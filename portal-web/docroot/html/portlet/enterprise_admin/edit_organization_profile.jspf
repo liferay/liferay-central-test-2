@@ -75,7 +75,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "name") %>
+				<bean:message key="name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="name" />
@@ -87,13 +87,13 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "organization") %>
+					<bean:message key="organization" />
 				</td>
 				<td>
 					<a class="portlet-font" href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:actionURL>" id="<portlet:namespace />parentOrganizationName" style="font-size: x-small;"><%= parentOrganizationName %></a>
 
 					<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
+						<input type="button" value="<bean:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
 					</c:if>
 				</td>
 			</tr>
@@ -101,7 +101,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "status") %>
+				<bean:message key="status" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />statusId">
@@ -129,7 +129,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>
+				<bean:message key="country" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
@@ -137,7 +137,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "region") %>
+				<bean:message key="region" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
@@ -151,7 +151,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');"><br />
+	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');"><br />
 </c:if>
 
 <c:if test="<%= organization != null %>">

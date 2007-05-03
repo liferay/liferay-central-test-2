@@ -74,7 +74,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>:
+		<bean:message key="type" />:
 	</td>
 	<td>
 		<%= LanguageUtil.get(pageContext, productEntry.getType()) %>
@@ -82,7 +82,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "licenses") %>:
+		<bean:message key="licenses" />:
 	</td>
 	<td>
 
@@ -105,7 +105,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 <c:if test="<%= Validator.isNotNull(productEntry.getPageURL()) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "page-url") %>:
+			<bean:message key="page-url" />:
 		</td>
 		<td>
 			<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
@@ -115,7 +115,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "short-description") %>:
+		<bean:message key="short-description" />:
 	</td>
 	<td>
 		<%= productEntry.getShortDescription() %>
@@ -125,7 +125,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 <c:if test="<%= Validator.isNotNull(productEntry.getLongDescription()) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "long-description") %>:
+			<bean:message key="long-description" />:
 		</td>
 		<td>
 			<%= productEntry.getLongDescription() %>
@@ -135,7 +135,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "screenshots") %>
+		<bean:message key="screenshots" />
 	</td>
 	<td>
 
@@ -172,19 +172,19 @@ if (lastProductVersion != null) {
 </tr>
 <tr>
 	<th colspan="2">
-		<%= LanguageUtil.get(pageContext, "information-about-the-latest-version") %>:
+		<bean:message key="information-about-the-latest-version" />:
 	</th>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "release-date") %>:
+		<bean:message key="release-date" />:
 	</td>
 	<td>
 		<%= lastProductVersion.getModifiedDate() %>
 	</td>
 </tr><tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "changeLog") %>:
+		<bean:message key="changeLog" />:
 	</td>
 	<td>
 		<%= lastProductVersion.getChangeLog() %>
@@ -192,7 +192,7 @@ if (lastProductVersion != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "supported-framework-versions") %>:
+		<bean:message key="supported-framework-versions" />:
 	</td>
 	<td>
 		<%= _buildFrameworkVersions(lastProductVersion.getFrameworkVersions()) %>
@@ -200,7 +200,7 @@ if (lastProductVersion != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "download-links") %>:
+		<bean:message key="download-links" />:
 	</td>
 	<td>
 		<% if (Validator.isNotNull(lastProductVersion.getDirectDownloadURL())) { %>

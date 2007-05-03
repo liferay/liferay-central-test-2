@@ -101,13 +101,13 @@ for (int i = 0; i < results.getLength(); i++) {
 
 <select name="<portlet:namespace/>type">
 	<option value=""></option>
-	<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
-	<option <%= type.equals("theme")? "selected" : "" %> value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
-	<option <%= type.equals("layout")? "selected" : "" %> value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
-	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
+	<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><bean:message key="portlet" /></option>
+	<option <%= type.equals("theme")? "selected" : "" %> value="theme"><bean:message key="theme" /></option>
+	<option <%= type.equals("layout")? "selected" : "" %> value="layout"><bean:message key="layout" /></option>
+	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><bean:message key="extension" /></option>
 </select>
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-products") %>">
+<input type="submit" value="<bean:message key="search-products" />">
 
 <br /><br />
 

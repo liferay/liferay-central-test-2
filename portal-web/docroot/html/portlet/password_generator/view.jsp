@@ -58,18 +58,18 @@ catch (Exception e) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "numbers") %>
+		<bean:message key="numbers" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />numbers">
-			<option <%= numbers ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-			<option <%= !numbers ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+			<option <%= numbers ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
+			<option <%= !numbers ? "selected" : "" %> value="0"><bean:message key="no" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "lower-case-letters") %>
+		<bean:message key="lower-case-letters" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="lowerCaseLetters" defaultValue="<%= lowerCaseLetters %>" />
@@ -77,7 +77,7 @@ catch (Exception e) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "upper-case-letters") %>
+		<bean:message key="upper-case-letters" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="upperCaseLetters" defaultValue="<%= upperCaseLetters %>" />
@@ -85,7 +85,7 @@ catch (Exception e) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "length") %>
+		<bean:message key="length" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />length">
@@ -111,6 +111,6 @@ catch (Exception e) {
 
 <br /><br />
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "generate") %>">
+<input type="submit" value="<bean:message key="generate" />">
 
 </form>

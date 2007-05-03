@@ -37,7 +37,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "bullet-style") %>
+		<bean:message key="bullet-style" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />bulletStyle">
@@ -57,7 +57,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "display-style") %>
+		<bean:message key="display-style" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">

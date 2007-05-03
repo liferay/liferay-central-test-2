@@ -40,9 +40,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br /><br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

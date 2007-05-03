@@ -33,13 +33,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "task-name") %>
+		<bean:message key="task-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "definition-name") %>
+		<bean:message key="definition-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "assigned-to") %>
+		<bean:message key="assigned-to" />
 	</td>
 </tr>
 <tr>
@@ -51,9 +51,9 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	</td>
 	<td>
 		<select name="<portlet:namespace /><%= TaskDisplayTerms.ASSIGNED_TO %>">
-			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><%= LanguageUtil.get(pageContext, "all") %></option>
-			<option <%= displayTerms.getAssignedTo().equals("me") ? "selected" : "" %> value="me"><%= LanguageUtil.get(pageContext, "me") %></option>
-			<option <%= displayTerms.getAssignedTo().equals("pool") ? "selected" : "" %> value="pool"><%= LanguageUtil.get(pageContext, "pool") %></option>
+			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><bean:message key="all" /></option>
+			<option <%= displayTerms.getAssignedTo().equals("me") ? "selected" : "" %> value="me"><bean:message key="me" /></option>
+			<option <%= displayTerms.getAssignedTo().equals("pool") ? "selected" : "" %> value="pool"><bean:message key="pool" /></option>
 		</select>
 	</td>
 </tr>
@@ -62,46 +62,46 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "create-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+		<bean:message key="create-date" /> (<bean:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_GT %>" />
 
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+		<bean:message key="start-date" /> (<bean:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_GT %>" />
 
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "end-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+		<bean:message key="end-date" /> (<bean:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_GT %>" />
 
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_LT %>" />
 
-		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <%= LanguageUtil.get(pageContext, "hide-tasks-that-have-already-ended") %>
+		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <bean:message key="hide-tasks-that-have-already-ended" />
 	</td>
 </tr>
 </table>
@@ -112,12 +112,12 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= TaskDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>

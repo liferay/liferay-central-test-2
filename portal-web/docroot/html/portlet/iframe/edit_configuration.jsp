@@ -43,7 +43,7 @@ String htmlAttributes =
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "source-url") %>
+		<bean:message key="source-url" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= src %>">
@@ -56,7 +56,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "authenticate") %>
+		<bean:message key="authenticate" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="auth" defaultValue="<%= auth %>" />
@@ -64,7 +64,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "authentication-type") %>
+		<bean:message key="authentication-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />authType">
@@ -75,7 +75,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "form-method") %>
+		<bean:message key="form-method" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />formMethod">
@@ -86,7 +86,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "user-name") %>
+		<bean:message key="user-name" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />userName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= userName %>">
@@ -94,7 +94,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "password") %>
+		<bean:message key="password" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />password" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= password %>">
@@ -102,7 +102,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "hidden-variables") %>
+		<bean:message key="hidden-variables" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />hiddenVariables" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= hiddenVariables %>">
@@ -115,7 +115,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "html-attributes") %>
+		<bean:message key="html-attributes" />
 	</td>
 	<td>
 		<textarea name="<portlet:namespace />htmlAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
@@ -126,7 +126,7 @@ String htmlAttributes =
 <br />
 
 <span class="portlet-msg-error" style="font-size: x-small;">
-<%= LanguageUtil.get(pageContext, "leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information") %>
+<bean:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
 </span>
 
 <br /><br />

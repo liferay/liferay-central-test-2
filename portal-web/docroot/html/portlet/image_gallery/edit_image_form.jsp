@@ -73,7 +73,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	String[] imageExtensions = PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
 	%>
 
-	<%= LanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<bean:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -93,7 +93,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 <c:if test="<%= image != null %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "folder") %>
+			<bean:message key="folder" />
 		</td>
 		<td>
 
@@ -105,7 +105,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 			<%= folder.getName() %>
 			</a>
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -117,7 +117,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "file") %>
+		<bean:message key="file" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
@@ -125,7 +125,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
+		<bean:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="description" />
@@ -138,7 +138,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tags") %>
+		<bean:message key="tags" />
 	</td>
 	<td>
 
@@ -166,7 +166,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -180,9 +180,9 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="parent.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="parent.location = '<%= redirect %>';">
 
 </form>
 

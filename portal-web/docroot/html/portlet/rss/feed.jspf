@@ -44,7 +44,7 @@ catch (Exception e) {
 			<%= title %>&nbsp;&nbsp;
 
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal;">
-			<%= LanguageUtil.get(pageContext, "more") %> &raquo;
+			<bean:message key="more" /> &raquo;
 			</a>
 		</div>
 

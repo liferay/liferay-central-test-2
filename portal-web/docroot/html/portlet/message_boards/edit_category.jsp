@@ -103,9 +103,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
 					<%= parentCategoryName %></a>
 
-					<input type="button" value='<bean:message key="select" />' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= parentCategoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 
-					<input id="<portlet:namespace />removeCategoryButton" type="button" value='<bean:message key="remove" />' onClick="<portlet:namespace />removeCategory();">
+					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeCategory();">
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="mergeWithParentCategory" />
@@ -170,9 +170,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 	<liferay-ui:captcha url="<%= captchaURL %>" />
 </c:if>
 
-<input type="submit" value='<bean:message key="save" />'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<bean:message key="cancel" />' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

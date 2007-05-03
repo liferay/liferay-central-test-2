@@ -66,7 +66,7 @@ WindowState windowState = renderRequest.getWindowState();
 		<br /><br />
 
 		<span style="font-size: small;">
-		<b><%= LanguageUtil.get(pageContext, "invoice") %></b>
+		<b><bean:message key="invoice" /></b>
 		</span>
 
 		<br /><br />
@@ -81,7 +81,7 @@ WindowState windowState = renderRequest.getWindowState();
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "order") %> #:
+		<bean:message key="order" /> #:
 	</td>
 	<td>
 		<b><%= order.getOrderId() %></b>
@@ -89,7 +89,7 @@ WindowState windowState = renderRequest.getWindowState();
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "order-date") %>:
+		<bean:message key="order-date" />:
 	</td>
 	<td>
 		<%= dateFormatDateTime.format(order.getCreateDate()) %>
@@ -97,7 +97,7 @@ WindowState windowState = renderRequest.getWindowState();
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "last-modified") %>:
+		<bean:message key="last-modified" />:
 	</td>
 	<td>
 		<%= dateFormatDateTime.format(order.getModifiedDate()) %>
@@ -110,14 +110,14 @@ WindowState windowState = renderRequest.getWindowState();
 <table class="liferay-table">
 <tr>
 	<td>
-		<b><%= LanguageUtil.get(pageContext, "billing-address") %></b>
+		<b><bean:message key="billing-address" /></b>
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>:
+				<bean:message key="first-name" />:
 			</td>
 			<td>
 				<%= order.getBillingFirstName() %>
@@ -125,7 +125,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>:
+				<bean:message key="last-name" />:
 			</td>
 			<td>
 				<%= order.getBillingLastName() %>
@@ -133,7 +133,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>:
+				<bean:message key="email-address" />:
 			</td>
 			<td>
 				<%= order.getBillingEmailAddress() %>
@@ -141,7 +141,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "company") %>:
+				<bean:message key="company" />:
 			</td>
 			<td>
 				<%= order.getBillingCompany() %>
@@ -149,7 +149,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street") %>:
+				<bean:message key="street" />:
 			</td>
 			<td>
 				<%= order.getBillingStreet() %>
@@ -157,7 +157,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<%= order.getBillingCity() %>:
@@ -165,7 +165,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "state") %>:
+				<bean:message key="state" />:
 			</td>
 			<td>
 				<%= order.getBillingState() %>
@@ -173,7 +173,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>:
+				<bean:message key="zip" />:
 			</td>
 			<td>
 				<%= order.getBillingZip() %>
@@ -181,7 +181,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>:
+				<bean:message key="country" />:
 			</td>
 			<td>
 				<%= order.getBillingCountry() %>
@@ -189,7 +189,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "phone") %>:
+				<bean:message key="phone" />:
 			</td>
 			<td>
 				<%= order.getBillingPhone() %>
@@ -198,14 +198,14 @@ WindowState windowState = renderRequest.getWindowState();
 		</table>
 	</td>
 	<td valign="top">
-		<b><%= LanguageUtil.get(pageContext, "shipping-address") %></b>
+		<b><bean:message key="shipping-address" /></b>
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>:
+				<bean:message key="first-name" />:
 			</td>
 			<td>
 				<%= order.getShippingFirstName() %>
@@ -213,7 +213,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>:
+				<bean:message key="last-name" />:
 			</td>
 			<td>
 				<%= order.getShippingLastName() %>
@@ -221,7 +221,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>:
+				<bean:message key="email-address" />:
 			</td>
 			<td>
 				<%= order.getShippingEmailAddress() %>
@@ -229,7 +229,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "company") %>:
+				<bean:message key="company" />:
 			</td>
 			<td>
 				<%= order.getShippingCompany() %>
@@ -237,7 +237,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street") %>:
+				<bean:message key="street" />:
 			</td>
 			<td>
 				<%= order.getShippingStreet() %>
@@ -245,7 +245,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<%= order.getShippingCity() %>:
@@ -253,7 +253,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "state") %>:
+				<bean:message key="state" />:
 			</td>
 			<td>
 				<%= order.getShippingState() %>
@@ -261,7 +261,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>:
+				<bean:message key="zip" />:
 			</td>
 			<td>
 				<%= order.getShippingZip() %>
@@ -269,7 +269,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>:
+				<bean:message key="country" />:
 			</td>
 			<td>
 				<%= order.getShippingCountry() %>
@@ -277,7 +277,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "phone") %>:
+				<bean:message key="phone" />:
 			</td>
 			<td>
 				<%= order.getShippingPhone() %>
@@ -299,7 +299,7 @@ WindowState windowState = renderRequest.getWindowState();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "status") %>:
+				<bean:message key="status" />:
 			</td>
 			<td>
 				<select name="<portlet:namespace />ppPaymentStatus">
@@ -319,7 +319,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "transaction-id") %>:
+				<bean:message key="transaction-id" />:
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppTxnId" />
@@ -327,7 +327,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "payment-gross") %>:
+				<bean:message key="payment-gross" />:
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPaymentGross" defaultValue="<%= currency.getSymbol() + doubleFormat.format(order.getPpPaymentGross()) %>" />
@@ -335,7 +335,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "receiver-email-address") %>:
+				<bean:message key="receiver-email-address" />:
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppReceiverEmail" />
@@ -343,7 +343,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "payer-email-address") %>:
+				<bean:message key="payer-email-address" />:
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPayerEmail" />
@@ -351,7 +351,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "paypal-order") %>:
+				<bean:message key="paypal-order" />:
 			</td>
 			<td>
 
@@ -366,14 +366,14 @@ WindowState windowState = renderRequest.getWindowState();
 		</table>
 	</c:when>
 	<c:otherwise>
-		<b><%= LanguageUtil.get(pageContext, "credit-card") %></b>
+		<b><bean:message key="credit-card" /></b>
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "full-name") %>:
+				<bean:message key="full-name" />:
 			</td>
 			<td>
 				<%= order.getCcName() %>
@@ -381,7 +381,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "type") %>:
+				<bean:message key="type" />:
 			</td>
 			<td>
 				<%= LanguageUtil.get(pageContext, "cc_" + order.getCcType()) %>
@@ -389,7 +389,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "number") %>:
+				<bean:message key="number" />:
 			</td>
 			<td>
 				<%= CreditCard.hide(order.getCcNumber()) %>
@@ -397,7 +397,7 @@ WindowState windowState = renderRequest.getWindowState();
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "expiration-date") %>:
+				<bean:message key="expiration-date" />:
 			</td>
 			<td>
 				<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= order.getCcExpYear() %>
@@ -407,7 +407,7 @@ WindowState windowState = renderRequest.getWindowState();
 		<c:if test="<%= Validator.isNotNull(order.getCcVerNumber()) %>">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "verification-number") %>:
+					<bean:message key="verification-number" />:
 				</td>
 				<td>
 					<%= order.getCcVerNumber() %>
@@ -422,7 +422,7 @@ WindowState windowState = renderRequest.getWindowState();
 <br />
 
 <c:if test="<%= Validator.isNotNull(order.getComments()) %>">
-	<b><%= LanguageUtil.get(pageContext, "comments") %></b>
+	<b><bean:message key="comments" /></b>
 
 	<br /><br />
 
@@ -527,7 +527,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subtotal") %>:
+		<bean:message key="subtotal" />:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualSubtotal(results)) %>
@@ -535,7 +535,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tax") %>:
+		<bean:message key="tax" />:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(order.getTax()) %>
@@ -543,7 +543,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "shipping") %> <%= Validator.isNotNull(order.getAltShipping()) ? "(" + order.getAltShipping() + ")" : StringPool.BLANK %>
+		<bean:message key="shipping" /> <%= Validator.isNotNull(order.getAltShipping()) ? "(" + order.getAltShipping() + ")" : StringPool.BLANK %>
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(order.getShipping()) %>
@@ -553,7 +553,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <c:if test="<%= order.isInsure() %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "insurance") %>:
+			<bean:message key="insurance" />:
 		</td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(order.getInsurance()) %>
@@ -564,7 +564,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <c:if test="<%= Validator.isNotNull(order.getCouponIds()) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "coupon-discount") %>:
+			<bean:message key="coupon-discount" />:
 		</td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(order.getCouponDiscount()) %>
@@ -578,7 +578,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "total") %>:
+		<bean:message key="total" />:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTotal(order)) %>
@@ -590,18 +590,18 @@ for (int i = 0; itr.hasNext(); i++) {
 	<br />
 
 	<c:if test="<%= shoppingPrefs.usePayPal() %>">
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveOrder();">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveOrder();">
 	</c:if>
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "invoice") %>' onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
+	<input type="button" value="<bean:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendEmail('confirmation');">
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' onClick="<portlet:namespace />sendEmail('shipping');">
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteOrder();">
+	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrder();">
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 </c:if>
 
 </form>

@@ -144,7 +144,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 	</td>
 	<td>
 		<input id="<portlet:namespace />to" name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text">
@@ -152,7 +152,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "cc") %>
+		<bean:message key="cc" />
 	</td>
 	<td>
 		<input id="<portlet:namespace />cc" name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>">
@@ -160,7 +160,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "bcc") %>
+		<bean:message key="bcc" />
 	</td>
 	<td>
 		<input id="<portlet:namespace />bcc" name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>">
@@ -168,7 +168,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subject") %>
+		<bean:message key="subject" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>">
@@ -181,13 +181,13 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <table class="liferay-table">
 <tr>
 	<td valign="top">
-		<%= LanguageUtil.get(pageContext, "attachments") %>
+		<bean:message key="attachments" />
 	</td>
 	<td>
 		<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />files">
 		<tr>
 			<td>
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-attachment") %>' onclick="<portlet:namespace />addAttachment()" />
+				<input type="button" value="<bean:message key="add-attachment" />" onclick="<portlet:namespace />addAttachment()" />
 			</td>
 		</tr>
 		</table>
@@ -197,11 +197,11 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <br />
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "send") %>' onClick="<portlet:namespace />sendMessage();">
+<input type="button" value="<bean:message key="send" />" onClick="<portlet:namespace />sendMessage();">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "save-draft") %>' onclick="<portlet:namespace />saveMessage();">
+<input type="button" value="<bean:message key="save-draft" />" onclick="<portlet:namespace />saveMessage();">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
 
 <br /><br />
 

@@ -118,7 +118,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "name") %>
+				<bean:message key="name" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
@@ -126,7 +126,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "address") %>
+				<bean:message key="address" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
@@ -138,7 +138,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "enabled") %>
+				<bean:message key="enabled" />
 			</td>
 			<td>
 				<c:choose>
@@ -164,7 +164,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "subject") %>
+				<bean:message key="subject" />
 			</td>
 			<td>
 				<c:choose>
@@ -190,7 +190,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "body") %>
+				<bean:message key="body" />
 			</td>
 			<td>
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -202,7 +202,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br />
 
-		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
+		<b><bean:message key="definition-of-terms" /></b>
 
 		<br /><br />
 
@@ -297,9 +297,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

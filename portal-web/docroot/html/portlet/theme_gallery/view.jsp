@@ -58,7 +58,7 @@ portletURL.setParameter("categoryId", categoryId);
 <tr>
 	<td>
 		<select onChange="document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = this[this.selectedIndex].value; submitForm(document.<portlet:namespace />fm);">
-			<option value=""><%= LanguageUtil.get(pageContext, "all-categories") %></option>
+			<option value=""><bean:message key="all-categories" /></option>
 
 			<%
 			String[] categories = ThemeGalleryUtil.getCategories();

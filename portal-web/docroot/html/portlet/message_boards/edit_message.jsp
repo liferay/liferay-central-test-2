@@ -184,7 +184,7 @@ if (message != null) {
 <c:if test="<%= message != null %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "category") %>
+			<bean:message key="category" />
 		</td>
 		<td>
 
@@ -196,7 +196,7 @@ if (message != null) {
 			<%= category.getName() %>
 			</a>
 
-			<input type="button" value='<bean:message key="select" />' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -391,9 +391,9 @@ if (message != null) {
 	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
 </c:if>
 
-<input type="button" value='<bean:message key="preview" />' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);">
+<input type="button" value="<bean:message key="preview" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);">
 
-<input type="button" value='<bean:message key="cancel" />' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 <c:if test="<%= curParentMessage != null %>">
 	<br /><br />

@@ -59,13 +59,13 @@
 				<c:if test='<%= (accessStatus != null) && (accessStatus.equals("reg")) %>'>
 					-
 
-					<a href="<%= article.getAccessURL() %>" target="_blank"><%= LanguageUtil.get(pageContext, "registration-required") %></a>
+					<a href="<%= article.getAccessURL() %>" target="_blank"><bean:message key="registration-required" /></a>
 				</c:if>
 
 				<c:if test='<%= (accessStatus != null) && (accessStatus.equals("sub")) %>'>
 					-
 
-					<a href="<%= article.getAccessURL() %>" target="_blank"><%= LanguageUtil.get(pageContext, "subscription-required") %></a>
+					<a href="<%= article.getAccessURL() %>" target="_blank"><bean:message key="subscription-required" /></a>
 				</c:if>
 
 				-

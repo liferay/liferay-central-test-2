@@ -98,7 +98,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "from") %>
+		<bean:message key="from" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />fromValue" size="30" type="text" value="<%= conversion.getFromValue() %>">
@@ -167,7 +167,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />to_value" size="30" type="text" value="<%= conversion.getToValue() %>">
@@ -236,7 +236,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<bean:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type"
@@ -262,11 +262,11 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, temperatureArray);
 				}"
 		>
-			<option <%= (type == 0) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "length") %></option>
-			<option <%= (type == 1) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "area") %></option>
-			<option <%= (type == 2) ? "selected" : "" %> value="2"><%= LanguageUtil.get(pageContext, "volume") %></option>
-			<option <%= (type == 3) ? "selected" : "" %> value="3"><%= LanguageUtil.get(pageContext, "mass") %></option>
-			<option <%= (type == 4) ? "selected" : "" %> value="4"><%= LanguageUtil.get(pageContext, "temperature") %></option>
+			<option <%= (type == 0) ? "selected" : "" %> value="0"><bean:message key="length" /></option>
+			<option <%= (type == 1) ? "selected" : "" %> value="1"><bean:message key="area" /></option>
+			<option <%= (type == 2) ? "selected" : "" %> value="2"><bean:message key="volume" /></option>
+			<option <%= (type == 3) ? "selected" : "" %> value="3"><bean:message key="mass" /></option>
+			<option <%= (type == 4) ? "selected" : "" %> value="4"><bean:message key="temperature" /></option>
 		</select>
 	</td>
 </tr>
@@ -274,7 +274,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <br />
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "convert") %>">
+<input type="submit" value="<bean:message key="convert" />">
 
 </form>
 

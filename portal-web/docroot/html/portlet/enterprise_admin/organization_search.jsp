@@ -33,16 +33,16 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "street") %>
+		<bean:message key="street" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "city") %>
+		<bean:message key="city" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "zip") %>
+		<bean:message key="zip" />
 	</td>
 </tr>
 <tr>
@@ -61,10 +61,10 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "country") %>
+		<bean:message key="country" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "region") %>
+		<bean:message key="region" />
 	</td>
 	<td colspan="2"></td>
 </tr>
@@ -85,12 +85,12 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= OrganizationDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>

@@ -46,7 +46,7 @@ List events = TICHUtil.getEvents();
 				<br /><br />
 
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">
-				<%= LanguageUtil.get(pageContext, "read-more") %> &raquo;
+				<bean:message key="read-more" /> &raquo;
 				</a>
 			</c:when>
 			<c:otherwise>
@@ -78,7 +78,7 @@ List events = TICHUtil.getEvents();
 				<tr>
 					<td></td>
 					<td>
-						<%= LanguageUtil.get(pageContext, "source") %>:
+						<bean:message key="source" />:
 
 						<c:if test="<%= user.hasCompanyMx() %>">
 

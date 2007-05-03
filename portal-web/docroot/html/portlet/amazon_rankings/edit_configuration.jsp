@@ -41,7 +41,7 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 	ValidatorException ve = (ValidatorException)errorException;
 	%>
 
-	<%= LanguageUtil.get(pageContext, "the-following-are-invalid-isbn-numbers") %>
+	<bean:message key="the-following-are-invalid-isbn-numbers" />
 
 	<%
 	Enumeration enu = ve.getFailedKeys();
@@ -58,7 +58,7 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 </liferay-ui:error>
 
-<%= LanguageUtil.get(pageContext, "add-all-isbn-numbers-separated-by-spaces") %>
+<bean:message key="add-all-isbn-numbers-separated-by-spaces" />
 
 <br /><br />
 

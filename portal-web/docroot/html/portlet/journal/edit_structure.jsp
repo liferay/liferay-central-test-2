@@ -205,7 +205,7 @@ int tabIndex = 1;
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "id") %>
+		<bean:message key="id" />
 	</td>
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0">
@@ -225,7 +225,7 @@ int tabIndex = 1;
 				<c:if test="<%= structure == null %>">
 					<liferay-ui:input-checkbox param="autoStructureId" />
 
-					<%= LanguageUtil.get(pageContext, "autogenerate-id") %>
+					<bean:message key="autogenerate-id" />
 				</c:if>
 			</td>
 		</tr>
@@ -239,7 +239,7 @@ int tabIndex = 1;
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="name" />
@@ -247,7 +247,7 @@ int tabIndex = 1;
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
+		<bean:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="description" />
@@ -262,7 +262,7 @@ int tabIndex = 1;
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -276,9 +276,9 @@ int tabIndex = 1;
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 <br /><br />
 

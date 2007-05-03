@@ -66,7 +66,7 @@ for (int i = 0; i < zips.length; i++) {
 
 <br />
 
-<%= LanguageUtil.get(pageContext, "city-or-zip-code") %>
+<bean:message key="city-or-zip-code" />
 
 <input name="where" size="23" type="text">
 

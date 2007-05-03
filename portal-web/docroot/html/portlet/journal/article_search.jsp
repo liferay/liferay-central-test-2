@@ -33,16 +33,16 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "id") %>
+		<bean:message key="id" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "version") %>
+		<bean:message key="version" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
+		<bean:message key="description" />
 	</td>
 </tr>
 <tr>
@@ -61,18 +61,18 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "content") %>
+		<bean:message key="content" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<bean:message key="type" />
 	</td>
 	<td colspan="2">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-				<%= LanguageUtil.get(pageContext, "status") %>
+				<bean:message key="status" />
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "community") %>
+				<bean:message key="community" />
 			</c:otherwise>
 		</c:choose>
 	</td>
@@ -102,10 +102,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.STATUS %>">
 					<option value=""></option>
-					<option <%= displayTerms.getStatus().equals("approved") ? "selected" : "" %> value="approved"><%= LanguageUtil.get(pageContext, "approved") %></option>
-					<option <%= displayTerms.getStatus().equals("not-approved") ? "selected" : "" %> value="not-approved"><%= LanguageUtil.get(pageContext, "not-approved") %></option>
-					<option <%= displayTerms.getStatus().equals("expired") ? "selected" : "" %> value="expired"><%= LanguageUtil.get(pageContext, "expired") %></option>
-					<option <%= displayTerms.getStatus().equals("review") ? "selected" : "" %> value="review"><%= LanguageUtil.get(pageContext, "review") %></option>
+					<option <%= displayTerms.getStatus().equals("approved") ? "selected" : "" %> value="approved"><bean:message key="approved" /></option>
+					<option <%= displayTerms.getStatus().equals("not-approved") ? "selected" : "" %> value="not-approved"><bean:message key="not-approved" /></option>
+					<option <%= displayTerms.getStatus().equals("expired") ? "selected" : "" %> value="expired"><bean:message key="expired" /></option>
+					<option <%= displayTerms.getStatus().equals("review") ? "selected" : "" %> value="review"><bean:message key="review" /></option>
 				</select>
 			</c:when>
 			<c:otherwise>
@@ -140,12 +140,12 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>
@@ -155,7 +155,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-structure") %>: <%= displayTerms.getStructureId() %><br />
+	<bean:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
@@ -163,5 +163,5 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-template") %>: <%= displayTerms.getTemplateId() %><br />
+	<bean:message key="filter-by-template" />: <%= displayTerms.getTemplateId() %><br />
 </c:if>

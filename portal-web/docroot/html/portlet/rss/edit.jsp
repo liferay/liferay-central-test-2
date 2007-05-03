@@ -48,7 +48,7 @@
 	ValidatorException ve = (ValidatorException)errorException;
 	%>
 
-	<%= LanguageUtil.get(pageContext, "the-following-are-invalid-urls") %>
+	<bean:message key="the-following-are-invalid-urls" />
 
 	<%
 	Enumeration enu = ve.getFailedKeys();
@@ -108,7 +108,7 @@ for (int i = 0; i < urls.length; i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "num-of-entries-per-feed") %>
+		<bean:message key="num-of-entries-per-feed" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />entriesPerFeed">

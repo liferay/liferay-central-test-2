@@ -73,7 +73,7 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 	</td>
 	<td align="right">
 		<select onChange="self.location = '<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=' + this.value;">
-			<option value=""><%= LanguageUtil.get(pageContext, "all-events") %></option>
+			<option value=""><bean:message key="all-events" /></option>
 
 			<%
 			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
@@ -129,7 +129,7 @@ for (int i = 0; i < 7; i++) {
 
 					<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
 						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= Integer.toString(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= Integer.toString(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-						<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<%= LanguageUtil.get(pageContext, "add") %>">
+						<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<bean:message key="add" />">
 						</a>
 					</c:if>
 				</td>
@@ -165,7 +165,7 @@ for (int i = 0; i < 7; i++) {
 							<td nowrap valign="top">
 								<c:choose>
 									<c:when test="<%= allDay %>">
-										<%= LanguageUtil.get(pageContext, "all-day") %>
+										<bean:message key="all-day" />
 									</c:when>
 									<c:otherwise>
 										<c:choose>

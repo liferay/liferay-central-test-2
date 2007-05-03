@@ -59,7 +59,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subject") %>
+		<bean:message key="subject" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>">
@@ -72,7 +72,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "body") %>
+		<bean:message key="body" />
 	</td>
 	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -84,7 +84,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br />
 
-<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
+<b><bean:message key="definition-of-terms" /></b>
 
 <br /><br />
 
@@ -125,7 +125,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
 </form>
 

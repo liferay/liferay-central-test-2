@@ -44,16 +44,16 @@ try {
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "keywords") %>
+			<bean:message key="keywords" />
 		</td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "tag") %>
+			<bean:message key="tag" />
 		</td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "repository") %>
+			<bean:message key="repository" />
 		</td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "install-status") %>
+			<bean:message key="install-status" />
 		</td>
 	</tr>
 	<tr>
@@ -62,7 +62,7 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>tag">
-				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+				<option value=""><bean:message key="all" /></option>
 
 				<%
 				Iterator itr = PluginPackageUtil.getAvailableTags().iterator();
@@ -81,7 +81,7 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>repositoryURL">
-				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+				<option value=""><bean:message key="all" /></option>
 
 				<%
 				String[] repositoryURLs = PluginPackageUtil.getRepositoryURLs();
@@ -100,10 +100,10 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>installStatus">
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><%= LanguageUtil.get(pageContext, "not-installed-or-older-version-installed") %></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED%>"><%= LanguageUtil.get(pageContext, "older-version-installed") %></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED%>"><%= LanguageUtil.get(pageContext, "not-installed") %></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_ALL%>"><%= LanguageUtil.get(pageContext, "all") %></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><bean:message key="not-installed-or-older-version-installed" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED%>"><bean:message key="older-version-installed" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED%>"><bean:message key="not-installed" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_ALL%>"><bean:message key="all" /></option>
 			</select>
 		</td>
 	</tr>
@@ -111,7 +111,7 @@ try {
 
 	<br />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "search") %>' onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
+	<input type="button" value="<bean:message key="search" />" onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')">
 
 	<br /><br />
 
@@ -232,7 +232,7 @@ try {
 		<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 		</c:if>
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "refresh") %>'  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
+		<input type="button" value="<bean:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');">
 
 		<br />
 
@@ -246,7 +246,7 @@ catch (PluginPackageException e) {
 %>
 
 	<span class="portlet-msg-error">
-	<%= LanguageUtil.get(pageContext, "error-obtaining-available-plugins") %>
+	<bean:message key="error-obtaining-available-plugins" />
 	</span>
 
 <%

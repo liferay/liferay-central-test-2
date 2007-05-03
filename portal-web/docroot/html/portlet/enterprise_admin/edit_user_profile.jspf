@@ -161,7 +161,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		<c:if test="<%= user2 != null %>">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "user-id") %>
+					<bean:message key="user-id" />
 				</td>
 				<td>
 					<%= user2.getUserId() %>
@@ -171,7 +171,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "screen-name") %>
+				<bean:message key="screen-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
@@ -179,7 +179,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>
+				<bean:message key="email-address" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
@@ -192,7 +192,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "prefix") %>
+				<bean:message key="prefix" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />prefixId">
@@ -216,7 +216,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>
+				<bean:message key="first-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
@@ -224,7 +224,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "middle-name") %>
+				<bean:message key="middle-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
@@ -232,7 +232,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>
+				<bean:message key="last-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
@@ -240,7 +240,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "suffix") %>
+				<bean:message key="suffix" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />suffixId">
@@ -275,7 +275,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<c:when test="<%= fieldEnableContactBirthday %>">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "birthday") %>
+						<bean:message key="birthday" />
 					</td>
 					<td>
 						<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
@@ -296,12 +296,12 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		<c:if test="<%= fieldEnableContactMale %>">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "gender") %>
+					<bean:message key="gender" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />male">
-						<option value="1"><%= LanguageUtil.get(pageContext, "male") %></option>
-						<option <%= !male? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "female") %></option>
+						<option value="1"><bean:message key="male" /></option>
+						<option <%= !male? "selected" : "" %> value="0"><bean:message key="female" /></option>
 					</select>
 				</td>
 			</tr>
@@ -317,7 +317,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "organization") %>
+				<bean:message key="organization" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>">
@@ -327,17 +327,17 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				</a>
 
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
 
 					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
-						<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeOrganization();">
+						<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
 					</c:if>
 				</c:if>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "location") %>
+				<bean:message key="location" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>">
@@ -347,17 +347,17 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				</a>
 
 				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
-					<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();">
 
 					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
-						<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeLocation();">
+						<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeLocation();">
 					</c:if>
 				</c:if>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "job-title") %>
+				<bean:message key="job-title" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="jobTitle" />
@@ -371,7 +371,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br />
 
 			<c:if test="<%= editable %>">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>" style="font-size: xx-small;"><bean:message key="change" /></a>
 			</c:if>
 		</td>
 	</c:if>
@@ -381,7 +381,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');"><br />
+	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');"><br />
 </c:if>
 
 <c:if test="<%= user2 != null %>">

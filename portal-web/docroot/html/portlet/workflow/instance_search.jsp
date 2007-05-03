@@ -33,16 +33,16 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 <table class="liferay-table">
 <tr>
 	<%--<td>
-		<%= LanguageUtil.get(pageContext, "instance-id") %>
+		<bean:message key="instance-id" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "definition-id") %>
+		<bean:message key="definition-id" />
 	</td>--%>
 	<td>
-		<%= LanguageUtil.get(pageContext, "definition-name") %>
+		<bean:message key="definition-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "definition-version") %>
+		<bean:message key="definition-version" />
 	</td>
 </tr>
 <tr>
@@ -64,32 +64,32 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+		<bean:message key="start-date" /> (<bean:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.START_DATE_GT %>" />
 
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.START_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "end-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+		<bean:message key="end-date" /> (<bean:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_GT %>" />
 
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_LT %>" />
 
-		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= InstanceDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <%= LanguageUtil.get(pageContext, "hide-instances-that-have-already-ended") %>
+		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= InstanceDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <bean:message key="hide-instances-that-have-already-ended" />
 	</td>
 </tr>
 </table>
@@ -100,12 +100,12 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= InstanceDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>

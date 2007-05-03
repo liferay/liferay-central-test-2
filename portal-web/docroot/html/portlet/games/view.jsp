@@ -68,12 +68,12 @@ portletURL.setParameter("tabs1", tabs1);
 		<input name="<portlet:namespace />level" type="hidden" value="<%= level %>">
 
 		<select onChange="document.<portlet:namespace />fm.<portlet:namespace />level.value = this[this.selectedIndex].value; submitForm(document.<portlet:namespace />fm);">
-			<option value="beginner"><%= LanguageUtil.get(pageContext, "beginner") %></option>
-			<option <%= level.equals("intermediate") ? "selected" : "" %> value="intermediate"><%= LanguageUtil.get(pageContext, "intermediate") %></option>
-			<option <%= level.equals("expert") ? "selected" : "" %> value="expert"><%= LanguageUtil.get(pageContext, "expert") %></option>
+			<option value="beginner"><bean:message key="beginner" /></option>
+			<option <%= level.equals("intermediate") ? "selected" : "" %> value="intermediate"><bean:message key="intermediate" /></option>
+			<option <%= level.equals("expert") ? "selected" : "" %> value="expert"><bean:message key="expert" /></option>
 		</select>
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "new-game") %>">
+		<input type="submit" value="<bean:message key="new-game" />">
 
 		<br /><br />
 

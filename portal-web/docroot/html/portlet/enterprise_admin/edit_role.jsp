@@ -63,7 +63,7 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 		<c:if test="<%= role != null %>">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "old-name") %>
+					<bean:message key="old-name" />
 				</td>
 				<td>
 					<%= role.getName() %>
@@ -81,7 +81,7 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "type") %>
+				<bean:message key="type" />
 			</td>
 			<td>
 				<c:choose>
@@ -100,9 +100,9 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 		<br />
 
-		<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+		<input type="submit" value="<bean:message key="save" />">
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 		</form>
 

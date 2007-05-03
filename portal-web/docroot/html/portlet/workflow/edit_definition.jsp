@@ -51,7 +51,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "name") %>:
+			<bean:message key="name" />:
 		</td>
 		<td>
 			<%= definition.getName() %>
@@ -59,7 +59,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "version") %>:
+			<bean:message key="version" />:
 		</td>
 		<td>
 			<%= definition.getVersion() %>
@@ -70,7 +70,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 	<br />
 </c:if>
 
-<%= LanguageUtil.get(pageContext, "enter-the-workflow-definition-below-in-xml-format") %>
+<bean:message key="enter-the-workflow-definition-below-in-xml-format" />
 
 <br /><br />
 
@@ -82,7 +82,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -95,9 +95,9 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save-new-version") %>'>
+<input type="submit" value="<bean:message key="save-new-version" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

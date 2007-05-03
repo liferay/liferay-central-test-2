@@ -88,7 +88,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "name") %>
+				<bean:message key="name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="name" />
@@ -96,7 +96,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "description") %>
+				<bean:message key="description" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="description" />
@@ -104,7 +104,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "encryption-type") %>
+				<bean:message key="encryption-type" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />storageScheme">
@@ -114,7 +114,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "changeable") %>
+				<bean:message key="changeable" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeable" />
@@ -125,7 +125,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<tbody id="<portlet:namespace />changeableSettings">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "change-required") %>
+					<bean:message key="change-required" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeRequired" />
@@ -135,7 +135,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "minimum-age") %>
+					<bean:message key="minimum-age" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />minAge">
@@ -171,7 +171,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "syntax-checking-enabled") %>
+				<bean:message key="syntax-checking-enabled" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="checkSyntax" />
@@ -182,7 +182,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<tbody id="<portlet:namespace />syntaxSettings">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "allow-dictionary-words") %>
+					<bean:message key="allow-dictionary-words" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="allowDictionaryWords" />
@@ -192,7 +192,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "minimum-length") %>
+					<bean:message key="minimum-length" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="minLength" />
@@ -216,7 +216,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "history-enabled") %>
+				<bean:message key="history-enabled" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="history" />
@@ -226,7 +226,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		</tr>
 		<tr id="<portlet:namespace />historySettings">
 			<td>
-				<%= LanguageUtil.get(pageContext, "history-count") %>
+				<bean:message key="history-count" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />historyCount">
@@ -263,7 +263,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "expiration-enabled") %>
+				<bean:message key="expiration-enabled" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="expireable" />
@@ -274,7 +274,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<tbody id="<portlet:namespace />expirationSettings">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "maximum-age") %>
+					<bean:message key="maximum-age" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />maxAge">
@@ -296,7 +296,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "warning-time") %>
+					<bean:message key="warning-time" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />warningTime">
@@ -318,7 +318,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "grace-limit") %>
+					<bean:message key="grace-limit" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="graceLimit" />
@@ -342,7 +342,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "lockout-enabled") %>
+				<bean:message key="lockout-enabled" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="lockout" />
@@ -353,7 +353,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		<tbody id="<portlet:namespace />lockoutSettings">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "maximum-failure") %>
+					<bean:message key="maximum-failure" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="maxFailure" />
@@ -363,7 +363,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "reset-failure-count") %>
+					<bean:message key="reset-failure-count" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />resetFailureCount">
@@ -385,12 +385,12 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "lockout-duration") %>
+					<bean:message key="lockout-duration" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />lockoutDuration">
 
-						<option value="0" <%= (requireUnlock) ? "selected" : "" %>><%= LanguageUtil.get(pageContext, "until-unlocked-by-an-administrator") %></option>
+						<option value="0" <%= (requireUnlock) ? "selected" : "" %>><bean:message key="until-unlocked-by-an-administrator" /></option>
 
 						<%
 						for (int i = 0; i < 15; i++) {
@@ -414,9 +414,9 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

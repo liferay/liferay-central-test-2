@@ -38,7 +38,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longV
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "question") %>
+		<bean:message key="question" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />questionId">

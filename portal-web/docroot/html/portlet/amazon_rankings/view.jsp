@@ -51,11 +51,11 @@ while (itr.hasNext()) {
 		</td>
 		<td>
 			<span style="font-size: xx-small;">
-			<%= LanguageUtil.get(pageContext, "title") %>: <%= StringUtil.shorten(amazonRankings.getProductName(), _DESCRIPTION_LENGTH) %><br />
-			<%= LanguageUtil.get(pageContext, "author") %>: <%= StringUtil.shorten(StringUtil.merge(amazonRankings.getAuthors(), ", "), _DESCRIPTION_LENGTH) %><br />
-			<%= LanguageUtil.get(pageContext, "publisher") %>: <%= StringUtil.shorten(amazonRankings.getManufacturer() + "; (" + amazonRankings.getReleaseDateAsString() + ")", _DESCRIPTION_LENGTH) %><br />
-			<%= LanguageUtil.get(pageContext, "isbn") %>: <%= amazonRankings.getISBN() %><br />
-			<%= LanguageUtil.get(pageContext, "rank") %>: <%= numberFormat.format(amazonRankings.getSalesRank()) %>
+			<bean:message key="title" />: <%= StringUtil.shorten(amazonRankings.getProductName(), _DESCRIPTION_LENGTH) %><br />
+			<bean:message key="author" />: <%= StringUtil.shorten(StringUtil.merge(amazonRankings.getAuthors(), ", "), _DESCRIPTION_LENGTH) %><br />
+			<bean:message key="publisher" />: <%= StringUtil.shorten(amazonRankings.getManufacturer() + "; (" + amazonRankings.getReleaseDateAsString() + ")", _DESCRIPTION_LENGTH) %><br />
+			<bean:message key="isbn" />: <%= amazonRankings.getISBN() %><br />
+			<bean:message key="rank" />: <%= numberFormat.format(amazonRankings.getSalesRank()) %>
 			</span>
 		</td>
 	</tr>

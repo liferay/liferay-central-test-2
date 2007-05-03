@@ -34,7 +34,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "xml-url") %>
+		<bean:message key="xml-url" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />xmlURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xmlURL %>">
@@ -42,7 +42,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "xsl-url") %>
+		<bean:message key="xsl-url" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />xslURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xslURL %>">

@@ -63,15 +63,15 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 					<c:otherwise>
 						<select id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>">
 							<option value=""></option>
-							<option <%= elType.equals("text") ? "selected" : "" %> value="text"><%= LanguageUtil.get(pageContext, "text") %></option>
-							<option <%= elType.equals("text_box") ? "selected" : "" %> value="text_box"><%= LanguageUtil.get(pageContext, "text-box") %></option>
-							<option <%= elType.equals("text_area") ? "selected" : "" %> value="text_area"><%= LanguageUtil.get(pageContext, "text-area") %></option>
-							<option <%= elType.equals("image") ? "selected" : "" %> value="image"><%= LanguageUtil.get(pageContext, "image") %></option>
+							<option <%= elType.equals("text") ? "selected" : "" %> value="text"><bean:message key="text" /></option>
+							<option <%= elType.equals("text_box") ? "selected" : "" %> value="text_box"><bean:message key="text-box" /></option>
+							<option <%= elType.equals("text_area") ? "selected" : "" %> value="text_area"><bean:message key="text-area" /></option>
+							<option <%= elType.equals("image") ? "selected" : "" %> value="image"><bean:message key="image" /></option>
 							<option <%= elType.equals("image_gallery") ? "selected" : "" %> value="image_gallery"><%= PortalUtil.getPortletTitle(PortletKeys.IMAGE_GALLERY, user) %></option>
 							<option <%= elType.equals("document_library") ? "selected" : "" %> value="document_library"><%= PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, user) %></option>
-							<option <%= elType.equals("boolean") ? "selected" : "" %> value="boolean"><%= LanguageUtil.get(pageContext, "boolean-flag") %></option>
-							<option <%= elType.equals("list") ? "selected" : "" %> value="list"><%= LanguageUtil.get(pageContext, "selection-list") %></option>
-							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><%= LanguageUtil.get(pageContext, "multi-selection-list") %></option>
+							<option <%= elType.equals("boolean") ? "selected" : "" %> value="boolean"><bean:message key="boolean-flag" /></option>
+							<option <%= elType.equals("list") ? "selected" : "" %> value="list"><bean:message key="selection-list" /></option>
+							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><bean:message key="multi-selection-list" /></option>
 						</select>
 					</c:otherwise>
 				</c:choose>
@@ -81,7 +81,7 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5"></td>
 				<td>
 					<a href="javascript: <portlet:namespace />editElement('add', <%= count.getValue() %>);">
-					<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<%= LanguageUtil.get(pageContext, "add") %>" vspace="0" width="9">
+					<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<bean:message key="add" />" vspace="0" width="9">
 					</a>
 				</td>
 			</c:if>
@@ -92,7 +92,7 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 				<c:when test="<%= el.elements().size() == 0 %>">
 					<td>
 						<a href="javascript: <portlet:namespace />editElement('remove', <%= count.getValue() %>);">
-						<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<%= LanguageUtil.get(pageContext, "remove") %>" vspace="0" width="9">
+						<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<bean:message key="remove" />" vspace="0" width="9">
 						</a>
 					</td>
 				</c:when>
@@ -105,13 +105,13 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10"></td>
 				<td>
 					<a href="javascript: <portlet:namespace />moveElement(true, <%= count.getValue() %>);">
-					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<%= LanguageUtil.get(pageContext, "up") %>" vspace="0" width="11">
+					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<bean:message key="up" />" vspace="0" width="11">
 					</a>
 				</td>
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5"></td>
 				<td>
 					<a href="javascript: <portlet:namespace />moveElement(false, <%= count.getValue() %>);">
-					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<%= LanguageUtil.get(pageContext, "down") %>" vspace="0" width="11">
+					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<bean:message key="down" />" vspace="0" width="11">
 					</a>
 				</td>
 			</c:if>

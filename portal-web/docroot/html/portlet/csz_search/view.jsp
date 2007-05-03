@@ -31,13 +31,13 @@ String csz = ParamUtil.getString(request, "csz");
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/csz_search/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-<%= LanguageUtil.get(pageContext, "street-address") %> <i>(<%= LanguageUtil.get(pageContext, "optional") %>)</i><br />
+<bean:message key="street-address" /> <i>(<bean:message key="optional" />)</i><br />
 
 <input name="<portlet:namespace />street" size="30" type="text" value="<%= street %>">
 
 <br /><br />
 
-<%= LanguageUtil.get(pageContext, "city-state-or-zip") %><br />
+<bean:message key="city-state-or-zip" /><br />
 
 <input name="<portlet:namespace />csz" size="30" type="text" value="<%= csz %>">
 
@@ -49,7 +49,7 @@ String csz = ParamUtil.getString(request, "csz");
 
 <br /><br />
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<bean:message key="search" />">
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(street) %>">
@@ -62,14 +62,14 @@ String csz = ParamUtil.getString(request, "csz");
 		<c:choose>
 			<c:when test="<%= (list == null) %>">
 				<span class="portlet-msg-error">
-				<%= LanguageUtil.get(pageContext, "an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state") %>
+				<bean:message key="an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state" />
 				</span>
 			</c:when>
 			<c:when test="<%= (list != null) && (list.size() == 0) %>">
-				<%= LanguageUtil.get(pageContext, "no-zip-code-was-found-associated-with-the-given-street-city-and-state") %>
+				<bean:message key="no-zip-code-was-found-associated-with-the-given-street-city-and-state" />
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "the-following-zip-code-was-found-associated-with-the-given-street-city-and-state") %>
+				<bean:message key="the-following-zip-code-was-found-associated-with-the-given-street-city-and-state" />
 
 				<br /><br />
 
@@ -99,14 +99,14 @@ String csz = ParamUtil.getString(request, "csz");
 				<c:choose>
 					<c:when test="<%= (list == null) %>">
 						<span class="portlet-msg-error">
-						<%= LanguageUtil.get(pageContext, "an-unexpected-database-error-occurred-while-querying-the-given-zip") %>
+						<bean:message key="an-unexpected-database-error-occurred-while-querying-the-given-zip" />
 						</span>
 					</c:when>
 					<c:when test="<%= (list != null) && (list.size() == 0) %>">
-						<%= LanguageUtil.get(pageContext, "no-city-and-state-pairs-were-found-associated-with-the-given-zip") %>
+						<bean:message key="no-city-and-state-pairs-were-found-associated-with-the-given-zip" />
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, "the-following-city-and-state-pairs-were-found-associated-with-the-given-zip") %>
+						<bean:message key="the-following-city-and-state-pairs-were-found-associated-with-the-given-zip" />
 
 						<br /><br />
 
@@ -134,14 +134,14 @@ String csz = ParamUtil.getString(request, "csz");
 				<c:choose>
 					<c:when test="<%= (list == null) %>">
 						<span class="portlet-msg-error">
-						<%= LanguageUtil.get(pageContext, "an-unexpected-database-error-occurred-while-querying-the-given-city-and-state") %>
+						<bean:message key="an-unexpected-database-error-occurred-while-querying-the-given-city-and-state" />
 						</span>
 					</c:when>
 					<c:when test="<%= (list != null) && (list.size() == 0) %>">
-						<%= LanguageUtil.get(pageContext, "no-zip-codes-were-found-associated-with-the-given-city-and-state") %>
+						<bean:message key="no-zip-codes-were-found-associated-with-the-given-city-and-state" />
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, "the-following-zip-codes-were-found-associated-with-the-given-city-and-state") %>
+						<bean:message key="the-following-zip-codes-were-found-associated-with-the-given-city-and-state" />
 
 						<br /><br />
 

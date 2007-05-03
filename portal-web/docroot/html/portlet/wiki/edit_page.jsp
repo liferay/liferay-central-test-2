@@ -76,13 +76,13 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 <table class="liferay-table">
 <tr>
 	<td>
-		<b><%= LanguageUtil.get(pageContext, "format") %></b>
+		<b><bean:message key="format" /></b>
 	</td>
 	<td>
 		<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
-			<option <%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) ? "selected" : "" %> value="classic_wiki"><%= LanguageUtil.get(pageContext, "classic-wiki") %></option>
+			<option <%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) ? "selected" : "" %> value="classic_wiki"><bean:message key="classic-wiki" /></option>
 			<option <%= format.equals(WikiPageImpl.HTML_FORMAT) ? "selected" : "" %> value="html">HTML</option>
-			<option <%= format.equals(WikiPageImpl.PLAIN_TEXT_FORMAT) ? "selected" : "" %> value="plain_text"><%= LanguageUtil.get(pageContext, "plain-text") %></option>
+			<option <%= format.equals(WikiPageImpl.PLAIN_TEXT_FORMAT) ? "selected" : "" %> value="plain_text"><bean:message key="plain-text" /></option>
 		</select>
 	</td>
 </tr>
@@ -106,7 +106,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tags") %>
+		<bean:message key="tags" />
 	</td>
 	<td>
 
@@ -125,9 +125,9 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "ad-client") %>
+		<bean:message key="ad-client" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />adClient" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adClient %>">
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "ad-channel") %>
+		<bean:message key="ad-channel" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />adChannel" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adChannel %>">
@@ -46,7 +46,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "ad-type") %>
+		<bean:message key="ad-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />adType">
@@ -66,7 +66,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "ad-format") %>
+		<bean:message key="ad-format" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />adFormat">
@@ -91,7 +91,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "color-border") %>
+		<bean:message key="color-border" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />colorBorder" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBorder %>">
@@ -99,7 +99,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "color-background") %>
+		<bean:message key="color-background" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />colorBg" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBg %>">
@@ -107,7 +107,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "color-link") %>
+		<bean:message key="color-link" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />colorLink" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorLink %>">
@@ -115,7 +115,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "color-text") %>
+		<bean:message key="color-text" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />colorText" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorText %>">
@@ -123,7 +123,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "color-url") %>
+		<bean:message key="color-url" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />colorUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorUrl %>">

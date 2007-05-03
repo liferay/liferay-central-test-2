@@ -97,7 +97,7 @@ if (choiceId > 0) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
+		<bean:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="title" />
@@ -105,7 +105,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
+		<bean:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="description" />
@@ -118,7 +118,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "expiration-date") %>
+		<bean:message key="expiration-date" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -129,7 +129,7 @@ if (choiceId > 0) {
 			<td>
 				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
 
-				<%= LanguageUtil.get(pageContext, "never-expire") %>
+				<bean:message key="never-expire" />
 			</td>
 		</tr>
 		</table>
@@ -142,7 +142,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "choices") %>
+		<bean:message key="choices" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -191,7 +191,7 @@ if (choiceId > 0) {
 
 						<c:if test="<%= choicesCount > 2 %>">
 							<td>
-								<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
+								<input type="button" value="<bean:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
 							</td>
 						</c:if>
 
@@ -204,7 +204,7 @@ if (choiceId > 0) {
 				</table>
 			</td>
 			<td valign="bottom">
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "add-choice") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);">
+				<input type="button" value="<bean:message key="add-choice" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);">
 			</td>
 		</tr>
 		</table>
@@ -219,7 +219,7 @@ if (choiceId > 0) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -233,9 +233,9 @@ if (choiceId > 0) {
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

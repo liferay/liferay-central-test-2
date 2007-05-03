@@ -41,7 +41,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 	ValidatorException ve = (ValidatorException)errorException;
 	%>
 
-	<%= LanguageUtil.get(pageContext, "the-following-are-invalid-cities-or-zip-codes") %>
+	<bean:message key="the-following-are-invalid-cities-or-zip-codes" />
 
 	<%
 	Enumeration enu = ve.getFailedKeys();
@@ -58,7 +58,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 </liferay-ui:error>
 
-<%= LanguageUtil.get(pageContext, "enter-one-city-or-zip-code-per-line") %>
+<bean:message key="enter-one-city-or-zip-code-per-line" />
 
 <br /><br />
 
@@ -69,12 +69,12 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "temperature-format") %>
+		<bean:message key="temperature-format" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />fahrenheit">
-			<option <%= fahrenheit ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "fahrenheit") %></option>
-			<option <%= !fahrenheit ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "celsius") %></option>
+			<option <%= fahrenheit ? "selected" : "" %> value="1"><bean:message key="fahrenheit" /></option>
+			<option <%= !fahrenheit ? "selected" : "" %> value="0"><bean:message key="celsius" /></option>
 		</select>
 	</td>
 </tr>

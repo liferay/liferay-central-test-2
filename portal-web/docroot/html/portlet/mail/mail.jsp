@@ -87,15 +87,15 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar">
 				<tr>
 					<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />';">
-						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/check_mail.png" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
+						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/check_mail.png" /> <bean:message key="check-mail" />
 					</td>
 					<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
-						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
+						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <bean:message key="new" />
 					</td>
 				</tr>
 				</table>
 
-				<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getUnreadMessageCount() %>
+				<bean:message key="unread-messages" />: <%= folder.getUnreadMessageCount() %>
 
 				<br /><br />
 
@@ -126,7 +126,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				%>
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-configure-a-valid-mail-server") %>
+				<bean:message key="please-contact-the-administrator-to-configure-a-valid-mail-server" />
 			</c:otherwise>
 		</c:choose>
 
@@ -435,25 +435,25 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-main-toolbar" width="100%">
 		<tr>
 			<td nowrap onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>';">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <bean:message key="new" />
 			</td>
 			<td nowrap onClick="Mail.getFolders(true);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/check_mail.png" /> <%= LanguageUtil.get(pageContext, "check-mail") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/check_mail.png" /> <bean:message key="check-mail" />
 			</td>
 			<td nowrap onClick="Mail.submitCompose('reply', document.<portlet:namespace />fm);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/reply.png" /> <%= LanguageUtil.get(pageContext, "reply") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/reply.png" /> <bean:message key="reply" />
 			</td>
 			<td nowrap onClick="Mail.submitCompose('replyAll', document.<portlet:namespace />fm);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/reply_all.png" /> <%= LanguageUtil.get(pageContext, "reply-all") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/reply_all.png" /> <bean:message key="reply-all" />
 			</td>
 			<td nowrap onClick="Mail.submitCompose('forward', document.<portlet:namespace />fm);">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/forward.png" /> <%= LanguageUtil.get(pageContext, "forward") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/forward.png" /> <bean:message key="forward" />
 			</td>
 			<td nowrap onClick="Mail.deleteSelectedMessages();">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/delete.png" /> <%= LanguageUtil.get(pageContext, "delete") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/delete.png" /> <bean:message key="delete" />
 			</td>
 			<td nowrap onClick="Mail.print();">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/print.png" /> <%= LanguageUtil.get(pageContext, "print") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/print.png" /> <bean:message key="print" />
 			</td>
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;" width="90%" />
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;">
@@ -469,7 +469,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="Search" type="image">
 					</td>
 					<td style="cursor: pointer; font-size: xx-small; text-align: right;">
-						<span onClick="showAdvancedSearch();"><%= LanguageUtil.get(pageContext, "more") %></span>
+						<span onClick="showAdvancedSearch();"><bean:message key="more" /></span>
 					</td>
 				</tr>
 				</table>
@@ -482,13 +482,13 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<table border="0" cellpadding="2" cellspacing="2" class="portlet-mail-toolbar font-small" id="portlet-mail-drafts-toolbar" style="display: none;">
 		<tr>
 			<td nowrap onClick="location.href='<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>'">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <%= LanguageUtil.get(pageContext, "new") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/compose.png" /> <bean:message key="new" />
 			</td>
 			<td nowrap onClick="Mail.submitCompose('edit', document.<portlet:namespace />fm)">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/edit_draft.png" /> <%= LanguageUtil.get(pageContext, "edit") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/edit_draft.png" /> <bean:message key="edit" />
 			</td>
 			<td nowrap onClick="Mail.deleteSelectedMessages()">
-				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/delete.png" /> <%= LanguageUtil.get(pageContext, "delete") %>
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/mail/delete.png" /> <bean:message key="delete" />
 			</td>
 		</tr>
 		</table>
@@ -500,16 +500,16 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "from") %>
+					<bean:message key="from" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "to") %>
+					<bean:message key="to" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "subject") %>
+					<bean:message key="subject" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "entire-message") %>
+					<bean:message key="entire-message" />
 				</td>
 			</tr>
 			<tr>
@@ -533,7 +533,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			<table class="liferay-table" id="portlet-mail-toolbar-advanced-search-dates">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "within") %>
+					<bean:message key="within" />
 				</td>
 				<td>
 					<select name="dateRange" onchange="changeRange(this.value)">
@@ -550,7 +550,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				</td>
 				<td>
 					<div id="portlet-mail-toolbar-advanced-search-dates-input">
-						<%= LanguageUtil.get(pageContext, "of") %>
+						<bean:message key="of" />
 
 						<span style="padding-left: 5px;" />
 
@@ -583,15 +583,15 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			<tr>
 				<td>
 					<select name="<%= MailDisplayTerms.AND_OPERATOR %>">
-						<option selected="selected" value="true"><%= LanguageUtil.get(pageContext, "and") %></option>
-						<option value="false"><%= LanguageUtil.get(pageContext, "or") %></option>
+						<option selected="selected" value="true"><bean:message key="and" /></option>
+						<option value="false"><bean:message key="or" /></option>
 					</select>
 				</td>
 				<td>
-					<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+					<input type="submit" value="<bean:message key="search" />">
 				</td>
 				<td>
-					<input type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="hideAdvancedSearch();">
+					<input type="button" value="<bean:message key="cancel" />" onClick="hideAdvancedSearch();">
 				</td>
 			</tr>
 			</table>
@@ -638,9 +638,9 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-from">
 											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "from") %></span>
-												<span style="display: none;"><%= LanguageUtil.get(pageContext, "to") %></span>
-												<span style="display: none;"><%= LanguageUtil.get(pageContext, "recipient") %></span>
+												<span><bean:message key="from" /></span>
+												<span style="display: none;"><bean:message key="to" /></span>
+												<span style="display: none;"><bean:message key="recipient" /></span>
 											</div>
 										</div>
 									</td>
@@ -650,7 +650,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-subject">
 											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "subject") %></span>
+												<span><bean:message key="subject" /></span>
 											</div>
 										</div>
 									</td>
@@ -660,7 +660,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-received">
 											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "date") %></span>
+												<span><bean:message key="date" /></span>
 											</div>
 										</div>
 									</td>
@@ -670,7 +670,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									<td class="portlet-mail-msgs-title" width="90%">
 										<div id="portlet-mail-msgs-title-size">
 											<div class="portlet-mail-title-text">
-												<span><%= LanguageUtil.get(pageContext, "size") %></span>
+												<span><bean:message key="size" /></span>
 											</div>
 										</div>
 									</td>

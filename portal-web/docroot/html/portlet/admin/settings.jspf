@@ -43,7 +43,7 @@
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "enabled") %>
+						<bean:message key="enabled" />
 					</td>
 					<td>
 						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PortalLDAPUtil.isAuthEnabled(company.getCompanyId())) %>' />
@@ -51,7 +51,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "required") %>
+						<bean:message key="required" />
 					</td>
 					<td>
 						<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_AUTH_REQUIRED)) %>' />
@@ -61,14 +61,14 @@
 
 				<br />
 
-				<%= LanguageUtil.get(pageContext, "the-ldap-url-format-is") %>
+				<bean:message key="the-ldap-url-format-is" />
 
 				<br /><br />
 
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "base-provider-url") %>
+						<bean:message key="base-provider-url" />
 					</td>
 					<td>
 						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>'>
@@ -76,7 +76,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "base-dn") %>
+						<bean:message key="base-dn" />
 					</td>
 					<td>
 						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>'>
@@ -84,7 +84,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "principal") %>
+						<bean:message key="principal" />
 					</td>
 					<td>
 						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>'>
@@ -92,7 +92,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "credentials") %>
+						<bean:message key="credentials" />
 					</td>
 					<td>
 						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>'>
@@ -102,7 +102,7 @@
 
 				<br />
 
-				<%= LanguageUtil.get(pageContext, "enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user") %>
+				<bean:message key="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
 
 				<br /><br />
 
@@ -110,7 +110,7 @@
 
 				<br /><br />
 
-				<%= LanguageUtil.get(pageContext, "enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server") %>
+				<bean:message key="enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server" />
 
 				<br /><br />
 
@@ -135,7 +135,7 @@
 
 				<br /><br />
 
-				<%= LanguageUtil.get(pageContext, "if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay") %>
+				<bean:message key="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
 
 				<br /><br />
 
@@ -154,32 +154,32 @@
 						</select>
 					</td>
 					<td>
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "reset-values") %>' onClick="<portlet:namespace />updateDefaultLdap();">
+						<input type="button" value="<bean:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();">
 					</td>
 				</tr>
 				</table>
 
 				<br />
 
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateLdap');">
+				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateLdap');">
 			</c:when>
 			<c:otherwise>
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "how-do-users-authenticate") %>
+						<bean:message key="how-do-users-authenticate" />
 					</td>
 					<td>
 						<select name="<portlet:namespace />authType">
-							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><%= LanguageUtil.get(pageContext, "by-email-address") %></option>
-							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_SN %>"><%= LanguageUtil.get(pageContext, "by-screen-name") %></option>
-							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_ID %>"><%= LanguageUtil.get(pageContext, "by-user-id") %></option>
+							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><bean:message key="by-email-address" /></option>
+							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_SN %>"><bean:message key="by-screen-name" /></option>
+							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_ID %>"><bean:message key="by-user-id" /></option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "allow-users-to-automatically-login") %>
+						<bean:message key="allow-users-to-automatically-login" />
 					</td>
 					<td>
 						<liferay-ui:input-checkbox param="autoLogin" defaultValue="<%= company.isAutoLogin() %>" />
@@ -187,7 +187,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "allow-users-to-request-forgotten-passwords") %>
+						<bean:message key="allow-users-to-request-forgotten-passwords" />
 					</td>
 					<td>
 						<liferay-ui:input-checkbox param="sendPassword" defaultValue="<%= company.isSendPassword() %>" />
@@ -195,7 +195,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "allow-strangers-to-create-accounts") %>
+						<bean:message key="allow-strangers-to-create-accounts" />
 					</td>
 					<td>
 						<liferay-ui:input-checkbox param="strangers" defaultValue="<%= company.isStrangers() %>" />
@@ -205,12 +205,12 @@
 
 				<br />
 
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateSecurity');">
+				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateSecurity');">
 			</c:otherwise>
 		</c:choose>
 	</c:when>
 	<c:when test='<%= tabs2.equals("default-user-associations") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users") %>
+		<bean:message key="enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users" />
 
 		<br /><br />
 
@@ -218,7 +218,7 @@
 
 		<br /><br />
 
-		<%= LanguageUtil.get(pageContext, "enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users") %>
+		<bean:message key="enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users" />
 
 		<br /><br />
 
@@ -226,7 +226,7 @@
 
 		<br /><br />
 
-		<%= LanguageUtil.get(pageContext, "enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users") %>
+		<bean:message key="enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users" />
 
 		<br /><br />
 
@@ -234,10 +234,10 @@
 
 		<br /><br />
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateDefaultGroupsAndRoles');">
 	</c:when>
 	<c:when test='<%= tabs2.equals("reserved-screen-names") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-one-screen-name-per-line-to-reserve-the-screen-name") %>
+		<bean:message key="enter-one-screen-name-per-line-to-reserve-the-screen-name" />
 
 		<br /><br />
 
@@ -245,7 +245,7 @@
 
 		<br /><br />
 
-		<%= LanguageUtil.get(pageContext, "enter-one-user-email-address-per-line-to-reserve-the-user-email-address") %>
+		<bean:message key="enter-one-user-email-address-per-line-to-reserve-the-user-email-address" />
 
 		<br /><br />
 
@@ -253,7 +253,7 @@
 
 		<br /><br />
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateReservedUsers');">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateReservedUsers');">
 	</c:when>
 	<c:when test='<%= tabs2.equals("mail-host-names") %>'>
 		<%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %>
@@ -264,7 +264,7 @@
 
 		<br /><br />
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveUsers('updateMailHostNames');">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUsers('updateMailHostNames');">
 	</c:when>
 	<c:when test='<%= tabs2.equals("email-notifications") %>'>
 		<script type="text/javascript">
@@ -325,7 +325,7 @@
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "enabled") %>
+						<bean:message key="enabled" />
 					</td>
 					<td>
 						<c:choose>
@@ -345,7 +345,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "subject") %>
+						<bean:message key="subject" />
 					</td>
 					<td>
 						<c:choose>
@@ -365,7 +365,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "body") %>
+						<bean:message key="body" />
 					</td>
 					<td>
 						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -377,7 +377,7 @@
 
 				<br />
 
-				<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
+				<b><bean:message key="definition-of-terms" /></b>
 
 				<br /><br />
 
@@ -476,12 +476,12 @@
 				<table class="liferay-table">
 				<tr>
 					<td colspan="2">
-						<%= LanguageUtil.get(pageContext, "the-remitent-of-mail-notifications-will-be") %>:
+						<bean:message key="the-remitent-of-mail-notifications-will-be" />:
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "name") %>
+						<bean:message key="name" />
 					</td>
 					<td>
 						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
@@ -489,7 +489,7 @@
 				</tr>
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "address") %>
+						<bean:message key="address" />
 					</td>
 					<td>
 						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
@@ -501,7 +501,7 @@
 
 		<br />
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEmails();">
+		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveEmails();">
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/admin/settings_general.jspf" %>

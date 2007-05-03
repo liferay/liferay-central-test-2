@@ -100,7 +100,7 @@ portletURL.setParameter("name", name);
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "name") %>
+			<bean:message key="name" />
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>">
@@ -110,7 +110,7 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "version") %>
+			<bean:message key="version" />
 		</td>
 		<td>
 			<%= fileEntry.getVersion() %>
@@ -118,7 +118,7 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "size") %>
+			<bean:message key="size" />
 		</td>
 		<td>
 			<%= TextFormatter.formatKB(fileEntry.getSize(), locale) %>k
@@ -126,7 +126,7 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "downloads") %>
+			<bean:message key="downloads" />
 		</td>
 		<td>
 			<%= fileEntry.getReadCount() %>
@@ -139,7 +139,7 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "url") %>
+			<bean:message key="url" />
 		</td>
 		<td>
 			<liferay-ui:input-resource

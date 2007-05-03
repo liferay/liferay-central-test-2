@@ -27,14 +27,14 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<%= LanguageUtil.get(pageContext, "please-select-the-article-type-that-you-would-like-to-limit-the-search-to") %>
+<bean:message key="please-select-the-article-type-that-you-would-like-to-limit-the-search-to" />
 
 <br /><br />
 
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "article-type") %>
+		<bean:message key="article-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">

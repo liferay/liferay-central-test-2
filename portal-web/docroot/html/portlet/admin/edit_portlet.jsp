@@ -49,7 +49,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "id") %>
+		<bean:message key="id" />
 	</td>
 	<td>
 		<%= portletId %>
@@ -57,7 +57,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
+		<bean:message key="title" />
 	</td>
 	<td>
 		<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
@@ -70,7 +70,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "active") %>
+		<bean:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Portlet.class %>" bean="<%= portlet %>" field="active" />
@@ -80,7 +80,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 <br />
 
-<%= LanguageUtil.get(pageContext, "enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page") %>
+<bean:message key="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page" />
 
 <br /><br />
 
@@ -88,8 +88,8 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 <br /><br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>

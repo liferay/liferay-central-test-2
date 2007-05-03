@@ -33,19 +33,19 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "id") %>
+		<bean:message key="id" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "status") %>
+		<bean:message key="status" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "first-name") %>
+		<bean:message key="first-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "last-name") %>
+		<bean:message key="last-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "email-address") %>
+		<bean:message key="email-address" />
 	</td>
 </tr>
 <tr>
@@ -86,12 +86,12 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= OrderDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>

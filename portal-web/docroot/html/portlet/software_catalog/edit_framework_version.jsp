@@ -53,7 +53,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="name" />
@@ -61,7 +61,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "url") %>
+		<bean:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="url" />
@@ -69,7 +69,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "active") %>
+		<bean:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
@@ -84,7 +84,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -98,9 +98,9 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

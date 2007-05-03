@@ -241,7 +241,7 @@ Assign permissions to users.
 
 				<div class="separator"></div>
 
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();">
 
 				<br /><br />
 
@@ -342,12 +342,12 @@ Assign permissions to users.
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td>
-						<input <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 
-						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 				</tr>
 				</table>
@@ -374,7 +374,7 @@ Assign permissions to users.
 			portletURL.setParameter("editUserPermissions", "1");
 			%>
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>';">
+			<input type="button" value="<bean:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>';">
 
 			<%
 			portletURL.setParameter("editUserPermissions", String.valueOf(editUserPermissions));

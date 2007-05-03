@@ -127,7 +127,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 
 <c:if test="<%= addresses.size() > 0 %>">
 	<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'billing');">
-		<option value="">-- <%= LanguageUtil.get(pageContext, "my-addresses") %> --</option>
+		<option value="">-- <bean:message key="my-addresses" /> --</option>
 
 		<%
 		for (int i = 0; addresses != null && i < addresses.size(); i++) {
@@ -151,7 +151,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>
+				<bean:message key="first-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingFirstName" />
@@ -159,7 +159,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>
+				<bean:message key="last-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingLastName" />
@@ -167,7 +167,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>
+				<bean:message key="email-address" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingEmailAddress" />
@@ -175,7 +175,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "company") %>
+				<bean:message key="company" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingCompany" />
@@ -183,7 +183,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street") %>
+				<bean:message key="street" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingStreet" />
@@ -191,7 +191,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingCity" />
@@ -203,11 +203,11 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "state") %>
+				<bean:message key="state" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />billingStateSel" name="<portlet:namespace />billingStateSel">
-					<option value=""><%= LanguageUtil.get(pageContext, "outside-us") %></option>
+					<option value=""><bean:message key="outside-us" /></option>
 
 					<%
 					for (int i = 0; i < StateUtil.STATES.length; i++) {
@@ -224,7 +224,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "other-state") %>
+				<bean:message key="other-state" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="billingState" defaultValue="<%= billingState %>" />
@@ -232,7 +232,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>
+				<bean:message key="zip" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingZip" />
@@ -240,7 +240,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>
+				<bean:message key="country" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingCountry" />
@@ -248,7 +248,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "phone") %>
+				<bean:message key="phone" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingPhone" />
@@ -278,7 +278,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 	<c:if test="<%= addresses.size() > 0 %>">
 		<td>
 			<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'shipping');">
-				<option value="">-- <%= LanguageUtil.get(pageContext, "my-addresses") %> --</option>
+				<option value="">-- <bean:message key="my-addresses" /> --</option>
 
 				<%
 				for (int i = 0; addresses != null && i < addresses.size(); i++) {
@@ -296,7 +296,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 	</c:if>
 
 	<td>
-		<%= LanguageUtil.get(pageContext, "same-as-billing") %>
+		<bean:message key="same-as-billing" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shipToBilling" />
@@ -312,7 +312,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>
+				<bean:message key="first-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingFirstName" />
@@ -320,7 +320,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>
+				<bean:message key="last-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingLastName" />
@@ -328,7 +328,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>
+				<bean:message key="email-address" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingEmailAddress" />
@@ -336,7 +336,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "company") %>
+				<bean:message key="company" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingCompany" />
@@ -344,7 +344,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street") %>
+				<bean:message key="street" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingStreet" />
@@ -352,7 +352,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingCity" />
@@ -364,11 +364,11 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "state") %>
+				<bean:message key="state" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />shippingStateSel" name="<portlet:namespace />shippingStateSel">
-					<option value=""><%= LanguageUtil.get(pageContext, "outside-us") %></option>
+					<option value=""><bean:message key="outside-us" /></option>
 
 					<%
 					for (int i = 0; i < StateUtil.STATES.length; i++) {
@@ -385,7 +385,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "other-state") %>
+				<bean:message key="other-state" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="shippingState" defaultValue="<%= shippingState %>" />
@@ -393,7 +393,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>
+				<bean:message key="zip" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingZip" />
@@ -401,7 +401,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>
+				<bean:message key="country" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingCountry" />
@@ -409,7 +409,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "phone") %>
+				<bean:message key="phone" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingPhone" />
@@ -449,7 +449,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "full-name") %>
+			<bean:message key="full-name" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ccName" />
@@ -457,7 +457,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "type") %>
+			<bean:message key="type" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />ccType">
@@ -478,7 +478,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "number") %>
+			<bean:message key="number" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccNumber" />
@@ -486,7 +486,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "expiration-date") %>
+			<bean:message key="expiration-date" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />ccExpMonth">
@@ -533,7 +533,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "verification-number") %>
+			<bean:message key="verification-number" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccVerNumber" />

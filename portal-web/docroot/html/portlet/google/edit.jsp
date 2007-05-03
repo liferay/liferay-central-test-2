@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "safe-search") %>
+		<bean:message key="safe-search" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="safeSearch" defaultValue="<%= safeSearch %>" />

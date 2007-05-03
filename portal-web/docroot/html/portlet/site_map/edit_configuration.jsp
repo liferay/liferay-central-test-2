@@ -39,7 +39,7 @@ List layoutList = layoutView.getList();
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "root-layout") %>
+		<bean:message key="root-layout" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />rootLayoutId">
@@ -78,11 +78,11 @@ List layoutList = layoutView.getList();
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "display-depth") %>
+		<bean:message key="display-depth" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayDepth">
-			<option value="0"><%= LanguageUtil.get(pageContext, "unlimited") %></option>
+			<option value="0"><bean:message key="unlimited" /></option>
 
 			<%
 			for (int i = 1; i <= 20; i++) {

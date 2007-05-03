@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
-		<%= LanguageUtil.get(pageContext, "global-tags-are-injected-to-all-pages-that-you-visit") %>
+		<bean:message key="global-tags-are-injected-to-all-pages-that-you-visit" />
 
 		<br /><br />
 
@@ -35,11 +35,11 @@
 				<%= LanguageUtil.format(pageContext, "you-have-the-following-tags-configured-x", "<b>" + StringUtil.merge(entries, ", ") + "</b>") %>
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "you-have-not-configured-any-global-tags") %>
+				<bean:message key="you-have-not-configured-any-global-tags" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<%= LanguageUtil.get(pageContext, "you-must-be-authenticated-to-use-this-portlet") %>
+		<bean:message key="you-must-be-authenticated-to-use-this-portlet" />
 	</c:otherwise>
 </c:choose>

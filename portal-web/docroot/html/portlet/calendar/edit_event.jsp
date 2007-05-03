@@ -328,7 +328,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "start-date") %>
+		<bean:message key="start-date" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="startDate" defaultValue="<%= startDate %>" />
@@ -336,7 +336,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "duration") %>
+		<bean:message key="duration" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />durationHour">
@@ -367,7 +367,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<option <%= (durationHour.equals("24")) ? "selected" : "" %> value="24">24</option>
 		</select>
 
-		<%= LanguageUtil.get(pageContext, "hours") %>
+		<bean:message key="hours" />
 
 		<select name="<portlet:namespace />durationMinute">
 			<option <%= (durationMinute.equals("00")) ? "selected" : "" %> value="00">:00</option>
@@ -379,12 +379,12 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<option <%= (durationMinute.equals("45")) ? "selected" : "" %> value="45">:45</option>
 		</select>
 
-		<%= LanguageUtil.get(pageContext, "minutes") %>
+		<bean:message key="minutes" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "all-day-event") %>
+		<bean:message key="all-day-event" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="allDay" defaultValue="<%= event == null ? false : event.isAllDay() %>" />
@@ -392,7 +392,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "time-zone-sensitive") %>
+		<bean:message key="time-zone-sensitive" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="timeZoneSensitive" defaultValue="<%= event == null ? true : event.isTimeZoneSensitive() %>" />
@@ -405,7 +405,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
+		<bean:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue="<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>" />
@@ -413,7 +413,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
+		<bean:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="description" />
@@ -421,7 +421,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<bean:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -448,7 +448,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -462,9 +462,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 <br /><br />
 
@@ -475,18 +475,18 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <table class="liferay-table">
 <tr>
 	<td>
-		<input <%= (recurrenceType == Recurrence.NO_RECURRENCE) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<portlet:namespace />showTable('<portlet:namespace />neverTable');"> <%= LanguageUtil.get(pageContext, "never") %><br />
-		<input <%= (recurrenceType == Recurrence.DAILY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />dailyTable');"> <%= LanguageUtil.get(pageContext, "daily") %><br />
-		<input <%= (recurrenceType == Recurrence.WEEKLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />weeklyTable');"> <%= LanguageUtil.get(pageContext, "weekly") %><br />
-		<input <%= (recurrenceType == Recurrence.MONTHLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />monthlyTable');"> <%= LanguageUtil.get(pageContext, "monthly") %><br />
-		<input <%= (recurrenceType == Recurrence.YEARLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />yearlyTable');"> <%= LanguageUtil.get(pageContext, "yearly") %>
+		<input <%= (recurrenceType == Recurrence.NO_RECURRENCE) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<portlet:namespace />showTable('<portlet:namespace />neverTable');"> <bean:message key="never" /><br />
+		<input <%= (recurrenceType == Recurrence.DAILY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />dailyTable');"> <bean:message key="daily" /><br />
+		<input <%= (recurrenceType == Recurrence.WEEKLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />weeklyTable');"> <bean:message key="weekly" /><br />
+		<input <%= (recurrenceType == Recurrence.MONTHLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />monthlyTable');"> <bean:message key="monthly" /><br />
+		<input <%= (recurrenceType == Recurrence.YEARLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />yearlyTable');"> <bean:message key="yearly" />
 	</td>
 	<td valign="top">
 		<div id="<portlet:namespace />neverTable" style="display: none;">
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "do-not-repeat-this-event") %>
+					<bean:message key="do-not-repeat-this-event" />
 				</td>
 			</tr>
 			</table>
@@ -496,8 +496,8 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>"> <%= LanguageUtil.get(pageContext, "day-s") %><br />
-					<input <%= (dailyType == 1) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="1"> <%= LanguageUtil.get(pageContext, "every-weekday") %>
+					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>"> <bean:message key="day-s" /><br />
+					<input <%= (dailyType == 1) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="1"> <bean:message key="every-weekday" />
 				</td>
 			</tr>
 			</table>
@@ -507,7 +507,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "recur-every") %> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>"> <%= LanguageUtil.get(pageContext, "weeks-on") %>
+					<bean:message key="recur-every" /> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>"> <bean:message key="weeks-on" />
 
 					<table class="liferay-table">
 					<tr>
@@ -545,23 +545,23 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table class="liferay-table">
 			<tr>
 				<td nowrap>
-					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "day") %> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "month-s") %><br />
+					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <bean:message key="day" /> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>"> <bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>"> <bean:message key="month-s" /><br />
 
 					<input <%= (monthlyType == 1) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="1">
 
-					<%= LanguageUtil.get(pageContext, "the") %>
+					<bean:message key="the" />
 
 					<select name="<portlet:namespace />monthlyPos">
-						<option <%= (monthlyPos == 1) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "first") %></option>
-						<option <%= (monthlyPos == 2) ? "selected" : "" %> value="2"><%= LanguageUtil.get(pageContext, "second") %></option>
-						<option <%= (monthlyPos == 3) ? "selected" : "" %> value="3"><%= LanguageUtil.get(pageContext, "third") %></option>
-						<option <%= (monthlyPos == 4) ? "selected" : "" %> value="4"><%= LanguageUtil.get(pageContext, "fourth") %></option>
-						<option <%= (monthlyPos == -1) ? "selected" : "" %> value="-1"><%= LanguageUtil.get(pageContext, "last") %></option>
+						<option <%= (monthlyPos == 1) ? "selected" : "" %> value="1"><bean:message key="first" /></option>
+						<option <%= (monthlyPos == 2) ? "selected" : "" %> value="2"><bean:message key="second" /></option>
+						<option <%= (monthlyPos == 3) ? "selected" : "" %> value="3"><bean:message key="third" /></option>
+						<option <%= (monthlyPos == 4) ? "selected" : "" %> value="4"><bean:message key="fourth" /></option>
+						<option <%= (monthlyPos == -1) ? "selected" : "" %> value="-1"><bean:message key="last" /></option>
 					</select>
 
 					<select name="<portlet:namespace />monthlyDay1">
-						<option <%= (monthlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= LanguageUtil.get(pageContext, "weekday") %></option>
-						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= LanguageUtil.get(pageContext, "weekend-day") %></option>
+						<option <%= (monthlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><bean:message key="weekday" /></option>
+						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><bean:message key="weekend-day" /></option>
 						<option <%= (monthlyDay1 == Calendar.SUNDAY) ? "selected" : "" %> value="<%= Calendar.SUNDAY %>"><%= days[0] %></option>
 						<option <%= (monthlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= days[1] %></option>
 						<option <%= (monthlyDay1 == Calendar.TUESDAY) ? "selected" : "" %> value="<%= Calendar.TUESDAY %>"><%= days[2] %></option>
@@ -571,7 +571,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= days[6] %></option>
 					</select>
 
-					<%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>"> <%= LanguageUtil.get(pageContext, "month-s") %>
+					<bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>"> <bean:message key="month-s" />
 				</td>
 			</tr>
 			</table>
@@ -581,7 +581,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<table class="liferay-table">
 			<tr>
 				<td nowrap>
-					<input <%= (yearlyType == 0) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "every") %>
+					<input <%= (yearlyType == 0) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="0"> <bean:message key="every" />
 
 					<select name="<portlet:namespace />yearlyMonth0">
 
@@ -597,21 +597,21 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					</select>
 
-					<input maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>"> <%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>"> <%= LanguageUtil.get(pageContext, "year-s") %><br />
+					<input maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>"> <bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>"> <bean:message key="year-s" /><br />
 
-					<input <%= (yearlyType == 1) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="1"> <%= LanguageUtil.get(pageContext, "the") %>
+					<input <%= (yearlyType == 1) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="1"> <bean:message key="the" />
 
 					<select name="<portlet:namespace />yearlyPos">
-						<option <%= (yearlyPos == 1) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "first") %></option>
-						<option <%= (yearlyPos == 2) ? "selected" : "" %> value="2"><%= LanguageUtil.get(pageContext, "second") %></option>
-						<option <%= (yearlyPos == 3) ? "selected" : "" %> value="3"><%= LanguageUtil.get(pageContext, "third") %></option>
-						<option <%= (yearlyPos == 4) ? "selected" : "" %> value="4"><%= LanguageUtil.get(pageContext, "fourth") %></option>
-						<option <%= (yearlyPos == -1) ? "selected" : "" %> value="-1"><%= LanguageUtil.get(pageContext, "last") %></option>
+						<option <%= (yearlyPos == 1) ? "selected" : "" %> value="1"><bean:message key="first" /></option>
+						<option <%= (yearlyPos == 2) ? "selected" : "" %> value="2"><bean:message key="second" /></option>
+						<option <%= (yearlyPos == 3) ? "selected" : "" %> value="3"><bean:message key="third" /></option>
+						<option <%= (yearlyPos == 4) ? "selected" : "" %> value="4"><bean:message key="fourth" /></option>
+						<option <%= (yearlyPos == -1) ? "selected" : "" %> value="-1"><bean:message key="last" /></option>
 					</select>
 
 					<select name="<portlet:namespace />yearlyDay1">
-						<option <%= (yearlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= LanguageUtil.get(pageContext, "weekday") %></option>
-						<option <%= (yearlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= LanguageUtil.get(pageContext, "weekend-day") %></option>
+						<option <%= (yearlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><bean:message key="weekday" /></option>
+						<option <%= (yearlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><bean:message key="weekend-day" /></option>
 						<option <%= (yearlyDay1 == Calendar.SUNDAY) ? "selected" : "" %> value="<%= Calendar.SUNDAY %>"><%= days[0] %></option>
 						<option <%= (yearlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= days[1] %></option>
 						<option <%= (yearlyDay1 == Calendar.TUESDAY) ? "selected" : "" %> value="<%= Calendar.TUESDAY %>"><%= days[2] %></option>
@@ -621,7 +621,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 						<option <%= (yearlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= days[6] %></option>
 					</select>
 
-					<%= LanguageUtil.get(pageContext, "of") %>
+					<bean:message key="of" />
 
 					<select name="<portlet:namespace />yearlyMonth1">
 
@@ -637,7 +637,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					</select>
 
-					<%= LanguageUtil.get(pageContext, "of-every") %> <input maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>"> <%= LanguageUtil.get(pageContext, "year-s") %>
+					<bean:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>"> <bean:message key="year-s" />
 				</td>
 			</tr>
 			</table>
@@ -651,16 +651,16 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "end-date") %>
+		<bean:message key="end-date" />
 	</td>
 	<td valign="top">
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <%= LanguageUtil.get(pageContext, "no-end-date") %><br />
+				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <bean:message key="no-end-date" /><br />
 				<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>"> occurrence(s)<br />--%>
 
-				<input <%= (endDateType == 2) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="2"> <%= LanguageUtil.get(pageContext, "end-by") %>
+				<input <%= (endDateType == 2) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="2"> <bean:message key="end-by" />
 
 				<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="endDate" defaultValue="<%= endDate %>" />
 			</td>
@@ -674,7 +674,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <liferay-ui:tabs names="reminders" />
 
-<%= LanguageUtil.get(pageContext, "remind-me") %>
+<bean:message key="remind-me" />
 
 <select name="<portlet:namespace />firstReminder">
 
@@ -690,7 +690,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 </select>
 
-<%= LanguageUtil.get(pageContext, "before-and-again") %>
+<bean:message key="before-and-again" />
 
 <select name="<portlet:namespace />secondReminder">
 
@@ -706,17 +706,17 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 </select>
 
-<%= LanguageUtil.get(pageContext, "before-the-event-by") %>
+<bean:message key="before-the-event-by" />
 
 <br /><br />
 
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>"> <%= LanguageUtil.get(pageContext, "do-not-send-a-reminder") %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>"> <%= LanguageUtil.get(pageContext, "email-address") %> (<%= user.getEmailAddress() %>)<br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>"> <%= LanguageUtil.get(pageContext, "sms") %> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>"> <%= LanguageUtil.get(pageContext, "aim") %> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>"> <%= LanguageUtil.get(pageContext, "icq") %> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>"> <%= LanguageUtil.get(pageContext, "msn") %> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br />
-<input <%= remindBy.equals(CalEventImpl.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>"> <%= LanguageUtil.get(pageContext, "ym") %> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>"> <bean:message key="do-not-send-a-reminder" /><br />
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>"> <bean:message key="email-address" /> (<%= user.getEmailAddress() %>)<br />
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>"> <bean:message key="sms" /> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br />
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>"> <bean:message key="aim" /> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br />
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>"> <bean:message key="icq" /> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br />
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>"> <bean:message key="msn" /> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br />
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>"> <bean:message key="ym" /> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
 
 </form>
 

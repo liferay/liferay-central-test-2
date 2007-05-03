@@ -52,14 +52,14 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 
 <fieldset>
-	<legend><%= LanguageUtil.get(pageContext, "form-information") %></legend>
+	<legend><bean:message key="form-information" /></legend>
 
 	<liferay-ui:error key="titleRequired" message="please-enter-a-title" />
 
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "title") %>
+			<bean:message key="title" />
 		</td>
 		<td>
 			<input name="<portlet:namespace />title" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= title %>">
@@ -67,7 +67,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "description") %>
+			<bean:message key="description" />
 		</td>
 		<td>
 			<textarea name="<portlet:namespace/>description" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= description %></textarea>
@@ -77,7 +77,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 </fieldset>
 
 <fieldset>
-	<legend><%= LanguageUtil.get(pageContext, "email-to") %></legend>
+	<legend><bean:message key="email-to" /></legend>
 
 	<liferay-ui:error key="subjectRequired" message="please-enter-a-subject" />
 	<liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
@@ -86,7 +86,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "subject") %>
+			<bean:message key="subject" />
 		</td>
 		<td>
 			<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>">
@@ -94,7 +94,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "email-address") %>
+			<bean:message key="email-address" />
 		</td>
 		<td>
 			<input name="<portlet:namespace />emailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
@@ -104,7 +104,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 </fieldset>
 
 <fieldset>
-	<legend><%= LanguageUtil.get(pageContext, "form-fields") %></legend>
+	<legend><bean:message key="form-fields" /></legend>
 
 	<table class="liferay-table">
 
@@ -117,12 +117,12 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
 		<tr>
 			<td colspan="2">
-				<b><%= LanguageUtil.get(pageContext, "field") %> <%= i %></b>
+				<b><bean:message key="field" /> <%= i %></b>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "name") %>
+				<bean:message key="name" />
 			</td>
 			<td>
 				<input name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" />
@@ -130,24 +130,24 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "type") %>
+				<bean:message key="type" />
 			</td>
 			<td>
 				<select id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>" onchange="<portlet:namespace/>toggleOptions(<%= i %>);">
-					<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><%= LanguageUtil.get(pageContext, "text") %></option>
-					<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><%= LanguageUtil.get(pageContext, "text-box") %></option>
-					<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><%= LanguageUtil.get(pageContext, "options") %></option>
+					<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><bean:message key="text" /></option>
+					<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><bean:message key="text-box" /></option>
+					<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><bean:message key="options" /></option>
 				</select>
 			</td>
 		</tr>
 		<tr id="<portlet:namespace/>fieldOptionsRow<%= i %>">
 			<td>
-				<%= LanguageUtil.get(pageContext, "options") %>
+				<bean:message key="options" />
 			</td>
 			<td>
 				<input id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" type="text" size="50" value="<%= fieldOptions %>">
 
-				(<%= LanguageUtil.get(pageContext, "add-options-separated-by-commas") %>)
+				(<bean:message key="add-options-separated-by-commas" />)
 
 				<script type="text/javascript">
 					<portlet:namespace/>toggleOptions(<%= i %>);
@@ -174,6 +174,6 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
 <input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>

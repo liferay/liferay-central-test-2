@@ -89,7 +89,7 @@ if (entry != null) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "title") %>
+		<bean:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
@@ -97,7 +97,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "category") %>
+		<bean:message key="category" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
@@ -106,7 +106,7 @@ if (entry != null) {
 		<%= categoryName %>
 		</a>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/blogs/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+		<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/blogs/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 	</td>
 </tr>
 <tr>
@@ -116,7 +116,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "display-date") %>
+		<bean:message key="display-date" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
@@ -129,7 +129,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "content") %>
+		<bean:message key="content" />
 	</td>
 	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -144,7 +144,7 @@ if (entry != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tags") %>
+		<bean:message key="tags" />
 	</td>
 	<td>
 
@@ -172,7 +172,7 @@ if (entry != null) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -186,9 +186,9 @@ if (entry != null) {
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

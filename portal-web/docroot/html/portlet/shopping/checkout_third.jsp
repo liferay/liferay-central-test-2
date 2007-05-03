@@ -43,9 +43,9 @@ catch (Exception e) {
 </liferay-util:include>
 
 <span class="portlet-msg-success">
-<%= LanguageUtil.get(pageContext, "thank-you-for-your-purchase") %>
+<bean:message key="thank-you-for-your-purchase" />
 </span>
 
 <br /><br />
 
-<%= LanguageUtil.get(pageContext, "your-order-number-is") %> <b><%= orderId %></b>. <%= LanguageUtil.get(pageContext, "you-will-receive-an-email-shortly-with-your-order-summary-and-further-details") %>
+<bean:message key="your-order-number-is" /> <b><%= orderId %></b>. <bean:message key="you-will-receive-an-email-shortly-with-your-order-summary-and-further-details" />

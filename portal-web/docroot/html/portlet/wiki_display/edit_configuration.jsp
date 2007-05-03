@@ -38,7 +38,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "node") %>
+		<bean:message key="node" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />nodeId">

@@ -33,13 +33,13 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "first-name") %>
+		<bean:message key="first-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "middle-name") %>
+		<bean:message key="middle-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "last-name") %>
+		<bean:message key="last-name" />
 	</td>
 </tr>
 <tr>
@@ -55,16 +55,16 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "screen-name") %>
+		<bean:message key="screen-name" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "email-address") %>
+		<bean:message key="email-address" />
 	</td>
 
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 			<td>
-				<%= LanguageUtil.get(pageContext, "active") %>
+				<bean:message key="active" />
 			</td>
 		</c:when>
 		<c:otherwise>
@@ -84,8 +84,8 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 			<td>
 				<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
-					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
+					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><bean:message key="no" /></option>
 				</select>
 			</td>
 		</c:when>
@@ -102,12 +102,12 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>

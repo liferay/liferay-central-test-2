@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "url") %>
+		<bean:message key="url" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />initUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= initUrl %>">
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "scope") %> (<%= LanguageUtil.get(pageContext, "regex") %>)
+		<bean:message key="scope" /> (<bean:message key="regex" />)
 	</td>
 	<td>
 		<input name="<portlet:namespace />scope" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= scope %>">
@@ -46,7 +46,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-host") %>
+		<bean:message key="proxy-host" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />proxyHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyHost %>">
@@ -54,7 +54,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-port") %>
+		<bean:message key="proxy-port" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />proxyPort" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyPort %>">
@@ -62,19 +62,19 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-authentication") %>
+		<bean:message key="proxy-authentication" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />proxyAuthentication">
-			<option <%= proxyAuthentication.equals("none") ? "selected" : "" %> value="none"><%= LanguageUtil.get(pageContext, "none") %></option>
-			<option <%= proxyAuthentication.equals("basic") ? "selected" : "" %> value="basic"><%= LanguageUtil.get(pageContext, "basic") %></option>
-			<option <%= proxyAuthentication.equals("ntlm") ? "selected" : "" %> value="ntlm"><%= LanguageUtil.get(pageContext, "ntlm") %></option>
+			<option <%= proxyAuthentication.equals("none") ? "selected" : "" %> value="none"><bean:message key="none" /></option>
+			<option <%= proxyAuthentication.equals("basic") ? "selected" : "" %> value="basic"><bean:message key="basic" /></option>
+			<option <%= proxyAuthentication.equals("ntlm") ? "selected" : "" %> value="ntlm"><bean:message key="ntlm" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-authentication-username") %>
+		<bean:message key="proxy-authentication-username" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />proxyAuthenticationUsername" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationUsername %>">
@@ -82,7 +82,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-authentication-password") %>
+		<bean:message key="proxy-authentication-password" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />proxyAuthenticationPassword" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationPassword %>">
@@ -90,7 +90,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-authentication-host") %>
+		<bean:message key="proxy-authentication-host" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />proxyAuthenticationHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationHost %>">
@@ -98,7 +98,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "proxy-authentication-domain") %>
+		<bean:message key="proxy-authentication-domain" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />proxyAuthenticationDomain" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationDomain %>">
@@ -111,7 +111,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "stylesheet") %>
+		<bean:message key="stylesheet" />
 	</td>
 	<td>
 		<textarea name="<portlet:namespace />stylesheet" style="height: 300px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>

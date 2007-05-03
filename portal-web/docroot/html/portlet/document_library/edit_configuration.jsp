@@ -62,15 +62,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "root-folder") %>
+		<bean:message key="root-folder" />
 	</td>
 	<td>
 		<a href="<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/view" /><liferay-portlet:param name="folderId" value="<%= rootFolderId %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
 		<%= rootFolderName %></a>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/select_folder" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+		<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<liferay-portlet:renderURL portletName="<%= portletResource %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><liferay-portlet:param name="struts_action" value="/document_library/select_folder" /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeFolder();">
+		<input type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();">
 	</td>
 </tr>
 <tr>
@@ -80,7 +80,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "show-breadcrumbs") %>
+		<bean:message key="show-breadcrumbs" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showBreadcrumbs" defaultValue="<%= showBreadcrumbs %>" />
@@ -88,7 +88,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "show-search") %>
+		<bean:message key="show-search" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showFoldersSearch" defaultValue="<%= showFoldersSearch %>" />
@@ -96,7 +96,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "show-subfolders") %>
+		<bean:message key="show-subfolders" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showSubfolders" defaultValue="<%= showSubfolders %>" />
@@ -104,7 +104,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "folders-per-page") %>
+		<bean:message key="folders-per-page" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>">
@@ -117,7 +117,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "show-columns") %>
+		<bean:message key="show-columns" />
 	</td>
 	<td>
 
@@ -174,7 +174,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "show-search") %>
+		<bean:message key="show-search" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showFileEntriesSearch" defaultValue="<%= showFileEntriesSearch %>" />
@@ -182,7 +182,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "documents-per-page") %>
+		<bean:message key="documents-per-page" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>">
@@ -195,7 +195,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "show-columns") %>
+		<bean:message key="show-columns" />
 	</td>
 	<td>
 
@@ -249,6 +249,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns); document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); submitForm(document.<portlet:namespace />fm);">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>

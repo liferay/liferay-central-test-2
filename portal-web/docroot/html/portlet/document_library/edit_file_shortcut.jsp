@@ -148,7 +148,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "name") %>
+			<bean:message key="name" />
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>">
@@ -158,7 +158,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "version") %>
+			<bean:message key="version" />
 		</td>
 		<td>
 			<%= toFileEntry.getVersion() %>
@@ -166,7 +166,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "size") %>
+			<bean:message key="size" />
 		</td>
 		<td>
 			<%= TextFormatter.formatKB(toFileEntry.getSize(), locale) %>k
@@ -174,7 +174,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "downloads") %>
+			<bean:message key="downloads" />
 		</td>
 		<td>
 			<%= toFileEntry.getReadCount() %>
@@ -187,7 +187,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "url") %>
+			<bean:message key="url" />
 		</td>
 		<td>
 			<liferay-ui:input-resource
@@ -200,14 +200,14 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<br />
 </c:if>
 
-<%= LanguageUtil.get(pageContext, "you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for") %>
+<bean:message key="you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for" />
 
 <br /><br />
 
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "community") %>
+		<bean:message key="community" />
 	</td>
 	<td>
 
@@ -220,13 +220,13 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
 		</c:if>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "document") %>
+		<bean:message key="document" />
 	</td>
 	<td>
 
@@ -239,7 +239,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-			<input <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
+			<input <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value="<bean:message key="select" />" onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
 		</c:if>
 	</td>
 </tr>
@@ -252,7 +252,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -267,9 +267,9 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
 	<br />
 
-	<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+	<input type="submit" value="<bean:message key="save" />">
 
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 	<br />
 </c:if>

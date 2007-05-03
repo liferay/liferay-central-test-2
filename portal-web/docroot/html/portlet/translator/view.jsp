@@ -45,32 +45,32 @@ if (translation == null) {
 <br /><br />
 
 <select name="<portlet:namespace />id">
-	<option <%= (translation.getTranslationId().equals("en_zh")) ? "selected" : "" %> value="en_zh"><%= LanguageUtil.get(pageContext, "en_zh") %></option>
-	<option <%= (translation.getTranslationId().equals("en_zt")) ? "selected" : "" %> value="en_zt"><%= LanguageUtil.get(pageContext, "en_zt") %></option>
-	<option <%= (translation.getTranslationId().equals("en_nl")) ? "selected" : "" %> value="en_nl"><%= LanguageUtil.get(pageContext, "en_nl") %></option>
-	<option <%= (translation.getTranslationId().equals("en_fr")) ? "selected" : "" %> value="en_fr"><%= LanguageUtil.get(pageContext, "en_fr") %></option>
-	<option <%= (translation.getTranslationId().equals("en_de")) ? "selected" : "" %> value="en_de"><%= LanguageUtil.get(pageContext, "en_de") %></option>
-	<option <%= (translation.getTranslationId().equals("en_it")) ? "selected" : "" %> value="en_it"><%= LanguageUtil.get(pageContext, "en_it") %></option>
-	<option <%= (translation.getTranslationId().equals("en_ja")) ? "selected" : "" %> value="en_ja"><%= LanguageUtil.get(pageContext, "en_ja") %></option>
-	<option <%= (translation.getTranslationId().equals("en_ko")) ? "selected" : "" %> value="en_ko"><%= LanguageUtil.get(pageContext, "en_ko") %></option>
-	<option <%= (translation.getTranslationId().equals("en_pt")) ? "selected" : "" %> value="en_pt"><%= LanguageUtil.get(pageContext, "en_pt") %></option>
-	<option <%= (translation.getTranslationId().equals("en_es")) ? "selected" : "" %> value="en_es"><%= LanguageUtil.get(pageContext, "en_es") %></option>
-	<option <%= (translation.getTranslationId().equals("zh_en")) ? "selected" : "" %> value="zh_en"><%= LanguageUtil.get(pageContext, "zh_en") %></option>
-	<option <%= (translation.getTranslationId().equals("zt_en")) ? "selected" : "" %> value="zt_en"><%= LanguageUtil.get(pageContext, "zt_en") %></option>
-	<option <%= (translation.getTranslationId().equals("nl_en")) ? "selected" : "" %> value="nl_en"><%= LanguageUtil.get(pageContext, "nl_en") %></option>
-	<option <%= (translation.getTranslationId().equals("fr_en")) ? "selected" : "" %> value="fr_en"><%= LanguageUtil.get(pageContext, "fr_en") %></option>
-	<option <%= (translation.getTranslationId().equals("fr_de")) ? "selected" : "" %> value="fr_de"><%= LanguageUtil.get(pageContext, "fr_de") %></option>
-	<option <%= (translation.getTranslationId().equals("de_en")) ? "selected" : "" %> value="de_en"><%= LanguageUtil.get(pageContext, "de_en") %></option>
-	<option <%= (translation.getTranslationId().equals("de_fr")) ? "selected" : "" %> value="de_fr"><%= LanguageUtil.get(pageContext, "de_fr") %></option>
-	<option <%= (translation.getTranslationId().equals("it_en")) ? "selected" : "" %> value="it_en"><%= LanguageUtil.get(pageContext, "it_en") %></option>
-	<option <%= (translation.getTranslationId().equals("ja_en")) ? "selected" : "" %> value="ja_en"><%= LanguageUtil.get(pageContext, "ja_en") %></option>
-	<option <%= (translation.getTranslationId().equals("ko_en")) ? "selected" : "" %> value="ko_en"><%= LanguageUtil.get(pageContext, "ko_en") %></option>
-	<option <%= (translation.getTranslationId().equals("pt_en")) ? "selected" : "" %> value="pt_en"><%= LanguageUtil.get(pageContext, "pt_en") %></option>
-	<option <%= (translation.getTranslationId().equals("ru_en")) ? "selected" : "" %> value="ru_en"><%= LanguageUtil.get(pageContext, "ru_en") %></option>
-	<option <%= (translation.getTranslationId().equals("es_en")) ? "selected" : "" %> value="es_en"><%= LanguageUtil.get(pageContext, "es_en") %></option>
+	<option <%= (translation.getTranslationId().equals("en_zh")) ? "selected" : "" %> value="en_zh"><bean:message key="en_zh" /></option>
+	<option <%= (translation.getTranslationId().equals("en_zt")) ? "selected" : "" %> value="en_zt"><bean:message key="en_zt" /></option>
+	<option <%= (translation.getTranslationId().equals("en_nl")) ? "selected" : "" %> value="en_nl"><bean:message key="en_nl" /></option>
+	<option <%= (translation.getTranslationId().equals("en_fr")) ? "selected" : "" %> value="en_fr"><bean:message key="en_fr" /></option>
+	<option <%= (translation.getTranslationId().equals("en_de")) ? "selected" : "" %> value="en_de"><bean:message key="en_de" /></option>
+	<option <%= (translation.getTranslationId().equals("en_it")) ? "selected" : "" %> value="en_it"><bean:message key="en_it" /></option>
+	<option <%= (translation.getTranslationId().equals("en_ja")) ? "selected" : "" %> value="en_ja"><bean:message key="en_ja" /></option>
+	<option <%= (translation.getTranslationId().equals("en_ko")) ? "selected" : "" %> value="en_ko"><bean:message key="en_ko" /></option>
+	<option <%= (translation.getTranslationId().equals("en_pt")) ? "selected" : "" %> value="en_pt"><bean:message key="en_pt" /></option>
+	<option <%= (translation.getTranslationId().equals("en_es")) ? "selected" : "" %> value="en_es"><bean:message key="en_es" /></option>
+	<option <%= (translation.getTranslationId().equals("zh_en")) ? "selected" : "" %> value="zh_en"><bean:message key="zh_en" /></option>
+	<option <%= (translation.getTranslationId().equals("zt_en")) ? "selected" : "" %> value="zt_en"><bean:message key="zt_en" /></option>
+	<option <%= (translation.getTranslationId().equals("nl_en")) ? "selected" : "" %> value="nl_en"><bean:message key="nl_en" /></option>
+	<option <%= (translation.getTranslationId().equals("fr_en")) ? "selected" : "" %> value="fr_en"><bean:message key="fr_en" /></option>
+	<option <%= (translation.getTranslationId().equals("fr_de")) ? "selected" : "" %> value="fr_de"><bean:message key="fr_de" /></option>
+	<option <%= (translation.getTranslationId().equals("de_en")) ? "selected" : "" %> value="de_en"><bean:message key="de_en" /></option>
+	<option <%= (translation.getTranslationId().equals("de_fr")) ? "selected" : "" %> value="de_fr"><bean:message key="de_fr" /></option>
+	<option <%= (translation.getTranslationId().equals("it_en")) ? "selected" : "" %> value="it_en"><bean:message key="it_en" /></option>
+	<option <%= (translation.getTranslationId().equals("ja_en")) ? "selected" : "" %> value="ja_en"><bean:message key="ja_en" /></option>
+	<option <%= (translation.getTranslationId().equals("ko_en")) ? "selected" : "" %> value="ko_en"><bean:message key="ko_en" /></option>
+	<option <%= (translation.getTranslationId().equals("pt_en")) ? "selected" : "" %> value="pt_en"><bean:message key="pt_en" /></option>
+	<option <%= (translation.getTranslationId().equals("ru_en")) ? "selected" : "" %> value="ru_en"><bean:message key="ru_en" /></option>
+	<option <%= (translation.getTranslationId().equals("es_en")) ? "selected" : "" %> value="es_en"><bean:message key="es_en" /></option>
 </select>
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "translate") %>">
+<input type="submit" value="<bean:message key="translate" />">
 
 </form>
 

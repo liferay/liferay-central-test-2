@@ -29,7 +29,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 %>
 
 <fieldset>
-	<legend><b><%= LanguageUtil.get(pageContext, "link") %></b></legend>
+	<legend><b><bean:message key="link" /></b></legend>
 
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
@@ -37,7 +37,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "color") %>
+					<bean:message key="color" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "LinkColor" %>' onchange="preview.aColor(this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
@@ -45,7 +45,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "decoration") %>
+					<bean:message key="decoration" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkDecor" %>' onchange="preview.aDecor(this.value);">
@@ -55,7 +55,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "font") %>
+					<bean:message key="font" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkFont" %>' onchange="preview.aFont(this.value);">
@@ -65,7 +65,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "size") %>
+					<bean:message key="size" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkSize" %>' onchange="preview.aSize(this.value);">
@@ -75,14 +75,14 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "style") %>
+					<bean:message key="style" />
 				</td>
 				<td>
-					<html:checkbox styleId='<%= propertyPrefix + "LinkStyle" %>' property='<%= propertyPrefix + "LinkStyle" %>' onclick="preview.aStyle(this.checked);" /> <%= LanguageUtil.get(pageContext, "italic") %>
+					<html:checkbox styleId='<%= propertyPrefix + "LinkStyle" %>' property='<%= propertyPrefix + "LinkStyle" %>' onclick="preview.aStyle(this.checked);" /> <bean:message key="italic" />
 
 					&nbsp;
 
-					<html:checkbox styleId='<%= propertyPrefix + "LinkBold" %>' property='<%= propertyPrefix + "LinkBold" %>' onclick="preview.aWeight(this.checked);" /> <%= LanguageUtil.get(pageContext, "bold") %>
+					<html:checkbox styleId='<%= propertyPrefix + "LinkBold" %>' property='<%= propertyPrefix + "LinkBold" %>' onclick="preview.aWeight(this.checked);" /> <bean:message key="bold" />
 				</td>
 			</tr>
 			</table>
@@ -94,7 +94,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 <br />
 
 <fieldset>
-	<legend><b><%= LanguageUtil.get(pageContext, "hover-link") %></b></legend>
+	<legend><b><bean:message key="hover-link" /></b></legend>
 
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
@@ -102,7 +102,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "color") %>
+					<bean:message key="color" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "LinkHoverColor" %>' onchange="preview.setHoverStyle('color', this.value);" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
@@ -110,7 +110,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "decoration") %>
+					<bean:message key="decoration" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkHoverDecor" %>' onchange="preview.setHoverStyle('decor', this.value);">
@@ -120,7 +120,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "font") %>
+					<bean:message key="font" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkHoverFont" %>' onchange="preview.setHoverStyle('font', this.value);">
@@ -130,7 +130,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "size") %>
+					<bean:message key="size" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkHoverSize" %>' onchange="preview.setHoverStyle('size', this.value);">
@@ -140,14 +140,14 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "style") %>
+					<bean:message key="style" />
 				</td>
 				<td>
-					<html:checkbox styleId='<%= propertyPrefix + "LinkHoverStyle" %>' property='<%= propertyPrefix + "LinkHoverStyle" %>' onclick="preview.setHoverStyle('style', this.checked);" /> <%= LanguageUtil.get(pageContext, "italic") %>
+					<html:checkbox styleId='<%= propertyPrefix + "LinkHoverStyle" %>' property='<%= propertyPrefix + "LinkHoverStyle" %>' onclick="preview.setHoverStyle('style', this.checked);" /> <bean:message key="italic" />
 
 					&nbsp;
 
-					<html:checkbox styleId='<%= propertyPrefix + "LinkHoverBold" %>' property='<%= propertyPrefix + "LinkHoverBold" %>' onclick="preview.setHoverStyle('weight', this.checked);" /> <%= LanguageUtil.get(pageContext, "bold") %>
+					<html:checkbox styleId='<%= propertyPrefix + "LinkHoverBold" %>' property='<%= propertyPrefix + "LinkHoverBold" %>' onclick="preview.setHoverStyle('weight', this.checked);" /> <bean:message key="bold" />
 				</td>
 			</tr>
 			</table>
@@ -159,7 +159,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 <br />
 
 <fieldset>
-	<legend><b><%= LanguageUtil.get(pageContext, "visited-link") %></b></legend>
+	<legend><b><bean:message key="visited-link" /></b></legend>
 
 	<table border="0" cellpadding="8" cellspacing="0">
 	<tr>
@@ -167,7 +167,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "color") %>
+					<bean:message key="color" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "LinkVisitedColor" %>' onchange="" /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
@@ -175,7 +175,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "decoration") %>
+					<bean:message key="decoration" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkVisitedDecor" %>'>
@@ -185,7 +185,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "font") %>
+					<bean:message key="font" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkVisitedFont" %>'>
@@ -195,7 +195,7 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "size") %>
+					<bean:message key="size" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "LinkVisitedSize" %>'>
@@ -205,14 +205,14 @@ String propertyPrefix = ParamUtil.getString(request, "propertyPrefix");
 			</tr>
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "style") %>
+					<bean:message key="style" />
 				</td>
 				<td>
-					<html:checkbox styleId='<%= propertyPrefix + "LinkVisitedStyle" %>' property='<%= propertyPrefix + "LinkVisitedStyle" %>' /> <%= LanguageUtil.get(pageContext, "italic") %>
+					<html:checkbox styleId='<%= propertyPrefix + "LinkVisitedStyle" %>' property='<%= propertyPrefix + "LinkVisitedStyle" %>' /> <bean:message key="italic" />
 
 					&nbsp;
 
-					<html:checkbox styleId='<%= propertyPrefix + "LinkVisitedBold" %>' property='<%= propertyPrefix + "LinkVisitedBold" %>' /> <%= LanguageUtil.get(pageContext, "bold") %>
+					<html:checkbox styleId='<%= propertyPrefix + "LinkVisitedBold" %>' property='<%= propertyPrefix + "LinkVisitedBold" %>' /> <bean:message key="bold" />
 				</td>
 			</tr>
 			</table>

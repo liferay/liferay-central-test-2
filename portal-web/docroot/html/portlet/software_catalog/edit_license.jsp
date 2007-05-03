@@ -56,7 +56,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="name" />
@@ -64,7 +64,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "url") %>
+		<bean:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="url" />
@@ -72,7 +72,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "open-source") %>
+		<bean:message key="open-source" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="openSource" defaultValue="<%= openSource %>" />
@@ -80,7 +80,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "active") %>
+		<bean:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
@@ -88,7 +88,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "recommended") %>
+		<bean:message key="recommended" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="recommended" defaultValue="<%= recommended %>" />
@@ -98,9 +98,9 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

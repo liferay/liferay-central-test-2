@@ -95,7 +95,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			<br />
 
 			<a href="<%= Validator.isNotNull(item.getLargeImageURL()) ? item.getLargeImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getItemId() + "&large=1" %>" style="font-size: xx-small;" target="_blank">
-			<%= LanguageUtil.get(pageContext, "see-large-photo") %>
+			<bean:message key="see-large-photo" />
 			</a>
 		</c:if>
 	</td>
@@ -141,7 +141,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 
 			<c:choose>
 				<c:when test="<%= (itemPrice.getMinQuantity()) == 0 && (itemPrice.getMaxQuantity() == 0) %>">
-					<%= LanguageUtil.get(pageContext, "price") %>:
+					<bean:message key="price" />:
 				</c:when>
 				<c:when test="<%= itemPrice.getMaxQuantity() != 0 %>">
 					<%= LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", "<b>" + new Integer(itemPrice.getMaxQuantity()) + "</b>"}, false) %>
@@ -156,7 +156,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			</c:if>
 
 			<c:if test="<%= itemPrice.getDiscount() > 0 %>">
-				<%= currency.getSymbol() %><strike><%= doubleFormat.format(itemPrice.getPrice()) %></strike> <span class="portlet-msg-success"><%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)) %></span> / <%= LanguageUtil.get(pageContext, "you-save") %>: <span class="portlet-msg-error"><%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)) %> (<%= percentFormat.format(itemPrice.getDiscount()) %>)</span><br />
+				<%= currency.getSymbol() %><strike><%= doubleFormat.format(itemPrice.getPrice()) %></strike> <span class="portlet-msg-success"><%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)) %></span> / <bean:message key="you-save" />: <span class="portlet-msg-error"><%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)) %> (<%= percentFormat.format(itemPrice.getDiscount()) %>)</span><br />
 			</c:if>
 
 		<%
@@ -168,10 +168,10 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY) %>">
 			<c:choose>
 				<c:when test="<%= ShoppingUtil.isInStock(item) %>">
-					<%= LanguageUtil.get(pageContext, "availability") %>: <span class="portlet-msg-success"><%= LanguageUtil.get(pageContext, "in-stock") %></span><br />
+					<bean:message key="availability" />: <span class="portlet-msg-success"><bean:message key="in-stock" /></span><br />
 				</c:when>
 				<c:otherwise>
-					<%= LanguageUtil.get(pageContext, "availability") %>: <span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "out-of-stock") %></span><br />
+					<bean:message key="availability" />: <span class="portlet-msg-error"><bean:message key="out-of-stock" /></span><br />
 				</c:otherwise>
 			</c:choose>
 
@@ -194,7 +194,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 				</td>
 				<td>
 					<select name="<portlet:namespace />fieldName<%= fieldName %>">
-						<option value=""><%= LanguageUtil.get(pageContext, "select-option") %></option>
+						<option value=""><bean:message key="select-option" /></option>
 
 						<%
 						for (int j = 0; j < fieldValues.length; j++) {
@@ -224,17 +224,17 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		}
 		%>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "add-to-shopping-cart") %>' onClick="<portlet:namespace />addToCart();"><br />
+		<input type="button" value="<bean:message key="add-to-shopping-cart" />" onClick="<portlet:namespace />addToCart();"><br />
 
 		<c:if test="<%= (prevAndNext[0] != null) || (prevAndNext[2] != null) %>">
 			<br />
 
 			<c:if test="<%= prevAndNext[0] != null %>">
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[0].getItemId() %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="previous" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[0].getItemId() %>" /></portlet:renderURL>';">
 			</c:if>
 
 			<c:if test="<%= prevAndNext[2] != null %>">
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[2].getItemId() %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="next" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= prevAndNext[2].getItemId() %>" /></portlet:renderURL>';">
 			</c:if>
 		</c:if>
 	</td>

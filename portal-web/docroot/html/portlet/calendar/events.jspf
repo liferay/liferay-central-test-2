@@ -102,7 +102,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "add-event") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(selMonth) %>" /><portlet:param name="day" value="<%= Integer.toString(selDay) %>" /><portlet:param name="year" value="<%= Integer.toString(selYear) %>" /></portlet:renderURL>';"><br />
+	<input type="button" value="<bean:message key="add-event" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(selMonth) %>" /><portlet:param name="day" value="<%= Integer.toString(selDay) %>" /><portlet:param name="year" value="<%= Integer.toString(selYear) %>" /></portlet:renderURL>';"><br />
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />

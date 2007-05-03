@@ -104,7 +104,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		<br />
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
+		<input type="button" value="<bean:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);">
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>

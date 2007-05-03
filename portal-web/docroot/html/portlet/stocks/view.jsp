@@ -76,7 +76,7 @@
 
 		<br />
 
-		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text"> <input type="submit" value='<%= LanguageUtil.get(pageContext, "get-quote") %>'>
+		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text"> <input type="submit" value="<bean:message key="get-quote" />">
 	</c:when>
 	<c:otherwise>
 
@@ -116,25 +116,25 @@
 		<input maxlength="10" name="<portlet:namespace />symbol" size="10" type="text" value="<%= symbol %>">
 
 		<select name="<portlet:namespace />time" onChange="submitForm(document.<portlet:namespace />fm);">
-			<option <%= (time == 1) ? "selected" : "" %> value="1">1 <%= LanguageUtil.get(pageContext, "day") %></option>
-			<option <%= (time == 2) ? "selected" : "" %> value="2">2 <%= LanguageUtil.get(pageContext, "days") %></option>
-			<option <%= (time == 3) ? "selected" : "" %> value="3">5 <%= LanguageUtil.get(pageContext, "days") %></option>
-			<option <%= (time == 18) ? "selected" : "" %> value="18">10 <%= LanguageUtil.get(pageContext, "days") %></option>
-			<option <%= (time == 4) ? "selected" : "" %> value="4">1 <%= LanguageUtil.get(pageContext, "month") %></option>
-			<option <%= (time == 5) ? "selected" : "" %> value="5">2 <%= LanguageUtil.get(pageContext, "months") %></option>
-			<option <%= (time == 6) ? "selected" : "" %> value="6">3 <%= LanguageUtil.get(pageContext, "months") %></option>
-			<option <%= (time == 7) ? "selected" : "" %> value="7">6 <%= LanguageUtil.get(pageContext, "months") %></option>
-			<option <%= (time == 19) ? "selected" : "" %> value="19"><%= LanguageUtil.get(pageContext, "year-to-date") %></option>
-			<option <%= (time == 8) ? "selected" : "" %> value="8">1 <%= LanguageUtil.get(pageContext, "year") %></option>
-			<option <%= (time == 9) ? "selected" : "" %> value="9">2 <%= LanguageUtil.get(pageContext, "years") %></option>
-			<option <%= (time == 10) ? "selected" : "" %> value="10">3 <%= LanguageUtil.get(pageContext, "years") %></option>
-			<option <%= (time == 11) ? "selected" : "" %> value="11">4 <%= LanguageUtil.get(pageContext, "years") %></option>
-			<option <%= (time == 12) ? "selected" : "" %> value="12">5 <%= LanguageUtil.get(pageContext, "years") %></option>
-			<option <%= (time == 13) ? "selected" : "" %> value="13">1 <%= LanguageUtil.get(pageContext, "decade") %></option>
-			<option <%= (time == 20) ? "selected" : "" %> value="20"><%= LanguageUtil.get(pageContext, "all-data") %></option>
+			<option <%= (time == 1) ? "selected" : "" %> value="1">1 <bean:message key="day" /></option>
+			<option <%= (time == 2) ? "selected" : "" %> value="2">2 <bean:message key="days" /></option>
+			<option <%= (time == 3) ? "selected" : "" %> value="3">5 <bean:message key="days" /></option>
+			<option <%= (time == 18) ? "selected" : "" %> value="18">10 <bean:message key="days" /></option>
+			<option <%= (time == 4) ? "selected" : "" %> value="4">1 <bean:message key="month" /></option>
+			<option <%= (time == 5) ? "selected" : "" %> value="5">2 <bean:message key="months" /></option>
+			<option <%= (time == 6) ? "selected" : "" %> value="6">3 <bean:message key="months" /></option>
+			<option <%= (time == 7) ? "selected" : "" %> value="7">6 <bean:message key="months" /></option>
+			<option <%= (time == 19) ? "selected" : "" %> value="19"><bean:message key="year-to-date" /></option>
+			<option <%= (time == 8) ? "selected" : "" %> value="8">1 <bean:message key="year" /></option>
+			<option <%= (time == 9) ? "selected" : "" %> value="9">2 <bean:message key="years" /></option>
+			<option <%= (time == 10) ? "selected" : "" %> value="10">3 <bean:message key="years" /></option>
+			<option <%= (time == 11) ? "selected" : "" %> value="11">4 <bean:message key="years" /></option>
+			<option <%= (time == 12) ? "selected" : "" %> value="12">5 <bean:message key="years" /></option>
+			<option <%= (time == 13) ? "selected" : "" %> value="13">1 <bean:message key="decade" /></option>
+			<option <%= (time == 20) ? "selected" : "" %> value="20"><bean:message key="all-data" /></option>
 		</select>
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "get-quote") %>">
+		<input type="submit" value="<bean:message key="get-quote" />">
 
 		<br /><br />
 
@@ -143,11 +143,11 @@
 				<table border="1" cellpadding="0" cellspacing="0" width="579">
 				<tr>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "last-trade") %><br />
+						<bean:message key="last-trade" /><br />
 						<b><%= decimalFormat.format(stocks.getLastTrade()) %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "change") %><br />
+						<bean:message key="change" /><br />
 
 						<c:if test="<%= stocks.isChangeAvailable() && stocks.isPreviousCloseAvailable() %>">
 							<c:if test="<%= stocks.getChange() < 0 %>">
@@ -168,27 +168,27 @@
 						</c:if>
 
 						<c:if test="<%= !stocks.isChangeAvailable() || !stocks.isPreviousCloseAvailable() %>">
-							<b><%= LanguageUtil.get(pageContext, "not-available") %></b>
+							<b><bean:message key="not-available" /></b>
 						</c:if>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "day-high") %><br />
+						<bean:message key="day-high" /><br />
 						<b><%= stocks.isDayHighAvailable() ? decimalFormat.format(stocks.getDayHigh()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "day-low") %><br />
+						<bean:message key="day-low" /><br />
 						<b><%= stocks.isDayLowAvailable() ? decimalFormat.format(stocks.getDayLow()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "open") %><br />
+						<bean:message key="open" /><br />
 						<b><%= stocks.isOpenAvailable() ? decimalFormat.format(stocks.getOpen()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "previous-close") %><br />
+						<bean:message key="previous-close" /><br />
 						<b><%= stocks.isPreviousCloseAvailable() ? decimalFormat.format(stocks.getPreviousClose()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 					<td align="center">
-						<%= LanguageUtil.get(pageContext, "volume") %><br />
+						<bean:message key="volume" /><br />
 						<b><%= stocks.isVolumeAvailable() ? numberFormat.format(stocks.getVolume()) : LanguageUtil.get(pageContext, "not-available") %></b>
 					</td>
 				</tr>

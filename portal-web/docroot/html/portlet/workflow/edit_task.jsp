@@ -112,19 +112,19 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 
 				<c:choose>
 					<c:when test='<%= errorCode.equals("required-value") %>'>
-						<%= LanguageUtil.get(pageContext, "please-enter-a-value") %>
+						<bean:message key="please-enter-a-value" />
 					</c:when>
 					<c:when test='<%= errorCode.equals("invalid-date") %>'>
-						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-date") %>
+						<bean:message key="please-enter-a-valid-date" />
 					</c:when>
 					<c:when test='<%= errorCode.equals("invalid-email") %>'>
-						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-email-address") %>
+						<bean:message key="please-enter-a-valid-email-address" />
 					</c:when>
 					<c:when test='<%= errorCode.equals("invalid-number") %>'>
-						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-number") %>
+						<bean:message key="please-enter-a-valid-number" />
 					</c:when>
 					<c:when test='<%= errorCode.equals("invalid-phone") %>'>
-						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-phone-number") %>
+						<bean:message key="please-enter-a-valid-phone-number" />
 					</c:when>
 				</c:choose>
 
@@ -263,6 +263,6 @@ for (int i = 0; i < taskTransitions.size(); i++) {
 }
 %>
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>

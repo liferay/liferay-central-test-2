@@ -57,7 +57,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 <c:if test="<%= userGroup != null %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "old-name") %>
+			<bean:message key="old-name" />
 		</td>
 		<td>
 			<%= userGroup.getName() %>
@@ -77,7 +77,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
 </form>
 

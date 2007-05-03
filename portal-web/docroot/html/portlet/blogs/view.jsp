@@ -167,7 +167,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "add-category") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';">
+						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';">
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>
@@ -176,7 +176,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					<td>
 						<input name="<portlet:namespace />keywords" size="30" type="text">
 
-						<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-categories") %>">
+						<input type="submit" value="<bean:message key="search-categories" />">
 					</td>
 				</c:if>
 			</tr>

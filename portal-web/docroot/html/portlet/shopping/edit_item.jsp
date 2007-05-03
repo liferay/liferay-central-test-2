@@ -177,7 +177,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <c:if test="<%= item != null %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "category") %>
+			<bean:message key="category" />
 		</td>
 		<td>
 
@@ -189,7 +189,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 			<%= category.getName() %>
 			</a>
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -201,7 +201,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "sku") %>
+		<bean:message key="sku" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="sku" />
@@ -214,7 +214,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="name" />
@@ -222,7 +222,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "description") %>
+		<bean:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="description" />
@@ -230,7 +230,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "properties") %>
+		<bean:message key="properties" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="properties" />
@@ -243,13 +243,13 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "requires-shipping") %>
+				<bean:message key="requires-shipping" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="requiresShipping" />
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "featured") %>
+				<bean:message key="featured" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="featured" />
@@ -257,7 +257,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 			<c:if test="<%= fieldsCount == 0 %>">
 				<td>
-					<%= LanguageUtil.get(pageContext, "stock-quantity") %>
+					<bean:message key="stock-quantity" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="stockQuantity" />
@@ -276,7 +276,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -290,9 +290,9 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 <br /><br />
 
@@ -300,7 +300,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <input name="<portlet:namespace />fields" type="hidden" value="">
 
-<%= LanguageUtil.get(pageContext, "fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user") %>
+<bean:message key="fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user" />
 
 <br /><br />
 
@@ -341,19 +341,19 @@ for (int i = 0; i < fieldsCount; i++) {
 
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "name") %>
+			<bean:message key="name" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="name" fieldParam='<%= "fieldName" + i %>' defaultValue="<%= fieldName %>" />
 		</td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "values") %>
+			<bean:message key="values" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="values" fieldParam='<%= "fieldValues" + i %>' defaultValue='<%= StringUtil.merge(fieldValues, ", ") %>' />
 		</td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "description") %>
+			<bean:message key="description" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="description" fieldParam='<%= "fieldDescription" + i %>' defaultValue="<%= fieldDescription %>" />
@@ -361,7 +361,7 @@ for (int i = 0; i < fieldsCount; i++) {
 
 		<c:if test="<%= fieldsCount > 0 %>">
 			<td>
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteField(<%= i %>);">
+				<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteField(<%= i %>);">
 			</td>
 		</c:if>
 	</tr>
@@ -376,10 +376,10 @@ for (int i = 0; i < fieldsCount; i++) {
 	<br />
 </c:if>
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "add-field") %>' onClick="<portlet:namespace />addField();">
+<input type="button" value="<bean:message key="add-field" />" onClick="<portlet:namespace />addField();">
 
 <c:if test="<%= fieldsCount > 0 %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "edit-stock-quantity") %>' onClick="<portlet:namespace />editItemQuantities();">
+	<input type="button" value="<bean:message key="edit-stock-quantity" />" onClick="<portlet:namespace />editItemQuantities();">
 </c:if>
 
 <br /><br />
@@ -498,31 +498,31 @@ for (int i = 0; i < pricesCount; i++) {
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "min-qty") %>
+					<bean:message key="min-qty" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="minQuantity" fieldParam='<%= "minQuantity" + i %>' defaultValue="<%= String.valueOf(minQuantity) %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "max-qty") %>
+					<bean:message key="max-qty" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="maxQuantity" fieldParam='<%= "maxQuantity" + i %>' defaultValue="<%= String.valueOf(maxQuantity) %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "price") %>
+					<bean:message key="price" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="price" fieldParam='<%= "price" + i %>' defaultValue="<%= currency.getSymbol() + doubleFormat.format(price) %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "discount") %>
+					<bean:message key="discount" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="discount" fieldParam='<%= "discount" + i %>' defaultValue="<%= percentFormat.format(discount) %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "taxable") %>
+					<bean:message key="taxable" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param='<%= "taxable" + i %>' defaultValue="<%= taxable %>" />
@@ -533,25 +533,25 @@ for (int i = 0; i < pricesCount; i++) {
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "shipping") %>
+					<bean:message key="shipping" />
 				</td>
 				<td>
 					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="shipping" fieldParam='<%= "shipping" + i %>' defaultValue="<%= currency.getSymbol() + doubleFormat.format(shipping) %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "use-shipping-formula") %>
+					<bean:message key="use-shipping-formula" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param='<%= "useShippingFormula" + i %>' defaultValue="<%= useShippingFormula %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "active") %>
+					<bean:message key="active" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param='<%= "active" + i %>' defaultValue="<%= active %>" />
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "default") %>
+					<bean:message key="default" />
 				</td>
 				<td>
 					<input <%= defaultPrice ? "checked" : "" %> name="<portlet:namespace />defaultPrice" type="radio" value="<%= i %>" onClick="document.<portlet:namespace />fm.<portlet:namespace />active<%= i %>.checked = true;">
@@ -559,7 +559,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 				<c:if test="<%= pricesCount > 1 %>">
 					<td>
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deletePrice(<%= i %>);">
+						<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deletePrice(<%= i %>);">
 					</td>
 				</c:if>
 			</tr>
@@ -579,7 +579,7 @@ for (int i = 0; i < pricesCount; i++) {
 
 <br />
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "add-price") %>' onClick="<portlet:namespace />addPrice();">
+<input type="button" value="<bean:message key="add-price" />" onClick="<portlet:namespace />addPrice();">
 
 <br /><br />
 
@@ -591,7 +591,7 @@ for (int i = 0; i < pricesCount; i++) {
 	String[] imageExtensions = PropsUtil.getArray(PropsUtil.SHOPPING_IMAGE_EXTENSIONS);
 	%>
 
-	<%= LanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<bean:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ItemLargeImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -602,7 +602,7 @@ for (int i = 0; i < pricesCount; i++) {
 	String[] imageExtensions = PropsUtil.getArray(PropsUtil.SHOPPING_IMAGE_EXTENSIONS);
 	%>
 
-	<%= LanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<bean:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ItemMediumImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -613,7 +613,7 @@ for (int i = 0; i < pricesCount; i++) {
 	String[] imageExtensions = PropsUtil.getArray(PropsUtil.SHOPPING_IMAGE_EXTENSIONS);
 	%>
 
-	<%= LanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<bean:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -621,7 +621,7 @@ for (int i = 0; i < pricesCount; i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "small-image-url") %>
+		<bean:message key="small-image-url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="smallImageURL" />
@@ -629,7 +629,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "small-image") %>
+		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="small-image" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
@@ -637,7 +637,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "use-small-image") %>
+		<bean:message key="use-small-image" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="smallImage" />
@@ -650,7 +650,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "medium-image-url") %>
+		<bean:message key="medium-image-url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="mediumImageURL" />
@@ -658,7 +658,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "medium-image") %>
+		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="medium-image" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
@@ -666,7 +666,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "use-medium-image") %>
+		<bean:message key="use-medium-image" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="mediumImage" />
@@ -679,7 +679,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "large-image-url") %>
+		<bean:message key="large-image-url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="largeImageURL" />
@@ -687,7 +687,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <%= LanguageUtil.get(pageContext, "large-image") %>
+		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="large-image" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
@@ -695,7 +695,7 @@ for (int i = 0; i < pricesCount; i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "use-large-image") %>
+		<bean:message key="use-large-image" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="largeImage" />

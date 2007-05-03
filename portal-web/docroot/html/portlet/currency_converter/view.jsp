@@ -42,7 +42,7 @@ decimalFormat.setMinimumFractionDigits(2);
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "convert") %>">
+<input type="submit" value="<bean:message key="convert" />">
 
 <input name="<portlet:namespace />number" size="3" type="text" value="<%= number %>">
 
@@ -66,7 +66,7 @@ decimalFormat.setMinimumFractionDigits(2);
 
 </select>
 
-<b><%= LanguageUtil.get(pageContext, "to") %></b>
+<b><bean:message key="to" /></b>
 
 <select name="<portlet:namespace />to">
 
@@ -95,7 +95,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		<table border="1" cellpadding="3" cellspacing="0" width="100%">
 		<tr class="portlet-section-header">
 			<td>
-				<b><%= LanguageUtil.get(pageContext, "currency") %></b>
+				<b><bean:message key="currency" /></b>
 			</td>
 
 			<%
@@ -166,7 +166,7 @@ decimalFormat.setMinimumFractionDigits(2);
 				<b><%= decimalFormat.format(number * currency.getRate()) %></b>
 			</td>
 			<td align="center" width="34%">
-				<%= LanguageUtil.get(pageContext, "historical-charts") %><br />
+				<bean:message key="historical-charts" /><br />
 
 				<%
 				PortletURL portletURL = renderResponse.createRenderURL();
@@ -178,15 +178,15 @@ decimalFormat.setMinimumFractionDigits(2);
 				%>
 
 				<c:if test='<%= chartId.equals("3m") %>'>
-					3<%= LanguageUtil.get(pageContext, "month-abbreviation") %>, <a href="<% portletURL.setParameter("chartId", "1y"); %><%= portletURL.toString() %>">1<%= LanguageUtil.get(pageContext, "year-abbreviation") %></a>, <a href="<% portletURL.setParameter("chartId", "2y"); %><%= portletURL.toString() %>">2<%= LanguageUtil.get(pageContext, "year-abbreviation") %></a>
+					3<bean:message key="month-abbreviation" />, <a href="<% portletURL.setParameter("chartId", "1y"); %><%= portletURL.toString() %>">1<bean:message key="year-abbreviation" /></a>, <a href="<% portletURL.setParameter("chartId", "2y"); %><%= portletURL.toString() %>">2<bean:message key="year-abbreviation" /></a>
 				</c:if>
 
 				<c:if test='<%= chartId.equals("1y") %>'>
-					<a href="<% portletURL.setParameter("chartId", "3m"); %><%= portletURL.toString() %>">3<%= LanguageUtil.get(pageContext, "month-abbreviation") %></a>, 1<%= LanguageUtil.get(pageContext, "year-abbreviation") %>, <a href="<% portletURL.setParameter("chartId", "2y"); %><%= portletURL.toString() %>">2<%= LanguageUtil.get(pageContext, "year-abbreviation") %></a>
+					<a href="<% portletURL.setParameter("chartId", "3m"); %><%= portletURL.toString() %>">3<bean:message key="month-abbreviation" /></a>, 1<bean:message key="year-abbreviation" />, <a href="<% portletURL.setParameter("chartId", "2y"); %><%= portletURL.toString() %>">2<bean:message key="year-abbreviation" /></a>
 				</c:if>
 
 				<c:if test='<%= chartId.equals("2y") %>'>
-					<a href="<% portletURL.setParameter("chartId", "3m"); %><%= portletURL.toString() %>">3<%= LanguageUtil.get(pageContext, "month-abbreviation") %></a>, <a href="<% portletURL.setParameter("chartId", "1y"); %><%= portletURL.toString() %>">1<%= LanguageUtil.get(pageContext, "year-abbreviation") %></a>, 2<%= LanguageUtil.get(pageContext, "year-abbreviation") %>
+					<a href="<% portletURL.setParameter("chartId", "3m"); %><%= portletURL.toString() %>">3<bean:message key="month-abbreviation" /></a>, <a href="<% portletURL.setParameter("chartId", "1y"); %><%= portletURL.toString() %>">1<bean:message key="year-abbreviation" /></a>, 2<bean:message key="year-abbreviation" />
 				</c:if>
 			</td>
 		</tr>

@@ -38,7 +38,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "community") %>
+		<bean:message key="community" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />groupId">
@@ -60,7 +60,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "article-type") %>
+		<bean:message key="article-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -81,18 +81,18 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "display-url") %>
+		<bean:message key="display-url" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />pageURL">
-			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><%= LanguageUtil.get(pageContext, "maximized") %></option>
-			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><%= LanguageUtil.get(pageContext, "pop-up") %></option>
+			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><bean:message key="maximized" /></option>
+			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><bean:message key="pop-up" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "display-per-page") %>
+		<bean:message key="display-per-page" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />pageDelta">
@@ -114,26 +114,26 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "order-by-column") %>
+		<bean:message key="order-by-column" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />orderByCol">
-			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><%= LanguageUtil.get(pageContext, "display-date") %></option>
-			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><%= LanguageUtil.get(pageContext, "create-date") %></option>
-			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><%= LanguageUtil.get(pageContext, "modified-date") %></option>
-			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><%= LanguageUtil.get(pageContext, "article-title") %></option>
-			<option <%= orderByCol.equals("articleId") ? "selected" : "" %> value="articleId"><%= LanguageUtil.get(pageContext, "article-id") %></option>
+			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><bean:message key="display-date" /></option>
+			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><bean:message key="create-date" /></option>
+			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><bean:message key="modified-date" /></option>
+			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><bean:message key="article-title" /></option>
+			<option <%= orderByCol.equals("articleId") ? "selected" : "" %> value="articleId"><bean:message key="article-id" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "order-by-type") %>
+		<bean:message key="order-by-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />orderByType">
-			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><%= LanguageUtil.get(pageContext, "ascending") %></option>
-			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><%= LanguageUtil.get(pageContext, "descending") %></option>
+			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><bean:message key="ascending" /></option>
+			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><bean:message key="descending" /></option>
 		</select>
 	</td>
 </tr>

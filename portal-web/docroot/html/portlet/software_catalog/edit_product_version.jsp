@@ -90,7 +90,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "version-name") %>
+			<bean:message key="version-name" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="version" />
@@ -98,7 +98,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "changeLog") %>
+			<bean:message key="changeLog" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="changeLog" />
@@ -106,7 +106,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "supported-framework-versions") %>
+			<bean:message key="supported-framework-versions" />
 		</td>
 		<td>
 			<select name="<portlet:namespace/>frameworkVersions" multiple="true">
@@ -132,7 +132,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "download-page-url") %>
+			<bean:message key="download-page-url" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="downloadPageURL" />
@@ -140,7 +140,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "direct-download-url") %> (<%= LanguageUtil.get(pageContext, "recommended") %>)
+				<bean:message key="direct-download-url" /> (<bean:message key="recommended" />)
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="directDownloadURL" />
@@ -148,19 +148,19 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "include-artifact-in-repository") %>
+			<bean:message key="include-artifact-in-repository" />
 		</td>
 
 		<% if (Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId())) { %>
 			<td>
 				<select name="<portlet:namespace/>repoStoreArtifact" size="1">
-					<option <%= ((productVersion != null) && (!productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="false"><%= LanguageUtil.get(pageContext, "no") %></option>
-					<option <%= ((productVersion != null) && (productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="true"><%= LanguageUtil.get(pageContext, "yes") %></option>
+					<option <%= ((productVersion != null) && (!productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="false"><bean:message key="no" /></option>
+					<option <%= ((productVersion != null) && (productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="true"><bean:message key="yes" /></option>
 				</select>
 			</td>
 		<% } else { %>
 			<td>
-				<a href="<%=editProductEntryURL%>"><%= LanguageUtil.get(pageContext, "please-specify-the-group-id-and-artifact-id-to-be-able-to-add-versions-to-our-repository") %></a>
+				<a href="<%=editProductEntryURL%>"><bean:message key="please-specify-the-group-id-and-artifact-id-to-be-able-to-add-versions-to-our-repository" /></a>
 			</td>
 		<% } %>
 	</tr>
@@ -169,8 +169,8 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </fieldset>
 
 <div class="form-buttons">
-	<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+	<input type="submit" value="<bean:message key="save" />">
+	<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 </div>
 
 </form>

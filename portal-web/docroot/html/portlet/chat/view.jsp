@@ -32,7 +32,7 @@
 		<img style="cursor: pointer" align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/chat/add_user.png" onclick="MessagingRoster.toggleEmail()" />
 
 		<div id="portlet-chat-roster-email-div" class="font-small" style="display: none; margin-top: 3px">
-			<%= LanguageUtil.get(pageContext, "email") %> <input id="portlet-chat-roster-email" name="email" onkeypress="MessagingRoster.onEmailKeypress(this, event)" />
+			<bean:message key="email" /> <input id="portlet-chat-roster-email" name="email" onkeypress="MessagingRoster.onEmailKeypress(this, event)" />
 		</div>
 
 		<script type="text/javascript">

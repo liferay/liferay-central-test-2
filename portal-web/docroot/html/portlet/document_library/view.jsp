@@ -147,7 +147,7 @@ portletURL.setParameter("folderId", folderId);
 				<tr>
 					<c:if test="<%= showAddFolderButton %>">
 						<td>
-							<input type="button" value='<%= LanguageUtil.get(pageContext, "add-folder") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';">
+							<input type="button" value="<bean:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';">
 						</td>
 						<td style="padding-left: 30px;"></td>
 					</c:if>
@@ -156,7 +156,7 @@ portletURL.setParameter("folderId", folderId);
 						<td>
 							<input name="<portlet:namespace />keywords" size="30" type="text">
 
-							<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-folders") %>">
+							<input type="submit" value="<bean:message key="search-folders" />">
 						</td>
 					</c:if>
 				</tr>
@@ -268,11 +268,11 @@ portletURL.setParameter("folderId", folderId);
 					<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton %>">
 						<td>
 							<c:if test="<%= showAddFileEntryButton %>">
-								<input type="button" value='<%= LanguageUtil.get(pageContext, "add-document") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
+								<input type="button" value="<bean:message key="add-document" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
 							</c:if>
 
 							<c:if test="<%= showAddFileShortcutButton %>">
-								<input type="button" value='<%= LanguageUtil.get(pageContext, "add-shortcut") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
+								<input type="button" value="<bean:message key="add-shortcut" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
 							</c:if>
 						</td>
 						<td style="padding-left: 30px;"></td>
@@ -282,7 +282,7 @@ portletURL.setParameter("folderId", folderId);
 						<td>
 							<input name="<portlet:namespace />keywords" size="30" type="text">
 
-							<input type="submit" value="<%= LanguageUtil.get(pageContext, "search-folder") %>">
+							<input type="submit" value="<bean:message key="search-folder" />">
 						</td>
 					</c:if>
 				</tr>

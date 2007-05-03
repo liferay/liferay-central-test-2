@@ -47,7 +47,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 &raquo;
 
 <a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /><portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>">
-<%= LanguageUtil.get(pageContext, "search") %>
+<bean:message key="search" />
 </a>
 
 <br /><br />
@@ -122,7 +122,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	<td>
 		<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 	<td align="right">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

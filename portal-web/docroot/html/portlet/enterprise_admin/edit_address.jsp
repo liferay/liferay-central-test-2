@@ -68,7 +68,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street1") %>
+				<bean:message key="street1" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street1" />
@@ -76,7 +76,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street2") %>
+				<bean:message key="street2" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street2" />
@@ -84,7 +84,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street3") %>
+				<bean:message key="street3" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street3" />
@@ -92,7 +92,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="city" />
@@ -100,7 +100,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>
+				<bean:message key="zip" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="zip" />
@@ -112,7 +112,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>
+				<bean:message key="country" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
@@ -120,7 +120,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "region") %>
+				<bean:message key="region" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
@@ -128,7 +128,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "type") %>
+				<bean:message key="type" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />typeId">
@@ -152,7 +152,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "mailing") %>
+				<bean:message key="mailing" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="mailing" />
@@ -160,7 +160,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "primary") %>
+				<bean:message key="primary" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="primary" />
@@ -173,9 +173,9 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

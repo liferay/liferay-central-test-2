@@ -85,12 +85,12 @@ boolean useEditorApplet = editorType.equals("applet");
 <table class="liferay-table">
 <tr>
 	<td>
-		<b><%= LanguageUtil.get(pageContext, "editor-type") %></b>
+		<b><bean:message key="editor-type" /></b>
 	</td>
 	<td>
 		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
-			<option value="1"><%= LanguageUtil.get(pageContext, "html") %></option>
-			<option <%= useEditorApplet ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "applet") %></option>
+			<option value="1"><bean:message key="html" /></option>
+			<option <%= useEditorApplet ? "selected" : "" %> value="0"><bean:message key="applet" /></option>
 		</select>
 	</td>
 </tr>
@@ -110,13 +110,13 @@ boolean useEditorApplet = editorType.equals("applet");
 
 <br /><br />
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateStructureXsd();">
+<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();">
 
 <c:if test="<%= !useEditorApplet %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "select-and-copy") %>' onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);">
+	<input type="button" value="<bean:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);">
 </c:if>
 
-<input type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.close();">
 
 </form>
 

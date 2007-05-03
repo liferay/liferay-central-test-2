@@ -105,7 +105,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.POLLS, ActionKeys.ADD_QUESTION) %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, "add-question") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';"><br />
+	<input type="button" value="<bean:message key="add-question" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';"><br />
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />

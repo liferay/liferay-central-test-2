@@ -37,7 +37,7 @@ catch (Exception e) {
 %>
 
 	<span class="portlet-msg-error">
-	<%= LanguageUtil.get(pageContext, "an-error-occurred-while-processing-your-xml-and-xsl") %>
+	<bean:message key="an-error-occurred-while-processing-your-xml-and-xsl" />
 	</span>
 
 <%

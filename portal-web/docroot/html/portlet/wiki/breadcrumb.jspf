@@ -24,7 +24,7 @@
 
 <c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
 	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view" /></portlet:renderURL>">
-	<%= LanguageUtil.get(pageContext, "nodes") %>
+	<bean:message key="nodes" />
 	</a>
 </c:if>
 

@@ -28,10 +28,10 @@
 
 <span class="portlet-msg-error" style="font-size: xx-small;">
 
-<%= LanguageUtil.get(pageContext, "an-unexpected-error-occurred-while-connecting-to-google") %>
+<bean:message key="an-unexpected-error-occurred-while-connecting-to-google" />
 
 <br /><br />
 
-<%= LanguageUtil.get(pageContext, "please-ensure-the-administrator-has-configured-a-proper-google-license") %>
+<bean:message key="please-ensure-the-administrator-has-configured-a-proper-google-license" />
 
 </span>

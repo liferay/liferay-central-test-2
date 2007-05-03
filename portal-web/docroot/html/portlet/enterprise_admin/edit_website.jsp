@@ -59,13 +59,13 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "url") %>
+		<bean:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<bean:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />typeId">
@@ -87,7 +87,7 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 		</select>
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "primary") %>
+		<bean:message key="primary" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="primary" />
@@ -97,9 +97,9 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

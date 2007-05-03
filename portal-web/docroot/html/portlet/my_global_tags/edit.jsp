@@ -27,7 +27,7 @@
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/my_global_tags/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<%= LanguageUtil.get(pageContext, "set-your-global-tags") %>
+<bean:message key="set-your-global-tags" />
 
 <br /><br />
 

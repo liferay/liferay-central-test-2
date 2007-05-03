@@ -27,7 +27,7 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<%= LanguageUtil.get(pageContext, "displayed-content-must-contain-the-following-tags") %>
+<bean:message key="displayed-content-must-contain-the-following-tags" />
 
 <br /><br />
 
@@ -39,7 +39,7 @@
 
 <br />
 
-<%= LanguageUtil.get(pageContext, "displayed-content-must-not-contain-the-following-tags") %>
+<bean:message key="displayed-content-must-not-contain-the-following-tags" />
 
 <br /><br />
 
@@ -54,12 +54,12 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "search-operator") %>
+		<bean:message key="search-operator" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />andOperator">
-			<option <%= andOperator ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
-			<option <%= !andOperator ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+			<option <%= andOperator ? "selected" : "" %> value="1"><bean:message key="and" /></option>
+			<option <%= !andOperator ? "selected" : "" %> value="0"><bean:message key="or" /></option>
 		</select>
 	</td>
 </tr>

@@ -81,14 +81,14 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 <table class="liferay-table">
 <tr>
 	<td>
-		<b><%= LanguageUtil.get(pageContext, "billing-address") %></b>
+		<b><bean:message key="billing-address" /></b>
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>:
+				<bean:message key="first-name" />:
 			</td>
 			<td>
 				<%= order.getBillingFirstName() %>
@@ -96,7 +96,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>:
+				<bean:message key="last-name" />:
 			</td>
 			<td>
 				<%= order.getBillingLastName() %>
@@ -104,7 +104,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>:
+				<bean:message key="email-address" />:
 			</td>
 			<td>
 				<%= order.getBillingEmailAddress() %>
@@ -112,7 +112,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "company") %>:
+				<bean:message key="company" />:
 			</td>
 			<td>
 				<%= order.getBillingCompany() %>
@@ -120,7 +120,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street") %>:
+				<bean:message key="street" />:
 			</td>
 			<td>
 				<%= order.getBillingStreet() %>
@@ -128,7 +128,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<%= order.getBillingCity() %>:
@@ -136,7 +136,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "state") %>:
+				<bean:message key="state" />:
 			</td>
 			<td>
 				<%= order.getBillingState() %>
@@ -144,7 +144,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>:
+				<bean:message key="zip" />:
 			</td>
 			<td>
 				<%= order.getBillingZip() %>
@@ -152,7 +152,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>:
+				<bean:message key="country" />:
 			</td>
 			<td>
 				<%= order.getBillingCountry() %>
@@ -160,7 +160,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "phone") %>:
+				<bean:message key="phone" />:
 			</td>
 			<td>
 				<%= order.getBillingPhone() %>
@@ -169,14 +169,14 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</table>
 	</td>
 	<td valign="top">
-		<b><%= LanguageUtil.get(pageContext, "shipping-address") %></b>
+		<b><bean:message key="shipping-address" /></b>
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "first-name") %>:
+				<bean:message key="first-name" />:
 			</td>
 			<td>
 				<%= order.getShippingFirstName() %>
@@ -184,7 +184,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "last-name") %>:
+				<bean:message key="last-name" />:
 			</td>
 			<td>
 				<%= order.getShippingLastName() %>
@@ -192,7 +192,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>:
+				<bean:message key="email-address" />:
 			</td>
 			<td>
 				<%= order.getShippingEmailAddress() %>
@@ -200,7 +200,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "company") %>:
+				<bean:message key="company" />:
 			</td>
 			<td>
 				<%= order.getShippingCompany() %>
@@ -208,7 +208,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "street") %>:
+				<bean:message key="street" />:
 			</td>
 			<td>
 				<%= order.getShippingStreet() %>
@@ -216,7 +216,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "city") %>
+				<bean:message key="city" />
 			</td>
 			<td>
 				<%= order.getShippingCity() %>:
@@ -224,7 +224,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "state") %>:
+				<bean:message key="state" />:
 			</td>
 			<td>
 				<%= order.getShippingState() %>
@@ -232,7 +232,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "zip") %>:
+				<bean:message key="zip" />:
 			</td>
 			<td>
 				<%= order.getShippingZip() %>
@@ -240,7 +240,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "country") %>:
+				<bean:message key="country" />:
 			</td>
 			<td>
 				<%= order.getShippingCountry() %>
@@ -248,7 +248,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "phone") %>:
+				<bean:message key="phone" />:
 			</td>
 			<td>
 				<%= order.getShippingPhone() %>
@@ -262,14 +262,14 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 <c:if test="<%= !shoppingPrefs.usePayPal() %>">
 	<br />
 
-	<b><%= LanguageUtil.get(pageContext, "credit-card") %></b>
+	<b><bean:message key="credit-card" /></b>
 
 	<br /><br />
 
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "full-name") %>:
+			<bean:message key="full-name" />:
 		</td>
 		<td>
 			<%= order.getCcName() %>
@@ -277,7 +277,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "type") %>:
+			<bean:message key="type" />:
 		</td>
 		<td>
 			<%= LanguageUtil.get(pageContext, "cc_" + order.getCcType()) %>
@@ -285,7 +285,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "number") %>:
+			<bean:message key="number" />:
 		</td>
 		<td>
 			<%= CreditCard.hide(order.getCcNumber()) %>
@@ -293,7 +293,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "expiration-date") %>:
+			<bean:message key="expiration-date" />:
 		</td>
 		<td>
 			<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= order.getCcExpYear() %>
@@ -303,7 +303,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 	<c:if test="<%= Validator.isNotNull(order.getCcVerNumber()) %>">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "verification-number") %>:
+				<bean:message key="verification-number" />:
 			</td>
 			<td>
 				<%= order.getCcVerNumber() %>
@@ -317,7 +317,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 <br />
 
 <c:if test="<%= Validator.isNotNull(order.getComments()) %>">
-	<b><%= LanguageUtil.get(pageContext, "comments") %></b>
+	<b><bean:message key="comments" /></b>
 
 	<br /><br />
 
@@ -446,7 +446,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subtotal") %>:
+		<bean:message key="subtotal" />:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualSubtotal(items)) %>
@@ -454,7 +454,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tax") %>:
+		<bean:message key="tax" />:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTax(items, order.getBillingState())) %>
@@ -462,7 +462,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "shipping") %> <%= Validator.isNotNull(altShippingName) ? "(" + altShippingName + ")" : StringPool.BLANK %>:
+		<bean:message key="shipping" /> <%= Validator.isNotNull(altShippingName) ? "(" + altShippingName + ")" : StringPool.BLANK %>:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateAlternativeShipping(items, altShipping)) %>
@@ -476,7 +476,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <c:if test="<%= cart.isInsure() && (insurance > 0) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "insurance") %>:
+			<bean:message key="insurance" />:
 		</td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(insurance) %>
@@ -487,7 +487,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <c:if test="<%= coupon != null %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "coupon-discount") %>:
+			<bean:message key="coupon-discount" />:
 		</td>
 		<td>
 			<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateCouponDiscount(items, order.getBillingState(), coupon)) %>
@@ -501,7 +501,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "total") %>:
+		<bean:message key="total" />:
 	</td>
 	<td>
 		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTotal(items, order.getBillingState(), coupon, altShipping, cart.isInsure())) %>

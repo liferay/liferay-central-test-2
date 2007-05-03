@@ -212,10 +212,10 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "edit-permissions-for") %> <%= selResourceName %>: <a href="<%= redirect %>"><%= selResourceDescription %></a>
+				<bean:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= redirect %>"><%= selResourceDescription %></a>
 			</td>
 			<td align="right">
-				&laquo; <a href="<%= redirect %>"><%= LanguageUtil.get(pageContext, "back") %></a>
+				&laquo; <a href="<%= redirect %>"><bean:message key="back" /></a>
 			</td>
 		</tr>
 		</table>
@@ -315,7 +315,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<div class="separator"></div>
 
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();">
 
 				<br /><br />
 
@@ -416,12 +416,12 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td>
-						<input <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 
-						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');">
 					</td>
 				</tr>
 				</table>
@@ -490,7 +490,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<div class="separator"></div>
 
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateOrganizationPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();">
 
 				<br /><br />
 
@@ -637,12 +637,12 @@ else if (modelResource.equals(Layout.class.getName())) {
 						<table class="liferay-table">
 						<tr>
 							<td>
-								<%= LanguageUtil.get(pageContext, "permission-exclusive-to-members-of-current-location-and-community") %>
+								<bean:message key="permission-exclusive-to-members-of-current-location-and-community" />
 							</td>
 							<td>
 								<select name="<portlet:namespace />organizationIntersection">
-									<option <%= organizationIntersection ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-									<option <%= !organizationIntersection ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+									<option <%= organizationIntersection ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
+									<option <%= !organizationIntersection ? "selected" : "" %> value="0"><bean:message key="no" /></option>
 								</select>
 							</td>
 						</tr>
@@ -655,12 +655,12 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td>
-						<input <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+						<input <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
 
-						<input <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+						<input <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');">
 					</td>
 				</tr>
 				</table>
@@ -719,7 +719,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<div class="separator"></div>
 
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "update-permissions") %>' onClick="<portlet:namespace />updateUserGroupPermissions();">
+				<input type="button" value="<bean:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();">
 
 				<br /><br />
 
@@ -817,12 +817,12 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td>
-						<input <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "previous") %>' onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+						<input <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 
-						<input <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+						<input <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 					</td>
 					<td align="right">
-						<input type="button" value='<%= LanguageUtil.get(pageContext, "finished") %>' onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+						<input type="button" value="<bean:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 					</td>
 				</tr>
 				</table>
@@ -899,7 +899,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td align="right">
-				<input type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveGroupPermissions();">
+				<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();">
 			</td>
 		</tr>
 		</table>
@@ -913,7 +913,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "list-users-with-the-permission-to-perform-the-action") %>:
+				<bean:message key="list-users-with-the-permission-to-perform-the-action" />:
 			</td>
 			<td>
 				<select name="<portlet:namespace />selectedActionId">

@@ -61,10 +61,10 @@ portletURL.setParameter("tabs1", tabs1);
 				<table class="liferay-table">
 				<tr>
 					<td align="right">
-						<b><%= LanguageUtil.get(pageContext, "available-categories") %></b>
+						<b><bean:message key="available-categories" /></b>
 					</td>
 					<td>
-						<b><%= LanguageUtil.get(pageContext, "your-selections") %></b>
+						<b><bean:message key="your-selections" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -160,7 +160,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<input name="<portlet:namespace />feeds" type="hidden" value="">
 
-		<%= LanguageUtil.get(pageContext, "set-the-display-order-of-news-feeds") %>
+		<bean:message key="set-the-display-order-of-news-feeds" />
 
 		<br /><br />
 
@@ -200,7 +200,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "num-of-articles-per-selection") %>
+				<bean:message key="num-of-articles-per-selection" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />apn">

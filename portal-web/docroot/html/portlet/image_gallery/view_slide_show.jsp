@@ -88,7 +88,7 @@
 		<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />showPrevious();"> <input type="button" value="<bean:message key="play" />" onClick="<portlet:namespace />play();"> <input type="button" value="<bean:message key="pause" />" onClick="<portlet:namespace />pause();"> <input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />showNext();">
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "speed") %>
+		<bean:message key="speed" />
 	</td>
 	<td>
 		<select onChange="<portlet:namespace />pause(); <portlet:namespace />speed = this[this.selectedIndex].value * 1000; <portlet:namespace />play();">

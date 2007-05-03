@@ -53,7 +53,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "loan-amount") %>
+		<bean:message key="loan-amount" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>">
@@ -61,7 +61,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "interest-rate") %>
+		<bean:message key="interest-rate" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>">
@@ -69,7 +69,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "years") %>
+		<bean:message key="years" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />years" size="5" type="text" value="<%= years %>">
@@ -77,7 +77,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "monthly-payment") %>
+		<bean:message key="monthly-payment" />
 	</td>
 	<td>
 		<b><%= integerFormat.format(amountPerPayment) %></b>
@@ -85,7 +85,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "interest-paid") %>
+		<bean:message key="interest-paid" />
 	</td>
 	<td>
 		<b><%= integerFormat.format(interestPaid) %></b>
@@ -93,7 +93,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "total-paid") %>
+		<bean:message key="total-paid" />
 	</td>
 	<td>
 		<b><%= integerFormat.format(totalPaid) %></b>
@@ -103,7 +103,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <br />
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "calculate") %>">
+<input type="submit" value="<bean:message key="calculate" />">
 
 </form>
 

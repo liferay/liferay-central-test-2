@@ -39,11 +39,11 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 <input name="<portlet:namespace />word" type="text" value="<%= word %>">
 
 <select name="<portlet:namespace />scramble">
-	<option <%= scramble ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "scramble") %></option>
-	<option <%= !scramble ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "unscramble") %></option>
+	<option <%= scramble ? "selected" : "" %> value="1"><bean:message key="scramble" /></option>
+	<option <%= !scramble ? "selected" : "" %> value="0"><bean:message key="unscramble" /></option>
 </select>
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+<input type="submit" value="<bean:message key="search" />">
 
 <c:if test="<%= (words != null) && (words.length > 0) %>">
 	<br /><br />

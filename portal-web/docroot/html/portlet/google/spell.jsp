@@ -44,11 +44,11 @@ String suggestion = (String)request.getAttribute(WebKeys.GOOGLE_SPELLING_SUGGEST
 <input name="<portlet:namespace />args" size="30" type="text" value="<%= args %>">
 
 <select name="<portlet:namespace />directive">
-	<option value="search"><%= LanguageUtil.get(pageContext, "search") %></option>
-	<option selected value="spell"><%= LanguageUtil.get(pageContext, "spell") %></option>
+	<option value="search"><bean:message key="search" /></option>
+	<option selected value="spell"><bean:message key="spell" /></option>
 </select>
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image">
 
 </form>
 

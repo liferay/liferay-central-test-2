@@ -78,7 +78,7 @@ else {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="name" />
@@ -86,24 +86,24 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<bean:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace/>type">
-			<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
-			<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
-			<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
-			<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
+			<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><bean:message key="portlet" /></option>
+			<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><bean:message key="theme" /></option>
+			<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><bean:message key="layout" /></option>
+			<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><bean:message key="extension" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "licenses") %>
+		<bean:message key="licenses" />
 	</td>
 	<td>
 		<select name="<portlet:namespace/>licenses" multiple="true">
-			<optgroup label="<%= LanguageUtil.get(pageContext, "recommended-licenses") %>">
+			<optgroup label="<bean:message key="recommended-licenses" />">
 
 				<%
 				Iterator itr = SCLicenseLocalServiceUtil.getLicenses(true, true).iterator();
@@ -120,7 +120,7 @@ else {
 
 			</optgroup>
 
-			<optgroup label="<%= LanguageUtil.get(pageContext, "other-licenses") %>">
+			<optgroup label="<bean:message key="other-licenses" />">
 
 				<%
 				itr = SCLicenseLocalServiceUtil.getLicenses(true, false).iterator();
@@ -141,7 +141,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "page-url") %>
+		<bean:message key="page-url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="pageURL" />
@@ -149,7 +149,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "short-description") %>
+		<bean:message key="short-description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="shortDescription" />
@@ -157,7 +157,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "long-description") %>
+		<bean:message key="long-description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="longDescription" />
@@ -165,7 +165,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "main-screenshot") %>
+		<bean:message key="main-screenshot" />
 	</td>
 	<td>
 		<%
@@ -189,7 +189,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "secondary-screenshots") %>
+		<bean:message key="secondary-screenshots" />
 	</td>
 	<td>
 		<%
@@ -223,7 +223,7 @@ else {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -242,7 +242,7 @@ else {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "group-id") %>
+		<bean:message key="group-id" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoGroupId" />
@@ -250,7 +250,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "artifact-id") %>
+		<bean:message key="artifact-id" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoArtifactId" />
@@ -260,9 +260,9 @@ else {
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

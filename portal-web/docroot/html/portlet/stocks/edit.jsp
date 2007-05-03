@@ -41,7 +41,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 	ValidatorException ve = (ValidatorException)errorException;
 	%>
 
-	<%= LanguageUtil.get(pageContext, "the-following-are-invalid-symbols") %>
+	<bean:message key="the-following-are-invalid-symbols" />
 
 	<%
 	Enumeration enu = ve.getFailedKeys();
@@ -58,7 +58,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 </liferay-ui:error>
 
-<%= LanguageUtil.get(pageContext, "add-all-ticker-symbols-separated-by-spaces") %>
+<bean:message key="add-all-ticker-symbols-separated-by-spaces" />
 
 <br /><br />
 

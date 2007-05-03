@@ -62,7 +62,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	<liferay-util:param name="tabs1" value="user-groups" />
 </liferay-util:include>
 
-<%= LanguageUtil.get(pageContext, "edit-assignments-for-user-group") %>: <%= userGroup.getName() %>
+<bean:message key="edit-assignments-for-user-group" />: <%= userGroup.getName() %>
 
 <br /><br />
 
@@ -113,7 +113,7 @@ searchContainer.setResults(results);
 
 <div class="separator"></div>
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 <br /><br />
 

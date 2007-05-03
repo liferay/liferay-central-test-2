@@ -31,7 +31,7 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-<%= LanguageUtil.get(pageContext, "add-hangman-words-separated-by-commas") %>
+<bean:message key="add-hangman-words-separated-by-commas" />
 
 <br /><br />
 

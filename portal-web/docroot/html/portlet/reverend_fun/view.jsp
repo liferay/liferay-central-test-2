@@ -65,7 +65,7 @@
 			</td>
 			<td align="right">
 				<c:if test="<%= previousDate != null %>">
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="date" value="<%= previousDate %>" /></portlet:renderURL>"><%= LanguageUtil.get(pageContext, "previous") %></a>
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="date" value="<%= previousDate %>" /></portlet:renderURL>"><bean:message key="previous" /></a>
 				</c:if>
 
 				<c:if test="<%= previousDate != null && nextDate != null %>">
@@ -73,7 +73,7 @@
 				</c:if>
 
 				<c:if test="<%= nextDate != null %>">
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="date" value="<%= nextDate %>" /></portlet:renderURL>"><%= LanguageUtil.get(pageContext, "next") %></a>
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="date" value="<%= nextDate %>" /></portlet:renderURL>"><bean:message key="next" /></a>
 				</c:if>
 			</td>
 		</tr>

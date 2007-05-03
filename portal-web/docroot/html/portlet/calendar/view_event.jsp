@@ -181,7 +181,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "date-and-time") %>:
+			<bean:message key="date-and-time" />:
 		</td>
 		<td>
 			<c:choose>
@@ -196,7 +196,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "duration") %>:
+			<bean:message key="duration" />:
 		</td>
 		<td>
 
@@ -207,7 +207,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<c:choose>
 				<c:when test="<%= allDay %>">
 					<abbr class="duration" title="P1D">
-						<%= LanguageUtil.get(pageContext, "all-day") %>:
+						<bean:message key="all-day" />:
 					</abbr>
 				</c:when>
 				<c:otherwise>
@@ -238,11 +238,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			</c:choose>
 
 			<c:if test="<%= allDay %>">
-				<%= LanguageUtil.get(pageContext, "all-day") %>
+				<bean:message key="all-day" />
 			</c:if>
 
 			<c:if test="<%= event.isTimeZoneSensitive() %>">
-				(<%= LanguageUtil.get(pageContext, "time-zone-sensitive") %>)
+				(<bean:message key="time-zone-sensitive" />)
 			</c:if>
 		</td>
 	</tr>
@@ -253,7 +253,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "title") %>:
+			<bean:message key="title" />:
 		</td>
 		<td>
 			<span class="summary"><%= event.getTitle() %></span>
@@ -261,7 +261,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "description") %>:
+			<bean:message key="description" />:
 		</td>
 		<td>
 			<%= event.getDescription() %>
@@ -269,7 +269,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "type") %>:
+			<bean:message key="type" />:
 		</td>
 		<td>
 			<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
@@ -284,15 +284,15 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "repeat-daily") %>:
+				<bean:message key="repeat-daily" />:
 			</td>
 			<td>
 				<c:if test="<%= (dailyType == 0) %>">
-					<%= dailyInterval %> <%= LanguageUtil.get(pageContext, "day-s") %>
+					<%= dailyInterval %> <bean:message key="day-s" />
 				</c:if>
 
 				<c:if test="<%= (dailyType == 1) %>">
-					<%= LanguageUtil.get(pageContext, "every-weekday") %>
+					<bean:message key="every-weekday" />
 				</c:if>
 			</td>
 		</tr>
@@ -301,11 +301,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "repeat-weekly") %>:
+				<bean:message key="repeat-weekly" />:
 			</td>
 			<td>
 				<abbr class="rrule" title="FREQ=WEEKLY">
-					<%= LanguageUtil.get(pageContext, "recur-every") %> <%= dailyInterval %> <%= LanguageUtil.get(pageContext, "weeks-on") %>
+					<bean:message key="recur-every" /> <%= dailyInterval %> <bean:message key="weeks-on" />
 
 					<%= weeklyPosSu ? (days[0] + ",") : "" %>
 					<%= weeklyPosMo ? (days[1] + ",") : "" %>
@@ -322,15 +322,15 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.MONTHLY) %>">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "repeat-monthly") %>:
+				<bean:message key="repeat-monthly" />:
 			</td>
 			<td>
 				<c:if test="<%= (monthlyType == 0) %>">
-					<%= LanguageUtil.get(pageContext, "day") %> <%= monthlyDay0 %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= monthlyInterval0 %> <%= LanguageUtil.get(pageContext, "month-s") %>
+					<bean:message key="day" /> <%= monthlyDay0 %> <bean:message key="of-every" /> <%= monthlyInterval0 %> <bean:message key="month-s" />
 				</c:if>
 
 				<c:if test="<%= (monthlyType == 1) %>">
-					<%= LanguageUtil.get(pageContext, "the") %>
+					<bean:message key="the" />
 
 					<%= (monthlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
 					<%= (monthlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
@@ -348,7 +348,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 					<%= (monthlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
 					<%= (monthlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
 
-					<%= LanguageUtil.get(pageContext, "of-every") %> <%= monthlyInterval1 %> <%= LanguageUtil.get(pageContext, "month-s") %>
+					<bean:message key="of-every" /> <%= monthlyInterval1 %> <bean:message key="month-s" />
 				</c:if>
 			</td>
 		</tr>
@@ -357,16 +357,16 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.YEARLY) %>">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "repeat-yearly") %>:
+				<bean:message key="repeat-yearly" />:
 			</td>
 			<td>
 				<abbr class="rrule" title="FREQ=YEARLY">
 					<c:if test="<%= (yearlyType == 0) %>">
-						<%= LanguageUtil.get(pageContext, "every") %> <%= months[yearlyMonth0] %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= yearlyInterval0 %> <%= LanguageUtil.get(pageContext, "year-s") %>
+						<bean:message key="every" /> <%= months[yearlyMonth0] %> <bean:message key="of-every" /> <%= yearlyInterval0 %> <bean:message key="year-s" />
 					</c:if>
 
 					<c:if test="<%= (yearlyType == 1) %>">
-						<%= LanguageUtil.get(pageContext, "the") %>
+						<bean:message key="the" />
 
 						<%= (yearlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
 						<%= (yearlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
@@ -384,7 +384,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 						<%= (yearlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
 						<%= (yearlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
 
-						<%= LanguageUtil.get(pageContext, "of") %> <%= months[yearlyMonth1] %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= yearlyInterval1 %> <%= LanguageUtil.get(pageContext, "year-s") %>
+						<bean:message key="of" /> <%= months[yearlyMonth1] %> <bean:message key="of-every" /> <%= yearlyInterval1 %> <bean:message key="year-s" />
 					</c:if>
 				</abbr>
 			</td>
@@ -393,11 +393,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "end-date") %>:
+			<bean:message key="end-date" />:
 		</td>
 		<td>
 			<c:if test="<%= (endDateType == 0) %>">
-				<%= LanguageUtil.get(pageContext, "none") %>
+				<bean:message key="none" />
 			</c:if>
 
 			<c:if test="<%= (endDateType == 2) %>">

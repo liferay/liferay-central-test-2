@@ -46,13 +46,13 @@
 			<option value="NKJV">NKJV</option>
 		</select>
 
-		<input checked name="showfn_cb" type="checkbox"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "footnotes") %></span>
+		<input checked name="showfn_cb" type="checkbox"> <span style="font-size: xx-small;"><bean:message key="footnotes" /></span>
 
-		<input checked name="showxref_cb" type="checkbox"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "cross-references") %></span>
+		<input checked name="showxref_cb" type="checkbox"> <span style="font-size: xx-small;"><bean:message key="cross-references" /></span>
 
 		<br /><br />
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "lookup") %>">
+		<input type="submit" value="<bean:message key="lookup" />">
 
 		</form>
 	</liferay-ui:section>
@@ -90,7 +90,7 @@
 
 		<br /><br />
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "compare") %>">
+		<input type="submit" value="<bean:message key="compare" />">
 
 		</form>
 	</liferay-ui:section>
@@ -111,24 +111,24 @@
 		</select>
 
 		<select name="SearchType">
-			<option value="AND"><%= LanguageUtil.get(pageContext, "all-words") %></option>
-			<option value="OR"><%= LanguageUtil.get(pageContext, "any-words") %></option>
-			<option value="EXACT"><%= LanguageUtil.get(pageContext, "exact-phrase") %></option>
-			<option value="FULL_TEXT"><%= LanguageUtil.get(pageContext, "similar-phrase") %></option>
+			<option value="AND"><bean:message key="all-words" /></option>
+			<option value="OR"><bean:message key="any-words" /></option>
+			<option value="EXACT"><bean:message key="exact-phrase" /></option>
+			<option value="FULL_TEXT"><bean:message key="similar-phrase" /></option>
 		</select>
 
 		<br />
 
-		<input name="SearchWholeWords" type="checkbox" value="yes"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "match-whole-words") %></span>
+		<input name="SearchWholeWords" type="checkbox" value="yes"> <span style="font-size: xx-small;"><bean:message key="match-whole-words" /></span>
 
-		<input name="SearchAsLink" type="checkbox" value="yes"> <span style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "references-only") %></span>
+		<input name="SearchAsLink" type="checkbox" value="yes"> <span style="font-size: xx-small;"><bean:message key="references-only" /></span>
 
 		<br /><br />
 
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "restrict-to") %>
+				<bean:message key="restrict-to" />
 			</td>
 			<td rowspan="3" style="padding-left: 10px;"></td>
 			<td>
@@ -150,7 +150,7 @@
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "start-from") %>
+				<bean:message key="start-from" />
 			</td>
 			<td>
 				<select name="StartRestrict" onChange="document.<portlet:namespace />fm3.restrict.selectedIndex = 0; text = document.<portlet:namespace />fm3.StartRestrict[document.<portlet:namespace />fm3.StartRestrict.selectedIndex].value; if (document.<portlet:namespace />fm3.StartRestrict.selectedIndex > document.<portlet:namespace />fm3.EndRestrict.selectedIndex) { for (var i = 0; i < document.<portlet:namespace />fm3.EndRestrict.length; i++) { if (document.<portlet:namespace />fm3.EndRestrict[i].value == text) { document.<portlet:namespace />fm3.EndRestrict.selectedIndex = i; } } }">
@@ -226,7 +226,7 @@
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "end-at") %>
+				<bean:message key="end-at" />
 			</td>
 			<td>
 				<select name="EndRestrict" onChange="document.<portlet:namespace />fm3.restrict.selectedIndex = 0; text = document.<portlet:namespace />fm3.StartRestrict[document.<portlet:namespace />fm3.EndRestrict.selectedIndex].value; if (document.<portlet:namespace />fm3.StartRestrict.selectedIndex == 0) { document.<portlet:namespace />fm3.StartRestrict.selectedIndex = document.<portlet:namespace />fm3.EndRestrict.selectedIndex; } else if (document.<portlet:namespace />fm3.StartRestrict.selectedIndex > document.<portlet:namespace />fm3.EndRestrict.selectedIndex) { for (var i = 0; i < document.<portlet:namespace />fm3.EndRestrict.length; i++) { if (document.<portlet:namespace />fm3.EndRestrict[i].value == text) { document.<portlet:namespace />fm3.StartRestrict.selectedIndex = i; } } }">
@@ -304,7 +304,7 @@
 
 		<br />
 
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 
 		</form>
 	</liferay-ui:section>

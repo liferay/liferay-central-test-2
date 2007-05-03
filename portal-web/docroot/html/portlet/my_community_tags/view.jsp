@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
-		<%= LanguageUtil.get(pageContext, "community-tags-are-injected-to-all-pages-of-this-community") %>
+		<bean:message key="community-tags-are-injected-to-all-pages-of-this-community" />
 
 		<br /><br />
 
@@ -35,11 +35,11 @@
 				<%= LanguageUtil.format(pageContext, "you-have-the-following-tags-configured-x", "<b>" + StringUtil.merge(entries, ", ") + "</b>") %>
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, "you-have-not-configured-any-community-tags") %>
+				<bean:message key="you-have-not-configured-any-community-tags" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<%= LanguageUtil.get(pageContext, "you-must-be-authenticated-to-use-this-portlet") %>
+		<bean:message key="you-must-be-authenticated-to-use-this-portlet" />
 	</c:otherwise>
 </c:choose>

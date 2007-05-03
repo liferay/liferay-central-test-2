@@ -59,19 +59,19 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "number") %>
+		<bean:message key="number" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="number" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "extension") %>
+		<bean:message key="extension" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="extension" />
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>
+		<bean:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />typeId">
@@ -93,7 +93,7 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 		</select>
 	</td>
 	<td>
-		<%= LanguageUtil.get(pageContext, "primary") %>
+		<bean:message key="primary" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="primary" />
@@ -103,9 +103,9 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value="<bean:message key="save" />">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';">
 
 </form>
 

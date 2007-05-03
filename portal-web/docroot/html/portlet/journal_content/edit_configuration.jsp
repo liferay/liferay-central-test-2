@@ -76,7 +76,7 @@ type = ParamUtil.getString(request, "type", type);
 		var del = document.createElement("a");
 
 		del.href = "javascript: <portlet:namespace />removeArticle('" + newRow.id + "');";
-		del.innerHTML = "[<%= LanguageUtil.get(pageContext, "remove") %>]";
+		del.innerHTML = "[<bean:message key="remove" />]";
 
 		newRow.insertCell(0).appendChild(input);
 		newRow.insertCell(1).appendChild(text);
@@ -120,16 +120,16 @@ type = ParamUtil.getString(request, "type", type);
 <table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
 <tr>
 	<td colspan="3">
-		<%= LanguageUtil.get(pageContext, "displaying-article-pages") %>:
+		<bean:message key="displaying-article-pages" />:
 	</td>
 </tr>
 </table>
 
 <br />
 
-<liferay-ui:input-checkbox param="paginate" defaultValue="<%= paginate %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "paginate-if-there-are-two-or-more-articles") %><br />
-<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "enable-ratings") %><br />
-<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "enable-comments") %>
+<liferay-ui:input-checkbox param="paginate" defaultValue="<%= paginate %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <bean:message key="paginate-if-there-are-two-or-more-articles" /><br />
+<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <bean:message key="enable-ratings" /><br />
+<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <bean:message key="enable-comments" />
 
 </form>
 

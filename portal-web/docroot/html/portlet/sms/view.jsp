@@ -40,7 +40,7 @@ String message = ParamUtil.getString(request, "message");
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "to") %>
+		<bean:message key="to" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= to %>">
@@ -48,7 +48,7 @@ String message = ParamUtil.getString(request, "message");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subject") %>
+		<bean:message key="subject" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>">
@@ -56,7 +56,7 @@ String message = ParamUtil.getString(request, "message");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "message") %>
+		<bean:message key="message" />
 	</td>
 	<td>
 		<textarea name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= message %></textarea><br />
@@ -67,14 +67,14 @@ String message = ParamUtil.getString(request, "message");
 	<td>
 		<input disabled maxlength="3" name="<portlet:namespace />length" size="3" type="text" value="<%= subject.length() + message.length() %>">
 
-		<span style="font-size: xx-small;">(500 <%= LanguageUtil.get(pageContext, "characters-maximum") %>)</span>
+		<span style="font-size: xx-small;">(500 <bean:message key="characters-maximum" />)</span>
 	</td>
 </tr>
 </table>
 
 <br />
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "send-text-message") %>">
+<input type="submit" value="<bean:message key="send-text-message" />">
 
 </form>
 

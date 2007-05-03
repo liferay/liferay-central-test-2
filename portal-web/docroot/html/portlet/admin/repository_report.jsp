@@ -43,7 +43,7 @@
 		<c:choose>
 			<c:when test="<%= status == RepositoryReport.SUCCESS %>">
 				<span class="portlet-msg-success">
-				<%= LanguageUtil.get(pageContext, "ok") %>
+				<bean:message key="ok" />
 				</span>
 			</c:when>
 			<c:otherwise>

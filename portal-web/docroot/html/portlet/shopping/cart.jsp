@@ -115,17 +115,17 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	String[] badItemIds = StringUtil.split(cmqe.getMessage());
 	%>
 
-	<%= LanguageUtil.get(pageContext, "all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item") %><br />
+	<bean:message key="all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item" /><br />
 
 	<c:if test="<%= minQuantityMultiple %>">
 		<br />
 
-		<%= LanguageUtil.get(pageContext, "all-quantities-must-be-a-multiple-of-the-minimum-quantity-of-the-item") %><br />
+		<bean:message key="all-quantities-must-be-a-multiple-of-the-minimum-quantity-of-the-item" /><br />
 	</c:if>
 
 	<br />
 
-	<%= LanguageUtil.get(pageContext, "please-reenter-your-quantity-for-the-items-with-the-following-skus") %>
+	<bean:message key="please-reenter-your-quantity-for-the-items-with-the-following-skus" />
 
 	<%
 	for (int i = 0; i < badItemIds.length; i++) {
@@ -404,7 +404,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subtotal") %>:
+		<bean:message key="subtotal" />:
 	</td>
 	<td>
 
@@ -427,7 +427,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <c:if test="<%= subtotal != actualSubtotal %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "you-save") %>:
+			<bean:message key="you-save" />:
 		</td>
 		<td>
 			<span class="portlet-msg-error">
@@ -444,7 +444,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "shipping") %>:
+		<bean:message key="shipping" />:
 	</td>
 	<td>
 		<c:choose>
@@ -489,11 +489,11 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <c:if test="<%= insurance > 0 %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "insurance") %>:
+			<bean:message key="insurance" />:
 		</td>
 		<td>
 			<select name="<portlet:namespace />insure">
-				<option <%= !cart.isInsure() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "none") %></option>
+				<option <%= !cart.isInsure() ? "selected" : "" %> value="0"><bean:message key="none" /></option>
 				<option <%= cart.isInsure() ? "selected" : "" %> value="1"><%= currency.getSymbol() %><%= doubleFormat.format(insurance) %></option>
 			</select>
 		</td>
@@ -507,13 +507,13 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "coupon-code") %>:
+		<bean:message key="coupon-code" />:
 	</td>
 	<td>
 		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>">
 
 		<c:if test="<%= coupon != null %>">
-			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<%= LanguageUtil.get(pageContext, "description") %>)</a>
+			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<bean:message key="description" />)</a>
 		</c:if>
 	</td>
 </tr>
@@ -521,7 +521,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <c:if test="<%= coupon != null %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "coupon-discount") %>:
+			<bean:message key="coupon-discount" />:
 		</td>
 		<td>
 			<span class="portlet-msg-error">
@@ -563,10 +563,10 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 }
 %>
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "update-cart") %>' onClick="<portlet:namespace />updateCart();">
+<input type="button" value="<bean:message key="update-cart" />" onClick="<portlet:namespace />updateCart();">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "empty-cart") %>' onClick="<portlet:namespace />emptyCart();">
+<input type="button" value="<bean:message key="empty-cart" />" onClick="<portlet:namespace />emptyCart();">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "checkout") %>' onClick="<portlet:namespace />checkout();">
+<input type="button" value="<bean:message key="checkout" />" onClick="<portlet:namespace />checkout();">
 
 </form>

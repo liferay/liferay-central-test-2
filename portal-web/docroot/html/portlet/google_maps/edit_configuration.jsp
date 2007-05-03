@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "map-address") %>
+		<bean:message key="map-address" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>">
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "map-input-enabled") %>
+		<bean:message key="map-input-enabled" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="mapInputEnabled" defaultValue="<%= mapInputEnabled %>" />
@@ -51,7 +51,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "directions-address") %>
+		<bean:message key="directions-address" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>">
@@ -59,7 +59,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "directions-input-enabled") %>
+		<bean:message key="directions-input-enabled" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="directionsInputEnabled" defaultValue="<%= directionsInputEnabled %>" />
@@ -72,7 +72,7 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "height") %>
+		<bean:message key="height" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px

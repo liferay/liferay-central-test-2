@@ -63,7 +63,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "movie") %>
+		<bean:message key="movie" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />movie" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= movie %>">
@@ -71,7 +71,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "flash-attributes") %>
+		<bean:message key="flash-attributes" />
 	</td>
 	<td>
 		<textarea name="<portlet:namespace />flashAttributes" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
@@ -79,7 +79,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "flash-variables") %>
+		<bean:message key="flash-variables" />
 	</td>
 	<td>
 		<textarea name="<portlet:namespace />flashVariables" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= flashVariables %></textarea>

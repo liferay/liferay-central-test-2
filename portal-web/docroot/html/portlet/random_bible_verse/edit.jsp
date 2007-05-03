@@ -34,11 +34,11 @@ Map bibles = RBVUtil.getBibles();
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "language") %>
+		<bean:message key="language" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />language">
-			<option <%= language.equals("") ? "selected" : "" %> value=""><%= LanguageUtil.get(pageContext, "default-language") %></option>
+			<option <%= language.equals("") ? "selected" : "" %> value=""><bean:message key="default-language" /></option>
 
 			<%
 			Iterator itr = bibles.entrySet().iterator();

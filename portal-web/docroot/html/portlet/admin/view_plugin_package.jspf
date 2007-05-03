@@ -44,15 +44,15 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <table class="liferay-table">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 	<td>
-		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<%= LanguageUtil.get(pageContext, "download") %>]</a>
+		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<bean:message key="download" />]</a>
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "author") %>
+		<bean:message key="author" />
 	</td>
 	<td>
 		<%= LanguageUtil.get(pageContext, pluginPackage.getAuthor()) %>
@@ -60,7 +60,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "types") %>
+		<bean:message key="types" />
 	</td>
 	<td>
 		<%
@@ -79,7 +79,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tags") %>
+		<bean:message key="tags" />
 	</td>
 	<td>
 
@@ -100,7 +100,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "licenses") %>
+		<bean:message key="licenses" />
 	</td>
 	<td>
 
@@ -135,7 +135,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "liferay-versions") %>
+		<bean:message key="liferay-versions" />
 	</td>
 	<td>
 
@@ -156,7 +156,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "repository") %>
+		<bean:message key="repository" />
 	</td>
 	<td>
 		<a href="<%= pluginPackage.getRepositoryURL() %>"><%= pluginPackage.getRepositoryURL() %></a>
@@ -169,7 +169,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "short-description") %>
+		<bean:message key="short-description" />
 	</td>
 	<td>
 		<%= pluginPackage.getShortDescription() %>
@@ -179,7 +179,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <c:if test="<%= Validator.isNotNull(pluginPackage.getLongDescription()) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "long-description") %>
+			<bean:message key="long-description" />
 		</td>
 		<td>
 			<%= pluginPackage.getLongDescription() %>
@@ -190,7 +190,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <c:if test="<%= Validator.isNotNull(pluginPackage.getChangeLog()) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "change-log") %>
+			<bean:message key="change-log" />
 		</td>
 		<td>
 			<%= pluginPackage.getChangeLog() %>
@@ -210,7 +210,7 @@ List screenshots = pluginPackage.getScreenshots();
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "screenshots") %>
+			<bean:message key="screenshots" />
 		</td>
 		<td>
 

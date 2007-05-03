@@ -44,7 +44,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "thumbnail") %>
+			<bean:message key="thumbnail" />
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" target="_blank">
@@ -59,7 +59,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "height") %>
+			<bean:message key="height" />
 		</td>
 		<td>
 			<%= image.getHeight() %>
@@ -67,7 +67,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "width") %>
+			<bean:message key="width" />
 		</td>
 		<td>
 			<%= image.getWidth() %>
@@ -75,7 +75,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "size") %>
+			<bean:message key="size" />
 		</td>
 		<td>
 			<%= TextFormatter.formatKB(image.getSize(), locale) %>k
@@ -88,7 +88,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "url") %>
+			<bean:message key="url" />
 		</td>
 		<td>
 			<liferay-ui:input-resource

@@ -123,7 +123,7 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 
 			<c:choose>
 				<c:when test='<%= token.getType().equals("join") %>'>
-					<%= LanguageUtil.get(pageContext, "waiting-on-sibling-tokens-to-complete") %>
+					<bean:message key="waiting-on-sibling-tokens-to-complete" />
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%= WorkflowInstancePermission.contains(permissionChecker, instance, ActionKeys.SIGNAL) %>">

@@ -36,7 +36,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 				%
 			</td>
 			<td colspan="6">
-				<%= LanguageUtil.get(pageContext, "votes") %>
+				<bean:message key="votes" />
 			</td>
 		</tr>
 
@@ -112,19 +112,19 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 <br />
 
 <div>
-	<b><%= LanguageUtil.get(pageContext, "total-votes") %>:</b> <%= numberFormat.format(totalVotes) %>
+	<b><bean:message key="total-votes" />:</b> <%= numberFormat.format(totalVotes) %>
 </div>
 
 <c:if test="<%= portletName.equals(PortletKeys.POLLS) %>">
 	<br />
 
 	<div>
-		<b><%= LanguageUtil.get(pageContext, "charts") %>:</b>
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "area") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "horizontal-bar") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "line") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "pie") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "vertical-bar") %></a>
+		<b><bean:message key="charts" />:</b>
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><bean:message key="area" /></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><bean:message key="horizontal-bar" /></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><bean:message key="line" /></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><bean:message key="pie" /></a>,
+		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><bean:message key="vertical-bar" /></a>
 	</div>
 
 	<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">

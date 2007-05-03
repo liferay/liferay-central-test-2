@@ -37,14 +37,14 @@
 <table class="liferay-table">
 <tr>
 	<td valign="top">
-		<input <%= (!customConf) ? "checked" : "" %> type="radio" name="<portlet:namespace />confType" value="recommended"> <%= LanguageUtil.get(pageContext, "choose-from-the-list-of-recommended-google-gadgets") %>
+		<input <%= (!customConf) ? "checked" : "" %> type="radio" name="<portlet:namespace />confType" value="recommended"> <bean:message key="choose-from-the-list-of-recommended-google-gadgets" />
 
 		<br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "gadget") %>
+				<bean:message key="gadget" />
 			</td>
 			<td>
 				<select id="<portlet:namespace />gadgetId" name="<portlet:namespace />gadgetId">
@@ -64,7 +64,7 @@
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "title") %>
+				<bean:message key="title" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />title" type="text" value="<%= title %>">
@@ -72,7 +72,7 @@
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "width") %>
+				<bean:message key="width" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />width" size="4" type="text" value="<%= width %>"> px
@@ -80,7 +80,7 @@
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "height") %>
+				<bean:message key="height" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
@@ -88,7 +88,7 @@
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "border") %>
+				<bean:message key="border" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />borderId">
@@ -111,7 +111,7 @@
 	<td valign="top">
 		<input <%= (customConf) ? "checked" : "" %> type="radio" name="<portlet:namespace />confType" value="custom">
 
-		<a href="http://www.google.com/ig/directory?synd=open" target="GoogleGadgets"><%= LanguageUtil.get(pageContext, "or-obtain-the-google-gadget-code-directly-and-paste-it-below") %></a>
+		<a href="http://www.google.com/ig/directory?synd=open" target="GoogleGadgets"><bean:message key="or-obtain-the-google-gadget-code-directly-and-paste-it-below" /></a>
 
 		<br />
 

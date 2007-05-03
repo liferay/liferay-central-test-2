@@ -33,7 +33,7 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>
+		<bean:message key="name" />
 	</td>
 </tr>
 <tr>
@@ -48,7 +48,7 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<input type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+		<input type="submit" value="<bean:message key="search" />">
 	</td>
 </tr>
 </table>

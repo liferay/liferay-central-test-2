@@ -29,11 +29,11 @@
 <input name="<portlet:namespace />word" size="30" type="text">
 
 <select name="<portlet:namespace />type">
-	<option value="http://dictionary.reference.com/search?q="><%= LanguageUtil.get(pageContext, "dictionary") %></option>
-	<option value="http://thesaurus.reference.com/search?q="><%= LanguageUtil.get(pageContext, "thesaurus") %></option>
+	<option value="http://dictionary.reference.com/search?q="><bean:message key="dictionary" /></option>
+	<option value="http://thesaurus.reference.com/search?q="><bean:message key="thesaurus" /></option>
 </select>
 
-<input type="submit" value="<%= LanguageUtil.get(pageContext, "find") %>">
+<input type="submit" value="<bean:message key="find" />">
 
 </form>
 

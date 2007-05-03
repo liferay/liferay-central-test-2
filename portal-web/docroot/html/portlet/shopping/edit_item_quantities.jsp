@@ -89,7 +89,7 @@ for (int i = 0; i < values.size(); i++) {
 	%>
 
 	<td>
-		<b><%= LanguageUtil.get(pageContext, "quantity") %></b>
+		<b><bean:message key="quantity" /></b>
 	</td>
 </tr>
 
@@ -144,8 +144,8 @@ for (int i = 0; i < rowsCount; i++) {
 
 <br />
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateItemQuantities();">
+<input type="button" value="<bean:message key="update" />" onClick="<portlet:namespace />updateItemQuantities();">
 
-<input type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.close();">
 
 </form>

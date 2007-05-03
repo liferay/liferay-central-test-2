@@ -73,7 +73,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	<liferay-util:param name="tabs1" value="roles" />
 </liferay-util:include>
 
-<%= LanguageUtil.get(pageContext, "edit-assignments-for-role") %>: <%= role.getName() %>
+<bean:message key="edit-assignments-for-role" />: <%= role.getName() %>
 
 <br /><br />
 
@@ -132,7 +132,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br /><br />
 
@@ -209,7 +209,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br /><br />
 
@@ -291,7 +291,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br /><br />
 
@@ -377,7 +377,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br /><br />
 
