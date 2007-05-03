@@ -23,6 +23,8 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
@@ -50,10 +52,21 @@ public class PortalCustomSQLUtil
 
 		long organizationClassNameId = PortalUtil.getClassNameId(
 			Organization.class);
+		long userClassNameId = PortalUtil.getClassNameId(User.class);
+		long userGroupClassNameId = PortalUtil.getClassNameId(UserGroup.class);
 
 		sql = StringUtil.replace(
-			sql, "[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
-			String.valueOf(organizationClassNameId));
+			sql,
+			new String[] {
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]",
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]"
+			},
+			new String[] {
+				String.valueOf(organizationClassNameId),
+				String.valueOf(userClassNameId),
+				String.valueOf(userGroupClassNameId)
+			});
 
 		return sql;
 	}

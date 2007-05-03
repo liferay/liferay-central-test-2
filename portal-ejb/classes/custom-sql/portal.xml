@@ -217,7 +217,7 @@
 				Organization_
 			LEFT JOIN
 				Address ON
-					(Address.className = 'com.liferay.portal.model.Organization') AND
+					(Address.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 					(Address.classPK = Organization_.organizationId)
 			[$JOIN$]
 			WHERE
@@ -246,7 +246,7 @@
 				Organization_
 			LEFT JOIN
 				Address ON
-					(Address.className = 'com.liferay.portal.model.Organization') AND
+					(Address.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 					(Address.classPK = Organization_.organizationId)
 			[$JOIN$]
 			WHERE
@@ -278,7 +278,7 @@
 				Permission_ ON
 					(Permission_.permissionId = Groups_Permissions.permissionId)
 			WHERE
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 				(Permission_.resourceId = ?)
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsGroups">
@@ -297,7 +297,7 @@
 					(PasswordPolicyRel.classPK = Organization_.organizationId)
 			WHERE
 				(PasswordPolicyRel.passwordPolicyId = ?) AND
-				(PasswordPolicyRel.className = 'com.liferay.portal.model.Organization')
+				(PasswordPolicyRel.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsRoles">
@@ -309,7 +309,7 @@
 				Groups_Roles ON
 					(Groups_Roles.groupId = Group_.groupId)
 			WHERE
-				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 				(Groups_Roles.roleId = ?)
 		]]>
 	</sql>
@@ -884,7 +884,7 @@
 					(PasswordPolicyRel.classPK = User_.userId)
 			WHERE
 				(PasswordPolicyRel.passwordPolicyId = ?) AND
-				(PasswordPolicyRel.className = 'com.liferay.portal.model.User')
+				(PasswordPolicyRel.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersRoles">
@@ -957,7 +957,7 @@
 				Permission_ ON
 					(Permission_.permissionId = Groups_Permissions.permissionId)
 			WHERE
-				(Group_.className = 'com.liferay.portal.model.UserGroup') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]) AND
 				(Permission_.resourceId = ?)
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupsGroups">
@@ -978,7 +978,7 @@
 				Groups_Roles ON
 					(Groups_Roles.groupId = Group_.groupId)
 			WHERE
-				(Group_.className = 'com.liferay.portal.model.UserGroup') AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]) AND
 				(Groups_Roles.roleId = ?)
 		]]>
 	</sql>
