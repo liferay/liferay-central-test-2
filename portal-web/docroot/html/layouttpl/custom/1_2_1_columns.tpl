@@ -1,7 +1,7 @@
 <div class="columns-1-2-1" id="content-wrapper">
 	<table id="layout-grid">
 	<tr>
-		<td class="lfr-column" colspan="3" id="column-1" valign="top">
+		<td class="lfr-column" colspan="2" id="column-1" valign="top">
 			$processor.processColumn("column-1")
 		</td>
 	</tr>
@@ -14,7 +14,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="lfr-column" colspan="3" id="column-4" valign="top">
+		<td class="lfr-column" colspan="2" id="column-4" valign="top">
 			$processor.processColumn("column-4")
 		</td>
 	</tr>

@@ -107,6 +107,14 @@ public class LayoutTemplateImpl
 		_templatePath = templatePath;
 	}
 
+	public String getWapTemplatePath() {
+		return _wapTemplatePath;
+	}
+
+	public void setWapTemplatePath(String wapTemplatePath) {
+		_wapTemplatePath = wapTemplatePath;
+	}
+
 	public String getThumbnailPath() {
 		return _thumbnailPath;
 	}
@@ -135,7 +143,7 @@ public class LayoutTemplateImpl
 				_log.debug(
 					"Cannot get latest content for " + _servletContextName +
 						" " + getTemplatePath() +
-							" because servlet context is null");
+							" because the servlet context is null");
 			}
 
 			return _content;
@@ -152,6 +160,46 @@ public class LayoutTemplateImpl
 		setContent(content);
 
 		return content;
+	}
+
+	public String getWapContent() {
+		return _wapContent;
+	}
+
+	public void setWapContent(String wapContent) {
+		_setWapContent = true;
+
+		_wapContent = wapContent;
+	}
+
+	public boolean hasSetWapContent() {
+		return _setWapContent;
+	}
+
+	public String getUncachedWapContent() throws IOException {
+		if (_ctx == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Cannot get latest WAP content for " + _servletContextName +
+						" " + getWapTemplatePath() +
+							" because the servlet context is null");
+			}
+
+			return _wapContent;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Getting latest WAP content for " + _servletContextName + " " +
+					getWapTemplatePath());
+		}
+
+		String wapContent = Http.URLtoString(
+			_ctx.getResource(getWapTemplatePath()));
+
+		setWapContent(wapContent);
+
+		return wapContent;
 	}
 
 	public List getColumns() {
@@ -244,9 +292,12 @@ public class LayoutTemplateImpl
 	private boolean _standard;
 	private String _name;
 	private String _templatePath;
+	private String _wapTemplatePath;
 	private String _thumbnailPath;
 	private String _content;
 	private boolean _setContent;
+	private String _wapContent;
+	private boolean _setWapContent;
 	private List _columns = new ArrayList();
 	private transient ServletContext _ctx;
 	private String _servletContextName;

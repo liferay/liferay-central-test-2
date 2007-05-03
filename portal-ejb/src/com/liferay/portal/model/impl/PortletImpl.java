@@ -1544,10 +1544,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				portlet mode
 	 */
 	public boolean hasPortletMode(String mimeType, PortletMode portletMode) {
-		if (portletMode.equals(PortletMode.VIEW)) {
-			return true;
-		}
-
 		if (mimeType == null) {
 			mimeType = Constants.TEXT_HTML;
 		}
@@ -1558,7 +1554,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return false;
 		}
 
-		return mimeTypeModes.contains(portletMode.toString());
+		if (mimeTypeModes.contains(portletMode.toString())) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**

@@ -122,6 +122,8 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isInheritWapLookAndFeel();
+
 	public com.liferay.portal.model.Theme getWapTheme()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

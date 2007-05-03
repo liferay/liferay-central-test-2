@@ -187,11 +187,11 @@ boolean showCloseIcon = true;
 boolean showConfigurationIcon = false;
 boolean showEditIcon = false;
 boolean showEditGuestIcon = false;
-boolean showHelpIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.HELP);
+boolean showHelpIcon = portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), PortletMode.HELP);
 boolean showMaxIcon = true;
 boolean showMinIcon = true;
 boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
-boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.PRINT);
+boolean showPrintIcon = portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), LiferayPortletMode.PRINT);
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION)) {
@@ -199,17 +199,19 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	}
 }
 
-if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT)) {
+if (portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), PortletMode.EDIT)) {
 	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
 		showEditIcon = true;
 	}
 }
 
-if (portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.EDIT_GUEST)) {
+if (portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), LiferayPortletMode.EDIT_GUEST)) {
 	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
 		showEditGuestIcon = true;
 	}
 }
+
+boolean supportsMimeType = portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), portletMode);
 
 // Unauthenticated users and users without UPDATE permission for the layout
 // cannot modify the layout
@@ -304,7 +306,7 @@ if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
 
 boolean portletException = false;
 
-if (portlet.isActive() && access) {
+if (portlet.isActive() && access && supportsMimeType) {
 	try {
 		cachePortlet.render(renderRequestImpl, renderResponseImpl);
 	}
@@ -360,6 +362,8 @@ PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(requ
 <%@ include file="/html/common/themes/portlet_css.jspf" %>
 
 <c:choose>
+	<c:when test="<%= !supportsMimeType %>">
+	</c:when>
 	<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">
 	</c:when>
 	<c:when test="<%= !portlet.isActive() && !portlet.isShowPortletInactive() %>">

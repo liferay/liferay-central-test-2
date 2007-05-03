@@ -126,6 +126,8 @@ public interface Constants {
 
 	public static final String TEXT_XML = "text/xml";
 
+	public static final String XHTML_MP = "application/vnd.wap.xhtml+xml";
+
 	// Content directories
 
 	public static final String TEXT_HTML_DIR = "/html";

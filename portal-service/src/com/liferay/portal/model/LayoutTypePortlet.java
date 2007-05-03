@@ -93,6 +93,8 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void addStateMaxPortletId(String portletId);
 
+	public String getStateMaxPortletId();
+
 	public boolean hasStateMaxPortletId(String portletId);
 
 	public void removeStateMaxPortletId(String portletId);

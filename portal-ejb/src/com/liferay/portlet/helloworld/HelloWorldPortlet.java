@@ -26,6 +26,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ReleaseInfo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -51,8 +52,9 @@ public class HelloWorldPortlet extends GenericPortlet {
 
 		res.setContentType(Constants.TEXT_HTML);
 
-		res.getWriter().print(
-			"Welcome to " + ReleaseInfo.getReleaseInfo() + ".");
+		PrintWriter writer = res.getWriter();
+
+		writer.print("Welcome to " + ReleaseInfo.getReleaseInfo() + ".");
 	}
 
 }

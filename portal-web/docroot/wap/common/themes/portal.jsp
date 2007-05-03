@@ -25,7 +25,7 @@
 <%@ include file="/wap/common/init.jsp" %>
 
 <%
-response.setContentType("application/vnd.wap.xhtml+xml");
+response.setContentType(Constants.XHTML_MP);
 %>
 
 <liferay-theme:include page="portal_normal.jsp" />

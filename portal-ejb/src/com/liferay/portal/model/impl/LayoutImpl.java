@@ -510,8 +510,19 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
+	public boolean isInheritWapLookAndFeel() {
+		if (Validator.isNull(getWapThemeId()) ||
+			Validator.isNull(getWapColorSchemeId())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public Theme getWapTheme() throws PortalException, SystemException {
-		if (isInheritLookAndFeel()) {
+		if (isInheritWapLookAndFeel()) {
 			return getLayoutSet().getWapTheme();
 		}
 		else {

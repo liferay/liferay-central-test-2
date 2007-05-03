@@ -58,6 +58,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 
 import org.apache.commons.logging.Log;
@@ -629,20 +630,21 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				String mimeType = supports.elementText("mime-type");
 
+				Set mimeTypeModes =
+					(Set)portletModel.getPortletModes().get(mimeType);
+
+				if (mimeTypeModes == null) {
+					mimeTypeModes = new HashSet();
+
+					portletModel.getPortletModes().put(mimeType, mimeTypeModes);
+				}
+
+				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
+
 				Iterator itr3 = supports.elements("portlet-mode").iterator();
 
 				while (itr3.hasNext()) {
 					Element portletMode = (Element)itr3.next();
-
-					Set mimeTypeModes =
-						(Set)portletModel.getPortletModes().get(mimeType);
-
-					if (mimeTypeModes == null) {
-						mimeTypeModes = new HashSet();
-
-						portletModel.getPortletModes().put(
-							mimeType, mimeTypeModes);
-					}
 
 					mimeTypeModes.add(portletMode.getTextTrim().toLowerCase());
 				}

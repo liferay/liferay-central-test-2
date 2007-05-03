@@ -10,7 +10,8 @@ This is the DTD for the Layout Templates parameters for Liferay Portal.
 
 <!ELEMENT standard (layout-template*)>
 
-<!ELEMENT layout-template (template-path, thumbnail-path?, roles?)>
+<!ELEMENT layout-template (template-path, wap-template-path, thumbnail-path?,
+roles?)>
 
 <!ATTLIST layout-template
 	id CDATA #REQUIRED
@@ -18,6 +19,8 @@ This is the DTD for the Layout Templates parameters for Liferay Portal.
 >
 
 <!ELEMENT template-path (#PCDATA)>
+
+<!ELEMENT wap-template-path (#PCDATA)>
 
 <!ELEMENT thumbnail-path (#PCDATA)>
 

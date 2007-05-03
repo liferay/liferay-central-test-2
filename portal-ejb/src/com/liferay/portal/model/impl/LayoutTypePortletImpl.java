@@ -497,6 +497,17 @@ public class LayoutTypePortletImpl
 		setStateMax(StringUtil.add(StringPool.BLANK, portletId));
 	}
 
+	public String getStateMaxPortletId() {
+		String[] stateMax = StringUtil.split(getStateMax());
+
+		if (stateMax.length > 0) {
+			return stateMax[0];
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
+
 	public boolean hasStateMaxPortletId(String portletId) {
 		if (StringUtil.contains(getStateMax(), portletId)) {
 			return true;

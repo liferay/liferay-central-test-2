@@ -96,6 +96,20 @@
 	#if ( $page.getType().equals("portlet") )
 		#set ( $is_portlet_page = true )
 	#end
+
+	#if ( $is_portlet_page && $theme_display.isWapTheme() )
+		#set ( $all_portlets = $layoutTypePortlet.getPortlets() )
+		#set ( $column_1_portlets = $layoutTypePortlet.getAllPortlets("column-1") )
+		#set ( $column_2_portlets = $layoutTypePortlet.getAllPortlets("column-2") )
+		#set ( $column_3_portlets = $layoutTypePortlet.getAllPortlets("column-3") )
+		#set ( $column_4_portlets = $layoutTypePortlet.getAllPortlets("column-4") )
+		#set ( $column_5_portlets = $layoutTypePortlet.getAllPortlets("column-5") )
+
+		#if ( $layoutTypePortlet.hasStateMax() )
+			#set ( $maximized_portlet_id = $layoutTypePortlet.getStateMaxPortletId() )
+		#end
+
+	#end
 #end
 
 #if ( $layouts )
@@ -111,9 +125,15 @@
 
 ## ---------- Includes ---------- ##
 
-#set ( $bottom_ext_include = "/html/common/themes/bottom-ext.jsp" )
-#set ( $content_include = "/html$tilesContent" )
-#set ( $session_timeout_include = "/html/common/themes/session_timeout.jsp" )
-#set ( $sound_alerts_include = "/html/common/themes/sound_alerts.jsp" )
-#set ( $top_head_include = "/html/common/themes/top_head.jsp" )
-#set ( $top_messages_include = "/html/common/themes/top_messages.jsp" )
+#if ( $is_portlet_page && $theme_display.isWapTheme() )
+	#set ( $dir_include = "/wap" )
+#else
+	#set ( $dir_include = "/html" )
+#end
+
+#set ( $bottom_ext_include = "$dir_include/common/themes/bottom-ext.jsp" )
+#set ( $content_include = "$dir_include$tilesContent" )
+#set ( $session_timeout_include = "$dir_include/common/themes/session_timeout.jsp" )
+#set ( $sound_alerts_include = "$dir_include/common/themes/sound_alerts.jsp" )
+#set ( $top_head_include = "$dir_include/common/themes/top_head.jsp" )
+#set ( $top_messages_include = "$dir_include/common/themes/top_messages.jsp" )

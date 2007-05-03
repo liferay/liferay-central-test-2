@@ -15,11 +15,7 @@
 	#parse("$full_templates_path/navigation.vm")
 #end
 
-#if ( $is_portlet_page )
-	#foreach ( $portlet in $layoutTypePortlet.getPortlets() )
-		$portlet.getPortletId()<br />
-	#end
-#end
+$theme.include($content_include)
 
 </body>
 

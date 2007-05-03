@@ -53,6 +53,10 @@ public interface LayoutTemplate extends Comparable, Plugin, Serializable {
 
 	public void setTemplatePath(String templatePath);
 
+	public String getWapTemplatePath();
+
+	public void setWapTemplatePath(String wapWapTemplatePath);
+
 	public String getThumbnailPath();
 
 	public void setThumbnailPath(String thumbnailPath);
@@ -64,6 +68,14 @@ public interface LayoutTemplate extends Comparable, Plugin, Serializable {
 	public boolean hasSetContent();
 
 	public String getUncachedContent() throws IOException;
+
+	public String getWapContent();
+
+	public void setWapContent(String wapContent);
+
+	public boolean hasSetWapContent();
+
+	public String getUncachedWapContent() throws IOException;
 
 	public List getColumns();
 

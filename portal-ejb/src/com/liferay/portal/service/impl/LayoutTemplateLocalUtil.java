@@ -165,6 +165,36 @@ public class LayoutTemplateLocalUtil {
 		return customLayoutTemplates;
 	}
 
+	public static String getWapContent(
+			String layoutTemplateId, boolean standard, String themeId)
+		throws SystemException {
+
+		LayoutTemplate layoutTemplate =
+			getLayoutTemplate(layoutTemplateId, standard, themeId);
+
+		if (layoutTemplate == null) {
+			_log.error(
+				"Layout template " + layoutTemplateId + " does not exist");
+
+			return null;
+		}
+		else {
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
+
+				return layoutTemplate.getWapContent();
+			}
+			else {
+				try {
+					return layoutTemplate.getUncachedWapContent();
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
+				}
+			}
+		}
+	}
+
 	public static List init(
 		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
 
@@ -269,6 +299,9 @@ public class LayoutTemplateLocalUtil {
 			layoutTemplateModel.setTemplatePath(GetterUtil.getString(
 				layoutTemplate.elementText("template-path"),
 				layoutTemplateModel.getTemplatePath()));
+			layoutTemplateModel.setWapTemplatePath(GetterUtil.getString(
+				layoutTemplate.elementText("wap-template-path"),
+				layoutTemplateModel.getWapTemplatePath()));
 			layoutTemplateModel.setThumbnailPath(GetterUtil.getString(
 				layoutTemplate.elementText("thumbnail-path"),
 				layoutTemplateModel.getThumbnailPath()));
@@ -276,7 +309,7 @@ public class LayoutTemplateLocalUtil {
 			String content = Http.URLtoString(ctx.getResource(
 				layoutTemplateModel.getTemplatePath()));
 
-			if ((content == null) || (content.length() == 0)) {
+			if (Validator.isNull(content)) {
 				_log.error(
 					"No content found at " +
 						layoutTemplateModel.getTemplatePath());
@@ -284,6 +317,18 @@ public class LayoutTemplateLocalUtil {
 			else {
 				layoutTemplateModel.setContent(content);
 				layoutTemplateModel.setColumns(_getColumns(content));
+			}
+
+			String wapContent = Http.URLtoString(ctx.getResource(
+				layoutTemplateModel.getWapTemplatePath()));
+
+			if (Validator.isNull(wapContent)) {
+				_log.error(
+					"No WAP content found at " +
+						layoutTemplateModel.getWapTemplatePath());
+			}
+			else {
+				layoutTemplateModel.setWapContent(wapContent);
 			}
 
 			Element rolesEl = layoutTemplate.element("roles");

@@ -242,6 +242,10 @@ public class ThemeDisplay implements Serializable {
 		return _colorScheme.getColorSchemeId();
 	}
 
+	public boolean isWapTheme() {
+		return _theme.isWapTheme();
+	}
+
 	public void setLookAndFeel(Theme theme, ColorScheme colorScheme) {
 		setLookAndFeel(getPathContext(), theme, colorScheme);
 	}

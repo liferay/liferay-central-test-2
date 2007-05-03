@@ -9,7 +9,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="lfr-column" colspan="3" id="column-3" valign="top">
+		<td class="lfr-column" colspan="2" id="column-3" valign="top">
 			$processor.processColumn("column-3")
 		</td>
 	</tr>

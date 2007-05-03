@@ -34,6 +34,7 @@ import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -101,7 +102,7 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	public boolean isPortletModeAllowed(PortletMode portletMode) {
-		if (portletMode == null || Validator.isNull(portletMode.toString())) {
+		if ((portletMode == null) || Validator.isNull(portletMode.toString())) {
 			return true;
 		}
 		else {
@@ -397,7 +398,12 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	public String getResponseContentType() {
-		return Constants.TEXT_HTML;
+		if (_wapTheme) {
+			return Constants.XHTML_MP;
+		}
+		else {
+			return Constants.TEXT_HTML;
+		}
 	}
 
 	public Enumeration getResponseContentTypes() {
@@ -604,6 +610,7 @@ public class RenderRequestImpl implements RenderRequest {
 		}
 
 		_req = dynamicReq;
+		_wapTheme = BrowserSniffer.is_wap_xhtml(_req);
 		_portlet = portlet;
 		_portalCtx = new PortalContextImpl();
 		_portletCtx = portletCtx;
@@ -640,6 +647,7 @@ public class RenderRequestImpl implements RenderRequest {
 		_req.removeAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
 
 		_req = null;
+		_wapTheme = false;
 		_portlet = null;
 		_portletName = null;
 		_portalCtx = null;
@@ -679,6 +687,7 @@ public class RenderRequestImpl implements RenderRequest {
 	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
 
 	private DynamicServletRequest _req;
+	private boolean _wapTheme;
 	private Portlet _portlet;
 	private String _portletName;
 	private PortalContext _portalCtx;
