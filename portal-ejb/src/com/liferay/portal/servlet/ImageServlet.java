@@ -102,9 +102,10 @@ public class ImageServlet extends HttpServlet {
 	protected Image getDefaultImage(HttpServletRequest req, String imageId) {
 		String path = req.getPathInfo();
 
-		// User Portrait
-
-		if (path.startsWith("/user_portrait")) {
+		if (path.startsWith("/company_logo")) {
+			return ImageLocalUtil.getDefaultCompanyLogo();
+		}
+		else if (path.startsWith("/user_portrait")) {
 			return ImageLocalUtil.getDefaultUserPortrait();
 		}
 		else {

@@ -55,6 +55,10 @@ public class ImageLocalUtil {
 		return image;
 	}
 
+	public static Image getDefaultCompanyLogo() {
+		return _instance._defaultCompanyLogo;
+	}
+
 	public static Image getDefaultSpacer() {
 		return _instance._defaultSpacer;
 	}
@@ -100,6 +104,11 @@ public class ImageLocalUtil {
 		_defaultSpacer.setTextObj(ImageUtil.read(
 			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_SPACER)));
 
+		_defaultCompanyLogo = new ImageImpl();
+
+		_defaultCompanyLogo.setTextObj(ImageUtil.read(
+			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_COMPANY_LOGO)));
+
 		_defaultUserPortrait = new ImageImpl();
 
 		_defaultUserPortrait.setTextObj(ImageUtil.read(
@@ -111,6 +120,7 @@ public class ImageLocalUtil {
 	private static ImageLocalUtil _instance = new ImageLocalUtil();
 
 	private Image _defaultSpacer;
+	private Image _defaultCompanyLogo;
 	private Image _defaultUserPortrait;
 
 }

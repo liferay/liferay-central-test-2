@@ -508,6 +508,8 @@ public class PropsUtil {
 
 	public static final String IMAGE_DEFAULT_SPACER = "image.default.spacer";
 
+	public static final String IMAGE_DEFAULT_COMPANY_LOGO = "image.default.company.logo";
+
 	public static final String IMAGE_DEFAULT_USER_PORTRAIT = "image.default.user.portrait";
 
 	// Fields
