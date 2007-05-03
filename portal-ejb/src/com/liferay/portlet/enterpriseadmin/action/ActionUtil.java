@@ -43,7 +43,6 @@ import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

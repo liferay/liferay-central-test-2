@@ -56,8 +56,8 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
 		return PasswordPolicyLocalServiceUtil.addPolicy(
-			user.getUserId(), false, name, description, storageScheme, 
-			changeable, changeRequired, minAge, checkSyntax, 
+			user.getUserId(), false, name, description, storageScheme,
+			changeable, changeRequired, minAge, checkSyntax,
 			allowDictionaryWords, minLength, history, historyCount, expireable,
 			maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount);

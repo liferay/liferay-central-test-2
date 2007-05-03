@@ -43,7 +43,6 @@ import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordPolicyFinder;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
 import java.util.Date;
@@ -60,12 +59,12 @@ public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
 	public PasswordPolicy addPolicy(
-			long userId, boolean defaultPolicy, String name, String description, 
-			String storageScheme, boolean changeable, boolean changeRequired, 
-			long minAge, boolean checkSyntax, boolean allowDictionaryWords, 
-			int minLength, boolean history, int historyCount, 
-			boolean expireable, long maxAge, long warningTime, int graceLimit, 
-			boolean lockout, int maxFailure, long lockoutDuration, 
+			long userId, boolean defaultPolicy, String name, String description,
+			String storageScheme, boolean changeable, boolean changeRequired,
+			long minAge, boolean checkSyntax, boolean allowDictionaryWords,
+			int minLength, boolean history, int historyCount,
+			boolean expireable, long maxAge, long warningTime, int graceLimit,
+			boolean lockout, int maxFailure, long lockoutDuration,
 			long resetFailureCount)
 		throws PortalException, SystemException {
 
@@ -133,9 +132,9 @@ public class PasswordPolicyLocalServiceImpl
 		}
 		catch (NoSuchPasswordPolicyException nsppe) {
 			addPolicy(
-				UserLocalServiceUtil.getDefaultUserId(companyId), true, 
-				defaultPasswordPolicyName, defaultPasswordPolicyName, "md5", 
-				true, false, 0, false, true, 6, false, 0, false, 0, 0, 0, false, 
+				UserLocalServiceUtil.getDefaultUserId(companyId), true,
+				defaultPasswordPolicyName, defaultPasswordPolicyName, "md5",
+				true, false, 0, false, true, 6, false, 0, false, 0, 0, 0, false,
 				0, 0, 0);
 		}
 	}
@@ -143,7 +142,7 @@ public class PasswordPolicyLocalServiceImpl
 	public void deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
-		PasswordPolicy passwordPolicy = 
+		PasswordPolicy passwordPolicy =
 			PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
 
 		if (passwordPolicy.isDefaultPolicy()) {
@@ -154,7 +153,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			passwordPolicy.getCompanyId(), PasswordPolicy.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, 
+			ResourceImpl.SCOPE_INDIVIDUAL,
 			passwordPolicy.getPasswordPolicyId());
 
 		// Password policy
