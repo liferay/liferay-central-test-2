@@ -216,7 +216,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';" />
 
 				<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE))) %>">
 					<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
@@ -446,7 +446,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<c:if test="<%= showButtons %>">
 				<c:if test="<%= (rootOrganization && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !rootOrganization %>">
-					<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (rootOrganization ? "organization" : "location") %>' /></portlet:renderURL>';">
+					<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (rootOrganization ? "organization" : "location") %>' /></portlet:renderURL>';" />
 				</c:if>
 
 				<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
@@ -573,7 +573,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
 				<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
 			</c:if>
@@ -649,7 +649,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
 				<br /><br />
 			</c:if>
@@ -730,7 +730,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
 				<br /><br />
 			</c:if>

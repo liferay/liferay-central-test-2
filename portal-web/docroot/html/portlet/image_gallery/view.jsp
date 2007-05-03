@@ -165,7 +165,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		%>
 
 		<c:if test="<%= IGFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER) %>">
-			<input type="button" value="<bean:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/image_gallery/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';"><br />
+			<input type="button" value="<bean:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" /><br />
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />
@@ -231,7 +231,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<c:if test="<%= showAddImageButton || (results.size() > 0) %>">
 				<c:if test="<%= showAddImageButton %>">
-					<input type="button" value="<bean:message key="add-image" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';">
+					<input type="button" value="<bean:message key="add-image" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 				</c:if>
 
 				<c:if test="<%= results.size() > 0 %>">

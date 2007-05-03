@@ -129,7 +129,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</c:if>
 
 			<input type="button" value="<bean:message key="expire" />" onClick="<portlet:namespace />expireArticles();" />
@@ -232,7 +232,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</c:if>
 
 			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteStructures();" />
@@ -327,7 +327,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</c:if>
 
 			<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteTemplates();" />

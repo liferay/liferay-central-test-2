@@ -178,7 +178,7 @@ portletURL.setParameter("categoryId", categoryId);
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 					</td>
 				</c:if>
 
@@ -341,7 +341,7 @@ portletURL.setParameter("categoryId", categoryId);
 				<tr>
 					<c:if test="<%= showAddMessageButton %>">
 						<td>
-							<input type="button" value="<bean:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+							<input type="button" value="<bean:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 						</td>
 					</c:if>
 

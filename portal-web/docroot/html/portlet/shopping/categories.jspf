@@ -128,7 +128,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	<tr>
 		<c:if test="<%= showAddCategoryButton %>">
 			<td>
-				<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 			</td>
 			<td style="padding-left: 30px;"></td>
 		</c:if>
@@ -326,9 +326,9 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		<tr>
 			<c:if test="<%= showAddItemButton %>">
 				<td>
-					<input type="button" value="<bean:message key="add-item" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+					<input type="button" value="<bean:message key="add-item" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 
-					<input type="button" value="<bean:message key="add-books" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';">
+					<input type="button" value="<bean:message key="add-books" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 				</td>
 				<td style="padding-left: 30px;"></td>
 			</c:if>

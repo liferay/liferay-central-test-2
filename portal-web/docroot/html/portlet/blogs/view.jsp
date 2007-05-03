@@ -167,7 +167,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';">
+						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>

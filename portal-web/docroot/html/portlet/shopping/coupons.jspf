@@ -76,7 +76,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 	<div class="separator"></div>
 
-	<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/shopping/edit_coupon" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+	<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
 	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteCoupons();" />
 

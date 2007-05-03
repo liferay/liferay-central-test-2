@@ -132,7 +132,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:actionURL>" autocomplete="off" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>" />
 <input name="<portlet:namespace />originalId" type="hidden" value="<%= originalId %>" />
 <input name="<portlet:namespace />inReplyTo" type="hidden" value="<%= inReplyTo %>" />
 <input name="<portlet:namespace />references" type="hidden" value="<%= references %>" />
@@ -201,7 +201,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <input type="button" value="<bean:message key="save-draft" />" onclick="<portlet:namespace />saveMessage();" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';">
+<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';" />
 
 <br /><br />
 

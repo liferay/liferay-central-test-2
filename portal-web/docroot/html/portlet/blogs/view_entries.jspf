@@ -34,7 +34,7 @@ boolean showAddEntryButton = tabs1.equals("entries") && PortletPermission.contai
 			<tr>
 				<c:if test="<%= showAddEntryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+						<input type="button" value="<bean:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>

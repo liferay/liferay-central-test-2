@@ -75,7 +75,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.WORKFLOW, ActionKeys.ADD_DEFINITION) %>">
-				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" /><portlet:param name="struts_action" value="/workflow/edit_definition" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+				<input type="button" value="<bean:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
 				<br /><br />
 			</c:if>
