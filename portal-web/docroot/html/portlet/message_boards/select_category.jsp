@@ -106,9 +106,9 @@ for (int i = 0; i < results.size(); i++) {
 	int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
 	int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
 
-	row.addText(Integer.toString(categoriesCount), rowURL);
-	row.addText(Integer.toString(threadsCount), rowURL);
-	row.addText(Integer.toString(messagesCount), rowURL);
+	row.addText(String.valueOf(categoriesCount), rowURL);
+	row.addText(String.valueOf(threadsCount), rowURL);
+	row.addText(String.valueOf(messagesCount), rowURL);
 
 	// Action
 

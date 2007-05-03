@@ -109,8 +109,8 @@ for (int i = 0; i < results.size(); i++) {
 
 	int entriesCount = BlogsEntryLocalServiceUtil.getCategoriesEntriesCount(subcategoryIds);
 
-	row.addText(Integer.toString(categoriesCount), rowURL);
-	row.addText(Integer.toString(entriesCount), rowURL);
+	row.addText(String.valueOf(categoriesCount), rowURL);
+	row.addText(String.valueOf(entriesCount), rowURL);
 
 	// Action
 

@@ -102,8 +102,8 @@ for (int i = 0; i < results.size(); i++) {
 	int foldersCount = subfolderIds.size() - 1;
 	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);
 
-	row.addText(Integer.toString(foldersCount), rowURL);
-	row.addText(Integer.toString(imagesCount), rowURL);
+	row.addText(String.valueOf(foldersCount), rowURL);
+	row.addText(String.valueOf(imagesCount), rowURL);
 
 	// Add result row
 
@@ -150,8 +150,8 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Statistics
 
-		row.addText(Integer.toString(image.getHeight()));
-		row.addText(Integer.toString(image.getWidth()));
+		row.addText(String.valueOf(image.getHeight()));
+		row.addText(String.valueOf(image.getWidth()));
 		row.addText(TextFormatter.formatKB(image.getSize(), locale) + "k");
 
 		// Action

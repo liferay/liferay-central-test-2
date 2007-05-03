@@ -59,6 +59,7 @@
 			data="<%= data %>"
 		/>
 	</td>
+	<td style="padding-left: 10px;"></td>
 	<td valign="top">
 		<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>
 	</td>

@@ -74,7 +74,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	int votesCount = PollsVoteLocalServiceUtil.getVotesCount(question.getQuestionId());
 
-	row.addText(Integer.toString(votesCount), rowURL);
+	row.addText(String.valueOf(votesCount), rowURL);
 
 	// Last vote date
 

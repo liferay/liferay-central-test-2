@@ -103,7 +103,7 @@ if (!rootOrganization) {
 	>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/email_address_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
@@ -111,7 +111,7 @@ if (!rootOrganization) {
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/address_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
@@ -119,7 +119,7 @@ if (!rootOrganization) {
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/website_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
@@ -127,7 +127,7 @@ if (!rootOrganization) {
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/phone_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
@@ -141,7 +141,7 @@ if (!rootOrganization) {
 	>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/org_labor_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 			</liferay-util:include>
 		</liferay-ui:section>

@@ -134,7 +134,7 @@ portletURL.setParameter("tabs1", tabs1);
 						<%
 							if ((char)letter == 'z') {
 								letter = (int)'a';
-								letterSuffix = Integer.toString(GetterUtil.getInteger(letterSuffix) + 1);
+								letterSuffix = String.valueOf(GetterUtil.getInteger(letterSuffix) + 1);
 						%>
 
 							<br />

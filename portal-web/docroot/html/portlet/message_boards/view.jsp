@@ -157,9 +157,9 @@ portletURL.setParameter("categoryId", categoryId);
 			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
 			int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
 
-			row.addText(Integer.toString(categoriesCount), rowURL);
-			row.addText(Integer.toString(threadsCount), rowURL);
-			row.addText(Integer.toString(messagesCount), rowURL);
+			row.addText(String.valueOf(categoriesCount), rowURL);
+			row.addText(String.valueOf(threadsCount), rowURL);
+			row.addText(String.valueOf(messagesCount), rowURL);
 
 			// Action
 
@@ -288,11 +288,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 				// Number of posts
 
-				row.addText(Integer.toString(thread.getMessageCount()), rowURL);
+				row.addText(String.valueOf(thread.getMessageCount()), rowURL);
 
 				// Number of views
 
-				row.addText(Integer.toString(thread.getViewCount()), rowURL);
+				row.addText(String.valueOf(thread.getViewCount()), rowURL);
 
 				// Last post
 
@@ -452,11 +452,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 			// Number of posts
 
-			row.addText(Integer.toString(thread.getMessageCount()), rowURL);
+			row.addText(String.valueOf(thread.getMessageCount()), rowURL);
 
 			// Number of views
 
-			row.addText(Integer.toString(thread.getViewCount()), rowURL);
+			row.addText(String.valueOf(thread.getViewCount()), rowURL);
 
 			// Last post
 
@@ -570,7 +570,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 					// Number of posts
 
-					row.addText(Integer.toString(statsUser.getMessageCount()), rowURL);
+					row.addText(String.valueOf(statsUser.getMessageCount()), rowURL);
 
 					// Join date
 
@@ -633,7 +633,7 @@ portletURL.setParameter("categoryId", categoryId);
 		for (int i = 0; i < results.size(); i++) {
 			MBBan ban = (MBBan)results.get(i);
 
-			ResultRow row = new ResultRow(ban, Long.toString(ban.getPrimaryKey()), i);
+			ResultRow row = new ResultRow(ban, String.valueOf(ban.getPrimaryKey()), i);
 
 			// Name
 

@@ -107,8 +107,8 @@ for (int i = 0; i < results.size(); i++) {
 	int foldersCount = subfolderIds.size() - 1;
 	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);
 
-	row.addText(Integer.toString(foldersCount), rowURL);
-	row.addText(Integer.toString(fileEntriesCount), rowURL);
+	row.addText(String.valueOf(foldersCount), rowURL);
+	row.addText(String.valueOf(fileEntriesCount), rowURL);
 
 	// Add result row
 
@@ -189,7 +189,7 @@ for (int i = 0; i < results.size(); i++) {
 		// Statistics
 
 		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-		row.addText(Integer.toString(fileEntry.getReadCount()), rowHREF);
+		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
 
 		// Locked
 

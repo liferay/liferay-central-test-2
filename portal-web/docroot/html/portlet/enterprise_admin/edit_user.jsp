@@ -103,7 +103,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 	>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/email_address_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
@@ -111,7 +111,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/address_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
@@ -121,7 +121,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/website_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
@@ -136,7 +136,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 	>
 		<liferay-ui:section>
 			<liferay-util:include page="/html/portlet/enterprise_admin/phone_iterator.jsp">
-				<liferay-util:param name="editable" value="<%= Boolean.toString(editable) %>" />
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />

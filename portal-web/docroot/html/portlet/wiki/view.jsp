@@ -73,7 +73,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	int pagesCount = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
 
-	row.addText(Integer.toString(pagesCount), rowURL);
+	row.addText(String.valueOf(pagesCount), rowURL);
 
 	// Last post date
 

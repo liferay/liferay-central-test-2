@@ -377,7 +377,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("recent") %>'>
-		<%= LanguageUtil.format(pageContext, "this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed", Integer.toString(JournalUtil.MAX_STACK_SIZE), false) %>
+		<%= LanguageUtil.format(pageContext, "this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 
 		<br /><br />
 
@@ -387,7 +387,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 					<td>
-						<%= LanguageUtil.format(pageContext, "last-x-articles", Integer.toString(JournalUtil.MAX_STACK_SIZE), false) %>
+						<%= LanguageUtil.format(pageContext, "last-x-articles", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
 
@@ -424,7 +424,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 					<td>
-						<%= LanguageUtil.format(pageContext, "last-x-structures", Integer.toString(JournalUtil.MAX_STACK_SIZE), false) %>
+						<%= LanguageUtil.format(pageContext, "last-x-structures", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
 
@@ -461,7 +461,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 					<td>
-						<%= LanguageUtil.format(pageContext, "last-x-templates", Integer.toString(JournalUtil.MAX_STACK_SIZE), false) %>
+						<%= LanguageUtil.format(pageContext, "last-x-templates", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
 

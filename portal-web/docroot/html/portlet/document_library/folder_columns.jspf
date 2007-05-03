@@ -91,10 +91,10 @@ for (int j = 0; j < folderColumns.length; j++) {
 		row.addText(sm.toString());
 	}
 	else if (folderColumn.equals("num-of-documents")) {
-		row.addText(Integer.toString(foldersCount), rowURL);
+		row.addText(String.valueOf(foldersCount), rowURL);
 	}
 	else if (folderColumn.equals("num-of-folders")) {
-		row.addText(Integer.toString(fileEntriesCount), rowURL);
+		row.addText(String.valueOf(fileEntriesCount), rowURL);
 	}
 }
 %>

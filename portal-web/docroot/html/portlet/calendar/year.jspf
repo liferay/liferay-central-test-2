@@ -45,7 +45,7 @@
 					for (int i = -10; i <= 10; i++) {
 					%>
 
-						<option <%= ((curYear - selYear + i) == 0) ? "selected" : "" %> value="<%= Integer.toString(curYear + i) %>"><%= curYear + i %></option>
+						<option <%= ((curYear - selYear + i) == 0) ? "selected" : "" %> value="<%= String.valueOf(curYear + i) %>"><%= curYear + i %></option>
 
 					<%
 					}

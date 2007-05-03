@@ -151,8 +151,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			int foldersCount = subfolderIds.size() - 1;
 			int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
 
-			row.addText(Integer.toString(foldersCount), rowURL);
-			row.addText(Integer.toString(entriesCount), rowURL);
+			row.addText(String.valueOf(foldersCount), rowURL);
+			row.addText(String.valueOf(entriesCount), rowURL);
 
 			// Action
 

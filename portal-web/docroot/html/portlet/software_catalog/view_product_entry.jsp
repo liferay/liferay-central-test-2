@@ -149,7 +149,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 		<%
 		}
 		for (int i = 1; i < 4; i++) {
-			imageName = Integer.toString(i);
+			imageName = String.valueOf(i);
 			imageId = productEntry.getImageId(imageName);
 			if (imageId != null) {
 				String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId;

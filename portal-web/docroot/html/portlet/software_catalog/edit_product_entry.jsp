@@ -194,7 +194,7 @@ else {
 	<td>
 		<%
 		for (int i = 1; i < 5; i++) {
-			String imageName = Integer.toString(i);
+			String imageName = String.valueOf(i);
 		%>
  			<br clear="all"/>
 			<input name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />

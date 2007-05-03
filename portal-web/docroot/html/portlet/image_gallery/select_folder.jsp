@@ -100,8 +100,8 @@ for (int i = 0; i < results.size(); i++) {
 	int foldersCount = subfolderIds.size() - 1;
 	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);
 
-	row.addText(Integer.toString(foldersCount), rowURL);
-	row.addText(Integer.toString(imagesCount), rowURL);
+	row.addText(String.valueOf(foldersCount), rowURL);
+	row.addText(String.valueOf(imagesCount), rowURL);
 
 	// Action
 

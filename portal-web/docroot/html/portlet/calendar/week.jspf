@@ -123,12 +123,12 @@ for (int i = 0; i < 7; i++) {
 				<td class="<%= className %>" style="font-size: x-small;">
 					<b><%= dateFormatDayOfWeek.format(Time.getDate(cal)) %></b><br />
 
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= Integer.toString(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= Integer.toString(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= Integer.toString(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="day" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
 					<%= dateFormatMonthAndDay.format(Time.getDate(cal)) %>
 					</a>
 
 					<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
-						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= Integer.toString(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= Integer.toString(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= Integer.toString(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(cal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(cal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(cal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
 						<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<bean:message key="add" />" />
 						</a>
 					</c:if>
