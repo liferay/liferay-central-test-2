@@ -386,6 +386,11 @@ create table TagsSource (
 alter table User_ add defaultUser BOOLEAN;
 alter_column_type User_ contactId LONG;
 alter table User_ add screenName VARCHAR(75) null;
+alter table User_ add passwordModifiedDate DATE null;
+alter table User_ add graceLoginCount INTEGER;
+alter table User_ add lastFailedLoginDate DATE null;
+alter table User_ add lockout BOOLEAN;
+alter table User_ add lockoutDate DATE null;
 update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
 

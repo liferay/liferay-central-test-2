@@ -58,6 +58,8 @@ public class UserSoap implements Serializable {
 		soapModel.setPasswordEncrypted(model.getPasswordEncrypted());
 		soapModel.setPasswordExpirationDate(model.getPasswordExpirationDate());
 		soapModel.setPasswordReset(model.getPasswordReset());
+		soapModel.setPasswordModifiedDate(model.getPasswordModifiedDate());
+		soapModel.setGraceLoginCount(model.getGraceLoginCount());
 		soapModel.setScreenName(model.getScreenName());
 		soapModel.setEmailAddress(model.getEmailAddress());
 		soapModel.setLanguageId(model.getLanguageId());
@@ -68,7 +70,10 @@ public class UserSoap implements Serializable {
 		soapModel.setLoginIP(model.getLoginIP());
 		soapModel.setLastLoginDate(model.getLastLoginDate());
 		soapModel.setLastLoginIP(model.getLastLoginIP());
+		soapModel.setLastFailedLoginDate(model.getLastFailedLoginDate());
 		soapModel.setFailedLoginAttempts(model.getFailedLoginAttempts());
+		soapModel.setLockout(model.getLockout());
+		soapModel.setLockoutDate(model.getLockoutDate());
 		soapModel.setAgreedToTermsOfUse(model.getAgreedToTermsOfUse());
 		soapModel.setActive(model.getActive());
 
@@ -189,6 +194,22 @@ public class UserSoap implements Serializable {
 		_passwordReset = passwordReset;
 	}
 
+	public Date getPasswordModifiedDate() {
+		return _passwordModifiedDate;
+	}
+
+	public void setPasswordModifiedDate(Date passwordModifiedDate) {
+		_passwordModifiedDate = passwordModifiedDate;
+	}
+
+	public int getGraceLoginCount() {
+		return _graceLoginCount;
+	}
+
+	public void setGraceLoginCount(int graceLoginCount) {
+		_graceLoginCount = graceLoginCount;
+	}
+
 	public String getScreenName() {
 		return _screenName;
 	}
@@ -269,12 +290,40 @@ public class UserSoap implements Serializable {
 		_lastLoginIP = lastLoginIP;
 	}
 
+	public Date getLastFailedLoginDate() {
+		return _lastFailedLoginDate;
+	}
+
+	public void setLastFailedLoginDate(Date lastFailedLoginDate) {
+		_lastFailedLoginDate = lastFailedLoginDate;
+	}
+
 	public int getFailedLoginAttempts() {
 		return _failedLoginAttempts;
 	}
 
 	public void setFailedLoginAttempts(int failedLoginAttempts) {
 		_failedLoginAttempts = failedLoginAttempts;
+	}
+
+	public boolean getLockout() {
+		return _lockout;
+	}
+
+	public boolean isLockout() {
+		return _lockout;
+	}
+
+	public void setLockout(boolean lockout) {
+		_lockout = lockout;
+	}
+
+	public Date getLockoutDate() {
+		return _lockoutDate;
+	}
+
+	public void setLockoutDate(Date lockoutDate) {
+		_lockoutDate = lockoutDate;
 	}
 
 	public boolean getAgreedToTermsOfUse() {
@@ -311,6 +360,8 @@ public class UserSoap implements Serializable {
 	private boolean _passwordEncrypted;
 	private Date _passwordExpirationDate;
 	private boolean _passwordReset;
+	private Date _passwordModifiedDate;
+	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;
 	private String _languageId;
@@ -321,7 +372,10 @@ public class UserSoap implements Serializable {
 	private String _loginIP;
 	private Date _lastLoginDate;
 	private String _lastLoginIP;
+	private Date _lastFailedLoginDate;
 	private int _failedLoginAttempts;
+	private boolean _lockout;
+	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
 	private boolean _active;
 }

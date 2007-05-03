@@ -97,6 +97,14 @@ public interface UserModel extends BaseModel {
 
 	public void setPasswordReset(boolean passwordReset);
 
+	public Date getPasswordModifiedDate();
+
+	public void setPasswordModifiedDate(Date passwordModifiedDate);
+
+	public int getGraceLoginCount();
+
+	public void setGraceLoginCount(int graceLoginCount);
+
 	public String getScreenName();
 
 	public void setScreenName(String screenName);
@@ -137,9 +145,23 @@ public interface UserModel extends BaseModel {
 
 	public void setLastLoginIP(String lastLoginIP);
 
+	public Date getLastFailedLoginDate();
+
+	public void setLastFailedLoginDate(Date lastFailedLoginDate);
+
 	public int getFailedLoginAttempts();
 
 	public void setFailedLoginAttempts(int failedLoginAttempts);
+
+	public boolean getLockout();
+
+	public boolean isLockout();
+
+	public void setLockout(boolean lockout);
+
+	public Date getLockoutDate();
+
+	public void setLockoutDate(Date lockoutDate);
 
 	public boolean getAgreedToTermsOfUse();
 

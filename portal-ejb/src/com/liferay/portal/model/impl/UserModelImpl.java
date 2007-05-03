@@ -64,6 +64,8 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
 			{ "passwordExpirationDate", new Integer(Types.TIMESTAMP) },
 			{ "passwordReset", new Integer(Types.BOOLEAN) },
+			{ "passwordModifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "graceLoginCount", new Integer(Types.INTEGER) },
 			{ "screenName", new Integer(Types.VARCHAR) },
 			{ "emailAddress", new Integer(Types.VARCHAR) },
 			{ "languageId", new Integer(Types.VARCHAR) },
@@ -74,7 +76,10 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "loginIP", new Integer(Types.VARCHAR) },
 			{ "lastLoginDate", new Integer(Types.TIMESTAMP) },
 			{ "lastLoginIP", new Integer(Types.VARCHAR) },
+			{ "lastFailedLoginDate", new Integer(Types.TIMESTAMP) },
 			{ "failedLoginAttempts", new Integer(Types.INTEGER) },
+			{ "lockout", new Integer(Types.BOOLEAN) },
+			{ "lockoutDate", new Integer(Types.TIMESTAMP) },
 			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
@@ -252,6 +257,31 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public Date getPasswordModifiedDate() {
+		return _passwordModifiedDate;
+	}
+
+	public void setPasswordModifiedDate(Date passwordModifiedDate) {
+		if (((passwordModifiedDate == null) && (_passwordModifiedDate != null)) ||
+				((passwordModifiedDate != null) &&
+				(_passwordModifiedDate == null)) ||
+				((passwordModifiedDate != null) &&
+				(_passwordModifiedDate != null) &&
+				!passwordModifiedDate.equals(_passwordModifiedDate))) {
+			_passwordModifiedDate = passwordModifiedDate;
+		}
+	}
+
+	public int getGraceLoginCount() {
+		return _graceLoginCount;
+	}
+
+	public void setGraceLoginCount(int graceLoginCount) {
+		if (graceLoginCount != _graceLoginCount) {
+			_graceLoginCount = graceLoginCount;
+		}
+	}
+
 	public String getScreenName() {
 		return GetterUtil.getString(_screenName);
 	}
@@ -414,6 +444,21 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public Date getLastFailedLoginDate() {
+		return _lastFailedLoginDate;
+	}
+
+	public void setLastFailedLoginDate(Date lastFailedLoginDate) {
+		if (((lastFailedLoginDate == null) && (_lastFailedLoginDate != null)) ||
+				((lastFailedLoginDate != null) &&
+				(_lastFailedLoginDate == null)) ||
+				((lastFailedLoginDate != null) &&
+				(_lastFailedLoginDate != null) &&
+				!lastFailedLoginDate.equals(_lastFailedLoginDate))) {
+			_lastFailedLoginDate = lastFailedLoginDate;
+		}
+	}
+
 	public int getFailedLoginAttempts() {
 		return _failedLoginAttempts;
 	}
@@ -421,6 +466,33 @@ public class UserModelImpl extends BaseModelImpl {
 	public void setFailedLoginAttempts(int failedLoginAttempts) {
 		if (failedLoginAttempts != _failedLoginAttempts) {
 			_failedLoginAttempts = failedLoginAttempts;
+		}
+	}
+
+	public boolean getLockout() {
+		return _lockout;
+	}
+
+	public boolean isLockout() {
+		return _lockout;
+	}
+
+	public void setLockout(boolean lockout) {
+		if (lockout != _lockout) {
+			_lockout = lockout;
+		}
+	}
+
+	public Date getLockoutDate() {
+		return _lockoutDate;
+	}
+
+	public void setLockoutDate(Date lockoutDate) {
+		if (((lockoutDate == null) && (_lockoutDate != null)) ||
+				((lockoutDate != null) && (_lockoutDate == null)) ||
+				((lockoutDate != null) && (_lockoutDate != null) &&
+				!lockoutDate.equals(_lockoutDate))) {
+			_lockoutDate = lockoutDate;
 		}
 	}
 
@@ -464,6 +536,8 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setPasswordEncrypted(getPasswordEncrypted());
 		clone.setPasswordExpirationDate(getPasswordExpirationDate());
 		clone.setPasswordReset(getPasswordReset());
+		clone.setPasswordModifiedDate(getPasswordModifiedDate());
+		clone.setGraceLoginCount(getGraceLoginCount());
 		clone.setScreenName(getScreenName());
 		clone.setEmailAddress(getEmailAddress());
 		clone.setLanguageId(getLanguageId());
@@ -474,7 +548,10 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setLoginIP(getLoginIP());
 		clone.setLastLoginDate(getLastLoginDate());
 		clone.setLastLoginIP(getLastLoginIP());
+		clone.setLastFailedLoginDate(getLastFailedLoginDate());
 		clone.setFailedLoginAttempts(getFailedLoginAttempts());
+		clone.setLockout(getLockout());
+		clone.setLockoutDate(getLockoutDate());
 		clone.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
 		clone.setActive(getActive());
 
@@ -538,6 +615,8 @@ public class UserModelImpl extends BaseModelImpl {
 	private boolean _passwordEncrypted;
 	private Date _passwordExpirationDate;
 	private boolean _passwordReset;
+	private Date _passwordModifiedDate;
+	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;
 	private String _languageId;
@@ -548,7 +627,10 @@ public class UserModelImpl extends BaseModelImpl {
 	private String _loginIP;
 	private Date _lastLoginDate;
 	private String _lastLoginIP;
+	private Date _lastFailedLoginDate;
 	private int _failedLoginAttempts;
+	private boolean _lockout;
+	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
 	private boolean _active;
 }

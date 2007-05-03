@@ -1068,6 +1068,8 @@ create table User_ (
 	passwordEncrypted BOOLEAN,
 	passwordExpirationDate DATE null,
 	passwordReset BOOLEAN,
+	passwordModifiedDate DATE null,
+	graceLoginCount INTEGER,
 	screenName VARCHAR(75) null,
 	emailAddress VARCHAR(75) null,
 	languageId VARCHAR(75) null,
@@ -1078,7 +1080,10 @@ create table User_ (
 	loginIP VARCHAR(75) null,
 	lastLoginDate DATE null,
 	lastLoginIP VARCHAR(75) null,
+	lastFailedLoginDate DATE null,
 	failedLoginAttempts INTEGER,
+	lockout BOOLEAN,
+	lockoutDate DATE null,
 	agreedToTermsOfUse BOOLEAN,
 	active_ BOOLEAN
 );

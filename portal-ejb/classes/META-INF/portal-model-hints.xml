@@ -413,6 +413,8 @@
 		<field name="passwordEncrypted" type="boolean" />
 		<field name="passwordExpirationDate" type="Date" />
 		<field name="passwordReset" type="boolean" />
+		<field name="passwordModifiedDate" type="Date" />
+		<field name="graceLoginCount" type="int" />
 		<field name="screenName" type="String" />
 		<field name="emailAddress" type="String" />
 		<field name="languageId" type="String" />
@@ -425,7 +427,10 @@
 		<field name="loginIP" type="String" />
 		<field name="lastLoginDate" type="Date" />
 		<field name="lastLoginIP" type="String" />
+		<field name="lastFailedLoginDate" type="Date" />
 		<field name="failedLoginAttempts" type="int" />
+		<field name="lockout" type="boolean" />
+		<field name="lockoutDate" type="Date" />
 		<field name="agreedToTermsOfUse" type="boolean" />
 		<field name="active" type="boolean" />
 	</model>

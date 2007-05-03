@@ -99,6 +99,17 @@ public class UserJSONSerializer {
 
 		jsonObj.put("passwordReset", model.getPasswordReset());
 
+		Date passwordModifiedDate = model.getPasswordModifiedDate();
+
+		if (passwordModifiedDate == null) {
+			jsonObj.put("passwordModifiedDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("passwordModifiedDate", passwordModifiedDate.toString());
+		}
+
+		jsonObj.put("graceLoginCount", model.getGraceLoginCount());
+
 		String screenName = model.getScreenName();
 
 		if (screenName == null) {
@@ -189,7 +200,27 @@ public class UserJSONSerializer {
 			jsonObj.put("lastLoginIP", lastLoginIP.toString());
 		}
 
+		Date lastFailedLoginDate = model.getLastFailedLoginDate();
+
+		if (lastFailedLoginDate == null) {
+			jsonObj.put("lastFailedLoginDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("lastFailedLoginDate", lastFailedLoginDate.toString());
+		}
+
 		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
+		jsonObj.put("lockout", model.getLockout());
+
+		Date lockoutDate = model.getLockoutDate();
+
+		if (lockoutDate == null) {
+			jsonObj.put("lockoutDate", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("lockoutDate", lockoutDate.toString());
+		}
+
 		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
 		jsonObj.put("active", model.getActive());
 

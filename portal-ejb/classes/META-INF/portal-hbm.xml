@@ -434,6 +434,8 @@
 		<property name="passwordEncrypted" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="passwordExpirationDate" />
 		<property name="passwordReset" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="passwordModifiedDate" />
+		<property name="graceLoginCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="screenName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="emailAddress" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="languageId" type="com.liferay.util.dao.hibernate.StringType" />
@@ -444,7 +446,10 @@
 		<property name="loginIP" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="lastLoginDate" />
 		<property name="lastLoginIP" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="lastFailedLoginDate" />
 		<property name="failedLoginAttempts" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="lockout" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="lockoutDate" />
 		<property name="agreedToTermsOfUse" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
