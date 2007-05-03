@@ -263,15 +263,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		Role role = RoleFinder.findByC_N(companyId, name);
 
 		if (inherited) {
-			return UserUtil.containsRole(userId, role.getRoleId());
-		}
-		else {
 			if (RoleFinder.countByR_U(role.getRoleId(), userId) > 0) {
 				return true;
 			}
 			else {
 				return false;
 			}
+		}
+		else {
+			return UserUtil.containsRole(userId, role.getRoleId());
 		}
 	}
 
