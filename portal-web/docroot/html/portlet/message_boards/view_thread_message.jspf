@@ -55,7 +55,7 @@
 
 								<br /><br />
 							</c:if>
-	
+
 							<bean:message key="rank" />: <%= rank %><br />
 							<bean:message key="posts" />: <%= posts %><br />
 							<bean:message key="joined" />: <%= dateFormatDate.format(user2.getCreateDate()) %>
@@ -142,9 +142,9 @@
 										<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
 										<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
 									</portlet:renderURL>
-			
+
 									<liferay-ui:icon image="reply" url="<%= replyURL %>" />
-			
+
 									<a href="<%= replyURL.toString() %>"><bean:message key="reply" /></a>
 								</li>
 								<li>
@@ -156,9 +156,9 @@
 										<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
 										<portlet:param name="quote" value="true" />
 									</portlet:renderURL>
-			
+
 									<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
-			
+
 									<a href="<%= quoteURL.toString() %>"><bean:message key="reply-with-quote" /></a>
 								</li>
 							</c:if>

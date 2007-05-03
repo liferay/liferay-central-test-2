@@ -31,7 +31,9 @@
 
 <%
 Locale locale = renderRequest.getLocale();
-ResourceBundle res = portletConfig.getResourceBundle(locale);
+ResourceBundle bundle = portletConfig.getResourceBundle(locale);
 %>
 
-<p><%= res.getString("welcome") %></p>
+<p>
+	<%= bundle.getString("welcome") %>
+</p>
