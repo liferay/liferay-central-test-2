@@ -22,16 +22,16 @@
 
 	<swimlane name="salesman">
 		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
-			<type>group</type>
-			<companyId>liferay.com</companyId>
+			<type>community</type>
+			<companyId>1</companyId>
 			<id>3</id>
 		</assignment>
 	</swimlane>
 
 	<swimlane name="accountant">
 		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
-			<type>group</type>
-			<companyId>liferay.com</companyId>
+			<type>community</type>
+			<companyId>1</companyId>
 			<name>Support</name>
 		</assignment>
 	</swimlane>
@@ -39,7 +39,7 @@
 	<swimlane name="shipper">
 		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
 			<type>user</type>
-			<companyId>liferay.com</companyId>
+			<companyId>1</companyId>
 			<name>test.lax.2@liferay.com</name>
 		</assignment>
 	</swimlane>

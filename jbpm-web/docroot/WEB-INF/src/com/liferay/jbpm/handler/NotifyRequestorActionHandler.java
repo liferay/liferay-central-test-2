@@ -25,6 +25,7 @@ package com.liferay.jbpm.handler;
 import com.liferay.client.portal.model.UserSoap;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import org.jbpm.graph.def.ActionHandler;
@@ -64,7 +65,8 @@ public class NotifyRequestorActionHandler
 		String displayMsg = null;
 
 		try {
-			UserSoap user = getUserService().getUserById(userId);
+			UserSoap user = getUserService().getUserById(
+				GetterUtil.getLong(userId));
 
 			displayMsg = StringUtil.replace(
 				msg, "${id}", user.getEmailAddress());

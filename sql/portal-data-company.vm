@@ -3,10 +3,14 @@
 ##
 
 #set($companyId = $counter.get())
-#set($accountId = $counter.get())
+
+#set($testUserId = $counter.get())
+#set($testContactId = $counter.get())
 
 #set($defaultUserId = $counter.get())
 #set($defaultContactId = $counter.get())
+
+#set($accountId = $counter.get())
 
 insert into Company (companyId, accountId, webId, portalURL, homeURL, mx) values ($companyId, $accountId, 'liferay.com', 'localhost:8080', 'localhost:8080', 'liferay.com');
 insert into Account_ (accountId, companyId, userId, userName, createDate, modifiedDate, parentAccountId, name, legalName, legalId, legalType, sicCode, tickerSymbol, industry, type_, size_) values ($accountId, $companyId, $defaultUserId, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Liferay', 'Liferay, Inc.', '', '', '', '', '', '', '');
@@ -165,9 +169,6 @@ insert into Contact_ (contactId, companyId, userId, userName, createDate, modifi
 ##
 ## User (test@liferay.com)
 ##
-
-#set($testUserId = $counter.get())
-#set($testContactId = $counter.get())
 
 insert into User_ (userId, companyId, createDate, modifiedDate, defaultUser, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ($testUserId, $companyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, FALSE, $testContactId, 'test', FALSE, FALSE, 'joebloggs', 'test@liferay.com', 'Welcome Joe Bloggs!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($testContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Joe', '', 'Bloggs', TRUE, '01/01/1970');

@@ -25,6 +25,7 @@ package com.liferay.jbpm.handler;
 import com.liferay.client.portal.model.UserSoap;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.util.GetterUtil;
 
 import org.jbpm.graph.def.ActionHandler;
 import org.jbpm.graph.def.ProcessDefinition;
@@ -58,7 +59,8 @@ public class SendEmailActionHandler
 
 		String userId = buyerSwimlaneInstance.getActorId();
 
-		UserSoap user = getUserService().getUserById(userId);
+		UserSoap user = getUserService().getUserById(
+			GetterUtil.getLong(userId));
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Sending email to " + user.getEmailAddress());

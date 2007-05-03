@@ -23,8 +23,8 @@
 	<swimlane name="approver">
 		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
 			<type>user</type>
-			<companyId>liferay.com</companyId>
-			<id>liferay.com.1</id>
+			<companyId>id</companyId>
+			<id>2</id>
 		</assignment>
 	</swimlane>
 

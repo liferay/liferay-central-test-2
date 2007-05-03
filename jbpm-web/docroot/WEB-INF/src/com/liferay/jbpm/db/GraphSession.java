@@ -237,13 +237,13 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				index = 1;
 			}
 
-			String endDateCheck = "(JBPM_TaskInstance.END_ IS NULL) ";
+			String endDateCheck = "(JBPM_TASKINSTANCE.END_ IS NULL) ";
 
 			if (!hideEndedTasks) {
 				endDateCheck =
-					"((JBPM_TaskInstance.END_ >= ? " +
+					"((JBPM_TASKINSTANCE.END_ >= ? " +
 							"[$AND_OR_NULL_CHECK$]) AND " +
-						"(JBPM_TaskInstance.END_ <= ? [$AND_OR_NULL_CHECK$])) ";
+						"(JBPM_TASKINSTANCE.END_ <= ? [$AND_OR_NULL_CHECK$])) ";
 			}
 
 			sql = StringUtil.replace(sql, "[$END_DATE_CHECK$]", endDateCheck);
@@ -420,13 +420,13 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			sql += "ORDER BY taskActorId DESC, taskCreate ASC";
 
-			String endDateCheck = "(JBPM_TaskInstance.END_ IS NULL) ";
+			String endDateCheck = "(JBPM_TASKINSTANCE.END_ IS NULL) ";
 
 			if (!hideEndedTasks) {
 				endDateCheck =
-					"((JBPM_TaskInstance.END_ >= ? " +
+					"((JBPM_TASKINSTANCE.END_ >= ? " +
 							"[$AND_OR_NULL_CHECK$]) AND " +
-						"(JBPM_TaskInstance.END_ <= ? [$AND_OR_NULL_CHECK$])) ";
+						"(JBPM_TASKINSTANCE.END_ <= ? [$AND_OR_NULL_CHECK$])) ";
 			}
 
 			sql = StringUtil.replace(sql, "[$END_DATE_CHECK$]", endDateCheck);

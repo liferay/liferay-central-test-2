@@ -50,16 +50,16 @@ public class IdentityAssignmentHandler
 					assignable.setActorId(id);
 				}
 				else {
-					UserSoap user =
-						getUserService().getUserByEmailAddress(companyId, name);
+					UserSoap user = getUserService().getUserByEmailAddress(
+						GetterUtil.getLong(companyId), name);
 
-					assignable.setActorId(user.getUserId());
+					assignable.setActorId(String.valueOf(user.getUserId()));
 				}
 			}
-			else if (type.equals("group")) {
+			else if (type.equals("community")) {
 				if (Validator.isNull(id)) {
-					GroupSoap group =
-						getGroupService().getGroup(companyId, name);
+					GroupSoap group = getGroupService().getGroup(
+						GetterUtil.getLong(companyId), name);
 
 					id = String.valueOf(group.getGroupId());
 				}
@@ -70,24 +70,26 @@ public class IdentityAssignmentHandler
 				String[] actorIds = new String[users.length];
 
 				for (int i = 0; i < users.length; i++) {
-					actorIds[i] = users[i].getUserId();
+					actorIds[i] = String.valueOf(users[i].getUserId());
 				}
 
 				assignable.setPooledActors(actorIds);
 			}
 			else if (type.equals("role")) {
 				if (Validator.isNull(id)) {
-					RoleSoap role = getRoleService().getRole(companyId, name);
+					RoleSoap role = getRoleService().getRole(
+						GetterUtil.getLong(companyId), name);
 
-					id = role.getRoleId();
+					id = String.valueOf(role.getRoleId());
 				}
 
-				UserSoap[] users = getUserService().getRoleUsers(id);
+				UserSoap[] users = getUserService().getRoleUsers(
+					GetterUtil.getLong(id));
 
 				String[] actorIds = new String[users.length];
 
 				for (int i = 0; i < users.length; i++) {
-					actorIds[i] = users[i].getUserId();
+					actorIds[i] = String.valueOf(users[i].getUserId());
 				}
 
 				assignable.setPooledActors(actorIds);
