@@ -947,12 +947,12 @@ public class PortalUtil {
 		return getSelectedUser(getHttpServletRequest(req));
 	}
 
-	public static String[] getSystemGroups() {
-		return _instance._getSystemGroups();
-	}
-
 	public static String[] getSystemCommunityRoles() {
 		return _instance._getSystemCommunityRoles();
+	}
+
+	public static String[] getSystemGroups() {
+		return _instance._getSystemGroups();
 	}
 
 	public static String[] getSystemRoles() {
@@ -1696,12 +1696,12 @@ public class PortalUtil {
 		_reservedParams.add("p_p_col_count");
 	}
 
-	private String[] _getSystemGroups() {
-		return _allSystemGroups;
-	}
-
 	private String[] _getSystemCommunityRoles() {
 		return _allSystemCommunityRoles;
+	}
+
+	private String[] _getSystemGroups() {
+		return _allSystemGroups;
 	}
 
 	private String[] _getSystemRoles() {
@@ -1755,11 +1755,11 @@ public class PortalUtil {
 
 	private static PortalUtil _instance = new PortalUtil();
 
-	private String[] _allSystemGroups;
 	private String[] _allSystemCommunityRoles;
+	private String[] _allSystemGroups;
 	private String[] _allSystemRoles;
-	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemCommunityRoles;
+	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemRoles;
 	private Set _reservedParams;
 

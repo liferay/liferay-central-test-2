@@ -200,12 +200,13 @@ public class ActionUtil {
 	public static void getPasswordPolicy(HttpServletRequest req)
 		throws Exception {
 
-		String passwordPolicyId = ParamUtil.getString(req, "passwordPolicyId");
+		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
 
 		PasswordPolicy passwordPolicy = null;
 
-		if (Validator.isNotNull(passwordPolicyId)) {
-			passwordPolicy = PasswordPolicyLocalServiceUtil.getPolicy(Long.valueOf(passwordPolicyId).longValue());
+		if (passwordPolicyId > 0) {
+			passwordPolicy = PasswordPolicyLocalServiceUtil.getPasswordPolicy(
+				passwordPolicyId);
 		}
 
 		req.setAttribute(WebKeys.PASSWORD_POLICY, passwordPolicy);
