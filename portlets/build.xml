@@ -11,7 +11,9 @@
 
 	<target name="clean-module">
 		<delete file="${project.dir}/${module.name}.war" failonerror="false" />
-		<delete dir="${module.name}.war/WEB-INF/classes/com" failonerror="false" />
+		<delete failonerror="false">
+			<fileset dir="${module.name}.war/WEB-INF/classes/com" excludes="**/*.properties,**/*.xml" />
+		</delete>
 
 		<delete failonerror="false">
 			<fileset dir="${module.name}.war/WEB-INF/lib" includes="util-bridges.jar,util-java.jar,util-taglib.jar" />
