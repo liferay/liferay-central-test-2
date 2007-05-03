@@ -83,6 +83,8 @@ public class PasswordPolicyJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
+		jsonObj.put("defaultPolicy", model.getDefaultPolicy());
+
 		String name = model.getName();
 
 		if (name == null) {

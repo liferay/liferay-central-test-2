@@ -58,21 +58,35 @@ public interface PasswordPolicyLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy addPolicy(long userId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String storageScheme, boolean changeable,
-		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount)
+		boolean defaultPolicy, java.lang.String name,
+		java.lang.String description, java.lang.String storageScheme,
+		boolean changeable, boolean changeRequired, long minAge,
+		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deletePolicy(long passwordPolicyId)
+	public void checkDefaultPasswordPolicy(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.PasswordPolicy getPolicy(
+	public void deletePasswordPolicy(long passwordPolicyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.PasswordPolicy getDefaultPasswordPolicy(
+		long companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
+		long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long passwordPolicyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -23,14 +23,28 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.DuplicatePasswordPolicyException;
+import com.liferay.portal.NoSuchPasswordPolicyException;
+import com.liferay.portal.NoSuchPasswordPolicyRelException;
+import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordPolicyFinder;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.Validator;
 
 import java.util.Date;
 import java.util.List;
@@ -46,12 +60,13 @@ public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
 	public PasswordPolicy addPolicy(
-			long userId, String name, String description, String storageScheme,
-			boolean changeable, boolean changeRequired, long minAge,
-			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-			boolean history, int historyCount, boolean expireable, long maxAge,
-			long warningTime, int graceLimit, boolean lockout, int maxFailure,
-			long lockoutDuration, long resetFailureCount)
+			long userId, boolean defaultPolicy, String name, String description, 
+			String storageScheme, boolean changeable, boolean changeRequired, 
+			long minAge, boolean checkSyntax, boolean allowDictionaryWords, 
+			int minLength, boolean history, int historyCount, 
+			boolean expireable, long maxAge, long warningTime, int graceLimit, 
+			boolean lockout, int maxFailure, long lockoutDuration, 
+			long resetFailureCount)
 		throws PortalException, SystemException {
 
 		// Password policy
@@ -59,7 +74,7 @@ public class PasswordPolicyLocalServiceImpl
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		validate(user.getCompanyId(), name);
+		validate(0, user.getCompanyId(), name);
 
 		long passwordPolicyId = CounterLocalServiceUtil.increment(
 			PasswordPolicy.class.getName());
@@ -72,6 +87,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setUserName(user.getFullName());
 		passwordPolicy.setCreateDate(now);
 		passwordPolicy.setModifiedDate(now);
+		passwordPolicy.setDefaultPolicy(defaultPolicy);
 		passwordPolicy.setName(name);
 		passwordPolicy.setDescription(description);
 		passwordPolicy.setStorageScheme(storageScheme);
@@ -97,20 +113,113 @@ public class PasswordPolicyLocalServiceImpl
 
 		// Resources
 
+		if (!user.isDefaultUser()) {
+			ResourceLocalServiceUtil.addResources(
+				user.getCompanyId(), 0, userId, PasswordPolicy.class.getName(),
+				passwordPolicy.getPasswordPolicyId(), false, false, false);
+		}
+
 		return passwordPolicy;
 	}
 
-	public void deletePolicy(long passwordPolicyId)
+	public void checkDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
+		String defaultPasswordPolicyName = "Default Password Policy";
+
+		try {
+			PasswordPolicyUtil.findByC_N(
+				companyId, defaultPasswordPolicyName);
+		}
+		catch (NoSuchPasswordPolicyException nsppe) {
+			addPolicy(
+				UserLocalServiceUtil.getDefaultUserId(companyId), true, 
+				defaultPasswordPolicyName, defaultPasswordPolicyName, "md5", 
+				true, false, 0, false, true, 6, false, 0, false, 0, 0, 0, false, 
+				0, 0, 0);
+		}
+	}
+
+	public void deletePasswordPolicy(long passwordPolicyId)
+		throws PortalException, SystemException {
+
+		PasswordPolicy passwordPolicy = 
+			PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
+
+		if (passwordPolicy.isDefaultPolicy()) {
+			throw new RequiredPasswordPolicyException();
+		}
+
 		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			passwordPolicy.getCompanyId(), PasswordPolicy.class.getName(),
+			ResourceImpl.SCOPE_INDIVIDUAL, 
+			passwordPolicy.getPasswordPolicyId());
 
 		// Password policy
 
 		PasswordPolicyUtil.remove(passwordPolicyId);
 	}
 
-	public PasswordPolicy getPolicy(long passwordPolicyId)
+	public PasswordPolicy getDefaultPasswordPolicy(long companyId)
+		throws PortalException, SystemException {
+
+		return PasswordPolicyUtil.findByC_DP(companyId, true);
+	}
+
+	public PasswordPolicy getPasswordPolicyByUserId(long userId)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRel passwordPolicyRel = null;
+
+		// Check for password policy specifically assigned to this user
+
+		try {
+			passwordPolicyRel =
+				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+					User.class.getName(), userId);
+
+			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+
+		// Check for password policy specifically assigned to this location
+
+		User user = UserUtil.findByPrimaryKey(userId);
+		long locationId = user.getLocation().getOrganizationId();
+
+		try {
+			passwordPolicyRel =
+				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+					Organization.class.getName(), locationId);
+
+			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+
+		// Check for password policy specifically assigned to this organization
+
+		long organizationId = user.getOrganization().getOrganizationId();
+
+		try {
+			passwordPolicyRel =
+				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+					Organization.class.getName(), organizationId);
+
+			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+
+		// Get default password policy
+
+		return getDefaultPasswordPolicy(user.getCompanyId());
+	}
+
+	public PasswordPolicy getPasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
 		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
@@ -143,10 +252,13 @@ public class PasswordPolicyLocalServiceImpl
 		PasswordPolicy passwordPolicy = PasswordPolicyUtil.findByPrimaryKey(
 			passwordPolicyId);
 
-		validate(passwordPolicy.getCompanyId(), name);
+		if (!passwordPolicy.getDefaultPolicy()) {
+			validate(passwordPolicyId, passwordPolicy.getCompanyId(), name);
+
+			passwordPolicy.setName(name);
+		}
 
 		passwordPolicy.setModifiedDate(now);
-		passwordPolicy.setName(name);
 		passwordPolicy.setDescription(description);
 		passwordPolicy.setStorageScheme(storageScheme);
 		passwordPolicy.setChangeable(changeable);
@@ -172,8 +284,28 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicy;
 	}
 
-	protected void validate(long companyId, String name)
+	protected void validate(long passwordPolicyId, long companyId, String name)
 		throws PortalException, SystemException {
+
+		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
+			(name.indexOf(StringPool.COMMA) != -1) ||
+			(name.indexOf(StringPool.STAR) != -1)) {
+
+			throw new PasswordPolicyNameException();
+		}
+
+		try {
+			PasswordPolicy passwordPolicy =
+				PasswordPolicyUtil.findByC_N(companyId, name);
+
+			if ((passwordPolicyId <= 0) ||
+				(passwordPolicy.getPasswordPolicyId() != passwordPolicyId)) {
+
+				throw new DuplicatePasswordPolicyException();
+			}
+		}
+		catch (NoSuchPasswordPolicyException nsge) {
+		}
 	}
 
 }

@@ -151,45 +151,30 @@ public class PasswordPolicyUtil {
 		return getPersistence().fetchByPrimaryKey(passwordPolicyId);
 	}
 
-	public static java.util.List findByName(java.lang.String name)
+	public static com.liferay.portal.model.PasswordPolicy findByC_DP(
+		long companyId, boolean defaultPolicy)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordPolicyException {
+		return getPersistence().findByC_DP(companyId, defaultPolicy);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicy fetchByC_DP(
+		long companyId, boolean defaultPolicy)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByName(name);
+		return getPersistence().fetchByC_DP(companyId, defaultPolicy);
 	}
 
-	public static java.util.List findByName(java.lang.String name, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByName(name, begin, end);
+	public static com.liferay.portal.model.PasswordPolicy findByC_N(
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordPolicyException {
+		return getPersistence().findByC_N(companyId, name);
 	}
 
-	public static java.util.List findByName(java.lang.String name, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portal.model.PasswordPolicy fetchByC_N(
+		long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByName(name, begin, end, obc);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicy findByName_First(
-		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPasswordPolicyException {
-		return getPersistence().findByName_First(name, obc);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicy findByName_Last(
-		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPasswordPolicyException {
-		return getPersistence().findByName_Last(name, obc);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicy[] findByName_PrevAndNext(
-		long passwordPolicyId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchPasswordPolicyException {
-		return getPersistence().findByName_PrevAndNext(passwordPolicyId, name,
-			obc);
+		return getPersistence().fetchByC_N(companyId, name);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -221,18 +206,30 @@ public class PasswordPolicyUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByName(java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByName(name);
+	public static void removeByC_DP(long companyId, boolean defaultPolicy)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordPolicyException {
+		getPersistence().removeByC_DP(companyId, defaultPolicy);
+	}
+
+	public static void removeByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordPolicyException {
+		getPersistence().removeByC_N(companyId, name);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByName(java.lang.String name)
+	public static int countByC_DP(long companyId, boolean defaultPolicy)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByName(name);
+		return getPersistence().countByC_DP(companyId, defaultPolicy);
+	}
+
+	public static int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_N(companyId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

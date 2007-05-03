@@ -61,6 +61,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "defaultPolicy", new Integer(Types.BOOLEAN) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "storageScheme", new Integer(Types.VARCHAR) },
@@ -180,6 +181,20 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public boolean getDefaultPolicy() {
+		return _defaultPolicy;
+	}
+
+	public boolean isDefaultPolicy() {
+		return _defaultPolicy;
+	}
+
+	public void setDefaultPolicy(boolean defaultPolicy) {
+		if (defaultPolicy != _defaultPolicy) {
+			_defaultPolicy = defaultPolicy;
 		}
 	}
 
@@ -443,6 +458,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setDefaultPolicy(getDefaultPolicy());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setStorageScheme(getStorageScheme());
@@ -520,6 +536,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _defaultPolicy;
 	private String _name;
 	private String _description;
 	private String _storageScheme;

@@ -263,6 +263,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="defaultPolicy" type="boolean" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />

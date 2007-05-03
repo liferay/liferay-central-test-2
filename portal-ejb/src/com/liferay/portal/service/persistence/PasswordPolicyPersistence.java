@@ -185,50 +185,33 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByName(String name) throws SystemException {
-		Session session = null;
+	public PasswordPolicy findByC_DP(long companyId, boolean defaultPolicy)
+		throws NoSuchPasswordPolicyException, SystemException {
+		PasswordPolicy passwordPolicy = fetchByC_DP(companyId, defaultPolicy);
 
-		try {
-			session = openSession();
+		if (passwordPolicy == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No PasswordPolicy exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("defaultPolicy=");
+			msg.append(defaultPolicy);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PasswordPolicy WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
 			}
 
-			return q.list();
+			throw new NoSuchPasswordPolicyException(msg.toString());
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return passwordPolicy;
 	}
 
-	public List findByName(String name, int begin, int end)
+	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
-		return findByName(name, begin, end, null);
-	}
-
-	public List findByName(String name, int begin, int end,
-		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -236,31 +219,27 @@ public class PasswordPolicyPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.PasswordPolicy WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("defaultPolicy = ?");
 			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+			q.setBoolean(queryPos++, defaultPolicy);
 
-			if (name != null) {
-				q.setString(queryPos++, name);
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
 			}
 
-			return QueryUtil.list(q, getDialect(), begin, end);
+			PasswordPolicy passwordPolicy = (PasswordPolicy)list.get(0);
+
+			return passwordPolicy;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -270,48 +249,33 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public PasswordPolicy findByName_First(String name, OrderByComparator obc)
+	public PasswordPolicy findByC_N(long companyId, String name)
 		throws NoSuchPasswordPolicyException, SystemException {
-		List list = findByName(name, 0, 1, obc);
+		PasswordPolicy passwordPolicy = fetchByC_N(companyId, name);
 
-		if (list.size() == 0) {
+		if (passwordPolicy == null) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PasswordPolicy exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
 			msg.append("name=");
 			msg.append(name);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
 			throw new NoSuchPasswordPolicyException(msg.toString());
 		}
-		else {
-			return (PasswordPolicy)list.get(0);
-		}
+
+		return passwordPolicy;
 	}
 
-	public PasswordPolicy findByName_Last(String name, OrderByComparator obc)
-		throws NoSuchPasswordPolicyException, SystemException {
-		int count = countByName(name);
-		List list = findByName(name, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PasswordPolicy exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPasswordPolicyException(msg.toString());
-		}
-		else {
-			return (PasswordPolicy)list.get(0);
-		}
-	}
-
-	public PasswordPolicy[] findByName_PrevAndNext(long passwordPolicyId,
-		String name, OrderByComparator obc)
-		throws NoSuchPasswordPolicyException, SystemException {
-		PasswordPolicy passwordPolicy = findByPrimaryKey(passwordPolicyId);
-		int count = countByName(name);
+	public PasswordPolicy fetchByC_N(long companyId, String name)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -319,6 +283,8 @@ public class PasswordPolicyPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.PasswordPolicy WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
 
 			if (name == null) {
 				query.append("name IS NULL");
@@ -329,28 +295,25 @@ public class PasswordPolicyPersistence extends BasePersistence {
 
 			query.append(" ");
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					passwordPolicy);
-			PasswordPolicy[] array = new PasswordPolicyImpl[3];
-			array[0] = (PasswordPolicy)objArray[0];
-			array[1] = (PasswordPolicy)objArray[1];
-			array[2] = (PasswordPolicy)objArray[2];
+			List list = q.list();
 
-			return array;
+			if (list.size() == 0) {
+				return null;
+			}
+
+			PasswordPolicy passwordPolicy = (PasswordPolicy)list.get(0);
+
+			return passwordPolicy;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -435,13 +398,16 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByName(String name) throws SystemException {
-		Iterator itr = findByName(name).iterator();
+	public void removeByC_DP(long companyId, boolean defaultPolicy)
+		throws NoSuchPasswordPolicyException, SystemException {
+		PasswordPolicy passwordPolicy = findByC_DP(companyId, defaultPolicy);
+		remove(passwordPolicy);
+	}
 
-		while (itr.hasNext()) {
-			PasswordPolicy passwordPolicy = (PasswordPolicy)itr.next();
-			remove(passwordPolicy);
-		}
+	public void removeByC_N(long companyId, String name)
+		throws NoSuchPasswordPolicyException, SystemException {
+		PasswordPolicy passwordPolicy = findByC_N(companyId, name);
+		remove(passwordPolicy);
 	}
 
 	public void removeAll() throws SystemException {
@@ -452,7 +418,8 @@ public class PasswordPolicyPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByName(String name) throws SystemException {
+	public int countByC_DP(long companyId, boolean defaultPolicy)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -461,6 +428,50 @@ public class PasswordPolicyPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.PasswordPolicy WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("defaultPolicy = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+			q.setBoolean(queryPos++, defaultPolicy);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_N(long companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.PasswordPolicy WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
 
 			if (name == null) {
 				query.append("name IS NULL");
@@ -475,6 +486,7 @@ public class PasswordPolicyPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);

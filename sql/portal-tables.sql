@@ -576,6 +576,7 @@ create table PasswordPolicy (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	defaultPolicy BOOLEAN,
 	name VARCHAR(75) null,
 	description STRING null,
 	storageScheme VARCHAR(75) null,

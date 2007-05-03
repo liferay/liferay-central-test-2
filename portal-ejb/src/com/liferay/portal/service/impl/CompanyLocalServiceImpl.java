@@ -47,6 +47,7 @@ import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
@@ -243,6 +244,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		// System groups
 
 		GroupLocalServiceUtil.checkSystemGroups(companyId);
+
+		// Default password policy
+
+		PasswordPolicyLocalServiceUtil.checkDefaultPasswordPolicy(companyId);
 
 		// System roles
 

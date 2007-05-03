@@ -54,6 +54,7 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setDefaultPolicy(model.getDefaultPolicy());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setStorageScheme(model.getStorageScheme());
@@ -146,6 +147,18 @@ public class PasswordPolicySoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public boolean getDefaultPolicy() {
+		return _defaultPolicy;
+	}
+
+	public boolean isDefaultPolicy() {
+		return _defaultPolicy;
+	}
+
+	public void setDefaultPolicy(boolean defaultPolicy) {
+		_defaultPolicy = defaultPolicy;
 	}
 
 	public String getName() {
@@ -346,6 +359,7 @@ public class PasswordPolicySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _defaultPolicy;
 	private String _name;
 	private String _description;
 	private String _storageScheme;

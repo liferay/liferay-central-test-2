@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyService;
@@ -49,15 +50,17 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
 		PortalPermission.check(
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
 		return PasswordPolicyLocalServiceUtil.addPolicy(
-			getUserId(), name, description, storageScheme, changeable,
-			changeRequired, minAge, checkSyntax, allowDictionaryWords,
-			minLength, history, historyCount, expireable, maxAge, warningTime,
-			graceLimit, lockout, maxFailure, lockoutDuration,
-			resetFailureCount);
+			user.getUserId(), false, name, description, storageScheme, 
+			changeable, changeRequired, minAge, checkSyntax, 
+			allowDictionaryWords, minLength, history, historyCount, expireable,
+			maxAge, warningTime, graceLimit, lockout, maxFailure,
+			lockoutDuration, resetFailureCount);
 	}
 
 	public void deletePolicy(long passwordPolicyId)
@@ -66,7 +69,7 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 		PasswordPolicyPermission.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.DELETE);
 
-		PasswordPolicyLocalServiceUtil.deletePolicy(passwordPolicyId);
+		PasswordPolicyLocalServiceUtil.deletePasswordPolicy(passwordPolicyId);
 	}
 
 	public PasswordPolicy updatePolicy(

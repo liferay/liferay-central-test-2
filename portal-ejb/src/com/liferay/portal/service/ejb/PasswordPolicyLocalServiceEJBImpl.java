@@ -67,33 +67,56 @@ public class PasswordPolicyLocalServiceEJBImpl
 	}
 
 	public com.liferay.portal.model.PasswordPolicy addPolicy(long userId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String storageScheme, boolean changeable,
-		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount)
+		boolean defaultPolicy, java.lang.String name,
+		java.lang.String description, java.lang.String storageScheme,
+		boolean changeable, boolean changeRequired, long minAge,
+		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PasswordPolicyLocalServiceFactory.getTxImpl().addPolicy(userId,
-			name, description, storageScheme, changeable, changeRequired,
-			minAge, checkSyntax, allowDictionaryWords, minLength, history,
-			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
-			maxFailure, lockoutDuration, resetFailureCount);
+			defaultPolicy, name, description, storageScheme, changeable,
+			changeRequired, minAge, checkSyntax, allowDictionaryWords,
+			minLength, history, historyCount, expireable, maxAge, warningTime,
+			graceLimit, lockout, maxFailure, lockoutDuration, resetFailureCount);
 	}
 
-	public void deletePolicy(long passwordPolicyId)
+	public void checkDefaultPasswordPolicy(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		PasswordPolicyLocalServiceFactory.getTxImpl().deletePolicy(passwordPolicyId);
+		PasswordPolicyLocalServiceFactory.getTxImpl()
+										 .checkDefaultPasswordPolicy(companyId);
 	}
 
-	public com.liferay.portal.model.PasswordPolicy getPolicy(
+	public void deletePasswordPolicy(long passwordPolicyId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PasswordPolicyLocalServiceFactory.getTxImpl().deletePasswordPolicy(passwordPolicyId);
+	}
+
+	public com.liferay.portal.model.PasswordPolicy getDefaultPasswordPolicy(
+		long companyId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PasswordPolicyLocalServiceFactory.getTxImpl()
+												.getDefaultPasswordPolicy(companyId);
+	}
+
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
+		long userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PasswordPolicyLocalServiceFactory.getTxImpl()
+												.getPasswordPolicyByUserId(userId);
+	}
+
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
 		long passwordPolicyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return PasswordPolicyLocalServiceFactory.getTxImpl().getPolicy(passwordPolicyId);
+		return PasswordPolicyLocalServiceFactory.getTxImpl().getPasswordPolicy(passwordPolicyId);
 	}
 
 	public java.util.List search(long companyId, java.lang.String name,

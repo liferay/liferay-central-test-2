@@ -75,6 +75,12 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public boolean getDefaultPolicy();
+
+	public boolean isDefaultPolicy();
+
+	public void setDefaultPolicy(boolean defaultPolicy);
+
 	public String getName();
 
 	public void setName(String name);

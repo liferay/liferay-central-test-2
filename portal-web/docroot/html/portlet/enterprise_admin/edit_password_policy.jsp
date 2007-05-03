@@ -31,6 +31,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PAS
 
 long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "passwordPolicyId");
 
+boolean defaultPolicy = BeanParamUtil.getBoolean(passwordPolicy, request, "defaultPolicy");
 long minAge = BeanParamUtil.getLong(passwordPolicy, request, "minAge");
 int historyCount = BeanParamUtil.getInteger(passwordPolicy, request, "historyCount");
 long maxAge = BeanParamUtil.getLong(passwordPolicy, request, "maxAge");
@@ -91,7 +92,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 				<bean:message key="name" />
 			</td>
 			<td>
-				<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="name" />
+				<liferay-ui:input-field disabled="<%= defaultPolicy %>" model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="name" />
 			</td>
 		</tr>
 		<tr>

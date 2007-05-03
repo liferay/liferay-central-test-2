@@ -596,6 +596,7 @@
 
 		<!-- Other fields -->
 
+		<column name="defaultPolicy" type="boolean" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="storageScheme" type="String" />
@@ -619,7 +620,12 @@
 
 		<!-- Finder methods -->
 
-		<finder name="Name" return-type="Collection">
+		<finder name="C_DP" return-type="PasswordPolicy">
+			<finder-column name="companyId" />
+			<finder-column name="defaultPolicy" />
+		</finder>
+		<finder name="C_N" return-type="PasswordPolicy">
+			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
 	</entity>
@@ -1285,6 +1291,7 @@
 		<exception>ContactLastName</exception>
 		<exception>DuplicateGroup</exception>
 		<exception>DuplicateOrganization</exception>
+		<exception>DuplicatePasswordPolicy</exception>
 		<exception>DuplicateRole</exception>
 		<exception>DuplicateUserEmailAddress</exception>
 		<exception>DuplicateUserGroup</exception>
@@ -1305,6 +1312,7 @@
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
 		<exception>OrganizationParent</exception>
+		<exception>PasswordPolicyName</exception>
 		<exception>PhoneNumber</exception>
 		<exception>PortletActive</exception>
 		<exception>PortletDefaultPreferences</exception>

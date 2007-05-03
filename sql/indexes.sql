@@ -130,7 +130,8 @@ create index IX_834BCEB6 on Organization_ (companyId);
 create index IX_E301BDF5 on Organization_ (companyId, name);
 create index IX_418E4522 on Organization_ (companyId, parentOrganizationId);
 
-create index IX_61941D2 on PasswordPolicy (name);
+create index IX_2C1142E on PasswordPolicy (companyId, defaultPolicy);
+create index IX_3FBFA9F4 on PasswordPolicy (companyId, name);
 
 create index IX_C3A17327 on PasswordPolicyRel (classNameId, classPK);
 create index IX_ED7CF243 on PasswordPolicyRel (passwordPolicyId, classNameId, classPK);

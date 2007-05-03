@@ -60,7 +60,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 </c:if>
 
-<c:if test="<%= PasswordPolicyPermission.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">
+<c:if test="<%= !passwordPolicy.getDefaultPolicy() && PasswordPolicyPermission.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
