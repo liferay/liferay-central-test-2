@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
-	<display-name>sample-jsf-sun-portlet</display-name>
 	<context-param>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
@@ -15,37 +14,14 @@
 		<param-value>false</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
-	</listener>
-	<listener>
 		<listener-class>com.liferay.util.jsf.sun.faces.config.LiferayConfigureListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>sample_jsf_sun_portlet</servlet-name>
-		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>com.sun.faces.portlet.FacesPortlet</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>FacesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>sample_jsf_sun_portlet</servlet-name>
-		<url-pattern>/sample_jsf_sun_portlet/*</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FacesServlet</servlet-name>
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
-	<jsp-config>
-		<taglib>
-			<taglib-uri>http://java.sun.com/portlet</taglib-uri>
-			<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
-		</taglib>
-	</jsp-config>
 </web-app>

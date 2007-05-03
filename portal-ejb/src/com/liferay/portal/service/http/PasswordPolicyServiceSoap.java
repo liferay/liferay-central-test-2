@@ -77,7 +77,7 @@ import java.rmi.RemoteException;
  *
  */
 public class PasswordPolicyServiceSoap {
-	public static com.liferay.portal.model.PasswordPolicySoap addPolicy(
+	public static com.liferay.portal.model.PasswordPolicySoap addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageScheme, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
@@ -86,7 +86,7 @@ public class PasswordPolicyServiceSoap {
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount) throws RemoteException {
 		try {
-			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.addPolicy(name,
+			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.addPasswordPolicy(name,
 					description, storageScheme, changeable, changeRequired,
 					minAge, checkSyntax, allowDictionaryWords, minLength,
 					history, historyCount, expireable, maxAge, warningTime,
@@ -101,10 +101,10 @@ public class PasswordPolicyServiceSoap {
 		}
 	}
 
-	public static void deletePolicy(long passwordPolicyId)
+	public static void deletePasswordPolicy(long passwordPolicyId)
 		throws RemoteException {
 		try {
-			PasswordPolicyServiceUtil.deletePolicy(passwordPolicyId);
+			PasswordPolicyServiceUtil.deletePasswordPolicy(passwordPolicyId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -112,7 +112,7 @@ public class PasswordPolicyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.PasswordPolicySoap updatePolicy(
+	public static com.liferay.portal.model.PasswordPolicySoap updatePasswordPolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,
@@ -121,7 +121,7 @@ public class PasswordPolicyServiceSoap {
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
 		long lockoutDuration, long resetFailureCount) throws RemoteException {
 		try {
-			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.updatePolicy(passwordPolicyId,
+			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.updatePasswordPolicy(passwordPolicyId,
 					name, description, storageScheme, changeable,
 					changeRequired, minAge, checkSyntax, allowDictionaryWords,
 					minLength, history, historyCount, expireable, maxAge,

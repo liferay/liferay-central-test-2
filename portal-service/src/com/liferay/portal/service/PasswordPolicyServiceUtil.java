@@ -49,7 +49,7 @@ package com.liferay.portal.service;
  *
  */
 public class PasswordPolicyServiceUtil {
-	public static com.liferay.portal.model.PasswordPolicy addPolicy(
+	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageScheme, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
@@ -61,21 +61,21 @@ public class PasswordPolicyServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 
-		return passwordPolicyService.addPolicy(name, description,
+		return passwordPolicyService.addPasswordPolicy(name, description,
 			storageScheme, changeable, changeRequired, minAge, checkSyntax,
 			allowDictionaryWords, minLength, history, historyCount, expireable,
 			maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount);
 	}
 
-	public static void deletePolicy(long passwordPolicyId)
+	public static void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-		passwordPolicyService.deletePolicy(passwordPolicyId);
+		passwordPolicyService.deletePasswordPolicy(passwordPolicyId);
 	}
 
-	public static com.liferay.portal.model.PasswordPolicy updatePolicy(
+	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,
@@ -87,9 +87,9 @@ public class PasswordPolicyServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 
-		return passwordPolicyService.updatePolicy(passwordPolicyId, name,
-			description, storageScheme, changeable, changeRequired, minAge,
-			checkSyntax, allowDictionaryWords, minLength, history,
+		return passwordPolicyService.updatePasswordPolicy(passwordPolicyId,
+			name, description, storageScheme, changeable, changeRequired,
+			minAge, checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
 			maxFailure, lockoutDuration, resetFailureCount);
 	}

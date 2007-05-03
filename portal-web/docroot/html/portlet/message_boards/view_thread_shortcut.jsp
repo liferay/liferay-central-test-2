@@ -45,41 +45,42 @@ if (treeWalker.isOdd()) {
 
 <tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5  %>px;" valign="middle" width="90%">
-				<c:if test="<%= !message.isRoot() %>">
-					<c:choose>
-						<c:when test="<%= !lastNode %>">
-							<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png">
-						</c:when>
-						<c:otherwise>
-							<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png">
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-				<%
-				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
-				%>
+		<c:if test="<%= !message.isRoot() %>">
+			<c:choose>
+				<c:when test="<%= !lastNode %>">
+					<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png">
+				</c:when>
+				<c:otherwise>
+					<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png">
+				</c:otherwise>
+			</c:choose>
+		</c:if>
 
-				<a href="<%= rowHREF %>">
+		<%
+		String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
+		%>
 
-				<%
-				boolean readFlag = true;
+		<a href="<%= rowHREF %>">
 
-				if (themeDisplay.isSignedIn()) {
-					readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), themeDisplay.getUserId());
-				}
-				%>
+		<%
+		boolean readFlag = true;
 
-				<c:if test="<%= !readFlag %>">
-					<b>
-				</c:if>
+		if (themeDisplay.isSignedIn()) {
+			readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), themeDisplay.getUserId());
+		}
+		%>
 
-				<%= message.getSubject() %>
+		<c:if test="<%= !readFlag %>">
+			<b>
+		</c:if>
 
-				<c:if test="<%= !readFlag %>">
-					</b>
-				</c:if>
+		<%= message.getSubject() %>
 
-				</a>
+		<c:if test="<%= !readFlag %>">
+			</b>
+		</c:if>
+
+		</a>
 	</td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">

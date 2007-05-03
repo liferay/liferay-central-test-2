@@ -360,6 +360,8 @@ public class PropsUtil {
 
 	public static final String PASSWORDS_RECYCLE = "passwords.recycle";
 
+	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
+
 	// Permissions
 
 	public static final String PERMISSIONS_CHECKER = "permissions.checker";

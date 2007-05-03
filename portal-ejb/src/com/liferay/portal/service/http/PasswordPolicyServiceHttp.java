@@ -71,7 +71,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  *
  */
 public class PasswordPolicyServiceHttp {
-	public static com.liferay.portal.model.PasswordPolicy addPolicy(
+	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,
@@ -117,7 +117,7 @@ public class PasswordPolicyServiceHttp {
 			Object paramObj17 = new LongWrapper(lockoutDuration);
 			Object paramObj18 = new LongWrapper(resetFailureCount);
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
-					"addPolicy",
+					"addPasswordPolicy",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
@@ -150,14 +150,14 @@ public class PasswordPolicyServiceHttp {
 		}
 	}
 
-	public static void deletePolicy(HttpPrincipal httpPrincipal,
+	public static void deletePasswordPolicy(HttpPrincipal httpPrincipal,
 		long passwordPolicyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(passwordPolicyId);
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
-					"deletePolicy", new Object[] { paramObj0 });
+					"deletePasswordPolicy", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -180,7 +180,7 @@ public class PasswordPolicyServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.PasswordPolicy updatePolicy(
+	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		HttpPrincipal httpPrincipal, long passwordPolicyId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageScheme, boolean changeable,
@@ -228,7 +228,7 @@ public class PasswordPolicyServiceHttp {
 			Object paramObj18 = new LongWrapper(lockoutDuration);
 			Object paramObj19 = new LongWrapper(resetFailureCount);
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
-					"updatePolicy",
+					"updatePasswordPolicy",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,

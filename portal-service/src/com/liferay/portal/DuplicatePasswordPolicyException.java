@@ -23,7 +23,8 @@
 package com.liferay.portal;
 
 /**
- * <a href="DuplicatePasswordPolicyException.java.html"><b><i>View Source</i></b></a>
+ * <a href="DuplicatePasswordPolicyException.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Scott Lee
  *

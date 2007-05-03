@@ -49,7 +49,7 @@ package com.liferay.portal.service;
  *
  */
 public interface PasswordPolicyService {
-	public com.liferay.portal.model.PasswordPolicy addPolicy(
+	public com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageScheme, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
@@ -60,11 +60,11 @@ public interface PasswordPolicyService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deletePolicy(long passwordPolicyId)
+	public void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.PasswordPolicy updatePolicy(
+	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,

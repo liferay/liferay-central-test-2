@@ -2,34 +2,12 @@
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-	<display-name>sample-tapestry-portlet</display-name>
-	<listener>
-		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
-	</listener>
-	<servlet>
-		<servlet-name>sample_tapestry_portlet</servlet-name>
-		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>org.apache.tapestry.portlet.ApplicationPortlet</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
 	<servlet>
 		<servlet-name>ApplicationServlet</servlet-name>
 		<servlet-class>org.apache.tapestry.ApplicationServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>sample_tapestry_portlet</servlet-name>
-		<url-pattern>/sample_tapestry_portlet/*</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ApplicationServlet</servlet-name>
 		<url-pattern>/app</url-pattern>
 	</servlet-mapping>
-	<taglib>
-		<taglib-uri>http://java.sun.com/portlet</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
-	</taglib>
 </web-app>

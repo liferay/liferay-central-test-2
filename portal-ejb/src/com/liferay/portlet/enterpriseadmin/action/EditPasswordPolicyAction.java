@@ -115,7 +115,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 	protected void deletePasswordPolicy(ActionRequest req) throws Exception {
 		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
 
-		PasswordPolicyServiceUtil.deletePolicy(passwordPolicyId);
+		PasswordPolicyServiceUtil.deletePasswordPolicy(passwordPolicyId);
 	}
 
 	protected void updatePasswordPolicy(ActionRequest req) throws Exception {
@@ -146,7 +146,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 			// Add password policy
 
-			PasswordPolicyServiceUtil.addPolicy(
+			PasswordPolicyServiceUtil.addPasswordPolicy(
 				name, description, storageScheme, changeable, changeRequired,
 				minAge, checkSyntax, allowDictionaryWords, minLength,
 				history, historyCount, expireable, maxAge, warningTime,
@@ -157,7 +157,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 			// Update password policy
 
-			PasswordPolicyServiceUtil.updatePolicy(
+			PasswordPolicyServiceUtil.updatePasswordPolicy(
 				passwordPolicyId, name, description, storageScheme, changeable,
 				changeRequired, minAge, checkSyntax, allowDictionaryWords,
 				minLength, history, historyCount, expireable, maxAge,

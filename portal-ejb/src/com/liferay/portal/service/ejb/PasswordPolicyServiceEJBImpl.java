@@ -54,7 +54,7 @@ import javax.ejb.SessionContext;
  */
 public class PasswordPolicyServiceEJBImpl implements PasswordPolicyService,
 	SessionBean {
-	public com.liferay.portal.model.PasswordPolicy addPolicy(
+	public com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		java.lang.String storageScheme, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
@@ -66,21 +66,21 @@ public class PasswordPolicyServiceEJBImpl implements PasswordPolicyService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return PasswordPolicyServiceFactory.getTxImpl().addPolicy(name,
+		return PasswordPolicyServiceFactory.getTxImpl().addPasswordPolicy(name,
 			description, storageScheme, changeable, changeRequired, minAge,
 			checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
 			maxFailure, lockoutDuration, resetFailureCount);
 	}
 
-	public void deletePolicy(long passwordPolicyId)
+	public void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		PasswordPolicyServiceFactory.getTxImpl().deletePolicy(passwordPolicyId);
+		PasswordPolicyServiceFactory.getTxImpl().deletePasswordPolicy(passwordPolicyId);
 	}
 
-	public com.liferay.portal.model.PasswordPolicy updatePolicy(
+	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,
@@ -92,7 +92,7 @@ public class PasswordPolicyServiceEJBImpl implements PasswordPolicyService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return PasswordPolicyServiceFactory.getTxImpl().updatePolicy(passwordPolicyId,
+		return PasswordPolicyServiceFactory.getTxImpl().updatePasswordPolicy(passwordPolicyId,
 			name, description, storageScheme, changeable, changeRequired,
 			minAge, checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,

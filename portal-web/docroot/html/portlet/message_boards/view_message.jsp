@@ -152,6 +152,7 @@ else {
 
 		]
 	</div>
+
 	<div class="message-board-thread-actions">
 		<table class="liferay-table">
 		<tr>
@@ -202,6 +203,7 @@ else {
 		</tr>
 		</table>
 	</div>
+
 	<div class="message-board-clear"></div>
 </div>
 
@@ -229,7 +231,7 @@ else {
 			defaultOn="true"
 		/>
 
-		<table border="0" cellpadding="1" cellspacing="0" class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" width="100%" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;">
+		<table class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;" width="100%">
 
 		<%
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);

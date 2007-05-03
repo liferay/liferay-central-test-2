@@ -57,8 +57,8 @@ public interface PasswordPolicyLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.PasswordPolicy addPolicy(long userId,
-		boolean defaultPolicy, java.lang.String name,
+	public com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
+		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,
 		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
@@ -81,13 +81,13 @@ public interface PasswordPolicyLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
-		long userId)
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
+		long passwordPolicyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
-		long passwordPolicyId)
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
+		long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -97,7 +97,7 @@ public interface PasswordPolicyLocalService {
 	public int searchCount(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.PasswordPolicy updatePolicy(
+	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, java.lang.String storageScheme,
 		boolean changeable, boolean changeRequired, long minAge,

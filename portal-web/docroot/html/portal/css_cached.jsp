@@ -135,6 +135,17 @@ ul.gamma .tree-item-hover {
 	padding-right: 0;
 }
 
+/* ---------- Liferay forms ---------- */
+
+.liferay-input-text {
+	width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;
+}
+
+.liferay-textarea {
+	height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;
+	width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;
+}
+
 /* ---------- Quick note ---------- */
 
 .portlet-quick-note {
@@ -185,15 +196,4 @@ ul.gamma .tree-item-hover {
 
 .portlet-quick-note a.close-note {
 	float: right;
-}
-
-/* ---------- Liferay forms ---------- */
-
-.liferay-input-text {
-	width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;
-}
-
-.liferay-textarea {
-	height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;
-	width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;
 }

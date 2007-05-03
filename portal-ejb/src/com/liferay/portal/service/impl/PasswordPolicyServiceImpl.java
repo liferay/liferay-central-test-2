@@ -41,7 +41,7 @@ import com.liferay.portal.service.permission.PortalPermission;
 public class PasswordPolicyServiceImpl extends PrincipalBean
 	implements PasswordPolicyService {
 
-	public PasswordPolicy addPolicy(
+	public PasswordPolicy addPasswordPolicy(
 			String name, String description, String storageScheme,
 			boolean changeable, boolean changeRequired, long minAge,
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
@@ -50,20 +50,17 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
-		User user = getUser();
-
 		PortalPermission.check(
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
-		return PasswordPolicyLocalServiceUtil.addPolicy(
-			user.getUserId(), false, name, description, storageScheme,
-			changeable, changeRequired, minAge, checkSyntax,
-			allowDictionaryWords, minLength, history, historyCount, expireable,
-			maxAge, warningTime, graceLimit, lockout, maxFailure,
-			lockoutDuration, resetFailureCount);
+		return PasswordPolicyLocalServiceUtil.addPasswordPolicy(
+			getUserId(), false, name, description, storageScheme, changeable,
+			changeRequired, minAge, checkSyntax, allowDictionaryWords,
+			minLength, history, historyCount, expireable, maxAge, warningTime,
+			graceLimit, lockout, maxFailure, lockoutDuration, resetFailureCount);
 	}
 
-	public void deletePolicy(long passwordPolicyId)
+	public void deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
 		PasswordPolicyPermission.check(
@@ -72,7 +69,7 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 		PasswordPolicyLocalServiceUtil.deletePasswordPolicy(passwordPolicyId);
 	}
 
-	public PasswordPolicy updatePolicy(
+	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,
 			String storageScheme, boolean changeable, boolean changeRequired,
 			long minAge, boolean checkSyntax, boolean allowDictionaryWords,
@@ -85,7 +82,7 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 		PasswordPolicyPermission.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		return PasswordPolicyLocalServiceUtil.updatePolicy(
+		return PasswordPolicyLocalServiceUtil.updatePasswordPolicy(
 			passwordPolicyId, name, description, storageScheme, changeable,
 			changeRequired, minAge, checkSyntax, allowDictionaryWords,
 			minLength, history, historyCount, expireable, maxAge, warningTime,

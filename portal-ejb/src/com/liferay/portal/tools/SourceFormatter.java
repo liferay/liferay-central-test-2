@@ -310,7 +310,7 @@ public class SourceFormatter {
 			DirectoryScanner ds = new DirectoryScanner();
 			ds.setIncludes(
 				new String[] {
-					"**\\*.jsp", "**\\*.vm"
+					"**\\*.jsp", "**\\*.jspf", "**\\*.vm"
 				});
 			ds.setExcludes(
 				new String[] {

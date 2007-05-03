@@ -43,6 +43,8 @@ import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordPolicyFinder;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.util.Date;
@@ -58,7 +60,7 @@ import java.util.List;
 public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
-	public PasswordPolicy addPolicy(
+	public PasswordPolicy addPasswordPolicy(
 			long userId, boolean defaultPolicy, String name, String description,
 			String storageScheme, boolean changeable, boolean changeRequired,
 			long minAge, boolean checkSyntax, boolean allowDictionaryWords,
@@ -124,14 +126,14 @@ public class PasswordPolicyLocalServiceImpl
 	public void checkDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
-		String defaultPasswordPolicyName = "Default Password Policy";
+		String defaultPasswordPolicyName = GetterUtil.getString(
+			PropsUtil.get(PropsUtil.PASSWORDS_DEFAULT_POLICY_NAME));
 
 		try {
-			PasswordPolicyUtil.findByC_N(
-				companyId, defaultPasswordPolicyName);
+			PasswordPolicyUtil.findByC_N(companyId, defaultPasswordPolicyName);
 		}
 		catch (NoSuchPasswordPolicyException nsppe) {
-			addPolicy(
+			addPasswordPolicy(
 				UserLocalServiceUtil.getDefaultUserId(companyId), true,
 				defaultPasswordPolicyName, defaultPasswordPolicyName, "md5",
 				true, false, 0, false, true, 6, false, 0, false, 0, 0, 0, false,
@@ -165,6 +167,12 @@ public class PasswordPolicyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return PasswordPolicyUtil.findByC_DP(companyId, true);
+	}
+
+	public PasswordPolicy getPasswordPolicy(long passwordPolicyId)
+		throws PortalException, SystemException {
+
+		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
 	}
 
 	public PasswordPolicy getPasswordPolicyByUserId(long userId)
@@ -218,12 +226,6 @@ public class PasswordPolicyLocalServiceImpl
 		return getDefaultPasswordPolicy(user.getCompanyId());
 	}
 
-	public PasswordPolicy getPasswordPolicy(long passwordPolicyId)
-		throws PortalException, SystemException {
-
-		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
-	}
-
 	public List search(long companyId, String name, int begin, int end)
 		throws SystemException {
 
@@ -236,7 +238,7 @@ public class PasswordPolicyLocalServiceImpl
 		return PasswordPolicyFinder.countByC_N(companyId, name);
 	}
 
-	public PasswordPolicy updatePolicy(
+	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,
 			String storageScheme, boolean changeable, boolean changeRequired,
 			long minAge, boolean checkSyntax, boolean allowDictionaryWords,

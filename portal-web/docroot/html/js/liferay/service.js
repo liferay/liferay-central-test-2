@@ -504,23 +504,23 @@ Liferay.Service.Portal.OrgLabor = {
 Liferay.Service.Portal.PasswordPolicy = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "PasswordPolicy" + Liferay.Service.classNameSuffix,
 
-	addPolicy: function(params, callback) {
+	addPasswordPolicy: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPolicy";
+		params.serviceMethodName = "addPasswordPolicy";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	deletePolicy: function(params, callback) {
+	deletePasswordPolicy: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deletePolicy";
+		params.serviceMethodName = "deletePasswordPolicy";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	updatePolicy: function(params, callback) {
+	updatePasswordPolicy: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePolicy";
+		params.serviceMethodName = "updatePasswordPolicy";
 
 		return Liferay.Service.ajax(params, callback);
 	}
