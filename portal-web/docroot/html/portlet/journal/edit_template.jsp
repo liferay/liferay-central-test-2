@@ -179,7 +179,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</c:choose>
 
 		<c:if test="<%= (template == null) || (Validator.isNull(template.getStructureId())) %>">
-			<input type="button" value="<bean:message key="select" />" onClick="var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureWindow.focus();" />
 
 			<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeStructure();">
 		</c:if>
@@ -197,7 +197,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<td>
 		<input name="<portlet:namespace />xsl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
 
-		<input type="button" value="<bean:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();">
+		<input type="button" value="<bean:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();" />
 
 		<c:if test="<%= template != null %>">
 			<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />

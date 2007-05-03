@@ -102,7 +102,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentFolderName">
 					<%= parentFolderName %></a>
 
-					<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+					<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 
 					<input id="<portlet:namespace />removeFolderButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
 				</td>

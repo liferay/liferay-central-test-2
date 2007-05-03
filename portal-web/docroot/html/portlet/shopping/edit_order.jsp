@@ -593,7 +593,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveOrder();" />
 	</c:if>
 
-	<input type="button" value="<bean:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
+	<input type="button" value="<bean:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');" />
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendEmail('confirmation');" />
 

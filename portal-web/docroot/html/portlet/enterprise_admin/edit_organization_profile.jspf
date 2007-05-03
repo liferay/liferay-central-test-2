@@ -93,7 +93,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 					<a class="portlet-font" href="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:actionURL>" id="<portlet:namespace />parentOrganizationName" style="font-size: x-small;"><%= parentOrganizationName %></a>
 
 					<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-						<input type="button" value="<bean:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();">
+						<input type="button" value="<bean:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 					</c:if>
 				</td>
 			</tr>

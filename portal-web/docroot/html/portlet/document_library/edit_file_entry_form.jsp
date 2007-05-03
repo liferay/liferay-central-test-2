@@ -129,7 +129,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 			<%= folder.getName() %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 		</td>
 	</tr>
 	<tr>

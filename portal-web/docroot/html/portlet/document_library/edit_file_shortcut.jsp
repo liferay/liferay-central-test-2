@@ -220,7 +220,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-			<input type="button" value="<bean:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" /><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
+			<input type="button" value="<bean:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();" />
 		</c:if>
 	</td>
 </tr>
