@@ -303,17 +303,17 @@
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" height="100%">
-				<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
+				<textarea class="liferay-textarea message-edit" id="textArea" name="textArea"></textarea>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td>
-		<div style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-left: 10px;">
+		<div class="message-board-emoticons">
 			<table border="0" cellpadding="2" cellspacing="0">
 			<tr>
 				<td align="center" bgcolor="#E5E4E8" colspan="4">
-					<%= LanguageUtil.get(pageContext, "clickable-emoticons") %>
+					<bean:message key="clickable-emoticons" />
 				</td>
 			</tr>
 

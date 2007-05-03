@@ -186,3 +186,14 @@ ul.gamma .tree-item-hover {
 .portlet-quick-note a.close-note {
 	float: right;
 }
+
+/* ---------- Liferay forms ---------- */
+
+.liferay-input-text {
+	width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;
+}
+
+.liferay-textarea {
+	height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;
+	width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;
+}

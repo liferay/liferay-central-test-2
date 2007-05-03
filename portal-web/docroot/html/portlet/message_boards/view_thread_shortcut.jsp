@@ -43,26 +43,18 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-	<td width="90%">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td style="padding-left: <%= depth * 10 %>px;"></td>
-			<td>
+<tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5  %>px;" valign="middle" width="90%">
 				<c:if test="<%= !message.isRoot() %>">
 					<c:choose>
 						<c:when test="<%= !lastNode %>">
-							<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png">
+							<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png">
 						</c:when>
 						<c:otherwise>
-							<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png">
+							<img class="message-board-tree" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png">
 						</c:otherwise>
 					</c:choose>
 				</c:if>
-			</td>
-			<td style="padding-left: 5px;"></td>
-			<td>
-
 				<%
 				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
 				%>
@@ -88,11 +80,7 @@ if (treeWalker.isOdd()) {
 				</c:if>
 
 				</a>
-			</td>
-		</tr>
-		</table>
 	</td>
-	<td></td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">
 
@@ -102,7 +90,7 @@ if (treeWalker.isOdd()) {
 
 		<c:choose>
 			<c:when test="<%= message.isAnonymous() %>">
-				<%= LanguageUtil.get(pageContext, "anonymous") %>
+				<bean:message key="anonymous" />
 			</c:when>
 			<c:otherwise>
 				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
@@ -115,7 +103,6 @@ if (treeWalker.isOdd()) {
 
 		</a>
 	</td>
-	<td></td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">
 		<%= dateFormatDateTime.format(message.getModifiedDate()) %>

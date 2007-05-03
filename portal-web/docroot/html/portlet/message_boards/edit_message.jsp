@@ -85,7 +85,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 </script>
 
 <c:if test="<%= preview %>">
-	<%= LanguageUtil.get(pageContext, "preview") %>:
+	<bean:message key="preview" />:
 
 	<%
 	MBMessage temp = null;
@@ -158,7 +158,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
 	%>
 
-	<%= LanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(fileExtensions, ", ") %>.
+	<bean:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(fileExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -196,7 +196,7 @@ if (message != null) {
 			<%= category.getName() %>
 			</a>
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
+			<input type="button" value='<bean:message key="select" />' onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();">
 		</td>
 	</tr>
 	<tr>
@@ -208,7 +208,7 @@ if (message != null) {
 
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "subject") %>
+		<bean:message key="subject" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="<%= subject %>" />
@@ -221,7 +221,7 @@ if (message != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "body") %>
+		<bean:message key="body" />
 	</td>
 	<td>
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
@@ -243,7 +243,7 @@ if (message != null) {
 
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "file") %> <%= i %>
+				<bean:message key="file" /> <%= i %>
 			</td>
 			<td>
 				<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file">
@@ -264,7 +264,7 @@ if (message != null) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "anonymous") %>
+			<bean:message key="anonymous" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="anonymous" />
@@ -280,7 +280,7 @@ if (message != null) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "priority") %>
+			<bean:message key="priority" />
 		</td>
 		<td>
 
@@ -335,7 +335,7 @@ if (message != null) {
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "tags") %>
+		<bean:message key="tags" />
 	</td>
 	<td>
 
@@ -363,7 +363,7 @@ if (message != null) {
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "permissions") %>
+			<bean:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -391,14 +391,14 @@ if (message != null) {
 	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);">
 </c:if>
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "preview") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);">
+<input type="button" value='<bean:message key="preview" />' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);">
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<bean:message key="cancel" />' onClick="self.location = '<%= redirect %>';">
 
 <c:if test="<%= curParentMessage != null %>">
 	<br /><br />
 
-	<%= LanguageUtil.get(pageContext, "replying-to") %>:
+	<bean:message key="replying-to" />:
 
 	<%
 	boolean editable = false;

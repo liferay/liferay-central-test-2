@@ -99,7 +99,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "name") %>
+				<bean:message key="name" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>">
@@ -107,7 +107,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "address") %>
+				<bean:message key="address" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>">
@@ -117,7 +117,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br />
 
-		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
+		<b><bean:message key="definition-of-terms" /></b>
 
 		<br /><br />
 
@@ -127,7 +127,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$COMPANY_ID$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-company-id-associated-with-the-message-board") %>
+				<bean:message key="the-company-id-associated-with-the-message-board" />
 			</td>
 		</tr>
 		<tr>
@@ -135,7 +135,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MAILING_LIST_ADDRESS$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-mailing-list") %>
+				<bean:message key="the-email-address-of-the-mailing-list" />
 			</td>
 		</tr>
 		<tr>
@@ -143,7 +143,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_ADDRESS$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-user-who-added-the-message") %>
+				<bean:message key="the-email-address-of-the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -151,7 +151,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_NAME$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-user-who-added-the-message") %>
+				<bean:message key="the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -168,7 +168,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "enabled") %>
+				<bean:message key="enabled" />
 			</td>
 			<td>
 				<c:choose>
@@ -188,15 +188,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "subject-prefix") %>
+				<bean:message key="subject-prefix" />
 			</td>
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<input name="<portlet:namespace />emailMessageAddedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageAddedSubjectPrefix %>">
+						<input class="liferay-input-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" type="text" value="<%= emailMessageAddedSubjectPrefix %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<input name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>">
+						<input class="liferay-input-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>">
 					</c:when>
 				</c:choose>
 			</td>
@@ -208,10 +208,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "body") %>
+				<bean:message key="body" />
 			</td>
 			<td>
-				<textarea name="<%= bodyEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= bodyEditorContent %></textarea>
+				<textarea class="liferay-textarea" name="<%= bodyEditorParam %>" style="" wrap="soft"><%= bodyEditorContent %></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -221,17 +221,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "signature") %>
+				<bean:message key="signature" />
 			</td>
 			<td>
-				<textarea name="<%= signatureEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= signatureEditorContent %></textarea>
+				<textarea class="liferay-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorContent %></textarea>
 			</td>
 		</tr>
 		</table>
 
 		<br />
 
-		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
+		<b><bean:message key="definition-of-terms" /></b>
 
 		<br /><br />
 
@@ -241,7 +241,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$CATEGORY_NAME$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-category-in-which-the-message-has-been-posted") %>
+				<bean:message key="the-category-in-which-the-message-has-been-posted" />
 			</td>
 		</tr>
 		<tr>
@@ -249,7 +249,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$COMPANY_ID$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-company-id-associated-with-the-message-board") %>
+				<bean:message key="the-company-id-associated-with-the-message-board" />
 			</td>
 		</tr>
 		<tr>
@@ -273,7 +273,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MAILING_LIST_ADDRESS$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-mailing-list") %>
+				<bean:message key="the-email-address-of-the-mailing-list" />
 			</td>
 		</tr>
 		<tr>
@@ -281,7 +281,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_BODY$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-message-body") %>The message body
+				<bean:message key="the-message-body" />The message body
 			</td>
 		</tr>
 		<tr>
@@ -297,7 +297,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_ADDRESS$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-user-who-added-the-message") %>
+				<bean:message key="the-email-address-of-the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -305,7 +305,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_NAME$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-user-who-added-the-message") %>
+				<bean:message key="the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -329,7 +329,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$TO_ADDRESS$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-address-of-the-email-recipient") %>
+				<bean:message key="the-address-of-the-email-recipient" />
 			</td>
 		</tr>
 		<tr>
@@ -337,26 +337,26 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$TO_NAME$]</b>
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-name-of-the-email-recipient") %>
+				<bean:message key="the-name-of-the-email-recipient" />
 			</td>
 		</tr>
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("thread-priorities") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-the-name,-image,-and-priority-level-in-descending-order") %>
+		<bean:message key="enter-the-name,-image,-and-priority-level-in-descending-order" />
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "name") %>
+				<bean:message key="name" />
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "image") %>
+				<bean:message key="image" />
 			</td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "priority") %>
+				<bean:message key="priority" />
 			</td>
 		</tr>
 
@@ -404,7 +404,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-ranks") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-rank-and-minimum-post-pairs-per-line") %>
+		<bean:message key="enter-rank-and-minimum-post-pairs-per-line" />
 
 		<br /><br />
 
@@ -412,7 +412,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
 		%>
 
-		<textarea name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br />
+		<textarea class="liferay-textarea" name="<portlet:namespace />ranks"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br />
 
 		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLocalizedRanks();">
 
@@ -442,9 +442,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input type="submit" value='<bean:message key="save" />'>
 
-<input type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+<input type="button" value='<bean:message key="cancel" />' onClick="self.location = '<%= redirect %>';">
 
 </form>
 

@@ -24,21 +24,22 @@
 
 <style type="text/css">
 	.message-board-code {
-		background: white;
-		border: 1px solid <%= colorScheme.getPortletFontDim() %>;
+		background: #fff;
+		border: 1px solid #777;
 		font-family: monospace;
+		white-space: pre;
 	}
 
 	.message-board-code-lines {
-		border-right: 1px solid <%= colorScheme.getPortletFontDim() %>;
-		color: <%= colorScheme.getPortletFontDim() %>;
+		border-right: 1px solid #ccc;
+		color: #000;
 		margin-right: 5px;
 		padding: 0px 5px 0px 5px;
 	}
 
 	.message-board-quote {
-		background: white url(<%= themeDisplay.getPathThemeImages() %>/message_boards/quoteleft.png) left top no-repeat;
-		border: 1px solid <%= colorScheme.getPortletFontDim() %>;
+		background: #fff url(<%= themeDisplay.getPathThemeImages() %>/message_boards/quoteleft.png) left top no-repeat;
+		border: 1px solid #777;
 		padding: 5px 0px 0px 5px;
 	}
 
@@ -50,5 +51,117 @@
 	.message-board-quote-title {
 		font-weight: bold;
 		padding: 5px 0px 5px 0px;
+	}
+	
+	.message-board-title {
+		border-bottom: 1px solid #ccc;
+		font-size: large; 
+		font-weight: normal; 
+		padding: 5px;
+	}
+	
+	.message-board-message-container {
+		margin: 5px 0 0 0;
+	}
+	
+	.ie .message-board-message-container {
+		width: 100%;
+	}
+	
+	.message-board-message-container table {
+		border-collapse: collapse;
+		table-layout: fixed;
+	}
+	
+	.message-board-message-container td {
+		border: 1px solid #ccc;
+	}
+	
+	.message-board-thread-top {
+		border-bottom: 1px solid #ccc;
+		padding: 3px 5px;
+	}
+	
+	.message-board-thread-bottom {
+		padding: 3px 5px;
+		text-align: right;
+	}
+	
+	.message-board-user-info {
+		border-right: 1px solid #ccc;
+	}
+	
+	.message-board-subject {
+		float: left;
+	}
+	
+	.message-board-edit-controls {
+		float: right;
+	}
+	
+	.message-board-edit-controls li {
+		float: left;
+		margin-right: 10px;
+	}
+	
+	.message-board-thread-body {
+		padding: 15px;
+	}
+	
+	.message-board-user-info {
+		border: 1px solid #f00;
+		padding: 5px;
+	}
+	
+	.message-board-clear {
+		clear: both;
+	}
+	
+	.toggle_id_message_boards_view_message_thread {
+		border: 1px solid #ccc;
+		margin: 5px 0px 0px 0px;
+	}
+	
+	.message-board-thread-controls {
+		border: 1px solid #ccc;
+		margin-bottom: 5px;
+		padding: 3px 5px;
+	}
+	
+	.message-board-thread-navigation {
+		float: left;
+	}
+	
+	.message-board-thread-actions {
+		float: right;
+	}
+	
+	.message-board-emoticons {
+		border: 1px solid #ccc;
+		margin-left: 10px;
+	}
+	
+	.message-board-tree {
+		vertical-align: middle;
+	}
+	
+	.message-board-message-action {
+		white-space: nowrap;
+	}
+	
+	.message-board-message-scroll {
+		margin: 5px 0px 0px 0px;
+	}
+	
+	.message-board-user-icon {
+		margin: 10px 0px;
+		width: 75%;
+	}
+
+	.liferay-textarea.message-edit {
+		font-family: monospace;
+		height: 378px;
+		min-height: 100%;
+		width: 100%;
 	}
 </style>

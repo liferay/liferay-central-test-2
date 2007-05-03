@@ -122,11 +122,9 @@ else {
 </tr>
 </table>
 
-<br /><br />
-
-<div style="background-color: <%= colorScheme.getLayoutTabBg() %>; border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin-bottom: 5px; padding: 3px 5px;">
-	<span style="float: left;">
-		<%= LanguageUtil.get(pageContext, "threads") %>
+<div class="message-board-thread-controls">
+	<div class="message-board-thread-navigation">
+		<bean:message key="threads" />
 
 		[
 
@@ -134,7 +132,7 @@ else {
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
-		<%= LanguageUtil.get(pageContext, "previous") %>
+		<bean:message key="previous" />
 
 		<c:if test="<%= previousThread != null %>">
 			</a>
@@ -146,16 +144,16 @@ else {
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
-		<%= LanguageUtil.get(pageContext, "next") %>
+		<bean:message key="next" />
 
 		<c:if test="<%= nextThread != null %>">
 			</a>
 		</c:if>
 
 		]
-	</span>
-	<span style="float: right;">
-		<table border="0" cellpadding="0" cellspacing="0">
+	</div>
+	<div class="message-board-thread-actions">
+		<table class="liferay-table">
 		<tr>
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 				<td>
@@ -167,12 +165,11 @@ else {
 
 					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" />
 
-					<a href="<%= addMessageURL.toString() %>"><%= LanguageUtil.get(pageContext, "post-new-thread") %></a>
+					<a href="<%= addMessageURL.toString() %>"><bean:message key="post-new-thread" /></a>
 				</td>
 			</c:if>
 
 			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
-				<td style="padding-left: 15px;"></td>
 				<td>
 					<c:choose>
 						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), GetterUtil.getLong(message.getThreadId())) %>">
@@ -185,7 +182,7 @@ else {
 
 							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
 
-							<a href="<%= unsubscribeURL.toString() %>"><%= LanguageUtil.get(pageContext, "unsubscribe") %></a>
+							<a href="<%= unsubscribeURL.toString() %>"><bean:message key="unsubscribe" /></a>
 						</c:when>
 						<c:otherwise>
 							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
@@ -197,18 +194,18 @@ else {
 
 							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
 
-							<a href="<%= subscribeURL.toString() %>"><%= LanguageUtil.get(pageContext, "subscribe") %></a>
+							<a href="<%= subscribeURL.toString() %>"><bean:message key="subscribe" /></a>
 						</c:otherwise>
 					</c:choose>
 				</td>
 			</c:if>
 		</tr>
 		</table>
-	</span>
-	<div style="clear: both;"></div>
+	</div>
+	<div class="message-board-clear"></div>
 </div>
 
-<div class="portlet-section-header" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; font-size: large; font-weight: normal; padding: 3px 5px;">
+<div class="portlet-section-header message-board-title">
 	<%= message.getSubject() %>
 </div>
 
@@ -224,7 +221,7 @@ else {
 	Collections.sort(messages, new MessageCreateDateComparator(true));
 	%>
 
-	<div id="<portlet:namespace />messageScroll0" style="margin: 5px 0px 0px 0px;"></div>
+	<div class="message-board-message-scroll" id="<portlet:namespace />messageScroll0"></div>
 
 	<c:if test='<%= threadView.equals("combination") && (messages.size() > 1) %>'>
 		<liferay-ui:toggle
@@ -232,7 +229,7 @@ else {
 			defaultOn="true"
 		/>
 
-		<table border="0" cellpadding="1" cellspacing="0" id="toggle_id_message_boards_view_message_thread" width="100%" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />; margin: 5px 0px 0px 0px;">
+		<table border="0" cellpadding="1" cellspacing="0" class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" width="100%" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;">
 
 		<%
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);

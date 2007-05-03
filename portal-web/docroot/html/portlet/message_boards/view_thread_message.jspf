@@ -22,131 +22,119 @@
  */
 %>
 
-<div style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin: 5px 0px 0px <%= depth * 10 %>px; <%= BrowserSniffer.is_ie(request) ? "width: 100%;" : "" %>">
-	<table cellpadding="0" cellspacing="0" id="<portlet:namespace />messageScroll<%= message.getMessageId() %>" style="table-layout: fixed;" width="100%">
+<div class="message-board-message-container" style="margin-left: <%= depth * 10 %>px;">
+	<table cellpadding="0" cellspacing="0" class="<%= className %>" id="<portlet:namespace />messageScroll<%= message.getMessageId() %>" width="100%">
 	<tr>
-		<td class="<%= className %>" rowspan="2" style="border-right: 1px solid <%= colorScheme.getPortletFontDim() %>; vertical-align: top;" width="100">
-			<div class="message-board-thread-left" style="padding:5px;">
-				<c:choose>
-					<c:when test="<%= message.isAnonymous() %>">
-						<%= LanguageUtil.get(pageContext, "anonymous") %>
-					</c:when>
-					<c:otherwise>
-						<b><%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %></b><br />
-
-						<span style="font-size: xx-small;">
-
-							<%
-							User user2 = null;
-
-							try {
-								user2 = UserLocalServiceUtil.getUserById(message.getUserId());
-								Organization organization = user2.getOrganization();
-								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
-								String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
-							%>
-
-								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br />
-
-								<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-									<div>
-										<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png"></a>
-									</div>
-								</c:if>
-
-								<c:if test="<%= organization.getOrganizationId() > 0 %>">
-									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
-
-									<br /><br />
-								</c:if>
-
-								<%= LanguageUtil.get(pageContext, "rank") %>: <%= rank %><br />
-								<%= LanguageUtil.get(pageContext, "posts") %>: <%= posts %><br />
-								<%= LanguageUtil.get(pageContext, "joined") %>: <%= dateFormatDate.format(user2.getCreateDate()) %>
-
-							<%
-							}
-							catch (NoSuchStatsUserException nssue) {
-							}
-							catch (NoSuchUserException nsue) {
-							}
-							%>
-
-							<c:if test="<%= (user.getUserId() != user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
-								<hr>
-
-								<c:choose>
-									<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), user2.getUserId()) %>">
-										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
-											<portlet:param name="struts_action" value="/message_boards/ban_user" />
-											<portlet:param name="<%= Constants.CMD %>" value="unban" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
-										</portlet:actionURL>
-
-										<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png"></a> <a href="<%= unbanUserURL.toString() %>"><%= LanguageUtil.get(pageContext, "unban-this-user") %></a>
-									</c:when>
-									<c:otherwise>
-										<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
-											<portlet:param name="struts_action" value="/message_boards/ban_user" />
-											<portlet:param name="<%= Constants.CMD %>" value="ban" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
-										</portlet:actionURL>
-
-										<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png"></a> <a href="<%= banUserURL.toString() %>"><%= LanguageUtil.get(pageContext, "ban-this-user") %></a>
-									</c:otherwise>
-								</c:choose>
-							</c:if>
-						</span>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</td>
-		<td class="<%= className %>" valign="top">
-			<div class="message-board-thread-top" style="border-bottom: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 3px 5px;">
-				<div style="float: left;">
-					<span>
-						<b><%= StringUtil.shorten(message.getSubject(), 50) %></b>
-					</span>
-					<span style="font-size: xx-small;">
-						|
-
-						<%= dateFormatDateTime.format(message.getModifiedDate()) %>
+		<td rowspan="2" width="100" class="message-board-user-info">
+			<c:choose>
+				<c:when test="<%= message.isAnonymous() %>">
+					<bean:message key="anonymous" />
+				</c:when>
+				<c:otherwise>
+					<b><%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %></b><br />
 
 						<%
-						MBMessage parentMessage = null;
+						User user2 = null;
 
 						try {
-							parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+							user2 = UserLocalServiceUtil.getUserById(message.getUserId());
+							Organization organization = user2.getOrganization();
+							int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
+							String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
+						%>
+							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>"><br />
+
+							<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
+								<div>
+									<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png"></a>
+								</div>
+							</c:if>
+
+							<c:if test="<%= organization.getOrganizationId() > 0 %>">
+								<bean:message key="organization" />: <%= organization.getName() %>
+
+								<br /><br />
+							</c:if>
+	
+							<bean:message key="rank" />: <%= rank %><br />
+							<bean:message key="posts" />: <%= posts %><br />
+							<bean:message key="joined" />: <%= dateFormatDate.format(user2.getCreateDate()) %>
+
+						<%
 						}
-						catch (Exception e) {}
+						catch (NoSuchStatsUserException nssue) {
+						}
+						catch (NoSuchUserException nsue) {
+						}
 						%>
 
-						<c:if test="<%= parentMessage != null %>">
+						<c:if test="<%= (user.getUserId() != user2.getUserId()) && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER) %>">
+							<hr>
 
-							<%
-							PortletURL parentMessageURL = renderResponse.createRenderURL();
+							<c:choose>
+								<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), user2.getUserId()) %>">
+									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
+										<portlet:param name="struts_action" value="/message_boards/ban_user" />
+										<portlet:param name="<%= Constants.CMD %>" value="unban" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
+									</portlet:actionURL>
 
-							parentMessageURL.setWindowState(WindowState.MAXIMIZED);
+									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png"></a> <a href="<%= unbanUserURL.toString() %>"><bean:message key="unban-this-user" /></a>
+								</c:when>
+								<c:otherwise>
+									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
+										<portlet:param name="struts_action" value="/message_boards/ban_user" />
+										<portlet:param name="<%= Constants.CMD %>" value="ban" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
+									</portlet:actionURL>
 
-							parentMessageURL.setParameter("struts_action", "/message_boards/view_message");
-							parentMessageURL.setParameter("messageId", parentMessage.getMessageId());
-
-							String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName());
-							%>
-
-							<%= LanguageUtil.format(pageContext, "posted-as-a-reply-to", author) %>
+									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png"></a> <a href="<%= banUserURL.toString() %>"><bean:message key="ban-this-user" /></a>
+								</c:otherwise>
+							</c:choose>
 						</c:if>
-					</span>
+				</c:otherwise>
+				</c:choose>
+		</td>
+		<td valign="top">
+			<div class="message-board-thread-top">
+				<div class="message-board-subject">
+					<b><%= StringUtil.shorten(message.getSubject(), 50) %></b>
+					|
+
+					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
+
+					<%
+					MBMessage parentMessage = null;
+
+					try {
+						parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+					}
+					catch (Exception e) {}
+					%>
+
+					<c:if test="<%= parentMessage != null %>">
+
+						<%
+						PortletURL parentMessageURL = renderResponse.createRenderURL();
+
+						parentMessageURL.setWindowState(WindowState.MAXIMIZED);
+
+						parentMessageURL.setParameter("struts_action", "/message_boards/view_message");
+						parentMessageURL.setParameter("messageId", parentMessage.getMessageId());
+
+						String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName());
+						%>
+
+						<%= LanguageUtil.format(pageContext, "posted-as-a-reply-to", author) %>
+					</c:if>
 				</div>
 
 				<c:if test="<%= editable %>">
-					<div style="float: right;">
-						<table border="0" cellpadding="0" cellspacing="0">
-						<tr>
+						<ul class="message-board-edit-controls">
 							<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
-								<td>
+								<li>
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
 										<portlet:param name="struts_action" value="/message_boards/edit_message" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -154,13 +142,12 @@
 										<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
 										<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
 									</portlet:renderURL>
-
+			
 									<liferay-ui:icon image="reply" url="<%= replyURL %>" />
-
-									<a href="<%= replyURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
-								</td>
-								<td style="padding-left: 15px;"></td>
-								<td>
+			
+									<a href="<%= replyURL.toString() %>"><bean:message key="reply" /></a>
+								</li>
+								<li>
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
 										<portlet:param name="struts_action" value="/message_boards/edit_message" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -169,32 +156,26 @@
 										<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
 										<portlet:param name="quote" value="true" />
 									</portlet:renderURL>
-
+			
 									<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
-
-									<a href="<%= quoteURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply-with-quote") %></a>
-								</td>
-								<td style="padding-left: 15px;"></td>
+			
+									<a href="<%= quoteURL.toString() %>"><bean:message key="reply-with-quote" /></a>
+								</li>
 							</c:if>
-
-							<td>
-
-								<%
+							<li>
+							<%
 								String topHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView('0');";
 								%>
 
 								<liferay-ui:icon image="top" url="<%= topHREF %>" />
 
-								<a href="<%= topHREF %>"><%= LanguageUtil.get(pageContext, "top") %></a>
-							</td>
-						</tr>
-						</table>
-					</div>
+								<a href="<%= topHREF %>"><bean:message key="top" /></a>
+							</li>
+						</ul>
 				</c:if>
-
-				<div style="clear: both;"></div>
+				<div class="message-board-clear"></div>
 			</div>
-			<div class="message-board-thread-body" style="padding: 15px;">
+			<div class="message-board-thread-body">
 
 				<%
 				String msgBody = message.getBody(false);
@@ -345,7 +326,6 @@
 				<%= msgBody %>
 
 				<c:if test="<%= message.isAttachments() %>">
-					<br /><br />
 
 					<%
 					String[] fileNames = null;
@@ -378,7 +358,7 @@
 						<table class="liferay-table">
 						<tr>
 							<td valign="top">
-								<b><%= LanguageUtil.get(pageContext, "attachments") %>:</b>
+								<b><bean:message key="attachments" />:</b>
 							</td>
 							<td>
 
@@ -405,50 +385,48 @@
 
 	<c:if test="<%= editable %>">
 		<tr>
-			<td class="<%= className %>" valign="bottom" width="90%">
-				<div class="message-board-thread-bottom" style="padding:3px 5px; text-align:right;">
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-							<portlet:param name="struts_action" value="/message_boards/edit_message" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
-						</portlet:renderURL>
+			<td class="message-board-thread-bottom" valign="bottom" width="90%">
+				<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+						<portlet:param name="struts_action" value="/message_boards/edit_message" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+					</portlet:renderURL>
 
-						<liferay-ui:icon image="edit" url="<%= editURL %>" />
-					</c:if>
+					<liferay-ui:icon image="edit" url="<%= editURL %>" />
+				</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
-						<liferay-security:permissionsURL
-							modelResource="<%= MBMessage.class.getName() %>"
-							modelResourceDescription="<%= message.getSubject() %>"
-							resourcePrimKey="<%= message.getPrimaryKey().toString() %>"
-							var="permissionsURL"
-						/>
+				<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
+					<liferay-security:permissionsURL
+						modelResource="<%= MBMessage.class.getName() %>"
+						modelResourceDescription="<%= message.getSubject() %>"
+						resourcePrimKey="<%= message.getPrimaryKey().toString() %>"
+						var="permissionsURL"
+					/>
 
-						<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-					</c:if>
+					<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+				</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
+				<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
 
-						<%
-						PortletURL categoryURL = renderResponse.createRenderURL();
+					<%
+					PortletURL categoryURL = renderResponse.createRenderURL();
 
-						categoryURL.setWindowState(WindowState.MAXIMIZED);
+					categoryURL.setWindowState(WindowState.MAXIMIZED);
 
-						categoryURL.setParameter("struts_action", "/message_boards/view");
-						categoryURL.setParameter("categoryId", message.getCategoryId());
-						%>
+					categoryURL.setParameter("struts_action", "/message_boards/view");
+					categoryURL.setParameter("categoryId", message.getCategoryId());
+					%>
 
-						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-							<portlet:param name="struts_action" value="/message_boards/edit_message" />
-							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-							<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />
-							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
-						</portlet:actionURL>
+					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+						<portlet:param name="struts_action" value="/message_boards/edit_message" />
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+						<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />
+						<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+					</portlet:actionURL>
 
-						<liferay-ui:icon-delete url="<%= deleteURL %>" />
-					</c:if>
-				</div>
+					<liferay-ui:icon-delete url="<%= deleteURL %>" />
+				</c:if>
 			</td>
 		</tr>
 	</c:if>
