@@ -1041,6 +1041,8 @@
 		<column name="passwordEncrypted" type="boolean" />
 		<column name="passwordExpirationDate" type="Date" />
 		<column name="passwordReset" type="boolean" />
+		<column name="passwordModifiedDate" type="Date" />
+		<column name="graceLoginCount" type="int" />
 		<column name="screenName" type="String" />
 		<column name="emailAddress" type="String" />
 		<column name="languageId" type="String" />
@@ -1051,7 +1053,10 @@
 		<column name="loginIP" type="String" />
 		<column name="lastLoginDate" type="Date" />
 		<column name="lastLoginIP" type="String" />
+		<column name="lastFailedLoginDate" type="Date" />
 		<column name="failedLoginAttempts" type="int" />
+		<column name="lockout" type="boolean" />
+		<column name="lockoutDate" type="Date" />
 		<column name="agreedToTermsOfUse" type="boolean" />
 		<column name="active" type="boolean" />
 
