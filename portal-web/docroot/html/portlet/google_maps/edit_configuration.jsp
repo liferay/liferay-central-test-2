@@ -33,7 +33,7 @@
 		<bean:message key="map-address" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />mapAddress" type="text" value="<%= mapAddress %>" />
 	</td>
 </tr>
 <tr>
@@ -54,7 +54,7 @@
 		<bean:message key="directions-address" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />directionsAddress" type="text" value="<%= directionsAddress %>" />
 	</td>
 </tr>
 <tr>

@@ -33,7 +33,7 @@
 		<bean:message key="ad-client" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />adClient" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adClient %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />adClient" type="text" value="<%= adClient %>" />
 	</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 		<bean:message key="ad-channel" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />adChannel" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= adChannel %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />adChannel" type="text" value="<%= adChannel %>" />
 	</td>
 </tr>
 <tr>
@@ -94,7 +94,7 @@
 		<bean:message key="color-border" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorBorder" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBorder %>" />
+		<inputclass="liferay-input-text" name="<portlet:namespace />colorBorder" type="text"  value="<%= colorBorder %>" />
 	</td>
 </tr>
 <tr>
@@ -102,7 +102,7 @@
 		<bean:message key="color-background" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorBg" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorBg %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />colorBg" type="text" value="<%= colorBg %>" />
 	</td>
 </tr>
 <tr>
@@ -110,7 +110,7 @@
 		<bean:message key="color-link" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorLink" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorLink %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />colorLink" type="text" value="<%= colorLink %>" />
 	</td>
 </tr>
 <tr>
@@ -118,7 +118,7 @@
 		<bean:message key="color-text" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorText" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorText %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />colorText" type="text" value="<%= colorText %>" />
 	</td>
 </tr>
 <tr>
@@ -126,7 +126,7 @@
 		<bean:message key="color-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />colorUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= colorUrl %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />colorUrl" type="text" value="<%= colorUrl %>" />
 	</td>
 </tr>
 </table>

@@ -195,7 +195,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<bean:message key="script" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />xsl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />xsl" type="file" />
 
 		<input type="button" value="<bean:message key="launch-editor" />" onClick="var templateXslWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /></portlet:renderURL>&<portlet:namespace />langType=' + document.<portlet:namespace />fm.<portlet:namespace />langType.value, 'templateXsl', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); templateXslWindow.focus();" />
 
@@ -250,7 +250,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="small-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />smallFile" type="file" />
 	</td>
 </tr>
 <tr>

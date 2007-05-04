@@ -55,7 +55,7 @@
 				</div>
 			</c:if>
 
-			<input name="<portlet:namespace />emailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>" />
+			<input class="liferay-input-text" name="<portlet:namespace />emailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
 
 			<br />
 

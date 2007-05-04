@@ -37,7 +37,7 @@
 		<bean:message key="xml-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />xmlURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xmlURL %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />xmlURL" type="text" value="<%= xmlURL %>" />
 	</td>
 </tr>
 <tr>
@@ -45,7 +45,7 @@
 		<bean:message key="xsl-url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />xslURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= xslURL %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />xslURL" type="text" value="<%= xslURL %>" />
 	</td>
 </tr>
 </table>

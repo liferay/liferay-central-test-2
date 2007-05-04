@@ -43,7 +43,7 @@ String message = ParamUtil.getString(request, "message");
 		<bean:message key="to" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= to %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />to" type="text" value="<%= to %>" />
 	</td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@ String message = ParamUtil.getString(request, "message");
 		<bean:message key="subject" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>" />
 	</td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@ String message = ParamUtil.getString(request, "message");
 		<bean:message key="message" />
 	</td>
 	<td>
-		<textarea name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= message %></textarea><br />
+		<textarea class="liferay-textarea" name="<portlet:namespace />message" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= message %></textarea><br />
 	</td>
 </tr>
 <tr>

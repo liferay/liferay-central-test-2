@@ -194,10 +194,10 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td>
-					<input name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>" />
+					<input class="liferay-input-text" name="<portlet:namespace />filterEmailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>" />
+					<input class="liferay-input-text" name="<portlet:namespace />filterFolder<%= i %>" type="text" value="<%= folder %>" />
 				</td>
 			</tr>
 
@@ -220,7 +220,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />forwardAddress" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= forwardAddress %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />forwardAddress" wrap="soft"><%= forwardAddress %></textarea>
 
 		<br /><br />
 

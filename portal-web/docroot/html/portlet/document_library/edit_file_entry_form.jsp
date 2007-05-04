@@ -144,7 +144,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 		<bean:message key="file" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />file" type="file" />
 	</td>
 </tr>
 <tr>

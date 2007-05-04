@@ -71,7 +71,7 @@
 						<bean:message key="base-provider-url" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
+						<input class="liferay-input-text" name="<portlet:namespace />baseProviderURL" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -79,7 +79,7 @@
 						<bean:message key="base-dn" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
+						<input class="liferay-input-text" name="<portlet:namespace />baseDN" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -87,7 +87,7 @@
 						<bean:message key="principal" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />principal" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>' />
+						<input class="liferay-input-text" name="<portlet:namespace />principal" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -95,7 +95,7 @@
 						<bean:message key="credentials" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
+						<input class="liferay-input-text" name="<portlet:namespace />credentials" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
 					</td>
 				</tr>
 				</table>
@@ -106,7 +106,7 @@
 
 				<br /><br />
 
-				<textarea name="<portlet:namespace />searchFilter" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %></textarea>
+				<textarea class="liferay-textarea" name="<portlet:namespace />searchFilter"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %></textarea>
 
 				<br /><br />
 
@@ -139,7 +139,7 @@
 
 				<br /><br />
 
-				<textarea name="<portlet:namespace />userMappings" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
+				<textarea class="liferay-textarea" name="<portlet:namespace />userMappings"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
 
 				<br /><br />
 
@@ -214,7 +214,7 @@
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />defaultGroupNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />defaultGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -222,7 +222,7 @@
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />defaultRoleNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />defaultRoleNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -230,7 +230,7 @@
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />defaultUserGroupNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />defaultUserGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -241,7 +241,7 @@
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />reservedScreenNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />reservedScreenNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -249,7 +249,7 @@
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />reservedEmailAddresses" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />reservedEmailAddresses"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
 
 		<br /><br />
 
@@ -260,7 +260,7 @@
 
 		<br /><br />
 
-		<textarea name="<portlet:namespace />mailHostNames" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />mailHostNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -350,10 +350,10 @@
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
-								<input name="<portlet:namespace />emailUserAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailUserAddedSubject %>" />
+								<input class="liferay-input-text" name="<portlet:namespace />emailUserAddedSubject" type="text" value="<%= emailUserAddedSubject %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
-								<input name="<portlet:namespace />emailPasswordSentSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailPasswordSentSubject %>" />
+								<input class="liferay-input-text" name="<portlet:namespace />emailPasswordSentSubject" type="text" value="<%= emailPasswordSentSubject %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -484,7 +484,7 @@
 						<bean:message key="name" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 					</td>
 				</tr>
 				<tr>
@@ -492,7 +492,7 @@
 						<bean:message key="address" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 					</td>
 				</tr>
 				</table>

@@ -323,7 +323,7 @@ breadcrumbs.append("<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.g
 				<span style="font-size: xx-small;">(<bean:message key="enter-one-url-per-line" />)</span>
 			</td>
 			<td>
-				<textarea name="<portlet:namespace />pluginRepositories" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
+				<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositories" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
 
 				<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
 			</td>

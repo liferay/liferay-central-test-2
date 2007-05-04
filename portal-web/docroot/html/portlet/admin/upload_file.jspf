@@ -29,7 +29,7 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+<input class="liferay-input-text" name="<portlet:namespace />file" type="file" />
 
 <br /><br />
 
@@ -39,7 +39,7 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />deploymentContext" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" />
+<input class="liferay-input-text" name="<portlet:namespace />deploymentContext" />
 
 <br /><br />
 

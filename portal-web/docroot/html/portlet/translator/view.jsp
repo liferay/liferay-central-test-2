@@ -40,7 +40,7 @@ if (translation == null) {
 	<br /><br />
 </c:if>
 
-<textarea name="<portlet:namespace />text" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= translation.getFromText() %></textarea>
+<textarea class="liferay-textarea" name="<portlet:namespace />text" wrap="soft"><%= translation.getFromText() %></textarea>
 
 <br /><br />
 

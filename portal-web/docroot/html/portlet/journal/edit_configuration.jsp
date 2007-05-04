@@ -121,7 +121,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="name" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
+				<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -129,7 +129,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
+				<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
@@ -169,16 +169,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
-						<input name="<portlet:namespace />emailArticleApprovalDeniedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-granted-email") %>'>
-						<input name="<portlet:namespace />emailArticleApprovalGrantedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
-						<input name="<portlet:namespace />emailArticleApprovalRequestedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("article-review-email") %>'>
-						<input name="<portlet:namespace />emailArticleReviewSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailArticleReviewSubject %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
 					</c:when>
 				</c:choose>
 			</td>

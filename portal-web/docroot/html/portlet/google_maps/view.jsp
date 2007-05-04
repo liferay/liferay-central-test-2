@@ -114,13 +114,13 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 		<form name="<portlet:namespace />fm">
 
 		<c:if test="<%= mapInputEnabled %>">
-			<input name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }" />
+			<input class="liferay-input-text" name="<portlet:namespace />mapAddress" type="text" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }" value="<%= mapAddress %>" />
 
 			<input type="button" value="<bean:message key="get-map" />" onClick="<portlet:namespace />getMap();" />
 		</c:if>
 
 		<c:if test="<%= directionsInputEnabled %>">
-			<input name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }" />
+			<input class="liferay-input-text" name="<portlet:namespace />directionsAddress" type="text" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }" value="<%= directionsAddress %>" />
 
 			<input type="button" value="<bean:message key="get-directions" />" onClick="<portlet:namespace />getDirections();" />
 		</c:if>

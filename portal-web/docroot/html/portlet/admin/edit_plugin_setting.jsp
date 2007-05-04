@@ -77,7 +77,7 @@
 
 <br /><br />
 
-<textarea name="<portlet:namespace />roles" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= StringUtil.merge(pluginSetting.getRolesArray(), "\n") %></textarea>
+<textarea class="liferay-textarea" name="<portlet:namespace />roles"><%= StringUtil.merge(pluginSetting.getRolesArray(), "\n") %></textarea>
 
 <br /><br />
 

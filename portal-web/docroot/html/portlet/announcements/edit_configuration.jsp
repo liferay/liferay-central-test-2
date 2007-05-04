@@ -33,7 +33,7 @@ content = ParamUtil.getString(request, "content", content);
 
 <liferay-ui:error exception="<%= AnnouncementsContentException.class %>" message="please-enter-valid-content" />
 
-<textarea name="<portlet:namespace />content" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= content %></textarea>
+<textarea class="liferay-textarea" name="<portlet:namespace />content" wrap="soft"><%= content %></textarea>
 
 <br /><br />
 

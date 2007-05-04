@@ -89,7 +89,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="name" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
+				<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
@@ -97,7 +97,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
+				<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		</table>
@@ -122,7 +122,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="subject" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailEventReminderSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailEventReminderSubject %>" />
+				<input class="liferay-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
 			</td>
 		</tr>
 		<tr>

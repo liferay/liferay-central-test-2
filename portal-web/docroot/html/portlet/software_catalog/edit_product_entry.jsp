@@ -171,7 +171,7 @@ else {
 		<%
 		String mainImageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
 		%>
-		<input name="<portlet:namespace />screenshot_update_<%=mainImageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />screenshot_update_<%=mainImageName%>" type="file" />
 		<%
 		if (productEntry != null) {
 			String imageId = productEntry.getImageId(mainImageName);
@@ -197,7 +197,7 @@ else {
 			String imageName = String.valueOf(i);
 		%>
  			<br clear="all"/>
-			<input name="<portlet:namespace />screenshot_update_<%=imageName%>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+			<input class="liferay-input-text" name="<portlet:namespace />screenshot_update_<%=imageName%>" type="file" />
 		<%
 			if (productEntry != null) {
 				String imageId = productEntry.getImageId(imageName);

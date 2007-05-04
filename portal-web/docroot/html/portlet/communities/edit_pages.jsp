@@ -994,7 +994,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 									<br /><br />
 
-									<textarea name="<portlet:namespace />css" style="height: 200px; width: 400px"><%= cssText %></textarea>
+									<textarea class="liferay-textarea" name="<portlet:namespace />css"><%= cssText %></textarea>
 
 									<br /><br />
 

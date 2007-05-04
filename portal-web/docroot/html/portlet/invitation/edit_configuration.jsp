@@ -62,7 +62,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 		<bean:message key="subject" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />emailMessageSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageSubject %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />emailMessageSubject" type="text" value="<%= emailMessageSubject %>" />
 	</td>
 </tr>
 <tr>

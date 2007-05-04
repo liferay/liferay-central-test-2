@@ -30,7 +30,7 @@
 		<bean:message key="url" />
 	</td>
 	<td>
-		<input name="TypeSettingsProperties(url)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />" />
+		<input class="liferay-input-text" name="TypeSettingsProperties(url)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />" />
 	</td>
 </tr>
 <tr>
@@ -38,7 +38,7 @@
 		<bean:message key="target" />
 	</td>
 	<td>
-		<input name="TypeSettingsProperties(target)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(target)" />" />
+		<input class="liferay-input-text" name="TypeSettingsProperties(target)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(target)" />" />
 	</td>
 </tr>
 <tr>
@@ -46,7 +46,7 @@
 		<bean:message key="description" />
 	</td>
 	<td>
-		<textarea name="TypeSettingsProperties(description)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
+		<textarea class="liferay-textarea" name="TypeSettingsProperties(description)" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
 	</td>
 </tr>
 </table>

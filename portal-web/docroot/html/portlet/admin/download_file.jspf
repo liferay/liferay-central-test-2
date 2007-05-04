@@ -30,7 +30,7 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="" />
+<input class="liferay-input-text" name="<portlet:namespace />url" value="" />
 
 <br /><br />
 
@@ -40,7 +40,7 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />remoteDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="" />
+<input class="liferay-input-text" name="<portlet:namespace />remoteDeployWARName" value="" />
 
 <br /><br />
 

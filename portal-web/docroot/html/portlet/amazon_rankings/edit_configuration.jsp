@@ -62,7 +62,7 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 <br /><br />
 
-<textarea name="<portlet:namespace />isbns" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= isbnsString %></textarea>
+<textarea class="liferay-textarea" name="<portlet:namespace />isbns" wrap="soft"><%= isbnsString %></textarea>
 
 <br /><br />
 

@@ -107,7 +107,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<bean:message key="paypal-email-address" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />payPalEmailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
+				<input class="liferay-input-text" name="<portlet:namespace />payPalEmailAddress" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
 			</td>
 		</tr>
 		<tr>
@@ -398,10 +398,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<input name="<portlet:namespace />emailOrderConfirmationSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderConfirmationSubject %>" />
+								<input class="liferay-input-text" name="<portlet:namespace />emailOrderConfirmationSubject" type="text" value="<%= emailOrderConfirmationSubject %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<input name="<portlet:namespace />emailOrderShippingSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailOrderShippingSubject %>" />
+								<input class="liferay-input-text" name="<portlet:namespace />emailOrderShippingSubject" type="text" value="<%= emailOrderShippingSubject %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -527,7 +527,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<bean:message key="name" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromName %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 					</td>
 				</tr>
 				<tr>
@@ -535,7 +535,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<bean:message key="address" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />emailFromAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailFromAddress %>" />
+						<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 					</td>
 				</tr>
 				</table>

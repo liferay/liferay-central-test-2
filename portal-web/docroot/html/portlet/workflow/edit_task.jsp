@@ -177,10 +177,10 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							<input name="<portlet:namespace /><%= displayName %>" type="hidden" value="" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>" />
+							<input class="liferay-input-text" name="<portlet:namespace /><%= displayName %>" type="text" value="<%= value %>" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_PASSWORD) %>">
-							<input name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>" />
+							<input class="liferay-input-text" name="<portlet:namespace /><%= displayName %>" type="password" value="<%= value %>" />
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
 
@@ -213,7 +213,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							</select>
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
-							<textarea name="<portlet:namespace /><%= displayName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
+							<textarea class="liferay-textarea" name="<portlet:namespace /><%= displayName %>" wrap="soft"><%= value %></textarea>
 						</c:when>
 					</c:choose>
 				</c:when>

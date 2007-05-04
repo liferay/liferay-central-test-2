@@ -147,7 +147,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="to" />
 	</td>
 	<td>
-		<input id="<portlet:namespace />to" name="<portlet:namespace />to" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" />
+		<input class="liferay-input-text" name="<portlet:namespace />to" type="text" id="<portlet:namespace />to" />
 	</td>
 </tr>
 <tr>
@@ -155,7 +155,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="cc" />
 	</td>
 	<td>
-		<input id="<portlet:namespace />cc" name="<portlet:namespace />cc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= cc %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />cc" type="text" id="<portlet:namespace />cc" value="<%= cc %>" />
 	</td>
 </tr>
 <tr>
@@ -163,7 +163,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="bcc" />
 	</td>
 	<td>
-		<input id="<portlet:namespace />bcc" name="<portlet:namespace />bcc" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= bcc %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />bcc" type="text" id="<portlet:namespace />bcc" value="<%= bcc %>" />
 	</td>
 </tr>
 <tr>
@@ -171,7 +171,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		<bean:message key="subject" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
 	</td>
 </tr>
 </table>

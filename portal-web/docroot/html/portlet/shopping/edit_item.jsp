@@ -632,7 +632,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="small-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />smallFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />smallFile" type="file" />
 	</td>
 </tr>
 <tr>
@@ -661,7 +661,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="medium-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />mediumFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />mediumFile" type="file" />
 	</td>
 </tr>
 <tr>
@@ -690,7 +690,7 @@ for (int i = 0; i < pricesCount; i++) {
 		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="large-image" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />largeFile" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file" />
+		<input class="liferay-input-text" name="<portlet:namespace />largeFile" type="file" />
 	</td>
 </tr>
 <tr>

@@ -62,7 +62,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="title" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />title" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= title %>" />
+			<input class="liferay-input-text" name="<portlet:namespace />title" type="text" value="<%= title %>" />
 		</td>
 	</tr>
 	<tr>
@@ -70,7 +70,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="description" />
 		</td>
 		<td>
-			<textarea name="<portlet:namespace/>description" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= description %></textarea>
+			<textarea class="liferay-textarea" name="<portlet:namespace/>description" wrap="soft"><%= description %></textarea>
 		</td>
 	</tr>
 	</table>
@@ -89,7 +89,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="subject" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />subject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= subject %>" />
+			<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
 		</td>
 	</tr>
 	<tr>
@@ -97,7 +97,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 			<bean:message key="email-address" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />emailAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>" />
+			<input class="liferay-input-text" name="<portlet:namespace />emailAddress" type="text" value="<%= emailAddress %>" />
 		</td>
 	</tr>
 	</table>

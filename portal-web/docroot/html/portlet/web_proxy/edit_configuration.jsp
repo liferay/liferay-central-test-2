@@ -33,7 +33,7 @@
 		<bean:message key="url" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />initUrl" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= initUrl %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />initUrl" value="<%= initUrl %>" />
 	</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 		<bean:message key="scope" /> (<bean:message key="regex" />)
 	</td>
 	<td>
-		<input name="<portlet:namespace />scope" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= scope %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />scope" value="<%= scope %>" />
 	</td>
 </tr>
 <tr>
@@ -49,7 +49,7 @@
 		<bean:message key="proxy-host" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyHost %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />proxyHost" value="<%= proxyHost %>" />
 	</td>
 </tr>
 <tr>
@@ -57,7 +57,7 @@
 		<bean:message key="proxy-port" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyPort" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyPort %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />proxyPort" value="<%= proxyPort %>" />
 	</td>
 </tr>
 <tr>
@@ -77,7 +77,7 @@
 		<bean:message key="proxy-authentication-username" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationUsername" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationUsername %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
 	</td>
 </tr>
 <tr>
@@ -85,7 +85,7 @@
 		<bean:message key="proxy-authentication-password" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationPassword" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationPassword %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
 	</td>
 </tr>
 <tr>
@@ -93,7 +93,7 @@
 		<bean:message key="proxy-authentication-host" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationHost" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationHost %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
 	</td>
 </tr>
 <tr>
@@ -101,7 +101,7 @@
 		<bean:message key="proxy-authentication-domain" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />proxyAuthenticationDomain" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= proxyAuthenticationDomain %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
 	</td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@
 		<bean:message key="stylesheet" />
 	</td>
 	<td>
-		<textarea name="<portlet:namespace />stylesheet" style="height: 300px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />stylesheet" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
 	</td>
 </tr>
 </table>

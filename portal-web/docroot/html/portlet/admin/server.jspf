@@ -116,7 +116,7 @@
 					<bean:message key="custom-message" />
 				</td>
 				<td>
-					<textarea name="<portlet:namespace />message" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+					<textarea class="liferay-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
 				</td>
 			</tr>
 			</table>

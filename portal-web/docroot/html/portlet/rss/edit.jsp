@@ -92,7 +92,7 @@ for (int i = 0; i < urls.length; i++) {
 			<input name="<portlet:namespace />title" value="<%= title %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= urls[i] %>" />
+			<input class="liferay-input-text" name="<portlet:namespace />url" value="<%= urls[i] %>" />
 		</td>
 		<td>
 			<a href="javascript: void(0);" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
