@@ -22,9 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import java.util.Date;
-import java.util.Iterator;
-
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -36,7 +33,9 @@ import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordTrackerLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
+
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  * <a href="PasswordTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -54,7 +53,7 @@ public class PasswordTrackerLocalServiceImpl
 
 	public boolean isSameAsCurrentPassword(long userId, String password)
 		throws PortalException, SystemException {
-		
+
 		String newEncPwd = PwdEncryptor.encrypt(password);
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -68,16 +67,16 @@ public class PasswordTrackerLocalServiceImpl
 		if (oldEncPwd.equals(newEncPwd)) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean isValidPassword(long userId, String password)
 		throws PortalException, SystemException {
 
 		String newEncPwd = PwdEncryptor.encrypt(password);
 
-		PasswordPolicy passwordPolicy = 
+		PasswordPolicy passwordPolicy =
 			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(userId);
 
 		if (!passwordPolicy.getHistory()) {
@@ -85,20 +84,20 @@ public class PasswordTrackerLocalServiceImpl
 		}
 
 		int historyCount = 1;
-				
+
 		Iterator itr = PasswordTrackerUtil.findByUserId(userId).iterator();
-		
+
 		while (itr.hasNext()) {
 			if (historyCount > passwordPolicy.getHistoryCount()) {
 				break;
 			}
-			
+
 			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
 
 			if (passwordTracker.getPassword().equals(newEncPwd)) {
 				return false;
 			}
-			
+
 			historyCount++;
 		}
 
