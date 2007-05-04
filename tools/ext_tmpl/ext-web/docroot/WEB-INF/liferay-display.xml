@@ -26,6 +26,7 @@
 			<portlet id="102" />
 			<portlet id="105" />
 			<portlet id="106" />
+			<portlet id="110" />
 		</category>
 		<portlet id="71" />
 		<portlet id="73" />
@@ -114,6 +115,7 @@
 		<portlet id="81" />
 		<portlet id="82" />
 		<portlet id="97" />
+		<portlet id="109" />
 	</category>
 	<category name="category.wiki">
 		<portlet id="36" />

@@ -498,6 +498,16 @@
 		<struts-path>page_ratings</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>109</portlet-name>
+		<struts-path>web_form</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>110</portlet-name>
+		<struts-path>document_library_display</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

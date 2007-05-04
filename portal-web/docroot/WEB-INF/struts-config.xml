@@ -496,6 +496,20 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<!-- Document Library Display -->
+
+		<action path="/document_library_display/edit_configuration" type="com.liferay.portlet.documentlibrary.action.EditConfigurationAction">
+			<forward name="portlet.document_library.edit_configuration" path="portlet.document_library.edit_configuration" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
+		<action path="/document_library_display/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />
+
+		<action path="/document_library_display/view" type="com.liferay.portlet.documentlibrary.action.ViewAction">
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
+		</action>
+
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">

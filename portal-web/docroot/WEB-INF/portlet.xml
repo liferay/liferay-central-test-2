@@ -2481,7 +2481,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/document_library/view</value>
+			<value>/document_library_display/view</value>
 		</init-param>
 		<portlet-preferences>
 			<preference>

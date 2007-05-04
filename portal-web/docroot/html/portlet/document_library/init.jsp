@@ -96,12 +96,13 @@ String allFileEntryColumns = defaultFileEntryColumns;
 
 String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(prefs, request, "fileEntryColumns", defaultFileEntryColumns));
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-
 boolean showTabs = false;
 boolean showButtons = false;
+
 if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showTabs = true;
 	showButtons = true;
 }
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
