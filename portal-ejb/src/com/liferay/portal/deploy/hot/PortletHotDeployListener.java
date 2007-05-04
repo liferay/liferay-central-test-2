@@ -109,8 +109,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			String[] xmls = new String[] {
 				Http.URLtoString(ctx.getResource("/WEB-INF/portlet.xml")),
-				Http.URLtoString(ctx.getResource(
-					"/WEB-INF/liferay-portlet.xml")),
+				Http.URLtoString(
+					ctx.getResource("/WEB-INF/liferay-portlet.xml")),
 				Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 			};
 

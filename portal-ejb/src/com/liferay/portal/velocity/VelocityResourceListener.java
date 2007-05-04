@@ -38,6 +38,9 @@ public abstract class VelocityResourceListener {
 
 	public static final String SERVLET_SEPARATOR = "_SERVLET_CONTEXT_";
 
+	public static final String THEME_LOADER_SEPARATOR =
+		"_THEME_LOADER_CONTEXT_";
+
 	public abstract InputStream getResourceStream(String source)
 		throws ResourceNotFoundException;
 

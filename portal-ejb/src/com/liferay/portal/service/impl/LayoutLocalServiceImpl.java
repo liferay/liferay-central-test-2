@@ -2289,7 +2289,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 
 			FileUtil.write(
-				themeLoader.getRoot() + "/" + themeId + "/" + key, value);
+				themeLoader.getFileStorage() + "/" + themeId + "/" + key,
+				value);
 		}
 
 		themeLoader.loadThemes();

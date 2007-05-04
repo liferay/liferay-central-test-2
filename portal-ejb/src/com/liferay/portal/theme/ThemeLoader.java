@@ -23,10 +23,14 @@
 package com.liferay.portal.theme;
 
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 
 import java.io.File;
+import java.io.StringReader;
 
 import java.util.Map;
 
@@ -34,6 +38,10 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ThemeLoader.java.html"><b><i>View Source</i></b></a>
@@ -47,20 +55,21 @@ public class ThemeLoader {
 		return _servletContextName;
 	}
 
-	public File getRoot() {
-		return _root;
+	public File getFileStorage() {
+		return _fileStorage;
 	}
 
 	public synchronized void loadThemes() {
 		if (_log.isInfoEnabled()) {
-			_log.info("Loading themes in " + _root);
+			_log.info("Loading themes in " + _fileStorage);
 		}
 
-		File[] files = _root.listFiles();
+		File[] files = _fileStorage.listFiles();
 
 		if (files == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("There are no directories to process for  " + _root);
+				_log.warn(
+					"There are no directories to process for  " + _fileStorage);
 			}
 
 			return;
@@ -106,10 +115,45 @@ public class ThemeLoader {
 		}
 	}
 
-	protected ThemeLoader(String servletContextName, ServletContext ctx) {
+	protected ThemeLoader(
+		String servletContextName, ServletContext ctx, String[] xmls) {
+
 		_servletContextName = servletContextName;
 		_ctx = ctx;
-		_root = new File(ctx.getRealPath("/themes"));
+
+		try {
+			_fileStorage = new File(ctx.getRealPath("/themes"));
+
+			SAXReader reader = SAXReaderFactory.getInstance();
+
+			Document doc = reader.read(new StringReader(xmls[0]));
+
+			Element root = doc.getRootElement();
+
+			String fileStorageValue = GetterUtil.getString(
+				root.elementText("file-storage"));
+
+			if (Validator.isNotNull(fileStorageValue)) {
+				_fileStorage = new File(fileStorageValue);
+				_loadFromServletContext = false;
+			}
+
+			if (!_fileStorage.exists()) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"File storage " + _fileStorage + " does not exist");
+				}
+
+				if (!_fileStorage.mkdirs()) {
+					_log.error(
+						"Unable to create theme loader file storage at " +
+							_fileStorage);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		loadThemes();
 	}
@@ -126,7 +170,8 @@ public class ThemeLoader {
 			String content = FileUtil.read(liferayLookAndFeelXML);
 
 			ThemeLocalUtil.init(
-				_servletContextName, _ctx, new String[] {content}, null);
+				_servletContextName, _ctx, _loadFromServletContext,
+				new String[] {content}, null);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -139,7 +184,8 @@ public class ThemeLoader {
 
 	private String _servletContextName;
 	private ServletContext _ctx;
-	private File _root;
+	private File _fileStorage;
+	private boolean _loadFromServletContext = true;
 	private Map _lastModifiedMap = CollectionFactory.getHashMap();
 
 }

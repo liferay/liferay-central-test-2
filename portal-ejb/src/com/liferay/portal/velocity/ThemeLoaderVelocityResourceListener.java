@@ -22,65 +22,73 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.theme.ThemeLoader;
+import com.liferay.portal.theme.ThemeLoaderFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
-
-import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
- * <a href="ServletVelocityResourceListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ThemeLoaderVelocityResourceListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class ServletVelocityResourceListener extends VelocityResourceListener {
+public class ThemeLoaderVelocityResourceListener
+	extends VelocityResourceListener {
 
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
 		InputStream is = null;
 
-		int pos = source.indexOf(SERVLET_SEPARATOR);
+		try {
+			int pos = source.indexOf(THEME_LOADER_SEPARATOR);
 
-		if (pos != -1) {
-			String ctxName = source.substring(0, pos);
+			if (pos != -1) {
+				String ctxName = source.substring(0, pos);
 
-			if (Validator.isNull(ctxName)) {
-				ctxName = PropsUtil.get(PropsUtil.PORTAL_CTX);
-			}
+				ThemeLoader themeLoader = ThemeLoaderFactory.getThemeLoader(
+					ctxName);
 
-			ServletContext ctx = VelocityContextPool.get(ctxName);
+				if (themeLoader != null) {
+					String name =
+						source.substring(pos + THEME_LOADER_SEPARATOR.length());
 
-			if (ctx != null) {
-				String name =
-					source.substring(pos + SERVLET_SEPARATOR.length());
+					if (name.startsWith("/themes")) {
+						name = name.substring(7, name.length());
+					}
 
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						name + " is associated with the servlet context " +
-							ctxName + " " + ctx);
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							name + " is associated with the theme loader " +
+								ctxName + " " + themeLoader);
+					}
+
+					is = new FileInputStream(
+						themeLoader.getFileStorage().getPath() + name);
 				}
-
-				is = ctx.getResourceAsStream(name);
+				else {
+					_log.error(
+						source + " is not valid because " + ctxName +
+							" does not map to a theme loader");
+				}
 			}
-			else {
-				_log.error(
-					source + " is not valid because " + ctxName +
-						" does not map to a servlet context");
-			}
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new ResourceNotFoundException(source);
 		}
 
 		return is;
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ServletVelocityResourceListener.class);
+		LogFactory.getLog(ThemeLoaderVelocityResourceListener.class);
 
 }

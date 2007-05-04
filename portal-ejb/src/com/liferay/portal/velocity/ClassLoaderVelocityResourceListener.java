@@ -50,6 +50,10 @@ public class ClassLoaderVelocityResourceListener
 		}
 
 		if (pos == -1) {
+			pos = source.indexOf(THEME_LOADER_SEPARATOR);
+		}
+
+		if (pos == -1) {
 			ClassLoader classLoader = getClass().getClassLoader();
 
 			if (_log.isDebugEnabled()) {

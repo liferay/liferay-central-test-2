@@ -312,7 +312,7 @@ public class MainServlet extends ActionServlet {
 						"/WEB-INF/liferay-look-and-feel-ext.xml"))
 				};
 
-				ThemeLocalUtil.init(ctx, xmls, pluginPackage);
+				ThemeLocalUtil.init(ctx, true, xmls, pluginPackage);
 
 				VelocityContextPool.put(servletContextName, ctx);
 			}

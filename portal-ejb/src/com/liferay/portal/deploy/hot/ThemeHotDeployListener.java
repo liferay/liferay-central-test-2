@@ -65,8 +65,8 @@ public class ThemeHotDeployListener implements HotDeployListener {
 			}
 
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
-					"/WEB-INF/liferay-look-and-feel.xml"))
+				Http.URLtoString(
+					ctx.getResource("/WEB-INF/liferay-look-and-feel.xml"))
 			};
 
 			if (xmls[0] == null) {
@@ -78,7 +78,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 			}
 
 			List themeIds = ThemeLocalUtil.init(
-				servletContextName, ctx, xmls, event.getPluginPackage());
+				servletContextName, ctx, true, xmls, event.getPluginPackage());
 
 			VelocityContextPool.put(servletContextName, ctx);
 

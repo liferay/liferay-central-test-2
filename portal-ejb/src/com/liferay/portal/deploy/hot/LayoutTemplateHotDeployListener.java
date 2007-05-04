@@ -63,8 +63,8 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 			}
 
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
-					"/WEB-INF/liferay-layout-templates.xml"))
+				Http.URLtoString(
+					ctx.getResource("/WEB-INF/liferay-layout-templates.xml"))
 			};
 
 			if (xmls[0] == null) {

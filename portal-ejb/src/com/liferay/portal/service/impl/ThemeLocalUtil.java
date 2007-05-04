@@ -170,21 +170,26 @@ public class ThemeLocalUtil {
 	}
 
 	public static List init(
-		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
+		ServletContext ctx, boolean loadFromServletContext, String[] xmls,
+		PluginPackage pluginPackage) {
 
-		return init(null, ctx, xmls, pluginPackage);
+		return init(null, ctx, loadFromServletContext, xmls, pluginPackage);
 	}
 
 	public static List init(
-		String servletContextName, ServletContext ctx, String[] xmls,
+		String servletContextName, ServletContext ctx,
+		boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
 		List themeIds = new ArrayList();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
-				Iterator itr = _readThemes(
-					servletContextName, ctx, xmls[i], pluginPackage).iterator();
+				Set themes = _readThemes(
+					servletContextName, ctx, loadFromServletContext, xmls[i],
+					pluginPackage);
+
+				Iterator itr = themes.iterator();
 
 				while (itr.hasNext()) {
 					String themeId = (String)itr.next();
@@ -379,7 +384,8 @@ public class ThemeLocalUtil {
 	}
 
 	private static Set _readThemes(
-			String servletContextName, ServletContext ctx, String xml,
+			String servletContextName, ServletContext ctx,
+			boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
 
@@ -508,6 +514,8 @@ public class ThemeLocalUtil {
 			if (servletContextName != null) {
 				themeModel.setServletContextName(servletContextName);
 			}
+
+			themeModel.setLoadFromServletContext(loadFromServletContext);
 
 			String name = GetterUtil.getString(
 				theme.attributeValue("name"), themeModel.getName());

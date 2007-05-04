@@ -22,12 +22,12 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.servlet.StringServletResponse;
@@ -152,10 +152,16 @@ public class ThemeUtil {
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
 
-		String source =
-			ctxName + VelocityResourceListener.SERVLET_SEPARATOR +
-				theme.getTemplatesPath() + StringPool.SLASH +
-					page.substring(0, pos) + ".vm";
+		StringMaker sm = new StringMaker();
+
+		sm.append(ctxName);
+		sm.append(theme.getVelocityResourceListener());
+		sm.append(theme.getTemplatesPath());
+		sm.append(StringPool.SLASH);
+		sm.append(page.substring(0, pos));
+		sm.append(".vm");
+
+		String source = sm.toString();
 
 		if (!Velocity.resourceExists(source)) {
 			_log.error(source + " does not exist");

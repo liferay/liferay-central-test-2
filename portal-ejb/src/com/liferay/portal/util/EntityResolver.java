@@ -180,6 +180,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Theme Loader 4.3.0//EN",
+			"liferay-theme-loader_4_3_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Pramati Technologies //DTD Pramati J2ee Server 3.0//EN",
 			"pramati-j2ee-server_3_0.dtd"
 		),

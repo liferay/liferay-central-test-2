@@ -56,8 +56,8 @@ public class ThemeLoaderHotDeployListener implements HotDeployListener {
 			}
 
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
-					"/WEB-INF/liferay-theme-loader.txt"))
+				Http.URLtoString(
+					ctx.getResource("/WEB-INF/liferay-theme-loader.xml"))
 			};
 
 			if (xmls[0] == null) {
@@ -68,7 +68,7 @@ public class ThemeLoaderHotDeployListener implements HotDeployListener {
 				_log.info("Registering theme loader for " + servletContextName);
 			}
 
-			ThemeLoaderFactory.init(servletContextName, ctx);
+			ThemeLoaderFactory.init(servletContextName, ctx, xmls);
 		}
 		catch (Exception e) {
 			throw new HotDeployException(

@@ -113,4 +113,12 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public String getContextPath();
 
+	public boolean getLoadFromServletContext();
+
+	public boolean isLoadFromServletContext();
+
+	public void setLoadFromServletContext(boolean loadFromServletContext);
+
+	public String getVelocityResourceListener();
+
 }

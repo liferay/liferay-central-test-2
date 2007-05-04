@@ -38,10 +38,13 @@ import javax.servlet.ServletContext;
  */
 public class ThemeLoaderFactory {
 
-	public static void init(String servletContextName, ServletContext ctx) {
+	public static void init(
+		String servletContextName, ServletContext ctx, String[] xmls) {
+
 		VelocityContextPool.put(servletContextName, ctx);
 
-		ThemeLoader themeLoader = new ThemeLoader(servletContextName, ctx);
+		ThemeLoader themeLoader = new ThemeLoader(
+			servletContextName, ctx, xmls);
 
 		_themeLoaders.put(servletContextName, themeLoader);
 	}
@@ -74,6 +77,10 @@ public class ThemeLoaderFactory {
 		}
 
 		return themeLoader;
+	}
+
+	public static ThemeLoader getThemeLoader(String servletContextName) {
+		return (ThemeLoader)_themeLoaders.get(servletContextName);
 	}
 
 	public static void loadThemes() {

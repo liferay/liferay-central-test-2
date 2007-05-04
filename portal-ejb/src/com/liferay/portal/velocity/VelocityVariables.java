@@ -164,12 +164,12 @@ public class VelocityVariables {
 
 			vc.put(
 				"fullCssPath",
-				ctxName + VelocityResourceListener.SERVLET_SEPARATOR +
+				ctxName + theme.getVelocityResourceListener() +
 					theme.getCssPath());
 
 			vc.put(
 				"fullTemplatesPath",
-				ctxName + VelocityResourceListener.SERVLET_SEPARATOR +
+				ctxName + theme.getVelocityResourceListener() +
 					theme.getTemplatesPath());
 
 			// Init

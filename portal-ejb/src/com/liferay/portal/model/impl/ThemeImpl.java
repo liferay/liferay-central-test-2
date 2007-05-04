@@ -28,6 +28,7 @@ import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Validator;
 
@@ -255,6 +256,27 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	public boolean getLoadFromServletContext() {
+		return _loadFromServletContext;
+	}
+
+	public boolean isLoadFromServletContext() {
+		return _loadFromServletContext;
+	}
+
+	public void setLoadFromServletContext(boolean loadFromServletContext) {
+		_loadFromServletContext = loadFromServletContext;
+	}
+
+	public String getVelocityResourceListener() {
+		if (_loadFromServletContext) {
+			return VelocityResourceListener.SERVLET_SEPARATOR;
+		}
+		else {
+			return VelocityResourceListener.THEME_LOADER_SEPARATOR;
+		}
+	}
+
 	public int compareTo(Object obj) {
 		if (obj == null) {
 			return -1;
@@ -379,5 +401,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private Map _colorSchemesMap = new HashMap();
 	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
+	private boolean _loadFromServletContext;
 
 }
