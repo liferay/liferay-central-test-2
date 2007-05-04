@@ -24,7 +24,7 @@
 
 <%@ include file="/init.jsp" %>
 
-<a href="<%= request.getContextPath() %>/video/video/abc.rm">
-<img src="<%= request.getContextPath() %>/video/video/abc.jpg" /><br />
+<a href="<%= request.getContextPath() %>/video/hong_kong.rm">
+<img src="<%= request.getContextPath() %>/video/hong_kong.gif" /><br />
 Download
 </a>
