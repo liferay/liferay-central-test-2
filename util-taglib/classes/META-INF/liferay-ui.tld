@@ -888,6 +888,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>message</name>
+		<tagclass>com.liferay.taglib.ui.MessageTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>my-places</name>
 		<tagclass>com.liferay.taglib.ui.MyPlacesTag</tagclass>
 		<bodycontent>JSP</bodycontent>
