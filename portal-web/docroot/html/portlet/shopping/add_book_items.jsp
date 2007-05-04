@@ -46,7 +46,7 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategoryImpl.DE
 
 <br /><br />
 
-<textarea name="<portlet:namespace />isbns" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+<textarea class="liferay-textarea" name="<portlet:namespace />isbns" wrap="soft"></textarea>
 
 <br /><br />
 

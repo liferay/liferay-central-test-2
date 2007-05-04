@@ -48,19 +48,19 @@
 
 			<bean:message key="meta-robots" /><br />
 
-			<textarea name="TypeSettingsProperties(meta-robots)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
+			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-robots)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
 
 			<br /><br />
 
 			<bean:message key="meta-description" /><br />
 
-			<textarea name="TypeSettingsProperties(meta-description)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
+			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-description)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
 
 			<br /><br />
 
 			<bean:message key="meta-keywords" /><br />
 
-			<textarea name="TypeSettingsProperties(meta-keywords)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
+			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-keywords)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
 
 			<br /><br />
 		</div>
@@ -89,19 +89,19 @@
 
 			<bean:message key="javascript-1" /><br />
 
-			<textarea name="TypeSettingsProperties(javascript-1)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
+			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-1)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
 
 			<br /><br />
 
 			<bean:message key="javascript-2" /><br />
 
-			<textarea name="TypeSettingsProperties(javascript-2)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
+			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-2)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
 
 			<br /><br />
 
 			<bean:message key="javascript-3" /><br />
 
-			<textarea name="TypeSettingsProperties(javascript-3)" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
+			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-3)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
 		</div>
 	</td>
 </tr>
