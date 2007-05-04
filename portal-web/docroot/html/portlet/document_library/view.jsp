@@ -62,13 +62,13 @@ portletURL.setParameter("folderId", folderId);
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIds) %>" />
 
 <c:choose>
-	<c:when test="<%= rootFolder == null %>">
+	<c:when test="<%= showTabs && (rootFolder == null) %>">
 		<liferay-ui:tabs
 			names="folders,my-documents,recent-documents"
 			url="<%= portletURL.toString() %>"
 		/>
 	</c:when>
-	<c:when test="<%= showSubfolders %>">
+	<c:when test="<%= showTabs && showSubfolders %>">
 		<liferay-ui:tabs names="folders" />
 	</c:when>
 </c:choose>
@@ -138,7 +138,7 @@ portletURL.setParameter("folderId", folderId);
 				resultRows.add(row);
 			}
 
-			boolean showAddFolderButton = DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+			boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
 			boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
 			%>
 
@@ -169,7 +169,7 @@ portletURL.setParameter("folderId", folderId);
 
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-			<c:if test="<%= folder != null %>">
+			<c:if test="<%= (folder != null) && (total > 0) %>">
 				<br />
 			</c:if>
 
@@ -187,7 +187,7 @@ portletURL.setParameter("folderId", folderId);
 			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
 			<input name="<portlet:namespace />folderIds" type="hidden" value="<%= folderId %>" />
 
-			<c:if test="<%= showSubfolders %>">
+			<c:if test="<%= showTabs && showSubfolders %>">
 				<liferay-ui:tabs names="documents" />
 			</c:if>
 
@@ -257,8 +257,8 @@ portletURL.setParameter("folderId", folderId);
 				resultRows.add(row);
 			}
 
-			boolean showAddFileEntryButton = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
-			boolean showAddFileShortcutButton = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
+			boolean showAddFileEntryButton = showButtons && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
+			boolean showAddFileShortcutButton = showButtons && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
 			boolean showCurDocumentSearch = showFileEntriesSearch && (results.size() > 0);
 			%>
 

@@ -1000,6 +1000,20 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
 	</portlet>
+	<portlet>
+		<portlet-name>110</portlet-name>
+		<struts-path>document_library</struts-path>
+		<configuration-path>/document_library/edit_configuration</configuration-path>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>0</render-weight>
+		<add-default-resource>true</add-default-resource>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

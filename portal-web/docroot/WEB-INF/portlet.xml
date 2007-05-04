@@ -2475,6 +2475,52 @@
 			</preference>
 		</portlet-preferences>
 	</portlet>
+	<portlet>
+		<portlet-name>110</portlet-name>
+		<display-name>Document Library Display</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/document_library/view</value>
+		</init-param>
+		<portlet-preferences>
+			<preference>
+				<name>showBreadcrumbs</name>
+				<value>false</value>
+			</preference>
+			<preference>
+				<name>showFoldersSearch</name>
+				<value>false</value>
+			</preference>
+			<preference>
+				<name>showSubfolders</name>
+				<value>true</value>
+			</preference>
+			<preference>
+				<name>folderColumns</name>
+				<value>folder,num-of-folders,num-of-documents</value>
+			</preference>
+			<preference>
+				<name>showFileEntriesSearch</name>
+				<value>false</value>
+			</preference>
+			<preference>
+				<name>fileEntryColumns</name>
+				<value>document,size</value>
+			</preference>
+		</portlet-preferences>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>
