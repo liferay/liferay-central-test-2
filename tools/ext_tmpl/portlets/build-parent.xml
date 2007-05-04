@@ -42,6 +42,10 @@
 			nowarn="${javac.nowarn}"
 			srcdir="${module.name}.war/WEB-INF/src"
 		/>
+
+		<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
+			<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
+		</copy>
 	</target>
 
 	<target name="war">
