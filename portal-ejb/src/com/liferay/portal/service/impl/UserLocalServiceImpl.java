@@ -22,6 +22,23 @@
 
 package com.liferay.portal.service.impl;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.rmi.RemoteException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.mail.internet.InternetAddress;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.ContactBirthdayException;
@@ -57,6 +74,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -74,6 +92,7 @@ import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -86,6 +105,7 @@ import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationUtil;
+import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 import com.liferay.portal.service.persistence.PermissionUserFinder;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
@@ -108,26 +128,6 @@ import com.liferay.util.InstancePool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import java.rmi.RemoteException;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.mail.internet.InternetAddress;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1012,6 +1012,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean passwordReset)
 		throws PortalException, SystemException {
 
+		PasswordPolicy passwordPolicy = 
+			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(userId);
+		
+		if (!passwordPolicy.getChangeable()) {
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_NOT_CHANGEABLE);
+		}
+		
 		validatePassword(userId, password1, password2);
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -1656,6 +1664,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			throw new UserPasswordException(
 				UserPasswordException.PASSWORD_INVALID);
+		}
+		else if (PasswordTrackerLocalServiceUtil.isSameAsCurrentPassword(
+					userId, password1)) {
+	
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_SAME_AS_CURRENT);
 		}
 		else if (!PasswordTrackerLocalServiceUtil.isValidPassword(
 					userId, password1)) {

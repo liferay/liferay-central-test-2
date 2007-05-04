@@ -22,21 +22,21 @@
 
 package com.liferay.portal.service.impl;
 
+import java.util.Date;
+import java.util.Iterator;
+
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.pwd.PwdEncryptor;
+import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordTrackerLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Time;
-
-import java.util.Date;
-import java.util.Iterator;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 /**
  * <a href="PasswordTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -52,44 +52,54 @@ public class PasswordTrackerLocalServiceImpl
 		PasswordTrackerUtil.removeByUserId(userId);
 	}
 
+	public boolean isSameAsCurrentPassword(long userId, String password)
+		throws PortalException, SystemException {
+		
+		String newEncPwd = PwdEncryptor.encrypt(password);
+
+		User user = UserUtil.findByPrimaryKey(userId);
+
+		String oldEncPwd = user.getPassword();
+
+		if (!user.isPasswordEncrypted()) {
+			oldEncPwd = PwdEncryptor.encrypt(user.getPassword());
+		}
+
+		if (oldEncPwd.equals(newEncPwd)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public boolean isValidPassword(long userId, String password)
 		throws PortalException, SystemException {
 
-		int passwordsRecycle = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.PASSWORDS_RECYCLE));
+		String newEncPwd = PwdEncryptor.encrypt(password);
 
-		if (passwordsRecycle > 0) {
-			String newEncPwd = PwdEncryptor.encrypt(password);
+		PasswordPolicy passwordPolicy = 
+			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(userId);
 
-			User user = UserUtil.findByPrimaryKey(userId);
+		if (!passwordPolicy.getHistory()) {
+			return true;
+		}
 
-			String oldEncPwd = user.getPassword();
-
-			if (!user.isPasswordEncrypted()) {
-				oldEncPwd = PwdEncryptor.encrypt(user.getPassword());
+		int historyCount = 1;
+				
+		Iterator itr = PasswordTrackerUtil.findByUserId(userId).iterator();
+		
+		while (itr.hasNext()) {
+			if (historyCount > passwordPolicy.getHistoryCount()) {
+				break;
 			}
+			
+			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
 
-			if (oldEncPwd.equals(newEncPwd)) {
+			if (passwordTracker.getPassword().equals(newEncPwd)) {
 				return false;
 			}
-
-			Date now = new Date();
-
-			Iterator itr = PasswordTrackerUtil.findByUserId(userId).iterator();
-
-			while (itr.hasNext()) {
-				PasswordTracker passwordTracker = (PasswordTracker)itr.next();
-
-				Date recycleDate = new Date(
-					passwordTracker.getCreateDate().getTime() +
-					Time.DAY * passwordsRecycle);
-
-				if (recycleDate.after(now)) {
-					if (passwordTracker.getPassword().equals(newEncPwd)) {
-						return false;
-					}
-				}
-			}
+			
+			historyCount++;
 		}
 
 		return true;

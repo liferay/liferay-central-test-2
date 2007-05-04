@@ -31,6 +31,8 @@ String tabs4 = ParamUtil.getString(request, "tabs4", "phone-numbers");
 
 User user2 = PortalUtil.getSelectedUser(request);
 
+PasswordPolicy passwordPolicy = PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(user2.getUserId());
+
 boolean editable = false;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
@@ -77,19 +79,25 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 
 <%@ include file="/html/portlet/enterprise_admin/edit_user_profile.jspf" %>
 
+<%
+String tabs2Names = "display" + (passwordPolicy.getChangeable() ? ",password" : "") + ",roles";
+%>
+
 <c:if test="<%= user2 != null %>">
 	<c:if test="<%= editable %>">
 		<liferay-ui:tabs
-			names="display,password,roles"
+			names="<%= tabs2Names %>"
 			param="tabs2"
 			refresh="<%= false %>"
 		>
 			<liferay-ui:section>
 				<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jspf" %>
 			</liferay-ui:section>
-			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>
-			</liferay-ui:section>
+			<c:if test="<%= passwordPolicy.getChangeable() %>">
+				<liferay-ui:section>
+					<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>
+				</liferay-ui:section>
+			</c:if>
 			<liferay-ui:section>
 				<%@ include file="/html/portlet/enterprise_admin/user_role_iterator.jspf" %>
 			</liferay-ui:section>

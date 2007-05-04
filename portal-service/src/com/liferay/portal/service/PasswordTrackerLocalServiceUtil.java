@@ -72,6 +72,16 @@ public class PasswordTrackerLocalServiceUtil {
 		passwordTrackerLocalService.deletePasswordTrackers(userId);
 	}
 
+	public static boolean isSameAsCurrentPassword(long userId,
+		java.lang.String password)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.isSameAsCurrentPassword(userId,
+			password);
+	}
+
 	public static boolean isValidPassword(long userId, java.lang.String password)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

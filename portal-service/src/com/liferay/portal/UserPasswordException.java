@@ -30,11 +30,19 @@ package com.liferay.portal;
  */
 public class UserPasswordException extends PortalException {
 
-	public static final int PASSWORDS_DO_NOT_MATCH = 1;
+	public static final int PASSWORD_ALREADY_USED = 1;
 
-	public static final int PASSWORD_INVALID = 2;
+	public static final int PASSWORD_CONTAINS_TRIVIAL_WORDS = 2;
 
-	public static final int PASSWORD_ALREADY_USED = 3;
+	public static final int PASSWORD_INVALID = 3;
+
+	public static final int PASSWORD_LENGTH = 4;
+
+	public static final int PASSWORD_NOT_CHANGEABLE = 5;
+
+	public static final int PASSWORD_SAME_AS_CURRENT = 6;
+
+	public static final int PASSWORDS_DO_NOT_MATCH = 7;
 
 	public UserPasswordException(int type) {
 		_type = type;

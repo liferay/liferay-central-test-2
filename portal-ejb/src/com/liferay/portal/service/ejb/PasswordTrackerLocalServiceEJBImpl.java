@@ -71,6 +71,15 @@ public class PasswordTrackerLocalServiceEJBImpl
 		PasswordTrackerLocalServiceFactory.getTxImpl().deletePasswordTrackers(userId);
 	}
 
+	public boolean isSameAsCurrentPassword(long userId,
+		java.lang.String password)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PasswordTrackerLocalServiceFactory.getTxImpl()
+												 .isSameAsCurrentPassword(userId,
+			password);
+	}
+
 	public boolean isValidPassword(long userId, java.lang.String password)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

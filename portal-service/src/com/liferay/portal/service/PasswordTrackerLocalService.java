@@ -60,6 +60,11 @@ public interface PasswordTrackerLocalService {
 	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public boolean isSameAsCurrentPassword(long userId,
+		java.lang.String password)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean isValidPassword(long userId, java.lang.String password)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
