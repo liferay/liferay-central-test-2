@@ -64,6 +64,7 @@ var LayoutConfiguration = {
 							onComplete: function() {
 											LayoutConfiguration.init();
 											Liferay.Util.addInputType();
+											Liferay.Util.addInputFocus();
 										}
 									});
 		}

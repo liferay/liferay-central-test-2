@@ -147,6 +147,7 @@
 			}
 
 			Liferay.Util.addInputType(jPopup[0]);
+			Liferay.Util.addInputFocus(jPopup[0]);
 			window.focus();
 
 			return jMessage[0];

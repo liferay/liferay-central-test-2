@@ -63,3 +63,8 @@ input[type="submit"], input[type="button"], input[type="reset"] {
 	font-weight: bold;
 	padding: 0.25em;
 }
+
+input.focus, textarea.focus, select.focus, .ie6 input.focus, .ie6 textarea.focus, ie6 select.focus {
+	background: #ffc none;
+	border: 1px solid #fc0;
+}

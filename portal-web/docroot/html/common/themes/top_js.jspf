@@ -133,6 +133,7 @@
 	_$J(document).ready(
 		function() {
 			Liferay.Util.addInputType();
+			Liferay.Util.addInputFocus();
 		}
 	);
 

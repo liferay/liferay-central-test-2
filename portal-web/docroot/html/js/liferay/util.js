@@ -22,6 +22,36 @@ Liferay.Util = {
 	   }
 	},
 
+	addInputFocus: function(el) {
+		var item;
+
+		if (el) {
+			if (typeof el == 'object') {
+				item = jQuery(el);
+			}
+			else {
+				item = jQuery('#' + el);
+			}
+		}
+		else {
+			item = document.body;
+		}
+		
+		var inputs = jQuery("input[@type=text], input[@type=password], select, textarea", item);
+		
+		inputs.focus(
+			function() {
+				jQuery(this).addClass('focus');
+			}
+		);
+		
+		inputs.blur(
+			function() {
+				jQuery(this).removeClass('focus');	
+			}
+		);
+	},
+
 	addInputType: function(el) {
 		var item;
 
@@ -737,16 +767,18 @@ function submitForm(form, action, singleSubmit) {
 
 		if (singleSubmit == null || singleSubmit) {
 			Liferay.Util.submitCountdown++;
-
-			for (var i = 0; i < form.length; i++){
-				var e = form.elements[i];
-
-				if (e.type && (e.type.toLowerCase() == "button" || e.type.toLowerCase() == "reset" || e.type.toLowerCase() == "submit")) {
-					e.disabled = true;
+			
+			var inputs = jQuery('input[@type=button], input[@type=reset], input[@type=submit]', form);
+			
+			inputs.each(
+				function(i, el) {
+						var input = jQuery(this)
+						input.attr('disabled', true);
+						input.fadeTo(50, 0.5);
 				}
-			}
+			);
 		}
-
+		
 		if (action != null) {
 			form.action = action;
 		}

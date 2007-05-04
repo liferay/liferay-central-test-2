@@ -121,6 +121,7 @@ function addPortletHTML(html, container, placeHolder) {
 	}
 
 	Liferay.Util.addInputType(portletBound.id);
+	Liferay.Util.addInputFocus(portletBound.id);
 
 	return portletId;
 }
