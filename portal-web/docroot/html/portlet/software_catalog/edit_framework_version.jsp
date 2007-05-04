@@ -53,7 +53,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="name" />
@@ -61,7 +61,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 </tr>
 <tr>
 	<td>
-		<bean:message key="url" />
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="url" />
@@ -69,7 +69,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 </tr>
 <tr>
 	<td>
-		<bean:message key="active" />
+		<liferay-ui:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
@@ -84,7 +84,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -98,9 +98,9 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

@@ -40,9 +40,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br /><br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

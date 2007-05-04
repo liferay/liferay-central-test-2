@@ -329,19 +329,19 @@ containerStyles = sm.toString();
 							<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
 								<span class="portlet-title-default"><%= portletTitle %></span>
 
-								- <a href="<%= portletDisplay.getURLConfiguration() %>"><bean:message key="configuration" /></a>
+								- <a href="<%= portletDisplay.getURLConfiguration() %>"><liferay-ui:message key="configuration" /></a>
 
 								<c:if test="<%= portletDisplay.isShowEditIcon() %>">
-									- <a href="<%= portletDisplay.getURLEdit() %>"><bean:message key="preferences" /></a>
+									- <a href="<%= portletDisplay.getURLEdit() %>"><liferay-ui:message key="preferences" /></a>
 								</c:if>
 
 								<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-									- <a href="<%= portletDisplay.getURLClose() %>"><bean:message key="close" /></a>
+									- <a href="<%= portletDisplay.getURLClose() %>"><liferay-ui:message key="close" /></a>
 								</c:if>
 							</c:if>
 
 							<c:if test="<%= portletDisplay.isShowBackIcon() %>">
-								- <a href="<%= portletDisplay.getURLBack() %>"><bean:message key="back" /></a>
+								- <a href="<%= portletDisplay.getURLBack() %>"><liferay-ui:message key="back" /></a>
 							</c:if>
 						</div>
 					</c:if>

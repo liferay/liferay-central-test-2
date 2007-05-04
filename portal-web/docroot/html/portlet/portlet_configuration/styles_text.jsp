@@ -38,7 +38,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<bean:message key="color" />
+					<liferay-ui:message key="color" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "TextColor" %>' onchange='<%= "preview." + previewObject + ".color = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />
@@ -46,7 +46,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="decoration" />
+					<liferay-ui:message key="decoration" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "TextDecor" %>' onchange='<%= "preview." + previewObject + ".textDecoration = this.value;" %>'>
@@ -56,7 +56,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="font" />
+					<liferay-ui:message key="font" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "TextFont" %>' onchange='<%= "preview." + previewObject + ".fontFamily = this.value;" %>'>
@@ -66,7 +66,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="size" />
+					<liferay-ui:message key="size" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "TextSize" %>' onchange='<%= "preview." + previewObject + ".fontSize = this.value;" %>'>
@@ -76,7 +76,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="style" />
+					<liferay-ui:message key="style" />
 				</td>
 				<td>
 
@@ -85,11 +85,11 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 					String textBoldOnClick = "preview." + previewObject + ".fontWeight = this.checked ? 'bold' : 'normal';";
 					%>
 
-					<html:checkbox styleId='<%= propertyPrefix + "TextStyle" %>' property='<%= propertyPrefix + "TextStyle" %>' onclick="<%= textStyleOnClick %>" /> <bean:message key="italic" />
+					<html:checkbox styleId='<%= propertyPrefix + "TextStyle" %>' property='<%= propertyPrefix + "TextStyle" %>' onclick="<%= textStyleOnClick %>" /> <liferay-ui:message key="italic" />
 
 					&nbsp;
 
-					<html:checkbox styleId='<%= propertyPrefix + "TextBold" %>' property='<%= propertyPrefix + "TextBold" %>' onclick="<%= textBoldOnClick %>" /> <bean:message key="bold" />
+					<html:checkbox styleId='<%= propertyPrefix + "TextBold" %>' property='<%= propertyPrefix + "TextBold" %>' onclick="<%= textBoldOnClick %>" /> <liferay-ui:message key="bold" />
 				</td>
 			</tr>
 			</table>

@@ -71,7 +71,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="type" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />typeId">
@@ -149,7 +149,7 @@ for (int i = 0; i < days.length; i++) {
 			<%= days[i] %>
 		</td>
 		<td>
-			<bean:message key="open" />
+			<liferay-ui:message key="open" />
 		</td>
 		<td>
 			<select name="<portlet:namespace /><%= curParam %>Open">
@@ -181,7 +181,7 @@ for (int i = 0; i < days.length; i++) {
 			</select>
 		</td>
 		<td>
-			<bean:message key="close" />
+			<liferay-ui:message key="close" />
 		</td>
 		<td>
 			<select name="<portlet:namespace /><%= curParam %>Close">
@@ -220,9 +220,9 @@ for (int i = 0; i < days.length; i++) {
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

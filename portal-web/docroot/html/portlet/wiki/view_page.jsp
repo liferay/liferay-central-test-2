@@ -42,7 +42,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <input name="<portlet:namespace />keywords" size="30" type="text" />
 
-<input type="submit" value="<bean:message key="search" />" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 <br /><br />
 
@@ -68,7 +68,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 			<liferay-ui:icon image="edit" url="<%= portletURL.toString() %>" />
 
-			<a href="<%= portletURL.toString() %>"><bean:message key="edit" /></a>
+			<a href="<%= portletURL.toString() %>"><liferay-ui:message key="edit" /></a>
 		</td>
 		<td style="padding-left: 15px;"></td>
 	</c:if>
@@ -84,7 +84,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 
-			<a href="<%= permissionsURL %>"><bean:message key="permissions" /></a>
+			<a href="<%= permissionsURL %>"><liferay-ui:message key="permissions" /></a>
 		</td>
 		<td style="padding-left: 15px;"></td>
 	</c:if>
@@ -97,7 +97,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 		<liferay-ui:icon image="links" message="page-links" url="<%= portletURL.toString() %>" />
 
-		<a href="<%= portletURL.toString() %>"><bean:message key="page-links" /></a>
+		<a href="<%= portletURL.toString() %>"><liferay-ui:message key="page-links" /></a>
 	</td>
 	<td style="padding-left: 15px;"></td>
 	<td>
@@ -108,7 +108,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 		<liferay-ui:icon image="history" message="page-history" url="<%= portletURL.toString() %>" />
 
-		<a href="<%= portletURL.toString() %>"><bean:message key="page-history" /></a>
+		<a href="<%= portletURL.toString() %>"><liferay-ui:message key="page-history" /></a>
 	</td>
 	<td style="padding-left: 15px;"></td>
 	<td>
@@ -119,7 +119,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 		<liferay-ui:icon image="recent_changes" message="recent-changes" url="<%= portletURL.toString() %>" />
 
-		<a href="<%= portletURL.toString() %>"><bean:message key="recent-changes" /></a>
+		<a href="<%= portletURL.toString() %>"><liferay-ui:message key="recent-changes" /></a>
 	</td>
 	<td style="padding-left: 15px;"></td>
 	<td>
@@ -130,7 +130,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 		<liferay-ui:icon image="all_pages" message="all-pages" url="<%= portletURL.toString() %>" />
 
-		<a href="<%= portletURL.toString() %>"><bean:message key="all-pages" /></a>
+		<a href="<%= portletURL.toString() %>"><liferay-ui:message key="all-pages" /></a>
 	</td>
 	<td style="padding-left: 15px;"></td>
 	<td>
@@ -141,7 +141,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 		<liferay-ui:icon image="orphan_pages" message="orphan-pages" url="<%= portletURL.toString() %>" />
 
-		<a href="<%= portletURL.toString() %>"><bean:message key="orphan-pages" /></a>
+		<a href="<%= portletURL.toString() %>"><liferay-ui:message key="orphan-pages" /></a>
 	</td>
 </tr>
 </table>

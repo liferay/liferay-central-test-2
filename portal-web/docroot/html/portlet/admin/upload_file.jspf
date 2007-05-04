@@ -33,7 +33,7 @@
 
 <br /><br />
 
-<bean:message key="specify-an-optional-context-for-deployment" />
+<liferay-ui:message key="specify-an-optional-context-for-deployment" />
 
 <%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
 
@@ -43,7 +43,7 @@
 
 <br /><br />
 
-<input type="button" value="<bean:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy', '<%= uploadProgressId %>');" />
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy', '<%= uploadProgressId %>');" />
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

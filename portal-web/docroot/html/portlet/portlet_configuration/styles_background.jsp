@@ -38,7 +38,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<bean:message key="color" />
+					<liferay-ui:message key="color" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "BgColor" %>' onchange='<%= "preview." + previewObject + ".backgroundColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onClick="colorPicker.toggle(this);" />
@@ -46,7 +46,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="image" />
+					<liferay-ui:message key="image" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "BgImageUrl" %>' onchange='<%= "preview." + previewObject + ".backgroundImage = \'url(\' + this.value + \')\';" %>' />
@@ -54,7 +54,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="attachment" />
+					<liferay-ui:message key="attachment" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BgImageAttach" %>' onchange='<%= "preview." + previewObject + ".backgroundAttachment = this.value;" %>'>
@@ -64,7 +64,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="position" />
+					<liferay-ui:message key="position" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BgImagePos" %>' onchange='<%= "preview." + previewObject + ".backgroundPosition = this.value;" %>'>
@@ -74,7 +74,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="tile" />
+					<liferay-ui:message key="tile" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BgImageTile" %>' onchange='<%= "preview." + previewObject + ".backgroundRepeat = this.value;" %>'>

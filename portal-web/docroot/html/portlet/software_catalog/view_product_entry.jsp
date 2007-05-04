@@ -74,7 +74,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="type" />:
+		<liferay-ui:message key="type" />:
 	</td>
 	<td>
 		<%= LanguageUtil.get(pageContext, productEntry.getType()) %>
@@ -82,7 +82,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 </tr>
 <tr>
 	<td>
-		<bean:message key="licenses" />:
+		<liferay-ui:message key="licenses" />:
 	</td>
 	<td>
 
@@ -105,7 +105,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 <c:if test="<%= Validator.isNotNull(productEntry.getPageURL()) %>">
 	<tr>
 		<td>
-			<bean:message key="page-url" />:
+			<liferay-ui:message key="page-url" />:
 		</td>
 		<td>
 			<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
@@ -115,7 +115,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 <tr>
 	<td>
-		<bean:message key="short-description" />:
+		<liferay-ui:message key="short-description" />:
 	</td>
 	<td>
 		<%= productEntry.getShortDescription() %>
@@ -125,7 +125,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 <c:if test="<%= Validator.isNotNull(productEntry.getLongDescription()) %>">
 	<tr>
 		<td>
-			<bean:message key="long-description" />:
+			<liferay-ui:message key="long-description" />:
 		</td>
 		<td>
 			<%= productEntry.getLongDescription() %>
@@ -135,7 +135,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 
 <tr>
 	<td>
-		<bean:message key="screenshots" />
+		<liferay-ui:message key="screenshots" />
 	</td>
 	<td>
 
@@ -172,19 +172,19 @@ if (lastProductVersion != null) {
 </tr>
 <tr>
 	<th colspan="2">
-		<bean:message key="information-about-the-latest-version" />:
+		<liferay-ui:message key="information-about-the-latest-version" />:
 	</th>
 </tr>
 <tr>
 	<td>
-		<bean:message key="release-date" />:
+		<liferay-ui:message key="release-date" />:
 	</td>
 	<td>
 		<%= lastProductVersion.getModifiedDate() %>
 	</td>
 </tr><tr>
 	<td>
-		<bean:message key="changeLog" />:
+		<liferay-ui:message key="changeLog" />:
 	</td>
 	<td>
 		<%= lastProductVersion.getChangeLog() %>
@@ -192,7 +192,7 @@ if (lastProductVersion != null) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="supported-framework-versions" />:
+		<liferay-ui:message key="supported-framework-versions" />:
 	</td>
 	<td>
 		<%= _buildFrameworkVersions(lastProductVersion.getFrameworkVersions()) %>
@@ -200,7 +200,7 @@ if (lastProductVersion != null) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="download-links" />:
+		<liferay-ui:message key="download-links" />:
 	</td>
 	<td>
 		<% if (Validator.isNotNull(lastProductVersion.getDirectDownloadURL())) { %>

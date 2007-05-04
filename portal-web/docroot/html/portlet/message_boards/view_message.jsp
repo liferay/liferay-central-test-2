@@ -124,7 +124,7 @@ else {
 
 <div class="message-board-thread-controls">
 	<div class="message-board-thread-navigation">
-		<bean:message key="threads" />
+		<liferay-ui:message key="threads" />
 
 		[
 
@@ -132,7 +132,7 @@ else {
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
-		<bean:message key="previous" />
+		<liferay-ui:message key="previous" />
 
 		<c:if test="<%= previousThread != null %>">
 			</a>
@@ -144,7 +144,7 @@ else {
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
 		</c:if>
 
-		<bean:message key="next" />
+		<liferay-ui:message key="next" />
 
 		<c:if test="<%= nextThread != null %>">
 			</a>
@@ -166,7 +166,7 @@ else {
 
 					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" />
 
-					<a href="<%= addMessageURL.toString() %>"><bean:message key="post-new-thread" /></a>
+					<a href="<%= addMessageURL.toString() %>"><liferay-ui:message key="post-new-thread" /></a>
 				</td>
 			</c:if>
 
@@ -183,7 +183,7 @@ else {
 
 							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
 
-							<a href="<%= unsubscribeURL.toString() %>"><bean:message key="unsubscribe" /></a>
+							<a href="<%= unsubscribeURL.toString() %>"><liferay-ui:message key="unsubscribe" /></a>
 						</c:when>
 						<c:otherwise>
 							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
@@ -195,7 +195,7 @@ else {
 
 							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
 
-							<a href="<%= subscribeURL.toString() %>"><bean:message key="subscribe" /></a>
+							<a href="<%= subscribeURL.toString() %>"><liferay-ui:message key="subscribe" /></a>
 						</c:otherwise>
 					</c:choose>
 				</td>

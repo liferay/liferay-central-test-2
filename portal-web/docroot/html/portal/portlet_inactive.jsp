@@ -25,5 +25,5 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <span class="portlet-msg-error">
-<bean:message key="this-portlet-is-inactive" />
+<liferay-ui:message key="this-portlet-is-inactive" />
 </span>

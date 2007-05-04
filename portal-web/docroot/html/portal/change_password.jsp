@@ -31,7 +31,7 @@
 <input name="passwordReset" type="hidden" value="false" />
 
 <span class="portlet-msg-error">
-<bean:message key="the-system-policy-requires-you-to-change-your-password-at-this-time" />
+<liferay-ui:message key="the-system-policy-requires-you-to-change-your-password-at-this-time" />
 </span>
 
 <br /><br />
@@ -45,15 +45,15 @@
 	<span class="portlet-msg-error" style="font-size: xx-small;">
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
-		<bean:message key="please-enter-matching-passwords" />
+		<liferay-ui:message key="please-enter-matching-passwords" />
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
-		<bean:message key="please-enter-a-valid-password" />
+		<liferay-ui:message key="please-enter-a-valid-password" />
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
-		<bean:message key="please-enter-a-password-that-has-not-already-been-used" />
+		<liferay-ui:message key="please-enter-a-password-that-has-not-already-been-used" />
 	</c:if>
 
 	</span>
@@ -64,7 +64,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="password" />
+		<liferay-ui:message key="password" />
 	</td>
 	<td>
 		<input name="password1" size="30" type="password" value="" />
@@ -72,7 +72,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="enter-again" />
+		<liferay-ui:message key="enter-again" />
 	</td>
 	<td>
 		<input name="password2" size="30" type="password" value="" />
@@ -82,7 +82,7 @@
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
 </form>
 

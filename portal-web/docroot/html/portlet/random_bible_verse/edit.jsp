@@ -34,11 +34,11 @@ Map bibles = RBVUtil.getBibles();
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="language" />
+		<liferay-ui:message key="language" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />language">
-			<option <%= language.equals("") ? "selected" : "" %> value=""><bean:message key="default-language" /></option>
+			<option <%= language.equals("") ? "selected" : "" %> value=""><liferay-ui:message key="default-language" /></option>
 
 			<%
 			Iterator itr = bibles.entrySet().iterator();
@@ -62,6 +62,6 @@ Map bibles = RBVUtil.getBibles();
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

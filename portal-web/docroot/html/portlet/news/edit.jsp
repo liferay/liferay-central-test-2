@@ -61,10 +61,10 @@ portletURL.setParameter("tabs1", tabs1);
 				<table class="liferay-table">
 				<tr>
 					<td align="right">
-						<b><bean:message key="available-categories" /></b>
+						<b><liferay-ui:message key="available-categories" /></b>
 					</td>
 					<td>
-						<b><bean:message key="your-selections" /></b>
+						<b><liferay-ui:message key="your-selections" /></b>
 					</td>
 				</tr>
 				<tr>
@@ -146,9 +146,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<br />
 
-				<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<bean:message key="back" />" onClick="self.location = '<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>';" />
+				<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>';" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
@@ -160,7 +160,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<input name="<portlet:namespace />feeds" type="hidden" value="" />
 
-		<bean:message key="set-the-display-order-of-news-feeds" />
+		<liferay-ui:message key="set-the-display-order-of-news-feeds" />
 
 		<br /><br />
 
@@ -200,7 +200,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="num-of-articles-per-selection" />
+				<liferay-ui:message key="num-of-articles-per-selection" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />apn">
@@ -222,7 +222,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);" />
+		<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);" />
 	</c:when>
 </c:choose>
 

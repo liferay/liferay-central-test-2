@@ -91,10 +91,10 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<bean:message key="edit-assignments-for-community" />: <%= group.getName() %>
+		<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
 	</td>
 	<td align="right">
-		&laquo; <a href="<%= redirect %>"><bean:message key="back" /></a>
+		&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
 	</td>
 </tr>
 </table>
@@ -151,7 +151,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 				<div class="separator"></div>
 
-				<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+				<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 				<br /><br />
 
@@ -266,7 +266,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					<div class="separator"></div>
 
-					<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+					<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 					<br /><br />
 
@@ -345,7 +345,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 
@@ -429,7 +429,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
 		<br /><br />
 

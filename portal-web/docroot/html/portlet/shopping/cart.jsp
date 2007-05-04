@@ -115,17 +115,17 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	String[] badItemIds = StringUtil.split(cmqe.getMessage());
 	%>
 
-	<bean:message key="all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item" /><br />
+	<liferay-ui:message key="all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item" /><br />
 
 	<c:if test="<%= minQuantityMultiple %>">
 		<br />
 
-		<bean:message key="all-quantities-must-be-a-multiple-of-the-minimum-quantity-of-the-item" /><br />
+		<liferay-ui:message key="all-quantities-must-be-a-multiple-of-the-minimum-quantity-of-the-item" /><br />
 	</c:if>
 
 	<br />
 
-	<bean:message key="please-reenter-your-quantity-for-the-items-with-the-following-skus" />
+	<liferay-ui:message key="please-reenter-your-quantity-for-the-items-with-the-following-skus" />
 
 	<%
 	for (int i = 0; i < badItemIds.length; i++) {
@@ -404,7 +404,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="subtotal" />:
+		<liferay-ui:message key="subtotal" />:
 	</td>
 	<td>
 
@@ -427,7 +427,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <c:if test="<%= subtotal != actualSubtotal %>">
 	<tr>
 		<td>
-			<bean:message key="you-save" />:
+			<liferay-ui:message key="you-save" />:
 		</td>
 		<td>
 			<span class="portlet-msg-error">
@@ -444,7 +444,7 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="shipping" />:
+		<liferay-ui:message key="shipping" />:
 	</td>
 	<td>
 		<c:choose>
@@ -489,11 +489,11 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <c:if test="<%= insurance > 0 %>">
 	<tr>
 		<td>
-			<bean:message key="insurance" />:
+			<liferay-ui:message key="insurance" />:
 		</td>
 		<td>
 			<select name="<portlet:namespace />insure">
-				<option <%= !cart.isInsure() ? "selected" : "" %> value="0"><bean:message key="none" /></option>
+				<option <%= !cart.isInsure() ? "selected" : "" %> value="0"><liferay-ui:message key="none" /></option>
 				<option <%= cart.isInsure() ? "selected" : "" %> value="1"><%= currency.getSymbol() %><%= doubleFormat.format(insurance) %></option>
 			</select>
 		</td>
@@ -507,13 +507,13 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 
 <tr>
 	<td>
-		<bean:message key="coupon-code" />:
+		<liferay-ui:message key="coupon-code" />:
 	</td>
 	<td>
 		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>" />
 
 		<c:if test="<%= coupon != null %>">
-			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<bean:message key="description" />)</a>
+			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<liferay-ui:message key="description" />)</a>
 		</c:if>
 	</td>
 </tr>
@@ -521,7 +521,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 <c:if test="<%= coupon != null %>">
 	<tr>
 		<td>
-			<bean:message key="coupon-discount" />:
+			<liferay-ui:message key="coupon-discount" />:
 		</td>
 		<td>
 			<span class="portlet-msg-error">
@@ -563,10 +563,10 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 }
 %>
 
-<input type="button" value="<bean:message key="update-cart" />" onClick="<portlet:namespace />updateCart();" />
+<input type="button" value="<liferay-ui:message key="update-cart" />" onClick="<portlet:namespace />updateCart();" />
 
-<input type="button" value="<bean:message key="empty-cart" />" onClick="<portlet:namespace />emptyCart();" />
+<input type="button" value="<liferay-ui:message key="empty-cart" />" onClick="<portlet:namespace />emptyCart();" />
 
-<input type="button" value="<bean:message key="checkout" />" onClick="<portlet:namespace />checkout();" />
+<input type="button" value="<liferay-ui:message key="checkout" />" onClick="<portlet:namespace />checkout();" />
 
 </form>

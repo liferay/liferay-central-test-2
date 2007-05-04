@@ -28,7 +28,7 @@
 		<td class="message-board-user-info" rowspan="2" width="100">
 			<c:choose>
 				<c:when test="<%= message.isAnonymous() %>">
-					<bean:message key="anonymous" />
+					<liferay-ui:message key="anonymous" />
 				</c:when>
 				<c:otherwise>
 					<b><%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %></b><br />
@@ -51,14 +51,14 @@
 							</c:if>
 
 							<c:if test="<%= organization.getOrganizationId() > 0 %>">
-								<bean:message key="organization" />: <%= organization.getName() %>
+								<liferay-ui:message key="organization" />: <%= organization.getName() %>
 
 								<br /><br />
 							</c:if>
 
-							<bean:message key="rank" />: <%= rank %><br />
-							<bean:message key="posts" />: <%= posts %><br />
-							<bean:message key="joined" />: <%= dateFormatDate.format(user2.getCreateDate()) %>
+							<liferay-ui:message key="rank" />: <%= rank %><br />
+							<liferay-ui:message key="posts" />: <%= posts %><br />
+							<liferay-ui:message key="joined" />: <%= dateFormatDate.format(user2.getCreateDate()) %>
 
 						<%
 						}
@@ -80,7 +80,7 @@
 										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
 									</portlet:actionURL>
 
-									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png" /></a> <a href="<%= unbanUserURL.toString() %>"><bean:message key="unban-this-user" /></a>
+									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png" /></a> <a href="<%= unbanUserURL.toString() %>"><liferay-ui:message key="unban-this-user" /></a>
 								</c:when>
 								<c:otherwise>
 									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
@@ -90,7 +90,7 @@
 										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
 									</portlet:actionURL>
 
-									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png" /></a> <a href="<%= banUserURL.toString() %>"><bean:message key="ban-this-user" /></a>
+									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png" /></a> <a href="<%= banUserURL.toString() %>"><liferay-ui:message key="ban-this-user" /></a>
 								</c:otherwise>
 							</c:choose>
 						</c:if>
@@ -145,7 +145,7 @@
 
 									<liferay-ui:icon image="reply" url="<%= replyURL %>" />
 
-									<a href="<%= replyURL.toString() %>"><bean:message key="reply" /></a>
+									<a href="<%= replyURL.toString() %>"><liferay-ui:message key="reply" /></a>
 								</li>
 								<li>
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
@@ -159,7 +159,7 @@
 
 									<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
 
-									<a href="<%= quoteURL.toString() %>"><bean:message key="reply-with-quote" /></a>
+									<a href="<%= quoteURL.toString() %>"><liferay-ui:message key="reply-with-quote" /></a>
 								</li>
 							</c:if>
 							<li>
@@ -169,7 +169,7 @@
 
 								<liferay-ui:icon image="top" url="<%= topHREF %>" />
 
-								<a href="<%= topHREF %>"><bean:message key="top" /></a>
+								<a href="<%= topHREF %>"><liferay-ui:message key="top" /></a>
 							</li>
 						</ul>
 				</c:if>
@@ -358,7 +358,7 @@
 						<table class="liferay-table">
 						<tr>
 							<td valign="top">
-								<b><bean:message key="attachments" />:</b>
+								<b><liferay-ui:message key="attachments" />:</b>
 							</td>
 							<td>
 

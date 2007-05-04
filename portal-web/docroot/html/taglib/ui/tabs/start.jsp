@@ -134,7 +134,7 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 
 		<c:if test="<%= Validator.isNotNull(backURL) %>">
 			<li class="toggle">
-				<a href="<%= backURL %>">&laquo; <bean:message key="back" /></a>
+				<a href="<%= backURL %>">&laquo; <liferay-ui:message key="back" /></a>
 			</li>
 		</c:if>
 	</ul>

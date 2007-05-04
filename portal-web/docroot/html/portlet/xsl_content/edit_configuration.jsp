@@ -34,7 +34,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="xml-url" />
+		<liferay-ui:message key="xml-url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />xmlURL" type="text" value="<%= xmlURL %>" />
@@ -42,7 +42,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="xsl-url" />
+		<liferay-ui:message key="xsl-url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />xslURL" type="text" value="<%= xslURL %>" />
@@ -52,6 +52,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

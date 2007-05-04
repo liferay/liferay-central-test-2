@@ -39,7 +39,7 @@ else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 
 <c:if test="<%= (staleSession != null) && staleSession.booleanValue() %>">
 	<span class="portlet-msg-error">
-	<bean:message key="you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-different-session" />
+	<liferay-ui:message key="you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-different-session" />
 	</span>
 
 	<%
@@ -50,31 +50,31 @@ else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 
 <c:if test="<%= SessionErrors.contains(request, LayoutPermissionException.class.getName()) %>">
 	<span class="portlet-msg-error">
-	<bean:message key="you-do-not-have-permission-to-view-this-page" />
+	<liferay-ui:message key="you-do-not-have-permission-to-view-this-page" />
 	</span>
 </c:if>
 
 <c:if test="<%= SessionErrors.contains(request, PortletActiveException.class.getName()) %>">
 	<span class="portlet-msg-error">
-	<bean:message key="this-page-is-part-of-an-inactive-portlet" />
+	<liferay-ui:message key="this-page-is-part-of-an-inactive-portlet" />
 	</span>
 </c:if>
 
 <c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
 	<span class="portlet-msg-error">
-	<bean:message key="you-do-not-have-the-roles-required-to-access-this-page" />
+	<liferay-ui:message key="you-do-not-have-the-roles-required-to-access-this-page" />
 	</span>
 </c:if>
 
 <c:if test="<%= SessionErrors.contains(request, RequiredLayoutException.class.getName()) %>">
 	<span class="portlet-msg-error">
-	<bean:message key="please-contact-the-administrator-because-you-do-not-have-any-pages-configured" />
+	<liferay-ui:message key="please-contact-the-administrator-because-you-do-not-have-any-pages-configured" />
 	</span>
 </c:if>
 
 <c:if test="<%= SessionErrors.contains(request, RequiredRoleException.class.getName()) %>">
 	<span class="portlet-msg-error">
-	<bean:message key="please-contact-the-administrator-because-you-do-not-have-any-roles" />
+	<liferay-ui:message key="please-contact-the-administrator-because-you-do-not-have-any-roles" />
 	</span>
 </c:if>
 

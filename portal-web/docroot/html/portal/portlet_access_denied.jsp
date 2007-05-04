@@ -25,5 +25,5 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <span class="portlet-msg-error">
-<bean:message key="you-do-not-have-the-roles-required-to-access-this-portlet" />
+<liferay-ui:message key="you-do-not-have-the-roles-required-to-access-this-portlet" />
 </span>

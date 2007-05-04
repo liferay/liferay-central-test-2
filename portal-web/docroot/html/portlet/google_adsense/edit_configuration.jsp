@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="ad-client" />
+		<liferay-ui:message key="ad-client" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />adClient" type="text" value="<%= adClient %>" />
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="ad-channel" />
+		<liferay-ui:message key="ad-channel" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />adChannel" type="text" value="<%= adChannel %>" />
@@ -46,7 +46,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="ad-type" />
+		<liferay-ui:message key="ad-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />adType">
@@ -66,7 +66,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="ad-format" />
+		<liferay-ui:message key="ad-format" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />adFormat">
@@ -91,7 +91,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="color-border" />
+		<liferay-ui:message key="color-border" />
 	</td>
 	<td>
 		<inputclass="liferay-input-text" name="<portlet:namespace />colorBorder" type="text"  value="<%= colorBorder %>" />
@@ -99,7 +99,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="color-background" />
+		<liferay-ui:message key="color-background" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />colorBg" type="text" value="<%= colorBg %>" />
@@ -107,7 +107,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="color-link" />
+		<liferay-ui:message key="color-link" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />colorLink" type="text" value="<%= colorLink %>" />
@@ -115,7 +115,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="color-text" />
+		<liferay-ui:message key="color-text" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />colorText" type="text" value="<%= colorText %>" />
@@ -123,7 +123,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="color-url" />
+		<liferay-ui:message key="color-url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />colorUrl" type="text" value="<%= colorUrl %>" />
@@ -133,7 +133,7 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

@@ -86,7 +86,7 @@ if (treeWalker.isOdd()) {
 
 		<c:choose>
 			<c:when test="<%= message.isAnonymous() %>">
-				<bean:message key="anonymous" />
+				<liferay-ui:message key="anonymous" />
 			</c:when>
 			<c:otherwise>
 				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>

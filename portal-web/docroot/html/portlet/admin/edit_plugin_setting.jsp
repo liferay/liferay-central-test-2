@@ -50,7 +50,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
 		<%= pluginId %>
@@ -63,7 +63,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="active" />
+		<liferay-ui:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= PluginSetting.class %>" bean="<%= pluginSetting %>" field="active" />
@@ -73,7 +73,7 @@
 
 <br />
 
-<bean:message key="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" />
+<liferay-ui:message key="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" />
 
 <br /><br />
 
@@ -81,8 +81,8 @@
 
 <br /><br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

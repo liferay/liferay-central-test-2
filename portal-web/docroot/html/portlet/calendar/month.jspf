@@ -60,7 +60,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 	</td>
 	<td align="right">
 		<select onChange="self.location = '<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=' + this.value;">
-			<option value=""><bean:message key="all-events" /></option>
+			<option value=""><liferay-ui:message key="all-events" /></option>
 
 			<%
 			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
@@ -168,14 +168,14 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 
 							<c:if test="<%= tempCal.get(Calendar.DAY_OF_WEEK) == cal.getFirstDayOfWeek() %>">
 								<span style="font-size: xx-small;">
-								[<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="week" /><portlet:param name="month" value="<%= String.valueOf(month) %>" /><portlet:param name="day" value="<%= String.valueOf(i) %>" /><portlet:param name="year" value="<%= String.valueOf(year) %>" /></portlet:renderURL>"><bean:message key="week" /> <%= tempCal.get(Calendar.WEEK_OF_YEAR) %></a>]
+								[<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/view" /><portlet:param name="tabs1" value="week" /><portlet:param name="month" value="<%= String.valueOf(month) %>" /><portlet:param name="day" value="<%= String.valueOf(i) %>" /><portlet:param name="year" value="<%= String.valueOf(year) %>" /></portlet:renderURL>"><liferay-ui:message key="week" /> <%= tempCal.get(Calendar.WEEK_OF_YEAR) %></a>]
 								</span>
 							</c:if>
 						</td>
 						<td align="right">
 							<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.CALENDAR, ActionKeys.ADD_EVENT) %>">
 								<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(tempCal.get(Calendar.MONTH)) %>" /><portlet:param name="day" value="<%= String.valueOf(tempCal.get(Calendar.DATE)) %>" /><portlet:param name="year" value="<%= String.valueOf(tempCal.get(Calendar.YEAR)) %>" /></portlet:renderURL>">
-								<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<bean:message key="add" />" />
+								<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" />
 								</a>
 							</c:if>
 						</td>

@@ -59,10 +59,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 
 		<c:choose>
 			<c:when test="<%= exception instanceof PrincipalException %>">
-				<bean:message key="you-do-not-have-permission-to-view-this-page" />
+				<liferay-ui:message key="you-do-not-have-permission-to-view-this-page" />
 			</c:when>
 			<c:otherwise>
-				<bean:message key="an-unexpected-system-error-occurred" />
+				<liferay-ui:message key="an-unexpected-system-error-occurred" />
 			</c:otherwise>
 		</c:choose>
 

@@ -181,7 +181,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="date-and-time" />:
+			<liferay-ui:message key="date-and-time" />:
 		</td>
 		<td>
 			<c:choose>
@@ -196,7 +196,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="duration" />:
+			<liferay-ui:message key="duration" />:
 		</td>
 		<td>
 
@@ -207,7 +207,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<c:choose>
 				<c:when test="<%= allDay %>">
 					<abbr class="duration" title="P1D">
-						<bean:message key="all-day" />:
+						<liferay-ui:message key="all-day" />:
 					</abbr>
 				</c:when>
 				<c:otherwise>
@@ -238,11 +238,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			</c:choose>
 
 			<c:if test="<%= allDay %>">
-				<bean:message key="all-day" />
+				<liferay-ui:message key="all-day" />
 			</c:if>
 
 			<c:if test="<%= event.isTimeZoneSensitive() %>">
-				(<bean:message key="time-zone-sensitive" />)
+				(<liferay-ui:message key="time-zone-sensitive" />)
 			</c:if>
 		</td>
 	</tr>
@@ -253,7 +253,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="title" />:
+			<liferay-ui:message key="title" />:
 		</td>
 		<td>
 			<span class="summary"><%= event.getTitle() %></span>
@@ -261,7 +261,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="description" />:
+			<liferay-ui:message key="description" />:
 		</td>
 		<td>
 			<%= event.getDescription() %>
@@ -269,7 +269,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="type" />:
+			<liferay-ui:message key="type" />:
 		</td>
 		<td>
 			<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
@@ -284,15 +284,15 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
 		<tr>
 			<td>
-				<bean:message key="repeat-daily" />:
+				<liferay-ui:message key="repeat-daily" />:
 			</td>
 			<td>
 				<c:if test="<%= (dailyType == 0) %>">
-					<%= dailyInterval %> <bean:message key="day-s" />
+					<%= dailyInterval %> <liferay-ui:message key="day-s" />
 				</c:if>
 
 				<c:if test="<%= (dailyType == 1) %>">
-					<bean:message key="every-weekday" />
+					<liferay-ui:message key="every-weekday" />
 				</c:if>
 			</td>
 		</tr>
@@ -301,11 +301,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
 		<tr>
 			<td>
-				<bean:message key="repeat-weekly" />:
+				<liferay-ui:message key="repeat-weekly" />:
 			</td>
 			<td>
 				<abbr class="rrule" title="FREQ=WEEKLY">
-					<bean:message key="recur-every" /> <%= dailyInterval %> <bean:message key="weeks-on" />
+					<liferay-ui:message key="recur-every" /> <%= dailyInterval %> <liferay-ui:message key="weeks-on" />
 
 					<%= weeklyPosSu ? (days[0] + ",") : "" %>
 					<%= weeklyPosMo ? (days[1] + ",") : "" %>
@@ -322,15 +322,15 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.MONTHLY) %>">
 		<tr>
 			<td>
-				<bean:message key="repeat-monthly" />:
+				<liferay-ui:message key="repeat-monthly" />:
 			</td>
 			<td>
 				<c:if test="<%= (monthlyType == 0) %>">
-					<bean:message key="day" /> <%= monthlyDay0 %> <bean:message key="of-every" /> <%= monthlyInterval0 %> <bean:message key="month-s" />
+					<liferay-ui:message key="day" /> <%= monthlyDay0 %> <liferay-ui:message key="of-every" /> <%= monthlyInterval0 %> <liferay-ui:message key="month-s" />
 				</c:if>
 
 				<c:if test="<%= (monthlyType == 1) %>">
-					<bean:message key="the" />
+					<liferay-ui:message key="the" />
 
 					<%= (monthlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
 					<%= (monthlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
@@ -348,7 +348,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 					<%= (monthlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
 					<%= (monthlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
 
-					<bean:message key="of-every" /> <%= monthlyInterval1 %> <bean:message key="month-s" />
+					<liferay-ui:message key="of-every" /> <%= monthlyInterval1 %> <liferay-ui:message key="month-s" />
 				</c:if>
 			</td>
 		</tr>
@@ -357,16 +357,16 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<c:if test="<%= (recurrenceType == Recurrence.YEARLY) %>">
 		<tr>
 			<td>
-				<bean:message key="repeat-yearly" />:
+				<liferay-ui:message key="repeat-yearly" />:
 			</td>
 			<td>
 				<abbr class="rrule" title="FREQ=YEARLY">
 					<c:if test="<%= (yearlyType == 0) %>">
-						<bean:message key="every" /> <%= months[yearlyMonth0] %> <bean:message key="of-every" /> <%= yearlyInterval0 %> <bean:message key="year-s" />
+						<liferay-ui:message key="every" /> <%= months[yearlyMonth0] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval0 %> <liferay-ui:message key="year-s" />
 					</c:if>
 
 					<c:if test="<%= (yearlyType == 1) %>">
-						<bean:message key="the" />
+						<liferay-ui:message key="the" />
 
 						<%= (yearlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
 						<%= (yearlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
@@ -384,7 +384,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 						<%= (yearlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
 						<%= (yearlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
 
-						<bean:message key="of" /> <%= months[yearlyMonth1] %> <bean:message key="of-every" /> <%= yearlyInterval1 %> <bean:message key="year-s" />
+						<liferay-ui:message key="of" /> <%= months[yearlyMonth1] %> <liferay-ui:message key="of-every" /> <%= yearlyInterval1 %> <liferay-ui:message key="year-s" />
 					</c:if>
 				</abbr>
 			</td>
@@ -393,11 +393,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<tr>
 		<td>
-			<bean:message key="end-date" />:
+			<liferay-ui:message key="end-date" />:
 		</td>
 		<td>
 			<c:if test="<%= (endDateType == 0) %>">
-				<bean:message key="none" />
+				<liferay-ui:message key="none" />
 			</c:if>
 
 			<c:if test="<%= (endDateType == 2) %>">

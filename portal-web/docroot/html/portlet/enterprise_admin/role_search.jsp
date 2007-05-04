@@ -33,7 +33,7 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 </tr>
 <tr>
@@ -48,7 +48,7 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>

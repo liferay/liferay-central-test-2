@@ -54,7 +54,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 <tr>
 	<td>
 		<div style="font-size: xx-small; padding-bottom: 2px;">
-			<bean:message key="your-rating" />
+			<liferay-ui:message key="your-rating" />
 		</div>
 
 		<div id="<%= randomNamespace %>yourRating">
@@ -64,7 +64,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	<td style="padding-left: 30px;"></td>
 	<td>
 		<div style="font-size: xx-small; padding-bottom: 2px;">
-			<bean:message key="average" /> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br />
+			<liferay-ui:message key="average" /> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br />
 		</div>
 
 		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> Stars')">

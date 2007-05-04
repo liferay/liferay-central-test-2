@@ -41,7 +41,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 	ValidatorException ve = (ValidatorException)errorException;
 	%>
 
-	<bean:message key="the-following-are-invalid-cities-or-zip-codes" />
+	<liferay-ui:message key="the-following-are-invalid-cities-or-zip-codes" />
 
 	<%
 	Enumeration enu = ve.getFailedKeys();
@@ -58,7 +58,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 </liferay-ui:error>
 
-<bean:message key="enter-one-city-or-zip-code-per-line" />
+<liferay-ui:message key="enter-one-city-or-zip-code-per-line" />
 
 <br /><br />
 
@@ -69,12 +69,12 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="temperature-format" />
+		<liferay-ui:message key="temperature-format" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />fahrenheit">
-			<option <%= fahrenheit ? "selected" : "" %> value="1"><bean:message key="fahrenheit" /></option>
-			<option <%= !fahrenheit ? "selected" : "" %> value="0"><bean:message key="celsius" /></option>
+			<option <%= fahrenheit ? "selected" : "" %> value="1"><liferay-ui:message key="fahrenheit" /></option>
+			<option <%= !fahrenheit ? "selected" : "" %> value="0"><liferay-ui:message key="celsius" /></option>
 		</select>
 	</td>
 </tr>
@@ -82,7 +82,7 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

@@ -33,13 +33,13 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
-		<bean:message key="discount-type" />
+		<liferay-ui:message key="discount-type" />
 	</td>
 	<td>
-		<bean:message key="active" />
+		<liferay-ui:message key="active" />
 	</td>
 </tr>
 <tr>
@@ -64,8 +64,8 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 	</td>
 	<td>
 		<select name="<portlet:namespace /><%= CouponDisplayTerms.ACTIVE %>">
-			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
-			<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><bean:message key="no" /></option>
+			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+			<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 		</select>
 	</td>
 </tr>
@@ -77,12 +77,12 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= CouponDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>

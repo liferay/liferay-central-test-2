@@ -63,7 +63,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="movie" />
+		<liferay-ui:message key="movie" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />movie" type="text" value="<%= movie %>" />
@@ -71,7 +71,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 </tr>
 <tr>
 	<td>
-		<bean:message key="flash-attributes" />
+		<liferay-ui:message key="flash-attributes" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />flashAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"><%= flashAttributes %></textarea>
@@ -79,7 +79,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 </tr>
 <tr>
 	<td>
-		<bean:message key="flash-variables" />
+		<liferay-ui:message key="flash-variables" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />flashVariables" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= flashVariables %></textarea>
@@ -89,7 +89,7 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

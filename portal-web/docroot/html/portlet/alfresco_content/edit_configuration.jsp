@@ -48,27 +48,27 @@ catch (Exception e) {
 
 	<fieldset class="block-labels">
 		<div class="ctrl-holder">
-			<label for="<portlet:namespace />userId"><bean:message key="user-id" /></label>
+			<label for="<portlet:namespace />userId"><liferay-ui:message key="user-id" /></label>
 
 			<input class="text-input" id="<portlet:namespace />userId" name="<portlet:namespace />userId" type="text" value="<%= userId %>" />
 		</div>
 
 		<div class="ctrl-holder">
-			<label for="<portlet:namespace />password"><bean:message key="password" /></label>
+			<label for="<portlet:namespace />password"><liferay-ui:message key="password" /></label>
 
 			<input class="text-input" id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
 		</div>
 
 		<div class="ctrl-holder">
-			<label for="<portlet:namespace />maximizeLinksCheckbox"><bean:message key="maximize-links" />
+			<label for="<portlet:namespace />maximizeLinksCheckbox"><liferay-ui:message key="maximize-links" />
 
 			<liferay-ui:input-checkbox param="maximizeLinks" defaultValue="<%= maximizeLinks %>" /></label>
 		</div>
 
 		<div class="button-holder">
-			<input type="button" id="<portlet:namespace />saveFormButton" value="<bean:message key="save" />" />
+			<input type="button" id="<portlet:namespace />saveFormButton" value="<liferay-ui:message key="save" />" />
 
-			<input type="button" id="<portlet:namespace />clearCacheButton" value="<bean:message key="clear-cache" />" />
+			<input type="button" id="<portlet:namespace />clearCacheButton" value="<liferay-ui:message key="clear-cache" />" />
 		 </div>
 	</fieldset>
 
@@ -133,7 +133,7 @@ catch (Exception e) {
 			if (!nodeUuid.equals(nodeName)) {
 	%>
 
-				<div class="portlet-msg-info"><bean:message key="displaying-content" />: <%= nodeName %></div>
+				<div class="portlet-msg-info"><liferay-ui:message key="displaying-content" />: <%= nodeName %></div>
 
 	<%
 			}
@@ -312,7 +312,7 @@ catch (Exception e) {
 			<input class="text-input" id="<portlet:namespace />userId" name="<portlet:namespace />userId" type="text" value="<%= userId %>" />
 
 			<div class="button-holder">
-				<input type="submit" value="<bean:message key="search" />" />
+				<input type="submit" value="<liferay-ui:message key="search" />" />
 			</div>
 		</div>
 	</fieldset>

@@ -94,14 +94,14 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					var next = document.getElementById("<portlet:namespace />next");
 
 					if (<portlet:namespace />index > 0) {
-						prev.innerHTML = "<a>&laquo;&nbsp;<bean:message key="previous" /></a>";
+						prev.innerHTML = "<a>&laquo;&nbsp;<liferay-ui:message key="previous" /></a>";
 					}
 					else {
 						prev.innerHTML = "";
 					}
 
 					if (<portlet:namespace />index < <%= content.length - 1 %>) {
-						next.innerHTML = "<a><bean:message key="next" />&nbsp;&raquo;</a>";
+						next.innerHTML = "<a><liferay-ui:message key="next" />&nbsp;&raquo;</a>";
 					}
 					else {
 						next.innerHTML = "";
@@ -111,11 +111,11 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<bean:message key="please-contact-the-administrator-to-setup-this-portlet" />
+		<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
 
 		<br /><br />
 
-		<bean:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
+		<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
 
 		<br />
 

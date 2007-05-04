@@ -144,7 +144,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="to" />
+		<liferay-ui:message key="to" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />to" type="text" id="<portlet:namespace />to" />
@@ -152,7 +152,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 <tr>
 	<td>
-		<bean:message key="cc" />
+		<liferay-ui:message key="cc" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />cc" type="text" id="<portlet:namespace />cc" value="<%= cc %>" />
@@ -160,7 +160,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 <tr>
 	<td>
-		<bean:message key="bcc" />
+		<liferay-ui:message key="bcc" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />bcc" type="text" id="<portlet:namespace />bcc" value="<%= bcc %>" />
@@ -168,7 +168,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 </tr>
 <tr>
 	<td>
-		<bean:message key="subject" />
+		<liferay-ui:message key="subject" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
@@ -181,13 +181,13 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <table class="liferay-table">
 <tr>
 	<td valign="top">
-		<bean:message key="attachments" />
+		<liferay-ui:message key="attachments" />
 	</td>
 	<td>
 		<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />files">
 		<tr>
 			<td>
-				<input type="button" value="<bean:message key="add-attachment" />" onclick="<portlet:namespace />addAttachment()" />
+				<input type="button" value="<liferay-ui:message key="add-attachment" />" onclick="<portlet:namespace />addAttachment()" />
 			</td>
 		</tr>
 		</table>
@@ -197,11 +197,11 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 
 <br />
 
-<input type="button" value="<bean:message key="send" />" onClick="<portlet:namespace />sendMessage();" />
+<input type="button" value="<liferay-ui:message key="send" />" onClick="<portlet:namespace />sendMessage();" />
 
-<input type="button" value="<bean:message key="save-draft" />" onclick="<portlet:namespace />saveMessage();" />
+<input type="button" value="<liferay-ui:message key="save-draft" />" onclick="<portlet:namespace />saveMessage();" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/view" /></portlet:renderURL>';" />
 
 <br /><br />
 

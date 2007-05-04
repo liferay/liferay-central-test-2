@@ -94,6 +94,6 @@ for (int i = 1; i <= 10; i++) {
 }
 %>
 
-<input type="submit" value="<bean:message key="send" />" />
+<input type="submit" value="<liferay-ui:message key="send" />" />
 
 </form>

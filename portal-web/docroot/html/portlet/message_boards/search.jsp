@@ -44,7 +44,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
 <div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %> &raquo; <bean:message key="search" />
+	<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %> &raquo; <liferay-ui:message key="search" />
 </div>
 
 <%
@@ -122,7 +122,7 @@ for (int i = 0; i < results.getLength(); i++) {
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-<input type="submit" value="<bean:message key="search" />" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 <br /><br />
 

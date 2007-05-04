@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="url" />
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />initUrl" value="<%= initUrl %>" />
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="scope" /> (<bean:message key="regex" />)
+		<liferay-ui:message key="scope" /> (<liferay-ui:message key="regex" />)
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />scope" value="<%= scope %>" />
@@ -46,7 +46,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-host" />
+		<liferay-ui:message key="proxy-host" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />proxyHost" value="<%= proxyHost %>" />
@@ -54,7 +54,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-port" />
+		<liferay-ui:message key="proxy-port" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />proxyPort" value="<%= proxyPort %>" />
@@ -62,19 +62,19 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-authentication" />
+		<liferay-ui:message key="proxy-authentication" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />proxyAuthentication">
-			<option <%= proxyAuthentication.equals("none") ? "selected" : "" %> value="none"><bean:message key="none" /></option>
-			<option <%= proxyAuthentication.equals("basic") ? "selected" : "" %> value="basic"><bean:message key="basic" /></option>
-			<option <%= proxyAuthentication.equals("ntlm") ? "selected" : "" %> value="ntlm"><bean:message key="ntlm" /></option>
+			<option <%= proxyAuthentication.equals("none") ? "selected" : "" %> value="none"><liferay-ui:message key="none" /></option>
+			<option <%= proxyAuthentication.equals("basic") ? "selected" : "" %> value="basic"><liferay-ui:message key="basic" /></option>
+			<option <%= proxyAuthentication.equals("ntlm") ? "selected" : "" %> value="ntlm"><liferay-ui:message key="ntlm" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-authentication-username" />
+		<liferay-ui:message key="proxy-authentication-username" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
@@ -82,7 +82,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-authentication-password" />
+		<liferay-ui:message key="proxy-authentication-password" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
@@ -90,7 +90,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-authentication-host" />
+		<liferay-ui:message key="proxy-authentication-host" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
@@ -98,7 +98,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="proxy-authentication-domain" />
+		<liferay-ui:message key="proxy-authentication-domain" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
@@ -111,7 +111,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="stylesheet" />
+		<liferay-ui:message key="stylesheet" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />stylesheet" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
@@ -121,7 +121,7 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

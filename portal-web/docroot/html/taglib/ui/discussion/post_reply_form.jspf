@@ -37,7 +37,7 @@
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="subject" />
+				<liferay-ui:message key="subject" />
 			</td>
 			<td>
 				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" /><br />
@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="body" />
+				<liferay-ui:message key="body" />
 			</td>
 			<td>
 				<textarea name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
@@ -55,9 +55,9 @@
 
 		<br />
 
-		<input type="button" value="<bean:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
+		<input type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 
 		<br /><br />
 	</td>
@@ -69,7 +69,7 @@
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<bean:message key="subject" />
+					<liferay-ui:message key="subject" />
 				</td>
 				<td>
 					<input name="<%= namespace %>editSubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= Html.toInputSafe(message.getSubject()) %>" /><br />
@@ -77,7 +77,7 @@
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="body" />
+					<liferay-ui:message key="body" />
 				</td>
 				<td>
 					<textarea name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= Html.toInputSafe(message.getBody()) %></textarea>
@@ -87,9 +87,9 @@
 
 			<br />
 
-			<input type="button" value="<bean:message key="update" />" onClick="<%= namespace %>updateMessage(<%= i %>);" />
+			<input type="button" value="<liferay-ui:message key="update" />" onClick="<%= namespace %>updateMessage(<%= i %>);" />
 
-			<input type="button" value="<bean:message key="cancel" />" onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');" />
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');" />
 
 			<br /><br />
 		</td>
@@ -108,7 +108,7 @@
 
 				<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" />
 
-				<a href="<%= postReplyHREF %>"><bean:message key="post-reply" /></a>
+				<a href="<%= postReplyHREF %>"><liferay-ui:message key="post-reply" /></a>
 			</td>
 
 			<c:if test="<%= i > 0 %>">
@@ -120,7 +120,7 @@
 				<td>
 					<liferay-ui:icon image="top" url="<%= topHREF %>" />
 
-					<a href="<%= topHREF %>"><bean:message key="top" /></a>
+					<a href="<%= topHREF %>"><liferay-ui:message key="top" /></a>
 				</td>
 
 				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
@@ -132,7 +132,7 @@
 					<td>
 						<liferay-ui:icon image="edit" url="<%= editHREF %>" />
 
-						<a href="<%= editHREF %>"><bean:message key="edit" /></a>
+						<a href="<%= editHREF %>"><liferay-ui:message key="edit" /></a>
 					</td>
 				</c:if>
 
@@ -145,7 +145,7 @@
 					<td>
 						<liferay-ui:icon-delete url="<%= deleteHREF %>" />
 
-						<a href="<%= deleteHREF %>"><bean:message key="delete" /></a>
+						<a href="<%= deleteHREF %>"><liferay-ui:message key="delete" /></a>
 					</td>
 				</c:if>
 			</c:if>

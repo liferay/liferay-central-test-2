@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <c:if test="<%= !OmniadminUtil.isOmniadmin(user.getUserId())%>">
-	<bean:message key="this-tool-can-only-be-used-by-omniadmin-users" />
+	<liferay-ui:message key="this-tool-can-only-be-used-by-omniadmin-users" />
 </c:if>
 
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
@@ -37,7 +37,7 @@
 	configurationURL.setParameter("referer", currentURL);
 	configurationURL.setParameter("tabs1", "configuration");
     %>
-	<a href="<%=configurationURL%>"><bean:message key="auto-deploy-has-to-be-enabled-to-use-this-tool" /></a>
+	<a href="<%=configurationURL%>"><liferay-ui:message key="auto-deploy-has-to-be-enabled-to-use-this-tool" /></a>
 </c:if>
 
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
@@ -234,7 +234,7 @@ try {
 	   <c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 	   </c:if>
-	   <input type="button" value="<bean:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
+	   <input type="button" value="<liferay-ui:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
 
 	   <br />
 
@@ -249,7 +249,7 @@ catch (PluginPackageException e) {
 %>
 
 	<span class="portlet-msg-error">
-	<bean:message key="error-obtaining-available-plugins" />
+	<liferay-ui:message key="error-obtaining-available-plugins" />
 	</span>
 
 <%

@@ -99,7 +99,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="name" />
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
 				<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
@@ -107,7 +107,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="address" />
+				<liferay-ui:message key="address" />
 			</td>
 			<td>
 				<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
@@ -117,7 +117,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br />
 
-		<b><bean:message key="definition-of-terms" /></b>
+		<b><liferay-ui:message key="definition-of-terms" /></b>
 
 		<br /><br />
 
@@ -127,7 +127,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$COMPANY_ID$]</b>
 			</td>
 			<td>
-				<bean:message key="the-company-id-associated-with-the-message-board" />
+				<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
 			</td>
 		</tr>
 		<tr>
@@ -135,7 +135,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MAILING_LIST_ADDRESS$]</b>
 			</td>
 			<td>
-				<bean:message key="the-email-address-of-the-mailing-list" />
+				<liferay-ui:message key="the-email-address-of-the-mailing-list" />
 			</td>
 		</tr>
 		<tr>
@@ -143,7 +143,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_ADDRESS$]</b>
 			</td>
 			<td>
-				<bean:message key="the-email-address-of-the-user-who-added-the-message" />
+				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -151,7 +151,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_NAME$]</b>
 			</td>
 			<td>
-				<bean:message key="the-user-who-added-the-message" />
+				<liferay-ui:message key="the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -168,7 +168,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="enabled" />
+				<liferay-ui:message key="enabled" />
 			</td>
 			<td>
 				<c:choose>
@@ -188,7 +188,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="subject-prefix" />
+				<liferay-ui:message key="subject-prefix" />
 			</td>
 			<td>
 				<c:choose>
@@ -208,7 +208,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="body" />
+				<liferay-ui:message key="body" />
 			</td>
 			<td>
 				<textarea class="liferay-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorContent %></textarea>
@@ -221,7 +221,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="signature" />
+				<liferay-ui:message key="signature" />
 			</td>
 			<td>
 				<textarea class="liferay-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorContent %></textarea>
@@ -231,7 +231,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br />
 
-		<b><bean:message key="definition-of-terms" /></b>
+		<b><liferay-ui:message key="definition-of-terms" /></b>
 
 		<br /><br />
 
@@ -241,7 +241,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$CATEGORY_NAME$]</b>
 			</td>
 			<td>
-				<bean:message key="the-category-in-which-the-message-has-been-posted" />
+				<liferay-ui:message key="the-category-in-which-the-message-has-been-posted" />
 			</td>
 		</tr>
 		<tr>
@@ -249,7 +249,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$COMPANY_ID$]</b>
 			</td>
 			<td>
-				<bean:message key="the-company-id-associated-with-the-message-board" />
+				<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
 			</td>
 		</tr>
 		<tr>
@@ -273,7 +273,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MAILING_LIST_ADDRESS$]</b>
 			</td>
 			<td>
-				<bean:message key="the-email-address-of-the-mailing-list" />
+				<liferay-ui:message key="the-email-address-of-the-mailing-list" />
 			</td>
 		</tr>
 		<tr>
@@ -281,7 +281,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_BODY$]</b>
 			</td>
 			<td>
-				<bean:message key="the-message-body" />The message body
+				<liferay-ui:message key="the-message-body" />The message body
 			</td>
 		</tr>
 		<tr>
@@ -297,7 +297,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_ADDRESS$]</b>
 			</td>
 			<td>
-				<bean:message key="the-email-address-of-the-user-who-added-the-message" />
+				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -305,7 +305,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_USER_NAME$]</b>
 			</td>
 			<td>
-				<bean:message key="the-user-who-added-the-message" />
+				<liferay-ui:message key="the-user-who-added-the-message" />
 			</td>
 		</tr>
 		<tr>
@@ -329,7 +329,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$TO_ADDRESS$]</b>
 			</td>
 			<td>
-				<bean:message key="the-address-of-the-email-recipient" />
+				<liferay-ui:message key="the-address-of-the-email-recipient" />
 			</td>
 		</tr>
 		<tr>
@@ -337,26 +337,26 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$TO_NAME$]</b>
 			</td>
 			<td>
-				<bean:message key="the-name-of-the-email-recipient" />
+				<liferay-ui:message key="the-name-of-the-email-recipient" />
 			</td>
 		</tr>
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("thread-priorities") %>'>
-		<bean:message key="enter-the-name,-image,-and-priority-level-in-descending-order" />
+		<liferay-ui:message key="enter-the-name,-image,-and-priority-level-in-descending-order" />
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="name" />
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<bean:message key="image" />
+				<liferay-ui:message key="image" />
 			</td>
 			<td>
-				<bean:message key="priority" />
+				<liferay-ui:message key="priority" />
 			</td>
 		</tr>
 
@@ -404,7 +404,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-ranks") %>'>
-		<bean:message key="enter-rank-and-minimum-post-pairs-per-line" />
+		<liferay-ui:message key="enter-rank-and-minimum-post-pairs-per-line" />
 
 		<br /><br />
 
@@ -442,9 +442,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

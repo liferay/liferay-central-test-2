@@ -38,7 +38,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="node" />
+		<liferay-ui:message key="node" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />nodeId">
@@ -62,6 +62,6 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

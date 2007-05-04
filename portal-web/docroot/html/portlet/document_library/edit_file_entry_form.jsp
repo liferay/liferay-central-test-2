@@ -93,11 +93,11 @@ if (fileEntry != null) {
 	String[] fileExtensions = PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
 	%>
 
-	<bean:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(fileExtensions, ", ") %>.
+	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(fileExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= SourceFileNameException.class %>">
-	<bean:message key="document-extensions-does-not-match" />
+	<liferay-ui:message key="document-extensions-does-not-match" />
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -117,7 +117,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 <c:if test="<%= fileEntry != null %>">
 	<tr>
 		<td>
-			<bean:message key="folder" />
+			<liferay-ui:message key="folder" />
 		</td>
 		<td>
 
@@ -129,7 +129,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 			<%= folder.getName() %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 		</td>
 	</tr>
 	<tr>
@@ -141,7 +141,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 
 <tr>
 	<td>
-		<bean:message key="file" />
+		<liferay-ui:message key="file" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />file" type="file" />
@@ -149,7 +149,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 </tr>
 <tr>
 	<td>
-		<bean:message key="title" />
+		<liferay-ui:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="title" />
@@ -157,7 +157,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="description" />
@@ -170,7 +170,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 </tr>
 <tr>
 	<td>
-		<bean:message key="tags" />
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -212,7 +212,7 @@ if (fileEntry == null) {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -226,20 +226,20 @@ if (fileEntry == null) {
 
 <br />
 
-<input <%= isLocked.booleanValue() && !hasLock.booleanValue() ? "disabled" : "" %> type="submit" value="<bean:message key="save" />">
+<input <%= isLocked.booleanValue() && !hasLock.booleanValue() ? "disabled" : "" %> type="submit" value="<liferay-ui:message key="save" />">
 
 <c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 	<c:choose>
 		<c:when test="<%= !hasLock.booleanValue() %>">
-			<input type="button" value="<bean:message key="lock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="lock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
 		</c:when>
 		<c:otherwise>
-			<input type="button" value="<bean:message key="unlock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="unlock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
 		</c:otherwise>
 	</c:choose>
 </c:if>
 
-<input type="button" value="<bean:message key="cancel" />" onClick="parent.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= redirect %>';" />
 
 </form>
 

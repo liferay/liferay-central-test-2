@@ -44,7 +44,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="thumbnail" />
+			<liferay-ui:message key="thumbnail" />
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" target="_blank">
@@ -59,7 +59,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="height" />
+			<liferay-ui:message key="height" />
 		</td>
 		<td>
 			<%= image.getHeight() %>
@@ -67,7 +67,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="width" />
+			<liferay-ui:message key="width" />
 		</td>
 		<td>
 			<%= image.getWidth() %>
@@ -75,7 +75,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="size" />
+			<liferay-ui:message key="size" />
 		</td>
 		<td>
 			<%= TextFormatter.formatKB(image.getSize(), locale) %>k
@@ -88,7 +88,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="url" />
+			<liferay-ui:message key="url" />
 		</td>
 		<td>
 			<liferay-ui:input-resource

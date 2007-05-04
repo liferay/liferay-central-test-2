@@ -33,19 +33,19 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
-		<bean:message key="status" />
+		<liferay-ui:message key="status" />
 	</td>
 	<td>
-		<bean:message key="first-name" />
+		<liferay-ui:message key="first-name" />
 	</td>
 	<td>
-		<bean:message key="last-name" />
+		<liferay-ui:message key="last-name" />
 	</td>
 	<td>
-		<bean:message key="email-address" />
+		<liferay-ui:message key="email-address" />
 	</td>
 </tr>
 <tr>
@@ -86,12 +86,12 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= OrderDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>

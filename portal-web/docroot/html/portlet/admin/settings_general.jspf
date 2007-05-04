@@ -36,7 +36,7 @@ User user2 = company.getDefaultUser();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="name" />
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="name" />
@@ -44,7 +44,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="legal-name" />
+				<liferay-ui:message key="legal-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalName" />
@@ -52,7 +52,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="legal-id" />
+				<liferay-ui:message key="legal-id" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalId" />
@@ -60,7 +60,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="legal-type" />
+				<liferay-ui:message key="legal-type" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalType" />
@@ -72,7 +72,7 @@ User user2 = company.getDefaultUser();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="sic-code" />
+				<liferay-ui:message key="sic-code" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="sicCode" />
@@ -80,7 +80,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="ticker-symbol" />
+				<liferay-ui:message key="ticker-symbol" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="tickerSymbol" />
@@ -88,7 +88,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="industry" />
+				<liferay-ui:message key="industry" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="industry" />
@@ -96,7 +96,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="type" />
+				<liferay-ui:message key="type" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="type" />
@@ -108,7 +108,7 @@ User user2 = company.getDefaultUser();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="portal-url" />
+				<liferay-ui:message key="portal-url" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="portalURL" />
@@ -116,7 +116,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="home-url" />
+				<liferay-ui:message key="home-url" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
@@ -124,7 +124,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="mail-domain" />
+				<liferay-ui:message key="mail-domain" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE)) %>" />
@@ -137,7 +137,7 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" onClick="<portlet:namespace />saveEnterprise('<%= Constants.UPDATE %>');" />
+<input type="submit" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEnterprise('<%= Constants.UPDATE %>');" />
 
 <br /><br />
 
@@ -149,7 +149,7 @@ User user2 = company.getDefaultUser();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="language" />
+				<liferay-ui:message key="language" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />languageId">
@@ -173,7 +173,7 @@ User user2 = company.getDefaultUser();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="time-zone" />
+				<liferay-ui:message key="time-zone" />
 			</td>
 			<td>
 				<liferay-ui:input-time-zone name="timeZoneId" value="<%= user2.getTimeZone().getID() %>" />
@@ -184,7 +184,7 @@ User user2 = company.getDefaultUser();
 	<td align="center" valign="top">
 		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getCompanyId() %>" /><br />
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><bean:message key="change" /></a><br />
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><liferay-ui:message key="change" /></a><br />
 	</td>
 </tr>
 </table>
@@ -194,7 +194,7 @@ User user2 = company.getDefaultUser();
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="allow-community-administrators-to-use-their-own-logo" />
+		<liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="communityLogo" defaultValue="<%= company.isCommunityLogo() %>" />
@@ -204,7 +204,7 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveEnterprise('display');" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEnterprise('display');" />
 
 <br /><br />
 

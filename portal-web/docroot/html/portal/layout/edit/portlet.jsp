@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="copy-page" />
+		<liferay-ui:message key="copy-page" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />copyLayoutId">

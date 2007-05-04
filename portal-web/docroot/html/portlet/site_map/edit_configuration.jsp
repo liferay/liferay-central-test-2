@@ -39,7 +39,7 @@ List layoutList = layoutView.getList();
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="root-layout" />
+		<liferay-ui:message key="root-layout" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />rootLayoutId">
@@ -78,11 +78,11 @@ List layoutList = layoutView.getList();
 </tr>
 <tr>
 	<td>
-		<bean:message key="display-depth" />
+		<liferay-ui:message key="display-depth" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayDepth">
-			<option value="0"><bean:message key="unlimited" /></option>
+			<option value="0"><liferay-ui:message key="unlimited" /></option>
 
 			<%
 			for (int i = 1; i <= 20; i++) {
@@ -101,6 +101,6 @@ List layoutList = layoutView.getList();
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

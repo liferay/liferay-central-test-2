@@ -57,7 +57,7 @@
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="login" />
+				<liferay-ui:message key="login" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>" />
@@ -65,7 +65,7 @@
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="password" />
+				<liferay-ui:message key="password" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>" />
@@ -76,7 +76,7 @@
 			<tr>
 				<td>
 					<span style="font-size: xx-small;">
-					<bean:message key="remember-me" />
+					<liferay-ui:message key="remember-me" />
 					</span>
 				</td>
 				<td>
@@ -97,17 +97,17 @@
 
 		<br />
 
-		<input type="submit" value="<bean:message key="sign-in" />" />
+		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
 
 		<c:if test="<%= company.isStrangers() %>">
-			<input type="button" value="<bean:message key="create-account" />" onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';" />
+			<input type="button" value="<liferay-ui:message key="create-account" />" onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';" />
 		</c:if>
 
 		<c:if test="<%= company.isSendPassword() %>">
 			<br /><br />
 
 			<a href="<%= themeDisplay.getPathMain() %>/portal/login?tabs1=forgot-password" style="font-size: xx-small;">
-			<bean:message key="forgot-password" />?
+			<liferay-ui:message key="forgot-password" />?
 			</a>
 		</c:if>
 

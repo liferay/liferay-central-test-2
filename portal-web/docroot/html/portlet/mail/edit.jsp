@@ -78,7 +78,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("recipients") %>'>
-		<bean:message key="find-potential-recipients-from-the-following" />
+		<liferay-ui:message key="find-potential-recipients-from-the-following" />
 
 		<br /><br />
 
@@ -103,12 +103,12 @@ portletURL.setParameter("tabs1", tabs1);
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<bean:message key="enabled" />
+						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
 						<select name="<portlet:namespace /><%= rfName %>">
-							<option value="<%= Boolean.TRUE.toString() %>" <%= enabled ? "selected='selected'" : "" %>><bean:message key="yes" /></option>
-							<option value="<%= Boolean.FALSE.toString() %>" <%= !enabled ? "selected='selected'" : "" %>><bean:message key="no" /></option>
+							<option value="<%= Boolean.TRUE.toString() %>" <%= enabled ? "selected='selected'" : "" %>><liferay-ui:message key="yes" /></option>
+							<option value="<%= Boolean.FALSE.toString() %>" <%= !enabled ? "selected='selected'" : "" %>><liferay-ui:message key="no" /></option>
 						</select>
 					</td>
 				</tr>
@@ -159,17 +159,17 @@ portletURL.setParameter("tabs1", tabs1);
 
 	</c:when>
 	<c:when test='<%= tabs1.equals("filters") %>'>
-		<bean:message key="set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder" />
+		<liferay-ui:message key="set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder" />
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="email-address" />
+				<liferay-ui:message key="email-address" />
 			</td>
 			<td>
-				<bean:message key="folder" />
+				<liferay-ui:message key="folder" />
 			</td>
 		</tr>
 
@@ -216,7 +216,7 @@ portletURL.setParameter("tabs1", tabs1);
 		forwardAddress = StringUtil.replace(forwardAddress, " ", "\n");
 		%>
 
-		<bean:message key="all-email-will-be-forwarded-to-the-email-addresses-below" /> <bean:message key="enter-one-email-address-per-line" /> <bean:message key="remove-all-entries-to-disable-email-forwarding" />
+		<liferay-ui:message key="all-email-will-be-forwarded-to-the-email-addresses-below" /> <liferay-ui:message key="enter-one-email-address-per-line" /> <liferay-ui:message key="remove-all-entries-to-disable-email-forwarding" />
 
 		<br /><br />
 
@@ -227,7 +227,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="leave-a-copy-of-the-forwarded-message" />
+				<liferay-ui:message key="leave-a-copy-of-the-forwarded-message" />
 			</td>
 			<td>
 				<liferay-ui:input-select param="leaveCopy" defaultValue="<%= leaveCopy %>" />
@@ -240,10 +240,10 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("signature") || tabs1.equals("vacation-message") %>'>
 		<c:choose>
 			<c:when test='<%= tabs1.equals("signature") %>'>
-				<bean:message key="the-signature-below-will-be-added-to-each-outgoing-message" />
+				<liferay-ui:message key="the-signature-below-will-be-added-to-each-outgoing-message" />
 			</c:when>
 			<c:otherwise>
-				<bean:message key="the-vacation-message-notifies-others-of-your-absence" />
+				<liferay-ui:message key="the-vacation-message-notifies-others-of-your-absence" />
 			</c:otherwise>
 		</c:choose>
 
@@ -257,7 +257,7 @@ portletURL.setParameter("tabs1", tabs1);
 	</c:when>
 </c:choose>
 
-<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />savePreferences();" />
 
 </form>
 

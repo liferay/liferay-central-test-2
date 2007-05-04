@@ -101,13 +101,13 @@ for (int i = 0; i < results.getLength(); i++) {
 
 <select name="<portlet:namespace/>type">
 	<option value=""></option>
-	<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><bean:message key="portlet" /></option>
-	<option <%= type.equals("theme")? "selected" : "" %> value="theme"><bean:message key="theme" /></option>
-	<option <%= type.equals("layout")? "selected" : "" %> value="layout"><bean:message key="layout" /></option>
-	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><bean:message key="extension" /></option>
+	<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
+	<option <%= type.equals("theme")? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
+	<option <%= type.equals("layout")? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
+	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
 </select>
 
-<input type="submit" value="<bean:message key="search-products" />" />
+<input type="submit" value="<liferay-ui:message key="search-products" />" />
 
 <br /><br />
 

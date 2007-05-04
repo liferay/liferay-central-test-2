@@ -28,6 +28,6 @@
 	<c:if test="<%= editable %>">
 		<br /><br />
 
-		<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('comments');" />
+		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('comments');" />
 	</c:if>
 </liferay-ui:tabs>

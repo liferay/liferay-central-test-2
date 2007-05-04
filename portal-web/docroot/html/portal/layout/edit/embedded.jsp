@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="url" />
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="TypeSettingsProperties(url)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />" />
@@ -35,7 +35,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="TypeSettingsProperties(description)" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>

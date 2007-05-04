@@ -124,7 +124,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 									<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
 								</td>
 								<td align="right">
-									<input type="button" value="<bean:message key="add" />"
+									<input type="button" value="<liferay-ui:message key="add" />"
 										onClick="
 											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
 

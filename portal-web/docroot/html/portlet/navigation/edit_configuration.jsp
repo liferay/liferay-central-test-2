@@ -37,7 +37,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="bullet-style" />
+		<liferay-ui:message key="bullet-style" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />bulletStyle">
@@ -57,7 +57,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="display-style" />
+		<liferay-ui:message key="display-style" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">
@@ -79,6 +79,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

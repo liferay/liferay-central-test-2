@@ -44,7 +44,7 @@
 			<tr>
 				<td>
 					<div>
-						<span id="portal_add_content_title" style="margin-right: 5px; cursor: move;"><bean:message key="content" /></span>
+						<span id="portal_add_content_title" style="margin-right: 5px; cursor: move;"><liferay-ui:message key="content" /></span>
 
 						<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" onKeyUp="LayoutConfiguration.startShowTimer(this.value);" />
 					</div>

@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<bean:message key="please-contact-the-administrator-to-setup-this-portlet" />
+<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />

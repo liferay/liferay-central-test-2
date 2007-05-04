@@ -43,9 +43,9 @@ catch (Exception e) {
 </liferay-util:include>
 
 <span class="portlet-msg-success">
-<bean:message key="thank-you-for-your-purchase" />
+<liferay-ui:message key="thank-you-for-your-purchase" />
 </span>
 
 <br /><br />
 
-<bean:message key="your-order-number-is" /> <b><%= orderId %></b>. <bean:message key="you-will-receive-an-email-shortly-with-your-order-summary-and-further-details" />
+<liferay-ui:message key="your-order-number-is" /> <b><%= orderId %></b>. <liferay-ui:message key="you-will-receive-an-email-shortly-with-your-order-summary-and-further-details" />

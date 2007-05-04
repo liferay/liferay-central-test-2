@@ -33,16 +33,16 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
-		<bean:message key="version" />
+		<liferay-ui:message key="version" />
 	</td>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 </tr>
 <tr>
@@ -61,18 +61,18 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<bean:message key="content" />
+		<liferay-ui:message key="content" />
 	</td>
 	<td>
-		<bean:message key="type" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td colspan="2">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-				<bean:message key="status" />
+				<liferay-ui:message key="status" />
 			</c:when>
 			<c:otherwise>
-				<bean:message key="community" />
+				<liferay-ui:message key="community" />
 			</c:otherwise>
 		</c:choose>
 	</td>
@@ -102,10 +102,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.STATUS %>">
 					<option value=""></option>
-					<option <%= displayTerms.getStatus().equals("approved") ? "selected" : "" %> value="approved"><bean:message key="approved" /></option>
-					<option <%= displayTerms.getStatus().equals("not-approved") ? "selected" : "" %> value="not-approved"><bean:message key="not-approved" /></option>
-					<option <%= displayTerms.getStatus().equals("expired") ? "selected" : "" %> value="expired"><bean:message key="expired" /></option>
-					<option <%= displayTerms.getStatus().equals("review") ? "selected" : "" %> value="review"><bean:message key="review" /></option>
+					<option <%= displayTerms.getStatus().equals("approved") ? "selected" : "" %> value="approved"><liferay-ui:message key="approved" /></option>
+					<option <%= displayTerms.getStatus().equals("not-approved") ? "selected" : "" %> value="not-approved"><liferay-ui:message key="not-approved" /></option>
+					<option <%= displayTerms.getStatus().equals("expired") ? "selected" : "" %> value="expired"><liferay-ui:message key="expired" /></option>
+					<option <%= displayTerms.getStatus().equals("review") ? "selected" : "" %> value="review"><liferay-ui:message key="review" /></option>
 				</select>
 			</c:when>
 			<c:otherwise>
@@ -140,12 +140,12 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>
@@ -155,7 +155,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 	<br />
 
-	<bean:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
+	<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
@@ -163,5 +163,5 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 	<br />
 
-	<bean:message key="filter-by-template" />: <%= displayTerms.getTemplateId() %><br />
+	<liferay-ui:message key="filter-by-template" />: <%= displayTerms.getTemplateId() %><br />
 </c:if>

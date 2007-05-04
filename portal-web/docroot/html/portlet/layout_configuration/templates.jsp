@@ -84,7 +84,7 @@
 
 	</table>
 
-	<input class="form-button" type="submit" value="<bean:message key="save" />" style="margin: 10px" />
+	<input class="form-button" type="submit" value="<liferay-ui:message key="save" />" style="margin: 10px" />
 
 	</form>
 </c:if>

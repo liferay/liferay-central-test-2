@@ -97,7 +97,7 @@ if (choiceId > 0) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="title" />
+		<liferay-ui:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="title" />
@@ -105,7 +105,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="description" />
@@ -118,7 +118,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="expiration-date" />
+		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -129,7 +129,7 @@ if (choiceId > 0) {
 			<td>
 				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
 
-				<bean:message key="never-expire" />
+				<liferay-ui:message key="never-expire" />
 			</td>
 		</tr>
 		</table>
@@ -142,7 +142,7 @@ if (choiceId > 0) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="choices" />
+		<liferay-ui:message key="choices" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -191,7 +191,7 @@ if (choiceId > 0) {
 
 						<c:if test="<%= choicesCount > 2 %>">
 							<td>
-								<input type="button" value="<bean:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
+								<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
 							</td>
 						</c:if>
 
@@ -204,7 +204,7 @@ if (choiceId > 0) {
 				</table>
 			</td>
 			<td valign="bottom">
-				<input type="button" value="<bean:message key="add-choice" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);" />
+				<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);" />
 			</td>
 		</tr>
 		</table>
@@ -219,7 +219,7 @@ if (choiceId > 0) {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -233,9 +233,9 @@ if (choiceId > 0) {
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

@@ -28,7 +28,7 @@
 	<c:when test='<%= SessionMessages.contains(renderRequest, "user_name_registered") %>'>
 		<%= LanguageUtil.format(pageContext, "your-new-email-address-is-x", "<b>" + user.getEmailAddress() + "</b>", false) %>
 
-		<bean:message key="this-email-address-will-also-serve-as-your-login" />
+		<liferay-ui:message key="this-email-address-will-also-serve-as-your-login" />
 
 		<br /><br />
 
@@ -42,7 +42,7 @@
 		<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 
-		<bean:message key="choose-a-user-name-for-your-personal-company-email-address" />
+		<liferay-ui:message key="choose-a-user-name-for-your-personal-company-email-address" />
 
 		<br /><br />
 
@@ -62,7 +62,7 @@
 
 		<br />
 
-		<input type="submit" value="<bean:message key="register" />" />
+		<input type="submit" value="<liferay-ui:message key="register" />" />
 
 		</form>
 

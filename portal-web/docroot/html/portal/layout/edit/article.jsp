@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="article-id" />
+		<liferay-ui:message key="article-id" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="TypeSettingsProperties(article-id)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />

@@ -93,18 +93,18 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("payment-settings") %>'>
-		<bean:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<b>http://" + company.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</b>", false) %>
+		<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<b>http://" + company.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</b>", false) %>
 
 		<br /><br />
 
-		<bean:message key="enter-a-blank-paypal-email-address-to-disable-paypal" />
+		<liferay-ui:message key="enter-a-blank-paypal-email-address-to-disable-paypal" />
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="paypal-email-address" />
+				<liferay-ui:message key="paypal-email-address" />
 			</td>
 			<td>
 				<input class="liferay-input-text" name="<portlet:namespace />payPalEmailAddress" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
@@ -117,7 +117,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="credit-cards" />
+				<liferay-ui:message key="credit-cards" />
 			</td>
 			<td>
 
@@ -167,7 +167,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="currency" />
+				<liferay-ui:message key="currency" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />currencyId">
@@ -187,7 +187,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="tax-state" />
+				<liferay-ui:message key="tax-state" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />taxState">
@@ -207,7 +207,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="tax-rate" />
+				<liferay-ui:message key="tax-rate" />
 			</td>
 			<td>
 				<input maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>" />
@@ -220,7 +220,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="minimum-order" />
+				<liferay-ui:message key="minimum-order" />
 			</td>
 			<td>
 				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>" />
@@ -229,19 +229,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("shipping-calculation") %>'>
-		<bean:message key="calculate-a-flat-shipping-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
+		<liferay-ui:message key="calculate-a-flat-shipping-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="formula" />
+				<liferay-ui:message key="formula" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />shippingFormula">
-					<option <%= shoppingPrefs.getShippingFormula().equals("flat") ? "selected" : "" %> value="flat"><bean:message key="flat-amount" /></option>
-					<option <%= shoppingPrefs.getShippingFormula().equals("percentage") ? "selected" : "" %> value="percentage"><bean:message key="percentage" /></option>
+					<option <%= shoppingPrefs.getShippingFormula().equals("flat") ? "selected" : "" %> value="flat"><liferay-ui:message key="flat-amount" /></option>
+					<option <%= shoppingPrefs.getShippingFormula().equals("percentage") ? "selected" : "" %> value="percentage"><liferay-ui:message key="percentage" /></option>
 				</select>
 			</td>
 		</tr>
@@ -252,7 +252,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="values" />
+				<liferay-ui:message key="values" />
 			</td>
 			<td>
 				<table class="liferay-table">
@@ -292,19 +292,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("insurance-calculation") %>'>
-		<bean:message key="calculate-a-flat-insurance-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <bean:message key="calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
+		<liferay-ui:message key="calculate-a-flat-insurance-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
 
 		<br /><br />
 
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="formula" />
+				<liferay-ui:message key="formula" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />insuranceFormula">
-					<option <%= shoppingPrefs.getInsuranceFormula().equals("flat") ? "selected" : "" %> value="flat"><bean:message key="flat-amount" /></option>
-					<option <%= shoppingPrefs.getInsuranceFormula().equals("percentage") ? "selected" : "" %> value="percentage"><bean:message key="percentage" /></option>
+					<option <%= shoppingPrefs.getInsuranceFormula().equals("flat") ? "selected" : "" %> value="flat"><liferay-ui:message key="flat-amount" /></option>
+					<option <%= shoppingPrefs.getInsuranceFormula().equals("percentage") ? "selected" : "" %> value="percentage"><liferay-ui:message key="percentage" /></option>
 				</select>
 			</td>
 		</tr>
@@ -315,7 +315,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="values" />
+				<liferay-ui:message key="values" />
 			</td>
 			<td>
 				<table class="liferay-table">
@@ -373,7 +373,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<bean:message key="enabled" />
+						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
 						<c:choose>
@@ -393,7 +393,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<bean:message key="subject" />
+						<liferay-ui:message key="subject" />
 					</td>
 					<td>
 						<c:choose>
@@ -413,7 +413,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<bean:message key="body" />
+						<liferay-ui:message key="body" />
 					</td>
 					<td>
 						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -425,7 +425,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<br />
 
-				<b><bean:message key="definition-of-terms" /></b>
+				<b><liferay-ui:message key="definition-of-terms" /></b>
 
 				<br /><br />
 
@@ -524,7 +524,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<bean:message key="name" />
+						<liferay-ui:message key="name" />
 					</td>
 					<td>
 						<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
@@ -532,7 +532,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<bean:message key="address" />
+						<liferay-ui:message key="address" />
 					</td>
 					<td>
 						<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
@@ -546,9 +546,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

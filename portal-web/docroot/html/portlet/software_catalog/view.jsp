@@ -160,7 +160,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<tr>
 				<c:if test="<%= showAddProductEntryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+						<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 					</td>
 					<td style="padding-left: 30px;"></td>
 				</c:if>
@@ -171,13 +171,13 @@ portletURL.setParameter("tabs1", tabs1);
 
 						<select name="<portlet:namespace/>type">
 							<option value=""></option>
-							<option value="portlet"><bean:message key="portlet" /></option>
-							<option value="theme"><bean:message key="theme" /></option>
-							<option value="layout-template"><bean:message key="layout-template" /></option>
-							<option value="extension"><bean:message key="extension" /></option>
+							<option value="portlet"><liferay-ui:message key="portlet" /></option>
+							<option value="theme"><liferay-ui:message key="theme" /></option>
+							<option value="layout-template"><liferay-ui:message key="layout-template" /></option>
+							<option value="extension"><liferay-ui:message key="extension" /></option>
 						</select>
 
-						<input type="submit" value="<bean:message key="search-products" />" />
+						<input type="submit" value="<liferay-ui:message key="search-products" />" />
 					</td>
 				</c:if>
 			</tr>
@@ -254,7 +254,7 @@ portletURL.setParameter("tabs1", tabs1);
 		%>
 
 		<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
-			<input type="button" value="<bean:message key="add-framework-version" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
+			<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />
@@ -345,7 +345,7 @@ portletURL.setParameter("tabs1", tabs1);
 		%>
 
 		<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE) %>">
-			<input type="button" value="<bean:message key="add-license" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
+			<input type="button" value="<liferay-ui:message key="add-license" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />

@@ -51,7 +51,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= WikiNode.class %>" bean="<%= node %>" field="name" />
@@ -59,7 +59,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= WikiNode.class %>" bean="<%= node %>" field="description" />
@@ -74,7 +74,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -88,9 +88,9 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

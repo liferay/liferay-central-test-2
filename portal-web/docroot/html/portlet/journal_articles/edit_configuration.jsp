@@ -38,7 +38,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="community" />
+		<liferay-ui:message key="community" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />groupId">
@@ -60,7 +60,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
-		<bean:message key="article-type" />
+		<liferay-ui:message key="article-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -81,18 +81,18 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
-		<bean:message key="display-url" />
+		<liferay-ui:message key="display-url" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />pageURL">
-			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><bean:message key="maximized" /></option>
-			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><bean:message key="pop-up" /></option>
+			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><liferay-ui:message key="maximized" /></option>
+			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><liferay-ui:message key="pop-up" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="display-per-page" />
+		<liferay-ui:message key="display-per-page" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />pageDelta">
@@ -114,26 +114,26 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 </tr>
 <tr>
 	<td>
-		<bean:message key="order-by-column" />
+		<liferay-ui:message key="order-by-column" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />orderByCol">
-			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><bean:message key="display-date" /></option>
-			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><bean:message key="create-date" /></option>
-			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><bean:message key="modified-date" /></option>
-			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><bean:message key="article-title" /></option>
-			<option <%= orderByCol.equals("articleId") ? "selected" : "" %> value="articleId"><bean:message key="article-id" /></option>
+			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><liferay-ui:message key="display-date" /></option>
+			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><liferay-ui:message key="create-date" /></option>
+			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><liferay-ui:message key="modified-date" /></option>
+			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="article-title" /></option>
+			<option <%= orderByCol.equals("articleId") ? "selected" : "" %> value="articleId"><liferay-ui:message key="article-id" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="order-by-type" />
+		<liferay-ui:message key="order-by-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />orderByType">
-			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><bean:message key="ascending" /></option>
-			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><bean:message key="descending" /></option>
+			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><liferay-ui:message key="ascending" /></option>
+			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><liferay-ui:message key="descending" /></option>
 		</select>
 	</td>
 </tr>
@@ -141,6 +141,6 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

@@ -66,11 +66,11 @@ for (int i = 0; i < zips.length; i++) {
 
 <br />
 
-<bean:message key="city-or-zip-code" />
+<liferay-ui:message key="city-or-zip-code" />
 
 <input name="where" size="23" type="text" />
 
-<input type="submit" value="<bean:message key="search" />" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 </form>
 

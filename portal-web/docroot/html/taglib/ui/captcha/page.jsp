@@ -40,7 +40,7 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="text-verification" />
+			<liferay-ui:message key="text-verification" />
 		</td>
 		<td>
 			<input name="<%= namespace %>captchaText" size="10" type="text" value="" />

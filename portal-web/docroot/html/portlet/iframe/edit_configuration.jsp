@@ -43,7 +43,7 @@ String htmlAttributes =
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="source-url" />
+		<liferay-ui:message key="source-url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
@@ -56,7 +56,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="authenticate" />
+		<liferay-ui:message key="authenticate" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="auth" defaultValue="<%= auth %>" />
@@ -64,7 +64,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="authentication-type" />
+		<liferay-ui:message key="authentication-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />authType">
@@ -75,7 +75,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="form-method" />
+		<liferay-ui:message key="form-method" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />formMethod">
@@ -86,7 +86,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="user-name" />
+		<liferay-ui:message key="user-name" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />userName" type="text" value="<%= userName %>" />
@@ -94,7 +94,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="password" />
+		<liferay-ui:message key="password" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />password" type="text" value="<%= password %>" />
@@ -102,7 +102,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="hidden-variables" />
+		<liferay-ui:message key="hidden-variables" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
@@ -115,7 +115,7 @@ String htmlAttributes =
 </tr>
 <tr>
 	<td>
-		<bean:message key="html-attributes" />
+		<liferay-ui:message key="html-attributes" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />htmlAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
@@ -126,12 +126,12 @@ String htmlAttributes =
 <br />
 
 <span class="portlet-msg-error" style="font-size: x-small;">
-<bean:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
+<liferay-ui:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
 </span>
 
 <br /><br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

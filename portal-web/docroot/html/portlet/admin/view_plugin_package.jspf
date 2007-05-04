@@ -44,15 +44,15 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
-		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<bean:message key="download" />]</a>
+		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<liferay-ui:message key="download" />]</a>
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="author" />
+		<liferay-ui:message key="author" />
 	</td>
 	<td>
 		<%= LanguageUtil.get(pageContext, pluginPackage.getAuthor()) %>
@@ -60,7 +60,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<bean:message key="types" />
+		<liferay-ui:message key="types" />
 	</td>
 	<td>
 		<%
@@ -79,7 +79,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<bean:message key="tags" />
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -100,7 +100,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<bean:message key="licenses" />
+		<liferay-ui:message key="licenses" />
 	</td>
 	<td>
 
@@ -135,7 +135,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<bean:message key="liferay-versions" />
+		<liferay-ui:message key="liferay-versions" />
 	</td>
 	<td>
 
@@ -156,7 +156,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<bean:message key="repository" />
+		<liferay-ui:message key="repository" />
 	</td>
 	<td>
 		<a href="<%= pluginPackage.getRepositoryURL() %>"><%= pluginPackage.getRepositoryURL() %></a>
@@ -169,7 +169,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 </tr>
 <tr>
 	<td>
-		<bean:message key="short-description" />
+		<liferay-ui:message key="short-description" />
 	</td>
 	<td>
 		<%= pluginPackage.getShortDescription() %>
@@ -179,7 +179,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <c:if test="<%= Validator.isNotNull(pluginPackage.getLongDescription()) %>">
 	<tr>
 		<td>
-			<bean:message key="long-description" />
+			<liferay-ui:message key="long-description" />
 		</td>
 		<td>
 			<%= pluginPackage.getLongDescription() %>
@@ -190,7 +190,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 <c:if test="<%= Validator.isNotNull(pluginPackage.getChangeLog()) %>">
 	<tr>
 		<td>
-			<bean:message key="change-log" />
+			<liferay-ui:message key="change-log" />
 		</td>
 		<td>
 			<%= pluginPackage.getChangeLog() %>
@@ -210,7 +210,7 @@ List screenshots = pluginPackage.getScreenshots();
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="screenshots" />
+			<liferay-ui:message key="screenshots" />
 		</td>
 		<td>
 

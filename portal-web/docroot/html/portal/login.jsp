@@ -84,7 +84,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="authentication-failed" />
+				<liferay-ui:message key="authentication-failed" />
 				</span>
 
 				<br /><br />
@@ -92,7 +92,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="authentication-failed-please-enable-browser-cookies" />
+				<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
 				</span>
 
 				<br /><br />
@@ -100,7 +100,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="please-enter-a-valid-login" />
+				<liferay-ui:message key="please-enter-a-valid-login" />
 				</span>
 
 				<br /><br />
@@ -108,8 +108,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
-				<bean:message key="please-sign-in-to-continue" />
+				<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
+				<liferay-ui:message key="please-sign-in-to-continue" />
 				</span>
 
 				<br /><br />
@@ -117,7 +117,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="please-enter-a-valid-login" />
+				<liferay-ui:message key="please-enter-a-valid-login" />
 				</span>
 
 				<br /><br />
@@ -125,7 +125,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="please-enter-a-valid-password" />
+				<liferay-ui:message key="please-enter-a-valid-password" />
 				</span>
 
 				<br /><br />
@@ -143,7 +143,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="login" />
+				<liferay-ui:message key="login" />
 			</td>
 			<td>
 				<input name="login" style="width: 150px;" type="text" value="<%= login %>" />
@@ -151,7 +151,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="password" />
+				<liferay-ui:message key="password" />
 			</td>
 			<td>
 				<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>" />
@@ -162,7 +162,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 			<tr>
 				<td>
 					<span style="font-size: xx-small;">
-					<bean:message key="remember-me" />
+					<liferay-ui:message key="remember-me" />
 					</span>
 				</td>
 				<td>
@@ -183,7 +183,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 		<br />
 
-		<input type="submit" value="<bean:message key="sign-in" />" />
+		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
 
 		</form>
 	</liferay-ui:section>
@@ -195,7 +195,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		<c:if test="<%= sectionSelected.booleanValue() %>">
 			<c:if test='<%= SessionMessages.contains(request, "request_processed") %>'>
 				<span class="portlet-msg-success" style="font-size: xx-small;">
-				<bean:message key="your-request-processed-successfully" />
+				<liferay-ui:message key="your-request-processed-successfully" />
 				</span>
 
 				<br /><br />
@@ -203,7 +203,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="the-email-address-you-requested-is-not-registered-in-our-database" />
+				<liferay-ui:message key="the-email-address-you-requested-is-not-registered-in-our-database" />
 				</span>
 
 				<br /><br />
@@ -211,7 +211,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, SendPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="your-password-can-only-be-sent-to-an-external-email-address" />
+				<liferay-ui:message key="your-password-can-only-be-sent-to-an-external-email-address" />
 				</span>
 
 				<br /><br />
@@ -219,7 +219,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 			<c:if test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<bean:message key="please-enter-a-valid-email-address" />
+				<liferay-ui:message key="please-enter-a-valid-email-address" />
 				</span>
 
 				<br /><br />
@@ -233,7 +233,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="email-address" />
+				<liferay-ui:message key="email-address" />
 			</td>
 			<td>
 				<input name="emailAddress" size="30" type="text" value="<%= emailAddress %>" />
@@ -243,7 +243,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 		<br />
 
-		<input type="submit" value="<bean:message key="send-new-password" />" />
+		<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
 
 		</form>
 	</liferay-ui:section>

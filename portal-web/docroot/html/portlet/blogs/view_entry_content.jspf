@@ -38,7 +38,7 @@
 		</portlet:renderURL>
 
 		<span style="font-size: small;"><b><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></b></span><br />
-		<span style="font-size: x-small;"><bean:message key="by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <bean:message key="on" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
+		<span style="font-size: x-small;"><liferay-ui:message key="by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
 
 		<liferay-ui:tags-summary
 			className="<%= BlogsEntry.class.getName() %>"

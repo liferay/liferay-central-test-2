@@ -178,7 +178,7 @@ portletURL.setParameter("categoryId", categoryId);
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value="<bean:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+						<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 					</td>
 				</c:if>
 
@@ -186,7 +186,7 @@ portletURL.setParameter("categoryId", categoryId);
 					<td>
 						<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<input type="submit" value="<bean:message key="search-categories" />" />
+						<input type="submit" value="<liferay-ui:message key="search-categories" />" />
 					</td>
 				</c:if>
 			</tr>
@@ -341,7 +341,7 @@ portletURL.setParameter("categoryId", categoryId);
 				<tr>
 					<c:if test="<%= showAddMessageButton %>">
 						<td>
-							<input type="button" value="<bean:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+							<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
 						</td>
 					</c:if>
 
@@ -349,7 +349,7 @@ portletURL.setParameter("categoryId", categoryId);
 						<td>
 							<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-							<input type="submit" value="<bean:message key="search-threads" />" />
+							<input type="submit" value="<liferay-ui:message key="search-threads" />" />
 						</td>
 					</c:if>
 				</tr>
@@ -511,9 +511,9 @@ portletURL.setParameter("categoryId", categoryId);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
-				<bean:message key="num-of-categories" />: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue())) %><br />
-				<bean:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId.longValue())) %><br />
-				<bean:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue())) %>
+				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue())) %><br />
+				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId.longValue())) %><br />
+				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue())) %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("top-posters") %>'>
 

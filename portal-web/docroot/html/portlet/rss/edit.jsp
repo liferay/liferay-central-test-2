@@ -48,7 +48,7 @@
 	ValidatorException ve = (ValidatorException)errorException;
 	%>
 
-	<bean:message key="the-following-are-invalid-urls" />
+	<liferay-ui:message key="the-following-are-invalid-urls" />
 
 	<%
 	Enumeration enu = ve.getFailedKeys();
@@ -68,10 +68,10 @@
 <table cellpadding="2" cellspacing="0" border="0" style="margin: 15px 0 15px 0;">
 <tr>
 	<td>
-		<bean:message key="title" />
+		<liferay-ui:message key="title" />
 	</td>
 	<td>
-		<bean:message key="url" />
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<a href="javascript: void(0);" onclick="AddRssRow(this.parentNode.parentNode.parentNode)"><img src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></a>
@@ -108,7 +108,7 @@ for (int i = 0; i < urls.length; i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="num-of-entries-per-feed" />
+		<liferay-ui:message key="num-of-entries-per-feed" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />entriesPerFeed">
@@ -130,6 +130,6 @@ for (int i = 0; i < urls.length; i++) {
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

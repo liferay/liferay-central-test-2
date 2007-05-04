@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="map-address" />
+		<liferay-ui:message key="map-address" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />mapAddress" type="text" value="<%= mapAddress %>" />
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="map-input-enabled" />
+		<liferay-ui:message key="map-input-enabled" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="mapInputEnabled" defaultValue="<%= mapInputEnabled %>" />
@@ -51,7 +51,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="directions-address" />
+		<liferay-ui:message key="directions-address" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />directionsAddress" type="text" value="<%= directionsAddress %>" />
@@ -59,7 +59,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="directions-input-enabled" />
+		<liferay-ui:message key="directions-input-enabled" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="directionsInputEnabled" defaultValue="<%= directionsInputEnabled %>" />
@@ -72,7 +72,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="height" />
+		<liferay-ui:message key="height" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />height" size="4" type="text" value="<%= height %>" /> px
@@ -82,7 +82,7 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
 

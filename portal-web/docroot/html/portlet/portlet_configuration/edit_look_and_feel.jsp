@@ -84,7 +84,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="title" />
+			<liferay-ui:message key="title" />
 		</td>
 		<td>
 			<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
@@ -109,7 +109,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			</select>
 		</td>
 		<td>
-			<bean:message key="use-custom-title" />
+			<liferay-ui:message key="use-custom-title" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="useCustomTitle" defaultValue="<%= useCustomTitle %>" />
@@ -120,7 +120,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="show-borders" />
+			<liferay-ui:message key="show-borders" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="showBorders" defaultValue="<%= showBorders %>" />
@@ -131,9 +131,9 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel();" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel();" />
 
-<input type="button" value="<bean:message key="reset" />" onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');" />
+<input type="button" value="<liferay-ui:message key="reset" />" onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');" />
 
 <br /><br />
 

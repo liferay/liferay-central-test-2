@@ -83,9 +83,9 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
 		<br />
 
-		<input type="button" value="<bean:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
@@ -94,12 +94,12 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 				<br />
 
-				<input type="button" value="<bean:message key="back-to-vote" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="back-to-vote" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>';" />
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(redirect) %>">
 				<br />
 
-				<input type="button" value="<bean:message key="back" />" onClick="self.location = '<%= redirect %>';" />
+				<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<%= redirect %>';" />
 			</c:when>
 		</c:choose>
 	</c:otherwise>

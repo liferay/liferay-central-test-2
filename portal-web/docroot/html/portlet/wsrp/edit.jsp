@@ -28,8 +28,8 @@
 <tr>
 	<td valign="top">
 		<font class="portlet-font" style="font-size: x-small;">
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit_local_preferences" /><portlet:param name="wsrp-remoteInvocation" value="false" /></portlet:renderURL>"><bean:message key="edit-wsrp-local-preferences" /></a><br />
-		<a href="<portlet:renderURL><portlet:param name="proxyportlet-remoteInvocation" value="true" /></portlet:renderURL>"><bean:message key="edit-wsrp-remote-preferences" /></a><br />
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit_local_preferences" /><portlet:param name="wsrp-remoteInvocation" value="false" /></portlet:renderURL>"><liferay-ui:message key="edit-wsrp-local-preferences" /></a><br />
+		<a href="<portlet:renderURL><portlet:param name="proxyportlet-remoteInvocation" value="true" /></portlet:renderURL>"><liferay-ui:message key="edit-wsrp-remote-preferences" /></a><br />
 		</font>
 	</td>
 </tr>

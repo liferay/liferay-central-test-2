@@ -102,7 +102,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -121,7 +121,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 				<c:if test="<%= coupon == null %>">
 					<liferay-ui:input-checkbox param="autoCouponId" />
 
-					<bean:message key="autogenerate-id" />
+					<liferay-ui:message key="autogenerate-id" />
 				</c:if>
 			</td>
 		</tr>
@@ -135,7 +135,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="name" />
@@ -143,7 +143,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="description" />
@@ -156,7 +156,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td>
-		<bean:message key="start-date" />
+		<liferay-ui:message key="start-date" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="startDate" defaultValue="<%= startDate %>" />
@@ -164,7 +164,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td>
-		<bean:message key="expiration-date" />
+		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0">
@@ -176,7 +176,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 			<td>
 				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'endDate\', this.checked);" %>' />
 
-				<bean:message key="never-expire" />
+				<liferay-ui:message key="never-expire" />
 			</td>
 		</tr>
 		</table>
@@ -189,7 +189,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </tr>
 <tr>
 	<td>
-		<bean:message key="active" />
+		<liferay-ui:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" />
@@ -199,9 +199,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -211,7 +211,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br /><br />
 
-<bean:message key="set-the-discount-amount-and-the-discount-type" />
+<liferay-ui:message key="set-the-discount-amount-and-the-discount-type" />
 
 <br /><br />
 
@@ -222,19 +222,19 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="minimum-order" />
+		<liferay-ui:message key="minimum-order" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>" />
 	</td>
 	<td>
-		<bean:message key="discount" />
+		<liferay-ui:message key="discount" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>" />
 	</td>
 	<td>
-		<bean:message key="discount-type" />
+		<liferay-ui:message key="discount-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />discountType">
@@ -264,7 +264,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	List categoryIds = (List)errorException;
 	%>
 
-	<bean:message key="the-following-are-invalid-category-ids" /> <%= StringUtil.merge((String[])categoryIds.toArray(new String[0])) %>
+	<liferay-ui:message key="the-following-are-invalid-category-ids" /> <%= StringUtil.merge((String[])categoryIds.toArray(new String[0])) %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= CouponLimitSKUsException.class %>">
@@ -273,12 +273,12 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	List skus = (List)errorException;
 	%>
 
-	<bean:message key="the-following-are-invalid-item-skus" /> <%= StringUtil.merge((String[])skus.toArray(new String[0])) %>
+	<liferay-ui:message key="the-following-are-invalid-item-skus" /> <%= StringUtil.merge((String[])skus.toArray(new String[0])) %>
 </liferay-ui:error>
 
-<bean:message key="this-coupon-only-applies-to-items-that-are-children-of-this-comma-delimited-list-of-categories" />
+<liferay-ui:message key="this-coupon-only-applies-to-items-that-are-children-of-this-comma-delimited-list-of-categories" />
 
-<bean:message key="leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item" />
+<liferay-ui:message key="leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item" />
 
 <br /><br />
 
@@ -286,9 +286,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br /><br />
 
-<bean:message key="this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus" />
+<liferay-ui:message key="this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus" />
 
-<bean:message key="leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku" />
+<liferay-ui:message key="leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku" />
 
 <br /><br />
 

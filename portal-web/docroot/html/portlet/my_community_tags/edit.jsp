@@ -27,7 +27,7 @@
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/my_community_tags/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<bean:message key="set-your-community-tags" />
+<liferay-ui:message key="set-your-community-tags" />
 
 <br /><br />
 
@@ -39,6 +39,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

@@ -56,7 +56,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="first-name" />
+				<liferay-ui:message key="first-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
@@ -64,7 +64,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="middle-name" />
+				<liferay-ui:message key="middle-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
@@ -72,7 +72,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="last-name" />
+				<liferay-ui:message key="last-name" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
@@ -83,7 +83,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			<c:when test="<%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) %>">
 				<tr>
 					<td>
-						<bean:message key="user-id" />
+						<liferay-ui:message key="user-id" />
 					</td>
 					<td>
 						<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
@@ -97,7 +97,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 		<tr>
 			<td>
-				<bean:message key="email-address" />
+				<liferay-ui:message key="email-address" />
 			</td>
 			<td>
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
@@ -108,7 +108,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
 				<tr>
 					<td>
-						<bean:message key="birthday" />
+						<liferay-ui:message key="birthday" />
 					</td>
 					<td>
 						<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
@@ -125,12 +125,12 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE)) %>">
 			<tr>
 				<td>
-					<bean:message key="gender" />
+					<liferay-ui:message key="gender" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />male">
-						<option value="1"><bean:message key="male" /></option>
-						<option <%= !male? "selected" : "" %> value="0"><bean:message key="female" /></option>
+						<option value="1"><liferay-ui:message key="male" /></option>
+						<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
 					</select>
 				</td>
 			</tr>
@@ -150,7 +150,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
 </form>
 

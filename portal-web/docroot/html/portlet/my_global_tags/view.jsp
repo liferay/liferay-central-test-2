@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
-		<bean:message key="global-tags-are-injected-to-all-pages-that-you-visit" />
+		<liferay-ui:message key="global-tags-are-injected-to-all-pages-that-you-visit" />
 
 		<br /><br />
 
@@ -35,11 +35,11 @@
 				<%= LanguageUtil.format(pageContext, "you-have-the-following-tags-configured-x", "<b>" + StringUtil.merge(entries, ", ") + "</b>") %>
 			</c:when>
 			<c:otherwise>
-				<bean:message key="you-have-not-configured-any-global-tags" />
+				<liferay-ui:message key="you-have-not-configured-any-global-tags" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<bean:message key="you-must-be-authenticated-to-use-this-portlet" />
+		<liferay-ui:message key="you-must-be-authenticated-to-use-this-portlet" />
 	</c:otherwise>
 </c:choose>

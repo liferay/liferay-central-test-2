@@ -29,7 +29,7 @@
 		<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
 
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/view"/></portlet:renderURL>">
-			<bean:message key="invite-friends" />
+			<liferay-ui:message key="invite-friends" />
 		</a>
 	</c:when>
 	<c:otherwise>
@@ -51,7 +51,7 @@
 
 			<c:if test='<%= (invalidEmailAddresses != null) && invalidEmailAddresses.contains("emailAddress" + i) %>'>
 				<div class="portlet-msg-error">
-				<bean:message key="please-enter-a-valid-email-address" />
+				<liferay-ui:message key="please-enter-a-valid-email-address" />
 				</div>
 			</c:if>
 
@@ -65,7 +65,7 @@
 
 		<br />
 
-		<input type="button" value="<bean:message key="invite-friends" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<input type="button" value="<liferay-ui:message key="invite-friends" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 		</form>
 	</c:otherwise>

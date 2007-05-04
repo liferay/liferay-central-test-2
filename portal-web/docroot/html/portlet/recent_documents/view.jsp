@@ -30,7 +30,7 @@ List ranks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(),
 
 <c:choose>
 	<c:when test="<%= (ranks == null) || (ranks.size() == 0) %>">
-		<bean:message key="there-are-no-recent-documents" />
+		<liferay-ui:message key="there-are-no-recent-documents" />
 	</c:when>
 	<c:otherwise>
 		<table border="0" cellpadding="0" cellspacing="0">

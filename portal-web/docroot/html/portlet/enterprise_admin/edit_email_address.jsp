@@ -59,13 +59,13 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="address" />
+		<liferay-ui:message key="address" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="address" />
 	</td>
 	<td>
-		<bean:message key="type" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />typeId">
@@ -87,7 +87,7 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 		</select>
 	</td>
 	<td>
-		<bean:message key="primary" />
+		<liferay-ui:message key="primary" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="primary" />
@@ -97,9 +97,9 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

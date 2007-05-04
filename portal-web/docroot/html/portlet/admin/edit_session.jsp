@@ -42,11 +42,11 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 
 <c:choose>
 	<c:when test="<%= userTracker == null %>">
-		<bean:message key="session-id-not-found" />
+		<liferay-ui:message key="session-id-not-found" />
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 	</c:when>
 	<c:otherwise>
 
@@ -63,7 +63,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<bean:message key="session-id" />:
+				<liferay-ui:message key="session-id" />:
 			</td>
 			<td>
 				<%= userTrackerId %>
@@ -71,7 +71,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="user-id" />:
+				<liferay-ui:message key="user-id" />:
 			</td>
 			<td>
 				<%= userTracker.getUserId() %>
@@ -79,7 +79,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="name" />:
+				<liferay-ui:message key="name" />:
 			</td>
 			<td>
 				<%= (user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available") %>
@@ -87,7 +87,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="email-address" />:
+				<liferay-ui:message key="email-address" />:
 			</td>
 			<td>
 				<%= (user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available") %>
@@ -95,7 +95,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="last-request" />:
+				<liferay-ui:message key="last-request" />:
 			</td>
 			<td>
 				<%= dateFormatDateTime.format(userTracker.getModifiedDate()) %>
@@ -103,7 +103,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="num-of-hits" />:
+				<liferay-ui:message key="num-of-hits" />:
 			</td>
 			<td>
 				<%= userTracker.getHits() %>
@@ -116,7 +116,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="browser-os-type" />:
+				<liferay-ui:message key="browser-os-type" />:
 			</td>
 			<td>
 				<%= userTracker.getUserAgent() %>
@@ -124,7 +124,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		</tr>
 		<tr>
 			<td>
-				<bean:message key="remote-host-ip" />:
+				<liferay-ui:message key="remote-host-ip" />:
 			</td>
 			<td>
 				<%= userTracker.getRemoteAddr() %> / <%= userTracker.getRemoteHost() %>
@@ -140,11 +140,11 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr>
 					<td class="beta-gradient">
-						<b><bean:message key="accessed-urls" /></b>
+						<b><liferay-ui:message key="accessed-urls" /></b>
 					</td>
 					<td align="right" class="beta-gradient">
 						<span style="font-size: xx-small;">
-						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 						</span>
 					</td>
 				</tr>
@@ -193,11 +193,11 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr>
 					<td class="beta-gradient">
-						<b><bean:message key="session-attributes" /></b>
+						<b><liferay-ui:message key="session-attributes" /></b>
 					</td>
 					<td align="right" class="beta-gradient">
 						<span style="font-size: xx-small;">
-						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 						</span>
 					</td>
 				</tr>
@@ -268,10 +268,10 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 		<br />
 
 		<c:if test="<%= userSessionAlive && !session.getId().equals(userTrackerId) %>">
-			<input type="submit" value="<bean:message key="kill-session" />" />
+			<input type="submit" value="<liferay-ui:message key="kill-session" />" />
 		</c:if>
 
-		<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 	</c:otherwise>
 </c:choose>
 

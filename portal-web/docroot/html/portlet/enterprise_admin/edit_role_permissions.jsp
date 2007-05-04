@@ -456,7 +456,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<div class="separator"></div>
 
-		<input type="button" value="<bean:message key="update-associations" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);" />
+		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos %>);" />
 
 		<br /><br />
 
@@ -487,9 +487,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
-				<input type="button" value="<bean:message key="previous" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);" />
+				<input type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos - 1 %>);" />
 
-				<input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);" />
+				<input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />updateGroupPermissions(<%= groupScopePos + 1 %>);" />
 			</td>
 		</tr>
 		</table>
@@ -548,7 +548,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<table class="liferay-table">
 		<tr>
 			<th>
-				<bean:message key="action" />
+				<liferay-ui:message key="action" />
 			</th>
 			<th>
 				<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "scope" : "") %>
@@ -573,10 +573,10 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 						<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
 							<select name="<portlet:namespace />scope<%= actionId %>">
 								<option value=""></option>
-									<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><bean:message key="enterprise" /></option>
+									<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 
 									<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
-										<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><bean:message key="communities" /></option>
+										<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
 									</c:if>
 							</select>
 						</c:when>
@@ -605,7 +605,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br />
 
-		<input type="button" value="<bean:message key="next" />" onClick="<portlet:namespace />updateActions();" />
+		<input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />updateActions();" />
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
@@ -622,7 +622,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<br /><br />
 
-		<input type="button" value="<bean:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';" />
+		<input type="button" value="<liferay-ui:message key="next" />" onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';" />
 
 		<c:if test="<%= modelResources.size() > 0 %>">
 			<br /><br />

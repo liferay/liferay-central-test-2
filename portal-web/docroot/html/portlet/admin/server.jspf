@@ -46,7 +46,7 @@
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="uptime" />:
+			<liferay-ui:message key="uptime" />:
 		</td>
 		<td>
 			<c:if test="<%= days > 0 %>">
@@ -65,26 +65,26 @@
 
 	<tr>
 		<td>
-			<bean:message key="free-memory" />:
+			<liferay-ui:message key="free-memory" />:
 		</td>
 		<td>
-			<%= numberFormat.format(runtime.freeMemory()) %> <bean:message key="bytes" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<bean:message key="total-memory" />:
-		</td>
-		<td>
-			<%= numberFormat.format(runtime.totalMemory()) %> <bean:message key="bytes" />
+			<%= numberFormat.format(runtime.freeMemory()) %> <liferay-ui:message key="bytes" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="maximum-memory" />:
+			<liferay-ui:message key="total-memory" />:
 		</td>
 		<td>
-			<%= numberFormat.format(runtime.maxMemory()) %> <bean:message key="bytes" />
+			<%= numberFormat.format(runtime.totalMemory()) %> <liferay-ui:message key="bytes" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="maximum-memory" />:
+		</td>
+		<td>
+			<%= numberFormat.format(runtime.maxMemory()) %> <liferay-ui:message key="bytes" />
 		</td>
 	</tr>
 	</table>
@@ -93,19 +93,19 @@
 		<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
 			<br />
 
-			<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><bean:message key="more-options" /></html:link> &raquo;
+			<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><liferay-ui:message key="more-options" /></html:link> &raquo;
 		</c:when>
 		<c:otherwise>
 			<div class="separator"></div>
 
-			<bean:message key="shutdown-the-server-in-the-specified-number-of-minutes" />
+			<liferay-ui:message key="shutdown-the-server-in-the-specified-number-of-minutes" />
 
 			<br /><br />
 
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<bean:message key="number-of-minutes" />
+					<liferay-ui:message key="number-of-minutes" />
 				</td>
 				<td>
 					<input name="<portlet:namespace />minutes" size="3" type="text" />
@@ -113,7 +113,7 @@
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="custom-message" />
+					<liferay-ui:message key="custom-message" />
 				</td>
 				<td>
 					<textarea class="liferay-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
@@ -123,7 +123,7 @@
 
 			<br />
 
-			<input type="button" value="<bean:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" /><br />
+			<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" /><br />
 
 			<div class="separator"></div>
 
@@ -133,11 +133,11 @@
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr>
 						<td class="beta-gradient">
-							<b><bean:message key="tasks" />:</b>
+							<b><liferay-ui:message key="tasks" />:</b>
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -150,47 +150,47 @@
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 						<tr class="portlet-section-alternate">
 							<td>
-								<bean:message key="run-the-garbage-collector-to-free-up-memory" />
+								<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
 							</td>
 							</td>
 							<td align="right">
-								<input type="button" value="<bean:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
 							</td>
 						</tr>
 						<tr class="portlet-section-body">
 							<td>
-								<bean:message key="clear-content-cached-by-this-vm" />
+								<liferay-ui:message key="clear-content-cached-by-this-vm" />
 							</td>
 							</td>
 							<td align="right">
-								<input type="button" value="<bean:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
 							</td>
 						</tr>
 						<tr class="portlet-section-alternate">
 							<td>
-								<bean:message key="clear-content-cached-across-the-cluster" />
+								<liferay-ui:message key="clear-content-cached-across-the-cluster" />
 							</td>
 							</td>
 							<td align="right">
-								<input type="button" value="<bean:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
 							</td>
 						</tr>
 						<tr class="portlet-section-body">
 							<td>
-								<bean:message key="clear-the-database-cache" />
+								<liferay-ui:message key="clear-the-database-cache" />
 							</td>
 							</td>
 							<td align="right">
-								<input type="button" value="<bean:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
 							</td>
 						</tr>
 						<tr class="portlet-section-alternate">
 							<td>
-								<bean:message key="precompile-jsps-for-faster-speed" />
+								<liferay-ui:message key="precompile-jsps-for-faster-speed" />
 							</td>
 							</td>
 							<td align="right">
-								<input type="button" value="<bean:message key="execute" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');" />
+								<input type="button" value="<liferay-ui:message key="execute" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');" />
 							</td>
 						</tr>
 						</table>
@@ -202,11 +202,11 @@
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr>
 						<td class="beta-gradient">
-							<b><bean:message key="log-levels" />:</b>
+							<b><liferay-ui:message key="log-levels" />:</b>
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -285,7 +285,7 @@
 
 						<br />
 
-						<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
 
 						<br /><br />
 					</div>
@@ -296,11 +296,11 @@
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr>
 						<td class="beta-gradient">
-							<b><bean:message key="system-properties" />:</b>
+							<b><liferay-ui:message key="system-properties" />:</b>
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />systemProperties'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />systemProperties'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -359,11 +359,11 @@
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 					<tr>
 						<td class="beta-gradient">
-							<b><bean:message key="portal-properties" />:</b>
+							<b><liferay-ui:message key="portal-properties" />:</b>
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />portalProperties'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />portalProperties'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 							</span>
 						</td>
 					</tr>

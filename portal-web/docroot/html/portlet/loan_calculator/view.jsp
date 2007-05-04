@@ -53,7 +53,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="loan-amount" />
+		<liferay-ui:message key="loan-amount" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />loanAmount" size="5" type="text" value="<%= integerFormat.format(loanAmount) %>" />
@@ -61,7 +61,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<bean:message key="interest-rate" />
+		<liferay-ui:message key="interest-rate" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />interest" size="5" type="text" value="<%= doubleFormat.format(interest) %>" />
@@ -69,7 +69,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<bean:message key="years" />
+		<liferay-ui:message key="years" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />years" size="5" type="text" value="<%= years %>" />
@@ -77,7 +77,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<bean:message key="monthly-payment" />
+		<liferay-ui:message key="monthly-payment" />
 	</td>
 	<td>
 		<b><%= integerFormat.format(amountPerPayment) %></b>
@@ -85,7 +85,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<bean:message key="interest-paid" />
+		<liferay-ui:message key="interest-paid" />
 	</td>
 	<td>
 		<b><%= integerFormat.format(interestPaid) %></b>
@@ -93,7 +93,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 </tr>
 <tr>
 	<td>
-		<bean:message key="total-paid" />
+		<liferay-ui:message key="total-paid" />
 	</td>
 	<td>
 		<b><%= integerFormat.format(totalPaid) %></b>
@@ -103,7 +103,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <br />
 
-<input type="submit" value="<bean:message key="calculate" />" />
+<input type="submit" value="<liferay-ui:message key="calculate" />" />
 
 </form>
 

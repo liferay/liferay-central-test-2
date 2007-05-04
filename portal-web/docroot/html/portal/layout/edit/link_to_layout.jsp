@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="link-to-layout" />
+		<liferay-ui:message key="link-to-layout" />
 	</td>
 	<td>
 

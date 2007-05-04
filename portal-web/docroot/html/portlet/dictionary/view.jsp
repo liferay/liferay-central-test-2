@@ -29,11 +29,11 @@
 <input name="<portlet:namespace />word" size="30" type="text" />
 
 <select name="<portlet:namespace />type">
-	<option value="http://dictionary.reference.com/search?q="><bean:message key="dictionary" /></option>
-	<option value="http://thesaurus.reference.com/search?q="><bean:message key="thesaurus" /></option>
+	<option value="http://dictionary.reference.com/search?q="><liferay-ui:message key="dictionary" /></option>
+	<option value="http://thesaurus.reference.com/search?q="><liferay-ui:message key="thesaurus" /></option>
 </select>
 
-<input type="submit" value="<bean:message key="find" />" />
+<input type="submit" value="<liferay-ui:message key="find" />" />
 
 </form>
 

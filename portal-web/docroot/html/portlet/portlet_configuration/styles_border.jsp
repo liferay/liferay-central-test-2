@@ -38,7 +38,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			<table class="liferay-table">
 			<tr>
 				<td>
-					<bean:message key="width" />
+					<liferay-ui:message key="width" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BorderWidth" %>' onchange='<%= "preview." + previewObject + ".borderWidth = this.value;" %>'>
@@ -48,7 +48,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="style" />
+					<liferay-ui:message key="style" />
 				</td>
 				<td>
 					<html:select property='<%= propertyPrefix + "BorderStyle" %>' onchange='<%= "preview." + previewObject + ".borderStyle = this.value;" %>'>
@@ -58,7 +58,7 @@ String previewObject = ParamUtil.getString(request, "previewObject");
 			</tr>
 			<tr>
 				<td>
-					<bean:message key="color" />
+					<liferay-ui:message key="color" />
 				</td>
 				<td>
 					<html:text property='<%= propertyPrefix + "BorderColor" %>' onchange='<%= "preview." + previewObject + ".borderColor = this.value;" %>' /> <img align="absmiddle" src="<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorpicker.png" style="cursor: pointer;" onclick="colorPicker.toggle(this);" />

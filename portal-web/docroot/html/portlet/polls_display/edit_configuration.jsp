@@ -38,7 +38,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longV
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="question" />
+		<liferay-ui:message key="question" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />questionId">
@@ -62,6 +62,6 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longV
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

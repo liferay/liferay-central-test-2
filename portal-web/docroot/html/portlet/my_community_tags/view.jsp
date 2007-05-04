@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
-		<bean:message key="community-tags-are-injected-to-all-pages-of-this-community" />
+		<liferay-ui:message key="community-tags-are-injected-to-all-pages-of-this-community" />
 
 		<br /><br />
 
@@ -35,11 +35,11 @@
 				<%= LanguageUtil.format(pageContext, "you-have-the-following-tags-configured-x", "<b>" + StringUtil.merge(entries, ", ") + "</b>") %>
 			</c:when>
 			<c:otherwise>
-				<bean:message key="you-have-not-configured-any-community-tags" />
+				<liferay-ui:message key="you-have-not-configured-any-community-tags" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<bean:message key="you-must-be-authenticated-to-use-this-portlet" />
+		<liferay-ui:message key="you-must-be-authenticated-to-use-this-portlet" />
 	</c:otherwise>
 </c:choose>

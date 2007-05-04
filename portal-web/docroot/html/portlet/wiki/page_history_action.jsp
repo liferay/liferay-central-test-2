@@ -44,4 +44,4 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 </portlet:actionURL>
 
-<input type="button" value="<bean:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />
+<input type="button" value="<liferay-ui:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />

@@ -44,7 +44,7 @@ else {
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image" />
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
 
 <br /><br />
 
@@ -218,7 +218,7 @@ for (int i = 0; i < portlets.size(); i++) {
 		</c:when>
 		<c:otherwise>
 			<div style="padding-top: 5px;">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>"><bean:message key="more" /> &raquo;</a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>"><liferay-ui:message key="more" /> &raquo;</a>
 			</div>
 		</c:otherwise>
 	</c:choose>

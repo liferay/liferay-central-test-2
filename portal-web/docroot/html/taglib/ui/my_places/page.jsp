@@ -26,7 +26,7 @@
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
 	<li class="my-places">
-		<a><bean:message key="my-places" /></a>
+		<a><liferay-ui:message key="my-places" /></a>
 
 		<ul>
 
@@ -62,7 +62,7 @@
 					<h3>
 						<c:choose>
 							<c:when test="<%= community.isUser() %>">
-								<bean:message key="my-community" />
+								<liferay-ui:message key="my-community" />
 							</c:when>
 							<c:otherwise>
 								<%= community.getName() %>
@@ -78,7 +78,7 @@
 						%>
 
 						<li class="public <%= selectedPlace ? "current" : "" %>">
-							<a href="<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>"><bean:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
+							<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
 						</li>
 
 						<%
@@ -88,7 +88,7 @@
 						%>
 
 						<li class="private <%= selectedPlace ? "current" : "" %>">
-							<a href="<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>"><bean:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
+							<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
 						</li>
 					</ul>
 				</li>

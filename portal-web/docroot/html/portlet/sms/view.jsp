@@ -40,7 +40,7 @@ String message = ParamUtil.getString(request, "message");
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="to" />
+		<liferay-ui:message key="to" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />to" type="text" value="<%= to %>" />
@@ -48,7 +48,7 @@ String message = ParamUtil.getString(request, "message");
 </tr>
 <tr>
 	<td>
-		<bean:message key="subject" />
+		<liferay-ui:message key="subject" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />subject" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= subject %>" />
@@ -56,7 +56,7 @@ String message = ParamUtil.getString(request, "message");
 </tr>
 <tr>
 	<td>
-		<bean:message key="message" />
+		<liferay-ui:message key="message" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />message" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= message %></textarea><br />
@@ -67,14 +67,14 @@ String message = ParamUtil.getString(request, "message");
 	<td>
 		<input disabled maxlength="3" name="<portlet:namespace />length" size="3" type="text" value="<%= subject.length() + message.length() %>" />
 
-		<span style="font-size: xx-small;">(500 <bean:message key="characters-maximum" />)</span>
+		<span style="font-size: xx-small;">(500 <liferay-ui:message key="characters-maximum" />)</span>
 	</td>
 </tr>
 </table>
 
 <br />
 
-<input type="submit" value="<bean:message key="send-text-message" />" />
+<input type="submit" value="<liferay-ui:message key="send-text-message" />" />
 
 </form>
 

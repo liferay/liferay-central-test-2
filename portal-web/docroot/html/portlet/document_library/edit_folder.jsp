@@ -80,7 +80,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 <c:if test="<%= folder != null %>">
 	<tr>
 		<td>
-			<bean:message key="parent-folder" />
+			<liferay-ui:message key="parent-folder" />
 		</td>
 		<td>
 
@@ -100,9 +100,9 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 			<%= parentFolderName %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= parentFolderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 
-			<input id="<portlet:namespace />removeFolderButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
+			<input id="<portlet:namespace />removeFolderButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
 		</td>
 	</tr>
 	<tr>
@@ -114,7 +114,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFolder.class %>" bean="<%= folder %>" field="name" />
@@ -122,7 +122,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFolder.class %>" bean="<%= folder %>" field="description" />
@@ -137,7 +137,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="webdav-url" />
+			<liferay-ui:message key="webdav-url" />
 		</td>
 		<td>
 
@@ -177,7 +177,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -191,9 +191,9 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

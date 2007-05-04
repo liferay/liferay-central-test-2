@@ -82,7 +82,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 	<div class="separator"></div>
 
-	<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteOrders();" />
+	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrders();" />
 
 	<br /><br />
 

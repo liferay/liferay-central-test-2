@@ -30,11 +30,11 @@
 		<table border="0" cellpadding="4" cellspacing="0" width="100%">
 		<tr>
 			<td class="beta-gradient">
-				<b><bean:message key="meta-tags" />:</b>
+				<b><liferay-ui:message key="meta-tags" />:</b>
 			</td>
 			<td align="right" class="beta-gradient">
 				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 				</span>
 			</td>
 		</tr>
@@ -46,19 +46,19 @@
 		<div id="<portlet:namespace />metaTags" style="display: none;">
 			<br />
 
-			<bean:message key="meta-robots" /><br />
+			<liferay-ui:message key="meta-robots" /><br />
 
 			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-robots)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
 
 			<br /><br />
 
-			<bean:message key="meta-description" /><br />
+			<liferay-ui:message key="meta-description" /><br />
 
 			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-description)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
 
 			<br /><br />
 
-			<bean:message key="meta-keywords" /><br />
+			<liferay-ui:message key="meta-keywords" /><br />
 
 			<textarea class="liferay-textarea" name="TypeSettingsProperties(meta-keywords)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
 
@@ -71,11 +71,11 @@
 		<table border="0" cellpadding="4" cellspacing="0" width="100%">
 		<tr>
 			<td class="beta-gradient">
-				<b><bean:message key="javascript" />:</b>
+				<b><liferay-ui:message key="javascript" />:</b>
 			</td>
 			<td align="right" class="beta-gradient">
 				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 				</span>
 			</td>
 		</tr>
@@ -87,19 +87,19 @@
 		<div id="<portlet:namespace />javascript" style="display: none;">
 			<br />
 
-			<bean:message key="javascript-1" /><br />
+			<liferay-ui:message key="javascript-1" /><br />
 
 			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-1)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
 
 			<br /><br />
 
-			<bean:message key="javascript-2" /><br />
+			<liferay-ui:message key="javascript-2" /><br />
 
 			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-2)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
 
 			<br /><br />
 
-			<bean:message key="javascript-3" /><br />
+			<liferay-ui:message key="javascript-3" /><br />
 
 			<textarea class="liferay-textarea" name="TypeSettingsProperties(javascript-3)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
 		</div>
@@ -112,11 +112,11 @@
 			<table border="0" cellpadding="4" cellspacing="0" width="100%">
 			<tr>
 				<td class="beta-gradient">
-					<b><bean:message key="sitemap-protocol" />:</b>
+					<b><liferay-ui:message key="sitemap-protocol" />:</b>
 				</td>
 				<td align="right" class="beta-gradient">
 					<span style="font-size: xx-small;">
-					[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sitemap'); self.focus();"><span><bean:message key="show" /></span><span style="display: none;"><bean:message key="hide" /></span></a>]
+					[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sitemap'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
 					</span>
 				</td>
 			</tr>
@@ -136,18 +136,18 @@
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<bean:message key="include" />
+						<liferay-ui:message key="include" />
 					</td>
 					<td>
 						<select name="TypeSettingsProperties(sitemap-include)">
-							<option <%= (include) ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
-							<option <%= (!include) ? "selected" : "" %> value="0"><bean:message key="no" /></option>
+							<option <%= (include) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+							<option <%= (!include) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<bean:message key="page-priority" /> (0.0 - 1.0)
+						<liferay-ui:message key="page-priority" /> (0.0 - 1.0)
 					</td>
 					<td>
 						<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />" />
@@ -155,17 +155,17 @@
 				</tr>
 				<tr>
 					<td>
-						<bean:message key="change-frequency" />
+						<liferay-ui:message key="change-frequency" />
 					</td>
 					<td>
 						<select name="TypeSettingsProperties(sitemap-changefreq)">
-							<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><bean:message key="always" /></option>
-							<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><bean:message key="hourly" /></option>
-							<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><bean:message key="daily" /></option>
-							<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><bean:message key="weekly" /></option>
-							<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><bean:message key="monthly" /></option>
-							<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><bean:message key="yearly" /></option>
-							<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><bean:message key="never" /></option>
+							<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><liferay-ui:message key="always" /></option>
+							<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><liferay-ui:message key="hourly" /></option>
+							<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><liferay-ui:message key="daily" /></option>
+							<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><liferay-ui:message key="weekly" /></option>
+							<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><liferay-ui:message key="monthly" /></option>
+							<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><liferay-ui:message key="yearly" /></option>
+							<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><liferay-ui:message key="never" /></option>
 						</select>
 					</td>
 				</tr>

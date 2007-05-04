@@ -37,7 +37,7 @@ catch (Exception e) {
 %>
 
 	<span class="portlet-msg-error">
-	<bean:message key="an-error-occurred-while-processing-your-xml-and-xsl" />
+	<liferay-ui:message key="an-error-occurred-while-processing-your-xml-and-xsl" />
 	</span>
 
 <%

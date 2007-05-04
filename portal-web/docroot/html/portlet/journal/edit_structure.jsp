@@ -205,7 +205,7 @@ int tabIndex = 1;
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
 		<table border="0" cellpadding="0" cellspacing="0">
@@ -225,7 +225,7 @@ int tabIndex = 1;
 				<c:if test="<%= structure == null %>">
 					<liferay-ui:input-checkbox param="autoStructureId" />
 
-					<bean:message key="autogenerate-id" />
+					<liferay-ui:message key="autogenerate-id" />
 				</c:if>
 			</td>
 		</tr>
@@ -239,7 +239,7 @@ int tabIndex = 1;
 </tr>
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="name" />
@@ -247,7 +247,7 @@ int tabIndex = 1;
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="description" />
@@ -262,7 +262,7 @@ int tabIndex = 1;
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -276,9 +276,9 @@ int tabIndex = 1;
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -288,12 +288,12 @@ int tabIndex = 1;
 
 <input name="<portlet:namespace />xsd" type="hidden" value="" />
 
-<input type="button" value="<bean:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);" />
+<input type="button" value="<liferay-ui:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);" />
 
-<input type="button" value="<bean:message key="launch-editor" />" onClick="var structureXsdWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>', 'structureXsd', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureXsdWindow.focus();" />
+<input type="button" value="<liferay-ui:message key="launch-editor" />" onClick="var structureXsdWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>', 'structureXsd', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureXsdWindow.focus();" />
 
 <c:if test="<%= structure != null %>">
-	<input type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';" />
+	<input type="button" value="<liferay-ui:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';" />
 </c:if>
 
 <br />

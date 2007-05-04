@@ -60,11 +60,11 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 	<td>
 		<span class="font-small" style="font-weight: bold;">
 
-		<bean:message key="page" />
+		<liferay-ui:message key="page" />
 
 		<input id="<%= namespace %>page-iterator-value" size="1" style="font-weight: italicized;" type="text" value="<%= curValue %>" onKeyPress="if (event.keyCode == 13) { <%= namespace %>submitPageIterator(); return false; }" />
 
-		<bean:message key="of" />
+		<liferay-ui:message key="of" />
 
 		<%= pages %>
 
@@ -79,7 +79,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<bean:message key="first" />
+		<liferay-ui:message key="first" />
 
 		<c:if test="<%= curValue != 1 %>">
 			</a>
@@ -91,7 +91,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<bean:message key="previous" />
+		<liferay-ui:message key="previous" />
 
 		<c:if test="<%= curValue != 1 %>">
 			</a>
@@ -103,7 +103,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<bean:message key="next" />
+		<liferay-ui:message key="next" />
 
 		<c:if test="<%= curValue != pages %>">
 			</a>
@@ -115,7 +115,7 @@ int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 			<a href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
 		</c:if>
 
-		<bean:message key="last" />
+		<liferay-ui:message key="last" />
 
 		<c:if test="<%= curValue != pages %>">
 			</a>

@@ -25,7 +25,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="language" />
+		<liferay-ui:message key="language" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />languageId">
@@ -49,7 +49,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="time-zone" />
+		<liferay-ui:message key="time-zone" />
 	</td>
 	<td>
 		<liferay-ui:input-time-zone name="timeZoneId" value="<%= user2.getTimeZone().getID() %>" />
@@ -57,7 +57,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="greeting" />
+		<liferay-ui:message key="greeting" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="greeting" />
@@ -68,7 +68,7 @@
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('display');" />
+	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('display');" />
 </c:if>
 
 <br /><br />

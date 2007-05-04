@@ -78,7 +78,7 @@ else {
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="name" />
@@ -86,24 +86,24 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="type" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace/>type">
-			<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><bean:message key="portlet" /></option>
-			<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><bean:message key="theme" /></option>
-			<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><bean:message key="layout" /></option>
-			<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><bean:message key="extension" /></option>
+			<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
+			<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
+			<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
+			<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="licenses" />
+		<liferay-ui:message key="licenses" />
 	</td>
 	<td>
 		<select name="<portlet:namespace/>licenses" multiple="true">
-			<optgroup label="<bean:message key="recommended-licenses" />">
+			<optgroup label="<liferay-ui:message key="recommended-licenses" />">
 
 				<%
 				Iterator itr = SCLicenseLocalServiceUtil.getLicenses(true, true).iterator();
@@ -120,7 +120,7 @@ else {
 
 			</optgroup>
 
-			<optgroup label="<bean:message key="other-licenses" />">
+			<optgroup label="<liferay-ui:message key="other-licenses" />">
 
 				<%
 				itr = SCLicenseLocalServiceUtil.getLicenses(true, false).iterator();
@@ -141,7 +141,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="page-url" />
+		<liferay-ui:message key="page-url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="pageURL" />
@@ -149,7 +149,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="short-description" />
+		<liferay-ui:message key="short-description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="shortDescription" />
@@ -157,7 +157,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="long-description" />
+		<liferay-ui:message key="long-description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="longDescription" />
@@ -165,7 +165,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="main-screenshot" />
+		<liferay-ui:message key="main-screenshot" />
 	</td>
 	<td>
 		<%
@@ -189,7 +189,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="secondary-screenshots" />
+		<liferay-ui:message key="secondary-screenshots" />
 	</td>
 	<td>
 		<%
@@ -223,7 +223,7 @@ else {
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -242,7 +242,7 @@ else {
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="group-id" />
+		<liferay-ui:message key="group-id" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoGroupId" />
@@ -250,7 +250,7 @@ else {
 </tr>
 <tr>
 	<td>
-		<bean:message key="artifact-id" />
+		<liferay-ui:message key="artifact-id" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoArtifactId" />
@@ -260,9 +260,9 @@ else {
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

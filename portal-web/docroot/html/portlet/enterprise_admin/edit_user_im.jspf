@@ -25,7 +25,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="aim" />
+		<liferay-ui:message key="aim" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="aimSn" />
@@ -34,7 +34,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="icq" />
+		<liferay-ui:message key="icq" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="icqSn" />
@@ -47,7 +47,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="jabber" />
+		<liferay-ui:message key="jabber" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="jabberSn" />
@@ -56,7 +56,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="msn" />
+		<liferay-ui:message key="msn" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="msnSn" />
@@ -65,7 +65,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="skype" />
+		<liferay-ui:message key="skype" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="skypeSn" />
@@ -78,7 +78,7 @@
 </tr>
 <tr>
 	<td>
-		<bean:message key="ym" />
+		<liferay-ui:message key="ym" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="ymSn" />
@@ -94,7 +94,7 @@
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('im');" /><br />
+	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('im');" /><br />
 </c:if>
 
 <br />

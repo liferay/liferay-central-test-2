@@ -69,7 +69,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 <c:if test="<%= entry != null %>">
 	<tr>
 		<td>
-			<bean:message key="folder" />
+			<liferay-ui:message key="folder" />
 		</td>
 		<td>
 
@@ -81,7 +81,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 			<%= folder.getName() %>
 			</a>
 
-			<input type="button" value="<bean:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/bookmarks/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/bookmarks/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 		</td>
 	</tr>
 	<tr>
@@ -93,7 +93,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="name" />
@@ -101,7 +101,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </tr>
 <tr>
 	<td>
-		<bean:message key="url" />
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="url" />
@@ -109,7 +109,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="comments" />
@@ -119,7 +119,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 <c:if test="<%= entry != null %>">
 	<tr>
 		<td>
-			<bean:message key="visits" />
+			<liferay-ui:message key="visits" />
 		</td>
 		<td>
 			<%= entry.getVisits() %>
@@ -134,7 +134,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </tr>
 <tr>
 	<td>
-		<bean:message key="tags" />
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -162,7 +162,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -176,9 +176,9 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

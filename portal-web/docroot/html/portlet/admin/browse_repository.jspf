@@ -44,16 +44,16 @@ try {
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<bean:message key="keywords" />
+			<liferay-ui:message key="keywords" />
 		</td>
 		<td>
-			<bean:message key="tag" />
+			<liferay-ui:message key="tag" />
 		</td>
 		<td>
-			<bean:message key="repository" />
+			<liferay-ui:message key="repository" />
 		</td>
 		<td>
-			<bean:message key="install-status" />
+			<liferay-ui:message key="install-status" />
 		</td>
 	</tr>
 	<tr>
@@ -62,7 +62,7 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>tag">
-				<option value=""><bean:message key="all" /></option>
+				<option value=""><liferay-ui:message key="all" /></option>
 
 				<%
 				Iterator itr = PluginPackageUtil.getAvailableTags().iterator();
@@ -81,7 +81,7 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>repositoryURL">
-				<option value=""><bean:message key="all" /></option>
+				<option value=""><liferay-ui:message key="all" /></option>
 
 				<%
 				String[] repositoryURLs = PluginPackageUtil.getRepositoryURLs();
@@ -100,10 +100,10 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>installStatus">
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><bean:message key="not-installed-or-older-version-installed" /></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED%>"><bean:message key="older-version-installed" /></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED%>"><bean:message key="not-installed" /></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_ALL%>"><bean:message key="all" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><liferay-ui:message key="not-installed-or-older-version-installed" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED%>"><liferay-ui:message key="older-version-installed" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED%>"><liferay-ui:message key="not-installed" /></option>
+				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_ALL%>"><liferay-ui:message key="all" /></option>
 			</select>
 		</td>
 	</tr>
@@ -111,7 +111,7 @@ try {
 
 	<br />
 
-	<input type="button" value="<bean:message key="search" />" onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')" />
+	<input type="button" value="<liferay-ui:message key="search" />" onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')" />
 
 	<br /><br />
 
@@ -232,7 +232,7 @@ try {
 		<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 		</c:if>
-		<input type="button" value="<bean:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
+		<input type="button" value="<liferay-ui:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
 
 		<br />
 
@@ -246,7 +246,7 @@ catch (PluginPackageException e) {
 %>
 
 	<span class="portlet-msg-error">
-	<bean:message key="error-obtaining-available-plugins" />
+	<liferay-ui:message key="error-obtaining-available-plugins" />
 	</span>
 
 <%

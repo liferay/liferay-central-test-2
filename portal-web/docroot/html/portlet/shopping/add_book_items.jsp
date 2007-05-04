@@ -42,7 +42,7 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategoryImpl.DE
 	<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
 </div>
 
-<bean:message key="add-all-isbn-numbers-separated-by-spaces" />
+<liferay-ui:message key="add-all-isbn-numbers-separated-by-spaces" />
 
 <br /><br />
 
@@ -50,9 +50,9 @@ String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategoryImpl.DE
 
 <br /><br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

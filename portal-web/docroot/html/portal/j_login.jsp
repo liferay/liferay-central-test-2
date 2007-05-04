@@ -37,7 +37,7 @@ String jPassword = (String)session.getAttribute("j_password");
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(jUserName) && Validator.isNotNull(jPassword) %>">
-		<html dir="<bean:message key="lang.dir" />">
+		<html dir="<liferay-ui:message key="lang.dir" />">
 
 		<head>
 			<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type" />
@@ -60,7 +60,7 @@ String jPassword = (String)session.getAttribute("j_password");
 				</form>
 
 				<font face="Verdana, Tahoma, Arial" size="3">
-				<b><bean:message key="processing-login" />
+				<b><liferay-ui:message key="processing-login" />
 				</font><br /><br />
 
 				<script type="text/javascript">
@@ -102,7 +102,7 @@ String jPassword = (String)session.getAttribute("j_password");
 		}
 		%>
 
-		<html dir="<bean:message key="lang.dir" />">
+		<html dir="<liferay-ui:message key="lang.dir" />">
 
 		<head>
 			<title></title>

@@ -43,7 +43,7 @@ uuid = (String)renderRequest.getAttribute("uuid");
 				<%= content %>
 			</c:when>
 			<c:otherwise>
-				<bean:message key="please-contact-the-administrator-to-setup-this-portlet" />
+				<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
 			</c:otherwise>
 		</c:choose>
 	</div>

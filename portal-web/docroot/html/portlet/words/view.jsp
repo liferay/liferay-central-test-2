@@ -39,11 +39,11 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 <input name="<portlet:namespace />word" type="text" value="<%= word %>" />
 
 <select name="<portlet:namespace />scramble">
-	<option <%= scramble ? "selected" : "" %> value="1"><bean:message key="scramble" /></option>
-	<option <%= !scramble ? "selected" : "" %> value="0"><bean:message key="unscramble" /></option>
+	<option <%= scramble ? "selected" : "" %> value="1"><liferay-ui:message key="scramble" /></option>
+	<option <%= !scramble ? "selected" : "" %> value="0"><liferay-ui:message key="unscramble" /></option>
 </select>
 
-<input type="submit" value="<bean:message key="search" />" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 <c:if test="<%= (words != null) && (words.length > 0) %>">
 	<br /><br />

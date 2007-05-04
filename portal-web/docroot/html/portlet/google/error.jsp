@@ -28,10 +28,10 @@
 
 <span class="portlet-msg-error" style="font-size: xx-small;">
 
-<bean:message key="an-unexpected-error-occurred-while-connecting-to-google" />
+<liferay-ui:message key="an-unexpected-error-occurred-while-connecting-to-google" />
 
 <br /><br />
 
-<bean:message key="please-ensure-the-administrator-has-configured-a-proper-google-license" />
+<liferay-ui:message key="please-ensure-the-administrator-has-configured-a-proper-google-license" />
 
 </span>

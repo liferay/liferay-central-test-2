@@ -30,7 +30,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="safe-search" />
+		<liferay-ui:message key="safe-search" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="safeSearch" defaultValue="<%= safeSearch %>" />
@@ -40,6 +40,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

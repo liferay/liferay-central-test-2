@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<font class="portlet-font" style="font-size: x-small;"><bean:message key="sms" /></font>
+		<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="sms" /></font>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="smsSn" />
@@ -38,7 +38,7 @@
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveUser('sms');" /><br />
+	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('sms');" /><br />
 </c:if>
 
 <br />

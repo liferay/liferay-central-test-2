@@ -38,7 +38,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= folderIds %>" />
 
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(breadcrumbsFolderId, null, pageContext, renderRequest, renderResponse) %> &raquo; <bean:message key="search" />
+	<%= DLUtil.getBreadcrumbs(breadcrumbsFolderId, null, pageContext, renderRequest, renderResponse) %> &raquo; <liferay-ui:message key="search" />
 </div>
 
 <%
@@ -120,7 +120,7 @@ for (int i = 0; i < results.getLength(); i++) {
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-<input type="submit" value="<bean:message key="search" />" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 <br /><br />
 

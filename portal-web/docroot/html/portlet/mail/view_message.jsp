@@ -49,7 +49,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 		<table cellpadding="0" cellspacing="0" border="0" class="font-small;">
 		<tr>
 			<td align="right" style="padding-right: 5px;" valign="top">
-				<bean:message key="from" />:&nbsp;
+				<liferay-ui:message key="from" />:&nbsp;
 			</td>
 			<td>
 				<%= Html.escape(InternetAddressUtil.toString(from), false) %>
@@ -59,7 +59,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 		<c:if test="<%= to != null %>">
 			<tr>
 				<td align="right" style="padding-right: 5px;" valign="top">
-					<bean:message key="to" />:&nbsp;
+					<liferay-ui:message key="to" />:&nbsp;
 				</td>
 				<td>
 					<%= Html.escape(InternetAddressUtil.toString(to), false) %>
@@ -70,7 +70,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 		<c:if test="<%= cc != null %>">
 			<tr>
 				<td align="right" style="padding-right: 5px;" valign="top">
-					<bean:message key="cc" />:&nbsp;
+					<liferay-ui:message key="cc" />:&nbsp;
 				</td>
 				<td>
 					<%= Html.escape(InternetAddressUtil.toString(cc), false) %>
@@ -81,7 +81,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 		<c:if test="<%= bcc != null %>">
 			<tr>
 				<td align="right" style="padding-right: 5px;" valign="top">
-					<bean:message key="bcc" />:&nbsp;
+					<liferay-ui:message key="bcc" />:&nbsp;
 				</td>
 				<td>
 					<%= Html.escape(InternetAddressUtil.toString(bcc), false) %>
@@ -92,7 +92,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 		<c:if test="<%= sentDate != null %>">
 			<tr>
 				<td align="right" style="padding-right: 5px;" valign="top">
-					<bean:message key="date" />:&nbsp;
+					<liferay-ui:message key="date" />:&nbsp;
 				</td>
 				<td>
 					<%= dateFormatDateTime.format(sentDate) %>

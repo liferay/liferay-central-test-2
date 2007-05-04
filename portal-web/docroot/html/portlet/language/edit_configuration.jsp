@@ -30,14 +30,14 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="display-style" />
+		<liferay-ui:message key="display-style" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle == LanguageTag.LIST_ICON) ? "selected" : "" %> value="<%= LanguageTag.LIST_ICON %>"><bean:message key="icon" /></option>
-			<option <%= (displayStyle == LanguageTag.LIST_LONG_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_LONG_TEXT %>"><bean:message key="long-text" /></option>
-			<option <%= (displayStyle == LanguageTag.LIST_SHORT_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_SHORT_TEXT %>"><bean:message key="short-text" /></option>
-			<option <%= (displayStyle == LanguageTag.SELECT_BOX) ? "selected" : "" %> value="<%= LanguageTag.SELECT_BOX %>"><bean:message key="select-box" /></option>
+			<option <%= (displayStyle == LanguageTag.LIST_ICON) ? "selected" : "" %> value="<%= LanguageTag.LIST_ICON %>"><liferay-ui:message key="icon" /></option>
+			<option <%= (displayStyle == LanguageTag.LIST_LONG_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_LONG_TEXT %>"><liferay-ui:message key="long-text" /></option>
+			<option <%= (displayStyle == LanguageTag.LIST_SHORT_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_SHORT_TEXT %>"><liferay-ui:message key="short-text" /></option>
+			<option <%= (displayStyle == LanguageTag.SELECT_BOX) ? "selected" : "" %> value="<%= LanguageTag.SELECT_BOX %>"><liferay-ui:message key="select-box" /></option>
 		</select>
 	</td>
 </tr>
@@ -45,6 +45,6 @@
 
 <br />
 
-<input type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>

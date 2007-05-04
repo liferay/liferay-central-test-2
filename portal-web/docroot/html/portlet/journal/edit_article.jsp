@@ -467,13 +467,13 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			deleteState.value = "yes";
 			document.images[img].style.display = "none";
 			document.getElementById(file).disabled = true;
-			button.value = "<bean:message key="cancel" />";
+			button.value = "<liferay-ui:message key="cancel" />";
 		}
 		else {
 			deleteState.value = "no";
 			document.images[img].style.display = "block";
 			document.getElementById(file).disabled = false;
-			button.value = "<bean:message key="delete" />";
+			button.value = "<liferay-ui:message key="delete" />";
 		}
 	}
 </script>
@@ -506,7 +506,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="id" />
+		<liferay-ui:message key="id" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -525,7 +525,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 				<c:if test="<%= article == null %>">
 					<liferay-ui:input-checkbox param="autoArticleId" />
 
-					<bean:message key="autogenerate-id" />
+					<liferay-ui:message key="autogenerate-id" />
 				</c:if>
 			</td>
 		</tr>
@@ -534,23 +534,23 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </tr>
 <tr>
 	<td>
-		<bean:message key="status" />
+		<liferay-ui:message key="status" />
 	</td>
 	<td>
 		<c:choose>
 			<c:when test="<%= article == null %>">
-				<bean:message key="new" />
+				<liferay-ui:message key="new" />
 			</c:when>
 			<c:otherwise>
 				<c:choose>
 					<c:when test="<%= article.isApproved() %>">
-						<bean:message key="approved" />
+						<liferay-ui:message key="approved" />
 					</c:when>
 					<c:when test="<%= article.isExpired() %>">
-						<bean:message key="expired" />
+						<liferay-ui:message key="expired" />
 					</c:when>
 					<c:otherwise>
-						<bean:message key="not-approved" />
+						<liferay-ui:message key="not-approved" />
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -566,7 +566,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="version" />
+			<liferay-ui:message key="version" />
 		</td>
 		<td>
 			<table class="liferay-table">
@@ -577,7 +577,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 				<td>
 					<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
 
-					<bean:message key="increment-version" />
+					<liferay-ui:message key="increment-version" />
 				</td>
 			</tr>
 			</table>
@@ -592,7 +592,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </tr>
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="title" />
@@ -600,7 +600,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </tr>
 <tr>
 	<td>
-		<bean:message key="description" />
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
@@ -613,7 +613,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 </tr>
 <tr>
 	<td>
-		<bean:message key="type" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -646,7 +646,7 @@ String[] availableLocales = null;
 	<c:when test="<%= (structure != null) %>">
 		<tr>
 			<td>
-				<bean:message key="language" />
+				<liferay-ui:message key="language" />
 			</td>
 			<td>
 				<table class="liferay-table">
@@ -669,7 +669,7 @@ String[] availableLocales = null;
 						</select>
 
 						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
+							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
 						</c:if>
 					</td>
 					<td>
@@ -692,7 +692,7 @@ String[] availableLocales = null;
 
 						<tr>
 							<td>
-								<bean:message key="default-language" />
+								<liferay-ui:message key="default-language" />
 							</td>
 							<td>
 								<select name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
@@ -758,7 +758,7 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td>
-		<bean:message key="display-date" />
+		<liferay-ui:message key="display-date" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="displayDate" defaultValue="<%= displayDate %>" />
@@ -766,7 +766,7 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td>
-		<bean:message key="expiration-date" />
+		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -777,7 +777,7 @@ String[] availableLocales = null;
 			<td>
 				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
 
-				<bean:message key="never-auto-expire" />
+				<liferay-ui:message key="never-auto-expire" />
 			</td>
 		</tr>
 		</table>
@@ -785,7 +785,7 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td>
-		<bean:message key="review-date" />
+		<liferay-ui:message key="review-date" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -796,7 +796,7 @@ String[] availableLocales = null;
 			<td>
 				<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'reviewDate\', this.checked);" %>' />
 
-				<bean:message key="never-review" />
+				<liferay-ui:message key="never-review" />
 			</td>
 		</tr>
 		</table>
@@ -809,7 +809,7 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td>
-		<bean:message key="tags" />
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -837,7 +837,7 @@ String[] availableLocales = null;
 	</tr>
 	<tr>
 		<td>
-			<bean:message key="permissions" />
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -851,35 +851,35 @@ String[] availableLocales = null;
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
 <c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
-	<input type="button" value="<bean:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
+	<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
 
 	<c:if test="<%= article != null %>">
-		<input type="button" value="<bean:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
+		<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
 	</c:if>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(structureId) %>">
-	<input type="button" value="<bean:message key="preview" />" onClick="<portlet:namespace />previewArticle();" />
+	<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewArticle();" />
 </c:if>
 
 <c:if test="<%= structure != null %>">
-	<input type="button" value="<bean:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
+	<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
 </c:if>
 
 <c:if test="<%= article != null %>">
 	<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-		<input type="button" value="<bean:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
+		<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-		<input type="button" value="<bean:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
+		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
 	</c:if>
 </c:if>
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 <br /><br />
 
@@ -888,7 +888,7 @@ String[] availableLocales = null;
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="structure" />
+		<liferay-ui:message key="structure" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
@@ -897,7 +897,7 @@ String[] availableLocales = null;
 		<%= structureName %>
 		</a>
 
-		<input type="button" value="<bean:message key="select" />"
+		<input type="button" value="<liferay-ui:message key="select" />"
 			onClick="
 				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>')) {
 					var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
@@ -906,7 +906,7 @@ String[] availableLocales = null;
 				}"
 			>
 
-		<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<bean:message key="remove" />" onClick="<portlet:namespace />removeStructure();">
+		<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeStructure();">
 	</td>
 </tr>
 <tr>
@@ -916,14 +916,14 @@ String[] availableLocales = null;
 </tr>
 <tr>
 	<td>
-		<bean:message key="template" />
+		<liferay-ui:message key="template" />
 	</td>
 	<td>
 		<c:choose>
 			<c:when test="<%= templates.size() == 0 %>">
 				<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
-				<input type="button" value="<bean:message key="select" />"
+				<input type="button" value="<liferay-ui:message key="select" />"
 					onClick="
 						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
 							var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');

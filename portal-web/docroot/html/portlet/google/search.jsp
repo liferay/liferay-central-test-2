@@ -51,11 +51,11 @@ integerFormat.setMaximumFractionDigits(0);
 <input name="<portlet:namespace />args" size="30" type="text" value="<%= searchResult.getSearchQuery() %>" />
 
 <select name="<portlet:namespace />directive">
-	<option selected value="search"><bean:message key="search" /></option>
-	<option value="spell"><bean:message key="spell" /></option>
+	<option selected value="search"><liferay-ui:message key="search" /></option>
+	<option value="spell"><liferay-ui:message key="spell" /></option>
 </select>
 
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<bean:message key="search" />" type="image" />
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
 
 </form>
 
@@ -69,11 +69,11 @@ integerFormat.setMaximumFractionDigits(0);
 <tr class="portlet-section-header">
 	<td>
 		<c:if test='<%= !searchResult.getSearchQuery().startsWith("related:") %>'>
-			<bean:message key="searched-the-web-for" /> <b><%= searchResult.getSearchQuery() %></b>.
+			<liferay-ui:message key="searched-the-web-for" /> <b><%= searchResult.getSearchQuery() %></b>.
 		</c:if>
 
 		<c:if test='<%= searchResult.getSearchQuery().startsWith("related:") %>'>
-			<bean:message key="searched-for-pages-similar-to" /> <b><%= searchResult.getSearchQuery().substring(8, searchResult.getSearchQuery().length()) %></b>.
+			<liferay-ui:message key="searched-for-pages-similar-to" /> <b><%= searchResult.getSearchQuery().substring(8, searchResult.getSearchQuery().length()) %></b>.
 		</c:if>
 	</td>
 	<td align="right">
@@ -108,7 +108,7 @@ for (int i = 0; i < resultElements.length; i++) {
 			<%= resultElement.getSnippet() %><br />
 
 			<c:if test="<%= Validator.isNotNull(resultElement.getSummary()) %>">
-				<bean:message key="description" />: <%= resultElement.getSummary() %><br />
+				<liferay-ui:message key="description" />: <%= resultElement.getSummary() %><br />
 			</c:if>
 
 			<%
@@ -116,10 +116,10 @@ for (int i = 0; i < resultElements.length; i++) {
 			%>
 
 			<c:if test="<%= Validator.isNotNull(categoryName) %>">
-				<bean:message key="category" />: <a href="http://directory.google.com/<%= categoryName %>" target="_blank"><%= StringUtil.replace(categoryName.substring(4, categoryName.length()), "/", " &gt; ") %></a><br />
+				<liferay-ui:message key="category" />: <a href="http://directory.google.com/<%= categoryName %>" target="_blank"><%= StringUtil.replace(categoryName.substring(4, categoryName.length()), "/", " &gt; ") %></a><br />
 			</c:if>
 
-			<span class="portlet-msg-success"><%= resultElement.getURL() %> - <%= resultElement.getCachedSize() %></span> - <a href="<%= themeDisplay.getPathMain() %>/google/cached?args=<%= StringUtil.replace(resultElement.getURL(), "http://", StringPool.BLANK) %>" target="_blank"><bean:message key="cached" /></a>
+			<span class="portlet-msg-success"><%= resultElement.getURL() %> - <%= resultElement.getCachedSize() %></span> - <a href='<%= themeDisplay.getPathMain() %>/google/cached?args=<%= StringUtil.replace(resultElement.getURL(), "http://", StringPool.BLANK) %>' target="_blank"><liferay-ui:message key="cached" /></a>
 
 			<c:if test="<%= resultElement.getRelatedInformationPresent() %>">
 
@@ -130,7 +130,7 @@ for (int i = 0; i < resultElements.length; i++) {
 				portletURL.setParameter("args", StringUtil.replace(resultElement.getURL(), "http://", "related:"));
 				%>
 
-				- <a href="<%= portletURL.toString() %>"><bean:message key="similar-pages" /></a>
+				- <a href="<%= portletURL.toString() %>"><liferay-ui:message key="similar-pages" /></a>
 			</c:if>
 		</td>
 	</tr>

@@ -25,5 +25,5 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <span class="portlet-msg-error">
-<bean:message key="jaas-is-not-configured-properly" />
+<liferay-ui:message key="jaas-is-not-configured-properly" />
 </span>

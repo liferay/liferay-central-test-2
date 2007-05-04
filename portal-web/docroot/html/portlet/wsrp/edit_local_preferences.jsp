@@ -64,7 +64,7 @@ catch (Throwable t) {
 				<c:if test="<%= error != null %>">
 					<tr>
 						<td colspan="3">
-							<font class="portlet-msg-error" style="font-size: xx-small;"><bean:message key="wsrp-your-service-url-or-endpoints-are-unreachable" /></font>
+							<font class="portlet-msg-error" style="font-size: xx-small;"><liferay-ui:message key="wsrp-your-service-url-or-endpoints-are-unreachable" /></font>
 						</td>
 					</tr>
 					<tr>
@@ -75,7 +75,7 @@ catch (Throwable t) {
 				</c:if>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><bean:message key="wsrp-service-url" /></font>
+						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-service-url" /></font>
 					</td>
 					<td width="10">
 						&nbsp;
@@ -91,7 +91,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><bean:message key="wsrp-markup-endpoint" /></font>
+						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-markup-endpoint" /></font>
 					</td>
 					<td width="10">
 						&nbsp;
@@ -107,7 +107,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><bean:message key="wsrp-service-description-endpoint" /></font>
+						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-service-description-endpoint" /></font>
 					</td>
 					<td width="10">
 						&nbsp;
@@ -123,7 +123,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><bean:message key="wsrp-registration-endpoint" /></font>
+						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-registration-endpoint" /></font>
 					</td>
 					<td width="10">
 						&nbsp;
@@ -139,7 +139,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><bean:message key="wsrp-portlet-management-endpoint" /></font>
+						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-portlet-management-endpoint" /></font>
 					</td>
 					<td width="10">
 						&nbsp;
@@ -155,7 +155,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><bean:message key="wsrp-portlet" /></font>
+						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-portlet" /></font>
 					</td>
 					<td width="10">
 						&nbsp;
@@ -191,9 +191,9 @@ catch (Throwable t) {
 		</tr>
 		<tr>
 			<td align="center">
-				<input type="button" value="<bean:message key="save-settings" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+				<input type="button" value="<liferay-ui:message key="save-settings" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit" /></portlet:renderURL>';" />
 			</td>
 		</tr>
 		</table>

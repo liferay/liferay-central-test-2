@@ -56,7 +56,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="name" />
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="name" />
@@ -64,7 +64,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<bean:message key="url" />
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="url" />
@@ -72,7 +72,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<bean:message key="open-source" />
+		<liferay-ui:message key="open-source" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="openSource" defaultValue="<%= openSource %>" />
@@ -80,7 +80,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<bean:message key="active" />
+		<liferay-ui:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
@@ -88,7 +88,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 </tr>
 <tr>
 	<td>
-		<bean:message key="recommended" />
+		<liferay-ui:message key="recommended" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="recommended" defaultValue="<%= recommended %>" />
@@ -98,9 +98,9 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 
 <br />
 
-<input type="submit" value="<bean:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<bean:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 

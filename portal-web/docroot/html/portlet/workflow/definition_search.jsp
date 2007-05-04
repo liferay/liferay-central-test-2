@@ -33,10 +33,10 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 <table class="liferay-table">
 <tr>
 	<%--<td>
-		<bean:message key="definition-id" />
+		<liferay-ui:message key="definition-id" />
 	</td>--%>
 	<td>
-		<bean:message key="definition-name" />
+		<liferay-ui:message key="definition-name" />
 	</td>
 </tr>
 <tr>
@@ -55,12 +55,12 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= DefinitionDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>

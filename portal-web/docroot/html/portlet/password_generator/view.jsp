@@ -58,18 +58,18 @@ catch (Exception e) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="numbers" />
+		<liferay-ui:message key="numbers" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />numbers">
-			<option <%= numbers ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
-			<option <%= !numbers ? "selected" : "" %> value="0"><bean:message key="no" /></option>
+			<option <%= numbers ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+			<option <%= !numbers ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="lower-case-letters" />
+		<liferay-ui:message key="lower-case-letters" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="lowerCaseLetters" defaultValue="<%= lowerCaseLetters %>" />
@@ -77,7 +77,7 @@ catch (Exception e) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="upper-case-letters" />
+		<liferay-ui:message key="upper-case-letters" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="upperCaseLetters" defaultValue="<%= upperCaseLetters %>" />
@@ -85,7 +85,7 @@ catch (Exception e) {
 </tr>
 <tr>
 	<td>
-		<bean:message key="length" />
+		<liferay-ui:message key="length" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />length">
@@ -111,6 +111,6 @@ catch (Exception e) {
 
 <br /><br />
 
-<input type="submit" value="<bean:message key="generate" />" />
+<input type="submit" value="<liferay-ui:message key="generate" />" />
 
 </form>

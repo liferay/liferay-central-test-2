@@ -116,13 +116,13 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 		<c:if test="<%= mapInputEnabled %>">
 			<input class="liferay-input-text" name="<portlet:namespace />mapAddress" type="text" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }" value="<%= mapAddress %>" />
 
-			<input type="button" value="<bean:message key="get-map" />" onClick="<portlet:namespace />getMap();" />
+			<input type="button" value="<liferay-ui:message key="get-map" />" onClick="<portlet:namespace />getMap();" />
 		</c:if>
 
 		<c:if test="<%= directionsInputEnabled %>">
 			<input class="liferay-input-text" name="<portlet:namespace />directionsAddress" type="text" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }" value="<%= directionsAddress %>" />
 
-			<input type="button" value="<bean:message key="get-directions" />" onClick="<portlet:namespace />getDirections();" />
+			<input type="button" value="<liferay-ui:message key="get-directions" />" onClick="<portlet:namespace />getDirections();" />
 		</c:if>
 
 		<c:if test="<%= mapInputEnabled || directionsInputEnabled %>">
@@ -134,6 +134,6 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 		</form>
 	</c:when>
 	<c:otherwise>
-		<bean:message key="please-contact-the-administrator-to-configure-a-google-license" />
+		<liferay-ui:message key="please-contact-the-administrator-to-configure-a-google-license" />
 	</c:otherwise>
 </c:choose>

@@ -129,15 +129,15 @@ List messages = treeWalker.getMessages();
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 		<td>
-			<bean:message key="threaded-replies" />
+			<liferay-ui:message key="threaded-replies" />
 		</td>
 		<td></td>
 		<td>
-			<bean:message key="author" />
+			<liferay-ui:message key="author" />
 		</td>
 		<td></td>
 		<td>
-			<bean:message key="date" />
+			<liferay-ui:message key="date" />
 		</td>
 	</tr>
 
@@ -185,7 +185,7 @@ List messages = treeWalker.getMessages();
 				<b><%= message.getSubject() %></b><br />
 
 				<span style="font-size: xx-small;">
-				<bean:message key="by" /> <%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %>, <bean:message key="on" /> <%= dateFormatDateTime.format(message.getModifiedDate()) %>
+				<liferay-ui:message key="by" /> <%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(message.getModifiedDate()) %>
 				</span>
 
 				<br /><br />

@@ -27,9 +27,9 @@
 <form id="<portlet:namespace />fm">
 
 <fieldset id="<portlet:namespace />searchEntriesFields">
-	<legend><bean:message key="search-tag" /></legend>
+	<legend><liferay-ui:message key="search-tag" /></legend>
 
-	<bean:message key="enter-text-below-to-refine-the-list-of-tags" />
+	<liferay-ui:message key="enter-text-below-to-refine-the-list-of-tags" />
 
 	<br /><br />
 
@@ -39,41 +39,41 @@
 
 	<br /><br />
 
-	<bean:message key="click-on-any-tag-to-edit-it" />
+	<liferay-ui:message key="click-on-any-tag-to-edit-it" />
 
 	<div id="<portlet:namespace />searchResultsDiv" /></div>
 </fieldset>
 
 <fieldset id="<portlet:namespace />editEntryFields">
-	<legend><bean:message key="edit-tag" /></legend>
+	<legend><liferay-ui:message key="edit-tag" /></legend>
 
-	<bean:message key="tag-value" />
+	<liferay-ui:message key="tag-value" />
 
 	<br />
 
 	<input id="<portlet:namespace />editEntryNameInput" type="text" value="" />
 
-	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value="<bean:message key="copy" />" />--%>
+	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value="<liferay-ui:message key="copy" />" />--%>
 
 	<br /><br />
 
-	<bean:message key="properties" />
+	<liferay-ui:message key="properties" />
 
 	<table border="0" cellpadding="0" cellspacing="0" id="<portlet:namespace />propertiesTable"></table>
 
-	<input id="<portlet:namespace />addPropertyButton" type="button" value="<bean:message key="add-property" />" />
+	<input id="<portlet:namespace />addPropertyButton" type="button" value="<liferay-ui:message key="add-property" />" />
 
 	<hr />
 
-	<input id="<portlet:namespace />updateEntryButton" type="button" value="<bean:message key="save" />" />
+	<input id="<portlet:namespace />updateEntryButton" type="button" value="<liferay-ui:message key="save" />" />
 
-	<input id="<portlet:namespace />deleteEntryButton" type="button" value="<bean:message key="delete" />" />
+	<input id="<portlet:namespace />deleteEntryButton" type="button" value="<liferay-ui:message key="delete" />" />
 
-	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value="<bean:message key="cancel" />" />
+	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value="<liferay-ui:message key="cancel" />" />
 </fieldset>
 
 <fieldset id="<portlet:namespace />addEntryFields">
-	<legend><bean:message key="add-tag" /></legend>
+	<legend><liferay-ui:message key="add-tag" /></legend>
 
 	<input id="<portlet:namespace />addEntryNameInput" type="text" />
 
@@ -81,7 +81,7 @@
 
 	<input id="<portlet:namespace />addCategoryNameInput" type="text" value="" />
 
-	<input id="<portlet:namespace />addEntryButton" type="button" value="<bean:message key="save" />" />
+	<input id="<portlet:namespace />addEntryButton" type="button" value="<liferay-ui:message key="save" />" />
 </fieldset>
 
 </form>

@@ -33,13 +33,13 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="first-name" />
+		<liferay-ui:message key="first-name" />
 	</td>
 	<td>
-		<bean:message key="middle-name" />
+		<liferay-ui:message key="middle-name" />
 	</td>
 	<td>
-		<bean:message key="last-name" />
+		<liferay-ui:message key="last-name" />
 	</td>
 </tr>
 <tr>
@@ -55,16 +55,16 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<bean:message key="screen-name" />
+		<liferay-ui:message key="screen-name" />
 	</td>
 	<td>
-		<bean:message key="email-address" />
+		<liferay-ui:message key="email-address" />
 	</td>
 
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 			<td>
-				<bean:message key="active" />
+				<liferay-ui:message key="active" />
 			</td>
 		</c:when>
 		<c:otherwise>
@@ -84,8 +84,8 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 			<td>
 				<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
-					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><bean:message key="yes" /></option>
-					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><bean:message key="no" /></option>
+					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 				</select>
 			</td>
 		</c:when>
@@ -102,12 +102,12 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>

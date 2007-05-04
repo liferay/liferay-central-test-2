@@ -33,13 +33,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="task-name" />
+		<liferay-ui:message key="task-name" />
 	</td>
 	<td>
-		<bean:message key="definition-name" />
+		<liferay-ui:message key="definition-name" />
 	</td>
 	<td>
-		<bean:message key="assigned-to" />
+		<liferay-ui:message key="assigned-to" />
 	</td>
 </tr>
 <tr>
@@ -51,9 +51,9 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	</td>
 	<td>
 		<select name="<portlet:namespace /><%= TaskDisplayTerms.ASSIGNED_TO %>">
-			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><bean:message key="all" /></option>
-			<option <%= displayTerms.getAssignedTo().equals("me") ? "selected" : "" %> value="me"><bean:message key="me" /></option>
-			<option <%= displayTerms.getAssignedTo().equals("pool") ? "selected" : "" %> value="pool"><bean:message key="pool" /></option>
+			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><liferay-ui:message key="all" /></option>
+			<option <%= displayTerms.getAssignedTo().equals("me") ? "selected" : "" %> value="me"><liferay-ui:message key="me" /></option>
+			<option <%= displayTerms.getAssignedTo().equals("pool") ? "selected" : "" %> value="pool"><liferay-ui:message key="pool" /></option>
 		</select>
 	</td>
 </tr>
@@ -62,46 +62,46 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<bean:message key="create-date" /> (<bean:message key="range" />)
+		<liferay-ui:message key="create-date" /> (<liferay-ui:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_GT %>" />
 
-		<bean:message key="to" />
+		<liferay-ui:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="start-date" /> (<bean:message key="range" />)
+		<liferay-ui:message key="start-date" /> (<liferay-ui:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_GT %>" />
 
-		<bean:message key="to" />
+		<liferay-ui:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<bean:message key="end-date" /> (<bean:message key="range" />)
+		<liferay-ui:message key="end-date" /> (<liferay-ui:message key="range" />)
 	</td>
 </tr>
 <tr>
 	<td>
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_GT %>" />
 
-		<bean:message key="to" />
+		<liferay-ui:message key="to" />
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_LT %>" />
 
-		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <bean:message key="hide-tasks-that-have-already-ended" />
+		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <liferay-ui:message key="hide-tasks-that-have-already-ended" />
 	</td>
 </tr>
 </table>
@@ -112,12 +112,12 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= TaskDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><bean:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><bean:message key="or" /></option>
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<bean:message key="search" />" />
+		<input type="submit" value="<liferay-ui:message key="search" />" />
 	</td>
 </tr>
 </table>
