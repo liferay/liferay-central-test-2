@@ -162,14 +162,16 @@ portletURL.setParameter("folderId", folderId);
 				</tr>
 				</table>
 
-				<br />
+				<c:if test="<%= results.size() > 0 %>">
+					<br />
+				</c:if>
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-			<c:if test="<%= (folder != null) && (total > 0) %>">
+			<c:if test="<%= (folder != null) && (showAddFolderButton || showCurFolderSearch || (results.size() > 0)) %>">
 				<br />
 			</c:if>
 
@@ -288,7 +290,9 @@ portletURL.setParameter("folderId", folderId);
 				</tr>
 				</table>
 
-				<br />
+				<c:if test="<%= results.size() > 0 %>">
+					<br />
+				</c:if>
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
