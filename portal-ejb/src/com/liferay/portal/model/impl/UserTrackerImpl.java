@@ -55,7 +55,7 @@ public class UserTrackerImpl
 	public void setHttpSession(HttpSession ses) {
 		_ses = ses;
 
-		setUserTrackerId(_ses.getId());
+		setSessionId(_ses.getId());
 	}
 
 	public String getFullName() {

@@ -52,6 +52,7 @@ public class UserTrackerSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setSessionId(model.getSessionId());
 		soapModel.setRemoteAddr(model.getRemoteAddr());
 		soapModel.setRemoteHost(model.getRemoteHost());
 		soapModel.setUserAgent(model.getUserAgent());
@@ -73,19 +74,19 @@ public class UserTrackerSoap implements Serializable {
 	public UserTrackerSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userTrackerId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserTrackerId(pk);
 	}
 
-	public String getUserTrackerId() {
+	public long getUserTrackerId() {
 		return _userTrackerId;
 	}
 
-	public void setUserTrackerId(String userTrackerId) {
+	public void setUserTrackerId(long userTrackerId) {
 		_userTrackerId = userTrackerId;
 	}
 
@@ -113,6 +114,14 @@ public class UserTrackerSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getSessionId() {
+		return _sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		_sessionId = sessionId;
+	}
+
 	public String getRemoteAddr() {
 		return _remoteAddr;
 	}
@@ -137,10 +146,11 @@ public class UserTrackerSoap implements Serializable {
 		_userAgent = userAgent;
 	}
 
-	private String _userTrackerId;
+	private long _userTrackerId;
 	private long _companyId;
 	private long _userId;
 	private Date _modifiedDate;
+	private String _sessionId;
 	private String _remoteAddr;
 	private String _remoteHost;
 	private String _userAgent;

@@ -82,13 +82,13 @@ public class EditSessionAction extends PortletAction {
 	}
 
 	protected void invalidateSession(ActionRequest req) throws Exception {
-		String userTrackerId = ParamUtil.getString(req, "userTrackerId");
+		String sessionId = ParamUtil.getString(req, "sessionId");
 
-		HttpSession userSession = PortalSessionContext.get(userTrackerId);
+		HttpSession userSession = PortalSessionContext.get(sessionId);
 
 		if (userSession != null) {
 			try {
-				if (!req.getPortletSession().getId().equals(userTrackerId)) {
+				if (!req.getPortletSession().getId().equals(sessionId)) {
 					userSession.invalidate();
 				}
 			}

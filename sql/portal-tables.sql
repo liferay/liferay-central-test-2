@@ -1138,18 +1138,19 @@ create table Users_UserGroups (
 );
 
 create table UserTracker (
-	userTrackerId VARCHAR(75) not null primary key,
+	userTrackerId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	modifiedDate DATE null,
+	sessionId VARCHAR(200) null,
 	remoteAddr VARCHAR(75) null,
 	remoteHost VARCHAR(75) null,
 	userAgent VARCHAR(200) null
 );
 
 create table UserTrackerPath (
-	userTrackerPathId VARCHAR(75) not null primary key,
-	userTrackerId VARCHAR(75) null,
+	userTrackerPathId LONG primary key,
+	userTrackerId LONG,
 	path STRING null,
 	pathDate DATE null
 );

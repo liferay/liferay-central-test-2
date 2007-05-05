@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserTrackerPathUtil {
 	public static com.liferay.portal.model.UserTrackerPath create(
-		java.lang.String userTrackerPathId) {
+		long userTrackerPathId) {
 		return getPersistence().create(userTrackerPathId);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath remove(
-		java.lang.String userTrackerPathId)
+		long userTrackerPathId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserTrackerPathException {
 		ModelListener listener = _getListener();
@@ -140,56 +140,50 @@ public class UserTrackerPathUtil {
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
-		java.lang.String userTrackerPathId)
+		long userTrackerPathId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByPrimaryKey(userTrackerPathId);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath fetchByPrimaryKey(
-		java.lang.String userTrackerPathId)
-		throws com.liferay.portal.SystemException {
+		long userTrackerPathId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(userTrackerPathId);
 	}
 
-	public static java.util.List findByUserTrackerId(
-		java.lang.String userTrackerId)
+	public static java.util.List findByUserTrackerId(long userTrackerId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserTrackerId(userTrackerId);
 	}
 
-	public static java.util.List findByUserTrackerId(
-		java.lang.String userTrackerId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByUserTrackerId(long userTrackerId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserTrackerId(userTrackerId, begin, end);
 	}
 
-	public static java.util.List findByUserTrackerId(
-		java.lang.String userTrackerId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByUserTrackerId(long userTrackerId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserTrackerId(userTrackerId, begin, end,
 			obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath findByUserTrackerId_First(
-		java.lang.String userTrackerId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByUserTrackerId_First(userTrackerId, obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath findByUserTrackerId_Last(
-		java.lang.String userTrackerId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByUserTrackerId_Last(userTrackerId, obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath[] findByUserTrackerId_PrevAndNext(
-		java.lang.String userTrackerPathId, java.lang.String userTrackerId,
+		long userTrackerPathId, long userTrackerId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserTrackerPathException {
@@ -226,7 +220,7 @@ public class UserTrackerPathUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByUserTrackerId(java.lang.String userTrackerId)
+	public static void removeByUserTrackerId(long userTrackerId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByUserTrackerId(userTrackerId);
 	}
@@ -235,7 +229,7 @@ public class UserTrackerPathUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByUserTrackerId(java.lang.String userTrackerId)
+	public static int countByUserTrackerId(long userTrackerId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserTrackerId(userTrackerId);
 	}

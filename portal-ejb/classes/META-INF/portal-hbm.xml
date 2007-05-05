@@ -483,22 +483,23 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.UserTrackerImpl" table="UserTracker">
 		<cache usage="read-write" />
-		<id name="userTrackerId" type="java.lang.String">
+		<id name="userTrackerId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="modifiedDate" />
+		<property name="sessionId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="remoteAddr" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="remoteHost" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userAgent" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserTrackerPathImpl" table="UserTrackerPath">
 		<cache usage="read-write" />
-		<id name="userTrackerPathId" type="java.lang.String">
+		<id name="userTrackerPathId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="userTrackerId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userTrackerId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="path" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pathDate" />
 	</class>

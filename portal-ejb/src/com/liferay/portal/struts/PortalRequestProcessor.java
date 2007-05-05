@@ -223,8 +223,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			fullPathSM.append(StringPool.QUESTION);
 			fullPathSM.append(req.getQueryString());
 
-			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(
-				StringPool.BLANK);
+			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
 
 			userTrackerPath.setUserTrackerId(userTracker.getUserTrackerId());
 			userTrackerPath.setPath(fullPathSM.toString());

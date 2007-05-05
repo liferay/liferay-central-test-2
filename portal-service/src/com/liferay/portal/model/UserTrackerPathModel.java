@@ -47,17 +47,17 @@ import java.util.Date;
  *
  */
 public interface UserTrackerPathModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getUserTrackerPathId();
+	public long getUserTrackerPathId();
 
-	public void setUserTrackerPathId(String userTrackerPathId);
+	public void setUserTrackerPathId(long userTrackerPathId);
 
-	public String getUserTrackerId();
+	public long getUserTrackerId();
 
-	public void setUserTrackerId(String userTrackerId);
+	public void setUserTrackerId(long userTrackerId);
 
 	public String getPath();
 

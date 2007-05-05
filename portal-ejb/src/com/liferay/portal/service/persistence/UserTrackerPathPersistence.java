@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class UserTrackerPathPersistence extends BasePersistence {
-	public UserTrackerPath create(String userTrackerPathId) {
+	public UserTrackerPath create(long userTrackerPathId) {
 		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
 		userTrackerPath.setNew(true);
 		userTrackerPath.setPrimaryKey(userTrackerPathId);
@@ -60,7 +60,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		return userTrackerPath;
 	}
 
-	public UserTrackerPath remove(String userTrackerPathId)
+	public UserTrackerPath remove(long userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
 		Session session = null;
 
@@ -68,7 +68,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			session = openSession();
 
 			UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
-					userTrackerPathId);
+					new Long(userTrackerPathId));
 
 			if (userTrackerPath == null) {
 				if (_log.isWarnEnabled()) {
@@ -149,7 +149,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public UserTrackerPath findByPrimaryKey(String userTrackerPathId)
+	public UserTrackerPath findByPrimaryKey(long userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
 		UserTrackerPath userTrackerPath = fetchByPrimaryKey(userTrackerPathId);
 
@@ -167,7 +167,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		return userTrackerPath;
 	}
 
-	public UserTrackerPath fetchByPrimaryKey(String userTrackerPathId)
+	public UserTrackerPath fetchByPrimaryKey(long userTrackerPathId)
 		throws SystemException {
 		Session session = null;
 
@@ -175,7 +175,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			session = openSession();
 
 			return (UserTrackerPath)session.get(UserTrackerPathImpl.class,
-				userTrackerPathId);
+				new Long(userTrackerPathId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -185,7 +185,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserTrackerId(String userTrackerId)
+	public List findByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		Session session = null;
 
@@ -194,24 +194,14 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
-
-			if (userTrackerId == null) {
-				query.append("userTrackerId IS NULL");
-			}
-			else {
-				query.append("userTrackerId = ?");
-			}
-
+			query.append("userTrackerId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userTrackerId != null) {
-				q.setString(queryPos++, userTrackerId);
-			}
+			q.setLong(queryPos++, userTrackerId);
 
 			return q.list();
 		}
@@ -223,12 +213,12 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserTrackerId(String userTrackerId, int begin, int end)
+	public List findByUserTrackerId(long userTrackerId, int begin, int end)
 		throws SystemException {
 		return findByUserTrackerId(userTrackerId, begin, end, null);
 	}
 
-	public List findByUserTrackerId(String userTrackerId, int begin, int end,
+	public List findByUserTrackerId(long userTrackerId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -237,14 +227,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
-
-			if (userTrackerId == null) {
-				query.append("userTrackerId IS NULL");
-			}
-			else {
-				query.append("userTrackerId = ?");
-			}
-
+			query.append("userTrackerId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -256,10 +239,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userTrackerId != null) {
-				q.setString(queryPos++, userTrackerId);
-			}
+			q.setLong(queryPos++, userTrackerId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -271,7 +251,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public UserTrackerPath findByUserTrackerId_First(String userTrackerId,
+	public UserTrackerPath findByUserTrackerId_First(long userTrackerId,
 		OrderByComparator obc)
 		throws NoSuchUserTrackerPathException, SystemException {
 		List list = findByUserTrackerId(userTrackerId, 0, 1, obc);
@@ -290,7 +270,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public UserTrackerPath findByUserTrackerId_Last(String userTrackerId,
+	public UserTrackerPath findByUserTrackerId_Last(long userTrackerId,
 		OrderByComparator obc)
 		throws NoSuchUserTrackerPathException, SystemException {
 		int count = countByUserTrackerId(userTrackerId);
@@ -311,7 +291,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 	}
 
 	public UserTrackerPath[] findByUserTrackerId_PrevAndNext(
-		String userTrackerPathId, String userTrackerId, OrderByComparator obc)
+		long userTrackerPathId, long userTrackerId, OrderByComparator obc)
 		throws NoSuchUserTrackerPathException, SystemException {
 		UserTrackerPath userTrackerPath = findByPrimaryKey(userTrackerPathId);
 		int count = countByUserTrackerId(userTrackerId);
@@ -322,14 +302,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
-
-			if (userTrackerId == null) {
-				query.append("userTrackerId IS NULL");
-			}
-			else {
-				query.append("userTrackerId = ?");
-			}
-
+			query.append("userTrackerId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -341,10 +314,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userTrackerId != null) {
-				q.setString(queryPos++, userTrackerId);
-			}
+			q.setLong(queryPos++, userTrackerId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTrackerPath);
@@ -438,7 +408,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByUserTrackerId(String userTrackerId)
+	public void removeByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		Iterator itr = findByUserTrackerId(userTrackerId).iterator();
 
@@ -456,7 +426,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByUserTrackerId(String userTrackerId)
+	public int countByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		Session session = null;
 
@@ -466,24 +436,14 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portal.model.UserTrackerPath WHERE ");
-
-			if (userTrackerId == null) {
-				query.append("userTrackerId IS NULL");
-			}
-			else {
-				query.append("userTrackerId = ?");
-			}
-
+			query.append("userTrackerId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (userTrackerId != null) {
-				q.setString(queryPos++, userTrackerId);
-			}
+			q.setLong(queryPos++, userTrackerId);
 
 			Iterator itr = q.list().iterator();
 

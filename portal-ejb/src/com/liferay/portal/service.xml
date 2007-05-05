@@ -1199,7 +1199,7 @@
 
 		<!-- PK fields -->
 
-		<column name="userTrackerId" type="String" primary="true" />
+		<column name="userTrackerId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -1209,6 +1209,7 @@
 
 		<!-- Other fields -->
 
+		<column name="sessionId" type="String" />
 		<column name="remoteAddr" type="String" />
 		<column name="remoteHost" type="String" />
 		<column name="userAgent" type="String" />
@@ -1221,16 +1222,19 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
+		<finder name="SessionId" return-type="Collection">
+			<finder-column name="sessionId" />
+		</finder>
 	</entity>
 	<entity name="UserTrackerPath" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
-		<column name="userTrackerPathId" type="String" primary="true" />
+		<column name="userTrackerPathId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="userTrackerId" type="String" />
+		<column name="userTrackerId" type="long" />
 		<column name="path" type="String" />
 		<column name="pathDate" type="Date" />
 

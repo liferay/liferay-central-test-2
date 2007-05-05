@@ -58,12 +58,12 @@ public interface UserTrackerLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
-		long userId, java.util.Date modifiedDate, java.lang.String remoteAddr,
-		java.lang.String remoteHost, java.lang.String userAgent,
-		java.util.List userTrackerPaths)
+		long userId, java.util.Date modifiedDate, java.lang.String sessionId,
+		java.lang.String remoteAddr, java.lang.String remoteHost,
+		java.lang.String userAgent, java.util.List userTrackerPaths)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteUserTracker(java.lang.String userTrackerId)
+	public void deleteUserTracker(long userTrackerId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

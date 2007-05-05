@@ -434,6 +434,26 @@ alter_column_type Users_Roles roleId LONG;
 
 alter_column_type Users_UserGroups userGroupId LONG;
 
+drop table UserTracker;
+create table UserTracker (
+	userTrackerId LONG primary key,
+	companyId LONG,
+	userId LONG,
+	modifiedDate DATE null,
+	sessionId VARCHAR(200) null,
+	remoteAddr VARCHAR(75) null,
+	remoteHost VARCHAR(75) null,
+	userAgent VARCHAR(200) null
+);
+
+drop table UserTrackerPath;
+create table UserTrackerPath (
+	userTrackerPathId LONG primary key,
+	userTrackerId LONG,
+	path STRING null,
+	pathDate DATE null
+);
+
 alter_column_type Website websiteId LONG;
 alter_column_name Website className classNameId VARCHAR(75) null;
 alter_column_type Website typeId INTEGER;

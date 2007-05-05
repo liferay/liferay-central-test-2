@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface UserTrackerModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getUserTrackerId();
+	public long getUserTrackerId();
 
-	public void setUserTrackerId(String userTrackerId);
+	public void setUserTrackerId(long userTrackerId);
 
 	public long getCompanyId();
 
@@ -66,6 +66,10 @@ public interface UserTrackerModel extends BaseModel {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
+
+	public String getSessionId();
+
+	public void setSessionId(String sessionId);
 
 	public String getRemoteAddr();
 

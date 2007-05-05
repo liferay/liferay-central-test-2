@@ -55,18 +55,19 @@ import java.util.Date;
 public class UserTrackerModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserTracker";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "userTrackerId", new Integer(Types.VARCHAR) },
+			{ "userTrackerId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "sessionId", new Integer(Types.VARCHAR) },
 			{ "remoteAddr", new Integer(Types.VARCHAR) },
 			{ "remoteHost", new Integer(Types.VARCHAR) },
 			{ "userAgent", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERTRACKERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker.userTrackerId"),
+	public static boolean XSS_ALLOW_SESSIONID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.UserTracker.sessionId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_REMOTEADDR = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker.remoteAddr"),
@@ -83,27 +84,20 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	public UserTrackerModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userTrackerId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserTrackerId(pk);
 	}
 
-	public String getUserTrackerId() {
-		return GetterUtil.getString(_userTrackerId);
+	public long getUserTrackerId() {
+		return _userTrackerId;
 	}
 
-	public void setUserTrackerId(String userTrackerId) {
-		if (((userTrackerId == null) && (_userTrackerId != null)) ||
-				((userTrackerId != null) && (_userTrackerId == null)) ||
-				((userTrackerId != null) && (_userTrackerId != null) &&
-				!userTrackerId.equals(_userTrackerId))) {
-			if (!XSS_ALLOW_USERTRACKERID) {
-				userTrackerId = XSSUtil.strip(userTrackerId);
-			}
-
+	public void setUserTrackerId(long userTrackerId) {
+		if (userTrackerId != _userTrackerId) {
 			_userTrackerId = userTrackerId;
 		}
 	}
@@ -138,6 +132,23 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public String getSessionId() {
+		return GetterUtil.getString(_sessionId);
+	}
+
+	public void setSessionId(String sessionId) {
+		if (((sessionId == null) && (_sessionId != null)) ||
+				((sessionId != null) && (_sessionId == null)) ||
+				((sessionId != null) && (_sessionId != null) &&
+				!sessionId.equals(_sessionId))) {
+			if (!XSS_ALLOW_SESSIONID) {
+				sessionId = XSSUtil.strip(sessionId);
+			}
+
+			_sessionId = sessionId;
 		}
 	}
 
@@ -198,6 +209,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setSessionId(getSessionId());
 		clone.setRemoteAddr(getRemoteAddr());
 		clone.setRemoteHost(getRemoteHost());
 		clone.setUserAgent(getUserAgent());
@@ -211,9 +223,17 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		}
 
 		UserTrackerImpl userTracker = (UserTrackerImpl)obj;
-		String pk = userTracker.getPrimaryKey();
+		long pk = userTracker.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -230,9 +250,9 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = userTracker.getPrimaryKey();
+		long pk = userTracker.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -241,13 +261,14 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _userTrackerId;
+	private long _userTrackerId;
 	private long _companyId;
 	private long _userId;
 	private Date _modifiedDate;
+	private String _sessionId;
 	private String _remoteAddr;
 	private String _remoteHost;
 	private String _userAgent;

@@ -464,10 +464,13 @@
 		<field name="externalUserId" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.UserTracker">
-		<field name="userTrackerId" type="String" />
+		<field name="userTrackerId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="modifiedDate" type="Date" />
+		<field name="sessionId" type="String">
+			<hint name="max-length">200</hint>
+		</field>
 		<field name="remoteAddr" type="String" />
 		<field name="remoteHost" type="String" />
 		<field name="userAgent" type="String">
@@ -475,8 +478,8 @@
 		</field>
 	</model>
 	<model name="com.liferay.portal.model.UserTrackerPath">
-		<field name="userTrackerPathId" type="String" />
-		<field name="userTrackerId" type="String" />
+		<field name="userTrackerPathId" type="long" />
+		<field name="userTrackerId" type="long" />
 		<field name="path" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>

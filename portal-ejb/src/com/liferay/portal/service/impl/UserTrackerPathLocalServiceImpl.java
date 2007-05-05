@@ -38,7 +38,7 @@ import java.util.List;
 public class UserTrackerPathLocalServiceImpl
 	extends UserTrackerPathLocalServiceBaseImpl {
 
-	public List getUserTrackerPaths(String userTrackerId, int begin, int end)
+	public List getUserTrackerPaths(long userTrackerId, int begin, int end)
 		throws SystemException {
 
 		return UserTrackerPathUtil.findByUserTrackerId(

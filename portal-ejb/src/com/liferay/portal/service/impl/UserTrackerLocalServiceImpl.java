@@ -46,24 +46,24 @@ import java.util.List;
 public class UserTrackerLocalServiceImpl
 	extends UserTrackerLocalServiceBaseImpl {
 
-	// Business methods
-
 	public UserTracker addUserTracker(
-			long companyId, long userId, Date modifiedDate, String remoteAddr,
-			String remoteHost, String userAgent, List userTrackerPaths)
+			long companyId, long userId, Date modifiedDate, String sessionId,
+			String remoteAddr, String remoteHost, String userAgent,
+			List userTrackerPaths)
 		throws SystemException {
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED))) {
 
-			String userTrackerId = String.valueOf(
-				CounterLocalServiceUtil.increment(UserTracker.class.getName()));
+			long userTrackerId = CounterLocalServiceUtil.increment(
+				UserTracker.class.getName());
 
 			UserTracker userTracker = UserTrackerUtil.create(userTrackerId);
 
 			userTracker.setCompanyId(companyId);
 			userTracker.setUserId(userId);
 			userTracker.setModifiedDate(modifiedDate);
+			userTracker.setSessionId(sessionId);
 			userTracker.setRemoteAddr(remoteAddr);
 			userTracker.setRemoteHost(remoteHost);
 			userTracker.setUserAgent(userAgent);
@@ -75,9 +75,8 @@ public class UserTrackerLocalServiceImpl
 			while (itr.hasNext()) {
 				UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
 
-				String pathId = String.valueOf(
-					CounterLocalServiceUtil.increment(
-						UserTrackerPath.class.getName()));
+				long pathId = CounterLocalServiceUtil.increment(
+					UserTrackerPath.class.getName());
 
 				userTrackerPath.setUserTrackerPathId(pathId);
 				userTrackerPath.setUserTrackerId(userTrackerId);
@@ -92,14 +91,14 @@ public class UserTrackerLocalServiceImpl
 		}
 	}
 
-	public void deleteUserTracker(String userTrackerId)
+	public void deleteUserTracker(long userTrackerId)
 		throws PortalException, SystemException {
 
-		// Delete paths
+		// Paths
 
 		UserTrackerPathUtil.removeByUserTrackerId(userTrackerId);
 
-		// Delete user tracker
+		// User tracker
 
 		UserTrackerUtil.remove(userTrackerId);
 	}

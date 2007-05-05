@@ -70,27 +70,27 @@ public class UserTrackerPathSoap implements Serializable {
 	public UserTrackerPathSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userTrackerPathId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserTrackerPathId(pk);
 	}
 
-	public String getUserTrackerPathId() {
+	public long getUserTrackerPathId() {
 		return _userTrackerPathId;
 	}
 
-	public void setUserTrackerPathId(String userTrackerPathId) {
+	public void setUserTrackerPathId(long userTrackerPathId) {
 		_userTrackerPathId = userTrackerPathId;
 	}
 
-	public String getUserTrackerId() {
+	public long getUserTrackerId() {
 		return _userTrackerId;
 	}
 
-	public void setUserTrackerId(String userTrackerId) {
+	public void setUserTrackerId(long userTrackerId) {
 		_userTrackerId = userTrackerId;
 	}
 
@@ -110,8 +110,8 @@ public class UserTrackerPathSoap implements Serializable {
 		_pathDate = pathDate;
 	}
 
-	private String _userTrackerPathId;
-	private String _userTrackerId;
+	private long _userTrackerPathId;
+	private long _userTrackerId;
 	private String _path;
 	private Date _pathDate;
 }

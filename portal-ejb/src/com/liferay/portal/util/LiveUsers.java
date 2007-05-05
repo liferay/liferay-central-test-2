@@ -299,15 +299,15 @@ public class LiveUsers {
 			(GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)))) {
 
-			userTracker = UserTrackerUtil.create(ses.getId());
+			userTracker = UserTrackerUtil.create(0);
 
 			userTracker.setCompanyId(companyId);
 			userTracker.setUserId(userId);
 			userTracker.setModifiedDate(new Date());
+			userTracker.setHttpSession(ses);
 			userTracker.setRemoteAddr(req.getRemoteAddr());
 			userTracker.setRemoteHost(req.getRemoteHost());
 			userTracker.setUserAgent(req.getHeader(HttpHeaders.USER_AGENT));
-			userTracker.setHttpSession(ses);
 
 			sessionUsers.put(ses.getId(), userTracker);
 
@@ -336,9 +336,9 @@ public class LiveUsers {
 			try {
 				UserTrackerLocalServiceUtil.addUserTracker(
 					userTracker.getCompanyId(), userTracker.getUserId(),
-					userTracker.getModifiedDate(), userTracker.getRemoteAddr(),
-					userTracker.getRemoteHost(), userTracker.getUserAgent(),
-					userTracker.getPaths());
+					userTracker.getModifiedDate(), sesId,
+					userTracker.getRemoteAddr(), userTracker.getRemoteHost(),
+					userTracker.getUserAgent(), userTracker.getPaths());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

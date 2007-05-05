@@ -244,6 +244,7 @@ create index IX_E60EA987 on UserIdMapper (userId);
 create index IX_D1C44A6E on UserIdMapper (userId, type_);
 
 create index IX_29BA1CF5 on UserTracker (companyId);
+create index IX_46B0AE8E on UserTracker (sessionId);
 create index IX_E4EFBA8D on UserTracker (userId);
 
 create index IX_14D8BCC0 on UserTrackerPath (userTrackerId);

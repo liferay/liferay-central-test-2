@@ -55,19 +55,13 @@ import java.util.Date;
 public class UserTrackerPathModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserTrackerPath";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "userTrackerPathId", new Integer(Types.VARCHAR) },
-			{ "userTrackerId", new Integer(Types.VARCHAR) },
+			{ "userTrackerPathId", new Integer(Types.BIGINT) },
+			{ "userTrackerId", new Integer(Types.BIGINT) },
 			{ "path", new Integer(Types.VARCHAR) },
 			{ "pathDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERTRACKERPATHID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTrackerPath.userTrackerPathId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERTRACKERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTrackerPath.userTrackerId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PATH = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath.path"),
 			XSS_ALLOW_BY_MODEL);
@@ -77,44 +71,30 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	public UserTrackerPathModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _userTrackerPathId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setUserTrackerPathId(pk);
 	}
 
-	public String getUserTrackerPathId() {
-		return GetterUtil.getString(_userTrackerPathId);
+	public long getUserTrackerPathId() {
+		return _userTrackerPathId;
 	}
 
-	public void setUserTrackerPathId(String userTrackerPathId) {
-		if (((userTrackerPathId == null) && (_userTrackerPathId != null)) ||
-				((userTrackerPathId != null) && (_userTrackerPathId == null)) ||
-				((userTrackerPathId != null) && (_userTrackerPathId != null) &&
-				!userTrackerPathId.equals(_userTrackerPathId))) {
-			if (!XSS_ALLOW_USERTRACKERPATHID) {
-				userTrackerPathId = XSSUtil.strip(userTrackerPathId);
-			}
-
+	public void setUserTrackerPathId(long userTrackerPathId) {
+		if (userTrackerPathId != _userTrackerPathId) {
 			_userTrackerPathId = userTrackerPathId;
 		}
 	}
 
-	public String getUserTrackerId() {
-		return GetterUtil.getString(_userTrackerId);
+	public long getUserTrackerId() {
+		return _userTrackerId;
 	}
 
-	public void setUserTrackerId(String userTrackerId) {
-		if (((userTrackerId == null) && (_userTrackerId != null)) ||
-				((userTrackerId != null) && (_userTrackerId == null)) ||
-				((userTrackerId != null) && (_userTrackerId != null) &&
-				!userTrackerId.equals(_userTrackerId))) {
-			if (!XSS_ALLOW_USERTRACKERID) {
-				userTrackerId = XSSUtil.strip(userTrackerId);
-			}
-
+	public void setUserTrackerId(long userTrackerId) {
+		if (userTrackerId != _userTrackerId) {
 			_userTrackerId = userTrackerId;
 		}
 	}
@@ -164,9 +144,17 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 		}
 
 		UserTrackerPathImpl userTrackerPath = (UserTrackerPathImpl)obj;
-		String pk = userTrackerPath.getPrimaryKey();
+		long pk = userTrackerPath.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -183,9 +171,9 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = userTrackerPath.getPrimaryKey();
+		long pk = userTrackerPath.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -194,11 +182,11 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _userTrackerPathId;
-	private String _userTrackerId;
+	private long _userTrackerPathId;
+	private long _userTrackerId;
 	private String _path;
 	private Date _pathDate;
 }

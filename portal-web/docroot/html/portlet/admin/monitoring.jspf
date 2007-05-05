@@ -61,7 +61,7 @@
 		for (int i = 0; i < results.size(); i++) {
 			UserTracker userTracker = (UserTracker)results.get(i);
 
-			ResultRow row = new ResultRow(userTracker, userTracker.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(userTracker, userTracker.getUserTrackerId(), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -69,7 +69,7 @@
 
 			rowURL.setParameter("struts_action", "/admin/edit_session");
 			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("userTrackerId", userTracker.getUserTrackerId());
+			rowURL.setParameter("sessionId", userTracker.getSessionId());
 
 			User user2 = null;
 
@@ -81,7 +81,7 @@
 
 			// Session ID
 
-			row.addText(userTracker.getUserTrackerId(), rowURL);
+			row.addText(userTracker.getSessionId(), rowURL);
 
 			// User ID
 

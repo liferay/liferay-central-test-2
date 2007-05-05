@@ -27,16 +27,16 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String userTrackerId = ParamUtil.getString(request, "userTrackerId");
+String sessionId = ParamUtil.getString(request, "sessionId");
 
 Map liveUsers = LiveUsers.getSessionUsers();
 
-UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
+UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
-<input name="<portlet:namespace />userTrackerId" type="hidden" value="<%= userTrackerId %>" />
+<input name="<portlet:namespace />sessionId" type="hidden" value="<%= sessionId %>" />
 
 <liferay-ui:tabs names="session" />
 
@@ -66,7 +66,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 				<liferay-ui:message key="session-id" />:
 			</td>
 			<td>
-				<%= userTrackerId %>
+				<%= sessionId %>
 			</td>
 		</tr>
 		<tr>
@@ -212,7 +212,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 					<%
 					boolean userSessionAlive = true;
 
-					HttpSession userSession = PortalSessionContext.get(userTrackerId);
+					HttpSession userSession = PortalSessionContext.get(sessionId);
 
 					if (userSession != null) {
 						try {
@@ -267,7 +267,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(userTrackerId);
 
 		<br />
 
-		<c:if test="<%= userSessionAlive && !session.getId().equals(userTrackerId) %>">
+		<c:if test="<%= userSessionAlive && !session.getId().equals(sessionId) %>">
 			<input type="submit" value="<liferay-ui:message key="kill-session" />" />
 		</c:if>
 

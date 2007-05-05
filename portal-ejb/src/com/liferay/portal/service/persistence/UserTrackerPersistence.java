@@ -52,7 +52,7 @@ import java.util.List;
  *
  */
 public class UserTrackerPersistence extends BasePersistence {
-	public UserTracker create(String userTrackerId) {
+	public UserTracker create(long userTrackerId) {
 		UserTracker userTracker = new UserTrackerImpl();
 		userTracker.setNew(true);
 		userTracker.setPrimaryKey(userTrackerId);
@@ -60,7 +60,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		return userTracker;
 	}
 
-	public UserTracker remove(String userTrackerId)
+	public UserTracker remove(long userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		Session session = null;
 
@@ -68,7 +68,7 @@ public class UserTrackerPersistence extends BasePersistence {
 			session = openSession();
 
 			UserTracker userTracker = (UserTracker)session.get(UserTrackerImpl.class,
-					userTrackerId);
+					new Long(userTrackerId));
 
 			if (userTracker == null) {
 				if (_log.isWarnEnabled()) {
@@ -149,7 +149,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public UserTracker findByPrimaryKey(String userTrackerId)
+	public UserTracker findByPrimaryKey(long userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = fetchByPrimaryKey(userTrackerId);
 
@@ -166,14 +166,15 @@ public class UserTrackerPersistence extends BasePersistence {
 		return userTracker;
 	}
 
-	public UserTracker fetchByPrimaryKey(String userTrackerId)
+	public UserTracker fetchByPrimaryKey(long userTrackerId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (UserTracker)session.get(UserTrackerImpl.class, userTrackerId);
+			return (UserTracker)session.get(UserTrackerImpl.class,
+				new Long(userTrackerId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -287,7 +288,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public UserTracker[] findByCompanyId_PrevAndNext(String userTrackerId,
+	public UserTracker[] findByCompanyId_PrevAndNext(long userTrackerId,
 		long companyId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
@@ -432,7 +433,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
-	public UserTracker[] findByUserId_PrevAndNext(String userTrackerId,
+	public UserTracker[] findByUserId_PrevAndNext(long userTrackerId,
 		long userId, OrderByComparator obc)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
@@ -457,6 +458,183 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, userId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					userTracker);
+			UserTracker[] array = new UserTrackerImpl[3];
+			array[0] = (UserTracker)objArray[0];
+			array[1] = (UserTracker)objArray[1];
+			array[2] = (UserTracker)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findBySessionId(String sessionId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
+			if (sessionId == null) {
+				query.append("sessionId IS NULL");
+			}
+			else {
+				query.append("sessionId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (sessionId != null) {
+				q.setString(queryPos++, sessionId);
+			}
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findBySessionId(String sessionId, int begin, int end)
+		throws SystemException {
+		return findBySessionId(sessionId, begin, end, null);
+	}
+
+	public List findBySessionId(String sessionId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
+			if (sessionId == null) {
+				query.append("sessionId IS NULL");
+			}
+			else {
+				query.append("sessionId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (sessionId != null) {
+				q.setString(queryPos++, sessionId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserTracker findBySessionId_First(String sessionId,
+		OrderByComparator obc)
+		throws NoSuchUserTrackerException, SystemException {
+		List list = findBySessionId(sessionId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No UserTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("sessionId=");
+			msg.append(sessionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserTrackerException(msg.toString());
+		}
+		else {
+			return (UserTracker)list.get(0);
+		}
+	}
+
+	public UserTracker findBySessionId_Last(String sessionId,
+		OrderByComparator obc)
+		throws NoSuchUserTrackerException, SystemException {
+		int count = countBySessionId(sessionId);
+		List list = findBySessionId(sessionId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No UserTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("sessionId=");
+			msg.append(sessionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserTrackerException(msg.toString());
+		}
+		else {
+			return (UserTracker)list.get(0);
+		}
+	}
+
+	public UserTracker[] findBySessionId_PrevAndNext(long userTrackerId,
+		String sessionId, OrderByComparator obc)
+		throws NoSuchUserTrackerException, SystemException {
+		UserTracker userTracker = findByPrimaryKey(userTrackerId);
+		int count = countBySessionId(sessionId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
+			if (sessionId == null) {
+				query.append("sessionId IS NULL");
+			}
+			else {
+				query.append("sessionId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (sessionId != null) {
+				q.setString(queryPos++, sessionId);
+			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
@@ -568,6 +746,15 @@ public class UserTrackerPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeBySessionId(String sessionId) throws SystemException {
+		Iterator itr = findBySessionId(sessionId).iterator();
+
+		while (itr.hasNext()) {
+			UserTracker userTracker = (UserTracker)itr.next();
+			remove(userTracker);
+		}
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -631,6 +818,54 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countBySessionId(String sessionId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.UserTracker WHERE ");
+
+			if (sessionId == null) {
+				query.append("sessionId IS NULL");
+			}
+			else {
+				query.append("sessionId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (sessionId != null) {
+				q.setString(queryPos++, sessionId);
+			}
 
 			Iterator itr = q.list().iterator();
 
