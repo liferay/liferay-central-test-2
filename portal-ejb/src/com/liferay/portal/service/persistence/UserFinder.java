@@ -337,6 +337,15 @@ public class UserFinder {
 						qPos.add(valueLong);
 					}
 				}
+				else if (value instanceof Long[]) {
+					Long[] valueArray = (Long[]) value;
+
+					for (int i = 0; i < valueArray.length; i++) {
+						if (Validator.isNotNull(valueArray[i])) {
+							qPos.add(valueArray[i]);
+						}
+					}
+				}
 				else if (value instanceof String) {
 					String valueString = (String)value;
 
