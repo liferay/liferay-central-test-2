@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.persistence.UserIdMapperPK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -54,6 +53,7 @@ import java.sql.Types;
 public class UserIdMapperModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "UserIdMapper";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "userIdMapperId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "type_", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
@@ -76,13 +76,22 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	public UserIdMapperModelImpl() {
 	}
 
-	public UserIdMapperPK getPrimaryKey() {
-		return new UserIdMapperPK(_userId, _type);
+	public long getPrimaryKey() {
+		return _userIdMapperId;
 	}
 
-	public void setPrimaryKey(UserIdMapperPK pk) {
-		setUserId(pk.userId);
-		setType(pk.type);
+	public void setPrimaryKey(long pk) {
+		setUserIdMapperId(pk);
+	}
+
+	public long getUserIdMapperId() {
+		return _userIdMapperId;
+	}
+
+	public void setUserIdMapperId(long userIdMapperId) {
+		if (userIdMapperId != _userIdMapperId) {
+			_userIdMapperId = userIdMapperId;
+		}
 	}
 
 	public long getUserId() {
@@ -147,6 +156,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserIdMapperImpl clone = new UserIdMapperImpl();
+		clone.setUserIdMapperId(getUserIdMapperId());
 		clone.setUserId(getUserId());
 		clone.setType(getType());
 		clone.setDescription(getDescription());
@@ -161,9 +171,17 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		}
 
 		UserIdMapperImpl userIdMapper = (UserIdMapperImpl)obj;
-		UserIdMapperPK pk = userIdMapper.getPrimaryKey();
+		long pk = userIdMapper.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -180,9 +198,9 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserIdMapperPK pk = userIdMapper.getPrimaryKey();
+		long pk = userIdMapper.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -191,9 +209,10 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
+	private long _userIdMapperId;
 	private long _userId;
 	private String _type;
 	private String _description;

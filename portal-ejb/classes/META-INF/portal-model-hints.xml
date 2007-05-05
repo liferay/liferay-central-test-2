@@ -457,6 +457,7 @@
 		<field name="roleId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.UserIdMapper">
+		<field name="userIdMapperId" type="long" />
 		<field name="userId" type="long" />
 		<field name="type" type="String" />
 		<field name="description" type="String" />

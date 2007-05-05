@@ -146,6 +146,6 @@ public class UpgradeRole extends UpgradeProcess {
 		"alter_column_type Role_ classPK LONG;"
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradeGroup.class);
+	private static Log _log = LogFactory.getLog(UpgradeRole.class);
 
 }

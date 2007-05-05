@@ -23,7 +23,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.service.persistence.UserIdMapperPK;
 
 /**
  * <a href="UserIdMapperModel.java.html"><b><i>View Source</i></b></a>
@@ -46,9 +45,13 @@ import com.liferay.portal.service.persistence.UserIdMapperPK;
  *
  */
 public interface UserIdMapperModel extends BaseModel {
-	public UserIdMapperPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(UserIdMapperPK pk);
+	public void setPrimaryKey(long pk);
+
+	public long getUserIdMapperId();
+
+	public void setUserIdMapperId(long userIdMapperId);
 
 	public long getUserId();
 

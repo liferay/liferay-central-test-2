@@ -149,6 +149,6 @@ public class UpgradeOrganization extends UpgradeProcess {
 		{"organizationId", new Integer(Types.BIGINT)}
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradeGroup.class);
+	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);
 
 }

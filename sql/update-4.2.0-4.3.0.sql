@@ -422,6 +422,8 @@ create table UserGroupRole (
 	primary key (userId, groupId, roleId)
 );
 
+alter table UserIdMapper add userIdMapperId LONG;
+
 alter_column_type Users_Groups groupId LONG;
 
 alter_column_type Users_Orgs organizationId LONG;

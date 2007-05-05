@@ -473,10 +473,11 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.UserIdMapperImpl" table="UserIdMapper">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserIdMapperPK">
-			<key-property name="userId" />
-			<key-property name="type" column="type_" />
-		</composite-id>
+		<id name="userIdMapperId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="externalUserId" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>

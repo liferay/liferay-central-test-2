@@ -52,15 +52,15 @@ import java.util.List;
  *
  */
 public class UserIdMapperPersistence extends BasePersistence {
-	public UserIdMapper create(UserIdMapperPK userIdMapperPK) {
+	public UserIdMapper create(long userIdMapperId) {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
 		userIdMapper.setNew(true);
-		userIdMapper.setPrimaryKey(userIdMapperPK);
+		userIdMapper.setPrimaryKey(userIdMapperId);
 
 		return userIdMapper;
 	}
 
-	public UserIdMapper remove(UserIdMapperPK userIdMapperPK)
+	public UserIdMapper remove(long userIdMapperId)
 		throws NoSuchUserIdMapperException, SystemException {
 		Session session = null;
 
@@ -68,17 +68,17 @@ public class UserIdMapperPersistence extends BasePersistence {
 			session = openSession();
 
 			UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapperImpl.class,
-					userIdMapperPK);
+					new Long(userIdMapperId));
 
 			if (userIdMapper == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserIdMapper exists with the primary key " +
-						userIdMapperPK);
+						userIdMapperId);
 				}
 
 				throw new NoSuchUserIdMapperException(
 					"No UserIdMapper exists with the primary key " +
-					userIdMapperPK);
+					userIdMapperId);
 			}
 
 			return remove(userIdMapper);
@@ -149,25 +149,25 @@ public class UserIdMapperPersistence extends BasePersistence {
 		}
 	}
 
-	public UserIdMapper findByPrimaryKey(UserIdMapperPK userIdMapperPK)
+	public UserIdMapper findByPrimaryKey(long userIdMapperId)
 		throws NoSuchUserIdMapperException, SystemException {
-		UserIdMapper userIdMapper = fetchByPrimaryKey(userIdMapperPK);
+		UserIdMapper userIdMapper = fetchByPrimaryKey(userIdMapperId);
 
 		if (userIdMapper == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No UserIdMapper exists with the primary key " +
-					userIdMapperPK);
+					userIdMapperId);
 			}
 
 			throw new NoSuchUserIdMapperException(
 				"No UserIdMapper exists with the primary key " +
-				userIdMapperPK);
+				userIdMapperId);
 		}
 
 		return userIdMapper;
 	}
 
-	public UserIdMapper fetchByPrimaryKey(UserIdMapperPK userIdMapperPK)
+	public UserIdMapper fetchByPrimaryKey(long userIdMapperId)
 		throws SystemException {
 		Session session = null;
 
@@ -175,7 +175,7 @@ public class UserIdMapperPersistence extends BasePersistence {
 			session = openSession();
 
 			return (UserIdMapper)session.get(UserIdMapperImpl.class,
-				userIdMapperPK);
+				new Long(userIdMapperId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -287,10 +287,10 @@ public class UserIdMapperPersistence extends BasePersistence {
 		}
 	}
 
-	public UserIdMapper[] findByUserId_PrevAndNext(
-		UserIdMapperPK userIdMapperPK, long userId, OrderByComparator obc)
+	public UserIdMapper[] findByUserId_PrevAndNext(long userIdMapperId,
+		long userId, OrderByComparator obc)
 		throws NoSuchUserIdMapperException, SystemException {
-		UserIdMapper userIdMapper = findByPrimaryKey(userIdMapperPK);
+		UserIdMapper userIdMapper = findByPrimaryKey(userIdMapperId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -321,6 +321,80 @@ public class UserIdMapperPersistence extends BasePersistence {
 			array[2] = (UserIdMapper)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserIdMapper findByU_T(long userId, String type)
+		throws NoSuchUserIdMapperException, SystemException {
+		UserIdMapper userIdMapper = fetchByU_T(userId, type);
+
+		if (userIdMapper == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No UserIdMapper exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("type=");
+			msg.append(type);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserIdMapperException(msg.toString());
+		}
+
+		return userIdMapper;
+	}
+
+	public UserIdMapper fetchByU_T(long userId, String type)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.UserIdMapper WHERE ");
+			query.append("userId = ?");
+			query.append(" AND ");
+
+			if (type == null) {
+				query.append("type_ IS NULL");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, userId);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			UserIdMapper userIdMapper = (UserIdMapper)list.get(0);
+
+			return userIdMapper;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -414,6 +488,12 @@ public class UserIdMapperPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByU_T(long userId, String type)
+		throws NoSuchUserIdMapperException, SystemException {
+		UserIdMapper userIdMapper = findByU_T(userId, type);
+		remove(userIdMapper);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -439,6 +519,57 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByU_T(long userId, String type) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.UserIdMapper WHERE ");
+			query.append("userId = ?");
+			query.append(" AND ");
+
+			if (type == null) {
+				query.append("type_ IS NULL");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, userId);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
 
 			Iterator itr = q.list().iterator();
 

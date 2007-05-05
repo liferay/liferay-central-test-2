@@ -1173,11 +1173,15 @@
 
 		<!-- PK fields -->
 
-		<column name="userId" type="long" primary="true" />
-		<column name="type" type="String" primary="true" />
+		<column name="userIdMapperId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
 
 		<!-- Other fields -->
 
+		<column name="type" type="String" />
 		<column name="description" type="String" />
 		<column name="externalUserId" type="String" />
 
@@ -1185,6 +1189,10 @@
 
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
+		</finder>
+		<finder name="U_T" return-type="UserIdMapper">
+			<finder-column name="userId" />
+			<finder-column name="type" />
 		</finder>
 	</entity>
 	<entity name="UserTracker" local-service="true" remote-service="false">

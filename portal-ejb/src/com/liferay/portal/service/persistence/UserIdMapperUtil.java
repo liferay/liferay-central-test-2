@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserIdMapperUtil {
 	public static com.liferay.portal.model.UserIdMapper create(
-		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK) {
-		return getPersistence().create(userIdMapperPK);
+		long userIdMapperId) {
+		return getPersistence().create(userIdMapperId);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper remove(
-		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
+		long userIdMapperId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserIdMapperException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(userIdMapperPK));
+			listener.onBeforeRemove(findByPrimaryKey(userIdMapperId));
 		}
 
 		com.liferay.portal.model.UserIdMapper userIdMapper = getPersistence()
-																 .remove(userIdMapperPK);
+																 .remove(userIdMapperId);
 
 		if (listener != null) {
 			listener.onAfterRemove(userIdMapper);
@@ -140,16 +140,15 @@ public class UserIdMapperUtil {
 	}
 
 	public static com.liferay.portal.model.UserIdMapper findByPrimaryKey(
-		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
+		long userIdMapperId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserIdMapperException {
-		return getPersistence().findByPrimaryKey(userIdMapperPK);
+		return getPersistence().findByPrimaryKey(userIdMapperId);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper fetchByPrimaryKey(
-		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(userIdMapperPK);
+		long userIdMapperId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(userIdMapperId);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -183,12 +182,25 @@ public class UserIdMapperUtil {
 	}
 
 	public static com.liferay.portal.model.UserIdMapper[] findByUserId_PrevAndNext(
-		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK,
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userIdMapperId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserIdMapperException {
-		return getPersistence().findByUserId_PrevAndNext(userIdMapperPK,
+		return getPersistence().findByUserId_PrevAndNext(userIdMapperId,
 			userId, obc);
+	}
+
+	public static com.liferay.portal.model.UserIdMapper findByU_T(long userId,
+		java.lang.String type)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
+		return getPersistence().findByU_T(userId, type);
+	}
+
+	public static com.liferay.portal.model.UserIdMapper fetchByU_T(
+		long userId, java.lang.String type)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByU_T(userId, type);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -225,6 +237,12 @@ public class UserIdMapperUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
+	public static void removeByU_T(long userId, java.lang.String type)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
+		getPersistence().removeByU_T(userId, type);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -232,6 +250,11 @@ public class UserIdMapperUtil {
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserId(userId);
+	}
+
+	public static int countByU_T(long userId, java.lang.String type)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByU_T(userId, type);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

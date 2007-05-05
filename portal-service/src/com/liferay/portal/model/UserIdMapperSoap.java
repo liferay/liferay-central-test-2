@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.UserIdMapperPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -49,6 +47,7 @@ import java.util.List;
 public class UserIdMapperSoap implements Serializable {
 	public static UserIdMapperSoap toSoapModel(UserIdMapper model) {
 		UserIdMapperSoap soapModel = new UserIdMapperSoap();
+		soapModel.setUserIdMapperId(model.getUserIdMapperId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setType(model.getType());
 		soapModel.setDescription(model.getDescription());
@@ -71,13 +70,20 @@ public class UserIdMapperSoap implements Serializable {
 	public UserIdMapperSoap() {
 	}
 
-	public UserIdMapperPK getPrimaryKey() {
-		return new UserIdMapperPK(_userId, _type);
+	public long getPrimaryKey() {
+		return _userIdMapperId;
 	}
 
-	public void setPrimaryKey(UserIdMapperPK pk) {
-		setUserId(pk.userId);
-		setType(pk.type);
+	public void setPrimaryKey(long pk) {
+		setUserIdMapperId(pk);
+	}
+
+	public long getUserIdMapperId() {
+		return _userIdMapperId;
+	}
+
+	public void setUserIdMapperId(long userIdMapperId) {
+		_userIdMapperId = userIdMapperId;
 	}
 
 	public long getUserId() {
@@ -112,6 +118,7 @@ public class UserIdMapperSoap implements Serializable {
 		_externalUserId = externalUserId;
 	}
 
+	private long _userIdMapperId;
 	private long _userId;
 	private String _type;
 	private String _description;

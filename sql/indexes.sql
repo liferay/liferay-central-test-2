@@ -241,6 +241,7 @@ create index IX_887BE56A on UserGroupRole (userId);
 create index IX_4D040680 on UserGroupRole (userId, groupId);
 
 create index IX_E60EA987 on UserIdMapper (userId);
+create index IX_D1C44A6E on UserIdMapper (userId, type_);
 
 create index IX_29BA1CF5 on UserTracker (companyId);
 create index IX_E4EFBA8D on UserTracker (userId);

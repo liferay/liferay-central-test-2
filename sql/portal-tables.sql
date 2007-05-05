@@ -1100,11 +1100,11 @@ create table UserGroupRole (
 );
 
 create table UserIdMapper (
+	userIdMapperId LONG primary key,
 	userId LONG,
-	type_ VARCHAR(75) not null,
+	type_ VARCHAR(75) null,
 	description VARCHAR(75) null,
-	externalUserId VARCHAR(75) null,
-	primary key (userId, type_)
+	externalUserId VARCHAR(75) null
 );
 
 create table Users_Groups (

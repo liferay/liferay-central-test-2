@@ -22,12 +22,11 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchUserIdMapperException;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.service.base.UserIdMapperLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.UserIdMapperPK;
 import com.liferay.portal.service.persistence.UserIdMapperUtil;
 
 import java.util.List;
@@ -49,8 +48,7 @@ public class UserIdMapperLocalServiceImpl
 	public UserIdMapper getUserIdMapper(long userId, String type)
 		throws PortalException, SystemException {
 
-		return UserIdMapperUtil.findByPrimaryKey(
-			new UserIdMapperPK(userId, type));
+		return UserIdMapperUtil.findByU_T(userId, type);
 	}
 
 	public List getUserIdMappers(long userId) throws SystemException {
@@ -61,17 +59,16 @@ public class UserIdMapperLocalServiceImpl
 			long userId, String type, String description, String externalUserId)
 		throws PortalException, SystemException {
 
-		UserIdMapperPK pk = new UserIdMapperPK(userId, type);
+		UserIdMapper userIdMapper = UserIdMapperUtil.fetchByU_T(userId, type);
 
-		UserIdMapper userIdMapper = null;
+		if (userIdMapper == null) {
+			long userIdMapperId = CounterLocalServiceUtil.increment();
 
-		try {
-			userIdMapper = UserIdMapperUtil.findByPrimaryKey(pk);
-		}
-		catch (NoSuchUserIdMapperException uidme) {
-			userIdMapper = UserIdMapperUtil.create(pk);
+			userIdMapper = UserIdMapperUtil.create(userIdMapperId);
 		}
 
+		userIdMapper.setUserId(userId);
+		userIdMapper.setType(type);
 		userIdMapper.setDescription(description);
 		userIdMapper.setExternalUserId(externalUserId);
 
