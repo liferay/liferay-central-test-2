@@ -59,7 +59,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class CMSServlet extends HttpServlet {

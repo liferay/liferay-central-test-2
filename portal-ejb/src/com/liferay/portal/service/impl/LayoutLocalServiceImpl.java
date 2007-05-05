@@ -136,7 +136,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {

@@ -79,7 +79,7 @@ import org.dom4j.io.SAXReader;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  *

@@ -36,7 +36,7 @@ import javax.portlet.PortletPreferences;
  * section of the <b>liferay-portlet.xml</b> file.
  * </p>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  * @author Joel Kozikowski
  *
  */

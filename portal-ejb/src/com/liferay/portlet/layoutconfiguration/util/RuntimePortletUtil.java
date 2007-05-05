@@ -61,7 +61,7 @@ import org.apache.velocity.app.Velocity;
  * <a href="RuntimePortletUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class RuntimePortletUtil {

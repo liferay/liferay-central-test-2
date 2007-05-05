@@ -38,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="LocalizedPortlet.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class LocalizedPortlet extends GenericPortlet {

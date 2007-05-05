@@ -75,7 +75,7 @@ import org.dom4j.io.XMLWriter;
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {

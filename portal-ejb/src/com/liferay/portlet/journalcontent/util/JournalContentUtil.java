@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="JournalContentUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class JournalContentUtil {

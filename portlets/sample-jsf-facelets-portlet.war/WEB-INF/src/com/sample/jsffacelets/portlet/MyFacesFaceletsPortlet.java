@@ -34,7 +34,7 @@ import javax.portlet.UnavailableException;
 /**
  * <a href="MyFacesFaceletsPortlet.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class MyFacesFaceletsPortlet
