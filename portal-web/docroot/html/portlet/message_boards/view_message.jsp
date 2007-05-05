@@ -129,7 +129,7 @@ else {
 		[
 
 		<c:if test="<%= previousThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= previousThread.getRootMessageId() %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(previousThread.getRootMessageId()) %>" /></portlet:renderURL>">
 		</c:if>
 
 		<liferay-ui:message key="previous" />
@@ -141,7 +141,7 @@ else {
 		|
 
 		<c:if test="<%= nextThread != null %>">
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= nextThread.getRootMessageId() %>" /></portlet:renderURL>">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(nextThread.getRootMessageId()) %>" /></portlet:renderURL>">
 		</c:if>
 
 		<liferay-ui:message key="next" />
@@ -161,7 +161,7 @@ else {
 					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addMessageURL">
 						<portlet:param name="struts_action" value="/message_boards/edit_message" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
+						<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" />
@@ -173,12 +173,12 @@ else {
 			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
 				<td>
 					<c:choose>
-						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), GetterUtil.getLong(message.getThreadId())) %>">
+						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), message.getThreadId()) %>">
 							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
 							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
@@ -190,7 +190,7 @@ else {
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
+								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
 							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
@@ -240,7 +240,6 @@ else {
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(false));
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-
 		%>
 
 		<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
@@ -271,7 +270,7 @@ else {
 </form>
 
 <%
-MBMessageFlagLocalServiceUtil.addReadFlags(messages, themeDisplay.getUserId());
+MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
 %>
 
 <%!

@@ -42,9 +42,9 @@ import org.hibernate.Session;
 public class MBMessageFlagFinder {
 
 	public static String COUNT_BY_T_U =
-		MBMessageFlagFinder.class.getName() + ".countByT_U";
+		MBMessageFlagFinder.class.getName() + ".countByU_T";
 
-	public static int countByT_U(String threadId, long userId)
+	public static int countByU_T(long threadId, long userId)
 		throws SystemException {
 
 		Session session = null;

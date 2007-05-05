@@ -768,14 +768,14 @@
 		<field name="banUserId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
-		<field name="categoryId" type="String" />
+		<field name="categoryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="parentCategoryId" type="String" />
+		<field name="parentCategoryId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -783,22 +783,21 @@
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBDiscussion">
-		<field name="discussionId" type="String" />
+		<field name="discussionId" type="long" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
-		<field name="threadId" type="String" />
+		<field name="threadId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
-		<field name="topicId" type="String" />
-		<field name="messageId" type="String" />
+		<field name="messageId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="categoryId" type="String" />
-		<field name="threadId" type="String" />
-		<field name="parentMessageId" type="String" />
+		<field name="categoryId" type="long" />
+		<field name="threadId" type="long" />
+		<field name="parentMessageId" type="long" />
 		<field name="subject" type="String" />
 		<field name="body" type="String">
 			<hint-collection name="CLOB" />
@@ -807,22 +806,22 @@
 		<field name="anonymous" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessageFlag">
-		<field name="topicId" type="String" />
-		<field name="messageId" type="String" />
+		<field name="messageFlagId" type="long" />
 		<field name="userId" type="long" />
-		<field name="flag" type="String" />
+		<field name="messageId" type="long" />
+		<field name="flag" type="int" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBStatsUser">
+		<field name="statsUserId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
 		<field name="messageCount" type="int" />
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBThread">
-		<field name="threadId" type="String" />
-		<field name="categoryId" type="String" />
-		<field name="topicId" type="String" />
-		<field name="rootMessageId" type="String" />
+		<field name="threadId" type="long" />
+		<field name="categoryId" type="long" />
+		<field name="rootMessageId" type="long" />
 		<field name="messageCount" type="int" />
 		<field name="viewCount" type="int" />
 		<field name="lastPostByUserId" type="long" />

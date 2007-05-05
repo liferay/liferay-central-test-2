@@ -53,15 +53,15 @@ import java.util.List;
  *
  */
 public class MBMessagePersistence extends BasePersistence {
-	public MBMessage create(MBMessagePK mbMessagePK) {
+	public MBMessage create(long messageId) {
 		MBMessage mbMessage = new MBMessageImpl();
 		mbMessage.setNew(true);
-		mbMessage.setPrimaryKey(mbMessagePK);
+		mbMessage.setPrimaryKey(messageId);
 
 		return mbMessage;
 	}
 
-	public MBMessage remove(MBMessagePK mbMessagePK)
+	public MBMessage remove(long messageId)
 		throws NoSuchMessageException, SystemException {
 		Session session = null;
 
@@ -69,16 +69,16 @@ public class MBMessagePersistence extends BasePersistence {
 			session = openSession();
 
 			MBMessage mbMessage = (MBMessage)session.get(MBMessageImpl.class,
-					mbMessagePK);
+					new Long(messageId));
 
 			if (mbMessage == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBMessage exists with the primary key " +
-						mbMessagePK);
+						messageId);
 				}
 
 				throw new NoSuchMessageException(
-					"No MBMessage exists with the primary key " + mbMessagePK);
+					"No MBMessage exists with the primary key " + messageId);
 			}
 
 			return remove(mbMessage);
@@ -148,31 +148,32 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByPrimaryKey(MBMessagePK mbMessagePK)
+	public MBMessage findByPrimaryKey(long messageId)
 		throws NoSuchMessageException, SystemException {
-		MBMessage mbMessage = fetchByPrimaryKey(mbMessagePK);
+		MBMessage mbMessage = fetchByPrimaryKey(messageId);
 
 		if (mbMessage == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBMessage exists with the primary key " +
-					mbMessagePK);
+					messageId);
 			}
 
 			throw new NoSuchMessageException(
-				"No MBMessage exists with the primary key " + mbMessagePK);
+				"No MBMessage exists with the primary key " + messageId);
 		}
 
 		return mbMessage;
 	}
 
-	public MBMessage fetchByPrimaryKey(MBMessagePK mbMessagePK)
+	public MBMessage fetchByPrimaryKey(long messageId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (MBMessage)session.get(MBMessageImpl.class, mbMessagePK);
+			return (MBMessage)session.get(MBMessageImpl.class,
+				new Long(messageId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -182,7 +183,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCategoryId(String categoryId) throws SystemException {
+	public List findByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -191,14 +192,7 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -208,10 +202,7 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return q.list();
 		}
@@ -223,12 +214,12 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end)
+	public List findByCategoryId(long categoryId, int begin, int end)
 		throws SystemException {
 		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end,
+	public List findByCategoryId(long categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -238,14 +229,7 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -262,10 +246,7 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -277,7 +258,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByCategoryId_First(String categoryId,
+	public MBMessage findByCategoryId_First(long categoryId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
@@ -295,7 +276,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByCategoryId_Last(String categoryId,
+	public MBMessage findByCategoryId_Last(long categoryId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		int count = countByCategoryId(categoryId);
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
@@ -314,10 +295,10 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage[] findByCategoryId_PrevAndNext(MBMessagePK mbMessagePK,
-		String categoryId, OrderByComparator obc)
+	public MBMessage[] findByCategoryId_PrevAndNext(long messageId,
+		long categoryId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		MBMessage mbMessage = findByPrimaryKey(mbMessagePK);
+		MBMessage mbMessage = findByPrimaryKey(messageId);
 		int count = countByCategoryId(categoryId);
 		Session session = null;
 
@@ -327,14 +308,7 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -351,10 +325,7 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -373,7 +344,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByThreadId(String threadId) throws SystemException {
+	public List findByThreadId(long threadId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -382,14 +353,7 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -399,10 +363,7 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, threadId);
 
 			return q.list();
 		}
@@ -414,12 +375,12 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByThreadId(String threadId, int begin, int end)
+	public List findByThreadId(long threadId, int begin, int end)
 		throws SystemException {
 		return findByThreadId(threadId, begin, end, null);
 	}
 
-	public List findByThreadId(String threadId, int begin, int end,
+	public List findByThreadId(long threadId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -429,14 +390,7 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -453,10 +407,7 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, threadId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -468,7 +419,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByThreadId_First(String threadId, OrderByComparator obc)
+	public MBMessage findByThreadId_First(long threadId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
 		List list = findByThreadId(threadId, 0, 1, obc);
 
@@ -486,7 +437,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByThreadId_Last(String threadId, OrderByComparator obc)
+	public MBMessage findByThreadId_Last(long threadId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
 		int count = countByThreadId(threadId);
 		List list = findByThreadId(threadId, count - 1, count, obc);
@@ -505,10 +456,10 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage[] findByThreadId_PrevAndNext(MBMessagePK mbMessagePK,
-		String threadId, OrderByComparator obc)
+	public MBMessage[] findByThreadId_PrevAndNext(long messageId,
+		long threadId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		MBMessage mbMessage = findByPrimaryKey(mbMessagePK);
+		MBMessage mbMessage = findByPrimaryKey(messageId);
 		int count = countByThreadId(threadId);
 		Session session = null;
 
@@ -518,14 +469,7 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -542,10 +486,7 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, threadId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -564,7 +505,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_T(String categoryId, String threadId)
+	public List findByC_T(long categoryId, long threadId)
 		throws SystemException {
 		Session session = null;
 
@@ -574,23 +515,9 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" AND ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -600,14 +527,8 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, categoryId);
+			q.setLong(queryPos++, threadId);
 
 			return q.list();
 		}
@@ -619,13 +540,13 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_T(String categoryId, String threadId, int begin, int end)
+	public List findByC_T(long categoryId, long threadId, int begin, int end)
 		throws SystemException {
 		return findByC_T(categoryId, threadId, begin, end, null);
 	}
 
-	public List findByC_T(String categoryId, String threadId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List findByC_T(long categoryId, long threadId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -634,23 +555,9 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" AND ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -667,14 +574,8 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, categoryId);
+			q.setLong(queryPos++, threadId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -686,7 +587,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByC_T_First(String categoryId, String threadId,
+	public MBMessage findByC_T_First(long categoryId, long threadId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List list = findByC_T(categoryId, threadId, 0, 1, obc);
 
@@ -707,7 +608,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByC_T_Last(String categoryId, String threadId,
+	public MBMessage findByC_T_Last(long categoryId, long threadId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		int count = countByC_T(categoryId, threadId);
 		List list = findByC_T(categoryId, threadId, count - 1, count, obc);
@@ -729,10 +630,10 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage[] findByC_T_PrevAndNext(MBMessagePK mbMessagePK,
-		String categoryId, String threadId, OrderByComparator obc)
+	public MBMessage[] findByC_T_PrevAndNext(long messageId, long categoryId,
+		long threadId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		MBMessage mbMessage = findByPrimaryKey(mbMessagePK);
+		MBMessage mbMessage = findByPrimaryKey(messageId);
 		int count = countByC_T(categoryId, threadId);
 		Session session = null;
 
@@ -742,23 +643,9 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" AND ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -775,14 +662,8 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, categoryId);
+			q.setLong(queryPos++, threadId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -801,7 +682,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_P(String threadId, String parentMessageId)
+	public List findByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		Session session = null;
 
@@ -811,23 +692,9 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" AND ");
-
-			if (parentMessageId == null) {
-				query.append("parentMessageId IS NULL");
-			}
-			else {
-				query.append("parentMessageId = ?");
-			}
-
+			query.append("parentMessageId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("createDate ASC").append(", ");
@@ -837,14 +704,8 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
-
-			if (parentMessageId != null) {
-				q.setString(queryPos++, parentMessageId);
-			}
+			q.setLong(queryPos++, threadId);
+			q.setLong(queryPos++, parentMessageId);
 
 			return q.list();
 		}
@@ -856,12 +717,12 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_P(String threadId, String parentMessageId, int begin,
+	public List findByT_P(long threadId, long parentMessageId, int begin,
 		int end) throws SystemException {
 		return findByT_P(threadId, parentMessageId, begin, end, null);
 	}
 
-	public List findByT_P(String threadId, String parentMessageId, int begin,
+	public List findByT_P(long threadId, long parentMessageId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -871,23 +732,9 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" AND ");
-
-			if (parentMessageId == null) {
-				query.append("parentMessageId IS NULL");
-			}
-			else {
-				query.append("parentMessageId = ?");
-			}
-
+			query.append("parentMessageId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -904,14 +751,8 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
-
-			if (parentMessageId != null) {
-				q.setString(queryPos++, parentMessageId);
-			}
+			q.setLong(queryPos++, threadId);
+			q.setLong(queryPos++, parentMessageId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -923,7 +764,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByT_P_First(String threadId, String parentMessageId,
+	public MBMessage findByT_P_First(long threadId, long parentMessageId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
@@ -944,7 +785,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage findByT_P_Last(String threadId, String parentMessageId,
+	public MBMessage findByT_P_Last(long threadId, long parentMessageId,
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		int count = countByT_P(threadId, parentMessageId);
 		List list = findByT_P(threadId, parentMessageId, count - 1, count, obc);
@@ -966,10 +807,10 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessage[] findByT_P_PrevAndNext(MBMessagePK mbMessagePK,
-		String threadId, String parentMessageId, OrderByComparator obc)
+	public MBMessage[] findByT_P_PrevAndNext(long messageId, long threadId,
+		long parentMessageId, OrderByComparator obc)
 		throws NoSuchMessageException, SystemException {
-		MBMessage mbMessage = findByPrimaryKey(mbMessagePK);
+		MBMessage mbMessage = findByPrimaryKey(messageId);
 		int count = countByT_P(threadId, parentMessageId);
 		Session session = null;
 
@@ -979,23 +820,9 @@ public class MBMessagePersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" AND ");
-
-			if (parentMessageId == null) {
-				query.append("parentMessageId IS NULL");
-			}
-			else {
-				query.append("parentMessageId = ?");
-			}
-
+			query.append("parentMessageId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -1012,14 +839,8 @@ public class MBMessagePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
-
-			if (parentMessageId != null) {
-				q.setString(queryPos++, parentMessageId);
-			}
+			q.setLong(queryPos++, threadId);
+			q.setLong(queryPos++, parentMessageId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -1119,7 +940,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCategoryId(String categoryId) throws SystemException {
+	public void removeByCategoryId(long categoryId) throws SystemException {
 		Iterator itr = findByCategoryId(categoryId).iterator();
 
 		while (itr.hasNext()) {
@@ -1128,7 +949,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByThreadId(String threadId) throws SystemException {
+	public void removeByThreadId(long threadId) throws SystemException {
 		Iterator itr = findByThreadId(threadId).iterator();
 
 		while (itr.hasNext()) {
@@ -1137,7 +958,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_T(String categoryId, String threadId)
+	public void removeByC_T(long categoryId, long threadId)
 		throws SystemException {
 		Iterator itr = findByC_T(categoryId, threadId).iterator();
 
@@ -1147,7 +968,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByT_P(String threadId, String parentMessageId)
+	public void removeByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		Iterator itr = findByT_P(threadId, parentMessageId).iterator();
 
@@ -1165,7 +986,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCategoryId(String categoryId) throws SystemException {
+	public int countByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1175,24 +996,14 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1214,7 +1025,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByThreadId(String threadId) throws SystemException {
+	public int countByThreadId(long threadId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1224,24 +1035,14 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, threadId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1263,7 +1064,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_T(String categoryId, String threadId)
+	public int countByC_T(long categoryId, long threadId)
 		throws SystemException {
 		Session session = null;
 
@@ -1274,37 +1075,17 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" AND ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
+			q.setLong(queryPos++, categoryId);
+			q.setLong(queryPos++, threadId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1326,7 +1107,7 @@ public class MBMessagePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByT_P(String threadId, String parentMessageId)
+	public int countByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		Session session = null;
 
@@ -1337,37 +1118,17 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-
-			if (threadId == null) {
-				query.append("threadId IS NULL");
-			}
-			else {
-				query.append("threadId = ?");
-			}
-
+			query.append("threadId = ?");
 			query.append(" AND ");
-
-			if (parentMessageId == null) {
-				query.append("parentMessageId IS NULL");
-			}
-			else {
-				query.append("parentMessageId = ?");
-			}
-
+			query.append("parentMessageId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (threadId != null) {
-				q.setString(queryPos++, threadId);
-			}
-
-			if (parentMessageId != null) {
-				q.setString(queryPos++, parentMessageId);
-			}
+			q.setLong(queryPos++, threadId);
+			q.setLong(queryPos++, parentMessageId);
 
 			Iterator itr = q.list().iterator();
 

@@ -53,8 +53,8 @@ public class IndexerImpl {
 	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 	public static void addMessage(
-			long companyId, long groupId, String userName, String categoryId,
-			String threadId, String messageId, String title, String content)
+			long companyId, long groupId, String userName, long categoryId,
+			long threadId, long messageId, String title, String content)
 		throws IOException {
 
 		content = Html.stripHtml(content);
@@ -93,7 +93,7 @@ public class IndexerImpl {
 		}
 	}
 
-	public static void deleteMessage(long companyId, String messageId)
+	public static void deleteMessage(long companyId, long messageId)
 		throws IOException {
 
 		LuceneUtil.deleteDocuments(
@@ -102,7 +102,7 @@ public class IndexerImpl {
 				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId)));
 	}
 
-	public static void deleteMessages(long companyId, String threadId)
+	public static void deleteMessages(long companyId, long threadId)
 		throws IOException, ParseException {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -153,8 +153,8 @@ public class IndexerImpl {
 	}
 
 	public static void updateMessage(
-			long companyId, long groupId, String userName, String categoryId,
-			String threadId, String messageId, String title, String content)
+			long companyId, long groupId, String userName, long categoryId,
+			long threadId, long messageId, String title, String content)
 		throws IOException {
 
 		try {

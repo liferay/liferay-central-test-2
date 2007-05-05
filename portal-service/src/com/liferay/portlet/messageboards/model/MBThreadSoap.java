@@ -50,7 +50,6 @@ public class MBThreadSoap implements Serializable {
 		MBThreadSoap soapModel = new MBThreadSoap();
 		soapModel.setThreadId(model.getThreadId());
 		soapModel.setCategoryId(model.getCategoryId());
-		soapModel.setTopicId(model.getTopicId());
 		soapModel.setRootMessageId(model.getRootMessageId());
 		soapModel.setMessageCount(model.getMessageCount());
 		soapModel.setViewCount(model.getViewCount());
@@ -75,43 +74,35 @@ public class MBThreadSoap implements Serializable {
 	public MBThreadSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _threadId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setThreadId(pk);
 	}
 
-	public String getThreadId() {
+	public long getThreadId() {
 		return _threadId;
 	}
 
-	public void setThreadId(String threadId) {
+	public void setThreadId(long threadId) {
 		_threadId = threadId;
 	}
 
-	public String getCategoryId() {
+	public long getCategoryId() {
 		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
-	public String getTopicId() {
-		return _topicId;
-	}
-
-	public void setTopicId(String topicId) {
-		_topicId = topicId;
-	}
-
-	public String getRootMessageId() {
+	public long getRootMessageId() {
 		return _rootMessageId;
 	}
 
-	public void setRootMessageId(String rootMessageId) {
+	public void setRootMessageId(long rootMessageId) {
 		_rootMessageId = rootMessageId;
 	}
 
@@ -155,10 +146,9 @@ public class MBThreadSoap implements Serializable {
 		_priority = priority;
 	}
 
-	private String _threadId;
-	private String _categoryId;
-	private String _topicId;
-	private String _rootMessageId;
+	private long _threadId;
+	private long _categoryId;
+	private long _rootMessageId;
 	private int _messageCount;
 	private int _viewCount;
 	private long _lastPostByUserId;

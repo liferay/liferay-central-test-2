@@ -24,8 +24,6 @@ package com.liferay.portlet.messageboards.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
-
 import java.util.Date;
 
 /**
@@ -49,9 +47,13 @@ import java.util.Date;
  *
  */
 public interface MBStatsUserModel extends BaseModel {
-	public MBStatsUserPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(MBStatsUserPK pk);
+	public void setPrimaryKey(long pk);
+
+	public long getStatsUserId();
+
+	public void setStatsUserId(long statsUserId);
 
 	public long getGroupId();
 

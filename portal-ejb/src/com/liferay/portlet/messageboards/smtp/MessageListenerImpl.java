@@ -41,6 +41,7 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.mail.JavaMailUtil;
 import com.liferay.util.mail.MailEngine;
 
@@ -72,7 +73,7 @@ public class MessageListenerImpl implements MessageListener {
 			}
 
 			Company company = _getCompany(recipient);
-			String categoryId = _getCategoryId(recipient);
+			long categoryId = _getCategoryId(recipient);
 
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
@@ -104,7 +105,7 @@ public class MessageListenerImpl implements MessageListener {
 
 		try {
 			Company company = _getCompany(recipient);
-			String categoryId = _getCategoryId(recipient);
+			long categoryId = _getCategoryId(recipient);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
@@ -123,10 +124,10 @@ public class MessageListenerImpl implements MessageListener {
 			MBMessage prevMessage = null;
 
 			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
-				String prevMessageId = MBUtil.getMessageId(inReplyToHeaders[0]);
+				long prevMessageId = MBUtil.getMessageId(inReplyToHeaders[0]);
 
 				try {
-					if (prevMessageId != null) {
+					if (prevMessageId > 0) {
 						prevMessage = MBMessageLocalServiceUtil.getMessage(
 							prevMessageId);
 					}
@@ -176,11 +177,11 @@ public class MessageListenerImpl implements MessageListener {
 		return MessageListenerImpl.class.getName();
 	}
 
-	private String _getCategoryId(String recipient) {
+	private long _getCategoryId(String recipient) {
 		int pos = recipient.indexOf(StringPool.AT);
 
-		String categoryId = recipient.substring(
-			MBUtil.SMTP_PORTLET_PREFIX.length(), pos);
+		long categoryId = GetterUtil.getLong(recipient.substring(
+			MBUtil.SMTP_PORTLET_PREFIX.length(), pos));
 
 		return categoryId;
 	}

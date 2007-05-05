@@ -53,24 +53,7 @@ import java.util.List;
 public class MBMessageJSONSerializer {
 	public static JSONObject toJSONObject(MBMessage model) {
 		JSONObject jsonObj = new JSONObject();
-		String topicId = model.getTopicId();
-
-		if (topicId == null) {
-			jsonObj.put("topicId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("topicId", topicId.toString());
-		}
-
-		String messageId = model.getMessageId();
-
-		if (messageId == null) {
-			jsonObj.put("messageId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("messageId", messageId.toString());
-		}
-
+		jsonObj.put("messageId", model.getMessageId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
@@ -101,32 +84,9 @@ public class MBMessageJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String categoryId = model.getCategoryId();
-
-		if (categoryId == null) {
-			jsonObj.put("categoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("categoryId", categoryId.toString());
-		}
-
-		String threadId = model.getThreadId();
-
-		if (threadId == null) {
-			jsonObj.put("threadId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("threadId", threadId.toString());
-		}
-
-		String parentMessageId = model.getParentMessageId();
-
-		if (parentMessageId == null) {
-			jsonObj.put("parentMessageId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentMessageId", parentMessageId.toString());
-		}
+		jsonObj.put("categoryId", model.getCategoryId());
+		jsonObj.put("threadId", model.getThreadId());
+		jsonObj.put("parentMessageId", model.getParentMessageId());
 
 		String subject = model.getSubject();
 

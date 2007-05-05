@@ -52,12 +52,13 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 			for (int i = 0; i < _messages.size(); i++) {
 				MBMessage curMessage = (MBMessage)_messages.get(i);
 
-				String parentMessageId = curMessage.getParentMessageId();
+				Long parentMessageIdObj = new Long(
+					curMessage.getParentMessageId());
 
 				if (!curMessage.isRoot() &&
-					!_messageIdsMap.containsKey(parentMessageId)) {
+					!_messageIdsMap.containsKey(parentMessageIdObj)) {
 
-					_messageIdsMap.put(parentMessageId, new Integer(i));
+					_messageIdsMap.put(parentMessageIdObj, new Integer(i));
 				}
 			}
 		}
@@ -83,9 +84,9 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 	}
 
 	public int[] getChildrenRange(MBMessage message) {
-		String messageId = message.getMessageId();
+		Long messageIdObj = new Long(message.getMessageId());
 
-		Integer pos = (Integer)_messageIdsMap.get(messageId);
+		Integer pos = (Integer)_messageIdsMap.get(messageIdObj);
 
 		if (pos == null) {
 			return new int[] {0, 0};
@@ -97,7 +98,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		for (int i = range[0]; i < _messages.size(); i++) {
 			MBMessage curMessage = (MBMessage)_messages.get(i);
 
-			if (curMessage.getParentMessageId().equals(messageId)) {
+			if (curMessage.getParentMessageId() == messageIdObj.longValue()) {
 				range[1] = i + 1;
 			}
 			else {
@@ -119,11 +120,13 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 	}
 
 	public boolean isLeaf(MBMessage message) {
-		if (_messageIdsMap.get(message.getMessageId()) == null) {
-			return true;
+		Long messageIdObj = new Long(message.getMessageId());
+
+		if (_messageIdsMap.containsKey(messageIdObj)) {
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 

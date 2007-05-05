@@ -25,8 +25,6 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
-
 import com.liferay.util.GetterUtil;
 
 import java.sql.Types;
@@ -56,6 +54,7 @@ import java.util.Date;
 public class MBStatsUserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBStatsUser";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "statsUserId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "messageCount", new Integer(Types.INTEGER) },
@@ -70,13 +69,22 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	public MBStatsUserModelImpl() {
 	}
 
-	public MBStatsUserPK getPrimaryKey() {
-		return new MBStatsUserPK(_groupId, _userId);
+	public long getPrimaryKey() {
+		return _statsUserId;
 	}
 
-	public void setPrimaryKey(MBStatsUserPK pk) {
-		setGroupId(pk.groupId);
-		setUserId(pk.userId);
+	public void setPrimaryKey(long pk) {
+		setStatsUserId(pk);
+	}
+
+	public long getStatsUserId() {
+		return _statsUserId;
+	}
+
+	public void setStatsUserId(long statsUserId) {
+		if (statsUserId != _statsUserId) {
+			_statsUserId = statsUserId;
+		}
 	}
 
 	public long getGroupId() {
@@ -124,6 +132,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBStatsUserImpl clone = new MBStatsUserImpl();
+		clone.setStatsUserId(getStatsUserId());
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setMessageCount(getMessageCount());
@@ -173,9 +182,9 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBStatsUserPK pk = mbStatsUser.getPrimaryKey();
+		long pk = mbStatsUser.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -184,9 +193,10 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
+	private long _statsUserId;
 	private long _groupId;
 	private long _userId;
 	private int _messageCount;

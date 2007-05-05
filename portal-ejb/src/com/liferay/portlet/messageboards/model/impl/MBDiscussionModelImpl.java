@@ -53,25 +53,19 @@ import java.sql.Types;
 public class MBDiscussionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBDiscussion";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "discussionId", new Integer(Types.VARCHAR) },
+			{ "discussionId", new Integer(Types.BIGINT) },
 			{ "className", new Integer(Types.VARCHAR) },
 			{ "classPK", new Integer(Types.VARCHAR) },
-			{ "threadId", new Integer(Types.VARCHAR) }
+			{ "threadId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_DISCUSSIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.discussionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.className"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.classPK"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion.threadId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBDiscussionModel"));
@@ -79,27 +73,20 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	public MBDiscussionModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _discussionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setDiscussionId(pk);
 	}
 
-	public String getDiscussionId() {
-		return GetterUtil.getString(_discussionId);
+	public long getDiscussionId() {
+		return _discussionId;
 	}
 
-	public void setDiscussionId(String discussionId) {
-		if (((discussionId == null) && (_discussionId != null)) ||
-				((discussionId != null) && (_discussionId == null)) ||
-				((discussionId != null) && (_discussionId != null) &&
-				!discussionId.equals(_discussionId))) {
-			if (!XSS_ALLOW_DISCUSSIONID) {
-				discussionId = XSSUtil.strip(discussionId);
-			}
-
+	public void setDiscussionId(long discussionId) {
+		if (discussionId != _discussionId) {
 			_discussionId = discussionId;
 		}
 	}
@@ -138,19 +125,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getThreadId() {
-		return GetterUtil.getString(_threadId);
+	public long getThreadId() {
+		return _threadId;
 	}
 
-	public void setThreadId(String threadId) {
-		if (((threadId == null) && (_threadId != null)) ||
-				((threadId != null) && (_threadId == null)) ||
-				((threadId != null) && (_threadId != null) &&
-				!threadId.equals(_threadId))) {
-			if (!XSS_ALLOW_THREADID) {
-				threadId = XSSUtil.strip(threadId);
-			}
-
+	public void setThreadId(long threadId) {
+		if (threadId != _threadId) {
 			_threadId = threadId;
 		}
 	}
@@ -171,9 +151,17 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 		}
 
 		MBDiscussionImpl mbDiscussion = (MBDiscussionImpl)obj;
-		String pk = mbDiscussion.getPrimaryKey();
+		long pk = mbDiscussion.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -190,9 +178,9 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = mbDiscussion.getPrimaryKey();
+		long pk = mbDiscussion.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -201,11 +189,11 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _discussionId;
+	private long _discussionId;
 	private String _className;
 	private String _classPK;
-	private String _threadId;
+	private long _threadId;
 }

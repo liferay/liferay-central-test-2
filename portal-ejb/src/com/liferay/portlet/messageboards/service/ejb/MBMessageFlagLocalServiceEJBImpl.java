@@ -66,10 +66,10 @@ public class MBMessageFlagLocalServiceEJBImpl
 			begin, end);
 	}
 
-	public void addReadFlags(java.util.List messages, long userId)
+	public void addReadFlags(long userId, java.util.List messages)
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalServiceFactory.getTxImpl().addReadFlags(messages,
-			userId);
+		MBMessageFlagLocalServiceFactory.getTxImpl().addReadFlags(userId,
+			messages);
 	}
 
 	public void deleteFlags(long userId)
@@ -77,10 +77,10 @@ public class MBMessageFlagLocalServiceEJBImpl
 		MBMessageFlagLocalServiceFactory.getTxImpl().deleteFlags(userId);
 	}
 
-	public boolean hasReadFlag(java.lang.String messageId, long userId)
+	public boolean hasReadFlag(long userId, long messageId)
 		throws com.liferay.portal.SystemException {
-		return MBMessageFlagLocalServiceFactory.getTxImpl().hasReadFlag(messageId,
-			userId);
+		return MBMessageFlagLocalServiceFactory.getTxImpl().hasReadFlag(userId,
+			messageId);
 	}
 
 	public void ejbCreate() throws CreateException {

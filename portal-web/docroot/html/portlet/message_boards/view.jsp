@@ -30,11 +30,11 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 List categoryIds = new ArrayList();
 
-categoryIds.add(categoryId);
+categoryIds.add(new Long(categoryId));
 
 MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), categoryId);
 
@@ -45,7 +45,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("categoryId", categoryId);
+portletURL.setParameter("categoryId", String.valueOf(categoryId));
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
@@ -86,14 +86,14 @@ portletURL.setParameter("categoryId", categoryId);
 		for (int i = 0; i < results.size(); i++) {
 			MBCategory curCategory = (MBCategory)results.get(i);
 
-			ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/message_boards/view");
-			rowURL.setParameter("categoryId", curCategory.getCategoryId());
+			rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 			// Name and description
 
@@ -125,7 +125,7 @@ portletURL.setParameter("categoryId", categoryId);
 				for (int j = 0; j < subcategories.size(); j++) {
 					MBCategory subcategory = (MBCategory)subcategories.get(j);
 
-					rowURL.setParameter("categoryId", subcategory.getCategoryId());
+					rowURL.setParameter("categoryId", String.valueOf(subcategory.getCategoryId()));
 
 					sm.append("<a href=\"");
 					sm.append(rowURL);
@@ -138,7 +138,7 @@ portletURL.setParameter("categoryId", categoryId);
 					}
 				}
 
-				rowURL.setParameter("categoryId", curCategory.getCategoryId());
+				rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 				sm.append("</span>");
 			}
@@ -149,7 +149,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 			List subcategoryIds = new ArrayList();
 
-			subcategoryIds.add(curCategory.getCategoryId());
+			subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
 			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
 
@@ -178,7 +178,7 @@ portletURL.setParameter("categoryId", categoryId);
 			<tr>
 				<c:if test="<%= showAddCategoryButton %>">
 					<td>
-						<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+						<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
 					</td>
 				</c:if>
 
@@ -248,14 +248,14 @@ portletURL.setParameter("categoryId", categoryId);
 				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
-				ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
+				ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/message_boards/view_message");
-				rowURL.setParameter("messageId", message.getMessageId());
+				rowURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 
 				// Thread
 
@@ -337,11 +337,11 @@ portletURL.setParameter("categoryId", categoryId);
 			%>
 
 			<c:if test="<%= showAddMessageButton || (results.size() > 0) %>">
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table class="liferay-table">
 				<tr>
 					<c:if test="<%= showAddMessageButton %>">
 						<td>
-							<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+							<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
 						</td>
 					</c:if>
 
@@ -412,14 +412,14 @@ portletURL.setParameter("categoryId", categoryId);
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
-			ResultRow row = new ResultRow(message, thread.getPrimaryKey().toString(), i, !readThread);
+			ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
 			rowURL.setParameter("struts_action", "/message_boards/view_message");
-			rowURL.setParameter("messageId", message.getMessageId());
+			rowURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 
 			// Thread
 
@@ -540,7 +540,7 @@ portletURL.setParameter("categoryId", categoryId);
 				for (int i = 0; i < results.size(); i++) {
 					MBStatsUser statsUser = (MBStatsUser)results.get(i);
 
-					ResultRow row = new ResultRow(statsUser, statsUser.getPrimaryKey().toString(), i);
+					ResultRow row = new ResultRow(statsUser, statsUser.getStatsUserId(), i);
 
 					PortletURL rowURL = null;
 

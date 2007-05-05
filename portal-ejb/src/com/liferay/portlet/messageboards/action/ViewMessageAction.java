@@ -56,10 +56,10 @@ public class ViewMessageAction extends PortletAction {
 		try {
 			long userId = PortalUtil.getUserId(req);
 
-			String messageId = ParamUtil.getString(req, "messageId");
+			long messageId = ParamUtil.getLong(req, "messageId");
 
 			MBMessageDisplay messageDisplay =
-				MBMessageServiceUtil.getMessageDisplay(messageId, userId);
+				MBMessageServiceUtil.getMessageDisplay(userId, messageId);
 
 			req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);
 

@@ -47,25 +47,21 @@ import java.util.Date;
  *
  */
 public interface MBThreadModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getThreadId();
+	public long getThreadId();
 
-	public void setThreadId(String threadId);
+	public void setThreadId(long threadId);
 
-	public String getCategoryId();
+	public long getCategoryId();
 
-	public void setCategoryId(String categoryId);
+	public void setCategoryId(long categoryId);
 
-	public String getTopicId();
+	public long getRootMessageId();
 
-	public void setTopicId(String topicId);
-
-	public String getRootMessageId();
-
-	public void setRootMessageId(String rootMessageId);
+	public void setRootMessageId(long rootMessageId);
 
 	public int getMessageCount();
 

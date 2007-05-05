@@ -27,7 +27,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
-import com.liferay.util.Validator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,15 +39,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 
-	public static final String DEPRECATED_TOPIC_ID = "-1";
-
-	public static final String DEFAULT_PARENT_MESSAGE_ID = "-1";
+	public static final long DEFAULT_PARENT_MESSAGE_ID = 0;
 
 	public MBMessageImpl() {
 	}
 
 	public MBCategory getCategory() {
-		if (getCategoryId().equals(CompanyImpl.SYSTEM_STRING)) {
+		if (getCategoryId() == CompanyImpl.SYSTEM) {
 			return null;
 		}
 
@@ -67,8 +64,12 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isRoot() {
-		return Validator.equals(
-			getParentMessageId(), DEFAULT_PARENT_MESSAGE_ID);
+		if (getParentMessageId() == DEFAULT_PARENT_MESSAGE_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isReply() {
@@ -76,7 +77,12 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isDiscussion() {
-		return Validator.equals(getCategoryId(), CompanyImpl.SYSTEM_STRING);
+		if (getCategoryId() == CompanyImpl.SYSTEM) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public String getThreadAttachmentsDir() {

@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBStatsUserUtil {
 	public static com.liferay.portlet.messageboards.model.MBStatsUser create(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK) {
-		return getPersistence().create(mbStatsUserPK);
+		long statsUserId) {
+		return getPersistence().create(statsUserId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser remove(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK)
+		long statsUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(mbStatsUserPK));
+			listener.onBeforeRemove(findByPrimaryKey(statsUserId));
 		}
 
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser = getPersistence()
-																			  .remove(mbStatsUserPK);
+																			  .remove(statsUserId);
 
 		if (listener != null) {
 			listener.onAfterRemove(mbStatsUser);
@@ -140,16 +140,15 @@ public class MBStatsUserUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser findByPrimaryKey(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK)
+		long statsUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
-		return getPersistence().findByPrimaryKey(mbStatsUserPK);
+		return getPersistence().findByPrimaryKey(statsUserId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser fetchByPrimaryKey(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(mbStatsUserPK);
+		long statsUserId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(statsUserId);
 	}
 
 	public static java.util.List findByGroupId(long groupId)
@@ -183,12 +182,12 @@ public class MBStatsUserUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser[] findByGroupId_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long statsUserId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
-		return getPersistence().findByGroupId_PrevAndNext(mbStatsUserPK,
-			groupId, obc);
+		return getPersistence().findByGroupId_PrevAndNext(statsUserId, groupId,
+			obc);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -222,12 +221,24 @@ public class MBStatsUserUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser[] findByUserId_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK,
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long statsUserId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
-		return getPersistence().findByUserId_PrevAndNext(mbStatsUserPK, userId,
+		return getPersistence().findByUserId_PrevAndNext(statsUserId, userId,
 			obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBStatsUser findByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchStatsUserException {
+		return getPersistence().findByG_U(groupId, userId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBStatsUser fetchByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_U(groupId, userId);
 	}
 
 	public static java.util.List findByG_M(long groupId, int messageCount)
@@ -263,12 +274,11 @@ public class MBStatsUserUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser[] findByG_M_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK,
-		long groupId, int messageCount,
+		long statsUserId, long groupId, int messageCount,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
-		return getPersistence().findByG_M_PrevAndNext(mbStatsUserPK, groupId,
+		return getPersistence().findByG_M_PrevAndNext(statsUserId, groupId,
 			messageCount, obc);
 	}
 
@@ -311,6 +321,12 @@ public class MBStatsUserUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
+	public static void removeByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchStatsUserException {
+		getPersistence().removeByG_U(groupId, userId);
+	}
+
 	public static void removeByG_M(long groupId, int messageCount)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_M(groupId, messageCount);
@@ -328,6 +344,11 @@ public class MBStatsUserUtil {
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserId(userId);
+	}
+
+	public static int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_U(groupId, userId);
 	}
 
 	public static int countByG_M(long groupId, int messageCount)

@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.messageboards.model;
 
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -49,9 +47,9 @@ import java.util.List;
 public class MBMessageFlagSoap implements Serializable {
 	public static MBMessageFlagSoap toSoapModel(MBMessageFlag model) {
 		MBMessageFlagSoap soapModel = new MBMessageFlagSoap();
-		soapModel.setTopicId(model.getTopicId());
-		soapModel.setMessageId(model.getMessageId());
+		soapModel.setMessageFlagId(model.getMessageFlagId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setMessageId(model.getMessageId());
 		soapModel.setFlag(model.getFlag());
 
 		return soapModel;
@@ -71,30 +69,20 @@ public class MBMessageFlagSoap implements Serializable {
 	public MBMessageFlagSoap() {
 	}
 
-	public MBMessageFlagPK getPrimaryKey() {
-		return new MBMessageFlagPK(_topicId, _messageId, _userId);
+	public long getPrimaryKey() {
+		return _messageFlagId;
 	}
 
-	public void setPrimaryKey(MBMessageFlagPK pk) {
-		setTopicId(pk.topicId);
-		setMessageId(pk.messageId);
-		setUserId(pk.userId);
+	public void setPrimaryKey(long pk) {
+		setMessageFlagId(pk);
 	}
 
-	public String getTopicId() {
-		return _topicId;
+	public long getMessageFlagId() {
+		return _messageFlagId;
 	}
 
-	public void setTopicId(String topicId) {
-		_topicId = topicId;
-	}
-
-	public String getMessageId() {
-		return _messageId;
-	}
-
-	public void setMessageId(String messageId) {
-		_messageId = messageId;
+	public void setMessageFlagId(long messageFlagId) {
+		_messageFlagId = messageFlagId;
 	}
 
 	public long getUserId() {
@@ -105,16 +93,24 @@ public class MBMessageFlagSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public String getFlag() {
+	public long getMessageId() {
+		return _messageId;
+	}
+
+	public void setMessageId(long messageId) {
+		_messageId = messageId;
+	}
+
+	public int getFlag() {
 		return _flag;
 	}
 
-	public void setFlag(String flag) {
+	public void setFlag(int flag) {
 		_flag = flag;
 	}
 
-	private String _topicId;
-	private String _messageId;
+	private long _messageFlagId;
 	private long _userId;
-	private String _flag;
+	private long _messageId;
+	private int _flag;
 }

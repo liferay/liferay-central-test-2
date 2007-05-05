@@ -40,7 +40,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 public class MBMessagePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String messageId,
+			PermissionChecker permissionChecker, long messageId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -60,7 +60,7 @@ public class MBMessagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String messageId,
+			PermissionChecker permissionChecker, long messageId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -84,7 +84,7 @@ public class MBMessagePermission {
 		else {
 			return permissionChecker.hasPermission(
 				category.getGroupId(), MBMessage.class.getName(),
-				message.getPrimaryKey().toString(), actionId);
+				message.getMessageId(), actionId);
 		}
 	}
 

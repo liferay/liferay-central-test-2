@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.messageboards.model;
 
-import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,6 +48,7 @@ import java.util.List;
 public class MBStatsUserSoap implements Serializable {
 	public static MBStatsUserSoap toSoapModel(MBStatsUser model) {
 		MBStatsUserSoap soapModel = new MBStatsUserSoap();
+		soapModel.setStatsUserId(model.getStatsUserId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setMessageCount(model.getMessageCount());
@@ -72,13 +71,20 @@ public class MBStatsUserSoap implements Serializable {
 	public MBStatsUserSoap() {
 	}
 
-	public MBStatsUserPK getPrimaryKey() {
-		return new MBStatsUserPK(_groupId, _userId);
+	public long getPrimaryKey() {
+		return _statsUserId;
 	}
 
-	public void setPrimaryKey(MBStatsUserPK pk) {
-		setGroupId(pk.groupId);
-		setUserId(pk.userId);
+	public void setPrimaryKey(long pk) {
+		setStatsUserId(pk);
+	}
+
+	public long getStatsUserId() {
+		return _statsUserId;
+	}
+
+	public void setStatsUserId(long statsUserId) {
+		_statsUserId = statsUserId;
 	}
 
 	public long getGroupId() {
@@ -113,6 +119,7 @@ public class MBStatsUserSoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
+	private long _statsUserId;
 	private long _groupId;
 	private long _userId;
 	private int _messageCount;

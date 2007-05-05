@@ -65,7 +65,7 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static void deleteThread(java.lang.String threadId)
+	public static void deleteThread(long threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
@@ -80,7 +80,7 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.deleteThread(thread);
 	}
 
-	public static void deleteThreads(java.lang.String categoryId)
+	public static void deleteThreads(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
@@ -123,7 +123,7 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread getThread(
-		java.lang.String threadId)
+		long threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
@@ -131,21 +131,21 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getThread(threadId);
 	}
 
-	public static java.util.List getThreads(java.lang.String categoryId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getThreads(long categoryId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.getThreads(categoryId, begin, end);
 	}
 
-	public static int getThreadsCount(java.lang.String categoryId)
+	public static int getThreadsCount(long categoryId)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.getThreadsCount(categoryId);
 	}
 
-	public static boolean hasReadThread(long userId, java.lang.String threadId)
+	public static boolean hasReadThread(long userId, long threadId)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 

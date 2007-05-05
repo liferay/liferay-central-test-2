@@ -57,7 +57,7 @@ public class FindThreadAction extends Action {
 
 		try {
 			String plid = ParamUtil.getString(req, "p_l_id");
-			String threadId = ParamUtil.getString(req, "threadId");
+			long threadId = ParamUtil.getLong(req, "threadId");
 
 			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
@@ -69,7 +69,8 @@ public class FindThreadAction extends Action {
 
 			portletURL.setParameter(
 				"struts_action", "/message_boards/view_message");
-			portletURL.setParameter("messageId", thread.getRootMessageId());
+			portletURL.setParameter(
+				"messageId", String.valueOf(thread.getRootMessageId()));
 
 			res.sendRedirect(portletURL.toString());
 

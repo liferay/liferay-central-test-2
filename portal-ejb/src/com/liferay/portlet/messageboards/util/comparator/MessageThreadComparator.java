@@ -41,8 +41,10 @@ public class MessageThreadComparator implements Comparator, Serializable {
 		MBMessage msg1 = (MBMessage)obj1;
 		MBMessage msg2 = (MBMessage)obj2;
 
-		int value =
-			msg1.getParentMessageId().compareTo(msg2.getParentMessageId());
+		Long parentMessageId1 = new Long(msg1.getParentMessageId());
+		Long parentMessageId2 = new Long(msg2.getParentMessageId());
+
+		int value = parentMessageId1.compareTo(parentMessageId2);
 
 		if (value == 0) {
 			value = DateUtil.compareTo(
@@ -50,7 +52,10 @@ public class MessageThreadComparator implements Comparator, Serializable {
 		}
 
 		if (value == 0) {
-			value = msg1.getMessageId().compareTo(msg2.getMessageId());
+			Long messageId1 = new Long(msg1.getMessageId());
+			Long messageId2 = new Long(msg2.getMessageId());
+
+			value = messageId1.compareTo(messageId2);
 		}
 
 		return value;

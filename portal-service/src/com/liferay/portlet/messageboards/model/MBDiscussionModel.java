@@ -45,13 +45,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface MBDiscussionModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getDiscussionId();
+	public long getDiscussionId();
 
-	public void setDiscussionId(String discussionId);
+	public void setDiscussionId(long discussionId);
 
 	public String getClassName();
 
@@ -61,7 +61,7 @@ public interface MBDiscussionModel extends BaseModel {
 
 	public void setClassPK(String classPK);
 
-	public String getThreadId();
+	public long getThreadId();
 
-	public void setThreadId(String threadId);
+	public void setThreadId(long threadId);
 }

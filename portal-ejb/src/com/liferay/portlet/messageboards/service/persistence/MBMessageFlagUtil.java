@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBMessageFlagUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag create(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK) {
-		return getPersistence().create(mbMessageFlagPK);
+		long messageFlagId) {
+		return getPersistence().create(messageFlagId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag remove(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK)
+		long messageFlagId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(mbMessageFlagPK));
+			listener.onBeforeRemove(findByPrimaryKey(messageFlagId));
 		}
 
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag = getPersistence()
-																				  .remove(mbMessageFlagPK);
+																				  .remove(messageFlagId);
 
 		if (listener != null) {
 			listener.onAfterRemove(mbMessageFlag);
@@ -140,58 +140,15 @@ public class MBMessageFlagUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK)
+		long messageFlagId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByPrimaryKey(mbMessageFlagPK);
+		return getPersistence().findByPrimaryKey(messageFlagId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag fetchByPrimaryKey(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(mbMessageFlagPK);
-	}
-
-	public static java.util.List findByTopicId(java.lang.String topicId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId(topicId);
-	}
-
-	public static java.util.List findByTopicId(java.lang.String topicId,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId(topicId, begin, end);
-	}
-
-	public static java.util.List findByTopicId(java.lang.String topicId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTopicId(topicId, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByTopicId_First(
-		java.lang.String topicId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByTopicId_First(topicId, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByTopicId_Last(
-		java.lang.String topicId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByTopicId_Last(topicId, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByTopicId_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK,
-		java.lang.String topicId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByTopicId_PrevAndNext(mbMessageFlagPK,
-			topicId, obc);
+		long messageFlagId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(messageFlagId);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -225,100 +182,63 @@ public class MBMessageFlagUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByUserId_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK,
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long messageFlagId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByUserId_PrevAndNext(mbMessageFlagPK,
-			userId, obc);
+		return getPersistence().findByUserId_PrevAndNext(messageFlagId, userId,
+			obc);
 	}
 
-	public static java.util.List findByT_M(java.lang.String topicId,
-		java.lang.String messageId) throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_M(topicId, messageId);
-	}
-
-	public static java.util.List findByT_M(java.lang.String topicId,
-		java.lang.String messageId, int begin, int end)
+	public static java.util.List findByMessageId(long messageId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_M(topicId, messageId, begin, end);
+		return getPersistence().findByMessageId(messageId);
 	}
 
-	public static java.util.List findByT_M(java.lang.String topicId,
-		java.lang.String messageId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByMessageId(long messageId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByMessageId(messageId, begin, end);
+	}
+
+	public static java.util.List findByMessageId(long messageId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_M(topicId, messageId, begin, end, obc);
+		return getPersistence().findByMessageId(messageId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByT_M_First(
-		java.lang.String topicId, java.lang.String messageId,
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_First(
+		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByMessageId_First(messageId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_Last(
+		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		return getPersistence().findByMessageId_Last(messageId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByMessageId_PrevAndNext(
+		long messageFlagId, long messageId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByT_M_First(topicId, messageId, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByT_M_Last(
-		java.lang.String topicId, java.lang.String messageId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByT_M_Last(topicId, messageId, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_M_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK,
-		java.lang.String topicId, java.lang.String messageId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByT_M_PrevAndNext(mbMessageFlagPK, topicId,
+		return getPersistence().findByMessageId_PrevAndNext(messageFlagId,
 			messageId, obc);
 	}
 
-	public static java.util.List findByT_U(java.lang.String topicId, long userId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_U(topicId, userId);
-	}
-
-	public static java.util.List findByT_U(java.lang.String topicId,
-		long userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_U(topicId, userId, begin, end);
-	}
-
-	public static java.util.List findByT_U(java.lang.String topicId,
-		long userId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_U(topicId, userId, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByT_U_First(
-		java.lang.String topicId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M(
+		long userId, long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByT_U_First(topicId, userId, obc);
+		return getPersistence().findByU_M(userId, messageId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByT_U_Last(
-		java.lang.String topicId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByT_U_Last(topicId, userId, obc);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_U_PrevAndNext(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK,
-		java.lang.String topicId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		return getPersistence().findByT_U_PrevAndNext(mbMessageFlagPK, topicId,
-			userId, obc);
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M(
+		long userId, long messageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByU_M(userId, messageId);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -350,33 +270,24 @@ public class MBMessageFlagUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByTopicId(java.lang.String topicId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByTopicId(topicId);
-	}
-
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
-	public static void removeByT_M(java.lang.String topicId,
-		java.lang.String messageId) throws com.liferay.portal.SystemException {
-		getPersistence().removeByT_M(topicId, messageId);
+	public static void removeByMessageId(long messageId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByMessageId(messageId);
 	}
 
-	public static void removeByT_U(java.lang.String topicId, long userId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByT_U(topicId, userId);
+	public static void removeByU_M(long userId, long messageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
+		getPersistence().removeByU_M(userId, messageId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
-	}
-
-	public static int countByTopicId(java.lang.String topicId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByTopicId(topicId);
 	}
 
 	public static int countByUserId(long userId)
@@ -384,14 +295,14 @@ public class MBMessageFlagUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
-	public static int countByT_M(java.lang.String topicId,
-		java.lang.String messageId) throws com.liferay.portal.SystemException {
-		return getPersistence().countByT_M(topicId, messageId);
+	public static int countByMessageId(long messageId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByMessageId(messageId);
 	}
 
-	public static int countByT_U(java.lang.String topicId, long userId)
+	public static int countByU_M(long userId, long messageId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByT_U(topicId, userId);
+		return getPersistence().countByU_M(userId, messageId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

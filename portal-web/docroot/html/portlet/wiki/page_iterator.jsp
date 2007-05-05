@@ -146,7 +146,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	WikiPage curWikiPage = (WikiPage)results.get(i);
 
-	ResultRow row = new ResultRow(curWikiPage, curWikiPage.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curWikiPage, curWikiPage.getPageId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 

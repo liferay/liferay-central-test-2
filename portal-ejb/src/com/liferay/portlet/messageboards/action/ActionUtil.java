@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -32,7 +32,6 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -64,17 +63,18 @@ public class ActionUtil {
 		// Add redundant check here because the JSP does not check permissions
 		// on the initial search container
 
-		long userId = PortalUtil.getUserId(req);
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		MBBanLocalServiceUtil.checkBan(layout.getGroupId(), userId);
+		MBBanLocalServiceUtil.checkBan(
+			themeDisplay.getPortletGroupId(), themeDisplay.getUserId());
 
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 
 		MBCategory category = null;
 
-		if (Validator.isNotNull(categoryId) &&
-			!categoryId.equals(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+		if ((categoryId > 0) &&
+			(categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = MBCategoryServiceUtil.getCategory(categoryId);
 		}
@@ -95,11 +95,11 @@ public class ActionUtil {
 	}
 
 	public static void getMessage(HttpServletRequest req) throws Exception {
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MBMessage message = null;
 
-		if (Validator.isNotNull(messageId)) {
+		if (messageId > 0) {
 			message = MBMessageServiceUtil.getMessage(messageId);
 		}
 

@@ -24,8 +24,6 @@ package com.liferay.portlet.messageboards.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
-
 import java.util.Date;
 
 /**
@@ -49,17 +47,13 @@ import java.util.Date;
  *
  */
 public interface MBMessageModel extends BaseModel {
-	public MBMessagePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(MBMessagePK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getTopicId();
+	public long getMessageId();
 
-	public void setTopicId(String topicId);
-
-	public String getMessageId();
-
-	public void setMessageId(String messageId);
+	public void setMessageId(long messageId);
 
 	public long getCompanyId();
 
@@ -81,17 +75,17 @@ public interface MBMessageModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getCategoryId();
+	public long getCategoryId();
 
-	public void setCategoryId(String categoryId);
+	public void setCategoryId(long categoryId);
 
-	public String getThreadId();
+	public long getThreadId();
 
-	public void setThreadId(String threadId);
+	public void setThreadId(long threadId);
 
-	public String getParentMessageId();
+	public long getParentMessageId();
 
-	public void setParentMessageId(String parentMessageId);
+	public void setParentMessageId(long parentMessageId);
 
 	public String getSubject();
 

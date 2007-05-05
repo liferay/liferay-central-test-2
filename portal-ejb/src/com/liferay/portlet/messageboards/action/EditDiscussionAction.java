@@ -34,7 +34,6 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -107,7 +106,7 @@ public class EditDiscussionAction extends PortletAction {
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
 
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
 			groupId, className, classPK, messageId);
@@ -118,14 +117,14 @@ public class EditDiscussionAction extends PortletAction {
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
 
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
-		String threadId = ParamUtil.getString(req, "threadId");
-		String parentMessageId = ParamUtil.getString(req, "parentMessageId");
+		long threadId = ParamUtil.getLong(req, "threadId");
+		long parentMessageId = ParamUtil.getLong(req, "parentMessageId");
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
 
-		if (Validator.isNull(messageId)) {
+		if (messageId <= 0) {
 
 			// Add message
 

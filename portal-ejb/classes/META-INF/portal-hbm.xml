@@ -791,7 +791,7 @@
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" table="MBCategory">
 		<cache usage="read-write" />
-		<id name="categoryId" type="java.lang.String">
+		<id name="categoryId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -800,34 +800,33 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="parentCategoryId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentCategoryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="lastPostDate" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl" table="MBDiscussion">
 		<cache usage="read-write" />
-		<id name="discussionId" type="java.lang.String">
+		<id name="discussionId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="threadId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="threadId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" table="MBMessage">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePK">
-			<key-property name="topicId" />
-			<key-property name="messageId" />
-		</composite-id>
+		<id name="messageId" type="long">
+			<generator class="assigned" />
+		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="categoryId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="threadId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="parentMessageId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="categoryId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="threadId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="parentMessageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="subject" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="body" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="attachments" type="com.liferay.util.dao.hibernate.BooleanType" />
@@ -835,30 +834,30 @@
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl" table="MBMessageFlag">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK">
-			<key-property name="topicId" />
-			<key-property name="messageId" />
-			<key-property name="userId" />
-		</composite-id>
-		<property name="flag" type="com.liferay.util.dao.hibernate.StringType" />
+		<id name="messageFlagId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="messageId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="flag" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl" table="MBStatsUser">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK">
-			<key-property name="groupId" />
-			<key-property name="userId" />
-		</composite-id>
+		<id name="statsUserId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="messageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lastPostDate" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBThreadImpl" table="MBThread">
 		<cache usage="read-write" />
-		<id name="threadId" type="java.lang.String">
+		<id name="threadId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="categoryId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="topicId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="rootMessageId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="categoryId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="rootMessageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="messageCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="viewCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lastPostByUserId" type="com.liferay.util.dao.hibernate.LongType" />

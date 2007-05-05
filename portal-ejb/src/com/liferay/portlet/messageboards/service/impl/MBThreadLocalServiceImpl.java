@@ -31,11 +31,9 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
@@ -61,7 +59,7 @@ import org.apache.lucene.queryParser.ParseException;
  */
 public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
-	public void deleteThread(String threadId)
+	public void deleteThread(long threadId)
 		throws PortalException, SystemException {
 
 		MBThread thread = MBThreadUtil.findByPrimaryKey(threadId);
@@ -73,8 +71,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		MBMessage rootMessage = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID,
-			thread.getRootMessageId()));
+			thread.getRootMessageId());
 
 		// Lucene
 
@@ -117,25 +114,24 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Tags
 
 			TagsAssetLocalServiceUtil.deleteAsset(
-				MBMessage.class.getName(), message.getPrimaryKey().toString());
+				MBMessage.class.getName(),
+				String.valueOf(message.getMessageId()));
 
 			// Message flags
 
-			MBMessageFlagUtil.removeByT_M(
-				message.getTopicId(), message.getMessageId());
+			MBMessageFlagUtil.removeByMessageId(message.getMessageId());
 
 			// Resources
 
 			if (!message.isDiscussion()) {
 				ResourceLocalServiceUtil.deleteResource(
 					message.getCompanyId(), MBMessage.class.getName(),
-					ResourceImpl.SCOPE_INDIVIDUAL,
-					message.getPrimaryKey().toString());
+					ResourceImpl.SCOPE_INDIVIDUAL, message.getMessageId());
 			}
 
 			// Message
 
-			MBMessageUtil.remove(message.getPrimaryKey());
+			MBMessageUtil.remove(message.getMessageId());
 		}
 
 		// Thread
@@ -143,7 +139,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBThreadUtil.remove(thread.getThreadId());
 	}
 
-	public void deleteThreads(String categoryId)
+	public void deleteThreads(long categoryId)
 		throws PortalException, SystemException {
 
 		Iterator itr = MBThreadUtil.findByCategoryId(categoryId).iterator();
@@ -193,23 +189,23 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 	}
 
-	public MBThread getThread(String threadId)
+	public MBThread getThread(long threadId)
 		throws PortalException, SystemException {
 
 		return MBThreadUtil.findByPrimaryKey(threadId);
 	}
 
-	public List getThreads(String categoryId, int begin, int end)
+	public List getThreads(long categoryId, int begin, int end)
 		throws SystemException {
 
 		return MBThreadUtil.findByCategoryId(categoryId, begin, end);
 	}
 
-	public int getThreadsCount(String categoryId) throws SystemException {
+	public int getThreadsCount(long categoryId) throws SystemException {
 		return MBThreadUtil.countByCategoryId(categoryId);
 	}
 
-	public boolean hasReadThread(long userId, String threadId)
+	public boolean hasReadThread(long userId, long threadId)
 		throws SystemException {
 
 		if (userId <= 0) {
@@ -220,7 +216,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 
 		int total = MBMessageUtil.countByThreadId(threadId);
-		int read = MBMessageFlagFinder.countByT_U(threadId, userId);
+		int read = MBMessageFlagFinder.countByU_T(userId, threadId);
 
 		if (total != read) {
 			return false;

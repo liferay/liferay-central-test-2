@@ -55,14 +55,14 @@ import java.util.Date;
 public class MBCategoryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBCategory";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "parentCategoryId", new Integer(Types.VARCHAR) },
+			{ "parentCategoryId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
@@ -70,14 +70,8 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory.categoryId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTCATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory.parentCategoryId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory.name"),
@@ -91,27 +85,20 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	public MBCategoryModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _categoryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCategoryId(pk);
 	}
 
-	public String getCategoryId() {
-		return GetterUtil.getString(_categoryId);
+	public long getCategoryId() {
+		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
-		if (((categoryId == null) && (_categoryId != null)) ||
-				((categoryId != null) && (_categoryId == null)) ||
-				((categoryId != null) && (_categoryId != null) &&
-				!categoryId.equals(_categoryId))) {
-			if (!XSS_ALLOW_CATEGORYID) {
-				categoryId = XSSUtil.strip(categoryId);
-			}
-
+	public void setCategoryId(long categoryId) {
+		if (categoryId != _categoryId) {
 			_categoryId = categoryId;
 		}
 	}
@@ -189,19 +176,12 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentCategoryId() {
-		return GetterUtil.getString(_parentCategoryId);
+	public long getParentCategoryId() {
+		return _parentCategoryId;
 	}
 
-	public void setParentCategoryId(String parentCategoryId) {
-		if (((parentCategoryId == null) && (_parentCategoryId != null)) ||
-				((parentCategoryId != null) && (_parentCategoryId == null)) ||
-				((parentCategoryId != null) && (_parentCategoryId != null) &&
-				!parentCategoryId.equals(_parentCategoryId))) {
-			if (!XSS_ALLOW_PARENTCATEGORYID) {
-				parentCategoryId = XSSUtil.strip(parentCategoryId);
-			}
-
+	public void setParentCategoryId(long parentCategoryId) {
+		if (parentCategoryId != _parentCategoryId) {
 			_parentCategoryId = parentCategoryId;
 		}
 	}
@@ -276,7 +256,16 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 
 		MBCategoryImpl mbCategory = (MBCategoryImpl)obj;
 		int value = 0;
-		value = getParentCategoryId().compareTo(mbCategory.getParentCategoryId());
+
+		if (getParentCategoryId() < mbCategory.getParentCategoryId()) {
+			value = -1;
+		}
+		else if (getParentCategoryId() > mbCategory.getParentCategoryId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -306,9 +295,9 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = mbCategory.getPrimaryKey();
+		long pk = mbCategory.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -317,17 +306,17 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _categoryId;
+	private long _categoryId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentCategoryId;
+	private long _parentCategoryId;
 	private String _name;
 	private String _description;
 	private Date _lastPostDate;

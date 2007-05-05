@@ -82,6 +82,13 @@ public class LuceneUtil {
 	}
 
 	public static void addExactTerm(
+			BooleanQuery booleanQuery, String field, long number)
+		throws ParseException {
+
+		addExactTerm(booleanQuery, field, String.valueOf(number));
+	}
+
+	public static void addExactTerm(
 			BooleanQuery booleanQuery, String field, String text)
 		throws ParseException {
 
@@ -90,6 +97,13 @@ public class LuceneUtil {
 		Query query = new TermQuery(new Term(field, text));
 
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+	}
+
+	public static void addTerm(
+			BooleanQuery booleanQuery, String field, long number)
+		throws ParseException {
+
+		addTerm(booleanQuery, field, String.valueOf(number));
 	}
 
 	public static void addTerm(

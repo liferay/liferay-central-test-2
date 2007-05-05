@@ -105,9 +105,28 @@ create table MBBan (
 	banUserId LONG
 );
 
+alter_column_type MBCategory categoryId LONG;
 alter_column_type MBCategory groupId LONG;
+alter_column_type MBCategory parentCategoryId LONG;
 
+alter_column_type MBDiscussion discussionId LONG;
+alter_column_type MBDiscussion threadId LONG;
+
+alter_column_type MBMessage messageId LONG;
+alter_column_type MBMessage categoryId LONG;
+alter_column_type MBMessage threadId LONG;
+alter_column_type MBMessage parentMessageId LONG;
+
+alter table MBMessageFlag add messageFlagId LONG;
+update MBMessageFlag set flag = '1';
+alter_column_type MBMessageFlag flag INTEGER;
+
+alter table MBStatsUser add statsUserId LONG;
 alter_column_type MBStatsUser groupId LONG;
+
+alter_column_type MBThread threadId LONG;
+alter_column_type MBThread categoryId LONG;
+alter_column_type MBThread rootMessageId LONG;
 
 alter_column_type Organization_ organizationId LONG;
 alter_column_type Organization_ parentOrganizationId LONG;

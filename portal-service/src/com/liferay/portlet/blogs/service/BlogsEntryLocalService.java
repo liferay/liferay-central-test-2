@@ -152,8 +152,8 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String[] categoryIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+		long groupId, long userId, long[] categoryIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(long userId,
 		long entryId, long categoryId, java.lang.String title,

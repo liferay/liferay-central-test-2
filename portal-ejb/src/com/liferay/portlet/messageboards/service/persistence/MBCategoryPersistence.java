@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class MBCategoryPersistence extends BasePersistence {
-	public MBCategory create(String categoryId) {
+	public MBCategory create(long categoryId) {
 		MBCategory mbCategory = new MBCategoryImpl();
 		mbCategory.setNew(true);
 		mbCategory.setPrimaryKey(categoryId);
@@ -61,7 +61,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		return mbCategory;
 	}
 
-	public MBCategory remove(String categoryId)
+	public MBCategory remove(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class MBCategoryPersistence extends BasePersistence {
 			session = openSession();
 
 			MBCategory mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
-					categoryId);
+					new Long(categoryId));
 
 			if (mbCategory == null) {
 				if (_log.isWarnEnabled()) {
@@ -148,7 +148,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public MBCategory findByPrimaryKey(String categoryId)
+	public MBCategory findByPrimaryKey(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		MBCategory mbCategory = fetchByPrimaryKey(categoryId);
 
@@ -165,14 +165,15 @@ public class MBCategoryPersistence extends BasePersistence {
 		return mbCategory;
 	}
 
-	public MBCategory fetchByPrimaryKey(String categoryId)
+	public MBCategory fetchByPrimaryKey(long categoryId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (MBCategory)session.get(MBCategoryImpl.class, categoryId);
+			return (MBCategory)session.get(MBCategoryImpl.class,
+				new Long(categoryId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -294,7 +295,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public MBCategory[] findByGroupId_PrevAndNext(String categoryId,
+	public MBCategory[] findByGroupId_PrevAndNext(long categoryId,
 		long groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		MBCategory mbCategory = findByPrimaryKey(categoryId);
@@ -455,7 +456,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public MBCategory[] findByCompanyId_PrevAndNext(String categoryId,
+	public MBCategory[] findByCompanyId_PrevAndNext(long categoryId,
 		long companyId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		MBCategory mbCategory = findByPrimaryKey(categoryId);
@@ -504,7 +505,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(long groupId, String parentCategoryId)
+	public List findByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -516,14 +517,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -534,10 +528,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			return q.list();
 		}
@@ -549,12 +540,12 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(long groupId, String parentCategoryId, int begin,
+	public List findByG_P(long groupId, long parentCategoryId, int begin,
 		int end) throws SystemException {
 		return findByG_P(groupId, parentCategoryId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, String parentCategoryId, int begin,
+	public List findByG_P(long groupId, long parentCategoryId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -566,14 +557,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -591,10 +575,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -606,7 +587,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public MBCategory findByG_P_First(long groupId, String parentCategoryId,
+	public MBCategory findByG_P_First(long groupId, long parentCategoryId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
@@ -627,7 +608,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public MBCategory findByG_P_Last(long groupId, String parentCategoryId,
+	public MBCategory findByG_P_Last(long groupId, long parentCategoryId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByG_P(groupId, parentCategoryId);
 		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
@@ -649,8 +630,8 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public MBCategory[] findByG_P_PrevAndNext(String categoryId, long groupId,
-		String parentCategoryId, OrderByComparator obc)
+	public MBCategory[] findByG_P_PrevAndNext(long categoryId, long groupId,
+		long parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		MBCategory mbCategory = findByPrimaryKey(categoryId);
 		int count = countByG_P(groupId, parentCategoryId);
@@ -664,14 +645,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -689,10 +663,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbCategory);
@@ -810,7 +781,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_P(long groupId, String parentCategoryId)
+	public void removeByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentCategoryId).iterator();
 
@@ -906,7 +877,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_P(long groupId, String parentCategoryId)
+	public int countByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -919,14 +890,7 @@ public class MBCategoryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -934,10 +898,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			Iterator itr = q.list().iterator();
 

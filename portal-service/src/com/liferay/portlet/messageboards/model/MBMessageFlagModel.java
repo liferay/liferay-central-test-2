@@ -24,8 +24,6 @@ package com.liferay.portlet.messageboards.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
-
 /**
  * <a href="MBMessageFlagModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,23 +45,23 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
  *
  */
 public interface MBMessageFlagModel extends BaseModel {
-	public MBMessageFlagPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(MBMessageFlagPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getTopicId();
+	public long getMessageFlagId();
 
-	public void setTopicId(String topicId);
-
-	public String getMessageId();
-
-	public void setMessageId(String messageId);
+	public void setMessageFlagId(long messageFlagId);
 
 	public long getUserId();
 
 	public void setUserId(long userId);
 
-	public String getFlag();
+	public long getMessageId();
 
-	public void setFlag(String flag);
+	public void setMessageId(long messageId);
+
+	public int getFlag();
+
+	public void setFlag(int flag);
 }

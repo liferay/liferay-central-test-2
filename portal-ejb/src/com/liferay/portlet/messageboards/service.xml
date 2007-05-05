@@ -45,7 +45,7 @@
 
 		<!-- PK fields -->
 
-		<column name="categoryId" type="String" primary="true" />
+		<column name="categoryId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -61,7 +61,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentCategoryId" type="String" />
+		<column name="parentCategoryId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="lastPostDate" type="Date" />
@@ -95,13 +95,13 @@
 
 		<!-- PK fields -->
 
-		<column name="discussionId" type="String" primary="true" />
+		<column name="discussionId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
-		<column name="threadId" type="String" />
+		<column name="threadId" type="long" />
 
 		<!-- Finder methods -->
 
@@ -114,8 +114,7 @@
 
 		<!-- PK fields -->
 
-		<column name="topicId" type="String" primary="true" />
-		<column name="messageId" type="String" primary="true" />
+		<column name="messageId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -127,9 +126,9 @@
 
 		<!-- Other fields -->
 
-		<column name="categoryId" type="String" />
-		<column name="threadId" type="String" />
-		<column name="parentMessageId" type="String" />
+		<column name="categoryId" type="long" />
+		<column name="threadId" type="long" />
+		<column name="parentMessageId" type="long" />
 		<column name="subject" type="String" />
 		<column name="body" type="String" />
 		<column name="attachments" type="boolean" />
@@ -170,37 +169,43 @@
 
 		<!-- PK fields -->
 
-		<column name="topicId" type="String" primary="true" />
-		<column name="messageId" type="String" primary="true" />
-		<column name="userId" type="long" primary="true" />
+		<column name="messageFlagId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
 
 		<!-- Other fields -->
 
-		<column name="flag" type="String" />
+		<column name="messageId" type="long" />
+		<column name="flag" type="int" />
 
 		<!-- Finder methods -->
 
-		<finder name="TopicId" return-type="Collection">
-			<finder-column name="topicId" />
-		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-		<finder name="T_M" return-type="Collection">
-			<finder-column name="topicId" />
+		<finder name="MessageId" return-type="Collection">
 			<finder-column name="messageId" />
 		</finder>
-		<finder name="T_U" return-type="Collection">
-			<finder-column name="topicId" />
+		<finder name="U_M" return-type="MBMessageFlag">
 			<finder-column name="userId" />
+			<finder-column name="messageId" />
 		</finder>
 	</entity>
 	<entity name="MBStatsUser" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
-		<column name="groupId" type="long" primary="true" />
-		<column name="userId" type="long" primary="true" />
+		<column name="statsUserId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
 
 		<!-- Other fields -->
 
@@ -221,6 +226,10 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
+		<finder name="G_U" return-type="MBStatsUser">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
 		<finder name="G_M" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="messageCount" comparator="!=" />
@@ -230,13 +239,12 @@
 
 		<!-- PK fields -->
 
-		<column name="threadId" type="String" primary="true" />
+		<column name="threadId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="categoryId" type="String" />
-		<column name="topicId" type="String" />
-		<column name="rootMessageId" type="String" />
+		<column name="categoryId" type="long" />
+		<column name="rootMessageId" type="long" />
 		<column name="messageCount" type="int" />
 		<column name="viewCount" type="int" />
 		<column name="lastPostByUserId" type="long" />

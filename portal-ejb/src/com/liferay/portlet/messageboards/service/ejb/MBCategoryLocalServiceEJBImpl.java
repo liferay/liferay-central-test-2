@@ -67,7 +67,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		long userId, java.lang.String plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -78,7 +78,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		long userId, java.lang.String plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -90,7 +90,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		long userId, java.lang.String plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -103,7 +103,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
-	public void addCategoryResources(java.lang.String categoryId,
+	public void addCategoryResources(long categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -120,7 +120,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addCategoryResources(java.lang.String categoryId,
+	public void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -145,7 +145,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		MBCategoryLocalServiceFactory.getTxImpl().deleteCategories(groupId);
 	}
 
-	public void deleteCategory(java.lang.String categoryId)
+	public void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalServiceFactory.getTxImpl().deleteCategory(categoryId);
@@ -158,9 +158,8 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		MBCategoryLocalServiceFactory.getTxImpl().deleteCategory(category);
 	}
 
-	public java.util.List getCategories(long groupId,
-		java.lang.String parentCategoryId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getCategories(long groupId, long parentCategoryId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategories(groupId,
 			parentCategoryId, begin, end);
 	}
@@ -170,22 +169,21 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategoriesCount(groupId);
 	}
 
-	public int getCategoriesCount(long groupId,
-		java.lang.String parentCategoryId)
+	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategoriesCount(groupId,
 			parentCategoryId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategory(categoryId);
 	}
 
 	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
-		java.lang.String categoryId) throws com.liferay.portal.SystemException {
+		long categoryId) throws com.liferay.portal.SystemException {
 		MBCategoryLocalServiceFactory.getTxImpl().getSubcategoryIds(categoryIds,
 			groupId, categoryId);
 	}
@@ -202,31 +200,29 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String[] categoryIds,
-		java.lang.String threadId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		long groupId, long[] categoryIds, long threadId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, categoryIds, threadId, keywords);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().updateCategory(categoryId,
 			parentCategoryId, name, description, mergeWithParentCategory);
 	}
 
-	public void subscribeCategory(long userId, java.lang.String categoryId)
+	public void subscribeCategory(long userId, long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalServiceFactory.getTxImpl().subscribeCategory(userId,
 			categoryId);
 	}
 
-	public void unsubscribeCategory(long userId, java.lang.String categoryId)
+	public void unsubscribeCategory(long userId, long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalServiceFactory.getTxImpl().unsubscribeCategory(userId,

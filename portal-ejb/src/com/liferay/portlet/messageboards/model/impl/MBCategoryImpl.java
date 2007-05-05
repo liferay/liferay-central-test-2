@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.util.Validator;
 
 /**
  * <a href="MBCategoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,18 +33,27 @@ import com.liferay.util.Validator;
  */
 public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 
-	public static String DEFAULT_PARENT_CATEGORY_ID = "-1";
+	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
 
 	public MBCategoryImpl() {
 	}
 
 	public boolean isRoot() {
-		return Validator.equals(
-			getParentCategoryId(), DEFAULT_PARENT_CATEGORY_ID);
+		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isDiscussion() {
-		return Validator.equals(getCategoryId(), CompanyImpl.SYSTEM_STRING);
+		if (getCategoryId() == CompanyImpl.SYSTEM) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

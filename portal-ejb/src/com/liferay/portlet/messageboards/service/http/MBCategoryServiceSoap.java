@@ -79,10 +79,9 @@ import java.rmi.RemoteException;
  */
 public class MBCategoryServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		java.lang.String plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
 					parentCategoryId, name, description,
@@ -97,9 +96,8 @@ public class MBCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		java.lang.String plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
@@ -114,7 +112,7 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws RemoteException {
 		try {
 			MBCategoryServiceUtil.deleteCategory(categoryId);
@@ -126,7 +124,7 @@ public class MBCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap getCategory(
-		java.lang.String categoryId) throws RemoteException {
+		long categoryId) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.getCategory(categoryId);
 
@@ -138,7 +136,7 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static void subscribeCategory(java.lang.String categoryId)
+	public static void subscribeCategory(long categoryId)
 		throws RemoteException {
 		try {
 			MBCategoryServiceUtil.subscribeCategory(categoryId);
@@ -149,7 +147,7 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static void unsubscribeCategory(java.lang.String categoryId)
+	public static void unsubscribeCategory(long categoryId)
 		throws RemoteException {
 		try {
 			MBCategoryServiceUtil.unsubscribeCategory(categoryId);
@@ -161,9 +159,9 @@ public class MBCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory) throws RemoteException {
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.updateCategory(categoryId,
 					parentCategoryId, name, description, mergeWithParentCategory);

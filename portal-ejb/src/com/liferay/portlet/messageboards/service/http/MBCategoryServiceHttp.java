@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -72,7 +73,7 @@ import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 public class MBCategoryServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -84,12 +85,7 @@ public class MBCategoryServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(parentCategoryId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -137,7 +133,7 @@ public class MBCategoryServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String parentCategoryId, java.lang.String name,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -149,12 +145,7 @@ public class MBCategoryServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(parentCategoryId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -211,16 +202,11 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void deleteCategory(HttpPrincipal httpPrincipal,
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"deleteCategory", new Object[] { paramObj0 });
 
@@ -246,16 +232,11 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId)
+		HttpPrincipal httpPrincipal, long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"getCategory", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -284,16 +265,11 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void subscribeCategory(HttpPrincipal httpPrincipal,
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"subscribeCategory", new Object[] { paramObj0 });
 
@@ -319,16 +295,11 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void unsubscribeCategory(HttpPrincipal httpPrincipal,
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"unsubscribeCategory", new Object[] { paramObj0 });
 
@@ -354,24 +325,14 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean mergeWithParentCategory)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentCategoryId;
-
-			if (parentCategoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj1 = new LongWrapper(parentCategoryId);
 			Object paramObj2 = name;
 
 			if (name == null) {

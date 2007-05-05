@@ -215,8 +215,8 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String[] categoryIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		long groupId, long userId, long[] categoryIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, userId, categoryIds, keywords);
 	}

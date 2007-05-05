@@ -59,10 +59,6 @@ public class UpgradeWiki extends UpgradeProcess {
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(WikiNode.class.getName());
-	}
-
 	private void _upgrade() throws Exception {
 
 		// WikiNode

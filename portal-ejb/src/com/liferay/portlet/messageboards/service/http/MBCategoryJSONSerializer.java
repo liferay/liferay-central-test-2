@@ -53,15 +53,7 @@ import java.util.List;
 public class MBCategoryJSONSerializer {
 	public static JSONObject toJSONObject(MBCategory model) {
 		JSONObject jsonObj = new JSONObject();
-		String categoryId = model.getCategoryId();
-
-		if (categoryId == null) {
-			jsonObj.put("categoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("categoryId", categoryId.toString());
-		}
-
+		jsonObj.put("categoryId", model.getCategoryId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
@@ -93,14 +85,7 @@ public class MBCategoryJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String parentCategoryId = model.getParentCategoryId();
-
-		if (parentCategoryId == null) {
-			jsonObj.put("parentCategoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentCategoryId", parentCategoryId.toString());
-		}
+		jsonObj.put("parentCategoryId", model.getParentCategoryId());
 
 		String name = model.getName();
 

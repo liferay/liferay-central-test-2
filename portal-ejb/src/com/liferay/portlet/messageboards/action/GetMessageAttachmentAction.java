@@ -60,7 +60,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String messageId = ParamUtil.getString(req, "messageId");
+			long messageId = ParamUtil.getLong(req, "messageId");
 			String fileName = ParamUtil.getString(req, "attachment");
 
 			getFile(messageId, fileName, res);
@@ -79,7 +79,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 		String fileName = ParamUtil.getString(req, "attachment");
 
 		HttpServletResponse httpRes =
@@ -89,7 +89,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 	}
 
 	protected void getFile(
-			String messageId, String fileName, HttpServletResponse res)
+			long messageId, String fileName, HttpServletResponse res)
 		throws Exception {
 
 		InputStream is = null;

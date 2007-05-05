@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portlet.messageboards.service.jms.IndexProducer;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.IOException;
@@ -47,9 +48,8 @@ import org.apache.lucene.queryParser.ParseException;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addMessage(
-			long companyId, long groupId, String userName,
-			String categoryId, String threadId, String messageId, String title,
-			String content)
+			long companyId, long groupId, String userName, long categoryId,
+			long threadId, long messageId, String title, String content)
 		throws IOException {
 
 		try {
@@ -57,7 +57,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				IndexerImpl.class.getName(), "addMessage",
 				new Object[] {
 					new LongWrapper(companyId), new LongWrapper(groupId),
-					userName, categoryId, threadId, messageId, title, content
+					userName, new LongWrapper(categoryId),
+					new LongWrapper(threadId), new LongWrapper(messageId),
+					title, content
 				});
 
 			IndexProducer.produce(methodWrapper);
@@ -72,13 +74,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteMessage(long companyId, String messageId)
+	public static void deleteMessage(long companyId, long messageId)
 		throws IOException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "deleteMessage",
-				new Object[] {new LongWrapper(companyId), messageId});
+				new Object[] {
+					new LongWrapper(companyId), new LongWrapper(messageId)
+				});
 
 			IndexProducer.produce(methodWrapper);
 		}
@@ -92,13 +96,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteMessages(long companyId, String threadId)
+	public static void deleteMessages(long companyId, long threadId)
 		throws IOException, ParseException {
 
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "deleteMessages",
-				new Object[] {new LongWrapper(companyId), threadId});
+				new Object[] {
+					new LongWrapper(companyId), new LongWrapper(threadId)
+				});
 
 			IndexProducer.produce(methodWrapper);
 		}
@@ -113,8 +119,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateMessage(
-			long companyId, long groupId, String userName, String categoryId,
-			String threadId, String messageId, String title, String content)
+			long companyId, long groupId, String userName, long categoryId,
+			long threadId, long messageId, String title, String content)
 		throws IOException {
 
 		try {
@@ -122,7 +128,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				IndexerImpl.class.getName(), "updateMessage",
 				new Object[] {
 					new LongWrapper(companyId), new LongWrapper(groupId),
-					userName, categoryId, threadId, messageId, title, content
+					userName, new LongWrapper(categoryId),
+					new LongWrapper(threadId), new LongWrapper(messageId),
+					title, content
 				});
 
 			IndexProducer.produce(methodWrapper);
@@ -152,10 +160,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// URL
 
-		String messageId = doc.get("messageId");
+		long messageId = GetterUtil.getLong(doc.get("messageId"));
 
-		portletURL.setParameter("struts_action", "/message_boards/view_message");
-		portletURL.setParameter("messageId", messageId);
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter("messageId", String.valueOf(messageId));
 
 		return new DocumentSummary(title, content, portletURL);
 	}

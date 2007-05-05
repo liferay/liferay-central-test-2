@@ -53,15 +53,15 @@ import java.util.List;
  *
  */
 public class MBMessageFlagPersistence extends BasePersistence {
-	public MBMessageFlag create(MBMessageFlagPK mbMessageFlagPK) {
+	public MBMessageFlag create(long messageFlagId) {
 		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
 		mbMessageFlag.setNew(true);
-		mbMessageFlag.setPrimaryKey(mbMessageFlagPK);
+		mbMessageFlag.setPrimaryKey(messageFlagId);
 
 		return mbMessageFlag;
 	}
 
-	public MBMessageFlag remove(MBMessageFlagPK mbMessageFlagPK)
+	public MBMessageFlag remove(long messageFlagId)
 		throws NoSuchMessageFlagException, SystemException {
 		Session session = null;
 
@@ -69,17 +69,17 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			session = openSession();
 
 			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlagImpl.class,
-					mbMessageFlagPK);
+					new Long(messageFlagId));
 
 			if (mbMessageFlag == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBMessageFlag exists with the primary key " +
-						mbMessageFlagPK);
+						messageFlagId);
 				}
 
 				throw new NoSuchMessageFlagException(
 					"No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK);
+					messageFlagId);
 			}
 
 			return remove(mbMessageFlag);
@@ -150,25 +150,25 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
+	public MBMessageFlag findByPrimaryKey(long messageFlagId)
 		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = fetchByPrimaryKey(mbMessageFlagPK);
+		MBMessageFlag mbMessageFlag = fetchByPrimaryKey(messageFlagId);
 
 		if (mbMessageFlag == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK);
+					messageFlagId);
 			}
 
 			throw new NoSuchMessageFlagException(
 				"No MBMessageFlag exists with the primary key " +
-				mbMessageFlagPK);
+				messageFlagId);
 		}
 
 		return mbMessageFlag;
 	}
 
-	public MBMessageFlag fetchByPrimaryKey(MBMessageFlagPK mbMessageFlagPK)
+	public MBMessageFlag fetchByPrimaryKey(long messageFlagId)
 		throws SystemException {
 		Session session = null;
 
@@ -176,187 +176,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			session = openSession();
 
 			return (MBMessageFlag)session.get(MBMessageFlagImpl.class,
-				mbMessageFlagPK);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByTopicId(String topicId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByTopicId(String topicId, int begin, int end)
-		throws SystemException {
-		return findByTopicId(topicId, begin, end, null);
-	}
-
-	public List findByTopicId(String topicId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessageFlag findByTopicId_First(String topicId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		List list = findByTopicId(topicId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("topicId=");
-			msg.append(topicId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag findByTopicId_Last(String topicId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		int count = countByTopicId(topicId);
-		List list = findByTopicId(topicId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("topicId=");
-			msg.append(topicId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag[] findByTopicId_PrevAndNext(
-		MBMessageFlagPK mbMessageFlagPK, String topicId, OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
-		int count = countByTopicId(topicId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlagImpl[3];
-			array[0] = (MBMessageFlag)objArray[0];
-			array[1] = (MBMessageFlag)objArray[1];
-			array[2] = (MBMessageFlag)objArray[2];
-
-			return array;
+				new Long(messageFlagId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -470,10 +290,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag[] findByUserId_PrevAndNext(
-		MBMessageFlagPK mbMessageFlagPK, long userId, OrderByComparator obc)
+	public MBMessageFlag[] findByUserId_PrevAndNext(long messageFlagId,
+		long userId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -514,8 +334,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_M(String topicId, String messageId)
-		throws SystemException {
+	public List findByMessageId(long messageId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -524,37 +343,14 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (messageId == null) {
-				query.append("messageId IS NULL");
-			}
-			else {
-				query.append("messageId = ?");
-			}
-
+			query.append("messageId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			if (messageId != null) {
-				q.setString(queryPos++, messageId);
-			}
+			q.setLong(queryPos++, messageId);
 
 			return q.list();
 		}
@@ -566,12 +362,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_M(String topicId, String messageId, int begin, int end)
+	public List findByMessageId(long messageId, int begin, int end)
 		throws SystemException {
-		return findByT_M(topicId, messageId, begin, end, null);
+		return findByMessageId(messageId, begin, end, null);
 	}
 
-	public List findByT_M(String topicId, String messageId, int begin, int end,
+	public List findByMessageId(long messageId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -581,23 +377,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (messageId == null) {
-				query.append("messageId IS NULL");
-			}
-			else {
-				query.append("messageId = ?");
-			}
-
+			query.append("messageId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -609,14 +389,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			if (messageId != null) {
-				q.setString(queryPos++, messageId);
-			}
+			q.setLong(queryPos++, messageId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -628,18 +401,15 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByT_M_First(String topicId, String messageId,
+	public MBMessageFlag findByMessageId_First(long messageId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		List list = findByT_M(topicId, messageId, 0, 1, obc);
+		List list = findByMessageId(messageId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No MBMessageFlag exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("topicId=");
-			msg.append(topicId);
-			msg.append(", ");
 			msg.append("messageId=");
 			msg.append(messageId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -650,19 +420,16 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag findByT_M_Last(String topicId, String messageId,
+	public MBMessageFlag findByMessageId_Last(long messageId,
 		OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		int count = countByT_M(topicId, messageId);
-		List list = findByT_M(topicId, messageId, count - 1, count, obc);
+		int count = countByMessageId(messageId);
+		List list = findByMessageId(messageId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No MBMessageFlag exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("topicId=");
-			msg.append(topicId);
-			msg.append(", ");
 			msg.append("messageId=");
 			msg.append(messageId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -673,12 +440,11 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public MBMessageFlag[] findByT_M_PrevAndNext(
-		MBMessageFlagPK mbMessageFlagPK, String topicId, String messageId,
-		OrderByComparator obc)
+	public MBMessageFlag[] findByMessageId_PrevAndNext(long messageFlagId,
+		long messageId, OrderByComparator obc)
 		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
-		int count = countByT_M(topicId, messageId);
+		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
+		int count = countByMessageId(messageId);
 		Session session = null;
 
 		try {
@@ -687,23 +453,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (messageId == null) {
-				query.append("messageId IS NULL");
-			}
-			else {
-				query.append("messageId = ?");
-			}
-
+			query.append("messageId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -715,14 +465,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			if (messageId != null) {
-				q.setString(queryPos++, messageId);
-			}
+			q.setLong(queryPos++, messageId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
@@ -741,7 +484,32 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByT_U(String topicId, long userId)
+	public MBMessageFlag findByU_M(long userId, long messageId)
+		throws NoSuchMessageFlagException, SystemException {
+		MBMessageFlag mbMessageFlag = fetchByU_M(userId, messageId);
+
+		if (mbMessageFlag == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("messageId=");
+			msg.append(messageId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchMessageFlagException(msg.toString());
+		}
+
+		return mbMessageFlag;
+	}
+
+	public MBMessageFlag fetchByU_M(long userId, long messageId)
 		throws SystemException {
 		Session session = null;
 
@@ -751,187 +519,27 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
 			query.append("userId = ?");
+			query.append(" AND ");
+			query.append("messageId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
 			q.setLong(queryPos++, userId);
+			q.setLong(queryPos++, messageId);
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+			List list = q.list();
 
-	public List findByT_U(String topicId, long userId, int begin, int end)
-		throws SystemException {
-		return findByT_U(topicId, userId, begin, end, null);
-	}
-
-	public List findByT_U(String topicId, long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
+			if (list.size() == 0) {
+				return null;
 			}
 
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)list.get(0);
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			q.setLong(queryPos++, userId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessageFlag findByT_U_First(String topicId, long userId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		List list = findByT_U(topicId, userId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("topicId=");
-			msg.append(topicId);
-			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag findByT_U_Last(String topicId, long userId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		int count = countByT_U(topicId, userId);
-		List list = findByT_U(topicId, userId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("topicId=");
-			msg.append(topicId);
-			msg.append(", ");
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag[] findByT_U_PrevAndNext(
-		MBMessageFlagPK mbMessageFlagPK, String topicId, long userId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByPrimaryKey(mbMessageFlagPK);
-		int count = countByT_U(topicId, userId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			q.setLong(queryPos++, userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlagImpl[3];
-			array[0] = (MBMessageFlag)objArray[0];
-			array[1] = (MBMessageFlag)objArray[1];
-			array[2] = (MBMessageFlag)objArray[2];
-
-			return array;
+			return mbMessageFlag;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -1017,15 +625,6 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByTopicId(String topicId) throws SystemException {
-		Iterator itr = findByTopicId(topicId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-			remove(mbMessageFlag);
-		}
-	}
-
 	public void removeByUserId(long userId) throws SystemException {
 		Iterator itr = findByUserId(userId).iterator();
 
@@ -1035,9 +634,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByT_M(String topicId, String messageId)
-		throws SystemException {
-		Iterator itr = findByT_M(topicId, messageId).iterator();
+	public void removeByMessageId(long messageId) throws SystemException {
+		Iterator itr = findByMessageId(messageId).iterator();
 
 		while (itr.hasNext()) {
 			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
@@ -1045,14 +643,10 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByT_U(String topicId, long userId)
-		throws SystemException {
-		Iterator itr = findByT_U(topicId, userId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-			remove(mbMessageFlag);
-		}
+	public void removeByU_M(long userId, long messageId)
+		throws NoSuchMessageFlagException, SystemException {
+		MBMessageFlag mbMessageFlag = findByU_M(userId, messageId);
+		remove(mbMessageFlag);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1060,55 +654,6 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 		while (itr.hasNext()) {
 			remove((MBMessageFlag)itr.next());
-		}
-	}
-
-	public int countByTopicId(String topicId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
 		}
 	}
 
@@ -1151,8 +696,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByT_M(String topicId, String messageId)
-		throws SystemException {
+	public int countByMessageId(long messageId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1162,37 +706,14 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (messageId == null) {
-				query.append("messageId IS NULL");
-			}
-			else {
-				query.append("messageId = ?");
-			}
-
+			query.append("messageId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
-			if (messageId != null) {
-				q.setString(queryPos++, messageId);
-			}
+			q.setLong(queryPos++, messageId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1214,7 +735,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByT_U(String topicId, long userId)
+	public int countByU_M(long userId, long messageId)
 		throws SystemException {
 		Session session = null;
 
@@ -1225,28 +746,17 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-			if (topicId == null) {
-				query.append("topicId IS NULL");
-			}
-			else {
-				query.append("topicId = ?");
-			}
-
-			query.append(" AND ");
 			query.append("userId = ?");
+			query.append(" AND ");
+			query.append("messageId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (topicId != null) {
-				q.setString(queryPos++, topicId);
-			}
-
 			q.setLong(queryPos++, userId);
+			q.setLong(queryPos++, messageId);
 
 			Iterator itr = q.list().iterator();
 

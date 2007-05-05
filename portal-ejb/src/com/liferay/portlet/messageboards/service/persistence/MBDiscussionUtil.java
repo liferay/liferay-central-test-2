@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBDiscussionUtil {
 	public static com.liferay.portlet.messageboards.model.MBDiscussion create(
-		java.lang.String discussionId) {
+		long discussionId) {
 		return getPersistence().create(discussionId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion remove(
-		java.lang.String discussionId)
+		long discussionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		ModelListener listener = _getListener();
@@ -140,15 +140,14 @@ public class MBDiscussionUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
-		java.lang.String discussionId)
+		long discussionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		return getPersistence().findByPrimaryKey(discussionId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByPrimaryKey(
-		java.lang.String discussionId)
-		throws com.liferay.portal.SystemException {
+		long discussionId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(discussionId);
 	}
 

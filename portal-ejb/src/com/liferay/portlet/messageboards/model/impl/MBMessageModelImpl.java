@@ -25,8 +25,6 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
-
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
@@ -58,16 +56,15 @@ import java.util.Date;
 public class MBMessageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBMessage";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "topicId", new Integer(Types.VARCHAR) },
-			{ "messageId", new Integer(Types.VARCHAR) },
+			{ "messageId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "categoryId", new Integer(Types.VARCHAR) },
-			{ "threadId", new Integer(Types.VARCHAR) },
-			{ "parentMessageId", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.BIGINT) },
+			{ "threadId", new Integer(Types.BIGINT) },
+			{ "parentMessageId", new Integer(Types.BIGINT) },
 			{ "subject", new Integer(Types.VARCHAR) },
 			{ "body", new Integer(Types.CLOB) },
 			{ "attachments", new Integer(Types.BOOLEAN) },
@@ -76,23 +73,8 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_TOPICID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.topicId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.messageId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.categoryId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.threadId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTMESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.parentMessageId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_SUBJECT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.subject"),
@@ -106,45 +88,20 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	public MBMessageModelImpl() {
 	}
 
-	public MBMessagePK getPrimaryKey() {
-		return new MBMessagePK(_topicId, _messageId);
+	public long getPrimaryKey() {
+		return _messageId;
 	}
 
-	public void setPrimaryKey(MBMessagePK pk) {
-		setTopicId(pk.topicId);
-		setMessageId(pk.messageId);
+	public void setPrimaryKey(long pk) {
+		setMessageId(pk);
 	}
 
-	public String getTopicId() {
-		return GetterUtil.getString(_topicId);
+	public long getMessageId() {
+		return _messageId;
 	}
 
-	public void setTopicId(String topicId) {
-		if (((topicId == null) && (_topicId != null)) ||
-				((topicId != null) && (_topicId == null)) ||
-				((topicId != null) && (_topicId != null) &&
-				!topicId.equals(_topicId))) {
-			if (!XSS_ALLOW_TOPICID) {
-				topicId = XSSUtil.strip(topicId);
-			}
-
-			_topicId = topicId;
-		}
-	}
-
-	public String getMessageId() {
-		return GetterUtil.getString(_messageId);
-	}
-
-	public void setMessageId(String messageId) {
-		if (((messageId == null) && (_messageId != null)) ||
-				((messageId != null) && (_messageId == null)) ||
-				((messageId != null) && (_messageId != null) &&
-				!messageId.equals(_messageId))) {
-			if (!XSS_ALLOW_MESSAGEID) {
-				messageId = XSSUtil.strip(messageId);
-			}
-
+	public void setMessageId(long messageId) {
+		if (messageId != _messageId) {
 			_messageId = messageId;
 		}
 	}
@@ -212,53 +169,32 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCategoryId() {
-		return GetterUtil.getString(_categoryId);
+	public long getCategoryId() {
+		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
-		if (((categoryId == null) && (_categoryId != null)) ||
-				((categoryId != null) && (_categoryId == null)) ||
-				((categoryId != null) && (_categoryId != null) &&
-				!categoryId.equals(_categoryId))) {
-			if (!XSS_ALLOW_CATEGORYID) {
-				categoryId = XSSUtil.strip(categoryId);
-			}
-
+	public void setCategoryId(long categoryId) {
+		if (categoryId != _categoryId) {
 			_categoryId = categoryId;
 		}
 	}
 
-	public String getThreadId() {
-		return GetterUtil.getString(_threadId);
+	public long getThreadId() {
+		return _threadId;
 	}
 
-	public void setThreadId(String threadId) {
-		if (((threadId == null) && (_threadId != null)) ||
-				((threadId != null) && (_threadId == null)) ||
-				((threadId != null) && (_threadId != null) &&
-				!threadId.equals(_threadId))) {
-			if (!XSS_ALLOW_THREADID) {
-				threadId = XSSUtil.strip(threadId);
-			}
-
+	public void setThreadId(long threadId) {
+		if (threadId != _threadId) {
 			_threadId = threadId;
 		}
 	}
 
-	public String getParentMessageId() {
-		return GetterUtil.getString(_parentMessageId);
+	public long getParentMessageId() {
+		return _parentMessageId;
 	}
 
-	public void setParentMessageId(String parentMessageId) {
-		if (((parentMessageId == null) && (_parentMessageId != null)) ||
-				((parentMessageId != null) && (_parentMessageId == null)) ||
-				((parentMessageId != null) && (_parentMessageId != null) &&
-				!parentMessageId.equals(_parentMessageId))) {
-			if (!XSS_ALLOW_PARENTMESSAGEID) {
-				parentMessageId = XSSUtil.strip(parentMessageId);
-			}
-
+	public void setParentMessageId(long parentMessageId) {
+		if (parentMessageId != _parentMessageId) {
 			_parentMessageId = parentMessageId;
 		}
 	}
@@ -326,7 +262,6 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBMessageImpl clone = new MBMessageImpl();
-		clone.setTopicId(getTopicId());
 		clone.setMessageId(getMessageId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -357,7 +292,15 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getMessageId().compareTo(mbMessage.getMessageId());
+		if (getMessageId() < mbMessage.getMessageId()) {
+			value = -1;
+		}
+		else if (getMessageId() > mbMessage.getMessageId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -380,9 +323,9 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBMessagePK pk = mbMessage.getPrimaryKey();
+		long pk = mbMessage.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -391,19 +334,18 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _topicId;
-	private String _messageId;
+	private long _messageId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _categoryId;
-	private String _threadId;
-	private String _parentMessageId;
+	private long _categoryId;
+	private long _threadId;
+	private long _parentMessageId;
 	private String _subject;
 	private String _body;
 	private boolean _attachments;

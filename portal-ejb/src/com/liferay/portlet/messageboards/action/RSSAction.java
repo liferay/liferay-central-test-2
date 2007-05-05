@@ -31,7 +31,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -77,8 +76,8 @@ public class RSSAction extends Action {
 		Company company = themeDisplay.getCompany();
 
 		String plid = ParamUtil.getString(req, "p_l_id");
-		String categoryId = ParamUtil.getString(req, "categoryId");
-		String threadId = ParamUtil.getString(req, "threadId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
+		long threadId = ParamUtil.getLong(req, "threadId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
@@ -91,7 +90,7 @@ public class RSSAction extends Action {
 
 		String rss = StringPool.BLANK;
 
-		if (Validator.isNotNull(categoryId)) {
+		if ((categoryId > 0)) {
 			String feedURL =
 				Http.getProtocol(req) + "://" + company.getPortalURL() +
 					themeDisplay.getPathMain() +

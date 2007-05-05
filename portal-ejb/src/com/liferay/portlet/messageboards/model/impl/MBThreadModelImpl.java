@@ -27,7 +27,6 @@ import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -56,10 +55,9 @@ import java.util.Date;
 public class MBThreadModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBThread";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "threadId", new Integer(Types.VARCHAR) },
-			{ "categoryId", new Integer(Types.VARCHAR) },
-			{ "topicId", new Integer(Types.VARCHAR) },
-			{ "rootMessageId", new Integer(Types.VARCHAR) },
+			{ "threadId", new Integer(Types.BIGINT) },
+			{ "categoryId", new Integer(Types.BIGINT) },
+			{ "rootMessageId", new Integer(Types.BIGINT) },
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "viewCount", new Integer(Types.INTEGER) },
 			{ "lastPostByUserId", new Integer(Types.BIGINT) },
@@ -69,96 +67,46 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_THREADID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.threadId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.categoryId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TOPICID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.topicId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ROOTMESSAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread.rootMessageId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThreadModel"));
 
 	public MBThreadModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _threadId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setThreadId(pk);
 	}
 
-	public String getThreadId() {
-		return GetterUtil.getString(_threadId);
+	public long getThreadId() {
+		return _threadId;
 	}
 
-	public void setThreadId(String threadId) {
-		if (((threadId == null) && (_threadId != null)) ||
-				((threadId != null) && (_threadId == null)) ||
-				((threadId != null) && (_threadId != null) &&
-				!threadId.equals(_threadId))) {
-			if (!XSS_ALLOW_THREADID) {
-				threadId = XSSUtil.strip(threadId);
-			}
-
+	public void setThreadId(long threadId) {
+		if (threadId != _threadId) {
 			_threadId = threadId;
 		}
 	}
 
-	public String getCategoryId() {
-		return GetterUtil.getString(_categoryId);
+	public long getCategoryId() {
+		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
-		if (((categoryId == null) && (_categoryId != null)) ||
-				((categoryId != null) && (_categoryId == null)) ||
-				((categoryId != null) && (_categoryId != null) &&
-				!categoryId.equals(_categoryId))) {
-			if (!XSS_ALLOW_CATEGORYID) {
-				categoryId = XSSUtil.strip(categoryId);
-			}
-
+	public void setCategoryId(long categoryId) {
+		if (categoryId != _categoryId) {
 			_categoryId = categoryId;
 		}
 	}
 
-	public String getTopicId() {
-		return GetterUtil.getString(_topicId);
+	public long getRootMessageId() {
+		return _rootMessageId;
 	}
 
-	public void setTopicId(String topicId) {
-		if (((topicId == null) && (_topicId != null)) ||
-				((topicId != null) && (_topicId == null)) ||
-				((topicId != null) && (_topicId != null) &&
-				!topicId.equals(_topicId))) {
-			if (!XSS_ALLOW_TOPICID) {
-				topicId = XSSUtil.strip(topicId);
-			}
-
-			_topicId = topicId;
-		}
-	}
-
-	public String getRootMessageId() {
-		return GetterUtil.getString(_rootMessageId);
-	}
-
-	public void setRootMessageId(String rootMessageId) {
-		if (((rootMessageId == null) && (_rootMessageId != null)) ||
-				((rootMessageId != null) && (_rootMessageId == null)) ||
-				((rootMessageId != null) && (_rootMessageId != null) &&
-				!rootMessageId.equals(_rootMessageId))) {
-			if (!XSS_ALLOW_ROOTMESSAGEID) {
-				rootMessageId = XSSUtil.strip(rootMessageId);
-			}
-
+	public void setRootMessageId(long rootMessageId) {
+		if (rootMessageId != _rootMessageId) {
 			_rootMessageId = rootMessageId;
 		}
 	}
@@ -220,7 +168,6 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		MBThreadImpl clone = new MBThreadImpl();
 		clone.setThreadId(getThreadId());
 		clone.setCategoryId(getCategoryId());
-		clone.setTopicId(getTopicId());
 		clone.setRootMessageId(getRootMessageId());
 		clone.setMessageCount(getMessageCount());
 		clone.setViewCount(getViewCount());
@@ -279,9 +226,9 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = mbThread.getPrimaryKey();
+		long pk = mbThread.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -290,13 +237,12 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _threadId;
-	private String _categoryId;
-	private String _topicId;
-	private String _rootMessageId;
+	private long _threadId;
+	private long _categoryId;
+	private long _rootMessageId;
 	private int _messageCount;
 	private int _viewCount;
 	private long _lastPostByUserId;

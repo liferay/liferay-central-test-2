@@ -66,7 +66,7 @@ if (treeWalker.isOdd()) {
 		boolean readFlag = true;
 
 		if (themeDisplay.isSignedIn()) {
-			readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), themeDisplay.getUserId());
+			readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(themeDisplay.getUserId(), message.getMessageId());
 		}
 		%>
 

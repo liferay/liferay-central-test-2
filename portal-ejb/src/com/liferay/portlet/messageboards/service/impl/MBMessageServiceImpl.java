@@ -51,8 +51,8 @@ public class MBMessageServiceImpl
 	extends PrincipalBean implements MBMessageService {
 
 	public MBMessage addDiscussionMessage(
-			long groupId, String className, String classPK, String threadId,
-			String parentMessageId, String subject, String body)
+			long groupId, String className, String classPK, long threadId,
+			long parentMessageId, String subject, String body)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
@@ -64,7 +64,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String subject, String body, List files,
+			long categoryId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -91,7 +91,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String subject, String body, List files,
+			long categoryId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			PortletPreferences prefs, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -119,7 +119,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String threadId, String parentMessageId,
+			long categoryId, long threadId, long parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			double priority, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -148,7 +148,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String threadId, String parentMessageId,
+			long categoryId, long threadId, long parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			double priority, String[] tagsEntries, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -177,7 +177,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String subject, String body, List files,
+			long categoryId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -204,7 +204,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String subject, String body, List files,
+			long categoryId, String subject, String body, List files,
 			boolean anonymous, double priority, String[] tagsEntries,
 			PortletPreferences prefs, String[] communityPermissions,
 			String[] guestPermissions)
@@ -232,7 +232,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String threadId, String parentMessageId,
+			long categoryId, long threadId, long parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			double priority, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
@@ -261,7 +261,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage addMessage(
-			String categoryId, String threadId, String parentMessageId,
+			long categoryId, long threadId, long parentMessageId,
 			String subject, String body, List files, boolean anonymous,
 			double priority, String[] tagsEntries, PortletPreferences prefs,
 			String[] communityPermissions, String[] guestPermissions)
@@ -290,7 +290,7 @@ public class MBMessageServiceImpl
 	}
 
 	public void deleteDiscussionMessage(
-			long groupId, String className, String classPK, String messageId)
+			long groupId, String className, String classPK, long messageId)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
@@ -300,7 +300,7 @@ public class MBMessageServiceImpl
 		MBMessageLocalServiceUtil.deleteDiscussionMessage(messageId);
 	}
 
-	public void deleteMessage(String messageId)
+	public void deleteMessage(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
@@ -309,7 +309,7 @@ public class MBMessageServiceImpl
 		MBMessageLocalServiceUtil.deleteMessage(messageId);
 	}
 
-	public MBMessage getMessage(String messageId)
+	public MBMessage getMessage(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
@@ -318,16 +318,16 @@ public class MBMessageServiceImpl
 		return MBMessageLocalServiceUtil.getMessage(messageId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(String messageId, long userId)
+	public MBMessageDisplay getMessageDisplay(long userId, long messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return MBMessageLocalServiceUtil.getMessageDisplay(messageId, userId);
+		return MBMessageLocalServiceUtil.getMessageDisplay(userId, messageId);
 	}
 
-	public void subscribeMessage(String messageId)
+	public void subscribeMessage(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
@@ -336,7 +336,7 @@ public class MBMessageServiceImpl
 		MBMessageLocalServiceUtil.subscribeMessage(getUserId(), messageId);
 	}
 
-	public void unsubscribeMessage(String messageId)
+	public void unsubscribeMessage(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
@@ -346,7 +346,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage updateDiscussionMessage(
-			long groupId, String className, String classPK, String messageId,
+			long groupId, String className, String classPK, long messageId,
 			String subject, String body)
 		throws PortalException, SystemException {
 
@@ -359,7 +359,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage updateMessage(
-			String messageId, String categoryId, String subject, String body,
+			long messageId, long categoryId, String subject, String body,
 			List files, double priority, String[] tagsEntries)
 		throws PortalException, SystemException {
 
@@ -390,7 +390,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage updateMessage(
-			String messageId, String categoryId, String subject, String body,
+			long messageId, long categoryId, String subject, String body,
 			List files, double priority, String[] tagsEntries,
 			PortletPreferences prefs)
 		throws PortalException, SystemException {

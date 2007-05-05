@@ -77,19 +77,19 @@ public class MBCategorySoap implements Serializable {
 	public MBCategorySoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _categoryId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCategoryId(pk);
 	}
 
-	public String getCategoryId() {
+	public long getCategoryId() {
 		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
@@ -141,11 +141,11 @@ public class MBCategorySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getParentCategoryId() {
+	public long getParentCategoryId() {
 		return _parentCategoryId;
 	}
 
-	public void setParentCategoryId(String parentCategoryId) {
+	public void setParentCategoryId(long parentCategoryId) {
 		_parentCategoryId = parentCategoryId;
 	}
 
@@ -173,14 +173,14 @@ public class MBCategorySoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
-	private String _categoryId;
+	private long _categoryId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _parentCategoryId;
+	private long _parentCategoryId;
 	private String _name;
 	private String _description;
 	private Date _lastPostDate;

@@ -22,13 +22,12 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 
 import java.util.Iterator;
@@ -44,7 +43,7 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
-	public void addReadFlags(List messages, long userId)
+	public void addReadFlags(long userId, List messages)
 		throws SystemException {
 
 		if (userId > 0) {
@@ -53,14 +52,13 @@ public class MBMessageFlagLocalServiceImpl
 			while (itr.hasNext()) {
 				MBMessage message = (MBMessage)itr.next();
 
-				MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
-					message.getTopicId(), message.getMessageId(), userId);
-
-				MBMessageFlag messageFlag =
-					MBMessageFlagUtil.fetchByPrimaryKey(messageFlagPK);
+				MBMessageFlag messageFlag = MBMessageFlagUtil.fetchByU_M(
+					userId, message.getMessageId());
 
 				if (messageFlag == null) {
-					messageFlag = MBMessageFlagUtil.create(messageFlagPK);
+					long messageFlagId = CounterLocalServiceUtil.increment();
+
+					messageFlag = MBMessageFlagUtil.create(messageFlagId);
 
 					messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
 
@@ -74,7 +72,7 @@ public class MBMessageFlagLocalServiceImpl
 		MBMessageFlagUtil.removeByUserId(userId);
 	}
 
-	public boolean hasReadFlag(String messageId, long userId)
+	public boolean hasReadFlag(long userId, long messageId)
 		throws SystemException {
 
 		if (userId > 0) {
@@ -84,11 +82,8 @@ public class MBMessageFlagLocalServiceImpl
 			return true;
 		}
 
-		MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
-			MBMessageImpl.DEPRECATED_TOPIC_ID, messageId, userId);
-
-		MBMessageFlag messageFlag =
-			MBMessageFlagUtil.fetchByPrimaryKey(messageFlagPK);
+		MBMessageFlag messageFlag = MBMessageFlagUtil.fetchByU_M(
+			userId, messageId);
 
 		if (messageFlag != null) {
 			return true;

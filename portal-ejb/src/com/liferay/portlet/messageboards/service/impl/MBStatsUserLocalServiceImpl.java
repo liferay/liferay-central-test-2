@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
 
 import java.util.Date;
@@ -55,14 +55,15 @@ public class MBStatsUserLocalServiceImpl
 	public MBStatsUser getStatsUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
-
-		MBStatsUser statsUser = null;
-
-		statsUser = MBStatsUserUtil.fetchByPrimaryKey(statsUserPK);
+		MBStatsUser statsUser = MBStatsUserUtil.fetchByG_U(groupId, userId);
 
 		if (statsUser == null) {
-			statsUser = MBStatsUserUtil.create(statsUserPK);
+			long statsUserId = CounterLocalServiceUtil.increment();
+
+			statsUser = MBStatsUserUtil.create(statsUserId);
+
+			statsUser.setGroupId(groupId);
+			statsUser.setUserId(userId);
 
 			MBStatsUserUtil.update(statsUser);
 		}
@@ -90,16 +91,19 @@ public class MBStatsUserLocalServiceImpl
 	protected void update(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
-
-		MBStatsUser statsUser = MBStatsUserUtil.fetchByPrimaryKey(statsUserPK);
+		MBStatsUser statsUser = MBStatsUserUtil.fetchByG_U(groupId, userId);
 
 		if (statsUser == null) {
-			statsUser = MBStatsUserUtil.create(statsUserPK);
+			long statsUserId = CounterLocalServiceUtil.increment();
+
+			statsUser = MBStatsUserUtil.create(statsUserId);
+
+			statsUser.setGroupId(groupId);
+			statsUser.setUserId(userId);
 		}
 
-		statsUser.setLastPostDate(new Date());
 		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
+		statsUser.setLastPostDate(new Date());
 
 		MBStatsUserUtil.update(statsUser);
 	}

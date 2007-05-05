@@ -24,7 +24,7 @@
 				(MBCategory.groupId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByT_U">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -32,11 +32,10 @@
 				MBMessageFlag
 			INNER JOIN
 				MBMessage ON
-					(MBMessage.topicId = MBMessageFlag.topicId) AND
 					(MBMessage.messageId = MBMessageFlag.messageId)
 			WHERE
-				(MBMessage.threadId = ?) AND
-				(MBMessageFlag.userId = ?)
+				(MBMessageFlag.userId = ?) AND
+				(MBMessage.threadId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByGroupId">

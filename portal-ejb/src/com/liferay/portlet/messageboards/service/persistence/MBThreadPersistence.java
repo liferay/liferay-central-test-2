@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class MBThreadPersistence extends BasePersistence {
-	public MBThread create(String threadId) {
+	public MBThread create(long threadId) {
 		MBThread mbThread = new MBThreadImpl();
 		mbThread.setNew(true);
 		mbThread.setPrimaryKey(threadId);
@@ -61,7 +61,7 @@ public class MBThreadPersistence extends BasePersistence {
 		return mbThread;
 	}
 
-	public MBThread remove(String threadId)
+	public MBThread remove(long threadId)
 		throws NoSuchThreadException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class MBThreadPersistence extends BasePersistence {
 			session = openSession();
 
 			MBThread mbThread = (MBThread)session.get(MBThreadImpl.class,
-					threadId);
+					new Long(threadId));
 
 			if (mbThread == null) {
 				if (_log.isWarnEnabled()) {
@@ -148,7 +148,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public MBThread findByPrimaryKey(String threadId)
+	public MBThread findByPrimaryKey(long threadId)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = fetchByPrimaryKey(threadId);
 
@@ -165,14 +165,13 @@ public class MBThreadPersistence extends BasePersistence {
 		return mbThread;
 	}
 
-	public MBThread fetchByPrimaryKey(String threadId)
-		throws SystemException {
+	public MBThread fetchByPrimaryKey(long threadId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (MBThread)session.get(MBThreadImpl.class, threadId);
+			return (MBThread)session.get(MBThreadImpl.class, new Long(threadId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -182,7 +181,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCategoryId(String categoryId) throws SystemException {
+	public List findByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -191,14 +190,7 @@ public class MBThreadPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("priority DESC").append(", ");
@@ -208,10 +200,7 @@ public class MBThreadPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return q.list();
 		}
@@ -223,12 +212,12 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end)
+	public List findByCategoryId(long categoryId, int begin, int end)
 		throws SystemException {
 		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end,
+	public List findByCategoryId(long categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -238,14 +227,7 @@ public class MBThreadPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -262,10 +244,7 @@ public class MBThreadPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -277,7 +256,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public MBThread findByCategoryId_First(String categoryId,
+	public MBThread findByCategoryId_First(long categoryId,
 		OrderByComparator obc) throws NoSuchThreadException, SystemException {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
@@ -295,8 +274,8 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public MBThread findByCategoryId_Last(String categoryId,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+	public MBThread findByCategoryId_Last(long categoryId, OrderByComparator obc)
+		throws NoSuchThreadException, SystemException {
 		int count = countByCategoryId(categoryId);
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
@@ -314,8 +293,8 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public MBThread[] findByCategoryId_PrevAndNext(String threadId,
-		String categoryId, OrderByComparator obc)
+	public MBThread[] findByCategoryId_PrevAndNext(long threadId,
+		long categoryId, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 		int count = countByCategoryId(categoryId);
@@ -327,14 +306,7 @@ public class MBThreadPersistence extends BasePersistence {
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -351,10 +323,7 @@ public class MBThreadPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
 			MBThread[] array = new MBThreadImpl[3];
@@ -453,7 +422,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByCategoryId(String categoryId) throws SystemException {
+	public void removeByCategoryId(long categoryId) throws SystemException {
 		Iterator itr = findByCategoryId(categoryId).iterator();
 
 		while (itr.hasNext()) {
@@ -470,7 +439,7 @@ public class MBThreadPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByCategoryId(String categoryId) throws SystemException {
+	public int countByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -480,24 +449,14 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Iterator itr = q.list().iterator();
 

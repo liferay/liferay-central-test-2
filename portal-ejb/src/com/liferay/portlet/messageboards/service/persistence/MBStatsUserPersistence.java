@@ -53,15 +53,15 @@ import java.util.List;
  *
  */
 public class MBStatsUserPersistence extends BasePersistence {
-	public MBStatsUser create(MBStatsUserPK mbStatsUserPK) {
+	public MBStatsUser create(long statsUserId) {
 		MBStatsUser mbStatsUser = new MBStatsUserImpl();
 		mbStatsUser.setNew(true);
-		mbStatsUser.setPrimaryKey(mbStatsUserPK);
+		mbStatsUser.setPrimaryKey(statsUserId);
 
 		return mbStatsUser;
 	}
 
-	public MBStatsUser remove(MBStatsUserPK mbStatsUserPK)
+	public MBStatsUser remove(long statsUserId)
 		throws NoSuchStatsUserException, SystemException {
 		Session session = null;
 
@@ -69,17 +69,17 @@ public class MBStatsUserPersistence extends BasePersistence {
 			session = openSession();
 
 			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUserImpl.class,
-					mbStatsUserPK);
+					new Long(statsUserId));
 
 			if (mbStatsUser == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBStatsUser exists with the primary key " +
-						mbStatsUserPK);
+						statsUserId);
 				}
 
 				throw new NoSuchStatsUserException(
 					"No MBStatsUser exists with the primary key " +
-					mbStatsUserPK);
+					statsUserId);
 			}
 
 			return remove(mbStatsUser);
@@ -150,31 +150,32 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public MBStatsUser findByPrimaryKey(MBStatsUserPK mbStatsUserPK)
+	public MBStatsUser findByPrimaryKey(long statsUserId)
 		throws NoSuchStatsUserException, SystemException {
-		MBStatsUser mbStatsUser = fetchByPrimaryKey(mbStatsUserPK);
+		MBStatsUser mbStatsUser = fetchByPrimaryKey(statsUserId);
 
 		if (mbStatsUser == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBStatsUser exists with the primary key " +
-					mbStatsUserPK);
+					statsUserId);
 			}
 
 			throw new NoSuchStatsUserException(
-				"No MBStatsUser exists with the primary key " + mbStatsUserPK);
+				"No MBStatsUser exists with the primary key " + statsUserId);
 		}
 
 		return mbStatsUser;
 	}
 
-	public MBStatsUser fetchByPrimaryKey(MBStatsUserPK mbStatsUserPK)
+	public MBStatsUser fetchByPrimaryKey(long statsUserId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (MBStatsUser)session.get(MBStatsUserImpl.class, mbStatsUserPK);
+			return (MBStatsUser)session.get(MBStatsUserImpl.class,
+				new Long(statsUserId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -294,10 +295,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public MBStatsUser[] findByGroupId_PrevAndNext(
-		MBStatsUserPK mbStatsUserPK, long groupId, OrderByComparator obc)
+	public MBStatsUser[] findByGroupId_PrevAndNext(long statsUserId,
+		long groupId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
+		MBStatsUser mbStatsUser = findByPrimaryKey(statsUserId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -452,10 +453,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public MBStatsUser[] findByUserId_PrevAndNext(MBStatsUserPK mbStatsUserPK,
+	public MBStatsUser[] findByUserId_PrevAndNext(long statsUserId,
 		long userId, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
+		MBStatsUser mbStatsUser = findByPrimaryKey(statsUserId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -491,6 +492,73 @@ public class MBStatsUserPersistence extends BasePersistence {
 			array[2] = (MBStatsUser)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public MBStatsUser findByG_U(long groupId, long userId)
+		throws NoSuchStatsUserException, SystemException {
+		MBStatsUser mbStatsUser = fetchByG_U(groupId, userId);
+
+		if (mbStatsUser == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchStatsUserException(msg.toString());
+		}
+
+		return mbStatsUser;
+	}
+
+	public MBStatsUser fetchByG_U(long groupId, long userId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("messageCount DESC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setLong(queryPos++, userId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			MBStatsUser mbStatsUser = (MBStatsUser)list.get(0);
+
+			return mbStatsUser;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -623,10 +691,10 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
-	public MBStatsUser[] findByG_M_PrevAndNext(MBStatsUserPK mbStatsUserPK,
-		long groupId, int messageCount, OrderByComparator obc)
+	public MBStatsUser[] findByG_M_PrevAndNext(long statsUserId, long groupId,
+		int messageCount, OrderByComparator obc)
 		throws NoSuchStatsUserException, SystemException {
-		MBStatsUser mbStatsUser = findByPrimaryKey(mbStatsUserPK);
+		MBStatsUser mbStatsUser = findByPrimaryKey(statsUserId);
 		int count = countByG_M(groupId, messageCount);
 		Session session = null;
 
@@ -772,6 +840,12 @@ public class MBStatsUserPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByG_U(long groupId, long userId)
+		throws NoSuchStatsUserException, SystemException {
+		MBStatsUser mbStatsUser = findByG_U(groupId, userId);
+		remove(mbStatsUser);
+	}
+
 	public void removeByG_M(long groupId, int messageCount)
 		throws SystemException {
 		Iterator itr = findByG_M(groupId, messageCount).iterator();
@@ -846,6 +920,48 @@ public class MBStatsUserPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
 			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();

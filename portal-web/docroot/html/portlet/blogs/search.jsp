@@ -30,7 +30,7 @@ long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId")
 long groupId = ParamUtil.getLong(request, "groupId");
 long userId = 0;
 String categoryIds = ParamUtil.getString(request, "categoryIds");
-String[] categoryIdsArray = StringUtil.split(categoryIds);
+long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>

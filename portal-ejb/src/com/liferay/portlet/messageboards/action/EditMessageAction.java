@@ -41,7 +41,6 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -147,19 +146,19 @@ public class EditMessageAction extends PortletAction {
 	}
 
 	protected void deleteMessage(ActionRequest req) throws Exception {
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
 	protected void subscribeMessage(ActionRequest req) throws Exception {
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MBMessageServiceUtil.subscribeMessage(messageId);
 	}
 
 	protected void unsubscribeMessage(ActionRequest req) throws Exception {
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
 		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
@@ -169,11 +168,11 @@ public class EditMessageAction extends PortletAction {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		String messageId = ParamUtil.getString(req, "messageId");
+		long messageId = ParamUtil.getLong(req, "messageId");
 
-		String categoryId = ParamUtil.getString(req, "categoryId");
-		String threadId = ParamUtil.getString(req, "threadId");
-		String parentMessageId = ParamUtil.getString(req, "parentMessageId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
+		long threadId = ParamUtil.getLong(req, "threadId");
+		long parentMessageId = ParamUtil.getLong(req, "parentMessageId");
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
 		boolean attachments = ParamUtil.getBoolean(req, "attachments");
@@ -210,10 +209,10 @@ public class EditMessageAction extends PortletAction {
 
 		MBMessage message = null;
 
-		if (Validator.isNull(messageId)) {
+		if (messageId <= 0) {
 			CaptchaUtil.check(req);
 
-			if (Validator.isNull(threadId)) {
+			if (threadId <= 0) {
 
 				// Post new thread
 
@@ -242,8 +241,10 @@ public class EditMessageAction extends PortletAction {
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
 
-		portletURL.setParameter("struts_action", "/message_boards/view_message");
-		portletURL.setParameter("messageId", message.getMessageId());
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter(
+			"messageId", String.valueOf(message.getMessageId()));
 
 		res.sendRedirect(portletURL.toString());
 	}

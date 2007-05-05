@@ -25,13 +25,13 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
-String breadcrumbsCategoryId = ParamUtil.getString(request, "breadcrumbsCategoryId");
-String breadcrumbsMessageId = ParamUtil.getString(request, "breadcrumbsMessageId");
+long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
+long breadcrumbsMessageId = ParamUtil.getLong(request, "breadcrumbsMessageId");
 
 String categoryIds = ParamUtil.getString(request, "categoryIds");
-String[] categoryIdsArray = StringUtil.split(categoryIds);
+long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 
-String threadId = ParamUtil.getString(request, "threadId");
+long threadId = ParamUtil.getLong(request, "threadId");
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
@@ -53,10 +53,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/message_boards/search");
-portletURL.setParameter("breadcrumbsCategoryId", breadcrumbsCategoryId);
-portletURL.setParameter("breadcrumbsMessageId", breadcrumbsMessageId);
+portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
+portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
 portletURL.setParameter("categoryIds", categoryIds);
-portletURL.setParameter("threadId", threadId);
+portletURL.setParameter("threadId", String.valueOf(threadId));
 portletURL.setParameter("keywords", keywords);
 
 List headerNames = new ArrayList();
@@ -94,8 +94,8 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	// Category and message
 
-	String categoryId = doc.get("categoryId");
-	String messageId = doc.get("messageId");
+	long categoryId = GetterUtil.getLong(doc.get("categoryId"));
+	long messageId = GetterUtil.getLong(doc.get("messageId"));
 
 	MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 	MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
@@ -105,7 +105,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/message_boards/view_message");
-	rowURL.setParameter("messageId", messageId);
+	rowURL.setParameter("messageId", String.valueOf(messageId));
 
 	row.addText(category.getName(), rowURL);
 	row.addText(message.getSubject(), rowURL);

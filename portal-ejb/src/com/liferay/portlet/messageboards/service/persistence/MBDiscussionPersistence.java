@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class MBDiscussionPersistence extends BasePersistence {
-	public MBDiscussion create(String discussionId) {
+	public MBDiscussion create(long discussionId) {
 		MBDiscussion mbDiscussion = new MBDiscussionImpl();
 		mbDiscussion.setNew(true);
 		mbDiscussion.setPrimaryKey(discussionId);
@@ -61,7 +61,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		return mbDiscussion;
 	}
 
-	public MBDiscussion remove(String discussionId)
+	public MBDiscussion remove(long discussionId)
 		throws NoSuchDiscussionException, SystemException {
 		Session session = null;
 
@@ -69,7 +69,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 			session = openSession();
 
 			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussionImpl.class,
-					discussionId);
+					new Long(discussionId));
 
 			if (mbDiscussion == null) {
 				if (_log.isWarnEnabled()) {
@@ -150,7 +150,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		}
 	}
 
-	public MBDiscussion findByPrimaryKey(String discussionId)
+	public MBDiscussion findByPrimaryKey(long discussionId)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = fetchByPrimaryKey(discussionId);
 
@@ -167,7 +167,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		return mbDiscussion;
 	}
 
-	public MBDiscussion fetchByPrimaryKey(String discussionId)
+	public MBDiscussion fetchByPrimaryKey(long discussionId)
 		throws SystemException {
 		Session session = null;
 
@@ -175,7 +175,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 			session = openSession();
 
 			return (MBDiscussion)session.get(MBDiscussionImpl.class,
-				discussionId);
+				new Long(discussionId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);

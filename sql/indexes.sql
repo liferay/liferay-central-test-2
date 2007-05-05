@@ -107,13 +107,13 @@ create index IX_138C7F1E on MBMessage (categoryId, threadId);
 create index IX_75B95071 on MBMessage (threadId);
 create index IX_A7038CD7 on MBMessage (threadId, parentMessageId);
 
-create index IX_EE1CA456 on MBMessageFlag (topicId);
-create index IX_93BF5C9C on MBMessageFlag (topicId, messageId);
-create index IX_E1F34690 on MBMessageFlag (topicId, userId);
+create index IX_D180D4AE on MBMessageFlag (messageId);
 create index IX_7B2917BE on MBMessageFlag (userId);
+create index IX_94A83834 on MBMessageFlag (userId, messageId);
 
 create index IX_A00A898F on MBStatsUser (groupId);
 create index IX_FAB5A88B on MBStatsUser (groupId, messageCount);
+create index IX_9168E2C9 on MBStatsUser (groupId, userId);
 create index IX_847F92B5 on MBStatsUser (userId);
 
 create index IX_CB854772 on MBThread (categoryId);

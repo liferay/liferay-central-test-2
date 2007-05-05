@@ -27,7 +27,7 @@
 <%
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -70,14 +70,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	MBCategory curCategory = (MBCategory)results.get(i);
 
-	ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/message_boards/select_category");
-	rowURL.setParameter("categoryId", curCategory.getCategoryId());
+	rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 	// Name and description
 
@@ -98,7 +98,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subcategoryIds = new ArrayList();
 
-	subcategoryIds.add(curCategory.getCategoryId());
+	subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
 	MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
 

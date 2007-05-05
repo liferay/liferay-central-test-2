@@ -55,7 +55,7 @@ public class FindCategoryAction extends Action {
 
 		try {
 			String plid = ParamUtil.getString(req, "p_l_id");
-			String categoryId = ParamUtil.getString(req, "categoryId");
+			long categoryId = ParamUtil.getLong(req, "categoryId");
 
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.MESSAGE_BOARDS, plid, false);
@@ -65,7 +65,7 @@ public class FindCategoryAction extends Action {
 
 			portletURL.setParameter(
 				"struts_action", "/message_boards/view");
-			portletURL.setParameter("categoryId", categoryId);
+			portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			res.sendRedirect(portletURL.toString());
 

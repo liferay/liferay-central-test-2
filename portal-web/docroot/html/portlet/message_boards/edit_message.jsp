@@ -31,18 +31,18 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
-String messageId = BeanParamUtil.getString(message, request, "messageId");
+long messageId = BeanParamUtil.getLong(message, request, "messageId");
 
-String categoryId = BeanParamUtil.getString(message, request, "categoryId");
-String threadId = BeanParamUtil.getString(message, request, "threadId");
-String parentMessageId = BeanParamUtil.getString(message, request, "parentMessageId", MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+long categoryId = BeanParamUtil.getLong(message, request, "categoryId");
+long threadId = BeanParamUtil.getLong(message, request, "threadId");
+long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 String subject = BeanParamUtil.getString(message, request, "subject");
 
 MBMessage curParentMessage = null;
 String parentAuthor = null;
 
-if (Validator.isNotNull(threadId)) {
+if (threadId > 0) {
 	try {
 		curParentMessage = MBMessageLocalServiceUtil.getMessage(parentMessageId);
 
@@ -164,9 +164,9 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
 <%
-String breadcrumbsMessageId = parentMessageId;
+long breadcrumbsMessageId = parentMessageId;
 
-if (Validator.isNull(threadId)) {
+if (threadId <= 0) {
 	breadcrumbsMessageId = messageId;
 }
 
@@ -192,11 +192,11 @@ if (message != null) {
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 			%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
 			<%= category.getName() %>
 			</a>
 
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
 		</td>
 	</tr>
 	<tr>
@@ -343,7 +343,7 @@ if (message != null) {
 		String classPK = StringPool.BLANK;
 
 		if (message != null) {
-			classPK = message.getPrimaryKey().toString();
+			classPK = String.valueOf(message.getMessageId());
 		}
 		%>
 
@@ -385,7 +385,7 @@ if (message != null) {
 	<liferay-ui:captcha url="<%= captchaURL %>" />
 </c:if>
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((Validator.isNull(threadId) ? "post-new-thread" : "reply"))) %>' />
+<input type="submit" value='<%= LanguageUtil.get(pageContext, (message != null) ? "update" : ((threadId <= 0) ? "post-new-thread" : "reply")) %>' />
 
 <c:if test="<%= MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_FILE) %>">
 	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);" />

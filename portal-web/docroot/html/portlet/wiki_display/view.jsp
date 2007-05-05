@@ -73,7 +73,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	<liferay-security:permissionsURL
 		modelResource="<%= WikiPage.class.getName() %>"
 		modelResourceDescription="<%= wikiPage.getTitle() %>"
-		resourcePrimKey="<%= wikiPage.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(wikiPage.getPageId()) %>"
 		var="permissionsURL"
 	/>
 

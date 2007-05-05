@@ -65,11 +65,11 @@ public class MBUtil {
 	public static final String SMTP_PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
-			String categoryId, String messageId, PageContext pageContext,
+			long categoryId, long messageId, PageContext pageContext,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		if (Validator.isNotNull(messageId)) {
+		if (messageId > 0) {
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 			return getBreadcrumbs(null, message, pageContext, req, res);
@@ -78,7 +78,12 @@ public class MBUtil {
 			MBCategory category = null;
 
 			try {
-				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+				if ((categoryId > 0) &&
+					(categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+
+					category = MBCategoryLocalServiceUtil.getCategory(
+						categoryId);
+				}
 			}
 			catch (Exception e) {
 			}
@@ -111,7 +116,8 @@ public class MBUtil {
 
 			categoriesURL.setParameter("struts_action", "/message_boards/view");
 			categoriesURL.setParameter(
-				"categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+				"categoryId",
+				String.valueOf(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID));
 		}
 
 		String categoriesLink =
@@ -134,7 +140,7 @@ public class MBUtil {
 					portletURL.setParameter(
 						"struts_action", "/message_boards/select_category");
 					portletURL.setParameter(
-						"categoryId", category.getCategoryId());
+						"categoryId", String.valueOf(category.getCategoryId()));
 				}
 				else {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -142,7 +148,7 @@ public class MBUtil {
 					portletURL.setParameter(
 						"struts_action", "/message_boards/view");
 					portletURL.setParameter(
-						"categoryId", category.getCategoryId());
+						"categoryId", String.valueOf(category.getCategoryId()));
 				}
 
 				String categoryLink =
@@ -174,7 +180,8 @@ public class MBUtil {
 
 			messageURL.setParameter(
 				"struts_action", "/message_boards/view_message");
-			messageURL.setParameter("messageId", message.getMessageId());
+			messageURL.setParameter(
+				"messageId", String.valueOf(message.getMessageId()));
 
 			String messageLink =
 				"<a href=\"" + messageURL.toString() + "\">" +
@@ -308,7 +315,7 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedSubjectPrefix(
-		PortletPreferences prefs)
+			PortletPreferences prefs)
 		throws IOException {
 
 		String emailMessageUpdatedSubject = prefs.getValue(
@@ -323,7 +330,7 @@ public class MBUtil {
 		}
 	}
 
-	public static String getMailId(String messageId, long companyId) {
+	public static String getMailId(long messageId, long companyId) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
 				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
@@ -331,22 +338,22 @@ public class MBUtil {
 	}
 
 	public static String getMailingListAddress(
-		String categoryId, long companyId) {
+		long categoryId, long companyId) {
 
 		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
 			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
 				companyId;
 	}
 
-	public static String getMessageId(String mailId) {
+	public static long getMessageId(String mailId) {
 		int x = mailId.indexOf(StringPool.LESS_THAN) + 1;
 		int y = mailId.indexOf(StringPool.PERIOD);
 
 		if ((x > 0 ) && (y != -1)) {
-			return mailId.substring(x, y);
+			return GetterUtil.getLong(mailId.substring(x, y));
 		}
 		else {
-			return null;
+			return 0;
 		}
 	}
 

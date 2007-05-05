@@ -57,7 +57,7 @@ public interface MBThreadLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void deleteThread(java.lang.String threadId)
+	public void deleteThread(long threadId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -66,7 +66,7 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteThreads(java.lang.String categoryId)
+	public void deleteThreads(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -86,16 +86,16 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread(
-		java.lang.String threadId)
+		long threadId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getThreads(java.lang.String categoryId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public int getThreadsCount(java.lang.String categoryId)
+	public java.util.List getThreads(long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasReadThread(long userId, java.lang.String threadId)
+	public int getThreadsCount(long categoryId)
+		throws com.liferay.portal.SystemException;
+
+	public boolean hasReadThread(long userId, long threadId)
 		throws com.liferay.portal.SystemException;
 }

@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.messageboards.model;
 
-import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,7 +48,6 @@ import java.util.List;
 public class MBMessageSoap implements Serializable {
 	public static MBMessageSoap toSoapModel(MBMessage model) {
 		MBMessageSoap soapModel = new MBMessageSoap();
-		soapModel.setTopicId(model.getTopicId());
 		soapModel.setMessageId(model.getMessageId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -82,28 +79,19 @@ public class MBMessageSoap implements Serializable {
 	public MBMessageSoap() {
 	}
 
-	public MBMessagePK getPrimaryKey() {
-		return new MBMessagePK(_topicId, _messageId);
-	}
-
-	public void setPrimaryKey(MBMessagePK pk) {
-		setTopicId(pk.topicId);
-		setMessageId(pk.messageId);
-	}
-
-	public String getTopicId() {
-		return _topicId;
-	}
-
-	public void setTopicId(String topicId) {
-		_topicId = topicId;
-	}
-
-	public String getMessageId() {
+	public long getPrimaryKey() {
 		return _messageId;
 	}
 
-	public void setMessageId(String messageId) {
+	public void setPrimaryKey(long pk) {
+		setMessageId(pk);
+	}
+
+	public long getMessageId() {
+		return _messageId;
+	}
+
+	public void setMessageId(long messageId) {
 		_messageId = messageId;
 	}
 
@@ -147,27 +135,27 @@ public class MBMessageSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getCategoryId() {
+	public long getCategoryId() {
 		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
-	public String getThreadId() {
+	public long getThreadId() {
 		return _threadId;
 	}
 
-	public void setThreadId(String threadId) {
+	public void setThreadId(long threadId) {
 		_threadId = threadId;
 	}
 
-	public String getParentMessageId() {
+	public long getParentMessageId() {
 		return _parentMessageId;
 	}
 
-	public void setParentMessageId(String parentMessageId) {
+	public void setParentMessageId(long parentMessageId) {
 		_parentMessageId = parentMessageId;
 	}
 
@@ -211,16 +199,15 @@ public class MBMessageSoap implements Serializable {
 		_anonymous = anonymous;
 	}
 
-	private String _topicId;
-	private String _messageId;
+	private long _messageId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _categoryId;
-	private String _threadId;
-	private String _parentMessageId;
+	private long _categoryId;
+	private long _threadId;
+	private long _parentMessageId;
 	private String _subject;
 	private String _body;
 	private boolean _attachments;

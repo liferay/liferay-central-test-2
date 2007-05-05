@@ -33,7 +33,7 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
 public class MBMessageFlagImpl
 	extends MBMessageFlagModelImpl implements MBMessageFlag {
 
-	public static final String READ_FLAG = "read";
+	public static final int READ_FLAG = 1;
 
 	public MBMessageFlagImpl() {
 	}

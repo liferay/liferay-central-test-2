@@ -421,7 +421,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long userId, String[] categoryIds,
+			long companyId, long groupId, long userId, long[] categoryIds,
 			String keywords)
 		throws SystemException {
 
@@ -451,7 +451,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BooleanQuery categoryIdsQuery = new BooleanQuery();
 
 				for (int i = 0; i < categoryIds.length; i++) {
-					Term term = new Term("categoryId", categoryIds[i]);
+					Term term = new Term(
+						"categoryId", String.valueOf(categoryIds[i]));
 					TermQuery termQuery = new TermQuery(term);
 
 					categoryIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);

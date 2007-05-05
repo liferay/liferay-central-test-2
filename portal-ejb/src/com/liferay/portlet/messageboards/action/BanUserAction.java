@@ -84,9 +84,9 @@ public class BanUserAction extends PortletAction {
 	}
 
 	protected void unbanUser(ActionRequest req) throws Exception {
-		long banUserId = ParamUtil.getLong(req, "banUserId");
-
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+		long banUserId = ParamUtil.getLong(req, "banUserId");
 
 		MBBanServiceUtil.deleteBan(layout.getPlid(), banUserId);
 	}

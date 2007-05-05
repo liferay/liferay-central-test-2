@@ -69,19 +69,19 @@ public class MBDiscussionSoap implements Serializable {
 	public MBDiscussionSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _discussionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setDiscussionId(pk);
 	}
 
-	public String getDiscussionId() {
+	public long getDiscussionId() {
 		return _discussionId;
 	}
 
-	public void setDiscussionId(String discussionId) {
+	public void setDiscussionId(long discussionId) {
 		_discussionId = discussionId;
 	}
 
@@ -101,16 +101,16 @@ public class MBDiscussionSoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public String getThreadId() {
+	public long getThreadId() {
 		return _threadId;
 	}
 
-	public void setThreadId(String threadId) {
+	public void setThreadId(long threadId) {
 		_threadId = threadId;
 	}
 
-	private String _discussionId;
+	private long _discussionId;
 	private String _className;
 	private String _classPK;
-	private String _threadId;
+	private long _threadId;
 }

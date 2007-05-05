@@ -457,65 +457,61 @@ create table MBBan (
 );
 
 create table MBCategory (
-	categoryId VARCHAR(75) not null primary key,
+	categoryId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentCategoryId VARCHAR(75) null,
+	parentCategoryId LONG,
 	name VARCHAR(75) null,
 	description STRING null,
 	lastPostDate DATE null
 );
 
 create table MBDiscussion (
-	discussionId VARCHAR(75) not null primary key,
+	discussionId LONG primary key,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
-	threadId VARCHAR(75) null
+	threadId LONG
 );
 
 create table MBMessage (
-	topicId VARCHAR(75) not null,
-	messageId VARCHAR(75) not null,
+	messageId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	categoryId VARCHAR(75) null,
-	threadId VARCHAR(75) null,
-	parentMessageId VARCHAR(75) null,
+	categoryId LONG,
+	threadId LONG,
+	parentMessageId LONG,
 	subject VARCHAR(75) null,
 	body TEXT null,
 	attachments BOOLEAN,
-	anonymous BOOLEAN,
-	primary key (topicId, messageId)
+	anonymous BOOLEAN
 );
 
 create table MBMessageFlag (
-	topicId VARCHAR(75) not null,
-	messageId VARCHAR(75) not null,
+	messageFlagId LONG primary key,
 	userId LONG,
-	flag VARCHAR(75) null,
-	primary key (topicId, messageId, userId)
+	messageId LONG,
+	flag INTEGER
 );
 
 create table MBStatsUser (
+	statsUserId LONG primary key,
 	groupId LONG,
 	userId LONG,
 	messageCount INTEGER,
-	lastPostDate DATE null,
-	primary key (groupId, userId)
+	lastPostDate DATE null
 );
 
 create table MBThread (
-	threadId VARCHAR(75) not null primary key,
-	categoryId VARCHAR(75) null,
-	topicId VARCHAR(75) null,
-	rootMessageId VARCHAR(75) null,
+	threadId LONG primary key,
+	categoryId LONG,
+	rootMessageId LONG,
 	messageCount INTEGER,
 	viewCount INTEGER,
 	lastPostByUserId LONG,

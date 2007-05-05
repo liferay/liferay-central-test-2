@@ -41,7 +41,7 @@ public class MBCategoryServiceImpl
 	extends PrincipalBean implements MBCategoryService {
 
 	public MBCategory addCategory(
-			String plid, String parentCategoryId, String name,
+			String plid, long parentCategoryId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -56,7 +56,7 @@ public class MBCategoryServiceImpl
 	}
 
 	public MBCategory addCategory(
-			String plid, String parentCategoryId, String name,
+			String plid, long parentCategoryId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -70,7 +70,7 @@ public class MBCategoryServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteCategory(String categoryId)
+	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -79,7 +79,7 @@ public class MBCategoryServiceImpl
 		MBCategoryLocalServiceUtil.deleteCategory(categoryId);
 	}
 
-	public MBCategory getCategory(String categoryId)
+	public MBCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -88,7 +88,7 @@ public class MBCategoryServiceImpl
 		return MBCategoryLocalServiceUtil.getCategory(categoryId);
 	}
 
-	public void subscribeCategory(String categoryId)
+	public void subscribeCategory(long categoryId)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -97,7 +97,7 @@ public class MBCategoryServiceImpl
 		MBCategoryLocalServiceUtil.subscribeCategory(getUserId(), categoryId);
 	}
 
-	public void unsubscribeCategory(String categoryId)
+	public void unsubscribeCategory(long categoryId)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -107,7 +107,7 @@ public class MBCategoryServiceImpl
 	}
 
 	public MBCategory updateCategory(
-			String categoryId, String parentCategoryId, String name,
+			long categoryId, long parentCategoryId, String name,
 			String description, boolean mergeWithParentCategory)
 		throws PortalException, SystemException {
 
