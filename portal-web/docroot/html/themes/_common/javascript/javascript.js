@@ -15,7 +15,7 @@ Liferay.Portlet.ready(
 	This function gets loaded after each and every portlet on the page.
 
 	portletId: the current portlet's id
-	portletObj: the jQuery wrapped object of the current portlet
+	jQueryObj: the jQuery wrapped object of the current portlet
 	*/
 
 	function(portletId, jQueryObj) {
