@@ -43,13 +43,11 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<div>
+					<div class="portal-add-content-search">
 						<span id="portal_add_content_title" style="margin-right: 5px; cursor: move;"><liferay-ui:message key="content" /></span>
 
 						<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" onKeyUp="LayoutConfiguration.startShowTimer(this.value);" />
 					</div>
-
-					<br />
 
 					<%
 					PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);

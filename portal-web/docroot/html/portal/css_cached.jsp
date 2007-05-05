@@ -30,6 +30,32 @@ response.setContentType(Constants.TEXT_CSS);
 
 <%@ include file="/html/portal/css_cached_uniform.jsp" %>
 
+/* ---------- Add content styles ---------- */
+
+.portal-add-content-search {
+	margin-bottom: 8px;
+}
+
+.portal-add-content img{
+	vertical-align: middle;
+}
+
+.portal-add-content table td{
+	padding: 0 5px;
+}
+
+.portal-add-content table td{
+	padding: 0 5px;
+}
+
+.portal-add-content table td:first-child, .portal-add-content table td.first-child {
+	padding-left: 0;
+}
+
+.portal-add-content table td:last-child, .portal-add-content table td.last-child {
+	padding-right: 0;
+}
+
 /* ---------- Taglib discussion thread ---------- */
 
 .taglib-discussion td img {

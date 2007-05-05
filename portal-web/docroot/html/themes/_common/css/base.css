@@ -184,7 +184,7 @@ body.staging {
 
 .portal-add-content {
 	background: #fff;
-	padding: 8px;
+	padding: 8px 4px 0;
 	text-align: left;
 	z-index: 20;
 }
