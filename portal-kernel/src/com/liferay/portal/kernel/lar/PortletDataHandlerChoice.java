@@ -23,32 +23,57 @@
 package com.liferay.portal.kernel.lar;
 
 /**
- * <a href="PortletDataHandlerKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletDataHandlerChoice.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
-public class PortletDataHandlerKeys {
+public class PortletDataHandlerChoice extends PortletDataHandlerControl {
 
-	public static final String EXPORT_PERMISSIONS = "EXPORT_PERMISSIONS";
+	public PortletDataHandlerChoice(String controlName) {
+		this(controlName, 0, _DEFAULT_CHOICES);
+	}
 
-	public static final String EXPORT_PORTLET_DATA = "EXPORT_PORTLET_DATA";
+	public PortletDataHandlerChoice(String controlName, int defaultChoice) {
+		this(controlName, defaultChoice, _DEFAULT_CHOICES);
+	}
 
-	public static final String EXPORT_PORTLET_PREFERENCES =
-		"EXPORT_PORTLET_PREFERENCES";
+	public PortletDataHandlerChoice(String controlName, int defaultChoice,
+									String[] choices) {
 
-	public static final String EXPORT_SELECTED_LAYOUTS =
-		"EXPORT_SELECTED_LAYOUTS";
+		super(controlName);
 
-	public static final String EXPORT_THEME = "EXPORT_THEME";
+		_choices = choices;
+		_defaultChoice = defaultChoice;
+	}
 
-	public static final String IMPORT_PERMISSIONS = "IMPORT_PERMISSIONS";
+	public String[] getChoices() {
+		if ((_choices == null) || (_choices.length < 1)) {
+			return _DEFAULT_CHOICES;
+		}
+		else {
+			return _choices;
+		}
+	}
 
-	public static final String IMPORT_PORTLET_DATA = "IMPORT_PORTLET_DATA";
+	public String getDefaultChoice() {
+		return getChoices()[getDefaultChoiceIndex()];
+	}
 
-	public static final String IMPORT_PORTLET_PREFERENCES =
-		"IMPORT_PORTLET_PREFERENCES";
+	public int getDefaultChoiceIndex() {
+		if ((_defaultChoice < 0) || (_defaultChoice >= _choices.length)) {
+			return 0;
+		}
+		else {
+			return _defaultChoice;
+		}
+	}
 
-	public static final String IMPORT_THEME = "IMPORT_THEME";
+	private static final String[] _DEFAULT_CHOICES = new String[] {
+		"false", "true"
+	};
+
+	private String[] _choices;
+	private int _defaultChoice;
 
 }

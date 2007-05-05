@@ -13,6 +13,8 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>com.sample.lar.resources.Resource</resource-bundle>
 		<portlet-info>
 			<title>Sample LAR Portlet</title>
 			<short-title>Sample LAR Portlet</short-title>

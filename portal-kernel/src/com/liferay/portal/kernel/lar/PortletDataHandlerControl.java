@@ -23,32 +23,21 @@
 package com.liferay.portal.kernel.lar;
 
 /**
- * <a href="PortletDataHandlerKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletDataHandlerControl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
-public class PortletDataHandlerKeys {
+public class PortletDataHandlerControl {
 
-	public static final String EXPORT_PERMISSIONS = "EXPORT_PERMISSIONS";
+	public PortletDataHandlerControl(String controlName) {
+		_controlName = controlName;
+	}
 
-	public static final String EXPORT_PORTLET_DATA = "EXPORT_PORTLET_DATA";
+	public String getControlName() {
+		return _controlName;
+	}
 
-	public static final String EXPORT_PORTLET_PREFERENCES =
-		"EXPORT_PORTLET_PREFERENCES";
-
-	public static final String EXPORT_SELECTED_LAYOUTS =
-		"EXPORT_SELECTED_LAYOUTS";
-
-	public static final String EXPORT_THEME = "EXPORT_THEME";
-
-	public static final String IMPORT_PERMISSIONS = "IMPORT_PERMISSIONS";
-
-	public static final String IMPORT_PORTLET_DATA = "IMPORT_PORTLET_DATA";
-
-	public static final String IMPORT_PORTLET_PREFERENCES =
-		"IMPORT_PORTLET_PREFERENCES";
-
-	public static final String IMPORT_THEME = "IMPORT_THEME";
+	private String _controlName;
 
 }

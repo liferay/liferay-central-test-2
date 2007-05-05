@@ -43,6 +43,26 @@ import javax.portlet.PortletPreferences;
 public interface PortletDataHandler {
 
 	/**
+	 * Returns an array of the controls defined for this data handler. These
+	 * controls enable the developer to create fine grained controls over export
+	 * behavior. The controls are rendered in the export UI.
+	 *
+	 * @return		an array of PortletDataHandlerControls
+	 */
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException;
+
+	/**
+	 * Returns an array of the controls defined for this data handler. These
+	 * controls enable the developer to create fine grained controls over import
+	 * behavior. The controls are rendered in the import UI.
+	 *
+	 * @return		An array of PortletDataHandlerControls
+	 */
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException;
+
+	/**
 	 * Returns a string of data to be placed in the &lt;portlet-data&gt; section
 	 * of the LAR file. This data will be passed as the <code>data</code>
 	 * parameter of <code>importData()</code>.

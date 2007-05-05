@@ -25,6 +25,9 @@ package com.liferay.portlet.journal.lar;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
+import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -35,6 +38,7 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
@@ -43,8 +47,12 @@ import java.io.StringReader;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletPreferences;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -81,10 +89,41 @@ import org.dom4j.io.SAXReader;
  */
 public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
+	public PortletDataHandlerControl[] getExportControls()
+		throws PortletDataException{
+
+		return new PortletDataHandlerControl[] {_enableExport};
+	}
+
+	public PortletDataHandlerControl[] getImportControls()
+		throws PortletDataException{
+
+		return new PortletDataHandlerControl[] {_enableImport};
+	}
+
 	public String exportData(
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs)
 		throws PortletDataException {
+
+		Map parameterMap = context.getParameterMap();
+
+		boolean exportData = MapUtil.getBoolean(
+			parameterMap, _EXPORT_JOURNAL_DATA,
+			_enableExport.getDefaultState());
+
+		if (_log.isDebugEnabled()) {
+			if (exportData) {
+				_log.debug("Exporting data is enabled");
+			}
+			else {
+				_log.debug("Exporting data is disabled");
+			}
+		}
+
+		if (!exportData) {
+			return null;
+		}
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -180,6 +219,25 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
+
+		Map parameterMap = context.getParameterMap();
+
+		boolean importData = MapUtil.getBoolean(
+			parameterMap, _IMPORT_JOURNAL_DATA,
+			_enableImport.getDefaultState());
+
+		if (_log.isDebugEnabled()) {
+			if (importData) {
+				_log.debug("Importing data is enabled");
+			}
+			else {
+				_log.debug("Importing data is disabled");
+			}
+		}
+
+		if (!importData) {
+			return null;
+		}
 
 		try {
 			JournalCreationStrategy creationStrategy =
@@ -387,5 +445,20 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			throw new PortletDataException(e);
 		}
 	}
+
+	private static final String _EXPORT_JOURNAL_DATA =
+		"export-" + PortletKeys.JOURNAL + "-data";
+
+	private static final String _IMPORT_JOURNAL_DATA =
+		"import-" + PortletKeys.JOURNAL + "-data";
+
+	private static final PortletDataHandlerBoolean _enableExport =
+		new PortletDataHandlerBoolean(_EXPORT_JOURNAL_DATA, true, null);
+
+	private static final PortletDataHandlerBoolean _enableImport =
+		new PortletDataHandlerBoolean(_IMPORT_JOURNAL_DATA, true, null);
+
+	private static Log _log =
+		LogFactory.getLog(JournalPortletDataHandlerImpl.class);
 
 }

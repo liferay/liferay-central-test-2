@@ -29,6 +29,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "");
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 String tabs3 = ParamUtil.getString(request, "tabs3", "page");
 String tabs4 = ParamUtil.getString(request, "tabs4", "regular-browser");
+String tabs5 = ParamUtil.getString(request, "tabs5", "export");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -157,6 +158,7 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("tabs4", tabs4);
+portletURL.setParameter("tabs5", tabs5);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
@@ -183,6 +185,10 @@ viewPagesURL.setParameter("ownerId", ownerId);
 			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= ownerId + StringPool.PERIOD + parentLayoutId %>";
 			submitForm(document.<portlet:namespace />fm);
 		}
+	}
+
+	function <portlet:namespace />exportPages() {
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />importPages() {
@@ -277,19 +283,23 @@ viewPagesURL.setParameter("ownerId", ownerId);
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>" />
-<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
-<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>" />
-<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>" />
-<input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>" />
-<input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>" />
-<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browser") ? "false" : "true" %>' />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
+<input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>">
+<input name="<portlet:namespace />tabs5" type="hidden" value="<%= tabs5 %>">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
+<input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
+<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
+<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
+<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
+<input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">
+<input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>">
+<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browser") ? "false" : "true" %>'>
+<input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" type="hidden" value="<%= true %>">
+<input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_SELECTED_LAYOUTS %>" type="hidden" value="">
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
@@ -1106,89 +1116,174 @@ viewPagesURL.setParameter("ownerId", ownerId);
 				<c:when test='<%= tabs3.equals("import-export") %>'>
 					<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
-					<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
-						<liferay-ui:message key="import-a-lar-file-to-overwrite-the-current-pages" />
+					<%
+					String tabs5Names = "export";
 
-						<br /><br />
+					if (!layout.getOwnerId().equals(ownerId)) {
+						tabs5Names += ",import";
+					}
+					%>
 
-						<div>
-							<input name="<portlet:namespace />importFileName" size="50" type="file" />
-						</div>
+					<liferay-ui:tabs
+						names="<%= tabs5Names %>"
+						param="tabs5"
+						url="<%= portletURL.toString() %>"
+					/>
 
-						<br />
+					<c:choose>
+						<c:when test='<%= tabs5.equals("import") %>'>
+							<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
+								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-current-pages" />
 
-						<liferay-ui:message key="what-would-you-like-to-import" />
+								<br /><br />
 
-						<div>
-							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
+								<div>
+									<input name="<portlet:namespace />importFileName" size="50" type="file" />
+								</div>
 
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
-						</div>
+								<br />
 
-						<div>
-							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
+								<liferay-ui:message key="what-would-you-like-to-import" />
 
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
-						</div>
+								<div>
+									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
-						<div>
-							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
+									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
+								</div>
 
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
-						</div>
+								<div>
+									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
 
-						<div>
-							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_THEME %>" defaultValue="<%= false %>" />
+									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
+								</div>
 
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /></label>
-						</div>
+								<div>
+									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
 
-						<br />
+									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
+								</div>
 
-						<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();" />
+								<div>
+									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_THEME %>" defaultValue="<%= false %>" />
 
-						<div class="separator"></div>
-					</c:if>
+									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /></label>
+								</div>
 
-					<liferay-ui:message key="export-the-current-pages-to-the-given-lar-file-name" />
+								<br />
 
-					<br /><br />
+								<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
+							</c:if>
+						</c:when>
+						<c:when test='<%= tabs5.equals("export") %>'>
+							<liferay-ui:message key="export-the-current-pages-to-the-given-lar-file-name" />
 
-					<div>
-						<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar" />
-					</div>
+							<br /><br />
 
-					<br />
+							<div>
+								<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
+							</div>
 
-					<liferay-ui:message key="what-would-you-like-to-export" />
+							<br />
 
-					<div>
-						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
+							<liferay-ui:message key="what-would-you-like-to-export" />
 
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
-					</div>
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
-					<div>
-						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
+							</div>
 
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
-					</div>
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
 
-					<div>
-						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
+							</div>
 
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
-					</div>
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
 
-					<div>
-						<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
+							</div>
 
-						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<liferay-ui:message key="all-pages-will-use-the-exported-theme" />)</label>
-					</div>
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
 
-					<br />
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
+							</div>
 
-					<input type="button" value="<liferay-ui:message key="export" />" onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>.value + '&<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>.value;" />
+							<%
+							List portletsList = new ArrayList();
+							Set portletIdsSet = new HashSet();
+
+							Iterator itr1 = LayoutLocalServiceUtil.getLayouts(ownerId).iterator();
+
+							while (itr1.hasNext()) {
+								Layout curLayout = (Layout)itr1.next();
+
+								if (curLayout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+									LayoutTypePortlet curLayoutTypePortlet = (LayoutTypePortlet)curLayout.getLayoutType();
+
+									Iterator itr2 = curLayoutTypePortlet.getPortletIds().iterator();
+
+									while (itr2.hasNext()) {
+										Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
+
+										PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+
+										if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
+											portletIdsSet.add(curPortlet.getRootPortletId());
+
+											portletsList.add(curPortlet);
+										}
+									}
+								}
+							}
+
+							Collections.sort(portletsList, new PortletTitleComparator(application, locale));
+
+							itr1 = portletsList.iterator();
+
+							while (itr1.hasNext()) {
+								Portlet curPortlet = (Portlet)itr1.next();
+
+								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+
+								PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
+
+								ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+
+								try {
+									PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
+
+									if (controls != null) {
+							%>
+
+										<fieldset>
+											<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+											<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+										</fieldset>
+
+							<%
+									}
+								}
+								catch (PortletDataException pde) {
+								%>
+
+									<fieldset>
+										<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+										<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-export-controls") %></span>
+									</fieldset>
+
+							<%
+								}
+							}
+							%>
+
+							<br />
+
+							<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportPages();" />
+						</c:when>
+					</c:choose>
 				</c:when>
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
@@ -1298,3 +1393,63 @@ viewPagesURL.setParameter("ownerId", ownerId);
 </c:if>
 
 </form>
+
+<%!
+private String _renderControls(String nameSpace, ResourceBundle resourceBundle, PortletDataHandlerControl[] controls) {
+	StringMaker sm = new StringMaker();
+
+	for (int i = 0; i < controls.length; i++) {
+		sm.append("<div class=\"ctrl-holder\">");
+
+		if (controls[i] instanceof PortletDataHandlerBoolean) {
+			PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)controls[i];
+
+			sm.append("<label class=\"inline-label\">");
+			sm.append("<input ");
+			sm.append(control.getDefaultState() ? "checked=\"checked\" " : "");
+			sm.append("name=\"");
+			sm.append(nameSpace);
+			sm.append(control.getControlName());
+			sm.append("\" ");
+			sm.append("type=\"checkbox\" />");
+			sm.append(resourceBundle.getString(control.getControlName()));
+			sm.append("</label>");
+
+			PortletDataHandlerControl[] children = control.getChildren();
+
+			if (children != null) {
+				sm.append(_renderControls(nameSpace, resourceBundle, children));
+			}
+		}
+		else if (controls[i] instanceof PortletDataHandlerChoice) {
+			PortletDataHandlerChoice control = (PortletDataHandlerChoice)controls[i];
+
+			sm.append("<span class=\"label\">");
+			sm.append("<strong>&#9632;</strong> ");
+			sm.append(resourceBundle.getString(control.getControlName()));
+			sm.append("</span>");
+
+			String[] choices = control.getChoices();
+
+			for (int j = 0; j < choices.length; j++) {
+				sm.append("<label class=\"inline-label\">");
+				sm.append("<input ");
+				sm.append(control.getDefaultChoiceIndex() == j ? "checked=\"checked\" " : "");
+				sm.append("name=\"");
+				sm.append(nameSpace);
+				sm.append(control.getControlName());
+				sm.append(j);
+				sm.append("\" type=\"radio\" value=\"");
+				sm.append(choices[j]);
+				sm.append("\" />");
+				sm.append(resourceBundle.getString(choices[j]));
+				sm.append("</label>");
+			}
+		}
+
+		sm.append("</div>");
+	}
+
+	return sm.toString();
+}
+%>

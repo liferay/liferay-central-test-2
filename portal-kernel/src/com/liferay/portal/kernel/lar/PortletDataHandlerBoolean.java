@@ -23,32 +23,39 @@
 package com.liferay.portal.kernel.lar;
 
 /**
- * <a href="PortletDataHandlerKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletDataHandlerBoolean.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
-public class PortletDataHandlerKeys {
+public class PortletDataHandlerBoolean extends PortletDataHandlerControl {
 
-	public static final String EXPORT_PERMISSIONS = "EXPORT_PERMISSIONS";
+	public PortletDataHandlerBoolean(String controlName) {
+		this(controlName, false, null);
+	}
 
-	public static final String EXPORT_PORTLET_DATA = "EXPORT_PORTLET_DATA";
+	public PortletDataHandlerBoolean(String controlName, boolean defaultState) {
+		this(controlName, defaultState, null);
+	}
 
-	public static final String EXPORT_PORTLET_PREFERENCES =
-		"EXPORT_PORTLET_PREFERENCES";
+	public PortletDataHandlerBoolean(String controlName, boolean defaultState,
+									 PortletDataHandlerControl[] children) {
 
-	public static final String EXPORT_SELECTED_LAYOUTS =
-		"EXPORT_SELECTED_LAYOUTS";
+		super(controlName);
 
-	public static final String EXPORT_THEME = "EXPORT_THEME";
+		_children = children;
+		_defaultState = defaultState;
+	}
 
-	public static final String IMPORT_PERMISSIONS = "IMPORT_PERMISSIONS";
+	public PortletDataHandlerControl[] getChildren() {
+		return _children;
+	}
 
-	public static final String IMPORT_PORTLET_DATA = "IMPORT_PORTLET_DATA";
+	public boolean getDefaultState() {
+		return _defaultState;
+	}
 
-	public static final String IMPORT_PORTLET_PREFERENCES =
-		"IMPORT_PORTLET_PREFERENCES";
-
-	public static final String IMPORT_THEME = "IMPORT_THEME";
+	private PortletDataHandlerControl[] _children;
+	private boolean _defaultState;
 
 }
