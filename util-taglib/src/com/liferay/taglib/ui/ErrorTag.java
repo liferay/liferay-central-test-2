@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Html;
 import com.liferay.util.Validator;
@@ -166,6 +167,6 @@ public class ErrorTag extends TagSupport {
 	private String _key;
 	private String _message;
 	private boolean _translateMessage = true;
-	private String _rowBreak = "<br /><br />";
+	private String _rowBreak = StringPool.BLANK;
 
 }
