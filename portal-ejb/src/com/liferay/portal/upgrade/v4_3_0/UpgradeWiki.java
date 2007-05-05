@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -94,7 +95,16 @@ public class UpgradeWiki extends UpgradeProcess {
 		// Counter
 
 		CounterLocalServiceUtil.reset(WikiNode.class.getName());
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter table WikiPage drop primary key;",
+		"alter table WikiPage add primary key (pageId);"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeWiki.class);
 
