@@ -71,7 +71,7 @@ public class CalEventPermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			event.getGroupId(), CalEvent.class.getName(), event.getPrimaryKey(),
+			event.getGroupId(), CalEvent.class.getName(), event.getEventId(),
 			actionId);
 	}
 

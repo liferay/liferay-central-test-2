@@ -76,7 +76,7 @@ public class AccountPermission {
 		long groupId = 0;
 
 		return permissionChecker.hasPermission(
-			groupId, Account.class.getName(), account.getPrimaryKey(),
+			groupId, Account.class.getName(), account.getAccountId(),
 			actionId);
 	}
 

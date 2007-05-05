@@ -95,7 +95,7 @@ public class SCProductEntryPermission {
 
 		return permissionChecker.hasPermission(
 			productEntry.getGroupId(), SCProductEntry.class.getName(),
-			productEntry.getPrimaryKey(), actionId);
+			productEntry.getProductEntryId(), actionId);
 	}
 
 }

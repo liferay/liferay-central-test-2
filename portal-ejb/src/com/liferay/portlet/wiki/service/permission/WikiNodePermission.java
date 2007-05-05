@@ -69,7 +69,7 @@ public class WikiNodePermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			node.getGroupId(), WikiNode.class.getName(), node.getPrimaryKey(),
+			node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),
 			actionId);
 	}
 

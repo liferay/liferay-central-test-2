@@ -95,7 +95,7 @@ public class SCLicensePermission {
 
 		return permissionChecker.hasPermission(
 			GroupImpl.DEFAULT_PARENT_GROUP_ID, SCLicense.class.getName(),
-			license.getPrimaryKey(), actionId);
+			license.getLicenseId(), actionId);
 	}
 
 }

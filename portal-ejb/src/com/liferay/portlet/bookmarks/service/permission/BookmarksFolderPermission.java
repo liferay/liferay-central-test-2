@@ -102,7 +102,7 @@ public class BookmarksFolderPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), BookmarksFolder.class.getName(),
-			folder.getPrimaryKey(), actionId);
+			folder.getFolderId(), actionId);
 	}
 
 }

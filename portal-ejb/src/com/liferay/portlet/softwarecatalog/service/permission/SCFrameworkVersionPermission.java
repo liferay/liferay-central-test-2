@@ -97,7 +97,7 @@ public class SCFrameworkVersionPermission {
 
 		return permissionChecker.hasPermission(
 			frameworkVersion.getGroupId(), SCFrameworkVersion.class.getName(),
-			frameworkVersion.getPrimaryKey(), actionId);
+			frameworkVersion.getFrameworkVersionId(), actionId);
 	}
 
 }
