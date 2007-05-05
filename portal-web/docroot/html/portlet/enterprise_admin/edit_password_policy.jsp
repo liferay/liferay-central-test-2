@@ -140,6 +140,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 				</td>
 				<td>
 					<select name="<portlet:namespace />minAge">
+						<option value="0" <%= (minAge == 0) ? "selected" : "" %>><liferay-ui:message key="immediately" /></option>
 
 						<%
 						for (int i = 0; i < 15; i++) {

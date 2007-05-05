@@ -56,7 +56,8 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			getUserId(), false, name, description, storageScheme, changeable,
 			changeRequired, minAge, checkSyntax, allowDictionaryWords,
 			minLength, history, historyCount, expireable, maxAge, warningTime,
-			graceLimit, lockout, maxFailure, lockoutDuration, resetFailureCount);
+			graceLimit, lockout, maxFailure, lockoutDuration,
+			resetFailureCount);
 	}
 
 	public void deletePasswordPolicy(long passwordPolicyId)

@@ -1014,13 +1014,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean passwordReset)
 		throws PortalException, SystemException {
 
-		PasswordPolicy passwordPolicy =
-			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(userId);
-
-		if (!passwordPolicy.getChangeable()) {
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORD_NOT_CHANGEABLE);
-		}
+		Date now = new Date();
 
 		validatePassword(userId, password1, password2);
 
@@ -1058,6 +1052,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordEncrypted(true);
 		user.setPasswordExpirationDate(expirationDate);
 		user.setPasswordReset(passwordReset);
+		user.setPasswordModifiedDate(now);
 
 		UserUtil.update(user);
 
@@ -1574,16 +1569,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (!autoPassword) {
-			if (!password1.equals(password2)) {
-				throw new UserPasswordException(
-					UserPasswordException.PASSWORDS_DO_NOT_MATCH);
-			}
-			else if (!PwdToolkitUtil.validate(password1) ||
-					 !PwdToolkitUtil.validate(password2)) {
+			PasswordPolicy passwordPolicy =
+				PasswordPolicyLocalServiceUtil.getPasswordPolicy(
+					companyId, organizationId, locationId);
 
-				throw new UserPasswordException(
-					UserPasswordException.PASSWORD_INVALID);
-			}
+			PwdToolkitUtil.validate(0, password1, password2, passwordPolicy);
 		}
 
 		if (!Validator.isEmailAddress(emailAddress)) {
@@ -1657,28 +1647,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long userId, String password1, String password2)
 		throws PortalException, SystemException {
 
-		if (!password1.equals(password2)) {
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORDS_DO_NOT_MATCH);
-		}
-		else if (!PwdToolkitUtil.validate(password1) ||
-				 !PwdToolkitUtil.validate(password2)) {
+		PasswordPolicy passwordPolicy =
+			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
+				userId);
 
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORD_INVALID);
-		}
-		else if (PasswordTrackerLocalServiceUtil.isSameAsCurrentPassword(
-					userId, password1)) {
-
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORD_SAME_AS_CURRENT);
-		}
-		else if (!PasswordTrackerLocalServiceUtil.isValidPassword(
-					userId, password1)) {
-
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORD_ALREADY_USED);
-		}
+		PwdToolkitUtil.validate(userId, password1, password2, passwordPolicy);
 	}
 
 	protected void validateScreenName(long companyId, String screenName)

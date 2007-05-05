@@ -22,8 +22,9 @@
 
 package com.liferay.portal.security.pwd;
 
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.PasswordPolicy;
 
 /**
  * <a href="BasicToolkit.java.html"><b><i>View Source</i></b></a>
@@ -33,21 +34,18 @@ import com.liferay.util.GetterUtil;
  */
 public abstract class BasicToolkit {
 
-	public BasicToolkit() {
-		_allowDictionaryWord = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.PASSWORDS_ALLOW_DICTIONARY_WORD));
-	}
-
-	public boolean allowDictionaryWord() {
-		return _allowDictionaryWord;
-	}
-
 	public abstract String generate();
 
-	public boolean validate(String password) {
-		return false;
+	public void validate(
+			String password1, String password2, PasswordPolicy passwordPolicy)
+		throws PortalException, SystemException {
+
+		validate(0, password1, password2, passwordPolicy);
 	}
 
-	private boolean _allowDictionaryWord;
+	public abstract void validate(
+			long userId, String password1, String password2,
+			PasswordPolicy passwordPolicy)
+		throws PortalException, SystemException;
 
 }

@@ -117,6 +117,16 @@ public class PasswordPolicyLocalServiceUtil {
 		return passwordPolicyLocalService.getPasswordPolicy(passwordPolicyId);
 	}
 
+	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
+		long companyId, long organizationId, long locationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.getPasswordPolicy(companyId,
+			organizationId, locationId);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
 		long userId)
 		throws com.liferay.portal.PortalException, 

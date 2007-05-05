@@ -352,8 +352,6 @@ public class PropsUtil {
 
 	public static final String PASSWORDS_REGEXPTOOLKIT_PATTERN = "passwords.regexptoolkit.pattern";
 
-	public static final String PASSWORDS_ALLOW_DICTIONARY_WORD = "passwords.allow.dictionary.word";
-
 	public static final String PASSWORDS_CHANGE_ON_FIRST_USE = "passwords.change.on.first.use";
 
 	public static final String PASSWORDS_LIFESPAN = "passwords.lifespan";

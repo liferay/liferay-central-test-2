@@ -175,6 +175,41 @@ public class PasswordPolicyLocalServiceImpl
 		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
 	}
 
+	public PasswordPolicy getPasswordPolicy(
+			long companyId, long organizationId, long locationId)
+		throws PortalException, SystemException {
+
+		PasswordPolicyRel passwordPolicyRel = null;
+
+		// Check for password policy specifically assigned to this location
+
+		try {
+			passwordPolicyRel =
+				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+					Organization.class.getName(), locationId);
+
+			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+
+		// Check for password policy specifically assigned to this organization
+
+		try {
+			passwordPolicyRel =
+				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+					Organization.class.getName(), organizationId);
+
+			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+
+		// Get default password policy
+
+		return getDefaultPasswordPolicy(companyId);
+	}
+
 	public PasswordPolicy getPasswordPolicyByUserId(long userId)
 		throws PortalException, SystemException {
 
@@ -192,38 +227,13 @@ public class PasswordPolicyLocalServiceImpl
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 
-		// Check for password policy specifically assigned to this location
-
 		User user = UserUtil.findByPrimaryKey(userId);
+
 		long locationId = user.getLocation().getOrganizationId();
-
-		try {
-			passwordPolicyRel =
-				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
-					Organization.class.getName(), locationId);
-
-			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
-		}
-		catch (NoSuchPasswordPolicyRelException nsppre) {
-		}
-
-		// Check for password policy specifically assigned to this organization
-
 		long organizationId = user.getOrganization().getOrganizationId();
 
-		try {
-			passwordPolicyRel =
-				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
-					Organization.class.getName(), organizationId);
-
-			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
-		}
-		catch (NoSuchPasswordPolicyRelException nsppre) {
-		}
-
-		// Get default password policy
-
-		return getDefaultPasswordPolicy(user.getCompanyId());
+		return getPasswordPolicy(
+			user.getCompanyId(), organizationId, locationId);
 	}
 
 	public List search(long companyId, String name, int begin, int end)

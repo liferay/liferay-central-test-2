@@ -22,8 +22,10 @@
 
 package com.liferay.portal.security.pwd;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.words.util.WordsUtil;
 import com.liferay.util.InstancePool;
 
 /**
@@ -38,8 +40,12 @@ public class PwdToolkitUtil {
 		return _instance._generate();
 	}
 
-	public static boolean validate(String password) {
-		return _instance._validate(password);
+	public static void validate(
+			long userId, String password1, String password2,
+			PasswordPolicy passwordPolicy)
+		throws PortalException, SystemException {
+
+		_instance._validate(userId, password1, password2, passwordPolicy);
 	}
 
 	private PwdToolkitUtil() {
@@ -51,14 +57,12 @@ public class PwdToolkitUtil {
 		return _toolkit.generate();
 	}
 
-	private boolean _validate(String password) {
-		boolean validPassword = _toolkit.validate(password);
+	private void _validate(
+			long userId, String password1, String password2,
+			PasswordPolicy passwordPolicy)
+		throws PortalException, SystemException {
 
-		if (validPassword && !_toolkit.allowDictionaryWord()) {
-			validPassword = !WordsUtil.isDictionaryWord(password);
-		}
-
-		return validPassword;
+		_toolkit.validate(userId, password1, password2, passwordPolicy);
 	}
 
 	private static PwdToolkitUtil _instance = new PwdToolkitUtil();

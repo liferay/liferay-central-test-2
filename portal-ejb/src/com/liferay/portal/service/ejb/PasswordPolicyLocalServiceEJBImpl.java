@@ -111,6 +111,14 @@ public class PasswordPolicyLocalServiceEJBImpl
 		return PasswordPolicyLocalServiceFactory.getTxImpl().getPasswordPolicy(passwordPolicyId);
 	}
 
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
+		long companyId, long organizationId, long locationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return PasswordPolicyLocalServiceFactory.getTxImpl().getPasswordPolicy(companyId,
+			organizationId, locationId);
+	}
+
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicyByUserId(
 		long userId)
 		throws com.liferay.portal.PortalException, 

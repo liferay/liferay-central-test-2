@@ -42,7 +42,9 @@ public class UserPasswordException extends PortalException {
 
 	public static final int PASSWORD_SAME_AS_CURRENT = 6;
 
-	public static final int PASSWORDS_DO_NOT_MATCH = 7;
+	public static final int PASSWORD_TOO_YOUNG = 7;
+
+	public static final int PASSWORDS_DO_NOT_MATCH = 8;
 
 	public UserPasswordException(int type) {
 		_type = type;

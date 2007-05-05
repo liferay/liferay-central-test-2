@@ -22,6 +22,10 @@
 
 package com.liferay.portal.security.pwd;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -44,16 +48,21 @@ public class RegExpToolkit extends BasicToolkit {
 		return PwdGenerator.getPinNumber();
 	}
 
-	public boolean validate(String password) {
-		boolean value = password.matches(_pattern);
+	public void validate(
+			long userId, String password1, String password2,
+			PasswordPolicy passwordPolicy)
+		throws PortalException, SystemException {
+
+		boolean value = password1.matches(_pattern);
 
 		if (!value) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Password " + password + " is not valid");
+				_log.warn("Password " + password1 + " is not valid");
 			}
 		}
 
-		return value;
+		throw new UserPasswordException(
+			UserPasswordException.PASSWORD_INVALID);
 	}
 
 	private static Log _log = LogFactory.getLog(RegExpToolkit.class);
