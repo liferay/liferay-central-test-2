@@ -274,15 +274,21 @@
 		<field name="minAge" type="long" />
 		<field name="checkSyntax" type="boolean" />
 		<field name="allowDictionaryWords" type="boolean" />
-		<field name="minLength" type="int" />
+		<field name="minLength" type="int">
+			<hint name="display-width">20</hint>
+		</field>
 		<field name="history" type="boolean" />
 		<field name="historyCount" type="int" />
 		<field name="expireable" type="boolean" />
 		<field name="maxAge" type="long" />
 		<field name="warningTime" type="long" />
-		<field name="graceLimit" type="int" />
+		<field name="graceLimit" type="int">
+			<hint name="display-width">20</hint>
+		</field>
 		<field name="lockout" type="boolean" />
-		<field name="maxFailure" type="int" />
+		<field name="maxFailure" type="int">
+			<hint name="display-width">20</hint>
+		</field>
 		<field name="lockoutDuration" type="long" />
 		<field name="requireUnlock" type="boolean" />
 		<field name="resetFailureCount" type="long" />

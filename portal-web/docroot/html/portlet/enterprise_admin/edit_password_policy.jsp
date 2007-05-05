@@ -59,7 +59,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 
 	jQuery(
 		function() {
-			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= defaultPolicy ? "description" : "name" %>.focus();
 
 			<portlet:namespace />toggleBoxes('changeableCheckbox', 'changeableSettings');
 			<portlet:namespace />toggleBoxes('checkSyntaxCheckbox', 'syntaxSettings');

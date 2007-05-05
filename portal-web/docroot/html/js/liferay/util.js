@@ -772,10 +772,10 @@ function submitForm(form, action, singleSubmit) {
 
 			inputs.each(
 				function(i, el) {
-						var input = jQuery(this);
+					var input = jQuery(this);
 
-						input.attr('disabled', true);
-						input.fadeTo(50, 0.5);
+					input.attr('disabled', true);
+					input.fadeTo(50, 0.5);
 				}
 			);
 		}
