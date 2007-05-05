@@ -82,15 +82,18 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		// WikiPage
 
+		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
-			upgradeNodeIdColumn);
+			pkUpgradeColumn, upgradeNodeIdColumn);
 
 		upgradeTable.updateTable();
 
 		// Resource
 
 		ResourceUtil.upgradePrimKey(nodeIdMapper, WikiNode.class.getName());
+		//ResourceUtil.upgradePrimKey(pageIdMapper, WikiPage.class.getName());
 
 		// Counter
 
