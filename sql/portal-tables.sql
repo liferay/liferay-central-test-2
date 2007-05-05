@@ -1186,15 +1186,22 @@ create table WikiNode (
 );
 
 create table WikiPage (
-	nodeId LONG,
-	title VARCHAR(75) not null,
-	version DOUBLE,
+	pageId LONG primary key,
+	resourcePrimKey LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
+	nodeId LONG,
+	title VARCHAR(75) null,
+	version DOUBLE,
 	content TEXT null,
 	format VARCHAR(75) null,
-	head BOOLEAN,
-	primary key (nodeId, title, version)
+	head BOOLEAN
+);
+
+create table WikiPageResource (
+	resourcePrimKey LONG primary key,
+	nodeId LONG,
+	title VARCHAR(75) null
 );

@@ -20,33 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wiki.model;
+package com.liferay.portlet.wiki.service.base;
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
+import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
+
+import java.util.List;
 
 /**
- * <a href="WikiPage.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>WikiPage</code> table in
- * the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.wiki.service.model.impl.WikiPageImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
+ * <a href="WikiPageResourceLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageModelImpl
- *
  */
-public interface WikiPage extends WikiPageModel {
-	public com.liferay.portlet.wiki.model.WikiNode getNode();
+public abstract class WikiPageResourceLocalServiceBaseImpl
+	implements WikiPageResourceLocalService {
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		return WikiPageResourceUtil.findWithDynamicQuery(queryInitializer);
+	}
+
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		return WikiPageResourceUtil.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
 }

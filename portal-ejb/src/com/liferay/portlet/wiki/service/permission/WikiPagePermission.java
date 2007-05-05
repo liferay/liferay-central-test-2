@@ -75,7 +75,7 @@ public class WikiPagePermission {
 
 		return permissionChecker.hasPermission(
 			node.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePK().toString(), actionId);
+			page.getResourcePrimKey(), actionId);
 	}
 
 }

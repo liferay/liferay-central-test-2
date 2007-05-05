@@ -111,7 +111,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 	<td>
 
 		<%
-		String classPK = wikiPage.getResourcePK().toString();
+		String classPK = String.valueOf(wikiPage.getResourcePrimKey());
 		%>
 
 		<liferay-ui:tags-selector

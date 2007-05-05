@@ -22,8 +22,10 @@
 
 package com.liferay.portlet.wiki.model;
 
+import com.liferay.portal.model.BaseModel;
+
 /**
- * <a href="WikiPage.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageResourceModel.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be overwritten
@@ -31,22 +33,31 @@ package com.liferay.portlet.wiki.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>WikiPage</code> table in
- * the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.wiki.service.model.impl.WikiPageImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
+ * This interface is a model that represents the <code>WikiPageResource</code> table
+ * in the database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageModelImpl
+ * @see com.liferay.portlet.wiki.service.model.WikiPageResource
+ * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceImpl
+ * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceModelImpl
  *
  */
-public interface WikiPage extends WikiPageModel {
-	public com.liferay.portlet.wiki.model.WikiNode getNode();
+public interface WikiPageResourceModel extends BaseModel {
+	public long getPrimaryKey();
+
+	public void setPrimaryKey(long pk);
+
+	public long getResourcePrimKey();
+
+	public void setResourcePrimKey(long resourcePrimKey);
+
+	public long getNodeId();
+
+	public void setNodeId(long nodeId);
+
+	public String getTitle();
+
+	public void setTitle(String title);
 }

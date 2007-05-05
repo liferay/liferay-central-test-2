@@ -20,10 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wiki.model;
+package com.liferay.portlet.wiki.service.ejb;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBLocalHome;
 
 /**
- * <a href="WikiPage.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageResourceLocalServiceHome.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be overwritten
@@ -31,22 +34,19 @@ package com.liferay.portlet.wiki.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>WikiPage</code> table in
- * the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.wiki.service.model.impl.WikiPageImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
+ * This class is the EJB home of the service that is used when Liferay is run inside
+ * a full J2EE container.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageModelImpl
+ * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalService
+ * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil
+ * @see com.liferay.portlet.wiki.service.ejb.WikiPageResourceLocalServiceEJB
+ * @see com.liferay.portlet.wiki.service.ejb.WikiPageResourceLocalServiceEJBImpl
+ * @see com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl
  *
  */
-public interface WikiPage extends WikiPageModel {
-	public com.liferay.portlet.wiki.model.WikiNode getNode();
+public interface WikiPageResourceLocalServiceHome extends EJBLocalHome {
+	public WikiPageResourceLocalServiceEJB create() throws CreateException;
 }

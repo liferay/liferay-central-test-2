@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.wiki.model;
 
-import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,13 +48,15 @@ import java.util.List;
 public class WikiPageSoap implements Serializable {
 	public static WikiPageSoap toSoapModel(WikiPage model) {
 		WikiPageSoap soapModel = new WikiPageSoap();
-		soapModel.setNodeId(model.getNodeId());
-		soapModel.setTitle(model.getTitle());
-		soapModel.setVersion(model.getVersion());
+		soapModel.setPageId(model.getPageId());
+		soapModel.setResourcePrimKey(model.getResourcePrimKey());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setNodeId(model.getNodeId());
+		soapModel.setTitle(model.getTitle());
+		soapModel.setVersion(model.getVersion());
 		soapModel.setContent(model.getContent());
 		soapModel.setFormat(model.getFormat());
 		soapModel.setHead(model.getHead());
@@ -78,38 +78,28 @@ public class WikiPageSoap implements Serializable {
 	public WikiPageSoap() {
 	}
 
-	public WikiPagePK getPrimaryKey() {
-		return new WikiPagePK(_nodeId, _title, _version);
+	public long getPrimaryKey() {
+		return _pageId;
 	}
 
-	public void setPrimaryKey(WikiPagePK pk) {
-		setNodeId(pk.nodeId);
-		setTitle(pk.title);
-		setVersion(pk.version);
+	public void setPrimaryKey(long pk) {
+		setPageId(pk);
 	}
 
-	public long getNodeId() {
-		return _nodeId;
+	public long getPageId() {
+		return _pageId;
 	}
 
-	public void setNodeId(long nodeId) {
-		_nodeId = nodeId;
+	public void setPageId(long pageId) {
+		_pageId = pageId;
 	}
 
-	public String getTitle() {
-		return _title;
+	public long getResourcePrimKey() {
+		return _resourcePrimKey;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	public double getVersion() {
-		return _version;
-	}
-
-	public void setVersion(double version) {
-		_version = version;
+	public void setResourcePrimKey(long resourcePrimKey) {
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getCompanyId() {
@@ -144,6 +134,30 @@ public class WikiPageSoap implements Serializable {
 		_createDate = createDate;
 	}
 
+	public long getNodeId() {
+		return _nodeId;
+	}
+
+	public void setNodeId(long nodeId) {
+		_nodeId = nodeId;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public double getVersion() {
+		return _version;
+	}
+
+	public void setVersion(double version) {
+		_version = version;
+	}
+
 	public String getContent() {
 		return _content;
 	}
@@ -172,13 +186,15 @@ public class WikiPageSoap implements Serializable {
 		_head = head;
 	}
 
-	private long _nodeId;
-	private String _title;
-	private double _version;
+	private long _pageId;
+	private long _resourcePrimKey;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private long _nodeId;
+	private String _title;
+	private double _version;
 	private String _content;
 	private String _format;
 	private boolean _head;

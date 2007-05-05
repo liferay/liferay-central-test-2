@@ -38,23 +38,21 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class WikiPageUtil {
-	public static com.liferay.portlet.wiki.model.WikiPage create(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK) {
-		return getPersistence().create(wikiPagePK);
+	public static com.liferay.portlet.wiki.model.WikiPage create(long pageId) {
+		return getPersistence().create(pageId);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPage remove(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK)
+	public static com.liferay.portlet.wiki.model.WikiPage remove(long pageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(wikiPagePK));
+			listener.onBeforeRemove(findByPrimaryKey(pageId));
 		}
 
 		com.liferay.portlet.wiki.model.WikiPage wikiPage = getPersistence()
-															   .remove(wikiPagePK);
+															   .remove(pageId);
 
 		if (listener != null) {
 			listener.onAfterRemove(wikiPage);
@@ -140,16 +138,15 @@ public class WikiPageUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK)
+		long pageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByPrimaryKey(wikiPagePK);
+		return getPersistence().findByPrimaryKey(pageId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage fetchByPrimaryKey(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(wikiPagePK);
+		long pageId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(pageId);
 	}
 
 	public static java.util.List findByNodeId(long nodeId)
@@ -183,11 +180,11 @@ public class WikiPageUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByNodeId_PrevAndNext(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK,
-		long nodeId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long pageId, long nodeId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByNodeId_PrevAndNext(wikiPagePK, nodeId, obc);
+		return getPersistence().findByNodeId_PrevAndNext(pageId, nodeId, obc);
 	}
 
 	public static java.util.List findByN_T(long nodeId, java.lang.String title)
@@ -223,13 +220,11 @@ public class WikiPageUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_T_PrevAndNext(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK,
-		long nodeId, java.lang.String title,
+		long pageId, long nodeId, java.lang.String title,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_PrevAndNext(wikiPagePK, nodeId,
-			title, obc);
+		return getPersistence().findByN_T_PrevAndNext(pageId, nodeId, title, obc);
 	}
 
 	public static java.util.List findByN_H(long nodeId, boolean head)
@@ -265,13 +260,24 @@ public class WikiPageUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_H_PrevAndNext(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK,
-		long nodeId, boolean head,
+		long pageId, long nodeId, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_H_PrevAndNext(wikiPagePK, nodeId, head,
-			obc);
+		return getPersistence().findByN_H_PrevAndNext(pageId, nodeId, head, obc);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_V(
+		long nodeId, java.lang.String title, double version)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException {
+		return getPersistence().findByN_T_V(nodeId, title, version);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage fetchByN_T_V(
+		long nodeId, java.lang.String title, double version)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByN_T_V(nodeId, title, version);
 	}
 
 	public static java.util.List findByN_T_H(long nodeId,
@@ -310,13 +316,12 @@ public class WikiPageUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_T_H_PrevAndNext(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK,
-		long nodeId, java.lang.String title, boolean head,
+		long pageId, long nodeId, java.lang.String title, boolean head,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_H_PrevAndNext(wikiPagePK, nodeId,
-			title, head, obc);
+		return getPersistence().findByN_T_H_PrevAndNext(pageId, nodeId, title,
+			head, obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -363,6 +368,13 @@ public class WikiPageUtil {
 		getPersistence().removeByN_H(nodeId, head);
 	}
 
+	public static void removeByN_T_V(long nodeId, java.lang.String title,
+		double version)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageException {
+		getPersistence().removeByN_T_V(nodeId, title, version);
+	}
+
 	public static void removeByN_T_H(long nodeId, java.lang.String title,
 		boolean head) throws com.liferay.portal.SystemException {
 		getPersistence().removeByN_T_H(nodeId, title, head);
@@ -385,6 +397,11 @@ public class WikiPageUtil {
 	public static int countByN_H(long nodeId, boolean head)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByN_H(nodeId, head);
+	}
+
+	public static int countByN_T_V(long nodeId, java.lang.String title,
+		double version) throws com.liferay.portal.SystemException {
+		return getPersistence().countByN_T_V(nodeId, title, version);
 	}
 
 	public static int countByN_T_H(long nodeId, java.lang.String title,

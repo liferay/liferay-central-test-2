@@ -50,9 +50,11 @@
 
 		<!-- PK fields -->
 
-		<column name="nodeId" type="long" primary="true" />
-		<column name="title" type="String" primary="true" />
-		<column name="version" type="double" primary="true" />
+		<column name="pageId" type="long" primary="true" />
+
+		<!-- Resource -->
+
+		<column name="resourcePrimKey" type="long" />
 
 		<!-- Audit fields -->
 
@@ -63,6 +65,9 @@
 
 		<!-- Other fields -->
 
+		<column name="nodeId" type="long" />
+		<column name="title" type="String" />
+		<column name="version" type="double" />
 		<column name="content" type="String" />
 		<column name="format" type="String" />
 		<column name="head" type="boolean" />
@@ -88,6 +93,11 @@
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
 		</finder>
+		<finder name="N_T_V" return-type="WikiPage">
+			<finder-column name="nodeId" />
+			<finder-column name="title" />
+			<finder-column name="version" />
+		</finder>
 		<finder name="N_T_H" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
@@ -97,6 +107,24 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
+	</entity>
+	<entity name="WikiPageResource" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="resourcePrimKey" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="nodeId" type="long" />
+		<column name="title" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="N_T" return-type="WikiPageResource">
+			<finder-column name="nodeId" />
+			<finder-column name="title" />
+		</finder>
 	</entity>
 	<exceptions>
 		<exception>NodeName</exception>

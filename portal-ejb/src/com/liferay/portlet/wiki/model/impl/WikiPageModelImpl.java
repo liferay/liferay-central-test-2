@@ -25,8 +25,6 @@ package com.liferay.portlet.wiki.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -57,24 +55,26 @@ import java.util.Date;
 public class WikiPageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "WikiPage";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "nodeId", new Integer(Types.BIGINT) },
-			{ "title", new Integer(Types.VARCHAR) },
-			{ "version", new Integer(Types.DOUBLE) },
+			{ "pageId", new Integer(Types.BIGINT) },
+			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "nodeId", new Integer(Types.BIGINT) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
 			{ "content", new Integer(Types.CLOB) },
 			{ "format", new Integer(Types.VARCHAR) },
 			{ "head", new Integer(Types.BOOLEAN) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.title"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.userName"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.title"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.content"),
@@ -88,49 +88,31 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	public WikiPageModelImpl() {
 	}
 
-	public WikiPagePK getPrimaryKey() {
-		return new WikiPagePK(_nodeId, _title, _version);
+	public long getPrimaryKey() {
+		return _pageId;
 	}
 
-	public void setPrimaryKey(WikiPagePK pk) {
-		setNodeId(pk.nodeId);
-		setTitle(pk.title);
-		setVersion(pk.version);
+	public void setPrimaryKey(long pk) {
+		setPageId(pk);
 	}
 
-	public long getNodeId() {
-		return _nodeId;
+	public long getPageId() {
+		return _pageId;
 	}
 
-	public void setNodeId(long nodeId) {
-		if (nodeId != _nodeId) {
-			_nodeId = nodeId;
+	public void setPageId(long pageId) {
+		if (pageId != _pageId) {
+			_pageId = pageId;
 		}
 	}
 
-	public String getTitle() {
-		return GetterUtil.getString(_title);
+	public long getResourcePrimKey() {
+		return _resourcePrimKey;
 	}
 
-	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
-			_title = title;
-		}
-	}
-
-	public double getVersion() {
-		return _version;
-	}
-
-	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+	public void setResourcePrimKey(long resourcePrimKey) {
+		if (resourcePrimKey != _resourcePrimKey) {
+			_resourcePrimKey = resourcePrimKey;
 		}
 	}
 
@@ -184,6 +166,42 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getNodeId() {
+		return _nodeId;
+	}
+
+	public void setNodeId(long nodeId) {
+		if (nodeId != _nodeId) {
+			_nodeId = nodeId;
+		}
+	}
+
+	public String getTitle() {
+		return GetterUtil.getString(_title);
+	}
+
+	public void setTitle(String title) {
+		if (((title == null) && (_title != null)) ||
+				((title != null) && (_title == null)) ||
+				((title != null) && (_title != null) && !title.equals(_title))) {
+			if (!XSS_ALLOW_TITLE) {
+				title = XSSUtil.strip(title);
+			}
+
+			_title = title;
+		}
+	}
+
+	public double getVersion() {
+		return _version;
+	}
+
+	public void setVersion(double version) {
+		if (version != _version) {
+			_version = version;
+		}
+	}
+
 	public String getContent() {
 		return GetterUtil.getString(_content);
 	}
@@ -234,13 +252,15 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		WikiPageImpl clone = new WikiPageImpl();
-		clone.setNodeId(getNodeId());
-		clone.setTitle(getTitle());
-		clone.setVersion(getVersion());
+		clone.setPageId(getPageId());
+		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
+		clone.setNodeId(getNodeId());
+		clone.setTitle(getTitle());
+		clone.setVersion(getVersion());
 		clone.setContent(getContent());
 		clone.setFormat(getFormat());
 		clone.setHead(getHead());
@@ -308,9 +328,9 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		WikiPagePK pk = wikiPage.getPrimaryKey();
+		long pk = wikiPage.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -319,16 +339,18 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private long _nodeId;
-	private String _title;
-	private double _version;
+	private long _pageId;
+	private long _resourcePrimKey;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private long _nodeId;
+	private String _title;
+	private double _version;
 	private String _content;
 	private String _format;
 	private boolean _head;

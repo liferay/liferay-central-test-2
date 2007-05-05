@@ -420,4 +420,12 @@ alter_column_type Website typeId INTEGER;
 alter_column_type WikiNode nodeId LONG;
 alter_column_type WikiNode groupId LONG;
 
+alter table WikiPage add pageId LONG;
+alter table WikiPage add resourcePrimKey LONG;
 alter_column_type WikiPage nodeId LONG;
+
+create table WikiPageResource (
+	resourcePrimKey LONG primary key,
+	nodeId LONG,
+	title VARCHAR(75) null
+);

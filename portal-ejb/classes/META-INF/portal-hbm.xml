@@ -1242,17 +1242,27 @@
 	</class>
 	<class name="com.liferay.portlet.wiki.model.impl.WikiPageImpl" table="WikiPage">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.wiki.service.persistence.WikiPagePK">
-			<key-property name="nodeId" />
-			<key-property name="title" />
-			<key-property name="version" />
-		</composite-id>
+		<id name="pageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="resourcePrimKey" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
+		<property name="nodeId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="format" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="head" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" table="WikiPageResource">
+		<cache usage="read-write" />
+		<id name="resourcePrimKey" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="nodeId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

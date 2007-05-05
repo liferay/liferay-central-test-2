@@ -4753,6 +4753,46 @@
 			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.wiki.service.WikiPageResourceLocalService</value>
+		</property>
+		<property name="jndiName">
+			<value>ejb/liferay/WikiPageResourceLocalServiceHome</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
 			<value>com.liferay.portlet.workflow.service.WorkflowComponentService</value>

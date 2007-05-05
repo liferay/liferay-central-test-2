@@ -20,33 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wiki.model;
+package com.liferay.portlet.wiki.model.impl;
+
+import com.liferay.portlet.wiki.model.WikiPageResource;
 
 /**
- * <a href="WikiPage.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>WikiPage</code> table in
- * the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.wiki.service.model.impl.WikiPageImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
+ * <a href="WikiPageResourceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageModelImpl
- *
  */
-public interface WikiPage extends WikiPageModel {
-	public com.liferay.portlet.wiki.model.WikiNode getNode();
+public class WikiPageResourceImpl
+	extends WikiPageResourceModelImpl implements WikiPageResource {
+
+	public WikiPageResourceImpl() {
+	}
+
 }

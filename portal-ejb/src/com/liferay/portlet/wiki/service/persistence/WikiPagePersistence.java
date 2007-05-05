@@ -53,15 +53,15 @@ import java.util.List;
  *
  */
 public class WikiPagePersistence extends BasePersistence {
-	public WikiPage create(WikiPagePK wikiPagePK) {
+	public WikiPage create(long pageId) {
 		WikiPage wikiPage = new WikiPageImpl();
 		wikiPage.setNew(true);
-		wikiPage.setPrimaryKey(wikiPagePK);
+		wikiPage.setPrimaryKey(pageId);
 
 		return wikiPage;
 	}
 
-	public WikiPage remove(WikiPagePK wikiPagePK)
+	public WikiPage remove(long pageId)
 		throws NoSuchPageException, SystemException {
 		Session session = null;
 
@@ -69,16 +69,16 @@ public class WikiPagePersistence extends BasePersistence {
 			session = openSession();
 
 			WikiPage wikiPage = (WikiPage)session.get(WikiPageImpl.class,
-					wikiPagePK);
+					new Long(pageId));
 
 			if (wikiPage == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No WikiPage exists with the primary key " +
-						wikiPagePK);
+						pageId);
 				}
 
 				throw new NoSuchPageException(
-					"No WikiPage exists with the primary key " + wikiPagePK);
+					"No WikiPage exists with the primary key " + pageId);
 			}
 
 			return remove(wikiPage);
@@ -148,31 +148,29 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiPage findByPrimaryKey(WikiPagePK wikiPagePK)
+	public WikiPage findByPrimaryKey(long pageId)
 		throws NoSuchPageException, SystemException {
-		WikiPage wikiPage = fetchByPrimaryKey(wikiPagePK);
+		WikiPage wikiPage = fetchByPrimaryKey(pageId);
 
 		if (wikiPage == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No WikiPage exists with the primary key " +
-					wikiPagePK);
+				_log.warn("No WikiPage exists with the primary key " + pageId);
 			}
 
 			throw new NoSuchPageException(
-				"No WikiPage exists with the primary key " + wikiPagePK);
+				"No WikiPage exists with the primary key " + pageId);
 		}
 
 		return wikiPage;
 	}
 
-	public WikiPage fetchByPrimaryKey(WikiPagePK wikiPagePK)
-		throws SystemException {
+	public WikiPage fetchByPrimaryKey(long pageId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (WikiPage)session.get(WikiPageImpl.class, wikiPagePK);
+			return (WikiPage)session.get(WikiPageImpl.class, new Long(pageId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -294,10 +292,9 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiPage[] findByNodeId_PrevAndNext(WikiPagePK wikiPagePK,
-		long nodeId, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
-		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+	public WikiPage[] findByNodeId_PrevAndNext(long pageId, long nodeId,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = findByPrimaryKey(pageId);
 		int count = countByNodeId(nodeId);
 		Session session = null;
 
@@ -486,10 +483,10 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiPage[] findByN_T_PrevAndNext(WikiPagePK wikiPagePK, long nodeId,
+	public WikiPage[] findByN_T_PrevAndNext(long pageId, long nodeId,
 		String title, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
-		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+		WikiPage wikiPage = findByPrimaryKey(pageId);
 		int count = countByN_T(nodeId, title);
 		Session session = null;
 
@@ -671,10 +668,10 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiPage[] findByN_H_PrevAndNext(WikiPagePK wikiPagePK, long nodeId,
+	public WikiPage[] findByN_H_PrevAndNext(long pageId, long nodeId,
 		boolean head, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
-		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+		WikiPage wikiPage = findByPrimaryKey(pageId);
 		int count = countByN_H(nodeId, head);
 		Session session = null;
 
@@ -713,6 +710,91 @@ public class WikiPagePersistence extends BasePersistence {
 			array[2] = (WikiPage)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public WikiPage findByN_T_V(long nodeId, String title, double version)
+		throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = fetchByN_T_V(nodeId, title, version);
+
+		if (wikiPage == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("title=");
+			msg.append(title);
+			msg.append(", ");
+			msg.append("version=");
+			msg.append(version);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchPageException(msg.toString());
+		}
+
+		return wikiPage;
+	}
+
+	public WikiPage fetchByN_T_V(long nodeId, String title, double version)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("nodeId = ?");
+			query.append(" AND ");
+
+			if (title == null) {
+				query.append("title IS NULL");
+			}
+			else {
+				query.append("title = ?");
+			}
+
+			query.append(" AND ");
+			query.append("version = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("nodeId ASC").append(", ");
+			query.append("title ASC").append(", ");
+			query.append("version ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, nodeId);
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
+			q.setDouble(queryPos++, version);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			WikiPage wikiPage = (WikiPage)list.get(0);
+
+			return wikiPage;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -881,10 +963,10 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
-	public WikiPage[] findByN_T_H_PrevAndNext(WikiPagePK wikiPagePK,
-		long nodeId, String title, boolean head, OrderByComparator obc)
+	public WikiPage[] findByN_T_H_PrevAndNext(long pageId, long nodeId,
+		String title, boolean head, OrderByComparator obc)
 		throws NoSuchPageException, SystemException {
-		WikiPage wikiPage = findByPrimaryKey(wikiPagePK);
+		WikiPage wikiPage = findByPrimaryKey(pageId);
 		int count = countByN_T_H(nodeId, title, head);
 		Session session = null;
 
@@ -1056,6 +1138,12 @@ public class WikiPagePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByN_T_V(long nodeId, String title, double version)
+		throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = findByN_T_V(nodeId, title, version);
+		remove(wikiPage);
+	}
+
 	public void removeByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		Iterator itr = findByN_T_H(nodeId, title, head).iterator();
@@ -1183,6 +1271,62 @@ public class WikiPagePersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 			q.setBoolean(queryPos++, head);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByN_T_V(long nodeId, String title, double version)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+			query.append("nodeId = ?");
+			query.append(" AND ");
+
+			if (title == null) {
+				query.append("title IS NULL");
+			}
+			else {
+				query.append("title = ?");
+			}
+
+			query.append(" AND ");
+			query.append("version = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, nodeId);
+
+			if (title != null) {
+				q.setString(queryPos++, title);
+			}
+
+			q.setDouble(queryPos++, version);
 
 			Iterator itr = q.list().iterator();
 

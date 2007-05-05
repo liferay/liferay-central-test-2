@@ -1364,6 +1364,16 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageResourceLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/WikiPageResourceLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
 			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
 			<bean-pool>

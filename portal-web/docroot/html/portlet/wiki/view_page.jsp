@@ -78,7 +78,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 			<liferay-security:permissionsURL
 				modelResource="<%= WikiPage.class.getName() %>"
 				modelResourceDescription="<%= wikiPage.getTitle() %>"
-				resourcePrimKey="<%= wikiPage.getResourcePK().toString() %>"
+				resourcePrimKey="<%= String.valueOf(wikiPage.getResourcePrimKey()) %>"
 				var="permissionsURL"
 			/>
 
@@ -161,7 +161,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 		formName="fm2"
 		formAction="<%= discussionURL %>"
 		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePK().toString() %>"
+		classPK="<%= String.valueOf(wikiPage.getResourcePrimKey()) %>"
 		userId="<%= wikiPage.getUserId() %>"
 		subject="<%= wikiPage.getTitle() %>"
 		redirect="<%= currentURL %>"

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
@@ -35,10 +36,10 @@ import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
-import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.NodeFilter;
@@ -83,15 +84,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		validate(title);
 
-		WikiPagePK pk = new WikiPagePK(
-			nodeId, title, WikiPageImpl.DEFAULT_VERSION);
+		long pageId = CounterLocalServiceUtil.increment();
 
-		WikiPage page = WikiPageUtil.create(pk);
+		long resourcePrimKey =
+			WikiPageResourceLocalServiceUtil.getPageResourcePrimKey(
+				nodeId, title);
 
+		WikiPage page = WikiPageUtil.create(pageId);
+
+		page.setResourcePrimKey(resourcePrimKey);
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
 		page.setCreateDate(now);
+		page.setNodeId(nodeId);
+		page.setTitle(title);
+		page.setVersion(WikiPageImpl.DEFAULT_VERSION);
 		page.setFormat(WikiPageImpl.DEFAULT_FORMAT);
 		page.setHead(true);
 
@@ -123,7 +131,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
-			WikiPage.class.getName(), page.getResourcePK().toString(), false,
+			WikiPage.class.getName(), page.getResourcePrimKey(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -145,7 +153,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
-			WikiPage.class.getName(), page.getResourcePK().toString(),
+			WikiPage.class.getName(), page.getResourcePrimKey(),
 			communityPermissions, guestPermissions);
 	}
 
@@ -177,13 +185,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			WikiPage.class.getName(), page.getResourcePK().toString());
+			WikiPage.class.getName(),
+			String.valueOf(page.getResourcePrimKey()));
 
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
 			page.getCompanyId(), WikiPage.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, page.getResourcePK().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, page.getResourcePrimKey());
+
+		// Resource
+
+		WikiPageResourceLocalServiceUtil.deletePageResource(
+			page.getNodeId(), page.getTitle());
 
 		// All versions
 
@@ -306,8 +320,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page = getPage(nodeId, title);
 		}
 		else {
-			page = WikiPageUtil.findByPrimaryKey(
-				new WikiPagePK(nodeId, title, version));
+			page = WikiPageUtil.findByN_T_V(nodeId, title, version);
 		}
 
 		return page;
@@ -416,14 +429,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		double oldVersion = page.getVersion();
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
-		WikiPagePK pk = new WikiPagePK(nodeId, title, newVersion);
+		long pageId = CounterLocalServiceUtil.increment();
 
-		page = WikiPageUtil.create(pk);
+		page = WikiPageUtil.create(pageId);
 
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
 		page.setCreateDate(now);
+		page.setNodeId(nodeId);
+		page.setTitle(title);
+		page.setVersion(newVersion);
 		page.setContent(content);
 		page.setFormat(format);
 		page.setHead(true);
@@ -443,7 +459,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (tagsEntries != null) {
 			TagsAssetLocalServiceUtil.updateAsset(
 				userId, WikiPage.class.getName(),
-				page.getResourcePK().toString(), tagsEntries);
+				String.valueOf(page.getResourcePrimKey()), tagsEntries);
 		}
 
 		// Lucene

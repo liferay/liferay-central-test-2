@@ -53,18 +53,8 @@ import java.util.List;
 public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("nodeId", model.getNodeId());
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		jsonObj.put("version", model.getVersion());
+		jsonObj.put("pageId", model.getPageId());
+		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
@@ -85,6 +75,19 @@ public class WikiPageJSONSerializer {
 		else {
 			jsonObj.put("createDate", createDate.toString());
 		}
+
+		jsonObj.put("nodeId", model.getNodeId());
+
+		String title = model.getTitle();
+
+		if (title == null) {
+			jsonObj.put("title", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("title", title.toString());
+		}
+
+		jsonObj.put("version", model.getVersion());
 
 		String content = model.getContent();
 

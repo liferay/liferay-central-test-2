@@ -1216,13 +1216,15 @@
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiPage">
-		<field name="nodeId" type="long" />
-		<field name="title" type="String" />
-		<field name="version" type="double" />
+		<field name="pageId" type="long" />
+		<field name="resourcePrimKey" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
+		<field name="nodeId" type="long" />
+		<field name="title" type="String" />
+		<field name="version" type="double" />
 		<field name="content" type="String">
 			<hint-collection name="CLOB" />
 			<hint name="display-height">375</hint>
@@ -1231,5 +1233,10 @@
 		</field>
 		<field name="format" type="String" />
 		<field name="head" type="boolean" />
+	</model>
+	<model name="com.liferay.portlet.wiki.model.WikiPageResource">
+		<field name="resourcePrimKey" type="long" />
+		<field name="nodeId" type="long" />
+		<field name="title" type="String" />
 	</model>
 </model-hints>

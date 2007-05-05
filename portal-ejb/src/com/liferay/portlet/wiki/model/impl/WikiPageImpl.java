@@ -26,7 +26,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
-import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,10 +56,6 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	};
 
 	public WikiPageImpl() {
-	}
-
-	public WikiPagePK getResourcePK() {
-		return new WikiPagePK(getNodeId(), getTitle(), DEFAULT_VERSION);
 	}
 
 	public WikiNode getNode() {

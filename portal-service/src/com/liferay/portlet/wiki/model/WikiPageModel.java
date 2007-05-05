@@ -24,8 +24,6 @@ package com.liferay.portlet.wiki.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
-
 import java.util.Date;
 
 /**
@@ -49,21 +47,17 @@ import java.util.Date;
  *
  */
 public interface WikiPageModel extends BaseModel {
-	public WikiPagePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(WikiPagePK pk);
+	public void setPrimaryKey(long pk);
 
-	public long getNodeId();
+	public long getPageId();
 
-	public void setNodeId(long nodeId);
+	public void setPageId(long pageId);
 
-	public String getTitle();
+	public long getResourcePrimKey();
 
-	public void setTitle(String title);
-
-	public double getVersion();
-
-	public void setVersion(double version);
+	public void setResourcePrimKey(long resourcePrimKey);
 
 	public long getCompanyId();
 
@@ -80,6 +74,18 @@ public interface WikiPageModel extends BaseModel {
 	public Date getCreateDate();
 
 	public void setCreateDate(Date createDate);
+
+	public long getNodeId();
+
+	public void setNodeId(long nodeId);
+
+	public String getTitle();
+
+	public void setTitle(String title);
+
+	public double getVersion();
+
+	public void setVersion(double version);
 
 	public String getContent();
 
