@@ -46,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
 public class PasswordPolicyToolkit extends BasicToolkit {
 
 	public String generate() {
-		return PwdGenerator.getPinNumber();
+		return PwdGenerator.getPassword();
 	}
 
 	public void validate(

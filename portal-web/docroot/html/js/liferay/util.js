@@ -23,7 +23,7 @@ Liferay.Util = {
 	},
 
 	addInputFocus: function(el) {
-		var item;
+		var item = null;
 
 		if (el) {
 			if (typeof el == 'object') {
@@ -36,18 +36,18 @@ Liferay.Util = {
 		else {
 			item = document.body;
 		}
-		
+
 		var inputs = jQuery("input[@type=text], input[@type=password], select, textarea", item);
-		
+
 		inputs.focus(
 			function() {
 				jQuery(this).addClass('focus');
 			}
 		);
-		
+
 		inputs.blur(
 			function() {
-				jQuery(this).removeClass('focus');	
+				jQuery(this).removeClass('focus');
 			}
 		);
 	},
@@ -681,7 +681,7 @@ LinkedList.prototype.add = function(obj) {
 		obj.listInfo.prev = this.tail;
 		this.tail = obj;
 	}
-	
+
 	obj.listInfo.listObj = this;
 };
 
@@ -767,18 +767,19 @@ function submitForm(form, action, singleSubmit) {
 
 		if (singleSubmit == null || singleSubmit) {
 			Liferay.Util.submitCountdown++;
-			
+
 			var inputs = jQuery('input[@type=button], input[@type=reset], input[@type=submit]', form);
-			
+
 			inputs.each(
 				function(i, el) {
-						var input = jQuery(this)
+						var input = jQuery(this);
+
 						input.attr('disabled', true);
 						input.fadeTo(50, 0.5);
 				}
 			);
 		}
-		
+
 		if (action != null) {
 			form.action = action;
 		}

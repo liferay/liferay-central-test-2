@@ -137,7 +137,7 @@
 /* ---------- Table or section header ---------- */
 
 .portlet-section-header {
-	background: #d9e1ec;
+	background: #D9E1EC;
 	padding: 1px 0 0;
 }
 
@@ -151,7 +151,7 @@
 /* ---------- Normal text in a table cell ---------- */
 
 .portlet-section-body {
-	background: #e7edf4;
+	background: #E7EDF4;
 	color: #000;
 }
 
@@ -164,7 +164,7 @@
 /* ---------- Text in every other row in the cell ---------- */
 
 .portlet-section-alternate {
-	background: #d3deeb;
+	background: #D3DEEB;
 	color: #000;
 }
 
