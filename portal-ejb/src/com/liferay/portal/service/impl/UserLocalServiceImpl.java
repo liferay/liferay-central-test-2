@@ -1570,8 +1570,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (!autoPassword) {
 			PasswordPolicy passwordPolicy =
-				PasswordPolicyLocalServiceUtil.getPasswordPolicy(
-					companyId, organizationId, locationId);
+				PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(
+					companyId);
 
 			PwdToolkitUtil.validate(0, password1, password2, passwordPolicy);
 		}

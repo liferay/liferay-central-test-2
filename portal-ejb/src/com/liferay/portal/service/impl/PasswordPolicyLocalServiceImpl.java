@@ -77,8 +77,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		validate(0, user.getCompanyId(), name);
 
-		long passwordPolicyId = CounterLocalServiceUtil.increment(
-			PasswordPolicy.class.getName());
+		long passwordPolicyId = CounterLocalServiceUtil.increment();
 
 		PasswordPolicy passwordPolicy = PasswordPolicyUtil.create(
 			passwordPolicyId);

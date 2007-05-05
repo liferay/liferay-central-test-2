@@ -31,8 +31,6 @@ String tabs4 = ParamUtil.getString(request, "tabs4", "phone-numbers");
 
 User user2 = PortalUtil.getSelectedUser(request);
 
-PasswordPolicy passwordPolicy = PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(user2.getUserId());
-
 boolean editable = false;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
@@ -49,6 +47,15 @@ Contact contact2 = null;
 
 if (user2 != null) {
 	contact2 = user2.getContact();
+}
+
+PasswordPolicy passwordPolicy = null;
+
+if (user2 == null) {
+	passwordPolicy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(company.getCompanyId());
+}
+else {
+	passwordPolicy = PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(user2.getUserId());
 }
 
 String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
