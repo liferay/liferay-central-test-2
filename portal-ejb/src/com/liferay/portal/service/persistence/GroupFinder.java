@@ -613,6 +613,11 @@ public class GroupFinder {
 
 							qPos.add(valueInteger);
 						}
+						else if (value instanceof Long) {
+							Long valueLong = (Long)value;
+
+							qPos.add(valueLong);
+						}
 						else if (value instanceof String) {
 							String valueString = (String)value;
 
