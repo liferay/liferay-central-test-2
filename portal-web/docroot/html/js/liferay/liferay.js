@@ -37,3 +37,16 @@ jQuery.fn.getOne = function(s) {
 };
 
 Liferay = {};
+
+/* jQuery's implementation of height() & width() is poor on performace
+ * in IE. Override with basic JS until issue is resolved
+ */
+if (jQuery.browser.msie) {
+	jQuery.each( [ "height", "width" ], function(i,n){
+		jQuery.fn[ n ] = function(h) {
+			return h == undefined ?
+				( this.length ? (n == "height" ? this[0].offsetHeight : this[0].offsetWidth) : null ) :
+				this.css( n, h.constructor == String ? h : h + "px" );
+		};
+	});
+}

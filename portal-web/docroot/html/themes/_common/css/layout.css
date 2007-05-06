@@ -13,6 +13,11 @@
 
 /* ---------- Column widths ---------- */
 
+.lfr-column.dragging {
+	height: 100px;
+	min-height: 100px;
+}
+
 .lfr-column.ten {
 	width: 10%;
 }

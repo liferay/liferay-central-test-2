@@ -199,7 +199,22 @@
 	<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 		jQuery(document).ready(
 			function() {
-				Liferay.Draggables.init();
+				if (themeDisplay.isFreeformLayout()) {
+					Liferay.Freeform({
+						columnSelector: "div[@id^=layout-column_]",
+						boxSelector: ".portlet-boundary"
+					});
+				}
+				else {
+					Liferay.Columns({
+						columnSelector: "div[@id^=layout-column_]",
+						handleSelector: ".portlet-title:first, .portlet-title-default:first",
+						boxSelector: ".portlet-boundary" ,
+						positionClass: "drop-position",
+						areaClass: "drop-area",
+						onComplete: function(d) {Liferay.Portlet.move(d)}
+					});
+				}
 
 				new Liferay.Navigation(
 					{

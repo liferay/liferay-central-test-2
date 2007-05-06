@@ -136,6 +136,33 @@ body.staging {
 	zoom: 1;
 }
 
+/* ---------- Drag Indicators ---------- */
+
+.drag-indicator {
+	background: url(../images/spacer.png) scroll repeat;
+	border: 3px dashed #003366;
+	cursor: move;
+	font-size: 0;
+	position: relative;
+}
+
+.drop-area {
+	background-color: #000000;
+	font-size: 0;
+	opacity: .10;
+	filter: alpha(opacity=10);
+}
+
+.drop-position-top {
+	background: url(../images/shadow/fade-top.png) scroll repeat-x top left;
+	font-size: 0;
+}
+
+.drop-position-bottom {
+	background: url(../images/shadow/fade-bottom.png) scroll repeat-x bottom left;
+	font-size: 0;
+}
+
 /* ---------- Alerts and popups ---------- */
 
 .alert-background {
@@ -154,6 +181,7 @@ body.staging {
 	border-bottom: 1px solid #aaa;
 	color: #333;
 	cursor: move;
+	margin-bottom: 20px;
 	padding: 5px;
 	position: relative;
 }
@@ -184,7 +212,7 @@ body.staging {
 
 .portal-add-content {
 	background: #fff;
-	padding: 8px 4px 0;
+	padding: 8px;
 	text-align: left;
 	z-index: 20;
 }

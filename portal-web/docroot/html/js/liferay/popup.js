@@ -23,10 +23,17 @@
 				jQuery(window).unbind("resize", $.Popup.resize);
 				jQuery(window).unbind("scroll", $.Popup.center);
 			}
+
+			if (jQuery.browser.msie &&
+				jQuery.browser.version.number() < 7 &&
+				$.Popup.count() == 0) {
+
+				jQuery("select").css("visibility", "");
+			}
 		},
 
 		count: function() {
-			return jQuery(".popup").length;
+			return jQuery("#alert-messages .popup").length;
 		},
 
 		open: function(options) {
@@ -62,9 +69,8 @@
 				"<div class='popup " + (modal ? "modal" : "") + "' style='position:absolute; top:0; left:0;'>" +
 					"<div class='popup-inner'>" +
 						"<div class='popup-header'>" +
-							"<span class='popup-title'>" + (title || "") + "</span>" +
+							"<span class='popup-title'>" + (title || "&nbsp;") + "</span>" +
 							"<img class='popup-close' src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/>" +
-							"<div style='clear:both'></div>" +
 						"</div>" +
 						"<div class='popup-message'></div>" +
 					"</div>" +
@@ -115,8 +121,13 @@
 					jBg.css({display: "none", opacity: 0});
 				}
 			}
-			Liferay.Util.setSelectVisibility("hidden");
-			Liferay.Util.setSelectVisibility("visible", jPopup[0]);
+
+			if (jQuery.browser.msie &&
+				jQuery.browser.version.number("round") < 7 &&
+				$.Popup.count() == 1) {
+
+				jQuery("select").not(".popup select").css("visibility", "hidden");
+			}
 
 			if (jAlertMsgs.find(".popup").length == 1) {
 				jQuery(window).resize($.Popup.center);
@@ -128,6 +139,7 @@
 			jBg.fadeTo("normal", 0.5);
 
 			if (false) {
+				// jQuery Draggable is slow.  Use Liferay Drag (lDrag)
 				jPopup.Draggable({
 					handle: jPopup.find(".popup-header")[0],
 					zIndex: ZINDEX.ALERT + 1
@@ -135,7 +147,9 @@
 			}
 			else {
 				jPopup.lDrag({
-					handle: jPopup.find(".popup-header")[0]
+					handle: jPopup.find(".popup-header")[0],
+					threshold: 2,
+					dragClass: "drag-indicator"
 				});
 			}
 

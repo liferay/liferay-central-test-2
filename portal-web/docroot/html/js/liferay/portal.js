@@ -222,7 +222,7 @@ var LiferayDock = {
 
 							//LiferayDock.dockCoords[1][index][count] = [Math.round(distRatio * (item.constants.x)), Math.round(distRatio * (item.constants.y))];
 						}
-						
+
 						if (ratio == 0) {
 							item.style.display = "none";
 						}
@@ -267,348 +267,6 @@ var LiferayDock = {
 	}
 };
 
-var LayoutColumns = {
-	arrow: null,
-	current: null,
-	doAsUserId: "",
-	highlight: "transparent",
-	layoutMaximized: "",
-	plid: "",
-
-	displayArrow: function(mode, left, top) {
-		var arrow = LayoutColumns.arrow;
-
-		if (!arrow) {
-			arrow = new Object();
-			var arrowUp = document.createElement("div");
-			arrowUp.style.zIndex = ZINDEX.DRAG_ARROW;
-			arrowUp.style.display = "none";
-			arrowUp.className = "layout-column-arrow-up";
-
-			var arrowDown = document.createElement("div");
-			arrowDown.style.zIndex = ZINDEX.DRAG_ARROW;
-			arrowDown.style.display = "none";
-			arrowDown.className = "layout-column-arrow-down";
-
-			document.body.appendChild(arrowUp);
-			document.body.appendChild(arrowDown);
-
-			arrow.up = arrowUp;
-			arrow.down = arrowDown;
-
-			LayoutColumns.arrow = arrow;
-		}
-
-		if (mode == "up") {
-			arrow.up.style.top = top + "px";
-			arrow.up.style.left = left + "px";
-			arrow.up.style.display = "";
-			arrow.down.style.display = "none";
-		}
-		else if (mode == "down") {
-			arrow.down.style.top = top + "px";
-			arrow.down.style.left = left + "px";
-			arrow.down.style.display = "";
-			arrow.up.style.display = "none";
-		}
-		else if (mode == "none") {
-			arrow.down.style.display = "none";
-			arrow.up.style.display = "none";
-		}
-	},
-
-	findPosition: function(portlet) {
-		var position = -1;
-
-		_$J(".portlet-boundary", portlet.parentNode).each(function(i) {
-			if (this == portlet) {
-				position = i;
-			}
-		});
-
-		return position;
-	},
-
-	init: function(colArray) {
-		for (var i = 0; i < colArray.length; i++) {
-			var column = _$J.getOne("#layout-column_" + colArray[i]);
-
-			if (column) {
-				column.columnId = colArray[i];
-
-				if (themeDisplay.isFreeformLayout()) {
-					var boxes = _$J(".portlet-boundary", column).each(function() {
-						LayoutColumns.initPortlet(this);
-					});
-				}
-				else {
-					DropZone.add(column, {
-						accept: ["portlet-boundary"],
-						onDrop: LayoutColumns.onDrop,
-						onHoverOver: LayoutColumns.onHoverOver,
-						onHoverOut: function() {
-							LayoutColumns.displayArrow("none");
-						},
-						inheritParent: true
-						});
-
-					var boxes = _$J(".portlet-boundary", column).each(function() {
-						if (!this.isStatic) {
-							LayoutColumns.initPortlet(this);
-						}
-					});
-				}
-			}
-		}
-	},
-
-	initPortlet: function(portlet) {
-		portlet = _$J.getOne(portlet);
-
-		var handle = _$J(".portlet-header-bar, .portlet-title-default, .portlet-topper", portlet).get(0);
-
-		handle.style.cursor = "move";
-
-		if (themeDisplay.isFreeformLayout()) {
-			portlet.style.position = "absolute";
-			_$J(portlet).lDrag({
-				handle: handle,
-				portlet: portlet,
-				onStart: function(settings) {
-					settings.wasClicked = true;
-					settings.container.style.zIndex = 99;
-				},
-				onMove: function(settings) {
-					settings.wasClicked = false;
-				},
-				onComplete: function(settings) {
-					var portlet = settings.portlet;
-					
-					if (!settings.wasClicked) {
-						var left = parseInt(portlet.style.left);
-						var top = parseInt(portlet.style.top);
-		
-						left = Math.round(left/10) * 10;
-						top = Math.round(top/10) * 10;
-		
-						portlet.style.left = left + "px";
-						portlet.style.top = top + "px";
-						
-						LayoutColumns.moveToTop(portlet);
-						LayoutColumns.savePosition(portlet);
-					}
-					portlet.style.zIndex = "";
-				}
-			});
-			
-			_$J(portlet).click(function() {
-				if (LayoutColumns.current != this) {
-					LayoutColumns.moveToTop(this);
-					LayoutColumns.savePosition(this);
-					LayoutColumns.current = this;
-				}
-			});
-
-			var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
-			var resizeHandle = _$J(portlet).getOne(".portlet-resize-handle");
-
-			if (resizeBox && resizeHandle) {
-				_$J(portlet).lResize({
-					handle: resizeHandle,
-					direction: "horizontal",
-					mode: "add",
-					portlet: portlet,
-					onStart: function(settings) {
-						LayoutColumns.moveToTop(settings.container.resizeSettings.portlet);
-					},
-					onComplete: function(settings) {
-						var portlet = settings.container.resizeSettings.portlet;
-						var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
-						var height = parseInt(resizeBox.style.height);
-						var width = parseInt(portlet.style.width);
-		
-						height = Math.round(height/10) * 10;
-						width = Math.round(width/10) * 10;
-		
-						resizeBox.style.height = height + "px";
-						portlet.style.width = width + "px";
-						LayoutColumns.savePosition(portlet);
-					}
-				});
-				
-				_$J(resizeBox).lResize({
-					handle: resizeHandle,
-					direction: "vertical",
-					mode: "add"
-				});
-			}
-
-			if ((parseInt(portlet.style.top) + parseInt(portlet.style.left)) == 0) {
-				portlet.style.top = (20 * portlet.columnPos) + "px";
-				portlet.style.left = (20 * portlet.columnPos) + "px";
-			}
-		}
-		else {
-			DragDrop.create(portlet, {
-				revert: true,
-				handle: handle,
-				ghosting: true,
-				highlightDropzones: LayoutColumns.highlight});
-		}
-	},
-
-	moveToTop: function(portlet) {
-		var container = portlet.parentNode;
-		portlet.oldPosition = this.findPosition(portlet);
-		
-		container.removeChild(portlet);
-		container.appendChild(portlet);
-	},
-
-	onDrop: function(item) {
-		var dropOptions = this;
-		var container = dropOptions.dropItem;
-		var insertBox = null;
-
-		item.dragOptions.clone.isStatic = "yes";
-
-		_$J(".portlet-boundary", container).each(function(i) {
-			var box = this;
-			if (!box.isStatic) {
-				var nwOffset = Coordinates.northwestOffset(box, true);
-				var midY = nwOffset.y + (box.offsetHeight / 2);
-
-				if (mousePos.y < midY) {
-					insertBox = box;
-					return false;
-				}
-			}
-			else if (box.isStatic.match("end")) {
-				insertBox = box;
-				return false;
-			}
-		});
-
-		Element.remove(item);
-		container.insertBefore(item, insertBox);
-
-		item.dragOptions.revert = false;
-		item.style.position = "";
-		item.style.left = "";
-		item.style.top = "";
-		item.style.height = "";
-		item.style.width = "100%";
-
-		// Find new position
-		var newPosition = 0;
-
-		_$J(".portlet-boundary", container).each(function(i) {
-			var box = this;
-			if (!box.isStatic) {
-				if (box == item) {
-					return false;
-				}
-				newPosition++;
-			}
-		});
-
-		LayoutColumns.displayArrow("none");
-
-		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition, LayoutColumns.doAsUserId);
-	},
-
-	onHoverOver: function(item) {
-		var dropOptions = this;
-		var container = dropOptions.dropItem;
-		var insertBox = null;
-		var bottom = true;
-		var inside;
-		var lastBox;
-
-		_$J(".portlet-boundary", container).each(function() {
-			var box = this;
-
-			if (!box.isStatic) {
-				lastBox = box;
-				inside = mousePos.insideObject(box, true);
-
-				if (inside) {
-					var midY = box.offsetHeight / 2;
-
-					if (inside.y <= midY || box == item.dragOptions.clone) {
-						bottom = false;
-					}
-					else {
-						bottom = true;
-					}
-
-					insertBox = box;
-					return false;
-				}
-			}
-			else if (box.isStatic.match("end")) {
-				insertBox = box;
-				return false;
-			}
-		});
-
-		var top;
-		var left;
-
-		if (insertBox) {
-			left = inside.nwOffset.x + 20;
-
-			if (bottom) {
-				top = inside.nwOffset.y + insertBox.offsetHeight - 50;
-
-				LayoutColumns.displayArrow("down", left, top);
-			}
-			else {
-				top = inside.nwOffset.y;
-
-				LayoutColumns.displayArrow("up", left, top);
-			}
-		}
-		else {
-			if (lastBox) {
-				var nwOffset = Coordinates.northwestOffset(lastBox, true);
-				top = nwOffset.y + lastBox.offsetHeight - 50;
-				left = nwOffset.x + 20;
-
-				LayoutColumns.displayArrow("down", left, top);
-			}
-			else {
-				var nwOffset = Coordinates.northwestOffset(container, true);
-				top = nwOffset.y;
-				left = nwOffset.x + 20;
-
-				LayoutColumns.displayArrow("up", left, top);
-			}
-		}
-	},
-
-	savePosition : function(portlet) {
-		var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
-		var newPosition = this.findPosition(portlet);
-		
-		if (newPosition != portlet.oldPosition) {
-			var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
-			movePortlet(themeDisplay.getPlid(), portlet.portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
-		}
-
-		if (resizeBox) {
-			AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout?plid=" + LayoutColumns.plid +
-				"&height=" + resizeBox.style.height +
-				"&width=" + portlet.style.width +
-				"&top=" + portlet.style.top +
-				"&left=" + portlet.style.left +
-				"&p_p_id=" + portlet.portletId +
-				"&doAsUserId=" + themeDisplay.getDoAsUserIdEncoded() +
-				"&cmd=drag");
-		}
-	}
-};
-
 var NavFlyout = {
 	zIndex: 1,
 	initialize: function (nav) {
@@ -617,7 +275,7 @@ var NavFlyout = {
 
 		navMapList.not(".portlet-nav-map-level_1, .portlet-nav-map-level_2")
 			.css({position: "absolute", display: "none"});
-		
+
 		_$J(".portlet-nav-map-list a", nav).each(function(){
 			var item = _$J(this.parentNode.parentNode);
 				if (item.is(".portlet-nav-map-level_1")) {
@@ -630,21 +288,21 @@ var NavFlyout = {
 				}
 		});
 	},
-	
+
 	initToggle: function(nav, imgSrc) {
 		var nav = _$J.getOne(nav);
 		var navMapList = _$J(".portlet-nav-map-level_1 > li", nav);
 		navMapList.click(NavFlyout.onToggle);
 		navMapList.css({ backgroundImage: "url(" + imgSrc + ")" });
 	},
-	
+
 	hide: function(listItem) {
 		NavFlyout.initialize(listItem.parentNode);
 	},
-	
+
 	onHoverOver: function() {
 		var listItem = this.parentNode;
-		
+
 		// Hide all other submenus
 		if (_$J(listItem.parentNode).is(".portlet-nav-map-level_2")) {
 			NavFlyout.hide(listItem.parentNode.parentNode.parentNode);
@@ -660,7 +318,7 @@ var NavFlyout = {
 				top: "5px",
 				left: "100px"
 			});
-			
+
 		// Fix Z-Index
 		zItem = listItem;
 		while (zItem.nodeName.toLowerCase() != "div") {
@@ -669,10 +327,10 @@ var NavFlyout = {
 			}
 			zItem = zItem.parentNode;
 		}
-		
+
 		NavFlyout.zIndex++;
 	},
-	
+
 	onToggle: function() {
 		var subMenu = _$J("ul:first", this).get(0);
 
@@ -929,7 +587,7 @@ var PortletHeaderBar = {
 				icons.css("display", "none");
 			}
 		}
-		
+
 		return changed;
 	},
 
@@ -1175,17 +833,17 @@ var StarRating = new Class({
 			var item = _$J("#" + id);
 			this.stars = item.find("img");
 			var self = this;
-	
+
 			if (!this.options.displayOnly) {
 				item.bind("mouseout",  {self: this}, this.onHoverOut);
-				
+
 				this.stars.each(function(index) {
 					this.index = index + 1;
 					_$J(this).bind("click", {self: self}, self.onClick)
 						   .bind("mouseover", {self: self}, self.onHoverOver);
 				})
 			}
-	
+
 			this.display(this.rating, "rating");
 		}
 	});

@@ -4,9 +4,9 @@
 			$.lResize(this, options);
 		});
 	};
-	
+
 	$.fn.lResizeBind = $.fn.lDragBind;
-	
+
 	$.fn.lResizeHandleRule = function(options) {
 		this.each(function() {
 			options.handle = this;
@@ -23,13 +23,13 @@
 		 */
 		$.lResize.create(container, options);
 	};
-	
+
 	$.lResize.extendNativeFunctionObject({
-	
+
 		/* Resize direction */
 		HORIZONTAL : "horizontal",
 		VERTICAL : "vertical",
-	
+
 		/* Resize modes */
 		ADD : "add",
 		SUBTRACT : "subtract",
@@ -42,14 +42,14 @@
 			this.origHeight = null;
 			this.mode = mode;
 		},
-		
+
 		handleRule: function(options) {
 			var handle = options.handle;
-			
+
 			if (typeof handle == "string") {
 				handle = $(handle);
 			}
-			
+
 			var settings = handle.resizeSettings;
 
 			if (!settings) {
@@ -70,15 +70,15 @@
     			if (typeof options.handle == "string") {
     				options.handle = $(options.handle)[0];
     			}
-    			
+
 				var handle = options.handle;
-				
+
 				if (!handle.resizeSettings) {
 					handle.resizeSettings = options;
 				}
-				
+
 				var settings = handle.resizeSettings;
-			
+
 				if (!handle.dragSettings || !handle.dragSettings.isResizeHandle) {
 					$.lDrag.create(handle, {
 						onStart: $.lResize.onMouseDown,
@@ -88,16 +88,16 @@
 						isResizeHandle: true
 					});
 				}
-				
+
 				var jHandle = $(handle);
 				jHandle.lDragBind("start", options.onStart);
 				jHandle.lDragBind("move", options.onMove);
 				jHandle.lDragBind("complete", options.onComplete);
-				
+
 				if (!settings.resizeRules) {
 					settings.resizeRules = new Array();
 				}
-				
+
 				settings.resizeRules.push(new $.lResize.resizeRule(container, options.direction, options.mode));
 			}
 		},
@@ -106,9 +106,9 @@
 			var handle = $.lDrag.container;
 			var settings = handle.resizeSettings;
 			var mouse = mousePos;
-			
+
 			settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
-			
+
 			for (var i = 0; i < settings.resizeRules.length; i++) {
 				var resizeRule = settings.resizeRules[i];
 				var jContainer = $(resizeRule.container);
@@ -123,18 +123,18 @@
 			var settings = handle.resizeSettings;
 			var mouse = mousePos;
 			var mouseDelta = mousePos.minus(settings.mouseStart);
-			
+
 			var newLength;
 			var lengthCorrection = 0;
 			var noChange = false;
-			
+
 			for (var i = 0; i < settings.resizeRules.length; i++) {
 				var resizeRule = settings.resizeRules[i];
 				var jContainer = $(resizeRule.container);
 
 				if (resizeRule.direction == $.lResize.HORIZONTAL) {
 					resizeRule.prevLength = jContainer.width();
-					
+
 					if (resizeRule.mode == $.lResize.ADD) {
 						newLength = resizeRule.origWidth + mouseDelta.x;
 					}
@@ -144,7 +144,7 @@
 				}
 				else if (resizeRule.direction == $.lResize.VERTICAL) {
 					resizeRule.prevLength = jContainer.height();
-					
+
 					if (resizeRule.mode == $.lResize.ADD) {
 						newLength = resizeRule.origHeight + mouseDelta.y;
 					}
@@ -152,19 +152,19 @@
 						newLength = resizeRule.origHeight - mouseDelta.y;
 					}
 				}
-				
+
 				resizeRule.newLength = newLength;
-				
+
 				if (newLength < 1) {
 					lengthCorrection = Math.max(-newLength + 1, lengthCorrection);
 					newLength = 1;
 				}
-				
+
 				if (newLength == resizeRule.prevLength) {
 					noChange = true;
 				}
 			}
-			
+
 			for (var i = 0; i < settings.resizeRules.length; i++) {
 				var resizeRule = settings.resizeRules[i];
 				var jContainer = $(resizeRule.container);
@@ -178,14 +178,12 @@
 				else {
 					newLength = resizeRule.newLength - lengthCorrection;
 				}
-				
+
 				if (resizeRule.direction == $.lResize.HORIZONTAL) {
 						jContainer.width(newLength);
-						//alert("h: " + jContainer[0].className);
 				}
 				else if (resizeRule.direction == $.lResize.VERTICAL) {
 						jContainer.height(newLength);
-						//alert("v: " + jContainer[0].className);
 				}
 			}
 		},
@@ -193,7 +191,7 @@
 		onMouseUp: function() {
 			var handle = $.lDrag.container;
 			var settings = handle.resizeSettings;
-			
+
 			settings.mouseEnd = new Coordinate(mousePos.x, mousePos.y);
 		}
 	});

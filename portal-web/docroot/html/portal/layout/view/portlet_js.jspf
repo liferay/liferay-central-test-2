@@ -106,12 +106,16 @@ function addPortletHTML(html, container, placeHolder) {
 		jQuery(portletBound).evalScripts();
 	}
 
-	//TODO: Check to see if user has permissions
-	if (true) {
+	<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 		if (!portletBound.isStatic) {
-			Liferay.Draggables.addItem(portletBound);
+			if (themeDisplay.isFreeformLayout()) {
+				Liferay.Freeform.add(portletBound);
+			}
+			else {
+				Liferay.Columns.add(portletBound);
+			}
 		}
-	}
+	</c:if>
 
 	if (_$J.browser.firefox) {
 		setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
@@ -143,7 +147,7 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 			LayoutConfiguration.initialized = false;
 		}
 
-		if (LayoutColumns.layoutMaximized) {
+		if (themeDisplay.layoutMaximized) {
 			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 		}
 		else {
@@ -158,7 +162,7 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 }
 
 function minimizePortlet(plid, portletId, restore, doAsUserId) {
-	if (LayoutColumns.layoutMaximized) {
+	if (themeDisplay.layoutMaximized) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}
 	else {
@@ -190,8 +194,4 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 
 		buttonsEl.html(html);
 	}
-}
-
-function movePortlet(plid, portletId, columnId, columnPos, doAsUserId) {
-	loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_col_id=" + columnId + "&p_p_col_pos=" + columnPos + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=move");
 }

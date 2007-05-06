@@ -77,6 +77,16 @@ Liferay.Util = {
 		}
 	},
 
+	changeOpacity: function(object, opacity) {
+		opacity = (opacity >= 1) ? 0.999 : opacity;
+		opacity = (opacity < 0) ? 0 : opacity;
+
+		object.style.opacity = opacity;
+		object.style.MozOpacity = opacity;
+		object.style.KhtmlOpacity = opacity;
+		object.style.filter = "alpha(opacity=" + (opacity * 100) + ")";
+	},
+
 	check: function(form, name, checked) {
 		for (var i = 0; i < form.elements.length; i++) {
 			var e = form.elements[i];
@@ -646,16 +656,6 @@ Element.disable = function(element) {
 	}
 };
 
-Element.changeOpacity = function(object, opacity) {
-	opacity = (opacity >= 100) ? 99.999 : opacity;
-	opacity = (opacity < 0) ? 0 : opacity;
-
-	object.style.opacity = (opacity / 100);
-	object.style.MozOpacity = (opacity / 100);
-	object.style.KhtmlOpacity = (opacity / 100);
-	object.style.filter = "alpha(opacity=" + opacity + ")";
-};
-
 Element.remove = function(id) {
 	var obj = jQuery.getOne(id);
 
@@ -864,10 +864,12 @@ var Viewport = {
 String.prototype.trim = jQuery.trim;
 
 var ZINDEX = {
-	ALERT: 100,
-	CHAT_BOX: 11,
-	DRAG_ITEM: 10,
-	DRAG_ARROW: 9
+	DOCK:			7,
+	DOCK_PARENT:	8,
+	ALERT:			9,
+	DROP_AREA:		10,
+	DROP_POSITION:	11,
+	DRAG_ITEM:		12
 };
 
 //0-100: Theme Developer

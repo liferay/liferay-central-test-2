@@ -1,13 +1,26 @@
 /**********************************************************
  Very minorly modified from the example by Tim Taylor
  http://tool-man.org/examples/sorting.html
- 
+
  Added Coordinate.prototype.inside( northwest, southeast );
- 
+
  **********************************************************/
+
 
 var Coordinates = {
 	ORIGIN : new Coordinate(0, 0),
+
+	coordinatesData: function(element, recurse) {
+		var data = new Object();
+
+		data.recurse = recurse;
+		data.size = new Coordinate(element.offsetWidth, element.offsetHeight);
+		data.nwOffset = Coordinates.northwestOffset(element, recurse);
+		data.seOffset = data.nwOffset.plus(data.size);
+		data.midPoint = data.nwOffset.plus(new Coordinate(Math.round(data.size.x/2), Math.round(data.size.y/2)));
+
+		return data;
+	},
 
 	northwestPosition : function(element) {
 		var x = parseInt(element.style.left);
@@ -38,22 +51,12 @@ var Coordinates = {
 	southeastOffset : function(element, isRecursive) {
 		return Coordinates.northwestOffset(element, isRecursive).plus(
 				new Coordinate(element.offsetWidth, element.offsetHeight));
-	},
-
-	fixEvent : function(event) {
-		if (typeof event == 'undefined') {
-    		event = window.event;
-		}
-    		
-		event.windowCoordinate = new Coordinate(event.clientX, event.clientY);
-		
-		return event;
 	}
 };
 
 function Coordinate(x, y) {
-	this.x = x;
-	this.y = y;
+	this.x = x || 0;
+	this.y = y || 0;
 }
 
 Coordinate.prototype.toString = function() {
@@ -111,7 +114,7 @@ Coordinate.prototype.equals = function(that) {
 Coordinate.prototype.inside = function(northwest, southeast) {
 	if ((this.x >= northwest.x) && (this.x <= southeast.x) &&
 		(this.y >= northwest.y) && (this.y <= southeast.y)) {
-		
+
 		return true;
 	}
 	else {
@@ -120,52 +123,82 @@ Coordinate.prototype.inside = function(northwest, southeast) {
 };
 
 Coordinate.prototype.insideObject = function(obj, recurse) {
-	var nwOffset = Coordinates.northwestOffset(obj, recurse);
-	var seOffset = nwOffset.plus(new Coordinate(obj.offsetWidth, obj.offsetHeight));
-	var rt = null;
-	
-	if (this.inside(nwOffset, seOffset)) {
-		rt = this.minus(nwOffset);
-		rt.nwOffset = nwOffset;
-		rt.seOffset = seOffset;
-	}
-	
-	return rt;
+	var data = Coordinates.coordinatesData(obj);
+	data.recurse = recurse;
+	data.quadrant = this.insideObjectData(data);
+
+	return data.quadrant ? data : null;
 };
 
-// getMousePos(event) has been depricated.  Use mousePos.update(event) instead.
-function getMousePos(event) {
-    mousePos.update(event);
-}
+Coordinate.prototype.insideObjectData = function(data) {
+	var nwOffset = data.nwOffset;
+	var seOffset = data.seOffset;
+	var rt = 0;
+
+	if (this.inside(nwOffset, seOffset)) {
+		var mid = data.midPoint;
+
+		if (this.x <= mid.x && this.y <= mid.y) {
+			rt = 1;
+		}
+		else if (this.x >= mid.x && this.y <= mid.y) {
+			rt = 2;
+		}
+		else if (this.x >= mid.x && this.y >= mid.y) {
+			rt = 3;
+		}
+		else if (this.x <= mid.x && this.y >= mid.y) {
+			rt = 4;
+		}
+	}
+
+	return rt;
+};
 
 function MousePos () { };
 
 // Extend the "Coordinate" class
-MousePos.prototype = new Coordinate(0, 0);
+MousePos.prototype = new Coordinate();
 
 MousePos.prototype.update = function(event) {
-	event = Coordinates.fixEvent(event);
-	var position = event.windowCoordinate;
-	
-	this.x = position.x;
-	this.y = position.y;
 
-	if (is_safari) {
-		// do nothing
-	}
-	else  {
-		this.x += document.body.scrollLeft;
-		this.y += document.body.scrollTop;
+	if (typeof event == 'undefined') {
+		event = window.event;
 	}
 
-	if (this.x < 0)
-		this.x = 0;
+	var position = new Coordinate(event.clientX, event.clientY);
 
-	if (this.y < 0)
-		this.y = 0;
+	var scrollOffset = Viewport.scroll();
+
+	this.x = position.x + scrollOffset.x;
+	this.y = position.y + scrollOffset.y;
+
+	if (this.x < 0) this.x = 0;
+
+	if (this.y < 0) this.y = 0;
 
 	return event;
 };
 
 // Track mouse's absolute position (counting scrollbars)
 var mousePos = new MousePos(0,0);
+
+/*
+ * jQuery extension
+ */
+jQuery.each([
+				"coordinatesData",
+				"northwestPosition",
+				"southeastPosition",
+				"northwestOffset",
+				"southeastOffset"
+			], function(i,n){
+
+	jQuery.fn[ n ] = function(h) {
+		return this.length > 0 ? Coordinates[n](this[0], h) : null;
+	};
+});
+
+jQuery.fn.size = function() {
+	return new Coordinate(this.width(), this.height());
+};
