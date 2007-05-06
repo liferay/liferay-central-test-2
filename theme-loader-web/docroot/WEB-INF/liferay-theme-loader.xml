@@ -8,6 +8,7 @@
 	this element is not set, then it will store the files inside the exploded
 	WAR's "themes" directory. If this element is set, it expects a full path to
 	an external directory.
+	-->
 
 	<!--
 	<file-storage>/home/liferay/lar_themes</file-storage>
