@@ -85,7 +85,8 @@ public class RenderResponseImpl implements RenderResponse {
 
 		String portletURLClass = portlet.getPortletURLClass();
 
-		if (Validator.isNotNull(portletURLClass)) {
+		if (portlet.getPortletId().equals(portletName) &&
+				Validator.isNotNull(portletURLClass)) {
 			try {
 				Class portletURLClassObj = Class.forName(portletURLClass);
 
