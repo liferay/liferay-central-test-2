@@ -161,7 +161,7 @@ try {
 
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		rowURL.setParameter("struts_action", "/admin/plugin_installer");
+		rowURL.setParameter("struts_action", "/plugin_installer/view");
 		rowURL.setParameter("referer", referer);
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("tabs1", tabs1);
@@ -236,7 +236,7 @@ try {
 
 		<br />
 
-		<liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
+		<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 
 	</div>
 <%
@@ -254,5 +254,5 @@ catch (PluginPackageException e) {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.admin.browse_repository.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.plugin_installer.browse_repository.jsp");
 %>

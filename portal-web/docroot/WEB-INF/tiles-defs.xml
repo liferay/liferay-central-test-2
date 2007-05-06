@@ -117,10 +117,6 @@
 		<put name="portlet_content" value="/portlet/admin/error.jsp" />
 	</definition>
 
-	<definition name="portlet.admin.plugin_installer" extends="portlet.admin">
-		<put name="portlet_content" value="/portlet/admin/plugin_installer.jsp" />
-	</definition>
-
 	<definition name="portlet.admin.view" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/view.jsp" />
 	</definition>
@@ -912,6 +908,18 @@
 
 	<definition name="portlet.page_ratings.view" extends="portlet.page_ratings">
 		<put name="portlet_content" value="/portlet/page_ratings/view.jsp" />
+	</definition>
+
+	<!-- Plugin Installer -->
+
+	<definition name="portlet.plugin_installer" extends="portlet" />
+
+	<definition name="portlet.plugin_installer.view" extends="portlet.plugin_installer">
+		<put name="portlet_content" value="/portlet/plugin_installer/view.jsp" />
+	</definition>
+
+	<definition name="portlet.plugin_installer.error" extends="portlet.plugin_installer">
+		<put name="portlet_content" value="/portlet/plugin_installer/error.jsp" />
 	</definition>
 
 	<!-- Polls -->

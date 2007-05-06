@@ -86,6 +86,8 @@ public class PortletKeys {
 
 	public static final String ORGANIZATION_ADMIN = "80";
 
+	public static final String PLUGIN_INSTALLER = "111";
+
 	public static final String POLLS = "25";
 
 	public static final String PORTAL = "90";

@@ -30,10 +30,10 @@
 
 <c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
 	<%
-	PortletURL configurationURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.ADMIN);
+	PortletURL configurationURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 	configurationURL.setWindowState(WindowState.MAXIMIZED);
 
-	configurationURL.setParameter("struts_action", "/admin/plugin_installer");
+	configurationURL.setParameter("struts_action", "/plugin_installer/view");
 	configurationURL.setParameter("referer", currentURL);
 	configurationURL.setParameter("tabs1", "configuration");
     %>
@@ -49,31 +49,24 @@ if (!themeDisplay.getPortletDisplay().isStateMax()) {
 	redirect = refererURL.toString();
 }
 
-PortletURL browseRepoURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.ADMIN);
+PortletURL browseRepoURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+
 browseRepoURL.setWindowState(WindowState.MAXIMIZED);
 
-browseRepoURL.setParameter("struts_action", "/admin/plugin_installer");
+browseRepoURL.setParameter("struts_action", "/plugin_installer/view");
 browseRepoURL.setParameter("referer", redirect);
 browseRepoURL.setParameter("tabs1", "browse-repository");
 
-PortletURL installPluginsURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.ADMIN);
+PortletURL installPluginURL = ((RenderResponseImpl) renderResponse).createActionURL(PortletKeys.PLUGIN_INSTALLER);
 
-installPluginsURL.setWindowState(WindowState.MAXIMIZED);
-
-installPluginsURL.setParameter("struts_action", "/admin/plugin_installer");
-installPluginsURL.setParameter("referer", redirect);
-installPluginsURL.setParameter("tabs1", "browse-repository");
-
-PortletURL editServerURL = renderResponse.createActionURL();
-
-editServerURL.setParameter("struts_action", "/admin/edit_server");
-editServerURL.setParameter("redirect", redirect);
+installPluginURL.setParameter("struts_action", "/plugin_installer/install_plugin");
+installPluginURL.setParameter("redirect", redirect);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />reloadRepositories(redirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-		submitForm(document.<portlet:namespace />fm, "<%=editServerURL%>")
+		submitForm(document.<portlet:namespace />fm, "<%=installPluginURL%>")
 	}
 </script>
 
@@ -167,11 +160,11 @@ try {
 		if (availablePluginPackage != null) {
 
 			PortletURL rowURL = ((RenderResponseImpl) renderResponse)
-				.createRenderURL(PortletKeys.ADMIN);
+				.createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 			rowURL.setWindowState(WindowState.MAXIMIZED);
 
-			rowURL.setParameter("struts_action", "/admin/plugin_installer");
+			rowURL.setParameter("struts_action", "/plugin_installer/view");
 			rowURL.setParameter("referer", redirect);
 			rowURL.setParameter("tabs1", "browse-repository");
 			rowURL.setParameter(
@@ -226,7 +219,7 @@ try {
 
    <br />
 
-   <input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
+   <input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= browseRepoURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
 
 	<div class="separator" style="clear: both;"/>
 
@@ -238,7 +231,7 @@ try {
 
 	   <br />
 
-	   <liferay-util:include page="/html/portlet/admin/repository_report.jsp" />
+	   <liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 
    </div>
 

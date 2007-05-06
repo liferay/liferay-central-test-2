@@ -230,8 +230,6 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/admin/plugin_installer" forward="portlet.admin.plugin_installer" />
-
 		<action path="/admin/view" forward="portlet.admin.view" />
 
 		<!-- Alfresco Content -->
@@ -1213,6 +1211,14 @@
 
 		<action path="/page_ratings/view" forward="portlet.page_ratings.view" />
 
+		<!-- Plugin Installer -->
+
+		<action path="/plugin_installer/view" forward="portlet.plugin_installer.view" />
+
+		<action path="/plugin_installer/install_plugin" type="com.liferay.portlet.admin.plugininstaller.InstallPluginAction">
+			<forward name="portlet.plugin_installer.error" path="portlet.plugin_installer.error" />
+		</action>
+
 		<!-- Polls -->
 
 		<action path="/polls/edit_question" type="com.liferay.portlet.polls.action.EditQuestionAction">
@@ -1435,7 +1441,7 @@
 
 		<!-- Update Manager -->
 
-		<action path="/update_manager/edit_server" type="com.liferay.portlet.admin.action.EditServerAction">
+		<action path="/update_manager/install_plugin" type="com.liferay.portlet.plugininstaller.InstallPluginAction">
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
 

@@ -1012,6 +1012,17 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
 	</portlet>
+	<portlet>
+		<portlet-name>111</portlet-name>
+		<struts-path>plugin_installer</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>0</render-weight>
+		<add-default-resource>true</add-default-resource>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

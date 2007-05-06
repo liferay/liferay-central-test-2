@@ -43,7 +43,7 @@ PortletURL rowURL = renderResponse.createRenderURL();
 
 rowURL.setWindowState(WindowState.MAXIMIZED);
 
-rowURL.setParameter("struts_action", "/admin/plugin_installer");
+rowURL.setParameter("struts_action", "/plugin_installer/view");
 rowURL.setParameter("referer", referer);
 rowURL.setParameter("redirect", currentURL);
 rowURL.setParameter("tabs1", tabs1);

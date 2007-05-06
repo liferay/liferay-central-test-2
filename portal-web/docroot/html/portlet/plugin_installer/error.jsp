@@ -22,41 +22,8 @@
  */
 %>
 
-<%
-String redirect = ParamUtil.getString(request, "redirect");
+<%@ include file="/html/portlet/admin/init.jsp" %>
 
-if (Validator.isNull(redirect)) {
-	redirect = currentURL;
-}
+<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-if (Validator.isNull(tabs2)) {
-	tabs2 = "portlets";
-}
-
-PortletURL installPluginsURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
-
-installPluginsURL.setWindowState(WindowState.MAXIMIZED);
-
-installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
-installPluginsURL.setParameter("referer", currentURL);
-installPluginsURL.setParameter("tabs1", tabs1);
-installPluginsURL.setParameter("tabs2", tabs2);
-%>
-
-<liferay-ui:tabs
-	names="portlets,themes,layout-templates"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
-
-<c:choose>
-	<c:when test='<%= tabs2.equals("themes") %>'>
-		<%@ include file="/html/portlet/admin/themes.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs2.equals("layout-templates") %>'>
-		<%@ include file="/html/portlet/admin/layout_templates.jspf" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="/html/portlet/admin/portlets.jspf" %>
-	</c:otherwise>
-</c:choose>
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
