@@ -4,12 +4,12 @@
 <display>
 	<category name="category.admin">
 		<portlet id="9" />
-		<portlet id="111" />
 		<portlet id="40" />
 		<portlet id="79" />
 		<portlet id="80" />
 		<portlet id="99" />
 		<portlet id="104" />
+		<portlet id="111" />
 	</category>
 	<category name="category.cms">
 		<category name="category.alfresco">

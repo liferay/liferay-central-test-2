@@ -508,6 +508,11 @@
 		<struts-path>document_library_display</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>111</portlet-name>
+		<struts-path>plugin_installer</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
