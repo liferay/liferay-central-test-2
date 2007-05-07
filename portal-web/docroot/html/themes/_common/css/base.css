@@ -181,7 +181,6 @@ body.staging {
 	border-bottom: 1px solid #aaa;
 	color: #333;
 	cursor: move;
-	margin-bottom: 20px;
 	padding: 5px;
 	position: relative;
 }
@@ -211,7 +210,7 @@ body.staging {
 
 .portal-add-content {
 	background: #fff;
-	padding: 8px;
+	padding: 8px 4px 0;
 	text-align: left;
 	z-index: 20;
 }
