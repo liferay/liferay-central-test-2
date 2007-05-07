@@ -48,6 +48,8 @@ package com.liferay.portal.model;
  *
  */
 public interface LayoutSet extends LayoutSetModel {
+	public java.lang.String getOwnerId();
+
 	public java.lang.String getLogoImageId();
 
 	public java.lang.String getPngLogoImageId();

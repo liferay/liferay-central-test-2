@@ -53,7 +53,7 @@ import java.sql.Types;
 public class LayoutSetModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "LayoutSet";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "ownerId", new Integer(Types.VARCHAR) },
+			{ "layoutSetId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -69,9 +69,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.LayoutSet.ownerId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_THEMEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet.themeId"),
 			XSS_ALLOW_BY_MODEL);
@@ -96,28 +93,21 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public LayoutSetModelImpl() {
 	}
 
-	public String getPrimaryKey() {
-		return _ownerId;
+	public long getPrimaryKey() {
+		return _layoutSetId;
 	}
 
-	public void setPrimaryKey(String pk) {
-		setOwnerId(pk);
+	public void setPrimaryKey(long pk) {
+		setLayoutSetId(pk);
 	}
 
-	public String getOwnerId() {
-		return GetterUtil.getString(_ownerId);
+	public long getLayoutSetId() {
+		return _layoutSetId;
 	}
 
-	public void setOwnerId(String ownerId) {
-		if (((ownerId == null) && (_ownerId != null)) ||
-				((ownerId != null) && (_ownerId == null)) ||
-				((ownerId != null) && (_ownerId != null) &&
-				!ownerId.equals(_ownerId))) {
-			if (!XSS_ALLOW_OWNERID) {
-				ownerId = XSSUtil.strip(ownerId);
-			}
-
-			_ownerId = ownerId;
+	public void setLayoutSetId(long layoutSetId) {
+		if (layoutSetId != _layoutSetId) {
+			_layoutSetId = layoutSetId;
 		}
 	}
 
@@ -292,7 +282,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		LayoutSetImpl clone = new LayoutSetImpl();
-		clone.setOwnerId(getOwnerId());
+		clone.setLayoutSetId(getLayoutSetId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
@@ -315,9 +305,17 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 
 		LayoutSetImpl layoutSet = (LayoutSetImpl)obj;
-		String pk = layoutSet.getPrimaryKey();
+		long pk = layoutSet.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -334,9 +332,9 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = layoutSet.getPrimaryKey();
+		long pk = layoutSet.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -345,10 +343,10 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _ownerId;
+	private long _layoutSetId;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;

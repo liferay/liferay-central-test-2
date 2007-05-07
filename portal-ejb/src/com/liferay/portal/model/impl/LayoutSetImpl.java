@@ -40,6 +40,15 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	public LayoutSetImpl() {
 	}
 
+	public String getOwnerId() {
+		if (isPrivateLayout()) {
+			return LayoutImpl.PRIVATE + getGroupId();
+		}
+		else {
+			return LayoutImpl.PUBLIC + getGroupId();
+		}
+	}
+
 	public String getLogoImageId() {
 		return getCompanyId() + ".layout_set." + getOwnerId();
 	}

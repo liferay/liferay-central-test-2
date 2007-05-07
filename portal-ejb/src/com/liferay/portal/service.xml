@@ -407,7 +407,7 @@
 
 		<!-- PK fields -->
 
-		<column name="ownerId" type="String" primary="true" />
+		<column name="layoutSetId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -435,6 +435,10 @@
 		<finder name="C_V" return-type="LayoutSet">
 			<finder-column name="companyId" />
 			<finder-column name="virtualHost" />
+		</finder>
+		<finder name="G_P" return-type="LayoutSet">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
 		</finder>
 	</entity>
 	<entity name="ListType" local-service="false" remote-service="true">

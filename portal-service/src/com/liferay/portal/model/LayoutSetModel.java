@@ -45,13 +45,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface LayoutSetModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getOwnerId();
+	public long getLayoutSetId();
 
-	public void setOwnerId(String ownerId);
+	public void setLayoutSetId(long layoutSetId);
 
 	public long getCompanyId();
 

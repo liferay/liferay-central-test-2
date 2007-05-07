@@ -193,7 +193,7 @@
 		<field name="priority" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutSet">
-		<field name="ownerId" type="String" />
+		<field name="layoutSetId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />

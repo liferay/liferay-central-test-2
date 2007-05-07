@@ -85,6 +85,7 @@ alter table Layout add wapThemeId VARCHAR(75) null;
 alter table Layout add wapColorSchemeId VARCHAR(75) null;
 alter table Layout add css VARCHAR(75) null;
 
+alter table LayoutSet add layoutSetId LONG;
 alter_column_type LayoutSet groupId LONG;
 alter table LayoutSet add logo BOOLEAN;
 alter table LayoutSet add wapThemeId VARCHAR(75) null;

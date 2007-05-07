@@ -424,7 +424,7 @@ create table Layout (
 );
 
 create table LayoutSet (
-	ownerId VARCHAR(75) not null primary key,
+	layoutSetId LONG primary key,
 	companyId LONG,
 	groupId LONG,
 	userId LONG,

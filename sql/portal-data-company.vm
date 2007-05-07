@@ -46,14 +46,14 @@ insert into Role_ (roleId, companyId, classNameId, classPK, name, description, t
 #set($guestGroupId = $counter.get())
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($guestGroupId, $companyId, $defaultUserId, 0, 0, 0, 0, 'Guest', '/guest', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$guestGroupId', $companyId, $guestGroupId, $guestGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$guestGroupId', $companyId, $guestGroupId, $guestGroupId, FALSE, FALSE, 'brochure', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $guestGroupId, $guestGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $guestGroupId, $guestGroupId, FALSE, FALSE, 'brochure', '01', 0.0);
 
 #set($supportGroupId = $counter.get())
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($supportGroupId, $companyId, $defaultUserId, 0, 0, 0, 0, 'Support', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$supportGroupId', $companyId, $supportGroupId, $supportGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$supportGroupId', $companyId, $supportGroupId, $supportGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $supportGroupId, $supportGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $supportGroupId, $supportGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ('1', 'PRI.$supportGroupId', $companyId, '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Support</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '', 0.0);
 
 ##
@@ -66,8 +66,8 @@ insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, t
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($usaOrganizationId, $companyId, 0, 'Liferay USA', FALSE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($usaGroupId, $companyId, $defaultUserId, $organizationClassNameId, '$usaOrganizationId', 0, 0, '$usaGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$usaGroupId', $companyId, $usaGroupId, $usaGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$usaGroupId', $companyId, $usaGroupId, $usaGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $usaGroupId, $usaGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $usaGroupId, $usaGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($laxOrganizationId = $counter.get())
 #set($laxGroupId = $counter.get())
@@ -75,8 +75,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($laxOrganizationId, $companyId, $usaOrganizationId, 'Liferay Los Angeles', FALSE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($laxGroupId, $companyId, $defaultUserId, $organizationClassNameId, $laxOrganizationId, 0, 0, '$laxGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$laxGroupId', $companyId, $laxGroupId, $laxGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$laxGroupId', $companyId, $laxGroupId, $laxGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $laxGroupId, $laxGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $laxGroupId, $laxGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($sfoOrganizationId = $counter.get())
 #set($sfoGroupId = $counter.get())
@@ -84,8 +84,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($sfoOrganizationId, $companyId, $usaOrganizationId, 'Liferay San Francisco', FALSE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($sfoGroupId, $companyId, $defaultUserId, $organizationClassNameId, $sfoOrganizationId, 0, 0, '$sfoGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$sfoGroupId', $companyId, $sfoGroupId, $sfoGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$sfoGroupId', $companyId, $sfoGroupId, $sfoGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $sfoGroupId, $sfoGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $sfoGroupId, $sfoGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($ordOrganizationId = $counter.get())
 #set($ordGroupId = $counter.get())
@@ -93,8 +93,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($ordOrganizationId, $companyId, $usaOrganizationId, 'Liferay Chicago', FALSE, 14, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($ordGroupId, $companyId, $defaultUserId, $organizationClassNameId, $ordOrganizationId, 0, 0, '$ordGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$ordGroupId', $companyId, $ordGroupId, $ordGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$ordGroupId', $companyId, $ordGroupId, $ordGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $ordGroupId, $ordGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $ordGroupId, $ordGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($nycOrganizationId = $counter.get())
 #set($nycGroupId = $counter.get())
@@ -102,8 +102,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($nycOrganizationId, $companyId, $usaOrganizationId, 'Liferay New York', FALSE, 33, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($nycGroupId, $companyId, $defaultUserId, $organizationClassNameId, $nycOrganizationId, 0, 0, '$nycGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$nycGroupId', $companyId, $nycGroupId, $nycGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$nycGroupId', $companyId, $nycGroupId, $nycGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $nycGroupId, $nycGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $nycGroupId, $nycGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($eurOrganizationId = $counter.get())
 #set($eurGroupId = $counter.get())
@@ -111,8 +111,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($eurOrganizationId, $companyId, 0, 'Liferay Europe', FALSE, 0, 4, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($eurGroupId, $companyId, $defaultUserId, $organizationClassNameId, '$eurOrganizationId', 0, 0, '$eurGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$eurGroupId', $companyId, $eurGroupId, $eurGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$eurGroupId', $companyId, $eurGroupId, $eurGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $eurGroupId, $eurGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $eurGroupId, $eurGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($fraOrganizationId = $counter.get())
 #set($fraGroupId = $counter.get())
@@ -120,8 +120,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($fraOrganizationId, $companyId, $eurOrganizationId, 'Liferay Frankfurt', FALSE, 0, 4, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($fraGroupId, $companyId, $defaultUserId, $organizationClassNameId, $fraOrganizationId, 0, 0, '$fraGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$fraGroupId', $companyId, $fraGroupId, $fraGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$fraGroupId', $companyId, $fraGroupId, $fraGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $fraGroupId, $fraGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $fraGroupId, $fraGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($madOrganizationId = $counter.get())
 #set($madGroupId = $counter.get())
@@ -129,8 +129,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($madOrganizationId, $companyId, $eurOrganizationId, 'Liferay Madrid', FALSE, 0, 15, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($madGroupId, $companyId, $defaultUserId, $organizationClassNameId, $madOrganizationId, 0, 0, '$madGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$madGroupId', $companyId, $madGroupId, $madGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$madGroupId', $companyId, $madGroupId, $madGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $madGroupId, $madGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $madGroupId, $madGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($asiOrganizationId = $counter.get())
 #set($asiGroupId = $counter.get())
@@ -138,8 +138,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($asiOrganizationId, $companyId, 0, 'Liferay Asia', FALSE, 0, 2, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($asiGroupId, $companyId, $defaultUserId, $organizationClassNameId, '$asiOrganizationId', 0, 0, '$asiGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$asiGroupId', $companyId, $asiGroupId, $asiGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$asiGroupId', $companyId, $asiGroupId, $asiGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $asiGroupId, $asiGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $asiGroupId, $asiGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($dlcOrganizationId = $counter.get())
 #set($dlcGroupId = $counter.get())
@@ -147,8 +147,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($dlcOrganizationId, $companyId, $asiOrganizationId, 'Liferay Dalian', FALSE, 0, 2, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($dlcGroupId, $companyId, $defaultUserId, $organizationClassNameId, $dlcOrganizationId, 0, 0, '$dlcGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$dlcGroupId', $companyId, $dlcGroupId, $dlcGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$dlcGroupId', $companyId, $dlcGroupId, $dlcGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $dlcGroupId, $dlcGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $dlcGroupId, $dlcGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 #set($hkgOrganizationId = $counter.get())
 #set($hkgGroupId = $counter.get())
@@ -156,8 +156,8 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo,
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($hkgOrganizationId, $companyId, $asiOrganizationId, 'Liferay Hong Kong', FALSE, 0, 2, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($hkgGroupId, $companyId, $defaultUserId, $organizationClassNameId, $hkgOrganizationId, 0, 0, '$hkgGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$hkgGroupId', $companyId, $hkgGroupId, $hkgGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$hkgGroupId', $companyId, $hkgGroupId, $hkgGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $hkgGroupId, $hkgGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $hkgGroupId, $hkgGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 ##
 ## User (default)
@@ -176,8 +176,8 @@ insert into Contact_ (contactId, companyId, userId, userName, createDate, modifi
 #set($testGroupId = $counter.get())
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($testGroupId, $companyId, $testUserId, $userClassNameId, '$testUserId', 0, 0, '$testGroupId', '', TRUE);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$testGroupId', $companyId, $testGroupId, $testGroupId, TRUE, FALSE, 'classic', '01', 1.0);
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$testGroupId', $companyId, $testGroupId, $testGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $testGroupId, $testGroupId, TRUE, FALSE, 'classic', '01', 1.0);
+insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $testGroupId, $testGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 insert into Layout (layoutId, ownerId, companyId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ('1', 'PRI.$testGroupId', $companyId, '-1', '<?xml version="1.0"?>\n\n<root>\n  <name>Home A1</name>\n</root>', 'portlet', 'column-1=71_INSTANCE_OY0d,61,65,\ncolumn-2=9,29,79,8,\nlayout-template-id=2_columns_ii\n', FALSE, '', 0.0);
 
 insert into Users_Groups values ($testUserId, $guestGroupId);
@@ -204,8 +204,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'LAX $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -225,8 +225,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'SFO $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -246,8 +246,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'ORD $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -267,8 +267,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'NYC $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -288,8 +288,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'FRA $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -309,8 +309,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'MAD $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -330,8 +330,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'DLC $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 
@@ -351,8 +351,8 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'HKG $cur', TRUE, '01/01/1970');
 
 	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PRI.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
-	insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ('PUB.$batchGroupId', $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0.0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, userId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0.0);
 
 	insert into Users_Groups values ($batchUserId, $supportGroupId);
 

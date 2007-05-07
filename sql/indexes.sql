@@ -88,6 +88,7 @@ create index IX_9AF212B1 on Layout (ownerId, parentLayoutId);
 
 create index IX_A34FBC19 on LayoutSet (companyId, virtualHost);
 create index IX_A40B8BEC on LayoutSet (groupId);
+create index IX_48550691 on LayoutSet (groupId, privateLayout);
 
 create index IX_2932DD37 on ListType (type_);
 

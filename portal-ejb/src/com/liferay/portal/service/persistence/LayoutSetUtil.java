@@ -38,22 +38,20 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class LayoutSetUtil {
-	public static com.liferay.portal.model.LayoutSet create(
-		java.lang.String ownerId) {
-		return getPersistence().create(ownerId);
+	public static com.liferay.portal.model.LayoutSet create(long layoutSetId) {
+		return getPersistence().create(layoutSetId);
 	}
 
-	public static com.liferay.portal.model.LayoutSet remove(
-		java.lang.String ownerId)
+	public static com.liferay.portal.model.LayoutSet remove(long layoutSetId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(ownerId));
+			listener.onBeforeRemove(findByPrimaryKey(layoutSetId));
 		}
 
-		com.liferay.portal.model.LayoutSet layoutSet = getPersistence().remove(ownerId);
+		com.liferay.portal.model.LayoutSet layoutSet = getPersistence().remove(layoutSetId);
 
 		if (listener != null) {
 			listener.onAfterRemove(layoutSet);
@@ -139,15 +137,15 @@ public class LayoutSetUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByPrimaryKey(
-		java.lang.String ownerId)
+		long layoutSetId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException {
-		return getPersistence().findByPrimaryKey(ownerId);
+		return getPersistence().findByPrimaryKey(layoutSetId);
 	}
 
 	public static com.liferay.portal.model.LayoutSet fetchByPrimaryKey(
-		java.lang.String ownerId) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(ownerId);
+		long layoutSetId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(layoutSetId);
 	}
 
 	public static java.util.List findByGroupId(long groupId)
@@ -181,11 +179,12 @@ public class LayoutSetUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet[] findByGroupId_PrevAndNext(
-		java.lang.String ownerId, long groupId,
+		long layoutSetId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException {
-		return getPersistence().findByGroupId_PrevAndNext(ownerId, groupId, obc);
+		return getPersistence().findByGroupId_PrevAndNext(layoutSetId, groupId,
+			obc);
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByC_V(long companyId,
@@ -199,6 +198,18 @@ public class LayoutSetUtil {
 		long companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_V(companyId, virtualHost);
+	}
+
+	public static com.liferay.portal.model.LayoutSet findByG_P(long groupId,
+		boolean privateLayout)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
+		return getPersistence().findByG_P(groupId, privateLayout);
+	}
+
+	public static com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
+		boolean privateLayout) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_P(groupId, privateLayout);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -241,6 +252,12 @@ public class LayoutSetUtil {
 		getPersistence().removeByC_V(companyId, virtualHost);
 	}
 
+	public static void removeByG_P(long groupId, boolean privateLayout)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
+		getPersistence().removeByG_P(groupId, privateLayout);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -253,6 +270,11 @@ public class LayoutSetUtil {
 	public static int countByC_V(long companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_V(companyId, virtualHost);
+	}
+
+	public static int countByG_P(long groupId, boolean privateLayout)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P(groupId, privateLayout);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

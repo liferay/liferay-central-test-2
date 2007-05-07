@@ -175,7 +175,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutSetImpl" table="LayoutSet">
 		<cache usage="read-write" />
-		<id name="ownerId" type="java.lang.String">
+		<id name="layoutSetId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />

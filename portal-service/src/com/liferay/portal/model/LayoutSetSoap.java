@@ -47,7 +47,7 @@ import java.util.List;
 public class LayoutSetSoap implements Serializable {
 	public static LayoutSetSoap toSoapModel(LayoutSet model) {
 		LayoutSetSoap soapModel = new LayoutSetSoap();
-		soapModel.setOwnerId(model.getOwnerId());
+		soapModel.setLayoutSetId(model.getLayoutSetId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
@@ -78,20 +78,20 @@ public class LayoutSetSoap implements Serializable {
 	public LayoutSetSoap() {
 	}
 
-	public String getPrimaryKey() {
-		return _ownerId;
+	public long getPrimaryKey() {
+		return _layoutSetId;
 	}
 
-	public void setPrimaryKey(String pk) {
-		setOwnerId(pk);
+	public void setPrimaryKey(long pk) {
+		setLayoutSetId(pk);
 	}
 
-	public String getOwnerId() {
-		return _ownerId;
+	public long getLayoutSetId() {
+		return _layoutSetId;
 	}
 
-	public void setOwnerId(String ownerId) {
-		_ownerId = ownerId;
+	public void setLayoutSetId(long layoutSetId) {
+		_layoutSetId = layoutSetId;
 	}
 
 	public long getCompanyId() {
@@ -198,7 +198,7 @@ public class LayoutSetSoap implements Serializable {
 		_virtualHost = virtualHost;
 	}
 
-	private String _ownerId;
+	private long _layoutSetId;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;

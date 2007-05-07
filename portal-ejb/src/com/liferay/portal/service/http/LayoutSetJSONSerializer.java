@@ -51,15 +51,7 @@ import java.util.List;
 public class LayoutSetJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSet model) {
 		JSONObject jsonObj = new JSONObject();
-		String ownerId = model.getOwnerId();
-
-		if (ownerId == null) {
-			jsonObj.put("ownerId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ownerId", ownerId.toString());
-		}
-
+		jsonObj.put("layoutSetId", model.getLayoutSetId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("userId", model.getUserId());

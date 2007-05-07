@@ -52,15 +52,15 @@ import java.util.List;
  *
  */
 public class LayoutSetPersistence extends BasePersistence {
-	public LayoutSet create(String ownerId) {
+	public LayoutSet create(long layoutSetId) {
 		LayoutSet layoutSet = new LayoutSetImpl();
 		layoutSet.setNew(true);
-		layoutSet.setPrimaryKey(ownerId);
+		layoutSet.setPrimaryKey(layoutSetId);
 
 		return layoutSet;
 	}
 
-	public LayoutSet remove(String ownerId)
+	public LayoutSet remove(long layoutSetId)
 		throws NoSuchLayoutSetException, SystemException {
 		Session session = null;
 
@@ -68,16 +68,16 @@ public class LayoutSetPersistence extends BasePersistence {
 			session = openSession();
 
 			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
-					ownerId);
+					new Long(layoutSetId));
 
 			if (layoutSet == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No LayoutSet exists with the primary key " +
-						ownerId);
+						layoutSetId);
 				}
 
 				throw new NoSuchLayoutSetException(
-					"No LayoutSet exists with the primary key " + ownerId);
+					"No LayoutSet exists with the primary key " + layoutSetId);
 			}
 
 			return remove(layoutSet);
@@ -146,31 +146,32 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
-	public LayoutSet findByPrimaryKey(String ownerId)
+	public LayoutSet findByPrimaryKey(long layoutSetId)
 		throws NoSuchLayoutSetException, SystemException {
-		LayoutSet layoutSet = fetchByPrimaryKey(ownerId);
+		LayoutSet layoutSet = fetchByPrimaryKey(layoutSetId);
 
 		if (layoutSet == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No LayoutSet exists with the primary key " +
-					ownerId);
+					layoutSetId);
 			}
 
 			throw new NoSuchLayoutSetException(
-				"No LayoutSet exists with the primary key " + ownerId);
+				"No LayoutSet exists with the primary key " + layoutSetId);
 		}
 
 		return layoutSet;
 	}
 
-	public LayoutSet fetchByPrimaryKey(String ownerId)
+	public LayoutSet fetchByPrimaryKey(long layoutSetId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (LayoutSet)session.get(LayoutSetImpl.class, ownerId);
+			return (LayoutSet)session.get(LayoutSetImpl.class,
+				new Long(layoutSetId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -282,9 +283,10 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
-	public LayoutSet[] findByGroupId_PrevAndNext(String ownerId, long groupId,
-		OrderByComparator obc) throws NoSuchLayoutSetException, SystemException {
-		LayoutSet layoutSet = findByPrimaryKey(ownerId);
+	public LayoutSet[] findByGroupId_PrevAndNext(long layoutSetId,
+		long groupId, OrderByComparator obc)
+		throws NoSuchLayoutSetException, SystemException {
+		LayoutSet layoutSet = findByPrimaryKey(layoutSetId);
 		int count = countByGroupId(groupId);
 		Session session = null;
 
@@ -398,6 +400,70 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
+	public LayoutSet findByG_P(long groupId, boolean privateLayout)
+		throws NoSuchLayoutSetException, SystemException {
+		LayoutSet layoutSet = fetchByG_P(groupId, privateLayout);
+
+		if (layoutSet == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No LayoutSet exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchLayoutSetException(msg.toString());
+		}
+
+		return layoutSet;
+	}
+
+	public LayoutSet fetchByG_P(long groupId, boolean privateLayout)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			LayoutSet layoutSet = (LayoutSet)list.get(0);
+
+			return layoutSet;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -488,6 +554,12 @@ public class LayoutSetPersistence extends BasePersistence {
 		remove(layoutSet);
 	}
 
+	public void removeByG_P(long groupId, boolean privateLayout)
+		throws NoSuchLayoutSetException, SystemException {
+		LayoutSet layoutSet = findByG_P(groupId, privateLayout);
+		remove(layoutSet);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -565,6 +637,48 @@ public class LayoutSetPersistence extends BasePersistence {
 			if (virtualHost != null) {
 				q.setString(queryPos++, virtualHost);
 			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_P(long groupId, boolean privateLayout)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
 
 			Iterator itr = q.list().iterator();
 

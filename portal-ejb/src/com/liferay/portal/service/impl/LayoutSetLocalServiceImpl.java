@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
@@ -69,7 +70,9 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		long userId = groupId;
 		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
-		LayoutSet layoutSet = LayoutSetUtil.create(ownerId);
+		long layoutSetId = CounterLocalServiceUtil.increment();
+
+		LayoutSet layoutSet = LayoutSetUtil.create(layoutSetId);
 
 		layoutSet.setCompanyId(companyId);
 		layoutSet.setGroupId(groupId);
@@ -91,7 +94,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	public void deleteLayoutSet(String ownerId)
 		throws PortalException, SystemException {
 
-		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
+		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
+
+		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
 		// Layouts
 
@@ -116,13 +122,16 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		// Layout set
 
-		LayoutSetUtil.remove(ownerId);
+		LayoutSetUtil.removeByG_P(groupId, privateLayout);
 	}
 
 	public LayoutSet getLayoutSet(String ownerId)
 		throws PortalException, SystemException {
 
-		return LayoutSetUtil.findByPrimaryKey(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
+		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
+
+		return LayoutSetUtil.findByG_P(groupId, privateLayout);
 	}
 
 	public LayoutSet getLayoutSet(long companyId, String virtualHost)
@@ -138,7 +147,11 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 			// Layout set
 
-			LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+			long groupId = LayoutImpl.getGroupId(ownerId);
+			boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
+
+			LayoutSet layoutSet = LayoutSetUtil.findByG_P(
+				groupId, privateLayout);
 
 			layoutSet.setLogo(logo);
 
@@ -191,7 +204,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			boolean wapTheme)
 		throws PortalException, SystemException {
 
-		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
+		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
+
+		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
 		if (wapTheme) {
 			layoutSet.setWapThemeId(themeId);
@@ -206,17 +222,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSetUtil.update(layoutSet);
 
 		if (PrefsPropsUtil.getBoolean(PropsUtil.THEME_SYNC_ON_GROUP)) {
-			String otherOwnerId = null;
-
-			if (layoutSet.isPrivateLayout()) {
-				otherOwnerId = LayoutImpl.PUBLIC + layoutSet.getGroupId();
-			}
-			else {
-				otherOwnerId = LayoutImpl.PRIVATE + layoutSet.getGroupId();
-			}
-
-			LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(
-				otherOwnerId);
+			LayoutSet otherLayoutSet = LayoutSetUtil.findByG_P(
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout());
 
 			if (wapTheme) {
 				otherLayoutSet.setWapThemeId(themeId);
@@ -236,9 +243,12 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	public LayoutSet updatePageCount(String ownerId)
 		throws PortalException, SystemException {
 
+		long groupId = LayoutImpl.getGroupId(ownerId);
+		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
+
 		int pageCount = LayoutUtil.countByOwnerId(ownerId);
 
-		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
 		layoutSet.setPageCount(pageCount);
 
@@ -250,7 +260,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
 		throws PortalException, SystemException {
 
-		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
+		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
+
+		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
 		if (Validator.isNotNull(virtualHost)) {
 			try {
