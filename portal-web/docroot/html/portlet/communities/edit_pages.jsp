@@ -1117,6 +1117,35 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
 					<%
+					List portletsList = new ArrayList();
+					Set portletIdsSet = new HashSet();
+
+					Iterator itr1 = LayoutLocalServiceUtil.getLayouts(ownerId).iterator();
+
+					while (itr1.hasNext()) {
+						Layout curLayout = (Layout)itr1.next();
+
+						if (curLayout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+							LayoutTypePortlet curLayoutTypePortlet = (LayoutTypePortlet)curLayout.getLayoutType();
+
+							Iterator itr2 = curLayoutTypePortlet.getPortletIds().iterator();
+
+							while (itr2.hasNext()) {
+								Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
+
+								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+
+								if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
+									portletIdsSet.add(curPortlet.getRootPortletId());
+
+									portletsList.add(curPortlet);
+								}
+							}
+						}
+					}
+
+					Collections.sort(portletsList, new PortletTitleComparator(application, locale));
+
 					String tabs5Names = "import,export";
 
 					if (layout.getOwnerId().equals(ownerId)) {
@@ -1169,6 +1198,45 @@ viewPagesURL.setParameter("ownerId", ownerId);
 									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /></label>
 								</div>
 
+								<%
+								itr1 = portletsList.iterator();
+	
+								while (itr1.hasNext()) {
+									Portlet curPortlet = (Portlet)itr1.next();
+	
+									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+	
+									PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
+	
+									ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+	
+									try {
+										PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
+	
+										if (controls != null) {
+								%>
+	
+											<fieldset>
+												<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+											</fieldset>
+	
+								<%
+										}
+									}
+									catch (PortletDataException pde) {
+									%>
+	
+										<fieldset>
+											<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+											<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
+										</fieldset>
+	
+								<%
+									}
+								}
+								%>
+	
 								<br />
 
 								<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
@@ -1212,35 +1280,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							</div>
 
 							<%
-							List portletsList = new ArrayList();
-							Set portletIdsSet = new HashSet();
-
-							Iterator itr1 = LayoutLocalServiceUtil.getLayouts(ownerId).iterator();
-
-							while (itr1.hasNext()) {
-								Layout curLayout = (Layout)itr1.next();
-
-								if (curLayout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
-									LayoutTypePortlet curLayoutTypePortlet = (LayoutTypePortlet)curLayout.getLayoutType();
-
-									Iterator itr2 = curLayoutTypePortlet.getPortletIds().iterator();
-
-									while (itr2.hasNext()) {
-										Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
-
-										PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
-
-										if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
-											portletIdsSet.add(curPortlet.getRootPortletId());
-
-											portletsList.add(curPortlet);
-										}
-									}
-								}
-							}
-
-							Collections.sort(portletsList, new PortletTitleComparator(application, locale));
-
 							itr1 = portletsList.iterator();
 
 							while (itr1.hasNext()) {
