@@ -29,7 +29,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "");
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 String tabs3 = ParamUtil.getString(request, "tabs3", "page");
 String tabs4 = ParamUtil.getString(request, "tabs4", "regular-browsers");
-String tabs5 = ParamUtil.getString(request, "tabs5", "import");
+String tabs5 = ParamUtil.getString(request, "tabs5", "export");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
