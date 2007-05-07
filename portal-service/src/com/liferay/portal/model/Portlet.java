@@ -294,6 +294,10 @@ public interface Portlet extends PortletModel {
 	public boolean hasPortletMode(java.lang.String mimeType,
 		javax.portlet.PortletMode portletMode);
 
+	public java.util.Set getAllPortletModes();
+
+	public boolean hasMultipleMimeTypes();
+
 	public java.util.Set getSupportedLocales();
 
 	public void setSupportedLocales(java.util.Set supportedLocales);

@@ -28,7 +28,7 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "");
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 String tabs3 = ParamUtil.getString(request, "tabs3", "page");
-String tabs4 = ParamUtil.getString(request, "tabs4", "regular-browser");
+String tabs4 = ParamUtil.getString(request, "tabs4", "regular-browsers");
 String tabs5 = ParamUtil.getString(request, "tabs5", "import");
 
 String redirect = ParamUtil.getString(request, "redirect");
@@ -297,7 +297,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
 <input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">
 <input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>">
-<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browser") ? "false" : "true" %>'>
+<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>'>
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" type="hidden" value="<%= true %>">
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_SELECTED_LAYOUTS %>" type="hidden" value="">
 
@@ -888,13 +888,13 @@ viewPagesURL.setParameter("ownerId", ownerId);
 				</c:when>
 				<c:when test='<%= tabs3.equals("look-and-feel") %>'>
 					<liferay-ui:tabs
-						names="regular-browser,mobile-devices"
+						names="regular-browsers,mobile-devices"
 						param="tabs4"
 						url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
 					/>
 
 					<c:choose>
-						<c:when test='<%= tabs4.equals("regular-browser") %>'>
+						<c:when test='<%= tabs4.equals("regular-browsers") %>'>
 
 							<%
 							Theme selTheme = null;

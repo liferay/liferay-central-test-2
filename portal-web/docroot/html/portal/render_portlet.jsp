@@ -120,6 +120,8 @@ catch (RuntimeException re) {
 	re.printStackTrace();
 }
 
+PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletId, true, true);
+
 PortletPreferences portletPrefs = PortletPreferencesLocalServiceUtil.getPreferences(company.getCompanyId(), PortletPreferencesFactory.getPortletPreferencesPK(request, portletId));
 
 PortletConfig portletConfig = PortletConfigFactory.create(portlet, application);
@@ -183,15 +185,17 @@ RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderReque
 
 renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
+String responseContentType = renderRequestImpl.getResponseContentType();
+
 boolean showCloseIcon = true;
 boolean showConfigurationIcon = false;
 boolean showEditIcon = false;
 boolean showEditGuestIcon = false;
-boolean showHelpIcon = portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), PortletMode.HELP);
+boolean showHelpIcon = portlet.hasPortletMode(responseContentType, PortletMode.HELP);
 boolean showMaxIcon = true;
 boolean showMinIcon = true;
 boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
-boolean showPrintIcon = portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), LiferayPortletMode.PRINT);
+boolean showPrintIcon = portlet.hasPortletMode(responseContentType, LiferayPortletMode.PRINT);
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION)) {
@@ -199,19 +203,23 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	}
 }
 
-if (portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), PortletMode.EDIT)) {
+if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
 	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
 		showEditIcon = true;
 	}
 }
 
-if (portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), LiferayPortletMode.EDIT_GUEST)) {
+if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_GUEST)) {
 	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
 		showEditGuestIcon = true;
 	}
 }
 
-boolean supportsMimeType = portlet.hasPortletMode(renderRequestImpl.getResponseContentType(), portletMode);
+boolean supportsMimeType = portlet.hasPortletMode(responseContentType, portletMode);
+
+if (responseContentType.equals(Constants.XHTML_MP) && portlet.hasMultipleMimeTypes()) {
+	supportsMimeType = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-supported-clients-mobile-devices-" + portletMode, String.valueOf(supportsMimeType)));
+}
 
 // Unauthenticated users and users without UPDATE permission for the layout
 // cannot modify the layout
@@ -324,8 +332,6 @@ if (portlet.isActive() && access && supportsMimeType) {
 	SessionMessages.clear(renderRequestImpl);
 	SessionErrors.clear(renderRequestImpl);
 }
-
-PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
 %>
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>

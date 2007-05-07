@@ -1324,6 +1324,9 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
+		<supports>
+			<mime-type>application/vnd.wap.xhtml+xml</mime-type>
+		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
 			<role-name>guest</role-name>
@@ -1980,6 +1983,9 @@
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
+		</supports>
+		<supports>
+			<mime-type>application/vnd.wap.xhtml+xml</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>

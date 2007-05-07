@@ -963,16 +963,20 @@
 		<put name="portlet_configuration_content" value="" />
 	</definition>
 
+	<definition name="portlet.portlet_configuration.edit_look_and_feel" extends="portlet.portlet_configuration">
+		<put name="portlet_content" value="/portlet/portlet_configuration/edit_look_and_feel.jsp" />
+	</definition>
+
 	<definition name="portlet.portlet_configuration.edit_permissions" extends="portlet.portlet_configuration">
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_permissions.jsp" />
 	</definition>
 
-	<definition name="portlet.portlet_configuration.error" extends="portlet.portlet_configuration">
-		<put name="portlet_content" value="/portlet/portlet_configuration/error.jsp" />
+	<definition name="portlet.portlet_configuration.edit_supported_clients" extends="portlet.portlet_configuration">
+		<put name="portlet_content" value="/portlet/portlet_configuration/edit_supported_clients.jsp" />
 	</definition>
 
-	<definition name="portlet.portlet_configuration.edit_look_and_feel" extends="portlet.portlet_configuration">
-		<put name="portlet_content" value="/portlet/portlet_configuration/edit_look_and_feel.jsp" />
+	<definition name="portlet.portlet_configuration.error" extends="portlet.portlet_configuration">
+		<put name="portlet_content" value="/portlet/portlet_configuration/error.jsp" />
 	</definition>
 
 	<!-- Quick Note -->

@@ -1261,6 +1261,11 @@
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
+		<action path="/portlet_configuration/edit_supported_clients" type="com.liferay.portlet.portletconfiguration.action.EditSupportedClientsAction">
+			<forward name="portlet.portlet_configuration.edit_supported_clients" path="portlet.portlet_configuration.edit_supported_clients" />
+			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
+		</action>
+
 		<action path="/portlet_configuration/update_title" type="com.liferay.portlet.portletconfiguration.action.UpdateTitleAction" />
 
 		<!-- Quick Note -->

@@ -54,6 +54,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.portlet.PortletMode;
 
@@ -1555,6 +1556,47 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		if (mimeTypeModes.contains(portletMode.toString())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Gets a list of all portlet modes supported by the portlet.
+	 *
+	 * @return		a list of all portlet modes supported by the portlet
+	 */
+	public Set getAllPortletModes() {
+		Set allPortletModes = new TreeSet();
+
+		Iterator itr1 = _portletModes.entrySet().iterator();
+
+		while (itr1.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr1.next();
+
+			Set mimeTypeModes = (Set)entry.getValue();
+
+			Iterator itr2 = mimeTypeModes.iterator();
+
+			while (itr2.hasNext()) {
+				String portletMode = (String)itr2.next();
+
+				allPortletModes.add(portletMode);
+			}
+		}
+
+		return allPortletModes;
+	}
+
+	/**
+	 * Returns true if the portlet supports more than one mime type.
+	 *
+	 * @return		true if the portlet supports more than one mime type
+	 */
+	public boolean hasMultipleMimeTypes() {
+		if (_portletModes.size() > 1) {
 			return true;
 		}
 		else {
