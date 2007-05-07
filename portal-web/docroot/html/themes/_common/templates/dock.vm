@@ -1,4 +1,4 @@
-<div class="lfr-dock">
+<div class="lfr-dock interactive-mode">
 	<h2 class="user-greeting">
 		<span>$user_greeting</span>
 	</h2>

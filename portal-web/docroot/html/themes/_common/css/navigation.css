@@ -139,7 +139,7 @@
 
 /* ---------- Dock with Javascript ---------- */
 
-.js .lfr-dock {
+.js .lfr-dock.interactive-mode {
 	float: right;
 	min-width: 150px;
 	position: relative;
@@ -147,7 +147,7 @@
 	top: 10px;
 }
 
-.js .lfr-dock h2 {
+.js .lfr-dock.interactive-mode h2 {
 	background: url(../images/dock/menu_bar.png) no-repeat 100% -30px;
 	font-size: 1.2em;
 	margin-bottom: 0;
@@ -156,7 +156,7 @@
 	z-index: 82;
 }
 
-.js .lfr-dock h2 span {
+.js .lfr-dock.interactive-mode h2 span {
 	background: url(../images/dock/menu_bar.png) no-repeat 0 0;
 	color: #fff;
 	display: block;
@@ -172,21 +172,21 @@
 	top: -2px;
 }
 
-.js .lfr-dock ul {
+.js .lfr-dock.interactive-mode ul {
 	background: url(../images/dock/menu_bg.gif) no-repeat 0 0;
 	border-left: 20px solid #DAE3EF;
 	display: none;
 	float: none;
 }
 
-.js .lfr-dock li {
+.js .lfr-dock.interactive-mode li {
 	display: block;
 	float: none;
 	margin-bottom: 0pt;
 	margin-left: 0.2em;
 }
 
-.js .lfr-dock li a {
+.js .lfr-dock.interactive-mode li a {
 	background-position: 0.5em 50%;
 	background-repeat: no-repeat;
 	border-top: 1px solid #ccc;
@@ -196,18 +196,18 @@
 	text-decoration: none;
 }
 
-.js .lfr-dock ul.lfr-dock-list > li:first-child a, .js .lfr-dock ul.lfr-dock-list > li:first-child ul.show-my-places li:first-child a {
+.js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child ul.show-my-places li:first-child a {
 	border-top: none;
 }
 
-.js .lfr-dock li a:hover {
+.js .lfr-dock.interactive-mode li a:hover {
 	background-color: #FFF5BA;
 	background-position: 1.5em 50%;
 	border-top: 1px solid #E0D79F;
 	padding-left: 3.5em;
 }
 
-.js .lfr-dock ul.lfr-dock-list > li:first-child a, .js .lfr-dock ul.lfr-dock-list > li:first-child a:hover, .js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a, .js .lfr-dock ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover {
+.js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list > li:first-child a:hover, .js .lfr-dock.interactive-mode ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a, .js .lfr-dock.interactive-mode ul.lfr-dock-list li.my-places ul.show-my-places li ul li:first-child a:hover {
 	border-top: none;
 }
 
@@ -215,11 +215,11 @@
 	display: none;
 }
 
-.js .lfr-dock li.my-places li a {
+.js .lfr-dock.interactive-mode li.my-places li a {
 	background-image: none;
 }
 
-.js .lfr-dock li.my-places li ul li.current a, .js .lfr-dock li.my-places li ul li.current a:hover {
+.js .lfr-dock.interactive-mode li.my-places li ul li.current a, .js .lfr-dock.interactive-mode li.my-places li ul li.current a:hover {
 	background: #E5F7FD url(../images/dock/my_place_current.png) no-repeat 1em 50%;
 	margin: 0.1em 0 0 0.2em;
 	padding-left: 3.5em;

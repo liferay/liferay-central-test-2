@@ -3,6 +3,11 @@ Liferay.Dock = {
 		var instance = this;
 
 		var dock = jQuery('.lfr-dock');
+		
+		if (!dock.is('.interactive-mode')) {
+			return;	
+		}
+		
 		var dockList = dock.find('.lfr-dock-list');
 
 		if (dockList.length > 0){
