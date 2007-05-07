@@ -140,17 +140,17 @@ body.staging {
 
 .drag-indicator {
 	background: url(../images/spacer.png) scroll repeat;
-	border: 3px dashed #003366;
+	border: 3px dashed #036;
 	cursor: move;
 	font-size: 0;
 	position: relative;
 }
 
 .drop-area {
-	background-color: #000000;
+	background-color: #000;
+	filter: alpha(opacity=10);
 	font-size: 0;
 	opacity: .10;
-	filter: alpha(opacity=10);
 }
 
 .drop-position-top {
