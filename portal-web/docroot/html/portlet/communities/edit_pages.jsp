@@ -282,6 +282,47 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	}
 </script>
 
+<c:if test="<%= tabs3.equals("import-export") %>">
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
+	
+		jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
+			var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
+			if (this.checked){          
+				input.children(".<portlet:namespace />handler-control").show();
+			} else {
+				input.children(".<portlet:namespace />handler-control").hide();
+			}		
+		});
+	});
+</script>
+
+<style type="text/css">
+	.<portlet:namespace />handler-control {
+		padding-top: 3px;
+		padding-bottom: 5px;
+	}
+	.<portlet:namespace />handler-control .<portlet:namespace />handler-control {
+		margin-left: 30px;
+	}
+	.<portlet:namespace />handler-control label.<portlet:namespace />handler-control-label {
+		padding-right: 12px;
+	}
+	.<portlet:namespace />handler-control span.<portlet:namespace />handler-control-label {
+		padding-right: 20px;
+	}
+	.<portlet:namespace />handler-control span.<portlet:namespace />handler-control-label strong {
+		padding-left: 3px;
+		padding-right:3px;
+	}
+	.ie .<portlet:namespace />handler-control span.<portlet:namespace />handler-control-label strong {
+		padding-left: 6px;
+		padding-right: 10px;
+	}
+</style>
+</c:if>	
+
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
@@ -1438,12 +1479,16 @@ private String _renderControls(String nameSpace, ResourceBundle resourceBundle, 
 	StringMaker sm = new StringMaker();
 
 	for (int i = 0; i < controls.length; i++) {
-		sm.append("<div class=\"ctrl-holder\">");
+		sm.append("<div class=\"");
+		sm.append(nameSpace);
+		sm.append("handler-control\">");
 
 		if (controls[i] instanceof PortletDataHandlerBoolean) {
 			PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)controls[i];
 
-			sm.append("<label class=\"inline-label\">");
+			sm.append("<label class=\"");
+			sm.append(nameSpace);
+			sm.append("handler-control-label\">");
 			sm.append("<input ");
 			sm.append(control.getDefaultState() ? "checked=\"checked\" " : "");
 			sm.append("name=\"");
@@ -1463,7 +1508,9 @@ private String _renderControls(String nameSpace, ResourceBundle resourceBundle, 
 		else if (controls[i] instanceof PortletDataHandlerChoice) {
 			PortletDataHandlerChoice control = (PortletDataHandlerChoice)controls[i];
 
-			sm.append("<span class=\"label\">");
+			sm.append("<span class=\"");
+			sm.append(nameSpace);
+			sm.append("handler-control-label\">");
 			sm.append("<strong>&#9632;</strong> ");
 			sm.append(resourceBundle.getString(control.getControlName()));
 			sm.append("</span>");
@@ -1471,13 +1518,14 @@ private String _renderControls(String nameSpace, ResourceBundle resourceBundle, 
 			String[] choices = control.getChoices();
 
 			for (int j = 0; j < choices.length; j++) {
-				sm.append("<label class=\"inline-label\">");
+				sm.append("<label class=\"");
+				sm.append(nameSpace);
+				sm.append("handler-control-label\">");
 				sm.append("<input ");
 				sm.append(control.getDefaultChoiceIndex() == j ? "checked=\"checked\" " : "");
 				sm.append("name=\"");
 				sm.append(nameSpace);
 				sm.append(control.getControlName());
-				sm.append(j);
 				sm.append("\" type=\"radio\" value=\"");
 				sm.append(choices[j]);
 				sm.append("\" />");
