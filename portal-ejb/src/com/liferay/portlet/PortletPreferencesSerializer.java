@@ -25,7 +25,6 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
@@ -115,7 +114,8 @@ public class PortletPreferencesSerializer {
 	}
 
 	public static PortletPreferencesImpl fromXML(
-			long companyId, PortletPreferencesPK pk, String xml)
+			long companyId, String ownerId, String layoutId, String portletId,
+			String xml)
 		throws PortalException, SystemException {
 
 		try {
@@ -123,7 +123,8 @@ public class PortletPreferencesSerializer {
 				(PortletPreferencesImpl)fromDefaultXML(xml);
 
 			prefs = new PortletPreferencesImpl(
-				companyId, pk, prefs.getPreferences());
+				companyId, ownerId, layoutId, portletId,
+				prefs.getPreferences());
 
 			return prefs;
 		}

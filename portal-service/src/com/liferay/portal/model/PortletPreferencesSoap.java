@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -49,9 +47,10 @@ import java.util.List;
 public class PortletPreferencesSoap implements Serializable {
 	public static PortletPreferencesSoap toSoapModel(PortletPreferences model) {
 		PortletPreferencesSoap soapModel = new PortletPreferencesSoap();
-		soapModel.setPortletId(model.getPortletId());
-		soapModel.setLayoutId(model.getLayoutId());
+		soapModel.setPortletPreferencesId(model.getPortletPreferencesId());
 		soapModel.setOwnerId(model.getOwnerId());
+		soapModel.setLayoutId(model.getLayoutId());
+		soapModel.setPortletId(model.getPortletId());
 		soapModel.setPreferences(model.getPreferences());
 
 		return soapModel;
@@ -71,30 +70,20 @@ public class PortletPreferencesSoap implements Serializable {
 	public PortletPreferencesSoap() {
 	}
 
-	public PortletPreferencesPK getPrimaryKey() {
-		return new PortletPreferencesPK(_portletId, _layoutId, _ownerId);
+	public long getPrimaryKey() {
+		return _portletPreferencesId;
 	}
 
-	public void setPrimaryKey(PortletPreferencesPK pk) {
-		setPortletId(pk.portletId);
-		setLayoutId(pk.layoutId);
-		setOwnerId(pk.ownerId);
+	public void setPrimaryKey(long pk) {
+		setPortletPreferencesId(pk);
 	}
 
-	public String getPortletId() {
-		return _portletId;
+	public long getPortletPreferencesId() {
+		return _portletPreferencesId;
 	}
 
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
-	}
-
-	public String getLayoutId() {
-		return _layoutId;
-	}
-
-	public void setLayoutId(String layoutId) {
-		_layoutId = layoutId;
+	public void setPortletPreferencesId(long portletPreferencesId) {
+		_portletPreferencesId = portletPreferencesId;
 	}
 
 	public String getOwnerId() {
@@ -105,6 +94,22 @@ public class PortletPreferencesSoap implements Serializable {
 		_ownerId = ownerId;
 	}
 
+	public String getLayoutId() {
+		return _layoutId;
+	}
+
+	public void setLayoutId(String layoutId) {
+		_layoutId = layoutId;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
 	public String getPreferences() {
 		return _preferences;
 	}
@@ -113,8 +118,9 @@ public class PortletPreferencesSoap implements Serializable {
 		_preferences = preferences;
 	}
 
-	private String _portletId;
-	private String _layoutId;
+	private long _portletPreferencesId;
 	private String _ownerId;
+	private String _layoutId;
+	private String _portletId;
 	private String _preferences;
 }

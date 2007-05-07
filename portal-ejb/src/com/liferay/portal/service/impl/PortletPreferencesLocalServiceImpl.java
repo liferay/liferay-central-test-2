@@ -22,16 +22,18 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -57,20 +59,21 @@ public class PortletPreferencesLocalServiceImpl
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 	}
 
-	public void deletePortletPreferences(String layoutId, String ownerId)
+	public void deletePortletPreferences(String ownerId, String layoutId)
 		throws SystemException {
 
-		PortletPreferencesUtil.removeByL_O(layoutId, ownerId);
+		PortletPreferencesUtil.removeByO_L(layoutId, ownerId);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 	}
 
-	public void deletePortletPreferences(PortletPreferencesPK pk)
+	public void deletePortletPreferences(
+			String ownerId, String layoutId, String portletId)
 		throws PortalException, SystemException {
 
-		PortletPreferencesUtil.remove(pk);
+		PortletPreferencesUtil.removeByO_L_P(ownerId, layoutId, portletId);
 
-		PortletPreferencesLocalUtil.clearPreferencesPool(pk.ownerId);
+		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
@@ -88,16 +91,17 @@ public class PortletPreferencesLocalServiceImpl
 		return PortletPreferencesUtil.findAll();
 	}
 
-	public PortletPreferences getPortletPreferences(PortletPreferencesPK pk)
+	public PortletPreferences getPortletPreferences(
+			String ownerId, String layoutId, String portletId)
 		throws PortalException, SystemException {
 
-		return PortletPreferencesUtil.findByPrimaryKey(pk);
+		return PortletPreferencesUtil.findByO_L_P(ownerId, layoutId, portletId);
 	}
 
-	public List getPortletPreferencesByLayout(String layoutId, String ownerId)
+	public List getPortletPreferencesByLayout(String ownerId, String layoutId)
 		throws SystemException {
 
-		return PortletPreferencesUtil.findByL_O(layoutId, ownerId);
+		return PortletPreferencesUtil.findByO_L(ownerId, layoutId);
 	}
 
 	public List getPortletPreferencesByOwnerId(String ownerId)
@@ -113,27 +117,36 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(
-			long companyId, PortletPreferencesPK pk)
+			long companyId, String ownerId, String layoutId, String portletId)
 		throws PortalException, SystemException {
 
 		Map prefsPool = PortletPreferencesLocalUtil.getPreferencesPool(
-			pk.ownerId);
+			ownerId);
+
+		String key = encodeKey(ownerId, layoutId, portletId);
 
 		PortletPreferencesImpl prefs =
-			(PortletPreferencesImpl)prefsPool.get(pk);
+			(PortletPreferencesImpl)prefsPool.get(key);
 
 		if (prefs == null) {
 			PortletPreferences portletPreferences = null;
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				companyId, pk.portletId);
+				companyId, portletId);
 
 			try {
-				portletPreferences =
-					PortletPreferencesUtil.findByPrimaryKey(pk);
+				portletPreferences = PortletPreferencesUtil.findByO_L_P(
+					ownerId, layoutId, portletId);
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
-				portletPreferences = PortletPreferencesUtil.create(pk);
+				long portletPreferencesId = CounterLocalServiceUtil.increment();
+
+				portletPreferences = PortletPreferencesUtil.create(
+					portletPreferencesId);
+
+				portletPreferences.setOwnerId(ownerId);
+				portletPreferences.setLayoutId(layoutId);
+				portletPreferences.setPortletId(portletId);
 
 				if (portlet == null) {
 					portletPreferences.setPreferences(
@@ -148,25 +161,35 @@ public class PortletPreferencesLocalServiceImpl
 			}
 
 			prefs = PortletPreferencesSerializer.fromXML(
-				companyId, pk, portletPreferences.getPreferences());
+				companyId, ownerId, layoutId, portletId,
+				portletPreferences.getPreferences());
 
-			prefsPool.put(pk, prefs);
+			prefsPool.put(key, prefs);
 		}
 
 		return (PortletPreferencesImpl)prefs.clone();
 	}
 
 	public PortletPreferences updatePreferences(
-			PortletPreferencesPK pk, javax.portlet.PortletPreferences prefs)
+			String ownerId, String layoutId, String portletId,
+			javax.portlet.PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		PortletPreferences portletPreferences = null;
 
 		try {
-			portletPreferences = PortletPreferencesUtil.findByPrimaryKey(pk);
+			portletPreferences = PortletPreferencesUtil.findByO_L_P(
+				ownerId, layoutId, portletId);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
-			portletPreferences = PortletPreferencesUtil.create(pk);
+			long portletPreferencesId = CounterLocalServiceUtil.increment();
+
+			portletPreferences = PortletPreferencesUtil.create(
+				portletPreferencesId);
+
+			portletPreferences.setOwnerId(ownerId);
+			portletPreferences.setLayoutId(layoutId);
+			portletPreferences.setPortletId(portletId);
 		}
 
 		PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)prefs;
@@ -177,9 +200,23 @@ public class PortletPreferencesLocalServiceImpl
 
 		PortletPreferencesUtil.update(portletPreferences);
 
-		PortletPreferencesLocalUtil.clearPreferencesPool(pk.ownerId);
+		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 
 		return portletPreferences;
+	}
+
+	protected String encodeKey(
+		String ownerId, String layoutId, String portletId) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(ownerId);
+		sm.append(StringPool.POUND);
+		sm.append(layoutId);
+		sm.append(StringPool.POUND);
+		sm.append(portletId);
+
+		return sm.toString();
 	}
 
 }

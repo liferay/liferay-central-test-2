@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.xml.XMLFormatter;
@@ -59,14 +58,17 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(0, null, new HashMap());
+		this(0, null, null, null, new HashMap());
 	}
 
-	public PortletPreferencesImpl(long companyId, PortletPreferencesPK pk,
+	public PortletPreferencesImpl(long companyId, String ownerId,
+								  String layoutId, String portletId,
 								  Map preferences) {
 
 		_companyId = companyId;
-		_pk = pk;
+		_ownerId = ownerId;
+		_layoutId = layoutId;
+		_portletId = portletId;
 		_preferences = preferences;
 	}
 
@@ -202,9 +204,9 @@ public class PortletPreferencesImpl
 
 		if (_defaultPreferences == null) {
 			try {
-				if (!_pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
+				if (!_portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
 					_defaultPreferences = PortletPreferencesLocalServiceUtil.
-						getDefaultPreferences(_companyId, _pk.portletId);
+						getDefaultPreferences(_companyId, _portletId);
 				}
 			}
 			catch (Exception e) {
@@ -227,15 +229,15 @@ public class PortletPreferencesImpl
 	}
 
 	public void store() throws IOException, ValidatorException {
-		if (_pk == null) {
+		if ((_ownerId == null) || (_layoutId == null) || (_portletId == null)) {
 			throw new UnsupportedOperationException();
 		}
 
 		try {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				_companyId, _pk.portletId);
+				_companyId, _portletId);
 
-			if (!_pk.portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
+			if (!_portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
 				PreferencesValidator prefsValidator =
 					PortalUtil.getPreferencesValidator(portlet);
 
@@ -244,7 +246,8 @@ public class PortletPreferencesImpl
 				}
 			}
 
-			PortletPreferencesLocalServiceUtil.updatePreferences(_pk, this);
+			PortletPreferencesLocalServiceUtil.updatePreferences(
+				_ownerId, _layoutId, _portletId, this);
 		}
 		catch (PortalException pe) {
 			_log.error(pe);
@@ -270,15 +273,24 @@ public class PortletPreferencesImpl
 			preferencesClone.put(key, preference.clone());
 		}
 
-		return new PortletPreferencesImpl(_companyId, _pk, preferencesClone);
+		return new PortletPreferencesImpl(
+			_companyId, _ownerId, _layoutId, _portletId, preferencesClone);
 	}
 
 	protected long getCompanyId() {
 		return  _companyId;
 	}
 
-	protected PortletPreferencesPK getPrimaryKey() {
-		return _pk;
+	protected String getOwnerId() {
+		return _ownerId;
+	}
+
+	protected String getLayoutId() {
+		return _layoutId;
+	}
+
+	protected String getPortletId() {
+		return _portletId;
 	}
 
 	protected Map getPreferences() {
@@ -348,7 +360,9 @@ public class PortletPreferencesImpl
 	private static Log _log = LogFactory.getLog(PortletPreferencesImpl.class);
 
 	private long _companyId;
-	private PortletPreferencesPK _pk = null;
+	private String _ownerId;
+	private String _layoutId;
+	private String _portletId;
 	private Map _preferences = null;
 	private PortletPreferences _defaultPreferences = null;
 

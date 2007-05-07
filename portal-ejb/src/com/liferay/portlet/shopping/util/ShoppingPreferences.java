@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -400,12 +399,13 @@ public class ShoppingPreferences {
 	protected ShoppingPreferences(long companyId, long groupId)
 		throws PortalException, SystemException {
 
-		PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-			PortletKeys.SHOPPING, PortletKeys.PREFS_LAYOUT_ID_SHARED,
-			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId);
+		String ownerId =
+			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId;
+		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+		String portletId = PortletKeys.SHOPPING;
 
 		_prefs = PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, prefsPK);
+			companyId, ownerId, layoutId, portletId);
 	}
 
 	private PortletPreferences _prefs;

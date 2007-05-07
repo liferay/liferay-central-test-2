@@ -127,10 +127,13 @@ public class PortletInvokerImpl implements PortletInvoker {
 			HttpServletRequest httpReq = new WSRPServletRequest(WSRPUtil
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					renderParameters);
-			PortletPreferences prefs = PortletPreferencesLocalServiceUtil
-					.getPreferences(companyId, PortletPreferencesFactory
-							.getPortletPreferencesPK(httpReq, portlet
-									.getPortletId()));
+			String[] portletPreferencesIds =
+				PortletPreferencesFactory.getPortletPreferencesIds(
+					httpReq, portlet.getPortletId());
+			PortletPreferences portletPreferences =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					companyId, portletPreferencesIds[0],
+					portletPreferencesIds[1], portletPreferencesIds[2]);
 
 			// this gets the default layout of the general guest
 			User user = UserLocalServiceUtil.getDefaultUser(companyId);
@@ -138,7 +141,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 
 			RenderRequestImpl renderRequest = RenderRequestFactory.create(httpReq,
 					portlet, cachePortlet, portletCtx, windowState, mode,
-					prefs, layout.getPlid());
+					portletPreferences, layout.getPlid());
 			WSRPServletResponse res = new WSRPServletResponse();
 
 			RenderResponseImpl renderResponse = new WSRPRenderResponseImpl(
@@ -205,10 +208,13 @@ public class PortletInvokerImpl implements PortletInvoker {
 			HttpServletRequest httpReq = new WSRPServletRequest(WSRPUtil
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					actionParameters);
-			PortletPreferences prefs = PortletPreferencesLocalServiceUtil
-					.getPreferences(companyId, PortletPreferencesFactory
-							.getPortletPreferencesPK(httpReq, portlet
-									.getPortletId()));
+			String[] portletPreferencesIds =
+				PortletPreferencesFactory.getPortletPreferencesIds(
+					httpReq, portlet.getPortletId());
+			PortletPreferences portletPreferences =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					companyId, portletPreferencesIds[0],
+					portletPreferencesIds[1], portletPreferencesIds[2]);
 
 			// this gets the default layout of the general guest
 			User user = UserLocalServiceUtil.getDefaultUser(companyId);
@@ -216,7 +222,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 
 			ActionRequestImpl actionRequest = ActionRequestFactory.create(httpReq,
 					portlet, cachePortlet, portletCtx, windowState, mode,
-					prefs, layout.getPlid());
+					portletPreferences, layout.getPlid());
 			WSRPServletResponse res = new WSRPServletResponse();
 
 			ActionResponseImpl actionResponse = new WSRPActionResponseImpl(pbo,

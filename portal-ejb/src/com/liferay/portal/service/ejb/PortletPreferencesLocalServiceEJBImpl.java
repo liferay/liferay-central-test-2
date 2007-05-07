@@ -72,19 +72,20 @@ public class PortletPreferencesLocalServiceEJBImpl
 											 .deletePortletPreferences(ownerId);
 	}
 
-	public void deletePortletPreferences(java.lang.String layoutId,
-		java.lang.String ownerId) throws com.liferay.portal.SystemException {
+	public void deletePortletPreferences(java.lang.String ownerId,
+		java.lang.String layoutId) throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalServiceFactory.getTxImpl()
-											 .deletePortletPreferences(layoutId,
-			ownerId);
+											 .deletePortletPreferences(ownerId,
+			layoutId);
 	}
 
-	public void deletePortletPreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+	public void deletePortletPreferences(java.lang.String ownerId,
+		java.lang.String layoutId, java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalServiceFactory.getTxImpl()
-											 .deletePortletPreferences(pk);
+											 .deletePortletPreferences(ownerId,
+			layoutId, portletId);
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
@@ -103,19 +104,21 @@ public class PortletPreferencesLocalServiceEJBImpl
 	}
 
 	public com.liferay.portal.model.PortletPreferences getPortletPreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl()
-													.getPortletPreferences(pk);
+													.getPortletPreferences(ownerId,
+			layoutId, portletId);
 	}
 
 	public java.util.List getPortletPreferencesByLayout(
-		java.lang.String layoutId, java.lang.String ownerId)
+		java.lang.String ownerId, java.lang.String layoutId)
 		throws com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl()
-													.getPortletPreferencesByLayout(layoutId,
-			ownerId);
+													.getPortletPreferencesByLayout(ownerId,
+			layoutId);
 	}
 
 	public java.util.List getPortletPreferencesByOwnerId(
@@ -131,20 +134,22 @@ public class PortletPreferencesLocalServiceEJBImpl
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl().getPreferences(companyId,
-			pk);
+			ownerId, layoutId, portletId);
 	}
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk,
-		javax.portlet.PortletPreferences prefs)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl()
-													.updatePreferences(pk, prefs);
+													.updatePreferences(ownerId,
+			layoutId, portletId, prefs);
 	}
 
 	public void ejbCreate() throws CreateException {

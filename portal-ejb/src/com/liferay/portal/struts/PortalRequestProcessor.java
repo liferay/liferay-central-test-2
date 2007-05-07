@@ -42,7 +42,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -671,12 +670,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		CachePortlet cachePortlet = PortletInstanceFactory.create(portlet, ctx);
 
-		PortletPreferencesPK prefsPK =
-			PortletPreferencesFactory.getPortletPreferencesPK(req, portletId);
+		String[] portletPreferencesIds =
+			PortletPreferencesFactory.getPortletPreferencesIds(
+				req, portletId);
 
-		PortletPreferences prefs =
+		PortletPreferences portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				portlet.getCompanyId(), prefsPK);
+				portlet.getCompanyId(), portletPreferencesIds[0],
+				portletPreferencesIds[1], portletPreferencesIds[2]);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx =
@@ -684,7 +685,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(
 			req, portlet, cachePortlet, portletCtx, WindowState.MAXIMIZED,
-			PortletMode.VIEW, prefs);
+			PortletMode.VIEW, portletPreferences);
 
 		RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(
 			renderRequestImpl, res, portletId, portlet.getCompanyId());

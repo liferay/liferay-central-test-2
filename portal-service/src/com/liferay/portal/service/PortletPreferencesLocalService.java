@@ -60,11 +60,11 @@ public interface PortletPreferencesLocalService {
 	public void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException;
 
-	public void deletePortletPreferences(java.lang.String layoutId,
-		java.lang.String ownerId) throws com.liferay.portal.SystemException;
+	public void deletePortletPreferences(java.lang.String ownerId,
+		java.lang.String layoutId) throws com.liferay.portal.SystemException;
 
-	public void deletePortletPreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+	public void deletePortletPreferences(java.lang.String ownerId,
+		java.lang.String layoutId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -77,12 +77,13 @@ public interface PortletPreferencesLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences getPortletPreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.util.List getPortletPreferencesByLayout(
-		java.lang.String layoutId, java.lang.String ownerId)
+		java.lang.String ownerId, java.lang.String layoutId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getPortletPreferencesByOwnerId(
@@ -92,13 +93,14 @@ public interface PortletPreferencesLocalService {
 		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk,
-		javax.portlet.PortletPreferences prefs)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -208,6 +208,8 @@ alter_column_type PollsQuestion groupId LONG;
 
 alter_column_type PollsVote questionId LONG;
 
+alter_column_type PortletPreferences portletPreferencesId LONG;
+
 alter_column_type Region regionId LONG;
 
 alter_column_type Release_ releaseId LONG;

@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -54,22 +53,23 @@ import java.sql.Types;
 public class PortletPreferencesModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PortletPreferences";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "portletId", new Integer(Types.VARCHAR) },
-			{ "layoutId", new Integer(Types.VARCHAR) },
+			{ "portletPreferencesId", new Integer(Types.BIGINT) },
 			{ "ownerId", new Integer(Types.VARCHAR) },
+			{ "layoutId", new Integer(Types.VARCHAR) },
+			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "preferences", new Integer(Types.CLOB) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences.portletId"),
+	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.PortletPreferences.ownerId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.layoutId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences.ownerId"),
+	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.PortletPreferences.portletId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PREFERENCES = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.preferences"),
@@ -80,30 +80,38 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	public PortletPreferencesModelImpl() {
 	}
 
-	public PortletPreferencesPK getPrimaryKey() {
-		return new PortletPreferencesPK(_portletId, _layoutId, _ownerId);
+	public long getPrimaryKey() {
+		return _portletPreferencesId;
 	}
 
-	public void setPrimaryKey(PortletPreferencesPK pk) {
-		setPortletId(pk.portletId);
-		setLayoutId(pk.layoutId);
-		setOwnerId(pk.ownerId);
+	public void setPrimaryKey(long pk) {
+		setPortletPreferencesId(pk);
 	}
 
-	public String getPortletId() {
-		return GetterUtil.getString(_portletId);
+	public long getPortletPreferencesId() {
+		return _portletPreferencesId;
 	}
 
-	public void setPortletId(String portletId) {
-		if (((portletId == null) && (_portletId != null)) ||
-				((portletId != null) && (_portletId == null)) ||
-				((portletId != null) && (_portletId != null) &&
-				!portletId.equals(_portletId))) {
-			if (!XSS_ALLOW_PORTLETID) {
-				portletId = XSSUtil.strip(portletId);
+	public void setPortletPreferencesId(long portletPreferencesId) {
+		if (portletPreferencesId != _portletPreferencesId) {
+			_portletPreferencesId = portletPreferencesId;
+		}
+	}
+
+	public String getOwnerId() {
+		return GetterUtil.getString(_ownerId);
+	}
+
+	public void setOwnerId(String ownerId) {
+		if (((ownerId == null) && (_ownerId != null)) ||
+				((ownerId != null) && (_ownerId == null)) ||
+				((ownerId != null) && (_ownerId != null) &&
+				!ownerId.equals(_ownerId))) {
+			if (!XSS_ALLOW_OWNERID) {
+				ownerId = XSSUtil.strip(ownerId);
 			}
 
-			_portletId = portletId;
+			_ownerId = ownerId;
 		}
 	}
 
@@ -124,20 +132,20 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getOwnerId() {
-		return GetterUtil.getString(_ownerId);
+	public String getPortletId() {
+		return GetterUtil.getString(_portletId);
 	}
 
-	public void setOwnerId(String ownerId) {
-		if (((ownerId == null) && (_ownerId != null)) ||
-				((ownerId != null) && (_ownerId == null)) ||
-				((ownerId != null) && (_ownerId != null) &&
-				!ownerId.equals(_ownerId))) {
-			if (!XSS_ALLOW_OWNERID) {
-				ownerId = XSSUtil.strip(ownerId);
+	public void setPortletId(String portletId) {
+		if (((portletId == null) && (_portletId != null)) ||
+				((portletId != null) && (_portletId == null)) ||
+				((portletId != null) && (_portletId != null) &&
+				!portletId.equals(_portletId))) {
+			if (!XSS_ALLOW_PORTLETID) {
+				portletId = XSSUtil.strip(portletId);
 			}
 
-			_ownerId = ownerId;
+			_portletId = portletId;
 		}
 	}
 
@@ -160,9 +168,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PortletPreferencesImpl clone = new PortletPreferencesImpl();
-		clone.setPortletId(getPortletId());
-		clone.setLayoutId(getLayoutId());
+		clone.setPortletPreferencesId(getPortletPreferencesId());
 		clone.setOwnerId(getOwnerId());
+		clone.setLayoutId(getLayoutId());
+		clone.setPortletId(getPortletId());
 		clone.setPreferences(getPreferences());
 
 		return clone;
@@ -174,9 +183,17 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		}
 
 		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
-		PortletPreferencesPK pk = portletPreferences.getPrimaryKey();
+		long pk = portletPreferences.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -193,9 +210,9 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PortletPreferencesPK pk = portletPreferences.getPrimaryKey();
+		long pk = portletPreferences.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -204,11 +221,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _portletId;
-	private String _layoutId;
+	private long _portletPreferencesId;
 	private String _ownerId;
+	private String _layoutId;
+	private String _portletId;
 	private String _preferences;
 }

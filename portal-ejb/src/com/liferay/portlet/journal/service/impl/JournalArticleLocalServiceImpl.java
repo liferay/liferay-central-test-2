@@ -43,7 +43,6 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -404,14 +403,16 @@ public class JournalArticleLocalServiceImpl
 				if ((diff > 0) && (diff < (Time.MINUTE * 15))) {
 					String articleURL = StringPool.BLANK;
 
-					PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-						PortletKeys.JOURNAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
+					String ownerId =
 						PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-							article.getGroupId());
+							article.getGroupId();
+					String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+					String portletId = PortletKeys.JOURNAL;
 
 					PortletPreferences prefs =
 						PortletPreferencesLocalServiceUtil.getPreferences(
-							article.getCompanyId(), prefsPK);
+							article.getCompanyId(), ownerId, layoutId,
+							portletId);
 
 					sendEmail(article, articleURL, prefs, "review");
 				}

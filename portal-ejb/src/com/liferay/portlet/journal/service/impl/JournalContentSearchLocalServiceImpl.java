@@ -34,7 +34,6 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
@@ -103,13 +102,10 @@ public class JournalContentSearchLocalServiceImpl
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
 					try {
-						PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-							portletId, layout.getLayoutId(),
-							layout.getOwnerId());
-
 						PortletPreferences prefs =
 							PortletPreferencesLocalServiceUtil.getPreferences(
-								layout.getCompanyId(), prefsPK);
+								layout.getCompanyId(), layout.getOwnerId(),
+								layout.getLayoutId(), portletId);
 
 						String articleId = prefs.getValue(
 							"article-id", StringPool.BLANK);

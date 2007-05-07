@@ -52,15 +52,15 @@ import java.util.List;
  *
  */
 public class PortletPreferencesPersistence extends BasePersistence {
-	public PortletPreferences create(PortletPreferencesPK portletPreferencesPK) {
+	public PortletPreferences create(long portletPreferencesId) {
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
 		portletPreferences.setNew(true);
-		portletPreferences.setPrimaryKey(portletPreferencesPK);
+		portletPreferences.setPrimaryKey(portletPreferencesId);
 
 		return portletPreferences;
 	}
 
-	public PortletPreferences remove(PortletPreferencesPK portletPreferencesPK)
+	public PortletPreferences remove(long portletPreferencesId)
 		throws NoSuchPortletPreferencesException, SystemException {
 		Session session = null;
 
@@ -68,18 +68,18 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			session = openSession();
 
 			PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
-					portletPreferencesPK);
+					new Long(portletPreferencesId));
 
 			if (portletPreferences == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No PortletPreferences exists with the primary key " +
-						portletPreferencesPK);
+						portletPreferencesId);
 				}
 
 				throw new NoSuchPortletPreferencesException(
 					"No PortletPreferences exists with the primary key " +
-					portletPreferencesPK);
+					portletPreferencesId);
 			}
 
 			return remove(portletPreferences);
@@ -150,34 +150,33 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByPrimaryKey(
-		PortletPreferencesPK portletPreferencesPK)
+	public PortletPreferences findByPrimaryKey(long portletPreferencesId)
 		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = fetchByPrimaryKey(portletPreferencesPK);
+		PortletPreferences portletPreferences = fetchByPrimaryKey(portletPreferencesId);
 
 		if (portletPreferences == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No PortletPreferences exists with the primary key " +
-					portletPreferencesPK);
+					portletPreferencesId);
 			}
 
 			throw new NoSuchPortletPreferencesException(
 				"No PortletPreferences exists with the primary key " +
-				portletPreferencesPK);
+				portletPreferencesId);
 		}
 
 		return portletPreferences;
 	}
 
-	public PortletPreferences fetchByPrimaryKey(
-		PortletPreferencesPK portletPreferencesPK) throws SystemException {
+	public PortletPreferences fetchByPrimaryKey(long portletPreferencesId)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			return (PortletPreferences)session.get(PortletPreferencesImpl.class,
-				portletPreferencesPK);
+				new Long(portletPreferencesId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -187,7 +186,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByPortletId(String portletId) throws SystemException {
+	public List findByOwnerId(String ownerId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -197,11 +196,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
 			}
 			else {
-				query.append("portletId = ?");
+				query.append("ownerId = ?");
 			}
 
 			query.append(" ");
@@ -211,8 +210,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
 			}
 
 			return q.list();
@@ -225,12 +224,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByPortletId(String portletId, int begin, int end)
+	public List findByOwnerId(String ownerId, int begin, int end)
 		throws SystemException {
-		return findByPortletId(portletId, begin, end, null);
+		return findByOwnerId(ownerId, begin, end, null);
 	}
 
-	public List findByPortletId(String portletId, int begin, int end,
+	public List findByOwnerId(String ownerId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -241,11 +240,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
 			}
 			else {
-				query.append("portletId = ?");
+				query.append("ownerId = ?");
 			}
 
 			query.append(" ");
@@ -260,8 +259,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
 			}
 
 			return QueryUtil.list(q, getDialect(), begin, end);
@@ -274,17 +273,17 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByPortletId_First(String portletId,
+	public PortletPreferences findByOwnerId_First(String ownerId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByPortletId(portletId, 0, 1, obc);
+		List list = findByOwnerId(ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PortletPreferences exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("portletId=");
-			msg.append(portletId);
+			msg.append("ownerId=");
+			msg.append(ownerId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
@@ -293,18 +292,18 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByPortletId_Last(String portletId,
+	public PortletPreferences findByOwnerId_Last(String ownerId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		int count = countByPortletId(portletId);
-		List list = findByPortletId(portletId, count - 1, count, obc);
+		int count = countByOwnerId(ownerId);
+		List list = findByOwnerId(ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PortletPreferences exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("portletId=");
-			msg.append(portletId);
+			msg.append("ownerId=");
+			msg.append(ownerId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
@@ -313,12 +312,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences[] findByPortletId_PrevAndNext(
-		PortletPreferencesPK portletPreferencesPK, String portletId,
-		OrderByComparator obc)
+	public PortletPreferences[] findByOwnerId_PrevAndNext(
+		long portletPreferencesId, String ownerId, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesPK);
-		int count = countByPortletId(portletId);
+		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
+		int count = countByOwnerId(ownerId);
 		Session session = null;
 
 		try {
@@ -328,11 +326,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
 			}
 			else {
-				query.append("portletId = ?");
+				query.append("ownerId = ?");
 			}
 
 			query.append(" ");
@@ -347,8 +345,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -495,10 +493,9 @@ public class PortletPreferencesPersistence extends BasePersistence {
 	}
 
 	public PortletPreferences[] findByLayoutId_PrevAndNext(
-		PortletPreferencesPK portletPreferencesPK, String layoutId,
-		OrderByComparator obc)
+		long portletPreferencesId, String layoutId, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesPK);
+		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
 		int count = countByLayoutId(layoutId);
 		Session session = null;
 
@@ -549,7 +546,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByOwnerId(String ownerId) throws SystemException {
+	public List findByPortletId(String portletId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -559,11 +556,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
+			if (portletId == null) {
+				query.append("portletId IS NULL");
 			}
 			else {
-				query.append("ownerId = ?");
+				query.append("portletId = ?");
 			}
 
 			query.append(" ");
@@ -573,8 +570,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
 			}
 
 			return q.list();
@@ -587,12 +584,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByOwnerId(String ownerId, int begin, int end)
+	public List findByPortletId(String portletId, int begin, int end)
 		throws SystemException {
-		return findByOwnerId(ownerId, begin, end, null);
+		return findByPortletId(portletId, begin, end, null);
 	}
 
-	public List findByOwnerId(String ownerId, int begin, int end,
+	public List findByPortletId(String portletId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -603,11 +600,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
+			if (portletId == null) {
+				query.append("portletId IS NULL");
 			}
 			else {
-				query.append("ownerId = ?");
+				query.append("portletId = ?");
 			}
 
 			query.append(" ");
@@ -622,8 +619,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
 			}
 
 			return QueryUtil.list(q, getDialect(), begin, end);
@@ -636,17 +633,17 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByOwnerId_First(String ownerId,
+	public PortletPreferences findByPortletId_First(String portletId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByOwnerId(ownerId, 0, 1, obc);
+		List list = findByPortletId(portletId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PortletPreferences exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
+			msg.append("portletId=");
+			msg.append(portletId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
@@ -655,18 +652,18 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByOwnerId_Last(String ownerId,
+	public PortletPreferences findByPortletId_Last(String portletId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		int count = countByOwnerId(ownerId);
-		List list = findByOwnerId(ownerId, count - 1, count, obc);
+		int count = countByPortletId(portletId);
+		List list = findByPortletId(portletId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PortletPreferences exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
+			msg.append("portletId=");
+			msg.append(portletId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
@@ -675,12 +672,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences[] findByOwnerId_PrevAndNext(
-		PortletPreferencesPK portletPreferencesPK, String ownerId,
-		OrderByComparator obc)
+	public PortletPreferences[] findByPortletId_PrevAndNext(
+		long portletPreferencesId, String portletId, OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesPK);
-		int count = countByOwnerId(ownerId);
+		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
+		int count = countByPortletId(portletId);
 		Session session = null;
 
 		try {
@@ -690,11 +686,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
+			if (portletId == null) {
+				query.append("portletId IS NULL");
 			}
 			else {
-				query.append("ownerId = ?");
+				query.append("portletId = ?");
 			}
 
 			query.append(" ");
@@ -709,8 +705,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -730,7 +726,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByL_O(String layoutId, String ownerId)
+	public List findByO_L(String ownerId, String layoutId)
 		throws SystemException {
 		Session session = null;
 
@@ -741,20 +737,20 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
 			if (ownerId == null) {
 				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (layoutId == null) {
+				query.append("layoutId IS NULL");
+			}
+			else {
+				query.append("layoutId = ?");
 			}
 
 			query.append(" ");
@@ -764,12 +760,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
 			}
 
 			return q.list();
@@ -782,12 +778,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByL_O(String layoutId, String ownerId, int begin, int end)
+	public List findByO_L(String ownerId, String layoutId, int begin, int end)
 		throws SystemException {
-		return findByL_O(layoutId, ownerId, begin, end, null);
+		return findByO_L(ownerId, layoutId, begin, end, null);
 	}
 
-	public List findByL_O(String layoutId, String ownerId, int begin, int end,
+	public List findByO_L(String ownerId, String layoutId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -798,20 +794,20 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
 			if (ownerId == null) {
 				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (layoutId == null) {
+				query.append("layoutId IS NULL");
+			}
+			else {
+				query.append("layoutId = ?");
 			}
 
 			query.append(" ");
@@ -826,12 +822,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
 			}
 
 			return QueryUtil.list(q, getDialect(), begin, end);
@@ -844,20 +840,20 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByL_O_First(String layoutId, String ownerId,
+	public PortletPreferences findByO_L_First(String ownerId, String layoutId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByL_O(layoutId, ownerId, 0, 1, obc);
+		List list = findByO_L(ownerId, layoutId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PortletPreferences exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("layoutId=");
-			msg.append(layoutId);
-			msg.append(", ");
 			msg.append("ownerId=");
 			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("layoutId=");
+			msg.append(layoutId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
@@ -866,21 +862,21 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences findByL_O_Last(String layoutId, String ownerId,
+	public PortletPreferences findByO_L_Last(String ownerId, String layoutId,
 		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		int count = countByL_O(layoutId, ownerId);
-		List list = findByL_O(layoutId, ownerId, count - 1, count, obc);
+		int count = countByO_L(ownerId, layoutId);
+		List list = findByO_L(ownerId, layoutId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No PortletPreferences exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("layoutId=");
-			msg.append(layoutId);
-			msg.append(", ");
 			msg.append("ownerId=");
 			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("layoutId=");
+			msg.append(layoutId);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
@@ -889,12 +885,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public PortletPreferences[] findByL_O_PrevAndNext(
-		PortletPreferencesPK portletPreferencesPK, String layoutId,
-		String ownerId, OrderByComparator obc)
+	public PortletPreferences[] findByO_L_PrevAndNext(
+		long portletPreferencesId, String ownerId, String layoutId,
+		OrderByComparator obc)
 		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesPK);
-		int count = countByL_O(layoutId, ownerId);
+		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
+		int count = countByO_L(ownerId, layoutId);
 		Session session = null;
 
 		try {
@@ -904,20 +900,20 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
 			if (ownerId == null) {
 				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (layoutId == null) {
+				query.append("layoutId IS NULL");
+			}
+			else {
+				query.append("layoutId = ?");
 			}
 
 			query.append(" ");
@@ -932,12 +928,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -948,6 +944,109 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			array[2] = (PortletPreferences)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PortletPreferences findByO_L_P(String ownerId, String layoutId,
+		String portletId)
+		throws NoSuchPortletPreferencesException, SystemException {
+		PortletPreferences portletPreferences = fetchByO_L_P(ownerId, layoutId,
+				portletId);
+
+		if (portletPreferences == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(", ");
+			msg.append("portletId=");
+			msg.append(portletId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchPortletPreferencesException(msg.toString());
+		}
+
+		return portletPreferences;
+	}
+
+	public PortletPreferences fetchByO_L_P(String ownerId, String layoutId,
+		String portletId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (layoutId == null) {
+				query.append("layoutId IS NULL");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			PortletPreferences portletPreferences = (PortletPreferences)list.get(0);
+
+			return portletPreferences;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -1032,8 +1131,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByPortletId(String portletId) throws SystemException {
-		Iterator itr = findByPortletId(portletId).iterator();
+	public void removeByOwnerId(String ownerId) throws SystemException {
+		Iterator itr = findByOwnerId(ownerId).iterator();
 
 		while (itr.hasNext()) {
 			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
@@ -1050,8 +1149,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByOwnerId(String ownerId) throws SystemException {
-		Iterator itr = findByOwnerId(ownerId).iterator();
+	public void removeByPortletId(String portletId) throws SystemException {
+		Iterator itr = findByPortletId(portletId).iterator();
 
 		while (itr.hasNext()) {
 			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
@@ -1059,14 +1158,21 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByL_O(String layoutId, String ownerId)
+	public void removeByO_L(String ownerId, String layoutId)
 		throws SystemException {
-		Iterator itr = findByL_O(layoutId, ownerId).iterator();
+		Iterator itr = findByO_L(ownerId, layoutId).iterator();
 
 		while (itr.hasNext()) {
 			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
 			remove(portletPreferences);
 		}
+	}
+
+	public void removeByO_L_P(String ownerId, String layoutId, String portletId)
+		throws NoSuchPortletPreferencesException, SystemException {
+		PortletPreferences portletPreferences = findByO_L_P(ownerId, layoutId,
+				portletId);
+		remove(portletPreferences);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1077,7 +1183,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByPortletId(String portletId) throws SystemException {
+	public int countByOwnerId(String ownerId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1088,11 +1194,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
 			}
 			else {
-				query.append("portletId = ?");
+				query.append("ownerId = ?");
 			}
 
 			query.append(" ");
@@ -1102,8 +1208,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
 			}
 
 			Iterator itr = q.list().iterator();
@@ -1175,7 +1281,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByOwnerId(String ownerId) throws SystemException {
+	public int countByPortletId(String portletId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1186,11 +1292,11 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
+			if (portletId == null) {
+				query.append("portletId IS NULL");
 			}
 			else {
-				query.append("ownerId = ?");
+				query.append("portletId = ?");
 			}
 
 			query.append(" ");
@@ -1200,8 +1306,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
 			}
 
 			Iterator itr = q.list().iterator();
@@ -1224,7 +1330,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByL_O(String layoutId, String ownerId)
+	public int countByO_L(String ownerId, String layoutId)
 		throws SystemException {
 		Session session = null;
 
@@ -1236,20 +1342,20 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
 
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
 			if (ownerId == null) {
 				query.append("ownerId IS NULL");
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (layoutId == null) {
+				query.append("layoutId IS NULL");
+			}
+			else {
+				query.append("layoutId = ?");
 			}
 
 			query.append(" ");
@@ -1259,12 +1365,88 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			int queryPos = 0;
 
+			if (ownerId != null) {
+				q.setString(queryPos++, ownerId);
+			}
+
 			if (layoutId != null) {
 				q.setString(queryPos++, layoutId);
 			}
 
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByO_L_P(String ownerId, String layoutId, String portletId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			if (ownerId == null) {
+				query.append("ownerId IS NULL");
+			}
+			else {
+				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (layoutId == null) {
+				query.append("layoutId IS NULL");
+			}
+			else {
+				query.append("layoutId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (layoutId != null) {
+				q.setString(queryPos++, layoutId);
+			}
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
 			}
 
 			Iterator itr = q.list().iterator();

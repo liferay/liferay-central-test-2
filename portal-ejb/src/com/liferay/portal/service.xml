@@ -820,28 +820,34 @@
 
 		<!-- PK fields -->
 
-		<column name="portletId" type="String" primary="true" />
-		<column name="layoutId" type="String" primary="true" />
-		<column name="ownerId" type="String" primary="true" />
+		<column name="portletPreferencesId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
+		<column name="ownerId" type="String" />
+		<column name="layoutId" type="String" />
+		<column name="portletId" type="String" />
 		<column name="preferences" type="String" />
 
 		<!-- Finder methods -->
 
-		<finder name="PortletId" return-type="Collection">
-			<finder-column name="portletId" />
+		<finder name="OwnerId" return-type="Collection">
+			<finder-column name="ownerId" />
 		</finder>
 		<finder name="LayoutId" return-type="Collection">
 			<finder-column name="layoutId" />
 		</finder>
-		<finder name="OwnerId" return-type="Collection">
-			<finder-column name="ownerId" />
+		<finder name="PortletId" return-type="Collection">
+			<finder-column name="portletId" />
 		</finder>
-		<finder name="L_O" return-type="Collection">
-			<finder-column name="layoutId" />
+		<finder name="O_L" return-type="Collection">
 			<finder-column name="ownerId" />
+			<finder-column name="layoutId" />
+		</finder>
+		<finder name="O_L_P" return-type="PortletPreferences">
+			<finder-column name="ownerId" />
+			<finder-column name="layoutId" />
+			<finder-column name="portletId" />
 		</finder>
 	</entity>
 	<entity name="Region" local-service="false" remote-service="true">

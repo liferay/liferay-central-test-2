@@ -49,7 +49,6 @@ import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -327,42 +326,41 @@ public class EditPagesAction extends PortletAction {
 
 			// Copy preference
 
-			PortletPreferencesPK prefsPK =
-				PortletPreferencesFactory.getPortletPreferencesPK(
-					httpReq, copyPortletId, layout.getPlid());
+			String[] portletPreferencesIds =
+				PortletPreferencesFactory.getPortletPreferencesIds(
+					httpReq, layout.getPlid(), copyPortletId);
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, prefsPK);
+				companyId, portletPreferencesIds[0], portletPreferencesIds[1],
+				portletPreferencesIds[2]);
 
-			PortletPreferencesPK copyPrefsPK =
-				PortletPreferencesFactory.getPortletPreferencesPK(
-					httpReq, copyPortletId, copyLayout.getPlid());
+			String[] copyPrtletPreferencesIds =
+				PortletPreferencesFactory.getPortletPreferencesIds(
+					httpReq, copyLayout.getPlid(), copyPortletId);
 
 			PortletPreferences copyPrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, copyPrefsPK);
+					companyId, copyPrtletPreferencesIds[0],
+					copyPrtletPreferencesIds[1], copyPrtletPreferencesIds[2]);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				prefsPK, copyPrefs);
+				portletPreferencesIds[0], portletPreferencesIds[1],
+				portletPreferencesIds[2], copyPrefs);
 
 			// Copy portlet setup
 
-			prefsPK = new PortletPreferencesPK(
-				copyPortletId, layout.getLayoutId(), layout.getOwnerId());
-
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, prefsPK);
-
-			copyPrefsPK = new PortletPreferencesPK(
-				copyPortletId, copyLayout.getLayoutId(),
-				copyLayout.getOwnerId());
+				companyId, layout.getOwnerId(), layout.getLayoutId(),
+				copyPortletId);
 
 			copyPrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, copyPrefsPK);
+					companyId, copyLayout.getOwnerId(),
+					copyLayout.getLayoutId(), copyPortletId);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				prefsPK, copyPrefs);
+				layout.getOwnerId(), layout.getLayoutId(), copyPortletId,
+				copyPrefs);
 		}
 	}
 

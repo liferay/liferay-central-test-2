@@ -34,7 +34,6 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.LayoutComparator;
@@ -455,13 +454,12 @@ public class ExportAction extends Action {
 			for (int i = 0; i < portletIds.size(); i++) {
 				String portletId = (String)portletIds.get(i);
 
-				PortletPreferencesPK pk = new PortletPreferencesPK(
-					portletId, layout.getLayoutId(), layout.getOwnerId());
-
 				try {
 					PortletPreferences portletPreferences =
 						PortletPreferencesLocalServiceUtil.
-							getPortletPreferences(pk);
+							getPortletPreferences(
+								layout.getOwnerId(), layout.getLayoutId(),
+								portletId);
 
 					String prefsXml = portletPreferences.getPreferences();
 

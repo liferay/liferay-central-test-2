@@ -122,7 +122,9 @@ catch (RuntimeException re) {
 
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletId, true, true);
 
-PortletPreferences portletPrefs = PortletPreferencesLocalServiceUtil.getPreferences(company.getCompanyId(), PortletPreferencesFactory.getPortletPreferencesPK(request, portletId));
+String[] portletPreferencesIds = PortletPreferencesFactory.getPortletPreferencesIds(request, portletId);
+
+PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(company.getCompanyId(), portletPreferencesIds[0], portletPreferencesIds[1], portletPreferencesIds[2]);
 
 PortletConfig portletConfig = PortletConfigFactory.create(portlet, application);
 PortletContext portletCtx = portletConfig.getPortletContext();
@@ -165,7 +167,7 @@ else if (modePrint) {
 
 HttpServletRequest originalReq = PortalUtil.getOriginalServletRequest(request);
 
-RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, cachePortlet, portletCtx, windowState, portletMode, portletPrefs, plid);
+RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, cachePortlet, portletCtx, windowState, portletMode, portletPreferences, plid);
 
 if (Validator.isNotNull(queryString)) {
 	DynamicServletRequest dynamicReq = (DynamicServletRequest)renderRequestImpl.getHttpServletRequest();

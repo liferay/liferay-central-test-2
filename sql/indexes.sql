@@ -161,8 +161,9 @@ create index IX_FE3220E9 on PollsVote (questionId, choiceId);
 create index IX_80CC9508 on Portlet (companyId);
 
 create index IX_8B1E639D on PortletPreferences (layoutId);
-create index IX_4A6293E1 on PortletPreferences (layoutId, ownerId);
 create index IX_3EAB5A5A on PortletPreferences (ownerId);
+create index IX_5B77C973 on PortletPreferences (ownerId, layoutId);
+create index IX_BC024FD2 on PortletPreferences (ownerId, layoutId, portletId);
 create index IX_8E6DA3A1 on PortletPreferences (portletId);
 
 create index IX_EA9B85B2 on RatingsEntry (className, classPK);

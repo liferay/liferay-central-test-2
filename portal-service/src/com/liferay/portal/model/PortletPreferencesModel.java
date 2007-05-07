@@ -23,7 +23,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 
 /**
  * <a href="PortletPreferencesModel.java.html"><b><i>View Source</i></b></a>
@@ -46,21 +45,25 @@ import com.liferay.portal.service.persistence.PortletPreferencesPK;
  *
  */
 public interface PortletPreferencesModel extends BaseModel {
-	public PortletPreferencesPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(PortletPreferencesPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getPortletId();
+	public long getPortletPreferencesId();
 
-	public void setPortletId(String portletId);
+	public void setPortletPreferencesId(long portletPreferencesId);
+
+	public String getOwnerId();
+
+	public void setOwnerId(String ownerId);
 
 	public String getLayoutId();
 
 	public void setLayoutId(String layoutId);
 
-	public String getOwnerId();
+	public String getPortletId();
 
-	public void setOwnerId(String ownerId);
+	public void setPortletId(String portletId);
 
 	public String getPreferences();
 

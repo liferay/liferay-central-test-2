@@ -42,7 +42,6 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
@@ -769,14 +768,15 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		try {
-			PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-				PortletKeys.CALENDAR, PortletKeys.PREFS_LAYOUT_ID_SHARED,
+			String ownerId =
 				PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-					event.getGroupId());
+					event.getGroupId();
+			String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+			String portletId = PortletKeys.CALENDAR;
 
 			PortletPreferences prefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					event.getCompanyId(), prefsPK);
+					event.getCompanyId(), ownerId, layoutId, portletId);
 
 			Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
 

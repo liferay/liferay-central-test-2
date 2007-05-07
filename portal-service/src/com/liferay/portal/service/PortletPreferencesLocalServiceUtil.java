@@ -72,19 +72,20 @@ public class PortletPreferencesLocalServiceUtil {
 		portletPreferencesLocalService.deletePortletPreferences(ownerId);
 	}
 
-	public static void deletePortletPreferences(java.lang.String layoutId,
-		java.lang.String ownerId) throws com.liferay.portal.SystemException {
+	public static void deletePortletPreferences(java.lang.String ownerId,
+		java.lang.String layoutId) throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-		portletPreferencesLocalService.deletePortletPreferences(layoutId,
-			ownerId);
+		portletPreferencesLocalService.deletePortletPreferences(ownerId,
+			layoutId);
 	}
 
-	public static void deletePortletPreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+	public static void deletePortletPreferences(java.lang.String ownerId,
+		java.lang.String layoutId, java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-		portletPreferencesLocalService.deletePortletPreferences(pk);
+		portletPreferencesLocalService.deletePortletPreferences(ownerId,
+			layoutId, portletId);
 	}
 
 	public static javax.portlet.PortletPreferences getDefaultPreferences(
@@ -105,21 +106,23 @@ public class PortletPreferencesLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PortletPreferences getPortletPreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.getPortletPreferences(pk);
+		return portletPreferencesLocalService.getPortletPreferences(ownerId,
+			layoutId, portletId);
 	}
 
 	public static java.util.List getPortletPreferencesByLayout(
-		java.lang.String layoutId, java.lang.String ownerId)
+		java.lang.String ownerId, java.lang.String layoutId)
 		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.getPortletPreferencesByLayout(layoutId,
-			ownerId);
+		return portletPreferencesLocalService.getPortletPreferencesByLayout(ownerId,
+			layoutId);
 	}
 
 	public static java.util.List getPortletPreferencesByOwnerId(
@@ -137,22 +140,24 @@ public class PortletPreferencesLocalServiceUtil {
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(
-		long companyId,
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		long companyId, java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.getPreferences(companyId, pk);
+		return portletPreferencesLocalService.getPreferences(companyId,
+			ownerId, layoutId, portletId);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updatePreferences(
-		com.liferay.portal.service.persistence.PortletPreferencesPK pk,
-		javax.portlet.PortletPreferences prefs)
+		java.lang.String ownerId, java.lang.String layoutId,
+		java.lang.String portletId, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.updatePreferences(pk, prefs);
+		return portletPreferencesLocalService.updatePreferences(ownerId,
+			layoutId, portletId, prefs);
 	}
 }

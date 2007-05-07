@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -50,12 +49,13 @@ public class PrefsPropsUtil {
 	public static PortletPreferences getPreferences(long companyId)
 		throws PortalException, SystemException {
 
-		PortletPreferencesPK prefsPK = new PortletPreferencesPK(
-			PortletKeys.LIFERAY_PORTAL, PortletKeys.PREFS_LAYOUT_ID_SHARED,
-			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId);
+		String ownerId =
+			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId;
+		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+		String portletId = PortletKeys.LIFERAY_PORTAL;
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, prefsPK);
+			companyId, ownerId, layoutId, portletId);
 	}
 
 	public static boolean getBoolean(String name)

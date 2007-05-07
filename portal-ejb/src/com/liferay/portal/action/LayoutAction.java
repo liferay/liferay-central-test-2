@@ -28,7 +28,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -246,12 +245,14 @@ public class LayoutAction extends Action {
 			CachePortlet.clearResponse(ses, layout.getPrimaryKey(), portletId);
 		}
 
-		PortletPreferencesPK prefsPK =
-			PortletPreferencesFactory.getPortletPreferencesPK(req, portletId);
+		String[] portletPreferencesIds =
+			PortletPreferencesFactory.getPortletPreferencesIds(
+				req, portletId);
 
-		PortletPreferences prefs =
+		PortletPreferences portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, prefsPK);
+				companyId, portletPreferencesIds[0], portletPreferencesIds[1],
+				portletPreferencesIds[2]);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx = portletConfig.getPortletContext();
@@ -265,7 +266,7 @@ public class LayoutAction extends Action {
 		if (action) {
 			ActionRequestImpl actionRequestImpl = ActionRequestFactory.create(
 				req, portlet, cachePortlet, portletCtx, windowState,
-				portletMode, prefs, layout.getPlid());
+				portletMode, portletPreferences, layout.getPlid());
 
 			ActionResponseImpl actionResponseImpl =
 				ActionResponseFactory.create(

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutImportException;
@@ -72,7 +73,6 @@ import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -219,7 +219,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Portlet preferences
 
 		PortletPreferencesLocalServiceUtil.deletePortletPreferences(
-			layout.getLayoutId(), layout.getOwnerId());
+			layout.getOwnerId(), layout.getLayoutId());
 
 		// Journal content searches
 
@@ -1283,16 +1283,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Iterator itr =
 			PortletPreferencesLocalServiceUtil.getPortletPreferencesByLayout(
-				layout.getLayoutId(), layout.getOwnerId()).iterator();
+				layout.getOwnerId(), layout.getLayoutId()).iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences prefs = (PortletPreferences)itr.next();
+			PortletPreferences portletPreferences =
+				(PortletPreferences)itr.next();
 
 			javax.portlet.PortletPreferences jxPrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					layout.getCompanyId(), prefs.getPrimaryKey());
+					layout.getCompanyId(), portletPreferences.getOwnerId(),
+					portletPreferences.getLayoutId(),
+					portletPreferences.getPortletId());
 
-			String portletId = prefs.getPortletId();
+			String portletId = portletPreferences.getPortletId();
 
 			if (layoutTypePortlet.hasPortletId(portletId)) {
 				exportPortletData(context, portletId, jxPrefs, parentEl);
@@ -1302,7 +1305,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void exportPortletData(
 			PortletDataContext context, String portletId,
-			javax.portlet.PortletPreferences prefs, Element parentEl)
+			javax.portlet.PortletPreferences portletPreferences,
+			Element parentEl)
 		throws PortalException, SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -1329,7 +1333,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			_log.debug("Exporting data for " + portletId);
 		}
 
-		String data = portletDataHandler.exportData(context, portletId, prefs);
+		String data = portletDataHandler.exportData(
+			context, portletId, portletPreferences);
 
 		if (data == null) {
 			if (_log.isDebugEnabled()) {
@@ -1415,12 +1420,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Iterator itr =
 			PortletPreferencesLocalServiceUtil.getPortletPreferencesByLayout(
-				layoutId, ownerId).iterator();
+				ownerId, layoutId).iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences prefs = (PortletPreferences)itr.next();
+			PortletPreferences portletPreferences =
+				(PortletPreferences)itr.next();
 
-			String portletId = prefs.getPortletId();
+			String portletId = portletPreferences.getPortletId();
 
 			if ((layoutTypePortlet == null) ||
 				(layoutTypePortlet.hasPortletId(portletId))) {
@@ -1430,7 +1436,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.addAttribute("portlet-id", portletId);
 				el.addAttribute("layout-id", layoutId);
 				el.addAttribute("owner-id", ownerId);
-				el.addElement("preferences").addCDATA(prefs.getPreferences());
+				el.addElement("preferences").addCDATA(
+					portletPreferences.getPreferences());
 			}
 		}
 	}
@@ -1980,20 +1987,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String portletId = el.attributeValue("portlet-id");
 
-			PortletPreferencesPK pk = new PortletPreferencesPK(
-				portletId, layout.getLayoutId(), layout.getOwnerId());
-
 			try {
-				PortletPreferences prefs =
-					PortletPreferencesUtil.findByPrimaryKey(pk);
+				PortletPreferences portletPreferences =
+					PortletPreferencesUtil.findByO_L_P(
+						layout.getOwnerId(), layout.getLayoutId(), portletId);
 
-				String preferences =
-					importPortletData(context, portletId, prefs, el);
+				String preferences = importPortletData(
+					context, portletId, portletPreferences, el);
 
 				if (preferences != null) {
-					prefs.setPreferences(preferences);
+					portletPreferences.setPreferences(preferences);
 
-					PortletPreferencesUtil.update(prefs);
+					PortletPreferencesUtil.update(portletPreferences);
 				}
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
@@ -2003,7 +2008,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected String importPortletData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, Element parentEl)
+			PortletPreferences portletPreferences, Element parentEl)
 		throws PortalException, SystemException {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -2038,7 +2043,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		PortletPreferencesImpl prefsImpl =
 			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
-				prefs.getPreferences());
+				portletPreferences.getPreferences());
 
 		prefsImpl = (PortletPreferencesImpl)portletDataHandler.importData(
 			context, portletId, prefsImpl, parentEl.getText());
@@ -2142,20 +2147,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				ownerId = LayoutImpl.PRIVATE + layoutSet.getGroupId();
 			}
 
-			PortletPreferencesPK pk = new PortletPreferencesPK(
-				portletId, layoutId, ownerId);
-
 			try {
-				PortletPreferencesLocalServiceUtil.deletePortletPreferences(pk);
+				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
+					ownerId, layoutId, portletId);
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
 			}
 
-			PortletPreferences prefs = PortletPreferencesUtil.create(pk);
+			long portletPreferencesId = CounterLocalServiceUtil.increment();
 
-			prefs.setPreferences(preferences);
+			PortletPreferences portletPreferences =
+				PortletPreferencesUtil.create(portletPreferencesId);
 
-			PortletPreferencesUtil.update(prefs);
+			portletPreferences.setOwnerId(ownerId);
+			portletPreferences.setLayoutId(layoutId);
+			portletPreferences.setPortletId(portletId);
+
+			portletPreferences.setPreferences(preferences);
+
+			PortletPreferencesUtil.update(portletPreferences);
 		}
 	}
 

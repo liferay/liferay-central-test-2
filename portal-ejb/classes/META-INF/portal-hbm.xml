@@ -349,11 +349,12 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.PortletPreferencesImpl" table="PortletPreferences">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.PortletPreferencesPK">
-			<key-property name="portletId" />
-			<key-property name="layoutId" />
-			<key-property name="ownerId" />
-		</composite-id>
+		<id name="portletPreferencesId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="ownerId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="layoutId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="preferences" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.RegionImpl" table="Region">

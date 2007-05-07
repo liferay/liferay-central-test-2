@@ -35,7 +35,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -74,13 +73,12 @@ public class PortletPreferencesFactory {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		PortletPreferencesPK pk = new PortletPreferencesPK(
-			portletId, layoutId, String.valueOf(themeDisplay.getUserId()));
+		String ownerId = String.valueOf(themeDisplay.getUserId());
 
 		if (themeDisplay.isSignedIn()) {
 			PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					themeDisplay.getCompanyId(), pk);
+					themeDisplay.getCompanyId(), ownerId, layoutId, portletId);
 
 			portalPrefs = new PortalPreferences(
 				prefsImpl, themeDisplay.isSignedIn());
@@ -94,7 +92,8 @@ public class PortletPreferencesFactory {
 			if (portalPrefs == null) {
 				PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
 					PortletPreferencesLocalServiceUtil.getPreferences(
-						themeDisplay.getCompanyId(), pk);
+						themeDisplay.getCompanyId(), ownerId, layoutId,
+						portletId);
 
 				prefsImpl = (PortletPreferencesImpl)prefsImpl.clone();
 
@@ -143,42 +142,46 @@ public class PortletPreferencesFactory {
 
 		long companyId = PortalUtil.getCompanyId(req);
 
+		String[] portletPreferencesIds = getPortletPreferencesIds(
+			req, portletId);
+
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, getPortletPreferencesPK(req, portletId));
+			companyId, portletPreferencesIds[0], portletPreferencesIds[1],
+			portletPreferencesIds[2]);
 	}
 
-	public static PortletPreferencesPK getPortletPreferencesPK(
+	public static String[] getPortletPreferencesIds(
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		return getPortletPreferencesPK(req, portletId, layout.getPlid());
+		return getPortletPreferencesIds(req, layout.getPlid(), portletId);
 	}
 
-	public static PortletPreferencesPK getPortletPreferencesPK(
-			HttpServletRequest req, String portletId, String selPlid)
+	public static String[] getPortletPreferencesIds(
+			HttpServletRequest req, String selPlid, String portletId)
 		throws PortalException, SystemException {
 
 		// Below is a list of  the possible combinations, where we specify the
-		// portlet id, the layout id, the owner id, and the function.
+		// the owner id, the layout id, portlet id, and the function.
 
-		// PORTAL, SHARED, liferay.com.1, preference is scoped per user across
+		// liferay.com.1, SHARED, PORTAL, preference is scoped per user across
 		// the entire portal
 
-		// 56_INSTANCE_abcd, SHARED, COMPANY.liferay.com, preference is scoped
+		// COMPANY.liferay.com, SHARED, 56_INSTANCE_abcd, preference is scoped
 		// per portlet and company and is shared across all layouts
 
-		// 56_INSTANCE_abcd, SHARED, GROUP.10, preference is scoped per portlet
+		// GROUP.10, SHARED, 56_INSTANCE_abcd, preference is scoped per portlet
 		// and group and is shared across all layouts
 
-		// 56_INSTANCE_abcd, SHARED, USER.liferay.com.1, preference is scoped
+		// USER.liferay.com.1, SHARED, 56_INSTANCE_abcd, preference is scoped
 		// per portlet and user and is shared across all layouts
 
-		// 56_INSTANCE_abcd, 3, PUB.10, preference is scoped per portlet, group,
+		// PUB.10, 3, 56_INSTANCE_abcd, preference is scoped per portlet, group,
 		// and layout
 
-		// 56_INSTANCE_abcd, 3, PUB.10.USER.liferay.com.1, preference is scoped
+		// PUB.10.USER.liferay.com.1, 3, 56_INSTANCE_abcd, preference is scoped
 		// per portlet, user, and layout
 
 		ThemeDisplay themeDisplay =
@@ -191,8 +194,8 @@ public class PortletPreferencesFactory {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
-		String layoutId = null;
 		String ownerId = null;
+		String layoutId = null;
 
 		boolean modeEditGuest = false;
 
@@ -219,15 +222,15 @@ public class PortletPreferencesFactory {
 		}
 
 		if (portlet.isPreferencesCompanyWide()) {
-			layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
 			ownerId =
 				PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD +
 					themeDisplay.getCompanyId();
+			layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
-				layoutId = LayoutImpl.getLayoutId(selPlid);
 				ownerId = LayoutImpl.getOwnerId(selPlid);
+				layoutId = LayoutImpl.getLayoutId(selPlid);
 
 				if (portlet.isPreferencesOwnedByGroup()) {
 				}
@@ -245,8 +248,8 @@ public class PortletPreferencesFactory {
 				}
 			}
 			else {
-				layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
 				ownerId = LayoutImpl.getOwnerId(selPlid);
+				layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
 
 				if (portlet.isPreferencesOwnedByGroup()) {
 					ownerId =
@@ -268,7 +271,7 @@ public class PortletPreferencesFactory {
 			}
 		}
 
-		return new PortletPreferencesPK(portletId, layoutId, ownerId);
+		return new String[] {ownerId, layoutId, portletId};
 	}
 
 	public static PortletPreferences getPortletSetup(
@@ -277,11 +280,8 @@ public class PortletPreferencesFactory {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
 
-		PortletPreferencesPK pk = new PortletPreferencesPK(
-			portletId, layoutId, ownerId);
-
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			layout.getCompanyId(), pk);
+			layout.getCompanyId(), ownerId, layoutId, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(
@@ -309,11 +309,8 @@ public class PortletPreferencesFactory {
 			}
 		}
 
-		PortletPreferencesPK pk = new PortletPreferencesPK(
-			portletId, layoutId, ownerId);
-
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			layout.getCompanyId(), pk);
+			layout.getCompanyId(), ownerId, layoutId, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(

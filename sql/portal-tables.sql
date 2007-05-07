@@ -678,11 +678,11 @@ create table Portlet (
 );
 
 create table PortletPreferences (
-	portletId VARCHAR(75) not null,
-	layoutId VARCHAR(75) not null,
-	ownerId VARCHAR(75) not null,
-	preferences TEXT null,
-	primary key (portletId, layoutId, ownerId)
+	portletPreferencesId LONG primary key,
+	ownerId VARCHAR(75) null,
+	layoutId VARCHAR(75) null,
+	portletId VARCHAR(75) null,
+	preferences TEXT null
 );
 
 create table RatingsEntry (
