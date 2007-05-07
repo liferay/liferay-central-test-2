@@ -802,11 +802,15 @@
 
 		<!-- PK fields -->
 
-		<column name="portletId" type="String" primary="true" />
-		<column name="companyId" type="long" primary="true" />
+		<column name="id" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
+		<column name="portletId" type="String" />
 		<column name="roles" type="String" />
 		<column name="active" type="boolean" />
 
@@ -814,6 +818,10 @@
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_P" return-type="Portlet">
+			<finder-column name="companyId" />
+			<finder-column name="portletId" />
 		</finder>
 	</entity>
 	<entity name="PortletPreferences" local-service="true" remote-service="false">

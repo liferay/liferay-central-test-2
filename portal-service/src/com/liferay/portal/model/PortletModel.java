@@ -23,7 +23,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.service.persistence.PortletPK;
 
 /**
  * <a href="PortletModel.java.html"><b><i>View Source</i></b></a>
@@ -46,17 +45,21 @@ import com.liferay.portal.service.persistence.PortletPK;
  *
  */
 public interface PortletModel extends BaseModel {
-	public PortletPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(PortletPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getPortletId();
+	public long getId();
 
-	public void setPortletId(String portletId);
+	public void setId(long id);
 
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);
+
+	public String getPortletId();
+
+	public void setPortletId(String portletId);
 
 	public String getRoles();
 

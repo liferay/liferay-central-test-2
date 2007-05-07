@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchPortletException;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
@@ -31,7 +31,6 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -380,17 +379,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
 
-		// Primary key should be reordered to companyId, portletId FIX ME
+		Portlet portlet = PortletUtil.fetchByC_P(companyId, portletId);
 
-		PortletPK pk = new PortletPK(portletId, companyId);
+		if (portlet == null) {
+			long id = CounterLocalServiceUtil.increment();
 
-		Portlet portlet = null;
+			portlet = PortletUtil.create(id);
 
-		try {
-			portlet = PortletUtil.findByPrimaryKey(pk);
-		}
-		catch (NoSuchPortletException nspe) {
-			portlet = PortletUtil.create(pk);
+			portlet.setCompanyId(companyId);
+			portlet.setPortletId(portletId);
 		}
 
 		portlet.setRoles(roles);
@@ -584,8 +581,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Portlet portletModel = (Portlet)portletsPool.get(portletId);
 
 			if (portletModel == null) {
-				portletModel = new PortletImpl(
-					new PortletPK(portletId, _SHARED_KEY));
+				portletModel = new PortletImpl(_SHARED_KEY, portletId);
 
 				portletsPool.put(portletId, portletModel);
 			}

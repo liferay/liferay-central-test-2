@@ -33,7 +33,6 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.Constants;
@@ -138,10 +137,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Constructs a portlet with the specified parameters.
 	 */
-	public PortletImpl(PortletPK pk) {
-		setPrimaryKey(pk);
-
-		setStrutsPath(pk.portletId);
+	public PortletImpl(long companyId, String portletId) {
+		setCompanyId(companyId);
+		setPortletId(portletId);
+		setStrutsPath(portletId);
 		setActive(true);
 		_headerCss = new ArrayList();
 		_headerJavaScript = new ArrayList();

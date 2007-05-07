@@ -338,8 +338,9 @@
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Portlet">
-		<field name="portletId" type="String" />
+		<field name="id" type="long" />
 		<field name="companyId" type="long" />
+		<field name="portletId" type="String" />
 		<field name="roles" type="String" />
 		<field name="active" type="boolean" />
 	</model>

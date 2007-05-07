@@ -1280,43 +1280,43 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 								<%
 								itr1 = portletsList.iterator();
-	
+
 								while (itr1.hasNext()) {
 									Portlet curPortlet = (Portlet)itr1.next();
-	
+
 									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
-	
+
 									PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
-	
+
 									ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
-	
+
 									try {
 										PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
-	
+
 										if (controls != null) {
 								%>
-	
+
 											<fieldset>
 												<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
 												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
 											</fieldset>
-	
+
 								<%
 										}
 									}
 									catch (PortletDataException pde) {
 									%>
-	
+
 										<fieldset>
 											<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
 											<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
 										</fieldset>
-	
+
 								<%
 									}
 								}
 								%>
-	
+
 								<br />
 
 								<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">

@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -53,8 +52,9 @@ import java.sql.Types;
 public class PortletModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Portlet";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "portletId", new Integer(Types.VARCHAR) },
+			{ "id", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
+			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "roles", new Integer(Types.VARCHAR) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
@@ -72,13 +72,32 @@ public class PortletModelImpl extends BaseModelImpl {
 	public PortletModelImpl() {
 	}
 
-	public PortletPK getPrimaryKey() {
-		return new PortletPK(_portletId, _companyId);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(PortletPK pk) {
-		setPortletId(pk.portletId);
-		setCompanyId(pk.companyId);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
+	}
+
+	public long getId() {
+		return _id;
+	}
+
+	public void setId(long id) {
+		if (id != _id) {
+			_id = id;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
+		}
 	}
 
 	public String getPortletId() {
@@ -95,16 +114,6 @@ public class PortletModelImpl extends BaseModelImpl {
 			}
 
 			_portletId = portletId;
-		}
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
 		}
 	}
 
@@ -140,8 +149,9 @@ public class PortletModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PortletImpl clone = new PortletImpl();
-		clone.setPortletId(getPortletId());
+		clone.setId(getId());
 		clone.setCompanyId(getCompanyId());
+		clone.setPortletId(getPortletId());
 		clone.setRoles(getRoles());
 		clone.setActive(getActive());
 
@@ -154,9 +164,17 @@ public class PortletModelImpl extends BaseModelImpl {
 		}
 
 		PortletImpl portlet = (PortletImpl)obj;
-		PortletPK pk = portlet.getPrimaryKey();
+		long pk = portlet.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -173,9 +191,9 @@ public class PortletModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PortletPK pk = portlet.getPrimaryKey();
+		long pk = portlet.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -184,11 +202,12 @@ public class PortletModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _portletId;
+	private long _id;
 	private long _companyId;
+	private String _portletId;
 	private String _roles;
 	private boolean _active;
 }

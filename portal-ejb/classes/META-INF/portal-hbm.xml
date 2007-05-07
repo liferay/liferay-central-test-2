@@ -340,10 +340,11 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.PortletImpl" table="Portlet">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.PortletPK">
-			<key-property name="portletId" />
-			<key-property name="companyId" />
-		</composite-id>
+		<id name="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="roles" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>

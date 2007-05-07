@@ -114,6 +114,7 @@ public class ServiceBuilder {
 		badCmpFields.add("fields");
 		badCmpFields.add("from");
 		badCmpFields.add("hidden");
+		badCmpFields.add("id");
 		badCmpFields.add("index");
 		badCmpFields.add("internal");
 		badCmpFields.add("interval");

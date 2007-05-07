@@ -52,31 +52,31 @@ import java.util.List;
  *
  */
 public class PortletPersistence extends BasePersistence {
-	public Portlet create(PortletPK portletPK) {
+	public Portlet create(long id) {
 		Portlet portlet = new PortletImpl();
 		portlet.setNew(true);
-		portlet.setPrimaryKey(portletPK);
+		portlet.setPrimaryKey(id);
 
 		return portlet;
 	}
 
-	public Portlet remove(PortletPK portletPK)
+	public Portlet remove(long id)
 		throws NoSuchPortletException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Portlet portlet = (Portlet)session.get(PortletImpl.class, portletPK);
+			Portlet portlet = (Portlet)session.get(PortletImpl.class,
+					new Long(id));
 
 			if (portlet == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Portlet exists with the primary key " +
-						portletPK);
+					_log.warn("No Portlet exists with the primary key " + id);
 				}
 
 				throw new NoSuchPortletException(
-					"No Portlet exists with the primary key " + portletPK);
+					"No Portlet exists with the primary key " + id);
 			}
 
 			return remove(portlet);
@@ -145,31 +145,29 @@ public class PortletPersistence extends BasePersistence {
 		}
 	}
 
-	public Portlet findByPrimaryKey(PortletPK portletPK)
+	public Portlet findByPrimaryKey(long id)
 		throws NoSuchPortletException, SystemException {
-		Portlet portlet = fetchByPrimaryKey(portletPK);
+		Portlet portlet = fetchByPrimaryKey(id);
 
 		if (portlet == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Portlet exists with the primary key " +
-					portletPK);
+				_log.warn("No Portlet exists with the primary key " + id);
 			}
 
 			throw new NoSuchPortletException(
-				"No Portlet exists with the primary key " + portletPK);
+				"No Portlet exists with the primary key " + id);
 		}
 
 		return portlet;
 	}
 
-	public Portlet fetchByPrimaryKey(PortletPK portletPK)
-		throws SystemException {
+	public Portlet fetchByPrimaryKey(long id) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Portlet)session.get(PortletImpl.class, portletPK);
+			return (Portlet)session.get(PortletImpl.class, new Long(id));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -281,10 +279,9 @@ public class PortletPersistence extends BasePersistence {
 		}
 	}
 
-	public Portlet[] findByCompanyId_PrevAndNext(PortletPK portletPK,
-		long companyId, OrderByComparator obc)
-		throws NoSuchPortletException, SystemException {
-		Portlet portlet = findByPrimaryKey(portletPK);
+	public Portlet[] findByCompanyId_PrevAndNext(long id, long companyId,
+		OrderByComparator obc) throws NoSuchPortletException, SystemException {
+		Portlet portlet = findByPrimaryKey(id);
 		int count = countByCompanyId(companyId);
 		Session session = null;
 
@@ -314,6 +311,80 @@ public class PortletPersistence extends BasePersistence {
 			array[2] = (Portlet)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public Portlet findByC_P(long companyId, String portletId)
+		throws NoSuchPortletException, SystemException {
+		Portlet portlet = fetchByC_P(companyId, portletId);
+
+		if (portlet == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Portlet exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("portletId=");
+			msg.append(portletId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchPortletException(msg.toString());
+		}
+
+		return portlet;
+	}
+
+	public Portlet fetchByC_P(long companyId, String portletId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Portlet portlet = (Portlet)list.get(0);
+
+			return portlet;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -407,6 +478,12 @@ public class PortletPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByC_P(long companyId, String portletId)
+		throws NoSuchPortletException, SystemException {
+		Portlet portlet = findByC_P(companyId, portletId);
+		remove(portlet);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -432,6 +509,58 @@ public class PortletPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_P(long companyId, String portletId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
 
 			Iterator itr = q.list().iterator();
 

@@ -51,6 +51,9 @@ import java.util.List;
 public class PortletJSONSerializer {
 	public static JSONObject toJSONObject(Portlet model) {
 		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("id", model.getId());
+		jsonObj.put("companyId", model.getCompanyId());
+
 		String portletId = model.getPortletId();
 
 		if (portletId == null) {
@@ -59,8 +62,6 @@ public class PortletJSONSerializer {
 		else {
 			jsonObj.put("portletId", portletId.toString());
 		}
-
-		jsonObj.put("companyId", model.getCompanyId());
 
 		String roles = model.getRoles();
 

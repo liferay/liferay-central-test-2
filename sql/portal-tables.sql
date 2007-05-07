@@ -670,11 +670,11 @@ create table PollsVote (
 );
 
 create table Portlet (
-	portletId VARCHAR(75) not null,
+	id LONG primary key,
 	companyId LONG,
+	portletId VARCHAR(75) null,
 	roles VARCHAR(75) null,
-	active_ BOOLEAN,
-	primary key (portletId, companyId)
+	active_ BOOLEAN
 );
 
 create table PortletPreferences (

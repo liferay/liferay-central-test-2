@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.PortletPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -49,8 +47,9 @@ import java.util.List;
 public class PortletSoap implements Serializable {
 	public static PortletSoap toSoapModel(Portlet model) {
 		PortletSoap soapModel = new PortletSoap();
-		soapModel.setPortletId(model.getPortletId());
+		soapModel.setId(model.getId());
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setPortletId(model.getPortletId());
 		soapModel.setRoles(model.getRoles());
 		soapModel.setActive(model.getActive());
 
@@ -71,21 +70,20 @@ public class PortletSoap implements Serializable {
 	public PortletSoap() {
 	}
 
-	public PortletPK getPrimaryKey() {
-		return new PortletPK(_portletId, _companyId);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(PortletPK pk) {
-		setPortletId(pk.portletId);
-		setCompanyId(pk.companyId);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
 	}
 
-	public String getPortletId() {
-		return _portletId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
+	public void setId(long id) {
+		_id = id;
 	}
 
 	public long getCompanyId() {
@@ -94,6 +92,14 @@ public class PortletSoap implements Serializable {
 
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
 	}
 
 	public String getRoles() {
@@ -116,8 +122,9 @@ public class PortletSoap implements Serializable {
 		_active = active;
 	}
 
-	private String _portletId;
+	private long _id;
 	private long _companyId;
+	private String _portletId;
 	private String _roles;
 	private boolean _active;
 }

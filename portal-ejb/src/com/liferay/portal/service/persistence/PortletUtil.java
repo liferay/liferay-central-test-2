@@ -38,22 +38,20 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PortletUtil {
-	public static com.liferay.portal.model.Portlet create(
-		com.liferay.portal.service.persistence.PortletPK portletPK) {
-		return getPersistence().create(portletPK);
+	public static com.liferay.portal.model.Portlet create(long id) {
+		return getPersistence().create(id);
 	}
 
-	public static com.liferay.portal.model.Portlet remove(
-		com.liferay.portal.service.persistence.PortletPK portletPK)
+	public static com.liferay.portal.model.Portlet remove(long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPortletException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(portletPK));
+			listener.onBeforeRemove(findByPrimaryKey(id));
 		}
 
-		com.liferay.portal.model.Portlet portlet = getPersistence().remove(portletPK);
+		com.liferay.portal.model.Portlet portlet = getPersistence().remove(id);
 
 		if (listener != null) {
 			listener.onAfterRemove(portlet);
@@ -138,17 +136,15 @@ public class PortletUtil {
 		return portlet;
 	}
 
-	public static com.liferay.portal.model.Portlet findByPrimaryKey(
-		com.liferay.portal.service.persistence.PortletPK portletPK)
+	public static com.liferay.portal.model.Portlet findByPrimaryKey(long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPortletException {
-		return getPersistence().findByPrimaryKey(portletPK);
+		return getPersistence().findByPrimaryKey(id);
 	}
 
-	public static com.liferay.portal.model.Portlet fetchByPrimaryKey(
-		com.liferay.portal.service.persistence.PortletPK portletPK)
+	public static com.liferay.portal.model.Portlet fetchByPrimaryKey(long id)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(portletPK);
+		return getPersistence().fetchByPrimaryKey(id);
 	}
 
 	public static java.util.List findByCompanyId(long companyId)
@@ -182,12 +178,23 @@ public class PortletUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet[] findByCompanyId_PrevAndNext(
-		com.liferay.portal.service.persistence.PortletPK portletPK,
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long id, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPortletException {
-		return getPersistence().findByCompanyId_PrevAndNext(portletPK,
-			companyId, obc);
+		return getPersistence().findByCompanyId_PrevAndNext(id, companyId, obc);
+	}
+
+	public static com.liferay.portal.model.Portlet findByC_P(long companyId,
+		java.lang.String portletId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletException {
+		return getPersistence().findByC_P(companyId, portletId);
+	}
+
+	public static com.liferay.portal.model.Portlet fetchByC_P(long companyId,
+		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_P(companyId, portletId);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -224,6 +231,12 @@ public class PortletUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeByC_P(long companyId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletException {
+		getPersistence().removeByC_P(companyId, portletId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -231,6 +244,11 @@ public class PortletUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByC_P(long companyId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_P(companyId, portletId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {
