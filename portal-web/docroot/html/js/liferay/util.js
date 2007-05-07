@@ -37,7 +37,7 @@ Liferay.Util = {
 			item = document.body;
 		}
 
-		var inputs = jQuery("input[@type=text], input[@type=password], select, textarea", item);
+		var inputs = jQuery("input[@type=text], input[@type=password], textarea", item);
 
 		inputs.focus(
 			function() {
