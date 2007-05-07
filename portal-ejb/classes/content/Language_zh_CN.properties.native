@@ -1027,6 +1027,7 @@ expire=到期
 expired=到期
 export-15-data=使能学报数据出口。
 export-56-data=使能学报美满的数据出口。
+export-import=出口/进口
 export-the-current-pages-to-the-given-lar-file-name=对指定的LAR 文件名出口当前时期。
 export=导出
 extension=引伸

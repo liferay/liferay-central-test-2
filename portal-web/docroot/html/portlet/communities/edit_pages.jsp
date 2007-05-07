@@ -119,7 +119,7 @@ if (selLayout != null) {
 	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
 		tabs3 = "page";
 	}
-	else if (tabs3.equals("logo") || tabs3.equals("import-export") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap"))) {
+	else if (tabs3.equals("logo") || tabs3.equals("export-import") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap"))) {
 		tabs3 = "page";
 	}
 }
@@ -434,7 +434,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						tabs3Names += ",logo";
 					}
 
-					tabs3Names += ",import-export";
+					tabs3Names += ",export-import";
 
 					if (!tabs1.equals("staging")) {
 						tabs3Names += ",virtual-host";
@@ -1113,7 +1113,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
 				</c:when>
-				<c:when test='<%= tabs3.equals("import-export") %>'>
+				<c:when test='<%= tabs3.equals("export-import") %>'>
 					<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
 					<%
@@ -1160,6 +1160,86 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					/>
 
 					<c:choose>
+						<c:when test='<%= tabs5.equals("export") %>'>
+							<liferay-ui:message key="export-the-current-pages-to-the-given-lar-file-name" />
+
+							<br /><br />
+
+							<div>
+								<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
+							</div>
+
+							<br />
+
+							<liferay-ui:message key="what-would-you-like-to-export" />
+
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
+
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
+							</div>
+
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
+
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
+							</div>
+
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
+
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
+							</div>
+
+							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
+
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
+							</div>
+
+							<%
+							itr1 = portletsList.iterator();
+
+							while (itr1.hasNext()) {
+								Portlet curPortlet = (Portlet)itr1.next();
+
+								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+
+								PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
+
+								ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+
+								try {
+									PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
+
+									if (controls != null) {
+							%>
+
+										<fieldset>
+											<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+											<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+										</fieldset>
+
+							<%
+									}
+								}
+								catch (PortletDataException pde) {
+								%>
+
+									<fieldset>
+										<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+										<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-export-controls") %></span>
+									</fieldset>
+
+							<%
+								}
+							}
+							%>
+
+							<br />
+
+							<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportPages();" />
+						</c:when>
 						<c:when test='<%= tabs5.equals("import") %>'>
 							<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
 								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-current-pages" />
@@ -1241,86 +1321,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 								<input type="button" value="<liferay-ui:message key="import" />" onClick="<portlet:namespace />importPages();">
 							</c:if>
-						</c:when>
-						<c:when test='<%= tabs5.equals("export") %>'>
-							<liferay-ui:message key="export-the-current-pages-to-the-given-lar-file-name" />
-
-							<br /><br />
-
-							<div>
-								<input name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
-							</div>
-
-							<br />
-
-							<liferay-ui:message key="what-would-you-like-to-export" />
-
-							<div>
-								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
-
-								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
-							</div>
-
-							<div>
-								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
-
-								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
-							</div>
-
-							<div>
-								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
-
-								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
-							</div>
-
-							<div>
-								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
-
-								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
-							</div>
-
-							<%
-							itr1 = portletsList.iterator();
-
-							while (itr1.hasNext()) {
-								Portlet curPortlet = (Portlet)itr1.next();
-
-								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
-
-								PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
-
-								ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
-
-								try {
-									PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
-
-									if (controls != null) {
-							%>
-
-										<fieldset>
-											<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
-											<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
-										</fieldset>
-
-							<%
-									}
-								}
-								catch (PortletDataException pde) {
-								%>
-
-									<fieldset>
-										<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
-										<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-export-controls") %></span>
-									</fieldset>
-
-							<%
-								}
-							}
-							%>
-
-							<br />
-
-							<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportPages();" />
 						</c:when>
 					</c:choose>
 				</c:when>

@@ -1025,6 +1025,7 @@ expire=切らしなさい
 expired=切らされる
 export-15-data=ジャーナルデータ輸出を可能にしなさい。
 export-56-data=ジャーナル満足なデータ輸出を可能にしなさい。
+export-import=輸出/輸入
 export-the-current-pages-to-the-given-lar-file-name=ある特定のLAR のファイル名に現在のページを輸出しなさい。
 export=輸出
 extension=延長

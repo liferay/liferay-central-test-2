@@ -1027,6 +1027,7 @@ expire=Verval
 expired=Vervallen
 export-15-data=Laat de de gegevensuitvoer toe van het Dagboek.
 export-56-data=Laat de de gegevensuitvoer toe van de Inhoud van het Dagboek.
+export-import=De uitvoer/de Invoer
 export-the-current-pages-to-the-given-lar-file-name=Voer de huidige pagina's naar de bepaalde LAR dossiernaam uit.
 export=Exporteer
 extension=Extensie

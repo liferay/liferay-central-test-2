@@ -1027,6 +1027,7 @@ expire=Expirez
 expired=Expiré
 export-15-data=Permettez l'exportation de données de journal.
 export-56-data=Permettez l'exportation de données de Contenu De Journal.
+export-import=Exportation/Importation
 export-the-current-pages-to-the-given-lar-file-name=Exportez les pages courantes vers le nom de fichier donné de LAR.
 export=Exportation
 extension=Prolongation
