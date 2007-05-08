@@ -154,7 +154,7 @@
 			$.lDrag.container = container;
 
 			var nwOffset = jContainer.northwestOffset(true);
-			var seOffset = nwOffset.plus(jContainer.size());
+			var seOffset = nwOffset.plus(jContainer.xySize());
 
 			settings.originalZIndex = container.style.zIndex;
 
@@ -193,7 +193,7 @@
 			var jContainer = $(container);
 			var nwOffset = jContainer.northwestOffset(true);
 			var nwPosition = jContainer.northwestPosition();
-			var size = jContainer.size();
+			var size = jContainer.xySize();
 			var seOffset = nwOffset.plus(size);
 			var sePosition = nwPosition.plus(size);
 

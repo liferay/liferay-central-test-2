@@ -199,6 +199,6 @@ jQuery.each([
 	};
 });
 
-jQuery.fn.size = function() {
+jQuery.fn.xySize = function() {
 	return new Coordinate(this.width(), this.height());
 };
