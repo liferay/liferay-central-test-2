@@ -3,11 +3,11 @@ Liferay.Dock = {
 		var instance = this;
 
 		var dock = jQuery('.lfr-dock');
-		
+
 		if (!dock.is('.interactive-mode')) {
-			return;	
+			return;
 		}
-		
+
 		var dockList = dock.find('.lfr-dock-list');
 
 		if (dockList.length > 0){
@@ -33,7 +33,7 @@ Liferay.Dock = {
 
 			var dockOver = function(event) {
 				event.data = dockData;
-				
+
 				jQuery(document).one('click', 
 					function(internalEvent) {
 						var currentEl = jQuery(internalEvent.target);
@@ -47,13 +47,13 @@ Liferay.Dock = {
 
 				instance._toggle(event, 'show');
 			};
-			
+
 			var dockOut = function(event) {
 				event.data = dockData;
 
 				instance._toggle(event, 'hide');
 			};
-			
+
 			var myPlacesToggle = function(event) {
 				event.data = myPlaces;
 
