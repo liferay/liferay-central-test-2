@@ -477,16 +477,21 @@ public class PortalUtil {
 			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
 		throws PortalException, SystemException {
 
-		String layoutFriendlyURL = getLayoutFriendlyURL(layout, themeDisplay);
+		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
+			String layoutFriendlyURL = getLayoutFriendlyURL(
+				layout, themeDisplay);
 
-		if (Validator.isNotNull(layoutFriendlyURL)) {
-			if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-				layoutFriendlyURL = Http.addParameter(
-					layoutFriendlyURL, "doAsUserId",
-					themeDisplay.getDoAsUserId());
+			if (Validator.isNotNull(layoutFriendlyURL)) {
+				if (doAsUser &&
+					Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+
+					layoutFriendlyURL = Http.addParameter(
+						layoutFriendlyURL, "doAsUserId",
+						themeDisplay.getDoAsUserId());
+				}
+
+				return layoutFriendlyURL;
 			}
-
-			return layoutFriendlyURL;
 		}
 
 		String layoutURL = getLayoutActualURL(layout, themeDisplay);
