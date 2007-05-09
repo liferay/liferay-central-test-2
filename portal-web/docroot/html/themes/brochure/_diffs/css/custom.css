@@ -280,19 +280,19 @@ font {
 
 /* ---------- Dock with Javascript ---------- */
 
-.js .lfr-dock h2 {
+.js .lfr-dock.interactive-mode h2 {
 	background-position: 100% -25px;
 	font-size: 1.1em;
 }
 
-.js .lfr-dock h2 span {
+.js .lfr-dock.interactive-mode h2 span {
 	color: #0C3163;
 	font-size: 1.1em;
 	padding: 0.4em 0.5em 0.35em 2.5em;
 	text-align: left;
 }
 
-.ie.js .lfr-dock h2 {
+.ie.js .lfr-dock.interactive-mode h2 {
 	height: 25px;
 }
 
