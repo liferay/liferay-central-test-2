@@ -282,47 +282,6 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	}
 </script>
 
-<c:if test="<%= tabs3.equals("import-export") %>">
-<script type="text/javascript">
-	jQuery(function(){
-		jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
-	
-		jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
-			var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
-			if (this.checked){          
-				input.children(".<portlet:namespace />handler-control").show();
-			} else {
-				input.children(".<portlet:namespace />handler-control").hide();
-			}		
-		});
-	});
-</script>
-
-<style type="text/css">
-	.<portlet:namespace />handler-control {
-		padding-top: 3px;
-		padding-bottom: 5px;
-	}
-	.<portlet:namespace />handler-control .<portlet:namespace />handler-control {
-		margin-left: 30px;
-	}
-	.<portlet:namespace />handler-control label.<portlet:namespace />handler-control-label {
-		padding-right: 12px;
-	}
-	.<portlet:namespace />handler-control span.<portlet:namespace />handler-control-label {
-		padding-right: 20px;
-	}
-	.<portlet:namespace />handler-control span.<portlet:namespace />handler-control-label strong {
-		padding-left: 3px;
-		padding-right:3px;
-	}
-	.ie .<portlet:namespace />handler-control span.<portlet:namespace />handler-control-label strong {
-		padding-left: 6px;
-		padding-right: 10px;
-	}
-</style>
-</c:if>	
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
@@ -1187,7 +1146,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
-					String tabs5Names = "import,export";
+					String tabs5Names = "export,import";
 
 					if (layout.getOwnerId().equals(ownerId)) {
 						tabs5Names = "export";
@@ -1364,6 +1323,23 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							</c:if>
 						</c:when>
 					</c:choose>
+
+					<script type="text/javascript">
+						jQuery(function(){
+							jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
+
+							jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
+								var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
+
+								if (this.checked) {
+									input.children(".<portlet:namespace />handler-control").show();
+								}
+								else {
+									input.children(".<portlet:namespace />handler-control").hide();
+								}
+							});
+						});
+					</script>
 				</c:when>
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
