@@ -28,12 +28,13 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 import com.liferay.util.GetterUtil;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +56,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 		_req = req;
 		_res = res;
 		_themeDisplay = (ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
-		_portletsMap = new HashMap();
+		_portletsMap = new TreeMap(new PortletRenderWeightComparator());
 
 		_parallelRenderEnable = GetterUtil.getBoolean(PropsUtil.get(
 			PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
