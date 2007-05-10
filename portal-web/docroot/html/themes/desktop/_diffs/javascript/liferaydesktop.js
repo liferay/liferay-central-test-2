@@ -82,8 +82,8 @@ var LiferayDesktop = {
 	
 	toTop: function(portletId) {
 		var portlet = document.getElementById("p_p_id_" + portletId + "_");
-		LayoutColumns.moveToTop(portlet);
-		LayoutColumns.savePosition(portlet);
+		Liferay.Freeform.moveToTop(portlet);
+		Liferay.Freeform.savePosition(portlet);
 	},
 
 	jiggleIcon: function(portletId, sound) {
