@@ -699,7 +699,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		for (int i = 0; i < results.size(); i++) {
 			Portlet portlet = (Portlet)results.get(i);
 
-			ResultRow row = new ResultRow(portlet, portlet.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(portlet, portlet.getId(), i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
