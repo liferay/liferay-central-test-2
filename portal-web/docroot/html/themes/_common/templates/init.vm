@@ -102,6 +102,8 @@
 
 #set ( $the_title = $languageUtil.get($company_id, $locale, $tilesTitle) )
 #set ( $selectable = $theme_display.isTilesSelectable() )
+#set ( $is_maximized = $layoutTypePortlet.hasStateMax() )
+#set ( $is_freeform = $themeDisplay.isFreeformLayout() )
 
 #if ( $layout )
 	#set ( $page = $layout )
