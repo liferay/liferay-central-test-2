@@ -29,41 +29,54 @@
 	</target>
 
 	<target name="compile-module">
-		<mkdir dir="${module.name}.war/WEB-INF/classes" />
-		<mkdir dir="${module.name}.war/WEB-INF/lib" />
-
 		<if>
-			<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
+
+			<!-- For some reason type="dir" does not work -->
+
+			<isfileselected file="${module.name}.war">
+				<type type="file" /> 
+			</isfileselected>
 			<then>
-				<path id="web-lib.classpath">
-					<path refid="project.classpath" />
-					<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-				</path>
+				<echo>Skipping packed module ${module.name}.war</echo>
 			</then>
 			<else>
-				<path id="web-lib.classpath">
-					<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
-					<pathelement location="${project.dir}/util-java/classes" />
-					<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-				</path>
+				<mkdir dir="${module.name}.war/WEB-INF/classes" />
+				<mkdir dir="${module.name}.war/WEB-INF/lib" />
+
+				<if>
+					<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
+					<then>
+						<path id="web-lib.classpath">
+							<path refid="project.classpath" />
+							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+						</path>
+					</then>
+					<else>
+						<path id="web-lib.classpath">
+							<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
+							<pathelement location="${project.dir}/util-java/classes" />
+							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+						</path>
+					</else>
+				</if>
+
+				<javac
+					classpathref="web.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="${module.name}.war/WEB-INF/classes"
+					fork="${javac.fork}"
+					memoryMaximumSize="${javac.memoryMaximumSize}"
+					nowarn="${javac.nowarn}"
+					srcdir="${module.name}.war/WEB-INF/src"
+				/>
+
+				<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
+					<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
+				</copy>
 			</else>
 		</if>
-
-		<javac
-			classpathref="web.classpath"
-			compiler="${javac.compiler}"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="${module.name}.war/WEB-INF/classes"
-			fork="${javac.fork}"
-			memoryMaximumSize="${javac.memoryMaximumSize}"
-			nowarn="${javac.nowarn}"
-			srcdir="${module.name}.war/WEB-INF/src"
-		/>
-
-		<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
-			<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
-		</copy>
 	</target>
 
 	<target name="war" depends="compile">
@@ -176,12 +189,22 @@
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<jar
-			basedir="${module.name}.war"
-			destfile="${tstamp.value}"
-		/>
+		<if>
+			<isfileselected file="${module.name}.war">
+				<type type="file" /> 
+			</isfileselected>
+			<then>
+				<copy file="${module.name}.war" todir="${auto.deploy.dir}" />				
+			</then>
+			<else>
+				<jar
+					basedir="${module.name}.war"
+					destfile="${tstamp.value}"
+				/>
 
-		<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+				<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+			</else>
+		</if>
 	</target>
 
 	<target name="build-lang">
@@ -195,6 +218,8 @@
 		<for param="module.name">
 			<path>
 				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
+
+				<fileset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
 			</path>
 			<sequential>
 				<antelope:stringutil string="@{module.name}" property="module.name.unix">
