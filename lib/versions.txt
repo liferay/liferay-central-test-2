@@ -83,7 +83,7 @@ PortletBridge 1.1.2
 Quartz 1.5.0
 Rome 0.9
 Secure FTP 1.6.3
-Servicemix 2.0.2
+Servicemix 3.1
 Simple Java Captcha 0.03 (patched for debug and additional properties)
 SLF4J 1.0.2
 Smack 2.2.1
