@@ -88,7 +88,6 @@
 <%@ page import="com.liferay.portal.service.impl.LayoutTemplateLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.LayoutPermission" %>
 <%@ page import="com.liferay.portal.service.permission.PortletPermission" %>
-<%@ page import="com.liferay.portal.service.persistence.LayoutPK" %>
 <%@ page import="com.liferay.portal.theme.PortletDisplay" %>
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portal.util.Constants" %>
