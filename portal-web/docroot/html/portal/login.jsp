@@ -123,6 +123,14 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<br /><br />
 			</c:if>
 
+			<c:if test='<%= SessionErrors.contains(request, UserLockoutException.class.getName()) %>'>
+				<span class="portlet-msg-error" style="font-size: xx-small;">
+				<liferay-ui:message key="your-account-has-been-locked-due-to-excessive-failed-login-attempts-please-wait-or-contact-an-administrator-to-unlock-your-account" />
+				</span>
+
+				<br /><br />
+			</c:if>
+
 			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="please-enter-a-valid-password" />

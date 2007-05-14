@@ -48,7 +48,6 @@ public class PortalEJBTest extends BaseEJBTest {
 			boolean autoPassword = true;
 			String password1 = null;
 			String password2 = null;
-			boolean passwordReset = false;
 			boolean autoScreenName = true;
 			String screenName = "";
 			String emailAddress = "UserServiceEJBTest@liferay.com";
@@ -69,10 +68,10 @@ public class PortalEJBTest extends BaseEJBTest {
 
 			User user = getUserService().addUser(
 				TestConstants.COMPANY_ID, autoPassword, password1, password2,
-				passwordReset, autoScreenName, screenName, emailAddress, locale,
-				firstName, middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				organizationId, locationId, sendMail);
+				autoScreenName, screenName, emailAddress, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+				sendMail);
 
 			getUserService().deleteUser(user.getUserId());
 		}

@@ -84,23 +84,22 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 
 	public com.liferay.portal.model.User addUser(long companyId,
 		boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset,
-		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.util.Locale locale,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long organizationId, long locationId,
-		boolean sendEmail)
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle, long organizationId,
+		long locationId, boolean sendEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return UserServiceFactory.getTxImpl().addUser(companyId, autoPassword,
-			password1, password2, passwordReset, autoScreenName, screenName,
-			emailAddress, locale, firstName, middleName, lastName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			organizationId, locationId, sendEmail);
+			password1, password2, autoScreenName, screenName, emailAddress,
+			locale, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, sendEmail);
 	}
 
 	public void deleteRoleUser(long roleId, long userId)

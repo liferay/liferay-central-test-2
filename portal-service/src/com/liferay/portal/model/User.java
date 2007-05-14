@@ -58,6 +58,10 @@ public interface User extends UserModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.lang.String getPasswordUnencrypted();
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);

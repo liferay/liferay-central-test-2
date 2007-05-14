@@ -260,7 +260,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			boolean autoPassword = false;
 			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
 			String password2 = password1;
-			boolean passwordReset = false;
 			boolean autoScreenName = true;
 			String screenName = StringPool.BLANK;
 			String emailAddress =
@@ -285,10 +284,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			User user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
-				passwordReset, autoScreenName, screenName, emailAddress, locale,
-				firstName, middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				organizationId, locationId, false);
+				autoScreenName, screenName, emailAddress, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+				false);
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupImpl.GUEST);

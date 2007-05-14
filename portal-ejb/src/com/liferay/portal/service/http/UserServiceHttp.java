@@ -219,13 +219,13 @@ public class UserServiceHttp {
 	public static com.liferay.portal.model.User addUser(
 		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, boolean autoScreenName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.util.Locale locale, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName, int prefixId,
-		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-		int birthdayYear, java.lang.String jobTitle, long organizationId,
-		long locationId, boolean sendEmail)
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long organizationId, long locationId,
+		boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -243,59 +243,58 @@ public class UserServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new BooleanWrapper(passwordReset);
-			Object paramObj5 = new BooleanWrapper(autoScreenName);
-			Object paramObj6 = screenName;
+			Object paramObj4 = new BooleanWrapper(autoScreenName);
+			Object paramObj5 = screenName;
 
 			if (screenName == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = emailAddress;
+
+			if (emailAddress == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = emailAddress;
-
-			if (emailAddress == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = locale;
+			Object paramObj7 = locale;
 
 			if (locale == null) {
-				paramObj8 = new NullWrapper("java.util.Locale");
+				paramObj7 = new NullWrapper("java.util.Locale");
 			}
 
-			Object paramObj9 = firstName;
+			Object paramObj8 = firstName;
 
 			if (firstName == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = middleName;
+
+			if (middleName == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = middleName;
+			Object paramObj10 = lastName;
 
-			if (middleName == null) {
+			if (lastName == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = lastName;
-
-			if (lastName == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = new IntegerWrapper(prefixId);
-			Object paramObj13 = new IntegerWrapper(suffixId);
-			Object paramObj14 = new BooleanWrapper(male);
-			Object paramObj15 = new IntegerWrapper(birthdayMonth);
-			Object paramObj16 = new IntegerWrapper(birthdayDay);
-			Object paramObj17 = new IntegerWrapper(birthdayYear);
-			Object paramObj18 = jobTitle;
+			Object paramObj11 = new IntegerWrapper(prefixId);
+			Object paramObj12 = new IntegerWrapper(suffixId);
+			Object paramObj13 = new BooleanWrapper(male);
+			Object paramObj14 = new IntegerWrapper(birthdayMonth);
+			Object paramObj15 = new IntegerWrapper(birthdayDay);
+			Object paramObj16 = new IntegerWrapper(birthdayYear);
+			Object paramObj17 = jobTitle;
 
 			if (jobTitle == null) {
-				paramObj18 = new NullWrapper("java.lang.String");
+				paramObj17 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj19 = new LongWrapper(organizationId);
-			Object paramObj20 = new LongWrapper(locationId);
-			Object paramObj21 = new BooleanWrapper(sendEmail);
+			Object paramObj18 = new LongWrapper(organizationId);
+			Object paramObj19 = new LongWrapper(locationId);
+			Object paramObj20 = new BooleanWrapper(sendEmail);
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
 					"addUser",
 					new Object[] {
@@ -303,7 +302,7 @@ public class UserServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21
+						paramObj18, paramObj19, paramObj20
 					});
 			Object returnObj = null;
 

@@ -75,14 +75,13 @@ public interface UserLocalService {
 
 	public com.liferay.portal.model.User addUser(long creatorUserId,
 		long companyId, boolean autoPassword, java.lang.String password1,
-		java.lang.String password2, boolean passwordReset,
-		boolean autoScreenName, java.lang.String screenName,
-		java.lang.String emailAddress, java.util.Locale locale,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, int prefixId, int suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long organizationId, long locationId,
-		boolean sendEmail)
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle, long organizationId,
+		long locationId, boolean sendEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -105,6 +104,10 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public boolean authenticateForJAAS(long userId, java.lang.String encPwd)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void checkLockout(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -209,6 +212,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isPasswordExpired(com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List search(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -268,6 +275,14 @@ public interface UserLocalService {
 
 	public com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updateLoginFailure(com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updateLockout(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

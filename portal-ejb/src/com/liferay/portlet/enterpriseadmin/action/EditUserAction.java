@@ -365,7 +365,6 @@ public class EditUserAction extends PortletAction {
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
-		boolean passwordReset = true;
 		boolean autoScreenName = false;
 		String screenName = ParamUtil.getString(req, "screenName");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
@@ -392,7 +391,7 @@ public class EditUserAction extends PortletAction {
 
 			user = UserServiceUtil.addUser(
 				themeDisplay.getCompanyId(), autoPassword, password1, password2,
-				passwordReset, autoScreenName, screenName, emailAddress,
+				autoScreenName, screenName, emailAddress,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, organizationId, locationId, sendEmail);

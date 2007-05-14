@@ -55,7 +55,7 @@ if (user2 == null) {
 	passwordPolicy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(company.getCompanyId());
 }
 else {
-	passwordPolicy = PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(user2.getUserId());
+	passwordPolicy = user2.getPasswordPolicy();
 }
 
 String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");

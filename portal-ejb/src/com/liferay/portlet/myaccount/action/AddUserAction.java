@@ -45,10 +45,8 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -139,8 +137,6 @@ public class AddUserAction extends PortletAction {
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
-		boolean passwordReset = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.PASSWORDS_CHANGE_ON_FIRST_USE));
 		boolean autoScreenName = false;
 		String screenName = ParamUtil.getString(req, "screenName");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
@@ -162,10 +158,10 @@ public class AddUserAction extends PortletAction {
 
 		User user = UserServiceUtil.addUser(
 			company.getCompanyId(), autoPassword, password1, password2,
-			passwordReset, autoScreenName, screenName, emailAddress,
-			themeDisplay.getLocale(), firstName, middleName, lastName,
-			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			jobTitle, organizationId, locationId, sendEmail);
+			autoScreenName, screenName, emailAddress, themeDisplay.getLocale(),
+			firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, sendEmail);
 
 		// Session messages
 

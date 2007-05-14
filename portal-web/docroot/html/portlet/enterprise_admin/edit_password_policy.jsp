@@ -360,7 +360,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 				<td>
 					<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="maxFailure" />
 
-					<liferay-ui:icon-help message="minimum-length-help" />
+					<liferay-ui:icon-help message="maximum-failure-help" />
 				</td>
 			</tr>
 			<tr>

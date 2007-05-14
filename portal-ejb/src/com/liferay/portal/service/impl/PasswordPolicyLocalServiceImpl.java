@@ -135,8 +135,8 @@ public class PasswordPolicyLocalServiceImpl
 			addPasswordPolicy(
 				UserLocalServiceUtil.getDefaultUserId(companyId), true,
 				defaultPasswordPolicyName, defaultPasswordPolicyName, "md5",
-				true, false, 0, false, true, 6, false, 0, false, 0, 0, 0, false,
-				0, 0, 0);
+				true, false, 0, false, true, 6, false, 6, false, 8640000, 86400,
+				0, false, 3, 0, 600);
 		}
 	}
 

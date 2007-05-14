@@ -69,10 +69,10 @@ public class PortalHttpTest extends TestCase {
 
 		User user = userService.addUser(
 			TestConstants.COMPANY_ID, autoPassword, password1, password2,
-			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendMail);
+			autoScreenName, screenName, emailAddress, locale, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+			sendMail);
 
 		user = userService.getUserByEmailAddress(
 			TestConstants.COMPANY_ID, emailAddress);

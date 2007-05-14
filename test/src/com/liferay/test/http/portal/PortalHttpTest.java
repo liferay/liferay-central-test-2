@@ -67,10 +67,10 @@ public class PortalHttpTest extends BaseHttpTest {
 
 			User user = UserServiceHttp.addUser(
 				getHttpPrincipal(), TestConstants.COMPANY_ID, autoPassword,
-				password1, password2, passwordReset, autoScreenName, screenName,
-				emailAddress, locale, firstName, middleName, lastName, prefixId,
-				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-				jobTitle, organizationId, locationId, sendMail);
+				password1, password2, autoScreenName, screenName, emailAddress,
+				locale, firstName, middleName, lastName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				organizationId, locationId, sendMail);
 
 			user = UserServiceHttp.getUserByEmailAddress(
 				getHttpPrincipal(), TestConstants.COMPANY_ID, emailAddress);

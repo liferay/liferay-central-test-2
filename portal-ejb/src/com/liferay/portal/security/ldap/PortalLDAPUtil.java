@@ -370,11 +370,10 @@ public class PortalLDAPUtil {
 			try {
 				user = UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoPassword, password1,
-					password2, passwordReset, autoScreenName, screenName,
-					emailAddress, locale, firstName, middleName, lastName,
-					prefixId, suffixId, male, birthdayMonth, birthdayDay,
-					birthdayYear, jobTitle, organizationId, locationId,
-					sendEmail);
+					password2, autoScreenName, screenName, emailAddress, locale,
+					firstName, middleName, lastName, prefixId, suffixId, male,
+					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+					organizationId, locationId, sendEmail);
 			}
 			catch (Exception e){
 				_log.error(

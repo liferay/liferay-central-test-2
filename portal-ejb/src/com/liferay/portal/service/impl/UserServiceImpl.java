@@ -96,12 +96,12 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 	public User addUser(
 			long companyId, boolean autoPassword, String password1,
-			String password2, boolean passwordReset, boolean autoScreenName,
-			String screenName, String emailAddress, Locale locale,
-			String firstName, String middleName, String lastName,
-			int prefixId, int suffixId, boolean male, int birthdayMonth,
-			int birthdayDay, int birthdayYear, String jobTitle,
-			long organizationId, long locationId, boolean sendEmail)
+			String password2, boolean autoScreenName, String screenName,
+			String emailAddress, Locale locale, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, long organizationId, long locationId,
+			boolean sendEmail)
 		throws PortalException, SystemException {
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
@@ -120,10 +120,10 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 		return UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
-			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail);
+			autoScreenName, screenName, emailAddress, locale, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+			sendEmail);
 	}
 
 	public void deleteRoleUser(long roleId, long userId)

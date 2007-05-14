@@ -39,6 +39,7 @@
 <%@ page import="com.liferay.portal.SendPasswordException" %>
 <%@ page import="com.liferay.portal.UserActiveException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
+<%@ page import="com.liferay.portal.UserLockoutException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
 <%@ page import="com.liferay.portal.action.LoginAction" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>

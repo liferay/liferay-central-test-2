@@ -29,12 +29,14 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -129,6 +131,16 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return login;
+	}
+
+	public PasswordPolicy getPasswordPolicy()
+		throws PortalException, SystemException {
+
+		PasswordPolicy passwordPolicy =
+			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
+				getUserId());
+
+		return passwordPolicy;
 	}
 
 	public String getPasswordUnencrypted() {

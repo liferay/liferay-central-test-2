@@ -1381,6 +1381,7 @@
 		<exception>UserEmailAddress</exception>
 		<exception>UserGroupName</exception>
 		<exception>UserId</exception>
+		<exception>UserLockout</exception>
 		<exception>UserPassword</exception>
 		<exception>UserPortrait</exception>
 		<exception>UserScreenName</exception>

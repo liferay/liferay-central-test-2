@@ -96,9 +96,9 @@ public class UserServiceJSON {
 
 	public static JSONObject addUser(long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, boolean autoScreenName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		String locale, java.lang.String firstName, java.lang.String middleName,
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, String locale,
+		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long organizationId, long locationId,
@@ -106,11 +106,11 @@ public class UserServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
-				autoPassword, password1, password2, passwordReset,
-				autoScreenName, screenName, emailAddress,
-				new java.util.Locale(locale), firstName, middleName, lastName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId, sendEmail);
+				autoPassword, password1, password2, autoScreenName, screenName,
+				emailAddress, new java.util.Locale(locale), firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, organizationId,
+				locationId, sendEmail);
 
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}

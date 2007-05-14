@@ -322,8 +322,6 @@ public class PropsUtil {
 
 	public static final String AUTH_MAX_FAILURES = "auth.max.failures";
 
-	public static final String AUTH_MAX_FAILURES_LIMIT = "auth.max.failures.limit";
-
 	public static final String AUTH_SIMULTANEOUS_LOGINS = "auth.simultaneous.logins";
 
 	public static final String AUTH_FORWARD_BY_LAST_PATH = "auth.forward.by.last.path";
@@ -351,10 +349,6 @@ public class PropsUtil {
 	public static final String PASSWORDS_TOOLKIT = "passwords.toolkit";
 
 	public static final String PASSWORDS_REGEXPTOOLKIT_PATTERN = "passwords.regexptoolkit.pattern";
-
-	public static final String PASSWORDS_CHANGE_ON_FIRST_USE = "passwords.change.on.first.use";
-
-	public static final String PASSWORDS_LIFESPAN = "passwords.lifespan";
 
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
 
