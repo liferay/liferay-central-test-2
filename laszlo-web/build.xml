@@ -3,7 +3,7 @@
 <project name="laszlo-web" basedir="." default="war">
 	<import file="../build-common-web.xml" />
 
-	<property name="lps.file" value="lps-3.3.3.war" />
+	<property name="original.war.file" value="openlaszlo-4.0.0-servlet.war" />
 	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="clean" depends="build-common-web.clean">
@@ -13,13 +13,13 @@
 	<target name="merge">
 		<if>
 			<not>
-				<uptodate srcfile="${lps.file}" targetfile="tmp" />
+				<uptodate srcfile="${original.war.file}" targetfile="tmp" />
 			</not>
 			<then>
 				<delete dir="tmp" />
 				<mkdir dir="tmp" />
 
-				<unjar dest="tmp" src="${lps.file}" />
+				<unjar dest="tmp" src="${original.war.file}" />
 
 				<copy todir="tmp" overwrite="true">
 					<fileset dir="docroot" />

@@ -63,7 +63,6 @@ JTA 1.0.1b
 jTDS 1.2
 JUnit 3.8.2
 jYMSG 0.6
-Laszlo 3.3.3
 Log4j 1.2.13
 Lucene 2.0.0
 MSNM 1.2.2
@@ -71,6 +70,7 @@ MyFaces 1.1.1
 MySQL Connector/J 3.1.13
 NekoHTML 0.9.5
 OGNL 2.6.7
+OpenLaszlo 4.0.0
 OpenSAML 1.0.1
 ORO 2.0.8
 OSCache 2.3.2
