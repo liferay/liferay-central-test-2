@@ -41,7 +41,7 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 public class IGFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, long folderId,
+			PermissionChecker permissionChecker, long plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -51,8 +51,7 @@ public class IGFolderPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long folderId,
-			String actionId)
+			PermissionChecker permissionChecker, long folderId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, folderId, actionId)) {
@@ -71,7 +70,7 @@ public class IGFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, long folderId,
+			PermissionChecker permissionChecker, long plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 

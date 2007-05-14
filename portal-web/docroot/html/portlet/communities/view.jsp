@@ -92,9 +92,9 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		<%
 		NoSuchLayoutSetException nslse = (NoSuchLayoutSetException)errorException;
 
-		String ownerId = nslse.getMessage();
+		PKParser pkParser = new PKParser(nslse.getMessage());
 
-		long groupId = LayoutImpl.getGroupId(ownerId);
+		long groupId = pkParser.getLong("groupId");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		%>
@@ -157,7 +157,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			sm.append("<span style=\"font-size: xx-small;\">");
 
 			if (publicLayoutsPageCount > 0) {
-				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + group.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 				sm.append("<a href=\"");
 				sm.append(rowURL.toString());
@@ -176,7 +177,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			}
 
 			if ((stagingGroup != null) && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				rowURL.setParameter("ownerId", LayoutImpl.PUBLIC + stagingGroup.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
+				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 				if (stagingGroup.getPublicLayoutsPageCount() > 0) {
 					sm.append(" / ");
@@ -191,7 +193,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			sm.append("<br />");
 
 			if (privateLayoutsPageCount > 0) {
-				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + group.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
 				sm.append("<a href=\"");
 				sm.append(rowURL.toString());
@@ -210,7 +213,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			}
 
 			if ((stagingGroup != null) && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				rowURL.setParameter("ownerId", LayoutImpl.PRIVATE + stagingGroup.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
+				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
 				if (stagingGroup.getPrivateLayoutsPageCount() > 0) {
 					sm.append(" / ");

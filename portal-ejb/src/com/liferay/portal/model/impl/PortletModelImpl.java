@@ -52,7 +52,7 @@ import java.sql.Types;
 public class PortletModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Portlet";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "id", new Integer(Types.BIGINT) },
+			{ "id_", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "roles", new Integer(Types.VARCHAR) },

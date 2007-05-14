@@ -46,7 +46,7 @@ public class JournalTemplateServiceImpl
 	extends PrincipalBean implements JournalTemplateService {
 
 	public JournalTemplate addTemplate(
-			String templateId, boolean autoTemplateId, String plid,
+			String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,
@@ -64,7 +64,7 @@ public class JournalTemplateServiceImpl
 	}
 
 	public JournalTemplate addTemplate(
-			String templateId, boolean autoTemplateId, String plid,
+			String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile, String[] communityPermissions,

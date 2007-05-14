@@ -27,7 +27,6 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
@@ -180,8 +179,6 @@ public class FriendlyURLServlet extends HttpServlet {
 			return mainPath;
 		}
 
-		String ownerId = null;
-
 		Group group = null;
 
 		try {
@@ -218,13 +215,6 @@ public class FriendlyURLServlet extends HttpServlet {
 			return mainPath;
 		}
 
-		if (_private) {
-			ownerId = LayoutImpl.PRIVATE + group.getGroupId();
-		}
-		else {
-			ownerId = LayoutImpl.PUBLIC + group.getGroupId();
-		}
-
 		// Layout friendly URL
 
 		friendlyURL = null;
@@ -234,7 +224,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		return PortalUtil.getLayoutActualURL(
-			ownerId, mainPath, friendlyURL, params);
+			group.getGroupId(), _private, mainPath, friendlyURL, params);
 	}
 
 	private static Log _log = LogFactory.getLog(FriendlyURLServlet.class);

@@ -22,23 +22,20 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.portal.NoSuchPortletPreferencesException;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl;
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -72,19 +69,17 @@ public class JournalContentSearchLocalServiceImpl
 
 			// Private layouts
 
-			String ownerId = LayoutImpl.PRIVATE + group.getGroupId();
+			deleteOwnerContentSearches(group.getGroupId(), true);
 
-			deleteOwnerContentSearches(ownerId);
-
-			layouts.addAll(LayoutLocalServiceUtil.getLayouts(ownerId));
+			layouts.addAll(
+				LayoutLocalServiceUtil.getLayouts(group.getGroupId(), true));
 
 			// Public layouts
 
-			ownerId = LayoutImpl.PUBLIC + group.getGroupId();
+			deleteOwnerContentSearches(group.getGroupId(), false);
 
-			deleteOwnerContentSearches(ownerId);
-
-			layouts.addAll(LayoutLocalServiceUtil.getLayouts(ownerId));
+			layouts.addAll(
+				LayoutLocalServiceUtil.getLayouts(group.getGroupId(), false));
 		}
 
 		for (int i = 0; i < layouts.size(); i++) {
@@ -101,23 +96,21 @@ public class JournalContentSearchLocalServiceImpl
 				String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
-					try {
-						PortletPreferences prefs =
-							PortletPreferencesLocalServiceUtil.getPreferences(
-								layout.getCompanyId(), layout.getOwnerId(),
-								layout.getLayoutId(), portletId);
+					PortletPreferences prefs =
+						PortletPreferencesLocalServiceUtil.getPreferences(
+							layout.getCompanyId(),
+							PortletKeys.PREFS_OWNER_ID_DEFAULT,
+							PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
+							layout.getPlid(), portletId);
 
-						String articleId = prefs.getValue(
-							"article-id", StringPool.BLANK);
+					String articleId = prefs.getValue(
+						"article-id", StringPool.BLANK);
 
-						if (Validator.isNotNull(articleId)) {
-							updateContentSearch(
-								portletId, layout.getLayoutId(),
-								layout.getOwnerId(), layout.getCompanyId(),
-								layout.getGroupId(), articleId);
-						}
-					}
-					catch (NoSuchPortletPreferencesException nsppe) {
+					if (Validator.isNotNull(articleId)) {
+						updateContentSearch(
+							layout.getCompanyId(), layout.getGroupId(),
+							layout.isPrivateLayout(), layout.getLayoutId(),
+							portletId, articleId);
 					}
 				}
 			}
@@ -131,16 +124,17 @@ public class JournalContentSearchLocalServiceImpl
 		JournalContentSearchUtil.removeByC_G_A(companyId, groupId, articleId);
 	}
 
-	public void deleteLayoutContentSearches(String layoutId, String ownerId)
+	public void deleteLayoutContentSearches(
+			long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByL_O(layoutId, ownerId);
+		JournalContentSearchUtil.removeByG_P_L(groupId, privateLayout, layoutId);
 	}
 
-	public void deleteOwnerContentSearches(String ownerId)
+	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByOwnerId(ownerId);
+		JournalContentSearchUtil.removeByG_P(groupId, privateLayout);
 	}
 
 	public List getArticleContentSearches() throws SystemException {
@@ -155,51 +149,54 @@ public class JournalContentSearchLocalServiceImpl
 			companyId, groupId, articleId);
 	}
 
-	public List getLayoutIds(String ownerId, long groupId, String articleId)
+	public List getLayoutIds(
+			long groupId, boolean privateLayout, String articleId)
 		throws SystemException {
 
 		List layoutIds = new ArrayList();
 
-		Iterator itr = JournalContentSearchUtil.findByO_G_A(
-			ownerId, groupId, articleId).iterator();
+		Iterator itr = JournalContentSearchUtil.findByG_P_A(
+			groupId, privateLayout, articleId).iterator();
 
 		while (itr.hasNext()) {
 			JournalContentSearch contentSearch =
 				(JournalContentSearch)itr.next();
 
-			layoutIds.add(contentSearch.getLayoutId());
+			layoutIds.add(new Long(contentSearch.getLayoutId()));
 		}
 
 		return layoutIds;
 	}
 
 	public int getLayoutIdsCount(
-			String ownerId, long groupId, String articleId)
+			long groupId, boolean privateLayout, String articleId)
 		throws SystemException {
 
-		return JournalContentSearchUtil.countByO_G_A(
-			ownerId, groupId, articleId);
+		return JournalContentSearchUtil.countByG_P_A(
+			groupId, privateLayout, articleId);
 	}
 
 	public JournalContentSearch updateContentSearch(
-			String portletId, String layoutId, String ownerId, long companyId,
-			long groupId, String articleId)
+			long companyId, long groupId, boolean privateLayout, long layoutId,
+			String portletId, String articleId)
 		throws PortalException, SystemException {
 
-		JournalContentSearchPK pk = new JournalContentSearchPK(
-			portletId, layoutId, ownerId, articleId);
+		JournalContentSearch contentSearch =
+			JournalContentSearchUtil.findByG_P_L_P_A(
+				groupId, privateLayout, layoutId, portletId, articleId);
 
-		JournalContentSearch contentSearch = null;
+		if (contentSearch == null) {
+			long contentSearchId = CounterLocalServiceUtil.increment();
 
-		try {
-			contentSearch = JournalContentSearchUtil.findByPrimaryKey(pk);
+			contentSearch = JournalContentSearchUtil.create(contentSearchId);
+
+			contentSearch.setCompanyId(companyId);
+			contentSearch.setGroupId(groupId);
+			contentSearch.setPrivateLayout(privateLayout);
+			contentSearch.setLayoutId(layoutId);
+			contentSearch.setPortletId(portletId);
+			contentSearch.setArticleId(articleId);
 		}
-		catch (NoSuchContentSearchException nscse) {
-			contentSearch = JournalContentSearchUtil.create(pk);
-		}
-
-		contentSearch.setCompanyId(companyId);
-		contentSearch.setGroupId(groupId);
 
 		JournalContentSearchUtil.update(contentSearch);
 
@@ -207,15 +204,15 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public List updateContentSearch(
-			String portletId, String layoutId, String ownerId, long companyId,
-			long groupId, String[] articleIds)
+			long companyId, long groupId, boolean privateLayout, long layoutId,
+			String portletId, String[] articleIds)
 		throws PortalException, SystemException {
 
 		List contentSearches = new ArrayList();
 
 		for (int i = 0; i < articleIds.length; i++) {
 			JournalContentSearch contentSearch = updateContentSearch(
-				portletId, layoutId, ownerId, companyId, groupId,
+				companyId, groupId, privateLayout, layoutId, portletId,
 				articleIds[i]);
 
 			contentSearches.add(contentSearch);

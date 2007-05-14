@@ -27,7 +27,6 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PermissionServiceUtil;
@@ -109,8 +108,7 @@ public class EditPermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String ownerId = LayoutImpl.getOwnerId(themeDisplay.getPlid());
-		long groupId = LayoutImpl.getGroupId(ownerId);
+		long groupId = themeDisplay.getPortletGroupId();
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 		String modelResource = ParamUtil.getString(req, "modelResource");
@@ -159,7 +157,7 @@ public class EditPermissionsAction extends PortletAction {
 		PermissionServiceUtil.setGroupPermissions(
 			groupId, actionIds, resourceId);
 
-		if (!LayoutImpl.isPrivateLayout(layout.getOwnerId())) {
+		if (!layout.isPrivateLayout()) {
 			Resource resource =
 				ResourceLocalServiceUtil.getResource(resourceId);
 

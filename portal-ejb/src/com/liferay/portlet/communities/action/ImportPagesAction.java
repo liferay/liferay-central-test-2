@@ -59,11 +59,13 @@ public class ImportPagesAction extends EditPagesAction {
 			UploadPortletRequest uploadReq =
 				PortalUtil.getUploadPortletRequest(req);
 
-			String ownerId = ParamUtil.getString(uploadReq, "ownerId");
+			long groupId = ParamUtil.getLong(uploadReq, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(
+				uploadReq, "privateLayout");
 			File file = uploadReq.getFile("importFileName");
 
 			LayoutServiceUtil.importLayouts(
-				ownerId, req.getParameterMap(), file);
+				groupId, privateLayout, req.getParameterMap(), file);
 
 			SessionMessages.add(req, "request_processed");
 		}

@@ -73,7 +73,7 @@ import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 public class JournalStructureServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -86,12 +86,7 @@ public class JournalStructureServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoStructureId);
-			Object paramObj2 = plid;
-
-			if (plid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(plid);
 			Object paramObj3 = name;
 
 			if (name == null) {
@@ -145,7 +140,7 @@ public class JournalStructureServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -159,12 +154,7 @@ public class JournalStructureServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoStructureId);
-			Object paramObj2 = plid;
-
-			if (plid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(plid);
 			Object paramObj3 = name;
 
 			if (name == null) {

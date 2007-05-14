@@ -25,8 +25,6 @@ package com.liferay.portlet.journal.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -55,24 +53,19 @@ import java.sql.Types;
 public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalContentSearch";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "portletId", new Integer(Types.VARCHAR) },
-			{ "layoutId", new Integer(Types.VARCHAR) },
-			{ "ownerId", new Integer(Types.VARCHAR) },
-			{ "articleId", new Integer(Types.VARCHAR) },
+			{ "contentSearchId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) }
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "privateLayout", new Integer(Types.BOOLEAN) },
+			{ "layoutId", new Integer(Types.BIGINT) },
+			{ "portletId", new Integer(Types.VARCHAR) },
+			{ "articleId", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch"),
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.portletId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.layoutId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.ownerId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.articleId"),
@@ -83,83 +76,21 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public JournalContentSearchModelImpl() {
 	}
 
-	public JournalContentSearchPK getPrimaryKey() {
-		return new JournalContentSearchPK(_portletId, _layoutId, _ownerId,
-			_articleId);
+	public long getPrimaryKey() {
+		return _contentSearchId;
 	}
 
-	public void setPrimaryKey(JournalContentSearchPK pk) {
-		setPortletId(pk.portletId);
-		setLayoutId(pk.layoutId);
-		setOwnerId(pk.ownerId);
-		setArticleId(pk.articleId);
+	public void setPrimaryKey(long pk) {
+		setContentSearchId(pk);
 	}
 
-	public String getPortletId() {
-		return GetterUtil.getString(_portletId);
+	public long getContentSearchId() {
+		return _contentSearchId;
 	}
 
-	public void setPortletId(String portletId) {
-		if (((portletId == null) && (_portletId != null)) ||
-				((portletId != null) && (_portletId == null)) ||
-				((portletId != null) && (_portletId != null) &&
-				!portletId.equals(_portletId))) {
-			if (!XSS_ALLOW_PORTLETID) {
-				portletId = XSSUtil.strip(portletId);
-			}
-
-			_portletId = portletId;
-		}
-	}
-
-	public String getLayoutId() {
-		return GetterUtil.getString(_layoutId);
-	}
-
-	public void setLayoutId(String layoutId) {
-		if (((layoutId == null) && (_layoutId != null)) ||
-				((layoutId != null) && (_layoutId == null)) ||
-				((layoutId != null) && (_layoutId != null) &&
-				!layoutId.equals(_layoutId))) {
-			if (!XSS_ALLOW_LAYOUTID) {
-				layoutId = XSSUtil.strip(layoutId);
-			}
-
-			_layoutId = layoutId;
-		}
-	}
-
-	public String getOwnerId() {
-		return GetterUtil.getString(_ownerId);
-	}
-
-	public void setOwnerId(String ownerId) {
-		if (((ownerId == null) && (_ownerId != null)) ||
-				((ownerId != null) && (_ownerId == null)) ||
-				((ownerId != null) && (_ownerId != null) &&
-				!ownerId.equals(_ownerId))) {
-			if (!XSS_ALLOW_OWNERID) {
-				ownerId = XSSUtil.strip(ownerId);
-			}
-
-			_ownerId = ownerId;
-		}
-	}
-
-	public String getArticleId() {
-		return GetterUtil.getString(_articleId);
-	}
-
-	public void setArticleId(String articleId) {
-		if (((articleId == null) && (_articleId != null)) ||
-				((articleId != null) && (_articleId == null)) ||
-				((articleId != null) && (_articleId != null) &&
-				!articleId.equals(_articleId))) {
-			if (!XSS_ALLOW_ARTICLEID) {
-				articleId = XSSUtil.strip(articleId);
-			}
-
-			_articleId = articleId;
+	public void setContentSearchId(long contentSearchId) {
+		if (contentSearchId != _contentSearchId) {
+			_contentSearchId = contentSearchId;
 		}
 	}
 
@@ -183,14 +114,73 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		if (privateLayout != _privateLayout) {
+			_privateLayout = privateLayout;
+		}
+	}
+
+	public long getLayoutId() {
+		return _layoutId;
+	}
+
+	public void setLayoutId(long layoutId) {
+		if (layoutId != _layoutId) {
+			_layoutId = layoutId;
+		}
+	}
+
+	public String getPortletId() {
+		return GetterUtil.getString(_portletId);
+	}
+
+	public void setPortletId(String portletId) {
+		if (((portletId == null) && (_portletId != null)) ||
+				((portletId != null) && (_portletId == null)) ||
+				((portletId != null) && (_portletId != null) &&
+				!portletId.equals(_portletId))) {
+			if (!XSS_ALLOW_PORTLETID) {
+				portletId = XSSUtil.strip(portletId);
+			}
+
+			_portletId = portletId;
+		}
+	}
+
+	public String getArticleId() {
+		return GetterUtil.getString(_articleId);
+	}
+
+	public void setArticleId(String articleId) {
+		if (((articleId == null) && (_articleId != null)) ||
+				((articleId != null) && (_articleId == null)) ||
+				((articleId != null) && (_articleId != null) &&
+				!articleId.equals(_articleId))) {
+			if (!XSS_ALLOW_ARTICLEID) {
+				articleId = XSSUtil.strip(articleId);
+			}
+
+			_articleId = articleId;
+		}
+	}
+
 	public Object clone() {
 		JournalContentSearchImpl clone = new JournalContentSearchImpl();
-		clone.setPortletId(getPortletId());
-		clone.setLayoutId(getLayoutId());
-		clone.setOwnerId(getOwnerId());
-		clone.setArticleId(getArticleId());
+		clone.setContentSearchId(getContentSearchId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setPrivateLayout(getPrivateLayout());
+		clone.setLayoutId(getLayoutId());
+		clone.setPortletId(getPortletId());
+		clone.setArticleId(getArticleId());
 
 		return clone;
 	}
@@ -201,9 +191,17 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 
 		JournalContentSearchImpl journalContentSearch = (JournalContentSearchImpl)obj;
-		JournalContentSearchPK pk = journalContentSearch.getPrimaryKey();
+		long pk = journalContentSearch.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -220,9 +218,9 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalContentSearchPK pk = journalContentSearch.getPrimaryKey();
+		long pk = journalContentSearch.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -231,13 +229,14 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _portletId;
-	private String _layoutId;
-	private String _ownerId;
-	private String _articleId;
+	private long _contentSearchId;
 	private long _companyId;
 	private long _groupId;
+	private boolean _privateLayout;
+	private long _layoutId;
+	private String _portletId;
+	private String _articleId;
 }

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
@@ -670,14 +671,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		CachePortlet cachePortlet = PortletInstanceFactory.create(portlet, ctx);
 
-		String[] portletPreferencesIds =
+		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactory.getPortletPreferencesIds(
 				req, portletId);
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				portlet.getCompanyId(), portletPreferencesIds[0],
-				portletPreferencesIds[1], portletPreferencesIds[2]);
+				portletPreferencesIds);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx =

@@ -10,7 +10,7 @@
 		<parameter name="wsdlPortType" value="PollsQuestionServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.polls.portlet.liferay.com" xmlns:rtns="http://model.polls.portlet.liferay.com" name="addQuestion" qname="operNS:addQuestion" returnQName="addQuestionReturn" returnType="rtns:PollsQuestionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateMonth" type="tns:int"></parameter>
@@ -24,7 +24,7 @@
 			<parameter xmlns:tns="urn:http.service.polls.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.polls.portlet.liferay.com" xmlns:rtns="http://model.polls.portlet.liferay.com" name="addQuestion" qname="operNS:addQuestion" returnQName="addQuestionReturn" returnType="rtns:PollsQuestionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="expirationDateMonth" type="tns:int"></parameter>

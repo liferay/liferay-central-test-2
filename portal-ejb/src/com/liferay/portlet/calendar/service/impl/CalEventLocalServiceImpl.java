@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
@@ -115,7 +114,7 @@ import org.apache.commons.logging.LogFactory;
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent addEvent(
-			long userId, String plid, String title, String description,
+			long userId, long plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -135,7 +134,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent addEvent(
-			long userId, String plid, String title, String description,
+			long userId, long plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -155,7 +154,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent addEvent(
-			long userId, String plid, String title, String description,
+			long userId, long plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -768,15 +767,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		try {
-			String ownerId =
-				PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-					event.getGroupId();
-			String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+			long ownerId = event.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
 			String portletId = PortletKeys.CALENDAR;
 
 			PortletPreferences prefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					event.getCompanyId(), ownerId, layoutId, portletId);
+					event.getCompanyId(), ownerId, ownerType, plid, portletId);
 
 			Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
 

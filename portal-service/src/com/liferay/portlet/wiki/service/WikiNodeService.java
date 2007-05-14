@@ -49,16 +49,15 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public interface WikiNodeService {
-	public com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

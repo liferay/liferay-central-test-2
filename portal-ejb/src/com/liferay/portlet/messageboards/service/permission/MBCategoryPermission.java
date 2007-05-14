@@ -42,7 +42,7 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 public class MBCategoryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, long categoryId,
+			PermissionChecker permissionChecker, long plid, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -72,7 +72,7 @@ public class MBCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, long categoryId,
+			PermissionChecker permissionChecker, long plid, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 

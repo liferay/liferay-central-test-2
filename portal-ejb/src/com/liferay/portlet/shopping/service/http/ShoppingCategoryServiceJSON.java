@@ -68,7 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class ShoppingCategoryServiceJSON {
-	public static JSONObject addCategory(java.lang.String plid,
+	public static JSONObject addCategory(long plid,
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -81,7 +81,7 @@ public class ShoppingCategoryServiceJSON {
 		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addCategory(java.lang.String plid,
+	public static JSONObject addCategory(long plid,
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

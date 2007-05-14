@@ -69,8 +69,7 @@ public class LayoutFinder {
 
 			q.setCacheable(false);
 
-			q.addScalar("layoutLayoutId", Hibernate.STRING);
-			q.addScalar("layoutOwnerId", Hibernate.STRING);
+			q.addScalar("layoutPlid", Hibernate.LONG);
 			q.addScalar("prefsPortletId", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -87,12 +86,11 @@ public class LayoutFinder {
 			while (itr.hasNext()) {
 				Object[] array = (Object[])itr.next();
 
-				String layoutId = (String)array[0];
-				String ownerId = (String)array[1];
-				String prefsPortletId = (String)array[2];
+				Long layoutPlid = (Long)array[0];
+				String prefsPortletId = (String)array[1];
 
 				Layout layout = LayoutUtil.findByPrimaryKey(
-					new LayoutPK(layoutId, ownerId));
+					layoutPlid.longValue());
 
 				list.add(
 					new LayoutReference(

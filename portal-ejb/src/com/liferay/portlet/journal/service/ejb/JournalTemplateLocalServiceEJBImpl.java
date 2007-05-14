@@ -68,12 +68,11 @@ public class JournalTemplateLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long plid, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalTemplateLocalServiceFactory.getTxImpl().addTemplate(userId,
@@ -84,11 +83,11 @@ public class JournalTemplateLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.lang.String[] communityPermissions,
+		long plid, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -100,11 +99,11 @@ public class JournalTemplateLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.lang.Boolean addCommunityPermissions,
+		long plid, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

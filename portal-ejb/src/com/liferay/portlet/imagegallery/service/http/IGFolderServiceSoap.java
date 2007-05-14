@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class IGFolderServiceSoap {
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
-		java.lang.String plid, long parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
 		try {
@@ -96,7 +96,7 @@ public class IGFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
-		java.lang.String plid, long parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {

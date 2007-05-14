@@ -26,8 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil;
 
@@ -40,15 +38,6 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServic
  *
  */
 public class SCFrameworkVersionPermission {
-
-	public static void check(
-			PermissionChecker permissionChecker, String plid, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, plid, actionId)) {
-			throw new PrincipalException();
-		}
-	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long frameworkVersionId,
@@ -68,14 +57,6 @@ public class SCFrameworkVersionPermission {
 		if (!contains(permissionChecker, frameworkVersion, actionId)) {
 			throw new PrincipalException();
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String actionId)
-		throws PortalException, SystemException {
-
-		return PortletPermission.contains(
-			permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, actionId);
 	}
 
 	public static boolean contains(

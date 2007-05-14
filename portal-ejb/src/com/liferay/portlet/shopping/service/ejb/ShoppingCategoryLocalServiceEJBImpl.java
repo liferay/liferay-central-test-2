@@ -67,7 +67,7 @@ public class ShoppingCategoryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		long userId, long plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -78,7 +78,7 @@ public class ShoppingCategoryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		long userId, long plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -90,7 +90,7 @@ public class ShoppingCategoryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, java.lang.String plid, java.lang.String parentCategoryId,
+		long userId, long plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

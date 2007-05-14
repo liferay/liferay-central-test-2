@@ -50,14 +50,14 @@ package com.liferay.portlet.imagegallery.service;
  */
 public interface IGFolderService {
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String plid, long parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String plid, long parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 

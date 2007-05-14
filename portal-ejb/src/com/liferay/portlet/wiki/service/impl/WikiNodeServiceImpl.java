@@ -44,7 +44,7 @@ public class WikiNodeServiceImpl
 	extends PrincipalBean implements WikiNodeService {
 
 	public WikiNode addNode(
-			String plid, String name, String description,
+			long plid, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -58,7 +58,7 @@ public class WikiNodeServiceImpl
 	}
 
 	public WikiNode addNode(
-			String plid, String name, String description,
+			long plid, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 

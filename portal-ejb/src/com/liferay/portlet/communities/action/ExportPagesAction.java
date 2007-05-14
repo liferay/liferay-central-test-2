@@ -54,11 +54,12 @@ public class ExportPagesAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String ownerId = ParamUtil.getString(req, "ownerId");
+			long groupId = ParamUtil.getLong(req, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 			String fileName = ParamUtil.getString(req, "exportFileName");
 
 			byte[] byteArray = LayoutServiceUtil.exportLayouts(
-				ownerId, req.getParameterMap());
+				groupId, privateLayout, req.getParameterMap());
 
 			HttpServletResponse httpRes =
 				((ActionResponseImpl)res).getHttpServletResponse();

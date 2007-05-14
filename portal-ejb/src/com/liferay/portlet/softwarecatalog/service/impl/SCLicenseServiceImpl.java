@@ -56,8 +56,8 @@ public class SCLicenseServiceImpl
 	public void deleteLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		SCLicensePermission.check(getPermissionChecker(),
-			licenseId, ActionKeys.DELETE);
+		SCLicensePermission.check(
+			getPermissionChecker(), licenseId, ActionKeys.DELETE);
 
 		SCLicenseLocalServiceUtil.deleteLicense(licenseId);
 	}
@@ -73,8 +73,8 @@ public class SCLicenseServiceImpl
 			boolean active, boolean recommended)
 		throws PortalException, SystemException {
 
-		SCLicensePermission.check(getPermissionChecker(),
-			licenseId, ActionKeys.UPDATE);
+		SCLicensePermission.check(
+			getPermissionChecker(), licenseId, ActionKeys.UPDATE);
 
 		return SCLicenseLocalServiceUtil.updateLicense(
 			licenseId, name, url, openSource, active, recommended);

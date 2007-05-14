@@ -42,15 +42,19 @@ import java.util.Locale;
 public class LayoutLister {
 
 	public LayoutView getLayoutView(
-			String ownerId, String rootNodeName, Locale locale)
+			long groupId, boolean privateLayout, String rootNodeName,
+			Locale locale)
 		throws PortalException, SystemException {
 
-		_ownerId = ownerId;
+		_groupId = groupId;
+		_privateLayout = privateLayout;
 		_locale = locale;
 		_nodeId = 1;
 
 		_list = new ArrayList();
-		_list.add("1|0|0|-1|" + rootNodeName + "|0");
+
+		_list.add(
+			"1|0|0|" + LayoutImpl.DEFAULT_PLID + "|" + rootNodeName + "|0");
 
 		_createList(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, _nodeId, 0);
 
@@ -58,11 +62,11 @@ public class LayoutLister {
 	}
 
 	private void _createList(
-			String parentLayoutId, int parentId, int depth)
+			long parentLayoutId, int parentId, int depth)
 		throws PortalException, SystemException {
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(
-			_ownerId, parentLayoutId);
+			_groupId, _privateLayout, parentLayoutId);
 
 		for (int i = 0; i < layouts.size(); i++) {
 			Layout layout = (Layout)layouts.get(i);
@@ -101,7 +105,8 @@ public class LayoutLister {
 		}
 	}
 
-	private String _ownerId;
+	private long _groupId;
+	private boolean _privateLayout;
 	private Locale _locale;
 	private int _nodeId;
 	private List _list;

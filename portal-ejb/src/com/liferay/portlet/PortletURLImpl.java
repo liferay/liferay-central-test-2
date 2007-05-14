@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -80,24 +79,24 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	public static final boolean APPEND_PARAMETERS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTLET_URL_APPEND_PARAMETERS));
 
-	public PortletURLImpl(ActionRequestImpl req, String portletName,
-						  String plid, boolean action) {
+	public PortletURLImpl(ActionRequestImpl req, String portletName, long plid,
+						  boolean action) {
 
 		this(req.getHttpServletRequest(), portletName, plid, action);
 
 		_portletReq = req;
 	}
 
-	public PortletURLImpl(RenderRequestImpl req, String portletName,
-						  String plid, boolean action) {
+	public PortletURLImpl(RenderRequestImpl req, String portletName, long plid,
+						  boolean action) {
 
 		this(req.getHttpServletRequest(), portletName, plid, action);
 
 		_portletReq = req;
 	}
 
-	public PortletURLImpl(HttpServletRequest req, String portletName,
-						  String plid, boolean action) {
+	public PortletURLImpl(HttpServletRequest req, String portletName, long plid,
+						  boolean action) {
 
 		_req = req;
 		_portletName = portletName;
@@ -164,17 +163,14 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		return _namespace;
 	}
 
-	public String getPlid() {
+	public long getPlid() {
 		return _plid;
 	}
 
 	public Layout getLayout() {
 		if (_layout == null) {
 			try {
-				String layoutId = LayoutImpl.getLayoutId(_plid);
-				String ownerId = LayoutImpl.getOwnerId(_plid);
-
-				_layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+				_layout = LayoutLocalServiceUtil.getLayout(_plid);
 			}
 			catch (Exception e) {
 				_log.warn("Layout cannot be found for " + _plid);
@@ -684,7 +680,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	private String _portletName;
 	private Portlet _portlet;
 	private String _namespace;
-	private String _plid;
+	private long _plid;
 	private Layout _layout;
 	private String _layoutFriendlyURL;
 	private boolean _action;

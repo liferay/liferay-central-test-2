@@ -54,8 +54,8 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "LayoutSet";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "layoutSetId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
 			{ "logo", new Integer(Types.BOOLEAN) },
@@ -111,16 +111,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
-	}
-
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -128,6 +118,16 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -283,8 +283,8 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public Object clone() {
 		LayoutSetImpl clone = new LayoutSetImpl();
 		clone.setLayoutSetId(getLayoutSetId());
-		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setPrivateLayout(getPrivateLayout());
 		clone.setLogo(getLogo());
@@ -347,8 +347,8 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	}
 
 	private long _layoutSetId;
-	private long _companyId;
 	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private boolean _privateLayout;
 	private boolean _logo;

@@ -56,9 +56,9 @@ import javax.ejb.SessionContext;
 public class ShoppingCategoryServiceEJBImpl implements ShoppingCategoryService,
 	SessionBean {
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -69,9 +69,8 @@ public class ShoppingCategoryServiceEJBImpl implements ShoppingCategoryService,
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

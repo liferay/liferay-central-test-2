@@ -37,7 +37,7 @@ public class PortletURLFactory {
 	}
 
 	public PortletURLImpl create(
-		HttpServletRequest req, String portletName, String plid,
+		HttpServletRequest req, String portletName, long plid,
 		boolean action) {
 
 		return new PortletURLImpl(req, portletName, plid, action);

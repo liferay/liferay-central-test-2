@@ -25,7 +25,16 @@
 <%@ include file="/html/portlet/site_map/init.jsp" %>
 
 <%
-List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getOwnerId(), rootLayoutId);
+List rootLayouts = null;
+
+if (rootPlid > 0) {
+	Layout rootLayout = LayoutLocalServiceUtil.getLayout(rootPlid);
+
+	rootLayouts = rootLayout.getChildren();
+}
+else {
+	rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+}
 
 StringMaker sm = new StringMaker();
 

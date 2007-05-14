@@ -73,20 +73,14 @@ import com.liferay.portal.service.http.TunnelUtil;
 public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout addLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		long parentLayoutId, java.lang.String name, java.lang.String title,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = new BooleanWrapper(privateLayout);
-			Object paramObj2 = parentLayoutId;
-
-			if (parentLayoutId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(parentLayoutId);
 			Object paramObj3 = name;
 
 			if (name == null) {
@@ -143,25 +137,17 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static void deleteLayout(HttpPrincipal httpPrincipal,
-		java.lang.String layoutId, java.lang.String ownerId)
+	public static void deleteLayout(HttpPrincipal httpPrincipal, long groupId,
+		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"deleteLayout", new Object[] { paramObj0, paramObj1 });
+					"deleteLayout",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -185,32 +171,23 @@ public class LayoutServiceHttp {
 	}
 
 	public static java.lang.String getLayoutName(HttpPrincipal httpPrincipal,
-		java.lang.String layoutId, java.lang.String ownerId,
+		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = languageId;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = languageId;
 
 			if (languageId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"getLayoutName",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -285,24 +262,21 @@ public class LayoutServiceHttp {
 	}
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
-		java.lang.String ownerId, java.util.Map parameterMap)
+		long groupId, boolean privateLayout, java.util.Map parameterMap)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = ownerId;
-
-			if (ownerId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parameterMap;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = parameterMap;
 
 			if (parameterMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayouts", new Object[] { paramObj0, paramObj1 });
+					"exportLayouts",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {
@@ -328,32 +302,28 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static void importLayouts(HttpPrincipal httpPrincipal,
-		java.lang.String ownerId, java.util.Map parameterMap, java.io.File file)
+	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
+		boolean privateLayout, java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = ownerId;
-
-			if (ownerId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parameterMap;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = parameterMap;
 
 			if (parameterMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj2 = file;
+			Object paramObj3 = file;
 
 			if (file == null) {
-				paramObj2 = new NullWrapper("java.io.File");
+				paramObj3 = new NullWrapper("java.io.File");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"importLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -376,33 +346,23 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static void setLayouts(HttpPrincipal httpPrincipal,
-		java.lang.String ownerId, java.lang.String parentLayoutId,
-		java.lang.String[] layoutIds)
+	public static void setLayouts(HttpPrincipal httpPrincipal, long groupId,
+		boolean privateLayout, long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = ownerId;
-
-			if (ownerId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentLayoutId;
-
-			if (parentLayoutId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = layoutIds;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(parentLayoutId);
+			Object paramObj3 = layoutIds;
 
 			if (layoutIds == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+				paramObj3 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"setLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -426,68 +386,53 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = parentLayoutId;
-
-			if (parentLayoutId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = name;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = new LongWrapper(parentLayoutId);
+			Object paramObj4 = name;
 
 			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = title;
-
-			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = languageId;
+			Object paramObj5 = title;
 
-			if (languageId == null) {
+			if (title == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = type;
+			Object paramObj6 = languageId;
 
-			if (type == null) {
+			if (languageId == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = new BooleanWrapper(hidden);
-			Object paramObj8 = friendlyURL;
+			Object paramObj7 = type;
+
+			if (type == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = new BooleanWrapper(hidden);
+			Object paramObj9 = friendlyURL;
 
 			if (friendlyURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLayout",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 			Object returnObj = null;
 
@@ -515,74 +460,59 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL, java.lang.Boolean iconImage,
-		byte[] iconBytes)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = parentLayoutId;
-
-			if (parentLayoutId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = name;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = new LongWrapper(parentLayoutId);
+			Object paramObj4 = name;
 
 			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = title;
-
-			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = languageId;
+			Object paramObj5 = title;
 
-			if (languageId == null) {
+			if (title == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = type;
+			Object paramObj6 = languageId;
 
-			if (type == null) {
+			if (languageId == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = new BooleanWrapper(hidden);
-			Object paramObj8 = friendlyURL;
+			Object paramObj7 = type;
+
+			if (type == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = new BooleanWrapper(hidden);
+			Object paramObj9 = friendlyURL;
 
 			if (friendlyURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = iconImage;
+			Object paramObj10 = iconImage;
 
 			if (iconImage == null) {
-				paramObj9 = new NullWrapper("java.lang.Boolean");
+				paramObj10 = new NullWrapper("java.lang.Boolean");
 			}
 
-			Object paramObj10 = iconBytes;
+			Object paramObj11 = iconBytes;
 
 			if (iconBytes == null) {
-				paramObj10 = new NullWrapper("[B");
+				paramObj11 = new NullWrapper("[B");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
@@ -590,7 +520,7 @@ public class LayoutServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11
 					});
 			Object returnObj = null;
 
@@ -618,32 +548,23 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String typeSettings)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, java.lang.String typeSettings)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = typeSettings;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = typeSettings;
 
 			if (typeSettings == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLayout",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -670,48 +591,39 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updateLookAndFeel(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String themeId,
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = themeId;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = themeId;
 
 			if (themeId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = colorSchemeId;
-
-			if (colorSchemeId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = css;
+			Object paramObj4 = colorSchemeId;
 
-			if (css == null) {
+			if (colorSchemeId == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(wapTheme);
+			Object paramObj5 = css;
+
+			if (css == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = new BooleanWrapper(wapTheme);
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLookAndFeel",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -739,39 +651,31 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updateName(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String name,
-		java.lang.String languageId)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = name;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = languageId;
+			Object paramObj4 = languageId;
 
 			if (languageId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateName",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 			Object returnObj = null;
 
 			try {
@@ -798,32 +702,18 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updateParentLayoutId(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String parentLayoutId)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, long parentLayoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = parentLayoutId;
-
-			if (parentLayoutId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = new LongWrapper(parentLayoutId);
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateParentLayoutId",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -850,27 +740,18 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Layout updatePriority(
-		HttpPrincipal httpPrincipal, java.lang.String layoutId,
-		java.lang.String ownerId, int priority)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long layoutId, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = layoutId;
-
-			if (layoutId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = ownerId;
-
-			if (ownerId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(priority);
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(layoutId);
+			Object paramObj3 = new IntegerWrapper(priority);
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updatePriority",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {

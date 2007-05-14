@@ -81,17 +81,19 @@ public class JournalContentSearchLocalServiceUtil {
 			groupId, articleId);
 	}
 
-	public static void deleteLayoutContentSearches(java.lang.String layoutId,
-		java.lang.String ownerId) throws com.liferay.portal.SystemException {
-		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-		journalContentSearchLocalService.deleteLayoutContentSearches(layoutId,
-			ownerId);
-	}
-
-	public static void deleteOwnerContentSearches(java.lang.String ownerId)
+	public static void deleteLayoutContentSearches(long groupId,
+		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-		journalContentSearchLocalService.deleteOwnerContentSearches(ownerId);
+		journalContentSearchLocalService.deleteLayoutContentSearches(groupId,
+			privateLayout, layoutId);
+	}
+
+	public static void deleteOwnerContentSearches(long groupId,
+		boolean privateLayout) throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.deleteOwnerContentSearches(groupId,
+			privateLayout);
 	}
 
 	public static java.util.List getArticleContentSearches()
@@ -110,44 +112,42 @@ public class JournalContentSearchLocalServiceUtil {
 			groupId, articleId);
 	}
 
-	public static java.util.List getLayoutIds(java.lang.String ownerId,
-		long groupId, java.lang.String articleId)
+	public static java.util.List getLayoutIds(long groupId,
+		boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.getLayoutIds(ownerId, groupId,
-			articleId);
+		return journalContentSearchLocalService.getLayoutIds(groupId,
+			privateLayout, articleId);
 	}
 
-	public static int getLayoutIdsCount(java.lang.String ownerId, long groupId,
+	public static int getLayoutIdsCount(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.getLayoutIdsCount(ownerId,
-			groupId, articleId);
+		return journalContentSearchLocalService.getLayoutIdsCount(groupId,
+			privateLayout, articleId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
-		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, long companyId, long groupId,
-		java.lang.String articleId)
+		long companyId, long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.updateContentSearch(portletId,
-			layoutId, ownerId, companyId, groupId, articleId);
+		return journalContentSearchLocalService.updateContentSearch(companyId,
+			groupId, privateLayout, layoutId, portletId, articleId);
 	}
 
-	public static java.util.List updateContentSearch(
-		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, long companyId, long groupId,
-		java.lang.String[] articleIds)
+	public static java.util.List updateContentSearch(long companyId,
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.updateContentSearch(portletId,
-			layoutId, ownerId, companyId, groupId, articleIds);
+		return journalContentSearchLocalService.updateContentSearch(companyId,
+			groupId, privateLayout, layoutId, portletId, articleIds);
 	}
 }

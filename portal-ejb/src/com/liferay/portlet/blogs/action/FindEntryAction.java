@@ -26,7 +26,6 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
@@ -55,8 +54,8 @@ public class FindEntryAction extends Action {
 		throws Exception {
 
 		try {
-			String plid = ParamUtil.getString(req, "p_l_id");
-			String entryId = ParamUtil.getString(req, "entryId");
+			long plid = ParamUtil.getLong(req, "p_l_id");
+			long entryId = ParamUtil.getLong(req, "entryId");
 
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.BLOGS, plid, false);
@@ -64,10 +63,10 @@ public class FindEntryAction extends Action {
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
-			if (Validator.isNotNull(entryId)) {
+			if (entryId > 0) {
 				portletURL.setParameter(
 					"struts_action", "/blogs/view_entry");
-				portletURL.setParameter("entryId", entryId);
+				portletURL.setParameter("entryId", String.valueOf(entryId));
 			}
 
 			res.sendRedirect(portletURL.toString());

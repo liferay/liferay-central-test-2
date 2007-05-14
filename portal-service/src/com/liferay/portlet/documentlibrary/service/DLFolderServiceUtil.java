@@ -50,9 +50,9 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFolderServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long plid, java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
@@ -62,9 +62,8 @@ public class DLFolderServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

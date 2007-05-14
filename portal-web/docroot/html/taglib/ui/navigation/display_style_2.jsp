@@ -42,8 +42,8 @@ Layout ancestorLayout = layout;
 while (true) {
 	layoutFamilySet.add(ancestorLayout);
 
-	if (!ancestorLayout.getParentLayoutId().equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
-		ancestorLayout = LayoutLocalServiceUtil.getLayout(ancestorLayout.getParentLayoutId(), ancestorLayout.getOwnerId());
+	if (ancestorLayout.getParentLayoutId() != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		ancestorLayout = LayoutLocalServiceUtil.getLayout(ancestorLayout.getGroupId(), ancestorLayout.isPrivateLayout(), ancestorLayout.getParentLayoutId());
 	}
 	else {
 		break;
@@ -85,7 +85,7 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 		layoutChildren = layout.getChildren();
 	}
 	else {
-		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getOwnerId(), LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getGroupId(), selLayout.isPrivateLayout(), LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 	}
 
 	if (layoutChildren.size() > 0) {
@@ -150,7 +150,7 @@ private void _buildNavigation(Layout layout, Layout selLayout, Set layoutFamilyS
 						className = "open";
 					}
 
-					if (selLayout.getLayoutId().equals(layoutChild.getLayoutId())) {
+					if (selLayout.getLayoutId() == layoutChild.getLayoutId()) {
 						className = "selected";
 					}
 

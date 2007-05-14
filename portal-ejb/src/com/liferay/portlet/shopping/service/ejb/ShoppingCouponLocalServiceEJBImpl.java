@@ -67,7 +67,7 @@ public class ShoppingCouponLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long userId, java.lang.String plid, java.lang.String couponId,
+		long userId, long plid, java.lang.String couponId,
 		boolean autoCouponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
@@ -103,9 +103,9 @@ public class ShoppingCouponLocalServiceEJBImpl
 		return ShoppingCouponLocalServiceFactory.getTxImpl().getCoupon(couponId);
 	}
 
-	public java.util.List search(java.lang.String couponId,
-		java.lang.String plid, long companyId, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+	public java.util.List search(java.lang.String couponId, long plid,
+		long companyId, boolean active, java.lang.String discountType,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return ShoppingCouponLocalServiceFactory.getTxImpl().search(couponId,
 			plid, companyId, active, discountType, andOperator, begin, end);

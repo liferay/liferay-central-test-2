@@ -45,7 +45,7 @@ public class PollsQuestionServiceImpl
 	extends PrincipalBean implements PollsQuestionService {
 
 	public PollsQuestion addQuestion(
-			String plid, String title, String description,
+			long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices,
@@ -64,7 +64,7 @@ public class PollsQuestionServiceImpl
 	}
 
 	public PollsQuestion addQuestion(
-			String plid, String title, String description,
+			long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices,

@@ -35,7 +35,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 Set allPortletModes = portlet.getAllPortletModes();
 
-PortletURL supportedClientsRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid, false);
+PortletURL supportedClientsRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), false);
 
 supportedClientsRedirect.setWindowState(WindowState.MAXIMIZED);
 supportedClientsRedirect.setPortletMode(PortletMode.VIEW);

@@ -53,7 +53,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		url.append(themeDisplay.getPathMain());
 		url.append("/portal/render_portlet");
 		url.append("?p_l_id=");
-		url.append(plid);
+		url.append(plid.longValue());
 		url.append("&p_p_id=");
 		url.append(portlet.getPortletId());
 		url.append("&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=");

@@ -23,7 +23,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.service.persistence.LayoutPK;
 
 /**
  * <a href="LayoutModel.java.html"><b><i>View Source</i></b></a>
@@ -46,25 +45,35 @@ import com.liferay.portal.service.persistence.LayoutPK;
  *
  */
 public interface LayoutModel extends BaseModel {
-	public LayoutPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(LayoutPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getLayoutId();
+	public long getPlid();
 
-	public void setLayoutId(String layoutId);
+	public void setPlid(long plid);
 
-	public String getOwnerId();
+	public long getGroupId();
 
-	public void setOwnerId(String ownerId);
+	public void setGroupId(long groupId);
 
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);
 
-	public String getParentLayoutId();
+	public boolean getPrivateLayout();
 
-	public void setParentLayoutId(String parentLayoutId);
+	public boolean isPrivateLayout();
+
+	public void setPrivateLayout(boolean privateLayout);
+
+	public long getLayoutId();
+
+	public void setLayoutId(long layoutId);
+
+	public long getParentLayoutId();
+
+	public void setParentLayoutId(long parentLayoutId);
 
 	public String getName();
 

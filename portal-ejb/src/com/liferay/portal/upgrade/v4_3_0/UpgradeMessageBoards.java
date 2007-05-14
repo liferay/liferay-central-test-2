@@ -64,10 +64,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(MBCategory.class.getName());
-	}
-
 	private void _upgrade() throws Exception {
 
 		// MBCategory

@@ -69,8 +69,8 @@ import org.json.JSONObject;
  *
  */
 public class ShoppingCouponServiceJSON {
-	public static JSONObject addCoupon(java.lang.String plid,
-		java.lang.String couponId, boolean autoCouponId, java.lang.String name,
+	public static JSONObject addCoupon(long plid, java.lang.String couponId,
+		boolean autoCouponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
@@ -89,15 +89,13 @@ public class ShoppingCouponServiceJSON {
 		return ShoppingCouponJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteCoupon(java.lang.String plid,
-		java.lang.String couponId)
+	public static void deleteCoupon(long plid, java.lang.String couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ShoppingCouponServiceUtil.deleteCoupon(plid, couponId);
 	}
 
-	public static JSONObject getCoupon(java.lang.String plid,
-		java.lang.String couponId)
+	public static JSONObject getCoupon(long plid, java.lang.String couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(plid,
@@ -106,9 +104,9 @@ public class ShoppingCouponServiceJSON {
 		return ShoppingCouponJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONArray search(java.lang.String couponId,
-		java.lang.String plid, long companyId, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+	public static JSONArray search(java.lang.String couponId, long plid,
+		long companyId, boolean active, java.lang.String discountType,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = ShoppingCouponServiceUtil.search(couponId,
@@ -117,14 +115,14 @@ public class ShoppingCouponServiceJSON {
 		return ShoppingCouponJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject updateCoupon(java.lang.String plid,
-		java.lang.String couponId, java.lang.String name,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
-		int endDateMinute, boolean neverExpire, boolean active,
-		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+	public static JSONObject updateCoupon(long plid, java.lang.String couponId,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
+		java.lang.String limitSkus, double minOrder, double discount,
+		java.lang.String discountType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateCoupon(plid,

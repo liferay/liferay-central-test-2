@@ -67,7 +67,7 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
@@ -83,7 +83,7 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
@@ -100,7 +100,7 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,

@@ -25,11 +25,13 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 /**
  * <a href="PortletPermission.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +52,7 @@ public class PortletPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, String portletId,
+			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -64,11 +66,11 @@ public class PortletPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return contains(permissionChecker, null, portletId, actionId);
+		return contains(permissionChecker, 0, portletId, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String portletId,
+			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -76,16 +78,16 @@ public class PortletPermission {
 		String name = null;
 		String primKey = null;
 
-		if (plid != null) {
-			String layoutId = LayoutImpl.getLayoutId(plid);
-			String ownerId = LayoutImpl.getOwnerId(plid);
+		if (plid > 0) {
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			groupId = LayoutImpl.getGroupId(ownerId);
 			name = PortletImpl.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
 
 			if (LayoutPermission.contains(
-					permissionChecker, layoutId, ownerId, ActionKeys.UPDATE)) {
+					permissionChecker, layout.getGroupId(),
+					layout.isPrivateLayout(), layout.getLayoutId(),
+					ActionKeys.UPDATE)) {
 
 				return true;
 			}
@@ -100,7 +102,7 @@ public class PortletPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, Portlet portlet,
+			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -120,8 +122,14 @@ public class PortletPermission {
 		}
 	}
 
-	public static String getPrimaryKey(String plid, String portletId) {
-		return plid + PortletImpl.LAYOUT_SEPARATOR + portletId;
+	public static String getPrimaryKey(long plid, String portletId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(plid);
+		sm.append(PortletImpl.LAYOUT_SEPARATOR);
+		sm.append(portletId);
+
+		return sm.toString();
 	}
 
 }

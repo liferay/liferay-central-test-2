@@ -70,7 +70,7 @@ public class DefineObjectsTei extends TagExtraInfo {
 			new VariableInfo(
 				"layouts", List.class.getName(), true, VariableInfo.AT_END),
 			new VariableInfo(
-				"plid", String.class.getName(), true, VariableInfo.AT_END),
+				"plid", Long.class.getName(), true, VariableInfo.AT_END),
 			new VariableInfo(
 				"layoutTypePortlet", LayoutTypePortlet.class.getName(), true,
 				VariableInfo.AT_END),

@@ -182,13 +182,12 @@
 	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByC_P_P">
 		<![CDATA[
 			SELECT
-				DISTINCT Layout.layoutId AS layoutLayoutId, Layout.ownerId AS layoutOwnerId, PortletPreferences.portletId AS prefsPortletId
+				DISTINCT Layout.layoutId AS layoutPlid, PortletPreferences.portletId AS prefsPortletId
 			FROM
 				Layout
 			INNER JOIN
 				PortletPreferences ON
-					(PortletPreferences.layoutId = Layout.layoutId) AND
-					(PortletPreferences.ownerId = Layout.ownerId)
+					(PortletPreferences.plid = Layout.plid)
 			WHERE
 				(Layout.companyId = ?) AND
 				(

@@ -53,17 +53,15 @@ import java.util.List;
  *
  */
 public class JournalContentSearchPersistence extends BasePersistence {
-	public JournalContentSearch create(
-		JournalContentSearchPK journalContentSearchPK) {
+	public JournalContentSearch create(long contentSearchId) {
 		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
 		journalContentSearch.setNew(true);
-		journalContentSearch.setPrimaryKey(journalContentSearchPK);
+		journalContentSearch.setPrimaryKey(contentSearchId);
 
 		return journalContentSearch;
 	}
 
-	public JournalContentSearch remove(
-		JournalContentSearchPK journalContentSearchPK)
+	public JournalContentSearch remove(long contentSearchId)
 		throws NoSuchContentSearchException, SystemException {
 		Session session = null;
 
@@ -71,18 +69,18 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			session = openSession();
 
 			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearchImpl.class,
-					journalContentSearchPK);
+					new Long(contentSearchId));
 
 			if (journalContentSearch == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No JournalContentSearch exists with the primary key " +
-						journalContentSearchPK);
+						contentSearchId);
 				}
 
 				throw new NoSuchContentSearchException(
 					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK);
+					contentSearchId);
 			}
 
 			return remove(journalContentSearch);
@@ -153,28 +151,26 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByPrimaryKey(
-		JournalContentSearchPK journalContentSearchPK)
+	public JournalContentSearch findByPrimaryKey(long contentSearchId)
 		throws NoSuchContentSearchException, SystemException {
-		JournalContentSearch journalContentSearch = fetchByPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = fetchByPrimaryKey(contentSearchId);
 
 		if (journalContentSearch == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK);
+					contentSearchId);
 			}
 
 			throw new NoSuchContentSearchException(
 				"No JournalContentSearch exists with the primary key " +
-				journalContentSearchPK);
+				contentSearchId);
 		}
 
 		return journalContentSearch;
 	}
 
-	public JournalContentSearch fetchByPrimaryKey(
-		JournalContentSearchPK journalContentSearchPK)
+	public JournalContentSearch fetchByPrimaryKey(long contentSearchId)
 		throws SystemException {
 		Session session = null;
 
@@ -182,7 +178,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			session = openSession();
 
 			return (JournalContentSearch)session.get(JournalContentSearchImpl.class,
-				journalContentSearchPK);
+				new Long(contentSearchId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -192,7 +188,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(long groupId) throws SystemException {
+	public List findByG_P(long groupId, boolean privateLayout)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -202,6 +199,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -209,6 +208,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
 
 			return q.list();
 		}
@@ -220,13 +220,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+	public List findByG_P(long groupId, boolean privateLayout, int begin,
+		int end) throws SystemException {
+		return findByG_P(groupId, privateLayout, begin, end, null);
 	}
 
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List findByG_P(long groupId, boolean privateLayout, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -236,6 +236,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -248,6 +250,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -259,10 +262,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByGroupId_First(long groupId,
-		OrderByComparator obc)
+	public JournalContentSearch findByG_P_First(long groupId,
+		boolean privateLayout, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
+		List list = findByG_P(groupId, privateLayout, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -270,6 +273,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
 			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchContentSearchException(msg.toString());
 		}
@@ -278,11 +284,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByGroupId_Last(long groupId,
-		OrderByComparator obc)
+	public JournalContentSearch findByG_P_Last(long groupId,
+		boolean privateLayout, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		int count = countByGroupId(groupId);
-		List list = findByGroupId(groupId, count - 1, count, obc);
+		int count = countByG_P(groupId, privateLayout);
+		List list = findByG_P(groupId, privateLayout, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -290,6 +296,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			msg.append(StringPool.OPEN_CURLY_BRACE);
 			msg.append("groupId=");
 			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 			throw new NoSuchContentSearchException(msg.toString());
 		}
@@ -298,12 +307,11 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch[] findByGroupId_PrevAndNext(
-		JournalContentSearchPK journalContentSearchPK, long groupId,
-		OrderByComparator obc)
+	public JournalContentSearch[] findByG_P_PrevAndNext(long contentSearchId,
+		long groupId, boolean privateLayout, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
-		int count = countByGroupId(groupId);
+		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
+		int count = countByG_P(groupId, privateLayout);
 		Session session = null;
 
 		try {
@@ -313,6 +321,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
 			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -325,660 +335,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearchImpl[3];
-			array[0] = (JournalContentSearch)objArray[0];
-			array[1] = (JournalContentSearch)objArray[1];
-			array[2] = (JournalContentSearch)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByOwnerId(String ownerId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByOwnerId(String ownerId, int begin, int end)
-		throws SystemException {
-		return findByOwnerId(ownerId, begin, end, null);
-	}
-
-	public List findByOwnerId(String ownerId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public JournalContentSearch findByOwnerId_First(String ownerId,
-		OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		List list = findByOwnerId(ownerId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalContentSearch exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchContentSearchException(msg.toString());
-		}
-		else {
-			return (JournalContentSearch)list.get(0);
-		}
-	}
-
-	public JournalContentSearch findByOwnerId_Last(String ownerId,
-		OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		int count = countByOwnerId(ownerId);
-		List list = findByOwnerId(ownerId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalContentSearch exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchContentSearchException(msg.toString());
-		}
-		else {
-			return (JournalContentSearch)list.get(0);
-		}
-	}
-
-	public JournalContentSearch[] findByOwnerId_PrevAndNext(
-		JournalContentSearchPK journalContentSearchPK, String ownerId,
-		OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
-		int count = countByOwnerId(ownerId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearchImpl[3];
-			array[0] = (JournalContentSearch)objArray[0];
-			array[1] = (JournalContentSearch)objArray[1];
-			array[2] = (JournalContentSearch)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByL_O(String layoutId, String ownerId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByL_O(String layoutId, String ownerId, int begin, int end)
-		throws SystemException {
-		return findByL_O(layoutId, ownerId, begin, end, null);
-	}
-
-	public List findByL_O(String layoutId, String ownerId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public JournalContentSearch findByL_O_First(String layoutId,
-		String ownerId, OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		List list = findByL_O(layoutId, ownerId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalContentSearch exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("layoutId=");
-			msg.append(layoutId);
-			msg.append(", ");
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchContentSearchException(msg.toString());
-		}
-		else {
-			return (JournalContentSearch)list.get(0);
-		}
-	}
-
-	public JournalContentSearch findByL_O_Last(String layoutId, String ownerId,
-		OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		int count = countByL_O(layoutId, ownerId);
-		List list = findByL_O(layoutId, ownerId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalContentSearch exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("layoutId=");
-			msg.append(layoutId);
-			msg.append(", ");
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchContentSearchException(msg.toString());
-		}
-		else {
-			return (JournalContentSearch)list.get(0);
-		}
-	}
-
-	public JournalContentSearch[] findByL_O_PrevAndNext(
-		JournalContentSearchPK journalContentSearchPK, String layoutId,
-		String ownerId, OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
-		int count = countByL_O(layoutId, ownerId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearchImpl[3];
-			array[0] = (JournalContentSearch)objArray[0];
-			array[1] = (JournalContentSearch)objArray[1];
-			array[2] = (JournalContentSearch)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByO_G_A(String ownerId, long groupId, String articleId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByO_G_A(String ownerId, long groupId, String articleId,
-		int begin, int end) throws SystemException {
-		return findByO_G_A(ownerId, groupId, articleId, begin, end, null);
-	}
-
-	public List findByO_G_A(String ownerId, long groupId, String articleId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public JournalContentSearch findByO_G_A_First(String ownerId, long groupId,
-		String articleId, OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		List list = findByO_G_A(ownerId, groupId, articleId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalContentSearch exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchContentSearchException(msg.toString());
-		}
-		else {
-			return (JournalContentSearch)list.get(0);
-		}
-	}
-
-	public JournalContentSearch findByO_G_A_Last(String ownerId, long groupId,
-		String articleId, OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		int count = countByO_G_A(ownerId, groupId, articleId);
-		List list = findByO_G_A(ownerId, groupId, articleId, count - 1, count,
-				obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalContentSearch exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(", ");
-			msg.append("articleId=");
-			msg.append(articleId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchContentSearchException(msg.toString());
-		}
-		else {
-			return (JournalContentSearch)list.get(0);
-		}
-	}
-
-	public JournalContentSearch[] findByO_G_A_PrevAndNext(
-		JournalContentSearchPK journalContentSearchPK, String ownerId,
-		long groupId, String articleId, OrderByComparator obc)
-		throws NoSuchContentSearchException, SystemException {
-		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
-		int count = countByO_G_A(ownerId, groupId, articleId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
+			q.setBoolean(queryPos++, privateLayout);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
@@ -1150,10 +507,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	}
 
 	public JournalContentSearch[] findByC_G_A_PrevAndNext(
-		JournalContentSearchPK journalContentSearchPK, long companyId,
-		long groupId, String articleId, OrderByComparator obc)
+		long contentSearchId, long companyId, long groupId, String articleId,
+		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
+		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 		int count = countByC_G_A(companyId, groupId, articleId);
 		Session session = null;
 
@@ -1201,6 +558,509 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			array[2] = (JournalContentSearch)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByG_P_L(long groupId, boolean privateLayout, long layoutId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("layoutId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, layoutId);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByG_P_L(long groupId, boolean privateLayout, long layoutId,
+		int begin, int end) throws SystemException {
+		return findByG_P_L(groupId, privateLayout, layoutId, begin, end, null);
+	}
+
+	public List findByG_P_L(long groupId, boolean privateLayout, long layoutId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("layoutId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, layoutId);
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalContentSearch findByG_P_L_First(long groupId,
+		boolean privateLayout, long layoutId, OrderByComparator obc)
+		throws NoSuchContentSearchException, SystemException {
+		List list = findByG_P_L(groupId, privateLayout, layoutId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(", ");
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
+		}
+		else {
+			return (JournalContentSearch)list.get(0);
+		}
+	}
+
+	public JournalContentSearch findByG_P_L_Last(long groupId,
+		boolean privateLayout, long layoutId, OrderByComparator obc)
+		throws NoSuchContentSearchException, SystemException {
+		int count = countByG_P_L(groupId, privateLayout, layoutId);
+		List list = findByG_P_L(groupId, privateLayout, layoutId, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(", ");
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
+		}
+		else {
+			return (JournalContentSearch)list.get(0);
+		}
+	}
+
+	public JournalContentSearch[] findByG_P_L_PrevAndNext(
+		long contentSearchId, long groupId, boolean privateLayout,
+		long layoutId, OrderByComparator obc)
+		throws NoSuchContentSearchException, SystemException {
+		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
+		int count = countByG_P_L(groupId, privateLayout, layoutId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("layoutId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, layoutId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalContentSearch);
+			JournalContentSearch[] array = new JournalContentSearchImpl[3];
+			array[0] = (JournalContentSearch)objArray[0];
+			array[1] = (JournalContentSearch)objArray[1];
+			array[2] = (JournalContentSearch)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByG_P_A(long groupId, boolean privateLayout,
+		String articleId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+
+			if (articleId == null) {
+				query.append("articleId IS NULL");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByG_P_A(long groupId, boolean privateLayout,
+		String articleId, int begin, int end) throws SystemException {
+		return findByG_P_A(groupId, privateLayout, articleId, begin, end, null);
+	}
+
+	public List findByG_P_A(long groupId, boolean privateLayout,
+		String articleId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+
+			if (articleId == null) {
+				query.append("articleId IS NULL");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalContentSearch findByG_P_A_First(long groupId,
+		boolean privateLayout, String articleId, OrderByComparator obc)
+		throws NoSuchContentSearchException, SystemException {
+		List list = findByG_P_A(groupId, privateLayout, articleId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
+		}
+		else {
+			return (JournalContentSearch)list.get(0);
+		}
+	}
+
+	public JournalContentSearch findByG_P_A_Last(long groupId,
+		boolean privateLayout, String articleId, OrderByComparator obc)
+		throws NoSuchContentSearchException, SystemException {
+		int count = countByG_P_A(groupId, privateLayout, articleId);
+		List list = findByG_P_A(groupId, privateLayout, articleId, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
+		}
+		else {
+			return (JournalContentSearch)list.get(0);
+		}
+	}
+
+	public JournalContentSearch[] findByG_P_A_PrevAndNext(
+		long contentSearchId, long groupId, boolean privateLayout,
+		String articleId, OrderByComparator obc)
+		throws NoSuchContentSearchException, SystemException {
+		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
+		int count = countByG_P_A(groupId, privateLayout, articleId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+
+			if (articleId == null) {
+				query.append("articleId IS NULL");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalContentSearch);
+			JournalContentSearch[] array = new JournalContentSearchImpl[3];
+			array[0] = (JournalContentSearch)objArray[0];
+			array[1] = (JournalContentSearch)objArray[1];
+			array[2] = (JournalContentSearch)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalContentSearch findByG_P_L_P_A(long groupId,
+		boolean privateLayout, long layoutId, String portletId, String articleId)
+		throws NoSuchContentSearchException, SystemException {
+		JournalContentSearch journalContentSearch = fetchByG_P_L_P_A(groupId,
+				privateLayout, layoutId, portletId, articleId);
+
+		if (journalContentSearch == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(", ");
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(", ");
+			msg.append("portletId=");
+			msg.append(portletId);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchContentSearchException(msg.toString());
+		}
+
+		return journalContentSearch;
+	}
+
+	public JournalContentSearch fetchByG_P_L_P_A(long groupId,
+		boolean privateLayout, long layoutId, String portletId, String articleId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("layoutId = ?");
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (articleId == null) {
+				query.append("articleId IS NULL");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, layoutId);
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			JournalContentSearch journalContentSearch = (JournalContentSearch)list.get(0);
+
+			return journalContentSearch;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -1286,37 +1146,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-			remove(journalContentSearch);
-		}
-	}
-
-	public void removeByOwnerId(String ownerId) throws SystemException {
-		Iterator itr = findByOwnerId(ownerId).iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-			remove(journalContentSearch);
-		}
-	}
-
-	public void removeByL_O(String layoutId, String ownerId)
+	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Iterator itr = findByL_O(layoutId, ownerId).iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
-			remove(journalContentSearch);
-		}
-	}
-
-	public void removeByO_G_A(String ownerId, long groupId, String articleId)
-		throws SystemException {
-		Iterator itr = findByO_G_A(ownerId, groupId, articleId).iterator();
+		Iterator itr = findByG_P(groupId, privateLayout).iterator();
 
 		while (itr.hasNext()) {
 			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
@@ -1334,6 +1166,34 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByG_P_L(long groupId, boolean privateLayout, long layoutId)
+		throws SystemException {
+		Iterator itr = findByG_P_L(groupId, privateLayout, layoutId).iterator();
+
+		while (itr.hasNext()) {
+			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			remove(journalContentSearch);
+		}
+	}
+
+	public void removeByG_P_A(long groupId, boolean privateLayout,
+		String articleId) throws SystemException {
+		Iterator itr = findByG_P_A(groupId, privateLayout, articleId).iterator();
+
+		while (itr.hasNext()) {
+			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
+			remove(journalContentSearch);
+		}
+	}
+
+	public void removeByG_P_L_P_A(long groupId, boolean privateLayout,
+		long layoutId, String portletId, String articleId)
+		throws NoSuchContentSearchException, SystemException {
+		JournalContentSearch journalContentSearch = findByG_P_L_P_A(groupId,
+				privateLayout, layoutId, portletId, articleId);
+		remove(journalContentSearch);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -1342,95 +1202,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByOwnerId(String ownerId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByL_O(String layoutId, String ownerId)
+	public int countByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		Session session = null;
 
@@ -1441,104 +1213,17 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (layoutId == null) {
-				query.append("layoutId IS NULL");
-			}
-			else {
-				query.append("layoutId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (layoutId != null) {
-				q.setString(queryPos++, layoutId);
-			}
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByO_G_A(String ownerId, long groupId, String articleId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-
-			if (ownerId == null) {
-				query.append("ownerId IS NULL");
-			}
-			else {
-				query.append("ownerId = ?");
-			}
-
-			query.append(" AND ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
-			}
-			else {
-				query.append("articleId = ?");
-			}
-
+			query.append("privateLayout = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (ownerId != null) {
-				q.setString(queryPos++, ownerId);
-			}
-
 			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
+			q.setBoolean(queryPos++, privateLayout);
 
 			Iterator itr = q.list().iterator();
 
@@ -1591,6 +1276,181 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, groupId);
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_P_L(long groupId, boolean privateLayout, long layoutId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("layoutId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, layoutId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_P_A(long groupId, boolean privateLayout,
+		String articleId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+
+			if (articleId == null) {
+				query.append("articleId IS NULL");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+
+			if (articleId != null) {
+				q.setString(queryPos++, articleId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_P_L_P_A(long groupId, boolean privateLayout,
+		long layoutId, String portletId, String articleId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("layoutId = ?");
+			query.append(" AND ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (articleId == null) {
+				query.append("articleId IS NULL");
+			}
+			else {
+				query.append("articleId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, layoutId);
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
 
 			if (articleId != null) {
 				q.setString(queryPos++, articleId);

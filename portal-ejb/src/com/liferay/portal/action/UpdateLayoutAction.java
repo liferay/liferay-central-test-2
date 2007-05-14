@@ -97,8 +97,9 @@ public class UpdateLayoutAction extends Action {
 		}
 		else if (cmd.equals("drag")) {
 			if (LayoutPermission.contains(
-					permissionChecker, layout.getLayoutId(),
-					layout.getOwnerId(), ActionKeys.UPDATE)) {
+					permissionChecker, layout.getGroupId(),
+					layout.isPrivateLayout(), layout.getLayoutId(),
+					ActionKeys.UPDATE)) {
 
 				String height = ParamUtil.getString(req, "height");
 				String width = ParamUtil.getString(req, "width");
@@ -107,7 +108,7 @@ public class UpdateLayoutAction extends Action {
 
 				PortletPreferences portletSetup =
 					PortletPreferencesFactory.getPortletSetup(
-						portletId, layout.getLayoutId(), layout.getOwnerId());
+						layout, portletId);
 
 				StringMaker sm = new StringMaker();
 
@@ -152,8 +153,8 @@ public class UpdateLayoutAction extends Action {
 
 		if (updateLayout) {
 			LayoutServiceUtil.updateLayout(
-				layout.getLayoutId(), layout.getOwnerId(),
-				layout.getTypeSettings());
+				layout.getGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId(), layout.getTypeSettings());
 
 			// See LEP-1411. Delay the delete of extraneous portlet resources
 			// only after the user has proven that he has the valid permissions.

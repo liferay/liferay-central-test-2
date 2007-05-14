@@ -54,13 +54,13 @@ public class RenderRequestFactory {
 
 		return create(
 			req, portlet, cachePortlet, portletCtx, windowState, portletMode,
-			prefs, null);
+			prefs, 0);
 	}
 
 	public static RenderRequestImpl create(
 			HttpServletRequest req, Portlet portlet, CachePortlet cachePortlet,
 			PortletContext portletCtx, WindowState windowState,
-			PortletMode portletMode, PortletPreferences prefs, String plid)
+			PortletMode portletMode, PortletPreferences prefs, long plid)
 		throws Exception {
 
 		if (CachePropsUtil.COMMONS_POOL_ENABLED) {

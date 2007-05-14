@@ -399,13 +399,13 @@ public class ShoppingPreferences {
 	protected ShoppingPreferences(long companyId, long groupId)
 		throws PortalException, SystemException {
 
-		String ownerId =
-			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD + groupId;
-		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+		long ownerId = groupId;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+		long plid = PortletKeys.PREFS_PLID_SHARED;
 		String portletId = PortletKeys.SHOPPING;
 
 		_prefs = PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, ownerId, layoutId, portletId);
+			companyId, ownerId, ownerType, plid, portletId);
 	}
 
 	private PortletPreferences _prefs;

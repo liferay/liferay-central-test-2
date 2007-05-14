@@ -147,10 +147,9 @@ public class VirtualHostFilter implements Filter, PortalInitable {
 						LayoutSetLocalServiceUtil.getLayoutSet(
 							_companyId, host);
 
-					String ownerId = layoutSet.getOwnerId();
-
 					redirect = PortalUtil.getLayoutActualURL(
-						ownerId, mainPath, friendlyURL);
+						layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+						mainPath, friendlyURL);
 				}
 			}
 			catch (NoSuchLayoutException nsle) {

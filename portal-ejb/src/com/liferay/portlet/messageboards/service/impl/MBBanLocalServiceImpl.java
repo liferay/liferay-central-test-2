@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
-	public MBBan addBan(long userId, String plid, long banUserId)
+	public MBBan addBan(long userId, long plid, long banUserId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -88,7 +88,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteBan(String plid, long banUserId)
+	public void deleteBan(long plid, long banUserId)
 		throws PortalException, SystemException {
 
 		long groupId = PortalUtil.getPortletGroupId(plid);

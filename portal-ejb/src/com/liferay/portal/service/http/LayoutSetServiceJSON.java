@@ -68,23 +68,23 @@ import org.json.JSONObject;
  *
  */
 public class LayoutSetServiceJSON {
-	public static JSONObject updateLookAndFeel(java.lang.String ownerId,
-		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String css, boolean wapTheme)
+	public static JSONObject updateLookAndFeel(long groupId,
+		boolean privateLayout, java.lang.String themeId,
+		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(ownerId,
-				themeId, colorSchemeId, css, wapTheme);
+		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(groupId,
+				privateLayout, themeId, colorSchemeId, css, wapTheme);
 
 		return LayoutSetJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateVirtualHost(java.lang.String ownerId,
-		java.lang.String virtualHost)
+	public static JSONObject updateVirtualHost(long groupId,
+		boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateVirtualHost(ownerId,
-				virtualHost);
+		com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateVirtualHost(groupId,
+				privateLayout, virtualHost);
 
 		return LayoutSetJSONSerializer.toJSONObject(returnValue);
 	}

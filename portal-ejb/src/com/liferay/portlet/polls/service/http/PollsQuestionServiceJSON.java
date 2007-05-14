@@ -68,12 +68,11 @@ import org.json.JSONObject;
  *
  */
 public class PollsQuestionServiceJSON {
-	public static JSONObject addQuestion(java.lang.String plid,
-		java.lang.String title, java.lang.String description,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List choices, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addQuestion(long plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
@@ -85,11 +84,11 @@ public class PollsQuestionServiceJSON {
 		return PollsQuestionJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addQuestion(java.lang.String plid,
-		java.lang.String title, java.lang.String description,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List choices, java.lang.String[] communityPermissions,
+	public static JSONObject addQuestion(long plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

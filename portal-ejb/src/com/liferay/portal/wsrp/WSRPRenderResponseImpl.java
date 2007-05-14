@@ -47,7 +47,7 @@ public class WSRPRenderResponseImpl extends RenderResponseImpl {
 
 	public WSRPRenderResponseImpl(GetMarkup getMarkup, Provider wsrpProvider,
 			RenderRequestImpl req, HttpServletResponse res, String portletName,
-			long companyId, String plid) {
+			long companyId, long plid) {
 		init(req, res, portletName, companyId, plid);
 		_init(getMarkup, wsrpProvider);
 	}

@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class MBBanServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBBanSoap addBan(
-		java.lang.String plid, long banUserId) throws RemoteException {
+		long plid, long banUserId) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(plid,
 					banUserId);
@@ -92,7 +92,7 @@ public class MBBanServiceSoap {
 		}
 	}
 
-	public static void deleteBan(java.lang.String plid, long banUserId)
+	public static void deleteBan(long plid, long banUserId)
 		throws RemoteException {
 		try {
 			MBBanServiceUtil.deleteBan(plid, banUserId);

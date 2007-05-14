@@ -26,7 +26,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.Action;
@@ -92,7 +91,7 @@ public class RandomLayoutAction extends Action {
 				themeDisplay.getCompanyId(), GroupImpl.GUEST);
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				LayoutImpl.PUBLIC + generalGuestGroup.getGroupId());
+				generalGuestGroup.getGroupId(), false);
 
 			if (layouts.size() > 0) {
 				Layout randomLayout = (Layout)layouts.get(

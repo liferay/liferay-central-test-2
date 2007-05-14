@@ -49,7 +49,8 @@ public class PortletPreferencesSoap implements Serializable {
 		PortletPreferencesSoap soapModel = new PortletPreferencesSoap();
 		soapModel.setPortletPreferencesId(model.getPortletPreferencesId());
 		soapModel.setOwnerId(model.getOwnerId());
-		soapModel.setLayoutId(model.getLayoutId());
+		soapModel.setOwnerType(model.getOwnerType());
+		soapModel.setPlid(model.getPlid());
 		soapModel.setPortletId(model.getPortletId());
 		soapModel.setPreferences(model.getPreferences());
 
@@ -86,20 +87,28 @@ public class PortletPreferencesSoap implements Serializable {
 		_portletPreferencesId = portletPreferencesId;
 	}
 
-	public String getOwnerId() {
+	public long getOwnerId() {
 		return _ownerId;
 	}
 
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(long ownerId) {
 		_ownerId = ownerId;
 	}
 
-	public String getLayoutId() {
-		return _layoutId;
+	public int getOwnerType() {
+		return _ownerType;
 	}
 
-	public void setLayoutId(String layoutId) {
-		_layoutId = layoutId;
+	public void setOwnerType(int ownerType) {
+		_ownerType = ownerType;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
 	}
 
 	public String getPortletId() {
@@ -119,8 +128,9 @@ public class PortletPreferencesSoap implements Serializable {
 	}
 
 	private long _portletPreferencesId;
-	private String _ownerId;
-	private String _layoutId;
+	private long _ownerId;
+	private int _ownerType;
+	private long _plid;
 	private String _portletId;
 	private String _preferences;
 }

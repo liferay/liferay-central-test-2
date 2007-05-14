@@ -138,7 +138,7 @@ portletURL.setParameter("folderId", folderId);
 				resultRows.add(row);
 			}
 
-			boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+			boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER);
 			boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
 			%>
 

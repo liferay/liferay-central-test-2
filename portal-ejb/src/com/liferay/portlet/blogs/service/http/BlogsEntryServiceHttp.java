@@ -73,7 +73,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
  */
 public class BlogsEntryServiceHttp {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		HttpPrincipal httpPrincipal, java.lang.String plid, long categoryId,
+		HttpPrincipal httpPrincipal, long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean addCommunityPermissions,
@@ -81,12 +81,7 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = new LongWrapper(categoryId);
 			Object paramObj2 = title;
 
@@ -146,7 +141,7 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		HttpPrincipal httpPrincipal, java.lang.String plid, long categoryId,
+		HttpPrincipal httpPrincipal, long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, java.lang.String[] tagsEntries,
@@ -155,12 +150,7 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = new LongWrapper(categoryId);
 			Object paramObj2 = title;
 

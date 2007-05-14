@@ -47,12 +47,12 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-p
 				function(newTextObj, oldText) {
 					var newText = newTextObj.innerHTML;
 					if (oldText != newText) {
-						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
-						"?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" +
-						"&layoutId=<%= layout.getLayoutId() %>" +
-						"&ownerId=<%= layout.getOwnerId() %>" +
-						"&portletId=<%= portletDisplay.getId() %>" +
-						"&title=" + encodeURIComponent(newText);
+						var url =
+							"<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
+							"?p_l_id=<%= layout.getPlid() %>" +
+							"&doAsUserId=<%= themeDisplay.getDoAsUserId() %>" +
+							"&portletId=<%= portletDisplay.getId() %>" +
+							"&title=" + encodeURIComponent(newText);
 
 						AjaxUtil.request(url);
 					}

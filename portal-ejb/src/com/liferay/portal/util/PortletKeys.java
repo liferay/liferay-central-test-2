@@ -94,13 +94,17 @@ public class PortletKeys {
 
 	public static final String PORTLET_CONFIGURATION = "86";
 
-	public static final String PREFS_LAYOUT_ID_SHARED = "SHARED";
+	public static final long PREFS_OWNER_ID_DEFAULT = 0;
 
-	public static final String PREFS_OWNER_ID_COMPANY = "COMPANY";
+	public static final int PREFS_OWNER_TYPE_COMPANY = 1;
 
-	public static final String PREFS_OWNER_ID_GROUP = "GROUP";
+	public static final int PREFS_OWNER_TYPE_GROUP = 2;
 
-	public static final String PREFS_OWNER_ID_USER = "USER";
+	public static final int PREFS_OWNER_TYPE_LAYOUT = 3;
+
+	public static final int PREFS_OWNER_TYPE_USER = 4;
+
+	public static final long PREFS_PLID_SHARED = 0;
 
 	public static final String SEARCH = "3";
 

@@ -30,7 +30,6 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -59,9 +58,9 @@ public class CommonPermission {
 		throws PortalException, SystemException {
 
 		if (className.equals(Account.class.getName())) {
-			Account account = AccountLocalServiceUtil.getAccount(classPK);
+			/*Account account = AccountLocalServiceUtil.getAccount(classPK);
 
-			/*if (account.isDefaultAccount()) {
+			if (account.isDefaultAccount()) {
 				AccountPermission.check(permissionChecker, classPK, actionId);
 			}
 			else {

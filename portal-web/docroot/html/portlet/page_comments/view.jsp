@@ -33,7 +33,7 @@
 		formName="fm"
 		formAction="<%= discussionURL %>"
 		className="<%= Layout.class.getName() %>"
-		classPK="<%= layout.getPrimaryKey().toString() %>"
+		classPK="<%= String.valueOf(layout.getPlid()) %>"
 		userId="<%= user.getUserId() %>"
 		subject="<%= layout.getName(locale) %>"
 		redirect="<%= currentURL %>"

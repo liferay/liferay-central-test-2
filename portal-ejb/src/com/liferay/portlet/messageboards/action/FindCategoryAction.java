@@ -54,7 +54,7 @@ public class FindCategoryAction extends Action {
 		throws Exception {
 
 		try {
-			String plid = ParamUtil.getString(req, "p_l_id");
+			long plid = ParamUtil.getLong(req, "p_l_id");
 			long categoryId = ParamUtil.getLong(req, "categoryId");
 
 			PortletURL portletURL = new PortletURLImpl(

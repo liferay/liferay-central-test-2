@@ -68,7 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class MBBanServiceJSON {
-	public static JSONObject addBan(java.lang.String plid, long banUserId)
+	public static JSONObject addBan(long plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBBan returnValue = MBBanServiceUtil.addBan(plid,
@@ -77,7 +77,7 @@ public class MBBanServiceJSON {
 		return MBBanJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteBan(java.lang.String plid, long banUserId)
+	public static void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		MBBanServiceUtil.deleteBan(plid, banUserId);

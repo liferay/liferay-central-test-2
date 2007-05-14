@@ -46,9 +46,6 @@
 			getLayoutId : function() {
 				return "<%= layout.getLayoutId() %>";
 			},
-			getOwnerId : function() {
-				return "<%= layout.getOwnerId() %>";
-			},
 			isPrivateLayout : function() {
 				return "<%= layout.isPrivateLayout() %>";
 			},
@@ -60,6 +57,9 @@
 		getLanguageId : function() {
 			return "<%= LanguageUtil.getLanguageId(request) %>";
 		},
+		isFreeformLayout : function() {
+			return <%= themeDisplay.isFreeformLayout() %>;
+		},
 		getPathMain : function() {
 			return "<%= themeDisplay.getPathMain() %>";
 		},
@@ -69,14 +69,8 @@
 		getPathThemeRoot : function() {
 			return "<%= themeDisplay.getPathThemeRoot() %>";
 		},
-		getPlid: function() {
-			return "<%= themeDisplay.getPlid() %>";
-		},
 		getURLHome : function() {
 			return "<%= themeDisplay.getURLHome() %>";
-		},
-		isFreeformLayout : function() {
-			return <%= themeDisplay.isFreeformLayout() %>;
 		}
 	};
 

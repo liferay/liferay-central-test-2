@@ -32,7 +32,7 @@
 	<td>
 
 		<%
-		String linkToPlid = selLayout.getTypeSettingsProperties().getProperty("linkToPlid", "");
+		long linkToPlid = GetterUtil.getLong(selLayout.getTypeSettingsProperties().getProperty("linkToPlid", StringPool.BLANK));
 		%>
 
 		<select name="TypeSettingsProperties(linkToPlid)">
@@ -49,7 +49,7 @@
 
 				String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-				String objId = nodeValues[3];
+				long objId = GetterUtil.getLong(nodeValues[3]);
 				String name = nodeValues[4];
 
 				int depth = 0;
@@ -65,7 +65,7 @@
 				Layout copiableLayout = null;
 
 				try {
-					copiableLayout = LayoutLocalServiceUtil.getLayout(LayoutImpl.getLayoutId(objId), LayoutImpl.getOwnerId(objId));
+					copiableLayout = LayoutLocalServiceUtil.getLayout(objId);
 				}
 				catch (Exception e) {
 				}
@@ -73,7 +73,7 @@
 				if (copiableLayout != null) {
 			%>
 
-					<option <%= linkToPlid.equals(copiableLayout.getPlid()) ? "selected" : "" %> value="<%= copiableLayout.getPlid() %>"><%= name %></option>
+					<option <%= (linkToPlid == copiableLayout.getPlid()) ? "selected" : "" %> value="<%= copiableLayout.getPlid() %>"><%= name %></option>
 
 			<%
 				}

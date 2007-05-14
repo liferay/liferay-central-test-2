@@ -75,7 +75,7 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		boolean autoArticleId, long plid, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -97,12 +97,7 @@ public class JournalArticleServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoArticleId);
-			Object paramObj2 = plid;
-
-			if (plid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(plid);
 			Object paramObj3 = title;
 
 			if (title == null) {
@@ -221,7 +216,7 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		boolean autoArticleId, long plid, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -244,12 +239,7 @@ public class JournalArticleServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoArticleId);
-			Object paramObj2 = plid;
-
-			if (plid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(plid);
 			Object paramObj3 = title;
 
 			if (title == null) {
@@ -378,7 +368,7 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		double version, java.lang.String plid, java.lang.String articleURL,
+		double version, long plid, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -391,12 +381,7 @@ public class JournalArticleServiceHttp {
 			}
 
 			Object paramObj2 = new DoubleWrapper(version);
-			Object paramObj3 = plid;
-
-			if (plid == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new LongWrapper(plid);
 			Object paramObj4 = articleURL;
 
 			if (articleURL == null) {

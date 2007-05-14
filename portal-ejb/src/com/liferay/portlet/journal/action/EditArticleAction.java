@@ -436,8 +436,9 @@ public class EditArticleAction extends PortletAction {
 		Layout layout = themeDisplay.getLayout();
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
-			portletResource, layout.getLayoutId(), layout.getOwnerId(),
-			layout.getCompanyId(), layout.getGroupId(), articleId);
+			layout.getCompanyId(), layout.getGroupId(),
+			layout.isPrivateLayout(), layout.getLayoutId(), portletResource,
+			articleId);
 	}
 
 }

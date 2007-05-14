@@ -142,11 +142,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Layout sets
 
-		LayoutSetLocalServiceUtil.addLayoutSet(
-			LayoutImpl.PRIVATE + groupId, group.getCompanyId());
+		LayoutSetLocalServiceUtil.addLayoutSet(groupId, true);
 
-		LayoutSetLocalServiceUtil.addLayoutSet(
-			LayoutImpl.PUBLIC + groupId, group.getCompanyId());
+		LayoutSetLocalServiceUtil.addLayoutSet(groupId, false);
 
 		if ((classNameId <= 0) && (classPK <= 0) && !user.isDefaultUser()) {
 
@@ -213,7 +211,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			if (group.getName().equals(GroupImpl.GUEST)) {
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					LayoutImpl.PUBLIC + group.getGroupId());
+					group.getGroupId(), false);
 
 				if (layoutSet.getPageCount() == 0) {
 					addDefaultLayouts(group);
@@ -234,15 +232,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Layout sets
 
 		try {
-			LayoutSetLocalServiceUtil.deleteLayoutSet(
-				LayoutImpl.PRIVATE + groupId);
+			LayoutSetLocalServiceUtil.deleteLayoutSet(groupId, true);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		try {
-			LayoutSetLocalServiceUtil.deleteLayoutSet(
-				LayoutImpl.PUBLIC + groupId);
+			LayoutSetLocalServiceUtil.deleteLayoutSet(groupId, false);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 		}
@@ -523,7 +519,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
-			group.getGroupId(), defaultUserId, false,
+			defaultUserId, group.getGroupId(), false,
 			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
 			LayoutImpl.TYPE_PORTLET, false, friendlyURL);
 
@@ -545,7 +541,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		LayoutLocalServiceUtil.updateLayout(
-			layout.getLayoutId(), layout.getOwnerId(),
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 	}
 

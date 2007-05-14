@@ -57,7 +57,7 @@
 
 		ContentHits contentHits = new ContentHits();
 
-		contentHits.recordHits(hits, layout.getOwnerId());
+		contentHits.recordHits(hits, layout.getGroupId(), layout.isPrivateLayout());
 
 		hits = contentHits;
 

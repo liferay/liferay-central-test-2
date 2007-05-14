@@ -39,7 +39,7 @@ if (PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
 	tabs1Names += ",licenses";
 }
 
-if (SCFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.ADD_FRAMEWORK_VERSION)) {
+if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
 	tabs1Names += ",framework-versions";
 }
 %>

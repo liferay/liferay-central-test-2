@@ -50,9 +50,9 @@ package com.liferay.portal.service;
  */
 public class LayoutServiceUtil {
 	public static com.liferay.portal.model.Layout addLayout(long groupId,
-		boolean privateLayout, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title, java.lang.String type,
-		boolean hidden, java.lang.String friendlyURL)
+		boolean privateLayout, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -61,21 +61,22 @@ public class LayoutServiceUtil {
 			name, title, type, hidden, friendlyURL);
 	}
 
-	public static void deleteLayout(java.lang.String layoutId,
-		java.lang.String ownerId)
+	public static void deleteLayout(long groupId, boolean privateLayout,
+		long layoutId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
-		layoutService.deleteLayout(layoutId, ownerId);
+		layoutService.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
-	public static java.lang.String getLayoutName(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String languageId)
+	public static java.lang.String getLayoutName(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.getLayoutName(layoutId, ownerId, languageId);
+		return layoutService.getLayoutName(groupId, privateLayout, layoutId,
+			languageId);
 	}
 
 	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
@@ -88,108 +89,110 @@ public class LayoutServiceUtil {
 			prefsKey, prefsValue);
 	}
 
-	public static byte[] exportLayouts(java.lang.String ownerId,
+	public static byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.exportLayouts(ownerId, parameterMap);
+		return layoutService.exportLayouts(groupId, privateLayout, parameterMap);
 	}
 
-	public static void importLayouts(java.lang.String ownerId,
+	public static void importLayouts(long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
-		layoutService.importLayouts(ownerId, parameterMap, file);
+		layoutService.importLayouts(groupId, privateLayout, parameterMap, file);
 	}
 
-	public static void setLayouts(java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
+	public static void setLayouts(long groupId, boolean privateLayout,
+		long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
-		layoutService.setLayouts(ownerId, parentLayoutId, layoutIds);
+		layoutService.setLayouts(groupId, privateLayout, parentLayoutId,
+			layoutIds);
 	}
 
-	public static com.liferay.portal.model.Layout updateLayout(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		LayoutService layoutService = LayoutServiceFactory.getService();
-
-		return layoutService.updateLayout(layoutId, ownerId, parentLayoutId,
-			name, title, languageId, type, hidden, friendlyURL);
-	}
-
-	public static com.liferay.portal.model.Layout updateLayout(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
-		java.lang.Boolean iconImage, byte[] iconBytes)
+	public static com.liferay.portal.model.Layout updateLayout(long groupId,
+		boolean privateLayout, long layoutId, long parentLayoutId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String languageId, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.updateLayout(layoutId, ownerId, parentLayoutId,
-			name, title, languageId, type, hidden, friendlyURL, iconImage,
-			iconBytes);
+		return layoutService.updateLayout(groupId, privateLayout, layoutId,
+			parentLayoutId, name, title, languageId, type, hidden, friendlyURL);
 	}
 
-	public static com.liferay.portal.model.Layout updateLayout(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String typeSettings)
+	public static com.liferay.portal.model.Layout updateLayout(long groupId,
+		boolean privateLayout, long layoutId, long parentLayoutId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String languageId, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL, java.lang.Boolean iconImage,
+		byte[] iconBytes)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.updateLayout(layoutId, ownerId, typeSettings);
+		return layoutService.updateLayout(groupId, privateLayout, layoutId,
+			parentLayoutId, name, title, languageId, type, hidden, friendlyURL,
+			iconImage, iconBytes);
+	}
+
+	public static com.liferay.portal.model.Layout updateLayout(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String typeSettings)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updateLayout(groupId, privateLayout, layoutId,
+			typeSettings);
 	}
 
 	public static com.liferay.portal.model.Layout updateLookAndFeel(
-		java.lang.String layoutId, java.lang.String ownerId,
+		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
 		java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.updateLookAndFeel(layoutId, ownerId, themeId,
-			colorSchemeId, css, wapTheme);
+		return layoutService.updateLookAndFeel(groupId, privateLayout,
+			layoutId, themeId, colorSchemeId, css, wapTheme);
 	}
 
-	public static com.liferay.portal.model.Layout updateName(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String name, java.lang.String languageId)
+	public static com.liferay.portal.model.Layout updateName(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String name,
+		java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.updateName(layoutId, ownerId, name, languageId);
+		return layoutService.updateName(groupId, privateLayout, layoutId, name,
+			languageId);
 	}
 
 	public static com.liferay.portal.model.Layout updateParentLayoutId(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String parentLayoutId)
+		long groupId, boolean privateLayout, long layoutId, long parentLayoutId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.updateParentLayoutId(layoutId, ownerId,
-			parentLayoutId);
+		return layoutService.updateParentLayoutId(groupId, privateLayout,
+			layoutId, parentLayoutId);
 	}
 
-	public static com.liferay.portal.model.Layout updatePriority(
-		java.lang.String layoutId, java.lang.String ownerId, int priority)
+	public static com.liferay.portal.model.Layout updatePriority(long groupId,
+		boolean privateLayout, long layoutId, int priority)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.updatePriority(layoutId, ownerId, priority);
+		return layoutService.updatePriority(groupId, privateLayout, layoutId,
+			priority);
 	}
 }

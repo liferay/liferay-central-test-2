@@ -58,7 +58,7 @@ public interface MBBanLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
-		java.lang.String plid, long banUserId)
+		long plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -66,7 +66,7 @@ public interface MBBanLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteBan(java.lang.String plid, long banUserId)
+	public void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

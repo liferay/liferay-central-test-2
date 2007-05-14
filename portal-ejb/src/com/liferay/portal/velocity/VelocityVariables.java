@@ -136,7 +136,7 @@ public class VelocityVariables {
 			vc.put("realUser", themeDisplay.getRealUser());
 			vc.put("layout", layout);
 			vc.put("layouts", layouts);
-			vc.put("plid", themeDisplay.getPlid());
+			vc.put("plid", String.valueOf(themeDisplay.getPlid()));
 			vc.put("layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
 			vc.put(
 				"portletGroupId", new Long(themeDisplay.getPortletGroupId()));

@@ -52,8 +52,8 @@ public class LayoutSetJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSet model) {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("layoutSetId", model.getLayoutSetId());
-		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("privateLayout", model.getPrivateLayout());
 		jsonObj.put("logo", model.getLogo());

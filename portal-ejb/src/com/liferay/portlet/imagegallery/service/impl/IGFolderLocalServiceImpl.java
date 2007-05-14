@@ -54,7 +54,7 @@ import java.util.List;
 public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder addFolder(
-			long userId, String plid, long parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -66,7 +66,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public IGFolder addFolder(
-			long userId, String plid, long parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -77,7 +77,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public IGFolder addFolder(
-			long userId, String plid, long parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)

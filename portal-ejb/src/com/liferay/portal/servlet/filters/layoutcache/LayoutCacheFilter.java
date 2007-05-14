@@ -216,8 +216,8 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		return sm.toString().trim().toUpperCase();
 	}
 
-	protected String getPlid(
-		String pathInfo, String servletPath, String defaultPlid) {
+	protected long getPlid(
+		String pathInfo, String servletPath, long defaultPlid) {
 
 		if (_pattern == _PATTERN_LAYOUT) {
 			return defaultPlid;
@@ -226,7 +226,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		if (Validator.isNull(pathInfo) ||
 			!pathInfo.startsWith(StringPool.SLASH)) {
 
-			return null;
+			return 0;
 		}
 
 		// Group friendly URL
@@ -245,26 +245,29 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		}
 
 		if (Validator.isNull(friendlyURL)) {
-			return null;
+			return 0;
 		}
 
-		String ownerId = null;
+		long groupId = 0;
+		boolean privateLayout = false;
 
 		try {
 			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
 				_companyId, friendlyURL);
+
+			groupId = group.getGroupId();
 
 			if (servletPath.startsWith(
 					_LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING) ||
 				servletPath.startsWith(
 					_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING)) {
 
-				ownerId = LayoutImpl.PRIVATE + group.getGroupId();
+				privateLayout = true;
 			}
 			else if (servletPath.startsWith(
 						_LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
 
-				ownerId = LayoutImpl.PUBLIC + group.getGroupId();
+				privateLayout = false;
 			}
 		}
 		catch (NoSuchLayoutException nsle) {
@@ -273,7 +276,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		catch (Exception e) {
 			_log.error(e);
 
-			return null;
+			return 0;
 		}
 
 		// Layout friendly URL
@@ -285,26 +288,26 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		}
 
 		if (Validator.isNull(friendlyURL)) {
-			return null;
+			return 0;
 		}
 
 		// If there is no layout path take the first from the group or user
 
 		try {
 			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-				ownerId, friendlyURL);
+				groupId, privateLayout, friendlyURL);
 
 			return layout.getPlid();
 		}
 		catch (NoSuchLayoutException nsle) {
 			_log.warn(nsle);
 
-			return null;
+			return 0;
 		}
 		catch (Exception e) {
 			_log.error(e);
 
-			return null;
+			return 0;
 		}
 	}
 
@@ -323,18 +326,15 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		}
 
 		try {
-			String plid = getPlid(
+			long plid = getPlid(
 				req.getPathInfo(), req.getServletPath(),
-				ParamUtil.getString(req, "p_l_id"));
+				ParamUtil.getLong(req, "p_l_id"));
 
-			if (plid == null) {
+			if (plid <= 0) {
 				return false;
 			}
 
-			String layoutId = LayoutImpl.getLayoutId(plid);
-			String ownerId = LayoutImpl.getOwnerId(plid);
-
-			Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				return false;

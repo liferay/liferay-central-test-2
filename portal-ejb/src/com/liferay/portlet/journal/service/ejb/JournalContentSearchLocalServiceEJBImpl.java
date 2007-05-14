@@ -80,17 +80,19 @@ public class JournalContentSearchLocalServiceEJBImpl
 			groupId, articleId);
 	}
 
-	public void deleteLayoutContentSearches(java.lang.String layoutId,
-		java.lang.String ownerId) throws com.liferay.portal.SystemException {
-		JournalContentSearchLocalServiceFactory.getTxImpl()
-											   .deleteLayoutContentSearches(layoutId,
-			ownerId);
-	}
-
-	public void deleteOwnerContentSearches(java.lang.String ownerId)
+	public void deleteLayoutContentSearches(long groupId,
+		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalServiceFactory.getTxImpl()
-											   .deleteOwnerContentSearches(ownerId);
+											   .deleteLayoutContentSearches(groupId,
+			privateLayout, layoutId);
+	}
+
+	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)
+		throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalServiceFactory.getTxImpl()
+											   .deleteOwnerContentSearches(groupId,
+			privateLayout);
 	}
 
 	public java.util.List getArticleContentSearches()
@@ -107,38 +109,37 @@ public class JournalContentSearchLocalServiceEJBImpl
 			groupId, articleId);
 	}
 
-	public java.util.List getLayoutIds(java.lang.String ownerId, long groupId,
+	public java.util.List getLayoutIds(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		return JournalContentSearchLocalServiceFactory.getTxImpl().getLayoutIds(ownerId,
-			groupId, articleId);
+		return JournalContentSearchLocalServiceFactory.getTxImpl().getLayoutIds(groupId,
+			privateLayout, articleId);
 	}
 
-	public int getLayoutIdsCount(java.lang.String ownerId, long groupId,
+	public int getLayoutIdsCount(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
-													  .getLayoutIdsCount(ownerId,
-			groupId, articleId);
+													  .getLayoutIdsCount(groupId,
+			privateLayout, articleId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
-		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, long companyId, long groupId,
-		java.lang.String articleId)
+		long companyId, long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
-													  .updateContentSearch(portletId,
-			layoutId, ownerId, companyId, groupId, articleId);
+													  .updateContentSearch(companyId,
+			groupId, privateLayout, layoutId, portletId, articleId);
 	}
 
-	public java.util.List updateContentSearch(java.lang.String portletId,
-		java.lang.String layoutId, java.lang.String ownerId, long companyId,
-		long groupId, java.lang.String[] articleIds)
+	public java.util.List updateContentSearch(long companyId, long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId,
+		java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
-													  .updateContentSearch(portletId,
-			layoutId, ownerId, companyId, groupId, articleIds);
+													  .updateContentSearch(companyId,
+			groupId, privateLayout, layoutId, portletId, articleIds);
 	}
 
 	public void ejbCreate() throws CreateException {

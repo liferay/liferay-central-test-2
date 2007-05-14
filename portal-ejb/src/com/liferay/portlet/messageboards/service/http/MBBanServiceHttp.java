@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -71,16 +70,11 @@ import com.liferay.portlet.messageboards.service.MBBanServiceUtil;
  */
 public class MBBanServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
-		HttpPrincipal httpPrincipal, java.lang.String plid, long banUserId)
+		HttpPrincipal httpPrincipal, long plid, long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = new LongWrapper(banUserId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
 					"addBan", new Object[] { paramObj0, paramObj1 });
@@ -109,17 +103,12 @@ public class MBBanServiceHttp {
 		}
 	}
 
-	public static void deleteBan(HttpPrincipal httpPrincipal,
-		java.lang.String plid, long banUserId)
+	public static void deleteBan(HttpPrincipal httpPrincipal, long plid,
+		long banUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = new LongWrapper(banUserId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
 					"deleteBan", new Object[] { paramObj0, paramObj1 });

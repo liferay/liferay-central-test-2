@@ -42,7 +42,7 @@ import com.liferay.util.Validator;
 public class DLFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, String folderId,
+			PermissionChecker permissionChecker, long plid, String folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -72,7 +72,7 @@ public class DLFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String folderId,
+			PermissionChecker permissionChecker, long plid, String folderId,
 			String actionId)
 		throws PortalException, SystemException {
 

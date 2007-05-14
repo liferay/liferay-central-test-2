@@ -68,7 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class DLFolderServiceJSON {
-	public static JSONObject addFolder(java.lang.String plid,
+	public static JSONObject addFolder(long plid,
 		java.lang.String parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -81,7 +81,7 @@ public class DLFolderServiceJSON {
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFolder(java.lang.String plid,
+	public static JSONObject addFolder(long plid,
 		java.lang.String parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

@@ -53,33 +53,34 @@ import javax.ejb.SessionContext;
  *
  */
 public class LayoutSetServiceEJBImpl implements LayoutSetService, SessionBean {
-	public void updateLogo(java.lang.String ownerId, boolean logo,
+	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
 		java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		LayoutSetServiceFactory.getTxImpl().updateLogo(ownerId, logo, file);
+		LayoutSetServiceFactory.getTxImpl().updateLogo(groupId, privateLayout,
+			logo, file);
 	}
 
-	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
-		java.lang.String ownerId, java.lang.String themeId,
+	public com.liferay.portal.model.LayoutSet updateLookAndFeel(long groupId,
+		boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return LayoutSetServiceFactory.getTxImpl().updateLookAndFeel(ownerId,
-			themeId, colorSchemeId, css, wapTheme);
+		return LayoutSetServiceFactory.getTxImpl().updateLookAndFeel(groupId,
+			privateLayout, themeId, colorSchemeId, css, wapTheme);
 	}
 
-	public com.liferay.portal.model.LayoutSet updateVirtualHost(
-		java.lang.String ownerId, java.lang.String virtualHost)
+	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
+		boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return LayoutSetServiceFactory.getTxImpl().updateVirtualHost(ownerId,
-			virtualHost);
+		return LayoutSetServiceFactory.getTxImpl().updateVirtualHost(groupId,
+			privateLayout, virtualHost);
 	}
 
 	public void ejbCreate() throws CreateException {

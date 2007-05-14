@@ -155,8 +155,9 @@ public class EditConfigurationAction extends PortletAction {
 		Layout layout = themeDisplay.getLayout();
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
-			portletResource, layout.getLayoutId(), layout.getOwnerId(),
-			layout.getCompanyId(), layout.getGroupId(), articleIds);
+			layout.getCompanyId(), layout.getGroupId(),
+			layout.isPrivateLayout(), layout.getLayoutId(), portletResource,
+			articleIds);
 	}
 
 }

@@ -76,7 +76,7 @@ import org.apache.lucene.search.TermQuery;
 public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 	public MBCategory addCategory(
-			long userId, String plid, long parentCategoryId, String name,
+			long userId, long plid, long parentCategoryId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -88,7 +88,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public MBCategory addCategory(
-			long userId, String plid, long parentCategoryId, String name,
+			long userId, long plid, long parentCategoryId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -99,7 +99,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public MBCategory addCategory(
-			long userId, String plid, long parentCategoryId, String name,
+			long userId, long plid, long parentCategoryId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)

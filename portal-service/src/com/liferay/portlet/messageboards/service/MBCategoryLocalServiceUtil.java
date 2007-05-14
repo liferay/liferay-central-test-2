@@ -66,9 +66,9 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, java.lang.String plid, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -79,9 +79,8 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, java.lang.String plid, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long userId, long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -93,8 +92,8 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, java.lang.String plid, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
+		long userId, long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -30,12 +31,12 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletPreferences;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -49,10 +50,10 @@ import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -322,15 +323,16 @@ public class ExportAction extends Action {
 				(JournalContentSearch)itr.next();
 
 			sm.append("insert into JournalContentSearch (");
-			sm.append("portletId, layoutId, ownerId, articleId, companyId, ");
-			sm.append("groupId");
+			sm.append("contentSearchId, companyId, groupId, privateLayout, ");
+			sm.append("layoutId, portletId, articleId");
 			sm.append(") values (");
-			addColumn(sm, contentSearch.getPortletId());
-			addColumn(sm, contentSearch.getLayoutId());
-			addColumn(sm, contentSearch.getOwnerId());
-			addColumn(sm, contentSearch.getArticleId());
+			addColumn(sm, contentSearch.getContentSearchId());
 			addColumn(sm, contentSearch.getCompanyId());
 			addColumn(sm, contentSearch.getGroupId());
+			addColumn(sm, contentSearch.isPrivateLayout());
+			addColumn(sm, contentSearch.getLayoutId());
+			addColumn(sm, contentSearch.getPortletId());
+			addColumn(sm, contentSearch.getArticleId());
 
 			removeTrailingComma(sm);
 			sm.append(");\n");
@@ -405,8 +407,7 @@ public class ExportAction extends Action {
 
 		StringMaker sm = new StringMaker();
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
-			LayoutImpl.PUBLIC + siteGroupId);
+		List layouts = LayoutLocalServiceUtil.getLayouts(siteGroupId, false);
 
 		Collections.sort(layouts, new LayoutComparator(true));
 
@@ -416,13 +417,15 @@ public class ExportAction extends Action {
 			Layout layout = (Layout)itr.next();
 
 			sm.append("insert into Layout (");
-			sm.append("layoutId, ownerId, companyId, parentLayoutId, name, ");
-			sm.append("title, type_, typeSettings, hidden_, friendlyURL, ");
-			sm.append("themeId, colorSchemeId, priority");
+			sm.append("plid, groupId, companyId, privateLayout, layoutId, ");
+			sm.append("parentLayoutId, name, title, type_, typeSettings, ");
+			sm.append("hidden_, friendlyURL, themeId, colorSchemeId, priority");
 			sm.append(") values (");
-			addColumn(sm, layout.getLayoutId());
-			addColumn(sm, layout.getOwnerId());
+			addColumn(sm, layout.getPlid());
+			addColumn(sm, layout.getGroupId());
 			addColumn(sm, layout.getCompanyId());
+			addColumn(sm, layout.isPrivateLayout());
+			addColumn(sm, layout.getLayoutId());
 			addColumn(sm, layout.getParentLayoutId());
 			addColumn(sm, layout.getName());
 			addColumn(sm, layout.getTitle());
@@ -458,8 +461,9 @@ public class ExportAction extends Action {
 					PortletPreferences portletPreferences =
 						PortletPreferencesLocalServiceUtil.
 							getPortletPreferences(
-								layout.getOwnerId(), layout.getLayoutId(),
-								portletId);
+								PortletKeys.PREFS_OWNER_ID_DEFAULT,
+								PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
+								layout.getPlid(), portletId);
 
 					String prefsXml = portletPreferences.getPreferences();
 
@@ -483,26 +487,36 @@ public class ExportAction extends Action {
 
 						// Add to the journal content search list
 
-						JournalContentSearch journalContentSearch =
-							new JournalContentSearchImpl();
+						long contentSearchId =
+							CounterLocalServiceUtil.increment();
 
-						journalContentSearch.setPortletId(portletId);
-						journalContentSearch.setLayoutId(layout.getLayoutId());
-						journalContentSearch.setOwnerId(layout.getOwnerId());
-						journalContentSearch.setArticleId(articleId);
+						JournalContentSearch journalContentSearch =
+							JournalContentSearchUtil.create(contentSearchId);
+
+						journalContentSearch.setContentSearchId(
+							contentSearchId);
 						journalContentSearch.setCompanyId(
 							layout.getCompanyId());
 						journalContentSearch.setGroupId(layout.getGroupId());
+						journalContentSearch.setPrivateLayout(
+							layout.isPrivateLayout());
+						journalContentSearch.setPortletId(portletId);
+						journalContentSearch.setLayoutId(layout.getLayoutId());
+						journalContentSearch.setPortletId(portletId);
+						journalContentSearch.setArticleId(articleId);
 
 						journalContentSearches.add(journalContentSearch);
 					}
 
 					sm.append("insert into PortletPreferences (");
-					sm.append("portletId, layoutId, ownerId, preferences");
+					sm.append("portletPreferencesId, ownerId, ownerType, ");
+					sm.append("plid, portletId, preferences");
 					sm.append(") values (");
-					addColumn(sm, portletId);
-					addColumn(sm, portletPreferences.getLayoutId());
+					addColumn(sm, portletPreferences.getPortletPreferencesId());
 					addColumn(sm, portletPreferences.getOwnerId());
+					addColumn(sm, portletPreferences.getOwnerType());
+					addColumn(sm, portletPreferences.getPlid());
+					addColumn(sm, portletId);
 					addColumn(sm, prefsXml);
 					removeTrailingComma(sm);
 					sm.append(");\n");

@@ -53,13 +53,13 @@ public interface LayoutSetModel extends BaseModel {
 
 	public void setLayoutSetId(long layoutSetId);
 
-	public long getCompanyId();
-
-	public void setCompanyId(long companyId);
-
 	public long getGroupId();
 
 	public void setGroupId(long groupId);
+
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 

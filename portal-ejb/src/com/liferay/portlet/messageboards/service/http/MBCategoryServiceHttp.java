@@ -72,19 +72,13 @@ import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
  */
 public class MBCategoryServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long plid, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = new LongWrapper(parentCategoryId);
 			Object paramObj2 = name;
 
@@ -132,19 +126,14 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long plid, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = new LongWrapper(parentCategoryId);
 			Object paramObj2 = name;
 

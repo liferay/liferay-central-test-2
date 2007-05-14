@@ -50,10 +50,10 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	breadCrumbSM.append("</a>");
 
 	Layout layoutParent = null;
-	String layoutParentId = selLayout.getParentLayoutId();
+	long layoutParentId = selLayout.getParentLayoutId();
 
-	if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(layoutParentId, selLayout.getOwnerId());
+	if (layoutParentId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
 
 		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
 
@@ -70,7 +70,7 @@ private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, 
 		return PortalUtil.getLayoutURL(selLayout, themeDisplay);
 	}
 	else {
-		portletURL.setParameter(selLayoutParam, selLayout.getPlid());
+		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));
 
 		return portletURL.toString();
 	}

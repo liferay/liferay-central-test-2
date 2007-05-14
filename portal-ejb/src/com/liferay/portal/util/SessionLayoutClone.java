@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,22 +36,26 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionLayoutClone implements LayoutClone {
 
-	public String get(HttpServletRequest req, String plid) {
+	public String get(HttpServletRequest req, long plid) {
 		HttpSession ses = req.getSession();
 
 		return (String)ses.getAttribute(_encodeKey(plid));
 	}
 
-	public void update(
-		HttpServletRequest req, String plid, String typeSettings) {
-
+	public void update(HttpServletRequest req, long plid, String typeSettings) {
 		HttpSession ses = req.getSession();
 
 		ses.setAttribute(_encodeKey(plid), typeSettings);
 	}
 
-	private String _encodeKey(String plid) {
-		return SessionLayoutClone.class.getName() + StringPool.POUND + plid;
+	private String _encodeKey(long plid) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(SessionLayoutClone.class.getName());
+		sm.append(StringPool.POUND);
+		sm.append(plid);
+
+		return sm.toString();
 	}
 
 }

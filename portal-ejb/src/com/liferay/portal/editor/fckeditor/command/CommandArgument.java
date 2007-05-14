@@ -93,7 +93,7 @@ public class CommandArgument {
 		return _themeDisplay.getUserId();
 	}
 
-	public String getPlid() {
+	public long getPlid() {
 		return _themeDisplay.getPlid();
 	}
 

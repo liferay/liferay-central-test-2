@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -53,10 +52,12 @@ import java.sql.Types;
 public class LayoutModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Layout";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "layoutId", new Integer(Types.VARCHAR) },
-			{ "ownerId", new Integer(Types.VARCHAR) },
+			{ "plid", new Integer(Types.BIGINT) },
+			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "parentLayoutId", new Integer(Types.VARCHAR) },
+			{ "privateLayout", new Integer(Types.BOOLEAN) },
+			{ "layoutId", new Integer(Types.BIGINT) },
+			{ "parentLayoutId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
@@ -73,15 +74,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.layoutId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.ownerId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTLAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.parentLayoutId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -118,46 +110,31 @@ public class LayoutModelImpl extends BaseModelImpl {
 	public LayoutModelImpl() {
 	}
 
-	public LayoutPK getPrimaryKey() {
-		return new LayoutPK(_layoutId, _ownerId);
+	public long getPrimaryKey() {
+		return _plid;
 	}
 
-	public void setPrimaryKey(LayoutPK pk) {
-		setLayoutId(pk.layoutId);
-		setOwnerId(pk.ownerId);
+	public void setPrimaryKey(long pk) {
+		setPlid(pk);
 	}
 
-	public String getLayoutId() {
-		return GetterUtil.getString(_layoutId);
+	public long getPlid() {
+		return _plid;
 	}
 
-	public void setLayoutId(String layoutId) {
-		if (((layoutId == null) && (_layoutId != null)) ||
-				((layoutId != null) && (_layoutId == null)) ||
-				((layoutId != null) && (_layoutId != null) &&
-				!layoutId.equals(_layoutId))) {
-			if (!XSS_ALLOW_LAYOUTID) {
-				layoutId = XSSUtil.strip(layoutId);
-			}
-
-			_layoutId = layoutId;
+	public void setPlid(long plid) {
+		if (plid != _plid) {
+			_plid = plid;
 		}
 	}
 
-	public String getOwnerId() {
-		return GetterUtil.getString(_ownerId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setOwnerId(String ownerId) {
-		if (((ownerId == null) && (_ownerId != null)) ||
-				((ownerId != null) && (_ownerId == null)) ||
-				((ownerId != null) && (_ownerId != null) &&
-				!ownerId.equals(_ownerId))) {
-			if (!XSS_ALLOW_OWNERID) {
-				ownerId = XSSUtil.strip(ownerId);
-			}
-
-			_ownerId = ownerId;
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
+			_groupId = groupId;
 		}
 	}
 
@@ -171,19 +148,36 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentLayoutId() {
-		return GetterUtil.getString(_parentLayoutId);
+	public boolean getPrivateLayout() {
+		return _privateLayout;
 	}
 
-	public void setParentLayoutId(String parentLayoutId) {
-		if (((parentLayoutId == null) && (_parentLayoutId != null)) ||
-				((parentLayoutId != null) && (_parentLayoutId == null)) ||
-				((parentLayoutId != null) && (_parentLayoutId != null) &&
-				!parentLayoutId.equals(_parentLayoutId))) {
-			if (!XSS_ALLOW_PARENTLAYOUTID) {
-				parentLayoutId = XSSUtil.strip(parentLayoutId);
-			}
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
 
+	public void setPrivateLayout(boolean privateLayout) {
+		if (privateLayout != _privateLayout) {
+			_privateLayout = privateLayout;
+		}
+	}
+
+	public long getLayoutId() {
+		return _layoutId;
+	}
+
+	public void setLayoutId(long layoutId) {
+		if (layoutId != _layoutId) {
+			_layoutId = layoutId;
+		}
+	}
+
+	public long getParentLayoutId() {
+		return _parentLayoutId;
+	}
+
+	public void setParentLayoutId(long parentLayoutId) {
+		if (parentLayoutId != _parentLayoutId) {
 			_parentLayoutId = parentLayoutId;
 		}
 	}
@@ -394,9 +388,11 @@ public class LayoutModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		LayoutImpl clone = new LayoutImpl();
-		clone.setLayoutId(getLayoutId());
-		clone.setOwnerId(getOwnerId());
+		clone.setPlid(getPlid());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
+		clone.setPrivateLayout(getPrivateLayout());
+		clone.setLayoutId(getLayoutId());
 		clone.setParentLayoutId(getParentLayoutId());
 		clone.setName(getName());
 		clone.setTitle(getTitle());
@@ -422,7 +418,16 @@ public class LayoutModelImpl extends BaseModelImpl {
 
 		LayoutImpl layout = (LayoutImpl)obj;
 		int value = 0;
-		value = getParentLayoutId().compareTo(layout.getParentLayoutId());
+
+		if (getParentLayoutId() < layout.getParentLayoutId()) {
+			value = -1;
+		}
+		else if (getParentLayoutId() > layout.getParentLayoutId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -459,9 +464,9 @@ public class LayoutModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		LayoutPK pk = layout.getPrimaryKey();
+		long pk = layout.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -470,13 +475,15 @@ public class LayoutModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _layoutId;
-	private String _ownerId;
+	private long _plid;
+	private long _groupId;
 	private long _companyId;
-	private String _parentLayoutId;
+	private boolean _privateLayout;
+	private long _layoutId;
+	private long _parentLayoutId;
 	private String _name;
 	private String _title;
 	private String _type;

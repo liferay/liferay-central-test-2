@@ -36,12 +36,9 @@ String content = doc.get(LuceneFields.CONTENT);
 content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
-long groupId = portletGroupId.longValue();
 String articleId = doc.get("articleId");
 
-String hitOwnerId = layout.getOwnerId();
-
-List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId, groupId, articleId);
+List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.getGroupId(), layout.isPrivateLayout(), articleId);
 %>
 
 <%= content %><br />
@@ -51,9 +48,9 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId
 
 	<%
 	for (int i = 0; i < hitLayoutIds.size(); i++) {
-		String hitLayoutId = (String)hitLayoutIds.get(i);
+		Long hitLayoutId = (Long)hitLayoutIds.get(i);
 
-		Layout hitLayout = LayoutLocalServiceUtil.getLayout(hitLayoutId, hitOwnerId);
+		Layout hitLayout = LayoutLocalServiceUtil.getLayout(layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId.longValue());
 
 		String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 	%>

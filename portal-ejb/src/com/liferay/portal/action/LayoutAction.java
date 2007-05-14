@@ -24,6 +24,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -102,11 +103,11 @@ public class LayoutAction extends Action {
 			return null;
 		}
 
-		String plid = ParamUtil.getString(req, "p_l_id");
+		long plid = ParamUtil.getLong(req, "p_l_id");
 		boolean resetLayout = ParamUtil.getBoolean(req, "p_l_reset");
 		String action = ParamUtil.getString(req, "p_p_action");
 
-		if (Validator.isNotNull(plid)) {
+		if (plid > 0) {
 			try {
 				if (resetLayout) {
 					RenderParametersPool.clear(req, plid);
@@ -192,7 +193,7 @@ public class LayoutAction extends Action {
 
 	private void _forwardLayout(HttpServletRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		String plid = LayoutImpl.DEFAULT_PLID;
+		long plid = LayoutImpl.DEFAULT_PLID;
 		String layoutFriendlyURL = null;
 
 		ThemeDisplay themeDisplay =
@@ -245,14 +246,13 @@ public class LayoutAction extends Action {
 			CachePortlet.clearResponse(ses, layout.getPrimaryKey(), portletId);
 		}
 
-		String[] portletPreferencesIds =
+		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactory.getPortletPreferencesIds(
 				req, portletId);
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, portletPreferencesIds[0], portletPreferencesIds[1],
-				portletPreferencesIds[2]);
+				portletPreferencesIds);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx = portletConfig.getPortletContext();

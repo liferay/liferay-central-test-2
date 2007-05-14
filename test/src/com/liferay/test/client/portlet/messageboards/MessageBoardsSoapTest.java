@@ -28,6 +28,7 @@ import com.liferay.client.portlet.messageboards.service.http.MBCategoryServiceSo
 import com.liferay.client.portlet.messageboards.service.http.MBCategoryServiceSoapServiceLocator;
 import com.liferay.client.portlet.messageboards.service.http.MBMessageServiceSoap;
 import com.liferay.client.portlet.messageboards.service.http.MBMessageServiceSoapServiceLocator;
+import com.liferay.test.TestConstants;
 import com.liferay.test.client.BaseSoapTest;
 
 /**
@@ -40,8 +41,8 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 
 	public void test() {
 		try {
-			String plid = "PRI.3.1";
-			String parentCategoryId = "-1";
+			long plid = TestConstants.PLID;
+			long parentCategoryId = 0;
 			String name = "Test Category";
 			String description = "This is a test category.";
 			String[] tagEntries = new String[0];
@@ -60,7 +61,7 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 				plid, parentCategoryId, name, description, communityPermissions,
 				guestPermissions);
 
-			String categoryId = category.getCategoryId();
+			long categoryId = category.getCategoryId();
 			String subject = "Test Subject";
 			String body = "This is a test body.";
 			Object[] files = new Object[0];

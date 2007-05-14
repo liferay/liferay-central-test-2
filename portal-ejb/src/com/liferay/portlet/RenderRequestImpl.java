@@ -483,7 +483,7 @@ public class RenderRequestImpl implements RenderRequest {
 	protected void init(
 		HttpServletRequest req, Portlet portlet, CachePortlet cachePortlet,
 		PortletContext portletCtx, WindowState windowState,
-		PortletMode portletMode, PortletPreferences prefs, String plid) {
+		PortletMode portletMode, PortletPreferences prefs, long plid) {
 
 		_portletName = portlet.getPortletId();
 
@@ -660,11 +660,11 @@ public class RenderRequestImpl implements RenderRequest {
 		_remoteUser = null;
 		_userPrincipal = null;
 		_locale = null;
-		_plid = null;
+		_plid = 0;
 	}
 
 	private void _putNamespaceParams(
-		HttpServletRequest req, String prefix, String plid,
+		HttpServletRequest req, String prefix, long plid,
 		Map renderParameters) {
 
 		// Adds params that are prefixed with given prefix to parameters pool.
@@ -700,6 +700,6 @@ public class RenderRequestImpl implements RenderRequest {
 	private String _remoteUser;
 	private Principal _userPrincipal;
 	private Locale _locale;
-	private String _plid;
+	private long _plid;
 
 }

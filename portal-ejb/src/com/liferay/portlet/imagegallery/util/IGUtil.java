@@ -25,7 +25,6 @@ package com.liferay.portlet.imagegallery.util;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
@@ -52,8 +51,6 @@ public class IGUtil {
 		throws Exception {
 
 		if (imageId > 0) {
-			long companyId = PortalUtil.getCompanyId(req);
-
 			IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
 			return getBreadcrumbs(

@@ -58,16 +58,17 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(0, null, null, null, new HashMap());
+		this(0, 0, 0, 0, null, new HashMap());
 	}
 
-	public PortletPreferencesImpl(long companyId, String ownerId,
-								  String layoutId, String portletId,
+	public PortletPreferencesImpl(long companyId, long ownerId, int ownerType,
+								  long plid, String portletId,
 								  Map preferences) {
 
 		_companyId = companyId;
 		_ownerId = ownerId;
-		_layoutId = layoutId;
+		_ownerType = ownerType;
+		_plid = plid;
 		_portletId = portletId;
 		_preferences = preferences;
 	}
@@ -229,7 +230,11 @@ public class PortletPreferencesImpl
 	}
 
 	public void store() throws IOException, ValidatorException {
-		if ((_ownerId == null) || (_layoutId == null) || (_portletId == null)) {
+		if (_portletId == null) {
+			throw new UnsupportedOperationException();
+		}
+
+		if ((_ownerId == 0) && (_plid == 0)) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -247,7 +252,7 @@ public class PortletPreferencesImpl
 			}
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				_ownerId, _layoutId, _portletId, this);
+				_ownerId, _ownerType, _plid, _portletId, this);
 		}
 		catch (PortalException pe) {
 			_log.error(pe);
@@ -274,19 +279,24 @@ public class PortletPreferencesImpl
 		}
 
 		return new PortletPreferencesImpl(
-			_companyId, _ownerId, _layoutId, _portletId, preferencesClone);
+			_companyId, _ownerId, _ownerType, _plid, _portletId,
+			preferencesClone);
 	}
 
 	protected long getCompanyId() {
 		return  _companyId;
 	}
 
-	protected String getOwnerId() {
+	protected long getOwnerId() {
 		return _ownerId;
 	}
 
-	protected String getLayoutId() {
-		return _layoutId;
+	protected int getOwnerType() {
+		return _ownerType;
+	}
+
+	protected long getPlid() {
+		return _plid;
 	}
 
 	protected String getPortletId() {
@@ -360,8 +370,9 @@ public class PortletPreferencesImpl
 	private static Log _log = LogFactory.getLog(PortletPreferencesImpl.class);
 
 	private long _companyId;
-	private String _ownerId;
-	private String _layoutId;
+	private long _ownerId;
+	private int _ownerType;
+	private long _plid;
 	private String _portletId;
 	private Map _preferences = null;
 	private PortletPreferences _defaultPreferences = null;

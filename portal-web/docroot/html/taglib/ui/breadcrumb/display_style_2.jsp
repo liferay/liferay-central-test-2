@@ -36,12 +36,12 @@ _buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sm);
 private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringMaker sm) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
-	String layoutParentId = selLayout.getParentLayoutId();
+	long layoutParentId = selLayout.getParentLayoutId();
 
 	StringMaker breadCrumbSM = new StringMaker();
 
 	if (selectedLayout) {
-		if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+		if (layoutParentId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
 			breadCrumbSM.append("<br />");
 			breadCrumbSM.append("<br />");
 		}
@@ -63,8 +63,8 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 
 	Layout layoutParent = null;
 
-	if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(layoutParentId, selLayout.getOwnerId());
+	if (layoutParentId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
 
 		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
 
@@ -81,7 +81,7 @@ private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, 
 		return PortalUtil.getLayoutURL(selLayout, themeDisplay);
 	}
 	else {
-		portletURL.setParameter(selLayoutParam, selLayout.getPlid());
+		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));
 
 		return portletURL.toString();
 	}

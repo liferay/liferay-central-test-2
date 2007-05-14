@@ -50,7 +50,7 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public interface SCProductEntryService {
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		java.lang.String plid, java.lang.String name, java.lang.String type,
+		long plid, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
@@ -60,7 +60,7 @@ public interface SCProductEntryService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		java.lang.String plid, java.lang.String name, java.lang.String type,
+		long plid, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,

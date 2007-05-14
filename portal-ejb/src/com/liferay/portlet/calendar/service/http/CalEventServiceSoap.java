@@ -79,13 +79,12 @@ import java.rmi.RemoteException;
  */
 public class CalEventServiceSoap {
 	public static com.liferay.portlet.calendar.model.CalEventSoap addEvent(
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		long plid, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
@@ -107,13 +106,12 @@ public class CalEventServiceSoap {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEventSoap addEvent(
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		long plid, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {

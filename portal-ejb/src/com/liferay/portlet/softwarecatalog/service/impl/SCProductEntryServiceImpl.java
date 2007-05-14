@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
@@ -44,14 +46,15 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 	implements SCProductEntryService {
 
 	public SCProductEntry addProductEntry(
-			String plid, String name, String type, String shortDescription,
+			long plid, String name, String type, String shortDescription,
 			String longDescription, String pageURL, String repoGroupId,
 			String repoArtifactId, long[] licenseIds, Map images,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		SCProductEntryPermission.check(
-			getPermissionChecker(), plid, ActionKeys.ADD_PRODUCT_ENTRY);
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
+			ActionKeys.ADD_PRODUCT_ENTRY);
 
 		return SCProductEntryLocalServiceUtil.addProductEntry(
 			getUserId(), plid, name, type, shortDescription, longDescription,
@@ -60,14 +63,15 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 	}
 
 	public SCProductEntry addProductEntry(
-			String plid, String name, String type, String shortDescription,
+			long plid, String name, String type, String shortDescription,
 			String longDescription, String pageURL, String repoGroupId,
 			String repoArtifactId, long[] licenseIds, Map images,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		SCProductEntryPermission.check(
-			getPermissionChecker(), plid, ActionKeys.ADD_PRODUCT_ENTRY);
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
+			ActionKeys.ADD_PRODUCT_ENTRY);
 
 		return SCProductEntryLocalServiceUtil.addProductEntry(
 			getUserId(), plid, name, type, shortDescription, longDescription,

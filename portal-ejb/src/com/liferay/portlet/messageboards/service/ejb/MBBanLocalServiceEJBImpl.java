@@ -66,7 +66,7 @@ public class MBBanLocalServiceEJBImpl implements MBBanLocalService, SessionBean 
 	}
 
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
-		java.lang.String plid, long banUserId)
+		long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return MBBanLocalServiceFactory.getTxImpl().addBan(userId, plid,
@@ -79,7 +79,7 @@ public class MBBanLocalServiceEJBImpl implements MBBanLocalService, SessionBean 
 		MBBanLocalServiceFactory.getTxImpl().checkBan(groupId, banUserId);
 	}
 
-	public void deleteBan(java.lang.String plid, long banUserId)
+	public void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalServiceFactory.getTxImpl().deleteBan(plid, banUserId);

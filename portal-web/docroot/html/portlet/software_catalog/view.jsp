@@ -152,7 +152,7 @@ portletURL.setParameter("tabs1", tabs1);
 			resultRows.add(row);
 		}
 
-		boolean showAddProductEntryButton = SCProductEntryPermission.contains(permissionChecker, plid, ActionKeys.ADD_PRODUCT_ENTRY);
+		boolean showAddProductEntryButton = PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
@@ -253,7 +253,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
+		<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
 			<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
 
 			<c:if test="<%= results.size() > 0 %>">

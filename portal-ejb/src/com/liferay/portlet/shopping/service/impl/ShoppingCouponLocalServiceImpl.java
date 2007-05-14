@@ -67,7 +67,7 @@ public class ShoppingCouponLocalServiceImpl
 	extends ShoppingCouponLocalServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
-			long userId, String plid, String couponId, boolean autoCouponId,
+			long userId, long plid, String couponId, boolean autoCouponId,
 			String name, String description, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
 			int startDateMinute, int endDateMonth, int endDateDay,
@@ -157,7 +157,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	public List search(
-			String couponId, String plid, long companyId, boolean active,
+			String couponId, long plid, long companyId, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
 

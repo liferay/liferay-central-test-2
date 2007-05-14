@@ -43,8 +43,7 @@ public class PortletPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String plid, java.lang.String portletId,
-		java.lang.String actionId)
+		long plid, java.lang.String portletId, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		PortletPermission.check(permissionChecker, plid, portletId, actionId);
@@ -60,8 +59,7 @@ public class PortletPermission_IW {
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String plid, java.lang.String portletId,
-		java.lang.String actionId)
+		long plid, java.lang.String portletId, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		return PortletPermission.contains(permissionChecker, plid, portletId,
@@ -70,7 +68,7 @@ public class PortletPermission_IW {
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String plid, com.liferay.portal.model.Portlet portlet,
+		long plid, com.liferay.portal.model.Portlet portlet,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -78,8 +76,7 @@ public class PortletPermission_IW {
 			actionId);
 	}
 
-	public java.lang.String getPrimaryKey(java.lang.String plid,
-		java.lang.String portletId) {
+	public java.lang.String getPrimaryKey(long plid, java.lang.String portletId) {
 		return PortletPermission.getPrimaryKey(plid, portletId);
 	}
 

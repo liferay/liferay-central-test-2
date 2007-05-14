@@ -76,7 +76,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			String[] pathArray = webDavReq.getPathArray();
 
-			String plid = getPlid(webDavReq.getGroupId());
+			long plid = getPlid(webDavReq.getGroupId());
 			String parentFolderId = getParentFolderId(webDavReq, true);
 			String name = pathArray[pathArray.length - 1];
 			String description = StringPool.BLANK;
@@ -120,7 +120,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (model instanceof DLFolder) {
 				DLFolder folder = (DLFolder)model;
 
-				String plid = getPlid(webDavReq.getGroupId());
+				long plid = getPlid(webDavReq.getGroupId());
 				String parentFolderId =
 					destinationArray[destinationArray.length - 2];
 				String name = "Copy of " + folder.getName();

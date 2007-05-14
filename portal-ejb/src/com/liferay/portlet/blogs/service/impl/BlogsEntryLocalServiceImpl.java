@@ -93,7 +93,7 @@ import org.apache.lucene.search.TermQuery;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long userId, String plid, long categoryId, String title,
+			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries, boolean addCommunityPermissions,
@@ -108,7 +108,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			long userId, String plid, long categoryId, String title,
+			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries, String[] communityPermissions,
@@ -122,7 +122,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			long userId, String plid, long categoryId, String title,
+			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			String[] tagsEntries, Boolean addCommunityPermissions,

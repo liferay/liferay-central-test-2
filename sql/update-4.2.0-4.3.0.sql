@@ -74,12 +74,24 @@ alter_column_type IGFolder groupId LONG;
 
 alter_column_type JournalArticle groupId LONG;
 
-alter_column_type JournalContentSearch groupId LONG;
+drop table JournalContentSearch;
+create table JournalContentSearch (
+	contentSearchId LONG primary key,
+	companyId LONG,
+	groupId LONG,
+	privateLayout BOOLEAN,
+	layoutId LONG,
+	portletId VARCHAR(75) null,
+	articleId VARCHAR(75) null
+);
 
 alter_column_type JournalStructure groupId LONG;
 
 alter_column_type JournalTemplate groupId LONG;
 
+alter table Layout add plid LONG;
+alter table Layout add groupId LONG;
+alter table Layout add privateLayout BOOLEAN;
 alter table Layout add iconImage BOOLEAN;
 alter table Layout add wapThemeId VARCHAR(75) null;
 alter table Layout add wapColorSchemeId VARCHAR(75) null;
@@ -210,7 +222,9 @@ alter_column_type PollsVote questionId LONG;
 
 alter_column_type Portlet id_ LONG;
 
-alter_column_type PortletPreferences portletPreferencesId LONG;
+alter table PortletPreferences add portletPreferencesId LONG;
+alter table PortletPreferences add ownerType INTEGER;
+alter table PortletPreferences add plid LONG;
 
 alter_column_type Region regionId LONG;
 

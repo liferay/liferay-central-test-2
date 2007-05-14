@@ -36,6 +36,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -53,6 +54,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -249,13 +251,10 @@ public class EditPagesAction extends PortletAction {
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
-		String prefix = null;
+		boolean privateLayout = true;
 
 		if (tabs2.equals("public")) {
-			prefix = LayoutImpl.PUBLIC;
-		}
-		else {
-			prefix = LayoutImpl.PRIVATE;
+			privateLayout = false;
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -265,12 +264,13 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		copyLayouts(
-			user.getUserId(), prefix + stagingGroup.getLiveGroupId(),
-			prefix + stagingGroup.getGroupId());
+			user.getUserId(), stagingGroup.getLiveGroupId(), privateLayout,
+			stagingGroup.getGroupId(), privateLayout);
 	}
 
 	protected void copyLayouts(
-			long creatorUserId, String sourceOwnerId, String targetOwnerId)
+			long creatorUserId, long sourceGroupId, boolean sourcePrivateLayout,
+			long targetGroupId, boolean targetPrivateLayout)
 		throws Exception{
 
 		Map parameterMap = new HashMap();
@@ -297,12 +297,13 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
 
 		byte[] data = LayoutLocalServiceUtil.exportLayouts(
-			sourceOwnerId, parameterMap);
+			sourceGroupId, sourcePrivateLayout, parameterMap);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
 		LayoutLocalServiceUtil.importLayouts(
-			creatorUserId, targetOwnerId, parameterMap, bais);
+			creatorUserId, targetGroupId, targetPrivateLayout, parameterMap,
+			bais);
 	}
 
 	protected void copyPreferences(
@@ -326,49 +327,53 @@ public class EditPagesAction extends PortletAction {
 
 			// Copy preference
 
-			String[] portletPreferencesIds =
+			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactory.getPortletPreferencesIds(
-					httpReq, layout.getPlid(), copyPortletId);
+					httpReq, layout, copyPortletId);
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, portletPreferencesIds[0], portletPreferencesIds[1],
-				portletPreferencesIds[2]);
+				portletPreferencesIds);
 
-			String[] copyPrtletPreferencesIds =
+			PortletPreferencesIds copyPortletPreferencesIds =
 				PortletPreferencesFactory.getPortletPreferencesIds(
-					httpReq, copyLayout.getPlid(), copyPortletId);
+					httpReq, copyLayout, copyPortletId);
 
 			PortletPreferences copyPrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, copyPrtletPreferencesIds[0],
-					copyPrtletPreferencesIds[1], copyPrtletPreferencesIds[2]);
+					copyPortletPreferencesIds);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				portletPreferencesIds[0], portletPreferencesIds[1],
-				portletPreferencesIds[2], copyPrefs);
+				portletPreferencesIds.getOwnerId(),
+				portletPreferencesIds.getOwnerType(),
+				portletPreferencesIds.getPlid(),
+				portletPreferencesIds.getPortletId(), copyPrefs);
 
 			// Copy portlet setup
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, layout.getOwnerId(), layout.getLayoutId(),
+				companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
 				copyPortletId);
 
 			copyPrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, copyLayout.getOwnerId(),
-					copyLayout.getLayoutId(), copyPortletId);
+					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, copyLayout.getPlid(),
+					copyPortletId);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				layout.getOwnerId(), layout.getLayoutId(), copyPortletId,
-				copyPrefs);
+				PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
+				copyPortletId, copyPrefs);
 		}
 	}
 
 	protected void deleteLayout(ActionRequest req) throws Exception {
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
 
-		LayoutServiceUtil.deleteLayout(layoutId, ownerId);
+		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
 	protected void publishToLive(ActionRequest req) throws Exception{
@@ -380,13 +385,10 @@ public class EditPagesAction extends PortletAction {
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
-		String prefix = null;
+		boolean privateLayout = true;
 
 		if (tabs2.equals("public")) {
-			prefix = LayoutImpl.PUBLIC;
-		}
-		else {
-			prefix = LayoutImpl.PRIVATE;
+			privateLayout = false;
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -396,18 +398,19 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		copyLayouts(
-			user.getUserId(), prefix + stagingGroup.getGroupId(),
-			prefix + stagingGroup.getLiveGroupId());
+			user.getUserId(), stagingGroup.getGroupId(), privateLayout,
+			stagingGroup.getLiveGroupId(), privateLayout);
 	}
 
 	protected void updateDisplayOrder(ActionRequest req) throws Exception {
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long parentLayoutId = ParamUtil.getLong(req, "parentLayoutId");
+		long[] layoutIds = StringUtil.split(
+			ParamUtil.getString(req, "layoutIds"), 0L);
 
-		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
-		String[] layoutIds = StringUtil.split(
-			ParamUtil.getString(req, "layoutIds"));
-
-		LayoutServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
+		LayoutServiceUtil.setLayouts(
+			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
 	protected void updateLayout(PageForm pageForm, ActionRequest req)
@@ -418,15 +421,10 @@ public class EditPagesAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
-		String layoutId = ParamUtil.getString(uploadReq, "layoutId");
-		String ownerId = ParamUtil.getString(uploadReq, "ownerId");
-
-		long groupId = ParamUtil.getLong(uploadReq, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			uploadReq, "privateLayout");
-
-		String parentLayoutId = ParamUtil.getString(
-			uploadReq, "parentLayoutId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
+		long parentLayoutId = ParamUtil.getLong(uploadReq, "parentLayoutId");
 		String name = ParamUtil.getString(uploadReq, "name");
 		String title = ParamUtil.getString(uploadReq, "title");
 		String languageId = ParamUtil.getString(uploadReq, "curLanguageId");
@@ -437,7 +435,7 @@ public class EditPagesAction extends PortletAction {
 		byte[] iconBytes = FileUtil.getBytes(
 			uploadReq.getFile("iconFileName"));
 
-		String copyLayoutId = ParamUtil.getString(uploadReq, "copyLayoutId");
+		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -456,34 +454,35 @@ public class EditPagesAction extends PortletAction {
 					false);
 
 				LayoutServiceUtil.updateLayout(
-					layout.getLayoutId(), layout.getOwnerId(),
-					layout.getTypeSettings());
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getLayoutId(), layout.getTypeSettings());
 			}
 		}
 		else {
 
 			// Update layout
 
-			Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, layoutId);
 
 			layout = LayoutServiceUtil.updateLayout(
-				layoutId, ownerId, layout.getParentLayoutId(), name, title,
-				languageId, type, hidden, friendlyURL, new Boolean(iconImage),
-				iconBytes);
+				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
+				name, title, languageId, type, hidden, friendlyURL,
+				new Boolean(iconImage), iconBytes);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
-				if ((Validator.isNotNull(copyLayoutId)) &&
-					(!copyLayoutId.equals(layout.getLayoutId()))) {
+				if ((copyLayoutId > 0) &&
+					(copyLayoutId != layout.getLayoutId())) {
 
 					try {
 						Layout copyLayout = LayoutLocalServiceUtil.getLayout(
-							copyLayoutId, ownerId);
+							groupId, privateLayout, copyLayoutId);
 
 						if (copyLayout.getType().equals(
 								LayoutImpl.TYPE_PORTLET)) {
 
 							LayoutServiceUtil.updateLayout(
-								layoutId, ownerId,
+								groupId, privateLayout, layoutId,
 								copyLayout.getTypeSettings());
 
 							copyPreferences(req, layout, copyLayout);
@@ -529,7 +528,8 @@ public class EditPagesAction extends PortletAction {
 						formProperties.getProperty("sitemap-changefreq"));
 
 					LayoutServiceUtil.updateLayout(
-						layoutId, ownerId, layout.getTypeSettings());
+						groupId, privateLayout, layoutId,
+						layout.getTypeSettings());
 				}
 			}
 			else {
@@ -537,7 +537,7 @@ public class EditPagesAction extends PortletAction {
 					pageForm.getTypeSettingsProperties());
 
 				LayoutServiceUtil.updateLayout(
-					layoutId, ownerId, layout.getTypeSettings());
+					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
 		}
 	}
@@ -546,8 +546,8 @@ public class EditPagesAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		String ownerId = ParamUtil.getString(req, "ownerId");
-
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		boolean logo = ParamUtil.getBoolean(req, "logo");
 
 		File file = uploadReq.getFile("logoFileName");
@@ -557,15 +557,15 @@ public class EditPagesAction extends PortletAction {
 			throw new UploadException();
 		}
 
-		LayoutSetServiceUtil.updateLogo(ownerId, logo, file);
+		LayoutSetServiceUtil.updateLogo(groupId, privateLayout, logo, file);
 	}
 
 	protected void updateLookAndFeel(ActionRequest req) throws Exception {
 		long companyId = PortalUtil.getCompanyId(req);
 
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
-
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
 		String themeId = ParamUtil.getString(req, "themeId");
 		String colorSchemeId = ParamUtil.getString(req, "colorSchemeId");
 		String css = ParamUtil.getString(req, "css");
@@ -578,19 +578,20 @@ public class EditPagesAction extends PortletAction {
 			colorSchemeId = colorScheme.getColorSchemeId();
 		}
 
-		if (Validator.isNull(layoutId)) {
+		if (layoutId <= 0) {
 
 			// Update layout set
 
 			LayoutSetServiceUtil.updateLookAndFeel(
-				ownerId, themeId, colorSchemeId, css, wapTheme);
+				groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 		}
 		else {
 
 			// Update layout
 
 			LayoutServiceUtil.updateLookAndFeel(
-				layoutId, ownerId, themeId, colorSchemeId, css, wapTheme);
+				groupId, privateLayout,	layoutId, themeId, colorSchemeId, css,
+				wapTheme);
 		}
 	}
 
@@ -614,14 +615,14 @@ public class EditPagesAction extends PortletAction {
 
 			if (group.hasPrivateLayouts()) {
 				copyLayouts(
-					user.getUserId(), LayoutImpl.PRIVATE + group.getGroupId(),
-					LayoutImpl.PRIVATE + stagingGroup.getGroupId());
+					user.getUserId(), group.getGroupId(), true,
+					stagingGroup.getGroupId(), true);
 			}
 
 			if (group.hasPublicLayouts()) {
 				copyLayouts(
-					user.getUserId(), LayoutImpl.PUBLIC + group.getGroupId(),
-					LayoutImpl.PUBLIC + stagingGroup.getGroupId());
+					user.getUserId(), group.getGroupId(), false,
+					stagingGroup.getGroupId(), false);
 			}
 		}
 	}
@@ -632,23 +633,19 @@ public class EditPagesAction extends PortletAction {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 
-		String publicOwnerId = LayoutImpl.PUBLIC + groupId;
-
 		String publicVirtualHost = ParamUtil.getString(
 			req, "publicVirtualHost");
 
 		LayoutSetServiceUtil.updateVirtualHost(
-			publicOwnerId, publicVirtualHost);
+			groupId, false, publicVirtualHost);
 
 		// Private virtual host
-
-		String privateOwnerId = LayoutImpl.PRIVATE + groupId;
 
 		String privateVirtualHost = ParamUtil.getString(
 			req, "privateVirtualHost");
 
 		LayoutSetServiceUtil.updateVirtualHost(
-			privateOwnerId, privateVirtualHost);
+			groupId, true, privateVirtualHost);
 
 		// Friendly URL
 

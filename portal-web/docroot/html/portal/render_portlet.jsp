@@ -31,7 +31,7 @@ String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
 String instanceId = portlet.getInstanceId();
 
-String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
+String portletPrimaryKey = PortletPermission.getPrimaryKey(plid.longValue(), portletId);
 
 String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
@@ -91,7 +91,7 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access = PortletPermission.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
+boolean access = PortletPermission.contains(permissionChecker, plid.longValue(), portlet, ActionKeys.VIEW);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -122,9 +122,9 @@ catch (RuntimeException re) {
 
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletId, true, true);
 
-String[] portletPreferencesIds = PortletPreferencesFactory.getPortletPreferencesIds(request, portletId);
+PortletPreferencesIds portletPreferencesIds = PortletPreferencesFactory.getPortletPreferencesIds(request, portletId);
 
-PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(company.getCompanyId(), portletPreferencesIds[0], portletPreferencesIds[1], portletPreferencesIds[2]);
+PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
 
 PortletConfig portletConfig = PortletConfigFactory.create(portlet, application);
 PortletContext portletCtx = portletConfig.getPortletContext();
@@ -167,7 +167,7 @@ else if (modePrint) {
 
 HttpServletRequest originalReq = PortalUtil.getOriginalServletRequest(request);
 
-RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, cachePortlet, portletCtx, windowState, portletMode, portletPreferences, plid);
+RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, cachePortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
 
 if (Validator.isNotNull(queryString)) {
 	DynamicServletRequest dynamicReq = (DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
@@ -183,7 +183,7 @@ if (Validator.isNotNull(queryString)) {
 
 StringServletResponse stringServletRes = new StringServletResponse(response);
 
-RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringServletRes, portletId, company.getCompanyId(), plid);
+RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringServletRes, portletId, company.getCompanyId(), plid.longValue());
 
 renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
@@ -200,13 +200,13 @@ boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
 boolean showPrintIcon = portlet.hasPortletMode(responseContentType, LiferayPortletMode.PRINT);
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION)) {
+	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
 	}
 }
 
 if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
-	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
+	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
 		showEditIcon = true;
 	}
 }

@@ -295,8 +295,6 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	private static final String _DOWNLOAD_DIR = "download";
-
 	private static Log _log = LogFactory.getLog(EditServerAction.class);
 
 }

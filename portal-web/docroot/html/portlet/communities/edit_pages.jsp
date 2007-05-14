@@ -84,38 +84,33 @@ if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
 
-String selPlid = ParamUtil.getString(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
-String layoutId = LayoutImpl.getLayoutId(selPlid);
-String ownerId = LayoutImpl.getOwnerId(selPlid);
+long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+long layoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 
 boolean privateLayout = tabs2.equals("private");
 
-if (Validator.isNull(ownerId)) {
-	if (privateLayout) {
-		ownerId = LayoutImpl.PRIVATE + groupId;
-
-		if (group != null) {
-			pagesCount = group.getPrivateLayoutsPageCount();
-		}
+if (privateLayout) {
+	if (group != null) {
+		pagesCount = group.getPrivateLayoutsPageCount();
 	}
-	else {
-		ownerId = LayoutImpl.PUBLIC + groupId;
-
-		if (group != null) {
-			pagesCount = group.getPublicLayoutsPageCount();
-		}
+}
+else {
+	if (group != null) {
+		pagesCount = group.getPublicLayoutsPageCount();
 	}
 }
 
 Layout selLayout = null;
 
 try {
-	selLayout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+	selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 }
 catch (NoSuchLayoutException nsle) {
 }
 
 if (selLayout != null) {
+	layoutId = selLayout.getLayoutId();
+
 	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
 		tabs3 = "page";
 	}
@@ -128,17 +123,17 @@ if (selLayout == null) {
 	if (tabs3.equals("page")) {
 		tabs3 = "children";
 	}
-	else if (tabs3.equals("sitemap") && ownerId.startsWith(LayoutImpl.PRIVATE)) {
+	else if (tabs3.equals("sitemap") && privateLayout) {
 		tabs3 = "children";
 	}
 }
 
-String parentLayoutId = BeanParamUtil.getString(selLayout, request,  "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+long parentLayoutId = BeanParamUtil.getLong(selLayout, request,  "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 LayoutLister layoutLister = new LayoutLister();
 
 String rootNodeName = liveGroup.isUser() ? contact.getFullName() : liveGroup.getName();
-LayoutView layoutView = layoutLister.getLayoutView(ownerId, rootNodeName, locale);
+LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
 
 List layoutList = layoutView.getList();
 
@@ -162,13 +157,14 @@ portletURL.setParameter("tabs5", tabs5);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
-PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, true);
+PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
 viewPagesURL.setWindowState(WindowState.NORMAL);
 viewPagesURL.setPortletMode(PortletMode.VIEW);
 
 viewPagesURL.setParameter("struts_action", "/my_places/view");
-viewPagesURL.setParameter("ownerId", ownerId);
+viewPagesURL.setParameter("groupId", String.valueOf(groupId));
+viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 %>
 
 <script type="text/javascript">
@@ -182,18 +178,18 @@ viewPagesURL.setParameter("ownerId", ownerId);
 	function <portlet:namespace />deletePage() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= ownerId + StringPool.PERIOD + parentLayoutId %>";
+			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutImpl.DEFAULT_PLID %>";
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
 
 	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />importPages() {
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />publishToLive() {
@@ -293,10 +289,9 @@ viewPagesURL.setParameter("ownerId", ownerId);
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
-<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
-<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
-<input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">
 <input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>">
+<input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
+<input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
 <input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>'>
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" type="hidden" value="<%= true %>">
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_SELECTED_LAYOUTS %>" type="hidden" value="">
@@ -439,7 +434,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					if (!tabs1.equals("staging")) {
 						tabs3Names += ",virtual-host";
 
-						if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
+						if (!privateLayout) {
 							tabs3Names += ",sitemap";
 						}
 					}
@@ -705,7 +700,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<liferay-security:permissionsURL
 						modelResource="<%= Layout.class.getName() %>"
 						modelResourceDescription="<%= selLayout.getName() %>"
-						resourcePrimKey="<%= selLayout.getPrimaryKey().toString() %>"
+						resourcePrimKey="<%= String.valueOf(selLayout.getPlid()) %>"
 						var="permissionURL"
 					/>
 
@@ -825,7 +820,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						selLayoutChildren = selLayout.getChildren();
 					}
 					else {
-						selLayoutChildren = LayoutLocalServiceUtil.getLayouts(ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+						selLayoutChildren = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 					}
 					%>
 
@@ -905,7 +900,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								selColorScheme = selLayout.getColorScheme();
 							}
 							else {
-								LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+								LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
 								selTheme = layoutSet.getTheme();
 								selColorScheme = layoutSet.getColorScheme();
@@ -994,7 +989,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 										cssText = selLayout.getCssText();
 									}
 									else {
-										LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+										LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
 										cssText = layoutSet.getCss();
 									}
@@ -1023,7 +1018,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 								selColorScheme = selLayout.getWapColorScheme();
 							}
 							else {
-								LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+								LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
 								selTheme = layoutSet.getWapTheme();
 								selColorScheme = layoutSet.getWapColorScheme();
@@ -1077,7 +1072,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
 					<%
-					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 					%>
 
 					<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-" + (privateLayout ? "private" : "public") + "-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
@@ -1120,7 +1115,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 					List portletsList = new ArrayList();
 					Set portletIdsSet = new HashSet();
 
-					Iterator itr1 = LayoutLocalServiceUtil.getLayouts(ownerId).iterator();
+					Iterator itr1 = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout).iterator();
 
 					while (itr1.hasNext()) {
 						Layout curLayout = (Layout)itr1.next();
@@ -1148,7 +1143,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					String tabs5Names = "export,import";
 
-					if (layout.getOwnerId().equals(ownerId)) {
+					if ((layout.getGroupId() == groupId) && (layout.isPrivateLayout() == privateLayout)) {
 						tabs5Names = "export";
 					}
 					%>
@@ -1241,7 +1236,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 							<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportPages();" />
 						</c:when>
 						<c:when test='<%= tabs5.equals("import") %>'>
-							<c:if test="<%= !layout.getOwnerId().equals(ownerId) %>">
+							<c:if test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
 								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-current-pages" />
 
 								<br /><br />
@@ -1356,9 +1351,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<td nowrap>
 
 							<%
-							String publicOwnerId = LayoutImpl.PUBLIC + LayoutImpl.getGroupId(ownerId);
-
-							LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(publicOwnerId);
+							LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
 
 							String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
 							%>
@@ -1373,9 +1366,7 @@ viewPagesURL.setParameter("ownerId", ownerId);
 						<td nowrap>
 
 							<%
-							String privateOwnerId = LayoutImpl.PRIVATE + LayoutImpl.getGroupId(ownerId);
-
-							LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(privateOwnerId);
+							LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
 
 							String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
 							%>
@@ -1422,12 +1413,12 @@ viewPagesURL.setParameter("ownerId", ownerId);
 
 					String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathRoot() + "/sitemap.xml";
 
-					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
 					String virtualHost = layoutSet.getVirtualHost();
 
 					if (!host.equals(virtualHost)) {
-						sitemapUrl += "?ownerId=" + ownerId;
+						sitemapUrl += "?groupId=" + groupId + "&privateLayout=" + privateLayout;
 					}
 					%>
 

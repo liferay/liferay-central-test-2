@@ -38,16 +38,20 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
  * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
+ * @author Brian Wing Shun Chan
  *
  */
 public class LayoutPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String layoutId,
-			String ownerId, String actionId)
+			PermissionChecker permissionChecker, long groupId,
+			boolean privateLayout, long layoutId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, layoutId, ownerId, actionId)) {
+		if (!contains(
+				permissionChecker, groupId, privateLayout, layoutId,
+				actionId)) {
+
 			throw new PrincipalException();
 		}
 	}
@@ -62,13 +66,11 @@ public class LayoutPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String layoutId,
-			String ownerId, String actionId)
+			PermissionChecker permissionChecker, long groupId,
+			boolean privateLayout, long layoutId, String actionId)
 		throws PortalException, SystemException {
 
-		if (layoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
-			long groupId = LayoutImpl.getGroupId(ownerId);
-
+		if (layoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
 			if (GroupPermission.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
@@ -79,8 +81,8 @@ public class LayoutPermission {
 			}
 		}
 		else {
-			Layout layout =
-				LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, layoutId);
 
 			return contains(permissionChecker, layout, actionId);
 		}
@@ -101,7 +103,7 @@ public class LayoutPermission {
 			ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
 				ResourceImpl.SCOPE_INDIVIDUAL,
-				layout.getPrimaryKey().toString());
+				String.valueOf(layout.getPlid()));
 		}
 		catch (NoSuchResourceException nsre) {
 			boolean addCommunityPermission = true;
@@ -113,13 +115,13 @@ public class LayoutPermission {
 
 			ResourceLocalServiceUtil.addResources(
 				layout.getCompanyId(), layout.getGroupId(), 0,
-				Layout.class.getName(), layout.getPrimaryKey().toString(),
-				false, addCommunityPermission, addGuestPermission);
+				Layout.class.getName(), layout.getPlid(), false,
+				addCommunityPermission, addGuestPermission);
 		}
 
 		return permissionChecker.hasPermission(
-			layout.getGroupId(), Layout.class.getName(),
-			layout.getPrimaryKey().toString(), actionId);
+			layout.getGroupId(), Layout.class.getName(), layout.getPlid(),
+			actionId);
 	}
 
 }

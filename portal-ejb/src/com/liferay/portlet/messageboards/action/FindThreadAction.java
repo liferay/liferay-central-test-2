@@ -56,7 +56,7 @@ public class FindThreadAction extends Action {
 		throws Exception {
 
 		try {
-			String plid = ParamUtil.getString(req, "p_l_id");
+			long plid = ParamUtil.getLong(req, "p_l_id");
 			long threadId = ParamUtil.getLong(req, "threadId");
 
 			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);

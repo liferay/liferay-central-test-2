@@ -40,7 +40,7 @@ import com.liferay.portlet.messageboards.service.MBBanService;
  */
 public class MBBanServiceImpl extends PrincipalBean implements MBBanService {
 
-	public MBBan addBan(String plid, long banUserId)
+	public MBBan addBan(long plid, long banUserId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -50,7 +50,7 @@ public class MBBanServiceImpl extends PrincipalBean implements MBBanService {
 		return MBBanLocalServiceUtil.addBan(getUserId(), plid, banUserId);
 	}
 
-	public void deleteBan(String plid, long banUserId)
+	public void deleteBan(long plid, long banUserId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(

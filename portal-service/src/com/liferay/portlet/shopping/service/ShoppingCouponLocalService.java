@@ -58,7 +58,7 @@ public interface ShoppingCouponLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long userId, java.lang.String plid, java.lang.String couponId,
+		long userId, long plid, java.lang.String couponId,
 		boolean autoCouponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
@@ -81,9 +81,9 @@ public interface ShoppingCouponLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(java.lang.String couponId,
-		java.lang.String plid, long companyId, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+	public java.util.List search(java.lang.String couponId, long plid,
+		long companyId, boolean active, java.lang.String discountType,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String couponId, long groupId,

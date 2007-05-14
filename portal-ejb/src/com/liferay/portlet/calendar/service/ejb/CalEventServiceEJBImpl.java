@@ -54,14 +54,13 @@ import javax.ejb.SessionContext;
  *
  */
 public class CalEventServiceEJBImpl implements CalEventService, SessionBean {
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long plid,
+		java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -77,14 +76,13 @@ public class CalEventServiceEJBImpl implements CalEventService, SessionBean {
 			addGuestPermissions);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(long plid,
+		java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

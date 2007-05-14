@@ -23,8 +23,6 @@
 package com.liferay.portal.util.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 
 /**
@@ -35,9 +33,9 @@ import com.liferay.portal.model.Layout;
  */
 public class LayoutComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "ownerId ASC, layoutId ASC";
+	public static String ORDER_BY_ASC = "groupId ASC, layoutId ASC";
 
-	public static String ORDER_BY_DESC = "ownerId DESC, layoutId DESC";
+	public static String ORDER_BY_DESC = "groupId DESC, layoutId DESC";
 
 	public LayoutComparator() {
 		this(false);
@@ -51,7 +49,10 @@ public class LayoutComparator extends OrderByComparator {
 		Layout layout1 = (Layout)obj1;
 		Layout layout2 = (Layout)obj2;
 
-		int value = layout1.getOwnerId().compareTo(layout2.getOwnerId());
+		Long groupId1 = new Long(layout1.getGroupId());
+		Long groupId2 = new Long(layout2.getGroupId());
+
+		int value = groupId1.compareTo(groupId2);
 
 		if (value != 0) {
 			if (_asc) {
@@ -62,8 +63,8 @@ public class LayoutComparator extends OrderByComparator {
 			}
 		}
 
-		Double layoutId1 = _getDouble(layout1.getLayoutId());
-		Double layoutId2 = _getDouble(layout2.getLayoutId());
+		Long layoutId1 = new Long(layout1.getLayoutId());
+		Long layoutId2 = new Long(layout2.getLayoutId());
 
 		value = layoutId1.compareTo(layoutId2);
 
@@ -82,31 +83,6 @@ public class LayoutComparator extends OrderByComparator {
 		else {
 			return ORDER_BY_DESC;
 		}
-	}
-
-	private Double _getDouble(String value) {
-		int pos = value.indexOf(StringPool.PERIOD);
-
-		if (pos != -1) {
-			int decPlacesCount = value.length() - 1 - pos;
-			int decPlacesTotal = 4;
-
-			if (decPlacesTotal > decPlacesCount) {
-				StringMaker zeroes = new StringMaker();
-
-				int decPlacesDiff = decPlacesTotal - decPlacesCount;
-
-				for (int i = 0; i < decPlacesDiff; i++) {
-					zeroes.append("0");
-				}
-
-				value =
-					value.substring(0, pos + 1) + zeroes.toString() +
-						value.substring(pos + 1, value.length());
-			}
-		}
-
-		return new Double(value);
 	}
 
 	private boolean _asc;

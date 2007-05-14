@@ -192,20 +192,22 @@ public class PortalUtil_IW {
 		return PortalUtil.getLayoutActualURL(layout, mainPath);
 	}
 
-	public java.lang.String getLayoutActualURL(java.lang.String ownerId,
-		java.lang.String mainPath, java.lang.String friendlyURL)
+	public java.lang.String getLayoutActualURL(long groupId,
+		boolean privateLayout, java.lang.String mainPath,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return PortalUtil.getLayoutActualURL(ownerId, mainPath, friendlyURL);
+		return PortalUtil.getLayoutActualURL(groupId, privateLayout, mainPath,
+			friendlyURL);
 	}
 
-	public java.lang.String getLayoutActualURL(java.lang.String ownerId,
-		java.lang.String mainPath, java.lang.String friendlyURL,
-		java.util.Map params)
+	public java.lang.String getLayoutActualURL(long groupId,
+		boolean privateLayout, java.lang.String mainPath,
+		java.lang.String friendlyURL, java.util.Map params)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return PortalUtil.getLayoutActualURL(ownerId, mainPath, friendlyURL,
-			params);
+		return PortalUtil.getLayoutActualURL(groupId, privateLayout, mainPath,
+			friendlyURL, params);
 	}
 
 	public java.lang.String getLayoutFriendlyURL(
@@ -262,22 +264,28 @@ public class PortalUtil_IW {
 		return PortalUtil.getPortalURL(serverName, serverPort, secure);
 	}
 
-	public java.lang.Object[] getPortletFriendlyURLMapper(
-		java.lang.String ownerId, java.lang.String url)
+	public java.lang.Object[] getPortletFriendlyURLMapper(long groupId,
+		boolean privateLayout, java.lang.String url)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return PortalUtil.getPortletFriendlyURLMapper(ownerId, url);
+		return PortalUtil.getPortletFriendlyURLMapper(groupId, privateLayout,
+			url);
 	}
 
-	public java.lang.Object[] getPortletFriendlyURLMapper(
-		java.lang.String ownerId, java.lang.String url, java.util.Map params)
+	public java.lang.Object[] getPortletFriendlyURLMapper(long groupId,
+		boolean privateLayout, java.lang.String url, java.util.Map params)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return PortalUtil.getPortletFriendlyURLMapper(ownerId, url, params);
+		return PortalUtil.getPortletFriendlyURLMapper(groupId, privateLayout,
+			url, params);
 	}
 
-	public long getPortletGroupId(java.lang.String plid) {
+	public long getPortletGroupId(long plid) {
 		return PortalUtil.getPortletGroupId(plid);
+	}
+
+	public long getPortletGroupId(com.liferay.portal.model.Layout layout) {
+		return PortalUtil.getPortletGroupId(layout);
 	}
 
 	public long getPortletGroupId(javax.servlet.http.HttpServletRequest req) {
@@ -339,12 +347,12 @@ public class PortalUtil_IW {
 		return PortalUtil.getSelectedUser(req);
 	}
 
-	public java.lang.String[] getSystemGroups() {
-		return PortalUtil.getSystemGroups();
-	}
-
 	public java.lang.String[] getSystemCommunityRoles() {
 		return PortalUtil.getSystemCommunityRoles();
+	}
+
+	public java.lang.String[] getSystemGroups() {
+		return PortalUtil.getSystemGroups();
 	}
 
 	public java.lang.String[] getSystemRoles() {

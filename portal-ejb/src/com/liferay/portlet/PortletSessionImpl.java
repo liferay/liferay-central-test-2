@@ -45,28 +45,26 @@ import javax.servlet.http.HttpSession;
  */
 public class PortletSessionImpl implements LiferayPortletSession {
 
-	public static final String getPortletScope(
-		String portletName, String layoutId) {
-
+	public static final String getPortletScope(String portletName, long plid) {
 		String portletScope =
 			_PORTLET_SCOPE_NAMESPACE + portletName + _LAYOUT_SEPARATOR +
-				layoutId;
+				plid;
 
 		return portletScope;
 	}
 
 	public static final String getPortletScopeName(
-		String portletName, String layoutId, String name) {
+		String portletName, long plid, String name) {
 
 		String portletScopeName =
-			getPortletScope(portletName, layoutId) + StringPool.QUESTION + name;
+			getPortletScope(portletName, plid) + StringPool.QUESTION + name;
 
 		return portletScopeName;
 	}
 
 	public PortletSessionImpl(HttpServletRequest req, String portletName,
 							  PortletContext ctx, String portalSessionId,
-							  String layoutId) {
+							  long plid) {
 
 		_req = req;
 		_portletName = portletName;
@@ -77,7 +75,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		_new = true;
 		_invalid = false;
 		_portalSessionId = portalSessionId;
-		_layoutId = layoutId;
+		_plid = plid;
 	}
 
 	public PortletContext getPortletContext() {
@@ -166,7 +164,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		if (scope == PortletSession.PORTLET_SCOPE) {
 			List attributeNames = new ArrayList();
 
-			String portletScope = getPortletScope(_portletName, _layoutId);
+			String portletScope = getPortletScope(_portletName, _plid);
 
 			Enumeration enu = getHttpSession().getAttributeNames();
 
@@ -280,7 +278,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	}
 
 	private String _getPortletScopeName(String name) {
-		return getPortletScopeName(_portletName, _layoutId, name);
+		return getPortletScopeName(_portletName, _plid, name);
 	}
 
  	private static final String _PORTLET_SCOPE_NAMESPACE = "javax.portlet.p.";
@@ -297,6 +295,6 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	private boolean _new;
 	private boolean _invalid;
 	private String _portalSessionId;
-	private String _layoutId;
+	private long _plid;
 
 }

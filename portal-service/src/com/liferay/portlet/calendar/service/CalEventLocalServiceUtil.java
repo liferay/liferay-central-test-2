@@ -66,7 +66,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -88,7 +88,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
@@ -111,7 +111,7 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,

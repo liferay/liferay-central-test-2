@@ -209,7 +209,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public int getPrivateLayoutsPageCount() {
 		try {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				LayoutImpl.PRIVATE + getGroupId());
+				getGroupId(), true);
 
 			return layoutSet.getPageCount();
 		}
@@ -232,7 +232,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public int getPublicLayoutsPageCount() {
 		try {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				LayoutImpl.PUBLIC + getGroupId());
+				getGroupId(), false);
 
 			return layoutSet.getPageCount();
 		}

@@ -26,7 +26,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.ReverseAjax;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.Action;
@@ -86,7 +85,7 @@ public class LoginPostAction extends Action {
 					companyId, userId);
 
 				Iterator itr = LayoutLocalServiceUtil.getLayouts(
-					LayoutImpl.PRIVATE + group.getGroupId()).iterator();
+					group.getGroupId(), true).iterator();
 
 				while (itr.hasNext()) {
 					Layout layout = (Layout)itr.next();
@@ -107,8 +106,8 @@ public class LoginPostAction extends Action {
 						layoutType.resetModes();
 
 						LayoutLocalServiceUtil.updateLayout(
-							layout.getLayoutId(), layout.getOwnerId(),
-							layout.getTypeSettings());
+							layout.getGroupId(), layout.isPrivateLayout(),
+							layout.getLayoutId(), layout.getTypeSettings());
 					}
 				}
 			}

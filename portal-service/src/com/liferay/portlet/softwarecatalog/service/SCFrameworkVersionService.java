@@ -50,15 +50,15 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public interface SCFrameworkVersionService {
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		java.lang.String plid, java.lang.String name, java.lang.String url,
-		boolean active, int priority, boolean addCommunityPermissions,
+		long plid, java.lang.String name, java.lang.String url, boolean active,
+		int priority, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		java.lang.String plid, java.lang.String name, java.lang.String url,
-		boolean active, int priority, java.lang.String[] communityPermissions,
+		long plid, java.lang.String name, java.lang.String url, boolean active,
+		int priority, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

@@ -54,8 +54,8 @@ import javax.ejb.SessionContext;
  *
  */
 public class MBBanServiceEJBImpl implements MBBanService, SessionBean {
-	public com.liferay.portlet.messageboards.model.MBBan addBan(
-		java.lang.String plid, long banUserId)
+	public com.liferay.portlet.messageboards.model.MBBan addBan(long plid,
+		long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -63,7 +63,7 @@ public class MBBanServiceEJBImpl implements MBBanService, SessionBean {
 		return MBBanServiceFactory.getTxImpl().addBan(plid, banUserId);
 	}
 
-	public void deleteBan(java.lang.String plid, long banUserId)
+	public void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

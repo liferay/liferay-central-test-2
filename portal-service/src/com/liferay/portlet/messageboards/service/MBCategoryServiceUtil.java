@@ -50,7 +50,7 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBCategoryServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		java.lang.String plid, long parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -62,7 +62,7 @@ public class MBCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		java.lang.String plid, long parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 

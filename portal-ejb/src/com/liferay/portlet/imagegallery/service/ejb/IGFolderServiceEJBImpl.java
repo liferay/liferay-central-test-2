@@ -55,7 +55,7 @@ import javax.ejb.SessionContext;
  */
 public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String plid, long parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -68,7 +68,7 @@ public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		java.lang.String plid, long parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 

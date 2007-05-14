@@ -853,7 +853,7 @@ String[] availableLocales = null;
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
+<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
 	<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
 
 	<c:if test="<%= article != null %>">

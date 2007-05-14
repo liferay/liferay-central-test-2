@@ -170,7 +170,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			resultRows.add(row);
 		}
 
-		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, plid, categoryId, ActionKeys.ADD_CATEGORY);
+		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, plid.longValue(), categoryId, ActionKeys.ADD_CATEGORY);
 		%>
 
 		<c:if test="<%= showAddCategoryButton || (results.size() > 0) %>">
@@ -550,7 +550,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					try {
 						User user2 = UserLocalServiceUtil.getUserById(statsUser.getUserId());
 
-						rowURL = new PortletURLImpl(request, PortletKeys.DIRECTORY, plid, false);
+						rowURL = new PortletURLImpl(request, PortletKeys.DIRECTORY, plid.longValue(), false);
 
 						rowURL.setWindowState(WindowState.MAXIMIZED);
 						rowURL.setPortletMode(PortletMode.VIEW);

@@ -56,13 +56,12 @@ import javax.ejb.SessionContext;
 public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 	SessionBean {
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String templateId, boolean autoTemplateId, long plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -74,12 +73,12 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.lang.String[] communityPermissions,
+		java.lang.String templateId, boolean autoTemplateId, long plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

@@ -24,9 +24,13 @@ package com.liferay.portal.wsrp;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
@@ -127,13 +131,12 @@ public class PortletInvokerImpl implements PortletInvoker {
 			HttpServletRequest httpReq = new WSRPServletRequest(WSRPUtil
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					renderParameters);
-			String[] portletPreferencesIds =
+			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactory.getPortletPreferencesIds(
 					httpReq, portlet.getPortletId());
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, portletPreferencesIds[0],
-					portletPreferencesIds[1], portletPreferencesIds[2]);
+					portletPreferencesIds);
 
 			// this gets the default layout of the general guest
 			User user = UserLocalServiceUtil.getDefaultUser(companyId);
@@ -208,13 +211,12 @@ public class PortletInvokerImpl implements PortletInvoker {
 			HttpServletRequest httpReq = new WSRPServletRequest(WSRPUtil
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					actionParameters);
-			String[] portletPreferencesIds =
+			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactory.getPortletPreferencesIds(
 					httpReq, portlet.getPortletId());
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, portletPreferencesIds[0],
-					portletPreferencesIds[1], portletPreferencesIds[2]);
+					portletPreferencesIds);
 
 			// this gets the default layout of the general guest
 			User user = UserLocalServiceUtil.getDefaultUser(companyId);
@@ -261,9 +263,13 @@ public class PortletInvokerImpl implements PortletInvoker {
 	private Layout _getDefaultUserLayout(long companyId)
 		throws PortalException, SystemException {
 
-		Layout layout = LayoutLocalServiceUtil.getLayout("1", "PUB.1");
+		Group group = GroupLocalServiceUtil.getGroup(
+			companyId, GroupImpl.GUEST);
 
-		return layout;
+		long plid = LayoutLocalServiceUtil.getDefaultPlid(
+			group.getGroupId(), true);
+
+		return LayoutLocalServiceUtil.getLayout(plid);
 	}
 
 	private static Map _getFormParameters(NamedString[] params) {

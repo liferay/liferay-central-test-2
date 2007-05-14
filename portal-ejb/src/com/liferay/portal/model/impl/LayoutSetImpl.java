@@ -42,10 +42,10 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 
 	public String getOwnerId() {
 		if (isPrivateLayout()) {
-			return LayoutImpl.PRIVATE + getGroupId();
+			return "PRI." + getGroupId();
 		}
 		else {
-			return LayoutImpl.PUBLIC + getGroupId();
+			return "PUB." + getGroupId();
 		}
 	}
 

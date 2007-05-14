@@ -41,9 +41,8 @@ public class ShoppingCategoryServiceImpl
 	extends PrincipalBean implements ShoppingCategoryService {
 
 	public ShoppingCategory addCategory(
-			String plid, String parentCategoryId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long plid, String parentCategoryId, String name, String description,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -56,9 +55,8 @@ public class ShoppingCategoryServiceImpl
 	}
 
 	public ShoppingCategory addCategory(
-			String plid, String parentCategoryId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
+			long plid, String parentCategoryId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(

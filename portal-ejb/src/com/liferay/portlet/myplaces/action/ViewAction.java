@@ -61,10 +61,11 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(
-			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 		String redirect = themeDisplay.getPathMain();
 
@@ -78,7 +79,9 @@ public class ViewAction extends PortletAction {
 
 			SessionErrors.add(
 				req, NoSuchLayoutSetException.class.getName(),
-				new NoSuchLayoutSetException(ownerId));
+				new NoSuchLayoutSetException(
+					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
+						"}"));
 		}
 
 		// Send redirect

@@ -237,7 +237,7 @@ public class PermissionServiceImpl
 
 			int pos = primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR);
 
-			String plid = primKey.substring(0, pos);
+			long plid = GetterUtil.getLong(primKey.substring(0, pos));
 
 			String portletId = primKey.substring(
 				pos + PortletImpl.LAYOUT_SEPARATOR.length() , primKey.length());

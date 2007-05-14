@@ -28,6 +28,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SitemapUtil;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -75,12 +76,14 @@ public class SitemapServlet extends HttpServlet {
 		try {
 			String host = PortalUtil.getHost(req);
 
-			String ownerId = req.getParameter("ownerId");
+			long groupId = ParamUtil.getLong(req, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
 			LayoutSet layoutSet = null;
 
-			if (ownerId != null) {
-				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+			if (groupId > 0) {
+				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					groupId, privateLayout);
 			}
 			else {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -97,7 +100,8 @@ public class SitemapServlet extends HttpServlet {
 			String mainPath = MainServlet.DEFAULT_MAIN_PATH;
 
 			String sitemap = SitemapUtil.getSitemap(
-				layoutSet.getOwnerId(), portalURL + mainPath);
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+				portalURL + mainPath);
 
 			if (!res.isCommitted()) {
 				out.write(sitemap);

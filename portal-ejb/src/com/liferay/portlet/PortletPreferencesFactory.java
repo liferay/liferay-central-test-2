@@ -25,13 +25,11 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -65,20 +63,21 @@ public class PortletPreferencesFactory {
 	public static PortalPreferences getPortalPreferences(HttpServletRequest req)
 		throws PortalException, SystemException {
 
-		PortalPreferences portalPrefs = null;
-
-		String portletId = PortletKeys.LIFERAY_PORTAL;
-		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String ownerId = String.valueOf(themeDisplay.getUserId());
+		long ownerId = themeDisplay.getUserId();
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
+		long plid = PortletKeys.PREFS_PLID_SHARED;
+		String portletId = PortletKeys.LIFERAY_PORTAL;
+
+		PortalPreferences portalPrefs = null;
 
 		if (themeDisplay.isSignedIn()) {
 			PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					themeDisplay.getCompanyId(), ownerId, layoutId, portletId);
+					themeDisplay.getCompanyId(), ownerId, ownerType, plid,
+					portletId);
 
 			portalPrefs = new PortalPreferences(
 				prefsImpl, themeDisplay.isSignedIn());
@@ -86,13 +85,13 @@ public class PortletPreferencesFactory {
 		else {
 			HttpSession ses = req.getSession();
 
-			portalPrefs =
-				(PortalPreferences)ses.getAttribute(WebKeys.PORTAL_PREFERENCES);
+			portalPrefs = (PortalPreferences)ses.getAttribute(
+				WebKeys.PORTAL_PREFERENCES);
 
 			if (portalPrefs == null) {
 				PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)
 					PortletPreferencesLocalServiceUtil.getPreferences(
-						themeDisplay.getCompanyId(), ownerId, layoutId,
+						themeDisplay.getCompanyId(), ownerId, ownerType, plid,
 						portletId);
 
 				prefsImpl = (PortletPreferencesImpl)prefsImpl.clone();
@@ -140,27 +139,24 @@ public class PortletPreferencesFactory {
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
-		long companyId = PortalUtil.getCompanyId(req);
-
-		String[] portletPreferencesIds = getPortletPreferencesIds(
+		PortletPreferencesIds portletPreferencesIds = getPortletPreferencesIds(
 			req, portletId);
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, portletPreferencesIds[0], portletPreferencesIds[1],
-			portletPreferencesIds[2]);
+			portletPreferencesIds);
 	}
 
-	public static String[] getPortletPreferencesIds(
+	public static PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		return getPortletPreferencesIds(req, layout.getPlid(), portletId);
+		return getPortletPreferencesIds(req, layout, portletId);
 	}
 
-	public static String[] getPortletPreferencesIds(
-			HttpServletRequest req, String selPlid, String portletId)
+	public static PortletPreferencesIds getPortletPreferencesIds(
+			HttpServletRequest req, Layout selLayout, String portletId)
 		throws PortalException, SystemException {
 
 		// Below is a list of  the possible combinations, where we specify the
@@ -194,8 +190,9 @@ public class PortletPreferencesFactory {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
-		String ownerId = null;
-		String layoutId = null;
+		long ownerId = 0;
+		int ownerType = 0;
+		long plid = 0;
 
 		boolean modeEditGuest = false;
 
@@ -222,15 +219,15 @@ public class PortletPreferencesFactory {
 		}
 
 		if (portlet.isPreferencesCompanyWide()) {
-			ownerId =
-				PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD +
-					themeDisplay.getCompanyId();
-			layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+			ownerId = themeDisplay.getCompanyId();
+			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
+			plid = PortletKeys.PREFS_PLID_SHARED;
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
-				ownerId = LayoutImpl.getOwnerId(selPlid);
-				layoutId = LayoutImpl.getLayoutId(selPlid);
+				ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+				ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+				plid = selLayout.getPlid();
 
 				if (portlet.isPreferencesOwnedByGroup()) {
 				}
@@ -242,19 +239,16 @@ public class PortletPreferencesFactory {
 							themeDisplay.getCompanyId());
 					}
 
-					ownerId +=
-						StringPool.PERIOD + PortletKeys.PREFS_OWNER_ID_USER +
-							StringPool.PERIOD + userId;
+					ownerId = userId;
+					ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
 				}
 			}
 			else {
-				ownerId = LayoutImpl.getOwnerId(selPlid);
-				layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+				plid = PortletKeys.PREFS_PLID_SHARED;
 
 				if (portlet.isPreferencesOwnedByGroup()) {
-					ownerId =
-						PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-							LayoutImpl.getGroupId(ownerId);
+					ownerId = selLayout.getGroupId();
+					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 				}
 				else {
 					long userId = PortalUtil.getUserId(req);
@@ -264,24 +258,26 @@ public class PortletPreferencesFactory {
 							themeDisplay.getCompanyId());
 					}
 
-					ownerId =
-						PortletKeys.PREFS_OWNER_ID_USER + StringPool.PERIOD +
-							userId;
+					ownerId = userId;
+					ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
 				}
 			}
 		}
 
-		return new String[] {ownerId, layoutId, portletId};
+		return new PortletPreferencesIds(
+			themeDisplay.getCompanyId(), ownerId, ownerType, plid, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(
-			String portletId, String layoutId, String ownerId)
+			Layout layout, String portletId)
 		throws PortalException, SystemException {
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			layout.getCompanyId(), ownerId, layoutId, portletId);
+			layout.getCompanyId(), ownerId, ownerType, layout.getPlid(),
+			portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(
@@ -291,26 +287,25 @@ public class PortletPreferencesFactory {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String layoutId = layout.getLayoutId();
-		String ownerId = layout.getOwnerId();
+		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+		long plid = layout.getPlid();
 
 		if (!uniquePerLayout) {
-			layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+			plid = PortletKeys.PREFS_PLID_SHARED;
 
 			if (uniquePerGroup) {
-				ownerId =
-					PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-						LayoutImpl.getGroupId(ownerId);
+				ownerId = layout.getGroupId();
+				ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 			}
 			else {
-				ownerId =
-					PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD +
-						layout.getCompanyId();
+				ownerId = layout.getCompanyId();
+				ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 			}
 		}
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			layout.getCompanyId(), ownerId, layoutId, portletId);
+			layout.getCompanyId(), ownerId, ownerType, plid, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(

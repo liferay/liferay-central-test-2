@@ -24,7 +24,6 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -94,8 +93,6 @@ public class IGImageServiceImpl
 			long imageId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries)
 		throws PortalException, SystemException {
-
-		User user = getUser();
 
 		IGImagePermission.check(
 			getPermissionChecker(), imageId, ActionKeys.UPDATE);

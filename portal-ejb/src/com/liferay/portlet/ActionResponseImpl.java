@@ -303,14 +303,14 @@ public class ActionResponseImpl implements ActionResponse {
 		return _layout;
 	}
 
-	protected String getPlid() {
+	protected long getPlid() {
 		return _plid;
 	}
 
-	protected void setPlid(String plid) {
+	protected void setPlid(long plid) {
 		_plid = plid;
 
-		if (_plid == null) {
+		if (_plid <= 0) {
 			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
 
 			if (layout != null) {
@@ -381,7 +381,7 @@ public class ActionResponseImpl implements ActionResponse {
 		_companyId = 0;
 		_user = null;
 		_layout = null;
-		_plid = null;
+		_plid = 0;
 		_windowState = null;
 		_portletMode = null;
 		_params = new LinkedHashMap();
@@ -418,7 +418,7 @@ public class ActionResponseImpl implements ActionResponse {
 	private long _companyId;
 	private User _user;
 	private Layout _layout;
-	private String _plid;
+	private long _plid;
 	private Map _properties;
 	private WindowState _windowState;
 	private PortletMode _portletMode;

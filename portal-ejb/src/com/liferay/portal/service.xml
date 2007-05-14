@@ -354,8 +354,11 @@
 
 		<!-- PK fields -->
 
-		<column name="layoutId" type="String" primary="true" />
-		<column name="ownerId" type="String" primary="true" />
+		<column name="plid" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -363,7 +366,9 @@
 
 		<!-- Other fields -->
 
-		<column name="parentLayoutId" type="String" />
+		<column name="privateLayout" type="boolean" />
+		<column name="layoutId" type="long" />
+		<column name="parentLayoutId" type="long" />
 		<column name="name" type="String" />
 		<column name="title" type="String" />
 		<column name="type" type="String" />
@@ -387,15 +392,23 @@
 
 		<!-- Finder methods -->
 
-		<finder name="OwnerId" return-type="Collection">
-			<finder-column name="ownerId" />
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
 		</finder>
-		<finder name="O_P" return-type="Collection">
-			<finder-column name="ownerId" />
+		<finder name="G_P_L" return-type="Layout">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="layoutId" />
+		</finder>
+		<finder name="G_P_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
 			<finder-column name="parentLayoutId" />
 		</finder>
-		<finder name="O_F" return-type="Layout">
-			<finder-column name="ownerId" />
+		<finder name="G_P_F" return-type="Layout">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
 			<finder-column name="friendlyURL" />
 		</finder>
 
@@ -409,14 +422,17 @@
 
 		<column name="layoutSetId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
 
 		<!-- Other fields -->
 
-		<column name="groupId" type="long" />
-		<column name="userId" type="long" />
 		<column name="privateLayout" type="boolean" />
 		<column name="logo" type="boolean" />
 		<column name="themeId" type="String" />
@@ -832,29 +848,26 @@
 
 		<!-- Other fields -->
 
-		<column name="ownerId" type="String" />
-		<column name="layoutId" type="String" />
+		<column name="ownerId" type="long" />
+		<column name="ownerType" type="int" />
+		<column name="plid" type="long" />
 		<column name="portletId" type="String" />
 		<column name="preferences" type="String" />
 
 		<!-- Finder methods -->
 
-		<finder name="OwnerId" return-type="Collection">
+		<finder name="Plid" return-type="Collection">
+			<finder-column name="plid" />
+		</finder>
+		<finder name="O_O_P" return-type="Collection">
 			<finder-column name="ownerId" />
+			<finder-column name="ownerType" />
+			<finder-column name="plid" />
 		</finder>
-		<finder name="LayoutId" return-type="Collection">
-			<finder-column name="layoutId" />
-		</finder>
-		<finder name="PortletId" return-type="Collection">
-			<finder-column name="portletId" />
-		</finder>
-		<finder name="O_L" return-type="Collection">
+		<finder name="O_O_P_P" return-type="PortletPreferences">
 			<finder-column name="ownerId" />
-			<finder-column name="layoutId" />
-		</finder>
-		<finder name="O_L_P" return-type="PortletPreferences">
-			<finder-column name="ownerId" />
-			<finder-column name="layoutId" />
+			<finder-column name="ownerType" />
+			<finder-column name="plid" />
 			<finder-column name="portletId" />
 		</finder>
 	</entity>

@@ -69,7 +69,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 	searchContainer.setTotal(total);
 
-	List results = ShoppingCouponServiceUtil.search(searchTerms.getCouponId(), plid, company.getCompanyId(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingCouponServiceUtil.search(searchTerms.getCouponId(), plid.longValue(), company.getCompanyId(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 	%>

@@ -39,24 +39,24 @@ import javax.servlet.http.HttpSession;
  */
 public class RenderParametersPool {
 
-	public static void clear(HttpServletRequest req, String plid) {
+	public static void clear(HttpServletRequest req, long plid) {
 		Map plidPool = get(req, plid);
 
 		plidPool.clear();
 	}
 
 	public static void clear(
-		HttpServletRequest req, String plid, String portletId) {
+		HttpServletRequest req, long plid, String portletId) {
 
 		Map params = get(req, plid, portletId);
 
 		params.clear();
 	}
 
-	public static Map get(HttpServletRequest req, String plid) {
+	public static Map get(HttpServletRequest req, long plid) {
 		HttpSession ses = req.getSession();
 
-		if (plid == null) {
+		if (plid <= 0) {
 			return CollectionFactory.getHashMap();
 		}
 
@@ -75,9 +75,7 @@ public class RenderParametersPool {
 		return plidPool;
 	}
 
-	public static Map get(
-		HttpServletRequest req, String plid, String portletId) {
-
+	public static Map get(HttpServletRequest req, long plid, String portletId) {
 		Map plidPool = get(req, plid);
 
 		Map params = (Map)plidPool.get(portletId);
@@ -92,7 +90,7 @@ public class RenderParametersPool {
 	}
 
 	public static void put(
-		HttpServletRequest req, String plid, String portletId, Map params) {
+		HttpServletRequest req, long plid, String portletId, Map params) {
 
 		Map plidPool = get(req, plid);
 

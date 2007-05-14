@@ -22,14 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.upgrade.StagnantRowException;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="OwnerIdMapper.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +39,7 @@ public class OwnerIdMapper implements ValueMapper {
 	public Object getNewValue(Object oldValue) throws Exception {
 		String ownerId = (String)oldValue;
 
-		try {
+		/*try {
 			if (ownerId.startsWith(PortletKeys.PREFS_OWNER_ID_GROUP)) {
 				int index = PortletKeys.PREFS_OWNER_ID_GROUP.length() + 1;
 
@@ -82,7 +75,7 @@ public class OwnerIdMapper implements ValueMapper {
 		}
 		catch (StagnantRowException sre) {
 			throw new StagnantRowException(ownerId, sre);
-		}
+		}*/
 
 		return ownerId;
 	}

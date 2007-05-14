@@ -49,19 +49,19 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public interface BlogsEntryService {
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String plid, long categoryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
+	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
+		long categoryId, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String plid, long categoryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
+	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
+		long categoryId, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

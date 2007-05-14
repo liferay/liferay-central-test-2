@@ -75,15 +75,11 @@ public class UpdateTitleAction extends JSONAction {
 			return null;
 		}
 
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
-
 		String languageId = LanguageUtil.getLanguageId(req);
 		String title = ParamUtil.getString(req, "title");
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactory.getPortletSetup(
-				portletId, layoutId, ownerId);
+			PortletPreferencesFactory.getPortletSetup(layout, portletId);
 
 		portletSetup.setValue("portlet-setup-title-" + languageId, title);
 		portletSetup.setValue("portlet-setup-use-custom-title", "true");

@@ -73,12 +73,12 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 public class JournalTemplateServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		boolean autoTemplateId, java.lang.String plid,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean autoTemplateId, long plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -89,12 +89,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoTemplateId);
-			Object paramObj2 = plid;
-
-			if (plid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(plid);
 			Object paramObj3 = structureId;
 
 			if (structureId == null) {
@@ -175,12 +170,11 @@ public class JournalTemplateServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		boolean autoTemplateId, java.lang.String plid,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		java.lang.String[] communityPermissions,
+		boolean autoTemplateId, long plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -192,12 +186,7 @@ public class JournalTemplateServiceHttp {
 			}
 
 			Object paramObj1 = new BooleanWrapper(autoTemplateId);
-			Object paramObj2 = plid;
-
-			if (plid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(plid);
 			Object paramObj3 = structureId;
 
 			if (structureId == null) {

@@ -54,7 +54,7 @@ public class FindMessageAction extends Action {
 		throws Exception {
 
 		try {
-			String plid = ParamUtil.getString(req, "p_l_id");
+			long plid = ParamUtil.getLong(req, "p_l_id");
 			long messageId = ParamUtil.getLong(req, "messageId");
 
 			PortletURL portletURL = new PortletURLImpl(

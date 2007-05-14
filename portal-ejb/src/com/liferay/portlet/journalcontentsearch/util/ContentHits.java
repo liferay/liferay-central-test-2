@@ -25,7 +25,6 @@ package com.liferay.portlet.journalcontentsearch.util;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.HitsImpl;
@@ -45,7 +44,8 @@ public class ContentHits extends HitsImpl {
 		super();
 	}
 
-	public void recordHits(Hits hits, String ownerId) throws SystemException {
+	public void recordHits(Hits hits, long groupId, boolean privateLayout)
+		throws SystemException {
 
 		// This can later be optimized according to LEP-915.
 
@@ -55,11 +55,10 @@ public class ContentHits extends HitsImpl {
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
 
-			long groupId = LayoutImpl.getGroupId(ownerId);
 			String articleId = doc.get("articleId");
 
 			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(
-					ownerId, groupId, articleId) > 0) {
+					groupId, privateLayout, articleId) > 0) {
 
 				docs.add(hits.doc(i));
 				scores.add(new Float(hits.score(i)));

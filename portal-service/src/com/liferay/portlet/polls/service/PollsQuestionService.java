@@ -50,20 +50,19 @@ package com.liferay.portlet.polls.service;
  */
 public interface PollsQuestionService {
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long plid, java.lang.String title, java.lang.String description,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		java.util.List choices, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String title, java.lang.String description,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		java.util.List choices, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

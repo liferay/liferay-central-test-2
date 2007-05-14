@@ -69,9 +69,8 @@ import org.json.JSONObject;
  */
 public class LayoutServiceJSON {
 	public static JSONObject addLayout(long groupId, boolean privateLayout,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		long parentLayoutId, java.lang.String name, java.lang.String title,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.addLayout(groupId,
@@ -81,19 +80,19 @@ public class LayoutServiceJSON {
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteLayout(java.lang.String layoutId,
-		java.lang.String ownerId)
+	public static void deleteLayout(long groupId, boolean privateLayout,
+		long layoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		LayoutServiceUtil.deleteLayout(layoutId, ownerId);
+		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
-	public static java.lang.String getLayoutName(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String languageId)
+	public static java.lang.String getLayoutName(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		java.lang.String returnValue = LayoutServiceUtil.getLayoutName(layoutId,
-				ownerId, languageId);
+		java.lang.String returnValue = LayoutServiceUtil.getLayoutName(groupId,
+				privateLayout, layoutId, languageId);
 
 		return returnValue;
 	}
@@ -108,90 +107,88 @@ public class LayoutServiceJSON {
 		return returnValue;
 	}
 
-	public static void setLayouts(java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
+	public static void setLayouts(long groupId, boolean privateLayout,
+		long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		LayoutServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
+		LayoutServiceUtil.setLayouts(groupId, privateLayout, parentLayoutId,
+			layoutIds);
 	}
 
-	public static JSONObject updateLayout(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+	public static JSONObject updateLayout(long groupId, boolean privateLayout,
+		long layoutId, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,
-				ownerId, parentLayoutId, name, title, languageId, type, hidden,
-				friendlyURL);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(groupId,
+				privateLayout, layoutId, parentLayoutId, name, title,
+				languageId, type, hidden, friendlyURL);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateLayout(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL, java.lang.Boolean iconImage,
-		byte[] iconBytes)
+	public static JSONObject updateLayout(long groupId, boolean privateLayout,
+		long layoutId, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,
-				ownerId, parentLayoutId, name, title, languageId, type, hidden,
-				friendlyURL, iconImage, iconBytes);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(groupId,
+				privateLayout, layoutId, parentLayoutId, name, title,
+				languageId, type, hidden, friendlyURL, iconImage, iconBytes);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateLayout(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String typeSettings)
+	public static JSONObject updateLayout(long groupId, boolean privateLayout,
+		long layoutId, java.lang.String typeSettings)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,
-				ownerId, typeSettings);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(groupId,
+				privateLayout, layoutId, typeSettings);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateLookAndFeel(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String themeId,
+	public static JSONObject updateLookAndFeel(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLookAndFeel(layoutId,
-				ownerId, themeId, colorSchemeId, css, wapTheme);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLookAndFeel(groupId,
+				privateLayout, layoutId, themeId, colorSchemeId, css, wapTheme);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateName(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String name,
-		java.lang.String languageId)
+	public static JSONObject updateName(long groupId, boolean privateLayout,
+		long layoutId, java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(layoutId,
-				ownerId, name, languageId);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(groupId,
+				privateLayout, layoutId, name, languageId);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateParentLayoutId(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String parentLayoutId)
+	public static JSONObject updateParentLayoutId(long groupId,
+		boolean privateLayout, long layoutId, long parentLayoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(layoutId,
-				ownerId, parentLayoutId);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(groupId,
+				privateLayout, layoutId, parentLayoutId);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updatePriority(java.lang.String layoutId,
-		java.lang.String ownerId, int priority)
+	public static JSONObject updatePriority(long groupId,
+		boolean privateLayout, long layoutId, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(layoutId,
-				ownerId, priority);
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(groupId,
+				privateLayout, layoutId, priority);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}

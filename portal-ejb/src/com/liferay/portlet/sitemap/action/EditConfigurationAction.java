@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.sitemap.action;
 
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
@@ -60,19 +58,15 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String rootLayoutId = ParamUtil.getString(req, "rootLayoutId");
+		long rootPlid = ParamUtil.getLong(req, "rootPlid");
 		String displayDepth = ParamUtil.getString(req, "displayDepth");
-
-		if (Validator.isNull(rootLayoutId)) {
-			rootLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
-		}
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("root-layout-id", rootLayoutId);
+		prefs.setValue("root-plid", String.valueOf(rootPlid));
 		prefs.setValue("display-depth", displayDepth);
 
 		prefs.store();

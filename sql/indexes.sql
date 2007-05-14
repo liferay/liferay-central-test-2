@@ -70,10 +70,10 @@ create index IX_EC743CD0 on JournalArticle (companyId, groupId, templateId);
 create index IX_9356F865 on JournalArticle (groupId);
 
 create index IX_4D73E06F on JournalContentSearch (companyId, groupId, articleId);
-create index IX_972C13BA on JournalContentSearch (groupId);
-create index IX_ABEEA675 on JournalContentSearch (layoutId, ownerId);
-create index IX_F09DD5EE on JournalContentSearch (ownerId);
-create index IX_4A642025 on JournalContentSearch (ownerId, groupId, articleId);
+create index IX_20962903 on JournalContentSearch (groupId, privateLayout);
+create index IX_7CC7D73E on JournalContentSearch (groupId, privateLayout, articleId);
+create index IX_B3B318DC on JournalContentSearch (groupId, privateLayout, layoutId);
+create index IX_C3AA93B8 on JournalContentSearch (groupId, privateLayout, layoutId, portletId, articleId);
 
 create index IX_47EF5658 on JournalStructure (companyId, structureId);
 create index IX_B97F5608 on JournalStructure (groupId);
@@ -82,9 +82,10 @@ create index IX_AB3E5F05 on JournalTemplate (companyId, groupId, structureId);
 create index IX_D7A3867A on JournalTemplate (companyId, templateId);
 create index IX_77923653 on JournalTemplate (groupId);
 
-create index IX_1A0B984E on Layout (ownerId);
-create index IX_E230D266 on Layout (ownerId, friendlyURL);
-create index IX_9AF212B1 on Layout (ownerId, parentLayoutId);
+create index IX_705F5AA3 on Layout (groupId, privateLayout);
+create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);
+create index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
+create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 
 create index IX_A34FBC19 on LayoutSet (companyId, virtualHost);
 create index IX_A40B8BEC on LayoutSet (groupId);
@@ -161,11 +162,9 @@ create index IX_FE3220E9 on PollsVote (questionId, choiceId);
 create index IX_80CC9508 on Portlet (companyId);
 create index IX_12B5E51D on Portlet (companyId, portletId);
 
-create index IX_8B1E639D on PortletPreferences (layoutId);
-create index IX_3EAB5A5A on PortletPreferences (ownerId);
-create index IX_5B77C973 on PortletPreferences (ownerId, layoutId);
-create index IX_BC024FD2 on PortletPreferences (ownerId, layoutId, portletId);
-create index IX_8E6DA3A1 on PortletPreferences (portletId);
+create index IX_E4F13E6E on PortletPreferences (ownerId, ownerType, plid);
+create index IX_C7057FF7 on PortletPreferences (ownerId, ownerType, plid, portletId);
+create index IX_F15C1C4F on PortletPreferences (plid);
 
 create index IX_EA9B85B2 on RatingsEntry (className, classPK);
 create index IX_9941DAEC on RatingsEntry (userId, className, classPK);

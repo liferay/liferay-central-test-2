@@ -36,8 +36,6 @@ import java.util.Map;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
-import javax.servlet.http.HttpServletRequest;
-
 import oasis.names.tc.wsrp.v1.types.GetMarkup;
 import oasis.names.tc.wsrp.v1.types.PerformBlockingInteraction;
 import oasis.names.tc.wsrp.v1.types.PortletContext;
@@ -59,7 +57,7 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 
 	public WSRPPortletURLImpl(PerformBlockingInteraction pbo, Provider wsrpProvider,
 							  ActionRequestImpl req, String portletName,
-							  String plid, boolean action) {
+							  long plid, boolean action) {
 
 		super(req, portletName, plid, action);
 
@@ -68,7 +66,7 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 
 	public WSRPPortletURLImpl(GetMarkup getMarkup, Provider wsrpProvider,
 							  RenderRequestImpl req, String portletName,
-							  String plid, boolean action) {
+							  long plid, boolean action) {
 
 		super(req, portletName, plid, action);
 
@@ -79,8 +77,6 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 		PortletMode portletMode = getPortletMode();
 		WindowState windowState = getWindowState();
 		boolean action = isAction();
-		HttpServletRequest req = getReq();
-
 		boolean secure = isSecure();
 
 		if (portletMode == null) {
@@ -128,7 +124,7 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 		Map renderParams = getParameterMap();
 		Map params = new HashMap();
 
-		String[] plid = {getPlid()};
+		String[] plid = {String.valueOf(getPlid())};
 		params.put("p_l_id", plid);
 
 		String[] portletName = {getPortletName()};

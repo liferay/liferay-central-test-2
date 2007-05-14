@@ -50,23 +50,22 @@ package com.liferay.portlet.journal.service;
  */
 public interface JournalTemplateService {
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String templateId, boolean autoTemplateId, long plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String templateId, boolean autoTemplateId,
-		java.lang.String plid, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.lang.String[] communityPermissions,
+		java.lang.String templateId, boolean autoTemplateId, long plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

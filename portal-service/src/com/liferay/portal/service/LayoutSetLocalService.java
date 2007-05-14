@@ -57,17 +57,17 @@ public interface LayoutSetLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.LayoutSet addLayoutSet(
-		java.lang.String ownerId, long companyId)
+	public com.liferay.portal.model.LayoutSet addLayoutSet(long groupId,
+		boolean privateLayout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteLayoutSet(java.lang.String ownerId)
+	public void deleteLayoutSet(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String ownerId)
+	public com.liferay.portal.model.LayoutSet getLayoutSet(long groupId,
+		boolean privateLayout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -76,24 +76,24 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateLogo(java.lang.String ownerId, boolean logo,
+	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
 		java.io.File file)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
-		java.lang.String ownerId, java.lang.String themeId,
+	public com.liferay.portal.model.LayoutSet updateLookAndFeel(long groupId,
+		boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.LayoutSet updatePageCount(
-		java.lang.String ownerId)
+	public com.liferay.portal.model.LayoutSet updatePageCount(long groupId,
+		boolean privateLayout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.LayoutSet updateVirtualHost(
-		java.lang.String ownerId, java.lang.String virtualHost)
+	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
+		boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

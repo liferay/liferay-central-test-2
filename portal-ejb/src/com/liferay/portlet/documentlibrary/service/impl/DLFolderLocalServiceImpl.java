@@ -60,7 +60,7 @@ import java.util.List;
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
-			long userId, String plid, String parentFolderId, String name,
+			long userId, long plid, String parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -72,7 +72,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder addFolder(
-			long userId, String plid, String parentFolderId, String name,
+			long userId, long plid, String parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -83,7 +83,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder addFolder(
-			long userId, String plid, String parentFolderId, String name,
+			long userId, long plid, String parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
@@ -154,14 +154,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 					privateLayout = false;
 				}
 
-				String parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+				long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 				String title = StringPool.BLANK;
 				String type = LayoutImpl.TYPE_PORTLET;
 				boolean hidden = false;
 				String friendlyURL = StringPool.BLANK;
 
 				LayoutLocalServiceUtil.addLayout(
-					groupId, userId, privateLayout, parentLayoutId, name, title,
+					userId, groupId, privateLayout, parentLayoutId, name, title,
 					type, hidden, friendlyURL);
 			}
 		}

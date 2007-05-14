@@ -35,11 +35,12 @@ public class LayoutPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String layoutId, java.lang.String ownerId,
+		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		LayoutPermission.check(permissionChecker, layoutId, ownerId, actionId);
+		LayoutPermission.check(permissionChecker, groupId, privateLayout,
+			layoutId, actionId);
 	}
 
 	public void check(
@@ -52,12 +53,12 @@ public class LayoutPermission_IW {
 
 	public boolean contains(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String layoutId, java.lang.String ownerId,
+		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return LayoutPermission.contains(permissionChecker, layoutId, ownerId,
-			actionId);
+		return LayoutPermission.contains(permissionChecker, groupId,
+			privateLayout, layoutId, actionId);
 	}
 
 	public boolean contains(

@@ -20,37 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.test.service.portlet.bookmarks;
+package com.liferay.portal.model;
 
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
-import com.liferay.test.TestConstants;
-import com.liferay.test.service.BaseServiceTest;
+import java.io.Serializable;
 
 /**
- * <a href="BookmarksFolderServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletPreferencesIds.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksFolderServiceTest extends BaseServiceTest {
+public class PortletPreferencesIds implements Serializable {
 
-	public void test() {
-		try {
-			long plid = TestConstants.PLID;
-			long parentFolderId = 0;
-			String name = "Test Folder";
-			String description = "This is a test folder.";
+	public PortletPreferencesIds(long companyId, long ownerId, int ownerType,
+								 long plid, String portletId) {
 
-			String[] communityPermissions = new String[0];
-			String[] guestPermissions = new String[0];
-
-			BookmarksFolderServiceUtil.addFolder(
-				plid, parentFolderId, name, description, communityPermissions,
-				guestPermissions);
-		}
-		catch (Exception e) {
-			fail(e);
-		}
+		_companyId = companyId;
+		_ownerId = ownerId;
+		_ownerType = ownerType;
+		_plid = plid;
+		_portletId = portletId;
 	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public long getOwnerId() {
+		return _ownerId;
+	}
+
+	public int getOwnerType() {
+		return _ownerType;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	private long _companyId;
+	private long _ownerId;
+	private int _ownerType;
+	private long _plid;
+	private String _portletId;
 
 }

@@ -57,7 +57,7 @@ public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
-			long userId, String plid, String title, String description,
+			long userId, long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices,
@@ -73,7 +73,7 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public PollsQuestion addQuestion(
-			long userId, String plid, String title, String description,
+			long userId, long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices,
@@ -88,7 +88,7 @@ public class PollsQuestionLocalServiceImpl
 	}
 
 	public PollsQuestion addQuestion(
-			long userId, String plid, String title, String description,
+			long userId, long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices,

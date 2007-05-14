@@ -41,7 +41,7 @@ public class BookmarksFolderServiceImpl
 	extends PrincipalBean implements BookmarksFolderService {
 
 	public BookmarksFolder addFolder(
-			String plid, long parentFolderId, String name, String description,
+			long plid, long parentFolderId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class BookmarksFolderServiceImpl
 	}
 
 	public BookmarksFolder addFolder(
-			String plid, long parentFolderId, String name, String description,
+			long plid, long parentFolderId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 

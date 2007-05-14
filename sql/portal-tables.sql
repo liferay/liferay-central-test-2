@@ -361,13 +361,13 @@ create table JournalArticle (
 );
 
 create table JournalContentSearch (
-	portletId VARCHAR(75) not null,
-	layoutId VARCHAR(75) not null,
-	ownerId VARCHAR(75) not null,
-	articleId VARCHAR(75) not null,
+	contentSearchId LONG primary key,
 	companyId LONG,
 	groupId LONG,
-	primary key (portletId, layoutId, ownerId, articleId)
+	privateLayout BOOLEAN,
+	layoutId LONG,
+	portletId VARCHAR(75) null,
+	articleId VARCHAR(75) null
 );
 
 create table JournalStructure (
@@ -403,10 +403,12 @@ create table JournalTemplate (
 );
 
 create table Layout (
-	layoutId VARCHAR(75) not null,
-	ownerId VARCHAR(75) not null,
+	plid LONG primary key,
+	groupId LONG,
 	companyId LONG,
-	parentLayoutId VARCHAR(75) null,
+	privateLayout BOOLEAN,
+	layoutId LONG,
+	parentLayoutId LONG,
 	name STRING null,
 	title STRING null,
 	type_ VARCHAR(75) null,
@@ -419,14 +421,13 @@ create table Layout (
 	wapThemeId VARCHAR(75) null,
 	wapColorSchemeId VARCHAR(75) null,
 	css VARCHAR(75) null,
-	priority INTEGER,
-	primary key (layoutId, ownerId)
+	priority INTEGER
 );
 
 create table LayoutSet (
 	layoutSetId LONG primary key,
-	companyId LONG,
 	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	privateLayout BOOLEAN,
 	logo BOOLEAN,
@@ -670,7 +671,7 @@ create table PollsVote (
 );
 
 create table Portlet (
-	id LONG primary key,
+	id_ LONG primary key,
 	companyId LONG,
 	portletId VARCHAR(75) null,
 	roles VARCHAR(75) null,
@@ -679,8 +680,9 @@ create table Portlet (
 
 create table PortletPreferences (
 	portletPreferencesId LONG primary key,
-	ownerId VARCHAR(75) null,
-	layoutId VARCHAR(75) null,
+	ownerId LONG,
+	ownerType INTEGER,
+	plid LONG,
 	portletId VARCHAR(75) null,
 	preferences TEXT null
 );

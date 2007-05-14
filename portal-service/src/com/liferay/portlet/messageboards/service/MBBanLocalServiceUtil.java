@@ -66,7 +66,7 @@ public class MBBanLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
-		long userId, java.lang.String plid, long banUserId)
+		long userId, long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
@@ -81,7 +81,7 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.checkBan(groupId, banUserId);
 	}
 
-	public static void deleteBan(java.lang.String plid, long banUserId)
+	public static void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();

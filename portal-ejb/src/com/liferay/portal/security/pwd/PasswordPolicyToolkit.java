@@ -34,9 +34,6 @@ import com.liferay.util.PwdGenerator;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PasswordPolicyToolkit.java.html"><b><i>View Source</i></b></a>
  *
@@ -111,7 +108,5 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 			}
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(PasswordPolicyToolkit.class);
 
 }

@@ -78,7 +78,7 @@ public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
-			long userId, String templateId, boolean autoTemplateId, String plid,
+			long userId, String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,
@@ -93,7 +93,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate addTemplate(
-			long userId, String templateId, boolean autoTemplateId, String plid,
+			long userId, String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile, String[] communityPermissions,
@@ -107,7 +107,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate addTemplate(
-			long userId, String templateId, boolean autoTemplateId, String plid,
+			long userId, String templateId, boolean autoTemplateId, long plid,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile,

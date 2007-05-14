@@ -79,8 +79,8 @@ import java.rmi.RemoteException;
  */
 public class SCFrameworkVersionServiceSoap {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap addFrameworkVersion(
-		java.lang.String plid, java.lang.String name, java.lang.String url,
-		boolean active, int priority, boolean addCommunityPermissions,
+		long plid, java.lang.String name, java.lang.String url, boolean active,
+		int priority, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
@@ -97,8 +97,8 @@ public class SCFrameworkVersionServiceSoap {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap addFrameworkVersion(
-		java.lang.String plid, java.lang.String name, java.lang.String url,
-		boolean active, int priority, java.lang.String[] communityPermissions,
+		long plid, java.lang.String name, java.lang.String url, boolean active,
+		int priority, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =

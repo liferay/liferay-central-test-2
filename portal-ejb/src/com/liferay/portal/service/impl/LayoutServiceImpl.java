@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -48,7 +47,7 @@ import java.util.Map;
 public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 	public Layout addLayout(
-			long groupId, boolean privateLayout, String parentLayoutId,
+			long groupId, boolean privateLayout, long parentLayoutId,
 			String name, String title, String type, boolean hidden,
 			String friendlyURL)
 		throws PortalException, SystemException {
@@ -57,26 +56,26 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return LayoutLocalServiceUtil.addLayout(
-			groupId, getUserId(), privateLayout, parentLayoutId, name, title,
+			getUserId(), groupId, privateLayout, parentLayoutId, name, title,
 			type, hidden, friendlyURL);
 	}
 
-	public void deleteLayout(String layoutId, String ownerId)
+	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		LayoutLocalServiceUtil.deleteLayout(layoutId, ownerId);
+		LayoutLocalServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
 	public String getLayoutName(
-			String layoutId, String ownerId, String languageId)
+			long groupId, boolean privateLayout, long layoutId,
+			String languageId)
 		throws PortalException, SystemException {
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			groupId, privateLayout, layoutId);
 
 		return layout.getName(languageId);
 	}
@@ -90,125 +89,137 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			companyId, portletId, prefsKey, prefsValue);
 	}
 
-	public byte[] exportLayouts(String ownerId, Map parameterMap)
+	public byte[] exportLayouts(
+			long groupId, boolean privateLayout, Map parameterMap)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		return LayoutLocalServiceUtil.exportLayouts(ownerId, parameterMap);
+		return LayoutLocalServiceUtil.exportLayouts(
+			groupId, privateLayout, parameterMap);
 	}
 
-	public void importLayouts(String ownerId, Map parameterMap, File file)
+	public void importLayouts(
+			long groupId, boolean privateLayout, Map parameterMap, File file)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutLocalServiceUtil.importLayouts(
-			getUserId(), ownerId, parameterMap, file);
+			getUserId(), groupId, privateLayout, parameterMap, file);
 	}
 
 	public void setLayouts(
-			String ownerId, String parentLayoutId, String[] layoutIds)
+			long groupId, boolean privateLayout, long parentLayoutId,
+			long[] layoutIds)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		LayoutLocalServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
+		LayoutLocalServiceUtil.setLayouts(
+			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
 	public Layout updateLayout(
-			String layoutId, String ownerId, String parentLayoutId, String name,
-			String title, String languageId, String type, boolean hidden,
-			String friendlyURL)
+			long groupId, boolean privateLayout, long layoutId,
+			long parentLayoutId, String name, String title, String languageId,
+			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
-			layoutId, ownerId, parentLayoutId, name, title, languageId, type,
-			hidden, friendlyURL);
+			groupId, privateLayout, layoutId, parentLayoutId, name, title,
+			languageId, type, hidden, friendlyURL);
 	}
 
 	public Layout updateLayout(
-			String layoutId, String ownerId, String parentLayoutId, String name,
-			String title, String languageId, String type, boolean hidden,
-			String friendlyURL, Boolean iconImage, byte[] iconBytes)
+			long groupId, boolean privateLayout, long layoutId,
+			long parentLayoutId, String name, String title, String languageId,
+			String type, boolean hidden, String friendlyURL, Boolean iconImage,
+			byte[] iconBytes)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
-			layoutId, ownerId, parentLayoutId, name, title, languageId, type,
-			hidden, friendlyURL, iconImage, iconBytes);
+			groupId, privateLayout, layoutId, parentLayoutId, name, title,
+			languageId, type, hidden, friendlyURL, iconImage, iconBytes);
 	}
 
 	public Layout updateLayout(
-			String layoutId, String ownerId, String typeSettings)
+			long groupId, boolean privateLayout, long layoutId,
+			String typeSettings)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
-			layoutId, ownerId, typeSettings);
+			groupId, privateLayout, layoutId, typeSettings);
 	}
 
 	public Layout updateLookAndFeel(
-			String layoutId, String ownerId, String themeId,
+			long groupId, boolean privateLayout, long layoutId, String themeId,
 			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		PluginSettingLocalServiceUtil.checkPermission(
 			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
 		return LayoutLocalServiceUtil.updateLookAndFeel(
-			layoutId, ownerId, themeId, colorSchemeId, css, wapTheme);
+			groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
+			wapTheme);
 	}
 
 	public Layout updateName(
-			String layoutId, String ownerId, String name, String languageId)
+			long groupId, boolean privateLayout, long layoutId, String name,
+			String languageId)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateName(
-			layoutId, ownerId, name, languageId);
+			groupId, privateLayout, layoutId, name, languageId);
 	}
 
 	public Layout updateParentLayoutId(
-			String layoutId, String ownerId, String parentLayoutId)
+			long groupId, boolean privateLayout, long layoutId,
+			long parentLayoutId)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateParentLayoutId(
-			layoutId, ownerId, parentLayoutId);
+			groupId, privateLayout, layoutId, parentLayoutId);
 	}
 
-	public Layout updatePriority(String layoutId, String ownerId, int priority)
+	public Layout updatePriority(
+			long groupId, boolean privateLayout, long layoutId, int priority)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
-			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updatePriority(
-			layoutId, ownerId, priority);
+			groupId, privateLayout, layoutId, priority);
 	}
 
 }

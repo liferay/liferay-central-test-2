@@ -58,7 +58,7 @@ public interface PollsQuestionLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
@@ -67,7 +67,7 @@ public interface PollsQuestionLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
@@ -77,7 +77,7 @@ public interface PollsQuestionLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, java.lang.String plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,

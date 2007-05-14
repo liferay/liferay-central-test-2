@@ -68,10 +68,9 @@ import org.json.JSONObject;
  *
  */
 public class IGFolderServiceJSON {
-	public static JSONObject addFolder(java.lang.String plid,
-		long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addFolder(long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.addFolder(plid,
@@ -81,9 +80,9 @@ public class IGFolderServiceJSON {
 		return IGFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFolder(java.lang.String plid,
-		long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+	public static JSONObject addFolder(long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

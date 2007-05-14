@@ -45,12 +45,12 @@ public class RenderResponseFactory {
 			long companyId)
 		throws Exception {
 
-		return create(req, res, portletName, companyId, null);
+		return create(req, res, portletName, companyId, 0);
 	}
 
 	public static RenderResponseImpl create(
 			RenderRequestImpl req, HttpServletResponse res, String portletName,
-			long companyId, String plid)
+			long companyId, long plid)
 		throws Exception {
 
 		if (CachePropsUtil.COMMONS_POOL_ENABLED) {

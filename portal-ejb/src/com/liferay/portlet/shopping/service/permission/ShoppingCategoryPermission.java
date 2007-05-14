@@ -42,7 +42,7 @@ import com.liferay.util.Validator;
 public class ShoppingCategoryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, String categoryId,
+			PermissionChecker permissionChecker, long plid, String categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -72,7 +72,7 @@ public class ShoppingCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String categoryId,
+			PermissionChecker permissionChecker, long plid, String categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 

@@ -44,7 +44,7 @@
 
 				String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-				String objId = nodeValues[3];
+				long objId = GetterUtil.getLong(nodeValues[3]);
 				String name = nodeValues[4];
 
 				int depth = 0;
@@ -60,7 +60,7 @@
 				Layout copiableLayout = null;
 
 				try {
-					copiableLayout = LayoutLocalServiceUtil.getLayout(LayoutImpl.getLayoutId(objId), LayoutImpl.getOwnerId(objId));
+					copiableLayout = LayoutLocalServiceUtil.getLayout(objId);
 				}
 				catch (Exception e) {
 				}

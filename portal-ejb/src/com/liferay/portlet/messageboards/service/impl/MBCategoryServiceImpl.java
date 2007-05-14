@@ -41,9 +41,8 @@ public class MBCategoryServiceImpl
 	extends PrincipalBean implements MBCategoryService {
 
 	public MBCategory addCategory(
-			String plid, long parentCategoryId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long plid, long parentCategoryId, String name, String description,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -56,9 +55,8 @@ public class MBCategoryServiceImpl
 	}
 
 	public MBCategory addCategory(
-			String plid, long parentCategoryId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
+			long plid, long parentCategoryId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(

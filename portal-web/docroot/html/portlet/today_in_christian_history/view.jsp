@@ -83,7 +83,7 @@ List events = TICHUtil.getEvents();
 						<c:if test="<%= user.hasCompanyMx() %>">
 
 							<%
-							PortletURL mailURL = new PortletURLImpl(request, PortletKeys.MAIL, plid, true);
+							PortletURL mailURL = new PortletURLImpl(request, PortletKeys.MAIL, plid.longValue(), true);
 
 							mailURL.setWindowState(WindowState.MAXIMIZED);
 							mailURL.setPortletMode(PortletMode.VIEW);

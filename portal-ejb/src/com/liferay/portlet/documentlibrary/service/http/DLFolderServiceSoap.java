@@ -79,10 +79,9 @@ import java.rmi.RemoteException;
  */
 public class DLFolderServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		long plid, java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
 					parentFolderId, name, description, addCommunityPermissions,
@@ -97,9 +96,8 @@ public class DLFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		java.lang.String plid, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,

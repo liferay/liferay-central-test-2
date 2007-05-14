@@ -50,18 +50,17 @@ package com.liferay.portlet.journal.service;
  */
 public interface JournalStructureService {
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String structureId, boolean autoStructureId,
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String structureId, boolean autoStructureId, long plid,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String structureId, boolean autoStructureId,
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String[] communityPermissions,
+		java.lang.String structureId, boolean autoStructureId, long plid,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

@@ -48,7 +48,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
@@ -86,13 +85,9 @@ import org.dom4j.io.SAXReader;
  */
 public class LayoutImpl extends LayoutModelImpl implements Layout {
 
-	public static final String PRIVATE = "PRI.";
+	public static final long DEFAULT_PLID = 0;
 
-	public static final String PUBLIC = "PUB.";
-
-	public static final String DEFAULT_PLID = "default";
-
-	public static final String DEFAULT_PARENT_LAYOUT_ID = "-1";
+	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
 
 	public static final String[] TYPES =
 		PropsUtil.getArray(PropsUtil.LAYOUT_TYPES);
@@ -104,55 +99,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public static final String TYPE_URL = "url";
 
 	public static final String TYPE_ARTICLE = "article";
-
-	public static long getGroupId(String ownerId) {
-		if ((ownerId != null) &&
-			(ownerId.startsWith(PRIVATE) || ownerId.startsWith(PUBLIC))) {
-
-			return GetterUtil.getLong(
-				ownerId.substring(PRIVATE.length(), ownerId.length()));
-		}
-		else {
-			return 0;
-		}
-	}
-
-	public static String getLayoutId(String plid) {
-		if (plid != null) {
-			int pos = plid.lastIndexOf(StringPool.PERIOD);
-
-			if (pos != -1) {
-				return plid.substring(pos + 1, plid.length());
-			}
-		}
-
-		return null;
-	}
-
-	public static String getOwnerId(String plid) {
-		if (plid != null) {
-			int pos = plid.lastIndexOf(StringPool.PERIOD);
-
-			if (pos != -1) {
-				return plid.substring(0, pos);
-			}
-		}
-
-		return null;
-	}
-
-	public static String getUnknownPlid(long groupId) {
-		return PUBLIC + groupId + StringPool.PERIOD + DEFAULT_PARENT_LAYOUT_ID;
-	}
-
-	public static boolean isPrivateLayout(String ownerId) {
-		if (ownerId.startsWith(PRIVATE)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 
 	public static int validateFriendlyURL(String friendlyURL) {
 		if (friendlyURL.length() < 2) {
@@ -211,18 +157,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public LayoutImpl() {
 	}
 
-	public void setOwnerId(String ownerId) {
-		_plid = ownerId + StringPool.PERIOD + getLayoutId();
-		_groupId = getGroupId(ownerId);
-		_privateLayout = isPrivateLayout(ownerId);
-
-		super.setOwnerId(ownerId);
-	}
-
-	public String getPlid() {
-		return _plid;
-	}
-
 	public Group getGroup() {
 		Group group = null;
 
@@ -238,16 +172,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return group;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public boolean isPrivateLayout() {
-		return _privateLayout;
-	}
-
 	public boolean isShared() {
-		if (!_privateLayout) {
+		if (!isPrivateLayout()) {
 			return true;
 		}
 		else {
@@ -265,19 +191,20 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public String getAncestorLayoutId() {
-		String ancestorLayoutId = StringPool.BLANK;
+	public long getAncestorLayoutId() {
+		long ancestorLayoutId = 0;
 
 		try {
 			Layout ancestorLayout = this;
 
 			while (true) {
-				if (!ancestorLayout.getParentLayoutId().equals(
-						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+				if (ancestorLayout.getParentLayoutId() !=
+						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
 
 					ancestorLayout = LayoutLocalServiceUtil.getLayout(
-						ancestorLayout.getParentLayoutId(),
-						ancestorLayout.getOwnerId());
+						ancestorLayout.getGroupId(),
+						ancestorLayout.isPrivateLayout(),
+						ancestorLayout.getParentLayoutId());
 				}
 				else {
 					ancestorLayoutId = ancestorLayout.getLayoutId();
@@ -293,18 +220,18 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return ancestorLayoutId;
 	}
 
-	public boolean hasAncestor(String layoutId)
+	public boolean hasAncestor(long layoutId)
 		throws PortalException, SystemException {
 
-		String parentLayoutId = getParentLayoutId();
+		long parentLayoutId = getParentLayoutId();
 
-		while (!parentLayoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
-			if (parentLayoutId.equals(layoutId)) {
+		while (parentLayoutId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+			if (parentLayoutId == layoutId) {
 				return true;
 			}
 			else {
 				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
-					parentLayoutId, getOwnerId());
+					getGroupId(), isPrivateLayout(), parentLayoutId);
 
 				parentLayoutId = parentLayout.getParentLayoutId();
 			}
@@ -315,7 +242,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public boolean isFirstParent() {
 		if (isFirstChild() &&
-			getParentLayoutId().equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+			(getParentLayoutId() == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 
 			return true;
 		}
@@ -334,7 +261,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public List getChildren() throws PortalException, SystemException {
-		return LayoutLocalServiceUtil.getLayouts(getOwnerId(), getLayoutId());
+		return LayoutLocalServiceUtil.getLayouts(
+			getGroupId(), isPrivateLayout(), getLayoutId());
 	}
 
 	public List getChildren(PermissionChecker permissionChecker)
@@ -349,8 +277,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 			if (layout.isHidden() ||
 				!LayoutPermission.contains(
-					permissionChecker, layout.getLayoutId(),
-					layout.getOwnerId(), ActionKeys.VIEW)) {
+					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
@@ -466,7 +393,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		LayoutSet layoutSet = null;
 
 		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(getOwnerId());
+			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				getGroupId(), isPrivateLayout());
 		}
 		catch (Exception e) {
 			layoutSet = new LayoutSetImpl();
@@ -576,13 +504,13 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public boolean isSelected(
-		boolean selectable, Layout layout, String ancestorLayoutId) {
+		boolean selectable, Layout layout, long ancestorLayoutId) {
 
 		if (selectable) {
-			String layoutId = getLayoutId();
+			long layoutId = getLayoutId();
 
-			if (layoutId.equals(layout.getLayoutId()) ||
-				layoutId.equals(ancestorLayoutId)) {
+			if ((layoutId == layout.getLayoutId()) ||
+				(layoutId == ancestorLayoutId)) {
 
 				return true;
 			}
@@ -788,9 +716,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	private static Log _log = LogFactory.getLog(LayoutImpl.class);
 
-	private String _plid;
-	private long _groupId;
-	private boolean _privateLayout;
 	private Properties _typeSettingsProperties = null;
 
 }

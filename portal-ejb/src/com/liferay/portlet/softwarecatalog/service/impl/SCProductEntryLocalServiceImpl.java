@@ -95,7 +95,7 @@ public class SCProductEntryLocalServiceImpl
 	extends SCProductEntryLocalServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(
-			long userId, String plid, String name, String type,
+			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
 			Map images, boolean addCommunityPermissions,
@@ -110,7 +110,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public SCProductEntry addProductEntry(
-			long userId, String plid, String name, String type,
+			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
 			Map images, String[] communityPermissions,
@@ -124,7 +124,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public SCProductEntry addProductEntry(
-			long userId, String plid, String name, String type,
+			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
 			Map images, Boolean addCommunityPermissions,

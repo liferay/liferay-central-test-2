@@ -72,7 +72,7 @@ public class PortalSoapTest extends BaseSoapTest {
 				passwordReset, autoScreenName, screenName, emailAddress, locale,
 				firstName, middleName, lastName, prefixId, suffixId, male,
 				birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				organizationId, locationId, false);
+				organizationId, locationId, sendMail);
 
 			user = getUserService().getUserByEmailAddress(
 				TestConstants.COMPANY_ID, emailAddress);

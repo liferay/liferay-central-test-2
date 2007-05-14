@@ -56,7 +56,7 @@ public class BookmarksFolderLocalServiceImpl
 	extends BookmarksFolderLocalServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
-			long userId, String plid, long parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -68,7 +68,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public BookmarksFolder addFolder(
-			long userId, String plid, long parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -79,7 +79,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public BookmarksFolder addFolder(
-			long userId, String plid, long parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)

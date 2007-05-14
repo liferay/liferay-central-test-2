@@ -51,7 +51,7 @@ String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
 
 if (Validator.isNull(modelResource)) {
-	PortletURL portletURL = new PortletURLImpl(request, portletResource, plid, false);
+	PortletURL portletURL = new PortletURLImpl(request, portletResource, plid.longValue(), false);
 
 	portletURL.setWindowState(WindowState.NORMAL);
 	portletURL.setPortletMode(PortletMode.VIEW);
@@ -65,15 +65,14 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = LanguageUtil.get(pageContext, "portlet");
 }
 
-String ownerId = layout.getOwnerId();
 long groupId = layout.getGroupId();
 
-if (modelResource.equals(Layout.class.getName())) {
-	int x = resourcePrimKey.indexOf("ownerId=");
-	int y = resourcePrimKey.indexOf("}", x);
+Layout selLayout = null;
 
-	ownerId = resourcePrimKey.substring(x + 8, y);
-	groupId = LayoutImpl.getGroupId(ownerId);
+if (modelResource.equals(Layout.class.getName())) {
+	selLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey));
+
+	groupId = selLayout.getGroupId();
 }
 
 Resource resource = null;
@@ -243,7 +242,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 	// Private layouts should not have guest assignments
 
-	if (LayoutImpl.isPrivateLayout(ownerId)) {
+	if (selLayout.isPrivateLayout()) {
 		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 	}
 }
@@ -297,11 +296,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 					userParams.put("permission", new Long(resource.getResourceId()));
 				}
 				else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
-					String layoutGroupId = StringUtil.split(resourcePrimKey, ".")[1];
-
-					layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
-
-					userParams.put("usersGroups", new Long(GetterUtil.getLong(layoutGroupId)));
+					userParams.put("usersGroups", new Long(groupId));
 				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());

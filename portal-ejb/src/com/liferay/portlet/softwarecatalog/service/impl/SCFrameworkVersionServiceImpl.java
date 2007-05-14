@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -45,12 +47,13 @@ public class SCFrameworkVersionServiceImpl
 	extends PrincipalBean implements SCFrameworkVersionService {
 
 	public SCFrameworkVersion addFrameworkVersion(
-			String plid, String name, String url, boolean active, int priority,
+			long plid, String name, String url, boolean active, int priority,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		SCFrameworkVersionPermission.check(
-			getPermissionChecker(), plid, ActionKeys.ADD_FRAMEWORK_VERSION);
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
+			ActionKeys.ADD_FRAMEWORK_VERSION);
 
 		return SCFrameworkVersionLocalServiceUtil.addFrameworkVersion(
 			getUserId(), plid, name, url, active, priority,
@@ -58,12 +61,13 @@ public class SCFrameworkVersionServiceImpl
 	}
 
 	public SCFrameworkVersion addFrameworkVersion(
-			String plid, String name, String url, boolean active, int priority,
+			long plid, String name, String url, boolean active, int priority,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		SCFrameworkVersionPermission.check(
-			getPermissionChecker(), plid, ActionKeys.ADD_FRAMEWORK_VERSION);
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
+			ActionKeys.ADD_FRAMEWORK_VERSION);
 
 		return SCFrameworkVersionLocalServiceUtil.addFrameworkVersion(
 			getUserId(), plid, name, url, active, priority,

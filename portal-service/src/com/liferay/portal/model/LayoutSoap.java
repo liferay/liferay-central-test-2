@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.LayoutPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -49,9 +47,11 @@ import java.util.List;
 public class LayoutSoap implements Serializable {
 	public static LayoutSoap toSoapModel(Layout model) {
 		LayoutSoap soapModel = new LayoutSoap();
-		soapModel.setLayoutId(model.getLayoutId());
-		soapModel.setOwnerId(model.getOwnerId());
+		soapModel.setPlid(model.getPlid());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setPrivateLayout(model.getPrivateLayout());
+		soapModel.setLayoutId(model.getLayoutId());
 		soapModel.setParentLayoutId(model.getParentLayoutId());
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
@@ -84,29 +84,28 @@ public class LayoutSoap implements Serializable {
 	public LayoutSoap() {
 	}
 
-	public LayoutPK getPrimaryKey() {
-		return new LayoutPK(_layoutId, _ownerId);
+	public long getPrimaryKey() {
+		return _plid;
 	}
 
-	public void setPrimaryKey(LayoutPK pk) {
-		setLayoutId(pk.layoutId);
-		setOwnerId(pk.ownerId);
+	public void setPrimaryKey(long pk) {
+		setPlid(pk);
 	}
 
-	public String getLayoutId() {
-		return _layoutId;
+	public long getPlid() {
+		return _plid;
 	}
 
-	public void setLayoutId(String layoutId) {
-		_layoutId = layoutId;
+	public void setPlid(long plid) {
+		_plid = plid;
 	}
 
-	public String getOwnerId() {
-		return _ownerId;
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setOwnerId(String ownerId) {
-		_ownerId = ownerId;
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -117,11 +116,31 @@ public class LayoutSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getParentLayoutId() {
+	public boolean getPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
+
+	public long getLayoutId() {
+		return _layoutId;
+	}
+
+	public void setLayoutId(long layoutId) {
+		_layoutId = layoutId;
+	}
+
+	public long getParentLayoutId() {
 		return _parentLayoutId;
 	}
 
-	public void setParentLayoutId(String parentLayoutId) {
+	public void setParentLayoutId(long parentLayoutId) {
 		_parentLayoutId = parentLayoutId;
 	}
 
@@ -237,10 +256,12 @@ public class LayoutSoap implements Serializable {
 		_priority = priority;
 	}
 
-	private String _layoutId;
-	private String _ownerId;
+	private long _plid;
+	private long _groupId;
 	private long _companyId;
-	private String _parentLayoutId;
+	private boolean _privateLayout;
+	private long _layoutId;
+	private long _parentLayoutId;
 	private String _name;
 	private String _title;
 	private String _type;

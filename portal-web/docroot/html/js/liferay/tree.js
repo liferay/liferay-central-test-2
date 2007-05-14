@@ -444,8 +444,9 @@ var Tree = new Class({
 				url: themeDisplay.getPathMain() + '/layout_management/update_page',
 				data: {
 					cmd: 'parent_layout_id',
+					groupId: themeDisplay.getGroupId(),
+					privateLayout: themeDisplay.isPrivateLayout(),
 					layoutId: currentId,
-					ownerId: themeDisplay.getOwnerId(),
 					parentLayoutId: newParentId
 				}
 			}

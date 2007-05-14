@@ -42,7 +42,7 @@ public class ShoppingOrderServiceImpl
 	extends PrincipalBean implements ShoppingOrderService {
 
 	public void completeOrder(
-			String plid, String orderId, String ppTxnId, String ppPaymentStatus,
+			long plid, String orderId, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class ShoppingOrderServiceImpl
 			ppPayerEmail, false);
 	}
 
-	public void deleteOrder(String plid, String orderId)
+	public void deleteOrder(long plid, String orderId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -65,7 +65,7 @@ public class ShoppingOrderServiceImpl
 		ShoppingOrderLocalServiceUtil.deleteOrder(orderId);
 	}
 
-	public ShoppingOrder getOrder(String plid, String orderId)
+	public ShoppingOrder getOrder(long plid, String orderId)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(orderId);
@@ -82,7 +82,7 @@ public class ShoppingOrderServiceImpl
 		}
 	}
 
-	public void sendEmail(String plid, String orderId, String emailType)
+	public void sendEmail(long plid, String orderId, String emailType)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -93,7 +93,7 @@ public class ShoppingOrderServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			String plid, String orderId, String billingFirstName,
+			long plid, String orderId, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingCompany, String billingStreet, String billingCity,
 			String billingState, String billingZip, String billingCountry,
@@ -121,7 +121,7 @@ public class ShoppingOrderServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			String plid, String orderId, String ppTxnId, String ppPaymentStatus,
+			long plid, String orderId, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 

@@ -68,9 +68,9 @@ import org.json.JSONObject;
  *
  */
 public class WikiNodeServiceJSON {
-	public static JSONObject addNode(java.lang.String plid,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public static JSONObject addNode(long plid, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
@@ -79,9 +79,8 @@ public class WikiNodeServiceJSON {
 		return WikiNodeJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addNode(java.lang.String plid,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+	public static JSONObject addNode(long plid, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

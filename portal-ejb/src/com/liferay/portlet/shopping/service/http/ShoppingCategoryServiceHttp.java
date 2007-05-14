@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -71,19 +72,14 @@ import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
  */
 public class ShoppingCategoryServiceHttp {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
+		HttpPrincipal httpPrincipal, long plid,
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = parentCategoryId;
 
 			if (parentCategoryId == null) {
@@ -136,19 +132,14 @@ public class ShoppingCategoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
+		HttpPrincipal httpPrincipal, long plid,
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = parentCategoryId;
 
 			if (parentCategoryId == null) {

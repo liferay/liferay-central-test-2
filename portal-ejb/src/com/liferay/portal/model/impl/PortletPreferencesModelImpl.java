@@ -54,20 +54,15 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PortletPreferences";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "portletPreferencesId", new Integer(Types.BIGINT) },
-			{ "ownerId", new Integer(Types.VARCHAR) },
-			{ "layoutId", new Integer(Types.VARCHAR) },
+			{ "ownerId", new Integer(Types.BIGINT) },
+			{ "ownerType", new Integer(Types.INTEGER) },
+			{ "plid", new Integer(Types.BIGINT) },
 			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "preferences", new Integer(Types.CLOB) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences.ownerId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences.layoutId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences.portletId"),
 			XSS_ALLOW_BY_MODEL);
@@ -98,37 +93,33 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getOwnerId() {
-		return GetterUtil.getString(_ownerId);
+	public long getOwnerId() {
+		return _ownerId;
 	}
 
-	public void setOwnerId(String ownerId) {
-		if (((ownerId == null) && (_ownerId != null)) ||
-				((ownerId != null) && (_ownerId == null)) ||
-				((ownerId != null) && (_ownerId != null) &&
-				!ownerId.equals(_ownerId))) {
-			if (!XSS_ALLOW_OWNERID) {
-				ownerId = XSSUtil.strip(ownerId);
-			}
-
+	public void setOwnerId(long ownerId) {
+		if (ownerId != _ownerId) {
 			_ownerId = ownerId;
 		}
 	}
 
-	public String getLayoutId() {
-		return GetterUtil.getString(_layoutId);
+	public int getOwnerType() {
+		return _ownerType;
 	}
 
-	public void setLayoutId(String layoutId) {
-		if (((layoutId == null) && (_layoutId != null)) ||
-				((layoutId != null) && (_layoutId == null)) ||
-				((layoutId != null) && (_layoutId != null) &&
-				!layoutId.equals(_layoutId))) {
-			if (!XSS_ALLOW_LAYOUTID) {
-				layoutId = XSSUtil.strip(layoutId);
-			}
+	public void setOwnerType(int ownerType) {
+		if (ownerType != _ownerType) {
+			_ownerType = ownerType;
+		}
+	}
 
-			_layoutId = layoutId;
+	public long getPlid() {
+		return _plid;
+	}
+
+	public void setPlid(long plid) {
+		if (plid != _plid) {
+			_plid = plid;
 		}
 	}
 
@@ -170,7 +161,8 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		PortletPreferencesImpl clone = new PortletPreferencesImpl();
 		clone.setPortletPreferencesId(getPortletPreferencesId());
 		clone.setOwnerId(getOwnerId());
-		clone.setLayoutId(getLayoutId());
+		clone.setOwnerType(getOwnerType());
+		clone.setPlid(getPlid());
 		clone.setPortletId(getPortletId());
 		clone.setPreferences(getPreferences());
 
@@ -225,8 +217,9 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	}
 
 	private long _portletPreferencesId;
-	private String _ownerId;
-	private String _layoutId;
+	private long _ownerId;
+	private int _ownerType;
+	private long _plid;
 	private String _portletId;
 	private String _preferences;
 }

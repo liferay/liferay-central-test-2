@@ -22,11 +22,12 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -121,8 +122,8 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		}
 	}
 
-	protected String getPlid(long groupId) {
-		return LayoutImpl.getUnknownPlid(groupId);
+	protected long getPlid(long groupId) throws SystemException {
+		return LayoutLocalServiceUtil.getDefaultPlid(groupId, true);
 	}
 
 	private String _rootPath;

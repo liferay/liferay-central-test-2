@@ -36,7 +36,7 @@ String tabs1Names = "categories,recent-posts,statistics";
 if (themeDisplay.isSignedIn()) {
 	tabs1Names = "categories,my-posts,recent-posts,statistics";
 
-	if (PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), ActionKeys.BAN_USER)) {
+	if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) {
 		tabs1Names += ",banned-users";
 	}
 }

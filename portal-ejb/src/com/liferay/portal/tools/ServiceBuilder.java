@@ -5379,11 +5379,18 @@ public class ServiceBuilder {
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
+			String colType = col.getType();
+
 			if (col.isPrimitiveType()) {
-				sm.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
+				if (colType.equals("boolean")) {
+					sm.append("jsonObj.put(\"" + col.getName() + "\", model.is" + col.getMethodName() + "());");
+				}
+				else {
+					sm.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
+				}
 			}
 			else {
-				sm.append(col.getType() + " " + col.getName() + " = model.get" + col.getMethodName() + "();");
+				sm.append(colType + " " + col.getName() + " = model.get" + col.getMethodName() + "();");
 				sm.append("if (" + col.getName() + " == null) {");
 				sm.append("jsonObj.put(\"" + col.getName() + "\", StringPool.BLANK);");
 				sm.append("}");

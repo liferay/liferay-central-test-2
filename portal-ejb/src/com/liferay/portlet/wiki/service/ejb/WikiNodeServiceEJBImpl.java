@@ -54,10 +54,9 @@ import javax.ejb.SessionContext;
  *
  */
 public class WikiNodeServiceEJBImpl implements WikiNodeService, SessionBean {
-	public com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -66,9 +65,9 @@ public class WikiNodeServiceEJBImpl implements WikiNodeService, SessionBean {
 			description, addCommunityPermissions, addGuestPermissions);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode addNode(
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+	public com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

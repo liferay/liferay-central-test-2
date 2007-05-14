@@ -24,8 +24,6 @@ package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
-
 /**
  * <a href="JournalContentSearchModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,25 +45,13 @@ import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
  *
  */
 public interface JournalContentSearchModel extends BaseModel {
-	public JournalContentSearchPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(JournalContentSearchPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getPortletId();
+	public long getContentSearchId();
 
-	public void setPortletId(String portletId);
-
-	public String getLayoutId();
-
-	public void setLayoutId(String layoutId);
-
-	public String getOwnerId();
-
-	public void setOwnerId(String ownerId);
-
-	public String getArticleId();
-
-	public void setArticleId(String articleId);
+	public void setContentSearchId(long contentSearchId);
 
 	public long getCompanyId();
 
@@ -74,4 +60,22 @@ public interface JournalContentSearchModel extends BaseModel {
 	public long getGroupId();
 
 	public void setGroupId(long groupId);
+
+	public boolean getPrivateLayout();
+
+	public boolean isPrivateLayout();
+
+	public void setPrivateLayout(boolean privateLayout);
+
+	public long getLayoutId();
+
+	public void setLayoutId(long layoutId);
+
+	public String getPortletId();
+
+	public void setPortletId(String portletId);
+
+	public String getArticleId();
+
+	public void setArticleId(String articleId);
 }

@@ -41,13 +41,13 @@
 
 		String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-		String objId = nodeValues[3];
+		long objId = GetterUtil.getLong(nodeValues[3]);
 		String name = UnicodeFormatter.toString(nodeValues[4]);
 
 		// Set a better name and remove depth because href should be in the 5th
 		// position
 
-		if (selPlid.equals(objId)) {
+		if (selPlid == objId) {
 			name = "<strong>" + name + "</strong>";
 		}
 

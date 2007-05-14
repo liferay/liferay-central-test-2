@@ -48,21 +48,13 @@ package com.liferay.portal.model;
  *
  */
 public interface Layout extends LayoutModel {
-	public void setOwnerId(java.lang.String ownerId);
-
-	public java.lang.String getPlid();
-
 	public com.liferay.portal.model.Group getGroup();
-
-	public long getGroupId();
-
-	public boolean isPrivateLayout();
 
 	public boolean isShared();
 
-	public java.lang.String getAncestorLayoutId();
+	public long getAncestorLayoutId();
 
-	public boolean hasAncestor(java.lang.String layoutId)
+	public boolean hasAncestor(long layoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -154,6 +146,5 @@ public interface Layout extends LayoutModel {
 	public java.lang.String getTarget();
 
 	public boolean isSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout,
-		java.lang.String ancestorLayoutId);
+		com.liferay.portal.model.Layout layout, long ancestorLayoutId);
 }

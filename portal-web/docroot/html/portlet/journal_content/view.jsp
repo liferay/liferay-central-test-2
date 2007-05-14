@@ -199,11 +199,11 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 	}
 	%>
 
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
 		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
 	</c:if>
 
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
 			<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
 			<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />

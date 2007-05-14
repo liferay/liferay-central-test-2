@@ -68,9 +68,9 @@ public class JournalStructureLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long plid, java.lang.String name, java.lang.String description,
+		java.lang.String xsd, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalStructureLocalServiceFactory.getTxImpl().addStructure(userId,
@@ -80,9 +80,8 @@ public class JournalStructureLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -93,9 +92,8 @@ public class JournalStructureLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
-		java.lang.String plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.Boolean addCommunityPermissions,
+		long plid, java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

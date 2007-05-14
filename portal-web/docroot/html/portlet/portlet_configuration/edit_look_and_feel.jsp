@@ -39,7 +39,7 @@ String title = portletSetup.getValue("portlet-setup-title-" + languageId, String
 boolean useCustomTitle = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-use-custom-title", "false"));
 boolean showBorders = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", "true"));
 
-PortletURL lookAndFeelRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid, false);
+PortletURL lookAndFeelRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), false);
 
 lookAndFeelRedirect.setWindowState(WindowState.MAXIMIZED);
 lookAndFeelRedirect.setPortletMode(PortletMode.VIEW);

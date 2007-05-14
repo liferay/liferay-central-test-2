@@ -44,7 +44,7 @@ public class ShoppingCouponServiceImpl
 	extends PrincipalBean implements ShoppingCouponService {
 
 	public ShoppingCoupon addCoupon(
-			String plid, String couponId, boolean autoCouponId, String name,
+			long plid, String couponId, boolean autoCouponId, String name,
 			String description, int startDateMonth, int startDateDay,
 			int startDateYear, int startDateHour, int startDateMinute,
 			int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
@@ -65,7 +65,7 @@ public class ShoppingCouponServiceImpl
 			minOrder, discount, discountType);
 	}
 
-	public void deleteCoupon(String plid, String couponId)
+	public void deleteCoupon(long plid, String couponId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -75,7 +75,7 @@ public class ShoppingCouponServiceImpl
 		ShoppingCouponLocalServiceUtil.deleteCoupon(couponId);
 	}
 
-	public ShoppingCoupon getCoupon(String plid, String couponId)
+	public ShoppingCoupon getCoupon(long plid, String couponId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -86,7 +86,7 @@ public class ShoppingCouponServiceImpl
 	}
 
 	public List search(
-			String couponId, String plid, long companyId, boolean active,
+			String couponId, long plid, long companyId, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws PortalException, SystemException {
 
@@ -100,7 +100,7 @@ public class ShoppingCouponServiceImpl
 	}
 
 	public ShoppingCoupon updateCoupon(
-			String plid, String couponId, String name, String description,
+			long plid, String couponId, String name, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,

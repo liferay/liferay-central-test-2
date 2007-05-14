@@ -72,22 +72,16 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
  */
 public class SCProductEntryServiceHttp {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.util.Map images,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -177,22 +171,17 @@ public class SCProductEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.util.Map images,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = name;
 
 			if (name == null) {

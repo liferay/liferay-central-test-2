@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class BlogsEntryServiceSoap {
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
-		java.lang.String plid, long categoryId, java.lang.String title,
+		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
@@ -100,7 +100,7 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
-		java.lang.String plid, long categoryId, java.lang.String title,
+		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,

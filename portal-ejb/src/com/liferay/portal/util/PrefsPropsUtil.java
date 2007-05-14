@@ -49,13 +49,13 @@ public class PrefsPropsUtil {
 	public static PortletPreferences getPreferences(long companyId)
 		throws PortalException, SystemException {
 
-		String ownerId =
-			PortletKeys.PREFS_OWNER_ID_COMPANY + StringPool.PERIOD + companyId;
-		String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+		long ownerId = companyId;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
+		long plid = PortletKeys.PREFS_PLID_SHARED;
 		String portletId = PortletKeys.LIFERAY_PORTAL;
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			companyId, ownerId, layoutId, portletId);
+			companyId, ownerId, ownerType, plid, portletId);
 	}
 
 	public static boolean getBoolean(String name)

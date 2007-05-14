@@ -44,7 +44,7 @@ public class CalEventServiceImpl
 	extends PrincipalBean implements CalEventService {
 
 	public CalEvent addEvent(
-			String plid, String title, String description, int startDateMonth,
+			long plid, String title, String description, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
@@ -68,7 +68,7 @@ public class CalEventServiceImpl
 	}
 
 	public CalEvent addEvent(
-			String plid, String title, String description, int startDateMonth,
+			long plid, String title, String description, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,

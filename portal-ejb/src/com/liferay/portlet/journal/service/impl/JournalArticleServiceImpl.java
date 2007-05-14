@@ -51,7 +51,7 @@ public class JournalArticleServiceImpl
 	extends PrincipalBean implements JournalArticleService {
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, String plid, String title,
+			String articleId, boolean autoArticleId, long plid, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -81,7 +81,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, String plid, String title,
+			String articleId, boolean autoArticleId, long plid, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -110,7 +110,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle approveArticle(
-			long groupId, String articleId, double version, String plid,
+			long groupId, String articleId, double version, long plid,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 

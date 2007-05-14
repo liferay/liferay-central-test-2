@@ -64,10 +64,11 @@ public interface JournalContentSearchLocalService {
 	public void deleteArticleContentSearches(long companyId, long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
-	public void deleteLayoutContentSearches(java.lang.String layoutId,
-		java.lang.String ownerId) throws com.liferay.portal.SystemException;
+	public void deleteLayoutContentSearches(long groupId,
+		boolean privateLayout, long layoutId)
+		throws com.liferay.portal.SystemException;
 
-	public void deleteOwnerContentSearches(java.lang.String ownerId)
+	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getArticleContentSearches()
@@ -77,22 +78,21 @@ public interface JournalContentSearchLocalService {
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getLayoutIds(java.lang.String ownerId, long groupId,
+	public java.util.List getLayoutIds(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
-	public int getLayoutIdsCount(java.lang.String ownerId, long groupId,
+	public int getLayoutIdsCount(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
-		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, long companyId, long groupId,
-		java.lang.String articleId)
+		long companyId, long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List updateContentSearch(java.lang.String portletId,
-		java.lang.String layoutId, java.lang.String ownerId, long companyId,
-		long groupId, java.lang.String[] articleIds)
+	public java.util.List updateContentSearch(long companyId, long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId,
+		java.lang.String[] articleIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

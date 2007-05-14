@@ -121,7 +121,7 @@ public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			long userId, String articleId, boolean autoArticleId, String plid,
+			long userId, String articleId, boolean autoArticleId, long plid,
 			String title, String description, String content, String type,
 			String structureId, String templateId, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
@@ -148,7 +148,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle addArticle(
-			long userId, String articleId, boolean autoArticleId, String plid,
+			long userId, String articleId, boolean autoArticleId, long plid,
 			String title, String description, String content, String type,
 			String structureId, String templateId, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
@@ -174,7 +174,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle addArticle(
-			long userId, String articleId, boolean autoArticleId, String plid,
+			long userId, String articleId, boolean autoArticleId, long plid,
 			String title, String description, String content, String type,
 			String structureId, String templateId, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
@@ -403,15 +403,14 @@ public class JournalArticleLocalServiceImpl
 				if ((diff > 0) && (diff < (Time.MINUTE * 15))) {
 					String articleURL = StringPool.BLANK;
 
-					String ownerId =
-						PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-							article.getGroupId();
-					String layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
+					long ownerId = article.getGroupId();
+					int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+					long plid = PortletKeys.PREFS_PLID_SHARED;
 					String portletId = PortletKeys.JOURNAL;
 
 					PortletPreferences prefs =
 						PortletPreferencesLocalServiceUtil.getPreferences(
-							article.getCompanyId(), ownerId, layoutId,
+							article.getCompanyId(), ownerId, ownerType, plid,
 							portletId);
 
 					sendEmail(article, articleURL, prefs, "review");

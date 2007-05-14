@@ -25,7 +25,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -44,23 +43,21 @@ import java.io.File;
 public class LayoutSetServiceImpl
 	extends PrincipalBean implements LayoutSetService {
 
-	public void updateLogo(String ownerId, boolean logo, File file)
+	public void updateLogo(
+			long groupId, boolean privateLayout, boolean logo, File file)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		LayoutSetLocalServiceUtil.updateLogo(ownerId, logo, file);
+		LayoutSetLocalServiceUtil.updateLogo(
+			groupId, privateLayout, logo, file);
 	}
 
 	public LayoutSet updateLookAndFeel(
-			String ownerId, String themeId, String colorSchemeId, String css,
-			boolean wapTheme)
+			long groupId, boolean privateLayout, String themeId,
+			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
@@ -69,19 +66,18 @@ public class LayoutSetServiceImpl
 			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
 		return LayoutSetLocalServiceUtil.updateLookAndFeel(
-			ownerId, themeId, colorSchemeId, css, wapTheme);
+			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 	}
 
-	public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
+	public LayoutSet updateVirtualHost(
+			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		return LayoutSetLocalServiceUtil.updateVirtualHost(
-			ownerId, virtualHost);
+			groupId, privateLayout, virtualHost);
 	}
 
 }

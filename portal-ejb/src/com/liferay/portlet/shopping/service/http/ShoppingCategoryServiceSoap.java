@@ -79,10 +79,9 @@ import java.rmi.RemoteException;
  */
 public class ShoppingCategoryServiceSoap {
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws RemoteException {
+		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
 					parentCategoryId, name, description,
@@ -97,9 +96,8 @@ public class ShoppingCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,

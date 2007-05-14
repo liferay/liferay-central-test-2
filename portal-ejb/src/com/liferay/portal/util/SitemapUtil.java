@@ -46,10 +46,12 @@ import org.dom4j.Element;
  */
 public class SitemapUtil {
 
-	public static String getSitemap(String ownerId, String urlPrefix)
+	public static String getSitemap(
+			long groupId, boolean privateLayout, String urlPrefix)
 		throws PortalException, SystemException {
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(ownerId);
+		List layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout);
 
 		return getSitemap(layouts, urlPrefix);
 	}

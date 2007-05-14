@@ -321,7 +321,7 @@ public class RenderResponseImpl implements RenderResponse {
 
 	protected void init(
 		RenderRequestImpl req, HttpServletResponse res, String portletName,
-		long companyId, String plid) {
+		long companyId, long plid) {
 
 		_req = req;
 		_res = res;
@@ -341,7 +341,7 @@ public class RenderResponseImpl implements RenderResponse {
 		_portlet = null;
 		_namespace = null;
 		_companyId = 0;
-		_plid = null;
+		_plid = 0;
 		_urlEncoder = null;
 		_title = null;
 		_useDefaultTemplate = null;
@@ -362,14 +362,14 @@ public class RenderResponseImpl implements RenderResponse {
 		return _companyId;
 	}
 
-	protected String getPlid() {
+	protected long getPlid() {
 		return _plid;
 	}
 
-	protected void setPlid(String plid) {
+	protected void setPlid(long plid) {
 		_plid = plid;
 
-		if (_plid == null) {
+		if (_plid <= 0) {
 			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
 
 			if (layout != null) {
@@ -402,7 +402,7 @@ public class RenderResponseImpl implements RenderResponse {
 	private Portlet _portlet;
 	private String _namespace;
 	private long _companyId;
-	private String _plid;
+	private long _plid;
 	private Map _properties;
 	private URLEncoder _urlEncoder;
 	private String _title;

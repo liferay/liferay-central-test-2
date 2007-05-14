@@ -107,11 +107,6 @@ public class WebSiteBuilder {
 						  String orionConfigDir) {
 
 		try {
-			_orionWebXmlDevelopment = System.getProperty(
-				"app.server.orion.web.xml.development");
-			_orionWebXmlJspCheck = System.getProperty(
-				"app.server.orion.web.xml.jsp.check");
-
 			_portalExtProperties = portalExtProperties;
 			_availableWebApps = availableWebApps;
 			_orionConfigDir = orionConfigDir;
@@ -417,8 +412,6 @@ public class WebSiteBuilder {
 		}
 	}
 
-	private String _orionWebXmlDevelopment = null;
-	private String _orionWebXmlJspCheck = null;
 	private String _portalExtProperties = null;
 	private String _availableWebApps = null;
 	private String _orionConfigDir = null;

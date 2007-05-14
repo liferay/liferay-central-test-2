@@ -22,15 +22,12 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceCode;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.util.StringUtil;
 
 /**
  * <a href="PrimKeyUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,9 +67,11 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			newValue = _groupIdMapper.getNewValue(new Long((String)oldValue));
 		}
 		else if (scope == ResourceImpl.SCOPE_INDIVIDUAL) {
-			String primKey = (String)oldValue;
+			//String primKey = (String)oldValue;
 
-			if (primKey.startsWith(LayoutImpl.PUBLIC) ||
+			// FIX ME
+
+			/*if (primKey.startsWith(LayoutImpl.PUBLIC) ||
 				primKey.startsWith(LayoutImpl.PRIVATE)) {
 
 				// PRI.1234.1_LAYOUT_56
@@ -89,7 +88,7 @@ public class PrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			}
 			else {
 				newValue = _compositeMapper.getNewValue(oldValue);
-			}
+			}*/
 		}
 
 		return newValue;

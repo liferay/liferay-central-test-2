@@ -66,25 +66,27 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 			begin, end);
 	}
 
-	public com.liferay.portal.model.LayoutSet addLayoutSet(
-		java.lang.String ownerId, long companyId)
+	public com.liferay.portal.model.LayoutSet addLayoutSet(long groupId,
+		boolean privateLayout)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutSetLocalServiceFactory.getTxImpl().addLayoutSet(ownerId,
-			companyId);
+		return LayoutSetLocalServiceFactory.getTxImpl().addLayoutSet(groupId,
+			privateLayout);
 	}
 
-	public void deleteLayoutSet(java.lang.String ownerId)
+	public void deleteLayoutSet(long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		LayoutSetLocalServiceFactory.getTxImpl().deleteLayoutSet(ownerId);
+		LayoutSetLocalServiceFactory.getTxImpl().deleteLayoutSet(groupId,
+			privateLayout);
 	}
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String ownerId)
+	public com.liferay.portal.model.LayoutSet getLayoutSet(long groupId,
+		boolean privateLayout)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutSetLocalServiceFactory.getTxImpl().getLayoutSet(ownerId);
+		return LayoutSetLocalServiceFactory.getTxImpl().getLayoutSet(groupId,
+			privateLayout);
 	}
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet(long companyId,
@@ -95,35 +97,37 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 			virtualHost);
 	}
 
-	public void updateLogo(java.lang.String ownerId, boolean logo,
+	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
 		java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		LayoutSetLocalServiceFactory.getTxImpl().updateLogo(ownerId, logo, file);
+		LayoutSetLocalServiceFactory.getTxImpl().updateLogo(groupId,
+			privateLayout, logo, file);
 	}
 
-	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
-		java.lang.String ownerId, java.lang.String themeId,
+	public com.liferay.portal.model.LayoutSet updateLookAndFeel(long groupId,
+		boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutSetLocalServiceFactory.getTxImpl().updateLookAndFeel(ownerId,
-			themeId, colorSchemeId, css, wapTheme);
+		return LayoutSetLocalServiceFactory.getTxImpl().updateLookAndFeel(groupId,
+			privateLayout, themeId, colorSchemeId, css, wapTheme);
 	}
 
-	public com.liferay.portal.model.LayoutSet updatePageCount(
-		java.lang.String ownerId)
+	public com.liferay.portal.model.LayoutSet updatePageCount(long groupId,
+		boolean privateLayout)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutSetLocalServiceFactory.getTxImpl().updatePageCount(ownerId);
+		return LayoutSetLocalServiceFactory.getTxImpl().updatePageCount(groupId,
+			privateLayout);
 	}
 
-	public com.liferay.portal.model.LayoutSet updateVirtualHost(
-		java.lang.String ownerId, java.lang.String virtualHost)
+	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
+		boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutSetLocalServiceFactory.getTxImpl().updateVirtualHost(ownerId,
-			virtualHost);
+		return LayoutSetLocalServiceFactory.getTxImpl().updateVirtualHost(groupId,
+			privateLayout, virtualHost);
 	}
 
 	public void ejbCreate() throws CreateException {

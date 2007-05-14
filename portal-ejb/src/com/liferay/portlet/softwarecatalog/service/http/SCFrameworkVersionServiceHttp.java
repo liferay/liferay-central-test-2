@@ -73,19 +73,13 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
  */
 public class SCFrameworkVersionServiceHttp {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String name, java.lang.String url, boolean active,
-		int priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		java.lang.String url, boolean active, int priority,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -134,19 +128,14 @@ public class SCFrameworkVersionServiceHttp {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
-		HttpPrincipal httpPrincipal, java.lang.String plid,
-		java.lang.String name, java.lang.String url, boolean active,
-		int priority, java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		java.lang.String url, boolean active, int priority,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = plid;
-
-			if (plid == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(plid);
 			Object paramObj1 = name;
 
 			if (name == null) {

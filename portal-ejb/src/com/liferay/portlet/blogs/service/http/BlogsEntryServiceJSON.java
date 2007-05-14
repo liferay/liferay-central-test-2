@@ -68,7 +68,7 @@ import org.json.JSONObject;
  *
  */
 public class BlogsEntryServiceJSON {
-	public static JSONObject addEntry(java.lang.String plid, long categoryId,
+	public static JSONObject addEntry(long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean addCommunityPermissions,
@@ -83,7 +83,7 @@ public class BlogsEntryServiceJSON {
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addEntry(java.lang.String plid, long categoryId,
+	public static JSONObject addEntry(long plid, long categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, java.lang.String[] tagsEntries,

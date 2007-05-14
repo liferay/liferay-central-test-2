@@ -43,7 +43,7 @@ public class BlogsEntryServiceImpl
 	extends PrincipalBean implements BlogsEntryService {
 
 	public BlogsEntry addEntry(
-			String plid, long categoryId, String title, String content,
+			long plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
@@ -61,7 +61,7 @@ public class BlogsEntryServiceImpl
 	}
 
 	public BlogsEntry addEntry(
-			String plid, long categoryId, String title, String content,
+			long plid, long categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)

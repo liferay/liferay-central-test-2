@@ -78,11 +78,10 @@ import java.rmi.RemoteException;
  *
  */
 public class ShoppingOrderServiceSoap {
-	public static void completeOrder(java.lang.String plid,
-		java.lang.String orderId, java.lang.String ppTxnId,
-		java.lang.String ppPaymentStatus, double ppPaymentGross,
-		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws RemoteException {
+	public static void completeOrder(long plid, java.lang.String orderId,
+		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
+		double ppPaymentGross, java.lang.String ppReceiverEmail,
+		java.lang.String ppPayerEmail) throws RemoteException {
 		try {
 			ShoppingOrderServiceUtil.completeOrder(plid, orderId, ppTxnId,
 				ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
@@ -93,8 +92,8 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static void deleteOrder(java.lang.String plid,
-		java.lang.String orderId) throws RemoteException {
+	public static void deleteOrder(long plid, java.lang.String orderId)
+		throws RemoteException {
 		try {
 			ShoppingOrderServiceUtil.deleteOrder(plid, orderId);
 		}
@@ -105,8 +104,7 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap getOrder(
-		java.lang.String plid, java.lang.String orderId)
-		throws RemoteException {
+		long plid, java.lang.String orderId) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(plid,
 					orderId);
@@ -119,9 +117,8 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static void sendEmail(java.lang.String plid,
-		java.lang.String orderId, java.lang.String emailType)
-		throws RemoteException {
+	public static void sendEmail(long plid, java.lang.String orderId,
+		java.lang.String emailType) throws RemoteException {
 		try {
 			ShoppingOrderServiceUtil.sendEmail(plid, orderId, emailType);
 		}
@@ -132,14 +129,13 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
-		java.lang.String plid, java.lang.String orderId,
-		java.lang.String billingFirstName, java.lang.String billingLastName,
-		java.lang.String billingEmailAddress, java.lang.String billingCompany,
-		java.lang.String billingStreet, java.lang.String billingCity,
-		java.lang.String billingState, java.lang.String billingZip,
-		java.lang.String billingCountry, java.lang.String billingPhone,
-		boolean shipToBilling, java.lang.String shippingFirstName,
-		java.lang.String shippingLastName,
+		long plid, java.lang.String orderId, java.lang.String billingFirstName,
+		java.lang.String billingLastName, java.lang.String billingEmailAddress,
+		java.lang.String billingCompany, java.lang.String billingStreet,
+		java.lang.String billingCity, java.lang.String billingState,
+		java.lang.String billingZip, java.lang.String billingCountry,
+		java.lang.String billingPhone, boolean shipToBilling,
+		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String shippingCompany, java.lang.String shippingStreet,
 		java.lang.String shippingCity, java.lang.String shippingState,
@@ -168,10 +164,10 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
-		java.lang.String plid, java.lang.String orderId,
-		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
-		double ppPaymentGross, java.lang.String ppReceiverEmail,
-		java.lang.String ppPayerEmail) throws RemoteException {
+		long plid, java.lang.String orderId, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
 					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,

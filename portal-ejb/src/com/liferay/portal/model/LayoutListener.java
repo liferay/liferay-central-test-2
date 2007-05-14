@@ -23,7 +23,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 
 /**
@@ -58,7 +57,7 @@ public class LayoutListener implements ModelListener {
 	protected void clearCache(BaseModel model) {
 		LayoutModel layout = (LayoutModel)model;
 
-		if (!LayoutImpl.isPrivateLayout(layout.getOwnerId())) {
+		if (!layout.isPrivateLayout()) {
 			LayoutCacheUtil.clearCache(layout.getCompanyId());
 		}
 	}

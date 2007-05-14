@@ -517,7 +517,7 @@ public class PortalUtil {
 		Map vars = new FastHashMap();
 
 		vars.put("liferay:mainPath", mainPath);
-		vars.put("liferay:plid", layout.getPlid());
+		vars.put("liferay:plid", String.valueOf(layout.getPlid()));
 		vars.putAll(layout.getLayoutType().getTypeSettingsProperties());
 
 		String href = PropsUtil.getComponentProperties().getString(
@@ -528,14 +528,17 @@ public class PortalUtil {
 	}
 
 	public static String getLayoutActualURL(
-			String ownerId, String mainPath, String friendlyURL)
+			long groupId, boolean privateLayout, String mainPath,
+			String friendlyURL)
 		throws PortalException, SystemException {
 
-		return getLayoutActualURL(ownerId, mainPath, friendlyURL, null);
+		return getLayoutActualURL(
+			groupId, privateLayout, mainPath, friendlyURL, null);
 	}
 
 	public static String getLayoutActualURL(
-			String ownerId, String mainPath, String friendlyURL, Map params)
+			long groupId, boolean privateLayout, String mainPath,
+			String friendlyURL, Map params)
 		throws PortalException, SystemException {
 
 		Layout layout = null;
@@ -543,26 +546,26 @@ public class PortalUtil {
 
 		if (Validator.isNull(friendlyURL)) {
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
 				layout = (Layout)layouts.get(0);
 			}
 			else {
 				throw new NoSuchLayoutException(
-					ownerId + " does not have any layouts");
+					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
+						"} does not have any layouts");
 			}
 		}
 		else {
-			Object[] friendlyURLMapper =
-				getPortletFriendlyURLMapper(ownerId, friendlyURL, params);
+			Object[] friendlyURLMapper = getPortletFriendlyURLMapper(
+				groupId, privateLayout, friendlyURL, params);
 
 			layout = (Layout)friendlyURLMapper[0];
 			queryString = (String)friendlyURLMapper[1];
 		}
 
-		String layoutActualURL =
-			PortalUtil.getLayoutActualURL(layout, mainPath);
+		String layoutActualURL = getLayoutActualURL(layout, mainPath);
 
 		if (Validator.isNotNull(queryString)) {
 			layoutActualURL = layoutActualURL + queryString;
@@ -747,14 +750,14 @@ public class PortalUtil {
 	}
 
 	public static Object[] getPortletFriendlyURLMapper(
-			String ownerId, String url)
+			long groupId, boolean privateLayout, String url)
 		throws PortalException, SystemException {
 
-		return getPortletFriendlyURLMapper(ownerId, url, null);
+		return getPortletFriendlyURLMapper(groupId, privateLayout, url, null);
 	}
 
 	public static Object[] getPortletFriendlyURLMapper(
-			String ownerId, String url, Map params)
+			long groupId, boolean privateLayout, String url, Map params)
 		throws PortalException, SystemException {
 
 		String friendlyURL = url;
@@ -828,33 +831,43 @@ public class PortalUtil {
 
 		try {
 			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-				ownerId, friendlyURL);
+				groupId, privateLayout, friendlyURL);
 		}
 		catch(NoSuchLayoutException nsle) {
-			String layoutId = friendlyURL.substring(1);
+			long layoutId = GetterUtil.getLong(friendlyURL.substring(1));
 
-			layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+			layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, layoutId);
 		}
 
 		return new Object[] {layout, queryString};
 	}
 
-	public static long getPortletGroupId(String plid) {
-		String ownerId = LayoutImpl.getOwnerId(plid);
+	public static long getPortletGroupId(long plid) {
+		Layout layout = null;
 
-		long groupId = LayoutImpl.getGroupId(ownerId);
-
-		if (groupId <= 0) {
-			groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		try {
+			layout = LayoutLocalServiceUtil.getLayout(plid);
+		}
+		catch (Exception e) {
 		}
 
-		return groupId;
+		return getPortletGroupId(layout);
+	}
+
+	public static long getPortletGroupId(Layout layout) {
+		if (layout == null) {
+			return 0;
+		}
+		else {
+			return layout.getGroupId();
+		}
 	}
 
 	public static long getPortletGroupId(HttpServletRequest req) {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		return getPortletGroupId(layout.getPlid());
+		return getPortletGroupId(layout);
 	}
 
 	public static long getPortletGroupId(ActionRequest req) {
@@ -1417,8 +1430,8 @@ public class PortalUtil {
 			if (updateLayout) {
 				if ((user != null) && !layout.isShared()) {
 					LayoutServiceUtil.updateLayout(
-						layout.getLayoutId(), layout.getOwnerId(),
-						layout.getTypeSettings());
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getLayoutId(), layout.getTypeSettings());
 				}
 				else {
 					LayoutClone layoutClone = LayoutCloneFactory.getInstance();
@@ -1470,8 +1483,7 @@ public class PortalUtil {
 					// portlet that had a maximum window state
 
 					CachePortlet.clearResponse(
-						req.getSession(), layout.getPrimaryKey(),
-						curMaxPortletId);
+						req.getSession(), layout.getPlid(), curMaxPortletId);
 
 					/*RenderParametersPool.clear(
 						req, layout.getPlid(), curMaxPortletId);*/
@@ -1528,8 +1540,8 @@ public class PortalUtil {
 			if (updateLayout) {
 				if ((user != null) && !layout.isShared()) {
 					LayoutServiceUtil.updateLayout(
-						layout.getLayoutId(), layout.getOwnerId(),
-						layout.getTypeSettings());
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getLayoutId(), layout.getTypeSettings());
 				}
 				else {
 					LayoutClone layoutClone = LayoutCloneFactory.getInstance();

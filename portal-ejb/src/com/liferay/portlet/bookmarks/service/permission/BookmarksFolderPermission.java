@@ -41,7 +41,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 public class BookmarksFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, long folderId,
+			PermissionChecker permissionChecker, long plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -71,7 +71,7 @@ public class BookmarksFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, long folderId,
+			PermissionChecker permissionChecker, long plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 

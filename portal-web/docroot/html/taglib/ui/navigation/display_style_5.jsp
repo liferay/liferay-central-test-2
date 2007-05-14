@@ -25,10 +25,10 @@
 <%@ include file="/html/taglib/ui/navigation/init.jsp" %>
 
 <%
-String rootLayoutId = layout.getAncestorLayoutId();
+long rootLayoutId = layout.getAncestorLayoutId();
 int displayDepth = 0;
 
-List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getOwnerId(), rootLayoutId);
+List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
 
 StringMaker sm = new StringMaker();
 
@@ -62,7 +62,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 		if (!layout.isHidden() && LayoutPermission.contains(permissionChecker, layout, ActionKeys.VIEW)) {
 			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 			String target = PortalUtil.getLayoutTarget(layout);
-			int children = layout.getChildren().size();
+			List children = layout.getChildren();
 
 			if (openList) {
 				sm.append("<ul class=\"portlet-nav-map-list portlet-nav-map-level_" + curDepth + "\">");
@@ -79,12 +79,12 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			sm.append(layout.getName(themeDisplay.getLocale()));
 			sm.append("</a>");
 
-			if ((curDepth > 1) && (children > 0)) {
+			if ((curDepth > 1) && (children.size() > 0)) {
 				sm.append("&nbsp;&raquo;");
 			}
 
-			if (((displayDepth == 0) || (displayDepth > curDepth)) && (children > 0)) {
-				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sm);
+			if (((displayDepth == 0) || (displayDepth > curDepth)) && (children.size() > 0)) {
+				_buildSiteMap(children, displayDepth, curDepth + 1, themeDisplay, sm);
 			}
 
 			sm.append("</li>");

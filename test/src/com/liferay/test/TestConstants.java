@@ -32,4 +32,6 @@ public class TestConstants {
 
 	public static final long COMPANY_ID = 2000;
 
+	public static final long PLID = 2000;
+
 }

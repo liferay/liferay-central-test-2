@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
 
@@ -40,15 +38,6 @@ import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
  *
  */
 public class SCLicensePermission {
-
-	public static void check(
-			PermissionChecker permissionChecker, String plid, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, plid, actionId)) {
-			throw new PrincipalException();
-		}
-	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long productEntryId,
@@ -68,14 +57,6 @@ public class SCLicensePermission {
 		if (!contains(permissionChecker, license, actionId)) {
 			throw new PrincipalException();
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, String plid, String actionId)
-		throws PortalException, SystemException {
-
-		return PortletPermission.contains(
-			permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, actionId);
 	}
 
 	public static boolean contains(

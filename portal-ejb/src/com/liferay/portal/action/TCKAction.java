@@ -75,7 +75,7 @@ public class TCKAction extends Action {
 			long userId = 2003;
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
-				1, userId, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
+				userId, 1, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
 				"TCKAction", StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
 				StringPool.BLANK);
 
@@ -87,8 +87,8 @@ public class TCKAction extends Action {
 			}
 
 			LayoutLocalServiceUtil.updateLayout(
-				layout.getLayoutId(), layout.getOwnerId(),
-				layout.getTypeSettings());
+				layout.getGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId(), layout.getTypeSettings());
 
 			String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
 

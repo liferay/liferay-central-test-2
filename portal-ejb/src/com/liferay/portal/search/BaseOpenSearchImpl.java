@@ -22,16 +22,17 @@
 
 package com.liferay.portal.search;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 import com.liferay.util.dao.search.SearchContainer;
 
 import java.util.Date;
@@ -267,23 +268,18 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected PortletURL getPortletURL(HttpServletRequest req, String portletId)
-		throws PortletModeException, WindowStateException {
+		throws PortalException, PortletModeException, SystemException,
+			   WindowStateException {
 
-		return getPortletURL(req, portletId, null);
+		return getPortletURL(req, portletId, 0);
 	}
 
 	protected PortletURL getPortletURL(
-			HttpServletRequest req, String portletId, String groupId)
-		throws PortletModeException, WindowStateException {
+			HttpServletRequest req, String portletId, long groupId)
+		throws PortalException, PortletModeException, SystemException,
+			   WindowStateException {
 
-		String plid = null;
-
-		if (Validator.isNull(groupId)) {
-			plid = LayoutImpl.DEFAULT_PLID;
-		}
-		else {
-			plid = LayoutImpl.PRIVATE + groupId + ".1";
-		}
+		long plid = LayoutLocalServiceUtil.getDefaultPlid(groupId, true);
 
 		PortletURL portletURL = new PortletURLImpl(req, portletId, plid, false);
 

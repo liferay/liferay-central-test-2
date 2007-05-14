@@ -78,12 +78,12 @@ import java.rmi.RemoteException;
  */
 public class LayoutSetServiceSoap {
 	public static com.liferay.portal.model.LayoutSetSoap updateLookAndFeel(
-		java.lang.String ownerId, java.lang.String themeId,
+		long groupId, boolean privateLayout, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(ownerId,
-					themeId, colorSchemeId, css, wapTheme);
+			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateLookAndFeel(groupId,
+					privateLayout, themeId, colorSchemeId, css, wapTheme);
 
 			return com.liferay.portal.model.LayoutSetSoap.toSoapModel(returnValue);
 		}
@@ -94,11 +94,11 @@ public class LayoutSetServiceSoap {
 	}
 
 	public static com.liferay.portal.model.LayoutSetSoap updateVirtualHost(
-		java.lang.String ownerId, java.lang.String virtualHost)
+		long groupId, boolean privateLayout, java.lang.String virtualHost)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateVirtualHost(ownerId,
-					virtualHost);
+			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateVirtualHost(groupId,
+					privateLayout, virtualHost);
 
 			return com.liferay.portal.model.LayoutSetSoap.toSoapModel(returnValue);
 		}

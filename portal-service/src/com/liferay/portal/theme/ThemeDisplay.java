@@ -170,11 +170,11 @@ public class ThemeDisplay implements Serializable {
 		_layouts = layouts;
 	}
 
-	public String getPlid() {
+	public long getPlid() {
 		return _plid;
 	}
 
-	public void setPlid(String plid) {
+	public void setPlid(long plid) {
 		_plid = plid;
 	}
 
@@ -658,7 +658,7 @@ public class ThemeDisplay implements Serializable {
 		_layoutSetLogo = StringPool.BLANK;
 		_layout = null;
 		_layouts = null;
-		_plid = StringPool.BLANK;
+		_plid = 0;
 		_layoutTypePortlet = null;
 		_portletGroupId = 0;
 		_signedIn = false;
@@ -726,7 +726,7 @@ public class ThemeDisplay implements Serializable {
 	private String _layoutSetLogo = StringPool.BLANK;
 	private Layout _layout;
 	private List _layouts;
-	private String _plid = StringPool.BLANK;
+	private long _plid;
 	private LayoutTypePortlet _layoutTypePortlet;
 	private long _portletGroupId;
 	private boolean _signedIn;

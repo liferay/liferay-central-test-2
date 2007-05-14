@@ -30,6 +30,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
@@ -37,6 +38,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutSetLocalServiceBaseImpl;
+import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -52,6 +54,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -63,19 +66,18 @@ import javax.imageio.ImageIO;
  */
 public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
-	public LayoutSet addLayoutSet(String ownerId, long companyId)
+	public LayoutSet addLayoutSet(long groupId, boolean privateLayout)
 		throws PortalException, SystemException {
 
-		long groupId = LayoutImpl.getGroupId(ownerId);
+		Group group = GroupUtil.findByPrimaryKey(groupId);
 		long userId = groupId;
-		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		long layoutSetId = CounterLocalServiceUtil.increment();
 
 		LayoutSet layoutSet = LayoutSetUtil.create(layoutSetId);
 
-		layoutSet.setCompanyId(companyId);
 		layoutSet.setGroupId(groupId);
+		layoutSet.setCompanyId(group.getCompanyId());
 		layoutSet.setUserId(userId);
 		layoutSet.setPrivateLayout(privateLayout);
 		layoutSet.setThemeId(ThemeImpl.getDefaultRegularThemeId());
@@ -91,18 +93,17 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return layoutSet;
 	}
 
-	public void deleteLayoutSet(String ownerId)
+	public void deleteLayoutSet(long groupId, boolean privateLayout)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
-		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
 		// Layouts
 
-		Iterator itr = LayoutUtil.findByO_P(
-			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID).iterator();
+		List layouts = LayoutUtil.findByG_P_P(
+			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+
+		Iterator itr = layouts.iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
@@ -125,11 +126,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSetUtil.removeByG_P(groupId, privateLayout);
 	}
 
-	public LayoutSet getLayoutSet(String ownerId)
+	public LayoutSet getLayoutSet(long groupId, boolean privateLayout)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
-		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		return LayoutSetUtil.findByG_P(groupId, privateLayout);
 	}
@@ -140,15 +138,13 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return LayoutSetFinder.findByC_V(companyId, virtualHost);
 	}
 
-	public void updateLogo(String ownerId, boolean logo, File file)
+	public void updateLogo(
+			long groupId, boolean privateLayout, boolean logo, File file)
 		throws PortalException, SystemException {
 
 		try {
 
 			// Layout set
-
-			long groupId = LayoutImpl.getGroupId(ownerId);
-			boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 			LayoutSet layoutSet = LayoutSetUtil.findByG_P(
 				groupId, privateLayout);
@@ -200,12 +196,9 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	}
 
 	public LayoutSet updateLookAndFeel(
-			String ownerId, String themeId, String colorSchemeId, String css,
-			boolean wapTheme)
+			long groupId, boolean privateLayout, String themeId,
+			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
-		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
@@ -240,13 +233,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return layoutSet;
 	}
 
-	public LayoutSet updatePageCount(String ownerId)
+	public LayoutSet updatePageCount(long groupId, boolean privateLayout)
 		throws PortalException, SystemException {
 
-		long groupId = LayoutImpl.getGroupId(ownerId);
-		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
-
-		int pageCount = LayoutUtil.countByOwnerId(ownerId);
+		int pageCount = LayoutUtil.countByG_P(groupId, privateLayout);
 
 		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
@@ -257,11 +247,9 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return layoutSet;
 	}
 
-	public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
+	public LayoutSet updateVirtualHost(
+			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {
-
-		long groupId = LayoutImpl.getGroupId(ownerId);
-		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 

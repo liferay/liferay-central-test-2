@@ -114,8 +114,8 @@ public class PortletPreferencesSerializer {
 	}
 
 	public static PortletPreferencesImpl fromXML(
-			long companyId, String ownerId, String layoutId, String portletId,
-			String xml)
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String xml)
 		throws PortalException, SystemException {
 
 		try {
@@ -123,7 +123,7 @@ public class PortletPreferencesSerializer {
 				(PortletPreferencesImpl)fromDefaultXML(xml);
 
 			prefs = new PortletPreferencesImpl(
-				companyId, ownerId, layoutId, portletId,
+				companyId, ownerId, ownerType, plid, portletId,
 				prefs.getPreferences());
 
 			return prefs;

@@ -53,13 +53,17 @@ public interface PortletPreferencesModel extends BaseModel {
 
 	public void setPortletPreferencesId(long portletPreferencesId);
 
-	public String getOwnerId();
+	public long getOwnerId();
 
-	public void setOwnerId(String ownerId);
+	public void setOwnerId(long ownerId);
 
-	public String getLayoutId();
+	public int getOwnerType();
 
-	public void setLayoutId(String layoutId);
+	public void setOwnerType(int ownerType);
+
+	public long getPlid();
+
+	public void setPlid(long plid);
 
 	public String getPortletId();
 

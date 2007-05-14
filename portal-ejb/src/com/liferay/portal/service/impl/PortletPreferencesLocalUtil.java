@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.CollectionFactory;
@@ -48,14 +49,14 @@ public class PortletPreferencesLocalUtil {
 		_cache.flushGroup(GROUP_NAME);
 	}
 
-	protected static void clearPreferencesPool(String key) {
-		key = _encodeKey(key);
+	protected static void clearPreferencesPool(long ownerId, int ownerType) {
+		String key = _encodeKey(ownerId, ownerType);
 
 		_cache.flushEntry(key);
 	}
 
-	protected static Map getPreferencesPool(String key) {
-		key = _encodeKey(key);
+	protected static Map getPreferencesPool(long ownerId, int ownerType) {
+		String key = _encodeKey(ownerId, ownerType);
 
 		Map prefsPool = null;
 
@@ -76,8 +77,16 @@ public class PortletPreferencesLocalUtil {
 		return prefsPool;
 	}
 
-	private static String _encodeKey(String key) {
-		return GROUP_NAME + StringPool.POUND + key;
+	private static String _encodeKey(long ownerId, int ownerType) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(GROUP_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(ownerId);
+		sm.append(StringPool.POUND);
+		sm.append(ownerType);
+
+		return sm.toString();
 	}
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();

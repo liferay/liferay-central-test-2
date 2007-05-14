@@ -69,7 +69,7 @@ import org.json.JSONObject;
  *
  */
 public class SCFrameworkVersionServiceJSON {
-	public static JSONObject addFrameworkVersion(java.lang.String plid,
+	public static JSONObject addFrameworkVersion(long plid,
 		java.lang.String name, java.lang.String url, boolean active,
 		int priority, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -82,7 +82,7 @@ public class SCFrameworkVersionServiceJSON {
 		return SCFrameworkVersionJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFrameworkVersion(java.lang.String plid,
+	public static JSONObject addFrameworkVersion(long plid,
 		java.lang.String name, java.lang.String url, boolean active,
 		int priority, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

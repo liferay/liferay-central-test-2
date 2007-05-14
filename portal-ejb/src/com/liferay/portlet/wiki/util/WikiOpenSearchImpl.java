@@ -35,6 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 
 import java.util.Date;
@@ -106,7 +107,8 @@ public class WikiOpenSearchImpl extends BaseOpenSearchImpl {
 			String portletTitle = PortalUtil.getPortletTitle(
 				portletId, themeDisplay.getUser());
 
-			String groupId = (String)result.get(LuceneFields.GROUP_ID);
+			long groupId = GetterUtil.getLong(
+				(String)result.get(LuceneFields.GROUP_ID));
 
 			PortletURL portletURL = getPortletURL(req, portletId, groupId);
 

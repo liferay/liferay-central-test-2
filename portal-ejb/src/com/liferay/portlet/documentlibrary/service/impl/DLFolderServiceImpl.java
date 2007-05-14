@@ -41,7 +41,7 @@ public class DLFolderServiceImpl
 	extends PrincipalBean implements DLFolderService {
 
 	public DLFolder addFolder(
-			String plid, String parentFolderId, String name, String description,
+			long plid, String parentFolderId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class DLFolderServiceImpl
 	}
 
 	public DLFolder addFolder(
-			String plid, String parentFolderId, String name, String description,
+			long plid, String parentFolderId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 

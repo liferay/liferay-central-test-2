@@ -31,7 +31,7 @@
 		<ul>
 
 			<%
-			PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, true);
+			PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
@@ -72,7 +72,8 @@
 					<ul>
 
 						<%
-						portletURL.setParameter("ownerId", LayoutImpl.PUBLIC + community.getGroupId());
+						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+						portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 						boolean selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
 						%>
@@ -82,7 +83,8 @@
 						</li>
 
 						<%
-						portletURL.setParameter("ownerId", LayoutImpl.PRIVATE + community.getGroupId());
+						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+						portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
 						selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
 						%>

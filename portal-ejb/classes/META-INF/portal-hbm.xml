@@ -153,12 +153,14 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutImpl" table="Layout">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.LayoutPK">
-			<key-property name="layoutId" />
-			<key-property name="ownerId" />
-		</composite-id>
+		<id name="plid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="parentLayoutId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="layoutId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="parentLayoutId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
@@ -178,8 +180,8 @@
 		<id name="layoutSetId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="logo" type="com.liferay.util.dao.hibernate.BooleanType" />
@@ -340,7 +342,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.PortletImpl" table="Portlet">
 		<cache usage="read-write" />
-		<id name="id" type="long">
+		<id name="id" column="id_" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -353,8 +355,9 @@
 		<id name="portletPreferencesId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="ownerId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="layoutId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="ownerId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="ownerType" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="plid" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="preferences" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
@@ -737,14 +740,15 @@
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalContentSearchImpl" table="JournalContentSearch">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPK">
-			<key-property name="portletId" />
-			<key-property name="layoutId" />
-			<key-property name="ownerId" />
-			<key-property name="articleId" />
-		</composite-id>
+		<id name="contentSearchId" type="long">
+			<generator class="assigned" />
+		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="layoutId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="articleId" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalStructureImpl" table="JournalStructure">
 		<cache usage="read-write" />

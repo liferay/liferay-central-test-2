@@ -32,7 +32,7 @@ String formName = namespace + request.getAttribute("liferay-ui:language:formName
 String formAction = (String)request.getAttribute("liferay-ui:language:formAction");
 
 if (Validator.isNull(formAction)) {
-	PortletURLImpl portletURLImpl = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, true);
+	PortletURLImpl portletURLImpl = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid.longValue(), true);
 
 	portletURLImpl.setWindowState(WindowState.NORMAL);
 	portletURLImpl.setPortletMode(PortletMode.VIEW);

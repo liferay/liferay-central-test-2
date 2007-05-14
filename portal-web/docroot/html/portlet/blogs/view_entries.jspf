@@ -23,7 +23,7 @@
 %>
 
 <%
-boolean showAddEntryButton = tabs1.equals("entries") && PortletPermission.contains(permissionChecker, plid, PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
+boolean showAddEntryButton = tabs1.equals("entries") && PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
 %>
 
 <c:if test="<%= showAddEntryButton || (results.size() > 0) %>">

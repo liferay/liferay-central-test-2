@@ -93,7 +93,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			}
 		}
 		else {
-			if (layoutName.equals(layout.getPlid())) {
+			if (layoutName.equals(String.valueOf(layout.getPlid()))) {
 				return layout;
 			}
 		}
@@ -125,7 +125,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			return friendlyURL;
 		}
 		else {
-			return layout.getPlid();
+			return String.valueOf(layout.getPlid());
 		}
 	}
 
@@ -146,15 +146,15 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 
 			root.appendChild(filesEl);
 
-			Group group = GroupServiceUtil.getGroup(arg.getCompanyId(), arg
-					.getCurrentGroupName());
+			Group group = GroupServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				LayoutImpl.PUBLIC + group.getGroupId(),
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-			if (("/" + arg.getCurrentGroupName() + "/").equals(arg
-					.getCurrentFolder())) {
+			if (("/" + arg.getCurrentGroupName() + "/").equals(
+					arg.getCurrentFolder())) {
+
 				for (int i = 0; i < layouts.size(); i++) {
 					Layout layout = (Layout)layouts.get(i);
 
@@ -165,8 +165,9 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 					fileEl.setAttribute("name", _getLayoutName(layout));
 					fileEl.setAttribute("desc", _getLayoutName(layout));
 					fileEl.setAttribute("size", "");
-					fileEl.setAttribute("url", PortalUtil.getLayoutURL(layout,
-							arg.getThemeDisplay()));
+					fileEl.setAttribute(
+						"url",
+						PortalUtil.getLayoutURL(layout,arg.getThemeDisplay()));
 				}
 			}
 			else {
@@ -237,8 +238,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				arg.getCompanyId(), arg.getCurrentGroupName());
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				LayoutImpl.PUBLIC + group.getGroupId(),
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (("/" + arg.getCurrentGroupName() + "/").equals(
 					arg.getCurrentFolder())) {

@@ -50,44 +50,43 @@ package com.liferay.portlet.journal.service;
  */
 public interface JournalArticleService {
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId,
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+		int reviewDateDay, int reviewDateYear, int reviewDateHour,
+		int reviewDateMinute, boolean neverReview, java.util.Map images,
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId,
-		java.lang.String plid, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
+		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+		int reviewDateDay, int reviewDateYear, int reviewDateHour,
+		int reviewDateMinute, boolean neverReview, java.util.Map images,
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		long groupId, java.lang.String articleId, double version,
-		java.lang.String plid, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		long groupId, java.lang.String articleId, double version, long plid,
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

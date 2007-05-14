@@ -56,7 +56,7 @@
 
 	String selector2 = StringPool.BLANK;
 
-	if ((layout.getPriority() == 0) && (layout.getParentLayoutId().equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID))) {
+	if ((layout.getPriority() == 0) && (layout.getParentLayoutId() == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 		selector2 = "firstLayout";
 	}
 

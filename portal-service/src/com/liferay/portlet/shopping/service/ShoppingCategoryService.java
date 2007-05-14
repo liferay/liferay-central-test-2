@@ -50,16 +50,15 @@ package com.liferay.portlet.shopping.service;
  */
 public interface ShoppingCategoryService {
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		java.lang.String plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

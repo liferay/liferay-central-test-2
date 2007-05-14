@@ -44,9 +44,9 @@ public class JournalStructureServiceImpl
 	extends PrincipalBean implements JournalStructureService {
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, String plid,
-			String name, String description, String xsd,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String structureId, boolean autoStructureId, long plid, String name,
+			String description, String xsd, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -59,9 +59,9 @@ public class JournalStructureServiceImpl
 	}
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, String plid,
-			String name, String description, String xsd,
-			String[] communityPermissions, String[] guestPermissions)
+			String structureId, boolean autoStructureId, long plid, String name,
+			String description, String xsd, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(

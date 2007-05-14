@@ -67,7 +67,7 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
-		java.lang.String plid, long categoryId, java.lang.String title,
+		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
@@ -81,7 +81,7 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
-		java.lang.String plid, long categoryId, java.lang.String title,
+		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,
@@ -96,7 +96,7 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
-		java.lang.String plid, long categoryId, java.lang.String title,
+		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		java.lang.String[] tagsEntries,

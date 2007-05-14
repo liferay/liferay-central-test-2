@@ -50,18 +50,18 @@ package com.liferay.portal.service;
  */
 public interface LayoutService {
 	public com.liferay.portal.model.Layout addLayout(long groupId,
-		boolean privateLayout, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title, java.lang.String type,
-		boolean hidden, java.lang.String friendlyURL)
+		boolean privateLayout, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteLayout(java.lang.String layoutId, java.lang.String ownerId)
+	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.lang.String getLayoutName(java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String languageId)
+	public java.lang.String getLayoutName(long groupId, boolean privateLayout,
+		long layoutId, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -70,65 +70,62 @@ public interface LayoutService {
 		java.lang.String prefsValue)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public byte[] exportLayouts(java.lang.String ownerId,
+	public byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map parameterMap)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void importLayouts(java.lang.String ownerId,
+	public void importLayouts(long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setLayouts(java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
+	public void setLayouts(long groupId, boolean privateLayout,
+		long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updateLayout(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+	public com.liferay.portal.model.Layout updateLayout(long groupId,
+		boolean privateLayout, long layoutId, long parentLayoutId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String languageId, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updateLayout(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
-		java.lang.Boolean iconImage, byte[] iconBytes)
+	public com.liferay.portal.model.Layout updateLayout(long groupId,
+		boolean privateLayout, long layoutId, long parentLayoutId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String languageId, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL, java.lang.Boolean iconImage,
+		byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updateLayout(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String typeSettings)
+	public com.liferay.portal.model.Layout updateLayout(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String typeSettings)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updateLookAndFeel(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String css, boolean wapTheme)
+	public com.liferay.portal.model.Layout updateLookAndFeel(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String themeId,
+		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updateName(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String name, java.lang.String languageId)
+	public com.liferay.portal.model.Layout updateName(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String name,
+		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updateParentLayoutId(
-		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String parentLayoutId)
+	public com.liferay.portal.model.Layout updateParentLayoutId(long groupId,
+		boolean privateLayout, long layoutId, long parentLayoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Layout updatePriority(
-		java.lang.String layoutId, java.lang.String ownerId, int priority)
+	public com.liferay.portal.model.Layout updatePriority(long groupId,
+		boolean privateLayout, long layoutId, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

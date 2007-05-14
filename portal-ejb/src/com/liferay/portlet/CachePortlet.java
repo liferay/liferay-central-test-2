@@ -24,9 +24,9 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -70,10 +70,9 @@ import org.apache.commons.logging.LogFactory;
 public class CachePortlet implements Portlet {
 
 	public static void clearResponse(
-		HttpSession ses, LayoutPK layoutPK, String portletId) {
+		HttpSession ses, long plid, String portletId) {
 
-		String sesResponseId =
-			layoutPK.getLayoutId() + StringPool.UNDERLINE + portletId;
+		String sesResponseId = encodeResponseKey(plid, portletId);
 
 		getResponses(ses).remove(sesResponseId);
 	}
@@ -84,6 +83,16 @@ public class CachePortlet implements Portlet {
 
 	public static void clearResponses(PortletSession ses) {
 		getResponses(ses).clear();
+	}
+
+	public static String encodeResponseKey(long plid, String portletId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(plid);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(portletId);
+
+		return sm.toString();
 	}
 
 	public static Map getResponses(HttpSession ses) {
@@ -202,8 +211,8 @@ public class CachePortlet implements Portlet {
 
 			Map sesResponses = getResponses(ses);
 
-			String sesResponseId =
-				layout.getLayoutId() + StringPool.UNDERLINE + _portletId;
+			String sesResponseId = encodeResponseKey(
+				layout.getPlid(), _portletId);
 
 			CachePortletResponse response =
 				(CachePortletResponse)sesResponses.get(sesResponseId);

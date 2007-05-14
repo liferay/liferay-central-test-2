@@ -112,8 +112,7 @@ public class UpdatePageAction extends JSONAction {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
-
+		long parentLayoutId = ParamUtil.getLong(req, "parentLayoutId");
 		String name = ParamUtil.getString(req, "name", "New Page");
 		String title = StringPool.BLANK;
 		String type = LayoutImpl.TYPE_PORTLET;
@@ -131,7 +130,7 @@ public class UpdatePageAction extends JSONAction {
 			0, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID), false);
 
 		LayoutServiceUtil.updateLayout(
-			layout.getLayoutId(), layout.getOwnerId(),
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 
 		String layoutURL = PortalUtil.getLayoutActualURL(layout, mainPath);
@@ -140,53 +139,60 @@ public class UpdatePageAction extends JSONAction {
 			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
 		}
 
-		return new String[] {layout.getLayoutId(), layoutURL};
+		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};
 	}
 
 	protected void deletePage(HttpServletRequest req) throws Exception {
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
 
-		LayoutServiceUtil.deleteLayout(layoutId, ownerId);
+		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
 	protected void updateDisplayOrder(HttpServletRequest req) throws Exception {
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long parentLayoutId = ParamUtil.getLong(req, "parentLayoutId");
+		long[] layoutIds = StringUtil.split(
+			ParamUtil.getString(req, "layoutIds"), 0L);
 
-		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
-		String[] layoutIds = StringUtil.split(
-			ParamUtil.getString(req, "layoutIds"));
-
-		LayoutServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
+		LayoutServiceUtil.setLayouts(
+			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
 	protected void updateName(HttpServletRequest req) throws Exception {
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
 		String name = ParamUtil.getString(req, "name");
 		String languageId = ParamUtil.getString(req, "languageId");
 
-		LayoutServiceUtil.updateName(layoutId, ownerId, name, languageId);
+		LayoutServiceUtil.updateName(
+			groupId, privateLayout, layoutId, name, languageId);
 	}
 
 	protected void updateParentLayoutId(HttpServletRequest req)
 		throws Exception {
 
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
-		String parentLayoutId = ParamUtil.getString(
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
+		long parentLayoutId = ParamUtil.getLong(
 			req, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 		LayoutServiceUtil.updateParentLayoutId(
-			layoutId, ownerId, parentLayoutId);
+			groupId, privateLayout, layoutId, parentLayoutId);
 	}
 
 	protected void updatePriority(HttpServletRequest req) throws Exception {
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
 		int priority = ParamUtil.getInteger(req, "priority");
 
-		LayoutServiceUtil.updatePriority(layoutId, ownerId, priority);
+		LayoutServiceUtil.updatePriority(
+			groupId, privateLayout, layoutId, priority);
 	}
 
 }

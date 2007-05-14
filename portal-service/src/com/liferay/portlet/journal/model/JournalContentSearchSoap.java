@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,12 +48,13 @@ public class JournalContentSearchSoap implements Serializable {
 	public static JournalContentSearchSoap toSoapModel(
 		JournalContentSearch model) {
 		JournalContentSearchSoap soapModel = new JournalContentSearchSoap();
-		soapModel.setPortletId(model.getPortletId());
-		soapModel.setLayoutId(model.getLayoutId());
-		soapModel.setOwnerId(model.getOwnerId());
-		soapModel.setArticleId(model.getArticleId());
+		soapModel.setContentSearchId(model.getContentSearchId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setPrivateLayout(model.getPrivateLayout());
+		soapModel.setLayoutId(model.getLayoutId());
+		soapModel.setPortletId(model.getPortletId());
+		soapModel.setArticleId(model.getArticleId());
 
 		return soapModel;
 	}
@@ -74,48 +73,20 @@ public class JournalContentSearchSoap implements Serializable {
 	public JournalContentSearchSoap() {
 	}
 
-	public JournalContentSearchPK getPrimaryKey() {
-		return new JournalContentSearchPK(_portletId, _layoutId, _ownerId,
-			_articleId);
+	public long getPrimaryKey() {
+		return _contentSearchId;
 	}
 
-	public void setPrimaryKey(JournalContentSearchPK pk) {
-		setPortletId(pk.portletId);
-		setLayoutId(pk.layoutId);
-		setOwnerId(pk.ownerId);
-		setArticleId(pk.articleId);
+	public void setPrimaryKey(long pk) {
+		setContentSearchId(pk);
 	}
 
-	public String getPortletId() {
-		return _portletId;
+	public long getContentSearchId() {
+		return _contentSearchId;
 	}
 
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
-	}
-
-	public String getLayoutId() {
-		return _layoutId;
-	}
-
-	public void setLayoutId(String layoutId) {
-		_layoutId = layoutId;
-	}
-
-	public String getOwnerId() {
-		return _ownerId;
-	}
-
-	public void setOwnerId(String ownerId) {
-		_ownerId = ownerId;
-	}
-
-	public String getArticleId() {
-		return _articleId;
-	}
-
-	public void setArticleId(String articleId) {
-		_articleId = articleId;
+	public void setContentSearchId(long contentSearchId) {
+		_contentSearchId = contentSearchId;
 	}
 
 	public long getCompanyId() {
@@ -134,10 +105,47 @@ public class JournalContentSearchSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	private String _portletId;
-	private String _layoutId;
-	private String _ownerId;
-	private String _articleId;
+	public boolean getPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
+
+	public long getLayoutId() {
+		return _layoutId;
+	}
+
+	public void setLayoutId(long layoutId) {
+		_layoutId = layoutId;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
+	public String getArticleId() {
+		return _articleId;
+	}
+
+	public void setArticleId(String articleId) {
+		_articleId = articleId;
+	}
+
+	private long _contentSearchId;
 	private long _companyId;
 	private long _groupId;
+	private boolean _privateLayout;
+	private long _layoutId;
+	private String _portletId;
+	private String _articleId;
 }
