@@ -74,36 +74,24 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				</c:choose>
 
 				</span>
-
-				<br /><br />
-
-				<%
-				%>
-
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="authentication-failed" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="please-enter-a-valid-login" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
@@ -111,32 +99,24 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
 				<liferay-ui:message key="please-sign-in-to-continue" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="please-enter-a-valid-login" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test='<%= SessionErrors.contains(request, UserLockoutException.class.getName()) %>'>
 				<span class="portlet-msg-error" style="font-size: xx-small;">
-				<liferay-ui:message key="your-account-has-been-locked-due-to-excessive-failed-login-attempts-please-wait-or-contact-an-administrator-to-unlock-your-account" />
+				<liferay-ui:message key="this-account-has-been-locked" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="please-enter-a-valid-password" />
 				</span>
-
-				<br /><br />
 			</c:if>
 		</c:if>
 
@@ -205,32 +185,24 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<span class="portlet-msg-success" style="font-size: xx-small;">
 				<liferay-ui:message key="your-request-processed-successfully" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="the-email-address-you-requested-is-not-registered-in-our-database" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, SendPasswordException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="your-password-can-only-be-sent-to-an-external-email-address" />
 				</span>
-
-				<br /><br />
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>">
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<liferay-ui:message key="please-enter-a-valid-email-address" />
 				</span>
-
-				<br /><br />
 			</c:if>
 		</c:if>
 

@@ -38,8 +38,6 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 <liferay-ui:message key="the-system-policy-requires-you-to-change-your-password-at-this-time" />
 </span>
 
-<br /><br />
-
 <c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 
 	<%
@@ -81,8 +79,6 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	</c:if>
 
 	</span>
-
-	<br /><br />
 </c:if>
 
 <table class="liferay-table">

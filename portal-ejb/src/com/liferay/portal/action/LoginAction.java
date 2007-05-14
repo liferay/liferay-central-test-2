@@ -29,6 +29,7 @@ import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
+import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
@@ -278,6 +279,7 @@ public class LoginAction extends Action {
 					e instanceof NoSuchUserException ||
 					e instanceof UserEmailAddressException ||
 					e instanceof UserIdException ||
+					e instanceof UserLockoutException ||
 					e instanceof UserPasswordException) {
 
 					SessionErrors.add(req, e.getClass().getName());
