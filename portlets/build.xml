@@ -30,9 +30,6 @@
 
 	<target name="compile-module">
 		<if>
-
-			<!-- For some reason type="dir" does not work -->
-
 			<isfileselected file="${module.name}.war">
 				<type type="file" /> 
 			</isfileselected>
@@ -99,7 +96,7 @@
 		The WAR must be deployed to the /alfresco context. See the
 		implementation of org.alfresco.webservice.util.WebServiceFactory to see
 		how to customize the web service end point.
-		
+
 		Manually remove portlet-api-lib.jar to resolve a class conflict.
 
 		Add the required portlet XML files to make it work.
@@ -113,44 +110,54 @@
 	</target>
 
 	<target name="war-module">
-		<copy todir="${module.name}.war/WEB-INF/lib">
-			<fileset
-				dir="${project.dir}/lib/portal"
-				includes="commons-logging.jar,log4j.jar"
-			/>
-		</copy>
-
-		<copy
-			file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
-			tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
-		/>
-
 		<if>
-			<equals arg1="${module.name}" arg2="sample-portal-client-portlet" />
+			<isfileselected file="${module.name}.war">
+				<type type="file" /> 
+			</isfileselected>
 			<then>
+				<copy file="${module.name}.war" todir="${project.dir}/${module.name}-${lp.version.file.name}.war" />
+			</then>
+			<else>
 				<copy todir="${module.name}.war/WEB-INF/lib">
 					<fileset
-						dir="${project.dir}/lib/development"
-						includes="activation.jar,mail.jar"
-					/>
-					<fileset
 						dir="${project.dir}/lib/portal"
-						includes="axis.jar,commons-discovery.jar,commons-logging.jar,concurrent.jar,jaxrpc.jar,saaj.jar,trove.jar,wsdl4j.jar"
-					/>
-					<fileset
-						dir="${project.dir}/portal-client"
-						includes="portal-client.jar"
+						includes="commons-logging.jar,log4j.jar"
 					/>
 				</copy>
-			</then>
-		</if>
 
-		<war
-			basedir="${module.name}.war"
-			destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
-			excludes="WEB-INF/web.xml*"
-			webxml="${module.name}.war/WEB-INF/web.xml"
-		/>
+				<copy
+					file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
+					tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
+				/>
+
+				<if>
+					<equals arg1="${module.name}" arg2="sample-portal-client-portlet" />
+					<then>
+						<copy todir="${module.name}.war/WEB-INF/lib">
+							<fileset
+								dir="${project.dir}/lib/development"
+								includes="activation.jar,mail.jar"
+							/>
+							<fileset
+								dir="${project.dir}/lib/portal"
+								includes="axis.jar,commons-discovery.jar,commons-logging.jar,concurrent.jar,jaxrpc.jar,saaj.jar,trove.jar,wsdl4j.jar"
+							/>
+							<fileset
+								dir="${project.dir}/portal-client"
+								includes="portal-client.jar"
+							/>
+						</copy>
+					</then>
+				</if>
+
+				<war
+					basedir="${module.name}.war"
+					destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
+					excludes="WEB-INF/web.xml*"
+					webxml="${module.name}.war/WEB-INF/web.xml"
+				/>
+			</else>
+		</if>
 	</target>
 
 	<target name="war-sample-spring-portlet">
@@ -185,18 +192,18 @@
 	</target>
 
 	<target name="deploy-module">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
 		<if>
 			<isfileselected file="${module.name}.war">
 				<type type="file" /> 
 			</isfileselected>
 			<then>
-				<copy file="${module.name}.war" todir="${auto.deploy.dir}" />				
+				<copy file="${module.name}.war" todir="${auto.deploy.dir}" />
 			</then>
 			<else>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
 				<jar
 					basedir="${module.name}.war"
 					destfile="${tstamp.value}"
@@ -218,7 +225,6 @@
 		<for param="module.name">
 			<path>
 				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
-
 				<fileset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
 			</path>
 			<sequential>

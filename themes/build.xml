@@ -26,21 +26,31 @@
 
 	<target name="compile-module">
 		<if>
-			<available file="${module.name}.war/_diffs" />
+			<isfileselected file="${module.name}.war">
+				<type type="file" /> 
+			</isfileselected>
 			<then>
-				<copy todir="${module.name}.war">
-					<fileset
-						dir="${project.dir}/portal-web/docroot/html/themes/_common"
-						excludes="templates/init.vm"
-					/>
-				</copy>
-
-				<copy todir="${module.name}.war" overwrite="yes">
-					<fileset
-						dir="${module.name}.war/_diffs"
-					/>
-				</copy>
+				<echo>Skipping packed module ${module.name}.war</echo>
 			</then>
+			<else>
+				<if>
+					<available file="${module.name}.war/_diffs" />
+					<then>
+						<copy todir="${module.name}.war">
+							<fileset
+								dir="${project.dir}/portal-web/docroot/html/themes/_common"
+								excludes="templates/init.vm"
+							/>
+						</copy>
+
+						<copy todir="${module.name}.war" overwrite="yes">
+							<fileset
+								dir="${module.name}.war/_diffs"
+							/>
+						</copy>
+					</then>
+				</if>
+			</else>
 		</if>
 	</target>
 
@@ -51,10 +61,20 @@
 	</target>
 
 	<target name="war-module">
-		<jar
-			basedir="${module.name}.war"
-			destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
-		/>
+		<if>
+			<isfileselected file="${module.name}.war">
+				<type type="file" /> 
+			</isfileselected>
+			<then>
+				<copy file="${module.name}.war" todir="${project.dir}/${module.name}-${lp.version.file.name}.war" />
+			</then>
+			<else>
+				<jar
+					basedir="${module.name}.war"
+					destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
+				/>
+			</else>
+		</if>
 	</target>
 
 	<target name="deploy" depends="compile">
@@ -72,23 +92,34 @@
 	</target>
 
 	<target name="deploy-module">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
+		<if>
+			<isfileselected file="${module.name}.war">
+				<type type="file" /> 
+			</isfileselected>
+			<then>
+				<copy file="${module.name}.war" todir="${auto.deploy.dir}" />
+			</then>
+			<else>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
 
-		<jar
-			basedir="${module.name}.war"
-			destfile="${tstamp.value}"
-			excludes="_diffs/**"
-		/>
+				<jar
+					basedir="${module.name}.war"
+					destfile="${tstamp.value}"
+					excludes="_diffs/**"
+				/>
 
-		<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+				<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
+			</else>
+		</if>
 	</target>
 
 	<target name="loop-modules">
 		<for param="module.name">
 			<path>
 				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
+				<fileset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
 			</path>
 			<sequential>
 				<antelope:stringutil string="@{module.name}" property="module.name.unix">
