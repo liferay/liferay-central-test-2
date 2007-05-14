@@ -25,7 +25,7 @@ package com.liferay.portal;
 /**
  * <a href="UserLockoutException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class UserLockoutException extends PortalException {
