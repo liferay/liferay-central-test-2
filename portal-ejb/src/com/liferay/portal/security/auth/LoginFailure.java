@@ -43,7 +43,7 @@ public class LoginFailure implements AuthFailure {
 		try {
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
 				companyId, emailAddress);
-			
+
 			UserLocalServiceUtil.updateLoginFailure(user);
 		}
 		catch (Exception e) {
@@ -58,7 +58,7 @@ public class LoginFailure implements AuthFailure {
 		try {
 			User user = UserLocalServiceUtil.getUserByScreenName(
 				companyId, screenName);
-			
+
 			UserLocalServiceUtil.updateLoginFailure(user);
 		}
 		catch (Exception e) {
@@ -72,7 +72,7 @@ public class LoginFailure implements AuthFailure {
 
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
-			
+
 			UserLocalServiceUtil.updateLoginFailure(user);
 		}
 		catch (Exception e) {
