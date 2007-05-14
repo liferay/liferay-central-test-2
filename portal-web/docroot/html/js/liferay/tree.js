@@ -32,9 +32,9 @@ var Tree = new Class({
 				var hasChildNode = instance.hasChildNode(node.id);
 				var isNodeOpen = instance.isNodeOpen(node.id);
 
-				var layoutId = Liferay.Layout.getLayoutId(node.objId);
+				var plid = node.objId;
 
-				instance.treeHTML += '<li class="tree-item" id="_branchId_' + layoutId + '" rel="_nodeId_' + node.id + '">';
+				instance.treeHTML += '<li class="tree-item" id="_branchId_' + plid + '" rel="_nodeId_' + node.id + '">';
 				instance.treeHTML += '<a href="' + node.href + '">';
 				instance.treeHTML += instance.generateImage(icons.page);
 				instance.treeHTML += '<span>' + node.name + '</span>';
@@ -368,8 +368,7 @@ var Tree = new Class({
 			}
 			else if (type == 'delete') {
 				var tabLayoutId = obj[0]._LFR_layoutId;
-				var treeBranch = tree.find('li[@id=_branchId_' + tabLayoutId + ']');
-
+				var treeBranch = tree.find('li[@rel=_nodeId_' + tabLayoutId + ']');
 				treeBranch.remove();
 			}
 		}
@@ -444,10 +443,8 @@ var Tree = new Class({
 				url: themeDisplay.getPathMain() + '/layout_management/update_page',
 				data: {
 					cmd: 'parent_layout_id',
-					groupId: themeDisplay.getGroupId(),
-					privateLayout: themeDisplay.isPrivateLayout(),
-					layoutId: currentId,
-					parentLayoutId: newParentId
+					plid: currentId,
+					parentPlid: newParentId
 				}
 			}
 		);
