@@ -65,20 +65,20 @@ public class UserGroupServiceUtil {
 		return userGroupService.addUserGroup(name, description);
 	}
 
-	public static void deleteUserGroup(long userGroupId)
+	public static void deleteUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
-		userGroupService.deleteUserGroup(userGroupId);
+		userGroupService.deleteUserGroup(groupId, userGroupId);
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
-		long userGroupId)
+		long groupId, long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
-		return userGroupService.getUserGroup(userGroupId);
+		return userGroupService.getUserGroup(groupId, userGroupId);
 	}
 
 	public static java.util.List getUserUserGroups(long userId)
@@ -97,11 +97,13 @@ public class UserGroupServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
-		long userGroupId, java.lang.String name, java.lang.String description)
+		long groupId, long userGroupId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
-		return userGroupService.updateUserGroup(userGroupId, name, description);
+		return userGroupService.updateUserGroup(groupId, userGroupId, name,
+			description);
 	}
 }

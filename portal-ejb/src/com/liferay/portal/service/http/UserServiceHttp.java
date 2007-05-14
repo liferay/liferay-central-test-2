@@ -181,19 +181,21 @@ public class UserServiceHttp {
 	}
 
 	public static void addUserGroupUsers(HttpPrincipal httpPrincipal,
-		long userGroupId, long[] userIds)
+		long groupId, long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(userGroupId);
-			Object paramObj1 = userIds;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(userGroupId);
+			Object paramObj2 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[J");
+				paramObj2 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"addUserGroupUsers", new Object[] { paramObj0, paramObj1 });
+					"addUserGroupUsers",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -854,19 +856,21 @@ public class UserServiceHttp {
 	}
 
 	public static void unsetUserGroupUsers(HttpPrincipal httpPrincipal,
-		long userGroupId, long[] userIds)
+		long groupId, long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(userGroupId);
-			Object paramObj1 = userIds;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(userGroupId);
+			Object paramObj2 = userIds;
 
 			if (userIds == null) {
-				paramObj1 = new NullWrapper("[J");
+				paramObj2 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"unsetUserGroupUsers", new Object[] { paramObj0, paramObj1 });
+					"unsetUserGroupUsers",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

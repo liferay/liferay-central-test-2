@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -105,6 +107,9 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 	}
 
 	protected void updateUserGroupUsers(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		long userGroupId = ParamUtil.getLong(req, "userGroupId");
 
 		long[] addUserIds = StringUtil.split(
@@ -112,8 +117,10 @@ public class EditUserGroupAssignmentsAction extends PortletAction {
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(req, "removeUserIds"), 0L);
 
-		UserServiceUtil.addUserGroupUsers(userGroupId, addUserIds);
-		UserServiceUtil.unsetUserGroupUsers(userGroupId, removeUserIds);
+		UserServiceUtil.addUserGroupUsers(
+			themeDisplay.getPortletGroupId(), userGroupId, addUserIds);
+		UserServiceUtil.unsetUserGroupUsers(
+			themeDisplay.getPortletGroupId(), userGroupId, removeUserIds);
 	}
 
 }

@@ -58,11 +58,12 @@ public interface UserGroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteUserGroup(long userGroupId)
+	public void deleteUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.UserGroup getUserGroup(long userGroupId)
+	public com.liferay.portal.model.UserGroup getUserGroup(long groupId,
+		long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -74,7 +75,7 @@ public interface UserGroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.UserGroup updateUserGroup(
+	public com.liferay.portal.model.UserGroup updateUserGroup(long groupId,
 		long userGroupId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

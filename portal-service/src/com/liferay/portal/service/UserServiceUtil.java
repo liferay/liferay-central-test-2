@@ -71,11 +71,12 @@ public class UserServiceUtil {
 		userService.addRoleUsers(roleId, userIds);
 	}
 
-	public static void addUserGroupUsers(long userGroupId, long[] userIds)
+	public static void addUserGroupUsers(long groupId, long userGroupId,
+		long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
-		userService.addUserGroupUsers(userGroupId, userIds);
+		userService.addUserGroupUsers(groupId, userGroupId, userIds);
 	}
 
 	public static com.liferay.portal.model.User addUser(long companyId,
@@ -213,11 +214,12 @@ public class UserServiceUtil {
 		userService.unsetRoleUsers(roleId, userIds);
 	}
 
-	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
+	public static void unsetUserGroupUsers(long groupId, long userGroupId,
+		long[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
-		userService.unsetUserGroupUsers(userGroupId, userIds);
+		userService.unsetUserGroupUsers(groupId, userGroupId, userIds);
 	}
 
 	public static com.liferay.portal.model.User updateActive(long userId,

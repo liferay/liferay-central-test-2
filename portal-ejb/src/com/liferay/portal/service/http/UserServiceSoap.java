@@ -110,10 +110,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws RemoteException {
+	public static void addUserGroupUsers(long groupId, long userGroupId,
+		long[] userIds) throws RemoteException {
 		try {
-			UserServiceUtil.addUserGroupUsers(userGroupId, userIds);
+			UserServiceUtil.addUserGroupUsers(groupId, userGroupId, userIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -327,10 +327,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws RemoteException {
+	public static void unsetUserGroupUsers(long groupId, long userGroupId,
+		long[] userIds) throws RemoteException {
 		try {
-			UserServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
+			UserServiceUtil.unsetUserGroupUsers(groupId, userGroupId, userIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

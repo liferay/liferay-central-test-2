@@ -39,7 +39,17 @@ public class UserGroupPermission {
 			String actionId)
 		throws PrincipalException {
 
-		if (!contains(permissionChecker, userGroupId, actionId)) {
+		if (!contains(permissionChecker, 0, userGroupId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, long groupId,
+			long userGroupId, String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, groupId, userGroupId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -48,8 +58,15 @@ public class UserGroupPermission {
 		PermissionChecker permissionChecker, long userGroupId,
 		String actionId) {
 
+		return contains(permissionChecker, 0, userGroupId, actionId);
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long groupId,
+		long userGroupId, String actionId) {
+
 		return permissionChecker.hasPermission(
-			0, UserGroup.class.getName(), userGroupId, actionId);
+			groupId, UserGroup.class.getName(), userGroupId, actionId);
 	}
 
 }

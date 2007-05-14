@@ -40,6 +40,7 @@ import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
@@ -252,12 +253,17 @@ public class ActionUtil {
 	public static void getUserGroup(HttpServletRequest req)
 		throws Exception {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getPortletGroupId();
+
 		long userGroupId = ParamUtil.getLong(req, "userGroupId");
 
 		UserGroup userGroup = null;
 
 		if (userGroupId > 0) {
-			userGroup = UserGroupServiceUtil.getUserGroup(userGroupId);
+			userGroup = UserGroupServiceUtil.getUserGroup(groupId, userGroupId);
 		}
 
 		req.setAttribute(WebKeys.USER_GROUP, userGroup);

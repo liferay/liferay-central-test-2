@@ -29,7 +29,9 @@ import com.liferay.portal.UserGroupNameException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -118,15 +120,22 @@ public class EditUserGroupAction extends PortletAction {
 	}
 
 	protected void deleteUserGroups(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		long[] deleteUserGroupIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteUserGroupIds"), 0L);
 
 		for (int i = 0; i < deleteUserGroupIds.length; i++) {
-			UserGroupServiceUtil.deleteUserGroup(deleteUserGroupIds[i]);
+			UserGroupServiceUtil.deleteUserGroup(
+				themeDisplay.getPortletGroupId(), deleteUserGroupIds[i]);
 		}
 	}
 
 	protected void updateUserGroup(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		long userGroupId = ParamUtil.getLong(req, "userGroupId");
 
 		String name = ParamUtil.getString(req, "name");
@@ -143,7 +152,8 @@ public class EditUserGroupAction extends PortletAction {
 			// Update user group
 
 			UserGroupServiceUtil.updateUserGroup(
-				userGroupId, name, description);
+				themeDisplay.getPortletGroupId(), userGroupId, name,
+				description);
 		}
 	}
 
