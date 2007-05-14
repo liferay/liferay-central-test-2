@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserGroupService;
@@ -78,8 +79,13 @@ public class UserGroupServiceImpl
 	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
-		UserGroupPermission.check(
-			getPermissionChecker(), userGroupId, ActionKeys.VIEW);
+		if (!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
+			!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
+
+			throw new PrincipalException();
+		}
 
 		return UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 	}

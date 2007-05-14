@@ -83,8 +83,13 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupPermission.check(
-			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
+		if (!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
+			!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
+
+			throw new PrincipalException();
+		}
 
 		UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
@@ -254,8 +259,13 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupPermission.check(
-			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
+		if (!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
+			!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
+
+			throw new PrincipalException();
+		}
 
 		UserLocalServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
 	}
