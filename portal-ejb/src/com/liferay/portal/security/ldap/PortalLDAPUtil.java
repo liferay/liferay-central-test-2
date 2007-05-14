@@ -65,6 +65,7 @@ import javax.naming.ldap.LdapContext;
  *
  * @author Michael Young
  * @author Brian Wing Shun Chan
+ * @author Jerry Niu
  * @author Scott Lee
  *
  */
