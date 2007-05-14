@@ -22,12 +22,14 @@
 
 package com.liferay.portal.servlet.filters.autologin;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AutoLogin;
-import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.portal.security.pwd.PwdEncryptor;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -116,9 +118,9 @@ public class AutoLoginFilter implements Filter, PortalInitable {
 						}
 					}
 				}
-				catch (AutoLoginException ale) {
-					_log.warn(ale, ale);
-					_log.error(ale.getMessage());
+				catch (Exception e) {
+					_log.warn(e, e);
+					_log.error(e.getMessage());
 				}
 			}
 		}
@@ -132,7 +134,7 @@ public class AutoLoginFilter implements Filter, PortalInitable {
 	protected String login(
 			HttpServletRequest req, HttpServletResponse res, HttpSession ses,
 			AutoLogin autoLogin)
-		throws AutoLoginException, IOException {
+		throws Exception {
 
 		String[] credentials = autoLogin.login(req, res);
 
@@ -143,6 +145,24 @@ public class AutoLoginFilter implements Filter, PortalInitable {
 
 			if (Validator.isNotNull(jUsername) &&
 				Validator.isNotNull(jPassword)) {
+
+				try {
+					long userId = GetterUtil.getLong(jUsername);
+
+					if (userId > 0) {
+						User user = UserLocalServiceUtil.getUserById(userId);
+
+						if (user.isLockout()) {
+							return null;
+						}
+					}
+					else {
+						return null;
+					}
+				}
+				catch (NoSuchUserException nsue) {
+					return null;
+				}
 
 				ses.setAttribute("j_username", jUsername);
 
