@@ -66,6 +66,13 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			friendlyURL);
 	}
 
+	public void deleteLayout(long plid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		LayoutServiceFactory.getTxImpl().deleteLayout(plid);
+	}
+
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -172,6 +179,16 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			privateLayout, layoutId, themeId, colorSchemeId, css, wapTheme);
 	}
 
+	public com.liferay.portal.model.Layout updateName(long plid,
+		java.lang.String name, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return LayoutServiceFactory.getTxImpl().updateName(plid, name,
+			languageId);
+	}
+
 	public com.liferay.portal.model.Layout updateName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String name,
 		java.lang.String languageId)
@@ -183,6 +200,16 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			privateLayout, layoutId, name, languageId);
 	}
 
+	public com.liferay.portal.model.Layout updateParentLayoutId(long plid,
+		long parentPlid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return LayoutServiceFactory.getTxImpl().updateParentLayoutId(plid,
+			parentPlid);
+	}
+
 	public com.liferay.portal.model.Layout updateParentLayoutId(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId)
 		throws com.liferay.portal.PortalException, 
@@ -191,6 +218,15 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 
 		return LayoutServiceFactory.getTxImpl().updateParentLayoutId(groupId,
 			privateLayout, layoutId, parentLayoutId);
+	}
+
+	public com.liferay.portal.model.Layout updatePriority(long plid,
+		int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return LayoutServiceFactory.getTxImpl().updatePriority(plid, priority);
 	}
 
 	public com.liferay.portal.model.Layout updatePriority(long groupId,

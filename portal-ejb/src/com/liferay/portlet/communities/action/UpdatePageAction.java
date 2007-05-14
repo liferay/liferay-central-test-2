@@ -143,11 +143,18 @@ public class UpdatePageAction extends JSONAction {
 	}
 
 	protected void deletePage(HttpServletRequest req) throws Exception {
+		long plid = ParamUtil.getLong(req, "plid");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 
-		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
+		if (plid <= 0) {
+			LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
+		}
+		else {
+			LayoutServiceUtil.deleteLayout(plid);
+		}
 	}
 
 	protected void updateDisplayOrder(HttpServletRequest req) throws Exception {
@@ -162,37 +169,59 @@ public class UpdatePageAction extends JSONAction {
 	}
 
 	protected void updateName(HttpServletRequest req) throws Exception {
+		long plid = ParamUtil.getLong(req, "plid");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 		String name = ParamUtil.getString(req, "name");
 		String languageId = ParamUtil.getString(req, "languageId");
 
-		LayoutServiceUtil.updateName(
-			groupId, privateLayout, layoutId, name, languageId);
+		if (plid <= 0) {
+			LayoutServiceUtil.updateName(
+				groupId, privateLayout, layoutId, name, languageId);
+		}
+		else {
+			LayoutServiceUtil.updateName(plid, name, languageId);
+		}
 	}
 
 	protected void updateParentLayoutId(HttpServletRequest req)
 		throws Exception {
 
+		long plid = ParamUtil.getLong(req, "plid");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
+		long parentPlid = ParamUtil.getLong(req, "parentPlid");
 		long parentLayoutId = ParamUtil.getLong(
 			req, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-		LayoutServiceUtil.updateParentLayoutId(
-			groupId, privateLayout, layoutId, parentLayoutId);
+		if (plid <= 0) {
+			LayoutServiceUtil.updateParentLayoutId(
+				groupId, privateLayout, layoutId, parentLayoutId);
+		}
+		else {
+			LayoutServiceUtil.updateParentLayoutId(plid, parentPlid);
+		}
 	}
 
 	protected void updatePriority(HttpServletRequest req) throws Exception {
+		long plid = ParamUtil.getLong(req, "plid");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 		int priority = ParamUtil.getInteger(req, "priority");
 
-		LayoutServiceUtil.updatePriority(
-			groupId, privateLayout, layoutId, priority);
+		if (plid <= 0) {
+			LayoutServiceUtil.updatePriority(
+				groupId, privateLayout, layoutId, priority);
+		}
+		else {
+			LayoutServiceUtil.updatePriority(plid, priority);
+		}
 	}
 
 }

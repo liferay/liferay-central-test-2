@@ -80,6 +80,12 @@ public class LayoutServiceJSON {
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void deleteLayout(long plid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		LayoutServiceUtil.deleteLayout(plid);
+	}
+
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId)
 		throws com.liferay.portal.SystemException, 
@@ -163,6 +169,16 @@ public class LayoutServiceJSON {
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject updateName(long plid, java.lang.String name,
+		java.lang.String languageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(plid,
+				name, languageId);
+
+		return LayoutJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject updateName(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
@@ -173,12 +189,30 @@ public class LayoutServiceJSON {
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject updateParentLayoutId(long plid, long parentPlid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(plid,
+				parentPlid);
+
+		return LayoutJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject updateParentLayoutId(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(groupId,
 				privateLayout, layoutId, parentLayoutId);
+
+		return LayoutJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updatePriority(long plid, int priority)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(plid,
+				priority);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}

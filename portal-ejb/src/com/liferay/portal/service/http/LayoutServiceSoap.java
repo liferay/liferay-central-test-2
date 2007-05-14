@@ -94,6 +94,16 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static void deleteLayout(long plid) throws RemoteException {
+		try {
+			LayoutServiceUtil.deleteLayout(plid);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId) throws RemoteException {
 		try {
@@ -216,6 +226,21 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSoap updateName(long plid,
+		java.lang.String name, java.lang.String languageId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(plid,
+					name, languageId);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.LayoutSoap updateName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String name,
 		java.lang.String languageId) throws RemoteException {
@@ -232,11 +257,39 @@ public class LayoutServiceSoap {
 	}
 
 	public static com.liferay.portal.model.LayoutSoap updateParentLayoutId(
+		long plid, long parentPlid) throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(plid,
+					parentPlid);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap updateParentLayoutId(
 		long groupId, boolean privateLayout, long layoutId, long parentLayoutId)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(groupId,
 					privateLayout, layoutId, parentLayoutId);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap updatePriority(
+		long plid, int priority) throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(plid,
+					priority);
 
 			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}

@@ -44,6 +44,15 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 public class LayoutPermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, long plid, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, plid, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long groupId,
 			boolean privateLayout, long layoutId, String actionId)
 		throws PortalException, SystemException {
@@ -63,6 +72,15 @@ public class LayoutPermission {
 		if (!contains(permissionChecker, layout, actionId)) {
 			throw new PrincipalException();
 		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long plid, String actionId)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		return contains(permissionChecker, layout, actionId);
 	}
 
 	public static boolean contains(

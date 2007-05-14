@@ -60,11 +60,20 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			type, hidden, friendlyURL);
 	}
 
+	public void deleteLayout(long plid)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.DELETE);
+
+		LayoutLocalServiceUtil.deleteLayout(plid);
+	}
+
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		LayoutPermission.check(
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.DELETE);
 
 		LayoutLocalServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
@@ -184,6 +193,14 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			wapTheme);
 	}
 
+	public Layout updateName(long plid, String name, String languageId)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+
+		return LayoutLocalServiceUtil.updateName(plid, name, languageId);
+	}
+
 	public Layout updateName(
 			long groupId, boolean privateLayout, long layoutId, String name,
 			String languageId)
@@ -197,6 +214,14 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			groupId, privateLayout, layoutId, name, languageId);
 	}
 
+	public Layout updateParentLayoutId(long plid, long parentPlid)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+
+		return LayoutLocalServiceUtil.updateParentLayoutId(plid, parentPlid);
+	}
+
 	public Layout updateParentLayoutId(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId)
@@ -208,6 +233,14 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		return LayoutLocalServiceUtil.updateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
+	}
+
+	public Layout updatePriority(long plid, int priority)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+
+		return LayoutLocalServiceUtil.updatePriority(plid, priority);
 	}
 
 	public Layout updatePriority(

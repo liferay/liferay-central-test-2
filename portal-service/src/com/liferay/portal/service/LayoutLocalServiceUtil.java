@@ -77,6 +77,13 @@ public class LayoutLocalServiceUtil {
 			parentLayoutId, name, title, type, hidden, friendlyURL);
 	}
 
+	public static void deleteLayout(long plid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.deleteLayout(plid);
+	}
+
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId)
 		throws com.liferay.portal.PortalException, 
@@ -248,6 +255,15 @@ public class LayoutLocalServiceUtil {
 			layoutId, themeId, colorSchemeId, css, wapTheme);
 	}
 
+	public static com.liferay.portal.model.Layout updateName(long plid,
+		java.lang.String name, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updateName(plid, name, languageId);
+	}
+
 	public static com.liferay.portal.model.Layout updateName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String name,
 		java.lang.String languageId)
@@ -257,6 +273,25 @@ public class LayoutLocalServiceUtil {
 
 		return layoutLocalService.updateName(groupId, privateLayout, layoutId,
 			name, languageId);
+	}
+
+	public static com.liferay.portal.model.Layout updateName(
+		com.liferay.portal.model.Layout layout, java.lang.String name,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updateName(layout, name, languageId);
+	}
+
+	public static com.liferay.portal.model.Layout updateParentLayoutId(
+		long plid, long parentPlid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updateParentLayoutId(plid, parentPlid);
 	}
 
 	public static com.liferay.portal.model.Layout updateParentLayoutId(
@@ -269,6 +304,15 @@ public class LayoutLocalServiceUtil {
 			layoutId, parentLayoutId);
 	}
 
+	public static com.liferay.portal.model.Layout updatePriority(long plid,
+		int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updatePriority(plid, priority);
+	}
+
 	public static com.liferay.portal.model.Layout updatePriority(long groupId,
 		boolean privateLayout, long layoutId, int priority)
 		throws com.liferay.portal.PortalException, 
@@ -277,5 +321,14 @@ public class LayoutLocalServiceUtil {
 
 		return layoutLocalService.updatePriority(groupId, privateLayout,
 			layoutId, priority);
+	}
+
+	public static com.liferay.portal.model.Layout updatePriority(
+		com.liferay.portal.model.Layout layout, int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updatePriority(layout, priority);
 	}
 }

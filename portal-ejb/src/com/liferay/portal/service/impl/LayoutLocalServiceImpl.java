@@ -189,6 +189,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	public void deleteLayout(long plid)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutUtil.findByPrimaryKey(plid);
+
+		deleteLayout(layout, true);
+	}
+
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws PortalException, SystemException {
 
@@ -1028,6 +1036,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	public Layout updateName(long plid, String name, String languageId)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutUtil.findByPrimaryKey(plid);
+
+		return updateName(layout, name, languageId);
+	}
+
 	public Layout updateName(
 			long groupId, boolean privateLayout, long layoutId, String name,
 			String languageId)
@@ -1036,7 +1052,51 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout = LayoutUtil.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
+		return updateName(layout, name, languageId);
+	}
+
+	public Layout updateName(Layout layout, String name, String languageId)
+		throws PortalException, SystemException {
+
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
+
+		LayoutUtil.update(layout);
+
+		return layout;
+	}
+
+	public Layout updateParentLayoutId(long plid, long parentPlid)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutUtil.findByPrimaryKey(plid);
+
+		long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+
+		if (parentPlid > 0) {
+			try {
+				Layout parentLayout = LayoutUtil.findByPrimaryKey(parentPlid);
+
+				parentLayoutId = parentLayout.getLayoutId();
+			}
+			catch (NoSuchLayoutException nsle) {
+			}
+		}
+
+		parentLayoutId = getParentLayoutId(
+			layout.getGroupId(), layout.isPrivateLayout(), parentLayoutId);
+
+		validateParentLayoutId(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			parentLayoutId);
+
+		if (parentLayoutId != layout.getParentLayoutId()) {
+			int priority = getNextPriority(
+				layout.getGroupId(), layout.isPrivateLayout(), parentLayoutId);
+
+			layout.setPriority(priority);
+		}
+
+		layout.setParentLayoutId(parentLayoutId);
 
 		LayoutUtil.update(layout);
 
@@ -1069,12 +1129,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	public Layout updatePriority(long plid, int priority)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutUtil.findByPrimaryKey(plid);
+
+		return updatePriority(layout, priority);
+	}
+
 	public Layout updatePriority(
 			long groupId, boolean privateLayout, long layoutId, int priority)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutUtil.findByG_P_L(
 			groupId, privateLayout, layoutId);
+
+		return updatePriority(layout, priority);
+	}
+
+	public Layout updatePriority(Layout layout, int priority)
+		throws PortalException, SystemException {
 
 		if (layout.getPriority() == priority) {
 			return layout;
@@ -1093,7 +1167,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		priority = 0;
 
 		List layouts = LayoutUtil.findByG_P_P(
-			groupId, privateLayout, layout.getParentLayoutId());
+			layout.getGroupId(), layout.isPrivateLayout(),
+			layout.getParentLayoutId());
 
 		Collections.sort(
 			layouts, new LayoutPriorityComparator(layout, lessThan));

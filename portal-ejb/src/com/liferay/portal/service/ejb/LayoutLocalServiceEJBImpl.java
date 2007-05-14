@@ -77,6 +77,12 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			friendlyURL);
 	}
 
+	public void deleteLayout(long plid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalServiceFactory.getTxImpl().deleteLayout(plid);
+	}
+
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -220,6 +226,14 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			privateLayout, layoutId, themeId, colorSchemeId, css, wapTheme);
 	}
 
+	public com.liferay.portal.model.Layout updateName(long plid,
+		java.lang.String name, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updateName(plid, name,
+			languageId);
+	}
+
 	public com.liferay.portal.model.Layout updateName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String name,
 		java.lang.String languageId)
@@ -227,6 +241,23 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			com.liferay.portal.SystemException {
 		return LayoutLocalServiceFactory.getTxImpl().updateName(groupId,
 			privateLayout, layoutId, name, languageId);
+	}
+
+	public com.liferay.portal.model.Layout updateName(
+		com.liferay.portal.model.Layout layout, java.lang.String name,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updateName(layout, name,
+			languageId);
+	}
+
+	public com.liferay.portal.model.Layout updateParentLayoutId(long plid,
+		long parentPlid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updateParentLayoutId(plid,
+			parentPlid);
 	}
 
 	public com.liferay.portal.model.Layout updateParentLayoutId(long groupId,
@@ -237,12 +268,28 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			privateLayout, layoutId, parentLayoutId);
 	}
 
+	public com.liferay.portal.model.Layout updatePriority(long plid,
+		int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updatePriority(plid,
+			priority);
+	}
+
 	public com.liferay.portal.model.Layout updatePriority(long groupId,
 		boolean privateLayout, long layoutId, int priority)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutLocalServiceFactory.getTxImpl().updatePriority(groupId,
 			privateLayout, layoutId, priority);
+	}
+
+	public com.liferay.portal.model.Layout updatePriority(
+		com.liferay.portal.model.Layout layout, int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updatePriority(layout,
+			priority);
 	}
 
 	public void ejbCreate() throws CreateException {

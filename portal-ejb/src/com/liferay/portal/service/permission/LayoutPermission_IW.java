@@ -35,6 +35,14 @@ public class LayoutPermission_IW {
 
 	public void check(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		long plid, java.lang.String actionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		LayoutPermission.check(permissionChecker, plid, actionId);
+	}
+
+	public void check(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
@@ -49,6 +57,14 @@ public class LayoutPermission_IW {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		LayoutPermission.check(permissionChecker, layout, actionId);
+	}
+
+	public boolean contains(
+		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
+		long plid, java.lang.String actionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		return LayoutPermission.contains(permissionChecker, plid, actionId);
 	}
 
 	public boolean contains(

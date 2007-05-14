@@ -61,6 +61,13 @@ public class LayoutServiceUtil {
 			name, title, type, hidden, friendlyURL);
 	}
 
+	public static void deleteLayout(long plid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+		layoutService.deleteLayout(plid);
+	}
+
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId)
 		throws com.liferay.portal.PortalException, 
@@ -165,6 +172,15 @@ public class LayoutServiceUtil {
 			layoutId, themeId, colorSchemeId, css, wapTheme);
 	}
 
+	public static com.liferay.portal.model.Layout updateName(long plid,
+		java.lang.String name, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updateName(plid, name, languageId);
+	}
+
 	public static com.liferay.portal.model.Layout updateName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String name,
 		java.lang.String languageId)
@@ -177,6 +193,15 @@ public class LayoutServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Layout updateParentLayoutId(
+		long plid, long parentPlid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updateParentLayoutId(plid, parentPlid);
+	}
+
+	public static com.liferay.portal.model.Layout updateParentLayoutId(
 		long groupId, boolean privateLayout, long layoutId, long parentLayoutId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -184,6 +209,15 @@ public class LayoutServiceUtil {
 
 		return layoutService.updateParentLayoutId(groupId, privateLayout,
 			layoutId, parentLayoutId);
+	}
+
+	public static com.liferay.portal.model.Layout updatePriority(long plid,
+		int priority)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updatePriority(plid, priority);
 	}
 
 	public static com.liferay.portal.model.Layout updatePriority(long groupId,
