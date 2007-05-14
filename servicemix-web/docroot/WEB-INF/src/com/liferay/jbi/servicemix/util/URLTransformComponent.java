@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbi.util;
+package com.liferay.jbi.servicemix.util;
 
 import com.liferay.util.Http;
 

@@ -14,14 +14,27 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<servlet>
+		<servlet-name>DB App Inbound Servlet</servlet-name>
+		<servlet-class>com.liferay.jbi.servicemix.http.SpringBindingServlet</servlet-class>
+		<init-param>
+			<param-name>endpoint</param-name>
+			<param-value>dbAppInbound</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>Workflow Inbound Servlet</servlet-name>
-		<servlet-class>com.liferay.jbi.http.SpringBindingServlet</servlet-class>
+		<servlet-class>com.liferay.jbi.servicemix.http.SpringBindingServlet</servlet-class>
 		<init-param>
 			<param-name>endpoint</param-name>
 			<param-value>workflowInbound</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>DB App Inbound Servlet</servlet-name>
+		<url-pattern>/dbapp/*</url-pattern>
+	</servlet-mapping>	
 	<servlet-mapping>
 		<servlet-name>Workflow Inbound Servlet</servlet-name>
 		<url-pattern>/workflow/*</url-pattern>

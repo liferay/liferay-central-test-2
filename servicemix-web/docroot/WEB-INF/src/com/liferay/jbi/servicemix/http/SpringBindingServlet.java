@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbi.http;
+package com.liferay.jbi.servicemix.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbi.http;
+package com.liferay.jbi.servicemix.http;
 
 import java.io.IOException;
 
