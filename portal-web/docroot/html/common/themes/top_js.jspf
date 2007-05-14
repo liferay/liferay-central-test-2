@@ -225,13 +225,4 @@
 			Liferay.Dock.init();
 		}
 	);
-	
-	<%
-	String layoutJS = layout.getTypeSettingsProperties().getProperty("javascript-1");
-	%>
-
-	<c:if test="<%= Validator.isNotNull(layoutJS) %>">
-		<%= layoutJS %>
-	</c:if>
-
 </script>
