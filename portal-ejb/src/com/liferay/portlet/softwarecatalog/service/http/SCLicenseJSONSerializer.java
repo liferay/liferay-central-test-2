@@ -72,9 +72,9 @@ public class SCLicenseJSONSerializer {
 			jsonObj.put("url", url.toString());
 		}
 
-		jsonObj.put("openSource", model.getOpenSource());
-		jsonObj.put("active", model.getActive());
-		jsonObj.put("recommended", model.getRecommended());
+		jsonObj.put("openSource", model.isOpenSource());
+		jsonObj.put("active", model.isActive());
+		jsonObj.put("recommended", model.isRecommended());
 
 		return jsonObj;
 	}

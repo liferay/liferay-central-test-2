@@ -98,7 +98,7 @@ public class CountryJSONSerializer {
 			jsonObj.put("idd", idd.toString());
 		}
 
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("active", model.isActive());
 
 		return jsonObj;
 	}

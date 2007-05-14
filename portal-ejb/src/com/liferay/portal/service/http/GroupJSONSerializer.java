@@ -95,7 +95,7 @@ public class GroupJSONSerializer {
 			jsonObj.put("friendlyURL", friendlyURL.toString());
 		}
 
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("active", model.isActive());
 
 		return jsonObj;
 	}

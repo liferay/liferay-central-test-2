@@ -115,7 +115,7 @@ public class ContactJSONSerializer {
 
 		jsonObj.put("prefixId", model.getPrefixId());
 		jsonObj.put("suffixId", model.getSuffixId());
-		jsonObj.put("male", model.getMale());
+		jsonObj.put("male", model.isMale());
 
 		Date birthday = model.getBirthday();
 

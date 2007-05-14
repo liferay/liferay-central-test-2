@@ -105,7 +105,7 @@ public class PhoneJSONSerializer {
 		}
 
 		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("primary", model.getPrimary());
+		jsonObj.put("primary", model.isPrimary());
 
 		return jsonObj;
 	}

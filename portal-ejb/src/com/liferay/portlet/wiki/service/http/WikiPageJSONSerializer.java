@@ -107,7 +107,7 @@ public class WikiPageJSONSerializer {
 			jsonObj.put("format", format.toString());
 		}
 
-		jsonObj.put("head", model.getHead());
+		jsonObj.put("head", model.isHead());
 
 		return jsonObj;
 	}

@@ -103,7 +103,7 @@ public class SCFrameworkVersionJSONSerializer {
 			jsonObj.put("url", url.toString());
 		}
 
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("active", model.isActive());
 		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;

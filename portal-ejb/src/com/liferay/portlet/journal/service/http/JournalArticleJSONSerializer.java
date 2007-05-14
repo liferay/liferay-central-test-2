@@ -158,7 +158,7 @@ public class JournalArticleJSONSerializer {
 			jsonObj.put("displayDate", displayDate.toString());
 		}
 
-		jsonObj.put("approved", model.getApproved());
+		jsonObj.put("approved", model.isApproved());
 		jsonObj.put("approvedByUserId", model.getApprovedByUserId());
 
 		String approvedByUserName = model.getApprovedByUserName();
@@ -179,7 +179,7 @@ public class JournalArticleJSONSerializer {
 			jsonObj.put("approvedDate", approvedDate.toString());
 		}
 
-		jsonObj.put("expired", model.getExpired());
+		jsonObj.put("expired", model.isExpired());
 
 		Date expirationDate = model.getExpirationDate();
 

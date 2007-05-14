@@ -72,7 +72,7 @@ public class PortletJSONSerializer {
 			jsonObj.put("roles", roles.toString());
 		}
 
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("active", model.isActive());
 
 		return jsonObj;
 	}

@@ -122,7 +122,7 @@ public class SCProductVersionJSONSerializer {
 			jsonObj.put("directDownloadURL", directDownloadURL.toString());
 		}
 
-		jsonObj.put("repoStoreArtifact", model.getRepoStoreArtifact());
+		jsonObj.put("repoStoreArtifact", model.isRepoStoreArtifact());
 
 		return jsonObj;
 	}

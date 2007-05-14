@@ -73,7 +73,7 @@ public class UserJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		jsonObj.put("defaultUser", model.getDefaultUser());
+		jsonObj.put("defaultUser", model.isDefaultUser());
 		jsonObj.put("contactId", model.getContactId());
 
 		String password = model.getPassword();
@@ -85,7 +85,7 @@ public class UserJSONSerializer {
 			jsonObj.put("password", password.toString());
 		}
 
-		jsonObj.put("passwordEncrypted", model.getPasswordEncrypted());
+		jsonObj.put("passwordEncrypted", model.isPasswordEncrypted());
 
 		Date passwordExpirationDate = model.getPasswordExpirationDate();
 
@@ -97,7 +97,7 @@ public class UserJSONSerializer {
 				passwordExpirationDate.toString());
 		}
 
-		jsonObj.put("passwordReset", model.getPasswordReset());
+		jsonObj.put("passwordReset", model.isPasswordReset());
 
 		Date passwordModifiedDate = model.getPasswordModifiedDate();
 
@@ -210,7 +210,7 @@ public class UserJSONSerializer {
 		}
 
 		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
-		jsonObj.put("lockout", model.getLockout());
+		jsonObj.put("lockout", model.isLockout());
 
 		Date lockoutDate = model.getLockoutDate();
 
@@ -221,8 +221,8 @@ public class UserJSONSerializer {
 			jsonObj.put("lockoutDate", lockoutDate.toString());
 		}
 
-		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("agreedToTermsOfUse", model.isAgreedToTermsOfUse());
+		jsonObj.put("active", model.isActive());
 
 		return jsonObj;
 	}

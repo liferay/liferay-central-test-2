@@ -139,7 +139,7 @@ public class JournalTemplateJSONSerializer {
 			jsonObj.put("langType", langType.toString());
 		}
 
-		jsonObj.put("smallImage", model.getSmallImage());
+		jsonObj.put("smallImage", model.isSmallImage());
 
 		String smallImageURL = model.getSmallImageURL();
 

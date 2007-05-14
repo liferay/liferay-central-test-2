@@ -105,8 +105,8 @@ public class ShoppingOrderJSONSerializer {
 			jsonObj.put("altShipping", altShipping.toString());
 		}
 
-		jsonObj.put("requiresShipping", model.getRequiresShipping());
-		jsonObj.put("insure", model.getInsure());
+		jsonObj.put("requiresShipping", model.isRequiresShipping());
+		jsonObj.put("insure", model.isInsure());
 		jsonObj.put("insurance", model.getInsurance());
 
 		String couponIds = model.getCouponIds();
@@ -210,7 +210,7 @@ public class ShoppingOrderJSONSerializer {
 			jsonObj.put("billingPhone", billingPhone.toString());
 		}
 
-		jsonObj.put("shipToBilling", model.getShipToBilling());
+		jsonObj.put("shipToBilling", model.isShipToBilling());
 
 		String shippingFirstName = model.getShippingFirstName();
 
@@ -388,8 +388,8 @@ public class ShoppingOrderJSONSerializer {
 			jsonObj.put("ppPayerEmail", ppPayerEmail.toString());
 		}
 
-		jsonObj.put("sendOrderEmail", model.getSendOrderEmail());
-		jsonObj.put("sendShippingEmail", model.getSendShippingEmail());
+		jsonObj.put("sendOrderEmail", model.isSendOrderEmail());
+		jsonObj.put("sendShippingEmail", model.isSendShippingEmail());
 
 		return jsonObj;
 	}

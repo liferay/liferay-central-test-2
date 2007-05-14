@@ -54,7 +54,7 @@ public class LayoutJSONSerializer {
 		jsonObj.put("plid", model.getPlid());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("privateLayout", model.getPrivateLayout());
+		jsonObj.put("privateLayout", model.isPrivateLayout());
 		jsonObj.put("layoutId", model.getLayoutId());
 		jsonObj.put("parentLayoutId", model.getParentLayoutId());
 
@@ -94,7 +94,7 @@ public class LayoutJSONSerializer {
 			jsonObj.put("typeSettings", typeSettings.toString());
 		}
 
-		jsonObj.put("hidden", model.getHidden());
+		jsonObj.put("hidden", model.isHidden());
 
 		String friendlyURL = model.getFriendlyURL();
 
@@ -105,7 +105,7 @@ public class LayoutJSONSerializer {
 			jsonObj.put("friendlyURL", friendlyURL.toString());
 		}
 
-		jsonObj.put("iconImage", model.getIconImage());
+		jsonObj.put("iconImage", model.isIconImage());
 
 		String themeId = model.getThemeId();
 

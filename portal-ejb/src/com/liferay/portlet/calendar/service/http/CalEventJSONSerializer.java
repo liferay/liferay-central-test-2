@@ -123,8 +123,8 @@ public class CalEventJSONSerializer {
 
 		jsonObj.put("durationHour", model.getDurationHour());
 		jsonObj.put("durationMinute", model.getDurationMinute());
-		jsonObj.put("allDay", model.getAllDay());
-		jsonObj.put("timeZoneSensitive", model.getTimeZoneSensitive());
+		jsonObj.put("allDay", model.isAllDay());
+		jsonObj.put("timeZoneSensitive", model.isTimeZoneSensitive());
 
 		String type = model.getType();
 
@@ -135,7 +135,7 @@ public class CalEventJSONSerializer {
 			jsonObj.put("type", type.toString());
 		}
 
-		jsonObj.put("repeating", model.getRepeating());
+		jsonObj.put("repeating", model.isRepeating());
 
 		String recurrence = model.getRecurrence();
 

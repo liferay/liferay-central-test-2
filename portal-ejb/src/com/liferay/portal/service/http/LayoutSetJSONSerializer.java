@@ -55,8 +55,8 @@ public class LayoutSetJSONSerializer {
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("privateLayout", model.getPrivateLayout());
-		jsonObj.put("logo", model.getLogo());
+		jsonObj.put("privateLayout", model.isPrivateLayout());
+		jsonObj.put("logo", model.isLogo());
 
 		String themeId = model.getThemeId();
 

@@ -83,7 +83,7 @@ public class PasswordPolicyJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		jsonObj.put("defaultPolicy", model.getDefaultPolicy());
+		jsonObj.put("defaultPolicy", model.isDefaultPolicy());
 
 		String name = model.getName();
 
@@ -112,22 +112,22 @@ public class PasswordPolicyJSONSerializer {
 			jsonObj.put("storageScheme", storageScheme.toString());
 		}
 
-		jsonObj.put("changeable", model.getChangeable());
-		jsonObj.put("changeRequired", model.getChangeRequired());
+		jsonObj.put("changeable", model.isChangeable());
+		jsonObj.put("changeRequired", model.isChangeRequired());
 		jsonObj.put("minAge", model.getMinAge());
-		jsonObj.put("checkSyntax", model.getCheckSyntax());
-		jsonObj.put("allowDictionaryWords", model.getAllowDictionaryWords());
+		jsonObj.put("checkSyntax", model.isCheckSyntax());
+		jsonObj.put("allowDictionaryWords", model.isAllowDictionaryWords());
 		jsonObj.put("minLength", model.getMinLength());
-		jsonObj.put("history", model.getHistory());
+		jsonObj.put("history", model.isHistory());
 		jsonObj.put("historyCount", model.getHistoryCount());
-		jsonObj.put("expireable", model.getExpireable());
+		jsonObj.put("expireable", model.isExpireable());
 		jsonObj.put("maxAge", model.getMaxAge());
 		jsonObj.put("warningTime", model.getWarningTime());
 		jsonObj.put("graceLimit", model.getGraceLimit());
-		jsonObj.put("lockout", model.getLockout());
+		jsonObj.put("lockout", model.isLockout());
 		jsonObj.put("maxFailure", model.getMaxFailure());
 		jsonObj.put("lockoutDuration", model.getLockoutDuration());
-		jsonObj.put("requireUnlock", model.getRequireUnlock());
+		jsonObj.put("requireUnlock", model.isRequireUnlock());
 		jsonObj.put("resetFailureCount", model.getResetFailureCount());
 
 		return jsonObj;

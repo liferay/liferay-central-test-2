@@ -72,7 +72,7 @@ public class RegionJSONSerializer {
 			jsonObj.put("name", name.toString());
 		}
 
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("active", model.isActive());
 
 		return jsonObj;
 	}

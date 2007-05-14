@@ -106,8 +106,8 @@ public class MBMessageJSONSerializer {
 			jsonObj.put("body", body.toString());
 		}
 
-		jsonObj.put("attachments", model.getAttachments());
-		jsonObj.put("anonymous", model.getAnonymous());
+		jsonObj.put("attachments", model.isAttachments());
+		jsonObj.put("anonymous", model.isAnonymous());
 
 		return jsonObj;
 	}

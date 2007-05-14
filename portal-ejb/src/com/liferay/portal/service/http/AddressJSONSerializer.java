@@ -134,8 +134,8 @@ public class AddressJSONSerializer {
 		jsonObj.put("regionId", model.getRegionId());
 		jsonObj.put("countryId", model.getCountryId());
 		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("mailing", model.getMailing());
-		jsonObj.put("primary", model.getPrimary());
+		jsonObj.put("mailing", model.isMailing());
+		jsonObj.put("primary", model.isPrimary());
 
 		return jsonObj;
 	}

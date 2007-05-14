@@ -137,7 +137,7 @@ public class ShoppingItemJSONSerializer {
 			jsonObj.put("properties", properties.toString());
 		}
 
-		jsonObj.put("fields", model.getFields());
+		jsonObj.put("fields", model.isFields());
 
 		String fieldsQuantities = model.getFieldsQuantities();
 
@@ -152,14 +152,14 @@ public class ShoppingItemJSONSerializer {
 		jsonObj.put("maxQuantity", model.getMaxQuantity());
 		jsonObj.put("price", model.getPrice());
 		jsonObj.put("discount", model.getDiscount());
-		jsonObj.put("taxable", model.getTaxable());
+		jsonObj.put("taxable", model.isTaxable());
 		jsonObj.put("shipping", model.getShipping());
-		jsonObj.put("useShippingFormula", model.getUseShippingFormula());
-		jsonObj.put("requiresShipping", model.getRequiresShipping());
+		jsonObj.put("useShippingFormula", model.isUseShippingFormula());
+		jsonObj.put("requiresShipping", model.isRequiresShipping());
 		jsonObj.put("stockQuantity", model.getStockQuantity());
-		jsonObj.put("featured", model.getFeatured());
-		jsonObj.put("sale", model.getSale());
-		jsonObj.put("smallImage", model.getSmallImage());
+		jsonObj.put("featured", model.isFeatured());
+		jsonObj.put("sale", model.isSale());
+		jsonObj.put("smallImage", model.isSmallImage());
 
 		String smallImageURL = model.getSmallImageURL();
 
@@ -170,7 +170,7 @@ public class ShoppingItemJSONSerializer {
 			jsonObj.put("smallImageURL", smallImageURL.toString());
 		}
 
-		jsonObj.put("mediumImage", model.getMediumImage());
+		jsonObj.put("mediumImage", model.isMediumImage());
 
 		String mediumImageURL = model.getMediumImageURL();
 
@@ -181,7 +181,7 @@ public class ShoppingItemJSONSerializer {
 			jsonObj.put("mediumImageURL", mediumImageURL.toString());
 		}
 
-		jsonObj.put("largeImage", model.getLargeImage());
+		jsonObj.put("largeImage", model.isLargeImage());
 
 		String largeImageURL = model.getLargeImageURL();
 

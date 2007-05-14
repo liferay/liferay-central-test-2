@@ -129,7 +129,7 @@ public class ShoppingCouponJSONSerializer {
 			jsonObj.put("endDate", endDate.toString());
 		}
 
-		jsonObj.put("active", model.getActive());
+		jsonObj.put("active", model.isActive());
 
 		String limitCategories = model.getLimitCategories();
 
