@@ -962,6 +962,40 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.User updateLockout(
+		HttpPrincipal httpPrincipal, long userId, boolean lockout)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+			Object paramObj1 = new BooleanWrapper(lockout);
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"updateLockout", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.User)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.User updatePassword(
 		HttpPrincipal httpPrincipal, long userId, java.lang.String password1,
 		java.lang.String password2, boolean passwordReset)

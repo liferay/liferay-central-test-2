@@ -83,6 +83,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
@@ -135,6 +136,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
@@ -481,13 +483,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
-		if (passwordPolicy.getLockout()) {
+		if (passwordPolicy.isLockout()) {
 
 			// Reset failure count
 
 			Date now = new Date();
+			int failedLoginAttempts = user.getFailedLoginAttempts();
 
-			if (user.getFailedLoginAttempts() > 0) {
+			if (failedLoginAttempts > 0) {
 				long failedLoginTime = user.getLastFailedLoginDate().getTime();
 				long elapsedTime = now.getTime() - failedLoginTime;
 				long requiredElapsedTime =
@@ -507,7 +510,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				long lockoutTime = user.getLockoutDate().getTime();
 				long elapsedTime = now.getTime() - lockoutTime;
 				long requiredElapsedTime =
-					passwordPolicy.getResetFailureCount() * 1000;
+					passwordPolicy.getLockoutDuration() * 1000;
 
 				if ((requiredElapsedTime != 0) &&
 					(elapsedTime > requiredElapsedTime)) {
@@ -515,12 +518,52 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					user.setLockout(false);
 					user.setLockoutDate(null);
 				}
+			}
 
-				if (user.isLockout()) {
-					throw new UserLockoutException();
-				}
+			if (user.isLockout()) {
+				throw new UserLockoutException();
 			}
 		}
+	}
+
+	public void checkLoginFailure(User user)
+		throws PortalException, SystemException {
+
+		Date now = new Date();
+
+		int failedLoginAttempts = user.getFailedLoginAttempts();
+
+		user.setLastFailedLoginDate(now);
+		user.setFailedLoginAttempts(++failedLoginAttempts);
+
+		UserUtil.update(user);
+	}
+
+	public void checkLoginFailureByEmailAddress(
+			long companyId, String emailAddress)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUserByEmailAddress(
+			companyId, emailAddress);
+
+		checkLoginFailure(user);
+	}
+
+	public void checkLoginFailureById(long userId)
+		throws PortalException, SystemException {
+
+		User user = this.getUserById(userId);
+
+		checkLoginFailure(user);
+	}
+
+	public void checkLoginFailureByScreenName(long companyId, String screenName)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUserByScreenName(
+			companyId, screenName);
+
+		checkLoginFailure(user);
 	}
 
 	public KeyValuePair decryptUserId(
@@ -1077,42 +1120,54 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	public void updateLoginFailure(User user)
+	public User updateLockout(User user, boolean lockout)
 		throws PortalException, SystemException {
 
-		Date now = new Date();
+		Date lockoutDate = null;
 
-		int failedLoginAttempts = user.getFailedLoginAttempts();
+		if (lockout) {
+			lockoutDate = new Date();
+		}
 
-		user.setLastFailedLoginDate(now);
-		user.setFailedLoginAttempts(++failedLoginAttempts);
+		user.setLockout(lockout);
+		user.setLockoutDate(lockoutDate);
+
+		if (!lockout) {
+			user.setLastFailedLoginDate(lockoutDate);
+			user.setFailedLoginAttempts(0);
+		}
 
 		UserUtil.update(user);
+
+		return user;
 	}
 
-	public void updateLockout(User user)
+	public User updateLockoutByEmailAddress(
+			long companyId, String emailAddress, boolean lockout)
 		throws PortalException, SystemException {
 
-		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+		User user = UserLocalServiceUtil.getUserByEmailAddress(
+			companyId, emailAddress);
 
-		if (passwordPolicy.getLockout()) {
+		return updateLockout(user, lockout);
+	}
 
-			// Activate lockout
+	public User updateLockoutById(long userId, boolean lockout)
+		throws PortalException, SystemException {
 
-			int failedLoginAttempts = user.getFailedLoginAttempts();
-			int maxFailures = passwordPolicy.getMaxFailure();
+		User user = this.getUserById(userId);
 
-			if (passwordPolicy.getLockout() &&
-					(failedLoginAttempts >= maxFailures)) {
+		return updateLockout(user, lockout);
+	}
 
-				Date now = new Date();
+	public User updateLockoutByScreenName(
+			long companyId, String screenName, boolean lockout)
+		throws PortalException, SystemException {
 
-				user.setLockout(true);
-				user.setLockoutDate(now);
+		User user = UserLocalServiceUtil.getUserByScreenName(
+			companyId, screenName);
 
-				UserUtil.update(user);
-			}
-		}
+		return updateLockout(user, lockout);
 	}
 
 	public User updatePassword(

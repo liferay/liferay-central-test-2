@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.Map;
@@ -31,6 +30,7 @@ import java.util.Map;
  * <a href="LoginMaxFailures.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class LoginMaxFailures implements AuthFailure {
@@ -41,10 +41,8 @@ public class LoginMaxFailures implements AuthFailure {
 		throws AuthException {
 
 		try {
-			User user = UserLocalServiceUtil.getUserByEmailAddress(
-				companyId, emailAddress);
-
-			UserLocalServiceUtil.updateLockout(user);
+			UserLocalServiceUtil.updateLockoutByEmailAddress(
+				companyId, emailAddress, true);
 		}
 		catch (Exception e) {
 			throw new AuthException();
@@ -56,10 +54,8 @@ public class LoginMaxFailures implements AuthFailure {
 		throws AuthException {
 
 		try {
-			User user = UserLocalServiceUtil.getUserByScreenName(
-				companyId, screenName);
-
-			UserLocalServiceUtil.updateLockout(user);
+			UserLocalServiceUtil.updateLockoutByScreenName(
+				companyId, screenName, true);
 		}
 		catch (Exception e) {
 			throw new AuthException();
@@ -71,9 +67,7 @@ public class LoginMaxFailures implements AuthFailure {
 		throws AuthException {
 
 		try {
-			User user = UserLocalServiceUtil.getUserById(userId);
-
-			UserLocalServiceUtil.updateLockout(user);
+			UserLocalServiceUtil.updateLockoutById(userId, true);
 		}
 		catch (Exception e) {
 			throw new AuthException();

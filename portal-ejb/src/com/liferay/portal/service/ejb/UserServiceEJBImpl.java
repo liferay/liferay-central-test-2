@@ -248,6 +248,15 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 			agreedToTermsOfUse);
 	}
 
+	public com.liferay.portal.model.User updateLockout(long userId,
+		boolean lockout)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return UserServiceFactory.getTxImpl().updateLockout(userId, lockout);
+	}
+
 	public com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)

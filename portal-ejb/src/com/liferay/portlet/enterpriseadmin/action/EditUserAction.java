@@ -121,6 +121,9 @@ public class EditUserAction extends PortletAction {
 			else if (cmd.equals("sms")) {
 				user = updateSms(req);
 			}
+			else if (cmd.equals("unlock")) {
+				user = updateLockout(req);
+			}
 
 			String redirect = null;
 
@@ -314,6 +317,14 @@ public class EditUserAction extends PortletAction {
 			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
 			user.getComments(), contact.getSmsSn(), aimSn, icqSn, jabberSn,
 			msnSn, skypeSn, ymSn);
+
+		return user;
+	}
+
+	protected User updateLockout(ActionRequest req) throws Exception {
+		User user = PortalUtil.getSelectedUser(req);
+
+		UserServiceUtil.updateLockout(user.getUserId(), false);
 
 		return user;
 	}

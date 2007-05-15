@@ -240,6 +240,15 @@ public class UserServiceUtil {
 		return userService.updateAgreedToTermsOfUse(userId, agreedToTermsOfUse);
 	}
 
+	public static com.liferay.portal.model.User updateLockout(long userId,
+		boolean lockout)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		return userService.updateLockout(userId, lockout);
+	}
+
 	public static com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)

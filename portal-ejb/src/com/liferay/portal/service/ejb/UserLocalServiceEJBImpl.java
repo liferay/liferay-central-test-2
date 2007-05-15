@@ -149,6 +149,34 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		UserLocalServiceFactory.getTxImpl().checkLockout(user);
 	}
 
+	public void checkLoginFailure(com.liferay.portal.model.User user)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().checkLoginFailure(user);
+	}
+
+	public void checkLoginFailureByEmailAddress(long companyId,
+		java.lang.String emailAddress)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().checkLoginFailureByEmailAddress(companyId,
+			emailAddress);
+	}
+
+	public void checkLoginFailureById(long userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().checkLoginFailureById(userId);
+	}
+
+	public void checkLoginFailureByScreenName(long companyId,
+		java.lang.String screenName)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalServiceFactory.getTxImpl().checkLoginFailureByScreenName(companyId,
+			screenName);
+	}
+
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.PortalException, 
@@ -410,16 +438,35 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			loginIP);
 	}
 
-	public void updateLoginFailure(com.liferay.portal.model.User user)
+	public com.liferay.portal.model.User updateLockout(
+		com.liferay.portal.model.User user, boolean lockout)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		UserLocalServiceFactory.getTxImpl().updateLoginFailure(user);
+		return UserLocalServiceFactory.getTxImpl().updateLockout(user, lockout);
 	}
 
-	public void updateLockout(com.liferay.portal.model.User user)
+	public com.liferay.portal.model.User updateLockoutByEmailAddress(
+		long companyId, java.lang.String emailAddress, boolean lockout)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		UserLocalServiceFactory.getTxImpl().updateLockout(user);
+		return UserLocalServiceFactory.getTxImpl().updateLockoutByEmailAddress(companyId,
+			emailAddress, lockout);
+	}
+
+	public com.liferay.portal.model.User updateLockoutById(long userId,
+		boolean lockout)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return UserLocalServiceFactory.getTxImpl().updateLockoutById(userId,
+			lockout);
+	}
+
+	public com.liferay.portal.model.User updateLockoutByScreenName(
+		long companyId, java.lang.String screenName, boolean lockout)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return UserLocalServiceFactory.getTxImpl().updateLockoutByScreenName(companyId,
+			screenName, lockout);
 	}
 
 	public com.liferay.portal.model.User updatePassword(long userId,

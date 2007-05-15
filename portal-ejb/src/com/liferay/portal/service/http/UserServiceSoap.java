@@ -366,6 +366,20 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserSoap updateLockout(long userId,
+		boolean lockout) throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateLockout(userId,
+					lockout);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap updatePassword(
 		long userId, java.lang.String password1, java.lang.String password2,
 		boolean passwordReset) throws RemoteException {

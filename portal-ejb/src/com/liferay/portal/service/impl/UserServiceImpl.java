@@ -49,6 +49,7 @@ import java.util.Locale;
  *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
+ * @author Scott Lee
  *
  */
 public class UserServiceImpl extends PrincipalBean implements UserService {
@@ -296,6 +297,14 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 		return UserLocalServiceUtil.updateAgreedToTermsOfUse(
 			userId, agreedToTermsOfUse);
+	}
+
+	public User updateLockout(long userId, boolean lockout)
+		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.DELETE);
+
+		return UserLocalServiceUtil.updateLockoutById(userId, lockout);
 	}
 
 	public User updatePassword(

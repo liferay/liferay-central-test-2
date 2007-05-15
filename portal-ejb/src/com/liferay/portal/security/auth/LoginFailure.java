@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.Map;
@@ -31,6 +30,7 @@ import java.util.Map;
  * <a href="LoginFailure.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class LoginFailure implements AuthFailure {
@@ -41,10 +41,8 @@ public class LoginFailure implements AuthFailure {
 		throws AuthException {
 
 		try {
-			User user = UserLocalServiceUtil.getUserByEmailAddress(
+			UserLocalServiceUtil.checkLoginFailureByEmailAddress(
 				companyId, emailAddress);
-
-			UserLocalServiceUtil.updateLoginFailure(user);
 		}
 		catch (Exception e) {
 			throw new AuthException(e);
@@ -56,10 +54,8 @@ public class LoginFailure implements AuthFailure {
 		throws AuthException {
 
 		try {
-			User user = UserLocalServiceUtil.getUserByScreenName(
+			UserLocalServiceUtil.checkLoginFailureByScreenName(
 				companyId, screenName);
-
-			UserLocalServiceUtil.updateLoginFailure(user);
 		}
 		catch (Exception e) {
 			throw new AuthException(e);
@@ -71,9 +67,7 @@ public class LoginFailure implements AuthFailure {
 		throws AuthException {
 
 		try {
-			User user = UserLocalServiceUtil.getUserById(userId);
-
-			UserLocalServiceUtil.updateLoginFailure(user);
+			UserLocalServiceUtil.checkLoginFailureById(userId);
 		}
 		catch (Exception e) {
 			throw new AuthException(e);

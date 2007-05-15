@@ -111,6 +111,24 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void checkLoginFailure(com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void checkLoginFailureByEmailAddress(long companyId,
+		java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void checkLoginFailureById(long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void checkLoginFailureByScreenName(long companyId,
+		java.lang.String screenName)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.SystemException, 
@@ -278,11 +296,23 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateLoginFailure(com.liferay.portal.model.User user)
+	public com.liferay.portal.model.User updateLockout(
+		com.liferay.portal.model.User user, boolean lockout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateLockout(com.liferay.portal.model.User user)
+	public com.liferay.portal.model.User updateLockoutByEmailAddress(
+		long companyId, java.lang.String emailAddress, boolean lockout)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.User updateLockoutById(long userId,
+		boolean lockout)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.User updateLockoutByScreenName(
+		long companyId, java.lang.String screenName, boolean lockout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

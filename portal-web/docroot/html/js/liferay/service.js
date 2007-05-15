@@ -946,6 +946,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateLockout: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateLockout";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updatePassword: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updatePassword";
