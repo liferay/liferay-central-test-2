@@ -60,7 +60,7 @@ You can change the database settings by modifying /WEB-INF/classes/connection-po
 
 <br><br>
 
-The SQL script to build the database is found in /WEB-INF/sql/sample_dao.sql.
+The SQL script to build the database is found in /WEB-INF/sql/sample-dao-mysql.sql.
 
 <br><br>
 
