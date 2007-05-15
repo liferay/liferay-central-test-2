@@ -97,9 +97,9 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 
 				parent.removeChild(curItem);
 				parent.innerHTML = '<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>';
-			    
+
 				AjaxUtil.request("<%= url.toString() %>", {
-					onComplete: function(xmlHttpReq) {						
+					onComplete: function(xmlHttpReq) {
 						var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
 
 						addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);

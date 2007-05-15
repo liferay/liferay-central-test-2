@@ -20,7 +20,6 @@
 			<param-name>endpoint</param-name>
 			<param-value>dbAppInbound</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>Workflow Inbound Servlet</servlet-name>
@@ -29,7 +28,6 @@
 			<param-name>endpoint</param-name>
 			<param-value>workflowInbound</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DB App Inbound Servlet</servlet-name>
