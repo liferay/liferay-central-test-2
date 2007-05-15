@@ -144,9 +144,9 @@
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
 			if (!is_safari) {
-				_$J(document).ready(
+				_$J(document).last(
 					function() {
-						setTimeout("ReverseAjax.initialize()", 2000);
+						ReverseAjax.initialize();
 					}
 				);
 			}

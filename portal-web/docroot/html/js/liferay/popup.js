@@ -89,10 +89,6 @@
 
 			jPopup[0].alertOptions = options;
 
-			if ((myMessage != null) && (typeof myMessage == "object")) {
-				myMessage = jQuery(myMessage);
-			}
-
 			jMessage.append(myMessage || "<div class=\"loading-animation\"></div>");
 
 			if (msgHeight) {

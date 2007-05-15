@@ -228,38 +228,6 @@
 			return rt;
 		},
 
-		_move: function(portlet, neighbor, quadrant) {
-			if (quadrant) {
-				if (quadrant == 1 || quadrant == 2) {
-					jQuery(neighbor).before(portlet);
-				}
-				else {
-					jQuery(neighbor).after(portlet);
-				}
-			}
-			else {
-				jQuery(neighbor).append(portlet);
-			}
-
-			var currentPortlet = jQuery(portlet);
-			var currentColumn = currentPortlet.parents('div[@id^=layout-column_]');
-			var currentColumnId = currentColumn[0].id.replace(/^layout-column_/, '');
-			var newPosition = -1;
-
-			var portletId = portlet.id.replace(/^(p_p_id_)/, '');
-			portletId = portletId.substring(0, portletId.length - 1);
-
-			jQuery(".portlet-boundary", currentColumn).each(
-				function(i) {
-					if (portlet == this) {
-						newPosition = i;
-					}
-				}
-			);
-
-			movePortlet(themeDisplay.getPlid(), portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
-		},
-
 		_onMove: function(settings) {
 			jQuery(settings.container).css({top: 0, left: 0});
 			var instance = this;
@@ -298,7 +266,6 @@
 				if (foundPortlet) {
 					if (instance._hasMoved(settings.container, foundPortlet.position, foundPortlet.data.quadrant)) {
 						// Move if not in the same position
-						//instance._move(settings.container, foundPortlet.position, foundPortlet.data.quadrant);
 						instance._onDrop({
 							portlet: settings.container,
 							neighbor: foundPortlet.position,
@@ -308,7 +275,6 @@
 				}
 				else {
 					// Add portlet to empty column
-					//instance._move(settings.container, foundContainer.area);
 					instance._onDrop({
 						portlet: settings.container,
 						container: foundContainer.area

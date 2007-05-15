@@ -38,7 +38,7 @@ var Messaging = {
 				_$J(chatBox).append(
 					"<img src='" + themeDisplay.getPathThemeImages() + "/chat/add_user.png' " +
 						"style='cursor: pointer; margin-top: 2px' " +
-						"onclick='MessagingRoster.addEntry('" + msg.toId + "'); _$J(this).remove()' " +
+						"onclick=\"MessagingRoster.addEntry('" + msg.toId + "'); _$J(this).remove()\"" +
 					"/>"
 				);
 			}

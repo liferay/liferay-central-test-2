@@ -49,7 +49,10 @@
 
 ## ---------- URLs ---------- ##
 
+#set ( $is_signed_in = $theme_display.isSignedIn() )
 #set ( $show_add_content = $theme_display.isShowAddContentIcon() )
+
+#set ( $my_places_text = $languageUtil.get($company_id, $locale, "my-places") )
 
 #if ( $show_add_content )
 	#set ( $add_content_text = $languageUtil.get($company_id, $locale, "add-content") )

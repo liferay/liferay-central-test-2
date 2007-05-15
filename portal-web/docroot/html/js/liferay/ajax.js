@@ -36,21 +36,11 @@ function AjaxRequest(url, options) {
 			if (xmlHttpReq.readyState == 4) {
 				try {
 					if (xmlHttpReq.status == 200) {
-						var ajaxId;
-						try {
-							ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
-						}
-						catch (e) {
-							ajaxId = "";
-						}
-						
 						if (onComplete) {
 							onComplete(xmlHttpReq, returnArgs);
 						}
 		
-						if (ajaxId && ajaxId != "") {
-							AjaxUtil.remove(parseInt(ajaxId));
-						}
+						AjaxUtil.remove(ajaxId);
 					}
 				}
 				catch(e) {
@@ -73,7 +63,6 @@ function AjaxRequest(url, options) {
 				xmlHttpReq.open("POST", path, true);
 				xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
 				xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xmlHttpReq.setRequestHeader("Ajax-ID", ajaxId);
 				xmlHttpReq.onreadystatechange = returnFunction;
 				xmlHttpReq.send(query);
 			}
@@ -86,6 +75,7 @@ function AjaxRequest(url, options) {
 
 	this.resend = function(url, options) {
 		opts = options;
+		ajaxId = 0;
 		onComplete = opts.onComplete;
 		
 		send(url);
@@ -220,7 +210,15 @@ var ReverseAjax = {
 };
 
 function $J(JSONText) {
-	return eval("(" + JSONText + ")");
+	var rt;
+	try {
+		rt = eval("(" + JSONText + ")");
+	}
+	catch (e) {
+		rt = new Object();
+	}
+	
+	return rt;
 }
 
 function executeLoadedScript(el) {

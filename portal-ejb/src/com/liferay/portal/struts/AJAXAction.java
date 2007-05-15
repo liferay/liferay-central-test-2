@@ -48,8 +48,6 @@ public abstract class AJAXAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		String ajaxId = req.getHeader("Ajax-ID");
-
 		String xml = null;
 
 		try {
@@ -64,10 +62,6 @@ public abstract class AJAXAction extends Action {
 
 		res.setContentType(Constants.TEXT_XML);
 		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
-
-		if (ajaxId != null) {
-			res.setHeader("Ajax-ID", ajaxId);
-		}
 
 		PrintWriter pw = res.getWriter();
 

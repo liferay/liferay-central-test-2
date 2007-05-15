@@ -50,8 +50,6 @@ public abstract class JSONAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		String ajaxId = req.getHeader("Ajax-ID");
-
 		String callback = ParamUtil.getString(req, "callback");
 		String instance = ParamUtil.getString(req, "inst");
 
@@ -77,10 +75,6 @@ public abstract class JSONAction extends Action {
 		if (Validator.isNotNull(json)) {
 			res.setContentType(Constants.TEXT_JAVASCRIPT);
 			res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
-
-			if (ajaxId != null && !ajaxId.equals("")) {
-				res.setHeader("Ajax-ID", ajaxId);
-			}
 
 			PrintWriter pw = res.getWriter();
 

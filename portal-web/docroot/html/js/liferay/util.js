@@ -6,20 +6,20 @@ Liferay.Util = {
 			type = "on" + type;
 		}
 
-	   var temp = obj[type];
+		var temp = obj[type];
 
 		if (typeof obj[type] != "function") {
-	       obj[type] = func;
-	   }
+			obj[type] = func;
+		}
 		else {
-	       obj[type] = function() {
-	       	if (temp) {
-		           temp();
-	       	}
-
+			obj[type] = function() {
+				if (temp) {
+					temp();
+				}
+		
 				func();
-	       }
-	   }
+			}
+		}
 	},
 
 	addInputFocus: function(el) {

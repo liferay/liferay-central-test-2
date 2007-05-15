@@ -25,80 +25,76 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
-	<li class="my-places">
-		<a><liferay-ui:message key="my-places" /></a>
+	<ul>
 
-		<ul>
+		<%
+		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
-			<%
-			PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+		portletURL.setWindowState(WindowState.NORMAL);
+		portletURL.setPortletMode(PortletMode.VIEW);
 
-			portletURL.setWindowState(WindowState.NORMAL);
-			portletURL.setPortletMode(PortletMode.VIEW);
+		portletURL.setParameter("struts_action", "/my_places/view");
 
-			portletURL.setParameter("struts_action", "/my_places/view");
+		LinkedHashMap groupParams = new LinkedHashMap();
 
-			LinkedHashMap groupParams = new LinkedHashMap();
+		groupParams.put("usersGroups", new Long(user.getUserId()));
+		//groupParams.put("pageCount", StringPool.BLANK);
 
-			groupParams.put("usersGroups", new Long(user.getUserId()));
-			//groupParams.put("pageCount", StringPool.BLANK);
+		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		if (user.isLayoutsRequired()) {
+			Group userGroup = user.getGroup();
 
-			if (user.isLayoutsRequired()) {
-				Group userGroup = user.getGroup();
+			communities.add(0, userGroup);
+		}
 
-				communities.add(0, userGroup);
-			}
+		for (int i = 0; i < communities.size(); i++) {
+			Group community = (Group)communities.get(i);
 
-			for (int i = 0; i < communities.size(); i++) {
-				Group community = (Group)communities.get(i);
+			int publicLayoutsPageCount = community.getPublicLayoutsPageCount();
+			int privateLayoutsPageCount = community.getPrivateLayoutsPageCount();
+		%>
 
-				int publicLayoutsPageCount = community.getPublicLayoutsPageCount();
-				int privateLayoutsPageCount = community.getPrivateLayoutsPageCount();
-			%>
+			<li>
+				<h3>
+					<c:choose>
+						<c:when test="<%= community.isUser() %>">
+							<liferay-ui:message key="my-community" />
+						</c:when>
+						<c:otherwise>
+							<%= community.getName() %>
+						</c:otherwise>
+					</c:choose>
+				</h3>
+				<ul>
 
-				<li>
-					<h3>
-						<c:choose>
-							<c:when test="<%= community.isUser() %>">
-								<liferay-ui:message key="my-community" />
-							</c:when>
-							<c:otherwise>
-								<%= community.getName() %>
-							</c:otherwise>
-						</c:choose>
-					</h3>
-					<ul>
+					<%
+					portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+					portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-						<%
-						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
-						portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+					boolean selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+					%>
 
-						boolean selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
-						%>
+					<li class="public <%= selectedPlace ? "current" : "" %>">
+						<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
+					</li>
 
-						<li class="public <%= selectedPlace ? "current" : "" %>">
-							<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
-						</li>
+					<%
+					portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+					portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
-						<%
-						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
-						portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+					selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+					%>
 
-						selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
-						%>
+					<li class="private <%= selectedPlace ? "current" : "" %>">
+						<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
+					</li>
+				</ul>
+			</li>
 
-						<li class="private <%= selectedPlace ? "current" : "" %>">
-							<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
-						</li>
-					</ul>
-				</li>
+		<%
+		}
+		%>
 
-			<%
-			}
-			%>
-
-		</ul>
-	</li>
+	</ul>
 </c:if>

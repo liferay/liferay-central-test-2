@@ -118,8 +118,8 @@ Liferay.Dock = {
 			function() {
 				var heading = jQuery(this);
 
+				heading.next("ul").BlindToggleVertically("fast");
 				heading.toggleClass('hide');
-				heading.next('ul').slideToggle('fast');
 			}
 		);
 	},

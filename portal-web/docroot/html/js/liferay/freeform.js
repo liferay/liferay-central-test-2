@@ -128,20 +128,12 @@
 
 		savePosition : function(portlet) {
 			var instance = this;
-			var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
-			var newPosition = this.findPosition(portlet);
+			var resizeBox = _$J(portlet).find(".portlet-content-container, .portlet-borderless-container")[0];
+			var newPosition = Liferay.Portlet.findIndex(portlet);
 			var cmd;
 
 			if (newPosition != portlet.oldPosition) {
-				var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
-				//movePortlet(themeDisplay.getPlid(), portlet.portletId, currentColumnId, newPosition, themeDisplay.getDoAsUserIdEncoded());
-				AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout" + 
-					"?p_l_id=" + themeDisplay.getPlid() +
-					"&p_p_id=" + portlet.portletId +
-					"&p_p_col_id=" + currentColumnId +
-					"&p_p_col_pos=" + newPosition +
-					"&doAsUserId=" + themeDisplay.getDoAsUserIdEncoded() +
-					"&cmd=move");
+				Liferay.Portlet.savePosition(portlet);
 			}
 
 			if (resizeBox) {
