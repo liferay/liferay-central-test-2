@@ -34,6 +34,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PermissionService;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -214,13 +215,13 @@ public class PermissionServiceImpl
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Layout.class.getName())) {
-			String layoutGroupIdStr = StringUtil.split(primKey, ".")[1];
+			long plid = GetterUtil.getLong(primKey);
 
-			long layoutGroupId = GetterUtil.getLong(
-				StringUtil.replace(layoutGroupIdStr, "}", ""));
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 			GroupPermission.check(
-				permissionChecker, layoutGroupId, ActionKeys.MANAGE_LAYOUTS);
+				permissionChecker, layout.getGroupId(),
+				ActionKeys.MANAGE_LAYOUTS);
 		}
 		else if (name.equals(User.class.getName())) {
 			long userId = GetterUtil.getLong(primKey);
