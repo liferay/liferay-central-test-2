@@ -772,9 +772,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layout.setPrivateLayout(privateLayout);
 				layout.setLayoutId(layoutId);
 			}
-			else {
-				newLayoutIds.add(new Long(layout.getPlid()));
-			}
 
 			layout.setCompanyId(user.getCompanyId());
 			layout.setParentLayoutId(parentLayoutId);
@@ -791,6 +788,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			fixTypeSettings(layout);
 
 			LayoutUtil.update(layout);
+
+			newLayoutIds.add(new Long(layoutId));
 
 			Element permissionsEl = layoutEl.element("permissions");
 
@@ -1202,15 +1201,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		List layouts = LayoutUtil.findByG_P_P(
-			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+		List layouts = LayoutUtil.findByG_P(groupId, privateLayout);
 
 		Iterator itr = layouts.iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
 
-			if (!newLayoutIds.contains(new Long(layout.getPlid()))) {
+			if (!newLayoutIds.contains(new Long(layout.getLayoutId()))) {
 				try {
 					deleteLayout(layout, false);
 				}
