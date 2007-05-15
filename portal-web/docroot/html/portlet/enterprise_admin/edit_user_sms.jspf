@@ -27,7 +27,7 @@
 <table class="liferay-table">
 <tr>
 	<td>
-		<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="sms" /></font>
+		<liferay-ui:message key="sms" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="smsSn" />

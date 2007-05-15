@@ -61,10 +61,11 @@ catch (Throwable t) {
 		<tr>
 			<td>
 				<table border="0" cellpadding="0" cellspacing="0">
+
 				<c:if test="<%= error != null %>">
 					<tr>
 						<td colspan="3">
-							<font class="portlet-msg-error" style="font-size: xx-small;"><liferay-ui:message key="wsrp-your-service-url-or-endpoints-are-unreachable" /></font>
+							<liferay-ui:message key="wsrp-your-service-url-or-endpoints-are-unreachable" />
 						</td>
 					</tr>
 					<tr>
@@ -73,9 +74,10 @@ catch (Throwable t) {
 						</td>
 					</tr>
 				</c:if>
+
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-service-url" /></font>
+						<liferay-ui:message key="wsrp-service-url" />
 					</td>
 					<td width="10">
 						&nbsp;
@@ -91,7 +93,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-markup-endpoint" /></font>
+						<liferay-ui:message key="wsrp-markup-endpoint" />
 					</td>
 					<td width="10">
 						&nbsp;
@@ -107,7 +109,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-service-description-endpoint" /></font>
+						<liferay-ui:message key="wsrp-service-description-endpoint" />
 					</td>
 					<td width="10">
 						&nbsp;
@@ -123,7 +125,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-registration-endpoint" /></font>
+						<liferay-ui:message key="wsrp-registration-endpoint" />
 					</td>
 					<td width="10">
 						&nbsp;
@@ -139,7 +141,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-portlet-management-endpoint" /></font>
+						<liferay-ui:message key="wsrp-portlet-management-endpoint" />
 					</td>
 					<td width="10">
 						&nbsp;
@@ -155,7 +157,7 @@ catch (Throwable t) {
 				</tr>
 				<tr>
 					<td>
-						<font class="portlet-font" style="font-size: x-small;"><liferay-ui:message key="wsrp-portlet" /></font>
+						<liferay-ui:message key="wsrp-portlet" />
 					</td>
 					<td width="10">
 						&nbsp;
