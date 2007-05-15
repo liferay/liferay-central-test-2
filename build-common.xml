@@ -72,29 +72,9 @@
 		<setproxy proxyhost="${setproxy.proxy.host}" proxyport="${setproxy.proxy.port}" />
 	</target>
 
-	<antelope:stringutil string="${ant.version}" property="ant.version.beginindex">
-		<indexof string="version" />
-	</antelope:stringutil>
-
-	<math
-		datatype="int"
-		operand1="${ant.version.beginindex}"
-		operand2="8"
-		operation="+"
-		result="ant.version.beginindex"
-	/>
-
-	<antelope:stringutil string="${ant.version}" property="ant.version.endindex">
-		<indexof string=" compiled" />
-	</antelope:stringutil>
-
-	<antelope:stringutil string="${ant.version}" property="ant.version.number">
-		<substring beginindex="${ant.version.beginindex}" endindex="${ant.version.endindex}" />
-	</antelope:stringutil>
-
-	<compare arg1="${ant.version.number}" arg2="1.7.0">
-		<greaterOrEqual property="correct.ant.version" />
-	</compare>
+	<condition property="correct.ant.version">
+		<antversion atleast="1.7.0" />
+	</condition>
 
 	<if>
 		<not>
