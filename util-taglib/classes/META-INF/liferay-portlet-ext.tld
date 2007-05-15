@@ -186,6 +186,16 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	<tag>
+		<name>icon-refresh</name>
+		<tagclass>com.liferay.taglib.portletext.IconRefreshTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 
 	<!--
 	liferay-portlet:renderURL is similar to portlet:renderURL except it has the

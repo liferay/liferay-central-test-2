@@ -91,6 +91,24 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		%>
 
 		<script type="text/javascript">
+			function <%= portletDisplay.getNamespace() %>refreshPortlet() {
+			    var curItem = document.getElementById("portlet-id-<%= portlet.getPortletId() %>");
+				var parent = curItem.parentNode;
+
+				parent.removeChild(curItem);
+				parent.innerHTML = '<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>';
+			    
+				AjaxUtil.request("<%= url.toString() %>", {
+					onComplete: function(xmlHttpReq) {						
+						var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
+
+						addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
+
+						portletDiv.parentNode.removeChild(portletDiv);
+					}
+				});
+			}
+
 			AjaxUtil.request("<%= url.toString() %>", {
 				onComplete: function(xmlHttpReq) {
 					var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");

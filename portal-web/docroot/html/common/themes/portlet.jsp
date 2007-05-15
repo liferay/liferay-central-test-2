@@ -93,6 +93,12 @@ urlConfiguration.setParameter("redirect", currentURL);
 
 portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
 
+// URL refresh
+
+String urlRefresh = "javascript: " + portletDisplay.getNamespace() + "refreshPortlet();";
+
+portletDisplay.setURLRefresh(urlRefresh);
+
 // URL close
 
 String urlClose = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";

@@ -198,6 +198,7 @@ boolean showMaxIcon = true;
 boolean showMinIcon = true;
 boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
 boolean showPrintIcon = portlet.hasPortletMode(responseContentType, LiferayPortletMode.PRINT);
+boolean showRefreshIcon = portlet.isAjaxable() && (portlet.getRenderWeight() == 0);
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
@@ -304,6 +305,7 @@ portletDisplay.setShowMaxIcon(showMaxIcon);
 portletDisplay.setShowMinIcon(showMinIcon);
 portletDisplay.setShowMoveIcon(showMoveIcon);
 portletDisplay.setShowPrintIcon(showPrintIcon);
+portletDisplay.setShowRefreshIcon(showRefreshIcon);
 
 portletDisplay.setRestoreCurrentView(portlet.isRestoreCurrentView());
 

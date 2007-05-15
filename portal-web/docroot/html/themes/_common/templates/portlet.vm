@@ -15,6 +15,7 @@
 			#if ( $portlet_display.isShowBackIcon() )
 				<a href="$portlet_back_url" class="portlet-icon-back">#language("back")</a>
 			#else
+			    $theme.iconRefresh()
 				$theme.iconConfiguration()
 				$theme.iconEdit()
 				$theme.iconEditGuest()

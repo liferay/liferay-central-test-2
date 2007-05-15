@@ -1,6 +1,6 @@
 <%
 /**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,43 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 %>
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<div class="portlet-header-bar" id="portlet-header-bar_<%= portletDisplay.getId() %>"
-	<c:if test="<%= !portletDisplay.isShowBackIcon() %>">
-		onmouseover="PortletHeaderBar.show('<%= portletDisplay.getId() %>')"
-		onmouseout="PortletHeaderBar.hide('<%= portletDisplay.getId() %>')"
-	</c:if>
-	>
-
-	<liferay-portlet:title />
-
-	<div class="portlet-small-icon-bar" style="display: <%= portletDisplay.isShowBackIcon() ? "block" : "none" %>;">
-		<c:choose>
-			<c:when test="<%= portletDisplay.isShowBackIcon() %>">
-				<liferay-portlet:icon-back />
-			</c:when>
-			<c:otherwise>
-			    <liferay-portlet:icon-refresh />
-
-				<liferay-portlet:icon-configuration />
-
-				<liferay-portlet:icon-edit />
-
-				<liferay-portlet:icon-edit-guest />
-
-				<liferay-portlet:icon-help />
-
-				<liferay-portlet:icon-print />
-
-				<liferay-portlet:icon-minimize />
-
-				<liferay-portlet:icon-maximize />
-
-				<liferay-portlet:icon-close />
-			</c:otherwise>
-		</c:choose>
-	</div>
-</div>
+<c:if test="<%= portletDisplay.isShowRefreshIcon() %>">
+	<liferay-ui:icon image="../portlet/refresh" message="refresh" url="<%= portletDisplay.getURLRefresh() %>" toolTip="<%= false %>" />
+</c:if>
