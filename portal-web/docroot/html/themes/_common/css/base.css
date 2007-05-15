@@ -255,7 +255,7 @@ body.staging {
 /* ---------- Loading animation ---------- */
 
 .loading-animation {
-	background: url(../images/progress_bar/loading_animation.gif) no-repeat top left;
+	background: url(../images/progress_bar/loading_animation.gif) no-repeat top center;
 	margin-top: 10px;
 	padding-top: 40px;
 	text-align: left;
