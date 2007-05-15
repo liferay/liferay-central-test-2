@@ -81,13 +81,13 @@ public class PortletPermission {
 		if (plid > 0) {
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
+			groupId = layout.getGroupId();
 			name = PortletImpl.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
 
 			if (LayoutPermission.contains(
-					permissionChecker, layout.getGroupId(),
-					layout.isPrivateLayout(), layout.getLayoutId(),
-					ActionKeys.UPDATE)) {
+					permissionChecker, groupId, layout.isPrivateLayout(),
+					layout.getLayoutId(), ActionKeys.UPDATE)) {
 
 				return true;
 			}
