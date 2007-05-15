@@ -108,7 +108,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 	<c:if test="<%= Validator.isNotNull(errorCode) %>">
 		<tr>
 			<td colspan="2">
-				<span class="portlet-msg-error" style="font-size: xx-small;">
+				<span class="portlet-msg-error">
 
 				<c:choose>
 					<c:when test='<%= errorCode.equals("required-value") %>'>
@@ -138,7 +138,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 			<%= LanguageUtil.get(pageContext, displayName) %>
 
 			<c:if test="<%= taskFormElement.isRequired() %>">
-				<span class="portlet-msg-error" style="font-size: xx-small;">
+				<span class="portlet-msg-error">
 				*
 				</span>
 			</c:if>

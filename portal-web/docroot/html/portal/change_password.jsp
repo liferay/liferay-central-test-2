@@ -44,7 +44,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	UserPasswordException upe = (UserPasswordException)SessionErrors.get(request, UserPasswordException.class.getName());
 	%>
 
-	<span class="portlet-msg-error" style="font-size: xx-small;">
+	<span class="portlet-msg-error">
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
 		<liferay-ui:message key="that-password-has-already-been-used-please-enter-in-a-different-password" />

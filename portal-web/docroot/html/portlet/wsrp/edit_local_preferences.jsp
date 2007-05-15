@@ -54,154 +54,80 @@ catch (Throwable t) {
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wsrp/edit_local_preferences" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 
-<table border="0" cellpadding="4" cellspacing="0" width="100%">
+<c:if test="<%= error != null %>">
+	<span class="portlet-message-error">
+	<liferay-ui:message key="wsrp-your-service-url-or-endpoints-are-unreachable" />
+	</span>
+</c:if>
+
+<table class="liferay-table">
 <tr>
-	<td align="center">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<table border="0" cellpadding="0" cellspacing="0">
+	<td>
+		<liferay-ui:message key="wsrp-service-url" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />wsrp_service_url" type="text" value="<%= wsrpServiceUrl %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="wsrp-markup-endpoint" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />markup_endpoint" type="text" value="<%= markupEndpoint %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="wsrp-service-description-endpoint" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />service_description_endpoint" type="text" value="<%= serviceDescriptionEndpoint %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="wsrp-registration-endpoint" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />registration_endpoint" type="text" value="<%= registrationEndpoint %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="wsrp-portlet-management-endpoint" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />portlet_management_endpoint" type="text" value="<%= portletManagementEndpoint %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="wsrp-portlet" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />portlet_handle">
 
-				<c:if test="<%= error != null %>">
-					<tr>
-						<td colspan="3">
-							<liferay-ui:message key="wsrp-your-service-url-or-endpoints-are-unreachable" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<br />
-						</td>
-					</tr>
-				</c:if>
+			<%
+			for (int i = 0; i < portletDescs.length; i++) {
+			%>
 
-				<tr>
-					<td>
-						<liferay-ui:message key="wsrp-service-url" />
-					</td>
-					<td width="10">
-						&nbsp;
-					</td>
-					<td>
-						<input name="<portlet:namespace />wsrp_service_url" type="text" size="40" value="<%= wsrpServiceUrl %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="wsrp-markup-endpoint" />
-					</td>
-					<td width="10">
-						&nbsp;
-					</td>
-					<td>
-						<input name="<portlet:namespace />markup_endpoint" type="text" size="40" value="<%= markupEndpoint %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="wsrp-service-description-endpoint" />
-					</td>
-					<td width="10">
-						&nbsp;
-					</td>
-					<td>
-						<input name="<portlet:namespace />service_description_endpoint" type="text" size="40" value="<%= serviceDescriptionEndpoint %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="wsrp-registration-endpoint" />
-					</td>
-					<td width="10">
-						&nbsp;
-					</td>
-					<td>
-						<input name="<portlet:namespace />registration_endpoint" type="text" size="40" value="<%= registrationEndpoint %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="wsrp-portlet-management-endpoint" />
-					</td>
-					<td width="10">
-						&nbsp;
-					</td>
-					<td>
-						<input name="<portlet:namespace />portlet_management_endpoint" type="text" size="40" value="<%= portletManagementEndpoint %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="wsrp-portlet" />
-					</td>
-					<td width="10">
-						&nbsp;
-					</td>
-					<td>
-						<select name="<portlet:namespace />portlet_handle">
+				<option <%= portletHandle.equals(portletDescs[i].getPortletHandle()) ? "selected" : "" %> value="<%= portletDescs[i].getPortletHandle() %>"><%= portletDescs[i].getTitle().getValue() %></option>
 
-							<%
-							for (int i = 0; i < portletDescs.length; i++) {
-							%>
+			<%
+			}
+			%>
 
-								<option <%= portletHandle.equals(portletDescs[i].getPortletHandle()) ? "selected" : "" %> value="<%= portletDescs[i].getPortletHandle() %>"><%= portletDescs[i].getTitle().getValue() %></option>
-
-							<%
-							}
-							%>
-
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<br />
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td align="center">
-				<input type="button" value="<liferay-ui:message key="save-settings" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit" /></portlet:renderURL>';" />
-			</td>
-		</tr>
-		</table>
+		</select>
 	</td>
 </tr>
 </table>
+
+<br />
+
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wsrp/edit" /></portlet:renderURL>';" />
 
 </form>
 

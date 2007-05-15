@@ -26,7 +26,7 @@
 
 <liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-<span class="portlet-msg-error" style="font-size: xx-small;">
+<span class="portlet-msg-error">
 
 <liferay-ui:message key="an-unexpected-error-occurred-while-connecting-to-google" />
 

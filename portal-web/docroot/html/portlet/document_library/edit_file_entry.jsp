@@ -73,12 +73,12 @@ portletURL.setParameter("name", name);
 			String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
 			%>
 
-			<span class="portlet-msg-success" style="font-size: xx-small;">
+			<span class="portlet-msg-success">
 			<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
 			</span>
 		</c:when>
 		<c:otherwise>
-			<span class="portlet-msg-error" style="font-size: xx-small;">
+			<span class="portlet-msg-error">
 			<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getDate())}, false) %>
 			</span>
 		</c:otherwise>
