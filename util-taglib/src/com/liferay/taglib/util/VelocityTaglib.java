@@ -252,7 +252,7 @@ public class VelocityTaglib {
 
 		return _res.getString();
 	}
-	
+
 	public String iconRefresh() throws Exception {
 		_res.recycle();
 

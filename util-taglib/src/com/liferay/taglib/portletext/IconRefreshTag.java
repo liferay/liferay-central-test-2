@@ -46,7 +46,7 @@ public class IconRefreshTag extends IconTag {
 
 		doTag(_PAGE, ctx, req, res);
 	}
-	
+
 	public static void doTag(
 			String page, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res)
