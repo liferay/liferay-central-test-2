@@ -1,6 +1,6 @@
 ActiveMQ 4.1.0 (core)
 Alfresco Web Service Client 1.4.0 (removed log4j.properties)
-Ant 1.6.5
+Ant 1.7.0
 Ant Contrib 1.0b3
 Antelope 3.4.0
 ANTLR 2.7.6
