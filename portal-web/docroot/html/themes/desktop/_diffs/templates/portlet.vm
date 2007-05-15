@@ -56,6 +56,7 @@
 					#if ($portletDisplay.isShowBackIcon())
 						$taglibLiferay.iconBack()
 					#else
+						$taglibLiferay.iconRefresh()
 						$taglibLiferay.iconConfiguration()
 						$taglibLiferay.iconEdit()
 						$taglibLiferay.iconEditGuest()
