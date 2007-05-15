@@ -273,7 +273,7 @@
 	</category>
 
 	<category name="com.liferay.portal.theme.ThemeLoader">
-		<priority value="INFO" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.upgrade">
