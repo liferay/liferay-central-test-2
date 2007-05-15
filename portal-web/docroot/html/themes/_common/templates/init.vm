@@ -47,12 +47,11 @@
 #set ( $user_organization = $user.getOrganization() )
 #set ( $user_location = $user.getLocation() )
 
+#set ( $is_signed_in = $theme_display.isSignedIn() )
+
 ## ---------- URLs ---------- ##
 
-#set ( $is_signed_in = $theme_display.isSignedIn() )
 #set ( $show_add_content = $theme_display.isShowAddContentIcon() )
-
-#set ( $my_places_text = $languageUtil.get($company_id, $locale, "my-places") )
 
 #if ( $show_add_content )
 	#set ( $add_content_text = $languageUtil.get($company_id, $locale, "add-content") )
@@ -145,6 +144,10 @@
 	#set ( $nav_items = $navItems )
 	#set ( $has_navigation = ($nav_items && $nav_items.size() > 0) )
 #end
+
+## ---------- My places ---------- ##
+
+#set ( $my_places_text = $languageUtil.get($company_id, $locale, "my-places") )
 
 ## ---------- Includes ---------- ##
 
