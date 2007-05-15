@@ -315,6 +315,15 @@ public class OrganizationFinder {
 
 			String sql = sm.toString();
 
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
+
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
@@ -329,6 +338,15 @@ public class OrganizationFinder {
 			sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
 
 			sql = sm.toString();
+
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
@@ -441,6 +459,15 @@ public class OrganizationFinder {
 
 			String sql = sm.toString();
 
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
+
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
@@ -455,6 +482,15 @@ public class OrganizationFinder {
 			sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
 
 			sql = sm.toString();
+
+			if (regionId == null) {
+				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+			}
+
+			if (countryId == null) {
+				sql = StringUtil.replace(
+					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(
 				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
