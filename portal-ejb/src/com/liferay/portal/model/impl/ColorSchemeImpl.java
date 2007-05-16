@@ -175,6 +175,18 @@ public class ColorSchemeImpl implements ColorScheme {
 		_name = name;
 	}
 
+	public boolean getDefaultCs() {
+		return _defaultCs;
+	}
+
+	public boolean isDefaultCs() {
+		return _defaultCs;
+	}
+
+	public void setDefaultCs(boolean defaultCs) {
+		_defaultCs = defaultCs;
+	}
+
 	public String getCssClass() {
 		return _cssClass;
 	}
@@ -409,6 +421,7 @@ public class ColorSchemeImpl implements ColorScheme {
 	private String _cssClass;
 	private String _colorSchemeImagesPath =
 		"${images-path}/color_schemes/${css-class}";
+	private boolean _defaultCs;
 	private Properties _settingsProperties = new NullSafeProperties();
 
 }

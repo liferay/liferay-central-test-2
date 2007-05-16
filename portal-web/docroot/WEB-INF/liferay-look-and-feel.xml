@@ -44,6 +44,7 @@
 			<css-class>aqua</css-class>
 		</color-scheme>
 		<color-scheme id="02" name="Vista">
+			<default-cs>true</default-cs>
 			<css-class>vista</css-class>
 		</color-scheme>
 		<color-scheme id="03" name="Linux">

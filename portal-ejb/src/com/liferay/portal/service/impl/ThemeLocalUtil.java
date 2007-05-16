@@ -95,7 +95,13 @@ public class ThemeLocalUtil {
 			List colorSchemes = theme.getColorSchemes();
 
 			if (colorSchemes.size() > 0) {
-				colorScheme = (ColorScheme)colorSchemes.get(0);
+				for (int i = (colorSchemes.size() - 1); i >= 0; i--) {
+					colorScheme = (ColorScheme)colorSchemes.get(i);
+
+					if (colorScheme.isDefaultCs()) {
+						break;
+					}
+				}
 			}
 		}
 
@@ -356,6 +362,10 @@ public class ThemeLocalUtil {
 
 			name = colorSchemeContextReplace.replace(name);
 
+			boolean defaultCs = GetterUtil.getBoolean(
+				colorScheme.elementText("default-cs"),
+				colorSchemeModel.isDefaultCs());
+
 			String cssClass = GetterUtil.getString(
 				colorScheme.elementText("css-class"),
 				colorSchemeModel.getCssClass());
@@ -375,9 +385,9 @@ public class ThemeLocalUtil {
 				"color-scheme-images-path", colorSchemeImagesPath);
 
 			colorSchemeModel.setName(name);
+			colorSchemeModel.setDefaultCs(defaultCs);
 			colorSchemeModel.setCssClass(cssClass);
-			colorSchemeModel.setColorSchemeImagesPath(
-				colorSchemeImagesPath);
+			colorSchemeModel.setColorSchemeImagesPath(colorSchemeImagesPath);
 
 			colorSchemes.put(id, colorSchemeModel);
 		}

@@ -40,6 +40,12 @@ public interface ColorScheme extends Comparable, Serializable {
 
 	public void setName(String name);
 
+	public boolean getDefaultCs();
+
+	public boolean isDefaultCs();
+
+	public void setDefaultCs(boolean defaultCs);
+
 	public String getCssClass();
 
 	public void setCssClass(String cssClass);

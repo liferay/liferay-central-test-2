@@ -265,7 +265,7 @@ Windows XP theme has one set of color schemes, and the Windows Classic theme
 has another set of color schemes. Each color scheme references a css class name
 and defines an image path for the location of the color scheme's images.
 -->
-<!ELEMENT color-scheme (css-class, color-scheme-images-path?)>
+<!ELEMENT color-scheme (default-cs?, css-class, color-scheme-images-path?)>
 
 <!--
 The id attribute specifies the key for a color scheme that is unique for its
@@ -279,6 +279,12 @@ that is displayed to the user.
 	id CDATA #REQUIRED
 	name CDATA #REQUIRED
 >
+
+<!--
+Set the default-cs value to true if this is the default color scheme. The
+default value is false.
+-->
+<!ELEMENT default-cs (#PCDATA)>
 
 <!--
 The css-class value is a css class name that represents the color scheme.
