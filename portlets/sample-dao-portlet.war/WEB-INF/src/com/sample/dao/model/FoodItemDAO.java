@@ -59,7 +59,7 @@ public class FoodItemDAO {
 		}
 	}
 
-	public static void deleteFoodItem(int id) throws SQLException {
+	public static void deleteFoodItem(long foodItemId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -68,7 +68,7 @@ public class FoodItemDAO {
 
 			ps = con.prepareStatement(_DELETE_FOOD_ITEM);
 
-			ps.setInt(1, id);
+			ps.setLong(1, foodItemId);
 
 			ps.executeUpdate();
 		}
@@ -77,7 +77,7 @@ public class FoodItemDAO {
 		}
 	}
 
-	public static FoodItem getFoodItem(int id) throws SQLException {
+	public static FoodItem getFoodItem(long foodItemId) throws SQLException {
 		FoodItem foodItem = null;
 
 		Connection con = null;
@@ -89,14 +89,14 @@ public class FoodItemDAO {
 
 			ps = con.prepareStatement(_GET_FOOD_ITEM);
 
-			ps.setInt(1, id);
+			ps.setLong(1, foodItemId);
 
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				foodItem = new FoodItem();
 
-				foodItem.setId(id);
+				foodItem.setFoodItemId(foodItemId);
 				foodItem.setName(rs.getString(2));
 				foodItem.setPoints(rs.getInt(3));
 			}
@@ -125,7 +125,7 @@ public class FoodItemDAO {
 			while (rs.next()) {
 				FoodItem foodItem = new FoodItem();
 
-				foodItem.setId(rs.getInt(1));
+				foodItem.setFoodItemId(rs.getLong(1));
 				foodItem.setName(rs.getString(2));
 				foodItem.setPoints(rs.getInt(3));
 
@@ -150,7 +150,7 @@ public class FoodItemDAO {
 
 			ps.setString(1, foodItem.getName());
 			ps.setInt(2, foodItem.getPoints());
-			ps.setInt(3, foodItem.getId());
+			ps.setLong(3, foodItem.getFoodItemId());
 
 			ps.executeUpdate();
 		}
@@ -163,15 +163,15 @@ public class FoodItemDAO {
 		"INSERT INTO FoodItem (name, points) VALUES (?, ?)";
 
 	private static final String _DELETE_FOOD_ITEM =
-		"DELETE FROM FoodItem WHERE id = ?";
+		"DELETE FROM FoodItem WHERE foodItemId = ?";
 
 	private static final String _GET_FOOD_ITEM =
-		"SELECT id, name, points FROM FoodItem WHERE id = ?";
+		"SELECT foodItemId, name, points FROM FoodItem WHERE foodItemId = ?";
 
 	private static final String _GET_FOOD_ITEMS =
-		"SELECT id, name, points FROM FoodItem";
+		"SELECT foodItemId, name, points FROM FoodItem";
 
 	private static final String _UPDATE_FOOD_ITEM =
-		"UPDATE FoodItem SET name = ?, points = ? WHERE id = ?";
+		"UPDATE FoodItem SET name = ?, points = ? WHERE foodItemId = ?";
 
 }

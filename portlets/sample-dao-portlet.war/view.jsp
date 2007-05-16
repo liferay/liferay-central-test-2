@@ -40,24 +40,24 @@
 String command = request.getParameter("command");
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
-	int id = 0;
+	long foodItemId = 0;
 	String name = "";
 	int points = 0;
 
 	if (command.equals("edit")) {
-		id = Integer.parseInt(request.getParameter("id"));
+		foodItemId = Long.parseLong(request.getParameter("foodItemId"));
 
-		FoodItem foodItem = FoodItemDAO.getFoodItem(id);
+		FoodItem foodItem = FoodItemDAO.getFoodItem(foodItemId);
 
 		name = foodItem.getName();
 		points = foodItem.getPoints();
 	}
 %>
 
-	<input name="command" type="hidden" value="<%= command %>">
-	<input name="id" type="hidden" value="<%= id %>">
+	<input name="command" type="hidden" value="<%= command %>" />
+	<input name="foodItemId" type="hidden" value="<%= foodItemId %>" />
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="liferay-table">
 
 	<%
 	if (command.equals("edit")) {
@@ -65,11 +65,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 
 		<tr>
 			<td>
-				ID
+				Food Item ID
 			</td>
-			<td style="padding-left: 10px;"></td>
 			<td>
-				<%= id %>
+				<%= foodItemId %>
 			</td>
 		</tr>
 
@@ -81,7 +80,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td>
 			Name
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="name" type="text" value="<%= name %>">
 		</td>
@@ -90,16 +88,15 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td>
 			Points
 		</td>
-		<td style="padding-left: 10px;"></td>
 		<td>
 			<input name="points" type="text" value="<%= points %>">
 		</td>
 	</tr>
 	</table>
 
-	<br>
+	<br />
 
-	<input type="submit" value="Save">
+	<input type="submit" value="Save" />
 
 	<%
 	if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
@@ -117,12 +114,12 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 else {
 %>
 
-	<input name="command" type="hidden" value="">
-	<input name="id" type="hidden" value="">
+	<input name="command" type="hidden" value="" />
+	<input name="foodItemId" type="hidden" value="" />
 
-	<input type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
+	<input type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';" />
 
-	<br><br>
+	<br /><br />
 
 	<table border="1" cellpadding="4" cellspacing="0" width="100%">
 	<tr>
@@ -149,7 +146,7 @@ else {
 
 		<tr>
 			<td>
-				<%= foodItem.getId() %>
+				<%= foodItem.getFoodItemId() %>
 			</td>
 			<td>
 				<%= foodItem.getName() %>
@@ -158,9 +155,9 @@ else {
 				<%= foodItem.getPoints() %>
 			</td>
 			<td>
-				<input type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(foodItem.getId()) %>" /></portlet:renderURL>';">
+				<input type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="foodItemId" value="<%= String.valueOf(foodItem.getFoodItemId()) %>" /></portlet:renderURL>';" />
 
-				<input type="button" value="Delete" onClick="document.fm.command.value = 'delete'; document.fm.id.value = '<%= foodItem.getId() %>'; document.fm.submit();">
+				<input type="button" value="Delete" onClick="document.fm.command.value = 'delete'; document.fm.foodItemId.value = '<%= foodItem.getFoodItemId() %>'; document.fm.submit();" />
 			</td>
 		</tr>
 

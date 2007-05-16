@@ -64,10 +64,10 @@ public class DAOPortlet extends GenericPortlet {
 
 		String command = req.getParameter("command");
 
-		int id = 0;
+		long foodItemId = 0;
 
 		try {
-			id = Integer.parseInt(req.getParameter("id"));
+			foodItemId = Long.parseLong(req.getParameter("foodItemId"));
 		}
 		catch (Exception e) {
 		}
@@ -92,7 +92,7 @@ public class DAOPortlet extends GenericPortlet {
 				FoodItemDAO.addFoodItem(foodItem);
 			}
 			else if (command.equals("edit")) {
-				FoodItem foodItem = FoodItemDAO.getFoodItem(id);
+				FoodItem foodItem = FoodItemDAO.getFoodItem(foodItemId);
 
 				foodItem.setName(name);
 				foodItem.setPoints(points);
@@ -100,7 +100,7 @@ public class DAOPortlet extends GenericPortlet {
 				FoodItemDAO.updateFoodItem(foodItem);
 			}
 			else if (command.equals("delete")) {
-				FoodItemDAO.deleteFoodItem(id);
+				FoodItemDAO.deleteFoodItem(foodItemId);
 			}
 		}
 		catch (SQLException sqle) {

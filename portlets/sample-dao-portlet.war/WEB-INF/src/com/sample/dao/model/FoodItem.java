@@ -30,11 +30,12 @@ package com.sample.dao.model;
  */
 public class FoodItem {
 
-	public FoodItem() {
+	public long getFoodItemId() {
+		return _foodItemId;
 	}
 
-	public int getId() {
-		return _id;
+	public void setFoodItemId(long foodItemId) {
+		_foodItemId = foodItemId;
 	}
 
 	public String getName() {
@@ -53,11 +54,7 @@ public class FoodItem {
 		_points = points;
 	}
 
-	protected void setId(int id) {
-		_id = id;
-	}
-
-	private int _id;
+	private long _foodItemId;
 	private String _name;
 	private int _points;
 
