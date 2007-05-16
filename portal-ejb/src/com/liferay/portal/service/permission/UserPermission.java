@@ -23,11 +23,13 @@
 package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.util.PortletKeys;
 
 /**
  * <a href="UserPermission.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +82,7 @@ public class UserPermission {
 		}
 		else if ((locationId  > 0) &&
 				 permissionChecker.hasPermission(
-					0, "com.liferay.portal.model.Location", locationId,
+					0, Location.class.getName(), locationId,
 					organizationActionId)) {
 
 			return true;

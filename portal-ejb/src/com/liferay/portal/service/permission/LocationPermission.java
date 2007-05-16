@@ -25,6 +25,7 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -59,8 +60,7 @@ public class LocationPermission {
 			(PermissionCheckerImpl)permissionChecker;
 
 		if (permissionChecker.hasPermission(
-				0, "com.liferay.portal.model.Location", locationId,
-				actionId)) {
+				0, Location.class.getName(), locationId, actionId)) {
 
 			return true;
 		}
