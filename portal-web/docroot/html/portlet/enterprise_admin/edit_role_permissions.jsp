@@ -76,15 +76,15 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 
-PortletURL addPermissionURL = renderResponse.createRenderURL();
+PortletURL addPermissionsURL = renderResponse.createRenderURL();
 
-addPermissionURL.setWindowState(WindowState.MAXIMIZED);
+addPermissionsURL.setWindowState(WindowState.MAXIMIZED);
 
-addPermissionURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-addPermissionURL.setParameter(Constants.CMD, Constants.EDIT);
-addPermissionURL.setParameter("tabs1", "roles");
-addPermissionURL.setParameter("redirect", currentURL);
-addPermissionURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+addPermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+addPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
+addPermissionsURL.setParameter("tabs1", "roles");
+addPermissionsURL.setParameter("redirect", currentURL);
+addPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 boolean editPortletPermissions = ParamUtil.getBoolean(request, "editPortletPermissions");
 
@@ -92,7 +92,17 @@ if ((modelResources != null) && (modelResources.size() == 0)) {
 	editPortletPermissions = true;
 }
 
-int totalSteps = (role.getType() == RoleImpl.TYPE_REGULAR) ? 4 : 3;
+int totalSteps = 0;
+
+if (portletResource.equals(PortletKeys.PORTAL)) {
+	totalSteps = 1;
+}
+else if (role.getType() == RoleImpl.TYPE_REGULAR) {
+	totalSteps = 4;
+}
+else if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
+	totalSteps = 3;
+}
 
 // Breadcrumbs
 
@@ -127,6 +137,16 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />addPermissions() {
+		var addPermissionsURL = "<%= addPermissionsURL.toString() %>";
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />permissionType.value == "portal") {
+			addPermissionsURL += "&<portlet:namespace />portletResource=<%= PortletKeys.PORTAL %>";
+		}
+
+		self.location = addPermissionsURL;
+	}
+
 	function <portlet:namespace />updateActions() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "actions";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>";
@@ -142,7 +162,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			redirect = "<%= portletURL.toString() %>";
 		}
 		else if (groupScopePos == <%= groupScopeActionIdsArray.length %>) {
-			redirect = "<%= portletURL.toString() %>&<portlet:namespace />groupScopePos=-1";
+			//redirect = "<%= portletURL.toString() %>&<portlet:namespace />groupScopePos=-1";
+			redirect = "<%= portletURL.toString() %>&<portlet:namespace /><%= Constants.CMD %>=<%= Constants.VIEW %>";
 		}
 		else {
 			redirect = "<%= portletURL.toString() %>&<portlet:namespace />groupScopePos=" +
@@ -256,7 +277,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		</div>
 
 		<liferay-ui:success key="permissionDeleted" message="the-permission-was-deleted" />
-		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-was-updated" />
+		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
 
 		<%
 		List headerNames = new ArrayList();
@@ -275,25 +296,18 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
 
-		int total = permissions.size();
+		List permissionsDisplay = new ArrayList(permissions.size());
 
-		searchContainer.setTotal(total);
-
-		List results = ListUtil.subList(permissions, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			Permission permission = (Permission)results.get(i);
+		for (int i = 0; i < permissions.size(); i++) {
+			Permission permission = (Permission)permissions.get(i);
 
 			Resource resource = ResourceLocalServiceUtil.getResource(permission.getResourceId());
 
 			String resourceName = resource.getName();
-			String actionId = permission.getActionId();
-			String resourceLabel = null;
 			String resourceNameParam = null;
+			String resourceLabel = null;
+			String actionId = permission.getActionId();
+			String actionLabel = ResourceActionsUtil.getAction(pageContext, actionId);
 
 			if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), resourceName)) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), resourceName);
@@ -305,6 +319,32 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				resourceLabel = ResourceActionsUtil.getModelResource(pageContext, resourceName);
 				resourceNameParam = "modelResource";
 			}
+
+			permissionsDisplay.add(new PermissionDisplay(permission, resource, resourceName, resourceNameParam, resourceLabel, actionId, actionLabel));
+		}
+
+		Collections.sort(permissionsDisplay);
+
+		int total = permissionsDisplay.size();
+
+		searchContainer.setTotal(total);
+
+		List results = ListUtil.subList(permissionsDisplay, searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			PermissionDisplay permissionDisplay = (PermissionDisplay)results.get(i);
+
+			Permission permission = permissionDisplay.getPermission();
+			Resource resource = permissionDisplay.getResource();
+			String resourceName = permissionDisplay.getResourceName();
+			String resourceNameParam = permissionDisplay.getResourceNameParam();
+			String resourceLabel = permissionDisplay.getResourceLabel();
+			String actionId = permissionDisplay.getActionId();
+			String actionLabel = permissionDisplay.getActionLabel();
 
 			ResultRow row = new ResultRow(new Object[] {permission, role}, actionId, i);
 
@@ -320,10 +360,19 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			editResourcePermissionsURL.setParameter("tabs1", "roles");
 			editResourcePermissionsURL.setParameter("redirect", currentURL);
 			editResourcePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-			editResourcePermissionsURL.setParameter(resourceNameParam, resource.getName());
+
+			if (resourceNameParam.equals("modelResource")) {
+				List portletResources = ResourceActionsUtil.getModelPortletResources(resourceName);
+
+				if (portletResources.size() > 0) {
+					editResourcePermissionsURL.setParameter("portletResource", (String)portletResources.get(0));
+				}
+			}
+
+			editResourcePermissionsURL.setParameter(resourceNameParam, resourceName);
 
 			row.addText(resourceLabel, editResourcePermissionsURL);
-			row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
+			row.addText(actionLabel);
 
 			if (hasCompanyScope) {
 				row.addText(LanguageUtil.get(pageContext, "enterprise"));
@@ -372,7 +421,23 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		}
 		%>
 
-		<input  type="button" value="<%=LanguageUtil.get(pageContext, "add-permissions")%>" onClick="self.location = '<%= addPermissionURL %>';" />
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="what-type-of-permissions-would-you-like-to-add" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />permissionType">
+					<option value="portlet"><liferay-ui:message key="portlet" /></option>
+					<option value="portal"><liferay-ui:message key="portal" /></option>
+				</select>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<input type="button" value="<liferay-ui:message key="add-permissions" />" onClick="<portlet:namespace />addPermissions();" />
 
 		<c:if test="<%= total > 0 %>">
 			<br /><br />
@@ -504,6 +569,13 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 			<c:choose>
+				<c:when test="<%= portletResource.equals(PortletKeys.PORTAL) %>">
+					Step 1 of <%= totalSteps %>: Select the scope of the action that this role can perform for the <i><%= portletResourceName %></i>.
+
+					<c:if test="<%= actions.size() > 0 %>">
+						You can choose more than one.
+					</c:if>
+				</c:when>
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
 					Step 3 of <%= totalSteps %>: Select the scope of the action that this role can perform for the
 
@@ -682,7 +754,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, true);
+		List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
 		Collections.sort(portlets, new PortletTitleComparator(application, locale));
 

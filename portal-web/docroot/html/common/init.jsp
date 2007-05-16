@@ -70,6 +70,7 @@
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePairComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.ObjectValuePair" %>
+<%@ page import="com.liferay.portal.kernel.util.ObjectValuePairComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.OrderByComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.ServerDetector" %>
 <%@ page import="com.liferay.portal.kernel.util.StackTraceUtil" %>

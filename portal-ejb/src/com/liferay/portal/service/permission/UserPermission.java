@@ -29,7 +29,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
-import com.liferay.portal.util.PortletKeys;
 
 /**
  * <a href="UserPermission.java.html"><b><i>View Source</i></b></a>

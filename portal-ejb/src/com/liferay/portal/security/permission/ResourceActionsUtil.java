@@ -143,6 +143,10 @@ public class ResourceActionsUtil {
 		return list;
 	}
 
+	public static List getModelPortletResources(String name) {
+		return _instance._getModelPortletResources(name);
+	}
+
 	public static String getModelResource(
 		long companyId, Locale locale, String name) {
 
@@ -281,6 +285,7 @@ public class ResourceActionsUtil {
 		_portletResourceGuestDefaultActions = CollectionFactory.getHashMap();
 		_portletResourceGuestUnsupportedActions =
 			CollectionFactory.getHashMap();
+		_modelPortletResources = CollectionFactory.getHashMap();
 		_modelResourceActions = CollectionFactory.getHashMap();
 		_modelResourceCommunityDefaultActions = CollectionFactory.getHashMap();
 		_modelResourceGuestDefaultActions = CollectionFactory.getHashMap();
@@ -345,6 +350,17 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	private List _getModelPortletResources(String name) {
+		Set resources = (Set)_modelPortletResources.get(name);
+
+		if (resources == null) {
+			return new UniqueList();
+		}
+		else {
+			return Collections.list(Collections.enumeration(resources));
+		}
+	}
+
 	private List _getModelResourceActions(String name) {
 		return _getActions(_modelResourceActions, name);
 	}
@@ -385,50 +401,39 @@ public class ResourceActionsUtil {
 			synchronized (this) {
 				actions.clear();
 
-				if (name.equals(PortletKeys.PORTAL)) {
-					actions.add(ActionKeys.ADD_COMMUNITY);
-					actions.add(ActionKeys.ADD_LICENSE);
-					actions.add(ActionKeys.ADD_ORGANIZATION);
-					actions.add(ActionKeys.ADD_PASSWORD_POLICY);
-					actions.add(ActionKeys.ADD_ROLE);
-					actions.add(ActionKeys.ADD_USER_GROUP);
-				}
-				else {
-					Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						companyId, name);
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					companyId, name);
 
-					Map portletModes = portlet.getPortletModes();
+				Map portletModes = portlet.getPortletModes();
 
-					Set mimeTypeModes = (Set)portletModes.get("text/html");
+				Set mimeTypeModes = (Set)portletModes.get("text/html");
 
-					if (mimeTypeModes != null) {
-						Iterator itr = mimeTypeModes.iterator();
+				if (mimeTypeModes != null) {
+					Iterator itr = mimeTypeModes.iterator();
 
-						while (itr.hasNext()) {
-							String actionId = (String)itr.next();
+					while (itr.hasNext()) {
+						String actionId = (String)itr.next();
 
-							if (actionId.equalsIgnoreCase("edit")) {
-								actions.add(ActionKeys.PREFERENCES);
-							}
-							else if (actionId.equalsIgnoreCase("edit_guest")) {
-								actions.add(ActionKeys.GUEST_PREFERENCES);
-							}
-							else {
-								actions.add(actionId.toUpperCase());
-							}
+						if (actionId.equalsIgnoreCase("edit")) {
+							actions.add(ActionKeys.PREFERENCES);
+						}
+						else if (actionId.equalsIgnoreCase("edit_guest")) {
+							actions.add(ActionKeys.GUEST_PREFERENCES);
+						}
+						else {
+							actions.add(actionId.toUpperCase());
 						}
 					}
-
-					_checkPortletActions(actions);
-
-					List communityDefaultActions = _getActions(
-						_portletResourceCommunityDefaultActions, name);
-
-					communityDefaultActions.clear();
-
-					_checkPortletCommunityDefaultActions(
-						communityDefaultActions);
 				}
+
+				_checkPortletActions(actions);
+
+				List communityDefaultActions = _getActions(
+					_portletResourceCommunityDefaultActions, name);
+
+				communityDefaultActions.clear();
+
+				_checkPortletCommunityDefaultActions(communityDefaultActions);
 			}
 		}
 
@@ -541,7 +546,9 @@ public class ResourceActionsUtil {
 				}
 			}
 
-			_checkPortletActions(actions);
+			if (!name.equals(PortletKeys.PORTAL)) {
+				_checkPortletActions(actions);
+			}
 
 			// Community default actions
 
@@ -631,6 +638,8 @@ public class ResourceActionsUtil {
 				portletNameString = PortalUtil.getJsSafePortletName(
 					portletNameString);
 
+				// Reference for a portlet to child models
+
 				Set modelResources = (Set)_portletModelResources.get(
 					portletNameString);
 
@@ -642,6 +651,18 @@ public class ResourceActionsUtil {
 				}
 
 				modelResources.add(name);
+
+				// Reference for a model to parent portlets
+
+				Set portletResources = (Set)_modelPortletResources.get(name);
+
+				if (portletResources == null) {
+					portletResources = new HashSet();
+
+					_modelPortletResources.put(name, portletResources);
+				}
+
+				portletResources.add(portletNameString);
 			}
 
 			// Actions
@@ -733,6 +754,7 @@ public class ResourceActionsUtil {
 	private Map _portletResourceCommunityDefaultActions;
 	private Map _portletResourceGuestDefaultActions;
 	private Map _portletResourceGuestUnsupportedActions;
+	private Map _modelPortletResources;
 	private Map _modelResourceActions;
 	private Map _modelResourceCommunityDefaultActions;
 	private Map _modelResourceGuestDefaultActions;

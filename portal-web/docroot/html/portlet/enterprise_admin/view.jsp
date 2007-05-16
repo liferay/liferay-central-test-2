@@ -216,7 +216,12 @@ portletURL.setParameter("tabs1", tabs1);
 			<div class="separator"></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';" />
+				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER)) ||
+								(portletName.equals(PortletKeys.LOCATION_ADMIN) && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER)) ||
+								(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER)) %>">
+
+					<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';" />
+				</c:if>
 
 				<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE))) %>">
 					<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />

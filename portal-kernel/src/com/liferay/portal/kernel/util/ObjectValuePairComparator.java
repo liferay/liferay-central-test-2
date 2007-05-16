@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,25 +19,61 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+package com.liferay.portal.kernel.util;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import java.util.Comparator;
 
-Object[] objArray = (Object[])row.getObject();
+/**
+ * <a href="ObjectValuePairComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ObjectValuePairComparator implements Comparator {
 
-Permission permission = (Permission)objArray[0];
-Role role = (Role)objArray[1];
-%>
+	public ObjectValuePairComparator() {
+		this(true);
+	}
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deletePermissionURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
-	<portlet:param name="<%= Constants.CMD %>" value="delete_permission" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-	<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
-</portlet:actionURL>
+	public ObjectValuePairComparator(boolean asc) {
+		this(true, asc);
+	}
 
-<liferay-ui:icon image="delete" url="<%= deletePermissionURL %>" />
+	public ObjectValuePairComparator(boolean byKey, boolean asc) {
+		_byKey = byKey;
+		_asc = asc;
+	}
+
+	public int compare(Object obj1, Object obj2) {
+		ObjectValuePair ovp1 = (ObjectValuePair)obj1;
+		ObjectValuePair ovp2 = (ObjectValuePair)obj2;
+
+		if (_byKey) {
+			Comparable key1 = (Comparable)ovp1.getKey();
+			Comparable key2 = (Comparable)ovp2.getKey();
+
+			if (_asc) {
+				return key1.compareTo(key2);
+			}
+			else {
+				return -(key1.compareTo(key2));
+			}
+		}
+		else {
+			Comparable value1 = (Comparable)ovp1.getValue();
+			Comparable value2 = (Comparable)ovp2.getValue();
+
+			if (_asc) {
+				return value1.compareTo(value2);
+			}
+			else {
+				return -(value1.compareTo(value2));
+			}
+		}
+	}
+
+	private boolean _byKey;
+	private boolean _asc;
+
+}

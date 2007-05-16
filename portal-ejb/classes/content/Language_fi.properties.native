@@ -2350,7 +2350,6 @@ the-repository-could-not-be-found=Varastoa ei löydy.
 the-resulting-first-page-must-be-a-portlet-page=Ensimmäisen sivun tulee olla portlet sivu.
 the-resulting-first-page-must-not-be-hidden=Ensimmäinen sivu ei voi olla kätketty.
 the-role-could-not-be-found=Roolia ei löytynyt.
-the-role-permissions-was-updated=Roolin oikeudet päivitettiin.
 the-screen-name-you-requested-is-already-taken=Pyytämäsi nimimerkki on jo varattu.
 the-screen-name-you-requested-is-reserved=Pyytämäsi nimimerkki on jo varattu.
 the-selected-entry-has-been-deleted=Valitty merkintä on poistettu.

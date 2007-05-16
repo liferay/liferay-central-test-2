@@ -75,11 +75,11 @@ public class EditRolePermissionsAction extends PortletAction {
 			if (cmd.equals("actions")) {
 				updateActions(req, res);
 			}
+			else if (cmd.equals("delete_permission")) {
+				deletePermission(req, res);
+			}
 			else if (cmd.equals("group_permissions")) {
 				updateGroupPermissions(req, res);
-			}
-			else if (cmd.equals("unset_permission")) {
-				unsetPermission(req, res);
 			}
 		}
 		catch (Exception e) {
@@ -121,7 +121,7 @@ public class EditRolePermissionsAction extends PortletAction {
 			getForward(req, "portlet.enterprise_admin.edit_role_permissions"));
 	}
 
-	protected void unsetPermission(ActionRequest req, ActionResponse res)
+	protected void deletePermission(ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -276,6 +276,9 @@ public class EditRolePermissionsAction extends PortletAction {
 			// Show message only if the user stayed on the same page
 
 			SessionMessages.add(req, "request_processed");
+		}
+		else if ((groupScopePos + 1) == groupScopeActionIds.length) {
+			SessionMessages.add(req, "permissionsUpdated");
 		}
 
 		res.sendRedirect(redirect);

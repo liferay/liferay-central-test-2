@@ -2255,7 +2255,6 @@ the-repository-could-not-be-found=لم يتم العثور على المستود
 the-resulting-first-page-must-be-a-portlet-page=الصفحة الناتجة الأولى يجب أن تكون صفحة بورتلت.
 the-resulting-first-page-must-not-be-hidden=الصفحة الناتجة الأولى يجب أن لا تكون مخفية.
 the-role-could-not-be-found=لم يتم العثور على الدور.
-the-role-permissions-was-updated=تم تعديل رخص الدور.
 the-selected-entry-has-been-deleted=.تم حذف المدخلات المختارة
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=لا يمكن حذف الدور المختار كونه مطلوب تابع للنظام.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=لا يمكن حذف الهيكل المختار كونه مطلوب من قبل قالب واحد على الأقل.
