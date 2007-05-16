@@ -117,7 +117,7 @@ String addUserURLString = null;
 
 		<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 			<liferay-security:permissionsURL
-				modelResource="com.liferay.portal.model.Location"
+				modelResource="<%= Location.class.getName() %>"
 				modelResourceDescription="<%= organization.getName() %>"
 				resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
 				var="editLocationPermissionsURL"
@@ -167,7 +167,7 @@ String addUserURLString = null;
 				<c:otherwise>
 					<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 						<liferay-security:permissionsURL
-							modelResource="com.liferay.portal.model.Location"
+							modelResource="<%= Location.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
 							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
 							var="editOrganizationPermissionsURL"

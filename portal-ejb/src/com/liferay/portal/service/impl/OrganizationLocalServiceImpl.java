@@ -31,6 +31,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
@@ -120,7 +121,7 @@ public class OrganizationLocalServiceImpl
 		String name = Organization.class.getName();
 
 		if (!organization.isRoot()) {
-			name = "com.liferay.portal.model.Location";
+			name = Location.class.getName();
 		}
 
 		ResourceLocalServiceUtil.addResources(
@@ -197,7 +198,7 @@ public class OrganizationLocalServiceImpl
 		String name = Organization.class.getName();
 
 		if (!organization.isRoot()) {
-			name = "com.liferay.portal.model.Location";
+			name = Location.class.getName();
 		}
 
 		ResourceLocalServiceUtil.deleteResource(
