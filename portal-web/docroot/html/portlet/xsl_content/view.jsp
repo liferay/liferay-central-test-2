@@ -34,6 +34,7 @@ try {
 <%
 }
 catch (Exception e) {
+	_log.error(e.getMessage());
 %>
 
 	<span class="portlet-msg-error">
@@ -42,4 +43,8 @@ catch (Exception e) {
 
 <%
 }
+%>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.xsl_content.view.jsp");
 %>

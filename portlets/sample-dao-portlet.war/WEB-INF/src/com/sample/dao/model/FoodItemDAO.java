@@ -160,18 +160,18 @@ public class FoodItemDAO {
 	}
 
 	private static final String _ADD_FOOD_ITEM =
-		"INSERT INTO FoodItem (name, points) VALUES (?, ?)";
+		"INSERT INTO FoodItem (name_, points) VALUES (?, ?)";
 
 	private static final String _DELETE_FOOD_ITEM =
 		"DELETE FROM FoodItem WHERE foodItemId = ?";
 
 	private static final String _GET_FOOD_ITEM =
-		"SELECT foodItemId, name, points FROM FoodItem WHERE foodItemId = ?";
+		"SELECT foodItemId, name_, points FROM FoodItem WHERE foodItemId = ?";
 
 	private static final String _GET_FOOD_ITEMS =
-		"SELECT foodItemId, name, points FROM FoodItem";
+		"SELECT foodItemId, name_, points FROM FoodItem ORDER BY name_ ASC";
 
 	private static final String _UPDATE_FOOD_ITEM =
-		"UPDATE FoodItem SET name = ?, points = ? WHERE foodItemId = ?";
+		"UPDATE FoodItem SET name_ = ?, points = ? WHERE foodItemId = ?";
 
 }

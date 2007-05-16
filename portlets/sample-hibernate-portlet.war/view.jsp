@@ -24,9 +24,10 @@
 
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
-<%@ page import="com.sample.dao.model.FoodItem" %>
-<%@ page import="com.sample.dao.model.FoodItemDAO" %>
-<%@ page import="com.sample.dao.util.ConnectionPool" %>
+<%@ page import="com.liferay.util.Http" %>
+
+<%@ page import="com.sample.hibernate.model.FoodItem" %>
+<%@ page import="com.sample.hibernate.util.FoodItemUtil" %>
 
 <%@ page import="java.util.List" %>
 
@@ -47,7 +48,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	if (command.equals("edit")) {
 		foodItemId = Long.parseLong(request.getParameter("foodItemId"));
 
-		FoodItem foodItem = FoodItemDAO.getFoodItem(foodItemId);
+		FoodItem foodItem = FoodItemUtil.getFoodItem(foodItemId);
 
 		name = foodItem.getName();
 		points = foodItem.getPoints();
@@ -138,7 +139,7 @@ else {
 	</tr>
 
 	<%
-	List foodItems = FoodItemDAO.getFoodItems();
+	List foodItems = FoodItemUtil.getFoodItems();
 
 	for (int i = 0; i < foodItems.size(); i++) {
 		FoodItem foodItem = (FoodItem)foodItems.get(i);
@@ -166,6 +167,15 @@ else {
 	%>
 
 	</table>
+
+	<br />
+
+	You can also access the list of food items via the following URLs in the XSL Content portlet.
+
+	<br /><br />
+
+	<%= Http.getProtocol(request) %>://<%= request.getServerName() %>:<%= request.getServerPort() %>/<%= request.getContextPath() %>/servlet/test?cmd=getFoodItemXml<br />
+	<%= Http.getProtocol(request) %>://<%= request.getServerName() %>:<%= request.getServerPort() %>/<%= request.getContextPath() %>/sample-hibernate-portlet/view.xsl
 
 <%
 }

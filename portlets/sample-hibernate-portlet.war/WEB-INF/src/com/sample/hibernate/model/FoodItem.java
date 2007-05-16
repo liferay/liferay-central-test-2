@@ -20,71 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+package com.sample.hibernate.model;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="FoodItem.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class FoodItem {
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+	public long getFoodItemId() {
+		return _foodItemId;
 	}
 
-	static String version = "4.2.0";
-
-	static String codeName = "Machen";
-
-	static String build = "4042";
-
-	static String date = "May 15, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public void setFoodItemId(long foodItemId) {
+		_foodItemId = foodItemId;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public String getName() {
+		return _name;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public int getPoints() {
+		return _points;
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public void setPoints(int points) {
+		_points = points;
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private long _foodItemId;
+	private String _name;
+	private int _points;
 
 }

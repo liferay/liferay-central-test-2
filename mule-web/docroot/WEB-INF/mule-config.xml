@@ -8,11 +8,11 @@
 		<agent name="mx4jAgent" className="org.mule.management.agents.Mx4jAgent" />
 	</agents>
 	<model name="jbi"></model>
-	<mule-descriptor name="dbAppInbound" implementation="com.liferay.jbi.mule.util.URLTransformComponent">
+	<mule-descriptor name="sampleHibernateInbound" implementation="com.liferay.jbi.mule.util.URLTransformComponent">
 		<inbound-router>
-			<endpoint address="vm://dbAppInbound">
+			<endpoint address="vm://sampleHibernateInbound">
 				<properties>
-		 			<property name="url" value="http://localhost:8080/db-app-web/servlet" />
+		 			<property name="url" value="http://localhost:8080/sample-hibernate-portlet/servlet" />
 				</properties>
 			</endpoint>
 		</inbound-router>

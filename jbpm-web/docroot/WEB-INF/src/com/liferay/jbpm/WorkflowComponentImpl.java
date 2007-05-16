@@ -75,9 +75,6 @@ import org.jbpm.taskmgmt.exe.TaskInstance;
  */
 public class WorkflowComponentImpl implements WorkflowComponent {
 
-	public WorkflowComponentImpl() {
-	}
-
 	public String process(HttpServletRequest req) {
 		String result = null;
 

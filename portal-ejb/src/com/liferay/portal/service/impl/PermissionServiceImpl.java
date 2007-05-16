@@ -43,7 +43,6 @@ import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 /**
  * <a href="PermissionServiceImpl.java.html"><b><i>View Source</i></b></a>

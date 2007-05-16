@@ -72,6 +72,10 @@ alter_column_type Groups_UserGroups userGroupId LONG;
 
 alter_column_type IGFolder groupId LONG;
 
+alter table Image add height INTEGER;
+alter table Image add width INTEGER;
+alter table Image add size_ INTEGER;
+
 alter_column_type JournalArticle groupId LONG;
 
 drop table JournalContentSearch;
