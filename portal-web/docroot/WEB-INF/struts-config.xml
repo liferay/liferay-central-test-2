@@ -1213,7 +1213,7 @@
 
 		<!-- Plugin Installer -->
 
-		<action path="/plugin_installer/install_plugin" type="com.liferay.portlet.admin.plugininstaller.action.InstallPluginAction">
+		<action path="/plugin_installer/install_plugin" type="com.liferay.portlet.plugininstaller.action.InstallPluginAction">
 			<forward name="portlet.plugin_installer.error" path="portlet.plugin_installer.error" />
 		</action>
 
