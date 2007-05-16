@@ -2,9 +2,6 @@ function AjaxRequest(url, options) {
 	
 	var xmlHttpReq;
 	var opts = options;
-	var returnArgs = opts.returnArgs;
-	var method = opts.method;
-	var ajaxId = opts.ajaxId;
 
 	if (window.XMLHttpRequest) {
 		xmlHttpReq = new XMLHttpRequest();
@@ -31,16 +28,21 @@ function AjaxRequest(url, options) {
 		}
 	}
 	
-	var onComplete = opts.onComplete;
 	var returnFunction = function() {
 			if (xmlHttpReq.readyState == 4) {
 				try {
 					if (xmlHttpReq.status == 200) {
-						if (onComplete) {
-							onComplete(xmlHttpReq, returnArgs);
+						if (opts.update) {
+							var el = jQuery.getOne(opts.update);
+							el.innerHTML = xmlHttpReq.responseText;
+							executeLoadedScript(el);
+						}
+
+						if (opts.onComplete) {
+							opts.onComplete(xmlHttpReq, opts.returnArgs);
 						}
 		
-						AjaxUtil.remove(ajaxId);
+						AjaxUtil.remove(opts.ajaxId);
 					}
 				}
 				catch(e) {
@@ -54,7 +56,7 @@ function AjaxRequest(url, options) {
 		var query = urlArray[1];
 		
 		try {
-			if (method == "get") {
+			if (opts.method == "get") {
 				xmlHttpReq.open("GET", url, true);
 				xmlHttpReq.onreadystatechange = returnFunction;
 				xmlHttpReq.send("");
@@ -75,9 +77,10 @@ function AjaxRequest(url, options) {
 
 	this.resend = function(url, options) {
 		opts = options;
+		/*
 		ajaxId = 0;
 		onComplete = opts.onComplete;
-		
+		*/
 		send(url);
 	};
 	
@@ -120,32 +123,35 @@ var AjaxUtil = {
 			AjaxUtil.requests[ajaxId] = request;
 		}
 		
-		if (!opts.onComplete) {
+		if (!opts.onComplete && !opts.update) {
 			AjaxUtil.remove(ajaxId);
 		}
 	},
 	
-	update : function(url, id, options) {
-		var element = _$J.getOne(id);
-
-		if (element) {
-			if (options == null) {
-				options = new Object();
-			}
-			
-			var origOnComplete = options.onComplete;
-
-			options.onComplete = function(xmlHttpReq, returnArgs) {
-				element.innerHTML = xmlHttpReq.responseText;
-				executeLoadedScript(element);
-
-				if (origOnComplete) {
-					origOnComplete();
-				}
-			};
-			
-			AjaxUtil.request(url, options);
+	submit: function(form, options) {
+		var url = form.action;
+		var inputs = jQuery("input, textarea, select", form);
+		var params = inputs.serialize();
+		
+		if (url.indexOf("?") == -1) {
+			url = url + "?" + params;
 		}
+		if (url.lastIndexOf("?") == url.length - 1) {
+			url = url + params;
+		}
+		else {
+			url = url + "&" + params;
+		}
+		
+		inputs.attr("disabled", true);
+
+		AjaxUtil.request(url, options);
+	},
+	
+	update : function(url, id, options) {
+		var opts = options || new Object();
+		opts.update = id;
+		AjaxUtil.request(url, opts);
 	},
 	
 	getNextId : function() {

@@ -93,7 +93,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	temperatureArray[4] = new Option("4", "Réaumure");
 </script>
 
-<form method="post" name="<portlet:namespace />fm" onSubmit="loadForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL anchor="false"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>', 'p_p_id<portlet:namespace />'); return false;">
+<form method="post" name="<portlet:namespace />fm" action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>" onSubmit="AjaxUtil.submit(this, {update: this.parentNode}); return false;">
 
 <table class="liferay-table">
 <tr>

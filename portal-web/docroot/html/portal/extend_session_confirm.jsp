@@ -53,9 +53,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		</tr>
 		<tr>
 			<td align="center" id="session_btns">
-				<input class="button" id="ok_btn" type="button" value="<liferay-ui:message key="ok" />" onClick="extendSession(); Liferay.Popup.close(this);" />
+				<input class="button" id="ok_btn" type="button" value="<liferay-ui:message key="yes" />" onClick="extendSession(); Liferay.Popup.close(this);" />
 
-				<input class="button" id="cancel_btn" type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
+				<input class="button" id="cancel_btn" type="button" value="<liferay-ui:message key="no" />" onClick="Liferay.Popup.close(this);" />
 			</td>
 		</tr>
 		</table>
