@@ -86,6 +86,8 @@
 /* ---------- Status of the current operation ---------- */
 
 .portlet-msg-status {
+	font-style: italic;
+	font-weight: bold;
 }
 
 /* ---------- Help messages, general additional information, etc. ---------- */
@@ -94,9 +96,10 @@
 	background: #FAFAFA;
 	border: 1px solid #53B2F8;
 	color: #777;
-	font-size: 90%;
-	margin: 0.15em auto 1em;
-	padding: 0.5em;
+	display: block;
+	font-style: italic;
+	font-weight: bold;
+	padding: 2px 2px 2px 2px;
 	text-align: left;
 }
 
@@ -106,8 +109,10 @@
 	background: #FFF1ED url(../images/messages/error.gif) no-repeat 0.5em 50%;
 	border: 1px solid #900;
 	display: block;
-	margin: 0.15em auto 1em;
-	padding: 0.5em 0.5em 0.5em 2.8em;
+	font-style: italic;
+	font-weight: bold;
+	margin: 1px 0px 0px 0px;
+	padding: 1px 1px 1px 24px;
 	text-align: left;
 }
 
@@ -116,8 +121,11 @@
 .portlet-msg-alert {
 	background: #FEFFDF url(../images/messages/alert.gif) no-repeat 0.5em 10%;
 	border: 1px solid #EFEFEF;
-	margin: 0.15em auto 1em;
-	padding: 0.5em 0.5em 0.5em 2.8em;
+	display: block;
+	font-style: italic;
+	font-weight: bold;
+	margin: 1px 0px 0px 0px;
+	padding: 1px 1px 1px 24px;
 	text-align: left;
 }
 
@@ -127,8 +135,10 @@
 	background: #F4FDEF url(../images/messages/success.gif) no-repeat 0.5em 50%;
 	border: 1px solid #3F9305;
 	display: block;
-	margin: 0.15em auto 1.2em;
-	padding: 0.5em 0.5em 0.5em 2.8em;
+	font-style: italic;
+	font-weight: bold;
+	margin: 1px 0px 0px 0px;
+	padding: 1px 1px 1px 24px;
 	text-align: left;
 }
 
