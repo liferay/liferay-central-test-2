@@ -53,7 +53,7 @@ catch (Exception e) {
 }
 %>
 
-<form method="post" name="<portlet:namespace />fm" action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/password_generator/view" /></liferay-portlet:renderURL>" onSubmit="AjaxUtil.submit(this, {update: this.parentNode}); return false;">
+<form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/password_generator/view" /></liferay-portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="AjaxUtil.submit(this, {update: this.parentNode}); return false;">
 
 <table class="liferay-table">
 <tr>
