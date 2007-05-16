@@ -2436,6 +2436,7 @@ this-portlet-is-inactive=このportlet は不活性である。
 this-theme-does-not-have-any-color-schemes=この主題に色彩の配合がない。
 this-topic-is-empty=このトピックは空である。
 this-topic=このトピック
+this-user-account-has-been-locked-due-to-excessive-failed-login-attempts=このユーザ・アカウントは余分な不成功のログインのために締まった。
 thread-priorities=糸優先順位
 thread=糸
 threaded-replies=通された応答

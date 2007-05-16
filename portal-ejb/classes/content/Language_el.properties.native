@@ -2438,6 +2438,7 @@ this-portlet-is-inactive=Αυτό το portlet είναι ανενεργό.
 this-theme-does-not-have-any-color-schemes=Αυτό το θέμα δεν έχει οποιαδήποτε χρώματα σχεδίου.
 this-topic-is-empty=Αυτό το θέμα είναι κενό.
 this-topic=Αυτό το θέμα
+this-user-account-has-been-locked-due-to-excessive-failed-login-attempts=Αυτός ο απολογισμός χρηστών έχει κλειδωθεί λόγω στις υπερβολικές αποτυχημένες προσπάθειες σύνδεσης.
 thread-priorities=Προτεραιότητες νημάτων
 thread=Νήμα
 threaded-replies=Περασμένες κλωστή απαντήσεις

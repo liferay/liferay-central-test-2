@@ -2438,6 +2438,7 @@ this-portlet-is-inactive=이 portlet은 비활동성 이다.
 this-theme-does-not-have-any-color-schemes=이 주제에는 어떤 색체 배합 설계가 있지 않는다.
 this-topic-is-empty=이 화제는 비다.
 this-topic=이 화제
+this-user-account-has-been-locked-due-to-excessive-failed-login-attempts=이 사용자 계정은 계속 과량 실패한 로그온 시도에 잠근 만기가 된다.
 thread-priorities=실 우선권
 thread=실
 threaded-replies=실을 꿴 대답

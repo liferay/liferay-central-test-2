@@ -2440,6 +2440,7 @@ this-portlet-is-inactive=Este portlet é inativo.
 this-theme-does-not-have-any-color-schemes=Este tema não tem nenhuns esquemas de cor.
 this-topic-is-empty=Este tópico está vazio.
 this-topic=Este Tópico
+this-user-account-has-been-locked-due-to-excessive-failed-login-attempts=Este cliente do usuário foi  travado devido às tentativas falhadas excessivas do início de uma sessão.
 thread-priorities=Prioridades Da Linha
 thread=Linha
 threaded-replies=Respostas Enfiadas
