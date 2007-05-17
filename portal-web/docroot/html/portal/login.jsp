@@ -50,130 +50,184 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
-		<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm1">
-		<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
-		<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm1">
+			<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
+			<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
 
-		<c:if test="<%= sectionSelected.booleanValue() %>">
-			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
+			<c:if test="<%= sectionSelected.booleanValue() %>">
+				<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
 
-				<%
-				String emailAddress = (String)SessionMessages.get(request, "user_added");
-				String password = (String)SessionMessages.get(request, "user_added_password");
-				%>
+					<%
+					String emailAddress = (String)SessionMessages.get(request, "user_added");
+					String password = (String)SessionMessages.get(request, "user_added_password");
+					%>
 
-				<span class="portlet-msg-success">
+					<span class="portlet-msg-success">
 
-				<c:choose>
-					<c:when test="<%= Validator.isNull(password) %>">
-						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", emailAddress) %>
-					</c:when>
-					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {password, emailAddress}) %>
-					</c:otherwise>
-				</c:choose>
+					<c:choose>
+						<c:when test="<%= Validator.isNull(password) %>">
+							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", emailAddress) %>
+						</c:when>
+						<c:otherwise>
+							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {password, emailAddress}) %>
+						</c:otherwise>
+					</c:choose>
 
-				</span>
+					</span>
+				</c:if>
+
+				<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="authentication-failed" />
+					</span>
+				</c:if>
+
+				<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
+					</span>
+				</c:if>
+
+				<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="please-enter-a-valid-login" />
+					</span>
+				</c:if>
+
+				<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
+					<liferay-ui:message key="please-sign-in-to-continue" />
+					</span>
+				</c:if>
+
+				<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="please-enter-a-valid-login" />
+					</span>
+				</c:if>
+
+				<c:if test='<%= SessionErrors.contains(request, UserLockoutException.class.getName()) %>'>
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="this-account-has-been-locked" />
+					</span>
+				</c:if>
+
+				<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="please-enter-a-valid-password" />
+					</span>
+				</c:if>
 			</c:if>
 
-			<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="authentication-failed" />
-				</span>
-			</c:if>
+			<%
+			String login = LoginAction.getLogin(request, "login", company);
+			String password = StringPool.BLANK;
+			boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+			%>
 
-			<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
-				</span>
-			</c:if>
+			<input name="rememberMe" type="hidden" value="<%= rememberMe %>" />
 
-			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="please-enter-a-valid-login" />
-				</span>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
-				<liferay-ui:message key="please-sign-in-to-continue" />
-				</span>
-			</c:if>
-
-			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="please-enter-a-valid-login" />
-				</span>
-			</c:if>
-
-			<c:if test='<%= SessionErrors.contains(request, UserLockoutException.class.getName()) %>'>
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="this-account-has-been-locked" />
-				</span>
-			</c:if>
-
-			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
-				<span class="portlet-msg-error">
-				<liferay-ui:message key="please-enter-a-valid-password" />
-				</span>
-			</c:if>
-		</c:if>
-
-		<%
-		String login = LoginAction.getLogin(request, "login", company);
-		String password = StringPool.BLANK;
-		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-		%>
-
-		<input name="rememberMe" type="hidden" value="<%= rememberMe %>" />
-
-		<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="login" />
-			</td>
-			<td>
-				<input name="login" style="width: 150px;" type="text" value="<%= login %>" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="password" />
-			</td>
-			<td>
-				<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>" />
-			</td>
-		</tr>
-
-		<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+			<table class="liferay-table">
 			<tr>
 				<td>
-					<span style="font-size: xx-small;">
-					<liferay-ui:message key="remember-me" />
-					</span>
+					<liferay-ui:message key="login" />
 				</td>
 				<td>
-					<input <%= rememberMe ? "checked" : "" %> type="checkbox"
-						onClick="
-							if (this.checked) {
-								document.fm1.rememberMe.value = 'on';
-							}
-							else {
-								document.fm1.rememberMe.value = 'off';
-							}"
-					>
+					<input name="login" style="width: 150px;" type="text" value="<%= login %>" />
 				</td>
 			</tr>
-		</c:if>
+			<tr>
+				<td>
+					<liferay-ui:message key="password" />
+				</td>
+				<td>
+					<input name="<%= SessionParameters.get(request, "password") %>" style="width: 150px" type="password" value="<%= password %>" />
+				</td>
+			</tr>
 
-		</table>
+			<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+				<tr>
+					<td>
+						<span style="font-size: xx-small;">
+						<liferay-ui:message key="remember-me" />
+						</span>
+					</td>
+					<td>
+						<input <%= rememberMe ? "checked" : "" %> type="checkbox"
+							onClick="
+								if (this.checked) {
+									document.fm1.rememberMe.value = 'on';
+								}
+								else {
+									document.fm1.rememberMe.value = 'off';
+								}"
+						>
+					</td>
+				</tr>
+			</c:if>
 
-		<br />
+			</table>
 
-		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+			<br />
 
-		</form>
+			<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+
+			</form>
+		</td>
+		<td width="10">
+			&nbsp;
+		</td>
+		<td valign="top">
+			<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" method="post" name="fm1">
+
+			<c:if test="<%= SessionErrors.contains(request, ConsumerException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="unable-to-init-open-id-consumer" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, DiscoveryException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="could-not-discover-the-open-id-provider" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, MessageException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="error-communicating-with-open-id-provider" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, AssociationException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="error-establishing-an-association-with-open-id-provider" />
+				</span>
+			</c:if>
+
+			<table class="liferay-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="open-id" />
+				</td>
+				<td>
+					<input class="openid_login" name="openId" style="width: 120px;" type="text"/>
+				</td>
+			</tr>
+
+			</table>
+
+				<br/>
+
+				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+
+			</form>
+		</td>
+	</tr>
+	</table>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm2">

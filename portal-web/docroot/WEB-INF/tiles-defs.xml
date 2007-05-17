@@ -890,6 +890,14 @@
 		<put name="portlet_content" value="/portlet/news/view.jsp" />
 	</definition>
 
+	<!-- OpenID -->
+
+	<definition name="portlet.open_id" extends="portlet" />
+
+	<definition name="portlet.open_id.view" extends="portlet.open_id">
+		<put name="portlet_content" value="/portlet/open_id/view.jsp" />
+	</definition>
+
 	<!-- Page Comments -->
 
 	<definition name="portlet.page_comments" extends="portlet" />

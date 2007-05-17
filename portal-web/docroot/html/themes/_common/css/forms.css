@@ -68,3 +68,13 @@ input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
 	background: #ffc none;
 	border: 1px solid #fc0;
 }
+
+/* ---------- OpenID ---------------- */
+
+input.openid_login {
+	background: url(http://openid.net/login-bg.gif) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
+}

@@ -296,7 +296,7 @@
 					<copy todir="${app.server.dir}/common/endorsed">
 						<fileset
 							dir="lib/development"
-							includes="jutf7.jar"
+							includes="${endorsed.libraries}"
 						/>
 					</copy>
 

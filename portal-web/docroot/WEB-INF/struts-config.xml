@@ -144,6 +144,14 @@
 
 		<action path="/portal/logout" type="com.liferay.portal.action.LogoutAction" />
 
+		<action path="/portal/open_id_request" type="com.liferay.portal.action.OpenIdRequestAction">
+			<forward name="portal.login" path="portal.login" />
+		</action>
+
+		<action path="/portal/open_id_response" type="com.liferay.portal.action.OpenIdResponseAction">
+			<forward name="portal.login" path="portal.login" />
+		</action>
+
 		<action path="/portal/render_portlet" type="com.liferay.portal.action.RenderPortletAction">
 			<forward name="/portal/render_portlet" path="/portal/render_portlet.jsp" />
 		</action>
@@ -1130,6 +1138,12 @@
 		</action>
 
 		<action path="/news/view" forward="portlet.news.view" />
+
+		<!-- OpenID -->
+
+		<action path="/open_id/view" type="com.liferay.portlet.openid.action.ViewAction">
+			<forward name="portlet.open_id.view" path="portlet.open_id.view" />
+		</action>
 
 		<!-- Organization Admin -->
 
