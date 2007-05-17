@@ -208,7 +208,8 @@ public class MainServlet extends ActionServlet {
 
 			try {
 				String[] xmls = new String[] {
-					Http.URLtoString(ctx.getResource("/WEB-INF/portlet.xml")),
+					Http.URLtoString(ctx.getResource(
+						"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM)),
 					Http.URLtoString(ctx.getResource(
 						"/WEB-INF/portlet-ext.xml")),
 					Http.URLtoString(ctx.getResource(

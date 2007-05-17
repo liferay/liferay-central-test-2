@@ -237,6 +237,14 @@
 					<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="custom-portlet-xml" />
+				</td>
+				<td>
+					<liferay-ui:input-checkbox param="customPortletXml" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML) %>" />
+				</td>
+			</tr>
 
 			<%
 			int jbossPrefix = GetterUtil.getInteger(PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX));

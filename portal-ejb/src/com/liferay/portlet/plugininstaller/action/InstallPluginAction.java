@@ -136,6 +136,8 @@ public class InstallPluginAction extends PortletAction {
 		int blacklistThreshold = ParamUtil.getInteger(
 			req, "blacklistThreshold");
 		boolean unpackWar = ParamUtil.getBoolean(req, "unpackWar");
+		boolean customPortletXml = ParamUtil.getBoolean(
+			req, "customPortletXml");
 		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
 		String tomcatConfDir = ParamUtil.getString(req, "tomcatConfDir");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
@@ -154,6 +156,9 @@ public class InstallPluginAction extends PortletAction {
 			String.valueOf(blacklistThreshold));
 		prefs.setValue(
 			PropsUtil.AUTO_DEPLOY_UNPACK_WAR, String.valueOf(unpackWar));
+		prefs.setValue(
+			PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+			String.valueOf(customPortletXml));
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR, tomcatConfDir);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);

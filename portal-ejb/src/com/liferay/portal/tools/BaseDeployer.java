@@ -239,6 +239,8 @@ public class BaseDeployer {
 		updateWebXML(webXML, srcFile, displayName);
 
 		if ((deployDir != null) && !baseDir.equals(destDir)) {
+			updateDeployDirectory(srcFile);
+
 			String excludes = StringPool.BLANK;
 
 			if (appServerType.equals("tomcat")) {
@@ -533,6 +535,9 @@ public class BaseDeployer {
 		}
 
 		return sm.toString();
+	}
+
+	protected void updateDeployDirectory(File srcFile) throws Exception {
 	}
 
 	protected void updateGeronimoWebXML(File srcFile, String displayName)

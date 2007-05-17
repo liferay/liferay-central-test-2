@@ -147,6 +147,11 @@ import org.hibernate.util.FastHashMap;
  */
 public class PortalUtil {
 
+	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
+
+	public static final String PORTLET_XML_FILE_NAME_CUSTOM =
+		"portlet-custom.xml";
+
 	public static void clearRequestParameters(RenderRequest req) {
 
 		// Clear the render parameters if they were set during processAction
@@ -880,6 +885,19 @@ public class PortalUtil {
 
 	public static String getPortletNamespace(String portletName) {
 		return StringPool.UNDERLINE + portletName + StringPool.UNDERLINE;
+	}
+
+	public static String getPortletXmlFileName()
+		throws PortalException, SystemException {
+
+		if (PrefsPropsUtil.getBoolean(
+				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+
+			return PORTLET_XML_FILE_NAME_CUSTOM;
+		}
+		else {
+			return PORTLET_XML_FILE_NAME_STANDARD;
+		}
 	}
 
 	public static String getPortletTitle(String portletId, User user)

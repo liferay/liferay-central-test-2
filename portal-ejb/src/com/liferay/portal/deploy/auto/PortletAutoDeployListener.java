@@ -23,6 +23,7 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.File;
 
@@ -47,7 +48,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		if (!isMatchingFile(file, "portlet.xml")) {
+		if (!isMatchingFile(file, PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
 			return;
 		}
 

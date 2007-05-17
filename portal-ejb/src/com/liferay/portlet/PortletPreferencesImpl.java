@@ -234,10 +234,6 @@ public class PortletPreferencesImpl
 			throw new UnsupportedOperationException();
 		}
 
-		if ((_ownerId == 0) && (_plid == 0)) {
-			throw new UnsupportedOperationException();
-		}
-
 		try {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				_companyId, _portletId);

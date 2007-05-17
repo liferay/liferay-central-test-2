@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
@@ -170,9 +171,11 @@ public class WebXMLBuilder {
 		"liferay-display.xml", "liferay-layout-templates.xml",
 		"liferay-layout-templates-ext.xml", "liferay-look-and-feel.xml",
 		"liferay-look-and-feel-ext.xml", "liferay-plugin-package.xml",
-		"liferay-portlet.xml", "liferay-portlet-ext.xml", "portlet.xml",
-		"portlet-ext.xml", "struts-config.xml", "struts-config-ext.xml",
-		"tiles-defs.xml", "tiles-defs-ext.xml"
+		"liferay-portlet.xml", "liferay-portlet-ext.xml",
+		PortalUtil.PORTLET_XML_FILE_NAME_STANDARD,
+		PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM, "portlet-ext.xml",
+		"struts-config.xml", "struts-config-ext.xml", "tiles-defs.xml",
+		"tiles-defs-ext.xml"
 	};
 
 }

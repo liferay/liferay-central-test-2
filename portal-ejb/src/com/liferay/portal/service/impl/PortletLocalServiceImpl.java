@@ -306,14 +306,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		try {
-			List servletPatterns = _readWebXML(xmls[2]);
+			List servletURLPatterns = _readWebXML(xmls[3]);
 
 			Set portletIds = _readPortletXML(
-				servletContextName, xmls[0], portletsPool, servletPatterns,
+				servletContextName, xmls[0], portletsPool, servletURLPatterns,
 				pluginPackage);
 
+			portletIds.addAll(_readPortletXML(
+				servletContextName, xmls[1], portletsPool, servletURLPatterns,
+				pluginPackage));
+
 			Set liferayPortletIds = _readLiferayPortletXML(
-				servletContextName, xmls[1], portletsPool);
+				servletContextName, xmls[2], portletsPool);
 
 			// Check for missing entries in liferay-portlet.xml
 

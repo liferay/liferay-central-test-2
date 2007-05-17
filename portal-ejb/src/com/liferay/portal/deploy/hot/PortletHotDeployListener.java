@@ -44,6 +44,7 @@ import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -108,9 +109,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 			// Initialize portlets
 
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource("/WEB-INF/portlet.xml")),
-				Http.URLtoString(
-					ctx.getResource("/WEB-INF/liferay-portlet.xml")),
+				Http.URLtoString(ctx.getResource(
+					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)),
+				Http.URLtoString(ctx.getResource(
+					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM)),
+				Http.URLtoString(ctx.getResource(
+					"/WEB-INF/liferay-portlet.xml")),
 				Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 			};
 

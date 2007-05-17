@@ -25,6 +25,8 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Validator;
@@ -98,7 +100,8 @@ public class PortletDeployer extends BaseDeployer {
 			"</listener>";
 
 		File facesXML = new File(srcFile + "/WEB-INF/faces-config.xml");
-		File portletXML = new File(srcFile + "/WEB-INF/portlet.xml");
+		File portletXML = new File(
+			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
 		File webXML = new File(srcFile + "/WEB-INF/web.xml");
 
 		extraContent += _getServletContent(portletXML, webXML);
@@ -116,6 +119,29 @@ public class PortletDeployer extends BaseDeployer {
 		}
 
 		return extraContent;
+	}
+
+	protected void updateDeployDirectory(File srcFile) throws Exception {
+		if (!PrefsPropsUtil.getBoolean(
+				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+
+			return;
+		}
+
+		File portletXML = new File(
+			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+
+		if (portletXML.exists()) {
+			File portletCustomXML = new File(
+				srcFile + "/WEB-INF/" +
+					PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM);
+
+			if (portletCustomXML.exists()) {
+				portletCustomXML.delete();
+			}
+
+			portletXML.renameTo(portletCustomXML);
+		}
 	}
 
 	private String _getServletContent(File portletXML, File webXML)
