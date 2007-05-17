@@ -75,6 +75,7 @@ MyFaces 1.1.1
 MySQL Connector/J 3.1.13
 NekoHTML 0.9.5
 OGNL 2.6.7
+openid4java 0.9.2
 OpenLaszlo 4.0.0
 OpenSAML 1.0.1
 OpenXRIclient 0.9.2.249
