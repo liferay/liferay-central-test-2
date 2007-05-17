@@ -154,13 +154,11 @@ body.staging {
 }
 
 .drop-position-top {
-	background: url(../images/shadow/fade-top.png) scroll repeat-x top left;
-	font-size: 0;
+	background: url(../images/arrows/03_up.png) scroll repeat-x top left;
 }
 
 .drop-position-bottom {
-	background: url(../images/shadow/fade-bottom.png) scroll repeat-x bottom left;
-	font-size: 0;
+	background: url(../images/arrows/03_down.png) scroll repeat-x bottom left;
 }
 
 /* ---------- Alerts and popups ---------- */
@@ -189,6 +187,7 @@ body.staging {
 	font-size: 1.5em;
 	font-weight: bold;
 	min-height: 1em;
+	white-space: nowrap;
 	width: 90%;
 }
 

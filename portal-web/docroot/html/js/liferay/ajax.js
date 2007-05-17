@@ -131,6 +131,7 @@ var AjaxUtil = {
 	submit: function(form, options) {
 		var url = form.action;
 		var inputs = jQuery("input, textarea, select", form);
+		var opts = options || new Object();
 		var params = inputs.serialize();
 		
 		if (url.indexOf("?") == -1) {
@@ -143,9 +144,11 @@ var AjaxUtil = {
 			url = url + "&" + params;
 		}
 		
-		inputs.attr("disabled", true);
+		if (opts.disable) {
+			inputs.attr("disabled", true);
+		}
 
-		AjaxUtil.request(url, options);
+		AjaxUtil.request(url, opts);
 	},
 	
 	update : function(url, id, options) {
@@ -257,47 +260,6 @@ function executeLoadedScript(el) {
 			}
 		}
 	}
-}
-
-function loadForm(form, action, elId, returnFunction) {
-	var pos = action.indexOf("?");
-
-	var path = action;
-	var queryString = "";
-
-	if (pos != -1) {
-		path = action.substring(0, pos);
-		queryString = action.substring(pos + 1, action.length);
-	}
-
-	if (!endsWith(queryString, "&")) {
-		queryString += "&";
-	}
-
-	for (var i = 0; i < form.elements.length; i++) {
-		var e = form.elements[i];
-
-		if ((e.name != null) && (e.value != null)) {
-			queryString += e.name + "=" + encodeURIComponent(e.value) + "&";
-		}
-	}
-
-	if (elId != null) {
-		document.body.style.cursor = "wait";
-
-		pos = path.indexOf("/portal/layout");
-	
-		path = path.substring(0, pos) + "/portal/render_portlet";
-
-		returnFunction =
-			function (xmlHttpReq) {
-				document.getElementById(elId).innerHTML = xmlHttpReq.responseText;
-
-				document.body.style.cursor = "default";
-			};
-	}
-
-	loadPage(path, queryString, returnFunction);
 }
 
 /*

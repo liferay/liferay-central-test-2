@@ -108,7 +108,7 @@ type = ParamUtil.getString(request, "type", type);
 
 	function <portlet:namespace />saveArticles() {
 		document.<portlet:namespace />pages.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-		loadForm(document.<portlet:namespace />pages, '<liferay-portlet:actionURL portletConfiguration="true" />');
+		AjaxUtil.submit(document.<portlet:namespace />pages);
 	}
 </script>
 

@@ -174,7 +174,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 		var html = buttonsEl.html();
 
 		if (restore) {
-			portletContentContainer.slideDown('fast');
+			portletContentContainer.BlindDown('fast');
 
 			html = html.replace(", true", ", false");
 			html = html.replace("restore.png", "minimize.png");
@@ -183,7 +183,7 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
 		else {
-			portletContentContainer.slideUp('fast');
+			portletContentContainer.BlindUp('fast');
 
 			html = html.replace(", false", ", true");
 			html = html.replace("minimize.png", "restore.png");

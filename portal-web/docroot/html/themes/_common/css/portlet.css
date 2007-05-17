@@ -67,6 +67,16 @@
 	width: 100% !important;
 }
 
+.portlet-resize-handle {
+	background: url(../images/arrows/resize.png) scroll no-repeat;
+	bottom: 12px;
+	cursor: se-resize;
+	height: 10px;
+	position: absolute;
+	right: 2px;
+	width: 10px;
+}
+
 /* ---------- Standard styles defined in the JSR 168 ---------- */
 
 /* ---------- Fonts ---------- */

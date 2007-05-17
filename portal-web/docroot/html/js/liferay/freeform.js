@@ -66,12 +66,17 @@
 				}
 			});
 
-			var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
-			var resizeHandle = _$J(portlet).getOne(".portlet-resize-handle");
+			var resizeBox = _$J(".portlet-content-container, .portlet-borderless-container", portlet);
+			var resizeHandle = _$J(".portlet-resize-handle", portlet);
+			
+			if (!resizeHandle.length) {
+				resizeBox.append("<div style='position:relative'><div class='portlet-resize-handle'></div></div>");
+				resizeHandle = _$J(".portlet-resize-handle", portlet);
+			}
 
-			if (resizeBox && resizeHandle) {
+			if (resizeBox.length && resizeHandle.length) {
 				_$J(portlet).lResize({
-					handle: resizeHandle,
+					handle: resizeHandle[0],
 					direction: "horizontal",
 					mode: "add",
 					portlet: portlet,
@@ -93,8 +98,8 @@
 					}
 				});
 
-				_$J(resizeBox).lResize({
-					handle: resizeHandle,
+				resizeBox.lResize({
+					handle: resizeHandle[0],
 					direction: "vertical",
 					mode: "add"
 				});
