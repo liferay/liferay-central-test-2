@@ -483,7 +483,7 @@ public class ServiceBuilder {
 				String persistenceClass = GetterUtil.getString(
 					entityEl.attributeValue("persistence-class"),
 					_packagePath + ".service.persistence."+ ejbName +
-						"Persistence");
+						"PersistenceImpl");
 				String dataSource = entityEl.attributeValue("data-source");
 				String sessionFactory = entityEl.attributeValue(
 					"session-factory");
@@ -718,6 +718,7 @@ public class ServiceBuilder {
 							_createHBM(entity);
 							_createHBMUtil(entity);
 
+							_createPersistenceImpl(entity);
 							_createPersistence(entity);
 							_createPersistenceUtil(entity);
 
@@ -2431,6 +2432,82 @@ public class ServiceBuilder {
 	}
 
 	private void _createPersistence(Entity entity) throws IOException {
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/persistence/" + entity.getName() + "PersistenceImpl.java");
+
+		JavaMethod[] methods = javaClass.getMethods();
+
+		StringMaker sm = new StringMaker();
+
+		// Package
+
+		sm.append("package " + _packagePath + ".service.persistence;");
+
+		// Class declaration
+
+		sm.append("public interface " + entity.getName() + "Persistence {");
+
+		// Methods
+
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
+
+			String methodName = javaMethod.getName();
+
+			if (!javaMethod.isConstructor() && javaMethod.isPublic()) {
+				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+
+				JavaParameter[] parameters = javaMethod.getParameters();
+
+				String p0Name = "";
+
+				if (parameters.length > 0) {
+					p0Name = parameters[0].getName();
+				}
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append(")");
+
+				Type[] thrownExceptions = javaMethod.getExceptions();
+
+				if (thrownExceptions.length > 0) {
+					sm.append(" throws ");
+
+					for (int j = 0; j < thrownExceptions.length; j++) {
+						Type thrownException = thrownExceptions[j];
+
+						sm.append(thrownException.getValue());
+
+						if ((j + 1) != thrownExceptions.length) {
+							sm.append(", ");
+						}
+					}
+				}
+
+				sm.append(";");
+			}
+		}
+
+		// Class close brace
+
+		sm.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
+
+		writeFile(ejbFile, sm.toString());
+	}
+
+	private void _createPersistenceImpl(Entity entity) throws IOException {
 		List columnList = entity.getColumnList();
 		List finderList = entity.getFinderList();
 
@@ -2484,7 +2561,7 @@ public class ServiceBuilder {
 
 		// Class declaration
 
-		sm.append("public class " + entity.getName() + "Persistence extends BasePersistence {");
+		sm.append("public class " + entity.getName() + "PersistenceImpl extends BasePersistence implements " + entity.getName() + "Persistence {");
 
 		// Create method
 
@@ -4007,8 +4084,8 @@ public class ServiceBuilder {
 				// containsUser(String pk, String userPK)
 
 				sm.append("protected class Contains" + tempEntity.getName() + " extends MappingSqlQuery {");
-				sm.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
-				sm.append("super(persistence.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
+				sm.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "PersistenceImpl persistenceImpl) {");
+				sm.append("super(persistenceImpl.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
 				sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
 				sm.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
 				sm.append("compile();");
@@ -4033,26 +4110,26 @@ public class ServiceBuilder {
 					// addUser(String pk, String userPK)
 
 					sm.append("protected class Add" + tempEntity.getName() + " extends SqlUpdate {");
-					sm.append("protected Add" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
-					sm.append("super(persistence.getDataSource(), \"INSERT INTO " + col.getMappingTable() + " (" + pkVarName + ", " + tempEntity.getPKVarName() + ") VALUES (?, ?)\");");
-					sm.append("_persistence = persistence;");
+					sm.append("protected Add" + tempEntity.getName() + "(" + entity.getName() + "PersistenceImpl persistenceImpl) {");
+					sm.append("super(persistenceImpl.getDataSource(), \"INSERT INTO " + col.getMappingTable() + " (" + pkVarName + ", " + tempEntity.getPKVarName() + ") VALUES (?, ?)\");");
+					sm.append("_persistenceImpl = persistenceImpl;");
 					sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
 					sm.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
 					sm.append("compile();");
 					sm.append("}");
 					sm.append("protected void add(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
-					sm.append("if (!_persistence.contains" + tempEntity.getName() + ".contains(" + pkVarName + ", " + tempEntity.getPKVarName() + ")) {");
+					sm.append("if (!_persistenceImpl.contains" + tempEntity.getName() + ".contains(" + pkVarName + ", " + tempEntity.getPKVarName() + ")) {");
 					sm.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
 					sm.append("}");
 					sm.append("}");
-					sm.append("private " + entity.getName() + "Persistence _persistence;");
+					sm.append("private " + entity.getName() + "PersistenceImpl _persistenceImpl;");
 					sm.append("}");
 
 					// clearUsers(String pk)
 
 					sm.append("protected class Clear" + tempEntity.getNames() + " extends SqlUpdate {");
-					sm.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "Persistence persistence) {");
-					sm.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
+					sm.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "PersistenceImpl persistenceImpl) {");
+					sm.append("super(persistenceImpl.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
 					sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
 					sm.append("compile();");
 					sm.append("}");
@@ -4064,8 +4141,8 @@ public class ServiceBuilder {
 					// removeUser(String pk, String userPK)
 
 					sm.append("protected class Remove" + tempEntity.getName() + " extends SqlUpdate {");
-					sm.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
-					sm.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
+					sm.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "PersistenceImpl persistenceImpl) {");
+					sm.append("super(persistenceImpl.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
 					sm.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
 					sm.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
 					sm.append("compile();");
@@ -4117,7 +4194,7 @@ public class ServiceBuilder {
 
 		// Fields
 
-		sm.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Persistence.class);");
+		sm.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "PersistenceImpl.class);");
 
 		// Class close brace
 
@@ -4125,13 +4202,13 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
+		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "PersistenceImpl.java");
 
 		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createPersistenceUtil(Entity entity) throws IOException {
-		JavaClass javaClass = _getJavaClass(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/persistence/" + entity.getName() + "PersistenceImpl.java");
 
 		JavaMethod[] methods = javaClass.getMethods();
 
@@ -4162,7 +4239,7 @@ public class ServiceBuilder {
 
 			String methodName = javaMethod.getName();
 
-			if (!javaMethod.isConstructor()) {
+			if (!javaMethod.isConstructor() && javaMethod.isPublic()) {
 				sm.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
@@ -5844,7 +5921,7 @@ public class ServiceBuilder {
 
 	private void _createSpringXMLSession(Entity entity, StringMaker sm) {
 		if (entity.hasColumns()) {
-			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" class=\"" + entity.getPersistenceClass() + "\" lazy-init=\"true\">\n");
+			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "PersistenceImpl\" class=\"" + entity.getPersistenceClass() + "\" lazy-init=\"true\">\n");
 			sm.append("\t\t<property name=\"dataSource\">\n");
 			sm.append("\t\t\t<ref bean=\"" + entity.getDataSource() + "\" />\n");
 			sm.append("\t\t</property>\n");
@@ -5855,7 +5932,7 @@ public class ServiceBuilder {
 
 			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "Util\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "Util\" lazy-init=\"true\">\n");
 			sm.append("\t\t<property name=\"persistence\">\n");
-			sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "Persistence\" />\n");
+			sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "PersistenceImpl\" />\n");
 			sm.append("\t\t</property>\n");
 			sm.append("\t</bean>\n");
 		}
