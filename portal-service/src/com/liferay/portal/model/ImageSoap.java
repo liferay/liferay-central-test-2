@@ -52,6 +52,9 @@ public class ImageSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setText(model.getText());
 		soapModel.setType(model.getType());
+		soapModel.setHeight(model.getHeight());
+		soapModel.setWidth(model.getWidth());
+		soapModel.setSize(model.getSize());
 
 		return soapModel;
 	}
@@ -70,19 +73,19 @@ public class ImageSoap implements Serializable {
 	public ImageSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _imageId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setImageId(pk);
 	}
 
-	public String getImageId() {
+	public long getImageId() {
 		return _imageId;
 	}
 
-	public void setImageId(String imageId) {
+	public void setImageId(long imageId) {
 		_imageId = imageId;
 	}
 
@@ -110,8 +113,35 @@ public class ImageSoap implements Serializable {
 		_type = type;
 	}
 
-	private String _imageId;
+	public int getHeight() {
+		return _height;
+	}
+
+	public void setHeight(int height) {
+		_height = height;
+	}
+
+	public int getWidth() {
+		return _width;
+	}
+
+	public void setWidth(int width) {
+		_width = width;
+	}
+
+	public int getSize() {
+		return _size;
+	}
+
+	public void setSize(int size) {
+		_size = size;
+	}
+
+	private long _imageId;
 	private Date _modifiedDate;
 	private String _text;
 	private String _type;
+	private int _height;
+	private int _width;
+	private int _size;
 }

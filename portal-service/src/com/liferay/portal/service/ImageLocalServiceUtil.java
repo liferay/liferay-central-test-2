@@ -65,22 +65,13 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static void deleteImage(java.lang.String imageId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+	public static void deleteImage(long imageId)
+		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 		imageLocalService.deleteImage(imageId);
 	}
 
-	public static void deleteImages(java.lang.String imageId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-		imageLocalService.deleteImages(imageId);
-	}
-
-	public static com.liferay.portal.model.Image getImage(
-		java.lang.String imageId)
+	public static com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
@@ -102,18 +93,12 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.getImages(begin, end);
 	}
 
-	public static java.util.List search(java.lang.String imageId)
+	public static com.liferay.portal.model.Image updateImage(long imageId,
+		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
-		return imageLocalService.search(imageId);
-	}
-
-	public static com.liferay.portal.model.Image updateImage(
-		java.lang.String imageId, byte[] bytes)
-		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(imageId, bytes);
+		return imageLocalService.updateImage(imageId, bytes, type, height,
+			width, size);
 	}
 }

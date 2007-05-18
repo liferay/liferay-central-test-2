@@ -169,16 +169,6 @@
 				(Users_Groups.groupId = Group_.groupId)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.ImageFinder.findByImageId">
-		<![CDATA[
-			SELECT
-				{Image.*}
-			FROM
-				Image
-			WHERE
-				imageId LIKE ?
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByC_P_P">
 		<![CDATA[
 			SELECT

@@ -101,6 +101,15 @@ public class SCFrameworkVersionServiceJSON {
 		SCFrameworkVersionServiceUtil.deleteFrameworkVersion(frameworkVersionId);
 	}
 
+	public static JSONObject getFrameworkVersion(long frameworkVersionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
+			SCFrameworkVersionServiceUtil.getFrameworkVersion(frameworkVersionId);
+
+		return SCFrameworkVersionJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONArray getFrameworkVersions(long groupId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
@@ -116,15 +125,6 @@ public class SCFrameworkVersionServiceJSON {
 				active, begin, end);
 
 		return SCFrameworkVersionJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static JSONObject getFrameworkVersion(long frameworkVersionId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
-			SCFrameworkVersionServiceUtil.getFrameworkVersion(frameworkVersionId);
-
-		return SCFrameworkVersionJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject updateFrameworkVersion(long frameworkVersionId,

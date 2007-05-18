@@ -27,7 +27,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
@@ -89,20 +88,18 @@ public class SCProductVersionLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		// Product version
+
+		User user = UserUtil.findByPrimaryKey(userId);
+		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
+			productEntryId);
+		Date now = new Date();
+
 		validate(
 			version, changeLog, downloadPageURL, directDownloadURL,
 			frameworkVersionIds);
 
-		// Product version
-
-		User user = UserUtil.findByPrimaryKey(userId);
-		SCProductEntry productEntry = getProductEntry(
-			user.getCompanyId(), productEntryId);
-		productEntryId = productEntry.getProductEntryId();
-		Date now = new Date();
-
-		long productVersionId = CounterLocalServiceUtil.increment(
-			SCProductVersion.class.getName());
+		long productVersionId = CounterLocalServiceUtil.increment();
 
 		SCProductVersion productVersion = SCProductVersionUtil.create(
 			productVersionId);
@@ -121,6 +118,10 @@ public class SCProductVersionLocalServiceImpl
 
 		SCProductVersionUtil.update(productVersion);
 
+		// Product entry
+
+		productEntry.setModifiedDate(now);
+
 		SCProductEntryUtil.update(productEntry);
 
 		// Framework versions
@@ -128,18 +129,14 @@ public class SCProductVersionLocalServiceImpl
 		SCProductVersionUtil.setSCFrameworkVersions(
 			productVersionId, frameworkVersionIds);
 
-		// Product entry
-
-		productEntry.setModifiedDate(now);
-
 		return productVersion;
 	}
 
 	public void deleteProductVersion(long productVersionId)
 		throws PortalException, SystemException {
 
-		SCProductVersion productVersion =
-			SCProductVersionUtil.findByPrimaryKey(productVersionId);
+		SCProductVersion productVersion = SCProductVersionUtil.findByPrimaryKey(
+			productVersionId);
 
 		deleteProductVersion(productVersion);
 	}
@@ -147,9 +144,7 @@ public class SCProductVersionLocalServiceImpl
 	public void deleteProductVersion(SCProductVersion productVersion)
 		throws PortalException, SystemException {
 
-		// Product version
-
-		SCProductVersionUtil.remove(productVersion.getProductVersionId());
+		SCProductVersionUtil.remove(productVersion);
 	}
 
 	public void deleteProductVersions(long productEntryId)
@@ -190,16 +185,16 @@ public class SCProductVersionLocalServiceImpl
 			boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws PortalException, SystemException {
 
-		validate(
-			version, changeLog, downloadPageURL, directDownloadURL,
-			frameworkVersionIds);
-
 		// Product version
 
 		Date now = new Date();
 
-		SCProductVersion productVersion =
-			SCProductVersionUtil.findByPrimaryKey(productVersionId);
+		validate(
+			version, changeLog, downloadPageURL, directDownloadURL,
+			frameworkVersionIds);
+
+		SCProductVersion productVersion = SCProductVersionUtil.findByPrimaryKey(
+			productVersionId);
 
 		productVersion.setModifiedDate(now);
 		productVersion.setVersion(version);
@@ -210,11 +205,6 @@ public class SCProductVersionLocalServiceImpl
 
 		SCProductVersionUtil.update(productVersion);
 
-		// Framework versions
-
-		SCProductVersionUtil.setSCFrameworkVersions(
-			productVersionId, frameworkVersionIds);
-
 		// Product entry
 
 		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
@@ -224,28 +214,17 @@ public class SCProductVersionLocalServiceImpl
 
 		SCProductEntryUtil.update(productEntry);
 
+		// Framework versions
+
+		SCProductVersionUtil.setSCFrameworkVersions(
+			productVersionId, frameworkVersionIds);
+
 		return productVersion;
 	}
 
-	protected SCProductEntry getProductEntry(
-			long companyId, long productEntryId)
-		throws PortalException, SystemException {
-
-		// Ensure product entry exists and belongs to the proper company
-
-		SCProductEntry productEntry =
-			SCProductEntryUtil.findByPrimaryKey(productEntryId);
-
-		if (companyId != productEntry.getCompanyId()) {
-			throw new NoSuchProductEntryException();
-		}
-
-		return productEntry;
-	}
-
 	private void validate(
-		String version, String changeLog, String downloadPageURL,
-		String directDownloadURL, long[] frameworkVersionIds)
+			String version, String changeLog, String downloadPageURL,
+			String directDownloadURL, long[] frameworkVersionIds)
 		throws PortalException {
 
 		if (Validator.isNull(version)) {
@@ -254,12 +233,13 @@ public class SCProductVersionLocalServiceImpl
 		else if (Validator.isNull(changeLog)) {
 			throw new ProductVersionChangeLogException();
 		}
+		else if (Validator.isNull(downloadPageURL) &&
+				 Validator.isNull(directDownloadURL)) {
+
+			throw new ProductVersionDownloadURLException();
+		}
 		else if (frameworkVersionIds.length == 0) {
 			throw new ProductVersionFrameworkVersionException();
-		}
-		else if (Validator.isNull(downloadPageURL) &&
-			Validator.isNull(directDownloadURL)) {
-			throw new ProductVersionDownloadURLException();
 		}
 	}
 

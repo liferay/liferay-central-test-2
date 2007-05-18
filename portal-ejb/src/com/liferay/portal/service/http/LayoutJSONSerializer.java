@@ -106,6 +106,7 @@ public class LayoutJSONSerializer {
 		}
 
 		jsonObj.put("iconImage", model.isIconImage());
+		jsonObj.put("iconImageId", model.getIconImageId());
 
 		String themeId = model.getThemeId();
 

@@ -64,9 +64,8 @@
 
 		<column name="folderId" type="long" />
 		<column name="description" type="String" />
-		<column name="height" type="int" />
-		<column name="width" type="int" />
-		<column name="size" type="int" />
+		<column name="smallImageId" type="long" />
+		<column name="largeImageId" type="long" />
 
 		<!-- Order -->
 
@@ -82,6 +81,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>

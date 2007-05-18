@@ -54,8 +54,7 @@ public interface SCProductEntryService {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -64,7 +63,7 @@ public interface SCProductEntryService {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.String[] communityPermissions,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
@@ -82,7 +81,7 @@ public interface SCProductEntryService {
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

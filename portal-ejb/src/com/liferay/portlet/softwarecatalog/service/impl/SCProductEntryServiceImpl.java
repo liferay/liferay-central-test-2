@@ -33,8 +33,6 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUti
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
 
-import java.util.Map;
-
 /**
  * <a href="SCProductEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,7 +46,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 	public SCProductEntry addProductEntry(
 			long plid, String name, String type, String shortDescription,
 			String longDescription, String pageURL, String repoGroupId,
-			String repoArtifactId, long[] licenseIds, Map images,
+			String repoArtifactId, long[] licenseIds,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -58,14 +56,14 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 
 		return SCProductEntryLocalServiceUtil.addProductEntry(
 			getUserId(), plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, images,
+			pageURL, repoGroupId, repoArtifactId, licenseIds,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public SCProductEntry addProductEntry(
 			long plid, String name, String type, String shortDescription,
 			String longDescription, String pageURL, String repoGroupId,
-			String repoArtifactId, long[] licenseIds, Map images,
+			String repoArtifactId, long[] licenseIds,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -75,7 +73,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 
 		return SCProductEntryLocalServiceUtil.addProductEntry(
 			getUserId(), plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, images,
+			pageURL, repoGroupId, repoArtifactId, licenseIds,
 			communityPermissions, guestPermissions);
 	}
 
@@ -100,8 +98,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 	public SCProductEntry updateProductEntry(
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			Map images)
+			String repoGroupId, String repoArtifactId, long[] licenseIds)
 		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
@@ -109,7 +106,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 
 		return SCProductEntryLocalServiceUtil.updateProductEntry(
 			productEntryId, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, images);
+			pageURL, repoGroupId, repoArtifactId, licenseIds);
 	}
 
 }

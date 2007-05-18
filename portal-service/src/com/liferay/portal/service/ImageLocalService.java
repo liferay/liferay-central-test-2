@@ -57,15 +57,10 @@ public interface ImageLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void deleteImage(java.lang.String imageId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+	public void deleteImage(long imageId)
+		throws com.liferay.portal.SystemException;
 
-	public void deleteImages(java.lang.String imageId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.Image getImage(java.lang.String imageId)
+	public com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -74,10 +69,7 @@ public interface ImageLocalService {
 	public java.util.List getImages(int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(java.lang.String imageId)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Image updateImage(
-		java.lang.String imageId, byte[] bytes)
+	public com.liferay.portal.model.Image updateImage(long imageId,
+		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException;
 }

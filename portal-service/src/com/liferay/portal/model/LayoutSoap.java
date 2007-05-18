@@ -60,6 +60,7 @@ public class LayoutSoap implements Serializable {
 		soapModel.setHidden(model.getHidden());
 		soapModel.setFriendlyURL(model.getFriendlyURL());
 		soapModel.setIconImage(model.getIconImage());
+		soapModel.setIconImageId(model.getIconImageId());
 		soapModel.setThemeId(model.getThemeId());
 		soapModel.setColorSchemeId(model.getColorSchemeId());
 		soapModel.setWapThemeId(model.getWapThemeId());
@@ -208,6 +209,14 @@ public class LayoutSoap implements Serializable {
 		_iconImage = iconImage;
 	}
 
+	public long getIconImageId() {
+		return _iconImageId;
+	}
+
+	public void setIconImageId(long iconImageId) {
+		_iconImageId = iconImageId;
+	}
+
 	public String getThemeId() {
 		return _themeId;
 	}
@@ -269,6 +278,7 @@ public class LayoutSoap implements Serializable {
 	private boolean _hidden;
 	private String _friendlyURL;
 	private boolean _iconImage;
+	private long _iconImageId;
 	private String _themeId;
 	private String _colorSchemeId;
 	private String _wapThemeId;

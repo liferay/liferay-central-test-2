@@ -76,4 +76,8 @@ public interface CompanyModel extends BaseModel {
 	public String getMx();
 
 	public void setMx(String mx);
+
+	public long getLogoId();
+
+	public void setLogoId(long logoId);
 }

@@ -22,13 +22,31 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.ImageUtil;
+import com.liferay.util.FileUtil;
+
+import com.sun.imageio.plugins.gif.GIFImageReader;
+import com.sun.imageio.plugins.jpeg.JPEGImageReader;
+import com.sun.imageio.plugins.png.PNGImageReader;
+
+import java.awt.image.BufferedImage;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Arrays;
+import java.util.Iterator;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.MemoryCacheImageInputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,14 +60,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageLocalUtil {
 
-	public static Image get(String id) {
-		Image image = null;
+	public static void deleteImage(long imageId) throws SystemException {
+		ImageLocalServiceUtil.deleteImage(imageId);
+	}
 
-		try {
-			image = ImageLocalServiceUtil.getImage(id);
-		}
-		catch (Exception e) {
-			_log.warn(e);
+	public static Image getCompanyLogo(long imageId) {
+		Image image = getImage(imageId);
+
+		if (image == null) {
+			image = getDefaultCompanyLogo();
 		}
 
 		return image;
@@ -67,6 +86,44 @@ public class ImageLocalUtil {
 		return _instance._defaultUserPortrait;
 	}
 
+	public static Image getImage(long imageId) {
+		try {
+			if (imageId > 0) {
+				return ImageLocalServiceUtil.getImage(imageId);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get image " + imageId + ": " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+
+	public static Image getImage(byte[] bytes) throws IOException {
+		return _instance._getImage(bytes);
+	}
+
+	public static Image getImage(File file) throws IOException {
+		return _instance._getImage(file);
+	}
+
+	public static Image getImage(InputStream is) throws IOException {
+		return _instance._getImage(is);
+	}
+
+	public static Image getImageOrDefault(long imageId) {
+		Image image = getImage(imageId);
+
+		if (image == null) {
+			image = getDefaultSpacer();
+		}
+
+		return image;
+	}
+
 	public static boolean isNullOrDefaultSpacer(byte[] bytes) {
 		if ((bytes == null) || (bytes.length == 0) ||
 			(Arrays.equals(bytes, getDefaultSpacer().getTextObj()))) {
@@ -78,41 +135,209 @@ public class ImageLocalUtil {
 		}
 	}
 
-	public static void put(String id, byte[] bytes) {
+	public static Image updateImage(long imageId, byte[] bytes)
+		throws SystemException {
+
 		try {
-			ImageLocalServiceUtil.updateImage(id, bytes);
+			Image image = ImageLocalUtil.getImage(bytes);
+
+			return ImageLocalUtil.updateImage(
+				imageId, image.getTextObj(), image.getType(), image.getHeight(),
+				image.getWidth(), image.getSize());
 		}
-		catch (Exception e) {
-			_log.warn(e);
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 	}
 
-	public static void remove(String id) {
+	public static Image updateImage(long imageId, File file)
+		throws SystemException {
+
 		try {
-			ImageLocalServiceUtil.deleteImage(id);
+			Image image = ImageLocalUtil.getImage(file);
+
+			return ImageLocalUtil.updateImage(
+				imageId, image.getTextObj(), image.getType(), image.getHeight(),
+				image.getWidth(), image.getSize());
 		}
-		catch (Exception e) {
-			_log.warn(e);
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
+	}
+
+	public static Image updateImage(long imageId, InputStream is)
+		throws SystemException {
+
+		try {
+			Image image = ImageLocalUtil.getImage(is);
+
+			return ImageLocalUtil.updateImage(
+				imageId, image.getTextObj(), image.getType(), image.getHeight(),
+				image.getWidth(), image.getSize());
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public static Image updateImage(
+			long imageId, byte[] bytes, String type, int height, int width,
+			int size)
+		throws SystemException {
+
+		return ImageLocalServiceUtil.updateImage(
+			imageId, bytes, type, height, width, size);
 	}
 
 	private ImageLocalUtil() {
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		_defaultSpacer = new ImageImpl();
+		try {
+			InputStream is = classLoader.getResourceAsStream(
+				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_SPACER));
 
-		_defaultSpacer.setTextObj(ImageUtil.read(
-			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_SPACER)));
+			if (is == null) {
+				_log.error("Default spacer is not available");
+			}
 
-		_defaultCompanyLogo = new ImageImpl();
+			_defaultSpacer = _getImage(is);
+		}
+		catch (IOException ioe) {
+			_log.error(
+				"Unable to configure the default spacer: " + ioe.getMessage());
+		}
 
-		_defaultCompanyLogo.setTextObj(ImageUtil.read(
-			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_COMPANY_LOGO)));
+		try {
+			InputStream is = classLoader.getResourceAsStream(
+				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_COMPANY_LOGO));
 
-		_defaultUserPortrait = new ImageImpl();
+			if (is == null) {
+				_log.error("Default company logo is not available");
+			}
 
-		_defaultUserPortrait.setTextObj(ImageUtil.read(
-			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_PORTRAIT)));
+			_defaultCompanyLogo = _getImage(is);
+		}
+		catch (IOException ioe) {
+			_log.error(
+				"Unable to configure the default company logo: " +
+					ioe.getMessage());
+		}
+
+		try {
+			InputStream is = classLoader.getResourceAsStream(
+				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_PORTRAIT));
+
+			if (is == null) {
+				_log.error("Default user portrait is not available");
+			}
+
+			_defaultUserPortrait = _getImage(is);
+		}
+		catch (IOException ioe) {
+			_log.error(
+				"Unable to configure the default use portrait: " +
+					ioe.getMessage());
+		}
+	}
+
+	private Image _getImage(byte[] bytes) throws IOException {
+		return _getImage(null, bytes);
+	}
+
+	private Image _getImage(File file) throws IOException {
+		return _getImage(new FileInputStream(file));
+	}
+
+	private Image _getImage(InputStream is) throws IOException {
+		return _getImage(is, null);
+	}
+
+	private Image _getImage(InputStream is, byte[] bytes) throws IOException {
+		MemoryCacheImageInputStream mcis = null;
+
+		try {
+			if (is == null) {
+				is = new ByteArrayInputStream(bytes);
+			}
+			else {
+				try {
+					bytes = FileUtil.getBytes(is);
+				}
+
+				finally {
+					is.close();
+				}
+
+				is = new ByteArrayInputStream(bytes);
+			}
+
+			mcis = new MemoryCacheImageInputStream(is);
+
+			String type = ImageImpl.TYPE_NOT_AVAILABLE;
+
+			Iterator itr = ImageIO.getImageReaders(mcis);
+
+			while (itr.hasNext()) {
+				ImageReader reader = (ImageReader)itr.next();
+
+				if (reader instanceof GIFImageReader) {
+					type = ImageImpl.TYPE_GIF;
+				}
+				else if (reader instanceof JPEGImageReader) {
+					type = ImageImpl.TYPE_JPEG;
+				}
+				else if (reader instanceof PNGImageReader) {
+					type = ImageImpl.TYPE_PNG;
+				}
+
+				reader.dispose();
+			}
+
+			BufferedImage bufferedImage = ImageIO.read(mcis);
+
+			if (bufferedImage == null) {
+				throw new IOException(
+					"Unable to retreive buffered image from input stream " +
+						"with type " + type);
+			}
+
+			int height = bufferedImage.getHeight();
+			int width = bufferedImage.getWidth();
+			int size = bytes.length;
+
+			Image image = new ImageImpl();
+
+			image.setTextObj(bytes);
+			image.setType(type);
+			image.setHeight(height);
+			image.setWidth(width);
+			image.setWidth(size);
+
+			return image;
+		}
+		finally {
+			if (is != null) {
+				try {
+					is.close();
+				}
+				catch (IOException ioe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(ioe);
+					}
+				}
+			}
+
+			if (mcis != null) {
+				try {
+					mcis.close();
+				}
+				catch (IOException ioe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(ioe);
+					}
+				}
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(ImageLocalUtil.class);

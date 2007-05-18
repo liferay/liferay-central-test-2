@@ -37,7 +37,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -60,6 +59,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
@@ -493,9 +493,8 @@ public class JournalArticleLocalServiceImpl
 
 		// Images
 
-		ImageLocalServiceUtil.deleteImages(
-			"%.journal.article." + article.getGroupId() + "." +
-				article.getArticleId() + ".%." + article.getVersion());
+		JournalArticleImageLocalServiceUtil.deleteImages(
+			article.getGroupId(), article.getArticleId(), article.getVersion());
 
 		// Resources
 
@@ -1182,9 +1181,10 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected String format(
-		long companyId, long groupId, String articleId, double version,
-		boolean incrementVersion, String content, String structureId,
-		Map images) {
+			long companyId, long groupId, String articleId, double version,
+			boolean incrementVersion, String content, String structureId,
+			Map images)
+		throws SystemException {
 
 		if (Validator.isNotNull(structureId)) {
 			SAXReader reader = new SAXReader();
@@ -1214,8 +1214,9 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void format(
-		long companyId, long groupId, String articleId, double version,
-		boolean incrementVersion, Element root, Map images) {
+			long companyId, long groupId, String articleId, double version,
+			boolean incrementVersion, Element root, Map images)
+		throws SystemException {
 
 		Iterator itr = root.elements().iterator();
 
@@ -1247,8 +1248,9 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void formatImage(
-		long companyId, long groupId, String articleId, double version,
-		boolean incrementVersion, Element el, String elName, Map images) {
+			long companyId, long groupId, String articleId, double version,
+			boolean incrementVersion, Element el, String elName, Map images)
+		throws SystemException {
 
 		List imageContents = el.elements("dynamic-content");
 
@@ -1264,23 +1266,22 @@ public class JournalArticleLocalServiceImpl
 				elLanguage = "_" + elLanguage;
 			}
 
-			String imageId =
-				companyId + ".journal.article." + groupId + "." + articleId +
-					"." + elName + elLanguage + "." + version;
+			long imageId =
+				JournalArticleImageLocalServiceUtil.getArticleImageId(
+					groupId, articleId, version, elName, elLanguage);
 
 			double oldVersion = MathUtil.format(version - 0.1, 1, 1);
 
-			String oldImageId =
-				companyId + ".journal.article." + groupId + "." + articleId +
-					"." + elName + elLanguage + "." + oldVersion;
+			long oldImageId =
+				JournalArticleImageLocalServiceUtil.getArticleImageId(
+					groupId, articleId, oldVersion, elName, elLanguage);
 
-			String elContent =
-				"/image/journal/article?img_id=" + groupId + "." + articleId +
-					"." + elName + elLanguage + "&version=" + version;
+			String elContent = "/image/journal/article?img_id=" + imageId;
 
 			if (dynamicContent.getText().equals("delete")) {
 				dynamicContent.setText(StringPool.BLANK);
-				ImageLocalUtil.remove(imageId);
+
+				ImageLocalUtil.deleteImage(imageId);
 
 				String defaultElLanguage = "";
 
@@ -1289,12 +1290,11 @@ public class JournalArticleLocalServiceImpl
 						"_" + LocaleUtil.toLanguageId(Locale.getDefault());
 				}
 
-				String defaultImageId =
-					companyId + ".journal.article." + groupId + "." +
-						articleId + "." + elName + defaultElLanguage + "." +
-							version;
+				long defaultImageId =
+					JournalArticleImageLocalServiceUtil.getArticleImageId(
+						groupId, articleId, version, elName, defaultElLanguage);
 
-				ImageLocalUtil.remove(defaultImageId);
+				ImageLocalUtil.deleteImage(defaultImageId);
 
 				continue;
 			}
@@ -1303,9 +1303,9 @@ public class JournalArticleLocalServiceImpl
 
 			if (bytes != null && (bytes.length > 0)) {
 				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute("id", imageId);
+				dynamicContent.addAttribute("id", String.valueOf(imageId));
 
-				ImageLocalUtil.put(imageId, bytes);
+				ImageLocalUtil.updateImage(imageId, bytes);
 
 				continue;
 			}
@@ -1313,25 +1313,25 @@ public class JournalArticleLocalServiceImpl
 			if ((version > JournalArticleImpl.DEFAULT_VERSION) &&
 				(incrementVersion)) {
 
-				Image oldImage = ImageLocalUtil.get(oldImageId);
+				Image oldImage = ImageLocalUtil.getImage(oldImageId);
 
 				if (oldImage != null) {
 					dynamicContent.setText(elContent);
-					dynamicContent.addAttribute("id", imageId);
+					dynamicContent.addAttribute("id", String.valueOf(imageId));
 
 					bytes = oldImage.getTextObj();
 
-					ImageLocalUtil.put(imageId, bytes);
+					ImageLocalUtil.updateImage(imageId, bytes);
 				}
 
 				continue;
 			}
 
-			Image image = ImageLocalUtil.get(imageId);
+			Image image = ImageLocalUtil.getImage(imageId);
 
 			if (image != null) {
 				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute("id", imageId);
+				dynamicContent.addAttribute("id", String.valueOf(imageId));
 
 				continue;
 			}
@@ -1343,19 +1343,19 @@ public class JournalArticleLocalServiceImpl
 					"_" + LocaleUtil.toLanguageId(Locale.getDefault());
 			}
 
-			String defaultImageId =
-				companyId + ".journal.article." + groupId + "." + articleId +
-					"." + elName + defaultElLanguage + "." + version;
+			long defaultImageId =
+				JournalArticleImageLocalServiceUtil.getArticleImageId(
+					groupId, articleId, version, elName, defaultElLanguage);
 
-			Image defaultImage = ImageLocalUtil.get(defaultImageId);
+			Image defaultImage = ImageLocalUtil.getImage(defaultImageId);
 
 			if (defaultImage != null) {
 				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute("id", imageId);
+				dynamicContent.addAttribute("id", String.valueOf(imageId));
 
 				bytes = defaultImage.getTextObj();
 
-				ImageLocalUtil.put(imageId, bytes);
+				ImageLocalUtil.updateImage(imageId, bytes);
 
 				continue;
 			}

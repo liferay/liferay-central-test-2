@@ -73,10 +73,13 @@ public class ShoppingItemSoap implements Serializable {
 		soapModel.setFeatured(model.getFeatured());
 		soapModel.setSale(model.getSale());
 		soapModel.setSmallImage(model.getSmallImage());
+		soapModel.setSmallImageId(model.getSmallImageId());
 		soapModel.setSmallImageURL(model.getSmallImageURL());
 		soapModel.setMediumImage(model.getMediumImage());
+		soapModel.setMediumImageId(model.getMediumImageId());
 		soapModel.setMediumImageURL(model.getMediumImageURL());
 		soapModel.setLargeImage(model.getLargeImage());
+		soapModel.setLargeImageId(model.getLargeImageId());
 		soapModel.setLargeImageURL(model.getLargeImageURL());
 
 		return soapModel;
@@ -332,6 +335,14 @@ public class ShoppingItemSoap implements Serializable {
 		_smallImage = smallImage;
 	}
 
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
 	public String getSmallImageURL() {
 		return _smallImageURL;
 	}
@@ -352,6 +363,14 @@ public class ShoppingItemSoap implements Serializable {
 		_mediumImage = mediumImage;
 	}
 
+	public long getMediumImageId() {
+		return _mediumImageId;
+	}
+
+	public void setMediumImageId(long mediumImageId) {
+		_mediumImageId = mediumImageId;
+	}
+
 	public String getMediumImageURL() {
 		return _mediumImageURL;
 	}
@@ -370,6 +389,14 @@ public class ShoppingItemSoap implements Serializable {
 
 	public void setLargeImage(boolean largeImage) {
 		_largeImage = largeImage;
+	}
+
+	public long getLargeImageId() {
+		return _largeImageId;
+	}
+
+	public void setLargeImageId(long largeImageId) {
+		_largeImageId = largeImageId;
 	}
 
 	public String getLargeImageURL() {
@@ -405,9 +432,12 @@ public class ShoppingItemSoap implements Serializable {
 	private boolean _featured;
 	private boolean _sale;
 	private boolean _smallImage;
+	private long _smallImageId;
 	private String _smallImageURL;
 	private boolean _mediumImage;
+	private long _mediumImageId;
 	private String _mediumImageURL;
 	private boolean _largeImage;
+	private long _largeImageId;
 	private String _largeImageURL;
 }

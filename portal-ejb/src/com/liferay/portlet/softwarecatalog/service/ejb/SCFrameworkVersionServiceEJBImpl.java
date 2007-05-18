@@ -87,6 +87,15 @@ public class SCFrameworkVersionServiceEJBImpl
 		SCFrameworkVersionServiceFactory.getTxImpl().deleteFrameworkVersion(frameworkVersionId);
 	}
 
+	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
+		long frameworkVersionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return SCFrameworkVersionServiceFactory.getTxImpl().getFrameworkVersion(frameworkVersionId);
+	}
+
 	public java.util.List getFrameworkVersions(long groupId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -104,15 +113,6 @@ public class SCFrameworkVersionServiceEJBImpl
 		return SCFrameworkVersionServiceFactory.getTxImpl()
 											   .getFrameworkVersions(groupId,
 			active, begin, end);
-	}
-
-	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
-		long frameworkVersionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SCFrameworkVersionServiceFactory.getTxImpl().getFrameworkVersion(frameworkVersionId);
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(

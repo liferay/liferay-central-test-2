@@ -332,6 +332,10 @@
 			<bean-home-name>com_liferay_portlet_journal_service_ejb_JournalArticleServiceEJB</bean-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_journal_service_ejb_JournalArticleImageLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/JournalArticleImageLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/JournalContentSearchLocalServiceHome</bean-local-home-name>
 		</session>

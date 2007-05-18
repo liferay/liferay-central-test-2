@@ -165,6 +165,10 @@ public interface ShoppingItemModel extends BaseModel {
 
 	public void setSmallImage(boolean smallImage);
 
+	public long getSmallImageId();
+
+	public void setSmallImageId(long smallImageId);
+
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);
@@ -175,6 +179,10 @@ public interface ShoppingItemModel extends BaseModel {
 
 	public void setMediumImage(boolean mediumImage);
 
+	public long getMediumImageId();
+
+	public void setMediumImageId(long mediumImageId);
+
 	public String getMediumImageURL();
 
 	public void setMediumImageURL(String mediumImageURL);
@@ -184,6 +192,10 @@ public interface ShoppingItemModel extends BaseModel {
 	public boolean isLargeImage();
 
 	public void setLargeImage(boolean largeImage);
+
+	public long getLargeImageId();
+
+	public void setLargeImageId(long largeImageId);
 
 	public String getLargeImageURL();
 

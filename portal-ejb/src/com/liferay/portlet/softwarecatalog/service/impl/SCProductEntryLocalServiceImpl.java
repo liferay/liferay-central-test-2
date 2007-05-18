@@ -26,20 +26,14 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.imagegallery.ImageSizeException;
-import com.liferay.portlet.softwarecatalog.ProductEntryImagesException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
@@ -48,29 +42,22 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
-import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.ImageUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.xml.DocUtil;
 
-import java.awt.image.BufferedImage;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -98,13 +85,12 @@ public class SCProductEntryLocalServiceImpl
 			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			Map images, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductEntry(
 			userId, plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, images,
+			pageURL, repoGroupId, repoArtifactId, licenseIds,
 			new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
@@ -113,26 +99,22 @@ public class SCProductEntryLocalServiceImpl
 			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			Map images, String[] communityPermissions,
-			String[] guestPermissions)
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductEntry(
 			userId, plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, images, null,
-			null, communityPermissions, guestPermissions);
+			pageURL, repoGroupId, repoArtifactId, licenseIds, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public SCProductEntry addProductEntry(
 			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			Map images, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
-
-		validate(name, type, shortDescription, licenseIds, images, true);
 
 		// Product entry
 
@@ -140,8 +122,9 @@ public class SCProductEntryLocalServiceImpl
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		long productEntryId = CounterLocalServiceUtil.increment(
-			SCProductEntry.class.getName());
+		validate(name, type, shortDescription, licenseIds);
+
+		long productEntryId = CounterLocalServiceUtil.increment();
 
 		SCProductEntry productEntry = SCProductEntryUtil.create(productEntryId);
 
@@ -160,10 +143,6 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setRepoArtifactId(repoArtifactId);
 
 		SCProductEntryUtil.update(productEntry);
-
-		// Images
-
-		processImages(productEntry, images);
 
 		// Resources
 
@@ -204,8 +183,8 @@ public class SCProductEntryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry =
-			SCProductEntryUtil.findByPrimaryKey(productEntryId);
+		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
+			productEntryId);
 
 		addProductEntryResources(
 			productEntry, addCommunityPermissions, addGuestPermissions);
@@ -228,8 +207,8 @@ public class SCProductEntryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry =
-			SCProductEntryUtil.findByPrimaryKey(productEntryId);
+		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
+			productEntryId);
 
 		addProductEntryResources(
 			productEntry, communityPermissions, guestPermissions);
@@ -250,8 +229,8 @@ public class SCProductEntryLocalServiceImpl
 	public void deleteProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry =
-			SCProductEntryUtil.findByPrimaryKey(productEntryId);
+		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
+			productEntryId);
 
 		deleteProductEntry(productEntry);
 	}
@@ -283,69 +262,13 @@ public class SCProductEntryLocalServiceImpl
 
 		// Product entry
 
-		SCProductEntryUtil.remove(productEntry.getProductEntryId());
+		SCProductEntryUtil.remove(productEntry);
 	}
 
 	public SCProductEntry getProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 
 		return SCProductEntryUtil.findByPrimaryKey(productEntryId);
-	}
-
-	public String getRepositoryXML(
-		long groupId, String baseImageURL, Date oldestDate,
-		int maxNumOfVersions, Properties repoSettings)
-		throws PortalException, SystemException{
-		Document doc = DocumentHelper.createDocument();
-
-		doc.setXMLEncoding("UTF-8");
-
-		Element root = doc.addElement("plugin-repository");
-
-		Element settingsEl = root.addElement("settings");
-		_populateSettingsElement(settingsEl, repoSettings);
-
-		List productEntries = SCProductEntryUtil.findByGroupId(groupId);
-		Iterator itr = productEntries.iterator();
-
-		while (itr.hasNext()) {
-			SCProductEntry productEntry = (SCProductEntry) itr.next();
-
-			if (Validator.isNull(productEntry.getRepoGroupId()) ||
-				Validator.isNull(productEntry.getRepoArtifactId())) {
-				continue;
-			}
-
-			List productVersions = SCProductVersionUtil.findByProductEntryId(
-				productEntry.getProductEntryId());
-
-			Iterator itr2 = productVersions.iterator();
-
-			for (int i = 1; itr2.hasNext(); i++) {
-				SCProductVersion productVersion =
-					(SCProductVersion) itr2.next();
-
-				if ((maxNumOfVersions > 0) && (maxNumOfVersions < i)) {
-					break;
-				}
-
-				if (!productVersion.getRepoStoreArtifact()) {
-					continue;
-				}
-
-				if ((oldestDate != null) &&
-					(oldestDate.after(productVersion.getModifiedDate()))) {
-					continue;
-				}
-
-				Element el = root.addElement("plugin-package");
-				_populatePluginPackageElement(
-					el, productEntry, productVersion, baseImageURL);
-			}
-		}
-
-		return doc.asXML();
-
 	}
 
 	public List getProductEntries(long groupId, int begin, int end)
@@ -372,17 +295,64 @@ public class SCProductEntryLocalServiceImpl
 		return SCProductEntryUtil.countByG_U(groupId, userId);
 	}
 
-	public String getProductEntryImageId(long productEntryId, String imageName)
-		throws PortalException, SystemException {
-		SCProductEntry productEntry = getProductEntry(productEntryId);
-		String imageId = buildImageId(productEntry, imageName);
-		Image image = ImageLocalUtil.get(imageId + ".large");
-		if (image != null) {
-			return imageId;
+	public String getRepositoryXML(
+			long groupId, String baseImageURL, Date oldestDate,
+			int maxNumOfVersions, Properties repoSettings)
+		throws PortalException, SystemException{
+
+		Document doc = DocumentHelper.createDocument();
+
+		doc.setXMLEncoding("UTF-8");
+
+		Element root = doc.addElement("plugin-repository");
+
+		Element settingsEl = root.addElement("settings");
+
+		populateSettingsElement(settingsEl, repoSettings);
+
+		List productEntries = SCProductEntryUtil.findByGroupId(groupId);
+
+		Iterator itr = productEntries.iterator();
+
+		while (itr.hasNext()) {
+			SCProductEntry productEntry = (SCProductEntry)itr.next();
+
+			if (Validator.isNull(productEntry.getRepoGroupId()) ||
+				Validator.isNull(productEntry.getRepoArtifactId())) {
+
+				continue;
+			}
+
+			List productVersions = SCProductVersionUtil.findByProductEntryId(
+				productEntry.getProductEntryId());
+
+			Iterator itr2 = productVersions.iterator();
+
+			for (int i = 1; itr2.hasNext(); i++) {
+				SCProductVersion productVersion = (SCProductVersion)itr2.next();
+
+				if ((maxNumOfVersions > 0) && (maxNumOfVersions < i)) {
+					break;
+				}
+
+				if (!productVersion.getRepoStoreArtifact()) {
+					continue;
+				}
+
+				if ((oldestDate != null) &&
+					(oldestDate.after(productVersion.getModifiedDate()))) {
+
+					continue;
+				}
+
+				Element el = root.addElement("plugin-package");
+
+				populatePluginPackageElement(
+					el, productEntry, productVersion, baseImageURL);
+			}
 		}
-		else {
-			return null;
-		}
+
+		return doc.asXML();
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -476,16 +446,15 @@ public class SCProductEntryLocalServiceImpl
 	public SCProductEntry updateProductEntry(
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			Map images)
+			String repoGroupId, String repoArtifactId, long[] licenseIds)
 		throws PortalException, SystemException {
-
-		validate(name, type, shortDescription, licenseIds, images, false);
 
 		// Product entry
 
-		SCProductEntry productEntry =
-			SCProductEntryUtil.findByPrimaryKey(productEntryId);
+		validate(name, type, shortDescription, licenseIds);
+
+		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
+			productEntryId);
 
 		productEntry.setModifiedDate(new Date());
 		productEntry.setName(name);
@@ -501,10 +470,6 @@ public class SCProductEntryLocalServiceImpl
 		// Licenses
 
 		SCProductEntryUtil.setSCLicenses(productEntryId, licenseIds);
-
-		// Images
-
-		processImages(productEntry, images);
 
 		// Lucene
 
@@ -522,89 +487,9 @@ public class SCProductEntryLocalServiceImpl
 		return productEntry;
 	}
 
-	protected String buildImageId(
-		SCProductEntry productEntry, String imageName) {
-		return productEntry.getCompanyId() + ".software_catalog.product_entry."
-					+ productEntry.getProductEntryId() + "." + imageName;
-	}
-
-	protected void processImages(SCProductEntry productEntry, Map images)
-		throws SystemException {
-		Iterator itr = images.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String imageName = (String) itr.next();
-			String imageId = buildImageId(productEntry, imageName);
-
-			Object imageObj = images.get(imageName);
-
-			if (imageObj instanceof String) {
-				String cmd = (String) imageObj;
-
-				if (cmd.equals("delete") &&
-					(!imageName.equals(SCProductEntryImpl.MAIN_IMAGE_NAME))) {
-					ImageLocalUtil.remove(imageId);
-				}
-			}
-			else if (imageObj instanceof Object[]) {
-				String contentType = (String) ((Object[]) imageObj)[0];
-				byte[] bytes = (byte[]) ((Object[]) imageObj)[1];
-
-				saveImage(imageId, contentType, bytes);
-			}
-		}
-	}
-
-	protected void saveImage(String imageId, String contentType, byte[] bytes)
-		throws SystemException {
-		try {
-
-			String largeImageId = imageId + ".large";
-			String smallImageId = imageId + ".small";
-
-			// Image
-
-			ImageLocalUtil.put(largeImageId, bytes);
-
-			// Thumbnail
-
-			BufferedImage bufferedImage = ImageIO.read(
-				new ByteArrayInputStream(bytes));
-
-			int thumbnailMaxHeight = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.SC_IMAGE_THUMBNAIL_MAX_HEIGHT));
-
-			int thumbnailMaxWidth = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.SC_IMAGE_THUMBNAIL_MAX_WIDTH));
-
-			BufferedImage thumbnail = ImageUtil.scale(
-				bufferedImage, thumbnailMaxHeight, thumbnailMaxWidth);
-
-			ByteArrayMaker bam = new ByteArrayMaker();
-
-			if (contentType.indexOf("gif") != -1) {
-				ImageUtil.encodeGIF(thumbnail, bam);
-			}
-			else if (contentType.indexOf("jpg") != -1 ||
-					 contentType.indexOf("jpeg") != -1) {
-
-				ImageIO.write(thumbnail, "jpeg", bam);
-			}
-			else if (contentType.indexOf("png") != -1) {
-				ImageIO.write(thumbnail, "png", bam);
-			}
-
-			ImageLocalUtil.put(smallImageId, bam.toByteArray());
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-
-	}
-
 	protected void validate(
-		String name, String type, String shortDescription, long[] licenseIds,
-		Map images, boolean checkMainImage)
+			String name, String type, String shortDescription,
+			long[] licenseIds)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -619,103 +504,75 @@ public class SCProductEntryLocalServiceImpl
 		else if (licenseIds.length == 0) {
 			throw new ProductEntryLicenseException();
 		}
-		else if (checkMainImage &&
-			(images.get(SCProductEntryImpl.MAIN_IMAGE_NAME) == null)) {
-			throw new ProductEntryImagesException();
-		}
-
-		long imageMaxSize = GetterUtil.getLong(
-			PropsUtil.get(PropsUtil.SC_IMAGE_MAX_SIZE));
-
-		Iterator iterator = images.keySet().iterator();
-		while (iterator.hasNext()) {
-			String imageName = (String) iterator.next();
-			Object imageObj = images.get(imageName);
-			 if (imageObj instanceof Object[]) {
-				String contentType = (String) ((Object[]) imageObj)[0];
-				byte[] bytes = (byte[]) ((Object[]) imageObj)[1];
-
-				if ((imageMaxSize > 0) && (bytes.length > imageMaxSize)) {
-
-					throw new ImageSizeException();
-				}
-			}
-		}
-
 	}
 
-	private void _populatePluginPackageElement(
-		Element el, SCProductEntry productEntry,
-		SCProductVersion productVersion, String baseImageURL)
-		throws PortalException, SystemException{
+	protected void populatePluginPackageElement(
+			Element el, SCProductEntry productEntry,
+			SCProductVersion productVersion, String baseImageURL)
+		throws PortalException, SystemException {
 
-		el.addElement("name").addText(productEntry.getName());
+		DocUtil.add(el, "name", productEntry.getName());
 
 		String moduleId = ModuleId.toString(
 			productEntry.getRepoGroupId(), productEntry.getRepoArtifactId(),
 			productVersion.getVersion(), "war");
-		el.addElement("module-id").addText(moduleId);
 
-		el.addElement("types").addElement("type").addText(
-			productEntry.getType());
+		DocUtil.add(el, "module-id", moduleId);
 
-		el.addElement("short-description").addText(
-			productEntry.getShortDescription());
+		Element typesEl = el.addElement("types");
+
+		DocUtil.add(typesEl, "type", productEntry.getType());
+
+		DocUtil.add(
+			el, "short-descriptionid", productEntry.getShortDescription());
 
 		if (Validator.isNotNull(productEntry.getLongDescription())) {
-			el.addElement("long-description").addText(
-				productEntry.getLongDescription());
+			DocUtil.add(
+				el, "long-description", productEntry.getLongDescription());
 		}
 
 		if (Validator.isNotNull(productVersion.getChangeLog())) {
-			el.addElement("change-log").addText(
-				productVersion.getChangeLog());
+			DocUtil.add(el, "change-log", productVersion.getChangeLog());
 		}
 
 		if (Validator.isNotNull(productVersion.getDirectDownloadURL())) {
-			el.addElement("download-url").addText(
-				productVersion.getDirectDownloadURL());
+			DocUtil.add(
+				el, "download-url", productVersion.getDirectDownloadURL());
 		}
 
-		String imageId =
-			productEntry.getImageId(SCProductEntryImpl.MAIN_IMAGE_NAME);
-
-		Element screenshotsEl = el.addElement("screenshots");
-		Element screenshotEl = screenshotsEl.addElement("screenshot");
-		screenshotEl.addElement("thumbnail-url").addText(
-			baseImageURL + "?img_id=" + imageId + "&small=1");
-		screenshotEl.addElement("large-image-url").addText(
-			baseImageURL + "?img_id=" + imageId + "&large=1");
-
-		el.addElement("author").addText(productEntry.getUserName());
+		DocUtil.add(el, "author", productEntry.getUserName());
 
 		Element licensesEl = el.addElement("licenses");
+
 		Iterator itr = productEntry.getLicenses().iterator();
 
 		while (itr.hasNext()) {
-			SCLicense license = (SCLicense) itr.next();
+			SCLicense license = (SCLicense)itr.next();
+
 			Element licenseEl = licensesEl.addElement("license");
+
 			licenseEl.addText(license.getName());
 			licenseEl.addAttribute(
-				"osi-approved", Boolean.toString(license.isOpenSource()));
+				"osi-approved", String.valueOf(license.isOpenSource()));
 		}
 
 		Element liferayVersionsEl = el.addElement("liferay-versions");
+
 		itr = productVersion.getFrameworkVersions().iterator();
 
 		while (itr.hasNext()) {
 			SCFrameworkVersion frameworkVersion =
-				(SCFrameworkVersion) itr.next();
+				(SCFrameworkVersion)itr.next();
 
-			Element frameworkVersionEl =
-				liferayVersionsEl.addElement("liferay-version");
-
-			frameworkVersionEl.addText(frameworkVersion.getName());
+			DocUtil.add(
+				liferayVersionsEl, "liferay-version",
+				frameworkVersion.getName());
 		}
-
 	}
 
-	private void _populateSettingsElement(Element el, Properties repoSettings) {
+	protected void populateSettingsElement(
+		Element el, Properties repoSettings) {
+
 		if (repoSettings == null) {
 			return;
 		}

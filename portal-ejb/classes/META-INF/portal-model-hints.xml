@@ -79,6 +79,7 @@
 		<field name="portalURL" type="String" />
 		<field name="homeURL" type="String" />
 		<field name="mx" type="String" />
+		<field name="logoId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Contact">
 		<default-hints>
@@ -158,7 +159,7 @@
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Image">
-		<field name="imageId" type="String">
+		<field name="imageId" type="long">
 			<hint name="max-length">200</hint>
 		</field>
 		<field name="modifiedDate" type="Date" />
@@ -166,6 +167,9 @@
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="type" type="String" />
+		<field name="height" type="int" />
+		<field name="width" type="int" />
+		<field name="size" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.Layout">
 		<field name="plid" type="long" />
@@ -187,6 +191,7 @@
 		<field name="hidden" type="boolean" />
 		<field name="friendlyURL" type="String" />
 		<field name="iconImage" type="boolean" />
+		<field name="iconImageId" type="long" />
 		<field name="themeId" type="String" />
 		<field name="colorSchemeId" type="String" />
 		<field name="wapThemeId" type="String" />
@@ -201,6 +206,7 @@
 		<field name="userId" type="long" />
 		<field name="privateLayout" type="boolean" />
 		<field name="logo" type="boolean" />
+		<field name="logoId" type="long" />
 		<field name="themeId" type="String" />
 		<field name="colorSchemeId" type="String" />
 		<field name="wapThemeId" type="String" />
@@ -428,6 +434,7 @@
 		<field name="graceLoginCount" type="int" />
 		<field name="screenName" type="String" />
 		<field name="emailAddress" type="String" />
+		<field name="portraitId" type="long" />
 		<field name="languageId" type="String" />
 		<field name="timeZoneId" type="String" />
 		<field name="greeting" type="String" />
@@ -684,9 +691,8 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="height" type="int" />
-		<field name="width" type="int" />
-		<field name="size" type="int" />
+		<field name="smallImageId" type="long" />
+		<field name="largeImageId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
 		<field name="companyId" type="long" />
@@ -717,6 +723,15 @@
 		<field name="expired" type="boolean" />
 		<field name="expirationDate" type="Date" />
 		<field name="reviewDate" type="Date" />
+	</model>
+	<model name="com.liferay.portlet.journal.model.JournalArticleImage">
+		<field name="articleImageId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="articleId" type="String" />
+		<field name="version" type="double" />
+		<field name="elName" type="String" />
+		<field name="languageId" type="String" />
+		<field name="tempImage" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalContentSearch">
 		<field name="contentSearchId" type="long" />
@@ -765,6 +780,7 @@
 		</field>
 		<field name="langType" type="String" />
 		<field name="smallImage" type="boolean" />
+		<field name="smallImageId" type="long" />
 		<field name="smallImageURL" type="String" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBBan">
@@ -977,10 +993,13 @@
 		<field name="featured" type="boolean" />
 		<field name="sale" type="boolean" />
 		<field name="smallImage" type="boolean" />
+		<field name="smallImageId" type="long" />
 		<field name="smallImageURL" type="String" />
 		<field name="mediumImage" type="boolean" />
+		<field name="mediumImageId" type="long" />
 		<field name="mediumImageURL" type="String" />
 		<field name="largeImage" type="boolean" />
+		<field name="largeImageId" type="long" />
 		<field name="largeImageURL" type="String" />
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingItemField">

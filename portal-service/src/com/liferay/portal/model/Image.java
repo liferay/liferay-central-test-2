@@ -51,6 +51,4 @@ public interface Image extends ImageModel {
 	public byte[] getTextObj();
 
 	public void setTextObj(byte[] textObj);
-
-	public void setTypeFromTextObj(byte[] textObj);
 }

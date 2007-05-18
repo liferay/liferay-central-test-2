@@ -61,9 +61,8 @@ public class IGImageModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "description", new Integer(Types.VARCHAR) },
-			{ "height", new Integer(Types.INTEGER) },
-			{ "width", new Integer(Types.INTEGER) },
-			{ "size_", new Integer(Types.INTEGER) }
+			{ "smallImageId", new Integer(Types.BIGINT) },
+			{ "largeImageId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
@@ -168,33 +167,23 @@ public class IGImageModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public int getHeight() {
-		return _height;
+	public long getSmallImageId() {
+		return _smallImageId;
 	}
 
-	public void setHeight(int height) {
-		if (height != _height) {
-			_height = height;
+	public void setSmallImageId(long smallImageId) {
+		if (smallImageId != _smallImageId) {
+			_smallImageId = smallImageId;
 		}
 	}
 
-	public int getWidth() {
-		return _width;
+	public long getLargeImageId() {
+		return _largeImageId;
 	}
 
-	public void setWidth(int width) {
-		if (width != _width) {
-			_width = width;
-		}
-	}
-
-	public int getSize() {
-		return _size;
-	}
-
-	public void setSize(int size) {
-		if (size != _size) {
-			_size = size;
+	public void setLargeImageId(long largeImageId) {
+		if (largeImageId != _largeImageId) {
+			_largeImageId = largeImageId;
 		}
 	}
 
@@ -207,9 +196,8 @@ public class IGImageModelImpl extends BaseModelImpl {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setFolderId(getFolderId());
 		clone.setDescription(getDescription());
-		clone.setHeight(getHeight());
-		clone.setWidth(getWidth());
-		clone.setSize(getSize());
+		clone.setSmallImageId(getSmallImageId());
+		clone.setLargeImageId(getLargeImageId());
 
 		return clone;
 	}
@@ -274,7 +262,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 	private Date _modifiedDate;
 	private long _folderId;
 	private String _description;
-	private int _height;
-	private int _width;
-	private int _size;
+	private long _smallImageId;
+	private long _largeImageId;
 }

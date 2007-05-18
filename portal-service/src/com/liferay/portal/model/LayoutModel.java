@@ -107,6 +107,10 @@ public interface LayoutModel extends BaseModel {
 
 	public void setIconImage(boolean iconImage);
 
+	public long getIconImageId();
+
+	public void setIconImageId(long iconImageId);
+
 	public String getThemeId();
 
 	public void setThemeId(String themeId);

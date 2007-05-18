@@ -23,17 +23,15 @@
 package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;
@@ -163,7 +161,7 @@ public class StartupAction extends SimpleAction {
 
 			// Delete temporary images
 
-			_deleteTempImages();
+			deleteTemporaryImages();
 
 			// Verify
 
@@ -220,12 +218,20 @@ public class StartupAction extends SimpleAction {
 		}
 	}
 
-	private void _deleteTempImages() throws PortalException, SystemException {
+	protected void deleteTemporaryImages() throws Exception {
+		DBUtil dbUtil = DBUtil.getInstance();
 
-		// Journal
-
-		ImageLocalServiceUtil.deleteImages("%.journal.article.PREVIEW_%");
+		dbUtil.executeSQL(_DELETE_TEMP_IMAGES_1);
+		dbUtil.executeSQL(_DELETE_TEMP_IMAGES_2);
 	}
+
+	private static final String _DELETE_TEMP_IMAGES_1 =
+		"DELETE i FROM JournalArticleImage INNER JOIN Image AS i ON " +
+			"i.imageId = JournalArticleImage.articleImageId WHERE " +
+				"JournalArticleImage.tempImage = TRUE;";
+
+	private static final String _DELETE_TEMP_IMAGES_2 =
+		"DELETE FROM JournalArticleImage where tempImage = TRUE;";
 
 	private static Log _log = LogFactory.getLog(StartupAction.class);
 

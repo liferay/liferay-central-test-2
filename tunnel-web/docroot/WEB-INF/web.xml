@@ -987,6 +987,13 @@
 		<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/JournalArticleImageLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.journal.service.ejb.JournalArticleImageLocalServiceHome</local-home>
+		<local>com.liferay.portlet.journal.service.ejb.JournalArticleImageLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleImageLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/JournalContentSearchLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portlet.journal.service.ejb.JournalContentSearchLocalServiceHome</local-home>

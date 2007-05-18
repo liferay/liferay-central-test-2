@@ -22,6 +22,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addUserGroupUsers" qname="operNS:addUserGroupUsers" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userGroupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
@@ -30,7 +31,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="autoPassword" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password1" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password2" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="passwordReset" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="autoScreenName" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="screenName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="emailAddress" type="tns:string"></parameter>
@@ -106,6 +106,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unsetUserGroupUsers" qname="operNS:unsetUserGroupUsers" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userGroupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
@@ -116,6 +117,10 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateAgreedToTermsOfUse" qname="operNS:updateAgreedToTermsOfUse" returnQName="updateAgreedToTermsOfUseReturn" returnType="rtns:UserSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agreedToTermsOfUse" type="tns:boolean"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLockout" qname="operNS:updateLockout" returnQName="updateLockoutReturn" returnType="rtns:UserSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="lockout" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updatePassword" qname="operNS:updatePassword" returnQName="updatePasswordReturn" returnType="rtns:UserSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
@@ -156,7 +161,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="locationId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updatePortrait hasRoleUser setRoleUsers unsetGroupUsers unsetPasswordPolicyUsers unsetUserGroupUsers getUserByScreenName addUser unsetRoleUsers addRoleUsers updatePassword deleteUser getUserByEmailAddress addGroupUsers getGroupUsers getRoleUsers addPasswordPolicyUsers hasGroupUser updateAgreedToTermsOfUse deleteRoleUser setGroupUsers getUserById addUserGroupUsers updateActive setUserGroupUsers updateUser"/>
+		<parameter name="allowedMethods" value="updatePortrait hasRoleUser setRoleUsers unsetGroupUsers unsetPasswordPolicyUsers unsetUserGroupUsers getUserByScreenName addUser unsetRoleUsers addRoleUsers updatePassword deleteUser getUserByEmailAddress addGroupUsers getGroupUsers getRoleUsers addPasswordPolicyUsers hasGroupUser updateAgreedToTermsOfUse deleteRoleUser setGroupUsers getUserById addUserGroupUsers updateActive updateLockout setUserGroupUsers updateUser"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserSoap" type="java:com.liferay.portal.model.UserSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_UserSoap" type="java:com.liferay.portal.model.UserSoap[]" innerType="cmp-ns:UserSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

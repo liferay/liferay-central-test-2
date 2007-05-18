@@ -173,6 +173,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setXsl(xsl);
 		template.setLangType(langType);
 		template.setSmallImage(smallImage);
+		template.setSmallImageId(CounterLocalServiceUtil.increment());
 		template.setSmallImageURL(smallImageURL);
 
 		JournalTemplateUtil.update(template);
@@ -289,7 +290,7 @@ public class JournalTemplateLocalServiceImpl
 
 		// Small image
 
-		ImageLocalUtil.remove(template.getSmallImageId());
+		ImageLocalUtil.deleteImage(template.getSmallImageId());
 
 		// Resources
 
@@ -472,16 +473,17 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	protected void saveImages(
-		boolean smallImage, String smallImageKey, File smallFile,
-		byte[] smallBytes) {
+			boolean smallImage, long smallImageId, File smallFile,
+			byte[] smallBytes)
+		throws SystemException {
 
 		if (smallImage) {
-			if (smallFile != null && smallBytes != null) {
-				ImageLocalUtil.put(smallImageKey, smallBytes);
+			if ((smallFile != null) && (smallBytes != null)) {
+				ImageLocalUtil.updateImage(smallImageId, smallBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.remove(smallImageKey);
+			ImageLocalUtil.deleteImage(smallImageId);
 		}
 	}
 

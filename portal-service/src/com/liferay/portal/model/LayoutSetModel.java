@@ -77,6 +77,10 @@ public interface LayoutSetModel extends BaseModel {
 
 	public void setLogo(boolean logo);
 
+	public long getLogoId();
+
+	public void setLogoId(long logoId);
+
 	public String getThemeId();
 
 	public void setThemeId(String themeId);

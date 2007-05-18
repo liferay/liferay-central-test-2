@@ -59,6 +59,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
 			{ "logo", new Integer(Types.BOOLEAN) },
+			{ "logoId", new Integer(Types.BIGINT) },
 			{ "themeId", new Integer(Types.VARCHAR) },
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
 			{ "wapThemeId", new Integer(Types.VARCHAR) },
@@ -166,6 +167,16 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public void setLogo(boolean logo) {
 		if (logo != _logo) {
 			_logo = logo;
+		}
+	}
+
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	public void setLogoId(long logoId) {
+		if (logoId != _logoId) {
+			_logoId = logoId;
 		}
 	}
 
@@ -288,6 +299,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		clone.setUserId(getUserId());
 		clone.setPrivateLayout(getPrivateLayout());
 		clone.setLogo(getLogo());
+		clone.setLogoId(getLogoId());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
 		clone.setWapThemeId(getWapThemeId());
@@ -352,6 +364,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private long _userId;
 	private boolean _privateLayout;
 	private boolean _logo;
+	private long _logoId;
 	private String _themeId;
 	private String _colorSchemeId;
 	private String _wapThemeId;

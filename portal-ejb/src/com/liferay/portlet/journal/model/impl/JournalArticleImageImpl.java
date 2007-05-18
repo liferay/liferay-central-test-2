@@ -20,58 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
+package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.impl.ImageImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-
-import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
+import com.liferay.portlet.journal.model.JournalArticleImage;
 
 /**
- * <a href="ImageFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleImageImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageFinder {
+public class JournalArticleImageImpl
+	extends JournalArticleImageModelImpl implements JournalArticleImage {
 
-	public static String FIND_BY_IMAGEID =
-		ImageFinder.class.getName() + ".findByImageId";
-
-	public static List findByImageId(String imageId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_IMAGEID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
-
-			q.addEntity("Image", ImageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(imageId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
+	public JournalArticleImageImpl() {
 	}
 
 }

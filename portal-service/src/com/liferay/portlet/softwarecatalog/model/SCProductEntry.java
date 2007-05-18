@@ -48,14 +48,10 @@ package com.liferay.portlet.softwarecatalog.model;
  *
  */
 public interface SCProductEntry extends SCProductEntryModel {
-	public java.lang.String getImageId(java.lang.String imageName)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getLatestVersion()
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List getLicenses()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getLastVersion()
-		throws com.liferay.portal.SystemException;
 }

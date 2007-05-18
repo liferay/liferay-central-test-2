@@ -27,11 +27,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ImageFinder;
 import com.liferay.portal.service.persistence.ImageUtil;
 
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,25 +39,17 @@ import java.util.List;
  */
 public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
-	public void deleteImage(String imageId)
-		throws PortalException, SystemException {
-
-		ImageUtil.remove(imageId);
-	}
-
-	public void deleteImages(String imageId)
-		throws PortalException, SystemException {
-
-		Iterator itr = ImageFinder.findByImageId(imageId).iterator();
-
-		while (itr.hasNext()) {
-			Image image = (Image)itr.next();
-
-			ImageUtil.remove(image.getPrimaryKey());
+	public void deleteImage(long imageId) throws SystemException {
+		try {
+			if (imageId > 0) {
+				ImageUtil.remove(imageId);
+			}
+		}
+		catch (NoSuchImageException nsie) {
 		}
 	}
 
-	public Image getImage(String imageId)
+	public Image getImage(long imageId)
 		throws PortalException, SystemException {
 
 		return ImageUtil.findByPrimaryKey(imageId);
@@ -74,24 +63,22 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return ImageUtil.findAll(begin, end);
 	}
 
-	public List search(String imageId) throws SystemException {
-		return ImageFinder.findByImageId(imageId);
-	}
-
-	public Image updateImage(String imageId, byte[] bytes)
+	public Image updateImage(
+			long imageId, byte[] bytes, String type, int height, int width,
+			int size)
 		throws SystemException {
 
-		Image image = null;
+		Image image = ImageUtil.fetchByPrimaryKey(imageId);
 
-		try {
-			image = ImageUtil.findByPrimaryKey(imageId);
-		}
-		catch (NoSuchImageException nsie) {
+		if (image == null) {
 			image = ImageUtil.create(imageId);
 		}
 
-		image.setModifiedDate(new Date());
 		image.setTextObj(bytes);
+		image.setType(type);
+		image.setHeight(height);
+		image.setWidth(width);
+		image.setWidth(size);
 
 		ImageUtil.update(image);
 

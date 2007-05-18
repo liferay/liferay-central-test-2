@@ -79,15 +79,11 @@ public interface IGImageModel extends BaseModel {
 
 	public void setDescription(String description);
 
-	public int getHeight();
+	public long getSmallImageId();
 
-	public void setHeight(int height);
+	public void setSmallImageId(long smallImageId);
 
-	public int getWidth();
+	public long getLargeImageId();
 
-	public void setWidth(int width);
-
-	public int getSize();
-
-	public void setSize(int size);
+	public void setLargeImageId(long largeImageId);
 }

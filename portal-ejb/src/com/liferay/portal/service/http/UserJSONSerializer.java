@@ -128,6 +128,8 @@ public class UserJSONSerializer {
 			jsonObj.put("emailAddress", emailAddress.toString());
 		}
 
+		jsonObj.put("portraitId", model.getPortraitId());
+
 		String languageId = model.getLanguageId();
 
 		if (languageId == null) {

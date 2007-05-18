@@ -630,7 +630,9 @@ public class JournalUtil {
 		return content;
 	}
 
-	public static void removeArticleLocale(Element el, String languageId) {
+	public static void removeArticleLocale(Element el, String languageId)
+		throws SystemException {
+
 		Iterator itr1 = el.elements("dynamic-element").iterator();
 
 		while (itr1.hasNext()) {
@@ -645,11 +647,11 @@ public class JournalUtil {
 					dynamicContentEl.attributeValue("language-id"));
 
 				if (curLanguageId.equals(languageId)) {
-					String id = GetterUtil.getString(
+					long id = GetterUtil.getLong(
 						dynamicContentEl.attributeValue("id"));
 
-					if (Validator.isNotNull(id)) {
-						ImageLocalUtil.remove(id);
+					if (id > 0) {
+						ImageLocalUtil.deleteImage(id);
 					}
 
 					dynamicContentEl.detach();
@@ -820,8 +822,9 @@ public class JournalUtil {
 	}
 
 	private static void _merge(
-		Stack path, Document curDoc, Document newDoc, Element xsdEl,
-		String defaultLocale) {
+			Stack path, Document curDoc, Document newDoc, Element xsdEl,
+			String defaultLocale)
+		throws SystemException {
 
 		String elPath = "";
 
@@ -877,8 +880,10 @@ public class JournalUtil {
 								 !curContentLanguageId.equals(
 									StringPool.BLANK))) {
 
-								ImageLocalUtil.remove(
+								long id = GetterUtil.getLong(
 									curContentEl.attributeValue("id"));
+
+								ImageLocalUtil.deleteImage(id);
 							}
 
 							curContentEl.detach();

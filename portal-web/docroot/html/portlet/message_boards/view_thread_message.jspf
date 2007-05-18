@@ -42,11 +42,12 @@
 							int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
 							String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 						%>
-							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" /><br />
+
+							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>" /><br />
 
 							<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 								<div>
-									<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
+									<a href="javascript: Messaging.chat({toId:'<%= user2.getUserId() %>', toName:'<%= user2.getFullName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
 								</div>
 							</c:if>
 

@@ -33,6 +33,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -231,24 +232,25 @@ public class ViewArticleContentAction extends Action {
 				byte[] bytes = FileUtil.getBytes(file);
 
 				if ((bytes != null) && (bytes.length > 0)) {
-					String imageId =
-						previewArticleId + "." + elName + elLanguage;
+					long imageId =
+						JournalArticleImageLocalServiceUtil.getArticleImageId(
+							groupId, previewArticleId, version, elName,
+							elLanguage, true);
 
 					dynamicContent.setText(
 						"/image/journal/article?img_id=" + imageId);
 
-					ImageLocalUtil.put(
-						companyId + ".journal.article." + imageId, bytes);
+					ImageLocalUtil.updateImage(imageId, bytes);
 				}
 				else {
 					if (Validator.isNotNull(articleId)) {
-						String imageId =
-							groupId + "." + articleId + "." + elName +
-								elLanguage;
+						long imageId = JournalArticleImageLocalServiceUtil.
+							getArticleImageId(
+								groupId, articleId, version, elName,
+								elLanguage);
 
 						dynamicContent.setText(
-							"/image/journal/article?img_id=" + imageId +
-								"&version=" + version);
+							"/image/journal/article?img_id=" + imageId);
 					}
 				}
 			}

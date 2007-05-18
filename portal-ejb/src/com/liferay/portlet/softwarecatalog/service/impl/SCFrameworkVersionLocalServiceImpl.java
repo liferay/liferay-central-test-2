@@ -80,19 +80,18 @@ public class SCFrameworkVersionLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		validate(name);
-
 		// Framework version
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		long frameworkVersionId = CounterLocalServiceUtil.increment(
-			SCFrameworkVersion.class.getName());
+		validate(name);
 
-		SCFrameworkVersion frameworkVersion =
-			SCFrameworkVersionUtil.create(frameworkVersionId);
+		long frameworkVersionId = CounterLocalServiceUtil.increment();
+
+		SCFrameworkVersion frameworkVersion = SCFrameworkVersionUtil.create(
+			frameworkVersionId);
 
 		frameworkVersion.setGroupId(groupId);
 		frameworkVersion.setCompanyId(user.getCompanyId());
@@ -190,8 +189,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		return SCFrameworkVersionUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public List getFrameworkVersions(
-			long groupId, boolean active)
+	public List getFrameworkVersions(long groupId, boolean active)
 		throws SystemException {
 
 		return SCFrameworkVersionUtil.findByG_A(groupId, active);
@@ -243,7 +241,6 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	protected void validate(String name) throws PortalException {
-
 		if (Validator.isNull(name)) {
 			throw new FrameworkVersionNameException();
 		}

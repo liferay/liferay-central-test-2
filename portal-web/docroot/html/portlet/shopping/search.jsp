@@ -99,8 +99,7 @@ for (int i = 0; i < results.size(); i++) {
 		else {
 			sm.append(themeDisplay.getPathImage());
 			sm.append("/shopping/item?img_id=");
-			sm.append(item.getItemId());
-			sm.append("&small=1");
+			sm.append(item.getSmallImageId());
 		}
 
 		sm.append("\">");

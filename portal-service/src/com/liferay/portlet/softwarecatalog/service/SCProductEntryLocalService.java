@@ -62,8 +62,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -72,7 +71,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.String[] communityPermissions,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -82,7 +81,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -127,12 +126,6 @@ public interface SCProductEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getRepositoryXML(long groupId,
-		java.lang.String baseImageURL, java.util.Date oldestDate,
-		int maxNumOfVersions, java.util.Properties repoSettings)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public java.util.List getProductEntries(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
@@ -145,8 +138,9 @@ public interface SCProductEntryLocalService {
 	public int getProductEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.lang.String getProductEntryImageId(long productEntryId,
-		java.lang.String imageName)
+	public java.lang.String getRepositoryXML(long groupId,
+		java.lang.String baseImageURL, java.util.Date oldestDate,
+		int maxNumOfVersions, java.util.Properties repoSettings)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -161,7 +155,7 @@ public interface SCProductEntryLocalService {
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

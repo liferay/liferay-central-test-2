@@ -963,7 +963,7 @@ String[] availableLocales = null;
 					<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 						<br />
 
-						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getGroupId() + "." + tableIteratorObj.getTemplateId() + "&small=1" %>" vspace="0" />
+						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() %>" vspace="0" />
 					</c:if>
 				</liferay-ui:table-iterator>
 			</c:otherwise>

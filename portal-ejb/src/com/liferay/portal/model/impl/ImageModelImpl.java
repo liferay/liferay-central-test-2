@@ -54,16 +54,16 @@ import java.util.Date;
 public class ImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Image";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "imageId", new Integer(Types.VARCHAR) },
+			{ "imageId", new Integer(Types.BIGINT) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "text_", new Integer(Types.CLOB) },
-			{ "type_", new Integer(Types.VARCHAR) }
+			{ "type_", new Integer(Types.VARCHAR) },
+			{ "height", new Integer(Types.INTEGER) },
+			{ "width", new Integer(Types.INTEGER) },
+			{ "size_", new Integer(Types.INTEGER) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_IMAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Image.imageId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TEXT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image.text"),
 			XSS_ALLOW_BY_MODEL);
@@ -76,27 +76,20 @@ public class ImageModelImpl extends BaseModelImpl {
 	public ImageModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _imageId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setImageId(pk);
 	}
 
-	public String getImageId() {
-		return GetterUtil.getString(_imageId);
+	public long getImageId() {
+		return _imageId;
 	}
 
-	public void setImageId(String imageId) {
-		if (((imageId == null) && (_imageId != null)) ||
-				((imageId != null) && (_imageId == null)) ||
-				((imageId != null) && (_imageId != null) &&
-				!imageId.equals(_imageId))) {
-			if (!XSS_ALLOW_IMAGEID) {
-				imageId = XSSUtil.strip(imageId);
-			}
-
+	public void setImageId(long imageId) {
+		if (imageId != _imageId) {
 			_imageId = imageId;
 		}
 	}
@@ -146,12 +139,45 @@ public class ImageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public int getHeight() {
+		return _height;
+	}
+
+	public void setHeight(int height) {
+		if (height != _height) {
+			_height = height;
+		}
+	}
+
+	public int getWidth() {
+		return _width;
+	}
+
+	public void setWidth(int width) {
+		if (width != _width) {
+			_width = width;
+		}
+	}
+
+	public int getSize() {
+		return _size;
+	}
+
+	public void setSize(int size) {
+		if (size != _size) {
+			_size = size;
+		}
+	}
+
 	public Object clone() {
 		ImageImpl clone = new ImageImpl();
 		clone.setImageId(getImageId());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setText(getText());
 		clone.setType(getType());
+		clone.setHeight(getHeight());
+		clone.setWidth(getWidth());
+		clone.setSize(getSize());
 
 		return clone;
 	}
@@ -163,7 +189,16 @@ public class ImageModelImpl extends BaseModelImpl {
 
 		ImageImpl image = (ImageImpl)obj;
 		int value = 0;
-		value = getImageId().compareTo(image.getImageId());
+
+		if (getImageId() < image.getImageId()) {
+			value = -1;
+		}
+		else if (getImageId() > image.getImageId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -186,9 +221,9 @@ public class ImageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = image.getPrimaryKey();
+		long pk = image.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -197,11 +232,14 @@ public class ImageModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _imageId;
+	private long _imageId;
 	private Date _modifiedDate;
 	private String _text;
 	private String _type;
+	private int _height;
+	private int _width;
+	private int _size;
 }

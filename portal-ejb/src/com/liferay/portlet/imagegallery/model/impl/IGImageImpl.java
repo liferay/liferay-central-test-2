@@ -55,14 +55,6 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return folder;
 	}
 
-	public String getSmallImageId() {
-		return getCompanyId() + ".image_gallery." + getImageId() + ".small";
-	}
-
-	public String getLargeImageId() {
-		return getCompanyId() + ".image_gallery." + getImageId() + ".large";
-	}
-
 	private static Log _log = LogFactory.getLog(IGImageImpl.class);
 
 }

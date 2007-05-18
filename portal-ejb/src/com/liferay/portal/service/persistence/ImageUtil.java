@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ImageUtil {
-	public static com.liferay.portal.model.Image create(
-		java.lang.String imageId) {
+	public static com.liferay.portal.model.Image create(long imageId) {
 		return getPersistence().create(imageId);
 	}
 
-	public static com.liferay.portal.model.Image remove(
-		java.lang.String imageId)
+	public static com.liferay.portal.model.Image remove(long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchImageException {
 		ModelListener listener = _getListener();
@@ -138,15 +136,14 @@ public class ImageUtil {
 		return image;
 	}
 
-	public static com.liferay.portal.model.Image findByPrimaryKey(
-		java.lang.String imageId)
+	public static com.liferay.portal.model.Image findByPrimaryKey(long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchImageException {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
 
-	public static com.liferay.portal.model.Image fetchByPrimaryKey(
-		java.lang.String imageId) throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.Image fetchByPrimaryKey(long imageId)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(imageId);
 	}
 

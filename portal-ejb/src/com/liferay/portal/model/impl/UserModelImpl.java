@@ -68,6 +68,7 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "graceLoginCount", new Integer(Types.INTEGER) },
 			{ "screenName", new Integer(Types.VARCHAR) },
 			{ "emailAddress", new Integer(Types.VARCHAR) },
+			{ "portraitId", new Integer(Types.BIGINT) },
 			{ "languageId", new Integer(Types.VARCHAR) },
 			{ "timeZoneId", new Integer(Types.VARCHAR) },
 			{ "greeting", new Integer(Types.VARCHAR) },
@@ -316,6 +317,16 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getPortraitId() {
+		return _portraitId;
+	}
+
+	public void setPortraitId(long portraitId) {
+		if (portraitId != _portraitId) {
+			_portraitId = portraitId;
+		}
+	}
+
 	public String getLanguageId() {
 		return GetterUtil.getString(_languageId);
 	}
@@ -540,6 +551,7 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setGraceLoginCount(getGraceLoginCount());
 		clone.setScreenName(getScreenName());
 		clone.setEmailAddress(getEmailAddress());
+		clone.setPortraitId(getPortraitId());
 		clone.setLanguageId(getLanguageId());
 		clone.setTimeZoneId(getTimeZoneId());
 		clone.setGreeting(getGreeting());
@@ -619,6 +631,7 @@ public class UserModelImpl extends BaseModelImpl {
 	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;
+	private long _portraitId;
 	private String _languageId;
 	private String _timeZoneId;
 	private String _greeting;

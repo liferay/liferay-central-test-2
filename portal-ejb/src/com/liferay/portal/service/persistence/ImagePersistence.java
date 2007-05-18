@@ -51,7 +51,7 @@ import java.util.List;
  *
  */
 public class ImagePersistence extends BasePersistence {
-	public Image create(String imageId) {
+	public Image create(long imageId) {
 		Image image = new ImageImpl();
 		image.setNew(true);
 		image.setPrimaryKey(imageId);
@@ -59,14 +59,14 @@ public class ImagePersistence extends BasePersistence {
 		return image;
 	}
 
-	public Image remove(String imageId)
+	public Image remove(long imageId)
 		throws NoSuchImageException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Image image = (Image)session.get(ImageImpl.class, imageId);
+			Image image = (Image)session.get(ImageImpl.class, new Long(imageId));
 
 			if (image == null) {
 				if (_log.isWarnEnabled()) {
@@ -144,7 +144,7 @@ public class ImagePersistence extends BasePersistence {
 		}
 	}
 
-	public Image findByPrimaryKey(String imageId)
+	public Image findByPrimaryKey(long imageId)
 		throws NoSuchImageException, SystemException {
 		Image image = fetchByPrimaryKey(imageId);
 
@@ -160,13 +160,13 @@ public class ImagePersistence extends BasePersistence {
 		return image;
 	}
 
-	public Image fetchByPrimaryKey(String imageId) throws SystemException {
+	public Image fetchByPrimaryKey(long imageId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Image)session.get(ImageImpl.class, imageId);
+			return (Image)session.get(ImageImpl.class, new Long(imageId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);

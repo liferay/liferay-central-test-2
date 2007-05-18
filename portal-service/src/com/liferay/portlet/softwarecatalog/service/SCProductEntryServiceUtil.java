@@ -54,15 +54,14 @@ public class SCProductEntryServiceUtil {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 
 		return scProductEntryService.addProductEntry(plid, name, type,
 			shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId, licenseIds, images, addCommunityPermissions,
+			repoArtifactId, licenseIds, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -71,7 +70,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.String[] communityPermissions,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -79,8 +78,7 @@ public class SCProductEntryServiceUtil {
 
 		return scProductEntryService.addProductEntry(plid, name, type,
 			shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId, licenseIds, images, communityPermissions,
-			guestPermissions);
+			repoArtifactId, licenseIds, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProductEntry(long productEntryId)
@@ -103,13 +101,13 @@ public class SCProductEntryServiceUtil {
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
 
 		return scProductEntryService.updateProductEntry(productEntryId, name,
 			type, shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId, licenseIds, images);
+			repoArtifactId, licenseIds);
 	}
 }

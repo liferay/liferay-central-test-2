@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface ImageModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getImageId();
+	public long getImageId();
 
-	public void setImageId(String imageId);
+	public void setImageId(long imageId);
 
 	public Date getModifiedDate();
 
@@ -66,4 +66,16 @@ public interface ImageModel extends BaseModel {
 	public String getType();
 
 	public void setType(String type);
+
+	public int getHeight();
+
+	public void setHeight(int height);
+
+	public int getWidth();
+
+	public void setWidth(int width);
+
+	public int getSize();
+
+	public void setSize(int size);
 }

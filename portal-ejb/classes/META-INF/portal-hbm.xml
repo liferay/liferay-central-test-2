@@ -64,6 +64,7 @@
 		<property name="portalURL" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="homeURL" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="mx" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="logoId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ContactImpl" table="Contact_">
 		<cache usage="read-write" />
@@ -144,12 +145,15 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.ImageImpl" table="Image">
 		<cache usage="read-write" />
-		<id name="imageId" type="java.lang.String">
+		<id name="imageId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="modifiedDate" />
 		<property name="text" column="text_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutImpl" table="Layout">
 		<cache usage="read-write" />
@@ -168,6 +172,7 @@
 		<property name="hidden" column="hidden_" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="friendlyURL" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="iconImage" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="iconImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="themeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="colorSchemeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="wapThemeId" type="com.liferay.util.dao.hibernate.StringType" />
@@ -185,6 +190,7 @@
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="logo" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="logoId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="themeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="colorSchemeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="wapThemeId" type="com.liferay.util.dao.hibernate.StringType" />
@@ -443,6 +449,7 @@
 		<property name="graceLoginCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="screenName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="emailAddress" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="portraitId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="languageId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="timeZoneId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="greeting" type="com.liferay.util.dao.hibernate.StringType" />
@@ -707,9 +714,8 @@
 		<property name="modifiedDate" />
 		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="smallImageId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="largeImageId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalArticleImpl" table="JournalArticle">
 		<cache usage="read-write" />
@@ -737,6 +743,18 @@
 		<property name="expired" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="expirationDate" />
 		<property name="reviewDate" />
+	</class>
+	<class name="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" table="JournalArticleImage">
+		<cache usage="read-write" />
+		<id name="articleImageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="articleId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
+		<property name="elName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="languageId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="tempImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalContentSearchImpl" table="JournalContentSearch">
 		<cache usage="read-write" />
@@ -782,6 +800,7 @@
 		<property name="xsl" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="langType" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="smallImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="smallImageURL" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBBanImpl" table="MBBan">
@@ -1012,10 +1031,13 @@
 		<property name="featured" column="featured_" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="sale" column="sale_" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="smallImage" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="smallImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="smallImageURL" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="mediumImage" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="mediumImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="mediumImageURL" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="largeImage" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="largeImageId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="largeImageURL" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl" table="ShoppingItemField">

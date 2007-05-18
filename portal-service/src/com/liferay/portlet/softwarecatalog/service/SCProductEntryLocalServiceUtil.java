@@ -71,15 +71,14 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.addProductEntry(userId, plid, name,
 			type, shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId, licenseIds, images, addCommunityPermissions,
+			repoArtifactId, licenseIds, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -88,7 +87,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.String[] communityPermissions,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -96,8 +95,7 @@ public class SCProductEntryLocalServiceUtil {
 
 		return scProductEntryLocalService.addProductEntry(userId, plid, name,
 			type, shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId, licenseIds, images, communityPermissions,
-			guestPermissions);
+			repoArtifactId, licenseIds, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
@@ -105,7 +103,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.Map images, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -115,7 +113,7 @@ public class SCProductEntryLocalServiceUtil {
 
 		return scProductEntryLocalService.addProductEntry(userId, plid, name,
 			type, shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId, licenseIds, images, addCommunityPermissions,
+			repoArtifactId, licenseIds, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
@@ -183,17 +181,6 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
-	public static java.lang.String getRepositoryXML(long groupId,
-		java.lang.String baseImageURL, java.util.Date oldestDate,
-		int maxNumOfVersions, java.util.Properties repoSettings)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getRepositoryXML(groupId,
-			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
-	}
-
 	public static java.util.List getProductEntries(long groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
@@ -223,14 +210,15 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.getProductEntriesCount(groupId, userId);
 	}
 
-	public static java.lang.String getProductEntryImageId(long productEntryId,
-		java.lang.String imageName)
+	public static java.lang.String getRepositoryXML(long groupId,
+		java.lang.String baseImageURL, java.util.Date oldestDate,
+		int maxNumOfVersions, java.util.Properties repoSettings)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.getProductEntryImageId(productEntryId,
-			imageName);
+		return scProductEntryLocalService.getRepositoryXML(groupId,
+			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
@@ -252,13 +240,13 @@ public class SCProductEntryLocalServiceUtil {
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.updateProductEntry(productEntryId,
 			name, type, shortDescription, longDescription, pageURL,
-			repoGroupId, repoArtifactId, licenseIds, images);
+			repoGroupId, repoArtifactId, licenseIds);
 	}
 }

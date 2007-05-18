@@ -53,6 +53,7 @@ public class LayoutSetSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setPrivateLayout(model.getPrivateLayout());
 		soapModel.setLogo(model.getLogo());
+		soapModel.setLogoId(model.getLogoId());
 		soapModel.setThemeId(model.getThemeId());
 		soapModel.setColorSchemeId(model.getColorSchemeId());
 		soapModel.setWapThemeId(model.getWapThemeId());
@@ -142,6 +143,14 @@ public class LayoutSetSoap implements Serializable {
 		_logo = logo;
 	}
 
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	public void setLogoId(long logoId) {
+		_logoId = logoId;
+	}
+
 	public String getThemeId() {
 		return _themeId;
 	}
@@ -204,6 +213,7 @@ public class LayoutSetSoap implements Serializable {
 	private long _userId;
 	private boolean _privateLayout;
 	private boolean _logo;
+	private long _logoId;
 	private String _themeId;
 	private String _colorSchemeId;
 	private String _wapThemeId;

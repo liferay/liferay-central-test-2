@@ -195,7 +195,6 @@ public class GlobalStartupAction extends SimpleAction {
 		// Other required events
 
 		runEvent(FixOracleAction.class.getName(), ids);
-		runEvent(FixImageAction.class.getName(), ids);
 		runEvent(FixCounterAction.class.getName(), ids);
 	}
 

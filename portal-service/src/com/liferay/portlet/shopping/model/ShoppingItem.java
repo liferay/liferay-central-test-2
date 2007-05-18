@@ -57,12 +57,6 @@ public interface ShoppingItem extends ShoppingItemModel {
 	public void setFieldsQuantitiesArray(
 		java.lang.String[] fieldsQuantitiesArray);
 
-	public java.lang.String getSmallImageId();
-
-	public java.lang.String getMediumImageId();
-
-	public java.lang.String getLargeImageId();
-
 	public int compareTo(java.lang.Object obj);
 
 	public java.util.List getItemPrices()

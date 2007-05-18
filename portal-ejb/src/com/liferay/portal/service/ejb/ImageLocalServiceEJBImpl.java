@@ -65,19 +65,12 @@ public class ImageLocalServiceEJBImpl implements ImageLocalService, SessionBean 
 			begin, end);
 	}
 
-	public void deleteImage(java.lang.String imageId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+	public void deleteImage(long imageId)
+		throws com.liferay.portal.SystemException {
 		ImageLocalServiceFactory.getTxImpl().deleteImage(imageId);
 	}
 
-	public void deleteImages(java.lang.String imageId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		ImageLocalServiceFactory.getTxImpl().deleteImages(imageId);
-	}
-
-	public com.liferay.portal.model.Image getImage(java.lang.String imageId)
+	public com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ImageLocalServiceFactory.getTxImpl().getImage(imageId);
@@ -92,15 +85,11 @@ public class ImageLocalServiceEJBImpl implements ImageLocalService, SessionBean 
 		return ImageLocalServiceFactory.getTxImpl().getImages(begin, end);
 	}
 
-	public java.util.List search(java.lang.String imageId)
+	public com.liferay.portal.model.Image updateImage(long imageId,
+		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException {
-		return ImageLocalServiceFactory.getTxImpl().search(imageId);
-	}
-
-	public com.liferay.portal.model.Image updateImage(
-		java.lang.String imageId, byte[] bytes)
-		throws com.liferay.portal.SystemException {
-		return ImageLocalServiceFactory.getTxImpl().updateImage(imageId, bytes);
+		return ImageLocalServiceFactory.getTxImpl().updateImage(imageId, bytes,
+			type, height, width, size);
 	}
 
 	public void ejbCreate() throws CreateException {

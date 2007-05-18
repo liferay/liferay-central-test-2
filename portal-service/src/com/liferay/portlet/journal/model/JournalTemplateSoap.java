@@ -63,6 +63,7 @@ public class JournalTemplateSoap implements Serializable {
 		soapModel.setXsl(model.getXsl());
 		soapModel.setLangType(model.getLangType());
 		soapModel.setSmallImage(model.getSmallImage());
+		soapModel.setSmallImageId(model.getSmallImageId());
 		soapModel.setSmallImageURL(model.getSmallImageURL());
 
 		return soapModel;
@@ -200,6 +201,14 @@ public class JournalTemplateSoap implements Serializable {
 		_smallImage = smallImage;
 	}
 
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
 	public String getSmallImageURL() {
 		return _smallImageURL;
 	}
@@ -221,5 +230,6 @@ public class JournalTemplateSoap implements Serializable {
 	private String _xsl;
 	private String _langType;
 	private boolean _smallImage;
+	private long _smallImageId;
 	private String _smallImageURL;
 }

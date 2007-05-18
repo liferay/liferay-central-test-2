@@ -107,6 +107,10 @@ public interface JournalTemplateModel extends BaseModel {
 
 	public void setSmallImage(boolean smallImage);
 
+	public long getSmallImageId();
+
+	public void setSmallImageId(long smallImageId);
+
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);

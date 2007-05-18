@@ -125,7 +125,8 @@ create table Company (
 	key_ TEXT null,
 	portalURL VARCHAR(75) null,
 	homeURL VARCHAR(75) null,
-	mx VARCHAR(75) null
+	mx VARCHAR(75) null,
+	logoId LONG
 );
 
 create table Contact_ (
@@ -322,16 +323,18 @@ create table IGImage (
 	modifiedDate DATE null,
 	folderId LONG,
 	description STRING null,
-	height INTEGER,
-	width INTEGER,
-	size_ INTEGER
+	smallImageId LONG,
+	largeImageId LONG
 );
 
 create table Image (
-	imageId VARCHAR(200) not null primary key,
+	imageId LONG primary key,
 	modifiedDate DATE null,
 	text_ TEXT null,
-	type_ VARCHAR(75) null
+	type_ VARCHAR(75) null,
+	height INTEGER,
+	width INTEGER,
+	size_ INTEGER
 );
 
 create table JournalArticle (
@@ -358,6 +361,16 @@ create table JournalArticle (
 	expirationDate DATE null,
 	reviewDate DATE null,
 	primary key (companyId, groupId, articleId, version)
+);
+
+create table JournalArticleImage (
+	articleImageId LONG primary key,
+	groupId LONG,
+	articleId VARCHAR(75) null,
+	version DOUBLE,
+	elName VARCHAR(75) null,
+	languageId VARCHAR(75) null,
+	tempImage BOOLEAN
 );
 
 create table JournalContentSearch (
@@ -398,6 +411,7 @@ create table JournalTemplate (
 	xsl TEXT null,
 	langType VARCHAR(75) null,
 	smallImage BOOLEAN,
+	smallImageId LONG,
 	smallImageURL VARCHAR(75) null,
 	primary key (companyId, groupId, templateId)
 );
@@ -416,6 +430,7 @@ create table Layout (
 	hidden_ BOOLEAN,
 	friendlyURL VARCHAR(75) null,
 	iconImage BOOLEAN,
+	iconImageId LONG,
 	themeId VARCHAR(75) null,
 	colorSchemeId VARCHAR(75) null,
 	wapThemeId VARCHAR(75) null,
@@ -431,6 +446,7 @@ create table LayoutSet (
 	userId LONG,
 	privateLayout BOOLEAN,
 	logo BOOLEAN,
+	logoId LONG,
 	themeId VARCHAR(75) null,
 	colorSchemeId VARCHAR(75) null,
 	wapThemeId VARCHAR(75) null,
@@ -894,10 +910,13 @@ create table ShoppingItem (
 	featured_ BOOLEAN,
 	sale_ BOOLEAN,
 	smallImage BOOLEAN,
+	smallImageId LONG,
 	smallImageURL VARCHAR(75) null,
 	mediumImage BOOLEAN,
+	mediumImageId LONG,
 	mediumImageURL VARCHAR(75) null,
 	largeImage BOOLEAN,
+	largeImageId LONG,
 	largeImageURL VARCHAR(75) null
 );
 
@@ -1070,6 +1089,7 @@ create table User_ (
 	graceLoginCount INTEGER,
 	screenName VARCHAR(75) null,
 	emailAddress VARCHAR(75) null,
+	portraitId LONG,
 	languageId VARCHAR(75) null,
 	timeZoneId VARCHAR(75) null,
 	greeting VARCHAR(75) null,

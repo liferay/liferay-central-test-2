@@ -48,5 +48,4 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalTemplate extends JournalTemplateModel {
-	public java.lang.String getSmallImageId();
 }

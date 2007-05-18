@@ -44,9 +44,4 @@ public class JournalTemplateImpl
 	public JournalTemplateImpl() {
 	}
 
-	public String getSmallImageId() {
-		return getCompanyId() + ".journal.template." + getGroupId() + "." +
-			getTemplateId() + ".small";
-	}
-
 }

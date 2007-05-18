@@ -77,10 +77,10 @@ public class EditProductVersionAction extends PortletAction {
 
 				setForward(req, "portlet.software_catalog.error");
 			}
-			else if (e instanceof ProductVersionNameException ||
-					 e instanceof ProductVersionChangeLogException ||
+			else if (e instanceof ProductVersionChangeLogException ||
 					 e instanceof ProductVersionDownloadURLException ||
-					 e instanceof ProductVersionFrameworkVersionException) {
+					 e instanceof ProductVersionFrameworkVersionException ||
+					 e instanceof ProductVersionNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 			}
@@ -122,7 +122,6 @@ public class EditProductVersionAction extends PortletAction {
 	}
 
 	protected void updateProductVersion(ActionRequest req) throws Exception {
-
 		long productVersionId = ParamUtil.getLong(req, "productVersionId");
 
 		long productEntryId = ParamUtil.getLong(req, "productEntryId");

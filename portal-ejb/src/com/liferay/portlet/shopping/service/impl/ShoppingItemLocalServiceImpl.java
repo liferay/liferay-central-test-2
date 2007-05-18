@@ -346,10 +346,13 @@ public class ShoppingItemLocalServiceImpl
 		item.setFeatured(featured);
 		item.setSale((sale != null) ? sale.booleanValue() : false);
 		item.setSmallImage(smallImage);
+		item.setSmallImageId(CounterLocalServiceUtil.increment());
 		item.setSmallImageURL(smallImageURL);
 		item.setMediumImage(mediumImage);
+		item.setMediumImageId(CounterLocalServiceUtil.increment());
 		item.setMediumImageURL(mediumImageURL);
 		item.setLargeImage(largeImage);
+		item.setLargeImageId(CounterLocalServiceUtil.increment());
 		item.setLargeImageURL(largeImageURL);
 
 		ShoppingItemUtil.update(item);
@@ -479,9 +482,9 @@ public class ShoppingItemLocalServiceImpl
 
 		// Images
 
-		ImageLocalUtil.remove(item.getSmallImageId());
-		ImageLocalUtil.remove(item.getMediumImageId());
-		ImageLocalUtil.remove(item.getLargeImageId());
+		ImageLocalUtil.deleteImage(item.getSmallImageId());
+		ImageLocalUtil.deleteImage(item.getMediumImageId());
+		ImageLocalUtil.deleteImage(item.getLargeImageId());
 
 		// Resources
 
@@ -807,42 +810,43 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	protected void saveImages(
-		boolean smallImage, String smallImageKey, File smallFile,
-		byte[] smallBytes, boolean mediumImage, String mediumImageKey,
-		File mediumFile, byte[] mediumBytes, boolean largeImage,
-		String largeImageKey, File largeFile, byte[] largeBytes) {
+			boolean smallImage, long smallImageId, File smallFile,
+			byte[] smallBytes, boolean mediumImage, long mediumImageId,
+			File mediumFile, byte[] mediumBytes, boolean largeImage,
+			long largeImageId, File largeFile, byte[] largeBytes)
+		throws SystemException {
 
 		// Small image
 
 		if (smallImage) {
-			if (smallFile != null && smallBytes != null) {
-				ImageLocalUtil.put(smallImageKey, smallBytes);
+			if ((smallFile != null) && (smallBytes != null)) {
+				ImageLocalUtil.updateImage(smallImageId, smallBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.remove(smallImageKey);
+			ImageLocalUtil.deleteImage(smallImageId);
 		}
 
 		// Medium image
 
 		if (mediumImage) {
-			if (mediumFile != null && mediumBytes != null) {
-				ImageLocalUtil.put(mediumImageKey, mediumBytes);
+			if ((mediumFile != null) && (mediumBytes != null)) {
+				ImageLocalUtil.updateImage(mediumImageId, mediumBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.remove(mediumImageKey);
+			ImageLocalUtil.deleteImage(mediumImageId);
 		}
 
 		// Large image
 
 		if (largeImage) {
-			if (largeFile != null && largeBytes != null) {
-				ImageLocalUtil.put(largeImageKey, largeBytes);
+			if ((largeFile != null) && (largeBytes != null)) {
+				ImageLocalUtil.updateImage(largeImageId, largeBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.remove(largeImageKey);
+			ImageLocalUtil.deleteImage(largeImageId);
 		}
 	}
 

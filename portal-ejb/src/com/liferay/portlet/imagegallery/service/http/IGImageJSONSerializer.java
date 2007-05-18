@@ -86,9 +86,8 @@ public class IGImageJSONSerializer {
 			jsonObj.put("description", description.toString());
 		}
 
-		jsonObj.put("height", model.getHeight());
-		jsonObj.put("width", model.getWidth());
-		jsonObj.put("size", model.getSize());
+		jsonObj.put("smallImageId", model.getSmallImageId());
+		jsonObj.put("largeImageId", model.getLargeImageId());
 
 		return jsonObj;
 	}

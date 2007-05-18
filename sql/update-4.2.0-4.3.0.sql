@@ -25,6 +25,7 @@ create table ClassName_ (
 
 alter table Company add accountId LONG;
 alter table Company add webId VARCHAR(75) null;
+alter table Company add logoId LONG;
 update Company set webId = companyId;
 
 alter_column_type Contact_ prefixId INTEGER;
@@ -72,11 +73,27 @@ alter_column_type Groups_UserGroups userGroupId LONG;
 
 alter_column_type IGFolder groupId LONG;
 
+alter table IGImage add smallImageId LONG;
+alter table IGImage add largeImageId LONG;
+alter table IGImage drop height;
+alter table IGImage drop width;
+alter table IGImage drop size_;
+
 alter table Image add height INTEGER;
 alter table Image add width INTEGER;
 alter table Image add size_ INTEGER;
 
 alter_column_type JournalArticle groupId LONG;
+
+create table JournalArticleImage (
+	articleImageId LONG primary key,
+	groupId LONG,
+	articleId VARCHAR(75) null,
+	version DOUBLE,
+	elName VARCHAR(75) null,
+	languageId VARCHAR(75) null,
+	tempImage BOOLEAN
+);
 
 drop table JournalContentSearch;
 create table JournalContentSearch (
@@ -92,11 +109,13 @@ create table JournalContentSearch (
 alter_column_type JournalStructure groupId LONG;
 
 alter_column_type JournalTemplate groupId LONG;
+alter table JournalTemplate add smallImageId LONG;
 
 alter table Layout add plid LONG;
 alter table Layout add groupId LONG;
 alter table Layout add privateLayout BOOLEAN;
 alter table Layout add iconImage BOOLEAN;
+alter table Layout add iconImageId LONG;
 alter table Layout add wapThemeId VARCHAR(75) null;
 alter table Layout add wapColorSchemeId VARCHAR(75) null;
 alter table Layout add css VARCHAR(75) null;
@@ -104,6 +123,7 @@ alter table Layout add css VARCHAR(75) null;
 alter table LayoutSet add layoutSetId LONG;
 alter_column_type LayoutSet groupId LONG;
 alter table LayoutSet add logo BOOLEAN;
+alter table LayoutSet add logoId LONG;
 alter table LayoutSet add wapThemeId VARCHAR(75) null;
 alter table LayoutSet add wapColorSchemeId VARCHAR(75) null;
 alter table LayoutSet add css VARCHAR(75) null;
@@ -365,6 +385,10 @@ alter_column_type ShoppingCategory groupId LONG;
 
 alter_column_type ShoppingCoupon groupId LONG;
 
+alter table ShoppingItem add smallImageId LONG;
+alter table ShoppingItem add mediumImageId LONG;
+alter table ShoppingItem add largeImageId LONG;
+
 alter_column_type ShoppingOrder groupId LONG;
 
 alter_column_type Subscription subscriptionId LONG;
@@ -427,9 +451,10 @@ create table TagsSource (
 
 alter table User_ add defaultUser BOOLEAN;
 alter_column_type User_ contactId LONG;
-alter table User_ add screenName VARCHAR(75) null;
 alter table User_ add passwordModifiedDate DATE null;
 alter table User_ add graceLoginCount INTEGER;
+alter table User_ add screenName VARCHAR(75) null;
+alter table User_ add portraitId LONG;
 alter table User_ add lastFailedLoginDate DATE null;
 alter table User_ add lockout BOOLEAN;
 alter table User_ add lockoutDate DATE null;

@@ -46,7 +46,6 @@ public class PortalHttpTest extends BaseHttpTest {
 			boolean autoPassword = true;
 			String password1 = null;
 			String password2 = null;
-			boolean passwordReset = false;
 			boolean autoScreenName = true;
 			String screenName = "";
 			String emailAddress = "UserServiceHttpTest@liferay.com";

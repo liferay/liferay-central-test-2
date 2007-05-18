@@ -36,7 +36,7 @@
 		IGImage image = (IGImage)images.get(i);
 	%>
 
-		<portlet:namespace />imgArray[<%= i %>] = "<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1";
+		<portlet:namespace />imgArray[<%= i %>] = "<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>";
 
 	<%
 	}
@@ -125,7 +125,7 @@
 			IGImage image = (IGImage)images.get(0);
 		%>
 
-			<img border="0" name="<portlet:namespace />slideShow" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>&large=1" />
+			<img border="0" name="<portlet:namespace />slideShow" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>" />
 
 		<%
 		}

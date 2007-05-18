@@ -80,18 +80,6 @@ public class ShoppingItemImpl
 		super.setFieldsQuantities(StringUtil.merge(fieldsQuantitiesArray));
 	}
 
-	public String getSmallImageId() {
-		return getCompanyId() + ".shopping.item." + getItemId() + ".small";
-	}
-
-	public String getMediumImageId() {
-		return getCompanyId() + ".shopping.item." + getItemId() + ".medium";
-	}
-
-	public String getLargeImageId() {
-		return getCompanyId() + ".shopping.item." + getItemId() + ".large";
-	}
-
 	public int compareTo(Object obj) {
 		return new ItemNameComparator(true).compare(this, obj);
 	}

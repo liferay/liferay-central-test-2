@@ -209,8 +209,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		else {
 			sm.append(themeDisplay.getPathImage());
 			sm.append("/shopping/item?img_id=");
-			sm.append(item.getItemId());
-			sm.append("&small=1");
+			sm.append(item.getSmallImageId());
 		}
 
 		sm.append("\">");

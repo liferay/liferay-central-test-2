@@ -54,6 +54,7 @@ public class CompanySoap implements Serializable {
 		soapModel.setPortalURL(model.getPortalURL());
 		soapModel.setHomeURL(model.getHomeURL());
 		soapModel.setMx(model.getMx());
+		soapModel.setLogoId(model.getLogoId());
 
 		return soapModel;
 	}
@@ -136,6 +137,14 @@ public class CompanySoap implements Serializable {
 		_mx = mx;
 	}
 
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	public void setLogoId(long logoId) {
+		_logoId = logoId;
+	}
+
 	private long _companyId;
 	private long _accountId;
 	private String _webId;
@@ -143,4 +152,5 @@ public class CompanySoap implements Serializable {
 	private String _portalURL;
 	private String _homeURL;
 	private String _mx;
+	private long _logoId;
 }

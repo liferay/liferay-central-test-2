@@ -34,6 +34,7 @@ import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -53,6 +54,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
@@ -124,470 +126,7 @@ public class ServicePreAction extends Action {
 		}
 
 		try {
-			HttpSession ses = req.getSession();
-
-			// Company
-
-			Company company = PortalUtil.getCompany(req);
-
-			long companyId = company.getCompanyId();
-
-			// Paths
-
-			String contextPath = PrefsPropsUtil.getString(
-				companyId, PropsUtil.PORTAL_CTX);
-
-			if (contextPath.equals(StringPool.SLASH)) {
-				contextPath = StringPool.BLANK;
-			}
-
-			String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
-			String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
-			String friendlyURLPrivateGroupPath = (String)req.getAttribute(
-				WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH);
-			String friendlyURLPrivateUserPath = (String)req.getAttribute(
-				WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
-			String friendlyURLPublicPath =
-				(String)req.getAttribute(WebKeys.FRIENDLY_URL_PUBLIC_PATH);
-			String imagePath = (String)req.getAttribute(WebKeys.IMAGE_PATH);
-
-			// Company logo
-
-			String companyLogo =
-				imagePath + "/company_logo?img_id=" + companyId;
-
-			String realCompanyLogo = companyLogo;
-
-			// User
-
-			User user = PortalUtil.getUser(req);
-
-			boolean signedIn = false;
-
-			if (user == null) {
-				user = company.getDefaultUser();
-			}
-			else if (!user.isDefaultUser()) {
-				signedIn = true;
-			}
-
-			User realUser = user;
-
-			Long realUserId = (Long)ses.getAttribute(WebKeys.USER_ID);
-
-			if (realUserId != null) {
-				if (user.getUserId() != realUserId.longValue()) {
-					realUser = UserLocalServiceUtil.getUserById(
-						realUserId.longValue());
-				}
-			}
-
-			String doAsUserId = ParamUtil.getString(req, "doAsUserId");
-
-			// Permission checker
-
-			PermissionCheckerImpl permissionChecker =
-				PermissionCheckerFactory.create(user, signedIn, true);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-			// Locale
-
-			Locale locale = (Locale)ses.getAttribute(Globals.LOCALE_KEY);
-
-			if (locale == null) {
-				if (signedIn) {
-					locale = user.getLocale();
-				}
-				else {
-
-					// User previously set their preferred language
-
-					String languageId = CookieUtil.get(
-						req.getCookies(), CookieKeys.GUEST_LANGUAGE_ID);
-
-					if (Validator.isNotNull(languageId)) {
-						locale = LocaleUtil.fromLanguageId(languageId);
-					}
-
-					// Get locale from the request
-
-					if ((locale == null) &&
-						GetterUtil.getBoolean(
-							PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST))) {
-
-						locale = req.getLocale();
-					}
-
-					// Get locale from the default user
-
-					if (locale == null) {
-						locale = user.getLocale();
-					}
-
-					if (Validator.isNull(locale.getCountry())) {
-
-						// Locales must contain the country code
-
-						locale = LanguageUtil.getLocale(locale.getLanguage());
-					}
-
-					List availableLocales = ListUtil.fromArray(
-						LanguageUtil.getAvailableLocales());
-
-					if (!availableLocales.contains(locale)) {
-						locale = user.getLocale();
-					}
-				}
-
-				ses.setAttribute(Globals.LOCALE_KEY, locale);
-
-				LanguageUtil.updateCookie(res, locale);
-			}
-
-			// Cookie support
-
-			CookieKeys.addSupportCookie(res);
-
-			// Time zone
-
-			TimeZone timeZone = user.getTimeZone();
-
-			if (timeZone == null) {
-				timeZone = company.getTimeZone();
-			}
-
-			// Layouts
-
-			if (signedIn) {
-				boolean layoutsRequired = user.isLayoutsRequired();
-
-				if (layoutsRequired) {
-					addDefaultLayouts(user);
-				}
-				else {
-					deleteDefaultLayouts(user);
-				}
-			}
-
-			Layout layout = null;
-			List layouts = null;
-
-			long plid = ParamUtil.getLong(req, "p_l_id");
-
-			if (plid > 0) {
-				try {
-					layout = LayoutLocalServiceUtil.getLayout(plid);
-
-					if (!isViewableCommunity(
-							user, layout.getGroupId(),
-							layout.isPrivateLayout())) {
-
-						layout = null;
-					}
-					else {
-						layouts = LayoutLocalServiceUtil.getLayouts(
-							layout.getGroupId(), layout.isPrivateLayout(),
-							LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
-					}
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
-			}
-
-			if (layout == null) {
-				Object[] defaultLayout = getDefaultLayout(req, user, signedIn);
-
-				layout = (Layout)defaultLayout[0];
-				layouts = (List)defaultLayout[1];
-
-				req.setAttribute(WebKeys.LAYOUT_DEFAULT, Boolean.TRUE);
-			}
-
-			Object[] viewableLayouts = getViewableLayouts(
-				layout, layouts, permissionChecker, req);
-
-			String layoutSetLogo = null;
-
-			layout = (Layout)viewableLayouts[0];
-			layouts = (List)viewableLayouts[1];
-
-			if (layout != null) {
-				if (company.isCommunityLogo()) {
-					LayoutSet layoutSet = layout.getLayoutSet();
-
-					if (layoutSet.isLogo()) {
-						layoutSetLogo =
-							imagePath + "/layout_set_logo?img_id=" +
-								layoutSet.getOwnerId();
-
-						companyLogo = layoutSetLogo;
-					}
-				}
-
-				plid = layout.getPlid();
-			}
-
-			if ((layout != null) && layout.isShared()) {
-
-				// Updates to shared layouts are not reflected until the next
-				// time the user logs in because group layouts are cached in the
-				// session
-
-				layout = (Layout)((LayoutImpl)layout).clone();
-
-				LayoutClone layoutClone = LayoutCloneFactory.getInstance();
-
-				if (layoutClone != null) {
-					String typeSettings =
-						layoutClone.get(req, layout.getPlid());
-
-					if (typeSettings != null) {
-						Properties props = new NullSafeProperties();
-
-						PropertiesUtil.load(props, typeSettings);
-
-						String stateMax = props.getProperty(
-							LayoutTypePortletImpl.STATE_MAX);
-						String stateMin = props.getProperty(
-							LayoutTypePortletImpl.STATE_MIN);
-
-						LayoutTypePortlet layoutTypePortlet =
-							(LayoutTypePortlet)layout.getLayoutType();
-
-						layoutTypePortlet.setStateMax(stateMax);
-						layoutTypePortlet.setStateMin(stateMin);
-					}
-				}
-			}
-
-			LayoutTypePortlet layoutTypePortlet = null;
-
-			if (layout != null) {
-				req.setAttribute(WebKeys.LAYOUT, layout);
-				req.setAttribute(WebKeys.LAYOUTS, layouts);
-
-				layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
-
-				if (layout.isPrivateLayout()) {
-					permissionChecker.setCheckGuest(false);
-				}
-			}
-
-			long portletGroupId = PortalUtil.getPortletGroupId(layout);
-
-			// Theme and color scheme
-
-			Theme theme = null;
-			ColorScheme colorScheme = null;
-
-			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
-
-			if (layout != null) {
-				if (wapTheme) {
-					theme = layout.getWapTheme();
-					colorScheme = layout.getWapColorScheme();
-				}
-				else {
-					theme = layout.getTheme();
-					colorScheme = layout.getColorScheme();
-				}
-			}
-			else {
-				String themeId = null;
-				String colorSchemeId = null;
-
-				if (wapTheme) {
-					themeId = ThemeImpl.getDefaultWapThemeId();
-					colorSchemeId =
-						ColorSchemeImpl.getDefaultWapColorSchemeId();
-				}
-				else {
-					themeId = ThemeImpl.getDefaultRegularThemeId();
-					colorSchemeId =
-						ColorSchemeImpl.getDefaultRegularColorSchemeId();
-				}
-
-				theme = ThemeLocalUtil.getTheme(companyId, themeId, wapTheme);
-				colorScheme = ThemeLocalUtil.getColorScheme(
-					companyId, theme.getThemeId(), colorSchemeId, wapTheme);
-			}
-
-			req.setAttribute(WebKeys.THEME, theme);
-			req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
-
-			// Theme display
-
-			String protocol = Http.getProtocol(req) + "://";
-
-			ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
-
-			themeDisplay.setCompany(company);
-			themeDisplay.setCompanyLogo(companyLogo);
-			themeDisplay.setRealCompanyLogo(realCompanyLogo);
-			themeDisplay.setUser(user);
-			themeDisplay.setRealUser(realUser);
-			themeDisplay.setDoAsUserId(doAsUserId);
-			themeDisplay.setLayoutSetLogo(layoutSetLogo);
-			themeDisplay.setLayout(layout);
-			themeDisplay.setLayouts(layouts);
-			themeDisplay.setPlid(plid);
-			themeDisplay.setLayoutTypePortlet(layoutTypePortlet);
-			themeDisplay.setPortletGroupId(portletGroupId);
-			themeDisplay.setSignedIn(signedIn);
-			themeDisplay.setPermissionChecker(permissionChecker);
-			themeDisplay.setLocale(locale);
-			themeDisplay.setTimeZone(timeZone);
-			themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
-			themeDisplay.setServerPort(req.getServerPort());
-			themeDisplay.setSecure(req.isSecure());
-			themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
-			themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
-			themeDisplay.setPathApplet(contextPath + "/applets");
-			themeDisplay.setPathCms(rootPath + "/cms");
-			themeDisplay.setPathContext(contextPath);
-			themeDisplay.setPathFlash(contextPath + "/flash");
-			themeDisplay.setPathFriendlyURLPrivateGroup(
-				friendlyURLPrivateGroupPath);
-			themeDisplay.setPathFriendlyURLPrivateUser(
-				friendlyURLPrivateUserPath);
-			themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
-			themeDisplay.setPathImage(imagePath);
-			themeDisplay.setPathJavaScript(contextPath + "/html/js");
-			themeDisplay.setPathMain(mainPath);
-			themeDisplay.setPathRoot(rootPath);
-			themeDisplay.setPathSound(contextPath + "/html/sound");
-
-			// URLs
-
-			themeDisplay.setShowAddContentIcon(false);
-			themeDisplay.setShowHomeIcon(true);
-			themeDisplay.setShowMyAccountIcon(signedIn);
-			themeDisplay.setShowPageSettingsIcon(false);
-			themeDisplay.setShowPortalIcon(true);
-			themeDisplay.setShowSignInIcon(!signedIn);
-			themeDisplay.setShowSignOutIcon(signedIn);
-
-			PortletURL createAccountURL = new PortletURLImpl(
-				req, PortletKeys.MY_ACCOUNT, plid, true);
-
-			createAccountURL.setWindowState(WindowState.MAXIMIZED);
-			createAccountURL.setPortletMode(PortletMode.VIEW);
-
-			createAccountURL.setParameter(
-				"struts_action", "/my_account/create_account");
-
-			themeDisplay.setURLCreateAccount(createAccountURL);
-
-			themeDisplay.setURLHome(protocol + company.getHomeURL());
-
-			if (layout != null) {
-				if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
-					boolean freeformLayout =
-						layoutTypePortlet.getLayoutTemplateId().equals(
-							"freeform");
-
-					themeDisplay.setFreeformLayout(freeformLayout);
-
-					boolean hasUpdateLayoutPermission =
-						LayoutPermission.contains(
-							permissionChecker, layout, ActionKeys.UPDATE);
-
-					if (hasUpdateLayoutPermission) {
-						themeDisplay.setShowAddContentIcon(true);
-						themeDisplay.setShowLayoutTemplatesIcon(true);
-
-						themeDisplay.setURLAddContent(
-							"LayoutConfiguration.toggle('" + plid + "', '" +
-								PortletKeys.LAYOUT_CONFIGURATION + "', '" +
-									doAsUserId + "');");
-
-						themeDisplay.setURLLayoutTemplates(
-							"showLayoutTemplates();");
-					}
-				}
-
-				boolean hasManageLayoutsPermission =
-					GroupPermission.contains(
-						permissionChecker, portletGroupId,
-						ActionKeys.MANAGE_LAYOUTS);
-
-				if (hasManageLayoutsPermission) {
-					themeDisplay.setShowPageSettingsIcon(true);
-
-					PortletURL pageSettingsURL = new PortletURLImpl(
-						req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
-
-					pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
-					pageSettingsURL.setPortletMode(PortletMode.VIEW);
-
-					pageSettingsURL.setParameter(
-						"struts_action", "/layout_management/edit_pages");
-
-					if (layout.isPrivateLayout()) {
-						pageSettingsURL.setParameter("tabs2", "private");
-					}
-					else {
-						pageSettingsURL.setParameter("tabs2", "public");
-					}
-
-					pageSettingsURL.setParameter(
-						"groupId", String.valueOf(portletGroupId));
-					pageSettingsURL.setParameter(
-						"selPlid", String.valueOf(plid));
-
-					themeDisplay.setURLPageSettings(pageSettingsURL);
-				}
-
-				PortletURL myAccountURL = new PortletURLImpl(
-					req, PortletKeys.MY_ACCOUNT, plid, false);
-
-				myAccountURL.setWindowState(WindowState.MAXIMIZED);
-				myAccountURL.setPortletMode(PortletMode.VIEW);
-
-				myAccountURL.setParameter(
-					"struts_action", "/my_account/edit_user");
-
-				themeDisplay.setURLMyAccount(myAccountURL);
-			}
-
-			boolean termsOfUseRequired = GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED), true);
-
-			if (!user.isActive() ||
-				(termsOfUseRequired && !user.isAgreedToTermsOfUse())) {
-
-				themeDisplay.setShowAddContentIcon(false);
-				themeDisplay.setShowMyAccountIcon(false);
-				themeDisplay.setShowPageSettingsIcon(false);
-			}
-
-			themeDisplay.setURLPortal(protocol + company.getPortalURL());
-			themeDisplay.setURLSignIn(mainPath + "/portal/login");
-			themeDisplay.setURLSignOut(mainPath + "/portal/logout");
-
-			PortletURL updateManagerURL = new PortletURLImpl(
-				req, PortletKeys.UPDATE_MANAGER, plid, false);
-
-			updateManagerURL.setWindowState(WindowState.MAXIMIZED);
-			updateManagerURL.setPortletMode(PortletMode.VIEW);
-
-			updateManagerURL.setParameter(
-				"struts_action", "/update_manager/view");
-
-			themeDisplay.setURLUpdateManager(updateManagerURL);
-
-			req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
-
-			// Parallel render
-
-			req.setAttribute(
-				WebKeys.PORTLET_PARALLEL_RENDER,
-				new Boolean(ParamUtil.getBoolean(req, "p_p_parallel", true)));
-
-			// Fix state
-
-			fixState(req, themeDisplay);
+			servicePre(req, res);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -943,6 +482,485 @@ public class ServicePreAction extends Action {
 		else {
 			return false;
 		}
+	}
+
+	protected void servicePre(HttpServletRequest req, HttpServletResponse res)
+		throws Exception {
+
+		HttpSession ses = req.getSession();
+
+		// Company
+
+		Company company = PortalUtil.getCompany(req);
+
+		long companyId = company.getCompanyId();
+
+		// Paths
+
+		String contextPath = PrefsPropsUtil.getString(
+			companyId, PropsUtil.PORTAL_CTX);
+
+		if (contextPath.equals(StringPool.SLASH)) {
+			contextPath = StringPool.BLANK;
+		}
+
+		String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
+		String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
+		String friendlyURLPrivateGroupPath = (String)req.getAttribute(
+			WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH);
+		String friendlyURLPrivateUserPath = (String)req.getAttribute(
+			WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
+		String friendlyURLPublicPath =
+			(String)req.getAttribute(WebKeys.FRIENDLY_URL_PUBLIC_PATH);
+		String imagePath = (String)req.getAttribute(WebKeys.IMAGE_PATH);
+
+		// Company logo
+
+		String companyLogo =
+			imagePath + "/company_logo?img_id=" + company.getLogoId();
+
+		Image companyLogoImage = ImageLocalUtil.getCompanyLogo(
+			company.getLogoId());
+
+		int companyLogoHeight = companyLogoImage.getHeight();
+		int companyLogoWidth = companyLogoImage.getWidth();
+
+		String realCompanyLogo = companyLogo;
+		int realCompanyLogoHeight = companyLogoHeight;
+		int realCompanyLogoWidth = companyLogoWidth;
+
+		// User
+
+		User user = PortalUtil.getUser(req);
+
+		boolean signedIn = false;
+
+		if (user == null) {
+			user = company.getDefaultUser();
+		}
+		else if (!user.isDefaultUser()) {
+			signedIn = true;
+		}
+
+		User realUser = user;
+
+		Long realUserId = (Long)ses.getAttribute(WebKeys.USER_ID);
+
+		if (realUserId != null) {
+			if (user.getUserId() != realUserId.longValue()) {
+				realUser = UserLocalServiceUtil.getUserById(
+					realUserId.longValue());
+			}
+		}
+
+		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+
+		// Permission checker
+
+		PermissionCheckerImpl permissionChecker =
+			PermissionCheckerFactory.create(user, signedIn, true);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+		// Locale
+
+		Locale locale = (Locale)ses.getAttribute(Globals.LOCALE_KEY);
+
+		if (locale == null) {
+			if (signedIn) {
+				locale = user.getLocale();
+			}
+			else {
+
+				// User previously set their preferred language
+
+				String languageId = CookieUtil.get(
+					req.getCookies(), CookieKeys.GUEST_LANGUAGE_ID);
+
+				if (Validator.isNotNull(languageId)) {
+					locale = LocaleUtil.fromLanguageId(languageId);
+				}
+
+				// Get locale from the request
+
+				if ((locale == null) &&
+					GetterUtil.getBoolean(
+						PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST))) {
+
+					locale = req.getLocale();
+				}
+
+				// Get locale from the default user
+
+				if (locale == null) {
+					locale = user.getLocale();
+				}
+
+				if (Validator.isNull(locale.getCountry())) {
+
+					// Locales must contain the country code
+
+					locale = LanguageUtil.getLocale(locale.getLanguage());
+				}
+
+				List availableLocales = ListUtil.fromArray(
+					LanguageUtil.getAvailableLocales());
+
+				if (!availableLocales.contains(locale)) {
+					locale = user.getLocale();
+				}
+			}
+
+			ses.setAttribute(Globals.LOCALE_KEY, locale);
+
+			LanguageUtil.updateCookie(res, locale);
+		}
+
+		// Cookie support
+
+		CookieKeys.addSupportCookie(res);
+
+		// Time zone
+
+		TimeZone timeZone = user.getTimeZone();
+
+		if (timeZone == null) {
+			timeZone = company.getTimeZone();
+		}
+
+		// Layouts
+
+		if (signedIn) {
+			boolean layoutsRequired = user.isLayoutsRequired();
+
+			if (layoutsRequired) {
+				addDefaultLayouts(user);
+			}
+			else {
+				deleteDefaultLayouts(user);
+			}
+		}
+
+		Layout layout = null;
+		List layouts = null;
+
+		long plid = ParamUtil.getLong(req, "p_l_id");
+
+		if (plid > 0) {
+			try {
+				layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				if (!isViewableCommunity(
+						user, layout.getGroupId(), layout.isPrivateLayout())) {
+
+					layout = null;
+				}
+				else {
+					layouts = LayoutLocalServiceUtil.getLayouts(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				}
+			}
+			catch (NoSuchLayoutException nsle) {
+			}
+		}
+
+		if (layout == null) {
+			Object[] defaultLayout = getDefaultLayout(req, user, signedIn);
+
+			layout = (Layout)defaultLayout[0];
+			layouts = (List)defaultLayout[1];
+
+			req.setAttribute(WebKeys.LAYOUT_DEFAULT, Boolean.TRUE);
+		}
+
+		Object[] viewableLayouts = getViewableLayouts(
+			layout, layouts, permissionChecker, req);
+
+		String layoutSetLogo = null;
+
+		layout = (Layout)viewableLayouts[0];
+		layouts = (List)viewableLayouts[1];
+
+		if (layout != null) {
+			if (company.isCommunityLogo()) {
+				LayoutSet layoutSet = layout.getLayoutSet();
+
+				if (layoutSet.isLogo()) {
+					long logoId = layoutSet.getLogoId();
+
+					layoutSetLogo =
+						imagePath + "/layout_set_logo?img_id=" + logoId;
+
+					Image layoutSetLogoImage = ImageLocalUtil.getCompanyLogo(
+						logoId);
+
+					companyLogo = layoutSetLogo;
+					companyLogoHeight = layoutSetLogoImage.getHeight();
+					companyLogoWidth = layoutSetLogoImage.getWidth();
+				}
+			}
+
+			plid = layout.getPlid();
+		}
+
+		if ((layout != null) && layout.isShared()) {
+
+			// Updates to shared layouts are not reflected until the next time
+			// the user logs in because group layouts are cached in the session
+
+			layout = (Layout)((LayoutImpl)layout).clone();
+
+			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+
+			if (layoutClone != null) {
+				String typeSettings = layoutClone.get(req, layout.getPlid());
+
+				if (typeSettings != null) {
+					Properties props = new NullSafeProperties();
+
+					PropertiesUtil.load(props, typeSettings);
+
+					String stateMax = props.getProperty(
+						LayoutTypePortletImpl.STATE_MAX);
+					String stateMin = props.getProperty(
+						LayoutTypePortletImpl.STATE_MIN);
+
+					LayoutTypePortlet layoutTypePortlet =
+						(LayoutTypePortlet)layout.getLayoutType();
+
+					layoutTypePortlet.setStateMax(stateMax);
+					layoutTypePortlet.setStateMin(stateMin);
+				}
+			}
+		}
+
+		LayoutTypePortlet layoutTypePortlet = null;
+
+		if (layout != null) {
+			req.setAttribute(WebKeys.LAYOUT, layout);
+			req.setAttribute(WebKeys.LAYOUTS, layouts);
+
+			layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+
+			if (layout.isPrivateLayout()) {
+				permissionChecker.setCheckGuest(false);
+			}
+		}
+
+		long portletGroupId = PortalUtil.getPortletGroupId(layout);
+
+		// Theme and color scheme
+
+		Theme theme = null;
+		ColorScheme colorScheme = null;
+
+		boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
+
+		if (layout != null) {
+			if (wapTheme) {
+				theme = layout.getWapTheme();
+				colorScheme = layout.getWapColorScheme();
+			}
+			else {
+				theme = layout.getTheme();
+				colorScheme = layout.getColorScheme();
+			}
+		}
+		else {
+			String themeId = null;
+			String colorSchemeId = null;
+
+			if (wapTheme) {
+				themeId = ThemeImpl.getDefaultWapThemeId();
+				colorSchemeId = ColorSchemeImpl.getDefaultWapColorSchemeId();
+			}
+			else {
+				themeId = ThemeImpl.getDefaultRegularThemeId();
+				colorSchemeId =
+					ColorSchemeImpl.getDefaultRegularColorSchemeId();
+			}
+
+			theme = ThemeLocalUtil.getTheme(companyId, themeId, wapTheme);
+			colorScheme = ThemeLocalUtil.getColorScheme(
+				companyId, theme.getThemeId(), colorSchemeId, wapTheme);
+		}
+
+		req.setAttribute(WebKeys.THEME, theme);
+		req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
+
+		// Theme display
+
+		String protocol = Http.getProtocol(req) + "://";
+
+		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
+
+		themeDisplay.setCompany(company);
+		themeDisplay.setCompanyLogo(companyLogo);
+		themeDisplay.setCompanyLogoHeight(companyLogoHeight);
+		themeDisplay.setCompanyLogoWidth(companyLogoWidth);
+		themeDisplay.setRealCompanyLogo(realCompanyLogo);
+		themeDisplay.setRealCompanyLogoHeight(realCompanyLogoHeight);
+		themeDisplay.setRealCompanyLogoWidth(realCompanyLogoWidth);
+		themeDisplay.setUser(user);
+		themeDisplay.setRealUser(realUser);
+		themeDisplay.setDoAsUserId(doAsUserId);
+		themeDisplay.setLayoutSetLogo(layoutSetLogo);
+		themeDisplay.setLayout(layout);
+		themeDisplay.setLayouts(layouts);
+		themeDisplay.setPlid(plid);
+		themeDisplay.setLayoutTypePortlet(layoutTypePortlet);
+		themeDisplay.setPortletGroupId(portletGroupId);
+		themeDisplay.setSignedIn(signedIn);
+		themeDisplay.setPermissionChecker(permissionChecker);
+		themeDisplay.setLocale(locale);
+		themeDisplay.setTimeZone(timeZone);
+		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
+		themeDisplay.setServerPort(req.getServerPort());
+		themeDisplay.setSecure(req.isSecure());
+		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
+		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
+		themeDisplay.setPathApplet(contextPath + "/applets");
+		themeDisplay.setPathCms(rootPath + "/cms");
+		themeDisplay.setPathContext(contextPath);
+		themeDisplay.setPathFlash(contextPath + "/flash");
+		themeDisplay.setPathFriendlyURLPrivateGroup(
+			friendlyURLPrivateGroupPath);
+		themeDisplay.setPathFriendlyURLPrivateUser(friendlyURLPrivateUserPath);
+		themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
+		themeDisplay.setPathImage(imagePath);
+		themeDisplay.setPathJavaScript(contextPath + "/html/js");
+		themeDisplay.setPathMain(mainPath);
+		themeDisplay.setPathRoot(rootPath);
+		themeDisplay.setPathSound(contextPath + "/html/sound");
+
+		// URLs
+
+		themeDisplay.setShowAddContentIcon(false);
+		themeDisplay.setShowHomeIcon(true);
+		themeDisplay.setShowMyAccountIcon(signedIn);
+		themeDisplay.setShowPageSettingsIcon(false);
+		themeDisplay.setShowPortalIcon(true);
+		themeDisplay.setShowSignInIcon(!signedIn);
+		themeDisplay.setShowSignOutIcon(signedIn);
+
+		PortletURL createAccountURL = new PortletURLImpl(
+			req, PortletKeys.MY_ACCOUNT, plid, true);
+
+		createAccountURL.setWindowState(WindowState.MAXIMIZED);
+		createAccountURL.setPortletMode(PortletMode.VIEW);
+
+		createAccountURL.setParameter(
+			"struts_action", "/my_account/create_account");
+
+		themeDisplay.setURLCreateAccount(createAccountURL);
+
+		themeDisplay.setURLHome(protocol + company.getHomeURL());
+
+		if (layout != null) {
+			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+				boolean freeformLayout =
+					layoutTypePortlet.getLayoutTemplateId().equals(
+						"freeform");
+
+				themeDisplay.setFreeformLayout(freeformLayout);
+
+				boolean hasUpdateLayoutPermission =
+					LayoutPermission.contains(
+						permissionChecker, layout, ActionKeys.UPDATE);
+
+				if (hasUpdateLayoutPermission) {
+					themeDisplay.setShowAddContentIcon(true);
+					themeDisplay.setShowLayoutTemplatesIcon(true);
+
+					themeDisplay.setURLAddContent(
+						"LayoutConfiguration.toggle('" + plid + "', '" +
+							PortletKeys.LAYOUT_CONFIGURATION + "', '" +
+								doAsUserId + "');");
+
+					themeDisplay.setURLLayoutTemplates(
+						"showLayoutTemplates();");
+				}
+			}
+
+			boolean hasManageLayoutsPermission =
+				GroupPermission.contains(
+					permissionChecker, portletGroupId,
+					ActionKeys.MANAGE_LAYOUTS);
+
+			if (hasManageLayoutsPermission) {
+				themeDisplay.setShowPageSettingsIcon(true);
+
+				PortletURL pageSettingsURL = new PortletURLImpl(
+					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
+
+				pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
+				pageSettingsURL.setPortletMode(PortletMode.VIEW);
+
+				pageSettingsURL.setParameter(
+					"struts_action", "/layout_management/edit_pages");
+
+				if (layout.isPrivateLayout()) {
+					pageSettingsURL.setParameter("tabs2", "private");
+				}
+				else {
+					pageSettingsURL.setParameter("tabs2", "public");
+				}
+
+				pageSettingsURL.setParameter(
+					"groupId", String.valueOf(portletGroupId));
+				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
+
+				themeDisplay.setURLPageSettings(pageSettingsURL);
+			}
+
+			PortletURL myAccountURL = new PortletURLImpl(
+				req, PortletKeys.MY_ACCOUNT, plid, false);
+
+			myAccountURL.setWindowState(WindowState.MAXIMIZED);
+			myAccountURL.setPortletMode(PortletMode.VIEW);
+
+			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
+
+			themeDisplay.setURLMyAccount(myAccountURL);
+		}
+
+		boolean termsOfUseRequired = GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED), true);
+
+		if (!user.isActive() ||
+			(termsOfUseRequired && !user.isAgreedToTermsOfUse())) {
+
+			themeDisplay.setShowAddContentIcon(false);
+			themeDisplay.setShowMyAccountIcon(false);
+			themeDisplay.setShowPageSettingsIcon(false);
+		}
+
+		themeDisplay.setURLPortal(protocol + company.getPortalURL());
+		themeDisplay.setURLSignIn(mainPath + "/portal/login");
+		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
+
+		PortletURL updateManagerURL = new PortletURLImpl(
+			req, PortletKeys.UPDATE_MANAGER, plid, false);
+
+		updateManagerURL.setWindowState(WindowState.MAXIMIZED);
+		updateManagerURL.setPortletMode(PortletMode.VIEW);
+
+		updateManagerURL.setParameter("struts_action", "/update_manager/view");
+
+		themeDisplay.setURLUpdateManager(updateManagerURL);
+
+		req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+
+		// Parallel render
+
+		req.setAttribute(
+			WebKeys.PORTLET_PARALLEL_RENDER,
+			new Boolean(ParamUtil.getBoolean(req, "p_p_parallel", true)));
+
+		// Fix state
+
+		fixState(req, themeDisplay);
 	}
 
 	private static Log _log = LogFactory.getLog(ServicePreAction.class);

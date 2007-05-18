@@ -80,10 +80,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 			{ "featured_", new Integer(Types.BOOLEAN) },
 			{ "sale_", new Integer(Types.BOOLEAN) },
 			{ "smallImage", new Integer(Types.BOOLEAN) },
+			{ "smallImageId", new Integer(Types.BIGINT) },
 			{ "smallImageURL", new Integer(Types.VARCHAR) },
 			{ "mediumImage", new Integer(Types.BOOLEAN) },
+			{ "mediumImageId", new Integer(Types.BIGINT) },
 			{ "mediumImageURL", new Integer(Types.VARCHAR) },
 			{ "largeImage", new Integer(Types.BOOLEAN) },
+			{ "largeImageId", new Integer(Types.BIGINT) },
 			{ "largeImageURL", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
@@ -474,6 +477,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		if (smallImageId != _smallImageId) {
+			_smallImageId = smallImageId;
+		}
+	}
+
 	public String getSmallImageURL() {
 		return GetterUtil.getString(_smallImageURL);
 	}
@@ -505,6 +518,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getMediumImageId() {
+		return _mediumImageId;
+	}
+
+	public void setMediumImageId(long mediumImageId) {
+		if (mediumImageId != _mediumImageId) {
+			_mediumImageId = mediumImageId;
+		}
+	}
+
 	public String getMediumImageURL() {
 		return GetterUtil.getString(_mediumImageURL);
 	}
@@ -533,6 +556,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	public void setLargeImage(boolean largeImage) {
 		if (largeImage != _largeImage) {
 			_largeImage = largeImage;
+		}
+	}
+
+	public long getLargeImageId() {
+		return _largeImageId;
+	}
+
+	public void setLargeImageId(long largeImageId) {
+		if (largeImageId != _largeImageId) {
+			_largeImageId = largeImageId;
 		}
 	}
 
@@ -580,10 +613,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		clone.setFeatured(getFeatured());
 		clone.setSale(getSale());
 		clone.setSmallImage(getSmallImage());
+		clone.setSmallImageId(getSmallImageId());
 		clone.setSmallImageURL(getSmallImageURL());
 		clone.setMediumImage(getMediumImage());
+		clone.setMediumImageId(getMediumImageId());
 		clone.setMediumImageURL(getMediumImageURL());
 		clone.setLargeImage(getLargeImage());
+		clone.setLargeImageId(getLargeImageId());
 		clone.setLargeImageURL(getLargeImageURL());
 
 		return clone;
@@ -658,9 +694,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	private boolean _featured;
 	private boolean _sale;
 	private boolean _smallImage;
+	private long _smallImageId;
 	private String _smallImageURL;
 	private boolean _mediumImage;
+	private long _mediumImageId;
 	private String _mediumImageURL;
 	private boolean _largeImage;
+	private long _largeImageId;
 	private String _largeImageURL;
 }

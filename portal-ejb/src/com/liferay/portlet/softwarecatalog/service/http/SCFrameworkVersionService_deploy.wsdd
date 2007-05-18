@@ -30,9 +30,8 @@
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" name="deleteFrameworkVersion" qname="operNS:deleteFrameworkVersion" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="frameworkVersionId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns2_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
+		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersion" qname="operNS:getFrameworkVersion" returnQName="getFrameworkVersionReturn" returnType="rtns:SCFrameworkVersionSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="frameworkVersionId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns2_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
@@ -40,8 +39,9 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersion" qname="operNS:getFrameworkVersion" returnQName="getFrameworkVersionReturn" returnType="rtns:SCFrameworkVersionSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="frameworkVersionId" type="tns:long"></parameter>
+		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:tns2="http://model.softwarecatalog.portlet.liferay.com" name="getFrameworkVersions" qname="operNS:getFrameworkVersions" returnQName="getFrameworkVersionsReturn" returnType="rtns:ArrayOf_tns2_SCFrameworkVersionSoap" returnItemType="tns2:SCFrameworkVersionSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.softwarecatalog.portlet.liferay.com" xmlns:rtns="http://model.softwarecatalog.portlet.liferay.com" name="updateFrameworkVersion" qname="operNS:updateFrameworkVersion" returnQName="updateFrameworkVersionReturn" returnType="rtns:SCFrameworkVersionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="frameworkVersionId" type="tns:long"></parameter>

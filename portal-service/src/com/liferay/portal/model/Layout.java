@@ -100,8 +100,6 @@ public interface Layout extends LayoutModel {
 
 	public java.lang.String getDefaultFriendlyURL();
 
-	public java.lang.String getIconImageId();
-
 	public com.liferay.portal.model.LayoutSet getLayoutSet();
 
 	public boolean isInheritLookAndFeel();

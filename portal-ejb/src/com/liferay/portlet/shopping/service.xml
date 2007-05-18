@@ -160,10 +160,13 @@
 		<column name="featured" type="boolean" />
 		<column name="sale" type="boolean" />
 		<column name="smallImage" type="boolean" />
+		<column name="smallImageId" type="long" />
 		<column name="smallImageURL" type="String" />
 		<column name="mediumImage" type="boolean" />
+		<column name="mediumImageId" type="long" />
 		<column name="mediumImageURL" type="String" />
 		<column name="largeImage" type="boolean" />
+		<column name="largeImageId" type="long" />
 		<column name="largeImageURL" type="String" />
 
 		<!-- Relationships -->
@@ -188,6 +191,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="ShoppingItemField" local-service="true" remote-service="false">

@@ -76,8 +76,8 @@ public class SCProductEntryServiceHttp {
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.Map images,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long[] licenseIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -130,20 +130,14 @@ public class SCProductEntryServiceHttp {
 				paramObj8 = new NullWrapper("[J");
 			}
 
-			Object paramObj9 = images;
-
-			if (images == null) {
-				paramObj9 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj10 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj11 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
 					"addProductEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10
 					});
 			Object returnObj = null;
 
@@ -175,8 +169,7 @@ public class SCProductEntryServiceHttp {
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.Map images,
-		java.lang.String[] communityPermissions,
+		long[] licenseIds, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -230,22 +223,16 @@ public class SCProductEntryServiceHttp {
 				paramObj8 = new NullWrapper("[J");
 			}
 
-			Object paramObj9 = images;
-
-			if (images == null) {
-				paramObj9 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj10 = communityPermissions;
+			Object paramObj9 = communityPermissions;
 
 			if (communityPermissions == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = guestPermissions;
+			Object paramObj10 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj11 = new NullWrapper("[Ljava.lang.String;");
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
@@ -253,7 +240,7 @@ public class SCProductEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10
 					});
 			Object returnObj = null;
 
@@ -348,7 +335,7 @@ public class SCProductEntryServiceHttp {
 		java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
 		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds, java.util.Map images)
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -401,17 +388,11 @@ public class SCProductEntryServiceHttp {
 				paramObj8 = new NullWrapper("[J");
 			}
 
-			Object paramObj9 = images;
-
-			if (images == null) {
-				paramObj9 = new NullWrapper("java.util.Map");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
 					"updateProductEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 			Object returnObj = null;
 

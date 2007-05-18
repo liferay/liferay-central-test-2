@@ -26,8 +26,10 @@ import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -136,15 +138,19 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			for (int i = 0; i < images.size(); i++) {
 				IGImage image = (IGImage)images.get(i);
 
+				Image portalImage = ImageLocalUtil.getImageOrDefault(
+					image.getLargeImageId());
+
 				Element fileEl = doc.createElement("File");
 
 				filesEl.appendChild(fileEl);
 
 				fileEl.setAttribute("name", String.valueOf(image.getImageId()));
 				fileEl.setAttribute("desc", image.getDescription());
-				fileEl.setAttribute("size", getSize(image.getSize()));
+				fileEl.setAttribute("size", getSize(portalImage.getSize()));
 				fileEl.setAttribute(
-					"url", "/image/image_gallery?img_id=" + image.getImageId());
+					"url",
+					"/image/image_gallery?img_id=" + image.getLargeImageId());
 			}
 		}
 	}

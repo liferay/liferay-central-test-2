@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
@@ -30,7 +29,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -99,7 +97,7 @@ public class ImageServlet extends HttpServlet {
 		return _companyId;
 	}
 
-	protected Image getDefaultImage(HttpServletRequest req, String imageId) {
+	protected Image getDefaultImage(HttpServletRequest req, long imageId) {
 		String path = req.getPathInfo();
 
 		if (path.startsWith("/company_logo")) {
@@ -113,149 +111,17 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected String getImageId(HttpServletRequest req) {
-		String path = req.getPathInfo();
+	protected long getImageId(HttpServletRequest req) {
 
 		// The image id may be passed in as image_id, img_id, or i_id
 
-		String imageId = ParamUtil.getString(req, "image_id");
+		long imageId = ParamUtil.getLong(req, "image_id");
 
-		if (Validator.isNull(imageId)) {
-			imageId = ParamUtil.getString(req, "img_id");
+		if (imageId <= 0) {
+			imageId = ParamUtil.getLong(req, "img_id");
 
-			if (Validator.isNull(imageId)) {
-				imageId = ParamUtil.getString(req, "i_id");
-			}
-		}
-
-		// Company logo
-
-		if (path.startsWith("/company_logo")) {
-			imageId = _companyId + ".portal.company";
-
-			if (ParamUtil.get(req, "png", false)) {
-				imageId += ".png";
-
-				//res.setContentType("image/png");
-			}
-			else if (ParamUtil.get(req, "wbmp", false)) {
-				imageId += ".wbmp";
-
-				//res.setContentType("image/vnd.wap.wbmp");
-			}
-		}
-
-		// User portrait
-
-		if (path.startsWith("/user_portrait")) {
-			imageId = _companyId + ".portal.user." + imageId;
-		}
-
-		// Image gallery
-
-		if (path.startsWith("/image_gallery")) {
-			if (!imageId.equals(StringPool.BLANK) &&
-				!imageId.startsWith(_companyId + ".image_gallery.")) {
-
-				imageId = _companyId + ".image_gallery." + imageId;
-
-				if (ParamUtil.get(req, "small", false)) {
-					imageId += ".small";
-				}
-				else {
-					imageId += ".large";
-				}
-			}
-		}
-
-		// Journal article
-
-		if (path.startsWith("/journal/article")) {
-			if (!imageId.equals(StringPool.BLANK) &&
-				!imageId.startsWith(_companyId + ".journal.article.")) {
-
-				imageId = _companyId + ".journal.article." + imageId;
-
-				String version = req.getParameter("version");
-
-				if (Validator.isNotNull(version)) {
-					imageId += "." + version;
-				}
-			}
-		}
-
-		// Journal template
-
-		if (path.startsWith("/journal/template")) {
-			if (!imageId.equals(StringPool.BLANK) &&
-				!imageId.startsWith(_companyId + ".journal.template.")) {
-
-				imageId = _companyId + ".journal.template." + imageId;
-				imageId += ".small";
-			}
-		}
-
-		// Layout icon
-
-		if (path.startsWith("/layout_icon")) {
-			if (!imageId.equals(StringPool.BLANK) &&
-				!imageId.startsWith(_companyId + ".layout.")) {
-
-				imageId = _companyId + ".layout." + imageId;
-			}
-		}
-
-		// Layout set logo
-
-		if (path.startsWith("/layout_set_logo")) {
-			if (!imageId.equals(StringPool.BLANK) &&
-				!imageId.startsWith(_companyId + ".layout_set.")) {
-
-				imageId = _companyId + ".layout_set." + imageId;
-			}
-
-			if (ParamUtil.get(req, "png", false)) {
-				imageId += ".png";
-
-				//res.setContentType("image/png");
-			}
-			else if (ParamUtil.get(req, "wbmp", false)) {
-				imageId += ".wbmp";
-
-				//res.setContentType("image/vnd.wap.wbmp");
-			}
-		}
-
-		// Shopping item
-
-		else if (path.startsWith("/shopping/item")) {
-			if (!imageId.equals(StringPool.BLANK) &&
-				!imageId.startsWith(_companyId + ".shopping.item.")) {
-
-				imageId = _companyId + ".shopping.item." + imageId;
-
-				if (ParamUtil.get(req, "small", false)) {
-					imageId += ".small";
-				}
-				else if (ParamUtil.get(req, "medium", false)) {
-					imageId += ".medium";
-				}
-				else {
-					imageId += ".large";
-				}
-			}
-		}
-
-		// Software catalog
-
-		else if (path.startsWith("/software_catalog")) {
-			if (!imageId.equals(StringPool.BLANK)) {
-				if (ParamUtil.get(req, "small", false)) {
-					imageId += ".small";
-				}
-				else {
-					imageId += ".large";
-				}
+			if (imageId <= 0) {
+				imageId = ParamUtil.getLong(req, "i_id");
 			}
 		}
 
@@ -264,13 +130,9 @@ public class ImageServlet extends HttpServlet {
 
 	protected long getLastModified(HttpServletRequest req) {
 		try {
-			String imageId = getImageId(req);
+			long imageId = getImageId(req);
 
-			if (Validator.isNull(imageId)) {
-				return -1;
-			}
-
-			Image image = ImageLocalUtil.get(imageId);
+			Image image = ImageLocalUtil.getImage(imageId);
 
 			if (image == null) {
 				return -1;
@@ -296,19 +158,9 @@ public class ImageServlet extends HttpServlet {
 	protected void writeImage(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		String imageId = getImageId(req);
+		long imageId = getImageId(req);
 
-		if (Validator.isNull(imageId)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Image id should never be null or empty, path is " +
-						req.getPathInfo());
-			}
-
-			return;
-		}
-
-		Image image = ImageLocalUtil.get(imageId);
+		Image image = ImageLocalUtil.getImage(imageId);
 
 		if (image == null) {
 			if (_log.isWarnEnabled()) {

@@ -65,6 +65,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "hidden_", new Integer(Types.BOOLEAN) },
 			{ "friendlyURL", new Integer(Types.VARCHAR) },
 			{ "iconImage", new Integer(Types.BOOLEAN) },
+			{ "iconImageId", new Integer(Types.BIGINT) },
 			{ "themeId", new Integer(Types.VARCHAR) },
 			{ "colorSchemeId", new Integer(Types.VARCHAR) },
 			{ "wapThemeId", new Integer(Types.VARCHAR) },
@@ -292,6 +293,16 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getIconImageId() {
+		return _iconImageId;
+	}
+
+	public void setIconImageId(long iconImageId) {
+		if (iconImageId != _iconImageId) {
+			_iconImageId = iconImageId;
+		}
+	}
+
 	public String getThemeId() {
 		return GetterUtil.getString(_themeId);
 	}
@@ -401,6 +412,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setHidden(getHidden());
 		clone.setFriendlyURL(getFriendlyURL());
 		clone.setIconImage(getIconImage());
+		clone.setIconImageId(getIconImageId());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
 		clone.setWapThemeId(getWapThemeId());
@@ -491,6 +503,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private boolean _hidden;
 	private String _friendlyURL;
 	private boolean _iconImage;
+	private long _iconImageId;
 	private String _themeId;
 	private String _colorSchemeId;
 	private String _wapThemeId;

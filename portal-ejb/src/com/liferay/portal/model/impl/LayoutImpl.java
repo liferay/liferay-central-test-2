@@ -385,10 +385,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return StringPool.SLASH + getLayoutId();
 	}
 
-	public String getIconImageId() {
-		return getCompanyId() + ".layout." + getPlid();
-	}
-
 	public LayoutSet getLayoutSet() {
 		LayoutSet layoutSet = null;
 

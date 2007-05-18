@@ -50,8 +50,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 
 		validate(name);
 
-		long licenseId = CounterLocalServiceUtil.increment(
-			SCLicense.class.getName());
+		long licenseId = CounterLocalServiceUtil.increment();
 
 		SCLicense license = SCLicenseUtil.create(licenseId);
 
@@ -122,8 +121,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 
 		validate(name);
 
-		SCLicense license =
-			SCLicenseUtil.findByPrimaryKey(licenseId);
+		SCLicense license = SCLicenseUtil.findByPrimaryKey(licenseId);
 
 		license.setName(name);
 		license.setUrl(url);
@@ -137,7 +135,6 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 	}
 
 	protected void validate(String name) throws PortalException {
-
 		if (Validator.isNull(name)) {
 			throw new LicenseNameException();
 		}

@@ -80,6 +80,15 @@ public class SCFrameworkVersionServiceUtil {
 		scFrameworkVersionService.deleteFrameworkVersion(frameworkVersionId);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
+		long frameworkVersionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
+
+		return scFrameworkVersionService.getFrameworkVersion(frameworkVersionId);
+	}
+
 	public static java.util.List getFrameworkVersions(long groupId,
 		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -95,15 +104,6 @@ public class SCFrameworkVersionServiceUtil {
 
 		return scFrameworkVersionService.getFrameworkVersions(groupId, active,
 			begin, end);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
-		long frameworkVersionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.getFrameworkVersion(frameworkVersionId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(

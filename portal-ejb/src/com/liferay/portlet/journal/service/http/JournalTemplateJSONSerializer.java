@@ -140,6 +140,7 @@ public class JournalTemplateJSONSerializer {
 		}
 
 		jsonObj.put("smallImage", model.isSmallImage());
+		jsonObj.put("smallImageId", model.getSmallImageId());
 
 		String smallImageURL = model.getSmallImageURL();
 

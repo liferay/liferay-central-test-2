@@ -70,6 +70,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 			{ "xsl", new Integer(Types.CLOB) },
 			{ "langType", new Integer(Types.VARCHAR) },
 			{ "smallImage", new Integer(Types.BOOLEAN) },
+			{ "smallImageId", new Integer(Types.BIGINT) },
 			{ "smallImageURL", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
@@ -302,6 +303,16 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		if (smallImageId != _smallImageId) {
+			_smallImageId = smallImageId;
+		}
+	}
+
 	public String getSmallImageURL() {
 		return GetterUtil.getString(_smallImageURL);
 	}
@@ -334,6 +345,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		clone.setXsl(getXsl());
 		clone.setLangType(getLangType());
 		clone.setSmallImage(getSmallImage());
+		clone.setSmallImageId(getSmallImageId());
 		clone.setSmallImageURL(getSmallImageURL());
 
 		return clone;
@@ -396,5 +408,6 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	private String _xsl;
 	private String _langType;
 	private boolean _smallImage;
+	private long _smallImageId;
 	private String _smallImageURL;
 }

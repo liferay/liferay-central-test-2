@@ -119,9 +119,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setModifiedDate(now);
 			image.setFolderId(folderId);
 			image.setDescription(description);
-			image.setHeight(bufferedImage.getHeight());
-			image.setWidth(bufferedImage.getWidth());
-			image.setSize(bytes.length);
+			image.setSmallImageId(CounterLocalServiceUtil.increment());
+			image.setLargeImageId(CounterLocalServiceUtil.increment());
 
 			IGImageUtil.update(image);
 
@@ -228,8 +227,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		// Images
 
-		ImageLocalUtil.remove(image.getLargeImageId());
-		ImageLocalUtil.remove(image.getSmallImageId());
+		ImageLocalUtil.deleteImage(image.getSmallImageId());
+		ImageLocalUtil.deleteImage(image.getLargeImageId());
 
 		// Image
 
@@ -340,12 +339,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setFolderId(folder.getFolderId());
 			image.setDescription(description);
 
-			if (bufferedImage != null) {
-				image.setHeight(bufferedImage.getHeight());
-				image.setWidth(bufferedImage.getWidth());
-				image.setSize(bytes.length);
-			}
-
 			IGImageUtil.update(image);
 
 			// Images
@@ -389,7 +382,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected void saveImages(
-			String imageKey, BufferedImage bufferedImage, String thumbnailKey,
+			long largeImageId, BufferedImage bufferedImage, long smallImageId,
 			File file, byte[] bytes, String contentType)
 		throws SystemException {
 
@@ -397,7 +390,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Image
 
-			ImageLocalUtil.put(imageKey, bytes);
+			ImageLocalUtil.updateImage(largeImageId, bytes);
 
 			// Thumbnail
 
@@ -424,7 +417,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				ImageIO.write(thumbnail, "png", bam);
 			}
 
-			ImageLocalUtil.put(thumbnailKey, bam.toByteArray());
+			ImageLocalUtil.updateImage(smallImageId, bam.toByteArray());
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

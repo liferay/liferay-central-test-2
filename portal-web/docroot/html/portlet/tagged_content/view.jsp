@@ -113,8 +113,7 @@ for (int i = 0; i < results.size(); i++) {
 				String folderId = pkParser.getString("folderId");
 				String name = pkParser.getString("name");
 
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					folderId, name);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
 				%>
 
 				<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
@@ -124,13 +123,12 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(IGImage.class.getName()) %>">
 
 				<%
-				PKParser pkParser = new PKParser(classPK);
+				long imageId = GetterUtil.getLong(classPK);
 
-				String companyId = pkParser.getString("companyId");
-				String imageId = pkParser.getString("imageId");
+				IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 				%>
 
-				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= imageId %>&large=1" />
+				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>" />
 			</c:when>
 			<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 

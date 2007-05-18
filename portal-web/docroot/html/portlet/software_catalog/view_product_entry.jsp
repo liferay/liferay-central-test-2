@@ -30,7 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String tabs2 = ParamUtil.getString(request, "tabs2", "comments");
 
 SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
-SCProductVersion lastProductVersion = productEntry.getLastVersion();
+SCProductVersion latestProductVersion = productEntry.getLatestVersion();
 
 long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntryId");
 
@@ -69,7 +69,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 	backURL="<%= redirect %>"
 />
 
-<h2><%= productEntry.getName() %> <%= (lastProductVersion == null)?"":lastProductVersion.getVersion() %></h2>
+<h2><%= productEntry.getName() %> <%= (latestProductVersion == null)?"":latestProductVersion.getVersion() %></h2>
 
 <table class="liferay-table">
 <tr>
@@ -163,7 +163,7 @@ addProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryI
 </tr>
 
 <%
-if (lastProductVersion != null) {
+if (latestProductVersion != null) {
 %>
 <tr>
 	<td colspan="2">
@@ -180,14 +180,14 @@ if (lastProductVersion != null) {
 		<liferay-ui:message key="release-date" />:
 	</td>
 	<td>
-		<%= lastProductVersion.getModifiedDate() %>
+		<%= latestProductVersion.getModifiedDate() %>
 	</td>
 </tr><tr>
 	<td>
 		<liferay-ui:message key="changeLog" />:
 	</td>
 	<td>
-		<%= lastProductVersion.getChangeLog() %>
+		<%= latestProductVersion.getChangeLog() %>
 	</td>
 </tr>
 <tr>
@@ -195,7 +195,7 @@ if (lastProductVersion != null) {
 		<liferay-ui:message key="supported-framework-versions" />:
 	</td>
 	<td>
-		<%= _buildFrameworkVersions(lastProductVersion.getFrameworkVersions()) %>
+		<%= _buildFrameworkVersions(latestProductVersion.getFrameworkVersions()) %>
 	</td>
 </tr>
 <tr>
@@ -203,13 +203,13 @@ if (lastProductVersion != null) {
 		<liferay-ui:message key="download-links" />:
 	</td>
 	<td>
-		<% if (Validator.isNotNull(lastProductVersion.getDirectDownloadURL())) { %>
-			<a href="<%=lastProductVersion.getDirectDownloadURL()%>">
+		<% if (Validator.isNotNull(latestProductVersion.getDirectDownloadURL())) { %>
+			<a href="<%=latestProductVersion.getDirectDownloadURL()%>">
 				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0" />
 			</a>
 		<% } %>
-		<% if (Validator.isNotNull(lastProductVersion.getDownloadPageURL())) { %>
-			<a href="<%=lastProductVersion.getDownloadPageURL()%>">
+		<% if (Validator.isNotNull(latestProductVersion.getDownloadPageURL())) { %>
+			<a href="<%=latestProductVersion.getDownloadPageURL()%>">
 				<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download-page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0" />
 			</a>
 		<% } %>

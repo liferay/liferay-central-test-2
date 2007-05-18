@@ -99,6 +99,8 @@ public class CompanyJSONSerializer {
 			jsonObj.put("mx", mx.toString());
 		}
 
+		jsonObj.put("logoId", model.getLogoId());
+
 		return jsonObj;
 	}
 

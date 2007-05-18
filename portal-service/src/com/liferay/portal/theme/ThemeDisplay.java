@@ -79,12 +79,44 @@ public class ThemeDisplay implements Serializable {
 		_companyLogo = companyLogo;
 	}
 
+	public int getCompanyLogoHeight() {
+		return _companyLogoHeight;
+	}
+
+	public void setCompanyLogoHeight(int companyLogoHeight) {
+		_companyLogoHeight = companyLogoHeight;
+	}
+
+	public int getCompanyLogoWidth() {
+		return _companyLogoWidth;
+	}
+
+	public void setCompanyLogoWidth(int companyLogoWidth) {
+		_companyLogoWidth = companyLogoWidth;
+	}
+
 	public String getRealCompanyLogo() {
 		return _realCompanyLogo;
 	}
 
 	public void setRealCompanyLogo(String realCompanyLogo) {
 		_realCompanyLogo = realCompanyLogo;
+	}
+
+	public int getRealCompanyLogoHeight() {
+		return _realCompanyLogoHeight;
+	}
+
+	public void setRealCompanyLogoHeight(int realCompanyLogoHeight) {
+		_realCompanyLogoHeight = realCompanyLogoHeight;
+	}
+
+	public int getRealCompanyLogoWidth() {
+		return _realCompanyLogoWidth;
+	}
+
+	public void setRealCompanyLogoWidth(int realCompanyLogoWidth) {
+		_realCompanyLogoWidth = realCompanyLogoWidth;
 	}
 
 	public Account getAccount() {
@@ -651,7 +683,11 @@ public class ThemeDisplay implements Serializable {
 
 		_company = null;
 		_companyLogo = StringPool.BLANK;
+		_companyLogoHeight = 0;
+		_companyLogoWidth = 0;
 		_realCompanyLogo = StringPool.BLANK;
+		_realCompanyLogoHeight = 0;
+		_realCompanyLogoWidth = 0;
 		_user = null;
 		_realUser = null;
 		_doAsUserId = StringPool.BLANK;
@@ -717,7 +753,11 @@ public class ThemeDisplay implements Serializable {
 
 	private Company _company;
 	private String _companyLogo = StringPool.BLANK;
+	private int _companyLogoHeight;
+	private int _companyLogoWidth;
 	private String _realCompanyLogo = StringPool.BLANK;
+	private int _realCompanyLogoHeight;
+	private int _realCompanyLogoWidth;
 	private Account _account;
 	private User _user;
 	private User _realUser;

@@ -48,7 +48,6 @@ public class PortalHttpTest extends TestCase {
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
-		boolean passwordReset = false;
 		boolean autoScreenName = true;
 		String screenName = "UserServiceSpringRemotingTest";
 		String emailAddress = "UserServiceSpringRemotingTest@liferay.com";

@@ -248,7 +248,7 @@ public class ExportAction extends Action {
 
 			sm.append("insert into IGImage (");
 			sm.append("imageId, companyId, userId, createDate, modifiedDate, ");
-			sm.append("folderId, description, height, width, size_");
+			sm.append("folderId, description, smallImageId, largeImageId");
 			sm.append(") values (");
 			addColumn(sm, image.getImageId());
 			addColumn(sm, image.getCompanyId());
@@ -257,9 +257,8 @@ public class ExportAction extends Action {
 			addColumn(sm, image.getModifiedDate());
 			addColumn(sm, image.getFolderId());
 			addColumn(sm, image.getDescription());
-			addColumn(sm, image.getHeight());
-			addColumn(sm, image.getWidth());
-			addColumn(sm, image.getSize());
+			addColumn(sm, image.getSmallImageId());
+			addColumn(sm, image.getLargeImageId());
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}
@@ -375,7 +374,8 @@ public class ExportAction extends Action {
 			sm.append("insert into JournalTemplate (");
 			sm.append("companyId, templateId, groupId, userId, userName, ");
 			sm.append("createDate, modifiedDate, structureId, name, ");
-			sm.append("description, xsl, langType, smallImage, smallImageURL");
+			sm.append("description, xsl, langType, smallImage, smallImageId, ");
+			sm.append("smallImageURL");
 			sm.append(") values (");
 			addColumn(sm, template.getCompanyId());
 			addColumn(sm, template.getTemplateId());
@@ -390,6 +390,7 @@ public class ExportAction extends Action {
 			addColumn(sm, template.getXsl());
 			addColumn(sm, template.getLangType());
 			addColumn(sm, template.getSmallImage());
+			addColumn(sm, template.getSmallImageId());
 			addColumn(sm, template.getSmallImageURL());
 			removeTrailingComma(sm);
 			sm.append(");\n");
@@ -419,7 +420,9 @@ public class ExportAction extends Action {
 			sm.append("insert into Layout (");
 			sm.append("plid, groupId, companyId, privateLayout, layoutId, ");
 			sm.append("parentLayoutId, name, title, type_, typeSettings, ");
-			sm.append("hidden_, friendlyURL, themeId, colorSchemeId, priority");
+			sm.append("hidden_, friendlyURL, iconImage, iconImageId, ");
+			sm.append("themeId, colorSchemeId, wapThemeId, wapColorSchemeId, ");
+			sm.append("css, priority");
 			sm.append(") values (");
 			addColumn(sm, layout.getPlid());
 			addColumn(sm, layout.getGroupId());
@@ -433,8 +436,13 @@ public class ExportAction extends Action {
 			addColumn(sm, layout.getTypeSettings());
 			addColumn(sm, layout.getHidden());
 			addColumn(sm, layout.getFriendlyURL());
+			addColumn(sm, layout.isIconImage());
+			addColumn(sm, layout.getIconImageId());
 			addColumn(sm, layout.getThemeId());
 			addColumn(sm, layout.getColorSchemeId());
+			addColumn(sm, layout.getWapThemeId());
+			addColumn(sm, layout.getWapColorSchemeId());
+			addColumn(sm, layout.getCss());
 			addColumn(sm, layout.getPriority());
 			removeTrailingComma(sm);
 			sm.append(");\n");
@@ -538,45 +546,24 @@ public class ExportAction extends Action {
 	protected void insertDataImage(ZipWriter zipWriter) throws Exception {
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = ImageLocalServiceUtil.search(
-			COMPANY_ID + "%").iterator();
+		Iterator itr = ImageLocalServiceUtil.getImages().iterator();
 
 		while (itr.hasNext()) {
 			Image image = (Image)itr.next();
 
-			String imageId = image.getImageId();
-
-			boolean insert = true;
-
-			if (imageId.startsWith("liferay.com.")) {
-				String suffix = StringUtil.replace(imageId, "liferay.com.", "");
-
-				if (Validator.isNumber(suffix)) {
-					insert = false;
-				}
-			}
-
-			if (imageId.indexOf(".image_gallery.") != -1) {
-				insert = false;
-			}
-
-			if ((imageId.indexOf(".shopping.item.") != -1) /*&&
-					imageId.endsWith(".large")*/) {
-
-				insert = false;
-			}
-
-			if (insert) {
-				sm.append("insert into Image (");
-				sm.append("imageId, modifiedDate, text_, type_");
-				sm.append(") values (");
-				addColumn(sm, image.getImageId());
-				addColumn(sm, image.getModifiedDate());
-				addColumn(sm, image.getText(), false);
-				addColumn(sm, image.getType());
-				removeTrailingComma(sm);
-				sm.append(");\n");
-			}
+			sm.append("insert into Image (");
+			sm.append("imageId, modifiedDate, text_, type_, height, width, ");
+			sm.append("size_");
+			sm.append(") values (");
+			addColumn(sm, image.getImageId());
+			addColumn(sm, image.getModifiedDate());
+			addColumn(sm, image.getText(), false);
+			addColumn(sm, image.getType());
+			addColumn(sm, image.getHeight());
+			addColumn(sm, image.getWidth());
+			addColumn(sm, image.getSize());
+			removeTrailingComma(sm);
+			sm.append(");\n");
 		}
 
 		removeTrailingNewLine(sm);

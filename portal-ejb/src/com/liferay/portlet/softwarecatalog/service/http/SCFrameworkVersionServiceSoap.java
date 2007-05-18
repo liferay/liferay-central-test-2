@@ -125,6 +125,20 @@ public class SCFrameworkVersionServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap getFrameworkVersion(
+		long frameworkVersionId) throws RemoteException {
+		try {
+			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
+				SCFrameworkVersionServiceUtil.getFrameworkVersion(frameworkVersionId);
+
+			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap[] getFrameworkVersions(
 		long groupId, boolean active) throws RemoteException {
 		try {
@@ -147,20 +161,6 @@ public class SCFrameworkVersionServiceSoap {
 					active, begin, end);
 
 			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap getFrameworkVersion(
-		long frameworkVersionId) throws RemoteException {
-		try {
-			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
-				SCFrameworkVersionServiceUtil.getFrameworkVersion(frameworkVersionId);
-
-			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

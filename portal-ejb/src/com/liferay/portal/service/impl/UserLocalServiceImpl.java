@@ -636,7 +636,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Portrait
 
-		ImageLocalUtil.remove(user.getCompanyId() + ".portal.user." + userId);
+		ImageLocalUtil.deleteImage(user.getPortraitId());
 
 		// Password policy relation
 
@@ -1215,6 +1215,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void updatePortrait(long userId, byte[] bytes)
 		throws PortalException, SystemException {
 
+		User user = UserUtil.findByPrimaryKey(userId);
+
 		long imageMaxSize = GetterUtil.getLong(
 			PropsUtil.get(PropsUtil.USERS_IMAGE_MAX_SIZE));
 
@@ -1224,10 +1226,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new UserPortraitException();
 		}
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		long portraitId = user.getPortraitId();
 
-		ImageLocalUtil.put(
-			user.getCompanyId() + ".portal.user." + userId, bytes);
+		if (portraitId <= 0) {
+			portraitId = CounterLocalServiceUtil.increment();
+
+			user.setPortraitId(portraitId);
+		}
+
+		ImageLocalUtil.updateImage(portraitId, bytes);
 	}
 
 	public User updateUser(

@@ -84,8 +84,14 @@ public class SCFrameworkVersionServiceImpl
 			frameworkVersionId);
 	}
 
-	public List getFrameworkVersions(
-			long groupId, boolean active)
+	public SCFrameworkVersion getFrameworkVersion(long frameworkVersionId)
+		throws PortalException, SystemException {
+
+		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersion(
+			frameworkVersionId);
+	}
+
+	public List getFrameworkVersions(long groupId, boolean active)
 		throws SystemException {
 
 		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(
@@ -98,13 +104,6 @@ public class SCFrameworkVersionServiceImpl
 
 		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(
 			groupId, active, begin, end);
-	}
-
-	public SCFrameworkVersion getFrameworkVersion(long frameworkVersionId)
-		throws PortalException, SystemException {
-
-		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersion(
-			frameworkVersionId);
 	}
 
 	public SCFrameworkVersion updateFrameworkVersion(

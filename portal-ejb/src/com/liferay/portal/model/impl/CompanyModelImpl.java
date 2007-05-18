@@ -58,7 +58,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "key_", new Integer(Types.CLOB) },
 			{ "portalURL", new Integer(Types.VARCHAR) },
 			{ "homeURL", new Integer(Types.VARCHAR) },
-			{ "mx", new Integer(Types.VARCHAR) }
+			{ "mx", new Integer(Types.VARCHAR) },
+			{ "logoId", new Integer(Types.BIGINT) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company"), XSS_ALLOW);
@@ -192,6 +193,16 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	public void setLogoId(long logoId) {
+		if (logoId != _logoId) {
+			_logoId = logoId;
+		}
+	}
+
 	public Object clone() {
 		CompanyImpl clone = new CompanyImpl();
 		clone.setCompanyId(getCompanyId());
@@ -201,6 +212,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		clone.setPortalURL(getPortalURL());
 		clone.setHomeURL(getHomeURL());
 		clone.setMx(getMx());
+		clone.setLogoId(getLogoId());
 
 		return clone;
 	}
@@ -259,4 +271,5 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private String _portalURL;
 	private String _homeURL;
 	private String _mx;
+	private long _logoId;
 }

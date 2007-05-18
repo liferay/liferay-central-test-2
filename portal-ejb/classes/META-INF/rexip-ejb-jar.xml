@@ -577,6 +577,13 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_journal_service_ejb_JournalArticleImageLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/JournalArticleImageLocalServiceHome</local-jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/JournalContentSearchLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>

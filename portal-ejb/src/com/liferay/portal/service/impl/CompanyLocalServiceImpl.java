@@ -32,7 +32,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -59,13 +58,9 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.ImageUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
-
-import java.awt.image.BufferedImage;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,8 +69,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import javax.imageio.ImageIO;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -499,36 +492,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
-		try {
-			ImageLocalUtil.put(
-				companyId + ".portal.company", FileUtil.getBytes(file));
+		Company company = CompanyUtil.findByPrimaryKey(companyId);
 
-			BufferedImage thumbnail = ImageUtil.scale(ImageIO.read(file), .6);
+		long logoId = company.getLogoId();
 
-			// PNG
+		if (logoId <= 0) {
+			logoId = CounterLocalServiceUtil.increment();
 
-			ByteArrayMaker bam = new ByteArrayMaker();
-
-			ImageIO.write(thumbnail, "png", bam);
-
-			ImageLocalUtil.put(
-				companyId + ".portal.company.png", bam.toByteArray());
-
-			// WBMP
-
-			bam = new ByteArrayMaker();
-
-			ImageUtil.encodeWBMP(thumbnail, bam);
-
-			ImageLocalUtil.put(
-				companyId + ".portal.company.wbmp", bam.toByteArray());
+			company.setLogoId(logoId);
 		}
-		catch (InterruptedException ie) {
-			throw new SystemException(ie);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+
+		ImageLocalUtil.updateImage(logoId, file);
 	}
 
 	public void updateSecurity(

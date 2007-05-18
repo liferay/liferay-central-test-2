@@ -223,6 +223,39 @@ public class SCFrameworkVersionServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
+		HttpPrincipal httpPrincipal, long frameworkVersionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(frameworkVersionId);
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"getFrameworkVersion", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static java.util.List getFrameworkVersions(
 		HttpPrincipal httpPrincipal, long groupId, boolean active)
 		throws com.liferay.portal.SystemException {
@@ -278,39 +311,6 @@ public class SCFrameworkVersionServiceHttp {
 			}
 
 			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
-		HttpPrincipal httpPrincipal, long frameworkVersionId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(frameworkVersionId);
-			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersion", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

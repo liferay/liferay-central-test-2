@@ -2210,6 +2210,38 @@
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence" class="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

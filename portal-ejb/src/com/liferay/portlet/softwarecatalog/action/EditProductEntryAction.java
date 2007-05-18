@@ -26,9 +26,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductEntryImagesException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -36,16 +34,8 @@ import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
-import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.UploadPortletRequest;
-
-import java.io.File;
-
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -90,12 +80,11 @@ public class EditProductEntryAction extends PortletAction {
 
 				setForward(req, "portlet.software_catalog.error");
 			}
-			else if (e instanceof ProductEntryNameException ||
-					 e instanceof ProductEntryTypeException ||
-					 e instanceof ProductEntryShortDescriptionException ||
+			else if (e instanceof ProductEntryImagesException ||
+					 e instanceof ProductEntryNameException ||
 					 e instanceof ProductEntryLicenseException ||
-					 e instanceof ProductEntryImagesException ||
-					 e instanceof ImageSizeException) {
+					 e instanceof ProductEntryShortDescriptionException ||
+					 e instanceof ProductEntryTypeException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 			}
@@ -137,12 +126,9 @@ public class EditProductEntryAction extends PortletAction {
 	}
 
 	protected void updateProductEntry(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
-
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		long productEntryId = ParamUtil.getLong(req, "productEntryId", -1);
+		long productEntryId = ParamUtil.getLong(req, "productEntryId");
 
 		String name = ParamUtil.getString(req, "name");
 		String type = ParamUtil.getString(req, "type");
@@ -153,8 +139,6 @@ public class EditProductEntryAction extends PortletAction {
 		String repoArtifactId = ParamUtil.getString(req, "repoArtifactId");
 
 		long[] licenseIds = ParamUtil.getLongValues(req, "licenses");
-
-		Map images = getImages(uploadReq);
 
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
@@ -167,7 +151,7 @@ public class EditProductEntryAction extends PortletAction {
 
 			SCProductEntryServiceUtil.addProductEntry(
 				layout.getPlid(), name, type, shortDescription, longDescription,
-				pageURL, repoGroupId, repoArtifactId, licenseIds, images,
+				pageURL, repoGroupId, repoArtifactId, licenseIds,
 				communityPermissions, guestPermissions);
 		}
 		else {
@@ -176,43 +160,8 @@ public class EditProductEntryAction extends PortletAction {
 
 			SCProductEntryServiceUtil.updateProductEntry(
 				productEntryId, name, type, shortDescription, longDescription,
-				pageURL, repoGroupId, repoArtifactId, licenseIds, images);
+				pageURL, repoGroupId, repoArtifactId, licenseIds);
 		}
-	}
-
-	protected Map getImages(UploadPortletRequest uploadReq) throws Exception {
-		Map images = new HashMap();
-
-		String imageUpdatePrefix = "screenshot_update_";
-		String imageDeletePrefix = "screenshot_delete_";
-
-		Enumeration enu = uploadReq.getParameterNames();
-
-		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
-
-			if (name.startsWith(imageDeletePrefix)) {
-				name = name.substring(
-					imageUpdatePrefix.length(), name.length());
-
-				images.put(name, "delete");
-			}
-			else if (name.startsWith(imageUpdatePrefix)) {
-				File file = uploadReq.getFile(name);
-				byte[] bytes = FileUtil.getBytes(file);
-
-				String contentType = uploadReq.getContentType(name);
-
-				if ((bytes != null) && (bytes.length > 0)) {
-					name = name.substring(
-						imageUpdatePrefix.length(), name.length());
-
-					images.put(name, new Object[] {contentType, bytes});
-				}
-			}
-		}
-
-		return images;
 	}
 
 }

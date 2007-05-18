@@ -79,6 +79,46 @@
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
+	<entity name="JournalArticleImage" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="articleImageId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="articleId" type="String" />
+		<column name="version" type="double" />
+		<column name="elName" type="String" />
+		<column name="languageId" type="String" />
+		<column name="tempImage" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="TempImage" return-type="Collection">
+			<finder-column name="tempImage" />
+		</finder>
+		<finder name="G_A_V" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="articleId" />
+			<finder-column name="version" />
+		</finder>
+		<finder name="G_A_V_E_L" return-type="JournalArticleImage">
+			<finder-column name="groupId" />
+			<finder-column name="articleId" />
+			<finder-column name="version" />
+			<finder-column name="elName" />
+			<finder-column name="languageId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Image" />
+	</entity>
 	<entity name="JournalContentSearch" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -99,21 +139,6 @@
 
 		<!-- Finder methods -->
 
-		<!--<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="OwnerId" return-type="Collection">
-			<finder-column name="ownerId" />
-		</finder>
-		<finder name="L_O" return-type="Collection">
-			<finder-column name="layoutId" />
-			<finder-column name="ownerId" />
-		</finder>
-		<finder name="O_G_A" return-type="Collection">
-			<finder-column name="ownerId" />
-			<finder-column name="groupId" />
-			<finder-column name="articleId" />
-		</finder>-->
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
@@ -205,6 +230,7 @@
 		<column name="xsl" type="String" />
 		<column name="langType" type="String" />
 		<column name="smallImage" type="boolean" />
+		<column name="smallImageId" type="long" />
 		<column name="smallImageURL" type="String" />
 
 		<!-- Order -->
@@ -230,6 +256,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<exceptions>

@@ -125,6 +125,7 @@
 		<column name="portalURL" type="String" />
 		<column name="homeURL" type="String" />
 		<column name="mx" type="String" />
+		<column name="logoId" type="long" />
 
 		<!-- Finder methods -->
 
@@ -333,7 +334,7 @@
 
 		<!-- PK fields -->
 
-		<column name="imageId" type="String" primary="true" />
+		<column name="imageId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -343,6 +344,9 @@
 
 		<column name="text" type="String" />
 		<column name="type" type="String" />
+		<column name="height" type="int" />
+		<column name="width" type="int" />
+		<column name="size" type="int" />
 
 		<!-- Order -->
 
@@ -376,6 +380,7 @@
 		<column name="hidden" type="boolean" />
 		<column name="friendlyURL" type="String" />
 		<column name="iconImage" type="boolean" />
+		<column name="iconImageId" type="long" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
 		<column name="wapThemeId" type="String" />
@@ -435,6 +440,7 @@
 
 		<column name="privateLayout" type="boolean" />
 		<column name="logo" type="boolean" />
+		<column name="logoId" type="long" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
 		<column name="wapThemeId" type="String" />
@@ -1076,6 +1082,7 @@
 		<column name="graceLoginCount" type="int" />
 		<column name="screenName" type="String" />
 		<column name="emailAddress" type="String" />
+		<column name="portraitId" type="long" />
 		<column name="languageId" type="String" />
 		<column name="timeZoneId" type="String" />
 		<column name="greeting" type="String" />

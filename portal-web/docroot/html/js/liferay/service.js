@@ -1900,16 +1900,16 @@ Liferay.Service.SC.SCFrameworkVersion = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getFrameworkVersions: function(params, callback) {
+	getFrameworkVersion: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFrameworkVersions";
+		params.serviceMethodName = "getFrameworkVersion";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getFrameworkVersion: function(params, callback) {
+	getFrameworkVersions: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFrameworkVersion";
+		params.serviceMethodName = "getFrameworkVersions";
 
 		return Liferay.Service.ajax(params, callback);
 	},
@@ -1925,6 +1925,13 @@ Liferay.Service.SC.SCFrameworkVersion = {
 Liferay.Service.SC.SCProductEntry = {
 	serviceClassName: Liferay.Service.SC.servicePackage + "SCProductEntry" + Liferay.Service.classNameSuffix,
 
+	addProductEntry: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addProductEntry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	deleteProductEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteProductEntry";
@@ -1935,6 +1942,13 @@ Liferay.Service.SC.SCProductEntry = {
 	getProductEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getProductEntry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateProductEntry: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateProductEntry";
 
 		return Liferay.Service.ajax(params, callback);
 	}

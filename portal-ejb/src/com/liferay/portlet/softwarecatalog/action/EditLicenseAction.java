@@ -116,7 +116,7 @@ public class EditLicenseAction extends PortletAction {
 	}
 
 	protected void updateLicense(ActionRequest req) throws Exception {
-		long licenseId = ParamUtil.getLong(req, "licenseId", -1);
+		long licenseId = ParamUtil.getLong(req, "licenseId");
 
 		String name = ParamUtil.getString(req, "name");
 		String url = ParamUtil.getString(req, "url");

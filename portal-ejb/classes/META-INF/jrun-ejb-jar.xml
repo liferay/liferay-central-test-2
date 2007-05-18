@@ -578,6 +578,13 @@
 			<timeout>3000</timeout>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_journal_service_ejb_JournalArticleImageLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/JournalArticleImageLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/JournalContentSearchLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>

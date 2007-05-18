@@ -113,6 +113,10 @@ public interface UserModel extends BaseModel {
 
 	public void setEmailAddress(String emailAddress);
 
+	public long getPortraitId();
+
+	public void setPortraitId(long portraitId);
+
 	public String getLanguageId();
 
 	public void setLanguageId(String languageId);

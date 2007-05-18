@@ -20,57 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.events;
+package com.liferay.portlet.journal.service.base;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Image;
-import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.struts.ActionException;
-import com.liferay.portal.struts.SimpleAction;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
-import java.util.Iterator;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
+import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
+
+import java.util.List;
 
 /**
- * <a href="FixImageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleImageLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class FixImageAction extends SimpleAction {
-
-	public void run(String[] ids) throws ActionException {
-		try {
-			_fixImage();
-		}
-		catch (Exception e) {
-			throw new ActionException(e);
-		}
+public abstract class JournalArticleImageLocalServiceBaseImpl
+	implements JournalArticleImageLocalService {
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		return JournalArticleImageUtil.findWithDynamicQuery(queryInitializer);
 	}
 
-	private void _fixImage() throws PortalException, SystemException {
-
-		// Make sure every image has a type
-
-		Iterator itr = ImageLocalServiceUtil.getImages(0, 1).iterator();
-
-		while (itr.hasNext()) {
-			Image image = (Image)itr.next();
-
-			if (Validator.isNotNull(image.getType())) {
-				return;
-			}
-		}
-
-		itr = ImageLocalServiceUtil.getImages().iterator();
-
-		while (itr.hasNext()) {
-			Image image = (Image)itr.next();
-
-			ImageLocalServiceUtil.updateImage(
-				image.getImageId(), image.getTextObj());
-		}
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		return JournalArticleImageUtil.findWithDynamicQuery(queryInitializer,
+			begin, end);
 	}
-
 }
