@@ -360,10 +360,6 @@ public class MBStatsUserUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static MBStatsUserPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -346,10 +346,6 @@ public class LayoutUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static LayoutPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

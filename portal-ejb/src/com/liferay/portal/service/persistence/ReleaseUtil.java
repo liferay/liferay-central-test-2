@@ -185,10 +185,6 @@ public class ReleaseUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ReleasePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

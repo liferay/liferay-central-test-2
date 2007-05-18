@@ -356,10 +356,6 @@ public class MBBanUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static MBBanPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

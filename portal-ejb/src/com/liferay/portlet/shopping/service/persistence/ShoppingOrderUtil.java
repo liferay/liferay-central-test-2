@@ -249,10 +249,6 @@ public class ShoppingOrderUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ShoppingOrderPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

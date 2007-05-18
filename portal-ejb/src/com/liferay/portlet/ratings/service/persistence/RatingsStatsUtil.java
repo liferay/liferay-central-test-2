@@ -213,10 +213,6 @@ public class RatingsStatsUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static RatingsStatsPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

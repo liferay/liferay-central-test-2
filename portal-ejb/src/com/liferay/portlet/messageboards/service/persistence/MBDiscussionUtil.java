@@ -213,10 +213,6 @@ public class MBDiscussionUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static MBDiscussionPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

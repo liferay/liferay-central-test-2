@@ -22,495 +22,90 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchOrgLaborException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.model.impl.OrgLaborImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="OrgLaborPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class OrgLaborPersistence extends BasePersistence {
-	public OrgLabor create(long orgLaborId) {
-		OrgLabor orgLabor = new OrgLaborImpl();
-		orgLabor.setNew(true);
-		orgLabor.setPrimaryKey(orgLaborId);
+public interface OrgLaborPersistence {
+	public com.liferay.portal.model.OrgLabor create(long orgLaborId);
 
-		return orgLabor;
-	}
+	public com.liferay.portal.model.OrgLabor remove(long orgLaborId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgLaborException;
 
-	public OrgLabor remove(long orgLaborId)
-		throws NoSuchOrgLaborException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
-					new Long(orgLaborId));
-
-			if (orgLabor == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No OrgLabor exists with the primary key " +
-						orgLaborId);
-				}
-
-				throw new NoSuchOrgLaborException(
-					"No OrgLabor exists with the primary key " + orgLaborId);
-			}
-
-			return remove(orgLabor);
-		}
-		catch (NoSuchOrgLaborException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(orgLabor);
-			session.flush();
-
-			return orgLabor;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.OrgLabor remove(
+		com.liferay.portal.model.OrgLabor orgLabor)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor) throws SystemException {
-		return update(orgLabor, false);
-	}
+		com.liferay.portal.model.OrgLabor orgLabor)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor update(
 		com.liferay.portal.model.OrgLabor orgLabor, boolean saveOrUpdate)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.OrgLabor findByPrimaryKey(long orgLaborId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgLaborException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(orgLabor);
-			}
-			else {
-				if (orgLabor.isNew()) {
-					session.save(orgLabor);
-				}
-			}
+	public com.liferay.portal.model.OrgLabor fetchByPrimaryKey(long orgLaborId)
+		throws com.liferay.portal.SystemException;
 
-			session.flush();
-			orgLabor.setNew(false);
+	public java.util.List findByOrganizationId(long organizationId)
+		throws com.liferay.portal.SystemException;
 
-			return orgLabor;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByOrganizationId(long organizationId, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
-	public OrgLabor findByPrimaryKey(long orgLaborId)
-		throws NoSuchOrgLaborException, SystemException {
-		OrgLabor orgLabor = fetchByPrimaryKey(orgLaborId);
+	public java.util.List findByOrganizationId(long organizationId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (orgLabor == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No OrgLabor exists with the primary key " +
-					orgLaborId);
-			}
+	public com.liferay.portal.model.OrgLabor findByOrganizationId_First(
+		long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgLaborException;
 
-			throw new NoSuchOrgLaborException(
-				"No OrgLabor exists with the primary key " + orgLaborId);
-		}
+	public com.liferay.portal.model.OrgLabor findByOrganizationId_Last(
+		long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgLaborException;
 
-		return orgLabor;
-	}
+	public com.liferay.portal.model.OrgLabor[] findByOrganizationId_PrevAndNext(
+		long orgLaborId, long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgLaborException;
 
-	public OrgLabor fetchByPrimaryKey(long orgLaborId)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			return (OrgLabor)session.get(OrgLaborImpl.class,
-				new Long(orgLaborId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-	public List findByOrganizationId(long organizationId)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
-			query.append("organizationId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("organizationId ASC").append(", ");
-			query.append("typeId ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, organizationId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByOrganizationId(long organizationId, int begin, int end)
-		throws SystemException {
-		return findByOrganizationId(organizationId, begin, end, null);
-	}
-
-	public List findByOrganizationId(long organizationId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
-			query.append("organizationId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("organizationId ASC").append(", ");
-				query.append("typeId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, organizationId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public OrgLabor findByOrganizationId_First(long organizationId,
-		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
-		List list = findByOrganizationId(organizationId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No OrgLabor exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("organizationId=");
-			msg.append(organizationId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchOrgLaborException(msg.toString());
-		}
-		else {
-			return (OrgLabor)list.get(0);
-		}
-	}
-
-	public OrgLabor findByOrganizationId_Last(long organizationId,
-		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
-		int count = countByOrganizationId(organizationId);
-		List list = findByOrganizationId(organizationId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No OrgLabor exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("organizationId=");
-			msg.append(organizationId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchOrgLaborException(msg.toString());
-		}
-		else {
-			return (OrgLabor)list.get(0);
-		}
-	}
-
-	public OrgLabor[] findByOrganizationId_PrevAndNext(long orgLaborId,
-		long organizationId, OrderByComparator obc)
-		throws NoSuchOrgLaborException, SystemException {
-		OrgLabor orgLabor = findByPrimaryKey(orgLaborId);
-		int count = countByOrganizationId(organizationId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
-			query.append("organizationId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("organizationId ASC").append(", ");
-				query.append("typeId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, organizationId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, orgLabor);
-			OrgLabor[] array = new OrgLaborImpl[3];
-			array[0] = (OrgLabor)objArray[0];
-			array[1] = (OrgLabor)objArray[1];
-			array[2] = (OrgLabor)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.OrgLabor ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("organizationId ASC").append(", ");
-				query.append("typeId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByOrganizationId(long organizationId)
-		throws SystemException {
-		Iterator itr = findByOrganizationId(organizationId).iterator();
+		throws com.liferay.portal.SystemException;
 
-		while (itr.hasNext()) {
-			OrgLabor orgLabor = (OrgLabor)itr.next();
-			remove(orgLabor);
-		}
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((OrgLabor)itr.next());
-		}
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByOrganizationId(long organizationId)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.OrgLabor WHERE ");
-			query.append("organizationId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, organizationId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.OrgLabor");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(OrgLaborPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

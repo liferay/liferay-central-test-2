@@ -834,10 +834,6 @@ public class GroupUtil {
 		getPersistence().setUsers(pk, users);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static GroupPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -22,523 +22,84 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="CompanyPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CompanyPersistence extends BasePersistence {
-	public Company create(long companyId) {
-		Company company = new CompanyImpl();
-		company.setNew(true);
-		company.setPrimaryKey(companyId);
+public interface CompanyPersistence {
+	public com.liferay.portal.model.Company create(long companyId);
 
-		return company;
-	}
+	public com.liferay.portal.model.Company remove(long companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
 
-	public Company remove(long companyId)
-		throws NoSuchCompanyException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Company company = (Company)session.get(CompanyImpl.class,
-					new Long(companyId));
-
-			if (company == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Company exists with the primary key " +
-						companyId);
-				}
-
-				throw new NoSuchCompanyException(
-					"No Company exists with the primary key " + companyId);
-			}
-
-			return remove(company);
-		}
-		catch (NoSuchCompanyException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Company remove(Company company) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(company);
-			session.flush();
-
-			return company;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.Company remove(
+		com.liferay.portal.model.Company company)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company) throws SystemException {
-		return update(company, false);
-	}
+		com.liferay.portal.model.Company company)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company update(
 		com.liferay.portal.model.Company company, boolean saveOrUpdate)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			if (saveOrUpdate) {
-				session.saveOrUpdate(company);
-			}
-			else {
-				if (company.isNew()) {
-					session.save(company);
-				}
-			}
-
-			session.flush();
-			company.setNew(false);
-
-			return company;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Company findByPrimaryKey(long companyId)
-		throws NoSuchCompanyException, SystemException {
-		Company company = fetchByPrimaryKey(companyId);
-
-		if (company == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No Company exists with the primary key " +
-					companyId);
-			}
-
-			throw new NoSuchCompanyException(
-				"No Company exists with the primary key " + companyId);
-		}
-
-		return company;
-	}
-
-	public Company fetchByPrimaryKey(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (Company)session.get(CompanyImpl.class, new Long(companyId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Company findByWebId(String webId)
-		throws NoSuchCompanyException, SystemException {
-		Company company = fetchByWebId(webId);
-
-		if (company == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Company exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("webId=");
-			msg.append(webId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchCompanyException(msg.toString());
-		}
-
-		return company;
-	}
-
-	public Company fetchByWebId(String webId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
-
-			if (webId == null) {
-				query.append("webId IS NULL");
-			}
-			else {
-				query.append("webId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
+	public com.liferay.portal.model.Company findByPrimaryKey(long companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
 
-			if (webId != null) {
-				q.setString(queryPos++, webId);
-			}
+	public com.liferay.portal.model.Company fetchByPrimaryKey(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			List list = q.list();
+	public com.liferay.portal.model.Company findByWebId(java.lang.String webId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
 
-			if (list.size() == 0) {
-				return null;
-			}
+	public com.liferay.portal.model.Company fetchByWebId(java.lang.String webId)
+		throws com.liferay.portal.SystemException;
 
-			Company company = (Company)list.get(0);
-
-			return company;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.Company findByMx(java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
 
-	public Company findByMx(String mx)
-		throws NoSuchCompanyException, SystemException {
-		Company company = fetchByMx(mx);
-
-		if (company == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No Company exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("mx=");
-			msg.append(mx);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchCompanyException(msg.toString());
-		}
-
-		return company;
-	}
-
-	public Company fetchByMx(String mx) throws SystemException {
-		Session session = null;
+	public com.liferay.portal.model.Company fetchByMx(java.lang.String mx)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
-
-			if (mx == null) {
-				query.append("mx IS NULL");
-			}
-			else {
-				query.append("mx = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (mx != null) {
-				q.setString(queryPos++, mx);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Company company = (Company)list.get(0);
-
-			return company;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Company ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByWebId(String webId)
-		throws NoSuchCompanyException, SystemException {
-		Company company = findByWebId(webId);
-		remove(company);
-	}
-
-	public void removeByMx(String mx)
-		throws NoSuchCompanyException, SystemException {
-		Company company = findByMx(mx);
-		remove(company);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((Company)itr.next());
-		}
-	}
-
-	public int countByWebId(String webId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
-
-			if (webId == null) {
-				query.append("webId IS NULL");
-			}
-			else {
-				query.append("webId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (webId != null) {
-				q.setString(queryPos++, webId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByMx(String mx) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
-
-			if (mx == null) {
-				query.append("mx IS NULL");
-			}
-			else {
-				query.append("mx = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (mx != null) {
-				q.setString(queryPos++, mx);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Company");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(CompanyPersistence.class);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByWebId(java.lang.String webId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
+
+	public void removeByMx(java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
+
+	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByWebId(java.lang.String webId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByMx(java.lang.String mx)
+		throws com.liferay.portal.SystemException;
+
+	public int countAll() throws com.liferay.portal.SystemException;
 }

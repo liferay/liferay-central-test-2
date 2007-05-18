@@ -288,10 +288,6 @@ public class BookmarksFolderUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static BookmarksFolderPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

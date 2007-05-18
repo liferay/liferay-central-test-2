@@ -22,804 +22,129 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
-import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="DLFileRankPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileRankPersistence extends BasePersistence {
-	public DLFileRank create(DLFileRankPK dlFileRankPK) {
-		DLFileRank dlFileRank = new DLFileRankImpl();
-		dlFileRank.setNew(true);
-		dlFileRank.setPrimaryKey(dlFileRankPK);
+public interface DLFileRankPersistence {
+	public com.liferay.portlet.documentlibrary.model.DLFileRank create(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK);
 
-		return dlFileRank;
-	}
+	public com.liferay.portlet.documentlibrary.model.DLFileRank remove(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-	public DLFileRank remove(DLFileRankPK dlFileRankPK)
-		throws NoSuchFileRankException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRankImpl.class,
-					dlFileRankPK);
-
-			if (dlFileRank == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No DLFileRank exists with the primary key " +
-						dlFileRankPK);
-				}
-
-				throw new NoSuchFileRankException(
-					"No DLFileRank exists with the primary key " +
-					dlFileRankPK);
-			}
-
-			return remove(dlFileRank);
-		}
-		catch (NoSuchFileRankException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(dlFileRank);
-			session.flush();
-
-			return dlFileRank;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.documentlibrary.model.DLFileRank remove(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws SystemException {
-		return update(dlFileRank, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByPrimaryKey(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(dlFileRank);
-			}
-			else {
-				if (dlFileRank.isNew()) {
-					session.save(dlFileRank);
-				}
-			}
+	public com.liferay.portlet.documentlibrary.model.DLFileRank fetchByPrimaryKey(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
+		throws com.liferay.portal.SystemException;
 
-			session.flush();
-			dlFileRank.setNew(false);
+	public java.util.List findByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-			return dlFileRank;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByUserId(long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK)
-		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = fetchByPrimaryKey(dlFileRankPK);
+	public java.util.List findByUserId(long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (dlFileRank == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No DLFileRank exists with the primary key " +
-					dlFileRankPK);
-			}
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByUserId_First(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-			throw new NoSuchFileRankException(
-				"No DLFileRank exists with the primary key " + dlFileRankPK);
-		}
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByUserId_Last(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-		return dlFileRank;
-	}
+	public com.liferay.portlet.documentlibrary.model.DLFileRank[] findByUserId_PrevAndNext(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK,
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-	public DLFileRank fetchByPrimaryKey(DLFileRankPK dlFileRankPK)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findByF_N(java.lang.String folderId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findByF_N(java.lang.String folderId,
+		java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			return (DLFileRank)session.get(DLFileRankImpl.class, dlFileRankPK);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByF_N(java.lang.String folderId,
+		java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public List findByUserId(long userId) throws SystemException {
-		Session session = null;
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByF_N_First(
+		java.lang.String folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.documentlibrary.model.DLFileRank findByF_N_Last(
+		java.lang.String folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate DESC");
+	public com.liferay.portlet.documentlibrary.model.DLFileRank[] findByF_N_PrevAndNext(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK,
+		java.lang.String folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-	public List findByUserId(long userId, int begin, int end)
-		throws SystemException {
-		return findByUserId(userId, begin, end, null);
-	}
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public List findByUserId(long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public void removeByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
+	public void removeByF_N(java.lang.String folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-			}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
+	public int countByF_N(java.lang.String folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public DLFileRank findByUserId_First(long userId, OrderByComparator obc)
-		throws NoSuchFileRankException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFileRankException(msg.toString());
-		}
-		else {
-			return (DLFileRank)list.get(0);
-		}
-	}
-
-	public DLFileRank findByUserId_Last(long userId, OrderByComparator obc)
-		throws NoSuchFileRankException, SystemException {
-		int count = countByUserId(userId);
-		List list = findByUserId(userId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFileRankException(msg.toString());
-		}
-		else {
-			return (DLFileRank)list.get(0);
-		}
-	}
-
-	public DLFileRank[] findByUserId_PrevAndNext(DLFileRankPK dlFileRankPK,
-		long userId, OrderByComparator obc)
-		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = findByPrimaryKey(dlFileRankPK);
-		int count = countByUserId(userId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					dlFileRank);
-			DLFileRank[] array = new DLFileRankImpl[3];
-			array[0] = (DLFileRank)objArray[0];
-			array[1] = (DLFileRank)objArray[1];
-			array[2] = (DLFileRank)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByF_N(String folderId, String name)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByF_N(String folderId, String name, int begin, int end)
-		throws SystemException {
-		return findByF_N(folderId, name, begin, end, null);
-	}
-
-	public List findByF_N(String folderId, String name, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public DLFileRank findByF_N_First(String folderId, String name,
-		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
-		List list = findByF_N(folderId, name, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFileRankException(msg.toString());
-		}
-		else {
-			return (DLFileRank)list.get(0);
-		}
-	}
-
-	public DLFileRank findByF_N_Last(String folderId, String name,
-		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
-		int count = countByF_N(folderId, name);
-		List list = findByF_N(folderId, name, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No DLFileRank exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("folderId=");
-			msg.append(folderId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFileRankException(msg.toString());
-		}
-		else {
-			return (DLFileRank)list.get(0);
-		}
-	}
-
-	public DLFileRank[] findByF_N_PrevAndNext(DLFileRankPK dlFileRankPK,
-		String folderId, String name, OrderByComparator obc)
-		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = findByPrimaryKey(dlFileRankPK);
-		int count = countByF_N(folderId, name);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					dlFileRank);
-			DLFileRank[] array = new DLFileRankImpl[3];
-			array[0] = (DLFileRank)objArray[0];
-			array[1] = (DLFileRank)objArray[1];
-			array[2] = (DLFileRank)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			DLFileRank dlFileRank = (DLFileRank)itr.next();
-			remove(dlFileRank);
-		}
-	}
-
-	public void removeByF_N(String folderId, String name)
-		throws SystemException {
-		Iterator itr = findByF_N(folderId, name).iterator();
-
-		while (itr.hasNext()) {
-			DLFileRank dlFileRank = (DLFileRank)itr.next();
-			remove(dlFileRank);
-		}
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((DLFileRank)itr.next());
-		}
-	}
-
-	public int countByUserId(long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByF_N(String folderId, String name)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(DLFileRankPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

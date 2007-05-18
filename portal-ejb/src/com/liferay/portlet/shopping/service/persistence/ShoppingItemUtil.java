@@ -300,10 +300,6 @@ public class ShoppingItemUtil {
 		return getPersistence().containsShoppingItemPrices(pk);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ShoppingItemPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

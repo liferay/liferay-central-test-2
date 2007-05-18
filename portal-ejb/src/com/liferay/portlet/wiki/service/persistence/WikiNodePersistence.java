@@ -22,686 +22,120 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="WikiNodePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiNodePersistence extends BasePersistence {
-	public WikiNode create(long nodeId) {
-		WikiNode wikiNode = new WikiNodeImpl();
-		wikiNode.setNew(true);
-		wikiNode.setPrimaryKey(nodeId);
+public interface WikiNodePersistence {
+	public com.liferay.portlet.wiki.model.WikiNode create(long nodeId);
 
-		return wikiNode;
-	}
+	public com.liferay.portlet.wiki.model.WikiNode remove(long nodeId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-	public WikiNode remove(long nodeId)
-		throws NoSuchNodeException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			WikiNode wikiNode = (WikiNode)session.get(WikiNodeImpl.class,
-					new Long(nodeId));
-
-			if (wikiNode == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No WikiNode exists with the primary key " +
-						nodeId);
-				}
-
-				throw new NoSuchNodeException(
-					"No WikiNode exists with the primary key " + nodeId);
-			}
-
-			return remove(wikiNode);
-		}
-		catch (NoSuchNodeException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public WikiNode remove(WikiNode wikiNode) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(wikiNode);
-			session.flush();
-
-			return wikiNode;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.wiki.model.WikiNode remove(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
-		throws SystemException {
-		return update(wikiNode, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean saveOrUpdate)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(long nodeId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(wikiNode);
-			}
-			else {
-				if (wikiNode.isNew()) {
-					session.save(wikiNode);
-				}
-			}
+	public com.liferay.portlet.wiki.model.WikiNode fetchByPrimaryKey(
+		long nodeId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			wikiNode.setNew(false);
+	public java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
-			return wikiNode;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public WikiNode findByPrimaryKey(long nodeId)
-		throws NoSuchNodeException, SystemException {
-		WikiNode wikiNode = fetchByPrimaryKey(nodeId);
+	public java.util.List findByGroupId(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (wikiNode == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No WikiNode exists with the primary key " + nodeId);
-			}
+	public com.liferay.portlet.wiki.model.WikiNode findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-			throw new NoSuchNodeException(
-				"No WikiNode exists with the primary key " + nodeId);
-		}
+	public com.liferay.portlet.wiki.model.WikiNode findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-		return wikiNode;
-	}
+	public com.liferay.portlet.wiki.model.WikiNode[] findByGroupId_PrevAndNext(
+		long nodeId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-	public WikiNode fetchByPrimaryKey(long nodeId) throws SystemException {
-		Session session = null;
+	public java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findByCompanyId(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			return (WikiNode)session.get(WikiNodeImpl.class, new Long(nodeId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByCompanyId(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public List findByGroupId(long groupId) throws SystemException {
-		Session session = null;
+	public com.liferay.portlet.wiki.model.WikiNode findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.wiki.model.WikiNode findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
+	public com.liferay.portlet.wiki.model.WikiNode[] findByCompanyId_PrevAndNext(
+		long nodeId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
-	}
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public WikiNode findByGroupId_First(long groupId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchNodeException(msg.toString());
-		}
-		else {
-			return (WikiNode)list.get(0);
-		}
-	}
-
-	public WikiNode findByGroupId_Last(long groupId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
-		int count = countByGroupId(groupId);
-		List list = findByGroupId(groupId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchNodeException(msg.toString());
-		}
-		else {
-			return (WikiNode)list.get(0);
-		}
-	}
-
-	public WikiNode[] findByGroupId_PrevAndNext(long nodeId, long groupId,
-		OrderByComparator obc) throws NoSuchNodeException, SystemException {
-		WikiNode wikiNode = findByPrimaryKey(nodeId);
-		int count = countByGroupId(groupId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
-			WikiNode[] array = new WikiNodeImpl[3];
-			array[0] = (WikiNode)objArray[0];
-			array[1] = (WikiNode)objArray[1];
-			array[2] = (WikiNode)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByCompanyId(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
-	}
-
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public WikiNode findByCompanyId_First(long companyId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchNodeException(msg.toString());
-		}
-		else {
-			return (WikiNode)list.get(0);
-		}
-	}
-
-	public WikiNode findByCompanyId_Last(long companyId, OrderByComparator obc)
-		throws NoSuchNodeException, SystemException {
-		int count = countByCompanyId(companyId);
-		List list = findByCompanyId(companyId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No WikiNode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchNodeException(msg.toString());
-		}
-		else {
-			return (WikiNode)list.get(0);
-		}
-	}
-
-	public WikiNode[] findByCompanyId_PrevAndNext(long nodeId, long companyId,
-		OrderByComparator obc) throws NoSuchNodeException, SystemException {
-		WikiNode wikiNode = findByPrimaryKey(nodeId);
-		int count = countByCompanyId(companyId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
-			WikiNode[] array = new WikiNodeImpl[3];
-			array[0] = (WikiNode)objArray[0];
-			array[1] = (WikiNode)objArray[1];
-			array[2] = (WikiNode)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			WikiNode wikiNode = (WikiNode)itr.next();
-			remove(wikiNode);
-		}
-	}
-
-	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			WikiNode wikiNode = (WikiNode)itr.next();
-			remove(wikiNode);
-		}
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((WikiNode)itr.next());
-		}
-	}
-
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByCompanyId(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.wiki.model.WikiNode");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(WikiNodePersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

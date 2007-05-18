@@ -22,820 +22,133 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.shopping.NoSuchItemException;
-import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
-
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
-import org.springframework.dao.DataAccessException;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="ShoppingItemPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingItemPersistence extends BasePersistence {
-	public ShoppingItem create(String itemId) {
-		ShoppingItem shoppingItem = new ShoppingItemImpl();
-		shoppingItem.setNew(true);
-		shoppingItem.setPrimaryKey(itemId);
+public interface ShoppingItemPersistence {
+	public com.liferay.portlet.shopping.model.ShoppingItem create(
+		java.lang.String itemId);
 
-		return shoppingItem;
-	}
+	public com.liferay.portlet.shopping.model.ShoppingItem remove(
+		java.lang.String itemId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-	public ShoppingItem remove(String itemId)
-		throws NoSuchItemException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ShoppingItem shoppingItem = (ShoppingItem)session.get(ShoppingItemImpl.class,
-					itemId);
-
-			if (shoppingItem == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ShoppingItem exists with the primary key " +
-						itemId);
-				}
-
-				throw new NoSuchItemException(
-					"No ShoppingItem exists with the primary key " + itemId);
-			}
-
-			return remove(shoppingItem);
-		}
-		catch (NoSuchItemException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public ShoppingItem remove(ShoppingItem shoppingItem)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(shoppingItem);
-			session.flush();
-
-			return shoppingItem;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.shopping.model.ShoppingItem remove(
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem update(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
-		throws SystemException {
-		return update(shoppingItem, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem update(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.shopping.model.ShoppingItem findByPrimaryKey(
+		java.lang.String itemId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(shoppingItem);
-			}
-			else {
-				if (shoppingItem.isNew()) {
-					session.save(shoppingItem);
-				}
-			}
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchByPrimaryKey(
+		java.lang.String itemId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			shoppingItem.setNew(false);
+	public java.util.List findByCategoryId(java.lang.String categoryId)
+		throws com.liferay.portal.SystemException;
 
-			return shoppingItem;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByCategoryId(java.lang.String categoryId,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public ShoppingItem findByPrimaryKey(String itemId)
-		throws NoSuchItemException, SystemException {
-		ShoppingItem shoppingItem = fetchByPrimaryKey(itemId);
+	public java.util.List findByCategoryId(java.lang.String categoryId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (shoppingItem == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No ShoppingItem exists with the primary key " +
-					itemId);
-			}
+	public com.liferay.portlet.shopping.model.ShoppingItem findByCategoryId_First(
+		java.lang.String categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-			throw new NoSuchItemException(
-				"No ShoppingItem exists with the primary key " + itemId);
-		}
+	public com.liferay.portlet.shopping.model.ShoppingItem findByCategoryId_Last(
+		java.lang.String categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-		return shoppingItem;
-	}
+	public com.liferay.portlet.shopping.model.ShoppingItem[] findByCategoryId_PrevAndNext(
+		java.lang.String itemId, java.lang.String categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-	public ShoppingItem fetchByPrimaryKey(String itemId)
-		throws SystemException {
-		Session session = null;
+	public com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
+		long companyId, java.lang.String sku)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
+		long companyId, java.lang.String sku)
+		throws com.liferay.portal.SystemException;
 
-			return (ShoppingItem)session.get(ShoppingItemImpl.class, itemId);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-	public List findByCategoryId(String categoryId) throws SystemException {
-		Session session = null;
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("itemId ASC");
+	public void removeByCategoryId(java.lang.String categoryId)
+		throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public void removeByC_S(long companyId, java.lang.String sku)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-			int queryPos = 0;
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+	public int countByCategoryId(java.lang.String categoryId)
+		throws com.liferay.portal.SystemException;
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public int countByC_S(long companyId, java.lang.String sku)
+		throws com.liferay.portal.SystemException;
 
-	public List findByCategoryId(String categoryId, int begin, int end)
-		throws SystemException {
-		return findByCategoryId(categoryId, begin, end, null);
-	}
+	public int countAll() throws com.liferay.portal.SystemException;
 
-	public List findByCategoryId(String categoryId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
+	public java.util.List getShoppingItemPrices(java.lang.String pk)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-		try {
-			session = openSession();
+	public java.util.List getShoppingItemPrices(java.lang.String pk, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
+	public java.util.List getShoppingItemPrices(java.lang.String pk, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchItemException;
 
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
+	public int getShoppingItemPricesSize(java.lang.String pk)
+		throws com.liferay.portal.SystemException;
 
-			query.append(" ");
+	public boolean containsShoppingItemPrice(java.lang.String pk,
+		java.lang.String shoppingItemPricePK)
+		throws com.liferay.portal.SystemException;
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("itemId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public ShoppingItem findByCategoryId_First(String categoryId,
-		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		List list = findByCategoryId(categoryId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingItem exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("categoryId=");
-			msg.append(categoryId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchItemException(msg.toString());
-		}
-		else {
-			return (ShoppingItem)list.get(0);
-		}
-	}
-
-	public ShoppingItem findByCategoryId_Last(String categoryId,
-		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		int count = countByCategoryId(categoryId);
-		List list = findByCategoryId(categoryId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingItem exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("categoryId=");
-			msg.append(categoryId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchItemException(msg.toString());
-		}
-		else {
-			return (ShoppingItem)list.get(0);
-		}
-	}
-
-	public ShoppingItem[] findByCategoryId_PrevAndNext(String itemId,
-		String categoryId, OrderByComparator obc)
-		throws NoSuchItemException, SystemException {
-		ShoppingItem shoppingItem = findByPrimaryKey(itemId);
-		int count = countByCategoryId(categoryId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("itemId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					shoppingItem);
-			ShoppingItem[] array = new ShoppingItemImpl[3];
-			array[0] = (ShoppingItem)objArray[0];
-			array[1] = (ShoppingItem)objArray[1];
-			array[2] = (ShoppingItem)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public ShoppingItem findByC_S(long companyId, String sku)
-		throws NoSuchItemException, SystemException {
-		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
-
-		if (shoppingItem == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ShoppingItem exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("sku=");
-			msg.append(sku);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchItemException(msg.toString());
-		}
-
-		return shoppingItem;
-	}
-
-	public ShoppingItem fetchByC_S(long companyId, String sku)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (sku == null) {
-				query.append("sku IS NULL");
-			}
-			else {
-				query.append("sku = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("itemId ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (sku != null) {
-				q.setString(queryPos++, sku);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			ShoppingItem shoppingItem = (ShoppingItem)list.get(0);
-
-			return shoppingItem;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("itemId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByCategoryId(String categoryId) throws SystemException {
-		Iterator itr = findByCategoryId(categoryId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingItem shoppingItem = (ShoppingItem)itr.next();
-			remove(shoppingItem);
-		}
-	}
-
-	public void removeByC_S(long companyId, String sku)
-		throws NoSuchItemException, SystemException {
-		ShoppingItem shoppingItem = findByC_S(companyId, sku);
-		remove(shoppingItem);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((ShoppingItem)itr.next());
-		}
-	}
-
-	public int countByCategoryId(String categoryId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_S(long companyId, String sku) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (sku == null) {
-				query.append("sku IS NULL");
-			}
-			else {
-				query.append("sku = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (sku != null) {
-				q.setString(queryPos++, sku);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.shopping.model.ShoppingItem");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getShoppingItemPrices(String pk)
-		throws NoSuchItemException, SystemException {
-		return getShoppingItemPrices(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List getShoppingItemPrices(String pk, int begin, int end)
-		throws NoSuchItemException, SystemException {
-		return getShoppingItemPrices(pk, begin, end, null);
-	}
-
-	public List getShoppingItemPrices(String pk, int begin, int end,
-		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETSHOPPINGITEMPRICES);
-
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
-			}
-			else {
-				sm.append("ORDER BY ");
-				sm.append("ShoppingItemPrice.itemId ASC");
-				sm.append(", ");
-				sm.append("ShoppingItemPrice.itemPriceId ASC");
-			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
-			q.addEntity("ShoppingItemPrice",
-				com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public int getShoppingItemPricesSize(String pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
-			q.setCacheable(false);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean containsShoppingItemPrice(String pk,
-		String shoppingItemPricePK) throws SystemException {
-		try {
-			return containsShoppingItemPrice.contains(pk, shoppingItemPricePK);
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
-
-	public boolean containsShoppingItemPrices(String pk)
-		throws SystemException {
-		if (getShoppingItemPricesSize(pk) > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	protected void initDao() {
-		containsShoppingItemPrice = new ContainsShoppingItemPrice(this);
-	}
-
-	protected ContainsShoppingItemPrice containsShoppingItemPrice;
-
-	protected class ContainsShoppingItemPrice extends MappingSqlQuery {
-		protected ContainsShoppingItemPrice(ShoppingItemPersistence persistence) {
-			super(persistence.getDataSource(), _SQL_CONTAINSSHOPPINGITEMPRICE);
-			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
-		}
-
-		protected boolean contains(String itemId, String itemPriceId) {
-			List results = execute(new Object[] { itemId, itemPriceId });
-
-			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
-
-				if (count.intValue() > 0) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-	}
-
-	private static final String _SQL_GETSHOPPINGITEMPRICES = "SELECT {ShoppingItemPrice.*} FROM ShoppingItemPrice INNER JOIN ShoppingItem ON (ShoppingItem.itemId = ShoppingItemPrice.itemId) WHERE (ShoppingItem.itemId = ?)";
-	private static final String _SQL_GETSHOPPINGITEMPRICESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItemPrice WHERE itemId = ?";
-	private static final String _SQL_CONTAINSSHOPPINGITEMPRICE = "SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItemPrice WHERE itemId = ? AND itemPriceId = ?";
-	private static Log _log = LogFactory.getLog(ShoppingItemPersistence.class);
+	public boolean containsShoppingItemPrices(java.lang.String pk)
+		throws com.liferay.portal.SystemException;
 }

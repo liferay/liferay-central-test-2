@@ -309,10 +309,6 @@ public class MBMessageFlagUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static MBMessageFlagPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

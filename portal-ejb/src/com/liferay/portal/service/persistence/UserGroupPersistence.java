@@ -22,1222 +22,215 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchUserGroupException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.UserGroupImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
-import org.springframework.dao.DataAccessException;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="UserGroupPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UserGroupPersistence extends BasePersistence {
-	public UserGroup create(long userGroupId) {
-		UserGroup userGroup = new UserGroupImpl();
-		userGroup.setNew(true);
-		userGroup.setPrimaryKey(userGroupId);
+public interface UserGroupPersistence {
+	public com.liferay.portal.model.UserGroup create(long userGroupId);
 
-		return userGroup;
-	}
+	public com.liferay.portal.model.UserGroup remove(long userGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
 
-	public UserGroup remove(long userGroupId)
-		throws NoSuchUserGroupException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			UserGroup userGroup = (UserGroup)session.get(UserGroupImpl.class,
-					new Long(userGroupId));
-
-			if (userGroup == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No UserGroup exists with the primary key " +
-						userGroupId);
-				}
-
-				throw new NoSuchUserGroupException(
-					"No UserGroup exists with the primary key " + userGroupId);
-			}
-
-			return remove(userGroup);
-		}
-		catch (NoSuchUserGroupException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public UserGroup remove(UserGroup userGroup) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(userGroup);
-			session.flush();
-			clearUsers.clear(userGroup.getPrimaryKey());
-
-			return userGroup;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.UserGroup remove(
+		com.liferay.portal.model.UserGroup userGroup)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup update(
-		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
-		return update(userGroup, false);
-	}
+		com.liferay.portal.model.UserGroup userGroup)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup update(
 		com.liferay.portal.model.UserGroup userGroup, boolean saveOrUpdate)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			if (saveOrUpdate) {
-				session.saveOrUpdate(userGroup);
-			}
-			else {
-				if (userGroup.isNew()) {
-					session.save(userGroup);
-				}
-			}
-
-			session.flush();
-			userGroup.setNew(false);
-
-			return userGroup;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public UserGroup findByPrimaryKey(long userGroupId)
-		throws NoSuchUserGroupException, SystemException {
-		UserGroup userGroup = fetchByPrimaryKey(userGroupId);
-
-		if (userGroup == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No UserGroup exists with the primary key " +
-					userGroupId);
-			}
-
-			throw new NoSuchUserGroupException(
-				"No UserGroup exists with the primary key " + userGroupId);
-		}
-
-		return userGroup;
-	}
-
-	public UserGroup fetchByPrimaryKey(long userGroupId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (UserGroup)session.get(UserGroupImpl.class,
-				new Long(userGroupId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByCompanyId(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
-	}
-
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public UserGroup findByCompanyId_First(long companyId, OrderByComparator obc)
-		throws NoSuchUserGroupException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroup exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchUserGroupException(msg.toString());
-		}
-		else {
-			return (UserGroup)list.get(0);
-		}
-	}
-
-	public UserGroup findByCompanyId_Last(long companyId, OrderByComparator obc)
-		throws NoSuchUserGroupException, SystemException {
-		int count = countByCompanyId(companyId);
-		List list = findByCompanyId(companyId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroup exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchUserGroupException(msg.toString());
-		}
-		else {
-			return (UserGroup)list.get(0);
-		}
-	}
-
-	public UserGroup[] findByCompanyId_PrevAndNext(long userGroupId,
-		long companyId, OrderByComparator obc)
-		throws NoSuchUserGroupException, SystemException {
-		UserGroup userGroup = findByPrimaryKey(userGroupId);
-		int count = countByCompanyId(companyId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroup);
-			UserGroup[] array = new UserGroupImpl[3];
-			array[0] = (UserGroup)objArray[0];
-			array[1] = (UserGroup)objArray[1];
-			array[2] = (UserGroup)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_P(long companyId, String parentUserGroupId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_P(long companyId, String parentUserGroupId, int begin,
-		int end) throws SystemException {
-		return findByC_P(companyId, parentUserGroupId, begin, end, null);
-	}
-
-	public List findByC_P(long companyId, String parentUserGroupId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public UserGroup findByC_P_First(long companyId, String parentUserGroupId,
-		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
-		List list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroup exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("parentUserGroupId=");
-			msg.append(parentUserGroupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchUserGroupException(msg.toString());
-		}
-		else {
-			return (UserGroup)list.get(0);
-		}
-	}
-
-	public UserGroup findByC_P_Last(long companyId, String parentUserGroupId,
-		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
-		int count = countByC_P(companyId, parentUserGroupId);
-		List list = findByC_P(companyId, parentUserGroupId, count - 1, count,
-				obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroup exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("parentUserGroupId=");
-			msg.append(parentUserGroupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchUserGroupException(msg.toString());
-		}
-		else {
-			return (UserGroup)list.get(0);
-		}
-	}
-
-	public UserGroup[] findByC_P_PrevAndNext(long userGroupId, long companyId,
-		String parentUserGroupId, OrderByComparator obc)
-		throws NoSuchUserGroupException, SystemException {
-		UserGroup userGroup = findByPrimaryKey(userGroupId);
-		int count = countByC_P(companyId, parentUserGroupId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroup);
-			UserGroup[] array = new UserGroupImpl[3];
-			array[0] = (UserGroup)objArray[0];
-			array[1] = (UserGroup)objArray[1];
-			array[2] = (UserGroup)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public UserGroup findByC_N(long companyId, String name)
-		throws NoSuchUserGroupException, SystemException {
-		UserGroup userGroup = fetchByC_N(companyId, name);
-
-		if (userGroup == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroup exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchUserGroupException(msg.toString());
-		}
-
-		return userGroup;
-	}
-
-	public UserGroup fetchByC_N(long companyId, String name)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			UserGroup userGroup = (UserGroup)list.get(0);
-
-			return userGroup;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroup ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroup userGroup = (UserGroup)itr.next();
-			remove(userGroup);
-		}
-	}
-
-	public void removeByC_P(long companyId, String parentUserGroupId)
-		throws SystemException {
-		Iterator itr = findByC_P(companyId, parentUserGroupId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroup userGroup = (UserGroup)itr.next();
-			remove(userGroup);
-		}
-	}
-
-	public void removeByC_N(long companyId, String name)
-		throws NoSuchUserGroupException, SystemException {
-		UserGroup userGroup = findByC_N(companyId, name);
-		remove(userGroup);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((UserGroup)itr.next());
-		}
-	}
-
-	public int countByCompanyId(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_P(long companyId, String parentUserGroupId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_N(long companyId, String name)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.UserGroup");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List getUsers(long pk)
-		throws NoSuchUserGroupException, SystemException {
-		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List getUsers(long pk, int begin, int end)
-		throws NoSuchUserGroupException, SystemException {
-		return getUsers(pk, begin, end, null);
-	}
-
-	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
-		throws NoSuchUserGroupException, SystemException {
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETUSERS);
-
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
-			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
-			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public int getUsersSize(long pk) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
-			q.setCacheable(false);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public boolean containsUser(long pk, long userPK) throws SystemException {
-		try {
-			return containsUser.contains(pk, userPK);
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
-
-	public boolean containsUsers(long pk) throws SystemException {
-		if (getUsersSize(pk) > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.UserGroup findByPrimaryKey(long userGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup fetchByPrimaryKey(
+		long userGroupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.UserGroup findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup[] findByCompanyId_PrevAndNext(
+		long userGroupId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public java.util.List findByC_P(long companyId,
+		java.lang.String parentUserGroupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByC_P(long companyId,
+		java.lang.String parentUserGroupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByC_P(long companyId,
+		java.lang.String parentUserGroupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.UserGroup findByC_P_First(long companyId,
+		java.lang.String parentUserGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup findByC_P_Last(long companyId,
+		java.lang.String parentUserGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup[] findByC_P_PrevAndNext(
+		long userGroupId, long companyId, java.lang.String parentUserGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup findByC_N(long companyId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public com.liferay.portal.model.UserGroup fetchByC_N(long companyId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByC_P(long companyId, java.lang.String parentUserGroupId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_P(long companyId, java.lang.String parentUserGroupId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public int countAll() throws com.liferay.portal.SystemException;
+
+	public java.util.List getUsers(long pk)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public java.util.List getUsers(long pk, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public java.util.List getUsers(long pk, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
+
+	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
+
+	public boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.SystemException;
+
+	public boolean containsUsers(long pk)
+		throws com.liferay.portal.SystemException;
 
 	public void addUser(long pk, long userPK)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			addUser.add(pk, userPK);
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			addUser.add(pk, user.getPrimaryKey());
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
 	public void addUsers(long pk, long[] userPKs)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			for (int i = 0; i < userPKs.length; i++) {
-				addUser.add(pk, userPKs[i]);
-			}
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
-	public void addUsers(long pk, List users)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
-				addUser.add(pk, user.getPrimaryKey());
-			}
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+	public void addUsers(long pk, java.util.List users)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
 	public void clearUsers(long pk)
-		throws NoSuchUserGroupException, SystemException {
-		try {
-			clearUsers.clear(pk);
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException;
 
 	public void removeUser(long pk, long userPK)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			removeUser.remove(pk, userPK);
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			removeUser.remove(pk, user.getPrimaryKey());
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
 	public void removeUsers(long pk, long[] userPKs)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			for (int i = 0; i < userPKs.length; i++) {
-				removeUser.remove(pk, userPKs[i]);
-			}
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
-	public void removeUsers(long pk, List users)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
-				removeUser.remove(pk, user.getPrimaryKey());
-			}
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
+	public void removeUsers(long pk, java.util.List users)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
 	public void setUsers(long pk, long[] userPKs)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			clearUsers.clear(pk);
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 
-			for (int i = 0; i < userPKs.length; i++) {
-				addUser.add(pk, userPKs[i]);
-			}
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
-
-	public void setUsers(long pk, List users)
-		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException, 
-			SystemException {
-		try {
-			clearUsers.clear(pk);
-
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = (com.liferay.portal.model.User)users.get(i);
-				addUser.add(pk, user.getPrimaryKey());
-			}
-		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
-		}
-	}
-
-	protected void initDao() {
-		containsUser = new ContainsUser(this);
-		addUser = new AddUser(this);
-		clearUsers = new ClearUsers(this);
-		removeUser = new RemoveUser(this);
-	}
-
-	protected ContainsUser containsUser;
-	protected AddUser addUser;
-	protected ClearUsers clearUsers;
-	protected RemoveUser removeUser;
-
-	protected class ContainsUser extends MappingSqlQuery {
-		protected ContainsUser(UserGroupPersistence persistence) {
-			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
-		}
-
-		protected boolean contains(long userGroupId, long userId) {
-			List results = execute(new Object[] {
-						new Long(userGroupId), new Long(userId)
-					});
-
-			if (results.size() > 0) {
-				Integer count = (Integer)results.get(0);
-
-				if (count.intValue() > 0) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-	}
-
-	protected class AddUser extends SqlUpdate {
-		protected AddUser(UserGroupPersistence persistence) {
-			super(persistence.getDataSource(),
-				"INSERT INTO Users_UserGroups (userGroupId, userId) VALUES (?, ?)");
-			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-			compile();
-		}
-
-		protected void add(long userGroupId, long userId) {
-			if (!_persistence.containsUser.contains(userGroupId, userId)) {
-				update(new Object[] { new Long(userGroupId), new Long(userId) });
-			}
-		}
-
-		private UserGroupPersistence _persistence;
-	}
-
-	protected class ClearUsers extends SqlUpdate {
-		protected ClearUsers(UserGroupPersistence persistence) {
-			super(persistence.getDataSource(),
-				"DELETE FROM Users_UserGroups WHERE userGroupId = ?");
-			declareParameter(new SqlParameter(Types.BIGINT));
-			compile();
-		}
-
-		protected void clear(long userGroupId) {
-			update(new Object[] { new Long(userGroupId) });
-		}
-	}
-
-	protected class RemoveUser extends SqlUpdate {
-		protected RemoveUser(UserGroupPersistence persistence) {
-			super(persistence.getDataSource(),
-				"DELETE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?");
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-			compile();
-		}
-
-		protected void remove(long userGroupId, long userId) {
-			update(new Object[] { new Long(userGroupId), new Long(userId) });
-		}
-	}
-
-	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
-	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
-	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";
-	private static Log _log = LogFactory.getLog(UserGroupPersistence.class);
+	public void setUsers(long pk, java.util.List users)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupException, 
+			com.liferay.portal.NoSuchUserException;
 }

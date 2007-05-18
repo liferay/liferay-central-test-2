@@ -958,10 +958,6 @@ public class UserUtil {
 		getPersistence().setUserGroups(pk, userGroups);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static UserPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

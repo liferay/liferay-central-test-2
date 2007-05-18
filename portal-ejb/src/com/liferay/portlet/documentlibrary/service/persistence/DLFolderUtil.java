@@ -366,10 +366,6 @@ public class DLFolderUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static DLFolderPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

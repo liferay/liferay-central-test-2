@@ -23,10 +23,10 @@
 package com.liferay.portal.service.persistence;
 
 /**
- * <a href="AddressPersistence2.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddressPersistenceImpl2.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddressPersistence2 extends AddressPersistence {
+public class AddressPersistenceImpl2 extends AddressPersistenceImpl {
 }

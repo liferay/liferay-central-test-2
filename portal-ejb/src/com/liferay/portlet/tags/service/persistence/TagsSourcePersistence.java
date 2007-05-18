@@ -22,284 +22,57 @@
 
 package com.liferay.portlet.tags.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.tags.NoSuchSourceException;
-import com.liferay.portlet.tags.model.TagsSource;
-import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="TagsSourcePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsSourcePersistence extends BasePersistence {
-	public TagsSource create(long sourceId) {
-		TagsSource tagsSource = new TagsSourceImpl();
-		tagsSource.setNew(true);
-		tagsSource.setPrimaryKey(sourceId);
+public interface TagsSourcePersistence {
+	public com.liferay.portlet.tags.model.TagsSource create(long sourceId);
 
-		return tagsSource;
-	}
+	public com.liferay.portlet.tags.model.TagsSource remove(long sourceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchSourceException;
 
-	public TagsSource remove(long sourceId)
-		throws NoSuchSourceException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			TagsSource tagsSource = (TagsSource)session.get(TagsSourceImpl.class,
-					new Long(sourceId));
-
-			if (tagsSource == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No TagsSource exists with the primary key " +
-						sourceId);
-				}
-
-				throw new NoSuchSourceException(
-					"No TagsSource exists with the primary key " + sourceId);
-			}
-
-			return remove(tagsSource);
-		}
-		catch (NoSuchSourceException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public TagsSource remove(TagsSource tagsSource) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(tagsSource);
-			session.flush();
-
-			return tagsSource;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.tags.model.TagsSource remove(
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsSource update(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
-		throws SystemException {
-		return update(tagsSource, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsSource update(
 		com.liferay.portlet.tags.model.TagsSource tagsSource,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.tags.model.TagsSource findByPrimaryKey(
+		long sourceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchSourceException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(tagsSource);
-			}
-			else {
-				if (tagsSource.isNew()) {
-					session.save(tagsSource);
-				}
-			}
+	public com.liferay.portlet.tags.model.TagsSource fetchByPrimaryKey(
+		long sourceId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			tagsSource.setNew(false);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-			return tagsSource;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public TagsSource findByPrimaryKey(long sourceId)
-		throws NoSuchSourceException, SystemException {
-		TagsSource tagsSource = fetchByPrimaryKey(sourceId);
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-		if (tagsSource == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No TagsSource exists with the primary key " +
-					sourceId);
-			}
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			throw new NoSuchSourceException(
-				"No TagsSource exists with the primary key " + sourceId);
-		}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		return tagsSource;
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public TagsSource fetchByPrimaryKey(long sourceId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (TagsSource)session.get(TagsSourceImpl.class,
-				new Long(sourceId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.tags.model.TagsSource ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((TagsSource)itr.next());
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.tags.model.TagsSource");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(TagsSourcePersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

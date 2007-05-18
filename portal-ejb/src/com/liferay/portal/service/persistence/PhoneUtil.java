@@ -453,10 +453,6 @@ public class PhoneUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static PhonePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

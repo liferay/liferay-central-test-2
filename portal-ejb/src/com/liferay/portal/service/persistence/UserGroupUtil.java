@@ -427,10 +427,6 @@ public class UserGroupUtil {
 		getPersistence().setUsers(pk, users);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static UserGroupPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

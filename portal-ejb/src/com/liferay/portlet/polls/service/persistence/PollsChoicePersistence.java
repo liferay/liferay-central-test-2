@@ -22,496 +22,92 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.polls.NoSuchChoiceException;
-import com.liferay.portlet.polls.model.PollsChoice;
-import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="PollsChoicePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsChoicePersistence extends BasePersistence {
-	public PollsChoice create(PollsChoicePK pollsChoicePK) {
-		PollsChoice pollsChoice = new PollsChoiceImpl();
-		pollsChoice.setNew(true);
-		pollsChoice.setPrimaryKey(pollsChoicePK);
+public interface PollsChoicePersistence {
+	public com.liferay.portlet.polls.model.PollsChoice create(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK);
 
-		return pollsChoice;
-	}
+	public com.liferay.portlet.polls.model.PollsChoice remove(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
 
-	public PollsChoice remove(PollsChoicePK pollsChoicePK)
-		throws NoSuchChoiceException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			PollsChoice pollsChoice = (PollsChoice)session.get(PollsChoiceImpl.class,
-					pollsChoicePK);
-
-			if (pollsChoice == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No PollsChoice exists with the primary key " +
-						pollsChoicePK);
-				}
-
-				throw new NoSuchChoiceException(
-					"No PollsChoice exists with the primary key " +
-					pollsChoicePK);
-			}
-
-			return remove(pollsChoice);
-		}
-		catch (NoSuchChoiceException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PollsChoice remove(PollsChoice pollsChoice)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(pollsChoice);
-			session.flush();
-
-			return pollsChoice;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.polls.model.PollsChoice remove(
+		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice update(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
-		throws SystemException {
-		return update(pollsChoice, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice update(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			if (saveOrUpdate) {
-				session.saveOrUpdate(pollsChoice);
-			}
-			else {
-				if (pollsChoice.isNew()) {
-					session.save(pollsChoice);
-				}
-			}
-
-			session.flush();
-			pollsChoice.setNew(false);
-
-			return pollsChoice;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PollsChoice findByPrimaryKey(PollsChoicePK pollsChoicePK)
-		throws NoSuchChoiceException, SystemException {
-		PollsChoice pollsChoice = fetchByPrimaryKey(pollsChoicePK);
-
-		if (pollsChoice == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No PollsChoice exists with the primary key " +
-					pollsChoicePK);
-			}
-
-			throw new NoSuchChoiceException(
-				"No PollsChoice exists with the primary key " + pollsChoicePK);
-		}
-
-		return pollsChoice;
-	}
-
-	public PollsChoice fetchByPrimaryKey(PollsChoicePK pollsChoicePK)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (PollsChoice)session.get(PollsChoiceImpl.class, pollsChoicePK);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByQuestionId(long questionId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("choiceId ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByQuestionId(long questionId, int begin, int end)
-		throws SystemException {
-		return findByQuestionId(questionId, begin, end, null);
-	}
-
-	public List findByQuestionId(long questionId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("choiceId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PollsChoice findByQuestionId_First(long questionId,
-		OrderByComparator obc) throws NoSuchChoiceException, SystemException {
-		List list = findByQuestionId(questionId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PollsChoice exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchChoiceException(msg.toString());
-		}
-		else {
-			return (PollsChoice)list.get(0);
-		}
-	}
-
-	public PollsChoice findByQuestionId_Last(long questionId,
-		OrderByComparator obc) throws NoSuchChoiceException, SystemException {
-		int count = countByQuestionId(questionId);
-		List list = findByQuestionId(questionId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PollsChoice exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchChoiceException(msg.toString());
-		}
-		else {
-			return (PollsChoice)list.get(0);
-		}
-	}
-
-	public PollsChoice[] findByQuestionId_PrevAndNext(
-		PollsChoicePK pollsChoicePK, long questionId, OrderByComparator obc)
-		throws NoSuchChoiceException, SystemException {
-		PollsChoice pollsChoice = findByPrimaryKey(pollsChoicePK);
-		int count = countByQuestionId(questionId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("choiceId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pollsChoice);
-			PollsChoice[] array = new PollsChoiceImpl[3];
-			array[0] = (PollsChoice)objArray[0];
-			array[1] = (PollsChoice)objArray[1];
-			array[2] = (PollsChoice)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.polls.model.PollsChoice ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("choiceId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByQuestionId(long questionId) throws SystemException {
-		Iterator itr = findByQuestionId(questionId).iterator();
-
-		while (itr.hasNext()) {
-			PollsChoice pollsChoice = (PollsChoice)itr.next();
-			remove(pollsChoice);
-		}
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((PollsChoice)itr.next());
-		}
-	}
-
-	public int countByQuestionId(long questionId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsChoice WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.polls.model.PollsChoice");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(PollsChoicePersistence.class);
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByPrimaryKey(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByQuestionId(long questionId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByQuestionId(long questionId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByQuestionId(long questionId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByQuestionId_First(
+		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByQuestionId_Last(
+		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice[] findByQuestionId_PrevAndNext(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK,
+		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByQuestionId(long questionId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByQuestionId(long questionId)
+		throws com.liferay.portal.SystemException;
+
+	public int countAll() throws com.liferay.portal.SystemException;
 }

@@ -589,10 +589,6 @@ public class PermissionUtil {
 		getPersistence().setUsers(pk, users);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static PermissionPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

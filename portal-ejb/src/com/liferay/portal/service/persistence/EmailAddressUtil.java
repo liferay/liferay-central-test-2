@@ -458,10 +458,6 @@ public class EmailAddressUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static EmailAddressPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

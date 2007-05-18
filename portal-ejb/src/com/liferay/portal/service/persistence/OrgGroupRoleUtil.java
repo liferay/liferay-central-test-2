@@ -287,10 +287,6 @@ public class OrgGroupRoleUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static OrgGroupRolePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

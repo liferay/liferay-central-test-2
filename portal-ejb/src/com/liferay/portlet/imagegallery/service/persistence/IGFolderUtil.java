@@ -288,10 +288,6 @@ public class IGFolderUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static IGFolderPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -234,10 +234,6 @@ public class ContactUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ContactPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

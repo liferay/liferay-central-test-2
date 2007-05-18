@@ -22,280 +22,56 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchAccountException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.model.Account;
-import com.liferay.portal.model.impl.AccountImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="AccountPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AccountPersistence extends BasePersistence {
-	public Account create(long accountId) {
-		Account account = new AccountImpl();
-		account.setNew(true);
-		account.setPrimaryKey(accountId);
+public interface AccountPersistence {
+	public com.liferay.portal.model.Account create(long accountId);
 
-		return account;
-	}
+	public com.liferay.portal.model.Account remove(long accountId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchAccountException;
 
-	public Account remove(long accountId)
-		throws NoSuchAccountException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Account account = (Account)session.get(AccountImpl.class,
-					new Long(accountId));
-
-			if (account == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No Account exists with the primary key " +
-						accountId);
-				}
-
-				throw new NoSuchAccountException(
-					"No Account exists with the primary key " + accountId);
-			}
-
-			return remove(account);
-		}
-		catch (NoSuchAccountException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Account remove(Account account) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(account);
-			session.flush();
-
-			return account;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.Account remove(
+		com.liferay.portal.model.Account account)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account update(
-		com.liferay.portal.model.Account account) throws SystemException {
-		return update(account, false);
-	}
+		com.liferay.portal.model.Account account)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account update(
 		com.liferay.portal.model.Account account, boolean saveOrUpdate)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.Account findByPrimaryKey(long accountId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchAccountException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(account);
-			}
-			else {
-				if (account.isNew()) {
-					session.save(account);
-				}
-			}
+	public com.liferay.portal.model.Account fetchByPrimaryKey(long accountId)
+		throws com.liferay.portal.SystemException;
 
-			session.flush();
-			account.setNew(false);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-			return account;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public Account findByPrimaryKey(long accountId)
-		throws NoSuchAccountException, SystemException {
-		Account account = fetchByPrimaryKey(accountId);
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-		if (account == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No Account exists with the primary key " +
-					accountId);
-			}
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			throw new NoSuchAccountException(
-				"No Account exists with the primary key " + accountId);
-		}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		return account;
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public Account fetchByPrimaryKey(long accountId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (Account)session.get(AccountImpl.class, new Long(accountId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Account ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((Account)itr.next());
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Account");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(AccountPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

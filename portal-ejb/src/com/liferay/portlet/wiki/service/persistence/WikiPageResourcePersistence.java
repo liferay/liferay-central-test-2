@@ -22,423 +22,75 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.wiki.NoSuchPageResourceException;
-import com.liferay.portlet.wiki.model.WikiPageResource;
-import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="WikiPageResourcePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiPageResourcePersistence extends BasePersistence {
-	public WikiPageResource create(long resourcePrimKey) {
-		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
-		wikiPageResource.setNew(true);
-		wikiPageResource.setPrimaryKey(resourcePrimKey);
+public interface WikiPageResourcePersistence {
+	public com.liferay.portlet.wiki.model.WikiPageResource create(
+		long resourcePrimKey);
 
-		return wikiPageResource;
-	}
+	public com.liferay.portlet.wiki.model.WikiPageResource remove(
+		long resourcePrimKey)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
-	public WikiPageResource remove(long resourcePrimKey)
-		throws NoSuchPageResourceException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			WikiPageResource wikiPageResource = (WikiPageResource)session.get(WikiPageResourceImpl.class,
-					new Long(resourcePrimKey));
-
-			if (wikiPageResource == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No WikiPageResource exists with the primary key " +
-						resourcePrimKey);
-				}
-
-				throw new NoSuchPageResourceException(
-					"No WikiPageResource exists with the primary key " +
-					resourcePrimKey);
-			}
-
-			return remove(wikiPageResource);
-		}
-		catch (NoSuchPageResourceException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public WikiPageResource remove(WikiPageResource wikiPageResource)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(wikiPageResource);
-			session.flush();
-
-			return wikiPageResource;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.wiki.model.WikiPageResource remove(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
-		throws SystemException {
-		return update(wikiPageResource, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
+		long resourcePrimKey)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(wikiPageResource);
-			}
-			else {
-				if (wikiPageResource.isNew()) {
-					session.save(wikiPageResource);
-				}
-			}
+	public com.liferay.portlet.wiki.model.WikiPageResource fetchByPrimaryKey(
+		long resourcePrimKey) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			wikiPageResource.setNew(false);
+	public com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
-			return wikiPageResource;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException;
 
-	public WikiPageResource findByPrimaryKey(long resourcePrimKey)
-		throws NoSuchPageResourceException, SystemException {
-		WikiPageResource wikiPageResource = fetchByPrimaryKey(resourcePrimKey);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-		if (wikiPageResource == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No WikiPageResource exists with the primary key " +
-					resourcePrimKey);
-			}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			throw new NoSuchPageResourceException(
-				"No WikiPageResource exists with the primary key " +
-				resourcePrimKey);
-		}
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-		return wikiPageResource;
-	}
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public WikiPageResource fetchByPrimaryKey(long resourcePrimKey)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public void removeByN_T(long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchPageResourceException;
 
-			return (WikiPageResource)session.get(WikiPageResourceImpl.class,
-				new Long(resourcePrimKey));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public WikiPageResource findByN_T(long nodeId, String title)
-		throws NoSuchPageResourceException, SystemException {
-		WikiPageResource wikiPageResource = fetchByN_T(nodeId, title);
+	public int countByN_T(long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException;
 
-		if (wikiPageResource == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No WikiPageResource exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("nodeId=");
-			msg.append(nodeId);
-			msg.append(", ");
-			msg.append("title=");
-			msg.append(title);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchPageResourceException(msg.toString());
-		}
-
-		return wikiPageResource;
-	}
-
-	public WikiPageResource fetchByN_T(long nodeId, String title)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
-			query.append("nodeId = ?");
-			query.append(" AND ");
-
-			if (title == null) {
-				query.append("title IS NULL");
-			}
-			else {
-				query.append("title = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, nodeId);
-
-			if (title != null) {
-				q.setString(queryPos++, title);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			WikiPageResource wikiPageResource = (WikiPageResource)list.get(0);
-
-			return wikiPageResource;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.wiki.model.WikiPageResource ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByN_T(long nodeId, String title)
-		throws NoSuchPageResourceException, SystemException {
-		WikiPageResource wikiPageResource = findByN_T(nodeId, title);
-		remove(wikiPageResource);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((WikiPageResource)itr.next());
-		}
-	}
-
-	public int countByN_T(long nodeId, String title) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
-			query.append("nodeId = ?");
-			query.append(" AND ");
-
-			if (title == null) {
-				query.append("title IS NULL");
-			}
-			else {
-				query.append("title = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, nodeId);
-
-			if (title != null) {
-				q.setString(queryPos++, title);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPageResource");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(WikiPageResourcePersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

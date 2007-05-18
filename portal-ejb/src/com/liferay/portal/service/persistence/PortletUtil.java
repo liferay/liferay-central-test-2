@@ -255,10 +255,6 @@ public class PortletUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static PortletPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

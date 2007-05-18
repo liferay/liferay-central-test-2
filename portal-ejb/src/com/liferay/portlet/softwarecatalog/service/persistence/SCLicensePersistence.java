@@ -22,723 +22,125 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
-import com.liferay.portlet.softwarecatalog.model.SCLicense;
-import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="SCLicensePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SCLicensePersistence extends BasePersistence {
-	public SCLicense create(long licenseId) {
-		SCLicense scLicense = new SCLicenseImpl();
-		scLicense.setNew(true);
-		scLicense.setPrimaryKey(licenseId);
+public interface SCLicensePersistence {
+	public com.liferay.portlet.softwarecatalog.model.SCLicense create(
+		long licenseId);
 
-		return scLicense;
-	}
+	public com.liferay.portlet.softwarecatalog.model.SCLicense remove(
+		long licenseId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
-	public SCLicense remove(long licenseId)
-		throws NoSuchLicenseException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SCLicense scLicense = (SCLicense)session.get(SCLicenseImpl.class,
-					new Long(licenseId));
-
-			if (scLicense == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No SCLicense exists with the primary key " +
-						licenseId);
-				}
-
-				throw new NoSuchLicenseException(
-					"No SCLicense exists with the primary key " + licenseId);
-			}
-
-			return remove(scLicense);
-		}
-		catch (NoSuchLicenseException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public SCLicense remove(SCLicense scLicense) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(scLicense);
-			session.flush();
-
-			return scLicense;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.softwarecatalog.model.SCLicense remove(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws SystemException {
-		return update(scLicense, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			if (saveOrUpdate) {
-				session.saveOrUpdate(scLicense);
-			}
-			else {
-				if (scLicense.isNew()) {
-					session.save(scLicense);
-				}
-			}
-
-			session.flush();
-			scLicense.setNew(false);
-
-			return scLicense;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public SCLicense findByPrimaryKey(long licenseId)
-		throws NoSuchLicenseException, SystemException {
-		SCLicense scLicense = fetchByPrimaryKey(licenseId);
-
-		if (scLicense == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No SCLicense exists with the primary key " +
-					licenseId);
-			}
-
-			throw new NoSuchLicenseException(
-				"No SCLicense exists with the primary key " + licenseId);
-		}
-
-		return scLicense;
-	}
-
-	public SCLicense fetchByPrimaryKey(long licenseId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (SCLicense)session.get(SCLicenseImpl.class,
-				new Long(licenseId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByActive(boolean active) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByActive(boolean active, int begin, int end)
-		throws SystemException {
-		return findByActive(active, begin, end, null);
-	}
-
-	public List findByActive(boolean active, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public SCLicense findByActive_First(boolean active, OrderByComparator obc)
-		throws NoSuchLicenseException, SystemException {
-		List list = findByActive(active, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchLicenseException(msg.toString());
-		}
-		else {
-			return (SCLicense)list.get(0);
-		}
-	}
-
-	public SCLicense findByActive_Last(boolean active, OrderByComparator obc)
-		throws NoSuchLicenseException, SystemException {
-		int count = countByActive(active);
-		List list = findByActive(active, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchLicenseException(msg.toString());
-		}
-		else {
-			return (SCLicense)list.get(0);
-		}
-	}
-
-	public SCLicense[] findByActive_PrevAndNext(long licenseId, boolean active,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
-		SCLicense scLicense = findByPrimaryKey(licenseId);
-		int count = countByActive(active);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					scLicense);
-			SCLicense[] array = new SCLicenseImpl[3];
-			array[0] = (SCLicense)objArray[0];
-			array[1] = (SCLicense)objArray[1];
-			array[2] = (SCLicense)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByA_R(boolean active, boolean recommended)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" AND ");
-			query.append("recommended = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-			q.setBoolean(queryPos++, recommended);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByA_R(boolean active, boolean recommended, int begin,
-		int end) throws SystemException {
-		return findByA_R(active, recommended, begin, end, null);
-	}
-
-	public List findByA_R(boolean active, boolean recommended, int begin,
-		int end, OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" AND ");
-			query.append("recommended = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-			q.setBoolean(queryPos++, recommended);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public SCLicense findByA_R_First(boolean active, boolean recommended,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
-		List list = findByA_R(active, recommended, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
-			msg.append(", ");
-			msg.append("recommended=");
-			msg.append(recommended);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchLicenseException(msg.toString());
-		}
-		else {
-			return (SCLicense)list.get(0);
-		}
-	}
-
-	public SCLicense findByA_R_Last(boolean active, boolean recommended,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
-		int count = countByA_R(active, recommended);
-		List list = findByA_R(active, recommended, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No SCLicense exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("active=");
-			msg.append(active);
-			msg.append(", ");
-			msg.append("recommended=");
-			msg.append(recommended);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchLicenseException(msg.toString());
-		}
-		else {
-			return (SCLicense)list.get(0);
-		}
-	}
-
-	public SCLicense[] findByA_R_PrevAndNext(long licenseId, boolean active,
-		boolean recommended, OrderByComparator obc)
-		throws NoSuchLicenseException, SystemException {
-		SCLicense scLicense = findByPrimaryKey(licenseId);
-		int count = countByA_R(active, recommended);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" AND ");
-			query.append("recommended = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-			q.setBoolean(queryPos++, recommended);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					scLicense);
-			SCLicense[] array = new SCLicenseImpl[3];
-			array[0] = (SCLicense)objArray[0];
-			array[1] = (SCLicense)objArray[1];
-			array[2] = (SCLicense)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByActive(boolean active) throws SystemException {
-		Iterator itr = findByActive(active).iterator();
-
-		while (itr.hasNext()) {
-			SCLicense scLicense = (SCLicense)itr.next();
-			remove(scLicense);
-		}
-	}
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense findByPrimaryKey(
+		long licenseId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense fetchByPrimaryKey(
+		long licenseId) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByActive(boolean active)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByActive(boolean active, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByActive(boolean active, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense findByActive_First(
+		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense findByActive_Last(
+		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense[] findByActive_PrevAndNext(
+		long licenseId, boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public java.util.List findByA_R(boolean active, boolean recommended)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByA_R(boolean active, boolean recommended,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByA_R(boolean active, boolean recommended,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense findByA_R_First(
+		boolean active, boolean recommended,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense findByA_R_Last(
+		boolean active, boolean recommended,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense[] findByA_R_PrevAndNext(
+		long licenseId, boolean active, boolean recommended,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByActive(boolean active)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByA_R(boolean active, boolean recommended)
-		throws SystemException {
-		Iterator itr = findByA_R(active, recommended).iterator();
+		throws com.liferay.portal.SystemException;
 
-		while (itr.hasNext()) {
-			SCLicense scLicense = (SCLicense)itr.next();
-			remove(scLicense);
-		}
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((SCLicense)itr.next());
-		}
-	}
-
-	public int countByActive(boolean active) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public int countByActive(boolean active)
+		throws com.liferay.portal.SystemException;
 
 	public int countByA_R(boolean active, boolean recommended)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense WHERE ");
-			query.append("active_ = ?");
-			query.append(" AND ");
-			query.append("recommended = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setBoolean(queryPos++, active);
-			q.setBoolean(queryPos++, recommended);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.softwarecatalog.model.SCLicense");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(SCLicensePersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

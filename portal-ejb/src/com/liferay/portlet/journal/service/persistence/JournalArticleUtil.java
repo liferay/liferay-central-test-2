@@ -524,10 +524,6 @@ public class JournalArticleUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static JournalArticlePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

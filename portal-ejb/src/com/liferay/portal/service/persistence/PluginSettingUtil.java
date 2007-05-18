@@ -262,10 +262,6 @@ public class PluginSettingUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static PluginSettingPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -22,975 +22,168 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.messageboards.NoSuchBanException;
-import com.liferay.portlet.messageboards.model.MBBan;
-import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="MBBanPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBBanPersistence extends BasePersistence {
-	public MBBan create(long banId) {
-		MBBan mbBan = new MBBanImpl();
-		mbBan.setNew(true);
-		mbBan.setPrimaryKey(banId);
+public interface MBBanPersistence {
+	public com.liferay.portlet.messageboards.model.MBBan create(long banId);
 
-		return mbBan;
-	}
+	public com.liferay.portlet.messageboards.model.MBBan remove(long banId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
 
-	public MBBan remove(long banId) throws NoSuchBanException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			MBBan mbBan = (MBBan)session.get(MBBanImpl.class, new Long(banId));
-
-			if (mbBan == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBBan exists with the primary key " + banId);
-				}
-
-				throw new NoSuchBanException(
-					"No MBBan exists with the primary key " + banId);
-			}
-
-			return remove(mbBan);
-		}
-		catch (NoSuchBanException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBBan remove(MBBan mbBan) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(mbBan);
-			session.flush();
-
-			return mbBan;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.messageboards.model.MBBan remove(
+		com.liferay.portlet.messageboards.model.MBBan mbBan)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBBan update(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
-		throws SystemException {
-		return update(mbBan, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBBan update(
 		com.liferay.portlet.messageboards.model.MBBan mbBan,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByPrimaryKey(
+		long banId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan fetchByPrimaryKey(
+		long banId) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.messageboards.model.MBBan findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan[] findByGroupId_PrevAndNext(
+		long banId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public java.util.List findByUserId(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUserId(long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUserId(long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByUserId_First(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByUserId_Last(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan[] findByUserId_PrevAndNext(
+		long banId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public java.util.List findByBanUserId(long banUserId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByBanUserId(long banUserId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByBanUserId(long banUserId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByBanUserId_First(
+		long banUserId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByBanUserId_Last(
+		long banUserId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan[] findByBanUserId_PrevAndNext(
+		long banId, long banUserId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan findByG_B(
+		long groupId, long banUserId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
+
+	public com.liferay.portlet.messageboards.model.MBBan fetchByG_B(
+		long groupId, long banUserId) throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbBan);
-			}
-			else {
-				if (mbBan.isNew()) {
-					session.save(mbBan);
-				}
-			}
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-			session.flush();
-			mbBan.setNew(false);
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			return mbBan;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public MBBan findByPrimaryKey(long banId)
-		throws NoSuchBanException, SystemException {
-		MBBan mbBan = fetchByPrimaryKey(banId);
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
-		if (mbBan == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No MBBan exists with the primary key " + banId);
-			}
+	public void removeByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-			throw new NoSuchBanException(
-				"No MBBan exists with the primary key " + banId);
-		}
-
-		return mbBan;
-	}
-
-	public MBBan fetchByPrimaryKey(long banId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (MBBan)session.get(MBBanImpl.class, new Long(banId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
-	}
-
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBBan findByGroupId_First(long groupId, OrderByComparator obc)
-		throws NoSuchBanException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchBanException(msg.toString());
-		}
-		else {
-			return (MBBan)list.get(0);
-		}
-	}
-
-	public MBBan findByGroupId_Last(long groupId, OrderByComparator obc)
-		throws NoSuchBanException, SystemException {
-		int count = countByGroupId(groupId);
-		List list = findByGroupId(groupId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchBanException(msg.toString());
-		}
-		else {
-			return (MBBan)list.get(0);
-		}
-	}
-
-	public MBBan[] findByGroupId_PrevAndNext(long banId, long groupId,
-		OrderByComparator obc) throws NoSuchBanException, SystemException {
-		MBBan mbBan = findByPrimaryKey(banId);
-		int count = countByGroupId(groupId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
-			MBBan[] array = new MBBanImpl[3];
-			array[0] = (MBBan)objArray[0];
-			array[1] = (MBBan)objArray[1];
-			array[2] = (MBBan)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByUserId(long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByUserId(long userId, int begin, int end)
-		throws SystemException {
-		return findByUserId(userId, begin, end, null);
-	}
-
-	public List findByUserId(long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBBan findByUserId_First(long userId, OrderByComparator obc)
-		throws NoSuchBanException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchBanException(msg.toString());
-		}
-		else {
-			return (MBBan)list.get(0);
-		}
-	}
-
-	public MBBan findByUserId_Last(long userId, OrderByComparator obc)
-		throws NoSuchBanException, SystemException {
-		int count = countByUserId(userId);
-		List list = findByUserId(userId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchBanException(msg.toString());
-		}
-		else {
-			return (MBBan)list.get(0);
-		}
-	}
-
-	public MBBan[] findByUserId_PrevAndNext(long banId, long userId,
-		OrderByComparator obc) throws NoSuchBanException, SystemException {
-		MBBan mbBan = findByPrimaryKey(banId);
-		int count = countByUserId(userId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
-			MBBan[] array = new MBBanImpl[3];
-			array[0] = (MBBan)objArray[0];
-			array[1] = (MBBan)objArray[1];
-			array[2] = (MBBan)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByBanUserId(long banUserId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("banUserId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, banUserId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByBanUserId(long banUserId, int begin, int end)
-		throws SystemException {
-		return findByBanUserId(banUserId, begin, end, null);
-	}
-
-	public List findByBanUserId(long banUserId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("banUserId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, banUserId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBBan findByBanUserId_First(long banUserId, OrderByComparator obc)
-		throws NoSuchBanException, SystemException {
-		List list = findByBanUserId(banUserId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("banUserId=");
-			msg.append(banUserId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchBanException(msg.toString());
-		}
-		else {
-			return (MBBan)list.get(0);
-		}
-	}
-
-	public MBBan findByBanUserId_Last(long banUserId, OrderByComparator obc)
-		throws NoSuchBanException, SystemException {
-		int count = countByBanUserId(banUserId);
-		List list = findByBanUserId(banUserId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("banUserId=");
-			msg.append(banUserId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchBanException(msg.toString());
-		}
-		else {
-			return (MBBan)list.get(0);
-		}
-	}
-
-	public MBBan[] findByBanUserId_PrevAndNext(long banId, long banUserId,
-		OrderByComparator obc) throws NoSuchBanException, SystemException {
-		MBBan mbBan = findByPrimaryKey(banId);
-		int count = countByBanUserId(banUserId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("banUserId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, banUserId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbBan);
-			MBBan[] array = new MBBanImpl[3];
-			array[0] = (MBBan)objArray[0];
-			array[1] = (MBBan)objArray[1];
-			array[2] = (MBBan)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBBan findByG_B(long groupId, long banUserId)
-		throws NoSuchBanException, SystemException {
-		MBBan mbBan = fetchByG_B(groupId, banUserId);
-
-		if (mbBan == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBBan exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(", ");
-			msg.append("banUserId=");
-			msg.append(banUserId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchBanException(msg.toString());
-		}
-
-		return mbBan;
-	}
-
-	public MBBan fetchByG_B(long groupId, long banUserId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("banUserId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, banUserId);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			MBBan mbBan = (MBBan)list.get(0);
-
-			return mbBan;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.messageboards.model.MBBan ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			MBBan mbBan = (MBBan)itr.next();
-			remove(mbBan);
-		}
-	}
-
-	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			MBBan mbBan = (MBBan)itr.next();
-			remove(mbBan);
-		}
-	}
-
-	public void removeByBanUserId(long banUserId) throws SystemException {
-		Iterator itr = findByBanUserId(banUserId).iterator();
-
-		while (itr.hasNext()) {
-			MBBan mbBan = (MBBan)itr.next();
-			remove(mbBan);
-		}
-	}
+	public void removeByBanUserId(long banUserId)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByG_B(long groupId, long banUserId)
-		throws NoSuchBanException, SystemException {
-		MBBan mbBan = findByG_B(groupId, banUserId);
-		remove(mbBan);
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchBanException;
 
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-		while (itr.hasNext()) {
-			remove((MBBan)itr.next());
-		}
-	}
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
+	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByUserId(long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByBanUserId(long banUserId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("banUserId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, banUserId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public int countByBanUserId(long banUserId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByG_B(long groupId, long banUserId)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("banUserId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, banUserId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.messageboards.model.MBBan");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(MBBanPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

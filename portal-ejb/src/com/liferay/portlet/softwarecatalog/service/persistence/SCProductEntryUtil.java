@@ -449,10 +449,6 @@ public class SCProductEntryUtil {
 		getPersistence().setSCLicenses(pk, scLicenses);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static SCProductEntryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

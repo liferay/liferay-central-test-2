@@ -213,10 +213,6 @@ public class WikiPageResourceUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static WikiPageResourcePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

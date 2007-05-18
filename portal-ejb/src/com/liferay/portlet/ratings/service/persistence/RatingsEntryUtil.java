@@ -266,10 +266,6 @@ public class RatingsEntryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static RatingsEntryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

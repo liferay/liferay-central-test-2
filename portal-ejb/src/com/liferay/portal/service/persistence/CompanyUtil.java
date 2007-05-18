@@ -230,10 +230,6 @@ public class CompanyUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static CompanyPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

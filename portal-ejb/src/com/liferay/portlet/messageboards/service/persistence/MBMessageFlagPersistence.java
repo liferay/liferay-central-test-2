@@ -22,798 +22,138 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="MBMessageFlagPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageFlagPersistence extends BasePersistence {
-	public MBMessageFlag create(long messageFlagId) {
-		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
-		mbMessageFlag.setNew(true);
-		mbMessageFlag.setPrimaryKey(messageFlagId);
+public interface MBMessageFlagPersistence {
+	public com.liferay.portlet.messageboards.model.MBMessageFlag create(
+		long messageFlagId);
 
-		return mbMessageFlag;
-	}
+	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
+		long messageFlagId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-	public MBMessageFlag remove(long messageFlagId)
-		throws NoSuchMessageFlagException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlagImpl.class,
-					new Long(messageFlagId));
-
-			if (mbMessageFlag == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No MBMessageFlag exists with the primary key " +
-						messageFlagId);
-				}
-
-				throw new NoSuchMessageFlagException(
-					"No MBMessageFlag exists with the primary key " +
-					messageFlagId);
-			}
-
-			return remove(mbMessageFlag);
-		}
-		catch (NoSuchMessageFlagException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(mbMessageFlag);
-			session.flush();
-
-			return mbMessageFlag;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
-		throws SystemException {
-		return update(mbMessageFlag, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
+		long messageFlagId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbMessageFlag);
-			}
-			else {
-				if (mbMessageFlag.isNew()) {
-					session.save(mbMessageFlag);
-				}
-			}
+	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByPrimaryKey(
+		long messageFlagId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			mbMessageFlag.setNew(false);
+	public java.util.List findByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-			return mbMessageFlag;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByUserId(long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public MBMessageFlag findByPrimaryKey(long messageFlagId)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = fetchByPrimaryKey(messageFlagId);
+	public java.util.List findByUserId(long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (mbMessageFlag == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No MBMessageFlag exists with the primary key " +
-					messageFlagId);
-			}
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_First(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-			throw new NoSuchMessageFlagException(
-				"No MBMessageFlag exists with the primary key " +
-				messageFlagId);
-		}
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_Last(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-		return mbMessageFlag;
-	}
+	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByUserId_PrevAndNext(
+		long messageFlagId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-	public MBMessageFlag fetchByPrimaryKey(long messageFlagId)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findByMessageId(long messageId)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findByMessageId(long messageId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			return (MBMessageFlag)session.get(MBMessageFlagImpl.class,
-				new Long(messageFlagId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByMessageId(long messageId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public List findByUserId(long userId) throws SystemException {
-		Session session = null;
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_First(
+		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_Last(
+		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
+	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByMessageId_PrevAndNext(
+		long messageFlagId, long messageId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M(
+		long userId, long messageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
+	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M(
+		long userId, long messageId) throws com.liferay.portal.SystemException;
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-	public List findByUserId(long userId, int begin, int end)
-		throws SystemException {
-		return findByUserId(userId, begin, end, null);
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public List findByUserId(long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
+	public void removeByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessageFlag findByUserId_First(long userId, OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag findByUserId_Last(long userId, OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		int count = countByUserId(userId);
-		List list = findByUserId(userId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag[] findByUserId_PrevAndNext(long messageFlagId,
-		long userId, OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
-		int count = countByUserId(userId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlagImpl[3];
-			array[0] = (MBMessageFlag)objArray[0];
-			array[1] = (MBMessageFlag)objArray[1];
-			array[2] = (MBMessageFlag)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByMessageId(long messageId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("messageId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, messageId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByMessageId(long messageId, int begin, int end)
-		throws SystemException {
-		return findByMessageId(messageId, begin, end, null);
-	}
-
-	public List findByMessageId(long messageId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("messageId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, messageId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessageFlag findByMessageId_First(long messageId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		List list = findByMessageId(messageId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("messageId=");
-			msg.append(messageId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag findByMessageId_Last(long messageId,
-		OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		int count = countByMessageId(messageId);
-		List list = findByMessageId(messageId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("messageId=");
-			msg.append(messageId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-		else {
-			return (MBMessageFlag)list.get(0);
-		}
-	}
-
-	public MBMessageFlag[] findByMessageId_PrevAndNext(long messageFlagId,
-		long messageId, OrderByComparator obc)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByPrimaryKey(messageFlagId);
-		int count = countByMessageId(messageId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("messageId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, messageId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlagImpl[3];
-			array[0] = (MBMessageFlag)objArray[0];
-			array[1] = (MBMessageFlag)objArray[1];
-			array[2] = (MBMessageFlag)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessageFlag findByU_M(long userId, long messageId)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = fetchByU_M(userId, messageId);
-
-		if (mbMessageFlag == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MBMessageFlag exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(", ");
-			msg.append("messageId=");
-			msg.append(messageId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-
-		return mbMessageFlag;
-	}
-
-	public MBMessageFlag fetchByU_M(long userId, long messageId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
-			query.append("messageId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-			q.setLong(queryPos++, messageId);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)list.get(0);
-
-			return mbMessageFlag;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByUserId(long userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-			remove(mbMessageFlag);
-		}
-	}
-
-	public void removeByMessageId(long messageId) throws SystemException {
-		Iterator itr = findByMessageId(messageId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)itr.next();
-			remove(mbMessageFlag);
-		}
-	}
+	public void removeByMessageId(long messageId)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByU_M(long userId, long messageId)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByU_M(userId, messageId);
-		remove(mbMessageFlag);
-	}
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-		while (itr.hasNext()) {
-			remove((MBMessageFlag)itr.next());
-		}
-	}
+	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
-	public int countByUserId(long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByMessageId(long messageId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("messageId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, messageId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public int countByMessageId(long messageId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByU_M(long userId, long messageId)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
-			query.append("messageId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-			q.setLong(queryPos++, messageId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(MBMessageFlagPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

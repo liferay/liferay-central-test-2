@@ -613,10 +613,6 @@ public class RoleUtil {
 		getPersistence().setUsers(pk, users);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static RolePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

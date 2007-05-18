@@ -322,10 +322,6 @@ public class TagsEntryUtil {
 		getPersistence().setTagsAssets(pk, tagsAssets);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static TagsEntryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

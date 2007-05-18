@@ -233,10 +233,6 @@ public class CountryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static CountryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -22,746 +22,110 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.ratings.NoSuchEntryException;
-import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="RatingsEntryPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RatingsEntryPersistence extends BasePersistence {
-	public RatingsEntry create(long entryId) {
-		RatingsEntry ratingsEntry = new RatingsEntryImpl();
-		ratingsEntry.setNew(true);
-		ratingsEntry.setPrimaryKey(entryId);
+public interface RatingsEntryPersistence {
+	public com.liferay.portlet.ratings.model.RatingsEntry create(long entryId);
 
-		return ratingsEntry;
-	}
+	public com.liferay.portlet.ratings.model.RatingsEntry remove(long entryId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-	public RatingsEntry remove(long entryId)
-		throws NoSuchEntryException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			RatingsEntry ratingsEntry = (RatingsEntry)session.get(RatingsEntryImpl.class,
-					new Long(entryId));
-
-			if (ratingsEntry == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No RatingsEntry exists with the primary key " +
-						entryId);
-				}
-
-				throw new NoSuchEntryException(
-					"No RatingsEntry exists with the primary key " + entryId);
-			}
-
-			return remove(ratingsEntry);
-		}
-		catch (NoSuchEntryException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public RatingsEntry remove(RatingsEntry ratingsEntry)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(ratingsEntry);
-			session.flush();
-
-			return ratingsEntry;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.ratings.model.RatingsEntry remove(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry update(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
-		throws SystemException {
-		return update(ratingsEntry, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry update(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.ratings.model.RatingsEntry findByPrimaryKey(
+		long entryId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(ratingsEntry);
-			}
-			else {
-				if (ratingsEntry.isNew()) {
-					session.save(ratingsEntry);
-				}
-			}
+	public com.liferay.portlet.ratings.model.RatingsEntry fetchByPrimaryKey(
+		long entryId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			ratingsEntry.setNew(false);
+	public java.util.List findByC_C(java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
-			return ratingsEntry;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByC_C(java.lang.String className,
+		java.lang.String classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public RatingsEntry findByPrimaryKey(long entryId)
-		throws NoSuchEntryException, SystemException {
-		RatingsEntry ratingsEntry = fetchByPrimaryKey(entryId);
+	public java.util.List findByC_C(java.lang.String className,
+		java.lang.String classPK, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (ratingsEntry == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No RatingsEntry exists with the primary key " +
-					entryId);
-			}
+	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
+		java.lang.String className, java.lang.String classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-			throw new NoSuchEntryException(
-				"No RatingsEntry exists with the primary key " + entryId);
-		}
+	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_Last(
+		java.lang.String className, java.lang.String classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-		return ratingsEntry;
-	}
+	public com.liferay.portlet.ratings.model.RatingsEntry[] findByC_C_PrevAndNext(
+		long entryId, java.lang.String className, java.lang.String classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-	public RatingsEntry fetchByPrimaryKey(long entryId)
-		throws SystemException {
-		Session session = null;
+	public com.liferay.portlet.ratings.model.RatingsEntry findByU_C_C(
+		long userId, java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-		try {
-			session = openSession();
+	public com.liferay.portlet.ratings.model.RatingsEntry fetchByU_C_C(
+		long userId, java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException;
 
-			return (RatingsEntry)session.get(RatingsEntryImpl.class,
-				new Long(entryId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-	public List findByC_C(String className, String classPK)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-			query.append(" AND ");
+	public void removeByC_C(java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException;
 
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
+	public void removeByU_C_C(long userId, java.lang.String className,
+		java.lang.String classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException;
 
-			query.append(" ");
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public int countByC_C(java.lang.String className, java.lang.String classPK)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
+	public int countByU_C_C(long userId, java.lang.String className,
+		java.lang.String classPK) throws com.liferay.portal.SystemException;
 
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByC_C(String className, String classPK, int begin, int end)
-		throws SystemException {
-		return findByC_C(className, classPK, begin, end, null);
-	}
-
-	public List findByC_C(String className, String classPK, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public RatingsEntry findByC_C_First(String className, String classPK,
-		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		List list = findByC_C(className, classPK, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No RatingsEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
-			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchEntryException(msg.toString());
-		}
-		else {
-			return (RatingsEntry)list.get(0);
-		}
-	}
-
-	public RatingsEntry findByC_C_Last(String className, String classPK,
-		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		int count = countByC_C(className, classPK);
-		List list = findByC_C(className, classPK, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No RatingsEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
-			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchEntryException(msg.toString());
-		}
-		else {
-			return (RatingsEntry)list.get(0);
-		}
-	}
-
-	public RatingsEntry[] findByC_C_PrevAndNext(long entryId, String className,
-		String classPK, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		RatingsEntry ratingsEntry = findByPrimaryKey(entryId);
-		int count = countByC_C(className, classPK);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					ratingsEntry);
-			RatingsEntry[] array = new RatingsEntryImpl[3];
-			array[0] = (RatingsEntry)objArray[0];
-			array[1] = (RatingsEntry)objArray[1];
-			array[2] = (RatingsEntry)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public RatingsEntry findByU_C_C(long userId, String className,
-		String classPK) throws NoSuchEntryException, SystemException {
-		RatingsEntry ratingsEntry = fetchByU_C_C(userId, className, classPK);
-
-		if (ratingsEntry == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No RatingsEntry exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
-			msg.append(", ");
-			msg.append("classPK=");
-			msg.append(classPK);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-
-		return ratingsEntry;
-	}
-
-	public RatingsEntry fetchByU_C_C(long userId, String className,
-		String classPK) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			RatingsEntry ratingsEntry = (RatingsEntry)list.get(0);
-
-			return ratingsEntry;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.ratings.model.RatingsEntry ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByC_C(String className, String classPK)
-		throws SystemException {
-		Iterator itr = findByC_C(className, classPK).iterator();
-
-		while (itr.hasNext()) {
-			RatingsEntry ratingsEntry = (RatingsEntry)itr.next();
-			remove(ratingsEntry);
-		}
-	}
-
-	public void removeByU_C_C(long userId, String className, String classPK)
-		throws NoSuchEntryException, SystemException {
-		RatingsEntry ratingsEntry = findByU_C_C(userId, className, classPK);
-		remove(ratingsEntry);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((RatingsEntry)itr.next());
-		}
-	}
-
-	public int countByC_C(String className, String classPK)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByU_C_C(long userId, String className, String classPK)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
-			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.ratings.model.RatingsEntry");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(RatingsEntryPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

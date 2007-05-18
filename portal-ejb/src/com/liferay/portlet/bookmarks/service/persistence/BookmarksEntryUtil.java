@@ -237,10 +237,6 @@ public class BookmarksEntryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static BookmarksEntryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

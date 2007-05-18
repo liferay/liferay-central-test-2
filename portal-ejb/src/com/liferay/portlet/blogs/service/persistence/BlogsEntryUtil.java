@@ -334,10 +334,6 @@ public class BlogsEntryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static BlogsEntryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

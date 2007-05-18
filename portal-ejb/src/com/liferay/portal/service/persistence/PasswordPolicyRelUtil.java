@@ -241,10 +241,6 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static PasswordPolicyRelPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

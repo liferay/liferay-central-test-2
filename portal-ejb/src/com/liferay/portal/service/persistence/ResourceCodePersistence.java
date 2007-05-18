@@ -22,854 +22,138 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchResourceCodeException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.ResourceCode;
-import com.liferay.portal.model.impl.ResourceCodeImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="ResourceCodePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ResourceCodePersistence extends BasePersistence {
-	public ResourceCode create(long codeId) {
-		ResourceCode resourceCode = new ResourceCodeImpl();
-		resourceCode.setNew(true);
-		resourceCode.setPrimaryKey(codeId);
+public interface ResourceCodePersistence {
+	public com.liferay.portal.model.ResourceCode create(long codeId);
 
-		return resourceCode;
-	}
+	public com.liferay.portal.model.ResourceCode remove(long codeId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-	public ResourceCode remove(long codeId)
-		throws NoSuchResourceCodeException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ResourceCode resourceCode = (ResourceCode)session.get(ResourceCodeImpl.class,
-					new Long(codeId));
-
-			if (resourceCode == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No ResourceCode exists with the primary key " +
-						codeId);
-				}
-
-				throw new NoSuchResourceCodeException(
-					"No ResourceCode exists with the primary key " + codeId);
-			}
-
-			return remove(resourceCode);
-		}
-		catch (NoSuchResourceCodeException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public ResourceCode remove(ResourceCode resourceCode)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(resourceCode);
-			session.flush();
-
-			return resourceCode;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.ResourceCode remove(
+		com.liferay.portal.model.ResourceCode resourceCode)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws SystemException {
-		return update(resourceCode, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean saveOrUpdate)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.ResourceCode findByPrimaryKey(long codeId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(resourceCode);
-			}
-			else {
-				if (resourceCode.isNew()) {
-					session.save(resourceCode);
-				}
-			}
+	public com.liferay.portal.model.ResourceCode fetchByPrimaryKey(long codeId)
+		throws com.liferay.portal.SystemException;
 
-			session.flush();
-			resourceCode.setNew(false);
+	public java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			return resourceCode;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByCompanyId(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public ResourceCode findByPrimaryKey(long codeId)
-		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = fetchByPrimaryKey(codeId);
+	public java.util.List findByCompanyId(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (resourceCode == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No ResourceCode exists with the primary key " +
-					codeId);
-			}
+	public com.liferay.portal.model.ResourceCode findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-			throw new NoSuchResourceCodeException(
-				"No ResourceCode exists with the primary key " + codeId);
-		}
+	public com.liferay.portal.model.ResourceCode findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-		return resourceCode;
-	}
+	public com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
+		long codeId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-	public ResourceCode fetchByPrimaryKey(long codeId)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findByName(java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findByName(java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			return (ResourceCode)session.get(ResourceCodeImpl.class,
-				new Long(codeId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByName(java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public List findByCompanyId(long companyId) throws SystemException {
-		Session session = null;
+	public com.liferay.portal.model.ResourceCode findByName_First(
+		java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.ResourceCode findByName_Last(
+		java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
+	public com.liferay.portal.model.ResourceCode[] findByName_PrevAndNext(
+		long codeId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public com.liferay.portal.model.ResourceCode findByC_N_S(long companyId,
+		java.lang.String name, int scope)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
+	public com.liferay.portal.model.ResourceCode fetchByC_N_S(long companyId,
+		java.lang.String name, int scope)
+		throws com.liferay.portal.SystemException;
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public void removeByName(java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
+	public void removeByC_N_S(long companyId, java.lang.String name, int scope)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchResourceCodeException;
 
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public ResourceCode findByCompanyId_First(long companyId,
-		OrderByComparator obc)
-		throws NoSuchResourceCodeException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceCodeException(msg.toString());
-		}
-		else {
-			return (ResourceCode)list.get(0);
-		}
-	}
+	public int countByName(java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
-	public ResourceCode findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
-		throws NoSuchResourceCodeException, SystemException {
-		int count = countByCompanyId(companyId);
-		List list = findByCompanyId(companyId, count - 1, count, obc);
+	public int countByC_N_S(long companyId, java.lang.String name, int scope)
+		throws com.liferay.portal.SystemException;
 
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceCodeException(msg.toString());
-		}
-		else {
-			return (ResourceCode)list.get(0);
-		}
-	}
-
-	public ResourceCode[] findByCompanyId_PrevAndNext(long codeId,
-		long companyId, OrderByComparator obc)
-		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = findByPrimaryKey(codeId);
-		int count = countByCompanyId(companyId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourceCode);
-			ResourceCode[] array = new ResourceCodeImpl[3];
-			array[0] = (ResourceCode)objArray[0];
-			array[1] = (ResourceCode)objArray[1];
-			array[2] = (ResourceCode)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByName(String name) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByName(String name, int begin, int end)
-		throws SystemException {
-		return findByName(name, begin, end, null);
-	}
-
-	public List findByName(String name, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public ResourceCode findByName_First(String name, OrderByComparator obc)
-		throws NoSuchResourceCodeException, SystemException {
-		List list = findByName(name, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceCodeException(msg.toString());
-		}
-		else {
-			return (ResourceCode)list.get(0);
-		}
-	}
-
-	public ResourceCode findByName_Last(String name, OrderByComparator obc)
-		throws NoSuchResourceCodeException, SystemException {
-		int count = countByName(name);
-		List list = findByName(name, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchResourceCodeException(msg.toString());
-		}
-		else {
-			return (ResourceCode)list.get(0);
-		}
-	}
-
-	public ResourceCode[] findByName_PrevAndNext(long codeId, String name,
-		OrderByComparator obc)
-		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = findByPrimaryKey(codeId);
-		int count = countByName(name);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourceCode);
-			ResourceCode[] array = new ResourceCodeImpl[3];
-			array[0] = (ResourceCode)objArray[0];
-			array[1] = (ResourceCode)objArray[1];
-			array[2] = (ResourceCode)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public ResourceCode findByC_N_S(long companyId, String name, int scope)
-		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = fetchByC_N_S(companyId, name, scope);
-
-		if (resourceCode == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No ResourceCode exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(", ");
-			msg.append("scope=");
-			msg.append(scope);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchResourceCodeException(msg.toString());
-		}
-
-		return resourceCode;
-	}
-
-	public ResourceCode fetchByC_N_S(long companyId, String name, int scope)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-			query.append("scope = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			q.setInteger(queryPos++, scope);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			ResourceCode resourceCode = (ResourceCode)list.get(0);
-
-			return resourceCode;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			ResourceCode resourceCode = (ResourceCode)itr.next();
-			remove(resourceCode);
-		}
-	}
-
-	public void removeByName(String name) throws SystemException {
-		Iterator itr = findByName(name).iterator();
-
-		while (itr.hasNext()) {
-			ResourceCode resourceCode = (ResourceCode)itr.next();
-			remove(resourceCode);
-		}
-	}
-
-	public void removeByC_N_S(long companyId, String name, int scope)
-		throws NoSuchResourceCodeException, SystemException {
-		ResourceCode resourceCode = findByC_N_S(companyId, name, scope);
-		remove(resourceCode);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((ResourceCode)itr.next());
-		}
-	}
-
-	public int countByCompanyId(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByName(String name) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_N_S(long companyId, String name, int scope)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
-
-			query.append(" AND ");
-			query.append("scope = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			q.setInteger(queryPos++, scope);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.ResourceCode");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(ResourceCodePersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

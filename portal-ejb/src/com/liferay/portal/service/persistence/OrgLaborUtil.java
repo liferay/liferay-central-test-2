@@ -237,10 +237,6 @@ public class OrgLaborUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static OrgLaborPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

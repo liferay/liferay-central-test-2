@@ -363,10 +363,6 @@ public class TagsPropertyUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static TagsPropertyPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

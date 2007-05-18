@@ -454,10 +454,6 @@ public class WebsiteUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static WebsitePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -56,7 +56,7 @@
 			<ref bean="com.liferay.portal.service.AccountService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.AccountPersistence" class="com.liferay.portal.service.persistence.AccountPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.AccountPersistenceImpl" class="com.liferay.portal.service.persistence.AccountPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -66,7 +66,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.AccountUtil" class="com.liferay.portal.service.persistence.AccountUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.AccountPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.AccountPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.AddressLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -123,7 +123,7 @@
 			<ref bean="com.liferay.portal.service.AddressService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.AddressPersistence" class="com.liferay.portal.service.persistence.AddressPersistence2" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.AddressPersistenceImpl" class="com.liferay.portal.service.persistence.AddressPersistenceImpl2" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -133,7 +133,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.AddressUtil" class="com.liferay.portal.service.persistence.AddressUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.AddressPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.AddressPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ClassNameLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -190,7 +190,7 @@
 			<ref bean="com.liferay.portal.service.ClassNameService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence" class="com.liferay.portal.service.persistence.ClassNamePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" class="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -200,7 +200,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ClassNameUtil" class="com.liferay.portal.service.persistence.ClassNameUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -257,7 +257,7 @@
 			<ref bean="com.liferay.portal.service.CompanyService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.CompanyPersistence" class="com.liferay.portal.service.persistence.CompanyPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.CompanyPersistenceImpl" class="com.liferay.portal.service.persistence.CompanyPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -267,7 +267,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.CompanyUtil" class="com.liferay.portal.service.persistence.CompanyUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.CompanyPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.CompanyPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ContactLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -324,7 +324,7 @@
 			<ref bean="com.liferay.portal.service.ContactService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ContactPersistence" class="com.liferay.portal.service.persistence.ContactPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ContactPersistenceImpl" class="com.liferay.portal.service.persistence.ContactPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -334,7 +334,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ContactUtil" class="com.liferay.portal.service.persistence.ContactUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ContactPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ContactPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.CountryService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
@@ -364,7 +364,7 @@
 			<ref bean="com.liferay.portal.service.CountryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.CountryPersistence" class="com.liferay.portal.service.persistence.CountryPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.CountryPersistenceImpl" class="com.liferay.portal.service.persistence.CountryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -374,7 +374,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.CountryUtil" class="com.liferay.portal.service.persistence.CountryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.CountryPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.CountryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -431,7 +431,7 @@
 			<ref bean="com.liferay.portal.service.EmailAddressService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence" class="com.liferay.portal.service.persistence.EmailAddressPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" class="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -441,7 +441,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.EmailAddressUtil" class="com.liferay.portal.service.persistence.EmailAddressUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.GroupLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -498,7 +498,7 @@
 			<ref bean="com.liferay.portal.service.GroupService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.GroupPersistence" class="com.liferay.portal.service.persistence.GroupPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.GroupPersistenceImpl" class="com.liferay.portal.service.persistence.GroupPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -508,7 +508,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.GroupUtil" class="com.liferay.portal.service.persistence.GroupUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.GroupPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.GroupPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ImageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -538,7 +538,7 @@
 			<ref bean="com.liferay.portal.service.ImageLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ImagePersistence" class="com.liferay.portal.service.persistence.ImagePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ImagePersistenceImpl" class="com.liferay.portal.service.persistence.ImagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -548,7 +548,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ImageUtil" class="com.liferay.portal.service.persistence.ImageUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ImagePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ImagePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -605,7 +605,7 @@
 			<ref bean="com.liferay.portal.service.LayoutService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.LayoutPersistence" class="com.liferay.portal.service.persistence.LayoutPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.LayoutPersistenceImpl" class="com.liferay.portal.service.persistence.LayoutPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -615,7 +615,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.LayoutUtil" class="com.liferay.portal.service.persistence.LayoutUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.LayoutPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.LayoutPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -672,7 +672,7 @@
 			<ref bean="com.liferay.portal.service.LayoutSetService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence" class="com.liferay.portal.service.persistence.LayoutSetPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" class="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -682,7 +682,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.LayoutSetUtil" class="com.liferay.portal.service.persistence.LayoutSetUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ListTypeService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
@@ -712,7 +712,7 @@
 			<ref bean="com.liferay.portal.service.ListTypeService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ListTypePersistence" class="com.liferay.portal.service.persistence.ListTypePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ListTypePersistenceImpl" class="com.liferay.portal.service.persistence.ListTypePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -722,7 +722,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ListTypeUtil" class="com.liferay.portal.service.persistence.ListTypeUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ListTypePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.OrganizationLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -779,7 +779,7 @@
 			<ref bean="com.liferay.portal.service.OrganizationService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence" class="com.liferay.portal.service.persistence.OrganizationPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" class="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -789,10 +789,10 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrganizationUtil" class="com.liferay.portal.service.persistence.OrganizationUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -802,10 +802,10 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence" class="com.liferay.portal.service.persistence.OrgGroupRolePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" class="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -815,7 +815,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupRoleUtil" class="com.liferay.portal.service.persistence.OrgGroupRoleUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.OrgGroupRolePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -872,7 +872,7 @@
 			<ref bean="com.liferay.portal.service.OrgLaborService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence" class="com.liferay.portal.service.persistence.OrgLaborPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" class="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -882,7 +882,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgLaborUtil" class="com.liferay.portal.service.persistence.OrgLaborUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -939,7 +939,7 @@
 			<ref bean="com.liferay.portal.service.PasswordPolicyService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PasswordPolicyPersistence" class="com.liferay.portal.service.persistence.PasswordPolicyPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" class="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -949,7 +949,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyUtil" class="com.liferay.portal.service.persistence.PasswordPolicyUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -979,7 +979,7 @@
 			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence" class="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" class="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -989,7 +989,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelUtil" class="com.liferay.portal.service.persistence.PasswordPolicyRelUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1019,7 +1019,7 @@
 			<ref bean="com.liferay.portal.service.PasswordTrackerLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence" class="com.liferay.portal.service.persistence.PasswordTrackerPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" class="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1029,7 +1029,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordTrackerUtil" class="com.liferay.portal.service.persistence.PasswordTrackerUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PasswordTrackerPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PermissionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1086,7 +1086,7 @@
 			<ref bean="com.liferay.portal.service.PermissionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PermissionPersistence" class="com.liferay.portal.service.persistence.PermissionPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PermissionPersistenceImpl" class="com.liferay.portal.service.persistence.PermissionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1096,7 +1096,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PermissionUtil" class="com.liferay.portal.service.persistence.PermissionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PermissionPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PermissionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1153,7 +1153,7 @@
 			<ref bean="com.liferay.portal.service.PhoneService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PhonePersistence" class="com.liferay.portal.service.persistence.PhonePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PhonePersistenceImpl" class="com.liferay.portal.service.persistence.PhonePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1163,7 +1163,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PhoneUtil" class="com.liferay.portal.service.persistence.PhoneUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PhonePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PhonePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortalService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
@@ -1247,7 +1247,7 @@
 			<ref bean="com.liferay.portal.service.PluginSettingService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence" class="com.liferay.portal.service.persistence.PluginSettingPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" class="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1257,7 +1257,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PluginSettingUtil" class="com.liferay.portal.service.persistence.PluginSettingUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1314,7 +1314,7 @@
 			<ref bean="com.liferay.portal.service.PortletService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PortletPersistence" class="com.liferay.portal.service.persistence.PortletPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PortletPersistenceImpl" class="com.liferay.portal.service.persistence.PortletPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1324,7 +1324,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletUtil" class="com.liferay.portal.service.persistence.PortletUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PortletPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PortletPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1354,7 +1354,7 @@
 			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence" class="com.liferay.portal.service.persistence.PortletPreferencesPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" class="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1364,7 +1364,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesUtil" class="com.liferay.portal.service.persistence.PortletPreferencesUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.RegionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
@@ -1394,7 +1394,7 @@
 			<ref bean="com.liferay.portal.service.RegionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.RegionPersistence" class="com.liferay.portal.service.persistence.RegionPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.RegionPersistenceImpl" class="com.liferay.portal.service.persistence.RegionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1404,7 +1404,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.RegionUtil" class="com.liferay.portal.service.persistence.RegionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.RegionPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.RegionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ReleaseLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1434,7 +1434,7 @@
 			<ref bean="com.liferay.portal.service.ReleaseLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ReleasePersistence" class="com.liferay.portal.service.persistence.ReleasePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ReleasePersistenceImpl" class="com.liferay.portal.service.persistence.ReleasePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1444,7 +1444,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ReleaseUtil" class="com.liferay.portal.service.persistence.ReleaseUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ReleasePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ReleasePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1501,7 +1501,7 @@
 			<ref bean="com.liferay.portal.service.ResourceService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ResourcePersistence" class="com.liferay.portal.service.persistence.ResourcePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ResourcePersistenceImpl" class="com.liferay.portal.service.persistence.ResourcePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1511,7 +1511,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ResourceUtil" class="com.liferay.portal.service.persistence.ResourceUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ResourcePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ResourcePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceCodeLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1541,7 +1541,7 @@
 			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence" class="com.liferay.portal.service.persistence.ResourceCodePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" class="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1551,7 +1551,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ResourceCodeUtil" class="com.liferay.portal.service.persistence.ResourceCodeUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ResourceCodePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.RoleLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1608,7 +1608,7 @@
 			<ref bean="com.liferay.portal.service.RoleService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.RolePersistence" class="com.liferay.portal.service.persistence.RolePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.RolePersistenceImpl" class="com.liferay.portal.service.persistence.RolePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1618,7 +1618,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.RoleUtil" class="com.liferay.portal.service.persistence.RoleUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.RolePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.RolePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1648,7 +1648,7 @@
 			<ref bean="com.liferay.portal.service.SubscriptionLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence" class="com.liferay.portal.service.persistence.SubscriptionPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" class="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1658,7 +1658,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.SubscriptionUtil" class="com.liferay.portal.service.persistence.SubscriptionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1715,7 +1715,7 @@
 			<ref bean="com.liferay.portal.service.UserService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserPersistence" class="com.liferay.portal.service.persistence.UserPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.UserPersistenceImpl" class="com.liferay.portal.service.persistence.UserPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1725,7 +1725,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserUtil" class="com.liferay.portal.service.persistence.UserUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.UserPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1782,7 +1782,7 @@
 			<ref bean="com.liferay.portal.service.UserGroupService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence" class="com.liferay.portal.service.persistence.UserGroupPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" class="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1792,7 +1792,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserGroupUtil" class="com.liferay.portal.service.persistence.UserGroupUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1849,7 +1849,7 @@
 			<ref bean="com.liferay.portal.service.UserGroupRoleService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence" class="com.liferay.portal.service.persistence.UserGroupRolePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" class="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1859,7 +1859,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupRoleUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserIdMapperLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1889,7 +1889,7 @@
 			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence" class="com.liferay.portal.service.persistence.UserIdMapperPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" class="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1899,7 +1899,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserIdMapperUtil" class="com.liferay.portal.service.persistence.UserIdMapperUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserIdMapperPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1929,7 +1929,7 @@
 			<ref bean="com.liferay.portal.service.UserTrackerLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence" class="com.liferay.portal.service.persistence.UserTrackerPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" class="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1939,7 +1939,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerUtil" class="com.liferay.portal.service.persistence.UserTrackerUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -1969,7 +1969,7 @@
 			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence" class="com.liferay.portal.service.persistence.UserTrackerPathPersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" class="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -1979,7 +1979,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathUtil" class="com.liferay.portal.service.persistence.UserTrackerPathUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistence" />
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.WebsiteLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2036,7 +2036,7 @@
 			<ref bean="com.liferay.portal.service.WebsiteService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.WebsitePersistence" class="com.liferay.portal.service.persistence.WebsitePersistence" lazy-init="true">
+	<bean id="com.liferay.portal.service.persistence.WebsitePersistenceImpl" class="com.liferay.portal.service.persistence.WebsitePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2046,7 +2046,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.WebsiteUtil" class="com.liferay.portal.service.persistence.WebsiteUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.WebsitePersistence" />
+			<ref bean="com.liferay.portal.service.persistence.WebsitePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsCategoryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2103,7 +2103,7 @@
 			<ref bean="com.liferay.portlet.blogs.service.BlogsCategoryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistenceImpl" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2113,7 +2113,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence" />
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2170,7 +2170,7 @@
 			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceImpl" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2180,7 +2180,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence" />
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2237,7 +2237,7 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceImpl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2247,7 +2247,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence" />
+			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2304,7 +2304,7 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceImpl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2314,7 +2314,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" />
+			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2371,7 +2371,7 @@
 			<ref bean="com.liferay.portlet.calendar.service.CalEventService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2381,7 +2381,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventUtil" class="com.liferay.portlet.calendar.service.persistence.CalEventUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" />
+			<ref bean="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2438,7 +2438,7 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2448,7 +2448,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" />
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2478,7 +2478,7 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2488,7 +2488,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" />
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2545,7 +2545,7 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2555,7 +2555,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence" />
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2585,7 +2585,7 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2595,7 +2595,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" />
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2652,7 +2652,7 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2662,7 +2662,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" />
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2719,7 +2719,7 @@
 			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2729,7 +2729,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" />
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2786,7 +2786,7 @@
 			<ref bean="com.liferay.portlet.imagegallery.service.IGImageService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceImpl" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2796,7 +2796,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence" />
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2853,7 +2853,7 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" class="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceImpl" class="com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2863,7 +2863,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence" />
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2893,7 +2893,7 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence" class="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceImpl" class="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2903,7 +2903,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence" />
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -2933,7 +2933,7 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalContentSearchLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceImpl" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2943,7 +2943,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence" />
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3000,7 +3000,7 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalStructureService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" class="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceImpl" class="com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3010,7 +3010,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence" />
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3067,7 +3067,7 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalTemplateService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceImpl" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3077,7 +3077,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence" />
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3134,7 +3134,7 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBBanService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3144,7 +3144,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" class="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3201,7 +3201,7 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3211,10 +3211,10 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3224,7 +3224,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3281,7 +3281,7 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3291,7 +3291,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3321,7 +3321,7 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3331,7 +3331,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3361,7 +3361,7 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3371,7 +3371,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3401,7 +3401,7 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBThreadLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" class="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3411,7 +3411,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence" />
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3441,7 +3441,7 @@
 			<ref bean="com.liferay.portlet.polls.service.PollsChoiceLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3451,7 +3451,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" class="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence" />
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3508,7 +3508,7 @@
 			<ref bean="com.liferay.portlet.polls.service.PollsQuestionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" class="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistenceImpl" class="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3518,7 +3518,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" class="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence" />
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3575,7 +3575,7 @@
 			<ref bean="com.liferay.portlet.polls.service.PollsVoteService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" class="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistenceImpl" class="com.liferay.portlet.polls.service.persistence.PollsVotePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3585,7 +3585,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" class="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.polls.service.persistence.PollsVotePersistence" />
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsVotePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3642,7 +3642,7 @@
 			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistenceImpl" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3652,7 +3652,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" />
+			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3682,7 +3682,7 @@
 			<ref bean="com.liferay.portlet.ratings.service.RatingsStatsLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3692,7 +3692,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" />
+			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3722,7 +3722,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCartLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3732,7 +3732,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3789,7 +3789,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3799,7 +3799,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3856,7 +3856,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3866,7 +3866,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3923,7 +3923,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3933,7 +3933,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -3963,7 +3963,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3973,7 +3973,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4003,7 +4003,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4013,7 +4013,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4070,7 +4070,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4080,7 +4080,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4110,7 +4110,7 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4120,7 +4120,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" />
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4177,7 +4177,7 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4187,7 +4187,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4244,7 +4244,7 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistenceImpl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4254,7 +4254,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4311,7 +4311,7 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4321,7 +4321,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4378,7 +4378,7 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceImpl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4388,7 +4388,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" />
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4445,7 +4445,7 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence" class="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" class="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4455,7 +4455,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence" />
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4512,7 +4512,7 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsEntryService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence" class="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" class="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4522,7 +4522,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence" />
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4579,7 +4579,7 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsPropertyService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence" class="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4589,7 +4589,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence" />
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4646,7 +4646,7 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsSourceService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" class="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceImpl" class="com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4656,7 +4656,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" class="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" />
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4713,7 +4713,7 @@
 			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceImpl" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4723,7 +4723,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" class="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" />
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4780,7 +4780,7 @@
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceImpl" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4790,7 +4790,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" />
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
@@ -4820,7 +4820,7 @@
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.enterprise" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -4830,7 +4830,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" />
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">

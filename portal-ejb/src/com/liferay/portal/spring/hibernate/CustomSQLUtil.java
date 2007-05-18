@@ -24,6 +24,9 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -34,41 +37,55 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class CustomSQLUtil {
 
 	public static String get(String id) {
-		return _instance.get(id);
+		return _instance._portalCustomSQLUtil.get(id);
 	}
 
 	public static boolean isVendorDB2(){
-		return _instance.isVendorDB2();
+		return _instance._portalCustomSQLUtil.isVendorDB2();
 	}
 
 	public static boolean isVendorMySQL(){
-		return _instance.isVendorMySQL();
+		return _instance._portalCustomSQLUtil.isVendorMySQL();
 	}
 
 	public static boolean isVendorOracle(){
-		return _instance.isVendorOracle();
+		return _instance._portalCustomSQLUtil.isVendorOracle();
 	}
 
 	public static boolean isVendorSybase(){
-		return _instance.isVendorSybase();
+		return _instance._portalCustomSQLUtil.isVendorSybase();
 	}
 
 	public static String replaceAndOperator(String sql, boolean andOperator) {
-		return _instance.replaceAndOperator(sql, andOperator);
+		return _instance._portalCustomSQLUtil.replaceAndOperator(
+			sql, andOperator);
 	}
 
 	public static String replaceIsNull(String sql) {
-		return _instance.replaceIsNull(sql);
+		return _instance._portalCustomSQLUtil.replaceIsNull(sql);
 	}
 
 	public static String removeOrderBy(String sql) {
-		return _instance.removeOrderBy(sql);
+		return _instance._portalCustomSQLUtil.removeOrderBy(sql);
 	}
 
 	public static String replaceOrderBy(String sql, OrderByComparator obc) {
-		return _instance.replaceOrderBy(sql, obc);
+		return _instance._portalCustomSQLUtil.replaceOrderBy(sql, obc);
 	}
 
-	private static PortalCustomSQLUtil _instance = new PortalCustomSQLUtil();
+	private CustomSQLUtil() {
+		try {
+			_portalCustomSQLUtil = new PortalCustomSQLUtil();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(CustomSQLUtil.class);
+
+	private static CustomSQLUtil _instance = new CustomSQLUtil();
+
+	private PortalCustomSQLUtil _portalCustomSQLUtil;
 
 }

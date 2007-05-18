@@ -236,10 +236,6 @@ public class ShoppingCouponUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ShoppingCouponPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

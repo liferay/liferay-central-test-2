@@ -243,10 +243,6 @@ public class BlogsCategoryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static BlogsCategoryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

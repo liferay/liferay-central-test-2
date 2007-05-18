@@ -240,10 +240,6 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ShoppingItemPricePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

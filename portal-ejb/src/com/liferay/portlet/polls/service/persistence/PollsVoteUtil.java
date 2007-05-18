@@ -292,10 +292,6 @@ public class PollsVoteUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static PollsVotePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

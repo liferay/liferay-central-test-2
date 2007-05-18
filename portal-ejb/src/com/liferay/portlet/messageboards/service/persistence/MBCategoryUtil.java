@@ -338,10 +338,6 @@ public class MBCategoryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static MBCategoryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

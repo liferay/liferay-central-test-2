@@ -237,10 +237,6 @@ public class IGImageUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static IGImagePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

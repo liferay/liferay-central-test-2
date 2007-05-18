@@ -295,10 +295,6 @@ public class ShoppingCategoryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ShoppingCategoryPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

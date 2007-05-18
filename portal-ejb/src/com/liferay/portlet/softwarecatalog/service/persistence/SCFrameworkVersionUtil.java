@@ -338,10 +338,6 @@ public class SCFrameworkVersionUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static SCFrameworkVersionPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

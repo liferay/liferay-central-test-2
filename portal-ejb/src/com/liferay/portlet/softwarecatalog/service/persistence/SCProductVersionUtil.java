@@ -362,10 +362,6 @@ public class SCProductVersionUtil {
 		getPersistence().setSCFrameworkVersions(pk, scFrameworkVersions);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static SCProductVersionPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

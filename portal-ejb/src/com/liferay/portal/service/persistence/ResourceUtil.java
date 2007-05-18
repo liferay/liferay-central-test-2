@@ -256,10 +256,6 @@ public class ResourceUtil {
 		return getPersistence().countAll();
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static ResourcePersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

@@ -22,878 +22,141 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchPortletPreferencesException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.PortletPreferences;
-import com.liferay.portal.model.impl.PortletPreferencesImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="PortletPreferencesPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletPreferencesPersistence extends BasePersistence {
-	public PortletPreferences create(long portletPreferencesId) {
-		PortletPreferences portletPreferences = new PortletPreferencesImpl();
-		portletPreferences.setNew(true);
-		portletPreferences.setPrimaryKey(portletPreferencesId);
+public interface PortletPreferencesPersistence {
+	public com.liferay.portal.model.PortletPreferences create(
+		long portletPreferencesId);
 
-		return portletPreferences;
-	}
+	public com.liferay.portal.model.PortletPreferences remove(
+		long portletPreferencesId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-	public PortletPreferences remove(long portletPreferencesId)
-		throws NoSuchPortletPreferencesException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
-					new Long(portletPreferencesId));
-
-			if (portletPreferences == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No PortletPreferences exists with the primary key " +
-						portletPreferencesId);
-				}
-
-				throw new NoSuchPortletPreferencesException(
-					"No PortletPreferences exists with the primary key " +
-					portletPreferencesId);
-			}
-
-			return remove(portletPreferences);
-		}
-		catch (NoSuchPortletPreferencesException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PortletPreferences remove(PortletPreferences portletPreferences)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(portletPreferences);
-			session.flush();
-
-			return portletPreferences;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.PortletPreferences remove(
+		com.liferay.portal.model.PortletPreferences portletPreferences)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws SystemException {
-		return update(portletPreferences, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.PortletPreferences findByPrimaryKey(
+		long portletPreferencesId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(portletPreferences);
-			}
-			else {
-				if (portletPreferences.isNew()) {
-					session.save(portletPreferences);
-				}
-			}
+	public com.liferay.portal.model.PortletPreferences fetchByPrimaryKey(
+		long portletPreferencesId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			portletPreferences.setNew(false);
+	public java.util.List findByPlid(long plid)
+		throws com.liferay.portal.SystemException;
 
-			return portletPreferences;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByPlid(long plid, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public PortletPreferences findByPrimaryKey(long portletPreferencesId)
-		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = fetchByPrimaryKey(portletPreferencesId);
+	public java.util.List findByPlid(long plid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (portletPreferences == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No PortletPreferences exists with the primary key " +
-					portletPreferencesId);
-			}
+	public com.liferay.portal.model.PortletPreferences findByPlid_First(
+		long plid, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-			throw new NoSuchPortletPreferencesException(
-				"No PortletPreferences exists with the primary key " +
-				portletPreferencesId);
-		}
+	public com.liferay.portal.model.PortletPreferences findByPlid_Last(
+		long plid, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-		return portletPreferences;
-	}
+	public com.liferay.portal.model.PortletPreferences[] findByPlid_PrevAndNext(
+		long portletPreferencesId, long plid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-	public PortletPreferences fetchByPrimaryKey(long portletPreferencesId)
-		throws SystemException {
-		Session session = null;
+	public java.util.List findByO_O_P(long ownerId, int ownerType, long plid)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findByO_O_P(long ownerId, int ownerType, long plid,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			return (PortletPreferences)session.get(PortletPreferencesImpl.class,
-				new Long(portletPreferencesId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByO_O_P(long ownerId, int ownerType, long plid,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public List findByPlid(long plid) throws SystemException {
-		Session session = null;
+	public com.liferay.portal.model.PortletPreferences findByO_O_P_First(
+		long ownerId, int ownerType, long plid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.PortletPreferences findByO_O_P_Last(
+		long ownerId, int ownerType, long plid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, plid);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByPlid(long plid, int begin, int end)
-		throws SystemException {
-		return findByPlid(plid, begin, end, null);
-	}
-
-	public List findByPlid(long plid, int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, plid);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PortletPreferences findByPlid_First(long plid, OrderByComparator obc)
-		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByPlid(plid, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("plid=");
-			msg.append(plid);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPortletPreferencesException(msg.toString());
-		}
-		else {
-			return (PortletPreferences)list.get(0);
-		}
-	}
-
-	public PortletPreferences findByPlid_Last(long plid, OrderByComparator obc)
-		throws NoSuchPortletPreferencesException, SystemException {
-		int count = countByPlid(plid);
-		List list = findByPlid(plid, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("plid=");
-			msg.append(plid);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPortletPreferencesException(msg.toString());
-		}
-		else {
-			return (PortletPreferences)list.get(0);
-		}
-	}
-
-	public PortletPreferences[] findByPlid_PrevAndNext(
-		long portletPreferencesId, long plid, OrderByComparator obc)
-		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
-		int count = countByPlid(plid);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, plid);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletPreferences);
-			PortletPreferences[] array = new PortletPreferencesImpl[3];
-			array[0] = (PortletPreferences)objArray[0];
-			array[1] = (PortletPreferences)objArray[1];
-			array[2] = (PortletPreferences)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByO_O_P(long ownerId, int ownerType, long plid)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByO_O_P(long ownerId, int ownerType, long plid, int begin,
-		int end) throws SystemException {
-		return findByO_O_P(ownerId, ownerType, plid, begin, end, null);
-	}
-
-	public List findByO_O_P(long ownerId, int ownerType, long plid, int begin,
-		int end, OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PortletPreferences findByO_O_P_First(long ownerId, int ownerType,
-		long plid, OrderByComparator obc)
-		throws NoSuchPortletPreferencesException, SystemException {
-		List list = findByO_O_P(ownerId, ownerType, plid, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(", ");
-			msg.append("ownerType=");
-			msg.append(ownerType);
-			msg.append(", ");
-			msg.append("plid=");
-			msg.append(plid);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPortletPreferencesException(msg.toString());
-		}
-		else {
-			return (PortletPreferences)list.get(0);
-		}
-	}
-
-	public PortletPreferences findByO_O_P_Last(long ownerId, int ownerType,
-		long plid, OrderByComparator obc)
-		throws NoSuchPortletPreferencesException, SystemException {
-		int count = countByO_O_P(ownerId, ownerType, plid);
-		List list = findByO_O_P(ownerId, ownerType, plid, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(", ");
-			msg.append("ownerType=");
-			msg.append(ownerType);
-			msg.append(", ");
-			msg.append("plid=");
-			msg.append(plid);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPortletPreferencesException(msg.toString());
-		}
-		else {
-			return (PortletPreferences)list.get(0);
-		}
-	}
-
-	public PortletPreferences[] findByO_O_P_PrevAndNext(
+	public com.liferay.portal.model.PortletPreferences[] findByO_O_P_PrevAndNext(
 		long portletPreferencesId, long ownerId, int ownerType, long plid,
-		OrderByComparator obc)
-		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
-		int count = countByO_O_P(ownerId, ownerType, plid);
-		Session session = null;
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.PortletPreferences findByO_O_P_P(
+		long ownerId, int ownerType, long plid, java.lang.String portletId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" ");
+	public com.liferay.portal.model.PortletPreferences fetchByO_O_P_P(
+		long ownerId, int ownerType, long plid, java.lang.String portletId)
+		throws com.liferay.portal.SystemException;
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletPreferences);
-			PortletPreferences[] array = new PortletPreferencesImpl[3];
-			array[0] = (PortletPreferences)objArray[0];
-			array[1] = (PortletPreferences)objArray[1];
-			array[2] = (PortletPreferences)objArray[2];
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-	public PortletPreferences findByO_O_P_P(long ownerId, int ownerType,
-		long plid, String portletId)
-		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = fetchByO_O_P_P(ownerId,
-				ownerType, plid, portletId);
-
-		if (portletPreferences == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PortletPreferences exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("ownerId=");
-			msg.append(ownerId);
-			msg.append(", ");
-			msg.append("ownerType=");
-			msg.append(ownerType);
-			msg.append(", ");
-			msg.append("plid=");
-			msg.append(plid);
-			msg.append(", ");
-			msg.append("portletId=");
-			msg.append(portletId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchPortletPreferencesException(msg.toString());
-		}
-
-		return portletPreferences;
-	}
-
-	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
-		long plid, String portletId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" AND ");
-
-			if (portletId == null) {
-				query.append("portletId IS NULL");
-			}
-			else {
-				query.append("portletId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
-
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			PortletPreferences portletPreferences = (PortletPreferences)list.get(0);
-
-			return portletPreferences;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PortletPreferences ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByPlid(long plid) throws SystemException {
-		Iterator itr = findByPlid(plid).iterator();
-
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
-			remove(portletPreferences);
-		}
-	}
+	public void removeByPlid(long plid)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByO_O_P(long ownerId, int ownerType, long plid)
-		throws SystemException {
-		Iterator itr = findByO_O_P(ownerId, ownerType, plid).iterator();
-
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
-			remove(portletPreferences);
-		}
-	}
+		throws com.liferay.portal.SystemException;
 
 	public void removeByO_O_P_P(long ownerId, int ownerType, long plid,
-		String portletId)
-		throws NoSuchPortletPreferencesException, SystemException {
-		PortletPreferences portletPreferences = findByO_O_P_P(ownerId,
-				ownerType, plid, portletId);
-		remove(portletPreferences);
-	}
+		java.lang.String portletId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException;
 
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-		while (itr.hasNext()) {
-			remove((PortletPreferences)itr.next());
-		}
-	}
-
-	public int countByPlid(long plid) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, plid);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public int countByPlid(long plid) throws com.liferay.portal.SystemException;
 
 	public int countByO_O_P(long ownerId, int ownerType, long plid)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+		throws com.liferay.portal.SystemException;
 
 	public int countByO_O_P_P(long ownerId, int ownerType, long plid,
-		String portletId) throws SystemException {
-		Session session = null;
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" AND ");
-
-			if (portletId == null) {
-				query.append("portletId IS NULL");
-			}
-			else {
-				query.append("portletId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
-
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.PortletPreferences");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(PortletPreferencesPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

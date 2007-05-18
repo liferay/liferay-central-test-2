@@ -587,10 +587,6 @@ public class OrganizationUtil {
 		getPersistence().setUsers(pk, users);
 	}
 
-	public static void initDao() {
-		getPersistence().initDao();
-	}
-
 	public static OrganizationPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

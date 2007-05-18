@@ -22,733 +22,125 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.portlet.bookmarks.NoSuchFolderException;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="BookmarksFolderPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksFolderPersistence extends BasePersistence {
-	public BookmarksFolder create(long folderId) {
-		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
-		bookmarksFolder.setNew(true);
-		bookmarksFolder.setPrimaryKey(folderId);
+public interface BookmarksFolderPersistence {
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder create(
+		long folderId);
 
-		return bookmarksFolder;
-	}
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder remove(
+		long folderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
-	public BookmarksFolder remove(long folderId)
-		throws NoSuchFolderException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolderImpl.class,
-					new Long(folderId));
-
-			if (bookmarksFolder == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No BookmarksFolder exists with the primary key " +
-						folderId);
-				}
-
-				throw new NoSuchFolderException(
-					"No BookmarksFolder exists with the primary key " +
-					folderId);
-			}
-
-			return remove(bookmarksFolder);
-		}
-		catch (NoSuchFolderException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(bookmarksFolder);
-			session.flush();
-
-			return bookmarksFolder;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder remove(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
-		throws SystemException {
-		return update(bookmarksFolder, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			if (saveOrUpdate) {
-				session.saveOrUpdate(bookmarksFolder);
-			}
-			else {
-				if (bookmarksFolder.isNew()) {
-					session.save(bookmarksFolder);
-				}
-			}
-
-			session.flush();
-			bookmarksFolder.setNew(false);
-
-			return bookmarksFolder;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public BookmarksFolder findByPrimaryKey(long folderId)
-		throws NoSuchFolderException, SystemException {
-		BookmarksFolder bookmarksFolder = fetchByPrimaryKey(folderId);
-
-		if (bookmarksFolder == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No BookmarksFolder exists with the primary key " +
-					folderId);
-			}
-
-			throw new NoSuchFolderException(
-				"No BookmarksFolder exists with the primary key " + folderId);
-		}
-
-		return bookmarksFolder;
-	}
-
-	public BookmarksFolder fetchByPrimaryKey(long folderId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (BookmarksFolder)session.get(BookmarksFolderImpl.class,
-				new Long(folderId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentFolderId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByGroupId(long groupId, int begin, int end)
-		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
-	}
-
-	public List findByGroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public BookmarksFolder findByGroupId_First(long groupId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		List list = findByGroupId(groupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFolderException(msg.toString());
-		}
-		else {
-			return (BookmarksFolder)list.get(0);
-		}
-	}
-
-	public BookmarksFolder findByGroupId_Last(long groupId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		int count = countByGroupId(groupId);
-		List list = findByGroupId(groupId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFolderException(msg.toString());
-		}
-		else {
-			return (BookmarksFolder)list.get(0);
-		}
-	}
-
-	public BookmarksFolder[] findByGroupId_PrevAndNext(long folderId,
-		long groupId, OrderByComparator obc)
-		throws NoSuchFolderException, SystemException {
-		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
-		int count = countByGroupId(groupId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					bookmarksFolder);
-			BookmarksFolder[] array = new BookmarksFolderImpl[3];
-			array[0] = (BookmarksFolder)objArray[0];
-			array[1] = (BookmarksFolder)objArray[1];
-			array[2] = (BookmarksFolder)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByG_P(long groupId, long parentFolderId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("parentFolderId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("parentFolderId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, parentFolderId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByG_P(long groupId, long parentFolderId, int begin, int end)
-		throws SystemException {
-		return findByG_P(groupId, parentFolderId, begin, end, null);
-	}
-
-	public List findByG_P(long groupId, long parentFolderId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("parentFolderId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, parentFolderId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public BookmarksFolder findByG_P_First(long groupId, long parentFolderId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(", ");
-			msg.append("parentFolderId=");
-			msg.append(parentFolderId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFolderException(msg.toString());
-		}
-		else {
-			return (BookmarksFolder)list.get(0);
-		}
-	}
-
-	public BookmarksFolder findByG_P_Last(long groupId, long parentFolderId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		int count = countByG_P(groupId, parentFolderId);
-		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No BookmarksFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(", ");
-			msg.append("parentFolderId=");
-			msg.append(parentFolderId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchFolderException(msg.toString());
-		}
-		else {
-			return (BookmarksFolder)list.get(0);
-		}
-	}
-
-	public BookmarksFolder[] findByG_P_PrevAndNext(long folderId, long groupId,
-		long parentFolderId, OrderByComparator obc)
-		throws NoSuchFolderException, SystemException {
-		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
-		int count = countByG_P(groupId, parentFolderId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("parentFolderId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, parentFolderId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					bookmarksFolder);
-			BookmarksFolder[] array = new BookmarksFolderImpl[3];
-			array[0] = (BookmarksFolder)objArray[0];
-			array[1] = (BookmarksFolder)objArray[1];
-			array[2] = (BookmarksFolder)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("parentFolderId ASC").append(", ");
-				query.append("name ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
-			remove(bookmarksFolder);
-		}
-	}
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByPrimaryKey(
+		long folderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder fetchByPrimaryKey(
+		long folderId) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder[] findByGroupId_PrevAndNext(
+		long folderId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public java.util.List findByG_P(long groupId, long parentFolderId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG_P(long groupId, long parentFolderId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG_P(long groupId, long parentFolderId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByG_P_First(
+		long groupId, long parentFolderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByG_P_Last(
+		long groupId, long parentFolderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder[] findByG_P_PrevAndNext(
+		long folderId, long groupId, long parentFolderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByG_P(long groupId, long parentFolderId)
-		throws SystemException {
-		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
+		throws com.liferay.portal.SystemException;
 
-		while (itr.hasNext()) {
-			BookmarksFolder bookmarksFolder = (BookmarksFolder)itr.next();
-			remove(bookmarksFolder);
-		}
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((BookmarksFolder)itr.next());
-		}
-	}
-
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, long parentFolderId)
-		throws SystemException {
-		Session session = null;
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("parentFolderId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, parentFolderId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(BookmarksFolderPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }

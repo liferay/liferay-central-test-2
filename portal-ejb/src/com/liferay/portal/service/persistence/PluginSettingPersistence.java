@@ -22,644 +22,106 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchPluginSettingException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.PluginSetting;
-import com.liferay.portal.model.impl.PluginSettingImpl;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * <a href="PluginSettingPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginSettingPersistence extends BasePersistence {
-	public PluginSetting create(long pluginSettingId) {
-		PluginSetting pluginSetting = new PluginSettingImpl();
-		pluginSetting.setNew(true);
-		pluginSetting.setPrimaryKey(pluginSettingId);
+public interface PluginSettingPersistence {
+	public com.liferay.portal.model.PluginSetting create(long pluginSettingId);
 
-		return pluginSetting;
-	}
+	public com.liferay.portal.model.PluginSetting remove(long pluginSettingId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-	public PluginSetting remove(long pluginSettingId)
-		throws NoSuchPluginSettingException, SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			PluginSetting pluginSetting = (PluginSetting)session.get(PluginSettingImpl.class,
-					new Long(pluginSettingId));
-
-			if (pluginSetting == null) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("No PluginSetting exists with the primary key " +
-						pluginSettingId);
-				}
-
-				throw new NoSuchPluginSettingException(
-					"No PluginSetting exists with the primary key " +
-					pluginSettingId);
-			}
-
-			return remove(pluginSetting);
-		}
-		catch (NoSuchPluginSettingException nsee) {
-			throw nsee;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PluginSetting remove(PluginSetting pluginSetting)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-			session.delete(pluginSetting);
-			session.flush();
-
-			return pluginSetting;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public com.liferay.portal.model.PluginSetting remove(
+		com.liferay.portal.model.PluginSetting pluginSetting)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws SystemException {
-		return update(pluginSetting, false);
-	}
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting,
-		boolean saveOrUpdate) throws SystemException {
-		Session session = null;
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.PluginSetting findByPrimaryKey(
+		long pluginSettingId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(pluginSetting);
-			}
-			else {
-				if (pluginSetting.isNew()) {
-					session.save(pluginSetting);
-				}
-			}
+	public com.liferay.portal.model.PluginSetting fetchByPrimaryKey(
+		long pluginSettingId) throws com.liferay.portal.SystemException;
 
-			session.flush();
-			pluginSetting.setNew(false);
+	public java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			return pluginSetting;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findByCompanyId(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public PluginSetting findByPrimaryKey(long pluginSettingId)
-		throws NoSuchPluginSettingException, SystemException {
-		PluginSetting pluginSetting = fetchByPrimaryKey(pluginSettingId);
+	public java.util.List findByCompanyId(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-		if (pluginSetting == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("No PluginSetting exists with the primary key " +
-					pluginSettingId);
-			}
+	public com.liferay.portal.model.PluginSetting findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-			throw new NoSuchPluginSettingException(
-				"No PluginSetting exists with the primary key " +
-				pluginSettingId);
-		}
+	public com.liferay.portal.model.PluginSetting findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-		return pluginSetting;
-	}
+	public com.liferay.portal.model.PluginSetting[] findByCompanyId_PrevAndNext(
+		long pluginSettingId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-	public PluginSetting fetchByPrimaryKey(long pluginSettingId)
-		throws SystemException {
-		Session session = null;
+	public com.liferay.portal.model.PluginSetting findByC_I_T(long companyId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-		try {
-			session = openSession();
+	public com.liferay.portal.model.PluginSetting fetchByC_I_T(long companyId,
+		java.lang.String pluginId, java.lang.String pluginType)
+		throws com.liferay.portal.SystemException;
 
-			return (PluginSetting)session.get(PluginSettingImpl.class,
-				new Long(pluginSettingId));
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
 
-	public List findByCompanyId(long companyId) throws SystemException {
-		Session session = null;
+	public java.util.List findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
+	public java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+	public java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-			return q.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public void removeByC_I_T(long companyId, java.lang.String pluginId,
+		java.lang.String pluginType)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPluginSettingException;
 
-	public List findByCompanyId(long companyId, int begin, int end)
-		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
-	}
+	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public List findByCompanyId(long companyId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
-		try {
-			session = openSession();
+	public int countByC_I_T(long companyId, java.lang.String pluginId,
+		java.lang.String pluginType) throws com.liferay.portal.SystemException;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PluginSetting findByCompanyId_First(long companyId,
-		OrderByComparator obc)
-		throws NoSuchPluginSettingException, SystemException {
-		List list = findByCompanyId(companyId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PluginSetting exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPluginSettingException(msg.toString());
-		}
-		else {
-			return (PluginSetting)list.get(0);
-		}
-	}
-
-	public PluginSetting findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
-		throws NoSuchPluginSettingException, SystemException {
-		int count = countByCompanyId(companyId);
-		List list = findByCompanyId(companyId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PluginSetting exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchPluginSettingException(msg.toString());
-		}
-		else {
-			return (PluginSetting)list.get(0);
-		}
-	}
-
-	public PluginSetting[] findByCompanyId_PrevAndNext(long pluginSettingId,
-		long companyId, OrderByComparator obc)
-		throws NoSuchPluginSettingException, SystemException {
-		PluginSetting pluginSetting = findByPrimaryKey(pluginSettingId);
-		int count = countByCompanyId(companyId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pluginSetting);
-			PluginSetting[] array = new PluginSettingImpl[3];
-			array[0] = (PluginSetting)objArray[0];
-			array[1] = (PluginSetting)objArray[1];
-			array[2] = (PluginSetting)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public PluginSetting findByC_I_T(long companyId, String pluginId,
-		String pluginType) throws NoSuchPluginSettingException, SystemException {
-		PluginSetting pluginSetting = fetchByC_I_T(companyId, pluginId,
-				pluginType);
-
-		if (pluginSetting == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PluginSetting exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", ");
-			msg.append("pluginId=");
-			msg.append(pluginId);
-			msg.append(", ");
-			msg.append("pluginType=");
-			msg.append(pluginType);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchPluginSettingException(msg.toString());
-		}
-
-		return pluginSetting;
-	}
-
-	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
-		String pluginType) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (pluginId == null) {
-				query.append("pluginId IS NULL");
-			}
-			else {
-				query.append("pluginId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (pluginType == null) {
-				query.append("pluginType IS NULL");
-			}
-			else {
-				query.append("pluginType = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (pluginId != null) {
-				q.setString(queryPos++, pluginId);
-			}
-
-			if (pluginType != null) {
-				q.setString(queryPos++, pluginType);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			PluginSetting pluginSetting = (PluginSetting)list.get(0);
-
-			return pluginSetting;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DynamicQuery query = queryInitializer.initialize(session);
-			query.setLimit(begin, end);
-
-			return query.list();
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findAll() throws SystemException {
-		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
-	}
-
-	public List findAll(int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PluginSetting ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			PluginSetting pluginSetting = (PluginSetting)itr.next();
-			remove(pluginSetting);
-		}
-	}
-
-	public void removeByC_I_T(long companyId, String pluginId, String pluginType)
-		throws NoSuchPluginSettingException, SystemException {
-		PluginSetting pluginSetting = findByC_I_T(companyId, pluginId,
-				pluginType);
-		remove(pluginSetting);
-	}
-
-	public void removeAll() throws SystemException {
-		Iterator itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove((PluginSetting)itr.next());
-		}
-	}
-
-	public int countByCompanyId(long companyId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByC_I_T(long companyId, String pluginId, String pluginType)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-
-			if (pluginId == null) {
-				query.append("pluginId IS NULL");
-			}
-			else {
-				query.append("pluginId = ?");
-			}
-
-			query.append(" AND ");
-
-			if (pluginType == null) {
-				query.append("pluginType IS NULL");
-			}
-			else {
-				query.append("pluginType = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (pluginId != null) {
-				q.setString(queryPos++, pluginId);
-			}
-
-			if (pluginType != null) {
-				q.setString(queryPos++, pluginType);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countAll() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.PluginSetting");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected void initDao() {
-	}
-
-	private static Log _log = LogFactory.getLog(PluginSettingPersistence.class);
+	public int countAll() throws com.liferay.portal.SystemException;
 }
