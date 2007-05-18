@@ -24,30 +24,31 @@ package com.sample.ruby.portlet;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.StringTokenizer;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
+import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
+import org.apache.bsf.BSFException;
+import org.apache.bsf.BSFManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.apache.bsf.BSFManager;
-import org.apache.bsf.BSFException;
-import org.jruby.exceptions.RaiseException;
 import org.jruby.RubyException;
+import org.jruby.exceptions.RaiseException;
 
 /**
  * <a href="RubyPortlet.java.html"><b><i>View Source</i></b></a>
@@ -156,7 +157,7 @@ public class RubyPortlet extends GenericPortlet {
 			}
 
 			_manager.exec("ruby", "(java)", 1, 1, script);
-			
+
 		}
 		catch (BSFException e) {
 			String message =
@@ -194,7 +195,7 @@ public class RubyPortlet extends GenericPortlet {
 			} finally {
 				is.close();
 			}
-				
+
 		}
 		return script.toString();
 	}
