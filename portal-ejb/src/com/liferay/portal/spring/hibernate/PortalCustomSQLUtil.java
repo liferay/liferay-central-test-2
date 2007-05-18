@@ -28,6 +28,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
+import java.sql.SQLException;
 
 /**
  * <a href="PortalCustomSQLUtil.java.html"><b><i>View Source</i></b></a>
@@ -38,8 +39,9 @@ import com.liferay.util.StringUtil;
 public class PortalCustomSQLUtil
 	extends com.liferay.util.dao.hibernate.CustomSQLUtil {
 
-	public PortalCustomSQLUtil() {
-		super(PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
+	public PortalCustomSQLUtil() throws SQLException {
+		super(HibernateUtil.getConnection(),
+			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
 			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL));
 	}
 

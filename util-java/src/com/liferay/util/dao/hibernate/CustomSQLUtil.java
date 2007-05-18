@@ -25,7 +25,6 @@ package com.liferay.util.dao.hibernate;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -83,26 +82,28 @@ public abstract class CustomSQLUtil {
 	public static final String ORACLE = "Oracle";
 
 	public CustomSQLUtil(String functionIsNull, String functionIsNotNull) {
-		if (Validator.isNotNull(functionIsNull) &&
-			Validator.isNotNull(functionIsNotNull)) {
+		this(null, functionIsNull, functionIsNotNull);
+	}
 
-			_functionIsNull = functionIsNull;
-			_functionIsNotNull = functionIsNotNull;
+	public CustomSQLUtil(Connection con, String functionIsNull,
+						 String functionIsNotNull) {
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"functionIsNull is manually set to " + functionIsNull);
-				_log.debug(
-					"functionIsNotNull is manually set to " +
-						functionIsNotNull);
+		try {
+			if (Validator.isNotNull(functionIsNull) &&
+				Validator.isNotNull(functionIsNotNull)) {
+
+				_functionIsNull = functionIsNull;
+				_functionIsNotNull = functionIsNotNull;
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"functionIsNull is manually set to " + functionIsNull);
+					_log.debug(
+						"functionIsNotNull is manually set to " +
+							functionIsNotNull);
+				}
 			}
-		}
-		else {
-			Connection con = null;
-
-			try {
-				con = HibernateUtil.getConnection();
-
+			else if (con != null) {
 				DatabaseMetaData metaData = con.getMetaData();
 
 				String dbName = GetterUtil.getString(
@@ -152,12 +153,12 @@ public abstract class CustomSQLUtil {
 					}
 				}
 			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-			finally {
-				DataAccess.cleanUp(con);
-			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+		finally {
+			DataAccess.cleanUp(con);
 		}
 
 		_sqlPool = CollectionFactory.getHashMap();
