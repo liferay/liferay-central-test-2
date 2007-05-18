@@ -27,9 +27,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -45,6 +43,7 @@ import org.hibernate.Session;
  * <a href="JournalTemplateFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class JournalTemplateFinder {
@@ -72,14 +71,11 @@ public class JournalTemplateFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_T_S_N_D);
 
-			boolean customSqlVendorOracle = GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.CUSTOM_SQL_VENDOR_ORACLE));
-
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				String replaceWith =
 					"structureId != ? AND structureId IS NOT NULL";
 
-				if (customSqlVendorOracle) {
+				if (CustomSQLUtil.isVendorOracle()) {
 					replaceWith = "structureId IS NOT NULL";
 				}
 
@@ -103,7 +99,7 @@ public class JournalTemplateFinder {
 			qPos.add(templateId);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				if (customSqlVendorOracle) {
+				if (CustomSQLUtil.isVendorOracle()) {
 				}
 				else {
 					qPos.add(structureId);
@@ -159,14 +155,11 @@ public class JournalTemplateFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_T_S_N_D);
 
-			boolean customSqlVendorOracle = GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.CUSTOM_SQL_VENDOR_ORACLE));
-
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				String replaceWith =
 					"structureId != ? AND structureId IS NOT NULL";
 
-				if (customSqlVendorOracle) {
+				if (CustomSQLUtil.isVendorOracle()) {
 					replaceWith = "structureId IS NOT NULL";
 				}
 
@@ -191,7 +184,7 @@ public class JournalTemplateFinder {
 			qPos.add(templateId);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
-				if (customSqlVendorOracle) {
+				if (CustomSQLUtil.isVendorOracle()) {
 				}
 				else {
 					qPos.add(structureId);

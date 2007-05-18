@@ -142,8 +142,6 @@ public class PropsUtil {
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";
 
-	public static final String CUSTOM_SQL_VENDOR_ORACLE = "custom.sql.vendor.oracle";
-
 	// Commons Pool
 
 	public static final String COMMONS_POOL_ENABLED = "commons.pool.enabled";

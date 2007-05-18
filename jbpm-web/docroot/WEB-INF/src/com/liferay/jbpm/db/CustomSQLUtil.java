@@ -28,12 +28,29 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class CustomSQLUtil {
 
 	public static String get(String id) {
 		return _instance.get(id);
+	}
+
+	public static boolean isVendorDB2(){
+		return _instance.isVendorDB2();
+	}
+
+	public static boolean isVendorMySQL(){
+		return _instance.isVendorMySQL();
+	}
+
+	public static boolean isVendorOracle(){
+		return _instance.isVendorOracle();
+	}
+
+	public static boolean isVendorSybase(){
+		return _instance.isVendorSybase();
 	}
 
 	public static String replaceAndOperator(String sql, boolean andOperator) {

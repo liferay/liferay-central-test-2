@@ -40,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.MappingException;
+import org.hibernate.dialect.DB2400Dialect;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.DialectFactory;
 import org.hibernate.exception.SQLExceptionConverter;
@@ -51,6 +52,7 @@ import org.hibernate.sql.JoinFragment;
  * <a href="DynamicDialect.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class DynamicDialect extends Dialect {
@@ -81,7 +83,21 @@ public class DynamicDialect extends Dialect {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			String msg = e.getMessage();
+
+			if (msg.indexOf("explicitly set for database: DB2") != -1) {
+				_dialect = new DB2400Dialect();
+
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"DB2400Dialect was dynamically chosen as the " +
+							"Hibernate dialect for DB2. This can be " +
+								"overriden in portal.properties");
+				}
+			}
+			else {
+				_log.error(e, e);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con);
