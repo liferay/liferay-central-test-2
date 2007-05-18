@@ -84,9 +84,9 @@ If the remote-service is true, then the service will generate remote interfaces
 for the service. The default value is true.
 
 The persistence-class value specifies the name of your custom persistence class.
-This class must extend the generated persistence class. By extending the
-generated persistence class, you can add custom logic without modifying the
-generated class.
+This class must implmeent the generated persistence interface or extend the
+generated persistence class. This allows you to override default behavior
+without modifying the generated persistence class.
 
 You can generate classes to use a custom data source and session factory.
 Point "spring.configs" in portal.properties to load your custom Spring XML with
@@ -358,10 +358,11 @@ The above settings will create a finder with the name findByCompanyId that will
 return a Collection and require a given companyId. It will also generate
 several more findByCompanyId methods that take in pagination fields (int begin,
 int end) and more sorting options. The easiest way to understand this is to
-look at a generated Persistence class. The Service Builder will also generate
-removeByCompanyId and countByCompanyId.
+look at a generated PersistenceImpl class. The Service Builder will also
+generate removeByCompanyId and countByCompanyId.
 
-See com.liferay.portal.service.persistence.LayoutPersistence for a good example.
+See com.liferay.portal.service.persistence.LayoutPersistenceImpl for a good
+example.
 
 The attribute comparator takes in the values =, !=, <, <=, >, >=, or LIKE and is
 used to compare this column.
