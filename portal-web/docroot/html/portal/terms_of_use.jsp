@@ -193,6 +193,8 @@ Welcome to our site. We maintain this web site as a service to our members. By u
 	</li>
 </ol>
 
+<br />
+
 <input type="button" value="<liferay-ui:message key="i-agree" />" onClick="submitForm(document.fm);" /> <input type="button" value="<liferay-ui:message key="i-disagree" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');" />
 
 </form>
