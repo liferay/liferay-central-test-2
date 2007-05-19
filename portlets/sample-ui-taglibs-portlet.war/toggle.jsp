@@ -35,7 +35,7 @@ Code:
     defaultOn="true"
 /&gt;</pre>
 
-<div class="separator"></div><br>
+<div class="separator"></div>
 
 Result:
 
@@ -58,6 +58,6 @@ Result:
 	The attributes <i>onImage</i> and <i>offImage</i> are optional and default to the images in this sample. You can also customize the default images by replacing them in a custom theme.
 </div>
 
-<br><div class="separator"></div><br>
+<div class="separator"></div>
 
 &laquo; <a href="<portlet:renderURL />">Back</a>

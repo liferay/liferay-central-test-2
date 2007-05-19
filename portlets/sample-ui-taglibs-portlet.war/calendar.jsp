@@ -35,7 +35,7 @@ Code:
     headerPattern="MMMM"
 /&gt;</pre>
 
-<div class="separator"></div><br>
+<div class="separator"></div>
 
 Result:
 
@@ -48,6 +48,6 @@ Result:
 	headerPattern="MMMM"
 />
 
-<br><div class="separator"></div><br>
+<div class="separator"></div>
 
 &laquo; <a href="<portlet:renderURL />">Back</a>

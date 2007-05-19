@@ -43,7 +43,7 @@ Code:
     &lt;/liferay-ui:section&gt;
 &lt;/liferay-ui:tabs&gt;</pre>
 
-<div class="separator"></div><br>
+<div class="separator"></div>
 
 Result:
 
@@ -64,6 +64,6 @@ Result:
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
-<br><div class="separator"></div><br>
+<div class="separator"></div>
 
 &laquo; <a href="<portlet:renderURL />">Back</a>
