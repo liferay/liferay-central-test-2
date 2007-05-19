@@ -445,16 +445,11 @@ public class MainServlet extends ActionServlet {
 			if (_lastModifiedPaths == null) {
 				_lastModifiedPaths = CollectionFactory.getHashSet();
 
-				for (int i = 0;; i++) {
-					String lastModifiedPath =
-						PropsUtil.get(PropsUtil.LAST_MODIFIED_PATH + i);
+				String[] pathsArray = PropsUtil.getArray(
+					PropsUtil.LAST_MODIFIED_PATHS);
 
-					if (lastModifiedPath == null) {
-						break;
-					}
-					else {
-						_lastModifiedPaths.add(lastModifiedPath);
-					}
+				for (int i = 0; i < pathsArray.length; i++) {
+					_lastModifiedPaths.add(pathsArray[i]);
 				}
 			}
 

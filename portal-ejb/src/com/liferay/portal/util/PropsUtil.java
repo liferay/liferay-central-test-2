@@ -252,7 +252,7 @@ public class PropsUtil {
 
 	public static final String SESSION_TRACKER_PERSISTENCE_ENABLED = "session.tracker.persistence.enabled";
 
-	public static final String SESSION_TRACKER_IGNORE_PATH = "session.tracker.ignore.path";
+	public static final String SESSION_TRACKER_IGNORE_PATHS = "session.tracker.ignore.paths";
 
 	// JAAS
 
@@ -326,9 +326,9 @@ public class PropsUtil {
 
 	public static final String AUTH_FORWARD_BY_LAST_PATH = "auth.forward.by.last.path";
 
-	public static final String AUTH_FORWARD_LAST_PATH = "auth.forward.last.path.";
+	public static final String AUTH_FORWARD_LAST_PATHS = "auth.forward.last.paths";
 
-	public static final String AUTH_PUBLIC_PATH = "auth.public.path.";
+	public static final String AUTH_PUBLIC_PATHS = "auth.public.paths";
 
 	// Auto Login
 
@@ -566,7 +566,7 @@ public class PropsUtil {
 
 	public static final String LAST_MODIFIED_CHECK = "last.modified.check";
 
-	public static final String LAST_MODIFIED_PATH = "last.modified.path.";
+	public static final String LAST_MODIFIED_PATHS = "last.modified.paths";
 
 	// XSS (Cross Site Scripting)
 

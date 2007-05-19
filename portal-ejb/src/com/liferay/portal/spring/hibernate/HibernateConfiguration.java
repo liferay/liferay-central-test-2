@@ -23,7 +23,6 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.InputStream;
@@ -50,8 +49,7 @@ public class HibernateConfiguration extends LocalSessionFactoryBean {
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 
-			String[] configs = StringUtil.split(
-				PropsUtil.get(PropsUtil.HIBERNATE_CONFIGS));
+			String[] configs = PropsUtil.getArray(PropsUtil.HIBERNATE_CONFIGS);
 
 			for (int i = 0; i < configs.length; i++) {
 				try {

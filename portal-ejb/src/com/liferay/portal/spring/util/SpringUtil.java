@@ -24,7 +24,6 @@ package com.liferay.portal.spring.util;
 
 import com.liferay.portal.spring.context.LazyClassPathApplicationContext;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.StringUtil;
 
 import org.springframework.context.ApplicationContext;
 
@@ -36,8 +35,7 @@ import org.springframework.context.ApplicationContext;
  */
 public class SpringUtil {
 
-	static String[] configs =
-		StringUtil.split(PropsUtil.get(PropsUtil.SPRING_CONFIGS));
+	static String[] configs = PropsUtil.getArray(PropsUtil.SPRING_CONFIGS);
 
 	static {
 		for (int i = 0; i < configs.length; i++) {

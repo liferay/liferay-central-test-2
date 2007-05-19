@@ -108,7 +108,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		_lastPaths.add(_PATH_PORTAL_LAYOUT);
 
-		_addPaths(_lastPaths, PropsUtil.AUTH_FORWARD_LAST_PATH);
+		_addPaths(_lastPaths, PropsUtil.AUTH_FORWARD_LAST_PATHS);
 
 		// auth.public.path.
 
@@ -126,11 +126,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
 
-		_addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATH);
+		_addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATHS);
 
 		_trackerIgnorePaths = CollectionFactory.getHashSet();
 
-		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATH);
+		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATHS);
 	}
 
 	public void process(HttpServletRequest req, HttpServletResponse res)
@@ -716,16 +716,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
-	private void _addPaths(Set paths, String propPrefix) {
-		for (int i = 0;; i++) {
-			String path = PropsUtil.get(propPrefix + i);
+	private void _addPaths(Set paths, String propsKey) {
+		String[] pathsArray = PropsUtil.getArray(propsKey);
 
-			if (path == null) {
-				break;
-			}
-			else {
-				paths.add(path);
-			}
+		for (int i = 0; i < pathsArray.length; i++) {
+			paths.add(pathsArray[i]);
 		}
 	}
 

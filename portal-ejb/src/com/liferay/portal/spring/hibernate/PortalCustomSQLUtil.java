@@ -28,6 +28,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
+
 import java.sql.SQLException;
 
 /**
@@ -46,7 +47,7 @@ public class PortalCustomSQLUtil
 	}
 
 	protected String[] getConfigs() {
-		return StringUtil.split(PropsUtil.get(PropsUtil.CUSTOM_SQL_CONFIGS));
+		return PropsUtil.getArray(PropsUtil.CUSTOM_SQL_CONFIGS);
 	}
 
 	protected String transform(String sql) {
