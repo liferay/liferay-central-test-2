@@ -22,13 +22,14 @@
 
 package com.sample.ruby.portlet;
 
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.util.FileUtil;
+import com.liferay.util.StringUtil;
+
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -63,15 +64,13 @@ public class RubyPortlet extends GenericPortlet {
 		helpFile = getInitParameter("help-file");
 		viewFile = getInitParameter("view-file");
 		actionFile = getInitParameter("action-file");
-
-		globalFiles = _split(getInitParameter("global-files"));
+		globalFiles = StringUtil.split(getInitParameter("global-files"));
 
 		BSFManager.registerScriptingEngine(
 			"ruby", "org.jruby.javasupport.bsf.JRubyEngine",
-			new String[]{"rb"});
+			new String[] {"rb"});
 
 		_manager = new BSFManager();
-
 	}
 
 	public void doDispatch(RenderRequest req, RenderResponse res)
@@ -112,7 +111,71 @@ public class RubyPortlet extends GenericPortlet {
 
 	public void processAction(ActionRequest req, ActionResponse res)
 		throws IOException, PortletException {
+
 		include(actionFile, req, res);
+	}
+
+	protected void declareBeans(
+			InputStream is, PortletRequest req, PortletResponse res)
+		throws BSFException, IOException {
+
+		String script = getGlobalScript() + new String(FileUtil.getBytes(is));
+
+		PortletConfig portletConfig = getPortletConfig();
+		PortletContext portletContext = getPortletContext();
+		PortletPreferences preferences = req.getPreferences();
+		Map userInfo = (Map)req.getAttribute(PortletRequest.USER_INFO);
+
+		_manager.declareBean(
+			"portletConfig", getPortletConfig(), PortletConfig.class);
+		_manager.declareBean(
+			"portletContext", getPortletContext(), PortletContext.class);
+		_manager.declareBean(
+			"preferences", preferences, PortletPreferences.class);
+		_manager.declareBean("userInfo", userInfo, Map.class);
+
+		if (req instanceof ActionRequest) {
+			_manager.declareBean("actionRequest", req, ActionRequest.class);
+		}
+		else if (req instanceof RenderRequest) {
+			_manager.declareBean("renderRequest", req, RenderRequest.class);
+		}
+
+		if (res instanceof ActionResponse) {
+			_manager.declareBean("actionResponse", res, ActionResponse.class);
+		}
+		else if (res instanceof RenderResponse) {
+			_manager.declareBean("renderResponse", res, RenderResponse.class);
+		}
+
+		_manager.exec("ruby", "(java)", 1, 1, script);
+	}
+
+	protected String getGlobalScript() throws IOException {
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < globalFiles.length; i++) {
+			InputStream is = getPortletContext().getResourceAsStream(
+				globalFiles[i]);
+
+			if (is == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Global file " + globalFiles[i] + " does not exist");
+				}
+			}
+
+			try {
+				if (is != null) {
+					sm.append(new String(FileUtil.getBytes(is)));
+				}
+			}
+			finally {
+				is.close();
+			}
+		}
+
+		return sm.toString();
 	}
 
 	protected void include(String path, PortletRequest req, PortletResponse res)
@@ -122,102 +185,39 @@ public class RubyPortlet extends GenericPortlet {
 
 		if (is == null) {
 			_log.error(path + " is not a valid ruby file");
+
 			return;
 		}
 
 		try {
-			String script = _getGlobalScript() + _readAll(is);
-
-			_manager.declareBean(
-				"portletConfig", getPortletConfig(), PortletConfig.class);
-			_manager.declareBean(
-				"portletContext", getPortletContext(), PortletContext.class);
-			_manager.declareBean(
-				"userInfo", req.getAttribute(PortletRequest.USER_INFO),
-				Map.class);
-			_manager.declareBean(
-				"preferences", req.getPreferences(), PortletPreferences.class);
-
-			if (req instanceof ActionRequest) {
-				_manager.declareBean(
-					"actionRequest", req, ActionRequest.class);
-			}
-			else if (req instanceof RenderRequest) {
-				_manager.declareBean(
-					"renderRequest", req, RenderRequest.class);
-			}
-
-			if (res instanceof ActionResponse) {
-				_manager.declareBean(
-					"actionResponse", res, ActionResponse.class);
-			}
-			else if (res instanceof RenderResponse) {
-				_manager.declareBean(
-					"renderResponse", res, RenderResponse.class);
-			}
-
-			_manager.exec("ruby", "(java)", 1, 1, script);
-
+			declareBeans(is, req, res);
 		}
-		catch (BSFException e) {
+		catch (BSFException bsfe) {
 			String message =
 				"The script at " + path + " or one of the global files has "
 					+ "errors: ";
-			if (e.getTargetException() instanceof RaiseException) {
-				RubyException re =
-					((RaiseException) e.getTargetException()).getException();
+
+			Throwable te = bsfe.getTargetException();
+
+			if (te instanceof RaiseException) {
+				RubyException re = ((RaiseException)te).getException();
+
 				message +=
 					re.message + " (" + re.getMetaClass().toString() + ")";
+
 				_log.error(message);
-				_log.debug("Ruby exception:", e.getTargetException());
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Ruby exception:", te);
+				}
 			}
 			else {
-				_log.error(message, e.getTargetException());
+				_log.error(message, te);
 			}
 		}
 		finally {
 			is.close();
 		}
-	}
-
-	private String _getGlobalScript() throws IOException {
-		StringBuffer script = new StringBuffer();
-		for (int i = 0; i < globalFiles.length; i++) {
-
-			InputStream is =
-				getPortletContext().getResourceAsStream(globalFiles[i]);
-
-			if (is == null) {
-				_log.warn("Global file '" + globalFiles[i] + "' not found");
-			}
-			try {
-				script.append(_readAll(is));
-			} finally {
-				is.close();
-			}
-
-		}
-		return script.toString();
-	}
-
-	private String _readAll(InputStream is) throws IOException {
-		byte[] bytes = new byte[is.available()];
-
-		is.read(bytes);
-
-		return new String(bytes);
-	}
-
-	private String[] _split(String listString) {
-		List result = new ArrayList();
-		StringTokenizer st = new StringTokenizer(listString, ",");
-		while (st.hasMoreTokens()) {
-			String item = st.nextToken();
-			if ((item != null && item.trim().length() > 0)) {
-				result.add(item.trim());
-			}
-		}
-		return (String[]) result.toArray(new String[0]);
 	}
 
 	protected String editFile;
@@ -229,4 +229,5 @@ public class RubyPortlet extends GenericPortlet {
 	private static Log _log = LogFactory.getLog(RubyPortlet.class);
 
 	private BSFManager _manager;
+
 }
