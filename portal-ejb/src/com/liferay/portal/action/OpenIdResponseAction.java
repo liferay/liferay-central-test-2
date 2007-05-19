@@ -88,7 +88,7 @@ public class OpenIdResponseAction extends Action {
 		}
 
 		try {
-			User user = readResponse(themeDisplay, req);
+			readResponse(themeDisplay, req);
 		}
 		catch (Exception e) {
 			if (e instanceof AssociationException ||

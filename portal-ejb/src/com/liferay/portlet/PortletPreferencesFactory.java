@@ -110,7 +110,7 @@ public class PortletPreferencesFactory {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getPortalPreferences(req);
+		return getPortalPreferences(httpReq);
 	}
 
 	public static PortalPreferences getPortalPreferences(RenderRequest req)
@@ -118,7 +118,7 @@ public class PortletPreferencesFactory {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getPortalPreferences(req);
+		return getPortalPreferences(httpReq);
 	}
 
 	public static PortletPreferences getPortletPreferences(

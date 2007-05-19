@@ -23,7 +23,7 @@
 %>
 
 <liferay-ui:tabs
-	names="general,authentication,default-user-associations,reserved-user-ids,mail-host-names,email-notifications"
+	names="general,authentication,default-user-associations,reserved-screen-names,mail-host-names,email-notifications"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
