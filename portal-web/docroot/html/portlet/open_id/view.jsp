@@ -25,47 +25,54 @@
 <%@ include file="/html/portlet/open_id/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isSignedIn() %>">
+	<c:when test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+		<c:choose>
+			<c:when test="<%= themeDisplay.isSignedIn() %>">
 
-		<%
-		String signedInAs = user.getFullName();
+				<%
+				String signedInAs = user.getFullName();
 
-		if (themeDisplay.isShowMyAccountIcon()) {
-			signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
-		}
-		%>
+				if (themeDisplay.isShowMyAccountIcon()) {
+					signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
+				}
+				%>
 
-		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
+				<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
+			</c:when>
+			<c:otherwise>
+				<form action="<portlet:actionURL><portlet:param name="struts_action" value="/open_id/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+
+				<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
+				<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
+				<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
+				<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
+				<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
+
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="open-id" />
+					</td>
+					<td>
+						<input name="<portlet:namespace />openId" style="width: 120px;" type="text" />
+					</td>
+				</tr>
+
+				</table>
+
+				<br />
+
+				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+
+				</form>
+
+				<script type="text/javascript">
+					document.<portlet:namespace />fm.<portlet:namespace />openId.focus();
+				</script>
+			</c:otherwise>
+		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/open_id/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-
-		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
-		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
-		<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
-		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
-		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
-
-		<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="open-id" />
-			</td>
-			<td>
-				<input name="<portlet:namespace />openId" style="width: 120px;" type="text" />
-			</td>
-		</tr>
-
-		</table>
-
-		<br />
-
-		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-
-		</form>
-
-		<script type="text/javascript">
-			document.<portlet:namespace />fm.<portlet:namespace />openId.focus();
-		</script>
+		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
 	</c:otherwise>
 </c:choose>

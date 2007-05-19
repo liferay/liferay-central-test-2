@@ -310,6 +310,8 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
 
+	public static final String OPEN_ID_AUTH_ENABLED = "open.id.auth.enabled";
+
 	// Authentication Pipeline
 
 	public static final String AUTH_PIPELINE_PRE = "auth.pipeline.pre";

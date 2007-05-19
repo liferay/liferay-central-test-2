@@ -97,6 +97,9 @@ public class EditUsersAction extends PortletAction {
 		else if (cmd.equals("updateMailHostNames")) {
 			updateMailHostNames(req, prefs);
 		}
+		else if (cmd.equals("updateOpenId")) {
+			updateOpenId(req, prefs);
+		}
 		else if (cmd.equals("updateReservedUsers")) {
 			updateReservedUsers(req, prefs);
 		}
@@ -275,6 +278,17 @@ public class EditUsersAction extends PortletAction {
 		String mailHostNames = ParamUtil.getString(req, "mailHostNames");
 
 		prefs.setValue(PropsUtil.ADMIN_MAIL_HOST_NAMES, mailHostNames);
+	}
+
+	protected void updateOpenId(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+
+		prefs.setValue(
+			PropsUtil.OPEN_ID_AUTH_ENABLED, Boolean.toString(enabled));
+
+		prefs.store();
 	}
 
 	protected void updateReservedUsers(

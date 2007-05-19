@@ -31,7 +31,7 @@
 <c:choose>
 	<c:when test='<%= tabs2.equals("authentication") %>'>
 		<liferay-ui:tabs
-			names="general,ldap"
+			names="general,ldap,open-id"
 			param="tabs3"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -162,6 +162,22 @@
 				<br />
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUsers('updateLdap');" />
+			</c:when>
+			<c:when test='<%= tabs3.equals("open-id") %>'>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="enabled" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", OpenIdUtil.isEnabled(company.getCompanyId())) %>' />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUsers('updateOpenId');" />
 			</c:when>
 			<c:otherwise>
 				<table class="liferay-table">

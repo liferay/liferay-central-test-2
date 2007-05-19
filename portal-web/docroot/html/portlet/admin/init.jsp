@@ -39,6 +39,7 @@
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 <%@ page import="com.liferay.portal.util.LiveUsers" %>
+<%@ page import="com.liferay.portal.util.OpenIdUtil" %>
 <%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
 <%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
 <%@ page import="com.liferay.util.License" %>

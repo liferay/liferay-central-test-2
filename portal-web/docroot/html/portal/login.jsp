@@ -53,9 +53,11 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="sign-in-with-a-regular-account" />
+				<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+					<liferay-ui:message key="sign-in-with-a-regular-account" />
 
-				<br /><br />
+					<br /><br />
+				</c:if>
 
 				<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm1">
 				<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
@@ -182,55 +184,58 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 				</form>
 			</td>
-			<td valign="top">
-				<liferay-ui:message key="sign-in-with-an-open-id-provider" />
 
-				<br /><br />
+			<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+				<td valign="top">
+					<liferay-ui:message key="sign-in-with-an-open-id-provider" />
 
-				<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" method="post" name="fm2">
+					<br /><br />
 
-				<c:if test="<%= SessionErrors.contains(request, AssociationException.class.getName()) %>">
-					<span class="portlet-msg-error">
-					<liferay-ui:message key="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
-					</span>
-				</c:if>
+					<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" method="post" name="fm2">
 
-				<c:if test="<%= SessionErrors.contains(request, ConsumerException.class.getName()) %>">
-					<span class="portlet-msg-error">
-					<liferay-ui:message key="an-error-occurred-while-initializing-the-open-id-consumer" />
-					</span>
-				</c:if>
+					<c:if test="<%= SessionErrors.contains(request, AssociationException.class.getName()) %>">
+						<span class="portlet-msg-error">
+						<liferay-ui:message key="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
+						</span>
+					</c:if>
 
-				<c:if test="<%= SessionErrors.contains(request, DiscoveryException.class.getName()) %>">
-					<span class="portlet-msg-error">
-					<liferay-ui:message key="an-error-occurred-while-discovering-the-open-id-provider" />
-					</span>
-				</c:if>
+					<c:if test="<%= SessionErrors.contains(request, ConsumerException.class.getName()) %>">
+						<span class="portlet-msg-error">
+						<liferay-ui:message key="an-error-occurred-while-initializing-the-open-id-consumer" />
+						</span>
+					</c:if>
 
-				<c:if test="<%= SessionErrors.contains(request, MessageException.class.getName()) %>">
-					<span class="portlet-msg-error">
-					<liferay-ui:message key="an-error-occurred-while-communicating-with-the-open-id-provider" />
-					</span>
-				</c:if>
+					<c:if test="<%= SessionErrors.contains(request, DiscoveryException.class.getName()) %>">
+						<span class="portlet-msg-error">
+						<liferay-ui:message key="an-error-occurred-while-discovering-the-open-id-provider" />
+						</span>
+					</c:if>
 
-				<table class="liferay-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="open-id" />
-					</td>
-					<td>
-						<input name="openId" style="width: 150px;" type="text" />
-					</td>
-				</tr>
+					<c:if test="<%= SessionErrors.contains(request, MessageException.class.getName()) %>">
+						<span class="portlet-msg-error">
+						<liferay-ui:message key="an-error-occurred-while-communicating-with-the-open-id-provider" />
+						</span>
+					</c:if>
 
-				</table>
+					<table class="liferay-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="open-id" />
+						</td>
+						<td>
+							<input name="openId" style="width: 150px;" type="text" />
+						</td>
+					</tr>
 
-				<br />
+					</table>
 
-				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+					<br />
 
-				</form>
-			</td>
+					<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+
+					</form>
+				</td>
+			</c:if>
 		</tr>
 		</table>
 	</liferay-ui:section>

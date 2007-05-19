@@ -30,3 +30,4 @@
 <%@ page import="com.liferay.portal.UserPasswordException" %>
 <%@ page import="com.liferay.portal.action.LoginAction" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>
+<%@ page import="com.liferay.portal.util.OpenIdUtil" %>

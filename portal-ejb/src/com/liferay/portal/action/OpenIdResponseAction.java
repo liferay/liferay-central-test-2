@@ -83,6 +83,10 @@ public class OpenIdResponseAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+		if (!OpenIdUtil.isEnabled(themeDisplay.getCompanyId())) {
+			return null;
+		}
+
 		try {
 			User user = readResponse(themeDisplay, req);
 		}

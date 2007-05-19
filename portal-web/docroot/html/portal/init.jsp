@@ -48,6 +48,7 @@
 <%@ page import="com.liferay.portal.struts.PortletRequestProcessor" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
+<%@ page import="com.liferay.portal.util.OpenIdUtil" %>
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 <%@ page import="com.liferay.util.servlet.fileupload.LiferayFileUpload" %>

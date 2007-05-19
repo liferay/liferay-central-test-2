@@ -66,6 +66,10 @@ public class OpenIdRequestAction extends Action {
 			HttpServletResponse res, String openId)
 		throws Exception {
 
+		if (!OpenIdUtil.isEnabled(themeDisplay.getCompanyId())) {
+			return;
+		}
+
 		HttpSession ses = req.getSession();
 
 		String returnURL =
@@ -119,9 +123,13 @@ public class OpenIdRequestAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String openId = ParamUtil.getString(req, "openId");
+		if (!OpenIdUtil.isEnabled(themeDisplay.getCompanyId())) {
+			return null;
+		}
 
 		try {
+			String openId = ParamUtil.getString(req, "openId");
+
 			sendOpenIdRequest(themeDisplay, req, res, openId);
 		}
 		catch (Exception e) {
