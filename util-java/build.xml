@@ -10,5 +10,6 @@
 		<copy file="${jar.file}.jar" todir="${project.dir}/jbpm-web/docroot/WEB-INF/lib" />
 		<copy file="${jar.file}.jar" todir="${project.dir}/mule-web/docroot/WEB-INF/lib" />
 		<copy file="${jar.file}.jar" todir="${project.dir}/portal-ejb/classes/com/liferay/portal/deploy/dependencies" />
+		<copy file="${jar.file}.jar" todir="${project.dir}/servicemix-web/docroot/WEB-INF/lib" />
 	</target>
 </project>

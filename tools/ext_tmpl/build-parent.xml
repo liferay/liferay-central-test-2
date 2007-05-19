@@ -286,16 +286,16 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
-					<copy todir="${app.server.dir}/common/endorsed">
+					<copy todir="${app.server.dir}/server/lib">
 						<fileset
 							dir="lib/development"
 							includes="support-tomcat.jar"
 						/>
 					</copy>
 
-					<copy todir="${app.server.dir}/common/endorsed">
+					<copy todir="${app.server.dir}/common/endorsed" flatten="true">
 						<fileset
-							dir="lib/development"
+							dir="lib"
 							includes="${endorsed.libraries}"
 						/>
 					</copy>
