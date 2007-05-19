@@ -2546,7 +2546,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>112</portlet-name>
-		<display-name>OpenID Sign in</display-name>
+		<display-name>OpenID Sign In</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>

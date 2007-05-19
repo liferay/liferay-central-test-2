@@ -22,7 +22,12 @@
 
 package com.liferay.portal.util;
 
-import org.apache.commons.lang.StringUtils;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.Http;
+import com.liferay.util.StringUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.openid4java.consumer.ConsumerException;
 import org.openid4java.consumer.ConsumerManager;
@@ -36,35 +41,45 @@ import org.openid4java.consumer.InMemoryNonceVerifier;
  */
 public class OpenIdUtil {
 
-	public static ConsumerManager getConsumerManager()
-		throws ConsumerException {
-		if (_manager == null)
-		{
+	public static ConsumerManager getConsumerManager() {
+		return _instance._manager;
+	}
+
+	public static String getScreenName(String openId) {
+		String result = openId;
+
+		if (result.startsWith(Http.HTTP_WITH_SLASH)) {
+			result = result.substring(Http.HTTP_WITH_SLASH.length());
+		}
+
+		if (result.endsWith(StringPool.SLASH)) {
+			result = result.substring(0, result.length() - 1);
+		}
+
+		result = StringUtil.replace(
+			result,
+			new String[] {StringPool.SLASH, StringPool.UNDERLINE},
+			new String[] {StringPool.PERIOD, StringPool.PERIOD});
+
+		return result;
+	}
+
+	private OpenIdUtil() {
+		try {
 			_manager = new ConsumerManager();
+
 			_manager.setAssociations(new InMemoryConsumerAssociationStore());
 			_manager.setNonceVerifier(new InMemoryNonceVerifier(5000));
 		}
-
-		return _manager;
+		catch (ConsumerException ce) {
+			_log.error(ce.getMessage());
+		}
 	}
 
-	public static String getScreenName(String openid) {
-			String result = openid;
+	private static Log _log = LogFactory.getLog(OpenIdUtil.class);
 
-			if (result.startsWith("http://")) {
-				result = result.substring("http://".length());
-			}
+	private static OpenIdUtil _instance = new OpenIdUtil();
 
-			if (result.endsWith("/")) {
-				result = result.substring(0, result.length() - 1);
-			}
-
-			StringUtils.replace(result, "/", ".");
-			StringUtils.replace(result, "_", ".");
-
-			return result;
-	}
-
-	public static ConsumerManager _manager;
+	private ConsumerManager _manager;
 
 }

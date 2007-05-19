@@ -513,6 +513,11 @@
 		<struts-path>plugin_installer</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>112</portlet-name>
+		<struts-path>open_id</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

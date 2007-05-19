@@ -43,11 +43,12 @@ public class OpenIdAutoLogin implements AutoLogin {
 
 	public String[] login(HttpServletRequest req, HttpServletResponse res)
 		throws AutoLoginException {
+
 		HttpSession ses = req.getSession();
+
 		String[] credentials = null;
 
-		Long userId =
-			(Long) ses.getAttribute(WebKeys.OPEN_ID_LOGIN);
+		Long userId = (Long)ses.getAttribute(WebKeys.OPEN_ID_LOGIN);
 
 		if (userId == null) {
 			return credentials;
@@ -56,8 +57,8 @@ public class OpenIdAutoLogin implements AutoLogin {
 		ses.removeAttribute(WebKeys.OPEN_ID_LOGIN);
 
 		try {
-			User user =
-				UserLocalServiceUtil.getUserById(userId.longValue());
+			User user = UserLocalServiceUtil.getUserById(
+				userId.longValue());
 
 			credentials = new String[3];
 
@@ -66,8 +67,9 @@ public class OpenIdAutoLogin implements AutoLogin {
 			credentials[2] = Boolean.TRUE.toString();
 		}
 		catch (Exception e) {
-			_log.error("Unexpected auto-login error", e);
+			_log.error(e.getMessage());
 		}
+
 		return credentials;
 	}
 

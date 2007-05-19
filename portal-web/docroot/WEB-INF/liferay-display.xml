@@ -116,6 +116,7 @@
 		<portlet id="82" />
 		<portlet id="97" />
 		<portlet id="109" />
+		<portlet id="112" />
 	</category>
 	<category name="category.wiki">
 		<portlet id="36" />

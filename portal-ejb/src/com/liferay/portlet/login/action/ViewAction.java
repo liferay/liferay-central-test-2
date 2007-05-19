@@ -33,10 +33,9 @@ import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -79,7 +78,7 @@ public class ViewAction extends PortletAction {
 		}
 		else if (Validator.isNotNull(cmd)) {
 			try {
-				_login(themeDisplay, req, res);
+				login(themeDisplay, req, res);
 			}
 			catch (Exception e) {
 				if (e instanceof AuthException ||
@@ -109,15 +108,12 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.login.view");
 	}
 
-	private void _login(
+	protected void login(
 			ThemeDisplay themeDisplay, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-		ActionResponseImpl resImpl = (ActionResponseImpl)res;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-		HttpServletResponse httpRes = resImpl.getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		String login = ParamUtil.getString(req, "login");
 		String password = ParamUtil.getString(req, "password");

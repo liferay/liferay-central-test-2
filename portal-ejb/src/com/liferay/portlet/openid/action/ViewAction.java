@@ -26,9 +26,8 @@ import com.liferay.portal.action.OpenIdRequestAction;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -74,21 +73,15 @@ public class ViewAction extends PortletAction {
 		}
 		else if (Validator.isNotNull(cmd)) {
 			try {
-				ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-				ActionResponseImpl resImpl = (ActionResponseImpl)res;
-
-				HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-				HttpServletResponse httpRes = resImpl.getHttpServletResponse();
-
-				String openId = ParamUtil.getString(req, "openId");
-
-				OpenIdRequestAction.sendOpenIdRequest(
-					themeDisplay, httpReq, httpRes, openId);
+				login(themeDisplay, req, res);
 			}
 			catch (Exception e) {
 				if (e instanceof OpenIDException) {
-					_log.info("Error communicating with OpenID provider: " +
-						e.toString());
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Error communicating with OpenID provider: " +
+								e.getMessage());
+					}
 
 					SessionErrors.add(req, e.getClass().getName());
 				}
@@ -107,6 +100,19 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward("portlet.open_id.view");
+	}
+
+	protected void login(
+			ThemeDisplay themeDisplay, ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+
+		String openId = ParamUtil.getString(req, "openId");
+
+		OpenIdRequestAction.sendOpenIdRequest(
+			themeDisplay, httpReq, httpRes, openId);
 	}
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);

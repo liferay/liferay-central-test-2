@@ -213,6 +213,8 @@ public class WebKeys {
 
 	public static final String NOTES_LIST = "NOTES_LIST";
 
+	public static final String OPEN_ID_DISCO = "openid-disco";
+
 	public static final String OPEN_ID_LOGIN = "OPEN_ID_LOGIN";
 
 	public static final String ORG_LABOR = "ORG_LABOR";

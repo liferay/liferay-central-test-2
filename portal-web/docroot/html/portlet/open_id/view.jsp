@@ -38,7 +38,6 @@
 		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
 	</c:when>
 	<c:otherwise>
-
 		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/open_id/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 
 		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
@@ -53,7 +52,7 @@
 				<liferay-ui:message key="open-id" />
 			</td>
 			<td>
-				<input class="openid_login" name="<portlet:namespace />openId" style="width: 120px;" type="text" />
+				<input name="<portlet:namespace />openId" style="width: 120px;" type="text" />
 			</td>
 		</tr>
 

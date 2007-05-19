@@ -92,8 +92,10 @@
 	<classpathentry kind="lib" path="lib/portal/google.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hessian.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hibernate3.jar"/>
+	<classpathentry kind="lib" path="lib/portal/htmlparser.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ical4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
+	<classpathentry kind="lib" path="lib/portal/icu4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/j2ee-management.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
@@ -113,6 +115,7 @@
 	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl-impl.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jug.jar"/>
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
@@ -120,6 +123,8 @@
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
 	<classpathentry kind="lib" path="lib/portal/openid4java.jar"/>
 	<classpathentry kind="lib" path="lib/portal/opensaml.jar"/>
+	<classpathentry kind="lib" path="lib/portal/openxri-client.jar"/>
+	<classpathentry kind="lib" path="lib/portal/openxri-syntax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/oro.jar"/>
 	<classpathentry kind="lib" path="lib/portal/oscache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/pdfbox.jar"/>

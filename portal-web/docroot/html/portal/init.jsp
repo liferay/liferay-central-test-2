@@ -57,7 +57,7 @@
 <%@ page import="org.apache.struts.tiles.ComponentDefinition" %>
 <%@ page import="org.apache.struts.tiles.TilesUtil" %>
 
+<%@ page import="org.openid4java.association.AssociationException" %>
 <%@ page import="org.openid4java.consumer.ConsumerException" %>
 <%@ page import="org.openid4java.discovery.DiscoveryException" %>
 <%@ page import="org.openid4java.message.MessageException" %>
-<%@ page import="org.openid4java.association.AssociationException" %>

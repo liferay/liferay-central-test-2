@@ -500,6 +500,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="org.openid4java">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="org.pdfbox">
 		<priority value="INFO" />
 	</category>

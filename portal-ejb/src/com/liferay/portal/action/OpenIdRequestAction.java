@@ -23,8 +23,6 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -34,12 +32,11 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
-import java.io.IOException;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
@@ -64,10 +61,60 @@ import org.openid4java.message.sreg.SRegRequest;
  */
 public class OpenIdRequestAction extends Action {
 
+	public static void sendOpenIdRequest(
+			ThemeDisplay themeDisplay, HttpServletRequest req,
+			HttpServletResponse res, String openId)
+		throws Exception {
+
+		HttpSession ses = req.getSession();
+
+		String returnURL =
+			PortalUtil.getPortalURL(req) + themeDisplay.getPathMain() +
+				"/portal/open_id_response";
+
+		ConsumerManager manager = OpenIdUtil.getConsumerManager();
+
+		List discoveries = manager.discover(openId);
+
+		DiscoveryInformation discovered = manager.associate(discoveries);
+
+		ses.setAttribute(WebKeys.OPEN_ID_DISCO, discovered);
+
+		AuthRequest authReq = manager.authenticate(discovered, returnURL);
+
+		String screenName = OpenIdUtil.getScreenName(openId);
+
+		try {
+			UserLocalServiceUtil.getUserByScreenName(
+				themeDisplay.getCompanyId(), screenName);
+		}
+		catch (NoSuchUserException nsue) {
+			FetchRequest fetch = FetchRequest.createFetchRequest();
+
+			fetch.addAttribute(
+				"email", "http://schema.openid.net/contact/email", true);
+			fetch.addAttribute(
+				"firstName", "http://schema.openid.net/namePerson/first", true);
+			fetch.addAttribute(
+				"lastName", "http://schema.openid.net/namePerson/last", true);
+
+			authReq.addExtension(fetch);
+
+			SRegRequest sregReq = SRegRequest.createFetchRequest();
+
+			sregReq.addAttribute("fullname", true);
+			sregReq.addAttribute("email", true);
+
+			authReq.addExtension(sregReq);
+		}
+
+		res.sendRedirect(authReq.getDestinationUrl(true));
+	}
+
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
-	{
+		throws Exception {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -91,66 +138,9 @@ public class OpenIdRequestAction extends Action {
 
 				return mapping.findForward(Constants.COMMON_ERROR);
 			}
-
 		}
 
 		return mapping.findForward("portal.login");
-	}
-
-	public static void sendOpenIdRequest(
-		ThemeDisplay themeDisplay, HttpServletRequest req ,
-		HttpServletResponse res, String openId)
-		throws ConsumerException, DiscoveryException, IOException,
-		MessageException, PortalException, SystemException {
-
-		String returnToUrl = PortalUtil.getPortalURL(req) +
-			themeDisplay.getPathMain() + "/portal/open_id_response";
-
-		ConsumerManager manager = OpenIdUtil.getConsumerManager();
-
-		List discoveries = manager.discover(openId);
-
-		DiscoveryInformation discovered = manager.associate(discoveries);
-
-		req.getSession().setAttribute("openid-disco", discovered);
-
-		AuthRequest authReq = manager.authenticate(discovered, returnToUrl);
-
-		if (_processUser(themeDisplay.getCompanyId(), openId)) {
-			FetchRequest fetch = FetchRequest.createFetchRequest();
-			fetch.addAttribute(
-				"email", "http://schema.openid.net/contact/email", true);
-			fetch.addAttribute(
-				"firstName", "http://schema.openid.net/namePerson/first", true);
-			fetch.addAttribute(
-				"lastName", "http://schema.openid.net/namePerson/last", true);
-
-			authReq.addExtension(fetch);
-
-			SRegRequest sregReq = SRegRequest.createFetchRequest();
-
-			sregReq.addAttribute("fullname", true);
-			sregReq.addAttribute("email", true);
-
-			authReq.addExtension(sregReq);
-		}
-
-		res.sendRedirect(authReq.getDestinationUrl(true));
-	}
-
-	private static boolean _processUser(long companyId, String openId)
-		throws SystemException, PortalException {
-		String screenName = OpenIdUtil.getScreenName(openId);
-
-		try {
-			UserLocalServiceUtil.getUserByScreenName(
-				companyId, screenName);
-		}
-		catch (NoSuchUserException nsue) {
-			return true;
-		}
-		return false;
-
 	}
 
 }
