@@ -30,7 +30,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.ActionRequestImpl;
 
 import java.rmi.RemoteException;
 
@@ -62,9 +61,9 @@ public class AdminUtil {
 	}
 
 	public static String getUpdateUserPassword(ActionRequest req, long userId) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getUpdateUserPassword(reqImpl.getHttpServletRequest(), userId);
+		return getUpdateUserPassword(httpReq, userId);
 	}
 
 	public static User updateUser(
@@ -107,12 +106,12 @@ public class AdminUtil {
 			String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return updateUser(
-			reqImpl.getHttpServletRequest(), userId, screenName, emailAddress,
-			languageId, timeZoneId, greeting, comments, smsSn, aimSn, icqSn,
-			jabberSn, msnSn, skypeSn, ymSn);
+			httpReq, userId, screenName, emailAddress, languageId, timeZoneId,
+			greeting, comments, smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn,
+			ymSn);
 	}
 
 }

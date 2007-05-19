@@ -27,10 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.CookieKeys;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.GetterUtil;
@@ -311,17 +310,17 @@ public class LanguageUtil {
 	public static String getLanguageId(ActionRequest req)
 		throws PortalException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getLanguageId(reqImpl.getHttpServletRequest());
+		return getLanguageId(httpReq);
 	}
 
 	public static String getLanguageId(RenderRequest req)
 		throws PortalException, SystemException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getLanguageId(reqImpl.getHttpServletRequest());
+		return getLanguageId(httpReq);
 	}
 
 	public static String getLanguageId(HttpServletRequest req) {

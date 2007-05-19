@@ -36,7 +36,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
@@ -266,10 +265,7 @@ public class EditLookAndFeelAction extends PortletAction {
 			ActionMapping mapping, DynaActionForm form, ActionRequest req)
 		throws Exception {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 		HttpSession httpSes = httpReq.getSession();
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);

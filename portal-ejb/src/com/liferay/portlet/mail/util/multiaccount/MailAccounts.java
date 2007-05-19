@@ -26,7 +26,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mail.AccountNotFoundException;
 import com.liferay.portlet.mail.MailAccountsException;
 import com.liferay.util.Validator;
@@ -80,9 +79,9 @@ public class MailAccounts {
 	public static MailAccount getCurrentAccount(ActionRequest req)
 		throws MailAccountsException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getCurrentAccount(reqImpl.getHttpServletRequest());
+		return getCurrentAccount(httpReq);
 	}
 
 	public static void setAccount(HttpServletRequest req, String accountName)

@@ -30,8 +30,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
@@ -68,12 +66,8 @@ public class ViewAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-		ActionResponseImpl resImpl = (ActionResponseImpl)res;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-		HttpServletResponse httpRes = resImpl.getHttpServletResponse();
-
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 		HttpSession httpSes = httpReq.getSession();
 
 		ThemeDisplay themeDisplay =

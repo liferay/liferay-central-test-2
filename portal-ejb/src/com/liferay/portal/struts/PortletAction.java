@@ -25,7 +25,6 @@ package com.liferay.portal.struts;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -192,8 +191,7 @@ public class PortletAction extends Action {
 		throws IOException {
 
 		if (req.getRemoteUser() == null) {
-			HttpServletRequest httpReq =
-				((ActionRequestImpl)req).getHttpServletRequest();
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 			SessionErrors.add(httpReq, PrincipalException.class.getName());
 

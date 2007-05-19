@@ -46,7 +46,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -165,9 +164,7 @@ public class AddUserAction extends PortletAction {
 
 		// Session messages
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		SessionMessages.add(httpReq, "user_added", user.getEmailAddress());
 		SessionMessages.add(

@@ -26,9 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -111,15 +110,15 @@ public class PollsUtil {
 	}
 
 	public static void saveVote(ActionRequest req, long questionId) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		saveVote(reqImpl.getHttpServletRequest(), questionId);
+		saveVote(httpReq, questionId);
 	}
 
 	public static void saveVote(RenderRequest req, long questionId) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		saveVote(reqImpl.getHttpServletRequest(), questionId);
+		saveVote(httpReq, questionId);
 	}
 
 	public static void saveVote(HttpServletRequest req, long questionId) {

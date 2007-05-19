@@ -34,8 +34,6 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Time;
@@ -235,12 +233,9 @@ public class EditServerAction extends PortletAction {
 
 		// Precompile JSPs
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-		ActionResponseImpl resImpl = (ActionResponseImpl)res;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 		HttpServletResponse httpRes = new NullServletResponse(
-			(HttpServletResponse)resImpl.getHttpServletResponse());
+			PortalUtil.getHttpServletResponse(res));
 
 		itr1 = jsps.iterator();
 

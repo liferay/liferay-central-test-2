@@ -57,7 +57,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.FileUtil;
@@ -320,10 +319,7 @@ public class EditPagesAction extends PortletAction {
 		for (int i = 0; i < copyPortletIds.size(); i++) {
 			String copyPortletId = (String)copyPortletIds.get(i);
 
-			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-			HttpServletRequest httpReq =
-				(HttpServletRequest)reqImpl.getHttpServletRequest();
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 			// Copy preference
 

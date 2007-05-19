@@ -42,7 +42,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.portlet.RenderRequestWrapper;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
@@ -109,30 +108,17 @@ public class PortletPreferencesFactory {
 	public static PortalPreferences getPortalPreferences(ActionRequest req)
 		throws PortalException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		return getPortalPreferences(reqImpl.getHttpServletRequest());
+		return getPortalPreferences(req);
 	}
 
 	public static PortalPreferences getPortalPreferences(RenderRequest req)
 		throws PortalException, SystemException {
 
-		// FIX ME, the logic for getting the HTTP servlet request should be
-		// abstracted out
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		RenderRequestImpl reqImpl = null;
-
-		if (req instanceof RenderRequestWrapper) {
-			RenderRequestWrapper reqWrapper = (RenderRequestWrapper)req;
-
-			return getPortalPreferences(
-				(RenderRequest)reqWrapper.getPortletRequest());
-		}
-		else {
-			reqImpl = (RenderRequestImpl)req;
-		}
-
-		return getPortalPreferences(reqImpl.getHttpServletRequest());
+		return getPortalPreferences(req);
 	}
 
 	public static PortletPreferences getPortletPreferences(
@@ -313,11 +299,10 @@ public class PortletPreferencesFactory {
 			boolean uniquePerGroup)
 		throws PortalException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return getPortletSetup(
-			reqImpl.getHttpServletRequest(), portletId, uniquePerLayout,
-			uniquePerGroup);
+			httpReq, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
 	public static PortletPreferences getPortletSetup(
@@ -325,11 +310,10 @@ public class PortletPreferencesFactory {
 			boolean uniquePerGroup)
 		throws PortalException, SystemException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return getPortletSetup(
-			reqImpl.getHttpServletRequest(), portletId, uniquePerLayout,
-			uniquePerGroup);
+			httpReq, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {

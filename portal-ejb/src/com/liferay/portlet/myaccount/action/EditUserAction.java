@@ -66,6 +66,7 @@ public class EditUserAction
 		User user = PortalUtil.getUser(req);
 
 		RenderRequestImpl renderReqImpl = (RenderRequestImpl)req;
+
 		DynamicServletRequest dynamicReq =
 			(DynamicServletRequest)renderReqImpl.getHttpServletRequest();
 

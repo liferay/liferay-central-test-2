@@ -32,8 +32,6 @@ import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.mail.RecipientException;
 import com.liferay.portlet.mail.model.MailAttachment;
 import com.liferay.portlet.mail.model.MailMessage;
@@ -111,9 +109,7 @@ public class EditMessageAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -331,11 +327,10 @@ public class EditMessageAction extends PortletAction {
 
 		boolean send = cmd.equals(Constants.SEND);
 
-		ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		MailUtil.completeMessage(
-			actionReqImpl.getHttpServletRequest(), mailMessage, send,
-			originalId, wasDraft);
+			httpReq, mailMessage, send, originalId, wasDraft);
 	}
 
 	protected Map getAttachments(ActionRequest req) throws Exception {

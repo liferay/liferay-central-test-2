@@ -36,13 +36,10 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletRequestDispatcherImpl;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -121,11 +118,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	public void process(RenderRequest req, RenderResponse res)
 		throws IOException, ServletException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-		RenderResponseImpl resImpl = (RenderResponseImpl)res;
-
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-		HttpServletResponse httpRes = resImpl.getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		process(httpReq, httpRes);
 	}
@@ -133,11 +127,10 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	public void process(ActionRequest req, ActionResponse res, String path)
 		throws IOException, ServletException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 		ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
-		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-		HttpServletResponse httpRes = resImpl.getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		ActionMapping mapping = processMapping(httpReq, httpRes, path);
 

@@ -22,8 +22,7 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -45,10 +44,10 @@ public abstract class Action {
 	public void run(RenderRequest req, RenderResponse res)
 		throws ActionException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-		RenderResponseImpl resImpl = (RenderResponseImpl)res;
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
-		run(reqImpl.getHttpServletRequest(), resImpl.getHttpServletResponse());
+		run(httpReq, httpRes);
 	}
 
 }

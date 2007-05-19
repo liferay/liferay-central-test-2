@@ -49,6 +49,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -91,10 +92,12 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		throws IOException, PortletException {
 
 		try {
-			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+			RenderRequestImpl reqImpl = (RenderRequestImpl)res;
 			RenderResponseImpl resImpl = (RenderResponseImpl)res;
 
-			HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletResponse httpRes =
+				PortalUtil.getHttpServletResponse(res);
 
 			String pathInfo = null;
 			String queryString = null;
@@ -223,8 +226,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 				servletPath);
 
 			PortletServletResponse portletServletRes =
-				new PortletServletResponse(
-					resImpl.getHttpServletResponse(), resImpl);
+				new PortletServletResponse(httpRes, resImpl);
 
 			URLEncoder urlEncoder = _portlet.getURLEncoder();
 
