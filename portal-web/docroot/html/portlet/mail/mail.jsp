@@ -457,7 +457,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			</td>
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;" width="90%" />
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;">
-				<form method="post" name="<portlet:namespace />search" onSubmit="this.action=themeDisplay.getPathMain() + '/mail/action?sortBy=' + Mail.sortBy.value + '&asc=' + Mail.sortBy.asc; AjaxUtil.submit(this,{onComplete: Mail.getSearchReturn}); return false;">
+				<form method="post" name="<portlet:namespace />search" onSubmit="this.action = themeDisplay.getPathMain() + '/mail/action?sortBy=' + Mail.sortBy.value + '&asc=' + Mail.sortBy.asc; AjaxUtil.submit(this,{onComplete: Mail.getSearchReturn}); return false;">
 				<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
 				<table class="liferay-table" id="portlet-mail-toolbar-search">
