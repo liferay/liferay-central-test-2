@@ -439,9 +439,9 @@
 				<then>
 					<ant dir="support-tomcat" target="deploy" inheritAll="false" />
 
-					<copy todir="${app.server.dir}/common/endorsed">
+					<copy todir="${app.server.dir}/common/endorsed" flatten="true">
 						<fileset
-							dir="lib/development"
+							dir="lib"
 							includes="${endorsed.libraries}"
 						/>
 					</copy>
