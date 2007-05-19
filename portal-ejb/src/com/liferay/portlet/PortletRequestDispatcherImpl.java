@@ -92,7 +92,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		throws IOException, PortletException {
 
 		try {
-			RenderRequestImpl reqImpl = (RenderRequestImpl)res;
+			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 			RenderResponseImpl resImpl = (RenderResponseImpl)res;
 
 			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
