@@ -226,9 +226,8 @@ public class StartupAction extends SimpleAction {
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
-		"DELETE i FROM JournalArticleImage INNER JOIN Image AS i ON " +
-			"i.imageId = JournalArticleImage.articleImageId WHERE " +
-				"JournalArticleImage.tempImage = TRUE;";
+		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
+			"JournalArticleImage WHERE tempImage = TRUE);";
 
 	private static final String _DELETE_TEMP_IMAGES_2 =
 		"DELETE FROM JournalArticleImage where tempImage = TRUE;";
