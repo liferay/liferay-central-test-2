@@ -9,7 +9,7 @@
 		<type>portlet</type>
 	</types>
 	<short-description>
-		Access the Alfresco UI as a portlet.
+		Access the Alfresco 2.0 UI as a portlet.
 	</short-description>
 	<change-log>
 		Adapted to the latest version of Liferay.
