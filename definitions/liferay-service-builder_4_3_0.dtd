@@ -68,7 +68,7 @@ If an entity does have columns, then the value object, the POJO class that
 is mapped to the database, and other persistence utilities are also generated
 based on the order and finder elements.
 -->
-<!ELEMENT entity (column*, order?, finder*, reference*)>
+<!ELEMENT entity (column*, order?, finder*)>
 
 <!--
 The name value specifies the name of the entity.
@@ -371,23 +371,6 @@ used to compare this column.
 	name CDATA #REQUIRED
 	db-name CDATA #IMPLIED
 	comparator CDATA #IMPLIED
->
-
-<!--
-The reference element will automatically populate the ejb-jar.xml and other
-required XML files with the proper reference from one service to another
-service.
-
-See com.liferay.portlet.documentlibrary.DLFileProfile for a good example.
--->
-<!ELEMENT reference (#PCDATA)>
-
-<!--
-See the comments in reference element.
--->
-<!ATTLIST reference
-	package-path CDATA #IMPLIED
-	entity CDATA #IMPLIED
 >
 
 <!--

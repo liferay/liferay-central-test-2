@@ -264,7 +264,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$PORTAL_URL$]</b>
 			</td>
 			<td>
-				<%= company.getPortalURL() %>
+				<%= company.getVirtualHost() %>
 			</td>
 		</tr>
 		<tr>

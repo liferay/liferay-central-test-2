@@ -97,6 +97,13 @@ Liferay.Service.Portal.ClassName = {
 Liferay.Service.Portal.Company = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Company" + Liferay.Service.classNameSuffix,
 
+	addCompany: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addCompany";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateCompany: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateCompany";

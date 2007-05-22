@@ -25,8 +25,9 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyHomeURLException" %>
-<%@ page import="com.liferay.portal.CompanyPortalURLException" %>
+<%@ page import="com.liferay.portal.CompanyMxException" %>
+<%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
+<%@ page import="com.liferay.portal.CompanyWebIdException" %>
 <%@ page import="com.liferay.portal.events.StartupAction" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>

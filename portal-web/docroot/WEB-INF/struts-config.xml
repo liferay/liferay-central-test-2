@@ -204,6 +204,11 @@
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
 
+		<action path="/admin/edit_instance" type="com.liferay.portlet.admin.action.EditInstanceAction">
+			<forward name="portlet.admin.edit_instance" path="portlet.admin.edit_instance" />
+			<forward name="portlet.admin.error" path="portlet.admin.error" />
+		</action>
+
 		<action path="/admin/edit_phone" type="com.liferay.portlet.enterpriseadmin.action.EditPhoneAction">
 			<forward name="portlet.enterprise_admin.edit_phone" path="portlet.enterprise_admin.edit_phone" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />

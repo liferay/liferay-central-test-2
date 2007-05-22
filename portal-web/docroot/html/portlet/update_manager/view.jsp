@@ -24,11 +24,11 @@
 
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
-<c:if test="<%= !OmniadminUtil.isOmniadmin(user.getUserId())%>">
+<c:if test="<%= !permissionChecker.isOmniadmin()%>">
 	<liferay-ui:message key="this-tool-can-only-be-used-by-omniadmin-users" />
 </c:if>
 
-<c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
+<c:if test="<%= permissionChecker.isOmniadmin() && !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
 	<%
 	PortletURL configurationURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 	configurationURL.setWindowState(WindowState.MAXIMIZED);
@@ -40,7 +40,7 @@
 	<a href="<%=configurationURL%>"><liferay-ui:message key="auto-deploy-has-to-be-enabled-to-use-this-tool" /></a>
 </c:if>
 
-<c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
+<c:if test="<%= permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
 <%
 String redirect = currentURL;
 if (!themeDisplay.getPortletDisplay().isStateMax()) {

@@ -123,8 +123,7 @@ create table Company (
 	accountId LONG,
 	webId VARCHAR(75) null,
 	key_ TEXT null,
-	portalURL VARCHAR(75) null,
-	homeURL VARCHAR(75) null,
+	virtualHost VARCHAR(75) null,
 	mx VARCHAR(75) null,
 	logoId LONG
 );

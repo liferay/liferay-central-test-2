@@ -110,6 +110,10 @@ portletURL.setParameter("tabs3", tabs3);
 
 <%
 String tabsNames = "server,monitoring,plugins,settings";
+
+if (permissionChecker.isOmniadmin()) {
+	tabsNames = "server,instances,monitoring,plugins,settings";
+}
 %>
 
 <liferay-ui:tabs
@@ -118,6 +122,9 @@ String tabsNames = "server,monitoring,plugins,settings";
 />
 
 <c:choose>
+	<c:when test='<%= permissionChecker.isOmniadmin() && tabs1.equals("instances") %>'>
+		<%@ include file="/html/portlet/admin/instances.jspf" %>
+	</c:when>
 	<c:when test='<%= tabs1.equals("monitoring") %>'>
 		<%@ include file="/html/portlet/admin/monitoring.jspf" %>
 	</c:when>

@@ -27,8 +27,8 @@ User user2 = company.getDefaultUser();
 %>
 
 <liferay-ui:error exception="<%= AccountNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= CompanyHomeURLException.class %>" message="please-enter-a-valid-home-url" />
-<liferay-ui:error exception="<%= CompanyPortalURLException.class %>" message="please-enter-a-valid-portal-url" />
+<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
+<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 
 <table class="liferay-table">
 <tr>
@@ -108,18 +108,10 @@ User user2 = company.getDefaultUser();
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="portal-url" />
+				<liferay-ui:message key="virtual-host" />
 			</td>
 			<td>
-				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="portalURL" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="home-url" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
+				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="virtualHost" />
 			</td>
 		</tr>
 		<tr>

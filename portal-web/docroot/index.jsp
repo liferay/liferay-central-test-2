@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,37 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.test.ejb;
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
-import com.liferay.test.ResultPrinter;
-import com.liferay.test.ejb.portal.PortalEJBTest;
+<html>
+<head>
+	<title></title>
+	<meta content="0; url=<%= PortalUtil.getPathMain() %>" http-equiv="refresh">
+</head>
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+<body onload="javascript:location.replace('<%= PortalUtil.getPathMain() %>')">
 
-import junit.textui.TestRunner;
+</body>
 
-/**
- * <a href="EJBTests.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class EJBTests {
-
-	public static void main(String[] args) {
-		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
-
-		runner.doRun(suite());
-	}
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite();
-
-		suite.addTestSuite(PortalEJBTest.class);
-
-		return suite;
-	}
-
-}
+</html>

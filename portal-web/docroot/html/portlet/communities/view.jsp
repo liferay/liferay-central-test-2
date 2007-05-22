@@ -237,7 +237,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		userParams.put("usersGroups", new Long(group.getGroupId()));
 
-		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null, null, null, true, userParams, true);
+		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, null, null, null, null, Boolean.TRUE, userParams, true);
 
 		row.addText(String.valueOf(membersCount));
 

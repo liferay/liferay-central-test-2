@@ -75,10 +75,6 @@
 	</target>
 
 	<target name="compile-common-jsp">
-		<move file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
-
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml" />
-
 		<java
 			classname="org.apache.jasper.JspC"
 			classpath="${jspc.classpath}"
@@ -87,8 +83,6 @@
 		>
 			<arg line="${arg.line}" />
 		</java>
-
-		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" />
 
 		<java
 			classname="com.liferay.portal.tools.JSPCompiler"
@@ -199,9 +193,7 @@
 		<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 
-		<move file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
-
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml" />
+		<copy file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
 
 		<replace file="docroot/WEB-INF/web.xml">
 			<replacefilter token="&lt;resource-ref&gt;" value="" />
@@ -352,6 +344,7 @@
 						<include name="**/*.png" />
 						<include name="**/*.tld" />
 						<include name="**/*.vm" />
+						<include name="**/*.xml" />
 					</fileset>
 				</copy>
 			</then>
@@ -551,30 +544,6 @@
 				</if>
 			</sequential>
 		</for>
-	</target>
-
-	<target name="build-website">
-		<java
-			classname="com.liferay.portal.tools.WebSiteBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dapp.server.orion.web.xml.development=${app.server.orion.web.xml.development}" />
-			<jvmarg value="-Dapp.server.orion.web.xml.jsp.check=${app.server.orion.web.xml.jsp.check}" />
-			<arg line="${asp.portal-ext.properties} ${asp.available.web-apps} ${asp.orion.config}" />
-		</java>
-
-		<antcall target="build-webxml" />
-	</target>
-
-	<target name="build-webxml">
-		<java
-			classname="com.liferay.portal.tools.WebXMLBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		/>
 	</target>
 
 	<target name="deploy-properties">

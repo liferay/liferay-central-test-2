@@ -55,7 +55,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 	%>
 
-		<br /><a href="<%= hitLayoutURL %>"><%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
+		<br /><a href="<%= hitLayoutURL %>"><%= PortalUtil.getPortalURL(request) %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
 
 	<%
 	}

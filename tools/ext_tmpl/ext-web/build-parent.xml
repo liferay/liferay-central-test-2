@@ -350,19 +350,11 @@
 						<include name="**/*.png" />
 						<include name="**/*.tld" />
 						<include name="**/*.vm" />
+						<include name="**/*.xml" />
 					</fileset>
 				</copy>
 			</then>
 		</if>
-	</target>
-
-	<target name="build-webxml">
-		<java
-			classname="com.liferay.portal.tools.WebXMLBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		/>
 	</target>
 
 	<target name="merge">
@@ -413,7 +405,5 @@
 			tofile="tmp/WEB-INF/web.xml"
 			overwrite="true"
 		/>
-
-		<antcall target="build-webxml" />
 	</target>
 </project>

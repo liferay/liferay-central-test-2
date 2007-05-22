@@ -24,7 +24,7 @@
 
 <%= ReleaseInfo.getReleaseInfo() %>
 
-<c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) %>">
+<c:if test="<%= permissionChecker.isOmniadmin() %>">
 	<br /><br />
 
 	<%

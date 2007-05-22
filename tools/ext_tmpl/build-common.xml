@@ -268,31 +268,6 @@
 		</if>
 
 		<if>
-			<or>
-				<and>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
-				</and>
-				<equals arg1="${app.server.type}" arg2="jetty" />
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-			</or>
-			<then>
-				<java
-					classname="com.liferay.portal.tools.WebXMLStripper"
-					classpathref="project.classpath"
-					fork="true"
-					newenvironment="true"
-				>
-					<arg value="${war.file.dest}/WEB-INF/web.xml" />
-				</java>
-			</then>
-		</if>
-
-		<if>
 			<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 			<then>
 				<copy

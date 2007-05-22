@@ -356,7 +356,7 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 
 				<%
-				String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(company, themeDisplay.getPathMain())) + "\"><b><u>";
+				String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay.getPathMain())) + "\"><b><u>";
 				String payPalLinkClose = "</u></b></a>";
 				%>
 

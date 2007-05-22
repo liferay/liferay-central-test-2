@@ -11,12 +11,6 @@
 		<pathelement path="${project.dir}/test/classes" />
 	</path>
 
-	<path id="test-ejb.classpath">
-		<path refid="project.classpath" />
-		<fileset dir="${app.server.dir}/lib" includes="*.jar" />
-		<fileset dir="${app.server.instance.dir}/lib" includes="*.jar" />
-	</path>
-
 	<path id="test-http.classpath">
 		<path refid="project.classpath" />
 	</path>
@@ -99,23 +93,11 @@
 		<echo message="is listening on a host that matches what is set in test.properties." />
 		<echo message="" />
 
-		<antcall target="test-ejb" />
 		<antcall target="test-http" />
 		<antcall target="test-service" />
 		<antcall target="test-soap" />
 		<!--<antcall target="test-spring-remoting-hessian" />-->
 		<antcall target="test-spring-remoting-http" />
-	</target>
-
-	<target name="test-ejb" depends="compile">
-		<java
-			classname="com.liferay.test.EJBTests"
-			classpathref="test-ejb.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Djava.security.auth.login.config=${app.server.dir}/client/auth.conf" />
-		</java>
 	</target>
 
 	<target name="test-http" depends="compile">

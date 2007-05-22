@@ -23,6 +23,7 @@ create index IX_FCD7C63D on CalEvent (groupId, type_);
 create index IX_B27A301F on ClassName_ (value);
 
 create index IX_12566EC2 on Company (mx);
+create index IX_975996C0 on Company (virtualHost);
 create index IX_EC00543C on Company (webId);
 
 create index IX_66D496A3 on Contact_ (companyId);
@@ -91,9 +92,9 @@ create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);
 create index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
 create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 
-create index IX_A34FBC19 on LayoutSet (companyId, virtualHost);
 create index IX_A40B8BEC on LayoutSet (groupId);
 create index IX_48550691 on LayoutSet (groupId, privateLayout);
+create index IX_5ABC2905 on LayoutSet (virtualHost);
 
 create index IX_2932DD37 on ListType (type_);
 

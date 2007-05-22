@@ -25,8 +25,11 @@ create table ClassName_ (
 
 alter table Company add accountId LONG;
 alter table Company add webId VARCHAR(75) null;
+alter table Company add virtualHost VARCHAR(75) null;
 alter table Company add logoId LONG;
 update Company set webId = companyId;
+alter table Company drop portalURL;
+alter table Company drop homeURL;
 
 alter_column_type Contact_ prefixId INTEGER;
 alter_column_type Contact_ suffixId INTEGER;

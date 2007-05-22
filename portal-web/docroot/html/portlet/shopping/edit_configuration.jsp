@@ -93,7 +93,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("payment-settings") %>'>
-		<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<b>http://" + company.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</b>", false) %>
+		<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<b>" + PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/shopping/notify</b>", false) %>
 
 		<br /><br />
 
@@ -491,7 +491,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<b>[$PORTAL_URL$]</b>
 					</td>
 					<td>
-						<%= company.getPortalURL() %>
+						<%= company.getVirtualHost() %>
 					</td>
 				</tr>
 				<tr>

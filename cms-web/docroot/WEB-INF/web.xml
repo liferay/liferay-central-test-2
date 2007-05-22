@@ -2,10 +2,6 @@
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-	<context-param>
-		<param-name>company_web_id</param-name>
-		<param-value>liferay.com</param-value>
-	</context-param>
 	<servlet>
 		<servlet-name>CMSServlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>

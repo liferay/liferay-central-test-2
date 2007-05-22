@@ -23,11 +23,11 @@
 %>
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
-<c:if test="<%= !OmniadminUtil.isOmniadmin(user.getUserId())%>">
+<c:if test="<%= !permissionChecker.isOmniadmin()%>">
 	<liferay-ui:message key="this-tool-can-only-be-used-by-omniadmin-users" />
 </c:if>
 
-<c:if test="<%= OmniadminUtil.isOmniadmin(user.getUserId()) %>">
+<c:if test="<%= permissionChecker.isOmniadmin() %>">
 	<%
 	String tabs1 = ParamUtil.getString(request, "tabs1");
 	String tabs2 = ParamUtil.getString(request, "tabs2");

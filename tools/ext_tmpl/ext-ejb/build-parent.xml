@@ -175,17 +175,6 @@
 		<ant dir=".." target="deploy-properties" inheritAll="false" />
 	</target>
 
-	<target name="build-ejbxml">
-		<java
-			classname="com.liferay.portal.tools.EJBXMLBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg value="ext-ejb.jar" />
-		</java>
-	</target>
-
 	<target name="build-service">
 		<java
 			classname="com.liferay.portal.tools.ServiceBuilder"
@@ -198,8 +187,7 @@
 			<arg value="${service.file}" />
 			<arg value="classes/META-INF/ext-hbm.xml" />
 			<arg value="classes/META-INF/ext-model-hints.xml" />
-			<arg value="classes/META-INF/ext-spring-enterprise.xml" />
-			<arg value="classes/META-INF/ext-spring-professional.xml" />
+			<arg value="classes/META-INF/ext-spring.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<arg value="${project.dir}/ext-service/src" />
 			<arg value="${project.dir}/ext-web/docroot/html/js/ext/service.js" />
@@ -207,13 +195,7 @@
 
 		<delete file="ServiceBuilder.temp" />
 		
-		<antcall target="build-ejbxml" />
-
 		<ant dir="../ext-service" target="compile" inheritAll="false" />
-	</target>
-
-	<target name="build-webxml">
-		<ant dir="../ext-web" target="build-webxml" />
 	</target>
 
 	<target name="build-wsdd" depends="compile">
@@ -228,7 +210,5 @@
 			<arg value="${service.file}" />
 			<arg value="../ext-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>
-
-		<antcall target="build-webxml" />
 	</target>
 </project>

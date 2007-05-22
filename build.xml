@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="portal" basedir="." default="compile">
+<project name="portal" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
 	<property name="project.dir" value="." />
 
 	<import file="build-common.xml" />
@@ -22,7 +22,6 @@
 		<ant dir="portal-ejb" target="build-newscategories" inheritAll="false" />
 		<ant dir="portal-ejb" target="build-reverendfun" inheritAll="false" />
   		<ant dir="portal-ejb" target="build-themes" inheritAll="false" />
-  		<ant dir="portal-ejb" target="build-website" inheritAll="false" />
 
 		<antcall target="jar" />
 	</target>
@@ -53,7 +52,6 @@
 		<ant dir="laszlo-web" target="clean" inheritAll="false" />
 		<ant dir="portal-web" target="clean" inheritAll="false" />
 		<ant dir="tunnel-web" target="clean" inheritAll="false" />
-		<ant dir="web-sites" target="clean" inheritAll="false" />
 
 		<ant dir="portlets" target="clean" inheritAll="false" />
 
@@ -152,8 +150,18 @@
 			</then>
 		</if>
 
-		<delete dir="${app.server.portal.dir}" />
-		<delete file="${app.server.portal.dir}" />
+		<if>
+			<not>
+				<and>
+					<equals arg1="${app.server.type}" arg2="tomcat" />
+					<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
+				</and>
+			</not>
+			<then>
+				<delete dir="${app.server.portal.dir}" />
+				<delete file="${app.server.portal.dir}" />
+			</then>
+		</if>
 
 		<if>
 			<equals arg1="${clean.temp.dir}" arg2="true" />
@@ -214,7 +222,6 @@
 		<ant dir="laszlo-web" target="war" inheritAll="false" />
 		<ant dir="portal-web" target="war" inheritAll="false" />
 		<ant dir="tunnel-web" target="war" inheritAll="false" />
-		<ant dir="web-sites" target="war" inheritAll="false" />
 
 		<ant dir="portlets" target="war" inheritAll="false" />
 
@@ -783,12 +790,6 @@ auto.deploy.dest.dir=../webapps</echo>
 			</filterset>
 		</copy>
 
-		<copy todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/tld" overwrite="yes">
-			<fileset
-				dir="web-sites/liferay.com-web/docroot/WEB-INF/tld"
-			/>
-		</copy>
-
 		<mkdir dir="${lp.ext.dir}/downloads" />
 
 		<copy todir="${lp.ext.dir}/ext-ear/modules" overwrite="yes">
@@ -860,35 +861,6 @@ auto.deploy.dest.dir=../webapps</echo>
 		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
 			<fileset dir="tools" includes="java2html.bat,javadoc.css" />
 		</copy>
-
-		<copy
-			todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF"
-			overwrite="yes">
-
-			<fileset
-				dir="web-sites/liferay.com-web/docroot/WEB-INF"
-				includes="orion-web.xml,web.xml"
-			/>
-		</copy>
-
-		<replace file="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml">
-			<replacefilter
-				token="/WEB-INF/struts-config.xml"
-				value="/WEB-INF/struts-config.xml,/WEB-INF/struts-config-ext.xml"
-			/>
-		</replace>
-
-		<copy todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot">
-			<fileset
-				dir="web-sites/liferay.com-web/docroot"
-				includes="index.html,WEB-INF/lib/*.jar,WEB-INF/tld/*.tld"
-			/>
-		</copy>
-
-		<copy
-			file="util-taglib/util-taglib.jar"
-			todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib" overwrite="yes"
-		/>
 	</target>
 
 	<target name="build-ext-dir" unless="lp.ext.dir.available">

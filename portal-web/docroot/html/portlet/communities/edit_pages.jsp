@@ -643,7 +643,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 										}
 										%>
 
-										<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= group.getPathFriendlyURL(privateLayout, themeDisplay) %><%= parentFriendlyURL %>
+										<%= PortalUtil.getPortalURL(request) %><%= group.getPathFriendlyURL(privateLayout, themeDisplay) %><%= parentFriendlyURL %>
 
 										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" /> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 									</td>
@@ -1339,7 +1339,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 				<c:when test='<%= tabs3.equals("virtual-host") %>'>
 					<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
 
-					<%= LanguageUtil.format(pageContext, "for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld", new Object[] {Http.getProtocol(request), Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic()}) %>
+					<%= LanguageUtil.format(pageContext, "for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld", new Object[] {Http.getProtocol(request), PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPublic()}) %>
 
 					<br /><br />
 
@@ -1381,7 +1381,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 						<liferay-ui:message key="enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages" />
 
-						<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {Http.getProtocol(request) + "://" + company.getPortalURL() + themeDisplay.getPathFriendlyURLPublic(), Http.getProtocol(request) + "://" + company.getPortalURL() + group.getPathFriendlyURL(false, themeDisplay)}) %>
+						<%= LanguageUtil.format(pageContext, "the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages", new Object[] {PortalUtil.getPortalURL(request) + themeDisplay.getPathFriendlyURLPublic(), PortalUtil.getPortalURL(request) + group.getPathFriendlyURL(false, themeDisplay)}) %>
 
 						<br /><br />
 
@@ -1411,7 +1411,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<%
 					String host = PortalUtil.getHost(request);
 
-					String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathRoot() + "/sitemap.xml";
+					String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathContext() + "/sitemap.xml";
 
 					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
