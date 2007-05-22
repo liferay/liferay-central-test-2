@@ -16,7 +16,7 @@
 		<if>
 			<and>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+				<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
 			</and>
 			<then>
 				<delete file="${app.server.lib.portal.dir}/portal-ejb.jar" />
@@ -55,7 +55,7 @@
 		<if>
 			<and>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+				<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
 			</and>
 			<then>
 				<property name="classes.dir" value="${app.server.classes.portal.dir}" />
@@ -97,7 +97,7 @@
 		<if>
 			<and>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+				<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
 			</and>
 			<then>
 				<javac
@@ -178,7 +178,7 @@
 		<if>
 			<and>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="web-sites/liferay.com-web/docroot" />
+				<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
 			</and>
 			<then>
 				<delete file="${app.server.lib.portal.dir}/portal-ejb.jar" />
@@ -235,26 +235,6 @@
 
 	<target name="build-db">
 		<ant dir="../sql" target="build-db" />
-	</target>
-
-	<target name="build-earxml">
-		<java
-			classname="com.liferay.portal.tools.EARXMLBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		/>
-	</target>
-
-	<target name="build-ejbxml">
-		<java
-			classname="com.liferay.portal.tools.EJBXMLBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg value="portal-ejb.jar" />
-		</java>
 	</target>
 
 	<target name="build-iw">
@@ -433,16 +413,13 @@
 			<arg value="${service.file}" />
 			<arg value="classes/META-INF/portal-hbm.xml" />
 			<arg value="classes/META-INF/portal-model-hints.xml" />
-			<arg value="classes/META-INF/portal-spring-enterprise.xml" />
-			<arg value="classes/META-INF/portal-spring-professional.xml" />
+			<arg value="classes/META-INF/portal-spring.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<arg value="${project.dir}/portal-service/src" />
 			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service.js" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
-
-		<antcall target="build-ejbxml" />
 
 		<ant dir="../portal-service" target="compile" inheritAll="false" />
 	</target>
@@ -569,14 +546,6 @@
 		<ant dir="../portal-web" target="build-themes" />
 	</target>
 
-	<target name="build-website">
-		<ant dir="../portal-web" target="build-website" />
-	</target>
-
-	<target name="build-webxml">
-		<ant dir="../portal-web" target="build-webxml" />
-	</target>
-
 	<target name="build-wsdd" depends="compile">
 		<java
 			classname="com.liferay.portal.tools.WSDDBuilder"
@@ -589,8 +558,6 @@
 			<arg value="${service.file}" />
 			<arg value="../tunnel-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>
-
-		<antcall target="build-webxml" />
 	</target>
 
 	<target name="build-wsdd-portal">

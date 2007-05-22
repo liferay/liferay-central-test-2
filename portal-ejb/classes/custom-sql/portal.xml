@@ -187,17 +187,6 @@
 				(PortletPreferences.preferences LIKE ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.LayoutSetFinder.findByC_V">
-		<![CDATA[
-			SELECT
-				{LayoutSet.*}
-			FROM
-				LayoutSet
-			WHERE
-				(LayoutSet.companyId = ?) AND
-				(lower(LayoutSet.virtualHost) = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
@@ -797,8 +786,7 @@
 					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND
-				(User_.active_ = ?)
+				) AND (User_.active_ = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_A">
@@ -821,8 +809,7 @@
 					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND
-				(User_.active_ = ?)
+				) AND (User_.active_ = ?)
 			ORDER BY
 				Contact_.firstName ASC,
 				Contact_.middleName ASC,

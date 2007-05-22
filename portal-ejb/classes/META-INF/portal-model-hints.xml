@@ -76,8 +76,7 @@
 		<field name="key" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="portalURL" type="String" />
-		<field name="homeURL" type="String" />
+		<field name="virtualHost" type="String" />
 		<field name="mx" type="String" />
 		<field name="logoId" type="long" />
 	</model>

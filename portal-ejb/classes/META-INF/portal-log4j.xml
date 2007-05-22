@@ -288,6 +288,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.util.PortalInstances">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.util.SAXReaderFactory">
 		<priority value="WARN" />
 	</category>

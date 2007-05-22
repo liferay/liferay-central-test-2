@@ -61,8 +61,7 @@
 		<property name="accountId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="webId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="key" column="key_" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="portalURL" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="homeURL" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="virtualHost" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="mx" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="logoId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
