@@ -77,17 +77,47 @@ import java.rmi.RemoteException;
  *
  */
 public class CompanyServiceSoap {
+	public static com.liferay.portal.model.CompanySoap addCompany(
+		java.lang.String webId, java.lang.String virtualHost,
+		java.lang.String mx) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
+					virtualHost, mx);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.CompanySoap updateCompany(
-		long companyId, java.lang.String portalURL, java.lang.String homeURL,
-		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		long companyId, java.lang.String virtualHost, java.lang.String mx)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
+					virtualHost, mx);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CompanySoap updateCompany(
+		long companyId, java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String name, java.lang.String legalName,
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-					portalURL, homeURL, mx, name, legalName, legalId,
-					legalType, sicCode, tickerSymbol, industry, type, size);
+					virtualHost, mx, name, legalName, legalId, legalType,
+					sicCode, tickerSymbol, industry, type, size);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}

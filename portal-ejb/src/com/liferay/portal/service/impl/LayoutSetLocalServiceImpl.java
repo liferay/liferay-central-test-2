@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.LayoutSetVirtualHostException;
+import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
@@ -35,10 +36,10 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutSetLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -98,7 +99,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		Iterator itr = layouts.iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = (Layout) itr.next();
 
 			try {
 				LayoutLocalServiceUtil.deleteLayout(layout, false);
@@ -122,10 +123,12 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return LayoutSetUtil.findByG_P(groupId, privateLayout);
 	}
 
-	public LayoutSet getLayoutSet(long companyId, String virtualHost)
+	public LayoutSet getLayoutSet(String virtualHost)
 		throws PortalException, SystemException {
 
-		return LayoutSetFinder.findByC_V(companyId, virtualHost);
+		virtualHost = virtualHost.trim().toLowerCase();
+
+		return LayoutSetUtil.findByVirtualHost(virtualHost);
 	}
 
 	public void updateLogo(
@@ -212,18 +215,27 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {
 
+		virtualHost = virtualHost.trim().toLowerCase();
+
 		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
 		if (Validator.isNotNull(virtualHost)) {
 			try {
-				LayoutSet virtualHostLayoutSet = getLayoutSet(
-					layoutSet.getCompanyId(), virtualHost);
+				LayoutSet virtualHostLayoutSet = getLayoutSet(virtualHost);
 
 				if (!layoutSet.equals(virtualHostLayoutSet)) {
 					throw new LayoutSetVirtualHostException();
 				}
 			}
 			catch (NoSuchLayoutSetException nslse) {
+			}
+
+			try {
+				CompanyLocalServiceUtil.getCompanyByVirtualHost(virtualHost);
+
+				throw new LayoutSetVirtualHostException();
+			}
+			catch (NoSuchCompanyException nsce) {
 			}
 		}
 

@@ -23,9 +23,6 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.BrowserSniffer;
 
 import java.io.IOException;
@@ -83,9 +80,7 @@ public class StrutsUtil {
 				_log.debug("Forward path " + path);
 			}
 
-			ServletContext portalCtx = _getPortalCtx(ctx, req);
-
-			RequestDispatcher rd = portalCtx.getRequestDispatcher(path);
+			RequestDispatcher rd = ctx.getRequestDispatcher(path);
 
 			try {
 				rd.forward(req, res);
@@ -103,7 +98,7 @@ public class StrutsUtil {
 					path = Constants.TEXT_WAP_DIR + Constants.COMMON_ERROR;
 				}
 
-				rd = portalCtx.getRequestDispatcher(errorPath);
+				rd = ctx.getRequestDispatcher(errorPath);
 
 				try {
 					rd.forward(req, res);
@@ -140,9 +135,7 @@ public class StrutsUtil {
 			_log.debug("Include path " + path);
 		}
 
-		ServletContext portalCtx = _getPortalCtx(ctx, req);
-
-		RequestDispatcher rd = portalCtx.getRequestDispatcher(path);
+		RequestDispatcher rd = ctx.getRequestDispatcher(path);
 
 		try {
 			rd.include(req, res);
@@ -196,28 +189,6 @@ public class StrutsUtil {
 
 			req.setAttribute(key, value);
 		}
-	}
-
-	private static ServletContext _getPortalCtx(
-		ServletContext ctx, HttpServletRequest req) {
-
-		long companyId = PortalUtil.getCompanyId(req);
-
-		ServletContext portalCtx = null;
-
-		try {
-			portalCtx = ctx.getContext(
-				PrefsPropsUtil.getString(companyId, PropsUtil.PORTAL_CTX));
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		if (portalCtx == null) {
-			portalCtx = ctx;
-		}
-
-		return portalCtx;
 	}
 
 	private static Log _log = LogFactory.getLog(StrutsUtil.class);

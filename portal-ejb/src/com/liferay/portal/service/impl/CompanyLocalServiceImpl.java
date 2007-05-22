@@ -24,10 +24,12 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AccountNameException;
-import com.liferay.portal.CompanyHomeURLException;
-import com.liferay.portal.CompanyPortalURLException;
+import com.liferay.portal.CompanyMxException;
+import com.liferay.portal.CompanyVirtualHostException;
+import com.liferay.portal.CompanyWebIdException;
 import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -39,6 +41,7 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -46,6 +49,7 @@ import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -54,8 +58,10 @@ import com.liferay.portal.service.persistence.AccountUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.comparator.CompanyComparator;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
@@ -66,6 +72,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -88,6 +95,30 @@ import org.apache.lucene.search.Searcher;
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
+	public Company addCompany(String webId, String virtualHost, String mx)
+		throws PortalException, SystemException {
+
+		virtualHost = virtualHost.trim().toLowerCase();
+
+		if ((Validator.isNull(webId)) ||
+			(webId.equals(PortalInstances.DEFAULT_WEB_ID)) ||
+			(CompanyUtil.fetchByWebId(webId) != null)) {
+
+			throw new CompanyWebIdException();
+		}
+
+		validate(webId, virtualHost, mx);
+
+		Company company = checkCompany(webId);
+
+		company.setVirtualHost(virtualHost);
+		company.setMx(mx);
+
+		CompanyUtil.update(company);
+
+		return company;
+	}
+
 	public Company checkCompany(String webId)
 		throws PortalException, SystemException {
 
@@ -95,14 +126,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		Company company = null;
+		Company company = CompanyUtil.fetchByWebId(webId);
 
-		try {
-			company = CompanyUtil.findByWebId(webId);
-		}
-		catch (NoSuchCompanyException nsce) {
-			String portalURL = "localhost";
-			String homeURL = "localhost";
+		if (company == null) {
+			String virtualHost = webId;
+
+			if (webId.equals(PortalInstances.DEFAULT_WEB_ID)) {
+				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
+			}
+
 			String mx = webId;
 			String name = webId;
 			String legalName = null;
@@ -126,23 +158,21 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			company.setWebId(webId);
-			company.setPortalURL(portalURL);
-			company.setHomeURL(homeURL);
+			company.setVirtualHost(virtualHost);
 			company.setMx(mx);
 
 			CompanyUtil.update(company);
 
 			updateCompany(
-				companyId, portalURL, homeURL, mx, name, legalName, legalId,
-				legalType, sicCode, tickerSymbol, industry, type, size);
+				companyId, virtualHost, mx, name, legalName, legalId, legalType,
+				sicCode, tickerSymbol, industry, type, size);
 
 			// Demo settings
 
 			if (webId.equals("liferay.net")) {
 				company = CompanyUtil.findByWebId(webId);
 
-				company.setPortalURL("demo.liferay.net");
-				company.setHomeURL("demo.liferay.net");
+				company.setVirtualHost("demo.liferay.net");
 
 				CompanyUtil.update(company);
 
@@ -323,7 +353,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public List getCompanies() throws SystemException {
-		return CompanyUtil.findAll();
+		List companies = CompanyUtil.findAll();
+
+		Collections.sort(companies, new CompanyComparator());
+
+		return companies;
 	}
 
 	public Company getCompanyById(long companyId)
@@ -336,6 +370,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return CompanyUtil.findByMx(mx);
+	}
+
+	public Company getCompanyByVirtualHost(String virtualHost)
+		throws PortalException, SystemException {
+
+		virtualHost = virtualHost.trim().toLowerCase();
+
+		return CompanyUtil.findByVirtualHost(virtualHost);
 	}
 
 	public Company getCompanyByWebId(String webId)
@@ -415,23 +457,43 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
+	public Company updateCompany(long companyId, String virtualHost, String mx)
+		throws PortalException, SystemException {
+
+		virtualHost = virtualHost.trim().toLowerCase();
+
+		Company company = CompanyUtil.findByPrimaryKey(companyId);
+
+		validate(company.getWebId(), virtualHost, mx);
+
+		company.setVirtualHost(virtualHost);
+
+		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE))) {
+			company.setMx(mx);
+		}
+
+		CompanyUtil.update(company);
+
+		return company;
+	}
+
 	public Company updateCompany(
-			long companyId, String portalURL, String homeURL, String mx,
-			String name, String legalName, String legalId, String legalType,
-			String sicCode, String tickerSymbol, String industry, String type,
-			String size)
+			long companyId, String virtualHost, String mx, String name,
+			String legalName, String legalId, String legalType, String sicCode,
+			String tickerSymbol, String industry, String type, String size)
 		throws PortalException, SystemException {
 
 		// Company
 
+		virtualHost = virtualHost.trim().toLowerCase();
 		Date now = new Date();
-
-		validate(portalURL, homeURL, name);
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
 
-		company.setPortalURL(portalURL);
-		company.setHomeURL(homeURL);
+		validate(company.getWebId(), virtualHost, mx);
+		validate(name);
+
+		company.setVirtualHost(virtualHost);
 
 		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MAIL_MX_UPDATE))) {
 			company.setMx(mx);
@@ -537,17 +599,47 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(String portalURL, String homeURL, String name)
-		throws PortalException {
-
-		if (Validator.isNull(portalURL)) {
-			throw new CompanyPortalURLException();
-		}
-		else if (Validator.isNull(homeURL)) {
-			throw new CompanyHomeURLException();
-		}
-		else if (Validator.isNull(name)) {
+	protected void validate(String name) throws PortalException {
+		if (Validator.isNull(name)) {
 			throw new AccountNameException();
+		}
+	}
+
+	protected void validate(String webId, String virtualHost, String mx)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(virtualHost)) {
+			throw new CompanyVirtualHostException();
+		}
+		else if (virtualHost.equals(PortalInstances.DEFAULT_VIRTUAL_HOST) &&
+				 !webId.equals(PortalInstances.DEFAULT_WEB_ID)) {
+
+			throw new CompanyVirtualHostException();
+		}
+		else {
+			try {
+				Company virtualHostCompany = getCompanyByVirtualHost(
+					virtualHost);
+
+				if (!virtualHostCompany.getWebId().equals(webId)) {
+					throw new CompanyVirtualHostException();
+				}
+			}
+			catch (NoSuchCompanyException nsce) {
+			}
+
+			try {
+				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					virtualHost);
+
+				throw new CompanyVirtualHostException();
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+		}
+
+		if (Validator.isNull(mx)) {
+			throw new CompanyMxException();
 		}
 	}
 

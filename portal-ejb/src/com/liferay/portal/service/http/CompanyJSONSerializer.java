@@ -72,22 +72,13 @@ public class CompanyJSONSerializer {
 			jsonObj.put("key", key.toString());
 		}
 
-		String portalURL = model.getPortalURL();
+		String virtualHost = model.getVirtualHost();
 
-		if (portalURL == null) {
-			jsonObj.put("portalURL", StringPool.BLANK);
+		if (virtualHost == null) {
+			jsonObj.put("virtualHost", StringPool.BLANK);
 		}
 		else {
-			jsonObj.put("portalURL", portalURL.toString());
-		}
-
-		String homeURL = model.getHomeURL();
-
-		if (homeURL == null) {
-			jsonObj.put("homeURL", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("homeURL", homeURL.toString());
+			jsonObj.put("virtualHost", virtualHost.toString());
 		}
 
 		String mx = model.getMx();

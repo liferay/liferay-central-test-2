@@ -31,8 +31,12 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PrincipalBean.java.html"><b><i>View Source</i></b></a>
@@ -41,6 +45,50 @@ import com.liferay.util.Validator;
  *
  */
 public class PrincipalBean {
+
+	public static final String JRUN_ANONYMOUS = "anonymus-guest";
+
+	public static final String ORACLE_ANONYMOUS = "guest";
+
+	public static final String SUN_ANONYMOUS = "ANONYMOUS";
+
+	public static final String WEBLOGIC_ANONYMOUS = "<anonymous>";
+
+	public static final String[] ANONYMOUS_NAMES = {
+		JRUN_ANONYMOUS, ORACLE_ANONYMOUS, SUN_ANONYMOUS, WEBLOGIC_ANONYMOUS
+	};
+
+	public static void setThreadValues(User user) {
+		long userId = user.getUserId();
+
+		String name = String.valueOf(userId);
+
+		PrincipalThreadLocal.setName(name);
+
+		try {
+			PermissionCheckerImpl permissionChecker =
+				PermissionThreadLocal.getPermissionChecker();
+
+			if (permissionChecker == null) {
+				permissionChecker = (PermissionCheckerImpl)Class.forName(
+					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
+
+				boolean signedIn = false;
+				boolean checkGuest = true;
+
+				if (user != null) {
+					signedIn = true;
+				}
+
+				permissionChecker.init(user, signedIn, checkGuest);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
 
 	public User getUser()
 		throws NoSuchUserException, SystemException, PrincipalException {
@@ -58,6 +106,14 @@ public class PrincipalBean {
 		if (Validator.isNull(name)) {
 			throw new PrincipalException("Principal cannot be null");
 		}
+		else {
+			for (int i = 0; i < ANONYMOUS_NAMES.length; i++) {
+				if (name.equalsIgnoreCase(ANONYMOUS_NAMES[i])) {
+					throw new PrincipalException(
+						"Principal cannot be " + ANONYMOUS_NAMES[i]);
+				}
+			}
+		}
 
 		return GetterUtil.getLong(name);
 	}
@@ -72,5 +128,7 @@ public class PrincipalBean {
 
 		return permissionChecker;
 	}
+
+	private static Log _log = LogFactory.getLog(PrincipalBean.class);
 
 }

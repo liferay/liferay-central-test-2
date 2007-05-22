@@ -38,22 +38,13 @@ public class ReleaseInfo {
 
 	static String name = "Liferay Portal";
 
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
-	}
-
 	static String version = "4.2.0";
 
 	static String codeName = "Machen";
 
-	static String build = "4060";
+	static String build = "4076";
 
-	static String date = "May 19, 2007";
+	static String date = "May 22, 2007";
 
 	static String releaseInfo =
 		name + " " + version + " (" + codeName + " / Build " + build + " / " +

@@ -82,7 +82,7 @@ public class UserFinder {
 	public static int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			boolean active, LinkedHashMap params, boolean andOperator)
+			Boolean active, LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
 		firstName = StringUtil.lowerCase(firstName);
@@ -97,6 +97,10 @@ public class UserFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_A);
+
+			if (active == null) {
+				sql = StringUtil.replace(sql, _ACTIVE_SQL, StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
@@ -123,7 +127,10 @@ public class UserFinder {
 			qPos.add(screenName);
 			qPos.add(emailAddress);
 			qPos.add(emailAddress);
-			qPos.add(active);
+
+			if (active != null) {
+				qPos.add(active);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -148,7 +155,7 @@ public class UserFinder {
 	public static List findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			boolean active, LinkedHashMap params, boolean andOperator,
+			Boolean active, LinkedHashMap params, boolean andOperator,
 			int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -164,6 +171,10 @@ public class UserFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_A);
+
+			if (active == null) {
+				sql = StringUtil.replace(sql, _ACTIVE_SQL, StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
@@ -191,7 +202,10 @@ public class UserFinder {
 			qPos.add(screenName);
 			qPos.add(emailAddress);
 			qPos.add(emailAddress);
-			qPos.add(active);
+
+			if (active != null) {
+				qPos.add(active);
+			}
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -365,5 +379,7 @@ public class UserFinder {
 			}
 		}
 	}
+
+	private static String _ACTIVE_SQL = "AND (User_.active_ = ?)";
 
 }

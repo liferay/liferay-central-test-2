@@ -36,6 +36,7 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.BrowserSniffer;
@@ -55,7 +56,6 @@ import java.util.Properties;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -82,10 +82,6 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		"UTF-8");
 
 	public void portalInit() {
-		ServletContext ctx = _config.getServletContext();
-
-		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-
 		_pattern = GetterUtil.getInteger(
 			_config.getInitParameter("pattern"));
 
@@ -129,11 +125,13 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 
 			String key = getCacheKey(httpReq);
 
-			CacheResponseData data =
-				LayoutCacheUtil.getCacheResponseData(_companyId, key);
+			long companyId = PortalInstances.getCompanyId(httpReq);
+
+			CacheResponseData data = LayoutCacheUtil.getCacheResponseData(
+				companyId, key);
 
 			if (data == null) {
-				if (!isCacheable(httpReq)) {
+				if (!isCacheable(companyId, httpReq)) {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Layout is not cacheable " + key);
 					}
@@ -157,8 +155,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 					cacheResponse.getHeaders());
 
 				if (data.getData().length > 0) {
-					LayoutCacheUtil.putCacheResponseData(
-						_companyId, key, data);
+					LayoutCacheUtil.putCacheResponseData(companyId, key, data);
 				}
 			}
 
@@ -217,7 +214,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 	}
 
 	protected long getPlid(
-		String pathInfo, String servletPath, long defaultPlid) {
+		long companyId, String pathInfo, String servletPath, long defaultPlid) {
 
 		if (_pattern == _PATTERN_LAYOUT) {
 			return defaultPlid;
@@ -253,7 +250,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 
 		try {
 			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				_companyId, friendlyURL);
+				companyId, friendlyURL);
 
 			groupId = group.getGroupId();
 
@@ -320,14 +317,14 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		}
 	}
 
-	protected boolean isCacheable(HttpServletRequest req) {
+	protected boolean isCacheable(long companyId, HttpServletRequest req) {
 		if (_pattern == _PATTERN_RESOURCE) {
 			return true;
 		}
 
 		try {
 			long plid = getPlid(
-				req.getPathInfo(), req.getServletPath(),
+				companyId, req.getPathInfo(), req.getServletPath(),
 				ParamUtil.getLong(req, "p_l_id"));
 
 			if (plid <= 0) {
@@ -354,7 +351,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 						portlets[j], PortletImpl.INSTANCE_SEPARATOR);
 
 					Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						_companyId, portletId);
+						companyId, portletId);
 
 					if (!portlet.isLayoutCacheable()) {
 						return false;
@@ -454,7 +451,6 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 	private static Log _log = LogFactory.getLog(LayoutCacheFilter.class);
 
 	private FilterConfig _config;
-	private long _companyId;
 	private int _pattern;
 
 }

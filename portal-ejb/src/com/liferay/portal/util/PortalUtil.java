@@ -71,7 +71,6 @@ import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
@@ -146,6 +145,10 @@ import org.hibernate.util.FastHashMap;
  *
  */
 public class PortalUtil {
+
+	public static final String PATH_IMAGE = "/image";
+
+	public static final String PATH_MAIN = "/c";
 
 	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
@@ -273,12 +276,7 @@ public class PortalUtil {
 	}
 
 	public static long getCompanyId(HttpServletRequest req) {
-		Long companyIdObj =
-			(Long)req.getSession().getAttribute(WebKeys.COMPANY_ID);
-
-		if (companyIdObj == null) {
-			companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
-		}
+		Long companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
 
 		if (companyIdObj != null) {
 			return companyIdObj.longValue();
@@ -393,6 +391,8 @@ public class PortalUtil {
 		String host = req.getHeader("Host");
 
 		if (host != null) {
+			host = host.trim().toLowerCase();
+
 			int pos = host.indexOf(':');
 
 			if (pos >= 0) {
@@ -499,7 +499,7 @@ public class PortalUtil {
 			}
 		}
 
-		String layoutURL = getLayoutActualURL(layout, themeDisplay);
+		String layoutURL = getLayoutActualURL(layout);
 
 		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 			layoutURL = Http.addParameter(
@@ -509,11 +509,10 @@ public class PortalUtil {
 		return layoutURL;
 	}
 
-	public static String getLayoutActualURL(
-			Layout layout, ThemeDisplay themeDisplay)
+	public static String getLayoutActualURL(Layout layout)
 		throws PortalException, SystemException {
 
-		return getLayoutActualURL(layout, themeDisplay.getPathMain());
+		return getLayoutActualURL(layout, getPathMain());
 	}
 
 	public static String getLayoutActualURL(Layout layout, String mainPath)
@@ -600,9 +599,7 @@ public class PortalUtil {
 				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
-			String contextPath = themeDisplay.getPathContext();
-
-			return portalURL + contextPath + layoutFriendlyURL;
+			return portalURL + getPathContext() + layoutFriendlyURL;
 		}
 
 		Group group = layout.getGroup();
@@ -618,14 +615,14 @@ public class PortalUtil {
 
 		if (layout.isPrivateLayout()) {
 			if (group.isUser()) {
-				friendlyURL = themeDisplay.getPathFriendlyURLPrivateUser();
+				friendlyURL = getPathFriendlyURLPrivateUser();
 			}
 			else {
-				friendlyURL = themeDisplay.getPathFriendlyURLPrivateGroup();
+				friendlyURL = getPathFriendlyURLPrivateGroup();
 			}
 		}
 		else {
-			friendlyURL = themeDisplay.getPathFriendlyURLPublic();
+			friendlyURL = getPathFriendlyURLPublic();
 		}
 
 		return friendlyURL + parentFriendlyURL + layoutFriendlyURL;
@@ -673,6 +670,30 @@ public class PortalUtil {
 		}
 
 		return originalReq;
+	}
+
+	public static String getPathContext() {
+		return _instance._getPathContext();
+	}
+
+	public static String getPathFriendlyURLPrivateGroup() {
+		return _instance._getPathFriendlyURLPrivateGroup();
+	}
+
+	public static String getPathFriendlyURLPrivateUser() {
+		return _instance._getPathFriendlyURLPrivateUser();
+	}
+
+	public static String getPathFriendlyURLPublic() {
+		return _instance._getPathFriendlyURLPublic();
+	}
+
+	public static String getPathImage() {
+		return _instance._getPathImage();
+	}
+
+	public static String getPathMain() {
+		return _instance._getPathMain();
 	}
 
 	public static String getPortalURL(HttpServletRequest req) {
@@ -1221,10 +1242,6 @@ public class PortalUtil {
 			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType()), true);
 	}
 
-	public static boolean isOmniadmin(long userId) {
-		return OmniadminUtil.isOmniadmin(userId);
-	}
-
 	public static boolean isReservedParameter(String name) {
 		return _instance._reservedParams.contains(name);
 	}
@@ -1640,6 +1657,23 @@ public class PortalUtil {
 
 	private PortalUtil() {
 
+		// Paths
+
+		_pathContext = PropsUtil.get(PropsUtil.PORTAL_CTX);
+
+		if (_pathContext.equals(StringPool.SLASH)) {
+			_pathContext = StringPool.BLANK;
+		}
+
+		_pathFriendlyURLPrivateGroup = _pathContext + PropsUtil.get(
+			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
+		_pathFriendlyURLPrivateUser = _pathContext + PropsUtil.get(
+			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
+		_pathFriendlyURLPublic = _pathContext + PropsUtil.get(
+			PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
+		_pathImage = _pathContext + PATH_IMAGE;
+		_pathMain = _pathContext + PATH_MAIN;
+
 		// Groups
 
 		String customSystemGroups[] =
@@ -1731,6 +1765,30 @@ public class PortalUtil {
 		_reservedParams.add("p_p_col_count");
 	}
 
+	private String _getPathContext() {
+		return _pathContext;
+	}
+
+	private String _getPathFriendlyURLPrivateGroup() {
+		return _pathFriendlyURLPrivateGroup;
+	}
+
+	private String _getPathFriendlyURLPrivateUser() {
+		return _pathFriendlyURLPrivateUser;
+	}
+
+	private String _getPathFriendlyURLPublic() {
+		return _pathFriendlyURLPublic;
+	}
+
+	private String _getPathImage() {
+		return _pathImage;
+	}
+
+	private String _getPathMain() {
+		return _pathMain;
+	}
+
 	private String[] _getSystemCommunityRoles() {
 		return _allSystemCommunityRoles;
 	}
@@ -1790,6 +1848,12 @@ public class PortalUtil {
 
 	private static PortalUtil _instance = new PortalUtil();
 
+	private String _pathContext;
+	private String _pathFriendlyURLPrivateGroup;
+	private String _pathFriendlyURLPrivateUser;
+	private String _pathFriendlyURLPublic;
+	private String _pathImage;
+	private String _pathMain;
 	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;
 	private String[] _allSystemRoles;

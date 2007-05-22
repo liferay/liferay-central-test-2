@@ -61,6 +61,14 @@ public interface CompanyPersistence {
 	public com.liferay.portal.model.Company fetchByWebId(java.lang.String webId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Company findByVirtualHost(
+		java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
+
+	public com.liferay.portal.model.Company fetchByVirtualHost(
+		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Company findByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException;
@@ -89,6 +97,10 @@ public interface CompanyPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException;
 
+	public void removeByVirtualHost(java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException;
+
 	public void removeByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException;
@@ -96,6 +108,9 @@ public interface CompanyPersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByWebId(java.lang.String webId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByVirtualHost(java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException;
 
 	public int countByMx(java.lang.String mx)

@@ -81,10 +81,9 @@ import org.dom4j.io.SAXReader;
 public class ServiceBuilder {
 
 	public static void main(String[] args) {
-		if (args.length == 8) {
+		if (args.length == 7) {
 			new ServiceBuilder(
-				args[0], args[1], args[2], args[3], args[4], args[5], args[6],
-				args[7]);
+				args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
 		}
 		else {
 			System.out.println(
@@ -93,8 +92,7 @@ public class ServiceBuilder {
 				"\tservice.xml\n" +
 				"\tclasses/META-INF/portal-hbm.xml\n" +
 				"\tclasses/META-INF/portal-model-hints.xml\n" +
-				"\tclasses/META-INF/portal-spring-enterprise.xml\n" +
-				"\tclasses/META-INF/portal-spring-professional.xml\n" +
+				"\tclasses/META-INF/portal-spring.xml\n" +
 				"\tcom.liferay.portal.kernel.bean.BeanLocatorUtil\n" +
 				"\t../portal-service/src\n" +
 				"\t../portal-web/docroot/html/js/liferay_services.js");
@@ -192,7 +190,6 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.util.StringPool",
 			"com.liferay.portal.security.auth.HttpPrincipal",
 			"com.liferay.portal.service.http.TunnelUtil",
-			"com.liferay.portal.service.impl.PrincipalSessionBean",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
 			"com.liferay.util.DateUtil",
@@ -392,20 +389,17 @@ public class ServiceBuilder {
 	}
 
 	public ServiceBuilder(String fileName, String hbmFileName,
-						  String modelHintsFileName, String springEntFileName,
-						  String springProFileName,
+						  String modelHintsFileName, String springFileName,
 						  String beanLocatorUtilClassName, String serviceDir,
 						  String jsonFileName) {
 
 		new ServiceBuilder(
-			fileName, hbmFileName, modelHintsFileName, springEntFileName,
-			springProFileName, beanLocatorUtilClassName, serviceDir,
-			jsonFileName, true);
+			fileName, hbmFileName, modelHintsFileName, springFileName,
+			beanLocatorUtilClassName, serviceDir, jsonFileName, true);
 	}
 
 	public ServiceBuilder(String fileName, String hbmFileName,
-						  String modelHintsFileName, String springEntFileName,
-						  String springProFileName,
+						  String modelHintsFileName, String springFileName,
 						  String beanLocatorUtilClassName, String serviceDir,
 						  String jsonFileName, boolean build) {
 
@@ -415,8 +409,7 @@ public class ServiceBuilder {
 
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
-			_springEntFileName = springEntFileName;
-			_springProFileName = springProFileName;
+			_springFileName = springFileName;
 			_beanLocatorUtilClassName = beanLocatorUtilClassName;
 			_serviceDir = serviceDir;
 
@@ -656,37 +649,13 @@ public class ServiceBuilder {
 						finderDBIndex));
 				}
 
-				List referenceList = new ArrayList();
-
-				if (build) {
-					List references = entityEl.elements("reference");
-
-					itr2 = references.iterator();
-
-					while (itr2.hasNext()) {
-						Element reference = (Element)itr2.next();
-
-						String refPackage =
-							reference.attributeValue("package-path");
-						String refEntity = reference.attributeValue("entity");
-
-						if ((refPackage == null) || (refEntity == null)) {
-							referenceList.add(reference.getText().trim());
-						}
-						else {
-							referenceList.add(
-								getEntity(refPackage + "." + refEntity));
-						}
-					}
-				}
-
 				_ejbList.add(
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, localService, remoteService, persistenceClass,
 						dataSource, sessionFactory, txManager, pkList,
 						regularColList, collectionList, columnList, order,
-						finderList, referenceList));
+						finderList));
 			}
 
 			List exceptionList = new ArrayList();
@@ -741,9 +710,6 @@ public class ServiceBuilder {
 							_createServiceBaseImpl(entity);
 							_createServiceImpl(entity, _LOCAL);
 							_createService(entity, _LOCAL);
-							_createServiceEJB(entity, _LOCAL);
-							_createServiceEJBImpl(entity, _LOCAL);
-							_createServiceHome(entity, _LOCAL);
 							_createServiceFactory(entity, _LOCAL);
 							_createServiceUtil(entity, _LOCAL);
 						}
@@ -751,9 +717,6 @@ public class ServiceBuilder {
 						if (entity.hasRemoteService()) {
 							_createServiceImpl(entity, _REMOTE);
 							_createService(entity, _REMOTE);
-							_createServiceEJB(entity, _REMOTE);
-							_createServiceEJBImpl(entity, _REMOTE);
-							_createServiceHome(entity, _REMOTE);
 							_createServiceFactory(entity, _REMOTE);
 							_createServiceUtil(entity, _REMOTE);
 
@@ -769,12 +732,11 @@ public class ServiceBuilder {
 					}
 				}
 
-				_createEJBXML();
 				_createHBMXML();
 				_createJSONJS();
 				_createModelHintsXML();
-				_createSpringXML(true);
-				_createSpringXML(false);
+				_createSpringXML();
+				_createRemotingXML();
 
 				_createSQLIndexes();
 				_createSQLTables();
@@ -821,8 +783,7 @@ public class ServiceBuilder {
 			}
 
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
-				refFileName, _hbmFileName, _modelHintsFileName,
-				_springEntFileName, _springProFileName,
+				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
 				_beanLocatorUtilClassName, _serviceDir, _jsonFileName, false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
@@ -1081,195 +1042,6 @@ public class ServiceBuilder {
 				ejbFile.delete();
 			}
 		}
-	}
-
-	private void _createEJBXML() throws IOException {
-		StringMaker sm = new StringMaker();
-
-		for (int i = 0; i < _ejbList.size(); i++) {
-			Entity entity = (Entity)_ejbList.get(i);
-
-			List referenceList = entity.getReferenceList();
-
-			if (entity.hasLocalService()) {
-				_createEJBXMLSession(entity, referenceList, sm, _LOCAL);
-			}
-
-			if (entity.hasRemoteService()) {
-				_createEJBXMLSession(entity, referenceList, sm, _REMOTE);
-			}
-		}
-
-		File xmlFile = new File("classes/META-INF/ejb-jar.xml");
-
-		if (!xmlFile.exists()) {
-			String content =
-				"<?xml version=\"1.0\"?>\n" +
-				"<!DOCTYPE ejb-jar PUBLIC \"-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN\" \"http://java.sun.com/dtd/ejb-jar_2_0.dtd\">\n" +
-				"\n" +
-				"<ejb-jar>\n" +
-				"\t<enterprise-beans>\n" +
-				"\t</enterprise-beans>\n" +
-				"</ejb-jar>";
-
-			FileUtil.write(xmlFile, content);
-		}
-
-		String oldContent = FileUtil.read(xmlFile);
-		String newContent = new String(oldContent);
-
-		int x = oldContent.indexOf("<session>");
-		int y = oldContent.lastIndexOf("</session>");
-
-		if (x == -1) {
-			x = newContent.indexOf("<enterprise-beans/>");
-			if (x != -1) {
-				newContent = StringUtil.replace(
-					newContent, "<enterprise-beans/>", "<enterprise-beans />");
-			}
-
-			x = newContent.indexOf("<enterprise-beans />");
-			if (x != -1) {
-				newContent = StringUtil.replace(
-					newContent, "<enterprise-beans />",
-					"<enterprise-beans>\n\t</enterprise-beans>");
-			}
-
-			x = newContent.indexOf("</enterprise-beans>") - 1;
-			newContent =
-				newContent.substring(0, x) + sm.toString() +
-				newContent.substring(x, newContent.length());
-		}
-		else {
-			int firstSession = newContent.indexOf(
-				"<ejb-name>" + StringUtil.replace(
-					_packagePath + ".service.ejb.", ".", "_"),
-				x);
-			int lastSession = newContent.lastIndexOf(
-				"<ejb-name>" + StringUtil.replace(
-					_packagePath + ".service.ejb.", ".", "_"),
-				y);
-
-			if (firstSession == -1 || firstSession > y) {
-				x = newContent.indexOf("</enterprise-beans>") - 1;
-				newContent =
-					newContent.substring(0, x) + sm.toString() +
-					newContent.substring(x, newContent.length());
-			}
-			else {
-				firstSession = newContent.lastIndexOf(
-					"<session>", firstSession) - 2;
-				lastSession = newContent.indexOf(
-					"</session>", lastSession) + 11;
-
-				newContent =
-					newContent.substring(0, firstSession) + sm.toString() +
-					newContent.substring(lastSession, newContent.length());
-			}
-		}
-
-		if (!oldContent.equals(newContent)) {
-			FileUtil.write(xmlFile, newContent);
-		}
-	}
-
-	private void _createEJBXMLSession(Entity entity, List referenceList, StringMaker sm, int sessionType) throws IOException {
-		sm.append("\t\t<session>\n");
-		sm.append("\t\t\t<display-name>" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</display-name>\n");
-		sm.append("\t\t\t<ejb-name>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</ejb-name>\n");
-		sm.append("\t\t\t<" + (sessionType == _LOCAL ? "local-" : "") + "home>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome</" + (sessionType == _LOCAL ? "local-" : "") + "home>\n");
-		sm.append("\t\t\t<" + (sessionType == _LOCAL ? "local" : "remote") + ">" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</" + (sessionType == _LOCAL ? "local" : "remote") + ">\n");
-		sm.append("\t\t\t<ejb-class>" + _packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl</ejb-class>\n");
-		sm.append("\t\t\t<session-type>Stateless</session-type>\n");
-		sm.append("\t\t\t<transaction-type>Bean</transaction-type>\n");
-
-		File manualFile = new File("../portal-ejb/classes/META-INF/ejb-jar-ref.xml");
-
-		if (!manualFile.exists()) {
-			manualFile = new File("../ext-ejb/classes/META-INF/ejb-jar-ref.xml");
-		}
-
-		if (manualFile.exists()) {
-			String content = FileUtil.read(manualFile);
-
-			int x = content.indexOf("<ejb-ref>");
-			int y = content.lastIndexOf("</ejb-ref>") + 11;
-
-			if (x != -1) {
-				content = content.substring(x - 1, y);
-				content = StringUtil.replace(content, "\t<", "\t\t\t<");
-
-				sm.append(content);
-			}
-		}
-
-		for (int j = 0; j < referenceList.size(); j++) {
-			Object reference = referenceList.get(j);
-
-			if (reference instanceof Entity) {
-				Entity entityRef = (Entity)referenceList.get(j);
-
-				if (entityRef.hasLocalService()) {
-					sm.append("\t\t\t<ejb-local-ref>\n");
-					sm.append("\t\t\t\t<ejb-ref-name>ejb/liferay/" + entityRef.getName() + "LocalServiceHome</ejb-ref-name>\n");
-					sm.append("\t\t\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
-					sm.append("\t\t\t\t<local-home>" + entityRef.getPackagePath() + ".service.ejb." + entityRef.getName() + "LocalServiceHome</local-home>\n");
-					sm.append("\t\t\t\t<local>" + entityRef.getPackagePath() + ".service.ejb." + entityRef.getName() + "LocalServiceEJB</local>\n");
-					sm.append("\t\t\t\t<ejb-link>" + StringUtil.replace(entityRef.getPackagePath() + ".service.ejb.", ".", "_") + entityRef.getName() + "LocalServiceEJB</ejb-link>\n");
-					sm.append("\t\t\t</ejb-local-ref>\n");
-				}
-			}
-			else if (reference instanceof String) {
-				sm.append("\t\t\t" + reference + "\n");
-			}
-		}
-
-		for (int j = 0; j < _ejbList.size(); j++) {
-			Entity entityRef = (Entity)_ejbList.get(j);
-
-			if (!((sessionType == _LOCAL) && entity.equals(entityRef)) && entityRef.hasLocalService()) {
-				sm.append("\t\t\t<ejb-local-ref>\n");
-				sm.append("\t\t\t\t<ejb-ref-name>ejb/liferay/" + entityRef.getName() + "LocalServiceHome</ejb-ref-name>\n");
-				sm.append("\t\t\t\t<ejb-ref-type>Session</ejb-ref-type>\n");
-				sm.append("\t\t\t\t<local-home>" + _packagePath + ".service.ejb." + entityRef.getName() + "LocalServiceHome</local-home>\n");
-				sm.append("\t\t\t\t<local>" + _packagePath + ".service.ejb." + entityRef.getName() + "LocalServiceEJB</local>\n");
-				sm.append("\t\t\t\t<ejb-link>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entityRef.getName() + "LocalServiceEJB</ejb-link>\n");
-				sm.append("\t\t\t</ejb-local-ref>\n");
-			}
-		}
-
-		manualFile = new File("../portal-ejb/classes/META-INF/ejb-jar-local-ref.xml");
-
-		if (!manualFile.exists()) {
-			manualFile = new File("../ext-ejb/classes/META-INF/ejb-jar-local-ref.xml");
-		}
-
-		if (manualFile.exists()) {
-			String content = FileUtil.read(manualFile);
-
-			int x = content.indexOf("<ejb-local-ref>");
-			int y = content.lastIndexOf("</ejb-local-ref>") + 17;
-
-			if (x != -1) {
-				content = content.substring(x - 1, y);
-				content = StringUtil.replace(content, "\t<", "\t\t\t<");
-
-				sm.append(content);
-			}
-		}
-
-		sm.append("\t\t\t<resource-ref>\n");
-		sm.append("\t\t\t\t<res-ref-name>jdbc/LiferayPool</res-ref-name>\n");
-		sm.append("\t\t\t\t<res-type>javax.sql.DataSource</res-type>\n");
-		sm.append("\t\t\t\t<res-auth>Container</res-auth>\n");
-		sm.append("\t\t\t\t<res-sharing-scope>Shareable</res-sharing-scope>\n");
-		sm.append("\t\t\t</resource-ref>\n");
-		sm.append("\t\t\t<resource-ref>\n");
-		sm.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
-		sm.append("\t\t\t\t<res-type>javax.mail.Session</res-type>\n");
-		sm.append("\t\t\t\t<res-auth>Container</res-auth>\n");
-		sm.append("\t\t\t</resource-ref>\n");
-		sm.append("\t\t</session>\n");
 	}
 
 	private void _createExceptions(List exceptions) throws IOException {
@@ -4412,6 +4184,78 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createRemotingXML() throws Exception {
+		StringMaker sm = new StringMaker();
+
+		SAXReader reader = SAXReaderFactory.getInstance();
+
+		Document doc = reader.read(new File(_springFileName));
+
+		Iterator itr = doc.getRootElement().elements("bean").iterator();
+
+		while (itr.hasNext()) {
+			Element beanEl = (Element)itr.next();
+
+			String beanId = beanEl.attributeValue("id");
+
+			if (beanId.endsWith("ServiceFactory") && !beanId.endsWith("LocalServiceFactory")) {
+				String serviceName = beanId.substring(0, beanId.length() - 7);
+
+				String serviceMapping = serviceName;
+				serviceMapping = StringUtil.replace(serviceMapping, ".service.", ".service.spring.");
+				serviceMapping = StringUtil.replace(serviceMapping, ".", "_");
+
+				sm.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
+				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".transaction\" />\n");
+				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sm.append("\t</bean>\n");
+
+				sm.append("\t<bean name=\"/").append(serviceMapping).append("-hessian\" class=\"org.springframework.remoting.caucho.HessianServiceExporter\">\n");
+				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".transaction\" />\n");
+				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sm.append("\t</bean>\n");
+
+				sm.append("\t<bean name=\"/").append(serviceMapping).append("-http\" class=\"org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter\">\n");
+				sm.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".transaction\" />\n");
+				sm.append("\t\t<property name=\"serviceInterface\" value=\"").append(serviceName).append("\" />\n");
+				sm.append("\t</bean>\n");
+			}
+		}
+
+		File outputFile = new File(
+			"../tunnel-web/docroot/WEB-INF/remoting-servlet.xml");
+
+		if (!outputFile.exists()) {
+			outputFile = new File(
+				"../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml");
+		}
+
+		String content = FileUtil.read(outputFile);
+		String newContent = content;
+
+		int x = content.indexOf("<bean ");
+		int y = content.lastIndexOf("</bean>") + 8;
+
+		if (x != -1) {
+			newContent =
+				content.substring(0, x - 1) + sm.toString() +
+					content.substring(y, content.length());
+		}
+		else {
+			x = content.indexOf("</beans>");
+
+			newContent =
+				content.substring(0, x) + sm.toString() +
+					content.substring(x, content.length());
+		}
+
+		if (!content.equals(newContent)) {
+			FileUtil.write(outputFile, newContent);
+
+			System.out.println(outputFile.toString());
+		}
+	}
+
 	private void _createService(Entity entity, int sessionType) throws IOException {
 		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
 
@@ -4583,216 +4427,6 @@ public class ServiceBuilder {
 		writeFile(ejbFile, sm.toString());
 	}
 
-	private void _createServiceEJB(Entity entity, int sessionType) throws IOException {
-		StringMaker sm = new StringMaker();
-
-		// Package
-
-		sm.append("package " + _packagePath + ".service.ejb;");
-
-		// Imports
-
-		sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
-
-		if (sessionType == _LOCAL) {
-			sm.append("import javax.ejb.EJBLocalObject;");
-		}
-		else {
-			sm.append("import javax.ejb.EJBObject;");
-		}
-
-		// Interface declaration
-
-		sm.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB extends EJB" + (sessionType == _LOCAL ? "Local" : "") + "Object, " + entity.getName() + _getSessionTypeName(sessionType) + "Service {");
-
-		// Interface close brace
-
-		sm.append("}");
-
-		// Write file
-
-		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB.java");
-
-		Map jalopySettings = new HashMap();
-
-		String[] classComments = {
-			_DEFAULT_CLASS_COMMENTS,
-			"This class is the EJB interface of the service that is used when Liferay is run inside a full J2EE container."
-		};
-
-		String[] see = {
-			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
-			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil",
-			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl",
-			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome",
-			_packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl"
-		};
-
-		jalopySettings.put("classComments", classComments);
-		jalopySettings.put("see", see);
-
-		writeFile(ejbFile, sm.toString(), jalopySettings);
-	}
-
-	private void _createServiceEJBImpl(Entity entity, int sessionType) throws IOException {
-		JavaClass javaClass = _getJavaClass(_serviceOutputPath + "/service/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
-
-		JavaMethod[] methods = javaClass.getMethods();
-
-		StringMaker sm = new StringMaker();
-
-		// Package
-
-		sm.append("package " + _packagePath + ".service.ejb;");
-
-		// Imports
-
-		sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
-
-		if (methods.length > 0) {
-			sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
-		}
-
-		sm.append("import javax.ejb.CreateException;");
-		sm.append("import javax.ejb.SessionContext;");
-		sm.append("import javax.ejb.SessionBean;");
-
-		if (sessionType == _REMOTE) {
-			sm.append("import com.liferay.portal.service.impl.PrincipalSessionBean;");
-		}
-
-		// Class declaration
-
-		sm.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl implements " + entity.getName() + _getSessionTypeName(sessionType) + "Service, SessionBean {");
-
-		// Methods
-
-		for (int i = 0; i < methods.length; i++) {
-			JavaMethod javaMethod = methods[i];
-
-			String methodName = javaMethod.getName();
-
-			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
-				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
-
-				JavaParameter[] parameters = javaMethod.getParameters();
-
-				for (int j = 0; j < parameters.length; j++) {
-					JavaParameter javaParameter = parameters[j];
-
-					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
-
-					if ((j + 1) != parameters.length) {
-						sm.append(", ");
-					}
-				}
-
-				sm.append(")");
-
-				Type[] thrownExceptions = javaMethod.getExceptions();
-
-				Set newExceptions = new LinkedHashSet();
-
-				for (int j = 0; j < thrownExceptions.length; j++) {
-					Type thrownException = thrownExceptions[j];
-
-					newExceptions.add(thrownException.getValue());
-				}
-
-				if (newExceptions.size() > 0) {
-					sm.append(" throws ");
-
-					Iterator itr = newExceptions.iterator();
-
-					while (itr.hasNext()) {
-						sm.append(itr.next());
-
-						if (itr.hasNext()) {
-							sm.append(", ");
-						}
-					}
-				}
-
-				sm.append("{");
-
-				if (sessionType == _REMOTE) {
-					sm.append("PrincipalSessionBean.setThreadValues(_sc);");
-				}
-
-				if (!javaMethod.getReturns().getValue().equals("void")) {
-					sm.append("return ");
-				}
-
-				sm.append(entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getTxImpl()." + methodName + "(");
-
-				for (int j = 0; j < parameters.length; j++) {
-					JavaParameter javaParameter = parameters[j];
-
-					sm.append(javaParameter.getName());
-
-					if ((j + 1) != parameters.length) {
-						sm.append(", ");
-					}
-				}
-
-				sm.append(");");
-				sm.append("}");
-			}
-		}
-
-		sm.append("public void ejbCreate() throws CreateException {");
-		sm.append("}");
-
-		sm.append("public void ejbRemove() {");
-		sm.append("}");
-
-		sm.append("public void ejbActivate() {");
-		sm.append("}");
-
-		sm.append("public void ejbPassivate() {");
-		sm.append("}");
-
-		sm.append("public SessionContext getSessionContext() {");
-		sm.append("return _sc;");
-		sm.append("}");
-
-		sm.append("public void setSessionContext(SessionContext sc) {");
-		sm.append("_sc = sc;");
-		sm.append("}");
-
-		// Fields
-
-		sm.append("private SessionContext _sc;");
-
-		// Class close brace
-
-		sm.append("}");
-
-		// Write file
-
-		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl.java");
-
-		Map jalopySettings = new HashMap();
-
-		String[] classComments = {
-			_DEFAULT_CLASS_COMMENTS,
-			"This class is the EJB implementation of the service that is used when Liferay is run inside a full J2EE container."
-		};
-
-		String[] see = {
-			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
-			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil",
-			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB",
-			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome",
-			_packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl"
-		};
-
-		jalopySettings.put("classComments", classComments);
-		jalopySettings.put("see", see);
-
-		writeFile(ejbFile, sm.toString(), jalopySettings);
-	}
-
 	private void _createServiceFactory(Entity entity, int sessionType) throws IOException {
 		StringMaker sm = new StringMaker();
 
@@ -4871,68 +4505,6 @@ public class ServiceBuilder {
 
 			ejbFile.delete();
 		}
-	}
-
-	private void _createServiceHome(Entity entity, int sessionType) throws IOException {
-		StringMaker sm = new StringMaker();
-
-		// Package
-
-		sm.append("package " + _packagePath + ".service.ejb;");
-
-		// Imports
-
-		sm.append("import javax.ejb.CreateException;");
-
-		if (sessionType == _LOCAL) {
-			sm.append("import javax.ejb.EJBLocalHome;");
-		}
-		else {
-			sm.append("import java.rmi.RemoteException;");
-			sm.append("import javax.ejb.EJBHome;");
-		}
-
-		// Interface declaration
-
-		sm.append("public interface " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome extends EJB" + (sessionType == _LOCAL ? "Local" : "") + "Home {");
-
-		// Create method
-
-		sm.append("public " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB create() throws CreateException");
-
-		if (sessionType != _LOCAL) {
-			sm.append(", RemoteException");
-		}
-
-		sm.append(";");
-
-		// Interface close brace
-
-		sm.append("}");
-
-		// Write file
-
-		File ejbFile = new File(_outputPath + "/service/ejb/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceHome.java");
-
-		Map jalopySettings = new HashMap();
-
-		String[] classComments = {
-			_DEFAULT_CLASS_COMMENTS,
-			"This class is the EJB home of the service that is used when Liferay is run inside a full J2EE container."
-		};
-
-		String[] see = {
-			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service",
-			_packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil",
-			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB",
-			_packagePath + ".service.ejb." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl",
-			_packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl"
-		};
-
-		jalopySettings.put("classComments", classComments);
-		jalopySettings.put("see", see);
-
-		writeFile(ejbFile, sm.toString(), jalopySettings);
 	}
 
 	private void _createServiceHttp(Entity entity) throws IOException {
@@ -5798,31 +5370,24 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createSpringXML(boolean enterprise) throws IOException {
+	private void _createSpringXML() throws IOException {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
 			if (entity.hasLocalService()) {
-				_createSpringXMLSession(entity, sm, _LOCAL, enterprise);
+				_createSpringXMLSession(entity, sm, _LOCAL);
 			}
 
 			if (entity.hasRemoteService()) {
-				_createSpringXMLSession(entity, sm, _REMOTE, enterprise);
+				_createSpringXMLSession(entity, sm, _REMOTE);
 			}
 
 			_createSpringXMLSession(entity, sm);
 		}
 
-		File xmlFile = null;
-
-		if (enterprise) {
-			xmlFile = new File(_springEntFileName);
-		}
-		else {
-			xmlFile = new File(_springProFileName);
-		}
+		File xmlFile = new File(_springFileName);
 
 		if (!xmlFile.exists()) {
 			String content =
@@ -5867,28 +5432,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createSpringXMLSession(Entity entity, StringMaker sm, int sessionType, boolean enterprise) {
-		if (enterprise) {
-			sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.enterprise\" class=\"" + (sessionType == _LOCAL ? "com.liferay.portal.spring.ejb.LocalSessionFactoryBean" : "com.liferay.portal.spring.ejb.RemoteSessionFactoryBean") + "\" lazy-init=\"true\">\n");
-
-			sm.append("\t\t<property name=\"businessInterface\">\n");
-			sm.append("\t\t\t<value>" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service</value>\n");
-			sm.append("\t\t</property>\n");
-
-			sm.append("\t\t<property name=\"jndiName\">\n");
-
-			if (sessionType == _LOCAL) {
-				sm.append("\t\t\t<value>ejb/liferay/" + entity.getName() + "LocalServiceHome</value>\n");
-			}
-			else {
-				sm.append("\t\t\t<value>" + StringUtil.replace(_packagePath + ".service.ejb.", ".", "_") + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJB</value>\n");
-			}
-
-			sm.append("\t\t</property>\n");
-
-			sm.append("\t</bean>\n");
-		}
-
+	private void _createSpringXMLSession(Entity entity, StringMaker sm, int sessionType) {
 		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\" />\n");
 
 		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
@@ -5908,7 +5452,7 @@ public class ServiceBuilder {
 
 		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" class=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" lazy-init=\"true\">\n");
 		sm.append("\t\t<property name=\"service\">\n");
-		sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service." + (enterprise ? "enterprise" : "transaction") + "\" />\n");
+		sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" />\n");
 		sm.append("\t\t</property>\n");
 		sm.append("\t</bean>\n");
 	}
@@ -6672,8 +6216,7 @@ public class ServiceBuilder {
 	private Set _badCmpFields;
 	private String _hbmFileName;
 	private String _modelHintsFileName;
-	private String _springEntFileName;
-	private String _springProFileName;
+	private String _springFileName;
 	private String _beanLocatorUtilClassName;
 	private String _serviceDir;
 	private String _jsonFileName;

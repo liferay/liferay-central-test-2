@@ -23,9 +23,6 @@
 package com.liferay.portal.servlet.filters.autologin;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.pwd.PwdEncryptor;
@@ -43,7 +40,6 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -60,25 +56,9 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class AutoLoginFilter implements Filter, PortalInitable {
-
-	public void portalInit() {
-		ServletContext ctx = _config.getServletContext();
-
-		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-
-		_rootPath = GetterUtil.getString(
-			ctx.getInitParameter("root_path"), StringPool.SLASH);
-
-		if (_rootPath.equals(StringPool.SLASH)) {
-			_rootPath = StringPool.BLANK;
-		}
-	}
+public class AutoLoginFilter implements Filter {
 
 	public void init(FilterConfig config) throws ServletException {
-		_config = config;
-
-		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
@@ -94,8 +74,6 @@ public class AutoLoginFilter implements Filter, PortalInitable {
 		String jUserName = (String)ses.getAttribute("j_username");
 
 		if ((remoteUser == null) && (jUserName == null)) {
-			req.setAttribute(WebKeys.COMPANY_ID, new Long(_companyId));
-
 			String[] autoLogins = PropsUtil.getArray(
 				PropsUtil.AUTO_LOGIN_HOOKS);
 
@@ -183,7 +161,8 @@ public class AutoLoginFilter implements Filter, PortalInitable {
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
 
-					res.sendRedirect(_rootPath + "/c/portal/touch_protected");
+					res.sendRedirect(
+						PortalUtil.getPathMain() + "/portal/touch_protected");
 				}
 
 				return jUsername;
@@ -194,9 +173,5 @@ public class AutoLoginFilter implements Filter, PortalInitable {
 	}
 
 	private static Log _log = LogFactory.getLog(AutoLoginFilter.class);
-
-	private FilterConfig _config;
-	private long _companyId;
-	private String _rootPath;
 
 }

@@ -122,8 +122,7 @@
 		<column name="accountId" type="long" />
 		<column name="webId" type="String" />
 		<column name="key" type="String" />
-		<column name="portalURL" type="String" />
-		<column name="homeURL" type="String" />
+		<column name="virtualHost" type="String" />
 		<column name="mx" type="String" />
 		<column name="logoId" type="long" />
 
@@ -131,6 +130,9 @@
 
 		<finder name="WebId" return-type="Company">
 			<finder-column name="webId" />
+		</finder>
+		<finder name="VirtualHost" return-type="Company">
+			<finder-column name="virtualHost" />
 		</finder>
 		<finder name="Mx" return-type="Company">
 			<finder-column name="mx" />
@@ -314,21 +316,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
-		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksFolder" />
-		<reference package-path="com.liferay.portlet.calendar" entity="CalEvent" />
-		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
-		<reference package-path="com.liferay.portlet.imagegallery" entity="IGFolder" />
-		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBCategory" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
-		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
-		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
-		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
 	<entity name="Image" local-service="true" remote-service="false">
 
@@ -416,10 +403,6 @@
 			<finder-column name="privateLayout" />
 			<finder-column name="friendlyURL" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.journal" entity="JournalContentSearch" />
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 
@@ -454,8 +437,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_V" return-type="LayoutSet">
-			<finder-column name="companyId" />
+		<finder name="VirtualHost" return-type="LayoutSet">
 			<finder-column name="virtualHost" />
 		</finder>
 		<finder name="G_P" return-type="LayoutSet">
@@ -1134,14 +1116,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="emailAddress" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessageFlag" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
-		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 	</entity>
 	<entity name="UserGroup" local-service="true" remote-service="true">
 
@@ -1339,8 +1313,9 @@
 		<exception>AddressCity</exception>
 		<exception>AddressStreet</exception>
 		<exception>AddressZip</exception>
-		<exception>CompanyHomeURL</exception>
-		<exception>CompanyPortalURL</exception>
+		<exception>CompanyMx</exception>
+		<exception>CompanyVirtualHost</exception>
+		<exception>CompanyWebId</exception>
 		<exception>ContactBirthday</exception>
 		<exception>ContactFirstName</exception>
 		<exception>ContactLastName</exception>

@@ -54,13 +54,11 @@ import org.apache.commons.logging.LogFactory;
 public class WebDAVServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		synchronized (WebDAVServlet.class) {
-			super.init(config);
+		super.init(config);
 
-			String storageClass = config.getInitParameter("storage-class");
+		String storageClass = config.getInitParameter("storage-class");
 
-			_storage = (WebDAVStorage)InstancePool.get(storageClass);
-		}
+		_storage = (WebDAVStorage)InstancePool.get(storageClass);
 	}
 
  	public void service(HttpServletRequest req, HttpServletResponse res)

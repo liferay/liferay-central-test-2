@@ -70,10 +70,109 @@ import com.liferay.portal.service.http.TunnelUtil;
  *
  */
 public class CompanyServiceHttp {
+	public static com.liferay.portal.model.Company addCompany(
+		HttpPrincipal httpPrincipal, java.lang.String webId,
+		java.lang.String virtualHost, java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = webId;
+
+			if (webId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = virtualHost;
+
+			if (virtualHost == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = mx;
+
+			if (mx == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
+					"addCompany",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Company)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Company updateCompany(
 		HttpPrincipal httpPrincipal, long companyId,
-		java.lang.String portalURL, java.lang.String homeURL,
-		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String virtualHost, java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj1 = virtualHost;
+
+			if (virtualHost == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = mx;
+
+			if (mx == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
+					"updateCompany",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Company)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Company updateCompany(
+		HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String name, java.lang.String legalName,
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
@@ -81,76 +180,70 @@ public class CompanyServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = portalURL;
+			Object paramObj1 = virtualHost;
 
-			if (portalURL == null) {
+			if (virtualHost == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = homeURL;
+			Object paramObj2 = mx;
 
-			if (homeURL == null) {
+			if (mx == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = mx;
+			Object paramObj3 = name;
 
-			if (mx == null) {
+			if (name == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = name;
+			Object paramObj4 = legalName;
 
-			if (name == null) {
+			if (legalName == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = legalName;
+			Object paramObj5 = legalId;
 
-			if (legalName == null) {
+			if (legalId == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = legalId;
+			Object paramObj6 = legalType;
 
-			if (legalId == null) {
+			if (legalType == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = legalType;
+			Object paramObj7 = sicCode;
 
-			if (legalType == null) {
+			if (sicCode == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = sicCode;
+			Object paramObj8 = tickerSymbol;
 
-			if (sicCode == null) {
+			if (tickerSymbol == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = tickerSymbol;
+			Object paramObj9 = industry;
 
-			if (tickerSymbol == null) {
+			if (industry == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = industry;
+			Object paramObj10 = type;
 
-			if (industry == null) {
+			if (type == null) {
 				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = type;
-
-			if (type == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = size;
+			Object paramObj11 = size;
 
 			if (size == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
+				paramObj11 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
@@ -158,7 +251,7 @@ public class CompanyServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
+						paramObj10, paramObj11
 					});
 			Object returnObj = null;
 

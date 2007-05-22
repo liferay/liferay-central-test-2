@@ -30,12 +30,11 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.spring.context.LazyWebApplicationContext;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,14 +57,6 @@ public class RemotingServlet extends DispatcherServlet {
 
 	public static final String CONTEXT_CONFIG_LOCATION =
 		"/WEB-INF/remoting-servlet.xml,/WEB-INF/remoting-servlet-ext.xml";
-
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-
-		ServletContext ctx = getServletContext();
-
-		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-	}
 
 	public Class getContextClass() {
 		try {
@@ -94,7 +85,9 @@ public class RemotingServlet extends DispatcherServlet {
 				_log.debug("Remote user " + remoteUser);
 			}
 
-			CompanyThreadLocal.setCompanyId(_companyId);
+			long companyId = PortalInstances.getCompanyId(req);
+
+			CompanyThreadLocal.setCompanyId(companyId);
 
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
@@ -131,7 +124,5 @@ public class RemotingServlet extends DispatcherServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(RemotingServlet.class);
-
-	private long _companyId;
 
 }

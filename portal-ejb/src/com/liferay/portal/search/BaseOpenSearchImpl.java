@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletURLImpl;
@@ -142,8 +141,6 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		String keywords, int startPage, int itemsPerPage, int total, Hits hits,
 		String title, String searchPath, ThemeDisplay themeDisplay) {
 
-		Company company = themeDisplay.getCompany();
-
 		int begin = (startPage * itemsPerPage) - itemsPerPage;
 
 		if (hits != null) {
@@ -236,7 +233,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		// links
 
-		String searchURL = company.getPortalURL() + searchPath;
+		String searchURL = themeDisplay.getURLPortal() + searchPath;
 
 		OpenSearchUtil.addLink(
 			root, searchURL, "self", keywords, startPage, itemsPerPage);

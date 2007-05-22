@@ -23,30 +23,16 @@
 package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
-import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.servlet.MainServlet;
-import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.SetUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
-
-import java.util.Set;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -68,32 +54,13 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class VirtualHostFilter implements Filter, PortalInitable {
+public class VirtualHostFilter implements Filter {
 
 	public static final boolean USE_VIRTUAL_HOST_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
 
-	public static final String IGNORE_HOSTS = GetterUtil.getString(
-		SystemProperties.get(VirtualHostFilter.class.getName() +
-			".ignore.hosts"));
-
-	public static final String IGNORE_PATHS = GetterUtil.getString(
-		SystemProperties.get(VirtualHostFilter.class.getName() +
-			".ignore.paths"));
-
-	public void portalInit() {
-		_ctx = _config.getServletContext();
-
-		_companyId = PortalUtil.getCompanyIdByWebId(_ctx);
-		_ignoreHosts = SetUtil.fromArray(StringUtil.split(IGNORE_HOSTS));
-		_ignorePaths = SetUtil.fromString(ContentUtil.get(
-			_DEPENDENCIES_IGNORE_PATHS, true));
-	}
-
 	public void init(FilterConfig config) throws ServletException {
-		_config = config;
-
-		PortalInitableUtil.init(this);
+		_ctx = config.getServletContext();
 	}
 
 	public void doFilter(
@@ -115,16 +82,21 @@ public class VirtualHostFilter implements Filter, PortalInitable {
 			_log.debug("Received " + httpReq.getRequestURL());
 		}
 
+		long companyId = PortalInstances.getCompanyId(httpReq);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Company id " + companyId);
+		}
+
+		String contextPath = PortalUtil.getPathContext();
+
 		String friendlyURL = httpReq.getRequestURI().toLowerCase();
 
-		String rootPath = GetterUtil.getString(
-			_ctx.getInitParameter("root_path"), StringPool.SLASH);
-
-		if ((!rootPath.equals(StringPool.SLASH)) &&
-			(friendlyURL.indexOf(rootPath) != -1)) {
+		if ((!contextPath.equals(StringPool.SLASH)) &&
+			(friendlyURL.indexOf(contextPath) != -1)) {
 
 			friendlyURL = friendlyURL.substring(
-				rootPath.length(), friendlyURL.length());
+				contextPath.length(), friendlyURL.length());
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -134,32 +106,20 @@ public class VirtualHostFilter implements Filter, PortalInitable {
 		String redirect = null;
 
 		if (USE_VIRTUAL_HOST_FILTER && isValidFriendlyURL(friendlyURL)) {
-			String host = PortalUtil.getHost(httpReq);
-			String mainPath = MainServlet.DEFAULT_MAIN_PATH;
+			String mainPath = PortalUtil.PATH_MAIN;
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Host " + host);
-			}
+			LayoutSet layoutSet = (LayoutSet)req.getAttribute(
+				WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
-			try {
-				if (isValidHost(host)) {
-					LayoutSet layoutSet =
-						LayoutSetLocalServiceUtil.getLayoutSet(
-							_companyId, host);
-
+			if (layoutSet != null) {
+				try {
 					redirect = PortalUtil.getLayoutActualURL(
 						layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
 						mainPath, friendlyURL);
 				}
-			}
-			catch (NoSuchLayoutException nsle) {
-				_log.warn(nsle);
-			}
-			catch (NoSuchLayoutSetException nslse) {
-				_log.warn(nslse);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 		}
 
@@ -181,7 +141,7 @@ public class VirtualHostFilter implements Filter, PortalInitable {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
-		if (_ignorePaths.contains(friendlyURL) ||
+		if (PortalInstances.isIgnorePath(friendlyURL) ||
 			friendlyURL.startsWith(_PATH_IMAGE)) {
 
 			return false;
@@ -198,39 +158,10 @@ public class VirtualHostFilter implements Filter, PortalInitable {
 		return true;
 	}
 
-	protected boolean isValidHost(String host)
-		throws PortalException, SystemException {
-
-		if (Validator.isNotNull(host)) {
-			if (_ignoreHosts.contains(host)) {
-				return false;
-			}
-
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				_companyId);
-
-			if (company.getPortalURL().indexOf(host) == -1) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);
-
-	private static String _DEPENDENCIES =
-		"com/liferay/portal/servlet/filters/virtualhost/dependencies/";
-
-	private static String _DEPENDENCIES_IGNORE_PATHS =
-		_DEPENDENCIES + "ignore_paths.txt";
 
 	private static String _PATH_IMAGE = "/image/";
 
-	private FilterConfig _config;
 	private ServletContext _ctx;
-	private long _companyId;
-	private Set _ignoreHosts;
-	private Set _ignorePaths;
 
 }

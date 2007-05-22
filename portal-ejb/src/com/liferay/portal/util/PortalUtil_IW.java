@@ -178,11 +178,10 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.String getLayoutActualURL(
-		com.liferay.portal.model.Layout layout,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
-		return PortalUtil.getLayoutActualURL(layout, themeDisplay);
+		return PortalUtil.getLayoutActualURL(layout);
 	}
 
 	public java.lang.String getLayoutActualURL(
@@ -238,6 +237,30 @@ public class PortalUtil_IW {
 	public javax.servlet.http.HttpServletRequest getOriginalServletRequest(
 		javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getOriginalServletRequest(req);
+	}
+
+	public java.lang.String getPathContext() {
+		return PortalUtil.getPathContext();
+	}
+
+	public java.lang.String getPathFriendlyURLPrivateGroup() {
+		return PortalUtil.getPathFriendlyURLPrivateGroup();
+	}
+
+	public java.lang.String getPathFriendlyURLPrivateUser() {
+		return PortalUtil.getPathFriendlyURLPrivateUser();
+	}
+
+	public java.lang.String getPathFriendlyURLPublic() {
+		return PortalUtil.getPathFriendlyURLPublic();
+	}
+
+	public java.lang.String getPathImage() {
+		return PortalUtil.getPathImage();
+	}
+
+	public java.lang.String getPathMain() {
+		return PortalUtil.getPathMain();
 	}
 
 	public java.lang.String getPortalURL(
@@ -302,6 +325,12 @@ public class PortalUtil_IW {
 
 	public java.lang.String getPortletNamespace(java.lang.String portletName) {
 		return PortalUtil.getPortletNamespace(portletName);
+	}
+
+	public java.lang.String getPortletXmlFileName()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		return PortalUtil.getPortletXmlFileName();
 	}
 
 	public java.lang.String getPortletTitle(java.lang.String portletId,
@@ -444,10 +473,6 @@ public class PortalUtil_IW {
 
 	public boolean isLayoutSitemapable(com.liferay.portal.model.Layout layout) {
 		return PortalUtil.isLayoutSitemapable(layout);
-	}
-
-	public boolean isOmniadmin(long userId) {
-		return PortalUtil.isOmniadmin(userId);
 	}
 
 	public boolean isReservedParameter(java.lang.String name) {

@@ -72,18 +72,13 @@ public class PortalSessionListener implements HttpSessionListener {
 		PortalSessionContext.remove(ses.getId());
 
 		try {
-			Long companyIdObj = (Long)ses.getAttribute(WebKeys.COMPANY_ID);
 			Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
-
-			if (companyIdObj == null) {
-				_log.warn("Company id is not in the session");
-			}
 
 			if (userIdObj == null) {
 				_log.warn("User id is not in the session");
 			}
 
-			if ((companyIdObj == null) || (userIdObj == null)) {
+			if (userIdObj == null) {
 				return;
 			}
 

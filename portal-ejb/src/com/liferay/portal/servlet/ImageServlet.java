@@ -25,8 +25,6 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -35,8 +33,6 @@ import java.io.IOException;
 
 import java.util.Date;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,22 +50,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageServlet extends HttpServlet {
 
-	public void init(ServletConfig config) throws ServletException {
-		synchronized (ImageServlet.class) {
-			super.init(config);
-
-			ServletContext ctx = getServletContext();
-
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-		}
-	}
-
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
-		if (!PortalInstances.matches()) {
-			return;
-		}
 
 		long lastModified = getLastModified(req);
 
@@ -91,10 +73,6 @@ public class ImageServlet extends HttpServlet {
 		}
 
 		writeImage(req, res);
-	}
-
-	protected long getCompanyId() {
-		return _companyId;
 	}
 
 	protected Image getDefaultImage(HttpServletRequest req, long imageId) {
@@ -192,7 +170,5 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageServlet.class);
-
-	private long _companyId;
 
 }

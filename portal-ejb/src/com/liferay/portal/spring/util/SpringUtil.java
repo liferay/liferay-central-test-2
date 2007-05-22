@@ -35,27 +35,12 @@ import org.springframework.context.ApplicationContext;
  */
 public class SpringUtil {
 
-	static String[] configs = PropsUtil.getArray(PropsUtil.SPRING_CONFIGS);
-
-	static {
-		for (int i = 0; i < configs.length; i++) {
-			String config = configs[i];
-
-			if (config.endsWith("spring.xml")) {
-				config =
-					config.substring(0, config.length() - 4) + "-" +
-						PropsUtil.get(PropsUtil.PORTAL_RELEASE) + ".xml";
-			}
-
-			configs[i] = config;
-		}
-	}
-
 	public static ApplicationContext getContext() {
 		return _ctx;
 	}
 
 	private static ApplicationContext _ctx =
-		new LazyClassPathApplicationContext(configs);
+		new LazyClassPathApplicationContext(
+			PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
 
 }

@@ -42,11 +42,31 @@ import java.io.File;
 public class CompanyServiceImpl
 	extends PrincipalBean implements CompanyService {
 
+	public Company addCompany(String webId, String virtualHost, String mx)
+		throws PortalException, SystemException {
+
+		if (!getPermissionChecker().isOmniadmin()) {
+			throw new PrincipalException();
+		}
+
+		return CompanyLocalServiceUtil.addCompany(webId, virtualHost, mx);
+	}
+
+	public Company updateCompany(long companyId, String virtualHost, String mx)
+		throws PortalException, SystemException {
+
+		if (!getPermissionChecker().isOmniadmin()) {
+			throw new PrincipalException();
+		}
+
+		return CompanyLocalServiceUtil.updateCompany(
+			companyId, virtualHost, mx);
+	}
+
 	public Company updateCompany(
-			long companyId, String portalURL, String homeURL, String mx,
-			String name, String legalName, String legalId, String legalType,
-			String sicCode, String tickerSymbol, String industry, String type,
-			String size)
+			long companyId, String virtualHost, String mx, String name,
+			String legalName, String legalId, String legalType, String sicCode,
+			String tickerSymbol, String industry, String type, String size)
 		throws PortalException, SystemException {
 
 		if (!RoleLocalServiceUtil.hasUserRole(
@@ -56,8 +76,8 @@ public class CompanyServiceImpl
 		}
 
 		return CompanyLocalServiceUtil.updateCompany(
-			companyId, portalURL, homeURL, mx, name, legalName, legalId,
-			legalType, sicCode, tickerSymbol, industry, type, size);
+			companyId, virtualHost, mx, name, legalName, legalId, legalType,
+			sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public void updateDisplay(

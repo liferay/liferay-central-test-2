@@ -40,15 +40,9 @@ public class PropsUtil {
 		InitUtil.init();
 	}
 
-	// Portal Release
-
-	public static final String PORTAL_RELEASE = "portal.release";
-
 	// Portal Context
 
 	public static final String PORTAL_CTX = "portal.ctx";
-
-	public static final String PORTAL_INSTANCES = "portal.instances";
 
 	// Error
 
@@ -645,6 +639,12 @@ public class PropsUtil {
 	public static final String VELOCITY_ENGINE_LOGGER = "velocity.engine.logger";
 
 	public static final String VELOCITY_ENGINE_LOGGER_CATEGORY = "velocity.engine.logger.category";
+
+	// Virtual Hosts
+
+	public static final String VIRTUAL_HOSTS_IGNORE_HOSTS = "virtual.hosts.ignore.hosts";
+
+	public static final String VIRTUAL_HOSTS_IGNORE_PATHS = "virtual.hosts.ignore.paths";
 
 	// Web Server
 

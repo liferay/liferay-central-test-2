@@ -62,55 +62,41 @@ import org.apache.commons.logging.LogFactory;
 public class FriendlyURLServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		synchronized (FriendlyURLServlet.class) {
-			super.init(config);
+		super.init(config);
 
-			ServletContext ctx = getServletContext();
-
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-			_private = GetterUtil.getBoolean(
-				config.getInitParameter("private"));
-			_user = GetterUtil.getBoolean(
-				config.getInitParameter("user"), false);
-		}
+		_private = GetterUtil.getBoolean(config.getInitParameter("private"));
+		_user = GetterUtil.getBoolean(config.getInitParameter("user"));
 	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
-		if (!PortalInstances.matches()) {
-			return;
-		}
 
 		ServletContext ctx = getServletContext();
 
 		// Do not set the entire full main path. See LEP-456.
 
 		//String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
-		String mainPath = MainServlet.DEFAULT_MAIN_PATH;
+		String mainPath = PortalUtil.PATH_MAIN;
 
 		String friendlyURLPath = null;
 
 		if (_private) {
 			if (_user) {
-				friendlyURLPath = (String)ctx.getAttribute(
-					WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
+				friendlyURLPath = PortalUtil.getPathFriendlyURLPrivateUser();
 			}
 			else {
-				friendlyURLPath = (String)ctx.getAttribute(
-					WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH);
+				friendlyURLPath = PortalUtil.getPathFriendlyURLPrivateGroup();
 			}
 		}
 		else {
-			friendlyURLPath = (String)ctx.getAttribute(
-				WebKeys.FRIENDLY_URL_PUBLIC_PATH);
+			friendlyURLPath = PortalUtil.getPathFriendlyURLPublic();
 		}
 
 		String redirect = mainPath;
 
 		try {
 			redirect = getRedirect(
-				req.getPathInfo(), mainPath, req.getParameterMap());
+				req, req.getPathInfo(), mainPath, req.getParameterMap());
 
 			LastPath lastPath = new LastPath(
 				friendlyURLPath, req.getPathInfo(), req.getParameterMap());
@@ -145,11 +131,8 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 	}
 
-	protected long getCompanyId() {
-		return _companyId;
-	}
-
-	protected String getRedirect(String path, String mainPath, Map params)
+	protected String getRedirect(
+			HttpServletRequest req, String path, String mainPath, Map params)
 		throws Exception {
 
 		if (Validator.isNull(path)) {
@@ -179,11 +162,13 @@ public class FriendlyURLServlet extends HttpServlet {
 			return mainPath;
 		}
 
+		long companyId = PortalInstances.getCompanyId(req);
+
 		Group group = null;
 
 		try {
 			group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				_companyId, friendlyURL);
+				companyId, friendlyURL);
 		}
 		catch (NoSuchGroupException nsge) {
 		}
@@ -194,7 +179,7 @@ public class FriendlyURLServlet extends HttpServlet {
 					String screenName = friendlyURL.substring(1);
 
 					User user = UserLocalServiceUtil.getUserByScreenName(
-						_companyId, screenName);
+						companyId, screenName);
 
 					group = user.getGroup();
 				}
@@ -229,7 +214,6 @@ public class FriendlyURLServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(FriendlyURLServlet.class);
 
-	private long _companyId;
 	private boolean _private;
 	private boolean _user;
 

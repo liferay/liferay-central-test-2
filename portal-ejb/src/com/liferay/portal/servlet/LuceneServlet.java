@@ -23,18 +23,21 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.job.JobScheduler;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.lucene.CleanUpJob;
 import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
@@ -55,34 +58,38 @@ import org.quartz.SchedulerException;
 public class LuceneServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		synchronized (LuceneServlet.class) {
-			super.init(config);
+		super.init(config);
 
-			ServletContext ctx = getServletContext();
+		long[] companyIds = PortalInstances.getCompanyIds();
 
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
+		for (int i = 0; i < companyIds.length; i++) {
+			long companyId = companyIds[0];
 
 			if (GetterUtil.getBoolean(
 					PropsUtil.get(PropsUtil.INDEX_ON_STARTUP))) {
 
-				_indexer = new LuceneIndexer(_companyId);
+				LuceneIndexer indexer = new LuceneIndexer(companyId);
+				Thread indexerThread = null;
 
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(PropsUtil.INDEX_WITH_THREAD)) ||
 					ServerDetector.isOrion()) {
 
-					_indexerThread = new Thread(
-						_indexer, THREAD_NAME + "." + _companyId);
+					indexerThread = new Thread(
+						indexer, THREAD_NAME + "." + companyId);
 
-					_indexerThread.setPriority(THREAD_PRIORITY);
-					_indexerThread.start();
+					indexerThread.setPriority(THREAD_PRIORITY);
+
+					indexerThread.start();
 				}
 				else {
-					_indexer.reIndex();
+					indexer.reIndex();
 				}
+
+				_indexers.add(new ObjectValuePair(indexer, indexerThread));
 			}
 			else {
-				Directory luceneDir = LuceneUtil.getLuceneDir(_companyId);
+				Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
 
 				IndexWriter writer = null;
 
@@ -131,18 +138,27 @@ public class LuceneServlet extends HttpServlet {
 
 		// Wait for indexer to be gracefully interrupted
 
-		if ((_indexer != null) && (!_indexer.isFinished()) &&
-			(_indexerThread != null)) {
+		for (int i = 0; i < _indexers.size(); i++) {
+			ObjectValuePair ovp = (ObjectValuePair)_indexers.get(i);
 
-			_log.warn("Waiting for Lucene indexer to shutdown");
+			LuceneIndexer indexer = (LuceneIndexer)ovp.getKey();
+			Thread indexerThread = (Thread)ovp.getValue();
 
-			_indexer.halt();
+			if ((indexer != null) && (!indexer.isFinished()) &&
+				(indexerThread != null)) {
 
-			try {
-				_indexerThread.join(THREAD_TIMEOUT);
-			}
-			catch (InterruptedException e) {
-				_log.error("Lucene indexer shutdown interrupted", e);
+				if (_log.isWarnEnabled()) {
+					_log.warn("Waiting for Lucene indexer to shutdown");
+				}
+
+				indexer.halt();
+
+				try {
+					indexerThread.join(THREAD_TIMEOUT);
+				}
+				catch (InterruptedException e) {
+					_log.error("Lucene indexer shutdown interrupted", e);
+				}
 			}
 		}
 
@@ -159,8 +175,6 @@ public class LuceneServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(LuceneServlet.class);
 
-	private long _companyId;
-	private LuceneIndexer _indexer;
-	private Thread _indexerThread;
+	private List _indexers = new ArrayList();
 
 }

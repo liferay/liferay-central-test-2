@@ -83,12 +83,6 @@ public class WebKeys {
 
 	public static final String FORWARD_URL = "FORWARD_URL";
 
-	public static final String FRIENDLY_URL_PRIVATE_GROUP_PATH = "FRIENDLY_URL_PRIVATE_GROUP_PATH";
-
-	public static final String FRIENDLY_URL_PRIVATE_USER_PATH = "FRIENDLY_URL_PRIVATE_USER_PATH";
-
-	public static final String FRIENDLY_URL_PUBLIC_PATH = "FRIENDLY_URL_PUBLIC_PATH";
-
 	public static final String GOOGLE_CACHED_PAGE = "GOOGLE_CACHED_PAGE";
 
 	public static final String GOOGLE_SEARCH_RESULT = "GOOGLE_SEARCH_RESULT";
@@ -103,8 +97,6 @@ public class WebKeys {
 
 	public static final String IMAGE_GALLERY_IMAGE = "IMAGE_GALLERY_IMAGE";
 
-	public static final String IMAGE_PATH = "IMAGE_PATH";
-
 	public static final String LAYOUT = "LAYOUT";
 
 	public static final String LAYOUT_DEFAULT = "LAYOUT_DEFAULT";
@@ -114,8 +106,6 @@ public class WebKeys {
 	public static final String LAYOUTS = "LAYOUTS";
 
 	public static final String LIVE_USERS = "LIVE_USERS";
-
-	public static final String MAIN_PATH = "MAIN_PATH";
 
 	public static final String JABBER_XMPP_SESSION = "JABBER_XMPP_SESSION";
 
@@ -273,11 +263,11 @@ public class WebKeys {
 
 	public static final String ROLE = "ROLE";
 
-	public static final String ROOT_PATH = "ROOT_PATH";
-
 	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";
 
 	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
+
+	public static final String SEL_COMPANY = "SEL_COMPANY";
 
 	public static final String SEL_LAYOUT = "SEL_LAYOUT";
 
@@ -326,6 +316,8 @@ public class WebKeys {
 	public static final String USER_PASSWORD = "USER_PASSWORD";
 
 	public static final String USERS_NOTIFIED = "USERS_NOTIFIED";
+
+	public static final String VIRTUAL_HOST_LAYOUT_SET = "VIRTUAL_HOST_LAYOUT_SET";
 
 	public static final String VM_VARIABLES = "VM_VARIABLES";
 

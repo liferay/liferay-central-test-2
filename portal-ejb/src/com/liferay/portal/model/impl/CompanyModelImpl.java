@@ -56,8 +56,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "accountId", new Integer(Types.BIGINT) },
 			{ "webId", new Integer(Types.VARCHAR) },
 			{ "key_", new Integer(Types.CLOB) },
-			{ "portalURL", new Integer(Types.VARCHAR) },
-			{ "homeURL", new Integer(Types.VARCHAR) },
+			{ "virtualHost", new Integer(Types.VARCHAR) },
 			{ "mx", new Integer(Types.VARCHAR) },
 			{ "logoId", new Integer(Types.BIGINT) }
 		};
@@ -69,11 +68,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_KEY = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.key"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PORTALURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.portalURL"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_HOMEURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.homeURL"),
+	public static boolean XSS_ALLOW_VIRTUALHOST = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Company.virtualHost"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_MX = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company.mx"),
@@ -144,37 +140,20 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getPortalURL() {
-		return GetterUtil.getString(_portalURL);
+	public String getVirtualHost() {
+		return GetterUtil.getString(_virtualHost);
 	}
 
-	public void setPortalURL(String portalURL) {
-		if (((portalURL == null) && (_portalURL != null)) ||
-				((portalURL != null) && (_portalURL == null)) ||
-				((portalURL != null) && (_portalURL != null) &&
-				!portalURL.equals(_portalURL))) {
-			if (!XSS_ALLOW_PORTALURL) {
-				portalURL = XSSUtil.strip(portalURL);
+	public void setVirtualHost(String virtualHost) {
+		if (((virtualHost == null) && (_virtualHost != null)) ||
+				((virtualHost != null) && (_virtualHost == null)) ||
+				((virtualHost != null) && (_virtualHost != null) &&
+				!virtualHost.equals(_virtualHost))) {
+			if (!XSS_ALLOW_VIRTUALHOST) {
+				virtualHost = XSSUtil.strip(virtualHost);
 			}
 
-			_portalURL = portalURL;
-		}
-	}
-
-	public String getHomeURL() {
-		return GetterUtil.getString(_homeURL);
-	}
-
-	public void setHomeURL(String homeURL) {
-		if (((homeURL == null) && (_homeURL != null)) ||
-				((homeURL != null) && (_homeURL == null)) ||
-				((homeURL != null) && (_homeURL != null) &&
-				!homeURL.equals(_homeURL))) {
-			if (!XSS_ALLOW_HOMEURL) {
-				homeURL = XSSUtil.strip(homeURL);
-			}
-
-			_homeURL = homeURL;
+			_virtualHost = virtualHost;
 		}
 	}
 
@@ -209,8 +188,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		clone.setAccountId(getAccountId());
 		clone.setWebId(getWebId());
 		clone.setKey(getKey());
-		clone.setPortalURL(getPortalURL());
-		clone.setHomeURL(getHomeURL());
+		clone.setVirtualHost(getVirtualHost());
 		clone.setMx(getMx());
 		clone.setLogoId(getLogoId());
 
@@ -268,8 +246,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private long _accountId;
 	private String _webId;
 	private String _key;
-	private String _portalURL;
-	private String _homeURL;
+	private String _virtualHost;
 	private String _mx;
 	private long _logoId;
 }

@@ -24,7 +24,6 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -49,10 +48,8 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
@@ -67,14 +64,12 @@ import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.BrowserSniffer;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.NullSafeProperties;
@@ -285,27 +280,19 @@ public class ServicePreAction extends Action {
 
 		// Check the virtual host
 
-		LayoutSet layoutSet = null;
+		LayoutSet layoutSet = (LayoutSet)req.getAttribute(
+			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
-		String host = PortalUtil.getHost(req);
+		if (layoutSet != null) {
+			List layouts = LayoutLocalServiceUtil.getLayouts(
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-		try {
-			if (isValidHost(user.getCompanyId(), host)) {
-				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					user.getCompanyId(), host);
+			if (layouts.size() > 0) {
+				Layout layout = (Layout)layouts.get(0);
 
-				List layouts = LayoutLocalServiceUtil.getLayouts(
-					layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
-
-				if (layouts.size() > 0) {
-					Layout layout = (Layout)layouts.get(0);
-
-					return new Object[] {layout, layouts};
-				}
+				return new Object[] {layout, layouts};
 			}
-		}
-		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		Layout layout = null;
@@ -427,20 +414,6 @@ public class ServicePreAction extends Action {
 		return new Object[] {layout, layouts};
 	}
 
-	protected boolean isValidHost(long companyId, String host)
-		throws PortalException, SystemException {
-
-		if (Validator.isNotNull(host)) {
-			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
-			if (company.getPortalURL().indexOf(host) == -1) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	protected boolean isViewableCommunity(
 			User user, long groupId, boolean privateLayout)
 		throws PortalException, SystemException {
@@ -497,22 +470,14 @@ public class ServicePreAction extends Action {
 
 		// Paths
 
-		String contextPath = PrefsPropsUtil.getString(
-			companyId, PropsUtil.PORTAL_CTX);
-
-		if (contextPath.equals(StringPool.SLASH)) {
-			contextPath = StringPool.BLANK;
-		}
-
-		String rootPath = (String)req.getAttribute(WebKeys.ROOT_PATH);
-		String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
-		String friendlyURLPrivateGroupPath = (String)req.getAttribute(
-			WebKeys.FRIENDLY_URL_PRIVATE_GROUP_PATH);
-		String friendlyURLPrivateUserPath = (String)req.getAttribute(
-			WebKeys.FRIENDLY_URL_PRIVATE_USER_PATH);
-		String friendlyURLPublicPath =
-			(String)req.getAttribute(WebKeys.FRIENDLY_URL_PUBLIC_PATH);
-		String imagePath = (String)req.getAttribute(WebKeys.IMAGE_PATH);
+		String contextPath = PortalUtil.getPathContext();
+		String friendlyURLPrivateGroupPath =
+			PortalUtil.getPathFriendlyURLPrivateGroup();
+		String friendlyURLPrivateUserPath =
+			PortalUtil.getPathFriendlyURLPrivateUser();
+		String friendlyURLPublicPath = PortalUtil.getPathFriendlyURLPublic();
+		String imagePath = PortalUtil.getPathImage();
+		String mainPath = PortalUtil.getPathMain();
 
 		// Company logo
 
@@ -791,8 +756,6 @@ public class ServicePreAction extends Action {
 
 		// Theme display
 
-		String protocol = Http.getProtocol(req) + "://";
-
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
 
 		themeDisplay.setCompany(company);
@@ -821,7 +784,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
 		themeDisplay.setPathApplet(contextPath + "/applets");
-		themeDisplay.setPathCms(rootPath + "/cms");
+		themeDisplay.setPathCms(contextPath + "/cms");
 		themeDisplay.setPathContext(contextPath);
 		themeDisplay.setPathFlash(contextPath + "/flash");
 		themeDisplay.setPathFriendlyURLPrivateGroup(
@@ -831,7 +794,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathImage(imagePath);
 		themeDisplay.setPathJavaScript(contextPath + "/html/js");
 		themeDisplay.setPathMain(mainPath);
-		themeDisplay.setPathRoot(rootPath);
 		themeDisplay.setPathSound(contextPath + "/html/sound");
 
 		// URLs
@@ -855,7 +817,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLCreateAccount(createAccountURL);
 
-		themeDisplay.setURLHome(protocol + company.getHomeURL());
+		themeDisplay.setURLHome(PortalUtil.getPortalURL(req));
 
 		if (layout != null) {
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
@@ -936,7 +898,7 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowPageSettingsIcon(false);
 		}
 
-		themeDisplay.setURLPortal(protocol + company.getPortalURL());
+		themeDisplay.setURLPortal(themeDisplay.getURLHome());
 		themeDisplay.setURLSignIn(mainPath + "/portal/login");
 		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 

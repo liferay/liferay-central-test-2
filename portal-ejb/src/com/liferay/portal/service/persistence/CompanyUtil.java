@@ -160,6 +160,18 @@ public class CompanyUtil {
 		return getPersistence().fetchByWebId(webId);
 	}
 
+	public static com.liferay.portal.model.Company findByVirtualHost(
+		java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException {
+		return getPersistence().findByVirtualHost(virtualHost);
+	}
+
+	public static com.liferay.portal.model.Company fetchByVirtualHost(
+		java.lang.String virtualHost) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByVirtualHost(virtualHost);
+	}
+
 	public static com.liferay.portal.model.Company findByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException {
@@ -206,6 +218,12 @@ public class CompanyUtil {
 		getPersistence().removeByWebId(webId);
 	}
 
+	public static void removeByVirtualHost(java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException {
+		getPersistence().removeByVirtualHost(virtualHost);
+	}
+
 	public static void removeByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException {
@@ -219,6 +237,11 @@ public class CompanyUtil {
 	public static int countByWebId(java.lang.String webId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByWebId(webId);
+	}
+
+	public static int countByVirtualHost(java.lang.String virtualHost)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByVirtualHost(virtualHost);
 	}
 
 	public static int countByMx(java.lang.String mx)

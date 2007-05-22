@@ -20,36 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.ejb;
+package com.liferay.portal.util.comparator;
 
-import java.rmi.RemoteException;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.util.PortalInstances;
 
-import javax.ejb.CreateException;
-import javax.ejb.EJBHome;
+import java.io.Serializable;
+
+import java.util.Comparator;
 
 /**
- * <a href="OrganizationServiceHome.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This class is the EJB home of the service that is used when Liferay is run inside
- * a full J2EE container.
- * </p>
+ * <a href="CompanyComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.OrganizationService
- * @see com.liferay.portal.service.OrganizationServiceUtil
- * @see com.liferay.portal.service.ejb.OrganizationServiceEJB
- * @see com.liferay.portal.service.ejb.OrganizationServiceEJBImpl
- * @see com.liferay.portal.service.impl.OrganizationServiceImpl
- *
  */
-public interface OrganizationServiceHome extends EJBHome {
-	public OrganizationServiceEJB create()
-		throws CreateException, RemoteException;
+public class CompanyComparator implements Comparator, Serializable {
+
+	public int compare(Object obj1, Object obj2) {
+		Company company1 = (Company)obj1;
+		Company company2 = (Company)obj2;
+
+		String webId1 = company1.getWebId();
+		String webId2 = company2.getWebId();
+
+		if (webId1.equals(PortalInstances.DEFAULT_WEB_ID)) {
+			return -1;
+		}
+		else if (webId2.equals(PortalInstances.DEFAULT_WEB_ID)) {
+			return 1;
+		}
+		else {
+			return webId1.compareTo(webId2);
+		}
+	}
+
 }

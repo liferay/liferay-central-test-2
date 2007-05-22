@@ -25,7 +25,6 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.LocaleUtil;
@@ -39,7 +38,6 @@ import java.io.IOException;
 import java.util.Locale;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,24 +55,14 @@ import org.apache.commons.logging.LogFactory;
 public class LanguageServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		synchronized (LanguageServlet.class) {
-			super.init(config);
+		super.init(config);
 
-			ServletContext ctx = getServletContext();
-
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-			_lastModified =
-				(ReleaseInfo.getBuildDate().getTime() / 1000) * 1000;
-			_maxAge = "max-age=" + (Time.HOUR / 1000);
-		}
+		_lastModified = (ReleaseInfo.getBuildDate().getTime() / 1000) * 1000;
+		_maxAge = "max-age=" + (Time.HOUR / 1000);
 	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
-		if (!PortalInstances.matches()) {
-			return;
-		}
 
 		String path = req.getPathInfo();
 
@@ -114,12 +102,13 @@ public class LanguageServlet extends HttpServlet {
 		String value = key;
 
 		try {
+			long companyId = PortalInstances.getCompanyId(req);
+
 			if ((arguments == null) || (arguments.length == 0)) {
-				value = LanguageUtil.get(getCompanyId(), locale, key);
+				value = LanguageUtil.get(companyId, locale, key);
 			}
 			else {
-				value = LanguageUtil.format(
-					getCompanyId(), locale, key, arguments);
+				value = LanguageUtil.format(companyId, locale, key, arguments);
 			}
 		}
 		catch (Exception e) {
@@ -152,10 +141,6 @@ public class LanguageServlet extends HttpServlet {
 		ServletResponseUtil.write(res, value.getBytes());
 	}
 
-	protected long getCompanyId() {
-		return _companyId;
-	}
-
 	protected long getLastModified() {
 		return _lastModified;
 	}
@@ -164,7 +149,6 @@ public class LanguageServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(LanguageServlet.class);
 
-	private long _companyId;
 	private long _lastModified;
 	private String _maxAge;
 

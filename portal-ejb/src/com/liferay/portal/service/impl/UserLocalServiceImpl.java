@@ -891,7 +891,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public List search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			boolean active, LinkedHashMap params, boolean andSearch, int begin,
+			Boolean active, LinkedHashMap params, boolean andSearch, int begin,
 			int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -903,7 +903,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public int searchCount(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			boolean active, LinkedHashMap params, boolean andSearch)
+			Boolean active, LinkedHashMap params, boolean andSearch)
 		throws SystemException {
 
 		return UserFinder.countByC_FN_MN_LN_SN_EA_A(
@@ -981,7 +981,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				new String[] {
 					fromAddress,
 					fromName,
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					remoteAddr,
 					remoteHost,
 					toAddress,
@@ -1008,7 +1008,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				new String[] {
 					fromAddress,
 					fromName,
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					remoteAddr,
 					remoteHost,
 					toAddress,
@@ -1652,7 +1652,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				new String[] {
 					fromAddress,
 					fromName,
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					toAddress,
 					toName,
 					String.valueOf(user.getUserId()),
@@ -1673,7 +1673,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				new String[] {
 					fromAddress,
 					fromName,
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					toAddress,
 					toName,
 					String.valueOf(user.getUserId()),
@@ -1859,7 +1859,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		String[] anonymousNames = PrincipalSessionBean.ANONYMOUS_NAMES;
+		String[] anonymousNames = PrincipalBean.ANONYMOUS_NAMES;
 
 		for (int i = 0; i < anonymousNames.length; i++) {
 			if (screenName.equalsIgnoreCase(anonymousNames[i])) {

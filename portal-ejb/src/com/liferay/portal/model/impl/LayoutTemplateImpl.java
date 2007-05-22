@@ -24,7 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutTemplate;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Validator;
 
@@ -242,13 +242,7 @@ public class LayoutTemplateImpl
 			return StringPool.SLASH + getServletContextName();
 		}
 		else {
-			String contextPath = PropsUtil.get(PropsUtil.PORTAL_CTX);
-
-			if (contextPath.equals(StringPool.SLASH)) {
-				contextPath = StringPool.BLANK;
-			}
-
-			return contextPath;
+			return PortalUtil.getPathContext();
 		}
 	}
 

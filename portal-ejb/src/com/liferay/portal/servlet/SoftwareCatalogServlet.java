@@ -25,19 +25,18 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
@@ -45,8 +44,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -63,48 +60,20 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SoftwareCatalogServlet extends HttpServlet {
 
-	public void init(ServletConfig config) throws ServletException {
-		synchronized (SoftwareCatalogServlet.class) {
-			super.init(config);
-
-			ServletContext ctx = getServletContext();
-
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-
-			_rootPath = GetterUtil.getString(
-				ctx.getInitParameter("root_path"), StringPool.SLASH);
-
-			if (_rootPath.equals(StringPool.SLASH)) {
-				_rootPath = StringPool.BLANK;
-			}
-
-			_imagePath = _rootPath + "/image";
-
-		}
-	}
-
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
-		if (!PortalInstances.matches()) {
-			return;
-		}
 
 		res.setContentType("text/xml; charset=UTF-8");
 
 		OutputStreamWriter out = new OutputStreamWriter(res.getOutputStream());
 
 		try {
-			long groupId = _getGroupId(req);
-
-			String baseImageURL = _getBaseImageURL(req);
-
-			Date oldestDate = _getOldestDate(req);
-
-			int maxNumOfVersions =
-				GetterUtil.getInteger(req.getParameter("maxNumOfVersions"));
-
-			Properties repoSettings = _getRepoSettings(req);
+			long groupId = getGroupId(req);
+			String baseImageURL = getBaseImageURL(req);
+			Date oldestDate = getOldestDate(req);
+			int maxNumOfVersions = ParamUtil.getInteger(
+				req, "maxNumOfVersions");
+			Properties repoSettings = getRepoSettings(req);
 
 			String repositoryXML =
 				SCProductEntryLocalServiceUtil.getRepositoryXML(
@@ -116,13 +85,15 @@ public class SoftwareCatalogServlet extends HttpServlet {
 			}
 		}
 		catch (NoSuchGroupException e) {
-			res.sendError(404);
+			res.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
-			res.sendError(500);
+
+			res.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 		finally {
 			out.flush();
@@ -130,26 +101,31 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		}
 	}
 
-	private long _getGroupId(HttpServletRequest req)
-		throws SystemException, PortalException {
+	protected String getBaseImageURL(HttpServletRequest req) {
+		String host = PortalUtil.getHost(req);
 
-		long groupId = -1;
+		String portalURL = PortalUtil.getPortalURL(
+			host, req.getServerPort(), req.isSecure());
+
+		return portalURL + PortalUtil.getPathImage() + "/software_catalog";
+	}
+
+	protected long getGroupId(HttpServletRequest req)
+		throws SystemException, PortalException {
 
 		String path = req.getPathInfo();
 
-		try {
-			groupId = Long.parseLong(path.substring(1));
-		}
-		catch (NumberFormatException e) {
+		long groupId = GetterUtil.getLong(path.substring(1));
+
+		if (groupId <= 0) {
+			groupId = ParamUtil.getLong(req, "groupId");
 		}
 
-		if (groupId == -1) {
-			groupId = GetterUtil.getLong(req.getParameter("groupId"), -1);
-		}
+		if (groupId <= 0) {
+			long companyId = PortalInstances.getCompanyId(req);
 
-		if (groupId == -1) {
 			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				_companyId, path);
+				companyId, path);
 
 			groupId = group.getGroupId();
 		}
@@ -157,17 +133,28 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return groupId;
 	}
 
-	private String _getBaseImageURL(HttpServletRequest req) {
-		String host = PortalUtil.getHost(req);
+	protected Date getOldestDate(HttpServletRequest req) {
+		Date oldestDate = null;
 
-		String portalURL = PortalUtil.getPortalURL(
-			host, req.getServerPort(), req.isSecure());
+		oldestDate = ParamUtil.getDate(
+			req, "oldestDate", new SimpleDateFormat("yyyy.MM.dd"), null);
 
-		return portalURL + _imagePath + "/software_catalog";
+		if (oldestDate == null) {
+			int daysOld = ParamUtil.getInteger(req, "maxAge", -1);
+
+			if (daysOld != -1) {
+				Calendar cal = Calendar.getInstance();
+
+				cal.add(Calendar.DATE, (0 - daysOld));
+
+				oldestDate = cal.getTime();
+			}
+		}
+
+		return oldestDate;
 	}
 
-	private Properties _getRepoSettings(HttpServletRequest req) {
-
+	protected Properties getRepoSettings(HttpServletRequest req) {
 		Properties repoSettings = new Properties();
 
 		String prefix = "setting_";
@@ -178,12 +165,13 @@ public class SoftwareCatalogServlet extends HttpServlet {
 			String name = (String)enu.nextElement();
 
 			if (name.startsWith(prefix)) {
-				String settingName =
-					name.substring(prefix.length(), name.length());
+				String settingName = name.substring(
+					prefix.length(), name.length());
 
-				if (Validator.isNotNull(req.getParameter(name))) {
-					repoSettings.setProperty(
-						settingName , req.getParameter(name));
+				String value = ParamUtil.getString(req, name);
+
+				if (Validator.isNotNull(value)) {
+					repoSettings.setProperty(settingName , value);
 				}
 			}
 		}
@@ -191,32 +179,6 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return repoSettings;
 	}
 
-	private Date _getOldestDate(HttpServletRequest req) {
-		Date oldestDate = null;
-
-		oldestDate =
-			GetterUtil.getDate(req.getParameter("oldestDate"), df, null);
-
-		if (oldestDate == null) {
-			int daysOld = GetterUtil.getInteger(req.getParameter("maxAge"), -1);
-
-			if (daysOld != -1) {
-				Calendar cal = Calendar.getInstance();
-				cal.add(Calendar.DATE, (0 - daysOld));
-				oldestDate = cal.getTime();
-			}
-
-		}
-
-		return oldestDate;
-	}
-
 	private static Log _log = LogFactory.getLog(SoftwareCatalogServlet.class);
-
-	private long _companyId;
-	private String _rootPath;
-	private String _imagePath;
-
-	private DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
 
 }

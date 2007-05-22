@@ -35,7 +35,7 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortalInstances;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -43,8 +43,6 @@ import java.io.ObjectOutputStream;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,14 +60,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TunnelServlet extends HttpServlet {
 
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-
-		ServletContext ctx = getServletContext();
-
-		_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-	}
-
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
@@ -86,7 +76,9 @@ public class TunnelServlet extends HttpServlet {
 				HttpPrincipal httpPrincipal = (HttpPrincipal)ovp.getKey();
 				MethodWrapper methodWrapper = (MethodWrapper)ovp.getValue();
 
-				CompanyThreadLocal.setCompanyId(_companyId);
+				long companyId = PortalInstances.getCompanyId(req);
+
+				CompanyThreadLocal.setCompanyId(companyId);
 
 				if (httpPrincipal.getUserId() > 0) {
 					String name = String.valueOf(httpPrincipal.getUserId());
@@ -140,7 +132,5 @@ public class TunnelServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(TunnelServlet.class);
-
-	private long _companyId;
 
 }

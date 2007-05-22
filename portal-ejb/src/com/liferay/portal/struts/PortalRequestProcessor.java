@@ -207,6 +207,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		HttpSession ses = req.getSession();
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		// Current users
 
 		UserTracker userTracker = LiveUsers.getUserTracker(ses.getId());
@@ -278,7 +281,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			// Save last path
 
 			if (saveLastPath) {
-				String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
 
 				// Was a last path set by another servlet that dispatched to
 				// the MainServlet? If so, use that last path instead.
@@ -288,7 +290,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				if (lastPath == null) {
 					lastPath = new LastPath(
-						mainPath, path, req.getParameterMap());
+						themeDisplay.getPathMain(), path,
+						req.getParameterMap());
 				}
 
 				ses.setAttribute(WebKeys.LAST_PATH, lastPath);
@@ -372,9 +375,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must have at least one personalized page
 
 		if (user != null) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
 			List layouts = themeDisplay.getLayouts();
 
 			if ((layouts == null) || (layouts.size() == 0)) {
@@ -573,13 +573,15 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	protected String getLastPath(HttpServletRequest req) {
 		HttpSession ses = req.getSession();
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		String portalURL = PortalUtil.getPortalURL(req);
-		String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
 
 		StringMaker defaultPathSM = new StringMaker();
 
 		defaultPathSM.append(portalURL);
-		defaultPathSM.append(mainPath);
+		defaultPathSM.append(themeDisplay.getPathMain());
 		defaultPathSM.append(_PATH_PORTAL_LAYOUT);
 
 		boolean forwardByLastPath = GetterUtil.getBoolean(
@@ -612,7 +614,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Only test for existing mappings for last paths that were set when the
 		// user accessed a layout directly instead of through its friendly URL
 
-		if (lastPath.getContextPath().equals(mainPath)) {
+		if (lastPath.getContextPath().equals(themeDisplay.getPathMain())) {
 			ActionMapping mapping =
 				(ActionMapping)moduleConfig.findActionConfig(
 					lastPath.getPath());

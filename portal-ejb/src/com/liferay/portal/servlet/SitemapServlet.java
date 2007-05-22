@@ -25,17 +25,13 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SitemapUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,22 +48,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SitemapServlet extends HttpServlet {
 
-	public void init(ServletConfig config) throws ServletException {
-		synchronized (SitemapServlet.class) {
-			super.init(config);
-
-			ServletContext ctx = getServletContext();
-
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-		}
-	}
-
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
-		if (!PortalInstances.matches()) {
-			return;
-		}
 
 		res.setContentType("text/xml; charset=UTF-8");
 
@@ -86,18 +68,13 @@ public class SitemapServlet extends HttpServlet {
 					groupId, privateLayout);
 			}
 			else {
-				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					_companyId, host);
-			}
-
-			if (Validator.isNull(host)) {
-				host = PortalUtil.getHost(req);
+				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(host);
 			}
 
 			String portalURL = PortalUtil.getPortalURL(
 				host, req.getServerPort(), req.isSecure());
 
-			String mainPath = MainServlet.DEFAULT_MAIN_PATH;
+			String mainPath = PortalUtil.PATH_MAIN;
 
 			String sitemap = SitemapUtil.getSitemap(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
@@ -108,12 +85,15 @@ public class SitemapServlet extends HttpServlet {
 			}
 		}
 		catch (NoSuchLayoutSetException e) {
-			res.sendError(404);
+			res.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
+
+			res.sendError(
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 		finally {
 			out.flush();
@@ -122,7 +102,5 @@ public class SitemapServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(SitemapServlet.class);
-
-	private long _companyId;
 
 }

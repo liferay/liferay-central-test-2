@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -63,6 +64,9 @@ public class TCKAction extends Action {
 				throw new PrincipalException();
 			}
 
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 			String[] portletNames = req.getParameterValues("portletName");
 
 			for (int i = 0; i < portletNames.length; i++) {
@@ -90,11 +94,10 @@ public class TCKAction extends Action {
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), layout.getTypeSettings());
 
-			String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
-
 			req.setAttribute(
 				WebKeys.FORWARD_URL,
-				mainPath + "/portal/layout?p_l_id=" + layout.getPlid());
+				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" +
+					layout.getPlid());
 
 			return mapping.findForward(Constants.COMMON_FORWARD_JSP);
 		}

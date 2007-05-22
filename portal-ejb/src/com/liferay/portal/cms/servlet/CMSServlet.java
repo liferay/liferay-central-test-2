@@ -26,14 +26,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.servlet.MainServlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ExtPropertiesLoader;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -45,7 +42,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,60 +61,23 @@ import org.apache.commons.logging.LogFactory;
 public class CMSServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		synchronized (CMSServlet.class) {
-			super.init(config);
+		super.init(config);
 
-			ServletContext ctx = getServletContext();
+		_groupId = GetterUtil.getLong(config.getInitParameter("group_id"));
 
-			_companyId = PortalUtil.getCompanyIdByWebId(ctx);
-			_groupId = GetterUtil.getLong(config.getInitParameter("group_id"));
+		String redirectsConf = config.getInitParameter("redirects_conf");
 
-			try {
-				_contextPath = PrefsPropsUtil.getString(
-					_companyId, PropsUtil.PORTAL_CTX);
-
-				if (_contextPath.equals(StringPool.SLASH)) {
-					_contextPath = StringPool.BLANK;
-				}
-			}
-			catch (Exception e) {
-				throw new ServletException(e);
-			}
-
-			_rootPath = GetterUtil.getString(
-				ctx.getInitParameter("root_path"), StringPool.SLASH);
-
-			if (_rootPath.equals(StringPool.SLASH)) {
-				_rootPath = StringPool.BLANK;
-			}
-
-			_friendlyURLPrivateGroupPath = _rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
-			_friendlyURLPrivateUserPath = _rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
-			_friendlyURLPublicPath = _rootPath + PropsUtil.get(
-				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
-			_imagePath = _rootPath + "/image";
-			_mainPath = _rootPath + MainServlet.DEFAULT_MAIN_PATH;
-
-			String redirectsConf = config.getInitParameter("redirects_conf");
-
-			if (redirectsConf != null) {
-				_redirectProperties = ExtPropertiesLoader.getInstance(
-					redirectsConf).getProperties();
-			}
-
-			_redirectsEnabled = GetterUtil.getBoolean(
-				config.getInitParameter("redirects_enabled"));
+		if (redirectsConf != null) {
+			_redirectProperties = ExtPropertiesLoader.getInstance(
+				redirectsConf).getProperties();
 		}
+
+		_redirectsEnabled = GetterUtil.getBoolean(
+			config.getInitParameter("redirects_enabled"));
 	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
-
-		if (!PortalInstances.matches()) {
-			return;
-		}
 
 		long groupId = _groupId;
 
@@ -153,23 +112,26 @@ public class CMSServlet extends HttpServlet {
 		try {
 			themeDisplay = ThemeDisplayFactory.create();
 
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				_companyId);
+			long companyId = PortalInstances.getCompanyId(req);
+
+			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+
+			String contextPath = PortalUtil.getPathContext();
 
 			themeDisplay.setCompany(company);
 			themeDisplay.setPortletGroupId(groupId);
-			themeDisplay.setPathContext(_contextPath);
+			themeDisplay.setPathContext(contextPath);
 			themeDisplay.setPathFriendlyURLPrivateGroup(
-				_friendlyURLPrivateGroupPath);
+				PortalUtil.getPathFriendlyURLPrivateGroup());
 			themeDisplay.setPathFriendlyURLPrivateUser(
-				_friendlyURLPrivateUserPath);
-			themeDisplay.setPathFriendlyURLPublic(_friendlyURLPublicPath);
-			themeDisplay.setPathImage(_imagePath);
-			themeDisplay.setPathMain(_mainPath);
-			themeDisplay.setPathRoot(_rootPath);
+				PortalUtil.getPathFriendlyURLPrivateUser());
+			themeDisplay.setPathFriendlyURLPublic(
+				PortalUtil.getPathFriendlyURLPublic());
+			themeDisplay.setPathImage(PortalUtil.getPathImage());
+			themeDisplay.setPathMain(PortalUtil.getPathMain());
 
 			String content = getContent(
-				groupId, path, languageId, themeDisplay);
+				companyId, groupId, path, languageId, themeDisplay);
 
 			if (Validator.isNotNull(content)) {
 				if (_log.isDebugEnabled()) {
@@ -208,24 +170,16 @@ public class CMSServlet extends HttpServlet {
 	}
 
 	protected String getContent(
-		long groupId, String articleId, String languageId,
+		long companyId, long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		return CMSServletUtil.getContent(
-			_companyId, groupId, articleId, languageId, themeDisplay);
+			companyId, groupId, articleId, languageId, themeDisplay);
 	}
 
 	private static Log _log = LogFactory.getLog(CMSServlet.class);
 
-	private long _companyId;
 	private long _groupId;
-	private String _contextPath;
-	private String _rootPath;
-	private String _friendlyURLPrivateGroupPath;
-	private String _friendlyURLPrivateUserPath;
-	private String _friendlyURLPublicPath;
-	private String _imagePath;
-	private String _mainPath;
 	private Properties _redirectProperties;
 	private boolean _redirectsEnabled;
 

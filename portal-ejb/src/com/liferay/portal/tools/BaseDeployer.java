@@ -31,6 +31,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Html;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
@@ -41,6 +42,9 @@ import com.liferay.util.ant.ExpandTask;
 import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
+import com.liferay.util.xml.XMLMerger;
+import com.liferay.util.xml.descriptor.WebXML23Descriptor;
+import com.liferay.util.xml.descriptor.WebXML24Descriptor;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -574,6 +578,35 @@ public class BaseDeployer {
 		System.out.println("  Adding Geronimo " + geronimoWebXML);
 	}
 
+	protected String organizeWebXML(String webXML) throws Exception {
+		webXML = Html.stripComments(webXML);
+
+		double version = 2.3;
+
+		SAXReader reader = SAXReaderFactory.getInstance(false);
+
+		Document doc = reader.read(new StringReader(webXML));
+
+		Element root = doc.getRootElement();
+
+		version = GetterUtil.getDouble(root.attributeValue("version"), version);
+
+		XMLMerger merger = null;
+
+		if (version == 2.3) {
+			merger = new XMLMerger(new WebXML23Descriptor());
+		}
+		else {
+			merger = new XMLMerger(new WebXML24Descriptor());
+		}
+
+		merger.organizeXML(doc);
+
+		webXML = XMLFormatter.toString(doc);
+
+		return webXML;
+	}
+
 	protected void updateWebXML(
 			File webXML, File srcFile, String displayName)
 		throws Exception {
@@ -625,7 +658,7 @@ public class BaseDeployer {
 			newContent, "com.liferay.portal.shared.",
 			"com.liferay.portal.kernel.");
 
-		newContent = WebXMLBuilder.organizeWebXML(newContent);
+		newContent = organizeWebXML(newContent);
 
 		FileUtil.write(webXML, newContent, true);
 

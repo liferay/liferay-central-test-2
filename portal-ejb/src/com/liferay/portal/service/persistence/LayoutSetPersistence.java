@@ -80,12 +80,12 @@ public interface LayoutSetPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException;
 
-	public com.liferay.portal.model.LayoutSet findByC_V(long companyId,
+	public com.liferay.portal.model.LayoutSet findByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException;
 
-	public com.liferay.portal.model.LayoutSet fetchByC_V(long companyId,
+	public com.liferay.portal.model.LayoutSet fetchByVirtualHost(
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutSet findByG_P(long groupId,
@@ -116,7 +116,7 @@ public interface LayoutSetPersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_V(long companyId, java.lang.String virtualHost)
+	public void removeByVirtualHost(java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException;
 
@@ -129,7 +129,7 @@ public interface LayoutSetPersistence {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_V(long companyId, java.lang.String virtualHost)
+	public int countByVirtualHost(java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, boolean privateLayout)

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet.filters.velocity;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Theme;
@@ -30,8 +29,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.BrowserSniffer;
@@ -136,12 +134,7 @@ public class VelocityFilter implements Filter {
 
 				// Paths
 
-				String contextPath = PrefsPropsUtil.getString(
-					companyId, PropsUtil.PORTAL_CTX);
-
-				if (contextPath.equals(StringPool.SLASH)) {
-					contextPath = StringPool.BLANK;
-				}
+				String contextPath = PortalUtil.getPathContext();
 
 				// Locale
 

@@ -40,6 +40,7 @@ import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 
@@ -84,6 +85,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		checkGuest = false;
 		bags.clear();
 		results.clear();
+		omniadmin = null;
 		resetValues();
 	}
 
@@ -260,6 +262,14 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 
 		return resultsValue.booleanValue();
+	}
+
+	public boolean isOmniadmin() {
+		if (omniadmin == null) {
+			omniadmin = new Boolean(OmniadminUtil.isOmniadmin(getUserId()));
+		}
+
+		return omniadmin.booleanValue();
 	}
 
 	protected PermissionCheckerBag getBag(long groupId) {
@@ -524,6 +534,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	protected boolean checkGuest;
 	protected Map bags = CollectionFactory.getHashMap();
 	protected Map results = CollectionFactory.getHashMap();
+	protected Boolean omniadmin;
 
 	private static Log _log = LogFactory.getLog(PermissionCheckerImpl.class);
 

@@ -246,13 +246,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 			return StringPool.SLASH + getServletContextName();
 		}
 		else {
-			String contextPath = PropsUtil.get(PropsUtil.PORTAL_CTX);
-
-			if (contextPath.equals(StringPool.SLASH)) {
-				contextPath = StringPool.BLANK;
-			}
-
-			return contextPath;
+			return PortalUtil.getPathContext();
 		}
 	}
 

@@ -247,6 +247,74 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public Company findByVirtualHost(String virtualHost)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByVirtualHost(virtualHost);
+
+		if (company == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Company exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("virtualHost=");
+			msg.append(virtualHost);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCompanyException(msg.toString());
+		}
+
+		return company;
+	}
+
+	public Company fetchByVirtualHost(String virtualHost)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+			if (virtualHost == null) {
+				query.append("virtualHost IS NULL");
+			}
+			else {
+				query.append("virtualHost = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (virtualHost != null) {
+				q.setString(queryPos++, virtualHost);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Company company = (Company)list.get(0);
+
+			return company;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public Company findByMx(String mx)
 		throws NoSuchCompanyException, SystemException {
 		Company company = fetchByMx(mx);
@@ -395,6 +463,12 @@ public class CompanyPersistenceImpl extends BasePersistence
 		remove(company);
 	}
 
+	public void removeByVirtualHost(String virtualHost)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByVirtualHost(virtualHost);
+		remove(company);
+	}
+
 	public void removeByMx(String mx)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByMx(mx);
@@ -435,6 +509,54 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 			if (webId != null) {
 				q.setString(queryPos++, webId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByVirtualHost(String virtualHost) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+			if (virtualHost == null) {
+				query.append("virtualHost IS NULL");
+			}
+			else {
+				query.append("virtualHost = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (virtualHost != null) {
+				q.setString(queryPos++, virtualHost);
 			}
 
 			Iterator itr = q.list().iterator();

@@ -23,6 +23,7 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
@@ -195,9 +196,10 @@ public class PortletAction extends Action {
 
 			SessionErrors.add(httpReq, PrincipalException.class.getName());
 
-			String mainPath = (String)httpReq.getAttribute(WebKeys.MAIN_PATH);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpReq.getAttribute(WebKeys.THEME_DISPLAY);
 
-			res.sendRedirect(mainPath + "/portal/login");
+			res.sendRedirect(themeDisplay.getPathMain() + "/portal/login");
 
 			return true;
 		}
