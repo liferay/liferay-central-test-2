@@ -51,18 +51,17 @@ package com.liferay.portal.service;
 public class PasswordPolicyServiceUtil {
 	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
-		java.lang.String storageScheme, boolean changeable,
-		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount)
+		boolean changeable, boolean changeRequired, long minAge,
+		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 
 		return passwordPolicyService.addPasswordPolicy(name, description,
-			storageScheme, changeable, changeRequired, minAge, checkSyntax,
+			changeable, changeRequired, minAge, checkSyntax,
 			allowDictionaryWords, minLength, history, historyCount, expireable,
 			maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount);
@@ -77,20 +76,20 @@ public class PasswordPolicyServiceUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		long passwordPolicyId, java.lang.String name,
-		java.lang.String description, java.lang.String storageScheme,
-		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-		boolean history, int historyCount, boolean expireable, long maxAge,
-		long warningTime, int graceLimit, boolean lockout, int maxFailure,
-		long lockoutDuration, long resetFailureCount)
+		java.lang.String description, boolean changeable,
+		boolean changeRequired, long minAge, boolean checkSyntax,
+		boolean allowDictionaryWords, int minLength, boolean history,
+		int historyCount, boolean expireable, long maxAge, long warningTime,
+		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
+		long resetFailureCount)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
 
 		return passwordPolicyService.updatePasswordPolicy(passwordPolicyId,
-			name, description, storageScheme, changeable, changeRequired,
-			minAge, checkSyntax, allowDictionaryWords, minLength, history,
-			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
-			maxFailure, lockoutDuration, resetFailureCount);
+			name, description, changeable, changeRequired, minAge, checkSyntax,
+			allowDictionaryWords, minLength, history, historyCount, expireable,
+			maxAge, warningTime, graceLimit, lockout, maxFailure,
+			lockoutDuration, resetFailureCount);
 	}
 }

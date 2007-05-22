@@ -275,7 +275,6 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="storageScheme" type="String" />
 		<field name="changeable" type="boolean" />
 		<field name="changeRequired" type="boolean" />
 		<field name="minAge" type="long" />
@@ -427,7 +426,6 @@
 		<field name="contactId" type="long" />
 		<field name="password" type="String" />
 		<field name="passwordEncrypted" type="boolean" />
-		<field name="passwordExpirationDate" type="Date" />
 		<field name="passwordReset" type="boolean" />
 		<field name="passwordModifiedDate" type="Date" />
 		<field name="graceLoginCount" type="int" />

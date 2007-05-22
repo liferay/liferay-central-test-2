@@ -57,7 +57,6 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setDefaultPolicy(model.getDefaultPolicy());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
-		soapModel.setStorageScheme(model.getStorageScheme());
 		soapModel.setChangeable(model.getChangeable());
 		soapModel.setChangeRequired(model.getChangeRequired());
 		soapModel.setMinAge(model.getMinAge());
@@ -175,14 +174,6 @@ public class PasswordPolicySoap implements Serializable {
 
 	public void setDescription(String description) {
 		_description = description;
-	}
-
-	public String getStorageScheme() {
-		return _storageScheme;
-	}
-
-	public void setStorageScheme(String storageScheme) {
-		_storageScheme = storageScheme;
 	}
 
 	public boolean getChangeable() {
@@ -362,7 +353,6 @@ public class PasswordPolicySoap implements Serializable {
 	private boolean _defaultPolicy;
 	private String _name;
 	private String _description;
-	private String _storageScheme;
 	private boolean _changeable;
 	private boolean _changeRequired;
 	private long _minAge;

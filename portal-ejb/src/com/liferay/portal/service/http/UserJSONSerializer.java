@@ -86,17 +86,6 @@ public class UserJSONSerializer {
 		}
 
 		jsonObj.put("passwordEncrypted", model.isPasswordEncrypted());
-
-		Date passwordExpirationDate = model.getPasswordExpirationDate();
-
-		if (passwordExpirationDate == null) {
-			jsonObj.put("passwordExpirationDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("passwordExpirationDate",
-				passwordExpirationDate.toString());
-		}
-
 		jsonObj.put("passwordReset", model.isPasswordReset());
 
 		Date passwordModifiedDate = model.getPasswordModifiedDate();

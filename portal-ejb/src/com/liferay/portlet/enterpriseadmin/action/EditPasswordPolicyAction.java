@@ -126,7 +126,6 @@ public class EditPasswordPolicyAction extends PortletAction {
 		boolean changeable = ParamUtil.getBoolean(req, "changeable");
 		boolean changeRequired = ParamUtil.getBoolean(req, "changeRequired");
 		long minAge = ParamUtil.getLong(req, "minAge");
-		String storageScheme = ParamUtil.getString(req, "storageScheme");
 		boolean checkSyntax = ParamUtil.getBoolean(req, "checkSyntax");
 		boolean allowDictionaryWords = ParamUtil.getBoolean(
 			req, "allowDictionaryWords");
@@ -147,22 +146,20 @@ public class EditPasswordPolicyAction extends PortletAction {
 			// Add password policy
 
 			PasswordPolicyServiceUtil.addPasswordPolicy(
-				name, description, storageScheme, changeable, changeRequired,
-				minAge, checkSyntax, allowDictionaryWords, minLength,
-				history, historyCount, expireable, maxAge, warningTime,
-				graceLimit, lockout, maxFailure, lockoutDuration,
-				resetFailureCount);
+				name, description, changeable, changeRequired, minAge, 
+				checkSyntax, allowDictionaryWords, minLength, history, 
+				historyCount, expireable, maxAge, warningTime, graceLimit, 
+				lockout, maxFailure, lockoutDuration, resetFailureCount);
 		}
 		else {
 
 			// Update password policy
 
 			PasswordPolicyServiceUtil.updatePasswordPolicy(
-				passwordPolicyId, name, description, storageScheme, changeable,
-				changeRequired, minAge, checkSyntax, allowDictionaryWords,
-				minLength, history, historyCount, expireable, maxAge,
-				warningTime, graceLimit, lockout, maxFailure, lockoutDuration,
-				resetFailureCount);
+				passwordPolicyId, name, description, changeable, changeRequired, 
+				minAge, checkSyntax, allowDictionaryWords, minLength, history, 
+				historyCount, expireable, maxAge, warningTime, graceLimit, 
+				lockout, maxFailure, lockoutDuration, resetFailureCount);
 		}
 	}
 

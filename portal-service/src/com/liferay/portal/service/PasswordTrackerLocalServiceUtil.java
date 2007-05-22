@@ -73,21 +73,23 @@ public class PasswordTrackerLocalServiceUtil {
 	}
 
 	public static boolean isSameAsCurrentPassword(long userId,
-		java.lang.String password)
+		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
 		return passwordTrackerLocalService.isSameAsCurrentPassword(userId,
-			password);
+			newClearTextPwd);
 	}
 
-	public static boolean isValidPassword(long userId, java.lang.String password)
+	public static boolean isValidPassword(long userId,
+		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-		return passwordTrackerLocalService.isValidPassword(userId, password);
+		return passwordTrackerLocalService.isValidPassword(userId,
+			newClearTextPwd);
 	}
 
 	public static void trackPassword(long userId, java.lang.String encPwd)

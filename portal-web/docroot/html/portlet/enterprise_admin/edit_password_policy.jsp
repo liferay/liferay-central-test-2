@@ -105,16 +105,6 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="encryption-type" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />storageScheme">
-					<option value="md5">MD5</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<liferay-ui:message key="changeable" />
 			</td>
 			<td>

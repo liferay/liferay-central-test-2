@@ -61,11 +61,11 @@ public interface PasswordTrackerLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean isSameAsCurrentPassword(long userId,
-		java.lang.String password)
+		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean isValidPassword(long userId, java.lang.String password)
+	public boolean isValidPassword(long userId, java.lang.String newClearTextPwd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

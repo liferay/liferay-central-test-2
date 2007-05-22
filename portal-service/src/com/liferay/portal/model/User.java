@@ -66,8 +66,6 @@ public interface User extends UserModel {
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
 
-	public boolean isPasswordExpired();
-
 	public java.util.Locale getLocale();
 
 	public void setLanguageId(java.lang.String languageId);

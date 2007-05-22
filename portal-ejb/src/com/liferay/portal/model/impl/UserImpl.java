@@ -151,17 +151,6 @@ public class UserImpl extends UserModelImpl implements User {
 		_passwordUnencrypted = passwordUnencrypted;
 	}
 
-	public boolean isPasswordExpired() {
-		if (getPasswordExpirationDate() != null &&
-			getPasswordExpirationDate().before(new Date())) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public Locale getLocale() {
 		return _locale;
 	}

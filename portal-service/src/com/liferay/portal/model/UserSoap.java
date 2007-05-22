@@ -56,7 +56,6 @@ public class UserSoap implements Serializable {
 		soapModel.setContactId(model.getContactId());
 		soapModel.setPassword(model.getPassword());
 		soapModel.setPasswordEncrypted(model.getPasswordEncrypted());
-		soapModel.setPasswordExpirationDate(model.getPasswordExpirationDate());
 		soapModel.setPasswordReset(model.getPasswordReset());
 		soapModel.setPasswordModifiedDate(model.getPasswordModifiedDate());
 		soapModel.setGraceLoginCount(model.getGraceLoginCount());
@@ -173,14 +172,6 @@ public class UserSoap implements Serializable {
 
 	public void setPasswordEncrypted(boolean passwordEncrypted) {
 		_passwordEncrypted = passwordEncrypted;
-	}
-
-	public Date getPasswordExpirationDate() {
-		return _passwordExpirationDate;
-	}
-
-	public void setPasswordExpirationDate(Date passwordExpirationDate) {
-		_passwordExpirationDate = passwordExpirationDate;
 	}
 
 	public boolean getPasswordReset() {
@@ -367,7 +358,6 @@ public class UserSoap implements Serializable {
 	private long _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
-	private Date _passwordExpirationDate;
 	private boolean _passwordReset;
 	private Date _passwordModifiedDate;
 	private int _graceLoginCount;

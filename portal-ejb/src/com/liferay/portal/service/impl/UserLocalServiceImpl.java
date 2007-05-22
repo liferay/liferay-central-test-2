@@ -464,7 +464,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			else if (!GetterUtil.getBoolean(PropsUtil.get(
 						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
 
-				encPwd = Encryptor.digest(encPwd);
+				encPwd = PwdEncryptor.encrypt(encPwd, password);
 
 				if (password.equals(encPwd)) {
 					return true;
@@ -940,7 +940,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new SendPasswordException();
 		}*/
 
-		if (PwdEncryptor.PASSWORDS_ENCRYPTED) {
+		if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
+				PwdEncryptor.TYPE_NONE)) {
+
 			user.setPassword(PwdToolkitUtil.generate());
 			user.setPasswordEncrypted(false);
 			user.setPasswordReset(
@@ -1496,7 +1498,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (GetterUtil.getBoolean(PropsUtil.get(
 					PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK))) {
 
-				String encPwd = PwdEncryptor.encrypt(password);
+				String encPwd = PwdEncryptor.encrypt(
+					password, user.getPassword());
 
 				if (user.getPassword().equals(encPwd)) {
 					authResult = Authenticator.SUCCESS;

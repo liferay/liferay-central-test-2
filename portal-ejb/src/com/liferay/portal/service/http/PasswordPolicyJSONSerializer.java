@@ -103,15 +103,6 @@ public class PasswordPolicyJSONSerializer {
 			jsonObj.put("description", description.toString());
 		}
 
-		String storageScheme = model.getStorageScheme();
-
-		if (storageScheme == null) {
-			jsonObj.put("storageScheme", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("storageScheme", storageScheme.toString());
-		}
-
 		jsonObj.put("changeable", model.isChangeable());
 		jsonObj.put("changeRequired", model.isChangeRequired());
 		jsonObj.put("minAge", model.getMinAge());

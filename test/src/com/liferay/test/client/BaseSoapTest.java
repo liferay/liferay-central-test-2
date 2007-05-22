@@ -22,7 +22,10 @@
 
 package com.liferay.test.client;
 
-import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.PwdEncryptorException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
 
@@ -37,18 +40,21 @@ import java.net.URL;
  */
 public class BaseSoapTest extends TestCase {
 
-	protected URL getURL(String serviceName) throws MalformedURLException {
+	protected URL getURL(String serviceName)
+		throws MalformedURLException, PwdEncryptorException {
+
 		return getURL(serviceName, true);
 	}
 
 	protected URL getURL(String serviceName, boolean authenticated)
-		throws MalformedURLException {
+		throws MalformedURLException, PwdEncryptorException {
 
 		String url = TestProps.get("soap.url");
 
 		if (authenticated) {
 			String userId = TestProps.get("soap.user.id");
-			String password = Digester.digest(TestProps.get("soap.password"));
+			String password = PwdEncryptor.encrypt(
+				TestProps.get("soap.password"));
 
 			int pos = url.indexOf("://");
 

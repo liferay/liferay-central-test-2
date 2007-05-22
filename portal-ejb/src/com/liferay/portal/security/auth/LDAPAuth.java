@@ -29,11 +29,11 @@ import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
-import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -299,7 +299,8 @@ public class LDAPAuth implements Authenticator {
 				if (Validator.isNotNull(algorithm)) {
 					encryptedPassword =
 						"{" + algorithm + "}" +
-							Encryptor.digest(algorithm, password);
+							PwdEncryptor.encrypt(
+								algorithm, password, ldapPassword);
 				}
 
 				if (ldapPassword.equals(encryptedPassword)) {

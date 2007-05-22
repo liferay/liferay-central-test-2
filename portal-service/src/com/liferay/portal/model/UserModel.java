@@ -87,10 +87,6 @@ public interface UserModel extends BaseModel {
 
 	public void setPasswordEncrypted(boolean passwordEncrypted);
 
-	public Date getPasswordExpirationDate();
-
-	public void setPasswordExpirationDate(Date passwordExpirationDate);
-
 	public boolean getPasswordReset();
 
 	public boolean isPasswordReset();

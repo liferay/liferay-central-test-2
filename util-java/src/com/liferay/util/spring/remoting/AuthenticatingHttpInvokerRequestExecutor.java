@@ -22,17 +22,16 @@
 
 package com.liferay.util.spring.remoting;
 
-import com.liferay.portal.kernel.util.Digester;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.GetterUtil;
-
 import java.io.IOException;
-
 import java.net.HttpURLConnection;
 
 import org.apache.commons.codec.binary.Base64;
-
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerRequestExecutor;
+
+import com.liferay.portal.PwdEncryptorException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.security.pwd.PwdEncryptor;
+import com.liferay.util.GetterUtil;
 
 /**
  * <a href="AuthenticatingHttpInvokerRequestExecutor.java.html"><b><i>
@@ -65,8 +64,8 @@ public class AuthenticatingHttpInvokerRequestExecutor
 		return _password;
 	}
 
-	public void setPassword(String password) {
-		_password = Digester.digest(password);
+	public void setPassword(String password) throws PwdEncryptorException {
+		_password = PwdEncryptor.encrypt(password);
 	}
 
 	/**

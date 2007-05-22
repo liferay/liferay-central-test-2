@@ -89,10 +89,6 @@ public interface PasswordPolicyModel extends BaseModel {
 
 	public void setDescription(String description);
 
-	public String getStorageScheme();
-
-	public void setStorageScheme(String storageScheme);
-
 	public boolean getChangeable();
 
 	public boolean isChangeable();

@@ -340,7 +340,7 @@ public class PropsUtil {
 
 	// Passwords
 
-	public static final String PASSWORDS_ENCRYPTED = "passwords.encrypted";
+	public static final String PASSWORDS_ENCRYPTION_ALGORITHM = "passwords.encryption.algorithm";
 
 	public static final String PASSWORDS_TOOLKIT = "passwords.toolkit";
 

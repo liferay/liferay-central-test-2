@@ -607,7 +607,6 @@
 		<column name="defaultPolicy" type="boolean" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="storageScheme" type="String" />
 		<column name="changeable" type="boolean" />
 		<column name="changeRequired" type="boolean" />
 		<column name="minAge" type="long" />
@@ -1058,7 +1057,6 @@
 		<column name="contactId" type="long" />
 		<column name="password" type="String" />
 		<column name="passwordEncrypted" type="boolean" />
-		<column name="passwordExpirationDate" type="Date" />
 		<column name="passwordReset" type="boolean" />
 		<column name="passwordModifiedDate" type="Date" />
 		<column name="graceLoginCount" type="int" />
@@ -1343,6 +1341,7 @@
 		<exception>OrganizationName</exception>
 		<exception>OrganizationParent</exception>
 		<exception>PasswordPolicyName</exception>
+		<exception>PwdEncryptor</exception>
 		<exception>PhoneNumber</exception>
 		<exception>PortletActive</exception>
 		<exception>PortletDefaultPreferences</exception>

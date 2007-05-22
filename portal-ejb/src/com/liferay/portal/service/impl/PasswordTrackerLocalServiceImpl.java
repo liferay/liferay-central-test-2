@@ -42,7 +42,7 @@ import java.util.Iterator;
  * </a>
  *
  * @author Brian Wing Shun Chan
- *
+ * @author Scott Lee
  */
 public class PasswordTrackerLocalServiceImpl
 	extends PasswordTrackerLocalServiceBaseImpl {
@@ -51,30 +51,36 @@ public class PasswordTrackerLocalServiceImpl
 		PasswordTrackerUtil.removeByUserId(userId);
 	}
 
-	public boolean isSameAsCurrentPassword(long userId, String password)
+	public boolean isSameAsCurrentPassword(long userId, String newClearTextPwd)
 		throws PortalException, SystemException {
-
-		String newEncPwd = PwdEncryptor.encrypt(password);
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
-		String oldEncPwd = user.getPassword();
+		String currentPwd = user.getPassword();
 
-		if (!user.isPasswordEncrypted()) {
-			oldEncPwd = PwdEncryptor.encrypt(user.getPassword());
+		if (user.isPasswordEncrypted()) {
+			String newEncPwd = PwdEncryptor.encrypt(
+				newClearTextPwd, user.getPassword());
+
+			if (currentPwd.equals(newEncPwd)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-
-		if (oldEncPwd.equals(newEncPwd)) {
-			return true;
+		else {
+			if (currentPwd.equals(newClearTextPwd)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-
-		return false;
 	}
 
-	public boolean isValidPassword(long userId, String password)
+	public boolean isValidPassword(long userId, String newClearTextPwd)
 		throws PortalException, SystemException {
-
-		String newEncPwd = PwdEncryptor.encrypt(password);
 
 		PasswordPolicy passwordPolicy =
 			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(userId);
@@ -82,6 +88,8 @@ public class PasswordTrackerLocalServiceImpl
 		if (!passwordPolicy.getHistory()) {
 			return true;
 		}
+
+		// Check password history
 
 		int historyCount = 1;
 
@@ -94,7 +102,10 @@ public class PasswordTrackerLocalServiceImpl
 
 			PasswordTracker passwordTracker = (PasswordTracker)itr.next();
 
-			if (passwordTracker.getPassword().equals(newEncPwd)) {
+			String oldEncPwd = passwordTracker.getPassword();
+			String newEncPwd = PwdEncryptor.encrypt(newClearTextPwd, oldEncPwd);
+
+			if (oldEncPwd.equals(newEncPwd)) {
 				return false;
 			}
 

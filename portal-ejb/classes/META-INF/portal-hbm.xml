@@ -271,7 +271,6 @@
 		<property name="defaultPolicy" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="storageScheme" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="changeable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="changeRequired" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="minAge" type="com.liferay.util.dao.hibernate.LongType" />
@@ -442,7 +441,6 @@
 		<property name="contactId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="password" column="password_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="passwordEncrypted" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="passwordExpirationDate" />
 		<property name="passwordReset" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="passwordModifiedDate" />
 		<property name="graceLoginCount" type="com.liferay.util.dao.hibernate.IntegerType" />

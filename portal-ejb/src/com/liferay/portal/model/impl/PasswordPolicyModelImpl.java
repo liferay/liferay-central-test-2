@@ -64,7 +64,6 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			{ "defaultPolicy", new Integer(Types.BOOLEAN) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
-			{ "storageScheme", new Integer(Types.VARCHAR) },
 			{ "changeable", new Integer(Types.BOOLEAN) },
 			{ "changeRequired", new Integer(Types.BOOLEAN) },
 			{ "minAge", new Integer(Types.BIGINT) },
@@ -93,9 +92,6 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordPolicy.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STORAGESCHEME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PasswordPolicy.storageScheme"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyModel"));
@@ -228,23 +224,6 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			}
 
 			_description = description;
-		}
-	}
-
-	public String getStorageScheme() {
-		return GetterUtil.getString(_storageScheme);
-	}
-
-	public void setStorageScheme(String storageScheme) {
-		if (((storageScheme == null) && (_storageScheme != null)) ||
-				((storageScheme != null) && (_storageScheme == null)) ||
-				((storageScheme != null) && (_storageScheme != null) &&
-				!storageScheme.equals(_storageScheme))) {
-			if (!XSS_ALLOW_STORAGESCHEME) {
-				storageScheme = XSSUtil.strip(storageScheme);
-			}
-
-			_storageScheme = storageScheme;
 		}
 	}
 
@@ -461,7 +440,6 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		clone.setDefaultPolicy(getDefaultPolicy());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
-		clone.setStorageScheme(getStorageScheme());
 		clone.setChangeable(getChangeable());
 		clone.setChangeRequired(getChangeRequired());
 		clone.setMinAge(getMinAge());
@@ -539,7 +517,6 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 	private boolean _defaultPolicy;
 	private String _name;
 	private String _description;
-	private String _storageScheme;
 	private boolean _changeable;
 	private boolean _changeRequired;
 	private long _minAge;

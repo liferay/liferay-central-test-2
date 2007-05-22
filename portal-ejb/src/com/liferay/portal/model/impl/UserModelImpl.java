@@ -62,7 +62,6 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "contactId", new Integer(Types.BIGINT) },
 			{ "password_", new Integer(Types.VARCHAR) },
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
-			{ "passwordExpirationDate", new Integer(Types.TIMESTAMP) },
 			{ "passwordReset", new Integer(Types.BOOLEAN) },
 			{ "passwordModifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "graceLoginCount", new Integer(Types.INTEGER) },
@@ -225,22 +224,6 @@ public class UserModelImpl extends BaseModelImpl {
 	public void setPasswordEncrypted(boolean passwordEncrypted) {
 		if (passwordEncrypted != _passwordEncrypted) {
 			_passwordEncrypted = passwordEncrypted;
-		}
-	}
-
-	public Date getPasswordExpirationDate() {
-		return _passwordExpirationDate;
-	}
-
-	public void setPasswordExpirationDate(Date passwordExpirationDate) {
-		if (((passwordExpirationDate == null) &&
-				(_passwordExpirationDate != null)) ||
-				((passwordExpirationDate != null) &&
-				(_passwordExpirationDate == null)) ||
-				((passwordExpirationDate != null) &&
-				(_passwordExpirationDate != null) &&
-				!passwordExpirationDate.equals(_passwordExpirationDate))) {
-			_passwordExpirationDate = passwordExpirationDate;
 		}
 	}
 
@@ -545,7 +528,6 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setContactId(getContactId());
 		clone.setPassword(getPassword());
 		clone.setPasswordEncrypted(getPasswordEncrypted());
-		clone.setPasswordExpirationDate(getPasswordExpirationDate());
 		clone.setPasswordReset(getPasswordReset());
 		clone.setPasswordModifiedDate(getPasswordModifiedDate());
 		clone.setGraceLoginCount(getGraceLoginCount());
@@ -625,7 +607,6 @@ public class UserModelImpl extends BaseModelImpl {
 	private long _contactId;
 	private String _password;
 	private boolean _passwordEncrypted;
-	private Date _passwordExpirationDate;
 	private boolean _passwordReset;
 	private Date _passwordModifiedDate;
 	private int _graceLoginCount;

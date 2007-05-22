@@ -194,7 +194,6 @@ create table PasswordPolicy (
 	defaultPolicy BOOLEAN,
 	name VARCHAR(75) null,
 	description STRING null,
-	storageScheme VARCHAR(75) null,
 	changeable BOOLEAN,
 	changeRequired BOOLEAN,
 	minAge LONG,
@@ -463,6 +462,7 @@ alter table User_ add lockout BOOLEAN;
 alter table User_ add lockoutDate DATE null;
 update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
+alter table User_ drop passwordExpirationDate;
 
 alter_column_type UserGroup userGroupId LONG;
 
