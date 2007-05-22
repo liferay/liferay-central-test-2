@@ -32,10 +32,6 @@
 			<finder-column name="active" />
 			<finder-column name="recommended" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="SCFrameworkVersion" local-service="true" remote-service="true">
 
@@ -83,10 +79,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="active" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="SCProductEntry" local-service="true" remote-service="true">
 
@@ -141,12 +133,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Image" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 	</entity>
 	<entity name="SCProductVersion" local-service="true" remote-service="true">
 

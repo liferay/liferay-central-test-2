@@ -168,8 +168,7 @@ public class CheckoutAction extends CartAction {
 
 		String returnURL = ShoppingUtil.getPayPalReturnURL(
 			((ActionResponseImpl)res).createActionURL(), order);
-		String notifyURL = ShoppingUtil.getPayPalNotifyURL(
-			themeDisplay.getCompany(), themeDisplay.getPathMain());
+		String notifyURL = ShoppingUtil.getPayPalNotifyURL(themeDisplay);
 
 		if (prefs.usePayPal()) {
 			double total = ShoppingUtil.calculateTotal(

@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.blogs.action;
 
-import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.dao.search.SearchContainer;
@@ -72,8 +70,6 @@ public class RSSAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Company company = themeDisplay.getCompany();
-
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
@@ -81,8 +77,8 @@ public class RSSAction extends Action {
 			req, "version", RSSUtil.DEFAULT_VERSION);
 
 		String url =
-			Http.getProtocol(req) + "://" + company.getPortalURL() +
-				themeDisplay.getPathMain() + "/blogs/find_entry?p_l_id=" + plid;
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/blogs/find_entry?p_l_id=" + plid;
 
 		String rss = BlogsEntryLocalServiceUtil.getGroupEntriesRSS(
 			groupId, 0, SearchContainer.DEFAULT_DELTA, type, version, url);

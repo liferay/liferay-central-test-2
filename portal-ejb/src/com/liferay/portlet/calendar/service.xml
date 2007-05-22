@@ -58,11 +58,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="repeating" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Contact" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<exceptions>
 		<exception>EventDuration</exception>

@@ -490,7 +490,7 @@ public class ShoppingOrderLocalServiceImpl
 					order.getOrderId(),
 					shippingAddress,
 					String.valueOf(total),
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					portletName,
 					toAddress,
 					toName
@@ -519,7 +519,7 @@ public class ShoppingOrderLocalServiceImpl
 					order.getOrderId(),
 					shippingAddress,
 					String.valueOf(total),
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					portletName,
 					toAddress,
 					toName

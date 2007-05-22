@@ -77,10 +77,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentCategoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="ShoppingCoupon" local-service="true" remote-service="true">
 
@@ -188,11 +184,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="sku" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Image" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="ShoppingItemField" local-service="true" remote-service="false">
 

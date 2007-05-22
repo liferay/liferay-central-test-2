@@ -20,33 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.documentlibrary.service.ejb;
+package com.liferay.portlet.admin.action;
 
-import javax.ejb.CreateException;
-import javax.ejb.EJBLocalHome;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.util.ParamUtil;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.RenderRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="DLFileShortcutLocalServiceHome.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This class is the EJB home of the service that is used when Liferay is run inside
- * a full J2EE container.
- * </p>
+ * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil
- * @see com.liferay.portlet.documentlibrary.service.ejb.DLFileShortcutLocalServiceEJB
- * @see com.liferay.portlet.documentlibrary.service.ejb.DLFileShortcutLocalServiceEJBImpl
- * @see com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl
- *
  */
-public interface DLFileShortcutLocalServiceHome extends EJBLocalHome {
-	public DLFileShortcutLocalServiceEJB create() throws CreateException;
+public class ActionUtil {
+
+	public static void getInstance(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getInstance(httpReq);
+	}
+
+	public static void getInstance(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getInstance(httpReq);
+	}
+
+	public static void getInstance(HttpServletRequest req) throws Exception {
+		long companyId = ParamUtil.getLong(req, "companyId");
+
+		Company company = null;
+
+		if (companyId > 0) {
+			company = CompanyLocalServiceUtil.getCompanyById(companyId);
+		}
+
+		req.setAttribute(WebKeys.SEL_COMPANY, company);
+	}
+
 }

@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
@@ -876,8 +875,8 @@ public class ShoppingUtil {
 		return minQuantity;
 	}
 
-	public static String getPayPalNotifyURL(Company company, String mainPath) {
-		return "http://" + company.getPortalURL() + mainPath +
+	public static String getPayPalNotifyURL(ThemeDisplay themeDisplay) {
+		return themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 			"/shopping/notify";
 	}
 

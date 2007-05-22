@@ -22,11 +22,15 @@
 
 package com.liferay.portlet.admin.action;
 
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.CompanyMxException;
+import com.liferay.portal.CompanyVirtualHostException;
+import com.liferay.portal.CompanyWebIdException;
+import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.servlet.PortalSessionContext;
+import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -37,44 +41,48 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditSessionAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditInstanceAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditSessionAction extends PortletAction {
+public class EditInstanceAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		try {
+			updateInstance(req);
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		if (!permissionChecker.isOmniadmin()) {
-			SessionErrors.add(req, PrincipalException.class.getName());
-
-			setForward(req, "portlet.admin.error");
-
-			return;
+			sendRedirect(req, res);
 		}
+		catch (Exception e) {
+			if (e instanceof NoSuchCompanyException ||
+				e instanceof PrincipalException) {
 
-		invalidateSession(req);
+				SessionErrors.add(req, e.getClass().getName());
 
-		sendRedirect(req, res);
+				setForward(req, "portlet.admin.error");
+			}
+			else if (e instanceof CompanyMxException ||
+					 e instanceof CompanyVirtualHostException ||
+					 e instanceof CompanyWebIdException) {
+
+				SessionErrors.add(req, e.getClass().getName());
+			}
+			else {
+				throw e;
+			}
+		}
 	}
 
 	public ActionForward render(
@@ -82,27 +90,50 @@ public class EditSessionAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward(
-			getForward(req, "portlet.admin.edit_session"));
-	}
+		try {
+			ActionUtil.getInstance(req);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchCompanyException ||
+				e instanceof PrincipalException) {
 
-	protected void invalidateSession(ActionRequest req) throws Exception {
-		String sessionId = ParamUtil.getString(req, "sessionId");
+				SessionErrors.add(req, e.getClass().getName());
 
-		HttpSession userSession = PortalSessionContext.get(sessionId);
-
-		if (userSession != null) {
-			try {
-				if (!req.getPortletSession().getId().equals(sessionId)) {
-					userSession.invalidate();
-				}
+				return mapping.findForward("portlet.admin.error");
 			}
-			catch (Exception e) {
-				_log.error(e);
+			else {
+				throw e;
 			}
 		}
+
+		return mapping.findForward(
+			getForward(req, "portlet.admin.edit_instance"));
 	}
 
-	private static Log _log = LogFactory.getLog(EditSessionAction.class);
+	protected void updateInstance(ActionRequest req) throws Exception {
+		long companyId = ParamUtil.getLong(req, "companyId");
+
+		String webId = ParamUtil.getString(req, "webId");
+		String virtualHost = ParamUtil.getString(req, "virtualHost");
+		String mx = ParamUtil.getString(req, "mx");
+
+		if (companyId <= 0) {
+
+			// Add instance
+
+			Company company = CompanyServiceUtil.addCompany(
+				webId, virtualHost, mx);
+
+			ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+
+			PortalInstances.initCompany(ctx, company.getWebId());
+		}
+		else {
+
+			// Update instance
+
+			CompanyServiceUtil.updateCompany(companyId, virtualHost, mx);
+		}
+	}
 
 }

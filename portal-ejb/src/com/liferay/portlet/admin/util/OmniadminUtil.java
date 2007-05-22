@@ -24,8 +24,10 @@ package com.liferay.portlet.admin.util;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
 
@@ -41,34 +43,54 @@ import org.apache.commons.logging.LogFactory;
 public class OmniadminUtil {
 
 	public static boolean isOmniadmin(long userId) {
+		if (CompanyThreadLocal.getCompanyId() !=
+				PortalInstances.getDefaultCompanyId()) {
+
+			return false;
+		}
+
 		if (userId <= 0) {
 			return false;
 		}
 
-		long[] omniAdminUsers = StringUtil.split(
-			PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
+		try {
+			long[] omniAdminUsers = StringUtil.split(
+				PropsUtil.get(PropsUtil.OMNIADMIN_USERS), 0L);
 
-		if (omniAdminUsers.length > 0) {
-			for (int i = 0; i < omniAdminUsers.length; i++) {
-				if (omniAdminUsers[i] == userId) {
-					return true;
+			if (omniAdminUsers.length > 0) {
+				for (int i = 0; i < omniAdminUsers.length; i++) {
+					if (omniAdminUsers[i] == userId) {
+						User user = UserLocalServiceUtil.getUserById(userId);
+
+						if (user.getCompanyId() !=
+								PortalInstances.getDefaultCompanyId()) {
+
+							return false;
+						}
+
+						return true;
+					}
 				}
-			}
 
-			return false;
-		}
-		else {
-			try {
+				return false;
+			}
+			else {
 				User user = UserLocalServiceUtil.getUserById(userId);
+
+				if (user.getCompanyId() !=
+						PortalInstances.getDefaultCompanyId()) {
+
+					return false;
+				}
 
 				return RoleLocalServiceUtil.hasUserRole(
 					userId, user.getCompanyId(), RoleImpl.ADMINISTRATOR, true);
 			}
-			catch (Exception e) {
-				_log.error(e);
+		}
+		catch (Exception e) {
+			_log.error(e);
 
-				return false;
-			}
+			return false;
 		}
 	}
 

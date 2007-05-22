@@ -49,4 +49,8 @@ public class UserSearchTerms extends UserDisplayTerms {
 		userGroupId = ParamUtil.getLong(req, USER_GROUP_ID);
 	}
 
+	public Boolean getActiveObj() {
+		return new Boolean(active);
+	}
+
 }

@@ -36,11 +36,6 @@
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="BookmarksFolder" local-service="true" remote-service="true">
 
@@ -81,10 +76,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<exceptions>
 		<exception>EntryURL</exception>

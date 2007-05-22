@@ -23,8 +23,9 @@
 package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.AccountNameException;
-import com.liferay.portal.CompanyHomeURLException;
-import com.liferay.portal.CompanyPortalURLException;
+import com.liferay.portal.CompanyMxException;
+import com.liferay.portal.CompanyVirtualHostException;
+import com.liferay.portal.CompanyWebIdException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
@@ -73,8 +74,9 @@ public class EditCompanyAction extends PortletAction {
 				setForward(req, "portlet.admin.error");
 			}
 			else if (e instanceof AccountNameException ||
-					 e instanceof CompanyHomeURLException ||
-					 e instanceof CompanyPortalURLException) {
+					 e instanceof CompanyMxException ||
+					 e instanceof CompanyVirtualHostException ||
+					 e instanceof CompanyWebIdException) {
 
 				SessionErrors.add(req, e.getClass().getName(), e);
 
@@ -89,8 +91,7 @@ public class EditCompanyAction extends PortletAction {
 	protected void updateCompany(ActionRequest req) throws Exception {
 		long companyId = PortalUtil.getCompanyId(req);
 
-		String portalURL = ParamUtil.getString(req, "portalURL");
-		String homeURL = ParamUtil.getString(req, "homeURL");
+		String virtualHost = ParamUtil.getString(req, "virtualHost");
 		String mx = ParamUtil.getString(req, "mx");
 		String name = ParamUtil.getString(req, "name");
 		String legalName = ParamUtil.getString(req, "legalName");
@@ -103,8 +104,8 @@ public class EditCompanyAction extends PortletAction {
 		String size = ParamUtil.getString(req, "size");
 
 		CompanyServiceUtil.updateCompany(
-			companyId, portalURL, homeURL, mx, name, legalName, legalId,
-			legalType, sicCode, tickerSymbol, industry, type, size);
+			companyId, virtualHost, mx, name, legalName, legalId, legalType,
+			sicCode, tickerSymbol, industry, type, size);
 	}
 
 	protected void updateDisplay(ActionRequest req) throws Exception {

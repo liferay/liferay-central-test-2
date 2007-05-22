@@ -34,11 +34,6 @@
 		<finder name="ParentCategoryId" return-type="Collection">
 			<finder-column name="parentCategoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="BlogsEntry" local-service="true" remote-service="true">
 
@@ -82,12 +77,6 @@
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Contact" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 	</entity>
 	<exceptions>
 		<exception>CategoryName</exception>

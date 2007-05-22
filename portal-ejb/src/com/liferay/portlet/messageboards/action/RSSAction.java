@@ -23,12 +23,10 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.dao.search.SearchContainer;
@@ -73,8 +71,6 @@ public class RSSAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Company company = themeDisplay.getCompany();
-
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long threadId = ParamUtil.getLong(req, "threadId");
@@ -83,19 +79,17 @@ public class RSSAction extends Action {
 			req, "version", RSSUtil.DEFAULT_VERSION);
 
 		String entryURL =
-			Http.getProtocol(req) + "://" + company.getPortalURL() +
-				themeDisplay.getPathMain() +
-					"/message_boards/find_message?p_l_id=" + plid +
-						"&categoryId=" + categoryId;
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/message_boards/find_message?p_l_id=" + plid + "&categoryId=" +
+					categoryId;
 
 		String rss = StringPool.BLANK;
 
 		if ((categoryId > 0)) {
 			String feedURL =
-				Http.getProtocol(req) + "://" + company.getPortalURL() +
-					themeDisplay.getPathMain() +
-						"/message_boards/find_category?p_l_id=" + plid +
-							"&categoryId=" + categoryId;
+				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+					"/message_boards/find_category?p_l_id=" + plid +
+						"&categoryId=" + categoryId;
 
 			rss = MBMessageLocalServiceUtil.getCategoryMessagesRSS(
 				categoryId, 0, SearchContainer.DEFAULT_DELTA, type, version,
@@ -103,10 +97,9 @@ public class RSSAction extends Action {
 		}
 		else {
 			String feedURL =
-				Http.getProtocol(req) + "://" + company.getPortalURL() +
-					themeDisplay.getPathMain() +
-						"/message_boards/find_thread?p_l_id=" + plid +
-							"&threadId=" + threadId;
+				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+					"/message_boards/find_thread?p_l_id=" + plid +
+						"&threadId=" + threadId;
 
 			rss = MBMessageLocalServiceUtil.getThreadMessagesRSS(
 				threadId, 0, SearchContainer.DEFAULT_DELTA, type, version,

@@ -25,9 +25,6 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.CollectionFactory;
 
@@ -92,7 +89,7 @@ public class PortletContextFactory {
 
 		if (portletContext == null) {
 			if (portlet.isWARFile()) {
-				PortletContextWrapper pcw =
+				/*PortletContextWrapper pcw =
 					PortletContextPool.get(portlet.getRootPortletId());
 
 				String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
@@ -102,7 +99,7 @@ public class PortletContextFactory {
 				// Context path for the portal must be passed to individual
 				// portlets
 
-				ctx.setAttribute(WebKeys.MAIN_PATH, mainPath);
+				ctx.setAttribute(WebKeys.MAIN_PATH, mainPath);*/
 			}
 
 			portletContext = new PortletContextImpl(portlet, ctx);

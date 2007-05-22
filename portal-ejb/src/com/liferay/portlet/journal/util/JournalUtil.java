@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
@@ -525,11 +524,9 @@ public class JournalUtil {
 			return tokens;
 		}
 
-		Company company = themeDisplay.getCompany();
-
 		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
 		tokens.put("group_id", String.valueOf(groupId));
-		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
+		tokens.put("cms_url", themeDisplay.getPathContext() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(
 			"friendly_url_private_group",
@@ -541,8 +538,8 @@ public class JournalUtil {
 			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
 		tokens.put("main_path", themeDisplay.getPathMain());
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
-		tokens.put("portal_url", company.getPortalURL());
-		tokens.put("root_path", themeDisplay.getPathRoot());
+		tokens.put("portal_url", themeDisplay.getURLPortal());
+		tokens.put("root_path", themeDisplay.getPathContext());
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 
 		// Deprecated tokens

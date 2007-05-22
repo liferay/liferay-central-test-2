@@ -85,11 +85,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentCategoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Contact" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="MBDiscussion" local-service="false" remote-service="false">
 
@@ -157,13 +152,6 @@
 			<finder-column name="threadId" />
 			<finder-column name="parentMessageId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="Subscription" />
-		<reference package-path="com.liferay.portal" entity="User" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="MBMessageFlag" local-service="true" remote-service="false">
 

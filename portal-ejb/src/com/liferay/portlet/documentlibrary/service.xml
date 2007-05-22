@@ -41,24 +41,6 @@
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Contact" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
-		<reference>
-			<![CDATA[
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>
-				<local>com.liferay.documentlibrary.service.ejb.DLLocalServiceEJB</local>
-				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			]]>
-		</reference>
 	</entity>
 	<entity name="DLFileRank" local-service="true" remote-service="false">
 
@@ -118,10 +100,6 @@
 			<finder-column name="toFolderId" />
 			<finder-column name="toName" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="DLFileVersion" local-service="true" remote-service="false">
 
@@ -205,21 +183,6 @@
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference>
-			<![CDATA[
-			<ejb-local-ref>
-				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
-				<ejb-ref-type>Session</ejb-ref-type>
-				<local-home>com.liferay.documentlibrary.service.ejb.DLLocalServiceHome</local-home>
-				<local>com.liferay.documentlibrary.service.ejb.DLLocalServiceEJB</local>
-				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
-			</ejb-local-ref>
-			]]>
-		</reference>
 	</entity>
 	<exceptions>
 		<exception>FileShortcutPermission</exception>

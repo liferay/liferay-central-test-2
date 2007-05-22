@@ -42,10 +42,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="IGImage" local-service="true" remote-service="true">
 
@@ -78,12 +74,6 @@
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Image" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<exceptions>
 		<exception>FolderName</exception>

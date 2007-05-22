@@ -32,7 +32,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.PrincipalSessionBean;
+import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -144,7 +144,7 @@ public class MessageListenerImpl implements MessageListener {
 
 			_collectPartContent(message, collector);
 
-			PrincipalSessionBean.setThreadValues(user);
+			PrincipalBean.setThreadValues(user);
 
 			if (prevMessage == null) {
 				MBMessageServiceUtil.addMessage(

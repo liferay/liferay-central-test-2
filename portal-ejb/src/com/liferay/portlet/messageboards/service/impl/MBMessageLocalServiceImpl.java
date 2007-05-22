@@ -1318,7 +1318,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getSubject(),
 					user.getEmailAddress(),
 					user.getFullName(),
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					portletName
 				});
 
@@ -1347,7 +1347,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getSubject(),
 					user.getEmailAddress(),
 					user.getFullName(),
-					company.getPortalURL(),
+					company.getVirtualHost(),
 					portletName
 				});
 

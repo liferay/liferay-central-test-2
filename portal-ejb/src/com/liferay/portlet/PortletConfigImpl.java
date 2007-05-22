@@ -27,6 +27,7 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 
@@ -136,11 +137,10 @@ public class PortletConfigImpl implements PortletConfig {
 					_resourceBundle.equals(
 						StrutsResourceBundle.class.getName())) {
 
-					Long companyIdObj =
-						(Long)_portletCtx.getAttribute(WebKeys.COMPANY_ID);
+					long companyId = PortalInstances.getDefaultCompanyId();
 
 					bundle = StrutsResourceBundle.getBundle(
-						_portletName, companyIdObj.longValue(), locale);
+						_portletName, companyId, locale);
 				}
 				else {
 					PortletContextWrapper pcw =

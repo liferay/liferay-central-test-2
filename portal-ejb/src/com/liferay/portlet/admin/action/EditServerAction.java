@@ -22,11 +22,13 @@
 
 package com.liferay.portlet.admin.action;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -34,7 +36,6 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
@@ -79,9 +80,13 @@ public class EditServerAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		long userId = PortalUtil.getUserId(req);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		if (!OmniadminUtil.isOmniadmin(userId)) {
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (!permissionChecker.isOmniadmin()) {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
 			setForward(req, "portlet.admin.error");

@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPortletPreferencesException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipWriter;
@@ -34,13 +35,13 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
-import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
@@ -98,9 +99,13 @@ public class ExportAction extends Action {
 		throws Exception {
 
 		try {
-			long userId = PortalUtil.getUserId(req);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			if (OmniadminUtil.isOmniadmin(userId)) {
+			PermissionChecker permissionChecker =
+				themeDisplay.getPermissionChecker();
+
+			if (permissionChecker.isOmniadmin()) {
 				long siteGroupId = ParamUtil.getLong(
 					req, "siteGroupId", DEFAULT_SITE_GROUP_ID);
 
