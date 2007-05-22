@@ -23,26 +23,26 @@
 package com.liferay.portal;
 
 /**
- * <a href="CompanyHomeURLException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompanyWebIdException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CompanyHomeURLException extends PortalException {
+public class CompanyWebIdException extends PortalException {
 
-	public CompanyHomeURLException() {
+	public CompanyWebIdException() {
 		super();
 	}
 
-	public CompanyHomeURLException(String msg) {
+	public CompanyWebIdException(String msg) {
 		super(msg);
 	}
 
-	public CompanyHomeURLException(String msg, Throwable cause) {
+	public CompanyWebIdException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CompanyHomeURLException(Throwable cause) {
+	public CompanyWebIdException(Throwable cause) {
 		super(cause);
 	}
 

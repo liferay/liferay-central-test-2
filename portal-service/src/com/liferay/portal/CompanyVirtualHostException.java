@@ -20,60 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import com.liferay.portal.model.BaseModel;
+package com.liferay.portal;
 
 /**
- * <a href="CompanyModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>Company</code> table in the
- * database.
- * </p>
+ * <a href="CompanyVirtualHostException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Company
- * @see com.liferay.portal.service.model.impl.CompanyImpl
- * @see com.liferay.portal.service.model.impl.CompanyModelImpl
- *
  */
-public interface CompanyModel extends BaseModel {
-	public long getPrimaryKey();
+public class CompanyVirtualHostException extends PortalException {
 
-	public void setPrimaryKey(long pk);
+	public CompanyVirtualHostException() {
+		super();
+	}
 
-	public long getCompanyId();
+	public CompanyVirtualHostException(String msg) {
+		super(msg);
+	}
 
-	public void setCompanyId(long companyId);
+	public CompanyVirtualHostException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public long getAccountId();
+	public CompanyVirtualHostException(Throwable cause) {
+		super(cause);
+	}
 
-	public void setAccountId(long accountId);
-
-	public String getWebId();
-
-	public void setWebId(String webId);
-
-	public String getKey();
-
-	public void setKey(String key);
-
-	public String getVirtualHost();
-
-	public void setVirtualHost(String virtualHost);
-
-	public String getMx();
-
-	public void setMx(String mx);
-
-	public long getLogoId();
-
-	public void setLogoId(long logoId);
 }

@@ -91,12 +91,12 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
-		long companyId, java.lang.String virtualHost)
+		java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
-		return layoutSetLocalService.getLayoutSet(companyId, virtualHost);
+		return layoutSetLocalService.getLayoutSet(virtualHost);
 	}
 
 	public static void updateLogo(long groupId, boolean privateLayout,

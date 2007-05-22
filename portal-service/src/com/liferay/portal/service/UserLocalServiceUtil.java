@@ -398,7 +398,7 @@ public class UserLocalServiceUtil {
 	public static java.util.List search(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, boolean active,
+		java.lang.String emailAddress, java.lang.Boolean active,
 		java.util.LinkedHashMap params, boolean andSearch, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -412,8 +412,8 @@ public class UserLocalServiceUtil {
 	public static int searchCount(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
-		boolean active, java.util.LinkedHashMap params, boolean andSearch)
-		throws com.liferay.portal.SystemException {
+		java.lang.Boolean active, java.util.LinkedHashMap params,
+		boolean andSearch) throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.searchCount(companyId, firstName, middleName,

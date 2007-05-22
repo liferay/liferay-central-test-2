@@ -49,9 +49,19 @@ package com.liferay.portal.service;
  *
  */
 public interface CompanyService {
+	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
+		java.lang.String virtualHost, java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String portalURL, java.lang.String homeURL,
-		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		java.lang.String virtualHost, java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public com.liferay.portal.model.Company updateCompany(long companyId,
+		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String name, java.lang.String legalName,
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)

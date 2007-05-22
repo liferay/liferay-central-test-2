@@ -49,9 +49,28 @@ package com.liferay.portal.service;
  *
  */
 public class CompanyServiceUtil {
+	public static com.liferay.portal.model.Company addCompany(
+		java.lang.String webId, java.lang.String virtualHost,
+		java.lang.String mx)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CompanyService companyService = CompanyServiceFactory.getService();
+
+		return companyService.addCompany(webId, virtualHost, mx);
+	}
+
 	public static com.liferay.portal.model.Company updateCompany(
-		long companyId, java.lang.String portalURL, java.lang.String homeURL,
-		java.lang.String mx, java.lang.String name, java.lang.String legalName,
+		long companyId, java.lang.String virtualHost, java.lang.String mx)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CompanyService companyService = CompanyServiceFactory.getService();
+
+		return companyService.updateCompany(companyId, virtualHost, mx);
+	}
+
+	public static com.liferay.portal.model.Company updateCompany(
+		long companyId, java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String name, java.lang.String legalName,
 		java.lang.String legalId, java.lang.String legalType,
 		java.lang.String sicCode, java.lang.String tickerSymbol,
 		java.lang.String industry, java.lang.String type, java.lang.String size)
@@ -59,9 +78,9 @@ public class CompanyServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
 
-		return companyService.updateCompany(companyId, portalURL, homeURL, mx,
-			name, legalName, legalId, legalType, sicCode, tickerSymbol,
-			industry, type, size);
+		return companyService.updateCompany(companyId, virtualHost, mx, name,
+			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
+			type, size);
 	}
 
 	public static void updateDisplay(long companyId,

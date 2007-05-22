@@ -71,7 +71,7 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.LayoutSet getLayoutSet(long companyId,
+	public com.liferay.portal.model.LayoutSet getLayoutSet(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

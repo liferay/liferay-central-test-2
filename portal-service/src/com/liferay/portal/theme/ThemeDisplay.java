@@ -445,14 +445,6 @@ public class ThemeDisplay implements Serializable {
 		_pathMain = pathMain;
 	}
 
-	public String getPathRoot() {
-		return _pathRoot;
-	}
-
-	public void setPathRoot(String pathRoot) {
-		_pathRoot = pathRoot;
-	}
-
 	public String getPathSound() {
 		return _pathSound;
 	}
@@ -719,7 +711,6 @@ public class ThemeDisplay implements Serializable {
 		_pathImage = StringPool.BLANK;
 		_pathJavaScript = StringPool.BLANK;
 		_pathMain = StringPool.BLANK;
-		_pathRoot = StringPool.BLANK;
 		_pathSound = StringPool.BLANK;
 		_pathThemeCss = StringPool.BLANK;
 		_pathThemeImages = StringPool.BLANK;
@@ -791,7 +782,6 @@ public class ThemeDisplay implements Serializable {
 	private String _pathImage = StringPool.BLANK;
 	private String _pathJavaScript = StringPool.BLANK;
 	private String _pathMain = StringPool.BLANK;
-	private String _pathRoot = StringPool.BLANK;
 	private String _pathSound = StringPool.BLANK;
 	private String _pathThemeCss = StringPool.BLANK;
 	private String _pathThemeImages = StringPool.BLANK;

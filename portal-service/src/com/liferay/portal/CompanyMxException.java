@@ -23,26 +23,26 @@
 package com.liferay.portal;
 
 /**
- * <a href="CompanyPortalURLException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompanyMxException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CompanyPortalURLException extends PortalException {
+public class CompanyMxException extends PortalException {
 
-	public CompanyPortalURLException() {
+	public CompanyMxException() {
 		super();
 	}
 
-	public CompanyPortalURLException(String msg) {
+	public CompanyMxException(String msg) {
 		super(msg);
 	}
 
-	public CompanyPortalURLException(String msg, Throwable cause) {
+	public CompanyMxException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CompanyPortalURLException(Throwable cause) {
+	public CompanyMxException(Throwable cause) {
 		super(cause);
 	}
 
