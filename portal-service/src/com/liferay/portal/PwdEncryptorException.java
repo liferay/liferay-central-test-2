@@ -22,8 +22,6 @@
 
 package com.liferay.portal;
 
-import com.liferay.portal.PortalException;
-
 /**
  * <a href="PwdEncryptorException.java.html"><b><i>View Source</i></b></a>
  *

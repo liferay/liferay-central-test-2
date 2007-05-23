@@ -41,11 +41,11 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 	implements PasswordPolicyService {
 
 	public PasswordPolicy addPasswordPolicy(
-			String name, String description, boolean changeable, 
-			boolean changeRequired, long minAge, boolean checkSyntax, 
-			boolean allowDictionaryWords, int minLength, boolean history, 
-			int historyCount, boolean expireable, long maxAge, long warningTime, 
-			int graceLimit, boolean lockout, int maxFailure, 
+			String name, String description, boolean changeable,
+			boolean changeRequired, long minAge, boolean checkSyntax,
+			boolean allowDictionaryWords, int minLength, boolean history,
+			int historyCount, boolean expireable, long maxAge, long warningTime,
+			int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
@@ -53,9 +53,9 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
 		return PasswordPolicyLocalServiceUtil.addPasswordPolicy(
-			getUserId(), false, name, description, changeable, changeRequired, 
-			minAge, checkSyntax, allowDictionaryWords, minLength, history, 
-			historyCount, expireable, maxAge, warningTime, graceLimit, lockout, 
+			getUserId(), false, name, description, changeable, changeRequired,
+			minAge, checkSyntax, allowDictionaryWords, minLength, history,
+			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
 			maxFailure, lockoutDuration, resetFailureCount);
 	}
 
@@ -70,10 +70,10 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 
 	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,
-			boolean changeable, boolean changeRequired, long minAge, 
-			boolean checkSyntax, boolean allowDictionaryWords, int minLength, 
-			boolean history, int historyCount, boolean expireable, long maxAge, 
-			long warningTime, int graceLimit, boolean lockout, int maxFailure, 
+			boolean changeable, boolean changeRequired, long minAge,
+			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
+			boolean history, int historyCount, boolean expireable, long maxAge,
+			long warningTime, int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
@@ -81,9 +81,9 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		return PasswordPolicyLocalServiceUtil.updatePasswordPolicy(
-			passwordPolicyId, name, description, changeable, changeRequired, 
-			minAge, checkSyntax, allowDictionaryWords, minLength, history, 
-			historyCount, expireable, maxAge, warningTime, graceLimit, lockout, 
+			passwordPolicyId, name, description, changeable, changeRequired,
+			minAge, checkSyntax, allowDictionaryWords, minLength, history,
+			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
 			maxFailure, lockoutDuration, resetFailureCount);
 	}
 

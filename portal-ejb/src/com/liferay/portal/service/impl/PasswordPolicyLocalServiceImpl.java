@@ -62,10 +62,10 @@ public class PasswordPolicyLocalServiceImpl
 
 	public PasswordPolicy addPasswordPolicy(
 			long userId, boolean defaultPolicy, String name, String description,
-			boolean changeable, boolean changeRequired, long minAge, 
-			boolean checkSyntax, boolean allowDictionaryWords, int minLength, 
-			boolean history, int historyCount, boolean expireable, long maxAge, 
-			long warningTime, int graceLimit, boolean lockout, int maxFailure, 
+			boolean changeable, boolean changeRequired, long minAge,
+			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
+			boolean history, int historyCount, boolean expireable, long maxAge,
+			long warningTime, int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
@@ -132,8 +132,8 @@ public class PasswordPolicyLocalServiceImpl
 		catch (NoSuchPasswordPolicyException nsppe) {
 			addPasswordPolicy(
 				UserLocalServiceUtil.getDefaultUserId(companyId), true,
-				defaultPasswordPolicyName, defaultPasswordPolicyName, true, 
-				false, 0, false, true, 6, false, 6, false, 8640000, 86400, 0, 
+				defaultPasswordPolicyName, defaultPasswordPolicyName, true,
+				false, 0, false, true, 6, false, 6, false, 8640000, 86400, 0,
 				false, 3, 0, 600);
 		}
 	}
@@ -247,10 +247,10 @@ public class PasswordPolicyLocalServiceImpl
 
 	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,
-			boolean changeable, boolean changeRequired, long minAge, 
-			boolean checkSyntax, boolean allowDictionaryWords, int minLength, 
-			boolean history, int historyCount, boolean expireable, long maxAge, 
-			long warningTime, int graceLimit, boolean lockout, int maxFailure, 
+			boolean changeable, boolean changeRequired, long minAge,
+			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
+			boolean history, int historyCount, boolean expireable, long maxAge,
+			long warningTime, int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 

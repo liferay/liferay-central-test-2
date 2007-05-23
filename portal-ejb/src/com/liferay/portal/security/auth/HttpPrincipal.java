@@ -22,13 +22,13 @@
 
 package com.liferay.portal.security.auth;
 
-import java.io.Serializable;
-
 import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.security.pwd.PwdEncryptor;
+
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <a href="HttpPrincipal.java.html"><b><i>View Source</i></b></a>

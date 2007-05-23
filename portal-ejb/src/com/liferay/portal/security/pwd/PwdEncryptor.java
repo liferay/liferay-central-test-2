@@ -22,21 +22,23 @@
 
 package com.liferay.portal.security.pwd;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
+import java.util.Random;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  * <a href="PwdEncryptor.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +49,7 @@ import com.liferay.util.Validator;
  */
 public class PwdEncryptor {
 
-	public static final String PASSWORDS_ENCRYPTION_ALGORITHM = 
+	public static final String PASSWORDS_ENCRYPTION_ALGORITHM =
 		GetterUtil.getString(PropsUtil.get(
 			PropsUtil.PASSWORDS_ENCRYPTION_ALGORITHM)).toUpperCase();
 
@@ -56,7 +58,7 @@ public class PwdEncryptor {
 	public static final String TYPE_NONE = "NONE";
 
 	public static final String TYPE_SHA = "SHA";
-	
+
 	public static final String TYPE_SSHA = "SSHA";
 
 	public static String encrypt(String clearTextPwd)
@@ -104,7 +106,7 @@ public class PwdEncryptor {
 			         new byte[clearTextPwdBytes.length + saltBytes.length];
 
 			    System.arraycopy(
-					clearTextPwdBytes, 0, pwdPlusSalt, 0, 
+					clearTextPwdBytes, 0, pwdPlusSalt, 0,
 					clearTextPwdBytes.length);
 
 			    System.arraycopy(
@@ -123,7 +125,7 @@ public class PwdEncryptor {
 			         new byte[pwdPlusSaltHash.length + saltBytes.length];
 
 			    System.arraycopy(
-			    	pwdPlusSaltHash, 0, digestPlusSalt, 0, 
+			    	pwdPlusSaltHash, 0, digestPlusSalt, 0,
 			    	pwdPlusSaltHash.length);
 
 			    System.arraycopy(
@@ -158,7 +160,7 @@ public class PwdEncryptor {
 			// Generate random salt
 
 			Random random = new SecureRandom();
-			
+
 			random.nextBytes(saltBytes);
 		}
 		else {

@@ -22,9 +22,7 @@
 
 package com.liferay.test.client;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.PwdEncryptorException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;

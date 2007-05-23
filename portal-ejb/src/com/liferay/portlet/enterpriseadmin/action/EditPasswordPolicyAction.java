@@ -146,9 +146,9 @@ public class EditPasswordPolicyAction extends PortletAction {
 			// Add password policy
 
 			PasswordPolicyServiceUtil.addPasswordPolicy(
-				name, description, changeable, changeRequired, minAge, 
-				checkSyntax, allowDictionaryWords, minLength, history, 
-				historyCount, expireable, maxAge, warningTime, graceLimit, 
+				name, description, changeable, changeRequired, minAge,
+				checkSyntax, allowDictionaryWords, minLength, history,
+				historyCount, expireable, maxAge, warningTime, graceLimit,
 				lockout, maxFailure, lockoutDuration, resetFailureCount);
 		}
 		else {
@@ -156,9 +156,9 @@ public class EditPasswordPolicyAction extends PortletAction {
 			// Update password policy
 
 			PasswordPolicyServiceUtil.updatePasswordPolicy(
-				passwordPolicyId, name, description, changeable, changeRequired, 
-				minAge, checkSyntax, allowDictionaryWords, minLength, history, 
-				historyCount, expireable, maxAge, warningTime, graceLimit, 
+				passwordPolicyId, name, description, changeable, changeRequired,
+				minAge, checkSyntax, allowDictionaryWords, minLength, history,
+				historyCount, expireable, maxAge, warningTime, graceLimit,
 				lockout, maxFailure, lockoutDuration, resetFailureCount);
 		}
 	}
