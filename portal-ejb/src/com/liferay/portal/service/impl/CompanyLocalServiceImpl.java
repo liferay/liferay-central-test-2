@@ -288,7 +288,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String emailAddress =
 				PropsUtil.get(
 					PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX) +
-				"@" + webId;
+				"@" + mx;
 			Locale locale = defaultUser.getLocale();
 			String firstName = PropsUtil.get(
 				PropsUtil.DEFAULT_ADMIN_FIRST_NAME);
