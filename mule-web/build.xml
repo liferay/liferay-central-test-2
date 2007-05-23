@@ -60,4 +60,8 @@
 			webxml="docroot/WEB-INF/web.xml"
 		/>
 	</target>
+
+	<target name="deploy" depends="merge">
+		<antcall target="build-common-web.deploy" />
+	</target>
 </project>

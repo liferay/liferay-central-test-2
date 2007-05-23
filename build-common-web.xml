@@ -120,9 +120,19 @@
 					</then>
 				</if>
 
-				<copy todir="${war.file.dest}">
-					<fileset dir="docroot" />
-				</copy>
+				<if>
+					<available file="tmp" type="dir" />
+					<then>
+						<copy todir="${war.file.dest}">
+							<fileset dir="tmp" />
+						</copy>
+					</then>
+					<else>
+						<copy todir="${war.file.dest}">
+							<fileset dir="docroot" />
+						</copy>
+					</else>
+				</if>
 			</else>
 		</if>
 
