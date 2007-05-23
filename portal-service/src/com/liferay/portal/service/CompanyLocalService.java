@@ -66,6 +66,11 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Company checkCompany(
+		java.lang.String webId, java.lang.String mx)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void checkCompanyKey(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -84,6 +84,15 @@ public class CompanyLocalServiceUtil {
 		return companyLocalService.checkCompany(webId);
 	}
 
+	public static com.liferay.portal.model.Company checkCompany(
+		java.lang.String webId, java.lang.String mx)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.checkCompany(webId, mx);
+	}
+
 	public static void checkCompanyKey(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

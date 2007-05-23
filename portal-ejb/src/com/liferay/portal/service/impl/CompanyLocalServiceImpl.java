@@ -109,7 +109,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(webId, virtualHost, mx);
 
-		Company company = checkCompany(webId);
+		Company company = checkCompany(webId, mx);
 
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
@@ -120,6 +120,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company checkCompany(String webId)
+		throws PortalException, SystemException {
+
+		String mx = webId;
+
+		return checkCompany(webId, mx);
+	}
+
+	public Company checkCompany(String webId, String mx)
 		throws PortalException, SystemException {
 
 		// Company
@@ -135,7 +143,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
 			}
 
-			String mx = webId;
 			String name = webId;
 			String legalName = null;
 			String legalId = null;
