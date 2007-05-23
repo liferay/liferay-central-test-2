@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -31,6 +33,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -44,6 +47,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletModeException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowStateException;
@@ -105,7 +109,25 @@ public class RenderResponseImpl implements RenderResponse {
 			}
 		}
 
-		return new PortletURLImpl(_req, portletName, _plid, action);
+		long plid = _plid;
+
+		try {
+			PortletPreferences portletSetup =
+				PortletPreferencesFactory.getPortletSetup(
+					_req, _portletName, true, true);
+			plid =
+				GetterUtil.getLong(portletSetup.getValue(
+					"portlet-setup-link-to-plid", Long.toString(_plid)));
+
+		}
+		catch (PortalException e) {
+			_log.warn(e);
+		}
+		catch (SystemException e) {
+			_log.warn(e);
+		}
+
+		return new PortletURLImpl(_req, portletName, plid, action);
 	}
 
 	public PortletURL createActionURL() {

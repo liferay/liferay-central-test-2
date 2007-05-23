@@ -285,6 +285,7 @@ public class EditLookAndFeelAction extends PortletAction {
 		String title = ParamUtil.getString(req, "title");
 		boolean useCustomTitle = ParamUtil.getBoolean(req, "useCustomTitle");
 		boolean showBorders = ParamUtil.getBoolean(req, "showBorders");
+		long linkToPlid = ParamUtil.getLong(req, "linkToPlid", -1);
 
 		if (cmd.equals(Constants.RESET)) {
 			form.initialize(mapping);
@@ -330,6 +331,15 @@ public class EditLookAndFeelAction extends PortletAction {
 			"portlet-setup-use-custom-title", String.valueOf(useCustomTitle));
 		portletSetup.setValue(
 			"portlet-setup-show-borders", String.valueOf(showBorders));
+
+		if (linkToPlid != -1) {
+			portletSetup.setValue(
+				"portlet-setup-link-to-plid", Long.toString(linkToPlid));
+		}
+		else {
+			portletSetup.reset("portlet-setup-link-to-plid");
+		}
+
 		portletSetup.setValue("portlet-setup-css", sm.toString());
 
 		portletSetup.store();

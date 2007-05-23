@@ -33,12 +33,13 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 String previewWidth = ParamUtil.getString(request, "previewWidth");
 
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
 String title = portletSetup.getValue("portlet-setup-title-" + languageId, StringPool.BLANK);
 boolean useCustomTitle = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-use-custom-title", "false"));
 boolean showBorders = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", "true"));
-
+long linkToPlid = GetterUtil.getLong(portletSetup.getValue("portlet-setup-link-to-plid", "-1"));
 PortletURL lookAndFeelRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), false);
 
 lookAndFeelRedirect.setWindowState(WindowState.MAXIMIZED);
@@ -127,6 +128,69 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		</td>
 	</tr>
 	</table>
+	<c:if test="<%= (!portlet.isInstanceable()) %>">
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="point-portlet-links-to" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />linkToPlid">
+				<option value=""><liferay-ui:message key="current-layout" /></option>
+
+				<%
+				LayoutLister layoutLister = new LayoutLister();
+
+				String rootNodeName = layout.getGroup().getName();
+				LayoutView layoutView = layoutLister.getLayoutView(layout.getGroup().getGroupId(), layout.getPrivateLayout(), rootNodeName, locale);
+
+				List layoutList = layoutView.getList();
+
+				for (int i = 0; i < layoutList.size(); i++) {
+
+					// id | parentId | ls | obj id | name | img | depth
+
+					String layoutDesc = (String)layoutList.get(i);
+
+					String[] nodeValues = StringUtil.split(layoutDesc, "|");
+
+					long objId = GetterUtil.getLong(nodeValues[3]);
+					String name = nodeValues[4];
+
+					int depth = 0;
+
+					if (i != 0) {
+						depth = GetterUtil.getInteger(nodeValues[6]);
+					}
+
+					for (int j = 0; j < depth; j++) {
+						name = "-&nbsp;" + name;
+					}
+
+					Layout linkableLayout = null;
+
+					try {
+						linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
+					}
+					catch (Exception e) {
+					}
+
+					if (linkableLayout != null) {
+				%>
+
+						<option <%= (linkableLayout.getPlid() == linkToPlid)?"selected":"" %> value="<%= linkableLayout.getPlid() %>"><%= name %></option>
+
+				<%
+					}
+				}
+				%>
+
+			</select>
+
+		</td>
+	</tr>
+	</table>
+	</c:if>
 </div>
 
 <br />
