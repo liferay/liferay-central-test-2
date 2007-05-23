@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.spring.remoting;
+package com.liferay.portal.spring.remoting;
 
 import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.util.StringPool;

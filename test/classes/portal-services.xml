@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="userServiceHttpSecureProxyExecutor" class="com.liferay.util.spring.remoting.AuthenticatingHttpInvokerRequestExecutor">
+	<bean id="userServiceHttpSecureProxyExecutor" class="com.liferay.portal.spring.remoting.AuthenticatingHttpInvokerRequestExecutor">
 		<property name="userId">
 			<value>2</value>
 		</property>
