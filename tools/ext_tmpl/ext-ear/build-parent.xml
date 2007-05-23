@@ -45,13 +45,6 @@
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<and>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 				<equals arg1="${app.server.type}" arg2="pramati" />

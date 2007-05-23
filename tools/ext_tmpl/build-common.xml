@@ -55,12 +55,7 @@
 	<propertycopy name="app.server.bin.dir" from="app.server.${app.server.type}.bin.dir" />
 	<propertycopy name="app.server.classes.global.dir" from="app.server.${app.server.type}.classes.global.dir" />
 	<propertycopy name="app.server.classes.portal.dir" from="app.server.${app.server.type}.classes.portal.dir" />
-	<propertycopy name="app.server.deploy.archive.unpack" from="app.server.${app.server.type}.deploy.archive.unpack" silent="true" />
-	<propertycopy name="app.server.deploy.archive.type" from="app.server.${app.server.type}.deploy.archive.type" silent="true" />
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
-	<propertycopy name="app.server.ejbgen.compile" from="app.server.${app.server.type}.ejbgen.compile" silent="true" />
-	<propertycopy name="app.server.ejbgen.protocols" from="app.server.${app.server.type}.ejbgen.protocols" silent="true" />
-	<propertycopy name="app.server.ejbgen.version" from="app.server.${app.server.type}.ejbgen.version" silent="true" />
 	<propertycopy name="app.server.instance.dir" from="app.server.${app.server.type}.instance.dir" silent="true" />
 	<propertycopy name="app.server.lib.global.dir" from="app.server.${app.server.type}.lib.global.dir" />
 	<propertycopy name="app.server.lib.portal.dir" from="app.server.${app.server.type}.lib.portal.dir" />
@@ -88,75 +83,37 @@
 
 	<target name="deploy-ejb-jar">
 		<if>
-			<and>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-				</or>
-				<and>
-					<equals arg1="${app.server.deploy.archive.unpack}" arg2="true" />
-					<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-				</and>
-			</and>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
 			<then>
 				<unjar src="${modules.dir}${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
+
+				<copy
+					file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
+					tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
+					overwrite="yes"
+				/>
 			</then>
 			<elseif>
 				<or>
-					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				</or>
-				<then>
-					<unjar src="${modules.dir}${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
-
-					<copy
-						file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
-						tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
-						overwrite="yes"
-					/>
-				</then>
-			</elseif>
-			<elseif>
-				<or>
 					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<and>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						</or>
-						<and>
-							<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
-							<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-						</and>
-					</and>
 					<equals arg1="${app.server.type}" arg2="pramati" />
 				</or>
 				<then>
 					<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.portal.dir}" />
 				</then>
 			</elseif>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="orion" />
-				<then>
-					<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.deploy.dir}" />
-				</then>
-			</elseif>
 			<else>
 				<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
 			</else>
-		</if>		
+		</if>
 	</target>
 
 	<target name="deploy-war">
 		<if>
 			<or>
-				<and>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
@@ -187,13 +144,10 @@
 					</then>
 					<else>
 						<if>
-							<and>
-								<or>
-									<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-									<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-								</or>
-								<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
-							</and>
+							<or>
+								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+							</or>
 							<then>
 								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
 							</then>
@@ -207,45 +161,29 @@
 		</if>
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="orion" />
+			<or>
+				<equals arg1="${app.server.type}" arg2="glassfish" />
+				<equals arg1="${app.server.type}" arg2="pramati" />
+			</or>
 			<then>
-				<copy file="${modules.dir}${war.file}.war" todir="${app.server.deploy.dir}" />
-			</then>
-			<elseif>
-				<or>
-					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<and>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						</or>
-						<and>
-							<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
-							<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-						</and>
-					</and>
-					<equals arg1="${app.server.type}" arg2="pramati" />
-				</or>
-				<then>
-					<if>
-						<equals arg1="${war.file}" arg2="ext-web" />
-						<then>
-							<copy file="${modules.dir}${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
+				<if>
+					<equals arg1="${war.file}" arg2="ext-web" />
+					<then>
+						<copy file="${modules.dir}${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
 
-							<war
-								basedir="${project.dir}/web-sites/liferay.com-web/docroot"
-								destfile="${app.server.portal.dir}/portal-web.war"
-								excludes="WEB-INF/web.xml"
-								webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
-								update="yes"
-							/>
-						</then>
-						<else>
-							<copy file="${modules.dir}${war.file}.war" todir="${app.server.portal.dir}" />
-						</else>
-					</if>
-				</then>
-			</elseif>
+						<war
+							basedir="${project.dir}/web-sites/liferay.com-web/docroot"
+							destfile="${app.server.portal.dir}/portal-web.war"
+							excludes="WEB-INF/web.xml"
+							webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
+							update="yes"
+						/>
+					</then>
+					<else>
+						<copy file="${modules.dir}${war.file}.war" todir="${app.server.portal.dir}" />
+					</else>
+				</if>
+			</then>
 			<else>
 				<if>
 					<available file="${war.file.dest}" type="file" />
@@ -340,40 +278,6 @@
 							<arg value="${war.file.dest}/WEB-INF/server-config.wsdd" />
 						</java>
 					</else>
-				</if>
-			</then>
-		</if>
-
-		<if>
-			<and>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-				</or>
-				<and>
-					<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
-					<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
-				</and>
-			</and>
-			<then>
-				<if>
-					<not>
-						<equals arg1="${war.file}" arg2="ext-web" />
-					</not>
-					<then>
-						<tstamp>
-							<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-						</tstamp>
-
-						<jar
-							basedir="${war.file.dest}"
-							jarfile="${tstamp.value}"
-						/>
-
-						<delete dir="${war.file.dest}" />
-
-						<move file="${tstamp.value}" tofile="${war.file.dest}" />
-					</then>
 				</if>
 			</then>
 		</if>

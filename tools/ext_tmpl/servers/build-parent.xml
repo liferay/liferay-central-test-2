@@ -8,10 +8,6 @@
 		<mkdir dir="${app.server.oc4j.dir}/oc4j" />
 	</target>
 
-	<target name="clean-orion">
-		<delete dir="${app.server.orion.dir}/orion" />
-	</target>
-
 	<target name="download-server">
 		<antcall target="setproxy" />
 
@@ -137,29 +133,6 @@
 		<antcall target="configure-oc4j" />
 	</target>
 
-	<target name="install-orion">
-		<antcall target="install-server">
-			<param name="app.server.zip.url" value="${app.server.orion.zip.url}" />
-			<param name="app.server.zip.name" value="${app.server.orion.zip.name}" />
-			<param name="app.server.dest" value="${app.server.orion.dir}" />
-		</antcall>
-
-		<mkdir dir="${app.server.orion.dir}/log" />
-		<mkdir dir="${app.server.orion.dir}/persistence/ejb" />
-
-		<delete dir="${app.server.orion.dir}/orion/applications" />
-		<delete dir="${app.server.orion.dir}/orion/database" />
-		<delete dir="${app.server.orion.dir}/orion/default-web-app" />
-		<delete dir="${app.server.orion.dir}/orion/demo" />
-		<delete dir="${app.server.orion.dir}/orion/docs" />
-		<delete dir="${app.server.orion.dir}/orion/config" />
-		<delete dir="${app.server.orion.dir}/orion/lib" />
-		<delete dir="${app.server.orion.dir}/orion/log" />
-		<delete dir="${app.server.orion.dir}/orion/persistence" />
-
-		<antcall target="configure-orion" />
-	</target>
-
 	<target name="install-pramati">
 		<antcall target="download-server">
 			<param name="app.server.zip.url" value="${app.server.pramati.zip.url}" />
@@ -237,15 +210,6 @@
 
 	<target name="configure-oc4j">
 		<replace file="${app.server.oc4j.dir}/config/server.xml">
-			<replacefilter
-				token="@rt.jar.path@"
-				value="${env.JAVA_HOME}${file.separator}jre${file.separator}lib${file.separator}rt.jar"
-			/>
-		</replace>
-	</target>
-
-	<target name="configure-orion">
-		<replace file="${app.server.orion.dir}/config/server.xml">
 			<replacefilter
 				token="@rt.jar.path@"
 				value="${env.JAVA_HOME}${file.separator}jre${file.separator}lib${file.separator}rt.jar"

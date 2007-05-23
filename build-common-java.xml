@@ -50,7 +50,7 @@
 		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
 
 		<antcall target="javadoc" />
-		
+
 		<replace dir="${java2html.dir}">
 			<include name="**/package-summary.html" />
 			<replacefilter

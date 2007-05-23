@@ -1,11 +1,4 @@
 <?xml version="1.0"?>
 
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
-	<ejb-ref>
-		<ejb-ref-name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.ext.portlet.reports.service.ejb.ReportsEntryServiceHome</home>
-		<remote>com.ext.portlet.reports.service.ejb.ReportsEntryServiceEJB</remote>
-		<ejb-link>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</ejb-link>
-	</ejb-ref>
 </web-app>

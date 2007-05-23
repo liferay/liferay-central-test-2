@@ -220,15 +220,7 @@
 			destfile="${war.file}.war"
 			excludes="WEB-INF/web.xml"
 			webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
-		>
-			<manifest>
-				<attribute name="Class-Path" value="${classpath.manifest}" />
-			</manifest>
-			<fileset
-				dir="${project.dir}/web-sites/liferay.com-web/docroot"
-				excludes="WEB-INF/web.xml"
-			/>
-		</war>
+		/>
 	</target>
 
 	<target name="deploy" depends="war">

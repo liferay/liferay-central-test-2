@@ -135,23 +135,11 @@
 		<ant dir="../util-java" target="jar" inheritAll="false" />
 		<ant dir="../util-taglib" target="jar" inheritAll="false" />
 
-		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
-			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
-			<attribute name="Genic-Jonas-Version" value="${app.server.ejbgen.version}" />
-			<attribute name="Genic-Jonas-protocols" value="${app.server.ejbgen.protocols}" />
-		</manifest>
-
 		<jar
 			basedir="classes"
 			excludes="portal-ext.properties,system-ext.properties"
 			jarfile="${jar.file}.jar"
-		>
-			<manifest>
-				<attribute name="Class-Path" value="counter-ejb.jar documentlibrary-ejb.jar lock-ejb.jar mail-ejb.jar ${classpath.manifest}" />
-			</manifest>
-		</jar>
-
-		<antcall target="jar-jonas-genic" />
+		/>
 	</target>
 
 	<target name="javadoc">
@@ -286,7 +274,7 @@
 		<exec dir="${lang.dir}" executable="cmd.exe" os="Windows 95,Windows 98,Windows NT,Windows 2000,Windows XP">
 			<arg line="/c '${env.JAVA_HOME}'/bin/native2ascii -encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
 		</exec>
-		
+
 		<exec dir="${lang.dir}" executable="'${env.JAVA_HOME}'/bin/native2ascii" os="Linux,FreeBSD,Solaris,Mac OS X">
 			<arg line="-encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
 		</exec>

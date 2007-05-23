@@ -3,145 +3,24 @@
 <project name="build-common-ejb">
 	<import file="build-common-java.xml" />
 
-	<target name="jar" depends="compile">
-		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
-			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
-			<attribute name="Genic-Jonas-Version" value="${app.server.ejbgen.version}" />
-			<attribute name="Genic-Jonas-protocols" value="${app.server.ejbgen.protocols}" />
-		</manifest>
-
-		<jar
-			basedir="classes"
-			jarfile="${jar.file}.jar"
-		>
-			<manifest>
-				<attribute name="Class-Path" value="portal-ejb.jar ${classpath.manifest}" />
-			</manifest>
-		</jar>
-
-		<antcall target="jar-jonas-genic" />
-	</target>
-
-	<target name="jar-jonas-genic">
-		<if>
-			<or>
-				<equals arg1="${app.server.jonas-jetty.ejbgen.compile}" arg2="on" />
-				<equals arg1="${app.server.jonas-tomcat.ejbgen.compile}" arg2="on" />
-			</or>
-			<then>
-				<tstamp>
-					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-				</tstamp>
-
-				<mkdir dir="${tstamp.value}" />
-
-				<java
-					classname="org.objectweb.jonas.server.Bootstrap"
-					classpath="${classpath.jonas.genic}"
-					fork="true"
-					maxmemory="512m"
-				>
-					<jvmarg value="-Dinstall.root=${env.JONAS_ROOT}" />
-					<jvmarg value="-Djonas.base=${env.JONAS_ROOT}" />
-					<jvmarg value="-Djava.security.policy=${env.JONAS_ROOT}/conf/java.policy" />
-					<jvmarg value="-Djava.endorsed.dirs=${env.JONAS_ROOT}/lib/endorsed" />
-					<jvmarg value="-Djava.io.tmpdir=${tstamp.value}" />
-					<arg value="org.objectweb.jonas_ejb.genic.GenIC" />
-					<arg value="-d" />
-					<arg value="${tstamp.value}" />
-					<arg value="-nocompil" />
-					<arg value="-protocols" />
-					<arg value="jrmp" />
-					<arg value="-keepgenerated" />
-					<arg value="-invokecmd" />
-					<arg value="classes/META-INF/ejb-jar.xml" />
-				</java>
-
-				<javac
-					classpath="${classpath.jonas.compiler}"
-					srcdir="${tstamp.value}"
-					fork="true"
-					memoryMaximumSize="512m"
-				/>
-
-				<rmic
-					base="${tstamp.value}"
-					classpath="${classpath.jonas.compiler}"
-					excludes="**/*LocalHome.class"
-					includes="**/*Home.class,**/*Remote.class"
-				/>
-
-				<jar
-					duplicate="preserve"
-					jarfile="${jar.file}.jar"
-					update="yes"
-				>
-					<fileset
-						dir="${tstamp.value}"
-						includes="**/*.class,**/*.xml"
-					/>
-				</jar>
-
-				<delete dir="${tstamp.value}" />
-
-				<delete>
-					<fileset dir="." includes="jonas*.log*" />
-				</delete>
-			</then>
-		</if>
-	</target>
-
 	<target name="deploy" depends="jar">
 		<if>
 			<or>
-				<and>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<and>
-						<equals arg1="${app.server.deploy.archive.unpack}" arg2="true" />
-						<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-					</and>
-				</and>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
 				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
+
+				<copy
+					file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
+					tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
+					overwrite="yes"
+				/>
 			</then>
 			<elseif>
 				<or>
-					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				</or>
-				<then>
-					<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
-
-					<copy
-						file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
-						tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
-						overwrite="yes"
-					/>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="orion" />
-				<then>
-					<copy file="${jar.file}.jar" todir="${app.server.deploy.dir}" />
-				</then>
-			</elseif>
-			<elseif>
-				<or>
 					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<and>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						</or>
-						<and>
-							<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
-							<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-						</and>
-					</and>
 					<equals arg1="${app.server.type}" arg2="pramati" />
 				</or>
 				<then>

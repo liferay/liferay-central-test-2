@@ -27,7 +27,7 @@
 	<target name="compile-module">
 		<if>
 			<isfileselected file="${module.name}.war">
-				<type type="file" /> 
+				<type type="file" />
 			</isfileselected>
 			<then>
 				<echo>Skipping packed module ${module.name}.war</echo>
@@ -63,7 +63,7 @@
 	<target name="war-module">
 		<if>
 			<isfileselected file="${module.name}.war">
-				<type type="file" /> 
+				<type type="file" />
 			</isfileselected>
 			<then>
 				<copy file="${module.name}.war" todir="${project.dir}/${module.name}-${lp.version.file.name}.war" />
@@ -94,7 +94,7 @@
 	<target name="deploy-module">
 		<if>
 			<isfileselected file="${module.name}.war">
-				<type type="file" /> 
+				<type type="file" />
 			</isfileselected>
 			<then>
 				<copy file="${module.name}.war" todir="${auto.deploy.dir}" />

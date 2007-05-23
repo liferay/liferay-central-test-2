@@ -64,18 +64,6 @@
 		</delete>
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="orion" />
-			<then>
-				<delete failonerror="false">
-					<fileset
-						dir="${app.server.dir}"
-						includes="**/state.ser,**/transaction.state"
-					/>
-				</delete>
-			</then>
-		</if>
-
-		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
 				<delete failonerror="false">
@@ -364,13 +352,10 @@
 		</copy>
 
 		<if>
-			<and>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-				</or>
-				<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
-			</and>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+			</or>
 			<then>
 				<delete>
 					<fileset
@@ -398,17 +383,6 @@
 					/>
 				</delete>
 			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="orion" />
-				<then>
-					<delete>
-						<fileset
-							dir="${app.server.lib.portal.dir}"
-							includes="xercesImpl.jar,xml-apis.jar"
-						/>
-					</delete>
-				</then>
-			</elseif>
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="resin" />
 				<then>
@@ -531,15 +505,6 @@
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<and>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<and>
-						<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
-					</and>
-				</and>
 				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
@@ -561,90 +526,63 @@
 
 	<target name="deploy-properties">
 		<if>
-			<equals arg1="${app.server.type}" arg2="orion" />
+			<or>
+				<equals arg1="${app.server.type}" arg2="glassfish" />
+				<equals arg1="${app.server.type}" arg2="pramati" />
+			</or>
 			<then>
-			</then>
-			<elseif>
-				<or>
-					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<and>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						</or>
-						<and>
-							<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
-							<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
-						</and>
-					</and>
-					<equals arg1="${app.server.type}" arg2="pramati" />
-				</or>
-				<then>
-					<tstamp>
-						<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-					</tstamp>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
 
-					<mkdir dir="${tstamp.value}" />
+				<mkdir dir="${tstamp.value}" />
 
-					<copy todir="${tstamp.value}" overwrite="yes">
-						<fileset dir="portal-ejb/classes">
-							<include name="*-ext.properties" />
-						</fileset>
-					</copy>
+				<copy todir="${tstamp.value}" overwrite="yes">
+					<fileset dir="portal-ejb/classes">
+						<include name="*-ext.properties" />
+					</fileset>
+				</copy>
 
-					<if>
-						<not>
-							<available file="${tstamp.value}/portal-ext.properties" />
-						</not>
-						<then>
-							<echo file="${tstamp.value}/portal-ext.properties" append="false">portal.release=enterprise
+				<if>
+					<not>
+						<available file="${tstamp.value}/portal-ext.properties" />
+					</not>
+					<then>
+						<echo file="${tstamp.value}/portal-ext.properties" append="false">portal.release=enterprise
 
 portal.ctx=/
 
 auto.deploy.dest.dir=../webapps</echo>
-						</then>
-					</if>
+					</then>
+				</if>
 
-					<if>
-						<equals arg1="${app.server.type}" arg2="glassfish" />
+				<if>
+					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<then>
+						<replace file="${tstamp.value}/portal-ext.properties">
+							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+							<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
+						</replace>
+					</then>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="pramati" />
 						<then>
 							<replace file="${tstamp.value}/portal-ext.properties">
 								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-								<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
+								<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
 							</replace>
 						</then>
-						<elseif>
-							<or>
-								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-							</or>
-							<then>
-								<replace file="${tstamp.value}/portal-ext.properties">
-									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-									<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
-								</replace>
-							</then>
-						</elseif>
-						<elseif>
-							<equals arg1="${app.server.type}" arg2="pramati" />
-							<then>
-								<replace file="${tstamp.value}/portal-ext.properties">
-									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-									<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
-								</replace>
-							</then>
-						</elseif>
-					</if>
+					</elseif>
+				</if>
 
-					<jar
-						basedir="${tstamp.value}"
-						destfile="${app.server.portal.dir}/portal-ejb.jar"
-						update="yes"
-					/>
+				<jar
+					basedir="${tstamp.value}"
+					destfile="${app.server.portal.dir}/portal-ejb.jar"
+					update="yes"
+				/>
 
-					<delete dir="${tstamp.value}" />
-				</then>
-			</elseif>
+				<delete dir="${tstamp.value}" />
+			</then>
 			<else>
 				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
 					<fileset dir="portal-ejb/classes">
@@ -669,13 +607,8 @@ auto.deploy.dest.dir=../webapps</echo>
 
 				<if>
 					<or>
-						<and>
-							<or>
-								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-							</or>
-							<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
-						</and>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<equals arg1="${app.server.type}" arg2="oc4j" />
 						<equals arg1="${app.server.type}" arg2="resin" />
@@ -745,13 +678,6 @@ auto.deploy.dest.dir=../webapps</echo>
 			<replacefilter
 				token="@JBOSS_HOME@"
 				value="${app.server.jboss-tomcat.dir}"
-			/>
-		</replace>
-
-		<replace file="${lp.eclipse.dir}/.metadata/.plugins/org.eclipse.debug.core/.launches/orion.launch">
-			<replacefilter
-				token="@ORION_HOME@"
-				value="${app.server.orion.dir}"
 			/>
 		</replace>
 	</target>
@@ -877,7 +803,7 @@ auto.deploy.dest.dir=../webapps</echo>
 		<ant antfile="${lp.ext.dir}/servers/build.xml" target="install-glassfish" inheritAll="false" />
 
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=glassfish</echo>
-		
+
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 
@@ -917,25 +843,21 @@ auto.deploy.dest.dir=../webapps</echo>
 
 	<target name="build-ext-jetty">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jetty</echo>
-		
+
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jonas-jetty">
-		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty
-
-app.server.jonas-jetty.ejbgen.compile=on</echo>
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
 
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jonas-tomcat">
-		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
 
-app.server.jonas-tomcat.ejbgen.compile=on</echo>
-		
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
@@ -977,14 +899,14 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="build-ext-resin">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
-		
+
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
-		
+
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
@@ -1052,7 +974,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-api">
 		<delete file="liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-doc-${lp.version.file.name}.zip"
 			basedir="."
 			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
@@ -1125,13 +1047,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-jboss">
 		<delete file="liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
 			basedir="${app.server.jboss-jetty.dir}"
 		/>
 
 		<delete file="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
 			basedir="${app.server.jboss-tomcat.dir}"
 		/>
@@ -1139,7 +1061,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-jetty">
 		<delete file="liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-jetty-${lp.version.file.name}.zip"
 			basedir="${app.server.jetty.dir}"
 		/>
@@ -1147,13 +1069,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-jonas">
 		<delete file="liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
 			basedir="${app.server.jonas-jetty.dir}"
 		/>
 
 		<delete file="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip"
 			basedir="${app.server.jonas-tomcat.dir}"
 		/>
@@ -1165,7 +1087,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
 			basedir="."
 			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar"
-		/>		
+		/>
 	</target>
 
 	<target name="zip-portal-dependencies">
@@ -1244,7 +1166,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-resin">
 		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"
 			basedir="${app.server.resin.dir}"
 		/>
@@ -1252,7 +1174,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-sql">
 		<delete file="liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-sql-${lp.version.file.name}.zip"
 			basedir="sql"
 			includes="**/*.sql"
@@ -1261,7 +1183,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-src">
 		<delete file="liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-src-${lp.version.file.name}.zip"
 			basedir="${lp.source.dir}"
 			excludes="**/CVS/**"
@@ -1270,13 +1192,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-tomcat">
 		<delete file="liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
 			basedir="${app.server.tomcat.dir}"
 		/>
 
 		<delete file="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
-		
+
 		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
 			basedir="${app.server.tomcat.dir}"
 			excludes="bin/jmx.jar,common/endorsed/xml-apis.jar"
