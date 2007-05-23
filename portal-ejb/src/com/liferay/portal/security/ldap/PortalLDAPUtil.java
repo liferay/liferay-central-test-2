@@ -302,7 +302,7 @@ public class PortalLDAPUtil {
 			while (enu.hasMore()) {
 				SearchResult result = (SearchResult)enu.next();
 
-				_importFromLDAP(
+				importFromLDAP(
 					companyId, ctx, userMappings, groupMappings, baseDN,
 					result);
 			}
@@ -315,6 +315,79 @@ public class PortalLDAPUtil {
 				ctx.close();
 			}
 		}
+	}
+
+	public static User importFromLDAP(
+			long companyId, LdapContext ctx, Properties userMappings,
+			Properties groupMappings, String baseDN, SearchResult result)
+		throws Exception {
+
+		String userDN = result.getName() + StringPool.COMMA + baseDN;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("User DN " + userDN);
+		}
+
+		Attributes attrs = result.getAttributes();
+
+		long creatorUserId = 0;
+		boolean autoPassword = true;
+		String password1 = StringPool.BLANK;
+		String password2 = StringPool.BLANK;
+		boolean passwordReset = false;
+		boolean autoScreenName = false;
+		String screenName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("screenName")).toLowerCase();
+		String emailAddress = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("emailAddress"));
+		Locale locale = Locale.US;
+		String firstName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("firstName"));
+		String middleName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("middleName"));
+		String lastName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("lastName"));
+
+		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+			String fullName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("fullName"));
+
+			String[] names = LDAPUtil.splitFullName(fullName);
+
+			firstName = names[0];
+			middleName = names[1];
+			lastName = names[2];
+		}
+
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("jobTitle"));
+		long organizationId = 0;
+		long locationId = 0;
+		boolean sendEmail = false;
+
+		User user = importFromLDAP(
+			creatorUserId, companyId, autoPassword, password1, password2,
+			passwordReset, autoScreenName, screenName, emailAddress, locale,
+			firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, sendEmail, true, false);
+
+		if (user != null) {
+			Attribute attr = attrs.get(userMappings.getProperty("group"));
+
+			if (attr != null){
+				_importToLDAPGroup(
+					companyId, ctx, groupMappings, user.getUserId(), attr);
+			}
+		}
+
+		return user;
 	}
 
 	public static User importFromLDAP(
@@ -415,77 +488,6 @@ public class PortalLDAPUtil {
 		}
 		else {
 			return false;
-		}
-	}
-
-	private static void _importFromLDAP(
-			long companyId, LdapContext ctx, Properties userMappings,
-			Properties groupMappings, String baseDN, SearchResult result)
-		throws Exception {
-
-		String userDN = result.getName() + StringPool.COMMA + baseDN;
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("User DN " + userDN);
-		}
-
-		Attributes attrs = result.getAttributes();
-
-		long creatorUserId = 0;
-		boolean autoPassword = true;
-		String password1 = StringPool.BLANK;
-		String password2 = StringPool.BLANK;
-		boolean passwordReset = false;
-		boolean autoScreenName = false;
-		String screenName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("screenName")).toLowerCase();
-		String emailAddress = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("emailAddress"));
-		Locale locale = Locale.US;
-		String firstName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("firstName"));
-		String middleName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("middleName"));
-		String lastName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("lastName"));
-
-		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
-			String fullName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("fullName"));
-
-			String[] names = LDAPUtil.splitFullName(fullName);
-
-			firstName = names[0];
-			middleName = names[1];
-			lastName = names[2];
-		}
-
-		int prefixId = 0;
-		int suffixId = 0;
-		boolean male = true;
-		int birthdayMonth = Calendar.JANUARY;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("jobTitle"));
-		long organizationId = 0;
-		long locationId = 0;
-		boolean sendEmail = false;
-
-		User user = importFromLDAP(
-			creatorUserId, companyId, autoPassword, password1, password2,
-			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail, true, false);
-
-		if (user != null) {
-			Attribute attr = attrs.get(userMappings.getProperty("group"));
-
-			if (attr != null){
-				_importToLDAPGroup(
-					companyId, ctx, groupMappings, user.getUserId(), attr);
-			}
 		}
 	}
 

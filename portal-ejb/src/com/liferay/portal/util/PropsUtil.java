@@ -30,9 +30,9 @@ import com.liferay.util.ExtPropertiesLoader;
 
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
- *
+ * 
  * @author Brian Wing Shun Chan
- *
+ * 
  */
 public class PropsUtil {
 
@@ -304,6 +304,12 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
 
+	// NTLM
+
+	public static final String NTLM_AUTH_ENABLED = "ntlm.auth.enabled";
+
+	// OpenID
+
 	public static final String OPEN_ID_AUTH_ENABLED = "open.id.auth.enabled";
 
 	// Authentication Pipeline
@@ -542,7 +548,7 @@ public class PropsUtil {
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
-	public static final String LUCENE_STORE_TYPE= "lucene.store.type";
+	public static final String LUCENE_STORE_TYPE = "lucene.store.type";
 
 	public static final String LUCENE_STORE_JDBC_AUTO_CLEAN_UP = "lucene.store.jdbc.auto.clean.up";
 
@@ -761,7 +767,7 @@ public class PropsUtil {
 	public static final String INVITATION_EMAIL_MAX_RECIPIENTS = "invitation.email.max.recipients";
 
 	public static final String INVITATION_EMAIL_MESSAGE_BODY = "invitation.email.message.body";
-	
+
 	public static final String INVITATION_EMAIL_MESSAGE_SUBJECT = "invitation.email.message.subject";
 
 	// Journal Portlet
@@ -980,8 +986,8 @@ public class PropsUtil {
 
 	private static ExtPropertiesLoader _getInstance(long companyId) {
 		if (companyId > 0) {
-			return ExtPropertiesLoader.getInstance(
-				PropsFiles.PORTAL, companyId);
+			return ExtPropertiesLoader
+					.getInstance(PropsFiles.PORTAL, companyId);
 		}
 		else {
 			return ExtPropertiesLoader.getInstance(PropsFiles.PORTAL);

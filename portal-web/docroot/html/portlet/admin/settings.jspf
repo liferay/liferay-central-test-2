@@ -57,6 +57,14 @@
 						<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_AUTH_REQUIRED)) %>' />
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="ntlm-enabled" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="ntlmEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "ntlmEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED)) %>' />
+					</td>
+				</tr>
 				</table>
 
 				<br />

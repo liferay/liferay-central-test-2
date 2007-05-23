@@ -216,6 +216,7 @@ public class EditUsersAction extends PortletAction {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 		boolean required = ParamUtil.getBoolean(req, "required");
+		boolean ntlmEnabled = ParamUtil.getBoolean(req, "ntlmEnabled");
 		String baseProviderURL = ParamUtil.getString(req, "baseProviderURL");
 		String baseDN = ParamUtil.getString(req, "baseDN");
 		String principal = ParamUtil.getString(req, "principal");
@@ -258,6 +259,8 @@ public class EditUsersAction extends PortletAction {
 		prefs.setValue(PropsUtil.LDAP_AUTH_ENABLED, Boolean.toString(enabled));
 		prefs.setValue(
 			PropsUtil.LDAP_AUTH_REQUIRED, Boolean.toString(required));
+		prefs.setValue(
+			PropsUtil.NTLM_AUTH_ENABLED, Boolean.toString(ntlmEnabled));
 		prefs.setValue(PropsUtil.LDAP_BASE_PROVIDER_URL, baseProviderURL);
 		prefs.setValue(PropsUtil.LDAP_BASE_DN, baseDN);
 		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
