@@ -190,6 +190,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//SPRING//DTD BEAN//EN",
+			"spring-beans.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN",
 			"struts-config_1_2.dtd"
 		),
