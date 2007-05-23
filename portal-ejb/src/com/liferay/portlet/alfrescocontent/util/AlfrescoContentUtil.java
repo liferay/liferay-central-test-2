@@ -78,7 +78,11 @@ public class AlfrescoContentUtil {
 			Reference reference = null;
 
 			if (Validator.isNull(uuid)) {
-				reference = new Reference(_SPACES_STORE, null, null);
+	            Predicate predicate = new Predicate(null, _SPACES_STORE, null);
+
+	            Node[] nodes = repositoryService.get(predicate);
+
+	            reference = nodes[0].getReference();
 			}
 			else {
 				reference = new Reference(_SPACES_STORE, uuid, null);
@@ -123,7 +127,7 @@ public class AlfrescoContentUtil {
 			Content[] contents = contentService.read(
 				predicate, Constants.PROP_CONTENT);
 
-			String ticket = AuthenticationUtils.getCurrentTicket();
+			String ticket = AuthenticationUtils.getTicket();
 
 			String content = Http.URLtoString(
 				contents[0].getUrl() + "?ticket=" + ticket);

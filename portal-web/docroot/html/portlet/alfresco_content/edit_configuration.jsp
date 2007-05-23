@@ -140,7 +140,7 @@ catch (Exception e) {
 		}
 	}
 	catch (Exception e) {
-		_log.error(e);
+		_log.error(e, e);
 	}
 
 	String breadcrumbs = StringPool.BLANK;
@@ -193,7 +193,7 @@ catch (Exception e) {
 		}
 	}
 	catch (Exception e) {
-		_log.error(e);
+		_log.error(e, e);
 	}
 	%>
 
@@ -229,7 +229,7 @@ catch (Exception e) {
 		}
 	}
 	catch (Exception e) {
-		_log.error(e);
+		_log.error(e, e);
 	}
 
 	int total = childNodes.length;
