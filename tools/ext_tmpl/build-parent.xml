@@ -120,8 +120,6 @@
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
@@ -202,7 +200,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="log4j.jar,jmx-remote.jar,jmx-ri.jar"
+						includes="log4j.jar"
 					/>
 				</delete>
 			</then>

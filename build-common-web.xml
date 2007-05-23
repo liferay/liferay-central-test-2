@@ -46,7 +46,7 @@
 		</if>
 	</target>
 
-	<target name="deploy" depends="war">
+	<target name="deploy" depends="compile">
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
@@ -120,7 +120,9 @@
 					</then>
 				</if>
 
-				<unwar src="${war.file}.war" dest="${war.file.dest}" />
+				<copy todir="${war.file.dest}">
+					<fileset dir="docroot" />
+				</copy>
 			</else>
 		</if>
 

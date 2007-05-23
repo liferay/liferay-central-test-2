@@ -101,7 +101,8 @@ public class BaseDeployer {
 		utilTaglibDTD = System.getProperty("deployer.util.taglib.dtd");
 		unpackWar = GetterUtil.getBoolean(
 			System.getProperty("deployer.unpack.war"), true);
-		jbossPrefix = System.getProperty("deployer.jboss.prefix");
+		jbossPrefix = GetterUtil.getString(
+			System.getProperty("deployer.jboss.prefix"));
 		tomcatLibDir = System.getProperty("deployer.tomcat.lib.dir");
 		this.wars = wars;
 		this.jars = jars;
