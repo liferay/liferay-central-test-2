@@ -305,17 +305,17 @@
 				Collections, Commons HttpClient, and Hibernate.
 				-->
 
-				<copy todir="${app.server.dir}/lib">
+				<copy todir="${app.server.dir}/lib" overwrite="yes">
 					<fileset
 						dir="lib/portal"
-						includes="commons-httpclient.jar,dom4j.jar,jaxen.jar"
+						includes="commons-codec.jar,commons-httpclient.jar,dom4j.jar,jaxen.jar"
 					/>
 				</copy>
 
-				<copy todir="${app.server.instance.dir}/lib">
+				<copy todir="${app.server.instance.dir}/lib" overwrite="yes">
 					<fileset
 						dir="lib/portal"
-						includes="commons-collections.jar,commons-httpclient.jar"
+						includes="commons-codec.jar,commons-collections.jar,commons-httpclient.jar"
 					/>
 				</copy>
 

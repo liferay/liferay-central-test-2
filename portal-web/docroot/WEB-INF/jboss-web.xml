@@ -3,6 +3,7 @@
 
 <jboss-web>
 	<security-domain>java:/jaas/PortalRealm</security-domain>
+	<context-root>/</context-root>
 	<resource-ref>
 		<res-ref-name>jdbc/LiferayPool</res-ref-name>
 		<jndi-name>java:/jdbc/LiferayPool</jndi-name>
