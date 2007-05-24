@@ -91,7 +91,7 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
-					names="look-and-feel,permissions"
+					names="look-and-feel,supported-clients,permissions"
 					url0="<%= lookAndFeelURL.toString() %>"
 					url1="<%= supportedClientsURL.toString() %>"
 					url2="<%= permissionsURL.toString() %>"
