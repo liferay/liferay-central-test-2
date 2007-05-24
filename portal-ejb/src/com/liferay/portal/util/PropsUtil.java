@@ -304,6 +304,20 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
 
+	// CAS
+
+	public static final String CAS_AUTH_ENABLED = "cas.auth.enabled";
+
+	public static final String CAS_IMPORT_FROM_LDAP = "cas.import.from.ldap";
+
+    public static final String CAS_LOGIN_URL = "cas.login.url";
+
+	public static final String CAS_LOGOUT_URL = "cas.logout.url";
+
+	public static final String CAS_SERVICE_URL = "cas.service.url";
+
+	public static final String CAS_VALIDATE_URL = "cas.validate.url";
+
 	// NTLM
 
 	public static final String NTLM_AUTH_ENABLED = "ntlm.auth.enabled";

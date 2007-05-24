@@ -20,62 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.util.servlet.filters;
 
-import com.liferay.util.GetterUtil;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="DynamicFilterConfig.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class DynamicFilterConfig implements FilterConfig {
 
-	static String name = "Liferay Portal";
-
-	static String version = "4.2.0";
-
-	static String codeName = "Machen";
-
-	static String build = "4080";
-
-	static String date = "May 23, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public DynamicFilterConfig(String filterName, ServletContext ctx) {
+		_filterName = filterName;
+		_ctx = ctx;
+		_parameters = new LinkedHashMap();
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public String getFilterName() {
+		return _filterName;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public ServletContext getServletContext() {
+		return _ctx;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public void addInitParameter(String name, String value) {
+		_parameters.put(name, value);
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public String getInitParameter(String name) {
+		return (String)_parameters.get(name);
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+	public Enumeration getInitParameterNames() {
+		return Collections.enumeration(_parameters.keySet());
 	}
+
+	private String _filterName;
+	private ServletContext _ctx;
+	private Map _parameters;
 
 }

@@ -127,10 +127,16 @@
 							<fileset dir="tmp" />
 						</copy>
 					</then>
+					<elseif>
+						<available file="docroot" type="dir" />
+						<then>
+							<copy todir="${war.file.dest}">
+								<fileset dir="docroot" />
+							</copy>
+						</then>
+					</elseif>
 					<else>
-						<copy todir="${war.file.dest}">
-							<fileset dir="docroot" />
-						</copy>
+						<unwar src="${war.file}.war" dest="${war.file.dest}" />
 					</else>
 				</if>
 			</else>

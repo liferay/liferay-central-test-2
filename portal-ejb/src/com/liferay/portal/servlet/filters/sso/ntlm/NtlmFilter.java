@@ -20,10 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.sso.cas;
+package com.liferay.portal.servlet.filters.sso.ntlm;
 
-import com.liferay.util.GetterUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
@@ -34,71 +38,81 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import jcifs.Config;
+
+import jcifs.http.NtlmHttpFilter;
+
+import jcifs.smb.NtlmPasswordAuthentication;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CASFilter.java.html"><b><i>View Source</i></b></a>
+ * <a href="NtlmFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Bruno Farache
  *
  */
-public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
-
-	public static final boolean USE_CAS_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(CASFilter.class.getName()));
+public class NtlmFilter extends NtlmHttpFilter {
 
 	public void init(FilterConfig config) throws ServletException {
-		synchronized (CASFilter.class) {
-			super.init(config);
-
-			_logoutUrl = config.getInitParameter("logout_url");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Logout URL " + _logoutUrl);
-			}
-		}
 	}
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
-		if (_log.isDebugEnabled()) {
-			if (USE_CAS_FILTER) {
-				_log.debug("CAS filter is enabled");
-			}
-			else {
-				_log.debug("CAS filter is disabled");
-			}
-		}
-
-		if (USE_CAS_FILTER) {
+		try {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
+			HttpServletResponse httpRes = (HttpServletResponse)res;
 
-			String pathInfo = httpReq.getPathInfo();
+			long companyId = PortalInstances.getCompanyId(httpReq);
 
-			if (pathInfo.indexOf("/portal/logout") != -1) {
-				HttpServletResponse httpRes = (HttpServletResponse)res;
-				HttpSession httpSes = httpReq.getSession();
+			if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
+				String domainController = PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
 
-				httpSes.invalidate();
+				domainController = domainController.substring(
+					7, domainController.lastIndexOf(":"));
 
-				httpRes.sendRedirect(_logoutUrl);
-			}
-			else {
-				super.doFilter(req, res, chain);
+				Config.setProperty(
+					"jcifs.http.domainController", domainController);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Host " + domainController);
+				}
+
+				NtlmPasswordAuthentication ntlm = negotiate(
+					httpReq, httpRes, false);
+
+				if (ntlm == null) {
+					return;
+				}
+
+				String remoteUser = ntlm.getName();
+
+				int pos = remoteUser.indexOf(StringPool.BACK_SLASH);
+
+				if (pos != -1) {
+					remoteUser = remoteUser.substring(pos + 1);
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("NTLM remote user " + remoteUser);
+				}
+
+				req.setAttribute(WebKeys.NTLM_REMOTE_USER, remoteUser);
 			}
 		}
-		else {
+		catch (Exception e) {
+			_log.error(e);
+		}
+		finally {
 			chain.doFilter(req, res);
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CASFilter.class);
-
-	private String _logoutUrl;
+	private static Log _log = LogFactory.getLog(NtlmFilter.class);
 
 }

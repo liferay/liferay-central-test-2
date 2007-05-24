@@ -27,6 +27,7 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.servlet.filters.sso.cas.CASFilter;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -85,7 +86,10 @@ public class EditUsersAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (cmd.equals("updateDefaultGroupsAndRoles")) {
+		if (cmd.equals("updateCAS")) {
+			updateCAS(req, companyId, prefs);
+		}
+		else if (cmd.equals("updateDefaultGroupsAndRoles")) {
 			updateDefaultGroupsAndRoles(req, prefs);
 		}
 		else if (cmd.equals("updateEmails")) {
@@ -117,6 +121,31 @@ public class EditUsersAction extends PortletAction {
 		else {
 			setForward(req, "portlet.admin.view");
 		}
+	}
+
+	protected void updateCAS(
+			ActionRequest req, long companyId, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		boolean importFromLdap = ParamUtil.getBoolean(req, "importFromLdap");
+		String loginUrl = ParamUtil.getString(req, "loginUrl");
+		String logoutUrl = ParamUtil.getString(req, "logoutUrl");
+		String serviceUrl = ParamUtil.getString(req, "serviceUrl");
+		String validateUrl = ParamUtil.getString(req, "validateUrl");
+
+		prefs.setValue(
+			PropsUtil.CAS_AUTH_ENABLED, Boolean.toString(enabled));
+		prefs.setValue(
+			PropsUtil.CAS_IMPORT_FROM_LDAP, Boolean.toString(importFromLdap));
+		prefs.setValue(PropsUtil.CAS_LOGIN_URL, loginUrl);
+		prefs.setValue(PropsUtil.CAS_LOGOUT_URL, logoutUrl);
+		prefs.setValue(PropsUtil.CAS_SERVICE_URL, serviceUrl);
+		prefs.setValue(PropsUtil.CAS_VALIDATE_URL, validateUrl);
+
+		prefs.store();
+
+		CASFilter.reload(companyId);
 	}
 
 	protected void updateDefaultGroupsAndRoles(

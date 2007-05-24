@@ -25,15 +25,39 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.PwdGenerator;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.ldap.LDAPUtil;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
+
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.naming.Binding;
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.SearchControls;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CASAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -50,13 +74,20 @@ public class CASAutoLogin implements AutoLogin {
 		try {
 			String[] credentials = null;
 
+			long companyId = PortalUtil.getCompanyId(req);
+
+			if (!PrefsPropsUtil.getBoolean(
+					companyId, PropsUtil.CAS_AUTH_ENABLED)) {
+
+				return credentials;
+			}
+
 			HttpSession ses = req.getSession();
 
 			String screenName =
 				(String)ses.getAttribute(CASFilter.CAS_FILTER_USER);
 
 			if (screenName != null) {
-				long companyId = PortalUtil.getCompanyId(req);
 				User user = null;
 
 				try {
@@ -64,8 +95,14 @@ public class CASAutoLogin implements AutoLogin {
 						companyId, screenName);
 				}
 				catch (NoSuchUserException nsue) {
-					user = processNoSuchUserException(
-						companyId, screenName, nsue);
+					if (PrefsPropsUtil.getBoolean(
+							companyId, PropsUtil.CAS_IMPORT_FROM_LDAP)) {
+
+						user = addUser(companyId, screenName);
+					}
+					else {
+						throw nsue;
+					}
 				}
 
 				credentials = new String[3];
@@ -82,11 +119,174 @@ public class CASAutoLogin implements AutoLogin {
 		}
 	}
 
-	protected User processNoSuchUserException(
-			long companyId, String screenName, NoSuchUserException nsue)
+	protected User addUser(long companyId, String screenName)
 		throws PortalException, SystemException {
 
-		throw nsue;
+		try {
+			Properties env = new Properties();
+
+			String baseProviderURL = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
+
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_BASE_DN);
+
+			env.put(
+				Context.INITIAL_CONTEXT_FACTORY,
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_FACTORY_INITIAL));
+			env.put(
+				Context.PROVIDER_URL,
+				LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
+			env.put(
+				Context.SECURITY_PRINCIPAL,
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL));
+			env.put(
+				Context.SECURITY_CREDENTIALS,
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
+
+			LdapContext ctx = null;
+
+			try {
+				ctx = new InitialLdapContext(env, null);
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Failed to bind to the LDAP server", e);
+				}
+
+				throw new SystemException(e);
+			}
+
+			String filter = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter before transformation " + filter);
+			}
+
+			filter = StringUtil.replace(
+				filter,
+				new String[] {
+					"@company_id@", "@email_address@", "@screen_name@"
+				},
+				new String[] {
+					String.valueOf(companyId), StringPool.BLANK, screenName
+				});
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter after transformation " + filter);
+			}
+
+			SearchControls cons = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+
+			NamingEnumeration enu = ctx.search(StringPool.BLANK, filter, cons);
+
+			if (enu.hasMore()) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Search filter returned at least one result");
+				}
+
+				Binding binding = (Binding)enu.next();
+
+				Attributes attrs = ctx.getAttributes(binding.getName());
+
+				Properties userMappings =
+					PortalLDAPUtil.getUserMappings(companyId);
+
+				Attribute emailAddressAttr = attrs.get("mail");
+
+				String emailAddress = StringPool.BLANK;
+
+				if (emailAddressAttr != null) {
+					emailAddress = emailAddressAttr.get().toString();
+				}
+
+				return addUser(
+					attrs, userMappings, companyId, emailAddress, screenName,
+					0);
+			}
+			else {
+				throw new NoSuchUserException(
+					"User " + screenName + " was not found in the LDAP server");
+			}
+		}
+		catch (Exception e) {
+			_log.error("Problem accessing LDAP server ", e);
+
+			throw new SystemException(
+				"Problem accessign LDAP server " + e.getMessage());
+		}
 	}
+
+	protected User addUser(
+			Attributes attrs, Properties userMappings, long companyId,
+			String emailAddress, String screenName, long userId)
+		throws Exception {
+
+		long creatorUserId = 0;
+
+		boolean autoPassword = false;
+		String password1 = PwdGenerator.getPassword();
+		String password2 = password1;
+		boolean passwordReset = false;
+
+		boolean autoScreenName = false;
+
+		if (Validator.isNull(screenName)) {
+			screenName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("screenName")).toLowerCase();
+		}
+
+		if (Validator.isNull(emailAddress)) {
+			emailAddress = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("emailAddress"));
+		}
+
+		Locale locale = Locale.US;
+		String firstName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("firstName"));
+		String middleName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("middleName"));
+		String lastName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("lastName"));
+
+		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+			String fullName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("fullName"));
+
+			String[] names = LDAPUtil.splitFullName(fullName);
+
+			firstName = names[0];
+			middleName = names[1];
+			lastName = names[2];
+		}
+
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("jobTitle"));
+		long organizationId = 0;
+		long locationId = 0;
+		boolean sendEmail = false;
+		boolean checkExists = true;
+		boolean updatePassword = true;
+
+		return PortalLDAPUtil.importFromLDAP(
+			creatorUserId, companyId, autoPassword, password1, password2,
+			passwordReset, autoScreenName, screenName, emailAddress, locale,
+			firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, sendEmail, checkExists, updatePassword);
+	}
+
+	private static Log _log = LogFactory.getLog(CASAutoLogin.class);
 
 }

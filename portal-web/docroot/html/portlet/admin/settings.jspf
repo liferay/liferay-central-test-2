@@ -31,7 +31,7 @@
 <c:choose>
 	<c:when test='<%= tabs2.equals("authentication") %>'>
 		<liferay-ui:tabs
-			names="general,ldap,open-id"
+			names="general,ldap,cas,open-id"
 			param="tabs3"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -171,6 +171,64 @@
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUsers('updateLdap');" />
 			</c:when>
+			<c:when test='<%= tabs3.equals("cas") %>'>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="enabled" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_AUTH_ENABLED) %>' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="import-cas-users-from-ldap" />
+
+						<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_IMPORT_FROM_LDAP) %>' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="login-url" />
+					</td>
+					<td>
+						<input class="liferay-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGIN_URL) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="logout-url" />
+					</td>
+					<td>
+						<input class="liferay-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGOUT_URL) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="service-url" />
+					</td>
+					<td>
+						<input class="liferay-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVICE_URL) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="validate-url" />
+					</td>
+					<td>
+						<input class="liferay-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_VALIDATE_URL) %>" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUsers('updateCAS');" />
+			</c:when>
 			<c:when test='<%= tabs3.equals("open-id") %>'>
 				<table class="liferay-table">
 				<tr>
@@ -178,7 +236,7 @@
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", OpenIdUtil.isEnabled(company.getCompanyId())) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_ID_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				</table>

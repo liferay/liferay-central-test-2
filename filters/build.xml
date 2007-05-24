@@ -5,7 +5,6 @@
 		<ant dir="compression" target="clean" />
 		<ant dir="doubleclick" target="clean" />
 		<ant dir="secure" target="clean" />
-		<ant dir="sso" target="clean" />
 		<ant dir="strip" target="clean" />
 	</target>
 
@@ -13,7 +12,6 @@
 		<ant dir="compression" target="compile" />
 		<ant dir="doubleclick" target="compile" />
 		<ant dir="secure" target="compile" />
-		<ant dir="sso" target="compile" />
 		<ant dir="strip" target="compile" />
 	</target>
 
@@ -21,7 +19,6 @@
 		<ant dir="compression" target="jar" />
 		<ant dir="doubleclick" target="jar" />
 		<ant dir="secure" target="jar" />
-		<ant dir="sso" target="jar" />
 		<ant dir="strip" target="jar" />
 	</target>
 
@@ -29,7 +26,6 @@
 		<ant dir="compression" target="java2html" />
 		<ant dir="doubleclick" target="java2html" />
 		<ant dir="secure" target="java2html" />
-		<ant dir="sso" target="java2html" />
 		<ant dir="strip" target="java2html" />
 	</target>
 
@@ -37,7 +33,6 @@
 		<ant dir="compression" target="javadoc" />
 		<ant dir="doubleclick" target="javadoc" />
 		<ant dir="secure" target="javadoc" />
-		<ant dir="sso" target="javadoc" />
 		<ant dir="strip" target="javadoc" />
 	</target>
 
@@ -45,7 +40,6 @@
 		<ant dir="compression" target="deploy" />
 		<ant dir="doubleclick" target="deploy" />
 		<ant dir="secure" target="deploy" />
-		<ant dir="sso" target="deploy" />
 		<ant dir="strip" target="deploy" />
 	</target>
 </project>

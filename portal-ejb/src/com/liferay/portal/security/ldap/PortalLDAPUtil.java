@@ -491,6 +491,19 @@ public class PortalLDAPUtil {
 		}
 	}
 
+	public static boolean isNtlmEnabled(long companyId) throws Exception {
+		if (!isAuthEnabled(companyId)) {
+			return false;
+		}
+
+		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.NTLM_AUTH_ENABLED)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private static void _importToLDAPGroup(
 			long companyId, LdapContext ctx, Properties groupMappings,
 			long userId, Attribute attr)
