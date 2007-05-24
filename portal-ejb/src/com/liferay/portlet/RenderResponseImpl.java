@@ -115,16 +115,23 @@ public class RenderResponseImpl implements RenderResponse {
 			PortletPreferences portletSetup =
 				PortletPreferencesFactory.getPortletSetup(
 					_req, _portletName, true, true);
-			plid =
-				GetterUtil.getLong(portletSetup.getValue(
-					"portlet-setup-link-to-plid", Long.toString(_plid)));
 
+			plid = GetterUtil.getLong(portletSetup.getValue(
+				"portlet-setup-link-to-plid", String.valueOf(_plid)));
+
+			if (plid <= 0) {
+				plid = _plid;
+			}
 		}
 		catch (PortalException e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 		catch (SystemException e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		return new PortletURLImpl(_req, portletName, plid, action);
