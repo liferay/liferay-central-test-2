@@ -60,6 +60,15 @@ public class PortletServlet extends HttpServlet {
 
 	public static final String PORTLET_CLASS_LOADER = "PORTLET_CLASS_LOADER";
 
+	public static final String PORTLET_SERVLET_CONFIG =
+		"com.liferay.portal.kernel.servlet.PortletServletConfig";
+
+	public static final String PORTLET_SERVLET_REQUEST =
+		"com.liferay.portal.kernel.servlet.PortletServletRequest";
+
+	public static final String PORTLET_SERVLET_RESPONSE =
+		"com.liferay.portal.kernel.servlet.PortletServletResponse";
+
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
@@ -73,6 +82,10 @@ public class PortletServlet extends HttpServlet {
 
 		LiferayPortletSession portletSes =
 			(LiferayPortletSession)portletReq.getPortletSession();
+
+		portletReq.setAttribute(PORTLET_SERVLET_CONFIG, getServletConfig());
+		portletReq.setAttribute(PORTLET_SERVLET_REQUEST, req);
+		portletReq.setAttribute(PORTLET_SERVLET_RESPONSE, res);
 
 		HttpSession ses = req.getSession();
 

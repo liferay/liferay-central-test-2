@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd" version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
+	<portlet>
+		<portlet-name>sample_php_portlet</portlet-name>
+		<display-name>Sample PHP Portlet</display-name>
+		<portlet-class>com.sample.php.portlet.PHPPortlet</portlet-class>
+		<init-param>
+			<name>view-uri</name>
+			<value>/index.php</value>
+		</init-param>
+		<init-param>
+			<name>add-portlet-params</name>
+			<value>true</value>
+		</init-param>
+		<!--
+		<init-param>
+			<name>script-encoding</name>
+			<value></value>
+		</init-param>
+		<init-param>
+			<name>php-ini-file</name>
+			<value></value>
+		</init-param>
+		<init-param>
+			<name>php-version</name>
+			<value></value>
+		</init-param>
+		<init-param>
+			<name>mysql-version</name>
+			<value></value>
+		</init-param>
+		<init-param>
+			<name>compile</name>
+			<value></value>
+		</init-param>
+		<init-param>
+			<name>database</name>
+			<value></value>
+		</init-param>
+		-->
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Sample PHP Portlet</title>
+			<short-title>Sample PHP Portlet</short-title>
+			<keywords>Sample PHP Portlet</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+</portlet-app>
