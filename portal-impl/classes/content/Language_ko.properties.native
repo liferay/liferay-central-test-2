@@ -1577,6 +1577,7 @@ notes=주
 notify-by=곁에 통지하십시요
 notify-new-users=새로운 사용자를 통지하십시요
 notify=통지하십시요
+ntlm-enabled=NTLM은 가능하게 했다
 ntlm=NTLM
 num-of-articles-per-selection=# 선택에 의하여 기사의
 num-of-categories=#종류의

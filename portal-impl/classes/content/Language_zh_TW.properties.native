@@ -1578,6 +1578,7 @@ notes=筆記
 notify-by=通報
 notify-new-users=通知新用戶
 notify=通報
+ntlm-enabled=NTLM 使能
 ntlm=NTLM
 num-of-articles-per-selection=# 文章每選擇
 num-of-categories=# 類別

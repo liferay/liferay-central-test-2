@@ -73,8 +73,18 @@ public class NtlmFilter extends NtlmHttpFilter {
 				String domainController = PrefsPropsUtil.getString(
 					companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
 
+				// Remove leading ldap://
+
 				domainController = domainController.substring(
-					7, domainController.lastIndexOf(":"));
+					7, domainController.length());
+
+				// Remove port
+
+				int pos = domainController.lastIndexOf(StringPool.COLON);
+
+				if (pos != -1) {
+					domainController = domainController.substring(0, pos);
+				}
 
 				Config.setProperty(
 					"jcifs.http.domainController", domainController);
@@ -92,7 +102,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 				String remoteUser = ntlm.getName();
 
-				int pos = remoteUser.indexOf(StringPool.BACK_SLASH);
+				pos = remoteUser.indexOf(StringPool.BACK_SLASH);
 
 				if (pos != -1) {
 					remoteUser = remoteUser.substring(pos + 1);

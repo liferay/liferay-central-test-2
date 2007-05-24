@@ -25,7 +25,6 @@ package com.sample.php.portlet;
 import com.caucho.quercus.servlet.QuercusServlet;
 
 import com.liferay.portal.kernel.servlet.PortletServlet;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
@@ -106,7 +105,6 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
-
 	public void destroy() {
 		if (_quercusServlet != null) {
 			_quercusServlet.destroy();
@@ -133,7 +131,7 @@ public class PHPPortlet extends GenericPortlet {
 			PHPServletRequest phpReq =
 				new PHPServletRequest(
 					httpReq, req, res, getPortletConfig(), config, phpURI);
-			
+
 			StringServletResponse phpRes =
 				new StringServletResponse(httpRes);
 

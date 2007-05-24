@@ -1578,6 +1578,7 @@ notes=Notas
 notify-by=Notificado por
 notify-new-users=Notificar a los nuevos usuarios
 notify=Notificar
+ntlm-enabled=NTLM Permitió
 ntlm=NTLM
 num-of-articles-per-selection=Número de artículos por selección
 num-of-categories=Número de categorías

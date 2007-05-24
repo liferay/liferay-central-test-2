@@ -76,6 +76,16 @@ public class DynamicDialect extends Dialect {
 					"Determining dialect for " + dbName + " " + dbMajorVersion);
 			}
 
+			if (dbName.startsWith(PortalCustomSQLUtil.HYPERSONIC)) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Liferay is configured to use Hypersonic as its " +
+							"database. Do NOT use Hypersonic in production. " +
+								"Hypersonic is an embedded database useful " +
+									"for development and demo'ing purposes.");
+				}
+			}
+
 			_dialect = DialectFactory.determineDialect(dbName, dbMajorVersion);
 
 			if (_log.isInfoEnabled()) {

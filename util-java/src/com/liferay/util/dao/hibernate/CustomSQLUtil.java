@@ -65,6 +65,8 @@ public abstract class CustomSQLUtil {
 	public static final String DB2_FUNCTION_IS_NOT_NULL =
 		"CAST(? AS VARCHAR(32672)) IS NOT NULL";
 
+	public static final String HYPERSONIC = "HSQL";
+
 	public static final String MYSQL = "MySQL";
 
 	public static final String MYSQL_FUNCTION_IS_NULL = "IFNULL(?, '1') = '1'";
@@ -108,6 +110,10 @@ public abstract class CustomSQLUtil {
 
 				String dbName = GetterUtil.getString(
 					metaData.getDatabaseProductName());
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Database name " + dbName);
+				}
 
 				if (dbName.startsWith(DB2)) {
 					_vendorDB2 = true;

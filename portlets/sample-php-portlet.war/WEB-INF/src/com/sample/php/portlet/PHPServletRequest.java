@@ -23,18 +23,20 @@
 package com.sample.php.portlet;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Validator;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
+
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.portlet.PortletConfig;
-import java.util.Map;
-import java.util.Enumeration;
-import java.util.HashMap;
 
 /**
  * <a href="PHPServletRequest.java.html"><b><i>View Source</i></b></a>

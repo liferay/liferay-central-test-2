@@ -1578,6 +1578,7 @@ notes=Notities
 notify-by=Op de hoogte houden middels
 notify-new-users=Breng nieuwe gebruikers op de hoogte
 notify=Op de hoogte houden
+ntlm-enabled=Toegelaten NTLM
 ntlm=NTLM
 num-of-articles-per-selection=aantal artikelen per selectie
 num-of-categories=aantal categorie�n

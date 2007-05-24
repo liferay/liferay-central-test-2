@@ -1576,6 +1576,7 @@ notes=ノート
 notify-by=知らせなさい
 notify-new-users=新しいユーザーを知らせなさい
 notify=知らせなさい
+ntlm-enabled=NTLM は可能になった
 ntlm=NTLM
 num-of-articles-per-selection=# 1 選択毎の記事数の
 num-of-categories=# 部門の

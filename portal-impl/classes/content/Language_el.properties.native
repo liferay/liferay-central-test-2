@@ -1577,6 +1577,7 @@ notes=Σημειώσεις
 notify-by=Ειδοποίηση Από
 notify-new-users=Ειδοποιήστε τους νέους χρήστες
 notify=Ειδοποιήστε
+ntlm-enabled=NTLM που επιτρέπεται
 ntlm=NTLM
 num-of-articles-per-selection=# Άρθρων ανά Επιλογή
 num-of-categories=# των κατηγοριών

@@ -1578,6 +1578,7 @@ notes=Notizen
 notify-by=Benachrichtigen bis zum:
 notify-new-users=Neue Nutzer benachrichtigen
 notify=Benachrichtigen
+ntlm-enabled=NTLM Ermöglicht
 ntlm=NTLM
 num-of-articles-per-selection=Anzahl der Artikel pro Auswahl
 num-of-categories=Anzahl der Kategorien
