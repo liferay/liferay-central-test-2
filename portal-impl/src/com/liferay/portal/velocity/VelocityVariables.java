@@ -178,7 +178,7 @@ public class VelocityVariables {
 				"init",
 				themeDisplay.getPathContext() +
 					VelocityResourceListener.SERVLET_SEPARATOR +
-						"/html/themes/_common/templates/init.vm");
+						"/html/themes/_unstyled/templates/init.vm");
 		}
 
 		// Tiles attributes

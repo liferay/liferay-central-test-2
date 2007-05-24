@@ -22,7 +22,7 @@
 	<target name="clean-themes">
 		<for param="module.name">
 			<path>
-				<dirset dir="docroot/html/themes" excludes="_common" includes="*" />
+				<dirset dir="docroot/html/themes" excludes="_styled,_unstyled" includes="*" />
 			</path>
 			<sequential>
 				<delete includeemptydirs="true" quiet="true" failonerror="false">
@@ -374,7 +374,11 @@
 		<for param="css.file">
 			<path>
 				<fileset
-					dir="docroot/html/themes/_common/css"
+					dir="docroot/html/themes/_styled/css"
+					excludes="custom.css,main.css"
+				/>
+				<fileset
+					dir="docroot/html/themes/_unstyled/css"
 					excludes="custom.css,main.css"
 				/>
 				<fileset
@@ -521,13 +525,19 @@
 	<target name="build-themes">
 		<for param="module.name">
 			<path>
-				<dirset dir="docroot/html/themes" excludes="_common" includes="*" />
+				<dirset dir="docroot/html/themes" excludes="_styled,_unstyled" includes="*" />
 			</path>
 			<sequential>
 				<copy todir="@{module.name}">
 					<fileset
-						dir="docroot/html/themes/_common"
+						dir="docroot/html/themes/_unstyled"
 						excludes="templates/init.vm"
+					/>
+				</copy>
+
+				<copy todir="@{module.name}">
+					<fileset
+						dir="docroot/html/themes/_styled"
 					/>
 				</copy>
 

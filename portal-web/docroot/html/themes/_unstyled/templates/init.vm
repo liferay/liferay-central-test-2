@@ -25,6 +25,8 @@
 #set ( $company_id = $company.getCompanyId() )
 #set ( $company_name = $company.getName() )
 #set ( $company_logo = $theme_display.getCompanyLogo() )
+#set ( $company_logo_height = $theme_display.getCompanyLogoHeight() )
+#set ( $company_logo_width = $theme_display.getCompanyLogoWidth() )
 #set ( $company_url = $theme_display.getURLHome() )
 
 #set ( $user_id = $user.getUserId() )
@@ -46,6 +48,8 @@
 #set ( $user_group = $user.getGroup() )
 #set ( $user_organization = $user.getOrganization() )
 #set ( $user_location = $user.getLocation() )
+
+#set ( $is_signed_in = $theme_display.isSignedIn() )
 
 ## ---------- URLs ---------- ##
 
@@ -142,6 +146,10 @@
 	#set ( $nav_items = $navItems )
 	#set ( $has_navigation = ($nav_items && $nav_items.size() > 0) )
 #end
+
+## ---------- My places ---------- ##
+
+#set ( $my_places_text = $languageUtil.get($company_id, $locale, "my-places") )
 
 ## ---------- Includes ---------- ##
 

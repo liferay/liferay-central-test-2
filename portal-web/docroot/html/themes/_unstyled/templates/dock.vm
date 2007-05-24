@@ -43,6 +43,12 @@
 			</li>
 		#end
 
-		$theme.myPlaces()
+		#if ( $is_signed_in )
+			<li class="my-places">
+				<a>$my_places_text</a>
+
+				$theme.myPlaces()
+			</li>
+		#end
 	</ul>
 </div>
