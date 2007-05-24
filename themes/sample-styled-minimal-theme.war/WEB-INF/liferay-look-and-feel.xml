@@ -5,5 +5,5 @@
 	<compatibility>
 		<version>4.2.0</version>
 	</compatibility>
-	<theme id="styled-minimal" name="Styled Minimal" />
+	<theme id="sample-styled-minimal" name="Sample Styled Minimal" />
 </look-and-feel>

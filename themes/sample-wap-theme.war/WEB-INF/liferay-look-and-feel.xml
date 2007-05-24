@@ -5,7 +5,7 @@
 	<compatibility>
 		<version>4.2.0</version>
 	</compatibility>
-	<theme id="base-wap" name="Base WAP">
+	<theme id="sample-wap" name="Sample WAP">
 		<wap-theme>true</wap-theme>
 	</theme>
 </look-and-feel>

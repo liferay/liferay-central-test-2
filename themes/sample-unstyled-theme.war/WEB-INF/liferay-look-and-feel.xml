@@ -5,5 +5,5 @@
 	<compatibility>
 		<version>4.2.0</version>
 	</compatibility>
-	<theme id="unstyled" name="Unstyled" />
+	<theme id="sample-unstyled" name="Sample Unstyled" />
 </look-and-feel>

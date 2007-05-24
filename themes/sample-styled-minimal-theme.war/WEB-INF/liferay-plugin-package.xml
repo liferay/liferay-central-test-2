@@ -11,7 +11,8 @@
 		<tag>sample</tag>
 	</tags>
 	<short-description>
-		This is a styled theme with minimal configuration set in liferay-look-and-feel.xml.
+		This is a sample styled theme with minimal configuration set in
+		liferay-look-and-feel.xml.
 	</short-description>
 	<change-log>
 		Adapted to the latest version of Liferay.
