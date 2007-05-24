@@ -17,11 +17,11 @@
 			<fileset dir="${project.dir}/ext-impl/classes" />
 		</copy>
 
-		<unjar src="${project.dir}/ext-ear/modules/counter-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/documentlibrary-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/lock-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/mail-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/portal-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/modules/counter-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/modules/documentlibrary-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/modules/lock-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/modules/mail-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/modules/portal-impl.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/global/portal-kernel.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/global/portal-service.jar" dest="${classpath.jsp}" />
@@ -30,7 +30,6 @@
 		<unjar src="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/development/activation.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/development/ejb.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/development/mail.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/global/portlet.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/alfresco-client.jar" dest="${classpath.jsp}" />
@@ -217,15 +216,13 @@
 		<war
 			basedir="tmp"
 			destfile="${war.file}.war"
-			excludes="WEB-INF/web.xml"
-			webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
+			excludes="WEB-INF/web.xml,WEB-INF/web.xml.original"
+			webxml="tmp/WEB-INF/web.xml"
 		/>
 	</target>
 
-	<target name="deploy" depends="war">
-		<antcall target="deploy-war">
-			<param name="modules.dir" value="" />
-		</antcall>
+	<target name="deploy" depends="merge">
+		<antcall target="deploy-war" />
 
 		<if>
 			<equals arg1="${jsp.precompile}" arg2="on" />
@@ -348,11 +345,24 @@
 		</if>
 	</target>
 
+	<target name="build-webxml">
+		<java
+			classname="com.liferay.portal.tools.WebXMLBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="tmp/WEB-INF/web.xml.original" />
+			<arg value="docroot/WEB-INF/web.xml" />
+			<arg value="tmp/WEB-INF/web.xml" />
+		</java>
+	</target>
+
 	<target name="merge">
 		<if>
 			<not>
 				<uptodate
-					srcfile="${project.dir}/ext-ear/modules/portal-web.war"
+					srcfile="${project.dir}/modules/portal-web.war"
 					targetfile="tmp"
 				/>
 			</not>
@@ -362,7 +372,7 @@
 
 				<unjar
 					dest="tmp"
-					src="${project.dir}/ext-ear/modules/portal-web.war"
+					src="${project.dir}/modules/portal-web.war"
 				/>
 
 				<copy todir="tmp" overwrite="true">
@@ -371,6 +381,11 @@
 						excludes="**/struts-config.xml,**/tiles-defs.xml,**/web.xml"
 					/>
 				</copy>
+
+				<copy
+					file="tmp/WEB-INF/web.xml"
+					tofile="tmp/WEB-INF/web.xml.original"
+				/>
 			</then>
 		</if>
 
@@ -391,10 +406,6 @@
 			tofile="tmp/WEB-INF/tiles-defs-ext.xml"
 		/>
 
-		<copy
-			file="docroot/WEB-INF/web.xml"
-			tofile="tmp/WEB-INF/web.xml"
-			overwrite="true"
-		/>
+		<antcall target="build-webxml" />
 	</target>
 </project>

@@ -5,7 +5,6 @@
 
 	<target name="clean">
 		<ant dir="ext-service" target="clean" inheritAll="false" />
-		<ant dir="ext-ear" target="clean" inheritAll="false" />
 		<ant dir="ext-impl" target="clean" inheritAll="false" />
 		<ant dir="ext-web" target="clean" inheritAll="false" />
 
@@ -129,9 +128,9 @@
 		</if>
 
 		<ant dir="ext-service" target="deploy" inheritAll="false" />
-		<ant dir="ext-ear" target="deploy" inheritAll="false" />
 		<ant dir="ext-impl" target="deploy" inheritAll="false" />
 		<ant dir="ext-web" target="deploy" inheritAll="false" />
+		<ant dir="modules" target="deploy" inheritAll="false" />
 
 		<ant dir="layouttpl" target="deploy" inheritAll="false" />
 		<ant dir="portlets" target="deploy" inheritAll="false" />

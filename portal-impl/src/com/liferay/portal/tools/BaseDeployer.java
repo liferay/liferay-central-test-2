@@ -579,35 +579,6 @@ public class BaseDeployer {
 		System.out.println("  Adding Geronimo " + geronimoWebXML);
 	}
 
-	protected String organizeWebXML(String webXML) throws Exception {
-		webXML = Html.stripComments(webXML);
-
-		double version = 2.3;
-
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new StringReader(webXML));
-
-		Element root = doc.getRootElement();
-
-		version = GetterUtil.getDouble(root.attributeValue("version"), version);
-
-		XMLMerger merger = null;
-
-		if (version == 2.3) {
-			merger = new XMLMerger(new WebXML23Descriptor());
-		}
-		else {
-			merger = new XMLMerger(new WebXML24Descriptor());
-		}
-
-		merger.organizeXML(doc);
-
-		webXML = XMLFormatter.toString(doc);
-
-		return webXML;
-	}
-
 	protected void updateWebXML(
 			File webXML, File srcFile, String displayName)
 		throws Exception {
@@ -659,7 +630,7 @@ public class BaseDeployer {
 			newContent, "com.liferay.portal.shared.",
 			"com.liferay.portal.kernel.");
 
-		newContent = organizeWebXML(newContent);
+		newContent = WebXMLBuilder.organizeWebXML(newContent);
 
 		FileUtil.write(webXML, newContent, true);
 

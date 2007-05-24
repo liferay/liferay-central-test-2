@@ -38,7 +38,7 @@
 
 	<path id="web.classpath">
 		<pathelement location="${project.dir}/ext-service/classes" />
-		<fileset dir="${project.dir}/lib/development" includes="ejb.jar,mail.jar,servlet.jar" />
+		<fileset dir="${project.dir}/lib/development" includes="mail.jar,servlet.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<path refid="web-lib.classpath" />
 	</path>
@@ -81,14 +81,14 @@
 		</then>
 	</if>
 
-	<target name="deploy-ejb-jar">
+	<target name="deploy-impl-jar">
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
-				<unjar src="${modules.dir}${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
+				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 
 				<copy
 					file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
@@ -102,11 +102,11 @@
 					<equals arg1="${app.server.type}" arg2="pramati" />
 				</or>
 				<then>
-					<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.portal.dir}" />
+					<copy file="${jar.file}.jar" todir="${app.server.portal.dir}" />
 				</then>
 			</elseif>
 			<else>
-				<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
+				<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
 			</else>
 		</if>
 	</target>
@@ -169,7 +169,7 @@
 				<if>
 					<equals arg1="${war.file}" arg2="ext-web" />
 					<then>
-						<copy file="${modules.dir}${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
+						<copy file="${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
 
 						<war
 							basedir="${project.dir}/web-sites/liferay.com-web/docroot"
@@ -180,7 +180,7 @@
 						/>
 					</then>
 					<else>
-						<copy file="${modules.dir}${war.file}.war" todir="${app.server.portal.dir}" />
+						<copy file="${war.file}.war" todir="${app.server.portal.dir}" />
 					</else>
 				</if>
 			</then>
@@ -192,15 +192,24 @@
 					</then>
 				</if>
 
-				<unwar src="${modules.dir}${war.file}.war" dest="${war.file.dest}" />
-
 				<if>
-					<equals arg1="${war.file}" arg2="ext-web" />
+					<available file="tmp" type="dir" />
 					<then>
-						<copy todir="${war.file.dest}" overwrite="yes">
-							<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" />
+						<copy todir="${war.file.dest}">
+							<fileset dir="tmp" />
 						</copy>
 					</then>
+					<elseif>
+						<available file="docroot" type="dir" />
+						<then>
+							<copy todir="${war.file.dest}">
+								<fileset dir="docroot" />
+							</copy>
+						</then>
+					</elseif>
+					<else>
+						<unwar src="${war.file}.war" dest="${war.file.dest}" />
+					</else>
 				</if>
 			</else>
 		</if>
@@ -239,7 +248,7 @@
 						<mkdir dir="${tstamp.value}" />
 
 						<unjar
-							src="${modules.dir}${war.file}.war"
+							src="${war.file}.war"
 							dest="${tstamp.value}"
 						>
 							<patternset>

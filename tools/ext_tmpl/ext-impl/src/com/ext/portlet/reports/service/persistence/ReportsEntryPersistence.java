@@ -1,636 +1,120 @@
 package com.ext.portlet.reports.service.persistence;
 
-import com.ext.portlet.reports.NoSuchEntryException;
-import com.ext.portlet.reports.model.ReportsEntry;
-import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
+public interface ReportsEntryPersistence {
+    public com.ext.portlet.reports.model.ReportsEntry create(
+        java.lang.String entryId);
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.persistence.BasePersistence;
+    public com.ext.portlet.reports.model.ReportsEntry remove(
+        java.lang.String entryId)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import java.util.Iterator;
-import java.util.List;
-
-
-public class ReportsEntryPersistence extends BasePersistence {
-    private static Log _log = LogFactory.getLog(ReportsEntryPersistence.class);
-
-    public ReportsEntry create(String entryId) {
-        ReportsEntry reportsEntry = new ReportsEntryImpl();
-        reportsEntry.setNew(true);
-        reportsEntry.setPrimaryKey(entryId);
-
-        return reportsEntry;
-    }
-
-    public ReportsEntry remove(String entryId)
-        throws NoSuchEntryException, SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            ReportsEntry reportsEntry = (ReportsEntry) session.get(ReportsEntryImpl.class,
-                    entryId);
-
-            if (reportsEntry == null) {
-                if (_log.isWarnEnabled()) {
-                    _log.warn("No ReportsEntry exists with the primary key " +
-                        entryId);
-                }
-
-                throw new NoSuchEntryException(
-                    "No ReportsEntry exists with the primary key " + entryId);
-            }
-
-            return remove(reportsEntry);
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public ReportsEntry remove(ReportsEntry reportsEntry)
-        throws SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-            session.delete(reportsEntry);
-            session.flush();
-
-            return reportsEntry;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
+    public com.ext.portlet.reports.model.ReportsEntry remove(
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry)
+        throws com.liferay.portal.SystemException;
 
     public com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
-        throws SystemException {
-        return update(reportsEntry, false);
-    }
+        throws com.liferay.portal.SystemException;
 
     public com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry,
-        boolean saveOrUpdate) throws SystemException {
-        Session session = null;
+        boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
-        try {
-            session = openSession();
+    public com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
+        java.lang.String entryId)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-            if (saveOrUpdate) {
-                session.saveOrUpdate(reportsEntry);
-            } else {
-                if (reportsEntry.isNew()) {
-                    session.save(reportsEntry);
-                }
-            }
+    public com.ext.portlet.reports.model.ReportsEntry fetchByPrimaryKey(
+        java.lang.String entryId) throws com.liferay.portal.SystemException;
 
-            session.flush();
-            reportsEntry.setNew(false);
+    public java.util.List findByCompanyId(java.lang.String companyId)
+        throws com.liferay.portal.SystemException;
 
-            return reportsEntry;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
+    public java.util.List findByCompanyId(java.lang.String companyId,
+        int begin, int end) throws com.liferay.portal.SystemException;
 
-    public ReportsEntry findByPrimaryKey(String entryId)
-        throws NoSuchEntryException, SystemException {
-        ReportsEntry reportsEntry = fetchByPrimaryKey(entryId);
+    public java.util.List findByCompanyId(java.lang.String companyId,
+        int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException;
 
-        if (reportsEntry == null) {
-            if (_log.isWarnEnabled()) {
-                _log.warn("No ReportsEntry exists with the primary key " +
-                    entryId);
-            }
+    public com.ext.portlet.reports.model.ReportsEntry findByCompanyId_First(
+        java.lang.String companyId,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-            throw new NoSuchEntryException(
-                "No ReportsEntry exists with the primary key " + entryId);
-        }
+    public com.ext.portlet.reports.model.ReportsEntry findByCompanyId_Last(
+        java.lang.String companyId,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-        return reportsEntry;
-    }
+    public com.ext.portlet.reports.model.ReportsEntry[] findByCompanyId_PrevAndNext(
+        java.lang.String entryId, java.lang.String companyId,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-    public ReportsEntry fetchByPrimaryKey(String entryId)
-        throws SystemException {
-        Session session = null;
+    public java.util.List findByUserId(java.lang.String userId)
+        throws com.liferay.portal.SystemException;
 
-        try {
-            session = openSession();
+    public java.util.List findByUserId(java.lang.String userId, int begin,
+        int end) throws com.liferay.portal.SystemException;
 
-            return (ReportsEntry) session.get(ReportsEntryImpl.class, entryId);
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
+    public java.util.List findByUserId(java.lang.String userId, int begin,
+        int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException;
 
-    public List findByCompanyId(String companyId) throws SystemException {
-        Session session = null;
+    public com.ext.portlet.reports.model.ReportsEntry findByUserId_First(
+        java.lang.String userId,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-        try {
-            session = openSession();
+    public com.ext.portlet.reports.model.ReportsEntry findByUserId_Last(
+        java.lang.String userId,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+    public com.ext.portlet.reports.model.ReportsEntry[] findByUserId_PrevAndNext(
+        java.lang.String entryId, java.lang.String userId,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException, 
+            com.ext.portlet.reports.NoSuchEntryException;
 
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
-            }
+    public java.util.List findWithDynamicQuery(
+        com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+        throws com.liferay.portal.SystemException;
 
-            query.append(" ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
+    public java.util.List findWithDynamicQuery(
+        com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+        int begin, int end) throws com.liferay.portal.SystemException;
 
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
+    public java.util.List findAll() throws com.liferay.portal.SystemException;
 
-            int queryPos = 0;
+    public java.util.List findAll(int begin, int end)
+        throws com.liferay.portal.SystemException;
 
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
+    public java.util.List findAll(int begin, int end,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
+        throws com.liferay.portal.SystemException;
 
-            return q.list();
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
+    public void removeByCompanyId(java.lang.String companyId)
+        throws com.liferay.portal.SystemException;
 
-    public List findByCompanyId(String companyId, int begin, int end)
-        throws SystemException {
-        return findByCompanyId(companyId, begin, end, null);
-    }
+    public void removeByUserId(java.lang.String userId)
+        throws com.liferay.portal.SystemException;
 
-    public List findByCompanyId(String companyId, int begin, int end,
-        OrderByComparator obc) throws SystemException {
-        Session session = null;
+    public void removeAll() throws com.liferay.portal.SystemException;
 
-        try {
-            session = openSession();
+    public int countByCompanyId(java.lang.String companyId)
+        throws com.liferay.portal.SystemException;
 
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+    public int countByUserId(java.lang.String userId)
+        throws com.liferay.portal.SystemException;
 
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
-            }
-
-            query.append(" ");
-
-            if (obc != null) {
-                query.append("ORDER BY " + obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            return QueryUtil.list(q, getDialect(), begin, end);
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public ReportsEntry findByCompanyId_First(String companyId,
-        OrderByComparator obc) throws NoSuchEntryException, SystemException {
-        List list = findByCompanyId(companyId, 0, 1, obc);
-
-        if (list.size() == 0) {
-            String msg = "No ReportsEntry exists with the key ";
-            msg += StringPool.OPEN_CURLY_BRACE;
-            msg += "companyId=";
-            msg += companyId;
-            msg += StringPool.CLOSE_CURLY_BRACE;
-            throw new NoSuchEntryException(msg);
-        } else {
-            return (ReportsEntry) list.get(0);
-        }
-    }
-
-    public ReportsEntry findByCompanyId_Last(String companyId,
-        OrderByComparator obc) throws NoSuchEntryException, SystemException {
-        int count = countByCompanyId(companyId);
-        List list = findByCompanyId(companyId, count - 1, count, obc);
-
-        if (list.size() == 0) {
-            String msg = "No ReportsEntry exists with the key ";
-            msg += StringPool.OPEN_CURLY_BRACE;
-            msg += "companyId=";
-            msg += companyId;
-            msg += StringPool.CLOSE_CURLY_BRACE;
-            throw new NoSuchEntryException(msg);
-        } else {
-            return (ReportsEntry) list.get(0);
-        }
-    }
-
-    public ReportsEntry[] findByCompanyId_PrevAndNext(String entryId,
-        String companyId, OrderByComparator obc)
-        throws NoSuchEntryException, SystemException {
-        ReportsEntry reportsEntry = findByPrimaryKey(entryId);
-        int count = countByCompanyId(companyId);
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
-            }
-
-            query.append(" ");
-
-            if (obc != null) {
-                query.append("ORDER BY " + obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-                    reportsEntry);
-            ReportsEntry[] array = new ReportsEntryImpl[3];
-            array[0] = (ReportsEntry) objArray[0];
-            array[1] = (ReportsEntry) objArray[1];
-            array[2] = (ReportsEntry) objArray[2];
-
-            return array;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public List findByUserId(String userId) throws SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
-            }
-
-            query.append(" ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            return q.list();
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public List findByUserId(String userId, int begin, int end)
-        throws SystemException {
-        return findByUserId(userId, begin, end, null);
-    }
-
-    public List findByUserId(String userId, int begin, int end,
-        OrderByComparator obc) throws SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
-            }
-
-            query.append(" ");
-
-            if (obc != null) {
-                query.append("ORDER BY " + obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            return QueryUtil.list(q, getDialect(), begin, end);
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public ReportsEntry findByUserId_First(String userId, OrderByComparator obc)
-        throws NoSuchEntryException, SystemException {
-        List list = findByUserId(userId, 0, 1, obc);
-
-        if (list.size() == 0) {
-            String msg = "No ReportsEntry exists with the key ";
-            msg += StringPool.OPEN_CURLY_BRACE;
-            msg += "userId=";
-            msg += userId;
-            msg += StringPool.CLOSE_CURLY_BRACE;
-            throw new NoSuchEntryException(msg);
-        } else {
-            return (ReportsEntry) list.get(0);
-        }
-    }
-
-    public ReportsEntry findByUserId_Last(String userId, OrderByComparator obc)
-        throws NoSuchEntryException, SystemException {
-        int count = countByUserId(userId);
-        List list = findByUserId(userId, count - 1, count, obc);
-
-        if (list.size() == 0) {
-            String msg = "No ReportsEntry exists with the key ";
-            msg += StringPool.OPEN_CURLY_BRACE;
-            msg += "userId=";
-            msg += userId;
-            msg += StringPool.CLOSE_CURLY_BRACE;
-            throw new NoSuchEntryException(msg);
-        } else {
-            return (ReportsEntry) list.get(0);
-        }
-    }
-
-    public ReportsEntry[] findByUserId_PrevAndNext(String entryId,
-        String userId, OrderByComparator obc)
-        throws NoSuchEntryException, SystemException {
-        ReportsEntry reportsEntry = findByPrimaryKey(entryId);
-        int count = countByUserId(userId);
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
-            }
-
-            query.append(" ");
-
-            if (obc != null) {
-                query.append("ORDER BY " + obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-                    reportsEntry);
-            ReportsEntry[] array = new ReportsEntryImpl[3];
-            array[0] = (ReportsEntry) objArray[0];
-            array[1] = (ReportsEntry) objArray[1];
-            array[2] = (ReportsEntry) objArray[2];
-
-            return array;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public List findAll() throws SystemException {
-        return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-    }
-
-    public List findAll(int begin, int end) throws SystemException {
-        return findAll(begin, end, null);
-    }
-
-    public List findAll(int begin, int end, OrderByComparator obc)
-        throws SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
-
-            if (obc != null) {
-                query.append("ORDER BY " + obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            return QueryUtil.list(q, getDialect(), begin, end);
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public void removeByCompanyId(String companyId) throws SystemException {
-        Iterator itr = findByCompanyId(companyId).iterator();
-
-        while (itr.hasNext()) {
-            ReportsEntry reportsEntry = (ReportsEntry) itr.next();
-            remove(reportsEntry);
-        }
-    }
-
-    public void removeByUserId(String userId) throws SystemException {
-        Iterator itr = findByUserId(userId).iterator();
-
-        while (itr.hasNext()) {
-            ReportsEntry reportsEntry = (ReportsEntry) itr.next();
-            remove(reportsEntry);
-        }
-    }
-
-    public int countByCompanyId(String companyId) throws SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append("SELECT COUNT(*) ");
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
-            }
-
-            query.append(" ");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            Iterator itr = q.list().iterator();
-
-            if (itr.hasNext()) {
-                Long count = (Long) itr.next();
-
-                if (count != null) {
-                    return count.intValue();
-                }
-            }
-
-            return 0;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    public int countByUserId(String userId) throws SystemException {
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            StringBuffer query = new StringBuffer();
-            query.append("SELECT COUNT(*) ");
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
-
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
-            }
-
-            query.append(" ");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            Iterator itr = q.list().iterator();
-
-            if (itr.hasNext()) {
-                Long count = (Long) itr.next();
-
-                if (count != null) {
-                    return count.intValue();
-                }
-            }
-
-            return 0;
-        } catch (HibernateException he) {
-            throw new SystemException(he);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    protected void initDao() {
-    }
+    public int countAll() throws com.liferay.portal.SystemException;
 }

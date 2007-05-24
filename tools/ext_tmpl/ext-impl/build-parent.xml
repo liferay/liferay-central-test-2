@@ -85,9 +85,7 @@
 
 		<antcall target="deploy-properties" />
 
-		<antcall target="deploy-ejb-jar">
-			<param name="modules.dir" value="" />
-		</antcall>
+		<antcall target="deploy-impl-jar" />
 	</target>
 
 	<target name="deploy-properties">

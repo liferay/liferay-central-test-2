@@ -677,7 +677,7 @@ auto.deploy.dest.dir=../webapps</echo>
 	</target>
 
 	<target name="build-ext">
-		<available file="${lp.ext.dir}/ext-ear" type="dir" property="lp.ext.dir.available" />
+		<available file="${lp.ext.dir}/modules" type="dir" property="lp.ext.dir.available" />
 
 		<antcall target="build-ext-dir" />
 
@@ -712,18 +712,6 @@ auto.deploy.dest.dir=../webapps</echo>
 
 		<mkdir dir="${lp.ext.dir}/downloads" />
 
-		<copy todir="${lp.ext.dir}/ext-ear/modules" overwrite="yes">
-			<fileset dir="${project.dir}/counter-impl" includes="counter-impl.jar" />
-			<fileset dir="${project.dir}/documentlibrary-impl" includes="documentlibrary-impl.jar" />
-			<fileset dir="${project.dir}/lock-impl" includes="lock-impl.jar" />
-			<fileset dir="${project.dir}/mail-impl" includes="mail-impl.jar" />
-			<fileset dir="${project.dir}/portal-impl" includes="portal-impl.jar" />
-			<fileset dir="${project.dir}/cms-web" includes="cms-web.war" />
-			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
-			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
-			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
-		</copy>
-
 		<mkdir dir="${lp.ext.dir}/ext-lib" />
 		<mkdir dir="${lp.ext.dir}/ext-lib/development" />
 		<mkdir dir="${lp.ext.dir}/ext-lib/global" />
@@ -755,7 +743,20 @@ auto.deploy.dest.dir=../webapps</echo>
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
 			<fileset dir="${project.dir}/util-bridges" includes="util-bridges.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
+			<fileset dir="${project.dir}/util-taglib" includes="util-taglib.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
+		</copy>
+
+		<copy todir="${lp.ext.dir}/modules" overwrite="yes">
+			<fileset dir="${project.dir}/counter-impl" includes="counter-impl.jar" />
+			<fileset dir="${project.dir}/documentlibrary-impl" includes="documentlibrary-impl.jar" />
+			<fileset dir="${project.dir}/lock-impl" includes="lock-impl.jar" />
+			<fileset dir="${project.dir}/mail-impl" includes="mail-impl.jar" />
+			<fileset dir="${project.dir}/portal-impl" includes="portal-impl.jar" />
+			<fileset dir="${project.dir}/cms-web" includes="cms-web.war" />
+			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
+			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
+			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
 		</copy>
 
 		<mkdir dir="${lp.ext.dir}/servers/geronimo-jetty" />

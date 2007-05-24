@@ -208,6 +208,19 @@ public class ReportsEntryUtil {
         return getPersistence().findByUserId_PrevAndNext(entryId, userId, obc);
     }
 
+    public static java.util.List findWithDynamicQuery(
+        com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+        throws com.liferay.portal.SystemException {
+        return getPersistence().findWithDynamicQuery(queryInitializer);
+    }
+
+    public static java.util.List findWithDynamicQuery(
+        com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+        int begin, int end) throws com.liferay.portal.SystemException {
+        return getPersistence().findWithDynamicQuery(queryInitializer, begin,
+            end);
+    }
+
     public static java.util.List findAll()
         throws com.liferay.portal.SystemException {
         return getPersistence().findAll();
@@ -234,6 +247,10 @@ public class ReportsEntryUtil {
         getPersistence().removeByUserId(userId);
     }
 
+    public static void removeAll() throws com.liferay.portal.SystemException {
+        getPersistence().removeAll();
+    }
+
     public static int countByCompanyId(java.lang.String companyId)
         throws com.liferay.portal.SystemException {
         return getPersistence().countByCompanyId(companyId);
@@ -244,8 +261,8 @@ public class ReportsEntryUtil {
         return getPersistence().countByUserId(userId);
     }
 
-    public static void initDao() {
-        getPersistence().initDao();
+    public static int countAll() throws com.liferay.portal.SystemException {
+        return getPersistence().countAll();
     }
 
     public static ReportsEntryPersistence getPersistence() {
