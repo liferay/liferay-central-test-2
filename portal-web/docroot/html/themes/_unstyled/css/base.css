@@ -1,0 +1,191 @@
+/* This CSS sets the default styles for the base components. */
+
+/* ---------- Browser normalization ---------- */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset, img {
+	border: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+caption, th {
+	text-align: left;
+}
+
+q:before, q:after {
+	content: '';
+}
+
+abbr, acronym {
+	border: 0;
+}
+
+body {
+	font: 62.5%/1.6em 'Tahoma','Lucida Sans Unicode','Lucida Grande','Lucida',Arial,Verdana,sans-serif;
+}
+
+html, body {
+	height: 100%;
+}
+
+/* ---------- Links ---------- */
+
+a {
+}
+
+a:hover {
+}
+
+a:visited {
+}
+
+/* ---------- Headers ---------- */
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+h5 {
+}
+
+h6 {
+}
+
+/* ---------- Text formatting ---------- */
+
+b, strong {
+}
+
+i, em {
+}
+
+code, pre {
+}
+
+.important {
+}
+
+/* ---------- Staging area ---------- */
+
+body.staging {
+}
+
+/* ---------- Main content body ---------- */
+
+#wrapper {
+}
+
+/* ---------- Banner ---------- */
+
+#banner {
+}
+
+#banner .logo {
+}
+
+#banner .logo a {
+}
+
+.ie6 #banner .logo {
+}
+
+/* ---------- Drag Indicators ---------- */
+
+.drag-indicator {
+}
+
+.drop-area {
+}
+
+.drop-position-top {
+}
+
+.drop-position-bottom {
+}
+
+/* ---------- Alerts and popups ---------- */
+
+.alert-background {
+}
+
+.popup {
+}
+
+.popup-header {
+}
+
+.popup-title {
+}
+
+.ie6 .popup-title {
+}
+
+.popup-close {
+}
+
+.popup-message {
+}
+
+/* ---------- Portal add content ---------- */
+
+.portal-add-content {
+}
+
+.portal-add-content a {
+}
+
+/* ---------- Portal tool tips ---------- */
+
+.portal-tool-tip {
+}
+
+/* ---------- Autocomplete styles ---------- */
+
+.autocomplete-box {
+}
+
+.ie6 .autocomplete-box {
+}
+
+.autocomplete-selected {
+}
+
+/* ---------- Loading animation ---------- */
+
+.loading-animation {
+}
+
+/* ---------- Separator ---------- */
+
+.separator {
+}
+
+/* ---------- Update Manager ---------- */
+
+.update-available {
+}
