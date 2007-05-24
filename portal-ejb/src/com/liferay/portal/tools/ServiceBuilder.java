@@ -4395,10 +4395,13 @@ public class ServiceBuilder {
 		// Imports
 
 		sm.append("import " + _packagePath + ".service." + entity.getName() + "LocalService;");
-		sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "Util;");
-		sm.append("import com.liferay.portal.SystemException;");
-		sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
-		sm.append("import java.util.List;");
+
+		if (entity.hasColumns()) {
+			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "Util;");
+			sm.append("import com.liferay.portal.SystemException;");
+			sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
+			sm.append("import java.util.List;");
+		}
 
 		// Class declaration
 
