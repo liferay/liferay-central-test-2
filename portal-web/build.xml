@@ -528,14 +528,14 @@
 				<dirset dir="docroot/html/themes" excludes="_styled,_unstyled" includes="*" />
 			</path>
 			<sequential>
-				<copy todir="@{module.name}">
+				<copy todir="@{module.name}" overwrite="yes">
 					<fileset
 						dir="docroot/html/themes/_unstyled"
 						excludes="templates/init.vm"
 					/>
 				</copy>
 
-				<copy todir="@{module.name}">
+				<copy todir="@{module.name}" overwrite="yes">
 					<fileset
 						dir="docroot/html/themes/_styled"
 					/>

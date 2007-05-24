@@ -10,12 +10,17 @@
 	</target>
 
 	<target name="clean-module">
-		<delete includeemptydirs="true" quiet="true" failonerror="false">
-			<fileset
-				dir="${module.name}.war"
-				excludes="_diffs/**,WEB-INF/**"
-			/>
-		</delete>
+		<if>
+			<available file="${module.name}.war/_diffs" />
+			<then>
+				<delete includeemptydirs="true" quiet="true" failonerror="false">
+					<fileset
+						dir="${module.name}.war"
+						excludes="_diffs/**,WEB-INF/**"
+					/>
+				</delete>
+			</then>
+		</if>
 	</target>
 
 	<target name="compile">
@@ -36,10 +41,16 @@
 				<if>
 					<available file="${module.name}.war/_diffs" />
 					<then>
-						<copy todir="${module.name}.war">
+						<copy todir="${module.name}.war" overwrite="yes">
 							<fileset
-								dir="${project.dir}/portal-web/docroot/html/themes/_common"
+								dir="${project.dir}/portal-web/docroot/html/themes/_unstyled"
 								excludes="templates/init.vm"
+							/>
+						</copy>
+
+						<copy todir="${module.name}.war" overwrite="yes">
+							<fileset
+								dir="${project.dir}/portal-web/docroot/html/themes/_styled"
 							/>
 						</copy>
 
