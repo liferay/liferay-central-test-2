@@ -386,6 +386,13 @@
 					file="tmp/WEB-INF/web.xml"
 					tofile="tmp/WEB-INF/web.xml.original"
 				/>
+
+				<replace file="tmp/WEB-INF/web.xml.original">
+					<replacefilter
+						token="/WEB-INF/struts-config.xml"
+						value="/WEB-INF/struts-config.xml,/WEB-INF/struts-config-ext.xml"
+					/>
+				</replace>
 			</then>
 		</if>
 
