@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<project name="documentlibrary-ejb" basedir="." default="compile">
-	<import file="../build-common-ejb.xml" />
-
-	<property name="jar.file" value="${ant.project.name}" />
-</project>

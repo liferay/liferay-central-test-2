@@ -126,7 +126,7 @@
 				</copy>
 
 				<copy
-					file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
+					file="${project.dir}/portal-impl/classes/META-INF/portal-log4j.xml"
 					tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
 				/>
 
@@ -215,7 +215,7 @@
 	</target>
 
 	<target name="build-lang">
-		<ant dir="${project.dir}/portal-ejb" target="build-lang-cmd">
+		<ant dir="${project.dir}/portal-impl" target="build-lang-cmd">
 			<property name="lang.dir" value="${project.dir}/portlets/sample-struts-portlet.war/WEB-INF/classes/content/test" />
 			<property name="lang.file" value="Language" />
 		</ant>

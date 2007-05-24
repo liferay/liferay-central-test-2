@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 
-<project name="ext-ejb" basedir="." default="compile">
+<project name="ext-impl" basedir="." default="compile">
 	<import file="build-parent.xml" />
 </project>

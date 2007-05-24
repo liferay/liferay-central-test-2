@@ -95,21 +95,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
-			"-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN",
-			"ejb-jar_2_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//ObjectWeb//DTD JOnAS 3.2//EN",
-			"jonas-ejb-jar_3_2.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Macromedia, Inc.//DTD jrun-ejb-jar 4.0//EN",
-			"jrun-ejb-jar.dtd"
-		),
-
-		new KeyValuePair(
 			"-//Liferay//DTD Display 4.0.0//EN",
 			"liferay-display_4_0_0.dtd"
 		),
@@ -145,33 +130,8 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
-			"-//Liferay//DTD Portlet Application 4.0.0//EN",
-			"liferay-portlet-app_4_0_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Liferay//DTD Portlet Application 4.1.0//EN",
-			"liferay-portlet-app_4_1_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Liferay//DTD Portlet Application 4.2.0//EN",
-			"liferay-portlet-app_4_2_0.dtd"
-		),
-
-		new KeyValuePair(
 			"-//Liferay//DTD Portlet Application 4.3.0//EN",
 			"liferay-portlet-app_4_3_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Liferay//DTD Service Builder 4.0.0//EN",
-			"liferay-service-builder_4_0_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Liferay//DTD Service Builder 4.2.0//EN",
-			"liferay-service-builder_4_2_0.dtd"
 		),
 
 		new KeyValuePair(
@@ -182,11 +142,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"-//Liferay//DTD Theme Loader 4.3.0//EN",
 			"liferay-theme-loader_4_3_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Pramati Technologies //DTD Pramati J2ee Server 3.0//EN",
-			"pramati-j2ee-server_3_0.dtd"
 		),
 
 		new KeyValuePair(
@@ -205,12 +160,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
-			"-//Sun Microsystems, Inc.//DTD " +
-				"Sun ONE Application Server 7.0 EJB 2.0//EN",
-			"sun-ejb-jar_2_0-0.dtd"
-		),
-
-		new KeyValuePair(
 			"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN",
 			"web-app_2_3.dtd"
 		),
@@ -223,11 +172,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN",
 			"web-facesconfig_1_1.dtd"
-		),
-
-		new KeyValuePair(
-			"-//BEA Systems, Inc.//DTD WebLogic 7.0.0 EJB//EN",
-			"weblogic-ejb-jar.dtd"
 		),
 
 		new KeyValuePair(

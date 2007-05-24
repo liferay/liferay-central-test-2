@@ -63,7 +63,7 @@
 		<pathelement path="${project.dir}/lib/portal/velocity.jar" />
 		<pathelement path="${project.dir}/lib/portal/xstream.jar" />
 		<pathelement path="${project.dir}/util-java/util-java.jar" />
-		<pathelement path="${project.dir}/portal-ejb/portal-ejb.jar" />
+		<pathelement path="${project.dir}/portal-impl/portal-impl.jar" />
 	</path>
 
 	<target name="compile">
@@ -72,7 +72,7 @@
 		<path id="test-compile.classpath">
 			<path refid="test-soap.classpath" />
 			<path refid="test-spring-remoting.classpath" />
-			<pathelement path="${project.dir}/portal-ejb/classes" />
+			<pathelement path="${project.dir}/portal-impl/classes" />
 		</path>
 
 		<javac

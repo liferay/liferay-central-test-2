@@ -9,11 +9,11 @@ This is the DTD for the Service Builder parameters for Liferay Portal.
 <!--
 The service-builder element is the root of the deployment descriptor for
 a Service Builder descriptor that is used to generate services available to
-portlets. The Service Builder saves the developer time by generating EJBs,
-Spring utilities, SOAP utilities, and Hibernate persistence classes to ease the
+portlets. The Service Builder saves the developer time by generating Spring
+utilities, SOAP utilities, and Hibernate persistence classes to ease the
 development of services.
 
-To run the service generator, go to /portal/portal-ejb (or /ext/ext-ejb) and
+To run the service generator, go to /portal/portal-impl (or /ext/ext-impl) and
 type "ant build-service". The ant task will check for the existence of a file
 called "service.xml" that must exist in your current directory. It will parse
 that file to generate the service.
@@ -22,8 +22,8 @@ that file to generate the service.
 
 <!--
 The root-dir value specifies the root directory of the portal source code. If
-you are running the service builder in /portal/portal-ejb or /ext/ext-ejb, then
-the value is just ".." because the root is /portal or /ext.
+you are running the service builder in /portal/portal-impl or /ext/ext-impl,
+then the value is just ".." because the root is /portal or /ext.
 
 The package-path value specifies the package of the generated code. If the value
 is "com.liferay.portlet", then all generated code will fall inside

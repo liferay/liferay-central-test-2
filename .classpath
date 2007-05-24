@@ -4,16 +4,16 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/editor/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/hangman/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/lawt/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="counter-ejb/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="documentlibrary-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="counter-impl/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="documentlibrary-impl/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/compression/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/doubleclick/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/secure/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/sso/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/strip/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="lock-ejb/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="mail-ejb/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="lock-impl/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="mail-impl/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-impl/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-kernel/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-service/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="test/src"/>

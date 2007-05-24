@@ -38,11 +38,11 @@
 	<target name="compile-common-lib">
 		<delete dir="${classpath.jsp}" />
 
-		<unjar src="${project.dir}/counter-ejb/counter-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/documentlibrary-ejb/documentlibrary-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lock-ejb/lock-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/mail-ejb/mail-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/portal-ejb/portal-ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/counter-impl/counter-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/documentlibrary-impl/documentlibrary-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lock-impl/lock-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/mail-impl/mail-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/portal-impl/portal-impl.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/portal-kernel/portal-kernel.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/portal-service/portal-service.jar" dest="${classpath.jsp}" />

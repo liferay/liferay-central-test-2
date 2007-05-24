@@ -14,7 +14,7 @@
 		</copy>
 
 		<copy
-			file="${project.dir}/portal-ejb/classes/META-INF/portal-log4j.xml"
+			file="${project.dir}/portal-impl/classes/META-INF/portal-log4j.xml"
 			tofile="docroot/WEB-INF/classes/log4j.xml"
 		/>
 

@@ -19,9 +19,9 @@
 		<ant dir="sql" target="build-db" inheritAll="false" />
 		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
 
-		<ant dir="portal-ejb" target="build-newscategories" inheritAll="false" />
-		<ant dir="portal-ejb" target="build-reverendfun" inheritAll="false" />
-  		<ant dir="portal-ejb" target="build-themes" inheritAll="false" />
+		<ant dir="portal-impl" target="build-newscategories" inheritAll="false" />
+		<ant dir="portal-impl" target="build-reverendfun" inheritAll="false" />
+  		<ant dir="portal-impl" target="build-themes" inheritAll="false" />
 
 		<antcall target="jar" />
 	</target>
@@ -42,11 +42,11 @@
 
 		<ant dir="portal-ear" target="clean" inheritAll="false" />
 
-		<ant dir="counter-ejb" target="clean" inheritAll="false" />
-		<ant dir="documentlibrary-ejb" target="clean" inheritAll="false" />
-		<ant dir="lock-ejb" target="clean" inheritAll="false" />
-		<ant dir="mail-ejb" target="clean" inheritAll="false" />
-		<ant dir="portal-ejb" target="clean" inheritAll="false" />
+		<ant dir="counter-impl" target="clean" inheritAll="false" />
+		<ant dir="documentlibrary-impl" target="clean" inheritAll="false" />
+		<ant dir="lock-impl" target="clean" inheritAll="false" />
+		<ant dir="mail-impl" target="clean" inheritAll="false" />
+		<ant dir="portal-impl" target="clean" inheritAll="false" />
 
 		<ant dir="cms-web" target="clean" inheritAll="false" />
 		<ant dir="laszlo-web" target="clean" inheritAll="false" />
@@ -174,16 +174,16 @@
 		<ant dir="util-java" target="compile" inheritAll="false" />
 		<ant dir="util-wsrp" target="compile" inheritAll="false" />
 
-		<ant dir="portal-ejb" target="compile-common" inheritAll="false" />
+		<ant dir="portal-impl" target="compile-common" inheritAll="false" />
 
 		<ant dir="applets" target="compile" inheritAll="false" />
 		<ant dir="filters" target="compile" inheritAll="false" />
 
-		<ant dir="counter-ejb" target="compile" inheritAll="false" />
-		<ant dir="documentlibrary-ejb" target="compile" inheritAll="false" />
-		<ant dir="lock-ejb" target="compile" inheritAll="false" />
-		<ant dir="mail-ejb" target="compile" inheritAll="false" />
-		<ant dir="portal-ejb" target="compile" inheritAll="false" />
+		<ant dir="counter-impl" target="compile" inheritAll="false" />
+		<ant dir="documentlibrary-impl" target="compile" inheritAll="false" />
+		<ant dir="lock-impl" target="compile" inheritAll="false" />
+		<ant dir="mail-impl" target="compile" inheritAll="false" />
+		<ant dir="portal-impl" target="compile" inheritAll="false" />
 
 		<ant dir="portlets" target="compile" inheritAll="false" />
 	</target>
@@ -200,11 +200,11 @@
 		<ant dir="applets" target="deploy" inheritAll="false" />
 		<ant dir="filters" target="jar" inheritAll="false" />
 
-		<ant dir="counter-ejb" target="jar" inheritAll="false" />
-		<ant dir="documentlibrary-ejb" target="jar" inheritAll="false" />
-		<ant dir="lock-ejb" target="jar" inheritAll="false" />
-		<ant dir="mail-ejb" target="jar" inheritAll="false" />
-		<ant dir="portal-ejb" target="jar" inheritAll="false" />
+		<ant dir="counter-impl" target="jar" inheritAll="false" />
+		<ant dir="documentlibrary-impl" target="jar" inheritAll="false" />
+		<ant dir="lock-impl" target="jar" inheritAll="false" />
+		<ant dir="mail-impl" target="jar" inheritAll="false" />
+		<ant dir="portal-impl" target="jar" inheritAll="false" />
 
 		<ant dir="cms-web" target="war" inheritAll="false" />
 		<ant dir="laszlo-web" target="war" inheritAll="false" />
@@ -230,11 +230,11 @@
 		<ant dir="applets" target="java2html" inheritAll="false" />
 		<ant dir="filters" target="java2html" inheritAll="false" />
 
-		<ant dir="counter-ejb" target="java2html" inheritAll="false" />
-		<ant dir="documentlibrary-ejb" target="java2html" inheritAll="false" />
-		<ant dir="lock-ejb" target="java2html" inheritAll="false" />
-		<ant dir="mail-ejb" target="java2html" inheritAll="false" />
-		<ant dir="portal-ejb" target="java2html" inheritAll="false" />
+		<ant dir="counter-impl" target="java2html" inheritAll="false" />
+		<ant dir="documentlibrary-impl" target="java2html" inheritAll="false" />
+		<ant dir="lock-impl" target="java2html" inheritAll="false" />
+		<ant dir="mail-impl" target="java2html" inheritAll="false" />
+		<ant dir="portal-impl" target="java2html" inheritAll="false" />
 
 		<ant dir="portal-client" target="java2html" inheritAll="false" />
 	</target>
@@ -251,11 +251,11 @@
 		<ant dir="applets" target="javadoc" inheritAll="false" />
 		<ant dir="filters" target="javadoc" inheritAll="false" />
 
-		<ant dir="counter-ejb" target="javadoc" inheritAll="false" />
-		<ant dir="documentlibrary-ejb" target="javadoc" inheritAll="false" />
-		<ant dir="lock-ejb" target="javadoc" inheritAll="false" />
-		<ant dir="mail-ejb" target="javadoc" inheritAll="false" />
-		<ant dir="portal-ejb" target="javadoc" inheritAll="false" />
+		<ant dir="counter-impl" target="javadoc" inheritAll="false" />
+		<ant dir="documentlibrary-impl" target="javadoc" inheritAll="false" />
+		<ant dir="lock-impl" target="javadoc" inheritAll="false" />
+		<ant dir="mail-impl" target="javadoc" inheritAll="false" />
+		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
 	</target>
 
 	<target name="deploy">
@@ -283,11 +283,11 @@
 
 		<ant dir="portal-ear" target="deploy" inheritAll="false" />
 
-		<ant dir="counter-ejb" target="deploy" inheritAll="false" />
-		<ant dir="documentlibrary-ejb" target="deploy" inheritAll="false" />
-		<ant dir="lock-ejb" target="deploy" inheritAll="false" />
-		<ant dir="mail-ejb" target="deploy" inheritAll="false" />
-		<ant dir="portal-ejb" target="deploy" inheritAll="false" />
+		<ant dir="counter-impl" target="deploy" inheritAll="false" />
+		<ant dir="documentlibrary-impl" target="deploy" inheritAll="false" />
+		<ant dir="lock-impl" target="deploy" inheritAll="false" />
+		<ant dir="mail-impl" target="deploy" inheritAll="false" />
+		<ant dir="portal-impl" target="deploy" inheritAll="false" />
 
 		<ant dir="cms-web" target="deploy" inheritAll="false" />
 		<ant dir="laszlo-web" target="deploy" inheritAll="false" />
@@ -536,7 +536,7 @@
 				<mkdir dir="${tstamp.value}" />
 
 				<copy todir="${tstamp.value}" overwrite="yes">
-					<fileset dir="portal-ejb/classes">
+					<fileset dir="portal-impl/classes">
 						<include name="*-ext.properties" />
 					</fileset>
 				</copy>
@@ -575,7 +575,7 @@ auto.deploy.dest.dir=../webapps</echo>
 
 				<jar
 					basedir="${tstamp.value}"
-					destfile="${app.server.portal.dir}/portal-ejb.jar"
+					destfile="${app.server.portal.dir}/portal-impl.jar"
 					update="yes"
 				/>
 
@@ -583,7 +583,7 @@ auto.deploy.dest.dir=../webapps</echo>
 			</then>
 			<else>
 				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
-					<fileset dir="portal-ejb/classes">
+					<fileset dir="portal-impl/classes">
 						<include name="*-ext.properties" />
 					</fileset>
 				</copy>
@@ -717,11 +717,11 @@ auto.deploy.dest.dir=../webapps</echo>
 		<mkdir dir="${lp.ext.dir}/downloads" />
 
 		<copy todir="${lp.ext.dir}/ext-ear/modules" overwrite="yes">
-			<fileset dir="${project.dir}/counter-ejb" includes="counter-ejb.jar" />
-			<fileset dir="${project.dir}/documentlibrary-ejb" includes="documentlibrary-ejb.jar" />
-			<fileset dir="${project.dir}/lock-ejb" includes="lock-ejb.jar" />
-			<fileset dir="${project.dir}/mail-ejb" includes="mail-ejb.jar" />
-			<fileset dir="${project.dir}/portal-ejb" includes="portal-ejb.jar" />
+			<fileset dir="${project.dir}/counter-impl" includes="counter-impl.jar" />
+			<fileset dir="${project.dir}/documentlibrary-impl" includes="documentlibrary-impl.jar" />
+			<fileset dir="${project.dir}/lock-impl" includes="lock-impl.jar" />
+			<fileset dir="${project.dir}/mail-impl" includes="mail-impl.jar" />
+			<fileset dir="${project.dir}/portal-impl" includes="portal-impl.jar" />
 			<fileset dir="${project.dir}/cms-web" includes="cms-web.war" />
 			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
 			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
@@ -932,9 +932,9 @@ auto.deploy.dest.dir=../webapps</echo>
 	</target>
 
 	<target name="sync-ext">
-		<copy todir="tools/ext_tmpl/ext-ejb" overwrite="yes">
+		<copy todir="tools/ext_tmpl/ext-impl" overwrite="yes">
 			<fileset
-				dir="${lp.ext.dir}/ext-ejb"
+				dir="${lp.ext.dir}/ext-impl"
 				includes="**/*.java,**/*.wsdd,**/*.xml,**/*.81"
 			/>
 		</copy>

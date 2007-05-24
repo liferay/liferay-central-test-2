@@ -49,7 +49,7 @@ com.liferay.portal.struts.PortletAction.
 
 See:
 
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/action/EditConfigurationAction.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/messageboards/action/EditConfigurationAction.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT configuration-path (#PCDATA)>
@@ -62,7 +62,7 @@ search index for the portlet.
 See:
 
 http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/util/Indexer.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
 http://lucene.apache.org
 -->
 <!ELEMENT indexer-class (#PCDATA)>
@@ -75,7 +75,7 @@ in the OpenSearch 1.1 standard.
 See:
 
 http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
 http://www.opensearch.org
 -->
 <!ELEMENT open-search-class (#PCDATA)>
@@ -87,8 +87,8 @@ portlet.
 
 See:
 
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portal/job/Scheduler.html
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/calendar/job/Scheduler.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portal/job/Scheduler.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
@@ -100,7 +100,7 @@ default portlet URL implementation.
 
 See:
 
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portal/struts/StrutsActionPortletURL.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
 
@@ -112,7 +112,7 @@ example of its uses.
 
 See:
 
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
 -->
 <!ELEMENT friendly-url-mapper-class (#PCDATA)>
 
@@ -132,7 +132,7 @@ tasks are run.
 See:
 
 http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
 -->
 <!ELEMENT portlet-data-handler-class (#PCDATA)>
 
@@ -144,7 +144,7 @@ emails.
 See:
 
 http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
-http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
+http://content.liferay.com/4/docs/api/portal-impl/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
 -->
 <!ELEMENT smtp-message-listener-class (#PCDATA)>
 

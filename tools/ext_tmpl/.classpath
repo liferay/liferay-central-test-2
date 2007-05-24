@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="ext-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="ext-impl/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="ext-service/src"/>
-	<classpathentry kind="lib" path="ext-ear/modules/counter-ejb.jar"/>
-	<classpathentry kind="lib" path="ext-ear/modules/documentlibrary-ejb.jar"/>
-	<classpathentry kind="lib" path="ext-ear/modules/lock-ejb.jar"/>
-	<classpathentry kind="lib" path="ext-ear/modules/mail-ejb.jar"/>
-	<classpathentry kind="lib" path="ext-ear/modules/portal-ejb.jar"/>
+	<classpathentry kind="lib" path="ext-ear/modules/counter-impl.jar"/>
+	<classpathentry kind="lib" path="ext-ear/modules/documentlibrary-impl.jar"/>
+	<classpathentry kind="lib" path="ext-ear/modules/lock-impl.jar"/>
+	<classpathentry kind="lib" path="ext-ear/modules/mail-impl.jar"/>
+	<classpathentry kind="lib" path="ext-ear/modules/portal-impl.jar"/>
 	<classpathentry kind="lib" path="lib/development/activation.jar"/>
 	<classpathentry kind="lib" path="lib/development/ant-contrib.jar"/>
 	<classpathentry kind="lib" path="lib/development/c3p0.jar"/>

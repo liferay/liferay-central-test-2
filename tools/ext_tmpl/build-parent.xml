@@ -6,7 +6,7 @@
 	<target name="clean">
 		<ant dir="ext-service" target="clean" inheritAll="false" />
 		<ant dir="ext-ear" target="clean" inheritAll="false" />
-		<ant dir="ext-ejb" target="clean" inheritAll="false" />
+		<ant dir="ext-impl" target="clean" inheritAll="false" />
 		<ant dir="ext-web" target="clean" inheritAll="false" />
 
 		<delete includeemptydirs="true" failonerror="false">
@@ -109,11 +109,11 @@
 	<target name="java2html">
 		<delete dir="api" />
 
-		<ant dir="ext-ejb" target="java2html" inheritAll="false" />
+		<ant dir="ext-impl" target="java2html" inheritAll="false" />
 	</target>
 
 	<target name="javadoc">
-		<ant dir="ext-ejb" target="javadoc" inheritAll="false" />
+		<ant dir="ext-impl" target="javadoc" inheritAll="false" />
 	</target>
 
 	<target name="deploy">
@@ -130,7 +130,7 @@
 
 		<ant dir="ext-service" target="deploy" inheritAll="false" />
 		<ant dir="ext-ear" target="deploy" inheritAll="false" />
-		<ant dir="ext-ejb" target="deploy" inheritAll="false" />
+		<ant dir="ext-impl" target="deploy" inheritAll="false" />
 		<ant dir="ext-web" target="deploy" inheritAll="false" />
 
 		<ant dir="layouttpl" target="deploy" inheritAll="false" />
@@ -384,7 +384,7 @@
 				<mkdir dir="${tstamp.value}" />
 
 				<copy todir="${tstamp.value}" overwrite="yes">
-					<fileset dir="ext-ejb/classes">
+					<fileset dir="ext-impl/classes">
 						<include name="*-ext.properties" />
 					</fileset>
 				</copy>
@@ -423,7 +423,7 @@ auto.deploy.dest.dir=../webapps</echo>
 
 				<jar
 					basedir="${tstamp.value}"
-					destfile="${app.server.portal.dir}/portal-ejb.jar"
+					destfile="${app.server.portal.dir}/portal-impl.jar"
 					update="yes"
 				/>
 
@@ -431,7 +431,7 @@ auto.deploy.dest.dir=../webapps</echo>
 			</then>
 			<else>
 				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
-					<fileset dir="ext-ejb/classes">
+					<fileset dir="ext-impl/classes">
 						<include name="*-ext.properties" />
 					</fileset>
 				</copy>

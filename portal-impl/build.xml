@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
-<project name="portal-ejb" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
-	<import file="../build-common-ejb.xml" />
+<project name="portal-impl" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="../build-common-java.xml" />
 
 	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
@@ -19,7 +19,7 @@
 				<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
 			</and>
 			<then>
-				<delete file="${app.server.lib.portal.dir}/portal-ejb.jar" />
+				<delete file="${app.server.lib.portal.dir}/portal-impl.jar" />
 
 				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/definitions">
 					<fileset dir="${project.dir}/definitions" />
@@ -169,7 +169,7 @@
 				<antelope:endswith string="${app.server.portal.dir}" with="/trunk/portal-web/docroot" />
 			</and>
 			<then>
-				<delete file="${app.server.lib.portal.dir}/portal-ejb.jar" />
+				<delete file="${app.server.lib.portal.dir}/portal-impl.jar" />
 
 				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/definitions">
 					<fileset dir="${project.dir}/definitions" />
@@ -186,7 +186,7 @@
 				<antcall target="compile" />
 			</then>
 			<else>
-				<antcall target="build-common-ejb.deploy" />
+				<antcall target="build-common-java.deploy" />
 			</else>
 		</if>
 	</target>

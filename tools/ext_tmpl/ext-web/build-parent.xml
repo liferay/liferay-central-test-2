@@ -14,14 +14,14 @@
 		<delete dir="${classpath.jsp}" />
 
 		<copy todir="${classpath.jsp}">
-			<fileset dir="${project.dir}/ext-ejb/classes" />
+			<fileset dir="${project.dir}/ext-impl/classes" />
 		</copy>
 
-		<unjar src="${project.dir}/ext-ear/modules/counter-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/documentlibrary-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/lock-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/mail-ejb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/ext-ear/modules/portal-ejb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/ext-ear/modules/counter-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/ext-ear/modules/documentlibrary-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/ext-ear/modules/lock-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/ext-ear/modules/mail-impl.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/ext-ear/modules/portal-impl.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/global/portal-kernel.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/global/portal-service.jar" dest="${classpath.jsp}" />
