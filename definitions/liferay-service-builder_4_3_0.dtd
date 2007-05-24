@@ -62,7 +62,7 @@ an entity does not have any columns, then it only represents a business facade.
 The Service Builder will always generate an empty business facade POJO if it
 does not exist. Upon subsequent generations, the Service Builder will check to
 see if the business facade already exists. If it exists and has additional
-methods, then the Service Builder will also update the EJB and SOAP wrappers.
+methods, then the Service Builder will also update the SOAP wrappers.
 
 If an entity does have columns, then the value object, the POJO class that
 is mapped to the database, and other persistence utilities are also generated

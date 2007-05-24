@@ -3,6 +3,7 @@
 <project name="portal-impl" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../build-common-java.xml" />
 
+	<property name="deploy.dir" value="${app.server.lib.portal.dir}" />
 	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
 
@@ -674,7 +675,7 @@
 			newenvironment="true"
 		/>
 
-		<delete file="EJBBuilder.temp" />
+		<delete file="ServiceBuilder.temp" />
 
 		<antcall target="build-releaseinfo" />
 	</target>

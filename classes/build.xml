@@ -52,30 +52,6 @@
 		</java>
 	</target>
 
-	<target name="TestDB" depends="compile">
-		<java
-			classname="TestDB"
-			classpathref="project.classpath"
-			fork="true"
-		/>
-	</target>
-
-	<target name="TestEJB" depends="compile">
-		<java
-			classname="TestEJB"
-			classpathref="project.classpath"
-			fork="true"
-		/>
-	</target>
-
-	<target name="TestHttp" depends="compile">
-		<java
-			classname="TestHttp"
-			classpathref="project.classpath"
-			fork="true"
-		/>
-	</target>
-
 	<target name="LiferaySQL" depends="compile">
 		<java
 			classname="LiferaySQL"

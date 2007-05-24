@@ -53,7 +53,7 @@ public class NewsCategoriesBuilder {
 				newCategories.substring(0, newCategories.length() - 1);
 
 			File file = new File(
-				"../portal-ejb/src/com/liferay/portlet/news/dependencies/" +
+				"../portal-impl/src/com/liferay/portlet/news/dependencies/" +
 					"categories.tsv");
 
 			FileUtil.write(file, newCategories, true);
