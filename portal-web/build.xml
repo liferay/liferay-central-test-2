@@ -69,9 +69,14 @@
 		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/lucene.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/openid4java.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/quartz.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/rome.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
+
+		<copy todir="${classpath.jsp}">
+			<fileset dir="docroot/WEB-INF/classes" />
+		</copy>
 	</target>
 
 	<target name="compile-common-jsp">

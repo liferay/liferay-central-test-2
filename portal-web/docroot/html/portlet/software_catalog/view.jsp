@@ -96,14 +96,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 			StringMaker sm = new StringMaker();
 
-			String imageId = productEntry.getImageId("0");
-			if (imageId != null) {
-				String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId + "&small=1";
-				sm.append("<img src='");
-				sm.append(imageURL);
-				sm.append("' align='left' style='margin-right: 10px'/>");
-			}
-
 			sm.append("<b>");
 			sm.append(productEntry.getName());
 			sm.append("</b>");

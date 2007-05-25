@@ -30,6 +30,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
