@@ -1,17 +1,9 @@
 <?xml version="1.0"?>
 
-<project name="portlets" basedir="." default="deploy" xmlns:antelope="antlib:ise.antelope.tasks">
-	<import file="../build-common.xml" />
-
-	<target name="clean">
-		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="clean-module" />
-		</antcall>
-	</target>
+<project name="portlets" basedir="." default="deploy">
+	<import file="../build-common-plugin.xml" />
 
 	<target name="clean-module">
-		<delete file="${project.dir}/${module.name}.war" failonerror="false" />
-
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${module.name}.war/WEB-INF/classes/com" excludes="${classes.dir.excludes}" />
 		</delete>
@@ -20,12 +12,6 @@
 			<fileset dir="${module.name}.war/WEB-INF/lib" includes="util-bridges.jar,util-java.jar,util-taglib.jar" />
 			<fileset dir="${module.name}.war/WEB-INF/tld" includes="liferay-portlet.tld" />
 		</delete>
-	</target>
-
-	<target name="compile">
-		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="compile-module" />
-		</antcall>
 	</target>
 
 	<target name="compile-module">
@@ -40,84 +26,6 @@
 				<mkdir dir="${module.name}.war/WEB-INF/classes" />
 				<mkdir dir="${module.name}.war/WEB-INF/lib" />
 
-				<if>
-					<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
-					<then>
-						<path id="web-lib.classpath">
-							<path refid="project.classpath" />
-							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-						</path>
-					</then>
-					<else>
-						<path id="web-lib.classpath">
-							<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
-							<pathelement location="${project.dir}/util-java/classes" />
-							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-						</path>
-					</else>
-				</if>
-
-				<javac
-					classpathref="web.classpath"
-					compiler="${javac.compiler}"
-					debug="${javac.debug}"
-					deprecation="${javac.deprecation}"
-					destdir="${module.name}.war/WEB-INF/classes"
-					fork="${javac.fork}"
-					memoryMaximumSize="${javac.memoryMaximumSize}"
-					nowarn="${javac.nowarn}"
-					srcdir="${module.name}.war/WEB-INF/src"
-				/>
-
-				<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
-					<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
-				</copy>
-			</else>
-		</if>
-	</target>
-
-	<target name="war" depends="compile">
-		<antcall target="loop-modules">
-			<param name="loop.modules.cmd" value="war-module" />
-		</antcall>
-
-		<copy
-			file="sample-spring-portlet.war"
-			tofile="${project.dir}/sample-spring-portlet-${lp.version.file.name}.war"
-		/>
-	</target>
-
-	<target name="war-alfresco">
-
-		<!--
-		Download Alfresco 1.4.0 from
-		http://www.sourceforge.net/projects/alfresco.
-
-		The WAR must be deployed to the /alfresco context. See the
-		implementation of org.alfresco.webservice.util.WebServiceFactory to see
-		how to customize the web service end point.
-
-		Manually remove portlet-api-lib.jar to resolve a class conflict.
-
-		Add the required portlet XML files to make it work.
-		-->
-
-		<jar
-			basedir="alfresco.war.ext"
-			destfile="alfresco.war"
-			update="yes"
-		/>
-	</target>
-
-	<target name="war-module">
-		<if>
-			<isfileselected file="${module.name}.war">
-				<type type="file" />
-			</isfileselected>
-			<then>
-				<copy file="${module.name}.war" todir="${project.dir}/${module.name}-${lp.version.file.name}.war" />
-			</then>
-			<else>
 				<copy todir="${module.name}.war/WEB-INF/lib">
 					<fileset
 						dir="${project.dir}/lib/portal"
@@ -150,17 +58,71 @@
 					</then>
 				</if>
 
-				<war
-					basedir="${module.name}.war"
-					destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
-					excludes="WEB-INF/web.xml*"
-					webxml="${module.name}.war/WEB-INF/web.xml"
+				<if>
+					<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
+					<then>
+						<path id="web-lib.classpath">
+							<path refid="project.classpath" />
+							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+						</path>
+					</then>
+					<else>
+						<path id="web-lib.classpath">
+							<pathelement location="${project.dir}/util-java/classes" />
+							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+						</path>
+					</else>
+				</if>
+
+				<javac
+					classpathref="web.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="${module.name}.war/WEB-INF/classes"
+					fork="${javac.fork}"
+					memoryMaximumSize="${javac.memoryMaximumSize}"
+					nowarn="${javac.nowarn}"
+					srcdir="${module.name}.war/WEB-INF/src"
 				/>
+
+				<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
+					<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
+				</copy>
 			</else>
 		</if>
 	</target>
 
-	<target name="war-sample-spring-portlet">
+	<target name="build-alfresco">
+
+		<!--
+		Download Alfresco 1.4.0 from
+		http://www.sourceforge.net/projects/alfresco.
+
+		The WAR must be deployed to the /alfresco context. See the
+		implementation of org.alfresco.webservice.util.WebServiceFactory to see
+		how to customize the web service end point.
+
+		Manually remove portlet-api-lib.jar to resolve a class conflict.
+
+		Add the required portlet XML files to make it work.
+		-->
+
+		<jar
+			basedir="alfresco.war.ext"
+			destfile="alfresco.war"
+			update="yes"
+		/>
+	</target>
+
+	<target name="build-lang">
+		<ant dir="${project.dir}/portal-impl" target="build-lang-cmd">
+			<property name="lang.dir" value="${project.dir}/portlets/sample-struts-portlet.war/WEB-INF/classes/content/test" />
+			<property name="lang.file" value="Language" />
+		</ant>
+	</target>
+
+	<target name="build-sample-spring-portlet">
 
 		<!--
 		Download Spring Portlet MVC 2.0 M4 from
@@ -175,67 +137,5 @@
 			destfile="sample-spring-portlet.war"
 			update="yes"
 		/>
-	</target>
-
-	<target name="deploy" depends="compile">
-		<if>
-			<available file="${auto.deploy.dir}" />
-			<then>
-				<antcall target="loop-modules">
-					<param name="loop.modules.cmd" value="deploy-module" />
-				</antcall>
-			</then>
-			<else>
-				<echo message="Please create ${auto.deploy.dir}" />
-			</else>
-		</if>
-	</target>
-
-	<target name="deploy-module">
-		<if>
-			<isfileselected file="${module.name}.war">
-				<type type="file" />
-			</isfileselected>
-			<then>
-				<copy file="${module.name}.war" todir="${auto.deploy.dir}" />
-			</then>
-			<else>
-				<tstamp>
-					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-				</tstamp>
-
-				<jar
-					basedir="${module.name}.war"
-					destfile="${tstamp.value}"
-				/>
-
-				<move file="${tstamp.value}" tofile="${auto.deploy.dir}/${module.name}.war" />
-			</else>
-		</if>
-	</target>
-
-	<target name="build-lang">
-		<ant dir="${project.dir}/portal-impl" target="build-lang-cmd">
-			<property name="lang.dir" value="${project.dir}/portlets/sample-struts-portlet.war/WEB-INF/classes/content/test" />
-			<property name="lang.file" value="Language" />
-		</ant>
-	</target>
-
-	<target name="loop-modules">
-		<for param="module.name">
-			<path>
-				<dirset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
-				<fileset dir="." excludes="${deploy.wars.excludes}" includes="${deploy.wars.includes}" />
-			</path>
-			<sequential>
-				<antelope:stringutil string="@{module.name}" property="module.name.unix">
-					<replace regex="\\" replacement="/" />
-				</antelope:stringutil>
-
-				<antelope:grep in="${module.name.unix}" regex="(.*/)(.*)(\.war)" group="2" property="module.name" />
-
-				<antcall target="${loop.modules.cmd}" />
-			</sequential>
-		</for>
 	</target>
 </project>

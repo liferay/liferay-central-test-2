@@ -288,6 +288,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.util.PortalInstances">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.util.SAXReaderFactory">
 		<priority value="WARN" />
 	</category>
@@ -354,6 +358,10 @@
 
 	<category name="com.liferay.portlet.documentlibrary.webdav">
 		<priority value="WARN" />
+	</category>
+
+	<category name="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portlet.journal">
@@ -497,6 +505,10 @@
 	</category>
 
 	<category name="org.jgroups">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="org.openid4java">
 		<priority value="ERROR" />
 	</category>
 

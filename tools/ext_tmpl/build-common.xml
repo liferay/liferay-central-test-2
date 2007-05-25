@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="ext-common" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="build-common" xmlns:antelope="antlib:ise.antelope.tasks">
 	<property name="project.dir" value=".." />
 
 	<property environment="env" />

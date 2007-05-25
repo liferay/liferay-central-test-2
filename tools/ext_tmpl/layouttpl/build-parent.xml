@@ -1,25 +1,5 @@
 <?xml version="1.0"?>
 
 <project name="layouttpl-parent">
-	<import file="../build-common.xml" />
-
-	<target name="deploy">
-		<java
-			classname="com.liferay.portal.tools.LayoutTemplateDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true">
-
-				<!-- Required Arguments -->
-
-				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-				<jvmarg value="-Ddeployer.unpack.war=true" />
-
-				<!-- Specific WARs -->
-
-				<arg line="${deploy.specific.wars}" />
-		</java>
-	</target>
+	<import file="../build-common-plugin.xml" />
 </project>
