@@ -701,7 +701,7 @@ auto.deploy.dest.dir=../webapps</echo>
 			/>
 			<fileset
 				dir="tools/ext_tmpl"
-				includes=".classpath,.project,readme.txt,build.properties,**/build-common.xml,**/build-parent.xml"
+				includes=".classpath,.project,readme.txt,build.properties,**/build-common**.xml,**/build-parent.xml"
 			/>
 			<filterset>
 				<filter token="lp.version" value="${lp.version}" />
