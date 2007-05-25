@@ -15,14 +15,24 @@
 		<if>
 			<available file="docroot/WEB-INF/src" />
 			<then>
-				<mkdir dir="docroot/WEB-INF/classes" />
+				<if>
+					<available file="tmp" type="dir" />
+					<then>
+						<property name="compile.file.dest" value="tmp/WEB-INF/classes" />
+					</then>
+					<else>
+						<property name="compile.file.dest" value="docroot/WEB-INF/classes" />
+					</else>
+				</if>
+
+				<mkdir dir="${compile.file.dest}" />
 
 				<javac
 					classpathref="web.classpath"
 					compiler="${javac.compiler}"
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
-					destdir="docroot/WEB-INF/classes"
+					destdir="${compile.file.dest}"
 					fork="${javac.fork}"
 					memoryMaximumSize="${javac.memoryMaximumSize}"
 					nowarn="on"
