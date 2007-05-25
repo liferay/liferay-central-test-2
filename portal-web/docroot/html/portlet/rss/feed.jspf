@@ -73,9 +73,11 @@ catch (Exception e) {
 								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
 							</c:if>
 
-							<div class="font-small">
-								<%= content.getValue() %>
-							</div>
+							<c:if test="<%= content != null %>">
+								<div class="font-small">
+									<%= content.getValue() %>
+								</div>
+							</c:if>
 
 							<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
 								<div style="font-size: 0; height: 10px;"></div>
