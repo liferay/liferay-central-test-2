@@ -330,7 +330,7 @@ WindowState windowState = renderRequest.getWindowState();
 				<liferay-ui:message key="payment-gross" />:
 			</td>
 			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPaymentGross" defaultValue="<%= currency.getSymbol() + doubleFormat.format(order.getPpPaymentGross()) %>" />
+				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPaymentGross" defaultValue="<%= currencyFormat.format(order.getPpPaymentGross()) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -356,7 +356,7 @@ WindowState windowState = renderRequest.getWindowState();
 			<td>
 
 				<%
-				String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay.getPathMain())) + "\"><b><u>";
+				String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay)) + "\"><b><u>";
 				String payPalLinkClose = "</u></b></a>";
 				%>
 
@@ -508,11 +508,11 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Price
 
-	row.addText(currency.getSymbol() + doubleFormat.format(orderItem.getPrice()), rowURL);
+	row.addText(currencyFormat.format(orderItem.getPrice()), rowURL);
 
 	// Total
 
-	row.addText(currency.getSymbol() + doubleFormat.format(orderItem.getPrice() * quantity), rowURL);
+	row.addText(currencyFormat.format(orderItem.getPrice() * quantity), rowURL);
 
 	// Add result row
 
@@ -530,7 +530,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="subtotal" />:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualSubtotal(results)) %>
+		<%= currencyFormat.format(ShoppingUtil.calculateActualSubtotal(results)) %>
 	</td>
 </tr>
 <tr>
@@ -538,7 +538,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="tax" />:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(order.getTax()) %>
+		<%= currencyFormat.format(order.getTax()) %>
 	</td>
 </tr>
 <tr>
@@ -546,7 +546,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="shipping" /> <%= Validator.isNotNull(order.getAltShipping()) ? "(" + order.getAltShipping() + ")" : StringPool.BLANK %>
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(order.getShipping()) %>
+		<%= currencyFormat.format(order.getShipping()) %>
 	</td>
 </tr>
 
@@ -556,7 +556,7 @@ for (int i = 0; itr.hasNext(); i++) {
 			<liferay-ui:message key="insurance" />:
 		</td>
 		<td>
-			<%= currency.getSymbol() %><%= doubleFormat.format(order.getInsurance()) %>
+			<%= currencyFormat.format(order.getInsurance()) %>
 		</td>
 	</tr>
 </c:if>
@@ -567,7 +567,7 @@ for (int i = 0; itr.hasNext(); i++) {
 			<liferay-ui:message key="coupon-discount" />:
 		</td>
 		<td>
-			<%= currency.getSymbol() %><%= doubleFormat.format(order.getCouponDiscount()) %>
+			<%= currencyFormat.format(order.getCouponDiscount()) %>
 
 			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= order.getCouponIds() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();">
 			(<%= order.getCouponIds() %>)
@@ -581,7 +581,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="total" />:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTotal(order)) %>
+		<%= currencyFormat.format(ShoppingUtil.calculateTotal(order)) %>
 	</td>
 </tr>
 </table>

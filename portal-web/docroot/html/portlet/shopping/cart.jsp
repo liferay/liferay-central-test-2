@@ -55,7 +55,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 			}
 		}
 		else {
-			alert("<%= UnicodeLanguageUtil.format(pageContext, "your-order-cannot-be-processed-because-it-falls-below-the-minimum-required-amount-of-x", currency.getSymbol() + doubleFormat.format(shoppingPrefs.getMinOrder()), false) %>");
+			alert("<%= UnicodeLanguageUtil.format(pageContext, "your-order-cannot-be-processed-because-it-falls-below-the-minimum-required-amount-of-x", currencyFormat.format(shoppingPrefs.getMinOrder()), false) %>");
 		}
 	}
 
@@ -311,23 +311,19 @@ for (int i = 0; itr.hasNext(); i++) {
 		}
 
 		if (itemPrice.getDiscount() <= 0) {
-			sm.append(currency.getSymbol());
-			sm.append(doubleFormat.format(itemPrice.getPrice()));
+			sm.append(currencyFormat.format(itemPrice.getPrice()));
 		}
 		else {
-			sm.append(currency.getSymbol());
 			sm.append("<strike>");
-			sm.append(doubleFormat.format(itemPrice.getPrice()));
+			sm.append(currencyFormat.format(itemPrice.getPrice()));
 			sm.append("</strike> ");
 			sm.append("<span class=\"portlet-msg-success\">");
-			sm.append(currency.getSymbol());
-			sm.append(doubleFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)));
+			sm.append(currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)));
 			sm.append("</span> / ");
 			sm.append(LanguageUtil.get(pageContext, "you-save"));
 			sm.append(": ");
 			sm.append("<span class=\"portlet-msg-error\">");
-			sm.append(currency.getSymbol());
-			sm.append(doubleFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)));
+			sm.append(currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)));
 			sm.append(" (");
 			sm.append(percentFormat.format(itemPrice.getDiscount()));
 			sm.append(")");
@@ -388,7 +384,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Price
 
-	row.addText(currency.getSymbol() + doubleFormat.format(ShoppingUtil.calculateActualPrice(item, count.intValue()) / count.intValue()), rowURL);
+	row.addText(currencyFormat.format(ShoppingUtil.calculateActualPrice(item, count.intValue()) / count.intValue()), rowURL);
 
 	// Add result row
 
@@ -414,11 +410,11 @@ for (int i = 0; itr.hasNext(); i++) {
 		%>
 
 		<c:if test="<%= subtotal == actualSubtotal %>">
-			<%= currency.getSymbol() %><%= doubleFormat.format(subtotal) %>
+			<%= currencyFormat.format(subtotal) %>
 		</c:if>
 
 		<c:if test="<%= subtotal != actualSubtotal %>">
-			<strike><%= currency.getSymbol() %><%= doubleFormat.format(subtotal) %></strike> <span class="portlet-msg-success"><%= currency.getSymbol() %><%= doubleFormat.format(actualSubtotal) %></span>
+			<strike><%= currencyFormat.format(subtotal) %></strike> <span class="portlet-msg-success"><%= currencyFormat.format(actualSubtotal) %></span>
 		</c:if>
 	</td>
 </tr>
@@ -430,7 +426,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		</td>
 		<td>
 			<span class="portlet-msg-error">
-			<%= currency.getSymbol() %><%= doubleFormat.format(discountSubtotal) %> (<%= percentFormat.format(ShoppingUtil.calculateDiscountPercent(items)) %>)
+			<%= currencyFormat.format(discountSubtotal) %> (<%= percentFormat.format(ShoppingUtil.calculateDiscountPercent(items)) %>)
 			</span>
 		</td>
 	</tr>
@@ -448,7 +444,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	<td>
 		<c:choose>
 			<c:when test="<%= !shoppingPrefs.useAlternativeShipping() %>">
-				<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateShipping(items)) %>
+				<%= currencyFormat.format(ShoppingUtil.calculateShipping(items)) %>
 			</c:when>
 			<c:otherwise>
 				<select name="<portlet:namespace />alternativeShipping">
@@ -463,7 +459,7 @@ for (int i = 0; itr.hasNext(); i++) {
 						if (Validator.isNotNull(altShippingName) && Validator.isNotNull(altShippingDelta)) {
 					%>
 
-							<option <%= i == cart.getAltShipping() ? "selected" : "" %> value="<%= i %>"><%= altShippingName %> (<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateAlternativeShipping(items, i)) %>)</option>
+							<option <%= i == cart.getAltShipping() ? "selected" : "" %> value="<%= i %>"><%= altShippingName %> (<%= currencyFormat.format(ShoppingUtil.calculateAlternativeShipping(items, i)) %>)</option>
 
 					<%
 						}
@@ -493,7 +489,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<td>
 			<select name="<portlet:namespace />insure">
 				<option <%= !cart.isInsure() ? "selected" : "" %> value="0"><liferay-ui:message key="none" /></option>
-				<option <%= cart.isInsure() ? "selected" : "" %> value="1"><%= currency.getSymbol() %><%= doubleFormat.format(insurance) %></option>
+				<option <%= cart.isInsure() ? "selected" : "" %> value="1"><%= currencyFormat.format(insurance) %></option>
 			</select>
 		</td>
 	</tr>
@@ -524,7 +520,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		</td>
 		<td>
 			<span class="portlet-msg-error">
-			<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateCouponDiscount(items, coupon)) %>
+			<%= currencyFormat.format(ShoppingUtil.calculateCouponDiscount(items, coupon)) %>
 			</span>
 		</td>
 	</tr>

@@ -424,11 +424,11 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Price
 
-	row.addText(currency.getSymbol() + doubleFormat.format(ShoppingUtil.calculateActualPrice(item, count.intValue()) / count.intValue()), rowURL);
+	row.addText(currencyFormat.format(ShoppingUtil.calculateActualPrice(item, count.intValue()) / count.intValue()), rowURL);
 
 	// Total
 
-	row.addText(currency.getSymbol() + doubleFormat.format(ShoppingUtil.calculateActualPrice(item, count.intValue())), rowURL);
+	row.addText(currencyFormat.format(ShoppingUtil.calculateActualPrice(item, count.intValue())), rowURL);
 
 	// Add result row
 
@@ -449,7 +449,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="subtotal" />:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualSubtotal(items)) %>
+		<%= currencyFormat.format(ShoppingUtil.calculateActualSubtotal(items)) %>
 	</td>
 </tr>
 <tr>
@@ -457,7 +457,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="tax" />:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTax(items, order.getBillingState())) %>
+		<%= currencyFormat.format(ShoppingUtil.calculateTax(items, order.getBillingState())) %>
 	</td>
 </tr>
 <tr>
@@ -465,7 +465,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<liferay-ui:message key="shipping" /> <%= Validator.isNotNull(altShippingName) ? "(" + altShippingName + ")" : StringPool.BLANK %>:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateAlternativeShipping(items, altShipping)) %>
+		<%= currencyFormat.format(ShoppingUtil.calculateAlternativeShipping(items, altShipping)) %>
 	</td>
 </tr>
 
@@ -479,7 +479,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 			<liferay-ui:message key="insurance" />:
 		</td>
 		<td>
-			<%= currency.getSymbol() %><%= doubleFormat.format(insurance) %>
+			<%= currencyFormat.format(insurance) %>
 		</td>
 	</tr>
 </c:if>
@@ -490,7 +490,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 			<liferay-ui:message key="coupon-discount" />:
 		</td>
 		<td>
-			<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateCouponDiscount(items, order.getBillingState(), coupon)) %>
+			<%= currencyFormat.format(ShoppingUtil.calculateCouponDiscount(items, order.getBillingState(), coupon)) %>
 
 			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();">
 			(<%= coupon.getCouponId() %>)
@@ -504,7 +504,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<liferay-ui:message key="total" />:
 	</td>
 	<td>
-		<%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateTotal(items, order.getBillingState(), coupon, altShipping, cart.isInsure())) %>
+		<%= currencyFormat.format(ShoppingUtil.calculateTotal(items, order.getBillingState(), coupon, altShipping, cart.isInsure())) %>
 	</td>
 </tr>
 </table>

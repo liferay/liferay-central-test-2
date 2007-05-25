@@ -152,11 +152,11 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			</c:choose>
 
 			<c:if test="<%= itemPrice.getDiscount() <= 0 %>">
-				<%= currency.getSymbol() %><%= doubleFormat.format(itemPrice.getPrice()) %><br />
+				<%= currencyFormat.format(itemPrice.getPrice()) %><br />
 			</c:if>
 
 			<c:if test="<%= itemPrice.getDiscount() > 0 %>">
-				<%= currency.getSymbol() %><strike><%= doubleFormat.format(itemPrice.getPrice()) %></strike> <span class="portlet-msg-success"><%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)) %></span> / <liferay-ui:message key="you-save" />: <span class="portlet-msg-error"><%= currency.getSymbol() %><%= doubleFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)) %> (<%= percentFormat.format(itemPrice.getDiscount()) %>)</span><br />
+				<strike><%= currencyFormat.format(itemPrice.getPrice()) %></strike> <span class="portlet-msg-success"><%= currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)) %></span> / <liferay-ui:message key="you-save" />: <span class="portlet-msg-error"><%= currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)) %> (<%= percentFormat.format(itemPrice.getDiscount()) %>)</span><br />
 			</c:if>
 
 		<%

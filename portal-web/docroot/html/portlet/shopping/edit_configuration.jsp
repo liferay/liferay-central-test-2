@@ -223,7 +223,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="minimum-order" />
 			</td>
 			<td>
-				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currency.getSymbol() %><%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>" />
+				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= currencyFormat.format(shoppingPrefs.getMinOrder()) %>" />
 			</td>
 		</tr>
 		</table>
@@ -267,10 +267,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 					<tr>
 						<td>
-							<%= currency.getSymbol() %><%= shippingRangeA %>
+							<%= currencyFormat.format(shippingRangeA) %>
 
 							<c:if test="<%= !Double.isInfinite(shippingRangeB) %>">
-								- <%= currency.getSymbol() %><%= shippingRangeB %>
+								- <%= currencyFormat.format(shippingRangeB) %>
 							</c:if>
 
 							<c:if test="<%= Double.isInfinite(shippingRangeB) %>">
@@ -330,10 +330,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 					<tr>
 						<td>
-							<%= currency.getSymbol() %><%= insuranceRangeA %>
+							<%= currencyFormat.format(insuranceRangeA) %>
 
 							<c:if test="<%= !Double.isInfinite(insuranceRangeB) %>">
-								- <%= currency.getSymbol() %><%= insuranceRangeB %>
+								- <%= currencyFormat.format(insuranceRangeB) %>
 							</c:if>
 
 							<c:if test="<%= Double.isInfinite(insuranceRangeB) %>">

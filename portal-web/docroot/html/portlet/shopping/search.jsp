@@ -152,10 +152,10 @@ for (int i = 0; i < results.size(); i++) {
 	// Price
 
 	if (item.getDiscount() <= 0) {
-		row.addText(currency.getSymbol() + doubleFormat.format(item.getPrice()), rowURL);
+		row.addText(currencyFormat.format(item.getPrice()), rowURL);
 	}
 	else {
-		row.addText("<span class=\"portlet-msg-success\">" + currency.getSymbol() + doubleFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</span>", rowURL);
+		row.addText("<span class=\"portlet-msg-success\">" + currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</span>", rowURL);
 	}
 
 	// Action

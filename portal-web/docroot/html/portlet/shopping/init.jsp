@@ -111,6 +111,10 @@ ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(company.getC
 
 Currency currency = Currency.getInstance(shoppingPrefs.getCurrencyId());
 
+NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+
+currencyFormat.setCurrency(currency);
+
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 NumberFormat doubleFormat = NumberFormat.getNumberInstance(locale);

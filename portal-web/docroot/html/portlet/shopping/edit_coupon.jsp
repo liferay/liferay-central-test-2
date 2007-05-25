@@ -207,7 +207,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <liferay-ui:tabs names="discount" />
 
-<%= LanguageUtil.format(pageContext, "coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount", currency.getSymbol() + doubleFormat.format(0), false) %>
+<%= LanguageUtil.format(pageContext, "coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount", currencyFormat.format(0), false) %>
 
 <br /><br />
 
@@ -225,7 +225,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		<liferay-ui:message key="minimum-order" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currency.getSymbol() %><%= doubleFormat.format(minOrder) %>" />
+		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= currencyFormat.format(minOrder) %>" />
 	</td>
 	<td>
 		<liferay-ui:message key="discount" />
