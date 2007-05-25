@@ -10,11 +10,11 @@
 		<listener-class>org.mule.config.builders.MuleXmlBuilderContextListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>DB App Inbound Servlet</servlet-name>
+		<servlet-name>Sample Hibernate Inbound Servlet</servlet-name>
 		<servlet-class>com.liferay.jbi.mule.http.MuleBindingServlet</servlet-class>
 		<init-param>
 			<param-name>endpoint</param-name>
-			<param-value>vm://dbAppInbound</param-value>
+			<param-value>vm://sampleHibernateInbound</param-value>
 		</init-param>
 	</servlet>
 	<servlet>
@@ -26,8 +26,8 @@
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DB App Inbound Servlet</servlet-name>
-		<url-pattern>/dbapp/*</url-pattern>
+		<servlet-name>Sample Hibernate Inbound Servlet</servlet-name>
+		<url-pattern>/sample_hibernate/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Workflow Inbound Servlet</servlet-name>

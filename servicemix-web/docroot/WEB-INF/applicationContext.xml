@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://xbean.org/schemas/spring/1.0" xmlns:spring="http://xbean.org/schemas/spring/1.0" xmlns:servicemix="http://servicemix.apache.org/config/1.0" xmlns:liferay="http://www.liferay.com/servicemix/">
-	<servicemix:container spring:id="jbi" rootDir="../wdir" useMBeanServer="true" createMBeanServer="true" installationDirPath="../install" deploymentDirPath="../deploy" monitorInstallationDirectory="true" dumpStats="true" statsInterval="10" transactionManager="#transactionManager">
+	<servicemix:container spring:id="jbi" rootDir="../wdir" useMBeanServer="true" createMBeanServer="true" installationDirPath="../install" deploymentDirPath="../deploy" monitorInstallationDirectory="true" transactionManager="#transactionManager">
 		<servicemix:activationSpecs>
 			<servicemix:activationSpec componentName="sampleHibernateInbound" service="liferay:sampleHibernateInbound" destinationService="liferay:sampleHibernateOutbound">
 				<servicemix:component>

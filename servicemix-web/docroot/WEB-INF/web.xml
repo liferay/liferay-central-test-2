@@ -14,11 +14,11 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>DB App Inbound Servlet</servlet-name>
+		<servlet-name>Sample Hibernate Servlet</servlet-name>
 		<servlet-class>com.liferay.jbi.servicemix.http.SpringBindingServlet</servlet-class>
 		<init-param>
 			<param-name>endpoint</param-name>
-			<param-value>dbAppInbound</param-value>
+			<param-value>sampleHibernateInbound</param-value>
 		</init-param>
 	</servlet>
 	<servlet>
@@ -30,8 +30,8 @@
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DB App Inbound Servlet</servlet-name>
-		<url-pattern>/dbapp/*</url-pattern>
+		<servlet-name>Sample Hibernate Servlet</servlet-name>
+		<url-pattern>/sample_hibernate/*</url-pattern>
 	</servlet-mapping>	
 	<servlet-mapping>
 		<servlet-name>Workflow Inbound Servlet</servlet-name>
