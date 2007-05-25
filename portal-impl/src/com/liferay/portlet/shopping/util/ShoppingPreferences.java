@@ -36,6 +36,11 @@ import com.liferay.util.Validator;
 
 import java.io.IOException;
 
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.portlet.PortletPreferences;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
@@ -51,8 +56,37 @@ public class ShoppingPreferences {
 	public static final String[] CC_TYPES =
 		new String[] {"visa", "mastercard", "discover", "amex"};
 
-	public static final String[] CURRENCY_IDS =
-		new String[] {"USD", "CAD", "EUR", "GBP", "JPY"};
+	public static final String[] CURRENCY_IDS;
+
+	static {
+		String[] ids = null;
+
+		try {
+			Set set = new TreeSet();
+
+			Locale[] locales = Locale.getAvailableLocales();
+
+			for (int i = 0; i < locales.length; i++) {
+				Locale locale = locales[i];
+
+				if (locale.getCountry().length() == 2) {
+					Currency currency = Currency.getInstance(locale);
+
+					String currencyId = currency.getCurrencyCode();
+
+					set.add(currencyId);
+				}
+			}
+
+			ids = (String[])set.toArray(new String[0]);
+		}
+		catch (Exception e) {
+			ids = new String[] {"USD", "CAD", "EUR", "GBP", "JPY"};
+		}
+		finally {
+			CURRENCY_IDS = ids;
+		}
+	}
 
 	public static final double[] SHIPPING_RANGE = {
 		0.01, 9.99, 10.00, 49.99, 50.00, 99.99, 100.00, 199.99, 200.00,
