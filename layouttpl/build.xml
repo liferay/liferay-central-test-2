@@ -1,39 +1,5 @@
 <?xml version="1.0"?>
 
 <project name="layouttpl" basedir="." default="deploy">
-	<import file="../build-common.xml" />
-
-	<target name="war">
-		<delete>
-			<fileset dir="." includes="**/Thumbs.db" />
-		</delete>
-
-		<war
-			basedir="sample-pack-01-layouttpl.war"
-			destfile="../sample-pack-01-layouttpl-${lp.version.file.name}.war"
-			excludes="WEB-INF/web.xml"
-			webxml="sample-pack-01-layouttpl.war/WEB-INF/web.xml"
-		/>
-	</target>
-
-	<target name="deploy">
-		<java
-			classname="com.liferay.portal.tools.LayoutTemplateDeployer"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-
-			<!-- Required Arguments -->
-
-			<jvmarg value="-Ddeployer.base.dir=./" />
-			<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-			<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-			<jvmarg value="-Ddeployer.unpack.war=true" />
-
-			<!-- Specific WARs -->
-
-			<arg line="${deploy.specific.wars}" />
-		</java>
-	</target>
+	<import file="../build-common-plugin.xml" />
 </project>
