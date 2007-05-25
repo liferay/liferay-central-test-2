@@ -292,6 +292,25 @@ insert into Region (regionId, countryId, regionCode, name, active_) values (62, 
 insert into Region (regionId, countryId, regionCode, name, active_) values (63, 1, 'QC', 'Quebec', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (64, 1, 'SK', 'Saskatchewan', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (65, 1, 'YT', 'Yukon', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (67, 15, 'AN', 'Andalusia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (68, 15, 'AR', 'Aragon', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (69, 15, 'AS', 'Asturias', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (70, 15, 'IB', 'Balearic Islands', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (71, 15, 'PV', 'Basque Country', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (72, 15, 'CN', 'Canary Islands', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (73, 15, 'CB', 'Cantabria', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (74, 15, 'CL', 'Castile and Leon', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (75, 15, 'CM', 'Castile-La Mancha', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (76, 15, 'CT', 'Catalonia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (77, 15, 'CE', 'Ceuta', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (78, 15, 'EX', 'Extremadura', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (79, 15, 'GA', 'Galicia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (80, 15, 'LO', 'La Rioja', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (81, 15, 'M', 'Madrid', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (82, 15, 'ML', 'Melilla', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (83, 15, 'MU', 'Murcia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (84, 15, 'NA', 'Navarra', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (85, 15, 'VC', 'Valencia', TRUE);
 
 ##
 ## List types for accounts
