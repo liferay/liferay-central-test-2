@@ -24,6 +24,7 @@ package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
@@ -36,6 +37,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import java.util.Random;
+
+import org.vps.crypt.Crypt;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -53,13 +56,25 @@ public class PwdEncryptor {
 		GetterUtil.getString(PropsUtil.get(
 			PropsUtil.PASSWORDS_ENCRYPTION_ALGORITHM)).toUpperCase();
 
+	public static final String TYPE_CRYPT = "CRYPT";
+
+	public static final String TYPE_MD2 = "MD2";
+
 	public static final String TYPE_MD5 = "MD5";
 
 	public static final String TYPE_NONE = "NONE";
 
 	public static final String TYPE_SHA = "SHA";
 
+	public static final String TYPE_SHA_256 = "SHA-256";
+
+	public static final String TYPE_SHA_384 = "SHA-384";
+
 	public static final String TYPE_SSHA = "SSHA";
+
+	public static final char[] saltChars =
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"
+			.toCharArray();
 
 	public static String encrypt(String clearTextPwd)
 		throws PwdEncryptorException {
@@ -78,7 +93,12 @@ public class PwdEncryptor {
 			String algorithm, String clearTextPwd, String currentEncPwd)
 		throws PwdEncryptorException {
 
-		if (algorithm.equals(TYPE_NONE)) {
+		if (algorithm.equals(TYPE_CRYPT)) {
+			byte[] saltBytes = _getSaltFromCrypt(currentEncPwd);
+
+			return encodePassword(algorithm, clearTextPwd, saltBytes);
+		}
+		else if (algorithm.equals(TYPE_NONE)) {
 			return clearTextPwd;
 		}
 		else if (algorithm.equals(TYPE_SSHA)) {
@@ -95,59 +115,107 @@ public class PwdEncryptor {
 			String algorithm, String clearTextPwd, byte[] saltBytes)
 		throws PwdEncryptorException {
 
-		if (algorithm.equals(TYPE_SSHA)) {
-			try {
+		try {
+			if (algorithm.equals(TYPE_CRYPT)) {
+				return Crypt.crypt(
+					clearTextPwd.getBytes(Digester.ENCODING), saltBytes);
+			}
+			else if (algorithm.equals(TYPE_SSHA)) {
 				byte[] clearTextPwdBytes =
 					clearTextPwd.getBytes(Digester.ENCODING);
 
-			    // Create a byte array of salt bytes appeneded to password bytes
+				// Create a byte array of salt bytes appeneded to password bytes
 
-			    byte[] pwdPlusSalt =
-			         new byte[clearTextPwdBytes.length + saltBytes.length];
+				byte[] pwdPlusSalt =
+					new byte[clearTextPwdBytes.length + saltBytes.length];
 
-			    System.arraycopy(
+				System.arraycopy(
 					clearTextPwdBytes, 0, pwdPlusSalt, 0,
 					clearTextPwdBytes.length);
 
-			    System.arraycopy(
-			    	saltBytes, 0, pwdPlusSalt, clearTextPwdBytes.length,
-			        saltBytes.length);
+				System.arraycopy(
+					saltBytes, 0, pwdPlusSalt, clearTextPwdBytes.length,
+					saltBytes.length);
 
-			    // Digest byte array
+				// Digest byte array
 
-			    MessageDigest sha1Digest = MessageDigest.getInstance("SHA-1");
+				MessageDigest sha1Digest = MessageDigest.getInstance("SHA-1");
 
 				byte[] pwdPlusSaltHash = sha1Digest.digest(pwdPlusSalt);
 
-			    // Appends salt bytes to the SHA-1 digest.
+				// Appends salt bytes to the SHA-1 digest.
 
-			    byte[] digestPlusSalt =
-			         new byte[pwdPlusSaltHash.length + saltBytes.length];
+				byte[] digestPlusSalt =
+					new byte[pwdPlusSaltHash.length + saltBytes.length];
 
-			    System.arraycopy(
-			    	pwdPlusSaltHash, 0, digestPlusSalt, 0,
-			    	pwdPlusSaltHash.length);
+				System.arraycopy(
+					pwdPlusSaltHash, 0, digestPlusSalt, 0,
+					pwdPlusSaltHash.length);
 
-			    System.arraycopy(
-			    	saltBytes, 0, digestPlusSalt, pwdPlusSaltHash.length,
-			        saltBytes.length);
+				System.arraycopy(
+					saltBytes, 0, digestPlusSalt, pwdPlusSaltHash.length,
+					saltBytes.length);
 
-			    // Base64 encode and format string
+				// Base64 encode and format string
 
 				BASE64Encoder encoder = new BASE64Encoder();
 
 				return encoder.encode(digestPlusSalt);
 			}
-			catch (NoSuchAlgorithmException nsae) {
-				throw new PwdEncryptorException(nsae.getMessage());
-			}
-			catch (UnsupportedEncodingException uee) {
-				throw new PwdEncryptorException(uee.getMessage());
+			else {
+				return Digester.digest(algorithm, clearTextPwd);
 			}
 		}
-		else {
-			return Digester.digest(algorithm, clearTextPwd);
+		catch (NoSuchAlgorithmException nsae) {
+			throw new PwdEncryptorException(nsae.getMessage());
 		}
+		catch (UnsupportedEncodingException uee) {
+			throw new PwdEncryptorException(uee.getMessage());
+		}
+	}
+
+	private static byte[] _getSaltFromCrypt(String cryptString)
+		throws PwdEncryptorException {
+
+		byte[] saltBytes = new byte[2];
+
+		try {
+			if (Validator.isNull(cryptString)) {
+
+				// Generate random salt
+
+				Random randomGenerator = new Random();
+
+				int numSaltChars = saltChars.length;
+
+				StringMaker sm = new StringMaker();
+
+				int x = Math.abs(randomGenerator.nextInt()) % numSaltChars;
+				int y = Math.abs(randomGenerator.nextInt()) % numSaltChars;
+
+				sm.append(saltChars[x]);
+				sm.append(saltChars[y]);
+
+				String salt = sm.toString();
+
+				saltBytes = salt.getBytes(Digester.ENCODING);
+			}
+			else {
+
+				// Extract salt from encrypted password
+
+				String salt = cryptString.substring(0, 3);
+
+				saltBytes = salt.getBytes(Digester.ENCODING);
+			}
+		}
+		catch (UnsupportedEncodingException uee) {
+			throw new PwdEncryptorException(
+				"Unable to extract salt from encrypted password: " +
+					uee.getMessage());
+		}
+
+		return saltBytes;
 	}
 
 	private static byte[] _getSaltFromSSHA(String sshaString)
@@ -167,18 +235,18 @@ public class PwdEncryptor {
 
 			// Extract salt from encrypted password
 
-		    BASE64Decoder decoder = new BASE64Decoder();
+			BASE64Decoder decoder = new BASE64Decoder();
 
 			try {
-			    byte[] digestPlusSalt = decoder.decodeBuffer(sshaString);
-			    byte[] digestBytes = new byte[digestPlusSalt.length - 8];
+				byte[] digestPlusSalt = decoder.decodeBuffer(sshaString);
+				byte[] digestBytes = new byte[digestPlusSalt.length - 8];
 
-			    System.arraycopy(
-			    	digestPlusSalt, 0, digestBytes, 0, digestBytes.length);
+				System.arraycopy(
+					digestPlusSalt, 0, digestBytes, 0, digestBytes.length);
 
-			    System.arraycopy(
-			    	digestPlusSalt, digestBytes.length, saltBytes, 0,
-			    	saltBytes.length);
+				System.arraycopy(
+					digestPlusSalt, digestBytes.length, saltBytes, 0,
+					saltBytes.length);
 			}
 			catch (IOException ioe) {
 				throw new PwdEncryptorException(
