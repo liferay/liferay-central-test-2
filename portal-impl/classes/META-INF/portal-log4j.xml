@@ -360,6 +360,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portlet.journal">
 		<priority value="ERROR" />
 	</category>
