@@ -34,6 +34,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
@@ -180,10 +181,15 @@ public class JournalContentSearchLocalServiceImpl
 			long companyId, long groupId, boolean privateLayout, long layoutId,
 			String portletId, String articleId)
 		throws PortalException, SystemException {
-
-		JournalContentSearch contentSearch =
-			JournalContentSearchUtil.findByG_P_L_P_A(
-				groupId, privateLayout, layoutId, portletId, articleId);
+		
+		JournalContentSearch contentSearch = null;
+		
+		try {
+			contentSearch = JournalContentSearchUtil.findByG_P_L_P_A(
+						groupId, privateLayout, layoutId, portletId, articleId);
+		}
+		catch (NoSuchContentSearchException e) {
+		}
 
 		if (contentSearch == null) {
 			long contentSearchId = CounterLocalServiceUtil.increment();
