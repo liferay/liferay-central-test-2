@@ -28,19 +28,27 @@ import com.liferay.util.JNDIUtil;
 import com.liferay.util.Validator;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 
 import java.net.SocketException;
 
 import java.util.Date;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Part;
 import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -55,6 +63,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer
+ * @author Neil Griffin
  *
  */
 public class MailEngine {
@@ -86,7 +95,7 @@ public class MailEngine {
 			mailMessage.getBCC(), mailMessage.getSubject(),
 			mailMessage.getBody(), mailMessage.isHTMLFormat(),
 			mailMessage.getReplyTo(), mailMessage.getMessageId(),
-			mailMessage.getInReplyTo());
+			mailMessage.getInReplyTo(), mailMessage.getAttachments());
 	}
 
 	public static void send(String from, String to, String subject, String body)
@@ -169,6 +178,18 @@ public class MailEngine {
 			String inReplyTo)
 		throws MailEngineException {
 
+		send(
+			from, to, cc, bcc, subject, body, htmlFormat, replyTo, messageId,
+			inReplyTo, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+			InternetAddress[] bcc, String subject, String body,
+			boolean htmlFormat, InternetAddress[] replyTo, String messageId,
+			String inReplyTo, File[] attachments)
+		throws MailEngineException {
+
 		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
@@ -186,6 +207,18 @@ public class MailEngine {
 			_log.debug("Reply to: " + replyTo);
 			_log.debug("Message ID: " + messageId);
 			_log.debug("In Reply To: " + inReplyTo);
+
+			if (attachments != null) {
+				for (int i = 0; i < attachments.length; i++) {
+					File attachment = attachments[i];
+
+					if (attachment != null) {
+						String path = attachment.getAbsolutePath();
+
+						_log.debug("Attachment #" + (i + 1) + ": " + path);
+					}
+				}
+			}
 		}
 
 		try {
@@ -206,25 +239,61 @@ public class MailEngine {
 
 			msg.setSubject(subject);
 
-			/*BodyPart bodyPart = new MimeBodyPart();
+			if ((attachments != null) && (attachments.length > 0)) {
+				MimeMultipart rootMultipart = new MimeMultipart(
+					_MULTIPART_TYPE_MIXED);
 
-			if (htmlFormat) {
-				bodyPart.setContent(body, "text/html");
+				MimeMultipart messageMultipart = new MimeMultipart(
+					_MULTIPART_TYPE_ALTERNATIVE);
+
+				MimeBodyPart messageBodyPart = new MimeBodyPart();
+
+				messageBodyPart.setContent(messageMultipart);
+
+				rootMultipart.addBodyPart(messageBodyPart);
+
+				if (htmlFormat) {
+					MimeBodyPart bodyPart = new MimeBodyPart();
+
+					bodyPart.setContent(body, _TEXT_HTML);
+
+					messageMultipart.addBodyPart(bodyPart);
+				}
+				else {
+					MimeBodyPart bodyPart = new MimeBodyPart();
+
+					bodyPart.setText(body);
+
+					messageMultipart.addBodyPart(bodyPart);
+				}
+
+				for (int i = 0; i < attachments.length; i++) {
+					File attachment = attachments[i];
+
+					if (attachment != null) {
+						MimeBodyPart bodyPart = new MimeBodyPart();
+
+						DataSource source = new FileDataSource(attachment);
+
+						bodyPart.setDisposition(Part.ATTACHMENT);
+						bodyPart.setDataHandler(new DataHandler(source));
+						bodyPart.setFileName(attachment.getName());
+
+						rootMultipart.addBodyPart(bodyPart);
+					}
+				}
+
+				msg.setContent(rootMultipart);
+
+				msg.saveChanges();
 			}
 			else {
-				bodyPart.setText(body);
-			}
-
-			Multipart multipart = new MimeMultipart();
-			multipart.addBodyPart(bodyPart);
-
-			msg.setContent(multipart);*/
-
-			if (htmlFormat) {
-				msg.setContent(body, _TEXT_HTML);
-			}
-			else {
-				msg.setContent(body, _TEXT_PLAIN);
+				if (htmlFormat) {
+					msg.setContent(body, _TEXT_HTML);
+				}
+				else {
+					msg.setContent(body, _TEXT_PLAIN);
+				}
 			}
 
 			msg.setSentDate(new Date());
@@ -305,6 +374,10 @@ public class MailEngine {
 			}
 		}
 	}
+
+	private static final String _MULTIPART_TYPE_ALTERNATIVE = "alternative";
+
+	private static final String _MULTIPART_TYPE_MIXED = "mixed";
 
 	private static final String _TEXT_HTML = "text/html;charset=\"UTF-8\"";
 

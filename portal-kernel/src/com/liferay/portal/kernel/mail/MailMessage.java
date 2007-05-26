@@ -22,7 +22,11 @@
 
 package com.liferay.portal.kernel.mail;
 
+import java.io.File;
 import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.mail.internet.InternetAddress;
 
@@ -30,6 +34,7 @@ import javax.mail.internet.InternetAddress;
  * <a href="MailMessage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Neil Griffin
  *
  */
 public class MailMessage implements Serializable {
@@ -65,6 +70,7 @@ public class MailMessage implements Serializable {
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
+		_attachments = new ArrayList();
 	}
 
 	public InternetAddress getFrom() {
@@ -151,6 +157,16 @@ public class MailMessage implements Serializable {
 		_inReplyTo = inReplyTo;
 	}
 
+	public void addAttachment(File attachment) {
+		if (attachment != null) {
+			_attachments.add(attachment);
+		}
+	}
+
+	public File[] getAttachments() {
+		return (File[])_attachments.toArray(new File[0]);
+	}
+
 	private InternetAddress _from;
 	private InternetAddress[] _to;
 	private InternetAddress[] _cc;
@@ -161,5 +177,6 @@ public class MailMessage implements Serializable {
 	private InternetAddress[] _replyTo;
 	private String _messageId;
 	private String _inReplyTo;
+	private List _attachments;
 
 }
