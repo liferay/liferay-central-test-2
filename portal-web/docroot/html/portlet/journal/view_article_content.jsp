@@ -25,20 +25,22 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <html>
-	<head>
-		<link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
-		<link href="<%= themeDisplay.getPathThemeCss() %>/main.css?companyId=<%= themeDisplay.getCompanyId() %>&themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" rel="stylesheet" type="text/css" />
-		<c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
-			<style type="text/css">
-				<%= layout.getCssText() %>
-			</style>
-		</c:if>
-	</head>
-	
-	<body>
 
-	<%= request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT) %>
-	
-	</body>
+<head>
+	<link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
+	<link href="<%= themeDisplay.getPathThemeCss() %>/main.css?companyId=<%= themeDisplay.getCompanyId() %>&themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" rel="stylesheet" type="text/css" />
+
+	<c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
+		<style type="text/css">
+			<%= layout.getCssText() %>
+		</style>
+	</c:if>
+</head>
+
+<body>
+
+<%= request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT) %>
+
+</body>
 
 </html>
