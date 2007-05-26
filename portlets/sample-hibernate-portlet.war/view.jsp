@@ -174,8 +174,8 @@ else {
 
 	<br /><br />
 
-	<%= Http.getProtocol(request) %>://<%= request.getServerName() %>:<%= request.getServerPort() %>/<%= request.getContextPath() %>/servlet/test?cmd=getFoodItemXml<br />
-	<%= Http.getProtocol(request) %>://<%= request.getServerName() %>:<%= request.getServerPort() %>/<%= request.getContextPath() %>/sample-hibernate-portlet/view.xsl
+	<%= Http.getProtocol(request) %>://<%= request.getServerName() %>:<%= request.getServerPort() %><%= request.getContextPath() %>/servlet/test?cmd=getFoodItemXml<br />
+	<%= Http.getProtocol(request) %>://<%= request.getServerName() %>:<%= request.getServerPort() %><%= request.getContextPath() %>/view.xsl
 
 <%
 }
