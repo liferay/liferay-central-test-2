@@ -10,7 +10,7 @@
 		<listener-class>org.mule.config.builders.MuleXmlBuilderContextListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>Sample Hibernate Inbound Servlet</servlet-name>
+		<servlet-name>Sample Hibernate Servlet</servlet-name>
 		<servlet-class>com.liferay.jbi.mule.http.MuleBindingServlet</servlet-class>
 		<init-param>
 			<param-name>endpoint</param-name>
@@ -26,7 +26,7 @@
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Sample Hibernate Inbound Servlet</servlet-name>
+		<servlet-name>Sample Hibernate Servlet</servlet-name>
 		<url-pattern>/sample_hibernate/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
