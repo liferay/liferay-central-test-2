@@ -518,6 +518,11 @@
 		<struts-path>open_id</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>113</portlet-name>
+		<struts-path>portlet_css</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

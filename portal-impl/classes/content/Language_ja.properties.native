@@ -23,6 +23,7 @@ javax.portlet.title.10=住所録
 javax.portlet.title.110=文書の図書館の表示
 javax.portlet.title.111=差込式の取付人
 javax.portlet.title.112=OpenID は署名する
+javax.portlet.title.113=Portlet CSS
 javax.portlet.title.11=登録簿
 javax.portlet.title.12=在庫
 javax.portlet.title.13=計算機

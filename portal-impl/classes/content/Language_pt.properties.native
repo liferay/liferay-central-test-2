@@ -23,6 +23,7 @@ javax.portlet.title.10=Livro De Endereço
 javax.portlet.title.110=Exposição Da Biblioteca Do Original
 javax.portlet.title.111=Instalador Plugin
 javax.portlet.title.112=Sinal De OpenID Dentro
+javax.portlet.title.113=Portlet Css
 javax.portlet.title.11=Diretório
 javax.portlet.title.12=Estoque
 javax.portlet.title.13=Calculadora

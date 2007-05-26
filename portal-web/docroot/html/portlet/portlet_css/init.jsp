@@ -22,30 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portal/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
-
-<%
-boolean layoutMaximized = layoutTypePortlet.hasStateMax();
-
-if (!layoutMaximized) {
-	String content = LayoutTemplateLocalUtil.getContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-
-	RuntimePortletUtil.processTemplate(application, pageContext, request, response, content);
-}
-else {
-	String content = null;
-
-	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
-	}
-	else {
-		content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
-	}
-
-	RuntimePortletUtil.processTemplate(application, pageContext, request, response, StringUtil.split(layoutTypePortlet.getStateMax())[0], content);
-}
-%>
-
-<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
+<%@ page import="com.liferay.portal.util.LayoutLister" %>
+<%@ page import="com.liferay.portal.util.LayoutView" %>

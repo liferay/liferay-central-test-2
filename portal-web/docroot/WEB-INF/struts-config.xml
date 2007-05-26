@@ -1287,6 +1287,10 @@
 
 		<action path="/portlet_configuration/update_title" type="com.liferay.portlet.portletconfiguration.action.UpdateTitleAction" />
 
+		<!-- Portlet CSS -->
+
+		<action path="/portlet_css/view" forward="portlet.portlet_css.view" />
+
 		<!-- Quick Note -->
 
 		<action path="/quick_note/save" type="com.liferay.portlet.quicknote.action.SaveAction" />

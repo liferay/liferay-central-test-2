@@ -94,6 +94,8 @@ public class PortletKeys {
 
 	public static final String PORTLET_CONFIGURATION = "86";
 
+	public static final String PORTLET_CSS = "113";
+
 	public static final long PREFS_OWNER_ID_DEFAULT = 0;
 
 	public static final int PREFS_OWNER_TYPE_COMPANY = 1;
