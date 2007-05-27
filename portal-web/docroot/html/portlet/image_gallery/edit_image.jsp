@@ -32,6 +32,12 @@ IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
+
+Image largeImage = null;
+
+if (image != null) {
+	largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
+}
 %>
 
 <liferay-ui:tabs names="image" />
@@ -62,7 +68,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 			<liferay-ui:message key="height" />
 		</td>
 		<td>
-			<%= image.getHeight() %>
+			<%= largeImage.getHeight() %>
 		</td>
 	</tr>
 	<tr>
@@ -70,7 +76,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 			<liferay-ui:message key="width" />
 		</td>
 		<td>
-			<%= image.getWidth() %>
+			<%= largeImage.getWidth() %>
 		</td>
 	</tr>
 	<tr>
@@ -78,7 +84,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 			<liferay-ui:message key="size" />
 		</td>
 		<td>
-			<%= TextFormatter.formatKB(image.getSize(), locale) %>k
+			<%= TextFormatter.formatKB(largeImage.getSize(), locale) %>k
 		</td>
 	</tr>
 	<tr>

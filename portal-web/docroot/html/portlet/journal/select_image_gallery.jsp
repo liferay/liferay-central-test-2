@@ -142,6 +142,8 @@ for (int i = 0; i < results.size(); i++) {
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = (IGImage)results.get(i);
 
+		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
+
 		ResultRow row = new ResultRow(image, image.getImageId(), i);
 
 		// Thumbnail
@@ -150,9 +152,9 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Statistics
 
-		row.addText(String.valueOf(image.getHeight()));
-		row.addText(String.valueOf(image.getWidth()));
-		row.addText(TextFormatter.formatKB(image.getSize(), locale) + "k");
+		row.addText(String.valueOf(largeImage.getHeight()));
+		row.addText(String.valueOf(largeImage.getWidth()));
+		row.addText(TextFormatter.formatKB(largeImage.getSize(), locale) + "k");
 
 		// Action
 
