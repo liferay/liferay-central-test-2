@@ -44,8 +44,10 @@ import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.util.Http;
+import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.UploadServletRequest;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -264,22 +266,53 @@ public class LayoutAction extends Action {
 			ParamUtil.getString(req, "p_p_mode"));
 
 		if (action) {
-			ActionRequestImpl actionRequestImpl = ActionRequestFactory.create(
-				req, portlet, cachePortlet, portletCtx, windowState,
-				portletMode, portletPreferences, layout.getPlid());
+			String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
 
-			ActionResponseImpl actionResponseImpl =
-				ActionResponseFactory.create(
-					actionRequestImpl, res, portletId, user, layout,
-					windowState, portletMode);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Content type " + contentType);
+			}
 
-			actionRequestImpl.defineObjects(portletConfig, actionResponseImpl);
+			UploadServletRequest uploadReq = null;
 
-			cachePortlet.processAction(actionRequestImpl, actionResponseImpl);
+			try {
+				if ((contentType != null) &&
+					(contentType.startsWith(
+						Constants.MULTIPART_FORM_DATA))) {
 
-			RenderParametersPool.put(
-				req, layout.getPlid(), portletId,
-				actionResponseImpl.getRenderParameters());
+					if (!cachePortlet.getPortletConfig().isWARFile() ||
+						cachePortlet.isStrutsPortlet()) {
+
+						uploadReq = new UploadServletRequest(req);
+
+						req = uploadReq;
+					}
+				}
+
+				ActionRequestImpl actionRequestImpl =
+					ActionRequestFactory.create(
+						req, portlet, cachePortlet, portletCtx, windowState,
+						portletMode, portletPreferences, layout.getPlid());
+
+				ActionResponseImpl actionResponseImpl =
+					ActionResponseFactory.create(
+						actionRequestImpl, res, portletId, user, layout,
+						windowState, portletMode);
+
+				actionRequestImpl.defineObjects(
+					portletConfig, actionResponseImpl);
+
+				cachePortlet.processAction(
+					actionRequestImpl, actionResponseImpl);
+
+				RenderParametersPool.put(
+					req, layout.getPlid(), portletId,
+					actionResponseImpl.getRenderParameters());
+			}
+			finally {
+				if (uploadReq != null) {
+					uploadReq.cleanUp();
+				}
+			}
 		}
 		else {
 			PortalUtil.updateWindowState(

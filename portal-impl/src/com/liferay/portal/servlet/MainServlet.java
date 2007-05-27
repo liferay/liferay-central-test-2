@@ -61,7 +61,6 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.EncryptedServletRequest;
 import com.liferay.util.servlet.ProtectedServletRequest;
-import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -397,24 +396,9 @@ public class MainServlet extends ActionServlet {
 
 		req.setCharacterEncoding(strutsCharEncoding);
 
-		// Determine content type
+		// Encrypt request
 
-		String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Content type " + contentType);
-		}
-
-		UploadServletRequest uploadReq = null;
-
-		if ((contentType != null) &&
-			(contentType.startsWith(Constants.MULTIPART_FORM_DATA))) {
-
-			uploadReq = new UploadServletRequest(req);
-
-			req = uploadReq;
-		}
-		else if (ParamUtil.get(req, WebKeys.ENCRYPT, false)) {
+		if (ParamUtil.get(req, WebKeys.ENCRYPT, false)) {
 			try {
 				Company company = CompanyLocalServiceUtil.getCompanyById(
 					companyId);
@@ -563,10 +547,6 @@ public class MainServlet extends ActionServlet {
 
 			res.addHeader(
 				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
-
-			if (uploadReq != null) {
-				uploadReq.cleanUp();
-			}
 
 			// Clear the company id associated with this thread
 

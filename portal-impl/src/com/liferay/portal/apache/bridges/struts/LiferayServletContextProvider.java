@@ -23,11 +23,16 @@
 package com.liferay.portal.apache.bridges.struts;
 
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.util.HttpHeaders;
+import com.liferay.util.servlet.UploadServletRequest;
+
+import java.io.IOException;
 
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletRequest;
@@ -36,6 +41,9 @@ import javax.portlet.PortletResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LiferayServletContextProvider.java.html"><b><i>View Source</i></b>
@@ -64,7 +72,24 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 		HttpServletRequest httpReq = null;
 
 		if (req instanceof ActionRequestImpl) {
-			httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
+			httpReq = ((ActionRequestImpl)req).getHttpServletRequest();
+
+	        String contentType = httpReq.getHeader(HttpHeaders.CONTENT_TYPE);
+
+	        if ((contentType != null) &&
+	            (contentType.startsWith(Constants.MULTIPART_FORM_DATA))) {
+
+	        	try {
+	        		httpReq = new UploadServletRequest(httpReq);
+	        	}
+	        	catch (IOException ioe) {
+	        	}
+
+	        	httpReq = new LiferayStrutsRequestImpl(httpReq);
+	        }
+	        else {
+	        	httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
+	        }
 		}
 		else {
 			httpReq = new LiferayStrutsRequestImpl((RenderRequestImpl)req);
@@ -83,5 +108,8 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 			return ((ActionResponseImpl)res).getHttpServletResponse();
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(LiferayServletContextProvider.class);
 
 }
