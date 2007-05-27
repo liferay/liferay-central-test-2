@@ -29,6 +29,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
@@ -122,10 +123,24 @@ public class PortletDeployer extends BaseDeployer {
 	}
 
 	protected void updateDeployDirectory(File srcFile) throws Exception {
-		if (!PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+		try {
+			if (!PrefsPropsUtil.getBoolean(
+					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
 
-			return;
+				return;
+			}
+		}
+		catch (Exception e) {
+
+			// This will only happen when running the deploy tool in Ant in the
+			// classical way where the WAR file is actually massaged and
+			// packaged.
+
+			if (!GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML))) {
+
+				return;
+			}
 		}
 
 		File portletXML = new File(
