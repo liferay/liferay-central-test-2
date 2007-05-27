@@ -250,6 +250,18 @@ public class BaseDeployer {
 				for (int i = 0; i < libs.length; i++) {
 					excludes += "**/WEB-INF/lib/" + libs[i] + ",";
 				}
+
+				File contextXML = new File(srcFile + "/META-INF/context.xml");
+
+				if (contextXML.exists()) {
+					String content = FileUtil.read(contextXML);
+
+					if (content.indexOf(_PORTAL_CLASS_LOADER) != -1) {
+						excludes += "**/WEB-INF/lib/util-bridges.jar,";
+						excludes += "**/WEB-INF/lib/util-java.jar,";
+						excludes += "**/WEB-INF/lib/util-taglib.jar,";
+					}
+				}
 			}
 
 			if (!unpackWar || appServerType.equals("websphere")) {
@@ -714,5 +726,8 @@ public class BaseDeployer {
 	protected String tomcatLibDir;
 	protected List wars;
 	protected List jars;
+
+	private static final String _PORTAL_CLASS_LOADER =
+		"com.liferay.support.tomcat.loader.PortalClassLoader";
 
 }
