@@ -266,7 +266,7 @@ public class MailAction extends JSONAction {
 			boolean enabled =
 				GetterUtil.getBoolean(
 					prefs.getValue(
-						finder.getClass().getName(), StringPool.BLANK),
+						finder.getClass().getName(), null),
 					true);
 
 			if (enabled) {
