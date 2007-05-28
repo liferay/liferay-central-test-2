@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.polls.model;
 
-import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -49,8 +47,9 @@ import java.util.List;
 public class PollsChoiceSoap implements Serializable {
 	public static PollsChoiceSoap toSoapModel(PollsChoice model) {
 		PollsChoiceSoap soapModel = new PollsChoiceSoap();
-		soapModel.setQuestionId(model.getQuestionId());
 		soapModel.setChoiceId(model.getChoiceId());
+		soapModel.setQuestionId(model.getQuestionId());
+		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 
 		return soapModel;
@@ -70,13 +69,20 @@ public class PollsChoiceSoap implements Serializable {
 	public PollsChoiceSoap() {
 	}
 
-	public PollsChoicePK getPrimaryKey() {
-		return new PollsChoicePK(_questionId, _choiceId);
+	public long getPrimaryKey() {
+		return _choiceId;
 	}
 
-	public void setPrimaryKey(PollsChoicePK pk) {
-		setQuestionId(pk.questionId);
-		setChoiceId(pk.choiceId);
+	public void setPrimaryKey(long pk) {
+		setChoiceId(pk);
+	}
+
+	public long getChoiceId() {
+		return _choiceId;
+	}
+
+	public void setChoiceId(long choiceId) {
+		_choiceId = choiceId;
 	}
 
 	public long getQuestionId() {
@@ -87,12 +93,12 @@ public class PollsChoiceSoap implements Serializable {
 		_questionId = questionId;
 	}
 
-	public String getChoiceId() {
-		return _choiceId;
+	public String getName() {
+		return _name;
 	}
 
-	public void setChoiceId(String choiceId) {
-		_choiceId = choiceId;
+	public void setName(String name) {
+		_name = name;
 	}
 
 	public String getDescription() {
@@ -103,7 +109,8 @@ public class PollsChoiceSoap implements Serializable {
 		_description = description;
 	}
 
+	private long _choiceId;
 	private long _questionId;
-	private String _choiceId;
+	private String _name;
 	private String _description;
 }

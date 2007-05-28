@@ -28,13 +28,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portlet.polls.QuestionExpiredException;
-import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsVoteService;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
-import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 
 /**
  * <a href="PollsVoteServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +42,7 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 public class PollsVoteServiceImpl extends PrincipalBean
 	implements PollsVoteService {
 
-	public PollsVote addVote(long questionId, String choiceId)
+	public PollsVote addVote(long questionId, long choiceId)
 		throws PortalException, SystemException {
 
 		long userId = 0;
@@ -54,18 +51,11 @@ public class PollsVoteServiceImpl extends PrincipalBean
 			userId = getUserId();
 		}
 		catch (PrincipalException pe) {
-			userId = CounterLocalServiceUtil.increment(
-				PollsQuestion.class.getName() + ".anonymous");
-		}
-
-		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
-
-		if (question.isExpired()) {
-			throw new QuestionExpiredException();
+			userId = CounterLocalServiceUtil.increment();
 		}
 
 		PollsQuestionPermission.check(
-			getPermissionChecker(), question, ActionKeys.ADD_VOTE);
+			getPermissionChecker(), questionId, ActionKeys.ADD_VOTE);
 
 		return PollsVoteLocalServiceUtil.addVote(userId, questionId, choiceId);
 	}

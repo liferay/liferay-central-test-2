@@ -40,8 +40,7 @@ public class PollsVoteImpl extends PollsVoteModelImpl implements PollsVote {
 	}
 
 	public PollsChoice getChoice() throws PortalException, SystemException {
-		return PollsChoiceLocalServiceUtil.getChoice(
-			getQuestionId(), getChoiceId());
+		return PollsChoiceLocalServiceUtil.getChoice(getChoiceId());
 	}
 
 }

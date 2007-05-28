@@ -25,8 +25,6 @@ package com.liferay.portlet.polls.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -55,15 +53,16 @@ import java.sql.Types;
 public class PollsChoiceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsChoice";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "choiceId", new Integer(Types.BIGINT) },
 			{ "questionId", new Integer(Types.BIGINT) },
-			{ "choiceId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_CHOICEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.choiceId"),
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.name"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.description"),
@@ -74,13 +73,22 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 	public PollsChoiceModelImpl() {
 	}
 
-	public PollsChoicePK getPrimaryKey() {
-		return new PollsChoicePK(_questionId, _choiceId);
+	public long getPrimaryKey() {
+		return _choiceId;
 	}
 
-	public void setPrimaryKey(PollsChoicePK pk) {
-		setQuestionId(pk.questionId);
-		setChoiceId(pk.choiceId);
+	public void setPrimaryKey(long pk) {
+		setChoiceId(pk);
+	}
+
+	public long getChoiceId() {
+		return _choiceId;
+	}
+
+	public void setChoiceId(long choiceId) {
+		if (choiceId != _choiceId) {
+			_choiceId = choiceId;
+		}
 	}
 
 	public long getQuestionId() {
@@ -93,20 +101,19 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getChoiceId() {
-		return GetterUtil.getString(_choiceId);
+	public String getName() {
+		return GetterUtil.getString(_name);
 	}
 
-	public void setChoiceId(String choiceId) {
-		if (((choiceId == null) && (_choiceId != null)) ||
-				((choiceId != null) && (_choiceId == null)) ||
-				((choiceId != null) && (_choiceId != null) &&
-				!choiceId.equals(_choiceId))) {
-			if (!XSS_ALLOW_CHOICEID) {
-				choiceId = XSSUtil.strip(choiceId);
+	public void setName(String name) {
+		if (((name == null) && (_name != null)) ||
+				((name != null) && (_name == null)) ||
+				((name != null) && (_name != null) && !name.equals(_name))) {
+			if (!XSS_ALLOW_NAME) {
+				name = XSSUtil.strip(name);
 			}
 
-			_choiceId = choiceId;
+			_name = name;
 		}
 	}
 
@@ -129,8 +136,9 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PollsChoiceImpl clone = new PollsChoiceImpl();
-		clone.setQuestionId(getQuestionId());
 		clone.setChoiceId(getChoiceId());
+		clone.setQuestionId(getQuestionId());
+		clone.setName(getName());
 		clone.setDescription(getDescription());
 
 		return clone;
@@ -143,7 +151,22 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 		PollsChoiceImpl pollsChoice = (PollsChoiceImpl)obj;
 		int value = 0;
-		value = getChoiceId().compareTo(pollsChoice.getChoiceId());
+
+		if (getQuestionId() < pollsChoice.getQuestionId()) {
+			value = -1;
+		}
+		else if (getQuestionId() > pollsChoice.getQuestionId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = getName().compareTo(pollsChoice.getName());
 
 		if (value != 0) {
 			return value;
@@ -166,9 +189,9 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PollsChoicePK pk = pollsChoice.getPrimaryKey();
+		long pk = pollsChoice.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -177,10 +200,11 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
+	private long _choiceId;
 	private long _questionId;
-	private String _choiceId;
+	private String _name;
 	private String _description;
 }

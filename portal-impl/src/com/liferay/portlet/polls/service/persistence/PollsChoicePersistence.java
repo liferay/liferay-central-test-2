@@ -29,11 +29,9 @@ package com.liferay.portlet.polls.service.persistence;
  *
  */
 public interface PollsChoicePersistence {
-	public com.liferay.portlet.polls.model.PollsChoice create(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK);
+	public com.liferay.portlet.polls.model.PollsChoice create(long choiceId);
 
-	public com.liferay.portlet.polls.model.PollsChoice remove(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+	public com.liferay.portlet.polls.model.PollsChoice remove(long choiceId)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException;
 
@@ -50,13 +48,12 @@ public interface PollsChoicePersistence {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice findByPrimaryKey(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		long choiceId)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
-		throws com.liferay.portal.SystemException;
+		long choiceId) throws com.liferay.portal.SystemException;
 
 	public java.util.List findByQuestionId(long questionId)
 		throws com.liferay.portal.SystemException;
@@ -79,10 +76,19 @@ public interface PollsChoicePersistence {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice[] findByQuestionId_PrevAndNext(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK,
-		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long choiceId, long questionId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByQ_N(
+		long questionId, java.lang.String name)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice fetchByQ_N(
+		long questionId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -104,9 +110,16 @@ public interface PollsChoicePersistence {
 	public void removeByQuestionId(long questionId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByQ_N(long questionId, java.lang.String name)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByQuestionId(long questionId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByQ_N(long questionId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -72,7 +72,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Number of votes
 
-	int votesCount = PollsVoteLocalServiceUtil.getVotesCount(question.getQuestionId());
+	int votesCount = PollsVoteLocalServiceUtil.getQuestionVotesCount(question.getQuestionId());
 
 	row.addText(String.valueOf(votesCount), rowURL);
 

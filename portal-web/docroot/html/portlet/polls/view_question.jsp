@@ -68,7 +68,7 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
 				</td>
 				<td>
-					<b><%= choice.getChoiceId() %>.</b>
+					<b><%= choice.getName() %>.</b>
 				</td>
 				<td>
 					<%= choice.getDescription() %>

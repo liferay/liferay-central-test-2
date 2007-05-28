@@ -54,15 +54,15 @@ import java.util.List;
  */
 public class PollsVotePersistenceImpl extends BasePersistence
 	implements PollsVotePersistence {
-	public PollsVote create(PollsVotePK pollsVotePK) {
+	public PollsVote create(long voteId) {
 		PollsVote pollsVote = new PollsVoteImpl();
 		pollsVote.setNew(true);
-		pollsVote.setPrimaryKey(pollsVotePK);
+		pollsVote.setPrimaryKey(voteId);
 
 		return pollsVote;
 	}
 
-	public PollsVote remove(PollsVotePK pollsVotePK)
+	public PollsVote remove(long voteId)
 		throws NoSuchVoteException, SystemException {
 		Session session = null;
 
@@ -70,16 +70,16 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			PollsVote pollsVote = (PollsVote)session.get(PollsVoteImpl.class,
-					pollsVotePK);
+					new Long(voteId));
 
 			if (pollsVote == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No PollsVote exists with the primary key " +
-						pollsVotePK);
+						voteId);
 				}
 
 				throw new NoSuchVoteException(
-					"No PollsVote exists with the primary key " + pollsVotePK);
+					"No PollsVote exists with the primary key " + voteId);
 			}
 
 			return remove(pollsVote);
@@ -149,31 +149,29 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public PollsVote findByPrimaryKey(PollsVotePK pollsVotePK)
+	public PollsVote findByPrimaryKey(long voteId)
 		throws NoSuchVoteException, SystemException {
-		PollsVote pollsVote = fetchByPrimaryKey(pollsVotePK);
+		PollsVote pollsVote = fetchByPrimaryKey(voteId);
 
 		if (pollsVote == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No PollsVote exists with the primary key " +
-					pollsVotePK);
+				_log.warn("No PollsVote exists with the primary key " + voteId);
 			}
 
 			throw new NoSuchVoteException(
-				"No PollsVote exists with the primary key " + pollsVotePK);
+				"No PollsVote exists with the primary key " + voteId);
 		}
 
 		return pollsVote;
 	}
 
-	public PollsVote fetchByPrimaryKey(PollsVotePK pollsVotePK)
-		throws SystemException {
+	public PollsVote fetchByPrimaryKey(long voteId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (PollsVote)session.get(PollsVoteImpl.class, pollsVotePK);
+			return (PollsVote)session.get(PollsVoteImpl.class, new Long(voteId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -287,10 +285,10 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public PollsVote[] findByQuestionId_PrevAndNext(PollsVotePK pollsVotePK,
+	public PollsVote[] findByQuestionId_PrevAndNext(long voteId,
 		long questionId, OrderByComparator obc)
 		throws NoSuchVoteException, SystemException {
-		PollsVote pollsVote = findByPrimaryKey(pollsVotePK);
+		PollsVote pollsVote = findByPrimaryKey(voteId);
 		int count = countByQuestionId(questionId);
 		Session session = null;
 
@@ -331,8 +329,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByQ_C(long questionId, String choiceId)
-		throws SystemException {
+	public List findByChoiceId(long choiceId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -341,27 +338,14 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" AND ");
-
-			if (choiceId == null) {
-				query.append("choiceId IS NULL");
-			}
-			else {
-				query.append("choiceId = ?");
-			}
-
+			query.append("choiceId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			if (choiceId != null) {
-				q.setString(queryPos++, choiceId);
-			}
+			q.setLong(queryPos++, choiceId);
 
 			return q.list();
 		}
@@ -373,12 +357,12 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByQ_C(long questionId, String choiceId, int begin, int end)
+	public List findByChoiceId(long choiceId, int begin, int end)
 		throws SystemException {
-		return findByQ_C(questionId, choiceId, begin, end, null);
+		return findByChoiceId(choiceId, begin, end, null);
 	}
 
-	public List findByQ_C(long questionId, String choiceId, int begin, int end,
+	public List findByChoiceId(long choiceId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -388,16 +372,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" AND ");
-
-			if (choiceId == null) {
-				query.append("choiceId IS NULL");
-			}
-			else {
-				query.append("choiceId = ?");
-			}
-
+			query.append("choiceId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -409,11 +384,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			if (choiceId != null) {
-				q.setString(queryPos++, choiceId);
-			}
+			q.setLong(queryPos++, choiceId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -425,54 +396,47 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public PollsVote findByQ_C_First(long questionId, String choiceId,
-		OrderByComparator obc) throws NoSuchVoteException, SystemException {
-		List list = findByQ_C(questionId, choiceId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
-			msg.append(", ");
-			msg.append("choiceId=");
-			msg.append(choiceId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchVoteException(msg.toString());
-		}
-		else {
-			return (PollsVote)list.get(0);
-		}
-	}
-
-	public PollsVote findByQ_C_Last(long questionId, String choiceId,
-		OrderByComparator obc) throws NoSuchVoteException, SystemException {
-		int count = countByQ_C(questionId, choiceId);
-		List list = findByQ_C(questionId, choiceId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No PollsVote exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("questionId=");
-			msg.append(questionId);
-			msg.append(", ");
-			msg.append("choiceId=");
-			msg.append(choiceId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchVoteException(msg.toString());
-		}
-		else {
-			return (PollsVote)list.get(0);
-		}
-	}
-
-	public PollsVote[] findByQ_C_PrevAndNext(PollsVotePK pollsVotePK,
-		long questionId, String choiceId, OrderByComparator obc)
+	public PollsVote findByChoiceId_First(long choiceId, OrderByComparator obc)
 		throws NoSuchVoteException, SystemException {
-		PollsVote pollsVote = findByPrimaryKey(pollsVotePK);
-		int count = countByQ_C(questionId, choiceId);
+		List list = findByChoiceId(choiceId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("choiceId=");
+			msg.append(choiceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchVoteException(msg.toString());
+		}
+		else {
+			return (PollsVote)list.get(0);
+		}
+	}
+
+	public PollsVote findByChoiceId_Last(long choiceId, OrderByComparator obc)
+		throws NoSuchVoteException, SystemException {
+		int count = countByChoiceId(choiceId);
+		List list = findByChoiceId(choiceId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("choiceId=");
+			msg.append(choiceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchVoteException(msg.toString());
+		}
+		else {
+			return (PollsVote)list.get(0);
+		}
+	}
+
+	public PollsVote[] findByChoiceId_PrevAndNext(long voteId, long choiceId,
+		OrderByComparator obc) throws NoSuchVoteException, SystemException {
+		PollsVote pollsVote = findByPrimaryKey(voteId);
+		int count = countByChoiceId(choiceId);
 		Session session = null;
 
 		try {
@@ -481,16 +445,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" AND ");
-
-			if (choiceId == null) {
-				query.append("choiceId IS NULL");
-			}
-			else {
-				query.append("choiceId = ?");
-			}
-
+			query.append("choiceId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -502,11 +457,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			if (choiceId != null) {
-				q.setString(queryPos++, choiceId);
-			}
+			q.setLong(queryPos++, choiceId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsVote);
@@ -516,6 +467,71 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			array[2] = (PollsVote)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PollsVote findByQ_U(long questionId, long userId)
+		throws NoSuchVoteException, SystemException {
+		PollsVote pollsVote = fetchByQ_U(questionId, userId);
+
+		if (pollsVote == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchVoteException(msg.toString());
+		}
+
+		return pollsVote;
+	}
+
+	public PollsVote fetchByQ_U(long questionId, long userId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+			query.append("questionId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, questionId);
+			q.setLong(queryPos++, userId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			PollsVote pollsVote = (PollsVote)list.get(0);
+
+			return pollsVote;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -609,14 +625,19 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByQ_C(long questionId, String choiceId)
-		throws SystemException {
-		Iterator itr = findByQ_C(questionId, choiceId).iterator();
+	public void removeByChoiceId(long choiceId) throws SystemException {
+		Iterator itr = findByChoiceId(choiceId).iterator();
 
 		while (itr.hasNext()) {
 			PollsVote pollsVote = (PollsVote)itr.next();
 			remove(pollsVote);
 		}
+	}
+
+	public void removeByQ_U(long questionId, long userId)
+		throws NoSuchVoteException, SystemException {
+		PollsVote pollsVote = findByQ_U(questionId, userId);
+		remove(pollsVote);
 	}
 
 	public void removeAll() throws SystemException {
@@ -666,7 +687,46 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByQ_C(long questionId, String choiceId)
+	public int countByChoiceId(long choiceId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+			query.append("choiceId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, choiceId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByQ_U(long questionId, long userId)
 		throws SystemException {
 		Session session = null;
 
@@ -679,14 +739,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
 			query.append("questionId = ?");
 			query.append(" AND ");
-
-			if (choiceId == null) {
-				query.append("choiceId IS NULL");
-			}
-			else {
-				query.append("choiceId = ?");
-			}
-
+			query.append("userId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -694,10 +747,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, questionId);
-
-			if (choiceId != null) {
-				q.setString(queryPos++, choiceId);
-			}
+			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();
 

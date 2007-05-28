@@ -150,6 +150,9 @@ public class PollsQuestionLocalServiceImpl
 		while (itr.hasNext()) {
 			PollsChoice choice = (PollsChoice)itr.next();
 
+			long choiceId = CounterLocalServiceUtil.increment();
+
+			choice.setChoiceId(choiceId);
 			choice.setQuestionId(questionId);
 
 			PollsChoiceUtil.update(choice);
@@ -297,14 +300,32 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		PollsChoiceUtil.removeByQuestionId(questionId);
+		int oldChoicesCount = PollsChoiceUtil.countByQuestionId(questionId);
+
+		if (oldChoicesCount != choices.size()) {
+			throw new QuestionChoiceException();
+		}
 
 		Iterator itr = choices.iterator();
 
 		while (itr.hasNext()) {
 			PollsChoice choice = (PollsChoice)itr.next();
 
-			choice.setQuestionId(questionId);
+			String choiceName = choice.getName();
+			String choiceDescription = choice.getDescription();
+
+			choice = PollsChoiceUtil.fetchByQ_N(questionId, choiceName);
+
+			if (choice == null) {
+				long choiceId = CounterLocalServiceUtil.increment();
+
+				choice = PollsChoiceUtil.create(choiceId);
+
+				choice.setQuestionId(questionId);
+				choice.setName(choiceName);
+			}
+
+			choice.setDescription(choiceDescription);
 
 			PollsChoiceUtil.update(choice);
 		}
@@ -329,7 +350,7 @@ public class PollsQuestionLocalServiceImpl
 		for (int i = 0; i < choices.size(); i++) {
 			PollsChoice choice = (PollsChoice)choices.get(i);
 
-			if (Validator.isNull(choice.getChoiceId()) ||
+			if (Validator.isNull(choice.getName()) ||
 				Validator.isNull(choice.getDescription())) {
 
 				throw new QuestionChoiceException();

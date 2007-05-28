@@ -890,10 +890,11 @@
 	</class>
 	<class name="com.liferay.portlet.polls.model.impl.PollsChoiceImpl" table="PollsChoice">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.polls.service.persistence.PollsChoicePK">
-			<key-property name="questionId" />
-			<key-property name="choiceId" />
-		</composite-id>
+		<id name="choiceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="questionId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.polls.model.impl.PollsQuestionImpl" table="PollsQuestion">
@@ -914,11 +915,12 @@
 	</class>
 	<class name="com.liferay.portlet.polls.model.impl.PollsVoteImpl" table="PollsVote">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.polls.service.persistence.PollsVotePK">
-			<key-property name="questionId" />
-			<key-property name="userId" />
-		</composite-id>
-		<property name="choiceId" type="com.liferay.util.dao.hibernate.StringType" />
+		<id name="voteId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="questionId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="choiceId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="voteDate" />
 	</class>
 	<class name="com.liferay.portlet.ratings.model.impl.RatingsEntryImpl" table="RatingsEntry">

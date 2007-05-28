@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -78,15 +79,23 @@ public class UpgradePolls extends UpgradeProcess {
 
 		// PollsChoice
 
+		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS,
-			upgradeQuestionIdColumn);
+			pkUpgradeColumn, upgradeQuestionIdColumn);
+
+		ValueMapper choiceIdMapper = pkUpgradeColumn.getValueMapper();
+
+		UpgradeColumn upgradeChoiceIdColumn = new SwapUpgradeColumnImpl(
+			"choiceId", choiceIdMapper);
 
 		// PollsVote
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
-			upgradeQuestionIdColumn);
+			new PKUpgradeColumnImpl(), upgradeQuestionIdColumn,
+			upgradeChoiceIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -98,7 +107,20 @@ public class UpgradePolls extends UpgradeProcess {
 		// Counter
 
 		CounterLocalServiceUtil.reset(PollsQuestion.class.getName());
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter table PollsChoice drop primary key;",
+		"alter table PollsChoice add primary key (choiceId);",
+
+		"alter table PollsVote drop primary key;",
+		"alter table PollsVote add primary key (voteId);",
+		"alter_column_type PollsVote choiceId LONG;"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradePolls.class);
 

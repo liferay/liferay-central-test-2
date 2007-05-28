@@ -852,8 +852,9 @@
 		<field name="priority" type="double" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsChoice">
+		<field name="choiceId" type="long" />
 		<field name="questionId" type="long" />
-		<field name="choiceId" type="String" />
+		<field name="name" type="String" />
 		<field name="description" type="String" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsQuestion">
@@ -872,9 +873,10 @@
 		<field name="lastVoteDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsVote">
-		<field name="questionId" type="long" />
+		<field name="voteId" type="long" />
 		<field name="userId" type="long" />
-		<field name="choiceId" type="String" />
+		<field name="questionId" type="long" />
+		<field name="choiceId" type="long" />
 		<field name="voteDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.ratings.model.RatingsEntry">

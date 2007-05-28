@@ -57,11 +57,11 @@ if (choicesCount < 2) {
 	choicesCount = 2;
 }
 
-int choiceId = ParamUtil.getInteger(request, "choiceId");
+int choiceName = ParamUtil.getInteger(request, "choiceName");
 
 boolean deleteChoice = false;
 
-if (choiceId > 0) {
+if (choiceName > 0) {
 	deleteChoice = true;
 }
 %>
@@ -87,7 +87,7 @@ if (choiceId > 0) {
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
 <input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>" />
-<input name="<portlet:namespace />choiceId" type="hidden" value="" />
+<input name="<portlet:namespace />choiceName" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />
 <liferay-ui:error exception="<%= QuestionDescriptionException.class %>" message="please-enter-a-valid-description" />
@@ -157,7 +157,7 @@ if (choiceId > 0) {
 					String choiceDesc = null;
 
 					if (deleteChoice) {
-						if (i < choiceId) {
+						if (i < choiceName) {
 							choiceDesc = ParamUtil.getString(request, EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c);
 						}
 						else {
@@ -184,14 +184,14 @@ if (choiceId > 0) {
 							<%= c %>.
 						</td>
 						<td>
-							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_ID_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
+							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
 
 							<liferay-ui:input-field model="<%= PollsChoice.class %>" field="description" fieldParam="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" defaultValue="<%= choiceDesc %>" />
 						</td>
 
 						<c:if test="<%= choicesCount > 2 %>">
 							<td>
-								<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
+								<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
 							</td>
 						</c:if>
 

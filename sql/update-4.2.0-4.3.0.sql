@@ -239,11 +239,14 @@ create table PluginSetting (
 	active_ BOOLEAN
 );
 
+alter_column_name PollsChoice choiceId name VARCHAR(75) null;
+alter table PollsChoice add choiceId LONG;
 alter_column_type PollsChoice questionId LONG;
 
 alter_column_type PollsQuestion questionId LONG;
 alter_column_type PollsQuestion groupId LONG;
 
+alter table PollsVote add voteId LONG;
 alter_column_type PollsVote questionId LONG;
 
 alter_column_type Portlet id_ LONG;

@@ -66,12 +66,12 @@ public class PollsChoiceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice getChoice(
-		long questionId, java.lang.String choiceId)
+		long choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
-		return pollsChoiceLocalService.getChoice(questionId, choiceId);
+		return pollsChoiceLocalService.getChoice(choiceId);
 	}
 
 	public static java.util.List getChoices(long questionId)

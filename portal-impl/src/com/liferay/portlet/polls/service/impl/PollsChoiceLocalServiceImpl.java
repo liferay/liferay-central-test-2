@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl;
-import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 
 import java.util.List;
@@ -40,12 +39,10 @@ import java.util.List;
 public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 
-	public PollsChoice getChoice(long questionId, String choiceId)
+	public PollsChoice getChoice(long choiceId)
 		throws PortalException, SystemException {
 
-		PollsChoicePK pk = new PollsChoicePK(questionId, choiceId);
-
-		return PollsChoiceUtil.findByPrimaryKey(pk);
+		return PollsChoiceUtil.findByPrimaryKey(choiceId);
 	}
 
 	public List getChoices(long questionId) throws SystemException {

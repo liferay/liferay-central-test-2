@@ -37,7 +37,6 @@ import com.liferay.portlet.polls.QuestionExpiredException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
-import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -68,7 +67,7 @@ public class EditQuestionAction extends PortletAction {
 
 	public static final String CHOICE_DESCRIPTION_PREFIX = "choiceDescription";
 
-	public static final String CHOICE_ID_PREFIX = "choiceId";
+	public static final String CHOICE_NAME_PREFIX = "choiceName";
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -184,13 +183,13 @@ public class EditQuestionAction extends PortletAction {
 					String id = param.substring(
 						CHOICE_DESCRIPTION_PREFIX.length(), param.length());
 
-					String choiceId = ParamUtil.getString(
-						req, CHOICE_ID_PREFIX + id);
+					String choiceName = ParamUtil.getString(
+						req, CHOICE_NAME_PREFIX + id);
 					String choiceDescription = ParamUtil.getString(req, param);
 
-					PollsChoice choice = PollsChoiceUtil.create(
-						new PollsChoicePK(0, choiceId));
+					PollsChoice choice = PollsChoiceUtil.create(0);
 
+					choice.setName(choiceName);
 					choice.setDescription(choiceDescription);
 
 					choices.add(choice);

@@ -158,11 +158,13 @@ create index IX_B9746445 on PluginSetting (companyId);
 create index IX_7171B2E8 on PluginSetting (companyId, pluginId, pluginType);
 
 create index IX_EC370F10 on PollsChoice (questionId);
+create index IX_D76DD2CF on PollsChoice (questionId, name);
 
 create index IX_9FF342EA on PollsQuestion (groupId);
 
+create index IX_D5DF7B54 on PollsVote (choiceId);
 create index IX_12112599 on PollsVote (questionId);
-create index IX_FE3220E9 on PollsVote (questionId, choiceId);
+create index IX_1BBFD4D3 on PollsVote (questionId, userId);
 
 create index IX_80CC9508 on Portlet (companyId);
 create index IX_12B5E51D on Portlet (companyId, portletId);

@@ -656,10 +656,10 @@ create table PluginSetting (
 );
 
 create table PollsChoice (
+	choiceId LONG primary key,
 	questionId LONG,
-	choiceId VARCHAR(75) not null,
-	description VARCHAR(75) null,
-	primary key (questionId, choiceId)
+	name VARCHAR(75) null,
+	description VARCHAR(75) null
 );
 
 create table PollsQuestion (
@@ -677,11 +677,11 @@ create table PollsQuestion (
 );
 
 create table PollsVote (
-	questionId LONG,
+	voteId LONG primary key,
 	userId LONG,
-	choiceId VARCHAR(75) null,
-	voteDate DATE null,
-	primary key (questionId, userId)
+	questionId LONG,
+	choiceId LONG,
+	voteDate DATE null
 );
 
 create table Portlet (

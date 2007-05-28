@@ -24,8 +24,6 @@ package com.liferay.portlet.polls.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.polls.service.persistence.PollsVotePK;
-
 import java.util.Date;
 
 /**
@@ -49,21 +47,25 @@ import java.util.Date;
  *
  */
 public interface PollsVoteModel extends BaseModel {
-	public PollsVotePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(PollsVotePK pk);
+	public void setPrimaryKey(long pk);
 
-	public long getQuestionId();
+	public long getVoteId();
 
-	public void setQuestionId(long questionId);
+	public void setVoteId(long voteId);
 
 	public long getUserId();
 
 	public void setUserId(long userId);
 
-	public String getChoiceId();
+	public long getQuestionId();
 
-	public void setChoiceId(String choiceId);
+	public void setQuestionId(long questionId);
+
+	public long getChoiceId();
+
+	public void setChoiceId(long choiceId);
 
 	public Date getVoteDate();
 

@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.polls.model;
 
-import com.liferay.portlet.polls.service.persistence.PollsVotePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,8 +48,9 @@ import java.util.List;
 public class PollsVoteSoap implements Serializable {
 	public static PollsVoteSoap toSoapModel(PollsVote model) {
 		PollsVoteSoap soapModel = new PollsVoteSoap();
-		soapModel.setQuestionId(model.getQuestionId());
+		soapModel.setVoteId(model.getVoteId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setQuestionId(model.getQuestionId());
 		soapModel.setChoiceId(model.getChoiceId());
 		soapModel.setVoteDate(model.getVoteDate());
 
@@ -72,21 +71,20 @@ public class PollsVoteSoap implements Serializable {
 	public PollsVoteSoap() {
 	}
 
-	public PollsVotePK getPrimaryKey() {
-		return new PollsVotePK(_questionId, _userId);
+	public long getPrimaryKey() {
+		return _voteId;
 	}
 
-	public void setPrimaryKey(PollsVotePK pk) {
-		setQuestionId(pk.questionId);
-		setUserId(pk.userId);
+	public void setPrimaryKey(long pk) {
+		setVoteId(pk);
 	}
 
-	public long getQuestionId() {
-		return _questionId;
+	public long getVoteId() {
+		return _voteId;
 	}
 
-	public void setQuestionId(long questionId) {
-		_questionId = questionId;
+	public void setVoteId(long voteId) {
+		_voteId = voteId;
 	}
 
 	public long getUserId() {
@@ -97,11 +95,19 @@ public class PollsVoteSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public String getChoiceId() {
+	public long getQuestionId() {
+		return _questionId;
+	}
+
+	public void setQuestionId(long questionId) {
+		_questionId = questionId;
+	}
+
+	public long getChoiceId() {
 		return _choiceId;
 	}
 
-	public void setChoiceId(String choiceId) {
+	public void setChoiceId(long choiceId) {
 		_choiceId = choiceId;
 	}
 
@@ -113,8 +119,9 @@ public class PollsVoteSoap implements Serializable {
 		_voteDate = voteDate;
 	}
 
-	private long _questionId;
+	private long _voteId;
 	private long _userId;
-	private String _choiceId;
+	private long _questionId;
+	private long _choiceId;
 	private Date _voteDate;
 }

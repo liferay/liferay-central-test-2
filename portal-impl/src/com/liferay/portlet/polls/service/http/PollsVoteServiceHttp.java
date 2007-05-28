@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -71,17 +70,12 @@ import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
  */
 public class PollsVoteServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
-		HttpPrincipal httpPrincipal, long questionId, java.lang.String choiceId)
+		HttpPrincipal httpPrincipal, long questionId, long choiceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);
-			Object paramObj1 = choiceId;
-
-			if (choiceId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(choiceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PollsVoteServiceUtil.class.getName(),
 					"addVote", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;

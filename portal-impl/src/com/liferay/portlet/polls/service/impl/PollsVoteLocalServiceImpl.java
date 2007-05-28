@@ -22,17 +22,18 @@
 
 package com.liferay.portlet.polls.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.polls.DuplicateVoteException;
-import com.liferay.portlet.polls.NoSuchVoteException;
+import com.liferay.portlet.polls.NoSuchQuestionException;
+import com.liferay.portlet.polls.QuestionExpiredException;
+import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.base.PollsVoteLocalServiceBaseImpl;
-import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
-import com.liferay.portlet.polls.service.persistence.PollsVotePK;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
 import java.util.Date;
@@ -46,14 +47,26 @@ import java.util.List;
  */
 public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
-	public PollsVote addVote(long userId, long questionId, String choiceId)
+	public PollsVote addVote(long userId, long questionId, long choiceId)
 		throws PortalException, SystemException {
 
-		// Question
+		// Choice
 
 		Date now = new Date();
 
+		PollsChoice choice = PollsChoiceUtil.findByPrimaryKey(choiceId);
+
+		if (choice.getQuestionId() != questionId) {
+			throw new NoSuchQuestionException();
+		}
+
+		// Question
+
 		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+
+		if (question.isExpired()) {
+			throw new QuestionExpiredException();
+		}
 
 		question.setLastVoteDate(now);
 
@@ -61,23 +74,18 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 		// Vote
 
-		PollsVotePK votePK = new PollsVotePK(questionId, userId);
+		PollsVote vote = PollsVoteUtil.fetchByQ_U(questionId, userId);
 
-		PollsVote vote = null;
-
-		try {
-			vote = PollsVoteUtil.findByPrimaryKey(votePK);
-
+		if (vote != null) {
 			throw new DuplicateVoteException();
 		}
-		catch (NoSuchVoteException nsve) {
-			vote = PollsVoteUtil.create(votePK);
+		else {
+			long voteId = CounterLocalServiceUtil.increment();
 
-			PollsChoicePK choicePK =
-				new PollsChoicePK(questionId, choiceId);
+			vote = PollsVoteUtil.create(voteId);
 
-			PollsChoiceUtil.findByPrimaryKey(choicePK);
-
+			vote.setUserId(userId);
+			vote.setQuestionId(questionId);
 			vote.setChoiceId(choiceId);
 			vote.setVoteDate(now);
 
@@ -87,34 +95,30 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return vote;
 	}
 
+	public List getChoiceVotes(long choiceId, int begin, int end)
+		throws SystemException {
+
+		return PollsVoteUtil.findByChoiceId(choiceId,  begin, end);
+	}
+
+	public int getChoiceVotesCount(long choiceId) throws SystemException {
+		return PollsVoteUtil.countByChoiceId(choiceId);
+	}
+
 	public PollsVote getVote(long questionId, long userId)
 		throws PortalException, SystemException {
 
-		PollsVotePK pk = new PollsVotePK(questionId, userId);
-
-		return PollsVoteUtil.findByPrimaryKey(pk);
+		return PollsVoteUtil.findByQ_U(questionId, userId);
 	}
 
-	public List getVotes(long questionId, int begin, int end)
+	public List getQuestionVotes(long questionId, int begin, int end)
 		throws SystemException {
 
 		return PollsVoteUtil.findByQuestionId(questionId, begin, end);
 	}
 
-	public List getVotes(long questionId, String choiceId, int begin, int end)
-		throws SystemException {
-
-		return PollsVoteUtil.findByQ_C(questionId, choiceId,  begin, end);
-	}
-
-	public int getVotesCount(long questionId) throws SystemException {
+	public int getQuestionVotesCount(long questionId) throws SystemException {
 		return PollsVoteUtil.countByQuestionId(questionId);
-	}
-
-	public int getVotesCount(long questionId, String choiceId)
-		throws SystemException {
-
-		return PollsVoteUtil.countByQ_C(questionId, choiceId);
 	}
 
 }

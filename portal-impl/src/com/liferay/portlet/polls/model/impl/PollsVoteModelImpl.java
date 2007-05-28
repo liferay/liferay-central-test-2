@@ -25,10 +25,7 @@ package com.liferay.portlet.polls.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.polls.service.persistence.PollsVotePK;
-
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -57,39 +54,36 @@ import java.util.Date;
 public class PollsVoteModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsVote";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "questionId", new Integer(Types.BIGINT) },
+			{ "voteId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
-			{ "choiceId", new Integer(Types.VARCHAR) },
+			{ "questionId", new Integer(Types.BIGINT) },
+			{ "choiceId", new Integer(Types.BIGINT) },
 			{ "voteDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsVote"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_CHOICEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsVote.choiceId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsVoteModel"));
 
 	public PollsVoteModelImpl() {
 	}
 
-	public PollsVotePK getPrimaryKey() {
-		return new PollsVotePK(_questionId, _userId);
+	public long getPrimaryKey() {
+		return _voteId;
 	}
 
-	public void setPrimaryKey(PollsVotePK pk) {
-		setQuestionId(pk.questionId);
-		setUserId(pk.userId);
+	public void setPrimaryKey(long pk) {
+		setVoteId(pk);
 	}
 
-	public long getQuestionId() {
-		return _questionId;
+	public long getVoteId() {
+		return _voteId;
 	}
 
-	public void setQuestionId(long questionId) {
-		if (questionId != _questionId) {
-			_questionId = questionId;
+	public void setVoteId(long voteId) {
+		if (voteId != _voteId) {
+			_voteId = voteId;
 		}
 	}
 
@@ -103,19 +97,22 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getChoiceId() {
-		return GetterUtil.getString(_choiceId);
+	public long getQuestionId() {
+		return _questionId;
 	}
 
-	public void setChoiceId(String choiceId) {
-		if (((choiceId == null) && (_choiceId != null)) ||
-				((choiceId != null) && (_choiceId == null)) ||
-				((choiceId != null) && (_choiceId != null) &&
-				!choiceId.equals(_choiceId))) {
-			if (!XSS_ALLOW_CHOICEID) {
-				choiceId = XSSUtil.strip(choiceId);
-			}
+	public void setQuestionId(long questionId) {
+		if (questionId != _questionId) {
+			_questionId = questionId;
+		}
+	}
 
+	public long getChoiceId() {
+		return _choiceId;
+	}
+
+	public void setChoiceId(long choiceId) {
+		if (choiceId != _choiceId) {
 			_choiceId = choiceId;
 		}
 	}
@@ -135,8 +132,9 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PollsVoteImpl clone = new PollsVoteImpl();
-		clone.setQuestionId(getQuestionId());
+		clone.setVoteId(getVoteId());
 		clone.setUserId(getUserId());
+		clone.setQuestionId(getQuestionId());
 		clone.setChoiceId(getChoiceId());
 		clone.setVoteDate(getVoteDate());
 
@@ -149,9 +147,17 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 		}
 
 		PollsVoteImpl pollsVote = (PollsVoteImpl)obj;
-		PollsVotePK pk = pollsVote.getPrimaryKey();
+		long pk = pollsVote.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -168,9 +174,9 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PollsVotePK pk = pollsVote.getPrimaryKey();
+		long pk = pollsVote.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -179,11 +185,12 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private long _questionId;
+	private long _voteId;
 	private long _userId;
-	private String _choiceId;
+	private long _questionId;
+	private long _choiceId;
 	private Date _voteDate;
 }

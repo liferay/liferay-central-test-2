@@ -7,23 +7,29 @@
 
 		<!-- PK fields -->
 
-		<column name="questionId" type="long" primary="true" />
-		<column name="choiceId" type="String" primary="true" />
+		<column name="choiceId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
+		<column name="questionId" type="long" />
+		<column name="name" type="String" />
 		<column name="description" type="String" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="choiceId" />
+			<order-column name="questionId" />
+			<order-column name="name" />
 		</order>
 
 		<!-- Finder methods -->
 
 		<finder name="QuestionId" return-type="Collection">
 			<finder-column name="questionId" />
+		</finder>
+		<finder name="Q_N" return-type="PollsChoice">
+			<finder-column name="questionId" />
+			<finder-column name="name" />
 		</finder>
 	</entity>
 	<entity name="PollsQuestion" local-service="true" remote-service="true">
@@ -67,12 +73,16 @@
 
 		<!-- PK fields -->
 
-		<column name="questionId" type="long" primary="true" />
-		<column name="userId" type="long" primary="true" />
+		<column name="voteId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
 
 		<!-- Other fields -->
 
-		<column name="choiceId" type="String" />
+		<column name="questionId" type="long" />
+		<column name="choiceId" type="long" />
 		<column name="voteDate" type="Date" />
 
 		<!-- Finder methods -->
@@ -80,9 +90,12 @@
 		<finder name="QuestionId" return-type="Collection">
 			<finder-column name="questionId" />
 		</finder>
-		<finder name="Q_C" return-type="Collection">
-			<finder-column name="questionId" />
+		<finder name="ChoiceId" return-type="Collection">
 			<finder-column name="choiceId" />
+		</finder>
+		<finder name="Q_U" return-type="PollsVote">
+			<finder-column name="questionId" />
+			<finder-column name="userId" />
 		</finder>
 	</entity>
 	<exceptions>

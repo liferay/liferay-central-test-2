@@ -41,12 +41,12 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		</tr>
 
 		<%
-		int totalVotes = PollsVoteLocalServiceUtil.getVotesCount(question.getQuestionId());
+		int totalVotes = PollsVoteLocalServiceUtil.getQuestionVotesCount(question.getQuestionId());
 
 		for (int i = 0; i < choices.size(); i++) {
 			PollsChoice choice = (PollsChoice)choices.get(i);
 
-			int choiceVotes = PollsVoteLocalServiceUtil.getVotesCount(question.getQuestionId(), choice.getChoiceId());
+			int choiceVotes = PollsVoteLocalServiceUtil.getChoiceVotesCount(choice.getChoiceId());
 
 			String className = "portlet-section-body";
 			String classHoverName = "portlet-section-body-hover";
@@ -93,7 +93,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 				<td></td>
 				<td>
-					<b><%= choice.getChoiceId() %>.</b>
+					<b><%= choice.getName() %>.</b>
 				</td>
 				<td width="99%">
 					<%= choice.getDescription() %>
@@ -149,11 +149,11 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = PollsVoteLocalServiceUtil.getVotesCount(question.getQuestionId());
+		int total = PollsVoteLocalServiceUtil.getQuestionVotesCount(question.getQuestionId());
 
 		searchContainer.setTotal(total);
 
-		List results = PollsVoteLocalServiceUtil.getVotes(question.getQuestionId(), searchContainer.getStart(), searchContainer.getEnd());
+		List results = PollsVoteLocalServiceUtil.getQuestionVotes(question.getQuestionId(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -162,7 +162,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		for (int i = 0; i < results.size(); i++) {
 			PollsVote vote = (PollsVote)results.get(i);
 
-			ResultRow row = new ResultRow(vote, vote.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(vote, vote.getVoteId(), i);
 
 			// User
 
@@ -172,7 +172,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 			PollsChoice choice = vote.getChoice();
 
-			row.addText(choice.getChoiceId() + ". " + choice.getDescription());
+			row.addText(choice.getName() + ". " + choice.getDescription());
 
 			// Vote date
 

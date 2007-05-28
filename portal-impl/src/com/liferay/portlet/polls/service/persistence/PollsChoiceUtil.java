@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PollsChoiceUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice create(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK) {
-		return getPersistence().create(pollsChoicePK);
+		long choiceId) {
+		return getPersistence().create(choiceId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice remove(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		long choiceId)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(pollsChoicePK));
+			listener.onBeforeRemove(findByPrimaryKey(choiceId));
 		}
 
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice = getPersistence()
-																	  .remove(pollsChoicePK);
+																	  .remove(choiceId);
 
 		if (listener != null) {
 			listener.onAfterRemove(pollsChoice);
@@ -140,16 +140,15 @@ public class PollsChoiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice findByPrimaryKey(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
+		long choiceId)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(pollsChoicePK);
+		return getPersistence().findByPrimaryKey(choiceId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(pollsChoicePK);
+		long choiceId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(choiceId);
 	}
 
 	public static java.util.List findByQuestionId(long questionId)
@@ -183,12 +182,25 @@ public class PollsChoiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice[] findByQuestionId_PrevAndNext(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK,
-		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long choiceId, long questionId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByQuestionId_PrevAndNext(pollsChoicePK,
+		return getPersistence().findByQuestionId_PrevAndNext(choiceId,
 			questionId, obc);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsChoice findByQ_N(
+		long questionId, java.lang.String name)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByQ_N(questionId, name);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsChoice fetchByQ_N(
+		long questionId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByQ_N(questionId, name);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -225,6 +237,12 @@ public class PollsChoiceUtil {
 		getPersistence().removeByQuestionId(questionId);
 	}
 
+	public static void removeByQ_N(long questionId, java.lang.String name)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeByQ_N(questionId, name);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -232,6 +250,11 @@ public class PollsChoiceUtil {
 	public static int countByQuestionId(long questionId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByQuestionId(questionId);
+	}
+
+	public static int countByQ_N(long questionId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByQ_N(questionId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

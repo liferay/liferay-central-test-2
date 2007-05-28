@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class PollsVoteServiceSoap {
 	public static com.liferay.portlet.polls.model.PollsVoteSoap addVote(
-		long questionId, java.lang.String choiceId) throws RemoteException {
+		long questionId, long choiceId) throws RemoteException {
 		try {
 			com.liferay.portlet.polls.model.PollsVote returnValue = PollsVoteServiceUtil.addVote(questionId,
 					choiceId);

@@ -37,7 +37,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 	String cmd = ParamUtil.getString(request, Constants.CMD);
 
 	if (cmd.equals(Constants.ADD)) {
-		String choiceId = ParamUtil.getString(request, "choiceId");
+		long choiceId = ParamUtil.getLong(request, "choiceId");
 
 		try {
 			PollsVoteServiceUtil.addVote(question.getQuestionId(), choiceId);
@@ -89,7 +89,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
 				</td>
 				<td>
-					<b><%= choice.getChoiceId() %>.</b>
+					<b><%= choice.getName() %>.</b>
 				</td>
 				<td>
 					<%= choice.getDescription() %>

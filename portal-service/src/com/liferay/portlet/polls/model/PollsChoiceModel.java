@@ -24,8 +24,6 @@ package com.liferay.portlet.polls.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
-
 /**
  * <a href="PollsChoiceModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,17 +45,21 @@ import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
  *
  */
 public interface PollsChoiceModel extends BaseModel {
-	public PollsChoicePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(PollsChoicePK pk);
+	public void setPrimaryKey(long pk);
+
+	public long getChoiceId();
+
+	public void setChoiceId(long choiceId);
 
 	public long getQuestionId();
 
 	public void setQuestionId(long questionId);
 
-	public String getChoiceId();
+	public String getName();
 
-	public void setChoiceId(String choiceId);
+	public void setName(String name);
 
 	public String getDescription();
 
