@@ -39,6 +39,7 @@ import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -428,8 +429,36 @@ public class LayoutTypePortletImpl
 			if (StringUtil.contains(columnValue, portletId)) {
 				return true;
 			}
+
+			if (hasStaticPortletId(columnId, portletId)) {
+				return true;
+			}
 		}
 
+		return false;
+	}
+
+	public boolean hasStaticPortletId(String columnId, String portletId) {
+		String[] staticPortletIdsStart = _getStaticPortletIds(
+				PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
+
+		String[] staticPortletIdsEnd = _getStaticPortletIds(
+			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
+
+		String[] staticPortletIds = new String[
+			staticPortletIdsStart.length + staticPortletIdsEnd.length];
+
+		ArrayUtil.combine(
+				staticPortletIdsStart, staticPortletIdsEnd, staticPortletIds);
+
+		for (int j = 0; j < staticPortletIds.length; j++) {
+			String staticPortletId = staticPortletIds[j];
+			
+			if (staticPortletId.equals(portletId)) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
