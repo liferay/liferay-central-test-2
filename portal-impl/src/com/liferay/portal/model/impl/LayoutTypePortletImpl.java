@@ -35,11 +35,11 @@ import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -430,35 +430,11 @@ public class LayoutTypePortletImpl
 				return true;
 			}
 
-			if (hasStaticPortletId(columnId, portletId)) {
+			if (_hasStaticPortletId(columnId, portletId)) {
 				return true;
 			}
 		}
 
-		return false;
-	}
-
-	public boolean hasStaticPortletId(String columnId, String portletId) {
-		String[] staticPortletIdsStart = _getStaticPortletIds(
-				PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
-
-		String[] staticPortletIdsEnd = _getStaticPortletIds(
-			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
-
-		String[] staticPortletIds = new String[
-			staticPortletIdsStart.length + staticPortletIdsEnd.length];
-
-		ArrayUtil.combine(
-				staticPortletIdsStart, staticPortletIdsEnd, staticPortletIds);
-
-		for (int j = 0; j < staticPortletIds.length; j++) {
-			String staticPortletId = staticPortletIds[j];
-			
-			if (staticPortletId.equals(portletId)) {
-				return true;
-			}
-		}
-		
 		return false;
 	}
 
@@ -913,6 +889,30 @@ public class LayoutTypePortletImpl
 		}
 
 		return portlets;
+	}
+
+	private boolean _hasStaticPortletId(String columnId, String portletId) {
+		String[] staticPortletIdsStart = _getStaticPortletIds(
+			PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
+
+		String[] staticPortletIdsEnd = _getStaticPortletIds(
+			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
+
+		String[] staticPortletIds = new String[
+			staticPortletIdsStart.length + staticPortletIdsEnd.length];
+
+		ArrayUtil.combine(
+			staticPortletIdsStart, staticPortletIdsEnd, staticPortletIds);
+
+		for (int i = 0; i < staticPortletIds.length; i++) {
+			String staticPortletId = staticPortletIds[i];
+
+			if (staticPortletId.equals(portletId)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutTypePortletImpl.class);
