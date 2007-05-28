@@ -337,14 +337,16 @@ create table Image (
 );
 
 create table JournalArticle (
-	companyId LONG,
+	id_ LONG primary key,
+	resourcePrimKey LONG,
 	groupId LONG,
-	articleId VARCHAR(75) not null,
-	version DOUBLE,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	articleId VARCHAR(75) null,
+	version DOUBLE,
 	title VARCHAR(75) null,
 	description STRING null,
 	content TEXT null,
@@ -358,8 +360,7 @@ create table JournalArticle (
 	approvedDate DATE null,
 	expired BOOLEAN,
 	expirationDate DATE null,
-	reviewDate DATE null,
-	primary key (companyId, groupId, articleId, version)
+	reviewDate DATE null
 );
 
 create table JournalArticleImage (
@@ -372,10 +373,16 @@ create table JournalArticleImage (
 	tempImage BOOLEAN
 );
 
+create table JournalArticleResource (
+	resourcePrimKey LONG primary key,
+	groupId LONG,
+	articleId VARCHAR(75) null
+);
+
 create table JournalContentSearch (
 	contentSearchId LONG primary key,
-	companyId LONG,
 	groupId LONG,
+	companyId LONG,
 	privateLayout BOOLEAN,
 	layoutId LONG,
 	portletId VARCHAR(75) null,
@@ -383,23 +390,9 @@ create table JournalContentSearch (
 );
 
 create table JournalStructure (
-	companyId LONG,
+	id_ LONG primary key,
 	groupId LONG,
-	structureId VARCHAR(75) not null,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	description STRING null,
-	xsd TEXT null,
-	primary key (companyId, groupId, structureId)
-);
-
-create table JournalTemplate (
 	companyId LONG,
-	groupId LONG,
-	templateId VARCHAR(75) not null,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -407,12 +400,26 @@ create table JournalTemplate (
 	structureId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
+	xsd TEXT null
+);
+
+create table JournalTemplate (
+	id_ LONG primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	templateId VARCHAR(75) null,
+	structureId VARCHAR(75) null,
+	name VARCHAR(75) null,
+	description STRING null,
 	xsl TEXT null,
 	langType VARCHAR(75) null,
 	smallImage BOOLEAN,
 	smallImageId LONG,
-	smallImageURL VARCHAR(75) null,
-	primary key (companyId, groupId, templateId)
+	smallImageURL VARCHAR(75) null
 );
 
 create table Layout (

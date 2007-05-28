@@ -719,16 +719,18 @@
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalArticleImpl" table="JournalArticle">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalArticlePK">
-			<key-property name="companyId" />
-			<key-property name="groupId" />
-			<key-property name="articleId" />
-			<key-property name="version" />
-		</composite-id>
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="resourcePrimKey" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
+		<property name="articleId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
@@ -756,13 +758,21 @@
 		<property name="languageId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="tempImage" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl" table="JournalArticleResource">
+		<cache usage="read-write" />
+		<id name="resourcePrimKey" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="articleId" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalContentSearchImpl" table="JournalContentSearch">
 		<cache usage="read-write" />
 		<id name="contentSearchId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="layoutId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
@@ -770,30 +780,32 @@
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalStructureImpl" table="JournalStructure">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalStructurePK">
-			<key-property name="companyId" />
-			<key-property name="groupId" />
-			<key-property name="structureId" />
-		</composite-id>
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
+		<property name="structureId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="xsd" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" table="JournalTemplate">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePK">
-			<key-property name="companyId" />
-			<key-property name="groupId" />
-			<key-property name="templateId" />
-		</composite-id>
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
+		<property name="templateId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="structureId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />

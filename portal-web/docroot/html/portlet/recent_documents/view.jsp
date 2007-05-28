@@ -25,34 +25,34 @@
 <%@ include file="/html/portlet/recent_documents/init.jsp" %>
 
 <%
-List ranks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(), user.getUserId());
+List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(), user.getUserId());
 %>
 
 <c:choose>
-	<c:when test="<%= (ranks == null) || (ranks.size() == 0) %>">
+	<c:when test="<%= (fileRanks == null) || (fileRanks.size() == 0) %>">
 		<liferay-ui:message key="there-are-no-recent-documents" />
 	</c:when>
 	<c:otherwise>
 		<table border="0" cellpadding="0" cellspacing="0">
 
 		<%
-		for (int i = 0; i < ranks.size() && i < 5; i++) {
-			DLFileRank rank = (DLFileRank)ranks.get(i);
+		for (int i = 0; i < fileRanks.size() && i < 5; i++) {
+			DLFileRank fileRank = (DLFileRank)fileRanks.get(i);
 
 			try {
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(rank.getFolderId(), rank.getName());
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileRank.getFolderId(), fileRank.getName());
 
 				PortletURL rowURL = renderResponse.createActionURL();
 
 				rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 				rowURL.setParameter("struts_action", "/recent_documents/get_file");
-				rowURL.setParameter("folderId", rank.getFolderId());
-				rowURL.setParameter("name", rank.getName());
+				rowURL.setParameter("folderId", String.valueOf(fileRank.getFolderId()));
+				rowURL.setParameter("name", fileRank.getName());
 		%>
 
 				<tr>
-					<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(rank.getName()) %>.png" /><%= fileEntry.getTitle() %></a></td>
+					<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getName()) %>.png" /><%= fileEntry.getTitle() %></a></td>
 				</tr>
 
 		<%

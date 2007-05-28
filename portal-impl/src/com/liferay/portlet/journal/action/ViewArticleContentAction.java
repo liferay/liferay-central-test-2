@@ -82,7 +82,6 @@ public class ViewArticleContentAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			long companyId = themeDisplay.getCompanyId();
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
@@ -117,8 +116,8 @@ public class ViewArticleContentAction extends Action {
 					PwdGenerator.getPassword(PwdGenerator.KEY3, 10);
 
 				format(
-					groupId, articleId, version, previewArticleId, companyId,
-					root, PortalUtil.getUploadServletRequest(req));
+					groupId, articleId, version, previewArticleId, root,
+					PortalUtil.getUploadServletRequest(req));
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
@@ -175,7 +174,7 @@ public class ViewArticleContentAction extends Action {
 
 				JournalTemplate template =
 					JournalTemplateLocalServiceUtil.getTemplate(
-						companyId, groupId, templateId);
+						groupId, templateId);
 
 				String langType = template.getLangType();
 				String script = template.getXsl();
@@ -185,8 +184,7 @@ public class ViewArticleContentAction extends Action {
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(
-					companyId, groupId, articleId, version, languageId,
-					themeDisplay);
+					groupId, articleId, version, languageId, themeDisplay);
 			}
 
 			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);
@@ -202,8 +200,7 @@ public class ViewArticleContentAction extends Action {
 
 	protected void format(
 			long groupId, String articleId, double version,
-			String previewArticleId, long companyId, Element root,
-			UploadServletRequest req)
+			String previewArticleId, Element root, UploadServletRequest req)
 		throws Exception {
 
 		Iterator itr = root.elements().iterator();
@@ -256,8 +253,7 @@ public class ViewArticleContentAction extends Action {
 			}
 
 			format(
-				groupId, articleId, version, previewArticleId, companyId, el,
-				req);
+				groupId, articleId, version, previewArticleId, el, req);
 		}
 	}
 

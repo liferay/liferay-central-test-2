@@ -44,7 +44,7 @@ if ((folder == null) && (defaultFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_I
 
 List folderIds = new ArrayList();
 
-folderIds.add(folderId);
+folderIds.add(new Long(folderId));
 
 DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), folderId);
 
@@ -121,7 +121,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				List subfolderIds = new ArrayList();
 
-				subfolderIds.add(curFolder.getFolderId());
+				subfolderIds.add(new Long(curFolder.getFolderId()));
 
 				DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
 

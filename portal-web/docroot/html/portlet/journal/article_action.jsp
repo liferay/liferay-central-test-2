@@ -46,7 +46,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= JournalArticle.class.getName() %>"
 		modelResourceDescription="<%= article.getTitle() %>"
-		resourcePrimKey="<%= article.getResourcePK().toString() %>"
+		resourcePrimKey="<%= String.valueOf(article.getResourcePrimKey()) %>"
 		var="permissionsURL"
 	/>
 

@@ -29,11 +29,9 @@ package com.liferay.portlet.journal.service.persistence;
  *
  */
 public interface JournalStructurePersistence {
-	public com.liferay.portlet.journal.model.JournalStructure create(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK);
+	public com.liferay.portlet.journal.model.JournalStructure create(long id);
 
-	public com.liferay.portlet.journal.model.JournalStructure remove(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK)
+	public com.liferay.portlet.journal.model.JournalStructure remove(long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchStructureException;
 
@@ -50,13 +48,12 @@ public interface JournalStructurePersistence {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK)
+		long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchStructureException;
 
 	public com.liferay.portlet.journal.model.JournalStructure fetchByPrimaryKey(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK)
-		throws com.liferay.portal.SystemException;
+		long id) throws com.liferay.portal.SystemException;
 
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -79,41 +76,47 @@ public interface JournalStructurePersistence {
 			com.liferay.portlet.journal.NoSuchStructureException;
 
 	public com.liferay.portlet.journal.model.JournalStructure[] findByGroupId_PrevAndNext(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long id, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchStructureException;
 
-	public java.util.List findByC_S(long companyId, java.lang.String structureId)
+	public java.util.List findByStructureId(java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_S(long companyId,
-		java.lang.String structureId, int begin, int end)
+	public java.util.List findByStructureId(java.lang.String structureId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByStructureId(java.lang.String structureId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_S(long companyId,
-		java.lang.String structureId, int begin, int end,
+	public com.liferay.portlet.journal.model.JournalStructure findByStructureId_First(
+		java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure findByStructureId_Last(
+		java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure[] findByStructureId_PrevAndNext(
+		long id, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure findByG_S(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure fetchByG_S(
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalStructure findByC_S_First(
-		long companyId, java.lang.String structureId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchStructureException;
-
-	public com.liferay.portlet.journal.model.JournalStructure findByC_S_Last(
-		long companyId, java.lang.String structureId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchStructureException;
-
-	public com.liferay.portlet.journal.model.JournalStructure[] findByC_S_PrevAndNext(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK,
-		long companyId, java.lang.String structureId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchStructureException;
 
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -135,15 +138,22 @@ public interface JournalStructurePersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_S(long companyId, java.lang.String structureId)
+	public void removeByStructureId(java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
+
+	public void removeByG_S(long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_S(long companyId, java.lang.String structureId)
+	public int countByStructureId(java.lang.String structureId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_S(long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -457,22 +457,19 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			long companyId, long groupId, String templateId, Map tokens,
-			String languageId)
+			long groupId, String templateId, Map tokens, String languageId)
 		throws PortalException, SystemException {
 
-		return getTemplateScript(
-			companyId, groupId, templateId, tokens, languageId, true);
+		return getTemplateScript(groupId, templateId, tokens, languageId, true);
 	}
 
 	public static String getTemplateScript(
-			long companyId, long groupId, String templateId, Map tokens,
-			String languageId, boolean transform)
+			long groupId, String templateId, Map tokens, String languageId,
+			boolean transform)
 		throws PortalException, SystemException {
 
-		JournalTemplate template =
-			JournalTemplateLocalServiceUtil.getTemplate(
-				companyId, groupId, templateId);
+		JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(
+			groupId, templateId);
 
 		return getTemplateScript(template, tokens, languageId, transform);
 	}

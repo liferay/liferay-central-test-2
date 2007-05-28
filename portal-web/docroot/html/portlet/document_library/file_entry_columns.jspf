@@ -60,7 +60,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
 	}
 	else if (fileEntryColumn.equals("locked")) {
-		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 	}

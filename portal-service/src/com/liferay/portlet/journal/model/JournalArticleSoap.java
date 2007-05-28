@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,14 +48,16 @@ import java.util.List;
 public class JournalArticleSoap implements Serializable {
 	public static JournalArticleSoap toSoapModel(JournalArticle model) {
 		JournalArticleSoap soapModel = new JournalArticleSoap();
-		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setId(model.getId());
+		soapModel.setResourcePrimKey(model.getResourcePrimKey());
 		soapModel.setGroupId(model.getGroupId());
-		soapModel.setArticleId(model.getArticleId());
-		soapModel.setVersion(model.getVersion());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setArticleId(model.getArticleId());
+		soapModel.setVersion(model.getVersion());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setContent(model.getContent());
@@ -90,23 +90,28 @@ public class JournalArticleSoap implements Serializable {
 	public JournalArticleSoap() {
 	}
 
-	public JournalArticlePK getPrimaryKey() {
-		return new JournalArticlePK(_companyId, _groupId, _articleId, _version);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(JournalArticlePK pk) {
-		setCompanyId(pk.companyId);
-		setGroupId(pk.groupId);
-		setArticleId(pk.articleId);
-		setVersion(pk.version);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
 	}
 
-	public long getCompanyId() {
-		return _companyId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
+	public void setId(long id) {
+		_id = id;
+	}
+
+	public long getResourcePrimKey() {
+		return _resourcePrimKey;
+	}
+
+	public void setResourcePrimKey(long resourcePrimKey) {
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getGroupId() {
@@ -117,20 +122,12 @@ public class JournalArticleSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getArticleId() {
-		return _articleId;
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setArticleId(String articleId) {
-		_articleId = articleId;
-	}
-
-	public double getVersion() {
-		return _version;
-	}
-
-	public void setVersion(double version) {
-		_version = version;
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -163,6 +160,22 @@ public class JournalArticleSoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getArticleId() {
+		return _articleId;
+	}
+
+	public void setArticleId(String articleId) {
+		_articleId = articleId;
+	}
+
+	public double getVersion() {
+		return _version;
+	}
+
+	public void setVersion(double version) {
+		_version = version;
 	}
 
 	public String getTitle() {
@@ -285,14 +298,16 @@ public class JournalArticleSoap implements Serializable {
 		_reviewDate = reviewDate;
 	}
 
-	private long _companyId;
+	private long _id;
+	private long _resourcePrimKey;
 	private long _groupId;
-	private String _articleId;
-	private double _version;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _articleId;
+	private double _version;
 	private String _title;
 	private String _description;
 	private String _content;

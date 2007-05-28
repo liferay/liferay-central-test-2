@@ -108,12 +108,9 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(DLFileEntry.class.getName()) %>">
 
 				<%
-				PKParser pkParser = new PKParser(classPK);
+				long fileEntryId = GetterUtil.getLong(classPK);
 
-				String folderId = pkParser.getString("folderId");
-				String name = pkParser.getString("name");
-
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileEntryId);
 				%>
 
 				<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
@@ -133,16 +130,13 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 
 				<%
-				PKParser pkParser = new PKParser(classPK);
+				long id = GetterUtil.getLong(classPK);
 
-				long companyId = pkParser.getLong("companyId");
-				long groupId = pkParser.getLong("groupId");
-				String articleId = pkParser.getString("articleId");
-				double version = pkParser.getDouble("version");
+				JournalArticle article = JournalArticleLocalServiceUtil.getArticle(id);
+
 				String languageId = LanguageUtil.getLanguageId(request);
 
-				String content = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, groupId, articleId, version, languageId, themeDisplay);
+				String content = JournalArticleLocalServiceUtil.getArticleContent(article.getGroupId(), article.getArticleId(), article.getVersion(), languageId, themeDisplay);
 				%>
 
 				<%= content %>

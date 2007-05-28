@@ -66,7 +66,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	JournalStructure structure = (JournalStructure)results.get(i);
 
-	ResultRow row = new ResultRow(structure, structure.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(structure, structure.getId(), i);
 
 	StringMaker sm = new StringMaker();
 

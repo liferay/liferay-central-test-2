@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,13 +48,14 @@ import java.util.List;
 public class JournalStructureSoap implements Serializable {
 	public static JournalStructureSoap toSoapModel(JournalStructure model) {
 		JournalStructureSoap soapModel = new JournalStructureSoap();
-		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setId(model.getId());
 		soapModel.setGroupId(model.getGroupId());
-		soapModel.setStructureId(model.getStructureId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setStructureId(model.getStructureId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setXsd(model.getXsd());
@@ -78,22 +77,20 @@ public class JournalStructureSoap implements Serializable {
 	public JournalStructureSoap() {
 	}
 
-	public JournalStructurePK getPrimaryKey() {
-		return new JournalStructurePK(_companyId, _groupId, _structureId);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(JournalStructurePK pk) {
-		setCompanyId(pk.companyId);
-		setGroupId(pk.groupId);
-		setStructureId(pk.structureId);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
 	}
 
-	public long getCompanyId() {
-		return _companyId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
+	public void setId(long id) {
+		_id = id;
 	}
 
 	public long getGroupId() {
@@ -104,12 +101,12 @@ public class JournalStructureSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getStructureId() {
-		return _structureId;
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setStructureId(String structureId) {
-		_structureId = structureId;
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -144,6 +141,14 @@ public class JournalStructureSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getStructureId() {
+		return _structureId;
+	}
+
+	public void setStructureId(String structureId) {
+		_structureId = structureId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -168,13 +173,14 @@ public class JournalStructureSoap implements Serializable {
 		_xsd = xsd;
 	}
 
-	private long _companyId;
+	private long _id;
 	private long _groupId;
-	private String _structureId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _structureId;
 	private String _name;
 	private String _description;
 	private String _xsd;

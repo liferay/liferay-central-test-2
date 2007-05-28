@@ -68,6 +68,10 @@ public class JournalStructureFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_S_N_D);
 
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -79,7 +83,11 @@ public class JournalStructureFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
 			qPos.add(structureId);
 			qPos.add(structureId);
 			qPos.add(name);
@@ -124,6 +132,10 @@ public class JournalStructureFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_S_N_D);
 
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -136,7 +148,11 @@ public class JournalStructureFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
 			qPos.add(structureId);
 			qPos.add(structureId);
 			qPos.add(name);

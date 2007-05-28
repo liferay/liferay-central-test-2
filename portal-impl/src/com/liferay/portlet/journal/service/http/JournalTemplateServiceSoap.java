@@ -78,11 +78,10 @@ import java.rmi.RemoteException;
  *
  */
 public class JournalTemplateServiceSoap {
-	public static void deleteTemplate(long companyId, long groupId,
-		java.lang.String templateId) throws RemoteException {
+	public static void deleteTemplate(long groupId, java.lang.String templateId)
+		throws RemoteException {
 		try {
-			JournalTemplateServiceUtil.deleteTemplate(companyId, groupId,
-				templateId);
+			JournalTemplateServiceUtil.deleteTemplate(groupId, templateId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -91,11 +90,10 @@ public class JournalTemplateServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplateSoap getTemplate(
-		long companyId, long groupId, java.lang.String templateId)
-		throws RemoteException {
+		long groupId, java.lang.String templateId) throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(companyId,
-					groupId, templateId);
+			com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(groupId,
+					templateId);
 
 			return com.liferay.portlet.journal.model.JournalTemplateSoap.toSoapModel(returnValue);
 		}

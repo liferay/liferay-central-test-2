@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
@@ -81,27 +80,22 @@ public class JournalTemplateServiceImpl
 			smallFile, communityPermissions, guestPermissions);
 	}
 
-	public void deleteTemplate(long companyId, long groupId, String templateId)
+	public void deleteTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
-			getPermissionChecker(), companyId, groupId, templateId,
-			ActionKeys.DELETE);
+			getPermissionChecker(), groupId, templateId, ActionKeys.DELETE);
 
-		JournalTemplateLocalServiceUtil.deleteTemplate(
-			companyId, groupId, templateId);
+		JournalTemplateLocalServiceUtil.deleteTemplate(groupId, templateId);
 	}
 
-	public JournalTemplate getTemplate(
-			long companyId, long groupId, String templateId)
+	public JournalTemplate getTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
-			getPermissionChecker(), companyId, groupId, templateId,
-			ActionKeys.VIEW);
+			getPermissionChecker(), groupId, templateId, ActionKeys.VIEW);
 
-		return JournalTemplateLocalServiceUtil.getTemplate(
-			companyId, groupId, templateId);
+		return JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
 	}
 
 	public JournalTemplate updateTemplate(
@@ -110,16 +104,12 @@ public class JournalTemplateServiceImpl
 			boolean smallImage, String smallImageURL, File smallFile)
 		throws PortalException, SystemException {
 
-		User user = getUser();
-
 		JournalTemplatePermission.check(
-			getPermissionChecker(), user.getCompanyId(), groupId, templateId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, templateId, ActionKeys.UPDATE);
 
 		return JournalTemplateLocalServiceUtil.updateTemplate(
-			user.getCompanyId(), groupId, templateId, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile);
+			groupId, templateId, structureId, name, description, xsl, formatXsl,
+			langType, smallImage, smallImageURL, smallFile);
 	}
 
 }

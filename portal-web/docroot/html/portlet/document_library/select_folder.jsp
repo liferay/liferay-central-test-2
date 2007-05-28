@@ -93,7 +93,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subfolderIds = new ArrayList();
 
-	subfolderIds.add(curFolder.getFolderId());
+	subfolderIds.add(new Long(curFolder.getFolderId()));
 
 	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
 

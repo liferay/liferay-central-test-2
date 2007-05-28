@@ -31,7 +31,7 @@ String type = JournalArticleImpl.TYPES[0];
 
 try {
 	if (articleIds.length > 0) {
-		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[0]);
+		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleIds[0]);
 
 		groupId = article.getGroupId();
 		type = article.getType();
@@ -228,7 +228,7 @@ for (int i = 0; i < results.size(); i++) {
 	<%
 	for (int i = 0; i < articleIds.length; i++) {
 		try {
-			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[i]);
+			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleIds[i]);
 	%>
 
 			<portlet:namespace />addArticle("<%= article.getArticleId() %>", false);

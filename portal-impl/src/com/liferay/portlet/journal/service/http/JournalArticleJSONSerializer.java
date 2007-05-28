@@ -53,19 +53,10 @@ import java.util.List;
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("id", model.getId());
+		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
 		jsonObj.put("groupId", model.getGroupId());
-
-		String articleId = model.getArticleId();
-
-		if (articleId == null) {
-			jsonObj.put("articleId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("articleId", articleId.toString());
-		}
-
-		jsonObj.put("version", model.getVersion());
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
 		String userName = model.getUserName();
@@ -94,6 +85,17 @@ public class JournalArticleJSONSerializer {
 		else {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
+
+		String articleId = model.getArticleId();
+
+		if (articleId == null) {
+			jsonObj.put("articleId", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("articleId", articleId.toString());
+		}
+
+		jsonObj.put("version", model.getVersion());
 
 		String title = model.getTitle();
 

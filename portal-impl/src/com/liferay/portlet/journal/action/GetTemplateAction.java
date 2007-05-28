@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -61,7 +60,6 @@ public class GetTemplateAction extends Action {
 		throws Exception {
 
 		try {
-			long companyId = PortalUtil.getCompanyId(req);
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String templateId = getTemplateId(req);
 
@@ -78,7 +76,7 @@ public class GetTemplateAction extends Action {
 
 			JournalTemplate template =
 				JournalTemplateLocalServiceUtil.getTemplate(
-					companyId, groupId, templateId);
+					groupId, templateId);
 
 			String script = JournalUtil.getTemplateScript(
 				template, tokens, languageId, transform);

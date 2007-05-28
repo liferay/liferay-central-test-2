@@ -695,16 +695,18 @@
 		<field name="largeImageId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
-		<field name="companyId" type="long" />
+		<field name="id" type="long" />
+		<field name="resourcePrimKey" type="long" />
 		<field name="groupId" type="long" />
-		<field name="articleId" type="String">
-			<hint name="upper-case">true</hint>
-		</field>
-		<field name="version" type="double" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="articleId" type="String">
+			<hint name="upper-case">true</hint>
+		</field>
+		<field name="version" type="double" />
 		<field name="title" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -733,25 +735,31 @@
 		<field name="languageId" type="String" />
 		<field name="tempImage" type="boolean" />
 	</model>
+	<model name="com.liferay.portlet.journal.model.JournalArticleResource">
+		<field name="resourcePrimKey" type="long" />
+		<field name="groupId" type="long" />
+		<field name="articleId" type="String" />
+	</model>
 	<model name="com.liferay.portlet.journal.model.JournalContentSearch">
 		<field name="contentSearchId" type="long" />
-		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="privateLayout" type="boolean" />
 		<field name="layoutId" type="long" />
 		<field name="portletId" type="String" />
 		<field name="articleId" type="String" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalStructure">
-		<field name="companyId" type="long" />
+		<field name="id" type="long" />
 		<field name="groupId" type="long" />
-		<field name="structureId" type="String">
-			<hint name="upper-case">true</hint>
-		</field>
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="structureId" type="String">
+			<hint name="upper-case">true</hint>
+		</field>
 		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -761,15 +769,16 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalTemplate">
-		<field name="companyId" type="long" />
+		<field name="id" type="long" />
 		<field name="groupId" type="long" />
-		<field name="templateId" type="String">
-			<hint name="upper-case">true</hint>
-		</field>
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="templateId" type="String">
+			<hint name="upper-case">true</hint>
+		</field>
 		<field name="structureId" type="String" />
 		<field name="name" type="String" />
 		<field name="description" type="String">

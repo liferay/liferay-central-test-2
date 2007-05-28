@@ -67,28 +67,33 @@ create index IX_1A605E9F on IGFolder (groupId, parentFolderId);
 create index IX_4438CA80 on IGImage (folderId);
 
 create index IX_DFF98523 on JournalArticle (companyId);
-create index IX_29BD22DA on JournalArticle (companyId, groupId, articleId);
-create index IX_A1D78A45 on JournalArticle (companyId, groupId, articleId, approved);
-create index IX_A0C28B17 on JournalArticle (companyId, groupId, structureId);
-create index IX_EC743CD0 on JournalArticle (companyId, groupId, templateId);
 create index IX_9356F865 on JournalArticle (groupId);
+create index IX_68C0F69C on JournalArticle (groupId, articleId);
+create index IX_8DBF1387 on JournalArticle (groupId, articleId, approved);
+create index IX_85C52EEC on JournalArticle (groupId, articleId, version);
+create index IX_2E207659 on JournalArticle (groupId, structureId);
+create index IX_8DEAE14E on JournalArticle (groupId, templateId);
 
 create index IX_158B526F on JournalArticleImage (groupId, articleId, version);
 create index IX_D67292FC on JournalArticleImage (groupId, articleId, version, elName, languageId);
 create index IX_D4121315 on JournalArticleImage (tempImage);
 
-create index IX_4D73E06F on JournalContentSearch (companyId, groupId, articleId);
+create index IX_88DF994A on JournalArticleResource (groupId, articleId);
+
+create index IX_6838E427 on JournalContentSearch (groupId, articleId);
 create index IX_20962903 on JournalContentSearch (groupId, privateLayout);
 create index IX_7CC7D73E on JournalContentSearch (groupId, privateLayout, articleId);
 create index IX_B3B318DC on JournalContentSearch (groupId, privateLayout, layoutId);
 create index IX_C3AA93B8 on JournalContentSearch (groupId, privateLayout, layoutId, portletId, articleId);
 
-create index IX_47EF5658 on JournalStructure (companyId, structureId);
 create index IX_B97F5608 on JournalStructure (groupId);
+create index IX_AB6E9996 on JournalStructure (groupId, structureId);
+create index IX_8831E4FC on JournalStructure (structureId);
 
-create index IX_AB3E5F05 on JournalTemplate (companyId, groupId, structureId);
-create index IX_D7A3867A on JournalTemplate (companyId, templateId);
 create index IX_77923653 on JournalTemplate (groupId);
+create index IX_1701CB2B on JournalTemplate (groupId, structureId);
+create index IX_E802AA3C on JournalTemplate (groupId, templateId);
+create index IX_1B12CA20 on JournalTemplate (templateId);
 
 create index IX_705F5AA3 on Layout (groupId, privateLayout);
 create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);

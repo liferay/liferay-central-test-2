@@ -158,7 +158,7 @@ double version = ParamUtil.getDouble(request, "version");
 		<%
 		String languageId = LanguageUtil.getLanguageId(request);
 
-		String content = JournalArticleLocalServiceUtil.getArticleContent(company.getCompanyId(), groupId, articleId, version, languageId, themeDisplay);
+		String content = JournalArticleLocalServiceUtil.getArticleContent(groupId, articleId, version, languageId, themeDisplay);
 
 		RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
 		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);

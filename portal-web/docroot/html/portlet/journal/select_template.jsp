@@ -66,7 +66,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	JournalTemplate template = (JournalTemplate)results.get(i);
 
-	ResultRow row = new ResultRow(template, template.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(template, template.getId(), i);
 
 	StringMaker sm = new StringMaker();
 

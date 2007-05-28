@@ -131,7 +131,7 @@ public class CMSServlet extends HttpServlet {
 			themeDisplay.setPathMain(PortalUtil.getPathMain());
 
 			String content = getContent(
-				companyId, groupId, path, languageId, themeDisplay);
+				groupId, path, languageId, themeDisplay);
 
 			if (Validator.isNotNull(content)) {
 				if (_log.isDebugEnabled()) {
@@ -170,11 +170,11 @@ public class CMSServlet extends HttpServlet {
 	}
 
 	protected String getContent(
-		long companyId, long groupId, String articleId, String languageId,
+		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		return CMSServletUtil.getContent(
-			companyId, groupId, articleId, languageId, themeDisplay);
+			groupId, articleId, languageId, themeDisplay);
 	}
 
 	private static Log _log = LogFactory.getLog(CMSServlet.class);

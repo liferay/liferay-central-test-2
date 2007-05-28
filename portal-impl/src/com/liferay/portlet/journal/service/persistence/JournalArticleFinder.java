@@ -81,6 +81,10 @@ public class JournalArticleFinder {
 			String sql = CustomSQLUtil.get(
 				COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
 
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
@@ -105,8 +109,11 @@ public class JournalArticleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
 			qPos.add(articleId);
 			qPos.add(articleId);
 
@@ -185,6 +192,10 @@ public class JournalArticleFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
 
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
@@ -210,8 +221,11 @@ public class JournalArticleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
 			qPos.add(articleId);
 			qPos.add(articleId);
 

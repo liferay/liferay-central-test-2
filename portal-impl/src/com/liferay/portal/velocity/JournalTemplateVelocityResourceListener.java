@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.util.GetterUtil;
 
 import java.io.ByteArrayInputStream;
@@ -66,13 +65,13 @@ public class JournalTemplateVelocityResourceListener
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Loading " + new JournalTemplatePK(
-							companyId, groupId, templateId));
+						"Loading {groupId=" +  groupId + ",templateId=" +
+							templateId + "}");
 				}
 
 				JournalTemplate template =
 					JournalTemplateLocalServiceUtil.getTemplate(
-						companyId, groupId, templateId);
+						groupId, templateId);
 
 				String buffer = template.getXsl();
 

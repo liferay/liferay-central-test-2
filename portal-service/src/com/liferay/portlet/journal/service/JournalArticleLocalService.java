@@ -112,9 +112,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addArticleResources(long companyId, long groupId,
-		java.lang.String articleId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addArticleResources(long groupId, java.lang.String articleId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -124,8 +123,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addArticleResources(long companyId, long groupId,
-		java.lang.String articleId, java.lang.String[] communityPermissions,
+	public void addArticleResources(long groupId, java.lang.String articleId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -143,18 +142,23 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.journal.model.JournalArticle checkArticleResourcePrimKey(
+		long groupId, java.lang.String articleId, double version)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void checkArticles()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkNewLine(long companyId, long groupId,
-		java.lang.String articleId, double version)
+	public void checkNewLine(long groupId, java.lang.String articleId,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteArticle(long companyId, long groupId,
-		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+	public void deleteArticle(long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -168,9 +172,9 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void expireArticle(long companyId, long groupId,
-		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+	public void expireArticle(long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -180,23 +184,27 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		long companyId, long groupId, java.lang.String articleId)
+	public com.liferay.portlet.journal.model.JournalArticle getArticle(long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		long companyId, long groupId, java.lang.String articleId, double version)
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getArticleContent(long companyId, long groupId,
+	public com.liferay.portlet.journal.model.JournalArticle getArticle(
+		long groupId, java.lang.String articleId, double version)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getArticleContent(long companyId, long groupId,
+	public java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -220,50 +228,48 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(
-		long companyId, long groupId, java.lang.String articleId)
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		long companyId, long groupId, java.lang.String articleId)
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		long companyId, long groupId, java.lang.String articleId,
-		java.lang.Boolean approved)
+		long groupId, java.lang.String articleId, java.lang.Boolean approved)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public double getLatestVersion(long companyId, long groupId,
-		java.lang.String articleId)
+	public double getLatestVersion(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getStructureArticles(long companyId, long groupId,
+	public java.util.List getStructureArticles(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getStructureArticles(long companyId, long groupId,
+	public java.util.List getStructureArticles(long groupId,
 		java.lang.String structureId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public int getStructureArticlesCount(long companyId, long groupId,
+	public int getStructureArticlesCount(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getTemplateArticles(long companyId, long groupId,
+	public java.util.List getTemplateArticles(long groupId,
 		java.lang.String templateId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getTemplateArticles(long companyId, long groupId,
+	public java.util.List getTemplateArticles(long groupId,
 		java.lang.String templateId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public int getTemplateArticlesCount(long companyId, long groupId,
+	public int getTemplateArticlesCount(long groupId,
 		java.lang.String templateId) throws com.liferay.portal.SystemException;
 
-	public boolean isLatestVersion(long companyId, long groupId,
-		java.lang.String articleId, double version)
+	public boolean isLatestVersion(long groupId, java.lang.String articleId,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -271,8 +277,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		long companyId, long groupId, java.lang.String articleId,
-		double version, java.lang.String languageId)
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -324,8 +330,8 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
-		long companyId, long groupId, java.lang.String articleId,
-		double version, java.lang.String content)
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String content)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

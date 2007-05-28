@@ -25,8 +25,6 @@ package com.liferay.portlet.journal.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -57,14 +55,16 @@ import java.util.Date;
 public class JournalArticleModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalArticle";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "companyId", new Integer(Types.BIGINT) },
+			{ "id_", new Integer(Types.BIGINT) },
+			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "articleId", new Integer(Types.VARCHAR) },
-			{ "version", new Integer(Types.DOUBLE) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "articleId", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "content", new Integer(Types.CLOB) },
@@ -83,11 +83,11 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.articleId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.userName"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.articleId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.title"),
@@ -116,24 +116,31 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	public JournalArticleModelImpl() {
 	}
 
-	public JournalArticlePK getPrimaryKey() {
-		return new JournalArticlePK(_companyId, _groupId, _articleId, _version);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(JournalArticlePK pk) {
-		setCompanyId(pk.companyId);
-		setGroupId(pk.groupId);
-		setArticleId(pk.articleId);
-		setVersion(pk.version);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
 	}
 
-	public long getCompanyId() {
-		return _companyId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+	public void setId(long id) {
+		if (id != _id) {
+			_id = id;
+		}
+	}
+
+	public long getResourcePrimKey() {
+		return _resourcePrimKey;
+	}
+
+	public void setResourcePrimKey(long resourcePrimKey) {
+		if (resourcePrimKey != _resourcePrimKey) {
+			_resourcePrimKey = resourcePrimKey;
 		}
 	}
 
@@ -147,30 +154,13 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getArticleId() {
-		return GetterUtil.getString(_articleId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setArticleId(String articleId) {
-		if (((articleId == null) && (_articleId != null)) ||
-				((articleId != null) && (_articleId == null)) ||
-				((articleId != null) && (_articleId != null) &&
-				!articleId.equals(_articleId))) {
-			if (!XSS_ALLOW_ARTICLEID) {
-				articleId = XSSUtil.strip(articleId);
-			}
-
-			_articleId = articleId;
-		}
-	}
-
-	public double getVersion() {
-		return _version;
-	}
-
-	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -224,6 +214,33 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public String getArticleId() {
+		return GetterUtil.getString(_articleId);
+	}
+
+	public void setArticleId(String articleId) {
+		if (((articleId == null) && (_articleId != null)) ||
+				((articleId != null) && (_articleId == null)) ||
+				((articleId != null) && (_articleId != null) &&
+				!articleId.equals(_articleId))) {
+			if (!XSS_ALLOW_ARTICLEID) {
+				articleId = XSSUtil.strip(articleId);
+			}
+
+			_articleId = articleId;
+		}
+	}
+
+	public double getVersion() {
+		return _version;
+	}
+
+	public void setVersion(double version) {
+		if (version != _version) {
+			_version = version;
 		}
 	}
 
@@ -436,14 +453,16 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalArticleImpl clone = new JournalArticleImpl();
-		clone.setCompanyId(getCompanyId());
+		clone.setId(getId());
+		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setGroupId(getGroupId());
-		clone.setArticleId(getArticleId());
-		clone.setVersion(getVersion());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setArticleId(getArticleId());
+		clone.setVersion(getVersion());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setContent(getContent());
@@ -508,9 +527,9 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalArticlePK pk = journalArticle.getPrimaryKey();
+		long pk = journalArticle.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -519,17 +538,19 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private long _companyId;
+	private long _id;
+	private long _resourcePrimKey;
 	private long _groupId;
-	private String _articleId;
-	private double _version;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _articleId;
+	private double _version;
 	private String _title;
 	private String _description;
 	private String _content;

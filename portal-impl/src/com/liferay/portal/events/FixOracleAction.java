@@ -97,8 +97,8 @@ public class FixOracleAction extends SimpleAction {
 					article = (JournalArticle)articles.get(j);
 
 					JournalArticleLocalServiceUtil.checkNewLine(
-						article.getCompanyId(), article.getGroupId(),
-						article.getArticleId(), article.getVersion());
+						article.getGroupId(), article.getArticleId(),
+						article.getVersion());
 				}
 
 				checkNewLine = true;
@@ -138,8 +138,7 @@ public class FixOracleAction extends SimpleAction {
 					structure = (JournalStructure)structures.get(i);
 
 					JournalStructureLocalServiceUtil.checkNewLine(
-						structure.getCompanyId(), structure.getGroupId(),
-						structure.getStructureId());
+						structure.getGroupId(), structure.getStructureId());
 				}
 			}
 		}
@@ -160,8 +159,7 @@ public class FixOracleAction extends SimpleAction {
 					template = (JournalTemplate)templates.get(i);
 
 					JournalTemplateLocalServiceUtil.checkNewLine(
-						template.getCompanyId(), template.getGroupId(),
-						template.getTemplateId());
+						template.getGroupId(), template.getTemplateId());
 				}
 			}
 		}

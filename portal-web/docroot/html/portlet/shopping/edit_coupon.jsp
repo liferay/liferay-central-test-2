@@ -188,7 +188,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		<liferay-ui:message key="active" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" defaultValue="<%= true %>" />
+		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
 	</td>
 </tr>
 </table>

@@ -74,7 +74,6 @@ public class EditConfigurationAction extends PortletAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			long companyId = themeDisplay.getCompanyId();
 			long groupId = ParamUtil.getLong(req, "groupId");
 
 			String languageId = LanguageUtil.getLanguageId(req);
@@ -91,8 +90,7 @@ public class EditConfigurationAction extends PortletAction {
 						req, name).toUpperCase();
 
 					String content = JournalContentUtil.getContent(
-						companyId, groupId, articleId, languageId,
-						themeDisplay);
+						groupId, articleId, languageId, themeDisplay);
 
 					if (Validator.isNull(content)) {
 						throw new NoSuchArticleException();
@@ -150,14 +148,13 @@ public class EditConfigurationAction extends PortletAction {
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
-			layout.getCompanyId(), layout.getGroupId(),
-			layout.isPrivateLayout(), layout.getLayoutId(), portletResource,
-			articleIds);
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			portletResource, articleIds);
 	}
 
 }

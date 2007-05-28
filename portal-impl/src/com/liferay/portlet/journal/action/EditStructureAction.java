@@ -26,7 +26,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -143,7 +142,6 @@ public class EditStructureAction extends PortletAction {
 	}
 
 	protected void deleteStructures(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteStructureIds = StringUtil.split(
@@ -151,7 +149,7 @@ public class EditStructureAction extends PortletAction {
 
 		for (int i = 0; i < deleteStructureIds.length; i++) {
 			JournalStructureServiceUtil.deleteStructure(
-				companyId, groupId, deleteStructureIds[i]);
+				groupId, deleteStructureIds[i]);
 
 			JournalUtil.removeRecentStructure(req, deleteStructureIds[i]);
 		}

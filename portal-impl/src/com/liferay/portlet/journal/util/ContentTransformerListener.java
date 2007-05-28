@@ -104,7 +104,6 @@ public class ContentTransformerListener extends TransformerListener {
 	protected void replaceContent(Element root) throws Exception {
 		Map tokens = getTokens();
 
-		long companyId = GetterUtil.getLong((String)tokens.get("company_id"));
 		long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
 
 		Iterator itr = root.elements().iterator();
@@ -137,7 +136,7 @@ public class ContentTransformerListener extends TransformerListener {
 
 						JournalArticle article =
 							JournalArticleLocalServiceUtil.getArticle(
-								companyId, groupId, articleId);
+								groupId, articleId);
 
 						dynamicContent.setText(StringPool.BLANK);
 						dynamicContent.addCDATA(

@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -145,8 +147,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalArticle article = (JournalArticle)itr.next();
 
+				String articlePrimaryKey = getPrimaryKey(
+					article.getGroupId(), article.getArticleId());
+
 				if (context.addPrimaryKey(
-						JournalArticle.class, article.getPrimaryKey())) {
+						JournalArticle.class, articlePrimaryKey)) {
 
 					itr.remove();
 				}
@@ -169,8 +174,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalStructure structure = (JournalStructure)itr.next();
 
+				String structurePrimaryKey = getPrimaryKey(
+					structure.getGroupId(), structure.getStructureId());
+
 				if (context.addPrimaryKey(
-						JournalStructure.class, structure.getPrimaryKey())) {
+						JournalStructure.class, structurePrimaryKey)) {
 
 					itr.remove();
 				}
@@ -193,8 +201,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalTemplate template = (JournalTemplate)itr.next();
 
+				String templatePrimaryKey = getPrimaryKey(
+					template.getGroupId(), template.getTemplateId());
+
 				if (context.addPrimaryKey(
-						JournalTemplate.class, template.getPrimaryKey())) {
+						JournalTemplate.class, templatePrimaryKey)) {
 
 					itr.remove();
 				}
@@ -444,6 +455,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	protected String getPrimaryKey(long groupId, String key) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(groupId);
+		sm.append(StringPool.POUND);
+		sm.append(key);
+
+		return sm.toString();
 	}
 
 	private static final String _EXPORT_JOURNAL_DATA =

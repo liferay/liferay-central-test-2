@@ -43,7 +43,7 @@ Group toGroup = null;
 DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
-if (Validator.isNotNull(toFolderId) && Validator.isNotNull(toName)) {
+if ((toFolderId > 0) && Validator.isNotNull(toName)) {
 	try {
 		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(toFolderId, toName);
 		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
@@ -52,7 +52,7 @@ if (Validator.isNotNull(toFolderId) && Validator.isNotNull(toName)) {
 	catch (Exception e) {
 	}
 }
-else if (Validator.isNotNull(toFolderId)) {
+else if ((toFolderId > 0)) {
 	try {
 		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());

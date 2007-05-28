@@ -276,21 +276,19 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static void deleteTemplate(HttpPrincipal httpPrincipal,
-		long companyId, long groupId, java.lang.String templateId)
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = new LongWrapper(groupId);
-			Object paramObj2 = templateId;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = templateId;
 
 			if (templateId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"deleteTemplate",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					"deleteTemplate", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -314,22 +312,19 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		java.lang.String templateId)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = new LongWrapper(groupId);
-			Object paramObj2 = templateId;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = templateId;
 
 			if (templateId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"getTemplate",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					"getTemplate", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {

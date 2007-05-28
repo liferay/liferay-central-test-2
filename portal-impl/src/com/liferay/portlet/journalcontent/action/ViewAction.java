@@ -57,7 +57,6 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
 		long groupId = GetterUtil.getLong(
 			prefs.getValue("group-id", StringPool.BLANK));
 		String[] articleIds = prefs.getValues("article-id", new String[0]);
@@ -68,7 +67,7 @@ public class ViewAction extends PortletAction {
 
 		for (int i = 0; i < articleIds.length; i++) {
 			content[i] = JournalContentUtil.getContent(
-				companyId, groupId, articleIds[i], languageId, themeDisplay);
+				groupId, articleIds[i], languageId, themeDisplay);
 		}
 
 		req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, content);

@@ -9,8 +9,8 @@
 				JournalArticle
 			WHERE
 				(companyId = ?) AND
+				(groupId = ?) AND
 				(
-					(groupId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(articleId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(version = ?) [$AND_OR_CONNECTOR$]
 					(lower(title) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -37,8 +37,8 @@
 				JournalArticle
 			WHERE
 				(companyId = ?) AND
+				(groupId = ?) AND
 				(
-					(groupId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(articleId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(version = ?) [$AND_OR_CONNECTOR$]
 					(lower(title) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]

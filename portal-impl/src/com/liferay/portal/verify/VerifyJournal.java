@@ -65,8 +65,8 @@ public class VerifyJournal extends VerifyProcess {
 
 			ResourceLocalServiceUtil.addResources(
 				structure.getCompanyId(), 0, 0,
-				JournalStructure.class.getName(),
-				structure.getPrimaryKey().toString(), false, true, true);
+				JournalStructure.class.getName(), structure.getId(), false,
+				true, true);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -82,8 +82,8 @@ public class VerifyJournal extends VerifyProcess {
 
 			ResourceLocalServiceUtil.addResources(
 				template.getCompanyId(), 0, 0,
-				JournalTemplate.class.getName(),
-				template.getPrimaryKey().toString(), false, true, true);
+				JournalTemplate.class.getName(), template.getId(), false, true,
+				true);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -97,10 +97,17 @@ public class VerifyJournal extends VerifyProcess {
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
+			if (article.getResourcePrimKey() <= 0) {
+				article =
+					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
+						article.getGroupId(), article.getArticleId(),
+						article.getVersion());
+			}
+
 			ResourceLocalServiceUtil.addResources(
 				article.getCompanyId(), 0, 0,
-				JournalArticle.class.getName(),
-				article.getResourcePK().toString(), false, true, true);
+				JournalArticle.class.getName(), article.getResourcePrimKey(),
+				false, true, true);
 		}
 
 		if (_log.isDebugEnabled()) {

@@ -217,21 +217,19 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static void deleteStructure(HttpPrincipal httpPrincipal,
-		long companyId, long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = new LongWrapper(groupId);
-			Object paramObj2 = structureId;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = structureId;
 
 			if (structureId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
-					"deleteStructure",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					"deleteStructure", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -255,22 +253,19 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		java.lang.String structureId)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-			Object paramObj1 = new LongWrapper(groupId);
-			Object paramObj2 = structureId;
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = structureId;
 
 			if (structureId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
-					"getStructure",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					"getStructure", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {

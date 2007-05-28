@@ -54,8 +54,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalContentSearch";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "contentSearchId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
 			{ "layoutId", new Integer(Types.BIGINT) },
 			{ "portletId", new Integer(Types.VARCHAR) },
@@ -94,16 +94,6 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
-		}
-	}
-
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -111,6 +101,16 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -175,8 +175,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public Object clone() {
 		JournalContentSearchImpl clone = new JournalContentSearchImpl();
 		clone.setContentSearchId(getContentSearchId());
-		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setPrivateLayout(getPrivateLayout());
 		clone.setLayoutId(getLayoutId());
 		clone.setPortletId(getPortletId());
@@ -233,8 +233,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	}
 
 	private long _contentSearchId;
-	private long _companyId;
 	private long _groupId;
+	private long _companyId;
 	private boolean _privateLayout;
 	private long _layoutId;
 	private String _portletId;

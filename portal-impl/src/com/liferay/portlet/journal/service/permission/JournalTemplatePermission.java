@@ -38,13 +38,11 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 public class JournalTemplatePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long companyId, long groupId,
+			PermissionChecker permissionChecker, long groupId,
 			String templateId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(
-				permissionChecker, companyId, groupId, templateId, actionId)) {
-
+		if (!contains(permissionChecker, groupId, templateId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -60,13 +58,12 @@ public class JournalTemplatePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long companyId, long groupId,
+			PermissionChecker permissionChecker, long groupId,
 			String templateId, String actionId)
 		throws PortalException, SystemException {
 
 		JournalTemplate template =
-			JournalTemplateLocalServiceUtil.getTemplate(
-				companyId, groupId, templateId);
+			JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
 
 		return contains(permissionChecker, template, actionId);
 	}
@@ -78,7 +75,7 @@ public class JournalTemplatePermission {
 
 		return permissionChecker.hasPermission(
 			template.getGroupId(), JournalTemplate.class.getName(),
-			template.getPrimaryKey().toString(), actionId);
+			template.getTemplateId(), actionId);
 	}
 
 }

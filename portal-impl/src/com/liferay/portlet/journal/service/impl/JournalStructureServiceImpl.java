@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
@@ -73,28 +72,23 @@ public class JournalStructureServiceImpl
 			xsd, communityPermissions, guestPermissions);
 	}
 
-	public void deleteStructure(
-			long companyId, long groupId, String structureId)
+	public void deleteStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
-			getPermissionChecker(), companyId, groupId, structureId,
-			ActionKeys.DELETE);
+			getPermissionChecker(), groupId, structureId, ActionKeys.DELETE);
 
-		JournalStructureLocalServiceUtil.deleteStructure(
-			companyId, groupId, structureId);
+		JournalStructureLocalServiceUtil.deleteStructure(groupId, structureId);
 	}
 
-	public JournalStructure getStructure(
-			long companyId, long groupId, String structureId)
+	public JournalStructure getStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
-			getPermissionChecker(), companyId, groupId, structureId,
-			ActionKeys.VIEW);
+			getPermissionChecker(), groupId, structureId, ActionKeys.VIEW);
 
 		return JournalStructureLocalServiceUtil.getStructure(
-			companyId, groupId, structureId);
+			groupId, structureId);
 	}
 
 	public JournalStructure updateStructure(
@@ -102,14 +96,11 @@ public class JournalStructureServiceImpl
 			String xsd)
 		throws PortalException, SystemException {
 
-		User user = getUser();
-
 		JournalStructurePermission.check(
-			getPermissionChecker(), user.getCompanyId(), groupId, structureId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
 		return JournalStructureLocalServiceUtil.updateStructure(
-			user.getCompanyId(), groupId, structureId, name, description, xsd);
+			groupId, structureId, name, description, xsd);
 	}
 
 }

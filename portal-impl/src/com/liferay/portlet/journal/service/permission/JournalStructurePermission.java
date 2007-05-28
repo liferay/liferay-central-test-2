@@ -38,13 +38,11 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 public class JournalStructurePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long companyId, long groupId,
+			PermissionChecker permissionChecker, long groupId,
 			String structureId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(
-				permissionChecker, companyId, groupId, structureId, actionId)) {
-
+		if (!contains(permissionChecker, groupId, structureId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -60,13 +58,12 @@ public class JournalStructurePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long companyId, long groupId,
+			PermissionChecker permissionChecker, long groupId,
 			String structureId, String actionId)
 		throws PortalException, SystemException {
 
 		JournalStructure structure =
-			JournalStructureLocalServiceUtil.getStructure(
-				companyId, groupId, structureId);
+			JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 
 		return contains(permissionChecker, structure, actionId);
 	}
@@ -78,7 +75,7 @@ public class JournalStructurePermission {
 
 		return permissionChecker.hasPermission(
 			structure.getGroupId(), JournalStructure.class.getName(),
-			structure.getPrimaryKey().toString(), actionId);
+			structure.getStructureId(), actionId);
 	}
 
 }

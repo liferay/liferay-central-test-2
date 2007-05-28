@@ -150,7 +150,6 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	protected void deleteTemplates(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteTemplateIds = StringUtil.split(
@@ -158,7 +157,7 @@ public class EditTemplateAction extends PortletAction {
 
 		for (int i = 0; i < deleteTemplateIds.length; i++) {
 			JournalTemplateServiceUtil.deleteTemplate(
-				companyId, groupId, deleteTemplateIds[i]);
+				groupId, deleteTemplateIds[i]);
 
 			JournalUtil.removeRecentTemplate(req, deleteTemplateIds[i]);
 		}

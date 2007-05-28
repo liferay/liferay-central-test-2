@@ -7,13 +7,19 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="long" primary="true" />
-		<column name="groupId" type="long" primary="true" />
-		<column name="articleId" type="String" primary="true" />
-		<column name="version" type="double" primary="true" />
+		<column name="id" type="long" primary="true" />
+
+		<!-- Resource -->
+
+		<column name="resourcePrimKey" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -21,6 +27,8 @@
 
 		<!-- Other fields -->
 
+		<column name="articleId" type="String" />
+		<column name="version" type="double" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
 		<column name="content" type="String" />
@@ -45,29 +53,30 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_G_A" return-type="Collection">
+		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="G_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
-		<finder name="C_G_S" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
-		<finder name="C_G_T" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_T" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="templateId" />
 		</finder>
-		<finder name="C_G_A_A" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_A_V" return-type="JournalArticle">
+			<finder-column name="groupId" />
+			<finder-column name="articleId" />
+			<finder-column name="version" />
+		</finder>
+		<finder name="G_A_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 			<finder-column name="approved" />
@@ -79,7 +88,7 @@
 
 		<column name="articleImageId" type="long" primary="true" />
 
-		<!-- Audit fields -->
+		<!-- Group instance -->
 
 		<column name="groupId" type="long" />
 
@@ -109,16 +118,37 @@
 			<finder-column name="languageId" />
 		</finder>
 	</entity>
+	<entity name="JournalArticleResource" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="resourcePrimKey" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="groupId" type="long" />
+		<column name="articleId" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="G_A" return-type="JournalArticleResource">
+			<finder-column name="groupId" />
+			<finder-column name="articleId" />
+		</finder>
+	</entity>
 	<entity name="JournalContentSearch" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
 		<column name="contentSearchId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
-		<column name="groupId" type="long" />
 
 		<!-- Other fields -->
 
@@ -133,8 +163,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 		</finder>
-		<finder name="C_G_A" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
@@ -160,12 +189,15 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="long" primary="true" />
-		<column name="groupId" type="long" primary="true" />
-		<column name="structureId" type="String" primary="true" />
+		<column name="id" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -173,6 +205,7 @@
 
 		<!-- Other fields -->
 
+		<column name="structureId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="xsd" type="String" />
@@ -188,8 +221,11 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_S" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="StructureId" return-type="Collection">
+			<finder-column name="structureId" />
+		</finder>
+		<finder name="G_S" return-type="JournalStructure">
+			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
 	</entity>
@@ -197,12 +233,15 @@
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="long" primary="true" />
-		<column name="groupId" type="long" primary="true" />
-		<column name="templateId" type="String" primary="true" />
+		<column name="id" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -210,6 +249,7 @@
 
 		<!-- Other fields -->
 
+		<column name="templateId" type="String" />
 		<column name="structureId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -230,12 +270,14 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_T" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="TemplateId" return-type="Collection">
 			<finder-column name="templateId" />
 		</finder>
-		<finder name="C_G_S" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_T" return-type="JournalTemplate">
+			<finder-column name="groupId" />
+			<finder-column name="templateId" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>

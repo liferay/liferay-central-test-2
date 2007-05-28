@@ -71,7 +71,6 @@ public class ActionUtil {
 	}
 
 	public static void getArticle(HttpServletRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(
@@ -81,7 +80,7 @@ public class ActionUtil {
 
 		if (Validator.isNotNull(articleId)) {
 			article = JournalArticleServiceUtil.getArticle(
-				companyId, groupId, articleId, version);
+				groupId, articleId, version);
 		}
 
 		req.setAttribute(WebKeys.JOURNAL_ARTICLE, article);
@@ -110,7 +109,6 @@ public class ActionUtil {
 	}
 
 	public static void getStructure(HttpServletRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String structureId = ParamUtil.getString(req, "structureId");
 
@@ -118,7 +116,7 @@ public class ActionUtil {
 
 		if (Validator.isNotNull(structureId)) {
 			structure = JournalStructureServiceUtil.getStructure(
-				companyId, groupId, structureId);
+				groupId, structureId);
 		}
 
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE, structure);
@@ -147,7 +145,6 @@ public class ActionUtil {
 	}
 
 	public static void getTemplate(HttpServletRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String templateId = ParamUtil.getString(req, "templateId");
 
@@ -155,7 +152,7 @@ public class ActionUtil {
 
 		if (Validator.isNotNull(templateId)) {
 			template = JournalTemplateServiceUtil.getTemplate(
-				companyId, groupId, templateId);
+				groupId, templateId);
 		}
 
 		req.setAttribute(WebKeys.JOURNAL_TEMPLATE, template);

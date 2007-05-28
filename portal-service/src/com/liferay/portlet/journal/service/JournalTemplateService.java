@@ -70,13 +70,12 @@ public interface JournalTemplateService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteTemplate(long companyId, long groupId,
-		java.lang.String templateId)
+	public void deleteTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		long companyId, long groupId, java.lang.String templateId)
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

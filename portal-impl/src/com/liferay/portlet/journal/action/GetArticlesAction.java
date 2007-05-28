@@ -101,9 +101,9 @@ public class GetArticlesAction extends Action {
 
 	protected List getArticles(HttpServletRequest req) throws Exception {
 		long companyId = PortalUtil.getCompanyId(req);
+		long groupId = DAOParamUtil.getLong(req, "groupId");
 		String articleId = null;
 		Double version = null;
-		long groupId = DAOParamUtil.getLong(req, "groupId");
 		String title = null;
 		String description = null;
 		String content = null;

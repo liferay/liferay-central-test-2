@@ -61,7 +61,7 @@ public interface JournalContentSearchLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteArticleContentSearches(long companyId, long groupId,
+	public void deleteArticleContentSearches(long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
 	public void deleteLayoutContentSearches(long groupId,
@@ -74,9 +74,8 @@ public interface JournalContentSearchLocalService {
 	public java.util.List getArticleContentSearches()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticleContentSearches(long companyId,
-		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getArticleContentSearches(long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
 	public java.util.List getLayoutIds(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
@@ -85,12 +84,12 @@ public interface JournalContentSearchLocalService {
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
-		long companyId, long groupId, boolean privateLayout, long layoutId,
+		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List updateContentSearch(long companyId, long groupId,
+	public java.util.List updateContentSearch(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String portletId,
 		java.lang.String[] articleIds)
 		throws com.liferay.portal.SystemException, 

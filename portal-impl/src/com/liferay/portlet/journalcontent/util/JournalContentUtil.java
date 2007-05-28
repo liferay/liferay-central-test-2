@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journalcontent.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
@@ -55,7 +56,7 @@ public class JournalContentUtil {
 	}
 
 	public static String getContent(
-		long companyId, long groupId, String articleId, String languageId,
+		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		String content = null;
@@ -66,9 +67,7 @@ public class JournalContentUtil {
 
 		articleId = articleId.trim().toUpperCase();
 
-		String key = _encodeKey(
-			companyId + ARTICLE_SEPARATOR + groupId + ARTICLE_SEPARATOR +
-				articleId + LANGUAGE_SEPARATOR + languageId);
+		String key = _encodeKey(groupId, articleId, languageId);
 
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);
@@ -76,12 +75,12 @@ public class JournalContentUtil {
 		catch (NeedsRefreshException nre) {
 			try {
 				content = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, groupId, articleId, languageId, themeDisplay);
+					groupId, articleId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
 				_log.error(
-					"Uanble to get content for " + companyId + " " + groupId +
-						" " + articleId + " " + languageId,
+					"Uanble to get content for " + groupId + " " + articleId +
+						" " + languageId,
 					e);
 			}
 
@@ -98,8 +97,20 @@ public class JournalContentUtil {
 		return content;
 	}
 
-	private static String _encodeKey(String key) {
-		return GROUP_NAME + StringPool.POUND + key;
+	private static String _encodeKey(
+		long groupId, String articleId, String languageId) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(GROUP_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(groupId);
+		sm.append(ARTICLE_SEPARATOR);
+		sm.append(articleId);
+		sm.append(LANGUAGE_SEPARATOR);
+		sm.append(languageId);
+
+		return sm.toString();
 	}
 
 	private static final int _REFRESH_TIME = 3600;

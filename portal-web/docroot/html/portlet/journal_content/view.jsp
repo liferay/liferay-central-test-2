@@ -148,13 +148,13 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 	for (int i = 0; i < articleIds.length; i++) {
 		try {
-			article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[i]);
+			article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleIds[i]);
 	%>
 
 			<c:if test="<%= enableRatings %>">
 				<liferay-ui:ratings
 					className="<%= JournalArticle.class.getName() %>"
-					classPK="<%= article.getResourcePK().toString() %>"
+					classPK="<%= String.valueOf(article.getResourcePrimKey()) %>"
 					url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
 				/>
 
@@ -169,7 +169,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				<liferay-ui:discussion
 					formAction="<%= discussionURL %>"
 					className="<%= JournalArticle.class.getName() %>"
-					classPK="<%= article.getResourcePK().toString() %>"
+					classPK="<%= String.valueOf(article.getResourcePrimKey()) %>"
 					userId="<%= article.getUserId() %>"
 					subject="<%= article.getTitle() %>"
 					redirect="<%= currentURL %>"

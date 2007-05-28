@@ -41,7 +41,7 @@ Boolean hasLock = (Boolean)objArray[4];
 		<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
-		<portlet:param name="folderId" value="<%= fileVersion.getFolderId() %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
 		<portlet:param name="name" value="<%= fileVersion.getName() %>" />
 		<portlet:param name="version" value="<%= String.valueOf(fileVersion.getVersion()) %>" />
 	</portlet:actionURL>

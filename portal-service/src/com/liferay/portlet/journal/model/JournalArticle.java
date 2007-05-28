@@ -48,8 +48,6 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalArticle extends JournalArticleModel {
-	public com.liferay.portlet.journal.service.persistence.JournalArticlePK getResourcePK();
-
 	public java.lang.String getContentByLocale(java.lang.String languageId);
 
 	public java.lang.String getDefaultLocale();

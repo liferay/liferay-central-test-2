@@ -24,8 +24,6 @@ package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
-
 import java.util.Date;
 
 /**
@@ -49,21 +47,21 @@ import java.util.Date;
  *
  */
 public interface JournalTemplateModel extends BaseModel {
-	public JournalTemplatePK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(JournalTemplatePK pk);
+	public void setPrimaryKey(long pk);
 
-	public long getCompanyId();
+	public long getId();
 
-	public void setCompanyId(long companyId);
+	public void setId(long id);
 
 	public long getGroupId();
 
 	public void setGroupId(long groupId);
 
-	public String getTemplateId();
+	public long getCompanyId();
 
-	public void setTemplateId(String templateId);
+	public void setCompanyId(long companyId);
 
 	public long getUserId();
 
@@ -80,6 +78,10 @@ public interface JournalTemplateModel extends BaseModel {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
+
+	public String getTemplateId();
+
+	public void setTemplateId(String templateId);
 
 	public String getStructureId();
 

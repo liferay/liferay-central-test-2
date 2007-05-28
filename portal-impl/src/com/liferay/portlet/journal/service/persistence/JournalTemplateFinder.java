@@ -71,6 +71,10 @@ public class JournalTemplateFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_T_S_N_D);
 
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				String replaceWith =
 					"structureId != ? AND structureId IS NOT NULL";
@@ -94,7 +98,11 @@ public class JournalTemplateFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
 			qPos.add(templateId);
 			qPos.add(templateId);
 
@@ -155,6 +163,10 @@ public class JournalTemplateFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_T_S_N_D);
 
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				String replaceWith =
 					"structureId != ? AND structureId IS NOT NULL";
@@ -179,7 +191,11 @@ public class JournalTemplateFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
 			qPos.add(templateId);
 			qPos.add(templateId);
 

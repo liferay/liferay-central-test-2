@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -55,7 +54,6 @@ public class GetLatestArticleContentAction extends Action {
 		throws Exception {
 
 		try {
-			long companyId = PortalUtil.getCompanyId(req);
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId = ParamUtil.getString(req, "articleId");
 
@@ -63,7 +61,7 @@ public class GetLatestArticleContentAction extends Action {
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
-					companyId, groupId, articleId, Boolean.TRUE);
+					groupId, articleId, Boolean.TRUE);
 
 			String fileName = "content.xml";
 			byte[] byteArray =

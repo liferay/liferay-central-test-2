@@ -184,7 +184,6 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void deleteArticles(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteArticleIds = StringUtil.split(
@@ -199,14 +198,13 @@ public class EditArticleAction extends PortletAction {
 					pos + VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.deleteArticle(
-				companyId, groupId, articleId, version, null, null);
+				groupId, articleId, version, null, null);
 
 			JournalUtil.removeRecentArticle(req, deleteArticleIds[i]);
 		}
 	}
 
 	protected void expireArticles(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] expireArticleIds = StringUtil.split(
@@ -221,7 +219,7 @@ public class EditArticleAction extends PortletAction {
 					pos + VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.expireArticle(
-				companyId, groupId, articleId, version, null, null);
+				groupId, articleId, version, null, null);
 		}
 	}
 
@@ -251,7 +249,6 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void removeArticlesLocale(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] removeArticleLocaleIds = StringUtil.split(
@@ -267,7 +264,7 @@ public class EditArticleAction extends PortletAction {
 			String languageId = ParamUtil.getString(req, "languageId");
 
 			JournalArticleServiceUtil.removeArticleLocale(
-				companyId, groupId, articleId, version, languageId);
+				groupId, articleId, version, languageId);
 		}
 	}
 
@@ -276,7 +273,6 @@ public class EditArticleAction extends PortletAction {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String articleId = ParamUtil.getString(req, "articleId");
@@ -371,12 +367,12 @@ public class EditArticleAction extends PortletAction {
 			if (Validator.isNotNull(structureId)) {
 				JournalArticle curArticle =
 					JournalArticleServiceUtil.getArticle(
-						companyId, groupId, articleId, version);
+						groupId, articleId, version);
 
 				if (Validator.isNotNull(curArticle.getStructureId())) {
 					JournalStructure structure =
 						JournalStructureServiceUtil.getStructure(
-							companyId, groupId, structureId);
+							groupId, structureId);
 
 					content = JournalUtil.mergeLocaleContent(
 						curArticle.getContent(), content, structure.getXsd());
@@ -386,7 +382,7 @@ public class EditArticleAction extends PortletAction {
 			// Update article
 
 			article = JournalArticleServiceUtil.updateArticle(
-				companyId, groupId, articleId, version, incrementVersion, title,
+				groupId, articleId, version, incrementVersion, title,
 				description, content, type, structureId, templateId,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
@@ -436,9 +432,8 @@ public class EditArticleAction extends PortletAction {
 		Layout layout = themeDisplay.getLayout();
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
-			layout.getCompanyId(), layout.getGroupId(),
-			layout.isPrivateLayout(), layout.getLayoutId(), portletResource,
-			articleId);
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			portletResource, articleId);
 	}
 
 }

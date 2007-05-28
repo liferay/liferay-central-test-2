@@ -60,14 +60,12 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
-import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -220,30 +218,34 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			user.getCompanyId(), groupId, articleId, autoArticleId, title,
-			content, structureId, templateId);
+			groupId, articleId, autoArticleId, title, content, structureId,
+			templateId);
 
 		if (autoArticleId) {
-			articleId = String.valueOf(CounterLocalServiceUtil.increment(
-				JournalArticle.class.getName() + "." + user.getCompanyId()));
+			articleId = String.valueOf(CounterLocalServiceUtil.increment());
 		}
 
-		JournalArticlePK pk = new JournalArticlePK(
-			user.getCompanyId(), groupId, articleId,
-			JournalArticleImpl.DEFAULT_VERSION);
+		long id = CounterLocalServiceUtil.increment();
 
-		JournalArticle article = JournalArticleUtil.create(pk);
+		long resourcePrimKey =
+			JournalArticleResourceLocalServiceUtil.getArticleResourcePrimKey(
+				groupId, articleId);
+
+		JournalArticle article = JournalArticleUtil.create(id);
 
 		content = format(
-			article.getCompanyId(), groupId, articleId, article.getVersion(),
-			false, content, structureId, images);
+			groupId, articleId, article.getVersion(), false, content,
+			structureId, images);
 
-		article.setCompanyId(user.getCompanyId());
+		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
+		article.setCompanyId(user.getCompanyId());
 		article.setUserId(user.getUserId());
 		article.setUserName(user.getFullName());
 		article.setCreateDate(now);
 		article.setModifiedDate(now);
+		article.setArticleId(articleId);
+		article.setVersion(JournalArticleImpl.DEFAULT_VERSION);
 		article.setTitle(title);
 		article.setDescription(description);
 		article.setContent(content);
@@ -275,7 +277,7 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			article.getPrimaryKey().toString(), tagsEntries);
+			String.valueOf(article.getArticleId()), tagsEntries);
 
 		// Email
 
@@ -285,12 +287,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void addArticleResources(
-			long companyId, long groupId, String articleId,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long groupId, String articleId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getLatestArticle(
-			companyId, groupId, articleId);
+		JournalArticle article = getLatestArticle(groupId, articleId);
 
 		addArticleResources(
 			article, addCommunityPermissions, addGuestPermissions);
@@ -304,17 +305,16 @@ public class JournalArticleLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			article.getCompanyId(), article.getGroupId(),
 			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePK().toString(), false, addCommunityPermissions,
+			article.getResourcePrimKey(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public void addArticleResources(
-			long companyId, long groupId, String articleId,
-			String[] communityPermissions, String[] guestPermissions)
+			long groupId, String articleId, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getLatestArticle(
-			companyId, groupId, articleId);
+		JournalArticle article = getLatestArticle(groupId, articleId);
 
 		addArticleResources(article, communityPermissions, guestPermissions);
 	}
@@ -327,7 +327,7 @@ public class JournalArticleLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			article.getCompanyId(), article.getGroupId(),
 			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePK().toString(), communityPermissions,
+			article.getResourcePrimKey(), communityPermissions,
 			guestPermissions);
 	}
 
@@ -341,10 +341,8 @@ public class JournalArticleLocalServiceImpl
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		JournalArticlePK pk = new JournalArticlePK(
-			user.getCompanyId(), groupId, articleId, version);
-
-		JournalArticle article = JournalArticleUtil.findByPrimaryKey(pk);
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		article.setModifiedDate(now);
 		article.setApproved(true);
@@ -369,8 +367,30 @@ public class JournalArticleLocalServiceImpl
 				article.getDisplayDate());
 		}
 		catch (IOException ioe) {
-			_log.error("Indexing " + pk, ioe);
+			_log.error("Indexing " + article.getId(), ioe);
 		}
+
+		return article;
+	}
+
+	public JournalArticle checkArticleResourcePrimKey(
+			long groupId, String articleId, double version)
+		throws PortalException, SystemException {
+
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
+
+		if (article.getResourcePrimKey() > 0) {
+			return article;
+		}
+
+		long resourcePrimKey =
+			JournalArticleResourceLocalServiceUtil.getArticleResourcePrimKey(
+				groupId, articleId);
+
+		article.setResourcePrimKey(resourcePrimKey);
+
+		JournalArticleUtil.update(article);
 
 		return article;
 	}
@@ -419,14 +439,11 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public void checkNewLine(
-			long companyId, long groupId, String articleId, double version)
+	public void checkNewLine(long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		JournalArticle article =
-			JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-				companyId, groupId, articleId,
-				JournalArticleImpl.DEFAULT_VERSION));
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		String content = article.getContent();
 
@@ -443,13 +460,12 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void deleteArticle(
-			long companyId, long groupId, String articleId, double version,
-			String articleURL, PortletPreferences prefs)
+			long groupId, String articleId, double version, String articleURL,
+			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		JournalArticle article =
-			JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-				companyId, groupId, articleId, version));
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		deleteArticle(article, articleURL, prefs);
 	}
@@ -474,8 +490,8 @@ public class JournalArticleLocalServiceImpl
 
 		if ((prefs != null) && !article.isApproved() &&
 			isLatestVersion(
-				article.getCompanyId(), article.getGroupId(),
-				article.getArticleId(), article.getVersion())) {
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion())) {
 
 			sendEmail(article, articleURL, prefs, "denied");
 		}
@@ -483,13 +499,13 @@ public class JournalArticleLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			JournalArticle.class.getName(), article.getPrimaryKey().toString());
+			JournalArticle.class.getName(),
+			String.valueOf(article.getArticleId()));
 
 		// Content searches
 
 		JournalContentSearchLocalServiceUtil.deleteArticleContentSearches(
-			article.getCompanyId(), article.getGroupId(),
-			article.getArticleId());
+			article.getGroupId(), article.getArticleId());
 
 		// Images
 
@@ -498,15 +514,18 @@ public class JournalArticleLocalServiceImpl
 
 		// Resources
 
-		if (JournalArticleUtil.countByC_G_A(
-				article.getCompanyId(), article.getGroupId(),
-					article.getArticleId()) == 1) {
+		if (JournalArticleUtil.countByG_A(
+				article.getGroupId(), article.getArticleId()) == 1) {
 
 			ResourceLocalServiceUtil.deleteResource(
 				article.getCompanyId(), JournalArticle.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL,
-				article.getResourcePK().toString());
+				ResourceImpl.SCOPE_INDIVIDUAL, article.getResourcePrimKey());
 		}
+
+		// Resource
+
+		JournalArticleResourceLocalServiceUtil.deleteArticleResource(
+			article.getGroupId(), article.getArticleId());
 
 		// Article
 
@@ -526,13 +545,12 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void expireArticle(
-			long companyId, long groupId, String articleId, double version,
-			String articleURL, PortletPreferences prefs)
+			long groupId, String articleId, double version, String articleURL,
+			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		JournalArticle article =
-			JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-				companyId, groupId, articleId, version));
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		expireArticle(article, articleURL, prefs);
 	}
@@ -545,8 +563,8 @@ public class JournalArticleLocalServiceImpl
 
 		if ((prefs != null) && !article.isApproved() &&
 			isLatestVersion(
-				article.getCompanyId(), article.getGroupId(),
-				article.getArticleId(), article.getVersion())) {
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion())) {
 
 			sendEmail(article, articleURL, prefs, "denied");
 		}
@@ -561,52 +579,51 @@ public class JournalArticleLocalServiceImpl
 		JournalArticleUtil.update(article);
 	}
 
-	public JournalArticle getArticle(
-			long companyId, long groupId, String articleId)
+	public JournalArticle getArticle(long id)
+		throws PortalException, SystemException {
+
+		return JournalArticleUtil.findByPrimaryKey(id);
+	}
+
+	public JournalArticle getArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
 		// Get the latest article that is approved, if none are approved, get
 		// the latest unapproved article
 
 		try {
-			return getLatestArticle(
-				companyId, groupId, articleId, Boolean.TRUE);
+			return getLatestArticle(groupId, articleId, Boolean.TRUE);
 		}
 		catch (NoSuchArticleException nsae) {
-			return getLatestArticle(
-				companyId, groupId, articleId, Boolean.FALSE);
+			return getLatestArticle(groupId, articleId, Boolean.FALSE);
 		}
 	}
 
 	public JournalArticle getArticle(
-			long companyId, long groupId, String articleId, double version)
+			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		return JournalArticleUtil.findByPrimaryKey(
-			new JournalArticlePK(companyId, groupId, articleId, version));
+		return JournalArticleUtil.findByG_A_V(groupId, articleId, version);
 	}
 
 	public String getArticleContent(
-			long companyId, long groupId, String articleId, String languageId,
+			long groupId, String articleId, String languageId,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getDisplayArticle(
-			companyId, groupId, articleId);
+		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleContent(
-			companyId, groupId, articleId, article.getVersion(), languageId,
-			themeDisplay);
+			groupId, articleId, article.getVersion(), languageId, themeDisplay);
 	}
 
 	public String getArticleContent(
-			long companyId, long groupId, String articleId, double version,
-			String languageId, ThemeDisplay themeDisplay)
+			long groupId, String articleId, double version, String languageId,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		JournalArticle article =
-			JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-				companyId, groupId, articleId, version));
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		/*if (!article.isTemplateDriven()) {
 			return article.getContent();
@@ -710,9 +727,8 @@ public class JournalArticleLocalServiceImpl
 			String langType = null;
 
 			if (article.isTemplateDriven()) {
-				JournalTemplate template =
-					JournalTemplateUtil.findByPrimaryKey(new JournalTemplatePK(
-						companyId, groupId, article.getTemplateId()));
+				JournalTemplate template = JournalTemplateUtil.findByG_T(
+					groupId, article.getTemplateId());
 
 				script = template.getXsl();
 				langType = template.getLangType();
@@ -751,12 +767,11 @@ public class JournalArticleLocalServiceImpl
 		return JournalArticleUtil.countByGroupId(groupId);
 	}
 
-	public JournalArticle getDisplayArticle(
-			long companyId, long groupId, String articleId)
+	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		List articles = JournalArticleUtil.findByC_G_A_A(
-			companyId, groupId, articleId, true);
+		List articles = JournalArticleUtil.findByG_A_A(
+			groupId, articleId, true);
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException();
@@ -777,26 +792,24 @@ public class JournalArticleLocalServiceImpl
 		return (JournalArticle)articles.get(0);
 	}
 
-	public JournalArticle getLatestArticle(
-			long companyId, long groupId, String articleId)
+	public JournalArticle getLatestArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		return getLatestArticle(companyId, groupId, articleId, null);
+		return getLatestArticle(groupId, articleId, null);
 	}
 
 	public JournalArticle getLatestArticle(
-			long companyId, long groupId, String articleId, Boolean approved)
+			long groupId, String articleId, Boolean approved)
 		throws PortalException, SystemException {
 
 		List articles = null;
 
 		if (approved == null) {
-			articles = JournalArticleUtil.findByC_G_A(
-				companyId, groupId, articleId, 0, 1);
+			articles = JournalArticleUtil.findByG_A(groupId, articleId, 0, 1);
 		}
 		else {
-			articles = JournalArticleUtil.findByC_G_A_A(
-				companyId, groupId, articleId, approved.booleanValue(), 0, 1);
+			articles = JournalArticleUtil.findByG_A_A(
+				groupId, articleId, approved.booleanValue(), 0, 1);
 		}
 
 		if (articles.size() == 0) {
@@ -806,67 +819,61 @@ public class JournalArticleLocalServiceImpl
 		return (JournalArticle)articles.get(0);
 	}
 
-	public double getLatestVersion(
-			long companyId, long groupId, String articleId)
+	public double getLatestVersion(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getLatestArticle(
-			companyId, groupId, articleId);
+		JournalArticle article = getLatestArticle(groupId, articleId);
 
 		return article.getVersion();
 	}
 
-	public List getStructureArticles(
-			long companyId, long groupId, String structureId)
+	public List getStructureArticles(long groupId, String structureId)
 		throws SystemException {
 
-		return JournalArticleUtil.findByC_G_S(companyId, groupId, structureId);
+		return JournalArticleUtil.findByG_S(groupId, structureId);
 	}
 
 	public List getStructureArticles(
-			long companyId, long groupId, String structureId, int begin,
-			int end, OrderByComparator obc)
+			long groupId, String structureId, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleUtil.findByC_G_S(
-			companyId, groupId, structureId, begin, end, obc);
+		return JournalArticleUtil.findByG_S(
+			groupId, structureId, begin, end, obc);
 	}
 
-	public int getStructureArticlesCount(
-			long companyId, long groupId, String structureId)
+	public int getStructureArticlesCount(long groupId, String structureId)
 		throws SystemException {
 
-		return JournalArticleUtil.countByC_G_S(companyId, groupId, structureId);
+		return JournalArticleUtil.countByG_S(groupId, structureId);
+	}
+
+	public List getTemplateArticles(long groupId, String templateId)
+		throws SystemException {
+
+		return JournalArticleUtil.findByG_T(groupId, templateId);
 	}
 
 	public List getTemplateArticles(
-			long companyId, long groupId, String templateId)
+			long groupId, String templateId, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleUtil.findByC_G_T(companyId, groupId, templateId);
+		return JournalArticleUtil.findByG_T(
+			groupId, templateId, begin, end, obc);
 	}
 
-	public List getTemplateArticles(
-			long companyId, long groupId, String templateId, int begin,
-			int end, OrderByComparator obc)
+	public int getTemplateArticlesCount(long groupId, String templateId)
 		throws SystemException {
 
-		return JournalArticleUtil.findByC_G_T(
-			companyId, groupId, templateId, begin, end, obc);
-	}
-
-	public int getTemplateArticlesCount(
-			long companyId, long groupId, String templateId)
-		throws SystemException {
-
-		return JournalArticleUtil.countByC_G_T(companyId, groupId, templateId);
+		return JournalArticleUtil.countByG_T(groupId, templateId);
 	}
 
 	public boolean isLatestVersion(
-			long companyId, long groupId, String articleId, double version)
+			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		if (getLatestVersion(companyId, groupId, articleId) == version) {
+		if (getLatestVersion(groupId, articleId) == version) {
 			return true;
 		}
 		else {
@@ -914,12 +921,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle removeArticleLocale(
-			long companyId, long groupId, String articleId, double version,
-			String languageId)
+			long groupId, String articleId, double version, String languageId)
 		throws PortalException, SystemException {
 
-		JournalArticle article = JournalArticleUtil.findByPrimaryKey(
-			new JournalArticlePK(companyId, groupId, articleId, version));
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		if (Validator.isNotNull(article.getStructureId())) {
 			String content = JournalUtil.removeArticleLocale(
@@ -1070,40 +1076,35 @@ public class JournalArticleLocalServiceImpl
 				new ArticleReviewDateException());
 		}
 
-		validate(
-			user.getCompanyId(), title, content, groupId, structureId,
-			templateId);
+		validate(title, content, groupId, structureId, templateId);
 
-		JournalArticlePK oldPK = new JournalArticlePK(
-			user.getCompanyId(), groupId, articleId, version);
-
-		JournalArticle oldArticle = JournalArticleUtil.findByPrimaryKey(oldPK);
+		JournalArticle oldArticle = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		JournalArticle article = null;
 
 		if (incrementVersion) {
-			double latestVersion = getLatestVersion(
-				user.getCompanyId(), groupId, articleId);
+			double latestVersion = getLatestVersion(groupId, articleId);
 
-			JournalArticlePK pk = new JournalArticlePK(
-				user.getCompanyId(), groupId, articleId,
-				MathUtil.format(latestVersion + 0.1, 1, 1));
+			long id = CounterLocalServiceUtil.increment();
 
-			article = JournalArticleUtil.create(pk);
+			article = JournalArticleUtil.create(id);
 
-			article.setCompanyId(user.getCompanyId());
 			article.setGroupId(oldArticle.getGroupId());
+			article.setCompanyId(user.getCompanyId());
 			article.setUserId(user.getUserId());
 			article.setUserName(user.getFullName());
 			article.setCreateDate(now);
+			article.setArticleId(articleId);
+			article.setVersion(MathUtil.format(latestVersion + 0.1, 1, 1));
 		}
 		else {
 			article = oldArticle;
 		}
 
 		content = format(
-			article.getCompanyId(), groupId, articleId, article.getVersion(),
-			incrementVersion, content, structureId, images);
+			groupId, articleId, article.getVersion(), incrementVersion, content,
+			structureId, images);
 
 		boolean approved = oldArticle.isApproved();
 
@@ -1136,7 +1137,7 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			article.getPrimaryKey().toString(), tagsEntries);
+			String.valueOf(article.getArticleId()), tagsEntries);
 
 		// Email
 
@@ -1164,14 +1165,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateContent(
-			long companyId, long groupId, String articleId, double version,
-			String content)
+			long groupId, String articleId, double version, String content)
 		throws PortalException, SystemException {
 
-		JournalArticlePK pk = new JournalArticlePK(
-			companyId, groupId, articleId, version);
-
-		JournalArticle article = JournalArticleUtil.findByPrimaryKey(pk);
+		JournalArticle article = JournalArticleUtil.findByG_A_V(
+			groupId, articleId, version);
 
 		article.setContent(content);
 
@@ -1181,7 +1179,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected String format(
-			long companyId, long groupId, String articleId, double version,
+			long groupId, String articleId, double version,
 			boolean incrementVersion, String content, String structureId,
 			Map images)
 		throws SystemException {
@@ -1197,7 +1195,7 @@ public class JournalArticleLocalServiceImpl
 				Element root = doc.getRootElement();
 
 				format(
-					companyId, groupId, articleId, version, incrementVersion,
+					groupId, articleId, version, incrementVersion,
 					root, images);
 
 				content = JournalUtil.formatXML(doc);
@@ -1214,7 +1212,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void format(
-			long companyId, long groupId, String articleId, double version,
+			long groupId, String articleId, double version,
 			boolean incrementVersion, Element root, Map images)
 		throws SystemException {
 
@@ -1228,8 +1226,8 @@ public class JournalArticleLocalServiceImpl
 
 			if (elType.equals("image")) {
 				formatImage(
-					companyId, groupId, articleId, version, incrementVersion,
-					el, elName, images);
+					groupId, articleId, version, incrementVersion, el, elName,
+					images);
 			}
 			else if (elType.equals("text_area")) {
 				Element dynamicContent = el.element("dynamic-content");
@@ -1242,13 +1240,12 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			format(
-				companyId, groupId, articleId, version, incrementVersion, el,
-				images);
+				groupId, articleId, version, incrementVersion, el, images);
 		}
 	}
 
 	protected void formatImage(
-			long companyId, long groupId, String articleId, double version,
+			long groupId, String articleId, double version,
 			boolean incrementVersion, Element el, String elName, Map images)
 		throws SystemException {
 
@@ -1513,9 +1510,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long groupId, String articleId,
-			boolean autoArticleId, String title, String content,
-			String structureId, String templateId)
+			long groupId, String articleId, boolean autoArticleId, String title,
+			String content, String structureId, String templateId)
 		throws PortalException, SystemException {
 
 		if (!autoArticleId) {
@@ -1527,9 +1523,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			try {
-				JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-					companyId, groupId, articleId,
-					JournalArticleImpl.DEFAULT_VERSION));
+				JournalArticle article = JournalArticleUtil.findByG_A_V(
+					groupId, articleId, JournalArticleImpl.DEFAULT_VERSION);
 
 				throw new DuplicateArticleIdException();
 			}
@@ -1537,12 +1532,12 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		validate(companyId, title, content, groupId, structureId, templateId);
+		validate(title, content, groupId, structureId, templateId);
 	}
 
 	protected void validate(
-			long companyId, String title, String content, long groupId,
-			String structureId, String templateId)
+			String title, String content, long groupId, String structureId,
+			String templateId)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(title)) {
@@ -1553,11 +1548,10 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (Validator.isNotNull(structureId)) {
-			JournalStructureUtil.findByPrimaryKey(
-				new JournalStructurePK(companyId, groupId, structureId));
+			JournalStructureUtil.findByG_S(groupId, structureId);
 
-			JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
-				new JournalTemplatePK(companyId, groupId, templateId));
+			JournalTemplate template = JournalTemplateUtil.findByG_T(
+				groupId, templateId);
 
 			if (!template.getStructureId().equals(structureId)) {
 				throw new NoSuchTemplateException();

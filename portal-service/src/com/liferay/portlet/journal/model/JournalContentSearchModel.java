@@ -53,13 +53,13 @@ public interface JournalContentSearchModel extends BaseModel {
 
 	public void setContentSearchId(long contentSearchId);
 
-	public long getCompanyId();
-
-	public void setCompanyId(long companyId);
-
 	public long getGroupId();
 
 	public void setGroupId(long groupId);
+
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
 
 	public boolean getPrivateLayout();
 

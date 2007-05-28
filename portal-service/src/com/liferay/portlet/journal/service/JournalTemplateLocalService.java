@@ -91,9 +91,8 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addTemplateResources(long companyId, long groupId,
-		java.lang.String templateId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addTemplateResources(long groupId, java.lang.String templateId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -103,8 +102,8 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addTemplateResources(long companyId, long groupId,
-		java.lang.String templateId, java.lang.String[] communityPermissions,
+	public void addTemplateResources(long groupId, java.lang.String templateId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -116,13 +115,11 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkNewLine(long companyId, long groupId,
-		java.lang.String templateId)
+	public void checkNewLine(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteTemplate(long companyId, long groupId,
-		java.lang.String templateId)
+	public void deleteTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -131,18 +128,23 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getStructureTemplates(long companyId, long groupId,
+	public java.util.List getStructureTemplates(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getStructureTemplates(long companyId, long groupId,
+	public java.util.List getStructureTemplates(long groupId,
 		java.lang.String structureId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getStructureTemplatesCount(long companyId, long groupId,
+	public int getStructureTemplatesCount(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		long companyId, long groupId, java.lang.String templateId)
+		long id)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -172,7 +174,7 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		long companyId, long groupId, java.lang.String templateId,
+		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean smallImage,

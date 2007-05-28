@@ -38,13 +38,11 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 public class JournalArticlePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long companyId, long groupId,
-			String articleId, String actionId)
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(
-				permissionChecker, companyId, groupId, articleId, actionId)) {
-
+		if (!contains(permissionChecker, groupId, articleId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -60,13 +58,12 @@ public class JournalArticlePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long companyId,
-			long groupId, String articleId, String actionId)
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getArticle(
-				companyId, groupId, articleId);
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			groupId, articleId);
 
 		return contains(permissionChecker, article, actionId);
 	}
@@ -78,7 +75,7 @@ public class JournalArticlePermission {
 
 		return permissionChecker.hasPermission(
 			article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePK().toString(), actionId);
+			article.getResourcePrimKey(), actionId);
 	}
 
 }

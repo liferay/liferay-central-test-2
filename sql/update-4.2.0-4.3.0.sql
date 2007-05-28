@@ -100,6 +100,7 @@ alter table Image add height INTEGER;
 alter table Image add width INTEGER;
 alter table Image add size_ INTEGER;
 
+alter table JournalArticle add resourcePrimKey LONG;
 alter_column_type JournalArticle groupId LONG;
 
 create table JournalArticleImage (
@@ -115,8 +116,8 @@ create table JournalArticleImage (
 drop table JournalContentSearch;
 create table JournalContentSearch (
 	contentSearchId LONG primary key,
-	companyId LONG,
 	groupId LONG,
+	companyId LONG,
 	privateLayout BOOLEAN,
 	layoutId LONG,
 	portletId VARCHAR(75) null,

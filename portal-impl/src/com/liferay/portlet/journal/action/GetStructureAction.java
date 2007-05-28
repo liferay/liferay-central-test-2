@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -52,13 +51,12 @@ public class GetStructureAction extends Action {
 		throws Exception {
 
 		try {
-			long companyId = PortalUtil.getCompanyId(req);
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String structureId = ParamUtil.getString(req, "structureId");
 
 			JournalStructure structure =
 				JournalStructureLocalServiceUtil.getStructure(
-					companyId, groupId, structureId);
+					groupId, structureId);
 
 			String fileName = structure.getStructureId() + ".xml";
 			byte[] byteArray = structure.getXsd().getBytes();

@@ -58,15 +58,13 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 				int templateIdIndex =
 					templatePathIndex + _GET_TEMPLATE_PATH.length();
 
-				long companyId = GetterUtil.getLong(
-					(String)_tokens.get("company_id"));
 				long groupId = GetterUtil.getLong(
 					(String)_tokens.get("group_id"));
 				String templateId =
 					href.substring(templateIdIndex, href.length());
 
 				content = JournalUtil.getTemplateScript(
-					companyId, groupId, templateId, _tokens, _languageId);
+					groupId, templateId, _tokens, _languageId);
 			}
 			else {
 				content = Http.URLtoString(href);

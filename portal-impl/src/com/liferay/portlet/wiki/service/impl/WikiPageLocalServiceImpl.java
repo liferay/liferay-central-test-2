@@ -422,6 +422,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = getPage(nodeId, title);
 
+		long resourcePrimKey = page.getResourcePrimKey();
+
 		page.setHead(false);
 
 		WikiPageUtil.update(page);
@@ -433,6 +435,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		page = WikiPageUtil.create(pageId);
 
+		page.setResourcePrimKey(resourcePrimKey);
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());

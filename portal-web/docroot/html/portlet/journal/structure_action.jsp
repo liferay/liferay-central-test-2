@@ -45,7 +45,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= JournalStructure.class.getName() %>"
 		modelResourceDescription="<%= structure.getName() %>"
-		resourcePrimKey="<%= structure.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(structure.getId()) %>"
 		var="permissionsURL"
 	/>
 

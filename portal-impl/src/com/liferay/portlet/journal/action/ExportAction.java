@@ -278,26 +278,27 @@ public class ExportAction extends Action {
 
 			if (article.isApproved() &&
 				JournalArticleLocalServiceUtil.isLatestVersion(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId(), article.getVersion())) {
+					article.getGroupId(), article.getArticleId(),
+					article.getVersion())) {
 
 				sm.append("insert into JournalArticle (");
-				sm.append("companyId, groupId, articleId, version, userId, ");
-				sm.append("userName, createDate, modifiedDate, title, ");
-				sm.append("description, content, type_, structureId, ");
+				sm.append("id_, groupId, companyId, userId, userName, ");
+				sm.append("createDate, modifiedDate, articleId, version, ");
+				sm.append("title, description, content, type_, structureId, ");
 				sm.append("templateId, displayDate, approved, ");
 				sm.append("approvedByUserId, approvedByUserName, expired");
 				sm.append(") values (");
-				addColumn(sm, article.getCompanyId());
+				addColumn(sm, article.getId());
 				addColumn(sm, article.getGroupId());
-				addColumn(sm, article.getArticleId());
-				addColumn(sm, JournalArticleImpl.DEFAULT_VERSION);
+				addColumn(sm, article.getCompanyId());
 				//addColumn(sm, article.getUserId());
 				//addColumn(sm, article.getUserName());
-				addColumn(sm, "liferay.com.1");
+				addColumn(sm, 2);
 				addColumn(sm, "Joe Bloggs");
 				addColumn(sm, article.getCreateDate());
 				addColumn(sm, article.getModifiedDate());
+				addColumn(sm, article.getArticleId());
+				addColumn(sm, JournalArticleImpl.DEFAULT_VERSION);
 				addColumn(sm, article.getTitle());
 				addColumn(sm, article.getDescription());
 				addColumn(sm, article.getContent());
@@ -327,12 +328,12 @@ public class ExportAction extends Action {
 				(JournalContentSearch)itr.next();
 
 			sm.append("insert into JournalContentSearch (");
-			sm.append("contentSearchId, companyId, groupId, privateLayout, ");
+			sm.append("contentSearchId, groupId, companyId, privateLayout, ");
 			sm.append("layoutId, portletId, articleId");
 			sm.append(") values (");
 			addColumn(sm, contentSearch.getContentSearchId());
-			addColumn(sm, contentSearch.getCompanyId());
 			addColumn(sm, contentSearch.getGroupId());
+			addColumn(sm, contentSearch.getCompanyId());
 			addColumn(sm, contentSearch.isPrivateLayout());
 			addColumn(sm, contentSearch.getLayoutId());
 			addColumn(sm, contentSearch.getPortletId());
@@ -351,16 +352,18 @@ public class ExportAction extends Action {
 			JournalStructure structure = (JournalStructure)itr.next();
 
 			sm.append("insert into JournalStructure (");
-			sm.append("companyId, structureId, groupId, userId, userName, ");
-			sm.append("createDate, modifiedDate, name, description, xsd");
+			sm.append("id_, groupId, companyId, userId, userName, ");
+			sm.append("createDate, modifiedDate, structureId, name, ");
+			sm.append("description, xsd");
 			sm.append(") values (");
-			addColumn(sm, structure.getCompanyId());
-			addColumn(sm, structure.getStructureId());
+			addColumn(sm, structure.getId());
 			addColumn(sm, structure.getGroupId());
+			addColumn(sm, structure.getCompanyId());
 			addColumn(sm, structure.getUserId());
 			addColumn(sm, structure.getUserName());
 			addColumn(sm, structure.getCreateDate());
 			addColumn(sm, structure.getModifiedDate());
+			addColumn(sm, structure.getStructureId());
 			addColumn(sm, structure.getName());
 			addColumn(sm, structure.getDescription());
 			addColumn(sm, structure.getXsd());
@@ -377,18 +380,19 @@ public class ExportAction extends Action {
 			JournalTemplate template = (JournalTemplate)itr.next();
 
 			sm.append("insert into JournalTemplate (");
-			sm.append("companyId, templateId, groupId, userId, userName, ");
-			sm.append("createDate, modifiedDate, structureId, name, ");
-			sm.append("description, xsl, langType, smallImage, smallImageId, ");
-			sm.append("smallImageURL");
+			sm.append("id_, groupId, companyId, userId, userName, ");
+			sm.append("createDate, modifiedDate, templateId, structureId, ");
+			sm.append("name, description, xsl, langType, smallImage, ");
+			sm.append("smallImageId, smallImageURL");
 			sm.append(") values (");
-			addColumn(sm, template.getCompanyId());
-			addColumn(sm, template.getTemplateId());
+			addColumn(sm, template.getId());
 			addColumn(sm, template.getGroupId());
+			addColumn(sm, template.getCompanyId());
 			addColumn(sm, template.getUserId());
 			addColumn(sm, template.getUserName());
 			addColumn(sm, template.getCreateDate());
 			addColumn(sm, template.getModifiedDate());
+			addColumn(sm, template.getTemplateId());
 			addColumn(sm, template.getStructureId());
 			addColumn(sm, template.getName());
 			addColumn(sm, template.getDescription());

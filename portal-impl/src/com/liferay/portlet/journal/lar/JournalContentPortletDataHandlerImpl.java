@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -41,9 +42,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.MapUtil;
@@ -166,7 +165,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			try {
 				article = JournalArticleLocalServiceUtil.getLatestArticle(
-					context.getCompanyId(), articleGroupId, articleId);
+					articleGroupId, articleId);
 			}
 			catch (NoSuchArticleException nsae) {
 				if (_log.isWarnEnabled()) {
@@ -182,9 +181,12 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
+			String articlePrimaryKey = getPrimaryKey(
+				article.getGroupId(), article.getArticleId());
+
 			if ((article.getGroupId() == context.getGroupId()) &&
 				!context.addPrimaryKey(
-					JournalArticle.class, article.getPrimaryKey())) {
+					JournalArticle.class, articlePrimaryKey)) {
 
 				SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -205,15 +207,15 @@ public class JournalContentPortletDataHandlerImpl
 				String structureId = article.getStructureId();
 
 				if (Validator.isNotNull(structureId)) {
-					JournalStructurePK structurePK = new JournalStructurePK(
-						context.getCompanyId(), article.getGroupId(),
-						structureId);
+					String structurePrimaryKey = getPrimaryKey(
+						article.getGroupId(), structureId);
 
 					if (!context.addPrimaryKey(
-							JournalStructure.class, structurePK)) {
+							JournalStructure.class, structurePrimaryKey)) {
 
 						JournalStructure structure =
-							JournalStructureUtil.findByPrimaryKey(structurePK);
+							JournalStructureUtil.findByG_S(
+								article.getGroupId(), structureId);
 
 						xml = xStream.toXML(structure);
 
@@ -226,15 +228,15 @@ public class JournalContentPortletDataHandlerImpl
 				String templateId = article.getTemplateId();
 
 				if (Validator.isNotNull(templateId)) {
-					JournalTemplatePK templatePK = new JournalTemplatePK(
-						context.getCompanyId(), article.getGroupId(),
-						templateId);
+					String templatePrimaryKey = getPrimaryKey(
+						article.getGroupId(), templateId);
 
 					if (!context.addPrimaryKey(
-							JournalTemplate.class, templatePK)) {
+							JournalTemplate.class, templatePrimaryKey)) {
 
 						JournalTemplate template =
-							JournalTemplateUtil.findByPrimaryKey(templatePK);
+							JournalTemplateUtil.findByG_T(
+								article.getGroupId(), templateId);
 
 						xml = xStream.toXML(template);
 
@@ -292,6 +294,16 @@ public class JournalContentPortletDataHandlerImpl
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	protected String getPrimaryKey(long groupId, String key) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(groupId);
+		sm.append(StringPool.POUND);
+		sm.append(key);
+
+		return sm.toString();
 	}
 
 	protected void importJournalData(

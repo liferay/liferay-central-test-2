@@ -109,7 +109,7 @@ String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
-		structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), groupId, structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 
 		structureName = structure.getName();
 	}
@@ -120,7 +120,7 @@ if (Validator.isNotNull(structureId)) {
 List templates = new ArrayList();
 
 if (structure != null) {
-	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(company.getCompanyId(), groupId, structureId);
+	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
 }
 
 String templateId = BeanParamUtil.getString(article, request, "templateId");
@@ -152,7 +152,7 @@ else {
 boolean disableIncrementVersion = false;
 
 if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION))) {
-	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(company.getCompanyId(), themeDisplay.getPortletGroupId(), articleId, version));
+	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(themeDisplay.getPortletGroupId(), articleId, version));
 
 	if (!latestVersion) {
 		incrementVersion = true;
@@ -817,7 +817,7 @@ String[] availableLocales = null;
 		String classPK = StringPool.BLANK;
 
 		if (article != null) {
-			classPK = article.getPrimaryKey().toString();
+			classPK = String.valueOf(article.getResourcePrimKey());
 		}
 		%>
 

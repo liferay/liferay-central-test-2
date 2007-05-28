@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JournalTemplateUtil {
 	public static com.liferay.portlet.journal.model.JournalTemplate create(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK) {
-		return getPersistence().create(journalTemplatePK);
+		long id) {
+		return getPersistence().create(id);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate remove(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK)
+		long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(journalTemplatePK));
+			listener.onBeforeRemove(findByPrimaryKey(id));
 		}
 
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate = getPersistence()
-																				.remove(journalTemplatePK);
+																				.remove(id);
 
 		if (listener != null) {
 			listener.onAfterRemove(journalTemplate);
@@ -140,16 +140,15 @@ public class JournalTemplateUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate findByPrimaryKey(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK)
+		long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByPrimaryKey(journalTemplatePK);
+		return getPersistence().findByPrimaryKey(id);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate fetchByPrimaryKey(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(journalTemplatePK);
+		long id) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(id);
 	}
 
 	public static java.util.List findByGroupId(long groupId)
@@ -183,104 +182,107 @@ public class JournalTemplateUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate[] findByGroupId_PrevAndNext(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long id, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByGroupId_PrevAndNext(journalTemplatePK,
-			groupId, obc);
+		return getPersistence().findByGroupId_PrevAndNext(id, groupId, obc);
 	}
 
-	public static java.util.List findByC_T(long companyId,
-		java.lang.String templateId) throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_T(companyId, templateId);
-	}
-
-	public static java.util.List findByC_T(long companyId,
-		java.lang.String templateId, int begin, int end)
+	public static java.util.List findByTemplateId(java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_T(companyId, templateId, begin, end);
+		return getPersistence().findByTemplateId(templateId);
 	}
 
-	public static java.util.List findByC_T(long companyId,
-		java.lang.String templateId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByTemplateId(java.lang.String templateId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByTemplateId(templateId, begin, end);
+	}
+
+	public static java.util.List findByTemplateId(java.lang.String templateId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_T(companyId, templateId, begin, end, obc);
+		return getPersistence().findByTemplateId(templateId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate findByC_T_First(
-		long companyId, java.lang.String templateId,
+	public static com.liferay.portlet.journal.model.JournalTemplate findByTemplateId_First(
+		java.lang.String templateId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByC_T_First(companyId, templateId, obc);
+		return getPersistence().findByTemplateId_First(templateId, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate findByC_T_Last(
-		long companyId, java.lang.String templateId,
+	public static com.liferay.portlet.journal.model.JournalTemplate findByTemplateId_Last(
+		java.lang.String templateId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByC_T_Last(companyId, templateId, obc);
+		return getPersistence().findByTemplateId_Last(templateId, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate[] findByC_T_PrevAndNext(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK,
-		long companyId, java.lang.String templateId,
+	public static com.liferay.portlet.journal.model.JournalTemplate[] findByTemplateId_PrevAndNext(
+		long id, java.lang.String templateId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByC_T_PrevAndNext(journalTemplatePK,
-			companyId, templateId, obc);
+		return getPersistence().findByTemplateId_PrevAndNext(id, templateId, obc);
 	}
 
-	public static java.util.List findByC_G_S(long companyId, long groupId,
+	public static com.liferay.portlet.journal.model.JournalTemplate findByG_T(
+		long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException {
+		return getPersistence().findByG_T(groupId, templateId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate fetchByG_T(
+		long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_T(groupId, templateId);
+	}
+
+	public static java.util.List findByG_S(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_G_S(companyId, groupId, structureId);
+		return getPersistence().findByG_S(groupId, structureId);
 	}
 
-	public static java.util.List findByC_G_S(long companyId, long groupId,
+	public static java.util.List findByG_S(long groupId,
 		java.lang.String structureId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_G_S(companyId, groupId, structureId,
-			begin, end);
+		return getPersistence().findByG_S(groupId, structureId, begin, end);
 	}
 
-	public static java.util.List findByC_G_S(long companyId, long groupId,
+	public static java.util.List findByG_S(long groupId,
 		java.lang.String structureId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_G_S(companyId, groupId, structureId,
-			begin, end, obc);
+		return getPersistence().findByG_S(groupId, structureId, begin, end, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate findByC_G_S_First(
-		long companyId, long groupId, java.lang.String structureId,
+	public static com.liferay.portlet.journal.model.JournalTemplate findByG_S_First(
+		long groupId, java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByC_G_S_First(companyId, groupId,
-			structureId, obc);
+		return getPersistence().findByG_S_First(groupId, structureId, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate findByC_G_S_Last(
-		long companyId, long groupId, java.lang.String structureId,
+	public static com.liferay.portlet.journal.model.JournalTemplate findByG_S_Last(
+		long groupId, java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByC_G_S_Last(companyId, groupId,
-			structureId, obc);
+		return getPersistence().findByG_S_Last(groupId, structureId, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate[] findByC_G_S_PrevAndNext(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK,
-		long companyId, long groupId, java.lang.String structureId,
+	public static com.liferay.portlet.journal.model.JournalTemplate[] findByG_S_PrevAndNext(
+		long id, long groupId, java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		return getPersistence().findByC_G_S_PrevAndNext(journalTemplatePK,
-			companyId, groupId, structureId, obc);
+		return getPersistence().findByG_S_PrevAndNext(id, groupId, structureId,
+			obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -317,14 +319,20 @@ public class JournalTemplateUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByC_T(long companyId, java.lang.String templateId)
+	public static void removeByTemplateId(java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_T(companyId, templateId);
+		getPersistence().removeByTemplateId(templateId);
 	}
 
-	public static void removeByC_G_S(long companyId, long groupId,
-		java.lang.String structureId) throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_G_S(companyId, groupId, structureId);
+	public static void removeByG_T(long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException {
+		getPersistence().removeByG_T(groupId, templateId);
+	}
+
+	public static void removeByG_S(long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_S(groupId, structureId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -336,14 +344,19 @@ public class JournalTemplateUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
-	public static int countByC_T(long companyId, java.lang.String templateId)
+	public static int countByTemplateId(java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_T(companyId, templateId);
+		return getPersistence().countByTemplateId(templateId);
 	}
 
-	public static int countByC_G_S(long companyId, long groupId,
-		java.lang.String structureId) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_G_S(companyId, groupId, structureId);
+	public static int countByG_T(long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_T(groupId, templateId);
+	}
+
+	public static int countByG_S(long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_S(groupId, structureId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

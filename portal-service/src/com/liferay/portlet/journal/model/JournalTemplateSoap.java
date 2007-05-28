@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,13 +48,14 @@ import java.util.List;
 public class JournalTemplateSoap implements Serializable {
 	public static JournalTemplateSoap toSoapModel(JournalTemplate model) {
 		JournalTemplateSoap soapModel = new JournalTemplateSoap();
-		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setId(model.getId());
 		soapModel.setGroupId(model.getGroupId());
-		soapModel.setTemplateId(model.getTemplateId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setTemplateId(model.getTemplateId());
 		soapModel.setStructureId(model.getStructureId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
@@ -83,22 +82,20 @@ public class JournalTemplateSoap implements Serializable {
 	public JournalTemplateSoap() {
 	}
 
-	public JournalTemplatePK getPrimaryKey() {
-		return new JournalTemplatePK(_companyId, _groupId, _templateId);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(JournalTemplatePK pk) {
-		setCompanyId(pk.companyId);
-		setGroupId(pk.groupId);
-		setTemplateId(pk.templateId);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
 	}
 
-	public long getCompanyId() {
-		return _companyId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
+	public void setId(long id) {
+		_id = id;
 	}
 
 	public long getGroupId() {
@@ -109,12 +106,12 @@ public class JournalTemplateSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getTemplateId() {
-		return _templateId;
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setTemplateId(String templateId) {
-		_templateId = templateId;
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -147,6 +144,14 @@ public class JournalTemplateSoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getTemplateId() {
+		return _templateId;
+	}
+
+	public void setTemplateId(String templateId) {
+		_templateId = templateId;
 	}
 
 	public String getStructureId() {
@@ -217,13 +222,14 @@ public class JournalTemplateSoap implements Serializable {
 		_smallImageURL = smallImageURL;
 	}
 
-	private long _companyId;
+	private long _id;
 	private long _groupId;
-	private String _templateId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _templateId;
 	private String _structureId;
 	private String _name;
 	private String _description;

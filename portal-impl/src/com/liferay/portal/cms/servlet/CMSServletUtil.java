@@ -54,7 +54,7 @@ public class CMSServletUtil {
 	}
 
 	public static String getContent(
-		long companyId, long groupId, String articleId, String languageId,
+		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		String content = null;
@@ -73,7 +73,7 @@ public class CMSServletUtil {
 		catch (NeedsRefreshException nre) {
 			try {
 				content = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, groupId, articleId, languageId, themeDisplay);
+					groupId, articleId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

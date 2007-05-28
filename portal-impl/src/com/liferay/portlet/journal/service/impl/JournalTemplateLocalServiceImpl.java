@@ -48,7 +48,6 @@ import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
@@ -148,25 +147,24 @@ public class JournalTemplateLocalServiceImpl
 		}
 
 		validate(
-			user.getCompanyId(), groupId, templateId, autoTemplateId, name,
-			description, xsl, smallImage, smallImageURL, smallFile, smallBytes);
+			groupId, templateId, autoTemplateId, name, description, xsl,
+			smallImage, smallImageURL, smallFile, smallBytes);
 
 		if (autoTemplateId) {
-			templateId = String.valueOf(CounterLocalServiceUtil.increment(
-				JournalTemplate.class.getName() + "." + user.getCompanyId()));
+			templateId = String.valueOf(CounterLocalServiceUtil.increment());
 		}
 
-		JournalTemplatePK pk = new JournalTemplatePK(
-			user.getCompanyId(), groupId, templateId);
+		long id = CounterLocalServiceUtil.increment();
 
-		JournalTemplate template = JournalTemplateUtil.create(pk);
+		JournalTemplate template = JournalTemplateUtil.create(id);
 
-		template.setCompanyId(user.getCompanyId());
 		template.setGroupId(groupId);
+		template.setCompanyId(user.getCompanyId());
 		template.setUserId(user.getUserId());
 		template.setUserName(user.getFullName());
 		template.setCreateDate(now);
 		template.setModifiedDate(now);
+		template.setTemplateId(templateId);
 		template.setStructureId(structureId);
 		template.setName(name);
 		template.setDescription(description);
@@ -201,12 +199,12 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			long companyId, long groupId, String templateId,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long groupId, String templateId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
-			new JournalTemplatePK(companyId, groupId, templateId));
+		JournalTemplate template = JournalTemplateUtil.findByG_T(
+			groupId, templateId);
 
 		addTemplateResources(
 			template, addCommunityPermissions, addGuestPermissions);
@@ -220,17 +218,17 @@ public class JournalTemplateLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), JournalTemplate.class.getName(),
-			template.getPrimaryKey().toString(), false, addCommunityPermissions,
+			template.getId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public void addTemplateResources(
-			long companyId, long groupId, String templateId,
-			String[] communityPermissions, String[] guestPermissions)
+			long groupId, String templateId, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
-			new JournalTemplatePK(companyId, groupId, templateId));
+		JournalTemplate template = JournalTemplateUtil.findByG_T(
+			groupId, templateId);
 
 		addTemplateResources(template, communityPermissions, guestPermissions);
 	}
@@ -243,15 +241,14 @@ public class JournalTemplateLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), JournalTemplate.class.getName(),
-			template.getPrimaryKey().toString(), communityPermissions,
-			guestPermissions);
+			template.getId(), communityPermissions, guestPermissions);
 	}
 
-	public void checkNewLine(long companyId, long groupId, String templateId)
+	public void checkNewLine(long groupId, String templateId)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
-			new JournalTemplatePK(companyId, groupId, templateId));
+		JournalTemplate template = JournalTemplateUtil.findByG_T(
+			groupId, templateId);
 
 		String xsl = template.getXsl();
 
@@ -267,13 +264,13 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
-	public void deleteTemplate(long companyId, long groupId, String templateId)
+	public void deleteTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		templateId = templateId.trim().toUpperCase();
 
-		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
-			new JournalTemplatePK(companyId, groupId, templateId));
+		JournalTemplate template = JournalTemplateUtil.findByG_T(
+			groupId, templateId);
 
 		deleteTemplate(template);
 	}
@@ -281,9 +278,8 @@ public class JournalTemplateLocalServiceImpl
 	public void deleteTemplate(JournalTemplate template)
 		throws PortalException, SystemException {
 
-		if (JournalArticleUtil.countByC_G_T(
-				template.getCompanyId(), template.getGroupId(),
-					template.getTemplateId()) > 0) {
+		if (JournalArticleUtil.countByG_T(
+				template.getGroupId(), template.getTemplateId()) > 0) {
 
 			throw new RequiredTemplateException();
 		}
@@ -296,66 +292,62 @@ public class JournalTemplateLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, template.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, template.getId());
 
 		// Template
 
 		JournalTemplateUtil.remove(template.getPrimaryKey());
 	}
 
-	public List getStructureTemplates(
-			long companyId, long groupId, String structureId)
+	public List getStructureTemplates(long groupId, String structureId)
 		throws SystemException {
 
-		return JournalTemplateUtil.findByC_G_S(companyId, groupId, structureId);
+		return JournalTemplateUtil.findByG_S(groupId, structureId);
 	}
 
 	public List getStructureTemplates(
-			long companyId, long groupId, String structureId, int begin,
-			int end)
+			long groupId, String structureId, int begin, int end)
 		throws SystemException {
 
-		return JournalTemplateUtil.findByC_G_S(
-			companyId, groupId, structureId, begin, end);
+		return JournalTemplateUtil.findByG_S(groupId, structureId, begin, end);
 	}
 
-	public int getStructureTemplatesCount(
-			long companyId, long groupId, String structureId)
+	public int getStructureTemplatesCount(long groupId, String structureId)
 		throws SystemException {
 
-		return JournalTemplateUtil.countByC_G_S(
-			companyId, groupId, structureId);
+		return JournalTemplateUtil.countByG_S(groupId, structureId);
 	}
 
-	public JournalTemplate getTemplate(
-			long companyId, long groupId, String templateId)
+	public JournalTemplate getTemplate(long id)
+		throws PortalException, SystemException {
+
+		return JournalTemplateUtil.findByPrimaryKey(id);
+	}
+
+	public JournalTemplate getTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		templateId = templateId.trim().toUpperCase();
 
-		JournalTemplatePK pk = new JournalTemplatePK(
-			companyId, groupId, templateId);
-
 		if (groupId == 0) {
 			_log.error(
-				"No group id was passed for " + pk + ". Group id is required " +
-					"since 4.2.0. Please update all custom code and data " +
-						"that references templates without group id.");
+				"No group id was passed for " + templateId + ". Group id is " +
+					"required since 4.2.0. Please update all custom code and " +
+						"data that references templates without a group id.");
 
-			List templates = JournalTemplateUtil.findByC_T(
-				companyId, templateId);
+			List templates = JournalTemplateUtil.findByTemplateId(templateId);
 
 			if (templates.size() == 0) {
 				throw new NoSuchTemplateException(
-					"No JournalTemplate exists with the primary key " + pk);
+					"No JournalTemplate exists with the template id " +
+						templateId);
 			}
 			else {
 				return (JournalTemplate)templates.get(0);
 			}
 		}
 		else {
-			return JournalTemplateUtil.findByPrimaryKey(
-				new JournalTemplatePK(companyId, groupId, templateId));
+			return JournalTemplateUtil.findByG_T(groupId, templateId);
 		}
 	}
 
@@ -400,10 +392,9 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate updateTemplate(
-			long companyId, long groupId, String templateId, String structureId,
-			String name, String description, String xsl, boolean formatXsl,
-			String langType, boolean smallImage, String smallImageURL,
-			File smallFile)
+			long groupId, String templateId, String structureId, String name,
+			String description, String xsl, boolean formatXsl, String langType,
+			boolean smallImage, String smallImageURL, File smallFile)
 		throws PortalException, SystemException {
 
 		// Template
@@ -439,8 +430,8 @@ public class JournalTemplateLocalServiceImpl
 			name, description, xsl, smallImage, smallImageURL, smallFile,
 			smallBytes);
 
-		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
-			new JournalTemplatePK(companyId, groupId, templateId));
+		JournalTemplate template = JournalTemplateUtil.findByG_T(
+			groupId, templateId);
 
 		template.setModifiedDate(new Date());
 
@@ -488,10 +479,9 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long groupId, String templateId,
-			boolean autoTemplateId, String name, String description, String xsl,
-			boolean smallImage, String smallImageURL, File smallFile,
-			byte[] smallBytes)
+			long groupId, String templateId, boolean autoTemplateId,
+			String name, String description, String xsl, boolean smallImage,
+			String smallImageURL, File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (!autoTemplateId) {
@@ -503,8 +493,7 @@ public class JournalTemplateLocalServiceImpl
 			}
 
 			try {
-				JournalTemplateUtil.findByPrimaryKey(
-					new JournalTemplatePK(companyId, groupId, templateId));
+				JournalTemplateUtil.findByG_T(groupId, templateId);
 
 				throw new DuplicateTemplateIdException();
 			}

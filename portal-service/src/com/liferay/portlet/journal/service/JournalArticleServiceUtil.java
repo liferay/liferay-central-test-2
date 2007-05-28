@@ -118,56 +118,55 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
-		long companyId, long groupId, java.lang.String articleId, double version)
+		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-		return journalArticleService.getArticle(companyId, groupId, articleId,
-			version);
+		return journalArticleService.getArticle(groupId, articleId, version);
 	}
 
-	public static java.lang.String getArticleContent(long companyId,
-		long groupId, java.lang.String articleId, java.lang.String languageId,
+	public static java.lang.String getArticleContent(long groupId,
+		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-		return journalArticleService.getArticleContent(companyId, groupId,
-			articleId, languageId, themeDisplay);
+		return journalArticleService.getArticleContent(groupId, articleId,
+			languageId, themeDisplay);
 	}
 
-	public static java.lang.String getArticleContent(long companyId,
-		long groupId, java.lang.String articleId, double version,
+	public static java.lang.String getArticleContent(long groupId,
+		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-		return journalArticleService.getArticleContent(companyId, groupId,
-			articleId, version, languageId, themeDisplay);
+		return journalArticleService.getArticleContent(groupId, articleId,
+			version, languageId, themeDisplay);
 	}
 
-	public static void deleteArticle(long companyId, long groupId,
-		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+	public static void deleteArticle(long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-		journalArticleService.deleteArticle(companyId, groupId, articleId,
-			version, articleURL, prefs);
+		journalArticleService.deleteArticle(groupId, articleId, version,
+			articleURL, prefs);
 	}
 
-	public static void expireArticle(long companyId, long groupId,
-		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+	public static void expireArticle(long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-		journalArticleService.expireArticle(companyId, groupId, articleId,
-			version, articleURL, prefs);
+		journalArticleService.expireArticle(groupId, articleId, version,
+			articleURL, prefs);
 	}
 
 	public static void removeArticleLocale(long companyId,
@@ -179,19 +178,19 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		long companyId, long groupId, java.lang.String articleId,
-		double version, java.lang.String languageId)
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-		return journalArticleService.removeArticleLocale(companyId, groupId,
-			articleId, version, languageId);
+		return journalArticleService.removeArticleLocale(groupId, articleId,
+			version, languageId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		long companyId, long groupId, java.lang.String articleId,
-		double version, boolean incrementVersion, java.lang.String title,
+		long groupId, java.lang.String articleId, double version,
+		boolean incrementVersion, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -206,14 +205,13 @@ public class JournalArticleServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
 
-		return journalArticleService.updateArticle(companyId, groupId,
-			articleId, version, incrementVersion, title, description, content,
-			type, structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs,
-			tagsEntries);
+		return journalArticleService.updateArticle(groupId, articleId, version,
+			incrementVersion, title, description, content, type, structureId,
+			templateId, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
+			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
+			images, articleURL, prefs, tagsEntries);
 	}
 }

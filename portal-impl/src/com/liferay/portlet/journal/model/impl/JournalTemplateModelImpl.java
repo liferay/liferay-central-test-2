@@ -25,8 +25,6 @@ package com.liferay.portlet.journal.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -57,13 +55,14 @@ import java.util.Date;
 public class JournalTemplateModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalTemplate";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "companyId", new Integer(Types.BIGINT) },
+			{ "id_", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "templateId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "templateId", new Integer(Types.VARCHAR) },
 			{ "structureId", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
@@ -76,11 +75,11 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_TEMPLATEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.templateId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.userName"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TEMPLATEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.templateId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_STRUCTUREID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.structureId"),
@@ -106,23 +105,21 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	public JournalTemplateModelImpl() {
 	}
 
-	public JournalTemplatePK getPrimaryKey() {
-		return new JournalTemplatePK(_companyId, _groupId, _templateId);
+	public long getPrimaryKey() {
+		return _id;
 	}
 
-	public void setPrimaryKey(JournalTemplatePK pk) {
-		setCompanyId(pk.companyId);
-		setGroupId(pk.groupId);
-		setTemplateId(pk.templateId);
+	public void setPrimaryKey(long pk) {
+		setId(pk);
 	}
 
-	public long getCompanyId() {
-		return _companyId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setCompanyId(long companyId) {
-		if (companyId != _companyId) {
-			_companyId = companyId;
+	public void setId(long id) {
+		if (id != _id) {
+			_id = id;
 		}
 	}
 
@@ -136,20 +133,13 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getTemplateId() {
-		return GetterUtil.getString(_templateId);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public void setTemplateId(String templateId) {
-		if (((templateId == null) && (_templateId != null)) ||
-				((templateId != null) && (_templateId == null)) ||
-				((templateId != null) && (_templateId != null) &&
-				!templateId.equals(_templateId))) {
-			if (!XSS_ALLOW_TEMPLATEID) {
-				templateId = XSSUtil.strip(templateId);
-			}
-
-			_templateId = templateId;
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -203,6 +193,23 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public String getTemplateId() {
+		return GetterUtil.getString(_templateId);
+	}
+
+	public void setTemplateId(String templateId) {
+		if (((templateId == null) && (_templateId != null)) ||
+				((templateId != null) && (_templateId == null)) ||
+				((templateId != null) && (_templateId != null) &&
+				!templateId.equals(_templateId))) {
+			if (!XSS_ALLOW_TEMPLATEID) {
+				templateId = XSSUtil.strip(templateId);
+			}
+
+			_templateId = templateId;
 		}
 	}
 
@@ -332,13 +339,14 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalTemplateImpl clone = new JournalTemplateImpl();
-		clone.setCompanyId(getCompanyId());
+		clone.setId(getId());
 		clone.setGroupId(getGroupId());
-		clone.setTemplateId(getTemplateId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setTemplateId(getTemplateId());
 		clone.setStructureId(getStructureId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
@@ -381,9 +389,9 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalTemplatePK pk = journalTemplate.getPrimaryKey();
+		long pk = journalTemplate.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -392,16 +400,17 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private long _companyId;
+	private long _id;
 	private long _groupId;
-	private String _templateId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _templateId;
 	private String _structureId;
 	private String _name;
 	private String _description;

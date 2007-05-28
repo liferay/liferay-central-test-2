@@ -73,12 +73,11 @@ public class JournalContentSearchLocalServiceUtil {
 		journalContentSearchLocalService.checkContentSearches(companyId);
 	}
 
-	public static void deleteArticleContentSearches(long companyId,
-		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException {
+	public static void deleteArticleContentSearches(long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-		journalContentSearchLocalService.deleteArticleContentSearches(companyId,
-			groupId, articleId);
+		journalContentSearchLocalService.deleteArticleContentSearches(groupId,
+			articleId);
 	}
 
 	public static void deleteLayoutContentSearches(long groupId,
@@ -103,13 +102,12 @@ public class JournalContentSearchLocalServiceUtil {
 		return journalContentSearchLocalService.getArticleContentSearches();
 	}
 
-	public static java.util.List getArticleContentSearches(long companyId,
-		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getArticleContentSearches(long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.getArticleContentSearches(companyId,
-			groupId, articleId);
+		return journalContentSearchLocalService.getArticleContentSearches(groupId,
+			articleId);
 	}
 
 	public static java.util.List getLayoutIds(long groupId,
@@ -130,24 +128,24 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
-		long companyId, long groupId, boolean privateLayout, long layoutId,
+		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.updateContentSearch(companyId,
-			groupId, privateLayout, layoutId, portletId, articleId);
+		return journalContentSearchLocalService.updateContentSearch(groupId,
+			privateLayout, layoutId, portletId, articleId);
 	}
 
-	public static java.util.List updateContentSearch(long companyId,
-		long groupId, boolean privateLayout, long layoutId,
-		java.lang.String portletId, java.lang.String[] articleIds)
+	public static java.util.List updateContentSearch(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId,
+		java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.updateContentSearch(companyId,
-			groupId, privateLayout, layoutId, portletId, articleIds);
+		return journalContentSearchLocalService.updateContentSearch(groupId,
+			privateLayout, layoutId, portletId, articleIds);
 	}
 }

@@ -45,7 +45,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= JournalTemplate.class.getName() %>"
 		modelResourceDescription="<%= template.getName() %>"
-		resourcePrimKey="<%= template.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(template.getId()) %>"
 		var="permissionsTemplateURL"
 	/>
 
