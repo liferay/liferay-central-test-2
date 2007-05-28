@@ -45,10 +45,10 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 	}
 
 	public String getCartItemId() {
-		String itemId = getItem().getItemId();
+		long itemId = getItem().getItemId();
 
 		if (Validator.isNull(_fields)) {
-			return itemId;
+			return String.valueOf(itemId);
 		}
 		else {
 			return itemId + "|" + _fields;

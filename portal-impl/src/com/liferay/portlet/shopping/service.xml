@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="cartId" type="String" primary="true" />
+		<column name="cartId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -24,7 +24,7 @@
 		<!-- Other fields -->
 
 		<column name="itemIds" type="String" />
-		<column name="couponIds" type="String" />
+		<column name="couponCodes" type="String" />
 		<column name="altShipping" type="int" />
 		<column name="insure" type="boolean" />
 
@@ -36,12 +36,16 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
+		<finder name="G_U" return-type="ShoppingCart">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
 	</entity>
 	<entity name="ShoppingCategory" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="categoryId" type="String" primary="true" />
+		<column name="categoryId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -57,7 +61,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentCategoryId" type="String" />
+		<column name="parentCategoryId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 
@@ -82,7 +86,7 @@
 
 		<!-- PK fields -->
 
-		<column name="couponId" type="String" primary="true" />
+		<column name="couponId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -98,6 +102,7 @@
 
 		<!-- Other fields -->
 
+		<column name="code" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="startDate" type="Date" />
@@ -120,12 +125,15 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="Code" return-type="ShoppingCoupon">
+			<finder-column name="code" />
+		</finder>
 	</entity>
 	<entity name="ShoppingItem" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="itemId" type="String" primary="true" />
+		<column name="itemId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -137,7 +145,7 @@
 
 		<!-- Other fields -->
 
-		<column name="categoryId" type="String" />
+		<column name="categoryId" type="long" />
 		<column name="sku" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -189,11 +197,11 @@
 
 		<!-- PK fields -->
 
-		<column name="itemFieldId" type="String" primary="true" />
+		<column name="itemFieldId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="itemId" type="String" />
+		<column name="itemId" type="long" />
 		<column name="name" type="String" />
 		<column name="values" type="String" />
 		<column name="description" type="String" />
@@ -215,11 +223,11 @@
 
 		<!-- PK fields -->
 
-		<column name="itemPriceId" type="String" primary="true" />
+		<column name="itemPriceId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="itemId" type="String" />
+		<column name="itemId" type="long" />
 		<column name="minQuantity" type="int" />
 		<column name="maxQuantity" type="int" />
 		<column name="price" type="double" />
@@ -246,7 +254,7 @@
 
 		<!-- PK fields -->
 
-		<column name="orderId" type="String" primary="true" />
+		<column name="orderId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -262,13 +270,14 @@
 
 		<!-- Other fields -->
 
+		<column name="number" type="String" />
 		<column name="tax" type="double" />
 		<column name="shipping" type="double" />
 		<column name="altShipping" type="String" />
 		<column name="requiresShipping" type="boolean" />
 		<column name="insure" type="boolean" />
 		<column name="insurance" type="double" />
-		<column name="couponIds" type="String" />
+		<column name="couponCodes" type="String" />
 		<column name="couponDiscount" type="double" />
 		<column name="billingFirstName" type="String" />
 		<column name="billingLastName" type="String" />
@@ -314,6 +323,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="Number" return-type="ShoppingOrder">
+			<finder-column name="number" />
+		</finder>
 		<finder name="G_U_PPPS" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
@@ -324,11 +336,12 @@
 
 		<!-- PK fields -->
 
-		<column name="orderId" type="String" primary="true" />
-		<column name="itemId" type="String" primary="true" />
+		<column name="orderItemId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
+		<column name="orderId" type="long" />
+		<column name="itemId" type="String" />
 		<column name="sku" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -368,15 +381,15 @@
 		<exception>CCNumber</exception>
 		<exception>CCType</exception>
 		<exception>CouponActive</exception>
+		<exception>CouponCode</exception>
 		<exception>CouponDate</exception>
 		<exception>CouponDescription</exception>
 		<exception>CouponEndDate</exception>
-		<exception>CouponId</exception>
 		<exception>CouponLimitCategories</exception>
 		<exception>CouponLimitSKUs</exception>
 		<exception>CouponName</exception>
 		<exception>CouponStartDate</exception>
-		<exception>DuplicateCouponId</exception>
+		<exception>DuplicateCouponCode</exception>
 		<exception>DuplicateItemSKU</exception>
 		<exception>ItemLargeImageName</exception>
 		<exception>ItemLargeImageSize</exception>

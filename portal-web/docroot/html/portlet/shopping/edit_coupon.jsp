@@ -29,8 +29,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 ShoppingCoupon coupon = (ShoppingCoupon)request.getAttribute(WebKeys.SHOPPING_COUPON);
 
-String couponId = BeanParamUtil.getString(coupon, request, "couponId");
-String newCouponId = ParamUtil.getString(request, "newCouponId");
+long couponId = BeanParamUtil.getLong(coupon, request, "couponId");
+
+String code = BeanParamUtil.getString(coupon, request, "code");
 
 Calendar startDate = new GregorianCalendar(timeZone, locale);
 
@@ -73,11 +74,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 	function <portlet:namespace />saveCoupon() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
-
-		<c:if test="<%= coupon == null %>">
-			document.<portlet:namespace />fm.<portlet:namespace />couponId.value = document.<portlet:namespace />fm.<portlet:namespace />newCouponId.value;
-		</c:if>
-
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
@@ -91,18 +87,18 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<liferay-util:param name="tabs1" value="coupons" />
 </liferay-util:include>
 
+<liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />
 <liferay-ui:error exception="<%= CouponDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-expiration-date" />
 <liferay-ui:error exception="<%= CouponDescriptionException.class %>" message="please-enter-a-valid-description" />
 <liferay-ui:error exception="<%= CouponEndDateException.class %>" message="please-enter-a-valid-expiration-date" />
-<liferay-ui:error exception="<%= CouponIdException.class %>" message="please-enter-a-valid-id" />
 <liferay-ui:error exception="<%= CouponNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
-<liferay-ui:error exception="<%= DuplicateCouponIdException.class %>" message="please-enter-a-unique-id" />
+<liferay-ui:error exception="<%= DuplicateCouponCodeException.class %>" message="please-enter-a-unique-code" />
 
 <table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="id" />
+		<liferay-ui:message key="code" />
 	</td>
 	<td>
 		<table class="liferay-table">
@@ -110,18 +106,18 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 			<td>
 				<c:choose>
 					<c:when test="<%= coupon == null %>">
-						<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="couponId" fieldParam="newCouponId" defaultValue="<%= newCouponId %>" />
+						<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="code" />
 					</c:when>
 					<c:otherwise>
-						<%= couponId %>
+						<%= code %>
 					</c:otherwise>
 				</c:choose>
 			</td>
 			<td>
 				<c:if test="<%= coupon == null %>">
-					<liferay-ui:input-checkbox param="autoCouponId" />
+					<liferay-ui:input-checkbox param="autoCode" />
 
-					<liferay-ui:message key="autogenerate-id" />
+					<liferay-ui:message key="autogenerate-code" />
 				</c:if>
 			</td>
 		</tr>
@@ -192,7 +188,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		<liferay-ui:message key="active" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" />
+		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" defaultValue="<%= true %>" />
 	</td>
 </tr>
 </table>
@@ -297,5 +293,5 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "newCouponId" : "name" %>.focus();
+	document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>.focus();
 </script>

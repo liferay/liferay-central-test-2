@@ -55,13 +55,13 @@ import java.util.Date;
 public class ShoppingItemModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItem";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "itemId", new Integer(Types.VARCHAR) },
+			{ "itemId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "sku", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
@@ -92,14 +92,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.itemId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CATEGORYID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.categoryId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_SKU = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.sku"),
@@ -131,27 +125,20 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	public ShoppingItemModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _itemId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setItemId(pk);
 	}
 
-	public String getItemId() {
-		return GetterUtil.getString(_itemId);
+	public long getItemId() {
+		return _itemId;
 	}
 
-	public void setItemId(String itemId) {
-		if (((itemId == null) && (_itemId != null)) ||
-				((itemId != null) && (_itemId == null)) ||
-				((itemId != null) && (_itemId != null) &&
-				!itemId.equals(_itemId))) {
-			if (!XSS_ALLOW_ITEMID) {
-				itemId = XSSUtil.strip(itemId);
-			}
-
+	public void setItemId(long itemId) {
+		if (itemId != _itemId) {
 			_itemId = itemId;
 		}
 	}
@@ -219,19 +206,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCategoryId() {
-		return GetterUtil.getString(_categoryId);
+	public long getCategoryId() {
+		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
-		if (((categoryId == null) && (_categoryId != null)) ||
-				((categoryId != null) && (_categoryId == null)) ||
-				((categoryId != null) && (_categoryId != null) &&
-				!categoryId.equals(_categoryId))) {
-			if (!XSS_ALLOW_CATEGORYID) {
-				categoryId = XSSUtil.strip(categoryId);
-			}
-
+	public void setCategoryId(long categoryId) {
+		if (categoryId != _categoryId) {
 			_categoryId = categoryId;
 		}
 	}
@@ -632,7 +612,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 
 		ShoppingItemImpl shoppingItem = (ShoppingItemImpl)obj;
 		int value = 0;
-		value = getItemId().compareTo(shoppingItem.getItemId());
+
+		if (getItemId() < shoppingItem.getItemId()) {
+			value = -1;
+		}
+		else if (getItemId() > shoppingItem.getItemId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -655,9 +644,9 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = shoppingItem.getPrimaryKey();
+		long pk = shoppingItem.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -666,16 +655,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _itemId;
+	private long _itemId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _categoryId;
+	private long _categoryId;
 	private String _sku;
 	private String _name;
 	private String _description;

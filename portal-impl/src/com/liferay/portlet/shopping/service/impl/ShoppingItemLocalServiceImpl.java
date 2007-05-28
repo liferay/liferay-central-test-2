@@ -84,7 +84,7 @@ import java.util.List;
 public class ShoppingItemLocalServiceImpl
 	extends ShoppingItemLocalServiceBaseImpl {
 
-	public void addBookItems(long userId, String categoryId, String[] isbns)
+	public void addBookItems(long userId, long categoryId, String[] isbns)
 		throws PortalException, SystemException {
 
 		try {
@@ -112,8 +112,7 @@ public class ShoppingItemLocalServiceImpl
 				double shipping = 0.0;
 				boolean useShippingFormula = true;
 
-				ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(
-					StringPool.BLANK);
+				ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(0);
 
 				itemPrice.setMinQuantity(minQuantity);
 				itemPrice.setMaxQuantity(maxQuantity);
@@ -221,7 +220,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			long userId, String categoryId, String sku, String name,
+			long userId, long categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -241,7 +240,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			long userId, String categoryId, String sku, String name,
+			long userId, long categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -260,7 +259,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			long userId, String categoryId, String sku, String name,
+			long userId, long categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -293,12 +292,11 @@ public class ShoppingItemLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			user.getCompanyId(), null, sku, name, smallImage, smallImageURL,
+			user.getCompanyId(), 0, sku, name, smallImage, smallImageURL,
 			smallFile, smallBytes, mediumImage, mediumImageURL, mediumFile,
 			mediumBytes, largeImage, largeImageURL, largeFile, largeBytes);
 
-		String itemId = String.valueOf(CounterLocalServiceUtil.increment(
-			ShoppingItem.class.getName()));
+		long itemId = CounterLocalServiceUtil.increment();
 
 		ShoppingItem item = ShoppingItemUtil.create(itemId);
 
@@ -362,9 +360,7 @@ public class ShoppingItemLocalServiceImpl
 		for (int i = 0; i < itemFields.size(); i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			String itemFieldId = String.valueOf(
-				CounterLocalServiceUtil.increment(
-					ShoppingItemField.class.getName()));
+			long itemFieldId = CounterLocalServiceUtil.increment();
 
 			itemField.setItemFieldId(itemFieldId);
 			itemField.setItemId(itemId);
@@ -381,9 +377,7 @@ public class ShoppingItemLocalServiceImpl
 
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			String itemPriceId = String.valueOf(
-				CounterLocalServiceUtil.increment(
-					ShoppingItemPrice.class.getName()));
+			long itemPriceId = CounterLocalServiceUtil.increment();
 
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
@@ -416,7 +410,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public void addItemResources(
-			String itemId, boolean addCommunityPermissions,
+			long itemId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -434,12 +428,12 @@ public class ShoppingItemLocalServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			item.getCompanyId(), category.getGroupId(), item.getUserId(),
-			ShoppingItem.class.getName(), item.getPrimaryKey().toString(),
-			false, addCommunityPermissions, addGuestPermissions);
+			ShoppingItem.class.getName(), item.getItemId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addItemResources(
-			String itemId, String[] communityPermissions,
+			long itemId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -457,11 +451,11 @@ public class ShoppingItemLocalServiceImpl
 
 		ResourceLocalServiceUtil.addModelResources(
 			item.getCompanyId(), category.getGroupId(), item.getUserId(),
-			ShoppingItem.class.getName(), item.getPrimaryKey().toString(),
+			ShoppingItem.class.getName(), item.getItemId(),
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteItem(String itemId)
+	public void deleteItem(long itemId)
 		throws PortalException, SystemException {
 
 		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
@@ -490,14 +484,14 @@ public class ShoppingItemLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			item.getCompanyId(), ShoppingItem.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, item.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, item.getItemId());
 
 		// Item
 
 		ShoppingItemUtil.remove(item.getItemId());
 	}
 
-	public void deleteItems(String categoryId)
+	public void deleteItems(long categoryId)
 		throws PortalException, SystemException {
 
 		Iterator itr = ShoppingItemUtil.findByCategoryId(categoryId).iterator();
@@ -516,18 +510,18 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public List getFeaturedItems(
-			long groupId, String categoryId, int numOfItems)
+			long groupId, long categoryId, int numOfItems)
 		throws SystemException {
 
 		List featuredItems = ShoppingItemFinder.findByFeatured(
-			groupId, new String[] {categoryId}, numOfItems);
+			groupId, new long[] {categoryId}, numOfItems);
 
 		if (featuredItems.size() == 0) {
 			List childCategories =
 				ShoppingCategoryUtil.findByG_P(groupId, categoryId);
 
 			if (childCategories.size() > 0) {
-				String[] categoryIds = new String[childCategories.size()];
+				long[] categoryIds = new long[childCategories.size()];
 
 				for (int i = 0; i < childCategories.size(); i++) {
 					ShoppingCategory childCategory =
@@ -544,7 +538,7 @@ public class ShoppingItemLocalServiceImpl
 		return featuredItems;
 	}
 
-	public ShoppingItem getItem(String itemId)
+	public ShoppingItem getItem(long itemId)
 		throws PortalException, SystemException {
 
 		return ShoppingItemUtil.findByPrimaryKey(itemId);
@@ -556,19 +550,19 @@ public class ShoppingItemLocalServiceImpl
 		return ShoppingItemUtil.findByC_S(companyId, sku);
 	}
 
-	public List getItems(String categoryId) throws SystemException {
+	public List getItems(long categoryId) throws SystemException {
 		return ShoppingItemUtil.findByCategoryId(categoryId);
 	}
 
 	public List getItems(
-			String categoryId, int begin, int end, OrderByComparator obc)
+			long categoryId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return ShoppingItemUtil.findByCategoryId(categoryId, begin, end, obc);
 	}
 
 	public ShoppingItem[] getItemsPrevAndNext(
-			String itemId, OrderByComparator obc)
+			long itemId, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
@@ -577,23 +571,22 @@ public class ShoppingItemLocalServiceImpl
 			item.getItemId(), item.getCategoryId(), obc);
 	}
 
-	public int getItemsCount(String categoryId) throws SystemException {
+	public int getItemsCount(long categoryId) throws SystemException {
 		return ShoppingItemUtil.countByCategoryId(categoryId);
 	}
 
-	public List getSaleItems(
-			long groupId, String categoryId, int numOfItems)
+	public List getSaleItems(long groupId, long categoryId, int numOfItems)
 		throws SystemException {
 
 		List saleItems = ShoppingItemFinder.findBySale(
-			groupId, new String[] {categoryId}, numOfItems);
+			groupId, new long[] {categoryId}, numOfItems);
 
 		if (saleItems.size() == 0) {
 			List childCategories =
 				ShoppingCategoryUtil.findByG_P(groupId, categoryId);
 
 			if (childCategories.size() > 0) {
-				String[] categoryIds = new String[childCategories.size()];
+				long[] categoryIds = new long[childCategories.size()];
 
 				for (int i = 0; i < childCategories.size(); i++) {
 					ShoppingCategory childCategory =
@@ -611,7 +604,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public List search(
-			long groupId, String[] categoryIds, String keywords, int begin,
+			long groupId, long[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
 
@@ -619,8 +612,7 @@ public class ShoppingItemLocalServiceImpl
 			groupId, categoryIds, keywords, begin, end);
 	}
 
-	public int searchCount(
-			long groupId, String[] categoryIds, String keywords)
+	public int searchCount(long groupId, long[] categoryIds, String keywords)
 		throws SystemException {
 
 		return ShoppingItemFinder.countByKeywords(
@@ -628,14 +620,13 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem updateItem(
-			long userId, String itemId, String categoryId, String sku,
-			String name, String description, String properties,
-			String fieldsQuantities, boolean requiresShipping,
-			int stockQuantity, boolean featured, Boolean sale,
-			boolean smallImage, String smallImageURL, File smallFile,
-			boolean mediumImage, String mediumImageURL, File mediumFile,
-			boolean largeImage, String largeImageURL, File largeFile,
-			List itemFields, List itemPrices)
+			long userId, long itemId, long categoryId, String sku, String name,
+			String description, String properties, String fieldsQuantities,
+			boolean requiresShipping, int stockQuantity, boolean featured,
+			Boolean sale, boolean smallImage, String smallImageURL,
+			File smallFile, boolean mediumImage, String mediumImageURL,
+			File mediumFile, boolean largeImage, String largeImageURL,
+			File largeFile, List itemFields, List itemPrices)
 		throws PortalException, SystemException {
 
 		// Item
@@ -718,9 +709,7 @@ public class ShoppingItemLocalServiceImpl
 		for (int i = 0; i < itemFields.size() && itemFields.size() > 0; i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			String itemFieldId = String.valueOf(
-				CounterLocalServiceUtil.increment(
-					ShoppingItemField.class.getName()));
+			long itemFieldId = CounterLocalServiceUtil.increment();
 
 			itemField.setItemFieldId(itemFieldId);
 			itemField.setItemId(itemId);
@@ -737,9 +726,7 @@ public class ShoppingItemLocalServiceImpl
 		for (int i = 0; i < itemPrices.size() && itemPrices.size() > 1; i++) {
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			String itemPriceId = String.valueOf(
-				CounterLocalServiceUtil.increment(
-					ShoppingItemPrice.class.getName()));
+			long itemPriceId = CounterLocalServiceUtil.increment();
 
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
@@ -789,10 +776,10 @@ public class ShoppingItemLocalServiceImpl
 		return properties;
 	}
 
-	protected ShoppingCategory getCategory(ShoppingItem item, String categoryId)
+	protected ShoppingCategory getCategory(ShoppingItem item, long categoryId)
 		throws PortalException, SystemException {
 
-		if (!item.getCategoryId().equals(categoryId)) {
+		if (item.getCategoryId() != categoryId) {
 			ShoppingCategory oldCategory =
 				ShoppingCategoryUtil.findByPrimaryKey(item.getCategoryId());
 
@@ -851,7 +838,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, String itemId, String sku, String name,
+			long companyId, long itemId, String sku, String name,
 			boolean smallImage, String smallImageURL, File smallFile,
 			byte[] smallBytes, boolean mediumImage, String mediumImageURL,
 			File mediumFile, byte[] mediumBytes, boolean largeImage,
@@ -865,8 +852,8 @@ public class ShoppingItemLocalServiceImpl
 		try {
 			ShoppingItem item = ShoppingItemUtil.findByC_S(companyId, sku);
 
-			if (itemId != null) {
-				if (!item.getItemId().equals(itemId)) {
+			if (itemId > 0) {
+				if (item.getItemId() != itemId) {
 					throw new DuplicateItemSKUException();
 				}
 			}

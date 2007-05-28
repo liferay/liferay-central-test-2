@@ -58,23 +58,22 @@ public interface ShoppingCategoryLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, long plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long userId, long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, long plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
+		long userId, long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, long plid, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
+		long userId, long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -82,7 +81,7 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addCategoryResources(java.lang.String categoryId,
+	public void addCategoryResources(long categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -93,7 +92,7 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addCategoryResources(java.lang.String categoryId,
+	public void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -106,7 +105,7 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteCategory(java.lang.String categoryId)
+	public void deleteCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -118,16 +117,14 @@ public interface ShoppingCategoryLocalService {
 	public java.util.List getCategories(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getCategories(long groupId,
-		java.lang.String parentCategoryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getCategories(long groupId, long parentCategoryId,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public int getCategoriesCount(long groupId,
-		java.lang.String parentCategoryId)
+	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -136,7 +133,7 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getParentCategories(java.lang.String categoryId)
+	public java.util.List getParentCategories(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -146,12 +143,11 @@ public interface ShoppingCategoryLocalService {
 			com.liferay.portal.PortalException;
 
 	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
-		java.lang.String categoryId) throws com.liferay.portal.SystemException;
+		long categoryId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -66,19 +66,19 @@ public class ShoppingOrderLocalServiceUtil {
 			end);
 	}
 
-	public static void completeOrder(java.lang.String orderId,
+	public static void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail, boolean updateInventory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
-		shoppingOrderLocalService.completeOrder(orderId, ppTxnId,
+		shoppingOrderLocalService.completeOrder(number, ppTxnId,
 			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail,
 			updateInventory);
 	}
 
-	public static void deleteOrder(java.lang.String orderId)
+	public static void deleteOrder(long orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
@@ -103,12 +103,21 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
-		java.lang.String orderId)
+		long orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
 		return shoppingOrderLocalService.getOrder(orderId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
+		java.lang.String number)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+
+		return shoppingOrderLocalService.getOrder(number);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder saveLatestOrder(
@@ -120,9 +129,10 @@ public class ShoppingOrderLocalServiceUtil {
 		return shoppingOrderLocalService.saveLatestOrder(cart);
 	}
 
-	public static java.util.List search(java.lang.String orderId, long groupId,
-		long companyId, long userId, java.lang.String billingFirstName,
-		java.lang.String billingLastName, java.lang.String billingEmailAddress,
+	public static java.util.List search(long groupId, long companyId,
+		long userId, java.lang.String number,
+		java.lang.String billingFirstName, java.lang.String billingLastName,
+		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
@@ -131,14 +141,14 @@ public class ShoppingOrderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
-		return shoppingOrderLocalService.search(orderId, groupId, companyId,
-			userId, billingFirstName, billingLastName, billingEmailAddress,
+		return shoppingOrderLocalService.search(groupId, companyId, userId,
+			number, billingFirstName, billingLastName, billingEmailAddress,
 			shippingFirstName, shippingLastName, shippingEmailAddress,
 			ppPaymentStatus, andOperator, begin, end);
 	}
 
-	public static int searchCount(java.lang.String orderId, long groupId,
-		long companyId, long userId, java.lang.String billingFirstName,
+	public static int searchCount(long groupId, long companyId, long userId,
+		java.lang.String number, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
@@ -147,14 +157,13 @@ public class ShoppingOrderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
-		return shoppingOrderLocalService.searchCount(orderId, groupId,
-			companyId, userId, billingFirstName, billingLastName,
+		return shoppingOrderLocalService.searchCount(groupId, companyId,
+			userId, number, billingFirstName, billingLastName,
 			billingEmailAddress, shippingFirstName, shippingLastName,
 			shippingEmailAddress, ppPaymentStatus, andOperator);
 	}
 
-	public static void sendEmail(java.lang.String orderId,
-		java.lang.String emailType)
+	public static void sendEmail(long orderId, java.lang.String emailType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
@@ -200,7 +209,7 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String billingFirstName,
+		long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -229,7 +238,7 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String ppTxnId,
+		long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException, 

@@ -53,8 +53,8 @@ import java.sql.Types;
 public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItemField";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "itemFieldId", new Integer(Types.VARCHAR) },
-			{ "itemId", new Integer(Types.VARCHAR) },
+			{ "itemFieldId", new Integer(Types.BIGINT) },
+			{ "itemId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "values_", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
@@ -62,12 +62,6 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ITEMFIELDID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField.itemFieldId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField.itemId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -83,44 +77,30 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	public ShoppingItemFieldModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _itemFieldId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setItemFieldId(pk);
 	}
 
-	public String getItemFieldId() {
-		return GetterUtil.getString(_itemFieldId);
+	public long getItemFieldId() {
+		return _itemFieldId;
 	}
 
-	public void setItemFieldId(String itemFieldId) {
-		if (((itemFieldId == null) && (_itemFieldId != null)) ||
-				((itemFieldId != null) && (_itemFieldId == null)) ||
-				((itemFieldId != null) && (_itemFieldId != null) &&
-				!itemFieldId.equals(_itemFieldId))) {
-			if (!XSS_ALLOW_ITEMFIELDID) {
-				itemFieldId = XSSUtil.strip(itemFieldId);
-			}
-
+	public void setItemFieldId(long itemFieldId) {
+		if (itemFieldId != _itemFieldId) {
 			_itemFieldId = itemFieldId;
 		}
 	}
 
-	public String getItemId() {
-		return GetterUtil.getString(_itemId);
+	public long getItemId() {
+		return _itemId;
 	}
 
-	public void setItemId(String itemId) {
-		if (((itemId == null) && (_itemId != null)) ||
-				((itemId != null) && (_itemId == null)) ||
-				((itemId != null) && (_itemId != null) &&
-				!itemId.equals(_itemId))) {
-			if (!XSS_ALLOW_ITEMID) {
-				itemId = XSSUtil.strip(itemId);
-			}
-
+	public void setItemId(long itemId) {
+		if (itemId != _itemId) {
 			_itemId = itemId;
 		}
 	}
@@ -193,7 +173,16 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 
 		ShoppingItemFieldImpl shoppingItemField = (ShoppingItemFieldImpl)obj;
 		int value = 0;
-		value = getItemId().compareTo(shoppingItemField.getItemId());
+
+		if (getItemId() < shoppingItemField.getItemId()) {
+			value = -1;
+		}
+		else if (getItemId() > shoppingItemField.getItemId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -223,9 +212,9 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = shoppingItemField.getPrimaryKey();
+		long pk = shoppingItemField.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -234,11 +223,11 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _itemFieldId;
-	private String _itemId;
+	private long _itemFieldId;
+	private long _itemId;
 	private String _name;
 	private String _values;
 	private String _description;

@@ -209,11 +209,13 @@ create index IX_98E6A9CB on SCProductEntry (groupId, userId);
 create index IX_8377A211 on SCProductVersion (productEntryId);
 
 create index IX_C28B41DC on ShoppingCart (groupId);
+create index IX_FC46FE16 on ShoppingCart (groupId, userId);
 create index IX_54101CC8 on ShoppingCart (userId);
 
 create index IX_5F615D3E on ShoppingCategory (groupId);
 create index IX_1E6464F5 on ShoppingCategory (groupId, parentCategoryId);
 
+create index IX_DC60CFAE on ShoppingCoupon (code_);
 create index IX_3251AF16 on ShoppingCoupon (groupId);
 
 create index IX_C8EACF2E on ShoppingItem (categoryId);
@@ -224,6 +226,7 @@ create index IX_6D5F9B87 on ShoppingItemField (itemId);
 create index IX_EA6FD516 on ShoppingItemPrice (itemId);
 
 create index IX_119B5630 on ShoppingOrder (groupId, userId, ppPaymentStatus);
+create index IX_D7D6E87A on ShoppingOrder (number_);
 
 create index IX_B5F82C7A on ShoppingOrderItem (orderId);
 

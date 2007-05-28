@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ShoppingItemPriceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice create(
-		java.lang.String itemPriceId) {
+		long itemPriceId) {
 		return getPersistence().create(itemPriceId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice remove(
-		java.lang.String itemPriceId)
+		long itemPriceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemPriceException {
 		ModelListener listener = _getListener();
@@ -141,51 +141,49 @@ public class ShoppingItemPriceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByPrimaryKey(
-		java.lang.String itemPriceId)
+		long itemPriceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemPriceException {
 		return getPersistence().findByPrimaryKey(itemPriceId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice fetchByPrimaryKey(
-		java.lang.String itemPriceId) throws com.liferay.portal.SystemException {
+		long itemPriceId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(itemPriceId);
 	}
 
-	public static java.util.List findByItemId(java.lang.String itemId)
+	public static java.util.List findByItemId(long itemId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId);
 	}
 
-	public static java.util.List findByItemId(java.lang.String itemId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByItemId(long itemId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId, begin, end);
 	}
 
-	public static java.util.List findByItemId(java.lang.String itemId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByItemId(long itemId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByItemId_First(
-		java.lang.String itemId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemPriceException {
 		return getPersistence().findByItemId_First(itemId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByItemId_Last(
-		java.lang.String itemId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemPriceException {
 		return getPersistence().findByItemId_Last(itemId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice[] findByItemId_PrevAndNext(
-		java.lang.String itemPriceId, java.lang.String itemId,
+		long itemPriceId, long itemId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemPriceException {
@@ -222,7 +220,7 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByItemId(java.lang.String itemId)
+	public static void removeByItemId(long itemId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByItemId(itemId);
 	}
@@ -231,7 +229,7 @@ public class ShoppingItemPriceUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByItemId(java.lang.String itemId)
+	public static int countByItemId(long itemId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByItemId(itemId);
 	}

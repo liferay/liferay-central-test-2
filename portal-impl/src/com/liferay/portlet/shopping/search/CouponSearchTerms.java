@@ -38,7 +38,7 @@ public class CouponSearchTerms extends CouponDisplayTerms {
 	public CouponSearchTerms(RenderRequest req) {
 		super(req);
 
-		couponId = DAOParamUtil.getLike(req, COUPON_ID);
+		code = DAOParamUtil.getLike(req, CODE);
 		discountType = DAOParamUtil.getString(req, DISCOUNT_TYPE);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 	}

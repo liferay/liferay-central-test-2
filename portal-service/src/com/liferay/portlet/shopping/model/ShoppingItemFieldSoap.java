@@ -70,27 +70,27 @@ public class ShoppingItemFieldSoap implements Serializable {
 	public ShoppingItemFieldSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _itemFieldId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setItemFieldId(pk);
 	}
 
-	public String getItemFieldId() {
+	public long getItemFieldId() {
 		return _itemFieldId;
 	}
 
-	public void setItemFieldId(String itemFieldId) {
+	public void setItemFieldId(long itemFieldId) {
 		_itemFieldId = itemFieldId;
 	}
 
-	public String getItemId() {
+	public long getItemId() {
 		return _itemId;
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(long itemId) {
 		_itemId = itemId;
 	}
 
@@ -118,8 +118,8 @@ public class ShoppingItemFieldSoap implements Serializable {
 		_description = description;
 	}
 
-	private String _itemFieldId;
-	private String _itemId;
+	private long _itemFieldId;
+	private long _itemId;
 	private String _name;
 	private String _values;
 	private String _description;

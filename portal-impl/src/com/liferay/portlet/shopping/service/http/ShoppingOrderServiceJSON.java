@@ -68,23 +68,23 @@ import org.json.JSONObject;
  *
  */
 public class ShoppingOrderServiceJSON {
-	public static void completeOrder(long plid, java.lang.String orderId,
+	public static void completeOrder(long plid, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		ShoppingOrderServiceUtil.completeOrder(plid, orderId, ppTxnId,
+		ShoppingOrderServiceUtil.completeOrder(plid, number, ppTxnId,
 			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 
-	public static void deleteOrder(long plid, java.lang.String orderId)
+	public static void deleteOrder(long plid, long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ShoppingOrderServiceUtil.deleteOrder(plid, orderId);
 	}
 
-	public static JSONObject getOrder(long plid, java.lang.String orderId)
+	public static JSONObject getOrder(long plid, long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(plid,
@@ -93,14 +93,14 @@ public class ShoppingOrderServiceJSON {
 		return ShoppingOrderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void sendEmail(long plid, java.lang.String orderId,
+	public static void sendEmail(long plid, long orderId,
 		java.lang.String emailType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ShoppingOrderServiceUtil.sendEmail(plid, orderId, emailType);
 	}
 
-	public static JSONObject updateOrder(long plid, java.lang.String orderId,
+	public static JSONObject updateOrder(long plid, long orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,
@@ -130,7 +130,7 @@ public class ShoppingOrderServiceJSON {
 		return ShoppingOrderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateOrder(long plid, java.lang.String orderId,
+	public static JSONObject updateOrder(long plid, long orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)

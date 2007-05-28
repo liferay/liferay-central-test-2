@@ -222,7 +222,8 @@ public class ShoppingUtil {
 				ShoppingItem item = cartItem.getItem();
 
 				if (((categoryIdsSet.size() > 0) &&
-					 (categoryIdsSet.contains(item.getCategoryId()))) ||
+					 (categoryIdsSet.contains(
+						new Long(item.getCategoryId())))) ||
 					((skusSet.size() > 0) &&
 					 (skusSet.contains(item.getSku())))) {
 
@@ -567,7 +568,7 @@ public class ShoppingUtil {
 	}
 
 	public static String getBreadcrumbs(
-			String categoryId, PageContext pageContext, RenderRequest req,
+			long categoryId, PageContext pageContext, RenderRequest req,
 			RenderResponse res)
 		throws Exception {
 
@@ -624,7 +625,7 @@ public class ShoppingUtil {
 					portletURL.setParameter(
 						"struts_action", "/shopping/select_category");
 					portletURL.setParameter(
-						"categoryId", category.getCategoryId());
+						"categoryId", String.valueOf(category.getCategoryId()));
 				}
 				else {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -632,7 +633,7 @@ public class ShoppingUtil {
 					portletURL.setParameter("struts_action", "/shopping/view");
 					portletURL.setParameter("tabs1", "categories");
 					portletURL.setParameter(
-						"categoryId", category.getCategoryId());
+						"categoryId", String.valueOf(category.getCategoryId()));
 				}
 
 				String categoryLink =
@@ -660,17 +661,14 @@ public class ShoppingUtil {
 		return breadcrumbs;
 	}
 
-	public static ShoppingCart getCart(
-		String cartId, ThemeDisplay themeDisplay) {
-
+	public static ShoppingCart getCart(ThemeDisplay themeDisplay) {
 		ShoppingCart cart = new ShoppingCartImpl();
 
-		cart.setCartId(cartId);
 		cart.setGroupId(themeDisplay.getPortletGroupId());
 		cart.setCompanyId(themeDisplay.getCompanyId());
 		cart.setUserId(themeDisplay.getUserId());
 		cart.setItemIds(StringPool.BLANK);
-		cart.setCouponIds(StringPool.BLANK);
+		cart.setCouponCodes(StringPool.BLANK);
 		cart.setAltShipping(0);
 		cart.setInsure(false);
 
@@ -686,12 +684,7 @@ public class ShoppingUtil {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String sesCartId =
-			ShoppingCart.class.getName() + "_SESSION_" + ses.getId() + "_" +
-				themeDisplay.getPortletGroupId();
-
-		String userCartId =
-			ShoppingCart.class.getName() + "_USER_" + themeDisplay.getUserId() +
-				"_" + themeDisplay.getPortletGroupId();
+			ShoppingCart.class.getName() + themeDisplay.getPortletGroupId();
 
 		if (themeDisplay.isSignedIn()) {
 			ShoppingCart cart = (ShoppingCart)ses.getAttribute(sesCartId);
@@ -703,21 +696,23 @@ public class ShoppingUtil {
 			if ((cart != null) && (cart.getItemsSize() > 0)) {
 				cart = ShoppingCartLocalServiceUtil.updateCart(
 					themeDisplay.getUserId(), themeDisplay.getPortletGroupId(),
-					cart.getCartId(), cart.getItemIds(), cart.getCouponIds(),
+					cart.getItemIds(), cart.getCouponCodes(),
 					cart.getAltShipping(), cart.isInsure());
 			}
 			else {
 				try {
-					cart = ShoppingCartLocalServiceUtil.getCart(userCartId);
+					cart = ShoppingCartLocalServiceUtil.getCart(
+						themeDisplay.getUserId(),
+						themeDisplay.getPortletGroupId());
 				}
 				catch (NoSuchCartException nsce) {
-					cart = getCart(userCartId, themeDisplay);
+					cart = getCart(themeDisplay);
 
 					cart = ShoppingCartLocalServiceUtil.updateCart(
 						themeDisplay.getUserId(),
-						themeDisplay.getPortletGroupId(), cart.getCartId(),
-						cart.getItemIds(), cart.getCouponIds(),
-						cart.getAltShipping(), cart.isInsure());
+						themeDisplay.getPortletGroupId(), cart.getItemIds(),
+						cart.getCouponCodes(), cart.getAltShipping(),
+						cart.isInsure());
 				}
 			}
 
@@ -727,7 +722,7 @@ public class ShoppingUtil {
 			ShoppingCart cart = (ShoppingCart)ses.getAttribute(sesCartId);
 
 			if (cart == null) {
-				cart = getCart(sesCartId, themeDisplay);
+				cart = getCart(themeDisplay);
 
 				ses.setAttribute(sesCartId, cart);
 			}
@@ -741,6 +736,7 @@ public class ShoppingUtil {
 		String[] fieldsArray) {
 
 		Set fieldsValues = new HashSet();
+
 		for (int i = 0; i < fieldsArray.length; i++) {
 			int pos = fieldsArray[i].indexOf("=");
 
@@ -759,6 +755,7 @@ public class ShoppingUtil {
 		}
 
 		int numOfRows = 1;
+
 		for (int i = 0; i < values.size(); i++) {
 			String[] vArray = (String[])values.get(i);
 
@@ -804,19 +801,18 @@ public class ShoppingUtil {
 		return rowPos;
 	}
 
-	public static String getItemId(String itemId) {
-		int pos = itemId.indexOf("|");
+	public static long getItemId(String itemId) {
+		int pos = itemId.indexOf(StringPool.PIPE);
 
-		if (pos == -1) {
-			return itemId;
+		if (pos != -1) {
+			itemId = itemId.substring(0, pos);
 		}
-		else {
-			return itemId.substring(0, pos);
-		}
+
+		return GetterUtil.getLong(itemId);
 	}
 
 	public static String getItemFields(String itemId) {
-		int pos = itemId.indexOf("|");
+		int pos = itemId.indexOf(StringPool.PIPE);
 
 		if (pos == -1) {
 			return StringPool.BLANK;
@@ -936,7 +932,7 @@ public class ShoppingUtil {
 		portletURL.setParameter(
 			"struts_action", "/shopping/checkout");
 		portletURL.setParameter(Constants.CMD, Constants.VIEW);
-		portletURL.setParameter("orderId", order.getOrderId());
+		portletURL.setParameter("orderId", String.valueOf(order.getOrderId()));
 
 		return portletURL.toString();
 	}
@@ -1056,7 +1052,7 @@ public class ShoppingUtil {
 		}
 
 		if (itemPrice == null) {
-			return ShoppingItemPriceUtil.create(StringPool.BLANK);
+			return ShoppingItemPriceUtil.create(0);
 		}
 
 		return itemPrice;

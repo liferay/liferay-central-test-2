@@ -45,7 +45,7 @@ import java.util.List;
 public class ShoppingItemServiceImpl
 	extends PrincipalBean implements ShoppingItemService {
 
-	public void addBookItems(String categoryId, String[] isbns)
+	public void addBookItems(long categoryId, String[] isbns)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -56,7 +56,7 @@ public class ShoppingItemServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			String categoryId, String sku, String name, String description,
+			long categoryId, String sku, String name, String description,
 			String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -78,7 +78,7 @@ public class ShoppingItemServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			String categoryId, String sku, String name, String description,
+			long categoryId, String sku, String name, String description,
 			String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -99,7 +99,7 @@ public class ShoppingItemServiceImpl
 			itemPrices, communityPermissions, guestPermissions);
 	}
 
-	public void deleteItem(String itemId)
+	public void deleteItem(long itemId)
 		throws PortalException, SystemException {
 
 		ShoppingItemPermission.check(
@@ -108,7 +108,7 @@ public class ShoppingItemServiceImpl
 		ShoppingItemLocalServiceUtil.deleteItem(itemId);
 	}
 
-	public ShoppingItem getItem(String itemId)
+	public ShoppingItem getItem(long itemId)
 		throws PortalException, SystemException {
 
 		ShoppingItemPermission.check(
@@ -118,7 +118,7 @@ public class ShoppingItemServiceImpl
 	}
 
 	public ShoppingItem updateItem(
-			String itemId, String categoryId, String sku, String name,
+			long itemId, long categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,

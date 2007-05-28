@@ -66,7 +66,7 @@ public class ShoppingItemFieldLocalServiceUtil {
 			begin, end);
 	}
 
-	public static java.util.List getItemFields(java.lang.String itemId)
+	public static java.util.List getItemFields(long itemId)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 

@@ -74,25 +74,25 @@ import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
  */
 public class ShoppingCouponServiceHttp {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String couponId,
-		boolean autoCouponId, java.lang.String name,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
-		int endDateMinute, boolean neverExpire, boolean active,
-		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+		HttpPrincipal httpPrincipal, long plid, java.lang.String code,
+		boolean autoCode, java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
+		java.lang.String limitSkus, double minOrder, double discount,
+		java.lang.String discountType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
-			Object paramObj1 = couponId;
+			Object paramObj1 = code;
 
-			if (couponId == null) {
+			if (code == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new BooleanWrapper(autoCouponId);
+			Object paramObj2 = new BooleanWrapper(autoCode);
 			Object paramObj3 = name;
 
 			if (name == null) {
@@ -172,17 +172,12 @@ public class ShoppingCouponServiceHttp {
 	}
 
 	public static void deleteCoupon(HttpPrincipal httpPrincipal, long plid,
-		java.lang.String couponId)
+		long couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
-			Object paramObj1 = couponId;
-
-			if (couponId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(couponId);
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
 					"deleteCoupon", new Object[] { paramObj0, paramObj1 });
 
@@ -208,17 +203,12 @@ public class ShoppingCouponServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String couponId)
+		HttpPrincipal httpPrincipal, long plid, long couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
-			Object paramObj1 = couponId;
-
-			if (couponId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(couponId);
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
 					"getCoupon", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
@@ -246,20 +236,20 @@ public class ShoppingCouponServiceHttp {
 		}
 	}
 
-	public static java.util.List search(HttpPrincipal httpPrincipal,
-		java.lang.String couponId, long plid, long companyId, boolean active,
+	public static java.util.List search(HttpPrincipal httpPrincipal, long plid,
+		long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = couponId;
+			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj1 = new LongWrapper(companyId);
+			Object paramObj2 = code;
 
-			if (couponId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+			if (code == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new LongWrapper(plid);
-			Object paramObj2 = new LongWrapper(companyId);
 			Object paramObj3 = new BooleanWrapper(active);
 			Object paramObj4 = discountType;
 
@@ -302,7 +292,7 @@ public class ShoppingCouponServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String couponId,
+		HttpPrincipal httpPrincipal, long plid, long couponId,
 		java.lang.String name, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,
 		int startDateHour, int startDateMinute, int endDateMonth,
@@ -314,12 +304,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
-			Object paramObj1 = couponId;
-
-			if (couponId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(couponId);
 			Object paramObj2 = name;
 
 			if (name == null) {

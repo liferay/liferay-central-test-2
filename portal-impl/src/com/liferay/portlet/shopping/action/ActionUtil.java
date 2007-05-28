@@ -35,7 +35,6 @@ import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -63,13 +62,12 @@ public class ActionUtil {
 	}
 
 	public static void getCategory(HttpServletRequest req) throws Exception {
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 
 		ShoppingCategory category = null;
 
-		if (Validator.isNotNull(categoryId) &&
-			!categoryId.equals(
-				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+		if ((categoryId > 0) &&
+			(categoryId != ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
 		}
@@ -93,11 +91,11 @@ public class ActionUtil {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String couponId = ParamUtil.getString(req, "couponId");
+		long couponId = ParamUtil.getLong(req, "couponId");
 
 		ShoppingCoupon coupon = null;
 
-		if (Validator.isNotNull(couponId)) {
+		if (couponId > 0) {
 			coupon = ShoppingCouponServiceUtil.getCoupon(
 				themeDisplay.getPlid(), couponId);
 		}
@@ -118,11 +116,11 @@ public class ActionUtil {
 	}
 
 	public static void getItem(HttpServletRequest req) throws Exception {
-		String itemId = ParamUtil.getString(req, "itemId");
+		long itemId = ParamUtil.getLong(req, "itemId");
 
 		ShoppingItem item = null;
 
-		if (Validator.isNotNull(itemId)) {
+		if (itemId > 0) {
 			item = ShoppingItemServiceUtil.getItem(itemId);
 		}
 
@@ -145,11 +143,11 @@ public class ActionUtil {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String orderId = ParamUtil.getString(req, "orderId");
+		long orderId = ParamUtil.getLong(req, "orderId");
 
 		ShoppingOrder order = null;
 
-		if (Validator.isNotNull(orderId)) {
+		if (orderId > 0) {
 			order = ShoppingOrderServiceUtil.getOrder(
 				themeDisplay.getPlid(), orderId);
 		}

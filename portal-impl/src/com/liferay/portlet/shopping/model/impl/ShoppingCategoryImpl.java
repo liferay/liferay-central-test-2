@@ -23,7 +23,6 @@
 package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.util.Validator;
 
 /**
  * <a href="ShoppingCategoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,14 +33,18 @@ import com.liferay.util.Validator;
 public class ShoppingCategoryImpl
 	extends ShoppingCategoryModelImpl implements ShoppingCategory {
 
-	public static final String DEFAULT_PARENT_CATEGORY_ID = "-1";
+	public static final long DEFAULT_PARENT_CATEGORY_ID = 0;
 
 	public ShoppingCategoryImpl() {
 	}
 
 	public boolean isRoot() {
-		return Validator.equals(
-			getParentCategoryId(), DEFAULT_PARENT_CATEGORY_ID);
+		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

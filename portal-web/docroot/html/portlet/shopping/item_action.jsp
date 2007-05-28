@@ -34,7 +34,7 @@ ShoppingItem item = (ShoppingItem)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/shopping/edit_item" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="itemId" value="<%= item.getItemId() %>" />
+		<portlet:param name="itemId" value="<%= String.valueOf(item.getItemId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -43,8 +43,8 @@ ShoppingItem item = (ShoppingItem)row.getObject();
 <c:if test="<%= ShoppingItemPermission.contains(permissionChecker, item, ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= ShoppingItem.class.getName() %>"
-		modelResourceDescription="<%= item.getItemId() %>"
-		resourcePrimKey="<%= item.getPrimaryKey().toString() %>"
+		modelResourceDescription="<%= item.getSku() %>"
+		resourcePrimKey="<%= String.valueOf(item.getItemId()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ ShoppingItem item = (ShoppingItem)row.getObject();
 		<portlet:param name="struts_action" value="/shopping/edit_item" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="itemId" value="<%= item.getItemId() %>" />
+		<portlet:param name="itemId" value="<%= String.valueOf(item.getItemId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

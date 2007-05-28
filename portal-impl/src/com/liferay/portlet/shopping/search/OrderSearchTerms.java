@@ -38,11 +38,11 @@ public class OrderSearchTerms extends OrderDisplayTerms {
 	public OrderSearchTerms(RenderRequest req) {
 		super(req);
 
-		orderId = DAOParamUtil.getLike(req, ORDER_ID);
+		number = DAOParamUtil.getLike(req, NUMBER);
 		status = DAOParamUtil.getString(req, STATUS);
-		firstName = DAOParamUtil.getString(req, FIRST_NAME);
-		lastName = DAOParamUtil.getString(req, LAST_NAME);
-		emailAddress = DAOParamUtil.getString(req, EMAIL_ADDRESS);
+		firstName = DAOParamUtil.getLike(req, FIRST_NAME);
+		lastName = DAOParamUtil.getLike(req, LAST_NAME);
+		emailAddress = DAOParamUtil.getLike(req, EMAIL_ADDRESS);
 	}
 
 	public String getStatus() {

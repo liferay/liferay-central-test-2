@@ -45,17 +45,17 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface ShoppingItemPriceModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getItemPriceId();
+	public long getItemPriceId();
 
-	public void setItemPriceId(String itemPriceId);
+	public void setItemPriceId(long itemPriceId);
 
-	public String getItemId();
+	public long getItemId();
 
-	public void setItemId(String itemId);
+	public void setItemId(long itemId);
 
 	public int getMinQuantity();
 

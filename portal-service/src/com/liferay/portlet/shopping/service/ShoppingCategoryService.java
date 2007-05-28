@@ -50,32 +50,31 @@ package com.liferay.portlet.shopping.service;
  */
 public interface ShoppingCategoryService {
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteCategory(java.lang.String categoryId)
+	public void deleteCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

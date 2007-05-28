@@ -55,6 +55,7 @@ public class ShoppingCouponSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCode(model.getCode());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setStartDate(model.getStartDate());
@@ -83,19 +84,19 @@ public class ShoppingCouponSoap implements Serializable {
 	public ShoppingCouponSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _couponId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCouponId(pk);
 	}
 
-	public String getCouponId() {
+	public long getCouponId() {
 		return _couponId;
 	}
 
-	public void setCouponId(String couponId) {
+	public void setCouponId(long couponId) {
 		_couponId = couponId;
 	}
 
@@ -145,6 +146,14 @@ public class ShoppingCouponSoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getCode() {
+		return _code;
+	}
+
+	public void setCode(String code) {
+		_code = code;
 	}
 
 	public String getName() {
@@ -231,13 +240,14 @@ public class ShoppingCouponSoap implements Serializable {
 		_discountType = discountType;
 	}
 
-	private String _couponId;
+	private long _couponId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _code;
 	private String _name;
 	private String _description;
 	private Date _startDate;

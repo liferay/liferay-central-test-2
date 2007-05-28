@@ -49,29 +49,28 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public interface ShoppingOrderService {
-	public void completeOrder(long plid, java.lang.String orderId,
+	public void completeOrder(long plid, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteOrder(long plid, java.lang.String orderId)
+	public void deleteOrder(long plid, long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
-		long plid, java.lang.String orderId)
+		long plid, long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void sendEmail(long plid, java.lang.String orderId,
-		java.lang.String emailType)
+	public void sendEmail(long plid, long orderId, java.lang.String emailType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		long plid, java.lang.String orderId, java.lang.String billingFirstName,
+		long plid, long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -89,7 +88,7 @@ public interface ShoppingOrderService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		long plid, java.lang.String orderId, java.lang.String ppTxnId,
+		long plid, long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.SystemException, 

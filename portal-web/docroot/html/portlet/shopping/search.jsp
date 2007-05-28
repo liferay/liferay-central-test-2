@@ -25,10 +25,10 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
-String breadcrumbsCategoryId = ParamUtil.getString(request, "breadcrumbsCategoryId");
+long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
 
 String categoryIds = ParamUtil.getString(request, "categoryIds");
-String[] categoryIdsArray = StringUtil.split(categoryIds);
+long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>
@@ -47,7 +47,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/shopping/search");
-portletURL.setParameter("breadcrumbsCategoryId", breadcrumbsCategoryId);
+portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 portletURL.setParameter("categoryIds", categoryIds);
 portletURL.setParameter("keywords", keywords);
 
@@ -74,14 +74,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	ShoppingItem item = (ShoppingItem)results.get(i);
 
-	ResultRow row = new ResultRow(item, item.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
-	rowURL.setParameter("itemId", item.getItemId());
+	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
 	// SKU and small image
 

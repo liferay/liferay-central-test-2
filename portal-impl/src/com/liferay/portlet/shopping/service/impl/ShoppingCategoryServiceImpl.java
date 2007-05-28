@@ -41,7 +41,7 @@ public class ShoppingCategoryServiceImpl
 	extends PrincipalBean implements ShoppingCategoryService {
 
 	public ShoppingCategory addCategory(
-			long plid, String parentCategoryId, String name, String description,
+			long plid, long parentCategoryId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class ShoppingCategoryServiceImpl
 	}
 
 	public ShoppingCategory addCategory(
-			long plid, String parentCategoryId, String name, String description,
+			long plid, long parentCategoryId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -68,7 +68,7 @@ public class ShoppingCategoryServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteCategory(String categoryId)
+	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -77,7 +77,7 @@ public class ShoppingCategoryServiceImpl
 		ShoppingCategoryLocalServiceUtil.deleteCategory(categoryId);
 	}
 
-	public ShoppingCategory getCategory(String categoryId)
+	public ShoppingCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -87,7 +87,7 @@ public class ShoppingCategoryServiceImpl
 	}
 
 	public ShoppingCategory updateCategory(
-			String categoryId, String parentCategoryId, String name,
+			long categoryId, long parentCategoryId, String name,
 			String description, boolean mergeWithParentCategory)
 		throws PortalException, SystemException {
 

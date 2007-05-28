@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -72,16 +73,11 @@ import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
  */
 public class ShoppingItemServiceHttp {
 	public static void addBookItems(HttpPrincipal httpPrincipal,
-		java.lang.String categoryId, java.lang.String[] isbns)
+		long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			Object paramObj1 = isbns;
 
 			if (isbns == null) {
@@ -113,27 +109,21 @@ public class ShoppingItemServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			Object paramObj1 = sku;
 
 			if (sku == null) {
@@ -262,27 +252,22 @@ public class ShoppingItemServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		HttpPrincipal httpPrincipal, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = categoryId;
-
-			if (categoryId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(categoryId);
 			Object paramObj1 = sku;
 
 			if (sku == null) {
@@ -420,17 +405,11 @@ public class ShoppingItemServiceHttp {
 		}
 	}
 
-	public static void deleteItem(HttpPrincipal httpPrincipal,
-		java.lang.String itemId)
+	public static void deleteItem(HttpPrincipal httpPrincipal, long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = itemId;
-
-			if (itemId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(itemId);
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
 					"deleteItem", new Object[] { paramObj0 });
 
@@ -456,16 +435,11 @@ public class ShoppingItemServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
-		HttpPrincipal httpPrincipal, java.lang.String itemId)
+		HttpPrincipal httpPrincipal, long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = itemId;
-
-			if (itemId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(itemId);
 			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
 					"getItem", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -494,32 +468,22 @@ public class ShoppingItemServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
-		HttpPrincipal httpPrincipal, java.lang.String itemId,
-		java.lang.String categoryId, java.lang.String sku,
-		java.lang.String name, java.lang.String description,
-		java.lang.String properties, java.lang.String fieldsQuantities,
-		boolean requiresShipping, int stockQuantity, boolean featured,
-		java.lang.Boolean sale, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean mediumImage, java.lang.String mediumImageURL,
-		java.io.File mediumFile, boolean largeImage,
-		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices)
+		HttpPrincipal httpPrincipal, long itemId, long categoryId,
+		java.lang.String sku, java.lang.String name,
+		java.lang.String description, java.lang.String properties,
+		java.lang.String fieldsQuantities, boolean requiresShipping,
+		int stockQuantity, boolean featured, java.lang.Boolean sale,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean mediumImage,
+		java.lang.String mediumImageURL, java.io.File mediumFile,
+		boolean largeImage, java.lang.String largeImageURL,
+		java.io.File largeFile, java.util.List itemFields,
+		java.util.List itemPrices)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = itemId;
-
-			if (itemId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = categoryId;
-
-			if (categoryId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(itemId);
+			Object paramObj1 = new LongWrapper(categoryId);
 			Object paramObj2 = sku;
 
 			if (sku == null) {

@@ -836,7 +836,7 @@ create table SCProductVersion (
 );
 
 create table ShoppingCart (
-	cartId VARCHAR(75) not null primary key,
+	cartId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -844,32 +844,33 @@ create table ShoppingCart (
 	createDate DATE null,
 	modifiedDate DATE null,
 	itemIds STRING null,
-	couponIds STRING null,
+	couponCodes VARCHAR(75) null,
 	altShipping INTEGER,
 	insure BOOLEAN
 );
 
 create table ShoppingCategory (
-	categoryId VARCHAR(75) not null primary key,
+	categoryId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentCategoryId VARCHAR(75) null,
+	parentCategoryId LONG,
 	name VARCHAR(75) null,
 	description STRING null
 );
 
 create table ShoppingCoupon (
-	couponId VARCHAR(75) not null primary key,
+	couponId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	code_ VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
 	startDate DATE null,
@@ -883,13 +884,13 @@ create table ShoppingCoupon (
 );
 
 create table ShoppingItem (
-	itemId VARCHAR(75) not null primary key,
+	itemId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	categoryId VARCHAR(75) null,
+	categoryId LONG,
 	sku VARCHAR(75) null,
 	name VARCHAR(200) null,
 	description STRING null,
@@ -919,16 +920,16 @@ create table ShoppingItem (
 );
 
 create table ShoppingItemField (
-	itemFieldId VARCHAR(75) not null primary key,
-	itemId VARCHAR(75) null,
+	itemFieldId LONG primary key,
+	itemId LONG,
 	name VARCHAR(75) null,
 	values_ STRING null,
 	description STRING null
 );
 
 create table ShoppingItemPrice (
-	itemPriceId VARCHAR(75) not null primary key,
-	itemId VARCHAR(75) null,
+	itemPriceId LONG primary key,
+	itemId LONG,
 	minQuantity INTEGER,
 	maxQuantity INTEGER,
 	price DOUBLE,
@@ -940,20 +941,21 @@ create table ShoppingItemPrice (
 );
 
 create table ShoppingOrder (
-	orderId VARCHAR(75) not null primary key,
+	orderId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	number_ VARCHAR(75) null,
 	tax DOUBLE,
 	shipping DOUBLE,
 	altShipping VARCHAR(75) null,
 	requiresShipping BOOLEAN,
 	insure BOOLEAN,
 	insurance DOUBLE,
-	couponIds VARCHAR(75) null,
+	couponCodes VARCHAR(75) null,
 	couponDiscount DOUBLE,
 	billingFirstName VARCHAR(75) null,
 	billingLastName VARCHAR(75) null,
@@ -993,16 +995,16 @@ create table ShoppingOrder (
 );
 
 create table ShoppingOrderItem (
-	orderId VARCHAR(75) not null,
-	itemId VARCHAR(75) not null,
+	orderItemId LONG primary key,
+	orderId LONG,
+	itemId VARCHAR(75) null,
 	sku VARCHAR(75) null,
 	name VARCHAR(200) null,
 	description STRING null,
 	properties STRING null,
 	price DOUBLE,
 	quantity INTEGER,
-	shippedDate DATE null,
-	primary key (orderId, itemId)
+	shippedDate DATE null
 );
 
 create table Subscription (

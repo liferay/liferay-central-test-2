@@ -54,7 +54,7 @@ import java.util.List;
  */
 public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	implements ShoppingCategoryPersistence {
-	public ShoppingCategory create(String categoryId) {
+	public ShoppingCategory create(long categoryId) {
 		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
 		shoppingCategory.setNew(true);
 		shoppingCategory.setPrimaryKey(categoryId);
@@ -62,7 +62,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		return shoppingCategory;
 	}
 
-	public ShoppingCategory remove(String categoryId)
+	public ShoppingCategory remove(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		Session session = null;
 
@@ -70,7 +70,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			ShoppingCategory shoppingCategory = (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
-					categoryId);
+					new Long(categoryId));
 
 			if (shoppingCategory == null) {
 				if (_log.isWarnEnabled()) {
@@ -152,7 +152,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCategory findByPrimaryKey(String categoryId)
+	public ShoppingCategory findByPrimaryKey(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = fetchByPrimaryKey(categoryId);
 
@@ -170,7 +170,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		return shoppingCategory;
 	}
 
-	public ShoppingCategory fetchByPrimaryKey(String categoryId)
+	public ShoppingCategory fetchByPrimaryKey(long categoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -178,7 +178,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			return (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
-				categoryId);
+				new Long(categoryId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -300,7 +300,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCategory[] findByGroupId_PrevAndNext(String categoryId,
+	public ShoppingCategory[] findByGroupId_PrevAndNext(long categoryId,
 		long groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = findByPrimaryKey(categoryId);
@@ -349,7 +349,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, String parentCategoryId)
+	public List findByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -361,14 +361,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -379,10 +372,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			return q.list();
 		}
@@ -394,12 +384,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, String parentCategoryId, int begin,
+	public List findByG_P(long groupId, long parentCategoryId, int begin,
 		int end) throws SystemException {
 		return findByG_P(groupId, parentCategoryId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, String parentCategoryId, int begin,
+	public List findByG_P(long groupId, long parentCategoryId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -411,14 +401,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -436,10 +419,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -452,7 +432,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public ShoppingCategory findByG_P_First(long groupId,
-		String parentCategoryId, OrderByComparator obc)
+		long parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
@@ -473,9 +453,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCategory findByG_P_Last(long groupId,
-		String parentCategoryId, OrderByComparator obc)
-		throws NoSuchCategoryException, SystemException {
+	public ShoppingCategory findByG_P_Last(long groupId, long parentCategoryId,
+		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByG_P(groupId, parentCategoryId);
 		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
 
@@ -496,8 +475,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCategory[] findByG_P_PrevAndNext(String categoryId,
-		long groupId, String parentCategoryId, OrderByComparator obc)
+	public ShoppingCategory[] findByG_P_PrevAndNext(long categoryId,
+		long groupId, long parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = findByPrimaryKey(categoryId);
 		int count = countByG_P(groupId, parentCategoryId);
@@ -511,14 +490,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -536,10 +508,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
@@ -648,7 +617,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByG_P(long groupId, String parentCategoryId)
+	public void removeByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentCategoryId).iterator();
 
@@ -705,7 +674,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByG_P(long groupId, String parentCategoryId)
+	public int countByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -718,14 +687,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentCategoryId == null) {
-				query.append("parentCategoryId IS NULL");
-			}
-			else {
-				query.append("parentCategoryId = ?");
-			}
-
+			query.append("parentCategoryId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -733,10 +695,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentCategoryId != null) {
-				q.setString(queryPos++, parentCategoryId);
-			}
+			q.setLong(queryPos++, parentCategoryId);
 
 			Iterator itr = q.list().iterator();
 

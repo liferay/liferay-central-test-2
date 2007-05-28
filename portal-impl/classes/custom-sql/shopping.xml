@@ -11,7 +11,7 @@
 				[$CATEGORY_ID$]
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.countByC_G_C_A_DT">
+	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.countByG_C_C_A_DT">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -21,13 +21,13 @@
 				(groupId = ?) AND
 				(companyId = ?) AND
 				(
-					(couponId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(code_ LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(active_ = ?) [$AND_OR_CONNECTOR$]
 					(discountType = ? [$AND_OR_NULL_CHECK$])
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.countByO_G_C_U_PPPS">
+	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.countByG_C_U_N_PPPS">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -36,9 +36,9 @@
 			WHERE
 				(groupId = ?) AND
 				(companyId = ?) AND
+				(userId = ?) AND
 				(
-					(orderId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(userId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(number_ LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(billingFirstName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(billingLastName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(billingEmailAddress LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -49,7 +49,7 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.findByC_G_C_A_DT">
+	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.findByG_C_C_A_DT">
 		<![CDATA[
 			SELECT
 				{ShoppingCoupon.*}
@@ -59,7 +59,7 @@
 				(groupId = ?) AND
 				(companyId = ?) AND
 				(
-					(couponId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(code_ LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(active_ = ?) [$AND_OR_CONNECTOR$]
 					(discountType = ? [$AND_OR_NULL_CHECK$])
 				)
@@ -67,7 +67,7 @@
 				createDate ASC
 		]]>
 	</sql>	
-	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.findByO_G_C_U_PPPS">
+	<sql id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.findByG_C_U_N_PPPS">
 		<![CDATA[
 			SELECT
 				{ShoppingOrder.*}
@@ -76,9 +76,9 @@
 			WHERE
 				(groupId = ?) AND
 				(companyId = ?) AND
+				(userId = ?) AND
 				(
-					(orderId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(userId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(number_ LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(billingFirstName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(billingLastName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(billingEmailAddress LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]

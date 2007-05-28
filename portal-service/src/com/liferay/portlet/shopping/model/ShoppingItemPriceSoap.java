@@ -75,27 +75,27 @@ public class ShoppingItemPriceSoap implements Serializable {
 	public ShoppingItemPriceSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _itemPriceId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setItemPriceId(pk);
 	}
 
-	public String getItemPriceId() {
+	public long getItemPriceId() {
 		return _itemPriceId;
 	}
 
-	public void setItemPriceId(String itemPriceId) {
+	public void setItemPriceId(long itemPriceId) {
 		_itemPriceId = itemPriceId;
 	}
 
-	public String getItemId() {
+	public long getItemId() {
 		return _itemId;
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(long itemId) {
 		_itemId = itemId;
 	}
 
@@ -171,8 +171,8 @@ public class ShoppingItemPriceSoap implements Serializable {
 		_status = status;
 	}
 
-	private String _itemPriceId;
-	private String _itemId;
+	private long _itemPriceId;
+	private long _itemId;
 	private int _minQuantity;
 	private int _maxQuantity;
 	private double _price;

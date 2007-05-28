@@ -54,7 +54,7 @@ import java.util.List;
  */
 public class ShoppingCouponPersistenceImpl extends BasePersistence
 	implements ShoppingCouponPersistence {
-	public ShoppingCoupon create(String couponId) {
+	public ShoppingCoupon create(long couponId) {
 		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
 		shoppingCoupon.setNew(true);
 		shoppingCoupon.setPrimaryKey(couponId);
@@ -62,7 +62,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		return shoppingCoupon;
 	}
 
-	public ShoppingCoupon remove(String couponId)
+	public ShoppingCoupon remove(long couponId)
 		throws NoSuchCouponException, SystemException {
 		Session session = null;
 
@@ -70,7 +70,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
-					couponId);
+					new Long(couponId));
 
 			if (shoppingCoupon == null) {
 				if (_log.isWarnEnabled()) {
@@ -151,7 +151,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCoupon findByPrimaryKey(String couponId)
+	public ShoppingCoupon findByPrimaryKey(long couponId)
 		throws NoSuchCouponException, SystemException {
 		ShoppingCoupon shoppingCoupon = fetchByPrimaryKey(couponId);
 
@@ -168,7 +168,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		return shoppingCoupon;
 	}
 
-	public ShoppingCoupon fetchByPrimaryKey(String couponId)
+	public ShoppingCoupon fetchByPrimaryKey(long couponId)
 		throws SystemException {
 		Session session = null;
 
@@ -176,7 +176,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			return (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
-				couponId);
+				new Long(couponId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -296,7 +296,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCoupon[] findByGroupId_PrevAndNext(String couponId,
+	public ShoppingCoupon[] findByGroupId_PrevAndNext(long couponId,
 		long groupId, OrderByComparator obc)
 		throws NoSuchCouponException, SystemException {
 		ShoppingCoupon shoppingCoupon = findByPrimaryKey(couponId);
@@ -335,6 +335,76 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			array[2] = (ShoppingCoupon)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCoupon findByCode(String code)
+		throws NoSuchCouponException, SystemException {
+		ShoppingCoupon shoppingCoupon = fetchByCode(code);
+
+		if (shoppingCoupon == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No ShoppingCoupon exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("code=");
+			msg.append(code);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCouponException(msg.toString());
+		}
+
+		return shoppingCoupon;
+	}
+
+	public ShoppingCoupon fetchByCode(String code) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
+			if (code == null) {
+				query.append("code_ IS NULL");
+			}
+			else {
+				query.append("code_ = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("createDate ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (code != null) {
+				q.setString(queryPos++, code);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)list.get(0);
+
+			return shoppingCoupon;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -433,6 +503,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByCode(String code)
+		throws NoSuchCouponException, SystemException {
+		ShoppingCoupon shoppingCoupon = findByCode(code);
+		remove(shoppingCoupon);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -459,6 +535,55 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByCode(String code) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
+			if (code == null) {
+				query.append("code_ IS NULL");
+			}
+			else {
+				query.append("code_ = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (code != null) {
+				q.setString(queryPos++, code);
+			}
 
 			Iterator itr = q.list().iterator();
 

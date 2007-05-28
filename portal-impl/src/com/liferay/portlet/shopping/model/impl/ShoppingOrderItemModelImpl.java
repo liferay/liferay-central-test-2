@@ -25,8 +25,6 @@ package com.liferay.portlet.shopping.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -57,7 +55,8 @@ import java.util.Date;
 public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingOrderItem";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "orderId", new Integer(Types.VARCHAR) },
+			{ "orderItemId", new Integer(Types.BIGINT) },
+			{ "orderId", new Integer(Types.BIGINT) },
 			{ "itemId", new Integer(Types.VARCHAR) },
 			{ "sku", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
@@ -70,9 +69,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.orderId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.itemId"),
 			XSS_ALLOW_BY_MODEL);
@@ -94,28 +90,30 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	public ShoppingOrderItemModelImpl() {
 	}
 
-	public ShoppingOrderItemPK getPrimaryKey() {
-		return new ShoppingOrderItemPK(_orderId, _itemId);
+	public long getPrimaryKey() {
+		return _orderItemId;
 	}
 
-	public void setPrimaryKey(ShoppingOrderItemPK pk) {
-		setOrderId(pk.orderId);
-		setItemId(pk.itemId);
+	public void setPrimaryKey(long pk) {
+		setOrderItemId(pk);
 	}
 
-	public String getOrderId() {
-		return GetterUtil.getString(_orderId);
+	public long getOrderItemId() {
+		return _orderItemId;
 	}
 
-	public void setOrderId(String orderId) {
-		if (((orderId == null) && (_orderId != null)) ||
-				((orderId != null) && (_orderId == null)) ||
-				((orderId != null) && (_orderId != null) &&
-				!orderId.equals(_orderId))) {
-			if (!XSS_ALLOW_ORDERID) {
-				orderId = XSSUtil.strip(orderId);
-			}
+	public void setOrderItemId(long orderItemId) {
+		if (orderItemId != _orderItemId) {
+			_orderItemId = orderItemId;
+		}
+	}
 
+	public long getOrderId() {
+		return _orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		if (orderId != _orderId) {
 			_orderId = orderId;
 		}
 	}
@@ -238,6 +236,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		ShoppingOrderItemImpl clone = new ShoppingOrderItemImpl();
+		clone.setOrderItemId(getOrderItemId());
 		clone.setOrderId(getOrderId());
 		clone.setItemId(getItemId());
 		clone.setSku(getSku());
@@ -287,9 +286,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ShoppingOrderItemPK pk = shoppingOrderItem.getPrimaryKey();
+		long pk = shoppingOrderItem.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -298,10 +297,11 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _orderId;
+	private long _orderItemId;
+	private long _orderId;
 	private String _itemId;
 	private String _sku;
 	private String _name;

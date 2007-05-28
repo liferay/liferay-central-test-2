@@ -33,7 +33,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 <table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="id" />
+		<liferay-ui:message key="code" />
 	</td>
 	<td>
 		<liferay-ui:message key="discount-type" />
@@ -44,7 +44,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= CouponDisplayTerms.COUPON_ID %>" size="20" type="text" value="<%= displayTerms.getCouponId() %>" />
+		<input name="<portlet:namespace /><%= CouponDisplayTerms.CODE %>" size="20" type="text" value="<%= displayTerms.getCode() %>" />
 	</td>
 	<td>
 		<select name="<%= CouponDisplayTerms.DISCOUNT_TYPE %>">

@@ -33,7 +33,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 <table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="id" />
+		<liferay-ui:message key="number" />
 	</td>
 	<td>
 		<liferay-ui:message key="status" />
@@ -50,7 +50,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.ORDER_ID %>" size="20" type="text" value="<%= displayTerms.getOrderId() %>" />
+		<input name="<portlet:namespace /><%= OrderDisplayTerms.NUMBER %>" size="20" type="text" value="<%= displayTerms.getNumber() %>" />
 	</td>
 	<td>
 		<select name="<%= OrderDisplayTerms.STATUS %>">

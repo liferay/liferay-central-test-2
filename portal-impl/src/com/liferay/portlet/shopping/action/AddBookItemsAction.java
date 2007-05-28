@@ -80,7 +80,7 @@ public class AddBookItemsAction extends PortletAction {
 	}
 
 	protected void quickAddItems(ActionRequest req) throws Exception {
-		String categoryId = ParamUtil.getString(req, "categoryId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 		String[] isbns = StringUtil.split(
 			ParamUtil.getString(req, "isbns").toUpperCase(),
 			StringPool.SPACE);

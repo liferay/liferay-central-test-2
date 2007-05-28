@@ -68,10 +68,9 @@ import org.json.JSONObject;
  *
  */
 public class ShoppingCategoryServiceJSON {
-	public static JSONObject addCategory(long plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addCategory(long plid, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
@@ -81,9 +80,9 @@ public class ShoppingCategoryServiceJSON {
 		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addCategory(long plid,
-		java.lang.String parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+	public static JSONObject addCategory(long plid, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -94,13 +93,13 @@ public class ShoppingCategoryServiceJSON {
 		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
-	public static JSONObject getCategory(java.lang.String categoryId)
+	public static JSONObject getCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
@@ -108,8 +107,8 @@ public class ShoppingCategoryServiceJSON {
 		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateCategory(java.lang.String categoryId,
-		java.lang.String parentCategoryId, java.lang.String name,
+	public static JSONObject updateCategory(long categoryId,
+		long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

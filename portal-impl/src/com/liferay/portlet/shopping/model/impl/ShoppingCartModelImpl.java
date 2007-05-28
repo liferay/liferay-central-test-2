@@ -55,7 +55,7 @@ import java.util.Date;
 public class ShoppingCartModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingCart";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "cartId", new Integer(Types.VARCHAR) },
+			{ "cartId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -63,24 +63,21 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "itemIds", new Integer(Types.VARCHAR) },
-			{ "couponIds", new Integer(Types.VARCHAR) },
+			{ "couponCodes", new Integer(Types.VARCHAR) },
 			{ "altShipping", new Integer(Types.INTEGER) },
 			{ "insure", new Integer(Types.BOOLEAN) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_CARTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.cartId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ITEMIDS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.itemIds"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUPONIDS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.couponIds"),
+	public static boolean XSS_ALLOW_COUPONCODES = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.couponCodes"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCartModel"));
@@ -88,27 +85,20 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	public ShoppingCartModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _cartId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCartId(pk);
 	}
 
-	public String getCartId() {
-		return GetterUtil.getString(_cartId);
+	public long getCartId() {
+		return _cartId;
 	}
 
-	public void setCartId(String cartId) {
-		if (((cartId == null) && (_cartId != null)) ||
-				((cartId != null) && (_cartId == null)) ||
-				((cartId != null) && (_cartId != null) &&
-				!cartId.equals(_cartId))) {
-			if (!XSS_ALLOW_CARTID) {
-				cartId = XSSUtil.strip(cartId);
-			}
-
+	public void setCartId(long cartId) {
+		if (cartId != _cartId) {
 			_cartId = cartId;
 		}
 	}
@@ -203,20 +193,20 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCouponIds() {
-		return GetterUtil.getString(_couponIds);
+	public String getCouponCodes() {
+		return GetterUtil.getString(_couponCodes);
 	}
 
-	public void setCouponIds(String couponIds) {
-		if (((couponIds == null) && (_couponIds != null)) ||
-				((couponIds != null) && (_couponIds == null)) ||
-				((couponIds != null) && (_couponIds != null) &&
-				!couponIds.equals(_couponIds))) {
-			if (!XSS_ALLOW_COUPONIDS) {
-				couponIds = XSSUtil.strip(couponIds);
+	public void setCouponCodes(String couponCodes) {
+		if (((couponCodes == null) && (_couponCodes != null)) ||
+				((couponCodes != null) && (_couponCodes == null)) ||
+				((couponCodes != null) && (_couponCodes != null) &&
+				!couponCodes.equals(_couponCodes))) {
+			if (!XSS_ALLOW_COUPONCODES) {
+				couponCodes = XSSUtil.strip(couponCodes);
 			}
 
-			_couponIds = couponIds;
+			_couponCodes = couponCodes;
 		}
 	}
 
@@ -254,7 +244,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setItemIds(getItemIds());
-		clone.setCouponIds(getCouponIds());
+		clone.setCouponCodes(getCouponCodes());
 		clone.setAltShipping(getAltShipping());
 		clone.setInsure(getInsure());
 
@@ -267,9 +257,17 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		}
 
 		ShoppingCartImpl shoppingCart = (ShoppingCartImpl)obj;
-		String pk = shoppingCart.getPrimaryKey();
+		long pk = shoppingCart.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -286,9 +284,9 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = shoppingCart.getPrimaryKey();
+		long pk = shoppingCart.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -297,10 +295,10 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _cartId;
+	private long _cartId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -308,7 +306,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _itemIds;
-	private String _couponIds;
+	private String _couponCodes;
 	private int _altShipping;
 	private boolean _insure;
 }

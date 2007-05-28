@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface ShoppingItemModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getItemId();
+	public long getItemId();
 
-	public void setItemId(String itemId);
+	public void setItemId(long itemId);
 
 	public long getCompanyId();
 
@@ -75,9 +75,9 @@ public interface ShoppingItemModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getCategoryId();
+	public long getCategoryId();
 
-	public void setCategoryId(String categoryId);
+	public void setCategoryId(long categoryId);
 
 	public String getSku();
 

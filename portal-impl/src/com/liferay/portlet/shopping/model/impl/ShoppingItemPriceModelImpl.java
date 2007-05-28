@@ -26,7 +26,6 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.XSSUtil;
 
 import java.sql.Types;
 
@@ -53,8 +52,8 @@ import java.sql.Types;
 public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingItemPrice";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "itemPriceId", new Integer(Types.VARCHAR) },
-			{ "itemId", new Integer(Types.VARCHAR) },
+			{ "itemPriceId", new Integer(Types.BIGINT) },
+			{ "itemId", new Integer(Types.BIGINT) },
 			{ "minQuantity", new Integer(Types.INTEGER) },
 			{ "maxQuantity", new Integer(Types.INTEGER) },
 			{ "price", new Integer(Types.DOUBLE) },
@@ -67,56 +66,36 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ITEMPRICEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice.itemPriceId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice.itemId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemPriceModel"));
 
 	public ShoppingItemPriceModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _itemPriceId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setItemPriceId(pk);
 	}
 
-	public String getItemPriceId() {
-		return GetterUtil.getString(_itemPriceId);
+	public long getItemPriceId() {
+		return _itemPriceId;
 	}
 
-	public void setItemPriceId(String itemPriceId) {
-		if (((itemPriceId == null) && (_itemPriceId != null)) ||
-				((itemPriceId != null) && (_itemPriceId == null)) ||
-				((itemPriceId != null) && (_itemPriceId != null) &&
-				!itemPriceId.equals(_itemPriceId))) {
-			if (!XSS_ALLOW_ITEMPRICEID) {
-				itemPriceId = XSSUtil.strip(itemPriceId);
-			}
-
+	public void setItemPriceId(long itemPriceId) {
+		if (itemPriceId != _itemPriceId) {
 			_itemPriceId = itemPriceId;
 		}
 	}
 
-	public String getItemId() {
-		return GetterUtil.getString(_itemId);
+	public long getItemId() {
+		return _itemId;
 	}
 
-	public void setItemId(String itemId) {
-		if (((itemId == null) && (_itemId != null)) ||
-				((itemId != null) && (_itemId == null)) ||
-				((itemId != null) && (_itemId != null) &&
-				!itemId.equals(_itemId))) {
-			if (!XSS_ALLOW_ITEMID) {
-				itemId = XSSUtil.strip(itemId);
-			}
-
+	public void setItemId(long itemId) {
+		if (itemId != _itemId) {
 			_itemId = itemId;
 		}
 	}
@@ -232,13 +211,30 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 
 		ShoppingItemPriceImpl shoppingItemPrice = (ShoppingItemPriceImpl)obj;
 		int value = 0;
-		value = getItemId().compareTo(shoppingItemPrice.getItemId());
+
+		if (getItemId() < shoppingItemPrice.getItemId()) {
+			value = -1;
+		}
+		else if (getItemId() > shoppingItemPrice.getItemId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
 		}
 
-		value = getItemPriceId().compareTo(shoppingItemPrice.getItemPriceId());
+		if (getItemPriceId() < shoppingItemPrice.getItemPriceId()) {
+			value = -1;
+		}
+		else if (getItemPriceId() > shoppingItemPrice.getItemPriceId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -261,9 +257,9 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = shoppingItemPrice.getPrimaryKey();
+		long pk = shoppingItemPrice.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -272,11 +268,11 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _itemPriceId;
-	private String _itemId;
+	private long _itemPriceId;
+	private long _itemId;
 	private int _minQuantity;
 	private int _maxQuantity;
 	private double _price;

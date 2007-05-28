@@ -53,15 +53,7 @@ import java.util.List;
 public class ShoppingItemJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingItem model) {
 		JSONObject jsonObj = new JSONObject();
-		String itemId = model.getItemId();
-
-		if (itemId == null) {
-			jsonObj.put("itemId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("itemId", itemId.toString());
-		}
-
+		jsonObj.put("itemId", model.getItemId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
@@ -92,14 +84,7 @@ public class ShoppingItemJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String categoryId = model.getCategoryId();
-
-		if (categoryId == null) {
-			jsonObj.put("categoryId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("categoryId", categoryId.toString());
-		}
+		jsonObj.put("categoryId", model.getCategoryId());
 
 		String sku = model.getSku();
 

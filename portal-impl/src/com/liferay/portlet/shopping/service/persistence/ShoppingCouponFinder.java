@@ -45,25 +45,25 @@ import org.hibernate.Session;
  */
 public class ShoppingCouponFinder {
 
-	public static String COUNT_BY_C_G_C_A_DT =
-		ShoppingCouponFinder.class.getName() + ".countByC_G_C_A_DT";
+	public static String COUNT_BY_G_C_C_A_DT =
+		ShoppingCouponFinder.class.getName() + ".countByG_C_C_A_DT";
 
-	public static String FIND_BY_C_G_C_A_DT =
-		ShoppingCouponFinder.class.getName() + ".findByC_G_C_A_DT";
+	public static String FIND_BY_G_C_C_A_DT =
+		ShoppingCouponFinder.class.getName() + ".findByG_C_C_A_DT";
 
-	public static int countByC_G_C_A_DT(
-			String couponId, long groupId, long companyId, boolean active,
+	public static int countByG_C_C_A_DT(
+			long groupId, long companyId, String code, boolean active,
 			String discountType, boolean andOperator)
 		throws SystemException {
 
-		couponId = StringUtil.upperCase(couponId);
+		code = StringUtil.upperCase(code);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_G_C_A_DT);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_C_A_DT);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -77,8 +77,8 @@ public class ShoppingCouponFinder {
 
 			qPos.add(groupId);
 			qPos.add(companyId);
-			qPos.add(couponId);
-			qPos.add(couponId);
+			qPos.add(code);
+			qPos.add(code);
 			qPos.add(active);
 			qPos.add(discountType);
 			qPos.add(discountType);
@@ -103,19 +103,19 @@ public class ShoppingCouponFinder {
 		}
 	}
 
-	public static List findByC_G_C_A_DT(
-			String couponId, long groupId, long companyId, boolean active,
+	public static List findByG_C_C_A_DT(
+			long groupId, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
 
-		couponId = StringUtil.upperCase(couponId);
+		code = StringUtil.upperCase(code);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_G_C_A_DT);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_C_A_DT);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -129,8 +129,8 @@ public class ShoppingCouponFinder {
 
 			qPos.add(groupId);
 			qPos.add(companyId);
-			qPos.add(couponId);
-			qPos.add(couponId);
+			qPos.add(code);
+			qPos.add(code);
 			qPos.add(active);
 			qPos.add(discountType);
 			qPos.add(discountType);

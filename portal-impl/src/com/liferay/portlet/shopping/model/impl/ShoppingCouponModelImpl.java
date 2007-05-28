@@ -56,13 +56,14 @@ import java.util.Date;
 public class ShoppingCouponModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingCoupon";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "couponId", new Integer(Types.VARCHAR) },
+			{ "couponId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "code_", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "startDate", new Integer(Types.TIMESTAMP) },
@@ -77,11 +78,11 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_COUPONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.couponId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.userName"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_CODE = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.code"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon.name"),
@@ -104,27 +105,20 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	public ShoppingCouponModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _couponId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCouponId(pk);
 	}
 
-	public String getCouponId() {
-		return GetterUtil.getString(_couponId);
+	public long getCouponId() {
+		return _couponId;
 	}
 
-	public void setCouponId(String couponId) {
-		if (((couponId == null) && (_couponId != null)) ||
-				((couponId != null) && (_couponId == null)) ||
-				((couponId != null) && (_couponId != null) &&
-				!couponId.equals(_couponId))) {
-			if (!XSS_ALLOW_COUPONID) {
-				couponId = XSSUtil.strip(couponId);
-			}
-
+	public void setCouponId(long couponId) {
+		if (couponId != _couponId) {
 			_couponId = couponId;
 		}
 	}
@@ -199,6 +193,22 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public String getCode() {
+		return GetterUtil.getString(_code);
+	}
+
+	public void setCode(String code) {
+		if (((code == null) && (_code != null)) ||
+				((code != null) && (_code == null)) ||
+				((code != null) && (_code != null) && !code.equals(_code))) {
+			if (!XSS_ALLOW_CODE) {
+				code = XSSUtil.strip(code);
+			}
+
+			_code = code;
 		}
 	}
 
@@ -355,6 +365,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setCode(getCode());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setStartDate(getStartDate());
@@ -400,9 +411,9 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = shoppingCoupon.getPrimaryKey();
+		long pk = shoppingCoupon.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -411,16 +422,17 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _couponId;
+	private long _couponId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _code;
 	private String _name;
 	private String _description;
 	private Date _startDate;

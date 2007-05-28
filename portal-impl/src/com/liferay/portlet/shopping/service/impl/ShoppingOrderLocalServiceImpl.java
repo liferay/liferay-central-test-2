@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -70,7 +71,6 @@ import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
@@ -104,14 +104,14 @@ public class ShoppingOrderLocalServiceImpl
 	extends ShoppingOrderLocalServiceBaseImpl {
 
 	public void completeOrder(
-			String orderId, String ppTxnId, String ppPaymentStatus,
+			String number, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail,
 			boolean updateInventory)
 		throws PortalException, SystemException {
 
 		// Order
 
-		ShoppingOrder order = ShoppingOrderUtil.findByPrimaryKey(orderId);
+		ShoppingOrder order = ShoppingOrderUtil.findByNumber(number);
 
 		order.setModifiedDate(new Date());
 		order.setPpTxnId(ppTxnId);
@@ -182,7 +182,7 @@ public class ShoppingOrderLocalServiceImpl
 		sendEmail(order, "confirmation");
 	}
 
-	public void deleteOrder(String orderId)
+	public void deleteOrder(long orderId)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order = ShoppingOrderUtil.findByPrimaryKey(orderId);
@@ -217,13 +217,15 @@ public class ShoppingOrderLocalServiceImpl
 			User user = UserUtil.findByPrimaryKey(userId);
 			Date now = new Date();
 
-			String orderId = getOrderId();
+			String number = getNumber();
 
 			List pastOrders = ShoppingOrderUtil.findByG_U_PPPS(
 				groupId, userId, ShoppingOrderImpl.STATUS_CHECKOUT, 0, 1);
 
-			if (pastOrders.size() == 1) {
+			if (pastOrders.size() > 0) {
 				ShoppingOrder pastOrder = (ShoppingOrder)pastOrders.get(0);
+
+				long orderId = CounterLocalServiceUtil.increment();
 
 				order = ShoppingOrderUtil.create(orderId);
 
@@ -243,8 +245,9 @@ public class ShoppingOrderLocalServiceImpl
 				order.setShippingCountry(pastOrder.getShippingCountry());
 				order.setShippingPhone(pastOrder.getShippingPhone());
 			}
+			else {
+				long orderId = CounterLocalServiceUtil.increment();
 
-			if (order == null) {
 				order = ShoppingOrderUtil.create(orderId);
 			}
 
@@ -254,6 +257,7 @@ public class ShoppingOrderLocalServiceImpl
 			order.setUserName(user.getFullName());
 			order.setCreateDate(now);
 			order.setModifiedDate(now);
+			order.setNumber(number);
 			order.setBillingFirstName(user.getFirstName());
 			order.setBillingLastName(user.getLastName());
 			order.setBillingEmailAddress(user.getEmailAddress());
@@ -271,10 +275,16 @@ public class ShoppingOrderLocalServiceImpl
 		return order;
 	}
 
-	public ShoppingOrder getOrder(String orderId)
+	public ShoppingOrder getOrder(long orderId)
 		throws PortalException, SystemException {
 
 		return ShoppingOrderUtil.findByPrimaryKey(orderId);
+	}
+
+	public ShoppingOrder getOrder(String number)
+		throws PortalException, SystemException {
+
+		return ShoppingOrderUtil.findByNumber(number);
 	}
 
 	public ShoppingOrder saveLatestOrder(ShoppingCart cart)
@@ -315,12 +325,13 @@ public class ShoppingOrderLocalServiceImpl
 				requiresShipping = true;
 			}
 
-			ShoppingOrderItemPK orderItemPK = new ShoppingOrderItemPK(
-				order.getOrderId(), cartItem.getCartItemId());
+			long orderItemId = CounterLocalServiceUtil.increment();
 
 			ShoppingOrderItem orderItem =
-				ShoppingOrderItemUtil.create(orderItemPK);
+				ShoppingOrderItemUtil.create(orderItemId);
 
+			orderItem.setOrderId(order.getOrderId());
+			orderItem.setItemId(cartItem.getCartItemId());
 			orderItem.setSku(item.getSku());
 			orderItem.setName(item.getName());
 			orderItem.setDescription(item.getDescription());
@@ -344,7 +355,7 @@ public class ShoppingOrderLocalServiceImpl
 		order.setRequiresShipping(requiresShipping);
 		order.setInsure(cart.isInsure());
 		order.setInsurance(ShoppingUtil.calculateInsurance(items));
-		order.setCouponIds(cart.getCouponIds());
+		order.setCouponCodes(cart.getCouponCodes());
 		order.setCouponDiscount(
 			ShoppingUtil.calculateCouponDiscount(
 				items, order.getBillingState(), cart.getCoupon()));
@@ -357,7 +368,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public List search(
-			String orderId, long groupId, long companyId, long userId,
+			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
@@ -366,29 +377,29 @@ public class ShoppingOrderLocalServiceImpl
 
 		OrderDateComparator obc = new OrderDateComparator(false);
 
-		return ShoppingOrderFinder.findByO_G_C_U_PPPS(
-			orderId, groupId, companyId, userId, billingFirstName,
+		return ShoppingOrderFinder.findByG_C_U_N_PPPS(
+			groupId, companyId, userId, number, billingFirstName,
 			billingLastName, billingEmailAddress, shippingFirstName,
 			shippingLastName, shippingEmailAddress, ppPaymentStatus,
 			andOperator, begin, end, obc);
 	}
 
 	public int searchCount(
-			String orderId, long groupId, long companyId, long userId,
+			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
 			String ppPaymentStatus, boolean andOperator)
 		throws PortalException, SystemException {
 
-		return ShoppingOrderFinder.countByO_G_C_U_PPPS(
-			orderId, groupId, companyId, userId, billingFirstName,
+		return ShoppingOrderFinder.countByG_C_U_N_PPPS(
+			groupId, companyId, userId, number, billingFirstName,
 			billingLastName, billingEmailAddress, shippingFirstName,
 			shippingLastName, shippingEmailAddress, ppPaymentStatus,
 			andOperator);
 	}
 
-	public void sendEmail(String orderId, String emailType)
+	public void sendEmail(long orderId, String emailType)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order = ShoppingOrderUtil.findByPrimaryKey(orderId);
@@ -487,7 +498,7 @@ public class ShoppingOrderLocalServiceImpl
 					fromName,
 					billingAddress,
 					currency.getSymbol(),
-					order.getOrderId(),
+					order.getNumber(),
 					shippingAddress,
 					String.valueOf(total),
 					company.getVirtualHost(),
@@ -516,7 +527,7 @@ public class ShoppingOrderLocalServiceImpl
 					fromName,
 					billingAddress,
 					currency.getSymbol(),
-					order.getOrderId(),
+					order.getNumber(),
 					shippingAddress,
 					String.valueOf(total),
 					company.getVirtualHost(),
@@ -583,7 +594,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			String orderId, String billingFirstName, String billingLastName,
+			long orderId, String billingFirstName, String billingLastName,
 			String billingEmailAddress, String billingCompany,
 			String billingStreet, String billingCity, String billingState,
 			String billingZip, String billingCountry, String billingPhone,
@@ -661,7 +672,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			String orderId, String ppTxnId, String ppPaymentStatus,
+			long orderId, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
@@ -679,17 +690,17 @@ public class ShoppingOrderLocalServiceImpl
 		return order;
 	}
 
-	protected String getOrderId() throws SystemException {
-		String orderId =
+	protected String getNumber() throws SystemException {
+		String number =
 			PwdGenerator.getPassword(PwdGenerator.KEY1 + PwdGenerator.KEY2, 12);
 
 		try {
-			ShoppingOrderUtil.findByPrimaryKey(orderId);
+			ShoppingOrderUtil.findByNumber(number);
 
-			return getOrderId();
+			return getNumber();
 		}
 		catch (NoSuchOrderException nsoe) {
-			return orderId;
+			return number;
 		}
 	}
 

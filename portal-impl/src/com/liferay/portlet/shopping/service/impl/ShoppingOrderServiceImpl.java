@@ -42,7 +42,7 @@ public class ShoppingOrderServiceImpl
 	extends PrincipalBean implements ShoppingOrderService {
 
 	public void completeOrder(
-			long plid, String orderId, String ppTxnId, String ppPaymentStatus,
+			long plid, String number, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
@@ -51,11 +51,11 @@ public class ShoppingOrderServiceImpl
 			ActionKeys.MANAGE_ORDERS);
 
 		ShoppingOrderLocalServiceUtil.completeOrder(
-			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			number, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
 			ppPayerEmail, false);
 	}
 
-	public void deleteOrder(long plid, String orderId)
+	public void deleteOrder(long plid, long orderId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -65,7 +65,7 @@ public class ShoppingOrderServiceImpl
 		ShoppingOrderLocalServiceUtil.deleteOrder(orderId);
 	}
 
-	public ShoppingOrder getOrder(long plid, String orderId)
+	public ShoppingOrder getOrder(long plid, long orderId)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(orderId);
@@ -82,7 +82,7 @@ public class ShoppingOrderServiceImpl
 		}
 	}
 
-	public void sendEmail(long plid, String orderId, String emailType)
+	public void sendEmail(long plid, long orderId, String emailType)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -93,7 +93,7 @@ public class ShoppingOrderServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			long plid, String orderId, String billingFirstName,
+			long plid, long orderId, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingCompany, String billingStreet, String billingCity,
 			String billingState, String billingZip, String billingCountry,
@@ -121,7 +121,7 @@ public class ShoppingOrderServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			long plid, String orderId, String ppTxnId, String ppPaymentStatus,
+			long plid, long orderId, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 

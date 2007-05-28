@@ -53,10 +53,18 @@ public class ViewCouponAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String couponId = ParamUtil.getString(req, "couponId");
+			long couponId = ParamUtil.getLong(req, "couponId");
 
-			ShoppingCoupon coupon =
-				ShoppingCouponLocalServiceUtil.getCoupon(couponId);
+			String code = ParamUtil.getString(req, "code");
+
+			ShoppingCoupon coupon = null;
+
+			if (couponId > 0) {
+				coupon = ShoppingCouponLocalServiceUtil.getCoupon(couponId);
+			}
+			else {
+				coupon = ShoppingCouponLocalServiceUtil.getCoupon(code);
+			}
 
 			req.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
 		}

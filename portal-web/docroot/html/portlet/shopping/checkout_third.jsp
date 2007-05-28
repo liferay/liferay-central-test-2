@@ -30,9 +30,7 @@ String orderId = ParamUtil.getString(request, "orderId");
 try {
 	ShoppingCart cart = ShoppingUtil.getCart(renderRequest);
 
-	ShoppingCartLocalServiceUtil.updateCart(
-		cart.getUserId(), cart.getGroupId(), cart.getCartId(),
-		StringPool.BLANK, StringPool.BLANK, 0, false);
+	ShoppingCartLocalServiceUtil.updateCart(cart.getUserId(), cart.getGroupId(), StringPool.BLANK, StringPool.BLANK, 0, false);
 }
 catch (Exception e) {
 }

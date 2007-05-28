@@ -65,11 +65,11 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	<%
 	CouponSearchTerms searchTerms = (CouponSearchTerms)searchContainer.getSearchTerms();
 
-	int total = ShoppingCouponLocalServiceUtil.searchCount(searchTerms.getCouponId(), portletGroupId.longValue(), company.getCompanyId(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
+	int total = ShoppingCouponLocalServiceUtil.searchCount(portletGroupId.longValue(), company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
 
 	searchContainer.setTotal(total);
 
-	List results = ShoppingCouponServiceUtil.search(searchTerms.getCouponId(), plid.longValue(), company.getCompanyId(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingCouponServiceUtil.search(plid.longValue(), company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 	%>
@@ -96,11 +96,11 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 		rowURL.setParameter("struts_action", "/shopping/edit_coupon");
 		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("couponId", coupon.getCouponId());
+		rowURL.setParameter("couponId", String.valueOf(coupon.getCouponId()));
 
-		// Coupon id
+		// Code
 
-		row.addText(coupon.getCouponId(), rowURL);
+		row.addText(coupon.getCode(), rowURL);
 
 		// Name and description
 

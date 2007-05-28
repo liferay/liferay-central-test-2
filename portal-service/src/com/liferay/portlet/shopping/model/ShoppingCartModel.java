@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface ShoppingCartModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getCartId();
+	public long getCartId();
 
-	public void setCartId(String cartId);
+	public void setCartId(long cartId);
 
 	public long getGroupId();
 
@@ -83,9 +83,9 @@ public interface ShoppingCartModel extends BaseModel {
 
 	public void setItemIds(String itemIds);
 
-	public String getCouponIds();
+	public String getCouponCodes();
 
-	public void setCouponIds(String couponIds);
+	public void setCouponCodes(String couponCodes);
 
 	public int getAltShipping();
 

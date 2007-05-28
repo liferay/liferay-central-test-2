@@ -374,14 +374,14 @@ for (int i = 0; itr.hasNext(); i++) {
 		itemIds.append(",");
 	}
 
-	ResultRow row = new ResultRow(item, item.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
-	rowURL.setParameter("itemId", item.getItemId());
+	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
 	// SKU
 
@@ -439,7 +439,7 @@ for (int i = 0; itr.hasNext(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <input name="<portlet:namespace />itemIds" type="hidden" value="<%= itemIds %>" />
-<input name="<portlet:namespace />couponIds" type="hidden" value="<%= cart.getCouponIds() %>" />
+<input name="<portlet:namespace />couponCodes" type="hidden" value="<%= cart.getCouponCodes() %>" />
 
 <br />
 
@@ -492,7 +492,7 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<td>
 			<%= currencyFormat.format(ShoppingUtil.calculateCouponDiscount(items, order.getBillingState(), coupon)) %>
 
-			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();">
+			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();">
 			(<%= coupon.getCouponId() %>)
 			</a>
 		</td>

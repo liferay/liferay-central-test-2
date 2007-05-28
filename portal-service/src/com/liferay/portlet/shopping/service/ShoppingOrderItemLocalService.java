@@ -57,6 +57,6 @@ public interface ShoppingOrderItemLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List getOrderItems(java.lang.String orderId)
+	public java.util.List getOrderItems(long orderId)
 		throws com.liferay.portal.SystemException;
 }

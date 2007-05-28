@@ -58,18 +58,18 @@ public interface ShoppingCouponLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long userId, long plid, java.lang.String couponId,
-		boolean autoCouponId, java.lang.String name,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
-		int endDateMinute, boolean neverExpire, boolean active,
-		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+		long userId, long plid, java.lang.String code, boolean autoCode,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
+		java.lang.String limitSkus, double minOrder, double discount,
+		java.lang.String discountType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteCoupon(java.lang.String couponId)
+	public void deleteCoupon(long couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -77,21 +77,26 @@ public interface ShoppingCouponLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
-		java.lang.String couponId)
+		long couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(java.lang.String couponId, long plid,
-		long companyId, boolean active, java.lang.String discountType,
+	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
+		java.lang.String code)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long plid, long companyId,
+		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String couponId, long groupId,
-		long companyId, boolean active, java.lang.String discountType,
-		boolean andOperator) throws com.liferay.portal.SystemException;
+	public int searchCount(long groupId, long companyId, java.lang.String code,
+		boolean active, java.lang.String discountType, boolean andOperator)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		long userId, java.lang.String couponId, java.lang.String name,
+		long userId, long couponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,

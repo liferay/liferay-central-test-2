@@ -30,10 +30,10 @@ package com.liferay.portlet.shopping.service.persistence;
  */
 public interface ShoppingCategoryPersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCategory create(
-		java.lang.String categoryId);
+		long categoryId);
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory remove(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
@@ -50,12 +50,12 @@ public interface ShoppingCategoryPersistence {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByPrimaryKey(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory fetchByPrimaryKey(
-		java.lang.String categoryId) throws com.liferay.portal.SystemException;
+		long categoryId) throws com.liferay.portal.SystemException;
 
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -78,39 +78,35 @@ public interface ShoppingCategoryPersistence {
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory[] findByGroupId_PrevAndNext(
-		java.lang.String categoryId, long groupId,
+		long categoryId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
-	public java.util.List findByG_P(long groupId,
-		java.lang.String parentCategoryId)
+	public java.util.List findByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId,
-		java.lang.String parentCategoryId, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List findByG_P(long groupId, long parentCategoryId,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId,
-		java.lang.String parentCategoryId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List findByG_P(long groupId, long parentCategoryId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_First(
-		long groupId, java.lang.String parentCategoryId,
+		long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_Last(
-		long groupId, java.lang.String parentCategoryId,
+		long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory[] findByG_P_PrevAndNext(
-		java.lang.String categoryId, long groupId,
-		java.lang.String parentCategoryId,
+		long categoryId, long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException;
@@ -135,7 +131,7 @@ public interface ShoppingCategoryPersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_P(long groupId, java.lang.String parentCategoryId)
+	public void removeByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -143,7 +139,7 @@ public interface ShoppingCategoryPersistence {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_P(long groupId, java.lang.String parentCategoryId)
+	public int countByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

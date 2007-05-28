@@ -53,15 +53,7 @@ import java.util.List;
 public class ShoppingOrderJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingOrder model) {
 		JSONObject jsonObj = new JSONObject();
-		String orderId = model.getOrderId();
-
-		if (orderId == null) {
-			jsonObj.put("orderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("orderId", orderId.toString());
-		}
-
+		jsonObj.put("orderId", model.getOrderId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
@@ -93,6 +85,15 @@ public class ShoppingOrderJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
+		String number = model.getNumber();
+
+		if (number == null) {
+			jsonObj.put("number", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("number", number.toString());
+		}
+
 		jsonObj.put("tax", model.getTax());
 		jsonObj.put("shipping", model.getShipping());
 
@@ -109,13 +110,13 @@ public class ShoppingOrderJSONSerializer {
 		jsonObj.put("insure", model.isInsure());
 		jsonObj.put("insurance", model.getInsurance());
 
-		String couponIds = model.getCouponIds();
+		String couponCodes = model.getCouponCodes();
 
-		if (couponIds == null) {
-			jsonObj.put("couponIds", StringPool.BLANK);
+		if (couponCodes == null) {
+			jsonObj.put("couponCodes", StringPool.BLANK);
 		}
 		else {
-			jsonObj.put("couponIds", couponIds.toString());
+			jsonObj.put("couponCodes", couponCodes.toString());
 		}
 
 		jsonObj.put("couponDiscount", model.getCouponDiscount());

@@ -66,7 +66,7 @@ import java.util.List;
  */
 public class ShoppingItemPersistenceImpl extends BasePersistence
 	implements ShoppingItemPersistence {
-	public ShoppingItem create(String itemId) {
+	public ShoppingItem create(long itemId) {
 		ShoppingItem shoppingItem = new ShoppingItemImpl();
 		shoppingItem.setNew(true);
 		shoppingItem.setPrimaryKey(itemId);
@@ -74,7 +74,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		return shoppingItem;
 	}
 
-	public ShoppingItem remove(String itemId)
+	public ShoppingItem remove(long itemId)
 		throws NoSuchItemException, SystemException {
 		Session session = null;
 
@@ -82,7 +82,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			ShoppingItem shoppingItem = (ShoppingItem)session.get(ShoppingItemImpl.class,
-					itemId);
+					new Long(itemId));
 
 			if (shoppingItem == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +162,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingItem findByPrimaryKey(String itemId)
+	public ShoppingItem findByPrimaryKey(long itemId)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchByPrimaryKey(itemId);
 
@@ -179,14 +179,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		return shoppingItem;
 	}
 
-	public ShoppingItem fetchByPrimaryKey(String itemId)
+	public ShoppingItem fetchByPrimaryKey(long itemId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (ShoppingItem)session.get(ShoppingItemImpl.class, itemId);
+			return (ShoppingItem)session.get(ShoppingItemImpl.class,
+				new Long(itemId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -196,7 +197,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCategoryId(String categoryId) throws SystemException {
+	public List findByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -205,14 +206,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("itemId ASC");
@@ -221,10 +215,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return q.list();
 		}
@@ -236,12 +227,12 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end)
+	public List findByCategoryId(long categoryId, int begin, int end)
 		throws SystemException {
 		return findByCategoryId(categoryId, begin, end, null);
 	}
 
-	public List findByCategoryId(String categoryId, int begin, int end,
+	public List findByCategoryId(long categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -251,14 +242,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -274,10 +258,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -289,7 +270,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingItem findByCategoryId_First(String categoryId,
+	public ShoppingItem findByCategoryId_First(long categoryId,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
@@ -307,7 +288,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingItem findByCategoryId_Last(String categoryId,
+	public ShoppingItem findByCategoryId_Last(long categoryId,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
 		int count = countByCategoryId(categoryId);
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
@@ -326,8 +307,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingItem[] findByCategoryId_PrevAndNext(String itemId,
-		String categoryId, OrderByComparator obc)
+	public ShoppingItem[] findByCategoryId_PrevAndNext(long itemId,
+		long categoryId, OrderByComparator obc)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByPrimaryKey(itemId);
 		int count = countByCategoryId(categoryId);
@@ -339,14 +320,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -362,10 +336,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItem);
@@ -541,7 +512,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByCategoryId(String categoryId) throws SystemException {
+	public void removeByCategoryId(long categoryId) throws SystemException {
 		Iterator itr = findByCategoryId(categoryId).iterator();
 
 		while (itr.hasNext()) {
@@ -564,7 +535,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByCategoryId(String categoryId) throws SystemException {
+	public int countByCategoryId(long categoryId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -574,24 +545,14 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
-
-			if (categoryId == null) {
-				query.append("categoryId IS NULL");
-			}
-			else {
-				query.append("categoryId = ?");
-			}
-
+			query.append("categoryId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (categoryId != null) {
-				q.setString(queryPos++, categoryId);
-			}
+			q.setLong(queryPos++, categoryId);
 
 			Iterator itr = q.list().iterator();
 
@@ -698,17 +659,17 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List getShoppingItemPrices(String pk)
+	public List getShoppingItemPrices(long pk)
 		throws NoSuchItemException, SystemException {
 		return getShoppingItemPrices(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List getShoppingItemPrices(String pk, int begin, int end)
+	public List getShoppingItemPrices(long pk, int begin, int end)
 		throws NoSuchItemException, SystemException {
 		return getShoppingItemPrices(pk, begin, end, null);
 	}
 
-	public List getShoppingItemPrices(String pk, int begin, int end,
+	public List getShoppingItemPrices(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
 		Session session = null;
 
@@ -748,7 +709,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int getShoppingItemPricesSize(String pk) throws SystemException {
+	public int getShoppingItemPricesSize(long pk) throws SystemException {
 		Session session = null;
 
 		try {
@@ -781,8 +742,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public boolean containsShoppingItemPrice(String pk,
-		String shoppingItemPricePK) throws SystemException {
+	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
+		throws SystemException {
 		try {
 			return containsShoppingItemPrice.contains(pk, shoppingItemPricePK);
 		}
@@ -791,7 +752,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public boolean containsShoppingItemPrices(String pk)
+	public boolean containsShoppingItemPrices(long pk)
 		throws SystemException {
 		if (getShoppingItemPricesSize(pk) > 0) {
 			return true;
@@ -812,8 +773,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			ShoppingItemPersistenceImpl persistenceImpl) {
 			super(persistenceImpl.getDataSource(),
 				_SQL_CONTAINSSHOPPINGITEMPRICE);
-			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -822,8 +783,10 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String itemId, String itemPriceId) {
-			List results = execute(new Object[] { itemId, itemPriceId });
+		protected boolean contains(long itemId, long itemPriceId) {
+			List results = execute(new Object[] {
+						new Long(itemId), new Long(itemPriceId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);

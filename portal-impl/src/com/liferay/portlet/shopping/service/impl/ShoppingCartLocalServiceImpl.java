@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
@@ -71,10 +72,10 @@ public class ShoppingCartLocalServiceImpl
 		ShoppingCartUtil.removeByUserId(userId);
 	}
 
-	public ShoppingCart getCart(String cartId)
+	public ShoppingCart getCart(long userId, long groupId)
 		throws PortalException, SystemException {
 
-		return ShoppingCartUtil.findByPrimaryKey(cartId);
+		return ShoppingCartUtil.findByG_U(groupId, userId);
 	}
 
 	public Map getItems(long groupId, String itemIds)
@@ -86,7 +87,7 @@ public class ShoppingCartLocalServiceImpl
 
 		for (int i = 0; i < itemIdsArray.length; i++) {
 			try {
-				String itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
+				long itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
 				String fields = ShoppingUtil.getItemFields(itemIdsArray[i]);
 
 				ShoppingItem item =
@@ -118,8 +119,8 @@ public class ShoppingCartLocalServiceImpl
 	}
 
 	public ShoppingCart updateCart(
-			long userId, long groupId, String cartId, String itemIds,
-			String couponIds, int altShipping, boolean insure)
+			long userId, long groupId, String itemIds, String couponCodes,
+			int altShipping, boolean insure)
 		throws PortalException, SystemException {
 
 		List badItemIds = new ArrayList();
@@ -140,38 +141,38 @@ public class ShoppingCartLocalServiceImpl
 
 			if (minQuantity > 0) {
 				if ((count.intValue() % minQuantity) > 0) {
-					badItemIds.add(item.getItemId());
+					badItemIds.add(new Long(item.getItemId()));
 				}
 			}
 		}
 
 		if (badItemIds.size() > 0) {
 			throw new CartMinQuantityException(
-				StringUtil.merge((String[])badItemIds.toArray(new String[0])));
+				StringUtil.merge((Long[])badItemIds.toArray(new Long[0])));
 		}
 
-		String[] couponIdsArray = StringUtil.split(couponIds);
+		String[] couponCodesArray = StringUtil.split(couponCodes);
 
-		for (int i = 0; i < couponIdsArray.length; i++) {
+		for (int i = 0; i < couponCodesArray.length; i++) {
 			try {
 				ShoppingCoupon coupon =
-					ShoppingCouponUtil.findByPrimaryKey(couponIdsArray[i]);
+					ShoppingCouponUtil.findByCode(couponCodesArray[i]);
 
 				if (coupon.getGroupId() != groupId) {
-					throw new NoSuchCouponException(couponIdsArray[i]);
+					throw new NoSuchCouponException(couponCodesArray[i]);
 				}
 				else if (!coupon.isActive()) {
-					throw new CouponActiveException(couponIdsArray[i]);
+					throw new CouponActiveException(couponCodesArray[i]);
 				}
 				else if (!coupon.hasValidStartDate()) {
-					throw new CouponStartDateException(couponIdsArray[i]);
+					throw new CouponStartDateException(couponCodesArray[i]);
 				}
 				else if (!coupon.hasValidEndDate()) {
-					throw new CouponEndDateException(couponIdsArray[i]);
+					throw new CouponEndDateException(couponCodesArray[i]);
 				}
 			}
 			catch (NoSuchCouponException nsce) {
-				throw new NoSuchCouponException(couponIdsArray[i]);
+				throw new NoSuchCouponException(couponCodesArray[i]);
 			}
 
 			// Temporarily disable stacking of coupon codes
@@ -185,7 +186,7 @@ public class ShoppingCartLocalServiceImpl
 		ShoppingCart cart = null;
 
 		if (user.isDefaultUser()) {
-			cart = ShoppingCartUtil.create(cartId);
+			cart = ShoppingCartUtil.create(0);
 
 			cart.setGroupId(groupId);
 			cart.setCompanyId(user.getCompanyId());
@@ -195,9 +196,11 @@ public class ShoppingCartLocalServiceImpl
 		}
 		else {
 			try {
-				cart = ShoppingCartUtil.findByPrimaryKey(cartId);
+				cart = ShoppingCartUtil.findByG_U(groupId, userId);
 			}
 			catch (NoSuchCartException nsce) {
+				long cartId = CounterLocalServiceUtil.increment();
+
 				cart = ShoppingCartUtil.create(cartId);
 
 				cart.setGroupId(groupId);
@@ -210,7 +213,7 @@ public class ShoppingCartLocalServiceImpl
 
 		cart.setModifiedDate(now);
 		cart.setItemIds(checkItemIds(groupId, itemIds));
-		cart.setCouponIds(couponIds);
+		cart.setCouponCodes(couponCodes);
 		cart.setAltShipping(altShipping);
 		cart.setInsure(insure);
 
@@ -225,7 +228,7 @@ public class ShoppingCartLocalServiceImpl
 		String[] itemIdsArray = StringUtil.split(itemIds);
 
 		for (int i = 0; i < itemIdsArray.length; i++) {
-			String itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
+			long itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
 
 			ShoppingItem item = null;
 

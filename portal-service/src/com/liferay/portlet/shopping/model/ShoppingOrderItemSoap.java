@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.shopping.model;
 
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,6 +48,7 @@ import java.util.List;
 public class ShoppingOrderItemSoap implements Serializable {
 	public static ShoppingOrderItemSoap toSoapModel(ShoppingOrderItem model) {
 		ShoppingOrderItemSoap soapModel = new ShoppingOrderItemSoap();
+		soapModel.setOrderItemId(model.getOrderItemId());
 		soapModel.setOrderId(model.getOrderId());
 		soapModel.setItemId(model.getItemId());
 		soapModel.setSku(model.getSku());
@@ -77,20 +76,27 @@ public class ShoppingOrderItemSoap implements Serializable {
 	public ShoppingOrderItemSoap() {
 	}
 
-	public ShoppingOrderItemPK getPrimaryKey() {
-		return new ShoppingOrderItemPK(_orderId, _itemId);
+	public long getPrimaryKey() {
+		return _orderItemId;
 	}
 
-	public void setPrimaryKey(ShoppingOrderItemPK pk) {
-		setOrderId(pk.orderId);
-		setItemId(pk.itemId);
+	public void setPrimaryKey(long pk) {
+		setOrderItemId(pk);
 	}
 
-	public String getOrderId() {
+	public long getOrderItemId() {
+		return _orderItemId;
+	}
+
+	public void setOrderItemId(long orderItemId) {
+		_orderItemId = orderItemId;
+	}
+
+	public long getOrderId() {
 		return _orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(long orderId) {
 		_orderId = orderId;
 	}
 
@@ -158,7 +164,8 @@ public class ShoppingOrderItemSoap implements Serializable {
 		_shippedDate = shippedDate;
 	}
 
-	private String _orderId;
+	private long _orderItemId;
+	private long _orderId;
 	private String _itemId;
 	private String _sku;
 	private String _name;

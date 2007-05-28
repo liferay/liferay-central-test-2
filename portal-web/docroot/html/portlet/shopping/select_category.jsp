@@ -27,7 +27,7 @@
 <%
 ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPPING_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -69,14 +69,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	ShoppingCategory curCategory = (ShoppingCategory)results.get(i);
 
-	ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/shopping/select_category");
-	rowURL.setParameter("categoryId", curCategory.getCategoryId());
+	rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 	// Name and description
 
@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subcategoryIds = new ArrayList();
 
-	subcategoryIds.add(curCategory.getCategoryId());
+	subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
 	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
 

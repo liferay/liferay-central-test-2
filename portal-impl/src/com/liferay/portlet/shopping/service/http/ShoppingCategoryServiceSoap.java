@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class ShoppingCategoryServiceSoap {
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
-		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
 		try {
@@ -96,7 +96,7 @@ public class ShoppingCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
-		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
@@ -112,7 +112,7 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws RemoteException {
 		try {
 			ShoppingCategoryServiceUtil.deleteCategory(categoryId);
@@ -124,7 +124,7 @@ public class ShoppingCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap getCategory(
-		java.lang.String categoryId) throws RemoteException {
+		long categoryId) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
 
@@ -137,9 +137,9 @@ public class ShoppingCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory) throws RemoteException {
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
 					parentCategoryId, name, description, mergeWithParentCategory);

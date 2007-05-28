@@ -68,20 +68,19 @@ import org.json.JSONObject;
  *
  */
 public class ShoppingItemServiceJSON {
-	public static void addBookItems(java.lang.String categoryId,
-		java.lang.String[] isbns)
+	public static void addBookItems(long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
 	}
 
-	public static void deleteItem(java.lang.String itemId)
+	public static void deleteItem(long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		ShoppingItemServiceUtil.deleteItem(itemId);
 	}
 
-	public static JSONObject getItem(java.lang.String itemId)
+	public static JSONObject getItem(long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItem(itemId);

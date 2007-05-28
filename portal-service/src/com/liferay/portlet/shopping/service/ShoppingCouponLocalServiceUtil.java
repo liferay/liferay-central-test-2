@@ -67,26 +67,26 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long userId, long plid, java.lang.String couponId,
-		boolean autoCouponId, java.lang.String name,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
-		int endDateMinute, boolean neverExpire, boolean active,
-		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+		long userId, long plid, java.lang.String code, boolean autoCode,
+		java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
+		java.lang.String limitSkus, double minOrder, double discount,
+		java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-		return shoppingCouponLocalService.addCoupon(userId, plid, couponId,
-			autoCouponId, name, description, startDateMonth, startDateDay,
+		return shoppingCouponLocalService.addCoupon(userId, plid, code,
+			autoCode, name, description, startDateMonth, startDateDay,
 			startDateYear, startDateHour, startDateMinute, endDateMonth,
 			endDateDay, endDateYear, endDateHour, endDateMinute, neverExpire,
 			active, limitCategories, limitSkus, minOrder, discount, discountType);
 	}
 
-	public static void deleteCoupon(java.lang.String couponId)
+	public static void deleteCoupon(long couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
@@ -100,7 +100,7 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
-		java.lang.String couponId)
+		long couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
@@ -108,27 +108,36 @@ public class ShoppingCouponLocalServiceUtil {
 		return shoppingCouponLocalService.getCoupon(couponId);
 	}
 
-	public static java.util.List search(java.lang.String couponId, long plid,
-		long companyId, boolean active, java.lang.String discountType,
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
+		java.lang.String code)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		return shoppingCouponLocalService.getCoupon(code);
+	}
+
+	public static java.util.List search(long plid, long companyId,
+		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-		return shoppingCouponLocalService.search(couponId, plid, companyId,
-			active, discountType, andOperator, begin, end);
+		return shoppingCouponLocalService.search(plid, companyId, code, active,
+			discountType, andOperator, begin, end);
 	}
 
-	public static int searchCount(java.lang.String couponId, long groupId,
-		long companyId, boolean active, java.lang.String discountType,
+	public static int searchCount(long groupId, long companyId,
+		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator) throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-		return shoppingCouponLocalService.searchCount(couponId, groupId,
-			companyId, active, discountType, andOperator);
+		return shoppingCouponLocalService.searchCount(groupId, companyId, code,
+			active, discountType, andOperator);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		long userId, java.lang.String couponId, java.lang.String name,
+		long userId, long couponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,

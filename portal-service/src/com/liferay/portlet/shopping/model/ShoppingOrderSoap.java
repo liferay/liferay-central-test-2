@@ -55,13 +55,14 @@ public class ShoppingOrderSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setNumber(model.getNumber());
 		soapModel.setTax(model.getTax());
 		soapModel.setShipping(model.getShipping());
 		soapModel.setAltShipping(model.getAltShipping());
 		soapModel.setRequiresShipping(model.getRequiresShipping());
 		soapModel.setInsure(model.getInsure());
 		soapModel.setInsurance(model.getInsurance());
-		soapModel.setCouponIds(model.getCouponIds());
+		soapModel.setCouponCodes(model.getCouponCodes());
 		soapModel.setCouponDiscount(model.getCouponDiscount());
 		soapModel.setBillingFirstName(model.getBillingFirstName());
 		soapModel.setBillingLastName(model.getBillingLastName());
@@ -116,19 +117,19 @@ public class ShoppingOrderSoap implements Serializable {
 	public ShoppingOrderSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _orderId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setOrderId(pk);
 	}
 
-	public String getOrderId() {
+	public long getOrderId() {
 		return _orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(long orderId) {
 		_orderId = orderId;
 	}
 
@@ -178,6 +179,14 @@ public class ShoppingOrderSoap implements Serializable {
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getNumber() {
+		return _number;
+	}
+
+	public void setNumber(String number) {
+		_number = number;
 	}
 
 	public double getTax() {
@@ -236,12 +245,12 @@ public class ShoppingOrderSoap implements Serializable {
 		_insurance = insurance;
 	}
 
-	public String getCouponIds() {
-		return _couponIds;
+	public String getCouponCodes() {
+		return _couponCodes;
 	}
 
-	public void setCouponIds(String couponIds) {
-		_couponIds = couponIds;
+	public void setCouponCodes(String couponCodes) {
+		_couponCodes = couponCodes;
 	}
 
 	public double getCouponDiscount() {
@@ -544,20 +553,21 @@ public class ShoppingOrderSoap implements Serializable {
 		_sendShippingEmail = sendShippingEmail;
 	}
 
-	private String _orderId;
+	private long _orderId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _number;
 	private double _tax;
 	private double _shipping;
 	private String _altShipping;
 	private boolean _requiresShipping;
 	private boolean _insure;
 	private double _insurance;
-	private String _couponIds;
+	private String _couponCodes;
 	private double _couponDiscount;
 	private String _billingFirstName;
 	private String _billingLastName;

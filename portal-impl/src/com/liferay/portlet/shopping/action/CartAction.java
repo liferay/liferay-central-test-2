@@ -109,7 +109,7 @@ public void processAction(
 		ShoppingCart cart = ShoppingUtil.getCart(req);
 
 		if (cmd.equals(Constants.ADD)) {
-			String itemId = ParamUtil.getString(req, "itemId");
+			long itemId = ParamUtil.getLong(req, "itemId");
 
 			String fields = ParamUtil.getString(req, "fields");
 
@@ -130,20 +130,19 @@ public void processAction(
 		}
 		else {
 			String itemIds = ParamUtil.getString(req, "itemIds");
-			String couponIds = ParamUtil.getString(req, "couponIds");
+			String couponCodes = ParamUtil.getString(req, "couponCodes");
 			int altShipping = ParamUtil.getInteger(req, "altShipping");
 			boolean insure = ParamUtil.getBoolean(req, "insure");
 
 			cart.setItemIds(itemIds);
-			cart.setCouponIds(couponIds);
+			cart.setCouponCodes(couponCodes);
 			cart.setAltShipping(altShipping);
 			cart.setInsure(insure);
 		}
 
 		ShoppingCartLocalServiceUtil.updateCart(
-			cart.getUserId(), cart.getGroupId(), cart.getCartId(),
-			cart.getItemIds(), cart.getCouponIds(), cart.getAltShipping(),
-			cart.isInsure());
+			cart.getUserId(), cart.getGroupId(), cart.getItemIds(),
+			cart.getCouponCodes(), cart.getAltShipping(), cart.isInsure());
 
 		if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 			SessionMessages.add(req, "request_processed");

@@ -25,26 +25,26 @@ package com.liferay.portlet.shopping;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="CouponIdException.java.html"><b><i>View Source</i></b></a>
+ * <a href="CouponCodeException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CouponIdException extends PortalException {
+public class CouponCodeException extends PortalException {
 
-	public CouponIdException() {
+	public CouponCodeException() {
 		super();
 	}
 
-	public CouponIdException(String msg) {
+	public CouponCodeException(String msg) {
 		super(msg);
 	}
 
-	public CouponIdException(String msg, Throwable cause) {
+	public CouponCodeException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CouponIdException(Throwable cause) {
+	public CouponCodeException(Throwable cause) {
 		super(cause);
 	}
 

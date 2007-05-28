@@ -50,7 +50,7 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingCouponServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long plid, java.lang.String couponId, boolean autoCouponId,
+		long plid, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,
 		int startDateHour, int startDateMinute, int endDateMonth,
@@ -62,14 +62,14 @@ public class ShoppingCouponServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
-		return shoppingCouponService.addCoupon(plid, couponId, autoCouponId,
-			name, description, startDateMonth, startDateDay, startDateYear,
+		return shoppingCouponService.addCoupon(plid, code, autoCode, name,
+			description, startDateMonth, startDateDay, startDateYear,
 			startDateHour, startDateMinute, endDateMonth, endDateDay,
 			endDateYear, endDateHour, endDateMinute, neverExpire, active,
 			limitCategories, limitSkus, minOrder, discount, discountType);
 	}
 
-	public static void deleteCoupon(long plid, java.lang.String couponId)
+	public static void deleteCoupon(long plid, long couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
@@ -77,7 +77,7 @@ public class ShoppingCouponServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
-		long plid, java.lang.String couponId)
+		long plid, long couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
@@ -85,19 +85,19 @@ public class ShoppingCouponServiceUtil {
 		return shoppingCouponService.getCoupon(plid, couponId);
 	}
 
-	public static java.util.List search(java.lang.String couponId, long plid,
-		long companyId, boolean active, java.lang.String discountType,
+	public static java.util.List search(long plid, long companyId,
+		java.lang.String code, boolean active, java.lang.String discountType,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
-		return shoppingCouponService.search(couponId, plid, companyId, active,
+		return shoppingCouponService.search(plid, companyId, code, active,
 			discountType, andOperator, begin, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		long plid, java.lang.String couponId, java.lang.String name,
+		long plid, long couponId, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,

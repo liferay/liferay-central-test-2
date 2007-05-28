@@ -51,8 +51,10 @@ public class ItemMinQuantityComparator extends OrderByComparator {
 		ShoppingItem item1 = (ShoppingItem)obj1;
 		ShoppingItem item2 = (ShoppingItem)obj2;
 
-		int value =
-			item1.getCategoryId().compareTo(item2.getCategoryId());
+		Long categoryId1 = new Long(item1.getCategoryId());
+		Long categoryId2 = new Long(item2.getCategoryId());
+
+		int value = categoryId1.compareTo(categoryId2);
 
 		if (value == 0) {
 			if (item1.getMinQuantity() < item2.getMinQuantity()) {

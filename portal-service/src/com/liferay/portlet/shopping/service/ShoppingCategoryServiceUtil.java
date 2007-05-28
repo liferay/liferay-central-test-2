@@ -50,7 +50,7 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingCategoryServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -62,7 +62,7 @@ public class ShoppingCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long plid, java.lang.String parentCategoryId, java.lang.String name,
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -73,7 +73,7 @@ public class ShoppingCategoryServiceUtil {
 			name, description, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteCategory(java.lang.String categoryId)
+	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
@@ -81,7 +81,7 @@ public class ShoppingCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
-		java.lang.String categoryId)
+		long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
@@ -90,9 +90,8 @@ public class ShoppingCategoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
-		java.lang.String categoryId, java.lang.String parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();

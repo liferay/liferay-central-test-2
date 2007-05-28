@@ -41,7 +41,7 @@ public class OrderSearch extends SearchContainer {
 	static List headerNames = new ArrayList();
 
 	static {
-		headerNames.add("id");
+		headerNames.add("number");
 		headerNames.add("date");
 		headerNames.add("status");
 		headerNames.add("customer");
@@ -59,7 +59,7 @@ public class OrderSearch extends SearchContainer {
 			(OrderDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			OrderDisplayTerms.ORDER_ID, displayTerms.getOrderId());
+			OrderDisplayTerms.NUMBER, displayTerms.getNumber());
 		iteratorURL.setParameter(
 			OrderDisplayTerms.STATUS, displayTerms.getStatus());
 		iteratorURL.setParameter(

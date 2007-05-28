@@ -22,21 +22,22 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
 import com.liferay.portlet.shopping.CouponDescriptionException;
 import com.liferay.portlet.shopping.CouponEndDateException;
-import com.liferay.portlet.shopping.CouponIdException;
 import com.liferay.portlet.shopping.CouponLimitCategoriesException;
 import com.liferay.portlet.shopping.CouponLimitSKUsException;
 import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
-import com.liferay.portlet.shopping.DuplicateCouponIdException;
+import com.liferay.portlet.shopping.DuplicateCouponCodeException;
 import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.NoSuchItemException;
@@ -67,14 +68,13 @@ public class ShoppingCouponLocalServiceImpl
 	extends ShoppingCouponLocalServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
-			long userId, long plid, String couponId, boolean autoCouponId,
-			String name, String description, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int endDateMonth, int endDateDay,
-			int endDateYear, int endDateHour, int endDateMinute,
-			boolean neverExpire, boolean active, String limitCategories,
-			String limitSkus, double minOrder, double discount,
-			String discountType)
+			long userId, long plid, String code, boolean autoCode, String name,
+			String description, int startDateMonth, int startDateDay,
+			int startDateYear, int startDateHour, int startDateMinute,
+			int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
+			int endDateMinute, boolean neverExpire, boolean active,
+			String limitCategories, String limitSkus, double minOrder,
+			double discount, String discountType)
 		throws PortalException, SystemException {
 
 		// Coupon
@@ -82,10 +82,10 @@ public class ShoppingCouponLocalServiceImpl
 		User user = UserUtil.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
-		couponId = couponId.trim().toUpperCase();
+		code = code.trim().toUpperCase();
 
-		if (autoCouponId) {
-			couponId = getCouponId();
+		if (autoCode) {
+			code = getCode();
 		}
 
 		Date now = new Date();
@@ -109,8 +109,10 @@ public class ShoppingCouponLocalServiceImpl
 		}
 
 		validate(
-			user.getCompanyId(), groupId, couponId, autoCouponId, name,
-			description, limitCategories, limitSkus);
+			user.getCompanyId(), groupId, code, autoCode, name, description,
+			limitCategories, limitSkus);
+
+		long couponId = CounterLocalServiceUtil.increment();
 
 		ShoppingCoupon coupon = ShoppingCouponUtil.create(couponId);
 
@@ -120,6 +122,7 @@ public class ShoppingCouponLocalServiceImpl
 		coupon.setUserName(user.getFullName());
 		coupon.setCreateDate(now);
 		coupon.setModifiedDate(now);
+		coupon.setCode(code);
 		coupon.setName(name);
 		coupon.setDescription(description);
 		coupon.setStartDate(startDate);
@@ -136,10 +139,8 @@ public class ShoppingCouponLocalServiceImpl
 		return coupon;
 	}
 
-	public void deleteCoupon(String couponId)
+	public void deleteCoupon(long couponId)
 		throws PortalException, SystemException {
-
-		couponId = couponId.trim().toUpperCase();
 
 		ShoppingCouponUtil.remove(couponId);
 	}
@@ -148,37 +149,43 @@ public class ShoppingCouponLocalServiceImpl
 		ShoppingCouponUtil.removeByGroupId(groupId);
 	}
 
-	public ShoppingCoupon getCoupon(String couponId)
+	public ShoppingCoupon getCoupon(long couponId)
 		throws PortalException, SystemException {
-
-		couponId = couponId.trim().toUpperCase();
 
 		return ShoppingCouponUtil.findByPrimaryKey(couponId);
 	}
 
+	public ShoppingCoupon getCoupon(String code)
+		throws PortalException, SystemException {
+
+		code = code.trim().toUpperCase();
+
+		return ShoppingCouponUtil.findByCode(code);
+	}
+
 	public List search(
-			String couponId, long plid, long companyId, boolean active,
+			long plid, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
-		return ShoppingCouponFinder.findByC_G_C_A_DT(
-			couponId, groupId, companyId, active, discountType, andOperator,
+		return ShoppingCouponFinder.findByG_C_C_A_DT(
+			groupId, companyId, code, active, discountType, andOperator,
 			begin, end);
 	}
 
 	public int searchCount(
-			String couponId, long groupId, long companyId, boolean active,
+			long groupId, long companyId, String code, boolean active,
 			String discountType, boolean andOperator)
 		throws SystemException {
 
-		return ShoppingCouponFinder.countByC_G_C_A_DT(
-			couponId, groupId, companyId, active, discountType, andOperator);
+		return ShoppingCouponFinder.countByG_C_C_A_DT(
+			groupId, companyId, code, active, discountType, andOperator);
 	}
 
 	public ShoppingCoupon updateCoupon(
-			long userId, String couponId, String name, String description,
+			long userId, long couponId, String name, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
@@ -188,8 +195,6 @@ public class ShoppingCouponLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
-
-		couponId = couponId.trim().toUpperCase();
 
 		ShoppingCoupon coupon = ShoppingCouponUtil.findByPrimaryKey(couponId);
 
@@ -232,38 +237,38 @@ public class ShoppingCouponLocalServiceImpl
 		return coupon;
 	}
 
-	protected String getCouponId() throws SystemException {
-		String couponId =
+	protected String getCode() throws SystemException {
+		String code =
 			PwdGenerator.getPassword(PwdGenerator.KEY1 + PwdGenerator.KEY2, 8);
 
 		try {
-			ShoppingCouponUtil.findByPrimaryKey(couponId);
+			ShoppingCouponUtil.findByCode(code);
 
-			return getCouponId();
+			return getCode();
 		}
 		catch (NoSuchCouponException nsce) {
-			return couponId;
+			return code;
 		}
 	}
 
 	protected void validate(
-			long companyId, long groupId, String couponId, boolean autoCouponId,
+			long companyId, long groupId, String code, boolean autoCode,
 			String name, String description, String limitCategories,
 			String limitSkus)
 		throws PortalException, SystemException {
 
-		if (!autoCouponId) {
-			if ((Validator.isNull(couponId)) ||
-				(Validator.isNumber(couponId)) ||
-				(couponId.indexOf(StringPool.SPACE) != -1)) {
+		if (!autoCode) {
+			if ((Validator.isNull(code)) ||
+				(Validator.isNumber(code)) ||
+				(code.indexOf(StringPool.SPACE) != -1)) {
 
-				throw new CouponIdException();
+				throw new CouponCodeException();
 			}
 
 			try {
-				ShoppingCouponUtil.findByPrimaryKey(couponId);
+				ShoppingCouponUtil.findByCode(code);
 
-				throw new DuplicateCouponIdException();
+				throw new DuplicateCouponCodeException();
 			}
 			catch (NoSuchCouponException nsce) {
 			}
@@ -287,7 +292,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		// Category IDs
 
-		String[] categoryIds = StringUtil.split(limitCategories);
+		long[] categoryIds = StringUtil.split(limitCategories, 0L);
 
 		List invalidCategoryIds = new ArrayList();
 
@@ -297,11 +302,11 @@ public class ShoppingCouponLocalServiceImpl
 					ShoppingCategoryUtil.findByPrimaryKey(categoryIds[i]);
 
 				if (category.getGroupId() != groupId) {
-					invalidCategoryIds.add(categoryIds[i]);
+					invalidCategoryIds.add(new Long(categoryIds[i]));
 				}
 			}
 			catch (NoSuchCategoryException nsce) {
-				invalidCategoryIds.add(categoryIds[i]);
+				invalidCategoryIds.add(new Long(categoryIds[i]));
 			}
 		}
 

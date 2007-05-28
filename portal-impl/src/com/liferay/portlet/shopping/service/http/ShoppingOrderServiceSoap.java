@@ -78,12 +78,12 @@ import java.rmi.RemoteException;
  *
  */
 public class ShoppingOrderServiceSoap {
-	public static void completeOrder(long plid, java.lang.String orderId,
+	public static void completeOrder(long plid, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail) throws RemoteException {
 		try {
-			ShoppingOrderServiceUtil.completeOrder(plid, orderId, ppTxnId,
+			ShoppingOrderServiceUtil.completeOrder(plid, number, ppTxnId,
 				ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 		}
 		catch (Exception e) {
@@ -92,7 +92,7 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static void deleteOrder(long plid, java.lang.String orderId)
+	public static void deleteOrder(long plid, long orderId)
 		throws RemoteException {
 		try {
 			ShoppingOrderServiceUtil.deleteOrder(plid, orderId);
@@ -104,7 +104,7 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap getOrder(
-		long plid, java.lang.String orderId) throws RemoteException {
+		long plid, long orderId) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(plid,
 					orderId);
@@ -117,7 +117,7 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static void sendEmail(long plid, java.lang.String orderId,
+	public static void sendEmail(long plid, long orderId,
 		java.lang.String emailType) throws RemoteException {
 		try {
 			ShoppingOrderServiceUtil.sendEmail(plid, orderId, emailType);
@@ -129,7 +129,7 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
-		long plid, java.lang.String orderId, java.lang.String billingFirstName,
+		long plid, long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -164,7 +164,7 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
-		long plid, java.lang.String orderId, java.lang.String ppTxnId,
+		long plid, long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws RemoteException {

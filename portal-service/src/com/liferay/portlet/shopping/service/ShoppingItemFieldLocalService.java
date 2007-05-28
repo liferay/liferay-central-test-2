@@ -57,6 +57,6 @@ public interface ShoppingItemFieldLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List getItemFields(java.lang.String itemId)
+	public java.util.List getItemFields(long itemId)
 		throws com.liferay.portal.SystemException;
 }

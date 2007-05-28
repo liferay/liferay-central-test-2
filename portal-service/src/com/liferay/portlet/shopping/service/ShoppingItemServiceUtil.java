@@ -49,8 +49,7 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingItemServiceUtil {
-	public static void addBookItems(java.lang.String categoryId,
-		java.lang.String[] isbns)
+	public static void addBookItems(long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
@@ -58,17 +57,17 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		java.lang.String categoryId, java.lang.String sku,
-		java.lang.String name, java.lang.String description,
-		java.lang.String properties, java.lang.String fieldsQuantities,
-		boolean requiresShipping, int stockQuantity, boolean featured,
-		java.lang.Boolean sale, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean mediumImage, java.lang.String mediumImageURL,
-		java.io.File mediumFile, boolean largeImage,
-		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long categoryId, java.lang.String sku, java.lang.String name,
+		java.lang.String description, java.lang.String properties,
+		java.lang.String fieldsQuantities, boolean requiresShipping,
+		int stockQuantity, boolean featured, java.lang.Boolean sale,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean mediumImage,
+		java.lang.String mediumImageURL, java.io.File mediumFile,
+		boolean largeImage, java.lang.String largeImageURL,
+		java.io.File largeFile, java.util.List itemFields,
+		java.util.List itemPrices, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
@@ -81,17 +80,16 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		java.lang.String categoryId, java.lang.String sku,
-		java.lang.String name, java.lang.String description,
-		java.lang.String properties, java.lang.String fieldsQuantities,
-		boolean requiresShipping, int stockQuantity, boolean featured,
-		java.lang.Boolean sale, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean mediumImage, java.lang.String mediumImageURL,
-		java.io.File mediumFile, boolean largeImage,
-		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
-		java.lang.String[] communityPermissions,
+		long categoryId, java.lang.String sku, java.lang.String name,
+		java.lang.String description, java.lang.String properties,
+		java.lang.String fieldsQuantities, boolean requiresShipping,
+		int stockQuantity, boolean featured, java.lang.Boolean sale,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, boolean mediumImage,
+		java.lang.String mediumImageURL, java.io.File mediumFile,
+		boolean largeImage, java.lang.String largeImageURL,
+		java.io.File largeFile, java.util.List itemFields,
+		java.util.List itemPrices, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -104,7 +102,7 @@ public class ShoppingItemServiceUtil {
 			itemFields, itemPrices, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteItem(java.lang.String itemId)
+	public static void deleteItem(long itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
@@ -112,7 +110,7 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
-		java.lang.String itemId)
+		long itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
@@ -121,17 +119,16 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
-		java.lang.String itemId, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices)
+		long itemId, long categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();

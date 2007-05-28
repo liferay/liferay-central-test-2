@@ -79,12 +79,12 @@ public class ShoppingCartLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart getCart(
-		java.lang.String cartId)
+		long userId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 
-		return shoppingCartLocalService.getCart(cartId);
+		return shoppingCartLocalService.getCart(userId, groupId);
 	}
 
 	public static java.util.Map getItems(long groupId, java.lang.String itemIds)
@@ -95,14 +95,13 @@ public class ShoppingCartLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
-		long userId, long groupId, java.lang.String cartId,
-		java.lang.String itemIds, java.lang.String couponIds, int altShipping,
-		boolean insure)
+		long userId, long groupId, java.lang.String itemIds,
+		java.lang.String couponCodes, int altShipping, boolean insure)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 
-		return shoppingCartLocalService.updateCart(userId, groupId, cartId,
-			itemIds, couponIds, altShipping, insure);
+		return shoppingCartLocalService.updateCart(userId, groupId, itemIds,
+			couponCodes, altShipping, insure);
 	}
 }

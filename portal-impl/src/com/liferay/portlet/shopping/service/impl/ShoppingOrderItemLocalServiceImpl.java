@@ -38,7 +38,7 @@ import java.util.List;
 public class ShoppingOrderItemLocalServiceImpl
 	extends ShoppingOrderItemLocalServiceBaseImpl {
 
-	public List getOrderItems(String orderId) throws SystemException {
+	public List getOrderItems(long orderId) throws SystemException {
 		return ShoppingOrderItemUtil.findByOrderId(orderId);
 	}
 

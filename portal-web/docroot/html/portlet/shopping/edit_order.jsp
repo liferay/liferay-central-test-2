@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
 
-String orderId = BeanParamUtil.getString(order, request, "orderId");
+long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 WindowState windowState = renderRequest.getWindowState();
 %>
@@ -471,7 +471,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	int quantity = orderItem.getQuantity();
 
-	ResultRow row = new ResultRow(item, orderItem.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(item, orderItem.getOrderItemId(), i);
 
 	PortletURL rowURL = null;
 
@@ -481,7 +481,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/shopping/view_item");
-		rowURL.setParameter("itemId", item.getItemId());
+		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 	}
 
 	// SKU
@@ -561,7 +561,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	</tr>
 </c:if>
 
-<c:if test="<%= Validator.isNotNull(order.getCouponIds()) %>">
+<c:if test="<%= Validator.isNotNull(order.getCouponCodes()) %>">
 	<tr>
 		<td>
 			<liferay-ui:message key="coupon-discount" />:
@@ -569,8 +569,8 @@ for (int i = 0; itr.hasNext(); i++) {
 		<td>
 			<%= currencyFormat.format(order.getCouponDiscount()) %>
 
-			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= order.getCouponIds() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();">
-			(<%= order.getCouponIds() %>)
+			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="code" value="<%= order.getCouponCodes() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();">
+			(<%= order.getCouponCodes() %>)
 			</a>
 		</td>
 	</tr>
@@ -593,7 +593,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrder();" />
 	</c:if>
 
-	<input type="button" value="<liferay-ui:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');" />
+	<input type="button" value="<liferay-ui:message key="invoice" />" onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= String.valueOf(orderId) %>" /></portlet:renderURL>');" />
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendEmail('confirmation');" />
 
@@ -619,9 +619,9 @@ for (int i = 0; itr.hasNext(); i++) {
 		formName="fm2"
 		formAction="<%= discussionURL %>"
 		className="<%= ShoppingOrder.class.getName() %>"
-		classPK="<%= order.getPrimaryKey().toString() %>"
+		classPK="<%= String.valueOf(order.getOrderId()) %>"
 		userId="<%= order.getUserId() %>"
-		subject="<%= order.getOrderId() %>"
+		subject="<%= order.getNumber() %>"
 		redirect="<%= currentURL %>"
 	/>
 </c:if>

@@ -114,8 +114,8 @@ public class EditOrderAction extends PortletAction {
 	protected void deleteOrders(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String[] deleteOrderIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteOrderIds"));
+		long[] deleteOrderIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteOrderIds"), 0L);
 
 		for (int i = 0; i < deleteOrderIds.length; i++) {
 			ShoppingOrderServiceUtil.deleteOrder(
@@ -126,7 +126,7 @@ public class EditOrderAction extends PortletAction {
 	protected void sendEmail(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String orderId = ParamUtil.getString(req, "orderId");
+		long orderId = ParamUtil.getLong(req, "orderId");
 
 		String emailType = ParamUtil.getString(req, "emailType");
 
@@ -137,8 +137,7 @@ public class EditOrderAction extends PortletAction {
 	protected void updateOrder(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String orderId = ParamUtil.getString(req, "orderId");
-
+		String number = ParamUtil.getString(req, "number");
 		String ppTxnId = ParamUtil.getString(req, "ppTxnId");
 		String ppPaymentStatus = ShoppingUtil.getPpPaymentStatus(
 			ParamUtil.getString(req, "ppPaymentStatus"));
@@ -147,7 +146,7 @@ public class EditOrderAction extends PortletAction {
 		String ppPayerEmail = ParamUtil.getString(req, "ppPayerEmail");
 
 		ShoppingOrderServiceUtil.completeOrder(
-			layout.getPlid(), orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
+			layout.getPlid(), number, ppTxnId, ppPaymentStatus, ppPaymentGross,
 			ppReceiverEmail, ppPayerEmail);
 	}
 

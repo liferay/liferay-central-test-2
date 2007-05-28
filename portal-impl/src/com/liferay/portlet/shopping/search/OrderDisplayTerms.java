@@ -35,7 +35,7 @@ import javax.portlet.RenderRequest;
  */
 public class OrderDisplayTerms extends DisplayTerms {
 
-	public static final String ORDER_ID = "searchOrderId";
+	public static final String NUMBER = "number";
 
 	public static final String STATUS = "status";
 
@@ -48,15 +48,15 @@ public class OrderDisplayTerms extends DisplayTerms {
 	public OrderDisplayTerms(RenderRequest req) {
 		super(req);
 
-		orderId = ParamUtil.getString(req, ORDER_ID);
+		number = ParamUtil.getString(req, NUMBER);
 		status = ParamUtil.getString(req, STATUS);
 		firstName = ParamUtil.getString(req, FIRST_NAME);
 		lastName = ParamUtil.getString(req, LAST_NAME);
 		emailAddress = ParamUtil.getString(req, EMAIL_ADDRESS);
 	}
 
-	public String getOrderId() {
-		return orderId;
+	public String getNumber() {
+		return number;
 	}
 
 	public String getStatus() {
@@ -75,7 +75,7 @@ public class OrderDisplayTerms extends DisplayTerms {
 		return emailAddress;
 	}
 
-	protected String orderId;
+	protected String number;
 	protected String status;
 	protected String firstName;
 	protected String lastName;

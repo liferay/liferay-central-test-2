@@ -41,7 +41,7 @@ public class CouponSearch extends SearchContainer {
 	static List headerNames = new ArrayList();
 
 	static {
-		headerNames.add("id");
+		headerNames.add("code");
 		headerNames.add("description");
 		headerNames.add("start-date");
 		headerNames.add("expiration-date");
@@ -60,7 +60,7 @@ public class CouponSearch extends SearchContainer {
 			(CouponDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			CouponDisplayTerms.COUPON_ID, displayTerms.getCouponId());
+			CouponDisplayTerms.CODE, displayTerms.getCode());
 		iteratorURL.setParameter(
 			CouponDisplayTerms.DISCOUNT_TYPE, displayTerms.getDiscountType());
 		iteratorURL.setParameter(

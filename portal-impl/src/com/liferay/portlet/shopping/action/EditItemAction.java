@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.shopping.action;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -144,7 +143,7 @@ public class EditItemAction extends PortletAction {
 	}
 
 	protected void deleteItem(ActionRequest req) throws Exception {
-		String itemId = ParamUtil.getString(req, "itemId");
+		long itemId = ParamUtil.getLong(req, "itemId");
 
 		ShoppingItemServiceUtil.deleteItem(itemId);
 	}
@@ -153,9 +152,9 @@ public class EditItemAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 
-		String itemId = ParamUtil.getString(uploadReq, "itemId");
+		long itemId = ParamUtil.getLong(uploadReq, "itemId");
 
-		String categoryId = ParamUtil.getString(uploadReq, "categoryId");
+		long categoryId = ParamUtil.getLong(uploadReq, "categoryId");
 		String sku = ParamUtil.getString(uploadReq, "sku");
 		String name = ParamUtil.getString(uploadReq, "name");
 		String description = ParamUtil.getString(uploadReq, "description");
@@ -172,8 +171,7 @@ public class EditItemAction extends PortletAction {
 			String fieldDescription = ParamUtil.getString(
 				uploadReq, "fieldDescription" + i);
 
-			ShoppingItemField itemField = ShoppingItemFieldUtil.create(
-				StringPool.BLANK);
+			ShoppingItemField itemField = ShoppingItemFieldUtil.create(0);
 
 			itemField.setName(fieldName);
 			itemField.setValues(fieldValues);
@@ -213,8 +211,7 @@ public class EditItemAction extends PortletAction {
 				status = ShoppingItemPriceImpl.STATUS_INACTIVE;
 			}
 
-			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(
-				StringPool.BLANK);
+			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(0);
 
 			itemPrice.setMinQuantity(minQuantity);
 			itemPrice.setMaxQuantity(maxQuantity);
@@ -253,7 +250,7 @@ public class EditItemAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (Validator.isNull(itemId)) {
+		if (itemId <= 0) {
 
 			// Add item
 

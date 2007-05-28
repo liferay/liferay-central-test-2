@@ -47,7 +47,7 @@ public class ShoppingCartImpl
 	public ShoppingCartImpl() {
 	}
 
-	public void addItemId(String itemId, String fields) {
+	public void addItemId(long itemId, String fields) {
 		setItemIds(StringUtil.add(
 			getItemIds(), itemId + fields, StringPool.COMMA, true));
 	}
@@ -64,11 +64,11 @@ public class ShoppingCartImpl
 	public ShoppingCoupon getCoupon() throws PortalException, SystemException {
 		ShoppingCoupon coupon = null;
 
-		if (Validator.isNotNull(getCouponIds())) {
-			String couponId = StringUtil.split(getCouponIds())[0];
+		if (Validator.isNotNull(getCouponCodes())) {
+			String code = StringUtil.split(getCouponCodes())[0];
 
 			try {
-				coupon = ShoppingCouponLocalServiceUtil.getCoupon(couponId);
+				coupon = ShoppingCouponLocalServiceUtil.getCoupon(code);
 			}
 			catch (NoSuchCouponException nsce) {
 			}

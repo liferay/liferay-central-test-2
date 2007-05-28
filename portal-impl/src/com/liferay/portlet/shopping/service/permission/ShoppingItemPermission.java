@@ -39,7 +39,7 @@ import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 public class ShoppingItemPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String itemId, String actionId)
+			PermissionChecker permissionChecker, long itemId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, itemId, actionId)) {
@@ -58,7 +58,7 @@ public class ShoppingItemPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String itemId, String actionId)
+			PermissionChecker permissionChecker, long itemId, String actionId)
 		throws PortalException, SystemException {
 
 		ShoppingItem item = ShoppingItemLocalServiceUtil.getItem(itemId);
@@ -75,7 +75,7 @@ public class ShoppingItemPermission {
 
 		return permissionChecker.hasPermission(
 			category.getGroupId(), ShoppingItem.class.getName(),
-			item.getPrimaryKey().toString(), actionId);
+			item.getItemId(), actionId);
 	}
 
 }

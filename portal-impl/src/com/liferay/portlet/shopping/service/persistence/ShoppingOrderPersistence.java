@@ -29,11 +29,9 @@ package com.liferay.portlet.shopping.service.persistence;
  *
  */
 public interface ShoppingOrderPersistence {
-	public com.liferay.portlet.shopping.model.ShoppingOrder create(
-		java.lang.String orderId);
+	public com.liferay.portlet.shopping.model.ShoppingOrder create(long orderId);
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder remove(
-		java.lang.String orderId)
+	public com.liferay.portlet.shopping.model.ShoppingOrder remove(long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
@@ -50,12 +48,20 @@ public interface ShoppingOrderPersistence {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByPrimaryKey(
-		java.lang.String orderId)
+		long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPrimaryKey(
-		java.lang.String orderId) throws com.liferay.portal.SystemException;
+		long orderId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
+		java.lang.String number)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
+		java.lang.String number) throws com.liferay.portal.SystemException;
 
 	public java.util.List findByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
@@ -83,7 +89,7 @@ public interface ShoppingOrderPersistence {
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder[] findByG_U_PPPS_PrevAndNext(
-		java.lang.String orderId, long groupId, long userId,
+		long orderId, long groupId, long userId,
 		java.lang.String ppPaymentStatus,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
@@ -106,11 +112,18 @@ public interface ShoppingOrderPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByNumber(java.lang.String number)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderException;
+
 	public void removeByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByNumber(java.lang.String number)
+		throws com.liferay.portal.SystemException;
 
 	public int countByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)

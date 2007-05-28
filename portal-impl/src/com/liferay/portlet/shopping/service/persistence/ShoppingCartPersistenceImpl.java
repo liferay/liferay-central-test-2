@@ -54,7 +54,7 @@ import java.util.List;
  */
 public class ShoppingCartPersistenceImpl extends BasePersistence
 	implements ShoppingCartPersistence {
-	public ShoppingCart create(String cartId) {
+	public ShoppingCart create(long cartId) {
 		ShoppingCart shoppingCart = new ShoppingCartImpl();
 		shoppingCart.setNew(true);
 		shoppingCart.setPrimaryKey(cartId);
@@ -62,7 +62,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		return shoppingCart;
 	}
 
-	public ShoppingCart remove(String cartId)
+	public ShoppingCart remove(long cartId)
 		throws NoSuchCartException, SystemException {
 		Session session = null;
 
@@ -70,7 +70,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			ShoppingCart shoppingCart = (ShoppingCart)session.get(ShoppingCartImpl.class,
-					cartId);
+					new Long(cartId));
 
 			if (shoppingCart == null) {
 				if (_log.isWarnEnabled()) {
@@ -150,7 +150,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCart findByPrimaryKey(String cartId)
+	public ShoppingCart findByPrimaryKey(long cartId)
 		throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = fetchByPrimaryKey(cartId);
 
@@ -167,14 +167,15 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		return shoppingCart;
 	}
 
-	public ShoppingCart fetchByPrimaryKey(String cartId)
+	public ShoppingCart fetchByPrimaryKey(long cartId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (ShoppingCart)session.get(ShoppingCartImpl.class, cartId);
+			return (ShoppingCart)session.get(ShoppingCartImpl.class,
+				new Long(cartId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -288,9 +289,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCart[] findByGroupId_PrevAndNext(String cartId,
-		long groupId, OrderByComparator obc)
-		throws NoSuchCartException, SystemException {
+	public ShoppingCart[] findByGroupId_PrevAndNext(long cartId, long groupId,
+		OrderByComparator obc) throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = findByPrimaryKey(cartId);
 		int count = countByGroupId(groupId);
 		Session session = null;
@@ -436,7 +436,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingCart[] findByUserId_PrevAndNext(String cartId, long userId,
+	public ShoppingCart[] findByUserId_PrevAndNext(long cartId, long userId,
 		OrderByComparator obc) throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = findByPrimaryKey(cartId);
 		int count = countByUserId(userId);
@@ -470,6 +470,71 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			array[2] = (ShoppingCart)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public ShoppingCart findByG_U(long groupId, long userId)
+		throws NoSuchCartException, SystemException {
+		ShoppingCart shoppingCart = fetchByG_U(groupId, userId);
+
+		if (shoppingCart == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No ShoppingCart exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCartException(msg.toString());
+		}
+
+		return shoppingCart;
+	}
+
+	public ShoppingCart fetchByG_U(long groupId, long userId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setLong(queryPos++, userId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			ShoppingCart shoppingCart = (ShoppingCart)list.get(0);
+
+			return shoppingCart;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -573,6 +638,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByG_U(long groupId, long userId)
+		throws NoSuchCartException, SystemException {
+		ShoppingCart shoppingCart = findByG_U(groupId, userId);
+		remove(shoppingCart);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -637,6 +708,48 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
 			q.setLong(queryPos++, userId);
 
 			Iterator itr = q.list().iterator();

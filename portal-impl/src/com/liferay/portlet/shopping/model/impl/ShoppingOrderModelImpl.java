@@ -56,20 +56,21 @@ import java.util.Date;
 public class ShoppingOrderModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "ShoppingOrder";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "orderId", new Integer(Types.VARCHAR) },
+			{ "orderId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "number_", new Integer(Types.VARCHAR) },
 			{ "tax", new Integer(Types.DOUBLE) },
 			{ "shipping", new Integer(Types.DOUBLE) },
 			{ "altShipping", new Integer(Types.VARCHAR) },
 			{ "requiresShipping", new Integer(Types.BOOLEAN) },
 			{ "insure", new Integer(Types.BOOLEAN) },
 			{ "insurance", new Integer(Types.DOUBLE) },
-			{ "couponIds", new Integer(Types.VARCHAR) },
+			{ "couponCodes", new Integer(Types.VARCHAR) },
 			{ "couponDiscount", new Integer(Types.DOUBLE) },
 			{ "billingFirstName", new Integer(Types.VARCHAR) },
 			{ "billingLastName", new Integer(Types.VARCHAR) },
@@ -110,17 +111,17 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ORDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.orderId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.userName"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_NUMBER = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.number"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ALTSHIPPING = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.altShipping"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUPONIDS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.couponIds"),
+	public static boolean XSS_ALLOW_COUPONCODES = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.couponCodes"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_BILLINGFIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingFirstName"),
@@ -215,27 +216,20 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	public ShoppingOrderModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _orderId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setOrderId(pk);
 	}
 
-	public String getOrderId() {
-		return GetterUtil.getString(_orderId);
+	public long getOrderId() {
+		return _orderId;
 	}
 
-	public void setOrderId(String orderId) {
-		if (((orderId == null) && (_orderId != null)) ||
-				((orderId != null) && (_orderId == null)) ||
-				((orderId != null) && (_orderId != null) &&
-				!orderId.equals(_orderId))) {
-			if (!XSS_ALLOW_ORDERID) {
-				orderId = XSSUtil.strip(orderId);
-			}
-
+	public void setOrderId(long orderId) {
+		if (orderId != _orderId) {
 			_orderId = orderId;
 		}
 	}
@@ -310,6 +304,23 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((modifiedDate != null) && (_modifiedDate != null) &&
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
+		}
+	}
+
+	public String getNumber() {
+		return GetterUtil.getString(_number);
+	}
+
+	public void setNumber(String number) {
+		if (((number == null) && (_number != null)) ||
+				((number != null) && (_number == null)) ||
+				((number != null) && (_number != null) &&
+				!number.equals(_number))) {
+			if (!XSS_ALLOW_NUMBER) {
+				number = XSSUtil.strip(number);
+			}
+
+			_number = number;
 		}
 	}
 
@@ -388,20 +399,20 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getCouponIds() {
-		return GetterUtil.getString(_couponIds);
+	public String getCouponCodes() {
+		return GetterUtil.getString(_couponCodes);
 	}
 
-	public void setCouponIds(String couponIds) {
-		if (((couponIds == null) && (_couponIds != null)) ||
-				((couponIds != null) && (_couponIds == null)) ||
-				((couponIds != null) && (_couponIds != null) &&
-				!couponIds.equals(_couponIds))) {
-			if (!XSS_ALLOW_COUPONIDS) {
-				couponIds = XSSUtil.strip(couponIds);
+	public void setCouponCodes(String couponCodes) {
+		if (((couponCodes == null) && (_couponCodes != null)) ||
+				((couponCodes != null) && (_couponCodes == null)) ||
+				((couponCodes != null) && (_couponCodes != null) &&
+				!couponCodes.equals(_couponCodes))) {
+			if (!XSS_ALLOW_COUPONCODES) {
+				couponCodes = XSSUtil.strip(couponCodes);
 			}
 
-			_couponIds = couponIds;
+			_couponCodes = couponCodes;
 		}
 	}
 
@@ -993,13 +1004,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setNumber(getNumber());
 		clone.setTax(getTax());
 		clone.setShipping(getShipping());
 		clone.setAltShipping(getAltShipping());
 		clone.setRequiresShipping(getRequiresShipping());
 		clone.setInsure(getInsure());
 		clone.setInsurance(getInsurance());
-		clone.setCouponIds(getCouponIds());
+		clone.setCouponCodes(getCouponCodes());
 		clone.setCouponDiscount(getCouponDiscount());
 		clone.setBillingFirstName(getBillingFirstName());
 		clone.setBillingLastName(getBillingLastName());
@@ -1072,9 +1084,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = shoppingOrder.getPrimaryKey();
+		long pk = shoppingOrder.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -1083,23 +1095,24 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _orderId;
+	private long _orderId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _number;
 	private double _tax;
 	private double _shipping;
 	private String _altShipping;
 	private boolean _requiresShipping;
 	private boolean _insure;
 	private double _insurance;
-	private String _couponIds;
+	private String _couponCodes;
 	private double _couponDiscount;
 	private String _billingFirstName;
 	private String _billingLastName;

@@ -27,15 +27,15 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
 import com.liferay.portlet.shopping.CouponDescriptionException;
 import com.liferay.portlet.shopping.CouponEndDateException;
-import com.liferay.portlet.shopping.CouponIdException;
 import com.liferay.portlet.shopping.CouponLimitCategoriesException;
 import com.liferay.portlet.shopping.CouponLimitSKUsException;
 import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
-import com.liferay.portlet.shopping.DuplicateCouponIdException;
+import com.liferay.portlet.shopping.DuplicateCouponCodeException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -87,15 +87,15 @@ public class EditCouponAction extends PortletAction {
 
 				setForward(req, "portlet.shopping.error");
 			}
-			else if (e instanceof CouponDateException ||
+			else if (e instanceof CouponCodeException ||
+					 e instanceof CouponDateException ||
 					 e instanceof CouponDescriptionException ||
 					 e instanceof CouponEndDateException ||
-					 e instanceof CouponIdException ||
 					 e instanceof CouponLimitCategoriesException ||
 					 e instanceof CouponLimitSKUsException ||
 					 e instanceof CouponNameException ||
 					 e instanceof CouponStartDateException ||
-					 e instanceof DuplicateCouponIdException) {
+					 e instanceof DuplicateCouponCodeException) {
 
 				if (e instanceof CouponLimitCategoriesException) {
 					CouponLimitCategoriesException clce =
@@ -149,8 +149,8 @@ public class EditCouponAction extends PortletAction {
 	protected void deleteCoupons(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String[] deleteCouponIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteCouponIds"));
+		long[] deleteCouponIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteCouponIds"), 0L);
 
 		for (int i = 0; i < deleteCouponIds.length; i++) {
 			ShoppingCouponServiceUtil.deleteCoupon(
@@ -159,12 +159,12 @@ public class EditCouponAction extends PortletAction {
 	}
 
 	protected void updateCoupon(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String couponId = ParamUtil.getString(req, "couponId");
-		boolean autoCouponId = ParamUtil.getBoolean(req, "autoCouponId");
+		long couponId = ParamUtil.getLong(req, "couponId");
+
+		String code = ParamUtil.getString(req, "code");
+		boolean autoCode = ParamUtil.getBoolean(req, "autoCode");
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
@@ -199,12 +199,12 @@ public class EditCouponAction extends PortletAction {
 		double discount = ParamUtil.getDouble(req, "discount");
 		String discountType = ParamUtil.getString(req, "discountType");
 
-		if (cmd.equals(Constants.ADD)) {
+		if (couponId <= 0) {
 
 			// Add coupon
 
 			ShoppingCouponServiceUtil.addCoupon(
-				layout.getPlid(), couponId, autoCouponId, name, description,
+				layout.getPlid(), code, autoCode, name, description,
 				startDateMonth, startDateDay, startDateYear, startDateHour,
 				startDateMinute, endDateMonth, endDateDay, endDateYear,
 				endDateHour, endDateMinute, neverExpire, active,

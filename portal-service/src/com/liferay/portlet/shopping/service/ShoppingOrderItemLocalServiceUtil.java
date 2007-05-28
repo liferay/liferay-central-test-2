@@ -66,7 +66,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 			begin, end);
 	}
 
-	public static java.util.List getOrderItems(java.lang.String orderId)
+	public static java.util.List getOrderItems(long orderId)
 		throws com.liferay.portal.SystemException {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 

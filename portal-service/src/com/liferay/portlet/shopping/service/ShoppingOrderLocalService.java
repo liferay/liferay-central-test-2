@@ -57,14 +57,14 @@ public interface ShoppingOrderLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void completeOrder(java.lang.String orderId,
+	public void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail, boolean updateInventory)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteOrder(java.lang.String orderId)
+	public void deleteOrder(long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -79,7 +79,12 @@ public interface ShoppingOrderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
-		java.lang.String orderId)
+		long orderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
+		java.lang.String number)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -88,8 +93,8 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(java.lang.String orderId, long groupId,
-		long companyId, long userId, java.lang.String billingFirstName,
+	public java.util.List search(long groupId, long companyId, long userId,
+		java.lang.String number, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
@@ -98,8 +103,8 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public int searchCount(java.lang.String orderId, long groupId,
-		long companyId, long userId, java.lang.String billingFirstName,
+	public int searchCount(long groupId, long companyId, long userId,
+		java.lang.String number, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
@@ -107,7 +112,7 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void sendEmail(java.lang.String orderId, java.lang.String emailType)
+	public void sendEmail(long orderId, java.lang.String emailType)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -136,7 +141,7 @@ public interface ShoppingOrderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String billingFirstName,
+		long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -154,7 +159,7 @@ public interface ShoppingOrderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String ppTxnId,
+		long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.SystemException, 

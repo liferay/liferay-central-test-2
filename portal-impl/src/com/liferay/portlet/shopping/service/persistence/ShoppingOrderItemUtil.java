@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ShoppingOrderItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem create(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK) {
-		return getPersistence().create(shoppingOrderItemPK);
+		long orderItemId) {
+		return getPersistence().create(orderItemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
+		long orderItemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(shoppingOrderItemPK));
+			listener.onBeforeRemove(findByPrimaryKey(orderItemId));
 		}
 
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem = getPersistence()
-																					 .remove(shoppingOrderItemPK);
+																					 .remove(orderItemId);
 
 		if (listener != null) {
 			listener.onAfterRemove(shoppingOrderItem);
@@ -141,58 +141,54 @@ public class ShoppingOrderItemUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
+		long orderItemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderItemException {
-		return getPersistence().findByPrimaryKey(shoppingOrderItemPK);
+		return getPersistence().findByPrimaryKey(orderItemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem fetchByPrimaryKey(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(shoppingOrderItemPK);
+		long orderItemId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(orderItemId);
 	}
 
-	public static java.util.List findByOrderId(java.lang.String orderId)
+	public static java.util.List findByOrderId(long orderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId);
 	}
 
-	public static java.util.List findByOrderId(java.lang.String orderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByOrderId(long orderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId, begin, end);
 	}
 
-	public static java.util.List findByOrderId(java.lang.String orderId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByOrderId(long orderId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_First(
-		java.lang.String orderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long orderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		return getPersistence().findByOrderId_First(orderId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_Last(
-		java.lang.String orderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long orderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		return getPersistence().findByOrderId_Last(orderId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
-		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK,
-		java.lang.String orderId,
+		long orderItemId, long orderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderItemException {
-		return getPersistence().findByOrderId_PrevAndNext(shoppingOrderItemPK,
-			orderId, obc);
+		return getPersistence().findByOrderId_PrevAndNext(orderItemId, orderId,
+			obc);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -224,7 +220,7 @@ public class ShoppingOrderItemUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByOrderId(java.lang.String orderId)
+	public static void removeByOrderId(long orderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByOrderId(orderId);
 	}
@@ -233,7 +229,7 @@ public class ShoppingOrderItemUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByOrderId(java.lang.String orderId)
+	public static int countByOrderId(long orderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByOrderId(orderId);
 	}

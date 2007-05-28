@@ -31,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="ShoppingCategoryPermission.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,7 @@ import com.liferay.util.Validator;
 public class ShoppingCategoryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, String categoryId,
+			PermissionChecker permissionChecker, long plid, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -52,7 +51,7 @@ public class ShoppingCategoryPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String categoryId,
+			PermissionChecker permissionChecker, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -72,13 +71,11 @@ public class ShoppingCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, String categoryId,
+			PermissionChecker permissionChecker, long plid, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (Validator.equals(
-				categoryId, ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
-
+		if (categoryId == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.SHOPPING, actionId);
 		}
@@ -88,7 +85,7 @@ public class ShoppingCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String categoryId,
+			PermissionChecker permissionChecker, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -105,7 +102,7 @@ public class ShoppingCategoryPermission {
 
 		return permissionChecker.hasPermission(
 			category.getGroupId(), ShoppingCategory.class.getName(),
-			category.getPrimaryKey().toString(), actionId);
+			category.getCategoryId(), actionId);
 	}
 
 }

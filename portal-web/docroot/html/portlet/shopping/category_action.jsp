@@ -34,7 +34,7 @@ ShoppingCategory category = (ShoppingCategory)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/shopping/edit_category" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
+		<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ ShoppingCategory category = (ShoppingCategory)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= ShoppingCategory.class.getName() %>"
 		modelResourceDescription="<%= category.getName() %>"
-		resourcePrimKey="<%= category.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ ShoppingCategory category = (ShoppingCategory)row.getObject();
 		<portlet:param name="struts_action" value="/shopping/edit_category" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
+		<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

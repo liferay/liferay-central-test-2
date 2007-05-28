@@ -25,7 +25,7 @@
 <%
 ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPPING_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 List categoryIds = new ArrayList();
 
@@ -37,7 +37,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/shopping/view");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("categoryId", categoryId);
+portletURL.setParameter("categoryId", String.valueOf(categoryId));
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
@@ -73,14 +73,14 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	ShoppingCategory curCategory = (ShoppingCategory)results.get(i);
 
-	ResultRow row = new ResultRow(curCategory, curCategory.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view");
-	rowURL.setParameter("categoryId", curCategory.getCategoryId());
+	rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
 	// Name and description
 
@@ -101,7 +101,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subcategoryIds = new ArrayList();
 
-	subcategoryIds.add(curCategory.getCategoryId());
+	subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
 	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
 
@@ -128,7 +128,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	<tr>
 		<c:if test="<%= showAddCategoryButton %>">
 			<td>
-				<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
 			</td>
 			<td style="padding-left: 30px;"></td>
 		</c:if>
@@ -220,14 +220,14 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	for (int i = 0; i < results.size(); i++) {
 		ShoppingItem item = (ShoppingItem)results.get(i);
 
-		ResultRow row = new ResultRow(item, item.getPrimaryKey().toString(), i);
+		ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/shopping/view_item");
-		rowURL.setParameter("itemId", item.getItemId());
+		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
 		// SKU and small image
 
@@ -325,9 +325,9 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 		<tr>
 			<c:if test="<%= showAddItemButton %>">
 				<td>
-					<input type="button" value="<liferay-ui:message key="add-item" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+					<input type="button" value="<liferay-ui:message key="add-item" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
 
-					<input type="button" value="<liferay-ui:message key="add-books" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>';" />
+					<input type="button" value="<liferay-ui:message key="add-books" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
 				</td>
 				<td style="padding-left: 30px;"></td>
 			</c:if>

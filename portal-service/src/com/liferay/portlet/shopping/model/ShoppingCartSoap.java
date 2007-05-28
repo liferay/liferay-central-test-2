@@ -56,7 +56,7 @@ public class ShoppingCartSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setItemIds(model.getItemIds());
-		soapModel.setCouponIds(model.getCouponIds());
+		soapModel.setCouponCodes(model.getCouponCodes());
 		soapModel.setAltShipping(model.getAltShipping());
 		soapModel.setInsure(model.getInsure());
 
@@ -77,19 +77,19 @@ public class ShoppingCartSoap implements Serializable {
 	public ShoppingCartSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _cartId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCartId(pk);
 	}
 
-	public String getCartId() {
+	public long getCartId() {
 		return _cartId;
 	}
 
-	public void setCartId(String cartId) {
+	public void setCartId(long cartId) {
 		_cartId = cartId;
 	}
 
@@ -149,12 +149,12 @@ public class ShoppingCartSoap implements Serializable {
 		_itemIds = itemIds;
 	}
 
-	public String getCouponIds() {
-		return _couponIds;
+	public String getCouponCodes() {
+		return _couponCodes;
 	}
 
-	public void setCouponIds(String couponIds) {
-		_couponIds = couponIds;
+	public void setCouponCodes(String couponCodes) {
+		_couponCodes = couponCodes;
 	}
 
 	public int getAltShipping() {
@@ -177,7 +177,7 @@ public class ShoppingCartSoap implements Serializable {
 		_insure = insure;
 	}
 
-	private String _cartId;
+	private long _cartId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -185,7 +185,7 @@ public class ShoppingCartSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _itemIds;
-	private String _couponIds;
+	private String _couponCodes;
 	private int _altShipping;
 	private boolean _insure;
 }

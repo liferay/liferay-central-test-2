@@ -78,8 +78,8 @@ import java.rmi.RemoteException;
  *
  */
 public class ShoppingItemServiceSoap {
-	public static void addBookItems(java.lang.String categoryId,
-		java.lang.String[] isbns) throws RemoteException {
+	public static void addBookItems(long categoryId, java.lang.String[] isbns)
+		throws RemoteException {
 		try {
 			ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
 		}
@@ -89,8 +89,7 @@ public class ShoppingItemServiceSoap {
 		}
 	}
 
-	public static void deleteItem(java.lang.String itemId)
-		throws RemoteException {
+	public static void deleteItem(long itemId) throws RemoteException {
 		try {
 			ShoppingItemServiceUtil.deleteItem(itemId);
 		}
@@ -101,7 +100,7 @@ public class ShoppingItemServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemSoap getItem(
-		java.lang.String itemId) throws RemoteException {
+		long itemId) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItem(itemId);
 

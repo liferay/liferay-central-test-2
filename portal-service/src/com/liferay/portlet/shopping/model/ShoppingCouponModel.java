@@ -47,13 +47,13 @@ import java.util.Date;
  *
  */
 public interface ShoppingCouponModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getCouponId();
+	public long getCouponId();
 
-	public void setCouponId(String couponId);
+	public void setCouponId(long couponId);
 
 	public long getGroupId();
 
@@ -78,6 +78,10 @@ public interface ShoppingCouponModel extends BaseModel {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
+
+	public String getCode();
+
+	public void setCode(String code);
 
 	public String getName();
 

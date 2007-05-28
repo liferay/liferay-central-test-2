@@ -57,13 +57,13 @@ public interface ShoppingItemLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void addBookItems(long userId, java.lang.String categoryId,
+	public void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long userId, java.lang.String categoryId, java.lang.String sku,
+		long userId, long categoryId, java.lang.String sku,
 		java.lang.String name, java.lang.String description,
 		java.lang.String properties, java.lang.String fieldsQuantities,
 		boolean requiresShipping, int stockQuantity, boolean featured,
@@ -78,7 +78,7 @@ public interface ShoppingItemLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long userId, java.lang.String categoryId, java.lang.String sku,
+		long userId, long categoryId, java.lang.String sku,
 		java.lang.String name, java.lang.String description,
 		java.lang.String properties, java.lang.String fieldsQuantities,
 		boolean requiresShipping, int stockQuantity, boolean featured,
@@ -94,7 +94,7 @@ public interface ShoppingItemLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long userId, java.lang.String categoryId, java.lang.String sku,
+		long userId, long categoryId, java.lang.String sku,
 		java.lang.String name, java.lang.String description,
 		java.lang.String properties, java.lang.String fieldsQuantities,
 		boolean requiresShipping, int stockQuantity, boolean featured,
@@ -111,8 +111,8 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addItemResources(java.lang.String itemId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public void addItemResources(long itemId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -123,7 +123,7 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addItemResources(java.lang.String itemId,
+	public void addItemResources(long itemId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -137,7 +137,7 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteItem(java.lang.String itemId)
+	public void deleteItem(long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -145,19 +145,17 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteItems(java.lang.String categoryId)
+	public void deleteItems(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public int getCategoriesItemsCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFeaturedItems(long groupId,
-		java.lang.String categoryId, int numOfItems)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getFeaturedItems(long groupId, long categoryId,
+		int numOfItems) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.shopping.model.ShoppingItem getItem(
-		java.lang.String itemId)
+	public com.liferay.portlet.shopping.model.ShoppingItem getItem(long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -166,45 +164,42 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getItems(java.lang.String categoryId)
+	public java.util.List getItems(long categoryId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getItems(java.lang.String categoryId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List getItems(long categoryId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
-		java.lang.String itemId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public int getItemsCount(java.lang.String categoryId)
+	public int getItemsCount(long categoryId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getSaleItems(long groupId,
-		java.lang.String categoryId, int numOfItems)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getSaleItems(long groupId, long categoryId,
+		int numOfItems) throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long groupId, java.lang.String[] categoryIds,
+	public java.util.List search(long groupId, long[] categoryIds,
 		java.lang.String keywords, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(long groupId, java.lang.String[] categoryIds,
+	public int searchCount(long groupId, long[] categoryIds,
 		java.lang.String keywords) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
-		long userId, java.lang.String itemId, java.lang.String categoryId,
-		java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices)
+		long userId, long itemId, long categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

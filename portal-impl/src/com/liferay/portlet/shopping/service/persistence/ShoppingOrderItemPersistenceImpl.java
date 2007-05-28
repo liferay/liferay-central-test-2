@@ -54,15 +54,15 @@ import java.util.List;
  */
 public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 	implements ShoppingOrderItemPersistence {
-	public ShoppingOrderItem create(ShoppingOrderItemPK shoppingOrderItemPK) {
+	public ShoppingOrderItem create(long orderItemId) {
 		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
 		shoppingOrderItem.setNew(true);
-		shoppingOrderItem.setPrimaryKey(shoppingOrderItemPK);
+		shoppingOrderItem.setPrimaryKey(orderItemId);
 
 		return shoppingOrderItem;
 	}
 
-	public ShoppingOrderItem remove(ShoppingOrderItemPK shoppingOrderItemPK)
+	public ShoppingOrderItem remove(long orderItemId)
 		throws NoSuchOrderItemException, SystemException {
 		Session session = null;
 
@@ -70,18 +70,18 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)session.get(ShoppingOrderItemImpl.class,
-					shoppingOrderItemPK);
+					new Long(orderItemId));
 
 			if (shoppingOrderItem == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No ShoppingOrderItem exists with the primary key " +
-						shoppingOrderItemPK);
+						orderItemId);
 				}
 
 				throw new NoSuchOrderItemException(
 					"No ShoppingOrderItem exists with the primary key " +
-					shoppingOrderItemPK);
+					orderItemId);
 			}
 
 			return remove(shoppingOrderItem);
@@ -152,34 +152,33 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingOrderItem findByPrimaryKey(
-		ShoppingOrderItemPK shoppingOrderItemPK)
+	public ShoppingOrderItem findByPrimaryKey(long orderItemId)
 		throws NoSuchOrderItemException, SystemException {
-		ShoppingOrderItem shoppingOrderItem = fetchByPrimaryKey(shoppingOrderItemPK);
+		ShoppingOrderItem shoppingOrderItem = fetchByPrimaryKey(orderItemId);
 
 		if (shoppingOrderItem == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingOrderItem exists with the primary key " +
-					shoppingOrderItemPK);
+					orderItemId);
 			}
 
 			throw new NoSuchOrderItemException(
 				"No ShoppingOrderItem exists with the primary key " +
-				shoppingOrderItemPK);
+				orderItemId);
 		}
 
 		return shoppingOrderItem;
 	}
 
-	public ShoppingOrderItem fetchByPrimaryKey(
-		ShoppingOrderItemPK shoppingOrderItemPK) throws SystemException {
+	public ShoppingOrderItem fetchByPrimaryKey(long orderItemId)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			return (ShoppingOrderItem)session.get(ShoppingOrderItemImpl.class,
-				shoppingOrderItemPK);
+				new Long(orderItemId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -189,7 +188,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByOrderId(String orderId) throws SystemException {
+	public List findByOrderId(long orderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -198,14 +197,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
-
-			if (orderId == null) {
-				query.append("orderId IS NULL");
-			}
-			else {
-				query.append("orderId = ?");
-			}
-
+			query.append("orderId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC").append(", ");
@@ -215,10 +207,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (orderId != null) {
-				q.setString(queryPos++, orderId);
-			}
+			q.setLong(queryPos++, orderId);
 
 			return q.list();
 		}
@@ -230,12 +219,12 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByOrderId(String orderId, int begin, int end)
+	public List findByOrderId(long orderId, int begin, int end)
 		throws SystemException {
 		return findByOrderId(orderId, begin, end, null);
 	}
 
-	public List findByOrderId(String orderId, int begin, int end,
+	public List findByOrderId(long orderId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -245,14 +234,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
-
-			if (orderId == null) {
-				query.append("orderId IS NULL");
-			}
-			else {
-				query.append("orderId = ?");
-			}
-
+			query.append("orderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -269,10 +251,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (orderId != null) {
-				q.setString(queryPos++, orderId);
-			}
+			q.setLong(queryPos++, orderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -284,7 +263,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingOrderItem findByOrderId_First(String orderId,
+	public ShoppingOrderItem findByOrderId_First(long orderId,
 		OrderByComparator obc) throws NoSuchOrderItemException, SystemException {
 		List list = findByOrderId(orderId, 0, 1, obc);
 
@@ -302,7 +281,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingOrderItem findByOrderId_Last(String orderId,
+	public ShoppingOrderItem findByOrderId_Last(long orderId,
 		OrderByComparator obc) throws NoSuchOrderItemException, SystemException {
 		int count = countByOrderId(orderId);
 		List list = findByOrderId(orderId, count - 1, count, obc);
@@ -321,10 +300,10 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public ShoppingOrderItem[] findByOrderId_PrevAndNext(
-		ShoppingOrderItemPK shoppingOrderItemPK, String orderId,
-		OrderByComparator obc) throws NoSuchOrderItemException, SystemException {
-		ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(shoppingOrderItemPK);
+	public ShoppingOrderItem[] findByOrderId_PrevAndNext(long orderItemId,
+		long orderId, OrderByComparator obc)
+		throws NoSuchOrderItemException, SystemException {
+		ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(orderItemId);
 		int count = countByOrderId(orderId);
 		Session session = null;
 
@@ -334,14 +313,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
-
-			if (orderId == null) {
-				query.append("orderId IS NULL");
-			}
-			else {
-				query.append("orderId = ?");
-			}
-
+			query.append("orderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -358,10 +330,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (orderId != null) {
-				q.setString(queryPos++, orderId);
-			}
+			q.setLong(queryPos++, orderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingOrderItem);
@@ -461,7 +430,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByOrderId(String orderId) throws SystemException {
+	public void removeByOrderId(long orderId) throws SystemException {
 		Iterator itr = findByOrderId(orderId).iterator();
 
 		while (itr.hasNext()) {
@@ -478,7 +447,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByOrderId(String orderId) throws SystemException {
+	public int countByOrderId(long orderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -488,24 +457,14 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem WHERE ");
-
-			if (orderId == null) {
-				query.append("orderId IS NULL");
-			}
-			else {
-				query.append("orderId = ?");
-			}
-
+			query.append("orderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (orderId != null) {
-				q.setString(queryPos++, orderId);
-			}
+			q.setLong(queryPos++, orderId);
 
 			Iterator itr = q.list().iterator();
 

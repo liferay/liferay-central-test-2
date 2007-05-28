@@ -45,17 +45,17 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface ShoppingItemFieldModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getItemFieldId();
+	public long getItemFieldId();
 
-	public void setItemFieldId(String itemFieldId);
+	public void setItemFieldId(long itemFieldId);
 
-	public String getItemId();
+	public long getItemId();
 
-	public void setItemId(String itemId);
+	public void setItemId(long itemId);
 
 	public String getName();
 

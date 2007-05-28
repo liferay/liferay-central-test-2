@@ -99,19 +99,19 @@ public class ShoppingItemSoap implements Serializable {
 	public ShoppingItemSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _itemId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setItemId(pk);
 	}
 
-	public String getItemId() {
+	public long getItemId() {
 		return _itemId;
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(long itemId) {
 		_itemId = itemId;
 	}
 
@@ -155,11 +155,11 @@ public class ShoppingItemSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getCategoryId() {
+	public long getCategoryId() {
 		return _categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
@@ -407,13 +407,13 @@ public class ShoppingItemSoap implements Serializable {
 		_largeImageURL = largeImageURL;
 	}
 
-	private String _itemId;
+	private long _itemId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _categoryId;
+	private long _categoryId;
 	private String _sku;
 	private String _name;
 	private String _description;

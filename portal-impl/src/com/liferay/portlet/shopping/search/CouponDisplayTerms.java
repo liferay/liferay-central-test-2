@@ -35,7 +35,7 @@ import javax.portlet.RenderRequest;
  */
 public class CouponDisplayTerms extends DisplayTerms {
 
-	public static final String COUPON_ID = "searchCouponId";
+	public static final String CODE = "code";
 
 	public static final String DISCOUNT_TYPE = "discountType";
 
@@ -44,13 +44,13 @@ public class CouponDisplayTerms extends DisplayTerms {
 	public CouponDisplayTerms(RenderRequest req) {
 		super(req);
 
-		couponId = ParamUtil.getString(req, COUPON_ID);
+		code = ParamUtil.getString(req, CODE);
 		discountType = ParamUtil.getString(req, DISCOUNT_TYPE);
 		active = ParamUtil.getBoolean(req, ACTIVE, true);
 	}
 
-	public String getCouponId() {
-		return couponId;
+	public String getCode() {
+		return code;
 	}
 
 	public String getDiscountType() {
@@ -61,7 +61,7 @@ public class CouponDisplayTerms extends DisplayTerms {
 		return active;
 	}
 
-	protected String couponId;
+	protected String code;
 	protected String discountType;
 	protected boolean active;
 

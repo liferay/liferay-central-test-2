@@ -61,7 +61,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 	function <portlet:namespace />emptyCart() {
 		document.<portlet:namespace />fm.<portlet:namespace />itemIds.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />couponIds.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />couponCodes.value = "";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -112,7 +112,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 	<%
 	CartMinQuantityException cmqe = (CartMinQuantityException)errorException;
 
-	String[] badItemIds = StringUtil.split(cmqe.getMessage());
+	long[] badItemIds = StringUtil.split(cmqe.getMessage(), 0L);
 	%>
 
 	<liferay-ui:message key="all-quantities-must-be-greater-than-the-minimum-quantity-of-the-item" /><br />
@@ -184,14 +184,14 @@ for (int i = 0; itr.hasNext(); i++) {
 		count = new Integer(ParamUtil.getInteger(request, "item_" + item.getItemId() + "_" + i + "_count"));
 	}
 
-	ResultRow row = new ResultRow(item, item.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(item, item.getItemId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
-	rowURL.setParameter("itemId", item.getItemId());
+	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
 	// SKU and small image
 
@@ -505,10 +505,10 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 		<liferay-ui:message key="coupon-code" />:
 	</td>
 	<td>
-		<input name="<portlet:namespace />couponIds" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponIds() %>" />
+		<input name="<portlet:namespace />couponCodes" size="30" style="text-transform: uppercase;" type="text" value="<%= cart.getCouponCodes() %>" />
 
 		<c:if test="<%= coupon != null %>">
-			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= coupon.getCouponId() %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<liferay-ui:message key="description" />)</a>
+			<a href="javascript: var viewCouponWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/view_coupon" /><portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" /></portlet:renderURL>', 'viewCoupon', 'directories=no,height=200,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=280'); void(''); viewCouponWindow.focus();" style="font-size: xx-small;">(<liferay-ui:message key="description" />)</a>
 		</c:if>
 	</td>
 </tr>

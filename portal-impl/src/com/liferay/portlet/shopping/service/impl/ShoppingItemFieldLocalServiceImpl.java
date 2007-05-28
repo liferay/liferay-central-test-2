@@ -38,7 +38,7 @@ import java.util.List;
 public class ShoppingItemFieldLocalServiceImpl
 	extends ShoppingItemFieldLocalServiceBaseImpl {
 
-	public List getItemFields(String itemId) throws SystemException {
+	public List getItemFields(long itemId) throws SystemException {
 		return ShoppingItemFieldUtil.findByItemId(itemId);
 	}
 

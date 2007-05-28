@@ -24,8 +24,6 @@ package com.liferay.portlet.shopping.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
-
 import java.util.Date;
 
 /**
@@ -49,13 +47,17 @@ import java.util.Date;
  *
  */
 public interface ShoppingOrderItemModel extends BaseModel {
-	public ShoppingOrderItemPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(ShoppingOrderItemPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getOrderId();
+	public long getOrderItemId();
 
-	public void setOrderId(String orderId);
+	public void setOrderItemId(long orderItemId);
+
+	public long getOrderId();
+
+	public void setOrderId(long orderId);
 
 	public String getItemId();
 

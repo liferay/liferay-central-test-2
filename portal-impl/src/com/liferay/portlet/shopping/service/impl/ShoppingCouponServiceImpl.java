@@ -44,7 +44,7 @@ public class ShoppingCouponServiceImpl
 	extends PrincipalBean implements ShoppingCouponService {
 
 	public ShoppingCoupon addCoupon(
-			long plid, String couponId, boolean autoCouponId, String name,
+			long plid, String code, boolean autoCode, String name,
 			String description, int startDateMonth, int startDateDay,
 			int startDateYear, int startDateHour, int startDateMinute,
 			int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
@@ -58,14 +58,14 @@ public class ShoppingCouponServiceImpl
 			ActionKeys.MANAGE_COUPONS);
 
 		return ShoppingCouponLocalServiceUtil.addCoupon(
-			getUserId(), plid, couponId, autoCouponId, name, description,
+			getUserId(), plid, code, autoCode, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear, endDateHour,
 			endDateMinute, neverExpire, active, limitCategories, limitSkus,
 			minOrder, discount, discountType);
 	}
 
-	public void deleteCoupon(long plid, String couponId)
+	public void deleteCoupon(long plid, long couponId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -75,7 +75,7 @@ public class ShoppingCouponServiceImpl
 		ShoppingCouponLocalServiceUtil.deleteCoupon(couponId);
 	}
 
-	public ShoppingCoupon getCoupon(long plid, String couponId)
+	public ShoppingCoupon getCoupon(long plid, long couponId)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -86,7 +86,7 @@ public class ShoppingCouponServiceImpl
 	}
 
 	public List search(
-			String couponId, long plid, long companyId, boolean active,
+			long plid, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws PortalException, SystemException {
 
@@ -95,12 +95,12 @@ public class ShoppingCouponServiceImpl
 			ActionKeys.MANAGE_COUPONS);
 
 		return ShoppingCouponLocalServiceUtil.search(
-			couponId, plid, companyId, active, discountType, andOperator, begin,
+			plid, companyId, code, active, discountType, andOperator, begin,
 			end);
 	}
 
 	public ShoppingCoupon updateCoupon(
-			long plid, String couponId, String name, String description,
+			long plid, long couponId, String name, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,

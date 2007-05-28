@@ -71,7 +71,7 @@ public class ShoppingItemFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < categoryIds.size(); i++) {
-				String categoryId = (String)categoryIds.get(i);
+				Long categoryId = (Long)categoryIds.get(i);
 
 				qPos.add(categoryId);
 			}
@@ -96,7 +96,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countByFeatured(long groupId, String[] categoryIds)
+	public static int countByFeatured(long groupId, long[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -168,7 +168,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static int countByKeywords(
-			long groupId, String[] categoryIds, String keywords)
+			long groupId, long[] categoryIds, String keywords)
 		throws SystemException {
 
 		Session session = null;
@@ -243,7 +243,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countBySale(long groupId, String[] categoryIds)
+	public static int countBySale(long groupId, long[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -315,7 +315,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findByFeatured(
-			long groupId, String[] categoryIds, int numOfItems)
+			long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countByFeatured = countByFeatured(groupId, categoryIds);
@@ -380,7 +380,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findByKeywords(
-			long groupId, String[] categoryIds, String keywords, int begin,
+			long groupId, long[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
 
@@ -447,7 +447,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findBySale(
-			long groupId, String[] categoryIds, int numOfItems)
+			long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countBySale = countBySale(groupId, categoryIds);

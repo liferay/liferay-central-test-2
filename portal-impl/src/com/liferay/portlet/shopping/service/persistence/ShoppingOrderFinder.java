@@ -24,6 +24,7 @@ package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
@@ -47,28 +48,32 @@ import org.hibernate.Session;
  */
 public class ShoppingOrderFinder {
 
-	public static String COUNT_BY_O_G_C_U_PPPS =
-		ShoppingOrderFinder.class.getName() + ".countByO_G_C_U_PPPS";
+	public static String COUNT_BY_G_C_U_N_PPPS =
+		ShoppingOrderFinder.class.getName() + ".countByG_C_U_N_PPPS";
 
-	public static String FIND_BY_O_G_C_U_PPPS =
-		ShoppingOrderFinder.class.getName() + ".findByO_G_C_U_PPPS";
+	public static String FIND_BY_G_C_U_N_PPPS =
+		ShoppingOrderFinder.class.getName() + ".findByG_C_U_N_PPPS";
 
-	public static int countByO_G_C_U_PPPS(
-			String orderId, long groupId, long companyId, long userId,
+	public static int countByG_C_U_N_PPPS(
+			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
 			String ppPaymentStatus, boolean andOperator)
 		throws SystemException {
 
-		orderId = StringUtil.upperCase(orderId);
+		number = StringUtil.upperCase(number);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_O_G_C_U_PPPS);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_U_N_PPPS);
+
+			if (userId <= 0) {
+				sql = StringUtil.replace(sql, _USER_ID_SQL, StringPool.BLANK);
+			}
 
 			if (Validator.isNull(ppPaymentStatus)) {
 				sql = StringUtil.replace(
@@ -89,10 +94,14 @@ public class ShoppingOrderFinder {
 
 			qPos.add(groupId);
 			qPos.add(companyId);
-			qPos.add(orderId);
-			qPos.add(orderId);
-			qPos.add(userId);
-			qPos.add(userId);
+
+			if (userId > 0) {
+				qPos.add(userId);
+				qPos.add(userId);
+			}
+
+			qPos.add(number);
+			qPos.add(number);
 			qPos.add(billingFirstName);
 			qPos.add(billingFirstName);
 			qPos.add(billingLastName);
@@ -127,8 +136,8 @@ public class ShoppingOrderFinder {
 		}
 	}
 
-	public static List findByO_G_C_U_PPPS(
-			String orderId, long groupId, long companyId, long userId,
+	public static List findByG_C_U_N_PPPS(
+			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
@@ -136,14 +145,18 @@ public class ShoppingOrderFinder {
 			OrderByComparator obc)
 		throws SystemException {
 
-		orderId = StringUtil.upperCase(orderId);
+		number = StringUtil.upperCase(number);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_O_G_C_U_PPPS);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_U_N_PPPS);
+
+			if (userId <= 0) {
+				sql = StringUtil.replace(sql, _USER_ID_SQL, StringPool.BLANK);
+			}
 
 			if (Validator.isNull(ppPaymentStatus)) {
 				sql = StringUtil.replace(
@@ -165,10 +178,14 @@ public class ShoppingOrderFinder {
 
 			qPos.add(groupId);
 			qPos.add(companyId);
-			qPos.add(orderId);
-			qPos.add(orderId);
-			qPos.add(userId);
-			qPos.add(userId);
+
+			if (userId > 0) {
+				qPos.add(userId);
+				qPos.add(userId);
+			}
+
+			qPos.add(number);
+			qPos.add(number);
 			qPos.add(billingFirstName);
 			qPos.add(billingFirstName);
 			qPos.add(billingLastName);
@@ -192,5 +209,7 @@ public class ShoppingOrderFinder {
 			HibernateUtil.closeSession(session);
 		}
 	}
+
+	private static String _USER_ID_SQL = "(userId = ?) AND";
 
 }
