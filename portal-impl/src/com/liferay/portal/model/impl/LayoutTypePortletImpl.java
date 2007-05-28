@@ -839,7 +839,7 @@ public class LayoutTypePortletImpl
 		Group group = layout.getGroup();
 
 		if (group.isUser()) {
-			selector1 = "desktop";
+			selector1 = "user";
 		}
 		else if (group.isCommunity()) {
 			selector1 = "community";
