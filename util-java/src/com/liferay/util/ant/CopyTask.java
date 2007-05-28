@@ -99,22 +99,26 @@ public class CopyTask {
 
 		fileSet.setFile(sourceFile);
 
-		copy.setFiltering(true);
 		copy.setProject(AntUtil.getProject());
+		copy.setFiltering(true);
 		copy.addFileset(fileSet);
 		copy.setTodir(destinationDir);
 		copy.setOverwrite(overwrite);
 		copy.setPreserveLastModified(preserveLastModified);
 
 		FilterSet filterSet = copy.createFilterSet();
-		Iterator it = filterMap.keySet().iterator();
-		while (it.hasNext()) {
-			String token = (String) it.next();
-			String replacement = (String) filterMap.get(token);
+
+		Iterator itr = filterMap.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String token = (String)itr.next();
+
+			String replacement = (String)filterMap.get(token);
+
 			filterSet.addFilter(token, replacement);
 		}
 
 		copy.execute();
 	}
-	
+
 }

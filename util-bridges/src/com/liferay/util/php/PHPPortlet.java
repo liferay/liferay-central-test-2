@@ -183,5 +183,5 @@ public class PHPPortlet extends GenericPortlet {
 	protected String viewUri;
 
 	private QuercusServlet _quercusServlet;
-	
+
 }

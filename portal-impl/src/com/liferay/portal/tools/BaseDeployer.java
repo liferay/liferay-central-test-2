@@ -406,9 +406,11 @@ public class BaseDeployer {
 
 				if (!deployed) {
 					String context = preliminaryContext;
+
 					if (pluginPackage != null) {
 						context = pluginPackage.getContext();
 					}
+
 					PluginPackageUtil.endPluginPackageInstallation(context);
 				}
 			}

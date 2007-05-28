@@ -51,7 +51,8 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		AutoDeployer deployer = null;
 
 		if (isMatchingFile(
-			file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
+				file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
+
 			deployer = _deployer;
 		}
 		else if (isMatchingFile(file, "index.php")) {
@@ -76,7 +77,6 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 	protected AutoDeployer getPhpDeployer() throws AutoDeployException {
 		if (_phpDeployer == null) {
 			_phpDeployer = new PHPPortletAutoDeployer();
-			_phpDeployer.init();
 		}
 
 		return _phpDeployer;
@@ -87,5 +87,5 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 	private AutoDeployer _deployer;
 	private PHPPortletAutoDeployer _phpDeployer;
-	
+
 }
