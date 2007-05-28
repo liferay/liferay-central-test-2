@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.sample.php.portlet;
+package com.liferay.util.php;
 
 import com.caucho.quercus.servlet.QuercusServlet;
 
@@ -100,6 +100,7 @@ public class PHPPortlet extends GenericPortlet {
 	public void processAction(ActionRequest req, ActionResponse res)
 		throws IOException, PortletException {
 		String phpURI = req.getParameter(PHP_URI_PARAM);
+
 		if (phpURI != null) {
 			res.setRenderParameter(PHP_URI_PARAM, phpURI);
 		}
@@ -111,7 +112,8 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
-	protected void processPHP(String phpURI, RenderRequest req, RenderResponse res)
+	protected void processPHP(
+		String phpURI, RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
 		try {
@@ -161,6 +163,7 @@ public class PHPPortlet extends GenericPortlet {
 
 	private synchronized void _initQuercus(ServletConfig config)
 		throws PortletException {
+
 		if (_quercusServlet == null) {
 			_quercusServlet = new QuercusServlet();
 
@@ -173,11 +176,12 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
+	private static Log _log = LogFactory.getLog(PHPPortlet.class);
+
 	protected String editUri;
 	protected String helpUri;
 	protected String viewUri;
 
 	private QuercusServlet _quercusServlet;
-	private static Log _log = LogFactory.getLog(PHPPortlet.class);
-
+	
 }

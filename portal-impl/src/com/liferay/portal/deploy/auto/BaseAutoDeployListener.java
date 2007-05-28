@@ -54,11 +54,10 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 		try {
 			zipFile = new ZipFile(file);
 
-			if (zipFile.getEntry("WEB-INF/" + checkXmlFile) == null) {
+			if (zipFile.getEntry(checkXmlFile) == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						file.getPath() + " does not have WEB-INF/" +
-							checkXmlFile);
+						file.getPath() + " does not have " + checkXmlFile);
 				}
 
 				return false;

@@ -190,6 +190,9 @@ public class BaseDeployer {
 		}
 	}
 
+	protected void copyXmls(File srcFile, String displayName) throws Exception {
+	}
+
 	protected void deploy() throws Exception  {
 		try {
 			File[] files = FileUtil.sortFiles(new File(baseDir).listFiles());
@@ -232,6 +235,7 @@ public class BaseDeployer {
 
 		copyJars(srcFile);
 		copyTlds(srcFile);
+		copyXmls(srcFile, displayName);
 
 		updateGeronimoWebXML(srcFile, displayName);
 
@@ -401,8 +405,11 @@ public class BaseDeployer {
 					srcFile, deployDirFile, displayName, overwrite);
 
 				if (!deployed) {
-					PluginPackageUtil.endPluginPackageInstallation(
-						pluginPackage.getContext());
+					String context = preliminaryContext;
+					if (pluginPackage != null) {
+						context = pluginPackage.getContext();
+					}
+					PluginPackageUtil.endPluginPackageInstallation(context);
 				}
 			}
 		}

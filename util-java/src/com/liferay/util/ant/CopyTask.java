@@ -26,8 +26,12 @@ import com.liferay.util.Validator;
 
 import java.io.File;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
+import org.apache.tools.ant.types.FilterSet;
 
 /**
  * <a href="CopyTask.java.html"><b><i>View Source</i></b></a>
@@ -85,4 +89,32 @@ public class CopyTask {
 		copy.execute();
 	}
 
+	public static void copyFile(
+		File sourceFile, File destinationDir, Map filterMap,
+		boolean overwrite, boolean preserveLastModified) {
+
+		Copy copy = new Copy();
+
+		FileSet fileSet = new FileSet();
+
+		fileSet.setFile(sourceFile);
+
+		copy.setFiltering(true);
+		copy.setProject(AntUtil.getProject());
+		copy.addFileset(fileSet);
+		copy.setTodir(destinationDir);
+		copy.setOverwrite(overwrite);
+		copy.setPreserveLastModified(preserveLastModified);
+
+		FilterSet filterSet = copy.createFilterSet();
+		Iterator it = filterMap.keySet().iterator();
+		while (it.hasNext()) {
+			String token = (String) it.next();
+			String replacement = (String) filterMap.get(token);
+			filterSet.addFilter(token, replacement);
+		}
+
+		copy.execute();
+	}
+	
 }

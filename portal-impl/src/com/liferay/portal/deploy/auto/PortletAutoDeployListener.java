@@ -48,7 +48,16 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		if (!isMatchingFile(file, PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
+		AutoDeployer deployer = null;
+
+		if (isMatchingFile(
+			file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
+			deployer = _deployer;
+		}
+		else if (isMatchingFile(file, "index.php")) {
+			deployer = getPhpDeployer();
+		}
+		else {
 			return;
 		}
 
@@ -56,7 +65,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			_log.info("Copying portlets for " + file.getPath());
 		}
 
-		_deployer.autoDeploy(file.getName());
+		deployer.autoDeploy(file.getName());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -64,9 +73,19 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		}
 	}
 
+	protected AutoDeployer getPhpDeployer() throws AutoDeployException {
+		if (_phpDeployer == null) {
+			_phpDeployer = new PHPPortletAutoDeployer();
+			_phpDeployer.init();
+		}
+
+		return _phpDeployer;
+	}
+
 	private static Log _log =
 		LogFactory.getLog(PortletAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
-
+	private PHPPortletAutoDeployer _phpDeployer;
+	
 }

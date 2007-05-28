@@ -3,7 +3,7 @@
 <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.1">
 	<environment>
 		<moduleId>
-			<artifactId>sample-php-portlet</artifactId>
+			<artifactId>@portlet_name@</artifactId>
 		</moduleId>
 		<dependencies>
 			<dependency>

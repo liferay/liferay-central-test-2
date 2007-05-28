@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.sample.php.portlet;
+package com.liferay.util.php;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
@@ -196,4 +196,5 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 	private RenderRequest _renderReq;
 	private RenderResponse _renderRes;
 	private ServletConfig _config;
+
 }
