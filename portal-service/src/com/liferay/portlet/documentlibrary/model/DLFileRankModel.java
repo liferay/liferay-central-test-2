@@ -24,8 +24,6 @@ package com.liferay.portlet.documentlibrary.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
-
 import java.util.Date;
 
 /**
@@ -49,9 +47,13 @@ import java.util.Date;
  *
  */
 public interface DLFileRankModel extends BaseModel {
-	public DLFileRankPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(DLFileRankPK pk);
+	public void setPrimaryKey(long pk);
+
+	public long getFileRankId();
+
+	public void setFileRankId(long fileRankId);
 
 	public long getCompanyId();
 
@@ -61,15 +63,15 @@ public interface DLFileRankModel extends BaseModel {
 
 	public void setUserId(long userId);
 
-	public String getFolderId();
+	public Date getCreateDate();
 
-	public void setFolderId(String folderId);
+	public void setCreateDate(Date createDate);
+
+	public long getFolderId();
+
+	public void setFolderId(long folderId);
 
 	public String getName();
 
 	public void setName(String name);
-
-	public Date getCreateDate();
-
-	public void setCreateDate(Date createDate);
 }

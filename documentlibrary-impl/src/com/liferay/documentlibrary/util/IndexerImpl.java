@@ -65,7 +65,7 @@ import org.apache.lucene.index.Term;
 public class IndexerImpl {
 
 	public static void addFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -235,7 +235,7 @@ public class IndexerImpl {
 	}
 
 	public static void deleteFile(
-			long companyId, String portletId, String repositoryId,
+			long companyId, String portletId, long repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -250,7 +250,7 @@ public class IndexerImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
 		long groupId = GetterUtil.getLong(ids[2]);
-		String repositoryId = ids[3];
+		long repositoryId = GetterUtil.getLong(ids[3]);
 
 		Session session = null;
 
@@ -285,7 +285,7 @@ public class IndexerImpl {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws IOException {
 

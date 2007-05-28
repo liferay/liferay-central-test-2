@@ -45,7 +45,7 @@ public class DLFileShortcutServiceImpl
 	extends PrincipalBean implements DLFileShortcutService {
 
 	public DLFileShortcut addFileShortcut(
-			String folderId, String toFolderId, String toName,
+			long folderId, long toFolderId, String toName,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -66,7 +66,7 @@ public class DLFileShortcutServiceImpl
 	}
 
 	public DLFileShortcut addFileShortcut(
-			String folderId, String toFolderId, String toName,
+			long folderId, long toFolderId, String toName,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -105,8 +105,7 @@ public class DLFileShortcutServiceImpl
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long fileShortcutId, String folderId, String toFolderId,
-			String toName)
+			long fileShortcutId, long folderId, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		DLFileShortcutPermission.check(

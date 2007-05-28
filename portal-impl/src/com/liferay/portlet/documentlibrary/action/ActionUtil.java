@@ -61,13 +61,13 @@ public class ActionUtil {
 	}
 
 	public static void getFileEntry(HttpServletRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
-		String newFolderId = ParamUtil.getString(req, "newFolderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
+		long newFolderId = ParamUtil.getLong(req, "newFolderId");
 		String name = ParamUtil.getString(req, "name");
 
 		DLFileEntry fileEntry = null;
 
-		if (Validator.isNotNull(folderId) && Validator.isNotNull(name)) {
+		if ((folderId > 0) && Validator.isNotNull(name)) {
 			try {
 				fileEntry = DLFileEntryServiceUtil.getFileEntry(folderId, name);
 			}
@@ -124,12 +124,12 @@ public class ActionUtil {
 	}
 
 	public static void getFolder(HttpServletRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 
 		DLFolder folder = null;
 
-		if (Validator.isNotNull(folderId) &&
-			!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if ((folderId > 0) &&
+			(folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = DLFolderServiceUtil.getFolder(folderId);
 		}

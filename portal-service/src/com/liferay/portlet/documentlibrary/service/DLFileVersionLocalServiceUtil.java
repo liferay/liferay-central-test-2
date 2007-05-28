@@ -66,7 +66,7 @@ public class DLFileVersionLocalServiceUtil {
 			end);
 	}
 
-	public static java.util.List getFileVersions(java.lang.String folderId,
+	public static java.util.List getFileVersions(long folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 

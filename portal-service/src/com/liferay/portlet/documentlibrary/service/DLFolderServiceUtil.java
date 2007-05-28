@@ -50,7 +50,7 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFolderServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, java.lang.String parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -62,7 +62,7 @@ public class DLFolderServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, java.lang.String parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -73,7 +73,7 @@ public class DLFolderServiceUtil {
 			description, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteFolder(java.lang.String folderId)
+	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
@@ -81,7 +81,7 @@ public class DLFolderServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
@@ -90,8 +90,8 @@ public class DLFolderServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description)
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFolderService dlFolderService = DLFolderServiceFactory.getService();

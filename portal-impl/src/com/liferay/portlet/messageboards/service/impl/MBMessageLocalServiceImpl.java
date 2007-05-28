@@ -315,7 +315,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM_STRING;
+			long repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -552,7 +552,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (message.isAttachments()) {
 			long companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM_STRING;
-			String repositoryId = CompanyImpl.SYSTEM_STRING;
+			long repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -576,7 +576,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			long companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM_STRING;
-			String repositoryId = CompanyImpl.SYSTEM_STRING;
+			long repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getThreadAttachmentsDir();
 
 			try {
@@ -925,7 +925,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM_STRING;
+			long repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {

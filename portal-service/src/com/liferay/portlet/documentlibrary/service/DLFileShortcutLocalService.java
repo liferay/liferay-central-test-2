@@ -58,22 +58,21 @@ public interface DLFileShortcutLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long userId, java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long userId, long folderId, long toFolderId, java.lang.String toName,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long userId, java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName, java.lang.String[] communityPermissions,
+		long userId, long folderId, long toFolderId, java.lang.String toName,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long userId, java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName, java.lang.Boolean addCommunityPermissions,
+		long userId, long folderId, long toFolderId, java.lang.String toName,
+		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -115,8 +114,7 @@ public interface DLFileShortcutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteFileShortcuts(java.lang.String toFolderId,
-		java.lang.String toName)
+	public void deleteFileShortcuts(long toFolderId, java.lang.String toName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -126,13 +124,13 @@ public interface DLFileShortcutLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long userId, long fileShortcutId, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName)
+		long userId, long fileShortcutId, long folderId, long toFolderId,
+		java.lang.String toName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateFileShortcuts(java.lang.String oldToFolderId,
-		java.lang.String oldToName, java.lang.String newToFolderId,
+	public void updateFileShortcuts(long oldToFolderId,
+		java.lang.String oldToName, long newToFolderId,
 		java.lang.String newToName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

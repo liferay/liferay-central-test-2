@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DLFileEntryUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry create(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK) {
-		return getPersistence().create(dlFileEntryPK);
+		long fileEntryId) {
+		return getPersistence().create(fileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
+		long fileEntryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(dlFileEntryPK));
+			listener.onBeforeRemove(findByPrimaryKey(fileEntryId));
 		}
 
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry = getPersistence()
-																				.remove(dlFileEntryPK);
+																				.remove(fileEntryId);
 
 		if (listener != null) {
 			listener.onAfterRemove(dlFileEntry);
@@ -140,58 +140,67 @@ public class DLFileEntryUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
+		long fileEntryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getPersistence().findByPrimaryKey(dlFileEntryPK);
+		return getPersistence().findByPrimaryKey(fileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(dlFileEntryPK);
+		long fileEntryId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(fileEntryId);
 	}
 
-	public static java.util.List findByFolderId(java.lang.String folderId)
+	public static java.util.List findByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
 	}
 
-	public static java.util.List findByFolderId(java.lang.String folderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByFolderId(long folderId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end);
 	}
 
-	public static java.util.List findByFolderId(java.lang.String folderId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByFolderId(long folderId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_First(
-		java.lang.String folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByFolderId_First(folderId, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_Last(
-		java.lang.String folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByFolderId_Last(folderId, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByFolderId_PrevAndNext(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK,
-		java.lang.String folderId,
+		long fileEntryId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getPersistence().findByFolderId_PrevAndNext(dlFileEntryPK,
+		return getPersistence().findByFolderId_PrevAndNext(fileEntryId,
 			folderId, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByF_N(
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		return getPersistence().findByF_N(folderId, name);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByF_N(
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByF_N(folderId, name);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -223,18 +232,29 @@ public class DLFileEntryUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByFolderId(java.lang.String folderId)
+	public static void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByFolderId(folderId);
+	}
+
+	public static void removeByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		getPersistence().removeByF_N(folderId, name);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByFolderId(java.lang.String folderId)
+	public static int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByFolderId(folderId);
+	}
+
+	public static int countByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByF_N(folderId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

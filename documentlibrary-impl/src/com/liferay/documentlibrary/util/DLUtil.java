@@ -45,7 +45,7 @@ import javax.jcr.version.VersionHistory;
 public class DLUtil {
 
 	public static Node getFileContentNode(
-			long companyId, String repositoryId, String fileName,
+			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -72,7 +72,7 @@ public class DLUtil {
 	}
 
 	public static Node getFileContentNode(
-			Session session, long companyId, String repositoryId,
+			Session session, long companyId, long repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
@@ -106,6 +106,12 @@ public class DLUtil {
 		return contentNode;
 	}
 
+	public static Node getFolderNode(Node node, long name)
+		throws RepositoryException {
+
+		return getFolderNode(node, String.valueOf(name));
+	}
+
 	public static Node getFolderNode(Node node, String name)
 		throws RepositoryException {
 
@@ -124,8 +130,7 @@ public class DLUtil {
 	public static Node getRootNode(Session session, long companyId)
 		throws RepositoryException {
 
-		Node companyNode = getFolderNode(
-			session.getRootNode(), String.valueOf(companyId));
+		Node companyNode = getFolderNode(session.getRootNode(), companyId);
 
 		return getFolderNode(companyNode, JCRFactory.NODE_DOCUMENTLIBRARY);
 	}

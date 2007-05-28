@@ -24,8 +24,6 @@ package com.liferay.portlet.documentlibrary.model;
 
 import com.liferay.portal.model.BaseModel;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
-
 import java.util.Date;
 
 /**
@@ -49,17 +47,13 @@ import java.util.Date;
  *
  */
 public interface DLFileEntryModel extends BaseModel {
-	public DLFileEntryPK getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(DLFileEntryPK pk);
+	public void setPrimaryKey(long pk);
 
-	public String getFolderId();
+	public long getFileEntryId();
 
-	public void setFolderId(String folderId);
-
-	public String getName();
-
-	public void setName(String name);
+	public void setFileEntryId(long fileEntryId);
 
 	public long getCompanyId();
 
@@ -88,6 +82,14 @@ public interface DLFileEntryModel extends BaseModel {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
+
+	public long getFolderId();
+
+	public void setFolderId(long folderId);
+
+	public String getName();
+
+	public void setName(String name);
 
 	public String getTitle();
 

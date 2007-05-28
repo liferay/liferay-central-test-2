@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,13 +48,14 @@ import java.util.List;
 public class DLFileVersionSoap implements Serializable {
 	public static DLFileVersionSoap toSoapModel(DLFileVersion model) {
 		DLFileVersionSoap soapModel = new DLFileVersionSoap();
-		soapModel.setFolderId(model.getFolderId());
-		soapModel.setName(model.getName());
-		soapModel.setVersion(model.getVersion());
+		soapModel.setFileVersionId(model.getFileVersionId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setFolderId(model.getFolderId());
+		soapModel.setName(model.getName());
+		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
 
 		return soapModel;
@@ -76,38 +75,20 @@ public class DLFileVersionSoap implements Serializable {
 	public DLFileVersionSoap() {
 	}
 
-	public DLFileVersionPK getPrimaryKey() {
-		return new DLFileVersionPK(_folderId, _name, _version);
+	public long getPrimaryKey() {
+		return _fileVersionId;
 	}
 
-	public void setPrimaryKey(DLFileVersionPK pk) {
-		setFolderId(pk.folderId);
-		setName(pk.name);
-		setVersion(pk.version);
+	public void setPrimaryKey(long pk) {
+		setFileVersionId(pk);
 	}
 
-	public String getFolderId() {
-		return _folderId;
+	public long getFileVersionId() {
+		return _fileVersionId;
 	}
 
-	public void setFolderId(String folderId) {
-		_folderId = folderId;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public double getVersion() {
-		return _version;
-	}
-
-	public void setVersion(double version) {
-		_version = version;
+	public void setFileVersionId(long fileVersionId) {
+		_fileVersionId = fileVersionId;
 	}
 
 	public long getCompanyId() {
@@ -142,6 +123,30 @@ public class DLFileVersionSoap implements Serializable {
 		_createDate = createDate;
 	}
 
+	public long getFolderId() {
+		return _folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		_folderId = folderId;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public double getVersion() {
+		return _version;
+	}
+
+	public void setVersion(double version) {
+		_version = version;
+	}
+
 	public int getSize() {
 		return _size;
 	}
@@ -150,12 +155,13 @@ public class DLFileVersionSoap implements Serializable {
 		_size = size;
 	}
 
-	private String _folderId;
-	private String _name;
-	private double _version;
+	private long _fileVersionId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private long _folderId;
+	private String _name;
+	private double _version;
 	private int _size;
 }

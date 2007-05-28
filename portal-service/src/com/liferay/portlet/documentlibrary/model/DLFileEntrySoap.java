@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,8 +48,7 @@ import java.util.List;
 public class DLFileEntrySoap implements Serializable {
 	public static DLFileEntrySoap toSoapModel(DLFileEntry model) {
 		DLFileEntrySoap soapModel = new DLFileEntrySoap();
-		soapModel.setFolderId(model.getFolderId());
-		soapModel.setName(model.getName());
+		soapModel.setFileEntryId(model.getFileEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -59,6 +56,8 @@ public class DLFileEntrySoap implements Serializable {
 		soapModel.setVersionUserName(model.getVersionUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setFolderId(model.getFolderId());
+		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setVersion(model.getVersion());
@@ -83,29 +82,20 @@ public class DLFileEntrySoap implements Serializable {
 	public DLFileEntrySoap() {
 	}
 
-	public DLFileEntryPK getPrimaryKey() {
-		return new DLFileEntryPK(_folderId, _name);
+	public long getPrimaryKey() {
+		return _fileEntryId;
 	}
 
-	public void setPrimaryKey(DLFileEntryPK pk) {
-		setFolderId(pk.folderId);
-		setName(pk.name);
+	public void setPrimaryKey(long pk) {
+		setFileEntryId(pk);
 	}
 
-	public String getFolderId() {
-		return _folderId;
+	public long getFileEntryId() {
+		return _fileEntryId;
 	}
 
-	public void setFolderId(String folderId) {
-		_folderId = folderId;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
+	public void setFileEntryId(long fileEntryId) {
+		_fileEntryId = fileEntryId;
 	}
 
 	public long getCompanyId() {
@@ -164,6 +154,22 @@ public class DLFileEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getFolderId() {
+		return _folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		_folderId = folderId;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public String getTitle() {
 		return _title;
 	}
@@ -212,8 +218,7 @@ public class DLFileEntrySoap implements Serializable {
 		_extraSettings = extraSettings;
 	}
 
-	private String _folderId;
-	private String _name;
+	private long _fileEntryId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
@@ -221,6 +226,8 @@ public class DLFileEntrySoap implements Serializable {
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _folderId;
+	private String _name;
 	private String _title;
 	private String _description;
 	private double _version;

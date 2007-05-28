@@ -77,13 +77,13 @@ public class DLFileEntryAndShortcutFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				String folderId = (String)folderIds.get(i);
+				Long folderId = (Long)folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				String folderId = (String)folderIds.get(i);
+				Long folderId = (Long)folderIds.get(i);
 
 				qPos.add(folderId);
 			}
@@ -131,7 +131,7 @@ public class DLFileEntryAndShortcutFinder {
 
 			q.setCacheable(false);
 
-			q.addScalar("folderId", Hibernate.STRING);
+			q.addScalar("folderId", Hibernate.LONG);
 			q.addScalar("name", Hibernate.STRING);
 			q.addScalar("title", Hibernate.STRING);
 			q.addScalar("fileShortcutId", Hibernate.LONG);
@@ -139,13 +139,13 @@ public class DLFileEntryAndShortcutFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				String folderId = (String)folderIds.get(i);
+				Long folderId = (Long)folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				String folderId = (String)folderIds.get(i);
+				Long folderId = (Long)folderIds.get(i);
 
 				qPos.add(folderId);
 			}
@@ -158,7 +158,7 @@ public class DLFileEntryAndShortcutFinder {
 			while (itr.hasNext()) {
 				Object[] array = (Object[])itr.next();
 
-				String folderId = (String)array[0];
+				Long folderId = (Long)array[0];
 				String name = (String)array[1];
 				//String title = (String)array[2];
 				long fileShortcutId = ((Long)array[3]).longValue();
@@ -169,8 +169,7 @@ public class DLFileEntryAndShortcutFinder {
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
 				else {
-					obj = DLFileEntryUtil.findByPrimaryKey(
-						new DLFileEntryPK(folderId, name));
+					obj = DLFileEntryUtil.findByF_N(folderId.longValue(), name);
 				}
 
 				list.add(obj);

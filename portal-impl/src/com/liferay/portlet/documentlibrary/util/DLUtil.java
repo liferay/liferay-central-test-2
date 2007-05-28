@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -52,11 +53,11 @@ import javax.servlet.jsp.PageContext;
 public class DLUtil {
 
 	public static String getBreadcrumbs(
-			String folderId, String name, PageContext pageContext,
+			long folderId, String name, PageContext pageContext,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		if (Validator.isNotNull(folderId) && Validator.isNotNull(name)) {
+		if ((folderId > 0) && Validator.isNotNull(name)) {
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 				folderId, name);
 
@@ -127,14 +128,16 @@ public class DLUtil {
 
 					portletURL.setParameter("struts_action", strutsAction);
 					portletURL.setParameter("groupId", String.valueOf(groupId));
-					portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"folderId", String.valueOf(folder.getFolderId()));
 				}
 				else {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter(
 						"struts_action", "/document_library/view");
-					portletURL.setParameter("folderId", folder.getFolderId());
+					portletURL.setParameter(
+						"folderId", String.valueOf(folder.getFolderId()));
 				}
 
 				String folderLink =
@@ -166,7 +169,8 @@ public class DLUtil {
 
 			fileEntryURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
-			fileEntryURL.setParameter("folderId", fileEntry.getFolderId());
+			fileEntryURL.setParameter(
+				"folderId", String.valueOf(fileEntry.getFolderId()));
 			fileEntryURL.setParameter("name", fileEntry.getName());
 
 			String fileEntryLink =
@@ -181,6 +185,16 @@ public class DLUtil {
 
 	public static String getFileExtension(String name) {
 		return _instance._getFileExtension(name);
+	}
+
+	public static String getLockId(long folderId, String name) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(folderId);
+		sm.append(StringPool.POUND);
+		sm.append(name);
+
+		return sm.toString();
 	}
 
 	private DLUtil() {

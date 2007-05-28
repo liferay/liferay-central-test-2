@@ -29,11 +29,11 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-String defaultFolderId = prefs.getValue("rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long defaultFolderId = GetterUtil.getLong(prefs.getValue("rootFolderId", StringPool.BLANK), DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", defaultFolderId);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", defaultFolderId);
 
-if ((folder == null) && (!defaultFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID))) {
+if ((folder == null) && (defaultFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 	try {
 		folder = DLFolderLocalServiceUtil.getFolder(folderId);
 	}
@@ -54,7 +54,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("folderId", folderId);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
@@ -110,14 +110,14 @@ portletURL.setParameter("folderId", folderId);
 			for (int i = 0; i < results.size(); i++) {
 				DLFolder curFolder = (DLFolder)results.get(i);
 
-				ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/document_library/view");
-				rowURL.setParameter("folderId", curFolder.getFolderId());
+				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 				List subfolderIds = new ArrayList();
 
@@ -147,7 +147,7 @@ portletURL.setParameter("folderId", folderId);
 				<tr>
 					<c:if test="<%= showAddFolderButton %>">
 						<td>
-							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= folderId %>" /></portlet:renderURL>';" />
+							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 						</td>
 						<td style="padding-left: 30px;"></td>
 					</c:if>
@@ -221,7 +221,7 @@ portletURL.setParameter("folderId", folderId);
 			for (int i = 0; i < results.size(); i++) {
 				Object result = results.get(i);
 
-				String primaryKey = null;
+				long primaryKey = 0;
 
 				DLFileEntry fileEntry = null;
 				DLFileShortcut fileShortcut = null;
@@ -229,13 +229,13 @@ portletURL.setParameter("folderId", folderId);
 				if (result instanceof DLFileEntry) {
 					fileEntry = (DLFileEntry)result;
 
-					primaryKey = fileEntry.getPrimaryKey().toString();
+					primaryKey = fileEntry.getFileEntryId();
 				}
 				else {
 					fileShortcut = (DLFileShortcut)result;
 					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), fileShortcut.getToName());
 
-					primaryKey = String.valueOf(fileShortcut.getPrimaryKey());
+					primaryKey = fileShortcut.getFileShortcutId();
 				}
 
 				ResultRow row = new ResultRow(result, primaryKey, i);
@@ -270,11 +270,11 @@ portletURL.setParameter("folderId", folderId);
 					<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton %>">
 						<td>
 							<c:if test="<%= showAddFileEntryButton %>">
-								<input type="button" value="<liferay-ui:message key="add-document" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';" />
+								<input type="button" value="<liferay-ui:message key="add-document" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 							</c:if>
 
 							<c:if test="<%= showAddFileShortcutButton %>">
-								<input type="button" value="<liferay-ui:message key="add-shortcut" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';" />
+								<input type="button" value="<liferay-ui:message key="add-shortcut" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 							</c:if>
 						</td>
 						<td style="padding-left: 30px;"></td>
@@ -347,7 +347,7 @@ portletURL.setParameter("folderId", folderId);
 		for (int i = 0; i < results.size(); i++) {
 			DLFileEntry fileEntry = (DLFileEntry)results.get(i);
 
-			ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
 			String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
 		%>

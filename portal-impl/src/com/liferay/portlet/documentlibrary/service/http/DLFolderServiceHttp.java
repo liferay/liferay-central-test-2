@@ -72,20 +72,14 @@ import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
  */
 public class DLFolderServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		HttpPrincipal httpPrincipal, long plid,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
-			Object paramObj1 = parentFolderId;
-
-			if (parentFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(parentFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -132,20 +126,15 @@ public class DLFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		HttpPrincipal httpPrincipal, long plid,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
-			Object paramObj1 = parentFolderId;
-
-			if (parentFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(parentFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -201,17 +190,11 @@ public class DLFolderServiceHttp {
 		}
 	}
 
-	public static void deleteFolder(HttpPrincipal httpPrincipal,
-		java.lang.String folderId)
+	public static void deleteFolder(HttpPrincipal httpPrincipal, long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
 					"deleteFolder", new Object[] { paramObj0 });
 
@@ -237,16 +220,11 @@ public class DLFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		HttpPrincipal httpPrincipal, java.lang.String folderId)
+		HttpPrincipal httpPrincipal, long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
 					"getFolder", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -275,24 +253,13 @@ public class DLFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = parentFolderId;
-
-			if (parentFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(parentFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {

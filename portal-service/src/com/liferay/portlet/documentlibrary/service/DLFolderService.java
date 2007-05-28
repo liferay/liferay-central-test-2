@@ -50,31 +50,31 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public interface DLFolderService {
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, java.lang.String parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, java.lang.String parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteFolder(java.lang.String folderId)
+	public void deleteFolder(long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description)
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

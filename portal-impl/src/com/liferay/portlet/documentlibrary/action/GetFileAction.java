@@ -65,7 +65,7 @@ public class GetFileAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String folderId = ParamUtil.getString(req, "folderId");
+			long folderId = ParamUtil.getLong(req, "folderId");
 			String name = ParamUtil.getString(req, "name");
 			double version = ParamUtil.getDouble(req, "version");
 
@@ -90,7 +90,7 @@ public class GetFileAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
 		double version = ParamUtil.getDouble(req, "version");
 
@@ -106,7 +106,7 @@ public class GetFileAction extends PortletAction {
 	}
 
 	protected void getFile(
-			String folderId, String name, double version, long fileShortcutId,
+			long folderId, String name, double version, long fileShortcutId,
 			ThemeDisplay themeDisplay, HttpServletResponse res)
 		throws Exception {
 

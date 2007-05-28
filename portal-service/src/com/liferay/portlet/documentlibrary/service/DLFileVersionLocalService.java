@@ -57,6 +57,6 @@ public interface DLFileVersionLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List getFileVersions(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
+	public java.util.List getFileVersions(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 }

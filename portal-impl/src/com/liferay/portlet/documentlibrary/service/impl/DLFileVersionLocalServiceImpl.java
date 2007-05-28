@@ -38,7 +38,7 @@ import java.util.List;
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
 
-	public List getFileVersions(String folderId, String name)
+	public List getFileVersions(long folderId, String name)
 		throws SystemException {
 
 		return DLFileVersionUtil.findByF_N(folderId, name);

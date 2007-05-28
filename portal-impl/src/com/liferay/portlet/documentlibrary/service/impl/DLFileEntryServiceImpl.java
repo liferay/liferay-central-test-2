@@ -34,7 +34,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.rmi.RemoteException;
 
@@ -48,7 +48,7 @@ public class DLFileEntryServiceImpl
 	extends PrincipalBean implements DLFileEntryService {
 
 	public DLFileEntry addFileEntry(
-			String folderId, String name, String title, String description,
+			long folderId, String name, String title, String description,
 			String[] tagsEntries, String extraSettings, byte[] byteArray,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -63,7 +63,7 @@ public class DLFileEntryServiceImpl
 	}
 
 	public DLFileEntry addFileEntry(
-			String folderId, String name, String title, String description,
+			long folderId, String name, String title, String description,
 			String[] tagsEntries, String extraSettings, byte[] byteArray,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -76,7 +76,7 @@ public class DLFileEntryServiceImpl
 			extraSettings, byteArray, communityPermissions, guestPermissions);
 	}
 
-	public void deleteFileEntry(String folderId, String name)
+	public void deleteFileEntry(long folderId, String name)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
@@ -84,17 +84,17 @@ public class DLFileEntryServiceImpl
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
+		String lockId = DLUtil.getLockId(folderId, name);
 
 		boolean alreadyHasLock = LockServiceUtil.hasLock(
-			DLFileEntry.class.getName(), pk, user.getUserId());
+			DLFileEntry.class.getName(), lockId, user.getUserId());
 
 		if (!alreadyHasLock) {
 
 			// Lock
 
 			LockServiceUtil.lock(
-				DLFileEntry.class.getName(), pk, user.getCompanyId(),
+				DLFileEntry.class.getName(), lockId, user.getCompanyId(),
 				user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 		}
 
@@ -104,11 +104,11 @@ public class DLFileEntryServiceImpl
 
 			// Unlock
 
-			LockServiceUtil.unlock(DLFileEntry.class.getName(), pk);
+			LockServiceUtil.unlock(DLFileEntry.class.getName(), lockId);
 		}
 	}
 
-	public void deleteFileEntry(String folderId, String name, double version)
+	public void deleteFileEntry(long folderId, String name, double version)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
@@ -116,17 +116,17 @@ public class DLFileEntryServiceImpl
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
+		String lockId = DLUtil.getLockId(folderId, name);
 
 		boolean alreadyHasLock = LockServiceUtil.hasLock(
-			DLFileEntry.class.getName(), pk, user.getUserId());
+			DLFileEntry.class.getName(), lockId, user.getUserId());
 
 		if (!alreadyHasLock) {
 
 			// Lock
 
 			LockServiceUtil.lock(
-				DLFileEntry.class.getName(), pk, user.getCompanyId(),
+				DLFileEntry.class.getName(), lockId, user.getCompanyId(),
 				user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 		}
 
@@ -136,11 +136,11 @@ public class DLFileEntryServiceImpl
 
 			// Unlock
 
-			LockServiceUtil.unlock(DLFileEntry.class.getName(), pk);
+			LockServiceUtil.unlock(DLFileEntry.class.getName(), lockId);
 		}
 	}
 
-	public DLFileEntry getFileEntry(String folderId, String name)
+	public DLFileEntry getFileEntry(long folderId, String name)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -149,30 +149,30 @@ public class DLFileEntryServiceImpl
 		return DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
 	}
 
-	public void lockFileEntry(String folderId, String name)
+	public void lockFileEntry(long folderId, String name)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
+		String lockId = DLUtil.getLockId(folderId, name);
 
 		LockServiceUtil.lock(
-			DLFileEntry.class.getName(), pk, user.getCompanyId(),
+			DLFileEntry.class.getName(), lockId, user.getCompanyId(),
 			user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
 
-	public void unlockFileEntry(String folderId, String name)
+	public void unlockFileEntry(long folderId, String name)
 		throws PortalException, RemoteException, SystemException {
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
+		String lockId = DLUtil.getLockId(folderId, name);
 
-		LockServiceUtil.unlock(DLFileEntry.class.getName(), pk);
+		LockServiceUtil.unlock(DLFileEntry.class.getName(), lockId);
 	}
 
 	public DLFileEntry updateFileEntry(
-			String folderId, String newFolderId, String name,
-			String sourceFileName, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] byteArray)
+			long folderId, long newFolderId, String name, String sourceFileName,
+			String title, String description, String[] tagsEntries,
+			String extraSettings, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
@@ -180,17 +180,17 @@ public class DLFileEntryServiceImpl
 		DLFileEntryPermission.check(
 			getPermissionChecker(), folderId, name, ActionKeys.UPDATE);
 
-		DLFileEntryPK pk = new DLFileEntryPK(folderId, name);
+		String lockId = DLUtil.getLockId(folderId, name);
 
 		boolean alreadyHasLock = LockServiceUtil.hasLock(
-			DLFileEntry.class.getName(), pk, user.getUserId());
+			DLFileEntry.class.getName(), lockId, user.getUserId());
 
 		if (!alreadyHasLock) {
 
 			// Lock
 
 			LockServiceUtil.lock(
-				DLFileEntry.class.getName(), pk, user.getCompanyId(),
+				DLFileEntry.class.getName(), lockId, user.getCompanyId(),
 				user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 		}
 
@@ -202,7 +202,7 @@ public class DLFileEntryServiceImpl
 
 			// Unlock
 
-			LockServiceUtil.unlock(DLFileEntry.class.getName(), pk);
+			LockServiceUtil.unlock(DLFileEntry.class.getName(), lockId);
 		}
 
 		return fileEntry;

@@ -54,15 +54,15 @@ import java.util.List;
  */
 public class DLFileEntryPersistenceImpl extends BasePersistence
 	implements DLFileEntryPersistence {
-	public DLFileEntry create(DLFileEntryPK dlFileEntryPK) {
+	public DLFileEntry create(long fileEntryId) {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 		dlFileEntry.setNew(true);
-		dlFileEntry.setPrimaryKey(dlFileEntryPK);
+		dlFileEntry.setPrimaryKey(fileEntryId);
 
 		return dlFileEntry;
 	}
 
-	public DLFileEntry remove(DLFileEntryPK dlFileEntryPK)
+	public DLFileEntry remove(long fileEntryId)
 		throws NoSuchFileEntryException, SystemException {
 		Session session = null;
 
@@ -70,17 +70,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntryImpl.class,
-					dlFileEntryPK);
+					new Long(fileEntryId));
 
 			if (dlFileEntry == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileEntry exists with the primary key " +
-						dlFileEntryPK);
+						fileEntryId);
 				}
 
 				throw new NoSuchFileEntryException(
 					"No DLFileEntry exists with the primary key " +
-					dlFileEntryPK);
+					fileEntryId);
 			}
 
 			return remove(dlFileEntry);
@@ -151,31 +151,32 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileEntry findByPrimaryKey(DLFileEntryPK dlFileEntryPK)
+	public DLFileEntry findByPrimaryKey(long fileEntryId)
 		throws NoSuchFileEntryException, SystemException {
-		DLFileEntry dlFileEntry = fetchByPrimaryKey(dlFileEntryPK);
+		DLFileEntry dlFileEntry = fetchByPrimaryKey(fileEntryId);
 
 		if (dlFileEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFileEntry exists with the primary key " +
-					dlFileEntryPK);
+					fileEntryId);
 			}
 
 			throw new NoSuchFileEntryException(
-				"No DLFileEntry exists with the primary key " + dlFileEntryPK);
+				"No DLFileEntry exists with the primary key " + fileEntryId);
 		}
 
 		return dlFileEntry;
 	}
 
-	public DLFileEntry fetchByPrimaryKey(DLFileEntryPK dlFileEntryPK)
+	public DLFileEntry fetchByPrimaryKey(long fileEntryId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (DLFileEntry)session.get(DLFileEntryImpl.class, dlFileEntryPK);
+			return (DLFileEntry)session.get(DLFileEntryImpl.class,
+				new Long(fileEntryId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -185,7 +186,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(String folderId) throws SystemException {
+	public List findByFolderId(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -194,14 +195,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("folderId ASC").append(", ");
@@ -211,10 +205,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			return q.list();
 		}
@@ -226,12 +217,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(String folderId, int begin, int end)
+	public List findByFolderId(long folderId, int begin, int end)
 		throws SystemException {
 		return findByFolderId(folderId, begin, end, null);
 	}
 
-	public List findByFolderId(String folderId, int begin, int end,
+	public List findByFolderId(long folderId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -241,14 +232,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -265,10 +249,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -280,8 +261,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileEntry findByFolderId_First(String folderId,
-		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+	public DLFileEntry findByFolderId_First(long folderId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -298,8 +279,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileEntry findByFolderId_Last(String folderId,
-		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
+	public DLFileEntry findByFolderId_Last(long folderId, OrderByComparator obc)
+		throws NoSuchFileEntryException, SystemException {
 		int count = countByFolderId(folderId);
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
@@ -317,10 +298,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileEntry[] findByFolderId_PrevAndNext(
-		DLFileEntryPK dlFileEntryPK, String folderId, OrderByComparator obc)
+	public DLFileEntry[] findByFolderId_PrevAndNext(long fileEntryId,
+		long folderId, OrderByComparator obc)
 		throws NoSuchFileEntryException, SystemException {
-		DLFileEntry dlFileEntry = findByPrimaryKey(dlFileEntryPK);
+		DLFileEntry dlFileEntry = findByPrimaryKey(fileEntryId);
 		int count = countByFolderId(folderId);
 		Session session = null;
 
@@ -330,14 +311,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -354,10 +328,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
@@ -367,6 +338,84 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			array[2] = (DLFileEntry)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileEntry findByF_N(long folderId, String name)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = fetchByF_N(folderId, name);
+
+		if (dlFileEntry == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFileEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+
+		return dlFileEntry;
+	}
+
+	public DLFileEntry fetchByF_N(long folderId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+			query.append("folderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("folderId ASC").append(", ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, folderId);
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			DLFileEntry dlFileEntry = (DLFileEntry)list.get(0);
+
+			return dlFileEntry;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -457,13 +506,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByFolderId(String folderId) throws SystemException {
+	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
 			DLFileEntry dlFileEntry = (DLFileEntry)itr.next();
 			remove(dlFileEntry);
 		}
+	}
+
+	public void removeByF_N(long folderId, String name)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = findByF_N(folderId, name);
+		remove(dlFileEntry);
 	}
 
 	public void removeAll() throws SystemException {
@@ -474,7 +529,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByFolderId(String folderId) throws SystemException {
+	public int countByFolderId(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -484,12 +539,53 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+			query.append("folderId = ?");
+			query.append(" ");
 
-			if (folderId == null) {
-				query.append("folderId IS NULL");
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, folderId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByF_N(long folderId, String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+			query.append("folderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
 			}
 			else {
-				query.append("folderId = ?");
+				query.append("name = ?");
 			}
 
 			query.append(" ");
@@ -498,9 +594,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, folderId);
 
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
+			if (name != null) {
+				q.setString(queryPos++, name);
 			}
 
 			Iterator itr = q.list().iterator();

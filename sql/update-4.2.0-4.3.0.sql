@@ -46,7 +46,21 @@ alter_column_type CyrusVirtual userId LONG;
 
 drop table DataTracker;
 
+alter table DLFileEntry add fileEntryId LONG;
+alter_column_type DLFileEntry folderId LONG;
+
+alter table DLFileRank add fileRankId LONG;
+alter_column_type DLFileRank folderId LONG;
+
+alter_column_type DLFileShortcut folderId LONG;
+alter_column_type DLFileShortcut toFolderId LONG;
+
+alter table DLFileVersion add fileVersionId LONG;
+alter_column_type DLFileVersion folderId LONG;
+
+alter_column_type DLFolder folderId LONG;
 alter_column_type DLFolder groupId LONG;
+alter_column_type DLFolder parentFolderId LONG;
 
 alter_column_type EmailAddress emailAddressId LONG;
 alter_column_name EmailAddress className classNameId VARCHAR(75) null;

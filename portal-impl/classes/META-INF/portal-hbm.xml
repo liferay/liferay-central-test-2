@@ -615,10 +615,9 @@
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" table="DLFileEntry">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK">
-			<key-property name="folderId" />
-			<key-property name="name" />
-		</composite-id>
+		<id name="fileEntryId" type="long">
+			<generator class="assigned" />
+		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -626,6 +625,8 @@
 		<property name="versionUserName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
+		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
@@ -635,13 +636,14 @@
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" table="DLFileRank">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK">
-			<key-property name="companyId" />
-			<key-property name="userId" />
-			<key-property name="folderId" />
-			<key-property name="name" />
-		</composite-id>
+		<id name="fileRankId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
+		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl" table="DLFileShortcut">
 		<cache usage="read-write" />
@@ -653,26 +655,27 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="folderId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="toFolderId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="toFolderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="toName" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl" table="DLFileVersion">
 		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK">
-			<key-property name="folderId" />
-			<key-property name="name" />
-			<key-property name="version" />
-		</composite-id>
+		<id name="fileVersionId" type="long">
+			<generator class="assigned" />
+		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
+		<property name="folderId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" table="DLFolder">
 		<cache usage="read-write" />
-		<id name="folderId" type="java.lang.String">
+		<id name="folderId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -681,7 +684,7 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="parentFolderId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentFolderId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="lastPostDate" />

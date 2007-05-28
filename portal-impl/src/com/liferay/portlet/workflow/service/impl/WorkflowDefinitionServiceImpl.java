@@ -89,7 +89,7 @@ public class WorkflowDefinitionServiceImpl
 			long companyId = user.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM_STRING;
+			long repositoryId = CompanyImpl.SYSTEM;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 
@@ -152,7 +152,7 @@ public class WorkflowDefinitionServiceImpl
 
 		try {
 			long companyId = getUser().getCompanyId();
-			String repositoryId = CompanyImpl.SYSTEM_STRING;
+			long repositoryId = CompanyImpl.SYSTEM;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 

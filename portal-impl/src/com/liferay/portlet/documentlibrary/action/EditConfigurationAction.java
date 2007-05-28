@@ -29,7 +29,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -63,7 +62,7 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String rootFolderId = ParamUtil.getString(req, "rootFolderId");
+		long rootFolderId = ParamUtil.getLong(req, "rootFolderId");
 
 		boolean showBreadcrumbs = ParamUtil.getBoolean(req, "showBreadcrumbs");
 		boolean showFoldersSearch = ParamUtil.getBoolean(
@@ -84,12 +83,7 @@ public class EditConfigurationAction extends PortletAction {
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		if (Validator.isNull(rootFolderId)) {
-			SessionErrors.add(req, "rootFolderIdInvalid");
-
-			return;
-		}
-		else if (!rootFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			try {
 				DLFolderLocalServiceUtil.getFolder(rootFolderId);
 			}
@@ -98,7 +92,7 @@ public class EditConfigurationAction extends PortletAction {
 			}
 		}
 
-		prefs.setValue("rootFolderId", rootFolderId);
+		prefs.setValue("rootFolderId", String.valueOf(rootFolderId));
 
 		prefs.setValue("showBreadcrumbs", String.valueOf(showBreadcrumbs));
 		prefs.setValue("showFoldersSearch", String.valueOf(showFoldersSearch));

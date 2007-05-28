@@ -34,9 +34,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT);
 
 long fileShortcutId = BeanParamUtil.getLong(fileShortcut, request, "fileShortcutId");
-String folderId = BeanParamUtil.getString(fileShortcut, request, "folderId");
+long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 long toGroupId = ParamUtil.getLong(request, "toGroupId");
-String toFolderId = BeanParamUtil.getString(fileShortcut, request, "toFolderId");
+long toFolderId = BeanParamUtil.getLong(fileShortcut, request, "toFolderId");
 String toName = BeanParamUtil.getString(fileShortcut, request, "toName");
 
 Group toGroup = null;
@@ -281,7 +281,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
-		classPK="<%= toFileEntry.getPrimaryKey().toString() %>"
+		classPK="<%= String.valueOf(toFileEntry.getFileEntryId()) %>"
 		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
@@ -322,7 +322,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
 				StringMaker sm = new StringMaker();
 
@@ -362,7 +362,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 					formName="fm2"
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= toFileEntry.getPrimaryKey().toString() %>"
+					classPK="<%= String.valueOf(toFileEntry.getFileEntryId()) %>"
 					userId="<%= toFileEntry.getUserId() %>"
 					subject="<%= toFileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"

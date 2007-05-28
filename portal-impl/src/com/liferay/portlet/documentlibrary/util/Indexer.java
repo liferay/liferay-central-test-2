@@ -95,11 +95,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 				String portletId = PortletKeys.DOCUMENT_LIBRARY;
 				long groupId = folder.getGroupId();
-				String folderId = folder.getFolderId();
+				long folderId = folder.getFolderId();
 
 				String[] newIds = {
 					String.valueOf(companyId), portletId,
-					String.valueOf(groupId), folderId
+					String.valueOf(groupId), String.valueOf(folderId)
 				};
 
 				DLServiceUtil.reIndex(newIds);

@@ -65,10 +65,10 @@ if (Validator.isNotNull(portletResource)) {
 
 DLFolder rootFolder = null;
 
-String rootFolderId = PrefsParamUtil.getString(prefs, request, "rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long rootFolderId = PrefsParamUtil.getLong(prefs, request, "rootFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 String rootFolderName = StringPool.BLANK;
 
-if (!rootFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 	try {
 		rootFolder = DLFolderLocalServiceUtil.getFolder(rootFolderId);
 

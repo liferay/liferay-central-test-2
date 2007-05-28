@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DLFileRankUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank create(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK) {
-		return getPersistence().create(dlFileRankPK);
+		long fileRankId) {
+		return getPersistence().create(fileRankId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank remove(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
+		long fileRankId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(dlFileRankPK));
+			listener.onBeforeRemove(findByPrimaryKey(fileRankId));
 		}
 
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank = getPersistence()
-																			  .remove(dlFileRankPK);
+																			  .remove(fileRankId);
 
 		if (listener != null) {
 			listener.onAfterRemove(dlFileRank);
@@ -140,16 +140,15 @@ public class DLFileRankUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
+		long fileRankId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
-		return getPersistence().findByPrimaryKey(dlFileRankPK);
+		return getPersistence().findByPrimaryKey(fileRankId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(dlFileRankPK);
+		long fileRankId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(fileRankId);
 	}
 
 	public static java.util.List findByUserId(long userId)
@@ -183,26 +182,25 @@ public class DLFileRankUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank[] findByUserId_PrevAndNext(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK,
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long fileRankId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
-		return getPersistence().findByUserId_PrevAndNext(dlFileRankPK, userId,
-			obc);
+		return getPersistence().findByUserId_PrevAndNext(fileRankId, userId, obc);
 	}
 
-	public static java.util.List findByF_N(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static java.util.List findByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name);
 	}
 
-	public static java.util.List findByF_N(java.lang.String folderId,
+	public static java.util.List findByF_N(long folderId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end);
 	}
 
-	public static java.util.List findByF_N(java.lang.String folderId,
+	public static java.util.List findByF_N(long folderId,
 		java.lang.String name, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -210,7 +208,7 @@ public class DLFileRankUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByF_N_First(
-		java.lang.String folderId, java.lang.String name,
+		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
@@ -218,7 +216,7 @@ public class DLFileRankUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByF_N_Last(
-		java.lang.String folderId, java.lang.String name,
+		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
@@ -226,13 +224,25 @@ public class DLFileRankUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank[] findByF_N_PrevAndNext(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK,
-		java.lang.String folderId, java.lang.String name,
+		long fileRankId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
-		return getPersistence().findByF_N_PrevAndNext(dlFileRankPK, folderId,
+		return getPersistence().findByF_N_PrevAndNext(fileRankId, folderId,
 			name, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByC_U_F_N(
+		long companyId, long userId, long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
+		return getPersistence().findByC_U_F_N(companyId, userId, folderId, name);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F_N(
+		long companyId, long userId, long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_U_F_N(companyId, userId, folderId, name);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -269,9 +279,16 @@ public class DLFileRankUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
-	public static void removeByF_N(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static void removeByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByF_N(folderId, name);
+	}
+
+	public static void removeByC_U_F_N(long companyId, long userId,
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
+		getPersistence().removeByC_U_F_N(companyId, userId, folderId, name);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -283,9 +300,15 @@ public class DLFileRankUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
-	public static int countByF_N(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByF_N(folderId, name);
+	}
+
+	public static int countByC_U_F_N(long companyId, long userId,
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_U_F_N(companyId, userId, folderId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

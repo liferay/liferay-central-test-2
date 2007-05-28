@@ -33,7 +33,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
-String folderId = BeanParamUtil.getString(fileEntry, request, "folderId");
+long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
 Lock lock = null;
@@ -42,7 +42,7 @@ Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
 	try {
-		lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+		lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
 
 		isLocked = Boolean.TRUE;
 
@@ -61,7 +61,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("folderId", folderId);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 %>
 
@@ -164,7 +164,7 @@ portletURL.setParameter("name", name);
 		<portlet:param name="tabs2" value="<%= tabs2 %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
-		<portlet:param name="folderId" value="<%= folderId %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		<portlet:param name="name" value="<%= name %>" />
 	</portlet:renderURL>
 
@@ -184,7 +184,7 @@ portletURL.setParameter("name", name);
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
-		classPK="<%= fileEntry.getPrimaryKey().toString() %>"
+		classPK="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
 		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
@@ -228,7 +228,7 @@ portletURL.setParameter("name", name);
 			for (int i = 0; i < results.size(); i++) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
+				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
 				StringMaker sm = new StringMaker();
 
@@ -271,7 +271,7 @@ portletURL.setParameter("name", name);
 				<liferay-ui:discussion
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= fileEntry.getPrimaryKey().toString() %>"
+					classPK="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
 					userId="<%= fileEntry.getUserId() %>"
 					subject="<%= fileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"

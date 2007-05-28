@@ -120,8 +120,8 @@ public class EditFileShortcutAction extends PortletAction {
 	protected void updateFileShortcut(ActionRequest req) throws Exception {
 		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
 
-		String folderId = ParamUtil.getString(req, "folderId");
-		String toFolderId = ParamUtil.getString(req, "toFolderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
+		long toFolderId = ParamUtil.getLong(req, "toFolderId");
 		String toName = ParamUtil.getString(req, "toName");
 
 		String[] communityPermissions = req.getParameterValues(

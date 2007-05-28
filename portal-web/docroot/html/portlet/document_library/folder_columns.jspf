@@ -70,7 +70,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 			for (int k = 0; k < subfolders.size(); k++) {
 				DLFolder subfolder = (DLFolder)subfolders.get(k);
 
-				rowURL.setParameter("folderId", subfolder.getFolderId());
+				rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
 				sm.append("<a href=\"");
 				sm.append(rowURL);
@@ -83,7 +83,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 				}
 			}
 
-			rowURL.setParameter("folderId", curFolder.getFolderId());
+			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 			sm.append("</span>");
 		}

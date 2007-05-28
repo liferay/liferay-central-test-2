@@ -7,8 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="folderId" type="String" primary="true" />
-		<column name="name" type="String" primary="true" />
+		<column name="fileEntryId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -22,6 +21,8 @@
 
 		<!-- Other fields -->
 
+		<column name="folderId" type="long" />
+		<column name="name" type="String" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
 		<column name="version" type="double" />
@@ -41,19 +42,27 @@
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
+		<finder name="F_N" return-type="DLFileEntry">
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+		</finder>
 	</entity>
 	<entity name="DLFileRank" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="long" primary="true" />
-		<column name="userId" type="long" primary="true" />
-		<column name="folderId" type="String" primary="true" />
-		<column name="name" type="String" primary="true" />
+		<column name="fileRankId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
 		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="folderId" type="long" />
+		<column name="name" type="String" />
 
 		<!-- Order -->
 
@@ -67,6 +76,12 @@
 			<finder-column name="userId" />
 		</finder>
 		<finder name="F_N" return-type="Collection">
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+		</finder>
+		<finder name="C_U_F_N" return-type="DLFileRank">
+			<finder-column name="companyId" />
+			<finder-column name="userId" />
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
@@ -87,8 +102,8 @@
 
 		<!-- Other fields -->
 
-		<column name="folderId" type="String" />
-		<column name="toFolderId" type="String" />
+		<column name="folderId" type="long" />
+		<column name="toFolderId" type="long" />
 		<column name="toName" type="String" />
 
 		<!-- Finder methods -->
@@ -105,9 +120,7 @@
 
 		<!-- PK fields -->
 
-		<column name="folderId" type="String" primary="true" />
-		<column name="name" type="String" primary="true" />
-		<column name="version" type="double" primary="true" />
+		<column name="fileVersionId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -118,6 +131,9 @@
 
 		<!-- Other fields -->
 
+		<column name="folderId" type="long" />
+		<column name="name" type="String" />
+		<column name="version" type="double" />
 		<column name="size" type="int" />
 
 		<!-- Order -->
@@ -134,12 +150,17 @@
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
+		<finder name="F_N_V" return-type="DLFileVersion">
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+			<finder-column name="version" />
+		</finder>
 	</entity>
 	<entity name="DLFolder" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="folderId" type="String" primary="true" />
+		<column name="folderId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -155,7 +176,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentFolderId" type="String" />
+		<column name="parentFolderId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="lastPostDate" type="Date" />

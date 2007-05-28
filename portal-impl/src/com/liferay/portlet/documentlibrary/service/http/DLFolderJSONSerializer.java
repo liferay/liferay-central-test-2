@@ -53,15 +53,7 @@ import java.util.List;
 public class DLFolderJSONSerializer {
 	public static JSONObject toJSONObject(DLFolder model) {
 		JSONObject jsonObj = new JSONObject();
-		String folderId = model.getFolderId();
-
-		if (folderId == null) {
-			jsonObj.put("folderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("folderId", folderId.toString());
-		}
-
+		jsonObj.put("folderId", model.getFolderId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
@@ -93,14 +85,7 @@ public class DLFolderJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String parentFolderId = model.getParentFolderId();
-
-		if (parentFolderId == null) {
-			jsonObj.put("parentFolderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentFolderId", parentFolderId.toString());
-		}
+		jsonObj.put("parentFolderId", model.getParentFolderId());
 
 		String name = model.getName();
 

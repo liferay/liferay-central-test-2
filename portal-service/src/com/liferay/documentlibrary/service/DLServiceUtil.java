@@ -38,7 +38,7 @@ import java.rmi.RemoteException;
 public class DLServiceUtil {
 
 	public static void addDirectory(
-			long companyId, String repositoryId, String dirName)
+			long companyId, long repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
@@ -47,7 +47,7 @@ public class DLServiceUtil {
 	}
 
 	public static void addFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, File file)
 		throws PortalException, RemoteException, SystemException {
 
@@ -58,7 +58,7 @@ public class DLServiceUtil {
 	}
 
 	public static void addFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
@@ -69,8 +69,7 @@ public class DLServiceUtil {
 	}
 
 	public static void deleteDirectory(
-			long companyId, String portletId, String repositoryId,
-			String dirName)
+			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
@@ -79,7 +78,7 @@ public class DLServiceUtil {
 	}
 
 	public static void deleteFile(
-			long companyId, String portletId, String repositoryId,
+			long companyId, String portletId, long repositoryId,
 			String fileName)
 		throws PortalException, RemoteException, SystemException {
 
@@ -89,7 +88,7 @@ public class DLServiceUtil {
 	}
 
 	public static void deleteFile(
-			long companyId, String portletId, String repositoryId,
+			long companyId, String portletId, long repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, RemoteException, SystemException {
 
@@ -100,7 +99,7 @@ public class DLServiceUtil {
 	}
 
 	public static byte[] getFile(
-			long companyId, String repositoryId, String fileName)
+			long companyId, long repositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
@@ -109,7 +108,7 @@ public class DLServiceUtil {
 	}
 
 	public static byte[] getFile(
-			long companyId, String repositoryId, String fileName,
+			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, RemoteException, SystemException {
 
@@ -120,7 +119,7 @@ public class DLServiceUtil {
 	}
 
 	public static String[] getFileNames(
-			long companyId, String repositoryId, String dirName)
+			long companyId, long repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
@@ -129,7 +128,7 @@ public class DLServiceUtil {
 	}
 
 	public static long getFileSize(
-			long companyId, String repositoryId, String fileName)
+			long companyId, long repositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
@@ -146,7 +145,7 @@ public class DLServiceUtil {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			File file)
 		throws PortalException, RemoteException, SystemException {
@@ -159,7 +158,7 @@ public class DLServiceUtil {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
@@ -172,8 +171,8 @@ public class DLServiceUtil {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, long groupId, String repositoryId,
-			String newRepositoryId, String fileName)
+			long companyId, String portletId, long groupId, long repositoryId,
+			long newRepositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();

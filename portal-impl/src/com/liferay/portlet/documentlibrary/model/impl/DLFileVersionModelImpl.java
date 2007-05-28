@@ -25,8 +25,6 @@ package com.liferay.portlet.documentlibrary.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -57,26 +55,24 @@ import java.util.Date;
 public class DLFileVersionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileVersion";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "folderId", new Integer(Types.VARCHAR) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "version", new Integer(Types.DOUBLE) },
+			{ "fileVersionId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "folderId", new Integer(Types.BIGINT) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
 			{ "size_", new Integer(Types.INTEGER) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion.folderId"),
+	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersionModel"));
@@ -84,56 +80,21 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	public DLFileVersionModelImpl() {
 	}
 
-	public DLFileVersionPK getPrimaryKey() {
-		return new DLFileVersionPK(_folderId, _name, _version);
+	public long getPrimaryKey() {
+		return _fileVersionId;
 	}
 
-	public void setPrimaryKey(DLFileVersionPK pk) {
-		setFolderId(pk.folderId);
-		setName(pk.name);
-		setVersion(pk.version);
+	public void setPrimaryKey(long pk) {
+		setFileVersionId(pk);
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public long getFileVersionId() {
+		return _fileVersionId;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
-
-			_folderId = folderId;
-		}
-	}
-
-	public String getName() {
-		return GetterUtil.getString(_name);
-	}
-
-	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
-			_name = name;
-		}
-	}
-
-	public double getVersion() {
-		return _version;
-	}
-
-	public void setVersion(double version) {
-		if (version != _version) {
-			_version = version;
+	public void setFileVersionId(long fileVersionId) {
+		if (fileVersionId != _fileVersionId) {
+			_fileVersionId = fileVersionId;
 		}
 	}
 
@@ -187,6 +148,42 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getFolderId() {
+		return _folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
+			_folderId = folderId;
+		}
+	}
+
+	public String getName() {
+		return GetterUtil.getString(_name);
+	}
+
+	public void setName(String name) {
+		if (((name == null) && (_name != null)) ||
+				((name != null) && (_name == null)) ||
+				((name != null) && (_name != null) && !name.equals(_name))) {
+			if (!XSS_ALLOW_NAME) {
+				name = XSSUtil.strip(name);
+			}
+
+			_name = name;
+		}
+	}
+
+	public double getVersion() {
+		return _version;
+	}
+
+	public void setVersion(double version) {
+		if (version != _version) {
+			_version = version;
+		}
+	}
+
 	public int getSize() {
 		return _size;
 	}
@@ -199,13 +196,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileVersionImpl clone = new DLFileVersionImpl();
-		clone.setFolderId(getFolderId());
-		clone.setName(getName());
-		clone.setVersion(getVersion());
+		clone.setFileVersionId(getFileVersionId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
+		clone.setFolderId(getFolderId());
+		clone.setName(getName());
+		clone.setVersion(getVersion());
 		clone.setSize(getSize());
 
 		return clone;
@@ -218,7 +216,17 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 
 		DLFileVersionImpl dlFileVersion = (DLFileVersionImpl)obj;
 		int value = 0;
-		value = getFolderId().compareTo(dlFileVersion.getFolderId());
+
+		if (getFolderId() < dlFileVersion.getFolderId()) {
+			value = -1;
+		}
+		else if (getFolderId() > dlFileVersion.getFolderId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
 		value = value * -1;
 
 		if (value != 0) {
@@ -265,9 +273,9 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFileVersionPK pk = dlFileVersion.getPrimaryKey();
+		long pk = dlFileVersion.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -276,15 +284,16 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _folderId;
-	private String _name;
-	private double _version;
+	private long _fileVersionId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private long _folderId;
+	private String _name;
+	private double _version;
 	private int _size;
 }

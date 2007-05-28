@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class DLFolderServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		long plid, java.lang.String parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
 		try {
@@ -96,7 +96,7 @@ public class DLFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		long plid, java.lang.String parentFolderId, java.lang.String name,
+		long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
@@ -112,8 +112,7 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static void deleteFolder(java.lang.String folderId)
-		throws RemoteException {
+	public static void deleteFolder(long folderId) throws RemoteException {
 		try {
 			DLFolderServiceUtil.deleteFolder(folderId);
 		}
@@ -124,7 +123,7 @@ public class DLFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
-		java.lang.String folderId) throws RemoteException {
+		long folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
 
@@ -137,9 +136,8 @@ public class DLFolderServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
-		java.lang.String folderId, java.lang.String parentFolderId,
-		java.lang.String name, java.lang.String description)
-		throws RemoteException {
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description);

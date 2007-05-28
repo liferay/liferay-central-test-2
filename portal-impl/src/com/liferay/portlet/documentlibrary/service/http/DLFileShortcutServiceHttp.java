@@ -72,24 +72,14 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
  */
 public class DLFileShortcutServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long folderId, long toFolderId,
+		java.lang.String toName, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = toFolderId;
-
-			if (toFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(toFolderId);
 			Object paramObj2 = toName;
 
 			if (toName == null) {
@@ -129,25 +119,14 @@ public class DLFileShortcutServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long folderId, long toFolderId,
+		java.lang.String toName, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = toFolderId;
-
-			if (toFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(toFolderId);
 			Object paramObj2 = toName;
 
 			if (toName == null) {
@@ -260,25 +239,14 @@ public class DLFileShortcutServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		HttpPrincipal httpPrincipal, long fileShortcutId,
-		java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName)
+		HttpPrincipal httpPrincipal, long fileShortcutId, long folderId,
+		long toFolderId, java.lang.String toName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(fileShortcutId);
-			Object paramObj1 = folderId;
-
-			if (folderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = toFolderId;
-
-			if (toFolderId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(folderId);
+			Object paramObj2 = new LongWrapper(toFolderId);
 			Object paramObj3 = toName;
 
 			if (toName == null) {

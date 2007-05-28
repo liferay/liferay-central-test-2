@@ -25,8 +25,6 @@ package com.liferay.portlet.documentlibrary.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
-
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
@@ -58,18 +56,16 @@ import java.util.Date;
 public class DLFileRankModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileRank";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "fileRankId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
-			{ "folderId", new Integer(Types.VARCHAR) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) }
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "folderId", new Integer(Types.BIGINT) },
+			{ "name", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileRank"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileRank.folderId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileRank.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -79,15 +75,22 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	public DLFileRankModelImpl() {
 	}
 
-	public DLFileRankPK getPrimaryKey() {
-		return new DLFileRankPK(_companyId, _userId, _folderId, _name);
+	public long getPrimaryKey() {
+		return _fileRankId;
 	}
 
-	public void setPrimaryKey(DLFileRankPK pk) {
-		setCompanyId(pk.companyId);
-		setUserId(pk.userId);
-		setFolderId(pk.folderId);
-		setName(pk.name);
+	public void setPrimaryKey(long pk) {
+		setFileRankId(pk);
+	}
+
+	public long getFileRankId() {
+		return _fileRankId;
+	}
+
+	public void setFileRankId(long fileRankId) {
+		if (fileRankId != _fileRankId) {
+			_fileRankId = fileRankId;
+		}
 	}
 
 	public long getCompanyId() {
@@ -110,19 +113,25 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
+	public void setCreateDate(Date createDate) {
+		if (((createDate == null) && (_createDate != null)) ||
+				((createDate != null) && (_createDate == null)) ||
+				((createDate != null) && (_createDate != null) &&
+				!createDate.equals(_createDate))) {
+			_createDate = createDate;
+		}
+	}
 
+	public long getFolderId() {
+		return _folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
 			_folderId = folderId;
 		}
 	}
@@ -143,26 +152,14 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public Date getCreateDate() {
-		return _createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
-			_createDate = createDate;
-		}
-	}
-
 	public Object clone() {
 		DLFileRankImpl clone = new DLFileRankImpl();
+		clone.setFileRankId(getFileRankId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
+		clone.setCreateDate(getCreateDate());
 		clone.setFolderId(getFolderId());
 		clone.setName(getName());
-		clone.setCreateDate(getCreateDate());
 
 		return clone;
 	}
@@ -198,9 +195,9 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFileRankPK pk = dlFileRank.getPrimaryKey();
+		long pk = dlFileRank.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -209,12 +206,13 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
+	private long _fileRankId;
 	private long _companyId;
 	private long _userId;
-	private String _folderId;
-	private String _name;
 	private Date _createDate;
+	private long _folderId;
+	private String _name;
 }

@@ -68,9 +68,9 @@ import org.json.JSONObject;
  *
  */
 public class DLFileShortcutServiceJSON {
-	public static JSONObject addFileShortcut(java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public static JSONObject addFileShortcut(long folderId, long toFolderId,
+		java.lang.String toName, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue = DLFileShortcutServiceUtil.addFileShortcut(folderId,
@@ -79,9 +79,8 @@ public class DLFileShortcutServiceJSON {
 		return DLFileShortcutJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFileShortcut(java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName,
-		java.lang.String[] communityPermissions,
+	public static JSONObject addFileShortcut(long folderId, long toFolderId,
+		java.lang.String toName, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -106,8 +105,7 @@ public class DLFileShortcutServiceJSON {
 	}
 
 	public static JSONObject updateFileShortcut(long fileShortcutId,
-		java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName)
+		long folderId, long toFolderId, java.lang.String toName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue = DLFileShortcutServiceUtil.updateFileShortcut(fileShortcutId,

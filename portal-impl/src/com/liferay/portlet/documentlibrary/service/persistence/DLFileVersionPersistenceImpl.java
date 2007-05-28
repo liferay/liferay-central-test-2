@@ -54,15 +54,15 @@ import java.util.List;
  */
 public class DLFileVersionPersistenceImpl extends BasePersistence
 	implements DLFileVersionPersistence {
-	public DLFileVersion create(DLFileVersionPK dlFileVersionPK) {
+	public DLFileVersion create(long fileVersionId) {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
 		dlFileVersion.setNew(true);
-		dlFileVersion.setPrimaryKey(dlFileVersionPK);
+		dlFileVersion.setPrimaryKey(fileVersionId);
 
 		return dlFileVersion;
 	}
 
-	public DLFileVersion remove(DLFileVersionPK dlFileVersionPK)
+	public DLFileVersion remove(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
 
@@ -70,17 +70,17 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
-					dlFileVersionPK);
+					new Long(fileVersionId));
 
 			if (dlFileVersion == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileVersion exists with the primary key " +
-						dlFileVersionPK);
+						fileVersionId);
 				}
 
 				throw new NoSuchFileVersionException(
 					"No DLFileVersion exists with the primary key " +
-					dlFileVersionPK);
+					fileVersionId);
 			}
 
 			return remove(dlFileVersion);
@@ -151,25 +151,25 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileVersion findByPrimaryKey(DLFileVersionPK dlFileVersionPK)
+	public DLFileVersion findByPrimaryKey(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
-		DLFileVersion dlFileVersion = fetchByPrimaryKey(dlFileVersionPK);
+		DLFileVersion dlFileVersion = fetchByPrimaryKey(fileVersionId);
 
 		if (dlFileVersion == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFileVersion exists with the primary key " +
-					dlFileVersionPK);
+					fileVersionId);
 			}
 
 			throw new NoSuchFileVersionException(
 				"No DLFileVersion exists with the primary key " +
-				dlFileVersionPK);
+				fileVersionId);
 		}
 
 		return dlFileVersion;
 	}
 
-	public DLFileVersion fetchByPrimaryKey(DLFileVersionPK dlFileVersionPK)
+	public DLFileVersion fetchByPrimaryKey(long fileVersionId)
 		throws SystemException {
 		Session session = null;
 
@@ -177,7 +177,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			return (DLFileVersion)session.get(DLFileVersionImpl.class,
-				dlFileVersionPK);
+				new Long(fileVersionId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -187,8 +187,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByF_N(String folderId, String name)
-		throws SystemException {
+	public List findByF_N(long folderId, String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -197,14 +196,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -224,10 +216,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -243,12 +232,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByF_N(String folderId, String name, int begin, int end)
+	public List findByF_N(long folderId, String name, int begin, int end)
 		throws SystemException {
 		return findByF_N(folderId, name, begin, end, null);
 	}
 
-	public List findByF_N(String folderId, String name, int begin, int end,
+	public List findByF_N(long folderId, String name, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -258,14 +247,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -292,10 +274,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -311,7 +290,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileVersion findByF_N_First(String folderId, String name,
+	public DLFileVersion findByF_N_First(long folderId, String name,
 		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		List list = findByF_N(folderId, name, 0, 1, obc);
@@ -333,7 +312,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileVersion findByF_N_Last(String folderId, String name,
+	public DLFileVersion findByF_N_Last(long folderId, String name,
 		OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		int count = countByF_N(folderId, name);
@@ -356,11 +335,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileVersion[] findByF_N_PrevAndNext(
-		DLFileVersionPK dlFileVersionPK, String folderId, String name,
-		OrderByComparator obc)
+	public DLFileVersion[] findByF_N_PrevAndNext(long fileVersionId,
+		long folderId, String name, OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
-		DLFileVersion dlFileVersion = findByPrimaryKey(dlFileVersionPK);
+		DLFileVersion dlFileVersion = findByPrimaryKey(fileVersionId);
 		int count = countByF_N(folderId, name);
 		Session session = null;
 
@@ -370,14 +348,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -404,10 +375,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -421,6 +389,92 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			array[2] = (DLFileVersion)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileVersion findByF_N_V(long folderId, String name, double version)
+		throws NoSuchFileVersionException, SystemException {
+		DLFileVersion dlFileVersion = fetchByF_N_V(folderId, name, version);
+
+		if (dlFileVersion == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFileVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(", ");
+			msg.append("version=");
+			msg.append(version);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileVersionException(msg.toString());
+		}
+
+		return dlFileVersion;
+	}
+
+	public DLFileVersion fetchByF_N_V(long folderId, String name, double version)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+			query.append("folderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" AND ");
+			query.append("version = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("folderId DESC").append(", ");
+			query.append("name DESC").append(", ");
+			query.append("version DESC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, folderId);
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			q.setDouble(queryPos++, version);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			DLFileVersion dlFileVersion = (DLFileVersion)list.get(0);
+
+			return dlFileVersion;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -512,7 +566,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByF_N(String folderId, String name)
+	public void removeByF_N(long folderId, String name)
 		throws SystemException {
 		Iterator itr = findByF_N(folderId, name).iterator();
 
@@ -520,6 +574,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			DLFileVersion dlFileVersion = (DLFileVersion)itr.next();
 			remove(dlFileVersion);
 		}
+	}
+
+	public void removeByF_N_V(long folderId, String name, double version)
+		throws NoSuchFileVersionException, SystemException {
+		DLFileVersion dlFileVersion = findByF_N_V(folderId, name, version);
+		remove(dlFileVersion);
 	}
 
 	public void removeAll() throws SystemException {
@@ -530,8 +590,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByF_N(String folderId, String name)
-		throws SystemException {
+	public int countByF_N(long folderId, String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -541,14 +600,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -564,14 +616,68 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
 			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByF_N_V(long folderId, String name, double version)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion WHERE ");
+			query.append("folderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" AND ");
+			query.append("version = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, folderId);
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			q.setDouble(queryPos++, version);
 
 			Iterator itr = q.list().iterator();
 

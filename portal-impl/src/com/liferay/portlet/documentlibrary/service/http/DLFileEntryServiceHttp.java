@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -72,20 +73,15 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
  */
 public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -156,21 +152,15 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
-		java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -251,16 +241,11 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
-		java.lang.String folderId, java.lang.String name)
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -296,16 +281,11 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
-		java.lang.String folderId, java.lang.String name, double version)
+		long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -343,17 +323,11 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -388,16 +362,11 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void lockFileEntry(HttpPrincipal httpPrincipal,
-		java.lang.String folderId, java.lang.String name)
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -433,16 +402,11 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
-		java.lang.String folderId, java.lang.String name)
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -478,26 +442,16 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		HttpPrincipal httpPrincipal, java.lang.String folderId,
-		java.lang.String newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray)
+		HttpPrincipal httpPrincipal, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String[] tagsEntries, java.lang.String extraSettings,
+		byte[] byteArray)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
-			Object paramObj0 = folderId;
-
-			if (folderId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = newFolderId;
-
-			if (newFolderId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(newFolderId);
 			Object paramObj2 = name;
 
 			if (name == null) {

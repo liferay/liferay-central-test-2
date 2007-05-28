@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -50,11 +48,12 @@ import java.util.List;
 public class DLFileRankSoap implements Serializable {
 	public static DLFileRankSoap toSoapModel(DLFileRank model) {
 		DLFileRankSoap soapModel = new DLFileRankSoap();
+		soapModel.setFileRankId(model.getFileRankId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setName(model.getName());
-		soapModel.setCreateDate(model.getCreateDate());
 
 		return soapModel;
 	}
@@ -73,15 +72,20 @@ public class DLFileRankSoap implements Serializable {
 	public DLFileRankSoap() {
 	}
 
-	public DLFileRankPK getPrimaryKey() {
-		return new DLFileRankPK(_companyId, _userId, _folderId, _name);
+	public long getPrimaryKey() {
+		return _fileRankId;
 	}
 
-	public void setPrimaryKey(DLFileRankPK pk) {
-		setCompanyId(pk.companyId);
-		setUserId(pk.userId);
-		setFolderId(pk.folderId);
-		setName(pk.name);
+	public void setPrimaryKey(long pk) {
+		setFileRankId(pk);
+	}
+
+	public long getFileRankId() {
+		return _fileRankId;
+	}
+
+	public void setFileRankId(long fileRankId) {
+		_fileRankId = fileRankId;
 	}
 
 	public long getCompanyId() {
@@ -100,11 +104,19 @@ public class DLFileRankSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public String getFolderId() {
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public long getFolderId() {
 		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
+	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
@@ -116,17 +128,10 @@ public class DLFileRankSoap implements Serializable {
 		_name = name;
 	}
 
-	public Date getCreateDate() {
-		return _createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
-	}
-
+	private long _fileRankId;
 	private long _companyId;
 	private long _userId;
-	private String _folderId;
-	private String _name;
 	private Date _createDate;
+	private long _folderId;
+	private String _name;
 }

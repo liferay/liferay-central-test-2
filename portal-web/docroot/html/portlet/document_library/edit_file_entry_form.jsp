@@ -33,7 +33,7 @@ String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
-String folderId = BeanParamUtil.getString(fileEntry, request, "folderId");
+long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
 Lock lock = null;
@@ -42,7 +42,7 @@ Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
 	try {
-		lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+		lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
 
 		isLocked = Boolean.TRUE;
 
@@ -125,11 +125,10 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 			%>
 
-			<a href="javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
-			<%= folder.getName() %>
-			</a>
+			<a href="javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
+			<%= folder.getName() %></a>
 
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 		</td>
 	</tr>
 	<tr>
@@ -178,7 +177,7 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 		String classPK = StringPool.BLANK;
 
 		if (fileEntry != null) {
-			classPK = fileEntry.getPrimaryKey().toString();
+			classPK = String.valueOf(fileEntry.getFileEntryId());
 		}
 		%>
 
@@ -231,10 +230,10 @@ if (fileEntry == null) {
 <c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 	<c:choose>
 		<c:when test="<%= !hasLock.booleanValue() %>">
-			<input type="button" value="<liferay-ui:message key="lock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="lock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
 		</c:when>
 		<c:otherwise>
-			<input type="button" value="<liferay-ui:message key="unlock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= folderId %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="unlock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
 		</c:otherwise>
 	</c:choose>
 </c:if>

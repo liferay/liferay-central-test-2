@@ -54,15 +54,15 @@ import java.util.List;
  */
 public class DLFileRankPersistenceImpl extends BasePersistence
 	implements DLFileRankPersistence {
-	public DLFileRank create(DLFileRankPK dlFileRankPK) {
+	public DLFileRank create(long fileRankId) {
 		DLFileRank dlFileRank = new DLFileRankImpl();
 		dlFileRank.setNew(true);
-		dlFileRank.setPrimaryKey(dlFileRankPK);
+		dlFileRank.setPrimaryKey(fileRankId);
 
 		return dlFileRank;
 	}
 
-	public DLFileRank remove(DLFileRankPK dlFileRankPK)
+	public DLFileRank remove(long fileRankId)
 		throws NoSuchFileRankException, SystemException {
 		Session session = null;
 
@@ -70,17 +70,16 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRankImpl.class,
-					dlFileRankPK);
+					new Long(fileRankId));
 
 			if (dlFileRank == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileRank exists with the primary key " +
-						dlFileRankPK);
+						fileRankId);
 				}
 
 				throw new NoSuchFileRankException(
-					"No DLFileRank exists with the primary key " +
-					dlFileRankPK);
+					"No DLFileRank exists with the primary key " + fileRankId);
 			}
 
 			return remove(dlFileRank);
@@ -150,31 +149,32 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileRank findByPrimaryKey(DLFileRankPK dlFileRankPK)
+	public DLFileRank findByPrimaryKey(long fileRankId)
 		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = fetchByPrimaryKey(dlFileRankPK);
+		DLFileRank dlFileRank = fetchByPrimaryKey(fileRankId);
 
 		if (dlFileRank == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFileRank exists with the primary key " +
-					dlFileRankPK);
+					fileRankId);
 			}
 
 			throw new NoSuchFileRankException(
-				"No DLFileRank exists with the primary key " + dlFileRankPK);
+				"No DLFileRank exists with the primary key " + fileRankId);
 		}
 
 		return dlFileRank;
 	}
 
-	public DLFileRank fetchByPrimaryKey(DLFileRankPK dlFileRankPK)
+	public DLFileRank fetchByPrimaryKey(long fileRankId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (DLFileRank)session.get(DLFileRankImpl.class, dlFileRankPK);
+			return (DLFileRank)session.get(DLFileRankImpl.class,
+				new Long(fileRankId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -294,10 +294,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileRank[] findByUserId_PrevAndNext(DLFileRankPK dlFileRankPK,
-		long userId, OrderByComparator obc)
-		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = findByPrimaryKey(dlFileRankPK);
+	public DLFileRank[] findByUserId_PrevAndNext(long fileRankId, long userId,
+		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
+		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
 		int count = countByUserId(userId);
 		Session session = null;
 
@@ -342,8 +341,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByF_N(String folderId, String name)
-		throws SystemException {
+	public List findByF_N(long folderId, String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -352,14 +350,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -377,10 +368,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -396,12 +384,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByF_N(String folderId, String name, int begin, int end)
+	public List findByF_N(long folderId, String name, int begin, int end)
 		throws SystemException {
 		return findByF_N(folderId, name, begin, end, null);
 	}
 
-	public List findByF_N(String folderId, String name, int begin, int end,
+	public List findByF_N(long folderId, String name, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -411,14 +399,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -443,10 +424,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -462,7 +440,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileRank findByF_N_First(String folderId, String name,
+	public DLFileRank findByF_N_First(long folderId, String name,
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
 		List list = findByF_N(folderId, name, 0, 1, obc);
 
@@ -483,7 +461,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileRank findByF_N_Last(String folderId, String name,
+	public DLFileRank findByF_N_Last(long folderId, String name,
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
 		int count = countByF_N(folderId, name);
 		List list = findByF_N(folderId, name, count - 1, count, obc);
@@ -505,10 +483,10 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileRank[] findByF_N_PrevAndNext(DLFileRankPK dlFileRankPK,
-		String folderId, String name, OrderByComparator obc)
+	public DLFileRank[] findByF_N_PrevAndNext(long fileRankId, long folderId,
+		String name, OrderByComparator obc)
 		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = findByPrimaryKey(dlFileRankPK);
+		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
 		int count = countByF_N(folderId, name);
 		Session session = null;
 
@@ -518,14 +496,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -550,10 +521,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -567,6 +535,95 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			array[2] = (DLFileRank)objArray[2];
 
 			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public DLFileRank findByC_U_F_N(long companyId, long userId, long folderId,
+		String name) throws NoSuchFileRankException, SystemException {
+		DLFileRank dlFileRank = fetchByC_U_F_N(companyId, userId, folderId, name);
+
+		if (dlFileRank == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFileRank exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileRankException(msg.toString());
+		}
+
+		return dlFileRank;
+	}
+
+	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
+		long folderId, String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" AND ");
+			query.append("folderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("createDate DESC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+			q.setLong(queryPos++, userId);
+			q.setLong(queryPos++, folderId);
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			DLFileRank dlFileRank = (DLFileRank)list.get(0);
+
+			return dlFileRank;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -665,7 +722,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByF_N(String folderId, String name)
+	public void removeByF_N(long folderId, String name)
 		throws SystemException {
 		Iterator itr = findByF_N(folderId, name).iterator();
 
@@ -673,6 +730,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			DLFileRank dlFileRank = (DLFileRank)itr.next();
 			remove(dlFileRank);
 		}
+	}
+
+	public void removeByC_U_F_N(long companyId, long userId, long folderId,
+		String name) throws NoSuchFileRankException, SystemException {
+		DLFileRank dlFileRank = findByC_U_F_N(companyId, userId, folderId, name);
+		remove(dlFileRank);
 	}
 
 	public void removeAll() throws SystemException {
@@ -722,8 +785,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByF_N(String folderId, String name)
-		throws SystemException {
+	public int countByF_N(long folderId, String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -733,14 +795,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -756,10 +811,66 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
+			q.setLong(queryPos++, folderId);
 
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
+			if (name != null) {
+				q.setString(queryPos++, name);
 			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_U_F_N(long companyId, long userId, long folderId,
+		String name) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+			query.append("companyId = ?");
+			query.append(" AND ");
+			query.append("userId = ?");
+			query.append(" AND ");
+			query.append("folderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+			q.setLong(queryPos++, userId);
+			q.setLong(queryPos++, folderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);

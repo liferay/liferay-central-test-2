@@ -54,7 +54,7 @@ public class DLFileShortcutLocalServiceImpl
 	extends DLFileShortcutLocalServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
-			long userId, String folderId, String toFolderId, String toName,
+			long userId, long folderId, long toFolderId, String toName,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -65,7 +65,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long userId, String folderId, String toFolderId, String toName,
+			long userId, long folderId, long toFolderId, String toName,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -75,7 +75,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long userId, String folderId, String toFolderId, String toName,
+			long userId, long folderId, long toFolderId, String toName,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -89,8 +89,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		validate(user, toFolderId, toName);
 
-		long fileShortcutId = CounterLocalServiceUtil.increment(
-			DLFileShortcut.class.getName());
+		long fileShortcutId = CounterLocalServiceUtil.increment();
 
 		DLFileShortcut fileShortcut = DLFileShortcutUtil.create(fileShortcutId);
 
@@ -149,7 +148,7 @@ public class DLFileShortcutLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			fileShortcut.getCompanyId(), folder.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
-			fileShortcut.getPrimaryKey(), false, addCommunityPermissions,
+			fileShortcut.getFileShortcutId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -174,7 +173,7 @@ public class DLFileShortcutLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			fileShortcut.getCompanyId(), folder.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
-			fileShortcut.getPrimaryKey(), communityPermissions,
+			fileShortcut.getFileShortcutId(), communityPermissions,
 			guestPermissions);
 	}
 
@@ -191,14 +190,14 @@ public class DLFileShortcutLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, fileShortcut.getPrimaryKey());
+			ResourceImpl.SCOPE_INDIVIDUAL, fileShortcut.getFileShortcutId());
 
 		// File shortcut
 
 		DLFileShortcutUtil.remove(fileShortcut.getFileShortcutId());
 	}
 
-	public void deleteFileShortcuts(String toFolderId, String toName)
+	public void deleteFileShortcuts(long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		Iterator itr = DLFileShortcutUtil.findByTF_TN(
@@ -218,8 +217,8 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long userId, long fileShortcutId, String folderId,
-			String toFolderId, String toName)
+			long userId, long fileShortcutId, long folderId,
+			long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		// File shortcut
@@ -249,7 +248,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void updateFileShortcuts(
-			String oldToFolderId, String oldToName, String newToFolderId,
+			long oldToFolderId, String oldToName, long newToFolderId,
 			String newToName)
 		throws PortalException, SystemException {
 
@@ -266,10 +265,10 @@ public class DLFileShortcutLocalServiceImpl
 		}
 	}
 
-	protected String getFolderId(long companyId, String folderId)
+	protected long getFolderId(long companyId, long folderId)
 		throws PortalException, SystemException {
 
-		if (!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 			// Ensure folder exists and belongs to the proper company
 
@@ -288,7 +287,7 @@ public class DLFileShortcutLocalServiceImpl
 		return folderId;
 	}
 
-	protected void validate(User user, String toFolderId, String toName)
+	protected void validate(User user, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(

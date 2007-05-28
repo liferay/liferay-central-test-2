@@ -41,7 +41,7 @@ public class DLFolderServiceImpl
 	extends PrincipalBean implements DLFolderService {
 
 	public DLFolder addFolder(
-			long plid, String parentFolderId, String name, String description,
+			long plid, long parentFolderId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -55,7 +55,7 @@ public class DLFolderServiceImpl
 	}
 
 	public DLFolder addFolder(
-			long plid, String parentFolderId, String name, String description,
+			long plid, long parentFolderId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -68,7 +68,7 @@ public class DLFolderServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(String folderId)
+	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
@@ -77,7 +77,7 @@ public class DLFolderServiceImpl
 		DLFolderLocalServiceUtil.deleteFolder(folderId);
 	}
 
-	public DLFolder getFolder(String folderId)
+	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
@@ -87,8 +87,7 @@ public class DLFolderServiceImpl
 	}
 
 	public DLFolder updateFolder(
-			String folderId, String parentFolderId, String name,
-			String description)
+			long folderId, long parentFolderId, String name, String description)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(

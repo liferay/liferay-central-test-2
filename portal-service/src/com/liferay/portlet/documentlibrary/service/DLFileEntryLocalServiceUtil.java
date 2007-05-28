@@ -66,7 +66,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, boolean addCommunityPermissions,
@@ -81,7 +81,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] byteArray, boolean addCommunityPermissions,
@@ -96,7 +96,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, java.lang.String[] communityPermissions,
@@ -111,7 +111,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] byteArray, java.lang.String[] communityPermissions,
@@ -126,7 +126,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, java.lang.Boolean addCommunityPermissions,
@@ -144,7 +144,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] byteArray, java.lang.Boolean addCommunityPermissions,
@@ -162,7 +162,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, java.lang.String folderId, java.lang.String name,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.InputStream is, long size,
@@ -180,7 +180,7 @@ public class DLFileEntryLocalServiceUtil {
 			guestPermissions);
 	}
 
-	public static void addFileEntryResources(java.lang.String folderId,
+	public static void addFileEntryResources(long folderId,
 		java.lang.String name, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -201,7 +201,7 @@ public class DLFileEntryLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public static void addFileEntryResources(java.lang.String folderId,
+	public static void addFileEntryResources(long folderId,
 		java.lang.String name, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -223,23 +223,22 @@ public class DLFileEntryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteFileEntries(java.lang.String folderId)
+	public static void deleteFileEntries(long folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 		dlFileEntryLocalService.deleteFileEntries(folderId);
 	}
 
-	public static void deleteFileEntry(java.lang.String folderId,
-		java.lang.String name)
+	public static void deleteFileEntry(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 		dlFileEntryLocalService.deleteFileEntry(folderId, name);
 	}
 
-	public static void deleteFileEntry(java.lang.String folderId,
-		java.lang.String name, double version)
+	public static void deleteFileEntry(long folderId, java.lang.String name,
+		double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -255,7 +254,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static java.io.InputStream getFileAsStream(long companyId,
-		long userId, java.lang.String folderId, java.lang.String name)
+		long userId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -265,8 +264,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static java.io.InputStream getFileAsStream(long companyId,
-		long userId, java.lang.String folderId, java.lang.String name,
-		double version)
+		long userId, long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -276,7 +274,16 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		java.lang.String folderId, java.lang.String name)
+		long fileEntryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntry(fileEntryId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -284,23 +291,22 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getFileEntry(folderId, name);
 	}
 
-	public static java.util.List getFileEntries(java.lang.String folderId)
+	public static java.util.List getFileEntries(long folderId)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getFileEntries(folderId);
 	}
 
-	public static java.util.List getFileEntries(java.lang.String folderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getFileEntries(long folderId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getFileEntries(folderId, begin, end);
 	}
 
-	public static java.util.List getFileEntriesAndShortcuts(
-		java.lang.String folderId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getFileEntriesAndShortcuts(long folderId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getFileEntriesAndShortcuts(folderId,
@@ -316,7 +322,7 @@ public class DLFileEntryLocalServiceUtil {
 			begin, end);
 	}
 
-	public static int getFileEntriesAndShortcutsCount(java.lang.String folderId)
+	public static int getFileEntriesAndShortcutsCount(long folderId)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
@@ -330,7 +336,7 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getFileEntriesAndShortcutsCount(folderIds);
 	}
 
-	public static int getFileEntriesCount(java.lang.String folderId)
+	public static int getFileEntriesCount(long folderId)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
@@ -374,11 +380,10 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, java.lang.String folderId, java.lang.String newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		java.io.File file)
+		long userId, long folderId, long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -389,11 +394,10 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, java.lang.String folderId, java.lang.String newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray)
+		long userId, long folderId, long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -404,11 +408,10 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, java.lang.String folderId, java.lang.String newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		java.io.InputStream is, long size)
+		long userId, long folderId, long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, java.io.InputStream is, long size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();

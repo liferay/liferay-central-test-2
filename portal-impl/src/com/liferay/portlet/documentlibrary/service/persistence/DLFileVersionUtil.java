@@ -39,22 +39,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DLFileVersionUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion create(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK) {
-		return getPersistence().create(dlFileVersionPK);
+		long fileVersionId) {
+		return getPersistence().create(fileVersionId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK)
+		long fileVersionId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(dlFileVersionPK));
+			listener.onBeforeRemove(findByPrimaryKey(fileVersionId));
 		}
 
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion = getPersistence()
-																					.remove(dlFileVersionPK);
+																					.remove(fileVersionId);
 
 		if (listener != null) {
 			listener.onAfterRemove(dlFileVersion);
@@ -140,30 +140,29 @@ public class DLFileVersionUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK)
+		long fileVersionId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByPrimaryKey(dlFileVersionPK);
+		return getPersistence().findByPrimaryKey(fileVersionId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByPrimaryKey(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByPrimaryKey(dlFileVersionPK);
+		long fileVersionId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(fileVersionId);
 	}
 
-	public static java.util.List findByF_N(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static java.util.List findByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name);
 	}
 
-	public static java.util.List findByF_N(java.lang.String folderId,
+	public static java.util.List findByF_N(long folderId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end);
 	}
 
-	public static java.util.List findByF_N(java.lang.String folderId,
+	public static java.util.List findByF_N(long folderId,
 		java.lang.String name, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
@@ -171,7 +170,7 @@ public class DLFileVersionUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_First(
-		java.lang.String folderId, java.lang.String name,
+		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
@@ -179,7 +178,7 @@ public class DLFileVersionUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_Last(
-		java.lang.String folderId, java.lang.String name,
+		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
@@ -187,13 +186,25 @@ public class DLFileVersionUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByF_N_PrevAndNext(
-		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK,
-		java.lang.String folderId, java.lang.String name,
+		long fileVersionId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
-		return getPersistence().findByF_N_PrevAndNext(dlFileVersionPK,
-			folderId, name, obc);
+		return getPersistence().findByF_N_PrevAndNext(fileVersionId, folderId,
+			name, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_V(
+		long folderId, java.lang.String name, double version)
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByF_N_V(folderId, name, version);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByF_N_V(
+		long folderId, java.lang.String name, double version)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByF_N_V(folderId, name, version);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -225,18 +236,30 @@ public class DLFileVersionUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByF_N(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static void removeByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByF_N(folderId, name);
+	}
+
+	public static void removeByF_N_V(long folderId, java.lang.String name,
+		double version)
+		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
+			com.liferay.portal.SystemException {
+		getPersistence().removeByF_N_V(folderId, name, version);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByF_N(java.lang.String folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByF_N(folderId, name);
+	}
+
+	public static int countByF_N_V(long folderId, java.lang.String name,
+		double version) throws com.liferay.portal.SystemException {
+		return getPersistence().countByF_N_V(folderId, name, version);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

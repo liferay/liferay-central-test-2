@@ -83,7 +83,7 @@ public class DLFileEntryFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				String folderId = (String)folderIds.get(i);
+				Long folderId = (Long)folderIds.get(i);
 
 				qPos.add(folderId);
 			}

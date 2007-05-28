@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder create(
-		java.lang.String folderId) {
+		long folderId) {
 		return getPersistence().create(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder remove(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		ModelListener listener = _getListener();
@@ -140,14 +140,14 @@ public class DLFolderUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByPrimaryKey(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByPrimaryKey(
-		java.lang.String folderId) throws com.liferay.portal.SystemException {
+		long folderId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(folderId);
 	}
 
@@ -182,7 +182,7 @@ public class DLFolderUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByGroupId_PrevAndNext(
-		java.lang.String folderId, long groupId,
+		long folderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
@@ -220,7 +220,7 @@ public class DLFolderUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByCompanyId_PrevAndNext(
-		java.lang.String folderId, long companyId,
+		long folderId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
@@ -228,28 +228,25 @@ public class DLFolderUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByG_P(long groupId,
-		java.lang.String parentFolderId)
+	public static java.util.List findByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_P(groupId, parentFolderId);
 	}
 
-	public static java.util.List findByG_P(long groupId,
-		java.lang.String parentFolderId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_P(long groupId, long parentFolderId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_P(groupId, parentFolderId, begin, end);
 	}
 
-	public static java.util.List findByG_P(long groupId,
-		java.lang.String parentFolderId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByG_P(long groupId, long parentFolderId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_P(groupId, parentFolderId, begin, end,
 			obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_First(
-		long groupId, java.lang.String parentFolderId,
+		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
@@ -257,7 +254,7 @@ public class DLFolderUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_Last(
-		long groupId, java.lang.String parentFolderId,
+		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
@@ -265,8 +262,7 @@ public class DLFolderUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder[] findByG_P_PrevAndNext(
-		java.lang.String folderId, long groupId,
-		java.lang.String parentFolderId,
+		long folderId, long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
@@ -275,14 +271,14 @@ public class DLFolderUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByP_N(
-		java.lang.String parentFolderId, java.lang.String name)
+		long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByP_N(parentFolderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByP_N(
-		java.lang.String parentFolderId, java.lang.String name)
+		long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByP_N(parentFolderId, name);
 	}
@@ -326,13 +322,12 @@ public class DLFolderUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByG_P(long groupId, java.lang.String parentFolderId)
+	public static void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_P(groupId, parentFolderId);
 	}
 
-	public static void removeByP_N(java.lang.String parentFolderId,
-		java.lang.String name)
+	public static void removeByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		getPersistence().removeByP_N(parentFolderId, name);
@@ -352,13 +347,13 @@ public class DLFolderUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByG_P(long groupId, java.lang.String parentFolderId)
+	public static int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_P(groupId, parentFolderId);
 	}
 
-	public static int countByP_N(java.lang.String parentFolderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static int countByP_N(long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().countByP_N(parentFolderId, name);
 	}
 

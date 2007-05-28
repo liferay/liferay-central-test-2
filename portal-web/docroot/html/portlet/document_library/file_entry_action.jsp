@@ -46,7 +46,7 @@ else {
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
 				<portlet:param name="struts_action" value="/document_library/view_file_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="folderId" value="<%= fileEntry.getFolderId() %>" />
+				<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
 				<portlet:param name="name" value="<%= fileEntry.getName() %>" />
 			</portlet:renderURL>
 
@@ -57,7 +57,7 @@ else {
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="folderId" value="<%= fileEntry.getFolderId() %>" />
+				<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
 				<portlet:param name="name" value="<%= fileEntry.getName() %>" />
 			</portlet:renderURL>
 
@@ -68,7 +68,7 @@ else {
 			<liferay-security:permissionsURL
 				modelResource="<%= DLFileEntry.class.getName() %>"
 				modelResourceDescription="<%= fileEntry.getName() %>"
-				resourcePrimKey="<%= fileEntry.getPrimaryKey().toString() %>"
+				resourcePrimKey="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
 				var="permissionsURL"
 			/>
 
@@ -80,7 +80,7 @@ else {
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="folderId" value="<%= fileEntry.getFolderId() %>" />
+				<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
 				<portlet:param name="name" value="<%= fileEntry.getName() %>" />
 			</portlet:actionURL>
 
@@ -112,7 +112,7 @@ else {
 			<liferay-security:permissionsURL
 				modelResource="<%= DLFileShortcut.class.getName() %>"
 				modelResourceDescription="<%= fileShortcut.getToName() %>"
-				resourcePrimKey="<%= String.valueOf(fileShortcut.getPrimaryKey()) %>"
+				resourcePrimKey="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>"
 				var="shortcutPermissionsURL"
 			/>
 

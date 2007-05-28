@@ -31,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="DLFolderPermission.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,7 @@ import com.liferay.util.Validator;
 public class DLFolderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, String folderId,
+			PermissionChecker permissionChecker, long plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -52,8 +51,7 @@ public class DLFolderPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String folderId,
-			String actionId)
+			PermissionChecker permissionChecker, long folderId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, folderId, actionId)) {
@@ -72,13 +70,11 @@ public class DLFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, String folderId,
+			PermissionChecker permissionChecker, long plid, long folderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (Validator.equals(
-				folderId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (folderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.DOCUMENT_LIBRARY,
 				actionId);
@@ -89,8 +85,7 @@ public class DLFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String folderId,
-			String actionId)
+			PermissionChecker permissionChecker, long folderId, String actionId)
 		throws PortalException, SystemException {
 
 		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
@@ -104,8 +99,8 @@ public class DLFolderPermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), DLFolder.class.getName(),
-			folder.getPrimaryKey().toString(), actionId);
+			folder.getGroupId(), DLFolder.class.getName(), folder.getFolderId(),
+			actionId);
 	}
 
 }

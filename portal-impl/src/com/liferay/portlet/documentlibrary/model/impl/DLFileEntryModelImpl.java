@@ -25,8 +25,6 @@ package com.liferay.portlet.documentlibrary.model.impl;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
-
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
@@ -57,8 +55,7 @@ import java.util.Date;
 public class DLFileEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileEntry";
 	public static Object[][] TABLE_COLUMNS = {
-			{ "folderId", new Integer(Types.VARCHAR) },
-			{ "name", new Integer(Types.VARCHAR) },
+			{ "fileEntryId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
@@ -66,6 +63,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 			{ "versionUserName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "folderId", new Integer(Types.BIGINT) },
+			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
@@ -76,17 +75,14 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.folderId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.name"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.userName"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_VERSIONUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.versionUserName"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.name"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.title"),
@@ -103,45 +99,21 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	public DLFileEntryModelImpl() {
 	}
 
-	public DLFileEntryPK getPrimaryKey() {
-		return new DLFileEntryPK(_folderId, _name);
+	public long getPrimaryKey() {
+		return _fileEntryId;
 	}
 
-	public void setPrimaryKey(DLFileEntryPK pk) {
-		setFolderId(pk.folderId);
-		setName(pk.name);
+	public void setPrimaryKey(long pk) {
+		setFileEntryId(pk);
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public long getFileEntryId() {
+		return _fileEntryId;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
-
-			_folderId = folderId;
-		}
-	}
-
-	public String getName() {
-		return GetterUtil.getString(_name);
-	}
-
-	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
-			_name = name;
+	public void setFileEntryId(long fileEntryId) {
+		if (fileEntryId != _fileEntryId) {
+			_fileEntryId = fileEntryId;
 		}
 	}
 
@@ -235,6 +207,32 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getFolderId() {
+		return _folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
+			_folderId = folderId;
+		}
+	}
+
+	public String getName() {
+		return GetterUtil.getString(_name);
+	}
+
+	public void setName(String name) {
+		if (((name == null) && (_name != null)) ||
+				((name != null) && (_name == null)) ||
+				((name != null) && (_name != null) && !name.equals(_name))) {
+			if (!XSS_ALLOW_NAME) {
+				name = XSSUtil.strip(name);
+			}
+
+			_name = name;
+		}
+	}
+
 	public String getTitle() {
 		return GetterUtil.getString(_title);
 	}
@@ -317,8 +315,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileEntryImpl clone = new DLFileEntryImpl();
-		clone.setFolderId(getFolderId());
-		clone.setName(getName());
+		clone.setFileEntryId(getFileEntryId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -326,6 +323,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		clone.setVersionUserName(getVersionUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setFolderId(getFolderId());
+		clone.setName(getName());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setVersion(getVersion());
@@ -343,7 +342,16 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 		DLFileEntryImpl dlFileEntry = (DLFileEntryImpl)obj;
 		int value = 0;
-		value = getFolderId().compareTo(dlFileEntry.getFolderId());
+
+		if (getFolderId() < dlFileEntry.getFolderId()) {
+			value = -1;
+		}
+		else if (getFolderId() > dlFileEntry.getFolderId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -372,9 +380,9 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFileEntryPK pk = dlFileEntry.getPrimaryKey();
+		long pk = dlFileEntry.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -383,11 +391,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _folderId;
-	private String _name;
+	private long _fileEntryId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
@@ -395,6 +402,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _folderId;
+	private String _name;
 	private String _title;
 	private String _description;
 	private double _version;

@@ -68,10 +68,9 @@ import org.json.JSONObject;
  *
  */
 public class DLFolderServiceJSON {
-	public static JSONObject addFolder(long plid,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject addFolder(long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
@@ -81,9 +80,9 @@ public class DLFolderServiceJSON {
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFolder(long plid,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
+	public static JSONObject addFolder(long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -94,13 +93,13 @@ public class DLFolderServiceJSON {
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteFolder(java.lang.String folderId)
+	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		DLFolderServiceUtil.deleteFolder(folderId);
 	}
 
-	public static JSONObject getFolder(java.lang.String folderId)
+	public static JSONObject getFolder(long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
@@ -108,9 +107,8 @@ public class DLFolderServiceJSON {
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateFolder(java.lang.String folderId,
-		java.lang.String parentFolderId, java.lang.String name,
-		java.lang.String description)
+	public static JSONObject updateFolder(long folderId, long parentFolderId,
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.updateFolder(folderId,

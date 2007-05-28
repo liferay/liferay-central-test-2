@@ -131,19 +131,19 @@ public class DLFileShortcutSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getFolderId() {
+	public long getFolderId() {
 		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
+	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
-	public String getToFolderId() {
+	public long getToFolderId() {
 		return _toFolderId;
 	}
 
-	public void setToFolderId(String toFolderId) {
+	public void setToFolderId(long toFolderId) {
 		_toFolderId = toFolderId;
 	}
 
@@ -161,7 +161,7 @@ public class DLFileShortcutSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _folderId;
-	private String _toFolderId;
+	private long _folderId;
+	private long _toFolderId;
 	private String _toName;
 }

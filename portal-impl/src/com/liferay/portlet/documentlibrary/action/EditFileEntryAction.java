@@ -155,7 +155,7 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	protected void deleteFileEntry(ActionRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
 		double version = ParamUtil.getDouble(req, "version");
 
@@ -163,14 +163,14 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	protected void lockFileEntry(ActionRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
 
 		DLFileEntryServiceUtil.lockFileEntry(folderId, name);
 	}
 
 	protected void unlockFileEntry(ActionRequest req) throws Exception {
-		String folderId = ParamUtil.getString(req, "folderId");
+		long folderId = ParamUtil.getLong(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
 
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
@@ -188,8 +188,8 @@ public class EditFileEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String folderId = ParamUtil.getString(uploadReq, "folderId");
-		String newFolderId = ParamUtil.getString(uploadReq, "newFolderId");
+		long folderId = ParamUtil.getLong(uploadReq, "folderId");
+		long newFolderId = ParamUtil.getLong(uploadReq, "newFolderId");
 		String name = ParamUtil.getString(uploadReq, "name");
 		String sourceFileName = uploadReq.getFileName("file");
 

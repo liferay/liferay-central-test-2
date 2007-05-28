@@ -30,10 +30,10 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  */
 public interface DLFolderPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFolder create(
-		java.lang.String folderId);
+		long folderId);
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder remove(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
@@ -50,12 +50,12 @@ public interface DLFolderPersistence {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
-		java.lang.String folderId)
+		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByPrimaryKey(
-		java.lang.String folderId) throws com.liferay.portal.SystemException;
+		long folderId) throws com.liferay.portal.SystemException;
 
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -78,7 +78,7 @@ public interface DLFolderPersistence {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder[] findByGroupId_PrevAndNext(
-		java.lang.String folderId, long groupId,
+		long folderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -104,50 +104,46 @@ public interface DLFolderPersistence {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder[] findByCompanyId_PrevAndNext(
-		java.lang.String folderId, long companyId,
+		long folderId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
-	public java.util.List findByG_P(long groupId,
-		java.lang.String parentFolderId)
+	public java.util.List findByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId,
-		java.lang.String parentFolderId, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List findByG_P(long groupId, long parentFolderId,
+		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_P(long groupId,
-		java.lang.String parentFolderId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List findByG_P(long groupId, long parentFolderId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_First(
-		long groupId, java.lang.String parentFolderId,
+		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_Last(
-		long groupId, java.lang.String parentFolderId,
+		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder[] findByG_P_PrevAndNext(
-		java.lang.String folderId, long groupId,
-		java.lang.String parentFolderId,
+		long folderId, long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder findByP_N(
-		java.lang.String parentFolderId, java.lang.String name)
+		long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByP_N(
-		java.lang.String parentFolderId, java.lang.String name)
+		long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List findWithDynamicQuery(
@@ -173,11 +169,10 @@ public interface DLFolderPersistence {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_P(long groupId, java.lang.String parentFolderId)
+	public void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByP_N(java.lang.String parentFolderId,
-		java.lang.String name)
+	public void removeByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
@@ -189,10 +184,10 @@ public interface DLFolderPersistence {
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_P(long groupId, java.lang.String parentFolderId)
+	public int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByP_N(java.lang.String parentFolderId, java.lang.String name)
+	public int countByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

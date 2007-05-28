@@ -25,10 +25,10 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String breadcrumbsFolderId = ParamUtil.getString(request, "breadcrumbsFolderId");
+long breadcrumbsFolderId = ParamUtil.getLong(request, "breadcrumbsFolderId");
 
 String folderIds = ParamUtil.getString(request, "folderIds");
-String[] folderIdsArray = StringUtil.split(folderIds);
+long[] folderIdsArray = StringUtil.split(folderIds, 0L);
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>
@@ -47,7 +47,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/document_library/search");
-portletURL.setParameter("breadcrumbsFolderId", breadcrumbsFolderId);
+portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
 portletURL.setParameter("folderIds", folderIds);
 portletURL.setParameter("keywords", keywords);
 
@@ -84,21 +84,21 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	// Folder and document
 
-	String repositoryId = doc.get("repositoryId");
+	long folderId = GetterUtil.getLong(doc.get("repositoryId"));
 	String fileName = doc.get("path");
 
-	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(repositoryId, fileName);
+	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, fileName);
 
 	row.setObject(fileEntry);
 
-	DLFolder folder = DLFolderLocalServiceUtil.getFolder(repositoryId);
+	DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 	PortletURL rowURL = renderResponse.createActionURL();
 
 	rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 	rowURL.setParameter("struts_action", "/document_library/get_file");
-	rowURL.setParameter("folderId", repositoryId);
+	rowURL.setParameter("folderId", String.valueOf(folderId));
 	rowURL.setParameter("name", fileName);
 
 	row.addText(folder.getName(), rowURL);

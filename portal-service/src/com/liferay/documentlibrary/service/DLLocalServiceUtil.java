@@ -37,7 +37,7 @@ import java.io.InputStream;
 public class DLLocalServiceUtil {
 
 	public static void addFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, InputStream is)
 		throws PortalException, SystemException {
 
@@ -48,7 +48,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static InputStream getFileAsStream(
-			long companyId, String repositoryId, String fileName)
+			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
@@ -58,7 +58,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static InputStream getFileAsStream(
-			long companyId, String repositoryId, String fileName,
+			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -69,7 +69,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static boolean hasFileContentNode(
-			long companyId, String repositoryId, String fileName,
+			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -81,7 +81,7 @@ public class DLLocalServiceUtil {
 
 	public static Hits search(
 			long companyId, String portletId, long groupId,
-			String[] repositoryIds, String keywords)
+			long[] repositoryIds, String keywords)
 		throws SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
@@ -91,7 +91,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			InputStream is)
 		throws PortalException, SystemException {

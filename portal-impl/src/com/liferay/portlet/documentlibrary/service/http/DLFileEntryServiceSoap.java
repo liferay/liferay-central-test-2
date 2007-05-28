@@ -79,11 +79,11 @@ import java.rmi.RemoteException;
  */
 public class DLFileEntryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		long folderId, java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
 					name, title, description, tagsEntries, extraSettings,
@@ -98,10 +98,10 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
-		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		long folderId, java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
@@ -116,8 +116,8 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static void deleteFileEntry(java.lang.String folderId,
-		java.lang.String name) throws RemoteException {
+	public static void deleteFileEntry(long folderId, java.lang.String name)
+		throws RemoteException {
 		try {
 			DLFileEntryServiceUtil.deleteFileEntry(folderId, name);
 		}
@@ -127,8 +127,8 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static void deleteFileEntry(java.lang.String folderId,
-		java.lang.String name, double version) throws RemoteException {
+	public static void deleteFileEntry(long folderId, java.lang.String name,
+		double version) throws RemoteException {
 		try {
 			DLFileEntryServiceUtil.deleteFileEntry(folderId, name, version);
 		}
@@ -139,8 +139,7 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
-		java.lang.String folderId, java.lang.String name)
-		throws RemoteException {
+		long folderId, java.lang.String name) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntry(folderId,
 					name);
@@ -153,8 +152,8 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static void lockFileEntry(java.lang.String folderId,
-		java.lang.String name) throws RemoteException {
+	public static void lockFileEntry(long folderId, java.lang.String name)
+		throws RemoteException {
 		try {
 			DLFileEntryServiceUtil.lockFileEntry(folderId, name);
 		}
@@ -164,8 +163,8 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static void unlockFileEntry(java.lang.String folderId,
-		java.lang.String name) throws RemoteException {
+	public static void unlockFileEntry(long folderId, java.lang.String name)
+		throws RemoteException {
 		try {
 			DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
 		}
@@ -176,11 +175,11 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap updateFileEntry(
-		java.lang.String folderId, java.lang.String newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray) throws RemoteException {
+		long folderId, long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, byte[] byteArray)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 					newFolderId, name, sourceFileName, title, description,

@@ -61,8 +61,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.VARCHAR) },
-			{ "toFolderId", new Integer(Types.VARCHAR) },
+			{ "folderId", new Integer(Types.BIGINT) },
+			{ "toFolderId", new Integer(Types.BIGINT) },
 			{ "toName", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
@@ -70,12 +70,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 			XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.folderId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TOFOLDERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.toFolderId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TONAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.toName"),
@@ -167,36 +161,22 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getFolderId() {
-		return GetterUtil.getString(_folderId);
+	public long getFolderId() {
+		return _folderId;
 	}
 
-	public void setFolderId(String folderId) {
-		if (((folderId == null) && (_folderId != null)) ||
-				((folderId != null) && (_folderId == null)) ||
-				((folderId != null) && (_folderId != null) &&
-				!folderId.equals(_folderId))) {
-			if (!XSS_ALLOW_FOLDERID) {
-				folderId = XSSUtil.strip(folderId);
-			}
-
+	public void setFolderId(long folderId) {
+		if (folderId != _folderId) {
 			_folderId = folderId;
 		}
 	}
 
-	public String getToFolderId() {
-		return GetterUtil.getString(_toFolderId);
+	public long getToFolderId() {
+		return _toFolderId;
 	}
 
-	public void setToFolderId(String toFolderId) {
-		if (((toFolderId == null) && (_toFolderId != null)) ||
-				((toFolderId != null) && (_toFolderId == null)) ||
-				((toFolderId != null) && (_toFolderId != null) &&
-				!toFolderId.equals(_toFolderId))) {
-			if (!XSS_ALLOW_TOFOLDERID) {
-				toFolderId = XSSUtil.strip(toFolderId);
-			}
-
+	public void setToFolderId(long toFolderId) {
+		if (toFolderId != _toFolderId) {
 			_toFolderId = toFolderId;
 		}
 	}
@@ -286,7 +266,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _folderId;
-	private String _toFolderId;
+	private long _folderId;
+	private long _toFolderId;
 	private String _toName;
 }

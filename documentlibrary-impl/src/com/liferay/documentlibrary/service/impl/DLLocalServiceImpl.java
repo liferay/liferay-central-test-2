@@ -74,7 +74,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public static final double DEFAULT_VERSION = 1.0;
 
 	public void addFile(
-			long companyId, String portletId, long groupId, String repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, InputStream is)
 		throws PortalException, SystemException {
 
@@ -168,14 +168,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public InputStream getFileAsStream(
-			long companyId, String repositoryId, String fileName)
+			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
 		return getFileAsStream(companyId, repositoryId, fileName, 0);
 	}
 
 	public InputStream getFileAsStream(
-			long companyId, String repositoryId, String fileName,
+			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -206,7 +206,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public boolean hasFileContentNode(
-			long companyId, String repositoryId, String fileName,
+			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -223,7 +223,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public Hits search(
 			long companyId, String portletId, long groupId,
-			String[] repositoryIds, String keywords)
+			long[] repositoryIds, String keywords)
 		throws SystemException {
 
 		try {
@@ -244,7 +244,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 				BooleanQuery repositoryIdsQuery = new BooleanQuery();
 
 				for (int i = 0; i < repositoryIds.length; i++) {
-					Term term = new Term("repositoryId", repositoryIds[i]);
+					Term term = new Term(
+						"repositoryId", String.valueOf(repositoryIds[i]));
 					TermQuery termQuery = new TermQuery(term);
 
 					repositoryIdsQuery.add(
@@ -279,9 +280,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public void updateFile(
-			long companyId, String portletId, long groupId,
-			String repositoryId, String fileName, double versionNumber,
-			String sourceFileName, InputStream is)
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		String versionLabel = String.valueOf(versionNumber);

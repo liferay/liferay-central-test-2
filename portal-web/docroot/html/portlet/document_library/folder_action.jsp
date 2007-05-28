@@ -34,7 +34,7 @@ DLFolder folder = (DLFolder)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/document_library/edit_folder" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="folderId" value="<%= folder.getFolderId() %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ DLFolder folder = (DLFolder)row.getObject();
 	<liferay-security:permissionsURL
 		modelResource="<%= DLFolder.class.getName() %>"
 		modelResourceDescription="<%= folder.getName() %>"
-		resourcePrimKey="<%= folder.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(folder.getFolderId()) %>"
 		var="permissionsURL"
 	/>
 
@@ -56,7 +56,7 @@ DLFolder folder = (DLFolder)row.getObject();
 		<portlet:param name="struts_action" value="/document_library/edit_folder" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="folderId" value="<%= folder.getFolderId() %>" />
+		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

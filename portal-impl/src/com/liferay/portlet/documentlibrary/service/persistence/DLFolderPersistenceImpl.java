@@ -54,7 +54,7 @@ import java.util.List;
  */
 public class DLFolderPersistenceImpl extends BasePersistence
 	implements DLFolderPersistence {
-	public DLFolder create(String folderId) {
+	public DLFolder create(long folderId) {
 		DLFolder dlFolder = new DLFolderImpl();
 		dlFolder.setNew(true);
 		dlFolder.setPrimaryKey(folderId);
@@ -62,7 +62,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		return dlFolder;
 	}
 
-	public DLFolder remove(String folderId)
+	public DLFolder remove(long folderId)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
 
@@ -70,7 +70,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			DLFolder dlFolder = (DLFolder)session.get(DLFolderImpl.class,
-					folderId);
+					new Long(folderId));
 
 			if (dlFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -149,7 +149,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder findByPrimaryKey(String folderId)
+	public DLFolder findByPrimaryKey(long folderId)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = fetchByPrimaryKey(folderId);
 
@@ -166,14 +166,13 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		return dlFolder;
 	}
 
-	public DLFolder fetchByPrimaryKey(String folderId)
-		throws SystemException {
+	public DLFolder fetchByPrimaryKey(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (DLFolder)session.get(DLFolderImpl.class, folderId);
+			return (DLFolder)session.get(DLFolderImpl.class, new Long(folderId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -295,7 +294,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder[] findByGroupId_PrevAndNext(String folderId, long groupId,
+	public DLFolder[] findByGroupId_PrevAndNext(long folderId, long groupId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByPrimaryKey(folderId);
 		int count = countByGroupId(groupId);
@@ -454,7 +453,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder[] findByCompanyId_PrevAndNext(String folderId,
+	public DLFolder[] findByCompanyId_PrevAndNext(long folderId,
 		long companyId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByPrimaryKey(folderId);
@@ -502,7 +501,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, String parentFolderId)
+	public List findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -514,14 +513,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentFolderId ASC").append(", ");
@@ -532,10 +524,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			return q.list();
 		}
@@ -547,12 +536,12 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByG_P(long groupId, String parentFolderId, int begin,
-		int end) throws SystemException {
+	public List findByG_P(long groupId, long parentFolderId, int begin, int end)
+		throws SystemException {
 		return findByG_P(groupId, parentFolderId, begin, end, null);
 	}
 
-	public List findByG_P(long groupId, String parentFolderId, int begin,
+	public List findByG_P(long groupId, long parentFolderId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -564,14 +553,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -589,10 +571,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -604,7 +583,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder findByG_P_First(long groupId, String parentFolderId,
+	public DLFolder findByG_P_First(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
@@ -625,7 +604,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder findByG_P_Last(long groupId, String parentFolderId,
+	public DLFolder findByG_P_Last(long groupId, long parentFolderId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
@@ -647,8 +626,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder[] findByG_P_PrevAndNext(String folderId, long groupId,
-		String parentFolderId, OrderByComparator obc)
+	public DLFolder[] findByG_P_PrevAndNext(long folderId, long groupId,
+		long parentFolderId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByPrimaryKey(folderId);
 		int count = countByG_P(groupId, parentFolderId);
@@ -662,14 +641,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -687,10 +659,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, dlFolder);
 			DLFolder[] array = new DLFolderImpl[3];
@@ -708,7 +677,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder findByP_N(String parentFolderId, String name)
+	public DLFolder findByP_N(long parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = fetchByP_N(parentFolderId, name);
 
@@ -733,7 +702,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		return dlFolder;
 	}
 
-	public DLFolder fetchByP_N(String parentFolderId, String name)
+	public DLFolder fetchByP_N(long parentFolderId, String name)
 		throws SystemException {
 		Session session = null;
 
@@ -743,14 +712,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -769,10 +731,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);
@@ -895,7 +854,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByG_P(long groupId, String parentFolderId)
+	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
@@ -905,7 +864,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByP_N(String parentFolderId, String name)
+	public void removeByP_N(long parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByP_N(parentFolderId, name);
 		remove(dlFolder);
@@ -997,7 +956,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByG_P(long groupId, String parentFolderId)
+	public int countByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -1010,14 +969,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
 			query.append("groupId = ?");
 			query.append(" AND ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -1025,10 +977,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			Iterator itr = q.list().iterator();
 
@@ -1050,7 +999,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByP_N(String parentFolderId, String name)
+	public int countByP_N(long parentFolderId, String name)
 		throws SystemException {
 		Session session = null;
 
@@ -1061,14 +1010,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
-
-			if (parentFolderId == null) {
-				query.append("parentFolderId IS NULL");
-			}
-			else {
-				query.append("parentFolderId = ?");
-			}
-
+			query.append("parentFolderId = ?");
 			query.append(" AND ");
 
 			if (name == null) {
@@ -1084,10 +1026,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (parentFolderId != null) {
-				q.setString(queryPos++, parentFolderId);
-			}
+			q.setLong(queryPos++, parentFolderId);
 
 			if (name != null) {
 				q.setString(queryPos++, name);

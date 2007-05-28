@@ -53,24 +53,7 @@ import java.util.List;
 public class DLFileEntryJSONSerializer {
 	public static JSONObject toJSONObject(DLFileEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		String folderId = model.getFolderId();
-
-		if (folderId == null) {
-			jsonObj.put("folderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("folderId", folderId.toString());
-		}
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
+		jsonObj.put("fileEntryId", model.getFileEntryId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 
@@ -110,6 +93,17 @@ public class DLFileEntryJSONSerializer {
 		}
 		else {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
+		}
+
+		jsonObj.put("folderId", model.getFolderId());
+
+		String name = model.getName();
+
+		if (name == null) {
+			jsonObj.put("name", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("name", name.toString());
 		}
 
 		String title = model.getTitle();

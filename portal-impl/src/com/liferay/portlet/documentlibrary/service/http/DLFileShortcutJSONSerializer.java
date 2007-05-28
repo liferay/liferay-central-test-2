@@ -84,23 +84,8 @@ public class DLFileShortcutJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String folderId = model.getFolderId();
-
-		if (folderId == null) {
-			jsonObj.put("folderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("folderId", folderId.toString());
-		}
-
-		String toFolderId = model.getToFolderId();
-
-		if (toFolderId == null) {
-			jsonObj.put("toFolderId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("toFolderId", toFolderId.toString());
-		}
+		jsonObj.put("folderId", model.getFolderId());
+		jsonObj.put("toFolderId", model.getToFolderId());
 
 		String toName = model.getToName();
 

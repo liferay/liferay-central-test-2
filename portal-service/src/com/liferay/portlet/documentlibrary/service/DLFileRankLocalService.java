@@ -60,14 +60,14 @@ public interface DLFileRankLocalService {
 	public void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteFileRanks(java.lang.String folderId, java.lang.String name)
+	public void deleteFileRanks(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getFileRanks(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, long companyId, long userId, java.lang.String folderId,
+		long groupId, long companyId, long userId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

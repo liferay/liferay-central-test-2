@@ -60,7 +60,7 @@ import java.util.List;
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
-			long userId, long plid, String parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -72,7 +72,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder addFolder(
-			long userId, long plid, String parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -83,7 +83,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder addFolder(
-			long userId, long plid, String parentFolderId, String name,
+			long userId, long plid, long parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
@@ -98,8 +98,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		validate(name);
 
-		String folderId = String.valueOf(CounterLocalServiceUtil.increment(
-			DLFolder.class.getName()));
+		long folderId = CounterLocalServiceUtil.increment();
 
 		DLFolder folder = DLFolderUtil.create(folderId);
 
@@ -133,7 +132,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
 
 		if (layoutsSyncEnabled &&
-			!parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			(parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			DLFolder parentFolder = DLFolderUtil.findByPrimaryKey(
 				parentFolderId);
@@ -170,7 +169,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public void addFolderResources(
-			String folderId, boolean addCommunityPermissions,
+			long folderId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -187,12 +186,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			DLFolder.class.getName(), folder.getPrimaryKey().toString(),
-			false, addCommunityPermissions, addGuestPermissions);
+			DLFolder.class.getName(), folder.getFolderId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFolderResources(
-			String folderId, String[] communityPermissions,
+			long folderId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -208,11 +207,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			DLFolder.class.getName(), folder.getPrimaryKey().toString(),
+			DLFolder.class.getName(), folder.getFolderId(),
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(String folderId)
+	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
@@ -242,7 +241,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), DLFolder.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, folder.getPrimaryKey().toString());
+			ResourceImpl.SCOPE_INDIVIDUAL, folder.getFolderId());
 
 		// Folder
 
@@ -261,13 +260,13 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
-	public DLFolder getFolder(String folderId)
+	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		return DLFolderUtil.findByPrimaryKey(folderId);
 	}
 
-	public DLFolder getFolder(String parentFolderId, String name)
+	public DLFolder getFolder(long parentFolderId, String name)
 		throws PortalException, SystemException {
 
 		return DLFolderUtil.findByP_N(parentFolderId, name);
@@ -277,27 +276,26 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return DLFolderUtil.findByCompanyId(companyId);
 	}
 
-	public List getFolders(long groupId, String parentFolderId)
+	public List getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return DLFolderUtil.findByG_P(groupId, parentFolderId);
 	}
 
 	public List getFolders(
-			long groupId, String parentFolderId, int begin, int end)
+			long groupId, long parentFolderId, int begin, int end)
 		throws SystemException {
 
 		return DLFolderUtil.findByG_P(groupId, parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(long groupId, String parentFolderId)
+	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return DLFolderUtil.countByG_P(groupId, parentFolderId);
 	}
 
-	public void getSubfolderIds(
-			List folderIds, long groupId, String folderId)
+	public void getSubfolderIds(List folderIds, long groupId, long folderId)
 		throws SystemException {
 
 		Iterator itr = DLFolderUtil.findByG_P(groupId, folderId).iterator();
@@ -305,7 +303,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			DLFolder folder = (DLFolder)itr.next();
 
-			folderIds.add(folder.getFolderId());
+			folderIds.add(new Long(folder.getFolderId()));
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
@@ -313,7 +311,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, String[] folderIds, String keywords)
+			long companyId, long groupId, long[] folderIds, String keywords)
 		throws PortalException, SystemException {
 
 		return DLLocalServiceUtil.search(
@@ -322,7 +320,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public DLFolder updateFolder(
-			String folderId, String parentFolderId, String name,
+			long folderId, long parentFolderId, String name,
 			String description)
 		throws PortalException, SystemException {
 
@@ -342,10 +340,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return folder;
 	}
 
-	protected String getParentFolderId(long groupId, String parentFolderId)
+	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (!parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder =
 				DLFolderUtil.fetchByPrimaryKey(parentFolderId);
 
@@ -359,14 +357,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return parentFolderId;
 	}
 
-	protected String getParentFolderId(DLFolder folder, String parentFolderId)
+	protected long getParentFolderId(DLFolder folder, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
 		}
 
-		if (folder.getFolderId().equals(parentFolderId)) {
+		if (folder.getFolderId() == parentFolderId) {
 			return folder.getParentFolderId();
 		}
 		else {
@@ -384,7 +382,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
-			if (subfolderIds.contains(parentFolderId)) {
+			if (subfolderIds.contains(new Long(parentFolderId))) {
 				return folder.getParentFolderId();
 			}
 

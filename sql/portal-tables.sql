@@ -184,8 +184,7 @@ create table CyrusVirtual (
 );
 
 create table DLFileEntry (
-	folderId VARCHAR(75) not null,
-	name VARCHAR(100) not null,
+	fileEntryId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -193,22 +192,23 @@ create table DLFileEntry (
 	versionUserName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	folderId LONG,
+	name VARCHAR(100) null,
 	title VARCHAR(100) null,
 	description STRING null,
 	version DOUBLE,
 	size_ INTEGER,
 	readCount INTEGER,
-	extraSettings TEXT null,
-	primary key (folderId, name)
+	extraSettings TEXT null
 );
 
 create table DLFileRank (
+	fileRankId LONG primary key,
 	companyId LONG,
 	userId LONG,
-	folderId VARCHAR(75) not null,
-	name VARCHAR(100) not null,
 	createDate DATE null,
-	primary key (companyId, userId, folderId, name)
+	folderId LONG,
+	name VARCHAR(100) null
 );
 
 create table DLFileShortcut (
@@ -218,32 +218,32 @@ create table DLFileShortcut (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	folderId VARCHAR(75) null,
-	toFolderId VARCHAR(75) null,
+	folderId LONG,
+	toFolderId LONG,
 	toName VARCHAR(75) null
 );
 
 create table DLFileVersion (
-	folderId VARCHAR(75) not null,
-	name VARCHAR(100) not null,
-	version DOUBLE,
+	fileVersionId LONG primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
-	size_ INTEGER,
-	primary key (folderId, name, version)
+	folderId LONG,
+	name VARCHAR(100) null,
+	version DOUBLE,
+	size_ INTEGER
 );
 
 create table DLFolder (
-	folderId VARCHAR(75) not null primary key,
+	folderId LONG primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	parentFolderId VARCHAR(75) null,
+	parentFolderId LONG,
 	name VARCHAR(100) null,
 	description STRING null,
 	lastPostDate DATE null

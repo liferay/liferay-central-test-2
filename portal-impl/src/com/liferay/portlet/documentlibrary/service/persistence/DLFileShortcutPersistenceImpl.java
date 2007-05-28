@@ -187,7 +187,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(String folderId) throws SystemException {
+	public List findByFolderId(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -196,24 +196,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			return q.list();
 		}
@@ -225,12 +215,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByFolderId(String folderId, int begin, int end)
+	public List findByFolderId(long folderId, int begin, int end)
 		throws SystemException {
 		return findByFolderId(folderId, begin, end, null);
 	}
 
-	public List findByFolderId(String folderId, int begin, int end,
+	public List findByFolderId(long folderId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -240,14 +230,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -259,10 +242,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -274,7 +254,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileShortcut findByFolderId_First(String folderId,
+	public DLFileShortcut findByFolderId_First(long folderId,
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		List list = findByFolderId(folderId, 0, 1, obc);
@@ -293,7 +273,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileShortcut findByFolderId_Last(String folderId,
+	public DLFileShortcut findByFolderId_Last(long folderId,
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByFolderId(folderId);
@@ -314,7 +294,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	}
 
 	public DLFileShortcut[] findByFolderId_PrevAndNext(long fileShortcutId,
-		String folderId, OrderByComparator obc)
+		long folderId, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
 		int count = countByFolderId(folderId);
@@ -326,14 +306,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -345,10 +318,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
@@ -367,7 +337,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByTF_TN(String toFolderId, String toName)
+	public List findByTF_TN(long toFolderId, String toName)
 		throws SystemException {
 		Session session = null;
 
@@ -377,14 +347,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (toFolderId == null) {
-				query.append("toFolderId IS NULL");
-			}
-			else {
-				query.append("toFolderId = ?");
-			}
-
+			query.append("toFolderId = ?");
 			query.append(" AND ");
 
 			if (toName == null) {
@@ -400,10 +363,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (toFolderId != null) {
-				q.setString(queryPos++, toFolderId);
-			}
+			q.setLong(queryPos++, toFolderId);
 
 			if (toName != null) {
 				q.setString(queryPos++, toName);
@@ -419,13 +379,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByTF_TN(String toFolderId, String toName, int begin, int end)
+	public List findByTF_TN(long toFolderId, String toName, int begin, int end)
 		throws SystemException {
 		return findByTF_TN(toFolderId, toName, begin, end, null);
 	}
 
-	public List findByTF_TN(String toFolderId, String toName, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List findByTF_TN(long toFolderId, String toName, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -434,14 +394,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (toFolderId == null) {
-				query.append("toFolderId IS NULL");
-			}
-			else {
-				query.append("toFolderId = ?");
-			}
-
+			query.append("toFolderId = ?");
 			query.append(" AND ");
 
 			if (toName == null) {
@@ -462,10 +415,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (toFolderId != null) {
-				q.setString(queryPos++, toFolderId);
-			}
+			q.setLong(queryPos++, toFolderId);
 
 			if (toName != null) {
 				q.setString(queryPos++, toName);
@@ -481,7 +431,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileShortcut findByTF_TN_First(String toFolderId, String toName,
+	public DLFileShortcut findByTF_TN_First(long toFolderId, String toName,
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		List list = findByTF_TN(toFolderId, toName, 0, 1, obc);
@@ -503,7 +453,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFileShortcut findByTF_TN_Last(String toFolderId, String toName,
+	public DLFileShortcut findByTF_TN_Last(long toFolderId, String toName,
 		OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		int count = countByTF_TN(toFolderId, toName);
@@ -527,7 +477,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	}
 
 	public DLFileShortcut[] findByTF_TN_PrevAndNext(long fileShortcutId,
-		String toFolderId, String toName, OrderByComparator obc)
+		long toFolderId, String toName, OrderByComparator obc)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
 		int count = countByTF_TN(toFolderId, toName);
@@ -539,14 +489,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (toFolderId == null) {
-				query.append("toFolderId IS NULL");
-			}
-			else {
-				query.append("toFolderId = ?");
-			}
-
+			query.append("toFolderId = ?");
 			query.append(" AND ");
 
 			if (toName == null) {
@@ -567,10 +510,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (toFolderId != null) {
-				q.setString(queryPos++, toFolderId);
-			}
+			q.setLong(queryPos++, toFolderId);
 
 			if (toName != null) {
 				q.setString(queryPos++, toName);
@@ -669,7 +609,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByFolderId(String folderId) throws SystemException {
+	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
@@ -678,7 +618,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByTF_TN(String toFolderId, String toName)
+	public void removeByTF_TN(long toFolderId, String toName)
 		throws SystemException {
 		Iterator itr = findByTF_TN(toFolderId, toName).iterator();
 
@@ -696,7 +636,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByFolderId(String folderId) throws SystemException {
+	public int countByFolderId(long folderId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -706,24 +646,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (folderId == null) {
-				query.append("folderId IS NULL");
-			}
-			else {
-				query.append("folderId = ?");
-			}
-
+			query.append("folderId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (folderId != null) {
-				q.setString(queryPos++, folderId);
-			}
+			q.setLong(queryPos++, folderId);
 
 			Iterator itr = q.list().iterator();
 
@@ -745,7 +675,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByTF_TN(String toFolderId, String toName)
+	public int countByTF_TN(long toFolderId, String toName)
 		throws SystemException {
 		Session session = null;
 
@@ -756,14 +686,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
-
-			if (toFolderId == null) {
-				query.append("toFolderId IS NULL");
-			}
-			else {
-				query.append("toFolderId = ?");
-			}
-
+			query.append("toFolderId = ?");
 			query.append(" AND ");
 
 			if (toName == null) {
@@ -779,10 +702,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (toFolderId != null) {
-				q.setString(queryPos++, toFolderId);
-			}
+			q.setLong(queryPos++, toFolderId);
 
 			if (toName != null) {
 				q.setString(queryPos++, toName);

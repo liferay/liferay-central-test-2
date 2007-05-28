@@ -39,7 +39,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 public class DLFileEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String folderId, String name,
+			PermissionChecker permissionChecker, long folderId, String name,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -59,7 +59,7 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String folderId, String name,
+			PermissionChecker permissionChecker, long folderId, String name,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -78,7 +78,7 @@ public class DLFileEntryPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), DLFileEntry.class.getName(),
-			fileEntry.getPrimaryKey().toString(), actionId);
+			fileEntry.getFolderId(), actionId);
 	}
 
 }

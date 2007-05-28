@@ -75,13 +75,13 @@ public interface DLFileShortcutModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public String getFolderId();
+	public long getFolderId();
 
-	public void setFolderId(String folderId);
+	public void setFolderId(long folderId);
 
-	public String getToFolderId();
+	public long getToFolderId();
 
-	public void setToFolderId(String toFolderId);
+	public void setToFolderId(long toFolderId);
 
 	public String getToName();
 

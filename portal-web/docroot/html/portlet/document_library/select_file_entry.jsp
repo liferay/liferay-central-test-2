@@ -27,11 +27,7 @@
 <%
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId");
-
-if (Validator.isNull(folderId)) {
-	folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
-}
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 long groupId = BeanParamUtil.getLong(folder, request, "groupId");
 %>
@@ -75,7 +71,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	DLFolder curFolder = (DLFolder)results.get(i);
 
-	ResultRow row = new ResultRow(curFolder, curFolder.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -83,7 +79,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setParameter("struts_action", "/document_library/select_file_entry");
 	rowURL.setParameter("groupId", String.valueOf(groupId));
-	rowURL.setParameter("folderId", curFolder.getFolderId());
+	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 	// Name
 
@@ -100,7 +96,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List subfolderIds = new ArrayList();
 
-	subfolderIds.add(curFolder.getFolderId());
+	subfolderIds.add(new Long(curFolder.getFolderId()));
 
 	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
@@ -150,7 +146,7 @@ for (int i = 0; i < results.size(); i++) {
 	for (int i = 0; i < results.size(); i++) {
 		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
 
-		ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
+		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
 		StringMaker sm = new StringMaker();
 
@@ -193,7 +189,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Locked
 
-		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 

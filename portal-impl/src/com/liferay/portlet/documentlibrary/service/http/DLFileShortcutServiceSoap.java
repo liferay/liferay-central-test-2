@@ -79,9 +79,9 @@ import java.rmi.RemoteException;
  */
 public class DLFileShortcutServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
-		java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		long folderId, long toFolderId, java.lang.String toName,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
 				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
@@ -96,8 +96,8 @@ public class DLFileShortcutServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
-		java.lang.String folderId, java.lang.String toFolderId,
-		java.lang.String toName, java.lang.String[] communityPermissions,
+		long folderId, long toFolderId, java.lang.String toName,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
@@ -138,9 +138,8 @@ public class DLFileShortcutServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap updateFileShortcut(
-		long fileShortcutId, java.lang.String folderId,
-		java.lang.String toFolderId, java.lang.String toName)
-		throws RemoteException {
+		long fileShortcutId, long folderId, long toFolderId,
+		java.lang.String toName) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
 				DLFileShortcutServiceUtil.updateFileShortcut(fileShortcutId,

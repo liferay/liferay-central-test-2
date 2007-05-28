@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.service.base.DLFileRankLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 
 import java.util.Date;
@@ -46,7 +46,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		DLFileRankUtil.removeByUserId(userId);
 	}
 
-	public void deleteFileRanks(String folderId, String name)
+	public void deleteFileRanks(long folderId, String name)
 		throws SystemException {
 
 		DLFileRankUtil.removeByF_N(folderId, name);
@@ -59,33 +59,38 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	}
 
 	public DLFileRank updateFileRank(
-			long groupId, long companyId, long userId, String folderId,
+			long groupId, long companyId, long userId, long folderId,
 			String name)
 		throws PortalException, SystemException{
 
-		DLFileRankPK pk = new DLFileRankPK(companyId, userId, folderId, name);
-
 		try {
-			DLFileRankUtil.remove(pk);
+			DLFileRankUtil.removeByC_U_F_N(companyId, userId, folderId, name);
 		}
 		catch (NoSuchFileRankException nsfre) {
 		}
 
-		DLFileRank rank = DLFileRankUtil.create(pk);
+		long fileRankId = CounterLocalServiceUtil.increment();
 
-		rank.setCreateDate(new Date());
+		DLFileRank fileRank = DLFileRankUtil.create(fileRankId);
 
-		DLFileRankUtil.update(rank);
+		fileRank.setCompanyId(companyId);
+		fileRank.setUserId(userId);
+		fileRank.setCreateDate(new Date());
+		fileRank.setFolderId(folderId);
+		fileRank.setName(name);
+
+		DLFileRankUtil.update(fileRank);
 
 		if (DLFileRankFinder.countByG_U(groupId, userId) > 5) {
-			List ranks = DLFileRankFinder.findByG_U(groupId, userId);
+			List fileRanks = DLFileRankFinder.findByG_U(groupId, userId);
 
-			DLFileRank lastRank = (DLFileRank)ranks.get(ranks.size() - 1);
+			DLFileRank lastFileRank = (DLFileRank)fileRanks.get(
+				fileRanks.size() - 1);
 
-			DLFileRankUtil.remove(lastRank.getPrimaryKey());
+			DLFileRankUtil.remove(lastFileRank.getPrimaryKey());
 		}
 
-		return rank;
+		return fileRank;
 	}
 
 }
