@@ -44,6 +44,7 @@
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
 	<classpathentry kind="lib" path="lib/development/ow_jonas_bootstrap.jar"/>
 	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
+	<classpathentry kind="lib" path="lib/development/quercus.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
