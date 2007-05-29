@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -42,7 +44,8 @@ import javax.servlet.http.HttpSessionBindingListener;
  * @author Rudy Hilado
  *
  */
-public class PortletSessionTracker implements HttpSessionBindingListener {
+public class PortletSessionTracker
+	implements HttpSessionBindingListener, Serializable {
 
 	public static void add(HttpSession session) {
 		_instance._add(session);
@@ -108,6 +111,6 @@ public class PortletSessionTracker implements HttpSessionBindingListener {
 	private static PortletSessionTracker _instance =
 		new PortletSessionTracker();
 
-	private Map _sessions;
+	private transient Map _sessions;
 
 }
