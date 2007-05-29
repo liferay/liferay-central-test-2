@@ -30,6 +30,7 @@ import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.GetterUtil;
@@ -43,8 +44,11 @@ import java.text.MessageFormat;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.Cookie;
@@ -290,6 +294,29 @@ public class LanguageUtil {
 			_log.error(e);
 
 			throw new LanguageException(key, e);
+		}
+
+		if (value == null) {
+
+			// LEP-2849
+
+			HttpServletRequest req =
+				(HttpServletRequest)pageContext.getRequest();
+
+			PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+				WebKeys.JAVAX_PORTLET_CONFIG);
+
+			if (portletConfig != null) {
+				Locale locale = req.getLocale();
+
+				ResourceBundle bundle = portletConfig.getResourceBundle(locale);
+
+				try {
+					value = bundle.getString(key);
+				}
+				catch (MissingResourceException mre) {
+				}
+			}
 		}
 
 		if (value == null) {
