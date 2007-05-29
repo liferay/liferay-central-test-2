@@ -29,8 +29,6 @@ RenderRequest renderRequest = (RenderRequest)request.getAttribute(WebKeys.JAVAX_
 
 RenderResponse renderResponse = (RenderResponse)request.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
 
-PortletConfig portletConfig = (PortletConfig)request.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
-
 String namespace = StringPool.BLANK;
 PortletURL currentURLObj = null;
 String currentURL = StringPool.BLANK;
