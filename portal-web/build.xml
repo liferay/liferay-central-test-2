@@ -74,9 +74,14 @@
 		<unjar src="${project.dir}/lib/portal/rome.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 
-		<copy todir="${classpath.jsp}">
-			<fileset dir="docroot/WEB-INF/classes" />
-		</copy>
+		<if>
+			<available file="docroot/WEB-INF/classes" />
+			<then>
+				<copy todir="${classpath.jsp}">
+					<fileset dir="docroot/WEB-INF/classes" />
+				</copy>
+			</then>
+		</if>
 	</target>
 
 	<target name="compile-common-jsp">

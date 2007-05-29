@@ -393,11 +393,7 @@
 						<available file="${tstamp.value}/portal-ext.properties" />
 					</not>
 					<then>
-						<echo file="${tstamp.value}/portal-ext.properties" append="false">portal.release=enterprise
-
-portal.ctx=/
-
-auto.deploy.dest.dir=../webapps</echo>
+						<echo file="${tstamp.value}/portal-ext.properties" append="false">auto.deploy.dest.dir=../webapps</echo>
 					</then>
 				</if>
 
@@ -434,23 +430,6 @@ auto.deploy.dest.dir=../webapps</echo>
 						<include name="*-ext.properties" />
 					</fileset>
 				</copy>
-
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-						<equals arg1="${app.server.type}" arg2="jetty" />
-						<equals arg1="${app.server.type}" arg2="oc4j" />
-						<equals arg1="${app.server.type}" arg2="resin" />
-						<equals arg1="${app.server.type}" arg2="tomcat" />
-					</or>
-					<then>
-						<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-							<replacetoken>portal.release=enterprise</replacetoken>
-							<replacevalue>portal.release=professional</replacevalue>
-						</replace>
-					</then>
-				</if>
 
 				<if>
 					<or>
