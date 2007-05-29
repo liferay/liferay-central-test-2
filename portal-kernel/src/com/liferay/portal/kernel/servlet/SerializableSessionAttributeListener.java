@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import java.io.Serializable;
+
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
@@ -36,7 +38,7 @@ public class SerializableSessionAttributeListener implements HttpSessionAttribut
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
 		
-		if(!isSerializable(event.getValue().getClass())){
+		if(!(event.getValue() instanceof Serializable)){
 			System.out.println(
 						"WARN [com.liferay.portal.kernel.servlet.SerializableSessionAttributeListener] " +
 						"An object was added to session " +
@@ -48,27 +50,6 @@ public class SerializableSessionAttributeListener implements HttpSessionAttribut
 		}
 		
 	}
-	
-	private boolean isSerializable(Class clazz){
-		
-		Class superclass = clazz.getSuperclass();
-		
-		if(superclass != null && isSerializable(superclass)){
-			return true;
-		}
-		
-		Class[] interfaces = clazz.getInterfaces();
-		
-		for (int i = 0; i < interfaces.length; i++) {
-			Class interfac = interfaces[i];
-			
-			if(interfac.getName().equals("java.io.Serializable")){
-				return true;
-			}
-		}
-		
-		return false;
-	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
 	}
@@ -76,12 +57,5 @@ public class SerializableSessionAttributeListener implements HttpSessionAttribut
 	public void attributeReplaced(HttpSessionBindingEvent event) {
 		this.attributeAdded(event);
 	}
-
-	/*public static void main(String[] args) {
-		SerializableSessionAttributeListener test = new SerializableSessionAttributeListener();
-		System.out.println(test.isSerializable(Long.class)); 
-        System.out.println(test.isSerializable(LinkedHashMap.class));
-		System.out.println(test.isSerializable(PortletSessionTracker.class));
-	}*/
 
 }
