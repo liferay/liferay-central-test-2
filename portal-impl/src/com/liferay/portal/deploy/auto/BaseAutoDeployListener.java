@@ -81,7 +81,9 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 	}
 
 	public boolean isMatchingFileExtension(File file) {
-		if (file.getName().endsWith(".war")) {
+		String fileName = file.getName().toLowerCase();
+
+		if (fileName.endsWith(".war") || fileName.endsWith(".zip")) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(file.getPath() + " has a matching extension");
 			}

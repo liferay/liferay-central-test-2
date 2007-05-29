@@ -134,10 +134,11 @@ public class AutoDeployDir {
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
 
-			String fileName = file.getName();
+			String fileName = file.getName().toLowerCase();
 
-			if (file.isFile() && fileName.endsWith(".war") ||
-				fileName.endsWith(".xml")) {
+			if ((file.isFile()) &&
+				(fileName.endsWith(".war") || fileName.endsWith(".zip") ||
+				 fileName.endsWith(".xml"))) {
 
 				processFile(file);
 			}
