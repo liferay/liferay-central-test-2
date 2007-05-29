@@ -116,7 +116,19 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 					</c:otherwise>
 				</c:choose>
 
-				<%= LanguageUtil.get(pageContext, names[i]) %>
+				<%
+				String output = LanguageUtil.get(pageContext, names[i]);
+				
+				if (Validator.equals(output, names[i]) && portletConfig != null) {
+					try {
+						output = portletConfig.getResourceBundle(locale).getString(output);
+					}
+					catch (MissingResourceException mre) {
+					}
+				}
+				%>
+				
+				<%= output %>
 
 				<c:choose>
 					<c:when test="<%= values.length > 1 %>">
