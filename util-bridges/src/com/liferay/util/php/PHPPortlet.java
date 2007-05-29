@@ -148,7 +148,7 @@ public class PHPPortlet extends GenericPortlet {
 			httpRes.getWriter().write(result.toCharArray());
 		}
 		catch (Exception e) {
-			_log.error("Error execuring PHP", e);
+			_log.error("Error executing PHP", e);
 		}
 	}
 
