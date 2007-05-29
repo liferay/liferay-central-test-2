@@ -306,6 +306,14 @@ public class PortletDisplay implements Serializable {
 		_showMoveIcon = showMoveIcon;
 	}
 
+	public boolean isShowPortletIcon() {
+		return _showPortletIcon;
+	}
+
+	public void setShowPortletIcon(boolean showPortletIcon) {
+		_showPortletIcon = showPortletIcon;
+	}
+
 	public boolean isShowPrintIcon() {
 		return _showPrintIcon;
 	}
@@ -386,6 +394,14 @@ public class PortletDisplay implements Serializable {
 		_urlMin = urlMin;
 	}
 
+	public String getURLPortlet() {
+		return _urlPortlet;
+	}
+
+	public void setURLPortlet(String urlPortlet) {
+		_urlPortlet = urlPortlet;
+	}
+
 	public String getURLPrint() {
 		return _urlPrint;
 	}
@@ -454,6 +470,7 @@ public class PortletDisplay implements Serializable {
 		_showMaxIcon = false;
 		_showMinIcon = false;
 		_showMoveIcon = false;
+		_showPortletIcon = false;
 		_showPrintIcon = false;
 		_showRefreshIcon = false;
 		_urlBack = StringPool.BLANK;
@@ -464,6 +481,7 @@ public class PortletDisplay implements Serializable {
 		_urlHelp = StringPool.BLANK;
 		_urlMax = StringPool.BLANK;
 		_urlMin = StringPool.BLANK;
+		_urlPortlet = StringPool.BLANK;
 		_urlPrint = StringPool.BLANK;
 		_urlRefresh = StringPool.BLANK;
 		_restoreCurrentView = false;
@@ -502,6 +520,7 @@ public class PortletDisplay implements Serializable {
 		_showMaxIcon = master.isShowMaxIcon();
 		_showMinIcon = master.isShowMinIcon();
 		_showMoveIcon = master.isShowMoveIcon();
+		_showPortletIcon = master.isShowPortletIcon();
 		_showPrintIcon = master.isShowPrintIcon();
 		_showRefreshIcon = master.isShowRefreshIcon();
 		_urlBack = master.getURLBack();
@@ -512,6 +531,7 @@ public class PortletDisplay implements Serializable {
 		_urlHelp = master.getURLHelp();
 		_urlMax = master.getURLMax();
 		_urlMin = master.getURLMin();
+		_urlPortlet = master.getURLPortlet();
 		_urlPrint = master.getURLPrint();
 		_urlRefresh = master.getURLRefresh();
 		_restoreCurrentView = master.isRestoreCurrentView();
@@ -550,6 +570,7 @@ public class PortletDisplay implements Serializable {
 		slave.setShowMaxIcon(_showMaxIcon);
 		slave.setShowMinIcon(_showMinIcon);
 		slave.setShowMoveIcon(_showMoveIcon);
+		slave.setShowPortletIcon(_showPortletIcon);
 		slave.setShowPrintIcon(_showPrintIcon);
 		slave.setShowRefreshIcon(_showRefreshIcon);
 		slave.setURLBack(_urlBack);
@@ -560,6 +581,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLHelp(_urlHelp);
 		slave.setURLMax(_urlMax);
 		slave.setURLMin(_urlMin);
+		slave.setURLPortlet(_urlPortlet);
 		slave.setURLPrint(_urlPrint);
 		slave.setURLRefresh(_urlRefresh);
 		slave.setRestoreCurrentView(_restoreCurrentView);
@@ -601,6 +623,7 @@ public class PortletDisplay implements Serializable {
 	private boolean _showMaxIcon;
 	private boolean _showMinIcon;
 	private boolean _showMoveIcon;
+	private boolean _showPortletIcon;
 	private boolean _showPrintIcon;
 	private boolean _showRefreshIcon;
 	private String _urlBack = StringPool.BLANK;
@@ -611,6 +634,7 @@ public class PortletDisplay implements Serializable {
 	private String _urlHelp = StringPool.BLANK;
 	private String _urlMax = StringPool.BLANK;
 	private String _urlMin = StringPool.BLANK;
+	private String _urlPortlet = StringPool.BLANK;
 	private String _urlPrint = StringPool.BLANK;
 	private String _urlRefresh = StringPool.BLANK;
 	private boolean _restoreCurrentView;

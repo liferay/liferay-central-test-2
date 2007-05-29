@@ -47,6 +47,8 @@
 			<div class="portlet-shadow-tc">
 
 				<div class="portlet-header-decoration">
+					$theme.iconPortlet()
+
 					#if ($portletDisplay.getTitle() != "")
 						<span class="portlet-title">$portletDisplay.getTitle()</span>
 					#end

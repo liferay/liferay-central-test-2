@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,43 +19,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+package com.liferay.taglib.portletext;
 
-<div class="portlet-header-bar" id="portlet-header-bar_<%= portletDisplay.getId() %>"
-	<c:if test="<%= !portletDisplay.isShowBackIcon() %>">
-		onmouseover="PortletHeaderBar.show('<%= portletDisplay.getId() %>')"
-		onmouseout="PortletHeaderBar.hide('<%= portletDisplay.getId() %>')"
-	</c:if>
-	>
+import com.liferay.taglib.ui.IconTag;
 
-	<liferay-portlet:title />
+import java.io.IOException;
 
-	<div class="portlet-small-icon-bar" style="display: <%= portletDisplay.isShowBackIcon() ? "block" : "none" %>;">
-		<c:choose>
-			<c:when test="<%= portletDisplay.isShowBackIcon() %>">
-				<liferay-portlet:icon-back />
-			</c:when>
-			<c:otherwise>
-			    <liferay-portlet:icon-refresh />
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-				<liferay-portlet:icon-configuration />
+/**
+ * <a href="IconPortletTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class IconPortletTag extends IconTag {
 
-				<liferay-portlet:icon-edit />
+	public static void doTag(
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
 
-				<liferay-portlet:icon-edit-guest />
+		doTag(_PAGE, ctx, req, res);
+	}
 
-				<liferay-portlet:icon-help />
+	public static void doTag(
+			String page, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
+		throws IOException, ServletException {
 
-				<liferay-portlet:icon-print />
+		RequestDispatcher rd = ctx.getRequestDispatcher(page);
 
-				<liferay-portlet:icon-minimize />
+		rd.include(req, res);
+	}
 
-				<liferay-portlet:icon-maximize />
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
 
-				<liferay-portlet:icon-close />
-			</c:otherwise>
-		</c:choose>
-	</div>
-</div>
+	private static final String _PAGE =
+		"/html/taglib/portlet/icon_portlet/page.jsp";
+
+}

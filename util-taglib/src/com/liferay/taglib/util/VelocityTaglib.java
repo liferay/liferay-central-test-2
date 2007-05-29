@@ -24,7 +24,6 @@ package com.liferay.taglib.util;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.taglib.portlet.ActionURLTag;
-import com.liferay.taglib.portletext.HeaderBarTag;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
 import com.liferay.taglib.portletext.IconConfigurationTag;
@@ -33,6 +32,7 @@ import com.liferay.taglib.portletext.IconEditTag;
 import com.liferay.taglib.portletext.IconHelpTag;
 import com.liferay.taglib.portletext.IconMaximizeTag;
 import com.liferay.taglib.portletext.IconMinimizeTag;
+import com.liferay.taglib.portletext.IconPortletTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.IconRefreshTag;
 import com.liferay.taglib.portletext.RuntimeTag;
@@ -91,22 +91,6 @@ public class VelocityTaglib {
 
 	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
-	}
-
-	public String headerBar() throws Exception {
-		_res.recycle();
-
-		HeaderBarTag.doTag(_ctx, _req, _res);
-
-		return _res.getString();
-	}
-
-	public String headerBar(String page) throws Exception {
-		_res.recycle();
-
-		HeaderBarTag.doTag(page, _ctx, _req, _res);
-
-		return _res.getString();
 	}
 
 	public String iconBack() throws Exception {
@@ -233,6 +217,22 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		IconMinimizeTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconPortlet() throws Exception {
+		_res.recycle();
+
+		IconPortletTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconPortlet(String page) throws Exception {
+		_res.recycle();
+
+		IconPortletTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}

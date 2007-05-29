@@ -87,16 +87,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>header-bar</name>
-		<tagclass>com.liferay.taglib.portletext.HeaderBarTag</tagclass>
-		<bodycontent>JSP</bodycontent>
-		<attribute>
-			<name>page</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>icon-back</name>
 		<tagclass>com.liferay.taglib.portletext.IconBackTag</tagclass>
 		<bodycontent>JSP</bodycontent>
@@ -169,6 +159,16 @@
 	<tag>
 		<name>icon-minimize</name>
 		<tagclass>com.liferay.taglib.portletext.IconMinimizeTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>icon-portlet</name>
+		<tagclass>com.liferay.taglib.portletext.IconPortletTag</tagclass>
 		<bodycontent>JSP</bodycontent>
 		<attribute>
 			<name>page</name>

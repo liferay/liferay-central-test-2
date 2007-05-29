@@ -158,7 +158,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public PortletImpl(String portletId, PluginPackage pluginPackage,
 					   PluginSetting pluginSetting, long companyId,
-					   String strutsPath, String configurationPath,
+					   String icon, String strutsPath, String configurationPath,
 					   String displayName, String portletClass,
 					   String indexerClass, String openSearchClass,
 					   String schedulerClass, String portletURLClass,
@@ -188,6 +188,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_pluginPackage = pluginPackage;
 		_defaultPluginSetting = pluginSetting;
 		setCompanyId(companyId);
+		_icon = icon;
 		_strutsPath = strutsPath;
 		_configurationPath = configurationPath;
 		_displayName = displayName;
@@ -314,6 +315,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setDefaultPluginSetting(PluginSetting pluginSetting) {
 		_defaultPluginSetting = pluginSetting;
+	}
+
+	/**
+	 * Gets the icon of the portlet.
+	 *
+	 * @return		the icon of the portlet
+	 */
+	public String getIcon() {
+		return _icon;
+	}
+
+	/**
+	 * Sets the icon of the portlet.
+	 *
+	 * @param		icon the icon of the portlet
+	 */
+	public void setIcon(String icon) {
+		_icon = icon;
 	}
 
 	/**
@@ -1893,7 +1912,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public Object clone() {
 		return new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
-			getCompanyId(), getStrutsPath(), getConfigurationPath(),
+			getCompanyId(), getIcon(), getStrutsPath(), getConfigurationPath(),
 			getDisplayName(), getPortletClass(), getIndexerClass(),
 			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
 			getFriendlyURLMapperClass(), getURLEncoderClass(),
@@ -1943,6 +1962,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Plugin settings associated with the portlet.
 	 */
 	private PluginSetting _defaultPluginSetting;
+
+	/**
+	 * The icon of the portlet.
+	 */
+	private String _icon;
 
 	/**
 	 * The struts path of the portlet.

@@ -66,6 +66,10 @@ public interface Portlet extends PortletModel {
 	public void setDefaultPluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting);
 
+	public java.lang.String getIcon();
+
+	public void setIcon(java.lang.String icon);
+
 	public java.lang.String getStrutsPath();
 
 	public void setStrutsPath(java.lang.String strutsPath);

@@ -57,6 +57,19 @@ if (!portletDecorate) {
 	portletPadding = false;
 }
 
+// Portlet icon
+
+String portletIcon = portlet.getIcon();
+
+if (Validator.isNotNull(portlet.getServletContextName())) {
+	portletIcon = StringPool.SLASH + portlet.getServletContextName() + portletIcon;
+}
+else {
+	portletIcon = themeDisplay.getPathContext() + portletIcon;
+}
+
+portletDisplay.setURLPortlet(portletIcon);
+
 // Portlet title
 
 String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));

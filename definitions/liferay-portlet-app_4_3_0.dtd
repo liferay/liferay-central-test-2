@@ -16,7 +16,7 @@ a Liferay portlet application.
 <!--
 The portlet element contains the declarative data of a portlet.
 -->
-<!ELEMENT portlet (portlet-name, struts-path?, configuration-path?,
+<!ELEMENT portlet (portlet-name, icon?, struts-path?, configuration-path?,
 indexer-class?, open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 smtp-message-listener-class?, preferences-company-wide?,
@@ -32,6 +32,11 @@ The portlet-name element contains the unique name of the portlet. This name must
 match the portlet-name specified in portlet.xml.
 -->
 <!ELEMENT portlet-name (#PCDATA)>
+
+<!--
+The icon element specifies an image that represents the portlet.
+-->
+<!ELEMENT icon (#PCDATA)>
 
 <!--
 Supppose the struts-path value is "mail". This tells the portal that all

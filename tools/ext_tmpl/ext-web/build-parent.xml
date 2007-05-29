@@ -80,6 +80,8 @@
 			<arg value="${jspc.classpath}" />
 			<arg value="${jspc.classes.dir}" />
 		</java>
+
+		<delete file="alfresco.log" />
 	</target>
 
 	<target name="compile-jboss-jetty" depends="merge">

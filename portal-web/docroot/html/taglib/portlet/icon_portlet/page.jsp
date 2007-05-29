@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,49 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.taglib.portletext;
+<%@ include file="/html/taglib/init.jsp" %>
 
-import com.liferay.taglib.ui.IconTag;
-
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * <a href="HeaderBarTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class HeaderBarTag extends IconTag {
-
-	public static void doTag(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		doTag(_PAGE, ctx, req, res);
-	}
-
-	public static void doTag(
-			String page, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
-		throws IOException, ServletException {
-
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
-
-		rd.include(req, res);
-	}
-
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	private static final String _PAGE =
-		"/html/taglib/portlet/header_bar/page.jsp";
-
-}
+<c:if test="<%= portletDisplay.isShowPortletIcon() %>">
+	<img src="<%= portletDisplay.getURLPortlet() %>" />
+</c:if>
