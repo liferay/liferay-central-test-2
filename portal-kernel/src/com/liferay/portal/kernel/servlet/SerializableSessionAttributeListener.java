@@ -22,40 +22,44 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.Serializable;
 
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
 /**
- * <a href="SerializableSessionAttributeListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="SerializableSessionAttributeListener.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Bruno Farache
  *
  */
 
-public class SerializableSessionAttributeListener implements HttpSessionAttributeListener {
+public class SerializableSessionAttributeListener
+	implements HttpSessionAttributeListener {
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		
-		if(!(event.getValue() instanceof Serializable)){
-			System.out.println(
-						"WARN [com.liferay.portal.kernel.servlet.SerializableSessionAttributeListener] " +
-						"An object was added to session " +
-						"but it doesn't implement java.io.Serializable.\n" +
-						"If your application must be distributable, " +
-						"every object stored in session must implement Serializable.\n" +
-						"Object's attribute name: " + event.getName() + "\n" +
-						"Object's class name: " + event.getValue().getClass());
+		Object obj = event.getValue();
+
+		if (!(obj instanceof Serializable)){
+			_log.error(
+				obj.getClass().getName() +
+					" is not serializable and will prevent this session from " +
+						"being replicated");
 		}
-		
 	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		this.attributeAdded(event);
+		attributeAdded(event);
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(SerializableSessionAttributeListener.class);
 
 }
