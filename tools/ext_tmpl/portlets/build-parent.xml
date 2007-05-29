@@ -22,74 +22,77 @@
 			<then>
 				<echo>Skipping packed module ${module.name}.war</echo>
 			</then>
-			<else>
-				<mkdir dir="${module.name}.war/WEB-INF/classes" />
-				<mkdir dir="${module.name}.war/WEB-INF/lib" />
+			<elseif>
+				<available file="${module.name}.war/WEB-INF/src" />
+				<then>
+					<mkdir dir="${module.name}.war/WEB-INF/classes" />
+					<mkdir dir="${module.name}.war/WEB-INF/lib" />
 
-				<copy todir="${module.name}.war/WEB-INF/lib">
-					<fileset
-						dir="${project.dir}/lib/portal"
-						includes="commons-logging.jar,log4j.jar"
+					<copy todir="${module.name}.war/WEB-INF/lib">
+						<fileset
+							dir="${project.dir}/lib/portal"
+							includes="commons-logging.jar,log4j.jar"
+						/>
+					</copy>
+
+					<!--<unjar
+						file="${project.dir}/portal-impl/classes/META-INF/portal-log4j.xml"
+						tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
+					/>-->
+
+					<if>
+						<equals arg1="${module.name}" arg2="sample-portal-client-portlet" />
+						<then>
+							<copy todir="${module.name}.war/WEB-INF/lib">
+								<fileset
+									dir="${project.dir}/lib/development"
+									includes="activation.jar,mail.jar"
+								/>
+								<fileset
+									dir="${project.dir}/lib/portal"
+									includes="axis.jar,commons-discovery.jar,commons-logging.jar,concurrent.jar,jaxrpc.jar,saaj.jar,trove.jar,wsdl4j.jar"
+								/>
+								<fileset
+									dir="${project.dir}/portal-client"
+									includes="portal-client.jar"
+								/>
+							</copy>
+						</then>
+					</if>
+
+					<if>
+						<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
+						<then>
+							<path id="web-lib.classpath">
+								<path refid="project.classpath" />
+								<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+							</path>
+						</then>
+						<else>
+							<path id="web-lib.classpath">
+								<fileset dir="${project.dir}/lib/portal" includes="util-java.jar" />
+								<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+							</path>
+						</else>
+					</if>
+
+					<javac
+						classpathref="web.classpath"
+						compiler="${javac.compiler}"
+						debug="${javac.debug}"
+						deprecation="${javac.deprecation}"
+						destdir="${module.name}.war/WEB-INF/classes"
+						fork="${javac.fork}"
+						memoryMaximumSize="${javac.memoryMaximumSize}"
+						nowarn="${javac.nowarn}"
+						srcdir="${module.name}.war/WEB-INF/src"
 					/>
-				</copy>
 
-				<!--<unjar
-					file="${project.dir}/portal-impl/classes/META-INF/portal-log4j.xml"
-					tofile="${module.name}.war/WEB-INF/classes/log4j.xml"
-				/>-->
-
-				<if>
-					<equals arg1="${module.name}" arg2="sample-portal-client-portlet" />
-					<then>
-						<copy todir="${module.name}.war/WEB-INF/lib">
-							<fileset
-								dir="${project.dir}/lib/development"
-								includes="activation.jar,mail.jar"
-							/>
-							<fileset
-								dir="${project.dir}/lib/portal"
-								includes="axis.jar,commons-discovery.jar,commons-logging.jar,concurrent.jar,jaxrpc.jar,saaj.jar,trove.jar,wsdl4j.jar"
-							/>
-							<fileset
-								dir="${project.dir}/portal-client"
-								includes="portal-client.jar"
-							/>
-						</copy>
-					</then>
-				</if>
-
-				<if>
-					<equals arg1="${module.name}" arg2="sample-struts-liferay-portlet" />
-					<then>
-						<path id="web-lib.classpath">
-							<path refid="project.classpath" />
-							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-						</path>
-					</then>
-					<else>
-						<path id="web-lib.classpath">
-							<fileset dir="${project.dir}/lib/portal" includes="util-java.jar" />
-							<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-						</path>
-					</else>
-				</if>
-
-				<javac
-					classpathref="web.classpath"
-					compiler="${javac.compiler}"
-					debug="${javac.debug}"
-					deprecation="${javac.deprecation}"
-					destdir="${module.name}.war/WEB-INF/classes"
-					fork="${javac.fork}"
-					memoryMaximumSize="${javac.memoryMaximumSize}"
-					nowarn="${javac.nowarn}"
-					srcdir="${module.name}.war/WEB-INF/src"
-				/>
-
-				<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
-					<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
-				</copy>
-			</else>
+					<copy todir="${module.name}.war/WEB-INF/classes" overwrite="yes">
+						<fileset dir="${module.name}.war/WEB-INF/src" includes="${classes.dir.excludes}" />
+					</copy>
+				</then>
+			</elseif>
 		</if>
 	</target>
 </project>
