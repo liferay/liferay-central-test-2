@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
@@ -54,10 +55,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		deleteAsset(asset);
 	}
 
-	public void deleteAsset(String className, String classPK)
+	public void deleteAsset(String className, long classPK)
 		throws PortalException, SystemException {
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
 
 		if (asset != null) {
 			deleteAsset(asset);
@@ -76,10 +79,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return TagsAssetUtil.findByPrimaryKey(assetId);
 	}
 
-	public TagsAsset getAsset(String className, String classPK)
+	public TagsAsset getAsset(String className, long classPK)
 		throws PortalException, SystemException {
 
-		return TagsAssetUtil.findByC_C(className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return TagsAssetUtil.findByC_C(classNameId, classPK);
 	}
 
 	public List getAssets(
@@ -110,15 +115,16 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public TagsAsset updateAsset(
-			long userId, String className, String classPK, String[] entryNames)
+			long userId, String className, long classPK, String[] entryNames)
 		throws PortalException, SystemException {
 
 		// Asset
 
 		User user = UserUtil.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
 			long assetId = CounterLocalServiceUtil.increment();
@@ -129,7 +135,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setUserId(user.getUserId());
 			asset.setUserName(user.getFullName());
 			asset.setCreateDate(now);
-			asset.setClassName(className);
+			asset.setClassNameId(classNameId);
 			asset.setClassPK(classPK);
 		}
 

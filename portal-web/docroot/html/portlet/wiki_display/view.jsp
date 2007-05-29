@@ -101,7 +101,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 				formName="fm"
 				formAction="<%= discussionURL %>"
 				className="<%= WikiPage.class.getName() %>"
-				classPK="<%= String.valueOf(wikiPage.getResourcePrimKey()) %>"
+				classPK="<%= wikiPage.getResourcePrimKey() %>"
 				userId="<%= wikiPage.getUserId() %>"
 				subject="<%= wikiPage.getTitle() %>"
 				redirect="<%= currentURL %>"

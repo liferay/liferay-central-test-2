@@ -63,8 +63,7 @@ public interface TagsEntryService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getEntries(java.lang.String className,
-		java.lang.String classPK)
+	public java.util.List getEntries(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

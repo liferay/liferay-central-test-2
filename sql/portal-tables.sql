@@ -495,8 +495,8 @@ create table MBCategory (
 
 create table MBDiscussion (
 	discussionId LONG primary key,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	threadId LONG
 );
 
@@ -715,15 +715,15 @@ create table RatingsEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	score DOUBLE
 );
 
 create table RatingsStats (
 	statsId LONG primary key,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	totalEntries INTEGER,
 	totalScore DOUBLE,
 	averageScore DOUBLE
@@ -1033,8 +1033,8 @@ create table TagsAsset (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	startDate DATE null,
 	endDate DATE null,
 	publishDate DATE null,

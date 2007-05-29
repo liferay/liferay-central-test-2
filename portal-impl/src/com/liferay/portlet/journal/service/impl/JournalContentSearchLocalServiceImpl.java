@@ -127,7 +127,8 @@ public class JournalContentSearchLocalServiceImpl
 			long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByG_P_L(groupId, privateLayout, layoutId);
+		JournalContentSearchUtil.removeByG_P_L(
+			groupId, privateLayout, layoutId);
 	}
 
 	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)

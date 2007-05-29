@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.json.JSONArrayWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.DuplicateEntryException;
 import com.liferay.portlet.tags.EntryNameException;
 import com.liferay.portlet.tags.model.TagsAsset;
@@ -153,10 +154,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return TagsEntryUtil.findAll();
 	}
 
-	public List getEntries(String className, String classPK)
+	public List getEntries(String className, long classPK)
 		throws PortalException, SystemException {
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
 			return new ArrayList();

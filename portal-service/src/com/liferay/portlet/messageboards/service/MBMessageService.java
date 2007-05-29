@@ -50,9 +50,8 @@ package com.liferay.portlet.messageboards.service;
  */
 public interface MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long groupId, java.lang.String className, java.lang.String classPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body)
+		long groupId, java.lang.String className, long classPK, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -127,7 +126,7 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void deleteDiscussionMessage(long groupId,
-		java.lang.String className, java.lang.String classPK, long messageId)
+		java.lang.String className, long classPK, long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -154,8 +153,8 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		long groupId, java.lang.String className, java.lang.String classPK,
-		long messageId, java.lang.String subject, java.lang.String body)
+		long groupId, java.lang.String className, long classPK, long messageId,
+		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

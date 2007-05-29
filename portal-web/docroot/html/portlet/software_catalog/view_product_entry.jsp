@@ -234,7 +234,7 @@ else {
 
 <liferay-ui:ratings
 	className="<%= SCProductEntry.class.getName() %>"
-	classPK="<%= String.valueOf(productEntry.getProductEntryId()) %>"
+	classPK="<%= productEntry.getProductEntryId() %>"
 	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry" %>'
 />
 
@@ -264,7 +264,7 @@ else {
 		<liferay-ui:discussion
 			formAction="<%= discussionURL %>"
 			className="<%= SCProductEntry.class.getName() %>"
-			classPK="<%= String.valueOf(productEntry.getProductEntryId()) %>"
+			classPK="<%= productEntry.getProductEntryId() %>"
 			userId="<%= productEntry.getUserId() %>"
 			subject="<%= productEntry.getName() %>"
 			redirect="<%= currentURL %>"

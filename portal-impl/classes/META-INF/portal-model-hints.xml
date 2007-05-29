@@ -819,8 +819,8 @@
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBDiscussion">
 		<field name="discussionId" type="long" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="threadId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
@@ -898,14 +898,14 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="score" type="double" />
 	</model>
 	<model name="com.liferay.portlet.ratings.model.RatingsStats">
 		<field name="statsId" type="long" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="totalEntries" type="int" />
 		<field name="totalScore" type="double" />
 		<field name="averageScore" type="double" />
@@ -1203,8 +1203,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="className" type="String" />
-		<field name="classPK" type="String" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
 		<field name="publishDate" type="Date" />

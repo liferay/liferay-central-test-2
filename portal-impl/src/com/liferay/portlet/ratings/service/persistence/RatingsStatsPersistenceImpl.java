@@ -185,16 +185,16 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public RatingsStats findByC_C(String className, String classPK)
+	public RatingsStats findByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
-		RatingsStats ratingsStats = fetchByC_C(className, classPK);
+		RatingsStats ratingsStats = fetchByC_C(classNameId, classPK);
 
 		if (ratingsStats == null) {
 			StringMaker msg = new StringMaker();
 			msg.append("No RatingsStats exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -210,7 +210,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		return ratingsStats;
 	}
 
-	public RatingsStats fetchByC_C(String className, String classPK)
+	public RatingsStats fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -220,37 +220,17 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -345,9 +325,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByC_C(String className, String classPK)
+	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
-		RatingsStats ratingsStats = findByC_C(className, classPK);
+		RatingsStats ratingsStats = findByC_C(classNameId, classPK);
 		remove(ratingsStats);
 	}
 
@@ -359,7 +339,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByC_C(String className, String classPK)
+	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -370,37 +350,17 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

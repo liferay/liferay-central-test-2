@@ -74,7 +74,7 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
-		java.lang.String classPK, long threadId, long parentMessageId,
+		long classPK, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -86,12 +86,7 @@ public class MBMessageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = classPK;
-
-			if (classPK == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(classPK);
 			Object paramObj3 = new LongWrapper(threadId);
 			Object paramObj4 = new LongWrapper(parentMessageId);
 			Object paramObj5 = subject;
@@ -768,8 +763,7 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String className, java.lang.String classPK,
-		long messageId)
+		long groupId, java.lang.String className, long classPK, long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -780,12 +774,7 @@ public class MBMessageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = classPK;
-
-			if (classPK == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(classPK);
 			Object paramObj3 = new LongWrapper(messageId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"deleteDiscussionMessage",
@@ -970,7 +959,7 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
-		java.lang.String classPK, long messageId, java.lang.String subject,
+		long classPK, long messageId, java.lang.String subject,
 		java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -982,12 +971,7 @@ public class MBMessageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = classPK;
-
-			if (classPK == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(classPK);
 			Object paramObj3 = new LongWrapper(messageId);
 			Object paramObj4 = subject;
 

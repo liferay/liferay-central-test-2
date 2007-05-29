@@ -114,8 +114,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Tags
 
 			TagsAssetLocalServiceUtil.deleteAsset(
-				MBMessage.class.getName(),
-				String.valueOf(message.getMessageId()));
+				MBMessage.class.getName(), message.getMessageId());
 
 			// Message flags
 

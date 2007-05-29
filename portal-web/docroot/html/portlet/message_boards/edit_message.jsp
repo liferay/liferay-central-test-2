@@ -340,10 +340,10 @@ if (message != null) {
 	<td>
 
 		<%
-		String classPK = StringPool.BLANK;
+		long classPK = 0;
 
 		if (message != null) {
-			classPK = String.valueOf(message.getMessageId());
+			classPK = message.getMessageId();
 		}
 		%>
 

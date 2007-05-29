@@ -61,7 +61,7 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteAsset(java.lang.String className, java.lang.String classPK)
+	public void deleteAsset(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -74,7 +74,7 @@ public interface TagsAssetLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -86,8 +86,7 @@ public interface TagsAssetLocalService {
 		boolean andOperator) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String[] entryNames)
+		java.lang.String className, long classPK, java.lang.String[] entryNames)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

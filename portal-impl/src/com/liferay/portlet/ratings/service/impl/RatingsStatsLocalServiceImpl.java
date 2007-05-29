@@ -25,6 +25,7 @@ package com.liferay.portlet.ratings.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl;
@@ -44,17 +45,19 @@ import org.apache.commons.logging.LogFactory;
 public class RatingsStatsLocalServiceImpl
 	extends RatingsStatsLocalServiceBaseImpl {
 
-	public void deleteStats(String className, String classPK)
+	public void deleteStats(String className, long classPK)
 		throws PortalException, SystemException {
 
+		long classNameId = PortalUtil.getClassNameId(className);
+
 		try {
-			RatingsStatsUtil.removeByC_C(className, classPK);
+			RatingsStatsUtil.removeByC_C(classNameId, classPK);
 		}
 		catch (NoSuchStatsException nsse) {
 			_log.warn(nsse);
 		}
 
-		RatingsEntryUtil.removeByC_C(className, classPK);
+		RatingsEntryUtil.removeByC_C(classNameId, classPK);
 	}
 
 	public RatingsStats getStats(long statsId)
@@ -63,21 +66,22 @@ public class RatingsStatsLocalServiceImpl
 		return RatingsStatsUtil.findByPrimaryKey(statsId);
 	}
 
-	public RatingsStats getStats(String className, String classPK)
+	public RatingsStats getStats(String className, long classPK)
 		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		RatingsStats stats = null;
 
 		try {
-			stats = RatingsStatsUtil.findByC_C(className, classPK);
+			stats = RatingsStatsUtil.findByC_C(classNameId, classPK);
 		}
 		catch (NoSuchStatsException nsse) {
-			long statsId = CounterLocalServiceUtil.increment(
-				RatingsStats.class.getName());
+			long statsId = CounterLocalServiceUtil.increment();
 
 			stats = RatingsStatsUtil.create(statsId);
 
-			stats.setClassName(className);
+			stats.setClassNameId(classNameId);
 			stats.setClassPK(classPK);
 			stats.setTotalEntries(0);
 			stats.setTotalScore(0.0);

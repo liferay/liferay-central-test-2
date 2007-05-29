@@ -67,7 +67,7 @@ public class RatingsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry getEntry(
-		long userId, java.lang.String className, java.lang.String classPK)
+		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
@@ -76,8 +76,7 @@ public class RatingsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
-		long userId, java.lang.String className, java.lang.String classPK,
-		double score)
+		long userId, java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();

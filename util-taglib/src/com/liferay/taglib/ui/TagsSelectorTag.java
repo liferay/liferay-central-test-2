@@ -38,7 +38,8 @@ public class TagsSelectorTag extends IncludeTag {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:tags_selector:className", _className);
-		req.setAttribute("liferay-ui:tags_selector:classPK", _classPK);
+		req.setAttribute(
+			"liferay-ui:tags_selector:classPK", String.valueOf(_classPK));
 		req.setAttribute("liferay-ui:tags_selector:hiddenInput", _hiddenInput);
 		req.setAttribute("liferay-ui:tags_selector:curTags", _curTags);
 		req.setAttribute(
@@ -51,7 +52,7 @@ public class TagsSelectorTag extends IncludeTag {
 		_className = className;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
@@ -75,7 +76,7 @@ public class TagsSelectorTag extends IncludeTag {
 		"/html/taglib/ui/tags_selector/page.jsp";
 
 	private String _className;
-	private String _classPK;
+	private long _classPK;
 	private String _hiddenInput;
 	private String _curTags;
 	private boolean _focus;

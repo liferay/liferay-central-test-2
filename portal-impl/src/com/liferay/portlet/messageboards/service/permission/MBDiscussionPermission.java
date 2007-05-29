@@ -37,8 +37,8 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 public class MBDiscussionPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId,
-			String className, String classPK, String actionId)
+			PermissionChecker permissionChecker, long groupId, String className,
+			long classPK, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
@@ -49,8 +49,8 @@ public class MBDiscussionPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			String className, String classPK, String actionId)
+			PermissionChecker permissionChecker, long groupId, String className,
+			long classPK, String actionId)
 		throws PortalException, SystemException {
 
 		if (MBBanLocalServiceUtil.hasBan(

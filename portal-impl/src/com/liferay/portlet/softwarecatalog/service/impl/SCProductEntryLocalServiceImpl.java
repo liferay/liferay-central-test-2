@@ -34,6 +34,8 @@ import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
@@ -253,6 +255,16 @@ public class SCProductEntryLocalServiceImpl
 
 		SCProductVersionLocalServiceUtil.deleteProductVersions(
 			productEntry.getProductEntryId());
+
+		// Ratings
+
+		RatingsStatsLocalServiceUtil.deleteStats(
+			SCProductEntry.class.getName(), productEntry.getProductEntryId());
+
+		// Message boards
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
 		// Resources
 

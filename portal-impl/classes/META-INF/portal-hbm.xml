@@ -849,8 +849,8 @@
 		<id name="discussionId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="threadId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" table="MBMessage">
@@ -948,8 +948,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="score" type="com.liferay.util.dao.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.ratings.model.impl.RatingsStatsImpl" table="RatingsStats">
@@ -957,8 +957,8 @@
 		<id name="statsId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="totalEntries" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="totalScore" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="averageScore" type="com.liferay.util.dao.hibernate.DoubleType" />
@@ -1224,8 +1224,8 @@
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="startDate" />
 		<property name="endDate" />
 		<property name="publishDate" />

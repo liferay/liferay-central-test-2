@@ -30,12 +30,12 @@
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
-String classPK = (String)request.getAttribute("liferay-ui:tags_selector:classPK");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_selector:classPK"));
 String hiddenInput = (String)request.getAttribute("liferay-ui:tags_selector:hiddenInput");
 String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:curTags"));
 boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:focus"));
 
-if (Validator.isNotNull(className) && Validator.isNotNull(classPK)) {
+if (Validator.isNotNull(className) && (classPK > 0)) {
 	List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
 
 	curTags = ListUtil.toString(entries, "name");

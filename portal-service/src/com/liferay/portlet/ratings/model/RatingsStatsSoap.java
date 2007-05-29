@@ -48,7 +48,7 @@ public class RatingsStatsSoap implements Serializable {
 	public static RatingsStatsSoap toSoapModel(RatingsStats model) {
 		RatingsStatsSoap soapModel = new RatingsStatsSoap();
 		soapModel.setStatsId(model.getStatsId());
-		soapModel.setClassName(model.getClassName());
+		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setTotalEntries(model.getTotalEntries());
 		soapModel.setTotalScore(model.getTotalScore());
@@ -87,19 +87,19 @@ public class RatingsStatsSoap implements Serializable {
 		_statsId = statsId;
 	}
 
-	public String getClassName() {
-		return _className;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		_className = className;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
-	public String getClassPK() {
+	public long getClassPK() {
 		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
@@ -128,8 +128,8 @@ public class RatingsStatsSoap implements Serializable {
 	}
 
 	private long _statsId;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private int _totalEntries;
 	private double _totalScore;
 	private double _averageScore;

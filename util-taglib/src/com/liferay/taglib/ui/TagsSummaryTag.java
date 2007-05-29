@@ -38,7 +38,8 @@ public class TagsSummaryTag extends IncludeTag {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:tags_summary:className", _className);
-		req.setAttribute("liferay-ui:tags_summary:classPK", _classPK);
+		req.setAttribute(
+			"liferay-ui:tags_summary:classPK", String.valueOf(_classPK));
 		req.setAttribute("liferay-ui:tags_summary:message", _message);
 
 		return EVAL_BODY_BUFFERED;
@@ -48,7 +49,7 @@ public class TagsSummaryTag extends IncludeTag {
 		_className = className;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
@@ -63,7 +64,7 @@ public class TagsSummaryTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/tags_summary/page.jsp";
 
 	private String _className;
-	private String _classPK;
+	private long _classPK;
 	private String _message;
 
 }

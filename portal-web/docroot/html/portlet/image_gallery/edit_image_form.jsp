@@ -142,10 +142,10 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 	<td>
 
 		<%
-		String classPK = StringPool.BLANK;
+		long classPK = 0;
 
 		if (image != null) {
-			classPK = String.valueOf(image.getImageId());
+			classPK = image.getImageId();
 		}
 		%>
 

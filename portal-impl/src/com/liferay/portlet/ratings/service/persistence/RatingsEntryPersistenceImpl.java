@@ -185,7 +185,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C(String className, String classPK)
+	public List findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -195,37 +195,17 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			return q.list();
 		}
@@ -237,12 +217,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_C(String className, String classPK, int begin, int end)
+	public List findByC_C(long classNameId, long classPK, int begin, int end)
 		throws SystemException {
-		return findByC_C(className, classPK, begin, end, null);
+		return findByC_C(classNameId, classPK, begin, end, null);
 	}
 
-	public List findByC_C(String className, String classPK, int begin, int end,
+	public List findByC_C(long classNameId, long classPK, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -252,23 +232,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -280,14 +246,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -299,16 +259,16 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public RatingsEntry findByC_C_First(String className, String classPK,
+	public RatingsEntry findByC_C_First(long classNameId, long classPK,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		List list = findByC_C(className, classPK, 0, 1, obc);
+		List list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No RatingsEntry exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -320,17 +280,17 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public RatingsEntry findByC_C_Last(String className, String classPK,
+	public RatingsEntry findByC_C_Last(long classNameId, long classPK,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		int count = countByC_C(className, classPK);
-		List list = findByC_C(className, classPK, count - 1, count, obc);
+		int count = countByC_C(classNameId, classPK);
+		List list = findByC_C(classNameId, classPK, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 			msg.append("No RatingsEntry exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -342,11 +302,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public RatingsEntry[] findByC_C_PrevAndNext(long entryId, String className,
-		String classPK, OrderByComparator obc)
+	public RatingsEntry[] findByC_C_PrevAndNext(long entryId, long classNameId,
+		long classPK, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = findByPrimaryKey(entryId);
-		int count = countByC_C(className, classPK);
+		int count = countByC_C(classNameId, classPK);
 		Session session = null;
 
 		try {
@@ -355,23 +315,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -383,14 +329,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					ratingsEntry);
@@ -409,9 +349,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public RatingsEntry findByU_C_C(long userId, String className,
-		String classPK) throws NoSuchEntryException, SystemException {
-		RatingsEntry ratingsEntry = fetchByU_C_C(userId, className, classPK);
+	public RatingsEntry findByU_C_C(long userId, long classNameId, long classPK)
+		throws NoSuchEntryException, SystemException {
+		RatingsEntry ratingsEntry = fetchByU_C_C(userId, classNameId, classPK);
 
 		if (ratingsEntry == null) {
 			StringMaker msg = new StringMaker();
@@ -420,8 +360,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			msg.append("userId=");
 			msg.append(userId);
 			msg.append(", ");
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -437,8 +377,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		return ratingsEntry;
 	}
 
-	public RatingsEntry fetchByU_C_C(long userId, String className,
-		String classPK) throws SystemException {
+	public RatingsEntry fetchByU_C_C(long userId, long classNameId, long classPK)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -449,23 +389,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
 			query.append("userId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -473,14 +399,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, userId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -575,9 +495,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByC_C(String className, String classPK)
+	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Iterator itr = findByC_C(className, classPK).iterator();
+		Iterator itr = findByC_C(classNameId, classPK).iterator();
 
 		while (itr.hasNext()) {
 			RatingsEntry ratingsEntry = (RatingsEntry)itr.next();
@@ -585,9 +505,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByU_C_C(long userId, String className, String classPK)
+	public void removeByU_C_C(long userId, long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
-		RatingsEntry ratingsEntry = findByU_C_C(userId, className, classPK);
+		RatingsEntry ratingsEntry = findByU_C_C(userId, classNameId, classPK);
 		remove(ratingsEntry);
 	}
 
@@ -599,7 +519,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByC_C(String className, String classPK)
+	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -610,37 +530,17 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 
@@ -662,7 +562,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByU_C_C(long userId, String className, String classPK)
+	public int countByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -675,23 +575,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.ratings.model.RatingsEntry WHERE ");
 			query.append("userId = ?");
 			query.append(" AND ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -699,14 +585,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, userId);
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

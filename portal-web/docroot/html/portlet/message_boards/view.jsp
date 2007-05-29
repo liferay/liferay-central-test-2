@@ -633,7 +633,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		for (int i = 0; i < results.size(); i++) {
 			MBBan ban = (MBBan)results.get(i);
 
-			ResultRow row = new ResultRow(ban, String.valueOf(ban.getPrimaryKey()), i);
+			ResultRow row = new ResultRow(ban, ban.getBanId(), i);
 
 			// Name
 

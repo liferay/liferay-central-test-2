@@ -79,7 +79,7 @@ import java.rmi.RemoteException;
  */
 public class RatingsEntryServiceSoap {
 	public static com.liferay.portlet.ratings.model.RatingsEntrySoap updateEntry(
-		java.lang.String className, java.lang.String classPK, double score)
+		java.lang.String className, long classPK, double score)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.ratings.model.RatingsEntry returnValue = RatingsEntryServiceUtil.updateEntry(className,

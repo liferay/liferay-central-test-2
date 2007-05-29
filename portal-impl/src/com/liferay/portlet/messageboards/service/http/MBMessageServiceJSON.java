@@ -69,7 +69,7 @@ import org.json.JSONObject;
  */
 public class MBMessageServiceJSON {
 	public static JSONObject addDiscussionMessage(long groupId,
-		java.lang.String className, java.lang.String classPK, long threadId,
+		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -137,7 +137,7 @@ public class MBMessageServiceJSON {
 	}
 
 	public static void deleteDiscussionMessage(long groupId,
-		java.lang.String className, java.lang.String classPK, long messageId)
+		java.lang.String className, long classPK, long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		MBMessageServiceUtil.deleteDiscussionMessage(groupId, className,
@@ -181,7 +181,7 @@ public class MBMessageServiceJSON {
 	}
 
 	public static JSONObject updateDiscussionMessage(long groupId,
-		java.lang.String className, java.lang.String classPK, long messageId,
+		java.lang.String className, long classPK, long messageId,
 		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

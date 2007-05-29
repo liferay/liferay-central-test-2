@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -47,22 +48,25 @@ import java.util.Date;
 public class RatingsEntryLocalServiceImpl
 	extends RatingsEntryLocalServiceBaseImpl {
 
-	public RatingsEntry getEntry(long userId, String className, String classPK)
+	public RatingsEntry getEntry(long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		return RatingsEntryUtil.findByU_C_C(userId, className, classPK);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return RatingsEntryUtil.findByU_C_C(userId, classNameId, classPK);
 	}
 
 	public RatingsEntry updateEntry(
-			long userId, String className, String classPK, double score)
+			long userId, String className, long classPK, double score)
 		throws PortalException, SystemException {
 
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		RatingsEntry entry = null;
 
 		try {
-			entry = RatingsEntryUtil.findByU_C_C(userId, className, classPK);
+			entry = RatingsEntryUtil.findByU_C_C(userId, classNameId, classPK);
 
 			double oldScore = entry.getScore();
 
@@ -85,8 +89,7 @@ public class RatingsEntryLocalServiceImpl
 		catch (NoSuchEntryException nsee) {
 			User user = UserUtil.findByPrimaryKey(userId);
 
-			long entryId = CounterLocalServiceUtil.increment(
-				RatingsEntry.class.getName());
+			long entryId = CounterLocalServiceUtil.increment();
 
 			entry = RatingsEntryUtil.create(entryId);
 
@@ -95,7 +98,7 @@ public class RatingsEntryLocalServiceImpl
 			entry.setUserName(user.getFullName());
 			entry.setCreateDate(now);
 			entry.setModifiedDate(now);
-			entry.setClassName(className);
+			entry.setClassNameId(classNameId);
 			entry.setClassPK(classPK);
 			entry.setScore(score);
 

@@ -174,10 +174,10 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 	<td>
 
 		<%
-		String classPK = StringPool.BLANK;
+		long classPK = 0;
 
 		if (fileEntry != null) {
-			classPK = String.valueOf(fileEntry.getFileEntryId());
+			classPK = fileEntry.getFileEntryId();
 		}
 		%>
 

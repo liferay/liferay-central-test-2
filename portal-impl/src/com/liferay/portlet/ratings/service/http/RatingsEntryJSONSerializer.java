@@ -84,24 +84,8 @@ public class RatingsEntryJSONSerializer {
 			jsonObj.put("modifiedDate", modifiedDate.toString());
 		}
 
-		String className = model.getClassName();
-
-		if (className == null) {
-			jsonObj.put("className", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("className", className.toString());
-		}
-
-		String classPK = model.getClassPK();
-
-		if (classPK == null) {
-			jsonObj.put("classPK", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("classPK", classPK.toString());
-		}
-
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
 		jsonObj.put("score", model.getScore());
 
 		return jsonObj;

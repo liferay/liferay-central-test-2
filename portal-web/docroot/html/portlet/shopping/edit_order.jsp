@@ -619,7 +619,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		formName="fm2"
 		formAction="<%= discussionURL %>"
 		className="<%= ShoppingOrder.class.getName() %>"
-		classPK="<%= String.valueOf(order.getOrderId()) %>"
+		classPK="<%= order.getOrderId() %>"
 		userId="<%= order.getUserId() %>"
 		subject="<%= order.getNumber() %>"
 		redirect="<%= currentURL %>"

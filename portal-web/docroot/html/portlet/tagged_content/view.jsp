@@ -89,8 +89,8 @@ searchContainer.setResults(results);
 for (int i = 0; i < results.size(); i++) {
 	TagsAsset asset = (TagsAsset)results.get(i);
 
-	String className = GetterUtil.getString(asset.getClassName());
-	String classPK = GetterUtil.getString(asset.getClassPK());
+	String className = PortalUtil.getClassName(asset.getClassNameId());
+	long classPK = asset.getClassPK();
 %>
 
 	<div>
@@ -98,9 +98,7 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
 
 				<%
-				long entryId = GetterUtil.getLong(classPK);
-
-				BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+				BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 				%>
 
 				<a href="<%= entry.getUrl() %>"><%= entry.getName() %></a>
@@ -108,9 +106,7 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(DLFileEntry.class.getName()) %>">
 
 				<%
-				long fileEntryId = GetterUtil.getLong(classPK);
-
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileEntryId);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 				%>
 
 				<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
@@ -120,9 +116,7 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(IGImage.class.getName()) %>">
 
 				<%
-				long imageId = GetterUtil.getLong(classPK);
-
-				IGImage image = IGImageLocalServiceUtil.getImage(imageId);
+				IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 				%>
 
 				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>" />
@@ -130,9 +124,7 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 
 				<%
-				long id = GetterUtil.getLong(classPK);
-
-				JournalArticle article = JournalArticleLocalServiceUtil.getArticle(id);
+				JournalArticle article = JournalArticleLocalServiceUtil.getArticle(classPK);
 
 				String languageId = LanguageUtil.getLanguageId(request);
 

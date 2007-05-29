@@ -50,6 +50,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.GetterUtil;
@@ -268,8 +269,8 @@ public class DLFileEntryLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, DLFileEntry.class.getName(),
-			String.valueOf(fileEntry.getFileEntryId()), tagsEntries);
+			userId, DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+			tagsEntries);
 
 		// Folder
 
@@ -410,14 +411,17 @@ public class DLFileEntryLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			DLFileEntry.class.getName(),
-			String.valueOf(fileEntry.getFileEntryId()));
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Ratings
 
 		RatingsStatsLocalServiceUtil.deleteStats(
-			DLFileEntry.class.getName(),
-			String.valueOf(fileEntry.getFileEntryId()));
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// Message boards
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Resources
 
@@ -727,8 +731,8 @@ public class DLFileEntryLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, DLFileEntry.class.getName(),
-			String.valueOf(fileEntry.getFileEntryId()), tagsEntries);
+			userId, DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+			tagsEntries);
 
 		// File version
 

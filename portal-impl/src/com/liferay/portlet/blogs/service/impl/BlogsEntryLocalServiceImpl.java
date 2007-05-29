@@ -177,8 +177,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BlogsEntry.class.getName(),
-			String.valueOf(entry.getEntryId()), tagsEntries);
+			userId, BlogsEntry.class.getName(), entry.getEntryId(),
+			tagsEntries);
 
 		// Lucene
 
@@ -271,12 +271,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			BlogsEntry.class.getName(), String.valueOf(entry.getEntryId()));
+			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Message boards
 
 		MBMessageLocalServiceUtil.deleteDiscussionMessages(
-			BlogsEntry.class.getName(), String.valueOf(entry.getEntryId()));
+			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Resources
 
@@ -518,8 +518,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BlogsEntry.class.getName(),
-			String.valueOf(entry.getEntryId()), tagsEntries);
+			userId, BlogsEntry.class.getName(), entry.getEntryId(),
+			tagsEntries);
 
 		// Lucene
 

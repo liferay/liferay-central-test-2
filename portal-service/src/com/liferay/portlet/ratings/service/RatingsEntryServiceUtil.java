@@ -50,7 +50,7 @@ package com.liferay.portlet.ratings.service;
  */
 public class RatingsEntryServiceUtil {
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
-		java.lang.String className, java.lang.String classPK, double score)
+		java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RatingsEntryService ratingsEntryService = RatingsEntryServiceFactory.getService();

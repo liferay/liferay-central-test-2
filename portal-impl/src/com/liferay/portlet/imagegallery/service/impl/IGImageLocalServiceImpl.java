@@ -147,8 +147,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			// Tags
 
 			TagsAssetLocalServiceUtil.updateAsset(
-				userId, IGImage.class.getName(),
-				String.valueOf(image.getImageId()), tagsEntries);
+				userId, IGImage.class.getName(), image.getImageId(),
+				tagsEntries);
 
 			return image;
 		}
@@ -217,7 +217,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			IGImage.class.getName(), String.valueOf(image.getImageId()));
+			IGImage.class.getName(), image.getImageId());
 
 		// Resources
 
@@ -352,8 +352,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			// Tags
 
 			TagsAssetLocalServiceUtil.updateAsset(
-				image.getUserId(), IGImage.class.getName(),
-				String.valueOf(image.getImageId()), tagsEntries);
+				image.getUserId(), IGImage.class.getName(), image.getImageId(),
+				tagsEntries);
 
 			return image;
 		}

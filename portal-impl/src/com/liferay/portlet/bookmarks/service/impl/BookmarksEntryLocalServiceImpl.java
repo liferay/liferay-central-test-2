@@ -131,8 +131,8 @@ public class BookmarksEntryLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BookmarksEntry.class.getName(),
-			String.valueOf(entry.getEntryId()), tagsEntries);
+			userId, BookmarksEntry.class.getName(), entry.getEntryId(),
+			tagsEntries);
 
 		return entry;
 	}
@@ -209,7 +209,7 @@ public class BookmarksEntryLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			BookmarksEntry.class.getName(), String.valueOf(entry.getEntryId()));
+			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Resources
 
@@ -317,7 +317,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			entry.getUserId(), BookmarksEntry.class.getName(),
-			String.valueOf(entry.getEntryId()), tagsEntries);
+			entry.getEntryId(), tagsEntries);
 
 		return entry;
 	}

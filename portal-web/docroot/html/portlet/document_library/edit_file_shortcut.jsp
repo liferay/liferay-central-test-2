@@ -281,7 +281,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
-		classPK="<%= String.valueOf(toFileEntry.getFileEntryId()) %>"
+		classPK="<%= toFileEntry.getFileEntryId() %>"
 		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
@@ -362,7 +362,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 					formName="fm2"
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= String.valueOf(toFileEntry.getFileEntryId()) %>"
+					classPK="<%= toFileEntry.getFileEntryId() %>"
 					userId="<%= toFileEntry.getUserId() %>"
 					subject="<%= toFileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"

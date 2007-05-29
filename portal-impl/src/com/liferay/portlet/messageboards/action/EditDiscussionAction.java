@@ -104,7 +104,7 @@ public class EditDiscussionAction extends PortletAction {
 	protected void deleteMessage(ActionRequest req) throws Exception {
 		long groupId = PortalUtil.getPortletGroupId(req);
 		String className = ParamUtil.getString(req, "className");
-		String classPK = ParamUtil.getString(req, "classPK");
+		long classPK = ParamUtil.getLong(req, "classPK");
 
 		long messageId = ParamUtil.getLong(req, "messageId");
 
@@ -115,7 +115,7 @@ public class EditDiscussionAction extends PortletAction {
 	protected void updateMessage(ActionRequest req) throws Exception {
 		long groupId = PortalUtil.getPortletGroupId(req);
 		String className = ParamUtil.getString(req, "className");
-		String classPK = ParamUtil.getString(req, "classPK");
+		long classPK = ParamUtil.getLong(req, "classPK");
 
 		long messageId = ParamUtil.getLong(req, "messageId");
 

@@ -196,16 +196,16 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public TagsAsset findByC_C(String className, String classPK)
+	public TagsAsset findByC_C(long classNameId, long classPK)
 		throws NoSuchAssetException, SystemException {
-		TagsAsset tagsAsset = fetchByC_C(className, classPK);
+		TagsAsset tagsAsset = fetchByC_C(classNameId, classPK);
 
 		if (tagsAsset == null) {
 			StringMaker msg = new StringMaker();
 			msg.append("No TagsAsset exists with the key ");
 			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 			msg.append(", ");
 			msg.append("classPK=");
 			msg.append(classPK);
@@ -221,7 +221,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		return tagsAsset;
 	}
 
-	public TagsAsset fetchByC_C(String className, String classPK)
+	public TagsAsset fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -230,37 +230,17 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 			StringMaker query = new StringMaker();
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			List list = q.list();
 
@@ -355,9 +335,9 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByC_C(String className, String classPK)
+	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchAssetException, SystemException {
-		TagsAsset tagsAsset = findByC_C(className, classPK);
+		TagsAsset tagsAsset = findByC_C(classNameId, classPK);
 		remove(tagsAsset);
 	}
 
@@ -369,7 +349,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByC_C(String className, String classPK)
+	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Session session = null;
 
@@ -379,37 +359,17 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			StringMaker query = new StringMaker();
 			query.append("SELECT COUNT(*) ");
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
-
-			if (className == null) {
-				query.append("className IS NULL");
-			}
-			else {
-				query.append("className = ?");
-			}
-
+			query.append("classNameId = ?");
 			query.append(" AND ");
-
-			if (classPK == null) {
-				query.append("classPK IS NULL");
-			}
-			else {
-				query.append("classPK = ?");
-			}
-
+			query.append("classPK = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (className != null) {
-				q.setString(queryPos++, className);
-			}
-
-			if (classPK != null) {
-				q.setString(queryPos++, classPK);
-			}
+			q.setLong(queryPos++, classNameId);
+			q.setLong(queryPos++, classPK);
 
 			Iterator itr = q.list().iterator();
 

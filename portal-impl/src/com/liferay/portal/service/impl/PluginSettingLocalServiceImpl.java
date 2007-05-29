@@ -141,8 +141,7 @@ public class PluginSettingLocalServiceImpl
 			companyId, pluginId, pluginType);
 
 		if (pluginSetting == null) {
-			long pluginSettingId = CounterLocalServiceUtil.increment(
-				PluginSetting.class.getName());
+			long pluginSettingId = CounterLocalServiceUtil.increment();
 
 			pluginSetting = PluginSettingUtil.create(pluginSettingId);
 

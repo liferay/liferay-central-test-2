@@ -139,10 +139,10 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<td>
 
 		<%
-		String classPK = StringPool.BLANK;
+		long classPK = 0;
 
 		if (entry != null) {
-			classPK = String.valueOf(entry.getEntryId());
+			classPK = entry.getEntryId();
 		}
 		%>
 

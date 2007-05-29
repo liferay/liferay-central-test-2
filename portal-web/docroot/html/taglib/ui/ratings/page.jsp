@@ -34,7 +34,7 @@
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:ratings:className");
-String classPK = (String)request.getAttribute("liferay-ui:ratings:classPK");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ratings:classPK"));
 String url = (String)request.getAttribute("liferay-ui:ratings:url");
 
 double yourScore = 0.0;

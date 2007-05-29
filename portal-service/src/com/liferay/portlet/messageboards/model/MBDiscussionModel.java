@@ -53,13 +53,13 @@ public interface MBDiscussionModel extends BaseModel {
 
 	public void setDiscussionId(long discussionId);
 
-	public String getClassName();
+	public long getClassNameId();
 
-	public void setClassName(String className);
+	public void setClassNameId(long classNameId);
 
-	public String getClassPK();
+	public long getClassPK();
 
-	public void setClassPK(String classPK);
+	public void setClassPK(long classPK);
 
 	public long getThreadId();
 

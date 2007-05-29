@@ -51,7 +51,7 @@ public class MBMessageServiceImpl
 	extends PrincipalBean implements MBMessageService {
 
 	public MBMessage addDiscussionMessage(
-			long groupId, String className, String classPK, long threadId,
+			long groupId, String className, long classPK, long threadId,
 			long parentMessageId, String subject, String body)
 		throws PortalException, SystemException {
 
@@ -290,7 +290,7 @@ public class MBMessageServiceImpl
 	}
 
 	public void deleteDiscussionMessage(
-			long groupId, String className, String classPK, long messageId)
+			long groupId, String className, long classPK, long messageId)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
@@ -346,7 +346,7 @@ public class MBMessageServiceImpl
 	}
 
 	public MBMessage updateDiscussionMessage(
-			long groupId, String className, String classPK, long messageId,
+			long groupId, String className, long classPK, long messageId,
 			String subject, String body)
 		throws PortalException, SystemException {
 

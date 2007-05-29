@@ -66,7 +66,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 		formName="fm2"
 		formAction="<%= discussionURL %>"
 		className="<%= BlogsEntry.class.getName() %>"
-		classPK="<%= String.valueOf(entry.getEntryId()) %>"
+		classPK="<%= entry.getEntryId() %>"
 		userId="<%= entry.getUserId() %>"
 		subject="<%= entry.getTitle() %>"
 		redirect="<%= currentURL %>"

@@ -150,16 +150,16 @@ public class TagsAssetUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset findByC_C(
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchAssetException {
-		return getPersistence().findByC_C(className, classPK);
+		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset fetchByC_C(
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_C(className, classPK);
+		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -191,20 +191,19 @@ public class TagsAssetUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByC_C(java.lang.String className,
-		java.lang.String classPK)
+	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchAssetException {
-		getPersistence().removeByC_C(className, classPK);
+		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByC_C(java.lang.String className,
-		java.lang.String classPK) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C(className, classPK);
+	public static int countByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

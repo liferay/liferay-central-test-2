@@ -115,7 +115,7 @@ create index IX_BC735DCF on MBCategory (companyId);
 create index IX_BB870C11 on MBCategory (groupId);
 create index IX_ED292508 on MBCategory (groupId, parentCategoryId);
 
-create index IX_B628DAD3 on MBDiscussion (className, classPK);
+create index IX_33A4DE38 on MBDiscussion (classNameId, classPK);
 
 create index IX_3C865EE5 on MBMessage (categoryId);
 create index IX_138C7F1E on MBMessage (categoryId, threadId);
@@ -181,10 +181,10 @@ create index IX_E4F13E6E on PortletPreferences (ownerId, ownerType, plid);
 create index IX_C7057FF7 on PortletPreferences (ownerId, ownerType, plid, portletId);
 create index IX_F15C1C4F on PortletPreferences (plid);
 
-create index IX_EA9B85B2 on RatingsEntry (className, classPK);
-create index IX_9941DAEC on RatingsEntry (userId, className, classPK);
+create index IX_16184D57 on RatingsEntry (classNameId, classPK);
+create index IX_B47E3C11 on RatingsEntry (userId, classNameId, classPK);
 
-create index IX_8366321F on RatingsStats (className, classPK);
+create index IX_A6E99284 on RatingsStats (classNameId, classPK);
 
 create index IX_2D9A426F on Region (active_);
 create index IX_16D87CA7 on Region (countryId);
@@ -242,7 +242,7 @@ create index IX_786D171A on Subscription (companyId, classNameId, classPK);
 create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classPK);
 create index IX_54243AFD on Subscription (userId);
 
-create index IX_92B431ED on TagsAsset (className, classPK);
+create index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 
 create index IX_10563688 on TagsEntry (companyId, name);
 

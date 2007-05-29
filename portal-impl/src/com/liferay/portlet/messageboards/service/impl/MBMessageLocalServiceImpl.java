@@ -402,8 +402,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (tagsEntries != null) {
 			TagsAssetLocalServiceUtil.updateAsset(
-				userId, MBMessage.class.getName(),
-				String.valueOf(message.getMessageId()), tagsEntries);
+				userId, MBMessage.class.getName(), message.getMessageId(),
+				tagsEntries);
 		}
 
 		logAddMessage(messageId, stopWatch, 9);
@@ -505,12 +505,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		deleteMessage(messageId);
 	}
 
-	public void deleteDiscussionMessages(String className, String classPK)
+	public void deleteDiscussionMessages(String className, long classPK)
 		throws PortalException, SystemException {
 
 		try {
+			long classNameId = PortalUtil.getClassNameId(className);
+
 			MBDiscussion discussion =
-				MBDiscussionUtil.findByC_C(className, classPK);
+				MBDiscussionUtil.findByC_C(classNameId, classPK);
 
 			List messages = MBMessageUtil.findByT_P(
 				discussion.getThreadId(),
@@ -658,7 +660,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			MBMessage.class.getName(), String.valueOf(message.getMessageId()));
+			MBMessage.class.getName(), message.getMessageId());
 
 		// Message flags
 
@@ -711,14 +713,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
-			long userId, String className, String classPK)
+			long userId, String className, long classPK)
 		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		MBMessage message = null;
 
 		try {
 			MBDiscussion discussion = MBDiscussionUtil.findByC_C(
-				className, classPK);
+				classNameId, classPK);
 
 			List messages = MBMessageUtil.findByT_P(
 				discussion.getThreadId(),
@@ -727,7 +731,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message = (MBMessage)messages.get(0);
 		}
 		catch (NoSuchDiscussionException nsde) {
-			String subject = classPK;
+			String subject = String.valueOf(classPK);
 			String body = subject;
 
 			message = MBMessageLocalServiceUtil.addDiscussionMessage(
@@ -737,7 +741,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			MBDiscussion discussion = MBDiscussionUtil.create(discussionId);
 
-			discussion.setClassName(className);
+			discussion.setClassNameId(classNameId);
 			discussion.setClassPK(classPK);
 			discussion.setThreadId(message.getThreadId());
 
@@ -1029,7 +1033,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (tagsEntries != null) {
 			TagsAssetLocalServiceUtil.updateAsset(
 				message.getUserId(), MBMessage.class.getName(),
-				String.valueOf(message.getMessageId()), tagsEntries);
+				message.getMessageId(), tagsEntries);
 		}
 
 		// Lucene

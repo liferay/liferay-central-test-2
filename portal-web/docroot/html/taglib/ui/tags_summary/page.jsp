@@ -28,7 +28,7 @@
 
 <%
 String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
-String classPK = (String)request.getAttribute("liferay-ui:tags_summary:classPK");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
 String message = (String)request.getAttribute("liferay-ui:tags_summary:message");
 
 if (message == null) {

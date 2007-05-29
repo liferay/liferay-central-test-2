@@ -61,8 +61,8 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "className", new Integer(Types.VARCHAR) },
-			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "classNameId", new Integer(Types.BIGINT) },
+			{ "classPK", new Integer(Types.BIGINT) },
 			{ "startDate", new Integer(Types.TIMESTAMP) },
 			{ "endDate", new Integer(Types.TIMESTAMP) },
 			{ "publishDate", new Integer(Types.TIMESTAMP) },
@@ -77,12 +77,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.className"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.classPK"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_MIMETYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.mimeType"),
@@ -180,36 +174,22 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getClassName() {
-		return GetterUtil.getString(_className);
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setClassName(String className) {
-		if (((className == null) && (_className != null)) ||
-				((className != null) && (_className == null)) ||
-				((className != null) && (_className != null) &&
-				!className.equals(_className))) {
-			if (!XSS_ALLOW_CLASSNAME) {
-				className = XSSUtil.strip(className);
-			}
-
-			_className = className;
+	public void setClassNameId(long classNameId) {
+		if (classNameId != _classNameId) {
+			_classNameId = classNameId;
 		}
 	}
 
-	public String getClassPK() {
-		return GetterUtil.getString(_classPK);
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setClassPK(String classPK) {
-		if (((classPK == null) && (_classPK != null)) ||
-				((classPK != null) && (_classPK == null)) ||
-				((classPK != null) && (_classPK != null) &&
-				!classPK.equals(_classPK))) {
-			if (!XSS_ALLOW_CLASSPK) {
-				classPK = XSSUtil.strip(classPK);
-			}
-
+	public void setClassPK(long classPK) {
+		if (classPK != _classPK) {
 			_classPK = classPK;
 		}
 	}
@@ -343,7 +323,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setClassName(getClassName());
+		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setStartDate(getStartDate());
 		clone.setEndDate(getEndDate());
@@ -411,8 +391,8 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _className;
-	private String _classPK;
+	private long _classNameId;
+	private long _classPK;
 	private Date _startDate;
 	private Date _endDate;
 	private Date _publishDate;

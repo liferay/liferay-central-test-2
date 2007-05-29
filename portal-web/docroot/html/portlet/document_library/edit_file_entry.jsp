@@ -184,7 +184,7 @@ portletURL.setParameter("name", name);
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
-		classPK="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
+		classPK="<%= fileEntry.getFileEntryId() %>"
 		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
 	/>
 
@@ -271,7 +271,7 @@ portletURL.setParameter("name", name);
 				<liferay-ui:discussion
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
+					classPK="<%= fileEntry.getFileEntryId() %>"
 					userId="<%= fileEntry.getUserId() %>"
 					subject="<%= fileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"

@@ -42,7 +42,7 @@
 
 		<liferay-ui:tags-summary
 			className="<%= BlogsEntry.class.getName() %>"
-			classPK="<%= String.valueOf(entry.getPrimaryKey()) %>"
+			classPK="<%= entry.getEntryId() %>"
 		/>
 	</td>
 </tr>
@@ -67,7 +67,7 @@
 			<liferay-security:permissionsURL
 				modelResource="<%= BlogsEntry.class.getName() %>"
 				modelResourceDescription="<%= entry.getTitle() %>"
-				resourcePrimKey="<%= String.valueOf(entry.getPrimaryKey()) %>"
+				resourcePrimKey="<%= String.valueOf(entry.getEntryId()) %>"
 				var="permissionsEntryURL"
 			/>
 

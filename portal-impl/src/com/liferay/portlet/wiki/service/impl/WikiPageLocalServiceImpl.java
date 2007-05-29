@@ -29,6 +29,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
@@ -185,8 +186,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			WikiPage.class.getName(),
-			String.valueOf(page.getResourcePrimKey()));
+			WikiPage.class.getName(), page.getResourcePrimKey());
+
+		// Message boards
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Resources
 
@@ -461,8 +466,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (tagsEntries != null) {
 			TagsAssetLocalServiceUtil.updateAsset(
-				userId, WikiPage.class.getName(),
-				String.valueOf(page.getResourcePrimKey()), tagsEntries);
+				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+				tagsEntries);
 		}
 
 		// Lucene

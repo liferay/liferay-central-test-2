@@ -50,7 +50,7 @@ public class RateEntryAction extends JSONAction {
 		throws Exception {
 
 		String className = getClassName(req);
-		String classPK = getClassPK(req);
+		long classPK = getClassPK(req);
 		double score = ParamUtil.getDouble(req, "score");
 
 		RatingsEntryServiceUtil.updateEntry(className, classPK, score);
@@ -71,8 +71,8 @@ public class RateEntryAction extends JSONAction {
 		return ParamUtil.getString(req, "className");
 	}
 
-	protected String getClassPK(HttpServletRequest req) {
-		return ParamUtil.getString(req, "classPK");
+	protected long getClassPK(HttpServletRequest req) {
+		return ParamUtil.getLong(req, "classPK");
 	}
 
 }

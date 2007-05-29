@@ -69,7 +69,7 @@ import org.json.JSONObject;
  */
 public class RatingsEntryServiceJSON {
 	public static JSONObject updateEntry(java.lang.String className,
-		java.lang.String classPK, double score)
+		long classPK, double score)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.ratings.model.RatingsEntry returnValue = RatingsEntryServiceUtil.updateEntry(className,

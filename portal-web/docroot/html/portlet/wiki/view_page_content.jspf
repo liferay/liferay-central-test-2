@@ -54,6 +54,6 @@
 <div>
 	<liferay-ui:tags-summary
 		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= String.valueOf(wikiPage.getResourcePrimKey()) %>"
+		classPK="<%= wikiPage.getResourcePrimKey() %>"
 	/>
 </div>

@@ -184,7 +184,7 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static java.util.List getEntries(HttpPrincipal httpPrincipal,
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -194,12 +194,7 @@ public class TagsEntryServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = classPK;
-
-			if (classPK == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(classPK);
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
 					"getEntries", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;

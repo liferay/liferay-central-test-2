@@ -114,7 +114,7 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List getEntries(java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();

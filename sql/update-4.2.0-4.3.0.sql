@@ -165,6 +165,7 @@ alter_column_type MBCategory groupId LONG;
 alter_column_type MBCategory parentCategoryId LONG;
 
 alter_column_type MBDiscussion discussionId LONG;
+alter_column_name MBDiscussion className classNameId VARCHAR(75) null;
 alter_column_type MBDiscussion threadId LONG;
 
 alter_column_type MBMessage messageId LONG;
@@ -269,6 +270,10 @@ alter_column_type Portlet id_ LONG;
 alter table PortletPreferences add portletPreferencesId LONG;
 alter table PortletPreferences add ownerType INTEGER;
 alter table PortletPreferences add plid LONG;
+
+alter_column_name RatingsEntry className classNameId VARCHAR(75) null;
+
+alter_column_name RatingsStats className classNameId VARCHAR(75) null;
 
 alter_column_type Region regionId LONG;
 
@@ -439,8 +444,8 @@ create table TagsAsset (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	className VARCHAR(75) null,
-	classPK VARCHAR(75) null,
+	classNameId LONG,
+	classPK LONG,
 	startDate DATE null,
 	endDate DATE null,
 	publishDate DATE null,

@@ -60,7 +60,7 @@ public class TagsEntryServiceImpl
 		TagsEntryLocalServiceUtil.deleteEntry(entryId);
 	}
 
-	public List getEntries(String className, String classPK)
+	public List getEntries(String className, long classPK)
 		throws PortalException, SystemException {
 
 		return TagsEntryLocalServiceUtil.getEntries(className, classPK);

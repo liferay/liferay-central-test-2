@@ -82,8 +82,7 @@ public interface TagsEntryLocalService {
 	public java.util.List getEntries()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getEntries(java.lang.String className,
-		java.lang.String classPK)
+	public java.util.List getEntries(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

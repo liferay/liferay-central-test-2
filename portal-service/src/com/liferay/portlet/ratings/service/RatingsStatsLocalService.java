@@ -57,7 +57,7 @@ public interface RatingsStatsLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public void deleteStats(java.lang.String className, java.lang.String classPK)
+	public void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -66,7 +66,7 @@ public interface RatingsStatsLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(
-		java.lang.String className, java.lang.String classPK)
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

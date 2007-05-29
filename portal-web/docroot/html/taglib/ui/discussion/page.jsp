@@ -38,7 +38,7 @@
 String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
 String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
-String classPK = (String)request.getAttribute("liferay-ui:discussion:classPK");
+long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
 String subject = (String)request.getAttribute("liferay-ui:discussion:subject");
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");

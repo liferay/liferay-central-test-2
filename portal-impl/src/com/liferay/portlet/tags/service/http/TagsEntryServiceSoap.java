@@ -117,8 +117,7 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getEntries(
-		java.lang.String className, java.lang.String classPK)
-		throws RemoteException {
+		java.lang.String className, long classPK) throws RemoteException {
 		try {
 			java.util.List returnValue = TagsEntryServiceUtil.getEntries(className,
 					classPK);

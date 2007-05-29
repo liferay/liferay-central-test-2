@@ -173,7 +173,7 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteDiscussionMessages(java.lang.String className,
-		java.lang.String classPK)
+		long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -202,7 +202,7 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, java.lang.String className, java.lang.String classPK)
+		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -50,9 +50,8 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long groupId, java.lang.String className, java.lang.String classPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body)
+		long groupId, java.lang.String className, long classPK, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
@@ -180,7 +179,7 @@ public class MBMessageServiceUtil {
 	}
 
 	public static void deleteDiscussionMessage(long groupId,
-		java.lang.String className, java.lang.String classPK, long messageId)
+		java.lang.String className, long classPK, long messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
@@ -228,8 +227,8 @@ public class MBMessageServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		long groupId, java.lang.String className, java.lang.String classPK,
-		long messageId, java.lang.String subject, java.lang.String body)
+		long groupId, java.lang.String className, long classPK, long messageId,
+		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();

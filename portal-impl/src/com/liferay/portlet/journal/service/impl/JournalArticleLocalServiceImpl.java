@@ -70,6 +70,8 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
@@ -277,7 +279,7 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			String.valueOf(article.getArticleId()), tagsEntries);
+			article.getResourcePrimKey(), tagsEntries);
 
 		// Email
 
@@ -499,8 +501,17 @@ public class JournalArticleLocalServiceImpl
 		// Tags
 
 		TagsAssetLocalServiceUtil.deleteAsset(
-			JournalArticle.class.getName(),
-			String.valueOf(article.getArticleId()));
+			JournalArticle.class.getName(), article.getResourcePrimKey());
+
+		// Ratings
+
+		RatingsStatsLocalServiceUtil.deleteStats(
+			JournalArticle.class.getName(), article.getResourcePrimKey());
+
+		// Message boards
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			JournalArticle.class.getName(), article.getResourcePrimKey());
 
 		// Content searches
 
@@ -1137,7 +1148,7 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			String.valueOf(article.getArticleId()), tagsEntries);
+			article.getResourcePrimKey(), tagsEntries);
 
 		// Email
 

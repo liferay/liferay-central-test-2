@@ -93,8 +93,7 @@ public class TagsEntryServiceJSON {
 		TagsEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	public static JSONArray getEntries(java.lang.String className,
-		java.lang.String classPK)
+	public static JSONArray getEntries(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsEntryServiceUtil.getEntries(className,

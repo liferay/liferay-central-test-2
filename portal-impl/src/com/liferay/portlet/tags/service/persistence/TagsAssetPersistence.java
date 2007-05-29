@@ -56,12 +56,12 @@ public interface TagsAssetPersistence {
 		long assetId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset findByC_C(
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchAssetException;
 
 	public com.liferay.portlet.tags.model.TagsAsset fetchByC_C(
-		java.lang.String className, java.lang.String classPK)
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List findWithDynamicQuery(
@@ -81,13 +81,13 @@ public interface TagsAssetPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_C(java.lang.String className, java.lang.String classPK)
+	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchAssetException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByC_C(java.lang.String className, java.lang.String classPK)
+	public int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

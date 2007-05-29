@@ -25,6 +25,7 @@ package com.liferay.portlet.ratings.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -71,8 +72,8 @@ import com.liferay.portlet.ratings.service.RatingsEntryServiceUtil;
  */
 public class RatingsEntryServiceHttp {
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
-		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String classPK, double score)
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
+		double score)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -82,12 +83,7 @@ public class RatingsEntryServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = classPK;
-
-			if (classPK == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(classPK);
 			Object paramObj2 = new DoubleWrapper(score);
 			MethodWrapper methodWrapper = new MethodWrapper(RatingsEntryServiceUtil.class.getName(),
 					"updateEntry",

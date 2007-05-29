@@ -33,6 +33,7 @@ import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.shopping.BillingCityException;
 import com.liferay.portlet.shopping.BillingCountryException;
 import com.liferay.portlet.shopping.BillingEmailAddressException;
@@ -196,6 +197,11 @@ public class ShoppingOrderLocalServiceImpl
 		// Items
 
 		ShoppingOrderItemUtil.removeByOrderId(order.getOrderId());
+
+		// Message boards
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			ShoppingOrder.class.getName(), order.getOrderId());
 
 		// Order
 

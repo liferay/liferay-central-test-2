@@ -814,10 +814,10 @@ String[] availableLocales = null;
 	<td>
 
 		<%
-		String classPK = StringPool.BLANK;
+		long classPK = 0;
 
 		if (article != null) {
-			classPK = String.valueOf(article.getResourcePrimKey());
+			classPK = article.getResourcePrimKey();
 		}
 		%>
 

@@ -87,6 +87,8 @@ import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
@@ -226,6 +228,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		PortletPreferencesLocalServiceUtil.deletePortletPreferences(
 			PortletKeys.PREFS_OWNER_ID_DEFAULT,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid());
+
+		// Ratings
+
+		RatingsStatsLocalServiceUtil.deleteStats(
+			Layout.class.getName(), layout.getPlid());
+
+		// Message boards
+
+		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+			Layout.class.getName(), layout.getPlid());
 
 		// Journal content searches
 

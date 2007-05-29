@@ -38,7 +38,8 @@ public class RatingsTag extends IncludeTag {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:ratings:className", _className);
-		req.setAttribute("liferay-ui:ratings:classPK", _classPK);
+		req.setAttribute(
+			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
 		req.setAttribute("liferay-ui:ratings:url", _url);
 
 		return EVAL_BODY_BUFFERED;
@@ -48,7 +49,7 @@ public class RatingsTag extends IncludeTag {
 		_className = className;
 	}
 
-	public void setClassPK(String classPK) {
+	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
@@ -63,7 +64,7 @@ public class RatingsTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/ratings/page.jsp";
 
 	private String _className;
-	private String _classPK;
+	private long _classPK;
 	private String _url;
 
 }
