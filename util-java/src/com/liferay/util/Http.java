@@ -57,6 +57,7 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.NTCredentials;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthPolicy;
@@ -546,9 +547,10 @@ public class Http {
 
 			if (post) {
 				method = new PostMethod(location);
-
+				
 				if ((parts != null) && (parts.size() > 0)) {
-					List partsList = new ArrayList();
+					List nvpList = new ArrayList();
+					List stringPartsList = new ArrayList();
 
 					Iterator itr = parts.entrySet().iterator();
 
@@ -559,14 +561,17 @@ public class Http {
 						String value = (String)entry.getValue();
 
 						if (value != null) {
-							partsList.add(new StringPart(key, (String)value));
+							nvpList.add(new NameValuePair(key, (String)value));
+							stringPartsList.add(new StringPart(key, (String)value));
 						}
 					}
 
+					method.setQueryString((NameValuePair[])nvpList.toArray(new NameValuePair[nvpList.size()]));
+					
 					PostMethod postMethod = (PostMethod)method;
 
 					RequestEntity requestEntity = new MultipartRequestEntity(
-						(StringPart[])partsList.toArray(new StringPart[0]),
+						(StringPart[])stringPartsList.toArray(new StringPart[0]),
 						method.getParams());
 
 					postMethod.setRequestEntity(requestEntity);
