@@ -31,6 +31,7 @@
 
 <%
 Locale locale = renderRequest.getLocale();
+
 ResourceBundle bundle = portletConfig.getResourceBundle(locale);
 %>
 
