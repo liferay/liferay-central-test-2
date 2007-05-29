@@ -31,6 +31,7 @@ import com.liferay.util.xml.DocUtil;
 import com.sample.hibernate.model.FoodItem;
 import com.sample.hibernate.util.FoodItemUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class FoodItemComponentImpl {
 			String cmd = ParamUtil.getString(req, "cmd");
 
 			if (cmd.equals("getFoodItemXml")) {
-				long foodItemId = ParamUtil.getLong(req, "foodItemId", 1);
+				long foodItemId = ParamUtil.getLong(req, "foodItemId", 0);
 
 				result = getFoodItemXml(foodItemId);
 			}
@@ -74,10 +75,11 @@ public class FoodItemComponentImpl {
 	public String getFoodItemXml(long foodItemId) throws Exception {
 		List foodItems = null;
 
-		if (foodItemId <= 0) {
+		if (foodItemId > 0) {
 			FoodItem foodItem = FoodItemUtil.getFoodItem(foodItemId);
 
 			if (foodItem != null) {
+				foodItems = new ArrayList();
 				foodItems.add(foodItem);
 			}
 		}
