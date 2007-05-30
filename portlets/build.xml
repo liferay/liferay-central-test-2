@@ -111,7 +111,7 @@
 		Add the required portlet XML files to make it work.
 		-->
 
-		<jar
+		<zip
 			basedir="alfresco.war.ext"
 			destfile="alfresco.war"
 			update="yes"
@@ -135,7 +135,7 @@
 		better user experience.
 		-->
 
-		<jar
+		<zip
 			basedir="sample-spring-portlet.war.ext"
 			destfile="sample-spring-portlet.war"
 			update="yes"

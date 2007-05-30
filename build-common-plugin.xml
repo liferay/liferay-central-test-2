@@ -36,7 +36,7 @@
 				<copy file="${module.name}.war" todir="${project.dir}/${module.name}-${lp.version.file.name}.war" />
 			</then>
 			<else>
-				<jar
+				<zip
 					basedir="${module.name}.war"
 					destfile="${project.dir}/${module.name}-${lp.version.file.name}.war"
 					excludes="${plugin.jar.excludes}"
@@ -72,7 +72,7 @@
 					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 				</tstamp>
 
-				<jar
+				<zip
 					basedir="${module.name}.war"
 					destfile="${tstamp.value}"
 					excludes="${plugin.jar.excludes}"
