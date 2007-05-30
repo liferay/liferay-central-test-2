@@ -22,6 +22,7 @@
 
 package com.liferay.filters.compression;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
@@ -160,7 +161,8 @@ public class CompressionFilter implements Filter {
 	}
 
 	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(_INCLUDE);
+		String uri = (String)req.getAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (uri == null) {
 			return false;
@@ -174,8 +176,6 @@ public class CompressionFilter implements Filter {
 		CompressionFilter.class + "_ALREADY_FILTERED";
 
 	private static final String _COMPRESS = "compress";
-
-	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
 	private static Log _log = LogFactory.getLog(CompressionFilter.class);
 

@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -367,7 +368,8 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 	}
 
 	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(_INCLUDE);
+		String uri = (String)req.getAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (uri == null) {
 			return false;
@@ -417,8 +419,6 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 			return true;
 		}
 	}
-
-	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
 	private static final String _ALREADY_FILTERED =
 		LayoutCacheFilter.class + "_ALREADY_FILTERED";

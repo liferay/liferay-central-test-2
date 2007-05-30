@@ -22,6 +22,7 @@
 
 package com.liferay.filters.strip;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
@@ -274,7 +275,8 @@ public class StripFilter implements Filter {
 	}
 
 	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(_INCLUDE);
+		String uri = (String)req.getAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (uri == null) {
 			return false;
@@ -311,8 +313,6 @@ public class StripFilter implements Filter {
 		StripFilter.class + "_ALREADY_FILTERED";
 
 	private static final String _STRIP = "strip";
-
-	private static final String _INCLUDE = "javax.servlet.include.request_uri";
 
 	private static Log _log = LogFactory.getLog(StripFilter.class);
 
