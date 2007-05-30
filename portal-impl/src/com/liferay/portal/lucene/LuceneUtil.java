@@ -198,10 +198,8 @@ public class LuceneUtil {
 		return IndexReader.open(getLuceneDir(companyId));
 	}
 
-	public static IndexSearcher getSearcher(long companyId)
-		throws IOException {
-
-		return _instance._getIndexSearcher(companyId);
+	public static IndexSearcher getSearcher(long companyId) throws IOException {
+		return _instance._getSearcher(companyId);
 	}
 
 	public static IndexWriter getWriter(long companyId) throws IOException {
@@ -352,22 +350,7 @@ public class LuceneUtil {
 		}
 	}
 
-	public IndexSearcher _getIndexSearcher(long companyId) throws IOException {
-		Long key = new Long(companyId);
-
-		IndexSearcher indexSearcher = 
-			(IndexSearcher)_instance._sharedIndexSearchers.get(key);
-
-		if (indexSearcher == null) {
-			indexSearcher = new IndexSearcher(getLuceneDir(companyId));
-
-			_instance._sharedIndexSearchers.put(key, indexSearcher);
-		}
-
-		return indexSearcher;
-	}
-	
-	public Directory _getLuceneDir(long companyId) {
+	private Directory _getLuceneDir(long companyId) {
 		Directory directory = null;
 
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
@@ -432,6 +415,21 @@ public class LuceneUtil {
 		return directory;
 	}
 
+	private IndexSearcher _getSearcher(long companyId) throws IOException {
+		Long companyIdObj = new Long(companyId);
+
+		IndexSearcher indexSearcher =
+			(IndexSearcher)_sharedSearchers.get(companyIdObj);
+
+		if (indexSearcher == null) {
+			indexSearcher = new IndexSearcher(_getLuceneDir(companyId));
+
+			_instance._sharedSearchers.put(companyIdObj, indexSearcher);
+		}
+
+		return indexSearcher;
+	}
+
 	private String _getTableName(long companyId) {
 		return _LUCENE_TABLE_PREFIX + companyId;
 	}
@@ -447,7 +445,7 @@ public class LuceneUtil {
 	private static LuceneUtil _instance = new LuceneUtil();
 
 	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
-	private Map _sharedIndexSearchers = CollectionFactory.getSyncHashMap();
+	private Map _sharedSearchers = CollectionFactory.getSyncHashMap();
 	private Class _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
 
