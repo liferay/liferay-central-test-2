@@ -23,6 +23,7 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -157,8 +158,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return;
 		}
 
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
 			action.processAction(mapping, form, portletConfig, req, res);
@@ -225,8 +226,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			ActionForm form, ActionMapping mapping)
 		throws IOException, ServletException {
 
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		String exceptionId =
 			WebKeys.PORTLET_STRUTS_EXCEPTION + StringPool.PERIOD +
@@ -295,7 +296,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		try {
 			PortletConfigImpl portletConfig =
 				(PortletConfigImpl)req.getAttribute(
-					WebKeys.JAVAX_PORTLET_CONFIG);
+					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				user.getCompanyId(), portletConfig.getPortletId());
@@ -417,14 +418,14 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			String uri, HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		RenderRequest renderRequest =
-			(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		RenderResponse renderResponse =
-			(RenderResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		PortletRequestDispatcherImpl prd = (PortletRequestDispatcherImpl)
 			portletConfig.getPortletContext().getRequestDispatcher(
@@ -470,7 +471,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		if (path == null) {
 			PortletConfigImpl portletConfig =
 				(PortletConfigImpl)req.getAttribute(
-					WebKeys.JAVAX_PORTLET_CONFIG);
+					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			_log.error(
 				portletConfig.getPortletName() +

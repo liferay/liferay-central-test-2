@@ -22,8 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
 import com.liferay.util.Validator;
 
@@ -51,7 +51,7 @@ public class SectionTag extends ParamAncestorTagImpl {
 			ServletRequest req = pageContext.getRequest();
 
 			RenderResponse renderResponse = (RenderResponse)req.getAttribute(
-				WebKeys.JAVAX_PORTLET_RESPONSE);
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			String namespace = StringPool.BLANK;
 

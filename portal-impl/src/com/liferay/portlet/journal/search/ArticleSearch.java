@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.journal.search;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.CollectionFactory;
@@ -73,8 +73,8 @@ public class ArticleSearch extends SearchContainer {
 			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
 			  EMPTY_RESULTS_MESSAGE);
 
-		PortletConfig portletConfig =
-			(PortletConfig)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		ArticleDisplayTerms displayTerms =
 			(ArticleDisplayTerms)getDisplayTerms();

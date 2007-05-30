@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -33,7 +34,6 @@ import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.BrowserSniffer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -348,7 +348,7 @@ public class RenderRequestImpl implements RenderRequest {
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			if (!name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
+			if (!name.equals(JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
 				names.add(name);
 			}
 		}
@@ -465,9 +465,9 @@ public class RenderRequestImpl implements RenderRequest {
 	}
 
 	public void defineObjects(PortletConfig portletConfig, RenderResponse res) {
-		setAttribute(WebKeys.JAVAX_PORTLET_CONFIG, portletConfig);
-		setAttribute(WebKeys.JAVAX_PORTLET_REQUEST, this);
-		setAttribute(WebKeys.JAVAX_PORTLET_RESPONSE, res);
+		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
+		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
+		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
 	}
 
 	public boolean isAction() {
@@ -642,9 +642,9 @@ public class RenderRequestImpl implements RenderRequest {
 			_log.debug("Recycling instance " + hashCode());
 		}
 
-		_req.removeAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
-		_req.removeAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
-		_req.removeAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		_req.removeAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
+		_req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+		_req.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		_req = null;
 		_wapTheme = false;

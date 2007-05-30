@@ -22,7 +22,7 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portlet.PortletConfigImpl;
 
 import javax.portlet.RenderRequest;
@@ -42,8 +42,8 @@ public class DefineObjectsTagUtil {
 	public static void doStartTag(PageContext pageContext) {
 		ServletRequest req = pageContext.getRequest();
 
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		if (portletConfig != null) {
 			pageContext.setAttribute("portletConfig", portletConfig);
@@ -51,8 +51,8 @@ public class DefineObjectsTagUtil {
 				"portletName", portletConfig.getPortletName());
 		}
 
-		RenderRequest renderRequest =
-			(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (renderRequest != null) {
 			pageContext.setAttribute("renderRequest", renderRequest);
@@ -62,8 +62,8 @@ public class DefineObjectsTagUtil {
 				"portletSession", renderRequest.getPortletSession());
 		}
 
-		RenderResponse renderResponse =
-			(RenderResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (renderResponse != null) {
 			pageContext.setAttribute("renderResponse", renderResponse);

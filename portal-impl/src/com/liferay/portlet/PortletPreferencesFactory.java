@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -317,8 +318,8 @@ public class PortletPreferencesFactory {
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {
-		RenderRequest renderRequest =
-			(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletPreferences prefs = null;
 

@@ -22,10 +22,10 @@
 
 package com.liferay.portal.wsrp;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.PortletConfigFactory;
 
@@ -231,12 +231,12 @@ public class DescriptionHandlerImpl implements DescriptionHandler {
 
 		LocalizedString shortTitle = new LocalizedString();
 		shortTitle.setLang(lang);
-		shortTitle.setValue(_getResourceString(resourceBundle, WebKeys.JAVAX_PORTLET_SHORT_TITLE, StringPool.BLANK));
+		shortTitle.setValue(_getResourceString(resourceBundle, JavaConstants.JAVAX_PORTLET_SHORT_TITLE, StringPool.BLANK));
 		portletDescription.setShortTitle(shortTitle);
 
 		LocalizedString title = new LocalizedString();
 		title.setLang(lang);
-		title.setValue(_getResourceString(resourceBundle, WebKeys.JAVAX_PORTLET_TITLE, StringPool.BLANK));
+		title.setValue(_getResourceString(resourceBundle, JavaConstants.JAVAX_PORTLET_TITLE, StringPool.BLANK));
 		portletDescription.setTitle(title);
 
 		portletDescription.setGroupID(portlet.getPortletId());

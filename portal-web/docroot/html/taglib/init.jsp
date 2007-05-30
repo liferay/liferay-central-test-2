@@ -25,9 +25,9 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
-RenderRequest renderRequest = (RenderRequest)request.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+RenderRequest renderRequest = (RenderRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 
-RenderResponse renderResponse = (RenderResponse)request.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+RenderResponse renderResponse = (RenderResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 String namespace = StringPool.BLANK;
 PortletURL currentURLObj = null;

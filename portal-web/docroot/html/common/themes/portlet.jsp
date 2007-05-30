@@ -83,7 +83,7 @@ if (portletDisplay.isAccess() && portletDisplay.isActive()) {
 if (Validator.isNull(portletTitle)) {
 	ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
-	portletTitle = resourceBundle.getString(WebKeys.JAVAX_PORTLET_TITLE);
+	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
 }
 
 portletDisplay.setTitle(portletTitle);

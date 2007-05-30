@@ -24,13 +24,13 @@ package com.liferay.portal.language;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.GetterUtil;
@@ -304,7 +304,7 @@ public class LanguageUtil {
 				(HttpServletRequest)pageContext.getRequest();
 
 			PortletConfig portletConfig = (PortletConfig)req.getAttribute(
-				WebKeys.JAVAX_PORTLET_CONFIG);
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			if (portletConfig != null) {
 				Locale locale = req.getLocale();

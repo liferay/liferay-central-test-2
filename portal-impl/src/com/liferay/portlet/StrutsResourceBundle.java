@@ -22,11 +22,11 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.util.WebKeys;
 
 import java.util.Enumeration;
 import java.util.Locale;
@@ -65,10 +65,10 @@ public class StrutsResourceBundle extends ResourceBundle {
 	protected Object handleGetObject(String key) {
 		Object obj = null;
 
-		if (key != null &&
-			(key.equals(WebKeys.JAVAX_PORTLET_TITLE) ||
-			 key.equals(WebKeys.JAVAX_PORTLET_SHORT_TITLE) ||
-			 key.equals(WebKeys.JAVAX_PORTLET_KEYWORDS))) {
+		if ((key != null) &&
+			(key.equals(JavaConstants.JAVAX_PORTLET_TITLE) ||
+			 key.equals(JavaConstants.JAVAX_PORTLET_SHORT_TITLE) ||
+			 key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS))) {
 
 			StringMaker sm = new StringMaker();
 

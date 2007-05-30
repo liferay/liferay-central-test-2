@@ -22,11 +22,11 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.servlet.ProtectedPrincipal;
 
@@ -95,30 +95,36 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 		if (ServerDetector.isWebSphere()) {
 			if (reqImpl.getPortlet().isWARFile()) {
-				if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
+				if (name.equals(
+						JavaConstants.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
+
 					retVal = _portletRequest.getContextPath();
 				}
-				else if (name.equals(WebKeys.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
+				else if (name.equals(
+							JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
+
 					retVal = _pathInfo;
 				}
 				else if (name.equals(
-							WebKeys.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
+							JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
 
 					retVal = _queryString;
 				}
 				else if (name.equals(
-							WebKeys.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
+							JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
 
 					retVal = _requestURI;
 				}
 				else if (name.equals(
-							WebKeys.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
+							JavaConstants.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
 
 					retVal = _servletPath;
 				}
 			}
 
-			if (name.startsWith("javax.servlet.include.") && (retVal == null)) {
+			if ((name.startsWith(JavaConstants.JAVAX_SERVLET_INCLUDE)) &&
+				(retVal == null)) {
+
 				retVal = StringPool.BLANK;
 			}
 		}

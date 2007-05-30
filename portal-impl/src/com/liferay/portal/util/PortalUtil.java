@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -924,8 +925,13 @@ public class PortalUtil {
 	public static String getPortletTitle(String portletId, User user)
 		throws LanguageException {
 
-		return LanguageUtil.get(
-			user, WebKeys.JAVAX_PORTLET_TITLE + StringPool.PERIOD + portletId);
+		StringMaker sm = new StringMaker();
+
+		sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
+		sm.append(StringPool.PERIOD);
+		sm.append(portletId);
+
+		return LanguageUtil.get(user, sm.toString());
 	}
 
 	public static String getPortletTitle(
@@ -935,12 +941,12 @@ public class PortalUtil {
 
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
-		return resourceBundle.getString(WebKeys.JAVAX_PORTLET_TITLE);
+		return resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {
-		RenderRequest renderRequest =
-			(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletPreferences prefs = null;
 

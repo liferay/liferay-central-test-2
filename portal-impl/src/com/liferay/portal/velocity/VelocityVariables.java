@@ -22,6 +22,7 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.language.LanguageUtil_IW;
 import com.liferay.portal.language.UnicodeLanguageUtil_IW;
 import com.liferay.portal.model.Layout;
@@ -90,8 +91,8 @@ public class VelocityVariables {
 
 		// Portlet config
 
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		if (portletConfig != null) {
 			vc.put("portletConfig", portletConfig);
@@ -99,8 +100,8 @@ public class VelocityVariables {
 
 		// Render request
 
-		PortletRequest portletRequest =
-			(PortletRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
 			if (portletRequest instanceof RenderRequest) {
@@ -110,8 +111,8 @@ public class VelocityVariables {
 
 		// Render response
 
-		PortletResponse portletResponse =
-			(PortletResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {
 			if (portletResponse instanceof RenderResponse) {

@@ -22,13 +22,13 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 
 import java.io.ByteArrayInputStream;
@@ -100,17 +100,17 @@ public class PortletConfigImpl implements PortletConfig {
 				StringMaker sm = new StringMaker();
 
 				try {
-					sm.append(WebKeys.JAVAX_PORTLET_TITLE);
+					sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
 					sm.append("=");
 					sm.append(_portletInfo.getTitle());
 					sm.append("\n");
 
-					sm.append(WebKeys.JAVAX_PORTLET_SHORT_TITLE);
+					sm.append(JavaConstants.JAVAX_PORTLET_SHORT_TITLE);
 					sm.append("=");
 					sm.append(_portletInfo.getShortTitle());
 					sm.append("\n");
 
-					sm.append(WebKeys.JAVAX_PORTLET_KEYWORDS);
+					sm.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
 					sm.append("=");
 					sm.append(_portletInfo.getKeywords());
 					sm.append("\n");

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.kernel.util.JavaConstants;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -85,9 +85,9 @@ public class ActionRequestImpl
 	}
 
 	public void defineObjects(PortletConfig portletConfig, ActionResponse res) {
-		setAttribute(WebKeys.JAVAX_PORTLET_CONFIG, portletConfig);
-		setAttribute(WebKeys.JAVAX_PORTLET_REQUEST, this);
-		setAttribute(WebKeys.JAVAX_PORTLET_RESPONSE, res);
+		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
+		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
+		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
 	}
 
 	public boolean isAction() {

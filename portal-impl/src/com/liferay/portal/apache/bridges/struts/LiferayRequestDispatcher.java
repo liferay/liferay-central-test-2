@@ -22,8 +22,8 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
 import com.liferay.portlet.RenderRequestImpl;
@@ -59,7 +59,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 	public void forward(ServletRequest req, ServletResponse res)
 		throws IOException, ServletException {
 
-		if (req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST) != null) {
+		if (req.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) != null) {
 			invoke(req, res, false);
 		}
 		else {
@@ -70,7 +70,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 	public void include(ServletRequest req, ServletResponse res)
 		throws IOException, ServletException {
 
-		if (req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST) != null) {
+		if (req.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) != null) {
 			invoke(req, res, true);
 		}
 		else {
@@ -87,10 +87,10 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		String servletPath = null;
 
 		RenderRequestImpl portletReq = (RenderRequestImpl)req.getAttribute(
-			WebKeys.JAVAX_PORTLET_REQUEST);
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletResponse portletRes = (PortletResponse)req.getAttribute(
-			WebKeys.JAVAX_PORTLET_RESPONSE);
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (_path != null) {
 			String pathNoQueryString = _path;

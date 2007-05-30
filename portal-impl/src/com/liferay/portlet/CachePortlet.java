@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -345,7 +346,7 @@ public class CachePortlet implements Portlet {
 				httpRes = renderResImpl.getHttpServletResponse();
 			}
 
-			httpReq.setAttribute(WebKeys.JAVAX_PORTLET_PORTLET, _portlet);
+			httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_PORTLET, _portlet);
 
 			try {
 				rd.include(httpReq, httpRes);

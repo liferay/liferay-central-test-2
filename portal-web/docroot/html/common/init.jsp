@@ -67,6 +67,7 @@
 <%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %>
 <%@ page import="com.liferay.portal.kernel.util.BooleanWrapper" %>
 <%@ page import="com.liferay.portal.kernel.util.IntegerWrapper" %>
+<%@ page import="com.liferay.portal.kernel.util.JavaConstants" %>
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePairComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.ObjectValuePair" %>

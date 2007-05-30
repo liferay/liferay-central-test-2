@@ -22,8 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.PortletInfo;
-import com.liferay.portal.util.WebKeys;
 
 import java.util.Enumeration;
 import java.util.Locale;
@@ -75,13 +75,16 @@ public class PortletResourceBundle extends ResourceBundle {
 	}
 
 	private String _getJavaxPortletString(String key) {
-		if (key != null && key.equals(WebKeys.JAVAX_PORTLET_TITLE)) {
+		if (key == null) {
+			return null;
+		}
+		else if (key.equals(JavaConstants.JAVAX_PORTLET_TITLE)) {
 			return _portletInfo.getTitle();
 		}
-		else if (key != null && key.equals(WebKeys.JAVAX_PORTLET_SHORT_TITLE)) {
+		else if (key.equals(JavaConstants.JAVAX_PORTLET_SHORT_TITLE)) {
 			return _portletInfo.getShortTitle();
 		}
-		else if (key != null && key.equals(WebKeys.JAVAX_PORTLET_KEYWORDS)) {
+		else if (key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS)) {
 			return _portletInfo.getKeywords();
 		}
 

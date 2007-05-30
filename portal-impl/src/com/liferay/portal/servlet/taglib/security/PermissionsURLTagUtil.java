@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.taglib.security;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -67,12 +68,11 @@ public class PermissionsURLTagUtil extends TagSupport {
 
 			Layout layout = themeDisplay.getLayout();
 
-			RenderRequest renderRequest =
-				(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+			RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
-			RenderResponse renderResponse =
-				(RenderResponse)req.getAttribute(
-					WebKeys.JAVAX_PORTLET_RESPONSE);
+			RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			if (Validator.isNull(redirect)) {
 				redirect = PortletURLUtil.getCurrent(

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -63,16 +64,16 @@ import org.apache.struts.util.MessageResources;
 public class PortletAction extends Action {
 
 	public static String getForwardKey(HttpServletRequest req) {
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		return PortalUtil.getPortletNamespace(portletConfig.getPortletId()) +
 			WebKeys.PORTLET_STRUTS_FORWARD;
 	}
 
 	public static String getForwardKey(PortletRequest req) {
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		return PortalUtil.getPortletNamespace(portletConfig.getPortletId()) +
 			WebKeys.PORTLET_STRUTS_FORWARD;
@@ -83,14 +84,14 @@ public class PortletAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		PortletConfig portletConfig =
-			(PortletConfig)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		RenderRequest renderRequest =
-			(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		RenderResponse renderResponse =
-			(RenderResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		Boolean strutsExecute = (Boolean)req.getAttribute(
 			WebKeys.PORTLET_STRUTS_EXECUTE);

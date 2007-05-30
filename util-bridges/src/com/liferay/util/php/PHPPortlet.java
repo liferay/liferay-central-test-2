@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -99,6 +100,7 @@ public class PHPPortlet extends GenericPortlet {
 
 	public void processAction(ActionRequest req, ActionResponse res)
 		throws IOException, PortletException {
+
 		String phpURI = req.getParameter(PHP_URI_PARAM);
 
 		if (phpURI != null) {
@@ -107,52 +109,64 @@ public class PHPPortlet extends GenericPortlet {
 	}
 
 	public void destroy() {
-		if (_quercusServlet != null) {
-			_quercusServlet.destroy();
+		if (quercusServlet != null) {
+			quercusServlet.destroy();
+		}
+	}
+
+	protected synchronized void initQuercus(ServletConfig config)
+		throws PortletException {
+
+		if (quercusServlet == null) {
+			quercusServlet = new QuercusServlet();
+
+			try {
+				quercusServlet.init(config);
+			}
+			catch (Exception e) {
+				throw new PortletException(e);
+			}
 		}
 	}
 
 	protected void processPHP(
-		String phpURI, RenderRequest req, RenderResponse res)
+			String phpURI, RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
 		try {
-			ServletConfig config =
-				(ServletConfig) req.getAttribute(
-					PortletServlet.PORTLET_SERVLET_CONFIG);
+			ServletConfig config = (ServletConfig)req.getAttribute(
+				PortletServlet.PORTLET_SERVLET_CONFIG);
 
-			_initQuercus(config);
+			initQuercus(config);
 
-			HttpServletRequest httpReq =
-				(HttpServletRequest) req.getAttribute(
-					PortletServlet.PORTLET_SERVLET_REQUEST);
-			HttpServletResponse httpRes =
-				(HttpServletResponse) req.getAttribute(
-					PortletServlet.PORTLET_SERVLET_RESPONSE);
+			HttpServletRequest httpReq = (HttpServletRequest)req.getAttribute(
+				PortletServlet.PORTLET_SERVLET_REQUEST);
+			HttpServletResponse httpRes = (HttpServletResponse)req.getAttribute(
+				PortletServlet.PORTLET_SERVLET_RESPONSE);
 
-			PHPServletRequest phpReq =
-				new PHPServletRequest(
-					httpReq, req, res, getPortletConfig(), config, phpURI);
+			PHPServletRequest phpReq = new PHPServletRequest(
+				httpReq, config, req, res, getPortletConfig(), phpURI);
 
-			StringServletResponse phpRes =
-				new StringServletResponse(httpRes);
+			StringServletResponse phpRes = new StringServletResponse(httpRes);
 
-			_quercusServlet.service(phpReq, phpRes);
+			quercusServlet.service(phpReq, phpRes);
 
 			String result = phpRes.getString();
 
 			if (phpRes.getContentType().startsWith("text/")) {
-				result = _rewriteURLs(result, res.createRenderURL());
+				result = rewriteURLs(result, res.createRenderURL());
 			}
 
-			httpRes.getWriter().write(result.toCharArray());
+			PrintWriter writer = httpRes.getWriter();
+
+			writer.write(result.toCharArray());
 		}
 		catch (Exception e) {
-			_log.error("Error executing PHP", e);
+			_log.error("Error processing PHP", e);
 		}
 	}
 
-	private String _rewriteURLs(String page, PortletURL portletURL) {
+	protected String rewriteURLs(String page, PortletURL portletURL) {
 		ScriptPostProcess processor = new ScriptPostProcess();
 
 		processor.setInitalPage(new StringBuffer(page));
@@ -161,27 +175,11 @@ public class PHPPortlet extends GenericPortlet {
 		return processor.getFinalizedPage();
 	}
 
-	private synchronized void _initQuercus(ServletConfig config)
-		throws PortletException {
-
-		if (_quercusServlet == null) {
-			_quercusServlet = new QuercusServlet();
-
-			try {
-				_quercusServlet.init(config);
-			}
-			catch (Exception e) {
-				throw new PortletException(e);
-			}
-		}
-	}
-
 	private static Log _log = LogFactory.getLog(PHPPortlet.class);
 
 	protected String editUri;
 	protected String helpUri;
 	protected String viewUri;
-
-	private QuercusServlet _quercusServlet;
+	protected QuercusServlet quercusServlet;
 
 }

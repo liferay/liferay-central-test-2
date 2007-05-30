@@ -29,6 +29,7 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -703,7 +704,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// for portlets that are called directly from a Struts path
 
 		RenderRequestImpl renderRequestImpl =
-			(RenderRequestImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+			(RenderRequestImpl)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (renderRequestImpl != null) {
 			RenderRequestFactory.recycle(renderRequestImpl);
@@ -711,7 +713,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		RenderResponseImpl renderResponseImpl =
 			(RenderResponseImpl)req.getAttribute(
-				WebKeys.JAVAX_PORTLET_RESPONSE);
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (renderResponseImpl != null) {
 			RenderResponseFactory.recycle(renderResponseImpl);

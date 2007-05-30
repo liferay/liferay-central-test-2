@@ -22,8 +22,8 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
@@ -65,14 +65,14 @@ public class ActionURLTagUtil {
 			if (portletName == null) {
 				PortletConfigImpl portletConfig =
 					(PortletConfigImpl)req.getAttribute(
-						WebKeys.JAVAX_PORTLET_CONFIG);
+						JavaConstants.JAVAX_PORTLET_CONFIG);
 
 				portletName = portletConfig.getPortletId();
 			}
 
 			RenderResponseImpl renderResponse =
 				(RenderResponseImpl)req.getAttribute(
-					WebKeys.JAVAX_PORTLET_RESPONSE);
+					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			if (renderResponse == null) {
 				_log.error(

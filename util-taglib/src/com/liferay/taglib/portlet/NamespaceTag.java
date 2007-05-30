@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.portlet;
 
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.kernel.util.JavaConstants;
 
 import javax.portlet.RenderResponse;
 
@@ -43,7 +43,7 @@ public class NamespaceTag extends TagSupport {
 			ServletRequest req = pageContext.getRequest();
 
 			RenderResponse renderResponse = (RenderResponse)req.getAttribute(
-				WebKeys.JAVAX_PORTLET_RESPONSE);
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			pageContext.getOut().print(renderResponse.getNamespace());
 		}

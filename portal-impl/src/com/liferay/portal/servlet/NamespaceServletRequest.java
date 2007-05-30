@@ -22,8 +22,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.DynamicServletRequest;
 
@@ -51,10 +51,10 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	static Set reservedAttrs = CollectionFactory.getHashSet();
 
 	static {
-		reservedAttrs.add(WebKeys.JAVAX_PORTLET_CONFIG);
-		reservedAttrs.add(WebKeys.JAVAX_PORTLET_PORTLET);
-		reservedAttrs.add(WebKeys.JAVAX_PORTLET_REQUEST);
-		reservedAttrs.add(WebKeys.JAVAX_PORTLET_RESPONSE);
+		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_CONFIG);
+		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_PORTLET);
+		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_REQUEST);
+		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_RESPONSE);
 	}
 
 	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(

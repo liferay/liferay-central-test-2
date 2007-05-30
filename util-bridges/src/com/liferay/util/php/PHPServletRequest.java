@@ -22,6 +22,7 @@
 
 package com.liferay.util.php;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
@@ -45,55 +46,57 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class PHPServletRequest extends HttpServletRequestWrapper {
 
-	public static String PATH_INFO = "javax.servlet.include.path_info";
-	public static String QUERY_STRING = "javax.servlet.include.query_string";
-	public static String REQUEST_URI = "javax.servlet.include.request_uri";
-	public static String SERVLET_PATH = "javax.servlet.include.servlet_path";
+	public PHPServletRequest(HttpServletRequest req, ServletConfig config,
+							 RenderRequest renderReq, RenderResponse renderRes,
+							 PortletConfig portletConfig, String phpURI) {
 
-	public PHPServletRequest(
-		HttpServletRequest req, RenderRequest renderReq,
-		RenderResponse renderRes, PortletConfig portletConfig,
-		ServletConfig config, String phpURI) {
 		super(req);
+
+		_config = config;
 		_renderReq = renderReq;
 		_renderRes = renderRes;
 		_portletConfig = portletConfig;
-		_config = config;
 
-		StringBuffer queryStringBuffer = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
-		int index = phpURI.indexOf(StringPool.QUESTION);
+		int pos = phpURI.indexOf(StringPool.QUESTION);
 
-		if (index != -1) {
-			_path = phpURI.substring(0, index);
-			queryStringBuffer.append(phpURI.substring(index + 1));
+		if (pos != -1) {
+			_path = phpURI.substring(0, pos);
+
+			sb.append(phpURI.substring(pos + 1));
 		}
 		else {
 			_path = phpURI;
 		}
 
 		if (GetterUtil.getBoolean(
-			portletConfig.getInitParameter("add-portlet-params"), true)) {
-			queryStringBuffer.append(StringPool.AMPERSAND);
-			queryStringBuffer.append("portlet_namespace");
-			queryStringBuffer.append(StringPool.EQUAL);
-			queryStringBuffer.append(_renderRes.getNamespace());
-			queryStringBuffer.append(StringPool.AMPERSAND);
-			queryStringBuffer.append("portlet_name");
-			queryStringBuffer.append(StringPool.EQUAL);
-			queryStringBuffer.append(_portletConfig.getPortletName());
+				portletConfig.getInitParameter("add-portlet-params"), true)) {
+
+			sb.append(StringPool.AMPERSAND);
+			sb.append("portlet_namespace");
+			sb.append(StringPool.EQUAL);
+			sb.append(_renderRes.getNamespace());
+			sb.append(StringPool.AMPERSAND);
+			sb.append("portlet_name");
+			sb.append(StringPool.EQUAL);
+			sb.append(_portletConfig.getPortletName());
 		}
 
-		_queryString = queryStringBuffer.toString();
+		_queryString = sb.toString();
 
-		req.setAttribute(QUERY_STRING, getQueryString());
-		req.setAttribute(PATH_INFO, getPathInfo());
-		req.setAttribute(REQUEST_URI, getRequestURI());
-		req.setAttribute(SERVLET_PATH, _path);
+		req.setAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING, getQueryString());
+		req.setAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO, getPathInfo());
+		req.setAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI, getRequestURI());
+		req.setAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_SERVLET_PATH, _path);
 	}
 
-	public String getRealPath(String path) {
-		return _config.getServletContext().getRealPath(path);
+	public String getContextPath() {
+		return StringPool.SLASH;
 	}
 
 	public String getParameter(String name) {
@@ -112,6 +115,44 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		return _renderReq.getParameterValues(name);
 	}
 
+	public String getPathInfo() {
+		return StringPool.BLANK;
+	}
+
+	public String getPathTranslated() {
+		return StringPool.BLANK;
+	}
+
+	public String getQueryString() {
+		return _queryString;
+	}
+
+	public String getRealPath(String path) {
+		return _config.getServletContext().getRealPath(path);
+	}
+
+	public String getRequestURI() {
+		return _path + StringPool.QUESTION + _queryString;
+	}
+
+	public StringBuffer getRequestURL() {
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(getRequest().getProtocol());
+		sb.append("://");
+		sb.append(getRequest().getRemoteHost());
+		sb.append(StringPool.COLON);
+		sb.append(getRequest().getServerPort());
+		sb.append(StringPool.SLASH);
+		sb.append(getRequestURI());
+
+		return sb;
+	}
+
+	public String getServletPath() {
+		return _path;
+	}
+
 	protected Map parseQueryString(String queryString) {
 		Map params = new HashMap();
 
@@ -120,6 +161,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		}
 
 		int ampersandIndex;
+
 		do {
 			ampersandIndex = queryString.indexOf(StringPool.AMPERSAND);
 
@@ -135,14 +177,10 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 
 			int equalIndex = nameValuePair.indexOf(StringPool.EQUAL);
 
-			String key;
-			String value;
+			String key = nameValuePair;
+			String value = StringPool.BLANK;
 
-			if (equalIndex == -1) {
-				key = nameValuePair;
-				value = StringPool.BLANK;
-			}
-			else {
+			if (equalIndex != -1) {
 				key = nameValuePair.substring(0, equalIndex);
 				value = nameValuePair.substring(equalIndex + 1);
 			}
@@ -155,46 +193,11 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		return params;
 	}
 
-	public long getDateHeader(String string) {
-		return super.getDateHeader(string);
-	}
-
-	public String getPathInfo() {
-		return StringPool.BLANK;
-	}
-
-	public String getPathTranslated() {
-		return StringPool.BLANK;
-	}
-
-	public String getContextPath() {
-		return StringPool.SLASH;
-	}
-
-	public String getQueryString() {
-		return _queryString;
-	}
-
-	public String getRequestURI() {
-		return _path + StringPool.QUESTION + _queryString;
-	}
-
-	public StringBuffer getRequestURL() {
-		return new StringBuffer(
-			getRequest().getProtocol() + "://" + getRequest().getRemoteHost()
-				+ ":" + getRequest().getServerPort() + "/" + getRequestURI());
-	}
-
-	public String getServletPath() {
-		return _path;
-	}
-
-	private String _queryString;
-	private String _path;
-
+	private ServletConfig _config;
 	private PortletConfig _portletConfig;
 	private RenderRequest _renderReq;
 	private RenderResponse _renderRes;
-	private ServletConfig _config;
+	private String _queryString;
+	private String _path;
 
 }

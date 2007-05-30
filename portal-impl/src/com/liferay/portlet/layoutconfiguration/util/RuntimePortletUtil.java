@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
@@ -141,8 +142,8 @@ public class RuntimePortletUtil {
 
 		portletDisplay.copyTo(portletDisplayClone);
 
-		PortletConfig portletConfig =
-			(PortletConfig)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
 			PortalUtil.renderPortlet(
@@ -298,15 +299,17 @@ public class RuntimePortletUtil {
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		if (portletConfig != null) {
-			req.setAttribute(WebKeys.JAVAX_PORTLET_CONFIG, portletConfig);
+			req.setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
 		}
 
 		if (renderRequest != null) {
-			req.setAttribute(WebKeys.JAVAX_PORTLET_REQUEST, renderRequest);
+			req.setAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST, renderRequest);
 		}
 
 		if (renderResponse != null) {
-			req.setAttribute(WebKeys.JAVAX_PORTLET_RESPONSE, renderResponse);
+			req.setAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponse);
 		}
 	}
 

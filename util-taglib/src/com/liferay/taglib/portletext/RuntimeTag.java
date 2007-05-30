@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -64,8 +65,8 @@ public class RuntimeTag extends TagSupport {
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		PortletRequest portletRequest =
-			(PortletRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		RenderRequest renderRequest = null;
 
@@ -75,8 +76,8 @@ public class RuntimeTag extends TagSupport {
 			renderRequest = (RenderRequest)portletRequest;
 		}
 
-		PortletResponse portletResponse =
-			(PortletResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		RenderResponse renderResponse = null;
 

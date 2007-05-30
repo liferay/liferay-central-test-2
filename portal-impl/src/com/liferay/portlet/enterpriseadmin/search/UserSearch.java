@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.dao.search.SearchContainer;
 
 import java.util.ArrayList;
@@ -61,8 +61,8 @@ public class UserSearch extends SearchContainer {
 			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
 			  EMPTY_RESULTS_MESSAGE);
 
-		PortletConfig portletConfig =
-			(PortletConfig)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		UserDisplayTerms displayTerms = (UserDisplayTerms)getDisplayTerms();
 		UserSearchTerms searchTerms = (UserSearchTerms)getSearchTerms();

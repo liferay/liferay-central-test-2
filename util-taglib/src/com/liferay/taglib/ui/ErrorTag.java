@@ -22,8 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Html;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -47,7 +47,7 @@ public class ErrorTag extends TagSupport {
 			ServletRequest req = pageContext.getRequest();
 
 			RenderRequest renderRequest = (RenderRequest)req.getAttribute(
-				WebKeys.JAVAX_PORTLET_REQUEST);
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			req.setAttribute("liferay-ui:error:key", _key);
 			req.setAttribute("liferay-ui:error:message", _message);
@@ -81,7 +81,7 @@ public class ErrorTag extends TagSupport {
 			ServletRequest req = pageContext.getRequest();
 
 			RenderRequest renderRequest = (RenderRequest)req.getAttribute(
-				WebKeys.JAVAX_PORTLET_REQUEST);
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			boolean includeEndPage = false;
 

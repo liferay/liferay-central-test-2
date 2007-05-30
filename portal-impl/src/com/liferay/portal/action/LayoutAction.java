@@ -22,6 +22,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
@@ -120,7 +121,7 @@ public class LayoutAction extends Action {
 
 					ActionResponseImpl actionResponseImpl =
 						(ActionResponseImpl)req.getAttribute(
-							WebKeys.JAVAX_PORTLET_RESPONSE);
+							JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 					String redirectLocation =
 						actionResponseImpl.getRedirectLocation();
@@ -152,7 +153,7 @@ public class LayoutAction extends Action {
 					if (action.equals("1")) {
 						ActionRequestImpl actionRequestImpl =
 							(ActionRequestImpl)req.getAttribute(
-								WebKeys.JAVAX_PORTLET_REQUEST);
+								JavaConstants.JAVAX_PORTLET_REQUEST);
 
 						ActionRequestFactory.recycle(actionRequestImpl);
 					}
@@ -161,13 +162,13 @@ public class LayoutAction extends Action {
 					_log.error(e);
 				}
 
-				req.removeAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+				req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 
 				try {
 					if (action.equals("1")) {
 						ActionResponseImpl actionResponseImpl =
 							(ActionResponseImpl)req.getAttribute(
-								WebKeys.JAVAX_PORTLET_RESPONSE);
+								JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 						ActionResponseFactory.recycle(actionResponseImpl);
 					}
@@ -176,7 +177,7 @@ public class LayoutAction extends Action {
 					_log.error(e);
 				}
 
-				req.removeAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
+				req.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 			}
 		}
 		else {
@@ -345,7 +346,8 @@ public class LayoutAction extends Action {
 		throws Exception {
 
 		ActionRequestImpl actionRequestImpl =
-			(ActionRequestImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+			(ActionRequestImpl)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
