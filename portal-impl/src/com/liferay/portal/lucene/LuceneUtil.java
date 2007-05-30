@@ -25,6 +25,7 @@ package com.liferay.portal.lucene;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -36,6 +37,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -199,7 +201,7 @@ public class LuceneUtil {
 	public static IndexSearcher getSearcher(long companyId)
 		throws IOException {
 
-		return new IndexSearcher(getLuceneDir(companyId));
+		return _instance._getIndexSearcher(companyId);
 	}
 
 	public static IndexWriter getWriter(long companyId) throws IOException {
@@ -350,6 +352,21 @@ public class LuceneUtil {
 		}
 	}
 
+	public IndexSearcher _getIndexSearcher(long companyId) throws IOException {
+		Long key = new Long(companyId);
+
+		IndexSearcher indexSearcher = 
+			(IndexSearcher)_instance._sharedIndexSearchers.get(key);
+
+		if (indexSearcher == null) {
+			indexSearcher = new IndexSearcher(getLuceneDir(companyId));
+
+			_instance._sharedIndexSearchers.put(key, indexSearcher);
+		}
+
+		return indexSearcher;
+	}
+	
 	public Directory _getLuceneDir(long companyId) {
 		Directory directory = null;
 
@@ -430,6 +447,7 @@ public class LuceneUtil {
 	private static LuceneUtil _instance = new LuceneUtil();
 
 	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
+	private Map _sharedIndexSearchers = CollectionFactory.getSyncHashMap();
 	private Class _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
 
