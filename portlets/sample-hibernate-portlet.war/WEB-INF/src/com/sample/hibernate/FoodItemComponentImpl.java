@@ -80,6 +80,7 @@ public class FoodItemComponentImpl {
 
 			if (foodItem != null) {
 				foodItems = new ArrayList();
+
 				foodItems.add(foodItem);
 			}
 		}

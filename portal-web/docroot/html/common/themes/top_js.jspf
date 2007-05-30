@@ -134,14 +134,14 @@
 	Liferay.Portlet.ready(
 		function(portletId, jQueryObj) {
 			Liferay.Util.addInputType(portletId, jQueryObj);
-			
+
 			Liferay.Util.portletTitleEdit(
 				{
 					obj: jQueryObj,
 					plid: '<%= layout.getPlid() %>',
-					portletId: portletId,  
-					url: '<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title', 
-					userId: '<%= themeDisplay.getDoAsUserId() %>'
+					doAsUserId: '<%= themeDisplay.getDoAsUserId() %>',
+					portletId: portletId,
+					url: '<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title'
 				}
 			);
 		}

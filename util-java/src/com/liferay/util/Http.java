@@ -547,7 +547,7 @@ public class Http {
 
 			if (post) {
 				method = new PostMethod(location);
-				
+
 				if ((parts != null) && (parts.size() > 0)) {
 					List nvpList = new ArrayList();
 					List stringPartsList = new ArrayList();
@@ -561,18 +561,23 @@ public class Http {
 						String value = (String)entry.getValue();
 
 						if (value != null) {
-							nvpList.add(new NameValuePair(key, (String)value));
-							stringPartsList.add(new StringPart(key, (String)value));
+							nvpList.add(new NameValuePair(key, value));
+							stringPartsList.add(new StringPart(key, value));
 						}
 					}
 
-					method.setQueryString((NameValuePair[])nvpList.toArray(new NameValuePair[nvpList.size()]));
-					
+					NameValuePair[] nvpArray = (NameValuePair[])nvpList.toArray(
+						new NameValuePair[nvpList.size()]);
+					StringPart[] stringPartsArray =
+						(StringPart[])stringPartsList.toArray(
+							new StringPart[0]);
+
+					method.setQueryString(nvpArray);
+
 					PostMethod postMethod = (PostMethod)method;
 
 					RequestEntity requestEntity = new MultipartRequestEntity(
-						(StringPart[])stringPartsList.toArray(new StringPart[0]),
-						method.getParams());
+						stringPartsArray, method.getParams());
 
 					postMethod.setRequestEntity(requestEntity);
 				}
