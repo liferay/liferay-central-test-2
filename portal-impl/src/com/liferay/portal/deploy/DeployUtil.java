@@ -23,7 +23,6 @@
 package com.liferay.portal.deploy;
 
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
@@ -68,7 +67,7 @@ public class DeployUtil {
 
 		os.write(byteArray);
 
-		return StringUtil.replace(file.getAbsolutePath(), "\\", "/");
+		return FileUtil.getAbsolutePath(file);
 	}
 
 	private static DeployUtil _instance = new DeployUtil();

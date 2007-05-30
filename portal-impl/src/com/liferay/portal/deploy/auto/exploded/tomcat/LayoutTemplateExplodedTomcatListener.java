@@ -49,7 +49,8 @@ public class LayoutTemplateExplodedTomcatListener
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		File docBaseDir = getDocBaseDir(file, "liferay-layout-templates.xml");
+		File docBaseDir = getDocBaseDir(
+			file, "WEB-INF/liferay-layout-templates.xml");
 
 		if (docBaseDir == null) {
 			return;

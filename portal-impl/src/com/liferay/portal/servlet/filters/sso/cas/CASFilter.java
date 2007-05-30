@@ -119,13 +119,13 @@ public class CASFilter implements Filter {
 				_filterName, _ctx);
 
 			config.addInitParameter(
-				casFilter.LOGIN_INIT_PARAM,
+				edu.yale.its.tp.cas.client.filter.CASFilter.LOGIN_INIT_PARAM,
 				PrefsPropsUtil.getString(companyId, PropsUtil.CAS_LOGIN_URL));
 			config.addInitParameter(
-				casFilter.SERVICE_INIT_PARAM,
+				edu.yale.its.tp.cas.client.filter.CASFilter.SERVICE_INIT_PARAM,
 				PrefsPropsUtil.getString(companyId, PropsUtil.CAS_SERVICE_URL));
 			config.addInitParameter(
-				casFilter.VALIDATE_INIT_PARAM,
+				edu.yale.its.tp.cas.client.filter.CASFilter.VALIDATE_INIT_PARAM,
 				PrefsPropsUtil.getString(
 					companyId, PropsUtil.CAS_VALIDATE_URL));
 

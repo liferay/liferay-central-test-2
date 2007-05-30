@@ -24,20 +24,11 @@ package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
-import com.liferay.util.Http;
-import com.liferay.util.StringUtil;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.ant.CopyTask;
 
 import java.io.File;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PHPPortletAutoDeployer.java.html"><b><i>View Source</i></b></a>
@@ -47,19 +38,15 @@ import org.apache.commons.logging.LogFactory;
 public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
 	protected PHPPortletAutoDeployer() throws AutoDeployException {
-		_basePath =
-			SystemProperties.get(SystemProperties.TMP_DIR) +
-				"/liferay/com/liferay/portal/deploy/dependencies/";
-
-		String[] libraries = {"quercus.jar", "resin-util.jar", "script-10.jar"};
-
 		try {
-			for (int i = 0; i < libraries.length; i++) {
-				String gplLib = libraries[i];
+			String[] phpJars = new String[] {
+				"quercus.jar", "resin-util.jar", "script-10.jar"
+			};
 
-				downloadLibrary(gplLib);
+			for (int i = 0; i < phpJars.length; i++) {
+				String phpJar = phpJars[i];
 
-				jars.add(_basePath + gplLib);
+				jars.add(downloadJar(phpJar));
 			}
 
 			jars.add(DeployUtil.getResourcePath("portals-bridges.jar"));
@@ -70,66 +57,20 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 	}
 
 	protected void copyXmls(File srcFile, String displayName) throws Exception {
-		copyFile(srcFile, "/WEB-INF", "geronimo-web.xml", displayName);
-		copyFile(srcFile, "/WEB-INF", "liferay-display.xml", displayName);
-		copyFile(srcFile, "/WEB-INF", "liferay-portlet.xml", displayName);
-		copyFile(srcFile, "/WEB-INF", "portlet.xml", displayName);
-		copyFile(srcFile, "/WEB-INF", "web.xml", displayName);
-	}
-
-	protected void copyFile(
-			File srcFile, String targetDir, String fileName, String displayName)
-		throws Exception {
-
-		File tempFile = new File(_basePath + fileName);
-
-		if (!tempFile.exists()) {
-			String fullFilePath =
-				"com/liferay/portal/deploy/dependencies/" + fileName;
-
-			ClassLoader classLoader = getClass().getClassLoader();
-
-			String content = StringUtil.read(classLoader, fullFilePath);
-
-			FileUtil.write(tempFile, content);
-		}
-
-		File destDir = new File(srcFile.getPath() + targetDir);
-
-		destDir.mkdir();
+		super.copyXmls(srcFile, displayName);
 
 		Map filterMap = new HashMap();
 
 		filterMap.put("portlet_class", "com.liferay.util.php.PHPPortlet");
-		filterMap.put("portlet_display_name", displayName);
 		filterMap.put("portlet_name", displayName);
+		filterMap.put("portlet_title", displayName);
 
-		CopyTask.copyFile(tempFile, destDir, filterMap, false, true);
+		copyDependencyXml(
+			"liferay-display.xml", srcFile + "/WEB-INF", filterMap);
+		copyDependencyXml(
+			"liferay-portlet.xml", srcFile + "/WEB-INF", filterMap);
+		copyDependencyXml(
+			"portlet.xml", srcFile + "/WEB-INF", filterMap);
 	}
-
-	protected void downloadLibrary(String library) throws Exception {
-		File libraryFile = new File(_basePath + library);
-
-		if (libraryFile.exists()) {
-			return;
-		}
-
-		synchronized(this) {
-			String url = PropsUtil.get(
-				PropsUtil.LIBRARY_DOWNLOAD_URL + library);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Downloading library from " + url);
-			}
-
-			byte[] bytes = Http.URLtoByteArray(url);
-
-			FileUtil.write(libraryFile, bytes);
-		}
-	}
-
-	private static Log _log = LogFactory.getLog(PHPPortletAutoDeployer.class);
-
-	private String _basePath;
 
 }

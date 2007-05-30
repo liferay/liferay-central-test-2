@@ -1534,7 +1534,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			try {
-				JournalArticle article = JournalArticleUtil.findByG_A_V(
+				JournalArticleUtil.findByG_A_V(
 					groupId, articleId, JournalArticleImpl.DEFAULT_VERSION);
 
 				throw new DuplicateArticleIdException();

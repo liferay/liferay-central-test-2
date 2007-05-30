@@ -22,15 +22,18 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
@@ -50,8 +53,12 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -153,6 +160,21 @@ public class BaseDeployer {
 		}
 	}
 
+	protected void copyDependencyXml(String fileName, String targetDir)
+		throws Exception {
+
+		copyDependencyXml(fileName, targetDir, null);
+	}
+
+	protected void copyDependencyXml(
+			String fileName, String targetDir, Map filterMap)
+		throws Exception {
+
+		File file = new File(DeployUtil.getResourcePath(fileName));
+
+		CopyTask.copyFile(file, new File(targetDir), filterMap, false, true);
+	}
+
 	protected void copyJars(File srcFile) throws Exception {
 		for (int i = 0; i < jars.size(); i++) {
 			String jarFullName = (String)jars.get(i);
@@ -191,6 +213,8 @@ public class BaseDeployer {
 	}
 
 	protected void copyXmls(File srcFile, String displayName) throws Exception {
+		copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
+		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
 
 	protected void deploy() throws Exception  {
@@ -237,11 +261,11 @@ public class BaseDeployer {
 		copyTlds(srcFile);
 		copyXmls(srcFile, displayName);
 
-		updateGeronimoWebXML(srcFile, displayName);
+		updateGeronimoWebXml(srcFile, displayName);
 
-		File webXML = new File(srcFile + "/WEB-INF/web.xml");
+		File webXml = new File(srcFile + "/WEB-INF/web.xml");
 
-		updateWebXML(webXML, srcFile, displayName);
+		updateWebXml(webXml, srcFile, displayName);
 
 		if ((deployDir != null) && !baseDir.equals(destDir)) {
 			updateDeployDirectory(srcFile);
@@ -255,10 +279,10 @@ public class BaseDeployer {
 					excludes += "**/WEB-INF/lib/" + libs[i] + ",";
 				}
 
-				File contextXML = new File(srcFile + "/META-INF/context.xml");
+				File contextXml = new File(srcFile + "/META-INF/context.xml");
 
-				if (contextXML.exists()) {
-					String content = FileUtil.read(contextXML);
+				if (contextXml.exists()) {
+					String content = FileUtil.read(contextXml);
 
 					if (content.indexOf(_PORTAL_CLASS_LOADER) != -1) {
 						excludes += "**/WEB-INF/lib/util-bridges.jar,";
@@ -269,7 +293,7 @@ public class BaseDeployer {
 			}
 
 			if (!unpackWar || appServerType.equals("websphere")) {
-				WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXML);
+				WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
 			}
 			else {
 
@@ -295,10 +319,10 @@ public class BaseDeployer {
 					// Tomcat checks to make sure that web.xml was modified 5
 					// seconds after WEB-INF
 
-					File deployWebXML = new File(
+					File deployWebXml = new File(
 						deployDir + "/WEB-INF/web.xml");
 
-					deployWebXML.setLastModified(
+					deployWebXml.setLastModified(
 						System.currentTimeMillis() + (Time.SECOND * 6));
 				}
 			}
@@ -306,9 +330,11 @@ public class BaseDeployer {
 	}
 
 	protected void deployFile(File srcFile) throws Exception {
-		PluginPackage pluginPackage = _readPluginPackage(srcFile);
+		PluginPackage pluginPackage = readPluginPackage(srcFile);
 
-		System.out.println("\nDeploying " + srcFile.getName());
+		if (_log.isInfoEnabled()) {
+			_log.info("Deploying " + srcFile.getName());
+		}
 
 		String deployDir = null;
 		String displayName = null;
@@ -382,13 +408,18 @@ public class BaseDeployer {
 
 		try {
 			PluginPackage previousPluginPackage =
-				_readPluginPackage(deployDirFile);
+				readPluginPackage(deployDirFile);
 
 			if (previousPluginPackage != null) {
-				System.out.println(
-					"Updating " + pluginPackage.getName() + " from version " +
-						previousPluginPackage.getVersion() + " to version " +
-							pluginPackage.getVersion());
+				if (_log.isInfoEnabled()) {
+					String name = pluginPackage.getName();
+					String previousVersion = previousPluginPackage.getVersion();
+					String version = pluginPackage.getVersion();
+
+					_log.info(
+						"Updating " + name + " from version " +
+							previousVersion + " to version " + version);
+				}
 
 				if (pluginPackage.isLaterVersionThan(
 					previousPluginPackage)) {
@@ -430,7 +461,9 @@ public class BaseDeployer {
 		throws Exception {
 
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
-			System.out.println(deployDir + " is already up to date");
+			if (_log.isInfoEnabled()) {
+				_log.info(deployDir + " is already up to date");
+			}
 
 			return false;
 		}
@@ -451,6 +484,31 @@ public class BaseDeployer {
 		DeleteTask.deleteDirectory(tempDir);
 
 		return true;
+	}
+
+	protected String downloadJar(String jar) throws Exception {
+		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
+
+		File file = new File(
+			tmpDir + "/liferay/com/liferay/portal/deploy/dependencies/" +
+				jar);
+
+		if (!file.exists()) {
+			synchronized(this) {
+				String url = PropsUtil.get(
+					PropsUtil.LIBRARY_DOWNLOAD_URL + jar);
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Downloading library from " + url);
+				}
+
+				byte[] bytes = Http.URLtoByteArray(url);
+
+				FileUtil.write(file, bytes);
+			}
+		}
+
+		return FileUtil.getAbsolutePath(file);
 	}
 
 	protected String getDisplayName(File srcFile) {
@@ -559,103 +617,7 @@ public class BaseDeployer {
 		return sm.toString();
 	}
 
-	protected void updateDeployDirectory(File srcFile) throws Exception {
-	}
-
-	protected void updateGeronimoWebXML(File srcFile, String displayName)
-		throws Exception {
-
-		File geronimoWebXML = new File(srcFile + "/WEB-INF/geronimo-web.xml");
-
-		if (geronimoWebXML.exists()) {
-			return;
-		}
-
-		String content = "";
-
-		content +=
-			"<web-app " +
-				"xmlns=\"http://geronimo.apache.org/xml/ns/j2ee/web-1.1\">";
-		content += "<environment>";
-		content += "<moduleId>";
-		content += "<artifactId>" + displayName + "</artifactId>";
-		content += "</moduleId>";
-		content += "<dependencies>";
-		content += "<dependency>";
-		content += "<groupId>liferay</groupId>";
-		content += "<artifactId>liferay-portal-tomcat</artifactId>";
-		content += "</dependency>";
-		content += "</dependencies>";
-		content += "</environment>";
-		content += "</web-app>";
-
-		content = XMLFormatter.toString(content);
-
-		FileUtil.write(geronimoWebXML, content);
-
-		System.out.println("  Adding Geronimo " + geronimoWebXML);
-	}
-
-	protected void updateWebXML(
-			File webXML, File srcFile, String displayName)
-		throws Exception {
-
-		if (!webXML.exists()) {
-			String content = "";
-
-			content += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-			content +=
-				"<!DOCTYPE web-app PUBLIC \"-//Sun Microsystems, Inc.//" +
-					"DTD Web Application 2.3//EN\" " +
-						"\"http://java.sun.com/dtd/web-app_2_3.dtd\">\n\n";
-			content += "<web-app>\n";
-			content += "</web-app>";
-
-			FileUtil.write(webXML, content);
-
-			System.out.println("  Adding Servlet " + webXML);
-		}
-
-		String content = FileUtil.read(webXML);
-
-		int pos = content.indexOf("<web-app");
-		pos = content.indexOf(">", pos) + 1;
-
-		double webXmlVersion = 2.3;
-
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document webXmlDoc = reader.read(new StringReader(content));
-
-		Element webXmlRoot = webXmlDoc.getRootElement();
-
-		webXmlVersion = GetterUtil.getDouble(
-			webXmlRoot.attributeValue("version"), webXmlVersion);
-
-		// Merge extra content
-
-		String extraContent = getExtraContent(
-			webXmlVersion, srcFile, displayName);
-
-		String newContent =
-			content.substring(0, pos) + extraContent +
-			content.substring(pos, content.length());
-
-		// Replace old package names
-
-		newContent = StringUtil.replace(
-			newContent, "com.liferay.portal.shared.",
-			"com.liferay.portal.kernel.");
-
-		newContent = WebXMLBuilder.organizeWebXML(newContent);
-
-		FileUtil.write(webXML, newContent, true);
-
-		System.out.println(
-			"  Modifying Servlet " + webXmlVersion + " " + webXML);
-	}
-
-	private PluginPackage _readPluginPackage(File file) {
+	protected PluginPackage readPluginPackage(File file) {
 		if (!file.exists()) {
 			return null;
 		}
@@ -665,11 +627,11 @@ public class BaseDeployer {
 
 		try {
 			if (file.isDirectory()) {
-				File pluginPackageXMLFile = new File(
+				File pluginPackageXmlFile = new File(
 					file.getPath() + "/WEB-INF/liferay-plugin-package.xml");
 
-				if (pluginPackageXMLFile.exists()) {
-					is = new FileInputStream(pluginPackageXMLFile);
+				if (pluginPackageXmlFile.exists()) {
+					is = new FileInputStream(pluginPackageXmlFile);
 				}
 			}
 			else {
@@ -684,9 +646,11 @@ public class BaseDeployer {
 			}
 
 			if (is == null) {
-				System.out.println(
-					file.getPath() + " does not have " +
-						"WEB-INF/liferay-plugin-package.xml");
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						file.getPath() + " does not have " +
+							"WEB-INF/liferay-plugin-package.xml");
+				}
 
 				return null;
 			}
@@ -721,6 +685,86 @@ public class BaseDeployer {
 		return null;
 	}
 
+	protected void updateDeployDirectory(File srcFile) throws Exception {
+	}
+
+	protected void updateGeronimoWebXml(File srcFile, String displayName)
+		throws Exception {
+
+		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
+
+		SAXReader reader = SAXReaderFactory.getInstance(false);
+
+		Document doc = reader.read(geronimoWebXml);
+
+		Element root = doc.getRootElement();
+
+		Element environmentEl = root.element("environment");
+
+		Element moduleIdEl = environmentEl.element("moduleId");
+
+		Element artifactIdEl = moduleIdEl.element("artifactId");
+
+		String artifactIdText = GetterUtil.getString(artifactIdEl.getText());
+
+		if (!artifactIdText.equals(displayName)) {
+			artifactIdEl.setText(displayName);
+
+			String content = XMLFormatter.toString(root);
+
+			FileUtil.write(geronimoWebXml, content);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Modifying Geronimo " + geronimoWebXml);
+			}
+
+		}
+	}
+
+	protected void updateWebXml(
+			File webXml, File srcFile, String displayName)
+		throws Exception {
+
+		String content = FileUtil.read(webXml);
+
+		int pos = content.indexOf("<web-app");
+		pos = content.indexOf(">", pos) + 1;
+
+		double webXmlVersion = 2.3;
+
+		SAXReader reader = SAXReaderFactory.getInstance(false);
+
+		Document webXmlDoc = reader.read(new StringReader(content));
+
+		Element webXmlRoot = webXmlDoc.getRootElement();
+
+		webXmlVersion = GetterUtil.getDouble(
+			webXmlRoot.attributeValue("version"), webXmlVersion);
+
+		// Merge extra content
+
+		String extraContent = getExtraContent(
+			webXmlVersion, srcFile, displayName);
+
+		String newContent =
+			content.substring(0, pos) + extraContent +
+			content.substring(pos, content.length());
+
+		// Replace old package names
+
+		newContent = StringUtil.replace(
+			newContent, "com.liferay.portal.shared.",
+			"com.liferay.portal.kernel.");
+
+		newContent = WebXMLBuilder.organizeWebXML(newContent);
+
+		FileUtil.write(webXml, newContent, true);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Modifying Servlet " + webXmlVersion + " " + webXml);
+		}
+	}
+
 	protected String baseDir;
 	protected String destDir;
 	protected String appServerType;
@@ -738,5 +782,7 @@ public class BaseDeployer {
 
 	private static final String _PORTAL_CLASS_LOADER =
 		"com.liferay.support.tomcat.loader.PortalClassLoader";
+
+	private static Log _log = LogFactory.getLog(BaseDeployer.class);
 
 }

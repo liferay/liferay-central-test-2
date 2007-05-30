@@ -3,7 +3,7 @@
 <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.1">
 	<environment>
 		<moduleId>
-			<artifactId>@portlet_name@</artifactId>
+			<artifactId></artifactId>
 		</moduleId>
 		<dependencies>
 			<dependency>

@@ -271,6 +271,11 @@ public class FileUtil {
 		return out.toByteArray();
 	}
 
+	public static String getAbsolutePath(File file) {
+		return StringUtil.replace(
+			file.getAbsolutePath(), StringPool.BACK_SLASH, StringPool.SLASH);
+	}
+
 	public static String getExtension(String fileName) {
 		if (fileName == null) {
 			return null;

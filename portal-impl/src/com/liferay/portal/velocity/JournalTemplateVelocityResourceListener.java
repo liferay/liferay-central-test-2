@@ -65,8 +65,8 @@ public class JournalTemplateVelocityResourceListener
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Loading {groupId=" +  groupId + ",templateId=" +
-							templateId + "}");
+						"Loading {companyId=" + companyId + ",groupId=" +
+							groupId + ",templateId=" + templateId + "}");
 				}
 
 				JournalTemplate template =

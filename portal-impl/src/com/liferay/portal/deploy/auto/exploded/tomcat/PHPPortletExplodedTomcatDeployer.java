@@ -20,30 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.ratings.service.impl;
+package com.liferay.portal.deploy.auto.exploded.tomcat;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.portlet.ratings.service.RatingsEntryService;
+import com.liferay.portal.deploy.auto.PHPPortletAutoDeployer;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+
+import java.io.File;
 
 /**
- * <a href="RatingsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PHPPortletExplodedTomcatDeployer.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RatingsEntryServiceImpl
-	extends PrincipalBean implements RatingsEntryService {
+public class PHPPortletExplodedTomcatDeployer
+	extends PHPPortletAutoDeployer implements ExplodedTomcatDeployer {
 
-	public RatingsEntry updateEntry(
-			String className, long classPK, double score)
-		throws PortalException, SystemException {
+	public PHPPortletExplodedTomcatDeployer() throws AutoDeployException {
+		super();
+	}
 
-		return RatingsEntryLocalServiceUtil.updateEntry(
-			getUserId(), className, classPK, score);
+	public void explodedTomcatDeploy(File contextFile, File webAppDir)
+		throws AutoDeployException {
+
+		try {
+			deployDirectory(webAppDir, getDisplayName(contextFile), false);
+		}
+		catch (Exception e) {
+			throw new AutoDeployException(e);
+		}
 	}
 
 }

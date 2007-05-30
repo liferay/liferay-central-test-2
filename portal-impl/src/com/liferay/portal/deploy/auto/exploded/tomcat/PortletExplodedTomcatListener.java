@@ -49,18 +49,30 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
+		ExplodedTomcatDeployer deployer = null;
+
 		File docBaseDir = getDocBaseDir(
-			file, PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+			file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
 
 		if (docBaseDir == null) {
-			return;
+			docBaseDir = getDocBaseDir(file, "index.php");
+
+			if (docBaseDir == null) {
+				return;
+			}
+			else {
+				deployer = getPhpDeployer();
+			}
+		}
+		else {
+			deployer = _deployer;
 		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Modifying portlets for " + file.getPath());
 		}
 
-		_deployer.explodedTomcatDeploy(file, docBaseDir);
+		deployer.explodedTomcatDeploy(file, docBaseDir);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -70,9 +82,20 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 		copyContextFile(file);
 	}
 
+	protected ExplodedTomcatDeployer getPhpDeployer()
+		throws AutoDeployException {
+
+		if (_phpDeployer == null) {
+			_phpDeployer = new PHPPortletExplodedTomcatDeployer();
+		}
+
+		return _phpDeployer;
+	}
+
 	private static Log _log =
 		LogFactory.getLog(PortletExplodedTomcatListener.class);
 
 	private ExplodedTomcatDeployer _deployer;
+	private PHPPortletExplodedTomcatDeployer _phpDeployer;
 
 }

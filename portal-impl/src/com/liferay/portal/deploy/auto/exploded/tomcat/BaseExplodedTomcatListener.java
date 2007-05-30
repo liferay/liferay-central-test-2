@@ -118,9 +118,9 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 			return null;
 		}
 
-		if (!FileUtil.exists(docBase + "/WEB-INF/" + checkXmlFile)) {
+		if (!FileUtil.exists(docBase + "/" + checkXmlFile)) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(docBase + " does not have WEB-INF/" + checkXmlFile);
+				_log.debug(docBase + " does not have " + checkXmlFile);
 			}
 
 			return null;

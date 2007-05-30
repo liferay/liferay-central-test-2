@@ -47,7 +47,8 @@ public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		File docBaseDir = getDocBaseDir(file, "liferay-look-and-feel.xml");
+		File docBaseDir = getDocBaseDir(
+			file, "WEB-INF/liferay-look-and-feel.xml");
 
 		if (docBaseDir == null) {
 			return;
