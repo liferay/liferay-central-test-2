@@ -333,7 +333,67 @@ Liferay.Util = {
 			}
 		}
 	},
+	
+	portletTitleEdit: function(options) {
+		var instance = this;
+		
+		var obj = options.obj;
+		var plid = options.plid;
+		var portletId = options.portletId;
+		var url = options.url;
+		var userId = options.userId;
+		
+		var title = obj.find('.portlet-title');
+		
+		if (!title.is('.not-editable')) {
+			title.editable(
+				function(value, settings) {
+					var cruft = settings._LFR_.cruft.join('');
+					
+					if (value != settings._LFR_.oldText) {
+						jQuery.ajax(
+							{
+								url: url,
+								data: {
+									p_l_id: plid,
+									doAsUserId: userId,
+									portletId: portletId,
+									title: value
+								}
+							}
+						);
+					}
+					return cruft + value;					
+				},
+				{
+					cssclass: 'text',
+					data: function(value, settings) {
+						var input = jQuery(this);
+						var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
+						
+						cruft = value.match(re);
 
+						settings._LFR_ = {};
+						settings._LFR_.oldText = value;
+						settings._LFR_.cruft = cruft;
+
+						value = value.replace(re, '');
+						settings._LFR_.oldText = value;
+						
+						return value;
+					},
+					height: '',
+					width: '',
+					onblur: 'submit',
+					type: 'text',
+					select: false,
+					style: '',
+					submit: ''
+				}
+			);
+		}
+	},
+	
 	processTab: function(id) {
 		document.all[id].selection.text = String.fromCharCode(9);
 		document.all[id].focus();

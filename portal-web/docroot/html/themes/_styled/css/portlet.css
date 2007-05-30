@@ -21,6 +21,10 @@
 	padding: 5px 10px;
 }
 
+.portlet-title img {
+	vertical-align: middle;
+}
+
 .portlet-icons {
 	margin: 3px;
 	position: absolute;
