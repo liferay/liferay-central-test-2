@@ -38,7 +38,7 @@ import java.io.File;
 public class PortletExplodedTomcatDeployer
 	extends PortletAutoDeployer implements ExplodedTomcatDeployer {
 
-	public void exlodedTomcatDeploy(File contextFile, File webAppDir)
+	public void explodedTomcatDeploy(File contextFile, File webAppDir)
 		throws AutoDeployException {
 
 		try {

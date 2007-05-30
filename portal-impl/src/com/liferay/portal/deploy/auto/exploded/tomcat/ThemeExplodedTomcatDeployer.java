@@ -37,7 +37,7 @@ import java.io.File;
 public class ThemeExplodedTomcatDeployer
 	extends ThemeAutoDeployer implements ExplodedTomcatDeployer {
 
-	public void exlodedTomcatDeploy(File contextFile, File webAppDir)
+	public void explodedTomcatDeploy(File contextFile, File webAppDir)
 		throws AutoDeployException {
 
 		try {

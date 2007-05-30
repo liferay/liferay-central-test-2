@@ -35,7 +35,7 @@ import java.io.File;
  */
 public interface ExplodedTomcatDeployer {
 
-	public void exlodedTomcatDeploy(File contextFile, File webAppDir)
+	public void explodedTomcatDeploy(File contextFile, File webAppDir)
 		throws AutoDeployException;
 
 }
