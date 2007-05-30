@@ -23,6 +23,7 @@
 package com.sample.ruby.portlet;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 
@@ -119,7 +120,12 @@ public class RubyPortlet extends GenericPortlet {
 			InputStream is, PortletRequest req, PortletResponse res)
 		throws BSFException, IOException {
 
-		String script = getGlobalScript() + new String(FileUtil.getBytes(is));
+		StringMaker sm = new StringMaker();
+
+		sm.append(getGlobalScript());
+		sm.append(new String(FileUtil.getBytes(is)));
+
+		String script = sm.toString();
 
 		PortletConfig portletConfig = getPortletConfig();
 		PortletContext portletContext = getPortletContext();
@@ -168,6 +174,7 @@ public class RubyPortlet extends GenericPortlet {
 			try {
 				if (is != null) {
 					sm.append(new String(FileUtil.getBytes(is)));
+					sm.append(StringPool.NEW_LINE);
 				}
 			}
 			finally {

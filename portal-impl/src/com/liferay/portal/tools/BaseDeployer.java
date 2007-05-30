@@ -224,14 +224,14 @@ public class BaseDeployer {
 			for (int i = 0; i < files.length; i++) {
 				File srcFile = files[i];
 
+				String fileName = srcFile.getName().toLowerCase();
+
 				boolean deploy = false;
 
-				if (srcFile.getName().endsWith(".war")) {
+				if (fileName.endsWith(".war") || fileName.endsWith(".zip")) {
 					deploy = true;
 
-					if ((wars.size() > 0) &&
-						(!wars.contains(srcFile.getName()))) {
-
+					if ((wars.size() > 0) && (!wars.contains(fileName))) {
 						deploy = false;
 					}
 				}
