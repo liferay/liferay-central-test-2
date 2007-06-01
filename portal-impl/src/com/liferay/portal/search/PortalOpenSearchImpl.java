@@ -81,95 +81,108 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		}
 	}
 
-	private String _search(
-			HttpServletRequest req, String keywords, int startPage,
-			int itemsPerPage)
-		throws Exception {
+	private String _search(HttpServletRequest req, String keywords,
+			int startPage, int itemsPerPage) throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		Hits hits = null;
 
-		Hits hits = CompanyLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), keywords);
+		try {
+			
+			ThemeDisplay themeDisplay = (ThemeDisplay) req
+					.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Object[] values = addSearchResults(
-			keywords, startPage, itemsPerPage, hits,
-			"Liferay Portal Search: " + keywords, SEARCH_PATH, themeDisplay);
+			hits = CompanyLocalServiceUtil.search(themeDisplay.getCompanyId(),
+					keywords);
 
-		Hits results = (Hits)values[0];
-		org.dom4j.Document doc = (org.dom4j.Document)values[1];
-		Element root = (Element)values[2];
+			Object[] values = addSearchResults(keywords, startPage,
+					itemsPerPage, hits, "Liferay Portal Search: " + keywords,
+					SEARCH_PATH, themeDisplay);
 
-		for (int i = 0; i < results.getLength(); i++) {
-			Document result = results.doc(i);
+			Hits results = (Hits) values[0];
+			org.dom4j.Document doc = (org.dom4j.Document) values[1];
+			Element root = (Element) values[2];
 
-			String portletId = (String)result.get(LuceneFields.PORTLET_ID);
+			for (int i = 0; i < results.getLength(); i++) {
+				Document result = results.doc(i);
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				themeDisplay.getCompanyId(), portletId);
+				String portletId = (String) result.get(LuceneFields.PORTLET_ID);
 
-			if (portlet == null) {
-				continue;
-			}
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+						themeDisplay.getCompanyId(), portletId);
 
-			String portletTitle = PortalUtil.getPortletTitle(
-				portletId, themeDisplay.getUser());
-
-			long groupId = GetterUtil.getLong(
-				(String)result.get(LuceneFields.GROUP_ID));
-
-			String title = StringPool.BLANK;
-
-			PortletURL portletURL = getPortletURL(req, portletId, groupId);
-
-			String url = portletURL.toString();
-
-			Date modifedDate = DateTools.stringToDate(
-				(String)result.get(LuceneFields.MODIFIED));
-
-			String content = StringPool.BLANK;
-
-			if (Validator.isNotNull(portlet.getIndexerClass())) {
-				Indexer indexer = (Indexer)InstancePool.get(
-					portlet.getIndexerClass());
-
-				DocumentSummary docSummary =
-					indexer.getDocumentSummary(result, portletURL);
-
-				title = docSummary.getTitle();
-				url = portletURL.toString();
-				content = docSummary.getContent();
-
-				if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-					String articleId = result.get("articleId");
-					String version = result.get("version");
-
-					StringMaker sm = new StringMaker();
-
-					sm.append(themeDisplay.getPathMain());
-					sm.append("/journal/view_article_content?groupId=");
-					sm.append(groupId);
-					sm.append("&articleId=");
-					sm.append(articleId);
-					sm.append("&version=");
-					sm.append(version);
-
-					url = sm.toString();
+				if (portlet == null) {
+					continue;
 				}
+
+				String portletTitle = PortalUtil.getPortletTitle(portletId,
+						themeDisplay.getUser());
+
+				long groupId = GetterUtil.getLong((String) result
+						.get(LuceneFields.GROUP_ID));
+
+				String title = StringPool.BLANK;
+
+				PortletURL portletURL = getPortletURL(req, portletId, groupId);
+
+				String url = portletURL.toString();
+
+				Date modifedDate = DateTools.stringToDate((String) result
+						.get(LuceneFields.MODIFIED));
+
+				String content = StringPool.BLANK;
+
+				if (Validator.isNotNull(portlet.getIndexerClass())) {
+					Indexer indexer = (Indexer) InstancePool.get(portlet
+							.getIndexerClass());
+
+					DocumentSummary docSummary = indexer.getDocumentSummary(
+							result, portletURL);
+
+					title = docSummary.getTitle();
+					url = portletURL.toString();
+					content = docSummary.getContent();
+
+					if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
+						String articleId = result.get("articleId");
+						String version = result.get("version");
+
+						StringMaker sm = new StringMaker();
+
+						sm.append(themeDisplay.getPathMain());
+						sm.append("/journal/view_article_content?groupId=");
+						sm.append(groupId);
+						sm.append("&articleId=");
+						sm.append(articleId);
+						sm.append("&version=");
+						sm.append(version);
+
+						url = sm.toString();
+					}
+				}
+
+				double score = hits.score(i);
+
+				addSearchResult(root, portletTitle + " &raquo; " + title, url,
+						modifedDate, content, score);
+
 			}
 
-			double score = hits.score(i);
-
-			addSearchResult(
-				root, portletTitle + " &raquo; " + title, url, modifedDate,
-				content, score);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Return\n" + doc.asXML());
+			}
+			
+			return doc.asXML();
+			
+		}
+		catch (Exception e) {
+			throw e;
+		}
+		finally {
+			if (hits != null) {
+				hits.closeSearcher();
+			}
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Return\n" + doc.asXML());
-		}
-
-		return doc.asXML();
 	}
 
 	private static Log _log = LogFactory.getLog(PortalOpenSearchImpl.class);

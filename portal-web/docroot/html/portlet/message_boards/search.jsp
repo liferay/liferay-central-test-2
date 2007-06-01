@@ -68,56 +68,60 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords);
+Hits hits = null;
 
-ThreadHits threadHits = new ThreadHits();
+try {
 
-threadHits.recordHits(hits);
+	hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords);
 
-hits = threadHits;
+	ThreadHits threadHits = new ThreadHits();
 
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-int total = hits.getLength();
+	threadHits.recordHits(hits);
 
-searchContainer.setTotal(total);
+	hits = threadHits;
 
-List resultRows = searchContainer.getResultRows();
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	int total = hits.getLength();
 
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
+	searchContainer.setTotal(total);
 
-	ResultRow row = new ResultRow(doc, i, i);
+	List resultRows = searchContainer.getResultRows();
 
-	// Position
+	for (int i = 0; i < results.getLength(); i++) {
+		Document doc = results.doc(i);
 
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+		ResultRow row = new ResultRow(doc, i, i);
 
-	// Category and message
+		// Position
 
-	long categoryId = GetterUtil.getLong(doc.get("categoryId"));
-	long messageId = GetterUtil.getLong(doc.get("messageId"));
+		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-	MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+		// Category and message
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		long categoryId = GetterUtil.getLong(doc.get("categoryId"));
+		long messageId = GetterUtil.getLong(doc.get("messageId"));
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-	rowURL.setParameter("struts_action", "/message_boards/view_message");
-	rowURL.setParameter("messageId", String.valueOf(messageId));
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	row.addText(category.getName(), rowURL);
-	row.addText(message.getSubject(), rowURL);
+		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-	// Score
+		rowURL.setParameter("struts_action", "/message_boards/view_message");
+		rowURL.setParameter("messageId", String.valueOf(messageId));
 
-	row.addText(String.valueOf(hits.score(i)), rowURL);
+		row.addText(category.getName(), rowURL);
+		row.addText(message.getSubject(), rowURL);
 
-	// Add result row
+		// Score
 
-	resultRows.add(row);
-}
+		row.addText(String.valueOf(hits.score(i)), rowURL);
+
+		// Add result row
+
+		resultRows.add(row);
+	}
 %>
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
@@ -129,6 +133,18 @@ for (int i = 0; i < results.getLength(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+<%
+}
+catch (Exception e) {
+}
+finally {
+	if (hits != null) {
+		hits.closeSearcher();	
+	}
+}
+%>
+
 
 </form>
 

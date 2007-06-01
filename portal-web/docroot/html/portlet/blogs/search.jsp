@@ -62,61 +62,65 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, userId, categoryIdsArray, keywords);
+Hits hits = null;
 
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-int total = hits.getLength();
+try {
 
-searchContainer.setTotal(total);
+	hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, userId, categoryIdsArray, keywords);
 
-List resultRows = searchContainer.getResultRows();
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	int total = hits.getLength();
 
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
+	searchContainer.setTotal(total);
 
-	ResultRow row = new ResultRow(doc, i, i);
+	List resultRows = searchContainer.getResultRows();
 
-	// Position
+	for (int i = 0; i < results.getLength(); i++) {
+		Document doc = results.doc(i);
 
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+		ResultRow row = new ResultRow(doc, i, i);
 
-	// Category and entry
+		// Position
 
-	long categoryId = GetterUtil.getLong(doc.get("categoryId"), BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
-	long entryId = GetterUtil.getLong(doc.get("entryId"));
+		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	String categoryName = LanguageUtil.get(pageContext, "not-available");
+		// Category and entry
 
-	try {
-		if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
+		long categoryId = GetterUtil.getLong(doc.get("categoryId"), BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+		long entryId = GetterUtil.getLong(doc.get("entryId"));
 
-			categoryName = category.getName();
+		String categoryName = LanguageUtil.get(pageContext, "not-available");
+
+		try {
+			if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
+
+				categoryName = category.getName();
+			}
 		}
+		catch (NoSuchCategoryException nsce) {
+		}
+
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+		PortletURL rowURL = renderResponse.createRenderURL();
+
+		rowURL.setWindowState(WindowState.MAXIMIZED);
+
+		rowURL.setParameter("struts_action", "/blogs/view_entry");
+		rowURL.setParameter("entryId", String.valueOf(entryId));
+
+		row.addText(categoryName, rowURL);
+		row.addText(entry.getTitle(), rowURL);
+
+		// Score
+
+		row.addText(String.valueOf(hits.score(i)), rowURL);
+
+		// Add result row
+
+		resultRows.add(row);
 	}
-	catch (NoSuchCategoryException nsce) {
-	}
-
-	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
-
-	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
-
-	rowURL.setParameter("struts_action", "/blogs/view_entry");
-	rowURL.setParameter("entryId", String.valueOf(entryId));
-
-	row.addText(categoryName, rowURL);
-	row.addText(entry.getTitle(), rowURL);
-
-	// Score
-
-	row.addText(String.valueOf(hits.score(i)), rowURL);
-
-	// Add result row
-
-	resultRows.add(row);
-}
 %>
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
@@ -128,6 +132,17 @@ for (int i = 0; i < results.getLength(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+<%
+}
+catch (Exception e) {
+}
+finally {
+	if (hits != null) {
+		hits.closeSearcher();	
+	}
+}
+%>
 
 </form>
 

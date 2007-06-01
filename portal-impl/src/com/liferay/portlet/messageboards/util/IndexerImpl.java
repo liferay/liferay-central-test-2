@@ -134,6 +134,9 @@ public class IndexerImpl {
 				}
 			}
 			finally {
+				if (searcher != null){
+					searcher.close();
+				}
 				if (reader != null) {
 					reader.close();
 				}

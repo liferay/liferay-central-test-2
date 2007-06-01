@@ -28,6 +28,8 @@ import com.liferay.util.Time;
 
 import java.io.IOException;
 
+import org.apache.lucene.search.Searcher;
+
 /**
  * <a href="HitsImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -89,6 +91,25 @@ public class HitsImpl implements Hits {
 
 		setScores(primScores);
 	}
+	
+	public Searcher getSearcher(){
+		return _searcher;
+	}
+	
+	protected void setSearcher(Searcher searcher){
+		_searcher = searcher;
+	}
+	
+	public void closeSearcher(){
+		try {
+			if(_searcher != null){
+				_searcher.close();
+				_searcher = null;
+			}
+		}
+		catch (IOException e) {
+		}
+	}
 
 	public Document doc(int n) {
 		try {
@@ -143,18 +164,20 @@ public class HitsImpl implements Hits {
 
 		return subset;
 	}
-
-	public void recordHits(org.apache.lucene.search.Hits hits)
+	
+	public void recordHits(org.apache.lucene.search.Hits hits, Searcher searcher)
 		throws IOException {
 
 		_hits = hits;
 		_length = hits.length();
 		_docs = new DocumentImpl[_length];
 		_scores = new float[_length];
+		_searcher = searcher;
 	}
 
 	private org.apache.lucene.search.Hits _hits;
 	private long _start;
+	private Searcher _searcher;
 	private float _searchTime;
 	private Document[] _docs = new DocumentImpl[0];
 	private int _length;

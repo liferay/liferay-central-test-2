@@ -140,6 +140,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				}
 			}
 			finally {
+				if (searcher != null) {
+					searcher.close();
+				}
 				if (reader != null) {
 					reader.close();
 				}

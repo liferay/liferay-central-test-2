@@ -45,6 +45,9 @@ public class ThreadHits extends HitsImpl {
 	}
 
 	public void recordHits(Hits hits) {
+		
+		setSearcher(((HitsImpl)hits).getSearcher());
+		
 		Set threadIds = CollectionFactory.getHashSet();
 
 		List docs = new ArrayList(hits.getLength());

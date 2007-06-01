@@ -330,8 +330,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(fullQuery));
-
+			hits.recordHits(searcher.search(fullQuery), searcher);
+			
 			return hits;
 		}
 		catch (IOException ioe) {

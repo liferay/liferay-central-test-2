@@ -81,60 +81,73 @@ public class BlogsOpenSearchImpl extends BaseOpenSearchImpl {
 			HttpServletRequest req, String keywords, int startPage,
 			int itemsPerPage)
 		throws Exception {
+		
+		Hits hits = null;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		try {
 
-		Hits hits = BlogsEntryLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), 0, 0, null, keywords);
+			ThemeDisplay themeDisplay = (ThemeDisplay) req
+					.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Object[] values = addSearchResults(
-			keywords, startPage, itemsPerPage, hits,
-			"Liferay Blogs Search: " + keywords, SEARCH_PATH, themeDisplay);
+			hits = BlogsEntryLocalServiceUtil.search(themeDisplay
+					.getCompanyId(), 0, 0, null, keywords);
 
-		Hits results = (Hits)values[0];
-		org.dom4j.Document doc = (org.dom4j.Document)values[1];
-		Element root = (Element)values[2];
+			Object[] values = addSearchResults(keywords, startPage,
+					itemsPerPage, hits, "Liferay Blogs Search: " + keywords,
+					SEARCH_PATH, themeDisplay);
 
-		for (int i = 0; i < results.getLength(); i++) {
-			Document result = results.doc(i);
+			Hits results = (Hits) values[0];
+			org.dom4j.Document doc = (org.dom4j.Document) values[1];
+			Element root = (Element) values[2];
 
-			String portletId = (String)result.get(LuceneFields.PORTLET_ID);
+			for (int i = 0; i < results.getLength(); i++) {
+				Document result = results.doc(i);
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				themeDisplay.getCompanyId(), portletId);
+				String portletId = (String) result.get(LuceneFields.PORTLET_ID);
 
-			String portletTitle = PortalUtil.getPortletTitle(
-				portletId, themeDisplay.getUser());
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+						themeDisplay.getCompanyId(), portletId);
 
-			long groupId = GetterUtil.getLong(
-				(String)result.get(LuceneFields.GROUP_ID));
+				String portletTitle = PortalUtil.getPortletTitle(portletId,
+						themeDisplay.getUser());
 
-			PortletURL portletURL = getPortletURL(req, portletId, groupId);
+				long groupId = GetterUtil.getLong((String) result
+						.get(LuceneFields.GROUP_ID));
 
-			Indexer indexer = (Indexer)InstancePool.get(
-				portlet.getIndexerClass());
+				PortletURL portletURL = getPortletURL(req, portletId, groupId);
 
-			DocumentSummary docSummary =
-				indexer.getDocumentSummary(result, portletURL);
+				Indexer indexer = (Indexer) InstancePool.get(portlet
+						.getIndexerClass());
 
-			String title = docSummary.getTitle();
-			String url = portletURL.toString();
-			Date modifedDate = DateTools.stringToDate(
-				(String)result.get(LuceneFields.MODIFIED));
-			String content = docSummary.getContent();
-			double score = hits.score(i);
+				DocumentSummary docSummary = indexer.getDocumentSummary(result,
+						portletURL);
 
-			addSearchResult(
-				root, portletTitle + " &raquo; " + title, url, modifedDate,
-				content, score);
+				String title = docSummary.getTitle();
+				String url = portletURL.toString();
+				Date modifedDate = DateTools.stringToDate((String) result
+						.get(LuceneFields.MODIFIED));
+				String content = docSummary.getContent();
+				double score = hits.score(i);
+
+				addSearchResult(root, portletTitle + " &raquo; " + title, url,
+						modifedDate, content, score);
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Return\n" + doc.asXML());
+			}
+
+			return doc.asXML();
+			
 		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Return\n" + doc.asXML());
+		catch (Exception e) {
+			throw e;
 		}
-
-		return doc.asXML();
+		finally {
+			if (hits != null) {
+				hits.closeSearcher();
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(BlogsOpenSearchImpl.class);

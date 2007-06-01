@@ -61,61 +61,65 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
+Hits hits = null;
 
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-int total = hits.getLength();
+try {
 
-searchContainer.setTotal(total);
+	hits = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
 
-List resultRows = searchContainer.getResultRows();
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	int total = hits.getLength();
 
-String rootDir = PropsUtil.get(PropsUtil.DL_ROOT_DIR);
-String versionRootDir = PropsUtil.get(PropsUtil.DL_VERSION_ROOT_DIR);
+	searchContainer.setTotal(total);
 
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
+	List resultRows = searchContainer.getResultRows();
 
-	ResultRow row = new ResultRow(doc, i, i);
+	String rootDir = PropsUtil.get(PropsUtil.DL_ROOT_DIR);
+	String versionRootDir = PropsUtil.get(PropsUtil.DL_VERSION_ROOT_DIR);
 
-	// Position
+	for (int i = 0; i < results.getLength(); i++) {
+		Document doc = results.doc(i);
 
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+		ResultRow row = new ResultRow(doc, i, i);
 
-	// Folder and document
+		// Position
 
-	long folderId = GetterUtil.getLong(doc.get("repositoryId"));
-	String fileName = doc.get("path");
+		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, fileName);
+		// Folder and document
 
-	row.setObject(fileEntry);
+		long folderId = GetterUtil.getLong(doc.get("repositoryId"));
+		String fileName = doc.get("path");
 
-	DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, fileName);
 
-	PortletURL rowURL = renderResponse.createActionURL();
+		row.setObject(fileEntry);
 
-	rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-	rowURL.setParameter("struts_action", "/document_library/get_file");
-	rowURL.setParameter("folderId", String.valueOf(folderId));
-	rowURL.setParameter("name", fileName);
+		PortletURL rowURL = renderResponse.createActionURL();
 
-	row.addText(folder.getName(), rowURL);
-	row.addText(fileEntry.getName(), rowURL);
+		rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
-	// Score
+		rowURL.setParameter("struts_action", "/document_library/get_file");
+		rowURL.setParameter("folderId", String.valueOf(folderId));
+		rowURL.setParameter("name", fileName);
 
-	row.addText(String.valueOf(hits.score(i)), rowURL);
+		row.addText(folder.getName(), rowURL);
+		row.addText(fileEntry.getName(), rowURL);
 
-	// Action
+		// Score
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
+		row.addText(String.valueOf(hits.score(i)), rowURL);
 
-	// Add result row
+		// Action
 
-	resultRows.add(row);
-}
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
+
+		// Add result row
+
+		resultRows.add(row);
+	}
 %>
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
@@ -127,6 +131,17 @@ for (int i = 0; i < results.getLength(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+<%
+}
+catch (Exception e) {
+}
+finally {
+	if (hits != null) {
+		hits.closeSearcher();	
+	}
+}
+%>
 
 </form>
 

@@ -82,59 +82,72 @@ public class WikiOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		Hits hits = null;
 
-		Hits hits = WikiNodeLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), 0, null, keywords);
+		try {
 
-		Object[] values = addSearchResults(
-			keywords, startPage, itemsPerPage, hits,
-			"Liferay Wiki Search: " + keywords, SEARCH_PATH, themeDisplay);
+			ThemeDisplay themeDisplay = (ThemeDisplay) req
+					.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Hits results = (Hits)values[0];
-		org.dom4j.Document doc = (org.dom4j.Document)values[1];
-		Element root = (Element)values[2];
+			hits = WikiNodeLocalServiceUtil.search(themeDisplay.getCompanyId(),
+					0, null, keywords);
 
-		for (int i = 0; i < results.getLength(); i++) {
-			Document result = results.doc(i);
+			Object[] values = addSearchResults(keywords, startPage,
+					itemsPerPage, hits, "Liferay Wiki Search: " + keywords,
+					SEARCH_PATH, themeDisplay);
 
-			String portletId = (String)result.get(LuceneFields.PORTLET_ID);
+			Hits results = (Hits) values[0];
+			org.dom4j.Document doc = (org.dom4j.Document) values[1];
+			Element root = (Element) values[2];
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				themeDisplay.getCompanyId(), portletId);
+			for (int i = 0; i < results.getLength(); i++) {
+				Document result = results.doc(i);
 
-			String portletTitle = PortalUtil.getPortletTitle(
-				portletId, themeDisplay.getUser());
+				String portletId = (String) result.get(LuceneFields.PORTLET_ID);
 
-			long groupId = GetterUtil.getLong(
-				(String)result.get(LuceneFields.GROUP_ID));
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+						themeDisplay.getCompanyId(), portletId);
 
-			PortletURL portletURL = getPortletURL(req, portletId, groupId);
+				String portletTitle = PortalUtil.getPortletTitle(portletId,
+						themeDisplay.getUser());
 
-			Indexer indexer = (Indexer)InstancePool.get(
-				portlet.getIndexerClass());
+				long groupId = GetterUtil.getLong((String) result
+						.get(LuceneFields.GROUP_ID));
 
-			DocumentSummary docSummary =
-				indexer.getDocumentSummary(result, portletURL);
+				PortletURL portletURL = getPortletURL(req, portletId, groupId);
 
-			String title = docSummary.getTitle();
-			String url = portletURL.toString();
-			Date modifedDate = DateTools.stringToDate(
-				(String)result.get(LuceneFields.MODIFIED));
-			String content = docSummary.getContent();
-			double score = hits.score(i);
+				Indexer indexer = (Indexer) InstancePool.get(portlet
+						.getIndexerClass());
 
-			addSearchResult(
-				root, portletTitle + " &raquo; " + title, url, modifedDate,
-				content, score);
+				DocumentSummary docSummary = indexer.getDocumentSummary(result,
+						portletURL);
+
+				String title = docSummary.getTitle();
+				String url = portletURL.toString();
+				Date modifedDate = DateTools.stringToDate((String) result
+						.get(LuceneFields.MODIFIED));
+				String content = docSummary.getContent();
+				double score = hits.score(i);
+
+				addSearchResult(root, portletTitle + " &raquo; " + title, url,
+						modifedDate, content, score);
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Return\n" + doc.asXML());
+			}
+
+			return doc.asXML();
+			
 		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Return\n" + doc.asXML());
+		catch (Exception e) {
+			throw e;
 		}
-
-		return doc.asXML();
+		finally {
+			if (hits != null) {
+				hits.closeSearcher();
+			}
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(WikiOpenSearchImpl.class);

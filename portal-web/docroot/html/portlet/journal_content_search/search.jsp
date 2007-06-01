@@ -53,50 +53,54 @@
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-		Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords);
+		Hits hits = null;
 
-		ContentHits contentHits = new ContentHits();
+		try {
 
-		contentHits.recordHits(hits, layout.getGroupId(), layout.isPrivateLayout());
+			hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords);
 
-		hits = contentHits;
+			ContentHits contentHits = new ContentHits();
 
-		Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-		int total = hits.getLength();
+			contentHits.recordHits(hits, layout.getGroupId(), layout.isPrivateLayout());
 
-		searchContainer.setTotal(total);
+			hits = contentHits;
 
-		List resultRows = searchContainer.getResultRows();
+			Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+			int total = hits.getLength();
 
-		for (int i = 0; i < results.getLength(); i++) {
-			Document doc = results.doc(i);
+			searchContainer.setTotal(total);
 
-			ResultRow row = new ResultRow(doc, i, i);
+			List resultRows = searchContainer.getResultRows();
 
-			// Position
+			for (int i = 0; i < results.getLength(); i++) {
+				Document doc = results.doc(i);
 
-			row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+				ResultRow row = new ResultRow(doc, i, i);
 
-			// Title
+				// Position
 
-			String title = doc.get(LuceneFields.TITLE);
+				row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-			title = StringUtil.highlight(title, keywords);
+				// Title
 
-			row.addText(title);
+				String title = doc.get(LuceneFields.TITLE);
 
-			// Content
+				title = StringUtil.highlight(title, keywords);
 
-			row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
+				row.addText(title);
 
-			// Score
+				// Content
 
-			row.addText(String.valueOf(hits.score(i)));
+				row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
 
-			// Add result row
+				// Score
 
-			resultRows.add(row);
-		}
+				row.addText(String.valueOf(hits.score(i)));
+
+				// Add result row
+
+				resultRows.add(row);
+			}
 		%>
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -117,7 +121,18 @@
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
+		
+		<%
+		}
+		catch (Exception e) {
+		}
+		finally {
+			if (hits != null) {
+				hits.closeSearcher();	
+			}
+		}
+		%>
+		
 		</form>
 
 		<script type="text/javascript">

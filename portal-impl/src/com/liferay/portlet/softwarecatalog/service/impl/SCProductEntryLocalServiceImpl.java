@@ -441,7 +441,7 @@ public class SCProductEntryLocalServiceImpl
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(searcher.search(fullQuery));
+			hits.recordHits(searcher.search(fullQuery), searcher);
 
 			return hits;
 		}

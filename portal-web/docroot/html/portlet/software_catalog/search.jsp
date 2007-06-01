@@ -51,50 +51,54 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-products-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), type, keywords);
+Hits hits = null;
 
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+try {
 
-int total = hits.getLength();
+	hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), type, keywords);
 
-searchContainer.setTotal(total);
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 
-List resultRows = searchContainer.getResultRows();
+	int total = hits.getLength();
 
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
+	searchContainer.setTotal(total);
 
-	ResultRow row = new ResultRow(doc, i, i);
+	List resultRows = searchContainer.getResultRows();
 
-	// Position
+	for (int i = 0; i < results.getLength(); i++) {
+		Document doc = results.doc(i);
 
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+		ResultRow row = new ResultRow(doc, i, i);
 
-	// Name and type
+		// Position
 
-	String title = doc.get("title");
-	String docType = doc.get("type");
-	String productEntryId = doc.get("productEntryId");
+		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		// Name and type
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
+		String title = doc.get("title");
+		String docType = doc.get("type");
+		String productEntryId = doc.get("productEntryId");
 
-	rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("productEntryId", productEntryId);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	row.addText(title, rowURL);
-	row.addText(LanguageUtil.get(pageContext, docType), rowURL);
+		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-	// Score
+		rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("productEntryId", productEntryId);
 
-	row.addText(String.valueOf(hits.score(i)), rowURL);
+		row.addText(title, rowURL);
+		row.addText(LanguageUtil.get(pageContext, docType), rowURL);
 
-	// Add result row
+		// Score
 
-	resultRows.add(row);
-}
+		row.addText(String.valueOf(hits.score(i)), rowURL);
+
+		// Add result row
+
+		resultRows.add(row);
+	}
 %>
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
@@ -114,6 +118,17 @@ for (int i = 0; i < results.getLength(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+<%
+}
+catch (Exception e) {
+}
+finally {
+	if (hits != null) {
+		hits.closeSearcher();	
+	}
+}
+%>
 
 </form>
 

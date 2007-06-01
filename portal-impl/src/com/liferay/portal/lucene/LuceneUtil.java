@@ -25,7 +25,6 @@ package com.liferay.portal.lucene;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -37,7 +36,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -198,8 +196,10 @@ public class LuceneUtil {
 		return IndexReader.open(getLuceneDir(companyId));
 	}
 
-	public static IndexSearcher getSearcher(long companyId) throws IOException {
-		return _instance._getSearcher(companyId);
+	public static IndexSearcher getSearcher(long companyId)
+		throws IOException {
+
+		return new IndexSearcher(getLuceneDir(companyId));
 	}
 
 	public static IndexWriter getWriter(long companyId) throws IOException {
@@ -415,21 +415,6 @@ public class LuceneUtil {
 		return directory;
 	}
 
-	private IndexSearcher _getSearcher(long companyId) throws IOException {
-		Long companyIdObj = new Long(companyId);
-
-		IndexSearcher indexSearcher =
-			(IndexSearcher)_sharedSearchers.get(companyIdObj);
-
-		if (indexSearcher == null) {
-			indexSearcher = new IndexSearcher(_getLuceneDir(companyId));
-
-			_instance._sharedSearchers.put(companyIdObj, indexSearcher);
-		}
-
-		return indexSearcher;
-	}
-
 	private String _getTableName(long companyId) {
 		return _LUCENE_TABLE_PREFIX + companyId;
 	}
@@ -445,7 +430,6 @@ public class LuceneUtil {
 	private static LuceneUtil _instance = new LuceneUtil();
 
 	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
-	private Map _sharedSearchers = CollectionFactory.getSyncHashMap();
 	private Class _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
 

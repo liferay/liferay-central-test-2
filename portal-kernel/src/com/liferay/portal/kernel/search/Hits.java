@@ -47,13 +47,15 @@ public interface Hits extends Serializable {
 	public int getLength();
 
 	public void setLength(int length);
-
+	
 	public float[] getScores();
 
 	public void setScores(float[] scores);
 
 	public void setScores(Float[] scores);
 
+	public void closeSearcher();
+	
 	public Document doc(int n);
 
 	public float score(int n);

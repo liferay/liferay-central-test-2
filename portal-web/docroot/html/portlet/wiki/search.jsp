@@ -70,51 +70,55 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), nodeIds, keywords);
+Hits hits = null;
 
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-int total = hits.getLength();
+try {
 
-searchContainer.setTotal(total);
+	hits = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), nodeIds, keywords);
 
-List resultRows = searchContainer.getResultRows();
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	int total = hits.getLength();
 
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
+	searchContainer.setTotal(total);
 
-	ResultRow row = new ResultRow(doc, i, i);
+	List resultRows = searchContainer.getResultRows();
 
-	// Position
+	for (int i = 0; i < results.getLength(); i++) {
+		Document doc = results.doc(i);
 
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+		ResultRow row = new ResultRow(doc, i, i);
 
-	// Node and page
+		// Position
 
-	long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
-	String title = doc.get("title");
+		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-	WikiNode curNode = WikiNodeLocalServiceUtil.getNode(curNodeId);
+		// Node and page
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
+		String title = doc.get("title");
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
+		WikiNode curNode = WikiNodeLocalServiceUtil.getNode(curNodeId);
 
-	rowURL.setParameter("struts_action", "/wiki/view_page");
-	rowURL.setParameter("nodeId", String.valueOf(curNodeId));
-	rowURL.setParameter("title", title);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	row.addText(curNode.getName(), rowURL);
+		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-	row.addText(title, rowURL);
+		rowURL.setParameter("struts_action", "/wiki/view_page");
+		rowURL.setParameter("nodeId", String.valueOf(curNodeId));
+		rowURL.setParameter("title", title);
 
-	// Score
+		row.addText(curNode.getName(), rowURL);
 
-	row.addText(String.valueOf(hits.score(i)), rowURL);
+		row.addText(title, rowURL);
 
-	// Add result row
+		// Score
 
-	resultRows.add(row);
-}
+		row.addText(String.valueOf(hits.score(i)), rowURL);
+
+		// Add result row
+
+		resultRows.add(row);
+	}
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -133,6 +137,17 @@ for (int i = 0; i < results.getLength(); i++) {
 <br />
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<%
+}
+catch (Exception e) {
+}
+finally {
+	if (hits != null) {
+		hits.closeSearcher();	
+	}
+}
+%>
 
 </form>
 
