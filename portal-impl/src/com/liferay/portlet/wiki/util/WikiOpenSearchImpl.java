@@ -138,7 +138,7 @@ public class WikiOpenSearchImpl extends BaseOpenSearchImpl {
 			}
 
 			return doc.asXML();
-			
+
 		}
 		catch (Exception e) {
 			throw e;

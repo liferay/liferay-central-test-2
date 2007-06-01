@@ -48,9 +48,9 @@ public class ContentHits extends HitsImpl {
 		throws SystemException {
 
 		setSearcher(((HitsImpl)hits).getSearcher());
-		
+
 		// This can later be optimized according to LEP-915.
-	
+
 		List docs = new ArrayList(hits.getLength());
 		List scores = new ArrayList(hits.getLength());
 

@@ -54,7 +54,6 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 Hits hits = null;
 
 try {
-
 	hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), type, keywords);
 
 	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
@@ -101,31 +100,32 @@ try {
 	}
 %>
 
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-<select name="<portlet:namespace/>type">
-	<option value=""></option>
-	<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
-	<option <%= type.equals("theme")? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
-	<option <%= type.equals("layout")? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
-	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
-</select>
+	<select name="<portlet:namespace/>type">
+		<option value=""></option>
+		<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
+		<option <%= type.equals("theme")? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
+		<option <%= type.equals("layout")? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
+		<option <%= type.equals("extension")? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
+	</select>
 
-<input type="submit" value="<liferay-ui:message key="search-products" />" />
+	<input type="submit" value="<liferay-ui:message key="search-products" />" />
 
-<br /><br />
+	<br /><br />
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 <%
 }
 catch (Exception e) {
+	_log.error(e.getMessage());
 }
 finally {
 	if (hits != null) {
-		hits.closeSearcher();	
+		hits.closeSearcher();
 	}
 }
 %>
@@ -135,3 +135,7 @@ finally {
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
 </script>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.software_catalog.search.jsp");
+%>

@@ -81,7 +81,7 @@ public class BlogsOpenSearchImpl extends BaseOpenSearchImpl {
 			HttpServletRequest req, String keywords, int startPage,
 			int itemsPerPage)
 		throws Exception {
-		
+
 		Hits hits = null;
 
 		try {
@@ -138,7 +138,7 @@ public class BlogsOpenSearchImpl extends BaseOpenSearchImpl {
 			}
 
 			return doc.asXML();
-			
+
 		}
 		catch (Exception e) {
 			throw e;

@@ -56,7 +56,6 @@
 		Hits hits = null;
 
 		try {
-
 			hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords);
 
 			ContentHits contentHits = new ContentHits();
@@ -103,36 +102,37 @@
 			}
 		%>
 
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td>
+					<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
 
-				<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
-			</td>
-			<td align="right">
-				<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />
-			</td>
-		</tr>
-		</table>
+					<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
+				</td>
+				<td align="right">
+					<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />
+				</td>
+			</tr>
+			</table>
 
-		<br />
+			<br />
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-		
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
 		<%
 		}
 		catch (Exception e) {
+			_log.error(e.getMessage());
 		}
 		finally {
 			if (hits != null) {
-				hits.closeSearcher();	
+				hits.closeSearcher();
 			}
 		}
 		%>
-		
+
 		</form>
 
 		<script type="text/javascript">
@@ -145,3 +145,7 @@
 		<liferay-ui:journal-content-search />
 	</c:otherwise>
 </c:choose>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.journal_content_search.search.jsp");
+%>

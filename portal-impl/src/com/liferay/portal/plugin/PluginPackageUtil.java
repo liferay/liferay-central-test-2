@@ -502,7 +502,7 @@ public class PluginPackageUtil {
 			Searcher searcher = LuceneUtil.getSearcher(CompanyImpl.SYSTEM);
 
 			hits.recordHits(searcher.search(fullQuery), searcher);
-			
+
 			return hits;
 		}
 		catch (IOException ioe) {

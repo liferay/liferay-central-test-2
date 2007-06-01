@@ -73,7 +73,6 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 Hits hits = null;
 
 try {
-
 	hits = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), nodeIds, keywords);
 
 	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
@@ -121,30 +120,31 @@ try {
 	}
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td>
+			<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-	</td>
-	<td align="right">
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-	</td>
-</tr>
-</table>
+			<input type="submit" value="<liferay-ui:message key="search" />" />
+		</td>
+		<td align="right">
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</td>
+	</tr>
+	</table>
 
-<br />
+	<br />
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <%
 }
 catch (Exception e) {
+	_log.error(e.getMessage());
 }
 finally {
 	if (hits != null) {
-		hits.closeSearcher();	
+		hits.closeSearcher();
 	}
 }
 %>
@@ -154,3 +154,7 @@ finally {
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
 </script>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.wiki.search.jsp");
+%>

@@ -91,23 +91,24 @@ public class HitsImpl implements Hits {
 
 		setScores(primScores);
 	}
-	
-	public Searcher getSearcher(){
+
+	public Searcher getSearcher() {
 		return _searcher;
 	}
-	
-	protected void setSearcher(Searcher searcher){
+
+	public void setSearcher(Searcher searcher) {
 		_searcher = searcher;
 	}
-	
-	public void closeSearcher(){
+
+	public void closeSearcher() {
 		try {
-			if(_searcher != null){
+			if (_searcher != null){
 				_searcher.close();
+
 				_searcher = null;
 			}
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
 		}
 	}
 
@@ -164,7 +165,7 @@ public class HitsImpl implements Hits {
 
 		return subset;
 	}
-	
+
 	public void recordHits(org.apache.lucene.search.Hits hits, Searcher searcher)
 		throws IOException {
 
@@ -177,10 +178,10 @@ public class HitsImpl implements Hits {
 
 	private org.apache.lucene.search.Hits _hits;
 	private long _start;
-	private Searcher _searcher;
 	private float _searchTime;
 	private Document[] _docs = new DocumentImpl[0];
 	private int _length;
 	private float[] _scores = new float[0];
+	private Searcher _searcher;
 
 }

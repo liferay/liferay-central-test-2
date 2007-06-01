@@ -1046,7 +1046,7 @@ public class JournalArticleLocalServiceImpl
 			Sort sort = new Sort(new SortField(sortField, true));
 
 			hits.recordHits(searcher.search(fullQuery, sort), searcher);
-		
+
 			return hits;
 		}
 		catch (IOException ioe) {

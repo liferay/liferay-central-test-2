@@ -87,7 +87,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		Hits hits = null;
 
 		try {
-			
+
 			ThemeDisplay themeDisplay = (ThemeDisplay) req
 					.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -170,9 +170,9 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Return\n" + doc.asXML());
 			}
-			
+
 			return doc.asXML();
-			
+
 		}
 		catch (Exception e) {
 			throw e;
