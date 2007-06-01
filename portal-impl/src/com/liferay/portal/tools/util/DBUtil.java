@@ -52,6 +52,7 @@ import org.hibernate.dialect.HSQLDialect;
 import org.hibernate.dialect.InterbaseDialect;
 import org.hibernate.dialect.JDataStoreDialect;
 import org.hibernate.dialect.MySQLDialect;
+import org.hibernate.dialect.Oracle9Dialect;
 import org.hibernate.dialect.OracleDialect;
 import org.hibernate.dialect.PostgreSQLDialect;
 import org.hibernate.dialect.SAPDBDialect;
@@ -120,7 +121,9 @@ public abstract class DBUtil {
 		else if (dialect instanceof MySQLDialect) {
 			dbUtil = MySQLUtil.getInstance();
 		}
-		else if (dialect instanceof OracleDialect) {
+		else if (dialect instanceof OracleDialect || 
+				dialect instanceof Oracle9Dialect) {
+			
 			dbUtil = OracleUtil.getInstance();
 		}
 		else if (dialect instanceof PostgreSQLDialect) {
