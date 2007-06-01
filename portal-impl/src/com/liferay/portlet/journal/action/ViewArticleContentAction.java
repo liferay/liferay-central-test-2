@@ -76,6 +76,8 @@ public class ViewArticleContentAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
+		UploadServletRequest uploadReq = null;
+
 		try {
 			String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -92,8 +94,11 @@ public class ViewArticleContentAction extends Action {
 			String output = null;
 
 			if (cmd.equals(Constants.PREVIEW)) {
-				String title = ParamUtil.getString(req, "title");
-				String description = ParamUtil.getString(req, "description");
+				uploadReq = new UploadServletRequest(req);
+
+				String title = ParamUtil.getString(uploadReq, "title");
+				String description = ParamUtil.getString(
+					uploadReq, "description");
 
 				Date now = new Date();
 
@@ -101,9 +106,9 @@ public class ViewArticleContentAction extends Action {
 				Date modifiedDate = now;
 				Date displayDate = now;
 
-				User user = PortalUtil.getUser(req);
+				User user = PortalUtil.getUser(uploadReq);
 
-				String xml = ParamUtil.getString(req, "xml");
+				String xml = ParamUtil.getString(uploadReq, "xml");
 
 				SAXReader reader = new SAXReader();
 
@@ -117,7 +122,7 @@ public class ViewArticleContentAction extends Action {
 
 				format(
 					groupId, articleId, version, previewArticleId, root,
-					PortalUtil.getUploadServletRequest(req));
+					uploadReq);
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
@@ -170,7 +175,8 @@ public class ViewArticleContentAction extends Action {
 
 				xml = JournalUtil.formatXML(doc);
 
-				String templateId = ParamUtil.getString(req, "templateId");
+				String templateId = ParamUtil.getString(
+					uploadReq, "templateId");
 
 				JournalTemplate template =
 					JournalTemplateLocalServiceUtil.getTemplate(
@@ -195,6 +201,11 @@ public class ViewArticleContentAction extends Action {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
 			return mapping.findForward(Constants.COMMON_ERROR);
+		}
+		finally {
+			if (uploadReq != null) {
+				uploadReq.cleanUp();
+			}
 		}
 	}
 
