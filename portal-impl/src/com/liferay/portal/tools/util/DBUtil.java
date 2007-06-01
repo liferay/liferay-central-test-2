@@ -121,9 +121,9 @@ public abstract class DBUtil {
 		else if (dialect instanceof MySQLDialect) {
 			dbUtil = MySQLUtil.getInstance();
 		}
-		else if (dialect instanceof OracleDialect || 
-				dialect instanceof Oracle9Dialect) {
-			
+		else if (dialect instanceof OracleDialect ||
+				 dialect instanceof Oracle9Dialect) {
+
 			dbUtil = OracleUtil.getInstance();
 		}
 		else if (dialect instanceof PostgreSQLDialect) {
