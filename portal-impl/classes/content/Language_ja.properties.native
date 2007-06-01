@@ -1645,6 +1645,7 @@ other=他
 out-of-stock=在庫から
 outgoing-smtp-server=出て行くSMTP サーバー
 outside-us=外の米国
+override-default-template=手数料のデフォルトの型板
 owner=所有者
 page-display-order=ページの表示順序
 page-history=ページの歴史

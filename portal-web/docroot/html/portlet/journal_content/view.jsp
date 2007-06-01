@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
 
 <%
-String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
+String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 %>
 
 <c:choose>
@@ -36,79 +36,13 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
 		RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
 
-		for (int i = 0; i < content.length; i++) {
-			content[i] = RuntimePortletUtil.processXML(request, content[i], portletLogic);
-			content[i] = RuntimePortletUtil.processXML(request, content[i], actionURLLogic);
-			content[i] = RuntimePortletUtil.processXML(request, content[i], renderURLLogic);
+		content = RuntimePortletUtil.processXML(request, content, portletLogic);
+		content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
+		content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
 		%>
 
-			<div id="<portlet:namespace />content<%= i %>">
-				<%= content[i] %>
-			</div>
+		<%= content %>
 
-		<%
-		}
-		%>
-
-		<c:if test="<%= (content.length > 1) && paginate %>">
-			<div id="<portlet:namespace />paginator" style="padding: 10px 0px 10px 0px;">
-				<span class="font-small" id="<portlet:namespace />prev" style="cursor: pointer; float: left;" onClick="<portlet:namespace />prevPage();"></span>
-				<span class="font-small" id="<portlet:namespace />next" style="cursor: pointer; float: right;" onClick="<portlet:namespace />nextPage();"></span>
-			</div>
-
-			<script type="text/javascript">
-				var <portlet:namespace />index = 0;
-
-				function <portlet:namespace />prevPage() {
-					<portlet:namespace />index--;
-					<portlet:namespace />updatePage();
-				}
-
-				function <portlet:namespace />nextPage() {
-					<portlet:namespace />index++;
-					<portlet:namespace />updatePage();
-				}
-
-				function <portlet:namespace />updatePage() {
-					for (var i = 0; i < <%= content.length %>; i++) {
-						var editArticle = document.getElementById("<portlet:namespace />editArticle" + i);
-						var content = document.getElementById("<portlet:namespace />content" + i);
-
-						if (i == <portlet:namespace />index) {
-							content.style.display = "";
-
-							if (editArticle != null) {
-								editArticle.style.display = "";
-							}
-						}
-						else {
-							content.style.display = "none";
-
-							if (editArticle != null) {
-								editArticle.style.display = "none";
-							}
-						}
-					}
-
-					var prev = document.getElementById("<portlet:namespace />prev");
-					var next = document.getElementById("<portlet:namespace />next");
-
-					if (<portlet:namespace />index > 0) {
-						prev.innerHTML = "<a>&laquo;&nbsp;<liferay-ui:message key="previous" /></a>";
-					}
-					else {
-						prev.innerHTML = "";
-					}
-
-					if (<portlet:namespace />index < <%= content.length - 1 %>) {
-						next.innerHTML = "<a><liferay-ui:message key="next" />&nbsp;&raquo;</a>";
-					}
-					else {
-						next.innerHTML = "";
-					}
-				}
-			</script>
-		</c:if>
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
@@ -119,24 +53,15 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 		<br />
 
-		<%
-		for (int i = 0; i < articleIds.length; i++) {
-		%>
+		<c:if test="<%= Validator.isNotNull(articleId) %>">
+			<br />
 
-			<c:if test="<%= Validator.isNotNull(articleIds[i]) %>">
-				<br />
+			<span class="portlet-msg-error">
+			<%= LanguageUtil.format(pageContext, "x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleId) %>
+			</span>
 
-				<span class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleIds[i]) %>
-				</span>
-
-				<br />
-			</c:if>
-
-		<%
-		}
-		%>
-
+			<br />
+		</c:if>
 	</c:otherwise>
 </c:choose>
 
@@ -146,56 +71,52 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 	<%
 	JournalArticle article = null;
 
-	for (int i = 0; i < articleIds.length; i++) {
-		try {
-			article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleIds[i]);
+	try {
+		article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId);
 	%>
 
-			<c:if test="<%= enableRatings %>">
-				<liferay-ui:ratings
-					className="<%= JournalArticle.class.getName() %>"
-					classPK="<%= article.getResourcePrimKey() %>"
-					url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
-				/>
+		<c:if test="<%= enableRatings %>">
+			<liferay-ui:ratings
+				className="<%= JournalArticle.class.getName() %>"
+				classPK="<%= article.getResourcePrimKey() %>"
+				url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+			/>
 
-				<br />
-			</c:if>
+			<br />
+		</c:if>
 
-			<c:if test="<%= enableComments %>">
-				<portlet:actionURL var="discussionURL">
-					<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
-				</portlet:actionURL>
+		<c:if test="<%= enableComments %>">
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
+			</portlet:actionURL>
 
-				<liferay-ui:discussion
-					formAction="<%= discussionURL %>"
-					className="<%= JournalArticle.class.getName() %>"
-					classPK="<%= article.getResourcePrimKey() %>"
-					userId="<%= article.getUserId() %>"
-					subject="<%= article.getTitle() %>"
-					redirect="<%= currentURL %>"
-				/>
+			<liferay-ui:discussion
+				formAction="<%= discussionURL %>"
+				className="<%= JournalArticle.class.getName() %>"
+				classPK="<%= article.getResourcePrimKey() %>"
+				userId="<%= article.getUserId() %>"
+				subject="<%= article.getTitle() %>"
+				redirect="<%= currentURL %>"
+			/>
 
-				<br />
-			</c:if>
+			<br />
+		</c:if>
 
-			<span id="<portlet:namespace />editArticle<%= i %>" >
-				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
-					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
-						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
-						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-						<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-						<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-						<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
-					</liferay-portlet:renderURL>
+		<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
+			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+				<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
+				<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+				<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+				<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+				<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+			</liferay-portlet:renderURL>
 
-					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
-				</c:if>
-			</span>
+			<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
+		</c:if>
 
 	<%
-		}
-		catch (NoSuchArticleException nsae) {
-		}
+	}
+	catch (NoSuchArticleException nsae) {
 	}
 	%>
 
@@ -212,10 +133,4 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 		<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
 	</c:if>
-</c:if>
-
-<c:if test="<%= (content.length > 1) && paginate %>">
-	<script type="text/javascript">
-		<portlet:namespace />updatePage();
-	</script>
 </c:if>

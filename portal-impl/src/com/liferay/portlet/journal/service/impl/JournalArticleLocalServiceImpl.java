@@ -622,15 +622,34 @@ public class JournalArticleLocalServiceImpl
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
+		return getArticleContent(
+			groupId, articleId, null, languageId, themeDisplay);
+	}
+
+	public String getArticleContent(
+			long groupId, String articleId, String templateId,
+			String languageId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleContent(
-			groupId, articleId, article.getVersion(), languageId, themeDisplay);
+			groupId, articleId, article.getVersion(), templateId, languageId,
+			themeDisplay);
 	}
 
 	public String getArticleContent(
 			long groupId, String articleId, double version, String languageId,
 			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getArticleContent(
+			groupId, articleId, version, null, languageId, themeDisplay);
+	}
+
+	public String getArticleContent(
+			long groupId, String articleId, double version, String templateId,
+			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticle article = JournalArticleUtil.findByG_A_V(
@@ -738,8 +757,33 @@ public class JournalArticleLocalServiceImpl
 			String langType = null;
 
 			if (article.isTemplateDriven()) {
-				JournalTemplate template = JournalTemplateUtil.findByG_T(
-					groupId, article.getTemplateId());
+
+				// Try with specified template first. If a template is not
+				// specified, use the default one. If the specified template
+				// does not exit, use the default one. If the default one does
+				// not exist, throw an exception.
+
+				String defaultTemplateId = article.getTemplateId();
+
+				if (Validator.isNull(templateId)) {
+					templateId = defaultTemplateId;
+				}
+
+				JournalTemplate template = null;
+
+				try {
+					template = JournalTemplateUtil.findByG_T(
+						groupId, templateId);
+				}
+				catch (NoSuchTemplateException nste) {
+					if (!defaultTemplateId.equals(templateId)) {
+						template = JournalTemplateUtil.findByG_T(
+							groupId, defaultTemplateId);
+					}
+					else {
+						throw nste;
+					}
+				}
 
 				script = template.getXsl();
 				langType = template.getLangType();

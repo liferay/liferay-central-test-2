@@ -1647,6 +1647,7 @@ other=其他
 out-of-stock=无库存
 outgoing-smtp-server=外出的SMTP服务器
 outside-us=外部美国
+override-default-template=代理佣金缺省模板
 owner=所有者
 page-display-order=页显示次序
 page-history=页历史

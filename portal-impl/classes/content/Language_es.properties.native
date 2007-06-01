@@ -1648,6 +1648,7 @@ other=Otro
 out-of-stock=Agotado
 outgoing-smtp-server=Servidor saliente de correo (SMTP)
 outside-us=Fuera de E.E.U.U.
+override-default-template=Plantilla Del Defecto De la Invalidación
 owner=Propietario
 page-display-order=Orden de disposición de las páginas
 page-history=Historial de la página

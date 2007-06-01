@@ -1646,6 +1646,7 @@ other=Άλλο
 out-of-stock=Εξαντλημένο
 outgoing-smtp-server=Εξερχόμενος SMTP Server
 outside-us=Έξω από τις ΗΠΑ
+override-default-template=Πρότυπο προεπιλογής συμπληρωματικής προμήθειας
 owner=Ιδιοκτήτης
 page-display-order=Σειρά Εμφάνισης Σελίδας
 page-history=Ιστορικό Σελίδας

@@ -82,18 +82,21 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			onComplete: function(rating) {
 				var url = "<%= url %>?className=<%= className %>&classPK=<%= classPK %>&score=" + rating;
 
-				AjaxUtil.request(url, {
-					onComplete: function(xmlHttpReq) {
-						var res = $J(xmlHttpReq.responseText);
+				AjaxUtil.request(
+					url,
+					{
+						onComplete: function(xmlHttpReq) {
+							var res = $J(xmlHttpReq.responseText);
 
-						document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
-						document.getElementById("<%= randomNamespace %>averageRating").onmousemove = function(event) {
-							ToolTip.show(event, this, res.averageScore.toFixed(1) + ' Stars');
-						};
+							document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
+							document.getElementById("<%= randomNamespace %>averageRating").onmousemove = function(event) {
+								ToolTip.show(event, this, res.averageScore.toFixed(1) + ' Stars');
+							};
 
-						<%= randomNamespace %>averageRatingObj.display(res.averageScore);
+							<%= randomNamespace %>averageRatingObj.display(res.averageScore);
+						}
 					}
-				});
+				);
 			}
 		});
 

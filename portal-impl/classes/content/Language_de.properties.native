@@ -1648,6 +1648,7 @@ other=Anders
 out-of-stock=Nicht im Lager
 outgoing-smtp-server=Ausgehender SMTP Server
 outside-us=Außerhalb der USA
+override-default-template=Übersteuerung Rückstellung Schablone
 owner=Besitzer
 page-display-order=Reihenfolger der Seitenanzeige
 page-history=Seiten Chronik

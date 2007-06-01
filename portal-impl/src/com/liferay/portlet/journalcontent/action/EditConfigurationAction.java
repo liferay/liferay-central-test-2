@@ -36,10 +36,6 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.TreeMap;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -75,37 +71,20 @@ public class EditConfigurationAction extends PortletAction {
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			long groupId = ParamUtil.getLong(req, "groupId");
+			String articleId = ParamUtil.getString(
+				req, "articleId").toUpperCase();
+			String templateId = ParamUtil.getString(
+				req, "templateId").toUpperCase();
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			Map articleIdsMap = new TreeMap();
+			String content = JournalContentUtil.getContent(
+				groupId, articleId, languageId, themeDisplay);
 
-			Enumeration enu = req.getParameterNames();
-
-			while (enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
-
-				if (name.startsWith("article")) {
-					String articleId = ParamUtil.getString(
-						req, name).toUpperCase();
-
-					String content = JournalContentUtil.getContent(
-						groupId, articleId, languageId, themeDisplay);
-
-					if (Validator.isNull(content)) {
-						throw new NoSuchArticleException();
-					}
-
-					// Use map to ensure it is sorted by user's choice
-
-					articleIdsMap.put(name, articleId);
-				}
+			if (Validator.isNull(content)) {
+				throw new NoSuchArticleException();
 			}
 
-			String[] articleIds =
-				(String[])articleIdsMap.values().toArray(new String[0]);
-
-			boolean paginate = ParamUtil.getBoolean(req, "paginate");
 			boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 			boolean enableComments = ParamUtil.getBoolean(
 				req, "enableComments");
@@ -118,14 +97,14 @@ public class EditConfigurationAction extends PortletAction {
 					req, portletResource, true, true);
 
 			prefs.setValue("group-id", String.valueOf(groupId));
-			prefs.setValues("article-id", articleIds);
-			prefs.setValue("paginate", String.valueOf(paginate));
+			prefs.setValue("article-id", articleId);
+			prefs.setValue("template-id", templateId);
 			prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 			prefs.setValue("enable-comments", String.valueOf(enableComments));
 
 			prefs.store();
 
-			updateContentSearch(req, portletResource, articleIds);
+			updateContentSearch(req, portletResource, articleId);
 
 			res.sendRedirect(ParamUtil.getString(req, "redirect"));
 		}
@@ -144,7 +123,7 @@ public class EditConfigurationAction extends PortletAction {
 	}
 
 	protected void updateContentSearch(
-			ActionRequest req, String portletResource, String[] articleIds)
+			ActionRequest req, String portletResource, String articleId)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -154,7 +133,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			portletResource, articleIds);
+			portletResource, articleId);
 	}
 
 }

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
@@ -49,6 +50,8 @@ public class JournalContentUtil {
 
 	public static String ARTICLE_SEPARATOR = "_ARTICLE_";
 
+	public static String TEMPLATE_SEPARATOR = "_TEMPLATE_";
+
 	public static String LANGUAGE_SEPARATOR = "_LANGUAGE_";
 
 	public static void clearCache() {
@@ -59,15 +62,19 @@ public class JournalContentUtil {
 		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
+		return getContent(groupId, articleId, null, languageId, themeDisplay);
+	}
+
+	public static String getContent(
+		long groupId, String articleId, String templateId, String languageId,
+		ThemeDisplay themeDisplay) {
+
 		String content = null;
 
-		if (articleId == null) {
-			articleId = StringPool.BLANK;
-		}
+		articleId = GetterUtil.getString(articleId).toUpperCase();
+		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		articleId = articleId.trim().toUpperCase();
-
-		String key = _encodeKey(groupId, articleId, languageId);
+		String key = _encodeKey(groupId, articleId, templateId, languageId);
 
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);
@@ -75,7 +82,7 @@ public class JournalContentUtil {
 		catch (NeedsRefreshException nre) {
 			try {
 				content = JournalArticleLocalServiceUtil.getArticleContent(
-					groupId, articleId, languageId, themeDisplay);
+					groupId, articleId, templateId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
 				_log.error(
@@ -98,7 +105,7 @@ public class JournalContentUtil {
 	}
 
 	private static String _encodeKey(
-		long groupId, String articleId, String languageId) {
+		long groupId, String articleId, String templateId, String languageId) {
 
 		StringMaker sm = new StringMaker();
 
@@ -107,6 +114,8 @@ public class JournalContentUtil {
 		sm.append(groupId);
 		sm.append(ARTICLE_SEPARATOR);
 		sm.append(articleId);
+		sm.append(TEMPLATE_SEPARATOR);
+		sm.append(templateId);
 		sm.append(LANGUAGE_SEPARATOR);
 		sm.append(languageId);
 

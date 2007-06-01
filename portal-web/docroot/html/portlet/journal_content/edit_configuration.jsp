@@ -27,11 +27,13 @@
 <%
 String cur = ParamUtil.getString(request, "cur");
 
+JournalArticle article = null;
+
 String type = JournalArticleImpl.TYPES[0];
 
 try {
-	if (articleIds.length > 0) {
-		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleIds[0]);
+	if (Validator.isNotNull(articleId)) {
+		article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId);
 
 		groupId = article.getGroupId();
 		type = article.getType();
@@ -47,95 +49,114 @@ type = ParamUtil.getString(request, "type", type);
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <script type="text/javascript">
-	var <portlet:namespace />articleIndex = 0;
-
-	function <portlet:namespace />addArticle(articleId, save) {
-		var table = document.getElementById("<portlet:namespace />articles");
-
-		if (<portlet:namespace />articleIndex == 0) {
-			var brRow = table.insertRow(table.rows.length);
-
-			var br = document.createElement("br");
-
-			brRow.insertCell(0).appendChild(br);
-		}
-
-		var newRow = table.insertRow(table.rows.length);
-
-		newRow.id = "<portlet:namespace />row" + <portlet:namespace />articleIndex;
-
-		var input = Liferay.Util.createInputElement("<portlet:namespace />article" + <portlet:namespace />articleIndex);
-
-		input.type = "hidden";
-		input.value = articleId;
-
-		var text = document.createElement("span");
-
-		text.innerHTML = articleId;
-
-		var del = document.createElement("a");
-
-		del.href = "javascript: <portlet:namespace />removeArticle('" + newRow.id + "');";
-		del.innerHTML = "[<liferay-ui:message key="remove" />]";
-
-		newRow.insertCell(0).appendChild(input);
-		newRow.insertCell(1).appendChild(text);
-		newRow.insertCell(2).appendChild(del);
-
-		newRow.cells[1].style.paddingLeft = "0px";
-		newRow.cells[1].style.paddingRight = "10px";
-
-		<portlet:namespace />articleIndex++;
-
-		if (save) {
-			<portlet:namespace />saveArticles();
-		}
+	function <portlet:namespace />save() {
+		AjaxUtil.submit(document.<portlet:namespace />fm1);
 	}
 
-	function <portlet:namespace />removeArticle(id) {
-		var delRow = document.getElementById(id);
-
-		document.getElementById("<portlet:namespace />articles").deleteRow(delRow.rowIndex);
-
-		<portlet:namespace />articleIndex--;
-
-		if (<portlet:namespace />articleIndex == 0) {
-			document.getElementById("<portlet:namespace />articles").deleteRow(1);
-		}
-
-		<portlet:namespace />saveArticles();
-	}
-
-	function <portlet:namespace />saveArticles() {
-		document.<portlet:namespace />pages.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-		AjaxUtil.submit(document.<portlet:namespace />pages);
+	function <portlet:namespace />selectArticle(articleId) {
+		document.<portlet:namespace />fm1.<portlet:namespace />articleId.value = articleId;
+		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
+		submitForm(document.<portlet:namespace />fm1);
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm1">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
+<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
-<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
-<tr>
-	<td colspan="3">
-		<liferay-ui:message key="displaying-article-pages" />:
-	</td>
-</tr>
-</table>
+<c:if test="<%= article != null %>">
+	<div class="portlet-msg-info"><liferay-ui:message key="displaying-content" />: <%= articleId %></div>
 
-<br />
+	<%
+	String structureId = article.getStructureId();
 
-<liferay-ui:input-checkbox param="paginate" defaultValue="<%= paginate %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <liferay-ui:message key="paginate-if-there-are-two-or-more-articles" /><br />
-<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <liferay-ui:message key="enable-ratings" /><br />
-<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <liferay-ui:message key="enable-comments" />
+	if (Validator.isNotNull(structureId)) {
+		List templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
+
+		if (templates.size() > 0) {
+			if (Validator.isNull(templateId)) {
+				templateId = article.getTemplateId();
+			}
+	%>
+
+			<table class="liferay-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="override-default-template" />
+				</td>
+				<td>
+					<liferay-ui:table-iterator
+						list="<%= templates %>"
+						listType="com.liferay.portlet.journal.model.JournalTemplate"
+						rowLength="3"
+						rowPadding="30"
+					>
+
+						<%
+						boolean templateChecked = false;
+
+						if (templateId.equals(tableIteratorObj.getTemplateId())) {
+							templateChecked = true;
+						}
+
+						if ((tableIteratorPos.intValue() == 0) && Validator.isNull(templateId)) {
+							templateChecked = true;
+						}
+						%>
+
+						<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />radioTemplateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" onClick="document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = this.value; <portlet:namespace />save();">
+
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
+						<%= tableIteratorObj.getName() %>
+						</a>
+
+						<c:if test="<%= tableIteratorObj.isSmallImage() %>">
+							<br />
+
+							<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() %>" vspace="0" />
+						</c:if>
+					</liferay-ui:table-iterator>
+				</td>
+			</tr>
+			</table>
+
+			<br />
+
+	<%
+		}
+	}
+	%>
+
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-ratings" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-comments" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+		</td>
+	</tr>
+	</table>
+</c:if>
 
 </form>
 
-<div class="separator"></div>
+<c:if test="<%= Validator.isNotNull(articleId) %>">
+	<div class="separator"></div>
+</c:if>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm2">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 
@@ -184,9 +205,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	sm.append("javascript: ");
 	sm.append(renderResponse.getNamespace());
-	sm.append("addArticle('");
+	sm.append("selectArticle('");
 	sm.append(curArticle.getArticleId());
-	sm.append("', true);");
+	sm.append("');");
 
 	String rowHREF = sm.toString();
 
@@ -223,22 +244,5 @@ for (int i = 0; i < results.size(); i++) {
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />searchArticleId.focus();
-
-	<%
-	for (int i = 0; i < articleIds.length; i++) {
-		try {
-			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleIds[i]);
-	%>
-
-			<portlet:namespace />addArticle("<%= article.getArticleId() %>", false);
-
-	<%
-		}
-		catch (NoSuchArticleException nsae) {
-		}
-	}
-	%>
-
-	<portlet:namespace />saveArticles();
+	document.<portlet:namespace />fm2.<portlet:namespace />searchArticleId.focus();
 </script>

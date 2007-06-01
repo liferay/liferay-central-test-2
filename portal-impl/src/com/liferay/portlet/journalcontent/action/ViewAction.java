@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -59,18 +60,23 @@ public class ViewAction extends PortletAction {
 
 		long groupId = GetterUtil.getLong(
 			prefs.getValue("group-id", StringPool.BLANK));
-		String[] articleIds = prefs.getValues("article-id", new String[0]);
+		String articleId = GetterUtil.getString(
+			prefs.getValue("article-id", StringPool.BLANK));
+		String templateId = GetterUtil.getString(
+			prefs.getValue("template-id", StringPool.BLANK));
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		String[] content = new String[articleIds.length];
+		String content = null;
 
-		for (int i = 0; i < articleIds.length; i++) {
-			content[i] = JournalContentUtil.getContent(
-				groupId, articleIds[i], languageId, themeDisplay);
+		if ((groupId > 0) && Validator.isNotNull(articleId)) {
+			content = JournalContentUtil.getContent(
+				groupId, articleId, templateId, languageId, themeDisplay);
 		}
 
-		req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, content);
+		if (Validator.isNotNull(content)) {
+			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, content);
+		}
 
 		return mapping.findForward("portlet.journal_content.view");
 	}

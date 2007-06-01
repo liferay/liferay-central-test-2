@@ -1647,6 +1647,7 @@ other=다른 사람
 out-of-stock=저장의에서
 outgoing-smtp-server=나가는SMTP서버
 outside-us=외부 미국
+override-default-template=커미션 과태 템플렛
 owner=소유자
 page-display-order=페이지 전시 명령
 page-history=페이지 전적
