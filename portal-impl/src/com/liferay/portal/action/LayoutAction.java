@@ -117,7 +117,7 @@ public class LayoutAction extends Action {
 				}
 
 				if (action.equals("1")) {
-					Portlet portlet = _processActionRequest(req, res);
+					Portlet portlet = processActionRequest(req, res);
 
 					ActionResponseImpl actionResponseImpl =
 						(ActionResponseImpl)req.getAttribute(
@@ -133,12 +133,12 @@ public class LayoutAction extends Action {
 					}
 
 					if (portlet.isActionURLRedirect()) {
-						_redirectActionURL(
+						redirectActionURL(
 							req, res, actionResponseImpl, portlet);
 					}
 				}
 				else if (action.equals("0")) {
-					_processRenderRequest(req, res);
+					processRenderRequest(req, res);
 				}
 
 				return mapping.findForward("portal.layout");
@@ -182,7 +182,7 @@ public class LayoutAction extends Action {
 		}
 		else {
 			try {
-				_forwardLayout(req);
+				forwardLayout(req);
 
 				return mapping.findForward(Constants.COMMON_FORWARD);
 			}
@@ -194,7 +194,7 @@ public class LayoutAction extends Action {
 		}
 	}
 
-	private void _forwardLayout(HttpServletRequest req) throws Exception {
+	protected void forwardLayout(HttpServletRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 		long plid = LayoutImpl.DEFAULT_PLID;
 		String layoutFriendlyURL = null;
@@ -227,7 +227,7 @@ public class LayoutAction extends Action {
 		req.setAttribute(WebKeys.FORWARD_URL, forwardURL);
 	}
 
-	private Portlet _processPortletRequest(
+	protected Portlet processPortletRequest(
 			HttpServletRequest req, HttpServletResponse res, boolean action)
 		throws Exception {
 
@@ -326,21 +326,21 @@ public class LayoutAction extends Action {
 		return portlet;
 	}
 
-	private Portlet _processActionRequest(
+	protected Portlet processActionRequest(
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		return _processPortletRequest(req, res, true);
+		return processPortletRequest(req, res, true);
 	}
 
-	private Portlet _processRenderRequest(
+	protected Portlet processRenderRequest(
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		return _processPortletRequest(req, res, false);
+		return processPortletRequest(req, res, false);
 	}
 
-	private void _redirectActionURL(
+	protected void redirectActionURL(
 			HttpServletRequest req, HttpServletResponse res,
 			ActionResponseImpl actionResponseImpl, Portlet portlet)
 		throws Exception {

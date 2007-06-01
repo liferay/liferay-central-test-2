@@ -255,6 +255,10 @@ public class LanguageUtil {
 			long companyId, Locale locale, String key, String defaultValue)
 		throws LanguageException {
 
+		if (key == null) {
+			return null;
+		}
+
 		String value = null;
 
 		try {
@@ -283,6 +287,10 @@ public class LanguageUtil {
 	public static String get(
 			PageContext pageContext, String key, String defaultValue)
 		throws LanguageException {
+
+		if (key == null) {
+			return null;
+		}
 
 		String value = null;
 
