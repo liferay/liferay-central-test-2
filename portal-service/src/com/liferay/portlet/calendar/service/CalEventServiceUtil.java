@@ -99,6 +99,14 @@ public class CalEventServiceUtil {
 		calEventService.deleteEvent(eventId);
 	}
 
+	public static java.io.File export(long eventId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
+
+		return calEventService.export(eventId);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		long eventId)
 		throws com.liferay.portal.PortalException, 

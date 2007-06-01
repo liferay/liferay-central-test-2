@@ -560,8 +560,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 					</select>
 
 					<select name="<portlet:namespace />monthlyDay1">
-						<option <%= (monthlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><liferay-ui:message key="weekday" /></option>
-						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><liferay-ui:message key="weekend-day" /></option>
 						<option <%= (monthlyDay1 == Calendar.SUNDAY) ? "selected" : "" %> value="<%= Calendar.SUNDAY %>"><%= days[0] %></option>
 						<option <%= (monthlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= days[1] %></option>
 						<option <%= (monthlyDay1 == Calendar.TUESDAY) ? "selected" : "" %> value="<%= Calendar.TUESDAY %>"><%= days[2] %></option>

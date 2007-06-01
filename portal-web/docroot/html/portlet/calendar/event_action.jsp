@@ -40,10 +40,12 @@ CalEvent event = (CalEvent)row.getObject();
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 </c:if>
 
-<liferay-ui:icon
-	image="export"
-	url='<%= themeDisplay.getPathMain() + "/calendar/export?eventId=" + event.getEventId() %>'
-/>
+<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.VIEW) %>">
+	<liferay-ui:icon
+		image="export"
+		url='<%= themeDisplay.getPathMain() + "/calendar/export?eventId=" + event.getEventId() %>'
+	/>
+</c:if>
 
 <c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL

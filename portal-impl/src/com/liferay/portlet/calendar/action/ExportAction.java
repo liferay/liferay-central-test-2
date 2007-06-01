@@ -23,7 +23,7 @@
 package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.util.Constants;
-import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -59,7 +59,7 @@ public class ExportAction extends Action {
 		try {
 			long eventId = ParamUtil.getLong(req, "eventId");
 
-			File file = CalEventLocalServiceUtil.export(eventId);
+			File file = CalEventServiceUtil.export(eventId);
 
 			is = new BufferedInputStream(new FileInputStream(file));
 

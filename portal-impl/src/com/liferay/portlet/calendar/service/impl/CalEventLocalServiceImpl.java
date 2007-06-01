@@ -894,18 +894,18 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (recurrenceType == Recurrence.DAILY) {
 			recur = new Recur(Recur.DAILY, -1);
 
-			if (interval >= 0) {
+			if (interval >= 1) {
 				recur.setInterval(interval);
 			}
-			else {
-				DayAndPosition[] byDay = recurrence.getByDay();
+			
+			DayAndPosition[] byDay = recurrence.getByDay();
 
-				for (int i = 0; i < byDay.length; i++) {
-					WeekDay weekDay = toWeekDay(byDay[i].getDayOfWeek());
+			for (int i = 0; i < byDay.length; i++) {
+				WeekDay weekDay = toWeekDay(byDay[i].getDayOfWeek());
 
-					recur.getDayList().add(weekDay);
-				}
+				recur.getDayList().add(weekDay);
 			}
+			
 		}
 		else if (recurrenceType == Recurrence.WEEKLY) {
 			recur = new Recur(Recur.WEEKLY, -1);
@@ -948,29 +948,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			recur = new Recur(Recur.YEARLY, -1);
 
 			recur.setInterval(interval);
-
-			int[] byMonthDay = recurrence.getByMonthDay();
-
-			Integer month = new Integer(recurrence.getByMonth()[0]);
-
-			recur.getMonthList().add(month);
-
-			if (byMonthDay != null) {
-				Integer monthDay = new Integer(byMonthDay[0]);
-
-				recur.getMonthDayList().add(monthDay);
-			}
-			else {
-				DayAndPosition[] byDay = recurrence.getByDay();
-
-				WeekDay weekDay = toWeekDay(byDay[0].getDayOfWeek());
-
-				recur.getDayList().add(weekDay);
-
-				Integer position = new Integer(byDay[0].getDayPosition());
-
-				recur.getSetPosList().add(position);
-			}
 		}
 
 		Calendar until = recurrence.getUntil();

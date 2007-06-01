@@ -34,6 +34,8 @@ import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 
+import java.io.File;
+
 /**
  * <a href="CalEventServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -98,6 +100,15 @@ public class CalEventServiceImpl
 			getPermissionChecker(), eventId, ActionKeys.DELETE);
 
 		CalEventLocalServiceUtil.deleteEvent(eventId);
+	}
+	
+	public File export(long eventId) 
+		throws PortalException, SystemException {
+		
+		CalEventPermission.check(
+				getPermissionChecker(), eventId, ActionKeys.VIEW);
+		
+		return CalEventLocalServiceUtil.export(eventId);
 	}
 
 	public CalEvent getEvent(long eventId)
