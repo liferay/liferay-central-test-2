@@ -255,9 +255,9 @@ implementation is only supported by DB2, Oracle, PostgreSQL, and SAP DB.
 
 The convert-null value specifies whether or not the column value is
 automatically converted to a non null value if it is null. This only applies if
-the type value is String. The default value is true. This is particularly
-useful if your entity is referencing a read-only table or a database view so
-that hibernate does not try to issue unnecessary updates.
+the type value is String. This is particularly useful if your entity is
+referencing a read only table or a database view so that Hibernate does not try
+to issue unnecessary updates. The default value is true.
 -->
 <!ATTLIST column
 	name CDATA #REQUIRED
