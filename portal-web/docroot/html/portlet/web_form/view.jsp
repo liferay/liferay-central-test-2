@@ -27,6 +27,7 @@
 <%
 String title = prefs.getValue("title", StringPool.BLANK);
 String description = prefs.getValue("description", StringPool.BLANK);
+boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("require-captcha", StringPool.BLANK));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" method="post">
@@ -41,6 +42,7 @@ String description = prefs.getValue("description", StringPool.BLANK);
 
 <liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
 
+<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error key="allFieldsRequired" message="please-complete-all-fields" />
 <liferay-ui:error key="emailNotSent" message="the-email-could-not-be-sent" />
 
@@ -93,6 +95,14 @@ for (int i = 1; i <= 10; i++) {
 <%
 }
 %>
+
+<c:if test="<%= requireCaptcha %>">
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+		<portlet:param name="struts_action" value="/web_form/captcha" />
+	</portlet:actionURL>
+
+	<liferay-ui:captcha url="<%= captchaURL %>" />
+</c:if>
 
 <input type="submit" value="<liferay-ui:message key="send" />" />
 

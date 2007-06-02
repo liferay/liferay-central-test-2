@@ -1485,6 +1485,8 @@
 
 		<!-- Web Form -->
 
+		<action path="/web_form/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
+
 		<action path="/web_form/edit_configuration" type="com.liferay.portlet.webform.action.EditConfigurationAction">
 			<forward name="portlet.web_form.edit_configuration" path="portlet.web_form.edit_configuration" />
 		</action>

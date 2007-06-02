@@ -29,6 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String title = PrefsParamUtil.getString(prefs, request, "title");
 String description = PrefsParamUtil.getString(prefs, request, "description");
+boolean requireCaptcha = PrefsParamUtil.getBoolean(prefs, request, "require-captcha");
 String subject = PrefsParamUtil.getString(prefs, request, "subject");
 String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 %>
@@ -71,6 +72,14 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 		</td>
 		<td>
 			<textarea class="liferay-textarea" name="<portlet:namespace/>description" wrap="soft"><%= description %></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="require-captcha" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="requireCaptcha" defaultValue="<%= requireCaptcha %>" />
 		</td>
 	</tr>
 	</table>
