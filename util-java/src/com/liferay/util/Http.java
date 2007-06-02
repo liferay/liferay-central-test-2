@@ -65,9 +65,6 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
-import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -550,7 +547,6 @@ public class Http {
 
 				if ((parts != null) && (parts.size() > 0)) {
 					List nvpList = new ArrayList();
-					List stringPartsList = new ArrayList();
 
 					Iterator itr = parts.entrySet().iterator();
 
@@ -562,24 +558,15 @@ public class Http {
 
 						if (value != null) {
 							nvpList.add(new NameValuePair(key, value));
-							stringPartsList.add(new StringPart(key, value));
 						}
 					}
 
 					NameValuePair[] nvpArray = (NameValuePair[])nvpList.toArray(
 						new NameValuePair[nvpList.size()]);
-					StringPart[] stringPartsArray =
-						(StringPart[])stringPartsList.toArray(
-							new StringPart[0]);
-
-					method.setQueryString(nvpArray);
 
 					PostMethod postMethod = (PostMethod)method;
 
-					RequestEntity requestEntity = new MultipartRequestEntity(
-						stringPartsArray, method.getParams());
-
-					postMethod.setRequestEntity(requestEntity);
+					postMethod.setRequestBody(nvpArray);
 				}
 			}
 			else {
