@@ -62,6 +62,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		String title = ParamUtil.getString(req, "title");
 		String description = ParamUtil.getString(req, "description");
+		boolean requireCaptcha = ParamUtil.getBoolean(req, "requireCaptcha");
 		String subject = ParamUtil.getString(req, "subject");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 
@@ -91,6 +92,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		prefs.setValue("title", title);
 		prefs.setValue("description", description);
+		prefs.setValue("require-captcha", String.valueOf(requireCaptcha));
 		prefs.setValue("subject", subject);
 		prefs.setValue("emailAddress", emailAddress);
 
