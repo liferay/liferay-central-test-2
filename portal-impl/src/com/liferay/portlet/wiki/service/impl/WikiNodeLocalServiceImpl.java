@@ -289,6 +289,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			long companyId, long groupId, long[] nodeIds, String keywords)
 		throws SystemException {
 
+		Searcher searcher = null;
+
 		try {
 			HitsImpl hits = new HitsImpl();
 
@@ -328,19 +330,14 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
 			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
+			searcher = LuceneUtil.getSearcher(companyId);
 
 			hits.recordHits(searcher.search(fullQuery), searcher);
 
 			return hits;
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (ParseException pe) {
-			_log.error("Parsing keywords " + keywords, pe);
-
-			return new HitsImpl();
+		catch (Exception e) {
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
 	}
 

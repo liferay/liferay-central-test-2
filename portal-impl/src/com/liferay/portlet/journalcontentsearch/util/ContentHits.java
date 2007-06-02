@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journalcontentsearch.util;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
@@ -45,7 +44,7 @@ public class ContentHits extends HitsImpl {
 	}
 
 	public void recordHits(Hits hits, long groupId, boolean privateLayout)
-		throws SystemException {
+		throws Exception  {
 
 		setSearcher(((HitsImpl)hits).getSearcher());
 

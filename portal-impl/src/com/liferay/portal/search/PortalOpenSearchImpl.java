@@ -73,52 +73,41 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws SearchException {
 
-		try {
-			return _search(req, keywords, startPage, itemsPerPage);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	private String _search(HttpServletRequest req, String keywords,
-			int startPage, int itemsPerPage) throws Exception {
-
 		Hits hits = null;
 
 		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			ThemeDisplay themeDisplay = (ThemeDisplay) req
-					.getAttribute(WebKeys.THEME_DISPLAY);
+			hits = CompanyLocalServiceUtil.search(
+				themeDisplay.getCompanyId(), keywords);
 
-			hits = CompanyLocalServiceUtil.search(themeDisplay.getCompanyId(),
-					keywords);
+			Object[] values = addSearchResults(
+				keywords, startPage, itemsPerPage, hits,
+				"Liferay Portal Search: " + keywords, SEARCH_PATH,
+				themeDisplay);
 
-			Object[] values = addSearchResults(keywords, startPage,
-					itemsPerPage, hits, "Liferay Portal Search: " + keywords,
-					SEARCH_PATH, themeDisplay);
-
-			Hits results = (Hits) values[0];
-			org.dom4j.Document doc = (org.dom4j.Document) values[1];
-			Element root = (Element) values[2];
+			Hits results = (Hits)values[0];
+			org.dom4j.Document doc = (org.dom4j.Document)values[1];
+			Element root = (Element)values[2];
 
 			for (int i = 0; i < results.getLength(); i++) {
 				Document result = results.doc(i);
 
-				String portletId = (String) result.get(LuceneFields.PORTLET_ID);
+				String portletId = (String)result.get(LuceneFields.PORTLET_ID);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						themeDisplay.getCompanyId(), portletId);
+					themeDisplay.getCompanyId(), portletId);
 
 				if (portlet == null) {
 					continue;
 				}
 
-				String portletTitle = PortalUtil.getPortletTitle(portletId,
-						themeDisplay.getUser());
+				String portletTitle = PortalUtil.getPortletTitle(
+					portletId, themeDisplay.getUser());
 
-				long groupId = GetterUtil.getLong((String) result
-						.get(LuceneFields.GROUP_ID));
+				long groupId = GetterUtil.getLong(
+					(String)result.get(LuceneFields.GROUP_ID));
 
 				String title = StringPool.BLANK;
 
@@ -126,17 +115,17 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String url = portletURL.toString();
 
-				Date modifedDate = DateTools.stringToDate((String) result
-						.get(LuceneFields.MODIFIED));
+				Date modifedDate = DateTools.stringToDate(
+					(String)result.get(LuceneFields.MODIFIED));
 
 				String content = StringPool.BLANK;
 
 				if (Validator.isNotNull(portlet.getIndexerClass())) {
-					Indexer indexer = (Indexer) InstancePool.get(portlet
-							.getIndexerClass());
+					Indexer indexer = (Indexer)InstancePool.get(
+						portlet.getIndexerClass());
 
 					DocumentSummary docSummary = indexer.getDocumentSummary(
-							result, portletURL);
+						result, portletURL);
 
 					title = docSummary.getTitle();
 					url = portletURL.toString();
@@ -162,9 +151,9 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				double score = hits.score(i);
 
-				addSearchResult(root, portletTitle + " &raquo; " + title, url,
-						modifedDate, content, score);
-
+				addSearchResult(
+					root, portletTitle + " &raquo; " + title, url, modifedDate,
+					content, score);
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -175,14 +164,13 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 		}
 		catch (Exception e) {
-			throw e;
+			throw new SearchException(e);
 		}
 		finally {
 			if (hits != null) {
 				hits.closeSearcher();
 			}
 		}
-
 	}
 
 	private static Log _log = LogFactory.getLog(PortalOpenSearchImpl.class);

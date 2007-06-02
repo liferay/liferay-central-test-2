@@ -44,8 +44,7 @@ public class ThreadHits extends HitsImpl {
 		super();
 	}
 
-	public void recordHits(Hits hits) {
-
+	public void recordHits(Hits hits) throws Exception {
 		setSearcher(((HitsImpl)hits).getSearcher());
 
 		Set threadIds = CollectionFactory.getHashSet();

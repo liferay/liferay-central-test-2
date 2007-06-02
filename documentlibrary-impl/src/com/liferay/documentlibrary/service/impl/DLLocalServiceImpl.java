@@ -56,8 +56,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.version.Version;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -226,6 +227,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long[] repositoryIds, String keywords)
 		throws SystemException {
 
+		Searcher searcher = null;
+
 		try {
 			HitsImpl hits = new HitsImpl();
 
@@ -265,17 +268,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
 			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
+			searcher = LuceneUtil.getSearcher(companyId);
 
 			hits.recordHits(searcher.search(fullQuery), searcher);
 
 			return hits;
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (ParseException pe) {
-			throw new SystemException(pe);
+		catch (Exception e) {
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
 	}
 
@@ -356,5 +356,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(DLLocalServiceImpl.class);
 
 }

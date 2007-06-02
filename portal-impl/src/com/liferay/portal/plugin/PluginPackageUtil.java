@@ -66,7 +66,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -420,6 +419,8 @@ public class PluginPackageUtil {
 
 		_checkRepositories(repositoryURL);
 
+		Searcher searcher = null;
+
 		try {
 			HitsImpl hits = new HitsImpl();
 
@@ -499,19 +500,14 @@ public class PluginPackageUtil {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			Searcher searcher = LuceneUtil.getSearcher(CompanyImpl.SYSTEM);
+			searcher = LuceneUtil.getSearcher(CompanyImpl.SYSTEM);
 
 			hits.recordHits(searcher.search(fullQuery), searcher);
 
 			return hits;
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (ParseException pe) {
-			_log.error("Parsing keywords " + keywords, pe);
-
-			return new HitsImpl();
+		catch (Exception e) {
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
 	}
 

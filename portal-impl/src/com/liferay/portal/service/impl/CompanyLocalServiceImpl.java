@@ -81,7 +81,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -403,6 +402,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String keywords)
 		throws SystemException {
 
+		Searcher searcher = null;
+
 		try {
 			HitsImpl hits = new HitsImpl();
 
@@ -440,26 +441,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
 			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
+			searcher = LuceneUtil.getSearcher(companyId);
 
 			hits.recordHits(searcher.search(fullQuery), searcher);
 
 			return hits;
 		}
-		catch (BooleanQuery.TooManyClauses tmc) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Keywords " + keywords);
-			}
-
-			throw new SystemException(tmc);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (ParseException pe) {
-			_log.error("Parsing keywords " + keywords, pe);
-
-			return new HitsImpl();
+		catch (Exception e) {
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
 	}
 

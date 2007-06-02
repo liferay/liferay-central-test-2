@@ -108,7 +108,7 @@ public class HitsImpl implements Hits {
 				_searcher = null;
 			}
 		}
-		catch (IOException ioe) {
+		catch (Exception e) {
 		}
 	}
 

@@ -30,6 +30,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -98,7 +99,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -1009,6 +1009,8 @@ public class JournalArticleLocalServiceImpl
 			String content, String type, String sortField)
 		throws SystemException {
 
+		Searcher searcher = null;
+
 		try {
 			HitsImpl hits = new HitsImpl();
 
@@ -1041,7 +1043,7 @@ public class JournalArticleLocalServiceImpl
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
 			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
-			Searcher searcher = LuceneUtil.getSearcher(companyId);
+			searcher = LuceneUtil.getSearcher(companyId);
 
 			Sort sort = new Sort(new SortField(sortField, true));
 
@@ -1049,13 +1051,18 @@ public class JournalArticleLocalServiceImpl
 
 			return hits;
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (ParseException pe) {
-			_log.error("Parsing keywords", pe);
+		catch (Exception e) {
+			StringMaker sm = new StringMaker();
 
-			return new HitsImpl();
+			sm.append(title);
+			sm.append(StringPool.SPACE);
+			sm.append(content);
+			sm.append(StringPool.SPACE);
+			sm.append(description);
+
+			String keywords = sm.toString();
+
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
 	}
 

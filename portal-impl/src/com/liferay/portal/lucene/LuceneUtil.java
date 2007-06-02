@@ -22,6 +22,8 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -29,6 +31,7 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
+import com.liferay.util.lucene.HitsImpl;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
@@ -54,6 +57,7 @@ import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -167,6 +171,34 @@ public class LuceneUtil {
 		TermQuery termQuery = new TermQuery(term);
 
 		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
+	}
+
+	public static void closeSearcher(Searcher searcher) {
+		try {
+			if (searcher != null){
+				searcher.close();
+			}
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public static Hits closeSearcher(
+			Searcher searcher, String keywords, Exception e)
+		throws SystemException {
+
+		closeSearcher(searcher);
+
+		if (e instanceof BooleanQuery.TooManyClauses ||
+			e instanceof ParseException) {
+
+			_log.error("Parsing keywords " + keywords, e);
+
+			return new HitsImpl();
+		}
+		else {
+			throw new SystemException(e);
+		}
 	}
 
 	public static void delete(long companyId) {
