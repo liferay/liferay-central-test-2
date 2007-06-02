@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.text.NumberFormat;
 
@@ -64,6 +65,10 @@ public class TextFormatter {
 
 	public static final int J = 9;
 
+	// formatId --> format-id
+
+	public static final int K = 10;
+
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
 			return null;
@@ -100,6 +105,9 @@ public class TextFormatter {
 		}
 		else if (style == J) {
 			return _formatJ(s);
+		}
+		else if (style == K) {
+			return _formatK(s);
 		}
 		else {
 			return s;
@@ -154,19 +162,22 @@ public class TextFormatter {
 	}
 
 	private static String _formatA(String s) {
-		return StringUtil.replace(s.toUpperCase(), ' ', '_');
+		return StringUtil.replace(
+			s.toUpperCase(), StringPool.SPACE, StringPool.UNDERLINE);
 	}
 
 	private static String _formatB(String s) {
-		return StringUtil.replace(s.toLowerCase(), ' ', "");
+		return StringUtil.replace(
+			s.toLowerCase(), StringPool.SPACE, StringPool.BLANK);
 	}
 
 	private static String _formatC(String s) {
-		return StringUtil.replace(s.toLowerCase(), ' ', '_');
+		return StringUtil.replace(
+			s.toLowerCase(), StringPool.SPACE, StringPool.UNDERLINE);
 	}
 
 	private static String _formatD(String s) {
-		return StringUtil.replace(s, ' ', "");
+		return StringUtil.replace(s, StringPool.SPACE, StringPool.BLANK);
 	}
 
 	private static String _formatE(String s) {
@@ -174,7 +185,7 @@ public class TextFormatter {
 	}
 
 	private static String _formatF(String s) {
-		s = StringUtil.replace(s, ' ', "");
+		s = StringUtil.replace(s, StringPool.SPACE, StringPool.BLANK);
 		s = Character.toLowerCase(s.charAt(0)) + s.substring(1, s.length());
 
 		return s;
@@ -191,7 +202,8 @@ public class TextFormatter {
 
 		for (int i = 0; i < c.length; i++) {
 			if (Character.isUpperCase(c[i])) {
-				sm.append(" ").append(Character.toLowerCase(c[i]));
+				sm.append(StringPool.SPACE);
+				sm.append(Character.toLowerCase(c[i]));
 			}
 			else {
 				sm.append(c[i]);
@@ -236,8 +248,8 @@ public class TextFormatter {
 	private static String _formatJ(String s) {
 		StringMaker sm = new StringMaker();
 
-		s = StringUtil.replace(s, "-", " ");
-		s = StringUtil.replace(s, "_", " ");
+		s = StringUtil.replace(s, StringPool.DASH, StringPool.SPACE);
+		s = StringUtil.replace(s, StringPool.UNDERLINE, StringPool.SPACE);
 
 		char[] c = s.toCharArray();
 
@@ -251,6 +263,13 @@ public class TextFormatter {
 		}
 
 		return sm.toString();
+	}
+
+	private static String _formatK(String s) {
+		s = _formatH(s);
+		s = StringUtil.replace(s, StringPool.SPACE, StringPool.DASH);
+
+		return s;
 	}
 
 }

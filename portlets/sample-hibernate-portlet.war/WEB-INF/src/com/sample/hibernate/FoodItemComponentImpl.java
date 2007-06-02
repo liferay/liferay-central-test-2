@@ -24,12 +24,17 @@ package com.sample.hibernate;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.TextFormatter;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.DocUtil;
 
 import com.sample.hibernate.model.FoodItem;
 import com.sample.hibernate.util.FoodItemUtil;
+
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -88,23 +93,71 @@ public class FoodItemComponentImpl {
 			foodItems = FoodItemUtil.getFoodItems();
 		}
 
+		return getXml(foodItems, FoodItem.class.getName());
+	}
+
+	public String getXml(List items, String className) {
 		Document doc = DocumentHelper.createDocument();
 
 		Element root = doc.addElement("result");
 
-		Iterator itr = foodItems.iterator();
+		String itemName = getClassNameWithoutPackage(className);
+
+		Iterator itr = items.iterator();
 
 		while (itr.hasNext()) {
-			FoodItem foodItem = (FoodItem)itr.next();
+			Object item = itr.next();
 
-			Element el = root.addElement("food-item");
+			Element el = root.addElement(itemName);
 
-			DocUtil.add(el, "food-item-id", foodItem.getFoodItemId());
-			DocUtil.add(el, "name", foodItem.getName());
-			DocUtil.add(el, "points", foodItem.getPoints());
+			addGetters(item, el);
 		}
 
 		return doc.asXML();
+	}
+
+	protected void addGetters(Object obj, Element el) {
+		Method[] methods = obj.getClass().getMethods();
+
+		for (int i = 0; i < methods.length; i++) {
+			Method method = methods[i];
+
+			if (method.getName().startsWith("get") &&
+				!method.getName().equals("getClass")) {
+
+				String memberName = StringUtil.replace(
+					method.getName(), "get", StringPool.BLANK);
+
+				memberName = TextFormatter.format(memberName, TextFormatter.I);
+				memberName = TextFormatter.format(memberName, TextFormatter.K);
+
+				try {
+					Object returnValue = method.invoke(obj, new Object[] {});
+
+					DocUtil.add(el, memberName, returnValue.toString());
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e.getMessage());
+					}
+				}
+			}
+		}
+	}
+
+	protected String getClassNameWithoutPackage(String className) {
+		String[] classNameArray = StringUtil.split(
+			className, StringPool.PERIOD);
+
+		String classNameWitoutPackage =
+			classNameArray[classNameArray.length - 1];
+
+		classNameWitoutPackage = TextFormatter.format(
+			classNameWitoutPackage, TextFormatter.I);
+		classNameWitoutPackage = TextFormatter.format(
+			classNameWitoutPackage, TextFormatter.K);
+
+		return classNameWitoutPackage;
 	}
 
 	private static Log _log =
