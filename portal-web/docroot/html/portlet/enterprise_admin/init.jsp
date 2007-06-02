@@ -24,9 +24,12 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.AccountNameException" %>
 <%@ page import="com.liferay.portal.AddressCityException" %>
 <%@ page import="com.liferay.portal.AddressStreetException" %>
 <%@ page import="com.liferay.portal.AddressZipException" %>
+<%@ page import="com.liferay.portal.CompanyMxException" %>
+<%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.ContactFirstNameException" %>
 <%@ page import="com.liferay.portal.ContactLastNameException" %>
 <%@ page import="com.liferay.portal.DuplicateOrganizationException" %>
@@ -62,6 +65,7 @@
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
 <%@ page import="com.liferay.portal.UserSmsException" %>
 <%@ page import="com.liferay.portal.WebsiteURLException" %>
+<%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
@@ -72,7 +76,10 @@
 <%@ page import="com.liferay.portal.service.permission.RolePermission" %>
 <%@ page import="com.liferay.portal.service.permission.UserGroupPermission" %>
 <%@ page import="com.liferay.portal.service.permission.UserPermission" %>
+<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
+<%@ page import="com.liferay.portal.util.LiveUsers" %>
 <%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
+<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupPermissionChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupRoleChecker" %>
@@ -102,4 +109,12 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
+
+if (!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
+	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring")) {
+		tabs1 = "users";
+	}
+}
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

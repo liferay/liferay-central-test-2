@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.admin.action;
+package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -57,12 +57,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditUsersAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSettingsAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditUsersAction extends PortletAction {
+public class EditSettingsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -77,7 +77,7 @@ public class EditUsersAction extends PortletAction {
 
 			SessionErrors.add(req, PrincipalException.class.getName());
 
-			setForward(req, "portlet.admin.error");
+			setForward(req, "portlet.enterprise_admin.error");
 
 			return;
 		}
@@ -119,7 +119,7 @@ public class EditUsersAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		else {
-			setForward(req, "portlet.admin.view");
+			setForward(req, "portlet.enterprise_admin.view");
 		}
 	}
 
@@ -135,9 +135,9 @@ public class EditUsersAction extends PortletAction {
 		String validateUrl = ParamUtil.getString(req, "validateUrl");
 
 		prefs.setValue(
-			PropsUtil.CAS_AUTH_ENABLED, Boolean.toString(enabled));
+			PropsUtil.CAS_AUTH_ENABLED, String.valueOf(enabled));
 		prefs.setValue(
-			PropsUtil.CAS_IMPORT_FROM_LDAP, Boolean.toString(importFromLdap));
+			PropsUtil.CAS_IMPORT_FROM_LDAP, String.valueOf(importFromLdap));
 		prefs.setValue(PropsUtil.CAS_LOGIN_URL, loginUrl);
 		prefs.setValue(PropsUtil.CAS_LOGOUT_URL, logoutUrl);
 		prefs.setValue(PropsUtil.CAS_SERVICE_URL, serviceUrl);
@@ -285,11 +285,10 @@ public class EditUsersAction extends PortletAction {
 			return;
 		}
 
-		prefs.setValue(PropsUtil.LDAP_AUTH_ENABLED, Boolean.toString(enabled));
+		prefs.setValue(PropsUtil.LDAP_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsUtil.LDAP_AUTH_REQUIRED, String.valueOf(required));
 		prefs.setValue(
-			PropsUtil.LDAP_AUTH_REQUIRED, Boolean.toString(required));
-		prefs.setValue(
-			PropsUtil.NTLM_AUTH_ENABLED, Boolean.toString(ntlmEnabled));
+			PropsUtil.NTLM_AUTH_ENABLED, String.valueOf(ntlmEnabled));
 		prefs.setValue(PropsUtil.LDAP_BASE_PROVIDER_URL, baseProviderURL);
 		prefs.setValue(PropsUtil.LDAP_BASE_DN, baseDN);
 		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
@@ -317,8 +316,7 @@ public class EditUsersAction extends PortletAction {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 
-		prefs.setValue(
-			PropsUtil.OPEN_ID_AUTH_ENABLED, Boolean.toString(enabled));
+		prefs.setValue(PropsUtil.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
 
 		prefs.store();
 	}
@@ -332,7 +330,8 @@ public class EditUsersAction extends PortletAction {
 		String reservedEmailAddresses = ParamUtil.getString(
 			req, "reservedEmailAddresses");
 
-		prefs.setValue(PropsUtil.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
+		prefs.setValue(
+			PropsUtil.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
 		prefs.setValue(
 			PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
 	}
@@ -350,6 +349,6 @@ public class EditUsersAction extends PortletAction {
 			strangers, company.isCommunityLogo());
 	}
 
-	private static Log _log = LogFactory.getLog(EditUsersAction.class);
+	private static Log _log = LogFactory.getLog(EditSettingsAction.class);
 
 }

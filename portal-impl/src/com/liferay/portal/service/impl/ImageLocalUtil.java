@@ -263,7 +263,6 @@ public class ImageLocalUtil {
 				try {
 					bytes = FileUtil.getBytes(is);
 				}
-
 				finally {
 					is.close();
 				}
@@ -311,7 +310,7 @@ public class ImageLocalUtil {
 			image.setType(type);
 			image.setHeight(height);
 			image.setWidth(width);
-			image.setWidth(size);
+			image.setSize(size);
 
 			return image;
 		}

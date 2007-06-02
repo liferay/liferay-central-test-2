@@ -97,10 +97,6 @@
 
 	<definition name="portlet.admin" extends="portlet" />
 
-	<definition name="portlet.admin.edit_enterprise_logo" extends="portlet.admin">
-		<put name="portlet_content" value="/portlet/admin/edit_enterprise_logo.jsp" />
-	</definition>
-
 	<definition name="portlet.admin.edit_instance" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/edit_instance.jsp" />
 	</definition>
@@ -111,10 +107,6 @@
 
 	<definition name="portlet.admin.edit_portlet" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/edit_portlet.jsp" />
-	</definition>
-
-	<definition name="portlet.admin.edit_session" extends="portlet.admin">
-		<put name="portlet_content" value="/portlet/admin/edit_session.jsp" />
 	</definition>
 
 	<definition name="portlet.admin.error" extends="portlet.admin">
@@ -391,6 +383,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_address.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_company_logo" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_company_logo.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_email_address" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_email_address.jsp" />
 	</definition>
@@ -429,6 +425,10 @@
 
 	<definition name="portlet.enterprise_admin.edit_role_permissions" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_role_permissions.jsp" />
+	</definition>
+
+	<definition name="portlet.enterprise_admin.edit_session" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_session.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_user" extends="portlet.enterprise_admin">

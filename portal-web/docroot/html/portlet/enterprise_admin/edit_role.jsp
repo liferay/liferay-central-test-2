@@ -34,7 +34,6 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="roles" />
-	<liferay-util:param name="backURL" value="<%= redirect %>" />
 </liferay-util:include>
 
 <c:choose>

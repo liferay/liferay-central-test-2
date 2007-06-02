@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.admin.action;
+package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
@@ -71,7 +71,7 @@ public class EditCompanyAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.admin.error");
+				setForward(req, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof AccountNameException ||
 					 e instanceof CompanyMxException ||
@@ -80,7 +80,7 @@ public class EditCompanyAction extends PortletAction {
 
 				SessionErrors.add(req, e.getClass().getName(), e);
 
-				setForward(req, "portlet.admin.view");
+				setForward(req, "portlet.enterprise_admin.view");
 			}
 			else {
 				throw e;

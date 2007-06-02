@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -34,11 +34,15 @@ Map liveUsers = LiveUsers.getSessionUsers();
 UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />sessionId" type="hidden" value="<%= sessionId %>" />
 
-<liferay-ui:tabs names="session" />
+<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="monitoring" />
+</liferay-util:include>
+
+<liferay-ui:tabs names="live-session" />
 
 <c:choose>
 	<c:when test="<%= userTracker == null %>">

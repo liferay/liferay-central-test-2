@@ -129,7 +129,7 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEnterprise('<%= Constants.UPDATE %>');" />
+<input type="submit" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany('<%= Constants.UPDATE %>');" />
 
 <br /><br />
 
@@ -176,7 +176,7 @@ User user2 = company.getDefaultUser();
 	<td align="center" valign="top">
 		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getLogoId() %>" /><br />
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><liferay-ui:message key="change" /></a><br />
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><liferay-ui:message key="change" /></a><br />
 	</td>
 </tr>
 </table>
@@ -196,7 +196,7 @@ User user2 = company.getDefaultUser();
 
 <br />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEnterprise('display');" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany('display');" />
 
 <br /><br />
 

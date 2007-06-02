@@ -25,6 +25,9 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
+
 boolean rootOrganization = tabs1.equals("organizations");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -33,6 +36,8 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/enterprise_admin/view");
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("tabs3", tabs3);
 %>
 
 <script type="text/javascript">
@@ -72,10 +77,70 @@ portletURL.setParameter("tabs1", tabs1);
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
 	}
+
+	function <portlet:namespace />saveCompany(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /></portlet:renderURL>";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />saveSettings(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /></portlet:renderURL>";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_settings" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />updateDefaultLdap() {
+		var baseProviderURL = "";
+		var baseDN = "";
+		var principal = "";
+		var credentials = "";
+		var searchFilter = "";
+		var userMappings = "";
+
+		var ldapType = document.<portlet:namespace />fm.<portlet:namespace />defaultLdap.selectedIndex;
+
+		if (ldapType == 1) {
+			baseProviderURL = "ldap://localhost:10389";
+			baseDN = "dc=example,dc=com";
+			principal = "uid=admin,ou=system";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+		}
+		else if (ldapType == 2) {
+			baseProviderURL = "ldap://localhost:389";
+			baseDN = "dc=example,dc=com";
+			principal = "admin";
+			credentials = "secret";
+			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
+			userMappings = "fullName=cn\nscreenName=sAMAccountName\nemailAddress=userprincipalname";
+		}
+		else if (ldapType == 3) {
+			url = "ldap://localhost:389";
+			baseDN = "";
+			principal = "cn=admin,ou=test";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+		}
+
+		if ((ldapType >= 1) && (ldapType <= 3)) {
+			document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
+			document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
+			document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
+			document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
+			document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
+			document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
+		}
+	}
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
@@ -779,12 +844,681 @@ portletURL.setParameter("tabs1", tabs1);
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
+	<c:when test='<%= tabs1.equals("settings") %>'>
+		<liferay-ui:tabs
+			names="general,authentication,default-user-associations,reserved-screen-names,mail-host-names,email-notifications"
+			param="tabs2"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<c:choose>
+			<c:when test='<%= tabs2.equals("authentication") %>'>
+				<liferay-ui:tabs
+					names="general,ldap,cas,open-id"
+					param="tabs3"
+					url="<%= portletURL.toString() %>"
+				/>
+
+				<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
+
+				<c:choose>
+					<c:when test='<%= tabs3.equals("ldap") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= ParamUtil.getBoolean(request, "enabled", PortalLDAPUtil.isAuthEnabled(company.getCompanyId())) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="required" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_AUTH_REQUIRED)) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="ntlm-enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="ntlmEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "ntlmEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED)) %>' />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<liferay-ui:message key="the-ldap-url-format-is" />
+
+						<br /><br />
+
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="base-provider-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />baseProviderURL" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="base-dn" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />baseDN" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="principal" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />principal" type="text" value='<%= ParamUtil.getString(request, "principal", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_PRINCIPAL)) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="credentials" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />credentials" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<liferay-ui:message key="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
+
+						<br /><br />
+
+						<textarea class="liferay-textarea" name="<portlet:namespace />searchFilter"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %></textarea>
+
+						<br /><br />
+
+						<liferay-ui:message key="enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server" />
+
+						<br /><br />
+
+						<select name="<portlet:namespace />passwordEncryptionAlgorithm">
+							<option value=""></option>
+
+							<%
+							String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
+
+							String[] algorithmTypes = PropsUtil.getArray(PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
+
+							for (int i = 0; i < algorithmTypes.length; i++) {
+							%>
+
+								<option <%= passwordEncryptionAlgorithm.equals(algorithmTypes[i]) ? "selected" : "" %> value="<%= algorithmTypes[i] %>"><%= algorithmTypes[i] %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+
+						<br /><br />
+
+						<liferay-ui:message key="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
+
+						<br /><br />
+
+						<textarea class="liferay-textarea" name="<portlet:namespace />userMappings"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
+
+						<br /><br />
+
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<select name="<portlet:namespace />defaultLdap">
+									<option></option>
+									<option>Apache Directory Server</option>
+									<option>Microsoft Active Directory Server</option>
+									<option>Novell eDirectory</option>
+								</select>
+							</td>
+							<td>
+								<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateLdap');" />
+					</c:when>
+					<c:when test='<%= tabs3.equals("cas") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_AUTH_ENABLED) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="import-cas-users-from-ldap" />
+
+								<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_IMPORT_FROM_LDAP) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="login-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGIN_URL) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="logout-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGOUT_URL) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="service-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVICE_URL) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="validate-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_VALIDATE_URL) %>" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateCAS');" />
+					</c:when>
+					<c:when test='<%= tabs3.equals("open-id") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_ID_AUTH_ENABLED) %>' />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateOpenId');" />
+					</c:when>
+					<c:otherwise>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="how-do-users-authenticate" />
+							</td>
+							<td>
+								<select name="<portlet:namespace />authType">
+									<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><liferay-ui:message key="by-email-address" /></option>
+									<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_SN %>"><liferay-ui:message key="by-screen-name" /></option>
+									<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_ID %>"><liferay-ui:message key="by-user-id" /></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="allow-users-to-automatically-login" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="autoLogin" defaultValue="<%= company.isAutoLogin() %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="allow-users-to-request-forgotten-passwords" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="sendPassword" defaultValue="<%= company.isSendPassword() %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="allow-strangers-to-create-accounts" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="strangers" defaultValue="<%= company.isStrangers() %>" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateSecurity');" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:when test='<%= tabs2.equals("default-user-associations") %>'>
+				<liferay-ui:message key="enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users" />
+
+				<br /><br />
+
+				<textarea class="liferay-textarea" name="<portlet:namespace />defaultGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
+
+				<br /><br />
+
+				<liferay-ui:message key="enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users" />
+
+				<br /><br />
+
+				<textarea class="liferay-textarea" name="<portlet:namespace />defaultRoleNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
+
+				<br /><br />
+
+				<liferay-ui:message key="enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users" />
+
+				<br /><br />
+
+				<textarea class="liferay-textarea" name="<portlet:namespace />defaultUserGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
+
+				<br /><br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateDefaultGroupsAndRoles');" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("reserved-screen-names") %>'>
+				<liferay-ui:message key="enter-one-screen-name-per-line-to-reserve-the-screen-name" />
+
+				<br /><br />
+
+				<textarea class="liferay-textarea" name="<portlet:namespace />reservedScreenNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
+
+				<br /><br />
+
+				<liferay-ui:message key="enter-one-user-email-address-per-line-to-reserve-the-user-email-address" />
+
+				<br /><br />
+
+				<textarea class="liferay-textarea" name="<portlet:namespace />reservedEmailAddresses"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
+
+				<br /><br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateReservedUsers');" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("mail-host-names") %>'>
+				<%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %>
+
+				<br /><br />
+
+				<textarea class="liferay-textarea" name="<portlet:namespace />mailHostNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
+
+				<br /><br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateMailHostNames');" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("email-notifications") %>'>
+				<script type="text/javascript">
+
+					<%
+					String emailFromName = ParamUtil.getString(request, "emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_FROM_NAME));
+					String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_FROM_ADDRESS));
+
+					String emailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT));
+					String emailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY));
+
+					String emailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
+					String emailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY));
+
+					String editorParam = "";
+					String editorContent = "";
+
+					if (tabs3.equals("account-created-notification")) {
+						editorParam = "emailUserAddedBody";
+						editorContent = emailUserAddedBody;
+					}
+					else if (tabs3.equals("password-changed-notification")) {
+						editorParam = "emailPasswordSentBody";
+						editorContent = emailPasswordSentBody;
+					}
+					%>
+
+					function initEditor() {
+						return "<%= UnicodeFormatter.toString(editorContent) %>";
+					}
+
+					function <portlet:namespace />saveEmails() {
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "updateEmails";
+
+						<c:if test='<%= tabs3.endsWith("-notification") %>'>
+							document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
+						</c:if>
+
+						submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_settings" /></portlet:actionURL>");
+					}
+				</script>
+
+				<liferay-ui:tabs
+					names="general,account-created-notification,password-changed-notification"
+					param="tabs3"
+					url="<%= portletURL.toString() %>"
+				/>
+
+				<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
+				<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
+				<liferay-ui:error key="emailPasswordSentBody" message="please-enter-a-valid-body" />
+				<liferay-ui:error key="emailPasswordSentSubject" message="please-enter-a-valid-subject" />
+				<liferay-ui:error key="emailUserAddedBody" message="please-enter-a-valid-body" />
+				<liferay-ui:error key="emailUserAddedSubject" message="please-enter-a-valid-subject" />
+
+				<c:choose>
+					<c:when test='<%= tabs3.endsWith("-notification") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<c:choose>
+									<c:when test='<%= tabs3.equals("account-created-notification") %>'>
+										<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED) %>" />
+									</c:when>
+									<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
+										<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) %>" />
+									</c:when>
+								</c:choose>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="subject" />
+							</td>
+							<td>
+								<c:choose>
+									<c:when test='<%= tabs3.equals("account-created-notification") %>'>
+										<input class="liferay-input-text" name="<portlet:namespace />emailUserAddedSubject" type="text" value="<%= emailUserAddedSubject %>" />
+									</c:when>
+									<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
+										<input class="liferay-input-text" name="<portlet:namespace />emailPasswordSentSubject" type="text" value="<%= emailPasswordSentSubject %>" />
+									</c:when>
+								</c:choose>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="body" />
+							</td>
+							<td>
+								<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+
+								<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<b><liferay-ui:message key="definition-of-terms" /></b>
+
+						<br /><br />
+
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<b>[$FROM_ADDRESS$]</b>
+							</td>
+							<td>
+								<%= emailFromAddress %>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<b>[$FROM_NAME$]</b>
+							</td>
+							<td>
+								<%= emailFromName %>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<b>[$PORTAL_URL$]</b>
+							</td>
+							<td>
+								<%= company.getVirtualHost() %>
+							</td>
+						</tr>
+
+						<c:if test='<%= tabs3.equals("password-changed-notification") %>'>
+							<tr>
+								<td>
+									<b>[$REMOTE_ADDRESS$]</b>
+								</td>
+								<td>
+									The browser's remote address
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<b>[$REMOTE_HOST$]</b>
+								</td>
+								<td>
+									The browser's remote host
+								</td>
+							</tr>
+						</c:if>
+
+						<tr>
+							<td>
+								<b>[$TO_ADDRESS$]</b>
+							</td>
+							<td>
+								The address of the email recipient
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<b>[$TO_NAME$]</b>
+							</td>
+							<td>
+								The name of the email recipient
+							</td>
+						</tr>
+
+						<c:if test='<%= tabs3.equals("password-changed-notification") %>'>
+							<tr>
+								<td>
+									<b>[$USER_AGENT$]</b>
+								</td>
+								<td>
+									The browser's user agent
+								</td>
+							</tr>
+						</c:if>
+
+						<tr>
+							<td>
+								<b>[$USER_ID$]</b>
+							</td>
+							<td>
+								The user ID
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<b>[$USER_PASSWORD$]</b>
+							</td>
+							<td>
+								The user password
+							</td>
+						</tr>
+						</table>
+					</c:when>
+					<c:otherwise>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="name" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="address" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+							</td>
+						</tr>
+						</table>
+					</c:otherwise>
+				</c:choose>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEmails();" />
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/enterprise_admin/edit_company.jsp" %>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:when test='<%= tabs1.equals("monitoring") %>'>
+		<c:choose>
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TRACKER_MEMORY_ENABLED)) %>">
+				<liferay-ui:tabs
+					names="live-sessions"
+					param="tabs2"
+					url="<%= portletURL.toString() %>"
+				/>
+
+				<%
+				SearchContainer searchContainer = new SearchContainer();
+
+				List headerNames = new ArrayList();
+
+				headerNames.add("session-id");
+				headerNames.add("user-id");
+				headerNames.add("name");
+				headerNames.add("email-address");
+				headerNames.add("last-request");
+				headerNames.add("num-of-hits");
+
+				searchContainer.setHeaderNames(headerNames);
+				searchContainer.setEmptyResultsMessage("there-are-no-live-sessions");
+
+				List results = new ArrayList();
+
+				Iterator itr = LiveUsers.getSessionUsers().entrySet().iterator();
+
+				while (itr.hasNext()) {
+					Map.Entry entry = (Map.Entry)itr.next();
+
+					results.add(entry.getValue());
+				}
+
+				Collections.sort(results, new UserTrackerModifiedDateComparator());
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					UserTracker userTracker = (UserTracker)results.get(i);
+
+					ResultRow row = new ResultRow(userTracker, userTracker.getUserTrackerId(), i);
+
+					PortletURL rowURL = renderResponse.createRenderURL();
+
+					rowURL.setWindowState(WindowState.MAXIMIZED);
+
+					rowURL.setParameter("struts_action", "/enterprise_admin/edit_session");
+					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("sessionId", userTracker.getSessionId());
+
+					User user2 = null;
+
+					try {
+						user2 = UserLocalServiceUtil.getUserById(userTracker.getUserId());
+					}
+					catch (NoSuchUserException nsue) {
+					}
+
+					// Session ID
+
+					row.addText(userTracker.getSessionId(), rowURL);
+
+					// User ID
+
+					row.addText(String.valueOf(userTracker.getUserId()), rowURL);
+
+					// Name
+
+					row.addText(((user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available")), rowURL);
+
+					// Email Address
+
+					row.addText(((user2 != null) ? user2.getEmailAddress() : LanguageUtil.get(pageContext, "not-available")), rowURL);
+
+					// Last Request
+
+					row.addText(dateFormatDateTime.format(userTracker.getModifiedDate()), rowURL);
+
+					// # of Hits
+
+					row.addText(String.valueOf(userTracker.getHits()), rowURL);
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsUtil.SESSION_TRACKER_MEMORY_ENABLED) %>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
 </c:choose>
 
 </form>
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace /><%= tabs1.equals("users") ? "firstName" : "name" %>.focus();
+		if (document.<portlet:namespace />fm.<portlet:namespace />firstName) {
+			document.<portlet:namespace />fm.<portlet:namespace />firstName.focus();
+		}
+		else if (document.<portlet:namespace />fm.<portlet:namespace />name) {
+			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+		}
 	</script>
 </c:if>
+
+<%!
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.enterprise_admin.view.jsp";
+%>

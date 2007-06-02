@@ -16,8 +16,8 @@
 		<style>
 			#banner .logo {
 				background: url($company_logo) no-repeat;
-				height: 50px;
-				width: 200px;
+				height: ${company_logo_height}px;
+				width: ${company_logo_width}px;
 			}
 		</style>
 	#end

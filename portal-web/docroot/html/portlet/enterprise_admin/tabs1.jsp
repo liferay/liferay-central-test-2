@@ -37,7 +37,13 @@
 	String tabs1Values = tabs1Names;
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-		tabs1Names += ",roles,password-policies";
+		if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+			tabs1Names += ",roles,password-policies,settings,monitoring";
+		}
+		else {
+			tabs1Names += ",roles,&raquo;";
+		}
+
 		tabs1Values = tabs1Names;
 	}
 

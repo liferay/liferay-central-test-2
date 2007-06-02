@@ -97,7 +97,12 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 						curURL = portletURL.toString();
 					}
 					else {
-						curURL = url + "&" + param + "=" + values[i] + anchor;
+						if (values[i].equals("&raquo;")) {
+							curURL = url + "&" + param + "=" + values[0] + anchor;
+						}
+						else {
+							curURL = url + "&" + param + "=" + values[i] + anchor;
+						}
 					}
 				}
 				else {
