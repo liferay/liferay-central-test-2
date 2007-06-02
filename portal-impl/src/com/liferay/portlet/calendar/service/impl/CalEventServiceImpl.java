@@ -101,13 +101,11 @@ public class CalEventServiceImpl
 
 		CalEventLocalServiceUtil.deleteEvent(eventId);
 	}
-	
-	public File export(long eventId) 
-		throws PortalException, SystemException {
-		
+
+	public File export(long eventId) throws PortalException, SystemException {
 		CalEventPermission.check(
-				getPermissionChecker(), eventId, ActionKeys.VIEW);
-		
+			getPermissionChecker(), eventId, ActionKeys.VIEW);
+
 		return CalEventLocalServiceUtil.export(eventId);
 	}
 

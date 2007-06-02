@@ -897,7 +897,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			if (interval >= 1) {
 				recur.setInterval(interval);
 			}
-			
+
 			DayAndPosition[] byDay = recurrence.getByDay();
 
 			for (int i = 0; i < byDay.length; i++) {
@@ -905,7 +905,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 				recur.getDayList().add(weekDay);
 			}
-			
+
 		}
 		else if (recurrenceType == Recurrence.WEEKLY) {
 			recur = new Recur(Recur.WEEKLY, -1);
