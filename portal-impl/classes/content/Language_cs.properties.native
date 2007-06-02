@@ -495,6 +495,7 @@ enter-one-city-or-zip-code-per-line=Vlož jedno město nebo PSČ na <b>každý �
 enter-one-email-address-per-line=VLož jeden e-mail na <b>každý řádek</b>.
 enter-one-isbn-number-per-line-to-add-books=Vlož jedno ISBN číslo na <b>každý řádek</b> pro přidání knih. Můžeš přidat maximálně {0} najednou.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=Vlož jeden mail server na <b>každý řádek</b> pro všechny servery kromě <i>{0}</i>.
+enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this portlet to a page.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.
 enter-one-url-per-line=Vlož jedno URL na <b>každý řádek</b>.

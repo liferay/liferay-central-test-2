@@ -539,6 +539,7 @@ enter-one-city-or-zip-code-per-line=Nhập mỗi thành phố hoặc mã vùng  
 enter-one-email-address-per-line=Enter one email address <b>per line</b>.
 enter-one-isbn-number-per-line-to-add-books=Nhập mỗi số ISBN  <b>trên một dòng </b> để thêm sách. Bạn có thể thêm tới  {0} trong một lần.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=Nhập vào mỗi tên máy chủ <b>trên một dòng </b> cho các máy chủ mail  <i>{0}</i>.
+enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this portlet to a page.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.
 enter-one-url-per-line=Nhập mỗi  URL <b>trên một dòng</b>.

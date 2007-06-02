@@ -956,6 +956,7 @@ enter-one-city-or-zip-code-per-line=أدخل إسم مدينة أو رمز بر�
 enter-one-email-address-per-line=أدخل عنوان بريد إلكتروني واحد في <b>السطر الواحد</b>.
 enter-one-isbn-number-per-line-to-add-books=أدخل رقم ISBN في <b>السطر الواحد</b> لإضافة كتاب. يمكن إضافة {0} في المرة الواحدة.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=أدخل إسم موزّع بريد إلكتروني في <b>السطر الواحد</b> لموزّعات البريد بالإضافة لـ <i>{0}</i>.
+enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=أدخل إسم دور في <b>السطر الواحد</b>. ليتمكن المستخدم من إضافة هذه البورتلت لصفحة ما، عليه أن ينتمي إلى أحد هذه الأدوار.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.
 enter-one-url-per-line=أدخل رابط تشعبي في <b>السطر الواحد</b>.

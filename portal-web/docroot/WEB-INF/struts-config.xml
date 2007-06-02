@@ -541,6 +541,11 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin/edit_plugin" type="com.liferay.portlet.enterpriseadmin.action.EditPluginAction">
+			<forward name="portlet.enterprise_admin.edit_plugin" path="portlet.enterprise_admin.edit_plugin" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin/edit_role" type="com.liferay.portlet.enterpriseadmin.action.EditRoleAction">
 			<forward name="portlet.enterprise_admin.edit_role" path="portlet.enterprise_admin.edit_role" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />

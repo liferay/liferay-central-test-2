@@ -38,7 +38,7 @@
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
 		if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
-			tabs1Names += ",roles,password-policies,settings,monitoring";
+			tabs1Names += ",roles,password-policies,settings,monitoring,plugins";
 		}
 		else {
 			tabs1Names += ",roles,&raquo;";

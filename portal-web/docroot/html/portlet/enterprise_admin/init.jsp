@@ -65,10 +65,12 @@
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
 <%@ page import="com.liferay.portal.UserSmsException" %>
 <%@ page import="com.liferay.portal.WebsiteURLException" %>
+<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
+<%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.LocationPermission" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermission" %>
 <%@ page import="com.liferay.portal.service.permission.PasswordPolicyPermission" %>
@@ -111,7 +113,7 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 
 if (!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring")) {
+	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring") || tabs1.equals("plugins")) {
 		tabs1 = "users";
 	}
 }

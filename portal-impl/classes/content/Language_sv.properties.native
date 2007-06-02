@@ -875,6 +875,7 @@ enter-one-city-or-zip-code-per-line=Skriv en ort eller ett postnummer <b>per rad
 enter-one-email-address-per-line=Skriv en e-post adress <b>per rad</b>.
 enter-one-isbn-number-per-line-to-add-books=Skriv ett ISBN nummer <b>per rad</b> för att lägga till böcker. Du kan lägga till upp till {0} åt gången.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=Lägg in ett e-post värdnamn <b>per rad</b> för ytterligare e-post värdnamn förutom <i>{0}</i>.
+enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=Lägg in ett rollnamn <b>per rad</b>. Användaren måste tillhöra en av rollerna för att kunna lägga till denna portlet till sidan.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.
 enter-one-url-per-line=Lägg in en URL <b>per rad</b>.

@@ -415,6 +415,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_phone.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_plugin" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_plugin.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_role" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_role.jsp" />
 	</definition>

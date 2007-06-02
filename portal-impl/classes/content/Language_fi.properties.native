@@ -981,6 +981,7 @@ enter-one-city-or-zip-code-per-line=Syötä yksi kaupunki tai postinumero <b>riv
 enter-one-email-address-per-line=Syötä yksi sähköpostiosoite <b>riviä kohden</b>.
 enter-one-isbn-number-per-line-to-add-books=Syötä yksi ISBN-numero <b>riviä kohden</b> lisätäksesi kirjoja. Voit lisätä korkeintaan {0} kerrallaan.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=Syötä yksi sähköposti hosti <b>riviä kohden</b> kaikille muille sähköposti hosteille kuin <i>{0}</i>.
+enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=Syötä yksi rooli <b>riviä kohden</b>. Käyttäjän täytyy kuulua yhteen näistä rooleista voidakseen lisätä portletti sivulle.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Syötä yksi nimimerkki <b>per rivi</b> varataksesi tämän nimimerkin.
 enter-one-url-per-line=Syötä yksi URL <b>riviä kohden</b>.
