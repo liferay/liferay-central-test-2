@@ -24,10 +24,10 @@
 
 <script type="text/javascript">
 	var themeDisplay = {
-		getCompanyId : function() {
+		getCompanyId: function() {
 			return "<%= themeDisplay.getCompanyId() %>";
 		},
-		getDoAsUserIdEncoded : function() {
+		getDoAsUserIdEncoded: function() {
 
 			// Use Java to encode the encrypted user id because IE doesn't
 			// properly encode with encodeURIComponent. It leaves a '+' as a '+'
@@ -35,41 +35,44 @@
 
 			return "<%= Http.encodeURL(themeDisplay.getDoAsUserId()) %>";
 		},
-		getPlid : function() {
+		getPlid: function() {
 			return "<%= themeDisplay.getPlid() %>";
 		},
-		getGroupId : function() {
+		getGroupId: function() {
 			return "<%= themeDisplay.getPortletGroupId() %>";
 		},
 
 		<c:if test="<%= layout != null %>">
-			getLayoutId : function() {
+			getLayoutId: function() {
 				return "<%= layout.getLayoutId() %>";
 			},
-			isPrivateLayout : function() {
+			isPrivateLayout: function() {
 				return "<%= layout.isPrivateLayout() %>";
 			},
-			getParentLayoutId : function() {
+			getParentLayoutId: function() {
 				return "<%= layout.getParentLayoutId() %>";
 			},
 		</c:if>
 
-		getLanguageId : function() {
+		getLanguageId: function() {
 			return "<%= LanguageUtil.getLanguageId(request) %>";
 		},
-		isFreeformLayout : function() {
+		isFreeformLayout: function() {
 			return <%= themeDisplay.isFreeformLayout() %>;
 		},
-		getPathMain : function() {
+		getPathContext: function() {
+			return "<%= themeDisplay.getPathContext() %>";
+		},
+		getPathMain: function() {
 			return "<%= themeDisplay.getPathMain() %>";
 		},
-		getPathThemeImages : function() {
+		getPathThemeImages: function() {
 			return "<%= themeDisplay.getPathThemeImages() %>";
 		},
-		getPathThemeRoot : function() {
+		getPathThemeRoot: function() {
 			return "<%= themeDisplay.getPathThemeRoot() %>";
 		},
-		getURLHome : function() {
+		getURLHome: function() {
 			return "<%= themeDisplay.getURLHome() %>";
 		}
 	};

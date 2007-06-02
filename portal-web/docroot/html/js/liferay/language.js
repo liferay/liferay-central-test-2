@@ -2,7 +2,7 @@ Liferay.Language = {
 	get: function(key, extraParams) {
 		var instance = this;
 
-		var url = '/language/' + themeDisplay.getLanguageId() + '/' + key + '/';
+		var url = themeDisplay.getPathContext() + '/language/' + themeDisplay.getLanguageId() + '/' + key + '/';
 
 		if (extraParams) {
 			if (typeof extraParams == 'string') {
