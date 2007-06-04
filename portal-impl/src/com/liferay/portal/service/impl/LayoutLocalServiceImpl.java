@@ -821,7 +821,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			// Portlet preferences
 
 			if (importPortletPreferences) {
-				importPortletPreferences(layoutSet, layoutEl);
+				importPortletPreferences(layoutSet, layout.getPlid(), layoutEl);
 			}
 
 			// Portlet data
@@ -841,9 +841,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Portlet preferences
 
-		if (importPortletPreferences) {
+		/*if (importPortletPreferences) {
 			importPortletPreferences(layoutSet, root);
-		}
+		}*/
 
 		Element rolesEl = (Element)root.element("roles");
 
@@ -2265,7 +2265,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importPortletPreferences(
-			LayoutSet layoutSet, Element parentEl)
+			LayoutSet layoutSet, long plid, Element parentEl)
 		throws PortalException, SystemException {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
@@ -2281,7 +2281,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.attributeValue("owner-type"));
 			boolean defaultUser = GetterUtil.getBoolean(
 				el.attributeValue("default-user"));
-			long plid = GetterUtil.getLong(el.attributeValue("plid"));
+			//long plid = GetterUtil.getLong(el.attributeValue("plid"));
 			String portletId = el.attributeValue("portlet-id");
 			String preferences = el.elementText("preferences");
 
