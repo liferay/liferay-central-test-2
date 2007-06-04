@@ -323,6 +323,10 @@ public class ThemeLocalUtil {
 	}
 
 	private static String _getVersion(String version) {
+		if (version.equals("${current-version}")) {
+			return ReleaseInfo.getVersion();
+		}
+
 		int x = version.indexOf(StringPool.PERIOD);
 		int y = version.indexOf(StringPool.PERIOD, x + 1);
 
