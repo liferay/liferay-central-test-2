@@ -757,7 +757,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>80</portlet-name>
-		<icon>/html/portlet/organization_admin/icon.png</icon>
+		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>organization_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
