@@ -1214,7 +1214,7 @@ public class JournalArticleLocalServiceImpl
 				Indexer.updateArticle(
 					article.getCompanyId(), article.getGroupId(),
 					article.getArticleId(), article.getVersion(),
-					article.getTitle(), article.getContent(),
+					article.getTitle(), article.getDescription(),
 					article.getContent(), article.getType(),
 					article.getDisplayDate());
 			}
