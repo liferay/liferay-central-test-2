@@ -74,7 +74,7 @@ public class PortalLDAPUtil {
 	public static void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
 
-		if (!isAuthEnabled(companyId)) {
+		if (!isAuthEnabled(companyId) || !isExportEnabled(companyId)) {
 			return;
 		}
 
@@ -117,7 +117,7 @@ public class PortalLDAPUtil {
 	public static void exportToLDAP(User user) throws Exception {
 		long companyId = user.getCompanyId();
 
-		if (!isAuthEnabled(companyId)) {
+		if (!isAuthEnabled(companyId) || !isExportEnabled(companyId)) {
 			return;
 		}
 
@@ -462,6 +462,17 @@ public class PortalLDAPUtil {
 
 	public static boolean isAuthEnabled(long companyId) throws Exception {
 		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.LDAP_AUTH_ENABLED)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isExportEnabled(long companyId) throws Exception {
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.LDAP_EXPORT_ENABLED)) {
+
 			return true;
 		}
 		else {

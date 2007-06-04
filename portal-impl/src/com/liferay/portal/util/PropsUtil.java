@@ -308,6 +308,8 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
 
+	public static final String LDAP_EXPORT_ENABLED = "ldap.export.enabled";
+
 	// CAS
 
 	public static final String CAS_AUTH_ENABLED = "cas.auth.enabled";
