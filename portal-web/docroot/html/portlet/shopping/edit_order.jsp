@@ -48,6 +48,7 @@ WindowState windowState = renderRequest.getWindowState();
 
 	function <portlet:namespace />sendEmail(emailType) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "sendEmail";
+		document.<portlet:namespace />fm.<portlet:namespace />emailType.value = emailType;
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
