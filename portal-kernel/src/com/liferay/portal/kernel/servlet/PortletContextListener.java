@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -41,14 +42,12 @@ public class PortletContextListener
 	implements PortalInitable, ServletContextListener {
 
 	public void portalInit() {
-		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(
-				_event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
+		HotDeployUtil.fireDeployEvent(new HotDeployEvent(_ctx, _classLoader));
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
-		_event = event;
+		_classLoader = Thread.currentThread().getContextClassLoader();
+		_ctx = event.getServletContext();
 
 		PortalInitableUtil.init(this);
 	}
@@ -60,6 +59,7 @@ public class PortletContextListener
 				Thread.currentThread().getContextClassLoader()));
 	}
 
-	private ServletContextEvent _event;
+	private ClassLoader _classLoader;
+	private ServletContext _ctx;
 
 }
