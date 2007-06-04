@@ -288,8 +288,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			boolean autoPassword = false;
 			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
 			String password2 = password1;
-			boolean autoScreenName = true;
-			String screenName = StringPool.BLANK;
+			boolean autoScreenName = false;
+			String screenName = PropsUtil.get(
+				PropsUtil.DEFAULT_ADMIN_SCREEN_NAME);
 			String emailAddress =
 				PropsUtil.get(
 					PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX) +

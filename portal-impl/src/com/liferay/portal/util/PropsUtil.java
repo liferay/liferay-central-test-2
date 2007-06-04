@@ -438,6 +438,8 @@ public class PropsUtil {
 
 	public static final String DEFAULT_ADMIN_PASSWORD = "default.admin.password";
 
+	public static final String DEFAULT_ADMIN_SCREEN_NAME = "default.admin.screen.name";
+
 	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
 
 	public static final String DEFAULT_ADMIN_FIRST_NAME = "default.admin.first.name";
