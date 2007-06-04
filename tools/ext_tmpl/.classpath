@@ -104,6 +104,7 @@
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
+	<classpathentry kind="lib" path="lib/portal/mx4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
 	<classpathentry kind="lib" path="lib/portal/openid4java.jar"/>
