@@ -465,7 +465,31 @@ Liferay.Util = {
 			}
 		}
 	},
-
+	
+	resizeTextarea: function(elString) {
+		var init = function() {
+			var el = jQuery('#' + elString);
+			if (el.length) {
+				var pageBody = jQuery('body');
+				
+				var resize = function() {
+					var pageBodyHeight = pageBody.height();
+					el.css(
+						{
+							height: (pageBodyHeight - 100) + "px",
+							width: '98%'
+						}
+					);
+				};
+				
+				resize();
+				jQuery(window).resize(resize);
+			}
+		};
+		
+		jQuery(init);
+	},
+	
 	resubmitCountdown: function(formName) {
 		if (Liferay.Util.submitCountdown > 0) {
 			Liferay.Util.submitCountdown--;

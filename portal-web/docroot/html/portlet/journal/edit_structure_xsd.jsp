@@ -38,15 +38,7 @@ boolean useEditorApplet = editorType.equals("applet");
 %>
 
 <script type="text/javascript">
-	 var <portlet:namespace />resizeTextArea = function () {
-		var textArea = document.getElementById("<portlet:namespace />xsdContent");
-		var structBody = document.getElementsByTagName("body")[0];
-
-		textArea.style.height = (structBody.clientHeight - 100) + "px";
-		textArea.style.width = '98%';
-	}
-	window.onresize = <portlet:namespace />resizeTextArea;
-	window.onload = window.onresize;
+	 Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent');
 	
 	function getEditorContent() {
 		return opener.<portlet:namespace />getXsd();

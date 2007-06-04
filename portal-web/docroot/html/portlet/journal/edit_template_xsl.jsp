@@ -49,13 +49,8 @@ else {
 %>
 
 <script type="text/javascript">
-	window.onresize = function () {
-		var textArea = document.getElementById("<portlet:namespace />xslContent");
-		var tempBody = document.getElementsByTagName("body")[0];
-
-		textArea.style.height = (tempBody.clientHeight - 100) + "px";
-	}
-
+	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent');
+	
 	function getEditorContent() {
 		var content = decodeURIComponent(opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
 
