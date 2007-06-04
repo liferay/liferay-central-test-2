@@ -152,6 +152,8 @@ public class PropsUtil {
 
 	// Company
 
+	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
+
 	public static final String COMPANY_SECURITY_AUTH_TYPE = "company.security.auth.type";
 
 	public static final String COMPANY_SECURITY_AUTO_LOGIN = "company.security.auto.login";

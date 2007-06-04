@@ -70,7 +70,8 @@ public class PortalInstances {
 
 	public static final String DEFAULT_VIRTUAL_HOST = "localhost";
 
-	public static final String DEFAULT_WEB_ID = "liferay.com";
+	public static final String DEFAULT_WEB_ID =
+		PropsUtil.get(PropsUtil.COMPANY_DEFAULT_WEB_ID);
 
 	public static void addCompanyId(long companyId) {
 		_instance._addCompanyId(companyId);
@@ -234,6 +235,10 @@ public class PortalInstances {
 	private String[] _getWebIds() {
 		if (_webIds != null) {
 			return _webIds;
+		}
+
+		if (Validator.isNull(DEFAULT_WEB_ID)) {
+			throw new RuntimeException("Default web id must not be null");
 		}
 
 		try {
