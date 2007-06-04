@@ -440,11 +440,11 @@ public class CalendarUtil {
 				febMax = 29;
 			}
 
-			if ((day < 0) || (day > febMax)) {
+			if ((day < 1) || (day > febMax)) {
 				return false;
 			}
 		}
-		else if ((day < 0) || (day > months[month])) {
+		else if ((day < 1) || (day > months[month])) {
 			return false;
 		}
 
@@ -465,11 +465,11 @@ public class CalendarUtil {
 				febMax = 29;
 			}
 
-			if ((day < 0) || (day > febMax)) {
+			if ((day < 1) || (day > febMax)) {
 				return false;
 			}
 		}
-		else if ((day < 0) || (day > months[month])) {
+		else if ((day < 1) || (day > months[month])) {
 			return false;
 		}
 
