@@ -141,6 +141,7 @@ public class VelocityVariables {
 			vc.put("layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
 			vc.put(
 				"portletGroupId", new Long(themeDisplay.getPortletGroupId()));
+			vc.put("permissionChecker", themeDisplay.getPermissionChecker());
 			vc.put("locale", themeDisplay.getLocale());
 			vc.put("timeZone", themeDisplay.getTimeZone());
 			vc.put("theme", theme);
