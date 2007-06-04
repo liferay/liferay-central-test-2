@@ -27,13 +27,14 @@
 		<unjar src="${project.dir}/lib/global/portal-service.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/util-java.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/util-wsrp.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/util-taglib.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/development/activation.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/development/mail.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/global/portlet.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/alfresco-client.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/ant.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-collections.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-fileupload.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-lang.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-logging.jar" dest="${classpath.jsp}" />
@@ -54,10 +55,6 @@
 	</target>
 
 	<target name="compile-common-jsp">
-		<move file="tmp/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml.bak" />
-
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml" />
-
 		<java
 			classname="org.apache.jasper.JspC"
 			classpath="${jspc.classpath}"
@@ -66,8 +63,6 @@
 		>
 			<arg line="${arg.line}" />
 		</java>
-
-		<move file="tmp/WEB-INF/web.xml.bak" tofile="tmp/WEB-INF/web.xml" />
 
 		<java
 			classname="com.liferay.portal.tools.JSPCompiler"
@@ -179,9 +174,7 @@
 		<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 
-		<move file="tmp/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml.bak" />
-
-		<copy file="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml" />
+		<copy file="tmp/WEB-INF/web.xml" tofile="tmp/WEB-INF/web.xml.bak" />
 
 		<replace file="tmp/WEB-INF/web.xml">
 			<replacefilter token="&lt;resource-ref&gt;" value="" />
@@ -198,7 +191,7 @@
 			<arg line="tmp ${jspc.classes.dir}" />
 		</java>
 
-		<move file="tmp/WEB-INF/web.xml.bak" tofile="tmp/WEB-INF/web.xml" />
+		<move file="tmp/WEB-INF/web.xml.bak" tofile="tmp/WEB-INF/web.xml" overwrite="yes" />
 	</target>
 
 	<target name="compile-tomcat" depends="merge">

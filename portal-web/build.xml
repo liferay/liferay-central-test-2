@@ -221,7 +221,7 @@
 			<arg line="docroot ${jspc.classes.dir}" />
 		</java>
 
-		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" />
+		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" overwrite="yes" />
 	</target>
 
 	<target name="compile-tomcat">
