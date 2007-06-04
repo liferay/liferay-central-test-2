@@ -38,13 +38,16 @@ boolean useEditorApplet = editorType.equals("applet");
 %>
 
 <script type="text/javascript">
-	window.onresize = function () {
+	 var <portlet:namespace />resizeTextArea = function () {
 		var textArea = document.getElementById("<portlet:namespace />xsdContent");
 		var structBody = document.getElementsByTagName("body")[0];
 
 		textArea.style.height = (structBody.clientHeight - 100) + "px";
+		textArea.style.width = '98%';
 	}
-
+	window.onresize = <portlet:namespace />resizeTextArea;
+	window.onload = window.onresize;
+	
 	function getEditorContent() {
 		return opener.<portlet:namespace />getXsd();
 	}
