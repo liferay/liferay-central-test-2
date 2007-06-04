@@ -212,7 +212,7 @@ public class MainServlet extends ActionServlet {
 					"/WEB-INF/liferay-look-and-feel-ext.xml"))
 			};
 
-			ThemeLocalUtil.init(ctx, true, xmls, pluginPackage);
+			ThemeLocalUtil.init(ctx, null, true, xmls, pluginPackage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

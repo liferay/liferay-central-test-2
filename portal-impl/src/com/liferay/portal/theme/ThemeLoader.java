@@ -122,13 +122,14 @@ public class ThemeLoader {
 		_ctx = ctx;
 
 		try {
-			_fileStorage = new File(ctx.getRealPath("/themes"));
-
 			SAXReader reader = SAXReaderFactory.getInstance();
 
 			Document doc = reader.read(new StringReader(xmls[0]));
 
 			Element root = doc.getRootElement();
+
+			_themesPath = GetterUtil.getString(
+				root.elementText("themes-path"), "/themes");
 
 			String fileStorageValue = GetterUtil.getString(
 				root.elementText("file-storage"));
@@ -136,6 +137,10 @@ public class ThemeLoader {
 			if (Validator.isNotNull(fileStorageValue)) {
 				_fileStorage = new File(fileStorageValue);
 				_loadFromServletContext = false;
+			}
+			else {
+				_fileStorage = new File(ctx.getRealPath(_themesPath));
+				_loadFromServletContext = true;
 			}
 
 			if (!_fileStorage.exists()) {
@@ -170,7 +175,7 @@ public class ThemeLoader {
 			String content = FileUtil.read(liferayLookAndFeelXML);
 
 			ThemeLocalUtil.init(
-				_servletContextName, _ctx, _loadFromServletContext,
+				_servletContextName, _ctx, _themesPath, _loadFromServletContext,
 				new String[] {content}, null);
 		}
 		catch (Exception e) {
@@ -184,6 +189,7 @@ public class ThemeLoader {
 
 	private String _servletContextName;
 	private ServletContext _ctx;
+	private String _themesPath;
 	private File _fileStorage;
 	private boolean _loadFromServletContext = true;
 	private Map _lastModifiedMap = CollectionFactory.getHashMap();

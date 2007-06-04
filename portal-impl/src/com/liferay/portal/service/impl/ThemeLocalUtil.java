@@ -176,14 +176,15 @@ public class ThemeLocalUtil {
 	}
 
 	public static List init(
-		ServletContext ctx, boolean loadFromServletContext, String[] xmls,
-		PluginPackage pluginPackage) {
+		ServletContext ctx, String themesPath, boolean loadFromServletContext,
+		String[] xmls, PluginPackage pluginPackage) {
 
-		return init(null, ctx, loadFromServletContext, xmls, pluginPackage);
+		return init(
+			null, ctx, themesPath, loadFromServletContext, xmls, pluginPackage);
 	}
 
 	public static List init(
-		String servletContextName, ServletContext ctx,
+		String servletContextName, ServletContext ctx, String themesPath,
 		boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
@@ -192,8 +193,8 @@ public class ThemeLocalUtil {
 		try {
 			for (int i = 0; i < xmls.length; i++) {
 				Set themes = _readThemes(
-					servletContextName, ctx, loadFromServletContext, xmls[i],
-					pluginPackage);
+					servletContextName, ctx, themesPath, loadFromServletContext,
+					xmls[i], pluginPackage);
 
 				Iterator itr = themes.iterator();
 
@@ -398,7 +399,7 @@ public class ThemeLocalUtil {
 	}
 
 	private static Set _readThemes(
-			String servletContextName, ServletContext ctx,
+			String servletContextName, ServletContext ctx, String themesPath,
 			boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
 		throws DocumentException, IOException {
@@ -494,6 +495,8 @@ public class ThemeLocalUtil {
 			Element theme = (Element)itr1.next();
 
 			ContextReplace themeContextReplace = new ContextReplace();
+
+			themeContextReplace.addValue("themes-path", themesPath);
 
 			String themeId = theme.attributeValue("id");
 
