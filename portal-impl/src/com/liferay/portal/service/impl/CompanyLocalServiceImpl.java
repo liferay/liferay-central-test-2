@@ -41,14 +41,20 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -336,6 +342,28 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			};
 
 			RoleLocalServiceUtil.setUserRoles(user.getUserId(), roleIds);
+
+			Organization organization =
+				OrganizationLocalServiceUtil.addOrganization(
+					user.getUserId(),
+					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
+					"Test Organization", RegionImpl.DEFAULT_REGION_ID,
+					CountryImpl.DEFAULT_COUNTRY_ID,
+					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, false);
+
+			UserUtil.addOrganization(
+				user.getUserId(), organization.getOrganizationId());
+
+			Organization location =
+				OrganizationLocalServiceUtil.addOrganization(
+					user.getUserId(),
+					organization.getOrganizationId(),
+					"Test Location", RegionImpl.DEFAULT_REGION_ID,
+					CountryImpl.DEFAULT_COUNTRY_ID,
+					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, true);
+
+			UserUtil.addOrganization(
+				user.getUserId(), location.getOrganizationId());
 		}
 
 		return company;

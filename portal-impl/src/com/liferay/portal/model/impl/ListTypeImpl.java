@@ -102,6 +102,8 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 	public static final String ORGANIZATION_STATUS =
 		Organization.class.getName() + ".status";
 
+	public static final int ORGANIZATION_STATUS_DEFAULT = 12017;
+
 	public static final String ORGANIZATION_WEBSITE =
 		Organization.class.getName() + WEBSITE;
 
