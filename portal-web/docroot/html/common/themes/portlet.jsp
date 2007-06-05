@@ -220,7 +220,7 @@ portletDisplay.setURLMin(urlMin);
 
 // URL portlet css
 
-String urlPortletCss = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
+String urlPortletCss = "javascript: Liferay.PortletCSS.init('p_p_id_" + portletDisplay.getId() + "_');";
 
 portletDisplay.setURLPortletCss(urlPortletCss.toString());
 
