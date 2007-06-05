@@ -22,13 +22,15 @@
 
 package com.liferay.portal.model;
 
+import java.io.Serializable;
+
 /**
  * <a href="ReverseAjax.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ming-Gih Lam
  *
  */
-public class ReverseAjax {
+public class ReverseAjax implements Serializable {
 
 	public RequestWait getRequestWait() {
 		return _requestWait;
@@ -58,8 +60,8 @@ public class ReverseAjax {
 		this._pendingChatRoster = pendingChatRoster;
 	}
 
-	private RequestWait _requestWait;
-	private boolean _pendingChatMessage;
-	private boolean _pendingChatRoster;
+	private transient RequestWait _requestWait;
+	private transient boolean _pendingChatMessage;
+	private transient boolean _pendingChatRoster;
 
 }
