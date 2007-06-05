@@ -50,7 +50,7 @@ else {
 
 <script type="text/javascript">
 	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent');
-	
+
 	function getEditorContent() {
 		var content = decodeURIComponent(opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
 

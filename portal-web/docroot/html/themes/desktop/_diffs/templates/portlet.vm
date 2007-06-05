@@ -56,18 +56,19 @@
 
 				<div class="portlet-small-icon-bar" $iconStyle>
 					#if ($portletDisplay.isShowBackIcon())
-						$taglibLiferay.iconBack()
+						$theme.iconBack()
 					#else
-						$taglibLiferay.iconRefresh()
-						$taglibLiferay.iconConfiguration()
-						$taglibLiferay.iconEdit()
-						$taglibLiferay.iconEditGuest()
-						$taglibLiferay.iconHelp()
-						$taglibLiferay.iconPrint()
+						$theme.iconRefresh()
+						$theme.iconPortletCss()
+						$theme.iconConfiguration()
+						$theme.iconEdit()
+						$theme.iconEditGuest()
+						$theme.iconHelp()
+						$theme.iconPrint()
 						#if ($portletDisplay.isShowMinIcon())
 							<a href="javascript: LiferayDesktop.minimize('$plid', '$portletDisplay.getId()', '$themeDisplay.getDoAsUserId()')"><img align="absmiddle" border="0" src="$themeDisplay.getPathThemeImages()/portlet/minimize.png" title="#language("minimize")" /></a>
 						#end
- 						$taglibLiferay.iconMaximize()
+ 						$theme.iconMaximize()
 						#if ($portletDisplay.isShowCloseIcon())
 							<a href="javascript: LiferayDesktop.remove('$plid', '$portletDisplay.getId()', '$themeDisplay.getDoAsUserId()')"><img align="absmiddle" border="0" src="$themeDisplay.getPathThemeImages()/portlet/close.png" title="#language("close")" /></a>
 						#end

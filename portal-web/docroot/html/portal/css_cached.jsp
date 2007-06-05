@@ -316,7 +316,6 @@ response.setContentType(Constants.TEXT_CSS);
 	height: 1%;
 }
 
-
 /* ---------- Portlet css editor ---------- */
 
 #portlet-set-properties {
