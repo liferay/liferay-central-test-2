@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -66,6 +67,7 @@ import org.apache.struts.util.MessageResources;
  * <a href="LanguageUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Andrius Vitkauskas
  *
  */
 public class LanguageUtil {
@@ -335,11 +337,11 @@ public class LanguageUtil {
 	}
 
 	public static Locale[] getAvailableLocales() {
-		return _instance._locales;
+		return _getInstance()._locales;
 	}
 
 	public static String getCharset(Locale locale) {
-		return _instance._getCharset(locale);
+		return _getInstance()._getCharset(locale);
 	}
 
 	public static String getLanguageId(ActionRequest req)
@@ -385,7 +387,7 @@ public class LanguageUtil {
 	}
 
 	public static Locale getLocale(String languageCode) {
-		return _instance._getLocale(languageCode);
+		return _getInstance()._getLocale(languageCode);
 	}
 
 	public static String getTimeDescription(
@@ -433,6 +435,20 @@ public class LanguageUtil {
 		CookieKeys.addCookie(res, languageIdCookie);
 	}
 
+	private static LanguageUtil _getInstance() {
+		Long companyIdObj = new Long(CompanyThreadLocal.getCompanyId());
+
+		LanguageUtil instance = (LanguageUtil)_instances.get(companyIdObj);
+
+		if (instance == null) {
+			instance = new LanguageUtil();
+
+			_instances.put(companyIdObj, instance);
+		}
+
+		return instance;
+	}
+
 	private LanguageUtil() {
 		String[] array = StringUtil.split(
 			PropsUtil.get(PropsUtil.LOCALES), StringPool.COMMA);
@@ -467,7 +483,7 @@ public class LanguageUtil {
 
 	private static Log _log = LogFactory.getLog(LanguageUtil.class);
 
-	private static LanguageUtil _instance = new LanguageUtil();
+	private static Map _instances = CollectionFactory.getSyncHashMap();
 
 	private Locale[] _locales;
 	private Map _localesByLanguageCode;
