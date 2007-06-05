@@ -66,7 +66,20 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 		String xml = Http.URLtoString(
 			ctx.getResource("/WEB-INF/liferay-plugin-package.xml"));
 
+		if (_log.isInfoEnabled()) {
+			if (servletContextName == null) {
+				_log.info("Reading plugin package for the root context");
+			}
+			else {
+				_log.info("Reading plugin package for " + servletContextName);
+			}
+		}
+
 		if (xml == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Reading plugin package from MANIFEST.MF");
+			}
+
 			Attributes attributes = null;
 
 			InputStream is = ctx.getResourceAsStream("/META-INF/MANIFEST.MF");
@@ -132,20 +145,15 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 			if (Validator.isNotNull(pageURL)) {
 				pluginPackage.setPageURL(pageURL);
 			}
-
-			return pluginPackage;
 		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Reading plugin package from liferay-plugin-package.xml");
+			}
 
-		if (_log.isInfoEnabled()) {
-			if (servletContextName == null) {
-				_log.info("Reading plugin package for the root context");
-			}
-			else {
-				_log.info("Reading plugin package for " + servletContextName);
-			}
+			pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
 		}
-
-		pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
 
 		return pluginPackage;
 	}
@@ -160,6 +168,10 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Invoking deploy for " + servletContextName);
+			}
+
+			if (ctx.getResource("/WEB-INF/liferay-theme-loader.xml") != null) {
+				return;
 			}
 
 			PluginPackage pluginPackage = readPluginPackage(ctx);
