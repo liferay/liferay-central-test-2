@@ -22,8 +22,6 @@
 
 package com.liferay.util.php;
 
-import com.caucho.quercus.servlet.QuercusServlet;
-
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.util.servlet.StringServletResponse;
 
@@ -39,6 +37,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -118,9 +117,10 @@ public class PHPPortlet extends GenericPortlet {
 		throws PortletException {
 
 		if (quercusServlet == null) {
-			quercusServlet = new QuercusServlet();
-
 			try {
+				quercusServlet = (HttpServlet)Class.forName(
+					_QUERCUS_SERVLET).newInstance();
+
 				quercusServlet.init(config);
 			}
 			catch (Exception e) {
@@ -175,11 +175,14 @@ public class PHPPortlet extends GenericPortlet {
 		return processor.getFinalizedPage();
 	}
 
+	private static final String _QUERCUS_SERVLET =
+		"com.caucho.quercus.servlet.QuercusServlet";
+
 	private static Log _log = LogFactory.getLog(PHPPortlet.class);
 
 	protected String editUri;
 	protected String helpUri;
 	protected String viewUri;
-	protected QuercusServlet quercusServlet;
+	protected HttpServlet quercusServlet;
 
 }
