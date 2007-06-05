@@ -51,19 +51,24 @@ String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 <div id="<%= randomNamespace %>flashcontent" style="height: <%= height %>; width: <%= width %>;"></div>
 
 <script type="text/javascript">
-	var <%= randomNamespace %>swfObj = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
+	jQuery(
+		function() {
+			var <%= randomNamespace %>swfObj = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
 
-	<%= randomNamespace %>swfObj.addParam("allowScriptAccess", "<%= allowScriptAccess %>");
-	<%= randomNamespace %>swfObj.addParam("base", "<%= base %>");
-	<%= randomNamespace %>swfObj.addParam("devicefont", "<%= devicefont %>");
-	<%= randomNamespace %>swfObj.addParam("flashvars", "<%= flashvars %>");
-	<%= randomNamespace %>swfObj.addParam("loop", "<%= loop %>");
-	<%= randomNamespace %>swfObj.addParam("menu", "<%= menu %>");
-	<%= randomNamespace %>swfObj.addParam("play", "<%= play %>");
-	<%= randomNamespace %>swfObj.addParam("quality", "<%= quality %>");
-	<%= randomNamespace %>swfObj.addParam("salign", "<%= salign %>");
-	<%= randomNamespace %>swfObj.addParam("scale", "<%= scale %>");
-	<%= randomNamespace %>swfObj.addParam("swliveconnect", "<%= swliveconnect %>");
-	<%= randomNamespace %>swfObj.addParam("wmode", "<%= wmode %>");
-	<%= randomNamespace %>swfObj.write("<%= randomNamespace %>flashcontent");
+			<%= randomNamespace %>swfObj.addParam("allowScriptAccess", "<%= allowScriptAccess %>");
+			<%= randomNamespace %>swfObj.addParam("base", "<%= base %>");
+			<%= randomNamespace %>swfObj.addParam("devicefont", "<%= devicefont %>");
+			<%= randomNamespace %>swfObj.addParam("flashvars", "<%= flashvars %>");
+			<%= randomNamespace %>swfObj.addParam("loop", "<%= loop %>");
+			<%= randomNamespace %>swfObj.addParam("menu", "<%= menu %>");
+			<%= randomNamespace %>swfObj.addParam("play", "<%= play %>");
+			<%= randomNamespace %>swfObj.addParam("quality", "<%= quality %>");
+			<%= randomNamespace %>swfObj.addParam("salign", "<%= salign %>");
+			<%= randomNamespace %>swfObj.addParam("scale", "<%= scale %>");
+			<%= randomNamespace %>swfObj.addParam("swliveconnect", "<%= swliveconnect %>");
+			<%= randomNamespace %>swfObj.addParam("wmode", "<%= wmode %>");
+
+			<%= randomNamespace %>swfObj.write("<%= randomNamespace %>flashcontent");
+		}
+	);
 </script>
