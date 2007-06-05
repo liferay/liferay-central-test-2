@@ -24,6 +24,8 @@ package com.liferay.portlet.messaging.model;
 
 import com.liferay.portlet.chat.model.RosterUpdateListener;
 
+import java.io.Serializable;
+
 import org.jivesoftware.smack.PacketCollector;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.XMPPConnection;
@@ -34,7 +36,7 @@ import org.jivesoftware.smack.XMPPConnection;
  * @author Ming-Gih Lam
  *
  */
-public class JabberSession {
+public class JabberSession implements Serializable {
 
 	public XMPPConnection getConnection() {
 		return _connection;
@@ -76,10 +78,10 @@ public class JabberSession {
 		_rosterListener = rosterListener;
 	}
 
-	private XMPPConnection _connection;
-	private PacketCollector _collector;
-	private MessageListener _messageListener;
-	private Roster _roster;
-	private RosterUpdateListener _rosterListener;
+	private transient XMPPConnection _connection;
+	private transient PacketCollector _collector;
+	private transient MessageListener _messageListener;
+	private transient Roster _roster;
+	private transient RosterUpdateListener _rosterListener;
 
 }
