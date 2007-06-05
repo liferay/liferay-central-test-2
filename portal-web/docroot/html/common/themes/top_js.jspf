@@ -218,7 +218,7 @@
 						boxSelector: ".portlet-boundary" ,
 						positionClass: "drop-position",
 						areaClass: "drop-area",
-						onComplete: function(d) {Liferay.Portlet.move(d)}
+						onComplete: function(d) {Liferay.Portlet.move(d);}
 					});
 				}
 
