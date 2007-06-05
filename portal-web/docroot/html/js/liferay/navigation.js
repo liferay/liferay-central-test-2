@@ -327,7 +327,7 @@ Liferay.Navigation = new Class({
 				};
 
 				onSuccess = function(data) {
-					data = $J(data);
+					data = Liferay.Util.toJSONObject(data);
 
 					var currentTab = enterPage.prev();
 					var currentSpan = currentTab.find('span');
@@ -373,7 +373,7 @@ Liferay.Navigation = new Class({
 			};
 
 			onSuccess = function(data) {
-				data = $J(data);
+				data = Liferay.Util.toJSONObject(data);
 
 				var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
 

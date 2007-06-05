@@ -86,7 +86,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					url,
 					{
 						onComplete: function(xmlHttpReq) {
-							var res = $J(xmlHttpReq.responseText);
+							var res = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
 
 							document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
 							document.getElementById("<%= randomNamespace %>averageRating").onmousemove = function(event) {

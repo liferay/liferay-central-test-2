@@ -667,7 +667,12 @@ Liferay.Util = {
 	},
 
 	toJSONObject: function(s) {
-		return eval("(" + s + ")");
+		try {
+			return eval("(" + s + ")");
+		}
+		catch (e) {
+			return new Object();
+		}
 	},
 
 	toJSONString: function (s) {

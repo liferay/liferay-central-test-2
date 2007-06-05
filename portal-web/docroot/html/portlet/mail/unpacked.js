@@ -359,7 +359,7 @@ var Mail = {
 	},
 	
 	emptyFolderReturn : function(xmlHttpReq) {
-		var jsonObj = $J(xmlHttpReq.responseText);
+		var jsonObj = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
 
 		Mail.getFolders();
 
@@ -390,7 +390,7 @@ var Mail = {
 	},
 	
 	getFoldersReturn : function(xmlHttpReq, checkMail) {
-		var foldersObject = $J(xmlHttpReq.responseText);
+		var foldersObject = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
@@ -501,7 +501,7 @@ var Mail = {
 	},
 
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
-		var mailObject = $J(xmlHttpReq.responseText);
+		var mailObject = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
 
 		Mail.currentMessageId = mailObject.id;
 		Mail.displayingMessage = true;
@@ -540,7 +540,7 @@ var Mail = {
 	},
 	
 	getPreviewReturn : function(xmlHttpReq) {
-		var mailObject = $J(xmlHttpReq.responseText);
+		var mailObject = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
 
 		Mail.searchResults = false;
 
@@ -553,7 +553,7 @@ var Mail = {
 	},
 
 	getSearchReturn : function(xmlHttpReq) {
-		var mailObject = $J(xmlHttpReq.responseText);
+		var mailObject = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
 
 		Mail.currentMessageId = null;
 		Mail.mailObject = mailObject;
@@ -597,35 +597,6 @@ var Mail = {
 		Mail.TRASH_NAME = trash;
 		Mail.DEFAULT_FOLDERS = new Array(inbox, drafts, sent, spam, trash);
 
-/*
-		var folderPane = document.getElementById("portlet-mail-folder-pane");
-		var folderHandle = document.getElementById("portlet-mail-handle");
-		var msgsPane = document.getElementById("portlet-mail-msgs-pane");
-		
-		var previewBox = document.getElementById("portlet-mail-msgs-preview");
-		var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
-		var previewHandle = document.getElementById("portlet-mail-msgs-handle");
-		var detailedPane = document.getElementById("portlet-mail-msg-detailed-pane");
-		var detailedFrame = document.getElementById("portlet-mail-msg-detailed-frame");
-		var msgHeader = document.getElementById("portlet-mail-msg-header");
-		
-		var msgsTitleState = document.getElementById("portlet-mail-msgs-title-state");
-		var msgsTitleFrom = document.getElementById("portlet-mail-msgs-title-from");
-		var msgsTitleFromHandle = document.getElementById("portlet-mail-msgs-from-handle");
-		var msgsTitleSubject = document.getElementById("portlet-mail-msgs-title-subject");
-		var msgsTitleSubjectHandle = document.getElementById("portlet-mail-msgs-subject-handle");
-		var msgsTitleReceived = document.getElementById("portlet-mail-msgs-title-received");
-		var msgsTitleReceivedHandle = document.getElementById("portlet-mail-msgs-received-handle");
-		var msgsTitleSize = document.getElementById("portlet-mail-msgs-title-size");
-		
-		var msgsFrom = document.getElementById("portlet-mail-msgs-from");
-		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
-		var msgsReceived = document.getElementById("portlet-mail-msgs-received");
-		var msgsSize = document.getElementById("portlet-mail-msgs-size");
-		
-		var mailBottomHandle = document.getElementById("portlet-mail-bottom-handle");
-		*/
-		
 		/* Vertical main folder bar */
 		_$J("#portlet-mail-folder-pane").lResize({
 			handle: "#portlet-mail-handle",

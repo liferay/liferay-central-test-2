@@ -196,7 +196,7 @@ var ReverseAjax = {
 	},
 	
 	response: function(xmlHttpRequest) {
-		var res =$J(xmlHttpRequest.responseText);
+		var res = Liferay.Util.toJSONObject(xmlHttpRequest.responseText);
 		var status = res.status;
 		
 		if (status && status != "failure") {
@@ -217,18 +217,6 @@ var ReverseAjax = {
 		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax?release=1", {reverseAjax:true});
 	}
 };
-
-function $J(JSONText) {
-	var rt;
-	try {
-		rt = eval("(" + JSONText + ")");
-	}
-	catch (e) {
-		rt = new Object();
-	}
-	
-	return rt;
-}
 
 function executeLoadedScript(el) {
 	var scripts = el.getElementsByTagName("script");
@@ -255,9 +243,7 @@ function executeLoadedScript(el) {
 					eval(scripts[i].text);
 				}
 			}
-			catch (e) {
-				//alert(e);
-			}
+			catch (e) {}
 		}
 	}
 }
@@ -266,7 +252,6 @@ function executeLoadedScript(el) {
  * NOTE: loadPage() has been depricated.  Use AjaxUtil.request() instead
  */
 function loadPage(path, queryString, returnFunction, returnArgs) {
-	
 	AjaxUtil.request(path + "?" + queryString, {
 			onComplete: returnFunction,
 			returnArgs: returnArgs
@@ -281,4 +266,4 @@ function printJSON(data) {
 			target.innerHTML = data.toString();
 		}
 	}
-}
+} 
