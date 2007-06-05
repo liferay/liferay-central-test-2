@@ -304,20 +304,22 @@ var jQBrowser2 = function() {
 	jQuery.browser = Public;
 	// Browser selectors
 	if(!add_selectors){return;}
+	var bn = jQuery.browser.browser.toLowerCase();
+	var bv = jQuery.browser.version.string('round');
 	var b = jQuery.browser.msie // IE
 						? 'ie ie'+jQuery.browser.version.string('round')
 						: (jQuery.browser.firefox || jQuery.browser.camino || jQuery.browser.flock || jQuery.browser.mozilla || jQuery.browser.netscape) // Gecko
-							? 'gecko '+jQuery.browser.browser.toLowerCase()+jQuery.browser.version.string('round')
+							? 'gecko '+ bn + bv + ' ' + bn
 								: (jQuery.browser.opera) // Opera
-									? 'opera opera'+jQuery.browser.version.string()
+									? 'opera ' + bn + bv
 										: (jQuery.browser.safari) // Safari
-											? 'safari'
+											? 'safari ' + bn + bv
 												: jQuery.browser.konqueror // Konqueror
-													? 'konqueror'
+													? 'konqueror ' + bn + bv
 														: jQuery.browser.icab // iCab
-															? 'icab'
+															? 'icab ' + bn + bv
 																: jQuery.browser.aol // AOL
-																 	? 'aol'
+																 	? 'aol ' + bn + bv
 																	: '',
 		os=jQuery.browser.linux?'linux':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
 		jQuery('html').addClass(b).addClass(os).addClass('js');
