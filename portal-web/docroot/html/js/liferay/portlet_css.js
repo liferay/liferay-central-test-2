@@ -1,7 +1,8 @@
 Liferay.PortletCSS = {
-	init: function(obj) {
+	init: function(str) {
 		var instance = this;
-		var currentId = obj.attr('id');
+		var obj = jQuery('#' + str);
+		var currentId = str;
 		var tabTrigger = 1;
 
 		instance._currentPortlet = obj.find('.portlet');
@@ -17,7 +18,7 @@ Liferay.PortletCSS = {
 
 				instance._lang = {};
 
-				instance._lang.refreshText = Liferay.Language.get('update-the-styles-on-this-page');;
+				instance._lang.refreshText = Liferay.Language.get('update-the-styles-on-this-page');
 				instance._lang.refreshTextSafari = Liferay.Language.get('please-press-the-save-button-to-view-your-changes');
 				instance._lang.addId = Liferay.Language.get('add-a-css-rule-for-just-this-portlet');
 				instance._lang.addClass = Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one');
