@@ -65,7 +65,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 
 		if (Validator.isNotNull(doAsUserId)) {
 			url.append("&doAsUserId=");
-			url.append(Http.encodeURL(doAsUserId));
+			url.append(doAsUserId);
 		}
 
 		String ppid = ParamUtil.getString(request, "p_p_id");

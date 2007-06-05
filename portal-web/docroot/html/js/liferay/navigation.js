@@ -279,6 +279,7 @@ Liferay.Navigation = new Class({
 		if (confirm('Are you sure you want to remove "' + tabText + '"?')) {
 			var data = {
 				cmd: 'delete',
+				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 				groupId: themeDisplay.getGroupId(),
 				privateLayout: themeDisplay.isPrivateLayout(),
 				layoutId: tab[0]._LFR_layoutId
@@ -315,9 +316,9 @@ Liferay.Navigation = new Class({
 			// Updating an existing page
 
 			if (name != oldName) {
-
 				data = {
 					cmd: 'name',
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					groupId: themeDisplay.getGroupId(),
 					privateLayout: themeDisplay.isPrivateLayout(),
 					layoutId: themeDisplay.getLayoutId(),
@@ -411,6 +412,7 @@ Liferay.Navigation = new Class({
 
 		var data = {
 			cmd: 'priority',
+			doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 			groupId: themeDisplay.getGroupId(),
 			privateLayout: themeDisplay.isPrivateLayout(),
 			layoutId: obj._LFR_layoutId,
