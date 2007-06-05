@@ -562,7 +562,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
+		<render-weight>1</render-weight>
 	</portlet>
 	<portlet>
 		<portlet-name>54</portlet-name>
@@ -653,7 +653,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
+		<render-weight>1</render-weight>
 	</portlet>
 	<portlet>
 		<portlet-name>66</portlet-name>

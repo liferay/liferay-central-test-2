@@ -709,7 +709,7 @@
 			</fieldset>
 
 			<fieldset class="col" id="lfr-border-style">
-				<legend>Border style</legend>
+				<legend><liferay-ui:message key="border-style" /></legend>
 
 				<div class="ctrl-holder">
 					<label for="lfr-use-for-all-style">
@@ -785,7 +785,7 @@
 			</fieldset>
 
 			<fieldset class="col" id="lfr-border-color">
-				<legend>Border color</legend>
+				<legend><liferay-ui:message key="border-color" /></legend>
 
 				<div class="ctrl-holder">
 					<label for="lfr-use-for-all-color">
