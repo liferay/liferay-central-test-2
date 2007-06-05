@@ -2361,6 +2361,7 @@ the-link-could-not-be-found=Ο σύνδεσμος δεν βρέθηκε.
 the-message-board-is-empty=Ο πίνακας μηνυμάτων είναι άδειος.
 the-message-body=Το σώμα μηνυμάτων
 the-message-could-not-be-found=Το μύνημα δεν μπόρεσε να βρεθεί.
+the-message-id=Η ταυτότητα μηνυμάτων
 the-message-object-has-expired-and-is-no-longer-available=Το μήνυμα έχει λήξει και δεν είναι πια διαθέσιμο. Παρακαλώ {0} την σύνθεσή σας.
 the-name-of-the-email-recipient=Το όνομα του παραλήπτη ηλεκτρονικού ταχυδρομείου
 the-node-could-not-be-found=Ο κόμβος δεν μπόρεσε να βρεθεί.

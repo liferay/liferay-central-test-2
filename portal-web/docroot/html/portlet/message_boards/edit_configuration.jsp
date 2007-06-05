@@ -281,7 +281,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<b>[$MESSAGE_BODY$]</b>
 			</td>
 			<td>
-				<liferay-ui:message key="the-message-body" />The message body
+				<liferay-ui:message key="the-message-body" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>[$MESSAGE_ID$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-message-id" />
 			</td>
 		</tr>
 		<tr>

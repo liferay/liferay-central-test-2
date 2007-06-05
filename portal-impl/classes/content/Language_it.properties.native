@@ -2363,6 +2363,7 @@ the-link-could-not-be-found=Il collegamento non ha potuto essere trovato.
 the-message-board-is-empty=La message board � vuota.
 the-message-body=Il corpo di messaggio
 the-message-could-not-be-found=Il messaggio non � stato trovato.
+the-message-id=L'identificazione del messaggio
 the-message-object-has-expired-and-is-no-longer-available=Il Messaggio � scaduto o non � pi� disponibile. Si prega di {0} la vostra composizione.
 the-name-of-the-email-recipient=Il nome del destinatario del email
 the-node-could-not-be-found=Il nodo non � stato  trovato.

@@ -2362,6 +2362,7 @@ the-link-could-not-be-found=链接找不到。
 the-message-board-is-empty=留言簿是空的。
 the-message-body=信息主体
 the-message-could-not-be-found=消息找不到。
+the-message-id=消息身份证
 the-message-object-has-expired-and-is-no-longer-available=消息已经超时并失效. 请 {0} 您的操作.
 the-name-of-the-email-recipient=电子邮件接收者的名字
 the-node-could-not-be-found=节点找不到。

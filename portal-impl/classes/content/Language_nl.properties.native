@@ -2363,6 +2363,7 @@ the-link-could-not-be-found=De link kon niet worden gevonden.
 the-message-board-is-empty=Het forum is leeg.
 the-message-body=Het berichtlichaam
 the-message-could-not-be-found=Het bericht kon niet worden gevonden.
+the-message-id=Berichtidentiteitskaart
 the-message-object-has-expired-and-is-no-longer-available=Het bericht is verlopen en is niet langer beschikbaar. {0} uw compositie.
 the-name-of-the-email-recipient=De naam van de e-mailontvanger
 the-node-could-not-be-found=Het knooppunt kon niet worden gevonden.

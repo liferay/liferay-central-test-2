@@ -2363,6 +2363,7 @@ the-link-could-not-be-found=Der Link konnte nicht gefunden werden.
 the-message-board-is-empty=Das Forum ist leer
 the-message-body=Der Nachrichtenkörper
 the-message-could-not-be-found=Die Nachricht konnte nicht gefunden werden.
+the-message-id=Die Anzeige Identifikation
 the-message-object-has-expired-and-is-no-longer-available=Das Nachrichtenobjekt ist verfallen und nicht mehr verfügbar. Bitte {0} Sie Ihre Zusammenstellung.
 the-name-of-the-email-recipient=Der Name des E-Mail Empfängers
 the-node-could-not-be-found=Der Knoten konnte nicht gefunden werden.
