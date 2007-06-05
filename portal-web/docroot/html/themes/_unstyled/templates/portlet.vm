@@ -16,6 +16,7 @@
 				<a href="$portlet_back_url" class="portlet-icon-back">#language("back")</a>
 			#else
 			    $theme.iconRefresh()
+				$theme.iconPortletCss()
 				$theme.iconConfiguration()
 				$theme.iconEdit()
 				$theme.iconEditGuest()

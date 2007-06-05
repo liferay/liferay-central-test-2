@@ -88,6 +88,12 @@ if (Validator.isNull(portletTitle)) {
 
 portletDisplay.setTitle(portletTitle);
 
+// URL close
+
+String urlClose = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
+
+portletDisplay.setURLClose(urlClose.toString());
+
 // URL configuration
 
 PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), false);
@@ -105,18 +111,6 @@ urlConfiguration.setParameter("portletResource", portletDisplay.getId());
 urlConfiguration.setParameter("redirect", currentURL);
 
 portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
-
-// URL refresh
-
-String urlRefresh = "javascript: " + portletDisplay.getNamespace() + "refreshPortlet();";
-
-portletDisplay.setURLRefresh(urlRefresh);
-
-// URL close
-
-String urlClose = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
-
-portletDisplay.setURLClose(urlClose.toString());
 
 // URL edit
 
@@ -139,7 +133,7 @@ else {
 
 portletDisplay.setURLEdit(urlEdit.toString());
 
-// URL guest edit
+// URL edit guest
 
 PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
 
@@ -224,6 +218,12 @@ String urlMin = "javascript: minimizePortlet('" + plid.longValue() + "', '" + po
 
 portletDisplay.setURLMin(urlMin);
 
+// URL portlet css
+
+String urlPortletCss = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
+
+portletDisplay.setURLPortletCss(urlPortletCss.toString());
+
 // URL print
 
 PortletURLImpl urlPrint = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
@@ -244,6 +244,12 @@ else {
 }
 
 portletDisplay.setURLPrint(urlPrint.toString());
+
+// URL refresh
+
+String urlRefresh = "javascript: " + portletDisplay.getNamespace() + "refreshPortlet();";
+
+portletDisplay.setURLRefresh(urlRefresh);
 
 // URL back
 

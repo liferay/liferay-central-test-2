@@ -48,4 +48,6 @@ else {
 }
 %>
 
-<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
+<c:if test="<%= themeDisplay.isSignedIn() && !layoutMaximized %>">
+	<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
+</c:if>

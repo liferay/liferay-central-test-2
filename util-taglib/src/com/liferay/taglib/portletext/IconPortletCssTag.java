@@ -20,62 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.taglib.portletext;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.taglib.ui.IconTag;
 
-import java.text.DateFormat;
+import java.io.IOException;
 
-import java.util.Date;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="IconPortletCssTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class IconPortletCssTag extends IconTag {
 
-	static String name = "Liferay Portal";
+	public static void doTag(
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
 
-	static String version = "4.3.0 RC1";
-
-	static String codeName = "Owen";
-
-	static String build = "4138";
-
-	static String date = "June 4, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		doTag(_PAGE, ctx, req, res);
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public static void doTag(
+			String page, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
+		throws IOException, ServletException {
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+
+		rd.include(req, res);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	protected String getDefaultPage() {
+		return _PAGE;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private static final String _PAGE =
+		"/html/taglib/portlet/icon_portlet_css/page.jsp";
 
 }

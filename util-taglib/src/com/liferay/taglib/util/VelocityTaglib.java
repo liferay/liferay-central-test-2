@@ -33,6 +33,7 @@ import com.liferay.taglib.portletext.IconHelpTag;
 import com.liferay.taglib.portletext.IconMaximizeTag;
 import com.liferay.taglib.portletext.IconMinimizeTag;
 import com.liferay.taglib.portletext.IconPortletTag;
+import com.liferay.taglib.portletext.IconPortletCssTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.IconRefreshTag;
 import com.liferay.taglib.portletext.RuntimeTag;
@@ -233,6 +234,22 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		IconPortletTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconPortletCss() throws Exception {
+		_res.recycle();
+
+		IconPortletCssTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconPortletCss(String page) throws Exception {
+		_res.recycle();
+
+		IconPortletCssTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}

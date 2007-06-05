@@ -177,6 +177,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>icon-portlet-css</name>
+		<tagclass>com.liferay.taglib.portletext.IconPortletCssTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>icon-print</name>
 		<tagclass>com.liferay.taglib.portletext.IconPrintTag</tagclass>
 		<bodycontent>JSP</bodycontent>

@@ -197,6 +197,7 @@ boolean showHelpIcon = portlet.hasPortletMode(responseContentType, PortletMode.H
 boolean showMaxIcon = true;
 boolean showMinIcon = true;
 boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
+boolean showPortletCssIcon = false;
 boolean showPortletIcon = Validator.isNotNull(portlet.getIcon());
 boolean showPrintIcon = portlet.hasPortletMode(responseContentType, LiferayPortletMode.PRINT);
 boolean showRefreshIcon = portlet.isAjaxable() && (portlet.getRenderWeight() == 0);
@@ -204,6 +205,7 @@ boolean showRefreshIcon = portlet.isAjaxable() && (portlet.getRenderWeight() == 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
+		showPortletCssIcon = true;
 	}
 }
 
@@ -264,6 +266,7 @@ if (denyAccess) {
 	showMaxIcon = false;
 	showMinIcon = false;
 	showMoveIcon = false;
+	showPortletCssIcon = false;
 	showPrintIcon = false;
 }
 
@@ -305,6 +308,7 @@ portletDisplay.setShowHelpIcon(showHelpIcon);
 portletDisplay.setShowMaxIcon(showMaxIcon);
 portletDisplay.setShowMinIcon(showMinIcon);
 portletDisplay.setShowMoveIcon(showMoveIcon);
+portletDisplay.setShowPortletCssIcon(showPortletCssIcon);
 portletDisplay.setShowPortletIcon(showPortletIcon);
 portletDisplay.setShowPrintIcon(showPrintIcon);
 portletDisplay.setShowRefreshIcon(showRefreshIcon);
