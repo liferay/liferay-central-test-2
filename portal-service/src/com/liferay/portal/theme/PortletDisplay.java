@@ -551,7 +551,7 @@ public class PortletDisplay implements Serializable {
 		_urlMax = master.getURLMax();
 		_urlMin = master.getURLMin();
 		_urlPortlet = master.getURLPortlet();
-		_urlPortletCss = master.getURLPortlet();
+		_urlPortletCss = master.getURLPortletCss();
 		_urlPrint = master.getURLPrint();
 		_urlRefresh = master.getURLRefresh();
 		_restoreCurrentView = master.isRestoreCurrentView();
@@ -603,7 +603,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLMax(_urlMax);
 		slave.setURLMin(_urlMin);
 		slave.setURLPortlet(_urlPortlet);
-		slave.setURLPortlet(_urlPortletCss);
+		slave.setURLPortletCss(_urlPortletCss);
 		slave.setURLPrint(_urlPrint);
 		slave.setURLRefresh(_urlRefresh);
 		slave.setRestoreCurrentView(_restoreCurrentView);
