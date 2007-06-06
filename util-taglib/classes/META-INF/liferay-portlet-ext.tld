@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
 
 <taglib>
-	<tlibversion>1.0</tlibversion>
-	<jspversion>1.1</jspversion>
-	<shortname>liferay-portlet</shortname>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.1</jsp-version>
+	<short-name>liferay-portlet</short-name>
 	<uri>http://liferay.com/tld/portlet</uri>
 
 	<!--
@@ -32,9 +32,9 @@
 
 	<tag>
 		<name>actionURL</name>
-		<tagclass>com.liferay.taglib.portlet.ActionURLTag</tagclass>
+		<tag-class>com.liferay.taglib.portlet.ActionURLTag</tag-class>
 		<teiclass>com.liferay.taglib.portlet.ActionURLTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>windowState</name>
 			<required>false</required>
@@ -88,8 +88,8 @@
 	</tag>
 	<tag>
 		<name>icon-back</name>
-		<tagclass>com.liferay.taglib.portletext.IconBackTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconBackTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -98,8 +98,8 @@
 	</tag>
 	<tag>
 		<name>icon-close</name>
-		<tagclass>com.liferay.taglib.portletext.IconCloseTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconCloseTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -108,8 +108,8 @@
 	</tag>
 	<tag>
 		<name>icon-configuration</name>
-		<tagclass>com.liferay.taglib.portletext.IconConfigurationTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconConfigurationTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -118,8 +118,8 @@
 	</tag>
 	<tag>
 		<name>icon-edit</name>
-		<tagclass>com.liferay.taglib.portletext.IconEditTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconEditTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -128,8 +128,8 @@
 	</tag>
 	<tag>
 		<name>icon-edit-guest</name>
-		<tagclass>com.liferay.taglib.portletext.IconEditGuestTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconEditGuestTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -138,8 +138,8 @@
 	</tag>
 	<tag>
 		<name>icon-help</name>
-		<tagclass>com.liferay.taglib.portletext.IconHelpTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconHelpTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -148,8 +148,8 @@
 	</tag>
 	<tag>
 		<name>icon-maximize</name>
-		<tagclass>com.liferay.taglib.portletext.IconMaximizeTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconMaximizeTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -158,8 +158,8 @@
 	</tag>
 	<tag>
 		<name>icon-minimize</name>
-		<tagclass>com.liferay.taglib.portletext.IconMinimizeTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconMinimizeTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -168,8 +168,8 @@
 	</tag>
 	<tag>
 		<name>icon-portlet</name>
-		<tagclass>com.liferay.taglib.portletext.IconPortletTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconPortletTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -178,8 +178,8 @@
 	</tag>
 	<tag>
 		<name>icon-portlet-css</name>
-		<tagclass>com.liferay.taglib.portletext.IconPortletCssTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconPortletCssTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -188,8 +188,8 @@
 	</tag>
 	<tag>
 		<name>icon-print</name>
-		<tagclass>com.liferay.taglib.portletext.IconPrintTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconPrintTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -198,8 +198,8 @@
 	</tag>
 	<tag>
 		<name>icon-refresh</name>
-		<tagclass>com.liferay.taglib.portletext.IconRefreshTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.IconRefreshTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -232,9 +232,9 @@
 
 	<tag>
 		<name>renderURL</name>
-		<tagclass>com.liferay.taglib.portlet.RenderURLTag</tagclass>
+		<tag-class>com.liferay.taglib.portlet.RenderURLTag</tag-class>
 		<teiclass>com.liferay.taglib.portlet.RenderURLTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>windowState</name>
 			<required>false</required>
@@ -288,8 +288,8 @@
 	</tag>
 	<tag>
 		<name>param</name>
-		<tagclass>com.liferay.taglib.util.ParamTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.util.ParamTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -303,8 +303,8 @@
 	</tag>
 	<tag>
 		<name>preview</name>
-		<tagclass>com.liferay.taglib.portletext.PreviewTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.PreviewTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>portletName</name>
 			<required>true</required>
@@ -323,8 +323,8 @@
 	</tag>
 	<tag>
 		<name>runtime</name>
-		<tagclass>com.liferay.taglib.portletext.RuntimeTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.RuntimeTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>portletName</name>
 			<required>true</required>
@@ -338,8 +338,8 @@
 	</tag>
 	<tag>
 		<name>title</name>
-		<tagclass>com.liferay.taglib.portletext.TitleTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portletext.TitleTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>

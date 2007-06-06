@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
 
 <taglib>
-	<tlibversion>1.0</tlibversion>
-	<jspversion>1.1</jspversion>
-	<shortname>liferay-ui</shortname>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.1</jsp-version>
+	<short-name>liferay-ui</short-name>
 	<uri>http://liferay.com/tld/ui</uri>
 	<tag>
 		<name>box</name>
-		<tagclass>com.liferay.taglib.ui.BoxTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.BoxTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>top</name>
 			<required>true</required>
@@ -23,8 +23,8 @@
 	</tag>
 	<tag>
 		<name>breadcrumb</name>
-		<tagclass>com.liferay.taglib.ui.BreadcrumbTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.BreadcrumbTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -53,8 +53,8 @@
 	</tag>
 	<tag>
 		<name>calendar</name>
-		<tagclass>com.liferay.taglib.ui.CalendarTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.CalendarTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -93,8 +93,8 @@
 	</tag>
 	<tag>
 		<name>captcha</name>
-		<tagclass>com.liferay.taglib.ui.CaptchaTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.CaptchaTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -108,8 +108,8 @@
 	</tag>
 	<tag>
 		<name>discussion</name>
-		<tagclass>com.liferay.taglib.ui.DiscussionTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.DiscussionTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -153,9 +153,9 @@
 	</tag>
 	<tag>
 		<name>error</name>
-		<tagclass>com.liferay.taglib.ui.ErrorTag</tagclass>
+		<tag-class>com.liferay.taglib.ui.ErrorTag</tag-class>
 		<teiclass>com.liferay.taglib.ui.ErrorTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
 			<required>false</required>
@@ -194,8 +194,8 @@
 	</tag>
 	<tag>
 		<name>flash</name>
-		<tagclass>com.liferay.taglib.ui.FlashTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.FlashTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -299,8 +299,8 @@
 	</tag>
 	<tag>
 		<name>icon</name>
-		<tagclass>com.liferay.taglib.ui.IconTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.IconTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -339,8 +339,8 @@
 	</tag>
 	<tag>
 		<name>icon-deactivate</name>
-		<tagclass>com.liferay.taglib.ui.IconDeactivateTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.IconDeactivateTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -354,8 +354,8 @@
 	</tag>
 	<tag>
 		<name>icon-delete</name>
-		<tagclass>com.liferay.taglib.ui.IconDeleteTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.IconDeleteTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -369,8 +369,8 @@
 	</tag>
 	<tag>
 		<name>icon-help</name>
-		<tagclass>com.liferay.taglib.ui.IconHelpTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.IconHelpTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -384,8 +384,8 @@
 	</tag>
 	<tag>
 		<name>png-image</name>
-		<tagclass>com.liferay.taglib.ui.PngImageTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.PngImageTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -409,8 +409,8 @@
 	</tag>
 	<tag>
 		<name>input-checkbox</name>
-		<tagclass>com.liferay.taglib.ui.InputCheckBoxTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputCheckBoxTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -444,8 +444,8 @@
 	</tag>
 	<tag>
 		<name>input-date</name>
-		<tagclass>com.liferay.taglib.ui.InputDateTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputDateTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -544,8 +544,8 @@
 	</tag>
 	<tag>
 		<name>input-editor</name>
-		<tagclass>com.liferay.taglib.ui.InputEditorTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputEditorTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -584,8 +584,8 @@
 	</tag>
 	<tag>
 		<name>input-field</name>
-		<tagclass>com.liferay.taglib.ui.InputFieldTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputFieldTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -624,8 +624,8 @@
 	</tag>
 	<tag>
 		<name>input-move-boxes</name>
-		<tagclass>com.liferay.taglib.ui.InputMoveBoxesTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputMoveBoxesTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>formName</name>
 			<required>false</required>
@@ -684,8 +684,8 @@
 	</tag>
 	<tag>
 		<name>input-permissions</name>
-		<tagclass>com.liferay.taglib.ui.InputPermissionsTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputPermissionsTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -704,8 +704,8 @@
 	</tag>
 	<tag>
 		<name>input-resource</name>
-		<tagclass>com.liferay.taglib.ui.InputResourceTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputResourceTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -719,8 +719,8 @@
 	</tag>
 	<tag>
 		<name>input-select</name>
-		<tagclass>com.liferay.taglib.ui.InputSelectTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputSelectTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -749,8 +749,8 @@
 	</tag>
 	<tag>
 		<name>input-time</name>
-		<tagclass>com.liferay.taglib.ui.InputTimeTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputTimeTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -814,8 +814,8 @@
 	</tag>
 	<tag>
 		<name>input-time-zone</name>
-		<tagclass>com.liferay.taglib.ui.InputTimeZoneTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.InputTimeZoneTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -854,13 +854,13 @@
 	</tag>
 	<tag>
 		<name>journal-content-search</name>
-		<tagclass>com.liferay.taglib.ui.JournalContentSearchTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.JournalContentSearchTag</tag-class>
+		<body-content>JSP</body-content>
 	</tag>
 	<tag>
 		<name>language</name>
-		<tagclass>com.liferay.taglib.ui.LanguageTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.LanguageTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -889,8 +889,8 @@
 	</tag>
 	<tag>
 		<name>message</name>
-		<tagclass>com.liferay.taglib.ui.MessageTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.MessageTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>key</name>
 			<required>true</required>
@@ -899,8 +899,8 @@
 	</tag>
 	<tag>
 		<name>my-places</name>
-		<tagclass>com.liferay.taglib.ui.MyPlacesTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.MyPlacesTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -909,8 +909,8 @@
 	</tag>
 	<tag>
 		<name>navigation</name>
-		<tagclass>com.liferay.taglib.ui.NavigationTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.NavigationTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -929,8 +929,8 @@
 	</tag>
 	<tag>
 		<name>page-iterator</name>
-		<tagclass>com.liferay.taglib.ui.PageIteratorTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.PageIteratorTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
 			<required>false</required>
@@ -989,8 +989,8 @@
 	</tag>
 	<tag>
 		<name>param</name>
-		<tagclass>com.liferay.taglib.util.ParamTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.util.ParamTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -1004,8 +1004,8 @@
 	</tag>
 	<tag>
 		<name>ratings</name>
-		<tagclass>com.liferay.taglib.ui.RatingsTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.RatingsTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1029,13 +1029,13 @@
 	</tag>
 	<tag>
 		<name>search</name>
-		<tagclass>com.liferay.taglib.ui.SearchTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.SearchTag</tag-class>
+		<body-content>JSP</body-content>
 	</tag>
 	<tag>
 		<name>search-form</name>
-		<tagclass>com.liferay.taglib.ui.SearchFormTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.SearchFormTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>true</required>
@@ -1049,8 +1049,8 @@
 	</tag>
 	<tag>
 		<name>search-iterator</name>
-		<tagclass>com.liferay.taglib.ui.SearchIteratorTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.SearchIteratorTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1064,8 +1064,8 @@
 	</tag>
 	<tag>
 		<name>search-paginator</name>
-		<tagclass>com.liferay.taglib.ui.SearchPaginatorTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.SearchPaginatorTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1079,8 +1079,8 @@
 	</tag>
 	<tag>
 		<name>search-speed</name>
-		<tagclass>com.liferay.taglib.ui.SearchSpeedTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.SearchSpeedTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1099,9 +1099,9 @@
 	</tag>
 	<tag>
 		<name>section</name>
-		<tagclass>com.liferay.taglib.ui.SectionTag</tagclass>
+		<tag-class>com.liferay.taglib.ui.SectionTag</tag-class>
 		<teiclass>com.liferay.taglib.ui.SectionTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
 			<required>false</required>
@@ -1115,8 +1115,8 @@
 	</tag>
 	<tag>
 		<name>success</name>
-		<tagclass>com.liferay.taglib.ui.SuccessTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.SuccessTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1140,9 +1140,9 @@
 	</tag>
 	<tag>
 		<name>table-iterator</name>
-		<tagclass>com.liferay.taglib.ui.TableIteratorTag</tagclass>
+		<tag-class>com.liferay.taglib.ui.TableIteratorTag</tag-class>
 		<teiclass>com.liferay.taglib.ui.TableIteratorTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
 			<required>false</required>
@@ -1191,8 +1191,8 @@
 	</tag>
 	<tag>
 		<name>tabs</name>
-		<tagclass>com.liferay.taglib.ui.TabsTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.TabsTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
 			<required>false</required>
@@ -1301,8 +1301,8 @@
 	</tag>
 	<tag>
 		<name>tags-selector</name>
-		<tagclass>com.liferay.taglib.ui.TagsSelectorTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.TagsSelectorTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1336,8 +1336,8 @@
 	</tag>
 	<tag>
 		<name>tags-summary</name>
-		<tagclass>com.liferay.taglib.ui.TagsSummaryTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.TagsSummaryTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1361,8 +1361,8 @@
 	</tag>
 	<tag>
 		<name>toggle</name>
-		<tagclass>com.liferay.taglib.ui.ToggleTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.ToggleTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
@@ -1396,8 +1396,8 @@
 	</tag>
 	<tag>
 		<name>toggle-value</name>
-		<tagclass>com.liferay.taglib.ui.ToggleValueTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.ToggleValueTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>id</name>
 			<required>true</required>
@@ -1406,8 +1406,8 @@
 	</tag>
 	<tag>
 		<name>upload-progress</name>
-		<tagclass>com.liferay.taglib.ui.UploadProgressTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.ui.UploadProgressTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
