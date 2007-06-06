@@ -1010,6 +1010,12 @@ public class PortalUtil {
 		return user;
 	}
 
+	public static User getSelectedUser(ActionRequest req)
+		throws PortalException, RemoteException, SystemException {
+
+		return getSelectedUser(req, true);
+	}
+
 	public static User getSelectedUser(
 			ActionRequest req, boolean checkPermission)
 		throws PortalException, RemoteException, SystemException {
@@ -1017,7 +1023,7 @@ public class PortalUtil {
 		return getSelectedUser(getHttpServletRequest(req), checkPermission);
 	}
 
-	public static User getSelectedUser(ActionRequest req)
+	public static User getSelectedUser(RenderRequest req)
 		throws PortalException, RemoteException, SystemException {
 
 		return getSelectedUser(req, true);
@@ -1028,12 +1034,6 @@ public class PortalUtil {
 		throws PortalException, RemoteException, SystemException {
 
 		return getSelectedUser(getHttpServletRequest(req), checkPermission);
-	}
-
-	public static User getSelectedUser(RenderRequest req)
-		throws PortalException, RemoteException, SystemException {
-
-		return getSelectedUser(req, true);
 	}
 
 	public static String[] getSystemCommunityRoles() {

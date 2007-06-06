@@ -45,4 +45,3 @@ Group group = (Group)objArray[1];
 
     <liferay-ui:icon image="assign_user_roles" url="<%= assignURL %>" />
 </c:if>
-    
