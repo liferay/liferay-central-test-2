@@ -280,7 +280,17 @@ Liferay.PortletCSS = {
 
 			instance._saveButton.unbind().click(
 				function() {
-						console.dir(instance._objData);
+						jQuery.ajax(
+							{
+								data: {
+									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+									cmd: 'update_portlet_css',
+									portletId: instance._portletId,
+									objData: instance._objData
+								},
+								url: themeDisplay.getPathContext() + '/update_portlet_css'
+							}
+						);
 				}
 			);
 
