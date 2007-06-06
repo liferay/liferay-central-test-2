@@ -1,0 +1,10 @@
+<libraries>
+	<library>
+		<file-name>development/ant-contrib.jar</file-name>
+		<version>1.0b3</version>
+		<project-name>Ant-Contrib Tasks</project-name>
+		<project-url>http://ant-contrib.sourceforge.net/</project-url>
+		<license-name>Apache License 2.0</license-name>
+		<license-url>http://www.opensource.org/licenses/apache2.0.php</license-url>
+	</library>
+</libraries>
