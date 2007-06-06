@@ -56,8 +56,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.version.Version;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -356,7 +354,5 @@ public class DLLocalServiceImpl implements DLLocalService {
 			}
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(DLLocalServiceImpl.class);
 
 }

@@ -85,8 +85,6 @@ import java.util.Locale;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -665,7 +663,5 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyMxException();
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(CompanyLocalServiceImpl.class);
 
 }
