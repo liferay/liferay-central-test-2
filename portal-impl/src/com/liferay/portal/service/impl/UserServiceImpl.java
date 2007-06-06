@@ -27,13 +27,17 @@ import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.User;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.*;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.RolePermission;
 import com.liferay.portal.service.permission.UserGroupPermission;
@@ -369,28 +373,27 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	protected void checkUnsetPermission(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
 		Role ownerRole = RoleLocalServiceUtil.getRole(
-				getUser().getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+			user.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
 		if (!UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				getUser().getUserId(), groupId, ownerRole.getRoleId())) {
+				user.getUserId(), groupId, ownerRole.getRoleId())) {
 
 			Role adminRole = RoleLocalServiceUtil.getRole(
-					getUser().getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
+				user.getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
 
 			for (int i = 0; i < userIds.length; i++) {
-
 				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						userIds[i], groupId, ownerRole.getRoleId()) ||
 					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						userIds[i], groupId, adminRole.getRoleId()) ) {
-					
+
 					throw new PrincipalException();
 				}
 			}
-
 		}
-
 
 		checkUpdatePermission(groupId, userIds);
 	}
@@ -408,9 +411,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 			boolean hasPermission = false;
 
-			User user = getUser();
+			long userId = getUserId();
 
-			if ((userIds.length == 1) && (user.getUserId() == userIds[0])) {
+			if ((userIds.length == 1) && (userId == userIds[0])) {
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 				if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
