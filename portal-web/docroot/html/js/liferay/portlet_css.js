@@ -8,6 +8,7 @@ Liferay.PortletCSS = {
 		instance._currentPortlet = obj.find('.portlet');
 		instance._newPanel = jQuery('#portlet-set-properties');
 		instance._currentPortletId = instance._currentPortlet.attr('id');
+		instance._portletBoundryId = obj.attr('id');
 
 		var newPanel = instance._newPanel;
 
@@ -285,7 +286,7 @@ Liferay.PortletCSS = {
 								data: {
 									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 									cmd: 'update_portlet_css',
-									portletId: instance._portletId,
+									portletId: instance._portletBoundryId,
 									objData: instance._objData
 								},
 								url: themeDisplay.getPathContext() + '/update_portlet_css'
