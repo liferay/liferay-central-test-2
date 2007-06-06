@@ -30,42 +30,9 @@
 <%@ page import="com.liferay.portal.CompanyWebIdException" %>
 <%@ page import="com.liferay.portal.events.StartupAction" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.kernel.search.Document" %>
-<%@ page import="com.liferay.portal.kernel.search.Hits" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageImpl" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
-<%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
-<%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.LiveUsers" %>
-<%@ page import="com.liferay.portal.util.OpenIdUtil" %>
-<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
-<%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
-<%@ page import="com.liferay.util.License" %>
-<%@ page import="com.liferay.util.Screenshot" %>
-<%@ page import="com.liferay.util.Version" %>
 
 <%@ page import="org.apache.log4j.Level" %>
 <%@ page import="org.apache.log4j.Logger" %>
 <%@ page import="org.apache.log4j.LogManager" %>
-
-<%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-%>
-
-<%!
-public String getNoteIcon(ThemeDisplay themeDisplay, String message) {
-	StringMaker sm = new StringMaker();
-
-	sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
-	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/document_library/page.png");
-	sm.append("' onmousemove='ToolTip.show(event, this, \"");
-	sm.append(message);
-	sm.append("\")'>");
-
-	return sm.toString();
-}
-%>

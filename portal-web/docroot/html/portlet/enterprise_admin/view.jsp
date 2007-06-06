@@ -1505,23 +1505,14 @@ portletURL.setParameter("tabs3", tabs3);
 		</c:choose>
 	</c:when>
 	<c:when test='<%= tabs1.equals("plugins") %>'>
-		<liferay-ui:tabs
-			names="portlets,themes,layout-templates"
-			param="tabs2"
-			url="<%= portletURL.toString() %>"
-		/>
 
-		<c:choose>
-			<c:when test='<%= tabs2.equals("themes") %>'>
-				<%@ include file="/html/portlet/enterprise_admin/themes.jspf" %>
-			</c:when>
-			<c:when test='<%= tabs2.equals("layout-templates") %>'>
-				<%@ include file="/html/portlet/enterprise_admin/layout_templates.jspf" %>
-			</c:when>
-			<c:otherwise>
-				<%@ include file="/html/portlet/enterprise_admin/portlets.jspf" %>
-			</c:otherwise>
-		</c:choose>
+		<%
+		boolean installable = false;
+
+		PortletURL installPluginsURL = null;
+		%>
+
+		<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>
 	</c:when>
 </c:choose>
 

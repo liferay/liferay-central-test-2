@@ -101,14 +101,6 @@
 		<put name="portlet_content" value="/portlet/admin/edit_instance.jsp" />
 	</definition>
 
-	<definition name="portlet.admin.edit_plugin_setting" extends="portlet.admin">
-		<put name="portlet_content" value="/portlet/admin/edit_plugin_setting.jsp" />
-	</definition>
-
-	<definition name="portlet.admin.edit_portlet" extends="portlet.admin">
-		<put name="portlet_content" value="/portlet/admin/edit_portlet.jsp" />
-	</definition>
-
 	<definition name="portlet.admin.error" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/error.jsp" />
 	</definition>

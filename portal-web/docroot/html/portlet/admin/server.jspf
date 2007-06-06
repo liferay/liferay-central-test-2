@@ -22,400 +22,384 @@
  */
 %>
 
-<%= ReleaseInfo.getReleaseInfo() %>
+<%= ReleaseInfo.getReleaseInfo() %><br />
 
-<c:if test="<%= permissionChecker.isOmniadmin() %>">
-	<br /><br />
+<%
+Date uptime = (Date)SimpleCachePool.get(StartupAction.class.getName() + ".uptime");
+Date now = new Date();
 
-	<%
-	Date uptime = (Date)SimpleCachePool.get(StartupAction.class.getName() + ".uptime");
-	Date now = new Date();
+long uptimeDiff = now.getTime() - uptime.getTime();
+long days = uptimeDiff / Time.DAY;
+long hours = (uptimeDiff / Time.HOUR) % 24;
+long minutes = (uptimeDiff / Time.MINUTE) % 60;
+long seconds = (uptimeDiff / Time.SECOND) % 60;
 
-	long uptimeDiff = now.getTime() - uptime.getTime();
-	long days = uptimeDiff / Time.DAY;
-	long hours = (uptimeDiff / Time.HOUR) % 24;
-	long minutes = (uptimeDiff / Time.MINUTE) % 60;
-	long seconds = (uptimeDiff / Time.SECOND) % 60;
+NumberFormat numberFormat = NumberFormat.getInstance();
 
-	NumberFormat numberFormat = NumberFormat.getInstance();
+numberFormat.setMaximumIntegerDigits(2);
+numberFormat.setMinimumIntegerDigits(2);
+%>
 
-	numberFormat.setMaximumIntegerDigits(2);
-	numberFormat.setMinimumIntegerDigits(2);
-	%>
+<liferay-ui:message key="uptime" />:
 
-	<table class="liferay-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="uptime" />:
-		</td>
-		<td>
-			<c:if test="<%= days > 0 %>">
-				<%= days %> <%= LanguageUtil.get(pageContext, ((days > 1) ? "days" : "day")) %>,
-			</c:if>
-
-			<%= numberFormat.format(hours) %>:<%= numberFormat.format(minutes) %>:<%= numberFormat.format(seconds) %>
-		</td>
-	</tr>
-
-	<%
-	Runtime runtime = Runtime.getRuntime();
-
-	numberFormat = NumberFormat.getInstance(locale);
-	%>
-
-	<tr>
-		<td>
-			<liferay-ui:message key="free-memory" />:
-		</td>
-		<td>
-			<%= numberFormat.format(runtime.freeMemory()) %> <liferay-ui:message key="bytes" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="total-memory" />:
-		</td>
-		<td>
-			<%= numberFormat.format(runtime.totalMemory()) %> <liferay-ui:message key="bytes" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="maximum-memory" />:
-		</td>
-		<td>
-			<%= numberFormat.format(runtime.maxMemory()) %> <liferay-ui:message key="bytes" />
-		</td>
-	</tr>
-	</table>
-
-	<c:choose>
-		<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-			<br />
-
-			<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><liferay-ui:message key="more-options" /></html:link> &raquo;
-		</c:when>
-		<c:otherwise>
-			<div class="separator"></div>
-
-			<liferay-ui:message key="shutdown-the-server-in-the-specified-number-of-minutes" />
-
-			<br /><br />
-
-			<table class="liferay-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="number-of-minutes" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />minutes" size="3" type="text" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="custom-message" />
-				</td>
-				<td>
-					<textarea class="liferay-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
-				</td>
-			</tr>
-			</table>
-
-			<br />
-
-			<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" /><br />
-
-			<div class="separator"></div>
-
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td>
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-					<tr>
-						<td class="beta-gradient">
-							<b><liferay-ui:message key="tasks" />:</b>
-						</td>
-						<td align="right" class="beta-gradient">
-							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-							</span>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id="<portlet:namespace />tasks" style="display: none;">
-						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-						<tr class="portlet-section-alternate">
-							<td>
-								<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
-							</td>
-							</td>
-							<td align="right">
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
-							</td>
-						</tr>
-						<tr class="portlet-section-body">
-							<td>
-								<liferay-ui:message key="clear-content-cached-by-this-vm" />
-							</td>
-							</td>
-							<td align="right">
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
-							</td>
-						</tr>
-						<tr class="portlet-section-alternate">
-							<td>
-								<liferay-ui:message key="clear-content-cached-across-the-cluster" />
-							</td>
-							</td>
-							<td align="right">
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
-							</td>
-						</tr>
-						<tr class="portlet-section-body">
-							<td>
-								<liferay-ui:message key="clear-the-database-cache" />
-							</td>
-							</td>
-							<td align="right">
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
-							</td>
-						</tr>
-						<tr class="portlet-section-alternate">
-							<td>
-								<liferay-ui:message key="precompile-jsps-for-faster-speed" />
-							</td>
-							</td>
-							<td align="right">
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); <portlet:namespace />saveServer('precompile');" />
-							</td>
-						</tr>
-						</table>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-					<tr>
-						<td class="beta-gradient">
-							<b><liferay-ui:message key="log-levels" />:</b>
-						</td>
-						<td align="right" class="beta-gradient">
-							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-							</span>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id="<portlet:namespace />logLevels" style="display: none;">
-
-						<%
-						Map currentLoggerNames = new TreeMap();
-
-						Enumeration enu = LogManager.getCurrentLoggers();
-
-						while (enu.hasMoreElements()) {
-							Logger logger = (Logger)enu.nextElement();
-
-							currentLoggerNames.put(logger.getName(), logger);
-						}
-						%>
-
-						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-						<%
-						int counter = 0;
-
-						Iterator itr = currentLoggerNames.entrySet().iterator();
-
-						while (itr.hasNext()) {
-							Map.Entry entry = (Map.Entry)itr.next();
-
-							String name = (String)entry.getKey();
-							Logger logger = (Logger)entry.getValue();
-						%>
-
-							<c:if test="<%= logger.getLevel() != null %>">
-
-								<%
-								String className = "portlet-section-body";
-								String classHoverName = "portlet-section-body-hover";
-
-								if (MathUtil.isEven(counter++)) {
-									className = "portlet-section-alternate";
-									classHoverName = "portlet-section-alternate-hover";
-								}
-								%>
-
-								<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-									<td>
-										<%= name %>
-									</td>
-									<td>
-										<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
-
-											<%
-											for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
-											%>
-
-												<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
-
-											<%
-											}
-											%>
-
-										</select>
-									</td>
-								</tr>
-							</c:if>
-
-						<%
-						}
-						%>
-
-						</table>
-
-						<br />
-
-						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
-
-						<br /><br />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-					<tr>
-						<td class="beta-gradient">
-							<b><liferay-ui:message key="system-properties" />:</b>
-						</td>
-						<td align="right" class="beta-gradient">
-							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />systemProperties'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-							</span>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id="<portlet:namespace />systemProperties" style="display: none;">
-						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-						<%
-						counter = 0;
-
-						Properties systemProps = new SortedProperties();
-
-						PropertiesUtil.copyProperties(System.getProperties(), systemProps);
-
-						enu = systemProps.propertyNames();
-
-						while (enu.hasMoreElements()) {
-							String name = (String)enu.nextElement();
-
-							String className = "portlet-section-body";
-							String classHoverName = "portlet-section-body-hover";
-
-							if (MathUtil.isEven(counter++)) {
-								className = "portlet-section-alternate";
-								classHoverName = "portlet-section-alternate-hover";
-							}
-
-							String value = System.getProperty(name);
-						%>
-
-							<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-								<td title="<%= name %>">
-									<%= StringUtil.shorten(name, 65) %>
-								</td>
-								<td title="<%= value %>">
-									<%= StringUtil.shorten(value, 75) %>
-								</td>
-							</tr>
-
-						<%
-						}
-						%>
-
-						</table>
-
-						<br />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table border="0" cellpadding="4" cellspacing="0" width="100%">
-					<tr>
-						<td class="beta-gradient">
-							<b><liferay-ui:message key="portal-properties" />:</b>
-						</td>
-						<td align="right" class="beta-gradient">
-							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />portalProperties'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-							</span>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id="<portlet:namespace />portalProperties" style="display: none;">
-						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-						<%
-						counter = 0;
-
-						Properties portalProps = new SortedProperties();
-
-						PropertiesUtil.copyProperties(PropsUtil.getProperties(), portalProps);
-
-						enu = portalProps.propertyNames();
-
-						while (enu.hasMoreElements()) {
-							String name = (String)enu.nextElement();
-
-							String className = "portlet-section-body";
-							String classHoverName = "portlet-section-body-hover";
-
-							if (MathUtil.isEven(counter++)) {
-								className = "portlet-section-alternate";
-								classHoverName = "portlet-section-alternate-hover";
-							}
-
-							String value = PropsUtil.get(name);
-						%>
-
-							<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-								<td title="<%= name %>">
-									<%= StringUtil.shorten(name, 65) %>
-								</td>
-								<td title="<%= value %>">
-									<%= StringUtil.shorten(value, 75) %>
-								</td>
-							</tr>
-
-						<%
-						}
-						%>
-
-						</table>
-					</div>
-				</td>
-			</tr>
-			</table>
-		</c:otherwise>
-	</c:choose>
+<c:if test="<%= days > 0 %>">
+	<%= days %> <%= LanguageUtil.get(pageContext, ((days > 1) ? "days" : "day")) %>,
 </c:if>
+
+<%= numberFormat.format(hours) %>:<%= numberFormat.format(minutes) %>:<%= numberFormat.format(seconds) %>
+
+<br /><br />
+
+<c:choose>
+	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+		<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><liferay-ui:message key="more" /></html:link> &raquo;
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="memory,log-levels,system-properties,portal-properties,shutdown"
+			param="tabs2"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<c:choose>
+			<c:when test='<%= tabs2.equals("memory") %>'>
+
+				<%
+				Runtime runtime = Runtime.getRuntime();
+
+				numberFormat = NumberFormat.getInstance(locale);
+				%>
+
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="free-memory" />:
+					</td>
+					<td>
+						<%= numberFormat.format(runtime.freeMemory()) %> <liferay-ui:message key="bytes" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="total-memory" />:
+					</td>
+					<td>
+						<%= numberFormat.format(runtime.totalMemory()) %> <liferay-ui:message key="bytes" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="maximum-memory" />:
+					</td>
+					<td>
+						<%= numberFormat.format(runtime.maxMemory()) %> <liferay-ui:message key="bytes" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-content-cached-by-this-vm" />
+					</td>
+					<td align="right">
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-content-cached-across-the-cluster" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-the-database-cache" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
+					</td>
+				</tr>
+				</table>
+			</c:when>
+			<c:when test='<%= tabs2.equals("log-levels") %>'>
+
+				<%
+				SearchContainer searchContainer = new SearchContainer();
+
+				List headerNames = new ArrayList();
+
+				headerNames.add("category");
+				headerNames.add("level");
+
+				searchContainer.setHeaderNames(headerNames);
+
+				Map currentLoggerNames = new TreeMap();
+
+				Enumeration enu = LogManager.getCurrentLoggers();
+
+				while (enu.hasMoreElements()) {
+					Logger logger = (Logger)enu.nextElement();
+
+					currentLoggerNames.put(logger.getName(), logger);
+				}
+
+				List results = ListUtil.fromCollection(currentLoggerNames.entrySet());
+
+				searchContainer.setResults(results);
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					Map.Entry entry = (Map.Entry)results.get(i);
+
+					String name = (String)entry.getKey();
+					Logger logger = (Logger)entry.getValue();
+
+					Level level = logger.getLevel();
+
+					if (level != null) {
+						ResultRow row = new ResultRow(entry, name, i);
+
+						// Name
+
+						row.addText(name);
+
+						// Logger
+
+						StringMaker sm = new StringMaker();
+
+						sm.append("<select name=\"");
+						sm.append(renderResponse.getNamespace());
+						sm.append("logLevel");
+						sm.append(name);
+						sm.append("\">");
+
+						for (int j = 0; j < Levels.ALL_LEVELS.length; j++) {
+							sm.append("<option ");
+
+							if (level.equals(Levels.ALL_LEVELS[j])) {
+								sm.append("selected");
+							}
+
+							sm.append(" value=\"");
+							sm.append(Levels.ALL_LEVELS[j]);
+							sm.append("\">");
+							sm.append(Levels.ALL_LEVELS[j]);
+							sm.append("</option>");
+						}
+
+						sm.append("</select>");
+
+						row.addText(sm.toString());
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+				<%--
+				Map currentLoggerNames = new TreeMap();
+
+				Enumeration enu = LogManager.getCurrentLoggers();
+
+				while (enu.hasMoreElements()) {
+					Logger logger = (Logger)enu.nextElement();
+
+					currentLoggerNames.put(logger.getName(), logger);
+				}
+				%>
+
+				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+
+				<%
+				int counter = 0;
+
+				Iterator itr = currentLoggerNames.entrySet().iterator();
+
+				while (itr.hasNext()) {
+					Map.Entry entry = (Map.Entry)itr.next();
+
+					String name = (String)entry.getKey();
+					Logger logger = (Logger)entry.getValue();
+				%>
+
+					<c:if test="<%= logger.getLevel() != null %>">
+
+						<%
+						String className = "portlet-section-body";
+						String classHoverName = "portlet-section-body-hover";
+
+						if (MathUtil.isEven(counter++)) {
+							className = "portlet-section-alternate";
+							classHoverName = "portlet-section-alternate-hover";
+						}
+						%>
+
+						<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+							<td>
+								<%= name %>
+							</td>
+							<td>
+								<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
+
+									<%
+									for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
+									%>
+
+										<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
+
+									<%
+									}
+									%>
+
+								</select>
+							</td>
+						</tr>
+					</c:if>
+
+				<%
+				}
+				%>
+
+				</table>--%>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("system-properties") %>'>
+
+				<%
+				SearchContainer searchContainer = new SearchContainer();
+
+				List headerNames = new ArrayList();
+
+				headerNames.add("property");
+				headerNames.add("value");
+
+				searchContainer.setHeaderNames(headerNames);
+
+				Map portalProps = new TreeMap();
+
+				portalProps.putAll(System.getProperties());
+
+				List results = ListUtil.fromCollection(portalProps.entrySet());
+
+				searchContainer.setResults(results);
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					Map.Entry entry = (Map.Entry)results.get(i);
+
+					String property = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					ResultRow row = new ResultRow(entry, property, i);
+
+					// Property
+
+					row.addText(StringUtil.shorten(property, 80));
+
+					// Value
+
+					row.addText(StringUtil.shorten(value, 80));
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("portal-properties") %>'>
+
+				<%
+				SearchContainer searchContainer = new SearchContainer();
+
+				List headerNames = new ArrayList();
+
+				headerNames.add("property");
+				headerNames.add("value");
+
+				searchContainer.setHeaderNames(headerNames);
+
+				Map portalProps = new TreeMap();
+
+				portalProps.putAll(PropsUtil.getProperties());
+
+				List results = ListUtil.fromCollection(portalProps.entrySet());
+
+				searchContainer.setResults(results);
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					Map.Entry entry = (Map.Entry)results.get(i);
+
+					String property = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					ResultRow row = new ResultRow(entry, property, i);
+
+					// Property
+
+					row.addText(StringUtil.shorten(property, 80));
+
+					// Value
+
+					row.addText(StringUtil.shorten(value, 80));
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("shutdown") %>'>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="number-of-minutes" />
+					</td>
+					<td>
+						<input name="<portlet:namespace />minutes" size="3" type="text" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="custom-message" />
+					</td>
+					<td>
+						<textarea class="liferay-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" />
+			</c:when>
+		</c:choose>
+	</c:otherwise>
+</c:choose>

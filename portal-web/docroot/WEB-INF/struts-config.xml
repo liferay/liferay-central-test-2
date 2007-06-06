@@ -189,16 +189,6 @@
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
 
-		<action path="/admin/edit_plugin_setting" type="com.liferay.portlet.admin.action.EditPluginSettingAction">
-			<forward name="portlet.admin.edit_plugin_setting" path="portlet.admin.edit_plugin_setting" />
-			<forward name="portlet.admin.error" path="portlet.admin.error" />
-		</action>
-
-		<action path="/admin/edit_portlet" type="com.liferay.portlet.admin.action.EditPortletAction">
-			<forward name="portlet.admin.edit_portlet" path="portlet.admin.edit_portlet" />
-			<forward name="portlet.admin.error" path="portlet.admin.error" />
-		</action>
-
 		<action path="/admin/edit_server" type="com.liferay.portlet.admin.action.EditServerAction">
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>
