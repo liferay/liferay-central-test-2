@@ -25,6 +25,8 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalPreferences {
+public class PortalPreferences implements Serializable {
 
 	public static final String RANDOM_KEY = "r";
 
