@@ -471,6 +471,11 @@
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
 
+		<action path="/document_library_display/select_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
+			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.select_folder" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">
