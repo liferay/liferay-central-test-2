@@ -508,8 +508,8 @@ else {
 }
 %>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">
-	<script type="text/javascript">
+<script type="text/javascript">
+	<c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">
 		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
 		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").columnPos = <%= columnPos %>;
 
@@ -520,8 +520,24 @@ else {
 		if (!Liferay.Portlet.isAjax("<%= portletDisplay.getId() %>")) {
 			Liferay.Portlet.process("<%= portletDisplay.getId() %>");
 		}
-	</script>
-</c:if>
+	</c:if>
+
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION) %>">
+		jQuery(
+			function() {
+				Liferay.Util.portletTitleEdit(
+					{
+						obj: jQuery("#p_p_id_<%= portletDisplay.getId() %>_"),
+						plid: "<%= layout.getPlid() %>",
+						doAsUserId: "<%= themeDisplay.getDoAsUserId() %>",
+						portletId: "<%= portletDisplay.getId() %>",
+						url: "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title"
+					}
+				);
+			}
+		);
+	</c:if>
+</script>
 
 <%
 RenderRequestFactory.recycle(renderRequestImpl);
