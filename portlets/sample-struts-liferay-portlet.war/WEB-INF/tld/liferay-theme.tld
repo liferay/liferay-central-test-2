@@ -24,7 +24,7 @@
 	<tag>
 		<name>defineObjects</name>
 		<tag-class>com.liferay.taglib.theme.DefineObjectsTag</tag-class>
-		<teiclass>com.liferay.taglib.theme.DefineObjectsTei</teiclass>
+		<tei-class>com.liferay.taglib.theme.DefineObjectsTei</tei-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>

@@ -9,7 +9,7 @@
 	<tag>
 		<name>doAsURL</name>
 		<tag-class>com.liferay.taglib.security.DoAsURLTag</tag-class>
-		<teiclass>com.liferay.taglib.security.DoAsURLTei</teiclass>
+		<tei-class>com.liferay.taglib.security.DoAsURLTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>doAsUserId</name>
@@ -60,7 +60,7 @@
 	<tag>
 		<name>permissionsURL</name>
 		<tag-class>com.liferay.taglib.security.PermissionsURLTag</tag-class>
-		<teiclass>com.liferay.taglib.security.PermissionsURLTei</teiclass>
+		<tei-class>com.liferay.taglib.security.PermissionsURLTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>redirect</name>

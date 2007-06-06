@@ -154,7 +154,7 @@
 	<tag>
 		<name>error</name>
 		<tag-class>com.liferay.taglib.ui.ErrorTag</tag-class>
-		<teiclass>com.liferay.taglib.ui.ErrorTei</teiclass>
+		<tei-class>com.liferay.taglib.ui.ErrorTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
@@ -1100,7 +1100,7 @@
 	<tag>
 		<name>section</name>
 		<tag-class>com.liferay.taglib.ui.SectionTag</tag-class>
-		<teiclass>com.liferay.taglib.ui.SectionTei</teiclass>
+		<tei-class>com.liferay.taglib.ui.SectionTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
@@ -1141,7 +1141,7 @@
 	<tag>
 		<name>table-iterator</name>
 		<tag-class>com.liferay.taglib.ui.TableIteratorTag</tag-class>
-		<teiclass>com.liferay.taglib.ui.TableIteratorTei</teiclass>
+		<tei-class>com.liferay.taglib.ui.TableIteratorTei</tei-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>startPage</name>
