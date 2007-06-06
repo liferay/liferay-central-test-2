@@ -163,7 +163,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 	}
 
 	protected void updateUserGroupRole(ActionRequest req) throws Exception {
-		User user = PortalUtil.getSelectedUser(req);
+		User user = PortalUtil.getSelectedUser(req, false);
 
 		if (user == null) {
 			return;

@@ -985,12 +985,24 @@ public class PortalUtil {
 	public static User getSelectedUser(HttpServletRequest req)
 		throws PortalException, RemoteException, SystemException {
 
+		return getSelectedUser(req, true);
+	}
+
+	public static User getSelectedUser(
+			HttpServletRequest req, boolean checkPermission)
+		throws PortalException, RemoteException, SystemException {
+
 		long userId = ParamUtil.getLong(req, "p_u_i_d");
 
 		User user = null;
 
 		try {
-			user = UserServiceUtil.getUserById(userId);
+			if (checkPermission) {
+				user = UserServiceUtil.getUserById(userId);
+			}
+			else {
+				user = UserLocalServiceUtil.getUserById(userId);
+			}
 		}
 		catch (NoSuchUserException nsue) {
 		}
@@ -998,16 +1010,30 @@ public class PortalUtil {
 		return user;
 	}
 
+	public static User getSelectedUser(
+			ActionRequest req, boolean checkPermission)
+		throws PortalException, RemoteException, SystemException {
+
+		return getSelectedUser(getHttpServletRequest(req), checkPermission);
+	}
+
 	public static User getSelectedUser(ActionRequest req)
 		throws PortalException, RemoteException, SystemException {
 
-		return getSelectedUser(getHttpServletRequest(req));
+		return getSelectedUser(req, true);
+	}
+
+	public static User getSelectedUser(
+			RenderRequest req, boolean checkPermission)
+		throws PortalException, RemoteException, SystemException {
+
+		return getSelectedUser(getHttpServletRequest(req), checkPermission);
 	}
 
 	public static User getSelectedUser(RenderRequest req)
 		throws PortalException, RemoteException, SystemException {
 
-		return getSelectedUser(getHttpServletRequest(req));
+		return getSelectedUser(req, true);
 	}
 
 	public static String[] getSystemCommunityRoles() {

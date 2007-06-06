@@ -34,7 +34,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-User selectedUser = PortalUtil.getSelectedUser(request);
+User selectedUser = PortalUtil.getSelectedUser(request, false);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
