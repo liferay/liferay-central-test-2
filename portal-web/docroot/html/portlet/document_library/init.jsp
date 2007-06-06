@@ -98,12 +98,10 @@ String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(prefs, req
 
 boolean showTabs = false;
 boolean showButtons = false;
-String strutsPath = "/document_library_display";
 
 if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showTabs = true;
 	showButtons = true;
-	strutsPath = "/document_library";
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
