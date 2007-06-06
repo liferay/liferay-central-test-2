@@ -28,12 +28,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.*;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.RolePermission;
 import com.liferay.portal.service.permission.UserGroupPermission;
@@ -58,7 +58,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		throws PortalException, SystemException {
 
 		if ((userIds != null) && (userIds.length > 0)) {
-			checkPermission(groupId, userIds);
+			checkUpdatePermission(groupId, userIds);
 
 			UserLocalServiceUtil.addGroupUsers(groupId, userIds);
 		}
@@ -236,7 +236,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		throws PortalException, SystemException {
 
 		if ((userIds != null) && (userIds.length > 0)) {
-			checkPermission(groupId, userIds);
+			checkUnsetPermission(groupId, userIds);
 
 			UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
 		}
@@ -366,7 +366,36 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			actionId);
 	}
 
-	protected void checkPermission(long groupId, long[] userIds)
+	protected void checkUnsetPermission(long groupId, long[] userIds)
+		throws PortalException, SystemException {
+
+		Role ownerRole = RoleLocalServiceUtil.getRole(
+				getUser().getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+
+		if (!UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+				getUser().getUserId(), groupId, ownerRole.getRoleId())) {
+
+			Role adminRole = RoleLocalServiceUtil.getRole(
+					getUser().getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
+
+			for (int i = 0; i < userIds.length; i++) {
+
+				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userIds[i], groupId, ownerRole.getRoleId()) ||
+					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userIds[i], groupId, adminRole.getRoleId()) ) {
+					
+					throw new PrincipalException();
+				}
+			}
+
+		}
+
+
+		checkUpdatePermission(groupId, userIds);
+	}
+
+	protected void checkUpdatePermission(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		try {
