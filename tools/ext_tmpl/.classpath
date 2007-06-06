@@ -5,6 +5,8 @@
 	<classpathentry kind="lib" path="lib/development/activation.jar"/>
 	<classpathentry kind="lib" path="lib/development/ant-contrib.jar"/>
 	<classpathentry kind="lib" path="lib/development/c3p0.jar"/>
+	<classpathentry kind="lib" path="lib/development/icefaces.jar"/>
+	<classpathentry kind="lib" path="lib/development/icefaces-comps.jar"/>
 	<classpathentry kind="lib" path="lib/development/j2h.jar"/>
 	<classpathentry kind="lib" path="lib/development/jaas.jar"/>
 	<classpathentry kind="lib" path="lib/development/jaas-ext.jar"/>
