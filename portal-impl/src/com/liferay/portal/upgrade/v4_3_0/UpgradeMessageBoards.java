@@ -179,17 +179,17 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table MBMessage drop primary key;",
-		"alter table MBMessage add primary key (messageId);",
-		"alter table MBMessage drop topicId;",
+		"alter table MBMessage drop primary key",
+		"alter table MBMessage add primary key (messageId)",
+		"alter table MBMessage drop topicId",
 
-		"alter table MBMessageFlag drop primary key;",
-		"alter table MBMessageFlag add primary key (messageFlagId);",
+		"alter table MBMessageFlag drop primary key",
+		"alter table MBMessageFlag add primary key (messageFlagId)",
 
-		"alter table MBStatsUser drop primary key;",
-		"alter table MBStatsUser add primary key (statsUserId);",
+		"alter table MBStatsUser drop primary key",
+		"alter table MBStatsUser add primary key (statsUserId)",
 
-		"alter table MBThread drop topicId;"
+		"alter table MBThread drop topicId"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeMessageBoards.class);

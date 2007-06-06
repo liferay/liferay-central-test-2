@@ -76,8 +76,8 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type EmailAddress classNameId LONG;",
-		"alter_column_type EmailAddress classPK LONG;"
+		"alter_column_type EmailAddress classNameId LONG",
+		"alter_column_type EmailAddress classPK LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);

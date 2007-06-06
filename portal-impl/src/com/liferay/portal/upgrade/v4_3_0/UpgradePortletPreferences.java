@@ -68,8 +68,8 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table PortletPreferences drop primary key;",
-		"alter table PortletPreferences add primary key (portletPreferencesId);"
+		"alter table PortletPreferences drop primary key",
+		"alter table PortletPreferences add primary key (portletPreferencesId)"
 	};
 
 	private static Log _log =

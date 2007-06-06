@@ -52,7 +52,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		String tableName, long companyId, String webId) {
 
 		return "update " + tableName + " set companyId = '" + companyId +
-			"' where companyId = '" + companyId + "';";
+			"' where companyId = '" + companyId + "'";
 	}
 
 	private void _upgrade() throws Exception {
@@ -72,7 +72,7 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		for (int i = 0; i < _TABLES.length; i++) {
 			dbUtil.executeSQL(
-				"alter_column_type " + _TABLES + " companyId LONG;");
+				"alter_column_type " + _TABLES + " companyId LONG");
 		}
 	}
 

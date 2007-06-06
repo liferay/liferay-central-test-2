@@ -227,10 +227,10 @@ public class StartupAction extends SimpleAction {
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
 		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
-			"JournalArticleImage WHERE tempImage = TRUE);";
+			"JournalArticleImage WHERE tempImage = TRUE)";
 
 	private static final String _DELETE_TEMP_IMAGES_2 =
-		"DELETE FROM JournalArticleImage where tempImage = TRUE;";
+		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
 	private static Log _log = LogFactory.getLog(StartupAction.class);
 

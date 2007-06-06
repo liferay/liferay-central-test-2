@@ -101,8 +101,8 @@ public class UpgradeWiki extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table WikiPage drop primary key;",
-		"alter table WikiPage add primary key (pageId);"
+		"alter table WikiPage drop primary key",
+		"alter table WikiPage add primary key (pageId)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeWiki.class);

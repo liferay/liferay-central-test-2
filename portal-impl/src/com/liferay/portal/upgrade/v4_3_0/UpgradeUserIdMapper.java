@@ -68,8 +68,8 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table UserIdMapper drop primary key;",
-		"alter table UserIdMapper add primary key (userIdMapperId);"
+		"alter table UserIdMapper drop primary key",
+		"alter table UserIdMapper add primary key (userIdMapperId)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUserIdMapper.class);

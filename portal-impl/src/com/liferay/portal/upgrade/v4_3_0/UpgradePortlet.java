@@ -68,8 +68,8 @@ public class UpgradePortlet extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table Portlet drop primary key;",
-		"alter table Portlet add primary key (id_);"
+		"alter table Portlet drop primary key",
+		"alter table Portlet add primary key (id_)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradePortlet.class);

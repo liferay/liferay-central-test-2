@@ -114,12 +114,12 @@ public class UpgradePolls extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table PollsChoice drop primary key;",
-		"alter table PollsChoice add primary key (choiceId);",
+		"alter table PollsChoice drop primary key",
+		"alter table PollsChoice add primary key (choiceId)",
 
-		"alter table PollsVote drop primary key;",
-		"alter table PollsVote add primary key (voteId);",
-		"alter_column_type PollsVote choiceId LONG;"
+		"alter table PollsVote drop primary key",
+		"alter table PollsVote add primary key (voteId)",
+		"alter_column_type PollsVote choiceId LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradePolls.class);

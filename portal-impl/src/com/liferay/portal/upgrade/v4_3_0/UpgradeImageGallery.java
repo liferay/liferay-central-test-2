@@ -116,8 +116,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table IGImage drop primary key;",
-		"alter table IGImage add primary key (imageId);"
+		"alter table IGImage drop primary key",
+		"alter table IGImage add primary key (imageId)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeImageGallery.class);

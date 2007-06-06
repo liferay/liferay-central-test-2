@@ -151,14 +151,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table DLFileEntry drop primary key;",
-		"alter table DLFileEntry add primary key (fileEntryId);",
+		"alter table DLFileEntry drop primary key",
+		"alter table DLFileEntry add primary key (fileEntryId)",
 
-		"alter table DLFileRank drop primary key;",
-		"alter table DLFileRank add primary key (fileRankId);",
+		"alter table DLFileRank drop primary key",
+		"alter table DLFileRank add primary key (fileRankId)",
 
-		"alter table DLFileVersion drop primary key;",
-		"alter table DLFileVersion add primary key (fileVersionId);"
+		"alter table DLFileVersion drop primary key",
+		"alter table DLFileVersion add primary key (fileVersionId)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeDocumentLibrary.class);

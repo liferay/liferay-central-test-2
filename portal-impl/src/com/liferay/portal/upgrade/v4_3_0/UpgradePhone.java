@@ -76,8 +76,8 @@ public class UpgradePhone extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Phone classNameId LONG;",
-		"alter_column_type Phone classPK LONG;"
+		"alter_column_type Phone classNameId LONG",
+		"alter_column_type Phone classPK LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradePhone.class);

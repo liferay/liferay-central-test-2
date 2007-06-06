@@ -79,9 +79,9 @@ public class UpgradeResource extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table Resource_ drop companyId;",
-		"alter table Resource_ drop name;",
-		"alter table Resource_ drop scope;"
+		"alter table Resource_ drop companyId",
+		"alter table Resource_ drop name",
+		"alter table Resource_ drop scope"
 	};
 
 	public static String _TABLE_NAME = "Resource_";

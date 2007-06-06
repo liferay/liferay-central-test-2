@@ -177,14 +177,14 @@ public class UpgradeShopping extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type ShoppingCart cartId LONG;",
+		"alter_column_type ShoppingCart cartId LONG",
 
-		"alter_column_type ShoppingCoupon couponId LONG;",
+		"alter_column_type ShoppingCoupon couponId LONG",
 
-		"alter_column_type ShoppingOrder orderId LONG;",
+		"alter_column_type ShoppingOrder orderId LONG",
 
-		"alter table ShoppingOrderItem drop primary key;",
-		"alter table ShoppingOrderItem add primary key (orderItemId);"
+		"alter table ShoppingOrderItem drop primary key",
+		"alter table ShoppingOrderItem add primary key (orderItemId)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeShopping.class);

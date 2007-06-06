@@ -89,7 +89,7 @@ public class UpgradeUser extends UpgradeProcess {
 	}
 
 	private static final String _UPGRADE_SCHEMA =
-		"alter_column_type User_ userId LONG;";
+		"alter_column_type User_ userId LONG";
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);
 

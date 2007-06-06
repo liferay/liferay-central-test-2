@@ -68,9 +68,9 @@ public class UpgradeLayoutSet extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table LayoutSet drop primary key;",
-		"alter table LayoutSet drop ownerId;",
-		"alter table LayoutSet add primary key (layoutSetId);"
+		"alter table LayoutSet drop primary key",
+		"alter table LayoutSet drop ownerId",
+		"alter table LayoutSet add primary key (layoutSetId)"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeLayoutSet.class);

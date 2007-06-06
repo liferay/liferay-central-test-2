@@ -76,8 +76,8 @@ public class UpgradeSubscription extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Subscription classNameId LONG;",
-		"alter_column_type Subscription classPK LONG;"
+		"alter_column_type Subscription classNameId LONG",
+		"alter_column_type Subscription classPK LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeSubscription.class);

@@ -76,8 +76,8 @@ public class UpgradeWebsite extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Website classNameId LONG;",
-		"alter_column_type Website classPK LONG;"
+		"alter_column_type Website classNameId LONG",
+		"alter_column_type Website classPK LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
