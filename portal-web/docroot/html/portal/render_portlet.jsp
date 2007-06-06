@@ -189,6 +189,16 @@ renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
 String responseContentType = renderRequestImpl.getResponseContentType();
 
+Portlet portletResourcePortlet = null;
+
+if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	String portletResource = ParamUtil.getString(request, "portletResource");
+
+	if (Validator.isNotNull(portletResource)) {
+		portletResourcePortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+	}
+}
+
 boolean showCloseIcon = true;
 boolean showConfigurationIcon = false;
 boolean showEditIcon = false;
@@ -198,7 +208,7 @@ boolean showMaxIcon = true;
 boolean showMinIcon = true;
 boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
 boolean showPortletCssIcon = false;
-boolean showPortletIcon = Validator.isNotNull(portlet.getIcon());
+boolean showPortletIcon = (portletResourcePortlet != null) ? Validator.isNotNull(portletResourcePortlet.getIcon()) : Validator.isNotNull(portlet.getIcon());
 boolean showPrintIcon = portlet.hasPortletMode(responseContentType, LiferayPortletMode.PRINT);
 boolean showRefreshIcon = portlet.isAjaxable() && (portlet.getRenderWeight() == 0);
 

@@ -39,6 +39,16 @@ RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
 
 String currentURL = PortletURLUtil.getCurrent(renderRequest, renderResponse).toString();
 
+Portlet portletResourcePortlet = null;
+
+if (portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	String portletResource = ParamUtil.getString(request, "portletResource");
+
+	if (Validator.isNotNull(portletResource)) {
+		portletResourcePortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+	}
+}
+
 // Portlet decorate
 
 boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
@@ -59,13 +69,27 @@ if (!portletDecorate) {
 
 // Portlet icon
 
-String portletIcon = portlet.getIcon();
+String portletIcon = null;
 
-if (Validator.isNotNull(portlet.getServletContextName())) {
-	portletIcon = StringPool.SLASH + portlet.getServletContextName() + portletIcon;
+if (portletResourcePortlet != null) {
+	portletIcon = portletResourcePortlet.getIcon();
+
+	if (Validator.isNotNull(portletResourcePortlet.getServletContextName())) {
+		portletIcon = StringPool.SLASH + portletResourcePortlet.getServletContextName() + portletIcon;
+	}
+	else {
+		portletIcon = themeDisplay.getPathContext() + portletIcon;
+	}
 }
 else {
-	portletIcon = themeDisplay.getPathContext() + portletIcon;
+	portletIcon = portlet.getIcon();
+
+	if (Validator.isNotNull(portlet.getServletContextName())) {
+		portletIcon = StringPool.SLASH + portlet.getServletContextName() + portletIcon;
+	}
+	else {
+		portletIcon = themeDisplay.getPathContext() + portletIcon;
+	}
 }
 
 portletDisplay.setURLPortlet(portletIcon);
