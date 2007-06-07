@@ -25,10 +25,7 @@
 <%= ReleaseInfo.getReleaseInfo() %><br />
 
 <%
-Date uptime = (Date)SimpleCachePool.get(StartupAction.class.getName() + ".uptime");
-Date now = new Date();
-
-long uptimeDiff = now.getTime() - uptime.getTime();
+long uptimeDiff = System.currentTimeMillis() - PortalUtil.getUptime().getTime();
 long days = uptimeDiff / Time.DAY;
 long hours = (uptimeDiff / Time.HOUR) % 24;
 long minutes = (uptimeDiff / Time.MINUTE) % 60;

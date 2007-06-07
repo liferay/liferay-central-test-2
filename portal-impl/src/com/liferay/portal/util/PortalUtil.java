@@ -156,6 +156,8 @@ public class PortalUtil {
 	public static final String PORTLET_XML_FILE_NAME_CUSTOM =
 		"portlet-custom.xml";
 
+	public static final Date UP_TIME = new Date();
+
 	public static void clearRequestParameters(RenderRequest req) {
 
 		// Clear the render parameters if they were set during processAction
@@ -1098,6 +1100,10 @@ public class PortalUtil {
 		}
 
 		return uploadReq;
+	}
+
+	public static Date getUptime() {
+		return UP_TIME;
 	}
 
 	public static User getUser(HttpServletRequest req)

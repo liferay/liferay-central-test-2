@@ -28,7 +28,6 @@
 <%@ page import="com.liferay.portal.CompanyMxException" %>
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.CompanyWebIdException" %>
-<%@ page import="com.liferay.portal.events.StartupAction" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>

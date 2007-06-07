@@ -148,7 +148,6 @@
 <%@ page import="com.liferay.util.PwdGenerator" %>
 <%@ page import="com.liferay.util.Randomizer" %>
 <%@ page import="com.liferay.util.SetUtil" %>
-<%@ page import="com.liferay.util.SimpleCachePool" %>
 <%@ page import="com.liferay.util.SortedProperties" %>
 <%@ page import="com.liferay.util.State" %>
 <%@ page import="com.liferay.util.StateUtil" %>

@@ -29,7 +29,6 @@ import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.currencyconverter.model.Currency;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.SimpleCachePool;
 
 import java.util.Iterator;
 import java.util.Locale;
@@ -37,10 +36,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.struts.Globals;
 
 /**
  * <a href="CurrencyUtil.java.html"><b><i>View Source</i></b></a>
@@ -53,14 +50,13 @@ public class CurrencyUtil {
 	public static Map getAllSymbols(PageContext pageContext)
 		throws LanguageException {
 
-		HttpSession ses = pageContext.getSession();
+		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
 
-		Locale locale = (Locale)ses.getAttribute(Globals.LOCALE_KEY);
+		Locale locale = req.getLocale();
 
-		String scpId =
-			CurrencyUtil.class.getName() + ".symbols." + locale.toString();
+		String key = locale.toString();
 
-		Map symbols = (Map)SimpleCachePool.get(scpId);
+		Map symbols = (Map)_symbolsPool.get(key);
 
 		if (symbols != null) {
 			return symbols;
@@ -76,7 +72,7 @@ public class CurrencyUtil {
 			symbols.put(LanguageUtil.get(pageContext, symbol), symbol);
 		}
 
-		SimpleCachePool.put(scpId, symbols);
+		_symbolsPool.put(key, symbols);
 
 		return symbols;
 	}
@@ -247,6 +243,8 @@ public class CurrencyUtil {
 	}
 
 	private static CurrencyUtil _instance = new CurrencyUtil();
+
+	private static Map _symbolsPool = CollectionFactory.getSyncHashMap();
 
 	private Set _currencyIds;
 

@@ -38,9 +38,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.verify.VerifyProcess;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.SimpleCachePool;
-
-import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,17 +52,11 @@ import org.apache.commons.logging.LogFactory;
 public class StartupAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
-
 		try {
 
 			// Print release information
 
 			System.out.println("Starting " + ReleaseInfo.getReleaseInfo());
-
-			// Keep track of uptime
-
-			SimpleCachePool.put(
-				StartupAction.class.getName() + ".uptime", new Date());
 
 			// Bean locator
 

@@ -363,6 +363,13 @@ public class PortalUtil_IW {
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
+		javax.servlet.http.HttpServletRequest req, boolean checkPermission)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		return PortalUtil.getSelectedUser(req, checkPermission);
+	}
+
+	public com.liferay.portal.model.User getSelectedUser(
 		javax.portlet.ActionRequest req)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -370,10 +377,24 @@ public class PortalUtil_IW {
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(
+		javax.portlet.ActionRequest req, boolean checkPermission)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		return PortalUtil.getSelectedUser(req, checkPermission);
+	}
+
+	public com.liferay.portal.model.User getSelectedUser(
 		javax.portlet.RenderRequest req)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return PortalUtil.getSelectedUser(req);
+	}
+
+	public com.liferay.portal.model.User getSelectedUser(
+		javax.portlet.RenderRequest req, boolean checkPermission)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		return PortalUtil.getSelectedUser(req, checkPermission);
 	}
 
 	public java.lang.String[] getSystemCommunityRoles() {
@@ -396,6 +417,10 @@ public class PortalUtil_IW {
 	public com.liferay.util.servlet.UploadServletRequest getUploadServletRequest(
 		javax.servlet.http.HttpServletRequest httpReq) {
 		return PortalUtil.getUploadServletRequest(httpReq);
+	}
+
+	public java.util.Date getUptime() {
+		return PortalUtil.getUptime();
 	}
 
 	public com.liferay.portal.model.User getUser(

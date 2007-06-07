@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletUtil;
@@ -41,7 +42,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.SimpleCachePool;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLSafeReader;
 
@@ -212,15 +212,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public void initEAR(String[] xmls, PluginPackage pluginPackage) {
-		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
-
-		Map portletsPool = (Map)SimpleCachePool.get(scpId);
-
-		if (portletsPool == null) {
-			portletsPool = CollectionFactory.getSyncHashMap();
-
-			SimpleCachePool.put(scpId, portletsPool);
-		}
+		Map portletsPool = _getPortletsPool();
 
 		try {
 			List servletURLPatterns = _readWebXML(xmls[4]);
@@ -297,15 +289,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		List portlets = new ArrayList();
 
-		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
-
-		Map portletsPool = (Map)SimpleCachePool.get(scpId);
-
-		if (portletsPool == null) {
-			portletsPool = CollectionFactory.getSyncHashMap();
-
-			SimpleCachePool.put(scpId, portletsPool);
-		}
+		Map portletsPool = _getPortletsPool();
 
 		try {
 			List servletURLPatterns = _readWebXML(xmls[3]);
@@ -371,12 +355,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		// Refresh security path to portlet id mapping for all portlets
 
-		SimpleCachePool.remove(PortletServiceImpl.class.getName());
+		_portletIdsByStrutsPath.clear();
 
 		// Refresh company portlets
 
-		SimpleCachePool.remove(
-			PortletServiceImpl.class.getName() + ".companyPortletsPool");
+		_companyPortletsPool.clear();
 
 		return portlets;
 	}
@@ -412,40 +395,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private Map _getFriendlyURLMappers() {
-		String scpId =
-			PortletServiceImpl.class.getName() + ".friendlyURLMappers";
-
-		Map friendlyURLMappers = (Map)SimpleCachePool.get(scpId);
-
-		if (friendlyURLMappers == null) {
-			friendlyURLMappers = CollectionFactory.getHashMap();
-
-			SimpleCachePool.put(scpId, friendlyURLMappers);
-		}
-
-		return friendlyURLMappers;
+		return _friendlyURLMappers;
 	}
 
 	private String _getPortletId(String securityPath) throws SystemException {
-		String scpId = PortletServiceImpl.class.getName();
-
-		Map portletIds = (Map)SimpleCachePool.get(scpId);
-
-		if (portletIds == null) {
-			portletIds = CollectionFactory.getHashMap();
-
+		if (_portletIdsByStrutsPath.size() == 0) {
 			Iterator itr = _getPortletsPool().values().iterator();
 
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();
 
-				portletIds.put(portlet.getStrutsPath(), portlet.getPortletId());
+				_portletIdsByStrutsPath.put(
+					portlet.getStrutsPath(), portlet.getPortletId());
 			}
-
-			SimpleCachePool.put(scpId, portletIds);
 		}
 
-		String portletId = (String)portletIds.get(securityPath);
+		String portletId = (String)_portletIdsByStrutsPath.get(securityPath);
 
 		if (Validator.isNull(portletId)) {
 			_log.error(
@@ -457,26 +422,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private Map _getPortletsPool() {
-		String scpId = PortletServiceImpl.class.getName() + "." + _SHARED_KEY;
-
-		return (Map)SimpleCachePool.get(scpId);
+		return _portletsPool;
 	}
 
 	private Map _getPortletsPool(long companyId) throws SystemException {
 		Long companyIdObj = new Long(companyId);
 
-		String scpId =
-			PortletServiceImpl.class.getName() + ".companyPortletsPool";
-
-		Map companyPortletsPool = (Map)SimpleCachePool.get(scpId);
-
-		if (companyPortletsPool == null) {
-			companyPortletsPool = CollectionFactory.getSyncHashMap();
-
-			SimpleCachePool.put(scpId, companyPortletsPool);
-		}
-
-		Map portletsPool = (Map)companyPortletsPool.get(companyIdObj);
+		Map portletsPool = (Map)_companyPortletsPool.get(companyIdObj);
 
 		if (portletsPool == null) {
 			portletsPool = CollectionFactory.getSyncHashMap();
@@ -522,7 +474,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 
-			companyPortletsPool.put(companyIdObj, portletsPool);
+			_companyPortletsPool.put(companyIdObj, portletsPool);
 		}
 
 		return portletsPool;
@@ -589,7 +541,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Portlet portletModel = (Portlet)portletsPool.get(portletId);
 
 			if (portletModel == null) {
-				portletModel = new PortletImpl(_SHARED_KEY, portletId);
+				portletModel = new PortletImpl(CompanyImpl.SYSTEM, portletId);
 
 				portletsPool.put(portletId, portletModel);
 			}
@@ -1119,8 +1071,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	}
 
-	private static final long _SHARED_KEY = 0;
-
 	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
+
+	private static Map _portletsPool = CollectionFactory.getSyncHashMap();
+	private static Map _companyPortletsPool =
+		CollectionFactory.getSyncHashMap();
+	private static Map _portletIdsByStrutsPath =
+		CollectionFactory.getSyncHashMap();
+	private static Map _friendlyURLMappers = CollectionFactory.getSyncHashMap();
 
 }

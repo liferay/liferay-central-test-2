@@ -23,7 +23,7 @@
 package com.liferay.util.cal;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.SimpleCachePool;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
 
 import java.sql.Timestamp;
@@ -35,6 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -100,6 +101,7 @@ public class CalendarUtil {
 
 	public static int getAge(Date date, Calendar today) {
 		Calendar birthday = new GregorianCalendar();
+
 		birthday.setTime(date);
 
 		int yearDiff = today.get(Calendar.YEAR) - birthday.get(Calendar.YEAR);
@@ -127,16 +129,16 @@ public class CalendarUtil {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("util-java.days_");
+		sm.append("days_");
 		sm.append(pattern);
 		sm.append("_");
 		sm.append(locale.getLanguage());
 		sm.append("_");
 		sm.append(locale.getCountry());
 
-		String id = sm.toString();
+		String key = sm.toString();
 
-		String[] days = (String[])SimpleCachePool.get(id);
+		String[] days = (String[])_calendarPool.get(key);
 
 		if (days == null) {
 			days = new String[7];
@@ -144,14 +146,16 @@ public class CalendarUtil {
 			DateFormat dayFormat = new SimpleDateFormat(pattern, locale);
 
 			Calendar cal = new GregorianCalendar();
+
 			cal.set(Calendar.DATE, 1);
 
 			for (int i = 0; i < 7; i++) {
 				cal.set(Calendar.DAY_OF_WEEK, i + 1);
+
 				days[i] = dayFormat.format(cal.getTime());
 			}
 
-			SimpleCachePool.put(id, days);
+			_calendarPool.put(key, days);
 		}
 
 		return days;
@@ -266,16 +270,16 @@ public class CalendarUtil {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("util-java.months_");
+		sm.append("months_");
 		sm.append(pattern);
 		sm.append("_");
 		sm.append(locale.getLanguage());
 		sm.append("_");
 		sm.append(locale.getCountry());
 
-		String id = sm.toString();
+		String key = sm.toString();
 
-		String[] months = (String[])SimpleCachePool.get(id);
+		String[] months = (String[])_calendarPool.get(key);
 
 		if (months == null) {
 			months = new String[12];
@@ -283,14 +287,16 @@ public class CalendarUtil {
 			DateFormat monthFormat = new SimpleDateFormat(pattern, locale);
 
 			Calendar cal = new GregorianCalendar();
+
 			cal.set(Calendar.DATE, 1);
 
 			for (int i = 0; i < 12; i++) {
 				cal.set(Calendar.MONTH, i);
+
 				months[i] = monthFormat.format(cal.getTime());
 			}
 
-			SimpleCachePool.put(id, months);
+			_calendarPool.put(key, months);
 		}
 
 		return months;
@@ -312,6 +318,7 @@ public class CalendarUtil {
 								  TimeZone timeZone, Locale locale) {
 
 		Calendar cal1 = new GregorianCalendar(timeZone, locale);
+
 		cal1.set(Calendar.MONTH, month1);
 		cal1.set(Calendar.DATE, day1);
 		cal1.set(Calendar.YEAR, year1);
@@ -320,6 +327,7 @@ public class CalendarUtil {
 		cal1.set(Calendar.AM_PM, amPm1);
 
 		Calendar cal2 = new GregorianCalendar(timeZone, locale);
+
 		cal2.set(Calendar.MONTH, month2);
 		cal2.set(Calendar.DATE, day2);
 		cal2.set(Calendar.YEAR, year2);
@@ -372,9 +380,11 @@ public class CalendarUtil {
 								   Locale locale) {
 
 		Calendar curCal = new GregorianCalendar(timeZone, locale);
+
 		curCal.set(Calendar.DATE, 1);
 
 		Calendar cal = (Calendar)curCal.clone();
+
 		cal.set(Calendar.MONTH, month);
 		cal.set(Calendar.YEAR, year);
 
@@ -392,6 +402,7 @@ public class CalendarUtil {
 		Calendar curCal = new GregorianCalendar(timeZone, locale);
 
 		Calendar cal = (Calendar)curCal.clone();
+
 		cal.set(Calendar.MONTH, month);
 		cal.set(Calendar.DATE, day);
 		cal.set(Calendar.YEAR, year);
@@ -414,6 +425,7 @@ public class CalendarUtil {
 		Calendar curCal = new GregorianCalendar(timeZone, locale);
 
 		Calendar cal = (Calendar)curCal.clone();
+
 		cal.set(Calendar.MONTH, month);
 		cal.set(Calendar.DATE, day);
 		cal.set(Calendar.YEAR, year);
@@ -496,5 +508,7 @@ public class CalendarUtil {
 
 		return cal;
 	}
+
+	private static Map _calendarPool = CollectionFactory.getSyncHashMap();
 
 }

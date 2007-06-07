@@ -23,10 +23,11 @@
 package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.SimpleCachePool;
+import com.liferay.util.CollectionFactory;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.Store;
@@ -59,21 +60,15 @@ public class MailCache {
 	}
 
 	public static Collection getUserAccounts(long userId) {
-		String userAccountsId = _MAIL_ACCOUNTS + userId;
-
-		return (Collection)SimpleCachePool.get(userAccountsId);
+		return (Collection)_accountsPool.get(new Long(userId));
 	}
 
 	public static void putUserAccounts(long userId, Collection accounts) {
-		String userAccountsId = _MAIL_ACCOUNTS + userId;
-
-		SimpleCachePool.put(userAccountsId, accounts);
+		_accountsPool.put(new Long(userId), accounts);
 	}
 
 	public static void removeUserAccounts(long userId) {
-		String userAccountsId = _MAIL_ACCOUNTS + userId;
-
-		SimpleCachePool.remove(userAccountsId);
+		_accountsPool.remove(new Long(userId));
 	}
 
 	public static void clearCache(HttpSession ses) throws MessagingException {
@@ -112,9 +107,8 @@ public class MailCache {
 		}
 	}
 
- 	public static final String _MAIL_ACCOUNTS =
-		MailCache.class.getName() + ".MAIL_ACCOUNTS.";
-
 	private static Log _log = LogFactory.getLog(MailCache.class);
+
+	private static Map _accountsPool = CollectionFactory.getSyncHashMap();
 
 }
