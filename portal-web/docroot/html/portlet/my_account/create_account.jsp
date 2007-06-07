@@ -78,6 +78,14 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="screen-name" />
+			</td>
+			<td>
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
+			</td>
+		</tr>
 
 		<c:choose>
 			<c:when test="<%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) %>">
