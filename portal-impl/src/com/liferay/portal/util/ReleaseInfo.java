@@ -36,7 +36,7 @@ import java.util.Date;
  */
 public class ReleaseInfo {
 
-	static String name = "Liferay Portal";
+	static String name = "Liferay Enterprise Portal";
 
 	static String version = "4.3.0 RC1";
 
