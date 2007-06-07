@@ -72,24 +72,10 @@ if (!portletDecorate) {
 String portletIcon = null;
 
 if (portletResourcePortlet != null) {
-	portletIcon = portletResourcePortlet.getIcon();
-
-	if (Validator.isNotNull(portletResourcePortlet.getServletContextName())) {
-		portletIcon = StringPool.SLASH + portletResourcePortlet.getServletContextName() + portletIcon;
-	}
-	else {
-		portletIcon = themeDisplay.getPathContext() + portletIcon;
-	}
+	portletIcon = portletResourcePortlet.getContextPath() + portlet.getIcon();
 }
 else {
-	portletIcon = portlet.getIcon();
-
-	if (Validator.isNotNull(portlet.getServletContextName())) {
-		portletIcon = StringPool.SLASH + portlet.getServletContextName() + portletIcon;
-	}
-	else {
-		portletIcon = themeDisplay.getPathContext() + portletIcon;
-	}
+	portletIcon = portlet.getContextPath() + portlet.getIcon();
 }
 
 portletDisplay.setURLPortlet(portletIcon);

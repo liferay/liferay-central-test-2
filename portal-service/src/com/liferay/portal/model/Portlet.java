@@ -70,6 +70,10 @@ public interface Portlet extends PortletModel {
 
 	public void setIcon(java.lang.String icon);
 
+	public java.lang.String getVirtualPath();
+
+	public void setVirtualPath(java.lang.String virtualPath);
+
 	public java.lang.String getStrutsPath();
 
 	public void setStrutsPath(java.lang.String strutsPath);
@@ -331,6 +335,8 @@ public interface Portlet extends PortletModel {
 	public boolean isWARFile();
 
 	public void setWARFile(boolean warFile);
+
+	public java.lang.String getContextPath();
 
 	public com.liferay.portal.model.Portlet getClonedInstance(
 		java.lang.String portletId);

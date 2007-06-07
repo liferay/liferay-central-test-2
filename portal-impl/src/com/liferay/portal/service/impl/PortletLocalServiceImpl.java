@@ -944,6 +944,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			if (portletModel != null) {
 				portletModel.setIcon(GetterUtil.getString(
 					portlet.elementText("icon"), portletModel.getIcon()));
+				portletModel.setVirtualPath(GetterUtil.getString(
+					portlet.elementText("virtual-path"),
+					portletModel.getVirtualPath()));
 				portletModel.setStrutsPath(GetterUtil.getString(
 					portlet.elementText("struts-path"),
 					portletModel.getStrutsPath()));

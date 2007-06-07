@@ -93,8 +93,7 @@ public class ThemeUtil {
 		themeDisplay.setTilesSelectable(tilesSelectable);
 
 		if (theme.isWARFile()) {
-			ServletContext themeCtx = ctx.getContext(
-				StringPool.SLASH + theme.getServletContextName());
+			ServletContext themeCtx = ctx.getContext(theme.getContextPath());
 
 			if (themeCtx == null) {
 				_log.error(

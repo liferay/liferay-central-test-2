@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
@@ -36,6 +38,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
@@ -158,12 +161,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public PortletImpl(String portletId, PluginPackage pluginPackage,
 					   PluginSetting pluginSetting, long companyId,
-					   String icon, String strutsPath, String configurationPath,
-					   String displayName, String portletClass,
-					   String indexerClass, String openSearchClass,
-					   String schedulerClass, String portletURLClass,
-					   String friendlyURLMapperClass, String urlEncoderClass,
-					   String portletDataHandlerClass,
+					   String icon, String virtualPath, String strutsPath,
+					   String configurationPath, String displayName,
+					   String portletClass, String indexerClass,
+					   String openSearchClass, String schedulerClass,
+					   String portletURLClass, String friendlyURLMapperClass,
+					   String urlEncoderClass, String portletDataHandlerClass,
 					   String smtpMessageListenerClass,
 					   String defaultPreferences, String prefsValidator,
 					   boolean prefsCompanyWide, boolean prefsUniquePerLayout,
@@ -189,6 +192,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_defaultPluginSetting = pluginSetting;
 		setCompanyId(companyId);
 		_icon = icon;
+		_virtualPath = virtualPath;
 		_strutsPath = strutsPath;
 		_configurationPath = configurationPath;
 		_displayName = displayName;
@@ -333,6 +337,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setIcon(String icon) {
 		_icon = icon;
+	}
+
+	/**
+	 * Gets the virtual path of the portlet.
+	 *
+	 * @return		the virtual path of the portlet
+	 */
+	public String getVirtualPath() {
+		return _virtualPath;
+	}
+
+	/**
+	 * Sets the virtual path of the portlet.
+	 *
+	 * @param		virtualPath the virtual path of the portlet
+	 */
+	public void setVirtualPath(String virtualPath) {
+		_virtualPath = virtualPath;
 	}
 
 	/**
@@ -1767,6 +1789,31 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets the servlet context path of the portlet.
+	 *
+	 * @return		the servlet context path of the portlet
+	 */
+	public String getContextPath() {
+		String virtualPath = getVirtualPath();
+
+		if (Validator.isNotNull(virtualPath)) {
+			return virtualPath;
+		}
+
+		if (isWARFile()) {
+			StringMaker sm = new StringMaker();
+
+			sm.append(StringPool.SLASH);
+			sm.append(getServletContextName());
+
+			return sm.toString();
+		}
+		else {
+			return PortalUtil.getPathContext();
+		}
+	}
+
+	/**
 	 * Returns true if the portlet is found in a WAR file.
 	 *
 	 * @param		portletId the cloned instance portlet id
@@ -1912,24 +1959,25 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public Object clone() {
 		return new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
-			getCompanyId(), getIcon(), getStrutsPath(), getConfigurationPath(),
-			getDisplayName(), getPortletClass(), getIndexerClass(),
-			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
-			getFriendlyURLMapperClass(), getURLEncoderClass(),
-			getPortletDataHandlerClass(), getSmtpMessageListenerClass(),
-			getDefaultPreferences(), getPreferencesValidator(),
-			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
-			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
-			isShowPortletAccessDenied(), isShowPortletInactive(),
-			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
-			isInstanceable(), isPrivateRequestAttributes(),
-			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
-			getHeaderCss(), getHeaderJavaScript(), isAddDefaultResource(),
-			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
-			isActive(), isInclude(), getInitParams(), getExpCache(),
-			getPortletModes(), getSupportedLocales(), getResourceBundle(),
-			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
+			getCompanyId(), getIcon(), getVirtualPath(), getStrutsPath(),
+			getConfigurationPath(), getDisplayName(), getPortletClass(),
+			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
+			getPortletURLClass(), getFriendlyURLMapperClass(),
+			getURLEncoderClass(), getPortletDataHandlerClass(),
+			getSmtpMessageListenerClass(), getDefaultPreferences(),
+			getPreferencesValidator(), isPreferencesCompanyWide(),
+			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
+			isUseDefaultTemplate(), isShowPortletAccessDenied(),
+			isShowPortletInactive(), isActionURLRedirect(),
+			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
+			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
+			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
+			getRenderWeight(), isAjaxable(), getHeaderCss(),
+			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
+			getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
 	}
 
@@ -1967,6 +2015,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The icon of the portlet.
 	 */
 	private String _icon;
+
+	/**
+	 * The virtual path of the portlet.
+	 */
+	private String _virtualPath;
 
 	/**
 	 * The struts path of the portlet.

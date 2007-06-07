@@ -57,14 +57,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 			for (int j = 0; j < headerCssList.size(); j++) {
 				String headerCss = (String)headerCssList.get(j);
 
-				String headerCssPath = headerCss;
-
-				if (Validator.isNotNull(portlet.getServletContextName())) {
-					headerCssPath = StringPool.SLASH + portlet.getServletContextName() + headerCssPath;
-				}
-				else {
-					headerCssPath = themeDisplay.getPathContext() + headerCssPath;
-				}
+				String headerCssPath = portlet.getContextPath() + headerCss;
 
 				if (!headerCssPaths.contains(headerCssPath)) {
 					headerCssPaths.add(headerCssPath);
@@ -107,14 +100,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 			for (int j = 0; j < headerJavaScriptList.size(); j++) {
 				String headerJavaScript = (String)headerJavaScriptList.get(j);
 
-				String headerJavaScriptPath = headerJavaScript;
-
-				if (Validator.isNotNull(portlet.getServletContextName())) {
-					headerJavaScriptPath = StringPool.SLASH + portlet.getServletContextName() + headerJavaScriptPath;
-				}
-				else {
-					headerJavaScriptPath = themeDisplay.getPathContext() + headerJavaScriptPath;
-				}
+				String headerJavaScriptPath = portlet.getContextPath() + headerJavaScript;
 
 				if (!headerJavaScriptPaths.contains(headerJavaScriptPath)) {
 					headerJavaScriptPaths.add(headerJavaScriptPath);

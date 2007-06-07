@@ -295,12 +295,6 @@ public class ThemeDisplay implements Serializable {
 				themeContextPath = theme.getContextPath();
 			}
 
-			String virtualPath = theme.getVirtualPath();
-
-			if ((virtualPath != null) && (virtualPath.length() > 0)) {
-				themeContextPath = virtualPath;
-			}
-
 			setPathColorSchemeImages(
 				themeContextPath + colorScheme.getColorSchemeImagesPath());
 

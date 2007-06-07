@@ -16,16 +16,17 @@ a Liferay portlet application.
 <!--
 The portlet element contains the declarative data of a portlet.
 -->
-<!ELEMENT portlet (portlet-name, icon?, struts-path?, configuration-path?,
-indexer-class?, open-search-class?, scheduler-class?, portlet-url-class?,
-friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
-smtp-message-listener-class?, preferences-company-wide?,
-preferences-unique-per-layout?, preferences-owned-by-group?,
-use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-pop-up-print?, layout-cacheable?, instanceable?, private-request-attributes?,
-private-session-attributes?, render-weight?, ajaxable?, header-css*,
-header-javascript*, add-default-resource?, system?, active?, include?)>
+<!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
+configuration-path?, indexer-class?, open-search-class?, scheduler-class?,
+portlet-url-class?, friendly-url-mapper-class?, url-encoder-class?,
+portlet-data-handler-class?, smtp-message-listener-class?,
+preferences-company-wide?, preferences-unique-per-layout?,
+preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
+show-portlet-inactive?, action-url-redirect?, restore-current-view?,
+maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
+private-request-attributes?, private-session-attributes?, render-weight?,
+ajaxable?, header-css*, header-javascript*, add-default-resource?, system?,
+active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -37,6 +38,19 @@ match the portlet-name specified in portlet.xml.
 The icon element specifies an image that represents the portlet.
 -->
 <!ELEMENT icon (#PCDATA)>
+
+<!--
+The virtual-path value sets the virtual path used to override the default
+servlet context path.
+
+For example, suppose your portlet is deployed to the servlet path
+"/test-portlet". By default, the portal will return "/test-portlet" for the
+servlet context path. You can override it by setting virtual-path to "/virtual"
+and have the portal return "/virtual" for the servlet context path.
+
+The default value is "" which means this is not used.
+-->
+<!ELEMENT virtual-path (#PCDATA)>
 
 <!--
 Supppose the struts-path value is "mail". This tells the portal that all

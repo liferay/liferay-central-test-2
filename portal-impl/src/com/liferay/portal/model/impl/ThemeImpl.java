@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeCompanyLimit;
@@ -242,8 +243,19 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public String getContextPath() {
+		String virtualPath = getVirtualPath();
+
+		if (Validator.isNotNull(virtualPath)) {
+			return virtualPath;
+		}
+
 		if (isWARFile()) {
-			return StringPool.SLASH + getServletContextName();
+			StringMaker sm = new StringMaker();
+
+			sm.append(StringPool.SLASH);
+			sm.append(getServletContextName());
+
+			return sm.toString();
 		}
 		else {
 			return PortalUtil.getPathContext();
