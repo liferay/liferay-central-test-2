@@ -262,8 +262,11 @@ public class DBLoader {
 	private void _loadHypersonic() throws Exception {
 		Class.forName("org.hsqldb.jdbcDriver");
 
+		// See LEP-2927. Appending ;shutdown=true to the hsqldb connect string 
+		// guaranties that ${_databaseName}.log is purged.
+		
 		Connection con = DriverManager.getConnection(
-			"jdbc:hsqldb:" + _databaseName, "sa", "");
+			"jdbc:hsqldb:" + _databaseName + ";shutdown=true", "sa", "");
 
 		if (Validator.isNull(_fileName)) {
 			_loadHypersonic(con, "../sql/portal/portal-hypersonic.sql");
