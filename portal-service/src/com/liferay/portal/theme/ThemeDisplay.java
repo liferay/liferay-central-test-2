@@ -292,8 +292,7 @@ public class ThemeDisplay implements Serializable {
 			String themeContextPath = contextPath;
 
 			if (theme.isWARFile()) {
-				themeContextPath =
-					StringPool.SLASH + theme.getServletContextName();
+				themeContextPath = theme.getContextPath();
 			}
 
 			String virtualPath = theme.getVirtualPath();
