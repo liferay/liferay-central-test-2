@@ -59,7 +59,8 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	LinkedHashMap groupParams = new LinkedHashMap();
 
 	if (tabs1.equals("communities-owned")) {
-		groupParams.put("creatorUserId", new Long(user.getUserId()));
+		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+		groupParams.put("userGroupRole", new Object[]{new Long(user.getUserId()), role.getRoleId()});
 	}
 	else if (tabs1.equals("communities-joined")) {
 		groupParams.put("usersGroups", new Long(user.getUserId()));

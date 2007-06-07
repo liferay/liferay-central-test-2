@@ -159,6 +159,17 @@
 				(Group_.type_ = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByUserGroupRole">
+		<![CDATA[
+			INNER JOIN
+				UserGroupRole ON
+					(UserGroupRole.userId = ?)
+			WHERE
+				(Group_.liveGroupId = 0) AND
+				(UserGroupRole.groupId = Group_.groupId) AND
+				(UserGroupRole.roleId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByUsersGroups">
 		<![CDATA[
 			INNER JOIN

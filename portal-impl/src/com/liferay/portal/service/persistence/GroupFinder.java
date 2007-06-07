@@ -93,6 +93,9 @@ public class GroupFinder {
 	public static String JOIN_BY_TYPE =
 		GroupFinder.class.getName() + ".joinByType";
 
+	private static final String JOIN_BY_USER_GROUP_ROLE =
+		GroupFinder.class.getName() + ".joinByUserGroupRole";
+
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
@@ -498,6 +501,9 @@ public class GroupFinder {
 		else if (key.equals("rolePermissions")) {
 			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
 		}
+		else if (key.equals("userGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
+		}
 		else if (key.equals("usersGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
 		}
@@ -566,6 +572,9 @@ public class GroupFinder {
 		else if (key.equals("type")) {
 			join = CustomSQLUtil.get(JOIN_BY_TYPE);
 		}
+		else if (key.equals("userGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
+		}
 		else if (key.equals("usersGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
 		}
@@ -623,6 +632,21 @@ public class GroupFinder {
 
 							qPos.add(valueString);
 						}
+					}
+				}
+				else if (key.equals("userGroupRole")) {
+					Object[] values = (Object[]) entry.getValue();
+
+					Long userId = (Long)values[0];
+
+					if (Validator.isNotNull(userId)) {
+						qPos.add(userId);
+					}
+
+					Long roleId = (Long)values[1];
+
+					if (Validator.isNotNull(roleId)) {
+						qPos.add(roleId);
 					}
 				}
 				else {
