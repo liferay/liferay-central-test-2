@@ -1,18 +1,20 @@
 Liferay.PortletCSS = {
-	init: function(str) {
+	init: function(portletId) {
 		var instance = this;
-		var obj = jQuery('#' + str);
-		var currentId = str;
+
+		var curPortletBoundaryId = 'p_p_id_' + portletId + '_';
+		var obj = jQuery('#' + curPortletBoundaryId);
 		var tabTrigger = 1;
 
-		instance._currentPortlet = obj.find('.portlet');
+		instance._portletId = portletId;
+		instance._curPortlet = obj.find('.portlet');
+		instance._curPortletWrapperId = instance._curPortlet.attr('id');
+		instance._portletBoundaryId = curPortletBoundaryId;
 		instance._newPanel = jQuery('#portlet-set-properties');
-		instance._currentPortletId = instance._currentPortlet.attr('id');
-		instance._portletBoundryId = obj.attr('id');
 
 		var newPanel = instance._newPanel;
 
-		if (instance._currentPortlet.length) {
+		if (instance._curPortlet.length) {
 			if (!instance._newPanel.is('.instantiated')) {
 
 				// Language keys
@@ -30,12 +32,12 @@ Liferay.PortletCSS = {
 
 				instance._newPanel.addClass('instantiated');
 
-				instance._portletId = jQuery('#portlet-id');
+				instance._portletBoundaryIdVar = jQuery('#portlet-boundary-id');
 
 				// Portlet config
 
 				instance._customTitleInput = jQuery('#custom-title');
-				instance._defaultPortletTitle = instance._currentPortlet.find('.portlet-title').text();
+				instance._defaultPortletTitle = instance._curPortlet.find('.portlet-title').text();
 				instance._customTitleCheckbox = jQuery('#use-custom-title-checkbox');
 				instance._showBorders = jQuery('#show-borders');
 				instance._borderNote = jQuery('#border-note');
@@ -243,7 +245,7 @@ Liferay.PortletCSS = {
 
 			instance._assignColorPickers();
 
-			instance._portletId.val(currentId);
+			instance._portletBoundaryIdVar.val(curPortletBoundaryId);
 
 			instance._setDefaults();
 
@@ -281,24 +283,23 @@ Liferay.PortletCSS = {
 
 			instance._saveButton.unbind().click(
 				function() {
-						jQuery.ajax(
-							{
-								data: {
-									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-									cmd: 'update_portlet_css',
-									portletId: instance._portletBoundryId,
-									objData: instance._objData
-								},
-								url: themeDisplay.getPathContext() + '/update_portlet_css'
-							}
-						);
+					jQuery.ajax(
+						{
+							data: {
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								portletId: instance._portletId,
+								css: jQuery.toJSON(instance._objData)
+							},
+							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel'
+						}
+					);
 				}
 			);
 
 			instance._resetButton.unbind().click(
 				function() {
-					instance._currentPortlet.attr('style', '');
-					jQuery('#lfr-custom-css-block-' + instance._currentPortletId).remove();
+					instance._curPortlet.attr('style', '');
+					jQuery('#lfr-custom-css-block-' + instance._curPortletWrapperId).remove();
 					instance._objData = defaultData;
 					instance._setDefaults();
 				}
@@ -328,10 +329,10 @@ Liferay.PortletCSS = {
 
 		var bgData = instance._objData.bgData;
 
-		var portlet = instance._currentPortlet;
+		var portlet = instance._curPortlet;
 
 		// Background color
-	
+
 		var backgroundColor = instance._backgroundColor;
 
 		var setColor = function(obj){
@@ -423,7 +424,7 @@ Liferay.PortletCSS = {
 	_borderStyles: function() {
 		var instance = this;
 
-		var portlet = instance._currentPortlet;
+		var portlet = instance._curPortlet;
 
 		var ufaWidth = instance._ufaBorderWidth;
 		var ufaStyle = instance._ufaBorderStyle;
@@ -648,7 +649,7 @@ Liferay.PortletCSS = {
 	_cssStyles: function() {
 		var instance = this;
 
-		var portlet = instance._currentPortlet;
+		var portlet = instance._curPortlet;
 
 		var customCSS = jQuery('#lfr-custom-css');
 		var customCSSContainer = customCSS.parents('.ctrl-holder');
@@ -656,7 +657,7 @@ Liferay.PortletCSS = {
 		var customPortletNote = jQuery('#lfr-portlet-info');
 		var refreshText = '';
 
-		var portletId = instance._currentPortletId;
+		var portletId = instance._curPortletWrapperId;
 		var portletClasses = portlet.attr('class');
 
 		portletClasses = jQuery.trim(portletClasses).replace(/(\s)/g, '$1.');
@@ -845,7 +846,7 @@ Liferay.PortletCSS = {
 					title = instance._defaultPortletTitle;
 				}
 
-				instance._currentPortlet.find('.portlet-title').text(title);
+				instance._curPortlet.find('.portlet-title').text(title);
 			}
 		);
 
@@ -854,7 +855,7 @@ Liferay.PortletCSS = {
 				if (!customTitleCheckbox.is(':checked')) {
 					return;
 				}
-				instance._currentPortlet.find('.portlet-title').text(this.value);
+				instance._curPortlet.find('.portlet-title').text(this.value);
 				portletData.title = this.value;
 			}
 		);
@@ -973,7 +974,7 @@ Liferay.PortletCSS = {
 
 		// Advanced CSS
 
-		var customStyleBlock = jQuery('#lfr-custom-css-block-' + instance._currentPortletId);
+		var customStyleBlock = jQuery('#lfr-custom-css-block-' + instance._curPortletWrapperId);
 
 		var customStyles = customStyleBlock.html();
 
@@ -1007,7 +1008,7 @@ Liferay.PortletCSS = {
 	_spacingStyles: function() {
 		var instance = this;
 
-		var portlet = instance._currentPortlet;
+		var portlet = instance._curPortlet;
 
 		var ufaPadding = instance._ufaPadding;
 		var ufaMargin = instance._ufaMargin;
@@ -1158,7 +1159,7 @@ Liferay.PortletCSS = {
 	_textStyles: function() {
 		var instance = this;
 
-		var portlet = instance._currentPortlet;
+		var portlet = instance._curPortlet;
 		var fontFamily = instance._fontFamily;
 		var fontBold = instance._fontWeight;
 		var fontItalic = instance._fontStyle;

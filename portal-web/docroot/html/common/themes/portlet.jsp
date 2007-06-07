@@ -244,7 +244,7 @@ portletDisplay.setURLMin(urlMin);
 
 // URL portlet css
 
-String urlPortletCss = "javascript: Liferay.PortletCSS.init('p_p_id_" + portletDisplay.getId() + "_');";
+String urlPortletCss = "javascript: Liferay.PortletCSS.init('" + portletDisplay.getId() + "');";
 
 portletDisplay.setURLPortletCss(urlPortletCss.toString());
 

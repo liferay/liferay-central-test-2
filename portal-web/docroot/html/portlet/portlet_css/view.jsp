@@ -49,7 +49,7 @@
 
 		<form class="uni-form" method="post">
 		<input type="hidden" name="portlet-area" id="portlet-area" />
-		<input type="hidden" name="portlet-id" id="portlet-id" />
+		<input type="hidden" name="portlet-boundary-id" id="portlet-boundary-id" />
 
 		<fieldset class="block-labels" id="portlet-config">
 			<legend><liferay-ui:message key="portlet-configuration" /></legend>

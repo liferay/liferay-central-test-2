@@ -5,7 +5,7 @@
 #set ( $portlet_content = $portlet_display.getContent() )
 #set ( $portlet_back_url = $portlet_display.getURLBack() )
 
-<div class="portlet" id="portlet-id-$portlet_id">
+<div class="portlet" id="portlet-wrapper-$portlet_id">
 	<div class="portlet-topper">
 		<span class="portlet-title">
 			$theme.iconPortlet() $portlet_title
