@@ -32,6 +32,7 @@ import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
@@ -94,6 +95,7 @@ public class AddUserAction extends PortletAction {
 				e instanceof UserEmailAddressException ||
 				e instanceof UserIdException ||
 				e instanceof UserPasswordException ||
+				e instanceof UserScreenNameException ||
 				e instanceof UserSmsException) {
 
 				SessionErrors.add(req, e.getClass().getName(), e);

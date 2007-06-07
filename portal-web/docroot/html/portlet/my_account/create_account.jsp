@@ -28,6 +28,8 @@
 User user2 = null;
 Contact contact2 = null;
 
+boolean alwaysAutoScreenName = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
+
 Calendar birthday = new GregorianCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
@@ -49,6 +51,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
+<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 <table class="liferay-table">
 <tr>
@@ -78,14 +81,17 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="screen-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
-			</td>
-		</tr>
+		
+		<c:if test="<%= !alwaysAutoScreenName %>" >
+			<tr>
+				<td>
+					<liferay-ui:message key="screen-name" />
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
+				</td>
+			</tr>
+		</c:if>
 
 		<c:choose>
 			<c:when test="<%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) %>">

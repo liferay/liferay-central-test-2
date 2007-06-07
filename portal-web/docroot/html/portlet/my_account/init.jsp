@@ -32,3 +32,4 @@
 <%@ page import="com.liferay.portal.ReservedUserIdException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserIdException" %>
+<%@ page import="com.liferay.portal.UserScreenNameException" %>
