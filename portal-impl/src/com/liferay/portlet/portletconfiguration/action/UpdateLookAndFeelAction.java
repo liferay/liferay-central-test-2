@@ -77,7 +77,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		//String languageId = LanguageUtil.getLanguageId(req);
 		//String title = ParamUtil.getString(req, "title");
 		String css = ParamUtil.getString(req, "css");
-System.out.println("## css " + css);
+
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(layout, portletId);
 
