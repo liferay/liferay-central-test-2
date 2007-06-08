@@ -163,57 +163,6 @@ else {
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="longDescription" />
 	</td>
 </tr>
-<tr>
-	<td>
-		<liferay-ui:message key="main-screenshot" />
-	</td>
-	<td>
-		<%
-		String mainImageName = SCProductEntryImpl.MAIN_IMAGE_NAME;
-		%>
-		<input class="liferay-input-text" name="<portlet:namespace />screenshot_update_<%=mainImageName%>" type="file" />
-		<%
-		if (productEntry != null) {
-			String imageId = productEntry.getImageId(mainImageName);
-			if (imageId != null) {
-				String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId + "&small=1";
-		%>
-				<br clear="all"/>
-				<img src="<%=imageURL%>"/>
-		<%
-			}
-		}
-
-		%>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="secondary-screenshots" />
-	</td>
-	<td>
-		<%
-		for (int i = 1; i < 5; i++) {
-			String imageName = String.valueOf(i);
-		%>
- 			<br clear="all"/>
-			<input class="liferay-input-text" name="<portlet:namespace />screenshot_update_<%=imageName%>" type="file" />
-		<%
-			if (productEntry != null) {
-				String imageId = productEntry.getImageId(imageName);
-				if (imageId != null) {
-					String imageURL = themeDisplay.getPathImage() + "/software_catalog?img_id=" + imageId + "&small=1";
-		%>
-					<br clear="all"/>
-					<img src="<%=imageURL%>" width="100"/>
-					<input type="checkbox" name="<portlet:namespace />screenshot_delete_<%=imageName%>"/> <%= LanguageUtil.get(pageContext, "delete")%>
-		<%
-				}
-			}
-		}
-		%>
-	</td>
-</tr>
 
 <c:if test="<%= productEntry == null %>">
 	<tr>
