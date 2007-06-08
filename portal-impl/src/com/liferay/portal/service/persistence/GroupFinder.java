@@ -93,7 +93,7 @@ public class GroupFinder {
 	public static String JOIN_BY_TYPE =
 		GroupFinder.class.getName() + ".joinByType";
 
-	private static final String JOIN_BY_USER_GROUP_ROLE =
+	public static String JOIN_BY_USER_GROUP_ROLE =
 		GroupFinder.class.getName() + ".joinByUserGroupRole";
 
 	public static String JOIN_BY_USERS_GROUPS =
@@ -635,19 +635,13 @@ public class GroupFinder {
 					}
 				}
 				else if (key.equals("userGroupRole")) {
-					Object[] values = (Object[]) entry.getValue();
+					List values = (List)entry.getValue();
 
-					Long userId = (Long)values[0];
+					Long userId = (Long)values.get(0);
+					Long roleId = (Long)values.get(1);
 
-					if (Validator.isNotNull(userId)) {
-						qPos.add(userId);
-					}
-
-					Long roleId = (Long)values[1];
-
-					if (Validator.isNotNull(roleId)) {
-						qPos.add(roleId);
-					}
+					qPos.add(userId);
+					qPos.add(roleId);
 				}
 				else {
 					Object value = entry.getValue();

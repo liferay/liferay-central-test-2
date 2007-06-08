@@ -60,7 +60,14 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 	if (tabs1.equals("communities-owned")) {
 		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
-		groupParams.put("userGroupRole", new Object[]{new Long(user.getUserId()), role.getRoleId()});
+
+		List userGroupRole = new ArrayList();
+
+		userGroupRole.add(new Long(user.getUserId()));
+		userGroupRole.add(new Long(role.getRoleId()));
+
+		groupParams.put("userGroupRole", userGroupRole);
+		groupParams.put("active", Boolean.TRUE);
 	}
 	else if (tabs1.equals("communities-joined")) {
 		groupParams.put("usersGroups", new Long(user.getUserId()));
