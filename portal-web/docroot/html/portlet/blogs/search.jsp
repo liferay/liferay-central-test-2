@@ -35,7 +35,7 @@ long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
 <input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
 
