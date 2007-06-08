@@ -4,9 +4,11 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
+	<property name="fckeditor.file" value="FCKeditor_2.4.2.zip" />
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
+		<delete dir="docroot/html/js/editor/fckeditor" />
 		<delete dir="docroot/html/skin/color" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 		<delete dir="docroot/WEB-INF/classes" />
@@ -238,7 +240,26 @@
 		</antcall>
 	</target>
 
+	<target name="war" depends="compile">
+		<war
+			basedir="docroot"
+			destfile="${war.file}.war"
+			excludes="WEB-INF/web.xml,html/js/editor/${fckeditor.file},html/js/editor/fckeditor/_samples/**"
+			webxml="docroot/WEB-INF/web.xml"
+		/>
+	</target>
+
 	<target name="deploy">
+		<unzip src="docroot/html/js/editor/${fckeditor.file}" dest="docroot/html/js/editor" />
+
+		<copy todir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay">
+			<fileset dir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/default" />
+		</copy>
+
+		<copy todir="docroot/html/js/editor/fckeditor" overwrite="yes">
+			<fileset dir="docroot/html/js/editor/_fckeditor" />
+		</copy>
+
 		<antcall target="build-common-web.deploy" />
 
 		<if>
