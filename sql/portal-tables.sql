@@ -441,7 +441,7 @@ create table Layout (
 	colorSchemeId VARCHAR(75) null,
 	wapThemeId VARCHAR(75) null,
 	wapColorSchemeId VARCHAR(75) null,
-	css VARCHAR(75) null,
+	css STRING null,
 	priority INTEGER
 );
 

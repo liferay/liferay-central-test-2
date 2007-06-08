@@ -195,7 +195,9 @@
 		<field name="colorSchemeId" type="String" />
 		<field name="wapThemeId" type="String" />
 		<field name="wapColorSchemeId" type="String" />
-		<field name="css" type="String" />
+		<field name="css" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="priority" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutSet">
