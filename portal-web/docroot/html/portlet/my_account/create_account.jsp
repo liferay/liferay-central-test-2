@@ -28,8 +28,6 @@
 User user2 = null;
 Contact contact2 = null;
 
-boolean alwaysAutoScreenName = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
-
 Calendar birthday = new GregorianCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
@@ -82,7 +80,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			</td>
 		</tr>
 
-		<c:if test="<%= !alwaysAutoScreenName %>" >
+		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) %>" >
 			<tr>
 				<td>
 					<liferay-ui:message key="screen-name" />
@@ -92,22 +90,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				</td>
 			</tr>
 		</c:if>
-
-		<c:choose>
-			<c:when test="<%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) %>">
-				<tr>
-					<td>
-						<liferay-ui:message key="user-id" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<input name="<portlet:namespace />autoUserId" type="hidden" value="1" />
-			</c:otherwise>
-		</c:choose>
 
 		<tr>
 			<td>
