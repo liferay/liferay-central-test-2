@@ -81,7 +81,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
 			</td>
 		</tr>
-		
+
 		<c:if test="<%= !alwaysAutoScreenName %>" >
 			<tr>
 				<td>
