@@ -29,6 +29,8 @@ Liferay.PortletCSS = {
 				instance._lang.portletId = Liferay.Language.get('portlet-id');
 				instance._lang.portletClasses = Liferay.Language.get('portlet-classes');
 				instance._lang.currentPortletInfo = Liferay.Language.get('your-current-portlet-information-is-as-follows');
+				instance._lang.saveSuccess = Liferay.Language.get('your-request-processed-successfully');
+				instance._lang.saveError = Liferay.Language.get('your-settings-could-not-be-saved');
 
 				instance._newPanel.addClass('instantiated');
 
@@ -147,7 +149,10 @@ Liferay.PortletCSS = {
 			}
 
 			newPanel.find('.lfr-color-picker-img').remove();
-
+			
+			instance._portletMsgResponse = jQuery('#lfr-portlet-css-response');
+			instance._portletMsgResponse.hide();
+			
 			var defaultData = {
 				advancedData: {
 					customCSS: ''
@@ -158,23 +163,35 @@ Liferay.PortletCSS = {
 					useBgImage: false,
 					backgroundRepeat: 'repeat',
 					backgroundPosition: {
-						left: '',
-						leftUnit: 'px',
-						top: '',
-						topUnit: 'px'
+						left: {
+							value: '',
+							unit: 'px'
+						},
+						top: {
+							value: '',
+							unit: 'px'
+						}
 					}
 				},
 
 				borderData: {
 					borderWidth: {
-						bottom: '',
-						bottomUnit: 'px',
-						left: '',
-						leftUnit: 'px',
-						right: '',
-						rightUnit: 'px',
-						top: '',
-						topUnit: 'px',
+						bottom: {
+							value: '',
+							unit: 'px'
+						},
+						left: {
+							value: '',
+							unit: 'px'
+						},
+						right: {
+							value: '',
+							unit: 'px'
+						},
+						top: {
+							value: '',
+							unit: 'px'
+						},
 						sameForAll: true
 					},
 
@@ -204,25 +221,41 @@ Liferay.PortletCSS = {
 				},
 				spacingData: {
 					margin: {
-						bottom: '',
-						bottomUnit: 'px',
-						left: '',
-						leftUnit: 'px',
-						right: '',
-						rightUnit: '%',
-						top: '',
-						topUnit: 'px',
+						bottom: {
+							value: '',
+							unit: 'px'
+						},
+						left: {
+							value: '',
+							unit: 'px'
+						},
+						right: {
+							value: '',
+							unit: 'px'
+						},
+						top: {
+							value: '',
+							unit: 'px'
+						},
 						sameForAll: true
 					},
 					padding: {
-						bottom: '',
-						bottomUnit: 'px',
-						left: '',
-						leftUnit: 'px',
-						right: '',
-						rightUnit: 'px',
-						top: '',
-						topUnit: 'px',
+						bottom: {
+							value: '',
+							unit: 'px'
+						},
+						left: {
+							value: '',
+							unit: 'px'
+						},
+						right: {
+							value: '',
+							unit: 'px'
+						},
+						top: {
+							value: '',
+							unit: 'px'
+						},
 						sameForAll: true
 					}
 
@@ -232,16 +265,33 @@ Liferay.PortletCSS = {
 					color: '',
 					fontFamily: 'Arial',
 					fontSize: '1em',
-					fontStyle: false,
-					fontWeight: false,
+					fontStyle: 'normal',
+					fontWeight: 'normal',
 					letterSpacing: '0',
 					lineHeight: '1.2em',
 					textDecoration: 'none',
 					wordSpacing: 'normal'
 				}
 			};
-
-			instance._objData = defaultData;
+			
+			var objectData = jQuery.ajax(
+				{
+					data: {
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+						portletId: instance._portletId
+					},
+					url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
+					async: false,
+					dataType: 'json'
+				}
+			);
+			
+			if (objectData.length) {
+				instance._objData = objectData;
+			} 
+			else {
+				instance._objData = defaultData;
+			}
 
 			instance._assignColorPickers();
 
@@ -280,9 +330,35 @@ Liferay.PortletCSS = {
 
 			useForAll.unbind().click(handleForms);
 			useForAll.each(handleForms);
+			
+			var saveHandler = function(xHR, type) {
+				var ajaxResponseMsg = instance._portletMsgResponse;
+				var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
+				var message = '';
+				var messageClass = '';
+				if (type == 'success') {
+					message = instance._lang.saveSuccess;
+					messageClass = 'portlet-msg-success';
+				}
+				else {
+					message = instance._lang.saveError;
+					messageClass = 'portlet-msg-error';
+				}
+				if (!ajaxResponseMsg.length) {
+					ajaxResponse = jQuery(ajaxResponseHTML);
+					instance._newPanel.find('form').prepend(ajaxResponse);
+					instance._portletMsgResponse = ajaxResponse;
+				}
+				ajaxResponse.hide();
+				ajaxResponse.attr('class', 'portlet-msg-success');
+				ajaxResponse.empty();
+				ajaxResponse.html(instance._lang.saveSuccess);
+				ajaxResponse.fadeIn('normal');
+			}
 
 			instance._saveButton.unbind().click(
 				function() {
+					instance._objData.advancedData.customCSS = instance._customCSS.val();
 					jQuery.ajax(
 						{
 							data: {
@@ -290,7 +366,8 @@ Liferay.PortletCSS = {
 								portletId: instance._portletId,
 								css: jQuery.toJSON(instance._objData)
 							},
-							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel'
+							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
+							complete: saveHandler
 						}
 					);
 				}
@@ -375,6 +452,7 @@ Liferay.PortletCSS = {
 		useBgImage.unbind().click(
 			function() {
 				bgImageProperties.toggle();
+				bgData.useBgImage = this.checked;
 			}
 		);
 
@@ -405,11 +483,11 @@ Liferay.PortletCSS = {
 
 			portlet.css('background-position', leftPos.both + ' ' + topPos.both);
 
-			bgData.backgroundPosition.top = topPos.input;
-			bgData.backgroundPosition.topUnit = topPos.selectBox;
+			bgData.backgroundPosition.top.value = topPos.input;
+			bgData.backgroundPosition.top.unit = topPos.selectBox;
 
-			bgData.backgroundPosition.left = leftPos.input;
-			bgData.backgroundPosition.leftUnit = leftPos.selectBox;
+			bgData.backgroundPosition.left.value = leftPos.input;
+			bgData.backgroundPosition.left.unit = leftPos.selectBox;
 		};
 
 		bgPosTop.unbind().blur(updatePos);
@@ -452,8 +530,8 @@ Liferay.PortletCSS = {
 
 			var ufa = ufaWidth.is(':checked');
 
-			borderData.borderWidth.top = borderWidth.input;
-			borderData.borderWidth.topUnit = borderWidth.selectBox;
+			borderData.borderWidth.top.value = borderWidth.input;
+			borderData.borderWidth.top.unit = borderWidth.selectBox;
 			borderData.borderWidth.sameForAll = ufa;
 
 			if (!ufa) {
@@ -471,14 +549,14 @@ Liferay.PortletCSS = {
 
 				styling = extStyling;
 
-				borderData.borderWidth.right = right.input;
-				borderData.borderWidth.rightUnit = right.selectBox;
+				borderData.borderWidth.right.value = right.input;
+				borderData.borderWidth.right.unit = right.selectBox;
 
-				borderData.borderWidth.bottom = bottom.input;
-				borderData.borderWidth.bottomUnit = bottom.selectBox;
+				borderData.borderWidth.bottom.value = bottom.input;
+				borderData.borderWidth.bottom.unit = bottom.selectBox;
 
-				borderData.borderWidth.left = left.input;
-				borderData.borderWidth.leftUnit = left.selectBox;
+				borderData.borderWidth.left.value = left.input;
+				borderData.borderWidth.left.unit = left.selectBox;
 			}
 
 			portlet.css(styling);
@@ -730,7 +808,7 @@ Liferay.PortletCSS = {
 					styleEl.styleSheet.cssText = customStyles;
 				}
 				else {
-					jQuery(styleEl).html(customStyles)
+					jQuery(styleEl).html(customStyles);
 				}
 			};
 
@@ -840,6 +918,10 @@ Liferay.PortletCSS = {
 				if (this.checked) {
 					title = customTitleInput.val();
 					portletData.useCustomTitle = this.checked;
+					if (title == '') {
+						title = instance._curPortlet.find('.portlet-title').text();
+						customTitleInput.val(title);
+					}
 					portletData.title = title;
 				}
 				else {
@@ -919,10 +1001,10 @@ Liferay.PortletCSS = {
 		instance._setInput(instance._backgroundColor, bgData.backgroundColor);
 		instance._setCheckbox(instance._useBgImage, bgData.useBgImage);
 		instance._setSelect(instance._bgRepeating, bgData.backgroundRepeat);
-		instance._setInput(instance._bgPosTop, bgData.backgroundPosition.top);
-		instance._setSelect(instance._bgPosTopUnit, bgData.backgroundPosition.topUnit);
-		instance._setInput(instance._bgPosLeft, bgData.backgroundPosition.left);
-		instance._setSelect(instance._bgPosLeftUnit, bgData.backgroundPosition.leftUnit);
+		instance._setInput(instance._bgPosTop, bgData.backgroundPosition.top.value);
+		instance._setSelect(instance._bgPosTopUnit, bgData.backgroundPosition.top.unit);
+		instance._setInput(instance._bgPosLeft, bgData.backgroundPosition.left.value);
+		instance._setSelect(instance._bgPosLeftUnit, bgData.backgroundPosition.left.unit);
 
 		// Border
 
@@ -930,14 +1012,14 @@ Liferay.PortletCSS = {
 		instance._setCheckbox(instance._ufaBorderStyle, borderData.borderStyle.sameForAll);
 		instance._setCheckbox(instance._ufaBorderColor, borderData.borderColor.sameForAll);
 
-		instance._setInput(instance._borderTopInt, borderData.borderWidth.top);
-		instance._setSelect(instance._borderTopUnit, borderData.borderWidth.topUnit);
-		instance._setInput(instance._borderRightInt, borderData.borderWidth.right);
-		instance._setSelect(instance._borderRightUnit, borderData.borderWidth.rightUnit);
-		instance._setInput(instance._borderBottomInt, borderData.borderWidth.bottom);
-		instance._setSelect(instance._borderBottomUnit, borderData.borderWidth.bottomUnit);
-		instance._setInput(instance._borderLeftInt, borderData.borderWidth.left);
-		instance._setSelect(instance._borderLeftUnit, borderData.borderWidth.leftUnit);
+		instance._setInput(instance._borderTopInt, borderData.borderWidth.top.value);
+		instance._setSelect(instance._borderTopUnit, borderData.borderWidth.top.unit);
+		instance._setInput(instance._borderRightInt, borderData.borderWidth.right.value);
+		instance._setSelect(instance._borderRightUnit, borderData.borderWidth.right.unit);
+		instance._setInput(instance._borderBottomInt, borderData.borderWidth.bottom.value);
+		instance._setSelect(instance._borderBottomUnit, borderData.borderWidth.bottom.unit);
+		instance._setInput(instance._borderLeftInt, borderData.borderWidth.left.value);
+		instance._setSelect(instance._borderLeftUnit, borderData.borderWidth.left.unit);
 
 		instance._setSelect(instance._borderTopStyle, borderData.borderStyle.top);
 		instance._setSelect(instance._borderRightStyle, borderData.borderStyle.right);
@@ -954,23 +1036,23 @@ Liferay.PortletCSS = {
 		instance._setCheckbox(instance._ufaPadding, spacingData.padding.sameForAll);
 		instance._setCheckbox(instance._ufaMargin, spacingData.margin.sameForAll);
 
-		instance._setInput(instance._paddingTopInt, spacingData.padding.top);
-		instance._setSelect(instance._paddingTopUnit, spacingData.padding.topUnit);
-		instance._setInput(instance._paddingRightInt, spacingData.padding.right);
-		instance._setSelect(instance._paddingRightUnit, spacingData.padding.rightUnit);
-		instance._setInput(instance._paddingBottomInt, spacingData.padding.bottom);
-		instance._setSelect(instance._paddingBottomUnit, spacingData.padding.bottomUnit);
-		instance._setInput(instance._paddingLeftInt, spacingData.padding.left);
-		instance._setSelect(instance._paddingLeftUnit, spacingData.padding.leftUnit);
+		instance._setInput(instance._paddingTopInt, spacingData.padding.top.value);
+		instance._setSelect(instance._paddingTopUnit, spacingData.padding.top.unit);
+		instance._setInput(instance._paddingRightInt, spacingData.padding.right.value);
+		instance._setSelect(instance._paddingRightUnit, spacingData.padding.right.unit);
+		instance._setInput(instance._paddingBottomInt, spacingData.padding.bottom.value);
+		instance._setSelect(instance._paddingBottomUnit, spacingData.padding.bottom.unit);
+		instance._setInput(instance._paddingLeftInt, spacingData.padding.left.value);
+		instance._setSelect(instance._paddingLeftUnit, spacingData.padding.left.unit);
 
-		instance._setInput(instance._marginTopInt, spacingData.margin.top);
-		instance._setSelect(instance._marginTopUnit, spacingData.margin.topUnit);
-		instance._setInput(instance._marginRightInt, spacingData.margin.right);
-		instance._setSelect(instance._marginRightUnit, spacingData.margin.rightUnit);
-		instance._setInput(instance._marginBottomInt, spacingData.margin.bottom);
-		instance._setSelect(instance._marginBottomUnit, spacingData.margin.bottomUnit);
-		instance._setInput(instance._marginLeftInt, spacingData.margin.left);
-		instance._setSelect(instance._marginLeftUnit, spacingData.margin.leftUnit);
+		instance._setInput(instance._marginTopInt, spacingData.margin.top.value);
+		instance._setSelect(instance._marginTopUnit, spacingData.margin.top.unit);
+		instance._setInput(instance._marginRightInt, spacingData.margin.right.value);
+		instance._setSelect(instance._marginRightUnit, spacingData.margin.right.unit);
+		instance._setInput(instance._marginBottomInt, spacingData.margin.bottom.value);
+		instance._setSelect(instance._marginBottomUnit, spacingData.margin.bottom.unit);
+		instance._setInput(instance._marginLeftInt, spacingData.margin.left.value);
+		instance._setSelect(instance._marginLeftUnit, spacingData.margin.left.unit);
 
 		// Advanced CSS
 
@@ -1035,8 +1117,8 @@ Liferay.PortletCSS = {
 
 			var ufa = ufaPadding.is(':checked');
 
-			spacingData.padding.top = top.input;
-			spacingData.padding.topUnit = top.selectBox;
+			spacingData.padding.top.value = padding.input;
+			spacingData.padding.top.unit = padding.selectBox;
 
 			spacingData.padding.sameForAll = ufa;
 
@@ -1055,16 +1137,16 @@ Liferay.PortletCSS = {
 
 				styling = extStyling;
 
-				spacingData.padding.right = right.input;
-				spacingData.padding.rightUnit = right.selectBox;
+				spacingData.padding.right.value = right.input;
+				spacingData.padding.right.unit = right.selectBox;
 
-				spacingData.padding.bottom = bottom.input;
-				spacingData.padding.bottomUnit = bottom.selectBox;
+				spacingData.padding.bottom.value = bottom.input;
+				spacingData.padding.bottom.unit = bottom.selectBox;
 
-				spacingData.padding.left = left.input;
-				spacingData.padding.leftUnit = left.selectBox;
+				spacingData.padding.left.value = left.input;
+				spacingData.padding.left.unit = left.selectBox;
 			}
-
+			console.log(spacingData.padding.top);
 			portlet.css(styling);
 		};
 
@@ -1105,8 +1187,8 @@ Liferay.PortletCSS = {
 
 			var ufa = ufaMargin.is(':checked');
 
-			spacingData.margin.top = margin.input;
-			spacingData.margin.topUnit = margin.selectBox;
+			spacingData.margin.top.value = margin.input;
+			spacingData.margin.top.unit = margin.selectBox;
 
 			spacingData.margin.sameForAll = ufa;
 
@@ -1125,14 +1207,14 @@ Liferay.PortletCSS = {
 
 				styling = extStyling;
 
-				spacingData.margin.right = right.input;
-				spacingData.margin.rightUnit = right.selectBox;
+				spacingData.margin.right.value = right.input;
+				spacingData.margin.right.unit = right.selectBox;
 
-				spacingData.margin.bottom = bottom.input;
-				spacingData.margin.bottomUnit = bottom.selectBox;
+				spacingData.margin.bottom.value = bottom.input;
+				spacingData.margin.bottom.unit = bottom.selectBox;
 
-				spacingData.margin.left = left.input;
-				spacingData.margin.leftUnit = left.selectBox;
+				spacingData.margin.left.value = left.input;
+				spacingData.margin.left.unit = left.selectBox;
 			}
 
 			portlet.css(styling);
@@ -1220,7 +1302,9 @@ Liferay.PortletCSS = {
 			function(){
 				var fontSize = this.options[this.selectedIndex].value;
 
-				portlet.css('font-size', fontSize)
+				portlet.css('font-size', fontSize);
+				
+				textData.fontSize = fontSize;
 			}
 		);
 
@@ -1284,7 +1368,7 @@ Liferay.PortletCSS = {
 
 				portlet.css('word-spacing', spacing);
 
-				textDecoration.wordSpacing = spacing;
+				textData.wordSpacing = spacing;
 			}
 		);
 
@@ -1296,7 +1380,7 @@ Liferay.PortletCSS = {
 
 				portlet.css('line-height', leading);
 
-				textDecoration.lineHeight = leading;
+				textData.lineHeight = leading;
 			}
 		);
 
@@ -1308,7 +1392,7 @@ Liferay.PortletCSS = {
 
 				portlet.css('letter-spacing', tracking);
 
-				textDecoration.letterSpacing = tracking;
+				textData.letterSpacing = tracking;
 			}
 		);
 	}
