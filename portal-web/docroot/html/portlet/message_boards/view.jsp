@@ -637,7 +637,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Name
 
-			row.addText(PortalUtil.getUserName(ban.getUserId(), ban.getUserName()));
+			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK));
 
 			// Ban Date
 
