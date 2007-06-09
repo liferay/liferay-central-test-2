@@ -33,6 +33,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,6 +67,14 @@ public class AmazonRankingsConverter implements WebCacheable {
 			SAXReader reader = new SAXReader();
 
 			Document doc = reader.read(url);
+
+			Iterator itr = doc.getRootElement().elements("ErrorMsg").iterator();
+
+			if (itr.hasNext()) {
+				String errorMsg = ((Element)itr.next()).getText();
+
+				throw new ConverterException(isbn + " " + errorMsg);
+			}
 
 			Element details = (Element)doc.getRootElement().elements(
 				"Details").iterator().next();
@@ -112,6 +121,9 @@ public class AmazonRankingsConverter implements WebCacheable {
 				mediumImageURL, largeImageURL, listPrice, ourPrice, usedPrice,
 				collectiblePrice, thirdPartyNewPrice, salesRank, media,
 				availability);
+		}
+		catch (ConverterException ce) {
+			throw ce;
 		}
 		catch (Exception e) {
 			throw new ConverterException(isbn + " " + e.toString());
