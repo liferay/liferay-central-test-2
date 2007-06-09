@@ -42,7 +42,8 @@
 	<classpathentry kind="lib" path="lib/development/jta.jar"/>
 	<classpathentry kind="lib" path="lib/development/junit.jar"/>
 	<classpathentry kind="lib" path="lib/development/mail.jar"/>
-	<classpathentry kind="lib" path="lib/development/myfaces.jar"/>
+	<classpathentry kind="lib" path="lib/development/myfaces-api.jar"/>
+	<classpathentry kind="lib" path="lib/development/myfaces-impl.jar"/>
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
 	<classpathentry kind="lib" path="lib/development/ow_jonas_bootstrap.jar"/>
 	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
