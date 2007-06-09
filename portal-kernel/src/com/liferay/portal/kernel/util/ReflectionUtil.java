@@ -20,24 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.jaas.ext.pramati;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.security.jaas.ext.BasicLoginModule;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import com.pramati.security.util.User;
-
-import java.security.Principal;
+import java.lang.reflect.Constructor;
 
 /**
- * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReflectionUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalLoginModule extends BasicLoginModule {
+public class ReflectionUtil {
 
-	protected Principal getPortalPrincipal(String name) {
-		return new User(name);
+	public static Object newInstance(String className, String p1) {
+		try {
+			Class classObj = Class.forName(className);
+
+			Constructor classConstructor =
+				classObj.getConstructor(new Class[] {String.class});
+
+			Object[] args = new Object[] {p1};
+
+			return classConstructor.newInstance(args);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(ReflectionUtil.class);
 
 }

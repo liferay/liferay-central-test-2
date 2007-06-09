@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="lib/development/icefaces-comps.jar"/>
 	<classpathentry kind="lib" path="lib/development/j2h.jar"/>
 	<classpathentry kind="lib" path="lib/development/jaas.jar"/>
-	<classpathentry kind="lib" path="lib/development/jaas-ext.jar"/>
 	<classpathentry kind="lib" path="lib/development/jalopy.jar"/>
 	<classpathentry kind="lib" path="lib/development/jce.jar"/>
 	<classpathentry kind="lib" path="lib/development/jdbc.jar"/>

@@ -22,11 +22,10 @@
 
 package com.liferay.portal.security.jaas.ext.weblogic;
 
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 import java.security.Principal;
-
-import weblogic.security.principal.WLSUserImpl;
 
 /**
  * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
@@ -37,7 +36,10 @@ import weblogic.security.principal.WLSUserImpl;
 public class PortalLoginModule extends BasicLoginModule {
 
 	protected Principal getPortalPrincipal(String name) {
-		return new WLSUserImpl(name);
+		return (Principal)ReflectionUtil.newInstance(_WLS_USER_IMPL, name);
 	}
+
+	private static final String _WLS_USER_IMPL =
+		"weblogic.security.principal.WLSUserImpl";
 
 }

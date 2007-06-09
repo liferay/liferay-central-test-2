@@ -69,21 +69,9 @@ public class PortalLoginModule implements LoginModule {
 				_loginModule =
 					new com.liferay.portal.security.jaas.ext.jonas.PortalLoginModule();
 			}
-			else if (ServerDetector.isPramati()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.pramati.PortalLoginModule();
-			}
 			else if (ServerDetector.isResin()) {
 				_loginModule =
 					new com.liferay.portal.security.jaas.ext.resin.PortalLoginModule();
-			}
-			else if (ServerDetector.isSun7()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.sun7.PortalLoginModule();
-			}
-			else if (ServerDetector.isSun8()) {
-				_loginModule =
-					new com.liferay.portal.security.jaas.ext.sun8.PortalLoginModule();
 			}
 			else if (ServerDetector.isWebLogic()) {
 				_loginModule =

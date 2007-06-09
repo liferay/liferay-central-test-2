@@ -22,13 +22,16 @@
 
 package com.liferay.portal.security.jaas.ext.jonas;
 
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
+
+import java.lang.reflect.Method;
 
 import java.security.Principal;
 
-import org.objectweb.jonas.security.auth.JGroup;
-import org.objectweb.jonas.security.auth.JPrincipal;
-import org.objectweb.jonas.security.auth.JRole;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
@@ -45,9 +48,18 @@ public class PortalLoginModule extends BasicLoginModule {
 			getSubject().getPrincipals().add(getPrincipal());
 			getSubject().getPrivateCredentials().add(getPassword());
 
-			JGroup group = new JGroup("Roles");
+			Object group = ReflectionUtil.newInstance(_JGROUP, "Roles");
+			Object role = ReflectionUtil.newInstance(_JROLE, "users");
 
-			group.addMember(new JRole("users"));
+			try {
+				Method method = MethodCache.get(
+					_JGROUP, "addMember", new Class[] {role.getClass()});
+
+				method.invoke(group, new Object[] {role});
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 
 			getSubject().getPrincipals().add(group);
 		}
@@ -56,7 +68,18 @@ public class PortalLoginModule extends BasicLoginModule {
 	}
 
 	protected Principal getPortalPrincipal(String name) {
-		return new JPrincipal(name);
+		return (Principal)ReflectionUtil.newInstance(_JPRINCIPAL, name);
 	}
+
+	private static final String _JGROUP =
+		"org.objectweb.jonas.security.auth.JGroup";
+
+	private static final String _JPRINCIPAL =
+		"org.objectweb.jonas.security.auth.JPrincipal";
+
+	private static final String _JROLE =
+		"org.objectweb.jonas.security.auth.JRole";
+
+ 	private static Log _log = LogFactory.getLog(PortalLoginModule.class);
 
 }
