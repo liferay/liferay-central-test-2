@@ -54,6 +54,7 @@
 		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
 		<liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
 		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
+		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 		<table class="liferay-table">
 		<tr>

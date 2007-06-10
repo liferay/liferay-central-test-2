@@ -28,6 +28,7 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.action.LoginAction;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.struts.PortletAction;
@@ -87,7 +88,8 @@ public class ViewAction extends PortletAction {
 					e instanceof UserEmailAddressException ||
 					e instanceof UserIdException ||
 					e instanceof UserLockoutException ||
-					e instanceof UserPasswordException) {
+					e instanceof UserPasswordException ||
+					e instanceof UserScreenNameException) {
 
 					SessionErrors.add(req, e.getClass().getName());
 				}

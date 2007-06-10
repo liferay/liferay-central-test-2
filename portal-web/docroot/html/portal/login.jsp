@@ -127,6 +127,12 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 						<liferay-ui:message key="please-enter-a-valid-password" />
 						</span>
 					</c:if>
+
+					<c:if test="<%= SessionErrors.contains(request, UserScreenNameException.class.getName()) %>">
+						<span class="portlet-msg-error">
+						<liferay-ui:message key="please-enter-a-valid-screen-name" />
+						</span>
+					</c:if>
 				</c:if>
 
 				<%
