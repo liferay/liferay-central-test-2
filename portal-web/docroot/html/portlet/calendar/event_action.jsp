@@ -41,10 +41,13 @@ CalEvent event = (CalEvent)row.getObject();
 </c:if>
 
 <c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.VIEW) %>">
-	<liferay-ui:icon
-		image="export"
-		url='<%= themeDisplay.getPathMain() + "/calendar/export?eventId=" + event.getEventId() %>'
-	/>
+	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportURL">
+		<portlet:param name="struts_action" value="/calendar/export_events" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon image="export" url='<%= exportURL %>'/>
 </c:if>
 
 <c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.PERMISSIONS) %>">

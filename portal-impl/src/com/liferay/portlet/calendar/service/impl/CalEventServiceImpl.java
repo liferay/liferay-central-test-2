@@ -102,11 +102,24 @@ public class CalEventServiceImpl
 		CalEventLocalServiceUtil.deleteEvent(eventId);
 	}
 
-	public File export(long eventId) throws PortalException, SystemException {
+	public File exportEvent(long eventId)
+		throws PortalException, SystemException {
+
 		CalEventPermission.check(
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
-		return CalEventLocalServiceUtil.export(eventId);
+		return CalEventLocalServiceUtil.exportEvent(getUserId(), eventId);
+	}
+
+	public File exportGroupEvents(long plid, String fileName)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.CALENDAR,
+			ActionKeys.EXPORT_ALL_EVENTS);
+
+		return CalEventLocalServiceUtil.exportGroupEvents(
+			getUserId(), plid, fileName);
 	}
 
 	public CalEvent getEvent(long eventId)
@@ -116,6 +129,16 @@ public class CalEventServiceImpl
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
 		return CalEventLocalServiceUtil.getEvent(eventId);
+	}
+
+	public void importICal4j(long plid, File file)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.CALENDAR,
+			ActionKeys.ADD_EVENT);
+
+		CalEventLocalServiceUtil.importICal4j(getUserId(), plid, file);
 	}
 
 	public CalEvent updateEvent(

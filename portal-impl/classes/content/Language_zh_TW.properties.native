@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=刪除討論
 action.DELETE_USER=刪除用戶
 action.EDIT=編輯
 action.EXPIRE=到期
+action.EXPORT_ALL_EVENTS=出口所有事件
 action.GUEST_PREFERENCES=客人特選
 action.HELP=幫助
 action.IMPERSONATE=假充

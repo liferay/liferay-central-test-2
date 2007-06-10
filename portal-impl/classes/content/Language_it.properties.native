@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=Cancella Discussione
 action.DELETE_USER=Cancella Utente
 action.EDIT=Modifica
 action.EXPIRE=Scadenza
+action.EXPORT_ALL_EVENTS=Esporti Tutti gli Eventi
 action.GUEST_PREFERENCES=Preferenze del Guest
 action.HELP=Aiuto
 action.IMPERSONATE=Impersona

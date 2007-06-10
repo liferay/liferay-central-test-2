@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=Discussion D'Effacement
 action.DELETE_USER=Utilisateur D'Effacement
 action.EDIT=Éditez
 action.EXPIRE=Expirez
+action.EXPORT_ALL_EVENTS=Exportez Tous les Événements
 action.GUEST_PREFERENCES=Préférences D'Invité
 action.HELP=Aide
 action.IMPERSONATE=Personnifié

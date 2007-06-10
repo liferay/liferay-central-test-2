@@ -205,12 +205,21 @@ public class CalEventLocalServiceUtil {
 		calEventLocalService.deleteEvents(groupId);
 	}
 
-	public static java.io.File export(long eventId)
+	public static java.io.File exportEvent(long userId, long eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-		return calEventLocalService.export(eventId);
+		return calEventLocalService.exportEvent(userId, eventId);
+	}
+
+	public static java.io.File exportGroupEvents(long userId, long plid,
+		java.lang.String fileName)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.exportGroupEvents(userId, plid, fileName);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
@@ -270,6 +279,13 @@ public class CalEventLocalServiceUtil {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
 		return calEventLocalService.hasEvents(groupId, cal, type);
+	}
+
+	public static void importICal4j(long userId, long plid, java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.importICal4j(userId, plid, file);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(

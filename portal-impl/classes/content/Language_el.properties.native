@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=Διαγράψτε τη συζήτηση
 action.DELETE_USER=Διαγράψτε το χρήστη
 action.EDIT=Εκδώστε
 action.EXPIRE=Λήξτε
+action.EXPORT_ALL_EVENTS=Εξάγετε όλα τα γεγονότα
 action.GUEST_PREFERENCES=Προτιμήσεις φιλοξενουμένων
 action.HELP=Βοήθεια
 action.IMPERSONATE=Impersonate

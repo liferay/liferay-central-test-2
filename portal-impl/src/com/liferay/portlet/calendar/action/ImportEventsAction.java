@@ -22,59 +22,57 @@
 
 package com.liferay.portlet.calendar.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.UploadPortletRequest;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 
-import org.apache.struts.action.Action;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ExportAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImportEventsAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Michael Young
+ * @author Bruno Farache
  *
  */
-public class ExportAction extends Action {
+public class ImportEventsAction extends PortletAction {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		InputStream is = null;
-
 		try {
-			long eventId = ParamUtil.getLong(req, "eventId");
+			UploadPortletRequest uploadReq =
+				PortalUtil.getUploadPortletRequest(req);
 
-			File file = CalEventServiceUtil.export(eventId);
+			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-			is = new BufferedInputStream(new FileInputStream(file));
+			File file = uploadReq.getFile("importFile");
 
-			ServletResponseUtil.sendFile(res, file.getName(), is);
+			CalEventServiceUtil.importICal4j(layout.getPlid(), file);
 
-			return null;
+			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
-
-			return mapping.findForward(Constants.COMMON_ERROR);
-		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
+			SessionErrors.add(req, e.getClass().getName());
+			setForward(req, "portlet.calendar.error");
+			_log.error(e, e);
 		}
 	}
+	
+	private static Log _log = LogFactory.getLog(ExportEventsAction.class);
 
 }

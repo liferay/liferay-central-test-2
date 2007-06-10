@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=削除の議論
 action.DELETE_USER=削除のユーザー
 action.EDIT=編集しなさい
 action.EXPIRE=切らしなさい
+action.EXPORT_ALL_EVENTS=でき事すべてを輸出しなさい
 action.GUEST_PREFERENCES=ゲストの好み
 action.HELP=助け
 action.IMPERSONATE=人格化された

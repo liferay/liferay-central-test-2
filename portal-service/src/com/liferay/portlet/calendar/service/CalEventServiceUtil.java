@@ -99,12 +99,21 @@ public class CalEventServiceUtil {
 		calEventService.deleteEvent(eventId);
 	}
 
-	public static java.io.File export(long eventId)
+	public static java.io.File exportEvent(long eventId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		CalEventService calEventService = CalEventServiceFactory.getService();
 
-		return calEventService.export(eventId);
+		return calEventService.exportEvent(eventId);
+	}
+
+	public static java.io.File exportGroupEvents(long plid,
+		java.lang.String fileName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
+
+		return calEventService.exportGroupEvents(plid, fileName);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
@@ -114,6 +123,13 @@ public class CalEventServiceUtil {
 		CalEventService calEventService = CalEventServiceFactory.getService();
 
 		return calEventService.getEvent(eventId);
+	}
+
+	public static void importICal4j(long plid, java.io.File file)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		CalEventService calEventService = CalEventServiceFactory.getService();
+		calEventService.importICal4j(plid, file);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(

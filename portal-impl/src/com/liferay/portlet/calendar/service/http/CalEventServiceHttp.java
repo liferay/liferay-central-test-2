@@ -306,13 +306,53 @@ public class CalEventServiceHttp {
 		}
 	}
 
-	public static java.io.File export(HttpPrincipal httpPrincipal, long eventId)
+	public static java.io.File exportEvent(HttpPrincipal httpPrincipal,
+		long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(eventId);
 			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"export", new Object[] { paramObj0 });
+					"exportEvent", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.io.File)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static java.io.File exportGroupEvents(HttpPrincipal httpPrincipal,
+		long plid, java.lang.String fileName)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj1 = fileName;
+
+			if (fileName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"exportGroupEvents", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {
@@ -364,6 +404,42 @@ public class CalEventServiceHttp {
 			}
 
 			return (com.liferay.portlet.calendar.model.CalEvent)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static void importICal4j(HttpPrincipal httpPrincipal, long plid,
+		java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj1 = file;
+
+			if (file == null) {
+				paramObj1 = new NullWrapper("java.io.File");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"importICal4j", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

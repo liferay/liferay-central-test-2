@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=Verwijderen Bespreking
 action.DELETE_USER=Verwijderen Gebruiker
 action.EDIT=Wijzigen
 action.EXPIRE=Vervallen
+action.EXPORT_ALL_EVENTS=Voer Alle Gebeurtenissen uit
 action.GUEST_PREFERENCES=De Voorkeur van de gast
 action.HELP=Help
 action.IMPERSONATE=Impersonate

@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=Discussão Da Supressão
 action.DELETE_USER=Usuário Da Supressão
 action.EDIT=Edite
 action.EXPIRE=Expire
+action.EXPORT_ALL_EVENTS=Exporte Todos os Eventos
 action.GUEST_PREFERENCES=Preferências Do Convidado
 action.HELP=Ajuda
 action.IMPERSONATE=Impersonate

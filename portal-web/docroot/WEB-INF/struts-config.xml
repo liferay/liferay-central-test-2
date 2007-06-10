@@ -306,7 +306,11 @@
 			<forward name="portlet.calendar.error" path="portlet.calendar.error" />
 		</action>
 
-		<action path="/calendar/export" type="com.liferay.portlet.calendar.action.ExportAction" />
+		<action path="/calendar/export_events" type="com.liferay.portlet.calendar.action.ExportEventsAction" />
+
+		<action path="/calendar/import_events" type="com.liferay.portlet.calendar.action.ImportEventsAction">
+			<forward name="portlet.calendar.error" path="portlet.calendar.error" />
+		</action>
 
 		<action path="/calendar/view" forward="portlet.calendar.view" />
 

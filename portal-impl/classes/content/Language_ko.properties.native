@@ -226,6 +226,7 @@ action.DELETE_DISCUSSION=감소 면담
 action.DELETE_USER=감소 사용자
 action.EDIT=편집하십시요
 action.EXPIRE=만료되십시요
+action.EXPORT_ALL_EVENTS=모든 사건을 수출하십시요
 action.GUEST_PREFERENCES=손님 특혜
 action.HELP=도움
 action.IMPERSONATE=구체화되는

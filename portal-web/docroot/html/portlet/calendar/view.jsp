@@ -60,6 +60,9 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("events") %>'>
 		<%@ include file="/html/portlet/calendar/events.jspf" %>
 	</c:when>
+	<c:when test='<%= tabs1.equals("export-import") %>'>
+		<%@ include file="/html/portlet/calendar/export_import.jspf" %>
+	</c:when>
 </c:choose>
 
 </form>

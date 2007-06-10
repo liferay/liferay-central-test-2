@@ -137,7 +137,12 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.io.File export(long eventId)
+	public java.io.File exportEvent(long userId, long eventId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.io.File exportGroupEvents(long userId, long plid,
+		java.lang.String fileName)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -165,6 +170,10 @@ public interface CalEventLocalService {
 
 	public boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String type) throws com.liferay.portal.SystemException;
+
+	public void importICal4j(long userId, long plid, java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long userId, long eventId, java.lang.String title,
