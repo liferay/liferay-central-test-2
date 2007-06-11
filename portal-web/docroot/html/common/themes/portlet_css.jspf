@@ -23,277 +23,311 @@
 %>
 
 <%
-String portletSetupCss = portletSetup.getValue("portlet-setup-css", StringPool.BLANK);
+JSONObject jsonObj = new JSONObject(portletSetupCss);
+
+List finalCSS = new ArrayList();
+
+// Background data
+
+JSONObject bgData = jsonObj.getJSONObject("bgData");
+
+String bgColor = bgData.getString("backgroundColor");
+String bgImage = bgData.getString("backgroundImage");
+
+JSONObject bgPos = bgData.getJSONObject("backgroundPosition");
+JSONObject bgPosLeft = bgPos.getJSONObject(_LEFT_KEY);
+JSONObject bgPosTop = bgPos.getJSONObject(_TOP_KEY);
+
+String bgPosLeftValue = bgPosLeft.getString(_VALUE_KEY) + bgPosLeft.getString(_UNIT_KEY);
+String bgPosTopValue = bgPosTop.getString(_VALUE_KEY) + bgPosTop.getString(_UNIT_KEY);
+String bgPosValue = bgPosLeftValue + " " + bgPosTopValue;
+
+Boolean useBgImage = bgData.getBoolean("useBgImage");
+
+if (Validator.isNotNull(bgColor)) {
+	finalCSS.add("background-color: " + bgColor);
+}
+
+if (Validator.isNotNull(bgImage)) {
+	finalCSS.add("background-image: url(" + bgImage + ")");
+}
+
+if (useBgImage) {
+	finalCSS.add("background-position: " + bgPosValue);
+}
+
+// Border data
+
+JSONObject borderData = jsonObj.getJSONObject("borderData");
+JSONObject borderWidth = borderData.getJSONObject("borderWidth");
+JSONObject borderStyle = borderData.getJSONObject("borderStyle");
+JSONObject borderColor = borderData.getJSONObject("borderColor");
+
+Boolean ufaBorderWidth = borderWidth.getBoolean(_SAME_FOR_ALL_KEY);
+Boolean ufaBorderStyle = borderStyle.getBoolean(_SAME_FOR_ALL_KEY);
+Boolean ufaBorderColor = borderColor.getBoolean(_SAME_FOR_ALL_KEY);
+
+// Width
+
+JSONObject borderWidthTop = borderWidth.getJSONObject(_TOP_KEY);
+JSONObject borderWidthRight = borderWidth.getJSONObject(_RIGHT_KEY);
+JSONObject borderWidthBottom = borderWidth.getJSONObject(_BOTTOM_KEY);
+JSONObject borderWidthLeft = borderWidth.getJSONObject(_LEFT_KEY);
+
+String borderTopWidthValue = borderWidthTop.getString(_VALUE_KEY) + borderWidthTop.getString(_UNIT_KEY);
+String borderRightWidthValue = borderWidthRight.getString(_VALUE_KEY) + borderWidthRight.getString(_UNIT_KEY);
+String borderBottomWidthValue = borderWidthBottom.getString(_VALUE_KEY) + borderWidthBottom.getString(_UNIT_KEY);
+String borderLeftWidthValue = borderWidthLeft.getString(_VALUE_KEY) + borderWidthLeft.getString(_UNIT_KEY);
+
+// Style
+
+String borderTopStyleValue = borderStyle.getString(_TOP_KEY);
+String borderRightStyleValue = borderStyle.getString(_RIGHT_KEY);
+String borderBottomStyleValue = borderStyle.getString(_BOTTOM_KEY);
+String borderLeftStyleValue = borderStyle.getString(_LEFT_KEY);
+
+// Color
+
+String borderTopColorValue = borderColor.getString(_TOP_KEY);
+String borderRightColorValue = borderColor.getString(_RIGHT_KEY);
+String borderBottomColorValue = borderColor.getString(_BOTTOM_KEY);
+String borderLeftColorValue = borderColor.getString(_LEFT_KEY);
+
+if (ufaBorderWidth) {
+	if (!_unitSet.contains(borderTopWidthValue)) {
+		finalCSS.add("border-width: " + borderTopWidthValue);
+	}
+}
+else {
+	if (!_unitSet.contains(borderTopWidthValue)) {
+		finalCSS.add("border-width-top: " + borderTopWidthValue);
+	}
+
+	if (!_unitSet.contains(borderRightWidthValue)) {
+		finalCSS.add("border-width-right: " + borderRightWidthValue);
+	}
+
+	if (!_unitSet.contains(borderBottomWidthValue)) {
+		finalCSS.add("border-width-bottom: " + borderBottomWidthValue);
+	}
+
+	if (!_unitSet.contains(borderLeftWidthValue)) {
+		finalCSS.add("border-width-left: " + borderLeftWidthValue);
+	}
+}
+
+if (ufaBorderStyle) {
+	finalCSS.add("border-style: " + borderTopStyleValue);
+}
+else {
+	finalCSS.add("border-style-top: " + borderTopStyleValue);
+	finalCSS.add("border-style-right: " + borderRightStyleValue);
+	finalCSS.add("border-style-bottom: " + borderBottomStyleValue);
+	finalCSS.add("border-style-left: " + borderLeftStyleValue);
+}
+
+if (ufaBorderColor) {
+	if (!borderTopColorValue.equals("")) {
+		finalCSS.add("border-color: " + borderTopColorValue);
+	}
+}
+else {
+	if (!borderTopColorValue.equals("")) {
+		finalCSS.add("border-color: " + borderTopColorValue);
+	}
+
+	if (!borderRightColorValue.equals("")) {
+		finalCSS.add("border-color-right: " + borderRightColorValue);
+	}
+
+	if (!borderBottomColorValue.equals("")) {
+		finalCSS.add("border-color-bottom: " + borderBottomColorValue);
+	}
+
+	if (!borderLeftColorValue.equals("")) {
+		finalCSS.add("border-color-left: " + borderLeftColorValue);
+	}
+}
+
+// Spacing data
+
+JSONObject spacingData = jsonObj.getJSONObject("spacingData");
+JSONObject margin = spacingData.getJSONObject("margin");
+JSONObject padding = spacingData.getJSONObject("padding");
+
+Boolean ufaMargin = margin.getBoolean(_SAME_FOR_ALL_KEY);
+Boolean ufaPadding = padding.getBoolean(_SAME_FOR_ALL_KEY);
+
+// Margin
+
+JSONObject marginTop = margin.getJSONObject(_TOP_KEY);
+JSONObject marginRight = margin.getJSONObject(_RIGHT_KEY);
+JSONObject marginBottom = margin.getJSONObject(_BOTTOM_KEY);
+JSONObject marginLeft = margin.getJSONObject(_LEFT_KEY);
+
+String marginTopValue = marginTop.getString(_VALUE_KEY) + marginTop.getString(_UNIT_KEY);
+String marginRightValue = marginRight.getString(_VALUE_KEY) + marginRight.getString(_UNIT_KEY);
+String marginBottomValue = marginBottom.getString(_VALUE_KEY) + marginBottom.getString(_UNIT_KEY);
+String marginLeftValue = marginLeft.getString(_VALUE_KEY) + marginLeft.getString(_UNIT_KEY);
+
+if (ufaMargin) {
+	if (!_unitSet.contains(marginTopValue)) {
+		finalCSS.add("margin: " + marginTopValue);
+	}
+}
+else {
+	if (!_unitSet.contains(marginTopValue)) {
+		finalCSS.add("margin-top: " + marginTopValue);
+	}
+
+	if (!_unitSet.contains(marginRightValue)) {
+		finalCSS.add("margin-right: " + marginRightValue);
+	}
+
+	if (!_unitSet.contains(marginBottomValue)) {
+		finalCSS.add("margin-bottom: " + marginBottomValue);
+	}
+
+	if (!_unitSet.contains(marginLeftValue)) {
+		finalCSS.add("margin-left: " + marginLeftValue);
+	}
+}
+
+// Padding
+
+JSONObject paddingTop = padding.getJSONObject(_TOP_KEY);
+JSONObject paddingRight = padding.getJSONObject(_RIGHT_KEY);
+JSONObject paddingBottom = padding.getJSONObject(_BOTTOM_KEY);
+JSONObject paddingLeft = padding.getJSONObject(_LEFT_KEY);
+
+String paddingTopValue = paddingTop.getString(_VALUE_KEY) + paddingTop.getString(_UNIT_KEY);
+String paddingRightValue = paddingRight.getString(_VALUE_KEY) + paddingRight.getString(_UNIT_KEY);
+String paddingBottomValue = paddingBottom.getString(_VALUE_KEY) + paddingBottom.getString(_UNIT_KEY);
+String paddingLeftValue = paddingLeft.getString(_VALUE_KEY) + paddingLeft.getString(_UNIT_KEY);
+
+if (ufaPadding) {
+	if (!_unitSet.contains(paddingTopValue)) {
+		finalCSS.add("padding: " + paddingTopValue);
+	}
+}
+else {
+	if (!_unitSet.contains(paddingTopValue)) {
+		finalCSS.add("padding-top: " + paddingTopValue);
+	}
+
+	if (!_unitSet.contains(paddingRightValue)) {
+		finalCSS.add("padding-right: " + paddingRightValue);
+	}
+
+	if (!_unitSet.contains(paddingBottomValue)) {
+		finalCSS.add("padding-bottom: " + paddingBottomValue);
+	}
+
+	if (!_unitSet.contains(paddingLeftValue)) {
+		finalCSS.add("padding-left: " + paddingLeftValue);
+	}
+}
+
+// Text data
+
+JSONObject textData = jsonObj.getJSONObject("textData");
+
+String color = textData.getString("color");
+String fontFamily = textData.getString("fontFamily");
+String fontSize = textData.getString("fontSize");
+String fontStyle = textData.getString("fontStyle");
+String fontWeight = textData.getString("fontWeight");
+String letterSpacing = textData.getString("letterSpacing");
+String lineHeight = textData.getString("lineHeight");
+String textAlign = textData.getString("textAlign");
+String textDecoration = textData.getString("textDecoration");
+String wordSpacing = textData.getString("wordSpacing");
+
+if (Validator.isNotNull(color)) {
+	finalCSS.add("color: " + color);
+}
+
+if (Validator.isNotNull(fontFamily)) {
+	finalCSS.add("font-family: '" + fontFamily + "'");
+}
+
+if (Validator.isNotNull(fontSize)) {
+	finalCSS.add("font-size: " + fontSize);
+}
+
+if (Validator.isNotNull(fontStyle)) {
+	finalCSS.add("font-style: " + fontStyle);
+}
+
+if (Validator.isNotNull(fontWeight)) {
+	finalCSS.add("font-weight: " + fontWeight);
+}
+
+if (Validator.isNotNull(letterSpacing)) {
+	finalCSS.add("letter-spacing: " + letterSpacing);
+}
+
+if (Validator.isNotNull(lineHeight)) {
+	finalCSS.add("line-height: " + lineHeight);
+}
+
+if (Validator.isNotNull(textAlign)) {
+	finalCSS.add("text-align: " + textAlign);
+}
+
+if (Validator.isNotNull(textDecoration)) {
+	finalCSS.add("text-decoration: " + textDecoration);
+}
+
+if (Validator.isNotNull(wordSpacing)) {
+	finalCSS.add("word-spacing: " + wordSpacing);
+}
+
+// Advanced styling
+
+JSONObject advancedData = jsonObj.getJSONObject("advancedData");
+
+String customCSS = advancedData.getString("customCSS");
+
+// Generated CSS
+
+out.print("#p_p_id_" + portlet.getPortletId() + "_ .portlet {\n");
+
+String[] finalCSSArray = (String[])finalCSS.toArray(new String[0]);
+
+String finalCSSString = StringUtil.merge(finalCSSArray, ";\n");
+
+out.print(finalCSSString);
+
+out.print("\n}\n");
+
+// Advanced CSS
+
+if (Validator.isNotNull(customCSS)) {
+	out.print(customCSS);
+}
 %>
 
-<c:if test="<%= Validator.isNotNull(portletSetupCss) %>">
+<%!
+private static final String _BOTTOM_KEY = "bottom";
 
-	<%
-	
-	try {
-		JSONObject jsonObj = new JSONObject(portletSetupCss);	
-		
-		//////
-		ArrayList finalCSS = new ArrayList();
-		ArrayList unitArray = new ArrayList();
-		unitArray.add("px");
-		unitArray.add("em");
-		unitArray.add("%");
-		
-		String sameForAllKey = "sameForAll";
-		String valueKey = "value";
-		String unitKey = "unit";
-		String topKey = "top";
-		String rightKey = "right";
-		String bottomKey = "bottom";
-		String leftKey = "left";
-		
-		//bgData
-		JSONObject bgData = jsonObj.getJSONObject("bgData");
-		String bgColor = bgData.getString("backgroundColor");
-		String bgImage = bgData.getString("backgroundImage");
-		
-		JSONObject bgPos = bgData.getJSONObject("backgroundPosition");
-		JSONObject bgPosLeft = bgPos.getJSONObject(leftKey);
-		JSONObject bgPosTop = bgPos.getJSONObject(topKey);
-		String bgPosLeftValue = bgPosLeft.getString(valueKey) + bgPosLeft.getString(unitKey);
-		String bgPosTopValue = bgPosTop.getString(valueKey) + bgPosTop.getString(unitKey);
-		String bgPosValue = bgPosLeftValue + " " + bgPosTopValue;
-		
-		Boolean useBgImage = bgData.getBoolean("useBgImage");
-		
-		if (!bgColor.equals("")) {
-			finalCSS.add("background-color: " + bgColor);
-		}
-		if (!bgImage.equals("")) {
-			finalCSS.add("background-image: url(" + bgImage + ")");
-		}
-		if (useBgImage) {
-			finalCSS.add("background-position: " + bgPosValue);
-		}
-		
-		//Border data
-		JSONObject borderData = jsonObj.getJSONObject("borderData");
-		JSONObject borderWidth = borderData.getJSONObject("borderWidth");
-		JSONObject borderStyle = borderData.getJSONObject("borderStyle");
-		JSONObject borderColor = borderData.getJSONObject("borderColor");
-		
-		Boolean ufaBorderWidth = borderWidth.getBoolean(sameForAllKey);
-		Boolean ufaBorderStyle = borderStyle.getBoolean(sameForAllKey);
-		Boolean ufaBorderColor = borderColor.getBoolean(sameForAllKey);
-		
-		//Width
-		JSONObject borderWidthTop = borderWidth.getJSONObject(topKey);
-		JSONObject borderWidthRight = borderWidth.getJSONObject(rightKey);
-		JSONObject borderWidthBottom = borderWidth.getJSONObject(bottomKey);
-		JSONObject borderWidthLeft = borderWidth.getJSONObject(leftKey);
-		
-		String borderTopWidthValue = borderWidthTop.getString(valueKey) + borderWidthTop.getString(unitKey);
-		String borderRightWidthValue = borderWidthRight.getString(valueKey) + borderWidthRight.getString(unitKey);
-		String borderBottomWidthValue = borderWidthBottom.getString(valueKey) + borderWidthBottom.getString(unitKey);
-		String borderLeftWidthValue = borderWidthLeft.getString(valueKey) + borderWidthLeft.getString(unitKey);
-		
-		//Style
-		String borderTopStyleValue = borderStyle.getString(topKey);
-		String borderRightStyleValue = borderStyle.getString(rightKey);
-		String borderBottomStyleValue = borderStyle.getString(bottomKey);
-		String borderLeftStyleValue = borderStyle.getString(leftKey);
-		
-		//Color
-		String borderTopColorValue = borderColor.getString(topKey);
-		String borderRightColorValue = borderColor.getString(rightKey);
-		String borderBottomColorValue = borderColor.getString(bottomKey);
-		String borderLeftColorValue = borderColor.getString(leftKey);
-		
-		if (ufaBorderWidth) {
-			if (unitArray.indexOf(borderTopWidthValue) < 0) {
-				finalCSS.add("border-width: " + borderTopWidthValue);
-			}
-		} else {
-			if (unitArray.indexOf(borderTopWidthValue) < 0) {
-				finalCSS.add("border-width-top: " + borderTopWidthValue);
-			}
-			if (unitArray.indexOf(borderRightWidthValue) < 0) {
-				finalCSS.add("border-width-right: " + borderRightWidthValue);
-			}
-			if (unitArray.indexOf(borderBottomWidthValue) < 0) {
-				finalCSS.add("border-width-bottom: " + borderBottomWidthValue);
-			}
-			if (unitArray.indexOf(borderLeftWidthValue) < 0) {
-				finalCSS.add("border-width-left: " + borderLeftWidthValue);
-			}
-		}
-		
-		if (ufaBorderStyle) {
-			finalCSS.add("border-style: " + borderTopStyleValue);
-		} else {
-			finalCSS.add("border-style-top: " + borderTopStyleValue);
-			finalCSS.add("border-style-right: " + borderRightStyleValue);
-			finalCSS.add("border-style-bottom: " + borderBottomStyleValue);
-			finalCSS.add("border-style-left: " + borderLeftStyleValue);
-		}
-		
-		if (ufaBorderColor) {
-			if (!borderTopColorValue.equals("")) {
-				finalCSS.add("border-color: " + borderTopColorValue);
-			}
-		} else {
-			if (!borderTopColorValue.equals("")) {
-				finalCSS.add("border-color: " + borderTopColorValue);
-			}
-			if (!borderRightColorValue.equals("")) {
-				finalCSS.add("border-color-right: " + borderRightColorValue);
-			}
-			if (!borderBottomColorValue.equals("")) {
-				finalCSS.add("border-color-bottom: " + borderBottomColorValue);
-			}
-			if (!borderLeftColorValue.equals("")) {
-				finalCSS.add("border-color-left: " + borderLeftColorValue);
-			}
-		}
+private static final String _LEFT_KEY = "left";
 
-		//Spacing data
-		JSONObject spacingData = jsonObj.getJSONObject("spacingData");
-		JSONObject margin = spacingData.getJSONObject("margin");
-		JSONObject padding = spacingData.getJSONObject("padding");
+private static final String _RIGHT_KEY = "right";
 
-		Boolean ufaMargin = margin.getBoolean(sameForAllKey);
-		Boolean ufaPadding = padding.getBoolean(sameForAllKey);
-		
-		
-		//Margin
-		JSONObject marginTop = margin.getJSONObject(topKey);
-		JSONObject marginRight = margin.getJSONObject(rightKey);
-		JSONObject marginBottom = margin.getJSONObject(bottomKey);
-		JSONObject marginLeft = margin.getJSONObject(leftKey);
-		
-		String marginTopValue = marginTop.getString(valueKey) + marginTop.getString(unitKey);
-		String marginRightValue = marginRight.getString(valueKey) + marginRight.getString(unitKey);
-		String marginBottomValue = marginBottom.getString(valueKey) + marginBottom.getString(unitKey);
-		String marginLeftValue = marginLeft.getString(valueKey) + marginLeft.getString(unitKey);
-		
-		if (ufaMargin) {
-			if (unitArray.indexOf(marginTopValue) < 0) {
-				finalCSS.add("margin: " + marginTopValue);
-			}
-		} else {
-			if (unitArray.indexOf(marginTopValue) < 0) {
-				finalCSS.add("margin-top: " + marginTopValue);
-			}
-			if (unitArray.indexOf(marginRightValue) < 0) {
-				finalCSS.add("margin-right: " + marginRightValue);
-			}
-			if (unitArray.indexOf(marginBottomValue) < 0) {
-				finalCSS.add("margin-bottom: " + marginBottomValue);
-			}
-			if (unitArray.indexOf(marginLeftValue) < 0) {
-				finalCSS.add("margin-left: " + marginLeftValue);
-			}
-		}
-		
-		//Padding
-		JSONObject paddingTop = padding.getJSONObject(topKey);
-		JSONObject paddingRight = padding.getJSONObject(rightKey);
-		JSONObject paddingBottom = padding.getJSONObject(bottomKey);
-		JSONObject paddingLeft = padding.getJSONObject(leftKey);
-		//System.out.println(portletDisplay.getId() + paddingTop);
-		String paddingTopValue = paddingTop.getString(valueKey) + paddingTop.getString(unitKey);
-		String paddingRightValue = paddingRight.getString(valueKey) + paddingRight.getString(unitKey);
-		String paddingBottomValue = paddingBottom.getString(valueKey) + paddingBottom.getString(unitKey);
-		String paddingLeftValue = paddingLeft.getString(valueKey) + paddingLeft.getString(unitKey);
-		
-		if (ufaPadding) {
-			if (unitArray.indexOf(paddingTopValue) < 0) {
-				finalCSS.add("padding: " + paddingTopValue);
-			}
-		} else {
-			if (unitArray.indexOf(paddingTopValue) < 0) {
-				finalCSS.add("padding-top: " + paddingTopValue);
-			}
-			if (unitArray.indexOf(paddingRightValue) < 0) {
-				finalCSS.add("padding-right: " + paddingRightValue);
-			}
-			if (unitArray.indexOf(paddingBottomValue) < 0) {
-				finalCSS.add("padding-bottom: " + paddingBottomValue);
-			}
-			if (unitArray.indexOf(paddingLeftValue) < 0) {
-				finalCSS.add("padding-left: " + paddingLeftValue);
-			}
-		}
-		
-		
-		//Text data
-		JSONObject textData = jsonObj.getJSONObject("textData");
-		
-		String color = textData.getString("color");
-		String fontFamily = textData.getString("fontFamily");
-		String fontSize = textData.getString("fontSize");
-		String fontStyle = textData.getString("fontStyle");
-		String fontWeight = textData.getString("fontWeight");
-		String letterSpacing = textData.getString("letterSpacing");
-		String lineHeight = textData.getString("lineHeight");
-		String textAlign = textData.getString("textAlign");
-		String textDecoration = textData.getString("textDecoration");
-		String wordSpacing = textData.getString("wordSpacing");
-		
-		if (!color.equals("")) {
-			finalCSS.add("color: " + color);
-		}
-		if (!fontFamily.equals("")) {
-			finalCSS.add("font-family: '" + fontFamily + "'");
-		}
-		if (!fontSize.equals("")) {
-			finalCSS.add("font-size: " + fontSize);
-		}
-		
-		if (!fontStyle.equals("")) {
-			finalCSS.add("font-style: " + fontStyle);
-		}
-		if (!fontWeight.equals("")) {
-			finalCSS.add("font-weight: " + fontWeight);
-		}
-		
-		if (!letterSpacing.equals("")) {
-			finalCSS.add("letter-spacing: " + letterSpacing);
-		}
-		if (!lineHeight.equals("")) {
-			finalCSS.add("line-height: " + lineHeight);
-		}
-		if (!textAlign.equals("")) {
-			finalCSS.add("text-align: " + textAlign);
-		}
-		if (!textDecoration.equals("")) {
-			finalCSS.add("text-decoration: " + textDecoration);
-		}
-		if (!wordSpacing.equals("")) {
-			finalCSS.add("word-spacing: " + wordSpacing);
-		}
+private static final String _SAME_FOR_ALL_KEY = "sameForAll";
 
-		//Advanced data/Custom CSS
-		JSONObject advancedData = jsonObj.getJSONObject("advancedData");
-		
-		String customCSS = advancedData.getString("customCSS");
-		
-		//Write opening portlet CSS
-		out.print("#p_p_id_" + portletDisplay.getId() + "_ .portlet {\n");
+private static final String _TOP_KEY = "top";
 
-		String[] finalCSSArray = (String[])finalCSS.toArray(new String[0]);
-		String finalCSSString = StringUtil.merge(finalCSSArray, ";\n");	
-		out.print(finalCSSString);
+private static final String _UNIT_KEY = "unit";
 
-		//Write closing portlet CSS
-		out.print("\n}\n");
-		
-		//Write custom CSS
-		if (!customCSS.equals("")) {
-			out.print(customCSS);
-		}
-	}
-	catch (Exception e) {
-		if (_log.isWarnEnabled()) {
-			_log.warn(e.getMessage());
-		}
-	}
-	%>
+private static final String _VALUE_KEY = "value";
 
-</c:if>
+private static final Set _unitSet = new HashSet();
+
+static {
+	_unitSet.add("px");
+	_unitSet.add("em");
+	_unitSet.add("%");
+}
+%>

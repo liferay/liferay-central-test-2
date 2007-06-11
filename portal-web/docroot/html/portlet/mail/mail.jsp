@@ -37,7 +37,7 @@ String subjectTitleWidth = prefs.getValue("subject-title-width", "250px");
 String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 %>
 
-<style>
+<style type="text/css">
 	.portlet-mail-toolbar {
 		margin-bottom: 5px;
 	}

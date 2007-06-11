@@ -62,6 +62,7 @@ JMS 1.1
 JMX 1.0.1.04
 JMX Remote 1.2.1
 JSF 1.1.01
+JSON-RPC-Java 1.0
 JSTL 1.0.6 (removed META-INF/*.tld)
 JTA 1.0.1b
 jTDS 1.2

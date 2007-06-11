@@ -16,22 +16,6 @@ Liferay.PortletCSS = {
 
 		if (instance._curPortlet.length) {
 			if (!instance._newPanel.is('.instantiated')) {
-
-				// Language keys
-
-				instance._lang = {};
-
-				instance._lang.refreshText = Liferay.Language.get('update-the-styles-on-this-page');
-				instance._lang.refreshTextSafari = Liferay.Language.get('please-press-the-save-button-to-view-your-changes');
-				instance._lang.addId = Liferay.Language.get('add-a-css-rule-for-just-this-portlet');
-				instance._lang.addClass = Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one');
-				instance._lang.updateOnType = Liferay.Language.get('update-my-styles-as-i-type');
-				instance._lang.portletId = Liferay.Language.get('portlet-id');
-				instance._lang.portletClasses = Liferay.Language.get('portlet-classes');
-				instance._lang.currentPortletInfo = Liferay.Language.get('your-current-portlet-information-is-as-follows');
-				instance._lang.saveSuccess = Liferay.Language.get('your-request-processed-successfully');
-				instance._lang.saveError = Liferay.Language.get('your-settings-could-not-be-saved');
-
 				instance._newPanel.addClass('instantiated');
 
 				instance._portletBoundaryIdVar = jQuery('#portlet-boundary-id');
@@ -149,14 +133,15 @@ Liferay.PortletCSS = {
 			}
 
 			newPanel.find('.lfr-color-picker-img').remove();
-			
+
 			instance._portletMsgResponse = jQuery('#lfr-portlet-css-response');
 			instance._portletMsgResponse.hide();
-			
+
 			var defaultData = {
 				advancedData: {
 					customCSS: ''
 				},
+
 				bgData: {
 					backgroundColor: '',
 					backgroundImage: '',
@@ -219,6 +204,7 @@ Liferay.PortletCSS = {
 					title: '',
 					useCustomTitle: false
 				},
+
 				spacingData: {
 					margin: {
 						bottom: {
@@ -260,6 +246,7 @@ Liferay.PortletCSS = {
 					}
 
 				},
+
 				textData: {
 					textAlign: 'left',
 					color: '',
@@ -273,19 +260,20 @@ Liferay.PortletCSS = {
 					wordSpacing: 'normal'
 				}
 			};
-			
+
 			var objectData = jQuery.ajax(
 				{
+					url: themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
 					data: {
+						p_l_id: themeDisplay.getPlid(),
 						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 						portletId: instance._portletId
 					},
-					url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
 					async: false,
 					dataType: 'json'
 				}
 			);
-			
+
 			if (objectData.length) {
 				instance._objData = objectData;
 			} 
@@ -330,18 +318,19 @@ Liferay.PortletCSS = {
 
 			useForAll.unbind().click(handleForms);
 			useForAll.each(handleForms);
-			
+
 			var saveHandler = function(xHR, type) {
 				var ajaxResponseMsg = instance._portletMsgResponse;
 				var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
 				var message = '';
 				var messageClass = '';
+
 				if (type == 'success') {
-					message = instance._lang.saveSuccess;
+					message = Liferay.Language.get('your-request-processed-successfully');
 					messageClass = 'portlet-msg-success';
 				}
 				else {
-					message = instance._lang.saveError;
+					message = Liferay.Language.get('your-settings-could-not-be-saved');
 					messageClass = 'portlet-msg-error';
 				}
 				if (!ajaxResponseMsg.length) {
@@ -349,24 +338,26 @@ Liferay.PortletCSS = {
 					instance._newPanel.find('form').prepend(ajaxResponse);
 					instance._portletMsgResponse = ajaxResponse;
 				}
+
 				ajaxResponse.hide();
 				ajaxResponse.attr('class', 'portlet-msg-success');
 				ajaxResponse.empty();
-				ajaxResponse.html(instance._lang.saveSuccess);
+				ajaxResponse.html(Liferay.Language.get('your-request-processed-successfully'));
 				ajaxResponse.fadeIn('normal');
-			}
+			};
 
 			instance._saveButton.unbind().click(
 				function() {
 					instance._objData.advancedData.customCSS = instance._customCSS.val();
 					jQuery.ajax(
 						{
+							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
 							data: {
+								p_l_id: themeDisplay.getPlid(),
 								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 								portletId: instance._portletId,
 								css: jQuery.toJSON(instance._objData)
 							},
-							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
 							complete: saveHandler
 						}
 					);
@@ -741,9 +732,9 @@ Liferay.PortletCSS = {
 		portletClasses = jQuery.trim(portletClasses).replace(/(\s)/g, '$1.');
 
 		var portletInfoText =
-			instance._lang.currentPortletInfo + ':<br />' +
-				instance._lang.portletId + ': <strong>#' + portletId + '</strong><br />' +
-					instance._lang.portletClasses + ': <strong>.' + portletClasses + '</strong>';
+			Liferay.Language.get('your-current-portlet-information-is-as-follows') + ':<br />' +
+				Liferay.Language.get('portlet-id') + ': <strong>#' + portletId + '</strong><br />' +
+					Liferay.Language.get('portlet-classes') + ': <strong>.' + portletClasses + '</strong>';
 
 		var customNote = jQuery('#lfr-refresh-styles');
 
@@ -773,15 +764,18 @@ Liferay.PortletCSS = {
 		customCSS.EnableTabs();
 
 		if (!jQuery.browser.safari) {
+			refreshText = Liferay.Language.get('update-the-styles-on-this-page');
 
-			refreshText = instance._lang.refreshText;
 			var refreshLink = jQuery('<a href="javascript:;">' + refreshText + '</a>');
 
 			var customStyleBlock = jQuery('#lfr-custom-css-block-' + portletId);
 
 			if (!customStyleBlock.length) {
-				//  Do not modify. This is a workaround for an IE bug.
+
+				// Do not modify. This is a workaround for an IE bug.
+
 				var styleEl = document.createElement('style');
+
 				styleEl.id = 'lfr-custom-css-block-' + portletId;
 				styleEl.className = 'lfr-custom-css-block';
 				styleEl.setAttribute('type', 'text/css');
@@ -817,7 +811,7 @@ Liferay.PortletCSS = {
 			customNote.empty().append(refreshLink);
 		}
 		else {
-			refreshText = instance._lang.refreshTextSafari;
+			refreshText = Liferay.Language.get('please-press-the-save-button-to-view-your-changes');
 
 			customNote.empty().text(refreshText);
 		}
@@ -829,11 +823,11 @@ Liferay.PortletCSS = {
 
 		if (!insertContainer.length) {
 			insertContainer = jQuery('<div id="lfr-add-rule-container"></div>');
-			addIdLink = jQuery('<a href="javascript:;" id="lfr-add-id">' + instance._lang.addId + '</a>');
-			addClassLink = jQuery('<a href="javascript:;" id="lfr-add-class">' + instance._lang.addClass + '</a>');
+			addIdLink = jQuery('<a href="javascript:;" id="lfr-add-id">' + Liferay.Language.get('add-a-css-rule-for-just-this-portlet') + '</a>');
+			addClassLink = jQuery('<a href="javascript:;" id="lfr-add-class">' + Liferay.Language.get('add-a-css-rule-for-all-portlets-like-this-one') + '</a>');
 
 			var updateOnTypeHolder = jQuery('<div class="ctrl-holder"></div>');
-			var updateOnTypeLabel = jQuery('<label>' + instance._lang.updateOnType + ' </label>');
+			var updateOnTypeLabel = jQuery('<label>' + Liferay.Language.get('update-my-styles-as-i-type') + ' </label>');
 
 			updateOnType = jQuery('<input id="lfr-update-on-type" type="checkbox" />');
 
@@ -1303,7 +1297,7 @@ Liferay.PortletCSS = {
 				var fontSize = this.options[this.selectedIndex].value;
 
 				portlet.css('font-size', fontSize);
-				
+
 				textData.fontSize = fontSize;
 			}
 		);

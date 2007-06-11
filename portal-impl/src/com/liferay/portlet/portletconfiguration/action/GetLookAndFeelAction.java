@@ -23,15 +23,18 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
+
+import java.text.ParseException;
 
 import javax.portlet.PortletPreferences;
 
@@ -39,16 +42,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import org.json.JSONObject;
+
 /**
- * <a href="UpdateLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpdateLookAndFeelAction extends JSONAction {
+public class GetLookAndFeelAction extends JSONAction {
 
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
@@ -74,22 +81,28 @@ public class UpdateLookAndFeelAction extends JSONAction {
 			return null;
 		}
 
-		//String languageId = LanguageUtil.getLanguageId(req);
-		//String title = ParamUtil.getString(req, "title");
-		String css = ParamUtil.getString(req, "css");
-
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(layout, portletId);
 
-		//portletSetup.setValue("portlet-setup-title-" + languageId, title);
-		//portletSetup.setValue("portlet-setup-use-custom-title", "true");
-		portletSetup.setValue("portlet-setup-css", css);
+		String css = portletSetup.getValue(
+			"portlet-setup-css", StringPool.BLANK);
 
-		portletSetup.store();
+		try {
+			if (Validator.isNotNull(css)) {
+				JSONObject jsonObj = new JSONObject(css);
 
-		CachePortlet.clearResponse(ses, layout.getPrimaryKey(), portletId);
+				return jsonObj.toString();
+			}
+		}
+		catch (ParseException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe);
+			}
+		}
 
 		return null;
 	}
+
+	private static Log _log = LogFactory.getLog(GetLookAndFeelAction.class);
 
 }

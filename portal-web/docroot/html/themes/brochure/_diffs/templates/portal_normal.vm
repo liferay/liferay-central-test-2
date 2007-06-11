@@ -13,7 +13,7 @@
 	#js($js_main_file)
 
 	#if ($company_logo != "")
-		<style>
+		<style type="text/css">
 			#banner .logo {
 				background: url($company_logo) no-repeat;
 				height: ${company_logo_height}px;

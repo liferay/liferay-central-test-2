@@ -385,8 +385,6 @@ if (portlet.isActive() && access && supportsMimeType) {
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
-<%@ include file="/html/common/themes/portlet_css.jspf" %>
-
 <c:choose>
 	<c:when test="<%= !supportsMimeType %>">
 	</c:when>

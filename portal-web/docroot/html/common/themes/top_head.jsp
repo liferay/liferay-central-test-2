@@ -72,6 +72,41 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 	}
 	%>
 
+	<style type="text/css">
+
+		<%
+		for (int i = 0; i < portlets.size(); i++) {
+			Portlet portlet = (Portlet)portlets.get(i);
+
+			PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portlet.getPortletId(), true, true);
+
+			String portletSetupCss = portletSetup.getValue("portlet-setup-css", StringPool.BLANK);
+		%>
+
+			<c:if test="<%= Validator.isNotNull(portletSetupCss) %>">
+
+				<%
+				try {
+				%>
+
+					<%@ include file="/html/common/themes/portlet_css.jspf" %>
+
+				<%
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e.getMessage());
+					}
+				}
+				%>
+
+			</c:if>
+
+		<%
+		}
+		%>
+
+	</style>
 </c:if>
 
 <c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
@@ -116,3 +151,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 	%>
 
 </c:if>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.themes.top_head.jsp");
+%>
