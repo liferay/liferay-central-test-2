@@ -569,8 +569,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				new FileReader(file));
 
 			TimeZone timeZone = toTimeZone(
-					userId,
-					(VTimeZone)calendar.getComponent(Component.VTIMEZONE));
+				userId, (VTimeZone)calendar.getComponent(Component.VTIMEZONE));
 
 			Iterator itr = calendar.getComponents(Component.VEVENT).iterator();
 
@@ -1206,7 +1205,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		TimeZone timeZone = user.getTimeZone();
 
 		timeZone = TimeZone.getTimeZone(
-				vTimeZone.getTimeZoneId().getValue());
+			vTimeZone.getTimeZoneId().getValue());
 
 		return timeZone;
 	}

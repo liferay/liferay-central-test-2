@@ -67,9 +67,11 @@ public class ImportEventsAction extends PortletAction {
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			SessionErrors.add(req, e.getClass().getName());
-			setForward(req, "portlet.calendar.error");
 			_log.error(e, e);
+
+			SessionErrors.add(req, e.getClass().getName());
+
+			setForward(req, "portlet.calendar.error");
 		}
 	}
 

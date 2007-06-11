@@ -90,6 +90,9 @@ public class ExportEventsAction extends PortletAction {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+		finally {
+			ServletResponseUtil.cleanUp(is);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(ExportEventsAction.class);
