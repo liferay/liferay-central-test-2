@@ -126,8 +126,8 @@ public abstract class CustomSQLUtil {
 				}
 				else if (dbName.startsWith(MYSQL)) {
 					_vendorMySQL = true;
-					_functionIsNull = MYSQL_FUNCTION_IS_NULL;
-					_functionIsNotNull = MYSQL_FUNCTION_IS_NOT_NULL;
+					//_functionIsNull = MYSQL_FUNCTION_IS_NULL;
+					//_functionIsNotNull = MYSQL_FUNCTION_IS_NOT_NULL;
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(
