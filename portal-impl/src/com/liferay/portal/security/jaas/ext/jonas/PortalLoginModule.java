@@ -61,7 +61,7 @@ public class PortalLoginModule extends BasicLoginModule {
 				_log.error(e, e);
 			}
 
-			getSubject().getPrincipals().add(group);
+			getSubject().getPrincipals().add((Principal)group);
 		}
 
 		return commitValue;
