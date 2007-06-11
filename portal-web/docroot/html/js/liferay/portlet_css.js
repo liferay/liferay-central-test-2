@@ -202,6 +202,7 @@ Liferay.PortletCSS = {
 					portletLinksTarget: '',
 					showBorders: true,
 					title: '',
+					titles: {},
 					useCustomTitle: false
 				},
 
@@ -274,7 +275,8 @@ Liferay.PortletCSS = {
 				}
 			);
 
-			if (objectData.length) {
+			if (objectData.responseText.length) {
+				objectData = jQuery.parseJSON(objectData.responseText);
 				instance._objData = objectData;
 			} 
 			else {
@@ -294,7 +296,13 @@ Liferay.PortletCSS = {
 			instance._spacingStyles();
 			instance._cssStyles();
 
+			var currentTab = newPanel.find('li.current');
+			
 			newPanel.triggerTab(tabTrigger);
+			
+			if (currentTab.length > 1) {
+				currentTab.not(':first').removeClass('current');
+			}
 
 			var useForAll = newPanel.find('.lfr-use-for-all');
 
@@ -316,7 +324,7 @@ Liferay.PortletCSS = {
 				}
 			};
 
-			useForAll.unbind().click(handleForms);
+			useForAll.unbind('click', handleForms).click(handleForms);
 			useForAll.each(handleForms);
 
 			var saveHandler = function(xHR, type) {
@@ -349,6 +357,24 @@ Liferay.PortletCSS = {
 			instance._saveButton.unbind().click(
 				function() {
 					instance._objData.advancedData.customCSS = instance._customCSS.val();
+					
+					/*var customTitleValue = instance._customTitleInput.val();
+					customTitleValue = jQuery.trim(customTitleValue);
+					
+					if (instance._customTitleCheckbox.is(':checked') && customTitleValue.length) {
+						Liferay.Util.savePortletTitle(
+							{
+								plid: themeDisplay.getPlid(),
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								portletId: instance._portletId,
+								title: customTitleValue
+							}
+						);
+
+						console.log(instance._customTitleInput.val());
+					}*/
+					
+					console.log(instance._objData.portletData.titles);
 					jQuery.ajax(
 						{
 							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
@@ -376,7 +402,7 @@ Liferay.PortletCSS = {
 			Liferay.Util.addInputFocus(instance._newPanel[0]);
 		}
 	},
-
+	
 	_assignColorPickers: function() {
 		var instance = this;
 		instance._newPanel.find('.use-color-picker').each(
@@ -892,7 +918,17 @@ Liferay.PortletCSS = {
 
 		return output;
 	},
-
+	
+	_languageClasses: function(key, value, removeClass) {
+		var instance = this;
+		var option = instance._portletLanguage.find('option[@value=' + key + ']');
+		if (removeClass) {
+			option.removeClass('focused');
+		} else {
+			option.addClass('focused');
+		}
+	},
+	
 	_portletConfig: function() {
 		var instance = this;
 
@@ -908,17 +944,25 @@ Liferay.PortletCSS = {
 		customTitleCheckbox.unbind().click(
 			function() {
 				var title;
-
+				
+				portletData.useCustomTitle = this.checked;
+				
 				if (this.checked) {
-					title = customTitleInput.val();
-					portletData.useCustomTitle = this.checked;
+					customTitleInput.attr('disabled', false);
+					language.attr('disabled', false);
+					title = jQuery.trim(customTitleInput.val());
+					
 					if (title == '') {
 						title = instance._curPortlet.find('.portlet-title').text();
+						title = jQuery.trim(title);
 						customTitleInput.val(title);
 					}
 					portletData.title = title;
+					instance._portletTitles(false, title);
 				}
 				else {
+					customTitleInput.attr('disabled', true);
+					language.attr('disabled', true);
 					title = instance._defaultPortletTitle;
 				}
 
@@ -928,11 +972,12 @@ Liferay.PortletCSS = {
 
 		customTitleInput.unbind().keyup(
 			function() {
-				if (!customTitleCheckbox.is(':checked')) {
+				if (!portletData.useCustomTitle) {
 					return;
 				}
 				instance._curPortlet.find('.portlet-title').text(this.value);
 				portletData.title = this.value;
+				instance._portletTitles(false, this.value);
 			}
 		);
 
@@ -948,10 +993,48 @@ Liferay.PortletCSS = {
 		language.change(
 			function() {
 				portletData.language = this.options[this.selectedIndex].value;
+				var title = instance._portletTitles(portletData.language);
+				
+				if (portletData.useCustomTitle) {
+					customTitleInput.val(title);
+				}
+				
 			}
 		);
 	},
+	
+	_portletTitles: function(key, value) {
+		var instance = this;
+		
+		var portletLanguage = instance._portletLanguage;
+		
+		if (!instance._objData.portletData.titles) {
+			instance._objData.portletData.titles = {};
+		}
+		
+		var portletTitles = instance._objData.portletData.titles;
+		
+		if (!key) {
+			key = instance._portletLanguage.find('option:selected').val();
+		}
 
+		if (value == null) {
+			var portletTitle = portletTitles[key];
+			if (portletTitle) {
+				return portletTitle;
+			}
+			return '';
+		} else {
+			portletTitles[key] = value;
+			
+			if (value == '') {
+				instance._languageClasses(key, null, true);
+			} else {
+				instance._languageClasses(key);
+			}
+		}
+	},
+	
 	_setCheckbox: function(obj, value) {
 		var instance = this;
 
@@ -968,20 +1051,47 @@ Liferay.PortletCSS = {
 		var bgData = objData.bgData;
 		var borderData = objData.borderData;
 		var spacingData = objData.spacingData;
+		
+		var portletTitles = portletData.titles;
+		var portletTitle = instance._portletTitles(portletData.language);
+		
+		var fontStyle = false;
+		var fontWeight = false;
+		
+		if (textData.fontStyle != 'normal') {
+			fontStyle = true;
+		}
+		
+		if (textData.fontWeight != 'normal') {
+			fontWeight = true;
+		}
 
 		// Portlet config
 
-		instance._setInput(instance._customTitleInput, portletData.title);
+		instance._setInput(instance._customTitleInput, portletTitle);
 		instance._setCheckbox(instance._customTitleCheckbox, portletData.useCustomTitle);
 		instance._setCheckbox(instance._showBorders, portletData.showBorders);
 		instance._setSelect(instance._portletLanguage, portletData.language);
 		instance._setSelect(instance._portletLinksTarget, portletData.portletLinksTarget);
+		
+		if (!portletData.useCustomTitle) {
+			instance._customTitleInput.attr('disabled', true);
+			instance._portletLanguage.attr('disabled', true);
+		}
+
+		if (portletData.titles) {
+			jQuery.each(portletData.titles,
+				function(key, value) {
+					instance._languageClasses(key);	
+				}
+			);
+		}
 
 		// Text
 
 		instance._setSelect(instance._fontFamily, textData.fontFamily);
-		instance._setCheckbox(instance._fontWeight, textData.fontWeight);
-		instance._setCheckbox(instance._fontStyle, textData.fontStyle);
+		instance._setCheckbox(instance._fontWeight, fontWeight);
+		instance._setCheckbox(instance._fontStyle, fontStyle);
 		instance._setSelect(instance._fontSize, textData.fontSize);
 		instance._setInput(instance._fontColor, textData.color);
 		instance._setSelect(instance._textAlign, textData.textAlign);
@@ -1140,7 +1250,6 @@ Liferay.PortletCSS = {
 				spacingData.padding.left.value = left.input;
 				spacingData.padding.left.unit = left.selectBox;
 			}
-			console.log(spacingData.padding.top);
 			portlet.css(styling);
 		};
 
@@ -1210,7 +1319,6 @@ Liferay.PortletCSS = {
 				spacingData.margin.left.value = left.input;
 				spacingData.margin.left.unit = left.selectBox;
 			}
-
 			portlet.css(styling);
 		};
 

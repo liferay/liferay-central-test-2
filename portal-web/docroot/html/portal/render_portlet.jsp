@@ -538,8 +538,7 @@ else {
 						obj: jQuery("#p_p_id_<%= portletDisplay.getId() %>_"),
 						plid: "<%= layout.getPlid() %>",
 						doAsUserId: "<%= themeDisplay.getDoAsUserId() %>",
-						portletId: "<%= portletDisplay.getId() %>",
-						url: "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title"
+						portletId: "<%= portletDisplay.getId() %>"
 					}
 				);
 			}

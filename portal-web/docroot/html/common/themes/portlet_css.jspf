@@ -100,52 +100,52 @@ if (ufaBorderWidth) {
 }
 else {
 	if (!_unitSet.contains(borderTopWidthValue)) {
-		finalCSS.add("border-width-top: " + borderTopWidthValue);
+		finalCSS.add("border-top-width: " + borderTopWidthValue);
 	}
 
 	if (!_unitSet.contains(borderRightWidthValue)) {
-		finalCSS.add("border-width-right: " + borderRightWidthValue);
+		finalCSS.add("border-right-width: " + borderRightWidthValue);
 	}
 
 	if (!_unitSet.contains(borderBottomWidthValue)) {
-		finalCSS.add("border-width-bottom: " + borderBottomWidthValue);
+		finalCSS.add("border-bottom-width: " + borderBottomWidthValue);
 	}
 
 	if (!_unitSet.contains(borderLeftWidthValue)) {
-		finalCSS.add("border-width-left: " + borderLeftWidthValue);
+		finalCSS.add("border-left-width: " + borderLeftWidthValue);
 	}
 }
 
-if (ufaBorderStyle) {
+if (ufaBorderStyle && !_unitSet.contains(borderTopWidthValue)) {
 	finalCSS.add("border-style: " + borderTopStyleValue);
 }
 else {
-	finalCSS.add("border-style-top: " + borderTopStyleValue);
-	finalCSS.add("border-style-right: " + borderRightStyleValue);
-	finalCSS.add("border-style-bottom: " + borderBottomStyleValue);
-	finalCSS.add("border-style-left: " + borderLeftStyleValue);
+	finalCSS.add("border-top-style: " + borderTopStyleValue);
+	finalCSS.add("border-right-style: " + borderRightStyleValue);
+	finalCSS.add("border-bottom-style: " + borderBottomStyleValue);
+	finalCSS.add("border-left-style: " + borderLeftStyleValue);
 }
 
 if (ufaBorderColor) {
-	if (!borderTopColorValue.equals("")) {
+	if (Validator.isNotNull(borderTopColorValue)) {
 		finalCSS.add("border-color: " + borderTopColorValue);
 	}
 }
 else {
-	if (!borderTopColorValue.equals("")) {
-		finalCSS.add("border-color: " + borderTopColorValue);
+	if (Validator.isNotNull(borderTopColorValue)) {
+		finalCSS.add("border-top-color: " + borderTopColorValue);
 	}
 
-	if (!borderRightColorValue.equals("")) {
-		finalCSS.add("border-color-right: " + borderRightColorValue);
+	if (Validator.isNotNull(borderRightColorValue)) {
+		finalCSS.add("border-right-color: " + borderRightColorValue);
 	}
 
-	if (!borderBottomColorValue.equals("")) {
-		finalCSS.add("border-color-bottom: " + borderBottomColorValue);
+	if (Validator.isNotNull(borderBottomColorValue)) {
+		finalCSS.add("border-bottom-color: " + borderBottomColorValue);
 	}
 
-	if (!borderLeftColorValue.equals("")) {
-		finalCSS.add("border-color-left: " + borderLeftColorValue);
+	if (Validator.isNotNull(borderLeftColorValue)) {
+		finalCSS.add("border-left-color: " + borderLeftColorValue);
 	}
 }
 

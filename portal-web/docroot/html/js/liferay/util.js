@@ -348,18 +348,17 @@ Liferay.Util = {
 		if (!title.is('.not-editable')) {
 			title.editable(
 				function(value, settings) {
-					var cruft = settings._LFR_.cruft.join('');
+					
+					var cruft = settings._LFR_.cruft || [];
+					cruft = cruft.join('');
 
 					if (value != settings._LFR_.oldText) {
-						jQuery.ajax(
+						Liferay.Util.savePortletTitle(
 							{
-								url: url,
-								data: {
-									p_l_id: plid,
-									doAsUserId: doAsUserId,
-									portletId: portletId,
-									title: value
-								}
+								plid: plid,
+								doAsUserId: doAsUserId,
+								portletId: portletId,
+								title: value
 							}
 						);
 					}
@@ -517,7 +516,32 @@ Liferay.Util = {
 			}
 		}
 	},
-
+	
+	savePortletTitle: function(params) {
+		
+		var defaultParams = {
+			plid: 0,
+			doAsUserId: 0,
+			portletId: 0,
+			title: '',
+			url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
+		};
+		
+		var settings = jQuery.extend(defaultParams, params);
+		jQuery.ajax(
+			{
+				url: settings.url,
+				data: {
+					p_l_id: settings.plid,
+					doAsUserId: settings.doAsUserId,
+					portletId: settings.portletId,
+					title: settings.title
+				}
+			}
+		);
+		
+	},
+	
 	selectAndCopy: function(el) {
 		el.focus();
 		el.select();
