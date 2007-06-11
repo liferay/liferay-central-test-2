@@ -72,7 +72,7 @@ public class ImportEventsAction extends PortletAction {
 			_log.error(e, e);
 		}
 	}
-	
+
 	private static Log _log = LogFactory.getLog(ExportEventsAction.class);
 
 }

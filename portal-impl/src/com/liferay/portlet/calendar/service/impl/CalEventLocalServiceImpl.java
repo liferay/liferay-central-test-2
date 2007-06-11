@@ -567,13 +567,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			net.fortuna.ical4j.model.Calendar calendar = builder.build(
 				new FileReader(file));
-			
+
 			TimeZone timeZone = toTimeZone(
 					userId,
 					(VTimeZone)calendar.getComponent(Component.VTIMEZONE));
-			
+
 			Iterator itr = calendar.getComponents(Component.VEVENT).iterator();
-			
+
 			while (itr.hasNext()) {
 				VEvent vEvent = (VEvent)itr.next();
 
@@ -751,7 +751,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		return recurrenceCal;
 	}
-	
+
 	protected void importICal4j(
 			long userId, long plid, VEvent event, TimeZone timeZone)
 		throws PortalException, SystemException {
@@ -839,7 +839,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			timeZoneSensitive, type, repeating, recurrence, remindBy,
 			firstReminder, secondReminder, addCommunityPermissions,
 			addGuestPermissions);
-		
+
 	}
 
 	protected void remindUser(CalEvent event, User user) {
@@ -1011,7 +1011,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		props.add(prodId);
 		props.add(Version.VERSION_2_0);
 		props.add(CalScale.GREGORIAN);
-		
+
 		User user = UserUtil.findByPrimaryKey(userId);
 		TimeZone timeZone = user.getTimeZone();
 
@@ -1043,11 +1043,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			}
 
 			DayAndPosition[] byDay = recurrence.getByDay();
-			
+
 			if (byDay != null) {
 				for (int i = 0; i < byDay.length; i++) {
 					WeekDay weekDay = toICalWeekDay(byDay[i].getDayOfWeek());
-	
+
 					recur.getDayList().add(weekDay);
 				}
 			}
@@ -1063,7 +1063,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			if (byDay != null) {
 				for (int i = 0; i < byDay.length; i++) {
 					WeekDay weekDay = toICalWeekDay(byDay[i].getDayOfWeek());
-	
+
 					recur.getDayList().add(weekDay);
 				}
 			}
@@ -1111,17 +1111,17 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	protected VEvent toICalVEvent(CalEvent event, TimeZone timeZone){
 		VEvent vEvent = new VEvent();
-		
+
 		PropertyList eventProps = vEvent.getProperties();
 
 		// UID
-		
+
 		Uid uid = new Uid(UUID.timeUUID().toString());
 
 		eventProps.add(uid);
-				
+
 		DtStart dtStart = new DtStart(new DateTime(event.getStartDate()));
-					
+
 		eventProps.add(dtStart);
 
 		// Duration
@@ -1166,7 +1166,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			eventProps.add(rRule);
 		}
-		
+
 		return vEvent;
 	}
 
@@ -1198,16 +1198,16 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return weekDay;
 	}
 
-	protected TimeZone toTimeZone(long userId, VTimeZone vTimeZone) 
+	protected TimeZone toTimeZone(long userId, VTimeZone vTimeZone)
 		throws SystemException, NoSuchUserException {
-		
+
 		User user = UserUtil.findByPrimaryKey(userId);
-		
+
 		TimeZone timeZone = user.getTimeZone();
-	
+
 		timeZone = TimeZone.getTimeZone(
-				vTimeZone.getTimeZoneId().getValue());	
-		
+				vTimeZone.getTimeZoneId().getValue());
+
 		return timeZone;
 	}
 
@@ -1251,7 +1251,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				dayPosList.add(
 					new DayAndPosition(toCalendarWeekDay(weekDay), 0));
 			}
-			
+
 			if (!dayPosList.isEmpty()) {
 				recurrence.setByDay(
 					(DayAndPosition[])dayPosList.toArray(
@@ -1271,7 +1271,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				dayPosList.add(
 					new DayAndPosition(toCalendarWeekDay(weekDay), 0));
 			}
-			
+
 			if (!dayPosList.isEmpty()) {
 				recurrence.setByDay(
 					(DayAndPosition[])dayPosList.toArray(

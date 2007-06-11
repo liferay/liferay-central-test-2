@@ -48,7 +48,8 @@ public class PortalLoginModule extends BasicLoginModule {
 			getSubject().getPrincipals().add(getPrincipal());
 			getSubject().getPrivateCredentials().add(getPassword());
 
-			Object group = ReflectionUtil.newInstance(_JGROUP, "Roles");
+			Principal group = (Principal)ReflectionUtil.newInstance(
+				_JGROUP, "Roles");
 			Object role = ReflectionUtil.newInstance(_JROLE, "users");
 
 			try {
@@ -61,7 +62,7 @@ public class PortalLoginModule extends BasicLoginModule {
 				_log.error(e, e);
 			}
 
-			getSubject().getPrincipals().add((Principal)group);
+			getSubject().getPrincipals().add(group);
 		}
 
 		return commitValue;
