@@ -479,6 +479,8 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
+		
+		<action path="/document_library_display/search" forward="portlet.document_library.search" />
 
 		<!-- Enterprise Admin -->
 
