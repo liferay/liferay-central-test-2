@@ -77,7 +77,13 @@ public class ViewAction extends PortletAction {
 	protected String getUserName(RenderRequest req, RenderResponse res) {
 		PortletPreferences prefs = req.getPreferences();
 
-		return prefs.getValue("user-name", req.getRemoteUser());
+		String userName = prefs.getValue("user-name", req.getRemoteUser());
+
+		if (Validator.isNull(userName)) {
+			userName = req.getRemoteUser();
+		}
+
+		return userName;
 	}
 
 	protected String getPassword(RenderRequest req, RenderResponse res)
@@ -88,10 +94,16 @@ public class ViewAction extends PortletAction {
 		String defaultPassword = null;
 
 		if (req.getRemoteUser() != null) {
-			defaultPassword = PortalUtil.getUser(req).getPassword();
+			defaultPassword = PortalUtil.getUserPassword(req);
 		}
 
-		return prefs.getValue("password", defaultPassword);
+		String password = prefs.getValue("password", defaultPassword);
+
+		if (Validator.isNull(password)) {
+			password = defaultPassword;
+		}
+
+		return password;
 	}
 
 	protected String transformSrc(
