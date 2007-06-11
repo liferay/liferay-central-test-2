@@ -77,6 +77,7 @@
 
 					<li class="public <%= selectedPlace ? "current" : "" %>">
 						<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
+						<a class="add-page" href="javascript:;"><liferay-ui:message key="add-page" /></a>
 					</li>
 
 					<%
@@ -88,6 +89,7 @@
 
 					<li class="private <%= selectedPlace ? "current" : "" %>">
 						<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
+						<a class="add-page" href="javascript:;"><liferay-ui:message key="add-page" /></a>
 					</li>
 				</ul>
 			</li>

@@ -283,12 +283,29 @@ response.setContentType(Constants.TEXT_CSS);
 	margin-left: 0.5em;
 }
 
+.js .interactive-mode .my-places .show-my-places li ul li {
+	position: relative;
+}
+
 .js .interactive-mode .my-places .show-my-places ul li.public a, .js .my-places .show-my-places ul li.public a:hover {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_places_public.png);
 }
 
 .js .interactive-mode .my-places .show-my-places li.private a, .js .my-places .show-my-places li.private a:hover {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_places_private.png);
+}
+
+.js .interactive-mode .my-places .show-my-places ul li.public a.add-page, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page {
+	background: none;
+	border: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.js .interactive-mode .my-places .show-my-places ul li.public a.add-page:hover, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page:hover {
+	background: none;
+	border: none;
 }
 
 .ie6.js .lfr-dock.interactive-mode {
