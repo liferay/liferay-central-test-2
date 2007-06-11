@@ -26,15 +26,19 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
 import com.liferay.portal.util.PortalUtil;
+
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -206,6 +210,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public long getDefaultPrivatePlid() {
+		return getDefaultPlid(true);
+	}
+
 	public int getPrivateLayoutsPageCount() {
 		try {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -229,6 +237,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public long getDefaultPublicPlid() {
+		return getDefaultPlid(false);
+	}
+
 	public int getPublicLayoutsPageCount() {
 		try {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -250,6 +262,27 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		else {
 			return false;
 		}
+	}
+
+	protected long getDefaultPlid(boolean privateLayout) {
+		try {
+			List layouts = LayoutLocalServiceUtil.getLayouts(
+				getGroupId(), privateLayout,
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
+
+			if (layouts.size() > 0) {
+				Layout layout = (Layout)layouts.get(0);
+
+				return layout.getPlid();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
+
+		return LayoutImpl.DEFAULT_PLID;
 	}
 
 	private static Log _log = LogFactory.getLog(GroupImpl.class);

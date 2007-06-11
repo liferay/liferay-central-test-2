@@ -22,36 +22,40 @@
 
 package com.liferay.portlet.myplaces.action;
 
-import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditPagesAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewAction extends PortletAction {
+public class EditPagesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -64,37 +68,43 @@ public class ViewAction extends PortletAction {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
+		Layout layout = null;
+
 		List layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
-		String redirect = themeDisplay.getPathMain();
-
 		if (layouts.size() > 0) {
-			Layout layout = (Layout)layouts.get(0);
-
-			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+			layout = (Layout)layouts.get(0);
 		}
 		else {
-			redirect = ParamUtil.getString(req, "redirect");
+			long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+			String name = "New Page";
+			String title = StringPool.BLANK;
+			String type = LayoutImpl.TYPE_PORTLET;
+			boolean hidden = false;
+			String friendlyURL = StringPool.BLANK;
 
-			SessionErrors.add(
-				req, NoSuchLayoutSetException.class.getName(),
-				new NoSuchLayoutSetException(
-					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
-						"}"));
+			layout = LayoutServiceUtil.addLayout(
+				groupId, privateLayout, parentLayoutId, name, title, type,
+				hidden, friendlyURL);
 		}
 
-		// Send redirect
+		if (layout != null) {
+			HttpServletRequest httReq = PortalUtil.getHttpServletRequest(req);
 
-		res.sendRedirect(redirect);
-	}
+			PortletURL portletURL = new PortletURLImpl(
+				httReq, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), false);
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
-		throws Exception {
+			portletURL.setWindowState(WindowState.MAXIMIZED);
+			portletURL.setPortletMode(PortletMode.VIEW);
 
-		return mapping.findForward("portlet.my_places.view");
+			portletURL.setParameter(
+				"struts_action", "/layout_management/edit_pages");
+			portletURL.setParameter("tabs2", "public");
+			portletURL.setParameter("groupId", String.valueOf(groupId));
+
+			res.sendRedirect(portletURL.toString());
+		}
 	}
 
 }

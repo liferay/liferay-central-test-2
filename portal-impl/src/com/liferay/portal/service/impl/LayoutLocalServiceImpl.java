@@ -560,6 +560,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return LayoutUtil.findByG_P_P(groupId, privateLayout, parentLayoutId);
 	}
 
+	public List getLayouts(
+			long groupId, boolean privateLayout, long parentLayoutId, int begin,
+			int end)
+		throws SystemException {
+
+		return LayoutUtil.findByG_P_P(
+			groupId, privateLayout, parentLayoutId, begin, end);
+	}
+
 	public LayoutReference[] getLayouts(
 			long companyId, String portletId, String prefsKey,
 			String prefsValue)

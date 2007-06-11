@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,63 +20,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.util;
+<%@ include file="/html/taglib/init.jsp" %>
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
-
-/**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class ReleaseInfo {
-
-	static String name = "Liferay Enterprise Portal";
-
-	static String version = "4.3.0 RC1";
-
-	static String codeName = "Owen";
-
-	static String build = "4153";
-
-	static String date = "June 11, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
-
-}
+<%@ page import="com.liferay.portal.service.permission.GroupPermission" %>

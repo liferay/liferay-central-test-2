@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/taglib/ui/my_places/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
 	<ul>
@@ -51,14 +51,62 @@
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);
 
+			boolean userCommunity = community.isUser();
 			int publicLayoutsPageCount = community.getPublicLayoutsPageCount();
 			int privateLayoutsPageCount = community.getPrivateLayoutsPageCount();
+
+			String publicAddPageHREF = null;
+			String privateAddPageHREF = null;
+
+			if (userCommunity) {
+				long publicAddPagePlid = community.getDefaultPublicPlid();
+
+				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, publicAddPagePlid, false);
+
+				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
+				publicAddPageURL.setPortletMode(PortletMode.VIEW);
+
+				publicAddPageURL.setParameter("struts_action", "/layout_management/edit_pages");
+				publicAddPageURL.setParameter("tabs2", "public");
+				publicAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+
+				publicAddPageHREF = publicAddPageURL.toString();
+
+				long privateAddPagePlid = community.getDefaultPrivatePlid();
+
+				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, privateAddPagePlid, false);
+
+				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
+				privateAddPageURL.setPortletMode(PortletMode.VIEW);
+
+				privateAddPageURL.setParameter("struts_action", "/layout_management/edit_pages");
+				privateAddPageURL.setParameter("tabs2", "private");
+				privateAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+
+				privateAddPageHREF = privateAddPageURL.toString();
+			}
+			else if (GroupPermission.contains(permissionChecker, community.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+
+				addPageURL.setWindowState(WindowState.NORMAL);
+				addPageURL.setPortletMode(PortletMode.VIEW);
+
+				addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+				addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+				addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
+
+				publicAddPageHREF = addPageURL.toString();
+
+				addPageURL.setParameter("privateLayout", Boolean.TRUE.toString());
+
+				privateAddPageHREF = addPageURL.toString();
+			}
 		%>
 
 			<li>
 				<h3>
 					<c:choose>
-						<c:when test="<%= community.isUser() %>">
+						<c:when test="<%= userCommunity %>">
 							<liferay-ui:message key="my-community" />
 						</c:when>
 						<c:otherwise>
@@ -77,7 +125,10 @@
 
 					<li class="public <%= selectedPlace ? "current" : "" %>">
 						<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
-						<a class="add-page" href="javascript:;"><liferay-ui:message key="add-page" /></a>
+
+						<c:if test="<%= publicAddPageHREF != null %>">
+							<a class="add-page" href="<%= publicAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
+						</c:if>
 					</li>
 
 					<%
@@ -89,7 +140,10 @@
 
 					<li class="private <%= selectedPlace ? "current" : "" %>">
 						<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
-						<a class="add-page" href="javascript:;"><liferay-ui:message key="add-page" /></a>
+
+						<c:if test="<%= privateAddPageHREF != null %>">
+							<a class="add-page" href="<%= privateAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
+						</c:if>
 					</li>
 				</ul>
 			</li>

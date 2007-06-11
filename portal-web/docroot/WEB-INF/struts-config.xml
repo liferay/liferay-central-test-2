@@ -1104,6 +1104,8 @@
 
 		<!-- My Places -->
 
+		<action path="/my_places/edit_pages" type="com.liferay.portlet.myplaces.action.EditPagesAction" />
+
 		<action path="/my_places/view" type="com.liferay.portlet.myplaces.action.ViewAction">
 			<forward name="portlet.my_places.view" path="portlet.my_places.view" />
 		</action>

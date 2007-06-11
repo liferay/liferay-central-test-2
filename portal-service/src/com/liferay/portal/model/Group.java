@@ -69,9 +69,13 @@ public interface Group extends GroupModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public long getDefaultPrivatePlid();
+
 	public int getPrivateLayoutsPageCount();
 
 	public boolean hasPrivateLayouts();
+
+	public long getDefaultPublicPlid();
 
 	public int getPublicLayoutsPageCount();
 
