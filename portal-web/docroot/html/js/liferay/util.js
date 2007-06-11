@@ -348,8 +348,8 @@ Liferay.Util = {
 		if (!title.is('.not-editable')) {
 			title.editable(
 				function(value, settings) {
-					
 					var cruft = settings._LFR_.cruft || [];
+
 					cruft = cruft.join('');
 
 					if (value != settings._LFR_.oldText) {
@@ -516,9 +516,8 @@ Liferay.Util = {
 			}
 		}
 	},
-	
+
 	savePortletTitle: function(params) {
-		
 		var defaultParams = {
 			plid: 0,
 			doAsUserId: 0,
@@ -526,8 +525,9 @@ Liferay.Util = {
 			title: '',
 			url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
 		};
-		
+
 		var settings = jQuery.extend(defaultParams, params);
+
 		jQuery.ajax(
 			{
 				url: settings.url,
@@ -539,9 +539,8 @@ Liferay.Util = {
 				}
 			}
 		);
-		
 	},
-	
+
 	selectAndCopy: function(el) {
 		el.focus();
 		el.select();

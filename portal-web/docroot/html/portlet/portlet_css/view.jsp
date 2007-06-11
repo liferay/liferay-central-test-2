@@ -591,7 +591,7 @@
 				<input class="text-input" id="lfr-bg-color" name="lfr-bg-color" size="9" type="text" value="#f00" />
 			</div>
 
-			<% /*<div class="ctrl-holder">
+			<%--<div class="ctrl-holder">
 				<label class="inline-label">
 					<liferay-ui:message key="use-a-background-image" /> <input checked="checked" id="lfr-use-bg-image" type="checkbox" />
 				</label>
@@ -642,7 +642,7 @@
 						<option value="em">em</option>
 					</select>
 				</div>
-			</div>*/ %>
+			</div>--%>
 		</fieldset>
 
 		<fieldset class="block-labels" id="border-styles">
