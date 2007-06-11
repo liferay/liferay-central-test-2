@@ -58,6 +58,10 @@ import org.dom4j.Element;
  */
 public abstract class BaseOpenSearchImpl implements OpenSearch {
 
+	public boolean isEnabled() {
+		return true;
+	}
+
 	public String search(HttpServletRequest req, String url)
 		throws SearchException {
 

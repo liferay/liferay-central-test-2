@@ -20,27 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.util;
+package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
 /**
- * <a href="BlogsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
+public class MBOpenSearchImpl extends HitsOpenSearchImpl {
 
-	public static final String SEARCH_PATH = "/c/blogs/open_search";
+	public static final String SEARCH_PATH = "/c/message_boards/open_search";
 
-	public static final String TITLE = "Liferay Blogs Search: ";
+	public static final String TITLE = "Liferay Message Boards Search: ";
 
 	public Hits getHits(long companyId, String keywords) throws Exception {
-		return BlogsEntryLocalServiceUtil.search(
-			companyId, 0, 0, null, keywords);
+		return MBCategoryLocalServiceUtil.search(
+			companyId, 0, null, 0, keywords);
 	}
 
 	public String getSearchPath() {

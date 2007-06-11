@@ -27,19 +27,14 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
-import com.liferay.util.Validator;
 
 import java.util.Date;
 
@@ -54,15 +49,20 @@ import org.apache.lucene.document.DateTools;
 import org.dom4j.Element;
 
 /**
- * <a href="PortalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="HitsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
+public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
-	public static final String SEARCH_PATH = "/c/search/open_search";
+	public abstract Hits getHits(long companyId, String keywords)
+		throws Exception;
+
+	public abstract String getSearchPath();
+
+	public abstract String getTitle(String keywords);
 
 	public String search(
 			HttpServletRequest req, String keywords, int startPage,
@@ -75,13 +75,11 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			hits = CompanyLocalServiceUtil.search(
-				themeDisplay.getCompanyId(), keywords);
+			hits = getHits(themeDisplay.getCompanyId(), keywords);
 
 			Object[] values = addSearchResults(
-				keywords, startPage, itemsPerPage, hits,
-				"Liferay Portal Search: " + keywords, SEARCH_PATH,
-				themeDisplay);
+				keywords, startPage, itemsPerPage, hits, getTitle(keywords),
+				getSearchPath(), themeDisplay);
 
 			Hits results = (Hits)values[0];
 			org.dom4j.Document doc = (org.dom4j.Document)values[1];
@@ -95,56 +93,25 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
 
-				if (portlet == null) {
-					continue;
-				}
-
 				String portletTitle = PortalUtil.getPortletTitle(
 					portletId, themeDisplay.getUser());
 
 				long groupId = GetterUtil.getLong(
 					(String)result.get(LuceneFields.GROUP_ID));
 
-				String title = StringPool.BLANK;
-
 				PortletURL portletURL = getPortletURL(req, portletId, groupId);
 
-				String url = portletURL.toString();
+				Indexer indexer = (Indexer)InstancePool.get(
+					portlet.getIndexerClass());
 
+				DocumentSummary docSummary = indexer.getDocumentSummary(
+					result, portletURL);
+
+				String title = docSummary.getTitle();
+				String url = portletURL.toString();
 				Date modifedDate = DateTools.stringToDate(
 					(String)result.get(LuceneFields.MODIFIED));
-
-				String content = StringPool.BLANK;
-
-				if (Validator.isNotNull(portlet.getIndexerClass())) {
-					Indexer indexer = (Indexer)InstancePool.get(
-						portlet.getIndexerClass());
-
-					DocumentSummary docSummary = indexer.getDocumentSummary(
-						result, portletURL);
-
-					title = docSummary.getTitle();
-					url = portletURL.toString();
-					content = docSummary.getContent();
-
-					if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-						String articleId = result.get("articleId");
-						String version = result.get("version");
-
-						StringMaker sm = new StringMaker();
-
-						sm.append(themeDisplay.getPathMain());
-						sm.append("/journal/view_article_content?groupId=");
-						sm.append(groupId);
-						sm.append("&articleId=");
-						sm.append(articleId);
-						sm.append("&version=");
-						sm.append(version);
-
-						url = sm.toString();
-					}
-				}
-
+				String content = docSummary.getContent();
 				double score = hits.score(i);
 
 				addSearchResult(
@@ -157,7 +124,6 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			}
 
 			return doc.asXML();
-
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -169,6 +135,6 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortalOpenSearchImpl.class);
+	private static Log _log = LogFactory.getLog(HitsOpenSearchImpl.class);
 
 }

@@ -20,27 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.util;
+package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
- * <a href="BlogsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
+public class DLOpenSearchImpl extends HitsOpenSearchImpl {
 
-	public static final String SEARCH_PATH = "/c/blogs/open_search";
+	public static final String SEARCH_PATH = "/c/document_library/open_search";
 
-	public static final String TITLE = "Liferay Blogs Search: ";
+	public static final String TITLE = "Liferay Document Library Search: ";
 
 	public Hits getHits(long companyId, String keywords) throws Exception {
-		return BlogsEntryLocalServiceUtil.search(
-			companyId, 0, 0, null, keywords);
+		return DLFolderLocalServiceUtil.search(companyId, 0, null, keywords);
 	}
 
 	public String getSearchPath() {

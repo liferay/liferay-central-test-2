@@ -55,10 +55,6 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/directory/open_search";
 
-	public boolean isEnabled() {
-		return true;
-	}
-
 	public String search(
 			HttpServletRequest req, String keywords, int startPage,
 			int itemsPerPage)
