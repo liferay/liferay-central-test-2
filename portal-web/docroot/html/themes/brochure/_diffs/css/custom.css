@@ -162,12 +162,16 @@ font {
 
 .portlet {
 	background: transparent;
+	margin: 0 0 10px;
+	padding: 0;
 }
 
 .portlet .portlet-topper {
 	background: none;
 	border-bottom: 2px solid #12558E;
 	color: #12558E;
+	padding: 0;
+	margin: 0;
 }
 
 .portlet .portlet-title, .portlet .portlet-icons {
@@ -184,6 +188,7 @@ font {
 .portlet .portlet-content {
 	background: none;
 	border: none;
+	padding: 10px;
 }
 
 .portlet-icons {
