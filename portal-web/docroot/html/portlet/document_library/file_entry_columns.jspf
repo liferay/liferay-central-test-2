@@ -57,7 +57,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		row.addText(sm.toString(), rowHREF);
 	}
 	else if (fileEntryColumn.equals("downloads")) {
-		row.addText(Integer.toString(fileEntry.getReadCount()), rowHREF);
+		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
 	}
 	else if (fileEntryColumn.equals("locked")) {
 		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
