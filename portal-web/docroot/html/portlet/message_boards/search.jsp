@@ -115,7 +115,7 @@ try {
 
 		// Score
 
-		row.addText(String.valueOf(hits.score(i)), rowURL);
+		row.addText(String.valueOf(results.score(i)), rowURL);
 
 		// Add result row
 

@@ -94,7 +94,7 @@
 
 				// Score
 
-				row.addText(String.valueOf(hits.score(i)));
+				row.addText(String.valueOf(results.score(i)));
 
 				// Add result row
 
