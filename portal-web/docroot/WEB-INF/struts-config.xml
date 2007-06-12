@@ -470,6 +470,8 @@
 
 		<action path="/document_library_display/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />
 
+		<action path="/document_library_display/search" forward="portlet.document_library.search" />
+
 		<action path="/document_library_display/select_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
 			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.select_folder" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
@@ -479,8 +481,6 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 			<forward name="portlet.document_library.view" path="portlet.document_library.view" />
 		</action>
-		
-		<action path="/document_library_display/search" forward="portlet.document_library.search" />
 
 		<!-- Enterprise Admin -->
 
@@ -1496,7 +1496,7 @@
 		<!-- Westminster Catechism -->
 
 		<action path="/westminster_catechism/view" forward="portlet.westminster_catechism.view" />
-		
+
 		<!-- Wiki -->
 
 		<action path="/wiki/edit_node" type="com.liferay.portlet.wiki.action.EditNodeAction">
