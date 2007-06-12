@@ -602,7 +602,16 @@ public class PortalUtil {
 				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
-			return portalURL + getPathContext() + layoutFriendlyURL;
+			// For the current layoutSet use the virtual host only if its
+			// currently being used for this request
+
+			long currentLayoutSetId =
+					themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+			
+			if ((layoutSet.getLayoutSetId() != currentLayoutSetId) ||
+					(portalURL.startsWith(themeDisplay.getURLPortal()))) {
+				return portalURL + getPathContext() + layoutFriendlyURL;
+			}
 		}
 
 		Group group = layout.getGroup();
