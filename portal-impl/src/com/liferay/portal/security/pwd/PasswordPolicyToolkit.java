@@ -84,10 +84,16 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 				if (passwordModfiedDate != null) {
 					Date now = new Date();
 
-					long elapsedTime =
+					long passwordModificationElapsedTime =
 						now.getTime() - passwordModfiedDate.getTime();
+					
+					long userCreationElapsedTime =
+						now.getTime() - user.getCreateDate().getTime();
+					
+					long minAge = passwordPolicy.getMinAge() * 1000; 
 
-					if (elapsedTime < passwordPolicy.getMinAge() * 1000) {
+					if (passwordModificationElapsedTime < minAge
+							&& userCreationElapsedTime > minAge) {
 						throw new UserPasswordException(
 							UserPasswordException.PASSWORD_TOO_YOUNG);
 					}
