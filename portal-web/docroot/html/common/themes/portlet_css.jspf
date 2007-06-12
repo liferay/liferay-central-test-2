@@ -42,7 +42,7 @@ String bgPosLeftValue = bgPosLeft.getString(_VALUE_KEY) + bgPosLeft.getString(_U
 String bgPosTopValue = bgPosTop.getString(_VALUE_KEY) + bgPosTop.getString(_UNIT_KEY);
 String bgPosValue = bgPosLeftValue + " " + bgPosTopValue;
 
-Boolean useBgImage = bgData.getBoolean("useBgImage");
+boolean useBgImage = bgData.getBoolean("useBgImage");
 
 if (Validator.isNotNull(bgColor)) {
 	finalCSS.add("background-color: " + bgColor);
@@ -63,9 +63,9 @@ JSONObject borderWidth = borderData.getJSONObject("borderWidth");
 JSONObject borderStyle = borderData.getJSONObject("borderStyle");
 JSONObject borderColor = borderData.getJSONObject("borderColor");
 
-Boolean ufaBorderWidth = borderWidth.getBoolean(_SAME_FOR_ALL_KEY);
-Boolean ufaBorderStyle = borderStyle.getBoolean(_SAME_FOR_ALL_KEY);
-Boolean ufaBorderColor = borderColor.getBoolean(_SAME_FOR_ALL_KEY);
+boolean ufaBorderWidth = borderWidth.getBoolean(_SAME_FOR_ALL_KEY);
+boolean ufaBorderStyle = borderStyle.getBoolean(_SAME_FOR_ALL_KEY);
+boolean ufaBorderColor = borderColor.getBoolean(_SAME_FOR_ALL_KEY);
 
 // Width
 
@@ -155,8 +155,8 @@ JSONObject spacingData = jsonObj.getJSONObject("spacingData");
 JSONObject margin = spacingData.getJSONObject("margin");
 JSONObject padding = spacingData.getJSONObject("padding");
 
-Boolean ufaMargin = margin.getBoolean(_SAME_FOR_ALL_KEY);
-Boolean ufaPadding = padding.getBoolean(_SAME_FOR_ALL_KEY);
+boolean ufaMargin = margin.getBoolean(_SAME_FOR_ALL_KEY);
+boolean ufaPadding = padding.getBoolean(_SAME_FOR_ALL_KEY);
 
 // Margin
 
