@@ -102,35 +102,35 @@
 }
 
 .lfr-dock li.home a {
-	background-image: url(../images/dock/home.gif);
+	background-image: url(../images/dock/home.png);
 }
 
 .lfr-dock li.my-account a {
-	background-image: url(../images/dock/my_account.gif);
+	background-image: url(../images/dock/my_account.png);
 }
 
 .lfr-dock li.sign-in a {
-	background-image: url(../images/dock/sign_in.gif);
+	background-image: url(../images/dock/sign_in.png);
 }
 
 .lfr-dock li.sign-out a {
-	background-image: url(../images/dock/sign_out.gif);
+	background-image: url(../images/dock/sign_out.png);
 }
 
 .lfr-dock li.add-content a {
-	background-image: url(../images/dock/add_content.gif);
+	background-image: url(../images/dock/add_content.png);
 }
 
 .lfr-dock li.layout a {
-	background-image: url(../images/dock/layout.gif);
+	background-image: url(../images/dock/layout.png);
 }
 
 .lfr-dock li.page-settings a {
-	background-image: url(../images/dock/page_settings.gif);
+	background-image: url(../images/dock/page_settings.png);
 }
 
 .lfr-dock li.my-places a {
-	background-image: url(../images/dock/my_places.gif);
+	background-image: url(../images/dock/my_places.png);
 }
 
 .lfr-dock li.my-places {
@@ -173,7 +173,7 @@
 }
 
 .js .lfr-dock.interactive-mode ul {
-	background: url(../images/dock/menu_bg.gif) no-repeat 0 0;
+	background: url(../images/dock/menu_bg.png) no-repeat 0 0;
 	border-left: 20px solid #DAE3EF;
 	display: none;
 	float: none;

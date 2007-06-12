@@ -184,7 +184,7 @@ response.setContentType(Constants.TEXT_CSS);
 }
 
 .js .lfr-dock.interactive-mode ul {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bg.gif) no-repeat 0 0;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bg.png) no-repeat 0 0;
 	display: none;
 	float: none;
 }
@@ -296,16 +296,21 @@ response.setContentType(Constants.TEXT_CSS);
 }
 
 .js .interactive-mode .my-places .show-my-places ul li.public a.add-page, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page {
-	background: none;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/page_settings.png) no-repeat;
 	border: none;
+	display: block;
+	font-size: 0;
+	height: 16px;
+	padding: 0;
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 3px;
+	text-indent: -9999em;
+	top: 3px;
+	width: 16px;
 }
-
 .js .interactive-mode .my-places .show-my-places ul li.public a.add-page:hover, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page:hover {
-	background: none;
-	border: none;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/page_settings.png) no-repeat;
+	padding: 0;
 }
 
 .ie6.js .lfr-dock.interactive-mode {
