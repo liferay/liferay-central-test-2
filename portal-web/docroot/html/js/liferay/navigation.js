@@ -42,24 +42,60 @@ Liferay.Navigation = new Class({
 		var addBlock = jQuery('<li>' + instance._enterPage + '</li>');
 
 		var blockInput = addBlock.find('input');
-
-		addBlock.find('.cancel-page').click(instance._cancelPage);
-
-		addBlock.find('.save-page').click(
-			function(event){
-				instance._savePage(event, this, instance);
-			}
-		);
-
-		addBlock.find('.enter-page input').keyup(
-			function(event){
-				instance._savePage(event, this, instance);
-			}
-		);
-
+		
 		navItem.find('ul:first').append(addBlock);
+		
+		var savePage = addBlock.find('.save-page');
+		var cancelPage = addBlock.find('.cancel-page');
+		var currentInput = addBlock.find('.enter-page input');
+		
+		var pageParents = jQuery(document);
 
+		var pageBlur = function(internalEvent) {
+			var currentEl = jQuery(internalEvent.target);
+			var liParent = currentEl.parents('ul:eq(0)');
+	
+			if ((liParent.length == 0) && !currentEl.is('li') && !currentEl.parents('#add-page').length) {
+				cancelPage.trigger('click');
+			}
+		};
+		
+		pageParents.click(pageBlur);
+
+		cancelPage.click(
+			function(event) {
+				instance._cancelAddingPage(event, addBlock);
+				pageParents.unbind('click', pageBlur);
+			}
+		);
+
+		savePage.click(
+			function(event){
+				instance._savePage(event, this, instance);
+				pageParents.unbind('click', pageBlur);
+			}
+		);
+
+		currentInput.keyup(
+			function(event){
+				if (event.keyCode == 13) {
+					savePage.trigger('click');
+				}
+				else if (event.keyCode == 27) {
+					cancelPage.trigger('click');
+				} else {
+					return;
+				}
+				
+				pageParents.unbind('click', pageBlur);
+			}
+		);
 		blockInput[0].focus();
+	},
+	
+	_cancelAddingPage: function(event, obj) {
+		var instance = this;
+		obj.remove();
 	},
 
 	_cancelPage: function(event, obj, oldName) {
@@ -161,7 +197,7 @@ Liferay.Navigation = new Class({
 					return false;
 				}
 			);
-
+			
 			currentSpan.click(
 				function() {
 					var span = jQuery(this);
@@ -178,7 +214,6 @@ Liferay.Navigation = new Class({
 
 					var pageBlur = function(event) {
 						event.stopPropagation();
-
 						if (!jQuery(this).is('li')) {
 							cancelPage.trigger('click');
 						}
