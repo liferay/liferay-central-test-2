@@ -636,14 +636,24 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<td nowrap>
 
 										<%
-										String parentFriendlyURL = group.getFriendlyURL();
+										StringMaker friendlyURLBase = new StringMaker();
+										friendlyURLBase.append(PortalUtil.getPortalURL(request));
 
-										if (Validator.isNull(parentFriendlyURL)) {
-											parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
+										String virtualHost = selLayout.getLayoutSet().getVirtualHost();
+
+										if (Validator.isNull(virtualHost) || (friendlyURLBase.indexOf(virtualHost) == -1)) {
+											friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
+
+											String parentFriendlyURL = group.getFriendlyURL();
+											if (Validator.isNull(parentFriendlyURL)) {
+												parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
+											}
+
+											friendlyURLBase.append(parentFriendlyURL);
 										}
 										%>
 
-										<%= PortalUtil.getPortalURL(request) %><%= group.getPathFriendlyURL(privateLayout, themeDisplay) %><%= parentFriendlyURL %>
+										<%= friendlyURLBase.toString() %>
 
 										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" /> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 									</td>
