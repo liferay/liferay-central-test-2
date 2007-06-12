@@ -73,7 +73,7 @@ alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN;
 update Group_ set liveGroupId = 0;
-update Group_ set friendlyURL = '' where className = 'com.liferay.portal.model.User';
+update Group_ set friendlyURL = '' where classNameId = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
 
 alter_column_type Groups_Orgs groupId LONG;
@@ -265,7 +265,7 @@ alter_column_type PollsQuestion groupId LONG;
 alter table PollsVote add voteId LONG;
 alter_column_type PollsVote questionId LONG;
 
-alter_column_type Portlet id_ LONG;
+alter table Portlet add id_ LONG;
 
 alter table PortletPreferences add portletPreferencesId LONG;
 alter table PortletPreferences add ownerType INTEGER;
@@ -363,44 +363,6 @@ create table SCProductVersion (
 	changeLog STRING null,
 	downloadPageURL VARCHAR(1024) null,
 	directDownloadURL VARCHAR(1024) null,
-	repoStoreArtifact BOOLEAN
-);
-
-create table SCLicenses_SCProductEntries (
-	productEntryId LONG,
-	licenseId LONG,
-	primary key (productEntryId, licenseId)
-);
-
-create table SCProductEntry (
-	productEntryId LONG primary key,
-	groupId LONG,
-	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	type_ VARCHAR(75) null,
-	shortDescription STRING null,
-	longDescription STRING null,
-	pageURL VARCHAR(75) null,
-	repoGroupId VARCHAR(75) null,
-	repoArtifactId VARCHAR(75) null
-);
-
-create table SCProductVersion (
-	productVersionId LONG primary key,
-	companyId VARCHAR(75) not null,
-	userId VARCHAR(75) not null,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	productEntryId LONG,
-	version VARCHAR(75) null,
-	changeLog STRING null,
-	downloadPageURL VARCHAR(75) null,
-	directDownloadURL VARCHAR(75) null,
 	repoStoreArtifact BOOLEAN
 );
 
