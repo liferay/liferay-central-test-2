@@ -39,6 +39,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -141,8 +143,10 @@ public class GetFileAction extends PortletAction {
 					companyId, userId, folderId, name);
 			}
 
+			String contentType = _MIME_TYPES.getContentType(name);
+
 			ServletResponseUtil.sendFile(
-				res, fileEntry.getTitleWithExtension(), is);
+				res, fileEntry.getTitleWithExtension(), is, contentType);
 		}
 		catch (PortalException pe) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND, pe.getMessage());
@@ -151,5 +155,8 @@ public class GetFileAction extends PortletAction {
 			ServletResponseUtil.cleanUp(is);
 		}
 	}
+
+	private static final MimetypesFileTypeMap _MIME_TYPES =
+			new MimetypesFileTypeMap();
 
 }
