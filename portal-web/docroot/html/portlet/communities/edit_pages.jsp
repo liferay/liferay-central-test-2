@@ -637,6 +637,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 										<%
 										StringMaker friendlyURLBase = new StringMaker();
+
 										friendlyURLBase.append(PortalUtil.getPortalURL(request));
 
 										String virtualHost = selLayout.getLayoutSet().getVirtualHost();
@@ -645,6 +646,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 											friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
 
 											String parentFriendlyURL = group.getFriendlyURL();
+
 											if (Validator.isNull(parentFriendlyURL)) {
 												parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
 											}
