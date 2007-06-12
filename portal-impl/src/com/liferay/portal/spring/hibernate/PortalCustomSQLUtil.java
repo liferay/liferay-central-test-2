@@ -43,7 +43,7 @@ public class PortalCustomSQLUtil
 	public PortalCustomSQLUtil() throws SQLException {
 		super(HibernateUtil.getConnection(),
 			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
-			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL));
+			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNOTNULL));
 	}
 
 	protected String[] getConfigs() {
