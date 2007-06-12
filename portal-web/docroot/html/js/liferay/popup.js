@@ -28,7 +28,7 @@
 				jQuery.browser.version.number() < 7 &&
 				$.Popup.count() == 0) {
 
-				jQuery("select").css("visibility", "");
+				jQuery("select").css("visibility", "visible");
 			}
 		},
 
@@ -122,7 +122,8 @@
 				jQuery.browser.version.number("round") < 7 &&
 				$.Popup.count() == 1) {
 
-				jQuery("select").not(".popup select").css("visibility", "hidden");
+				jQuery('select').css('visibility', 'hidden');
+				jPopup.find('select').css('visibility', 'visible');
 			}
 
 			if (jAlertMsgs.find(".popup").length == 1) {
