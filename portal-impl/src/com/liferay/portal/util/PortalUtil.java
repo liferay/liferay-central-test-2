@@ -602,14 +602,15 @@ public class PortalUtil {
 				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
-			// For the current layoutSet use the virtual host only if its
-			// currently being used for this request
+			// Use the layout set's virtual host setting only if the layout set
+			// is already used for the current request
 
-			long currentLayoutSetId =
-					themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
-			
-			if ((layoutSet.getLayoutSetId() != currentLayoutSetId) ||
+			long curLayoutSetId =
+				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+
+			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
 					(portalURL.startsWith(themeDisplay.getURLPortal()))) {
+
 				return portalURL + getPathContext() + layoutFriendlyURL;
 			}
 		}
