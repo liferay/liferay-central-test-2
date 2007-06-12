@@ -20,52 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.mail.model;
-
-import java.io.Serializable;
-
-import java.sql.Types;
+package com.liferay.portal.upgrade.util;
 
 /**
- * <a href="CyrusVirtual.java.html"><b><i>View Source</i></b></a>
+ * <a href="SkipUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CyrusVirtual implements Serializable {
+public class SkipUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public static String TABLE_NAME = "CyrusVirtual";
+	public SkipUpgradeColumnImpl(int pos, Integer oldColumnType) {
+		super(pos);
 
-	public static Object[][] TABLE_COLUMNS = {
-		{"emailAddress", new Integer(Types.VARCHAR)},
-		{"userId", new Integer(Types.BIGINT)}
-	};
-
-	public CyrusVirtual() {
+		_oldColumnType = oldColumnType;
 	}
 
-	public CyrusVirtual(String emailAddress, long userId) {
-		_emailAddress = emailAddress;
-		_userId = userId;
+	public SkipUpgradeColumnImpl(String name, Integer oldColumnType) {
+		super(name);
+
+		_oldColumnType = oldColumnType;
 	}
 
-	public String getEmailAddress() {
-		return _emailAddress;
+	public Integer getOldColumnType(Integer defaultType) {
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
+		}
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		_emailAddress = emailAddress;
+	public Integer getNewColumnType(Integer defaultType) {
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
+		}
 	}
 
-	public long getUserId() {
-		return _userId;
+	public Object getNewValue(Object oldValue) throws Exception {
+		return oldValue;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
-	}
-
-	private String _emailAddress;
-	private long _userId;
+	private Integer _oldColumnType;
 
 }

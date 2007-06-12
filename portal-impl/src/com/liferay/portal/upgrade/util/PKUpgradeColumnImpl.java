@@ -40,18 +40,18 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		this(0, false);
 	}
 
-	public PKUpgradeColumnImpl(String name, boolean trackValues) {
-		this(name, null, trackValues);
-	}
-
 	public PKUpgradeColumnImpl(int pos, boolean trackValues) {
 		this(pos, null, trackValues);
 	}
 
-	public PKUpgradeColumnImpl(String name, Integer oldColumnType,
+	public PKUpgradeColumnImpl(String name, boolean trackValues) {
+		this(name, null, trackValues);
+	}
+
+	public PKUpgradeColumnImpl(int pos, Integer oldColumnType,
 							   boolean trackValues) {
 
-		super(name);
+		super(pos);
 
 		_oldColumnType = oldColumnType;
 		_trackValues = trackValues;
@@ -61,10 +61,10 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
-	public PKUpgradeColumnImpl(int pos, Integer oldColumnType,
+	public PKUpgradeColumnImpl(String name, Integer oldColumnType,
 							   boolean trackValues) {
 
-		super(pos);
+		super(name);
 
 		_oldColumnType = oldColumnType;
 		_trackValues = trackValues;

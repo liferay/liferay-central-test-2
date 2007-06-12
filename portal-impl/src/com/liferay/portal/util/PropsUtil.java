@@ -644,6 +644,10 @@ public class PropsUtil {
 
 	public static final String REVERSE_AJAX_HEARTBEAT = "reverse.ajax.heartbeat";
 
+	// Scheduler
+
+	public static final String SCHEDULER_ENABLED = "scheduler.enabled";
+
 	// SMTP
 
 	public static final String SMTP_SERVER_ENABLED = "smtp.server.enabled";

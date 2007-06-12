@@ -31,21 +31,45 @@ package com.liferay.portal.upgrade.util;
 public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public SwapUpgradeColumnImpl(int pos, ValueMapper valueMapper) {
+		this(pos, null, valueMapper);
+	}
+
+	public SwapUpgradeColumnImpl(int pos, Integer oldColumnType,
+								 ValueMapper valueMapper) {
+
 		super(pos);
 
+		_oldColumnType = oldColumnType;
 		_valueMapper = valueMapper;
 	}
 
 	public SwapUpgradeColumnImpl(String name, ValueMapper valueMapper) {
+		this(name, null, valueMapper);
+	}
+
+	public SwapUpgradeColumnImpl(String name, Integer oldColumnType,
+								 ValueMapper valueMapper) {
+
 		super(name);
 
+		_oldColumnType = oldColumnType;
 		_valueMapper = valueMapper;
+	}
+
+	public Integer getOldColumnType(Integer defaultType) {
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
+		}
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		return _valueMapper.getNewValue(oldValue);
 	}
 
+	private Integer _oldColumnType;
 	private ValueMapper _valueMapper;
 
 }

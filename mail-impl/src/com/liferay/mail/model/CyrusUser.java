@@ -24,6 +24,8 @@ package com.liferay.mail.model;
 
 import java.io.Serializable;
 
+import java.sql.Types;
+
 /**
  * <a href="CyrusUser.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +33,13 @@ import java.io.Serializable;
  *
  */
 public class CyrusUser implements Serializable {
+
+	public static String TABLE_NAME = "CyrusUser";
+
+	public static Object[][] TABLE_COLUMNS = {
+		{"userId", new Integer(Types.BIGINT)},
+		{"password_", new Integer(Types.VARCHAR)}
+	};
 
 	public CyrusUser() {
 	}

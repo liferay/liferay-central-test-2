@@ -344,19 +344,23 @@ public class PortalInstances {
 		}
 
 		try {
-			Iterator itr = PortletLocalServiceUtil.getPortlets(
-				companyId).iterator();
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.SCHEDULER_ENABLED))) {
 
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Iterator itr = PortletLocalServiceUtil.getPortlets(
+					companyId).iterator();
 
-				String className = portlet.getSchedulerClass();
+				while (itr.hasNext()) {
+					Portlet portlet = (Portlet)itr.next();
 
-				if (portlet.isActive() && Validator.isNotNull(className)) {
-					Scheduler scheduler =
-						(Scheduler)InstancePool.get(className);
+					String className = portlet.getSchedulerClass();
 
-					scheduler.schedule();
+					if (portlet.isActive() && Validator.isNotNull(className)) {
+						Scheduler scheduler =
+							(Scheduler)InstancePool.get(className);
+
+						scheduler.schedule();
+					}
 				}
 			}
 		}

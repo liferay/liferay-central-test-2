@@ -22,9 +22,19 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.util.dao.DataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,6 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeCompany.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
+ * @author  Brian Wing Shun Chan
  *
  */
 public class UpgradeCompany extends UpgradeProcess {
@@ -51,33 +62,123 @@ public class UpgradeCompany extends UpgradeProcess {
 	private String _getUpdateSQL(
 		String tableName, long companyId, String webId) {
 
-		return "update " + tableName + " set companyId = '" + companyId +
-			"' where companyId = '" + companyId + "'";
+		String updateSQL =
+			"update " + tableName + " set companyId = '" + companyId +
+				"' where companyId = '" + webId + "'";
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(updateSQL);
+		}
+
+		return updateSQL;
+	}
+
+	private String[] _getWebIds() throws Exception {
+		List webIds = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(_GET_WEB_IDS);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String companyId = rs.getString("companyId");
+
+				webIds.add(companyId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return (String[])webIds.toArray(new String[0]);
 	}
 
 	private void _upgrade() throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
-		String[] webIds = new String[0];
+		String[] webIds = _getWebIds();
 
 		for (int i = 0; i < webIds.length; i++) {
 			String webId = webIds[i];
 
-			long companyId = 0;
-
-			for (int j = 0; j < _TABLES.length; j++) {
-				dbUtil.executeSQL(_getUpdateSQL(_TABLES[j], companyId, webId));
-			}
+			_upgradeWebId(webId);
 		}
 
 		for (int i = 0; i < _TABLES.length; i++) {
-			dbUtil.executeSQL(
-				"alter_column_type " + _TABLES + " companyId LONG");
+			String sql = "alter_column_type " + _TABLES[i] + " companyId LONG";
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(sql);
+			}
+
+			dbUtil.executeSQL(sql);
 		}
 	}
 
+	private void _upgradeWebId(String webId) throws Exception {
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		long companyId = CounterLocalServiceUtil.increment();
+
+		for (int j = 0; j < _TABLES.length; j++) {
+			dbUtil.executeSQL(_getUpdateSQL(_TABLES[j], companyId, webId));
+		}
+
+		long defaultUserId = CounterLocalServiceUtil.increment();
+		long defaultContactId = CounterLocalServiceUtil.increment();
+
+		long accountId = CounterLocalServiceUtil.increment();
+
+		dbUtil.executeSQL(
+			"update Account_ set accountId = '" + accountId +
+				"', companyId = '" + companyId + "', userId = '" +
+					defaultUserId + "', parentAccountId = 0 " +
+						"where accountId = '" + webId + "'");
+
+		dbUtil.executeSQL(
+			"update Company set companyId = '" + companyId + "', accountId = " +
+				accountId + " where companyId = '" + webId + "'");
+
+		dbUtil.executeSQL("alter_column_type Company companyId LONG");
+
+		dbUtil.executeSQL(
+			"update Contact_ set contactId = '" + defaultContactId +
+				"', companyId = '" + companyId + "', userId = '" +
+					defaultUserId + "', accountId = " + accountId +
+						", parentContactId = 0 where contactId = '" + webId +
+							".default'");
+
+		dbUtil.executeSQL(
+			"update Contact_ set accountId = '" + accountId +
+				"', parentContactId = 0 where accountId = '" + webId + "'");
+
+		dbUtil.executeSQL(
+			"update User_ set userId = '" + defaultUserId + "', companyId = '" +
+				companyId + "', defaultUser = TRUE, contactId = '" +
+					defaultContactId + "' where userId = '" + webId +
+						".default'");
+	}
+
+	private static final String _GET_WEB_IDS = "select companyId from Company";
+
 	private static final String[] _TABLES = new String[] {
-		"Address", "BlogsCategory"
+		"Account_", "Address", "BlogsCategory", "BlogsEntry", "BookmarksEntry",
+		"BookmarksFolder", "CalEvent", "Company", "Contact_", "DLFileEntry",
+		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
+		"EmailAddress", "Group_", "IGFolder", "IGImage", "JournalArticle",
+		"JournalContentSearch", "JournalStructure", "JournalTemplate", "Layout",
+		"LayoutSet", "MBCategory", "MBMessage", "Organization_", "Permission_",
+		"Phone", "PollsQuestion", "Portlet", "RatingsEntry", "Resource_",
+		"Role_", "ShoppingCart", "ShoppingCategory", "ShoppingCoupon",
+		"ShoppingItem", "ShoppingOrder", "Subscription", "UserGroup", "User_",
+		"UserTracker", "Website", "WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);

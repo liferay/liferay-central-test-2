@@ -44,6 +44,9 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.dialect.DB2Dialect;
 import org.hibernate.dialect.DerbyDialect;
 import org.hibernate.dialect.Dialect;
@@ -221,7 +224,13 @@ public abstract class DBUtil {
 			stmt = con.createStatement();
 
 			for (int i = 0; i < templates.length; i++) {
-				stmt.executeUpdate(buildSQL(templates[i]));
+				String sql = buildSQL(templates[i]);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(sql);
+				}
+
+				stmt.executeUpdate(sql);
 			}
 		}
 		finally {
@@ -545,5 +554,7 @@ public abstract class DBUtil {
 		" STRING", " TEXT", " VARCHAR",
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};
+
+	private static Log _log = LogFactory.getLog(DBUtil.class);
 
 }

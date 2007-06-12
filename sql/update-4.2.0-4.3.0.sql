@@ -100,6 +100,7 @@ alter table Image add height INTEGER;
 alter table Image add width INTEGER;
 alter table Image add size_ INTEGER;
 
+alter table JournalArticle add id_ LONG;
 alter table JournalArticle add resourcePrimKey LONG;
 alter_column_type JournalArticle groupId LONG;
 
@@ -124,8 +125,10 @@ create table JournalContentSearch (
 	articleId VARCHAR(75) null
 );
 
+alter table JournalStructure add id_ LONG;
 alter_column_type JournalStructure groupId LONG;
 
+alter table JournalTemplate add id_ LONG;
 alter_column_type JournalTemplate groupId LONG;
 alter table JournalTemplate add smallImageId LONG;
 
@@ -235,7 +238,6 @@ create table PasswordPolicyRel (
 	classNameId LONG,
 	classPK LONG
 );
-
 
 alter_column_type PasswordTracker passwordTrackerId LONG;
 
