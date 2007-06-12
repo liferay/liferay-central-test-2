@@ -72,7 +72,7 @@ Liferay.DynamicSelect = new Class({
 		var options = '';
 
 		if (selectNullable) {
-			options += '<option value=""></option>';
+			options += '<option value="0"></option>';
 		}
 
 		jQuery.each(
