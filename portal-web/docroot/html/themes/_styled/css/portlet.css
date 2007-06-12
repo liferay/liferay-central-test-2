@@ -44,13 +44,6 @@
 	padding: 10px 5px 25px 15px;
 }
 
-.ie6 .portlet-content {
-	height: 1%;
-}
-
-.ie6 .portlet-icons {
-}
-
 .portlet-icon-back {
 	background: url(../images/portlet/back.png) no-repeat 0 50%;
 	font-weight: bold;
