@@ -27,6 +27,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -38,8 +39,6 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
-
-import javax.activation.MimetypesFileTypeMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -57,6 +56,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetFileAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class GetFileAction extends PortletAction {
@@ -143,7 +143,7 @@ public class GetFileAction extends PortletAction {
 					companyId, userId, folderId, name);
 			}
 
-			String contentType = _MIME_TYPES.getContentType(name);
+			String contentType = MimeTypesUtil.getContentType(name);
 
 			ServletResponseUtil.sendFile(
 				res, fileEntry.getTitleWithExtension(), is, contentType);
@@ -155,8 +155,5 @@ public class GetFileAction extends PortletAction {
 			ServletResponseUtil.cleanUp(is);
 		}
 	}
-
-	private static final MimetypesFileTypeMap _MIME_TYPES =
-			new MimetypesFileTypeMap();
 
 }

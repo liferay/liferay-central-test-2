@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
@@ -101,7 +102,9 @@ public class GetMessageAttachmentAction extends PortletAction {
 				message.getCompanyId(), CompanyImpl.SYSTEM,
 				message.getAttachmentsDir() + "/" + fileName);
 
-			ServletResponseUtil.sendFile(res, fileName, is);
+			String contentType = MimeTypesUtil.getContentType(fileName);
+
+			ServletResponseUtil.sendFile(res, fileName, is, contentType);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);
