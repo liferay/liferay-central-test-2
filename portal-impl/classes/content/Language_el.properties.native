@@ -1237,7 +1237,6 @@ incoming-pop-server=Εισερχόμενος pop-server
 increment-version=Αύξηση Έκδοσης
 indexed=Με ευρετήριο
 industry=Βιομηχανία
-inherit-layout-and-content=Κληρονομήστε το σχεδιάγραμμα και το περιεχόμενο
 inherit-look-and-feel-from-the-private-root-node=Κληρονομήστε το βλέμμα και αισθανθείτε από τον ιδιωτικό κόμβο ρίζας;
 inherit-look-and-feel-from-the-public-root-node=Κληρονομήστε το βλέμμα και αισθανθείτε από το δημόσιο κόμβο ρίζας;
 inherit=Κληρονομήστε

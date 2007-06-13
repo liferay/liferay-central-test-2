@@ -1238,7 +1238,6 @@ incoming-pop-server=收件POP服务器
 increment-version=累增版本
 indexed=已索引
 industry=产业
-inherit-layout-and-content=继承布局和内容
 inherit-look-and-feel-from-the-private-root-node=从私有根结点继承样式
 inherit-look-and-feel-from-the-public-root-node=从公共根结点继承样式
 inherit=继承

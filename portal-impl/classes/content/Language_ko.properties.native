@@ -1237,7 +1237,6 @@ incoming-pop-server=들어오는POP서버
 increment-version=증분 버전
 indexed=색인을 붙이는
 industry=공업
-inherit-layout-and-content=배치와 내용을 상속하십시요
 inherit-look-and-feel-from-the-private-root-node=개인 뿌리 마디에서 품질을 상속하십시요?
 inherit-look-and-feel-from-the-public-root-node=공중 뿌리 마디에서 품질을 상속하십시요?
 inherit=상속하십시요

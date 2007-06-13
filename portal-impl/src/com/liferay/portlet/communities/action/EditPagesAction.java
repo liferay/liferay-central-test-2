@@ -431,32 +431,32 @@ public class EditPagesAction extends PortletAction {
 		byte[] iconBytes = FileUtil.getBytes(
 			uploadReq.getFile("iconFileName"));
 
-		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
+		boolean inheritFromParentLayoutId = ParamUtil.getBoolean(
+			uploadReq, "inheritFromParentLayoutId");
 
-		boolean inheritFromParent = ParamUtil.getBoolean(uploadReq, "inheritFromParent");
+		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add layout
-			Layout layout = null;
-			Layout parentLayout = null;
 
-			if (inheritFromParent && parentLayoutId > 0) {
-				parentLayout = LayoutLocalServiceUtil.getLayout(
-						groupId, privateLayout, parentLayoutId);
+			if (inheritFromParentLayoutId && (parentLayoutId > 0)) {
+				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
+					groupId, privateLayout, parentLayoutId);
 
-				layout = LayoutServiceUtil.addLayout(
-						groupId, privateLayout, parentLayoutId, name, title,
-						parentLayout.getType(), parentLayout.isHidden(), friendlyURL);
+				Layout layout = LayoutServiceUtil.addLayout(
+					groupId, privateLayout, parentLayoutId, name, title,
+					parentLayout.getType(), parentLayout.isHidden(),
+					friendlyURL);
 
 				LayoutServiceUtil.updateLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(), parentLayout.getTypeSettings());
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getLayoutId(), parentLayout.getTypeSettings());
 			}
 			else {
-				layout = LayoutServiceUtil.addLayout(
-						groupId, privateLayout, parentLayoutId, name, title, type,
-						hidden, friendlyURL);
+				Layout layout = LayoutServiceUtil.addLayout(
+					groupId, privateLayout, parentLayoutId, name, title, type,
+					hidden, friendlyURL);
 
 				if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 					LayoutTypePortlet layoutTypePortlet =

@@ -1238,7 +1238,6 @@ incoming-pop-server=Servidor de correo entrante POP
 increment-version=Incrementar número de versión
 indexed=Indexado
 industry=Industria
-inherit-layout-and-content=Herede la disposición y el contenido
 inherit-look-and-feel-from-the-private-root-node=Heredar apariencia del nodo raíz privado
 inherit-look-and-feel-from-the-public-root-node=Heredar apariencia del nodo raíz público
 inherit=Heredar

@@ -218,17 +218,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />setInheritFromParent(obj) {
-		if (obj.checked) {
-			document.<portlet:namespace />fm.<portlet:namespace />type.disabled = 'disabled';
-			document.<portlet:namespace />fm.<portlet:namespace />hiddenCheckbox.disabled = 'disabled';
-		}
-		else {
-			document.<portlet:namespace />fm.<portlet:namespace />type.disabled = '';
-			document.<portlet:namespace />fm.<portlet:namespace />hiddenCheckbox.disabled = '';
-		}
-	}
-
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
 		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
@@ -647,14 +636,26 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<td nowrap>
 
 										<%
-										String parentFriendlyURL = group.getFriendlyURL();
+										StringMaker friendlyURLBase = new StringMaker();
 
-										if (Validator.isNull(parentFriendlyURL)) {
-											parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
+										friendlyURLBase.append(PortalUtil.getPortalURL(request));
+
+										String virtualHost = selLayout.getLayoutSet().getVirtualHost();
+
+										if (Validator.isNull(virtualHost) || (friendlyURLBase.indexOf(virtualHost) == -1)) {
+											friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
+
+											String parentFriendlyURL = group.getFriendlyURL();
+
+											if (Validator.isNull(parentFriendlyURL)) {
+												parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
+											}
+
+											friendlyURLBase.append(parentFriendlyURL);
 										}
 										%>
 
-										<%= PortalUtil.getPortalURL(request) %><%= group.getPathFriendlyURL(privateLayout, themeDisplay) %><%= parentFriendlyURL %>
+										<%= friendlyURLBase.toString() %>
 
 										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" /> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 									</td>
@@ -786,24 +787,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							<br />
 						</td>
 					</tr>
-
-					<c:if test="<%= selLayout != null && selLayout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
-						<tr>
-							<td>
-								<liferay-ui:message key="inherit-layout-and-content" />
-							</td>
-							<td>
-								<liferay-ui:input-checkbox param="inheritFromParent" defaultValue="false" />
-
-								<script type="text/javascript">
-									jQuery('#<portlet:namespace />inheritFromParentCheckbox').click(function(){
-										<portlet:namespace />setInheritFromParent(this);
-									});
-								</script>
-							</td>
-						</tr>
-					</c:if>
-
 					<tr>
 						<td>
 							<liferay-ui:message key="type" />
@@ -832,6 +815,17 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
 						</td>
 					</tr>
+
+					<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
+						<tr>
+							<td>
+								<liferay-ui:message key="inherit" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="inheritFromParentLayoutId" defaultValue="false" />
+							</td>
+						</tr>
+					</c:if>
 
 					</table>
 

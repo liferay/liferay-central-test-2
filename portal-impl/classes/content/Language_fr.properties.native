@@ -1238,7 +1238,6 @@ incoming-pop-server=Serveur POP entrant
 increment-version=Incrémenter la version
 indexed=Classé
 industry=Industrie
-inherit-layout-and-content=Héritez de la disposition et du contenu
 inherit-look-and-feel-from-the-private-root-node=Héritez du regard et sentez du noeud privé de racine ?
 inherit-look-and-feel-from-the-public-root-node=Héritez du regard et sentez du noeud public de racine ?
 inherit=Héritez

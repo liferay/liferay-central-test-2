@@ -1236,7 +1236,6 @@ incoming-pop-server=入って来るPOP サーバー
 increment-version=増分版
 indexed=指示される
 industry=企業
-inherit-layout-and-content=レイアウト及び内容を受継ぎなさい
 inherit-look-and-feel-from-the-private-root-node=私用根ノードからの外観や質を受継ぎなさいか。
 inherit-look-and-feel-from-the-public-root-node=公共の根ノードからの外観や質を受継ぎなさいか。
 inherit=受継ぎなさい
