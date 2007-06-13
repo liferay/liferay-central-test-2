@@ -147,9 +147,12 @@ body.staging {
 
 .drop-area {
 	background-color: #000;
-	filter: alpha(opacity=10);
 	font-size: 0;
 	opacity: .10;
+}
+
+.ie .drop-area {
+	filter: alpha(opacity=10);
 }
 
 .drop-position-top {
