@@ -274,14 +274,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_loadFromServletContext = loadFromServletContext;
 	}
 
-	public boolean isFileStorageEnabled() {
-		return _fileStorageEnabled;
-	}
-
-	public void setFileStorageEnabled(boolean fileStorageEnabled) {
-		_fileStorageEnabled = fileStorageEnabled;
-	}
-
 	public String getVelocityResourceListener() {
 		if (_loadFromServletContext) {
 			return VelocityResourceListener.SERVLET_SEPARATOR;
@@ -416,6 +408,5 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
 	private boolean _loadFromServletContext;
-	private boolean _fileStorageEnabled;
 
 }

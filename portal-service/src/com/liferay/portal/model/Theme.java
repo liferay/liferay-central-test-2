@@ -119,10 +119,6 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public void setLoadFromServletContext(boolean loadFromServletContext);
 
-	public boolean isFileStorageEnabled();
-
-	public void setFileStorageEnabled(boolean fileStorageEnabled);
-
 	public String getVelocityResourceListener();
 
 }
