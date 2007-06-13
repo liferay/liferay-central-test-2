@@ -133,6 +133,14 @@ for (int i = 0; i < results.size(); i++) {
 
 				<%= content %>
 			</c:when>
+			<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
+
+				<%
+				BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+				%>
+				
+				<%= entry.getContent() %>
+			</c:when>
 			<c:otherwise>
 				<%= className %> is not a valid type.
 			</c:otherwise>
