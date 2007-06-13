@@ -24,14 +24,9 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Phone;
-import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,14 +52,6 @@ public class UpgradePhone extends UpgradeProcess {
 	}
 
 	private void _upgrade() throws Exception {
-
-		// Phone
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), new ClassNameUpgradeColumnImpl());
-
-		upgradeTable.updateTable();
 
 		// Counter
 

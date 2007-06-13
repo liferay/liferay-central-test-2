@@ -22,13 +22,17 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeClassName;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeCompany;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeContact;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeOrganization;
+import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,18 +69,18 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 		// Upgrade all other tables
 
-		//upgrade(new UpgradeAddress());
+		upgrade(new UpgradeAddress());
 		//upgrade(new UpgradeBlogs());
 		//upgrade(new UpgradeBookmarks());
 		//upgrade(new UpgradeCalendar());
 		//upgrade(new UpgradeContact());
-		//upgrade(new UpgradeEmailAddress());
+		upgrade(new UpgradeEmailAddress());
 		//upgrade(new UpgradeOrgLabor());
 		//upgrade(new UpgradePasswordTracker());
-		//upgrade(new UpgradePhone());
+		upgrade(new UpgradePhone());
 		//upgrade(new UpgradePolls());
 		//upgrade(new UpgradeSubscription());
-		//upgrade(new UpgradeWebsite());
+		upgrade(new UpgradeWebsite());
 		//upgrade(new UpgradeWiki());
 	}
 
