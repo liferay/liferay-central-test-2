@@ -50,7 +50,6 @@ public class LayoutSetSoap implements Serializable {
 		soapModel.setLayoutSetId(model.getLayoutSetId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
-		soapModel.setUserId(model.getUserId());
 		soapModel.setPrivateLayout(model.getPrivateLayout());
 		soapModel.setLogo(model.getLogo());
 		soapModel.setLogoId(model.getLogoId());
@@ -109,14 +108,6 @@ public class LayoutSetSoap implements Serializable {
 
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
-	}
-
-	public long getUserId() {
-		return _userId;
-	}
-
-	public void setUserId(long userId) {
-		_userId = userId;
 	}
 
 	public boolean getPrivateLayout() {
@@ -210,7 +201,6 @@ public class LayoutSetSoap implements Serializable {
 	private long _layoutSetId;
 	private long _groupId;
 	private long _companyId;
-	private long _userId;
 	private boolean _privateLayout;
 	private boolean _logo;
 	private long _logoId;

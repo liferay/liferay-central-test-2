@@ -25,13 +25,13 @@ package com.liferay.portal.upgrade.v4_3_0;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -72,7 +72,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		ValueMapper folderIdMapper = new DefaultParentIdMapper(
+		ValueMapper folderIdMapper = new DefaultPKMapper(
 			pkUpgradeColumn.getValueMapper());
 
 		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(

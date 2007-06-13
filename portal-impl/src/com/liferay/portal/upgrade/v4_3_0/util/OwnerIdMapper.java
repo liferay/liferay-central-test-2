@@ -86,6 +86,10 @@ public class OwnerIdMapper implements ValueMapper {
 	public void appendException(Object exception) {
 	}
 
+	public int size() throws Exception {
+		return 0;
+	}
+
 	private ValueMapper _groupIdMapper;
 
 }

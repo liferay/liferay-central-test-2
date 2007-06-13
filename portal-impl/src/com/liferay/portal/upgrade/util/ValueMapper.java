@@ -37,4 +37,6 @@ public interface ValueMapper {
 
 	public void appendException(Object exception);
 
+	public int size() throws Exception;
+
 }

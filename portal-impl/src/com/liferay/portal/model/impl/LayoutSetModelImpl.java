@@ -56,7 +56,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			{ "layoutSetId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
 			{ "logo", new Integer(Types.BOOLEAN) },
 			{ "logoId", new Integer(Types.BIGINT) },
@@ -129,16 +128,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
-		}
-	}
-
-	public long getUserId() {
-		return _userId;
-	}
-
-	public void setUserId(long userId) {
-		if (userId != _userId) {
-			_userId = userId;
 		}
 	}
 
@@ -296,7 +285,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		clone.setLayoutSetId(getLayoutSetId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
 		clone.setPrivateLayout(getPrivateLayout());
 		clone.setLogo(getLogo());
 		clone.setLogoId(getLogoId());
@@ -361,7 +349,6 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private long _layoutSetId;
 	private long _groupId;
 	private long _companyId;
-	private long _userId;
 	private boolean _privateLayout;
 	private boolean _logo;
 	private long _logoId;

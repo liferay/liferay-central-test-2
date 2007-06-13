@@ -99,6 +99,10 @@ public class CompositePrimKeyMapper implements ValueMapper {
 	public void mapValue(Object oldValue, Object newValue) throws Exception {
 	}
 
+	public int size() throws Exception {
+		return 0;
+	}
+
 	private KeyValueMapperPair[] _kvms;
 
 }

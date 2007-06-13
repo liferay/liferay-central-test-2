@@ -54,7 +54,6 @@ public class LayoutSetJSONSerializer {
 		jsonObj.put("layoutSetId", model.getLayoutSetId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("privateLayout", model.isPrivateLayout());
 		jsonObj.put("logo", model.isLogo());
 		jsonObj.put("logoId", model.getLogoId());

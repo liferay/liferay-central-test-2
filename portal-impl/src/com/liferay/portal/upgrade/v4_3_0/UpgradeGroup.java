@@ -34,6 +34,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
@@ -42,7 +43,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
@@ -112,8 +112,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// Groups_Orgs
 
-		_groupIdMapper = new DefaultParentIdMapper(
-			pkUpgradeColumn.getValueMapper());
+		_groupIdMapper = new DefaultPKMapper(pkUpgradeColumn.getValueMapper());
 
 		_ownerIdMapper = new OwnerIdMapper(_groupIdMapper);
 

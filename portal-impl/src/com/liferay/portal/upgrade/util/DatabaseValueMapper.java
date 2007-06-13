@@ -56,4 +56,8 @@ public class DatabaseValueMapper implements ValueMapper {
 
 	}
 
+	public int size() throws Exception {
+		return 0;
+	}
+
 }

@@ -23,58 +23,51 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.upgrade.StagnantRowException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.liferay.util.GetterUtil;
 
 /**
- * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultPKMapper.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
  */
-public class MemoryValueMapper implements ValueMapper {
+public class DefaultPKMapper implements ValueMapper {
 
-	public MemoryValueMapper() {
-		this(new HashSet());
-	}
-
-	public MemoryValueMapper(Set exceptions) {
-		_map = new HashMap();
-		_exceptions = exceptions;
+	public DefaultPKMapper(ValueMapper valueMapper) {
+		_valueMapper = valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Object value = _map.get(oldValue);
+		String oldValueString = GetterUtil.getString(
+			String.valueOf(oldValue));
 
-		if (value == null) {
-			if (_exceptions.contains(oldValue)) {
-				value = oldValue;
+		if (oldValueString.equals("-1") || oldValueString.equals("0") ||
+			oldValueString.equals("")) {
+
+			return new Long(0);
+		}
+		else {
+			try {
+				return _valueMapper.getNewValue(oldValue);
 			}
-			else {
-				throw new StagnantRowException(String.valueOf(oldValue));
+			catch (StagnantRowException sre) {
+				return new Long(0);
 			}
 		}
-
-		return value;
 	}
 
 	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_map.put(oldValue, newValue);
+		_valueMapper.mapValue(oldValue, newValue);
 	}
 
 	public void appendException(Object exception) {
-		_exceptions.add(exception);
+		_valueMapper.appendException(exception);
 	}
 
 	public int size() throws Exception {
-		return _map.size();
+		return _valueMapper.size();
 	}
 
-	private Map _map;
-	private Set _exceptions;
+	private ValueMapper _valueMapper;
 
 }

@@ -25,6 +25,8 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="ClassNameUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,12 +37,20 @@ public class ClassNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ClassNameUpgradeColumnImpl() {
 		super("classNameId");
+
+		_oldColumnType = new Integer(Types.VARCHAR);
+	}
+
+	public Integer getOldColumnType(Integer defaultType) {
+		return _oldColumnType;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		String className = (String)oldValue;
 
-		return String.valueOf(PortalUtil.getClassNameId(className));
+		return new Long(PortalUtil.getClassNameId(className));
 	}
+
+	private Integer _oldColumnType;
 
 }

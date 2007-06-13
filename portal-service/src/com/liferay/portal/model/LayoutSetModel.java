@@ -61,10 +61,6 @@ public interface LayoutSetModel extends BaseModel {
 
 	public void setCompanyId(long companyId);
 
-	public long getUserId();
-
-	public void setUserId(long userId);
-
 	public boolean getPrivateLayout();
 
 	public boolean isPrivateLayout();

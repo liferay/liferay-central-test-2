@@ -204,7 +204,6 @@
 		<field name="layoutSetId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
 		<field name="privateLayout" type="boolean" />
 		<field name="logo" type="boolean" />
 		<field name="logoId" type="long" />

@@ -20,35 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
+
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.GetterUtil;
+
+import java.sql.Types;
 
 /**
- * <a href="SkipUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SkipUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public SkipUpgradeColumnImpl(int pos, Integer oldColumnType) {
-		super(pos);
+	public ClassPKUpgradeColumnImpl(TempUpgradeColumnImpl classNameIdColumn,
+									String className, ValueMapper valueMapper,
+									boolean isLong) {
 
-		_oldColumnType = oldColumnType;
-	}
+		super("classPK");
 
-	public SkipUpgradeColumnImpl(String name, Integer oldColumnType) {
-		super(name);
-
-		_oldColumnType = oldColumnType;
+		_oldColumnType = new Integer(Types.VARCHAR);
+		_classNameIdColumn = classNameIdColumn;
+		_classNameId = PortalUtil.getClassNameId(className);
+		_valueMapper = valueMapper;
+		_isLong = isLong;
 	}
 
 	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
-		}
+		return _oldColumnType;
 	}
 
 	public Integer getNewColumnType(Integer defaultType) {
@@ -56,9 +60,26 @@ public class SkipUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		return oldValue;
+		Long classNameIdObj = (Long)_classNameIdColumn.getTemp();
+
+		if (classNameIdObj.longValue() == _classNameId) {
+			if (_isLong) {
+				return _valueMapper.getNewValue(
+					new Long(GetterUtil.getLong((String)oldValue)));
+			}
+			else {
+				return _valueMapper.getNewValue(oldValue);
+			}
+		}
+		else {
+			return oldValue;
+		}
 	}
 
 	private Integer _oldColumnType;
+	private TempUpgradeColumnImpl _classNameIdColumn;
+	private long _classNameId;
+	private ValueMapper _valueMapper;
+	private boolean _isLong;
 
 }

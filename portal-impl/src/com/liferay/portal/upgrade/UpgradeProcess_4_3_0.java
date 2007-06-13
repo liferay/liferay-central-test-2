@@ -22,8 +22,13 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.upgrade.v4_3_0.UpgradeClassName;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeCompany;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeContact;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeOrganization;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,6 +37,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeProcess_4_3_0.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeProcess_4_3_0 extends UpgradeProcess {
@@ -49,9 +55,12 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		// Upgrade major tables
 
 		upgrade(new UpgradeCompany());
-		//upgrade(new UpgradeResource());
+		upgrade(new UpgradeResource());
+		upgrade(new UpgradeClassName());
 		upgrade(new UpgradeUser());
-		//upgrade(new UpgradeUserGroup());
+		upgrade(new UpgradeContact());
+		upgrade(new UpgradeUserGroup());
+		upgrade(new UpgradeOrganization());
 		//upgrade(new UpgradeGroup());
 
 		// Upgrade all other tables

@@ -24,19 +24,26 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.AddressImpl;
+import com.liferay.portal.model.impl.EmailAddressImpl;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.impl.PhoneImpl;
+import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.DefaultParentIdMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 
 import java.sql.Types;
@@ -75,7 +82,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		ValueMapper organizationIdMapper = new DefaultParentIdMapper(
+		ValueMapper organizationIdMapper = new DefaultPKMapper(
 			pkUpgradeColumn.getValueMapper());
 
 		UpgradeColumn upgradeParentOrganizationIdColumn =
@@ -90,6 +97,37 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		UpgradeColumn upgradeOrganizationIdColumn = new SwapUpgradeColumnImpl(
 			"organizationId", organizationIdMapper);
+
+		// Address
+
+		TempUpgradeColumnImpl classNameIdColumn =
+			new TempUpgradeColumnImpl("classNameId");
+
+		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
+			classNameIdColumn, Organization.class.getName(),
+			organizationIdMapper, true);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
+			classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
+		// EmailAddress
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
+			classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
+		// Group
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS,
+			classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
 
 		// Groups_Orgs
 
@@ -117,11 +155,27 @@ public class UpgradeOrganization extends UpgradeProcess {
 			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
 			upgradeOrganizationIdColumn);
 
+		// Phone
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
+			classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
 		// Users_Orgs
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_USERS_ORGS, _COLUMNS_USERS_ORGS,
 			upgradeOrganizationIdColumn);
+
+		upgradeTable.updateTable();
+
+		// Website
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 

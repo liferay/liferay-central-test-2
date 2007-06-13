@@ -131,39 +131,31 @@ public class UpgradeCompany extends UpgradeProcess {
 			dbUtil.executeSQL(_getUpdateSQL(_TABLES[j], companyId, webId));
 		}
 
-		long defaultUserId = CounterLocalServiceUtil.increment();
-		long defaultContactId = CounterLocalServiceUtil.increment();
-
 		long accountId = CounterLocalServiceUtil.increment();
 
 		dbUtil.executeSQL(
 			"update Account_ set accountId = '" + accountId +
-				"', companyId = '" + companyId + "', userId = '" +
-					defaultUserId + "', parentAccountId = 0 " +
-						"where accountId = '" + webId + "'");
+				"', companyId = '" + companyId + "' where accountId = '" +
+					webId + "'");
 
 		dbUtil.executeSQL(
-			"update Company set companyId = '" + companyId + "', accountId = " +
-				accountId + " where companyId = '" + webId + "'");
+			"update Company set accountId = " + accountId + " where webId = '" +
+				webId + "'");
 
 		dbUtil.executeSQL("alter_column_type Company companyId LONG");
 
 		dbUtil.executeSQL(
-			"update Contact_ set contactId = '" + defaultContactId +
-				"', companyId = '" + companyId + "', userId = '" +
-					defaultUserId + "', accountId = " + accountId +
-						", parentContactId = 0 where contactId = '" + webId +
-							".default'");
+			"update Contact_ set companyId = '" + companyId +
+				"', accountId = " + accountId + " where contactId = '" + webId +
+					".default'");
 
 		dbUtil.executeSQL(
 			"update Contact_ set accountId = '" + accountId +
-				"', parentContactId = 0 where accountId = '" + webId + "'");
+				"' where accountId = '" + webId + "'");
 
 		dbUtil.executeSQL(
-			"update User_ set userId = '" + defaultUserId + "', companyId = '" +
-				companyId + "', defaultUser = TRUE, contactId = '" +
-					defaultContactId + "' where userId = '" + webId +
-						".default'");
+			"update User_ set companyId = '" + companyId +
+				"', defaultUser = TRUE where userId = '" + webId + ".default'");
 	}
 
 	private static final String _GET_WEB_IDS = "select companyId from Company";

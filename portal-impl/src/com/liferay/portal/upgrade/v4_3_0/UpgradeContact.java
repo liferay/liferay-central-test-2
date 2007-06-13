@@ -22,24 +22,30 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.model.impl.WebsiteImpl;
+import com.liferay.portal.tools.comparator.ColumnsComparator;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl;
 
 import java.sql.Types;
+
+import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,12 +54,20 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeContact.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeContact extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
+
+		// Sort the User_ table's columns to ensure the screenName column is
+		// populated before the contactId column
+
+		_columnsUser = (Object[][])UserImpl.TABLE_COLUMNS.clone();
+
+		Arrays.sort(_columnsUser, new ColumnsComparator("screenName"));
 
 		try {
 			_upgrade();
@@ -67,41 +81,28 @@ public class UpgradeContact extends UpgradeProcess {
 
 		// Contact_
 
-		PKUpgradeColumnImpl upgradeColumn =
-			new PKUpgradeColumnImpl(0, new Integer(Types.VARCHAR), true);
+		PKUpgradeColumnImpl upgradeColumn = new PKUpgradeColumnImpl(
+			0, new Integer(Types.VARCHAR), true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS, upgradeColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper contactIdMapper = upgradeColumn.getValueMapper();
-
-		TempUpgradeColumnImpl upgradeUserIdColumn = new TempUpgradeColumnImpl(
-			"userId");
-
-		UpgradeColumn upgradeContactIdColumn = new ContactIdUpgradeColumnImpl(
-			"contactId", upgradeUserIdColumn, contactIdMapper);
-
-		TempUpgradeColumnImpl upgradeClassNameColumn =
-			new TempUpgradeColumnImpl("className");
-
-		UpgradeColumn upgradeClassPKColumn = new ContactIdUpgradeColumnImpl(
-			"classPK", upgradeClassNameColumn, contactIdMapper);
-
-		// User_
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeContactIdColumn);
-
-		upgradeTable.updateTable();
+		ValueMapper contactIdMapper = new DefaultPKMapper(
+			upgradeColumn.getValueMapper());
 
 		// Address
 
+		TempUpgradeColumnImpl classNameIdColumn =
+			new TempUpgradeColumnImpl("classNameId");
+
+		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
+			classNameIdColumn, Contact.class.getName(), contactIdMapper, false);
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			upgradeClassNameColumn, upgradeClassPKColumn);
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -109,7 +110,7 @@ public class UpgradeContact extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
-			upgradeClassNameColumn, upgradeClassPKColumn);
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -117,7 +118,21 @@ public class UpgradeContact extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			upgradeClassNameColumn, upgradeClassPKColumn);
+			classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
+		// User_
+
+		TempUpgradeColumnImpl upgradeScreenNameColumn =
+			new TempUpgradeColumnImpl("screenName");
+
+		UpgradeColumn upgradeContactIdColumn = new ContactIdUpgradeColumnImpl(
+			upgradeScreenNameColumn, contactIdMapper);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			UserImpl.TABLE_NAME, _columnsUser, upgradeScreenNameColumn,
+			upgradeContactIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -125,7 +140,7 @@ public class UpgradeContact extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			upgradeClassNameColumn, upgradeClassPKColumn);
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -138,5 +153,7 @@ public class UpgradeContact extends UpgradeProcess {
 		"alter_column_type Contact_ contactId LONG";
 
 	private static Log _log = LogFactory.getLog(UpgradeContact.class);
+
+	private Object[][] _columnsUser;
 
 }

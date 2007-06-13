@@ -449,7 +449,6 @@ create table LayoutSet (
 	layoutSetId LONG primary key,
 	groupId LONG,
 	companyId LONG,
-	userId LONG,
 	privateLayout BOOLEAN,
 	logo BOOLEAN,
 	logoId LONG,

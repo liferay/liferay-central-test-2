@@ -24,11 +24,12 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.mail.model.CyrusVirtual;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.EmailAddressImpl;
-import com.liferay.portal.model.impl.LayoutSetImpl;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.SubscriptionImpl;
@@ -39,13 +40,16 @@ import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SkipUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
@@ -86,6 +90,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeUser extends UpgradeProcess {
@@ -113,7 +118,8 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		ValueMapper userIdMapper = upgradeColumn.getValueMapper();
+		ValueMapper userIdMapper = new DefaultPKMapper(
+			upgradeColumn.getValueMapper());
 
 		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
 			"userId", new Integer(Types.VARCHAR), userIdMapper);
@@ -128,16 +134,12 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// Address
 
-		UpgradeColumn upgradeClassNameIdColumn = new SkipUpgradeColumnImpl(
-			"classNameId", new Integer(Types.VARCHAR));
-
-		UpgradeColumn upgradeClassPKColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn skipUpgradeClassPKColumn = new SkipUpgradeColumnImpl(
 			"classPK", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeClassNameIdColumn,
-			upgradeClassPKColumn);
+			upgradeUserIdColumn, skipUpgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -254,8 +256,21 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeClassNameIdColumn,
-			upgradeClassPKColumn);
+			upgradeUserIdColumn, skipUpgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
+		// Group
+
+		TempUpgradeColumnImpl classNameIdColumn =
+			new TempUpgradeColumnImpl("classNameId");
+
+		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
+			classNameIdColumn, User.class.getName(), userIdMapper, false);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS,
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -298,14 +313,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// LayoutSet
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			LayoutSetImpl.TABLE_NAME, LayoutSetImpl.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
@@ -365,8 +372,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeClassNameIdColumn,
-			upgradeClassPKColumn);
+			upgradeUserIdColumn, skipUpgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -393,8 +399,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			RatingsEntryImpl.TABLE_NAME, RatingsEntryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeClassNameIdColumn,
-			upgradeClassPKColumn);
+			upgradeUserIdColumn, skipUpgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -448,8 +453,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			SubscriptionImpl.TABLE_NAME, SubscriptionImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeClassNameIdColumn,
-			upgradeClassPKColumn);
+			upgradeUserIdColumn, skipUpgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -510,8 +514,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeClassNameIdColumn,
-			upgradeClassPKColumn);
+			upgradeUserIdColumn, skipUpgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -590,8 +593,8 @@ public class UpgradeUser extends UpgradeProcess {
 		"BookmarksFolder", "CalEvent", "Contact_", "CyrusUser", "CyrusVirtual",
 		"DLFileEntry", "DLFileRank", "DLFileShortcut", "DLFileVersion",
 		"DLFolder", "EmailAddress", "IGFolder", "IGImage", "JournalArticle",
-		"JournalStructure", "JournalTemplate", "LayoutSet", "MBCategory",
-		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker", "Phone",
+		"JournalStructure", "JournalTemplate", "MBCategory", "MBMessage",
+		"MBMessageFlag", "MBStatsUser", "PasswordTracker", "Phone",
 		"PollsQuestion", "PollsVote", "RatingsEntry", "ShoppingCart",
 		"ShoppingCategory", "ShoppingCoupon", "ShoppingItem", "ShoppingOrder",
 		"Subscription", "User_", "UserIdMapper", "Users_Groups", "Users_Orgs",

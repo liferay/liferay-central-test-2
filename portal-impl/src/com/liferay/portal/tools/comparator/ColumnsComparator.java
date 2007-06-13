@@ -20,41 +20,71 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0.util;
+package com.liferay.portal.tools.comparator;
 
-import com.liferay.portal.upgrade.util.ValueMapper;
+import java.util.Comparator;
 
 /**
- * <a href="DefaultParentIdMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ColumnsComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DefaultParentIdMapper implements ValueMapper {
+public class ColumnsComparator implements Comparator {
 
-	public DefaultParentIdMapper(ValueMapper valueMapper) {
-		_valueMapper = valueMapper;
+	public ColumnsComparator(String columnName) {
+		this(new String[] {columnName});
 	}
 
-	public Object getNewValue(Object oldValue) throws Exception {
-		if (oldValue.equals("-1") || oldValue.equals("0") ||
-			oldValue.equals("")) {
+	public ColumnsComparator(String[] columnNames) {
+		_columnNames = columnNames;
+	}
 
-			return new Long(0);
+	public int compare(Object obj1, Object obj2) {
+		Object[] column1 = (Object[])obj1;
+		Object[] column2 = (Object[])obj2;
+
+		String columnName1 = (String)column1[0];
+		String columnName2 = (String)column2[0];
+
+		int x = -1;
+
+		for (int i = 0; i < _columnNames.length; i++) {
+			if (_columnNames[i].equals(columnName1)) {
+				x = i;
+
+				break;
+			}
 		}
-		else {
-			return _valueMapper.getNewValue(oldValue);
+
+		int y = -1;
+
+		for (int i = 0; i < _columnNames.length; i++) {
+			if (_columnNames[i].equals(columnName2)) {
+				y = i;
+
+				break;
+			}
 		}
+
+		if ((x == -1) && (y > -1)) {
+			return 1;
+		}
+		else if ((x > -1) && (y == -1)) {
+			return -1;
+		}
+		else if ((x > -1) && (y > -1)) {
+			if (x < y) {
+				return -1;
+			}
+			else if (x > y) {
+				return 1;
+			}
+		}
+
+		return 0;
 	}
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_valueMapper.mapValue(oldValue, newValue);
-	}
-
-	public void appendException(Object exception) {
-		_valueMapper.appendException(exception);
-	}
-
-	private ValueMapper _valueMapper;
+	private String[] _columnNames;
 
 }

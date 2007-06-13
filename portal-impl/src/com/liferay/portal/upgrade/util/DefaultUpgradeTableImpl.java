@@ -55,13 +55,9 @@ public class DefaultUpgradeTableImpl
 								   UpgradeColumn upgradeColumn2,
 								   UpgradeColumn upgradeColumn3) {
 
-		super(tableName, columns);
-
-		_upgradeColumns = new UpgradeColumn[columns.length];
-
-		prepareUpgradeColumns(upgradeColumn1);
-		prepareUpgradeColumns(upgradeColumn2);
-		prepareUpgradeColumns(upgradeColumn3);
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			null);
 	}
 
 	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
@@ -69,6 +65,18 @@ public class DefaultUpgradeTableImpl
 								   UpgradeColumn upgradeColumn2,
 								   UpgradeColumn upgradeColumn3,
 								   UpgradeColumn upgradeColumn4) {
+
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			upgradeColumn4, null);
+	}
+
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4,
+								   UpgradeColumn upgradeColumn5) {
 
 		super(tableName, columns);
 
@@ -78,6 +86,7 @@ public class DefaultUpgradeTableImpl
 		prepareUpgradeColumns(upgradeColumn2);
 		prepareUpgradeColumns(upgradeColumn3);
 		prepareUpgradeColumns(upgradeColumn4);
+		prepareUpgradeColumns(upgradeColumn5);
 	}
 
 	public String getExportedData(ResultSet rs) throws Exception {

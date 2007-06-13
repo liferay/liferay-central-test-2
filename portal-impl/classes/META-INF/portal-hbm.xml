@@ -186,7 +186,6 @@
 		</id>
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="logo" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="logoId" type="com.liferay.util.dao.hibernate.LongType" />

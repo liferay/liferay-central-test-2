@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -31,38 +30,27 @@ import com.liferay.portal.upgrade.util.ValueMapper;
  * <a href="ContactIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class ContactIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ContactIdUpgradeColumnImpl(String name,
-									  TempUpgradeColumnImpl upgradeColumn,
-									  ValueMapper contactIdMapper) {
+	public ContactIdUpgradeColumnImpl(TempUpgradeColumnImpl upgradeColumn,
+									  ValueMapper valueMapper) {
 
-		super(name);
+		super("contactId");
 
-		_isContactId = name.equals("contactId");
 		_upgradeColumn = upgradeColumn;
-		_contactIdMapper = contactIdMapper;
+		_valueMapper = valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Object newValue = oldValue;
+		String userId = (String)_upgradeColumn.getTemp();
 
-		if (_isContactId) {
-			String userId = (String)_upgradeColumn.getTemp();
-
-			newValue = _contactIdMapper.getNewValue(userId);
-		}
-		else if (_upgradeColumn.getTemp().equals(Contact.class.getName())){
-			newValue = _contactIdMapper.getNewValue(oldValue);
-		}
-
-		return newValue;
+		return _valueMapper.getNewValue(userId);
 	}
 
-	private boolean _isContactId;
 	private TempUpgradeColumnImpl _upgradeColumn;
-	private ValueMapper _contactIdMapper;
+	private ValueMapper _valueMapper;
 
 }

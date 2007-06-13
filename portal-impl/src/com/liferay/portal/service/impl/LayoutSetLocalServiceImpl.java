@@ -63,7 +63,6 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
-		long userId = groupId;
 
 		long layoutSetId = CounterLocalServiceUtil.increment();
 
@@ -71,7 +70,6 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		layoutSet.setGroupId(groupId);
 		layoutSet.setCompanyId(group.getCompanyId());
-		layoutSet.setUserId(userId);
 		layoutSet.setPrivateLayout(privateLayout);
 		layoutSet.setThemeId(ThemeImpl.getDefaultRegularThemeId());
 		layoutSet.setColorSchemeId(

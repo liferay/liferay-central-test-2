@@ -1,3 +1,6 @@
+update Account_ set parentAccountId = '0';
+update Account_ set legalName = 'Liferay, Inc.' where legalName = 'Liferay, LLC';
+
 alter_column_type Address addressId LONG;
 alter_column_name Address className classNameId VARCHAR(75) null;
 alter_column_type Address typeId INTEGER;
@@ -34,6 +37,7 @@ alter table Company drop homeURL;
 alter_column_type Contact_ prefixId INTEGER;
 alter_column_type Contact_ suffixId INTEGER;
 alter_column_type Contact_ parentContactId LONG;
+update Contact_ set parentContactId = 0;
 
 alter_column_type Counter currentId LONG;
 
@@ -72,6 +76,7 @@ alter_column_name Group_ className classNameId VARCHAR(75) null;
 alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN;
+update Group_ set parentGroupId = 0;
 update Group_ set liveGroupId = 0;
 update Group_ set friendlyURL = '' where classNameId = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
@@ -143,6 +148,7 @@ alter table Layout add css VARCHAR(75) null;
 
 alter table LayoutSet add layoutSetId LONG;
 alter_column_type LayoutSet groupId LONG;
+alter table LayoutSet drop userId;
 alter table LayoutSet add logo BOOLEAN;
 alter table LayoutSet add logoId LONG;
 alter table LayoutSet add wapThemeId VARCHAR(75) null;
