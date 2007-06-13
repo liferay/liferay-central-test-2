@@ -582,6 +582,9 @@ public class ThemeLocalUtil {
 				theme.elementText("template-extension"),
 				themeModel.getTemplateExtension());
 
+			boolean fileStorageEnabled = GetterUtil.getBoolean(
+				theme.elementText("file-storage-enabled"), themeModel.isFileStorageEnabled());
+
 			themeModel.setName(name);
 			themeModel.setRootPath(rootPath);
 			themeModel.setTemplatesPath(templatesPath);
@@ -590,6 +593,7 @@ public class ThemeLocalUtil {
 			themeModel.setJavaScriptPath(javaScriptPath);
 			themeModel.setVirtualPath(virtualPath);
 			themeModel.setTemplateExtension(templateExtension);
+			themeModel.setFileStorageEnabled(fileStorageEnabled);
 
 			Element settingsEl = theme.element("settings");
 

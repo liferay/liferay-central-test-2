@@ -1682,6 +1682,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected byte[] exportTheme(LayoutSet layoutSet)
 		throws IOException, PortalException, SystemException {
 
+		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
+		String fileStorage = "";
+
+		if (themeLoader != null) {
+			fileStorage = themeLoader.getFileStorage().toString();
+		}
+
 		Theme theme = layoutSet.getTheme();
 
 		ZipWriter zipWriter = new ZipWriter();
@@ -1715,22 +1722,31 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return null;
 		}
 
-		File cssPath = new File(ctx.getRealPath(theme.getCssPath()));
+		File cssPath;
+		File imagesPath;
+		File javaScriptPath;
+		File templatesPath;
+
+		if (theme.isFileStorageEnabled() && Validator.isNotNull(fileStorage)) {
+			String themeName = theme.getName();
+
+			cssPath = new File(fileStorage + "/" + themeName + "/css");
+			imagesPath = new File(fileStorage + "/" + themeName + "/images");
+			javaScriptPath = new File(fileStorage + "/" + themeName + "/javascript");
+			templatesPath = new File(fileStorage + "/" + themeName + "/templates");
+		}
+		else {
+			cssPath = new File(ctx.getRealPath(theme.getCssPath()));
+			imagesPath = new File(ctx.getRealPath(theme.getImagesPath()));
+			javaScriptPath = new File(
+				ctx.getRealPath(theme.getJavaScriptPath()));
+			templatesPath = new File(
+				ctx.getRealPath(theme.getTemplatesPath()));
+		}
 
 		exportThemeFiles("css", cssPath, zipWriter);
-
-		File imagesPath = new File(ctx.getRealPath(theme.getImagesPath()));
-
 		exportThemeFiles("images", imagesPath, zipWriter);
-
-		File javaScriptPath = new File(
-			ctx.getRealPath(theme.getJavaScriptPath()));
-
 		exportThemeFiles("javascript", javaScriptPath, zipWriter);
-
-		File templatesPath = new File(
-			ctx.getRealPath(theme.getTemplatesPath()));
-
 		exportThemeFiles("templates", templatesPath, zipWriter);
 
 		return zipWriter.finish();
@@ -2431,10 +2447,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		lookAndFeelXML = StringUtil.replace(
 			lookAndFeelXML,
 			new String[] {
-				"[$GROUP_ID$]", "[$THEME_ID$]", "[$THEME_NAME$]"
+				"[$GROUP_ID$]", "[$THEME_ID$]", "[$THEME_NAME$]",
+				"[$FILE_STORAGE$]"
 			},
 			new String[] {
-				String.valueOf(layoutSet.getGroupId()), themeId, themeName
+				String.valueOf(layoutSet.getGroupId()), themeId, themeName,
+				(new Boolean(Validator.isNotNull(
+					themeLoader.getFileStorage()))).toString()
 			}
 		);
 

@@ -112,8 +112,8 @@ See the comments in the group-id element.
 The theme element contains the declarative data of a theme.
 -->
 <!ELEMENT theme (root-path?, templates-path?, css-path?, images-path?,
-javascript-path?, virtual-path?, template-extension?, settings?, wap-theme?,
-roles?, color-scheme*, layout-templates?)>
+javascript-path?, virtual-path?, template-extension?, file-storage-enabled?,
+settings?, wap-theme?, roles?, color-scheme*, layout-templates?)>
 
 <!--
 The id attribute specifies the unique key for a theme. For convenience, the id
@@ -208,7 +208,7 @@ The default value is "" which means this is not used.
 <!ELEMENT virtual-path (#PCDATA)>
 
 <!--
-The templates-extension value sets the file extension of the files located in
+The template-extension value sets the file extension of the files located in
 the templates directory. If you specify the value "jsp", then the portal will
 look for files such as portal_nav.jsp in the templates directory. If you specify
 the value "vm", then the portal will look for files such as portal_nav.vm in the
@@ -219,6 +219,15 @@ flexibility in the creation of themes.
 The default value is "vm".
 -->
 <!ELEMENT template-extension (#PCDATA)>
+
+<!--
+Set file-storage-enabled to true if the theme files are physically located
+somewhere else on the file system and were not deployed into the web
+application.
+
+The default value is "false".
+-->
+<!ELEMENT file-storage-enabled (#PCDATA)>
 
 <!--
 The settings element contain a list of settings or properties that are available
