@@ -42,10 +42,7 @@ var LayoutConfiguration = {
 
 			LayoutConfiguration.initialized = true;
 			
-			// Double foucus for IE bug
-			if (is_ie) {
-				document.getElementById("layout_configuration_content").focus();
-			}
+			jQuery('#layout_configuration_content').trigger('focus').addClass('focus');
 		}
 	},	
 
