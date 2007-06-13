@@ -1238,6 +1238,7 @@ incoming-pop-server=Usuário Entrante do PNF
 increment-version=Versão Do Incremento
 indexed=Posicionado
 industry=Indústria
+inherit-layout-and-content=Herde a disposição e o índice
 inherit-look-and-feel-from-the-private-root-node=Herde o olhar e sinta-o do nó confidencial da raiz?
 inherit-look-and-feel-from-the-public-root-node=Herde o olhar e sinta-o do nó público da raiz?
 inherit=Herde

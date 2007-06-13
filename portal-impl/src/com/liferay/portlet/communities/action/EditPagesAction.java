@@ -433,25 +433,43 @@ public class EditPagesAction extends PortletAction {
 
 		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
 
+		boolean inheritFromParent = ParamUtil.getBoolean(uploadReq, "inheritFromParent");
+
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add layout
+			Layout layout = null;
+			Layout parentLayout = null;
+			
+			if (inheritFromParent && parentLayoutId > 0) {
+				parentLayout = LayoutLocalServiceUtil.getLayout(
+						groupId, privateLayout, parentLayoutId);
 
-			Layout layout = LayoutServiceUtil.addLayout(
-				groupId, privateLayout, parentLayoutId, name, title, type,
-				hidden, friendlyURL);
-
-			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
-				LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet)layout.getLayoutType();
-
-				layoutTypePortlet.setLayoutTemplateId(
-					0, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID),
-					false);
-
+				layout = LayoutServiceUtil.addLayout(
+						groupId, privateLayout, parentLayoutId, name, title, 
+						parentLayout.getType(), parentLayout.isHidden(), friendlyURL);
+				
 				LayoutServiceUtil.updateLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					layout.getLayoutId(), layout.getTypeSettings());
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getLayoutId(), parentLayout.getTypeSettings());				
+			}
+			else {
+				layout = LayoutServiceUtil.addLayout(
+						groupId, privateLayout, parentLayoutId, name, title, type,
+						hidden, friendlyURL);
+
+				if (type.equals(LayoutImpl.TYPE_PORTLET)) {
+					LayoutTypePortlet layoutTypePortlet =
+						(LayoutTypePortlet)layout.getLayoutType();
+
+					layoutTypePortlet.setLayoutTemplateId(
+						0, PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_TEMPLATE_ID),
+						false);
+
+					LayoutServiceUtil.updateLayout(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getLayoutId(), layout.getTypeSettings());
+				}
 			}
 		}
 		else {
