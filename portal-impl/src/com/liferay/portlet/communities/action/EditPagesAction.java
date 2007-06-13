@@ -440,18 +440,18 @@ public class EditPagesAction extends PortletAction {
 			// Add layout
 			Layout layout = null;
 			Layout parentLayout = null;
-			
+
 			if (inheritFromParent && parentLayoutId > 0) {
 				parentLayout = LayoutLocalServiceUtil.getLayout(
 						groupId, privateLayout, parentLayoutId);
 
 				layout = LayoutServiceUtil.addLayout(
-						groupId, privateLayout, parentLayoutId, name, title, 
+						groupId, privateLayout, parentLayoutId, name, title,
 						parentLayout.getType(), parentLayout.isHidden(), friendlyURL);
-				
+
 				LayoutServiceUtil.updateLayout(
 						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(), parentLayout.getTypeSettings());				
+						layout.getLayoutId(), parentLayout.getTypeSettings());
 			}
 			else {
 				layout = LayoutServiceUtil.addLayout(

@@ -182,7 +182,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
-	
+
 	function <portlet:namespace />exportPages() {
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
@@ -794,7 +794,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							</td>
 							<td>
 								<liferay-ui:input-checkbox param="inheritFromParent" defaultValue="false" />
-								
+
 								<script type="text/javascript">
 									jQuery('#<portlet:namespace />inheritFromParentCheckbox').click(function(){
 										<portlet:namespace />setInheritFromParent(this);
@@ -803,7 +803,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							</td>
 						</tr>
 					</c:if>
-					
+
 					<tr>
 						<td>
 							<liferay-ui:message key="type" />
@@ -832,7 +832,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
 						</td>
 					</tr>
-					
+
 					</table>
 
 					<br />
