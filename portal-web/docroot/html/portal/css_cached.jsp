@@ -496,7 +496,8 @@ ul.gamma .tree-item-hover {
 }
 
 .liferay-table {
-	border-collapse: collapse
+	border-collapse: collapse;
+	clear: both;
 }
 
 .liferay-table tr td {
