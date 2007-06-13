@@ -8,15 +8,15 @@
 
 .portlet {
 	margin: 10px 0;
-	text-align: left;
 	padding-right: 10px;
+	text-align: left;
 }
 
 .portlet-topper {
 	background-position: right top;
 	margin-right: -10px;
-	position: relative;
 	padding-right: 40px;
+	position: relative;
 }
 
 .portlet-title {

@@ -157,6 +157,7 @@ public class PortletPreferencesSerializer {
 				Element prefEl = docFactory.createElement("preference");
 
 				Element nameEl = docFactory.createElement("name");
+
 				nameEl.addText(preference.getName());
 
 				prefEl.add(nameEl);
@@ -165,6 +166,7 @@ public class PortletPreferencesSerializer {
 
 				for (int i = 0; i < values.length; i++) {
 					Element valueEl = docFactory.createElement("value");
+
 					valueEl.addText(values[i]);
 
 					prefEl.add(valueEl);
@@ -172,6 +174,7 @@ public class PortletPreferencesSerializer {
 
 				if (preference.isReadOnly()) {
 					Element valueEl = docFactory.createElement("read-only");
+
 					valueEl.addText("true");
 				}
 
