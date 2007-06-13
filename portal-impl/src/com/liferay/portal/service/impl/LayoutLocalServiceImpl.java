@@ -1715,22 +1715,41 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return null;
 		}
 
-		File cssPath = new File(ctx.getRealPath(theme.getCssPath()));
+		File cssPath = null;
+		File imagesPath = null;
+		File javaScriptPath = null;
+		File templatesPath = null;
+
+		if (!theme.isLoadFromServletContext()) {
+			ThemeLoader themeLoader = ThemeLoaderFactory.getThemeLoader(
+				servletContextName);
+
+			if (themeLoader == null) {
+				_log.error(
+					servletContextName + " does not map to a theme loader");
+			}
+			else {
+				String realPath =
+					themeLoader.getFileStorage().getPath() + "/" +
+						theme.getName();
+
+				cssPath = new File(realPath + "/css");
+				imagesPath = new File(realPath + "/images");
+				javaScriptPath = new File(realPath + "/javascript");
+				templatesPath = new File(realPath + "/templates");
+			}
+		}
+		else {
+			cssPath = new File(ctx.getRealPath(theme.getCssPath()));
+			imagesPath = new File(ctx.getRealPath(theme.getImagesPath()));
+			javaScriptPath = new File(
+				ctx.getRealPath(theme.getJavaScriptPath()));
+			templatesPath = new File(ctx.getRealPath(theme.getTemplatesPath()));
+		}
 
 		exportThemeFiles("css", cssPath, zipWriter);
-
-		File imagesPath = new File(ctx.getRealPath(theme.getImagesPath()));
-
 		exportThemeFiles("images", imagesPath, zipWriter);
-
-		File javaScriptPath = new File(
-			ctx.getRealPath(theme.getJavaScriptPath()));
-
 		exportThemeFiles("javascript", javaScriptPath, zipWriter);
-
-		File templatesPath = new File(
-			ctx.getRealPath(theme.getTemplatesPath()));
-
 		exportThemeFiles("templates", templatesPath, zipWriter);
 
 		return zipWriter.finish();
@@ -1739,7 +1758,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected void exportThemeFiles(String path, File dir, ZipWriter zipWriter)
 		throws IOException {
 
-		if (!dir.exists()) {
+		if ((dir == null) || (!dir.exists())) {
 			return;
 		}
 
