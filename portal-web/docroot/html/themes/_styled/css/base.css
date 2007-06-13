@@ -139,8 +139,7 @@ body.staging {
 /* ---------- Drag Indicators ---------- */
 
 .drag-indicator {
-	background: url(../images/spacer.png) scroll repeat;
-	border: 3px dashed #036;
+	border: 2px dashed #036;
 	cursor: move;
 	font-size: 0;
 	position: relative;
