@@ -111,8 +111,8 @@ public class PortletColumnLogic extends RuntimeLogic {
 			}
 
 			RuntimePortletUtil.processPortlet(
-				sm, _ctx, _req, _res, null, null, rootPortletId, instanceId,
-				queryString, columnId, columnPos, columnCount, path);
+				sm, _ctx, _req, _res, portlet, queryString, columnId, columnPos,
+				columnCount, path);
 		}
 
 		sm.append("</div>");

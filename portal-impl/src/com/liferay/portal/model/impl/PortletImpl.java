@@ -1997,6 +1997,18 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Checks whether this portlet is equal to the specified object.
+	 *
+	 * @param		obj the object to compare this portlet against
+	 * @return		true if the portlet is equal to the specified object
+	 */
+	public boolean equals(Object obj) {
+		Portlet portlet = (Portlet)obj;
+
+		return getPortletId().equals(portlet.getPortletId());
+	}
+
+	/**
 	 * Log instance for this class.
 	 */
 	private static Log _log = LogFactory.getLog(PortletImpl.class);

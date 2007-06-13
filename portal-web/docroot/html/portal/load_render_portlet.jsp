@@ -63,6 +63,10 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		url.append("&p_p_col_count=");
 		url.append(columnCount);
 
+		if (portlet.isStatic()) {
+			url.append("&p_p_static=1");
+		}
+
 		if (Validator.isNotNull(doAsUserId)) {
 			url.append("&doAsUserId=");
 			url.append(doAsUserId);

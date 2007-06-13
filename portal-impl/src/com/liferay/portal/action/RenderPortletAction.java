@@ -64,6 +64,13 @@ public class RenderPortletAction extends Action {
 		String columnId = ParamUtil.getString(req, "p_p_col_id");
 		int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
 		int columnCount = ParamUtil.getInteger(req, "p_p_col_count");
+		boolean staticPortlet = ParamUtil.getBoolean(req, "p_p_static");
+
+		if (staticPortlet) {
+			portlet = (Portlet)portlet.clone();
+
+			portlet.setStatic(true);
+		}
 
 		if (ajaxId != null) {
 			res.setHeader("Ajax-ID", ajaxId);

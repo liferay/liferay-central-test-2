@@ -88,23 +88,38 @@ public class RuntimePortletUtil {
 		throws Exception {
 
 		processPortlet(
-			sm, ctx, req, res, renderRequest, renderResponse, portletId,
+			sm, ctx, req, res, renderRequest, renderResponse, null, portletId,
 			instanceId, queryString, columnId, columnPos, columnCount, null);
 	}
 
 	public static void processPortlet(
 			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path)
+		throws Exception {
+
+		processPortlet(
+			sm, ctx, req, res, null, null, portlet, portlet.getRootPortletId(),
+			portlet.getInstanceId(), queryString, columnId, columnPos,
+			columnCount, path);
+	}
+
+	public static void processPortlet(
+			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String instanceId,
-			String queryString, String columnId, Integer columnPos,
-			Integer columnCount, String path)
+			RenderResponse renderResponse, Portlet portlet, String portletId,
+			String instanceId, String queryString, String columnId,
+			Integer columnPos, Integer columnCount, String path)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			themeDisplay.getCompanyId(), portletId);
+		if (portlet == null) {
+			portlet = PortletLocalServiceUtil.getPortletById(
+				themeDisplay.getCompanyId(), portletId);
+		}
 
 		if ((portlet != null) && portlet.isInstanceable()) {
 			if (Validator.isNotNull(instanceId) &&
