@@ -185,7 +185,7 @@ public class PortletPreferencesSerializer {
 
 			writer.write(portletPreferences);
 
-			return bam.toString();
+			return bam.toString("UTF-8");
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
