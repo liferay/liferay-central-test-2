@@ -37,8 +37,7 @@ String csz = ParamUtil.getString(request, "csz");
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td valign="top">
-		<html:form action="/maps/view?windowState=maximized" method="post" focus="street" onsubmit="submitForm(this); return false;">
-
+		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/maps/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />mapsMapsForm" onsubmit="submitForm(this); return false;">
 		<liferay-ui:message key="street-address" /><br />
 
 		<html:text name="mapsMapsForm" property="street" size="30" />
@@ -59,11 +58,15 @@ String csz = ParamUtil.getString(request, "csz");
 
 		<html:submit><liferay-ui:message key="search" /></html:submit>
 
-		</html:form>
+		</form>
 
 		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">
-				document.<portlet:namespace />fm.<portlet:namespace />street.focus();
+			jQuery(
+				function() {
+					jQuery('input[@name=street]').trigger('focus');
+				}
+			);
 			</script>
 		</c:if>
 	</td>
