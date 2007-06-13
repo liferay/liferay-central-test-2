@@ -40,7 +40,6 @@ import javax.portlet.PortletPreferences;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,8 +60,6 @@ public class GetLookAndFeelAction extends JSONAction {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
-
-		HttpSession ses = req.getSession();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);

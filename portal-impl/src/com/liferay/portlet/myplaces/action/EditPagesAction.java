@@ -28,10 +28,8 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.ParamUtil;
 
@@ -61,9 +59,6 @@ public class EditPagesAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
