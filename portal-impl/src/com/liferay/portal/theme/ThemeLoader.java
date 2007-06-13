@@ -55,6 +55,10 @@ public class ThemeLoader {
 		return _servletContextName;
 	}
 
+	public String getThemesPath() {
+		return _themesPath;
+	}
+
 	public File getFileStorage() {
 		return _fileStorage;
 	}

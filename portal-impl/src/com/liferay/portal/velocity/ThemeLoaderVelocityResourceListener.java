@@ -61,8 +61,11 @@ public class ThemeLoaderVelocityResourceListener
 					String name =
 						source.substring(pos + THEME_LOADER_SEPARATOR.length());
 
-					if (name.startsWith("/themes")) {
-						name = name.substring(7, name.length());
+					String themesPath = themeLoader.getThemesPath();
+
+					if (name.startsWith(themesPath)) {
+						name = name.substring(
+							themesPath.length(), name.length());
 					}
 
 					if (_log.isDebugEnabled()) {
