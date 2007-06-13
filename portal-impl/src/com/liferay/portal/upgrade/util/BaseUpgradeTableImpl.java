@@ -71,9 +71,8 @@ import org.hibernate.usertype.UserType;
  */
 public abstract class BaseUpgradeTableImpl {
 
-	public BaseUpgradeTableImpl(String tableName, Object[][] columns) {
+	public BaseUpgradeTableImpl(String tableName) {
 		_tableName = tableName;
-		_columns = columns;
 	}
 
 	public String getTableName() {
@@ -82,6 +81,10 @@ public abstract class BaseUpgradeTableImpl {
 
 	public Object[][] getColumns() {
 		return _columns;
+	}
+
+	public void setColumns(Object[][] columns) {
+		_columns = columns;;
 	}
 
 	public abstract String getExportedData(ResultSet rs) throws Exception;

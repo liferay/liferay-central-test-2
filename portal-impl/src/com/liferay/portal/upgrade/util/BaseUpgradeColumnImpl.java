@@ -38,6 +38,14 @@ public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 		_name = name;
 	}
 
+	public int getPos() {
+		return _pos;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
 	public boolean isApplicable(int pos, String name) {
 		if (_pos != -1) {
 			if (_pos == pos) {

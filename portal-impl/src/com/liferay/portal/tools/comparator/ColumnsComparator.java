@@ -23,6 +23,7 @@
 package com.liferay.portal.tools.comparator;
 
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * <a href="ColumnsComparator.java.html"><b><i>View Source</i></b></a>
@@ -34,6 +35,10 @@ public class ColumnsComparator implements Comparator {
 
 	public ColumnsComparator(String columnName) {
 		this(new String[] {columnName});
+	}
+
+	public ColumnsComparator(List columnNames) {
+		this((String[])columnNames.toArray(new String[0]));
 	}
 
 	public ColumnsComparator(String[] columnNames) {

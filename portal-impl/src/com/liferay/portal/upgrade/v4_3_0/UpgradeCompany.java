@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -120,6 +121,8 @@ public class UpgradeCompany extends UpgradeProcess {
 
 			dbUtil.executeSQL(sql);
 		}
+
+		dbUtil.executeSQL("alter_column_type Account_ accountId LONG");
 	}
 
 	private void _upgradeWebId(String webId) throws Exception {
@@ -139,6 +142,11 @@ public class UpgradeCompany extends UpgradeProcess {
 					webId + "'");
 
 		dbUtil.executeSQL(
+			"update Address set classPK = '" + accountId +
+				"' where classNameId = '" + Account.class.getName() +
+					"' and classPK = '" + webId + "'");
+
+		dbUtil.executeSQL(
 			"update Company set accountId = " + accountId + " where webId = '" +
 				webId + "'");
 
@@ -154,8 +162,23 @@ public class UpgradeCompany extends UpgradeProcess {
 				"' where accountId = '" + webId + "'");
 
 		dbUtil.executeSQL(
+			"update EmailAddress set classPK = '" + accountId +
+				"' where classNameId = '" + Account.class.getName() +
+					"' and classPK = '" + webId + "'");
+
+		dbUtil.executeSQL(
+			"update Phone set classPK = '" + accountId +
+				"' where classNameId = '" + Account.class.getName() +
+					"' and classPK = '" + webId + "'");
+
+		dbUtil.executeSQL(
 			"update User_ set companyId = '" + companyId +
 				"', defaultUser = TRUE where userId = '" + webId + ".default'");
+
+		dbUtil.executeSQL(
+			"update Website set classPK = '" + accountId +
+				"' where classNameId = '" + Account.class.getName() +
+					"' and classPK = '" + webId + "'");
 	}
 
 	private static final String _GET_WEB_IDS = "select companyId from Company";

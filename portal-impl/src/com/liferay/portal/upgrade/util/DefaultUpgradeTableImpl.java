@@ -23,10 +23,16 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.tools.comparator.ColumnsComparator;
 import com.liferay.portal.upgrade.StagnantRowException;
+import com.liferay.util.Validator;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <a href="DefaultUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
@@ -78,7 +84,26 @@ public class DefaultUpgradeTableImpl
 								   UpgradeColumn upgradeColumn4,
 								   UpgradeColumn upgradeColumn5) {
 
-		super(tableName, columns);
+		super(tableName);
+
+		// Sort the column names to ensure they're sorted based on the
+		// constructor's list of columns to upgrade. This is needed if you
+		// use TempUpgradeColumnImpl and need to ensure a column's temporary
+		// value is populated in the correct order.
+
+		columns = (Object[][])columns.clone();
+
+		List sortedColumnNames = new ArrayList();
+
+		getSortedColumnName(sortedColumnNames, upgradeColumn1);
+		getSortedColumnName(sortedColumnNames, upgradeColumn2);
+		getSortedColumnName(sortedColumnNames, upgradeColumn3);
+		getSortedColumnName(sortedColumnNames, upgradeColumn4);
+		getSortedColumnName(sortedColumnNames, upgradeColumn5);
+
+		Arrays.sort(columns, new ColumnsComparator(sortedColumnNames));
+
+		setColumns(columns);
 
 		_upgradeColumns = new UpgradeColumn[columns.length];
 
@@ -139,6 +164,20 @@ public class DefaultUpgradeTableImpl
 		}
 
 		super.setColumn(ps, index, type, value);
+	}
+
+	protected void getSortedColumnName(
+		List sortedColumnNames, UpgradeColumn upgradeColumn) {
+
+		if (upgradeColumn == null) {
+			return;
+		}
+
+		String name = upgradeColumn.getName();
+
+		if (Validator.isNotNull(name)) {
+			sortedColumnNames.add(name);
+		}
 	}
 
 	protected void prepareUpgradeColumns(UpgradeColumn upgradeColumn) {

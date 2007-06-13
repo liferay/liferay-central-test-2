@@ -29,7 +29,6 @@ import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.model.impl.WebsiteImpl;
-import com.liferay.portal.tools.comparator.ColumnsComparator;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -45,8 +44,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl;
 
 import java.sql.Types;
 
-import java.util.Arrays;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -61,13 +58,6 @@ public class UpgradeContact extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
-
-		// Sort the User_ table's columns to ensure the screenName column is
-		// populated before the contactId column
-
-		_columnsUser = (Object[][])UserImpl.TABLE_COLUMNS.clone();
-
-		Arrays.sort(_columnsUser, new ColumnsComparator("screenName"));
 
 		try {
 			_upgrade();
@@ -131,8 +121,8 @@ public class UpgradeContact extends UpgradeProcess {
 			upgradeScreenNameColumn, contactIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			UserImpl.TABLE_NAME, _columnsUser, upgradeScreenNameColumn,
-			upgradeContactIdColumn);
+			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS,
+			upgradeScreenNameColumn, upgradeContactIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -153,7 +143,5 @@ public class UpgradeContact extends UpgradeProcess {
 		"alter_column_type Contact_ contactId LONG";
 
 	private static Log _log = LogFactory.getLog(UpgradeContact.class);
-
-	private Object[][] _columnsUser;
 
 }

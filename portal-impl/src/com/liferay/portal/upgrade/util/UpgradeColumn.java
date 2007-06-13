@@ -31,6 +31,10 @@ package com.liferay.portal.upgrade.util;
  */
 public interface UpgradeColumn {
 
+	public int getPos();
+
+	public String getName();
+
 	public boolean isApplicable(int pos, String name);
 
 	public Integer getOldColumnType(Integer defaultType);
