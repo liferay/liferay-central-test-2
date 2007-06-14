@@ -5789,11 +5789,9 @@ public class ServiceBuilder {
 					}
 
 					if (col.isPrimary()) {
-						if (!col.isPrimitiveType()) {
-							sm.append(" not null");
-						}
+						sm.append(" not null");
 
-						if (col.isPrimary() && !entity.hasCompoundPK()) {
+						if (!entity.hasCompoundPK()) {
 							sm.append(" primary key");
 						}
 					}
