@@ -263,7 +263,6 @@ public class BookmarksFolderLocalServiceImpl
 
 		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
 
-		long oldFolderId = folder.getParentFolderId();
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
@@ -277,7 +276,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Merge folders
 
-		if (mergeWithParentFolder && (oldFolderId != parentFolderId) &&
+		if (mergeWithParentFolder && (folderId != parentFolderId) &&
 			(parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
@@ -294,7 +293,7 @@ public class BookmarksFolderLocalServiceImpl
 				BookmarksFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(groupId !=parentFolder.getGroupId())) {
+				(groupId != parentFolder.getGroupId())) {
 
 				parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
