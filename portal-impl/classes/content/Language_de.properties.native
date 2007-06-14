@@ -220,6 +220,7 @@ action.ADD_VOTE=abstimmen
 action.ADMINISTRATE=Üben Sie aus
 action.APPROVE_ARTICLE=Artikel genehmigen
 action.ASSIGN_USERS=Nutzer zuweisen
+action.BAN_USER=Verbot-Benutzer
 action.CONFIGURATION=Konfiguration
 action.DELETE=Löschen
 action.DELETE_DISCUSSION=Diskussion löschen

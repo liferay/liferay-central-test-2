@@ -220,6 +220,7 @@ action.ADD_VOTE=Ajoutez La Voix
 action.ADMINISTRATE=Administez
 action.APPROVE_ARTICLE=Approuvez L'Article
 action.ASSIGN_USERS=Affectez Les Utilisateurs
+action.BAN_USER=Utilisateur D'Interdiction
 action.CONFIGURATION=Configuration
 action.DELETE=Effacement
 action.DELETE_DISCUSSION=Discussion D'Effacement

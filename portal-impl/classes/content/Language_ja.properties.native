@@ -220,6 +220,7 @@ action.ADD_VOTE=投票を加えなさい
 action.ADMINISTRATE=管理しなさい
 action.APPROVE_ARTICLE=記事を承認しなさい
 action.ASSIGN_USERS=ユーザーを割り当てなさい
+action.BAN_USER=禁止のユーザー
 action.CONFIGURATION=構成
 action.DELETE=削除
 action.DELETE_DISCUSSION=削除の議論

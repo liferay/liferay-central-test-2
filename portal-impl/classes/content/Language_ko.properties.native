@@ -220,6 +220,7 @@ action.ADD_VOTE=투표를 추가하십시요
 action.ADMINISTRATE=관리하십시요
 action.APPROVE_ARTICLE=기사를 찬성하십시요
 action.ASSIGN_USERS=사용자를 지정하십시요
+action.BAN_USER=금지 사용자
 action.CONFIGURATION=윤곽
 action.DELETE=감소
 action.DELETE_DISCUSSION=감소 면담

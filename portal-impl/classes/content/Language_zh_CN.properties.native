@@ -220,6 +220,7 @@ action.ADD_VOTE=增加投票
 action.ADMINISTRATE=管理
 action.APPROVE_ARTICLE=批准文章
 action.ASSIGN_USERS=分配用户
+action.BAN_USER=禁令用户
 action.CONFIGURATION=配置
 action.DELETE=删除
 action.DELETE_DISCUSSION=删除讨论

@@ -220,6 +220,7 @@ action.ADD_VOTE=Stem toevoegen
 action.ADMINISTRATE=Beheer
 action.APPROVE_ARTICLE=Keur Artikel goed
 action.ASSIGN_USERS=Wijs Gebruikers toevoegen
+action.BAN_USER=De Gebruiker van het verbod
 action.CONFIGURATION=Configuratie
 action.DELETE=Verwijderen
 action.DELETE_DISCUSSION=Verwijderen Bespreking

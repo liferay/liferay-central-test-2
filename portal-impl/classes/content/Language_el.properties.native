@@ -220,6 +220,7 @@ action.ADD_VOTE=Προσθέστε την ψηφοφορία
 action.ADMINISTRATE=Διαχειριστείτε
 action.APPROVE_ARTICLE=Εγκρίνετε το άρθρο
 action.ASSIGN_USERS=Διορίστε τους χρήστες
+action.BAN_USER=Χρήστης απαγόρευσης
 action.CONFIGURATION=Διαμόρφωση
 action.DELETE=Διαγράψτε
 action.DELETE_DISCUSSION=Διαγράψτε τη συζήτηση
