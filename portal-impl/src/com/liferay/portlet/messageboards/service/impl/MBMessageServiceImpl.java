@@ -25,8 +25,10 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -571,6 +573,21 @@ public class MBMessageServiceImpl
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
+			if (!message.isAnonymous()) {
+				String userName = message.getUserName();
+
+				try {
+					User user =
+						UserLocalServiceUtil.getUserById(message.getUserId());
+
+					userName = user.getFullName();
+				}
+				catch (Exception e) {
+				}
+
+				syndEntry.setAuthor(userName);
+			}
+
 			syndEntry.setTitle(message.getSubject());
 			syndEntry.setLink(
 				entryURL + "&messageId=" + message.getMessageId());
@@ -598,6 +615,6 @@ public class MBMessageServiceImpl
 	}
 
 	private static final String _RSS_PERMISSIONS_ERROR =
-		"Sorry, you do not have the permissions necessary for this RSS feed.";
+		"Sorry, you do not have permission to view this RSS feed.";
 
 }
