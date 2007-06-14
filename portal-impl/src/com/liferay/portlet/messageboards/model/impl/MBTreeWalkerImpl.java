@@ -47,7 +47,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 
 		try {
 			_messages = MBMessageLocalServiceUtil.getThreadMessages(
-				message.getThreadId(), userId);
+				message.getThreadId());
 
 			for (int i = 0; i < _messages.size(); i++) {
 				MBMessage curMessage = (MBMessage)_messages.get(i);
