@@ -44,6 +44,7 @@
 			<portlet-name>15</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>ADD_DISCUSSION</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>EXPIRE</action-key>
 			<action-key>PERMISSIONS</action-key>
