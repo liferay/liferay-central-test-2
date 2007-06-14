@@ -134,6 +134,12 @@ public interface MBMessageService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public java.lang.String getCategoryMessagesRSS(long categoryId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
 		throws com.liferay.portal.SystemException, 
@@ -141,6 +147,12 @@ public interface MBMessageService {
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long userId, long messageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public java.lang.String getThreadMessagesRSS(long threadId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

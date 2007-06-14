@@ -285,6 +285,15 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getCategoryMessages(categoryId, begin, end);
 	}
 
+	public static java.util.List getCategoryMessages(long categoryId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getCategoryMessages(categoryId, begin,
+			end, obc);
+	}
+
 	public static int getCategoryMessagesCount(long categoryId)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
@@ -297,17 +306,6 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getCategoriesMessagesCount(categoryIds);
-	}
-
-	public static java.lang.String getCategoryMessagesRSS(long categoryId,
-		int begin, int end, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCategoryMessagesRSS(categoryId, begin,
-			end, type, version, feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
@@ -361,20 +359,19 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getMessageDisplay(userId, message);
 	}
 
-	public static java.util.List getThreadMessages(long threadId, long userId)
+	public static java.util.List getThreadMessages(long threadId)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getThreadMessages(threadId, userId);
+		return mbMessageLocalService.getThreadMessages(threadId);
 	}
 
-	public static java.util.List getThreadMessages(long threadId, long userId,
+	public static java.util.List getThreadMessages(long threadId,
 		java.util.Comparator comparator)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getThreadMessages(threadId, userId,
-			comparator);
+		return mbMessageLocalService.getThreadMessages(threadId, comparator);
 	}
 
 	public static int getThreadMessagesCount(long threadId)
@@ -382,17 +379,6 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getThreadMessagesCount(threadId);
-	}
-
-	public static java.lang.String getThreadMessagesRSS(long threadId,
-		int begin, int end, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getThreadMessagesRSS(threadId, begin, end,
-			type, version, feedURL, entryURL);
 	}
 
 	public static void subscribeMessage(long userId, long messageId)

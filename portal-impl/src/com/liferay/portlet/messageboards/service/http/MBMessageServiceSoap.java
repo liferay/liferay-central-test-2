@@ -194,6 +194,22 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static java.lang.String getCategoryMessagesRSS(long categoryId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getCategoryMessagesRSS(categoryId,
+					max, type, version, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap getMessage(
 		long messageId) throws RemoteException {
 		try {
@@ -212,6 +228,21 @@ public class MBMessageServiceSoap {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue =
 				MBMessageServiceUtil.getMessageDisplay(userId, messageId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL) throws RemoteException {
+		try {
+			java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(threadId,
+					max, type, version, feedURL, entryURL);
 
 			return returnValue;
 		}

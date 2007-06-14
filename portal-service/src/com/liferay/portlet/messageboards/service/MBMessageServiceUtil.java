@@ -194,6 +194,17 @@ public class MBMessageServiceUtil {
 		mbMessageService.deleteMessage(messageId);
 	}
 
+	public static java.lang.String getCategoryMessagesRSS(long categoryId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.getCategoryMessagesRSS(categoryId, max, type,
+			version, feedURL, entryURL);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
 		throws com.liferay.portal.PortalException, 
@@ -210,6 +221,17 @@ public class MBMessageServiceUtil {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getMessageDisplay(userId, messageId);
+	}
+
+	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.getThreadMessagesRSS(threadId, max, type,
+			version, feedURL, entryURL);
 	}
 
 	public static void subscribeMessage(long messageId)

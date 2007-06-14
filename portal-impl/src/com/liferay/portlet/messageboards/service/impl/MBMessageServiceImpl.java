@@ -24,19 +24,42 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.util.Constants;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
+import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
+import com.liferay.util.Html;
+import com.liferay.util.RSSUtil;
+import com.liferay.util.StringUtil;
 
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.FeedException;
+
+import java.io.IOException;
+
+import java.rmi.RemoteException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -309,6 +332,61 @@ public class MBMessageServiceImpl
 		MBMessageLocalServiceUtil.deleteMessage(messageId);
 	}
 
+	public String getCategoryMessagesRSS(
+			long categoryId, int max, String type, double version,
+			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		String name = StringPool.BLANK;
+		String description = StringPool.BLANK;
+		List messages = new ArrayList();
+		boolean rssPermission = true;
+
+		try {
+			MBCategory category = MBCategoryServiceUtil.getCategory(categoryId);
+
+			name = category.getName();
+			description = category.getDescription();
+
+			int messageCount =
+				MBMessageLocalServiceUtil.getCategoryMessagesCount(categoryId);
+
+			List tempMessages = MBMessageLocalServiceUtil.getCategoryMessages(
+				categoryId, 0, messageCount,
+				new MessageCreateDateComparator(false));
+
+			Iterator itr = tempMessages.iterator();
+
+			while (itr.hasNext() && messages.size() < max) {
+				MBMessage message = (MBMessage)itr.next();
+
+				try {
+					long messageId = message.getMessageId();
+
+					MBMessagePermission.check(
+						getPermissionChecker(), messageId, ActionKeys.VIEW);
+
+					messages.add(message);
+				}
+				catch (PrincipalException pe) {
+					rssPermission = false;
+				}
+			}
+		}
+		catch (PrincipalException pe) {
+			rssPermission = false;
+		}
+		catch (RemoteException re) {
+		}
+
+		if (!rssPermission && messages.size() == 0) {
+			name = _RSS_PERMISSIONS_ERROR;
+		}
+
+		return exportToRSS(
+			name, description, type, version, feedURL, entryURL, messages);
+	}
+
 	public MBMessage getMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -325,6 +403,51 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
 		return MBMessageLocalServiceUtil.getMessageDisplay(userId, messageId);
+	}
+
+	public String getThreadMessagesRSS(
+			long threadId, int max, String type, double version,
+			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		String name = StringPool.BLANK;
+		String description = StringPool.BLANK;
+		List messages = new ArrayList();
+		boolean rssPermission = true;
+
+		List tempMessages = MBMessageLocalServiceUtil.getThreadMessages(
+			threadId, new MessageCreateDateComparator(false));
+
+		Iterator itr = tempMessages.iterator();
+
+		while (itr.hasNext() && messages.size() < max) {
+			MBMessage message = (MBMessage)itr.next();
+
+			try {
+				long messageId = message.getMessageId();
+
+				MBMessagePermission.check(
+					getPermissionChecker(), messageId, ActionKeys.VIEW);
+
+				messages.add(message);
+			}
+			catch (PrincipalException pe) {
+				rssPermission = false;
+			}
+		}
+
+		if (messages.size() > 0) {
+			MBMessage message = (MBMessage)messages.get(messages.size() - 1);
+
+			name = message.getSubject();
+			description = message.getSubject();
+		}
+		else if (!rssPermission) {
+			name = _RSS_PERMISSIONS_ERROR;
+		}
+
+		return exportToRSS(
+			name, description, type, version, feedURL, entryURL, messages);
 	}
 
 	public void subscribeMessage(long messageId)
@@ -420,5 +543,61 @@ public class MBMessageServiceImpl
 			messageId, categoryId, subject, body, files, priority, tagsEntries,
 			prefs);
 	}
+
+	protected String exportToRSS(
+			String name, String description, String type, double version,
+			String feedURL, String entryURL, List messages)
+		throws SystemException {
+
+		SyndFeed syndFeed = new SyndFeedImpl();
+
+		syndFeed.setFeedType(type + "_" + version);
+
+		syndFeed.setTitle(name);
+		syndFeed.setLink(feedURL);
+		syndFeed.setDescription(description);
+
+		List entries = new ArrayList();
+
+		syndFeed.setEntries(entries);
+
+		Iterator itr = messages.iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			String firstLine = StringUtil.shorten(
+				Html.stripHtml(message.getBody()), 80, StringPool.BLANK);
+
+			SyndEntry syndEntry = new SyndEntryImpl();
+
+			syndEntry.setTitle(message.getSubject());
+			syndEntry.setLink(
+				entryURL + "&messageId=" + message.getMessageId());
+			syndEntry.setPublishedDate(message.getCreateDate());
+
+			SyndContent syndContent = new SyndContentImpl();
+
+			syndContent.setType(Constants.TEXT_PLAIN);
+			syndContent.setValue(firstLine);
+
+			syndEntry.setDescription(syndContent);
+
+			entries.add(syndEntry);
+		}
+
+		try {
+			return RSSUtil.export(syndFeed);
+		}
+		catch (FeedException fe) {
+			throw new SystemException(fe);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	private static final String _RSS_PERMISSIONS_ERROR =
+		"Sorry, you do not have the permissions necessary for this RSS feed.";
 
 }

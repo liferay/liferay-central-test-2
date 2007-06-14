@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.dao.search.SearchContainer;
@@ -91,8 +91,8 @@ public class RSSAction extends Action {
 					"/message_boards/find_category?p_l_id=" + plid +
 						"&categoryId=" + categoryId;
 
-			rss = MBMessageLocalServiceUtil.getCategoryMessagesRSS(
-				categoryId, 0, SearchContainer.DEFAULT_DELTA, type, version,
+			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
+				categoryId, SearchContainer.DEFAULT_DELTA, type, version,
 				feedURL, entryURL);
 		}
 		else {
@@ -101,8 +101,8 @@ public class RSSAction extends Action {
 					"/message_boards/find_thread?p_l_id=" + plid +
 						"&threadId=" + threadId;
 
-			rss = MBMessageLocalServiceUtil.getThreadMessagesRSS(
-				threadId, 0, SearchContainer.DEFAULT_DELTA, type, version,
+			rss = MBMessageServiceUtil.getThreadMessagesRSS(
+				threadId, SearchContainer.DEFAULT_DELTA, type, version,
 				feedURL, entryURL);
 		}
 

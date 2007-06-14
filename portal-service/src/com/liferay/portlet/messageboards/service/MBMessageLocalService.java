@@ -189,17 +189,15 @@ public interface MBMessageLocalService {
 	public java.util.List getCategoryMessages(long categoryId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
+	public java.util.List getCategoryMessages(long categoryId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int getCategoryMessagesCount(long categoryId)
 		throws com.liferay.portal.SystemException;
 
 	public int getCategoriesMessagesCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException;
-
-	public java.lang.String getCategoryMessagesRSS(long categoryId, int begin,
-		int end, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
 		long userId, java.lang.String className, long classPK)
@@ -227,21 +225,15 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getThreadMessages(long threadId, long userId)
+	public java.util.List getThreadMessages(long threadId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getThreadMessages(long threadId, long userId,
+	public java.util.List getThreadMessages(long threadId,
 		java.util.Comparator comparator)
 		throws com.liferay.portal.SystemException;
 
 	public int getThreadMessagesCount(long threadId)
 		throws com.liferay.portal.SystemException;
-
-	public java.lang.String getThreadMessagesRSS(long threadId, int begin,
-		int end, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
 
 	public void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.SystemException, 
