@@ -304,7 +304,6 @@ public class ShoppingCategoryLocalServiceImpl
 		ShoppingCategory category =
 			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
 
-		long oldCategoryId = category.getParentCategoryId();
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
 		validate(name);
@@ -319,7 +318,7 @@ public class ShoppingCategoryLocalServiceImpl
 		// Merge categories
 
 		if (mergeWithParentCategory &&
-			(oldCategoryId != parentCategoryId) &&
+			(categoryId != parentCategoryId) &&
 			(parentCategoryId !=
 				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 

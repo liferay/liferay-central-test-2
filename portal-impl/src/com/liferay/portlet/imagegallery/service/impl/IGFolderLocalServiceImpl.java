@@ -269,7 +269,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
 
-		long oldFolderId = folder.getParentFolderId();
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
@@ -283,7 +282,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Merge folders
 
-		if (mergeWithParentFolder && (oldFolderId != parentFolderId) &&
+		if (mergeWithParentFolder && (folderId != parentFolderId) &&
 			(parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);

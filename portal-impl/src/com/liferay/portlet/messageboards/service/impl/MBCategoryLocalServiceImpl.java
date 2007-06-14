@@ -425,7 +425,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
-		long oldCategoryId = category.getParentCategoryId();
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
 		validate(name);
@@ -440,7 +439,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Merge categories
 
 		if (mergeWithParentCategory &&
-			(oldCategoryId != parentCategoryId) &&
+			(categoryId != parentCategoryId) &&
 			(parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
