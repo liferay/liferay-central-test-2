@@ -136,8 +136,6 @@ public class MBMessageConsumer implements MessageListener {
 			String messageId, String inReplyTo)
 		throws Exception {
 
-		Long userIdObj = new Long(userId);
-
 		for (int i = 0; i < subscriptions.size(); i++) {
 			Subscription subscription = (Subscription)subscriptions.get(i);
 
@@ -145,11 +143,13 @@ public class MBMessageConsumer implements MessageListener {
 				continue;
 			}
 
-			if (sent.contains(userIdObj)) {
+			Long subscribedUserId = new Long(subscription.getUserId());
+
+			if (sent.contains(subscribedUserId)) {
 				continue;
 			}
 			else {
-				sent.add(userIdObj);
+				sent.add(subscribedUserId);
 			}
 
 			User user = UserLocalServiceUtil.getUserById(
