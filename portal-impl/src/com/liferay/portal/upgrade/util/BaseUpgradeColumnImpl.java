@@ -30,38 +30,20 @@ package com.liferay.portal.upgrade.util;
  */
 public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 
-	public BaseUpgradeColumnImpl(int pos) {
-		_pos = pos;
-	}
-
 	public BaseUpgradeColumnImpl(String name) {
 		_name = name;
-	}
-
-	public int getPos() {
-		return _pos;
 	}
 
 	public String getName() {
 		return _name;
 	}
 
-	public boolean isApplicable(int pos, String name) {
-		if (_pos != -1) {
-			if (_pos == pos) {
-				return true;
-			}
-			else {
-				return false;
-			}
+	public boolean isApplicable(String name) {
+		if (_name.equals(name)) {
+			return true;
 		}
 		else {
-			if (_name.equals(name)) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return false;
 		}
 	}
 
@@ -73,7 +55,6 @@ public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 		return defaultType;
 	}
 
-	private int _pos = -1;
 	private String _name;
 
 }

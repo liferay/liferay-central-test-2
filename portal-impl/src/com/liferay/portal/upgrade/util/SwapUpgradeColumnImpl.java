@@ -30,19 +30,6 @@ package com.liferay.portal.upgrade.util;
  */
 public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public SwapUpgradeColumnImpl(int pos, ValueMapper valueMapper) {
-		this(pos, null, valueMapper);
-	}
-
-	public SwapUpgradeColumnImpl(int pos, Integer oldColumnType,
-								 ValueMapper valueMapper) {
-
-		super(pos);
-
-		_oldColumnType = oldColumnType;
-		_valueMapper = valueMapper;
-	}
-
 	public SwapUpgradeColumnImpl(String name, ValueMapper valueMapper) {
 		this(name, null, valueMapper);
 	}

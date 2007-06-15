@@ -64,7 +64,8 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		// BlogsCategory
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"categoryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
@@ -89,7 +90,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		// BlogsEntry
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("entryId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,

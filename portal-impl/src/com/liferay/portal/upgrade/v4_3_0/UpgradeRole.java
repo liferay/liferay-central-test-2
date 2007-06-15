@@ -24,21 +24,16 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-
-import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,46 +61,17 @@ public class UpgradeRole extends UpgradeProcess {
 
 		// Role
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"roleId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, pkUpgradeColumn,
-			new ClassNameUpgradeColumnImpl());
+			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, pkUpgradeColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper roleIdMapper = pkUpgradeColumn.getValueMapper();
 
-		UpgradeColumn upgradeRoleIdColumn = new SwapUpgradeColumnImpl(
-			"roleId", roleIdMapper);
-
-		// Groups_Roles
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_ROLES, _COLUMNS_GROUPS_ROLES, upgradeRoleIdColumn);
-
-		upgradeTable.updateTable();
-
-		// OrgGroupRole
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
-			upgradeRoleIdColumn);
-
-		// Roles_Permissions
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
-			upgradeRoleIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Users_Roles
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_USERS_ROLES, _COLUMNS_USERS_ROLES, upgradeRoleIdColumn);
-
-		upgradeTable.updateTable();
+		AvailableMappersUtil.setRoleIdMapper(roleIdMapper);
 
 		// Resource
 
@@ -119,27 +85,6 @@ public class UpgradeRole extends UpgradeProcess {
 
 		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String _TABLE_GROUPS_ROLES = "Groups_Roles";
-
-	private static final String _TABLE_ROLES_PERMISSIONS = "Roles_Permissions";
-
-	private static final String _TABLE_USERS_ROLES = "Users_Roles";
-
-	private static final Object[][] _COLUMNS_GROUPS_ROLES = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"roleId", new Integer(Types.BIGINT)}
-	};
-
-	private static final Object[][] _COLUMNS_ROLES_PERMISSIONS = {
-		{"roleId", new Integer(Types.BIGINT)},
-		{"permissionId", new Integer(Types.BIGINT)}
-	};
-
-	private static final Object[][] _COLUMNS_USERS_ROLES = {
-		{"userId", new Integer(Types.BIGINT)},
-		{"roleId", new Integer(Types.BIGINT)}
-	};
 
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter_column_type Role_ classNameId LONG",

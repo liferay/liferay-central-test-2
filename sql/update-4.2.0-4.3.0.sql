@@ -172,6 +172,7 @@ create table MBBan (
 alter_column_type MBCategory categoryId LONG;
 alter_column_type MBCategory groupId LONG;
 alter_column_type MBCategory parentCategoryId LONG;
+update MBCategory set companyId = '0', userId = '0' where companyId = 'system';
 
 alter_column_type MBDiscussion discussionId LONG;
 alter_column_name MBDiscussion className classNameId VARCHAR(75) null;
@@ -278,6 +279,7 @@ alter table Portlet add id_ LONG;
 alter table PortletPreferences add portletPreferencesId LONG;
 alter table PortletPreferences add ownerType INTEGER;
 alter table PortletPreferences add plid LONG;
+update PortletPreferences set plid = 0;
 
 alter_column_name RatingsEntry className classNameId VARCHAR(75) null;
 
@@ -302,6 +304,8 @@ create table ResourceCode (
 alter_column_type Role_ roleId LONG;
 alter_column_name Role_ className classNameId VARCHAR(75) null;
 alter table Role_ add type_ INTEGER;
+update Role_ SET classNameId = '0';
+update Role_ SET classPK = '0';
 update Role_ SET type_ = 1;
 
 alter_column_type Roles_Permissions roleId LONG;

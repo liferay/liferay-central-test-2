@@ -20,66 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.StagnantRowException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.ValueMapper;
 
 /**
- * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutOwnerIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
  */
-public class MemoryValueMapper implements ValueMapper {
+public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public MemoryValueMapper() {
-		this(new HashSet());
-	}
+	public LayoutOwnerIdUpgradeColumnImpl(String name,
+										  TempUpgradeColumnImpl upgradeColumn,
+										  ValueMapper valueMapper) {
 
-	public MemoryValueMapper(Set exceptions) {
-		_map = new HashMap();
-		_exceptions = exceptions;
+		super(name);
+
+		_name = name;
+		_upgradeColumn = upgradeColumn;
+		_valueMapper = valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Object value = _map.get(oldValue);
+		String ownerId = (String)_upgradeColumn.getTemp();
 
-		if (value == null) {
-			if (_exceptions.contains(oldValue)) {
-				value = oldValue;
+		if (_name.equals("groupId")) {
+			if (ownerId.startsWith("PUB.") || ownerId.startsWith("PRI.")) {
+				return new Long(ownerId.substring(4, ownerId.length()));
 			}
 			else {
-				throw new StagnantRowException(String.valueOf(oldValue));
+				throw new StagnantRowException(ownerId);
 			}
 		}
-
-		return value;
+		else {
+			if (ownerId.startsWith("PUB.")) {
+				return Boolean.FALSE;
+			}
+			else if (ownerId.startsWith("PRI.")) {
+				return Boolean.TRUE;
+			}
+			else {
+				throw new StagnantRowException(ownerId);
+			}
+		}
 	}
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_map.put(oldValue, newValue);
-	}
-
-	public void appendException(Object exception) {
-		_exceptions.add(exception);
-	}
-
-	public Iterator iterator() throws Exception {
-		return _map.keySet().iterator();
-	}
-
-	public int size() throws Exception {
-		return _map.size();
-	}
-
-	private Map _map;
-	private Set _exceptions;
+	private String _name;
+	private TempUpgradeColumnImpl _upgradeColumn;
+	private ValueMapper _valueMapper;
 
 }

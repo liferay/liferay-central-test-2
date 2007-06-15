@@ -25,27 +25,23 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 import com.liferay.portal.upgrade.util.ValueMapper;
 
 /**
- * <a href="KeyValueMapperPair.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassPKContainer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class KeyValueMapperPair {
+public class ClassPKContainer {
 
-	public KeyValueMapperPair(String key, ValueMapper valueMapper) {
-		this(key, valueMapper, true);
-	}
+	public ClassPKContainer(String className, ValueMapper valueMapper,
+							boolean isLong) {
 
-	public KeyValueMapperPair(String key, ValueMapper valueMapper,
-							  boolean isLong) {
-
-		_key = key;
+		_className = className;
 		_valueMapper = valueMapper;
 		_isLong = isLong;
 	}
 
-	public String getKey() {
-		return _key;
+	public String getClassName() {
+		return _className;
 	}
 
 	public ValueMapper getValueMapper() {
@@ -56,7 +52,7 @@ public class KeyValueMapperPair {
 		return _isLong;
 	}
 
-	private String _key;
+	private String _className;
 	private ValueMapper _valueMapper;
 	private boolean _isLong;
 

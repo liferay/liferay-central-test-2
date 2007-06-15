@@ -58,7 +58,7 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			UserIdMapperImpl.TABLE_NAME, UserIdMapperImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl());
+			new PKUpgradeColumnImpl("userIdMapperId", false));
 
 		upgradeTable.updateTable();
 

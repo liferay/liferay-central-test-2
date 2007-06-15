@@ -63,7 +63,8 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		// WikiNode
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"nodeId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
@@ -78,7 +79,7 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		// WikiPage
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("pageId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,

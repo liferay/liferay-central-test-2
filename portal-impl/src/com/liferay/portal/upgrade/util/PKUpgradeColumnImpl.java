@@ -36,29 +36,8 @@ import java.sql.Types;
  */
 public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public PKUpgradeColumnImpl() {
-		this(0, false);
-	}
-
-	public PKUpgradeColumnImpl(int pos, boolean trackValues) {
-		this(pos, null, trackValues);
-	}
-
 	public PKUpgradeColumnImpl(String name, boolean trackValues) {
 		this(name, null, trackValues);
-	}
-
-	public PKUpgradeColumnImpl(int pos, Integer oldColumnType,
-							   boolean trackValues) {
-
-		super(pos);
-
-		_oldColumnType = oldColumnType;
-		_trackValues = trackValues;
-
-		if (_trackValues) {
-			_valueMapper = new MemoryValueMapper();
-		}
 	}
 
 	public PKUpgradeColumnImpl(String name, Integer oldColumnType,

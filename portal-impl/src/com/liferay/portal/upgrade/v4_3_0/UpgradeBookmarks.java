@@ -64,7 +64,8 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		// BookmarksFolder
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
@@ -89,7 +90,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		// BookmarksEntry
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("entryId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,

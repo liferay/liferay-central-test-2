@@ -74,13 +74,14 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl());
+			new PKUpgradeColumnImpl("cartId", false));
 
 		upgradeTable.updateTable();
 
 		// ShoppingCategory
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"categoryId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
@@ -105,7 +106,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingItem
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("itemId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingItemImpl.TABLE_NAME, ShoppingItemImpl.TABLE_COLUMNS,
@@ -122,8 +123,8 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingItemFieldImpl.TABLE_NAME,
-			ShoppingItemFieldImpl.TABLE_COLUMNS, new PKUpgradeColumnImpl(),
-			upgradeItemIdColumn);
+			ShoppingItemFieldImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("itemFieldId", false), upgradeItemIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -131,14 +132,14 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingItemPriceImpl.TABLE_NAME,
-			ShoppingItemPriceImpl.TABLE_COLUMNS, new PKUpgradeColumnImpl(),
-			upgradeItemIdColumn);
+			ShoppingItemPriceImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("itemPriceId", false), upgradeItemIdColumn);
 
 		upgradeTable.updateTable();
 
 		// ShoppingOrder
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("orderId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
@@ -155,8 +156,9 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderItemImpl.TABLE_NAME,
-			ShoppingOrderItemImpl.TABLE_COLUMNS, new PKUpgradeColumnImpl(),
-			upgradeOrderIdColumn, upgradeItemIdColumn);
+			ShoppingOrderItemImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("orderItemId", false), upgradeOrderIdColumn,
+			upgradeItemIdColumn);
 
 		upgradeTable.updateTable();
 

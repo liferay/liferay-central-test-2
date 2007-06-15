@@ -24,36 +24,37 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
-import com.liferay.portal.model.impl.PortletPreferencesImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SkipUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.OwnerIdMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.PreferencesUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.PrimKeyUpgradeColumnImpl;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -64,8 +65,12 @@ import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
+import com.liferay.util.ArrayUtil;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -74,6 +79,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeGroup extends UpgradeProcess {
@@ -82,94 +88,56 @@ public class UpgradeGroup extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeGroupIds();
-			_upgradeOwnerIds();
-			_upgradeResources();
-			_upgradeLucene();
-			_upgradeCounter();
-			_upgradeSchema();
+			_upgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeCounter() throws Exception {
-		CounterLocalServiceUtil.reset(Group.class.getName());
-	}
-
-	private void _upgradeGroupIds() throws Exception {
+	private void _upgrade() throws Exception {
 
 		// Group_
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"groupId", true);
+
+		ClassNameIdUpgradeColumnImpl classNameIdColumn =
+			new ClassNameIdUpgradeColumnImpl();
+
+		List classPKContainers = new ArrayList();
+
+		classPKContainers.add(
+			new ClassPKContainer(
+				Organization.class.getName(),
+				AvailableMappersUtil.getOrganizationIdMapper(), true));
+
+		classPKContainers.add(
+			new ClassPKContainer(
+				User.class.getName(),
+				AvailableMappersUtil.getUserIdMapper(), false));
+
+		classPKContainers.add(
+			new ClassPKContainer(
+				UserGroup.class.getName(),
+				AvailableMappersUtil.getUserGroupIdMapper(), true));
+
+		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
+			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, pkUpgradeColumn,
-			new ClassNameUpgradeColumnImpl());
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
-		// Groups_Orgs
+		ValueMapper groupIdMapper = new DefaultPKMapper(
+			pkUpgradeColumn.getValueMapper());
 
-		_groupIdMapper = new DefaultPKMapper(pkUpgradeColumn.getValueMapper());
+		AvailableMappersUtil.setGroupIdMapper(groupIdMapper);
 
-		_ownerIdMapper = new OwnerIdMapper(_groupIdMapper);
-
-		UpgradeColumn upgradeGroupIdColumn =
-			new SwapUpgradeColumnImpl("groupId", _groupIdMapper);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_ORGS, _COLUMNS_GROUPS_ORGS, upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Groups_Permissions
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Groups_Roles
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_ROLES, _COLUMNS_GROUPS_ROLES,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Groups_UserGroups
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_USERGROUPS, _COLUMNS_GROUPS_USERGROUPS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// OrgGroupPermission
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupPermissionImpl.TABLE_NAME,
-			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// OrgGroupRole
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Users_Groups
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_USERS_GROUPS, _COLUMNS_USERS_GROUPS, upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", groupIdMapper);
 
 		// BlogsEntry
 
@@ -199,6 +167,14 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
+		// Groups_Permissions
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
@@ -235,6 +211,54 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// Layout
+
+		TempUpgradeColumnImpl upgradeLayoutOwnerIdColumn =
+			new TempUpgradeColumnImpl("ownerId");
+
+		UpgradeColumn upgradeLayoutOwnerIdGroupIdColumn =
+			new LayoutOwnerIdUpgradeColumnImpl(
+				"groupId", upgradeLayoutOwnerIdColumn, groupIdMapper);
+
+		UpgradeColumn upgradeLayoutOwnerIdPrivateLayoutColumn =
+			new LayoutOwnerIdUpgradeColumnImpl(
+				"privateLayout", upgradeLayoutOwnerIdColumn, groupIdMapper);
+
+		Object[][] layoutColumns1 = {{"ownerId", new Integer(Types.VARCHAR)}};
+		Object[][] layoutColumns2 =
+			(Object[][])LayoutImpl.TABLE_COLUMNS.clone();
+		Object[][] layoutColumns =
+			new Object[layoutColumns1.length + layoutColumns2.length][];
+
+		ArrayUtil.combine(layoutColumns1, layoutColumns2, layoutColumns);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			LayoutImpl.TABLE_NAME, layoutColumns,
+			new PKUpgradeColumnImpl("plid", false), upgradeLayoutOwnerIdColumn,
+			upgradeLayoutOwnerIdGroupIdColumn,
+			upgradeLayoutOwnerIdPrivateLayoutColumn);
+
+		upgradeTable.updateTable();
+
+		// LayoutSet
+
+		Object[][] layoutSetColumns1 =
+			{{"ownerId", new Integer(Types.VARCHAR)}};
+		Object[][] layoutSetColumns2 =
+			(Object[][])LayoutSetImpl.TABLE_COLUMNS.clone();
+		Object[][] layoutSetColumns =
+			new Object[layoutSetColumns1.length + layoutSetColumns2.length][];
+
+		ArrayUtil.combine(
+			layoutSetColumns1, layoutSetColumns2, layoutSetColumns);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			LayoutSetImpl.TABLE_NAME, layoutSetColumns,
+			new PKUpgradeColumnImpl("layoutSetId", false),
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
 		// MBCategory
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -251,6 +275,22 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// OrgGroupPermission
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			OrgGroupPermissionImpl.TABLE_NAME,
+			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
+		// OrgGroupRole
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
 		// PollsQuestion
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -261,9 +301,12 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// ShoppingCart
 
+		UpgradeColumn upgradeCartIdColumn = new SkipUpgradeColumnImpl(
+			"cartId", new Integer(Types.VARCHAR));
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
+			upgradeCartIdColumn, upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -277,9 +320,12 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// ShoppingCoupon
 
+		UpgradeColumn upgradeCouponIdColumn = new SkipUpgradeColumnImpl(
+			"couponId", new Integer(Types.VARCHAR));
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
+			upgradeCouponIdColumn, upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -298,57 +344,17 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();
+
+		// Counter
+
+		CounterLocalServiceUtil.reset(Group.class.getName());
+
+		// Schema
+
+		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
 	}
 
-	private void _upgradeLucene() throws Exception {
-		PropsUtil.set(PropsUtil.INDEX_ON_STARTUP, "true");
-	}
-
-	private void _upgradeOwnerIds() throws Exception {
-		UpgradeColumn upgradeOwnerIdColumn =
-			new SwapUpgradeColumnImpl("ownerId", _ownerIdMapper);
-
-		UpgradeColumn upgradeGroupIdColumn =
-			new SwapUpgradeColumnImpl("groupId", _groupIdMapper);
-
-		// Layout
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			LayoutImpl.TABLE_NAME, LayoutImpl.TABLE_COLUMNS,
-			upgradeOwnerIdColumn);
-
-		upgradeTable.updateTable();
-
-		// LayoutSet
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			LayoutSetImpl.TABLE_NAME, LayoutSetImpl.TABLE_COLUMNS,
-			upgradeOwnerIdColumn, upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// PortletPreferences
-
-		UpgradeColumn upgradePreferencesColumn =
-			new PreferencesUpgradeColumnImpl(_groupIdMapper);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PortletPreferencesImpl.TABLE_NAME,
-			PortletPreferencesImpl.TABLE_COLUMNS,
-			upgradeOwnerIdColumn, upgradePreferencesColumn);
-
-		upgradeTable.updateTable();
-
-		// JournalContentSearch
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalContentSearchImpl.TABLE_NAME,
-			JournalContentSearchImpl.TABLE_COLUMNS, upgradeGroupIdColumn,
-			upgradeOwnerIdColumn);
-
-		upgradeTable.updateTable();
-	}
-
+	/*
 	private void _upgradeResources() throws Exception {
 		TempUpgradeColumnImpl codeIdColumn =
 			new TempUpgradeColumnImpl("codeId");
@@ -362,54 +368,28 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradePrimKeyColumn);
 
 		upgradeTable.updateTable();
-	}
-
-	private void _upgradeSchema() throws Exception {
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
-	}
-
-	private ValueMapper _groupIdMapper;
-	private ValueMapper _ownerIdMapper;
-
-	private static final String _TABLE_GROUPS_ORGS = "Groups_Orgs";
+	}*/
 
 	private static final String _TABLE_GROUPS_PERMISSIONS =
 		"Groups_Permissions";
-
-	private static final String _TABLE_GROUPS_ROLES = "Groups_Roles";
-
-	private static final String _TABLE_GROUPS_USERGROUPS = "Groups_UserGroups";
-
-	private static final String _TABLE_USERS_GROUPS = "Users_Groups";
-
-	private static final Object[][] _COLUMNS_GROUPS_ORGS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"organizationId", new Integer(Types.VARCHAR)}
-	};
 
 	private static final Object[][] _COLUMNS_GROUPS_PERMISSIONS = {
 		{"groupId", new Integer(Types.BIGINT)},
 		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
-	private static final Object[][] _COLUMNS_GROUPS_ROLES = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"roleId", new Integer(Types.VARCHAR)}
-	};
-
-	private static final Object[][] _COLUMNS_GROUPS_USERGROUPS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"userGroupId", new Integer(Types.VARCHAR)}
-	};
-
-	private static final Object[][] _COLUMNS_USERS_GROUPS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.VARCHAR)}
-	};
-
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter_column_type Group_ classNameId LONG",
-		"alter_column_type Group_ classPK LONG"
+		"alter_column_type Group_ classPK LONG",
+		"update Group_ set name = classPK where classPK > 0",
+
+		"alter table Layout drop primary key",
+		"alter table Layout add primary key (plid)",
+		"alter table Layout drop ownerId",
+
+		"alter table LayoutSet drop primary key",
+		"alter table LayoutSet add primary key (layoutSetId)",
+		"alter table LayoutSet drop ownerId"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);

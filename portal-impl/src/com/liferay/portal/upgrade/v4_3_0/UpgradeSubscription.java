@@ -30,8 +30,17 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassNameUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+
+import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,9 +69,27 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		// Subscription
 
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
+		ClassNameIdUpgradeColumnImpl classNameIdColumn =
+			new ClassNameIdUpgradeColumnImpl();
+
+		List classPKContainers = new ArrayList();
+
+		/*classPKContainers.add(
+			new ClassPKContainer(
+				MBCategory.class.getName(),
+				AvailableMappersUtil.getMBCategoryIdMapper(), true));*/
+
+		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
+			classNameIdColumn, classPKContainers);
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			SubscriptionImpl.TABLE_NAME, SubscriptionImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), new ClassNameUpgradeColumnImpl());
+			new PKUpgradeColumnImpl("subscriptionId", false),
+			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -76,6 +103,7 @@ public class UpgradeSubscription extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type Subscription userId LONG",
 		"alter_column_type Subscription classNameId LONG",
 		"alter_column_type Subscription classPK LONG"
 	};

@@ -20,27 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import java.util.Iterator;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.util.PortalUtil;
+
+import java.sql.Types;
 
 /**
- * <a href="ValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassNameIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
  */
-public interface ValueMapper {
+public class ClassNameIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public Object getNewValue(Object oldValue) throws Exception;
+	public ClassNameIdUpgradeColumnImpl() {
+		super("classNameId");
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception;
+		_oldColumnType = new Integer(Types.VARCHAR);
+	}
 
-	public void appendException(Object exception);
+	public Integer getOldColumnType(Integer defaultType) {
+		return _oldColumnType;
+	}
 
-	public Iterator iterator() throws Exception;
+	public Object getNewValue(Object oldValue) throws Exception {
+		String className = (String)oldValue;
 
-	public int size() throws Exception;
+		Object newValue = new Long(PortalUtil.getClassNameId(className));
+
+		_temp = newValue;
+
+		return newValue;
+	}
+
+	public Object getTemp() {
+		return _temp;
+	}
+
+	private Integer _oldColumnType;
+	private Object _temp;
 
 }

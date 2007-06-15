@@ -22,25 +22,20 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeOrgLabor.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeOrgLabor extends UpgradeProcess {
+public class UpgradeJournal extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -54,20 +49,9 @@ public class UpgradeOrgLabor extends UpgradeProcess {
 	}
 
 	private void _upgrade() throws Exception {
-
-		// OrgLabor
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl());
-
-		upgradeTable.updateTable();
-
-		// Counter
-
-		CounterLocalServiceUtil.reset(OrgLabor.class.getName());
+		PropsUtil.set(PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeOrgLabor.class);
+	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
 
 }

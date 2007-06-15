@@ -23,34 +23,28 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.util.PortalUtil;
-
-import java.sql.Types;
 
 /**
- * <a href="ClassNameUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PrefsOwnerTypeUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ClassNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class PrefsOwnerTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ClassNameUpgradeColumnImpl() {
-		super("classNameId");
+	public PrefsOwnerTypeUpgradeColumnImpl(
+		PrefsOwnerIdUpgradeColumnImpl ownerIdColumn) {
 
-		_oldColumnType = new Integer(Types.VARCHAR);
-	}
+		super("ownerType");
 
-	public Integer getOldColumnType(Integer defaultType) {
-		return _oldColumnType;
+		_ownerIdColumn = ownerIdColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String className = (String)oldValue;
-
-		return new Long(PortalUtil.getClassNameId(className));
+		return _ownerIdColumn.getOwnerType();
 	}
 
-	private Integer _oldColumnType;
+	private PrefsOwnerIdUpgradeColumnImpl _ownerIdColumn;
 
 }

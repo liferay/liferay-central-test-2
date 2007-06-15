@@ -20,27 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import java.util.Iterator;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 
 /**
- * <a href="ValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="PrefsPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
  */
-public interface ValueMapper {
+public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public Object getNewValue(Object oldValue) throws Exception;
+	public PrefsPlidUpgradeColumnImpl(
+		PrefsOwnerIdUpgradeColumnImpl ownerIdColumn,
+		TempUpgradeColumnImpl layoutIdColumn) {
 
-	public void mapValue(Object oldValue, Object newValue) throws Exception;
+		super("plid");
 
-	public void appendException(Object exception);
+		_ownerIdColumn = ownerIdColumn;
+		_layoutIdColumn = layoutIdColumn;
+	}
 
-	public Iterator iterator() throws Exception;
+	public Object getNewValue(Object oldValue) throws Exception {
+		//return _ownerIdColumn.getOwnerType();
+		return oldValue;
+	}
 
-	public int size() throws Exception;
+	private PrefsOwnerIdUpgradeColumnImpl _ownerIdColumn;
+	private TempUpgradeColumnImpl _layoutIdColumn;
 
 }

@@ -58,7 +58,7 @@ public class UpgradePortlet extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PortletImpl.TABLE_NAME, PortletImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl());
+			new PKUpgradeColumnImpl("id_", false));
 
 		upgradeTable.updateTable();
 

@@ -23,10 +23,27 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+
+import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,6 +70,37 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 	private void _upgrade() throws Exception {
 
+		// EmailAddress
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
+		ClassNameIdUpgradeColumnImpl classNameIdColumn =
+			new ClassNameIdUpgradeColumnImpl();
+
+		List classPKContainers = new ArrayList();
+
+		classPKContainers.add(
+			new ClassPKContainer(
+				Contact.class.getName(),
+				AvailableMappersUtil.getContactIdMapper(), false));
+
+		classPKContainers.add(
+			new ClassPKContainer(
+				Organization.class.getName(),
+				AvailableMappersUtil.getOrganizationIdMapper(), true));
+
+		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
+			classNameIdColumn, classPKContainers);
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("emailAddressId", false),
+			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
 		// Counter
 
 		CounterLocalServiceUtil.reset(EmailAddress.class.getName());
@@ -63,6 +111,7 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type EmailAddress userId LONG",
 		"alter_column_type EmailAddress classNameId LONG",
 		"alter_column_type EmailAddress classPK LONG"
 	};

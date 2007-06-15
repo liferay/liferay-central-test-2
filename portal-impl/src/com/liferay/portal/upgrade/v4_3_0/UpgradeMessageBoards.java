@@ -68,7 +68,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBCategory
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"categoryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
@@ -93,7 +94,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBMessage
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("messageId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
@@ -120,7 +121,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBMessageFlag
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("messageFlagId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageFlagImpl.TABLE_NAME, MBMessageFlagImpl.TABLE_COLUMNS,
@@ -130,7 +131,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBThread
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("threadId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBThreadImpl.TABLE_NAME, MBThreadImpl.TABLE_COLUMNS,
@@ -156,7 +157,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBDiscussionImpl.TABLE_NAME, MBDiscussionImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), upgradeThreadIdColumn);
+			new PKUpgradeColumnImpl("discussionId", false),
+			upgradeThreadIdColumn);
 
 		upgradeTable.updateTable();
 

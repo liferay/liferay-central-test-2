@@ -50,6 +50,10 @@ public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
+	public Integer getNewColumnType(Integer defaultType) {
+		return getOldColumnType(defaultType);
+	}
+
 	public Object getNewValue(Object oldValue) throws Exception {
 		_temp = oldValue;
 

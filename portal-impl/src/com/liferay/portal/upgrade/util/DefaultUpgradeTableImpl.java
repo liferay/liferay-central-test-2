@@ -101,7 +101,9 @@ public class DefaultUpgradeTableImpl
 		getSortedColumnName(sortedColumnNames, upgradeColumn4);
 		getSortedColumnName(sortedColumnNames, upgradeColumn5);
 
-		Arrays.sort(columns, new ColumnsComparator(sortedColumnNames));
+		if (sortedColumnNames.size() > 0) {
+			Arrays.sort(columns, new ColumnsComparator(sortedColumnNames));
+		}
 
 		setColumns(columns);
 
@@ -190,7 +192,7 @@ public class DefaultUpgradeTableImpl
 		for (int i = 0; i < columns.length; i++) {
 			String name = (String)columns[i][0];
 
-			if (upgradeColumn.isApplicable(i, name)) {
+			if (upgradeColumn.isApplicable(name)) {
 				_upgradeColumns[i] = upgradeColumn;
 			}
 		}

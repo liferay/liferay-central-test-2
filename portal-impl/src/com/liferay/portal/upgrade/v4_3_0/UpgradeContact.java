@@ -22,13 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.ContactImpl;
-import com.liferay.portal.model.impl.EmailAddressImpl;
-import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -39,7 +34,7 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl;
 
 import java.sql.Types;
@@ -72,7 +67,7 @@ public class UpgradeContact extends UpgradeProcess {
 		// Contact_
 
 		PKUpgradeColumnImpl upgradeColumn = new PKUpgradeColumnImpl(
-			0, new Integer(Types.VARCHAR), true);
+			"contactId", new Integer(Types.VARCHAR), true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS, upgradeColumn);
@@ -82,35 +77,7 @@ public class UpgradeContact extends UpgradeProcess {
 		ValueMapper contactIdMapper = new DefaultPKMapper(
 			upgradeColumn.getValueMapper());
 
-		// Address
-
-		TempUpgradeColumnImpl classNameIdColumn =
-			new TempUpgradeColumnImpl("classNameId");
-
-		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
-			classNameIdColumn, Contact.class.getName(), contactIdMapper, false);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
-		// EmailAddress
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
-		// Phone
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
+		AvailableMappersUtil.setContactIdMapper(contactIdMapper);
 
 		// User_
 
@@ -123,14 +90,6 @@ public class UpgradeContact extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS,
 			upgradeScreenNameColumn, upgradeContactIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Website
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 

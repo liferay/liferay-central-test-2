@@ -56,7 +56,8 @@ public class UpgradeCalendar extends UpgradeProcess {
 	}
 
 	private void _upgrade() throws Exception {
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"eventId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,

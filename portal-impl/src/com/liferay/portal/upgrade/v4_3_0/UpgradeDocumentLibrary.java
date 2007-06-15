@@ -69,7 +69,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFolder
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
@@ -97,7 +98,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileEntry
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("fileEntryId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
@@ -111,7 +112,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), upgradeFolderIdColumn);
+			new PKUpgradeColumnImpl("fileRankId", false),
+			upgradeFolderIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -119,8 +121,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), upgradeFolderIdColumn,
-			upgradeToFolderIdColumn);
+			new PKUpgradeColumnImpl("fileShortcutId", false),
+			upgradeFolderIdColumn, upgradeToFolderIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -128,7 +130,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), upgradeFolderIdColumn);
+			new PKUpgradeColumnImpl("fileVersionId", false),
+			upgradeFolderIdColumn);
 
 		upgradeTable.updateTable();
 

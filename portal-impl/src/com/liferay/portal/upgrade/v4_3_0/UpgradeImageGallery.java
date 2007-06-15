@@ -65,7 +65,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		// IGFolder
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
@@ -90,7 +91,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		// IGImage
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("imageId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			IGImageImpl.TABLE_NAME, IGImageImpl.TABLE_COLUMNS, pkUpgradeColumn,

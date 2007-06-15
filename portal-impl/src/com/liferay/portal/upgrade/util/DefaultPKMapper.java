@@ -25,6 +25,8 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.util.GetterUtil;
 
+import java.util.Iterator;
+
 /**
  * <a href="DefaultPKMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -62,6 +64,10 @@ public class DefaultPKMapper implements ValueMapper {
 
 	public void appendException(Object exception) {
 		_valueMapper.appendException(exception);
+	}
+
+	public Iterator iterator() throws Exception {
+		return _valueMapper.iterator();
 	}
 
 	public int size() throws Exception {

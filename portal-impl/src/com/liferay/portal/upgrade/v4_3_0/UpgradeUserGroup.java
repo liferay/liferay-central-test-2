@@ -29,13 +29,10 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-
-import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,7 +60,8 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 		// UserGroup
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"userGroupId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			UserGroupImpl.TABLE_NAME, UserGroupImpl.TABLE_COLUMNS,
@@ -73,24 +71,7 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 		ValueMapper userGroupIdMapper = pkUpgradeColumn.getValueMapper();
 
-		UpgradeColumn upgradeUserGroupIdColumn =
-			new SwapUpgradeColumnImpl("userGroupId", userGroupIdMapper);
-
-		// Groups_UserGroups
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_USERGROUPS, _COLUMNS_GROUPS_USERGROUPS,
-			upgradeUserGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Users_UserGroups
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_USERS_USERGROUPS, _COLUMNS_USERS_USERGROUPS,
-			upgradeUserGroupIdColumn);
-
-		upgradeTable.updateTable();
+		AvailableMappersUtil.setUserGroupIdMapper(userGroupIdMapper);
 
 		// Resource
 
@@ -101,20 +82,6 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 		CounterLocalServiceUtil.reset(UserGroup.class.getName());
 	}
-
-	private static final String _TABLE_GROUPS_USERGROUPS = "Groups_UserGroups";
-
-	private static final String _TABLE_USERS_USERGROUPS = "Users_UserGroups";
-
-	private static final Object[][] _COLUMNS_GROUPS_USERGROUPS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"userGroupId", new Integer(Types.BIGINT)}
-	};
-
-	private static final Object[][] _COLUMNS_USERS_USERGROUPS = {
-		{"userId", new Integer(Types.BIGINT)},
-		{"userGroupId", new Integer(Types.BIGINT)}
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUserGroup.class);
 

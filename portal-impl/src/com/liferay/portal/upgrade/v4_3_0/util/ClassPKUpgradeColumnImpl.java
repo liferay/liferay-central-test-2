@@ -23,12 +23,13 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.GetterUtil;
 
 import java.sql.Types;
+
+import java.util.List;
 
 /**
  * <a href="ClassPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,17 +39,15 @@ import java.sql.Types;
  */
 public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ClassPKUpgradeColumnImpl(TempUpgradeColumnImpl classNameIdColumn,
-									String className, ValueMapper valueMapper,
-									boolean isLong) {
+	public ClassPKUpgradeColumnImpl(
+		ClassNameIdUpgradeColumnImpl classNameIdColumn,
+		List classPKContainers) {
 
 		super("classPK");
 
 		_oldColumnType = new Integer(Types.VARCHAR);
 		_classNameIdColumn = classNameIdColumn;
-		_classNameId = PortalUtil.getClassNameId(className);
-		_valueMapper = valueMapper;
-		_isLong = isLong;
+		_classPKContainers = classPKContainers;
 	}
 
 	public Integer getOldColumnType(Integer defaultType) {
@@ -62,24 +61,30 @@ public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Long classNameIdObj = (Long)_classNameIdColumn.getTemp();
 
-		if (classNameIdObj.longValue() == _classNameId) {
-			if (_isLong) {
-				return _valueMapper.getNewValue(
-					new Long(GetterUtil.getLong((String)oldValue)));
-			}
-			else {
-				return _valueMapper.getNewValue(oldValue);
+		for (int i = 0; i < _classPKContainers.size(); i++) {
+			ClassPKContainer classPKContainer =
+				(ClassPKContainer)_classPKContainers.get(i);
+
+			long classNameId = PortalUtil.getClassNameId(
+				classPKContainer.getClassName());
+			ValueMapper valueMapper = classPKContainer.getValueMapper();
+
+			if (classNameIdObj.longValue() == classNameId) {
+				if (classPKContainer.isLong()) {
+					return valueMapper.getNewValue(
+						new Long(GetterUtil.getLong((String)oldValue)));
+				}
+				else {
+					return valueMapper.getNewValue(oldValue);
+				}
 			}
 		}
-		else {
-			return oldValue;
-		}
+
+		return new Long(0);
 	}
 
 	private Integer _oldColumnType;
-	private TempUpgradeColumnImpl _classNameIdColumn;
-	private long _classNameId;
-	private ValueMapper _valueMapper;
-	private boolean _isLong;
+	private ClassNameIdUpgradeColumnImpl _classNameIdColumn;
+	private List _classPKContainers;
 
 }

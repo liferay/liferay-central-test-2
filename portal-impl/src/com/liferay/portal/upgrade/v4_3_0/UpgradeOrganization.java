@@ -23,30 +23,22 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.impl.AddressImpl;
-import com.liferay.portal.model.impl.EmailAddressImpl;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
-import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
-import com.liferay.portal.model.impl.PhoneImpl;
-import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-
-import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -74,7 +66,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		// Organization
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"organizationId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
@@ -84,6 +77,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		ValueMapper organizationIdMapper = new DefaultPKMapper(
 			pkUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setOrganizationIdMapper(organizationIdMapper);
 
 		UpgradeColumn upgradeParentOrganizationIdColumn =
 			new SwapUpgradeColumnImpl(
@@ -98,86 +93,18 @@ public class UpgradeOrganization extends UpgradeProcess {
 		UpgradeColumn upgradeOrganizationIdColumn = new SwapUpgradeColumnImpl(
 			"organizationId", organizationIdMapper);
 
-		// Address
-
-		TempUpgradeColumnImpl classNameIdColumn =
-			new TempUpgradeColumnImpl("classNameId");
-
-		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
-			classNameIdColumn, Organization.class.getName(),
-			organizationIdMapper, true);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
-		// EmailAddress
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
-		// Group
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
-		// Groups_Orgs
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_ORGS, _COLUMNS_GROUPS_ORGS,
-			upgradeOrganizationIdColumn);
-
-		upgradeTable.updateTable();
-
 		// OrgGroupPermission
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgGroupPermissionImpl.TABLE_NAME,
 			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeOrganizationIdColumn);
 
-		// OrgGroupRole
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
-			upgradeOrganizationIdColumn);
-
 		// OrgLabor
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("orgLaborId", false),
 			upgradeOrganizationIdColumn);
-
-		// Phone
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
-		// Users_Orgs
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_USERS_ORGS, _COLUMNS_USERS_ORGS,
-			upgradeOrganizationIdColumn);
-
-		upgradeTable.updateTable();
-
-		// Website
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			classNameIdColumn, upgradeClassPKColumn);
-
-		upgradeTable.updateTable();
 
 		// Resource
 
@@ -187,21 +114,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 		// Counter
 
 		CounterLocalServiceUtil.reset(Organization.class.getName());
+		CounterLocalServiceUtil.reset(OrgLabor.class.getName());
 	}
-
-	private static final String _TABLE_GROUPS_ORGS = "Groups_Orgs";
-
-	private static final String _TABLE_USERS_ORGS = "Users_Orgs";
-
-	private static final Object[][] _COLUMNS_GROUPS_ORGS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"organizationId", new Integer(Types.BIGINT)}
-	};
-
-	private static final Object[][] _COLUMNS_USERS_ORGS = {
-		{"userId", new Integer(Types.BIGINT)},
-		{"organizationId", new Integer(Types.BIGINT)}
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);
 

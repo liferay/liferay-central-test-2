@@ -30,12 +30,6 @@ package com.liferay.portal.upgrade.util;
  */
 public class SkipUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public SkipUpgradeColumnImpl(int pos, Integer oldColumnType) {
-		super(pos);
-
-		_oldColumnType = oldColumnType;
-	}
-
 	public SkipUpgradeColumnImpl(String name, Integer oldColumnType) {
 		super(name);
 

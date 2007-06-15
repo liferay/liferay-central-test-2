@@ -28,6 +28,10 @@ import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.MemoryValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -104,12 +108,18 @@ public class UpgradeCompany extends UpgradeProcess {
 	private void _upgrade() throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
+		ValueMapper companyIdMapper = new MemoryValueMapper();
+
+		AvailableMappersUtil.setCompanyIdMapper(companyIdMapper);
+
 		String[] webIds = _getWebIds();
 
 		for (int i = 0; i < webIds.length; i++) {
 			String webId = webIds[i];
 
-			_upgradeWebId(webId);
+			long companyId = _upgradeWebId(webId);
+
+			companyIdMapper.mapValue(webId, new Long(companyId));
 		}
 
 		for (int i = 0; i < _TABLES.length; i++) {
@@ -122,10 +132,15 @@ public class UpgradeCompany extends UpgradeProcess {
 			dbUtil.executeSQL(sql);
 		}
 
+		dbUtil.executeSQL(
+			"update PortletPreferences set ownerId = '0', ownerType = " +
+				PortletKeys.PREFS_OWNER_TYPE_COMPANY +
+					" where ownerId = 'COMPANY.LIFERAY_PORTAL'");
+
 		dbUtil.executeSQL("alter_column_type Account_ accountId LONG");
 	}
 
-	private void _upgradeWebId(String webId) throws Exception {
+	private long _upgradeWebId(String webId) throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		long companyId = CounterLocalServiceUtil.increment();
@@ -172,6 +187,11 @@ public class UpgradeCompany extends UpgradeProcess {
 					"' and classPK = '" + webId + "'");
 
 		dbUtil.executeSQL(
+			"update PortletPreferences set ownerId = '" + companyId +
+				"', ownerType = " + PortletKeys.PREFS_OWNER_TYPE_COMPANY +
+					" where ownerId = 'COMPANY." + webId + "'");
+
+		dbUtil.executeSQL(
 			"update User_ set companyId = '" + companyId +
 				"', defaultUser = TRUE where userId = '" + webId + ".default'");
 
@@ -179,6 +199,8 @@ public class UpgradeCompany extends UpgradeProcess {
 			"update Website set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
+
+		return companyId;
 	}
 
 	private static final String _GET_WEB_IDS = "select companyId from Company";
@@ -193,7 +215,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		"Phone", "PollsQuestion", "Portlet", "RatingsEntry", "Resource_",
 		"Role_", "ShoppingCart", "ShoppingCategory", "ShoppingCoupon",
 		"ShoppingItem", "ShoppingOrder", "Subscription", "UserGroup", "User_",
-		"UserTracker", "Website", "WikiNode", "WikiPage"
+		"Website", "WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);

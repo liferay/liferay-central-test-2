@@ -23,13 +23,18 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
-import com.liferay.portal.upgrade.v4_3_0.UpgradeClassName;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeCompany;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeContact;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeLucene;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeMappingTables;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeOrganization;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
+import com.liferay.portal.upgrade.v4_3_0.UpgradePortlet;
+import com.liferay.portal.upgrade.v4_3_0.UpgradePortletPreferences;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeRole;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
@@ -56,30 +61,33 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		// Upgrade major tables
-
+		upgrade(new UpgradeLucene());
 		upgrade(new UpgradeCompany());
 		upgrade(new UpgradeResource());
-		upgrade(new UpgradeClassName());
 		upgrade(new UpgradeUser());
 		upgrade(new UpgradeContact());
 		upgrade(new UpgradeUserGroup());
 		upgrade(new UpgradeOrganization());
-		//upgrade(new UpgradeGroup());
-
-		// Upgrade all other tables
-
+		upgrade(new UpgradeGroup());
+		upgrade(new UpgradeRole());
+		upgrade(new UpgradePortletPreferences());
+		upgrade(new UpgradeMappingTables());
 		upgrade(new UpgradeAddress());
 		//upgrade(new UpgradeBlogs());
 		//upgrade(new UpgradeBookmarks());
 		//upgrade(new UpgradeCalendar());
-		//upgrade(new UpgradeContact());
+		//upgrade(new UpgradeDocumentLibrary());
 		upgrade(new UpgradeEmailAddress());
-		//upgrade(new UpgradeOrgLabor());
-		//upgrade(new UpgradePasswordTracker());
+		//upgrade(new UpgradeImageGallery());
+		//upgrade(new UpgradeJournal());
+		//upgrade(new UpgradeLayoutSet());
+		//upgrade(new UpgradeMessageBoards());
 		upgrade(new UpgradePhone());
 		//upgrade(new UpgradePolls());
+		upgrade(new UpgradePortlet());
+		//upgrade(new UpgradeShopping());
 		//upgrade(new UpgradeSubscription());
+		//upgrade(new UpgradeUserIdMapper());
 		upgrade(new UpgradeWebsite());
 		//upgrade(new UpgradeWiki());
 	}

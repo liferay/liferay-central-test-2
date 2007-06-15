@@ -64,7 +64,8 @@ public class UpgradePolls extends UpgradeProcess {
 
 		// PollsQuestion
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"questionId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
@@ -79,7 +80,7 @@ public class UpgradePolls extends UpgradeProcess {
 
 		// PollsChoice
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(0, true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl("choiceId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS,
@@ -94,7 +95,7 @@ public class UpgradePolls extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl(), upgradeQuestionIdColumn,
+			new PKUpgradeColumnImpl("voteId", false), upgradeQuestionIdColumn,
 			upgradeChoiceIdColumn);
 
 		upgradeTable.updateTable();

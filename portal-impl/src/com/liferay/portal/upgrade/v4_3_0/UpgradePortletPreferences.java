@@ -28,7 +28,20 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerTypeUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.PrefsPlidUpgradeColumnImpl;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.util.ArrayUtil;
+
+import java.sql.Types;
+
+import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -56,20 +69,67 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 		// PortletPreferences
 
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		dbUtil.executeSQL(
+			"delete from PortletPreferences where ownerId = '0' and " +
+				"ownerType = " + PortletKeys.PREFS_OWNER_TYPE_COMPANY);
+
+		ValueMapper companyIdMapper = AvailableMappersUtil.getCompanyIdMapper();
+
+		Iterator itr = companyIdMapper.iterator();
+
+		while (itr.hasNext()) {
+			String webId = (String)itr.next();
+
+			Long companyIdObj = (Long)companyIdMapper.getNewValue(webId);
+
+			dbUtil.executeSQL(
+				"delete from PortletPreferences where ownerId = '" +
+					companyIdObj.longValue() + "' and ownerType = " +
+						PortletKeys.PREFS_OWNER_TYPE_COMPANY);
+		}
+
+		Object[][] prefsColumns1 = {{"layoutId", new Integer(Types.VARCHAR)}};
+		Object[][] prefsColumns2 =
+			(Object[][])PortletPreferencesImpl.TABLE_COLUMNS.clone();
+		Object[][] prefsColumns =
+			new Object[prefsColumns1.length + prefsColumns2.length][];
+
+		ArrayUtil.combine(prefsColumns1, prefsColumns2, prefsColumns);
+
+		PrefsOwnerIdUpgradeColumnImpl upgradeOwnerIdColumn =
+			new PrefsOwnerIdUpgradeColumnImpl(
+				AvailableMappersUtil.getGroupIdMapper(),
+				AvailableMappersUtil.getUserIdMapper());
+
+		UpgradeColumn upgradeOwnerTypeColumn =
+			new PrefsOwnerTypeUpgradeColumnImpl(upgradeOwnerIdColumn);
+
+		TempUpgradeColumnImpl upgradeLayoutIdColumn =
+			new TempUpgradeColumnImpl("layoutId");
+
+		UpgradeColumn upgradePlidColumn = new PrefsPlidUpgradeColumnImpl(
+			upgradeOwnerIdColumn, upgradeLayoutIdColumn);
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PortletPreferencesImpl.TABLE_NAME,
-			PortletPreferencesImpl.TABLE_COLUMNS, new PKUpgradeColumnImpl());
+			PortletPreferencesImpl.TABLE_NAME, prefsColumns,
+			new PKUpgradeColumnImpl("portletPreferencesId", false),
+			upgradeOwnerIdColumn, upgradeOwnerTypeColumn, upgradeLayoutIdColumn,
+			upgradePlidColumn);
 
 		upgradeTable.updateTable();
 
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		dbUtil.executeSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table PortletPreferences drop primary key",
 		"alter table PortletPreferences add primary key (portletPreferencesId)"
+		//"alter_column_type PortletPreferences ownerId LONG"
+		//"alter table PortletPreferences drop layoutId"
 	};
 
 	private static Log _log =

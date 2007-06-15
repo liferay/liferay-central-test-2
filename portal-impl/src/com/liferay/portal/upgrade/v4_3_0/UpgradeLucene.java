@@ -20,49 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0.util;
+package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
-import com.liferay.util.Validator;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.util.PropsUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PreferencesUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="UpgradeLucene.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class PreferencesUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class UpgradeLucene extends UpgradeProcess {
 
-	public PreferencesUpgradeColumnImpl(ValueMapper groupIdMapper) {
-		super("preferences");
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
 
-		_groupIdMapper = groupIdMapper;
-	}
-
-	public Object getNewValue(Object oldValue) throws Exception {
-		String xml = (String)oldValue;
-
-		PortletPreferencesImpl prefs = (PortletPreferencesImpl)
-			PortletPreferencesSerializer.fromDefaultXML(xml);
-
-		String groupId = (String)prefs.getValue("group-id", null);
-
-		if (Validator.isNotNull(groupId)) {
-			Long newGroupId =
-				(Long)_groupIdMapper.getNewValue(new Long(groupId));
-
-			prefs.setValue("group-id", newGroupId.toString());
-
-			xml = PortletPreferencesSerializer.toXML(prefs);
+		try {
+			_upgrade();
 		}
-
-		return xml;
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private ValueMapper _groupIdMapper;
+	private void _upgrade() throws Exception {
+		PropsUtil.set(PropsUtil.INDEX_ON_STARTUP, "true");
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeLucene.class);
 
 }
