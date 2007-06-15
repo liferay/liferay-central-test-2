@@ -241,6 +241,8 @@
 	</target>
 
 	<target name="war" depends="compile">
+		<antcall target="build-fckeditor" />
+
 		<war
 			basedir="docroot"
 			destfile="${war.file}.war"
@@ -250,15 +252,7 @@
 	</target>
 
 	<target name="deploy">
-		<unzip src="docroot/html/js/editor/${fckeditor.file}" dest="docroot/html/js/editor" />
-
-		<copy todir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay">
-			<fileset dir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/default" />
-		</copy>
-
-		<copy todir="docroot/html/js/editor/fckeditor" overwrite="yes">
-			<fileset dir="docroot/html/js/editor/_fckeditor" />
-		</copy>
+		<antcall target="build-fckeditor" />
 
 		<antcall target="build-common-web.deploy" />
 
@@ -495,6 +489,18 @@
 		>
 			<arg line="${css.file}" />
 		</java>
+	</target>
+
+	<target name="build-fckeditor">
+		<unzip src="docroot/html/js/editor/${fckeditor.file}" dest="docroot/html/js/editor" />
+
+		<copy todir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay">
+			<fileset dir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/default" />
+		</copy>
+
+		<copy todir="docroot/html/js/editor/fckeditor" overwrite="yes">
+			<fileset dir="docroot/html/js/editor/_fckeditor" />
+		</copy>
 	</target>
 
 	<target name="build-javascript">
