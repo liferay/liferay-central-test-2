@@ -51,6 +51,7 @@ import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
 import com.liferay.util.ArrayUtil_IW;
 import com.liferay.util.BrowserSniffer_IW;
+import com.liferay.util.DateUtil_IW;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.GetterUtil_IW;
 import com.liferay.util.Randomizer_IW;
@@ -232,6 +233,11 @@ public class VelocityVariables {
 
 		vc.put(
 			"browserSniffer", BrowserSniffer_IW.getInstance());
+
+		// Date util
+
+		vc.put(
+			"dateUtil", DateUtil_IW.getInstance());
 
 		// Getter util
 

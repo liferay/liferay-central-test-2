@@ -28,6 +28,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -68,6 +69,10 @@ public class DateUtil {
 		else {
 			return 1;
 		}
+	}
+
+	public static Date getCurrentDate() {
+		return new Date();
 	}
 
 	public static DateFormat getISOFormat() {
@@ -139,4 +144,9 @@ public class DateUtil {
 		return dateFormat;
 	}
 
+	public static DateFormat getSimpleDateFormat(
+			String pattern, Locale locale) {
+		
+		return new SimpleDateFormat(pattern, locale);
+	}
 }
