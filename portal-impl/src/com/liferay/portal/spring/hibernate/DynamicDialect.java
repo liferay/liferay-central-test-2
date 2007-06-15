@@ -31,6 +31,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -43,8 +44,10 @@ import org.hibernate.MappingException;
 import org.hibernate.dialect.DB2400Dialect;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.DialectFactory;
+import org.hibernate.dialect.lock.LockingStrategy;
 import org.hibernate.exception.SQLExceptionConverter;
 import org.hibernate.exception.ViolatedConstraintNameExtracter;
+import org.hibernate.persister.entity.Lockable;
 import org.hibernate.sql.CaseFragment;
 import org.hibernate.sql.JoinFragment;
 
@@ -148,6 +151,16 @@ public class DynamicDialect extends Dialect {
 		return _dialect.appendLockHint(mode, tableName);
 	}
 
+	public String applyLocksToSql(
+		String sql, Map aliasedLockModes, Map keyColumnNames) {
+
+		return _dialect.applyLocksToSql(sql, aliasedLockModes, keyColumnNames);
+	}
+
+	public boolean areStringComparisonsCaseInsensitive() {
+		return _dialect.areStringComparisonsCaseInsensitive();
+	}
+
 	public boolean bindLimitParametersFirst() {
 		return _dialect.bindLimitParametersFirst();
 	}
@@ -170,6 +183,14 @@ public class DynamicDialect extends Dialect {
 
 	public JoinFragment createOuterJoinFragment() {
 		return _dialect.createOuterJoinFragment();
+	}
+
+	public boolean doesReadCommittedCauseWritersToBlockReaders() {
+		return _dialect.doesReadCommittedCauseWritersToBlockReaders();
+	}
+
+	public boolean doesRepeatableReadCauseReadersToBlockWriters() {
+		return _dialect.doesRepeatableReadCauseReadersToBlockWriters();
 	}
 
 	public boolean dropConstraints() {
@@ -217,10 +238,26 @@ public class DynamicDialect extends Dialect {
 		return _dialect.getColumnComment(comment);
 	}
 
+	public String getCreateMultisetTableString() {
+		return _dialect.getCreateMultisetTableString();
+	}
+
 	public String[] getCreateSequenceStrings(String sequenceName)
 		throws MappingException {
 
 		return _dialect.getCreateSequenceStrings(sequenceName);
+	}
+
+	public String[] getCreateSequenceStrings(
+			String sequenceName, int initialValue, int incrementSize)
+		throws MappingException {
+
+		return _dialect.getCreateSequenceStrings(
+			sequenceName, initialValue, incrementSize);
+	}
+
+	public String getCreateTableString() {
+		return _dialect.getCreateTableString();
 	}
 
 	public String getCreateTemporaryTablePostfix() {
@@ -298,20 +335,22 @@ public class DynamicDialect extends Dialect {
 		return _dialect.getKeywords();
 	}
 
-	public String getLimitString(String querySelect, boolean hasOffset) {
-
-		// Based on Hibernate 3.2.0ga source code.  Under 3.2.1ga+, this method
-		// is protected.
-
-		throw new UnsupportedOperationException("paged queries not supported");
-	}
-
 	public String getLimitString(String querySelect, int hasOffset, int limit) {
 		return _dialect.getLimitString(querySelect, hasOffset, limit);
 	}
 
+	public LockingStrategy getLockingStrategy(
+		Lockable lockable, LockMode lockMode) {
+
+		return _dialect.getLockingStrategy(lockable, lockMode);
+	}
+
 	public String getLowercaseFunction() {
 		return _dialect.getLowercaseFunction();
+	}
+
+	public int getMaxAliasLength() {
+		return _dialect.getMaxAliasLength();
 	}
 
 	public Class getNativeIdentifierGeneratorClass() {
@@ -354,6 +393,10 @@ public class DynamicDialect extends Dialect {
 		return _dialect.getSequenceNextValString(sequenceName);
 	}
 
+	public String getTableComment(String comment) {
+		return _dialect.getTableComment(comment);
+	}
+
 	public String getTableTypeString() {
 		return _dialect.getTableTypeString();
 	}
@@ -394,6 +437,10 @@ public class DynamicDialect extends Dialect {
 		return _dialect.openQuote();
 	}
 
+	public Boolean performTemporaryTableDDLInIsolation() {
+		return _dialect.performTemporaryTableDDLInIsolation();
+	}
+
 	public boolean qualifyIndexName() {
 		return _dialect.qualifyIndexName();
 	}
@@ -405,8 +452,16 @@ public class DynamicDialect extends Dialect {
 		return _dialect.registerResultSetOutParameter(statement, col);
 	}
 
+	public boolean supportsBindAsCallableArgument() {
+		return _dialect.supportsBindAsCallableArgument();
+	}
+
 	public boolean supportsCascadeDelete() {
 		return _dialect.supportsCascadeDelete();
+	}
+
+	public boolean supportsCircularCascadeDeleteConstraints() {
+		return _dialect.supportsCircularCascadeDeleteConstraints();
 	}
 
 	public boolean supportsColumnCheck() {
@@ -419,6 +474,18 @@ public class DynamicDialect extends Dialect {
 
 	public boolean supportsCurrentTimestampSelection() {
 		return _dialect.supportsCurrentTimestampSelection();
+	}
+
+	public boolean supportsEmptyInList() {
+		return _dialect.supportsEmptyInList();
+	}
+
+	public boolean supportsExistsInSelect() {
+		return _dialect.supportsExistsInSelect();
+	}
+
+	public boolean supportsExpectedLobUsagePattern() {
+		return _dialect.supportsExpectedLobUsagePattern();
 	}
 
 	public boolean supportsIdentityColumns() {
@@ -445,6 +512,10 @@ public class DynamicDialect extends Dialect {
 		return _dialect.supportsLimitOffset();
 	}
 
+	public boolean supportsLobValueChangePropogation() {
+		return _dialect.supportsLobValueChangePropogation();
+	}
+
 	public boolean supportsNotNullUnique() {
 		return _dialect.supportsNotNullUnique();
 	}
@@ -457,8 +528,33 @@ public class DynamicDialect extends Dialect {
 		return _dialect.supportsParametersInInsertSelect();
 	}
 
+	public boolean supportsPooledSequences() {
+		return _dialect.supportsPooledSequences();
+	}
+
+	public boolean supportsResultSetPositionQueryMethodsOnForwardOnlyCursor() {
+		return _dialect.
+			supportsResultSetPositionQueryMethodsOnForwardOnlyCursor();
+	}
+
+	public boolean supportsRowValueConstructorSyntax() {
+		return _dialect.supportsRowValueConstructorSyntax();
+	}
+
+	public boolean supportsRowValueConstructorSyntaxInInList() {
+		return _dialect.supportsRowValueConstructorSyntaxInInList();
+	}
+
 	public boolean supportsSequences() {
 		return _dialect.supportsSequences();
+	}
+
+	public boolean supportsSubqueryOnMutatingTable() {
+		return _dialect.supportsSubqueryOnMutatingTable();
+	}
+
+	public boolean supportsSubselectAsInPredicateLHS() {
+		return _dialect.supportsSubselectAsInPredicateLHS();
 	}
 
 	public boolean supportsTableCheck() {
@@ -467,6 +563,10 @@ public class DynamicDialect extends Dialect {
 
 	public boolean supportsTemporaryTables() {
 		return _dialect.supportsTemporaryTables();
+	}
+
+	public boolean supportsUnboundedLobLocatorMaterialization() {
+		return _dialect.supportsUnboundedLobLocatorMaterialization();
 	}
 
 	public boolean supportsUnionAll() {

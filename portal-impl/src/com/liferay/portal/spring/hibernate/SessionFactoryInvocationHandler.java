@@ -22,6 +22,30 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import org.hibernate.CacheMode;
+import org.hibernate.Criteria;
+import org.hibernate.EntityMode;
+import org.hibernate.Filter;
+import org.hibernate.FlushMode;
+import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
+import org.hibernate.Query;
+import org.hibernate.ReplicationMode;
+import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import org.hibernate.stat.SessionStatistics;
+
+import java.io.Serializable;
+
+import java.lang.Class;
+import java.lang.Object;
+import java.lang.String;
+
+import java.sql.Connection;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Validator;
 
@@ -54,80 +78,74 @@ import org.hibernate.HibernateException;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 import org.hibernate.SessionFactory;
 
+
 /**
- * <a href="HibernateConfiguration.java.html"><b><i>View Source</i></b></a>
+ * <a href="SessionFactoryInvocationHandler.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-2996.
+ * </p>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HibernateConfiguration extends LocalSessionFactoryBean {
+public class SessionFactoryInvocationHandler implements InvocationHandler {
 
-	protected SessionFactory getTransactionAwareSessionFactoryProxy(
-		SessionFactory target) {
-
-		// LEP-2996
-
-		Class sessionFactoryInterface = SessionFactory.class;
-
-		if (target instanceof SessionFactoryImplementor) {
-			sessionFactoryInterface = SessionFactoryImplementor.class;
-		}
-
-		return (SessionFactory)Proxy.newProxyInstance(
-			sessionFactoryInterface.getClassLoader(),
-			new Class[] {sessionFactoryInterface},
-			new SessionFactoryInvocationHandler(target));
+	public SessionFactoryInvocationHandler(SessionFactory sessionFactory) {
+		_sessionFactory = sessionFactory;
 	}
 
-	protected Configuration newConfiguration() {
-		Configuration cfg = new Configuration();
+	public Object invoke(Object proxy, Method method, Object[] args)
+		throws Throwable {
+
+		if (method.getName().equals("getCurrentSession")) {
+			try {
+				Session session = (Session)SessionFactoryUtils.doGetSession(
+					(SessionFactory) proxy, false);
+
+				return wrapLiferaySession(session);
+			}
+			catch (IllegalStateException ise) {
+				throw new HibernateException(ise.getMessage());
+			}
+		}
+		else if (method.getName().equals("openSession")) {
+			Session session = (Session)method.invoke(_sessionFactory, args);
+
+			return wrapLiferaySession(session);
+		}
+		else if (method.getName().equals("equals")) {
+			if (proxy == args[0]) {
+				return Boolean.TRUE;
+			}
+			else {
+				return Boolean.FALSE;
+			}
+		}
+		else if (method.getName().equals("hashCode")) {
+			return new Integer(hashCode());
+		}
 
 		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-
-			String[] configs = PropsUtil.getArray(PropsUtil.HIBERNATE_CONFIGS);
-
-			for (int i = 0; i < configs.length; i++) {
-				try {
-					InputStream is =
-						classLoader.getResourceAsStream(configs[i]);
-
-					if (is != null) {
-						cfg = cfg.addInputStream(is);
-
-						is.close();
-					}
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-			cfg.setProperties(PropsUtil.getProperties());
+			return method.invoke(_sessionFactory, args);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return cfg;
-	}
-
-	protected void postProcessConfiguration(Configuration cfg) {
-
-		// Make sure that settings in portal.properties are set. See
-		// the buildSessionFactory implementation in the
-		// LocalSessionFactoryBean class to understand how Spring automates a
-		// lot of configuration for Hibernate.
-
-		String connectionReleaseMode = PropsUtil.get(
-			Environment.RELEASE_CONNECTIONS);
-
-		if (Validator.isNotNull(connectionReleaseMode)) {
-			cfg.setProperty(
-				Environment.RELEASE_CONNECTIONS, connectionReleaseMode);
+		catch (InvocationTargetException ite) {
+			throw ite.getTargetException();
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(HibernateConfiguration.class);
+	protected Session wrapLiferaySession(Session session) {
+		if (session.getClass().getName().equals(
+				LiferayClassicSession.class.getName())) {
+
+			return session;
+		}
+		else {
+			return new LiferayClassicSession(session);
+		}
+	}
+
+	private final SessionFactory _sessionFactory;
 
 }

@@ -50,7 +50,7 @@ public class HibernateUtil {
 
 	public static void closeSession(Session session) {
 		try {
-			if (session != null) {
+			if ((session != null) && (session.isOpen())) {
 				session.close();
 			}
 		}

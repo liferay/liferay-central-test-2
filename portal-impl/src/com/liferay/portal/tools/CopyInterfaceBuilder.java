@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.tools.comparator.JavaMethodComparator;
 import com.liferay.util.StringUtil;
+import com.liferay.util.TextFormatter;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -90,6 +91,8 @@ public class CopyInterfaceBuilder {
 
 		sm.append("public class Copy" + javaClass.getName() + " implements " + javaClass.getName() + " {");
 
+		String varName = "_" + TextFormatter.format(javaClass.getName(), TextFormatter.I);
+
 		// Methods
 
 		Set imports = new TreeSet();
@@ -100,9 +103,11 @@ public class CopyInterfaceBuilder {
 			String methodName = javaMethod.getName();
 
 			if (javaMethod.isPublic()) {
-				sm.append("public " + javaMethod.getReturns().getJavaClass().getName() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				String returnValueName = javaMethod.getReturns().getValue();
 
-				imports.add(javaMethod.getReturns().getValue());
+				imports.add(returnValueName);
+
+				sm.append("public " + javaMethod.getReturns().getJavaClass().getName() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
@@ -147,10 +152,31 @@ public class CopyInterfaceBuilder {
 				}
 
 				sm.append("{");
-				sm.append("throw new Exception();");
+
+				if (!returnValueName.equals("void")) {
+					sm.append("return ");
+				}
+
+				sm.append(varName + "." + methodName + "(");
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sm.append(javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append(");");
 				sm.append("}");
 			}
 		}
+
+		// Fields
+
+		sm.append("private " + javaClass.getName() + " " + varName + ";");
 
 		// Class close brace
 
