@@ -22,7 +22,7 @@ alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 
 create table ClassName_ (
-	classNameId LONG primary key,
+	classNameId LONG not null primary key,
 	value VARCHAR(75) null
 );
 
@@ -110,7 +110,7 @@ alter table JournalArticle add resourcePrimKey LONG;
 alter_column_type JournalArticle groupId LONG;
 
 create table JournalArticleImage (
-	articleImageId LONG primary key,
+	articleImageId LONG not null primary key,
 	groupId LONG,
 	articleId VARCHAR(75) null,
 	version DOUBLE,
@@ -121,7 +121,7 @@ create table JournalArticleImage (
 
 drop table JournalContentSearch;
 create table JournalContentSearch (
-	contentSearchId LONG primary key,
+	contentSearchId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	privateLayout BOOLEAN,
@@ -159,7 +159,7 @@ update LayoutSet set logo = FALSE;
 alter_column_type ListType listTypeId INTEGER;
 
 create table MBBan (
-	banId LONG primary key,
+	banId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -211,7 +211,7 @@ alter_column_type OrgLabor organizationId LONG;
 alter_column_type OrgLabor typeId INTEGER;
 
 create table PasswordPolicy (
-	passwordPolicyId LONG primary key,
+	passwordPolicyId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -240,7 +240,7 @@ create table PasswordPolicy (
 );
 
 create table PasswordPolicyRel (
-	passwordPolicyRelId LONG primary key,
+	passwordPolicyRelId LONG not null primary key,
 	passwordPolicyId LONG,
 	classNameId LONG,
 	classPK LONG
@@ -256,7 +256,7 @@ alter_column_name Phone className classNameId VARCHAR(75) null;
 alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
-	pluginSettingId LONG primary key,
+	pluginSettingId LONG not null primary key,
 	companyId LONG,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
@@ -295,7 +295,7 @@ alter table Resource_ add codeId LONG;
 alter table Resource_ drop typeId;
 
 create table ResourceCode (
-	codeId LONG primary key,
+	codeId LONG not null primary key,
 	companyId LONG,
 	name VARCHAR(75) null,
 	scope INTEGER
@@ -318,7 +318,7 @@ create table SCFrameworkVersi_SCProductVers (
 );
 
 create table SCFrameworkVersion (
-	frameworkVersionId LONG primary key,
+	frameworkVersionId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -332,7 +332,7 @@ create table SCFrameworkVersion (
 );
 
 create table SCLicense (
-	licenseId LONG primary key,
+	licenseId LONG not null primary key,
 	name VARCHAR(75) null,
 	url VARCHAR(1024) null,
 	openSource BOOLEAN,
@@ -347,7 +347,7 @@ create table SCLicenses_SCProductEntries (
 );
 
 create table SCProductEntry (
-	productEntryId LONG primary key,
+	productEntryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -364,7 +364,7 @@ create table SCProductEntry (
 );
 
 create table SCProductVersion (
-	productVersionId LONG primary key,
+	productVersionId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -412,7 +412,7 @@ alter_column_type Subscription subscriptionId LONG;
 alter_column_name Subscription className classNameId VARCHAR(75) null;
 
 create table TagsAsset (
-	assetId LONG primary key,
+	assetId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -438,7 +438,7 @@ create table TagsAssets_TagsEntries (
 );
 
 create table TagsEntry (
-	entryId LONG primary key,
+	entryId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -448,7 +448,7 @@ create table TagsEntry (
 );
 
 create table TagsProperty (
-	propertyId LONG primary key,
+	propertyId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -460,7 +460,7 @@ create table TagsProperty (
 );
 
 create table TagsSource (
-	sourceId LONG primary key,
+	sourceId LONG not null primary key,
 	parentSourceId LONG,
 	name VARCHAR(75) null,
 	acronym VARCHAR(75) null
@@ -482,9 +482,9 @@ alter table User_ drop passwordExpirationDate;
 alter_column_type UserGroup userGroupId LONG;
 
 create table UserGroupRole (
-	userId LONG,
-	groupId LONG,
-	roleId LONG,
+	userId LONG not null,
+	groupId LONG not null,
+	roleId LONG not null,
 	primary key (userId, groupId, roleId)
 );
 
@@ -502,7 +502,7 @@ alter_column_type Users_UserGroups userGroupId LONG;
 
 drop table UserTracker;
 create table UserTracker (
-	userTrackerId LONG primary key,
+	userTrackerId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	modifiedDate DATE null,
@@ -514,7 +514,7 @@ create table UserTracker (
 
 drop table UserTrackerPath;
 create table UserTrackerPath (
-	userTrackerPathId LONG primary key,
+	userTrackerPathId LONG not null primary key,
 	userTrackerId LONG,
 	path STRING null,
 	pathDate DATE null
@@ -532,7 +532,7 @@ alter table WikiPage add resourcePrimKey LONG;
 alter_column_type WikiPage nodeId LONG;
 
 create table WikiPageResource (
-	resourcePrimKey LONG primary key,
+	resourcePrimKey LONG not null primary key,
 	nodeId LONG,
 	title VARCHAR(75) null
 );
