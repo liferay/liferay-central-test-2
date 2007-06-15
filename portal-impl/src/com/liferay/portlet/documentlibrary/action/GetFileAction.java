@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -57,6 +58,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Charles May
  *
  */
 public class GetFileAction extends PortletAction {
@@ -149,7 +151,13 @@ public class GetFileAction extends PortletAction {
 				res, fileEntry.getTitleWithExtension(), is, contentType);
 		}
 		catch (PortalException pe) {
-			res.sendError(HttpServletResponse.SC_NOT_FOUND, pe.getMessage());
+			if (pe instanceof PrincipalException) {
+				throw new PrincipalException();
+			}
+			else {
+				res.sendError(
+					HttpServletResponse.SC_NOT_FOUND, pe.getMessage());
+			}
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

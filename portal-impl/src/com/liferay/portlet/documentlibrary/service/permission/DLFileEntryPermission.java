@@ -34,6 +34,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
  * <a href="DLFileEntryPermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Charles May
  *
  */
 public class DLFileEntryPermission {
@@ -78,7 +79,7 @@ public class DLFileEntryPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), DLFileEntry.class.getName(),
-			fileEntry.getFolderId(), actionId);
+			fileEntry.getFileEntryId(), actionId);
 	}
 
 }
