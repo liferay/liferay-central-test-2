@@ -37,7 +37,7 @@ jQuery.fn.getOne = function(s) {
 };
 
 Liferay = function() {
-	$ = jQuery;
+	var $ = jQuery;
 	return {};
 }();
 
