@@ -298,6 +298,14 @@ public class DynamicDialect extends Dialect {
 		return _dialect.getKeywords();
 	}
 
+	public String getLimitString(String querySelect, boolean hasOffset) {
+
+		// Based on Hibernate 3.2.0ga source code.  Under 3.2.1ga+, this method
+		// is protected.
+
+		throw new UnsupportedOperationException("paged queries not supported");
+	}
+
 	public String getLimitString(String querySelect, int hasOffset, int limit) {
 		return _dialect.getLimitString(querySelect, hasOffset, limit);
 	}
