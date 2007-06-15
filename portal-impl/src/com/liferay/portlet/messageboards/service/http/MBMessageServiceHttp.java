@@ -924,14 +924,13 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		HttpPrincipal httpPrincipal, long userId, long messageId)
+		HttpPrincipal httpPrincipal, long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-			Object paramObj1 = new LongWrapper(messageId);
+			Object paramObj0 = new LongWrapper(messageId);
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getMessageDisplay", new Object[] { paramObj0, paramObj1 });
+					"getMessageDisplay", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {

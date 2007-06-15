@@ -34,10 +34,16 @@
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
+<%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

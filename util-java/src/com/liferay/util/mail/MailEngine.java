@@ -367,7 +367,7 @@ public class MailEngine {
 					_log.warn(
 						"Failed to connect to a valid mail server. Please " +
 							" make sure one is properly configured. " +
-							me.getMessage());
+								me.getMessage());
 				}
 			}
 

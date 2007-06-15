@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.PrincipalBean;
@@ -36,7 +35,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
-import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
@@ -57,8 +56,6 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
-
-import java.rmi.RemoteException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -339,50 +336,25 @@ public class MBMessageServiceImpl
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
-		String name = StringPool.BLANK;
-		String description = StringPool.BLANK;
-		List messages = new ArrayList();
-		boolean rssPermission = true;
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+			categoryId);
 
-		try {
-			MBCategory category = MBCategoryServiceUtil.getCategory(categoryId);
+		String name = category.getName();
+		String description = category.getDescription();
 
-			name = category.getName();
-			description = category.getDescription();
+		List messages = MBMessageLocalServiceUtil.getCategoryMessages(
+			categoryId, 0, max, new MessageCreateDateComparator(false));
 
-			int messageCount =
-				MBMessageLocalServiceUtil.getCategoryMessagesCount(categoryId);
+		Iterator itr = messages.iterator();
 
-			List tempMessages = MBMessageLocalServiceUtil.getCategoryMessages(
-				categoryId, 0, messageCount,
-				new MessageCreateDateComparator(false));
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
 
-			Iterator itr = tempMessages.iterator();
+			if (!MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
 
-			while (itr.hasNext() && messages.size() < max) {
-				MBMessage message = (MBMessage)itr.next();
-
-				try {
-					long messageId = message.getMessageId();
-
-					MBMessagePermission.check(
-						getPermissionChecker(), messageId, ActionKeys.VIEW);
-
-					messages.add(message);
-				}
-				catch (PrincipalException pe) {
-					rssPermission = false;
-				}
+				itr.remove();
 			}
-		}
-		catch (PrincipalException pe) {
-			rssPermission = false;
-		}
-		catch (RemoteException re) {
-		}
-
-		if (!rssPermission && messages.size() == 0) {
-			name = _RSS_PERMISSIONS_ERROR;
 		}
 
 		return exportToRSS(
@@ -398,13 +370,13 @@ public class MBMessageServiceImpl
 		return MBMessageLocalServiceUtil.getMessage(messageId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(long userId, long messageId)
+	public MBMessageDisplay getMessageDisplay(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return MBMessageLocalServiceUtil.getMessageDisplay(userId, messageId);
+		return MBMessageLocalServiceUtil.getMessageDisplay(messageId);
 	}
 
 	public String getThreadMessagesRSS(
@@ -414,27 +386,19 @@ public class MBMessageServiceImpl
 
 		String name = StringPool.BLANK;
 		String description = StringPool.BLANK;
+
 		List messages = new ArrayList();
-		boolean rssPermission = true;
 
-		List tempMessages = MBMessageLocalServiceUtil.getThreadMessages(
-			threadId, new MessageCreateDateComparator(false));
+		Iterator itr = MBMessageLocalServiceUtil.getThreadMessages(
+			threadId, new MessageCreateDateComparator(false)).iterator();
 
-		Iterator itr = tempMessages.iterator();
-
-		while (itr.hasNext() && messages.size() < max) {
+		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = (MBMessage)itr.next();
 
-			try {
-				long messageId = message.getMessageId();
-
-				MBMessagePermission.check(
-					getPermissionChecker(), messageId, ActionKeys.VIEW);
+			if (MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
 
 				messages.add(message);
-			}
-			catch (PrincipalException pe) {
-				rssPermission = false;
 			}
 		}
 
@@ -443,9 +407,6 @@ public class MBMessageServiceImpl
 
 			name = message.getSubject();
 			description = message.getSubject();
-		}
-		else if (!rssPermission) {
-			name = _RSS_PERMISSIONS_ERROR;
 		}
 
 		return exportToRSS(
@@ -577,8 +538,8 @@ public class MBMessageServiceImpl
 				String userName = message.getUserName();
 
 				try {
-					User user =
-						UserLocalServiceUtil.getUserById(message.getUserId());
+					User user = UserLocalServiceUtil.getUserById(
+						message.getUserId());
 
 					userName = user.getFullName();
 				}
@@ -613,8 +574,5 @@ public class MBMessageServiceImpl
 			throw new SystemException(ioe);
 		}
 	}
-
-	private static final String _RSS_PERMISSIONS_ERROR =
-		"Sorry, you do not have permission to view this RSS feed.";
 
 }

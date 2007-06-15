@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBTreeWalkerImpl implements MBTreeWalker {
 
-	public MBTreeWalkerImpl(MBMessage message, long userId) {
+	public MBTreeWalkerImpl(MBMessage message) {
 		_messageIdsMap = CollectionFactory.getHashMap();
 
 		try {

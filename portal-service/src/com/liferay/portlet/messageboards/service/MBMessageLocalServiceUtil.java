@@ -342,21 +342,21 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long userId, long messageId)
+		long messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getMessageDisplay(userId, messageId);
+		return mbMessageLocalService.getMessageDisplay(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long userId, com.liferay.portlet.messageboards.model.MBMessage message)
+		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getMessageDisplay(userId, message);
+		return mbMessageLocalService.getMessageDisplay(message);
 	}
 
 	public static java.util.List getThreadMessages(long threadId)

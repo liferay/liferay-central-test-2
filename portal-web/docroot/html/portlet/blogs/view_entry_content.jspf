@@ -21,13 +21,14 @@
  * SOFTWARE.
  */
 %>
+
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
 	<c:if test="<%= (category == null) && (entry.getCategoryId() != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
 		<div class="breadcrumbs">
 			<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderRequest, renderResponse) %>
 		</div>
 	</c:if>
-	
+
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
 		<td>
@@ -36,10 +37,10 @@
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 			</portlet:renderURL>
-	
+
 			<span style="font-size: small;"><b><a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a></b></span><br />
 			<span style="font-size: x-small;"><liferay-ui:message key="by" /> <%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
-	
+
 			<liferay-ui:tags-summary
 				className="<%= BlogsEntry.class.getName() %>"
 				classPK="<%= entry.getEntryId() %>"
@@ -59,10 +60,10 @@
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:renderURL>
-	
+
 				<liferay-ui:icon image="edit" url="<%= editEntryURL %>" />
 			</c:if>
-	
+
 			<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
 					modelResource="<%= BlogsEntry.class.getName() %>"
@@ -70,10 +71,10 @@
 					resourcePrimKey="<%= String.valueOf(entry.getEntryId()) %>"
 					var="permissionsEntryURL"
 				/>
-	
+
 				<liferay-ui:icon image="permissions" url="<%= permissionsEntryURL %>" />
 			</c:if>
-	
+
 			<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteEntryURL">
 					<portlet:param name="struts_action" value="/blogs/edit_entry" />
@@ -81,7 +82,7 @@
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:actionURL>
-	
+
 				<liferay-ui:icon-delete url="<%= deleteEntryURL %>" />
 			</c:if>
 		</td>

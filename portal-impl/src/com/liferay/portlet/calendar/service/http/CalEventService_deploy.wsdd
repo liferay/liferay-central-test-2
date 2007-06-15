@@ -4,7 +4,7 @@
 	<service name="Portlet_Calendar_CalEventService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.calendar.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="CalEventServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.calendar.portlet.liferay.com,http://cal.kernel.portal.liferay.com,urn:http.service.calendar.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.calendar.portlet.liferay.com,http://cal.kernel.portal.liferay.com,http://model.calendar.portlet.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portlet_Calendar_CalEventService"/>
 		<parameter name="className" value="com.liferay.portlet.calendar.service.http.CalEventServiceSoap"/>
 		<parameter name="wsdlPortType" value="CalEventServiceSoap"/>
@@ -89,12 +89,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="secondReminder" type="tns:int"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="deleteEvent updateEvent getEvent addEvent"/>
-		<arrayMapping xmlns:ns="urn:http.service.calendar.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_int" type="java:int[]" innerType="cmp-ns:int" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<arrayMapping xmlns:ns="urn:http.service.calendar.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.calendar.portlet.liferay.com" xmlns:cmp-ns="http://cal.kernel.portal.liferay.com" qname="ns:ArrayOf_tns2_DayAndPosition" type="java:com.liferay.portal.kernel.cal.DayAndPosition[]" innerType="cmp-ns:DayAndPosition" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<typeMapping xmlns:ns="http://cal.kernel.portal.liferay.com" qname="ns:Duration" type="java:com.liferay.portal.kernel.cal.Duration" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://cal.kernel.portal.liferay.com" qname="ns:Recurrence" type="java:com.liferay.portal.kernel.cal.Recurrence" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.calendar.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://cal.kernel.portal.liferay.com" qname="ns:DayAndPosition" type="java:com.liferay.portal.kernel.cal.DayAndPosition" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://cal.kernel.portal.liferay.com" qname="ns:Duration" type="java:com.liferay.portal.kernel.cal.Duration" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.calendar.portlet.liferay.com" qname="ns:CalEventSoap" type="java:com.liferay.portlet.calendar.model.CalEventSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.calendar.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_int" type="java:int[]" innerType="cmp-ns:int" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 </deployment>

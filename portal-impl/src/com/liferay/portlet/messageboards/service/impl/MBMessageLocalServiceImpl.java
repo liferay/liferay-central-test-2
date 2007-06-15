@@ -729,7 +729,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBDiscussionUtil.update(discussion);
 		}
 
-		return getMessageDisplay(userId, message);
+		return getMessageDisplay(message);
 	}
 
 	public List getGroupMessages(long groupId, int begin, int end)
@@ -748,15 +748,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return MBMessageUtil.findByPrimaryKey(messageId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(long userId, long messageId)
+	public MBMessageDisplay getMessageDisplay(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = getMessage(messageId);
 
-		return getMessageDisplay(userId, message);
+		return getMessageDisplay(message);
 	}
 
-	public MBMessageDisplay getMessageDisplay(long userId, MBMessage message)
+	public MBMessageDisplay getMessageDisplay(MBMessage message)
 		throws PortalException, SystemException {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(
@@ -775,7 +775,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBThreadUtil.update(thread);
 
-		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message, userId);
+		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message);
 
 		ThreadLastPostDateComparator comparator =
 			new ThreadLastPostDateComparator(false);
@@ -807,12 +807,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return new MBMessageDisplayImpl(
 			message, parentMessage, category, thread, treeWalker,
-			previousThread, nextThread, firstThread, lastThread, userId);
+			previousThread, nextThread, firstThread, lastThread);
 	}
 
-	public List getThreadMessages(long threadId)
-		throws SystemException {
-
+	public List getThreadMessages(long threadId) throws SystemException {
 		return getThreadMessages(threadId, new MessageThreadComparator());
 	}
 

@@ -146,7 +146,7 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long userId, long messageId)
+		long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

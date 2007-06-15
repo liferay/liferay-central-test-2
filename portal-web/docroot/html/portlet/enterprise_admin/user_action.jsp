@@ -99,6 +99,5 @@
 				</c:when>
 			</c:choose>
 		</c:if>
-
 	</c:if>
 </c:if>

@@ -216,12 +216,12 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long userId, long messageId)
+		long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long userId, com.liferay.portlet.messageboards.model.MBMessage message)
+		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

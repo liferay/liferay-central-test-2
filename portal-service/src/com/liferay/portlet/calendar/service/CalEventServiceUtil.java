@@ -100,8 +100,8 @@ public class CalEventServiceUtil {
 	}
 
 	public static java.io.File exportEvent(long eventId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CalEventService calEventService = CalEventServiceFactory.getService();
 
 		return calEventService.exportEvent(eventId);
@@ -109,8 +109,8 @@ public class CalEventServiceUtil {
 
 	public static java.io.File exportGroupEvents(long plid,
 		java.lang.String fileName)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CalEventService calEventService = CalEventServiceFactory.getService();
 
 		return calEventService.exportGroupEvents(plid, fileName);
@@ -126,8 +126,8 @@ public class CalEventServiceUtil {
 	}
 
 	public static void importICal4j(long plid, java.io.File file)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CalEventService calEventService = CalEventServiceFactory.getService();
 		calEventService.importICal4j(plid, file);
 	}

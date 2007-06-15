@@ -73,20 +73,19 @@ WindowState windowState = renderRequest.getWindowState();
 			jQuery(
 				function() {
 					var currentPortlet = jQuery('#p_p_id<portlet:namespace />');
+
 					currentPortlet.Accordion({
 						headerSelector: '.portlet-rss-header',
 						panelSelector: '.portlet-rss-content',
 						panelHeight: _$J("#p_p_id<portlet:namespace /> .portlet-rss-content:first").height(),
 						speed: 300
 					});
+
 					if (!jQuery.browser.msie) {
 						currentPortlet.css('overflow', 'visible');
 					}
-					
-					
 				}
 			);
-			
 		</script>
 	</c:otherwise>
 </c:choose>

@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -54,12 +53,10 @@ public class ViewMessageAction extends PortletAction {
 		throws Exception {
 
 		try {
-			long userId = PortalUtil.getUserId(req);
-
 			long messageId = ParamUtil.getLong(req, "messageId");
 
 			MBMessageDisplay messageDisplay =
-				MBMessageServiceUtil.getMessageDisplay(userId, messageId);
+				MBMessageServiceUtil.getMessageDisplay(messageId);
 
 			req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);
 

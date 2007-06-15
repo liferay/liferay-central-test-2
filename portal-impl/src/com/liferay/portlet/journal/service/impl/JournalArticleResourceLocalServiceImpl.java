@@ -45,25 +45,31 @@ public class JournalArticleResourceLocalServiceImpl
 		JournalArticleResourceUtil.removeByG_A(groupId, articleId);
 	}
 
+	public JournalArticleResource getArticleResource(long articleResourceId)
+		throws PortalException, SystemException {
+
+		return JournalArticleResourceUtil.findByPrimaryKey(articleResourceId);
+	}
+
 	public long getArticleResourcePrimKey(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		JournalArticleResource pageResource =
+		JournalArticleResource articleResource =
 			JournalArticleResourceUtil.fetchByG_A(groupId, articleId);
 
-		if (pageResource == null) {
-			long pageResourcePrimKey = CounterLocalServiceUtil.increment();
+		if (articleResource == null) {
+			long articleResourcePrimKey = CounterLocalServiceUtil.increment();
 
-			pageResource = JournalArticleResourceUtil.create(
-				pageResourcePrimKey);
+			articleResource = JournalArticleResourceUtil.create(
+				articleResourcePrimKey);
 
-			pageResource.setGroupId(groupId);
-			pageResource.setArticleId(articleId);
+			articleResource.setGroupId(groupId);
+			articleResource.setArticleId(articleId);
 
-			JournalArticleResourceUtil.update(pageResource);
+			JournalArticleResourceUtil.update(articleResource);
 		}
 
-		return pageResource.getResourcePrimKey();
+		return articleResource.getResourcePrimKey();
 	}
 
 }
