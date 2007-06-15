@@ -298,10 +298,6 @@ public class DynamicDialect extends Dialect {
 		return _dialect.getKeywords();
 	}
 
-	public String getLimitString(String querySelect, boolean hasOffset) {
-		return _dialect.getLimitString(querySelect, hasOffset);
-	}
-
 	public String getLimitString(String querySelect, int hasOffset, int limit) {
 		return _dialect.getLimitString(querySelect, hasOffset, limit);
 	}
