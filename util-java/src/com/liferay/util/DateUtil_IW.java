@@ -22,14 +22,10 @@
 
 package com.liferay.util;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 /**
  * <a href="DateUtil_IW.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
 public class DateUtil_IW {
@@ -37,13 +33,36 @@ public class DateUtil_IW {
 		return _instance;
 	}
 
-	public Date getCurrentDate() {
+	public int compareTo(java.util.Date date1, java.util.Date date2) {
+		return DateUtil.compareTo(date1, date2);
+	}
+
+	public java.util.Date getCurrentDate() {
 		return DateUtil.getCurrentDate();
 	}
 
-	public DateFormat getSimpleDateFormat(
-			String pattern, Locale locale) {
-		
+	public java.text.DateFormat getISOFormat() {
+		return DateUtil.getISOFormat();
+	}
+
+	public java.text.DateFormat getISOFormat(java.lang.String text) {
+		return DateUtil.getISOFormat(text);
+	}
+
+	public java.text.DateFormat getISO8601Format() {
+		return DateUtil.getISO8601Format();
+	}
+
+	public java.text.DateFormat getUTCFormat() {
+		return DateUtil.getUTCFormat();
+	}
+
+	public java.text.DateFormat getUTCFormat(java.lang.String text) {
+		return DateUtil.getUTCFormat(text);
+	}
+
+	public java.text.DateFormat getSimpleDateFormat(java.lang.String pattern,
+		java.util.Locale locale) {
 		return DateUtil.getSimpleDateFormat(pattern, locale);
 	}
 

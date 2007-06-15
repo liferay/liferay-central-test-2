@@ -75,6 +75,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../util-java/src"
+		src-file="com/liferay/util/DateUtil.java"
+	/>
+	<instance-wrapper
+		parent-dir="../util-java/src"
 		src-file="com/liferay/util/GetterUtil.java"
 	/>
 	<instance-wrapper

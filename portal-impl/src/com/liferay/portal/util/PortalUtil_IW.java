@@ -558,7 +558,7 @@ public class PortalUtil_IW {
 	}
 
 	public void storePreferences(javax.portlet.PortletPreferences prefs)
-		throws java.io.IOException, javax.portlet.ValidatorException {
+		throws javax.portlet.ValidatorException, java.io.IOException {
 		PortalUtil.storePreferences(prefs);
 	}
 
