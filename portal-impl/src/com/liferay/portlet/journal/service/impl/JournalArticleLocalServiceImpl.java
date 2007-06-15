@@ -279,7 +279,7 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			article.getPrimaryKey(), tagsEntries);
+			article.getResourcePrimKey(), tagsEntries);
 
 		// Email
 

@@ -95,6 +95,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	<div>
 		<c:choose>
+			<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
+
+				<%
+				BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+				%>
+
+				<%= entry.getContent() %>
+			</c:when>
 			<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
 
 				<%
@@ -124,22 +132,26 @@ for (int i = 0; i < results.size(); i++) {
 			<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 
 				<%
-				JournalArticle article = JournalArticleLocalServiceUtil.getArticle(classPK);
+				JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
 				String languageId = LanguageUtil.getLanguageId(request);
 
-				String content = JournalArticleLocalServiceUtil.getArticleContent(article.getGroupId(), article.getArticleId(), article.getVersion(), languageId, themeDisplay);
+				String content = JournalArticleLocalServiceUtil.getArticleContent(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 				%>
 
 				<%= content %>
 			</c:when>
-			<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
+			<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
 
 				<%
-				BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+				WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+
+				WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+				String content = wikiPage.getContent();
 				%>
-				
-				<%= entry.getContent() %>
+
+				<%= content %>
 			</c:when>
 			<c:otherwise>
 				<%= className %> is not a valid type.
@@ -147,7 +159,9 @@ for (int i = 0; i < results.size(); i++) {
 		</c:choose>
 	</div>
 
-	<br />
+	<c:if test="<%= (i + 1) < results.size() %>">
+		<br />
+	</c:if>
 
 <%
 }
