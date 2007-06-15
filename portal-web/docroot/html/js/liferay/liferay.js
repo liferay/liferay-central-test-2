@@ -36,7 +36,10 @@ jQuery.fn.getOne = function(s) {
 	return jQuery.getOne(s, this);
 };
 
-Liferay = {};
+Liferay = function() {
+	$ = jQuery;
+	return {};
+}();
 
 /* jQuery's implementation of height() & width() is poor on performace
  * in IE. Override with basic JS until issue is resolved
