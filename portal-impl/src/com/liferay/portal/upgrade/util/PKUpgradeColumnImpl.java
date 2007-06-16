@@ -49,7 +49,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		_trackValues = trackValues;
 
 		if (_trackValues) {
-			_valueMapper = new MemoryValueMapper();
+			_valueMapper = ValueMapperFactory.getValueMapper();
 		}
 	}
 

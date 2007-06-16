@@ -26,6 +26,7 @@ import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.util.GetterUtil;
 
 /**
  * <a href="LayoutOwnerIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
@@ -38,21 +39,29 @@ public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public LayoutOwnerIdUpgradeColumnImpl(String name,
 										  TempUpgradeColumnImpl upgradeColumn,
-										  ValueMapper valueMapper) {
+										  ValueMapper groupIdMapper) {
 
 		super(name);
 
 		_name = name;
 		_upgradeColumn = upgradeColumn;
-		_valueMapper = valueMapper;
+		_groupIdMapper = groupIdMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
+		_groupId = null;
+		_privateLayout = null;
+
 		String ownerId = (String)_upgradeColumn.getTemp();
 
 		if (_name.equals("groupId")) {
 			if (ownerId.startsWith("PUB.") || ownerId.startsWith("PRI.")) {
-				return new Long(ownerId.substring(4, ownerId.length()));
+				Long groupIdObj = new Long(GetterUtil.getLong(
+					ownerId.substring(4, ownerId.length())));
+
+				_groupId = (Long)_groupIdMapper.getNewValue(groupIdObj);
+
+				return _groupId;
 			}
 			else {
 				throw new StagnantRowException(ownerId);
@@ -60,10 +69,14 @@ public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 		else {
 			if (ownerId.startsWith("PUB.")) {
-				return Boolean.FALSE;
+				_privateLayout = Boolean.FALSE;
+
+				return _privateLayout;
 			}
 			else if (ownerId.startsWith("PRI.")) {
-				return Boolean.TRUE;
+				_privateLayout = Boolean.TRUE;
+
+				return _privateLayout;
 			}
 			else {
 				throw new StagnantRowException(ownerId);
@@ -71,8 +84,18 @@ public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
+	public Long getGroupId() {
+		return _groupId;
+	}
+
+	public Boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
 	private String _name;
 	private TempUpgradeColumnImpl _upgradeColumn;
-	private ValueMapper _valueMapper;
+	private ValueMapper _groupIdMapper;
+	private Long _groupId;
+	private Boolean _privateLayout;
 
 }

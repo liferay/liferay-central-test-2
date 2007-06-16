@@ -166,7 +166,8 @@ public class HitsImpl implements Hits {
 		return subset;
 	}
 
-	public void recordHits(org.apache.lucene.search.Hits hits, Searcher searcher)
+	public void recordHits(
+			org.apache.lucene.search.Hits hits, Searcher searcher)
 		throws IOException {
 
 		_hits = hits;

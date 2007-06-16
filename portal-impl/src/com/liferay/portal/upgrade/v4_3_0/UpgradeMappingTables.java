@@ -83,6 +83,14 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// Groups_Permissions
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
+			upgradeGroupIdColumn);
+
+		upgradeTable.updateTable();
+
 		// Groups_Roles
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -156,6 +164,9 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 	private static final String _TABLE_GROUPS_ROLES = "Groups_Roles";
 
+	private static final String _TABLE_GROUPS_PERMISSIONS =
+		"Groups_Permissions";
+
 	private static final String _TABLE_GROUPS_USERGROUPS = "Groups_UserGroups";
 
 	private static final String _TABLE_ROLES_PERMISSIONS = "Roles_Permissions";
@@ -173,6 +184,11 @@ public class UpgradeMappingTables extends UpgradeProcess {
 	private static final Object[][] _COLUMNS_GROUPS_ORGS = {
 		{"groupId", new Integer(Types.BIGINT)},
 		{"organizationId", new Integer(Types.BIGINT)}
+	};
+
+	private static final Object[][] _COLUMNS_GROUPS_PERMISSIONS = {
+		{"groupId", new Integer(Types.BIGINT)},
+		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
 	private static final Object[][] _COLUMNS_GROUPS_ROLES = {

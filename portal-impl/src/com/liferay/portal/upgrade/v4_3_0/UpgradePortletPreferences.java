@@ -110,7 +110,8 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			new TempUpgradeColumnImpl("layoutId");
 
 		UpgradeColumn upgradePlidColumn = new PrefsPlidUpgradeColumnImpl(
-			upgradeOwnerIdColumn, upgradeLayoutIdColumn);
+			upgradeOwnerIdColumn, upgradeLayoutIdColumn,
+			AvailableMappersUtil.getLayoutPlidMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PortletPreferencesImpl.TABLE_NAME, prefsColumns,
@@ -126,10 +127,9 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table PortletPreferences drop primary key",
-		"alter table PortletPreferences add primary key (portletPreferencesId)"
-		//"alter_column_type PortletPreferences ownerId LONG"
-		//"alter table PortletPreferences drop layoutId"
+		"alter table PortletPreferences add primary key (portletPreferencesId)",
+		"alter_column_type PortletPreferences ownerId LONG",
+		"alter table PortletPreferences drop layoutId"
 	};
 
 	private static Log _log =

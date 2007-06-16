@@ -33,7 +33,6 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -114,7 +113,10 @@ public class SharedSessionWrapper implements HttpSession {
 		return _ses.getServletContext();
 	}
 
-	public HttpSessionContext getSessionContext() {
+	/**
+	 * @deprecated
+	 */
+	public javax.servlet.http.HttpSessionContext getSessionContext() {
 		return _ses.getSessionContext();
 	}
 

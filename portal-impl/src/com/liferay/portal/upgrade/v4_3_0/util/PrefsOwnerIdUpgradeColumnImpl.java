@@ -66,24 +66,47 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		int ownerType = 0;
 
 		if (ownerId.startsWith("PUB.") || ownerId.startsWith("PRI.")) {
-			if (ownerId.indexOf(".USER.") != -1) {
+			_privateLayout = new Boolean(ownerId.startsWith("PRI."));
+
+			int pos = ownerId.indexOf(".USER.");
+
+			if (pos != -1) {
+				Long groupIdObj = new Long(GetterUtil.getLong(
+					ownerId.substring(4, pos)));
+
+				groupIdObj = (Long)_groupIdMapper.getNewValue(groupIdObj);
+
+				ownerId = String.valueOf(_userIdMapper.getNewValue(
+					ownerId.substring(pos + 6, ownerId.length())));
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
+				_groupId = groupIdObj;
 			}
 			else {
-				ownerId = ownerId.substring(4, ownerId.length());
+				Long groupIdObj = new Long(GetterUtil.getLong(
+					ownerId.substring(4, ownerId.length())));
+
+				groupIdObj = (Long)_groupIdMapper.getNewValue(groupIdObj);
+
+				ownerId = String.valueOf(PortletKeys.PREFS_OWNER_ID_DEFAULT);
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
-				_groupId = new Long(GetterUtil.getLong(ownerId));
-				_privateLayout = new Boolean(ownerId.startsWith("PRI."));
+				_groupId = groupIdObj;
 			}
 		}
 		else if (ownerId.startsWith("COMPANY.")) {
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 		}
 		else if (ownerId.startsWith("GROUP.")) {
-			ownerId = ownerId.substring(6, ownerId.length());
+			Long groupIdObj = new Long(GetterUtil.getLong(
+				ownerId.substring(6, ownerId.length())));
+
+			groupIdObj = (Long)_groupIdMapper.getNewValue(groupIdObj);
+
+			ownerId = String.valueOf(groupIdObj);
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 		}
 		else if (ownerId.startsWith("USER.")) {
+			ownerId = String.valueOf(_userIdMapper.getNewValue(
+				ownerId.substring(5, ownerId.length())));
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
 		}
 		else {

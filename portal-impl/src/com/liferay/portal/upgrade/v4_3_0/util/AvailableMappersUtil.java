@@ -56,6 +56,14 @@ public class AvailableMappersUtil {
 		_groupIdMapper = groupIdMapper;
 	}
 
+	public static ValueMapper getLayoutPlidMapper() {
+		return _layoutPlidMapper;
+	}
+
+	public static void setLayoutPlidMapper(ValueMapper layoutPlidMapper) {
+		_layoutPlidMapper = layoutPlidMapper;
+	}
+
 	public static ValueMapper getOrganizationIdMapper() {
 		return _organizationIdMapper;
 	}
@@ -93,6 +101,7 @@ public class AvailableMappersUtil {
 	private static ValueMapper _companyIdMapper;
 	private static ValueMapper _contactIdMapper;
 	private static ValueMapper _groupIdMapper;
+	private static ValueMapper _layoutPlidMapper;
 	private static ValueMapper _organizationIdMapper;
 	private static ValueMapper _roleIdMapper;
 	private static ValueMapper _userGroupIdMapper;

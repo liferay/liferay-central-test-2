@@ -28,8 +28,8 @@ import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.MemoryValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.dao.DataAccess;
@@ -108,7 +108,7 @@ public class UpgradeCompany extends UpgradeProcess {
 	private void _upgrade() throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
-		ValueMapper companyIdMapper = new MemoryValueMapper();
+		ValueMapper companyIdMapper = ValueMapperFactory.getValueMapper();
 
 		AvailableMappersUtil.setCompanyIdMapper(companyIdMapper);
 

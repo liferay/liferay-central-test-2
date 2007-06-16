@@ -22,47 +22,56 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.StagnantRowException;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.util.PortletKeys;
+import com.liferay.util.Validator;
 
 /**
- * <a href="PrefsPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
-	public PrefsPlidUpgradeColumnImpl(
-		PrefsOwnerIdUpgradeColumnImpl ownerIdColumn,
+	public LayoutPlidUpgradeColumnImpl(
+		LayoutOwnerIdUpgradeColumnImpl groupIdColumn,
+		LayoutOwnerIdUpgradeColumnImpl privateLayoutColumn,
 		TempUpgradeColumnImpl layoutIdColumn, ValueMapper layoutPlidMapper) {
 
-		super("plid");
+		super("plid", false);
 
-		_ownerIdColumn = ownerIdColumn;
+		_groupIdColumn = groupIdColumn;
+		_privateLayoutColumn = privateLayoutColumn;
 		_layoutIdColumn = layoutIdColumn;
 		_layoutPlidMapper = layoutPlidMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long groupIdObj = _ownerIdColumn.getGroupId();
-		Boolean privateLayoutObj = _ownerIdColumn.isPrivateLayout();
-		String layoutId = (String)_layoutIdColumn.getTemp();
+		Object newValue = super.getNewValue(oldValue);
 
-		if ((!layoutId.equals("SHARED")) && (groupIdObj != null) &&
-			(privateLayoutObj != null)) {
+		Long groupIdObj = _groupIdColumn.getGroupId();
+		Boolean privateLayoutObj = _privateLayoutColumn.isPrivateLayout();
+		Long layoutId = (Long)_layoutIdColumn.getTemp();
 
-			return _layoutPlidMapper.getNewValue(
-				groupIdObj + "_" + privateLayoutObj + "_" + layoutId);
+		if ((groupIdObj == null) || (privateLayoutObj == null) ||
+			(Validator.isNull(layoutId))) {
+
+			throw new StagnantRowException(
+				"{groupId=" + groupIdObj + ",privateLayout=" +
+					privateLayoutObj + ",layoutId=" + layoutId + "}");
 		}
-		else {
-			return new Long(PortletKeys.PREFS_PLID_SHARED);
-		}
+
+		_layoutPlidMapper.mapValue(
+			groupIdObj + "_" + privateLayoutObj + "_" + layoutId, newValue);
+
+		return newValue;
 	}
 
-	private PrefsOwnerIdUpgradeColumnImpl _ownerIdColumn;
+	private LayoutOwnerIdUpgradeColumnImpl _groupIdColumn;
+	private LayoutOwnerIdUpgradeColumnImpl _privateLayoutColumn;
 	private TempUpgradeColumnImpl _layoutIdColumn;
 	private ValueMapper _layoutPlidMapper;
 

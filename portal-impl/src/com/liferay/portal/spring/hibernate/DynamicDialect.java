@@ -242,6 +242,9 @@ public class DynamicDialect extends Dialect {
 		return _dialect.getCreateMultisetTableString();
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public String[] getCreateSequenceStrings(String sequenceName)
 		throws MappingException {
 

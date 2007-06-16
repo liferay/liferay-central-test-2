@@ -34,7 +34,6 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
 /**
  * <a href="NullSession.java.html"><b><i>View Source</i></b></a>
@@ -53,7 +52,6 @@ public class NullSession implements HttpSession {
 		_lastAccessedTime = _creationTime;
 		_maxInactiveInterval = 0;
 		_servletContext = null;
-		_sessionContext = null;
 		_new = true;
 	}
 
@@ -85,8 +83,11 @@ public class NullSession implements HttpSession {
 		return _servletContext;
 	}
 
-	public HttpSessionContext getSessionContext() {
-		return _sessionContext;
+	/**
+	 * @deprecated
+	 */
+	public javax.servlet.http.HttpSessionContext getSessionContext() {
+		return null;
 	}
 
 	public Object getValue(String name) {
@@ -133,7 +134,6 @@ public class NullSession implements HttpSession {
 	private long _lastAccessedTime;
 	private int _maxInactiveInterval;
 	private ServletContext _servletContext;
-	private HttpSessionContext _sessionContext;
 	private boolean _new;
 
 }

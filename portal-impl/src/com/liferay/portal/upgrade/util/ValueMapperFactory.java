@@ -20,62 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+package com.liferay.portal.upgrade.util;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="ValueMapperFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class ValueMapperFactory {
 
-	static String name = "Liferay Enterprise Portal";
-
-	static String version = "4.3.0 RC1";
-
-	static String codeName = "Owen";
-
-	static String build = "4180";
-
-	static String date = "June 16, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
+	public static ValueMapper getValueMapper() {
+		if (true) {
+			return new MemoryValueMapper();
+		}
+		else {
+			return new DatabaseValueMapper();
+		}
 	}
 
 }

@@ -79,6 +79,9 @@ public class LiferaySession implements Session {
 		return _session.close();
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Connection connection() throws HibernateException {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
@@ -308,6 +311,9 @@ public class LiferaySession implements Session {
 		_session.persist(entityName, object);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void reconnect() throws HibernateException {
 		_session.reconnect();
 	}

@@ -75,6 +75,9 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 		super.setRecurrence(recurrence);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Recurrence getRecurrenceObj() {
 		if (_recurrenceObj == null) {
 			String recurrence = getRecurrence();

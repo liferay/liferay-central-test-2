@@ -280,6 +280,7 @@ alter table PortletPreferences add portletPreferencesId LONG;
 alter table PortletPreferences add ownerType INTEGER;
 alter table PortletPreferences add plid LONG;
 update PortletPreferences set plid = 0;
+alter table PortletPreferences drop primary key;
 
 alter_column_name RatingsEntry className classNameId VARCHAR(75) null;
 

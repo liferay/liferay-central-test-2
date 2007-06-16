@@ -44,11 +44,13 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
@@ -171,14 +173,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Groups_Permissions
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
 		// IGFolder
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -216,13 +210,25 @@ public class UpgradeGroup extends UpgradeProcess {
 		TempUpgradeColumnImpl upgradeLayoutOwnerIdColumn =
 			new TempUpgradeColumnImpl("ownerId");
 
-		UpgradeColumn upgradeLayoutOwnerIdGroupIdColumn =
+		LayoutOwnerIdUpgradeColumnImpl upgradeLayoutOwnerIdGroupIdColumn =
 			new LayoutOwnerIdUpgradeColumnImpl(
 				"groupId", upgradeLayoutOwnerIdColumn, groupIdMapper);
 
-		UpgradeColumn upgradeLayoutOwnerIdPrivateLayoutColumn =
+		LayoutOwnerIdUpgradeColumnImpl upgradeLayoutOwnerIdPrivateLayoutColumn =
 			new LayoutOwnerIdUpgradeColumnImpl(
 				"privateLayout", upgradeLayoutOwnerIdColumn, groupIdMapper);
+
+		TempUpgradeColumnImpl upgradeLayoutIdColumn =
+			new TempUpgradeColumnImpl("layoutId");
+
+		ValueMapper layoutPlidMapper = ValueMapperFactory.getValueMapper();
+
+		AvailableMappersUtil.setLayoutPlidMapper(layoutPlidMapper);
+
+		UpgradeColumn upgradeLayoutPlidColumn = new LayoutPlidUpgradeColumnImpl(
+			upgradeLayoutOwnerIdGroupIdColumn,
+			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
+			layoutPlidMapper);
 
 		Object[][] layoutColumns1 = {{"ownerId", new Integer(Types.VARCHAR)}};
 		Object[][] layoutColumns2 =
@@ -233,10 +239,10 @@ public class UpgradeGroup extends UpgradeProcess {
 		ArrayUtil.combine(layoutColumns1, layoutColumns2, layoutColumns);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			LayoutImpl.TABLE_NAME, layoutColumns,
-			new PKUpgradeColumnImpl("plid", false), upgradeLayoutOwnerIdColumn,
+			LayoutImpl.TABLE_NAME, layoutColumns, upgradeLayoutOwnerIdColumn,
 			upgradeLayoutOwnerIdGroupIdColumn,
-			upgradeLayoutOwnerIdPrivateLayoutColumn);
+			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
+			upgradeLayoutPlidColumn);
 
 		upgradeTable.updateTable();
 
@@ -369,14 +375,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}*/
-
-	private static final String _TABLE_GROUPS_PERMISSIONS =
-		"Groups_Permissions";
-
-	private static final Object[][] _COLUMNS_GROUPS_PERMISSIONS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"permissionId", new Integer(Types.BIGINT)}
-	};
 
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter_column_type Group_ classNameId LONG",
