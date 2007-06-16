@@ -146,7 +146,7 @@ public class DateUtil {
 
 	public static DateFormat getSimpleDateFormat(
 			String pattern, Locale locale) {
-		
+
 		return new SimpleDateFormat(pattern, locale);
 	}
 }

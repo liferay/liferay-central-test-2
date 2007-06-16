@@ -231,13 +231,11 @@ public class VelocityVariables {
 
 		// Browser sniffer
 
-		vc.put(
-			"browserSniffer", BrowserSniffer_IW.getInstance());
+		vc.put("browserSniffer", BrowserSniffer_IW.getInstance());
 
 		// Date util
 
-		vc.put(
-			"dateUtil", DateUtil_IW.getInstance());
+		vc.put("dateUtil", DateUtil_IW.getInstance());
 
 		// Getter util
 
