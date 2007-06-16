@@ -47,7 +47,6 @@
 		<guest-unsupported>
 			<action-key>ADD_CATEGORY</action-key>
 			<action-key>ADD_FILE</action-key>
-			<action-key>ADD_MESSAGE</action-key>
 			<action-key>SUBSCRIBE</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>UPDATE_THREAD_PRIORITY</action-key>

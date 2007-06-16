@@ -229,6 +229,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
+		anonymous = user.isDefaultUser() ? true : anonymous;
 		Date now = new Date();
 
 		validate(subject, body);
@@ -349,8 +350,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Resources
 
 		if (!category.isDiscussion()) {
-			if ((addCommunityPermissions != null) &&
-				(addGuestPermissions != null)) {
+			if (user.isDefaultUser()) {
+				addMessageResources(category, message, true, true);
+			}
+			else if ((addCommunityPermissions != null) &&
+					 (addGuestPermissions != null)) {
 
 				addMessageResources(
 					category, message, addCommunityPermissions.booleanValue(),

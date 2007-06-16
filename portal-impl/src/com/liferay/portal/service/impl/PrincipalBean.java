@@ -26,10 +26,12 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
@@ -87,6 +89,21 @@ public class PrincipalBean {
 		}
 		catch (Exception e) {
 			_log.error(e);
+		}
+	}
+
+	public long getGuestOrUserId() throws PrincipalException {
+		try {
+			return getUserId();
+		}
+		catch (PrincipalException pe) {
+			try {
+				return UserLocalServiceUtil.getDefaultUserId(
+					CompanyThreadLocal.getCompanyId());
+			}
+			catch (Exception e) {
+				throw pe;
+			}
 		}
 	}
 

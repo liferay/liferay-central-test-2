@@ -108,8 +108,9 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, subject, body, files, anonymous, priority,
-			tagsEntries, null, addCommunityPermissions, addGuestPermissions);
+			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
+			priority, tagsEntries, null, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -136,8 +137,9 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, subject, body, files, anonymous, priority,
-			tagsEntries, prefs, addCommunityPermissions, addGuestPermissions);
+			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
+			priority, tagsEntries, prefs, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -164,8 +166,8 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, null,
+			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, null,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -193,8 +195,8 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs,
+			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -221,8 +223,9 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, subject, body, files, anonymous, priority,
-			tagsEntries, null, communityPermissions, guestPermissions);
+			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
+			priority, tagsEntries, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -249,8 +252,9 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, subject, body, files, anonymous, priority,
-			tagsEntries, prefs, communityPermissions, guestPermissions);
+			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
+			priority, tagsEntries, prefs, communityPermissions,
+			guestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -277,9 +281,9 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, null, communityPermissions,
-			guestPermissions);
+			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -306,8 +310,8 @@ public class MBMessageServiceImpl
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
-			getUserId(), categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, tagsEntries, prefs,
+			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
 			communityPermissions, guestPermissions);
 	}
 
