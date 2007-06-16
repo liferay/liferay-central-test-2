@@ -42,22 +42,12 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public PKUpgradeColumnImpl(String name, Integer oldColumnType,
 							   boolean trackValues) {
 
-		super(name);
+		super(name, oldColumnType);
 
-		_oldColumnType = oldColumnType;
 		_trackValues = trackValues;
 
 		if (_trackValues) {
 			_valueMapper = ValueMapperFactory.getValueMapper();
-		}
-	}
-
-	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
 		}
 	}
 
@@ -79,7 +69,6 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _valueMapper;
 	}
 
-	private Integer _oldColumnType;
 	private boolean _trackValues;
 	private ValueMapper _valueMapper;
 

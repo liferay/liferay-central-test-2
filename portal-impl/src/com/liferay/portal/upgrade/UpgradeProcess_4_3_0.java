@@ -43,6 +43,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeWiki;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,7 +93,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		//upgrade(new UpgradeSubscription());
 		upgrade(new UpgradeUserIdMapper());
 		upgrade(new UpgradeWebsite());
-		//upgrade(new UpgradeWiki());
+		upgrade(new UpgradeWiki());
 		upgrade(new UpgradeCounter());
 		upgrade(new UpgradeResource());
 		upgrade(new UpgradeMappingTables());

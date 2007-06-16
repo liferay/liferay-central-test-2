@@ -27,7 +27,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
  * <a href="ResourceCodeIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
@@ -40,8 +40,8 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ResourceCodeIdUpgradeColumnImpl(
-		TempUpgradeColumnImpl companyIdColumn, TempUpgradeColumnImpl nameColumn,
-		TempUpgradeColumnImpl scopeColumn) {
+		UpgradeColumn companyIdColumn, UpgradeColumn nameColumn,
+		UpgradeColumn scopeColumn) {
 
 		super("codeId");
 
@@ -53,9 +53,9 @@ public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		_scope = 0;
 
-		Long companyIdObj = (Long)_companyIdColumn.getTemp();
-		String name = (String)_nameColumn.getTemp();
-		String scope = (String)_scopeColumn.getTemp();
+		Long companyIdObj = (Long)_companyIdColumn.getOldValue();
+		String name = (String)_nameColumn.getOldValue();
+		String scope = (String)_scopeColumn.getOldValue();
 
 		if (scope.equals("company")) {
 			_scope = ResourceImpl.SCOPE_COMPANY;
@@ -84,9 +84,9 @@ public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _scope;
 	}
 
-	private TempUpgradeColumnImpl _companyIdColumn;
-	private TempUpgradeColumnImpl _nameColumn;
-	private TempUpgradeColumnImpl _scopeColumn;
+	private UpgradeColumn _companyIdColumn;
+	private UpgradeColumn _nameColumn;
+	private UpgradeColumn _scopeColumn;
 	private int _scope;
 
 }

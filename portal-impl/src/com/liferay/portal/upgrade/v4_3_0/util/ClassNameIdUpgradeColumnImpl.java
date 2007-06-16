@@ -37,30 +37,13 @@ import java.sql.Types;
 public class ClassNameIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ClassNameIdUpgradeColumnImpl() {
-		super("classNameId");
-
-		_oldColumnType = new Integer(Types.VARCHAR);
-	}
-
-	public Integer getOldColumnType(Integer defaultType) {
-		return _oldColumnType;
+		super("classNameId", new Integer(Types.VARCHAR));
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		String className = (String)oldValue;
 
-		Object newValue = new Long(PortalUtil.getClassNameId(className));
-
-		_temp = newValue;
-
-		return newValue;
+		return new Long(PortalUtil.getClassNameId(className));
 	}
-
-	public Object getTemp() {
-		return _temp;
-	}
-
-	private Integer _oldColumnType;
-	private Object _temp;
 
 }

@@ -24,8 +24,9 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.util.Validator;
 
 /**
@@ -37,10 +38,10 @@ import com.liferay.util.Validator;
 public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public LayoutPlidUpgradeColumnImpl(
-		TempUpgradeColumnImpl upgradeLayoutOwnerIdColumn,
+		UpgradeColumn upgradeLayoutOwnerIdColumn,
 		LayoutOwnerIdUpgradeColumnImpl groupIdColumn,
 		LayoutOwnerIdUpgradeColumnImpl privateLayoutColumn,
-		TempUpgradeColumnImpl layoutIdColumn, ValueMapper layoutPlidMapper) {
+		UpgradeColumn layoutIdColumn) {
 
 		super("plid", false);
 
@@ -48,7 +49,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_groupIdColumn = groupIdColumn;
 		_privateLayoutColumn = privateLayoutColumn;
 		_layoutIdColumn = layoutIdColumn;
-		_layoutPlidMapper = layoutPlidMapper;
+		_layoutPlidMapper = ValueMapperFactory.getValueMapper();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -56,7 +57,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 		Long groupIdObj = _groupIdColumn.getGroupId();
 		Boolean privateLayoutObj = _privateLayoutColumn.isPrivateLayout();
-		Long layoutId = (Long)_layoutIdColumn.getTemp();
+		Long layoutId = (Long)_layoutIdColumn.getOldValue();
 
 		if ((groupIdObj == null) || (privateLayoutObj == null) ||
 			(Validator.isNull(layoutId))) {
@@ -66,7 +67,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 					privateLayoutObj + ",layoutId=" + layoutId + "}");
 		}
 
-		String oldOwnerId = (String)_upgradeLayoutOwnerIdColumn.getTemp();
+		String oldOwnerId = (String)_upgradeLayoutOwnerIdColumn.getOldValue();
 
 		String oldPlidValue =
 			"{layoutId=" + layoutId + ", ownerId=" + oldOwnerId + "}";
@@ -76,10 +77,14 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
-	private TempUpgradeColumnImpl _upgradeLayoutOwnerIdColumn;
+	public ValueMapper getValueMapper() {
+		return _layoutPlidMapper;
+	}
+
+	private UpgradeColumn _upgradeLayoutOwnerIdColumn;
 	private LayoutOwnerIdUpgradeColumnImpl _groupIdColumn;
 	private LayoutOwnerIdUpgradeColumnImpl _privateLayoutColumn;
-	private TempUpgradeColumnImpl _layoutIdColumn;
+	private UpgradeColumn _layoutIdColumn;
 	private ValueMapper _layoutPlidMapper;
 
 }

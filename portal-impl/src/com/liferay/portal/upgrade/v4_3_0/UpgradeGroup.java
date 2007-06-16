@@ -35,13 +35,11 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.SkipUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
@@ -61,7 +59,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
-import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -178,7 +175,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// Layout
 
-		TempUpgradeColumnImpl upgradeLayoutOwnerIdColumn =
+		UpgradeColumn upgradeLayoutOwnerIdColumn =
 			new TempUpgradeColumnImpl("ownerId");
 
 		LayoutOwnerIdUpgradeColumnImpl upgradeLayoutOwnerIdGroupIdColumn =
@@ -189,17 +186,13 @@ public class UpgradeGroup extends UpgradeProcess {
 			new LayoutOwnerIdUpgradeColumnImpl(
 				"privateLayout", upgradeLayoutOwnerIdColumn, groupIdMapper);
 
-		TempUpgradeColumnImpl upgradeLayoutIdColumn =
+		UpgradeColumn upgradeLayoutIdColumn =
 			new TempUpgradeColumnImpl("layoutId");
 
-		ValueMapper layoutPlidMapper = ValueMapperFactory.getValueMapper();
-
-		AvailableMappersUtil.setLayoutPlidMapper(layoutPlidMapper);
-
-		UpgradeColumn upgradeLayoutPlidColumn = new LayoutPlidUpgradeColumnImpl(
-			upgradeLayoutOwnerIdColumn, upgradeLayoutOwnerIdGroupIdColumn,
-			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
-			layoutPlidMapper);
+		PKUpgradeColumnImpl upgradeLayoutPlidColumn =
+			new LayoutPlidUpgradeColumnImpl(
+				upgradeLayoutOwnerIdColumn, upgradeLayoutOwnerIdGroupIdColumn,
+				upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn);
 
 		Object[][] layoutColumns1 = {{"ownerId", new Integer(Types.VARCHAR)}};
 		Object[][] layoutColumns2 =
@@ -216,6 +209,10 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeLayoutPlidColumn);
 
 		upgradeTable.updateTable();
+
+		ValueMapper layoutPlidMapper = upgradeLayoutPlidColumn.getValueMapper();
+
+		AvailableMappersUtil.setLayoutPlidMapper(layoutPlidMapper);
 
 		// LayoutSet
 
@@ -278,7 +275,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// ShoppingCart
 
-		UpgradeColumn upgradeCartIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn upgradeCartIdColumn = new TempUpgradeColumnImpl(
 			"cartId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -297,7 +294,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// ShoppingCoupon
 
-		UpgradeColumn upgradeCouponIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn upgradeCouponIdColumn = new TempUpgradeColumnImpl(
 			"couponId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -310,14 +307,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// WikiNode
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();

@@ -80,7 +80,7 @@ public class UpgradeContact extends UpgradeProcess {
 
 		// User_
 
-		TempUpgradeColumnImpl upgradeScreenNameColumn =
+		UpgradeColumn upgradeScreenNameColumn =
 			new TempUpgradeColumnImpl("screenName");
 
 		UpgradeColumn upgradeContactIdColumn = new ContactIdUpgradeColumnImpl(

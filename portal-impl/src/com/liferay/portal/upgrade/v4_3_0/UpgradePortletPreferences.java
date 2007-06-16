@@ -103,7 +103,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		UpgradeColumn upgradeOwnerTypeColumn =
 			new PrefsOwnerTypeUpgradeColumnImpl(upgradeOwnerIdColumn);
 
-		TempUpgradeColumnImpl upgradeLayoutIdColumn =
+		UpgradeColumn upgradeLayoutIdColumn =
 			new TempUpgradeColumnImpl("layoutId");
 
 		UpgradeColumn upgradePlidColumn = new PrefsPlidUpgradeColumnImpl(

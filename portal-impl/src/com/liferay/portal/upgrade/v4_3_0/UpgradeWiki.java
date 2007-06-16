@@ -27,13 +27,17 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.WikiPageIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.WikiPageResourcePrimKeyUpgradeColumnImpl;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,34 +65,52 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		// WikiNode
 
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", AvailableMappersUtil.getGroupIdMapper());
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"nodeId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper nodeIdMapper = pkUpgradeColumn.getValueMapper();
+
+		AvailableMappersUtil.setWikiNodeIdMapper(nodeIdMapper);
 
 		UpgradeColumn upgradeNodeIdColumn = new SwapUpgradeColumnImpl(
 			"nodeId", nodeIdMapper);
 
 		// WikiPage
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("pageId", true);
+		UpgradeColumn upgradeTitleColumn = new TempUpgradeColumnImpl("title");
+
+		WikiPageIdUpgradeColumnImpl pageIdUpgradeColumn =
+			new WikiPageIdUpgradeColumnImpl(
+				upgradeNodeIdColumn, upgradeTitleColumn);
+
+		WikiPageResourcePrimKeyUpgradeColumnImpl
+			pageResourcePrimKeyUpgradeColumn =
+				new WikiPageResourcePrimKeyUpgradeColumnImpl(
+					pageIdUpgradeColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeNodeIdColumn);
+			upgradeNodeIdColumn, upgradeTitleColumn, pageIdUpgradeColumn,
+			pageResourcePrimKeyUpgradeColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		// Resource
+		ValueMapper pageIdMapper = pageIdUpgradeColumn.getValueMapper();
 
-		ResourceUtil.upgradePrimKey(nodeIdMapper, WikiNode.class.getName());
-		//ResourceUtil.upgradePrimKey(pageIdMapper, WikiPage.class.getName());
+		AvailableMappersUtil.setWikiPageIdMapper(pageIdMapper);
 
 		// Schema
 
@@ -96,8 +118,12 @@ public class UpgradeWiki extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type WikiNode groupId LONG",
+		"alter_column_type WikiNode userId LONG",
+
 		"alter table WikiPage drop primary key",
-		"alter table WikiPage add primary key (pageId)"
+		"alter table WikiPage add primary key (pageId)",
+		"alter_column_type WikiPage userId LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeWiki.class);

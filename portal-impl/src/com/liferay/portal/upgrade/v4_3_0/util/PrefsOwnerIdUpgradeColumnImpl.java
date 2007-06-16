@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.GetterUtil;
@@ -36,30 +36,21 @@ import java.sql.Types;
  * @author Brian Wing Shun Chan
  *
  */
-public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public PrefsOwnerIdUpgradeColumnImpl(
 		ValueMapper groupIdMapper, ValueMapper userIdMapper) {
 
-		super("ownerId");
+		super("ownerId", new Integer(Types.VARCHAR));
 
-		_oldColumnType = new Integer(Types.VARCHAR);
 		_groupIdMapper = groupIdMapper;
 		_userIdMapper = userIdMapper;
-	}
-
-	public Integer getOldColumnType(Integer defaultType) {
-		return _oldColumnType;
-	}
-
-	public Integer getNewColumnType(Integer defaultType) {
-		return getOldColumnType(defaultType);
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		_ownerTypeObj = null;
 		_oldGroupId = null;
-		_groupId = null;
+		_newGroupId = null;
 		_privateLayout = null;
 
 		String ownerId = (String)oldValue;
@@ -74,7 +65,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			if (pos != -1) {
 				_oldGroupId = new Long(GetterUtil.getLong(
 					ownerId.substring(4, pos)));
-				_groupId = (Long)_groupIdMapper.getNewValue(_oldGroupId);
+				_newGroupId = (Long)_groupIdMapper.getNewValue(_oldGroupId);
 
 				ownerId = String.valueOf(_userIdMapper.getNewValue(
 					ownerId.substring(pos + 6, ownerId.length())));
@@ -83,7 +74,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			else {
 				_oldGroupId = new Long(GetterUtil.getLong(
 					ownerId.substring(4, ownerId.length())));
-				_groupId = (Long)_groupIdMapper.getNewValue(_oldGroupId);
+				_newGroupId = (Long)_groupIdMapper.getNewValue(_oldGroupId);
 
 				ownerId = String.valueOf(PortletKeys.PREFS_OWNER_ID_DEFAULT);
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
@@ -124,20 +115,19 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _oldGroupId;
 	}
 
-	public Long getGroupId() {
-		return _groupId;
+	public Long getNewGroupId() {
+		return _newGroupId;
 	}
 
 	public Boolean isPrivateLayout() {
 		return _privateLayout;
 	}
 
-	private Integer _oldColumnType;
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _userIdMapper;
 	private Integer _ownerTypeObj;
 	private Long _oldGroupId;
-	private Long _groupId;
+	private Long _newGroupId;
 	private Boolean _privateLayout;
 
 }

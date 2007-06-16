@@ -44,6 +44,8 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -147,6 +149,20 @@ public class UpgradeResource extends UpgradeProcess {
 			new ClassPKContainer(
 				AvailableMappersUtil.getUserGroupIdMapper(), true));
 
+		// WikiNode
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(WikiNode.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getWikiNodeIdMapper(), true));
+
+		// WikiPage
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(WikiPage.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getWikiPageIdMapper(), false));
+
 		return classPKContainers;
 	}
 
@@ -167,12 +183,11 @@ public class UpgradeResource extends UpgradeProcess {
 		ArrayUtil.combine(
 			resourceColumns1, resourceColumns2, resourceColumns);
 
-		TempUpgradeColumnImpl companyIdColumn =
-			new TempUpgradeColumnImpl("companyId");
+		UpgradeColumn companyIdColumn = new TempUpgradeColumnImpl("companyId");
 
-		TempUpgradeColumnImpl nameColumn = new TempUpgradeColumnImpl("name");
+		UpgradeColumn nameColumn = new TempUpgradeColumnImpl("name");
 
-		TempUpgradeColumnImpl scopeColumn = new TempUpgradeColumnImpl("scope");
+		UpgradeColumn scopeColumn = new TempUpgradeColumnImpl("scope");
 
 		ResourceCodeIdUpgradeColumnImpl codeIdColumn =
 			new ResourceCodeIdUpgradeColumnImpl(

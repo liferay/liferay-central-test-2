@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.util.GetterUtil;
 
@@ -37,9 +37,8 @@ import com.liferay.util.GetterUtil;
  */
 public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public LayoutOwnerIdUpgradeColumnImpl(String name,
-										  TempUpgradeColumnImpl upgradeColumn,
-										  ValueMapper groupIdMapper) {
+	public LayoutOwnerIdUpgradeColumnImpl(
+		String name, UpgradeColumn upgradeColumn, ValueMapper groupIdMapper) {
 
 		super(name);
 
@@ -52,7 +51,7 @@ public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		_groupId = null;
 		_privateLayout = null;
 
-		String ownerId = (String)_upgradeColumn.getTemp();
+		String ownerId = (String)_upgradeColumn.getOldValue();
 
 		if (_name.equals("groupId")) {
 			if (ownerId.startsWith("PUB.") || ownerId.startsWith("PRI.")) {
@@ -93,7 +92,7 @@ public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private String _name;
-	private TempUpgradeColumnImpl _upgradeColumn;
+	private UpgradeColumn _upgradeColumn;
 	private ValueMapper _groupIdMapper;
 	private Long _groupId;
 	private Boolean _privateLayout;

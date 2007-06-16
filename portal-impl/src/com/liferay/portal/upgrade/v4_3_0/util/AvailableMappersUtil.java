@@ -144,6 +144,22 @@ public class AvailableMappersUtil {
 		_userIdMapper = userIdMapper;
 	}
 
+	public static ValueMapper getWikiNodeIdMapper() {
+		return _wikiNodeIdMapper;
+	}
+
+	public static void setWikiNodeIdMapper(ValueMapper wikiNodeIdMapper) {
+		_wikiNodeIdMapper = wikiNodeIdMapper;
+	}
+
+	public static ValueMapper getWikiPageIdMapper() {
+		return _wikiPageIdMapper;
+	}
+
+	public static void setWikiPageIdMapper(ValueMapper wikiPageIdMapper) {
+		_wikiPageIdMapper = wikiPageIdMapper;
+	}
+
 	private static ValueMapper _blogsCategoryIdMapper;
 	private static ValueMapper _blogsEntryIdMapper;
 	private static ValueMapper _bookmarksEntryIdMapper;
@@ -157,5 +173,7 @@ public class AvailableMappersUtil {
 	private static ValueMapper _roleIdMapper;
 	private static ValueMapper _userGroupIdMapper;
 	private static ValueMapper _userIdMapper;
+	private static ValueMapper _wikiNodeIdMapper;
+	private static ValueMapper _wikiPageIdMapper;
 
 }

@@ -32,22 +32,11 @@ package com.liferay.portal.upgrade.util;
 public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public TempUpgradeColumnImpl(String name) {
-		this(name, null);
+		super(name);
 	}
 
 	public TempUpgradeColumnImpl(String name, Integer oldColumnType) {
-		super(name);
-
-		_oldColumnType = oldColumnType;
-	}
-
-	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
-		}
+		super(name, oldColumnType);
 	}
 
 	public Integer getNewColumnType(Integer defaultType) {
@@ -55,16 +44,7 @@ public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		_temp = oldValue;
-
 		return oldValue;
 	}
-
-	public Object getTemp() {
-		return _temp;
-	}
-
-	private Integer _oldColumnType;
-	private Object _temp;
 
 }

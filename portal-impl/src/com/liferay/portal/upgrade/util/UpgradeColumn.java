@@ -37,8 +37,16 @@ public interface UpgradeColumn {
 
 	public Integer getOldColumnType(Integer defaultType);
 
+	public Object getOldValue();
+
+	public void setOldValue(Object oldValue);
+
 	public Integer getNewColumnType(Integer defaultType);
 
 	public Object getNewValue(Object oldValue) throws Exception;
+
+	public Object getNewValue();
+
+	public void setNewValue(Object newValue);
 
 }

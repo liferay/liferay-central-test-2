@@ -20,39 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
+
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="SkipUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageResourcePrimKeyUpgradeColumnImpl.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SkipUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class WikiPageResourcePrimKeyUpgradeColumnImpl
+	extends BaseUpgradeColumnImpl {
 
-	public SkipUpgradeColumnImpl(String name, Integer oldColumnType) {
-		super(name);
+	public WikiPageResourcePrimKeyUpgradeColumnImpl(
+		WikiPageIdUpgradeColumnImpl pageIdColumn) {
 
-		_oldColumnType = oldColumnType;
-	}
+		super("resourcePrimKey");
 
-	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
-		}
-	}
-
-	public Integer getNewColumnType(Integer defaultType) {
-		return getOldColumnType(defaultType);
+		_pageIdColumn = pageIdColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		return oldValue;
+		return _pageIdColumn.getResourcePrimKey();
 	}
 
-	private Integer _oldColumnType;
+	private WikiPageIdUpgradeColumnImpl _pageIdColumn;
 
 }

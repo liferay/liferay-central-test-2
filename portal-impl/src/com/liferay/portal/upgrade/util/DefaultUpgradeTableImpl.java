@@ -229,11 +229,17 @@ public class DefaultUpgradeTableImpl
 					Object oldValue = getValue(
 						rs, (String)columns[i][0], columnType);
 
+					_upgradeColumns[i].setOldValue(oldValue);
+
 					Object newValue = _upgradeColumns[i].getNewValue(oldValue);
+
+					_upgradeColumns[i].setNewValue(newValue);
 
 					appendColumn(sm, newValue, last);
 				}
 				catch (StagnantRowException sre) {
+					_upgradeColumns[i].setNewValue(null);
+
 					throw new StagnantRowException(
 						"Column " + columns[i][0] + " with value " +
 							sre.getMessage(),

@@ -23,7 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 
 /**
@@ -35,22 +35,22 @@ import com.liferay.portal.upgrade.util.ValueMapper;
  */
 public class ContactIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ContactIdUpgradeColumnImpl(TempUpgradeColumnImpl upgradeColumn,
-									  ValueMapper valueMapper) {
+	public ContactIdUpgradeColumnImpl(
+		UpgradeColumn screenNameColumn, ValueMapper valueMapper) {
 
 		super("contactId");
 
-		_upgradeColumn = upgradeColumn;
+		_screenNameColumn = screenNameColumn;
 		_valueMapper = valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String userId = (String)_upgradeColumn.getTemp();
+		String userId = (String)_screenNameColumn.getOldValue();
 
 		return _valueMapper.getNewValue(userId);
 	}
 
-	private TempUpgradeColumnImpl _upgradeColumn;
+	private UpgradeColumn _screenNameColumn;
 	private ValueMapper _valueMapper;
 
 }

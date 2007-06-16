@@ -37,26 +37,15 @@ public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public SwapUpgradeColumnImpl(String name, Integer oldColumnType,
 								 ValueMapper valueMapper) {
 
-		super(name);
+		super(name, oldColumnType);
 
-		_oldColumnType = oldColumnType;
 		_valueMapper = valueMapper;
-	}
-
-	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
-		}
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		return _valueMapper.getNewValue(oldValue);
 	}
 
-	private Integer _oldColumnType;
 	private ValueMapper _valueMapper;
 
 }

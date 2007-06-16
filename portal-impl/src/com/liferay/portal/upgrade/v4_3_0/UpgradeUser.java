@@ -33,8 +33,8 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.SkipUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -62,8 +62,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
-import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
 import java.sql.Types;
 
@@ -120,7 +118,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// Contact
 
-		UpgradeColumn upgradeContactIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn upgradeContactIdColumn = new TempUpgradeColumnImpl(
 			"contactId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -292,7 +290,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// PollsVote
 
-		UpgradeColumn upgradeChoiceIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn upgradeChoiceIdColumn = new TempUpgradeColumnImpl(
 			"choiceId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -303,10 +301,10 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// RatingsEntry
 
-		UpgradeColumn skipUpgradeClassNameIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn skipUpgradeClassNameIdColumn = new TempUpgradeColumnImpl(
 			"classNameId", new Integer(Types.VARCHAR));
 
-		UpgradeColumn skipUpgradeClassPKColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn skipUpgradeClassPKColumn = new TempUpgradeColumnImpl(
 			"classPK", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -318,7 +316,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// ShoppingCart
 
-		UpgradeColumn upgradeCartIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn upgradeCartIdColumn = new TempUpgradeColumnImpl(
 			"cartId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -337,7 +335,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// ShoppingCoupon
 
-		UpgradeColumn upgradeCouponIdColumn = new SkipUpgradeColumnImpl(
+		UpgradeColumn upgradeCouponIdColumn = new TempUpgradeColumnImpl(
 			"couponId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -358,22 +356,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// WikiNode
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// WikiPage
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
@@ -401,7 +383,7 @@ public class UpgradeUser extends UpgradeProcess {
 		"MBCategory", "MBMessage", "MBMessageFlag", "MBStatsUser",
 		"PasswordTracker", "PollsQuestion", "PollsVote", "RatingsEntry",
 		"ShoppingCart", "ShoppingCategory", "ShoppingCoupon", "ShoppingItem",
-		"ShoppingOrder", "User_", "WikiNode", "WikiPage"
+		"ShoppingOrder", "User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

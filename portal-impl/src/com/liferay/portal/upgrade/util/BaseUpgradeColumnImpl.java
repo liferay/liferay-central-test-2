@@ -31,7 +31,12 @@ package com.liferay.portal.upgrade.util;
 public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 
 	public BaseUpgradeColumnImpl(String name) {
+		this(name, null);
+	}
+
+	public BaseUpgradeColumnImpl(String name, Integer oldColumnType) {
 		_name = name;
+		_oldColumnType = oldColumnType;
 	}
 
 	public String getName() {
@@ -48,13 +53,37 @@ public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 	}
 
 	public Integer getOldColumnType(Integer defaultType) {
-		return defaultType;
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
+		}
+	}
+
+	public Object getOldValue() {
+		return _oldValue;
+	}
+
+	public void setOldValue(Object oldValue) {
+		_oldValue = oldValue;
 	}
 
 	public Integer getNewColumnType(Integer defaultType) {
 		return defaultType;
 	}
 
+	public Object getNewValue() {
+		return _newValue;
+	}
+
+	public void setNewValue(Object newValue) {
+		_newValue = newValue;
+	}
+
 	private String _name;
+	private Integer _oldColumnType;
+	private Object _oldValue;
+	private Object _newValue;
 
 }

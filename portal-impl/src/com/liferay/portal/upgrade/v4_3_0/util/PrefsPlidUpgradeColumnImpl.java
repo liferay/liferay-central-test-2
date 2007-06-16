@@ -23,7 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortletKeys;
 
@@ -37,7 +37,7 @@ public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PrefsPlidUpgradeColumnImpl(
 		PrefsOwnerIdUpgradeColumnImpl ownerIdColumn,
-		TempUpgradeColumnImpl layoutIdColumn, ValueMapper layoutPlidMapper) {
+		UpgradeColumn layoutIdColumn, ValueMapper layoutPlidMapper) {
 
 		super("plid");
 
@@ -47,12 +47,13 @@ public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long groupIdObj = _ownerIdColumn.getGroupId();
+		Long oldGroupIdObj = _ownerIdColumn.getOldGroupId();
+		Long newGroupIdObj = _ownerIdColumn.getNewGroupId();
 		Boolean privateLayoutObj = _ownerIdColumn.isPrivateLayout();
-		String layoutId = (String)_layoutIdColumn.getTemp();
+		String layoutId = (String)_layoutIdColumn.getOldValue();
 
-		if ((!layoutId.equals("SHARED")) && (groupIdObj != null) &&
-			(privateLayoutObj != null)) {
+		if ((!layoutId.equals("SHARED")) && (oldGroupIdObj != null) &&
+			(newGroupIdObj != null) && (privateLayoutObj != null)) {
 
 			String oldOwnerId = null;
 
@@ -63,7 +64,7 @@ public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 				oldOwnerId = "PUB.";
 			}
 
-			oldOwnerId += _ownerIdColumn.getOldGroupId().longValue();
+			oldOwnerId += oldGroupIdObj.longValue();
 
 			String oldPlidValue =
 				"{layoutId=" + layoutId + ", ownerId=" + oldOwnerId + "}";
@@ -76,7 +77,7 @@ public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private PrefsOwnerIdUpgradeColumnImpl _ownerIdColumn;
-	private TempUpgradeColumnImpl _layoutIdColumn;
+	private UpgradeColumn _layoutIdColumn;
 	private ValueMapper _layoutPlidMapper;
 
 }

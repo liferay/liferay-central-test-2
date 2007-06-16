@@ -25,7 +25,7 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.GetterUtil;
@@ -45,8 +45,7 @@ import org.apache.commons.logging.LogFactory;
 public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ResourcePrimKeyUpgradeColumnImpl(
-		TempUpgradeColumnImpl nameColumn,
-		ResourceCodeIdUpgradeColumnImpl codeIdColumn,
+		UpgradeColumn nameColumn, ResourceCodeIdUpgradeColumnImpl codeIdColumn,
 		ValueMapper groupIdMapper, Map classPKContainers) {
 
 		super("primKey");
@@ -70,29 +69,10 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 				new Long(GetterUtil.getLong(primKey))));
 		}
 		else if (scope == ResourceImpl.SCOPE_INDIVIDUAL) {
-			String name = (String)_nameColumn.getTemp();
+			String name = (String)_nameColumn.getOldValue();
 
 			if (name.startsWith("com.liferay.")) {
-				Long classNameIdObj = new Long(PortalUtil.getClassNameId(name));
-
-				ClassPKContainer classPKContainer =
-					(ClassPKContainer)_classPKContainers.get(classNameIdObj);
-
-				if (classPKContainer != null) {
-					ValueMapper valueMapper = classPKContainer.getValueMapper();
-
-					if (classPKContainer.isLong()) {
-						primKey = String.valueOf(valueMapper.getNewValue(
-							new Long(GetterUtil.getLong((String)oldValue))));
-					}
-					else {
-						primKey = String.valueOf(
-							valueMapper.getNewValue(oldValue));
-					}
-				}
-				else {
-					_log.error("Name " + name + " is invalid");
-				}
+				primKey = getPrimKey(name, primKey);
 			}
 
 			return primKey;
@@ -102,10 +82,39 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
+	protected String getPrimKey(String name, String primKey) throws Exception {
+		Long classNameIdObj = new Long(PortalUtil.getClassNameId(name));
+
+		ClassPKContainer classPKContainer =
+			(ClassPKContainer)_classPKContainers.get(classNameIdObj);
+
+		if (classPKContainer != null) {
+			ValueMapper valueMapper = classPKContainer.getValueMapper();
+
+			if (valueMapper == null) {
+				_log.error("Name " + name + " does not have a value mapper");
+			}
+			else {
+				if (classPKContainer.isLong()) {
+					primKey = String.valueOf(valueMapper.getNewValue(
+						new Long(GetterUtil.getLong(primKey))));
+				}
+				else {
+					primKey = String.valueOf(valueMapper.getNewValue(primKey));
+				}
+			}
+		}
+		else {
+			_log.error("Name " + name + " is invalid");
+		}
+
+		return primKey;
+	}
+
 	private static Log _log =
 		LogFactory.getLog(ResourcePrimKeyUpgradeColumnImpl.class);
 
-	private TempUpgradeColumnImpl _nameColumn;
+	private UpgradeColumn _nameColumn;
 	private ResourceCodeIdUpgradeColumnImpl _codeIdColumn;
 	private ValueMapper _groupIdMapper;
 	private Map _classPKContainers;

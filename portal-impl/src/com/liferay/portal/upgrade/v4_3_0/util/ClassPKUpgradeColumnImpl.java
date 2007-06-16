@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.util.GetterUtil;
 
@@ -36,28 +36,19 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  *
  */
-public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public ClassPKUpgradeColumnImpl(
 		ClassNameIdUpgradeColumnImpl classNameIdColumn, Map classPKContainers) {
 
-		super("classPK");
+		super("classPK", new Integer(Types.VARCHAR));
 
-		_oldColumnType = new Integer(Types.VARCHAR);
 		_classNameIdColumn = classNameIdColumn;
 		_classPKContainers = classPKContainers;
 	}
 
-	public Integer getOldColumnType(Integer defaultType) {
-		return _oldColumnType;
-	}
-
-	public Integer getNewColumnType(Integer defaultType) {
-		return getOldColumnType(defaultType);
-	}
-
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long classNameIdObj = (Long)_classNameIdColumn.getTemp();
+		Long classNameIdObj = (Long)_classNameIdColumn.getNewValue();
 
 		ClassPKContainer classPKContainer =
 			(ClassPKContainer)_classPKContainers.get(classNameIdObj);
@@ -83,7 +74,6 @@ public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
-	private Integer _oldColumnType;
 	private ClassNameIdUpgradeColumnImpl _classNameIdColumn;
 	private Map _classPKContainers;
 
