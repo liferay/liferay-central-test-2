@@ -54,8 +54,21 @@ public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		if ((!layoutId.equals("SHARED")) && (groupIdObj != null) &&
 			(privateLayoutObj != null)) {
 
-			return _layoutPlidMapper.getNewValue(
-				groupIdObj + "_" + privateLayoutObj + "_" + layoutId);
+			String oldOwnerId = null;
+
+			if (privateLayoutObj.booleanValue()) {
+				oldOwnerId = "PRI.";
+			}
+			else {
+				oldOwnerId = "PUB.";
+			}
+
+			oldOwnerId += _ownerIdColumn.getOldGroupId().longValue();
+
+			String oldPlidValue =
+				"{layoutId=" + layoutId + ", ownerId=" + oldOwnerId + "}";
+
+			return _layoutPlidMapper.getNewValue(oldPlidValue);
 		}
 		else {
 			return new Long(PortletKeys.PREFS_PLID_SHARED);

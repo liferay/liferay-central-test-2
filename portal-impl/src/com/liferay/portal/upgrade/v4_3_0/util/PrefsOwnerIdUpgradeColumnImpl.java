@@ -58,6 +58,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		_ownerTypeObj = null;
+		_oldGroupId = null;
 		_groupId = null;
 		_privateLayout = null;
 
@@ -71,25 +72,21 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			int pos = ownerId.indexOf(".USER.");
 
 			if (pos != -1) {
-				Long groupIdObj = new Long(GetterUtil.getLong(
+				_oldGroupId = new Long(GetterUtil.getLong(
 					ownerId.substring(4, pos)));
-
-				groupIdObj = (Long)_groupIdMapper.getNewValue(groupIdObj);
+				_groupId = (Long)_groupIdMapper.getNewValue(_oldGroupId);
 
 				ownerId = String.valueOf(_userIdMapper.getNewValue(
 					ownerId.substring(pos + 6, ownerId.length())));
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
-				_groupId = groupIdObj;
 			}
 			else {
-				Long groupIdObj = new Long(GetterUtil.getLong(
+				_oldGroupId = new Long(GetterUtil.getLong(
 					ownerId.substring(4, ownerId.length())));
-
-				groupIdObj = (Long)_groupIdMapper.getNewValue(groupIdObj);
+				_groupId = (Long)_groupIdMapper.getNewValue(_oldGroupId);
 
 				ownerId = String.valueOf(PortletKeys.PREFS_OWNER_ID_DEFAULT);
 				ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
-				_groupId = groupIdObj;
 			}
 		}
 		else if (ownerId.startsWith("COMPANY.")) {
@@ -123,6 +120,10 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _ownerTypeObj;
 	}
 
+	public Long getOldGroupId() {
+		return _oldGroupId;
+	}
+
 	public Long getGroupId() {
 		return _groupId;
 	}
@@ -135,6 +136,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _userIdMapper;
 	private Integer _ownerTypeObj;
+	private Long _oldGroupId;
 	private Long _groupId;
 	private Boolean _privateLayout;
 

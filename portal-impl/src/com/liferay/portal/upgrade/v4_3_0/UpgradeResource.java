@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
@@ -110,6 +112,20 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(CalEvent.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getCalEventIdMapper(), true));
+
+		// Group
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Group.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getGroupIdMapper(), true));
+
+		// Layout
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Layout.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getLayoutPlidMapper(), false));
 
 		// Organization
 

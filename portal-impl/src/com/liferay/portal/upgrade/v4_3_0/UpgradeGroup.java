@@ -197,7 +197,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		AvailableMappersUtil.setLayoutPlidMapper(layoutPlidMapper);
 
 		UpgradeColumn upgradeLayoutPlidColumn = new LayoutPlidUpgradeColumnImpl(
-			upgradeLayoutOwnerIdGroupIdColumn,
+			upgradeLayoutOwnerIdColumn, upgradeLayoutOwnerIdGroupIdColumn,
 			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
 			layoutPlidMapper);
 

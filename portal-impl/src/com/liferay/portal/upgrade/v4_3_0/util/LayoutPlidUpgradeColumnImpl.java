@@ -37,12 +37,14 @@ import com.liferay.util.Validator;
 public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public LayoutPlidUpgradeColumnImpl(
+		TempUpgradeColumnImpl upgradeLayoutOwnerIdColumn,
 		LayoutOwnerIdUpgradeColumnImpl groupIdColumn,
 		LayoutOwnerIdUpgradeColumnImpl privateLayoutColumn,
 		TempUpgradeColumnImpl layoutIdColumn, ValueMapper layoutPlidMapper) {
 
 		super("plid", false);
 
+		_upgradeLayoutOwnerIdColumn = upgradeLayoutOwnerIdColumn;
 		_groupIdColumn = groupIdColumn;
 		_privateLayoutColumn = privateLayoutColumn;
 		_layoutIdColumn = layoutIdColumn;
@@ -64,12 +66,17 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 					privateLayoutObj + ",layoutId=" + layoutId + "}");
 		}
 
-		_layoutPlidMapper.mapValue(
-			groupIdObj + "_" + privateLayoutObj + "_" + layoutId, newValue);
+		String oldOwnerId = (String)_upgradeLayoutOwnerIdColumn.getTemp();
+
+		String oldPlidValue =
+			"{layoutId=" + layoutId + ", ownerId=" + oldOwnerId + "}";
+
+		_layoutPlidMapper.mapValue(oldPlidValue, newValue);
 
 		return newValue;
 	}
 
+	private TempUpgradeColumnImpl _upgradeLayoutOwnerIdColumn;
 	private LayoutOwnerIdUpgradeColumnImpl _groupIdColumn;
 	private LayoutOwnerIdUpgradeColumnImpl _privateLayoutColumn;
 	private TempUpgradeColumnImpl _layoutIdColumn;
