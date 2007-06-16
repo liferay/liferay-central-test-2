@@ -22,6 +22,16 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+
+import java.io.Serializable;
+
+import java.lang.Class;
+import java.lang.Object;
+import java.lang.String;
+
+import java.sql.Connection;
+
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.EntityMode;
@@ -35,17 +45,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import org.hibernate.stat.SessionStatistics;
-
-import java.io.Serializable;
-
-import java.lang.Class;
-import java.lang.Object;
-import java.lang.String;
-
-import java.sql.Connection;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
  * <a href="LiferaySession.java.html"><b><i>View Source</i></b></a>
@@ -120,7 +120,7 @@ public class LiferaySession implements Session {
 
 	public Query createFilter(Object collection, String queryString)
 		throws HibernateException {
-		
+
 		return _session.createFilter(collection, queryString);
 	}
 
@@ -130,7 +130,7 @@ public class LiferaySession implements Session {
 
 	public SQLQuery createSQLQuery(String queryString)
 		throws HibernateException {
-		
+
 		return _session.createSQLQuery(queryString);
 	}
 
@@ -140,7 +140,7 @@ public class LiferaySession implements Session {
 
 	public void delete(String entityName, Object object)
 		throws HibernateException {
-		
+
 		_session.delete(entityName, object);
 	}
 
@@ -170,19 +170,19 @@ public class LiferaySession implements Session {
 
 	public Object get(Class clazz, Serializable id, LockMode lockMode)
 		throws HibernateException {
-		
+
 		return _session.get(clazz, id, lockMode);
 	}
 
 	public Object get(String entityName, Serializable id)
 		throws HibernateException {
-		
+
 		return _session.get(entityName, id);
 	}
 
 	public Object get(String entityName, Serializable id, LockMode lockMode)
 		throws HibernateException {
-		
+
 		return _session.get(entityName, id, lockMode);
 	}
 
@@ -250,25 +250,25 @@ public class LiferaySession implements Session {
 
 	public Object load(Class theClass, Serializable id, LockMode lockMode)
 		throws HibernateException {
-		
+
 		return _session.load(theClass, id, lockMode);
 	}
 
 	public Object load(String entityName, Serializable id, LockMode lockMode)
 		throws HibernateException {
-		
+
 		return _session.load(entityName, id, lockMode);
 	}
 
 	public Object load(Class theClass, Serializable id)
 		throws HibernateException {
-		
+
 		return _session.load(theClass, id);
 	}
 
 	public Object load(String entityName, Serializable id)
 		throws HibernateException {
-		
+
 		return _session.load(entityName, id);
 	}
 
@@ -278,13 +278,13 @@ public class LiferaySession implements Session {
 
 	public void lock(Object object, LockMode lockMode)
 		throws HibernateException {
-		
+
 		_session.lock(object, lockMode);
 	}
 
 	public void lock(String entityName, Object object, LockMode lockMode)
 		throws HibernateException {
-		
+
 		_session.lock(entityName, object, lockMode);
 	}
 
@@ -294,7 +294,7 @@ public class LiferaySession implements Session {
 
 	public Object merge(String entityName, Object object)
 		throws HibernateException {
-		
+
 		return _session.merge(entityName, object);
 	}
 
@@ -304,7 +304,7 @@ public class LiferaySession implements Session {
 
 	public void persist(String entityName, Object object)
 		throws HibernateException {
-		
+
 		_session.persist(entityName, object);
 	}
 
@@ -322,13 +322,13 @@ public class LiferaySession implements Session {
 
 	public void refresh(Object object, LockMode lockMode)
 		throws HibernateException {
-		
+
 		_session.refresh(object, lockMode);
 	}
 
 	public void replicate(Object object, ReplicationMode replicationMode)
 		throws HibernateException {
-		
+
 		_session.replicate(object, replicationMode);
 	}
 
@@ -354,7 +354,7 @@ public class LiferaySession implements Session {
 
 	public void saveOrUpdate(String entityName, Object object)
 		throws HibernateException {
-		
+
 		_session.saveOrUpdate(entityName, object);
 	}
 

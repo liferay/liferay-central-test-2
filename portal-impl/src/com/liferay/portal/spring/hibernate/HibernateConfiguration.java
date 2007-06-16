@@ -27,32 +27,17 @@ import com.liferay.util.Validator;
 
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.HibernateException;
-import org.hibernate.JDBCException;
+
 import org.hibernate.SessionFactory;
-import org.hibernate.engine.SessionFactoryImplementor;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.support.PersistenceExceptionTranslator;
-import org.springframework.jdbc.support.SQLExceptionTranslator;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import org.hibernate.classic.Session;
-import org.hibernate.HibernateException;
+import org.hibernate.engine.SessionFactoryImplementor;
+
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
-import org.hibernate.SessionFactory;
 
 /**
  * <a href="HibernateConfiguration.java.html"><b><i>View Source</i></b></a>
