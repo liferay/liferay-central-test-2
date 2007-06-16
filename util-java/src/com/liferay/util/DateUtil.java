@@ -71,8 +71,16 @@ public class DateUtil {
 		}
 	}
 
-	public static Date getCurrentDate() {
-		return new Date();
+	public static String getCurrentDate(String pattern, Locale locale) {
+		return getDate(new Date(), pattern, locale);
+	}
+
+	public static String getDate(
+			Date date, String pattern, Locale locale) {
+		
+		DateFormat dateFormat = new SimpleDateFormat(pattern, locale);
+		
+		return dateFormat.format(date); 
 	}
 
 	public static DateFormat getISOFormat() {
@@ -142,11 +150,5 @@ public class DateUtil {
 		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
 		return dateFormat;
-	}
-
-	public static DateFormat getSimpleDateFormat(
-			String pattern, Locale locale) {
-
-		return new SimpleDateFormat(pattern, locale);
 	}
 }

@@ -37,8 +37,14 @@ public class DateUtil_IW {
 		return DateUtil.compareTo(date1, date2);
 	}
 
-	public java.util.Date getCurrentDate() {
-		return DateUtil.getCurrentDate();
+	public java.lang.String getCurrentDate(java.lang.String pattern,
+		java.util.Locale locale) {
+		return DateUtil.getCurrentDate(pattern, locale);
+	}
+
+	public java.lang.String getDate(java.util.Date date,
+		java.lang.String pattern, java.util.Locale locale) {
+		return DateUtil.getDate(date, pattern, locale);
 	}
 
 	public java.text.DateFormat getISOFormat() {
@@ -59,11 +65,6 @@ public class DateUtil_IW {
 
 	public java.text.DateFormat getUTCFormat(java.lang.String text) {
 		return DateUtil.getUTCFormat(text);
-	}
-
-	public java.text.DateFormat getSimpleDateFormat(java.lang.String pattern,
-		java.util.Locale locale) {
-		return DateUtil.getSimpleDateFormat(pattern, locale);
 	}
 
 	private DateUtil_IW() {
