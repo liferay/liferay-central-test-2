@@ -41,14 +41,14 @@ public class UpgradeJournal extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 		PropsUtil.set(PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
 	}
 

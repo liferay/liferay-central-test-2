@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -52,14 +50,14 @@ public class UpgradeWiki extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// WikiNode
 
@@ -92,13 +90,9 @@ public class UpgradeWiki extends UpgradeProcess {
 		ResourceUtil.upgradePrimKey(nodeIdMapper, WikiNode.class.getName());
 		//ResourceUtil.upgradePrimKey(pageIdMapper, WikiPage.class.getName());
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(WikiNode.class.getName());
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

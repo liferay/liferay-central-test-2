@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -55,14 +54,14 @@ public class UpgradeContact extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// Contact_
 
@@ -95,7 +94,7 @@ public class UpgradeContact extends UpgradeProcess {
 
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String _UPGRADE_SCHEMA =

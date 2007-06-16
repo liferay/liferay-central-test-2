@@ -212,8 +212,8 @@ public class StartupAction extends SimpleAction {
 	protected void deleteTemporaryImages() throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
-		dbUtil.executeSQL(_DELETE_TEMP_IMAGES_1);
-		dbUtil.executeSQL(_DELETE_TEMP_IMAGES_2);
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =

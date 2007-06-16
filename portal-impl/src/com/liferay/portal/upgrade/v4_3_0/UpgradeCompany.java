@@ -25,7 +25,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -47,8 +46,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="UpgradeCompany.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
- * @author  Brian Wing Shun Chan
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeCompany extends UpgradeProcess {
@@ -57,7 +56,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -105,9 +104,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		return (String[])webIds.toArray(new String[0]);
 	}
 
-	private void _upgrade() throws Exception {
-		DBUtil dbUtil = DBUtil.getInstance();
-
+	protected void doUpgrade() throws Exception {
 		ValueMapper companyIdMapper = ValueMapperFactory.getValueMapper();
 
 		AvailableMappersUtil.setCompanyIdMapper(companyIdMapper);
@@ -129,73 +126,75 @@ public class UpgradeCompany extends UpgradeProcess {
 				_log.debug(sql);
 			}
 
-			dbUtil.executeSQL(sql);
+			runSQL(sql);
 		}
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update PortletPreferences set ownerId = '0', ownerType = " +
 				PortletKeys.PREFS_OWNER_TYPE_COMPANY +
 					" where ownerId = 'COMPANY.LIFERAY_PORTAL'");
 
-		dbUtil.executeSQL("alter_column_type Account_ accountId LONG");
+		runSQL("alter_column_type Account_ accountId LONG");
 	}
 
 	private long _upgradeWebId(String webId) throws Exception {
-		DBUtil dbUtil = DBUtil.getInstance();
-
 		long companyId = CounterLocalServiceUtil.increment();
 
 		for (int j = 0; j < _TABLES.length; j++) {
-			dbUtil.executeSQL(_getUpdateSQL(_TABLES[j], companyId, webId));
+			runSQL(_getUpdateSQL(_TABLES[j], companyId, webId));
 		}
 
 		long accountId = CounterLocalServiceUtil.increment();
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Account_ set accountId = '" + accountId +
 				"', companyId = '" + companyId + "' where accountId = '" +
 					webId + "'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Address set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Company set accountId = " + accountId + " where webId = '" +
 				webId + "'");
 
-		dbUtil.executeSQL("alter_column_type Company companyId LONG");
+		runSQL("alter_column_type Company companyId LONG");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Contact_ set companyId = '" + companyId +
 				"', accountId = " + accountId + " where contactId = '" + webId +
 					".default'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Contact_ set accountId = '" + accountId +
 				"' where accountId = '" + webId + "'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update EmailAddress set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Phone set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update PortletPreferences set ownerId = '" + companyId +
 				"', ownerType = " + PortletKeys.PREFS_OWNER_TYPE_COMPANY +
 					" where ownerId = 'COMPANY." + webId + "'");
 
-		dbUtil.executeSQL(
+		runSQL(
+			"update Resource_ set primKey = '" + companyId +
+				"' where scope = 'company' and primKey = '" + webId + "'");
+
+		runSQL(
 			"update User_ set companyId = '" + companyId +
 				"', defaultUser = TRUE where userId = '" + webId + ".default'");
 
-		dbUtil.executeSQL(
+		runSQL(
 			"update Website set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");

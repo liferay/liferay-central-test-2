@@ -22,16 +22,29 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.tools.util.DBUtil;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceCodeUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
+import com.liferay.portal.upgrade.v4_3_0.util.ResourceCodeIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ResourcePrimKeyUpgradeColumnImpl;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.util.ArrayUtil;
+import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
+
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +53,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeResource.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeResource extends UpgradeProcess {
@@ -48,51 +62,100 @@ public class UpgradeResource extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected Map getClassPKContainers() {
+		Map classPKContainers = CollectionFactory.getHashMap();
+
+		// BlogsCategory
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(BlogsCategory.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getBlogsCategoryIdMapper(), true));
+
+		// BlogsEntry
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(BlogsEntry.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getBlogsEntryIdMapper(), true));
+
+		// Organization
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Organization.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getOrganizationIdMapper(), true));
+
+		// Role
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Role.class.getName())),
+			new ClassPKContainer(AvailableMappersUtil.getRoleIdMapper(), true));
+
+		// UserGroup
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(UserGroup.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getUserGroupIdMapper(), true));
+
+		return classPKContainers;
+	}
+
+	protected void doUpgrade() throws Exception {
 
 		// Resource
 
+		Object[][] resourceColumns1 = {
+			{"companyId", new Integer(Types.BIGINT)},
+			{"name", new Integer(Types.VARCHAR)},
+			{"scope", new Integer(Types.VARCHAR)}
+		};
+		Object[][] resourceColumns2 =
+			(Object[][])ResourceImpl.TABLE_COLUMNS.clone();
+		Object[][] resourceColumns =
+			new Object[resourceColumns1.length + resourceColumns2.length][];
+
+		ArrayUtil.combine(
+			resourceColumns1, resourceColumns2, resourceColumns);
+
 		TempUpgradeColumnImpl companyIdColumn =
 			new TempUpgradeColumnImpl("companyId");
+
 		TempUpgradeColumnImpl nameColumn = new TempUpgradeColumnImpl("name");
+
 		TempUpgradeColumnImpl scopeColumn = new TempUpgradeColumnImpl("scope");
 
-		UpgradeColumn codeColumn = new ResourceCodeUpgradeColumnImpl(
-			companyIdColumn, nameColumn, scopeColumn);
+		ResourceCodeIdUpgradeColumnImpl codeIdColumn =
+			new ResourceCodeIdUpgradeColumnImpl(
+				companyIdColumn, nameColumn, scopeColumn);
+
+		UpgradeColumn primKeyColumn = new ResourcePrimKeyUpgradeColumnImpl(
+			nameColumn, codeIdColumn, AvailableMappersUtil.getGroupIdMapper(),
+			getClassPKContainers());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_NAME, _TABLE_COLUMNS, companyIdColumn, nameColumn,
-			scopeColumn, codeColumn);
+			ResourceImpl.TABLE_NAME, resourceColumns, companyIdColumn,
+			nameColumn, scopeColumn, codeIdColumn, primKeyColumn);
 
 		upgradeTable.updateTable();
 
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table Resource_ drop companyId",
 		"alter table Resource_ drop name",
 		"alter table Resource_ drop scope"
-	};
-
-	public static String _TABLE_NAME = "Resource_";
-
-	public static Object[][] _TABLE_COLUMNS = {
-		{"resourceId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"scope", new Integer(Types.VARCHAR)},
-		{"codeId", new Integer(Types.BIGINT)},
-		{"primKey", new Integer(Types.VARCHAR)}
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeResource.class);

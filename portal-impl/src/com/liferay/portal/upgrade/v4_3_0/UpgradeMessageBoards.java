@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -33,9 +31,6 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
@@ -57,14 +52,14 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// MBCategory
 
@@ -167,17 +162,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		//ResourceUtil.upgradePrimKey(categoryIdMapper, MBCategory.class.getName());
 		//ResourceUtil.upgradePrimKey(messageIdMapper, MBMessage.class.getName());
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(MBCategory.class.getName());
-		CounterLocalServiceUtil.reset(MBMessage.class.getName());
-		CounterLocalServiceUtil.reset(MBThread.class.getName());
-		CounterLocalServiceUtil.reset(
-			"com.liferay.portlet.messageboards.model.MBTopic");
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

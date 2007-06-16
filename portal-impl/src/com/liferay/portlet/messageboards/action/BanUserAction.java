@@ -41,7 +41,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="BanUserAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Michael Young
+ * @author Michael Young
  *
  */
 public class BanUserAction extends PortletAction {

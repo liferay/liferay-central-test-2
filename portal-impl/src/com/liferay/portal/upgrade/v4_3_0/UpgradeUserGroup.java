@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -32,7 +30,6 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,14 +46,14 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// UserGroup
 
@@ -72,15 +69,6 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		ValueMapper userGroupIdMapper = pkUpgradeColumn.getValueMapper();
 
 		AvailableMappersUtil.setUserGroupIdMapper(userGroupIdMapper);
-
-		// Resource
-
-		ResourceUtil.upgradePrimKey(
-			userGroupIdMapper, UserGroup.class.getName());
-
-		// Counter
-
-		CounterLocalServiceUtil.reset(UserGroup.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeUserGroup.class);

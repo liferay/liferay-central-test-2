@@ -22,9 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
@@ -38,7 +35,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,14 +51,14 @@ public class UpgradeOrganization extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// Organization
 
@@ -105,16 +101,6 @@ public class UpgradeOrganization extends UpgradeProcess {
 			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("orgLaborId", false),
 			upgradeOrganizationIdColumn);
-
-		// Resource
-
-		ResourceUtil.upgradePrimKey(
-			organizationIdMapper, Organization.class.getName());
-
-		// Counter
-
-		CounterLocalServiceUtil.reset(Organization.class.getName());
-		CounterLocalServiceUtil.reset(OrgLabor.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);

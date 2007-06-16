@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -48,14 +47,14 @@ public class UpgradeCalendar extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"eventId", true);
 
@@ -70,10 +69,6 @@ public class UpgradeCalendar extends UpgradeProcess {
 		// Resource
 
 		ResourceUtil.upgradePrimKey(eventIdMapper, CalEvent.class.getName());
-
-		// Counter
-
-		CounterLocalServiceUtil.reset(CalEvent.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);

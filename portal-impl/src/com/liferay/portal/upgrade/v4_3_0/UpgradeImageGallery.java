@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -54,14 +52,14 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// IGFolder
 
@@ -106,14 +104,9 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		ResourceUtil.upgradePrimKey(folderIdMapper, IGFolder.class.getName());
 		ResourceUtil.upgradePrimKey(imageIdMapper, IGImage.class.getName());
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(IGFolder.class.getName());
-		CounterLocalServiceUtil.reset(IGImage.class.getName());
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

@@ -32,16 +32,9 @@ import com.liferay.portal.upgrade.util.ValueMapper;
  */
 public class ClassPKContainer {
 
-	public ClassPKContainer(String className, ValueMapper valueMapper,
-							boolean isLong) {
-
-		_className = className;
+	public ClassPKContainer(ValueMapper valueMapper, boolean isLong) {
 		_valueMapper = valueMapper;
 		_isLong = isLong;
-	}
-
-	public String getClassName() {
-		return _className;
 	}
 
 	public ValueMapper getValueMapper() {
@@ -52,7 +45,6 @@ public class ClassPKContainer {
 		return _isLong;
 	}
 
-	private String _className;
 	private ValueMapper _valueMapper;
 	private boolean _isLong;
 

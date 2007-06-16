@@ -95,56 +95,58 @@ public abstract class DBUtil {
 	public static final int DB_TYPE_SYBASE = 12;
 
 	public static DBUtil getInstance() {
-		DBUtil dbUtil = null;
+		if (_dbUtil != null) {
+			return _dbUtil;
+		}
 
 		Dialect dialect = HibernateUtil.getWrappedDialect();
 
 		if (dialect instanceof DB2Dialect) {
 			if (dialect instanceof DerbyDialect) {
-				dbUtil = DerbyUtil.getInstance();
+				_dbUtil = DerbyUtil.getInstance();
 			}
 			else {
-				dbUtil = DB2Util.getInstance();
+				_dbUtil = DB2Util.getInstance();
 			}
 		}
 		else if (dialect instanceof InterbaseDialect) {
 			if (dialect instanceof FirebirdDialect) {
-				dbUtil = FirebirdUtil.getInstance();
+				_dbUtil = FirebirdUtil.getInstance();
 			}
 			else {
-				dbUtil = InterBaseUtil.getInstance();
+				_dbUtil = InterBaseUtil.getInstance();
 			}
 		}
 		else if (dialect instanceof JDataStoreDialect) {
-			dbUtil = JDataStoreUtil.getInstance();
+			_dbUtil = JDataStoreUtil.getInstance();
 		}
 		else if (dialect instanceof HSQLDialect) {
-			dbUtil = HypersonicUtil.getInstance();
+			_dbUtil = HypersonicUtil.getInstance();
 		}
 		else if (dialect instanceof MySQLDialect) {
-			dbUtil = MySQLUtil.getInstance();
+			_dbUtil = MySQLUtil.getInstance();
 		}
 		else if (dialect instanceof OracleDialect ||
 				 dialect instanceof Oracle9Dialect) {
 
-			dbUtil = OracleUtil.getInstance();
+			_dbUtil = OracleUtil.getInstance();
 		}
 		else if (dialect instanceof PostgreSQLDialect) {
-			dbUtil = PostgreSQLUtil.getInstance();
+			_dbUtil = PostgreSQLUtil.getInstance();
 		}
 		else if (dialect instanceof SAPDBDialect) {
-			dbUtil = SAPUtil.getInstance();
+			_dbUtil = SAPUtil.getInstance();
 		}
 		else if (dialect instanceof SybaseDialect) {
 			if (dialect instanceof SQLServerDialect) {
-				dbUtil = SQLServerUtil.getInstance();
+				_dbUtil = SQLServerUtil.getInstance();
 			}
 			else {
-				dbUtil = SybaseUtil.getInstance();
+				_dbUtil = SybaseUtil.getInstance();
 			}
 		}
 
-		return dbUtil;
+		return _dbUtil;
 	}
 
 	public static DBUtil getInstance(int dbType) {
@@ -208,11 +210,11 @@ public abstract class DBUtil {
 			template);
 	}
 
-	public void executeSQL(String template) throws IOException, SQLException {
-		executeSQL(new String[] {template});
+	public void runSQL(String template) throws IOException, SQLException {
+		runSQL(new String[] {template});
 	}
 
-	public void executeSQL(String[] templates)
+	public void runSQL(String[] templates)
 		throws IOException, SQLException {
 
 		Connection con = null;
@@ -556,5 +558,7 @@ public abstract class DBUtil {
 	};
 
 	private static Log _log = LogFactory.getLog(DBUtil.class);
+
+	private static DBUtil _dbUtil;
 
 }

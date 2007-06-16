@@ -22,12 +22,9 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.WebsiteImpl;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -39,11 +36,12 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,14 +59,14 @@ public class UpgradeWebsite extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// Website
 
@@ -79,16 +77,16 @@ public class UpgradeWebsite extends UpgradeProcess {
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
-		List classPKContainers = new ArrayList();
+		Map classPKContainers = CollectionFactory.getHashMap();
 
-		classPKContainers.add(
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Contact.class.getName())),
 			new ClassPKContainer(
-				Contact.class.getName(),
 				AvailableMappersUtil.getContactIdMapper(), false));
 
-		classPKContainers.add(
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Organization.class.getName())),
 			new ClassPKContainer(
-				Organization.class.getName(),
 				AvailableMappersUtil.getOrganizationIdMapper(), true));
 
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
@@ -101,13 +99,9 @@ public class UpgradeWebsite extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(Website.class.getName());
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

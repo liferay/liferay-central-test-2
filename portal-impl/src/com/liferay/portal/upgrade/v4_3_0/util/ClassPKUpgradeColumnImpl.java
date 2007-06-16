@@ -24,12 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.GetterUtil;
 
 import java.sql.Types;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="ClassPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,8 +39,7 @@ import java.util.List;
 public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ClassPKUpgradeColumnImpl(
-		ClassNameIdUpgradeColumnImpl classNameIdColumn,
-		List classPKContainers) {
+		ClassNameIdUpgradeColumnImpl classNameIdColumn, Map classPKContainers) {
 
 		super("classPK");
 
@@ -61,30 +59,32 @@ public class ClassPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Long classNameIdObj = (Long)_classNameIdColumn.getTemp();
 
-		for (int i = 0; i < _classPKContainers.size(); i++) {
-			ClassPKContainer classPKContainer =
-				(ClassPKContainer)_classPKContainers.get(i);
+		ClassPKContainer classPKContainer =
+			(ClassPKContainer)_classPKContainers.get(classNameIdObj);
 
-			long classNameId = PortalUtil.getClassNameId(
-				classPKContainer.getClassName());
+		if (classPKContainer != null) {
 			ValueMapper valueMapper = classPKContainer.getValueMapper();
 
-			if (classNameIdObj.longValue() == classNameId) {
-				if (classPKContainer.isLong()) {
-					return valueMapper.getNewValue(
-						new Long(GetterUtil.getLong((String)oldValue)));
-				}
-				else {
-					return valueMapper.getNewValue(oldValue);
-				}
+			if (classPKContainer.isLong()) {
+				return valueMapper.getNewValue(
+					new Long(GetterUtil.getLong((String)oldValue)));
+			}
+			else {
+				return valueMapper.getNewValue(oldValue);
 			}
 		}
-
-		return new Long(0);
+		else {
+			if (oldValue instanceof String) {
+				return new Long(GetterUtil.getLong((String)oldValue));
+			}
+			else {
+				return oldValue;
+			}
+		}
 	}
 
 	private Integer _oldColumnType;
 	private ClassNameIdUpgradeColumnImpl _classNameIdColumn;
-	private List _classPKContainers;
+	private Map _classPKContainers;
 
 }

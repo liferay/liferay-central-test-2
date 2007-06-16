@@ -22,16 +22,13 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.mail.model.CyrusVirtual;
-import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -43,8 +40,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
-import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
@@ -92,14 +87,14 @@ public class UpgradeUser extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// User_
 
@@ -123,22 +118,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			AccountImpl.TABLE_NAME, AccountImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// BlogsCategory
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// BlogsEntry
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
@@ -435,13 +414,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(PasswordTracker.class.getName());
-
 		// Schema
-
-		DBUtil dbUtil = DBUtil.getInstance();
 
 		for (int i = 0; i < _TABLES.length; i++) {
 			String sql = "alter_column_type " + _TABLES[i] + " userId LONG";
@@ -450,24 +423,22 @@ public class UpgradeUser extends UpgradeProcess {
 				_log.debug(sql);
 			}
 
-			dbUtil.executeSQL(sql);
+			runSQL(sql);
 		}
 
-		dbUtil.executeSQL(
-			"alter_column_type JournalArticle approvedByUserId LONG");
-		dbUtil.executeSQL("alter_column_type MBThread lastPostByUserId LONG");
+		runSQL("alter_column_type JournalArticle approvedByUserId LONG");
+		runSQL("alter_column_type MBThread lastPostByUserId LONG");
 	}
 
 	private static final String[] _TABLES = new String[] {
-		"Account_", "BlogsCategory", "BlogsEntry", "BookmarksEntry",
-		"BookmarksFolder", "CalEvent", "Contact_", "CyrusUser", "CyrusVirtual",
-		"DLFileEntry", "DLFileRank", "DLFileShortcut", "DLFileVersion",
-		"DLFolder", "IGFolder", "IGImage", "JournalArticle", "JournalStructure",
-		"JournalTemplate", "MBCategory", "MBMessage", "MBMessageFlag",
-		"MBStatsUser", "PasswordTracker", "PollsQuestion", "PollsVote",
-		"RatingsEntry", "ShoppingCart", "ShoppingCategory", "ShoppingCoupon",
-		"ShoppingItem", "ShoppingOrder", "User_", "UserIdMapper", "WikiNode",
-		"WikiPage"
+		"Account_", "BookmarksEntry", "BookmarksFolder", "CalEvent", "Contact_",
+		"CyrusUser", "CyrusVirtual", "DLFileEntry", "DLFileRank",
+		"DLFileShortcut", "DLFileVersion", "DLFolder", "IGFolder", "IGImage",
+		"JournalArticle", "JournalStructure", "JournalTemplate", "MBCategory",
+		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker",
+		"PollsQuestion", "PollsVote", "RatingsEntry", "ShoppingCart",
+		"ShoppingCategory", "ShoppingCoupon", "ShoppingItem", "ShoppingOrder",
+		"User_", "UserIdMapper", "WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

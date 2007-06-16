@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -59,14 +57,14 @@ public class UpgradeShopping extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// ShoppingCoupon
 
@@ -168,14 +166,9 @@ public class UpgradeShopping extends UpgradeProcess {
 			categoryIdMapper, ShoppingCategory.class.getName());
 		ResourceUtil.upgradePrimKey(itemIdMapper, ShoppingItem.class.getName());
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(ShoppingCategory.class.getName());
-		CounterLocalServiceUtil.reset(ShoppingItem.class.getName());
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

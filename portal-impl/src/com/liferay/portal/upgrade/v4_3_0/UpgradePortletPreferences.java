@@ -23,7 +23,6 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -58,20 +57,18 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// PortletPreferences
 
-		DBUtil dbUtil = DBUtil.getInstance();
-
-		dbUtil.executeSQL(
+		runSQL(
 			"delete from PortletPreferences where ownerId = '0' and " +
 				"ownerType = " + PortletKeys.PREFS_OWNER_TYPE_COMPANY);
 
@@ -84,7 +81,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 			Long companyIdObj = (Long)companyIdMapper.getNewValue(webId);
 
-			dbUtil.executeSQL(
+			runSQL(
 				"delete from PortletPreferences where ownerId = '" +
 					companyIdObj.longValue() + "' and ownerType = " +
 						PortletKeys.PREFS_OWNER_TYPE_COMPANY);
@@ -123,7 +120,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 		// Schema
 
-		dbUtil.executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

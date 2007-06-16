@@ -22,10 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.impl.SubscriptionImpl;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -36,11 +33,11 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,14 +55,14 @@ public class UpgradeSubscription extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// Subscription
 
@@ -76,11 +73,11 @@ public class UpgradeSubscription extends UpgradeProcess {
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
-		List classPKContainers = new ArrayList();
+		Map classPKContainers = CollectionFactory.getHashMap();
 
-		/*classPKContainers.add(
+		/*classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(MBCategory.class.getName())),
 			new ClassPKContainer(
-				MBCategory.class.getName(),
 				AvailableMappersUtil.getMBCategoryIdMapper(), true));*/
 
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
@@ -93,13 +90,9 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(Subscription.class.getName());
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {

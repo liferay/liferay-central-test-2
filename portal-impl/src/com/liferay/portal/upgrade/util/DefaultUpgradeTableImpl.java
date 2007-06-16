@@ -84,6 +84,84 @@ public class DefaultUpgradeTableImpl
 								   UpgradeColumn upgradeColumn4,
 								   UpgradeColumn upgradeColumn5) {
 
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			upgradeColumn4, upgradeColumn5, null);
+	}
+
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4,
+								   UpgradeColumn upgradeColumn5,
+								   UpgradeColumn upgradeColumn6) {
+
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			upgradeColumn4, upgradeColumn5, upgradeColumn6, null);
+	}
+
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4,
+								   UpgradeColumn upgradeColumn5,
+								   UpgradeColumn upgradeColumn6,
+								   UpgradeColumn upgradeColumn7) {
+
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			upgradeColumn4, upgradeColumn5, upgradeColumn6, upgradeColumn7,
+			null);
+	}
+
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4,
+								   UpgradeColumn upgradeColumn5,
+								   UpgradeColumn upgradeColumn6,
+								   UpgradeColumn upgradeColumn7,
+								   UpgradeColumn upgradeColumn8) {
+
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			upgradeColumn4, upgradeColumn5, upgradeColumn6, upgradeColumn7,
+			upgradeColumn8, null);
+	}
+
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4,
+								   UpgradeColumn upgradeColumn5,
+								   UpgradeColumn upgradeColumn6,
+								   UpgradeColumn upgradeColumn7,
+								   UpgradeColumn upgradeColumn8,
+								   UpgradeColumn upgradeColumn9) {
+
+		this(
+			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
+			upgradeColumn4, upgradeColumn5, upgradeColumn6, upgradeColumn7,
+			upgradeColumn8, upgradeColumn9, null);
+	}
+
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
+								   UpgradeColumn upgradeColumn1,
+								   UpgradeColumn upgradeColumn2,
+								   UpgradeColumn upgradeColumn3,
+								   UpgradeColumn upgradeColumn4,
+								   UpgradeColumn upgradeColumn5,
+								   UpgradeColumn upgradeColumn6,
+								   UpgradeColumn upgradeColumn7,
+								   UpgradeColumn upgradeColumn8,
+								   UpgradeColumn upgradeColumn9,
+								   UpgradeColumn upgradeColumn10) {
+
 		super(tableName);
 
 		// Sort the column names to ensure they're sorted based on the
@@ -100,6 +178,11 @@ public class DefaultUpgradeTableImpl
 		getSortedColumnName(sortedColumnNames, upgradeColumn3);
 		getSortedColumnName(sortedColumnNames, upgradeColumn4);
 		getSortedColumnName(sortedColumnNames, upgradeColumn5);
+		getSortedColumnName(sortedColumnNames, upgradeColumn6);
+		getSortedColumnName(sortedColumnNames, upgradeColumn7);
+		getSortedColumnName(sortedColumnNames, upgradeColumn8);
+		getSortedColumnName(sortedColumnNames, upgradeColumn9);
+		getSortedColumnName(sortedColumnNames, upgradeColumn10);
 
 		if (sortedColumnNames.size() > 0) {
 			Arrays.sort(columns, new ColumnsComparator(sortedColumnNames));
@@ -114,6 +197,11 @@ public class DefaultUpgradeTableImpl
 		prepareUpgradeColumns(upgradeColumn3);
 		prepareUpgradeColumns(upgradeColumn4);
 		prepareUpgradeColumns(upgradeColumn5);
+		prepareUpgradeColumns(upgradeColumn6);
+		prepareUpgradeColumns(upgradeColumn7);
+		prepareUpgradeColumns(upgradeColumn8);
+		prepareUpgradeColumns(upgradeColumn9);
+		prepareUpgradeColumns(upgradeColumn10);
 	}
 
 	public String getExportedData(ResultSet rs) throws Exception {

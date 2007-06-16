@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -44,7 +43,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class UpgradeBookmarks extends UpgradeProcess {
@@ -53,14 +53,14 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// BookmarksFolder
 
@@ -106,11 +106,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			folderIdMapper, BookmarksFolder.class.getName());
 		ResourceUtil.upgradePrimKey(
 			entryIdMapper, BookmarksEntry.class.getName());
-
-		// Counter
-
-		CounterLocalServiceUtil.reset(BookmarksFolder.class.getName());
-		CounterLocalServiceUtil.reset(BookmarksEntry.class.getName());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeBookmarks.class);

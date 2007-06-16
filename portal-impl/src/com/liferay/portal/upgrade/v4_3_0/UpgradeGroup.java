@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -32,7 +30,6 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
-import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -51,7 +48,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
-import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
@@ -68,11 +65,11 @@ import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.util.ArrayUtil;
+import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -90,14 +87,14 @@ public class UpgradeGroup extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgrade();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 
 		// Group_
 
@@ -107,21 +104,21 @@ public class UpgradeGroup extends UpgradeProcess {
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
-		List classPKContainers = new ArrayList();
+		Map classPKContainers = CollectionFactory.getHashMap();
 
-		classPKContainers.add(
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Organization.class.getName())),
 			new ClassPKContainer(
-				Organization.class.getName(),
 				AvailableMappersUtil.getOrganizationIdMapper(), true));
 
-		classPKContainers.add(
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(User.class.getName())),
 			new ClassPKContainer(
-				User.class.getName(),
 				AvailableMappersUtil.getUserIdMapper(), false));
 
-		classPKContainers.add(
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(UserGroup.class.getName())),
 			new ClassPKContainer(
-				UserGroup.class.getName(),
 				AvailableMappersUtil.getUserGroupIdMapper(), true));
 
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
@@ -140,14 +137,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", groupIdMapper);
-
-		// BlogsEntry
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
 
 		// BookmarksFolder
 
@@ -351,30 +340,10 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Counter
-
-		CounterLocalServiceUtil.reset(Group.class.getName());
-
 		// Schema
 
-		DBUtil.getInstance().executeSQL(_UPGRADE_SCHEMA);
+		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	/*
-	private void _upgradeResources() throws Exception {
-		TempUpgradeColumnImpl codeIdColumn =
-			new TempUpgradeColumnImpl("codeId");
-
-		UpgradeColumn upgradePrimKeyColumn =
-			new PrimKeyUpgradeColumnImpl(
-				codeIdColumn, _groupIdMapper, _ownerIdMapper);
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS, codeIdColumn,
-			upgradePrimKeyColumn);
-
-		upgradeTable.updateTable();
-	}*/
 
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter_column_type Group_ classNameId LONG",

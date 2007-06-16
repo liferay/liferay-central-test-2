@@ -23,8 +23,10 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeCompany;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeContact;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeCounter;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeLucene;
@@ -63,7 +65,6 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 		upgrade(new UpgradeLucene());
 		upgrade(new UpgradeCompany());
-		upgrade(new UpgradeResource());
 		upgrade(new UpgradeUser());
 		upgrade(new UpgradeContact());
 		upgrade(new UpgradeUserGroup());
@@ -71,9 +72,8 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeGroup());
 		upgrade(new UpgradeRole());
 		upgrade(new UpgradePortletPreferences());
-		upgrade(new UpgradeMappingTables());
 		upgrade(new UpgradeAddress());
-		//upgrade(new UpgradeBlogs());
+		upgrade(new UpgradeBlogs());
 		//upgrade(new UpgradeBookmarks());
 		//upgrade(new UpgradeCalendar());
 		//upgrade(new UpgradeDocumentLibrary());
@@ -90,6 +90,9 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		//upgrade(new UpgradeUserIdMapper());
 		upgrade(new UpgradeWebsite());
 		//upgrade(new UpgradeWiki());
+		upgrade(new UpgradeCounter());
+		upgrade(new UpgradeResource());
+		upgrade(new UpgradeMappingTables());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 
 import java.sql.Types;
@@ -67,8 +66,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long newValue = new Long(
-			CounterLocalServiceUtil.increment(Counter.class.getName()));
+		Long newValue = new Long(CounterLocalServiceUtil.increment());
 
 		if (_trackValues) {
 			_valueMapper.mapValue(oldValue, newValue);

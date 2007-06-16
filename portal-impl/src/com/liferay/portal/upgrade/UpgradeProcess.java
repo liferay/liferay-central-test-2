@@ -22,6 +22,12 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.tools.util.DBUtil;
+
+import java.io.IOException;
+
+import java.sql.SQLException;
+
 /**
  * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,6 +47,16 @@ public abstract class UpgradeProcess {
 		// process.
 
 		return 0;
+	}
+
+	public void runSQL(String template) throws IOException, SQLException {
+		DBUtil.getInstance().runSQL(template);
+	}
+
+	public void runSQL(String[] templates)
+		throws IOException, SQLException {
+
+		DBUtil.getInstance().runSQL(templates);
 	}
 
 	public abstract void upgrade() throws UpgradeException;

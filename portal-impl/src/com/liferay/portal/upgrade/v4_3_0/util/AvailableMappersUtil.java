@@ -32,6 +32,24 @@ import com.liferay.portal.upgrade.util.ValueMapper;
  */
 public class AvailableMappersUtil {
 
+	public static ValueMapper getBlogsCategoryIdMapper() {
+		return _blogsCategoryIdMapper;
+	}
+
+	public static void setBlogsCategoryIdMapper(
+		ValueMapper blogsCategoryIdMapper) {
+
+		_blogsCategoryIdMapper = blogsCategoryIdMapper;
+	}
+
+	public static ValueMapper getBlogsEntryIdMapper() {
+		return _blogsEntryIdMapper;
+	}
+
+	public static void setBlogsEntryIdMapper(ValueMapper blogsEntryIdMapper) {
+		_blogsEntryIdMapper = blogsEntryIdMapper;
+	}
+
 	public static ValueMapper getCompanyIdMapper() {
 		return _companyIdMapper;
 	}
@@ -98,6 +116,8 @@ public class AvailableMappersUtil {
 		_userIdMapper = userIdMapper;
 	}
 
+	private static ValueMapper _blogsCategoryIdMapper;
+	private static ValueMapper _blogsEntryIdMapper;
 	private static ValueMapper _companyIdMapper;
 	private static ValueMapper _contactIdMapper;
 	private static ValueMapper _groupIdMapper;

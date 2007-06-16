@@ -30,17 +30,18 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 
 /**
- * <a href="ResourceCodeUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * <a href="ResourceCodeIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class ResourceCodeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ResourceCodeUpgradeColumnImpl(TempUpgradeColumnImpl companyIdColumn,
-										 TempUpgradeColumnImpl nameColumn,
-										 TempUpgradeColumnImpl scopeColumn) {
+	public ResourceCodeIdUpgradeColumnImpl(
+		TempUpgradeColumnImpl companyIdColumn, TempUpgradeColumnImpl nameColumn,
+		TempUpgradeColumnImpl scopeColumn) {
 
 		super("codeId");
 
@@ -50,37 +51,42 @@ public class ResourceCodeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
+		_scope = 0;
+
 		Long companyIdObj = (Long)_companyIdColumn.getTemp();
 		String name = (String)_nameColumn.getTemp();
 		String scope = (String)_scopeColumn.getTemp();
 
-		int newScope = 0;
-
-		if (scope.equals("individual")) {
-			newScope = ResourceImpl.SCOPE_INDIVIDUAL;
+		if (scope.equals("company")) {
+			_scope = ResourceImpl.SCOPE_COMPANY;
 		}
 		else if (scope.equals("group")) {
-			newScope = ResourceImpl.SCOPE_GROUP;
+			_scope = ResourceImpl.SCOPE_GROUP;
 		}
 		else if (scope.equals("groupTemplate")) {
-			newScope = ResourceImpl.SCOPE_GROUP_TEMPLATE;
+			_scope = ResourceImpl.SCOPE_GROUP_TEMPLATE;
 		}
-		else if (scope.equals("company")) {
-			newScope = ResourceImpl.SCOPE_COMPANY;
+		else if (scope.equals("individual")) {
+			_scope = ResourceImpl.SCOPE_INDIVIDUAL;
 		}
 		else {
-			throw new UpgradeException("Scope " + scope + " is invalid");
+			throw new UpgradeException("Scope " + _scope + " is invalid");
 		}
 
 		ResourceCode resourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyIdObj.longValue(), name, newScope);
+				companyIdObj.longValue(), name, _scope);
 
 		return new Long(resourceCode.getCodeId());
+	}
+
+	public int getScope() {
+		return _scope;
 	}
 
 	private TempUpgradeColumnImpl _companyIdColumn;
 	private TempUpgradeColumnImpl _nameColumn;
 	private TempUpgradeColumnImpl _scopeColumn;
+	private int _scope;
 
 }

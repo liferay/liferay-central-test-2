@@ -22,23 +22,27 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.counter.model.Counter;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
+
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradePortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeCounter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradePortlet extends UpgradeProcess {
+public class UpgradeCounter extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -53,24 +57,25 @@ public class UpgradePortlet extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 
-		// Portlet
+		// Counter
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PortletImpl.TABLE_NAME, PortletImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("id_", false));
+		List names = CounterLocalServiceUtil.getNames();
 
-		upgradeTable.updateTable();
+		for (int i = 0; i < names.size(); i++) {
+			String name = (String)names.get(i);
 
-		// Schema
+			if (name.startsWith("com.liferay.") &&
+				!name.equals(Counter.class.getName()) &&
+				!name.equals(Permission.class.getName()) &&
+				!name.equals(Resource.class.getName()) &&
+				!name.equals(ResourceCode.class.getName()) &&
+				!name.equals(UserTracker.class.getName())) {
 
-		runSQL(_UPGRADE_SCHEMA);
+				CounterLocalServiceUtil.reset(name);
+			}
+		}
 	}
 
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table Portlet drop primary key",
-		"alter table Portlet add primary key (id_)"
-	};
-
-	private static Log _log = LogFactory.getLog(UpgradePortlet.class);
+	private static Log _log = LogFactory.getLog(UpgradeCounter.class);
 
 }
