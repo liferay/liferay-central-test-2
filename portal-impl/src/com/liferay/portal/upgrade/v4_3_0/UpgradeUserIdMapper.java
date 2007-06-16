@@ -27,7 +27,12 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,9 +60,14 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 
 		// UserIdMapper
 
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			UserIdMapperImpl.TABLE_NAME, UserIdMapperImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("userIdMapperId", false));
+			new PKUpgradeColumnImpl("userIdMapperId", false),
+			upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -68,7 +78,8 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table UserIdMapper drop primary key",
-		"alter table UserIdMapper add primary key (userIdMapperId)"
+		"alter table UserIdMapper add primary key (userIdMapperId)",
+		"alter_column_type UserIdMapper userId LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUserIdMapper.class);

@@ -31,11 +31,11 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,17 +64,26 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		// BookmarksFolder
 
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", AvailableMappersUtil.getGroupIdMapper());
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
 			pkUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setBookmarksFolderIdMapper(folderIdMapper);
 
 		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(
 			"parentFolderId", folderIdMapper);
@@ -94,19 +103,25 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeFolderIdColumn);
+			pkUpgradeColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper entryIdMapper = pkUpgradeColumn.getValueMapper();
 
-		// Resource
+		AvailableMappersUtil.setBookmarksEntryIdMapper(entryIdMapper);
 
-		ResourceUtil.upgradePrimKey(
-			folderIdMapper, BookmarksFolder.class.getName());
-		ResourceUtil.upgradePrimKey(
-			entryIdMapper, BookmarksEntry.class.getName());
+		// Schema
+
+		runSQL(_UPGRADE_SCHEMA);
 	}
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type BookmarksEntry userId LONG",
+
+		"alter_column_type BookmarksFolder groupId LONG",
+		"alter_column_type BookmarksFolder userId LONG"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeBookmarks.class);
 

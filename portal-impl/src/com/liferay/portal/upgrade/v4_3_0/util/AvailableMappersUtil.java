@@ -50,6 +50,34 @@ public class AvailableMappersUtil {
 		_blogsEntryIdMapper = blogsEntryIdMapper;
 	}
 
+	public static ValueMapper getBookmarksEntryIdMapper() {
+		return _bookmarksEntryIdMapper;
+	}
+
+	public static void setBookmarksEntryIdMapper(
+		ValueMapper bookmarksEntryIdMapper) {
+
+		_bookmarksEntryIdMapper = bookmarksEntryIdMapper;
+	}
+
+	public static ValueMapper getBookmarksFolderIdMapper() {
+		return _bookmarksFolderIdMapper;
+	}
+
+	public static void setBookmarksFolderIdMapper(
+		ValueMapper bookmarksFolderIdMapper) {
+
+		_bookmarksFolderIdMapper = bookmarksFolderIdMapper;
+	}
+
+	public static ValueMapper getCalEventIdMapper() {
+		return _calEventIdMapper;
+	}
+
+	public static void setCalEventIdMapper(ValueMapper calEventIdMapper) {
+		_calEventIdMapper = calEventIdMapper;
+	}
+
 	public static ValueMapper getCompanyIdMapper() {
 		return _companyIdMapper;
 	}
@@ -118,6 +146,9 @@ public class AvailableMappersUtil {
 
 	private static ValueMapper _blogsCategoryIdMapper;
 	private static ValueMapper _blogsEntryIdMapper;
+	private static ValueMapper _bookmarksEntryIdMapper;
+	private static ValueMapper _bookmarksFolderIdMapper;
+	private static ValueMapper _calEventIdMapper;
 	private static ValueMapper _companyIdMapper;
 	private static ValueMapper _contactIdMapper;
 	private static ValueMapper _groupIdMapper;

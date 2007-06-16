@@ -39,6 +39,9 @@ import com.liferay.portal.upgrade.v4_3_0.util.ResourcePrimKeyUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -85,6 +88,28 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(BlogsEntry.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getBlogsEntryIdMapper(), true));
+
+		// BookmarksEntry
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(BookmarksEntry.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getBookmarksEntryIdMapper(), true));
+
+		// BookmarksFolder
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(
+				BookmarksFolder.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getBookmarksFolderIdMapper(), true));
+
+		// CalEvent
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(CalEvent.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getCalEventIdMapper(), true));
 
 		// Organization
 

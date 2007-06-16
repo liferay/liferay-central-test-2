@@ -27,7 +27,6 @@ import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.PasswordTrackerImpl;
-import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -40,9 +39,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
@@ -118,30 +114,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			AccountImpl.TABLE_NAME, AccountImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// BookmarksEntry
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// BookmarksFolder
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// CalEvent
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
@@ -390,14 +362,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// UserIdMapper
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			UserIdMapperImpl.TABLE_NAME, UserIdMapperImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
 		// WikiNode
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -431,14 +395,13 @@ public class UpgradeUser extends UpgradeProcess {
 	}
 
 	private static final String[] _TABLES = new String[] {
-		"Account_", "BookmarksEntry", "BookmarksFolder", "CalEvent", "Contact_",
-		"CyrusUser", "CyrusVirtual", "DLFileEntry", "DLFileRank",
-		"DLFileShortcut", "DLFileVersion", "DLFolder", "IGFolder", "IGImage",
-		"JournalArticle", "JournalStructure", "JournalTemplate", "MBCategory",
-		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker",
-		"PollsQuestion", "PollsVote", "RatingsEntry", "ShoppingCart",
-		"ShoppingCategory", "ShoppingCoupon", "ShoppingItem", "ShoppingOrder",
-		"User_", "UserIdMapper", "WikiNode", "WikiPage"
+		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "DLFileEntry",
+		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder", "IGFolder",
+		"IGImage", "JournalArticle", "JournalStructure", "JournalTemplate",
+		"MBCategory", "MBMessage", "MBMessageFlag", "MBStatsUser",
+		"PasswordTracker", "PollsQuestion", "PollsVote", "RatingsEntry",
+		"ShoppingCart", "ShoppingCategory", "ShoppingCoupon", "ShoppingItem",
+		"ShoppingOrder", "User_", "WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

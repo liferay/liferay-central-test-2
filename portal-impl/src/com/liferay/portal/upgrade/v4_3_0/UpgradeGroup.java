@@ -49,8 +49,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -137,22 +135,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", groupIdMapper);
-
-		// BookmarksFolder
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// CalEvent
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
 
 		// DLFolder
 
