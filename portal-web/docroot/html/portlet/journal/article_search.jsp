@@ -111,10 +111,18 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			<c:otherwise>
 
 				<%
-				List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				LinkedHashMap groupParams = new LinkedHashMap();
+	
+				groupParams.put("usersGroups", user.getUserId());
+	
+				List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				%>
 
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.GROUP_ID %>">
+					
+					<c:if test="<%= layout.getGroup().isUser() %>">
+						<option <%= displayTerms.getGroupId() == layout.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(layout.getGroupId()) %>"><liferay-ui:message key="my-community" /></option>
+					</c:if>
 
 					<%
 					for (int i = 0; i < communities.size(); i++) {
