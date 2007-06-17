@@ -195,6 +195,23 @@ public class BaseDeployer {
 		}
 
 		FileUtil.delete(srcFile + "/WEB-INF/lib/util-jsf.jar");
+		
+		// If the app server already has el-api.jar in the classpath, then
+		// it shipped with el-api.jar in its classpath. In order to avoid
+		// classloader conflicts, delete the el-api.jar file from the
+		// exploded war, if present. (LEP-2990)
+		String jarFilePath = srcFile + "/WEB-INF/lib/el-api.jar";
+		try {
+			Class.forName("javax.el.ELContext");
+			if (FileUtil.exists(jarFilePath)) {
+				FileUtil.delete(jarFilePath);
+				if (_log.isInfoEnabled()) {
+					_log.info("Deleted " + jarFilePath + " (LEP-2990)");
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			// ignore
+		}
 	}
 
 	protected void copyTlds(File srcFile) throws Exception {
