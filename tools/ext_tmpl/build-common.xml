@@ -59,6 +59,7 @@
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
 	<propertycopy name="app.server.instance.dir" from="app.server.${app.server.type}.instance.dir" silent="true" />
 	<propertycopy name="app.server.lib.global.dir" from="app.server.${app.server.type}.lib.global.dir" />
+	<propertycopy name="app.server.lib.global.endorsed.dir" from="app.server.${app.server.type}.lib.global.endorsed.dir" />
 	<propertycopy name="app.server.lib.portal.dir" from="app.server.${app.server.type}.lib.portal.dir" />
 	<propertycopy name="app.server.portal.dir" from="app.server.${app.server.type}.portal.dir" />
 	<propertycopy name="app.server.log.dir" from="app.server.${app.server.type}.log.dir" />
