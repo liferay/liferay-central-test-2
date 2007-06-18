@@ -370,7 +370,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	ShoppingItemField[] itemFields = (ShoppingItemField[])ShoppingItemFieldLocalServiceUtil.getItemFields(item.getItemId()).toArray(new ShoppingItemField[0]);
 
 	for (int j = 0; j < count.intValue(); j++) {
-		itemIds.append(item.getItemId());
+		itemIds.append(cartItem.getCartItemId());
 		itemIds.append(",");
 	}
 
