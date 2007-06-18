@@ -2,6 +2,7 @@
 
 #set ( $theme_display = $themeDisplay )
 #set ( $portlet_display = $portletDisplay )
+#set ( $date = $dateUtil)
 
 #set ( $css_class = $theme_display.getColorScheme().getCssClass() )
 
@@ -41,6 +42,8 @@
 #set ( $user_email_address = $user.getEmailAddress() )
 #set ( $language_id = $user.getLanguageId() )
 #set ( $time_zone = $user.getTimeZoneId() )
+#set ( $current_time = $date.getCurrentDate())
+#set ( $the_year = $date.getSimpleDateFormat("yyyy", $locale) )
 #set ( $user_greeting = $user.getGreeting() )
 #set ( $user_comments = $user.getComments() )
 #set ( $user_login_ip = $user.getLoginIP() )
