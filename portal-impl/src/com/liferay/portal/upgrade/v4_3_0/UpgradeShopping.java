@@ -31,9 +31,6 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl;
@@ -162,9 +159,9 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// Resource
 
-		ResourceUtil.upgradePrimKey(
-			categoryIdMapper, ShoppingCategory.class.getName());
-		ResourceUtil.upgradePrimKey(itemIdMapper, ShoppingItem.class.getName());
+		//ResourceUtil.upgradePrimKey(
+		//	categoryIdMapper, ShoppingCategory.class.getName());
+		//ResourceUtil.upgradePrimKey(itemIdMapper, ShoppingItem.class.getName());
 
 		// Schema
 

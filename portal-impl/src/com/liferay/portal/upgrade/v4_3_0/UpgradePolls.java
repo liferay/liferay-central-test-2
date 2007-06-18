@@ -30,11 +30,14 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.PollsChoiceIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.PollsVoteChoiceIdUpgradeColumnImpl;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,46 +65,54 @@ public class UpgradePolls extends UpgradeProcess {
 
 		// PollsQuestion
 
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", AvailableMappersUtil.getGroupIdMapper());
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"questionId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper questionIdMapper = pkUpgradeColumn.getValueMapper();
+
+		AvailableMappersUtil.setPollsQuestionIdMapper(questionIdMapper);
 
 		UpgradeColumn upgradeQuestionIdColumn = new SwapUpgradeColumnImpl(
 			"questionId", questionIdMapper);
 
 		// PollsChoice
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("choiceId", true);
+		PKUpgradeColumnImpl upgradeChoiceId =
+			new PollsChoiceIdUpgradeColumnImpl(upgradeQuestionIdColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeQuestionIdColumn);
-
-		ValueMapper choiceIdMapper = pkUpgradeColumn.getValueMapper();
-
-		UpgradeColumn upgradeChoiceIdColumn = new SwapUpgradeColumnImpl(
-			"choiceId", choiceIdMapper);
-
-		// PollsVote
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("voteId", false), upgradeQuestionIdColumn,
-			upgradeChoiceIdColumn);
+			upgradeQuestionIdColumn, upgradeChoiceId);
 
 		upgradeTable.updateTable();
 
-		// Resource
+		ValueMapper choiceIdMapper = upgradeChoiceId.getValueMapper();
 
-		ResourceUtil.upgradePrimKey(
-			questionIdMapper, PollsQuestion.class.getName());
+		// PollsVote
+
+		UpgradeColumn upgradeVoteChoiceIdColumn =
+			new PollsVoteChoiceIdUpgradeColumnImpl(
+				upgradeQuestionIdColumn, choiceIdMapper);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("voteId", false), upgradeUserIdColumn,
+			upgradeQuestionIdColumn, upgradeVoteChoiceIdColumn);
+
+		upgradeTable.updateTable();
 
 		// Schema
 
@@ -109,11 +120,15 @@ public class UpgradePolls extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table PollsChoice drop primary key",
+		"alter_column_type PollsQuestion groupId LONG",
+		"alter_column_type PollsQuestion userId LONG",
+
+		"alter_column_type PollsChoice choiceId LONG",
 		"alter table PollsChoice add primary key (choiceId)",
 
 		"alter table PollsVote drop primary key",
 		"alter table PollsVote add primary key (voteId)",
+		"alter_column_type PollsVote userId LONG",
 		"alter_column_type PollsVote choiceId LONG"
 	};
 

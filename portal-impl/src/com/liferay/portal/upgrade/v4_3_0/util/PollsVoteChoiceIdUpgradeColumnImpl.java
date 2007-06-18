@@ -20,62 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.ValueMapper;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import java.sql.Types;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsVoteChoiceIdUpgradeColumnImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class PollsVoteChoiceIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public PollsVoteChoiceIdUpgradeColumnImpl(
+		UpgradeColumn questionIdColumn, ValueMapper pollsChoiceIdMapper) {
 
-	static String version = "4.3.0 RC1";
+		super("choiceId", new Integer(Types.VARCHAR));
 
-	static String codeName = "Owen";
-
-	static String build = "4195";
-
-	static String date = "June 17, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_questionIdColumn = questionIdColumn;
+		_pollsChoiceIdMapper = pollsChoiceIdMapper;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		Long oldQuestionIdObj = (Long)_questionIdColumn.getOldValue();
+
+		String oldChoiceIdValue =
+			"{questionId=" + oldQuestionIdObj.longValue() + ", choiceId=" +
+				oldValue + "}";
+
+		return _pollsChoiceIdMapper.getNewValue(oldChoiceIdValue);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private UpgradeColumn _questionIdColumn;
+	private ValueMapper _pollsChoiceIdMapper;
 
 }

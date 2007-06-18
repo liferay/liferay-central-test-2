@@ -53,7 +53,6 @@ import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
-import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
@@ -252,14 +251,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// PollsQuestion
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();

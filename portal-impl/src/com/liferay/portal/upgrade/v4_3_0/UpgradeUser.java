@@ -53,8 +53,6 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
-import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
-import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
@@ -268,25 +266,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// PollsQuestion
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// PollsVote
-
-		UpgradeColumn upgradeChoiceIdColumn = new TempUpgradeColumnImpl(
-			"choiceId", new Integer(Types.VARCHAR));
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeChoiceIdColumn);
-
-		upgradeTable.updateTable();
-
 		// RatingsEntry
 
 		UpgradeColumn skipUpgradeClassNameIdColumn = new TempUpgradeColumnImpl(
@@ -369,9 +348,8 @@ public class UpgradeUser extends UpgradeProcess {
 		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
 		"JournalArticle", "JournalStructure", "JournalTemplate", "MBCategory",
 		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker",
-		"PollsQuestion", "PollsVote", "RatingsEntry", "ShoppingCart",
-		"ShoppingCategory", "ShoppingCoupon", "ShoppingItem", "ShoppingOrder",
-		"User_",
+		"RatingsEntry", "ShoppingCart", "ShoppingCategory", "ShoppingCoupon",
+		"ShoppingItem", "ShoppingOrder", "User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

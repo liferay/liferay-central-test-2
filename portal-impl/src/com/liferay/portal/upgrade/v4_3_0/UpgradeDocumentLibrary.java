@@ -31,9 +31,6 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
@@ -134,10 +131,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// Resource
 
-		ResourceUtil.upgradePrimKey(
-			folderIdMapper, DLFolder.class.getName());
-		ResourceUtil.upgradePrimKey(
-			entryIdMapper, DLFileEntry.class.getName());
+		//ResourceUtil.upgradePrimKey(
+		//	folderIdMapper, DLFolder.class.getName());
+		//ResourceUtil.upgradePrimKey(
+		//	entryIdMapper, DLFileEntry.class.getName());
 
 		// Schema
 

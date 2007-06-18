@@ -144,6 +144,16 @@ public class AvailableMappersUtil {
 		_organizationIdMapper = organizationIdMapper;
 	}
 
+	public static ValueMapper getPollsQuestionIdMapper() {
+		return _pollsQuestionIdMapper;
+	}
+
+	public static void setPollsQuestionIdMapper(
+		ValueMapper pollsQuestionIdMapper) {
+
+		_pollsQuestionIdMapper = pollsQuestionIdMapper;
+	}
+
 	public static ValueMapper getRoleIdMapper() {
 		return _roleIdMapper;
 	}
@@ -197,6 +207,7 @@ public class AvailableMappersUtil {
 	private static ValueMapper _imageIdMapper;
 	private static ValueMapper _layoutPlidMapper;
 	private static ValueMapper _organizationIdMapper;
+	private static ValueMapper _pollsQuestionIdMapper;
 	private static ValueMapper _roleIdMapper;
 	private static ValueMapper _userGroupIdMapper;
 	private static ValueMapper _userIdMapper;

@@ -268,9 +268,10 @@ create table PluginSetting (
 	active_ BOOLEAN
 );
 
-alter_column_name PollsChoice choiceId name VARCHAR(75) null;
-alter table PollsChoice add choiceId LONG;
+alter table PollsChoice drop primary key;
 alter_column_type PollsChoice questionId LONG;
+alter table PollsChoice add name VARCHAR(75) null;
+update PollsChoice set name = choiceId;
 
 alter_column_type PollsQuestion questionId LONG;
 alter_column_type PollsQuestion groupId LONG;
