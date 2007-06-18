@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v4_3_0;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -35,6 +36,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.ImageSizeUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageTextUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageTypeUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageWidthUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 
 import java.sql.Types;
 
@@ -61,6 +63,21 @@ public class UpgradeImage extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+
+		// Company
+
+		String[] webIds = WebIdUtil.getWebIds();
+
+		for (int i = 0; i < webIds.length; i++) {
+			String webId = webIds[i];
+			runSQL("delete from Image where imageId = '" + webId + "'");
+
+			runSQL("delete from Image where imageId = '" + webId + ".wbmp'");
+
+			runSQL(
+				"update Image set imageId = '" + webId + "' where imageId = '" +
+					webId + ".png'");
+		}
 
 		// Image
 
@@ -89,7 +106,8 @@ public class UpgradeImage extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		ValueMapper imageIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper imageIdMapper = new DefaultPKMapper(
+			pkUpgradeColumn.getValueMapper());
 
 		AvailableMappersUtil.setImageIdMapper(imageIdMapper);
 

@@ -39,6 +39,7 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.UserPortraitIdUpgradeColumnImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
@@ -93,8 +94,13 @@ public class UpgradeUser extends UpgradeProcess {
 		PKUpgradeColumnImpl pkUpgradeColumn =
 			new PKUpgradeColumnImpl("userId", new Integer(Types.VARCHAR), true);
 
+		UpgradeColumn upgradeUserPortraitIdColumn =
+			new UserPortraitIdUpgradeColumnImpl(
+				pkUpgradeColumn, AvailableMappersUtil.getImageIdMapper());
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, pkUpgradeColumn);
+			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, pkUpgradeColumn,
+			upgradeUserPortraitIdColumn);
 
 		upgradeTable.updateTable();
 

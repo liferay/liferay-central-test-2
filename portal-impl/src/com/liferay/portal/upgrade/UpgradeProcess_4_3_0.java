@@ -70,6 +70,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(new UpgradeLucene());
+		upgrade(new UpgradeImage());
 		upgrade(new UpgradeCompany());
 		upgrade(new UpgradeUser());
 		upgrade(new UpgradeContact());
@@ -78,7 +79,6 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeGroup());
 		upgrade(new UpgradeRole());
 		upgrade(new UpgradePortletPreferences());
-		upgrade(new UpgradeImage());
 		upgrade(new UpgradeAddress());
 		upgrade(new UpgradeBlogs());
 		upgrade(new UpgradeBookmarks());

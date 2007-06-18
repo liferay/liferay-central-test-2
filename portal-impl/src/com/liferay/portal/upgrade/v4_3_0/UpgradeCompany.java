@@ -24,21 +24,13 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.Account;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.util.dao.DataAccess;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,58 +55,17 @@ public class UpgradeCompany extends UpgradeProcess {
 		}
 	}
 
-	private String _getUpdateSQL(
-		String tableName, long companyId, String webId) {
-
-		String updateSQL =
-			"update " + tableName + " set companyId = '" + companyId +
-				"' where companyId = '" + webId + "'";
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(updateSQL);
-		}
-
-		return updateSQL;
-	}
-
-	private String[] _getWebIds() throws Exception {
-		List webIds = new ArrayList();
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = HibernateUtil.getConnection();
-
-			ps = con.prepareStatement(_GET_WEB_IDS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				String companyId = rs.getString("companyId");
-
-				webIds.add(companyId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return (String[])webIds.toArray(new String[0]);
-	}
-
 	protected void doUpgrade() throws Exception {
 		ValueMapper companyIdMapper = ValueMapperFactory.getValueMapper();
 
 		AvailableMappersUtil.setCompanyIdMapper(companyIdMapper);
 
-		String[] webIds = _getWebIds();
+		String[] webIds = WebIdUtil.getWebIds();
 
 		for (int i = 0; i < webIds.length; i++) {
 			String webId = webIds[i];
 
-			long companyId = _upgradeWebId(webId);
+			long companyId = upgradeWebId(webId);
 
 			companyIdMapper.mapValue(webId, new Long(companyId));
 		}
@@ -137,11 +88,25 @@ public class UpgradeCompany extends UpgradeProcess {
 		runSQL("alter_column_type Account_ accountId LONG");
 	}
 
-	private long _upgradeWebId(String webId) throws Exception {
+	protected String getUpdateSQL(
+		String tableName, long companyId, String webId) {
+
+		String updateSQL =
+			"update " + tableName + " set companyId = '" + companyId +
+				"' where companyId = '" + webId + "'";
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(updateSQL);
+		}
+
+		return updateSQL;
+	}
+
+	protected long upgradeWebId(String webId) throws Exception {
 		long companyId = CounterLocalServiceUtil.increment();
 
 		for (int j = 0; j < _TABLES.length; j++) {
-			runSQL(_getUpdateSQL(_TABLES[j], companyId, webId));
+			runSQL(getUpdateSQL(_TABLES[j], companyId, webId));
 		}
 
 		long accountId = CounterLocalServiceUtil.increment();
@@ -156,9 +121,13 @@ public class UpgradeCompany extends UpgradeProcess {
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
 
+		ValueMapper imageIdMapper = AvailableMappersUtil.getImageIdMapper();
+
+		Long logoId = (Long)imageIdMapper.getNewValue(webId);
+
 		runSQL(
-			"update Company set accountId = " + accountId + " where webId = '" +
-				webId + "'");
+			"update Company set accountId = " + accountId + ", logoId = " +
+				logoId.longValue() + " where webId = '" + webId + "'");
 
 		runSQL("alter_column_type Company companyId LONG");
 
@@ -175,14 +144,6 @@ public class UpgradeCompany extends UpgradeProcess {
 			"update EmailAddress set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
-
-		runSQL("delete from Image where imageId = '" + webId + "'");
-
-		runSQL("delete from Image where imageId = '" + webId + ".wbmp'");
-
-		runSQL(
-			"update Image set imageId = '" + webId + "' where imageId = '" +
-				webId + ".png'");
 
 		runSQL(
 			"update Phone set classPK = '" + accountId +
@@ -209,8 +170,6 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		return companyId;
 	}
-
-	private static final String _GET_WEB_IDS = "select companyId from Company";
 
 	private static final String[] _TABLES = new String[] {
 		"Account_", "Address", "BlogsCategory", "BlogsEntry", "BookmarksEntry",

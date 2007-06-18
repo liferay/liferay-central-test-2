@@ -20,62 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.ValueMapper;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserPortraitIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class UserPortraitIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public UserPortraitIdUpgradeColumnImpl(
+		UpgradeColumn userIdColumn, ValueMapper imageIdMapper) {
 
-	static String version = "4.3.0 RC1";
+		super("portraitId");
 
-	static String codeName = "Owen";
-
-	static String build = "4194";
-
-	static String date = "June 17, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_userIdColumn = userIdColumn;
+		_imageIdMapper = imageIdMapper;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		String userId = (String)_userIdColumn.getOldValue();
+
+		String oldImageId = userId;
+
+		return _imageIdMapper.getNewValue(oldImageId);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private UpgradeColumn _userIdColumn;
+	private ValueMapper _imageIdMapper;
 
 }
