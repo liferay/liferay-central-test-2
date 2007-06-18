@@ -20,62 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGImageIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class IGImageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public IGImageIdUpgradeColumnImpl(UpgradeColumn companyIdColumn) {
+		super("imageId", false);
 
-	static String version = "4.3.0 RC1";
-
-	static String codeName = "Owen";
-
-	static String build = "4193";
-
-	static String date = "June 17, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_companyIdColumn = companyIdColumn;
+		_igImageIdMapper = ValueMapperFactory.getValueMapper();
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		Object newValue = super.getNewValue(oldValue);
+
+		String companyId = (String)_companyIdColumn.getOldValue();
+		Long imageId = (Long)oldValue;
+
+		String oldImageIdValue =
+			"{companyId=" + companyId + ", imageId=" + imageId + "}";
+
+		_igImageIdMapper.mapValue(oldImageIdValue, newValue);
+
+		return newValue;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public ValueMapper getValueMapper() {
+		return _igImageIdMapper;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private UpgradeColumn _companyIdColumn;
+	private ValueMapper _igImageIdMapper;
 
 }

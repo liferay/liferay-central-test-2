@@ -44,6 +44,8 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.ArrayUtil;
@@ -121,6 +123,20 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(Group.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getGroupIdMapper(), true));
+
+		// IGFolder
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(IGFolder.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getIGFolderIdMapper(), true));
+
+		// IGImage
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(IGImage.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getIGImageIdMapper(), false));
 
 		// Layout
 

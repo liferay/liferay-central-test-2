@@ -93,8 +93,12 @@ alter_column_type Groups_Roles roleId LONG;
 alter_column_type Groups_UserGroups groupId LONG;
 alter_column_type Groups_UserGroups userGroupId LONG;
 
+alter_column_type IGFolder folderId LONG;
 alter_column_type IGFolder groupId LONG;
+alter_column_type IGFolder parentFolderId LONG;
 
+alter_column_type IGImage imageId LONG;
+alter_column_type IGImage folderId LONG;
 alter table IGImage add smallImageId LONG;
 alter table IGImage add largeImageId LONG;
 alter table IGImage drop height;

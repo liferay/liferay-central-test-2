@@ -216,7 +216,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		"Account_", "Address", "BlogsCategory", "BlogsEntry", "BookmarksEntry",
 		"BookmarksFolder", "CalEvent", "Company", "Contact_", "DLFileEntry",
 		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
-		"EmailAddress", "Group_", "IGFolder", "IGImage", "JournalArticle",
+		"EmailAddress", "Group_", "IGFolder", "JournalArticle",
 		"JournalContentSearch", "JournalStructure", "JournalTemplate", "Layout",
 		"LayoutSet", "MBCategory", "MBMessage", "Organization_", "Permission_",
 		"Phone", "PollsQuestion", "Portlet", "RatingsEntry", "Resource_",

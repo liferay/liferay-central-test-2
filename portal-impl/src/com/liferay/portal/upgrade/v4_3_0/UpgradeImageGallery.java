@@ -31,11 +31,14 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceUtil;
-import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.IGImageIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.IGLargeImageIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.IGSmallImageIdUpgradeColumnImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,17 +66,26 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		// IGFolder
 
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", AvailableMappersUtil.getGroupIdMapper());
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
 			pkUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setIGFolderIdMapper(folderIdMapper);
 
 		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(
 			"parentFolderId", folderIdMapper);
@@ -89,20 +101,34 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		// IGImage
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("imageId", true);
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
+		PKUpgradeColumnImpl upgradeImageIdColumn =
+			new IGImageIdUpgradeColumnImpl(upgradeCompanyIdColumn);
+
+		UpgradeColumn upgradeSmallImageIdColumn =
+			new IGSmallImageIdUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeImageIdColumn,
+				AvailableMappersUtil.getImageIdMapper());
+
+		UpgradeColumn upgradeLargeImageIdColumn =
+			new IGLargeImageIdUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeImageIdColumn,
+				AvailableMappersUtil.getImageIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			IGImageImpl.TABLE_NAME, IGImageImpl.TABLE_COLUMNS, pkUpgradeColumn,
-			upgradeFolderIdColumn);
+			IGImageImpl.TABLE_NAME, IGImageImpl.TABLE_COLUMNS,
+			upgradeCompanyIdColumn, upgradeImageIdColumn, upgradeUserIdColumn,
+			upgradeFolderIdColumn, upgradeSmallImageIdColumn,
+			upgradeLargeImageIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper imageIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper imageIdMapper = upgradeImageIdColumn.getValueMapper();
 
-		// Resource
-
-		ResourceUtil.upgradePrimKey(folderIdMapper, IGFolder.class.getName());
-		ResourceUtil.upgradePrimKey(imageIdMapper, IGImage.class.getName());
+		AvailableMappersUtil.setIGImageIdMapper(imageIdMapper);
 
 		// Schema
 
@@ -110,8 +136,13 @@ public class UpgradeImageGallery extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
+		"alter_column_type IGFolder groupId LONG",
+		"alter_column_type IGFolder userId LONG",
+
 		"alter table IGImage drop primary key",
-		"alter table IGImage add primary key (imageId)"
+		"alter table IGImage add primary key (imageId)",
+		"alter_column_type IGImage companyId LONG",
+		"alter_column_type IGImage userId LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeImageGallery.class);

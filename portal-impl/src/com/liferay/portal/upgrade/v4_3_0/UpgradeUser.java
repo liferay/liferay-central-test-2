@@ -44,8 +44,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
-import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -181,22 +179,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// IGFolder
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// IGImage
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			IGImageImpl.TABLE_NAME, IGImageImpl.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
@@ -378,12 +360,12 @@ public class UpgradeUser extends UpgradeProcess {
 
 	private static final String[] _TABLES = new String[] {
 		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "DLFileEntry",
-		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder", "IGFolder",
-		"IGImage", "JournalArticle", "JournalStructure", "JournalTemplate",
-		"MBCategory", "MBMessage", "MBMessageFlag", "MBStatsUser",
-		"PasswordTracker", "PollsQuestion", "PollsVote", "RatingsEntry",
-		"ShoppingCart", "ShoppingCategory", "ShoppingCoupon", "ShoppingItem",
-		"ShoppingOrder", "User_",
+		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
+		"JournalArticle", "JournalStructure", "JournalTemplate", "MBCategory",
+		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker",
+		"PollsQuestion", "PollsVote", "RatingsEntry", "ShoppingCart",
+		"ShoppingCategory", "ShoppingCoupon", "ShoppingItem", "ShoppingOrder",
+		"User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

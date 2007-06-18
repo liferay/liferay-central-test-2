@@ -102,6 +102,22 @@ public class AvailableMappersUtil {
 		_groupIdMapper = groupIdMapper;
 	}
 
+	public static ValueMapper getIGFolderIdMapper() {
+		return _igFolderIdMapper;
+	}
+
+	public static void setIGFolderIdMapper(ValueMapper igFolderIdMapper) {
+		_igFolderIdMapper = igFolderIdMapper;
+	}
+
+	public static ValueMapper getIGImageIdMapper() {
+		return _igImageIdMapper;
+	}
+
+	public static void setIGImageIdMapper(ValueMapper igImageIdMapper) {
+		_igImageIdMapper = igImageIdMapper;
+	}
+
 	public static ValueMapper getImageIdMapper() {
 		return _imageIdMapper;
 	}
@@ -176,6 +192,8 @@ public class AvailableMappersUtil {
 	private static ValueMapper _companyIdMapper;
 	private static ValueMapper _contactIdMapper;
 	private static ValueMapper _groupIdMapper;
+	private static ValueMapper _igFolderIdMapper;
+	private static ValueMapper _igImageIdMapper;
 	private static ValueMapper _imageIdMapper;
 	private static ValueMapper _layoutPlidMapper;
 	private static ValueMapper _organizationIdMapper;
