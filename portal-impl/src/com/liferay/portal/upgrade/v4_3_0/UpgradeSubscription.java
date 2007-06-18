@@ -32,7 +32,10 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
@@ -75,10 +78,10 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		Map classPKContainers = CollectionFactory.getHashMap();
 
-		/*classPKContainers.put(
+		classPKContainers.put(
 			new Long(PortalUtil.getClassNameId(MBCategory.class.getName())),
 			new ClassPKContainer(
-				AvailableMappersUtil.getMBCategoryIdMapper(), true));*/
+				AvailableMappersUtil.getMBCategoryIdMapper(), true));
 
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
 			classNameIdColumn, classPKContainers);

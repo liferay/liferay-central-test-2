@@ -44,6 +44,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradePortletPreferences;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeResource;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeRole;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeShopping;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUser;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserIdMapper;
@@ -95,7 +96,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradePolls());
 		upgrade(new UpgradePortlet());
 		upgrade(new UpgradeShopping());
-		//upgrade(new UpgradeSubscription());
+		upgrade(new UpgradeSubscription());
 		upgrade(new UpgradeUserIdMapper());
 		upgrade(new UpgradeWebsite());
 		upgrade(new UpgradeWiki());
