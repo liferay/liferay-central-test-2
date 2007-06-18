@@ -32,6 +32,9 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCartItemIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCartItemIdsUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCouponLimitCategoriesUpgradeColumnImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
@@ -67,7 +70,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 
-		// ShoppingCoupon
+		// ShoppingCategory
 
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
@@ -76,28 +79,10 @@ public class UpgradeShopping extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("couponId", false), upgradeGroupIdColumn,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCart
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("cartId", false), upgradeGroupIdColumn,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCategory
-
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"categoryId", true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
 			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -157,7 +142,8 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingOrder
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("orderId", true);
+		pkUpgradeColumn = new PKUpgradeColumnImpl(
+			"orderId", new Integer(Types.VARCHAR), true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
@@ -168,15 +154,46 @@ public class UpgradeShopping extends UpgradeProcess {
 		ValueMapper orderIdMapper = pkUpgradeColumn.getValueMapper();
 
 		UpgradeColumn upgradeOrderIdColumn = new SwapUpgradeColumnImpl(
-			"orderId", orderIdMapper);
+			"orderId", new Integer(Types.VARCHAR), orderIdMapper);
 
 		// ShoppingOrderItem
+
+		UpgradeColumn upgradeCartItemIdColumn =
+			new ShoppingCartItemIdUpgradeColumnImpl(itemIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderItemImpl.TABLE_NAME,
 			ShoppingOrderItemImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("orderItemId", false), upgradeOrderIdColumn,
-			upgradeItemIdColumn);
+			new PKUpgradeColumnImpl("orderItemId", false),
+			upgradeOrderIdColumn, upgradeCartItemIdColumn);
+
+		upgradeTable.updateTable();
+
+		// ShoppingCart
+
+		UpgradeColumn upgradeItemIdsColumn =
+			new ShoppingCartItemIdsUpgradeColumnImpl(itemIdMapper);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl(
+				"cartId", new Integer(Types.VARCHAR), false),
+			upgradeGroupIdColumn, upgradeUserIdColumn, upgradeItemIdsColumn);
+
+		upgradeTable.updateTable();
+
+		// ShoppingCoupon
+
+		UpgradeColumn upgradeLimitCategoriesColumn =
+			new ShoppingCouponLimitCategoriesUpgradeColumnImpl(
+				categoryIdMapper);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl(
+				"couponId", new Integer(Types.VARCHAR), false),
+			upgradeGroupIdColumn, upgradeUserIdColumn,
+			upgradeLimitCategoriesColumn);
 
 		upgradeTable.updateTable();
 

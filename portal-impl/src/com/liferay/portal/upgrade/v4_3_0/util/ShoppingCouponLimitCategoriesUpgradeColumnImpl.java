@@ -20,62 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.util.StringUtil;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCouponLimitCategoriesUpgradeColumnImpl.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class ShoppingCouponLimitCategoriesUpgradeColumnImpl
+	extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public ShoppingCouponLimitCategoriesUpgradeColumnImpl(
+		ValueMapper shoppingCategoryIdMapper) {
 
-	static String version = "4.3.0 RC2";
+		super("limitCategories");
 
-	static String codeName = "Owen";
-
-	static String build = "4200";
-
-	static String date = "June 18, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_shoppingCategoryIdMapper = shoppingCategoryIdMapper;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		String[] limitCategories = StringUtil.split((String)oldValue);
+
+		for (int i = 0; i < limitCategories.length; i++) {
+			limitCategories[i] = String.valueOf(
+				_shoppingCategoryIdMapper.getNewValue(
+					new Long(GetterUtil.getLong(limitCategories[i]))));
+		}
+
+		return StringUtil.merge(limitCategories);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private ValueMapper _shoppingCategoryIdMapper;
 
 }
