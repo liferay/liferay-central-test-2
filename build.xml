@@ -91,6 +91,54 @@
 					</delete>
 				</then>
 			</elseif>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<then>
+					<!-- Delete web apps that ship with the binary Tomcat download -->
+					<if>
+						<equals arg1="${app.server.version}" arg2="5.5"/>
+						<then>
+							<delete failonerror="false" includeemptydirs="true">
+								<fileset
+									dir="${app.server.deploy.dir}"
+									includes="balancer/**,jsp-examples/**,servlets-examples/**,tomcat-docs/**,webdav/**"
+								/>
+								<fileset
+									dir="${app.server.dir}/conf/Catalina/localhost"
+									includes="host-manager.xml,manager.xml"
+								/>
+								<fileset
+									dir="${app.server.dir}/server/webapps"
+									includes="host-manager/**,manager/**"
+								/>
+							</delete>
+						</then>
+					</if>
+					<if>
+						<equals arg1="${app.server.version}" arg2="6.0"/>
+						<then>
+							<delete failonerror="false" includeemptydirs="true">
+								<fileset
+									dir="${app.server.deploy.dir}"
+									includes="docs/**,examples/**,host-manager/**,manager/**"
+								/>
+							</delete>
+						</then>
+					</if>
+					<delete failonerror="false" includeemptydirs="true">
+						<fileset
+							dir="${app.server.lib.global.endorsed.dir}"
+							includes="${endorsed.libraries.flattened}"
+						/>
+					</delete>
+					<delete failonerror="false">
+						<fileset
+							dir="${app.server.tomcat.support.deploy.dir}"
+							includes="support-tomcat.jar"
+						/>
+					</delete>
+				</then>
+			</elseif>
 			<else>
 				<delete failonerror="false">
 					<fileset
@@ -414,7 +462,7 @@
 				<then>
 					<ant dir="support-tomcat" target="deploy" inheritAll="false" />
 
-					<copy todir="${app.server.dir}/common/endorsed" flatten="true">
+					<copy todir="${app.server.lib.global.endorsed.dir}" flatten="true">
 						<fileset
 							dir="lib"
 							includes="${endorsed.libraries}"
@@ -427,8 +475,21 @@
 							includes="activation.jar,jms.jar,jta.jar,mail.jar"
 						/>
 					</copy>
+					
+					<if>
+						<equals arg1="${app.server.version}" arg2="5.5"/>
+						<then>
+							<!-- LEP-2981 -->
+							<copy todir="${app.server.dir}/common/lib">
+								<fileset
+									dir="lib/development"
+									includes="naming-factory.jar"
+								/>
+							</copy>
+						</then>
+					</if>
 
-					<move todir="${app.server.dir}/common/endorsed">
+					<move todir="${app.server.lib.global.endorsed.dir}">
 						<fileset
 							dir="${app.server.lib.portal.dir}"
 							includes="xercesImpl.jar"
@@ -441,6 +502,20 @@
 							includes="quercus.jar,resin-util.jar,script-10.jar"
 						/>
 					</copy>
+
+					<!-- Recursively copy the template files for the extension environment to their -->
+					<!-- respective locations in the app server deployment -->
+					<copy todir="${app.server.dir}" overwrite="no">
+						<fileset
+							dir="${project.dir}/tools/ext_tmpl/servers/tomcat"
+							excludes="catalina.properties-*"/>
+					</copy>
+					<copy todir="${app.server.dir}/conf" overwrite="yes">
+						<fileset
+							dir="${project.dir}/tools/ext_tmpl/servers/tomcat/conf"
+							includes="catalina.properties-*"/>
+					</copy>
+					
 				</then>
 			</elseif>
 		</if>
