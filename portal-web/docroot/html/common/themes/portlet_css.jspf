@@ -123,15 +123,15 @@ else {
 	if (Validator.isNotNull(borderTopStyleValue)) {
 		finalCSS.add("border-top-style: " + borderTopStyleValue);
 	}
-	
+
 	if (Validator.isNotNull(borderRightStyleValue)) {
 		finalCSS.add("border-right-style: " + borderRightStyleValue);
 	}
-	
+
 	if (Validator.isNotNull(borderBottomStyleValue)) {
 		finalCSS.add("border-bottom-style: " + borderBottomStyleValue);
 	}
-	
+
 	if (Validator.isNotNull(borderLeftStyleValue)) {
 		finalCSS.add("border-left-style: " + borderLeftStyleValue);
 	}

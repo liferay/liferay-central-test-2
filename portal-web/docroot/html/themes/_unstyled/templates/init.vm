@@ -2,7 +2,6 @@
 
 #set ( $theme_display = $themeDisplay )
 #set ( $portlet_display = $portletDisplay )
-#set ( $date = $dateUtil)
 
 #set ( $css_class = $theme_display.getColorScheme().getCssClass() )
 
@@ -42,8 +41,6 @@
 #set ( $user_email_address = $user.getEmailAddress() )
 #set ( $language_id = $user.getLanguageId() )
 #set ( $time_zone = $user.getTimeZoneId() )
-#set ( $current_time = $date.getCurrentDate())
-#set ( $the_year = $date.getSimpleDateFormat("yyyy", $locale) )
 #set ( $user_greeting = $user.getGreeting() )
 #set ( $user_comments = $user.getComments() )
 #set ( $user_login_ip = $user.getLoginIP() )
@@ -168,3 +165,10 @@
 #set ( $sound_alerts_include = "$dir_include/common/themes/sound_alerts.jsp" )
 #set ( $top_head_include = "$dir_include/common/themes/top_head.jsp" )
 #set ( $top_messages_include = "$dir_include/common/themes/top_messages.jsp" )
+
+## ---------- Date ---------- ##
+
+#set ( $date = $dateUtil)
+
+#set ( $current_time = $date.getCurrentDate())
+#set ( $the_year = $date.getSimpleDateFormat("yyyy", $locale) )
