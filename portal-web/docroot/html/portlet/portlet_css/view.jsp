@@ -157,6 +157,7 @@
 					<label for="lfr-font-family"><liferay-ui:message key="font" /></label>
 
 					<select id="lfr-font-family">
+						<option value=""></option>
 						<option value="Arial">Arial</option>
 						<option value="Georgia">Georgia</option>
 						<option value="Times New Roman">Times New Roman</option>
@@ -184,6 +185,7 @@
 					<label for="lfr-font-size"><liferay-ui:message key="size" /></label>
 
 					<select id="lfr-font-size" name="lfr-font-size">
+						<option value=""></option>
 						<option value="0.1em">0.1em</option>
 						<option value="0.2em">0.2em</option>
 						<option value="0.3em">0.3em</option>
@@ -317,6 +319,7 @@
 					<label for="lfr-font-align"><liferay-ui:message key="alignment" /></label>
 
 					<select id="lfr-font-align" name="lfr-font-align">
+						<option value=""></option>
 						<option value="justify">justify</option>
 						<option value="left">left</option>
 						<option value="right">right</option>
@@ -328,6 +331,7 @@
 					<label for="lfr-font-decoration"><liferay-ui:message key="text-decoration" /></label>
 
 					<select id="lfr-font-decoration" name="lfr-font-decoration">
+						<option value=""></option>
 						<option value="none">none</option>
 						<option value="underline">underline</option>
 						<option value="overline">overline</option>
@@ -341,6 +345,7 @@
 					<label for="lfr-font-space"><liferay-ui:message key="word-spacing" /></label>
 
 					<select id="lfr-font-space" name="lfr-font-space">
+						<option value=""></option>
 						<option value="-1em">-1em</option>
 						<option value="-0.95em">-0.95em</option>
 						<option value="-0.9em">-0.9em</option>
@@ -389,6 +394,7 @@
 					<label for="lfr-font-leading"><liferay-ui:message key="line-height" /></label>
 
 					<select id="lfr-font-leading" name="lfr-font-leading">
+						<option value=""></option>
 						<option value="0.1em">0.1em</option>
 						<option value="0.2em">0.2em</option>
 						<option value="0.3em">0.3em</option>
@@ -516,6 +522,7 @@
 					<label for="lfr-font-tracking"><liferay-ui:message key="letter-spacing" /></label>
 
 					<select id="lfr-font-tracking" name="lfr-font-tracking">
+						<option value=""></option>
 						<option value="-10px">-10px</option>
 						<option value="-9px">-9px</option>
 						<option value="-8px">-8px</option>
@@ -723,6 +730,7 @@
 					<label for="lfr-border-style-top"><liferay-ui:message key="top" /></label>
 
 					<select id="lfr-border-style-top">
+						<option value=""></option>
 						<option value="dashed">dashed</option>
 						<option value="double">double</option>
 						<option value="dotted">dotted</option>
@@ -739,6 +747,7 @@
 					<label for="lfr-border-style-right"><liferay-ui:message key="right" /></label>
 
 					<select id="lfr-border-style-right">
+						<option value=""></option>
 						<option value="dashed">dashed</option>
 						<option value="double">double</option>
 						<option value="dotted">dotted</option>
@@ -755,6 +764,7 @@
 					<label for="lfr-border-style-bottom"><liferay-ui:message key="bottom" /></label>
 
 					<select id="lfr-border-style-bottom">
+						<option value=""></option>
 						<option value="dashed">dashed</option>
 						<option value="double">double</option>
 						<option value="dotted">dotted</option>
@@ -771,6 +781,7 @@
 					<label for="lfr-border-style-left"><liferay-ui:message key="left" /></label>
 
 					<select id="lfr-border-style-left">
+						<option value=""></option>
 						<option value="dashed">dashed</option>
 						<option value="double">double</option>
 						<option value="dotted">dotted</option>
