@@ -40,11 +40,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.UserPortraitIdUpgradeColumnImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -134,49 +129,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// DLFileEntry
-
-		UpgradeColumn upgradeVersionUserIdColumn = new SwapUpgradeColumnImpl(
-			"versionUserId", new Integer(Types.VARCHAR), userIdMapper);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeVersionUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// DLFileRank
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// DLFileShortcut
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// DLFileVersion
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// DLFolder
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
 		// JournalArticle
 
 		UpgradeColumn upgradeApprovedByUserIdColumn = new SwapUpgradeColumnImpl(
@@ -244,10 +196,9 @@ public class UpgradeUser extends UpgradeProcess {
 	}
 
 	private static final String[] _TABLES = new String[] {
-		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "DLFileEntry",
-		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
-		"JournalArticle", "JournalStructure", "JournalTemplate",
-		"PasswordTracker", "RatingsEntry", "User_",
+		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "JournalArticle",
+		"JournalStructure", "JournalTemplate", "PasswordTracker",
+		"RatingsEntry", "User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

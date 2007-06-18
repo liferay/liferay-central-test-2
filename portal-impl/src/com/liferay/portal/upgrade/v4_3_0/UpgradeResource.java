@@ -45,6 +45,9 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -122,6 +125,27 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(CalEvent.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getCalEventIdMapper(), true));
+
+		// DLFileEntry
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(DLFileEntry.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getDLFileEntryIdMapper(), true));
+
+		// DLFileShortcut
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(DLFileShortcut.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getDLFileShortcutIdMapper(), true));
+
+		// DLFolder
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(DLFolder.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getDLFolderIdMapper(), true));
 
 		// Group
 

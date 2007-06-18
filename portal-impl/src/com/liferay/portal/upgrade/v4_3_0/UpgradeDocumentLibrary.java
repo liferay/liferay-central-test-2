@@ -31,11 +31,14 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,17 +66,26 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFolder
 
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", AvailableMappersUtil.getGroupIdMapper());
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
 			pkUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setDLFolderIdMapper(folderIdMapper);
 
 		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(
 			"parentFolderId", folderIdMapper);
@@ -94,47 +106,53 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		pkUpgradeColumn = new PKUpgradeColumnImpl("fileEntryId", true);
 
+		UpgradeColumn upgradeVersionUserIdColumn = new SwapUpgradeColumnImpl(
+			"versionUserId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeFolderIdColumn);
+			pkUpgradeColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn,
+			upgradeFolderIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper entryIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper fileEntryIdMapper = pkUpgradeColumn.getValueMapper();
+
+		AvailableMappersUtil.setDLFileEntryIdMapper(fileEntryIdMapper);
 
 		// DLFileRank
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("fileRankId", false),
-			upgradeFolderIdColumn);
+			upgradeUserIdColumn, upgradeFolderIdColumn);
 
 		upgradeTable.updateTable();
 
 		// DLFileShortcut
 
+		pkUpgradeColumn = new PKUpgradeColumnImpl("fileShortcutId", true);
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("fileShortcutId", false),
-			upgradeFolderIdColumn, upgradeToFolderIdColumn);
+			pkUpgradeColumn, upgradeUserIdColumn, upgradeFolderIdColumn,
+			upgradeToFolderIdColumn);
 
 		upgradeTable.updateTable();
+
+		ValueMapper fileShortcutIdMapper = pkUpgradeColumn.getValueMapper();
+
+		AvailableMappersUtil.setDLFileShortcutIdMapper(fileShortcutIdMapper);
 
 		// DLFileVersion
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("fileVersionId", false),
-			upgradeFolderIdColumn);
+			upgradeUserIdColumn, upgradeFolderIdColumn);
 
 		upgradeTable.updateTable();
-
-		// Resource
-
-		//ResourceUtil.upgradePrimKey(
-		//	folderIdMapper, DLFolder.class.getName());
-		//ResourceUtil.upgradePrimKey(
-		//	entryIdMapper, DLFileEntry.class.getName());
 
 		// Schema
 
@@ -144,12 +162,20 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table DLFileEntry drop primary key",
 		"alter table DLFileEntry add primary key (fileEntryId)",
+		"alter_column_type DLFileEntry userId LONG",
+		"alter_column_type DLFileEntry versionUserId LONG",
 
 		"alter table DLFileRank drop primary key",
 		"alter table DLFileRank add primary key (fileRankId)",
+		"alter_column_type DLFileRank userId LONG",
+
+		"alter_column_type DLFileShortcut userId LONG",
 
 		"alter table DLFileVersion drop primary key",
-		"alter table DLFileVersion add primary key (fileVersionId)"
+		"alter table DLFileVersion add primary key (fileVersionId)",
+		"alter_column_type DLFileVersion userId LONG",
+
+		"alter_column_type DLFolder userId LONG"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeDocumentLibrary.class);

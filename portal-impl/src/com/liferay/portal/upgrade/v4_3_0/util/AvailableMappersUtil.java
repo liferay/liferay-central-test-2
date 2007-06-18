@@ -94,6 +94,32 @@ public class AvailableMappersUtil {
 		_contactIdMapper = contactIdMapper;
 	}
 
+	public static ValueMapper getDLFileEntryIdMapper() {
+		return _dlFileEntryIdMapper;
+	}
+
+	public static void setDLFileEntryIdMapper(ValueMapper dlFileEntryIdMapper) {
+		_dlFileEntryIdMapper = dlFileEntryIdMapper;
+	}
+
+	public static ValueMapper getDLFileShortcutIdMapper() {
+		return _dlFileShortcutIdMapper;
+	}
+
+	public static void setDLFileShortcutIdMapper(
+		ValueMapper dlFileShortcutIdMapper) {
+
+		_dlFileShortcutIdMapper = dlFileShortcutIdMapper;
+	}
+
+	public static ValueMapper getDLFolderIdMapper() {
+		return _dlFolderIdMapper;
+	}
+
+	public static void setDLFolderIdMapper(ValueMapper dlFolderIdMapper) {
+		_dlFolderIdMapper = dlFolderIdMapper;
+	}
+
 	public static ValueMapper getGroupIdMapper() {
 		return _groupIdMapper;
 	}
@@ -237,6 +263,9 @@ public class AvailableMappersUtil {
 	private static ValueMapper _calEventIdMapper;
 	private static ValueMapper _companyIdMapper;
 	private static ValueMapper _contactIdMapper;
+	private static ValueMapper _dlFileEntryIdMapper;
+	private static ValueMapper _dlFileShortcutIdMapper;
+	private static ValueMapper _dlFolderIdMapper;
 	private static ValueMapper _groupIdMapper;
 	private static ValueMapper _igFolderIdMapper;
 	private static ValueMapper _igImageIdMapper;
