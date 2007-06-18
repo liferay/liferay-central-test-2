@@ -48,8 +48,11 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 		Boolean attachments = (Boolean)oldValue;
 
 		if (attachments.booleanValue()) {
-			Long messageId = (Long)_messageIdColumn.getOldValue();
-			Long threadId = (Long)_threadIdColumn.getOldValue();
+			Long oldMessageId = (Long)_messageIdColumn.getOldValue();
+			Long oldThreadId = (Long)_threadIdColumn.getOldValue();
+
+			Long newMessageId = (Long)_messageIdColumn.getNewValue();
+			Long newThreadId = (Long)_threadIdColumn.getNewValue();
 
 			// Move files
 

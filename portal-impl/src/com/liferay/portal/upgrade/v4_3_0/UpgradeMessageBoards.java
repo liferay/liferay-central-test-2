@@ -26,9 +26,9 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.LazyPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -114,17 +114,17 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		pkUpgradeColumn = new PKUpgradeColumnImpl("messageId", true);
 
-		UpgradeColumn upgradeThreadIdColumn = new TempUpgradeColumnImpl(
-			"threadId");
+		PKUpgradeColumnImpl upgradeThreadIdPKColumn =
+			new LazyPKUpgradeColumnImpl("threadId");
 
 		UpgradeColumn upgradeAttachmentsColumn =
 			new MBMessageAttachmentsUpgradeColumnImpl(
-				pkUpgradeColumn, upgradeThreadIdColumn);
+				pkUpgradeColumn, upgradeThreadIdPKColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
 			pkUpgradeColumn, upgradeUserIdColumn, upgradeCategoryIdColumn,
-			upgradeThreadIdColumn, upgradeAttachmentsColumn);
+			upgradeThreadIdPKColumn, upgradeAttachmentsColumn);
 
 		upgradeTable.updateTable();
 
@@ -133,12 +133,17 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		AvailableMappersUtil.setMBMessageIdMapper(messageIdMapper);
 
+		ValueMapper threadIdMapper = upgradeThreadIdPKColumn.getValueMapper();
+
+		UpgradeColumn upgradeThreadIdColumn = new SwapUpgradeColumnImpl(
+			"threadId", threadIdMapper);
+
 		UpgradeColumn upgradeParentMessageIdColumn = new SwapUpgradeColumnImpl(
 			"parentMessageId", messageIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
-			upgradeParentMessageIdColumn);
+			upgradeThreadIdColumn, upgradeParentMessageIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -169,29 +174,14 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBThread
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("threadId", true);
-
 		UpgradeColumn upgradeLastPostByUserIdColumn = new SwapUpgradeColumnImpl(
 			"lastPostByUserId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBThreadImpl.TABLE_NAME, MBThreadImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeCategoryIdColumn,
+			upgradeThreadIdColumn, upgradeCategoryIdColumn,
 			upgradeRootMessageIdColumn, upgradeLastPostByUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		ValueMapper threadIdMapper = pkUpgradeColumn.getValueMapper();
-
-		upgradeThreadIdColumn = new SwapUpgradeColumnImpl(
-			"threadId", threadIdMapper);
-
-		// MBMessage
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
-			upgradeThreadIdColumn);
 
 		upgradeTable.updateTable();
 

@@ -20,62 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.upgrade.StagnantRowException;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="LazyPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class LazyPKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
-
-	static String version = "4.3.0 RC2";
-
-	static String codeName = "Owen";
-
-	static String build = "4203";
-
-	static String date = "June 18, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public LazyPKUpgradeColumnImpl(String name) {
+		super(name, true);
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public LazyPKUpgradeColumnImpl(String name, Integer oldColumnType) {
+		super(name, oldColumnType, true);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
+	public Object getNewValue(Object oldValue) throws Exception {
+		ValueMapper valueMapper = getValueMapper();
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+		Long newValue = null;
 
-		return GetterUtil.getDate(date, df);
-	}
+		try {
+			newValue = (Long)valueMapper.getNewValue(oldValue);
+		}
+		catch (StagnantRowException sre) {
+			newValue = new Long(CounterLocalServiceUtil.increment());
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
+			valueMapper.mapValue(oldValue, newValue);
+		}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+		return newValue;
 	}
 
 }

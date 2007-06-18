@@ -65,6 +65,10 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return newValue;
 	}
 
+	public boolean isTrackValues() {
+		return _trackValues;
+	}
+
 	public ValueMapper getValueMapper() {
 		return _valueMapper;
 	}
