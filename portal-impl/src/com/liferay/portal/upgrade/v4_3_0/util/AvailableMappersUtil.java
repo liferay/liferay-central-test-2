@@ -134,6 +134,22 @@ public class AvailableMappersUtil {
 		_layoutPlidMapper = layoutPlidMapper;
 	}
 
+	public static ValueMapper getMBCategoryIdMapper() {
+		return _mbCategoryIdMapper;
+	}
+
+	public static void setMBCategoryIdMapper(ValueMapper mbCategoryIdMapper) {
+		_mbCategoryIdMapper = mbCategoryIdMapper;
+	}
+
+	public static ValueMapper getMBMessageIdMapper() {
+		return _mbMessageIdMapper;
+	}
+
+	public static void setMBMessageIdMapper(ValueMapper mbMessageIdMapper) {
+		_mbMessageIdMapper = mbMessageIdMapper;
+	}
+
 	public static ValueMapper getOrganizationIdMapper() {
 		return _organizationIdMapper;
 	}
@@ -226,6 +242,8 @@ public class AvailableMappersUtil {
 	private static ValueMapper _igImageIdMapper;
 	private static ValueMapper _imageIdMapper;
 	private static ValueMapper _layoutPlidMapper;
+	private static ValueMapper _mbCategoryIdMapper;
+	private static ValueMapper _mbMessageIdMapper;
 	private static ValueMapper _organizationIdMapper;
 	private static ValueMapper _pollsQuestionIdMapper;
 	private static ValueMapper _roleIdMapper;

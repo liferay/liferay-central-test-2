@@ -22,40 +22,44 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
-import com.liferay.util.GetterUtil;
+import java.util.Iterator;
 
 /**
- * <a href="DefaultPKMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ValueMapperWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DefaultPKMapper extends ValueMapperWrapper {
+public class ValueMapperWrapper implements ValueMapper {
 
-	public DefaultPKMapper(ValueMapper valueMapper) {
-		super(valueMapper);
+	public ValueMapperWrapper(ValueMapper valueMapper) {
+		_valueMapper = valueMapper;
+	}
+
+	public ValueMapper getValueMapper() {
+		return _valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String oldValueString = GetterUtil.getString(
-			String.valueOf(oldValue));
-
-		if (oldValueString.equals("-1") || oldValueString.equals("0") ||
-			oldValueString.equals("")) {
-
-			return new Long(0);
-		}
-		else {
-			try {
-				ValueMapper valueMapper = getValueMapper();
-
-				return valueMapper.getNewValue(oldValue);
-			}
-			catch (StagnantRowException sre) {
-				return new Long(0);
-			}
-		}
+		return _valueMapper.getNewValue(oldValue);
 	}
+
+	public void mapValue(Object oldValue, Object newValue) throws Exception {
+		_valueMapper.mapValue(oldValue, newValue);
+	}
+
+	public void appendException(Object exception) {
+		_valueMapper.appendException(exception);
+	}
+
+	public Iterator iterator() throws Exception {
+		return _valueMapper.iterator();
+	}
+
+	public int size() throws Exception {
+		return _valueMapper.size();
+	}
+
+	private ValueMapper _valueMapper;
 
 }

@@ -51,8 +51,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
-import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -215,22 +213,6 @@ public class UpgradeGroup extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			LayoutSetImpl.TABLE_NAME, layoutSetColumns,
 			new PKUpgradeColumnImpl("layoutSetId", false),
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// MBCategory
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// MBStatsUser
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBStatsUserImpl.TABLE_NAME, MBStatsUserImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();

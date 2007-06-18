@@ -36,6 +36,7 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
+import com.liferay.portal.upgrade.v4_3_0.util.MBMessageIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceCodeIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourcePrimKeyUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -46,6 +47,8 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -147,6 +150,22 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(Layout.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getLayoutPlidMapper(), false));
+
+		// MBCategory
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(MBCategory.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getMBCategoryIdMapper(), true));
+
+		// MBMessage
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(MBMessage.class.getName())),
+			new ClassPKContainer(
+				new MBMessageIdMapper(
+					AvailableMappersUtil.getMBMessageIdMapper()),
+				false));
 
 		// Organization
 

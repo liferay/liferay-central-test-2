@@ -20,42 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapperWrapper;
+import com.liferay.util.PKParser;
 
 /**
- * <a href="DefaultPKMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageIdMapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DefaultPKMapper extends ValueMapperWrapper {
+public class MBMessageIdMapper extends ValueMapperWrapper {
 
-	public DefaultPKMapper(ValueMapper valueMapper) {
+	public MBMessageIdMapper(ValueMapper valueMapper) {
 		super(valueMapper);
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String oldValueString = GetterUtil.getString(
-			String.valueOf(oldValue));
+		PKParser pkParser = new PKParser((String)oldValue);
 
-		if (oldValueString.equals("-1") || oldValueString.equals("0") ||
-			oldValueString.equals("")) {
+		ValueMapper valueMapper = getValueMapper();
 
-			return new Long(0);
-		}
-		else {
-			try {
-				ValueMapper valueMapper = getValueMapper();
-
-				return valueMapper.getNewValue(oldValue);
-			}
-			catch (StagnantRowException sre) {
-				return new Long(0);
-			}
-		}
+		return valueMapper.getNewValue(new Long(pkParser.getLong("messageId")));
 	}
 
 }

@@ -48,11 +48,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
-import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 
 import java.sql.Types;
@@ -209,49 +204,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// MBCategory
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// MBMessage
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// MBMessageFlag
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBMessageFlagImpl.TABLE_NAME, MBMessageFlagImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// MBStatsUser
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBStatsUserImpl.TABLE_NAME, MBStatsUserImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// MBThread
-
-		UpgradeColumn upgradeLastPostByUserIdColumn = new SwapUpgradeColumnImpl(
-			"lastPostByUserId", new Integer(Types.VARCHAR), userIdMapper);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			MBThreadImpl.TABLE_NAME, MBThreadImpl.TABLE_COLUMNS,
-			upgradeLastPostByUserIdColumn);
-
-		upgradeTable.updateTable();
-
 		// PasswordTracker
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -289,15 +241,13 @@ public class UpgradeUser extends UpgradeProcess {
 		}
 
 		runSQL("alter_column_type JournalArticle approvedByUserId LONG");
-		runSQL("alter_column_type MBThread lastPostByUserId LONG");
 	}
 
 	private static final String[] _TABLES = new String[] {
 		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "DLFileEntry",
 		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
-		"JournalArticle", "JournalStructure", "JournalTemplate", "MBCategory",
-		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker",
-		"RatingsEntry", "User_",
+		"JournalArticle", "JournalStructure", "JournalTemplate",
+		"PasswordTracker", "RatingsEntry", "User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

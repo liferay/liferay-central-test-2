@@ -20,42 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
- * <a href="DefaultPKMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DefaultPKMapper extends ValueMapperWrapper {
+public class MBMessageAttachmentsUpgradeColumnImpl
+	extends BaseUpgradeColumnImpl {
 
-	public DefaultPKMapper(ValueMapper valueMapper) {
-		super(valueMapper);
+	public MBMessageAttachmentsUpgradeColumnImpl(
+		UpgradeColumn messageIdColumn, UpgradeColumn threadIdColumn) {
+
+		super("attachments");
+
+		_messageIdColumn = messageIdColumn;
+		_threadIdColumn = threadIdColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String oldValueString = GetterUtil.getString(
-			String.valueOf(oldValue));
+		Boolean attachments = (Boolean)oldValue;
 
-		if (oldValueString.equals("-1") || oldValueString.equals("0") ||
-			oldValueString.equals("")) {
+		if (attachments.booleanValue()) {
+			Long messageId = (Long)_messageIdColumn.getOldValue();
+			Long threadId = (Long)_threadIdColumn.getOldValue();
 
-			return new Long(0);
+			// Move files
+
 		}
-		else {
-			try {
-				ValueMapper valueMapper = getValueMapper();
 
-				return valueMapper.getNewValue(oldValue);
-			}
-			catch (StagnantRowException sre) {
-				return new Long(0);
-			}
-		}
+		return attachments;
 	}
+
+	private UpgradeColumn _messageIdColumn;
+	private UpgradeColumn _threadIdColumn;
 
 }
