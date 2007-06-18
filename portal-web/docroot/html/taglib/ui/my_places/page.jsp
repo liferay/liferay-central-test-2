@@ -124,7 +124,7 @@
 					%>
 
 					<li class="public <%= selectedPlace ? "current" : "" %>">
-						<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> (<%= publicLayoutsPageCount %>)</a>
+						<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
 
 						<c:if test="<%= publicAddPageHREF != null %>">
 							<a class="add-page" href="<%= publicAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
@@ -139,7 +139,7 @@
 					%>
 
 					<li class="private <%= selectedPlace ? "current" : "" %>">
-						<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> (<%= privateLayoutsPageCount %>)</a>
+						<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
 
 						<c:if test="<%= privateAddPageHREF != null %>">
 							<a class="add-page" href="<%= privateAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
