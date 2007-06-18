@@ -102,6 +102,14 @@ public class AvailableMappersUtil {
 		_groupIdMapper = groupIdMapper;
 	}
 
+	public static ValueMapper getImageIdMapper() {
+		return _imageIdMapper;
+	}
+
+	public static void setImageIdMapper(ValueMapper imageIdMapper) {
+		_imageIdMapper = imageIdMapper;
+	}
+
 	public static ValueMapper getLayoutPlidMapper() {
 		return _layoutPlidMapper;
 	}
@@ -168,6 +176,7 @@ public class AvailableMappersUtil {
 	private static ValueMapper _companyIdMapper;
 	private static ValueMapper _contactIdMapper;
 	private static ValueMapper _groupIdMapper;
+	private static ValueMapper _imageIdMapper;
 	private static ValueMapper _layoutPlidMapper;
 	private static ValueMapper _organizationIdMapper;
 	private static ValueMapper _roleIdMapper;

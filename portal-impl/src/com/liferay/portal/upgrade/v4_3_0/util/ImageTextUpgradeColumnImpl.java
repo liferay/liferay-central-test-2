@@ -20,62 +20,64 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.model.Image;
+import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageTextUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
-
-	static String version = "4.3.0 RC1";
-
-	static String codeName = "Owen";
-
-	static String build = "4192";
-
-	static String date = "June 17, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public ImageTextUpgradeColumnImpl() {
+		super("text_");
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		_type = null;
+		_height = null;
+		_width = null;
+		_size = null;
+
+		String text = (String)oldValue;
+
+		byte[] bytes = (byte[])Base64.stringToObject(text);
+
+		Image image = ImageLocalUtil.getImage(bytes);
+
+		_type = image.getType();
+		_height = new Integer(image.getHeight());
+		_width = new Integer(image.getWidth());
+		_size = new Integer(image.getSize());
+
+		return oldValue;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public String getType() {
+		return _type;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public Integer getHeight() {
+		return _height;
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public Integer getWidth() {
+		return _width;
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+	public Integer getSize() {
+		return _size;
 	}
+
+	private String _type;
+	private Integer _height;
+	private Integer _width;
+	private Integer _size;
 
 }

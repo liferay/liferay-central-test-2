@@ -20,62 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.upgrade.StagnantRowException;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageTypeUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class ImageTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public ImageTypeUpgradeColumnImpl(ImageTextUpgradeColumnImpl textColumn) {
+		super("type");
 
-	static String version = "4.3.0 RC1";
-
-	static String codeName = "Owen";
-
-	static String build = "4192";
-
-	static String date = "June 17, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_textColumn = textColumn;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		String type = _textColumn.getType();
+
+		if (type == null) {
+			throw new StagnantRowException("Type is null");
+		}
+
+		return type;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private ImageTextUpgradeColumnImpl _textColumn;
 
 }

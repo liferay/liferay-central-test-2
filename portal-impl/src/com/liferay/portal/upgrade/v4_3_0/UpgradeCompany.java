@@ -176,6 +176,14 @@ public class UpgradeCompany extends UpgradeProcess {
 				"' where classNameId = '" + Account.class.getName() +
 					"' and classPK = '" + webId + "'");
 
+		runSQL("delete from Image where imageId = '" + webId + "'");
+
+		runSQL("delete from Image where imageId = '" + webId + ".wbmp'");
+
+		runSQL(
+			"update Image set imageId = '" + webId + "' where imageId = '" +
+				webId + ".png'");
+
 		runSQL(
 			"update Phone set classPK = '" + accountId +
 				"' where classNameId = '" + Account.class.getName() +
