@@ -53,10 +53,6 @@ import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -251,44 +247,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCart
-
-		UpgradeColumn upgradeCartIdColumn = new TempUpgradeColumnImpl(
-			"cartId", new Integer(Types.VARCHAR));
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
-			upgradeCartIdColumn, upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCategory
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCoupon
-
-		UpgradeColumn upgradeCouponIdColumn = new TempUpgradeColumnImpl(
-			"couponId", new Integer(Types.VARCHAR));
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
-			upgradeCouponIdColumn, upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingOrder
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
 		upgradeTable.updateTable();

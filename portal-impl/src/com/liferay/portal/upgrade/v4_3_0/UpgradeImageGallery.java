@@ -136,7 +136,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type IGFolder groupId LONG",
 		"alter_column_type IGFolder userId LONG",
 
 		"alter table IGImage drop primary key",

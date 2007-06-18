@@ -120,7 +120,6 @@ public class UpgradeBlogs extends UpgradeProcess {
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter_column_type BlogsCategory userId LONG",
 
-		"alter_column_type BlogsEntry groupId LONG",
 		"alter_column_type BlogsEntry userId LONG"
 	};
 

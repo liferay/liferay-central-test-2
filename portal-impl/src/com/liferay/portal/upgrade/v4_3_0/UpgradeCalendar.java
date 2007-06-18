@@ -88,7 +88,6 @@ public class UpgradeCalendar extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type CalEvent groupId LONG",
 		"alter_column_type CalEvent userId LONG"
 	};
 

@@ -119,7 +119,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter_column_type BookmarksEntry userId LONG",
 
-		"alter_column_type BookmarksFolder groupId LONG",
 		"alter_column_type BookmarksFolder userId LONG"
 	};
 

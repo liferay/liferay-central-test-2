@@ -54,11 +54,6 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 
 import java.sql.Types;
 
@@ -281,52 +276,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// ShoppingCart
-
-		UpgradeColumn upgradeCartIdColumn = new TempUpgradeColumnImpl(
-			"cartId", new Integer(Types.VARCHAR));
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
-			upgradeCartIdColumn, upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCategory
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingCoupon
-
-		UpgradeColumn upgradeCouponIdColumn = new TempUpgradeColumnImpl(
-			"couponId", new Integer(Types.VARCHAR));
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
-			upgradeCouponIdColumn, upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingItem
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingItemImpl.TABLE_NAME, ShoppingItemImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// ShoppingOrder
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
 		// Schema
 
 		for (int i = 0; i < _TABLES.length; i++) {
@@ -348,8 +297,7 @@ public class UpgradeUser extends UpgradeProcess {
 		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
 		"JournalArticle", "JournalStructure", "JournalTemplate", "MBCategory",
 		"MBMessage", "MBMessageFlag", "MBStatsUser", "PasswordTracker",
-		"RatingsEntry", "ShoppingCart", "ShoppingCategory", "ShoppingCoupon",
-		"ShoppingItem", "ShoppingOrder", "User_",
+		"RatingsEntry", "User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

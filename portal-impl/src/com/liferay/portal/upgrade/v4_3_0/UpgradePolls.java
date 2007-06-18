@@ -120,7 +120,6 @@ public class UpgradePolls extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type PollsQuestion groupId LONG",
 		"alter_column_type PollsQuestion userId LONG",
 
 		"alter_column_type PollsChoice choiceId LONG",

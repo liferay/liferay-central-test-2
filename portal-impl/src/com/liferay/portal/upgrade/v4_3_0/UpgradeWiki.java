@@ -118,7 +118,6 @@ public class UpgradeWiki extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type WikiNode groupId LONG",
 		"alter_column_type WikiNode userId LONG",
 
 		"alter table WikiPage drop primary key",

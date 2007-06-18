@@ -47,6 +47,8 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.ArrayUtil;
@@ -165,6 +167,21 @@ public class UpgradeResource extends UpgradeProcess {
 		classPKContainers.put(
 			new Long(PortalUtil.getClassNameId(Role.class.getName())),
 			new ClassPKContainer(AvailableMappersUtil.getRoleIdMapper(), true));
+
+		// ShoppingCategory
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(
+				ShoppingCategory.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getShoppingCategoryIdMapper(), true));
+
+		// ShoppingItem
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(ShoppingItem.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getShoppingItemIdMapper(), true));
 
 		// UserGroup
 

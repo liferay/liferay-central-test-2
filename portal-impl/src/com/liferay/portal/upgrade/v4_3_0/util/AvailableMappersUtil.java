@@ -162,6 +162,26 @@ public class AvailableMappersUtil {
 		_roleIdMapper = roleIdMapper;
 	}
 
+	public static ValueMapper getShoppingCategoryIdMapper() {
+		return _shoppingCategoryIdMapper;
+	}
+
+	public static void setShoppingCategoryIdMapper(
+		ValueMapper shoppingCategoryIdMapper) {
+
+		_shoppingCategoryIdMapper = shoppingCategoryIdMapper;
+	}
+
+	public static ValueMapper getShoppingItemIdMapper() {
+		return _shoppingItemIdMapper;
+	}
+
+	public static void setShoppingItemIdMapper(
+		ValueMapper shoppingItemIdMapper) {
+
+		_shoppingItemIdMapper = shoppingItemIdMapper;
+	}
+
 	public static ValueMapper getUserGroupIdMapper() {
 		return _userGroupIdMapper;
 	}
@@ -209,6 +229,8 @@ public class AvailableMappersUtil {
 	private static ValueMapper _organizationIdMapper;
 	private static ValueMapper _pollsQuestionIdMapper;
 	private static ValueMapper _roleIdMapper;
+	private static ValueMapper _shoppingCategoryIdMapper;
+	private static ValueMapper _shoppingItemIdMapper;
 	private static ValueMapper _userGroupIdMapper;
 	private static ValueMapper _userIdMapper;
 	private static ValueMapper _wikiNodeIdMapper;
