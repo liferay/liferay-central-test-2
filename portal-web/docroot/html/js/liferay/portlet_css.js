@@ -146,7 +146,7 @@ Liferay.PortletCSS = {
 					backgroundColor: '',
 					backgroundImage: '',
 					useBgImage: false,
-					backgroundRepeat: 'repeat',
+					backgroundRepeat: '',
 					backgroundPosition: {
 						left: {
 							value: '',
@@ -181,10 +181,10 @@ Liferay.PortletCSS = {
 					},
 
 					borderStyle: {
-						bottom: 'solid',
-						left: 'solid',
-						right: 'solid',
-						top: 'solid',
+						bottom: '',
+						left: '',
+						right: '',
+						top: '',
 						sameForAll: true
 					},
 
@@ -249,16 +249,16 @@ Liferay.PortletCSS = {
 				},
 
 				textData: {
-					textAlign: 'left',
+					textAlign: '',
 					color: '',
-					fontFamily: 'Arial',
-					fontSize: '1em',
-					fontStyle: 'normal',
-					fontWeight: 'normal',
-					letterSpacing: '0',
-					lineHeight: '1.2em',
-					textDecoration: 'none',
-					wordSpacing: 'normal'
+					fontFamily: '',
+					fontSize: '',
+					fontStyle: '',
+					fontWeight: '',
+					letterSpacing: '',
+					lineHeight: '',
+					textDecoration: '',
+					wordSpacing: ''
 				}
 			};
 
