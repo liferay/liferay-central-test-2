@@ -12,6 +12,10 @@ Liferay.Dock = {
 
 		if (dockList.length > 0){
 			var myPlaces = jQuery('.my-places', dock);
+			
+			instance._dock = dock;
+			instance._dockList = dockList;
+			instance._myPlaces = myPlaces;
 
 			instance._hideCommunities(myPlaces);
 
@@ -92,6 +96,23 @@ Liferay.Dock = {
 					zIndex: ZINDEX.DOCK_PARENT
 				}
 			);
+			
+			instance._handleDebug();
+		}
+	},
+	
+	_handleDebug: function() {
+		var instance = this;
+		
+		var dock = instance._dock;
+		var dockList = instance._dockList;
+		var myPlacesList = instance._myPlaces.find('> ul');
+		
+		if (dock.is('.debug')) {
+			dock.show();
+			dockList.show();
+			dockList.addClass('expanded');
+			myPlacesList.addClass('show-my-places');
 		}
 	},
 
