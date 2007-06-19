@@ -539,14 +539,14 @@ ul.gamma .tree-item-hover {
 	vertical-align: middle;
 }
 
-/* ---------- Taglib discussion thread ---------- */
+/* ---------- Taglib search iterator ---------- */
 
-.taglib-search-paging {
+.taglib-search-iterator {
 	border-collapse: collapse;
 	width: 100%;
 }
 
-.taglib-seach-paging td {
+.taglib-search-iterator td {
 	padding: 4px;
 }
 
