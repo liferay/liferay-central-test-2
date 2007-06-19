@@ -723,7 +723,6 @@
 		<field name="approvedByUserId" type="long" />
 		<field name="approvedByUserName" type="String" />
 		<field name="approvedDate" type="Date" />
-		<field name="expired" type="boolean" />
 		<field name="expirationDate" type="Date" />
 		<field name="reviewDate" type="Date" />
 	</model>

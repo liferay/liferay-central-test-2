@@ -40,7 +40,6 @@
 		<column name="approvedByUserId" type="long" />
 		<column name="approvedByUserName" type="String" />
 		<column name="approvedDate" type="Date" />
-		<column name="expired" type="boolean" />
 		<column name="expirationDate" type="Date" />
 		<column name="reviewDate" type="Date" />
 

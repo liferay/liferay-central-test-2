@@ -76,7 +76,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			{ "approvedByUserId", new Integer(Types.BIGINT) },
 			{ "approvedByUserName", new Integer(Types.VARCHAR) },
 			{ "approvedDate", new Integer(Types.TIMESTAMP) },
-			{ "expired", new Integer(Types.BOOLEAN) },
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
 			{ "reviewDate", new Integer(Types.TIMESTAMP) }
 		};
@@ -411,20 +410,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public boolean getExpired() {
-		return _expired;
-	}
-
-	public boolean isExpired() {
-		return _expired;
-	}
-
-	public void setExpired(boolean expired) {
-		if (expired != _expired) {
-			_expired = expired;
-		}
-	}
-
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -474,7 +459,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		clone.setApprovedByUserId(getApprovedByUserId());
 		clone.setApprovedByUserName(getApprovedByUserName());
 		clone.setApprovedDate(getApprovedDate());
-		clone.setExpired(getExpired());
 		clone.setExpirationDate(getExpirationDate());
 		clone.setReviewDate(getReviewDate());
 
@@ -562,7 +546,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	private long _approvedByUserId;
 	private String _approvedByUserName;
 	private Date _approvedDate;
-	private boolean _expired;
 	private Date _expirationDate;
 	private Date _reviewDate;
 }

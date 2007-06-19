@@ -69,7 +69,6 @@ public class JournalArticleSoap implements Serializable {
 		soapModel.setApprovedByUserId(model.getApprovedByUserId());
 		soapModel.setApprovedByUserName(model.getApprovedByUserName());
 		soapModel.setApprovedDate(model.getApprovedDate());
-		soapModel.setExpired(model.getExpired());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setReviewDate(model.getReviewDate());
 
@@ -270,18 +269,6 @@ public class JournalArticleSoap implements Serializable {
 		_approvedDate = approvedDate;
 	}
 
-	public boolean getExpired() {
-		return _expired;
-	}
-
-	public boolean isExpired() {
-		return _expired;
-	}
-
-	public void setExpired(boolean expired) {
-		_expired = expired;
-	}
-
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -319,7 +306,6 @@ public class JournalArticleSoap implements Serializable {
 	private long _approvedByUserId;
 	private String _approvedByUserName;
 	private Date _approvedDate;
-	private boolean _expired;
 	private Date _expirationDate;
 	private Date _reviewDate;
 }

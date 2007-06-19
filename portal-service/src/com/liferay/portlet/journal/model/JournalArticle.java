@@ -53,4 +53,10 @@ public interface JournalArticle extends JournalArticleModel {
 	public java.lang.String getDefaultLocale();
 
 	public boolean isTemplateDriven();
+
+	public boolean getExpired();
+
+	public boolean isExpired();
+
+	public void setExpired(boolean expired);
 }
