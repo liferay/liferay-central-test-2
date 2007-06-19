@@ -71,7 +71,7 @@ if (rowChecker != null) {
 		}
 	%>
 
-		<th style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;"
+		<th
 
 			<%--
 
