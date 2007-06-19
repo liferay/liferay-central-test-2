@@ -52,6 +52,7 @@
 		<ant dir="tunnel-web" target="clean" inheritAll="false" />
 
 		<ant dir="portlets" target="clean" inheritAll="false" />
+		<ant dir="support-tomcat" target="clean" inheritAll="false" />
 
 		<delete>
 			<fileset dir="." includes="*.ear,*.jar,*.war,*.zip" />
