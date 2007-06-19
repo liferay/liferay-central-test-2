@@ -171,4 +171,4 @@
 #set ( $date = $dateUtil)
 
 #set ( $current_time = $date.getCurrentDate())
-#set ( $the_year = $date.getSimpleDateFormat("yyyy", $locale) )
+#set ( $the_year = $date.getCurrentDate("yyyy", $locale) )
