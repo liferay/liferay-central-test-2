@@ -26,10 +26,12 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.Time;
 import com.liferay.util.Validator;
 
 import java.io.StringReader;
 
+import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.logging.Log;
@@ -94,6 +96,33 @@ public class JournalArticleImpl
 		}
 
 		return defaultLanguageId;
+	}
+
+	public boolean getExpired() {
+		if (getExpirationDate() != null &&
+				getExpirationDate().before(new Date())) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	public boolean isExpired() {
+		if (getExpirationDate() != null &&
+				getExpirationDate().before(new Date())) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	public void setExpired(boolean expired) {
+		if (expired) {
+			setExpirationDate(new Date());
+		}
+		else {
+			setExpirationDate(null);
+		}
 	}
 
 	public boolean isTemplateDriven() {

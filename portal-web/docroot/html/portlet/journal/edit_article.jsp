@@ -543,11 +543,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="<%= article.isApproved() %>">
-						<liferay-ui:message key="approved" />
-					</c:when>
 					<c:when test="<%= article.isExpired() %>">
 						<liferay-ui:message key="expired" />
+					</c:when>
+					<c:when test="<%= article.isApproved() %>">
+						<liferay-ui:message key="approved" />
 					</c:when>
 					<c:otherwise>
 						<liferay-ui:message key="not-approved" />
