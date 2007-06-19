@@ -20,62 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleResourcePrimKeyUpgradeColumnImpl.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class JournalArticleResourcePrimKeyUpgradeColumnImpl
+	extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public JournalArticleResourcePrimKeyUpgradeColumnImpl(
+		JournalArticlePKUpgradeColumnImpl articlePKColumn) {
 
-	static String version = "4.3.0 RC2";
+		super("resourcePrimKey");
 
-	static String codeName = "Owen";
-
-	static String build = "4212";
-
-	static String date = "June 19, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_articlePKColumn = articlePKColumn;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		return _articlePKColumn.getResourcePrimKey();
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private JournalArticlePKUpgradeColumnImpl _articlePKColumn;
 
 }

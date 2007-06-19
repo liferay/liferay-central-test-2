@@ -96,10 +96,9 @@ public class UpgradeWiki extends UpgradeProcess {
 			new WikiPageIdUpgradeColumnImpl(
 				upgradeNodeIdColumn, upgradeTitleColumn);
 
-		WikiPageResourcePrimKeyUpgradeColumnImpl
-			pageResourcePrimKeyUpgradeColumn =
-				new WikiPageResourcePrimKeyUpgradeColumnImpl(
-					pageIdUpgradeColumn);
+		UpgradeColumn pageResourcePrimKeyUpgradeColumn =
+			new WikiPageResourcePrimKeyUpgradeColumnImpl(
+				pageIdUpgradeColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,

@@ -40,9 +40,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.UserPortraitIdUpgradeColumnImpl;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 
 import java.sql.Types;
@@ -129,33 +126,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// JournalArticle
-
-		UpgradeColumn upgradeApprovedByUserIdColumn = new SwapUpgradeColumnImpl(
-			"approvedByUserId", new Integer(Types.VARCHAR), userIdMapper);
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, upgradeApprovedByUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// JournalStructure
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
-		// JournalTemplate
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn);
-
-		upgradeTable.updateTable();
-
 		// PasswordTracker
 
 		upgradeTable = new DefaultUpgradeTableImpl(
@@ -191,13 +161,10 @@ public class UpgradeUser extends UpgradeProcess {
 
 			runSQL(sql);
 		}
-
-		runSQL("alter_column_type JournalArticle approvedByUserId LONG");
 	}
 
 	private static final String[] _TABLES = new String[] {
-		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "JournalArticle",
-		"JournalStructure", "JournalTemplate", "PasswordTracker",
+		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "PasswordTracker",
 		"RatingsEntry", "User_",
 	};
 

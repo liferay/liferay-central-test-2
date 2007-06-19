@@ -109,9 +109,11 @@ alter table Image add height INTEGER;
 alter table Image add width INTEGER;
 alter table Image add size_ INTEGER;
 
-alter table JournalArticle add id_ LONG;
+alter table JournalArticle add id_ VARCHAR(75) null;
 alter table JournalArticle add resourcePrimKey LONG;
 alter_column_type JournalArticle groupId LONG;
+update JournalArticle set id_ = articleId;
+alter table JournalArticle drop expired;
 
 create table JournalArticleImage (
 	articleImageId LONG not null primary key,
@@ -121,6 +123,12 @@ create table JournalArticleImage (
 	elName VARCHAR(75) null,
 	languageId VARCHAR(75) null,
 	tempImage BOOLEAN
+);
+
+create table JournalArticleResource (
+	resourcePrimKey LONG not null primary key,
+	groupId LONG,
+	articleId VARCHAR(75) null
 );
 
 drop table JournalContentSearch;
@@ -134,12 +142,14 @@ create table JournalContentSearch (
 	articleId VARCHAR(75) null
 );
 
-alter table JournalStructure add id_ LONG;
+alter table JournalStructure add id_ VARCHAR(75) null;
 alter_column_type JournalStructure groupId LONG;
+update JournalStructure set id_ = structureId;
 
-alter table JournalTemplate add id_ LONG;
+alter table JournalTemplate add id_ VARCHAR(75) null;
 alter_column_type JournalTemplate groupId LONG;
 alter table JournalTemplate add smallImageId LONG;
+update JournalTemplate set id_ = templateId;
 
 alter table Layout add plid LONG;
 alter table Layout add groupId LONG;

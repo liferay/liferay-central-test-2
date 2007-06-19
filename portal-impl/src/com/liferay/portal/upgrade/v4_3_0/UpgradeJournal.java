@@ -22,9 +22,27 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultPKMapper;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalArticlePKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleResourcePrimKeyUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalStructurePKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplatePKUpgradeColumnImpl;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,8 +67,112 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		PropsUtil.set(PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
+
+		// JournalArticle
+
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
+		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
+			"groupId", AvailableMappersUtil.getGroupIdMapper());
+
+		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
+			"userId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
+		UpgradeColumn upgradeApprovedByUserIdColumn = new SwapUpgradeColumnImpl(
+			"approvedByUserId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getUserIdMapper());
+
+		JournalArticlePKUpgradeColumnImpl articlePKUpgradeColumn =
+			new JournalArticlePKUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeGroupIdColumn);
+
+		UpgradeColumn articleResourcePrimKeyUpgradeColumn =
+			new JournalArticleResourcePrimKeyUpgradeColumnImpl(
+				articlePKUpgradeColumn);
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
+			upgradeCompanyIdColumn, upgradeGroupIdColumn,
+			articlePKUpgradeColumn, articleResourcePrimKeyUpgradeColumn,
+			upgradeUserIdColumn, upgradeApprovedByUserIdColumn);
+
+		upgradeTable.updateTable();
+
+		ValueMapper articleIdMapper = new DefaultPKMapper(
+			articlePKUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setJournalArticleIdMapper(articleIdMapper);
+
+		// JournalStructure
+
+		PKUpgradeColumnImpl structurePKUpgradeColumn =
+			new JournalStructurePKUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeGroupIdColumn);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
+			upgradeCompanyIdColumn, upgradeGroupIdColumn,
+			structurePKUpgradeColumn, upgradeUserIdColumn);
+
+		upgradeTable.updateTable();
+
+		ValueMapper structureIdMapper = new DefaultPKMapper(
+			structurePKUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setJournalStructureIdMapper(structureIdMapper);
+
+		// JournalTemplate
+
+		PKUpgradeColumnImpl templatePKUpgradeColumn =
+			new JournalTemplatePKUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeGroupIdColumn);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
+			upgradeCompanyIdColumn, upgradeGroupIdColumn,
+			templatePKUpgradeColumn, upgradeUserIdColumn);
+
+		upgradeTable.updateTable();
+
+		ValueMapper templateIdMapper = new DefaultPKMapper(
+			templatePKUpgradeColumn.getValueMapper());
+
+		AvailableMappersUtil.setJournalTemplateIdMapper(templateIdMapper);
+
+		// JournalContentSearch
+
+		PropsUtil.set(
+			CompanyImpl.SYSTEM,
+			PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
+
+		// Schema
+
+		runSQL(_UPGRADE_SCHEMA);
 	}
+
+	private static final String[] _UPGRADE_SCHEMA = {
+		"alter table JournalArticle drop primary key",
+		"alter_column_type JournalArticle id_ LONG",
+		"alter table JournalArticle add primary key (id_)",
+		"alter_column_type JournalArticle companyId LONG",
+		"alter_column_type JournalArticle userId LONG",
+		"alter_column_type JournalArticle approvedByUserId LONG",
+
+		"alter table JournalStructure drop primary key",
+		"alter_column_type JournalStructure id_ LONG",
+		"alter table JournalStructure add primary key (id_)",
+		"alter_column_type JournalStructure companyId LONG",
+		"alter_column_type JournalStructure userId LONG",
+
+		"alter table JournalTemplate drop primary key",
+		"alter_column_type JournalTemplate id_ LONG",
+		"alter table JournalTemplate add primary key (id_)",
+		"alter_column_type JournalTemplate companyId LONG",
+		"alter_column_type JournalTemplate userId LONG"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
 

@@ -141,15 +141,12 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		ValueMapper threadIdMapper = upgradeThreadIdPKColumn.getValueMapper();
 
-		UpgradeColumn upgradeThreadIdColumn = new SwapUpgradeColumnImpl(
-			"threadId", threadIdMapper);
-
 		UpgradeColumn upgradeParentMessageIdColumn = new SwapUpgradeColumnImpl(
 			"parentMessageId", messageIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
-			upgradeThreadIdColumn, upgradeParentMessageIdColumn);
+			upgradeParentMessageIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -179,6 +176,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		upgradeTable.updateTable();
 
 		// MBThread
+
+		UpgradeColumn upgradeThreadIdColumn = new SwapUpgradeColumnImpl(
+			"threadId", threadIdMapper);
 
 		UpgradeColumn upgradeLastPostByUserIdColumn = new SwapUpgradeColumnImpl(
 			"lastPostByUserId", new Integer(Types.VARCHAR),

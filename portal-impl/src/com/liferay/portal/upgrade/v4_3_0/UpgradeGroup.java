@@ -47,9 +47,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -123,30 +120,6 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", groupIdMapper);
-
-		// JournalArticle
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// JournalStructure
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
-
-		// JournalTemplate
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
-			upgradeGroupIdColumn);
-
-		upgradeTable.updateTable();
 
 		// Layout
 

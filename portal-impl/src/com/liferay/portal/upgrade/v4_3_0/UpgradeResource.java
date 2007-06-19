@@ -50,6 +50,9 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -167,6 +170,29 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(IGImage.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getIGImageIdMapper(), false));
+
+		// JournalArticle
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(JournalArticle.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getJournalArticleIdMapper(), false));
+
+		// JournalStructure
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(
+				JournalStructure.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getJournalStructureIdMapper(), false));
+
+		// JournalTemplate
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(
+				JournalTemplate.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getJournalTemplateIdMapper(), false));
 
 		// Layout
 

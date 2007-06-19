@@ -152,6 +152,36 @@ public class AvailableMappersUtil {
 		_imageIdMapper = imageIdMapper;
 	}
 
+	public static ValueMapper getJournalArticleIdMapper() {
+		return _journalArticleIdMapper;
+	}
+
+	public static void setJournalArticleIdMapper(
+		ValueMapper journalArticleIdMapper) {
+
+		_journalArticleIdMapper = journalArticleIdMapper;
+	}
+
+	public static ValueMapper getJournalStructureIdMapper() {
+		return _journalStructureIdMapper;
+	}
+
+	public static void setJournalStructureIdMapper(
+		ValueMapper journalStructureIdMapper) {
+
+		_journalStructureIdMapper = journalStructureIdMapper;
+	}
+
+	public static ValueMapper getJournalTemplateIdMapper() {
+		return _journalTemplateIdMapper;
+	}
+
+	public static void setJournalTemplateIdMapper(
+		ValueMapper journalTemplateIdMapper) {
+
+		_journalTemplateIdMapper = journalTemplateIdMapper;
+	}
+
 	public static ValueMapper getLayoutPlidMapper() {
 		return _layoutPlidMapper;
 	}
@@ -270,6 +300,9 @@ public class AvailableMappersUtil {
 	private static ValueMapper _igFolderIdMapper;
 	private static ValueMapper _igImageIdMapper;
 	private static ValueMapper _imageIdMapper;
+	private static ValueMapper _journalArticleIdMapper;
+	private static ValueMapper _journalStructureIdMapper;
+	private static ValueMapper _journalTemplateIdMapper;
 	private static ValueMapper _layoutPlidMapper;
 	private static ValueMapper _mbCategoryIdMapper;
 	private static ValueMapper _mbMessageIdMapper;
