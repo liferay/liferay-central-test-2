@@ -96,6 +96,9 @@ public class UpgradeJournal extends UpgradeProcess {
 			new JournalArticleResourcePrimKeyUpgradeColumnImpl(
 				upgradeArticlePKColumn);
 
+		UpgradeColumn upgradeArticleIdColumn =
+			new TempUpgradeColumnImpl("articleId");
+
 		UpgradeColumn upgradeVersionColumn =
 			new TempUpgradeColumnImpl("version", new Integer(Types.DOUBLE));
 
@@ -105,7 +108,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		UpgradeColumn upgradeContentColumn =
 			new JournalArticleContentUpgradeColumnImpl(
 				upgradeCompanyIdColumn, upgradeGroupIdColumn,
-				upgradeArticlePKColumn, upgradeVersionColumn,
+				upgradeArticleIdColumn, upgradeVersionColumn,
 				upgradeStructureIdColumn,
 				AvailableMappersUtil.getImageIdMapper());
 
@@ -113,8 +116,9 @@ public class UpgradeJournal extends UpgradeProcess {
 			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
 			upgradeApprovedByUserIdColumn, upgradeArticlePKColumn,
-			upgradeArticleResourcePrimKeyColumn, upgradeVersionColumn,
-			upgradeStructureIdColumn, upgradeContentColumn);
+			upgradeArticleResourcePrimKeyColumn, upgradeArticleIdColumn,
+			upgradeVersionColumn, upgradeStructureIdColumn,
+			upgradeContentColumn);
 
 		upgradeTable.updateTable();
 

@@ -66,6 +66,16 @@ public class JournalArticleImageLocalServiceUtil {
 			begin, end);
 	}
 
+	public static void addArticleImageId(long articleImageId, long groupId,
+		java.lang.String articleId, double version, java.lang.String elName,
+		java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.addArticleImageId(articleImageId,
+			groupId, articleId, version, elName, languageId);
+	}
+
 	public static void deleteArticleImage(long articleImageId)
 		throws com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();

@@ -20,62 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.journal;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="DuplicateArticleImageIdException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class DuplicateArticleImageIdException extends PortalException {
 
-	static String name = "Liferay Enterprise Portal";
-
-	static String version = "4.3.0 RC2";
-
-	static String codeName = "Owen";
-
-	static String build = "4215";
-
-	static String date = "June 19, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public DuplicateArticleImageIdException() {
+		super();
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public DuplicateArticleImageIdException(String msg) {
+		super(msg);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public DuplicateArticleImageIdException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
+	public DuplicateArticleImageIdException(Throwable cause) {
+		super(cause);
 	}
 
 }

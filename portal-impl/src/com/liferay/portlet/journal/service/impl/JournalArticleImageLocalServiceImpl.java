@@ -23,8 +23,10 @@
 package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portlet.journal.DuplicateArticleImageIdException;
 import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.service.base.JournalArticleImageLocalServiceBaseImpl;
@@ -41,6 +43,32 @@ import java.util.Iterator;
  */
 public class JournalArticleImageLocalServiceImpl
 	extends JournalArticleImageLocalServiceBaseImpl {
+
+	public void addArticleImageId(
+			long articleImageId, long groupId, String articleId, double version,
+			String elName, String languageId)
+		throws PortalException, SystemException {
+
+		JournalArticleImage articleImage =
+			JournalArticleImageUtil.fetchByG_A_V_E_L(
+				groupId, articleId, version, elName, languageId);
+
+		if (articleImage == null) {
+			articleImage = JournalArticleImageUtil.create(articleImageId);
+
+			articleImage.setGroupId(groupId);
+			articleImage.setArticleId(articleId);
+			articleImage.setVersion(version);
+			articleImage.setElName(elName);
+			articleImage.setLanguageId(languageId);
+			articleImage.setTempImage(false);
+
+			JournalArticleImageUtil.update(articleImage);
+		}
+		else {
+			throw new DuplicateArticleImageIdException();
+		}
+	}
 
 	public void deleteArticleImage(long articleImageId) throws SystemException {
 		try {

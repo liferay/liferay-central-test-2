@@ -57,6 +57,12 @@ public interface JournalArticleImageLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public void addArticleImageId(long articleImageId, long groupId,
+		java.lang.String articleId, double version, java.lang.String elName,
+		java.lang.String languageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteArticleImage(long articleImageId)
 		throws com.liferay.portal.SystemException;
 
