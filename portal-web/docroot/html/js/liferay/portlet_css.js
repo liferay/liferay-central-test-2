@@ -120,7 +120,7 @@ Liferay.PortletCSS = {
 				});
 
 				instance._currentPopup = Liferay.Popup({
-					width: 700,
+					width: 800,
 					message: newPanel[0],
 					modal: false,
 					noCenter: true,
