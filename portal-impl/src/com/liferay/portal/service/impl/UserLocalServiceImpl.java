@@ -328,15 +328,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Organization and location
 
-		UserUtil.clearOrganizations(userId);
-
-		if (organizationId > 0) {
-			UserUtil.addOrganization(userId, organizationId);
-		}
-
-		if (locationId  > 0) {
-			UserUtil.addOrganization(userId, locationId);
-		}
+		updateOrganizations(userId, organizationId, locationId);
 
 		// Group
 
@@ -1172,6 +1164,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return updateLockout(user, lockout);
 	}
 
+	public void updateOrganizations(
+			long userId, long organizationId, long locationId)
+		throws PortalException, SystemException {
+
+		UserUtil.clearOrganizations(userId);
+
+		if (organizationId  > 0) {
+			UserUtil.addOrganization(userId, organizationId);
+		}
+
+		if (locationId  > 0) {
+			UserUtil.addOrganization(userId, locationId);
+		}
+	}
+
 	public User updatePassword(
 			long userId, String password1, String password2,
 				boolean passwordReset)
@@ -1356,15 +1363,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Organization and location
 
-		UserUtil.clearOrganizations(userId);
-
-		if (organizationId  > 0) {
-			UserUtil.addOrganization(userId, organizationId);
-		}
-
-		if (locationId  > 0) {
-			UserUtil.addOrganization(userId, locationId);
-		}
+		updateOrganizations(userId, organizationId, locationId);
 
 		return user;
 	}

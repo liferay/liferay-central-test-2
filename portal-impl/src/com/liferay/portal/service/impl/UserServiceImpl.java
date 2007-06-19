@@ -311,6 +311,16 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.updateLockoutById(userId, lockout);
 	}
 
+	public void updateOrganizations(
+			long userId, long organizationId, long locationId)
+		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.UPDATE);
+
+		UserLocalServiceUtil.updateOrganizations(
+			userId, organizationId, locationId);
+	}
+
 	public User updatePassword(
 			long userId, String password1, String password2,
 			boolean passwordReset)

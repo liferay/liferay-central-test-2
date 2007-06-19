@@ -960,6 +960,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateOrganizations: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateOrganizations";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updatePassword: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updatePassword";

@@ -317,6 +317,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void updateOrganizations(long userId, long organizationId,
+		long locationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)

@@ -380,6 +380,18 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void updateOrganizations(long userId, long organizationId,
+		long locationId) throws RemoteException {
+		try {
+			UserServiceUtil.updateOrganizations(userId, organizationId,
+				locationId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap updatePassword(
 		long userId, java.lang.String password1, java.lang.String password2,
 		boolean passwordReset) throws RemoteException {

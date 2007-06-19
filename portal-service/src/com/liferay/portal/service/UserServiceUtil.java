@@ -249,6 +249,14 @@ public class UserServiceUtil {
 		return userService.updateLockout(userId, lockout);
 	}
 
+	public static void updateOrganizations(long userId, long organizationId,
+		long locationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+		userService.updateOrganizations(userId, organizationId, locationId);
+	}
+
 	public static com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)

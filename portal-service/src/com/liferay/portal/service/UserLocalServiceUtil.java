@@ -546,6 +546,14 @@ public class UserLocalServiceUtil {
 			screenName, lockout);
 	}
 
+	public static void updateOrganizations(long userId, long organizationId,
+		long locationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.updateOrganizations(userId, organizationId, locationId);
+	}
+
 	public static com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)

@@ -260,6 +260,13 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void updateOrganizations(long userId, long organizationId,
+		long locationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		UserServiceUtil.updateOrganizations(userId, organizationId, locationId);
+	}
+
 	public static JSONObject updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
