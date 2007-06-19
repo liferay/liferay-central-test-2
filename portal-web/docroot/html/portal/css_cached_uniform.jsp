@@ -43,16 +43,6 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 }
 
 /* Some generals */
-.uni-form fieldset {
-	border: none;
-	margin: 0;
-	padding: 0;
-}
-
-.uni-form fieldset legend {
-	margin: 0;
-	padding: 0;
-}
 
 .uni-form .ctrl-holder {
 	/* this is the main unit that contains our form elements */
