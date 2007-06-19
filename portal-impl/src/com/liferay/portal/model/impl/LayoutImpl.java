@@ -48,6 +48,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
@@ -607,7 +608,13 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			}
 		}
 
-		return PortalUtil.getLayoutURL(this, themeDisplay, false, resetRenderParameters);
+		String url = PortalUtil.getLayoutURL(this, themeDisplay);
+
+		if (resetRenderParameters) {
+			url = Http.addParameter(url, "p_l_reset", 1);
+		}
+
+		return url;
 	}
 
 	private String _parseLocalizedXml(String xml, String localeLanguageId) {

@@ -478,50 +478,27 @@ public class PortalUtil {
 	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return getLayoutURL(layout, themeDisplay, true, false);
-	}
-
-	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay,
-			boolean doAsUser)
-		throws PortalException, SystemException {
-
-		return getLayoutURL(layout, themeDisplay, doAsUser, false);
+		return getLayoutURL(layout, themeDisplay, true);
 	}
 
 	public static String getLayoutURL(
-			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser,
-			boolean resetParams)
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
 		throws PortalException, SystemException {
 
-		StringMaker layoutFriendlyURL = new StringMaker();
-
 		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
-			layoutFriendlyURL.append(getLayoutFriendlyURL(
-				layout, themeDisplay));
+			String layoutFriendlyURL = getLayoutFriendlyURL(
+				layout, themeDisplay);
 
-			if (layoutFriendlyURL.length() > 0) {
-				boolean queryAdded = false;
-
+			if (Validator.isNotNull(layoutFriendlyURL)) {
 				if (doAsUser &&
 					Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 
-					layoutFriendlyURL.append("?doAsUserId=");
-					layoutFriendlyURL.append(themeDisplay.getDoAsUserId());
-
-					queryAdded = true;
+					layoutFriendlyURL = Http.addParameter(
+						layoutFriendlyURL, "doAsUserId",
+						themeDisplay.getDoAsUserId());
 				}
 
-				if (resetParams) {
-					if (!queryAdded) {
-						layoutFriendlyURL.append("?");
-					}
-
-					layoutFriendlyURL.append("p_l_reset=1");
-
-					queryAdded = true;
-				}
-
-				return layoutFriendlyURL.toString();
+				return layoutFriendlyURL;
 			}
 		}
 
@@ -530,10 +507,6 @@ public class PortalUtil {
 		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 			layoutURL = Http.addParameter(
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
-		}
-
-		if (resetParams) {
-			layoutURL = Http.addParameter(layoutURL, "p_l_reset", 1);
 		}
 
 		return layoutURL;
