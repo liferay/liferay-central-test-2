@@ -492,7 +492,7 @@ public class PortalUtil {
 			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser,
 			boolean resetParams)
 		throws PortalException, SystemException {
-		
+
 		StringMaker layoutFriendlyURL = new StringMaker();
 
 		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
@@ -510,7 +510,7 @@ public class PortalUtil {
 
 					queryAdded = true;
 				}
-				
+
 				if (resetParams) {
 					if (!queryAdded) {
 						layoutFriendlyURL.append("?");
