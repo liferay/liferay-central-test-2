@@ -32,13 +32,13 @@ import org.apache.lucene.index.IndexWriter;
  */
 public class IndexWriterData {
 
-	public IndexWriterData(long companyId, IndexWriter writer, int count) {
+	public IndexWriterData(String companyId, IndexWriter writer, int count) {
 		_companyId = companyId;
 		_writer = writer;
 		_count = count;
 	}
 
-	public long getCompanyId() {
+	public String getCompanyId() {
 		return _companyId;
 	}
 
@@ -54,7 +54,7 @@ public class IndexWriterData {
 		_count = count;
 	}
 
-	private long _companyId;
+	private String _companyId;
 	private IndexWriter _writer;
 	private int _count;
 

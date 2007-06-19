@@ -65,7 +65,7 @@ import org.apache.lucene.index.Term;
 public class IndexerImpl {
 
 	public static void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
+			String companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -103,7 +103,7 @@ public class IndexerImpl {
 			session = JCRFactoryUtil.createSession();
 
 			Node contentNode = DLUtil.getFileContentNode(
-				session, companyId, repositoryId, fileName, 0);
+				session, companyId, String.valueOf(repositoryId), fileName, 0);
 
 			is = contentNode.getProperty(JCRConstants.JCR_DATA).getStream();
 		}
@@ -235,7 +235,7 @@ public class IndexerImpl {
 	}
 
 	public static void deleteFile(
-			long companyId, String portletId, long repositoryId,
+			String companyId, String portletId, long repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -247,7 +247,7 @@ public class IndexerImpl {
 	}
 
 	public static void reIndex(String[] ids) throws SearchException {
-		long companyId = GetterUtil.getLong(ids[0]);
+		String companyId = ids[0];
 		String portletId = ids[1];
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
@@ -285,7 +285,7 @@ public class IndexerImpl {
 	}
 
 	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
+			String companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws IOException {
 

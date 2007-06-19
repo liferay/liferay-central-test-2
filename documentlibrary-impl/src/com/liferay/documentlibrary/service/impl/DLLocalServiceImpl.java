@@ -77,6 +77,16 @@ public class DLLocalServiceImpl implements DLLocalService {
 			String fileName, InputStream is)
 		throws PortalException, SystemException {
 
+		addFile(
+			String.valueOf(companyId), portletId, groupId, repositoryId,
+			fileName, is);
+	}
+
+	public void addFile(
+			String companyId, String portletId, long groupId, long repositoryId,
+			String fileName, InputStream is)
+		throws PortalException, SystemException {
+
 		if ((fileName.indexOf("\\\\") != -1) ||
 			(fileName.indexOf("//") != -1) ||
 			(fileName.indexOf(":") != -1) ||
@@ -170,11 +180,29 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
+		return getFileAsStream(
+			String.valueOf(companyId), String.valueOf(repositoryId), fileName);
+	}
+
+	public InputStream getFileAsStream(
+			String companyId, String repositoryId, String fileName)
+		throws PortalException, SystemException {
+
 		return getFileAsStream(companyId, repositoryId, fileName, 0);
 	}
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
+		return getFileAsStream(
+			String.valueOf(companyId), String.valueOf(repositoryId), fileName,
+			versionNumber);
+	}
+
+	public InputStream getFileAsStream(
+			String companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -279,6 +307,17 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			InputStream is)
+		throws PortalException, SystemException {
+
+		updateFile(
+			String.valueOf(companyId), portletId, groupId, repositoryId,
+			fileName, versionNumber, sourceFileName, is);
+	}
+
+	public void updateFile(
+			String companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			InputStream is)
 		throws PortalException, SystemException {

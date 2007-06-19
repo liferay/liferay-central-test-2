@@ -22,8 +22,15 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
+
+import java.io.InputStream;
 
 /**
  * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
@@ -36,11 +43,13 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 	extends BaseUpgradeColumnImpl {
 
 	public MBMessageAttachmentsUpgradeColumnImpl(
-		UpgradeColumn messageIdColumn, UpgradeColumn threadIdColumn) {
+		UpgradeColumn messageIdColumn, UpgradeColumn companyIdColumn,
+		UpgradeColumn threadIdColumn) {
 
 		super("attachments");
 
 		_messageIdColumn = messageIdColumn;
+		_companyIdColumn = companyIdColumn;
 		_threadIdColumn = threadIdColumn;
 	}
 
@@ -49,19 +58,62 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 
 		if (attachments.booleanValue()) {
 			Long oldMessageId = (Long)_messageIdColumn.getOldValue();
+			String oldCompanyId = (String)_companyIdColumn.getOldValue();
 			Long oldThreadId = (Long)_threadIdColumn.getOldValue();
 
 			Long newMessageId = (Long)_messageIdColumn.getNewValue();
+			Long newCompanyId = (Long)_companyIdColumn.getNewValue();
 			Long newThreadId = (Long)_threadIdColumn.getNewValue();
 
-			// Move files
+			String[] fileNames = null;
 
+			try {
+				fileNames = DLServiceUtil.getFileNames(
+					oldCompanyId, "system",
+					"messageboards/" + oldThreadId.longValue());
+			}
+			catch (NoSuchDirectoryException nsde) {
+			}
+
+			if ((fileNames == null) || (fileNames.length == 0)) {
+				return Boolean.FALSE;
+			}
+
+			DLServiceUtil.addDirectory(
+				newCompanyId.longValue(), CompanyImpl.SYSTEM,
+				"messageboards/" + newThreadId.longValue());
+
+			for (int i = 0; i < fileNames.length; i++) {
+				String fileName = fileNames[i];
+
+				InputStream is = null;
+
+				try {
+					is = DLLocalServiceUtil.getFileAsStream(
+						oldCompanyId, "system", fileName);
+
+					String dirName =
+						"messageboards/" + newThreadId.longValue() + "/" +
+							newMessageId.longValue();
+
+					DLLocalServiceUtil.addFile(
+						newCompanyId.longValue(), CompanyImpl.SYSTEM_STRING,
+						GroupImpl.DEFAULT_PARENT_GROUP_ID, CompanyImpl.SYSTEM,
+						dirName + "/" + fileName, is);
+				}
+				finally {
+					if (is != null) {
+						is.close();
+					}
+				}
+			}
 		}
 
 		return attachments;
 	}
 
 	private UpgradeColumn _messageIdColumn;
+	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _threadIdColumn;
 
 }

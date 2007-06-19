@@ -202,10 +202,20 @@ public class LuceneUtil {
 	}
 
 	public static void delete(long companyId) {
+		delete(String.valueOf(companyId));
+	}
+
+	public static void delete(String companyId) {
 		_instance._delete(companyId);
 	}
 
 	public static void deleteDocuments(long companyId, Term term)
+		throws IOException {
+
+		deleteDocuments(String.valueOf(companyId), term);
+	}
+
+	public static void deleteDocuments(String companyId, Term term)
 		throws IOException {
 
 		try {
@@ -221,6 +231,10 @@ public class LuceneUtil {
 	}
 
 	public static Directory getLuceneDir(long companyId) {
+		return getLuceneDir(String.valueOf(companyId));
+	}
+
+	public static Directory getLuceneDir(String companyId) {
 		return _instance._getLuceneDir(companyId);
 	}
 
@@ -238,7 +252,17 @@ public class LuceneUtil {
 		return getWriter(companyId, false);
 	}
 
+	public static IndexWriter getWriter(String companyId) throws IOException {
+		return getWriter(companyId, false);
+	}
+
 	public static IndexWriter getWriter(long companyId, boolean create)
+		throws IOException {
+
+		return _instance._sharedWriter.getWriter(companyId, create);
+	}
+
+	public static IndexWriter getWriter(String companyId, boolean create)
 		throws IOException {
 
 		return _instance._sharedWriter.getWriter(companyId, create);
@@ -249,6 +273,10 @@ public class LuceneUtil {
 	}
 
 	public static void write(long companyId) throws IOException {
+		_instance._sharedWriter.write(companyId);
+	}
+
+	public static void write(String companyId) throws IOException {
 		_instance._sharedWriter.write(companyId);
 	}
 
@@ -320,7 +348,7 @@ public class LuceneUtil {
 		}
 	}
 
-	public void _delete(long companyId) {
+	public void _delete(String companyId) {
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
 				_LUCENE_STORE_TYPE_JDBC)) {
 
@@ -382,7 +410,7 @@ public class LuceneUtil {
 		}
 	}
 
-	private Directory _getLuceneDir(long companyId) {
+	private Directory _getLuceneDir(String companyId) {
 		Directory directory = null;
 
 		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
@@ -424,8 +452,9 @@ public class LuceneUtil {
 			}
 		}
 		else {
-			String path = PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-				StringPool.SLASH;
+			String path =
+				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
+					StringPool.SLASH;
 
 			try {
 				directory = FSDirectory.getDirectory(path, false);
@@ -447,7 +476,7 @@ public class LuceneUtil {
 		return directory;
 	}
 
-	private String _getTableName(long companyId) {
+	private String _getTableName(String companyId) {
 		return _LUCENE_TABLE_PREFIX + companyId;
 	}
 

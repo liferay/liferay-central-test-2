@@ -49,6 +49,16 @@ public class DLUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
+		return getFileContentNode(
+			String.valueOf(companyId), String.valueOf(repositoryId), fileName,
+			versionNumber);
+	}
+
+	public static Node getFileContentNode(
+			String companyId, String repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
 		Node contentNode = null;
 
 		Session session = null;
@@ -73,6 +83,16 @@ public class DLUtil {
 
 	public static Node getFileContentNode(
 			Session session, long companyId, long repositoryId,
+			String fileName, double versionNumber)
+		throws PortalException, SystemException {
+
+		return getFileContentNode(
+			session, String.valueOf(companyId), String.valueOf(repositoryId),
+			fileName, versionNumber);
+	}
+
+	public static Node getFileContentNode(
+			Session session, String companyId, String repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
@@ -128,6 +148,12 @@ public class DLUtil {
 	}
 
 	public static Node getRootNode(Session session, long companyId)
+		throws RepositoryException {
+
+		return getRootNode(session, String.valueOf(companyId));
+	}
+
+	public static Node getRootNode(Session session, String companyId)
 		throws RepositoryException {
 
 		Node companyNode = getFolderNode(session.getRootNode(), companyId);

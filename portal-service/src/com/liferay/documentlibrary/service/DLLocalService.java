@@ -41,12 +41,26 @@ public interface DLLocalService {
 			String fileName, InputStream is)
 		throws PortalException, SystemException;
 
+	public void addFile(
+			String companyId, String portletId, long groupId, long repositoryId,
+			String fileName, InputStream is)
+		throws PortalException, SystemException;
+
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;
 
 	public InputStream getFileAsStream(
+			String companyId, String repositoryId, String fileName)
+		throws PortalException, SystemException;
+
+	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException;
+
+	public InputStream getFileAsStream(
+			String companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException;
 
@@ -62,8 +76,14 @@ public interface DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber,
-			String sourceFileName, InputStream is)
+			String fileName, double versionNumber, String sourceFileName,
+			InputStream is)
+	throws PortalException, SystemException;
+
+	public void updateFile(
+			String companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			InputStream is)
 	throws PortalException, SystemException;
 
 }

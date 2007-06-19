@@ -47,6 +47,17 @@ public class DLLocalServiceUtil {
 			companyId, portletId, groupId, repositoryId, fileName, is);
 	}
 
+	public static void addFile(
+			String companyId, String portletId, long groupId, long repositoryId,
+			String fileName, InputStream is)
+		throws PortalException, SystemException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		dlLocalService.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, is);
+	}
+
 	public static InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
@@ -58,7 +69,28 @@ public class DLLocalServiceUtil {
 	}
 
 	public static InputStream getFileAsStream(
+			String companyId, String repositoryId, String fileName)
+		throws PortalException, SystemException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		return dlLocalService.getFileAsStream(
+			companyId, repositoryId, fileName);
+	}
+
+	public static InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		return dlLocalService.getFileAsStream(
+			companyId, repositoryId, fileName, versionNumber);
+	}
+
+	public static InputStream getFileAsStream(
+			String companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
@@ -92,6 +124,19 @@ public class DLLocalServiceUtil {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			InputStream is)
+		throws PortalException, SystemException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		dlLocalService.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, is);
+	}
+
+	public static void updateFile(
+			String companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			InputStream is)
 		throws PortalException, SystemException {

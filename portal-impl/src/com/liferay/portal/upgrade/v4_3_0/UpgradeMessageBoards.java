@@ -114,17 +114,23 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		pkUpgradeColumn = new PKUpgradeColumnImpl("messageId", true);
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		PKUpgradeColumnImpl upgradeThreadIdPKColumn =
 			new LazyPKUpgradeColumnImpl("threadId");
 
 		UpgradeColumn upgradeAttachmentsColumn =
 			new MBMessageAttachmentsUpgradeColumnImpl(
-				pkUpgradeColumn, upgradeThreadIdPKColumn);
+				pkUpgradeColumn, upgradeCompanyIdColumn,
+			upgradeThreadIdPKColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeUserIdColumn, upgradeCategoryIdColumn,
-			upgradeThreadIdPKColumn, upgradeAttachmentsColumn);
+			pkUpgradeColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
+			upgradeCategoryIdColumn, upgradeThreadIdPKColumn,
+			upgradeAttachmentsColumn);
 
 		upgradeTable.updateTable();
 
@@ -221,6 +227,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		"alter table MBMessage drop primary key",
 		"alter table MBMessage add primary key (messageId)",
 		"alter table MBMessage drop topicId",
+		"alter_column_type MBMessage companyId LONG",
 		"alter_column_type MBMessage userId LONG",
 
 		"alter table MBMessageFlag drop primary key",

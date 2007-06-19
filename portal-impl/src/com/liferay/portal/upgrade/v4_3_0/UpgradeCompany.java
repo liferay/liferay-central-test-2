@@ -177,11 +177,11 @@ public class UpgradeCompany extends UpgradeProcess {
 		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
 		"EmailAddress", "Group_", "IGFolder", "JournalArticle",
 		"JournalContentSearch", "JournalStructure", "JournalTemplate", "Layout",
-		"LayoutSet", "MBCategory", "MBMessage", "Organization_", "Permission_",
-		"Phone", "PollsQuestion", "Portlet", "RatingsEntry", "Resource_",
-		"Role_", "ShoppingCart", "ShoppingCategory", "ShoppingCoupon",
-		"ShoppingItem", "ShoppingOrder", "Subscription", "UserGroup", "User_",
-		"Website", "WikiNode", "WikiPage"
+		"LayoutSet", "MBCategory", "Organization_", "Permission_", "Phone",
+		"PollsQuestion", "Portlet", "RatingsEntry", "Resource_", "Role_",
+		"ShoppingCart", "ShoppingCategory", "ShoppingCoupon", "ShoppingItem",
+		"ShoppingOrder", "Subscription", "UserGroup", "User_", "Website",
+		"WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);
