@@ -25,6 +25,7 @@ package com.liferay.portlet.myaccount.action;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
+import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredUserException;
@@ -88,6 +89,7 @@ public class AddUserAction extends PortletAction {
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactLastNameException ||
 				e instanceof DuplicateUserEmailAddressException ||
+				e instanceof DuplicateUserScreenNameException ||
 				e instanceof NoSuchOrganizationException ||
 				e instanceof OrganizationParentException ||
 				e instanceof RequiredUserException ||
