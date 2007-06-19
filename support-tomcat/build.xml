@@ -7,9 +7,11 @@
 	<property name="jar.file" value="${ant.project.name}" />
 
 	<target name="clean">
-		<delete file="${deploy.dir}/support-tomcat.jar" />
+		<antcall target="build-common-java.clean" />
+
+		<delete file="${deploy.dir}/${jar.file}.jar" />
 	</target>
-	
+
 	<target name="compile">
 		<mkdir dir="classes" />
 
@@ -51,7 +53,7 @@
 
 	<target name="deploy">
 		<delete file="${deploy.dir}/support-catalina.jar" />
-		
+
 		<antcall target="build-common-java.deploy" />
 	</target>
 </project>
