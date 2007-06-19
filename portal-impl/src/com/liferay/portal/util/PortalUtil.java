@@ -478,27 +478,50 @@ public class PortalUtil {
 	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return getLayoutURL(layout, themeDisplay, true);
+		return getLayoutURL(layout, themeDisplay, true, false);
+	}
+
+	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay,
+			boolean doAsUser)
+		throws PortalException, SystemException {
+
+		return getLayoutURL(layout, themeDisplay, doAsUser, false);
 	}
 
 	public static String getLayoutURL(
-			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser,
+			boolean resetParams)
 		throws PortalException, SystemException {
+		
+		StringMaker layoutFriendlyURL = new StringMaker();
 
 		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
-			String layoutFriendlyURL = getLayoutFriendlyURL(
-				layout, themeDisplay);
+			layoutFriendlyURL.append(getLayoutFriendlyURL(
+				layout, themeDisplay));
 
-			if (Validator.isNotNull(layoutFriendlyURL)) {
+			if (layoutFriendlyURL.length() > 0) {
+				boolean queryAdded = false;
+
 				if (doAsUser &&
 					Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 
-					layoutFriendlyURL = Http.addParameter(
-						layoutFriendlyURL, "doAsUserId",
-						themeDisplay.getDoAsUserId());
+					layoutFriendlyURL.append("?doAsUserId=");
+					layoutFriendlyURL.append(themeDisplay.getDoAsUserId());
+
+					queryAdded = true;
+				}
+				
+				if (resetParams) {
+					if (!queryAdded) {
+						layoutFriendlyURL.append("?");
+					}
+
+					layoutFriendlyURL.append("p_l_reset=1");
+
+					queryAdded = true;
 				}
 
-				return layoutFriendlyURL;
+				return layoutFriendlyURL.toString();
 			}
 		}
 
@@ -507,6 +530,10 @@ public class PortalUtil {
 		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 			layoutURL = Http.addParameter(
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
+		}
+
+		if (resetParams) {
+			layoutURL = Http.addParameter(layoutURL, "p_l_reset", 1);
 		}
 
 		return layoutURL;

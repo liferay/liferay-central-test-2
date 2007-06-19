@@ -607,7 +607,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			}
 		}
 
-		return PortalUtil.getLayoutURL(this, themeDisplay);
+		return PortalUtil.getLayoutURL(this, themeDisplay, false, resetRenderParameters);
 	}
 
 	private String _parseLocalizedXml(String xml, String localeLanguageId) {
