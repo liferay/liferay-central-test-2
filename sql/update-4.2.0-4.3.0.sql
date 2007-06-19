@@ -154,11 +154,13 @@ update JournalTemplate set id_ = templateId;
 alter table Layout add plid LONG;
 alter table Layout add groupId LONG;
 alter table Layout add privateLayout BOOLEAN;
+alter_column_type Layout parentLayoutId LONG;
 alter table Layout add iconImage BOOLEAN;
 alter table Layout add iconImageId LONG;
 alter table Layout add wapThemeId VARCHAR(75) null;
 alter table Layout add wapColorSchemeId VARCHAR(75) null;
 alter table Layout add css VARCHAR(75) null;
+update Layout set parentLayoutId = 0 where parentLayoutId = -1;
 
 alter table LayoutSet add layoutSetId LONG;
 alter_column_type LayoutSet groupId LONG;

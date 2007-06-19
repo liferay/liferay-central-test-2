@@ -20,62 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portlet.PortletPreferencesImpl;
+import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import javax.portlet.PortletPreferences;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="PrefsXMLUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	static String name = "Liferay Enterprise Portal";
+	public PrefsXMLUpgradeColumnImpl(ValueMapper groupIdMapper) {
+		super("preferences");
 
-	static String version = "4.3.0 RC2";
-
-	static String codeName = "Owen";
-
-	static String build = "4216";
-
-	static String date = "June 19, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		_groupIdMapper = groupIdMapper;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Object getNewValue(Object oldValue) throws Exception {
+		String xml = (String)oldValue;
+
+		PortletPreferences prefs =
+			PortletPreferencesSerializer.fromDefaultXML(xml);
+
+		String groupId = prefs.getValue("group-id", null);
+
+		if (Validator.isNotNull(groupId)) {
+			groupId = String.valueOf(_groupIdMapper.getNewValue(
+				new Long(GetterUtil.getLong(groupId))));
+
+			prefs.setValue("group-id", groupId);
+
+			xml = PortletPreferencesSerializer.toXML(
+				(PortletPreferencesImpl)prefs);
+		}
+
+		return xml;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private ValueMapper _groupIdMapper;
 
 }

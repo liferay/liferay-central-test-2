@@ -86,7 +86,7 @@ public class JournalContentUtil {
 			}
 			catch (Exception e) {
 				_log.error(
-					"Uanble to get content for " + groupId + " " + articleId +
+					"Unable to get content for " + groupId + " " + articleId +
 						" " + languageId,
 					e);
 			}

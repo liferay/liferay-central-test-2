@@ -35,6 +35,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerTypeUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsPlidUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.PrefsXMLUpgradeColumnImpl;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.ArrayUtil;
 
@@ -110,11 +111,14 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			upgradeOwnerIdColumn, upgradeLayoutIdColumn,
 			AvailableMappersUtil.getLayoutPlidMapper());
 
+		UpgradeColumn upgradePreferencesColumn = new PrefsXMLUpgradeColumnImpl(
+			AvailableMappersUtil.getGroupIdMapper());
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PortletPreferencesImpl.TABLE_NAME, prefsColumns,
 			new PKUpgradeColumnImpl("portletPreferencesId", false),
 			upgradeOwnerIdColumn, upgradeOwnerTypeColumn, upgradeLayoutIdColumn,
-			upgradePlidColumn);
+			upgradePlidColumn, upgradePreferencesColumn);
 
 		upgradeTable.updateTable();
 
