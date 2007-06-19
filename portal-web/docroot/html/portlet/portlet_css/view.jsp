@@ -653,7 +653,7 @@
 		</fieldset>
 
 		<fieldset class="block-labels" id="border-styles">
-			<legend><liferay-ui:message key="borders-and-spacing" /></legend>
+			<legend><liferay-ui:message key="border-styling" /></legend>
 
 			<fieldset class="col" id="lfr-border-width">
 				<legend><liferay-ui:message key="border-width" /></legend>
