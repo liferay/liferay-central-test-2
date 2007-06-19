@@ -48,11 +48,10 @@ public class PollsChoiceIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
-		Long oldQuestionIdObj = (Long)_questionIdColumn.getOldValue();
+		Long oldQuestionId = (Long)_questionIdColumn.getOldValue();
 
 		String oldChoiceIdValue =
-			"{questionId=" + oldQuestionIdObj.longValue() + ", choiceId=" +
-				oldValue + "}";
+			"{questionId=" + oldQuestionId + ", choiceId=" + oldValue + "}";
 
 		_pollsChoiceIdMapper.mapValue(oldChoiceIdValue, newValue);
 

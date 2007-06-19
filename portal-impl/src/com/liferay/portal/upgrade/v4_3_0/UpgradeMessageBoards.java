@@ -84,17 +84,17 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"categoryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper categoryIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setMBCategoryIdMapper(categoryIdMapper);
 
@@ -112,7 +112,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBMessage
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("messageId", true);
+		upgradePKColumn = new PKUpgradeColumnImpl("messageId", true);
 
 		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
 			"companyId", new Integer(Types.VARCHAR),
@@ -123,19 +123,19 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		UpgradeColumn upgradeAttachmentsColumn =
 			new MBMessageAttachmentsUpgradeColumnImpl(
-				pkUpgradeColumn, upgradeCompanyIdColumn,
+				upgradePKColumn, upgradeCompanyIdColumn,
 			upgradeThreadIdPKColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
+			upgradePKColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
 			upgradeCategoryIdColumn, upgradeThreadIdPKColumn,
 			upgradeAttachmentsColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper messageIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setMBMessageIdMapper(messageIdMapper);
 
@@ -158,11 +158,11 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBMessageFlag
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("messageFlagId", true);
+		upgradePKColumn = new PKUpgradeColumnImpl("messageFlagId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			MBMessageFlagImpl.TABLE_NAME, MBMessageFlagImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeUserIdColumn, upgradeMessageIdColumn);
+			upgradePKColumn, upgradeUserIdColumn, upgradeMessageIdColumn);
 
 		upgradeTable.updateTable();
 

@@ -29,14 +29,17 @@ import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleContentUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticlePKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleResourcePrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalStructurePKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplatePKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateSmallImageIdUpgradeColumnImpl;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
@@ -85,60 +88,81 @@ public class UpgradeJournal extends UpgradeProcess {
 			"approvedByUserId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		JournalArticlePKUpgradeColumnImpl articlePKUpgradeColumn =
+		JournalArticlePKUpgradeColumnImpl upgradeArticlePKColumn =
 			new JournalArticlePKUpgradeColumnImpl(
 				upgradeCompanyIdColumn, upgradeGroupIdColumn);
 
-		UpgradeColumn articleResourcePrimKeyUpgradeColumn =
+		UpgradeColumn upgradeArticleResourcePrimKeyColumn =
 			new JournalArticleResourcePrimKeyUpgradeColumnImpl(
-				articlePKUpgradeColumn);
+				upgradeArticlePKColumn);
+
+		UpgradeColumn upgradeVersionColumn =
+			new TempUpgradeColumnImpl("version", new Integer(Types.DOUBLE));
+
+		UpgradeColumn upgradeStructureIdColumn =
+			new TempUpgradeColumnImpl("structureId");
+
+		UpgradeColumn upgradeContentColumn =
+			new JournalArticleContentUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeGroupIdColumn,
+				upgradeArticlePKColumn, upgradeVersionColumn,
+				upgradeStructureIdColumn,
+				AvailableMappersUtil.getImageIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			upgradeCompanyIdColumn, upgradeGroupIdColumn,
-			articlePKUpgradeColumn, articleResourcePrimKeyUpgradeColumn,
-			upgradeUserIdColumn, upgradeApprovedByUserIdColumn);
+			upgradeCompanyIdColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
+			upgradeApprovedByUserIdColumn, upgradeArticlePKColumn,
+			upgradeArticleResourcePrimKeyColumn, upgradeVersionColumn,
+			upgradeStructureIdColumn, upgradeContentColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper articleIdMapper = new DefaultPKMapper(
-			articlePKUpgradeColumn.getValueMapper());
+			upgradeArticlePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setJournalArticleIdMapper(articleIdMapper);
 
 		// JournalStructure
 
-		PKUpgradeColumnImpl structurePKUpgradeColumn =
+		PKUpgradeColumnImpl upgradeStructurePKColumn =
 			new JournalStructurePKUpgradeColumnImpl(
 				upgradeCompanyIdColumn, upgradeGroupIdColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
-			structurePKUpgradeColumn, upgradeUserIdColumn);
+			upgradeStructurePKColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper structureIdMapper = new DefaultPKMapper(
-			structurePKUpgradeColumn.getValueMapper());
+			upgradeStructurePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setJournalStructureIdMapper(structureIdMapper);
 
 		// JournalTemplate
 
-		PKUpgradeColumnImpl templatePKUpgradeColumn =
+		PKUpgradeColumnImpl upgradeTemplatePKColumn =
 			new JournalTemplatePKUpgradeColumnImpl(
 				upgradeCompanyIdColumn, upgradeGroupIdColumn);
+
+		UpgradeColumn upgradeSmallImageIdColumn =
+			new JournalTemplateSmallImageIdUpgradeColumnImpl(
+				upgradeCompanyIdColumn, upgradeGroupIdColumn,
+				upgradeTemplatePKColumn,
+				AvailableMappersUtil.getImageIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
-			templatePKUpgradeColumn, upgradeUserIdColumn);
+			upgradeTemplatePKColumn, upgradeUserIdColumn,
+			upgradeSmallImageIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper templateIdMapper = new DefaultPKMapper(
-			templatePKUpgradeColumn.getValueMapper());
+			upgradeTemplatePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setJournalTemplateIdMapper(templateIdMapper);
 

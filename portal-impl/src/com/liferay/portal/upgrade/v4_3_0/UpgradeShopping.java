@@ -79,17 +79,17 @@ public class UpgradeShopping extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"categoryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper categoryIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setShoppingCategoryIdMapper(categoryIdMapper);
 
@@ -107,15 +107,15 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingItem
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("itemId", true);
+		upgradePKColumn = new PKUpgradeColumnImpl("itemId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingItemImpl.TABLE_NAME, ShoppingItemImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeCategoryIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeCategoryIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper itemIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper itemIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setShoppingItemIdMapper(itemIdMapper);
 
@@ -142,16 +142,16 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingOrder
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl(
+		upgradePKColumn = new PKUpgradeColumnImpl(
 			"orderId", new Integer(Types.VARCHAR), true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper orderIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper orderIdMapper = upgradePKColumn.getValueMapper();
 
 		UpgradeColumn upgradeOrderIdColumn = new SwapUpgradeColumnImpl(
 			"orderId", new Integer(Types.VARCHAR), orderIdMapper);

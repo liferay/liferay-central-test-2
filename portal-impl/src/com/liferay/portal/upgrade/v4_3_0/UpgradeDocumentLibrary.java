@@ -75,17 +75,17 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setDLFolderIdMapper(folderIdMapper);
 
@@ -138,16 +138,16 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileShortcut
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("fileShortcutId", true);
+		upgradePKColumn = new PKUpgradeColumnImpl("fileShortcutId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeUserIdColumn, upgradeFolderIdColumn,
+			upgradePKColumn, upgradeUserIdColumn, upgradeFolderIdColumn,
 			upgradeToFolderIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper fileShortcutIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper fileShortcutIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setDLFileShortcutIdMapper(fileShortcutIdMapper);
 

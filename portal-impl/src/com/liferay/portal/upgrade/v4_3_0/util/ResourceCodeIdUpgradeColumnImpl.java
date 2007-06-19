@@ -53,7 +53,7 @@ public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		_scope = 0;
 
-		Long companyIdObj = (Long)_companyIdColumn.getOldValue();
+		Long companyId = (Long)_companyIdColumn.getOldValue();
 		String name = (String)_nameColumn.getOldValue();
 		String scope = (String)_scopeColumn.getOldValue();
 
@@ -75,7 +75,7 @@ public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		ResourceCode resourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyIdObj.longValue(), name, _scope);
+				companyId.longValue(), name, _scope);
 
 		return new Long(resourceCode.getCodeId());
 	}

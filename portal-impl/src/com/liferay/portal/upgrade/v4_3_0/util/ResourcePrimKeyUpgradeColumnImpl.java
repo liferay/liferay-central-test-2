@@ -83,10 +83,10 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	protected String getPrimKey(String name, String primKey) throws Exception {
-		Long classNameIdObj = new Long(PortalUtil.getClassNameId(name));
+		Long classNameId = new Long(PortalUtil.getClassNameId(name));
 
 		ClassPKContainer classPKContainer =
-			(ClassPKContainer)_classPKContainers.get(classNameIdObj);
+			(ClassPKContainer)_classPKContainers.get(classNameId);
 
 		if (classPKContainer != null) {
 			ValueMapper valueMapper = classPKContainer.getValueMapper();

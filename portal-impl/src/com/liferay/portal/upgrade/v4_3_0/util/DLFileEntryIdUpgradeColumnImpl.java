@@ -49,12 +49,12 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
-		Long oldFolderIdObj = (Long)_folderIdColumn.getOldValue();
-		Long newFolderIdObj = (Long)_folderIdColumn.getNewValue();
+		Long oldFolderId = (Long)_folderIdColumn.getOldValue();
+		Long newFolderId = (Long)_folderIdColumn.getNewValue();
 		String name = (String)_nameColumn.getOldValue();
 
 		String oldPageIdValue =
-			"{folderId=" + oldFolderIdObj.longValue() + ", name=" + name + "}";
+			"{folderId=" + oldFolderId + ", name=" + name + "}";
 
 		_dlFileEntryIdMapper.mapValue(oldPageIdValue, newValue);
 

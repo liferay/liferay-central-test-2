@@ -48,10 +48,10 @@ public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long classNameIdObj = (Long)_classNameIdColumn.getNewValue();
+		Long classNameId = (Long)_classNameIdColumn.getNewValue();
 
 		ClassPKContainer classPKContainer =
-			(ClassPKContainer)_classPKContainers.get(classNameIdObj);
+			(ClassPKContainer)_classPKContainers.get(classNameId);
 
 		if (classPKContainer != null) {
 			ValueMapper valueMapper = classPKContainer.getValueMapper();

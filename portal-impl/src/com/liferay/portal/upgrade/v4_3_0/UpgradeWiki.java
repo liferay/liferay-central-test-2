@@ -72,16 +72,16 @@ public class UpgradeWiki extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"nodeId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper nodeIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper nodeIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setWikiNodeIdMapper(nodeIdMapper);
 
@@ -92,22 +92,22 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		UpgradeColumn upgradeTitleColumn = new TempUpgradeColumnImpl("title");
 
-		WikiPageIdUpgradeColumnImpl pageIdUpgradeColumn =
+		WikiPageIdUpgradeColumnImpl upgradePageIdColumn =
 			new WikiPageIdUpgradeColumnImpl(
 				upgradeNodeIdColumn, upgradeTitleColumn);
 
-		UpgradeColumn pageResourcePrimKeyUpgradeColumn =
+		UpgradeColumn upgradePageResourcePrimKeyColumn =
 			new WikiPageResourcePrimKeyUpgradeColumnImpl(
-				pageIdUpgradeColumn);
+				upgradePageIdColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
-			upgradeNodeIdColumn, upgradeTitleColumn, pageIdUpgradeColumn,
-			pageResourcePrimKeyUpgradeColumn, upgradeUserIdColumn);
+			upgradeNodeIdColumn, upgradeTitleColumn, upgradePageIdColumn,
+			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper pageIdMapper = pageIdUpgradeColumn.getValueMapper();
+		ValueMapper pageIdMapper = upgradePageIdColumn.getValueMapper();
 
 		AvailableMappersUtil.setWikiPageIdMapper(pageIdMapper);
 

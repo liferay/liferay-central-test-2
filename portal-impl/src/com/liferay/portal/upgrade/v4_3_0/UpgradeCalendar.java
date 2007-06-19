@@ -69,16 +69,16 @@ public class UpgradeCalendar extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"eventId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper eventIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper eventIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setCalEventIdMapper(eventIdMapper);
 

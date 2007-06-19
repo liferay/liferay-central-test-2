@@ -81,7 +81,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// Group_
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"groupId", true);
 
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
@@ -108,13 +108,13 @@ public class UpgradeGroup extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, pkUpgradeColumn,
+			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, upgradePKColumn,
 			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper groupIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setGroupIdMapper(groupIdMapper);
 

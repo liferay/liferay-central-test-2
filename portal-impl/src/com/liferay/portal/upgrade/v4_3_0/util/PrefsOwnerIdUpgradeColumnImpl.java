@@ -48,7 +48,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		_ownerTypeObj = null;
+		_ownerType = null;
 		_oldGroupId = null;
 		_newGroupId = null;
 		_privateLayout = null;
@@ -84,12 +84,12 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 		}
 		else if (ownerId.startsWith("GROUP.")) {
-			Long groupIdObj = new Long(GetterUtil.getLong(
+			Long groupId = new Long(GetterUtil.getLong(
 				ownerId.substring(6, ownerId.length())));
 
-			groupIdObj = (Long)_groupIdMapper.getNewValue(groupIdObj);
+			groupId = (Long)_groupIdMapper.getNewValue(groupId);
 
-			ownerId = String.valueOf(groupIdObj);
+			ownerId = String.valueOf(groupId);
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 		}
 		else if (ownerId.startsWith("USER.")) {
@@ -102,13 +102,13 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
 		}
 
-		_ownerTypeObj = new Integer(ownerType);
+		_ownerType = new Integer(ownerType);
 
 		return ownerId;
 	}
 
 	public Integer getOwnerType() {
-		return _ownerTypeObj;
+		return _ownerType;
 	}
 
 	public Long getOldGroupId() {
@@ -125,7 +125,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _userIdMapper;
-	private Integer _ownerTypeObj;
+	private Integer _ownerType;
 	private Long _oldGroupId;
 	private Long _newGroupId;
 	private Boolean _privateLayout;

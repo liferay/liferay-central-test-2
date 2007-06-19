@@ -81,7 +81,7 @@ public class UpgradeImage extends UpgradeProcess {
 
 		// Image
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"imageId", new Integer(Types.VARCHAR), true);
 
 		ImageTextUpgradeColumnImpl upgradeTextColumn =
@@ -101,13 +101,13 @@ public class UpgradeImage extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ImageImpl.TABLE_NAME, ImageImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeTextColumn, upgradeTypeColumn,
+			upgradePKColumn, upgradeTextColumn, upgradeTypeColumn,
 			upgradeHeightColumn, upgradeWidthColumn, upgradeSizeColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper imageIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setImageIdMapper(imageIdMapper);
 

@@ -71,17 +71,17 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setBookmarksFolderIdMapper(folderIdMapper);
 
@@ -99,15 +99,15 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		// BookmarksEntry
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("entryId", true);
+		upgradePKColumn = new PKUpgradeColumnImpl("entryId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper entryIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper entryIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setBookmarksEntryIdMapper(entryIdMapper);
 

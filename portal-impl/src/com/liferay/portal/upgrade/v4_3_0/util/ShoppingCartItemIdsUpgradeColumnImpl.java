@@ -58,11 +58,11 @@ public class ShoppingCartItemIdsUpgradeColumnImpl
 					new Long(GetterUtil.getLong(itemId))));
 			}
 			else {
-				Long oldItemIdObj = new Long(
+				Long oldItemId = new Long(
 					GetterUtil.getLong(itemId.substring(0, pos)));
 
 				itemIds[i] =
-					_shoppingItemIdMapper.getNewValue(oldItemIdObj) +
+					_shoppingItemIdMapper.getNewValue(oldItemId) +
 						itemId.substring(pos, itemId.length());
 			}
 		}

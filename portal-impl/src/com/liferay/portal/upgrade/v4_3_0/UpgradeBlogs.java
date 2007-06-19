@@ -71,17 +71,17 @@ public class UpgradeBlogs extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"categoryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper categoryIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setBlogsCategoryIdMapper(categoryIdMapper);
 
@@ -99,16 +99,16 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		// BlogsEntry
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("entryId", true);
+		upgradePKColumn = new PKUpgradeColumnImpl("entryId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
 			upgradeCategoryIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper entryIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper entryIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setBlogsEntryIdMapper(entryIdMapper);
 

@@ -52,11 +52,11 @@ public class JournalStructurePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		Object newValue = super.getNewValue(oldValue);
 
 		String companyId = (String)_companyIdColumn.getOldValue();
-		Long groupIdObj = (Long)_groupIdColumn.getOldValue();
+		Long groupId = (Long)_groupIdColumn.getOldValue();
 		String structureId = (String)oldValue;
 
 		String oldIdValue =
-			"{companyId=" + companyId + ", groupId=" + groupIdObj.longValue() +
+			"{companyId=" + companyId + ", groupId=" + groupId +
 				", structureId=" + structureId + "}";
 
 		_journalStructureIdMapper.mapValue(oldIdValue, newValue);

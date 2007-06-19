@@ -22,54 +22,47 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
-
-import java.sql.Types;
 
 /**
- * <a href="JournalTemplatePKUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="JournalTemplateSmallImageIdUpgradeColumnImpl.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTemplatePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
+public class JournalTemplateSmallImageIdUpgradeColumnImpl
+	extends BaseUpgradeColumnImpl {
 
-	public JournalTemplatePKUpgradeColumnImpl(
-		UpgradeColumn companyIdColumn, UpgradeColumn groupIdColumn) {
+	public JournalTemplateSmallImageIdUpgradeColumnImpl(
+		UpgradeColumn companyIdColumn, UpgradeColumn groupIdColumn,
+		UpgradeColumn templateIdColumn, ValueMapper imageIdMapper) {
 
-		super("id_", new Integer(Types.VARCHAR), false);
+		super("smallImageId");
 
 		_companyIdColumn = companyIdColumn;
 		_groupIdColumn = groupIdColumn;
-		_journalTemplateIdMapper = ValueMapperFactory.getValueMapper();
+		_templateIdColumn = templateIdColumn;
+		_imageIdMapper = imageIdMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Object newValue = super.getNewValue(oldValue);
-
 		String companyId = (String)_companyIdColumn.getOldValue();
 		Long groupId = (Long)_groupIdColumn.getOldValue();
-		String templateId = (String)oldValue;
+		String oldTemplateId = (String)_templateIdColumn.getOldValue();
 
-		String oldIdValue =
-			"{companyId=" + companyId + ", groupId=" + groupId +
-				", templateId=" + templateId + "}";
+		String oldImageId =
+			companyId + ".journal.template." + groupId + "." + oldTemplateId +
+				".small";
 
-		_journalTemplateIdMapper.mapValue(oldIdValue, newValue);
-
-		return newValue;
-	}
-
-	public ValueMapper getValueMapper() {
-		return _journalTemplateIdMapper;
+		return _imageIdMapper.getNewValue(oldImageId);
 	}
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _groupIdColumn;
-	private ValueMapper _journalTemplateIdMapper;
+	private UpgradeColumn _templateIdColumn;
+	private ValueMapper _imageIdMapper;
 
 }

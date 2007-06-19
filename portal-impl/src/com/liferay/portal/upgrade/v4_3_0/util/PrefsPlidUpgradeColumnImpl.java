@@ -47,24 +47,24 @@ public class PrefsPlidUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long oldGroupIdObj = _ownerIdColumn.getOldGroupId();
-		Long newGroupIdObj = _ownerIdColumn.getNewGroupId();
-		Boolean privateLayoutObj = _ownerIdColumn.isPrivateLayout();
+		Long oldGroupId = _ownerIdColumn.getOldGroupId();
+		Long newGroupId = _ownerIdColumn.getNewGroupId();
+		Boolean privateLayout = _ownerIdColumn.isPrivateLayout();
 		String layoutId = (String)_layoutIdColumn.getOldValue();
 
-		if ((!layoutId.equals("SHARED")) && (oldGroupIdObj != null) &&
-			(newGroupIdObj != null) && (privateLayoutObj != null)) {
+		if ((!layoutId.equals("SHARED")) && (oldGroupId != null) &&
+			(newGroupId != null) && (privateLayout != null)) {
 
 			String oldOwnerId = null;
 
-			if (privateLayoutObj.booleanValue()) {
+			if (privateLayout.booleanValue()) {
 				oldOwnerId = "PRI.";
 			}
 			else {
 				oldOwnerId = "PUB.";
 			}
 
-			oldOwnerId += oldGroupIdObj.longValue();
+			oldOwnerId += oldGroupId.longValue();
 
 			String oldPlidValue =
 				"{layoutId=" + layoutId + ", ownerId=" + oldOwnerId + "}";

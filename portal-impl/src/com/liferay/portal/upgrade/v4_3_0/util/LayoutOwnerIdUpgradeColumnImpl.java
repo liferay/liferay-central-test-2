@@ -55,10 +55,10 @@ public class LayoutOwnerIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		if (_name.equals("groupId")) {
 			if (ownerId.startsWith("PUB.") || ownerId.startsWith("PRI.")) {
-				Long groupIdObj = new Long(GetterUtil.getLong(
+				Long groupId = new Long(GetterUtil.getLong(
 					ownerId.substring(4, ownerId.length())));
 
-				_groupId = (Long)_groupIdMapper.getNewValue(groupIdObj);
+				_groupId = (Long)_groupIdMapper.getNewValue(groupId);
 
 				return _groupId;
 			}

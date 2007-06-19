@@ -55,17 +55,16 @@ public class JournalArticlePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		Object newValue = super.getNewValue(oldValue);
 
 		String companyId = (String)_companyIdColumn.getOldValue();
-		Long oldGroupIdObj = (Long)_groupIdColumn.getOldValue();
-		Long newGroupIdObj = (Long)_groupIdColumn.getNewValue();
+		Long oldGroupId = (Long)_groupIdColumn.getOldValue();
+		Long newGroupId = (Long)_groupIdColumn.getNewValue();
 		String articleId = (String)oldValue;
 
 		String oldIdValue =
-			"{companyId=" + companyId + ", groupId=" +
-				oldGroupIdObj.longValue() + ", articleId=" + articleId +
-					", version=1.0}";
+			"{companyId=" + companyId + ", groupId=" + oldGroupId +
+				", articleId=" + articleId + ", version=1.0}";
 
 		_resourcePrimKey = new Long(JournalArticleResourceLocalServiceUtil.
-			getArticleResourcePrimKey(newGroupIdObj.longValue(), articleId));
+			getArticleResourcePrimKey(newGroupId.longValue(), articleId));
 
 		_journalArticleIdMapper.mapValue(oldIdValue, _resourcePrimKey);
 

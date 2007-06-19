@@ -51,16 +51,15 @@ public class WikiPageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 		Object newValue = super.getNewValue(oldValue);
 
-		Long oldNodeIdObj = (Long)_nodeIdColumn.getOldValue();
-		Long newNodeIdObj = (Long)_nodeIdColumn.getNewValue();
+		Long oldNodeId = (Long)_nodeIdColumn.getOldValue();
+		Long newNodeId = (Long)_nodeIdColumn.getNewValue();
 		String title = (String)_titleColumn.getOldValue();
 
 		String oldPageIdValue =
-			"{nodeId=" + oldNodeIdObj.longValue() + ", title=" + title +
-				", version=1.0}";
+			"{nodeId=" + oldNodeId + ", title=" + title + ", version=1.0}";
 
 		_resourcePrimKey = new Long(WikiPageResourceLocalServiceUtil.
-			getPageResourcePrimKey(newNodeIdObj.longValue(), title));
+			getPageResourcePrimKey(newNodeId.longValue(), title));
 
 		_wikiPageIdMapper.mapValue(oldPageIdValue, _resourcePrimKey);
 

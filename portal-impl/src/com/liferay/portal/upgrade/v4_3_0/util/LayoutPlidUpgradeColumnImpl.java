@@ -55,16 +55,16 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
-		Long groupIdObj = _groupIdColumn.getGroupId();
-		Boolean privateLayoutObj = _privateLayoutColumn.isPrivateLayout();
+		Long groupId = _groupIdColumn.getGroupId();
+		Boolean privateLayout = _privateLayoutColumn.isPrivateLayout();
 		Long layoutId = (Long)_layoutIdColumn.getOldValue();
 
-		if ((groupIdObj == null) || (privateLayoutObj == null) ||
+		if ((groupId == null) || (privateLayout == null) ||
 			(Validator.isNull(layoutId))) {
 
 			throw new StagnantRowException(
-				"{groupId=" + groupIdObj + ",privateLayout=" +
-					privateLayoutObj + ",layoutId=" + layoutId + "}");
+				"{groupId=" + groupId + ",privateLayout=" + privateLayout +
+					",layoutId=" + layoutId + "}");
 		}
 
 		String oldOwnerId = (String)_upgradeLayoutOwnerIdColumn.getOldValue();

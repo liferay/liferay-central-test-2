@@ -70,21 +70,21 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// User_
 
-		PKUpgradeColumnImpl pkUpgradeColumn =
+		PKUpgradeColumnImpl upgradePKColumn =
 			new PKUpgradeColumnImpl("userId", new Integer(Types.VARCHAR), true);
 
 		UpgradeColumn upgradeUserPortraitIdColumn =
 			new UserPortraitIdUpgradeColumnImpl(
-				pkUpgradeColumn, AvailableMappersUtil.getImageIdMapper());
+				upgradePKColumn, AvailableMappersUtil.getImageIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, pkUpgradeColumn,
+			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, upgradePKColumn,
 			upgradeUserPortraitIdColumn);
 
 		upgradeTable.updateTable();
 
 		ValueMapper userIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setUserIdMapper(userIdMapper);
 

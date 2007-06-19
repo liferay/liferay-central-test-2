@@ -72,16 +72,16 @@ public class UpgradePolls extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"questionId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper questionIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper questionIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setPollsQuestionIdMapper(questionIdMapper);
 
