@@ -60,7 +60,7 @@
 			jar="${downloads.dir}/${app.server.glassfish.zip.name}"
 			maxmemory="256m"
 		>
-			<arg value="-console"/>
+			<arg value="-console" />
 		</java>
 
 		<move file="${tstamp.value}/glassfish" tofile="${app.server.glassfish.dir}" />
@@ -147,8 +147,8 @@
 		</copy>
 
 		<java jar="${downloads.dir}/${app.server.pramati.zip.name}" fork="true">
-			<arg value="-silent"/>
-			<arg value="pramati/silent_install.xml"/>
+			<arg value="-silent" />
+			<arg value="pramati/silent_install.xml" />
 		</java>
 
 		<replace

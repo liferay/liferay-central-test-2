@@ -42,23 +42,6 @@
 					</delete>
 				</then>
 			</elseif>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<then>
-					<delete failonerror="false" includeemptydirs="true">
-						<fileset
-							dir="${app.server.lib.global.endorsed.dir}"
-							includes="${endorsed.libraries.flattened}"
-						/>
-					</delete>
-					<delete failonerror="false">
-						<fileset
-							dir="${app.server.tomcat.support.deploy.dir}"
-							includes="support-tomcat.jar"
-						/>
-					</delete>
-				</then>
-			</elseif>
 			<else>
 				<delete failonerror="false">
 					<fileset
@@ -274,14 +257,14 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
-					<copy todir="${app.server.tomcat.support.deploy.dir}">
+					<copy todir="${app.server.lib.support.dir}">
 						<fileset
 							dir="lib/development"
 							includes="support-tomcat.jar"
 						/>
 					</copy>
 
-					<copy todir="${app.server.lib.global.endorsed.dir}" flatten="true">
+					<copy todir="${app.server.lib.endorsed.dir}" flatten="true">
 						<fileset
 							dir="lib"
 							includes="${endorsed.libraries}"
@@ -294,11 +277,15 @@
 							includes="activation.jar,jms.jar,jta.jar,mail.jar"
 						/>
 					</copy>
-					
+
 					<if>
-						<equals arg1="${app.server.version}" arg2="5.5"/>
+						<equals arg1="${app.server.version}" arg2="5.5" />
 						<then>
-							<!-- LEP-2981 -->
+
+							<!--
+							LEP-2981
+							-->
+
 							<copy todir="${app.server.dir}/common/lib">
 								<fileset
 									dir="lib/development"
@@ -308,7 +295,7 @@
 						</then>
 					</if>
 
-					<move todir="${app.server.lib.global.endorsed.dir}">
+					<move todir="${app.server.lib.endorsed.dir}">
 						<fileset
 							dir="${app.server.lib.portal.dir}"
 							includes="xercesImpl.jar"

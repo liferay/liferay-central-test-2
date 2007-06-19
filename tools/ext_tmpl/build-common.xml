@@ -4,8 +4,8 @@
 	<property name="project.dir" value=".." />
 
 	<property environment="env" />
-	<property name="env.COMPUTERNAME" value="${env.HOST}"/>
-	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+	<property name="env.COMPUTERNAME" value="${env.HOST}" />
+	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}" />
 
 	<property file="${project.dir}/app.server.${user.name}.properties" />
 	<property file="${project.dir}/app.server.${env.COMPUTERNAME}.properties" />
@@ -58,9 +58,10 @@
 	<propertycopy name="app.server.classes.portal.dir" from="app.server.${app.server.type}.classes.portal.dir" />
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
 	<propertycopy name="app.server.instance.dir" from="app.server.${app.server.type}.instance.dir" silent="true" />
+	<propertycopy name="app.server.lib.endorsed.dir" from="app.server.${app.server.type}.lib.endorsed.dir" silent="true" />
 	<propertycopy name="app.server.lib.global.dir" from="app.server.${app.server.type}.lib.global.dir" />
-	<propertycopy name="app.server.lib.global.endorsed.dir" from="app.server.${app.server.type}.lib.global.endorsed.dir" />
 	<propertycopy name="app.server.lib.portal.dir" from="app.server.${app.server.type}.lib.portal.dir" />
+	<propertycopy name="app.server.lib.support.dir" from="app.server.${app.server.type}.lib.support.dir" silent="true" />
 	<propertycopy name="app.server.portal.dir" from="app.server.${app.server.type}.portal.dir" />
 	<propertycopy name="app.server.log.dir" from="app.server.${app.server.type}.log.dir" />
 	<propertycopy name="app.server.temp.dir" from="app.server.${app.server.type}.temp.dir" />
