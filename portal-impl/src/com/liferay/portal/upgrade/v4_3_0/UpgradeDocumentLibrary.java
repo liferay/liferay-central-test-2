@@ -28,10 +28,12 @@ import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.DLFileEntryIdUpgradeColumnImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
@@ -104,7 +106,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileEntry
 
-		pkUpgradeColumn = new PKUpgradeColumnImpl("fileEntryId", true);
+		UpgradeColumn upgradeNameColumn = new TempUpgradeColumnImpl("name");
+
+		PKUpgradeColumnImpl fileEntryIdColumn =
+			new DLFileEntryIdUpgradeColumnImpl(
+				upgradeFolderIdColumn, upgradeNameColumn);
 
 		UpgradeColumn upgradeVersionUserIdColumn = new SwapUpgradeColumnImpl(
 			"versionUserId", new Integer(Types.VARCHAR),
@@ -112,12 +118,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
-			pkUpgradeColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn,
-			upgradeFolderIdColumn);
+			upgradeFolderIdColumn, upgradeNameColumn, fileEntryIdColumn,
+			upgradeUserIdColumn, upgradeVersionUserIdColumn);
 
 		upgradeTable.updateTable();
 
-		ValueMapper fileEntryIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper fileEntryIdMapper = fileEntryIdColumn.getValueMapper();
 
 		AvailableMappersUtil.setDLFileEntryIdMapper(fileEntryIdMapper);
 

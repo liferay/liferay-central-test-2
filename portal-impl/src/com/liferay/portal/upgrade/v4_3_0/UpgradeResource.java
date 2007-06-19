@@ -134,7 +134,7 @@ public class UpgradeResource extends UpgradeProcess {
 		classPKContainers.put(
 			new Long(PortalUtil.getClassNameId(DLFileEntry.class.getName())),
 			new ClassPKContainer(
-				AvailableMappersUtil.getDLFileEntryIdMapper(), true));
+				AvailableMappersUtil.getDLFileEntryIdMapper(), false));
 
 		// DLFileShortcut
 

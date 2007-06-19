@@ -22,9 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -37,6 +34,9 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
+import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
@@ -47,13 +47,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeRatings.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeAddress extends UpgradeProcess {
+public class UpgradeRatings extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -68,7 +67,7 @@ public class UpgradeAddress extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 
-		// Address
+		// RatingsEntry
 
 		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
 			"userId", new Integer(Types.VARCHAR),
@@ -80,22 +79,26 @@ public class UpgradeAddress extends UpgradeProcess {
 		Map classPKContainers = CollectionFactory.getHashMap();
 
 		classPKContainers.put(
-			new Long(PortalUtil.getClassNameId(Contact.class.getName())),
+			new Long(PortalUtil.getClassNameId(DLFileEntry.class.getName())),
 			new ClassPKContainer(
-				AvailableMappersUtil.getContactIdMapper(), false));
-
-		classPKContainers.put(
-			new Long(PortalUtil.getClassNameId(Organization.class.getName())),
-			new ClassPKContainer(
-				AvailableMappersUtil.getOrganizationIdMapper(), true));
+				AvailableMappersUtil.getDLFileEntryIdMapper(), false));
 
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("addressId", false), upgradeUserIdColumn,
+			RatingsEntryImpl.TABLE_NAME, RatingsEntryImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("entryId", false), upgradeUserIdColumn,
 			classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.updateTable();
+
+		// RatingsStats
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			RatingsStatsImpl.TABLE_NAME, RatingsStatsImpl.TABLE_COLUMNS,
+			new PKUpgradeColumnImpl("statsId", false), classNameIdColumn,
+			upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
@@ -105,11 +108,14 @@ public class UpgradeAddress extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Address userId LONG",
-		"alter_column_type Address classNameId LONG",
-		"alter_column_type Address classPK LONG"
+		"alter_column_type RatingsEntry userId LONG",
+		"alter_column_type RatingsEntry classNameId LONG",
+		"alter_column_type RatingsEntry classPK LONG",
+
+		"alter_column_type RatingsStats classNameId LONG",
+		"alter_column_type RatingsStats classPK LONG"
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
+	private static Log _log = LogFactory.getLog(UpgradeRatings.class);
 
 }

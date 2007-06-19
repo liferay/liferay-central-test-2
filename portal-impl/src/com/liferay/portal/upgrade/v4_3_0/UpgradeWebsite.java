@@ -94,8 +94,8 @@ public class UpgradeWebsite extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("websiteId", false),
-			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
+			new PKUpgradeColumnImpl("websiteId", false), upgradeUserIdColumn,
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 

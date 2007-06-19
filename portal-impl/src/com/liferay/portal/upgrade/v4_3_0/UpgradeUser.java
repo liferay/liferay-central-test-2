@@ -40,7 +40,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.UserPortraitIdUpgradeColumnImpl;
-import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 
 import java.sql.Types;
 
@@ -135,21 +134,6 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// RatingsEntry
-
-		UpgradeColumn skipUpgradeClassNameIdColumn = new TempUpgradeColumnImpl(
-			"classNameId", new Integer(Types.VARCHAR));
-
-		UpgradeColumn skipUpgradeClassPKColumn = new TempUpgradeColumnImpl(
-			"classPK", new Integer(Types.VARCHAR));
-
-		upgradeTable = new DefaultUpgradeTableImpl(
-			RatingsEntryImpl.TABLE_NAME, RatingsEntryImpl.TABLE_COLUMNS,
-			upgradeUserIdColumn, skipUpgradeClassNameIdColumn,
-			skipUpgradeClassPKColumn);
-
-		upgradeTable.updateTable();
-
 		// Schema
 
 		for (int i = 0; i < _TABLES.length; i++) {
@@ -165,7 +149,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 	private static final String[] _TABLES = new String[] {
 		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "PasswordTracker",
-		"RatingsEntry", "User_",
+		"User_",
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);

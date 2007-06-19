@@ -94,8 +94,8 @@ public class UpgradePhone extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("phoneId", false),
-			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
+			new PKUpgradeColumnImpl("phoneId", false), upgradeUserIdColumn,
+			classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.updateTable();
 
