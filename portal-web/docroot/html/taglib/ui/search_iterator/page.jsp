@@ -38,7 +38,7 @@ if (rowChecker != null) {
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
-	<table cellpadding="4" cellspacing="0" width="100%">
+	<table class="taglib-search-paging">
 	<tr class="portlet-section-header">
 
 	<%

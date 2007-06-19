@@ -512,6 +512,10 @@ ul.gamma .tree-item-hover {
 	padding-right: 0;
 }
 
+.lfr-control-links a {
+	margin-right: 1em;
+}
+
 /* ---------- Liferay forms ---------- */
 
 .liferay-input-text {
@@ -533,6 +537,17 @@ ul.gamma .tree-item-hover {
 
 .taglib-discussion td img {
 	vertical-align: middle;
+}
+
+/* ---------- Taglib discussion thread ---------- */
+
+.taglib-search-paging {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.taglib-seach-paging td {
+	padding: 4px;
 }
 
 /* ---------- Specific portlet styles ---------- */
