@@ -71,6 +71,8 @@ public class UpgradeContact extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS, pkUpgradeColumn);
 
+		upgradeTable.setCreateSQL(ContactImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper contactIdMapper = new DefaultPKMapper(
@@ -89,6 +91,8 @@ public class UpgradeContact extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS,
 			upgradeScreenNameColumn, upgradeContactIdColumn);
+
+		upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

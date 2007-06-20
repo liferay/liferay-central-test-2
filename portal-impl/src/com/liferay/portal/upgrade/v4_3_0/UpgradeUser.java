@@ -117,6 +117,8 @@ public class UpgradeUser extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			CyrusUser.TABLE_NAME, CyrusUser.TABLE_COLUMNS, upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_CYRUS_USER);
+
 		upgradeTable.updateTable();
 
 		// CyrusVirtual
@@ -124,6 +126,8 @@ public class UpgradeUser extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			CyrusVirtual.TABLE_NAME, CyrusVirtual.TABLE_COLUMNS,
 			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(_CREATE_CYRUS_VIRUAL);
 
 		upgradeTable.updateTable();
 
@@ -134,25 +138,22 @@ public class UpgradeUser extends UpgradeProcess {
 			new PKUpgradeColumnImpl("passwordTrackerId", false),
 			upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(PasswordTrackerImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		for (int i = 0; i < _TABLES.length; i++) {
-			String sql = "alter_column_type " + _TABLES[i] + " userId LONG";
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(sql);
-			}
-
-			runSQL(sql);
-		}
 	}
 
-	private static final String[] _TABLES = new String[] {
-		"Account_", "Contact_", "CyrusUser", "CyrusVirtual", "PasswordTracker",
-		"User_",
-	};
+	private static final String _CREATE_CYRUS_USER =
+		"create table CyrusUser (" +
+			"userId LONG not null primary key, " +
+			"password_ VARCHAR(75) not null" +
+		")";
+
+	private static final String _CREATE_CYRUS_VIRUAL =
+		"create table CyrusVirtual (" +
+			"emailAddress VARCHAR(75) not null primary key," +
+			"userId LONG" +
+		")";
 
 	private static Log _log = LogFactory.getLog(UpgradeUser.class);
 

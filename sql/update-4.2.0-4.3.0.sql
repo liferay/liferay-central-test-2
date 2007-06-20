@@ -17,10 +17,7 @@ alter table Company add virtualHost VARCHAR(75) null;
 alter table Company add logoId LONG;
 update Company set webId = companyId;
 
-alter_column_type Contact_ prefixId INTEGER;
-alter_column_type Contact_ suffixId INTEGER;
-alter_column_type Contact_ parentContactId LONG;
-update Contact_ set parentContactId = 0;
+update Contact_ set parentContactId = '0';
 
 alter_column_type Counter currentId LONG;
 
