@@ -68,6 +68,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFolder
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -110,7 +114,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		PKUpgradeColumnImpl fileEntryIdColumn =
 			new DLFileEntryIdUpgradeColumnImpl(
-				upgradeFolderIdColumn, upgradeNameColumn);
+				upgradeCompanyIdColumn, upgradeFolderIdColumn,
+				upgradeNameColumn);
 
 		UpgradeColumn upgradeVersionUserIdColumn = new SwapUpgradeColumnImpl(
 			"versionUserId", new Integer(Types.VARCHAR),
@@ -118,8 +123,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
-			upgradeFolderIdColumn, upgradeNameColumn, fileEntryIdColumn,
-			upgradeUserIdColumn, upgradeVersionUserIdColumn);
+			upgradeCompanyIdColumn, upgradeFolderIdColumn, upgradeNameColumn,
+			fileEntryIdColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -168,6 +173,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table DLFileEntry drop primary key",
 		"alter table DLFileEntry add primary key (fileEntryId)",
+		"alter_column_type DLFileEntry companyId LONG",
 		"alter_column_type DLFileEntry userId LONG",
 		"alter_column_type DLFileEntry versionUserId LONG",
 

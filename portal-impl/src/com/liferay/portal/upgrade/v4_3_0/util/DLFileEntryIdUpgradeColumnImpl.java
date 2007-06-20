@@ -22,10 +22,14 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
+import com.liferay.util.CollectionFactory;
+
+import java.util.Set;
 
 /**
  * <a href="DLFileEntryIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
@@ -37,26 +41,41 @@ import com.liferay.portal.upgrade.util.ValueMapperFactory;
 public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public DLFileEntryIdUpgradeColumnImpl(
-		UpgradeColumn folderIdColumn, UpgradeColumn nameColumn) {
+		UpgradeColumn companyIdColumn, UpgradeColumn folderIdColumn,
+		UpgradeColumn nameColumn) {
 
 		super("fileEntryId", false);
 
+		_companyIdColumn = companyIdColumn;
 		_folderIdColumn = folderIdColumn;
 		_nameColumn = nameColumn;
 		_dlFileEntryIdMapper = ValueMapperFactory.getValueMapper();
+		_movedFolderIds = CollectionFactory.getHashSet();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
+		String oldCompanyId = (String)_companyIdColumn.getOldValue();
 		Long oldFolderId = (Long)_folderIdColumn.getOldValue();
+
+		Long newCompanyId = (Long)_companyIdColumn.getNewValue();
 		Long newFolderId = (Long)_folderIdColumn.getNewValue();
+
 		String name = (String)_nameColumn.getOldValue();
 
 		String oldPageIdValue =
 			"{folderId=" + oldFolderId + ", name=" + name + "}";
 
 		_dlFileEntryIdMapper.mapValue(oldPageIdValue, newValue);
+
+		if (!_movedFolderIds.contains(oldFolderId)) {
+			DLLocalServiceUtil.move(
+				"/" + oldCompanyId + "/documentlibrary/" + oldFolderId,
+				"/" + newCompanyId + "/documentlibrary/" + newFolderId);
+
+			_movedFolderIds.add(oldFolderId);
+		}
 
 		return newValue;
 	}
@@ -65,8 +84,10 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return _dlFileEntryIdMapper;
 	}
 
+	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _folderIdColumn;
 	private UpgradeColumn _nameColumn;
 	private ValueMapper _dlFileEntryIdMapper;
+	private Set _movedFolderIds;
 
 }

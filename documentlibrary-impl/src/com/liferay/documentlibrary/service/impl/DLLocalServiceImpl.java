@@ -147,7 +147,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 				Version version = contentNode.checkin();
 
 				contentNode.getVersionHistory().addVersionLabel(
-					version.getName(), Double.toString(DEFAULT_VERSION), false);
+					version.getName(), String.valueOf(DEFAULT_VERSION), false);
 
 				Indexer.addFile(
 					companyId, portletId, groupId, repositoryId, fileName);
@@ -155,6 +155,26 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+	}
+
+	public void checkRootNode(long companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node rootNode = DLUtil.getRootNode(session, companyId);
+
+			session.save();
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);

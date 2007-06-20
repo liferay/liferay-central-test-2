@@ -47,6 +47,12 @@ public class DLLocalServiceUtil {
 			companyId, portletId, groupId, repositoryId, fileName, is);
 	}
 
+	public static void checkRootNode(long companyId) throws SystemException {
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		dlLocalService.checkRootNode(companyId);
+	}
+
 	public static InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {

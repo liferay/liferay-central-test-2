@@ -41,6 +41,8 @@ public interface DLLocalService {
 			String fileName, InputStream is)
 		throws PortalException, SystemException;
 
+	public void checkRootNode(long companyId) throws SystemException;
+
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;

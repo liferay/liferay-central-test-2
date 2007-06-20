@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -71,6 +72,8 @@ public class UpgradeCompany extends UpgradeProcess {
 			companyIdMapper.mapValue(webId, new Long(companyId));
 
 			LuceneUtil.checkLuceneDir(companyId);
+
+			DLLocalServiceUtil.checkRootNode(companyId);
 		}
 
 		for (int i = 0; i < _TABLES.length; i++) {
@@ -176,13 +179,13 @@ public class UpgradeCompany extends UpgradeProcess {
 
 	private static final String[] _TABLES = new String[] {
 		"Account_", "Address", "BlogsCategory", "BlogsEntry", "BookmarksEntry",
-		"BookmarksFolder", "CalEvent", "Company", "Contact_", "DLFileEntry",
-		"DLFileRank", "DLFileShortcut", "DLFileVersion", "DLFolder",
-		"EmailAddress", "Group_", "IGFolder", "Layout", "LayoutSet",
-		"MBCategory", "Organization_", "Permission_", "Phone", "PollsQuestion",
-		"Portlet", "RatingsEntry", "Resource_", "Role_", "ShoppingCart",
-		"ShoppingCategory", "ShoppingCoupon", "ShoppingItem", "ShoppingOrder",
-		"Subscription", "UserGroup", "User_", "Website", "WikiNode", "WikiPage"
+		"BookmarksFolder", "CalEvent", "Company", "Contact_", "DLFileRank",
+		"DLFileShortcut", "DLFileVersion", "DLFolder", "EmailAddress", "Group_",
+		"IGFolder", "Layout", "LayoutSet", "MBCategory", "Organization_",
+		"Permission_", "Phone", "PollsQuestion", "Portlet", "RatingsEntry",
+		"Resource_", "Role_", "ShoppingCart", "ShoppingCategory",
+		"ShoppingCoupon", "ShoppingItem", "ShoppingOrder", "Subscription",
+		"UserGroup", "User_", "Website", "WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);

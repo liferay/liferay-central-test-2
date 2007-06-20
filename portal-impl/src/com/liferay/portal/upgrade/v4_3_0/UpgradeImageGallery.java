@@ -66,6 +66,10 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		// IGFolder
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -100,10 +104,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			"folderId", folderIdMapper);
 
 		// IGImage
-
-		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
-			"companyId", new Integer(Types.VARCHAR),
-			AvailableMappersUtil.getCompanyIdMapper());
 
 		PKUpgradeColumnImpl upgradeImageIdColumn =
 			new IGImageIdUpgradeColumnImpl(upgradeCompanyIdColumn);

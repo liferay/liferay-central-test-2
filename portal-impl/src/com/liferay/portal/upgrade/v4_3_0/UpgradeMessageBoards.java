@@ -77,6 +77,10 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBCategory
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -113,10 +117,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		// MBMessage
 
 		upgradePKColumn = new PKUpgradeColumnImpl("messageId", true);
-
-		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
-			"companyId", new Integer(Types.VARCHAR),
-			AvailableMappersUtil.getCompanyIdMapper());
 
 		PKUpgradeColumnImpl upgradeThreadIdPKColumn =
 			new LazyPKUpgradeColumnImpl("threadId");
