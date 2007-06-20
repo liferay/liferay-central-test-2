@@ -63,6 +63,8 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(100) null)";
+	public static String TABLE_SQL_DROP = "drop table DLFileRank";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileRank"),
 			XSS_ALLOW);

@@ -57,6 +57,8 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "roleId", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table OrgGroupRole (organizationId LONG not null,groupId LONG not null,roleId LONG not null,primary key (organizationId, groupId, roleId))";
+	public static String TABLE_SQL_DROP = "drop table OrgGroupRole";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupRole"), XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

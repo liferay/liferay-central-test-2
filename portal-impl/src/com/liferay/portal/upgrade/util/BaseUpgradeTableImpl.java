@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.tools.util.DBUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
@@ -32,6 +33,7 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
 import com.liferay.util.dao.hibernate.BooleanType;
 import com.liferay.util.dao.hibernate.DoubleType;
@@ -141,6 +143,14 @@ public abstract class BaseUpgradeTableImpl {
 		Object value = getValue(rs, name, type);
 
 		appendColumn(sm, value, last);
+	}
+
+	public String getCreateSQL() throws Exception {
+		return _createSQL;
+	}
+
+	public void setCreateSQL(String createSQL) throws Exception {
+		_createSQL = createSQL;
 	}
 
 	public String getDeleteSQL() throws Exception {
@@ -369,6 +379,14 @@ public abstract class BaseUpgradeTableImpl {
 			bw.close();
 		}
 
+		if (Validator.isNotNull(_createSQL)) {
+			DBUtil dbUtil = DBUtil.getInstance();
+
+			dbUtil.runSQL("drop table " + _tableName);
+
+			dbUtil.runSQL(_createSQL);
+		}
+
 		if (!isEmpty) {
 			Statement stmt = null;
 
@@ -470,5 +488,6 @@ public abstract class BaseUpgradeTableImpl {
 
 	private String _tableName;
 	private Object[][] _columns;
+	private String _createSQL;
 
 }

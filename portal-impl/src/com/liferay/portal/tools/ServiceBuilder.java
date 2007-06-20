@@ -1757,6 +1757,16 @@ public class ServiceBuilder {
 
 		sm.append("};");
 
+		String createTableSQL = _getCreateTableSQL(entity);
+
+		createTableSQL = StringUtil.replace(createTableSQL, "\n", "");
+		createTableSQL = StringUtil.replace(createTableSQL, "\t", "");
+		createTableSQL = createTableSQL.substring(0, createTableSQL.length() - 1);
+
+		sm.append("public static String TABLE_SQL_CREATE = \"" + createTableSQL + "\";");
+
+		sm.append("public static String TABLE_SQL_DROP = \"drop table " + entity.getTable() + "\";");
+
 		sm.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
 
 		for (int i = 0; i < regularColList.size(); i++) {
@@ -5726,116 +5736,11 @@ public class ServiceBuilder {
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
-			List pkList = entity.getPKList();
-			List regularColList = entity.getRegularColList();
+			String createTableSQL = _getCreateTableSQL(entity);
 
-			if (regularColList.size() > 0) {
-				StringMaker sm = new StringMaker();
-
-				sm.append(_CREATE_TABLE + entity.getTable() + " (\n");
-
-				for (int j = 0; j < regularColList.size(); j++) {
-					EntityColumn col = (EntityColumn)regularColList.get(j);
-
-					String colName = col.getName();
-					String colType = col.getType();
-					String colIdType = col.getIdType();
-
-					sm.append("\t" + col.getDBName());
-					sm.append(" ");
-
-					if (colType.equalsIgnoreCase("boolean")) {
-						sm.append("BOOLEAN");
-					}
-					else if (colType.equalsIgnoreCase("double") ||
-							 colType.equalsIgnoreCase("float")) {
-
-						sm.append("DOUBLE");
-					}
-					else if (colType.equals("int") ||
-							 colType.equals("Integer") ||
-							 colType.equalsIgnoreCase("short")) {
-
-						sm.append("INTEGER");
-					}
-					else if (colType.equalsIgnoreCase("long")) {
-						sm.append("LONG");
-					}
-					else if (colType.equals("String")) {
-						Map hints = ModelHintsUtil.getHints(_packagePath + ".model." + entity.getName(), colName);
-
-						int maxLength = 75;
-
-						if (hints != null) {
-							maxLength = GetterUtil.getInteger(
-								(String)hints.get("max-length"), maxLength);
-						}
-
-						if (maxLength < 4000) {
-							sm.append("VARCHAR(" + maxLength + ")");
-						}
-						else if (maxLength == 4000) {
-							sm.append("STRING");
-						}
-						else if (maxLength > 4000) {
-							sm.append("TEXT");
-						}
-					}
-					else if (colType.equals("Date")) {
-						sm.append("DATE null");
-					}
-					else {
-						sm.append("invalid");
-					}
-
-					if (col.isPrimary()) {
-						sm.append(" not null");
-
-						if (!entity.hasCompoundPK()) {
-							sm.append(" primary key");
-						}
-					}
-					else if (colType.equals("String")) {
-						sm.append(" null");
-					}
-
-					if (Validator.isNotNull(colIdType) &&
-						colIdType.equals("identity")) {
-
-						sm.append(" IDENTITY");
-					}
-
-					if (((j + 1) != regularColList.size()) ||
-						(entity.hasCompoundPK())) {
-
-						sm.append(",");
-					}
-
-					sm.append("\n");
-				}
-
-				if (entity.hasCompoundPK()) {
-					sm.append("\tprimary key (");
-
-					for (int k = 0; k < pkList.size(); k++) {
-						EntityColumn pk = (EntityColumn)pkList.get(k);
-
-						sm.append(pk.getDBName());
-
-						if ((k + 1) != pkList.size()) {
-							sm.append(", ");
-						}
-					}
-
-					sm.append(")\n");
-				}
-
-				sm.append(");");
-
-				String newCreateTableString = sm.toString();
-
-				_createSQLTables(sqlFile, newCreateTableString, entity, true);
-				_createSQLTables(new File(sqlPath + "/update-4.2.0-4.3.0.sql"), newCreateTableString, entity, false);
+			if (Validator.isNotNull(createTableSQL)) {
+				_createSQLTables(sqlFile, createTableSQL, entity, true);
+				_createSQLTables(new File(sqlPath + "/update-4.2.0-4.3.0.sql"), createTableSQL, entity, false);
 			}
 		}
 	}
@@ -5980,6 +5885,119 @@ public class ServiceBuilder {
 		}
 
 		return name;
+	}
+
+	private String _getCreateTableSQL(Entity entity) {
+		List pkList = entity.getPKList();
+		List regularColList = entity.getRegularColList();
+
+		if (regularColList.size() == 0) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(_CREATE_TABLE + entity.getTable() + " (\n");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			String colName = col.getName();
+			String colType = col.getType();
+			String colIdType = col.getIdType();
+
+			sm.append("\t" + col.getDBName());
+			sm.append(" ");
+
+			if (colType.equalsIgnoreCase("boolean")) {
+				sm.append("BOOLEAN");
+			}
+			else if (colType.equalsIgnoreCase("double") ||
+					 colType.equalsIgnoreCase("float")) {
+
+				sm.append("DOUBLE");
+			}
+			else if (colType.equals("int") ||
+					 colType.equals("Integer") ||
+					 colType.equalsIgnoreCase("short")) {
+
+				sm.append("INTEGER");
+			}
+			else if (colType.equalsIgnoreCase("long")) {
+				sm.append("LONG");
+			}
+			else if (colType.equals("String")) {
+				Map hints = ModelHintsUtil.getHints(_packagePath + ".model." + entity.getName(), colName);
+
+				int maxLength = 75;
+
+				if (hints != null) {
+					maxLength = GetterUtil.getInteger(
+						(String)hints.get("max-length"), maxLength);
+				}
+
+				if (maxLength < 4000) {
+					sm.append("VARCHAR(" + maxLength + ")");
+				}
+				else if (maxLength == 4000) {
+					sm.append("STRING");
+				}
+				else if (maxLength > 4000) {
+					sm.append("TEXT");
+				}
+			}
+			else if (colType.equals("Date")) {
+				sm.append("DATE null");
+			}
+			else {
+				sm.append("invalid");
+			}
+
+			if (col.isPrimary()) {
+				sm.append(" not null");
+
+				if (!entity.hasCompoundPK()) {
+					sm.append(" primary key");
+				}
+			}
+			else if (colType.equals("String")) {
+				sm.append(" null");
+			}
+
+			if (Validator.isNotNull(colIdType) &&
+				colIdType.equals("identity")) {
+
+				sm.append(" IDENTITY");
+			}
+
+			if (((i + 1) != regularColList.size()) ||
+				(entity.hasCompoundPK())) {
+
+				sm.append(",");
+			}
+
+			sm.append("\n");
+		}
+
+		if (entity.hasCompoundPK()) {
+			sm.append("\tprimary key (");
+
+			for (int j = 0; j < pkList.size(); j++) {
+				EntityColumn pk = (EntityColumn)pkList.get(j);
+
+				sm.append(pk.getDBName());
+
+				if ((j + 1) != pkList.size()) {
+					sm.append(", ");
+				}
+			}
+
+			sm.append(")\n");
+		}
+
+		sm.append(");");
+
+		return sm.toString();
 	}
 
 	private String _getDimensions(Type type) {

@@ -44,6 +44,10 @@ public interface UpgradeTable {
 			boolean last)
 		throws Exception;
 
+	public String getCreateSQL() throws Exception;
+
+	public void setCreateSQL(String createSQL) throws Exception;
+
 	public String getDeleteSQL() throws Exception;
 
 	public String getInsertSQL() throws Exception;

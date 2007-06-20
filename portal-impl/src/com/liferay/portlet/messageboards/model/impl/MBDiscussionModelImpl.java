@@ -57,6 +57,8 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 			{ "classPK", new Integer(Types.BIGINT) },
 			{ "threadId", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table MBDiscussion (discussionId LONG not null primary key,classNameId LONG,classPK LONG,threadId LONG)";
+	public static String TABLE_SQL_DROP = "drop table MBDiscussion";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			XSS_ALLOW);

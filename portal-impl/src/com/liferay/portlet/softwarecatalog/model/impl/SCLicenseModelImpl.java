@@ -60,6 +60,8 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 			{ "active_", new Integer(Types.BOOLEAN) },
 			{ "recommended", new Integer(Types.BOOLEAN) }
 		};
+	public static String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url VARCHAR(1024) null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
+	public static String TABLE_SQL_DROP = "drop table SCLicense";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCLicense"),
 			XSS_ALLOW);

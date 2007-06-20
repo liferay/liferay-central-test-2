@@ -1,9 +1,7 @@
 update Account_ set parentAccountId = '0';
 update Account_ set legalName = 'Liferay, Inc.' where legalName = 'Liferay, LLC';
 
-alter_column_type Address addressId LONG;
 alter_column_name Address className classNameId VARCHAR(75) null;
-alter_column_type Address typeId INTEGER;
 
 alter_column_type BlogsCategory categoryId LONG;
 alter_column_type BlogsCategory parentCategoryId LONG;

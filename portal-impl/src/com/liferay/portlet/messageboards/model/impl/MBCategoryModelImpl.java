@@ -67,6 +67,8 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table MBCategory (categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table MBCategory";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory"),
 			XSS_ALLOW);

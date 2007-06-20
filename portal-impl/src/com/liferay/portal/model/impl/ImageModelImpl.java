@@ -62,6 +62,8 @@ public class ImageModelImpl extends BaseModelImpl {
 			{ "width", new Integer(Types.INTEGER) },
 			{ "size_", new Integer(Types.INTEGER) }
 		};
+	public static String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
+	public static String TABLE_SQL_DROP = "drop table Image";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_TEXT = GetterUtil.getBoolean(PropsUtil.get(

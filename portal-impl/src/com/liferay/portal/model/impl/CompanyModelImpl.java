@@ -60,6 +60,8 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "mx", new Integer(Types.VARCHAR) },
 			{ "logoId", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
+	public static String TABLE_SQL_DROP = "drop table Company";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_WEBID = GetterUtil.getBoolean(PropsUtil.get(

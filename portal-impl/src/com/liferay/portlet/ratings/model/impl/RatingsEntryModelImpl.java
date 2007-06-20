@@ -65,6 +65,8 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 			{ "classPK", new Integer(Types.BIGINT) },
 			{ "score", new Integer(Types.DOUBLE) }
 		};
+	public static String TABLE_SQL_CREATE = "create table RatingsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,score DOUBLE)";
+	public static String TABLE_SQL_DROP = "drop table RatingsEntry";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.ratings.model.RatingsEntry"),
 			XSS_ALLOW);

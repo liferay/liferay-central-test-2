@@ -64,6 +64,8 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 			{ "remoteHost", new Integer(Types.VARCHAR) },
 			{ "userAgent", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
+	public static String TABLE_SQL_DROP = "drop table UserTracker";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTracker"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_SESSIONID = GetterUtil.getBoolean(PropsUtil.get(

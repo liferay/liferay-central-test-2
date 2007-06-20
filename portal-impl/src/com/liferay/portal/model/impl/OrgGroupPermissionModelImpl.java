@@ -57,6 +57,8 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "permissionId", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";
+	public static String TABLE_SQL_DROP = "drop table OrgGroupPermission";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission"),
 			XSS_ALLOW);

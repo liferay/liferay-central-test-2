@@ -70,6 +70,10 @@ public class UpgradeAddress extends UpgradeProcess {
 
 		// Address
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
@@ -94,21 +98,13 @@ public class UpgradeAddress extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("addressId", false), upgradeUserIdColumn,
-			classNameIdColumn, upgradeClassPKColumn);
+			new PKUpgradeColumnImpl("addressId", false), upgradeCompanyIdColumn,
+			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.setCreateSQL(AddressImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Address userId LONG",
-		"alter_column_type Address classNameId LONG",
-		"alter_column_type Address classPK LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
 

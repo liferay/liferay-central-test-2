@@ -64,6 +64,8 @@ public class IGImageModelImpl extends BaseModelImpl {
 			{ "smallImageId", new Integer(Types.BIGINT) },
 			{ "largeImageId", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table IGImage (imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
+	public static String TABLE_SQL_DROP = "drop table IGImage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
 			XSS_ALLOW);

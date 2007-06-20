@@ -58,6 +58,8 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "acronym", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table TagsSource (sourceId LONG not null primary key,parentSourceId LONG,name VARCHAR(75) null,acronym VARCHAR(75) null)";
+	public static String TABLE_SQL_DROP = "drop table TagsSource";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsSource"),
 			XSS_ALLOW);

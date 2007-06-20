@@ -59,6 +59,8 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 			{ "values_", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";
+	public static String TABLE_SQL_DROP = "drop table ShoppingItemField";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField"),
 			XSS_ALLOW);

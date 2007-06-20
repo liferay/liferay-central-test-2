@@ -70,6 +70,8 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			{ "anonymous", new Integer(Types.BOOLEAN) }
 		};
+	public static String TABLE_SQL_CREATE = "create table MBMessage (messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
+	public static String TABLE_SQL_DROP = "drop table MBMessage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage"),
 			XSS_ALLOW);

@@ -67,6 +67,8 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "xsd", new Integer(Types.CLOB) }
 		};
+	public static String TABLE_SQL_CREATE = "create table JournalStructure (id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
+	public static String TABLE_SQL_DROP = "drop table JournalStructure";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure"),
 			XSS_ALLOW);

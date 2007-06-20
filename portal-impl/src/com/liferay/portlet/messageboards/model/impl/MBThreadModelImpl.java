@@ -64,6 +64,8 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
+	public static String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
+	public static String TABLE_SQL_DROP = "drop table MBThread";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread"),
 			XSS_ALLOW);

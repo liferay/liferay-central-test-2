@@ -67,6 +67,8 @@ public class DLFolderModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table DLFolder (folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table DLFolder";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFolder"),
 			XSS_ALLOW);

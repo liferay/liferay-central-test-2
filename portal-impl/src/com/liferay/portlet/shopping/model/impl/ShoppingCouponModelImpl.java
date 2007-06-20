@@ -75,6 +75,8 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 			{ "discount", new Integer(Types.DOUBLE) },
 			{ "discountType", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories STRING null,limitSkus STRING null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null)";
+	public static String TABLE_SQL_DROP = "drop table ShoppingCoupon";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			XSS_ALLOW);

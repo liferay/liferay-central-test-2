@@ -60,6 +60,8 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 			{ "choiceId", new Integer(Types.BIGINT) },
 			{ "voteDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table PollsVote (voteId LONG not null primary key,userId LONG,questionId LONG,choiceId LONG,voteDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table PollsVote";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsVote"),
 			XSS_ALLOW);

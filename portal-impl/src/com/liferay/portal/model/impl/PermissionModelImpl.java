@@ -58,6 +58,8 @@ public class PermissionModelImpl extends BaseModelImpl {
 			{ "actionId", new Integer(Types.VARCHAR) },
 			{ "resourceId", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";
+	public static String TABLE_SQL_DROP = "drop table Permission_";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_ACTIONID = GetterUtil.getBoolean(PropsUtil.get(

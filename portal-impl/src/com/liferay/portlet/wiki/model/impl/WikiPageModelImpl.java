@@ -68,6 +68,8 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			{ "format", new Integer(Types.VARCHAR) },
 			{ "head", new Integer(Types.BOOLEAN) }
 		};
+	public static String TABLE_SQL_CREATE = "create table WikiPage (pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
+	public static String TABLE_SQL_DROP = "drop table WikiPage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(

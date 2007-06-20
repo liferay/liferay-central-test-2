@@ -67,6 +67,8 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 			{ "active_", new Integer(Types.BOOLEAN) },
 			{ "priority", new Integer(Types.INTEGER) }
 		};
+	public static String TABLE_SQL_CREATE = "create table SCFrameworkVersion (frameworkVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url VARCHAR(1024) null,active_ BOOLEAN,priority INTEGER)";
+	public static String TABLE_SQL_DROP = "drop table SCFrameworkVersion";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"),
 			XSS_ALLOW);

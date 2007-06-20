@@ -65,6 +65,8 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 			{ "key_", new Integer(Types.VARCHAR) },
 			{ "value", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(75) null)";
+	public static String TABLE_SQL_DROP = "drop table TagsProperty";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsProperty"),
 			XSS_ALLOW);

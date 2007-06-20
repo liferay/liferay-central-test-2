@@ -59,6 +59,8 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 			{ "totalScore", new Integer(Types.DOUBLE) },
 			{ "averageScore", new Integer(Types.DOUBLE) }
 		};
+	public static String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
+	public static String TABLE_SQL_DROP = "drop table RatingsStats";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.ratings.model.RatingsStats"),
 			XSS_ALLOW);

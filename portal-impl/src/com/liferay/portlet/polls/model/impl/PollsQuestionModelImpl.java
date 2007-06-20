@@ -68,6 +68,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
 			{ "lastVoteDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table PollsQuestion (questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table PollsQuestion";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),
 			XSS_ALLOW);

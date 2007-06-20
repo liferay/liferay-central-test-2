@@ -65,6 +65,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 			{ "toFolderId", new Integer(Types.BIGINT) },
 			{ "toName", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table DLFileShortcut (fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(75) null)";
+	public static String TABLE_SQL_DROP = "drop table DLFileShortcut";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut"),
 			XSS_ALLOW);

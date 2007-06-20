@@ -78,6 +78,8 @@ public class CalEventModelImpl extends BaseModelImpl {
 			{ "firstReminder", new Integer(Types.INTEGER) },
 			{ "secondReminder", new Integer(Types.INTEGER) }
 		};
+	public static String TABLE_SQL_CREATE = "create table CalEvent (eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy VARCHAR(75) null,firstReminder INTEGER,secondReminder INTEGER)";
+	public static String TABLE_SQL_DROP = "drop table CalEvent";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent"),
 			XSS_ALLOW);

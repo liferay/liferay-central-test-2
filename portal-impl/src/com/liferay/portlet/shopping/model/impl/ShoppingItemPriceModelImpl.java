@@ -63,6 +63,8 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 			{ "useShippingFormula", new Integer(Types.BOOLEAN) },
 			{ "status", new Integer(Types.INTEGER) }
 		};
+	public static String TABLE_SQL_CREATE = "create table ShoppingItemPrice (itemPriceId LONG not null primary key,itemId LONG,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,status INTEGER)";
+	public static String TABLE_SQL_DROP = "drop table ShoppingItemPrice";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
 			XSS_ALLOW);

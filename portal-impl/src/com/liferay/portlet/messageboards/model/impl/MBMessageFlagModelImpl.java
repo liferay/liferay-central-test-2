@@ -57,6 +57,8 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 			{ "messageId", new Integer(Types.BIGINT) },
 			{ "flag", new Integer(Types.INTEGER) }
 		};
+	public static String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
+	public static String TABLE_SQL_DROP = "drop table MBMessageFlag";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag"),
 			XSS_ALLOW);

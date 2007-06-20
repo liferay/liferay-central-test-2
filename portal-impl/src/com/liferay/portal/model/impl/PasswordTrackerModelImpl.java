@@ -61,6 +61,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
+	public static String TABLE_SQL_DROP = "drop table PasswordTracker";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(

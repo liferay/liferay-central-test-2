@@ -67,6 +67,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 			{ "altShipping", new Integer(Types.INTEGER) },
 			{ "insure", new Integer(Types.BOOLEAN) }
 		};
+	public static String TABLE_SQL_CREATE = "create table ShoppingCart (cartId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,itemIds STRING null,couponCodes VARCHAR(75) null,altShipping INTEGER,insure BOOLEAN)";
+	public static String TABLE_SQL_DROP = "drop table ShoppingCart";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart"),
 			XSS_ALLOW);

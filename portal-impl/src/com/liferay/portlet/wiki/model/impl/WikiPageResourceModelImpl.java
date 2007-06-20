@@ -57,6 +57,8 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 			{ "nodeId", new Integer(Types.BIGINT) },
 			{ "title", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(75) null)";
+	public static String TABLE_SQL_DROP = "drop table WikiPageResource";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPageResource"),
 			XSS_ALLOW);

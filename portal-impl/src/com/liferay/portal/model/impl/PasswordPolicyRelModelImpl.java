@@ -57,6 +57,8 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "classPK", new Integer(Types.BIGINT) }
 		};
+	public static String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
+	public static String TABLE_SQL_DROP = "drop table PasswordPolicyRel";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordPolicyRel"),
 			XSS_ALLOW);

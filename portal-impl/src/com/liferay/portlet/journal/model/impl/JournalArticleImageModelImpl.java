@@ -61,6 +61,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 			{ "languageId", new Integer(Types.VARCHAR) },
 			{ "tempImage", new Integer(Types.BOOLEAN) }
 		};
+	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
+	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage"),
 			XSS_ALLOW);

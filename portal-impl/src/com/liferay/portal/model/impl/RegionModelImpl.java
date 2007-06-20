@@ -58,6 +58,8 @@ public class RegionModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
+	public static String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
+	public static String TABLE_SQL_DROP = "drop table Region";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Region"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_REGIONCODE = GetterUtil.getBoolean(PropsUtil.get(

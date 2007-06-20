@@ -60,6 +60,8 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table MBStatsUser (statsUserId LONG not null primary key,groupId LONG,userId LONG,messageCount INTEGER,lastPostDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table MBStatsUser";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser"),
 			XSS_ALLOW);

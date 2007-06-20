@@ -65,6 +65,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 			{ "version", new Integer(Types.DOUBLE) },
 			{ "size_", new Integer(Types.INTEGER) }
 		};
+	public static String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(100) null,version DOUBLE,size_ INTEGER)";
+	public static String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
 			XSS_ALLOW);

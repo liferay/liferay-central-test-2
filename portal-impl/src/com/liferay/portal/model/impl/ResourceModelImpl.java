@@ -57,6 +57,8 @@ public class ResourceModelImpl extends BaseModelImpl {
 			{ "codeId", new Integer(Types.BIGINT) },
 			{ "primKey", new Integer(Types.VARCHAR) }
 		};
+	public static String TABLE_SQL_CREATE = "create table Resource_ (resourceId LONG not null primary key,codeId LONG,primKey VARCHAR(200) null)";
+	public static String TABLE_SQL_DROP = "drop table Resource_";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Resource"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_PRIMKEY = GetterUtil.getBoolean(PropsUtil.get(

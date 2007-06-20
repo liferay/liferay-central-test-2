@@ -60,6 +60,8 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 			{ "path", new Integer(Types.VARCHAR) },
 			{ "pathDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path STRING null,pathDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table UserTrackerPath";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_PATH = GetterUtil.getBoolean(PropsUtil.get(

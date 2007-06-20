@@ -66,6 +66,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 			{ "quantity", new Integer(Types.INTEGER) },
 			{ "shippedDate", new Integer(Types.TIMESTAMP) }
 		};
+	public static String TABLE_SQL_CREATE = "create table ShoppingOrderItem (orderItemId LONG not null primary key,orderId LONG,itemId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
+	public static String TABLE_SQL_DROP = "drop table ShoppingOrderItem";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem"),
 			XSS_ALLOW);
