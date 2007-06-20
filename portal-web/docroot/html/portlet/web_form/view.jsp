@@ -47,10 +47,13 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("require-captcha",
 <liferay-ui:error key="emailNotSent" message="the-email-could-not-be-sent" />
 
 <%
-for (int i = 1; i <= 10; i++) {
-    String fieldName = "field" + i;
-    String fieldLabel = prefs.getValue("fieldLabel" + i, "");
-	String fieldValue = ParamUtil.getString(request, fieldName);
+int i = 1;
+
+String fieldName = "field" + i;
+String fieldLabel = prefs.getValue("fieldLabel" + i, "");
+String fieldValue = ParamUtil.getString(request, fieldName);
+
+while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 
 	if (Validator.isNull(fieldLabel)) {
        continue;
@@ -93,6 +96,11 @@ for (int i = 1; i <= 10; i++) {
 	<br /><br />
 
 <%
+    i++;
+        
+    fieldName = "field" + i;
+    fieldLabel = prefs.getValue("fieldLabel" + i, "");
+    fieldValue = ParamUtil.getString(request, fieldName);
 }
 %>
 
