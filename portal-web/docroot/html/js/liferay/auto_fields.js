@@ -11,6 +11,7 @@ Liferay.autoFields = new Class({
                onAdd (function) a callback that executes after new fields have been added
                onRemove (function) a callback that executes after fields have been removed
                onClear (function) a callback that executes after the form fields have been returned
+			   init (function) a callback that executes after the class has fully initialized
        */
                initialize: function(options) {
                        var instance = this;
