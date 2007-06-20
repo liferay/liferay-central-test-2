@@ -63,21 +63,14 @@ public class UpgradeRole extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, pkUpgradeColumn);
 
+		upgradeTable.setCreateSQL(RoleImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper roleIdMapper = pkUpgradeColumn.getValueMapper();
 
 		AvailableMappersUtil.setRoleIdMapper(roleIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Role_ classNameId LONG",
-		"alter_column_type Role_ classPK LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeRole.class);
 

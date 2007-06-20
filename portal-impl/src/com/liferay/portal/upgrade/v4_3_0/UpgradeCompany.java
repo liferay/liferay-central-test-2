@@ -76,16 +76,6 @@ public class UpgradeCompany extends UpgradeProcess {
 			DLLocalServiceUtil.checkRootNode(companyId);
 		}
 
-		for (int i = 0; i < _TABLES.length; i++) {
-			String sql = "alter_column_type " + _TABLES[i] + " companyId LONG";
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(sql);
-			}
-
-			runSQL(sql);
-		}
-
 		runSQL(
 			"update PortletPreferences set ownerId = '0', ownerType = " +
 				PortletKeys.PREFS_OWNER_TYPE_COMPANY +
@@ -178,11 +168,14 @@ public class UpgradeCompany extends UpgradeProcess {
 	}
 
 	private static final String[] _TABLES = new String[] {
-		"Account_", "CalEvent", "Company", "Contact_", "DLFileRank",
+		"Account_", "Address", "BlogsCategory", "BlogsEntry", "BookmarksEntry",
+		"BookmarksFolder", "CalEvent", "Company", "Contact_", "DLFileRank",
 		"DLFileShortcut", "DLFileVersion", "DLFolder", "EmailAddress", "Group_",
 		"IGFolder", "Layout", "LayoutSet", "MBCategory", "Organization_",
 		"Permission_", "Phone", "PollsQuestion", "Portlet", "RatingsEntry",
-		"Resource_", "Role_", "User_"
+		"Resource_", "Role_", "ShoppingCart", "ShoppingCategory",
+		"ShoppingCoupon", "ShoppingItem", "ShoppingOrder", "Subscription",
+		"UserGroup", "User_", "Website", "WikiNode", "WikiPage"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);

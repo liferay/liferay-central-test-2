@@ -64,10 +64,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		// BookmarksFolder
 
-		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
-			"companyId", new Integer(Types.VARCHAR),
-			AvailableMappersUtil.getCompanyIdMapper());
-
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -80,8 +76,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BookmarksFolderImpl.TABLE_SQL_CREATE);
 
@@ -110,8 +105,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeFolderIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePKColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BookmarksEntryImpl.TABLE_SQL_CREATE);
 

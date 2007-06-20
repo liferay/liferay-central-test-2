@@ -72,10 +72,6 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingCategory
 
-		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
-			"companyId", new Integer(Types.VARCHAR),
-			AvailableMappersUtil.getCompanyIdMapper());
-
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -88,8 +84,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingCategoryImpl.TABLE_SQL_CREATE);
 
@@ -118,8 +113,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingItemImpl.TABLE_NAME, ShoppingItemImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeCategoryIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePKColumn, upgradeCategoryIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingItemImpl.TABLE_SQL_CREATE);
 
@@ -161,8 +155,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingOrderImpl.TABLE_SQL_CREATE);
 
@@ -197,8 +190,7 @@ public class UpgradeShopping extends UpgradeProcess {
 			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"cartId", new Integer(Types.VARCHAR), false),
-			upgradeGroupIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn, upgradeItemIdsColumn);
+			upgradeGroupIdColumn, upgradeUserIdColumn, upgradeItemIdsColumn);
 
 		upgradeTable.setCreateSQL(ShoppingCartImpl.TABLE_SQL_CREATE);
 
@@ -214,7 +206,7 @@ public class UpgradeShopping extends UpgradeProcess {
 			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"couponId", new Integer(Types.VARCHAR), false),
-			upgradeGroupIdColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
+			upgradeGroupIdColumn, upgradeUserIdColumn,
 			upgradeLimitCategoriesColumn);
 
 		upgradeTable.setCreateSQL(ShoppingCouponImpl.TABLE_SQL_CREATE);

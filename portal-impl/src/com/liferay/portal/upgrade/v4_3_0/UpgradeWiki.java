@@ -65,10 +65,6 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		// WikiNode
 
-		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
-			"companyId", new Integer(Types.VARCHAR),
-			AvailableMappersUtil.getCompanyIdMapper());
-
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -81,8 +77,7 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(WikiNodeImpl.TABLE_SQL_CREATE);
 
@@ -110,8 +105,7 @@ public class UpgradeWiki extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
 			upgradeNodeIdColumn, upgradeTitleColumn, upgradePageIdColumn,
-			upgradePageResourcePrimKeyColumn, upgradeCompanyIdColumn,
-			upgradeUserIdColumn);
+			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
 
