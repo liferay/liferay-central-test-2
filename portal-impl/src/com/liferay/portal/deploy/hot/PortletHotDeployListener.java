@@ -278,6 +278,11 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			// Struts bridges
 
+			if (!strutsBridges) {
+				strutsBridges = GetterUtil.getBoolean(
+					ctx.getInitParameter("struts-bridges-context-provider"));
+			}
+
 			if (strutsBridges) {
 				ctx.setAttribute(
 					ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER,
