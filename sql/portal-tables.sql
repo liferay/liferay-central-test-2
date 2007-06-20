@@ -174,7 +174,7 @@ create table Country (
 );
 
 create table CyrusUser (
-	userId LONG primary key,
+	userId LONG not null primary key,
 	password_ VARCHAR(75) not null
 );
 
@@ -279,26 +279,26 @@ create table Group_ (
 );
 
 create table Groups_Orgs (
-	groupId LONG,
-	organizationId LONG,
+	groupId LONG not null,
+	organizationId LONG not null,
 	primary key (groupId, organizationId)
 );
 
 create table Groups_Permissions (
-	groupId LONG,
-	permissionId LONG,
+	groupId LONG not null,
+	permissionId LONG not null,
 	primary key (groupId, permissionId)
 );
 
 create table Groups_Roles (
-	groupId LONG,
-	roleId LONG,
+	groupId LONG not null,
+	roleId LONG not null,
 	primary key (groupId, roleId)
 );
 
 create table Groups_UserGroups (
-	groupId LONG,
-	userGroupId LONG,
+	groupId LONG not null,
+	userGroupId LONG not null,
 	primary key (groupId, userGroupId)
 );
 
@@ -456,7 +456,7 @@ create table LayoutSet (
 	colorSchemeId VARCHAR(75) null,
 	wapThemeId VARCHAR(75) null,
 	wapColorSchemeId VARCHAR(75) null,
-	css VARCHAR(75) null,
+	css STRING null,
 	pageCount INTEGER,
 	virtualHost VARCHAR(75) null
 );
@@ -769,14 +769,14 @@ create table Role_ (
 );
 
 create table Roles_Permissions (
-	roleId LONG,
-	permissionId LONG,
+	roleId LONG not null,
+	permissionId LONG not null,
 	primary key (roleId, permissionId)
 );
 
 create table SCFrameworkVersi_SCProductVers (
-	productVersionId LONG,
-	frameworkVersionId LONG,
+	productVersionId LONG not null,
+	frameworkVersionId LONG not null,
 	primary key (productVersionId, frameworkVersionId)
 );
 
@@ -804,8 +804,8 @@ create table SCLicense (
 );
 
 create table SCLicenses_SCProductEntries (
-	productEntryId LONG,
-	licenseId LONG,
+	productEntryId LONG not null,
+	licenseId LONG not null,
 	primary key (productEntryId, licenseId)
 );
 
@@ -1046,8 +1046,8 @@ create table TagsAsset (
 );
 
 create table TagsAssets_TagsEntries (
-	assetId LONG,
-	entryId LONG,
+	assetId LONG not null,
+	entryId LONG not null,
 	primary key (assetId, entryId)
 );
 
@@ -1135,32 +1135,32 @@ create table UserIdMapper (
 );
 
 create table Users_Groups (
-	userId LONG,
-	groupId LONG,
+	userId LONG not null,
+	groupId LONG not null,
 	primary key (userId, groupId)
 );
 
 create table Users_Orgs (
-	userId LONG,
-	organizationId LONG,
+	userId LONG not null,
+	organizationId LONG not null,
 	primary key (userId, organizationId)
 );
 
 create table Users_Permissions (
-	userId LONG,
-	permissionId LONG,
+	userId LONG not null,
+	permissionId LONG not null,
 	primary key (userId, permissionId)
 );
 
 create table Users_Roles (
-	userId LONG,
-	roleId LONG,
+	userId LONG not null,
+	roleId LONG not null,
 	primary key (userId, roleId)
 );
 
 create table Users_UserGroups (
-	userId LONG,
-	userGroupId LONG,
+	userId LONG not null,
+	userGroupId LONG not null,
 	primary key (userId, userGroupId)
 );
 

@@ -314,8 +314,8 @@ alter_column_type Roles_Permissions roleId LONG;
 alter_column_type Roles_Permissions permissionId LONG;
 
 create table SCFrameworkVersi_SCProductVers (
-	productVersionId LONG,
-	frameworkVersionId LONG,
+	productVersionId LONG not null,
+	frameworkVersionId LONG not null,
 	primary key (productVersionId, frameworkVersionId)
 );
 
@@ -343,8 +343,8 @@ create table SCLicense (
 );
 
 create table SCLicenses_SCProductEntries (
-	productEntryId LONG,
-	licenseId LONG,
+	productEntryId LONG not null,
+	licenseId LONG not null,
 	primary key (productEntryId, licenseId)
 );
 
@@ -434,8 +434,8 @@ create table TagsAsset (
 );
 
 create table TagsAssets_TagsEntries (
-	assetId LONG,
-	entryId LONG,
+	assetId LONG not null,
+	entryId LONG not null,
 	primary key (assetId, entryId)
 );
 
