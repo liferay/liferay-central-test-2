@@ -96,7 +96,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 
 		<script type="text/javascript">
 			function <%= portletDisplay.getNamespace() %>refreshPortlet() {
-			    var curItem = document.getElementById("portlet-id-<%= portlet.getPortletId() %>");
+			    var curItem = document.getElementById("portlet-wrapper-<%= portlet.getPortletId() %>");
 				var parent = curItem.parentNode;
 
 				parent.removeChild(curItem);
