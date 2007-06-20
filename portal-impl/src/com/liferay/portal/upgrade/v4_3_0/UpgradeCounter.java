@@ -30,6 +30,10 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+
+import java.sql.Types;
 
 import java.util.List;
 
@@ -74,7 +78,27 @@ public class UpgradeCounter extends UpgradeProcess {
 				CounterLocalServiceUtil.reset(name);
 			}
 		}
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_COUNTER, _COLUMNS_COUNTER);
+
+		upgradeTable.setCreateSQL(_CREATE_COUNTER);
+
+		upgradeTable.updateTable();
 	}
+
+	private static final String _TABLE_COUNTER = "Counter";
+
+	private static final Object[][] _COLUMNS_COUNTER = {
+		{"name", new Integer(Types.VARCHAR)},
+		{"currentId", new Integer(Types.BIGINT)}
+	};
+
+	private static final String _CREATE_COUNTER =
+		"create table Counter (" +
+			"name VARCHAR(75) not null primary key," +
+			"currentId LONG" +
+		")";
 
 	private static Log _log = LogFactory.getLog(UpgradeCounter.class);
 

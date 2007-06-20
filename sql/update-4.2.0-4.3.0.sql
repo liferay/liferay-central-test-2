@@ -19,8 +19,6 @@ update Company set webId = companyId;
 
 update Contact_ set parentContactId = '0';
 
-alter_column_type Counter currentId LONG;
-
 update Country set countryId = '51' where countryId = '51`';
 alter_column_type Country countryId LONG;
 
@@ -46,9 +44,7 @@ alter_column_type DLFolder folderId LONG;
 alter_column_type DLFolder groupId LONG;
 alter_column_type DLFolder parentFolderId LONG;
 
-alter_column_type EmailAddress emailAddressId LONG;
 alter_column_name EmailAddress className classNameId VARCHAR(75) null;
-alter_column_type EmailAddress typeId INTEGER;
 
 alter_column_type Group_ groupId LONG;
 alter table Group_ add creatorUserId VARCHAR(75) null;
