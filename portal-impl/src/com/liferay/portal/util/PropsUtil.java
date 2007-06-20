@@ -515,6 +515,8 @@ public class PropsUtil {
 
 	public static final String LAYOUT_TEMPLATE_CACHE_ENABLED = "layout.template.cache.enabled";
 
+	public static final String LAYOUT_DEFAULT_P_L_RESET = "layout.default.p_l_reset";
+
 	// Portlet URL
 
 	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";

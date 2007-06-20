@@ -147,6 +147,9 @@ import org.hibernate.util.FastHashMap;
  */
 public class PortalUtil {
 
+	public static final boolean DEFAULT_P_L_RESET = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.LAYOUT_DEFAULT_P_L_RESET));
+
 	public static final String PATH_IMAGE = "/image";
 
 	public static final String PATH_MAIN = "/c";
