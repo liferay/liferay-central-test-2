@@ -64,6 +64,10 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		// BlogsCategory
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -76,7 +80,9 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsCategoryImpl.TABLE_NAME, BlogsCategoryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeCompanyIdColumn, upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(BlogsCategoryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -103,25 +109,17 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
-			upgradeCategoryIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn, upgradeCategoryIdColumn);
+
+		upgradeTable.setCreateSQL(BlogsEntryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		ValueMapper entryIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setBlogsEntryIdMapper(entryIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type BlogsCategory userId LONG",
-
-		"alter_column_type BlogsEntry userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);
 

@@ -3,19 +3,6 @@ update Account_ set legalName = 'Liferay, Inc.' where legalName = 'Liferay, LLC'
 
 alter_column_name Address className classNameId VARCHAR(75) null;
 
-alter_column_type BlogsCategory categoryId LONG;
-alter_column_type BlogsCategory parentCategoryId LONG;
-
-alter_column_type BlogsEntry entryId LONG;
-alter_column_type BlogsEntry groupId LONG;
-alter_column_type BlogsEntry categoryId LONG;
-
-alter_column_type BookmarksEntry entryId LONG;
-
-alter_column_type BookmarksFolder folderId LONG;
-alter_column_type BookmarksFolder groupId LONG;
-alter_column_type BookmarksFolder parentFolderId LONG;
-
 alter_column_type CalEvent eventId LONG;
 alter_column_type CalEvent groupId LONG;
 

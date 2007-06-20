@@ -64,6 +64,10 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		// BookmarksFolder
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -76,7 +80,10 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksFolderImpl.TABLE_NAME, BookmarksFolderImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(BookmarksFolderImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -103,24 +110,17 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeFolderIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(BookmarksEntryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		ValueMapper entryIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setBookmarksEntryIdMapper(entryIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type BookmarksEntry userId LONG",
-
-		"alter_column_type BookmarksFolder userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeBookmarks.class);
 
