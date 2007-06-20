@@ -113,7 +113,6 @@ alter table JournalArticle add id_ VARCHAR(75) null;
 alter table JournalArticle add resourcePrimKey LONG;
 alter_column_type JournalArticle groupId LONG;
 update JournalArticle set id_ = articleId;
-alter table JournalArticle drop expired;
 
 create table JournalArticleImage (
 	articleImageId LONG not null primary key,

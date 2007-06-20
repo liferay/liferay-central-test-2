@@ -358,6 +358,7 @@ create table JournalArticle (
 	approvedByUserId LONG,
 	approvedByUserName VARCHAR(75) null,
 	approvedDate DATE null,
+	expired BOOLEAN,
 	expirationDate DATE null,
 	reviewDate DATE null
 );

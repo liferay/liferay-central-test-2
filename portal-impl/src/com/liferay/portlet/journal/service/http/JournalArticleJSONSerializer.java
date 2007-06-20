@@ -181,6 +181,8 @@ public class JournalArticleJSONSerializer {
 			jsonObj.put("approvedDate", approvedDate.toString());
 		}
 
+		jsonObj.put("expired", model.isExpired());
+
 		Date expirationDate = model.getExpirationDate();
 
 		if (expirationDate == null) {

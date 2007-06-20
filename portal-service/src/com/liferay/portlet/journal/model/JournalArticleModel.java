@@ -137,6 +137,12 @@ public interface JournalArticleModel extends BaseModel {
 
 	public void setApprovedDate(Date approvedDate);
 
+	public boolean getExpired();
+
+	public boolean isExpired();
+
+	public void setExpired(boolean expired);
+
 	public Date getExpirationDate();
 
 	public void setExpirationDate(Date expirationDate);

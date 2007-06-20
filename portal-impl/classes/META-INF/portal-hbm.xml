@@ -741,6 +741,7 @@
 		<property name="approvedByUserId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="approvedByUserName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="approvedDate" />
+		<property name="expired" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="expirationDate" />
 		<property name="reviewDate" />
 	</class>

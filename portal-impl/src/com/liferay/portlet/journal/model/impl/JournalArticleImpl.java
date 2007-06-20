@@ -30,7 +30,6 @@ import com.liferay.util.Validator;
 
 import java.io.StringReader;
 
-import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.logging.Log;
@@ -103,30 +102,6 @@ public class JournalArticleImpl
 		}
 		else {
 			return true;
-		}
-	}
-
-	public boolean getExpired() {
-		if ((getExpirationDate() != null) &&
-				(getExpirationDate().before(new Date()))) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isExpired() {
-		return getExpired();
-	}
-
-	public void setExpired(boolean expired) {
-		if (expired) {
-			setExpirationDate(new Date());
-		}
-		else {
-			setExpirationDate(null);
 		}
 	}
 
