@@ -45,6 +45,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
@@ -535,7 +536,8 @@ public class JournalUtil {
 			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
 		tokens.put("main_path", themeDisplay.getPathMain());
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
-		tokens.put("portal_url", themeDisplay.getURLPortal());
+		tokens.put(
+			"portal_url", Http.removeProtocol(themeDisplay.getURLPortal()));
 		tokens.put("root_path", themeDisplay.getPathContext());
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 

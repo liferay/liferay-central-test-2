@@ -134,20 +134,37 @@ public class JournalArticleContentUpgradeColumnImpl
 				}
 			}
 
-			if (elType.equals("image")) {
+			if (elType.equals("image") || elType.equals("text")) {
 				String oldImageId = dynamicContent.getText();
 
-				if (oldImageId.startsWith(_IMG_ID_PATH)) {
+				if (oldImageId.startsWith(_IMG_ID_PATH) ||
+					oldImageId.startsWith("@portal_url@" + _IMG_ID_PATH) ||
+					oldImageId.startsWith(
+						"http://@portal_url@" + _IMG_ID_PATH) ||
+					oldImageId.startsWith(
+						"https://@portal_url@" + _IMG_ID_PATH)) {
+
+					int pos = oldImageId.indexOf(_IMG_ID_PATH);
+
+					String preOldImageId = oldImageId.substring(0, pos);
+
+					oldImageId = oldImageId.substring(
+						pos + _IMG_ID_PATH.length(), oldImageId.length());
+
 					String newImageId = getNewImageId(oldCompanyId, oldImageId);
 
-					dynamicContent.setText(_IMG_ID_PATH + newImageId);
-					dynamicContent.addAttribute("id", newImageId);
+					dynamicContent.setText(
+						preOldImageId + _IMG_ID_PATH + newImageId);
 
-					long articleImageId = GetterUtil.getLong(newImageId);
+					if (elType.equals("image")) {
+						dynamicContent.addAttribute("id", newImageId);
 
-					JournalArticleImageLocalServiceUtil.addArticleImageId(
-						articleImageId, groupId, articleId, version, elName,
-						elLanguage);
+						long articleImageId = GetterUtil.getLong(newImageId);
+
+						JournalArticleImageLocalServiceUtil.addArticleImageId(
+							articleImageId, groupId, articleId, version, elName,
+							elLanguage);
+					}
 				}
 			}
 
@@ -157,9 +174,6 @@ public class JournalArticleContentUpgradeColumnImpl
 
 	protected String getNewImageId(String oldCompanyId, String oldImageId)
 		throws Exception {
-
-		oldImageId = oldImageId.substring(
-			_IMG_ID_PATH.length(), oldImageId.length());
 
 		int pos = oldImageId.lastIndexOf("&version=");
 
@@ -172,7 +186,8 @@ public class JournalArticleContentUpgradeColumnImpl
 		return String.valueOf(_imageIdMapper.getNewValue(newImageId));
 	}
 
-	private static final String _IMG_ID_PATH = "/image/journal/article?img_id=";
+	private static final String _IMG_ID_PATH =
+		"/image/journal/article?img_id=";
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _groupIdColumn;

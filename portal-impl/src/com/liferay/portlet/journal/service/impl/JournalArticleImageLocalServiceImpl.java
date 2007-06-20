@@ -49,6 +49,10 @@ public class JournalArticleImageLocalServiceImpl
 			String elName, String languageId)
 		throws PortalException, SystemException {
 
+		if (articleImageId <= 0) {
+			return;
+		}
+
 		JournalArticleImage articleImage =
 			JournalArticleImageUtil.fetchByG_A_V_E_L(
 				groupId, articleId, version, elName, languageId);
@@ -64,6 +68,8 @@ public class JournalArticleImageLocalServiceImpl
 			articleImage.setTempImage(false);
 
 			JournalArticleImageUtil.update(articleImage);
+		}
+		else if (articleImage.getArticleImageId() == articleImageId) {
 		}
 		else {
 			throw new DuplicateArticleImageIdException();

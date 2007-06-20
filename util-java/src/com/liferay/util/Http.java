@@ -465,6 +465,18 @@ public class Http {
 		}
 	}
 
+	public static String removeProtocol(String url) {
+		if (url.startsWith(HTTP_WITH_SLASH)) {
+			return url.substring(HTTP_WITH_SLASH.length() , url.length());
+		}
+		else if (url.startsWith(HTTPS_WITH_SLASH)) {
+			return url.substring(HTTPS_WITH_SLASH.length() , url.length());
+		}
+		else {
+			return url;
+		}
+	}
+
 	public static void submit(String location) throws IOException {
 		submit(location, null);
 	}
