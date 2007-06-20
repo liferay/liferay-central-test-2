@@ -85,7 +85,6 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeOrganization());
 		upgrade(new UpgradeGroup());
 		upgrade(new UpgradeRole());
-		upgrade(new UpgradePortletPreferences());
 		upgrade(new UpgradeAddress());
 		upgrade(new UpgradeBlogs());
 		upgrade(new UpgradeBookmarks());
@@ -103,6 +102,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeUserIdMapper());
 		upgrade(new UpgradeWebsite());
 		upgrade(new UpgradeWiki());
+		upgrade(new UpgradePortletPreferences());
 		upgrade(new UpgradeRatings());
 		upgrade(new UpgradeCounter());
 		upgrade(new UpgradeResource());

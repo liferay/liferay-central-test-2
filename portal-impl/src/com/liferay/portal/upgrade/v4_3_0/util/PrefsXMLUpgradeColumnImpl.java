@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -39,33 +40,80 @@ import javax.portlet.PortletPreferences;
  */
 public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public PrefsXMLUpgradeColumnImpl(ValueMapper groupIdMapper) {
+	public PrefsXMLUpgradeColumnImpl(
+		UpgradeColumn upgradePortletIdColumn, ValueMapper groupIdMapper,
+		ValueMapper pollsQuestionIdMapper, ValueMapper wikiNodeIdMapper) {
+
 		super("preferences");
 
+		_upgradePortletIdColumn = upgradePortletIdColumn;
 		_groupIdMapper = groupIdMapper;
+		_pollsQuestionIdMapper = pollsQuestionIdMapper;
+		_wikiNodeIdMapper = wikiNodeIdMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		String xml = (String)oldValue;
 
+		String portletId = (String)_upgradePortletIdColumn.getOldValue();
+
 		PortletPreferences prefs =
 			PortletPreferencesSerializer.fromDefaultXML(xml);
 
-		String groupId = prefs.getValue("group-id", null);
+		processPrefs(portletId, prefs);
 
-		if (Validator.isNotNull(groupId)) {
-			groupId = String.valueOf(_groupIdMapper.getNewValue(
-				new Long(GetterUtil.getLong(groupId))));
-
-			prefs.setValue("group-id", groupId);
-
-			xml = PortletPreferencesSerializer.toXML(
-				(PortletPreferencesImpl)prefs);
-		}
-
-		return xml;
+		return PortletPreferencesSerializer.toXML(
+			(PortletPreferencesImpl)prefs);
 	}
 
+	protected void processPrefs(String portletId, PortletPreferences prefs)
+		throws Exception {
+
+		// Journal Articles and Journal Content
+
+		if (portletId.startsWith("62_INSTANCE_") ||
+			portletId.startsWith("56_INSTANCE_")) {
+
+			String groupId = prefs.getValue("group-id", null);
+
+			if (Validator.isNotNull(groupId)) {
+				groupId = String.valueOf(_groupIdMapper.getNewValue(
+					new Long(GetterUtil.getLong(groupId))));
+
+				prefs.setValue("group-id", groupId);
+			}
+		}
+
+		// Polls Display
+
+		else if (portletId.startsWith("59_INSTANCE_")) {
+			String questionId = prefs.getValue("question-id", null);
+
+			if (Validator.isNotNull(questionId)) {
+				questionId = String.valueOf(_pollsQuestionIdMapper.getNewValue(
+					new Long(GetterUtil.getLong(questionId))));
+
+				prefs.setValue("question-id", questionId);
+			}
+		}
+
+		// Wiki Display
+
+		else if (portletId.startsWith("54_INSTANCE_")) {
+			String nodeId = prefs.getValue("node-id", null);
+
+			if (Validator.isNotNull(nodeId)) {
+				nodeId = String.valueOf(_wikiNodeIdMapper.getNewValue(
+					new Long(GetterUtil.getLong(nodeId))));
+
+				prefs.setValue("node-id", nodeId);
+			}
+		}
+	}
+
+	private UpgradeColumn _upgradePortletIdColumn;
 	private ValueMapper _groupIdMapper;
+	private ValueMapper _pollsQuestionIdMapper;
+	private ValueMapper _wikiNodeIdMapper;
 
 }

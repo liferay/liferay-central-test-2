@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -68,6 +69,8 @@ public class UpgradeCompany extends UpgradeProcess {
 			long companyId = upgradeWebId(webId);
 
 			companyIdMapper.mapValue(webId, new Long(companyId));
+
+			LuceneUtil.checkLuceneDir(companyId);
 		}
 
 		for (int i = 0; i < _TABLES.length; i++) {

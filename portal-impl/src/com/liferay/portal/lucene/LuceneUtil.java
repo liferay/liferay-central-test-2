@@ -173,6 +173,39 @@ public class LuceneUtil {
 		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
 	}
 
+	public static void checkLuceneDir(long companyId) {
+		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
+
+		IndexWriter writer = null;
+
+		// Lucene does not properly release its lock on the index when
+		// IndexWriter throws an exception
+
+		try {
+			if (luceneDir.fileExists("segments")) {
+				writer = new IndexWriter(
+					luceneDir, LuceneUtil.getAnalyzer(), false);
+			}
+			else {
+				writer = new IndexWriter(
+					luceneDir, LuceneUtil.getAnalyzer(), true);
+			}
+		}
+		catch (IOException ioe) {
+			_log.error(ioe);
+		}
+		finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				}
+				catch (IOException ioe) {
+					_log.error(ioe);
+				}
+			}
+		}
+	}
+
 	public static void closeSearcher(Searcher searcher) {
 		try {
 			if (searcher != null){

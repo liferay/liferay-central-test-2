@@ -32,8 +32,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +41,6 @@ import javax.servlet.http.HttpServlet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.store.Directory;
 
 import org.quartz.SchedulerException;
 
@@ -89,36 +85,7 @@ public class LuceneServlet extends HttpServlet {
 				_indexers.add(new ObjectValuePair(indexer, indexerThread));
 			}
 			else {
-				Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
-
-				IndexWriter writer = null;
-
-				// Lucene does not properly release its lock on the index when
-				// IndexWriter throws an exception
-
-				try {
-					if (luceneDir.fileExists("segments")) {
-						writer = new IndexWriter(
-							luceneDir, LuceneUtil.getAnalyzer(), false);
-					}
-					else {
-						writer = new IndexWriter(
-							luceneDir, LuceneUtil.getAnalyzer(), true);
-					}
-				}
-				catch (IOException ioe) {
-					_log.error(ioe);
-				}
-				finally {
-					if (writer != null) {
-						try {
-							writer.close();
-						}
-						catch (IOException ioe) {
-							_log.error(ioe);
-						}
-					}
-				}
+				LuceneUtil.checkLuceneDir(companyId);
 			}
 
 			if (GetterUtil.getBoolean(

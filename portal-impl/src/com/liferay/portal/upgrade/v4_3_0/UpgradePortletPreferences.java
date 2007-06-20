@@ -111,14 +111,20 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			upgradeOwnerIdColumn, upgradeLayoutIdColumn,
 			AvailableMappersUtil.getLayoutPlidMapper());
 
+		UpgradeColumn upgradePortletIdColumn =
+			new TempUpgradeColumnImpl("portletId");
+
 		UpgradeColumn upgradePreferencesColumn = new PrefsXMLUpgradeColumnImpl(
-			AvailableMappersUtil.getGroupIdMapper());
+			upgradePortletIdColumn,	 AvailableMappersUtil.getGroupIdMapper(),
+			AvailableMappersUtil.getPollsQuestionIdMapper(),
+			AvailableMappersUtil.getWikiNodeIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			PortletPreferencesImpl.TABLE_NAME, prefsColumns,
 			new PKUpgradeColumnImpl("portletPreferencesId", false),
 			upgradeOwnerIdColumn, upgradeOwnerTypeColumn, upgradeLayoutIdColumn,
-			upgradePlidColumn, upgradePreferencesColumn);
+			upgradePlidColumn, upgradePortletIdColumn,
+			upgradePreferencesColumn);
 
 		upgradeTable.updateTable();
 

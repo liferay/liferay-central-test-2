@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.util.FileUtil;
 
 import java.io.InputStream;
 
@@ -70,7 +71,7 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 			try {
 				fileNames = DLServiceUtil.getFileNames(
 					oldCompanyId, "system",
-					"messageboards/" + oldThreadId.longValue());
+					"messageboards/" + oldThreadId + "/" + oldMessageId);
 			}
 			catch (NoSuchDirectoryException nsde) {
 			}
@@ -81,10 +82,12 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 
 			DLServiceUtil.addDirectory(
 				newCompanyId.longValue(), CompanyImpl.SYSTEM,
-				"messageboards/" + newThreadId.longValue());
+				"messageboards/" + newThreadId + "/" + newMessageId);
 
 			for (int i = 0; i < fileNames.length; i++) {
 				String fileName = fileNames[i];
+
+				String shortFileName = FileUtil.getShortFileName(fileName);
 
 				InputStream is = null;
 
@@ -99,7 +102,7 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 					DLLocalServiceUtil.addFile(
 						newCompanyId.longValue(), CompanyImpl.SYSTEM_STRING,
 						GroupImpl.DEFAULT_PARENT_GROUP_ID, CompanyImpl.SYSTEM,
-						dirName + "/" + fileName, is);
+						dirName + "/" + shortFileName, is);
 				}
 				finally {
 					if (is != null) {
