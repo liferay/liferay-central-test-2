@@ -54,27 +54,13 @@ public interface DLService {
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException;
 
-	public void deleteDirectory(
-			String companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, RemoteException, SystemException;
-
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
 		throws PortalException, RemoteException, SystemException;
 
 	public void deleteFile(
-			String companyId, String portletId, long repositoryId,
-			String fileName)
-		throws PortalException, RemoteException, SystemException;
-
-	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
-		throws PortalException, RemoteException, SystemException;
-
-	public void deleteFile(
-			String companyId, String portletId, long repositoryId,
 			String fileName, double versionNumber)
 		throws PortalException, RemoteException, SystemException;
 
@@ -88,10 +74,6 @@ public interface DLService {
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, RemoteException, SystemException;
-
-	public String[] getFileNames(
-			String companyId, String repositoryId, String dirName)
 		throws PortalException, RemoteException, SystemException;
 
 	public long getFileSize(
@@ -114,11 +96,6 @@ public interface DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName)
-		throws PortalException, RemoteException, SystemException;
-
-	public void updateFile(
-			String companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException;
 

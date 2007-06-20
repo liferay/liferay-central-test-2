@@ -211,14 +211,6 @@ public class DLServiceImpl implements DLService {
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		deleteDirectory(
-			String.valueOf(companyId), portletId, repositoryId, dirName);
-	}
-
-	public void deleteDirectory(
-			String companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
-
 		Session session = null;
 
 		try {
@@ -252,15 +244,6 @@ public class DLServiceImpl implements DLService {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName)
-		throws PortalException, SystemException {
-
-		deleteFile(
-			String.valueOf(companyId), portletId, repositoryId, fileName);
-	}
-
-	public void deleteFile(
-			String companyId, String portletId, long repositoryId,
 			String fileName)
 		throws PortalException, SystemException {
 
@@ -384,16 +367,6 @@ public class DLServiceImpl implements DLService {
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
-		deleteFile(
-			String.valueOf(companyId), portletId, repositoryId, fileName,
-			versionNumber);
-	}
-
-	public void deleteFile(
-			String companyId, String portletId, long repositoryId,
-			String fileName, double versionNumber)
-		throws PortalException, SystemException {
-
 		String versionLabel = String.valueOf(versionNumber);
 
 		Session session = null;
@@ -467,14 +440,6 @@ public class DLServiceImpl implements DLService {
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
-
-		return getFileNames(
-			String.valueOf(companyId), String.valueOf(repositoryId), dirName);
-	}
-
-	public String[] getFileNames(
-			String companyId, String repositoryId, String dirName)
 		throws PortalException, SystemException {
 
 		List fileNames = new ArrayList();
@@ -622,16 +587,6 @@ public class DLServiceImpl implements DLService {
 			long newRepositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		updateFile(
-			String.valueOf(companyId), portletId, groupId, repositoryId,
-			newRepositoryId, fileName);
-	}
-
-	public void updateFile(
-			String companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName)
-		throws PortalException, SystemException {
-
 		Session session = null;
 
 		try {
@@ -722,7 +677,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	private void _deleteDirectory(
-			String companyId, String portletId, long repositoryId, Node dirNode)
+			long companyId, String portletId, long repositoryId, Node dirNode)
 		throws IOException {
 
 		try {

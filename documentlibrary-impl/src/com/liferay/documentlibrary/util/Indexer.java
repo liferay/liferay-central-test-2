@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addFile(
-			String companyId, String portletId, long groupId, long repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -53,32 +53,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "addFile",
 				new Object[] {
-					companyId, portletId, new LongWrapper(groupId),
-					new LongWrapper(repositoryId), fileName
-				});
-
-			IndexProducer.produce(methodWrapper);
-		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
-			}
-		}
-	}
-
-	public static void deleteFile(
-			String companyId, String portletId, long repositoryId,
-			String fileName)
-		throws IOException {
-
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "deleteFile",
-				new Object[] {
-					companyId, portletId, new LongWrapper(repositoryId),
+					new LongWrapper(companyId), portletId,
+					new LongWrapper(groupId), new LongWrapper(repositoryId),
 					fileName
 				});
 
@@ -94,8 +70,33 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
+	public static void deleteFile(
+			long companyId, String portletId, long repositoryId,
+			String fileName)
+		throws IOException {
+
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "deleteFile",
+				new Object[] {
+					new LongWrapper(companyId), portletId,
+					new LongWrapper(repositoryId), fileName
+				});
+
+			IndexProducer.produce(methodWrapper);
+		}
+		catch (Exception e) {
+			if (e instanceof IOException) {
+				throw (IOException)e;
+			}
+			else {
+				_log.error(e);
+			}
+		}
+	}
+
 	public static void updateFile(
-			String companyId, String portletId, long groupId, long repositoryId,
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws IOException {
 
@@ -103,8 +104,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "updateFile",
 				new Object[] {
-					companyId, portletId, new LongWrapper(groupId),
-					new LongWrapper(repositoryId), fileName
+					new LongWrapper(companyId), portletId,
+					new LongWrapper(groupId), new LongWrapper(repositoryId),
+					fileName
 				});
 
 			IndexProducer.produce(methodWrapper);

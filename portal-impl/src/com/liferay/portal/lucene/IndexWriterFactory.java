@@ -76,11 +76,10 @@ public class IndexWriterFactory {
 				Company company = (Company)companies.get(i);
 
 				_lockLookup.put(
-					String.valueOf(company.getCompanyId()),
-					new FIFOSemaphore(1));
+					new Long(company.getCompanyId()), new FIFOSemaphore(1));
 			}
 
-			_lockLookup.put(CompanyImpl.SYSTEM_STRING, new FIFOSemaphore(1));
+			_lockLookup.put(new Long(CompanyImpl.SYSTEM), new FIFOSemaphore(1));
 		}
 		catch (SystemException se) {
 			_log.error(se);
@@ -90,13 +89,7 @@ public class IndexWriterFactory {
 	public void acquireLock(long companyId, boolean needExclusive)
 		throws InterruptedException {
 
-		acquireLock(String.valueOf(companyId), needExclusive);
-	}
-
-	public void acquireLock(String companyId, boolean needExclusive)
-		throws InterruptedException {
-
-		Semaphore lock = (Semaphore)_lockLookup.get(companyId);
+		Semaphore lock = (Semaphore)_lockLookup.get(new Long(companyId));
 
 		if (lock != null) {
 
@@ -131,12 +124,6 @@ public class IndexWriterFactory {
 	public void deleteDocuments(long companyId, Term term)
 		throws InterruptedException, IOException {
 
-		deleteDocuments(String.valueOf(companyId), term);
-	}
-
-	public void deleteDocuments(String companyId, Term term)
-		throws InterruptedException, IOException {
-
 		try {
 			try {
 				acquireLock(companyId, true);
@@ -168,11 +155,7 @@ public class IndexWriterFactory {
 	public IndexWriter getWriter(long companyId, boolean create)
 		throws IOException {
 
-		return getWriter(String.valueOf(companyId), create);
-	}
-
-	public IndexWriter getWriter(String companyId, boolean create)
-		throws IOException {
+		Long companyIdObj = new Long(companyId);
 
 		boolean hasError = false;
 		boolean newWriter = false;
@@ -189,7 +172,7 @@ public class IndexWriterFactory {
 
 			synchronized(this) {
 				IndexWriterData writerData =
-					(IndexWriterData)_writerLookup.get(companyId);
+					(IndexWriterData)_writerLookup.get(companyIdObj);
 
 				if (writerData == null) {
 					acquireLock(companyId, false);
@@ -200,7 +183,7 @@ public class IndexWriterFactory {
 
 					writerData = new IndexWriterData(companyId, writer, 0);
 
-					_writerLookup.put(companyId, writerData);
+					_writerLookup.put(companyIdObj, writerData);
 				}
 
 				writerData.setCount(writerData.getCount() + 1);
@@ -227,11 +210,7 @@ public class IndexWriterFactory {
 	}
 
 	public void releaseLock(long companyId) {
-		releaseLock(String.valueOf(companyId));
-	}
-
-	public void releaseLock(String companyId) {
-		Semaphore lock = (Semaphore)_lockLookup.get(companyId);
+		Semaphore lock = (Semaphore)_lockLookup.get(new Long(companyId));
 
 		if (lock != null) {
 			lock.release();
@@ -239,12 +218,8 @@ public class IndexWriterFactory {
 	}
 
 	public void write(long companyId) throws IOException {
-		write(String.valueOf(companyId));
-	}
-
-	public void write(String companyId) throws IOException {
 		IndexWriterData writerData =
-			(IndexWriterData)_writerLookup.get(companyId);
+			(IndexWriterData)_writerLookup.get(new Long(companyId));
 
 		if (writerData != null) {
 			decrement(writerData);
@@ -293,7 +268,7 @@ public class IndexWriterFactory {
 			writerData.setCount(writerData.getCount() - 1);
 
 			if (writerData.getCount() == 0) {
-				_writerLookup.remove(writerData.getCompanyId());
+				_writerLookup.remove(new Long(writerData.getCompanyId()));
 
 				try {
 					try {

@@ -22,16 +22,11 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-import com.liferay.util.FileUtil;
-
-import java.io.InputStream;
 
 /**
  * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
@@ -66,50 +61,15 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 			Long newCompanyId = (Long)_companyIdColumn.getNewValue();
 			Long newThreadId = (Long)_threadIdColumn.getNewValue();
 
-			String[] fileNames = null;
-
-			try {
-				fileNames = DLServiceUtil.getFileNames(
-					oldCompanyId, "system",
-					"messageboards/" + oldThreadId + "/" + oldMessageId);
-			}
-			catch (NoSuchDirectoryException nsde) {
-			}
-
-			if ((fileNames == null) || (fileNames.length == 0)) {
-				return Boolean.FALSE;
-			}
-
 			DLServiceUtil.addDirectory(
 				newCompanyId.longValue(), CompanyImpl.SYSTEM,
-				"messageboards/" + newThreadId + "/" + newMessageId);
+				"messageboards/" + newThreadId);
 
-			for (int i = 0; i < fileNames.length; i++) {
-				String fileName = fileNames[i];
-
-				String shortFileName = FileUtil.getShortFileName(fileName);
-
-				InputStream is = null;
-
-				try {
-					is = DLLocalServiceUtil.getFileAsStream(
-						oldCompanyId, "system", fileName);
-
-					String dirName =
-						"messageboards/" + newThreadId.longValue() + "/" +
-							newMessageId.longValue();
-
-					DLLocalServiceUtil.addFile(
-						newCompanyId.longValue(), CompanyImpl.SYSTEM_STRING,
-						GroupImpl.DEFAULT_PARENT_GROUP_ID, CompanyImpl.SYSTEM,
-						dirName + "/" + shortFileName, is);
-				}
-				finally {
-					if (is != null) {
-						is.close();
-					}
-				}
-			}
+			DLLocalServiceUtil.move(
+				"/" + oldCompanyId + "/documentlibrary/system/messageboards/" +
+					oldThreadId + "/" + oldMessageId,
+				"/" + newCompanyId + "/documentlibrary/0/messageboards/" +
+					newThreadId + "/" + newMessageId);
 		}
 
 		return attachments;
