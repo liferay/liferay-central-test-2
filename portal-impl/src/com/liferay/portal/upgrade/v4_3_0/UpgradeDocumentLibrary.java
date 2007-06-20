@@ -86,6 +86,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(DLFolderImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
@@ -126,6 +128,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeCompanyIdColumn, upgradeFolderIdColumn, upgradeNameColumn,
 			fileEntryIdColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn);
 
+		upgradeTable.setCreateSQL(DLFileEntryImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper fileEntryIdMapper = fileEntryIdColumn.getValueMapper();
@@ -139,6 +143,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			new PKUpgradeColumnImpl("fileRankId", false),
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
+		upgradeTable.setCreateSQL(DLFileRankImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// DLFileShortcut
@@ -149,6 +155,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, upgradeFolderIdColumn,
 			upgradeToFolderIdColumn);
+
+		upgradeTable.setCreateSQL(DLFileShortcutImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -163,32 +171,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			new PKUpgradeColumnImpl("fileVersionId", false),
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
+		upgradeTable.setCreateSQL(DLFileVersionImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table DLFileEntry drop primary key",
-		"alter table DLFileEntry add primary key (fileEntryId)",
-		"alter_column_type DLFileEntry companyId LONG",
-		"alter_column_type DLFileEntry userId LONG",
-		"alter_column_type DLFileEntry versionUserId LONG",
-
-		"alter table DLFileRank drop primary key",
-		"alter table DLFileRank add primary key (fileRankId)",
-		"alter_column_type DLFileRank userId LONG",
-
-		"alter_column_type DLFileShortcut userId LONG",
-
-		"alter table DLFileVersion drop primary key",
-		"alter table DLFileVersion add primary key (fileVersionId)",
-		"alter_column_type DLFileVersion userId LONG",
-
-		"alter_column_type DLFolder userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeDocumentLibrary.class);
 
