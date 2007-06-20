@@ -103,9 +103,9 @@ public class BBCodeUtil {
 
 	public static String getHTML(String bbcode) {
 		String html = Html.escape(bbcode, false);
-		
+
 		html = StringUtil.replace(html, _BBCODE_TAGS, _HTML_TAGS);
-		
+
 		for (int i = 0; i < EMOTICONS.length; i++) {
 			String imgTag = "<img src='" + EMOTICONS[i][0] + "' />";
 
