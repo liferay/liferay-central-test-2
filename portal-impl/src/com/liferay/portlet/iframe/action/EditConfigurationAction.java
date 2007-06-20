@@ -70,6 +70,7 @@ public class EditConfigurationAction extends PortletAction {
 			src = Http.getProtocol(req) + "://" + src;
 		}
 
+		boolean relative = ParamUtil.getBoolean(req, "relative");
 		boolean auth = ParamUtil.getBoolean(req, "auth");
 		String authType = ParamUtil.getString(req, "authType");
 		String formMethod = ParamUtil.getString(req, "formMethod");
@@ -88,6 +89,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		prefs.setValue("src", src);
 
+		prefs.setValue("relative", String.valueOf(relative));
 		prefs.setValue("auth", String.valueOf(auth));
 		prefs.setValue("auth-type", authType);
 		prefs.setValue("form-method", formMethod);

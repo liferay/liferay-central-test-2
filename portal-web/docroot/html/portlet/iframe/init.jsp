@@ -35,6 +35,7 @@ if (Validator.isNotNull(portletResource)) {
 
 String src = prefs.getValue("src", StringPool.BLANK);
 
+boolean relative = GetterUtil.getBoolean(prefs.getValue("relative", StringPool.BLANK));
 boolean auth = GetterUtil.getBoolean(prefs.getValue("auth", StringPool.BLANK));
 String authType = prefs.getValue("auth-type", StringPool.BLANK);
 String formMethod = prefs.getValue("form-method", StringPool.BLANK);
