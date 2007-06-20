@@ -25,7 +25,13 @@
 <%@ include file="/html/portlet/iframe/init.jsp" %>
 
 <%
-String iframeSrc = (relative ? themeDisplay.getPathContext() : "") + (String)request.getAttribute(WebKeys.IFRAME_SRC);
+String iframeSrc = StringPool.BLANK;
+
+if (relative) {
+	iframeSrc = themeDisplay.getPathContext();
+}
+
+iframeSrc += (String)request.getAttribute(WebKeys.IFRAME_SRC);
 
 String iframeHeight = heightNormal;
 

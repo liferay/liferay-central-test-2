@@ -46,12 +46,7 @@ String htmlAttributes =
 		<liferay-ui:message key="source-url" />
 	</td>
 	<td>
-		<span class="context-path-text" style="<%= relative ? "" : "display:none" %>"><%= themeDisplay.getPathContext() %></span><input class="liferay-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
+		<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span> <input class="liferay-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
 	</td>
 </tr>
 <tr>
@@ -59,7 +54,12 @@ String htmlAttributes =
 		<liferay-ui:message key="relative-to-context-path" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" onClick="_$J('span.context-path-text').toggle()" />
+		<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" onClick='<%= "_$J('#" + renderResponse.getNamespace() + "context-path-text').toggle();" %>' />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
 	</td>
 </tr>
 <tr>

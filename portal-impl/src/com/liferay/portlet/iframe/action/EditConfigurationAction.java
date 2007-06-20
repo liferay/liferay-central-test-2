@@ -71,6 +71,7 @@ public class EditConfigurationAction extends PortletAction {
 		}
 
 		boolean relative = ParamUtil.getBoolean(req, "relative");
+
 		boolean auth = ParamUtil.getBoolean(req, "auth");
 		String authType = ParamUtil.getString(req, "authType");
 		String formMethod = ParamUtil.getString(req, "formMethod");
@@ -88,8 +89,8 @@ public class EditConfigurationAction extends PortletAction {
 			req, portletResource, true, true);
 
 		prefs.setValue("src", src);
-
 		prefs.setValue("relative", String.valueOf(relative));
+
 		prefs.setValue("auth", String.valueOf(auth));
 		prefs.setValue("auth-type", authType);
 		prefs.setValue("form-method", formMethod);
