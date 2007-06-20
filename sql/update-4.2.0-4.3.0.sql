@@ -380,37 +380,21 @@ create table SCProductVersion (
 	repoStoreArtifact BOOLEAN
 );
 
-alter_column_type ShoppingCart groupId LONG;
 alter_column_name ShoppingCart couponIds couponCodes VARCHAR(75) null;
 
-alter_column_type ShoppingCategory categoryId LONG;
-alter_column_type ShoppingCategory groupId LONG;
-alter_column_type ShoppingCategory parentCategoryId LONG;
-
-alter_column_type ShoppingCoupon groupId LONG;
 alter table ShoppingCoupon add code_ VARCHAR(75) null;
 update ShoppingCoupon set code_ = couponId;
 
-alter_column_type ShoppingItem itemId LONG;
-alter_column_type ShoppingItem categoryId LONG;
 alter table ShoppingItem add smallImageId LONG;
 alter table ShoppingItem add mediumImageId LONG;
 alter table ShoppingItem add largeImageId LONG;
 
-alter_column_type ShoppingItemField itemFieldId LONG;
-alter_column_type ShoppingItemField itemId LONG;
-
-alter_column_type ShoppingItemPrice itemPriceId LONG;
-alter_column_type ShoppingItemPrice itemId LONG;
-
-alter_column_type ShoppingOrder groupId LONG;
 alter table ShoppingOrder add number_ VARCHAR(75) null;
 alter_column_name ShoppingOrder couponIds couponCodes VARCHAR(75) null;
 update ShoppingOrder set number_ = orderId;
 
 alter table ShoppingOrderItem add orderItemId LONG;
 
-alter_column_type Subscription subscriptionId LONG;
 alter_column_name Subscription className classNameId VARCHAR(75) null;
 
 create table TagsAsset (

@@ -182,9 +182,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		"DLFileShortcut", "DLFileVersion", "DLFolder", "EmailAddress", "Group_",
 		"IGFolder", "Layout", "LayoutSet", "MBCategory", "Organization_",
 		"Permission_", "Phone", "PollsQuestion", "Portlet", "RatingsEntry",
-		"Resource_", "Role_", "ShoppingCart", "ShoppingCategory",
-		"ShoppingCoupon", "ShoppingItem", "ShoppingOrder", "Subscription",
-		"User_"
+		"Resource_", "Role_", "User_"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);

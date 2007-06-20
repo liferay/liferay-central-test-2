@@ -69,6 +69,10 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		// Subscription
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
@@ -89,20 +93,13 @@ public class UpgradeSubscription extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			SubscriptionImpl.TABLE_NAME, SubscriptionImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("subscriptionId", false),
-			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
+			upgradeCompanyIdColumn, upgradeUserIdColumn, classNameIdColumn,
+			upgradeClassPKColumn);
+
+		upgradeTable.setCreateSQL(SubscriptionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Subscription userId LONG",
-		"alter_column_type Subscription classNameId LONG",
-		"alter_column_type Subscription classPK LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeSubscription.class);
 

@@ -72,6 +72,10 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingCategory
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -84,7 +88,10 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(ShoppingCategoryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -111,7 +118,10 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingItemImpl.TABLE_NAME, ShoppingItemImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeCategoryIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeCategoryIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(ShoppingItemImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -129,6 +139,8 @@ public class UpgradeShopping extends UpgradeProcess {
 			ShoppingItemFieldImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("itemFieldId", false), upgradeItemIdColumn);
 
+		upgradeTable.setCreateSQL(ShoppingItemFieldImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// ShoppingItemPrice
@@ -137,6 +149,8 @@ public class UpgradeShopping extends UpgradeProcess {
 			ShoppingItemPriceImpl.TABLE_NAME,
 			ShoppingItemPriceImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("itemPriceId", false), upgradeItemIdColumn);
+
+		upgradeTable.setCreateSQL(ShoppingItemPriceImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -147,7 +161,10 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(ShoppingOrderImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -167,6 +184,8 @@ public class UpgradeShopping extends UpgradeProcess {
 			new PKUpgradeColumnImpl("orderItemId", false),
 			upgradeOrderIdColumn, upgradeCartItemIdColumn);
 
+		upgradeTable.setCreateSQL(ShoppingOrderItemImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// ShoppingCart
@@ -178,7 +197,10 @@ public class UpgradeShopping extends UpgradeProcess {
 			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"cartId", new Integer(Types.VARCHAR), false),
-			upgradeGroupIdColumn, upgradeUserIdColumn, upgradeItemIdsColumn);
+			upgradeGroupIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn, upgradeItemIdsColumn);
+
+		upgradeTable.setCreateSQL(ShoppingCartImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -192,34 +214,13 @@ public class UpgradeShopping extends UpgradeProcess {
 			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"couponId", new Integer(Types.VARCHAR), false),
-			upgradeGroupIdColumn, upgradeUserIdColumn,
+			upgradeGroupIdColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
 			upgradeLimitCategoriesColumn);
 
+		upgradeTable.setCreateSQL(ShoppingCouponImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type ShoppingCart cartId LONG",
-		"alter_column_type ShoppingCart userId LONG",
-
-		"alter_column_type ShoppingCategory userId LONG",
-
-		"alter_column_type ShoppingCoupon couponId LONG",
-		"alter_column_type ShoppingCoupon userId LONG",
-
-		"alter_column_type ShoppingItem userId LONG",
-
-		"alter_column_type ShoppingOrder orderId LONG",
-		"alter_column_type ShoppingOrder userId LONG",
-
-		"alter table ShoppingOrderItem drop primary key",
-		"alter table ShoppingOrderItem add primary key (orderItemId)",
-		"alter_column_type ShoppingOrderItem orderId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeShopping.class);
 
