@@ -44,6 +44,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.GroupNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -107,9 +108,14 @@ public class UpgradeGroup extends UpgradeProcess {
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
 			classNameIdColumn, classPKContainers);
 
+		UpgradeColumn upgradeNameColumn = new GroupNameUpgradeColumnImpl(
+			upgradePKColumn, upgradeClassPKColumn);
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, upgradePKColumn,
-			classNameIdColumn, upgradeClassPKColumn);
+			classNameIdColumn, upgradeClassPKColumn, upgradeNameColumn);
+
+		upgradeTable.setCreateSQL(GroupImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -156,6 +162,14 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
 			upgradeLayoutPlidColumn);
 
+		String createSQL = LayoutImpl.TABLE_SQL_CREATE;
+
+		createSQL =
+			createSQL.substring(0, createSQL.length() - 1) +
+				",ownerId VARCHAR(75) null)";
+
+		upgradeTable.setCreateSQL(createSQL);
+
 		upgradeTable.updateTable();
 
 		ValueMapper layoutPlidMapper = upgradeLayoutPlidColumn.getValueMapper();
@@ -179,6 +193,14 @@ public class UpgradeGroup extends UpgradeProcess {
 			new PKUpgradeColumnImpl("layoutSetId", false),
 			upgradeGroupIdColumn);
 
+		createSQL = LayoutSetImpl.TABLE_SQL_CREATE;
+
+		createSQL =
+			createSQL.substring(0, createSQL.length() - 1) +
+				",ownerId VARCHAR(75) null)";
+
+		upgradeTable.setCreateSQL(createSQL);
+
 		upgradeTable.updateTable();
 
 		// OrgGroupPermission
@@ -186,6 +208,8 @@ public class UpgradeGroup extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgGroupPermissionImpl.TABLE_NAME,
 			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeGroupIdColumn);
+
+		upgradeTable.setCreateSQL(OrgGroupPermissionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -195,6 +219,8 @@ public class UpgradeGroup extends UpgradeProcess {
 			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
+		upgradeTable.setCreateSQL(OrgGroupRoleImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// Schema
@@ -203,16 +229,8 @@ public class UpgradeGroup extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Group_ classNameId LONG",
-		"alter_column_type Group_ classPK LONG",
-		"update Group_ set name = classPK where classPK > 0",
-
-		"alter table Layout drop primary key",
-		"alter table Layout add primary key (plid)",
 		"alter table Layout drop ownerId",
 
-		"alter table LayoutSet drop primary key",
-		"alter table LayoutSet add primary key (layoutSetId)",
 		"alter table LayoutSet drop ownerId"
 	};
 

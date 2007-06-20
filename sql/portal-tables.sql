@@ -456,7 +456,7 @@ create table LayoutSet (
 	colorSchemeId VARCHAR(75) null,
 	wapThemeId VARCHAR(75) null,
 	wapColorSchemeId VARCHAR(75) null,
-	css STRING null,
+	css VARCHAR(75) null,
 	pageCount INTEGER,
 	virtualHost VARCHAR(75) null
 );

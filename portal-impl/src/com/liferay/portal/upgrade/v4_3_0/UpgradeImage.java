@@ -104,21 +104,15 @@ public class UpgradeImage extends UpgradeProcess {
 			upgradePKColumn, upgradeTextColumn, upgradeTypeColumn,
 			upgradeHeightColumn, upgradeWidthColumn, upgradeSizeColumn);
 
+		upgradeTable.setCreateSQL(ImageImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper imageIdMapper = new DefaultPKMapper(
 			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setImageIdMapper(imageIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Image imageId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeImage.class);
 

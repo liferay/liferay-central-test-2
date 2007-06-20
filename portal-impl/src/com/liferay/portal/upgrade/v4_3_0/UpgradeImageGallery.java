@@ -84,6 +84,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(IGFolderImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
@@ -124,25 +126,14 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			upgradeFolderIdColumn, upgradeSmallImageIdColumn,
 			upgradeLargeImageIdColumn);
 
+		upgradeTable.setCreateSQL(IGImageImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper imageIdMapper = upgradeImageIdColumn.getValueMapper();
 
 		AvailableMappersUtil.setIGImageIdMapper(imageIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type IGFolder userId LONG",
-
-		"alter table IGImage drop primary key",
-		"alter table IGImage add primary key (imageId)",
-		"alter_column_type IGImage companyId LONG",
-		"alter_column_type IGImage userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeImageGallery.class);
 

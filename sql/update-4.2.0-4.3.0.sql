@@ -36,13 +36,11 @@ alter table DLFileVersion add fileVersionId LONG;
 
 alter_column_name EmailAddress className classNameId VARCHAR(75) null;
 
-alter_column_type Group_ groupId LONG;
 alter table Group_ add creatorUserId VARCHAR(75) null;
 alter_column_name Group_ className classNameId VARCHAR(75) null;
-alter_column_type Group_ parentGroupId LONG;
 alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN;
-update Group_ set parentGroupId = 0;
+update Group_ set parentGroupId = '0';
 update Group_ set liveGroupId = 0;
 update Group_ set friendlyURL = '' where classNameId = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
@@ -59,17 +57,8 @@ alter_column_type Groups_Roles roleId LONG;
 alter_column_type Groups_UserGroups groupId LONG;
 alter_column_type Groups_UserGroups userGroupId LONG;
 
-alter_column_type IGFolder folderId LONG;
-alter_column_type IGFolder groupId LONG;
-alter_column_type IGFolder parentFolderId LONG;
-
-alter_column_type IGImage imageId LONG;
-alter_column_type IGImage folderId LONG;
 alter table IGImage add smallImageId LONG;
 alter table IGImage add largeImageId LONG;
-alter table IGImage drop height;
-alter table IGImage drop width;
-alter table IGImage drop size_;
 
 alter table Image add height INTEGER;
 alter table Image add width INTEGER;
