@@ -55,17 +55,14 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userGroupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "parentUserGroupId", new Integer(Types.VARCHAR) },
+			{ "parentUserGroupId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId VARCHAR(75) null,name VARCHAR(75) null,description STRING null)";
+	public static String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table UserGroup";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserGroup"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PARENTUSERGROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserGroup.parentUserGroupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserGroup.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -106,19 +103,12 @@ public class UserGroupModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentUserGroupId() {
-		return GetterUtil.getString(_parentUserGroupId);
+	public long getParentUserGroupId() {
+		return _parentUserGroupId;
 	}
 
-	public void setParentUserGroupId(String parentUserGroupId) {
-		if (((parentUserGroupId == null) && (_parentUserGroupId != null)) ||
-				((parentUserGroupId != null) && (_parentUserGroupId == null)) ||
-				((parentUserGroupId != null) && (_parentUserGroupId != null) &&
-				!parentUserGroupId.equals(_parentUserGroupId))) {
-			if (!XSS_ALLOW_PARENTUSERGROUPID) {
-				parentUserGroupId = XSSUtil.strip(parentUserGroupId);
-			}
-
+	public void setParentUserGroupId(long parentUserGroupId) {
+		if (parentUserGroupId != _parentUserGroupId) {
 			_parentUserGroupId = parentUserGroupId;
 		}
 	}
@@ -213,7 +203,7 @@ public class UserGroupModelImpl extends BaseModelImpl {
 
 	private long _userGroupId;
 	private long _companyId;
-	private String _parentUserGroupId;
+	private long _parentUserGroupId;
 	private String _name;
 	private String _description;
 }

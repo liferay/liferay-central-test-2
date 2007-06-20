@@ -184,7 +184,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		"Permission_", "Phone", "PollsQuestion", "Portlet", "RatingsEntry",
 		"Resource_", "Role_", "ShoppingCart", "ShoppingCategory",
 		"ShoppingCoupon", "ShoppingItem", "ShoppingOrder", "Subscription",
-		"UserGroup", "User_", "Website", "WikiNode", "WikiPage"
+		"User_"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCompany.class);

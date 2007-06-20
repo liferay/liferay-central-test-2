@@ -481,7 +481,7 @@ update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
 alter table User_ drop passwordExpirationDate;
 
-alter_column_type UserGroup userGroupId LONG;
+update UserGroup SET parentUserGroupId = '0';
 
 create table UserGroupRole (
 	userId LONG not null,
@@ -522,16 +522,10 @@ create table UserTrackerPath (
 	pathDate DATE null
 );
 
-alter_column_type Website websiteId LONG;
 alter_column_name Website className classNameId VARCHAR(75) null;
-alter_column_type Website typeId INTEGER;
-
-alter_column_type WikiNode nodeId LONG;
-alter_column_type WikiNode groupId LONG;
 
 alter table WikiPage add pageId LONG;
 alter table WikiPage add resourcePrimKey LONG;
-alter_column_type WikiPage nodeId LONG;
 
 create table WikiPageResource (
 	resourcePrimKey LONG not null primary key,

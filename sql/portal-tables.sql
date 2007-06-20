@@ -1114,7 +1114,7 @@ create table User_ (
 create table UserGroup (
 	userGroupId LONG not null primary key,
 	companyId LONG,
-	parentUserGroupId VARCHAR(75) null,
+	parentUserGroupId LONG,
 	name VARCHAR(75) null,
 	description STRING null
 );

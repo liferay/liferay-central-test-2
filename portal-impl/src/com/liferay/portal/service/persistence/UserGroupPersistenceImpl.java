@@ -351,7 +351,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_P(long companyId, String parentUserGroupId)
+	public List findByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
 		Session session = null;
 
@@ -362,14 +362,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
+			query.append("parentUserGroupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("name ASC");
@@ -379,10 +372,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
+			q.setLong(queryPos++, parentUserGroupId);
 
 			return q.list();
 		}
@@ -394,12 +384,12 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByC_P(long companyId, String parentUserGroupId, int begin,
+	public List findByC_P(long companyId, long parentUserGroupId, int begin,
 		int end) throws SystemException {
 		return findByC_P(companyId, parentUserGroupId, begin, end, null);
 	}
 
-	public List findByC_P(long companyId, String parentUserGroupId, int begin,
+	public List findByC_P(long companyId, long parentUserGroupId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -410,14 +400,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
+			query.append("parentUserGroupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -434,10 +417,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
+			q.setLong(queryPos++, parentUserGroupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -449,7 +429,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public UserGroup findByC_P_First(long companyId, String parentUserGroupId,
+	public UserGroup findByC_P_First(long companyId, long parentUserGroupId,
 		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
 		List list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
 
@@ -470,7 +450,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public UserGroup findByC_P_Last(long companyId, String parentUserGroupId,
+	public UserGroup findByC_P_Last(long companyId, long parentUserGroupId,
 		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
 		int count = countByC_P(companyId, parentUserGroupId);
 		List list = findByC_P(companyId, parentUserGroupId, count - 1, count,
@@ -494,7 +474,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public UserGroup[] findByC_P_PrevAndNext(long userGroupId, long companyId,
-		String parentUserGroupId, OrderByComparator obc)
+		long parentUserGroupId, OrderByComparator obc)
 		throws NoSuchUserGroupException, SystemException {
 		UserGroup userGroup = findByPrimaryKey(userGroupId);
 		int count = countByC_P(companyId, parentUserGroupId);
@@ -507,14 +487,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
+			query.append("parentUserGroupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -531,10 +504,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
+			q.setLong(queryPos++, parentUserGroupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroup);
@@ -717,7 +687,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByC_P(long companyId, String parentUserGroupId)
+	public void removeByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
 		Iterator itr = findByC_P(companyId, parentUserGroupId).iterator();
 
@@ -779,7 +749,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByC_P(long companyId, String parentUserGroupId)
+	public int countByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
 		Session session = null;
 
@@ -791,14 +761,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
 			query.append("companyId = ?");
 			query.append(" AND ");
-
-			if (parentUserGroupId == null) {
-				query.append("parentUserGroupId IS NULL");
-			}
-			else {
-				query.append("parentUserGroupId = ?");
-			}
-
+			query.append("parentUserGroupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
@@ -806,10 +769,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
-
-			if (parentUserGroupId != null) {
-				q.setString(queryPos++, parentUserGroupId);
-			}
+			q.setLong(queryPos++, parentUserGroupId);
 
 			Iterator itr = q.list().iterator();
 

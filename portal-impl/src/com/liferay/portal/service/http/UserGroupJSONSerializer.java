@@ -53,15 +53,7 @@ public class UserGroupJSONSerializer {
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("userGroupId", model.getUserGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
-
-		String parentUserGroupId = model.getParentUserGroupId();
-
-		if (parentUserGroupId == null) {
-			jsonObj.put("parentUserGroupId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("parentUserGroupId", parentUserGroupId.toString());
-		}
+		jsonObj.put("parentUserGroupId", model.getParentUserGroupId());
 
 		String name = model.getName();
 

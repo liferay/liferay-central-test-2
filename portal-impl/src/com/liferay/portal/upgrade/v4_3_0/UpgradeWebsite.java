@@ -70,6 +70,10 @@ public class UpgradeWebsite extends UpgradeProcess {
 
 		// Website
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeUserIdColumn = new SwapUpgradeColumnImpl(
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
@@ -94,21 +98,13 @@ public class UpgradeWebsite extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("websiteId", false), upgradeUserIdColumn,
-			classNameIdColumn, upgradeClassPKColumn);
+			new PKUpgradeColumnImpl("websiteId", false), upgradeCompanyIdColumn,
+			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
+
+		upgradeTable.setCreateSQL(WebsiteImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Website userId LONG",
-		"alter_column_type Website classNameId LONG",
-		"alter_column_type Website classPK LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
 

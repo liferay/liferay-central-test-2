@@ -65,6 +65,10 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		// WikiNode
 
+		UpgradeColumn upgradeCompanyIdColumn = new SwapUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR),
+			AvailableMappersUtil.getCompanyIdMapper());
+
 		UpgradeColumn upgradeGroupIdColumn = new SwapUpgradeColumnImpl(
 			"groupId", AvailableMappersUtil.getGroupIdMapper());
 
@@ -77,7 +81,10 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
-			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
+			upgradePKColumn, upgradeGroupIdColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(WikiNodeImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -103,26 +110,17 @@ public class UpgradeWiki extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
 			upgradeNodeIdColumn, upgradeTitleColumn, upgradePageIdColumn,
-			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);
+			upgradePageResourcePrimKeyColumn, upgradeCompanyIdColumn,
+			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		ValueMapper pageIdMapper = upgradePageIdColumn.getValueMapper();
 
 		AvailableMappersUtil.setWikiPageIdMapper(pageIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type WikiNode userId LONG",
-
-		"alter table WikiPage drop primary key",
-		"alter table WikiPage add primary key (pageId)",
-		"alter_column_type WikiPage userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeWiki.class);
 

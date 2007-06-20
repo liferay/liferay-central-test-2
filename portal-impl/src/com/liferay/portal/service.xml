@@ -1126,7 +1126,7 @@
 
 		<!-- Other fields -->
 
-		<column name="parentUserGroupId" type="String" />
+		<column name="parentUserGroupId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 

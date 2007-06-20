@@ -69,18 +69,10 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 			new PKUpgradeColumnImpl("userIdMapperId", false),
 			upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(UserIdMapperImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table UserIdMapper drop primary key",
-		"alter table UserIdMapper add primary key (userIdMapperId)",
-		"alter_column_type UserIdMapper userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeUserIdMapper.class);
 

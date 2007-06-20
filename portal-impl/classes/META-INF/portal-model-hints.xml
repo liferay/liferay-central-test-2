@@ -453,7 +453,7 @@
 	<model name="com.liferay.portal.model.UserGroup">
 		<field name="userGroupId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="parentUserGroupId" type="String" />
+		<field name="parentUserGroupId" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
 		</field>

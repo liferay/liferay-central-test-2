@@ -188,20 +188,19 @@ public class UserGroupUtil {
 	}
 
 	public static java.util.List findByC_P(long companyId,
-		java.lang.String parentUserGroupId)
-		throws com.liferay.portal.SystemException {
+		long parentUserGroupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentUserGroupId);
 	}
 
 	public static java.util.List findByC_P(long companyId,
-		java.lang.String parentUserGroupId, int begin, int end)
+		long parentUserGroupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentUserGroupId, begin,
 			end);
 	}
 
 	public static java.util.List findByC_P(long companyId,
-		java.lang.String parentUserGroupId, int begin, int end,
+		long parentUserGroupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, parentUserGroupId, begin,
@@ -209,7 +208,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup findByC_P_First(
-		long companyId, java.lang.String parentUserGroupId,
+		long companyId, long parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -218,7 +217,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup findByC_P_Last(
-		long companyId, java.lang.String parentUserGroupId,
+		long companyId, long parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -226,7 +225,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup[] findByC_P_PrevAndNext(
-		long userGroupId, long companyId, java.lang.String parentUserGroupId,
+		long userGroupId, long companyId, long parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
@@ -281,8 +280,7 @@ public class UserGroupUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByC_P(long companyId,
-		java.lang.String parentUserGroupId)
+	public static void removeByC_P(long companyId, long parentUserGroupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_P(companyId, parentUserGroupId);
 	}
@@ -302,8 +300,7 @@ public class UserGroupUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByC_P(long companyId,
-		java.lang.String parentUserGroupId)
+	public static int countByC_P(long companyId, long parentUserGroupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_P(companyId, parentUserGroupId);
 	}

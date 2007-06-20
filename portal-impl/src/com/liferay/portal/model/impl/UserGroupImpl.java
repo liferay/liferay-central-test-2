@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 
-	public static final String DEFAULT_PARENT_USER_GROUP_ID = "-1";
+	public static final long DEFAULT_PARENT_USER_GROUP_ID = 0;
 
 	public UserGroupImpl() {
 	}
