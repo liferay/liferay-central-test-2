@@ -34,12 +34,15 @@ Role role = (Role)objArray[1];
 String redirect = (String)objArray[2];
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-	<portlet:param name="<%= Constants.CMD %>" value="deleteRole" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-</portlet:actionURL>
+<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+		<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+		<portlet:param name="<%= Constants.CMD %>" value="deleteRole" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+	</portlet:actionURL>
 
-<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
+	<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
+</c:if>
+	
