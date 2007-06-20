@@ -22,6 +22,8 @@
 
 package com.liferay.portal.comm;
 
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Validator;
 
@@ -76,6 +78,12 @@ public class CommLink implements MessageListener {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Receiving message " + obj);
+			}
+
+			if (obj instanceof MethodWrapper) {
+				MethodWrapper methodWrapper = (MethodWrapper)obj;
+
+				MethodInvoker.invoke(methodWrapper);
 			}
 
 			_history.add(obj);
