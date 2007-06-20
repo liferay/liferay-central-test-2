@@ -30,6 +30,7 @@ import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Validator;
 
@@ -163,6 +164,11 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public void setVirtualPath(String virtualPath) {
+		if (_warFile && Validator.isNull(virtualPath)) {
+			virtualPath = GetterUtil.getString(
+				PropsUtil.get(PropsUtil.THEME_VIRTUAL_PATH));
+		}
+
 		_virtualPath = virtualPath;
 	}
 

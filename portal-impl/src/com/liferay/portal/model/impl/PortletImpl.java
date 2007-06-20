@@ -354,6 +354,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param		virtualPath the virtual path of the portlet
 	 */
 	public void setVirtualPath(String virtualPath) {
+		if (_warFile && Validator.isNull(virtualPath)) {
+			virtualPath = GetterUtil.getString(
+				PropsUtil.get(PropsUtil.PORTLET_VIRTUAL_PATH));
+		}
+
 		_virtualPath = virtualPath;
 	}
 

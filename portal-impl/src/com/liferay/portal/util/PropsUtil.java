@@ -109,6 +109,14 @@ public class PropsUtil {
 
 	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
 
+	// Portlet
+
+	public static final String PORTLET_VIRTUAL_PATH = "portlet.virtual.path";
+
+	// Theme
+
+	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";
+
 	// Resource Actions
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
