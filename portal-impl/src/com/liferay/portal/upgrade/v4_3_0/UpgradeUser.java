@@ -97,6 +97,8 @@ public class UpgradeUser extends UpgradeProcess {
 			AccountImpl.TABLE_NAME, AccountImpl.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(AccountImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// Contact

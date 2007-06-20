@@ -43,6 +43,10 @@ import java.util.List;
 public class DefaultUpgradeTableImpl
 	extends BaseUpgradeTableImpl implements UpgradeTable {
 
+	public DefaultUpgradeTableImpl(String tableName, Object[][] columns) {
+		this(tableName, columns, null);
+	}
+
 	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
 								   UpgradeColumn upgradeColumn1) {
 

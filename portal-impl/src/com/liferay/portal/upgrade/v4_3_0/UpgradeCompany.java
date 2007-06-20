@@ -26,8 +26,11 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
@@ -76,12 +79,17 @@ public class UpgradeCompany extends UpgradeProcess {
 			DLLocalServiceUtil.checkRootNode(companyId);
 		}
 
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			CompanyImpl.TABLE_NAME, CompanyImpl.TABLE_COLUMNS);
+
+		upgradeTable.setCreateSQL(CompanyImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
+
 		runSQL(
 			"update PortletPreferences set ownerId = '0', ownerType = " +
 				PortletKeys.PREFS_OWNER_TYPE_COMPANY +
 					" where ownerId = 'COMPANY.LIFERAY_PORTAL'");
-
-		runSQL("alter_column_type Account_ accountId LONG");
 	}
 
 	protected String getUpdateSQL(
@@ -124,8 +132,6 @@ public class UpgradeCompany extends UpgradeProcess {
 		runSQL(
 			"update Company set accountId = " + accountId + ", logoId = " +
 				logoId.longValue() + " where webId = '" + webId + "'");
-
-		runSQL("alter_column_type Company companyId LONG");
 
 		runSQL(
 			"update Contact_ set companyId = '" + companyId +
