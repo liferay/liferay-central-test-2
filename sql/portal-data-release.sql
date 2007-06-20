@@ -1,1 +1,1 @@
-insert into Release_ (releaseId, createDate, modifiedDate, buildNumber, verified) values (1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4216, TRUE);
+insert into Release_ (releaseId, createDate, modifiedDate, buildNumber, verified) values (1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4220, TRUE);
