@@ -97,7 +97,7 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 
 <%
     i++;
-        
+
     fieldName = "field" + i;
     fieldLabel = prefs.getValue("fieldLabel" + i, "");
     fieldValue = ParamUtil.getString(request, fieldName);
