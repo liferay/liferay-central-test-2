@@ -330,20 +330,45 @@ StarRating.implement({
 });
 
 var ToolTip = {
+	container: null,
 	show: function(event, obj, text) {
-		var position = jQuery(obj).offset();
+		var instance = this;
+
+		var container = instance.container;
+		var currentItem = jQuery(obj);
+		var position = currentItem.offset();
 		
-		jQuery("body").append(
-			"<div class='portal-tool-tip' " + 
-				"style='position:absolute; cursor:default; top:" + (position.top - 15) + "px; left:" + (position.left + 20) + "px'>" +
-					text +
-			"</div>"
+		if (!container) {
+			container = jQuery('<div class="portal-tool-tip"></div>').appendTo('body');
+			
+			instance.container = container;
+		}
+
+		container.html(text);
+		
+		container.show();
+		
+		var width = container.width();
+		
+		container.css(
+			{
+				cursor: 'default',
+				left: (position.left - (width + 5)) + 'px',
+				position: 'absolute',
+				top: (position.top - 15) +'px'
+			}
 		);
 
-		jQuery(obj).one("mouseout", ToolTip.hide);
+		currentItem.one('mouseout',
+			function() {
+				instance.hide();	
+			}
+		);
 	},
 
 	hide: function(event) {
-		jQuery(".portal-tool-tip").remove();
+		var instance = this;
+		
+		instance.container.hide();
 	}
 };
