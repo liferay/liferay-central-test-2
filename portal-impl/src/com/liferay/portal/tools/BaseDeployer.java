@@ -239,6 +239,7 @@ public class BaseDeployer {
 
 					if ((wars.size() > 0) &&
 						(!wars.contains(srcFile.getName()))) {
+
 						deploy = false;
 					}
 				}
