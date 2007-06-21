@@ -37,6 +37,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/journal/select_document_library");
 portletURL.setParameter("folderId", String.valueOf(folderId));
+portletURL.setParameter("groupId", String.valueOf(groupId));
 %>
 
 <form method="post" name="<portlet:namespace />">
@@ -86,6 +87,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setParameter("struts_action", "/journal/select_document_library");
 	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+	rowURL.setParameter("groupId", String.valueOf(groupId));
 
 	// Name
 
