@@ -24,14 +24,39 @@ package com.liferay.portlet.blogs.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.util.Html;
+import com.liferay.util.RSSUtil;
+import com.liferay.util.StringUtil;
+
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.FeedException;
+
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * <a href="BlogsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -86,6 +111,36 @@ public class BlogsEntryServiceImpl
 		BlogsEntryLocalServiceUtil.deleteEntry(entryId);
 	}
 
+	public String getCategoryBlogsRSS(
+			long categoryId, int max, String type, double version,
+			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(
+			categoryId);
+
+		String name = category.getName();
+		String description = category.getDescription();
+
+		List blogsEntries = BlogsEntryLocalServiceUtil.getEntries(
+			categoryId, 0, max);
+
+		Iterator itr = blogsEntries.iterator();
+
+		while (itr.hasNext()) {
+			BlogsEntry entry = (BlogsEntry)itr.next();
+
+			if (!BlogsEntryPermission.contains(
+					getPermissionChecker(), entry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return exportToRSS(
+			name, description, type, version, feedURL, entryURL, blogsEntries);
+	}
+
 	public BlogsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -93,6 +148,43 @@ public class BlogsEntryServiceImpl
 			getPermissionChecker(), entryId, ActionKeys.VIEW);
 
 		return BlogsEntryLocalServiceUtil.getEntry(entryId);
+	}
+
+	public String getGroupEntriesRSS(
+			long groupId, int max, String type, double version,
+			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		Group group = GroupUtil.findByPrimaryKey(groupId);
+
+		String name = group.getName();
+
+		if (group.isUser()) {
+			long userId = group.getClassPK();
+
+			User user = UserUtil.findByPrimaryKey(userId);
+
+			name = user.getFullName();
+		}
+
+		List blogsEntries = BlogsEntryLocalServiceUtil.getGroupEntries(
+			groupId, 0, max);
+
+		Iterator itr = blogsEntries.iterator();
+
+		while (itr.hasNext()) {
+			BlogsEntry entry = (BlogsEntry)itr.next();
+
+			if (!BlogsEntryPermission.contains(
+					getPermissionChecker(), entry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return exportToRSS(
+			name, null, type, version, feedURL, entryURL, blogsEntries);
+
 	}
 
 	public BlogsEntry updateEntry(
@@ -108,6 +200,63 @@ public class BlogsEntryServiceImpl
 			getUserId(), entryId, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, tagsEntries);
+	}
+
+	protected String exportToRSS(
+			String name, String description, String type, double version,
+			String feedURL, String entryURL, List blogsEntries)
+		throws SystemException {
+
+		SyndFeed syndFeed = new SyndFeedImpl();
+
+		syndFeed.setFeedType(type + "_" + version);
+
+		syndFeed.setTitle(name);
+		syndFeed.setLink(feedURL);
+
+		if (description == null) {
+			description = name;
+		}
+		syndFeed.setDescription(description);
+
+		List entries = new ArrayList();
+
+		syndFeed.setEntries(entries);
+
+		Iterator itr = blogsEntries.iterator();
+
+		while (itr.hasNext()) {
+			BlogsEntry entry = (BlogsEntry)itr.next();
+
+			String firstLine = StringUtil.shorten(
+				Html.stripHtml(entry.getContent()), 80, StringPool.BLANK);
+
+			SyndEntry syndEntry = new SyndEntryImpl();
+
+			syndEntry.setAuthor(entry.getUserName());
+			syndEntry.setTitle(entry.getTitle());
+			syndEntry.setLink(entryURL + "&entryId=" + entry.getEntryId());
+			syndEntry.setPublishedDate(entry.getCreateDate());
+
+			SyndContent syndContent = new SyndContentImpl();
+
+			syndContent.setType(Constants.TEXT_PLAIN);
+			syndContent.setValue(firstLine);
+
+			syndEntry.setDescription(syndContent);
+
+			entries.add(syndEntry);
+		}
+
+		try {
+			return RSSUtil.export(syndFeed);
+		}
+		catch (FeedException fe) {
+			throw new SystemException(fe);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 }

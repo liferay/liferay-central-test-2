@@ -51,6 +51,8 @@ BlogsCategory category = (BlogsCategory)row.getObject();
 	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
+<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/blogs/rss?p_l_id=" + plid + "&categoryId=" + category.getCategoryId() %>' target="_blank" />
+
 <c:if test="<%= BlogsCategoryPermission.contains(permissionChecker, category, ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/blogs/edit_category" />

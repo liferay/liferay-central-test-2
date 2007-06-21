@@ -105,12 +105,34 @@ public class BlogsEntryServiceJSON {
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
 
+	public static java.lang.String getCategoryBlogsRSS(long categoryId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.lang.String returnValue = BlogsEntryServiceUtil.getCategoryBlogsRSS(categoryId,
+				max, type, version, feedURL, entryURL);
+
+		return returnValue;
+	}
+
 	public static JSONObject getEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.lang.String returnValue = BlogsEntryServiceUtil.getGroupEntriesRSS(groupId,
+				max, type, version, feedURL, entryURL);
+
+		return returnValue;
 	}
 
 	public static JSONObject updateEntry(long entryId, long categoryId,

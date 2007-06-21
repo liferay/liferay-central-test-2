@@ -22,10 +22,11 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.dao.search.SearchContainer;
@@ -71,17 +72,38 @@ public class RSSAction extends Action {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
 
-		String url =
+		String entryURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-				"/blogs/find_entry?p_l_id=" + plid;
+				"/blogs/find_entry?p_l_id=" + plid + "&categoryId=" +
+					categoryId;
 
-		String rss = BlogsEntryLocalServiceUtil.getGroupEntriesRSS(
-			groupId, 0, SearchContainer.DEFAULT_DELTA, type, version, url);
+		String rss = StringPool.BLANK;
+
+		if ((categoryId > 0)) {
+			String feedURL =
+				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+					"/blogs/find_category?p_l_id=" + plid +
+						"&categoryId=" + categoryId;
+
+			rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
+				categoryId, SearchContainer.DEFAULT_DELTA, type, version,
+				feedURL, entryURL);
+		}
+		else {
+			String feedURL =
+				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+					"/blogs/find_entry?p_l_id=" + plid;
+
+			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
+				groupId, SearchContainer.DEFAULT_DELTA, type, version,
+				feedURL, entryURL);
+		}
 
 		return rss.getBytes();
 	}

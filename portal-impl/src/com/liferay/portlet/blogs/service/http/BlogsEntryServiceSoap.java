@@ -131,12 +131,43 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
+	public static java.lang.String getCategoryBlogsRSS(long categoryId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = BlogsEntryServiceUtil.getCategoryBlogsRSS(categoryId,
+					max, type, version, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap getEntry(
 		long entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL) throws RemoteException {
+		try {
+			java.lang.String returnValue = BlogsEntryServiceUtil.getGroupEntriesRSS(groupId,
+					max, type, version, feedURL, entryURL);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

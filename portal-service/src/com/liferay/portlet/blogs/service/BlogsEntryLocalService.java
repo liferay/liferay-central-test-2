@@ -143,11 +143,6 @@ public interface BlogsEntryLocalService {
 	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.lang.String getGroupEntriesRSS(long groupId, int begin,
-		int end, java.lang.String type, double version, java.lang.String url)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

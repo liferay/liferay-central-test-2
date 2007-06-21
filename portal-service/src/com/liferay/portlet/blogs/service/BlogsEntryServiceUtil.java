@@ -89,6 +89,17 @@ public class BlogsEntryServiceUtil {
 		blogsEntryService.deleteEntry(entryId);
 	}
 
+	public static java.lang.String getCategoryBlogsRSS(long categoryId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+
+		return blogsEntryService.getCategoryBlogsRSS(categoryId, max, type,
+			version, feedURL, entryURL);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException, 
@@ -96,6 +107,17 @@ public class BlogsEntryServiceUtil {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.getEntry(entryId);
+	}
+
+	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+
+		return blogsEntryService.getGroupEntriesRSS(groupId, max, type,
+			version, feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(

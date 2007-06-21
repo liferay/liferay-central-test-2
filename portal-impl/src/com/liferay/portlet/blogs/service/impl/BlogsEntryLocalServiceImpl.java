@@ -26,16 +26,12 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -52,23 +48,11 @@ import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Html;
-import com.liferay.util.RSSUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
-import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
-
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -318,71 +302,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return BlogsEntryUtil.countByGroupId(groupId);
-	}
-
-	public String getGroupEntriesRSS(
-			long groupId, int begin, int end, String type, double version,
-			String url)
-		throws PortalException, SystemException {
-
-		Group group = GroupUtil.findByPrimaryKey(groupId);
-
-		String name = group.getName();
-
-		if (group.isUser()) {
-			long userId = group.getClassPK();
-
-			User user = UserUtil.findByPrimaryKey(userId);
-
-			name = user.getFullName();
-		}
-
-		SyndFeed syndFeed = new SyndFeedImpl();
-
-		syndFeed.setFeedType(type + "_" + version);
-
-		syndFeed.setTitle(name);
-		syndFeed.setLink(url);
-		syndFeed.setDescription(name);
-
-		List entries = new ArrayList();
-
-		syndFeed.setEntries(entries);
-
-		Iterator itr = BlogsEntryUtil.findByGroupId(
-			groupId, begin, end).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
-
-			String firstLine = StringUtil.shorten(
-				Html.stripHtml(entry.getContent()), 80, StringPool.BLANK);
-
-			SyndEntry syndEntry = new SyndEntryImpl();
-
-			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(url + "&entryId=" + entry.getEntryId());
-			syndEntry.setPublishedDate(entry.getCreateDate());
-
-			SyndContent syndContent = new SyndContentImpl();
-
-			syndContent.setType(Constants.TEXT_PLAIN);
-			syndContent.setValue(firstLine);
-
-			syndEntry.setDescription(syndContent);
-
-			entries.add(syndEntry);
-		}
-
-		try {
-			return RSSUtil.export(syndFeed);
-		}
-		catch (FeedException fe) {
-			throw new SystemException(fe);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
