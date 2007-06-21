@@ -817,7 +817,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLCreateAccount(createAccountURL);
 
-		themeDisplay.setURLHome(PortalUtil.getPortalURL(req));
+		themeDisplay.setURLHome(PortalUtil.getPortalURL(req) + contextPath);
 
 		if (layout != null) {
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
