@@ -237,7 +237,7 @@ public abstract class DBUtil {
 					stmt.executeUpdate(sql);
 				}
 				catch (SQLException sqle) {
-					_log.error("Error to running " + sql);
+					_log.error("Error running " + sql);
 
 					throw sqle;
 				}

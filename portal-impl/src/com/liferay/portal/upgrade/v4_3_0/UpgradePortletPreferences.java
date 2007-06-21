@@ -142,7 +142,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table PortletPreferences drop layoutId"
+		"alter table PortletPreferences drop column layoutId"
 	};
 
 	private static Log _log =

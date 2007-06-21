@@ -229,9 +229,9 @@ public class UpgradeGroup extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table Layout drop ownerId",
+		"alter table Layout drop column ownerId",
 
-		"alter table LayoutSet drop ownerId"
+		"alter table LayoutSet drop column ownerId"
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeGroup.class);
