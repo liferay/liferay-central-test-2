@@ -145,21 +145,13 @@ update MBMessageFlag set flag = '1';
 
 alter table MBStatsUser add statsUserId LONG;
 
-alter_column_type Organization_ organizationId LONG;
-alter_column_type Organization_ parentOrganizationId LONG;
-alter_column_type Organization_ statusId INTEGER;
-
-alter_column_type OrgGroupPermission organizationId LONG;
-alter_column_type OrgGroupPermission groupId LONG;
-alter_column_type OrgGroupPermission permissionId LONG;
-
-alter_column_type OrgGroupRole organizationId LONG;
-alter_column_type OrgGroupRole groupId LONG;
-alter_column_type OrgGroupRole roleId LONG;
-
-alter_column_type OrgLabor orgLaborId LONG;
-alter_column_type OrgLabor organizationId LONG;
-alter_column_type OrgLabor typeId INTEGER;
+drop table OrgGroupRole;
+create table OrgGroupRole (
+	organizationId LONG not null,
+	groupId LONG not null,
+	roleId LONG not null,
+	primary key (organizationId, groupId, roleId)
+);
 
 create table PasswordPolicy (
 	passwordPolicyId LONG not null primary key,
@@ -197,14 +189,7 @@ create table PasswordPolicyRel (
 	classPK LONG
 );
 
-alter_column_type PasswordTracker passwordTrackerId LONG;
-
-alter_column_type Permission_ permissionId LONG;
-alter_column_type Permission_ resourceId LONG;
-
-alter_column_type Phone phoneId LONG;
 alter_column_name Phone className classNameId VARCHAR(75) null;
-alter_column_type Phone typeId INTEGER;
 
 create table PluginSetting (
 	pluginSettingId LONG not null primary key,

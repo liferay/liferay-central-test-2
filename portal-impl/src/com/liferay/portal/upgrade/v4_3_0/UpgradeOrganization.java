@@ -69,6 +69,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
 			pkUpgradeColumn);
 
+		upgradeTable.setCreateSQL(OrganizationImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper organizationIdMapper = new DefaultPKMapper(
@@ -95,12 +97,20 @@ public class UpgradeOrganization extends UpgradeProcess {
 			OrgGroupPermissionImpl.TABLE_NAME,
 			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeOrganizationIdColumn);
 
+		upgradeTable.setCreateSQL(OrgGroupPermissionImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
+
 		// OrgLabor
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("orgLaborId", false),
 			upgradeOrganizationIdColumn);
+
+		upgradeTable.setCreateSQL(OrgLaborImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);

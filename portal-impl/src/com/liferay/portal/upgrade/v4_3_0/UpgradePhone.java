@@ -97,18 +97,10 @@ public class UpgradePhone extends UpgradeProcess {
 			new PKUpgradeColumnImpl("phoneId", false), upgradeUserIdColumn,
 			classNameIdColumn, upgradeClassPKColumn);
 
+		upgradeTable.setCreateSQL(PhoneImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Phone userId LONG",
-		"alter_column_type Phone classNameId LONG",
-		"alter_column_type Phone classPK LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradePhone.class);
 
