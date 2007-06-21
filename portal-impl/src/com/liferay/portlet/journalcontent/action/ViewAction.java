@@ -79,6 +79,7 @@ public class ViewAction extends PortletAction {
 		}
 		else {
 			req.removeAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
+			req.setAttribute(WebKeys.PORTLET_DECORATE_OVERRIDE, Boolean.FALSE);
 		}
 
 		return mapping.findForward("portlet.journal_content.view");

@@ -45,22 +45,24 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 
 	</c:when>
 	<c:otherwise>
-		<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
-
-		<br /><br />
-
-		<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
-
-		<br />
-
-		<c:if test="<%= Validator.isNotNull(articleId) %>">
+		<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
+			<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
+	
+			<br /><br />
+	
+			<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
+	
 			<br />
-
-			<span class="portlet-msg-error">
-			<%= LanguageUtil.format(pageContext, "x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleId) %>
-			</span>
-
-			<br />
+	
+			<c:if test="<%= Validator.isNotNull(articleId) %>">
+				<br />
+	
+				<span class="portlet-msg-error">
+				<%= LanguageUtil.format(pageContext, "x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleId) %>
+				</span>
+	
+				<br />
+			</c:if>
 		</c:if>
 	</c:otherwise>
 </c:choose>
