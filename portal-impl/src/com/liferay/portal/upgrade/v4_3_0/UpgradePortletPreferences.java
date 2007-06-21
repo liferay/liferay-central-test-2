@@ -126,6 +126,14 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			upgradePlidColumn, upgradePortletIdColumn,
 			upgradePreferencesColumn);
 
+		String createSQL = PortletPreferencesImpl.TABLE_SQL_CREATE;
+
+		createSQL =
+			createSQL.substring(0, createSQL.length() - 1) +
+				",layoutId VARCHAR(75) null)";
+
+		upgradeTable.setCreateSQL(createSQL);
+
 		upgradeTable.updateTable();
 
 		// Schema
@@ -134,8 +142,6 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	}
 
 	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table PortletPreferences add primary key (portletPreferencesId)",
-		"alter_column_type PortletPreferences ownerId LONG",
 		"alter table PortletPreferences drop layoutId"
 	};
 

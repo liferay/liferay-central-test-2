@@ -311,6 +311,15 @@ public class UpgradeResource extends UpgradeProcess {
 			ResourceImpl.TABLE_NAME, resourceColumns, companyIdColumn,
 			nameColumn, scopeColumn, codeIdColumn, primKeyColumn);
 
+		String createSQL = ResourceImpl.TABLE_SQL_CREATE;
+
+		createSQL =
+			createSQL.substring(0, createSQL.length() - 1) +
+				",companyId VARCHAR(75) null, name VARCHAR(75) null, " +
+					"scope VARCHAR(75) null)";
+
+		upgradeTable.setCreateSQL(createSQL);
+
 		upgradeTable.updateTable();
 
 		// Schema

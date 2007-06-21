@@ -3,9 +3,6 @@ update Account_ set legalName = 'Liferay, Inc.' where legalName = 'Liferay, LLC'
 
 alter_column_name Address className classNameId VARCHAR(75) null;
 
-alter_column_type CalEvent eventId LONG;
-alter_column_type CalEvent groupId LONG;
-
 create table ClassName_ (
 	classNameId LONG not null primary key,
 	value VARCHAR(75) null
@@ -20,11 +17,6 @@ update Company set webId = companyId;
 update Contact_ set parentContactId = '0';
 
 update Country set countryId = '51' where countryId = '51`';
-alter_column_type Country countryId LONG;
-
-alter_column_type CyrusUser userId LONG;
-
-alter_column_type CyrusVirtual userId LONG;
 
 drop table DataTracker;
 
@@ -211,7 +203,6 @@ alter table PortletPreferences add portletPreferencesId LONG;
 alter table PortletPreferences add ownerType INTEGER;
 alter table PortletPreferences add plid LONG;
 update PortletPreferences set plid = 0;
-alter table PortletPreferences drop primary key;
 
 alter_column_name RatingsEntry className classNameId VARCHAR(75) null;
 
@@ -219,7 +210,6 @@ alter_column_name RatingsStats className classNameId VARCHAR(75) null;
 
 alter table Release_ add verified BOOLEAN;
 
-alter_column_type Resource_ resourceId LONG;
 alter table Resource_ add codeId LONG;
 alter table Resource_ drop typeId;
 
@@ -379,7 +369,6 @@ create table TagsSource (
 );
 
 alter table User_ add defaultUser BOOLEAN;
-alter_column_type User_ contactId LONG;
 alter table User_ add passwordModifiedDate DATE null;
 alter table User_ add graceLoginCount INTEGER;
 alter table User_ add screenName VARCHAR(75) null;
@@ -389,7 +378,6 @@ alter table User_ add lockout BOOLEAN;
 alter table User_ add lockoutDate DATE null;
 update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
-alter table User_ drop passwordExpirationDate;
 
 update UserGroup SET parentUserGroupId = '0';
 
