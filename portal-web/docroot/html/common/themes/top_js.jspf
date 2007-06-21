@@ -167,30 +167,32 @@
 		</c:if>
 	</c:if>
 
-	<%
-	List portletIds = layoutTypePortlet.getPortletIds();
-	%>
+    <c:if test="<%= (layoutTypePortlet != null) %>">
+        <%
+        List portletIds = layoutTypePortlet.getPortletIds();
+        %>
 
-	<c:choose>
-		<c:when test="<%= portletIds.size() > 0 && !layoutTypePortlet.hasStateMax() %>">
-			Liferay.Portlet.list = {<%
-				for (int i = 0; i < portletIds.size(); i++) {
-					out.print("\"" + portletIds.get(i) + "\":1");
+        <c:choose>
+            <c:when test="<%= portletIds.size() > 0 && !layoutTypePortlet.hasStateMax() %>">
+                Liferay.Portlet.list = {<%
+                    for (int i = 0; i < portletIds.size(); i++) {
+                        out.print("\"" + portletIds.get(i) + "\":1");
 
-					if (i < portletIds.size() - 1) {
-						out.print(",");
-					}
-				}
-			%>};
-		</c:when>
-		<c:otherwise>
-			_$J(document).ready(
-				function() {
-						Liferay.Portlet.processLast();
-				}
-			);
-		</c:otherwise>
-	</c:choose>
+                        if (i < portletIds.size() - 1) {
+                            out.print(",");
+                        }
+                    }
+                %>};
+            </c:when>
+            <c:otherwise>
+                _$J(document).ready(
+                    function() {
+                            Liferay.Portlet.processLast();
+                    }
+                );
+            </c:otherwise>
+        </c:choose>
+	</c:if>
 
 	<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 		jQuery(document).ready(
