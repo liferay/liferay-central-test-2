@@ -83,15 +83,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 		ValueMapper eventIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setCalEventIdMapper(eventIdMapper);
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type CalEvent userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
 

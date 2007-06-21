@@ -12,6 +12,9 @@ alter table Company add accountId LONG;
 alter table Company add webId VARCHAR(75) null;
 alter table Company add virtualHost VARCHAR(75) null;
 alter table Company add logoId LONG;
+
+COMMIT_TRANSACTION;
+
 update Company set webId = companyId;
 
 update Contact_ set parentContactId = '0';
@@ -32,6 +35,9 @@ alter table Group_ add creatorUserId VARCHAR(75) null;
 alter_column_name Group_ className classNameId VARCHAR(75) null;
 alter table Group_ add liveGroupId LONG;
 alter table Group_ add active_ BOOLEAN;
+
+COMMIT_TRANSACTION;
+
 update Group_ set parentGroupId = '0';
 update Group_ set liveGroupId = 0;
 update Group_ set friendlyURL = '' where classNameId = 'com.liferay.portal.model.User';
@@ -46,6 +52,9 @@ alter table Image add size_ INTEGER;
 
 alter table JournalArticle add id_ VARCHAR(75) null;
 alter table JournalArticle add resourcePrimKey LONG;
+
+COMMIT_TRANSACTION;
+
 update JournalArticle set id_ = articleId;
 
 create table JournalArticleImage (
@@ -76,10 +85,16 @@ create table JournalContentSearch (
 );
 
 alter table JournalStructure add id_ VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
 update JournalStructure set id_ = structureId;
 
 alter table JournalTemplate add id_ VARCHAR(75) null;
 alter table JournalTemplate add smallImageId LONG;
+
+COMMIT_TRANSACTION;
+
 update JournalTemplate set id_ = templateId;
 
 alter table Layout add plid LONG;
@@ -98,6 +113,9 @@ alter table LayoutSet add logoId LONG;
 alter table LayoutSet add wapThemeId VARCHAR(75) null;
 alter table LayoutSet add wapColorSchemeId VARCHAR(75) null;
 alter table LayoutSet add css VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
 update LayoutSet set logo = FALSE;
 
 create table MBBan (
@@ -181,6 +199,9 @@ create table PluginSetting (
 );
 
 alter table PollsChoice add name VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
 update PollsChoice set name = choiceId;
 
 alter table PollsVote add voteId LONG;
@@ -190,6 +211,9 @@ alter table Portlet add id_ LONG;
 alter table PortletPreferences add portletPreferencesId LONG;
 alter table PortletPreferences add ownerType INTEGER;
 alter table PortletPreferences add plid LONG;
+
+COMMIT_TRANSACTION;
+
 update PortletPreferences set plid = 0;
 
 alter_column_name RatingsEntry className classNameId VARCHAR(75) null;
@@ -199,7 +223,6 @@ alter_column_name RatingsStats className classNameId VARCHAR(75) null;
 alter table Release_ add verified BOOLEAN;
 
 alter table Resource_ add codeId LONG;
-alter table Resource_ drop typeId;
 
 create table ResourceCode (
 	codeId LONG not null primary key,
@@ -210,6 +233,9 @@ create table ResourceCode (
 
 alter_column_name Role_ className classNameId VARCHAR(75) null;
 alter table Role_ add type_ INTEGER;
+
+COMMIT_TRANSACTION;
+
 update Role_ SET classNameId = '0';
 update Role_ SET classPK = '0';
 update Role_ SET type_ = 1;
@@ -284,6 +310,9 @@ create table SCProductVersion (
 alter_column_name ShoppingCart couponIds couponCodes VARCHAR(75) null;
 
 alter table ShoppingCoupon add code_ VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
 update ShoppingCoupon set code_ = couponId;
 
 alter table ShoppingItem add smallImageId LONG;
@@ -292,6 +321,9 @@ alter table ShoppingItem add largeImageId LONG;
 
 alter table ShoppingOrder add number_ VARCHAR(75) null;
 alter_column_name ShoppingOrder couponIds couponCodes VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
 update ShoppingOrder set number_ = orderId;
 
 alter table ShoppingOrderItem add orderItemId LONG;
@@ -361,6 +393,9 @@ alter table User_ add portraitId LONG;
 alter table User_ add lastFailedLoginDate DATE null;
 alter table User_ add lockout BOOLEAN;
 alter table User_ add lockoutDate DATE null;
+
+COMMIT_TRANSACTION;
+
 update User_ set defaultUser = FALSE;
 update User_ set screenName = userId;
 

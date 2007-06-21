@@ -279,7 +279,16 @@ public abstract class BaseUpgradeTableImpl {
 		}
 
 		if (userType != null) {
-			value = userType.nullSafeGet(rs, new String[] {name}, null);
+			try {
+				value = userType.nullSafeGet(rs, new String[] {name}, null);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unable to nullSafeGet " + name + " with " +
+						userType.getClass().getName());
+
+				throw e;
+			}
 		}
 
 		return value;

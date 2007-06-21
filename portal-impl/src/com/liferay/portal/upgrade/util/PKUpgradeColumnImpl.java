@@ -44,6 +44,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		super(name, oldColumnType);
 
+		_newColumnType = new Integer(Types.BIGINT);
 		_trackValues = trackValues;
 
 		if (_trackValues) {
@@ -52,7 +53,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Integer getNewColumnType(Integer defaultType) {
-		return new Integer(Types.BIGINT);
+		return _newColumnType;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -73,6 +74,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _valueMapper;
 	}
 
+	private Integer _newColumnType;
 	private boolean _trackValues;
 	private ValueMapper _valueMapper;
 

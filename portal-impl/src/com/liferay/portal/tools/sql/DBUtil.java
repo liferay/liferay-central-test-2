@@ -233,7 +233,14 @@ public abstract class DBUtil {
 					_log.debug(sql);
 				}
 
-				stmt.executeUpdate(sql);
+				try {
+					stmt.executeUpdate(sql);
+				}
+				catch (SQLException sqle) {
+					_log.error("Error to running " + sql);
+
+					throw sqle;
+				}
 			}
 		}
 		finally {
@@ -286,7 +293,14 @@ public abstract class DBUtil {
 					sm = new StringMaker();
 
 					try {
-						runSQL(sql);
+						if (!sql.equals("COMMIT_TRANSACTION;")) {
+							runSQL(sql);
+						}
+						else {
+							if (_log.isDebugEnabled()) {
+								_log.debug("Skip commit sql");
+							}
+						}
 					}
 					catch (IOException ioe) {
 						if (failOnError) {

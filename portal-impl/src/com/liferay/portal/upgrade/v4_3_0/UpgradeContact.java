@@ -95,14 +95,7 @@ public class UpgradeContact extends UpgradeProcess {
 		upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String _UPGRADE_SCHEMA =
-		"alter_column_type Contact_ contactId LONG";
 
 	private static Log _log = LogFactory.getLog(UpgradeContact.class);
 

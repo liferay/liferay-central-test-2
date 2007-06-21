@@ -22,6 +22,8 @@
 
 package com.liferay.util.dao.hibernate;
 
+import com.liferay.util.GetterUtil;
+
 import java.io.Serializable;
 
 import java.sql.PreparedStatement;
@@ -80,7 +82,24 @@ public class LongType implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
 		throws HibernateException, SQLException {
 
-		Long value = (Long)Hibernate.LONG.nullSafeGet(rs, names[0]);
+		Object value = null;
+
+		try {
+			value = Hibernate.LONG.nullSafeGet(rs, names[0]);
+		}
+		catch (SQLException sqle1) {
+
+			// Some JDBC drivers do not know how to convert a VARCHAR column
+			// with a blank entry into a BIGINT
+
+			try {
+				value = new Long(GetterUtil.getLong(
+					(String)Hibernate.STRING.nullSafeGet(rs, names[0])));
+			}
+			catch (SQLException sqle2) {
+				throw sqle1;
+			}
+		}
 
 		if (value == null) {
 			return new Long(DEFAULT_VALUE);
