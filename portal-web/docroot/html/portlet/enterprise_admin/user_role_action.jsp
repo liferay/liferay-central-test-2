@@ -45,4 +45,3 @@ String redirect = (String)objArray[2];
 
 	<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
 </c:if>
-	

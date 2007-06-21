@@ -331,25 +331,26 @@ StarRating.implement({
 
 var ToolTip = {
 	container: null,
+
 	show: function(event, obj, text) {
 		var instance = this;
 
 		var container = instance.container;
 		var currentItem = jQuery(obj);
 		var position = currentItem.offset();
-		
+
 		if (!container) {
 			container = jQuery('<div class="portal-tool-tip"></div>').appendTo('body');
-			
+
 			instance.container = container;
 		}
 
 		container.html(text);
-		
+
 		container.show();
-		
+
 		var width = container.width();
-		
+
 		container.css(
 			{
 				cursor: 'default',
@@ -361,14 +362,14 @@ var ToolTip = {
 
 		currentItem.one('mouseout',
 			function() {
-				instance.hide();	
+				instance.hide();
 			}
 		);
 	},
 
 	hide: function(event) {
 		var instance = this;
-		
+
 		instance.container.hide();
 	}
 };
