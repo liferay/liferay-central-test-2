@@ -143,7 +143,7 @@
 
 			if (resizeBox) {
 				AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout" +
-					"?plid=" + themeDisplay.getPlid() +
+					"?p_l_id=" + themeDisplay.getPlid() +
 					"&height=" + resizeBox.style.height +
 					"&width=" + portlet.style.width +
 					"&top=" + portlet.style.top +

@@ -106,9 +106,9 @@ public class UpdateLayoutAction extends Action {
 				String top = ParamUtil.getString(req, "top");
 				String left = ParamUtil.getString(req, "left");
 
-				PortletPreferences portletSetup =
+				PortletPreferences prefs =
 					PortletPreferencesFactory.getPortletSetup(
-						layout, portletId);
+						req, portletId, true, true);
 
 				StringMaker sm = new StringMaker();
 
@@ -117,10 +117,10 @@ public class UpdateLayoutAction extends Action {
 				sm.append("top=" + top + "\n");
 				sm.append("left=" + left + "\n");
 
-				portletSetup.setValue(
+				prefs.setValue(
 					"portlet-freeform-styles", sm.toString());
 
-				portletSetup.store();
+				prefs.store();
 			}
 		}
 		else if (cmd.equals("minimize")) {
