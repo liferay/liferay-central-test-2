@@ -4,7 +4,7 @@
 
 @include portal-data-counter.sql
 
-@include portal-data-company.vm
+@include portal-data-sample.vm
 
 @include portal-data-release.sql
 
