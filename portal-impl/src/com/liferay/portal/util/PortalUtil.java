@@ -154,6 +154,8 @@ public class PortalUtil {
 
 	public static final String PATH_MAIN = "/c";
 
+	public static final String PATH_PORTAL_LAYOUT = "/portal/layout";
+
 	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
 	public static final String PORTLET_XML_FILE_NAME_CUSTOM =
@@ -488,6 +490,10 @@ public class PortalUtil {
 			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
 		throws PortalException, SystemException {
 
+		if (layout == null) {
+			return themeDisplay.getPathMain() + PATH_PORTAL_LAYOUT;
+		}
+		
 		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
 			String layoutFriendlyURL = getLayoutFriendlyURL(
 				layout, themeDisplay);
