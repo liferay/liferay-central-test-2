@@ -370,8 +370,6 @@ public class MailEngine {
 								me.getMessage());
 				}
 			}
-
-			throw me;
 		}
 	}
 
