@@ -59,17 +59,10 @@ public class UpgradePortlet extends UpgradeProcess {
 			PortletImpl.TABLE_NAME, PortletImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("id_", false));
 
+		upgradeTable.setCreateSQL(PortletImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table Portlet drop primary key",
-		"alter table Portlet add primary key (id_)"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradePortlet.class);
 

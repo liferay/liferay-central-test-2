@@ -91,6 +91,8 @@ public class UpgradeRatings extends UpgradeProcess {
 			new PKUpgradeColumnImpl("entryId", false), upgradeUserIdColumn,
 			classNameIdColumn, upgradeClassPKColumn);
 
+		upgradeTable.setCreateSQL(RatingsEntryImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// RatingsStats
@@ -100,21 +102,10 @@ public class UpgradeRatings extends UpgradeProcess {
 			new PKUpgradeColumnImpl("statsId", false), classNameIdColumn,
 			upgradeClassPKColumn);
 
+		upgradeTable.setCreateSQL(RatingsStatsImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type RatingsEntry userId LONG",
-		"alter_column_type RatingsEntry classNameId LONG",
-		"alter_column_type RatingsEntry classPK LONG",
-
-		"alter_column_type RatingsStats classNameId LONG",
-		"alter_column_type RatingsStats classPK LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeRatings.class);
 

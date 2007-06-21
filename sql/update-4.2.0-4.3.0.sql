@@ -200,16 +200,10 @@ create table PluginSetting (
 	active_ BOOLEAN
 );
 
-alter table PollsChoice drop primary key;
-alter_column_type PollsChoice questionId LONG;
 alter table PollsChoice add name VARCHAR(75) null;
 update PollsChoice set name = choiceId;
 
-alter_column_type PollsQuestion questionId LONG;
-alter_column_type PollsQuestion groupId LONG;
-
 alter table PollsVote add voteId LONG;
-alter_column_type PollsVote questionId LONG;
 
 alter table Portlet add id_ LONG;
 
@@ -223,9 +217,6 @@ alter_column_name RatingsEntry className classNameId VARCHAR(75) null;
 
 alter_column_name RatingsStats className classNameId VARCHAR(75) null;
 
-alter_column_type Region regionId LONG;
-
-alter_column_type Release_ releaseId LONG;
 alter table Release_ add verified BOOLEAN;
 
 alter_column_type Resource_ resourceId LONG;
@@ -239,7 +230,6 @@ create table ResourceCode (
 	scope INTEGER
 );
 
-alter_column_type Role_ roleId LONG;
 alter_column_name Role_ className classNameId VARCHAR(75) null;
 alter table Role_ add type_ INTEGER;
 update Role_ SET classNameId = '0';

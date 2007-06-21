@@ -79,6 +79,8 @@ public class UpgradePolls extends UpgradeProcess {
 			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(PollsQuestionImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper questionIdMapper = upgradePKColumn.getValueMapper();
@@ -97,6 +99,8 @@ public class UpgradePolls extends UpgradeProcess {
 			PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS,
 			upgradeQuestionIdColumn, upgradeChoiceId);
 
+		upgradeTable.setCreateSQL(PollsChoiceImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper choiceIdMapper = upgradeChoiceId.getValueMapper();
@@ -112,24 +116,10 @@ public class UpgradePolls extends UpgradeProcess {
 			new PKUpgradeColumnImpl("voteId", false), upgradeUserIdColumn,
 			upgradeQuestionIdColumn, upgradeVoteChoiceIdColumn);
 
+		upgradeTable.setCreateSQL(PollsVoteImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type PollsQuestion userId LONG",
-
-		"alter_column_type PollsChoice choiceId LONG",
-		"alter table PollsChoice add primary key (choiceId)",
-
-		"alter table PollsVote drop primary key",
-		"alter table PollsVote add primary key (voteId)",
-		"alter_column_type PollsVote userId LONG",
-		"alter_column_type PollsVote choiceId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradePolls.class);
 
