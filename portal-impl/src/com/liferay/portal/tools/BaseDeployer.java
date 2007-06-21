@@ -77,10 +77,12 @@ public class BaseDeployer {
 		List jars = new ArrayList();
 
 		for (int i = 0; i < args.length; i++) {
-			if (args[i].endsWith(".war")) {
+			String fileName = args[i].toLowerCase();
+
+			if (fileName.endsWith(".war")) {
 				wars.add(args[i]);
 			}
-			else if (args[i].endsWith(".jar")) {
+			else if (fileName.endsWith(".jar")) {
 				jars.add(args[i]);
 			}
 		}
@@ -235,7 +237,8 @@ public class BaseDeployer {
 				if (fileName.endsWith(".war") || fileName.endsWith(".zip")) {
 					deploy = true;
 
-					if ((wars.size() > 0) && (!wars.contains(fileName))) {
+					if ((wars.size() > 0) &&
+						(!wars.contains(srcFile.getName()))) {
 						deploy = false;
 					}
 				}
