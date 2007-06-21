@@ -38,6 +38,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleContentUpgradeColumn
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticlePKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleResourcePrimKeyUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalStructurePKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalStructureXSDUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplatePKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateSmallImageIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateXSLUpgradeColumnImpl;
@@ -136,10 +137,13 @@ public class UpgradeJournal extends UpgradeProcess {
 			new JournalStructurePKUpgradeColumnImpl(
 				upgradeCompanyIdColumn, upgradeGroupIdColumn);
 
+		UpgradeColumn upgradeXSDColumn =
+			new JournalStructureXSDUpgradeColumnImpl();
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
-			upgradeStructurePKColumn, upgradeUserIdColumn);
+			upgradeStructurePKColumn, upgradeUserIdColumn, upgradeXSDColumn);
 
 		upgradeTable.setCreateSQL(JournalStructureImpl.TABLE_SQL_CREATE);
 

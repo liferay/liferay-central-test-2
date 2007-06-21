@@ -229,6 +229,12 @@ public abstract class DBUtil {
 			for (int i = 0; i < templates.length; i++) {
 				String sql = buildSQL(templates[i]);
 
+				sql = sql.trim();
+
+				if (sql.endsWith(";")) {
+					sql = sql.substring(0, sql.length() - 1);
+				}
+
 				if (_log.isDebugEnabled()) {
 					_log.debug(sql);
 				}

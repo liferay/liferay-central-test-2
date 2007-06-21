@@ -90,6 +90,13 @@ public class JournalArticleContentUpgradeColumnImpl
 			content, BaseUpgradeTableImpl.SAFE_CHARS[1],
 			BaseUpgradeTableImpl.SAFE_CHARS[0]);
 
+		if (content.indexOf("\\n") != -1) {
+			content = StringUtil.replace(
+				content,
+				new String[] {"\\n", "\\r"},
+				new String[] {"\n", "\r"});
+		}
+
 		SAXReader reader = new SAXReader();
 
 		Document doc = reader.read(new StringReader(content));

@@ -269,7 +269,7 @@ public abstract class BaseUpgradeTableImpl {
 		}
 		else if (t == Types.TIMESTAMP) {
 			try {
-				value = rs.getObject(name);
+				value = rs.getTimestamp(name);
 			}
 			catch (Exception e) {
 			}

@@ -26,31 +26,31 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.util.StringUtil;
 
 /**
- * <a href="JournalTemplateXSLUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="JournalStructureXSDUpgradeColumnImpl.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTemplateXSLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class JournalStructureXSDUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public JournalTemplateXSLUpgradeColumnImpl() {
-		super("xsl");
+	public JournalStructureXSDUpgradeColumnImpl() {
+		super("xsd");
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String xsl = (String)oldValue;
+		String xsd = (String)oldValue;
 
-		return formatXSL(xsl);
+		return formatXSL(xsd);
 	}
 
-	protected String formatXSL(String xsl) throws Exception {
-		if (xsl.indexOf("\\n") != -1) {
-			xsl = StringUtil.replace(
-				xsl, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
+	protected String formatXSL(String xsd) throws Exception {
+		if (xsd.indexOf("\\n") != -1) {
+			xsd = StringUtil.replace(
+				xsd, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
 		}
 
-		return xsl;
+		return xsd;
 	}
 
 }
