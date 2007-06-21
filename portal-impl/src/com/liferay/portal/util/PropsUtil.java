@@ -385,6 +385,10 @@ public class PropsUtil {
 
 	public static final String PASSWORDS_TOOLKIT = "passwords.toolkit";
 
+	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR = "passwords.passwordpolicytoolkit.generator";
+
+	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC = "passwords.passwordpolicytoolkit.static";
+
 	public static final String PASSWORDS_REGEXPTOOLKIT_PATTERN = "passwords.regexptoolkit.pattern";
 
 	public static final String PASSWORDS_DEFAULT_POLICY_NAME = "passwords.default.policy.name";
