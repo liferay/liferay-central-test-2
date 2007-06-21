@@ -61,7 +61,7 @@ $taglibLiferay.include("/html/common/themes/top_messages.jsp")
 			</div>
 		</div>
 	</div>
-	
+
 	#parse("$fullTemplatesPath/navigation.vm")
 	#parse("$fullTemplatesPath/dock.vm")
 #end

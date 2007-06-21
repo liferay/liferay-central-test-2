@@ -493,7 +493,7 @@ public class PortalUtil {
 		if (layout == null) {
 			return themeDisplay.getPathMain() + PATH_PORTAL_LAYOUT;
 		}
-		
+
 		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
 			String layoutFriendlyURL = getLayoutFriendlyURL(
 				layout, themeDisplay);

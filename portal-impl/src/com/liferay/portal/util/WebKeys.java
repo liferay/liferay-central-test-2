@@ -205,7 +205,7 @@ public class WebKeys {
 
 	public static final String PORTLET_CONTENT = "PORTLET_CONTENT";
 
-	public static final String PORTLET_DECORATE_OVERRIDE = "PORTLET_DECORATE_OVERRIDE";
+	public static final String PORTLET_DECORATE = "PORTLET_DECORATE";
 
 	public static final String PORTLET_PARALLEL_RENDER = "PORTLET_PARALLEL_RENDER";
 

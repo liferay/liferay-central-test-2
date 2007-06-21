@@ -44,27 +44,25 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 		<%= content %>
 
 	</c:when>
-	<c:otherwise>
-		<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
-			<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
-	
-			<br /><br />
-	
-			<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
-	
+	<c:when test="<%= portletDisplay.isShowConfigurationIcon() %>">
+		<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
+
+		<br /><br />
+
+		<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
+
+		<br />
+
+		<c:if test="<%= Validator.isNotNull(articleId) %>">
 			<br />
-	
-			<c:if test="<%= Validator.isNotNull(articleId) %>">
-				<br />
-	
-				<span class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleId) %>
-				</span>
-	
-				<br />
-			</c:if>
+
+			<span class="portlet-msg-error">
+			<%= LanguageUtil.format(pageContext, "x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleId) %>
+			</span>
+
+			<br />
 		</c:if>
-	</c:otherwise>
+	</c:when>
 </c:choose>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">

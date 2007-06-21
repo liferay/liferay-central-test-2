@@ -68,7 +68,7 @@
 
 			var resizeBox = _$J(".portlet-content-container, .portlet-borderless-container", portlet);
 			var resizeHandle = _$J(".portlet-resize-handle", portlet);
-			
+
 			if (!resizeHandle.length) {
 				resizeBox.append("<div style='position:relative'><div class='portlet-resize-handle'></div></div>");
 				resizeHandle = _$J(".portlet-resize-handle", portlet);

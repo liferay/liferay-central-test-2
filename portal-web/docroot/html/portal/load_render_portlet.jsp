@@ -96,7 +96,7 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 
 		<script type="text/javascript">
 			function <%= portletDisplay.getNamespace() %>refreshPortlet() {
-			    _$J("#p_p_id<%= portletDisplay.getNamespace() %>").empty().append('<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>');
+				_$J("#p_p_id<%= portletDisplay.getNamespace() %>").empty().append('<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>');
 				addPortletHTML("<%= url.toString() %>", _$J("#p_load<%= portletDisplay.getNamespace() %>")[0]);
 			}
 

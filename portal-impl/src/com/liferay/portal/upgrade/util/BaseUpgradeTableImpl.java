@@ -51,7 +51,6 @@ import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
 
@@ -225,32 +224,34 @@ public abstract class BaseUpgradeTableImpl {
 		else if (t == Types.CLOB) {
 			try {
 				Clob clob = rs.getClob(name);
-	
+
 				if (clob == null) {
 					value = StringPool.BLANK;
 				}
 				else {
 					BufferedReader br = new BufferedReader(
 						clob.getCharacterStream());
-	
+
 					StringMaker sm = new StringMaker();
-	
+
 					String line = null;
-	
+
 					while ((line = br.readLine()) != null) {
 						if (sm.length() != 0) {
 							sm.append(SAFE_NEWLINE_CHARACTER);
 						}
-	
+
 						sm.append(line);
 					}
-	
+
 					value = sm.toString();
 				}
 			}
 			catch (Exception e) {
-				// If the database doesn't allow CLOB types the column value
-				// must be retrieved as a String
+
+				// If the database doesn't allow CLOB types for the column
+				// value, then try retrieving it as a String
+
 				value = rs.getString(name);
 			}
 		}
@@ -352,18 +353,43 @@ public abstract class BaseUpgradeTableImpl {
 	public void updateTable() throws Exception {
 		_calledUpdateTable = true;
 
+		String tempFileName = getTempFileName();
+
+		try {
+			DBUtil dbUtil = DBUtil.getInstance();
+
+			if (Validator.isNotNull(_createSQL)) {
+				dbUtil.runSQL("drop table " + _tableName);
+
+				dbUtil.runSQL(_createSQL);
+			}
+
+			if (Validator.isNotNull(tempFileName)) {
+				dbUtil.runSQL(getDeleteSQL());
+
+				repopulateTable(tempFileName);
+			}
+		}
+		finally {
+			if (Validator.isNotNull(tempFileName)) {
+				FileUtil.delete(tempFileName);
+			}
+		}
+	}
+
+	protected String getTempFileName() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		boolean isEmpty = true;
 
-		String tempFilename =
+		String tempFileName =
 			"temp-db-" + _tableName + "-" + System.currentTimeMillis();
 
 		String selectSQL = getSelectSQL();
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter(tempFilename));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(tempFileName));
 
 		try {
 			con = HibernateUtil.getConnection();
@@ -393,8 +419,13 @@ public abstract class BaseUpgradeTableImpl {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					_tableName + " table backed up to file " + tempFilename);
+					_tableName + " table backed up to file " + tempFileName);
 			}
+		}
+		catch (Exception e) {
+			FileUtil.delete(tempFileName);
+
+			throw e;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -402,102 +433,88 @@ public abstract class BaseUpgradeTableImpl {
 			bw.close();
 		}
 
-		if (Validator.isNotNull(_createSQL)) {
-			DBUtil dbUtil = DBUtil.getInstance();
-
-			dbUtil.runSQL("drop table " + _tableName);
-
-			dbUtil.runSQL(_createSQL);
-		}
-
 		if (!isEmpty) {
-			Statement stmt = null;
+			return tempFileName;
+		}
+		else {
+			return null;
+		}
+	}
 
-			try {
-				con = HibernateUtil.getConnection();
+	protected void repopulateTable(String tempFileName) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
 
-				stmt = con.createStatement();
+		String insertSQL = getInsertSQL();
 
-				stmt.executeUpdate(getDeleteSQL());
+		BufferedReader br = new BufferedReader(new FileReader(tempFileName));
+
+		String line = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			boolean useBatch = con.getMetaData().supportsBatchUpdates();
+
+			if (!useBatch) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Database does not support batch updates");
+				}
 			}
-			finally {
-				DataAccess.cleanUp(con, stmt);
-			}
 
-			String insertSQL = getInsertSQL();
+			int count = 0;
 
-			BufferedReader br = new BufferedReader(
-				new FileReader(tempFilename));
+			while ((line = br.readLine()) != null) {
+				String[] values = StringUtil.split(line);
 
-			String line = null;
-
-			try {
-				con = HibernateUtil.getConnection();
-
-				boolean useBatch = con.getMetaData().supportsBatchUpdates();
-
-				if (!useBatch) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Database does not support batch updates");
-					}
+				if (values.length != _columns.length) {
+					throw new UpgradeException(
+						"Columns differ between temp file and schema. " +
+							"Attempted to insert row " + line  + ".");
 				}
 
-				int count = 0;
+				if (count == 0) {
+					ps = con.prepareStatement(insertSQL);
+				}
 
-				while ((line = br.readLine()) != null) {
-					String[] values = StringUtil.split(line);
-
-					if (values.length != _columns.length) {
-						throw new UpgradeException(
-							"Columns differ between temp file and schema. " +
-								"Attempted to insert row " + line  + ".");
-					}
-
-					if (count == 0) {
-						ps = con.prepareStatement(insertSQL);
-					}
-
-					for (int i = 0; i < _columns.length; i++) {
-						setColumn(ps, i, (Integer)_columns[i][1], values[i]);
-					}
-
-					if (useBatch) {
-						ps.addBatch();
-
-						if (count == _BATCH_SIZE) {
-							ps.executeBatch();
-
-							ps.close();
-
-							count = 0;
-						}
-						else {
-							count++;
-						}
-					}
-					else {
-						ps.executeUpdate();
-
-						ps.close();
-					}
+				for (int i = 0; i < _columns.length; i++) {
+					setColumn(ps, i, (Integer)_columns[i][1], values[i]);
 				}
 
 				if (useBatch) {
-					if (count != 0) {
+					ps.addBatch();
+
+					if (count == _BATCH_SIZE) {
 						ps.executeBatch();
 
 						ps.close();
+
+						count = 0;
+					}
+					else {
+						count++;
 					}
 				}
-			}
-			finally {
-				DataAccess.cleanUp(con, ps);
+				else {
+					ps.executeUpdate();
 
-				br.close();
+					ps.close();
+				}
+			}
+
+			if (useBatch) {
+				if (count != 0) {
+					ps.executeBatch();
+
+					ps.close();
+				}
 			}
 		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 
-		FileUtil.delete(tempFilename);
+			br.close();
+		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info(_tableName + " table repopulated with data");

@@ -168,7 +168,8 @@
 	</c:if>
 
     <c:if test="<%= (layoutTypePortlet != null) %>">
-        <%
+
+		<%
         List portletIds = layoutTypePortlet.getPortletIds();
         %>
 

@@ -15,9 +15,9 @@ Liferay.autoFields = new Class({
 	*/
 	initialize: function(options) {
 		var instance = this;
-		
+
 		options = jQuery.extend(options, {});
-		
+
 		instance._html = jQuery(options.html || '');
 		instance._container = jQuery(options.container || '');
 		instance._addText = options.addText || '';
@@ -29,29 +29,30 @@ Liferay.autoFields = new Class({
 		instance._onRemove = options.onRemove;
 		instance._onClear = options.onClear;
 		instance._init = options.init || false;
-		
+
 		instance._numField = 1;
-		
+
 		instance._run();
-		
+
 		if (instance._init) {
 			instance._init();
 		}
 	},
-	
+
 	_run: function() {
 		var instance = this;
-		
+
 		var container = instance._container;
-		
+
 		if (container.length) {
 			var html = instance._html;
 
 			var addLink, removeLink, clearLink;
 			var links = jQuery('<span class="lfr-control-links"></span>');
-			
+
 			if (instance._addText) {
 				addLink = jQuery('<a href="javascript:;">' + instance._addText + '</a>');
+
 				addLink.click(
 				   function() {
 					   var newField = instance._addFields();
@@ -63,11 +64,12 @@ Liferay.autoFields = new Class({
 
 				links.append(addLink);
 			}
-			
+
 			if (instance._removeText) {
 				removeLink = jQuery('<a href="javascript:;">' + instance._removeText + '</a>');
+
 				removeLink.hide();
-				
+
 				removeLink.click(
 				   function() {
 					   instance._removeFields();
@@ -76,12 +78,13 @@ Liferay.autoFields = new Class({
 					   }
 				   }
 				);
-				
+
 				links.append(removeLink);
 			}
-			
+
 			if (instance._clearText) {
 				clearLink = jQuery('<a href="javascript:;">' + instance._clearText + '</a>');
+
 				clearLink.click(
 				   function() {
 					   instance._clearFields();
@@ -90,7 +93,7 @@ Liferay.autoFields = new Class({
 					   }
 				   }
 				);
-				
+
 				links.append(clearLink);
 			}
 
@@ -98,46 +101,47 @@ Liferay.autoFields = new Class({
 			instance._controlLinks = links;
 		}
 	},
-	
+
 	_addFields: function() {
 		var instance = this;
-		
+
 		var container = instance._container;
 		var html = instance._html.clone();
-		
+
 		container.append(html);
-		
+
 		instance._numField++;
-		
+
 		var removeLink = instance._controlLinks.find('a:eq(1)');
+
 		if (removeLink.is(':hidden')) {
 			removeLink.show();
 		}
-		
+
 		return html;
 	},
-	
+
 	_clearFields: function() {
 		var instance = this;
-		
+
 		var container = instance._container;
 		var rows = container.find(instance._rowType).not(':first');
-		
+
 		var confirmBox = true;
-		
+
 		if (instance._confirmText) {
 			   confirmBox = confirm(instance._confirmText);
 		}
-		
+
 		if (confirmBox) {
 			   rows.remove();
 			   instance._numField = 1;
 		}
 	},
-	
+
 	_removeFields: function() {
 		var instance = this;
-		
+
 		var container = instance._container;
 		var lastRow = container.find(instance._rowType + ':last');
 
@@ -145,9 +149,10 @@ Liferay.autoFields = new Class({
 			   lastRow.remove();
 			   --instance._numField;
 		}
-		
+
 		if (instance._numField <= 1) {
 		   var removeLink = instance._controlLinks.find('a:eq(1)');
+		   
 		   if (removeLink.is(':visible')) {
 				   removeLink.hide();
 		   }

@@ -117,8 +117,7 @@ public class UpdateLayoutAction extends Action {
 				sm.append("top=" + top + "\n");
 				sm.append("left=" + left + "\n");
 
-				prefs.setValue(
-					"portlet-freeform-styles", sm.toString());
+				prefs.setValue("portlet-freeform-styles", sm.toString());
 
 				prefs.store();
 			}
