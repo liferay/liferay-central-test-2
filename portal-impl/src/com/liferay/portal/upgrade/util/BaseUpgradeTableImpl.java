@@ -223,28 +223,35 @@ public abstract class BaseUpgradeTableImpl {
 			userType = new BooleanType();
 		}
 		else if (t == Types.CLOB) {
-			Clob clob = rs.getClob(name);
-
-			if (clob == null) {
-				value = StringPool.BLANK;
-			}
-			else {
-				BufferedReader br = new BufferedReader(
-					clob.getCharacterStream());
-
-				StringMaker sm = new StringMaker();
-
-				String line = null;
-
-				while ((line = br.readLine()) != null) {
-					if (sm.length() != 0) {
-						sm.append(SAFE_NEWLINE_CHARACTER);
-					}
-
-					sm.append(line);
+			try {
+				Clob clob = rs.getClob(name);
+	
+				if (clob == null) {
+					value = StringPool.BLANK;
 				}
-
-				value = sm.toString();
+				else {
+					BufferedReader br = new BufferedReader(
+						clob.getCharacterStream());
+	
+					StringMaker sm = new StringMaker();
+	
+					String line = null;
+	
+					while ((line = br.readLine()) != null) {
+						if (sm.length() != 0) {
+							sm.append(SAFE_NEWLINE_CHARACTER);
+						}
+	
+						sm.append(line);
+					}
+	
+					value = sm.toString();
+				}
+			}
+			catch (Exception e) {
+				// If the database doesn't allow CLOB types the column value
+				// must be retrieved as a String
+				value = rs.getString(name);
 			}
 		}
 		else if (t == Types.DOUBLE) {
