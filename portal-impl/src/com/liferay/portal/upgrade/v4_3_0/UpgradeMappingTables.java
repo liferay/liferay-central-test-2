@@ -80,6 +80,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			_TABLE_GROUPS_ORGS, _COLUMNS_GROUPS_ORGS, upgradeGroupIdColumn,
 			upgradeOrganizationIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_GROUPS_ORGS);
+
 		upgradeTable.updateTable();
 
 		// Groups_Permissions
@@ -87,6 +89,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
 			upgradeGroupIdColumn);
+
+		upgradeTable.setCreateSQL(_CREATE_GROUPS_PERMISSIONS);
 
 		upgradeTable.updateTable();
 
@@ -96,6 +100,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			_TABLE_GROUPS_ROLES, _COLUMNS_GROUPS_ROLES,
 			upgradeGroupIdColumn, upgradeRoleIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_GROUPS_ROLES);
+
 		upgradeTable.updateTable();
 
 		// Groups_UserGroups
@@ -103,6 +109,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_USERGROUPS, _COLUMNS_GROUPS_USERGROUPS,
 			upgradeGroupIdColumn, upgradeUserGroupIdColumn);
+
+		upgradeTable.setCreateSQL(_CREATE_GROUPS_USERGROUPS);
 
 		upgradeTable.updateTable();
 
@@ -112,6 +120,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
 			upgradeRoleIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_ROLES_PERMISSIONS);
+
 		upgradeTable.updateTable();
 
 		// Users_Groups
@@ -119,6 +129,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_USERS_GROUPS, _COLUMNS_USERS_GROUPS, upgradeUserIdColumn,
 			upgradeGroupIdColumn);
+
+		upgradeTable.setCreateSQL(_CREATE_USERS_GROUPS);
 
 		upgradeTable.updateTable();
 
@@ -128,6 +140,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			_TABLE_USERS_ORGS, _COLUMNS_USERS_ORGS, upgradeUserIdColumn,
 			upgradeOrganizationIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_USERS_ORGS);
+
 		upgradeTable.updateTable();
 
 		// Users_Permissions
@@ -135,6 +149,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_USERS_PERMISSIONS, _COLUMNS_USERS_PERMISSIONS,
 			upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(_CREATE_USERS_PERMISSIONS);
 
 		upgradeTable.updateTable();
 
@@ -144,6 +160,8 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			_TABLE_USERS_ROLES, _COLUMNS_USERS_ROLES, upgradeUserIdColumn,
 			upgradeRoleIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_USERS_ROLES);
+
 		upgradeTable.updateTable();
 
 		// Users_UserGroups
@@ -152,11 +170,9 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			_TABLE_USERS_USERGROUPS, _COLUMNS_USERS_USERGROUPS,
 			upgradeUserIdColumn, upgradeUserGroupIdColumn);
 
+		upgradeTable.setCreateSQL(_CREATE_USERS_USERGROUPS);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
 
 	private static final String _TABLE_GROUPS_ORGS = "Groups_Orgs";
@@ -230,13 +246,75 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		{"userGroupId", new Integer(Types.BIGINT)}
 	};
 
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type Users_Groups userId LONG",
-		"alter_column_type Users_Orgs userId LONG",
-		"alter_column_type Users_Permissions userId LONG",
-		"alter_column_type Users_Roles userId LONG",
-		"alter_column_type Users_UserGroups userId LONG"
-	};
+	private static final String _CREATE_GROUPS_ORGS =
+		"create table Groups_Orgs (" +
+			"groupId LONG not null," +
+			"organizationId LONG not null," +
+			"primary key (groupId, organizationId)" +
+		")";
+
+	private static final String _CREATE_GROUPS_PERMISSIONS =
+		"create table Groups_Permissions (" +
+			"groupId LONG not null," +
+			"permissionId LONG not null," +
+			"primary key (groupId, permissionId)" +
+		")";
+
+	private static final String _CREATE_GROUPS_ROLES =
+		"create table Groups_Roles (" +
+			"groupId LONG not null," +
+			"roleId LONG not null," +
+			"primary key (groupId, roleId)" +
+		")";
+
+	private static final String _CREATE_GROUPS_USERGROUPS =
+		"create table Groups_UserGroups (" +
+			"groupId LONG not null," +
+			"userGroupId LONG not null," +
+			"primary key (groupId, userGroupId)" +
+		")";
+
+	private static final String _CREATE_ROLES_PERMISSIONS =
+		"create table Roles_Permissions (" +
+			"roleId LONG not null," +
+			"permissionId LONG not null," +
+			"primary key (roleId, permissionId)" +
+		")";
+
+	private static final String _CREATE_USERS_GROUPS =
+		"create table Users_Groups (" +
+			"userId LONG not null," +
+			"groupId LONG not null," +
+			"primary key (userId, groupId)" +
+		")";
+
+	private static final String _CREATE_USERS_ORGS =
+		"create table Users_Orgs (" +
+			"userId LONG not null," +
+			"organizationId LONG not null," +
+			"primary key (userId, organizationId)" +
+		")";
+
+	private static final String _CREATE_USERS_PERMISSIONS =
+		"create table Users_Permissions (" +
+			"userId LONG not null," +
+			"permissionId LONG not null," +
+			"primary key (userId, permissionId)" +
+		")";
+
+	private static final String _CREATE_USERS_ROLES =
+		"create table Users_Roles (" +
+			"userId LONG not null," +
+			"roleId LONG not null," +
+			"primary key (userId, roleId)" +
+		")";
+
+	private static final String _CREATE_USERS_USERGROUPS =
+		"create table Users_UserGroups (" +
+			"userId LONG not null," +
+			"userGroupId LONG not null," +
+			"primary key (userId, userGroupId)" +
+		")";
 
 	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
 

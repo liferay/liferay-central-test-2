@@ -37,18 +37,6 @@ update Group_ set liveGroupId = 0;
 update Group_ set friendlyURL = '' where classNameId = 'com.liferay.portal.model.User';
 update Group_ set active_ = TRUE;
 
-alter_column_type Groups_Orgs groupId LONG;
-alter_column_type Groups_Orgs organizationId LONG;
-
-alter_column_type Groups_Permissions groupId LONG;
-alter_column_type Groups_Permissions permissionId LONG;
-
-alter_column_type Groups_Roles groupId LONG;
-alter_column_type Groups_Roles roleId LONG;
-
-alter_column_type Groups_UserGroups groupId LONG;
-alter_column_type Groups_UserGroups userGroupId LONG;
-
 alter table IGImage add smallImageId LONG;
 alter table IGImage add largeImageId LONG;
 
@@ -226,9 +214,6 @@ update Role_ SET classNameId = '0';
 update Role_ SET classPK = '0';
 update Role_ SET type_ = 1;
 
-alter_column_type Roles_Permissions roleId LONG;
-alter_column_type Roles_Permissions permissionId LONG;
-
 create table SCFrameworkVersi_SCProductVers (
 	productVersionId LONG not null,
 	frameworkVersionId LONG not null,
@@ -389,16 +374,6 @@ create table UserGroupRole (
 );
 
 alter table UserIdMapper add userIdMapperId LONG;
-
-alter_column_type Users_Groups groupId LONG;
-
-alter_column_type Users_Orgs organizationId LONG;
-
-alter_column_type Users_Permissions permissionId LONG;
-
-alter_column_type Users_Roles roleId LONG;
-
-alter_column_type Users_UserGroups userGroupId LONG;
 
 drop table UserTracker;
 create table UserTracker (

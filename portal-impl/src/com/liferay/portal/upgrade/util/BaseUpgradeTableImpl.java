@@ -150,6 +150,11 @@ public abstract class BaseUpgradeTableImpl {
 	}
 
 	public void setCreateSQL(String createSQL) throws Exception {
+		if (_calledUpdateTable) {
+			throw new UpgradeException(
+				"setCreateSQL is called after updateTable");
+		}
+
 		_createSQL = createSQL;
 	}
 
@@ -329,6 +334,8 @@ public abstract class BaseUpgradeTableImpl {
 	}
 
 	public void updateTable() throws Exception {
+		_calledUpdateTable = true;
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -489,5 +496,6 @@ public abstract class BaseUpgradeTableImpl {
 	private String _tableName;
 	private Object[][] _columns;
 	private String _createSQL;
+	private boolean _calledUpdateTable;
 
 }
