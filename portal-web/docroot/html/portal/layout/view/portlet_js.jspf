@@ -27,25 +27,30 @@ var loadingAnimation = new Image();
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImages() %>/progress_bar/loading_animation.gif";
 
 function addPortlet(plid, portletId, doAsUserId) {
-	var refreshPortletList = ",";
-
 	<%
 	List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+	List nonAjaxPortlets = new ArrayList();
+	StringMaker portletList = new StringMaker();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
 
 		if (!portlet.isAjaxable()) {
-	%>
-
-			refreshPortletList += "<%= portlet.getPortletId() %>,";
-
-	<%
+			nonAjaxPortlets.add(portlet.getPortletId());
 		}
+	}
+
+	for (int i = 0; i < nonAjaxPortlets.size(); i++) {
+		portletList.append("_");
+		portletList.append(nonAjaxPortlets.get(i));
+		portletList.append(":true");
+		portletList.append((i < nonAjaxPortlets.size() - 1) ? "," : "");
 	}
 	%>
 
-	if (refreshPortletList.match("," + portletId + ",")) {
+	var refreshPortletList = { <%= portletList.toString() %> };
+
+	if (refreshPortletList["_" + portletId]) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}
 	else {
@@ -62,72 +67,73 @@ function addPortlet(plid, portletId, doAsUserId) {
 
 		var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>";
 
-		AjaxUtil.request(queryString, {
-			onComplete: function(xmlHttpReq){
-				var container = document.getElementById("layout-column_column-1");
-				var portletId = addPortletHTML(xmlHttpReq.responseText, container, loadingDiv);
-
-				if (window.location.hash) {
-					window.location.hash = "p_" + portletId;
-				}
-			}
-		});
+		addPortletHTML(queryString, loadingDiv);
 	}
 }
 
-function addPortletHTML(html, container, placeHolder) {
-	if (container == null) {
-		return;
-	}
+function addPortletHTML(url, placeHolder) {
 
-	var addDiv = document.createElement("div");
+	var addPortletReturn = function(html) {
+		var container = placeHolder.parentNode;
+		var addDiv = document.createElement("div");
 
-	addDiv.style.display = "none";
-	addDiv.innerHTML = html;
+		addDiv.style.display = "none";
+		addDiv.innerHTML = html;
 
-	var portletBound = _$J(".portlet-boundary:first", addDiv).get(0);
+		var portletBound = _$J(".portlet-boundary:first", addDiv).get(0);
 
-	portletBound.parentNode.removeChild(portletBound);
+		portletBound.parentNode.removeChild(portletBound);
 
-	var portletId = portletBound.id;
+		var portletId = portletBound.id;
 
-	portletId = portletId.replace(/^p_p_id_/,"");
-	portletId = portletId.replace(/_$/,"");
+		portletId = portletId.replace(/^p_p_id_/,"");
+		portletId = portletId.replace(/_$/,"");
 
-	portletBound.portletId = portletId;
+		portletBound.portletId = portletId;
 
-	Liferay.Portlet.flagAjax(portletId);
+		Liferay.Portlet.flagAjax(portletId);
 
-	container.replaceChild(portletBound, placeHolder);
+		container.replaceChild(portletBound, placeHolder);
 
-	jQuery(addDiv).evalScripts();
+		jQuery(addDiv).evalScripts();
 
-	if (!jQuery.browser.firefox) {
-		jQuery(portletBound).evalScripts();
-	}
-
-	<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
-		if (!portletBound.isStatic) {
-			if (themeDisplay.isFreeformLayout()) {
-				Liferay.Freeform.add(portletBound);
-			}
-			else {
-				Liferay.Columns.add(portletBound);
-			}
+		if (!jQuery.browser.firefox) {
+			jQuery(portletBound).evalScripts();
 		}
-	</c:if>
 
-	if (_$J.browser.firefox) {
-		setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
-	}
-	else {
-		Liferay.Portlet.process(portletId);
-	}
+		<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+			if (!portletBound.isStatic) {
+				if (themeDisplay.isFreeformLayout()) {
+					Liferay.Freeform.add(portletBound);
+				}
+				else {
+					Liferay.Columns.add(portletBound);
+				}
+			}
+		</c:if>
 
-	Liferay.Util.addInputType(portletBound.id);
-	Liferay.Util.addInputFocus(portletBound.id);
+		if (_$J.browser.firefox) {
+			setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
+		}
+		else {
+			Liferay.Portlet.process(portletId);
+		}
 
-	return portletId;
+		Liferay.Util.addInputType(portletBound.id);
+		Liferay.Util.addInputFocus(portletBound.id);
+
+		if (window.location.hash) {
+			window.location.hash = "p_" + portletId;
+		}
+
+		return portletId;
+	};
+
+	AjaxUtil.request(url, {
+		onComplete: function(xmlHttpReq){
+			addPortletReturn(xmlHttpReq.responseText);
+		}
+	});
 }
 
 function closePortlet(plid, portletId, doAsUserId, skipConfirm) {

@@ -96,29 +96,12 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 
 		<script type="text/javascript">
 			function <%= portletDisplay.getNamespace() %>refreshPortlet() {
-			    var curItem = document.getElementById("portlet-wrapper-<%= portlet.getPortletId() %>");
-				var parent = curItem.parentNode;
-
-				parent.removeChild(curItem);
-				parent.innerHTML = '<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>';
-
-				AjaxUtil.request("<%= url.toString() %>", {
-					onComplete: function(xmlHttpReq) {
-						var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
-
-						addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
-
-						portletDiv.parentNode.removeChild(portletDiv);
-					}
-				});
+			    _$J("#p_p_id<%= portletDisplay.getNamespace() %>").empty().append('<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>');
+				addPortletHTML("<%= url.toString() %>", _$J("#p_load<%= portletDisplay.getNamespace() %>")[0]);
 			}
 
-			AjaxUtil.request("<%= url.toString() %>", {
-				onComplete: function(xmlHttpReq) {
-					var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
-
-					addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
-				}
+			_$J(window).load(function () {
+				addPortletHTML("<%= url.toString() %>", _$J("#p_load<%= portletDisplay.getNamespace() %>")[0]);
 			});
 		</script>
 	</c:otherwise>
