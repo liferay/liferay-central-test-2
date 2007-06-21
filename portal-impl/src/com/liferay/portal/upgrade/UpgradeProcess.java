@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.portal.tools.util.DBUtil;
+import com.liferay.portal.tools.sql.DBUtil;
 
 import java.io.IOException;
 

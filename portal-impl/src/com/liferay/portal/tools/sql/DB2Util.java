@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
@@ -32,12 +32,12 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="SybaseUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class SybaseUtil extends DBUtil {
+public class DB2Util extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -48,17 +48,14 @@ public class SybaseUtil extends DBUtil {
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
 		template = reword(template);
-		template = StringUtil.replace(template, ");\n", ")\ngo\n");
-		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
-		template = StringUtil.replace(
-			template,
-			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
-			new String[] {"\\", "''", "\"", "\n", "\r"});
+		template = removeLongInserts(template);
+		template = removeNull(template);
+		template = StringUtil.replace(template, "\\'", "''");
 
 		return template;
 	}
 
-	protected SybaseUtil() {
+	protected DB2Util() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
@@ -68,31 +65,30 @@ public class SybaseUtil extends DBUtil {
 
 		File file = new File(
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-sybase.sql");
+				"-db2.sql");
 
 		StringMaker sm = new StringMaker();
 
-		sm = new StringMaker();
-
-		sm.append("use " + databaseName + "\n\n");
+		sm.append("drop database " + databaseName + ";\n");
+		sm.append("create database " + databaseName + ";\n");
+		sm.append("connect to " + databaseName + ";\n");
 		sm.append(
-			FileUtil.read(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
-					"-sybase.sql"));
+			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
+				minimalSuffix + "-db2.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
+		sm.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
+		sm.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
 		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "sybase";
+		return "db2";
 	}
 
 	protected String[] getTemplate() {
-		return _SYBASE;
+		return _DB2;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -103,19 +99,10 @@ public class SybaseUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
+			if (line.startsWith(ALTER_COLUMN_TYPE) ||
+				line.startsWith(ALTER_COLUMN_NAME)) {
 
-				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ @type@;",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
-				String[] template = buildColumnNameTokens(line);
-
-				line = StringUtil.replace(
-					"exec sp_rename '@table@.@old-column@', '@new-column@', 'column';",
-					REWORD_TEMPLATE, template);
+				line = "-- " + line;
 			}
 
 			sm.append(line);
@@ -127,15 +114,15 @@ public class SybaseUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _SYBASE = {
+	private static String[] _DB2 = {
 		"--", "1", "0",
-		"'19700101'", "getdate()",
-		" int", " datetime", " float",
-		" int", " decimal(20,0)",
-		" varchar(1000)", " text", " varchar",
-		"  identity(1,1)", "go"
+		"'1970-01-01-00.00.00.000000'", "current timestamp",
+		" smallint", " timestamp", " double",
+		" integer", " bigint",
+		" varchar(500)", " clob", " varchar",
+		" generated always as identity", "commit"
 	};
 
-	private static SybaseUtil _instance = new SybaseUtil();
+	private static DB2Util _instance = new DB2Util();
 
 }

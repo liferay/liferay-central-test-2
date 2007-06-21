@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
@@ -32,12 +32,12 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
+ * <a href="SQLServerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class DB2Util extends DBUtil {
+public class SQLServerUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -48,14 +48,16 @@ public class DB2Util extends DBUtil {
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
 		template = reword(template);
-		template = removeLongInserts(template);
-		template = removeNull(template);
-		template = StringUtil.replace(template, "\\'", "''");
+		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
+		template = StringUtil.replace(
+			template,
+			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
+			new String[] {"\\", "''", "\"", "\n", "\r"});
 
 		return template;
 	}
 
-	protected DB2Util() {
+	protected SQLServerUtil() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
@@ -65,30 +67,34 @@ public class DB2Util extends DBUtil {
 
 		File file = new File(
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-db2.sql");
+				"-sql-server.sql");
 
 		StringMaker sm = new StringMaker();
 
 		sm.append("drop database " + databaseName + ";\n");
 		sm.append("create database " + databaseName + ";\n");
-		sm.append("connect to " + databaseName + ";\n");
+		sm.append("\n");
+		sm.append("go\n");
+		sm.append("\n");
+		sm.append("use " + databaseName + ";\n\n");
 		sm.append(
-			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
-				minimalSuffix + "-db2.sql"));
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-sql-server.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sm.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
+		sm.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
 
 		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "db2";
+		return "sql-server";
 	}
 
 	protected String[] getTemplate() {
-		return _DB2;
+		return _SQL_SERVER;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -99,10 +105,20 @@ public class DB2Util extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE) ||
-				line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				String[] template = buildColumnTypeTokens(line);
 
-				line = "-- " + line;
+				line = StringUtil.replace(
+					"alter table @table@ alter column @old-column@ @type@;",
+					REWORD_TEMPLATE, template);
+			}
+			else if (line.startsWith(ALTER_COLUMN_NAME)) {
+				String[] template = buildColumnNameTokens(line);
+
+				line = StringUtil.replace(
+					"exec sp_rename '@table@.@old-column@', '@new-column@', " +
+						"'column';",
+					REWORD_TEMPLATE, template);
 			}
 
 			sm.append(line);
@@ -114,15 +130,15 @@ public class DB2Util extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _DB2 = {
+	private static String[] _SQL_SERVER = {
 		"--", "1", "0",
-		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" smallint", " timestamp", " double",
-		" integer", " bigint",
-		" varchar(500)", " clob", " varchar",
-		" generated always as identity", "commit"
+		"'19700101'", "GetDate()",
+		" bit", " datetime", " float",
+		" int", " bigint",
+		" varchar(1000)", " text", " varchar",
+		"  identity(1,1)", "go"
 	};
 
-	private static DB2Util _instance = new DB2Util();
+	private static SQLServerUtil _instance = new SQLServerUtil();
 
 }

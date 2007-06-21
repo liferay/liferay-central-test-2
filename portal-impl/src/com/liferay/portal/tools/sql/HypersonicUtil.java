@@ -20,24 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="FirebirdUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="HypersonicUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class FirebirdUtil extends DBUtil {
+public class HypersonicUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -48,47 +46,24 @@ public class FirebirdUtil extends DBUtil {
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
 		template = reword(template);
-		template = removeInserts(template);
-		template = removeNull(template);
+		template = StringUtil.replace(template, "\\'", "''");
 
 		return template;
 	}
 
-	protected FirebirdUtil() {
+	protected HypersonicUtil() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
-
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-firebird.sql");
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(
-			"create database '" + databaseName +
-				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sm.append(
-			"connect '" + databaseName +
-				".gdb' user 'sysdba' password 'masterkey';\n");
-		sm.append(
-			readSQL(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
-					"-firebird.sql",
-				_FIREBIRD[0], ";\n"));
-
-		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "firebird";
+		return "hypersonic";
 	}
 
 	protected String[] getTemplate() {
-		return _FIREBIRD;
+		return _HYPERSONIC;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -103,16 +78,15 @@ public class FirebirdUtil extends DBUtil {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column \"@old-column@\" " +
-						"type @type@;",
+					"alter table @table@ alter column @type@ @nullable@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column \"@old-column@\" to " +
-						"\"@new-column@\";",
+					"alter table @table@ alter column @old-column@ rename to " +
+						"@new-column@;",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -125,15 +99,15 @@ public class FirebirdUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _FIREBIRD = {
-		"--", "1", "0",
-		"'01/01/1970'", "current_timestamp",
-		" smallint", " timestamp", " double precision",
-		" integer", " int64",
-		" varchar(4000)", " blob", " varchar",
+	private static String[] _HYPERSONIC = {
+		"//", "true", "false",
+		"'1970-01-01'", "now()",
+		" bit", " timestamp", " double",
+		" int", " bigint",
+		" longvarchar", " longvarchar", " varchar",
 		"", "commit"
 	};
 
-	private static FirebirdUtil _instance = new FirebirdUtil();
+	private static HypersonicUtil _instance = new HypersonicUtil();
 
 }

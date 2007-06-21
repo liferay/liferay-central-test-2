@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
@@ -32,12 +32,12 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="SQLServerUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PostgreSQLUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class SQLServerUtil extends DBUtil {
+public class PostgreSQLUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -48,16 +48,11 @@ public class SQLServerUtil extends DBUtil {
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
 		template = reword(template);
-		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
-		template = StringUtil.replace(
-			template,
-			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
-			new String[] {"\\", "''", "\"", "\n", "\r"});
 
 		return template;
 	}
 
-	protected SQLServerUtil() {
+	protected PostgreSQLUtil() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
@@ -67,34 +62,32 @@ public class SQLServerUtil extends DBUtil {
 
 		File file = new File(
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-sql-server.sql");
+				"-postgresql.sql");
 
 		StringMaker sm = new StringMaker();
 
 		sm.append("drop database " + databaseName + ";\n");
-		sm.append("create database " + databaseName + ";\n");
-		sm.append("\n");
-		sm.append("go\n");
-		sm.append("\n");
-		sm.append("use " + databaseName + ";\n\n");
+		sm.append(
+			"create database " + databaseName + " encoding = 'UNICODE';\n");
+		sm.append("\\c " + databaseName + ";\n\n");
 		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
-					"-sql-server.sql"));
+					"-postgresql.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
+		sm.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
+		sm.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
 
 		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "sql-server";
+		return "postgresql";
 	}
 
 	protected String[] getTemplate() {
-		return _SQL_SERVER;
+		return _POSTGRESQL;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -109,16 +102,22 @@ public class SQLServerUtil extends DBUtil {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ @type@;",
+					"alter table @table@ alter @old-column@ type @type@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"exec sp_rename '@table@.@old-column@', '@new-column@', " +
-						"'column';",
+					"alter table @table@ rename @old-column@ to @new-column@;",
 					REWORD_TEMPLATE, template);
+			}
+			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
+				String[] tokens = StringUtil.split(line, " ");
+
+				line = StringUtil.replace(
+					"alter table @table@ drop constraint @table@_pkey;",
+					"@table@", tokens[2]);
 			}
 
 			sm.append(line);
@@ -130,15 +129,15 @@ public class SQLServerUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _SQL_SERVER = {
-		"--", "1", "0",
-		"'19700101'", "GetDate()",
-		" bit", " datetime", " float",
-		" int", " bigint",
-		" varchar(1000)", " text", " varchar",
-		"  identity(1,1)", "go"
+	private static String[] _POSTGRESQL = {
+		"--", "true", "false",
+		"'01/01/1970'", "current_timestamp",
+		" bool", " timestamp", " double precision",
+		" integer", " bigint",
+		" text", " text", " varchar",
+		"", "commit"
 	};
 
-	private static SQLServerUtil _instance = new SQLServerUtil();
+	private static PostgreSQLUtil _instance = new PostgreSQLUtil();
 
 }

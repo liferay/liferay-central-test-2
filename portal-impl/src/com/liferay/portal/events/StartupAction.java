@@ -31,7 +31,7 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
-import com.liferay.portal.tools.util.DBUtil;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;

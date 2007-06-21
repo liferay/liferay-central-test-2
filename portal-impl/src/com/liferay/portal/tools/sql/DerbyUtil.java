@@ -20,22 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="HypersonicUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DerbyUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class HypersonicUtil extends DBUtil {
+public class DerbyUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -45,25 +47,49 @@ public class HypersonicUtil extends DBUtil {
 		template = convertTimestamp(template);
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
-		template = reword(template);
-		template = StringUtil.replace(template, "\\'", "''");
+		template  = reword(template );
+		//template = _removeLongInserts(derby);
+		template = removeNull(template);
+		template = StringUtil.replace(template , "\\'", "''");
 
 		return template;
 	}
 
-	protected HypersonicUtil() {
+	protected DerbyUtil() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
+
+		String minimalSuffix = getMinimalSuffix(minimal);
+
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-derby.sql");
+
+		StringMaker sm = new StringMaker();
+
+		sm.append("drop database " + databaseName + ";\n");
+		sm.append("create database " + databaseName + ";\n");
+		sm.append("connect to " + databaseName + ";\n");
+		sm.append(
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-derby.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
+		sm.append("\n\n");
+		sm.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+
+		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "hypersonic";
+		return "derby";
 	}
 
 	protected String[] getTemplate() {
-		return _HYPERSONIC;
+		return _DERBY;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -74,20 +100,10 @@ public class HypersonicUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
+			if (line.startsWith(ALTER_COLUMN_TYPE) ||
+				line.startsWith(ALTER_COLUMN_NAME)) {
 
-				line = StringUtil.replace(
-					"alter table @table@ alter column @type@ @nullable@;",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
-				String[] template = buildColumnNameTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ rename to " +
-						"@new-column@;",
-					REWORD_TEMPLATE, template);
+				line = "-- " + line;
 			}
 
 			sm.append(line);
@@ -99,15 +115,15 @@ public class HypersonicUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _HYPERSONIC = {
-		"//", "true", "false",
-		"'1970-01-01'", "now()",
-		" bit", " timestamp", " double",
-		" int", " bigint",
-		" longvarchar", " longvarchar", " varchar",
-		"", "commit"
+	private static String[] _DERBY = {
+		"--", "1", "0",
+		"'1970-01-01-00.00.00.000000'", "current timestamp",
+		" smallint", " timestamp", " double",
+		" integer", " bigint",
+		" long varchar", " clob", " varchar",
+		" generated always as identity", "commit"
 	};
 
-	private static HypersonicUtil _instance = new HypersonicUtil();
+	private static DerbyUtil _instance = new DerbyUtil();
 
 }

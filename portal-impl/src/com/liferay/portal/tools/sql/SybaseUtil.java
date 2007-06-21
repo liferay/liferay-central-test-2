@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
@@ -32,12 +32,12 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="DerbyUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SybaseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class DerbyUtil extends DBUtil {
+public class SybaseUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -47,15 +47,18 @@ public class DerbyUtil extends DBUtil {
 		template = convertTimestamp(template);
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
-		template  = reword(template );
-		//template = _removeLongInserts(derby);
-		template = removeNull(template);
-		template = StringUtil.replace(template , "\\'", "''");
+		template = reword(template);
+		template = StringUtil.replace(template, ");\n", ")\ngo\n");
+		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
+		template = StringUtil.replace(
+			template,
+			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
+			new String[] {"\\", "''", "\"", "\n", "\r"});
 
 		return template;
 	}
 
-	protected DerbyUtil() {
+	protected SybaseUtil() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
@@ -65,31 +68,31 @@ public class DerbyUtil extends DBUtil {
 
 		File file = new File(
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-derby.sql");
+				"-sybase.sql");
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("drop database " + databaseName + ";\n");
-		sm.append("create database " + databaseName + ";\n");
-		sm.append("connect to " + databaseName + ";\n");
+		sm = new StringMaker();
+
+		sm.append("use " + databaseName + "\n\n");
 		sm.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
-					"-derby.sql"));
+					"-sybase.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
+		sm.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+		sm.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
 
 		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "derby";
+		return "sybase";
 	}
 
 	protected String[] getTemplate() {
-		return _DERBY;
+		return _SYBASE;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -100,10 +103,19 @@ public class DerbyUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE) ||
-				line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				String[] template = buildColumnTypeTokens(line);
 
-				line = "-- " + line;
+				line = StringUtil.replace(
+					"alter table @table@ alter column @old-column@ @type@;",
+					REWORD_TEMPLATE, template);
+			}
+			else if (line.startsWith(ALTER_COLUMN_NAME)) {
+				String[] template = buildColumnNameTokens(line);
+
+				line = StringUtil.replace(
+					"exec sp_rename '@table@.@old-column@', '@new-column@', 'column';",
+					REWORD_TEMPLATE, template);
 			}
 
 			sm.append(line);
@@ -115,15 +127,15 @@ public class DerbyUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _DERBY = {
+	private static String[] _SYBASE = {
 		"--", "1", "0",
-		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" smallint", " timestamp", " double",
-		" integer", " bigint",
-		" long varchar", " clob", " varchar",
-		" generated always as identity", "commit"
+		"'19700101'", "getdate()",
+		" int", " datetime", " float",
+		" int", " decimal(20,0)",
+		" varchar(1000)", " text", " varchar",
+		"  identity(1,1)", "go"
 	};
 
-	private static DerbyUtil _instance = new DerbyUtil();
+	private static SybaseUtil _instance = new SybaseUtil();
 
 }

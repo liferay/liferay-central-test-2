@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.FileUtil;
@@ -32,12 +32,12 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="PostgreSQLUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="FirebirdUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class PostgreSQLUtil extends DBUtil {
+public class FirebirdUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -48,11 +48,13 @@ public class PostgreSQLUtil extends DBUtil {
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
 		template = reword(template);
+		template = removeInserts(template);
+		template = removeNull(template);
 
 		return template;
 	}
 
-	protected PostgreSQLUtil() {
+	protected FirebirdUtil() {
 	}
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
@@ -62,32 +64,31 @@ public class PostgreSQLUtil extends DBUtil {
 
 		File file = new File(
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-postgresql.sql");
+				"-firebird.sql");
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("drop database " + databaseName + ";\n");
 		sm.append(
-			"create database " + databaseName + " encoding = 'UNICODE';\n");
-		sm.append("\\c " + databaseName + ";\n\n");
+			"create database '" + databaseName +
+				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
 		sm.append(
-			FileUtil.read(
+			"connect '" + databaseName +
+				".gdb' user 'sysdba' password 'masterkey';\n");
+		sm.append(
+			readSQL(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
-					"-postgresql.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
+					"-firebird.sql",
+				_FIREBIRD[0], ";\n"));
 
 		FileUtil.write(file, sm.toString());
 	}
 
 	protected String getServerName() {
-		return "postgresql";
+		return "firebird";
 	}
 
 	protected String[] getTemplate() {
-		return _POSTGRESQL;
+		return _FIREBIRD;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -102,22 +103,17 @@ public class PostgreSQLUtil extends DBUtil {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter @old-column@ type @type@;",
+					"alter table @table@ alter column \"@old-column@\" " +
+						"type @type@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ rename @old-column@ to @new-column@;",
+					"alter table @table@ alter column \"@old-column@\" to " +
+						"\"@new-column@\";",
 					REWORD_TEMPLATE, template);
-			}
-			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
-				String[] tokens = StringUtil.split(line, " ");
-
-				line = StringUtil.replace(
-					"alter table @table@ drop constraint @table@_pkey;",
-					"@table@", tokens[2]);
 			}
 
 			sm.append(line);
@@ -129,15 +125,15 @@ public class PostgreSQLUtil extends DBUtil {
 		return sm.toString();
 	}
 
-	private static String[] _POSTGRESQL = {
-		"--", "true", "false",
+	private static String[] _FIREBIRD = {
+		"--", "1", "0",
 		"'01/01/1970'", "current_timestamp",
-		" bool", " timestamp", " double precision",
-		" integer", " bigint",
-		" text", " text", " varchar",
+		" smallint", " timestamp", " double precision",
+		" integer", " int64",
+		" varchar(4000)", " blob", " varchar",
 		"", "commit"
 	};
 
-	private static PostgreSQLUtil _instance = new PostgreSQLUtil();
+	private static FirebirdUtil _instance = new FirebirdUtil();
 
 }

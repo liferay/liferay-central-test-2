@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
 /**
  * <a href="InterBaseUtil.java.html"><b><i>View Source</i></b></a>

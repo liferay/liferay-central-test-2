@@ -25,7 +25,7 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portal.tools.util.DBUtil;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;

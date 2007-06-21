@@ -20,22 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.util;
+package com.liferay.portal.tools.sql;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.StringUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 
 /**
- * <a href="SAPUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="JDataStoreUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class SAPUtil extends DBUtil {
+public class JDataStoreUtil extends FirebirdUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -46,66 +43,34 @@ public class SAPUtil extends DBUtil {
 		template = StringUtil.replace(template, TEMPLATE, getTemplate());
 
 		template = reword(template);
+		template = StringUtil.replace(
+			template,
+			new String[] {"\\'", "\\\"", "\\\\",  "\\n", "\\r"},
+			new String[] {"''", "\"", "\\", "\n", "\r"});
 
 		return template;
 	}
 
-	protected SAPUtil() {
-	}
-
-	protected void buildCreateFile(String databaseName, boolean minimal)
-		throws IOException {
+	protected JDataStoreUtil() {
 	}
 
 	protected String getServerName() {
-		return "sap";
+		return "jdatastore";
 	}
 
 	protected String[] getTemplate() {
-		return _SAP;
+		return _JDATASTORE;
 	}
 
-	protected String reword(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new StringReader(data));
-
-		StringMaker sm = new StringMaker();
-
-		String line = null;
-
-		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ modify @old-column@ @type@;",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
-				String[] template = buildColumnNameTokens(line);
-
-				line = StringUtil.replace(
-					"rename column @table@.@old-column@ to @new-column@;",
-					REWORD_TEMPLATE, template);
-			}
-
-			sm.append(line);
-			sm.append("\n");
-		}
-
-		br.close();
-
-		return sm.toString();
-	}
-
-	private static String[] _SAP = {
-		"##", "TRUE", "FALSE",
-		"'1970-01-01 00:00:00.000000'", "timestamp",
-		" boolean", " timestamp", " float",
-		" int", " bigint",
-		" varchar", " varchar", " varchar",
+	private static String[] _JDATASTORE = {
+		"--", "TRUE", "FALSE",
+		"'1970-01-01'", "current_timestamp",
+		" boolean", " date", " double",
+		" integer", " bigint",
+		" long varchar", " long varchar", " varchar",
 		"", "commit"
 	};
 
-	private static SAPUtil _instance = new SAPUtil();
+	private static JDataStoreUtil _instance = new JDataStoreUtil();
 
 }

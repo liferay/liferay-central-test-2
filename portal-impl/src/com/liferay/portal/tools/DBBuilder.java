@@ -22,7 +22,7 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.tools.util.DBUtil;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.util.FileUtil;
 
 import java.io.IOException;
