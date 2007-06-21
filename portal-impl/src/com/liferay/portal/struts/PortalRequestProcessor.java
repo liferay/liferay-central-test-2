@@ -273,10 +273,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				saveLastPath = false;
 			}
 
-			// Pop up window states should never be set as the last path
+			// Exclusive and pop up window states should never be set as the
+			// last path
 
-			if (LiferayWindowState.isPopUp(req) ||
-				LiferayWindowState.isExclusive(req)) {
+			if (LiferayWindowState.isExclusive(req) ||
+				LiferayWindowState.isPopUp(req)) {
+
 				saveLastPath = false;
 			}
 
