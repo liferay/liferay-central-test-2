@@ -35,6 +35,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 
 import java.sql.Connection;
@@ -240,6 +241,76 @@ public abstract class DBUtil {
 		}
 	}
 
+	public void runSQLTemplate(String path) throws IOException, SQLException {
+		runSQLTemplate(path, true);
+	}
+
+	public void runSQLTemplate(String path, boolean failOnError)
+		throws IOException, SQLException {
+
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		InputStream is = classLoader.getResourceAsStream(
+			"com/liferay/portal/tools/sql/dependencies/" + path);
+
+		if (is == null) {
+			is = classLoader.getResourceAsStream(path);
+		}
+
+		String template = StringUtil.read(is);
+
+		is.close();
+
+		if (path.endsWith(".vm")) {
+			try {
+				template = evaluateVM(template);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		StringMaker sm = new StringMaker();
+
+		BufferedReader br = new BufferedReader(new StringReader(template));
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			if (!line.startsWith("##")) {
+				sm.append(line);
+
+				if (line.endsWith(";")) {
+					String sql = sm.toString();
+
+					sm = new StringMaker();
+
+					try {
+						runSQL(sql);
+					}
+					catch (IOException ioe) {
+						if (failOnError) {
+							throw ioe;
+						}
+						else if (_log.isWarnEnabled()) {
+							_log.warn(ioe.getMessage());
+						}
+					}
+					catch (SQLException sqle) {
+						if (failOnError) {
+							throw sqle;
+						}
+						else if (_log.isWarnEnabled()) {
+							_log.warn(sqle.getMessage());
+						}
+					}
+				}
+			}
+		}
+
+		br.close();
+	}
+
 	protected abstract void buildCreateFile(
 			String databaseName, boolean minimal)
 		throws IOException;
@@ -284,9 +355,7 @@ public abstract class DBUtil {
 		return template;
 	}
 
-	protected String buildTemplate(String fileName)
-		throws IOException {
-
+	protected String buildTemplate(String fileName) throws IOException {
 		File file = new File("../sql/" + fileName + ".sql");
 
 		String template = FileUtil.read(file);

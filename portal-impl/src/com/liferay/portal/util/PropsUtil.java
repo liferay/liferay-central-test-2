@@ -63,6 +63,12 @@ public class PropsUtil {
 
 	public static final String TCK_URL = "tck.url";
 
+	// Schema
+
+	public static final String SCHEMA_RUN_ENABLED = "schema.run.enabled";
+
+	public static final String SCHEMA_RUN_MINIMAL = "schema.run.minimal";
+
 	// Upgrade
 
 	public static final String UPGRADE_PROCESSES = "upgrade.processes";

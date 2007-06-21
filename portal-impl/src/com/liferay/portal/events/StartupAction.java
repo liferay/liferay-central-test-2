@@ -80,21 +80,15 @@ public class StartupAction extends SimpleAction {
 
 			CacheRegistry.setActive(false);
 
-			// Class names
-
-			ClassNameLocalServiceUtil.checkClassNames();
-
 			// Upgrade
 
-			Release release = ReleaseLocalServiceUtil.getRelease();
+			int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
-			if (release.getBuildNumber() < 3500) {
+			if (buildNumber < 3500) {
 				_log.error("You must first upgrade to Liferay Portal 4.2.x");
 
 				System.exit(0);
 			}
-
-			int buildNumber = release.getBuildNumber();
 
 			String[] upgradeProcesses =
 				PropsUtil.getArray(PropsUtil.UPGRADE_PROCESSES);
@@ -144,17 +138,23 @@ public class StartupAction extends SimpleAction {
 				}
 			}
 
+			// Class names
+
+			ClassNameLocalServiceUtil.checkClassNames();
+
+			// Delete temporary images
+
+			deleteTemporaryImages();
+
 			// Enable database caching after upgrade
 
 			CacheRegistry.setActive(true);
 
 			ClusterPool.clear();
 
-			// Delete temporary images
-
-			deleteTemporaryImages();
-
 			// Verify
+
+			Release release = ReleaseLocalServiceUtil.getRelease();
 
 			int verifyFrequency = GetterUtil.getInteger(
 				PropsUtil.get(PropsUtil.VERIFY_FREQUENCY));

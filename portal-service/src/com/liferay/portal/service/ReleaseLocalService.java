@@ -57,6 +57,10 @@ public interface ReleaseLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public int getBuildNumberOrCreate()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -26,6 +26,13 @@
 					<fileset dir="${project.dir}/definitions" />
 				</copy>
 
+				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/tools/sql/dependencies">
+					<fileset
+						dir="${project.dir}/sql"
+						includes="portal-tables.sql,portal-data-*.*,indexes.sql,sequences.sql,update-*.sql"
+					/>
+				</copy>
+
 				<copy todir="${app.server.classes.portal.dir}">
 					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
 				</copy>
@@ -40,6 +47,13 @@
 			<else>
 				<copy todir="classes/com/liferay/portal/definitions">
 					<fileset dir="${project.dir}/definitions" />
+				</copy>
+
+				<copy todir="classes/com/liferay/portal/tools/sql/dependencies">
+					<fileset
+						dir="${project.dir}/sql"
+						includes="portal-tables.sql,portal-data-*.*,indexes.sql,sequences.sql,update-*.sql"
+					/>
 				</copy>
 
 				<copy todir="classes">

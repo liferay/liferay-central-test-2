@@ -29,9 +29,21 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ReleaseUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.dao.DataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ReleaseLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,6 +52,60 @@ import java.util.Date;
  *
  */
 public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
+
+	public int getBuildNumberOrCreate()
+		throws PortalException, SystemException {
+
+		// Get release build number
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(_GET_BUILD_NUMBER);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int buildNumber = rs.getInt("buildNumber");
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Build number " + buildNumber);
+				}
+
+				return buildNumber;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		// Create tables and populate with default data
+
+		if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.SCHEMA_RUN_ENABLED))) {
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Create tables and populate with default data");
+			}
+
+			createTablesAndPopulate();
+
+			return getRelease().getBuildNumber();
+		}
+		else {
+			throw new NoSuchReleaseException(
+				"The database needs to be populated");
+		}
+	}
 
 	public Release getRelease() throws PortalException, SystemException {
 		Release release = null;
@@ -75,5 +141,35 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 		return release;
 	}
+
+	protected void createTablesAndPopulate() throws SystemException {
+		try {
+			DBUtil dbUtil = DBUtil.getInstance();
+
+			dbUtil.runSQLTemplate("portal-tables.sql");
+			dbUtil.runSQLTemplate("portal-data-common.sql");
+			dbUtil.runSQLTemplate("portal-data-counter.sql");
+
+			if (!GetterUtil.getBoolean(
+					PropsUtil.get(PropsUtil.SCHEMA_RUN_MINIMAL))) {
+
+				dbUtil.runSQLTemplate("portal-data-sample.vm");
+			}
+
+			dbUtil.runSQLTemplate("portal-data-release.sql");
+			dbUtil.runSQLTemplate("indexes.sql", false);
+			dbUtil.runSQLTemplate("sequences.sql");
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new SystemException(e);
+		}
+	}
+
+	private static final String _GET_BUILD_NUMBER =
+		"select buildNumber from Release_";
+
+	private static Log _log = LogFactory.getLog(ReleaseLocalServiceImpl.class);
 
 }

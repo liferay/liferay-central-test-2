@@ -180,6 +180,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.service.impl.ReleaseLocalServiceImpl">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.service.impl.ResourceLocalServiceImpl">
 		<priority value="WARN" />
 	</category>
@@ -276,8 +280,12 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.tools.sql.DBUtil">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.upgrade">
-		<priority value="DEBUG" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.util">

@@ -65,6 +65,14 @@ public class ReleaseLocalServiceUtil {
 		return releaseLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static int getBuildNumberOrCreate()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getBuildNumberOrCreate();
+	}
+
 	public static com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
