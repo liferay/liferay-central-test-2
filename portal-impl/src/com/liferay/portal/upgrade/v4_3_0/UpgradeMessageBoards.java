@@ -95,6 +95,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
+		upgradeTable.setCreateSQL(MBCategoryImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper categoryIdMapper = new DefaultPKMapper(
@@ -132,6 +134,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			upgradeCategoryIdColumn, upgradeThreadIdPKColumn,
 			upgradeAttachmentsColumn);
 
+		upgradeTable.setCreateSQL(MBMessageImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper messageIdMapper = new DefaultPKMapper(
@@ -164,6 +168,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			MBMessageFlagImpl.TABLE_NAME, MBMessageFlagImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, upgradeMessageIdColumn);
 
+		upgradeTable.setCreateSQL(MBMessageFlagImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		// MBStatsUser
@@ -172,6 +178,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			MBStatsUserImpl.TABLE_NAME, MBStatsUserImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("statsUserId", false),
 			upgradeGroupIdColumn, upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(MBStatsUserImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -188,6 +196,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			MBThreadImpl.TABLE_NAME, MBThreadImpl.TABLE_COLUMNS,
 			upgradeThreadIdColumn, upgradeCategoryIdColumn,
 			upgradeRootMessageIdColumn, upgradeLastPostByUserIdColumn);
+
+		upgradeTable.setCreateSQL(MBThreadImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -211,37 +221,10 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			new PKUpgradeColumnImpl("discussionId", false),
 			classNameIdColumn, upgradeClassPKColumn, upgradeThreadIdColumn);
 
+		upgradeTable.setCreateSQL(MBDiscussionImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter_column_type MBCategory userId LONG",
-
-		"alter_column_type MBDiscussion classNameId LONG",
-		"alter_column_type MBDiscussion classPK LONG",
-
-		"alter table MBMessage drop primary key",
-		"alter table MBMessage add primary key (messageId)",
-		"alter table MBMessage drop topicId",
-		"alter_column_type MBMessage companyId LONG",
-		"alter_column_type MBMessage userId LONG",
-
-		"alter table MBMessageFlag drop primary key",
-		"alter table MBMessageFlag add primary key (messageFlagId)",
-		"alter table MBMessageFlag drop topicId",
-		"alter_column_type MBMessageFlag userId LONG",
-
-		"alter table MBStatsUser drop primary key",
-		"alter table MBStatsUser add primary key (statsUserId)",
-		"alter_column_type MBStatsUser userId LONG",
-
-		"alter table MBThread drop topicId",
-		"alter_column_type MBThread lastPostByUserId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeMessageBoards.class);
 

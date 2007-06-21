@@ -66,7 +66,6 @@ alter table Image add size_ INTEGER;
 
 alter table JournalArticle add id_ VARCHAR(75) null;
 alter table JournalArticle add resourcePrimKey LONG;
-alter_column_type JournalArticle groupId LONG;
 update JournalArticle set id_ = articleId;
 
 create table JournalArticleImage (
@@ -97,36 +96,29 @@ create table JournalContentSearch (
 );
 
 alter table JournalStructure add id_ VARCHAR(75) null;
-alter_column_type JournalStructure groupId LONG;
 update JournalStructure set id_ = structureId;
 
 alter table JournalTemplate add id_ VARCHAR(75) null;
-alter_column_type JournalTemplate groupId LONG;
 alter table JournalTemplate add smallImageId LONG;
 update JournalTemplate set id_ = templateId;
 
 alter table Layout add plid LONG;
 alter table Layout add groupId LONG;
 alter table Layout add privateLayout BOOLEAN;
-alter_column_type Layout parentLayoutId LONG;
 alter table Layout add iconImage BOOLEAN;
 alter table Layout add iconImageId LONG;
 alter table Layout add wapThemeId VARCHAR(75) null;
 alter table Layout add wapColorSchemeId VARCHAR(75) null;
 alter table Layout add css VARCHAR(75) null;
-update Layout set parentLayoutId = 0 where parentLayoutId = -1;
+update Layout set parentLayoutId = '0' where parentLayoutId = '-1';
 
 alter table LayoutSet add layoutSetId LONG;
-alter_column_type LayoutSet groupId LONG;
-alter table LayoutSet drop userId;
 alter table LayoutSet add logo BOOLEAN;
 alter table LayoutSet add logoId LONG;
 alter table LayoutSet add wapThemeId VARCHAR(75) null;
 alter table LayoutSet add wapColorSchemeId VARCHAR(75) null;
 alter table LayoutSet add css VARCHAR(75) null;
 update LayoutSet set logo = FALSE;
-
-alter_column_type ListType listTypeId INTEGER;
 
 create table MBBan (
 	banId LONG not null primary key,
@@ -139,30 +131,19 @@ create table MBBan (
 	banUserId LONG
 );
 
-alter_column_type MBCategory categoryId LONG;
-alter_column_type MBCategory groupId LONG;
-alter_column_type MBCategory parentCategoryId LONG;
+update MBCategory set categoryId = '0' where categoryId = 'system';
 update MBCategory set companyId = '0', userId = '0' where companyId = 'system';
 
-alter_column_type MBDiscussion discussionId LONG;
-alter_column_name MBDiscussion className classNameId VARCHAR(75) null;
-alter_column_type MBDiscussion threadId LONG;
+update MBMessage set categoryId = '0' where categoryId = 'system';
 
-alter_column_type MBMessage messageId LONG;
-alter_column_type MBMessage categoryId LONG;
-alter_column_type MBMessage threadId LONG;
-alter_column_type MBMessage parentMessageId LONG;
+update MBThread set categoryId = '0' where categoryId = 'system';
+
+alter_column_name MBDiscussion className classNameId VARCHAR(75) null;
 
 alter table MBMessageFlag add messageFlagId LONG;
 update MBMessageFlag set flag = '1';
-alter_column_type MBMessageFlag flag INTEGER;
 
 alter table MBStatsUser add statsUserId LONG;
-alter_column_type MBStatsUser groupId LONG;
-
-alter_column_type MBThread threadId LONG;
-alter_column_type MBThread categoryId LONG;
-alter_column_type MBThread rootMessageId LONG;
 
 alter_column_type Organization_ organizationId LONG;
 alter_column_type Organization_ parentOrganizationId LONG;

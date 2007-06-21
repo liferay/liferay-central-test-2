@@ -121,6 +121,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			upgradeVersionColumn, upgradeStructureIdColumn,
 			upgradeContentColumn);
 
+		upgradeTable.setCreateSQL(JournalArticleImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper articleIdMapper = new DefaultPKMapper(
@@ -138,6 +140,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
 			upgradeStructurePKColumn, upgradeUserIdColumn);
+
+		upgradeTable.setCreateSQL(JournalStructureImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -167,6 +171,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			upgradeTemplatePKColumn, upgradeUserIdColumn, upgradeXSLColumn,
 			upgradeSmallImageIdColumn);
 
+		upgradeTable.setCreateSQL(JournalTemplateImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 
 		ValueMapper templateIdMapper = new DefaultPKMapper(
@@ -179,32 +185,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		PropsUtil.set(
 			CompanyImpl.SYSTEM,
 			PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
-
-		// Schema
-
-		runSQL(_UPGRADE_SCHEMA);
 	}
-
-	private static final String[] _UPGRADE_SCHEMA = {
-		"alter table JournalArticle drop primary key",
-		"alter_column_type JournalArticle id_ LONG",
-		"alter table JournalArticle add primary key (id_)",
-		"alter_column_type JournalArticle companyId LONG",
-		"alter_column_type JournalArticle userId LONG",
-		"alter_column_type JournalArticle approvedByUserId LONG",
-
-		"alter table JournalStructure drop primary key",
-		"alter_column_type JournalStructure id_ LONG",
-		"alter table JournalStructure add primary key (id_)",
-		"alter_column_type JournalStructure companyId LONG",
-		"alter_column_type JournalStructure userId LONG",
-
-		"alter table JournalTemplate drop primary key",
-		"alter_column_type JournalTemplate id_ LONG",
-		"alter table JournalTemplate add primary key (id_)",
-		"alter_column_type JournalTemplate companyId LONG",
-		"alter_column_type JournalTemplate userId LONG"
-	};
 
 	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
 

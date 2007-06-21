@@ -35,6 +35,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeImage;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeImageGallery;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeJournal;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeListType;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeLucene;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeMappingTables;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeMessageBoards;
@@ -93,6 +94,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeEmailAddress());
 		upgrade(new UpgradeImageGallery());
 		upgrade(new UpgradeJournal());
+		upgrade(new UpgradeListType());
 		upgrade(new UpgradeMessageBoards());
 		upgrade(new UpgradePhone());
 		upgrade(new UpgradePolls());

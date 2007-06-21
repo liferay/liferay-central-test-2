@@ -20,62 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeListType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class UpgradeListType extends UpgradeProcess {
 
-	static String name = "Liferay Enterprise Portal";
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
 
-	static String version = "4.3.0 RC2";
-
-	static String codeName = "Owen";
-
-	static String build = "4239";
-
-	static String date = "June 20, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	protected void doUpgrade() throws Exception {
+
+		// ListType
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			ListTypeImpl.TABLE_NAME, ListTypeImpl.TABLE_COLUMNS);
+
+		upgradeTable.setCreateSQL(ListTypeImpl.TABLE_SQL_CREATE);
+
+		upgradeTable.updateTable();
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private static Log _log = LogFactory.getLog(UpgradeListType.class);
 
 }
