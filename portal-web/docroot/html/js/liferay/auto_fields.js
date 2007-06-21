@@ -45,48 +45,57 @@ Liferay.autoFields = new Class({
 		var container = instance._container;
 		
 		if (container.length) {
-			   var html = instance._html;
-		
-			   var addLink = jQuery('<a href="javascript:;">' + instance._addText + '</a>');
-			   var removeLink = jQuery('<a href="javascript:;">' + instance._removeText + '</a>');
-			   var clearLink = jQuery('<a href="javascript:;">' + instance._clearText + '</a>');
-		
-			   removeLink.hide();
-		
-			   addLink.click(
+			var html = instance._html;
+
+			var addLink, removeLink, clearLink;
+			var links = jQuery('<span class="lfr-control-links"></span>');
+			
+			if (instance._addText) {
+				addLink = jQuery('<a href="javascript:;">' + instance._addText + '</a>');
+				addLink.click(
 				   function() {
 					   var newField = instance._addFields();
 					   if (instance._onAdd) {
 							   instance._onAdd(newField);
 					   }
 				   }
-			   );
-		
-			   removeLink.click(
+				);
+
+				links.append(addLink);
+			}
+			
+			if (instance._removeText) {
+				removeLink = jQuery('<a href="javascript:;">' + instance._removeText + '</a>');
+				removeLink.hide();
+				
+				removeLink.click(
 				   function() {
 					   instance._removeFields();
 					   if (instance._onRemove) {
 							   instance._onRemove();
 					   }
 				   }
-			   );
-		
-			   clearLink.click(
+				);
+				
+				links.append(removeLink);
+			}
+			
+			if (instance._clearText) {
+				clearLink = jQuery('<a href="javascript:;">' + instance._clearText + '</a>');
+				clearLink.click(
 				   function() {
 					   instance._clearFields();
 					   if (instance._onClear) {
 							   instance._onClear();
 					   }
 				   }
-			   );
-		
-			   var links = jQuery('<span class="lfr-control-links"></span>');
-			   links.append(addLink);
-			   links.append(removeLink);
-			   links.append(clearLink);
-		
-			   container.after(links);
-			   instance._controlLinks = links;
+				);
+				
+				links.append(clearLink);
+			}
+
+			container.after(links);
+			instance._controlLinks = links;
 		}
 	},
 	
