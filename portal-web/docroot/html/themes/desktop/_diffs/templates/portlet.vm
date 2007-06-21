@@ -47,11 +47,7 @@
 			<div class="portlet-shadow-tc">
 
 				<div class="portlet-header-decoration">
-					$theme.iconPortlet()
-
-					#if ($portletDisplay.getTitle() != "")
-						<span class="portlet-title">$portletDisplay.getTitle()</span>
-					#end
+					<span class="portlet-title">$theme.iconPortlet() $portletDisplay.getTitle()</span>
 				</div>
 
 				<div class="portlet-small-icon-bar" $iconStyle>
@@ -108,7 +104,6 @@
 			<script type="text/javascript">
 				Liferay.Portlet.ready("$portletDisplay.getId()", function() {
 					LiferayDesktop.addIcon("$plid", "$portletDisplay.getId()", "$themeDisplay.getDoAsUserId()", $portletDisplay.isStateMin(), "$unicodeFormatter.toString($portletDisplay.getTitle())");
-					LiferayDesktop.jigglePortlet("$portletDisplay.getId()");
 				});
 			</script>
 		#end

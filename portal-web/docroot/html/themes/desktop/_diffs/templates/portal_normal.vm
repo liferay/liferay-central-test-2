@@ -54,8 +54,16 @@
 $taglibLiferay.include("/html/common/themes/top_messages.jsp")
 
 #if (!$layoutTypePortlet.hasStateMax())
-	#parse("$fullTemplatesPath/top.vm")
+	<div id="layout-desktop-icons-box">
+		<div id="layout-desktop-icons-outer-decoration">
+			<div id="layout-desktop-icons-inner-decoration">
+				<span id="layout-desktop-icons"></span>
+			</div>
+		</div>
+	</div>
+	
 	#parse("$fullTemplatesPath/navigation.vm")
+	#parse("$fullTemplatesPath/dock.vm")
 #end
 
 #if ($tilesSelectable.equals("true"))

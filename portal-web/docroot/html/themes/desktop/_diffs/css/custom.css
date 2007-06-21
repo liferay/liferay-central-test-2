@@ -56,7 +56,7 @@ body.linux #desktop-icon-title {
 	z-index: 100;
 }
 
-.js .lfr-dock.interactive-mode, .lfr-dock.interactive-mode {
+.lfr-dock, .js .lfr-dock.interactive-mode, .lfr-dock.interactive-mode {
 	top: 4px;
 }
 

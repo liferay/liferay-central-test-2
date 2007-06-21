@@ -61,7 +61,7 @@
 			_$J(portlet).click(function() {
 				if (instance._current != this) {
 					instance.moveToTop(this);
-					instance.savePosition(this);
+					instance.savePosition(this, true);
 					instance._current = this;
 				}
 			});
@@ -131,7 +131,7 @@
 			container.appendChild(portlet);
 		},
 
-		savePosition : function(portlet) {
+		savePosition : function(portlet, wasClicked) {
 			var instance = this;
 			var resizeBox = _$J(portlet).find(".portlet-content-container, .portlet-borderless-container")[0];
 			var newPosition = Liferay.Portlet.findIndex(portlet);
@@ -141,7 +141,7 @@
 				Liferay.Portlet.savePosition(portlet);
 			}
 
-			if (resizeBox) {
+			if (resizeBox && !wasClicked) {
 				AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout" +
 					"?p_l_id=" + themeDisplay.getPlid() +
 					"&height=" + resizeBox.style.height +
