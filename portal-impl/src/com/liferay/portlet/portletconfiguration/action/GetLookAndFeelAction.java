@@ -92,6 +92,22 @@ public class GetLookAndFeelAction extends JSONAction {
 
 				JSONObject jsonObj = new JSONObject(css);
 
+				/*Locale[] locales = LanguageUtil.getAvailableLocales();
+
+				for (int i = 0; i < locales.length; i++) {
+					String languageId = LocaleUtil.toLanguageId(locale);
+
+					String title = portletSetup.getValue(
+						"portlet-setup-title-" + languageId, null);
+
+					if (Validator.isNotNull(languageId)) {
+					}
+				}
+
+				boolean useCustomTitle = GetterUtil.getBoolean(
+					portletSetup.getValue(
+						"portlet-setup-use-custom-title", null));*/
+
 				return jsonObj.toString();
 			}
 		}
@@ -103,6 +119,8 @@ public class GetLookAndFeelAction extends JSONAction {
 
 		return null;
 	}
+
+	//protected void get
 
 	private static Log _log = LogFactory.getLog(GetLookAndFeelAction.class);
 
