@@ -4,7 +4,7 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
-	<property name="fckeditor.file" value="FCKeditor_2.4.2.zip" />
+	<property name="fckeditor.file" value="FCKeditor_2.4.3.zip" />
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
