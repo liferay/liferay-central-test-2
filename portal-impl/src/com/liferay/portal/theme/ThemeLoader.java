@@ -23,6 +23,7 @@
 package com.liferay.portal.theme;
 
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
@@ -135,8 +136,13 @@ public class ThemeLoader {
 			_themesPath = GetterUtil.getString(
 				root.elementText("themes-path"), "/themes");
 
-			String fileStorageValue = GetterUtil.getString(
-				root.elementText("file-storage"));
+			String fileStorageValue = GetterUtil.getString(PropsUtil.get(
+				PropsUtil.THEME_IMPORT_FILE_STORAGE_PATH));
+
+			if (Validator.isNull(fileStorageValue)) {
+				fileStorageValue = GetterUtil.getString(
+					root.elementText("file-storage"));
+			}
 
 			if (Validator.isNotNull(fileStorageValue)) {
 				_fileStorage = new File(fileStorageValue);

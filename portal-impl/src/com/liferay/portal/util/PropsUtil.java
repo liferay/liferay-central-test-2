@@ -123,6 +123,8 @@ public class PropsUtil {
 
 	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";
 
+	public static final String THEME_IMPORT_FILE_STORAGE_PATH = "theme.import.file.storage.path";
+
 	// Resource Actions
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
