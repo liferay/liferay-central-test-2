@@ -140,4 +140,10 @@
 		debug="99"
 		useContextClassLoader="false"
 	/>
+
+	<!--
+	Disable persistent sessions by default because of a bug in Tomcat 5.5.23
+	-->
+
+	<Manager pathname="" />
 </Context>
