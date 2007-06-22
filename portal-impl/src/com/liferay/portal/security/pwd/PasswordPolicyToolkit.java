@@ -31,8 +31,8 @@ import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.words.util.WordsUtil;
-import com.liferay.util.PwdGenerator;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.PwdGenerator;
 
 import java.util.Date;
 
