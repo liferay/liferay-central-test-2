@@ -350,25 +350,26 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			companyId, GroupImpl.GUEST);
 
 		// Create bag for Guest group
-		
+
 		PermissionCheckerBag bag = getBag(guestGroup.getGroupId());
-		
+
 		if (bag == null) {
 			List groups = new ArrayList();
-			
+
 			groups.add(guestGroup);
 
 			List roles = RoleServiceUtil.getUserRoles(user.getUserId());
-			
+
 			bag = new PermissionCheckerBagImpl(
-					user.getUserId(), new ArrayList(), new ArrayList(), new ArrayList(),
-					new ArrayList(), groups, roles);
-	
+				user.getUserId(), new ArrayList(), new ArrayList(),
+				new ArrayList(), new ArrayList(), groups, roles);
+
 			putBag(guestGroup.getGroupId(), bag);
 		}
-		
+
 		try {
-			return hasUserPermission(guestGroup.getGroupId(), name, primKey, actionId, false);
+			return hasUserPermission(
+				guestGroup.getGroupId(), name, primKey, actionId, false);
 		}
 		catch (Exception e) {
 			return false;

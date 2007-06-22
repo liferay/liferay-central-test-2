@@ -32,6 +32,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.words.util.WordsUtil;
 import com.liferay.util.PwdGenerator;
+import com.liferay.util.GetterUtil;
 
 import java.util.Date;
 
@@ -44,17 +45,17 @@ import java.util.Date;
 public class PasswordPolicyToolkit extends BasicToolkit {
 
 	public String generate() {
-		String generator = 
-			PropsUtil.get(PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR);
-		
+		String generator = GetterUtil.getString(PropsUtil.get(
+			PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR));
+
 		if (generator.equals("static")) {
-			String password = 
-				PropsUtil.get(PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC);
-			
+			String password = GetterUtil.getString(PropsUtil.get(
+				PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC));
+
 			return password;
 		}
 		else {
-			return PwdGenerator.getPassword();			
+			return PwdGenerator.getPassword();
 		}
 	}
 

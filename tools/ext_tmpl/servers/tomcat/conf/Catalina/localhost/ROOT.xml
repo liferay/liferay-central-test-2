@@ -65,6 +65,19 @@
 		maxActive="20"
 	/>-->
 
+	<!-- PostgreSQL -->
+
+	<!--<Resource
+		name="jdbc/LiferayPool"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://localhost:5432/lportal"
+		username="sa"
+		password=""
+		maxActive="20"
+	/>-->
+
 	<!-- SQL Server -->
 
 	<!--<Resource

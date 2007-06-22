@@ -285,15 +285,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		RoleLocalServiceUtil.checkSystemRoles(companyId);
 
-		// Give default user Guest role
-		
-		Role guestRole = RoleLocalServiceUtil.getRole(
-				companyId, RoleImpl.GUEST);
+		// Default user must have the Guest role
 
-		if (!RoleLocalServiceUtil.hasUserRole(defaultUser.getUserId(), companyId, guestRole.getName(), false)) {
-			RoleLocalServiceUtil.setUserRoles(defaultUser.getUserId(), new long[] {guestRole.getRoleId()});
-		}
-		
+		Role guestRole = RoleLocalServiceUtil.getRole(
+			companyId, RoleImpl.GUEST);
+
+		RoleLocalServiceUtil.setUserRoles(
+			defaultUser.getUserId(), new long[] {guestRole.getRoleId()});
+
 		// Default admin
 
 		if (UserUtil.countByCompanyId(companyId) == 1) {
