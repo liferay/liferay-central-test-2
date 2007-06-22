@@ -24,6 +24,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.CookieNotSupportedException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.SystemException;
@@ -278,6 +279,7 @@ public class LoginAction extends Action {
 				if (e instanceof AuthException ||
 					e instanceof CookieNotSupportedException ||
 					e instanceof NoSuchUserException ||
+					e instanceof PasswordExpiredException ||
 					e instanceof UserEmailAddressException ||
 					e instanceof UserIdException ||
 					e instanceof UserLockoutException ||

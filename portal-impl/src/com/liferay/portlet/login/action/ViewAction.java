@@ -24,6 +24,7 @@ package com.liferay.portlet.login.action;
 
 import com.liferay.portal.CookieNotSupportedException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
@@ -85,6 +86,7 @@ public class ViewAction extends PortletAction {
 				if (e instanceof AuthException ||
 					e instanceof CookieNotSupportedException ||
 					e instanceof NoSuchUserException ||
+					e instanceof PasswordExpiredException ||
 					e instanceof UserEmailAddressException ||
 					e instanceof UserIdException ||
 					e instanceof UserLockoutException ||
