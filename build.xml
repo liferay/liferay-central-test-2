@@ -83,10 +83,30 @@
 							includes="${database.name}.*"
 						/>
 					</delete>
+
 					<delete failonerror="false">
 						<fileset
 							dir="${app.server.bin.dir}/unix"
 							includes="${database.name}.*"
+						/>
+					</delete>
+
+					<delete includeemptydirs="true" failonerror="false">
+						<fileset
+							dir="${app.server.dir}/apps"
+							includes="*.ear,autoload/*.ear"
+						/>
+						<fileset
+							dir="${app.server.dir}/ejbjars"
+							includes="*.jar,autoload/*.jar"
+						/>
+						<fileset
+							dir="${app.server.dir}/webapps"
+							includes="*.war,autoload/*.war,autoload/jonas-doc-en/**,autoload/jonas-javadoc/**"
+						/>
+						<fileset
+							dir="${app.server.dir}"
+							includes="demoserver/**,examples/**,"
 						/>
 					</delete>
 				</then>

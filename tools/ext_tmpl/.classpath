@@ -25,7 +25,6 @@
 	<classpathentry kind="lib" path="lib/development/myfaces-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/myfaces-impl.jar"/>
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
-	<classpathentry kind="lib" path="lib/development/ow_jonas_bootstrap.jar"/>
 	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
 	<classpathentry kind="lib" path="lib/development/quercus.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
