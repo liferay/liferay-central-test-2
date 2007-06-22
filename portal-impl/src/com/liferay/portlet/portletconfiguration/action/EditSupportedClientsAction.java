@@ -22,9 +22,13 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactory;
@@ -38,6 +42,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -51,7 +56,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  *
  */
-public class EditSupportedClientsAction extends EditLookAndFeelAction {
+public class EditSupportedClientsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -88,6 +93,23 @@ public class EditSupportedClientsAction extends EditLookAndFeelAction {
 
 		return mapping.findForward(
 			"portlet.portlet_configuration.edit_supported_clients");
+	}
+
+	protected void checkPermissions(PortletRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		String portletId = ParamUtil.getString(req, "portletResource");
+
+		if (!PortletPermission.contains(
+				permissionChecker, themeDisplay.getPlid(), portletId,
+				ActionKeys.CONFIGURATION)) {
+
+			throw new PrincipalException();
+		}
 	}
 
 	protected void updateSupportedClients(ActionRequest req)
