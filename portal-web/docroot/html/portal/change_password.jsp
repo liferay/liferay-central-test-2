@@ -35,7 +35,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 <input name="passwordReset" type="hidden" value="false" />
 
 <span class="portlet-msg-error">
-<liferay-ui:message key="the-system-policy-requires-you-to-change-your-password-at-this-time" />
+<liferay-ui:message key="please-change-your-password" />
 </span>
 
 <c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
