@@ -145,7 +145,9 @@ public class PortalLDAPUtil {
 		else {
 			Modifications mods = Modifications.getInstance();
 
-			if (Validator.isNotNull(user.getPasswordUnencrypted())) {
+			if (user.isPasswordModified() &&
+				Validator.isNotNull(user.getPasswordUnencrypted())) {
+
 				mods.addItem(
 					userMappings.getProperty("password"),
 					user.getPasswordUnencrypted());
@@ -461,7 +463,9 @@ public class PortalLDAPUtil {
 		return user;
 	}
 
-	public static boolean isAuthEnabled(long companyId) throws Exception {
+	public static boolean isAuthEnabled(long companyId)
+		throws PortalException, SystemException {
+
 		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.LDAP_AUTH_ENABLED)) {
 			return true;
 		}
@@ -470,7 +474,9 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static boolean isExportEnabled(long companyId) throws Exception {
+	public static boolean isExportEnabled(long companyId)
+		throws PortalException, SystemException {
+
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.LDAP_EXPORT_ENABLED)) {
 
@@ -481,7 +487,9 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static boolean isImportEnabled(long companyId) throws Exception {
+	public static boolean isImportEnabled(long companyId)
+		throws PortalException, SystemException {
+
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.LDAP_IMPORT_ENABLED)) {
 
@@ -492,7 +500,9 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static boolean isImportOnStartup(long companyId) throws Exception {
+	public static boolean isImportOnStartup(long companyId)
+		throws PortalException, SystemException {
+
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
 
@@ -503,12 +513,27 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static boolean isNtlmEnabled(long companyId) throws Exception {
+	public static boolean isNtlmEnabled(long companyId)
+		throws PortalException, SystemException {
+
 		if (!isAuthEnabled(companyId)) {
 			return false;
 		}
 
 		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.NTLM_AUTH_ENABLED)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isPasswordPolicyEnabled(long companyId)
+		throws PortalException, SystemException {
+
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.LDAP_PASSWORD_POLICY_ENABLED)) {
+
 			return true;
 		}
 		else {

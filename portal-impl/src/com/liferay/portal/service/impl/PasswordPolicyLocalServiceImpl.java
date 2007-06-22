@@ -36,6 +36,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -163,6 +164,10 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy getDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
+		if (PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
+			return null;
+		}
+
 		return PasswordPolicyUtil.findByC_DP(companyId, true);
 	}
 
@@ -175,6 +180,10 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy getPasswordPolicy(
 			long companyId, long organizationId, long locationId)
 		throws PortalException, SystemException {
+
+		if (PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
+			return null;
+		}
 
 		PasswordPolicyRel passwordPolicyRel = null;
 
@@ -210,6 +219,12 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy getPasswordPolicyByUserId(long userId)
 		throws PortalException, SystemException {
 
+		User user = UserUtil.findByPrimaryKey(userId);
+
+		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+			return null;
+		}
+
 		PasswordPolicyRel passwordPolicyRel = null;
 
 		// Check for password policy specifically assigned to this user
@@ -223,8 +238,6 @@ public class PasswordPolicyLocalServiceImpl
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
-
-		User user = UserUtil.findByPrimaryKey(userId);
 
 		long locationId = user.getLocation().getOrganizationId();
 		long organizationId = user.getOrganization().getOrganizationId();

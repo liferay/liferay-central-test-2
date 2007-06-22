@@ -151,6 +151,18 @@ public class UserImpl extends UserModelImpl implements User {
 		_passwordUnencrypted = passwordUnencrypted;
 	}
 
+	public boolean getPasswordModified() {
+		return _passwordModified;
+	}
+
+	public boolean isPasswordModified() {
+		return _passwordModified;
+	}
+
+	public void setPasswordModified(boolean passwordModified) {
+		_passwordModified = passwordModified;
+	}
+
 	public Locale getLocale() {
 		return _locale;
 	}
@@ -352,6 +364,7 @@ public class UserImpl extends UserModelImpl implements User {
 
 	private static Log _log = LogFactory.getLog(UserImpl.class);
 
+	private boolean _passwordModified;
 	private String _passwordUnencrypted;
 	private Locale _locale;
 	private TimeZone _timeZone;

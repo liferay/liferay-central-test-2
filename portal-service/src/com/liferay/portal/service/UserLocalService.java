@@ -129,6 +129,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void checkPasswordExpired(com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.SystemException, 
@@ -234,6 +238,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isPasswordExpiringSoon(com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List search(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -325,6 +333,10 @@ public interface UserLocalService {
 	public com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updatePasswordReset(long userId, boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

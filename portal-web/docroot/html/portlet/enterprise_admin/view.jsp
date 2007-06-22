@@ -766,7 +766,7 @@ portletURL.setParameter("tabs3", tabs3);
 	<c:when test='<%= tabs1.equals("password-policies") %>'>
 
 		<%
-		boolean passwordPolicyEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_PASSWORD_POLICY_ENABLED);
+		boolean passwordPolicyEnabled = PortalLDAPUtil.isPasswordPolicyEnabled(company.getCompanyId());
 		%>
 
 		<c:if test="<%= passwordPolicyEnabled %>">

@@ -64,11 +64,6 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 			PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
 
-		if (!password1.equals(password2)) {
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORDS_DO_NOT_MATCH);
-		}
-
 		if (passwordPolicy.getCheckSyntax()) {
 			if (!passwordPolicy.getAllowDictionaryWords() &&
 					WordsUtil.isDictionaryWord(password1)) {

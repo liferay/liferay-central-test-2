@@ -35,6 +35,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.OrganizationParentException;
+import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
@@ -72,6 +73,7 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameValidator;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
@@ -473,6 +475,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void checkLockout(User user)
 		throws PortalException, SystemException {
 
+		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+			return;
+		}
+
 		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
 		if (passwordPolicy.isLockout()) {
@@ -556,6 +562,59 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, screenName);
 
 		checkLoginFailure(user);
+	}
+
+	public void checkPasswordExpired(User user)
+		throws PortalException, SystemException {
+
+		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
+			return;
+		}
+
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+		// Check if password has expired
+
+		if (isPasswordExpired(user)) {
+			int graceLoginCount = user.getGraceLoginCount();
+
+			if (graceLoginCount < passwordPolicy.getGraceLimit()) {
+				user.setGraceLoginCount(++graceLoginCount);
+
+				UserUtil.update(user);
+			}
+			else {
+				throw new PasswordExpiredException();
+			}
+		}
+
+		// Check if warning message should be sent
+
+		if (isPasswordExpiringSoon(user)) {
+			user.setPasswordReset(true);
+
+			UserUtil.update(user);
+		}
+
+		// Check if user should be forced to change password on first login
+
+		if (passwordPolicy.isChangeable() &&
+			passwordPolicy.isChangeRequired()) {
+
+			if (user.getLastLoginDate() == null) {
+				boolean passwordReset = false;
+
+				if (passwordPolicy.isChangeable() &&
+					passwordPolicy.isChangeRequired()) {
+
+					passwordReset = true;
+				}
+
+				user.setPasswordReset(passwordReset);
+
+				UserUtil.update(user);
+			}
+		}
 	}
 
 	public KeyValuePair decryptUserId(
@@ -880,6 +939,37 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return false;
 	}
 
+	public boolean isPasswordExpiringSoon(User user)
+		throws PortalException, SystemException {
+
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+		if (passwordPolicy.isExpireable()) {
+			Date now = new Date();
+
+			if (user.getPasswordModifiedDate() == null) {
+				user.setPasswordModifiedDate(now);
+
+				UserUtil.update(user);
+			}
+
+			long timeModified = user.getPasswordModifiedDate().getTime();
+			long passwordExpiresOn =
+				(passwordPolicy.getMaxAge() * 1000) + timeModified;
+
+			long timeStartWarning =
+				passwordExpiresOn - (passwordPolicy.getWarningTime() * 1000);
+
+			if ((now.getTime() * 1000) > timeStartWarning) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		return false;
+	}
 	public List search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
@@ -1117,6 +1207,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateLockout(User user, boolean lockout)
 		throws PortalException, SystemException {
 
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+		if ((passwordPolicy == null) || !passwordPolicy.isLockout()) {
+			return user;
+		}
+
 		Date lockoutDate = null;
 
 		if (lockout) {
@@ -1181,14 +1277,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public User updatePassword(
 			long userId, String password1, String password2,
-				boolean passwordReset)
+			boolean passwordReset)
 		throws PortalException, SystemException {
 
-		Date now = new Date();
-
-		validatePassword(userId, password1, password2);
-
 		User user = UserUtil.findByPrimaryKey(userId);
+
+		validatePassword(user.getCompanyId(), userId, password1, password2);
 
 		String oldEncPwd = user.getPassword();
 
@@ -1211,14 +1305,27 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordUnencrypted(password1);
 		user.setPasswordEncrypted(true);
 		user.setPasswordReset(passwordReset);
-		user.setPasswordModifiedDate(now);
+		user.setPasswordModified(true);
+		user.setPasswordModifiedDate(new Date());
 		user.setGraceLoginCount(0);
 
 		UserUtil.update(user);
 
+		user.setPasswordModified(false);
+
 		PasswordTrackerLocalServiceUtil.trackPassword(userId, oldEncPwd);
 
 		return user;
+	}
+
+	public void updatePasswordReset(long userId, boolean passwordReset)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		user.setPasswordReset(passwordReset);
+
+		UserUtil.update(user);
 	}
 
 	public void updatePortrait(long userId, byte[] bytes)
@@ -1377,6 +1484,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		long userId = GetterUtil.getLong(login);
 
+		// User input validation
+
 		if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 			if (!Validator.isEmailAddress(login)) {
 				throw new UserEmailAddressException();
@@ -1400,6 +1509,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		int authResult = Authenticator.FAILURE;
 
+		// Pre-authentication pipeline
+
 		String[] authPipelinePre =
 			PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE);
 
@@ -1418,6 +1529,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				authPipelinePre, companyId, userId, password, headerMap,
 				parameterMap);
 		}
+
+		// Get user
 
 		User user = null;
 
@@ -1443,10 +1556,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return Authenticator.DNE;
 		}
 
-		// Check user account lockout
-
-		checkLockout(user);
-
 		if (!user.isPasswordEncrypted()) {
 			user.setPassword(PwdEncryptor.encrypt(user.getPassword()));
 			user.setPasswordEncrypted(true);
@@ -1454,44 +1563,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			UserUtil.update(user);
 		}
 
-		// Check password expiration
+		// Check password policy to see if the is account locked out or if the
+		// password is expired
 
-		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+		checkLockout(user);
 
-		if (isPasswordExpired(user)) {
-			int graceLoginCount = user.getGraceLoginCount();
+		checkPasswordExpired(user);
 
-			if (graceLoginCount < passwordPolicy.getGraceLimit()) {
-				user.setGraceLoginCount(++graceLoginCount);
-
-				UserUtil.update(user);
-			}
-			else {
-				user.setPasswordReset(true);
-
-				UserUtil.update(user);
-			}
-		}
-
-		if (passwordPolicy.getChangeable() &&
-			passwordPolicy.getChangeRequired()) {
-
-			// Force user to change password on first login
-
-			if (user.getLastLoginDate() == null) {
-				boolean passwordReset = false;
-
-				if (passwordPolicy.getChangeable() &&
-					passwordPolicy.getChangeRequired()) {
-
-					passwordReset = true;
-				}
-
-				user.setPasswordReset(passwordReset);
-
-				UserUtil.update(user);
-			}
-		}
+		// Authenticate against the User_ table
 
 		if (authResult == Authenticator.SUCCESS) {
 			if (GetterUtil.getBoolean(PropsUtil.get(
@@ -1538,6 +1617,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
+		// Post-authentication pipeline
+
 		if (authResult == Authenticator.SUCCESS) {
 			String[] authPipelinePost =
 				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST);
@@ -1559,6 +1640,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
+		// Execute code triggered by authentication failure
+
 		if (authResult == Authenticator.FAILURE) {
 			try {
 				String[] authFailure =
@@ -1578,29 +1661,37 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 						parameterMap);
 				}
 
-				int failedLoginAttempts = user.getFailedLoginAttempts();
-				int maxFailures = passwordPolicy.getMaxFailure();
+				// Let LDAP handle max failure event
 
-				if ((failedLoginAttempts >= maxFailures) &&
-					(maxFailures != 0)) {
+				if (!PortalLDAPUtil.isPasswordPolicyEnabled(
+						user.getCompanyId())) {
 
-					String[] authMaxFailures =
-						PropsUtil.getArray(PropsUtil.AUTH_MAX_FAILURES);
+					PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
-					if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
-						AuthPipeline.onMaxFailuresByEmailAddress(
-							authMaxFailures, companyId, login, headerMap,
-							parameterMap);
-					}
-					else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
-						AuthPipeline.onMaxFailuresByScreenName(
-							authMaxFailures, companyId, login, headerMap,
-							parameterMap);
-					}
-					else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
-						AuthPipeline.onMaxFailuresByUserId(
-							authMaxFailures, companyId, userId, headerMap,
-							parameterMap);
+					int failedLoginAttempts = user.getFailedLoginAttempts();
+					int maxFailures = passwordPolicy.getMaxFailure();
+
+					if ((failedLoginAttempts >= maxFailures) &&
+						(maxFailures != 0)) {
+
+						String[] authMaxFailures =
+							PropsUtil.getArray(PropsUtil.AUTH_MAX_FAILURES);
+
+						if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+							AuthPipeline.onMaxFailuresByEmailAddress(
+								authMaxFailures, companyId, login, headerMap,
+								parameterMap);
+						}
+						else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+							AuthPipeline.onMaxFailuresByScreenName(
+								authMaxFailures, companyId, login, headerMap,
+								parameterMap);
+						}
+						else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+							AuthPipeline.onMaxFailuresByUserId(
+								authMaxFailures, companyId, userId, headerMap,
+								parameterMap);
+						}
 					}
 				}
 			}
@@ -1763,7 +1854,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(
 					companyId);
 
-			PwdToolkitUtil.validate(0, password1, password2, passwordPolicy);
+			PwdToolkitUtil.validate(
+				companyId, 0, password1, password2, passwordPolicy);
 		}
 
 		if (!Validator.isEmailAddress(emailAddress)) {
@@ -1834,14 +1926,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validatePassword(
-			long userId, String password1, String password2)
+			long companyId, long userId, String password1, String password2)
 		throws PortalException, SystemException {
+
+		if (!password1.equals(password2)) {
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORDS_DO_NOT_MATCH);
+		}
 
 		PasswordPolicy passwordPolicy =
 			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
 				userId);
 
-		PwdToolkitUtil.validate(userId, password1, password2, passwordPolicy);
+		PwdToolkitUtil.validate(
+			companyId, userId, password1, password2, passwordPolicy);
 	}
 
 	protected void validateScreenName(long companyId, String screenName)

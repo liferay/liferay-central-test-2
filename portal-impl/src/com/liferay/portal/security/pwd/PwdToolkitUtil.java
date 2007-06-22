@@ -24,7 +24,9 @@ package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.InstancePool;
 
@@ -41,11 +43,18 @@ public class PwdToolkitUtil {
 	}
 
 	public static void validate(
-			long userId, String password1, String password2,
+			long companyId, long userId, String password1, String password2,
 			PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
 
-		_instance._validate(userId, password1, password2, passwordPolicy);
+		if (!password1.equals(password2)) {
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORDS_DO_NOT_MATCH);
+		}
+
+		if (!PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
+			_instance._validate(userId, password1, password2, passwordPolicy);
+		}
 	}
 
 	private PwdToolkitUtil() {

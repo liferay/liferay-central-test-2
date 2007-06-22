@@ -193,6 +193,13 @@ public class UserLocalServiceUtil {
 		userLocalService.checkLoginFailureByScreenName(companyId, screenName);
 	}
 
+	public static void checkPasswordExpired(com.liferay.portal.model.User user)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.checkPasswordExpired(user);
+	}
+
 	public static com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.PortalException, 
@@ -395,6 +402,15 @@ public class UserLocalServiceUtil {
 		return userLocalService.isPasswordExpired(user);
 	}
 
+	public static boolean isPasswordExpiringSoon(
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.isPasswordExpiringSoon(user);
+	}
+
 	public static java.util.List search(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
@@ -563,6 +579,13 @@ public class UserLocalServiceUtil {
 
 		return userLocalService.updatePassword(userId, password1, password2,
 			passwordReset);
+	}
+
+	public static void updatePasswordReset(long userId, boolean passwordReset)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.updatePasswordReset(userId, passwordReset);
 	}
 
 	public static void updatePortrait(long userId, byte[] bytes)

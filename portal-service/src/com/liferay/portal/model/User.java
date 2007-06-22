@@ -66,6 +66,12 @@ public interface User extends UserModel {
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
 
+	public boolean getPasswordModified();
+
+	public boolean isPasswordModified();
+
+	public void setPasswordModified(boolean passwordModified);
+
 	public java.util.Locale getLocale();
 
 	public void setLanguageId(java.lang.String languageId);
