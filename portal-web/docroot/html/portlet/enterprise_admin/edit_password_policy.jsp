@@ -293,7 +293,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 					<select name="<portlet:namespace />warningTime">
 
 						<%
-						for (int i = 7; i < 15; i++) {
+						for (int i = 7; i < 16; i++) {
 						%>
 
 							<option value="<%= _DURATIONS[i] %>" <%= (warningTime == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
