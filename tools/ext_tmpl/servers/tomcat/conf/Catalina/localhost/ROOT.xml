@@ -142,8 +142,8 @@
 	/>
 
 	<!--
-	Disable persistent sessions by default because of a bug in Tomcat 5.5.23
+	Disable persistent sessions by uncommenting the following
 	-->
 
-	<Manager pathname="" />
+	<!--<Manager pathname="" />-->
 </Context>
