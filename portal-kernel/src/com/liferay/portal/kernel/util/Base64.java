@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -164,7 +167,7 @@ public class Base64 {
 			os.flush();
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			_log.error(e.getMessage());
 		}
 
 		return encode(bam.toByteArray());
@@ -186,10 +189,12 @@ public class Base64 {
 			return is.readObject();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e.getMessage());
 		}
 
 		return null;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(Base64.class);
 
 }

@@ -437,6 +437,8 @@ public abstract class BaseUpgradeTableImpl {
 			return tempFileName;
 		}
 		else {
+			FileUtil.delete(tempFileName);
+
 			return null;
 		}
 	}

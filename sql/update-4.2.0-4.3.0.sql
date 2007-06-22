@@ -49,6 +49,7 @@ alter table IGImage add largeImageId LONG;
 alter table Image add height INTEGER;
 alter table Image add width INTEGER;
 alter table Image add size_ INTEGER;
+delete from Image where type_ = 'na';
 
 alter table JournalArticle add id_ VARCHAR(75) null;
 alter table JournalArticle add resourcePrimKey LONG;

@@ -1,7 +1,7 @@
 <Context path="" crossContext="true">
 
 	<!-- DB2 -->
-	
+
 	<!--<Resource
 		name="jdbc/LiferayPool" 
         auth="Container" 
@@ -12,7 +12,7 @@
         password="lportal"
         maxActive="20" 
 	/>-->
-	
+
 	<!-- Derby -->
 
 	<!--<Resource
