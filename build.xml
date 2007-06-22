@@ -514,6 +514,11 @@
 						tofile="${app.server.dir}/conf/catalina.properties"
 						overwrite="yes"
 					/>
+
+					<copy
+						file="${project.dir}/tools/ext_tmpl/servers/tomcat/conf/jaas.config"
+						tofile="${app.server.dir}/conf/jaas.config"
+					/>
 				</then>
 			</elseif>
 		</if>
@@ -1244,13 +1249,14 @@
 
 		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
 			basedir="${app.server.tomcat.dir}"
+			excludes="common/lib/ext/firebird.jar,common/lib/ext/interbase.jar,common/lib/ext/jtds.jar,common/lib/ext/mysql.jar,common/lib/ext/ojdbc14.jar,common/lib/ext/p6spy.jar,common/lib/ext/postgresql.jar,common/lib/ext/sap.jar,common/lib/ext/spy.properties"
 		/>
 
 		<delete file="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
 			basedir="${app.server.tomcat.dir}"
-			excludes="bin/jmx.jar"
+			excludes="bin/jmx.jar,common/lib/ext/firebird.jar,common/lib/ext/interbase.jar,common/lib/ext/jtds.jar,common/lib/ext/mysql.jar,common/lib/ext/ojdbc14.jar,common/lib/ext/p6spy.jar,common/lib/ext/postgresql.jar,common/lib/ext/sap.jar,common/lib/ext/spy.properties"
 		/>
 	</target>
 
