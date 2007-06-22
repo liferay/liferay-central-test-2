@@ -122,7 +122,7 @@ if (Validator.isNotNull(portlet.getConfigurationPath())) {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 }
 else {
-	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_look_and_feel");
+	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 }
 
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());

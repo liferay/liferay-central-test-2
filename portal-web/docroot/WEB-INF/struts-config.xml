@@ -9,70 +9,6 @@
 		<form-bean name="communitiesPageForm" type="com.liferay.portlet.communities.form.PageForm" />
 		<form-bean name="documentLibraryFileEntryForm" type="com.liferay.portlet.documentlibrary.form.FileEntryForm" />
 		<form-bean name="mapsMapsForm" type="com.liferay.portlet.maps.form.MapsForm" />
-		<form-bean name="portletConfigurationLookAndFeelForm" type="org.apache.struts.action.DynaActionForm">
-			<form-property type="java.util.ArrayList" name="listBorderWidths" />
-			<form-property type="java.util.ArrayList" name="listBorderStyles" />
-			<form-property type="java.util.ArrayList" name="listImageAttachments" />
-			<form-property type="java.util.ArrayList" name="listImagePositions" />
-			<form-property type="java.util.ArrayList" name="listImageTiling" />
-			<form-property type="java.util.ArrayList" name="listFonts" />
-			<form-property type="java.util.ArrayList" name="listFontSizes" />
-			<form-property type="java.util.ArrayList" name="listFontDecorations" />
-			<form-property type="java.lang.String" name="portletBgColor" />
-			<form-property type="java.lang.String" name="portletBgImageUrl" />
-			<form-property type="java.lang.String" name="portletBgImageAttach" />
-			<form-property type="java.lang.String" name="portletBgImagePos" />
-			<form-property type="java.lang.String" name="portletBgImageTile" />
-			<form-property type="java.lang.String" name="portletBorderWidth" />
-			<form-property type="java.lang.String" name="portletBorderStyle" />
-			<form-property type="java.lang.String" name="portletBorderColor" />
-			<form-property type="java.lang.String" name="headerBgColor" />
-			<form-property type="java.lang.String" name="headerBgImageUrl" />
-			<form-property type="java.lang.String" name="headerBgImageAttach" />
-			<form-property type="java.lang.String" name="headerBgImagePos" />
-			<form-property type="java.lang.String" name="headerBgImageTile" />
-			<form-property type="java.lang.String" name="headerBorderWidth" />
-			<form-property type="java.lang.String" name="headerBorderStyle" />
-			<form-property type="java.lang.String" name="headerBorderColor" />
-			<form-property type="java.lang.String" name="headerTextColor" />
-			<form-property type="java.lang.String" name="headerTextDecor" />
-			<form-property type="java.lang.String" name="headerTextFont" />
-			<form-property type="java.lang.String" name="headerTextSize" />
-			<form-property type="java.lang.String" name="headerTextStyle" />
-			<form-property type="java.lang.String" name="headerTextBold" />
-			<form-property type="java.lang.String" name="contentBgColor" />
-			<form-property type="java.lang.String" name="contentBgImageUrl" />
-			<form-property type="java.lang.String" name="contentBgImageAttach" />
-			<form-property type="java.lang.String" name="contentBgImagePos" />
-			<form-property type="java.lang.String" name="contentBgImageTile" />
-			<form-property type="java.lang.String" name="contentBorderWidth" />
-			<form-property type="java.lang.String" name="contentBorderStyle" />
-			<form-property type="java.lang.String" name="contentBorderColor" />
-			<form-property type="java.lang.String" name="contentTextColor" />
-			<form-property type="java.lang.String" name="contentTextDecor" />
-			<form-property type="java.lang.String" name="contentTextFont" />
-			<form-property type="java.lang.String" name="contentTextSize" />
-			<form-property type="java.lang.String" name="contentTextStyle" />
-			<form-property type="java.lang.String" name="contentTextBold" />
-			<form-property type="java.lang.String" name="contentLinkColor" />
-			<form-property type="java.lang.String" name="contentLinkDecor" />
-			<form-property type="java.lang.String" name="contentLinkFont" />
-			<form-property type="java.lang.String" name="contentLinkSize" />
-			<form-property type="java.lang.String" name="contentLinkStyle" />
-			<form-property type="java.lang.String" name="contentLinkBold" />
-			<form-property type="java.lang.String" name="contentLinkVisitedColor" />
-			<form-property type="java.lang.String" name="contentLinkVisitedDecor" />
-			<form-property type="java.lang.String" name="contentLinkVisitedFont" />
-			<form-property type="java.lang.String" name="contentLinkVisitedSize" />
-			<form-property type="java.lang.String" name="contentLinkVisitedStyle" />
-			<form-property type="java.lang.String" name="contentLinkVisitedBold" />
-			<form-property type="java.lang.String" name="contentLinkHoverColor" />
-			<form-property type="java.lang.String" name="contentLinkHoverDecor" />
-			<form-property type="java.lang.String" name="contentLinkHoverFont" />
-			<form-property type="java.lang.String" name="contentLinkHoverSize" />
-			<form-property type="java.lang.String" name="contentLinkHoverStyle" />
-			<form-property type="java.lang.String" name="contentLinkHoverBold" />
-		</form-bean>
 	</form-beans>
 
 	<!-- Global Forwards -->
@@ -1255,11 +1191,6 @@
 		<!-- Portlet Configuration -->
 
 		<action path="/portlet_configuration/edit_configuration" type="com.liferay.portlet.portletconfiguration.action.EditConfigurationAction">
-			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
-		</action>
-
-		<action path="/portlet_configuration/edit_look_and_feel" type="com.liferay.portlet.portletconfiguration.action.EditLookAndFeelAction" name="portletConfigurationLookAndFeelForm">
-			<forward name="portlet.portlet_configuration.edit_look_and_feel" path="portlet.portlet_configuration.edit_look_and_feel" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 

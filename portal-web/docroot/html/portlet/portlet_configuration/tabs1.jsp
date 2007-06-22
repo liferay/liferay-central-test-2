@@ -43,17 +43,6 @@ configurationURL.setParameter("redirect", redirect);
 configurationURL.setParameter("portletResource", portletResource);
 configurationURL.setParameter("previewWidth", previewWidth);
 
-// Look and feel
-
-PortletURL lookAndFeelURL = renderResponse.createRenderURL();
-
-lookAndFeelURL.setWindowState(WindowState.MAXIMIZED);
-
-lookAndFeelURL.setParameter("struts_action", "/portlet_configuration/edit_look_and_feel");
-lookAndFeelURL.setParameter("redirect", redirect);
-lookAndFeelURL.setParameter("portletResource", portletResource);
-lookAndFeelURL.setParameter("previewWidth", previewWidth);
-
 // Supported clients
 
 PortletURL supportedClientsURL = renderResponse.createRenderURL();
@@ -63,6 +52,7 @@ supportedClientsURL.setWindowState(WindowState.MAXIMIZED);
 supportedClientsURL.setParameter("struts_action", "/portlet_configuration/edit_supported_clients");
 supportedClientsURL.setParameter("redirect", redirect);
 supportedClientsURL.setParameter("portletResource", portletResource);
+configurationURL.setParameter("previewWidth", previewWidth);
 
 // Permissions
 
@@ -82,19 +72,17 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationPath()) %>">
 				<liferay-ui:tabs
-					names="setup,look-and-feel,supported-clients,permissions"
+					names="setup,supported-clients,permissions"
 					url0="<%= configurationURL.toString() %>"
-					url1="<%= lookAndFeelURL.toString() %>"
-					url2="<%= supportedClientsURL.toString() %>"
-					url3="<%= permissionsURL.toString() %>"
+					url1="<%= supportedClientsURL.toString() %>"
+					url2="<%= permissionsURL.toString() %>"
 				/>
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
-					names="look-and-feel,supported-clients,permissions"
-					url0="<%= lookAndFeelURL.toString() %>"
-					url1="<%= supportedClientsURL.toString() %>"
-					url2="<%= permissionsURL.toString() %>"
+					names="supported-clients,permissions"
+					url0="<%= supportedClientsURL.toString() %>"
+					url1="<%= permissionsURL.toString() %>"
 				/>
 			</c:otherwise>
 		</c:choose>
@@ -103,17 +91,15 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationPath()) %>">
 				<liferay-ui:tabs
-					names="setup,look-and-feel,permissions"
+					names="setup,permissions"
 					url0="<%= configurationURL.toString() %>"
-					url1="<%= lookAndFeelURL.toString() %>"
-					url2="<%= permissionsURL.toString() %>"
+					url1="<%= permissionsURL.toString() %>"
 				/>
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
-					names="look-and-feel,permissions"
-					url0="<%= lookAndFeelURL.toString() %>"
-					url1="<%= permissionsURL.toString() %>"
+					names="permissions"
+					url0="<%= permissionsURL.toString() %>"
 				/>
 			</c:otherwise>
 		</c:choose>
