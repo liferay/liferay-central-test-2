@@ -96,10 +96,10 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 	<c:if test="<%= editable %>">
 
 		<%
-		String tabs2Names = "display,roles";
+		String tabs2Names = "display,password,roles";
 
-		if (passwordPolicy.getChangeable()) {
-			tabs2Names = "display,password,roles";
+		if ((passwordPolicy != null) && !passwordPolicy.isChangeable()) {
+			tabs2Names = "display,roles";
 		}
 		%>
 
@@ -112,7 +112,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<%@ include file="/html/portlet/enterprise_admin/edit_user_display.jspf" %>
 			</liferay-ui:section>
 
-			<c:if test="<%= passwordPolicy.getChangeable() %>">
+			<c:if test="<%= (passwordPolicy == null) || passwordPolicy.isChangeable() %>">
 				<liferay-ui:section>
 					<%@ include file="/html/portlet/enterprise_admin/edit_user_password.jspf" %>
 				</liferay-ui:section>

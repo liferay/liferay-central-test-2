@@ -1339,6 +1339,7 @@
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
 		<exception>OrganizationParent</exception>
+		<exception>PasswordExpired</exception>
 		<exception>PasswordPolicyName</exception>
 		<exception>PwdEncryptor</exception>
 		<exception>PhoneNumber</exception>

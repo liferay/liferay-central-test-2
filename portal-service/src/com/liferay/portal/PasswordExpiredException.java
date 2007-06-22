@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,16 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal;
 
-<%@ page import="com.liferay.portal.CookieNotSupportedException" %>
-<%@ page import="com.liferay.portal.NoSuchUserException" %>
-<%@ page import="com.liferay.portal.PasswordExpiredException" %>
-<%@ page import="com.liferay.portal.UserEmailAddressException" %>
-<%@ page import="com.liferay.portal.UserLockoutException" %>
-<%@ page import="com.liferay.portal.UserPasswordException" %>
-<%@ page import="com.liferay.portal.UserScreenNameException" %>
-<%@ page import="com.liferay.portal.action.LoginAction" %>
-<%@ page import="com.liferay.portal.security.auth.AuthException" %>
+/**
+ * <a href="PasswordExpiredException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class PasswordExpiredException extends PortalException {
+
+	public PasswordExpiredException() {
+		super();
+	}
+
+	public PasswordExpiredException(String msg) {
+		super(msg);
+	}
+
+	public PasswordExpiredException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public PasswordExpiredException(Throwable cause) {
+		super(cause);
+	}
+
+}
