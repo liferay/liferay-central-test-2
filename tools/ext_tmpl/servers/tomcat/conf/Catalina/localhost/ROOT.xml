@@ -1,5 +1,18 @@
 <Context path="" crossContext="true">
 
+	<!-- DB2 -->
+	
+	<!--<Resource
+		name="jdbc/LiferayPool" 
+        auth="Container" 
+        type="javax.sql.DataSource"
+        driverClassName="com.ibm.db2.jcc.DB2Driver" 
+        url="jdbc:db2:lportal" 
+        username="db2admin" 
+        password="lportal"
+        maxActive="20" 
+	/>-->
+	
 	<!-- Derby -->
 
 	<!--<Resource
