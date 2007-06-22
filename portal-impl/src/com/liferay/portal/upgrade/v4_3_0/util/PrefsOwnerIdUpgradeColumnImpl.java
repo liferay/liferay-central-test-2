@@ -47,6 +47,14 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 		_userIdMapper = userIdMapper;
 	}
 
+	public Integer getNewColumnType(Integer defaultType) {
+		return new Integer(Types.BIGINT);
+	}
+	
+	public Long getNewGroupId() {
+		return _newGroupId;
+	}
+
 	public Object getNewValue(Object oldValue) throws Exception {
 		_ownerType = null;
 		_oldGroupId = null;
@@ -113,10 +121,6 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public Long getOldGroupId() {
 		return _oldGroupId;
-	}
-
-	public Long getNewGroupId() {
-		return _newGroupId;
 	}
 
 	public Boolean isPrivateLayout() {

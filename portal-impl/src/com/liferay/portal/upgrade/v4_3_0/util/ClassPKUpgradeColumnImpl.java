@@ -47,6 +47,10 @@ public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 		_classPKContainers = classPKContainers;
 	}
 
+	public Integer getNewColumnType(Integer defaultType) {
+		return new Integer(Types.BIGINT);
+	}
+
 	public Object getNewValue(Object oldValue) throws Exception {
 		Long classNameId = (Long)_classNameIdColumn.getNewValue();
 
