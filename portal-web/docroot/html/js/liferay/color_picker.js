@@ -2,6 +2,7 @@ Liferay.ColorPicker = new Class({
 
 	/*
 	context (Object): A DOM object which specifies the context in which to search for the item
+	hasImage: (Boolean) If set to true, it uses the "item" param or whatever image has the .use-color-picker class as the image
 	item: (Object|String): A DOM object or a jQuery Selector string that specifies which field to insert the selected value into
 	onChange (Function): A function that will get called whenever the color changes
 	onClose (Function): A function that will get called when the color picker is closed
@@ -14,6 +15,7 @@ Liferay.ColorPicker = new Class({
 		instance._onClose = params.onClose || null;
 		instance._onChange = params.onChange || null;
 		instance._context = params.context || document.body;
+		instance._hasImage = params.hasImage || false;
 		instance._item = jQuery(params.item || '.use-color-picker', instance._context);
 
 		instance._baseColor = {r:255, g:0, b:0};
@@ -110,20 +112,35 @@ Liferay.ColorPicker = new Class({
 		var colorPickerImgHTML = '<img class="lfr-color-picker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" />';
 
 		if (items.length == 1) {
-			var colorPickerImg = jQuery(colorPickerImgHTML);
+			
+			var colorPickerImg;
+			
+			if (instance._hasImage) {
+				colorPickerImg = items;
+			}
+			else {
+				colorPickerImg = jQuery(colorPickerImgHTML);
+				items.after(colorPickerImg);
+			}
 
 			colorPickerImg.click(
 				function(event) {
 					instance._toggle(event, this);
 				}
 			);
-
-			items.after(colorPickerImg);
 		}
 		else {
 			items.each(
 				function() {
-					var colorPickerImg = jQuery(colorPickerImgHTML);
+					var item = jQuery(this);
+					var colorPickerImg;
+					
+					if (!instance._hasImage) {
+						colorPickerImg = jQuery(colorPickerImgHTML);
+					}
+					else {
+						colorPickerImg = item;
+					}
 
 					colorPickerImg.click(
 						function(event) {
@@ -131,7 +148,7 @@ Liferay.ColorPicker = new Class({
 						}
 					);
 
-					jQuery(this).after(colorPickerImg);
+					item.after(colorPickerImg);
 				}
 			);
 		}
