@@ -396,6 +396,10 @@
 		<priority value="DEBUG" />
 	</category>
 
+	<category name="com.liferay.portlet.portletconfiguration.action">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.shopping.action.PayPalNotificationAction">
 		<priority value="DEBUG" />
 	</category>

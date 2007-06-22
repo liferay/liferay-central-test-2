@@ -39,6 +39,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -78,6 +80,10 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		//String title = ParamUtil.getString(req, "title");
 		String css = ParamUtil.getString(req, "css");
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Updating css " + css);
+		}
+
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(layout, portletId);
 
@@ -91,5 +97,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 
 		return null;
 	}
+
+	private static Log _log = LogFactory.getLog(UpdateLookAndFeelAction.class);
 
 }

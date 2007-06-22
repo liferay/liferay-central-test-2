@@ -271,7 +271,8 @@ Liferay.PortletCSS = {
 						portletId: instance._portletId
 					},
 					async: false,
-					dataType: 'json'
+					dataType: 'json',
+					type: "POST"
 				}
 			);
 
@@ -342,6 +343,7 @@ Liferay.PortletCSS = {
 					message = Liferay.Language.get('your-settings-could-not-be-saved');
 					messageClass = 'portlet-msg-error';
 				}
+
 				if (!ajaxResponseMsg.length) {
 					ajaxResponse = jQuery(ajaxResponseHTML);
 					instance._newPanel.find('form').prepend(ajaxResponse);
@@ -349,9 +351,9 @@ Liferay.PortletCSS = {
 				}
 
 				ajaxResponse.hide();
-				ajaxResponse.attr('class', 'portlet-msg-success');
+				ajaxResponse.attr('class', messageClass);
 				ajaxResponse.empty();
-				ajaxResponse.html(Liferay.Language.get('your-request-processed-successfully'));
+				ajaxResponse.html(message);
 				ajaxResponse.fadeIn('normal');
 			};
 
@@ -368,7 +370,8 @@ Liferay.PortletCSS = {
 								portletId: instance._portletId,
 								css: jQuery.toJSON(instance._objData)
 							},
-							complete: saveHandler
+							complete: saveHandler,
+							type: "POST"
 						}
 					);
 				}

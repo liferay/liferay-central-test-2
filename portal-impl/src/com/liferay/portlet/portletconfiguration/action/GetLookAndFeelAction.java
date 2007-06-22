@@ -86,6 +86,10 @@ public class GetLookAndFeelAction extends JSONAction {
 
 		try {
 			if (Validator.isNotNull(css)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Getting css " + css);
+				}
+
 				JSONObject jsonObj = new JSONObject(css);
 
 				return jsonObj.toString();
