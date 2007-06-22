@@ -33,7 +33,7 @@ Display Tag Library 1.1
 dom4j 1.6.1
 EasyConf 0.9.5
 Ehcache 1.2.4
-FCKeditor 2.3.1
+FCKeditor 2.4.3
 Friki 2.1.1
 Hessian 2.1.12
 Hibernate 3.2
@@ -97,7 +97,7 @@ Servicemix 3.1
 Simple Java Captcha 0.03 (patched for debug and additional properties)
 SLF4J 1.0.2
 Smack 2.2.1
-Spring 2.0.5
+Spring 2.0.6
 SSHTerm 0.2.2
 SSHVnc 0.1.3
 Struts 1.2.9 (removed META-INF/MANIFEST.MF)
