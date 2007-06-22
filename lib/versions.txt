@@ -91,7 +91,7 @@ Portals Bridges 1.0
 Portlet 1.0
 PortletBridge 1.1.2
 PostgreSQL 8.2-505 JDBC 3
-Quartz 1.5.0
+Quartz 1.6.0
 Rome 0.9
 Secure FTP 1.6.3
 Servicemix 3.1
