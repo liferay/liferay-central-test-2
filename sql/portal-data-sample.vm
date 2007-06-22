@@ -65,7 +65,7 @@ insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLay
 
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($usaOrganizationId, $companyId, 0, 'Liferay USA', FALSE, 5, 19, 12017, '');
 
-insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($usaGroupId, $companyId, $defaultUserId, $organizationClassNameId, '$usaOrganizationId', 0, 0, '$usaGroupId', '', TRUE);
+insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($usaGroupId, $companyId, $defaultUserId, $organizationClassNameId, $usaOrganizationId, 0, 0, '$usaGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $usaGroupId, TRUE, FALSE, 'classic', '01', 0);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $usaGroupId, FALSE, FALSE, 'classic', '01', 0);
 
@@ -110,7 +110,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($eurOrganizationId, $companyId, 0, 'Liferay Europe', FALSE, 0, 4, 12017, '');
 
-insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($eurGroupId, $companyId, $defaultUserId, $organizationClassNameId, '$eurOrganizationId', 0, 0, '$eurGroupId', '', TRUE);
+insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($eurGroupId, $companyId, $defaultUserId, $organizationClassNameId, $eurOrganizationId, 0, 0, '$eurGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $eurGroupId, TRUE, FALSE, 'classic', '01', 0);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $eurGroupId, FALSE, FALSE, 'classic', '01', 0);
 
@@ -137,7 +137,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 
 insert into Organization_ (organizationId, companyId, parentOrganizationId, name, recursable, regionId, countryId, statusId, comments) values ($asiOrganizationId, $companyId, 0, 'Liferay Asia', FALSE, 0, 2, 12017, '');
 
-insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($asiGroupId, $companyId, $defaultUserId, $organizationClassNameId, '$asiOrganizationId', 0, 0, '$asiGroupId', '', TRUE);
+insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($asiGroupId, $companyId, $defaultUserId, $organizationClassNameId, $asiOrganizationId, 0, 0, '$asiGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $asiGroupId, TRUE, FALSE, 'classic', '01', 0);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $asiGroupId, FALSE, FALSE, 'classic', '01', 0);
 
@@ -163,7 +163,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 ## User (default)
 ##
 
-insert into User_ (userId, companyId, createDate, modifiedDate, defaultUser, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ($defaultUserId, $companyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE, $defaultContactId, 'password', FALSE, FALSE, $defaultUserId, 'default@liferay.com', 'Welcome!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+insert into User_ (userId, companyId, createDate, modifiedDate, defaultUser, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ($defaultUserId, $companyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, TRUE, $defaultContactId, 'password', FALSE, FALSE, '$defaultUserId', 'default@liferay.com', 'Welcome!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($defaultContactId, $companyId, $defaultUserId, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, '', '', '', TRUE, '01/01/1970');
 
 ##
@@ -175,7 +175,7 @@ insert into Contact_ (contactId, companyId, userId, userName, createDate, modifi
 
 #set($testGroupId = $counter.get())
 
-insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($testGroupId, $companyId, $testUserId, $userClassNameId, '$testUserId', 0, 0, '$testGroupId', '', TRUE);
+insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($testGroupId, $companyId, $testUserId, $userClassNameId, $testUserId, 0, 0, '$testGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $testGroupId, TRUE, FALSE, 'classic', '01', 1);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $testGroupId, FALSE, FALSE, 'classic', '01', 0);
 insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values ($counter.get(), $testGroupId, $companyId, TRUE, 1, 0, '<?xml version="1.0"?>\n\n<root>\n  <name>Home A1</name>\n</root>', 'portlet', 'column-1=71_INSTANCE_OY0d,61,65,\ncolumn-2=9,29,79,8,\nlayout-template-id=2_columns_ii\n', FALSE, '', 0);
