@@ -254,6 +254,16 @@ public class EditSettingsAction extends PortletAction {
 		String passwordEncryptionAlgorithm = ParamUtil.getString(
 			req, "passwordEncryptionAlgorithm");
 		String userMappings = ParamUtil.getString(req, "userMappings");
+		boolean importOnStartup = ParamUtil.getBoolean(req, "importOnStartup");
+		long importInterval = ParamUtil.getLong(req, "importInterval");
+		String importSearchFilter = ParamUtil.getString(
+			req, "importSearchFilter");
+		boolean exportEnabled = ParamUtil.getBoolean(req, "exportEnabled");
+		String usersDn = ParamUtil.getString(req, "usersDn");
+		String userDefaultObjectClasses = ParamUtil.getString(
+			req, "userDefaultObjectClasses");
+		boolean passwordPolicyEnabled = ParamUtil.getBoolean(
+			req, "passwordPolicyEnabled");
 
 		try {
 			if (enabled) {
@@ -298,6 +308,20 @@ public class EditSettingsAction extends PortletAction {
 			PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM,
 			passwordEncryptionAlgorithm);
 		prefs.setValue(PropsUtil.LDAP_USER_MAPPINGS, userMappings);
+		prefs.setValue(
+			PropsUtil.LDAP_IMPORT_ON_STARTUP, String.valueOf(importOnStartup));
+		prefs.setValue(
+			PropsUtil.LDAP_IMPORT_INTERVAL, String.valueOf(importInterval));
+		prefs.setValue(PropsUtil.LDAP_IMPORT_SEARCH_FILTER, importSearchFilter);
+		prefs.setValue(
+			PropsUtil.LDAP_EXPORT_ENABLED, String.valueOf(exportEnabled));
+		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDn);
+		prefs.setValue(
+			PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES,
+			userDefaultObjectClasses);
+		prefs.setValue(
+			PropsUtil.LDAP_PASSWORD_POLICY_ENABLED,
+			String.valueOf(passwordPolicyEnabled));
 
 		prefs.store();
 	}

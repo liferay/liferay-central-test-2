@@ -325,6 +325,8 @@ public class PropsUtil {
 
 	public static final String LDAP_EXPORT_ENABLED = "ldap.export.enabled";
 
+	public static final String LDAP_PASSWORD_POLICY_ENABLED = "ldap.password.policy.enabled";
+
 	// CAS
 
 	public static final String CAS_AUTH_ENABLED = "cas.auth.enabled";
