@@ -137,12 +137,10 @@ public class ThemeLoader {
 				root.elementText("themes-path"), "/themes");
 
 			String fileStorageValue = GetterUtil.getString(PropsUtil.get(
-				PropsUtil.THEME_IMPORT_FILE_STORAGE_PATH));
+				PropsUtil.THEME_LOADER_STORAGE_PATH));
 
-			if (Validator.isNull(fileStorageValue)) {
-				fileStorageValue = GetterUtil.getString(
-					root.elementText("file-storage"));
-			}
+			fileStorageValue = GetterUtil.getString(
+				root.elementText("file-storage"), fileStorageValue);
 
 			if (Validator.isNotNull(fileStorageValue)) {
 				_fileStorage = new File(fileStorageValue);
