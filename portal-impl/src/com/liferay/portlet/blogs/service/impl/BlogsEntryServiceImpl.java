@@ -40,6 +40,7 @@ import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.StringUtil;
@@ -184,7 +185,6 @@ public class BlogsEntryServiceImpl
 
 		return exportToRSS(
 			name, null, type, version, feedURL, entryURL, blogsEntries);
-
 	}
 
 	public BlogsEntry updateEntry(
@@ -213,11 +213,7 @@ public class BlogsEntryServiceImpl
 
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
-
-		if (description == null) {
-			description = name;
-		}
-		syndFeed.setDescription(description);
+		syndFeed.setDescription(GetterUtil.getString(description, name));
 
 		List entries = new ArrayList();
 

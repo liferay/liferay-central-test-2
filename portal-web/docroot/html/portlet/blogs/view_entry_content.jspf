@@ -75,6 +75,8 @@
 				<liferay-ui:icon image="permissions" url="<%= permissionsEntryURL %>" />
 			</c:if>
 
+			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId %>' target="_blank" />
+
 			<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteEntryURL">
 					<portlet:param name="struts_action" value="/blogs/edit_entry" />

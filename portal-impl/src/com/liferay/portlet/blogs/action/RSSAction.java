@@ -72,8 +72,8 @@ public class RSSAction extends Action {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
-		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long groupId = ParamUtil.getLong(req, "groupId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
@@ -88,8 +88,8 @@ public class RSSAction extends Action {
 		if ((categoryId > 0)) {
 			String feedURL =
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-					"/blogs/find_category?p_l_id=" + plid +
-						"&categoryId=" + categoryId;
+					"/blogs/find_category?p_l_id=" + plid + "&categoryId=" +
+						categoryId;
 
 			rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
 				categoryId, SearchContainer.DEFAULT_DELTA, type, version,
