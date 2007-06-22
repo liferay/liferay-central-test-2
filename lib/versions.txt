@@ -41,7 +41,7 @@ HiveMind 1.1
 HTML Parser 1.6
 Hypersonic 1.8.0.7
 iCal4j 1.0b2
-ICEfaces 1.6-snapshot (Subversion rev 14172)
+ICEfaces 1.6-Beta
 ICU4J 3.4.1
 Jackrabbit 1.3.0
 JAIMBot 1.4
