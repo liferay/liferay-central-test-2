@@ -49,6 +49,10 @@ public class PropsUtil_IW {
 		PropsUtil.set(key, value);
 	}
 
+	public void set(long companyId, java.lang.String key, java.lang.String value) {
+		PropsUtil.set(companyId, key, value);
+	}
+
 	public java.lang.String[] getArray(java.lang.String key) {
 		return PropsUtil.getArray(key);
 	}

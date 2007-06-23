@@ -33,9 +33,92 @@ public class ArrayUtil_IW {
 		return _instance;
 	}
 
+	public java.lang.Boolean[] append(java.lang.Boolean[] array,
+		java.lang.Boolean obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Double[] append(java.lang.Double[] array,
+		java.lang.Double obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Integer[] append(java.lang.Integer[] array,
+		java.lang.Integer obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Long[] append(java.lang.Long[] array, java.lang.Long obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Object[] append(java.lang.Object[] array,
+		java.lang.Object obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Object[][] append(java.lang.Object[][] array,
+		java.lang.Object[] obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Short[] append(java.lang.Short[] array, java.lang.Short obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
 	public java.lang.String[] append(java.lang.String[] array,
 		java.lang.String obj) {
 		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.String[][] append(java.lang.String[][] array,
+		java.lang.String[] obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
+	public java.lang.Boolean[] append(java.lang.Boolean[] array1,
+		java.lang.Boolean[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Double[] append(java.lang.Double[] array1,
+		java.lang.Double[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Integer[] append(java.lang.Integer[] array1,
+		java.lang.Integer[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Long[] append(java.lang.Long[] array1,
+		java.lang.Long[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Object[] append(java.lang.Object[] array1,
+		java.lang.Object[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Object[][] append(java.lang.Object[][] array1,
+		java.lang.Object[][] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Short[] append(java.lang.Short[] array1,
+		java.lang.Short[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.String[] append(java.lang.String[] array1,
+		java.lang.String[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.String[][] append(java.lang.String[][] array1,
+		java.lang.String[][] array2) {
+		return ArrayUtil.append(array1, array2);
 	}
 
 	public void combine(java.lang.Object[] array1, java.lang.Object[] array2,

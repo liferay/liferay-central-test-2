@@ -178,10 +178,8 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 							dynamicReq.setParameterValues(name, values);
 						}
 						else {
-							String[] newValues =
-								new String[values.length + oldValues.length];
-
-							ArrayUtil.combine(values, oldValues, newValues);
+							String[] newValues = ArrayUtil.append(
+								values, oldValues);
 
 							dynamicReq.setParameterValues(name, newValues);
 						}

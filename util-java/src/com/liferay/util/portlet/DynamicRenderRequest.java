@@ -94,10 +94,8 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 						_params.put(name, oldValues);
 					}
 					else {
-						String[] newValues =
-							new String[oldValues.length + curValues.length];
-
-						ArrayUtil.combine(oldValues, curValues, newValues);
+						String[] newValues = ArrayUtil.append(
+							oldValues, curValues);
 
 						_params.put(name, newValues);
 					}

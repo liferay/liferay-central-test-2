@@ -287,11 +287,9 @@ public class UpgradeResource extends UpgradeProcess {
 		};
 		Object[][] resourceColumns2 =
 			(Object[][])ResourceImpl.TABLE_COLUMNS.clone();
-		Object[][] resourceColumns =
-			new Object[resourceColumns1.length + resourceColumns2.length][];
 
-		ArrayUtil.combine(
-			resourceColumns1, resourceColumns2, resourceColumns);
+		Object[][] resourceColumns = ArrayUtil.append(
+			resourceColumns1, resourceColumns2);
 
 		UpgradeColumn companyIdColumn = new TempUpgradeColumnImpl("companyId");
 

@@ -31,9 +31,7 @@
 String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
 if ((compilerEntries != null) && (compilerEntries.length > 0)) {
-	String[] newEntries = new String[entries.length + compilerEntries.length];
-
-	ArrayUtil.combine(entries, compilerEntries, newEntries);
+	String[] newEntries = ArrayUtil.append(entries, compilerEntries);
 
 	entries = newEntries;
 }
@@ -47,9 +45,7 @@ if (themeDisplay.isSignedIn()) {
 	String[] myGlobalEntries = myGlobalPrefs.getValues(PortletKeys.MY_GLOBAL_TAGS, "entries", new String[0]);
 
 	if ((myGlobalEntries != null) && (myGlobalEntries.length > 0)) {
-		String[] newEntries = new String[entries.length + myGlobalEntries.length];
-
-		ArrayUtil.combine(entries, myGlobalEntries, newEntries);
+		String[] newEntries = ArrayUtil.append(entries, myGlobalEntries);
 
 		entries = newEntries;
 	}
@@ -61,9 +57,7 @@ if (themeDisplay.isSignedIn()) {
 	String[] myCommunityEntries = myCommunityPrefs.getValues("entries", new String[0]);
 
 	if ((myCommunityEntries != null) && (myCommunityEntries.length > 0)) {
-		String[] newEntries = new String[entries.length + myCommunityEntries.length];
-
-		ArrayUtil.combine(entries, myCommunityEntries, newEntries);
+		String[] newEntries = ArrayUtil.append(entries, myCommunityEntries);
 
 		entries = newEntries;
 	}

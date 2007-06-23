@@ -76,11 +76,8 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 					StringUtil.merge(entriesFromSessionArray));
 		}
 
-		String[] entries = new String[
-			entriesFromURLArray.length + entriesFromSessionArray.length];
-
-		ArrayUtil.combine(
-			entriesFromURLArray, entriesFromSessionArray, entries);
+		String[] entries = ArrayUtil.append(
+			entriesFromURLArray, entriesFromSessionArray);
 
 		req.setAttribute(WebKeys.TAGS_COMPILER_ENTRIES, entries);
 

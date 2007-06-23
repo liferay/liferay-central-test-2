@@ -91,10 +91,9 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		Object[][] prefsColumns1 = {{"layoutId", new Integer(Types.VARCHAR)}};
 		Object[][] prefsColumns2 =
 			(Object[][])PortletPreferencesImpl.TABLE_COLUMNS.clone();
-		Object[][] prefsColumns =
-			new Object[prefsColumns1.length + prefsColumns2.length][];
 
-		ArrayUtil.combine(prefsColumns1, prefsColumns2, prefsColumns);
+		Object[][] prefsColumns =
+			ArrayUtil.append(prefsColumns1, prefsColumns2);
 
 		PrefsOwnerIdUpgradeColumnImpl upgradeOwnerIdColumn =
 			new PrefsOwnerIdUpgradeColumnImpl(

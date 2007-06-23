@@ -151,10 +151,9 @@ public class UpgradeGroup extends UpgradeProcess {
 		Object[][] layoutColumns1 = {{"ownerId", new Integer(Types.VARCHAR)}};
 		Object[][] layoutColumns2 =
 			(Object[][])LayoutImpl.TABLE_COLUMNS.clone();
-		Object[][] layoutColumns =
-			new Object[layoutColumns1.length + layoutColumns2.length][];
 
-		ArrayUtil.combine(layoutColumns1, layoutColumns2, layoutColumns);
+		Object[][] layoutColumns = ArrayUtil.append(
+			layoutColumns1, layoutColumns2);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			LayoutImpl.TABLE_NAME, layoutColumns, upgradeLayoutOwnerIdColumn,
@@ -182,11 +181,9 @@ public class UpgradeGroup extends UpgradeProcess {
 			{{"ownerId", new Integer(Types.VARCHAR)}};
 		Object[][] layoutSetColumns2 =
 			(Object[][])LayoutSetImpl.TABLE_COLUMNS.clone();
-		Object[][] layoutSetColumns =
-			new Object[layoutSetColumns1.length + layoutSetColumns2.length][];
 
-		ArrayUtil.combine(
-			layoutSetColumns1, layoutSetColumns2, layoutSetColumns);
+		Object[][] layoutSetColumns = ArrayUtil.append(
+			layoutSetColumns1, layoutSetColumns2);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			LayoutSetImpl.TABLE_NAME, layoutSetColumns,

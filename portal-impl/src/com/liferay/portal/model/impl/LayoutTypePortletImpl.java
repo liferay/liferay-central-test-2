@@ -898,11 +898,8 @@ public class LayoutTypePortletImpl
 		String[] staticPortletIdsEnd = _getStaticPortletIds(
 			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
 
-		String[] staticPortletIds = new String[
-			staticPortletIdsStart.length + staticPortletIdsEnd.length];
-
-		ArrayUtil.combine(
-			staticPortletIdsStart, staticPortletIdsEnd, staticPortletIds);
+		String[] staticPortletIds = ArrayUtil.append(
+			staticPortletIdsStart, staticPortletIdsEnd);
 
 		for (int i = 0; i < staticPortletIds.length; i++) {
 			String staticPortletId = staticPortletIds[i];

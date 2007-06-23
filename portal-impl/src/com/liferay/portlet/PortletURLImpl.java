@@ -297,9 +297,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		if (append && _params.containsKey(name)) {
 			String[] oldValues = (String[])_params.get(name);
 
-			String[] newValues = new String[oldValues.length + values.length];
-
-			ArrayUtil.combine(oldValues, values, newValues);
+			String[] newValues = ArrayUtil.append(oldValues, values);
 
 			_params.put(name, newValues);
 		}

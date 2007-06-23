@@ -1740,11 +1740,8 @@ public class PortalUtil {
 			_allSystemGroups = GroupImpl.SYSTEM_GROUPS;
 		}
 		else {
-			_allSystemGroups = new String[
-				GroupImpl.SYSTEM_GROUPS.length + customSystemGroups.length];
-
-			ArrayUtil.combine(
-				GroupImpl.SYSTEM_GROUPS, customSystemGroups, _allSystemGroups);
+			_allSystemGroups = ArrayUtil.append(
+				GroupImpl.SYSTEM_GROUPS, customSystemGroups);
 		}
 
 		_sortedSystemGroups = new String[_allSystemGroups.length];
@@ -1763,11 +1760,8 @@ public class PortalUtil {
 			_allSystemRoles = RoleImpl.SYSTEM_ROLES;
 		}
 		else {
-			_allSystemRoles = new String[
-				RoleImpl.SYSTEM_ROLES.length + customSystemRoles.length];
-
-			ArrayUtil.combine(
-				RoleImpl.SYSTEM_ROLES, customSystemRoles, _allSystemRoles);
+			_allSystemRoles = ArrayUtil.append(
+				RoleImpl.SYSTEM_ROLES, customSystemRoles);
 		}
 
 		_sortedSystemRoles = new String[_allSystemRoles.length];
@@ -1788,13 +1782,8 @@ public class PortalUtil {
 			_allSystemCommunityRoles = RoleImpl.SYSTEM_COMMUNITY_ROLES;
 		}
 		else {
-			_allSystemCommunityRoles = new String[
-				RoleImpl.SYSTEM_COMMUNITY_ROLES.length +
-						customSystemCommunityRoles.length];
-
-			ArrayUtil.combine(
-				RoleImpl.SYSTEM_COMMUNITY_ROLES, customSystemCommunityRoles,
-				_allSystemCommunityRoles);
+			_allSystemCommunityRoles = ArrayUtil.append(
+				RoleImpl.SYSTEM_COMMUNITY_ROLES, customSystemCommunityRoles);
 		}
 
 		_sortedSystemCommunityRoles =
