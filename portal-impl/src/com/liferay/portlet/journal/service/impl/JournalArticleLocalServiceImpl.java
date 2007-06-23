@@ -44,6 +44,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -56,6 +57,7 @@ import com.liferay.portlet.journal.ArticleTitleException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
+import com.liferay.portlet.journal.job.CheckArticleJob;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -71,6 +73,7 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
+import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
@@ -79,13 +82,13 @@ import com.liferay.util.Html;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -408,29 +411,57 @@ public class JournalArticleLocalServiceImpl
 	public void checkArticles() throws PortalException, SystemException {
 		Date now = new Date();
 
-		List articles = JournalArticleUtil.findAll();
-
+		List articles = JournalArticleFinder.findByE_E(Boolean.FALSE, 
+				now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
+		
+		if (_log.isDebugEnabled()) {
+			_log.debug("Expiring " + articles.size() + " JournalArticles");
+		}
+		
+		List companies = new ArrayList();
+		
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
-			Date expirationDate = article.getExpirationDate();
+			article.setApproved(false);
+			article.setExpired(true);
+
+			JournalArticleUtil.update(article);
+			
+			JournalContentUtil.clearArticleGroupCache(article.getGroupId(), 
+					article.getArticleId(), article.getTemplateId());
+			
+			companies.add(new Long(article.getCompanyId()));
+		}		
+
+		Iterator companyItr = companies.iterator();
+		
+		while (companyItr.hasNext()) {
+			long companyId = ((Long)companyItr.next()).longValue();
+			LayoutCacheUtil.clearCache(companyId);
+		}
+
+		
+		articles = JournalArticleFinder.findByR( 
+				now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Sending " + articles.size() + " JournalArticle review emails");
+		}
+		
+		for (int i = 0; i < articles.size(); i++) {
+			JournalArticle article = (JournalArticle)articles.get(i);
+
 			Date reviewDate = article.getReviewDate();
 
-			if (!article.isExpired() && (expirationDate != null) &&
-				expirationDate.before(now)) {
+			if (reviewDate != null) {
 
-				article.setApproved(false);
-				article.setExpired(true);
-
-				JournalArticleUtil.update(article);
-			}
-			else if (reviewDate != null) {
-
-				// Check in 15 minute intervals because of CheckArticleJob
+				// Check in *INTERVAL* minute intervals because of 
+				// CheckArticleJob
 
 				long diff = reviewDate.getTime() - now.getTime();
 
-				if ((diff > 0) && (diff < (Time.MINUTE * 15))) {
+				if ((diff > 0) && (diff < CheckArticleJob.INTERVAL)) {
 					String articleURL = StringPool.BLANK;
 
 					long ownerId = article.getGroupId();
