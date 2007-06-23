@@ -828,7 +828,7 @@ public class PropsUtil {
 	public static final String JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION = "journal.article.force.increment.version";
 
 	public static final String JOURNAL_ARTICLES_CHECK_INTERVAL = "journal.article.check.interval";
-	
+
 	public static final String JOURNAL_IMAGE_SMALL_MAX_SIZE = "journal.image.small.max.size";
 
 	public static final String JOURNAL_IMAGE_EXTENSIONS = "journal.image.extensions";

@@ -29,6 +29,7 @@ import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
@@ -40,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="JournalContentUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class JournalContentUtil {
@@ -59,15 +60,15 @@ public class JournalContentUtil {
 		_cache.flushGroup(GROUP_NAME);
 	}
 
-	public static void clearArticleGroupCache(long groupId, String articleId, 
-			String templateId) {
+	public static void clearCache(
+		long groupId, String articleId, String templateId) {
 
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		String articleGroupKey = _encodeKey(groupId, articleId, templateId, 
-				null);
-		
+		String articleGroupKey = _encodeKey(
+			groupId, articleId, templateId, null);
+
 		_cache.flushGroup(articleGroupKey);
 	}
 
@@ -88,8 +89,6 @@ public class JournalContentUtil {
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
-		String articleGroupKey = _encodeKey(groupId, articleId, templateId, 
-				null);
 
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);
@@ -100,14 +99,21 @@ public class JournalContentUtil {
 					groupId, articleId, templateId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
-				_log.warn(
-					"Unable to get content for " + groupId + " " + articleId +
-						" " + languageId);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to get content for " + groupId + " " +
+							articleId + " " + languageId);
+				}
 			}
 
 			if (content != null) {
-				_cache.putInCache(key, content, ArrayUtil.append(
-						GROUP_NAME_ARRAY, articleGroupKey));
+				String articleGroupKey = _encodeKey(
+					groupId, articleId, templateId, null);
+
+				String[] groups = ArrayUtil.append(
+					GROUP_NAME_ARRAY, articleGroupKey);
+
+				_cache.putInCache(key, content, groups);
 			}
 		}
 		finally {
@@ -131,8 +137,11 @@ public class JournalContentUtil {
 		sm.append(articleId);
 		sm.append(TEMPLATE_SEPARATOR);
 		sm.append(templateId);
-		sm.append(LANGUAGE_SEPARATOR);
-		sm.append(languageId);
+
+		if (Validator.isNotNull(languageId)) {
+			sm.append(LANGUAGE_SEPARATOR);
+			sm.append(languageId);
+		}
 
 		return sm.toString();
 	}

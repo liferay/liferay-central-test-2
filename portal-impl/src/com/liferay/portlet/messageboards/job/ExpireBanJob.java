@@ -51,7 +51,7 @@ public class ExpireBanJob implements IntervalJob {
 				_log.debug("Interval " + rawInterval + " minutes");
 			}
 
-			_interval =  rawInterval * Time.MINUTE;
+			_interval = rawInterval * Time.MINUTE;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

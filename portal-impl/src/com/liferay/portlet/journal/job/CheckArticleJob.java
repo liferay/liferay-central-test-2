@@ -44,12 +44,18 @@ import org.quartz.JobExecutionException;
 public class CheckArticleJob implements IntervalJob {
 
 	public CheckArticleJob() {
-		INTERVAL = GetterUtil.getInteger(PropsUtil.get(
-				PropsUtil.JOURNAL_ARTICLES_CHECK_INTERVAL)) * Time.MINUTE;
+		long rawInterval = GetterUtil.getLong(PropsUtil.get(
+			PropsUtil.JOURNAL_ARTICLES_CHECK_INTERVAL));
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Interval " + rawInterval + " minutes");
+		}
+
+		_interval = rawInterval * Time.MINUTE;
 	}
 
 	public long getInterval() {
-		return INTERVAL;
+		return _interval;
 	}
 
 	public void execute(JobExecutionContext context)
@@ -65,6 +71,6 @@ public class CheckArticleJob implements IntervalJob {
 
 	private static Log _log = LogFactory.getLog(CheckArticleJob.class);
 
-	public static long INTERVAL;
+	private long _interval;
 
 }
