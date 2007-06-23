@@ -256,6 +256,14 @@ public class JournalArticleLocalServiceImpl
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
 		article.setApproved(false);
+		
+		if (expirationDate == null || expirationDate.after(now)) {
+			article.setExpired(false);
+		}
+		else {
+			article.setExpired(true);
+		}
+		
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 
@@ -654,6 +662,12 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = JournalArticleUtil.findByG_A_V(
 			groupId, articleId, version);
+		
+		Date now = new Date();
+		
+		if (article.isExpired() || article.getExpirationDate().before(now)) {
+			return null;
+		}
 
 		/*if (!article.isTemplateDriven()) {
 			return article.getContent();
@@ -1189,7 +1203,14 @@ public class JournalArticleLocalServiceImpl
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
 		article.setApproved(approved);
-		article.setExpired(expired);
+		
+		if (expirationDate == null || expirationDate.after(now)) {
+			article.setExpired(false);
+		}
+		else {
+			article.setExpired(expired);
+		}
+		
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 
