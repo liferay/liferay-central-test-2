@@ -112,14 +112,14 @@ Liferay.ColorPicker = new Class({
 		var colorPickerImgHTML = '<img class="lfr-color-picker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" />';
 
 		if (items.length == 1) {
-			
 			var colorPickerImg;
-			
+
 			if (instance._hasImage) {
 				colorPickerImg = items;
 			}
 			else {
 				colorPickerImg = jQuery(colorPickerImgHTML);
+
 				items.after(colorPickerImg);
 			}
 
@@ -134,7 +134,7 @@ Liferay.ColorPicker = new Class({
 				function() {
 					var item = jQuery(this);
 					var colorPickerImg;
-					
+
 					if (!instance._hasImage) {
 						colorPickerImg = jQuery(colorPickerImgHTML);
 					}
