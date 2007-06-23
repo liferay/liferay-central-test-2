@@ -23,7 +23,9 @@
 package com.liferay.portlet.journal.job;
 
 import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;
@@ -36,16 +38,18 @@ import org.quartz.JobExecutionException;
  * <a href="CheckArticleJob.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class CheckArticleJob implements IntervalJob {
 
 	public CheckArticleJob() {
-		_interval = Time.MINUTE * 15;
+		INTERVAL = GetterUtil.getInteger(PropsUtil.get(
+				PropsUtil.JOURNAL_ARTICLES_CHECK_INTERVAL)) * Time.MINUTE;
 	}
 
 	public long getInterval() {
-		return _interval;
+		return INTERVAL;
 	}
 
 	public void execute(JobExecutionContext context)
@@ -61,6 +65,6 @@ public class CheckArticleJob implements IntervalJob {
 
 	private static Log _log = LogFactory.getLog(CheckArticleJob.class);
 
-	private long _interval;
+	public static long INTERVAL;
 
 }
