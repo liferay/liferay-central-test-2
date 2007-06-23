@@ -59,35 +59,322 @@ public class Test {
 
 	public static void main(String[] args) {
 		try {
-			String[] array1 = new String[] {"a", "b", "c"};
+			Convention convention = Convention.getInstance();
 
-			ArrayUtil.append(array1, "d");
+			convention.putBoolean(ConventionKeys.SORT, false);
 
-			String[] array2 = new String[] {"a", "b", "c"};
+			convention.putInt(ConventionKeys.BLANK_LINES_AFTER_HEADER, 1);
+			convention.putBoolean(ConventionKeys.HEADER, true);
+			convention.put(ConventionKeys.HEADER_TEXT, FileUtil.read("../copyright.txt"));
 
-			ArrayUtil.append(array1, array2);
+			convention.putInt(ConventionKeys.BLANK_LINES_AFTER_IMPORT, 1);
 
-			Object[][] array3 = new Object[][] {
-				new Object[] {"a", "b", "c"},
-				new Object[] {"a", "b", "c"}
-			};
+			convention.putInt(ConventionKeys.INDENT_SIZE_TABS, 4);
+			convention.putBoolean(ConventionKeys.INDENT_WITH_TABS, true);
 
-			Object[][] array4 = new Object[][] {
-				new Object[] {"a", "b", "c"},
-				new Object[] {"a", "b", "c"}
-			};
+			convention.putBoolean(ConventionKeys.INSERT_TRAILING_NEWLINE, false);
 
-			ArrayUtil.append(array3, new Object[] {"a", "b", "c"});
+			convention.putBoolean(ConventionKeys.BRACE_NEWLINE_RIGHT, true);
+			convention.putInt(ConventionKeys.INDENT_SIZE_BRACE_RIGHT_AFTER, 0);
 
-			ArrayUtil.append(array3, array4);
+			convention.putBoolean(ConventionKeys.SPACE_AFTER_CAST, false);
 
-			Long[] array5 = new Long[] {new Long(1), new Long(2), new Long(3)};
+			/*
+			convention.putInt(ConventionKeys.BLANK_LINES_AFTER_BRACE_LEFT, 1);
+			//convention.putInt(ConventionKeys.BLANK_LINES_AFTER_CLASS, 1);
+			//convention.putInt(ConventionKeys.BLANK_LINES_AFTER_INTERFACE, 1);
+			convention.putInt(ConventionKeys.BLANK_LINES_AFTER_DECLARATION, 1);
+			convention.putInt(ConventionKeys.BLANK_LINES_KEEP_UP_TO, 1);
 
-			ArrayUtil.append(array5, new Long(4));
+			//convention.putBoolean(ConventionKeys.INDENT_CONTINUATION_IF_TERNARY, true);
+			convention.putInt(ConventionKeys.INDENT_SIZE_CONTINUATION, 0);
+			//convention.putBoolean(ConventionKeys.INDENT_USE_PARAMS_METHOD_CALL, true);
 
-			Long[] array6 = new Long[] {new Long(1), new Long(2), new Long(3)};
+			convention.putBoolean(ConventionKeys.LINE_WRAP_BEFORE_THROWS, true);
+			convention.putInt(ConventionKeys.INDENT_SIZE_THROWS, 4);
+			*/
 
-			ArrayUtil.append(array5, array6);
+			String classMask =
+				"/**\n" +
+				" * <a href=\"$fileName$.html\"><b><i>View Source</i></b></a>\n" +
+				" *\n" +
+				" * @author $author$\n" +
+				" *\n" +
+				" */";
+
+			convention.putInt(ConventionKeys.COMMENT_JAVADOC_CLASS_MASK, 1);
+			convention.putBoolean(ConventionKeys.COMMENT_JAVADOC_REMOVE, true);
+			convention.putBoolean(ConventionKeys.COMMENT_REMOVE_MULTI_LINE, true);
+			convention.putBoolean(ConventionKeys.COMMENT_REMOVE_SINGLE_LINE, true);
+			convention.put(ConventionKeys.COMMENT_JAVADOC_TEMPLATE_CLASS, classMask);
+			convention.put(ConventionKeys.COMMENT_JAVADOC_TEMPLATE_INTERFACE, classMask);
+
+			convention.exportSettings(new FileOutputStream(new File("../tools/jalopy.xml")), Convention.EXTENSION_XML);
+
+			/*
+			com.liferay.portlet.messageboards.util.Preference pref =
+				new com.liferay.portlet.messageboards.util.Preference();
+
+			com.liferay.portlet.messageboards.util.PreferenceSerializer prefSerializer =
+				new com.liferay.portlet.messageboards.util.PreferenceSerializer();
+
+			System.out.println(prefSerializer.toPrefString(pref));
+			*/
+
+			/*
+			String basedir = "../portal-web/";
+
+			DirectoryScanner ds = new DirectoryScanner();
+			ds.setIncludes(new String[] {"**\\*.jsp"});
+			ds.setBasedir(basedir);
+			ds.scan();
+
+			String[] files = ds.getIncludedFiles();
+
+			for (int i = 0; i < files.length; i++) {
+				File file = new File(basedir + files[i]);
+
+				String content = FileUtil.read(file);
+
+				BufferedReader br =
+					new BufferedReader(new StringReader(content));
+
+				StringBuffer sb = new StringBuffer();
+				String line = null;
+
+				while ((line = br.readLine()) != null) {
+					int x = line.indexOf("<%=");
+					int y = line.indexOf("%>", x);
+
+					if ((x != -1) && (y != -1) && ((line.indexOf("<jsp:") != -1) || (line.indexOf("<util:") != -1))) {
+						try {
+							String regexp = line.substring(
+								x, y + 2);
+
+							if (regexp.indexOf("\\\"") != -1) {
+								regexp = regexp.substring(0, regexp.length() - 2);
+
+								if (regexp.indexOf("\\\"") != -1) {
+									String patched = StringUtil.replace(regexp, "\\\"", "\"");
+
+									sb.append(line.substring(0, x) + patched + line.substring(y, line.length()));
+
+									//return;
+								}
+								else {
+									sb.append(line);
+								}
+							}
+							else {
+								sb.append(line);
+							}
+						}
+						catch (Exception exc) {
+							sb.append(line);
+						}
+					}
+					else if ((x != -1) && (y == -1)) {
+						System.out.println("ERROR " + file.toString());
+
+						return;
+					}
+					else {
+						sb.append(line);
+					}
+
+					sb.append("\n");
+				}
+
+				sb.delete(sb.length() - 1, sb.length());
+
+				br.close();
+
+				String newContent = sb.toString();
+
+				//System.out.println(content.length());
+				//System.out.println(newContent.length());
+
+				if ((newContent != null) && !content.equals(newContent)) {
+					FileUtil.write(file, newContent);
+
+					System.out.println(file.toString());
+
+					//break;
+				}
+			}
+			*/
+
+			/*
+			String basedir = "../portal-web/";
+
+			DirectoryScanner ds = new DirectoryScanner();
+			ds.setIncludes(new String[] {"**\\*.jsp"});
+			ds.setBasedir(basedir);
+			ds.scan();
+
+			String[] files = ds.getIncludedFiles();
+
+			for (int i = 0; i < files.length; i++) {
+				File file = new File(basedir + files[i]);
+
+				String content = FileUtil.read(file);
+
+				BufferedReader br =
+					new BufferedReader(new StringReader(content));
+
+				StringBuffer sb = new StringBuffer();
+				String line = null;
+
+				while ((line = br.readLine()) != null) {
+					int x = line.indexOf("<%=");
+					int y = line.indexOf("%>", x);
+
+					if ((x != -1) && (y != -1) && ((line.indexOf("<c:") != -1) || (line.indexOf("<jsp:") != -1) || (line.indexOf("<util:") != -1))) {
+						try {
+							String regexp = line.substring(
+								x, y + 2);
+
+							if (regexp.indexOf("\\\"") == -1) {
+								regexp = regexp.substring(0, regexp.length() - 2);
+
+								if (regexp.indexOf("\"") != -1) {
+									String patched = StringUtil.replace(regexp, "\"", "\\\"");
+
+									sb.append(line.substring(0, x) + patched + line.substring(y, line.length()));
+
+									//return;
+								}
+								else {
+									sb.append(line);
+								}
+							}
+							else {
+								sb.append(line);
+							}
+						}
+						catch (Exception exc) {
+							sb.append(line);
+						}
+					}
+					else if ((x != -1) && (y == -1)) {
+						System.out.println("ERROR " + file.toString());
+
+						return;
+					}
+					else {
+						sb.append(line);
+					}
+
+					sb.append("\n");
+				}
+
+				if (sb.length() > 0) {
+					sb.delete(sb.length() - 1, sb.length());
+				}
+
+				br.close();
+
+				String newContent = sb.toString();
+
+				//System.out.println(content.length());
+				//System.out.println(newContent.length());
+
+				if ((newContent != null) && !content.equals(newContent)) {
+					FileUtil.write(file, newContent);
+
+					System.out.println(file.toString());
+
+					//break;
+				}
+			}
+			*/
+
+			/*
+			String basedir = "../portal-web/";
+
+			DirectoryScanner ds = new DirectoryScanner();
+			ds.setIncludes(new String[] {"**\\*.jsp"});
+			ds.setBasedir(basedir);
+			ds.scan();
+
+			String[] files = ds.getIncludedFiles();
+
+			for (int i = 0; i < files.length; i++) {
+				File file = new File(basedir + files[i]);
+
+				String content = FileUtil.read(file);
+
+				BufferedReader br =
+					new BufferedReader(new StringReader(content));
+
+				StringBuffer sb = new StringBuffer();
+				String line = null;
+
+				while ((line = br.readLine()) != null) {
+					int x = line.indexOf("\"<%=");
+					int y = line.indexOf("%>\"", x);
+
+					if ((x != -1) && (y != -1) && ((line.indexOf("<c:") != -1) || (line.indexOf("<jsp:") != -1) || (line.indexOf("<liferay:") != -1))) {
+						try {
+							String regexp = line.substring(
+								x, y + 3);
+
+							if (regexp.indexOf("\\\"") == -1) {
+								regexp = regexp.substring(1, regexp.length() - 1);
+
+								if (regexp.indexOf("\"") != -1) {
+									//System.out.println(regexp);
+
+									sb.append(line.substring(0, x));
+									sb.append("'");
+									sb.append(regexp);
+									sb.append("'");
+									sb.append(line.substring(y + 3, line.length()));
+								}
+								else {
+									sb.append(line);
+								}
+							}
+							else {
+								sb.append(line);
+							}
+						}
+						catch (Exception exc) {
+							sb.append(line);
+						}
+					}
+					//else if ((x != -1) && (y == -1)) {
+					//	System.out.println("ERROR " + file.toString());
+					//
+					//	return;
+					//}
+					else {
+						sb.append(line);
+					}
+
+					sb.append("\n");
+				}
+
+				if (sb.length() > 0) {
+					sb.delete(sb.length() - 1, sb.length());
+				}
+
+				br.close();
+
+				String newContent = sb.toString();
+
+				//System.out.println(content.length());
+				//System.out.println(newContent.length());
+
+				if ((newContent != null) && !content.equals(newContent)) {
+					FileUtil.write(file, newContent);
+
+					System.out.println(file.toString());
+
+					break;
+				}
+			}
+			*/
 		}
 		catch (Exception e) {
 			e.printStackTrace();
