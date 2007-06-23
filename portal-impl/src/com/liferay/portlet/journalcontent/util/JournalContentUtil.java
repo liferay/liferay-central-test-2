@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="JournalContentUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class JournalContentUtil {
@@ -85,10 +85,9 @@ public class JournalContentUtil {
 					groupId, articleId, templateId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
-				_log.error(
+				_log.warn(
 					"Unable to get content for " + groupId + " " + articleId +
-						" " + languageId,
-					e);
+						" " + languageId);
 			}
 
 			if (content != null) {
