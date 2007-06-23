@@ -392,6 +392,8 @@ Liferay.PortletCSS = {
 			);
 
 			Liferay.Util.addInputFocus(instance._newPanel[0]);
+
+			jQuery(instance._currentPopup).parents('.popup').ScrollTo(800);
 		}
 	},
 
