@@ -114,6 +114,11 @@ public class PortletSetupUtil {
 		portletData.put("showBorders", showBorders);
 		portletData.put("portletLinksTarget", linkToPlid);
 
+		// The JSONObject class does not properly detect boolean attributes
+		// without going through serialization
+
+		jsonObj = new JSONObject(jsonObj.toString());
+
 		return jsonObj;
 	}
 
