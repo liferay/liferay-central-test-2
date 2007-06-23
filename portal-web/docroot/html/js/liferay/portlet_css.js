@@ -11,6 +11,11 @@ Liferay.PortletCSS = {
 		instance._curPortletWrapperId = instance._curPortlet.attr('id');
 		instance._portletBoundaryId = curPortletBoundaryId;
 		instance._newPanel = jQuery('#portlet-set-properties');
+		
+		if (!instance._curPortlet.length) {
+			instance._curPortlet = obj;
+			instance._curPortletWrapperId = curPortletBoundaryId;
+		}
 
 		var newPanel = instance._newPanel;
 
@@ -928,6 +933,7 @@ Liferay.PortletCSS = {
 		var showBorders = instance._showBorders;
 		var language = instance._portletLanguage;
 		var borderNote = instance._borderNote;
+		var portletLinksTarget = instance._portletLinksTarget;
 
 		// Use custom title
 
@@ -991,6 +997,13 @@ Liferay.PortletCSS = {
 				if (portletData.useCustomTitle) {
 					customTitleInput.val(title);
 				}
+			}
+		);
+		
+		//Point target links to
+		portletLinksTarget.change(
+			function() {
+				portletData.portletLinksTarget = instance._getSafeInteger(this.options[this.selectedIndex].value);	
 			}
 		);
 	},

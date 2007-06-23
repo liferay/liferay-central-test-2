@@ -300,9 +300,20 @@ JSONObject advancedData = jsonObj.getJSONObject("advancedData");
 
 String customCSS = advancedData.getString("customCSS");
 
+//Portlet data
+
+JSONObject portletData = jsonObj.getJSONObject("portletData");
+boolean showBorders = portletData.getBoolean("showBorders");
+
 // Generated CSS
 
-out.print("#p_p_id_" + portlet.getPortletId() + "_ .portlet {\n");
+out.print("#p_p_id_" + portlet.getPortletId() + "_ ");
+
+if (showBorders) {
+	out.print(" .portlet");
+}
+
+out.print(" {\n");
 
 String[] finalCSSArray = (String[])finalCSS.toArray(new String[0]);
 
