@@ -116,6 +116,7 @@
 <%@ page import="com.liferay.portlet.PortletConfigImpl" %>
 <%@ page import="com.liferay.portlet.PortletInstanceFactory" %>
 <%@ page import="com.liferay.portlet.PortletPreferencesFactory" %>
+<%@ page import="com.liferay.portlet.PortletSetupUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLImpl" %>
 <%@ page import="com.liferay.portlet.PortletURLUtil" %>
 <%@ page import="com.liferay.portlet.RenderParametersPool" %>

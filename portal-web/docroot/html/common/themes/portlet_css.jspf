@@ -23,7 +23,7 @@
 %>
 
 <%
-JSONObject jsonObj = new JSONObject(portletSetupCss);
+JSONObject jsonObj = PortletSetupUtil.cssToJSON(portletSetup, portletSetupCss);
 
 List finalCSS = new ArrayList();
 
