@@ -24,6 +24,7 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermission;
@@ -31,10 +32,14 @@ import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
 import java.text.ParseException;
+
+import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
@@ -92,21 +97,39 @@ public class GetLookAndFeelAction extends JSONAction {
 
 				JSONObject jsonObj = new JSONObject(css);
 
-				/*Locale[] locales = LanguageUtil.getAvailableLocales();
+				JSONObject portletData = new JSONObject();
+
+				jsonObj.put("portletData", portletData);
+
+				JSONObject titles = new JSONObject();
+
+				portletData.put("titles", titles);
+
+				Locale[] locales = LanguageUtil.getAvailableLocales();
 
 				for (int i = 0; i < locales.length; i++) {
-					String languageId = LocaleUtil.toLanguageId(locale);
+					String languageId = LocaleUtil.toLanguageId(locales[i]);
 
 					String title = portletSetup.getValue(
 						"portlet-setup-title-" + languageId, null);
 
 					if (Validator.isNotNull(languageId)) {
+						titles.put(languageId, title);
 					}
 				}
 
 				boolean useCustomTitle = GetterUtil.getBoolean(
 					portletSetup.getValue(
-						"portlet-setup-use-custom-title", null));*/
+						"portlet-setup-use-custom-title", null));
+				boolean showBorders = GetterUtil.getBoolean(
+					portletSetup.getValue("portlet-setup-show-borders", null),
+					true);
+				long linkToPlid = GetterUtil.getLong(
+					portletSetup.getValue("portlet-setup-link-to-plid", null));
+
+				portletData.put("useCustomTitle", useCustomTitle);
+				portletData.put("showBorders", showBorders);
+				portletData.put("portletLinksTarget", linkToPlid);
 
 				return jsonObj.toString();
 			}
@@ -119,8 +142,6 @@ public class GetLookAndFeelAction extends JSONAction {
 
 		return null;
 	}
-
-	//protected void get
 
 	private static Log _log = LogFactory.getLog(GetLookAndFeelAction.class);
 

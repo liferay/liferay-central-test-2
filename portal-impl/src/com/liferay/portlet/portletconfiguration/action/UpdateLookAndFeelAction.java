@@ -23,6 +23,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermission;
@@ -31,7 +32,12 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
+
+import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
@@ -43,6 +49,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
+import org.json.JSONObject;
 
 /**
  * <a href="UpdateLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
@@ -76,19 +84,63 @@ public class UpdateLookAndFeelAction extends JSONAction {
 			return null;
 		}
 
-		//String languageId = LanguageUtil.getLanguageId(req);
-		//String title = ParamUtil.getString(req, "title");
+		PortletPreferences portletSetup =
+			PortletPreferencesFactory.getPortletSetup(layout, portletId);
+
 		String css = ParamUtil.getString(req, "css");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Updating css " + css);
 		}
 
-		PortletPreferences portletSetup =
-			PortletPreferencesFactory.getPortletSetup(layout, portletId);
+		JSONObject jsonObj = new JSONObject(css);
 
-		//portletSetup.setValue("portlet-setup-title-" + languageId, title);
-		//portletSetup.setValue("portlet-setup-use-custom-title", "true");
+		JSONObject portletData = jsonObj.getJSONObject("portletData");
+
+		jsonObj.remove("portletData");
+
+		css = jsonObj.toString();
+
+		boolean useCustomTitle = portletData.getBoolean("useCustomTitle");
+		boolean showBorders = portletData.getBoolean("showBorders");
+		long linkToPlid = GetterUtil.getLong(
+			portletData.getString("portletLinksTarget"));
+
+		JSONObject titles = portletData.getJSONObject("titles");
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (int i = 0; i < locales.length; i++) {
+			String languageId = LocaleUtil.toLanguageId(locales[i]);
+
+			String title = null;
+
+			if (titles.has(languageId)) {
+				title = GetterUtil.getString(titles.getString(languageId));
+			}
+
+			if (Validator.isNotNull(title)) {
+				portletSetup.setValue(
+					"portlet-setup-title-" + languageId, title);
+			}
+			else {
+				portletSetup.reset("portlet-setup-title-" + languageId);
+			}
+		}
+
+		portletSetup.setValue(
+			"portlet-setup-use-custom-title", String.valueOf(useCustomTitle));
+		portletSetup.setValue(
+			"portlet-setup-show-borders", String.valueOf(showBorders));
+
+		if (linkToPlid > 0) {
+			portletSetup.setValue(
+				"portlet-setup-link-to-plid", String.valueOf(linkToPlid));
+		}
+		else {
+			portletSetup.reset("portlet-setup-link-to-plid");
+		}
+
 		portletSetup.setValue("portlet-setup-css", css);
 
 		portletSetup.store();

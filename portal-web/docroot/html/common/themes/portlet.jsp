@@ -372,6 +372,8 @@ containerStyles = sm.toString();
 							<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
 								<span class="portlet-title-default"><%= portletTitle %></span>
 
+								- <a href="<%= portletDisplay.getURLPortletCss() %>"><liferay-ui:message key="look-and-feel" /></a>
+
 								- <a href="<%= portletDisplay.getURLConfiguration() %>"><liferay-ui:message key="configuration" /></a>
 
 								<c:if test="<%= portletDisplay.isShowEditIcon() %>">
