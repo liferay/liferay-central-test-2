@@ -45,9 +45,7 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 
 	</c:when>
 	<c:when test="<%= portletDisplay.isShowConfigurationIcon() %>">
-		<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
-
-		<br /><br />
+		<br />
 
 		<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
 
