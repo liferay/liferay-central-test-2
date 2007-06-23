@@ -30,8 +30,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.sql.SQLException;
 
+import java.sql.SQLException;
 
 /**
  * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
@@ -56,17 +56,18 @@ public class DB2Util extends DBUtil {
 
 		return template;
 	}
-	
+
 	public void runSQL(String[] templates) throws IOException, SQLException {
 		if (templates[0].startsWith(ALTER_COLUMN_NAME)) {
 			String sql = buildSQL(templates[0]);
+
 			String[] renameSqls = sql.split(";");
+
 			super.runSQL(renameSqls);
-		} 
+		}
 		else {
 			super.runSQL(templates);
 		}
-		
 	}
 
 	protected DB2Util() {
@@ -118,18 +119,18 @@ public class DB2Util extends DBUtil {
 			}
 			else if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
-				
+
 				line = StringUtil.replace(
-						"alter table @table@ add column @new-column@ @type@;\n",
-						REWORD_TEMPLATE, template);
-				
+					"alter table @table@ add column @new-column@ @type@;\n",
+					REWORD_TEMPLATE, template);
+
 				line = line + StringUtil.replace(
-						"update @table@ set @new-column@ = @old-column@;\n",
-						REWORD_TEMPLATE, template);
-				
+					"update @table@ set @new-column@ = @old-column@;\n",
+					REWORD_TEMPLATE, template);
+
 				line = line + StringUtil.replace(
-						"alter table @table@ drop column @old-column@",
-						REWORD_TEMPLATE, template);
+					"alter table @table@ drop column @old-column@",
+					REWORD_TEMPLATE, template);
 			}
 
 			sm.append(line);
