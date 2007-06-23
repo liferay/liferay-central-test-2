@@ -88,13 +88,14 @@ import com.liferay.util.lucene.HitsImpl;
 import java.io.IOException;
 import java.io.StringReader;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 
@@ -259,14 +260,14 @@ public class JournalArticleLocalServiceImpl
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
 		article.setApproved(false);
-		
-		if (expirationDate == null || expirationDate.after(now)) {
+
+		if ((expirationDate == null) || expirationDate.after(now)) {
 			article.setExpired(false);
 		}
 		else {
 			article.setExpired(true);
 		}
-		
+
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 
@@ -411,15 +412,16 @@ public class JournalArticleLocalServiceImpl
 	public void checkArticles() throws PortalException, SystemException {
 		Date now = new Date();
 
-		List articles = JournalArticleFinder.findByE_E(Boolean.FALSE, 
-				now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
-		
+		List articles = JournalArticleFinder.findByExpirationDate(
+			Boolean.FALSE, now,
+			new Date(now.getTime() - CheckArticleJob.INTERVAL));
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Expiring " + articles.size() + " JournalArticles");
+			_log.debug("Expiring " + articles.size() + " articles");
 		}
-		
-		List companies = new ArrayList();
-		
+
+		Set companies = new HashSet();
+
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
@@ -427,38 +429,37 @@ public class JournalArticleLocalServiceImpl
 			article.setExpired(true);
 
 			JournalArticleUtil.update(article);
-			
-			JournalContentUtil.clearArticleGroupCache(article.getGroupId(), 
-					article.getArticleId(), article.getTemplateId());
-			
-			companies.add(new Long(article.getCompanyId()));
-		}		
 
-		Iterator companyItr = companies.iterator();
-		
-		while (companyItr.hasNext()) {
-			long companyId = ((Long)companyItr.next()).longValue();
+			JournalContentUtil.clearCache(
+				article.getGroupId(), article.getArticleId(),
+				article.getTemplateId());
+
+			companies.add(new Long(article.getCompanyId()));
+		}
+
+		Iterator itr = companies.iterator();
+
+		while (itr.hasNext()) {
+			long companyId = ((Long)itr.next()).longValue();
+
 			LayoutCacheUtil.clearCache(companyId);
 		}
 
-		
-		articles = JournalArticleFinder.findByR( 
-				now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
+		articles = JournalArticleFinder.findByReviewDate(
+			now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Sending " + articles.size() + " JournalArticle review emails");
+			_log.debug(
+				"Sending review notifications for " + articles.size() +
+					" articles");
 		}
-		
+
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
 			Date reviewDate = article.getReviewDate();
 
 			if (reviewDate != null) {
-
-				// Check in *INTERVAL* minute intervals because of 
-				// CheckArticleJob
-
 				long diff = reviewDate.getTime() - now.getTime();
 
 				if ((diff > 0) && (diff < CheckArticleJob.INTERVAL)) {
@@ -693,11 +694,13 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = JournalArticleUtil.findByG_A_V(
 			groupId, articleId, version);
-		
-		Date now = new Date();
-		
-		if (article.isExpired() || article.getExpirationDate().before(now)) {
-			return null;
+
+		if (article.isExpired()) {
+			Date expirationDate = article.getExpirationDate();
+
+			if ((expirationDate != null) && expirationDate.before(new Date())) {
+				return null;
+			}
 		}
 
 		/*if (!article.isTemplateDriven()) {
@@ -1234,14 +1237,14 @@ public class JournalArticleLocalServiceImpl
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
 		article.setApproved(approved);
-		
-		if (expirationDate == null || expirationDate.after(now)) {
+
+		if ((expirationDate == null) || expirationDate.after(now)) {
 			article.setExpired(false);
 		}
 		else {
-			article.setExpired(expired);
+			article.setExpired(true);
 		}
-		
+
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 

@@ -38,8 +38,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -51,97 +49,20 @@ import org.hibernate.Session;
  *
  */
 public class JournalArticleFinder {
-	
-	public static String FIND_BY_E_E =
-		JournalArticleFinder.class.getName() +
-			".findByE_E";
-
-	public static String FIND_BY_R =
-		JournalArticleFinder.class.getName() +
-			".findByR";
 
 	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
 			".countByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
+	public static String FIND_BY_EXPIRATION_DATE =
+		JournalArticleFinder.class.getName() + ".findByExpirationDate";
+
+	public static String FIND_BY_REVIEW_DATE =
+		JournalArticleFinder.class.getName() + ".findByReviewDate";
+
 	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
 			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
-
-	public static List findByE_E(Boolean expired, Date expirationDateLT, 
-			Date expirationDateGT)
-		throws SystemException {
-
-		Timestamp expirationDateLT_TS = CalendarUtil.getTimestamp(expirationDateLT);
-		Timestamp expirationDateGT_TS = CalendarUtil.getTimestamp(expirationDateGT);
-
-		Session session = null;
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_E_E);
-
-			if (expired == null) {
-				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
-
-			q.addEntity("JournalArticle", JournalArticleImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (expired != null) {
-				qPos.add(expired);
-			}
-
-			qPos.add(expirationDateGT_TS);
-			qPos.add(expirationDateLT_TS);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public static List findByR(Date reviewDateLT, Date reviewDateGT)
-		throws SystemException {
-
-		Timestamp reviewDateLT_TS = CalendarUtil.getTimestamp(reviewDateLT);
-		Timestamp reviewDateGT_TS = CalendarUtil.getTimestamp(reviewDateGT);
-
-		Session session = null;
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_R);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
-
-			q.addEntity("JournalArticle", JournalArticleImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(reviewDateGT_TS);
-			qPos.add(reviewDateLT_TS);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
 
 	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
@@ -245,6 +166,83 @@ public class JournalArticleFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByExpirationDate(
+			Boolean expired, Date expirationDateLT, Date expirationDateGT)
+		throws SystemException {
+
+		Timestamp expirationDateLT_TS = CalendarUtil.getTimestamp(
+			expirationDateLT);
+		Timestamp expirationDateGT_TS = CalendarUtil.getTimestamp(
+			expirationDateGT);
+
+		Session session = null;
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_EXPIRATION_DATE);
+
+			if (expired == null) {
+				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("JournalArticle", JournalArticleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (expired != null) {
+				qPos.add(expired);
+			}
+
+			qPos.add(expirationDateGT_TS);
+			qPos.add(expirationDateLT_TS);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByReviewDate(Date reviewDateLT, Date reviewDateGT)
+		throws SystemException {
+
+		Timestamp reviewDateLT_TS = CalendarUtil.getTimestamp(reviewDateLT);
+		Timestamp reviewDateGT_TS = CalendarUtil.getTimestamp(reviewDateGT);
+
+		Session session = null;
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_REVIEW_DATE);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("JournalArticle", JournalArticleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(reviewDateGT_TS);
+			qPos.add(reviewDateLT_TS);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
