@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.GetterUtil;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
@@ -58,6 +59,18 @@ public class JournalContentUtil {
 		_cache.flushGroup(GROUP_NAME);
 	}
 
+	public static void clearArticleGroupCache(long groupId, String articleId, 
+			String templateId) {
+
+		articleId = GetterUtil.getString(articleId).toUpperCase();
+		templateId = GetterUtil.getString(templateId).toUpperCase();
+
+		String articleGroupKey = _encodeKey(groupId, articleId, templateId, 
+				null);
+		
+		_cache.flushGroup(articleGroupKey);
+	}
+
 	public static String getContent(
 		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
@@ -75,6 +88,8 @@ public class JournalContentUtil {
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
+		String articleGroupKey = _encodeKey(groupId, articleId, templateId, 
+				null);
 
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);
@@ -91,7 +106,8 @@ public class JournalContentUtil {
 			}
 
 			if (content != null) {
-				_cache.putInCache(key, content, GROUP_NAME_ARRAY);
+				_cache.putInCache(key, content, ArrayUtil.append(
+						GROUP_NAME_ARRAY, articleGroupKey));
 			}
 		}
 		finally {
