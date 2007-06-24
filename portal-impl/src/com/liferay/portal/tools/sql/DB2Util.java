@@ -23,15 +23,21 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
+import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
@@ -57,16 +63,58 @@ public class DB2Util extends DBUtil {
 		return template;
 	}
 
+	private void reorgTables(String[] templates) throws SQLException {
+		Set tableNames = new HashSet();
+		
+		for (int i = 0; i < templates.length; i++) {
+			if (templates[i].startsWith("alter table")) {
+				tableNames.add(templates[i].split(" ")[2]);
+			}
+		}
+		
+		if (tableNames.size() == 0) {
+			return;
+		}
+		 
+		Connection con = null;
+		CallableStatement  callStmt = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+			
+			for (Iterator iter = tableNames.iterator(); iter.hasNext();) {
+				String tableName = (String) iter.next();
+				
+				String sql = "CALL SYSPROC.ADMIN_CMD(?)";
+				callStmt = con.prepareCall(sql);
+
+			    String param = "REORG TABLE " + tableName;
+
+			    callStmt.setString(1, param);
+
+			    callStmt.execute();
+			}			
+		}
+		finally {
+			DataAccess.cleanUp(con, callStmt);
+		}
+		
+	}
+
 	public void runSQL(String[] templates) throws IOException, SQLException {
-		if (templates[0].startsWith(ALTER_COLUMN_NAME)) {
-			String sql = buildSQL(templates[0]);
+		super.runSQL(templates);
+		reorgTables(templates);
+	}
+
+	public void runSQL(String template) throws IOException, SQLException {
+		if (template.startsWith(ALTER_COLUMN_NAME)) {
+			String sql = buildSQL(template);
 
 			String[] renameSqls = sql.split(";");
-
-			super.runSQL(renameSqls);
+			runSQL(renameSqls);
 		}
 		else {
-			super.runSQL(templates);
+			super.runSQL(template);
 		}
 	}
 
