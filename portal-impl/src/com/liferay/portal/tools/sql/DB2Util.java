@@ -32,9 +32,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -43,6 +45,7 @@ import java.util.Set;
  * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Bruno Farache
  *
  */
 public class DB2Util extends DBUtil {
@@ -63,47 +66,9 @@ public class DB2Util extends DBUtil {
 		return template;
 	}
 
-	private void reorgTables(String[] templates) throws SQLException {
-		Set tableNames = new HashSet();
-		
-		for (int i = 0; i < templates.length; i++) {
-			if (templates[i].startsWith("alter table")) {
-				tableNames.add(templates[i].split(" ")[2]);
-			}
-		}
-		
-		if (tableNames.size() == 0) {
-			return;
-		}
-		 
-		Connection con = null;
-		CallableStatement  callStmt = null;
-
-		try {
-			con = HibernateUtil.getConnection();
-			
-			for (Iterator iter = tableNames.iterator(); iter.hasNext();) {
-				String tableName = (String) iter.next();
-				
-				String sql = "CALL SYSPROC.ADMIN_CMD(?)";
-				callStmt = con.prepareCall(sql);
-
-			    String param = "REORG TABLE " + tableName;
-
-			    callStmt.setString(1, param);
-
-			    callStmt.execute();
-			}			
-		}
-		finally {
-			DataAccess.cleanUp(con, callStmt);
-		}
-		
-	}
-
 	public void runSQL(String[] templates) throws IOException, SQLException {
 		super.runSQL(templates);
-		reorgTables(templates);
+		_reorgTables(templates);
 	}
 
 	public void runSQL(String template) throws IOException, SQLException {
@@ -188,6 +153,43 @@ public class DB2Util extends DBUtil {
 		br.close();
 
 		return sm.toString();
+	}
+	
+	private void _reorgTables(String[] templates) throws SQLException {
+		Set tableNames = new HashSet();
+		
+		for (int i = 0; i < templates.length; i++) {
+			if (templates[i].startsWith("alter table")) {
+				tableNames.add(templates[i].split(" ")[2]);
+			}
+		}
+		
+		if (tableNames.size() == 0) {
+			return;
+		}
+		 
+		Connection con = null;
+		CallableStatement  callStmt = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+			
+			for (Iterator iter = tableNames.iterator(); iter.hasNext();) {
+				String tableName = (String) iter.next();
+				
+				String sql = "call sysproc.admin_cmd(?)";
+				callStmt = con.prepareCall(sql);
+
+			    String param = "reorg table " + tableName;
+
+			    callStmt.setString(1, param);
+
+			    callStmt.execute();
+			}			
+		}
+		finally {
+			DataAccess.cleanUp(con, callStmt);
+		}
 	}
 
 	private static String[] _DB2 = {
