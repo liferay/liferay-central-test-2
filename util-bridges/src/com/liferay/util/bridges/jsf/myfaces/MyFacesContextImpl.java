@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.jsf.apache.myfaces.context.servlet;
+package com.liferay.util.bridges.jsf.myfaces;
 
 import javax.faces.context.ResponseWriter;
 

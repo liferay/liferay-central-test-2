@@ -113,8 +113,7 @@ public class PortletDeployer extends BaseDeployer {
 			extraContent +=
 				"<listener>" +
 				"<listener-class>" +
-				"com.liferay.util.jsf.sun.faces.config." +
-					"LiferayConfigureListener" +
+				"com.liferay.util.bridges.jsf.sun.LiferayConfigureListener" +
 				"</listener-class>" +
 				"</listener>";
 		}

@@ -20,37 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.jsf.sun.faces.config;
+package com.liferay.util.bridges.jsf.sun;
 
-import com.sun.faces.RIConstants;
-import com.sun.faces.application.ApplicationAssociate;
-import com.sun.faces.config.ConfigureListener;
+import com.sun.faces.renderkit.RenderKitFactoryImpl;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
+import java.util.HashMap;
 
 /**
- * <a href="LiferayConfigureListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayRenderKitFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Myunghun Kim
  *
  */
-public class LiferayConfigureListener extends ConfigureListener {
+public class LiferayRenderKitFactoryImpl extends RenderKitFactoryImpl {
 
-	public static final String ASSOCIATE_KEY =
-		RIConstants.FACES_PREFIX + "ApplicationAssociate";
+	public LiferayRenderKitFactoryImpl() {
+		super();
 
-	public void contextInitialized(ServletContextEvent sce) {
-		ServletContext sc = sce.getServletContext();
+		renderKits = new HashMap();
 
-		super.contextInitialized(sce);
-
-		ApplicationAssociate associate =
-			ApplicationAssociate.getInstance(new ServletContextAdapter(sc));
-
-		if (associate != null) {
-			sc.setAttribute(ASSOCIATE_KEY, associate);
-		}
+		addRenderKit(HTML_BASIC_RENDER_KIT, new LiferayRenderKitImpl());
 	}
 
 }

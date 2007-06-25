@@ -9,7 +9,7 @@
 		<view-handler>com.sun.facelets.FaceletPortletViewHandler</view-handler>
 	</application>
 	<factory>
-		<faces-context-factory>com.liferay.util.jsf.apache.myfaces.context.MyFacesContextFactoryImpl</faces-context-factory>
+		<faces-context-factory>com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl</faces-context-factory>
 	</factory>
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>

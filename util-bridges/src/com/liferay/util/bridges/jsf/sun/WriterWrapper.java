@@ -20,26 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.jsf.sun.faces.renderkit;
+package com.liferay.util.bridges.jsf.sun;
 
-import com.sun.faces.renderkit.RenderKitFactoryImpl;
+import com.liferay.portal.kernel.util.StringMaker;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
- * <a href="LiferayRenderKitFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WriterWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Myunghun Kim
  *
  */
-public class LiferayRenderKitFactoryImpl extends RenderKitFactoryImpl {
+public class WriterWrapper extends Writer {
 
-	public LiferayRenderKitFactoryImpl() {
-		super();
-
-		renderKits = new HashMap();
-
-		addRenderKit(HTML_BASIC_RENDER_KIT, new LiferayRenderKitImpl());
+	public WriterWrapper(Writer writer) {
+		_writer = writer;
 	}
+
+	public void close() throws IOException {
+		_writer.close();
+	}
+
+	public void flush() throws IOException {
+	}
+
+	public void write(char cbuf) throws IOException {
+		_writer.write(cbuf);
+	}
+
+	public void write(char[] cbuf, int off, int len) throws IOException {
+		StringMaker sm = new StringMaker();
+
+		sm.append(cbuf, off, len);
+
+		_writer.write(sm.toString());
+	}
+
+	public void write(int c) throws IOException {
+		_writer.write(c);
+	}
+
+	public void write(String str) throws IOException {
+		_writer.write(str);
+	}
+
+	public void write(String str, int off, int len) throws IOException {
+		_writer.write(str, off, len);
+	}
+
+	private Writer _writer;
 
 }

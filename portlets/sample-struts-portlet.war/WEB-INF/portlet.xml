@@ -7,7 +7,7 @@
 		<portlet-class>org.apache.portals.bridges.struts.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>ServletContextProvider</name>
-			<value>com.liferay.util.apache.bridges.struts.LiferayServletContextProviderWrapper</value>
+			<value>com.liferay.util.bridges.struts.LiferayServletContextProviderWrapper</value>
 		</init-param>
 		<init-param>
 			<name>EditPage</name>

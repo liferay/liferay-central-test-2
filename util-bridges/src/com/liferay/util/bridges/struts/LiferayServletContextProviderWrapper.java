@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.apache.bridges.struts;
+package com.liferay.util.bridges.struts;
 
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 

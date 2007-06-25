@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.jsf.sun.faces.renderkit;
-
-import com.liferay.util.jsf.sun.faces.renderkit.html_basic.WriterWrapper;
+package com.liferay.util.bridges.jsf.sun;
 
 import com.sun.faces.renderkit.RenderKitImpl;
 

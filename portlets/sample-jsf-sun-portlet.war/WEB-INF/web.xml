@@ -14,7 +14,7 @@
 		<param-value>false</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.liferay.util.jsf.sun.faces.config.LiferayConfigureListener</listener-class>
+		<listener-class>com.liferay.util.bridges.jsf.sun.LiferayConfigureListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>FacesServlet</servlet-name>

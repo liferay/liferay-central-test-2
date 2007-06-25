@@ -3,7 +3,7 @@
 
 <faces-config xmlns="http://java.sun.com/JSF/Configuration">
 	<factory>
-		<faces-context-factory>com.liferay.util.jsf.apache.myfaces.context.MyFacesContextFactoryImpl</faces-context-factory>
+		<faces-context-factory>com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl</faces-context-factory>
 	</factory>
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>

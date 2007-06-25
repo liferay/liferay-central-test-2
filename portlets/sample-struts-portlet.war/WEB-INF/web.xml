@@ -4,7 +4,7 @@
 <web-app>
 	<servlet>
 		<servlet-name>PortletActionServlet</servlet-name>
-		<servlet-class>com.liferay.util.apache.bridges.struts.LiferayPortletServlet</servlet-class>
+		<servlet-class>com.liferay.util.bridges.struts.LiferayPortletServlet</servlet-class>
 		<init-param>
 			<param-name>config</param-name>
 			<param-value>/WEB-INF/struts-config.xml</param-value>

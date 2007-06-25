@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.jsf.apache.myfaces.context;
-
-import com.liferay.util.jsf.apache.myfaces.context.servlet.MyFacesContextImpl;
+package com.liferay.util.bridges.jsf.myfaces;
 
 import javax.faces.FacesException;
 import javax.faces.context.FacesContext;

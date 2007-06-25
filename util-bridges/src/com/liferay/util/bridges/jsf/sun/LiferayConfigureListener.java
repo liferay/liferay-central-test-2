@@ -20,56 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.jsf.sun.faces.renderkit.html_basic;
+package com.liferay.util.bridges.jsf.sun;
 
-import com.liferay.portal.kernel.util.StringMaker;
+import com.sun.faces.RIConstants;
+import com.sun.faces.application.ApplicationAssociate;
+import com.sun.faces.config.ConfigureListener;
 
-import java.io.IOException;
-import java.io.Writer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 
 /**
- * <a href="WriterWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayConfigureListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Myunghun Kim
  *
  */
-public class WriterWrapper extends Writer {
+public class LiferayConfigureListener extends ConfigureListener {
 
-	public WriterWrapper(Writer writer) {
-		_writer = writer;
+	public static final String ASSOCIATE_KEY =
+		RIConstants.FACES_PREFIX + "ApplicationAssociate";
+
+	public void contextInitialized(ServletContextEvent sce) {
+		ServletContext sc = sce.getServletContext();
+
+		super.contextInitialized(sce);
+
+		ApplicationAssociate associate =
+			ApplicationAssociate.getInstance(new ServletContextAdapter(sc));
+
+		if (associate != null) {
+			sc.setAttribute(ASSOCIATE_KEY, associate);
+		}
 	}
-
-	public void close() throws IOException {
-		_writer.close();
-	}
-
-	public void flush() throws IOException {
-	}
-
-	public void write(char cbuf) throws IOException {
-		_writer.write(cbuf);
-	}
-
-	public void write(char[] cbuf, int off, int len) throws IOException {
-		StringMaker sm = new StringMaker();
-
-		sm.append(cbuf, off, len);
-
-		_writer.write(sm.toString());
-	}
-
-	public void write(int c) throws IOException {
-		_writer.write(c);
-	}
-
-	public void write(String str) throws IOException {
-		_writer.write(str);
-	}
-
-	public void write(String str, int off, int len) throws IOException {
-		_writer.write(str, off, len);
-	}
-
-	private Writer _writer;
 
 }

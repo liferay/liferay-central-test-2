@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.php;
+package com.liferay.util.bridges.php;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;

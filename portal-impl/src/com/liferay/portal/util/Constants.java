@@ -159,7 +159,7 @@ public interface Constants {
 		"com.liferay.util.jsf.sun.faces.renderkit.LiferayRenderKitFactoryImpl";
 
 	public static final String MYFACES_CONTEXT_FACTORY =
-		"com.liferay.util.jsf.apache.myfaces.context.MyFacesContextFactoryImpl";
+		"com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl";
 
 	// Plugin management
 
