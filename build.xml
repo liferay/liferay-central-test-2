@@ -46,8 +46,6 @@
 		<ant dir="mail-impl" target="clean" inheritAll="false" />
 		<ant dir="portal-impl" target="clean" inheritAll="false" />
 
-		<ant dir="cms-web" target="clean" inheritAll="false" />
-		<ant dir="laszlo-web" target="clean" inheritAll="false" />
 		<ant dir="portal-web" target="clean" inheritAll="false" />
 		<ant dir="tunnel-web" target="clean" inheritAll="false" />
 
@@ -168,7 +166,7 @@
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
 				dir="${app.server.deploy.dir}"
-				includes="cms-web*/**,laszlo-web*/**,sample*/**,tunnel-web*/**,liferay-portal.ear/**"
+				includes="sample*/**,tunnel-web*/**"
 			/>
 		</delete>
 
@@ -261,8 +259,6 @@
 		<ant dir="mail-impl" target="jar" inheritAll="false" />
 		<ant dir="portal-impl" target="jar" inheritAll="false" />
 
-		<ant dir="cms-web" target="war" inheritAll="false" />
-		<ant dir="laszlo-web" target="war" inheritAll="false" />
 		<ant dir="portal-web" target="war" inheritAll="false" />
 		<ant dir="tunnel-web" target="war" inheritAll="false" />
 
@@ -342,8 +338,6 @@
 		<ant dir="mail-impl" target="deploy" inheritAll="false" />
 		<ant dir="portal-impl" target="deploy" inheritAll="false" />
 
-		<ant dir="cms-web" target="deploy" inheritAll="false" />
-		<ant dir="laszlo-web" target="deploy" inheritAll="false" />
 		<ant dir="portal-web" target="deploy" inheritAll="false" />
 		<ant dir="tunnel-web" target="deploy" inheritAll="false" />
 
@@ -833,8 +827,6 @@
 			<fileset dir="${project.dir}/lock-impl" includes="lock-impl.jar" />
 			<fileset dir="${project.dir}/mail-impl" includes="mail-impl.jar" />
 			<fileset dir="${project.dir}/portal-impl" includes="portal-impl.jar" />
-			<fileset dir="${project.dir}/cms-web" includes="cms-web.war" />
-			<fileset dir="${project.dir}/laszlo-web" includes="laszlo-web.war" />
 			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
 			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
 		</copy>
@@ -1322,7 +1314,6 @@
 		<copy file="cas-web/cas-web.war" tofile="liferay-portal-cas-${lp.version.file.name}.war" />
 		<copy file="cms-web/cms-web.war" tofile="liferay-portal-cms-${lp.version.file.name}.war" />
 		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
-		<copy file="laszlo-web/laszlo-web.war" tofile="liferay-portal-laszlo-${lp.version.file.name}.war" />
 		<copy file="servicemix-web/servicemix-web.war" tofile="liferay-portal-servicemix-${lp.version.file.name}.war" />
 		<copy file="tunnel-web/tunnel-web.war" tofile="liferay-portal-tunnel-${lp.version.file.name}.war" />
 

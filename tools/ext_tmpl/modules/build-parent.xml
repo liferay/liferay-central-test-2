@@ -25,14 +25,6 @@
 		</antcall>
 
 		<antcall target="deploy-war">
-			<param name="war.file" value="cms-web" />
-		</antcall>
-
-		<antcall target="deploy-war">
-			<param name="war.file" value="laszlo-web" />
-		</antcall>
-
-		<antcall target="deploy-war">
 			<param name="war.file" value="tunnel-web" />
 		</antcall>
 
