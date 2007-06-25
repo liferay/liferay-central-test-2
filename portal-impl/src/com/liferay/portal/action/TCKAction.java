@@ -76,10 +76,16 @@ public class TCKAction extends Action {
 					nameAndWar[1] + PortletImpl.WAR_SEPARATOR + nameAndWar[0]);
 			}
 
-			long userId = 2003;
+			// Default admin
+
+			long userId = 2;
+
+			// Guest group
+
+			long groupId = 13;
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
-				userId, 1, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
+				userId, groupId, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
 				"TCKAction", StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
 				StringPool.BLANK);
 

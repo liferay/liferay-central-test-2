@@ -205,13 +205,15 @@ public class PortletPreferencesImpl
 
 		if (_defaultPreferences == null) {
 			try {
-				if (!_portletId.equals(PortletKeys.LIFERAY_PORTAL)) {
+				if ((_portletId != null) &&
+					(!_portletId.equals(PortletKeys.LIFERAY_PORTAL))) {
+
 					_defaultPreferences = PortletPreferencesLocalServiceUtil.
 						getDefaultPreferences(_companyId, _portletId);
 				}
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
@@ -251,7 +253,7 @@ public class PortletPreferencesImpl
 				_ownerId, _ownerType, _plid, _portletId, this);
 		}
 		catch (PortalException pe) {
-			_log.error(pe);
+			_log.error(pe, pe);
 
 			throw new IOException(pe.getMessage());
 		}

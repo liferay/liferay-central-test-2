@@ -89,8 +89,16 @@
 
 					<delete includeemptydirs="true" failonerror="false">
 						<fileset
+							dir="${app.server.dir}"
+							includes="demoserver/**,examples/**,"
+						/>
+						<fileset
 							dir="${app.server.dir}/apps"
 							includes="*.ear,autoload/*.ear"
+						/>
+						<fileset
+							dir="${app.server.dir}/conf"
+							includes="db2.properties,FirebirdSQL.properties,HSQL1.properties,InstantDB1.properties,InterBase1.properties,MailMimePartDS1.properties,MailSession1.properties,McKoi1.properties,MySQL.properties,Oracle1.properties,PostgreSQL1.properties,spy.properties,Sybase1.properties"
 						/>
 						<fileset
 							dir="${app.server.dir}/ejbjars"
@@ -99,10 +107,6 @@
 						<fileset
 							dir="${app.server.dir}/webapps"
 							includes="*.war,autoload/*.war,autoload/jonas-doc-en/**,autoload/jonas-javadoc/**"
-						/>
-						<fileset
-							dir="${app.server.dir}"
-							includes="demoserver/**,examples/**,"
 						/>
 					</delete>
 				</then>

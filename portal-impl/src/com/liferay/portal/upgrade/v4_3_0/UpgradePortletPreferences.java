@@ -97,6 +97,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 		PrefsOwnerIdUpgradeColumnImpl upgradeOwnerIdColumn =
 			new PrefsOwnerIdUpgradeColumnImpl(
+				AvailableMappersUtil.getCompanyIdMapper(),
 				AvailableMappersUtil.getGroupIdMapper(),
 				AvailableMappersUtil.getUserIdMapper());
 

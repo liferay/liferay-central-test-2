@@ -385,7 +385,7 @@ create table JournalContentSearch (
 	companyId LONG,
 	privateLayout BOOLEAN,
 	layoutId LONG,
-	portletId VARCHAR(75) null,
+	portletId VARCHAR(200) null,
 	articleId VARCHAR(75) null
 );
 
@@ -693,7 +693,7 @@ create table PollsVote (
 create table Portlet (
 	id_ LONG not null primary key,
 	companyId LONG,
-	portletId VARCHAR(75) null,
+	portletId VARCHAR(200) null,
 	roles VARCHAR(75) null,
 	active_ BOOLEAN
 );
@@ -703,7 +703,7 @@ create table PortletPreferences (
 	ownerId LONG,
 	ownerType INTEGER,
 	plid LONG,
-	portletId VARCHAR(75) null,
+	portletId VARCHAR(200) null,
 	preferences TEXT null
 );
 
@@ -754,7 +754,7 @@ create table Resource_ (
 create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(75) null,
+	name VARCHAR(200) null,
 	scope INTEGER
 );
 

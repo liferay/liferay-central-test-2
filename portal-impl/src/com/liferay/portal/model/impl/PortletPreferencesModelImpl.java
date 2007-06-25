@@ -60,7 +60,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "preferences", new Integer(Types.CLOB) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(75) null,preferences TEXT null)";
+	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table PortletPreferences";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences"),

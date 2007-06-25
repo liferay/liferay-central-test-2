@@ -58,7 +58,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "scope", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(75) null,scope INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(200) null,scope INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table ResourceCode";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ResourceCode"), XSS_ALLOW);

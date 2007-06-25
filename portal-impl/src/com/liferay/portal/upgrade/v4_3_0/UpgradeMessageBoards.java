@@ -36,6 +36,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.MBCategoryIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.MBMessageAttachmentsUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -88,8 +89,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
-			"categoryId", true);
+		PKUpgradeColumnImpl upgradePKColumn =
+			new MBCategoryIdUpgradeColumnImpl();
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,

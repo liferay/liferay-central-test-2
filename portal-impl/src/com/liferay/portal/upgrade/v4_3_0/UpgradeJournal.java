@@ -160,8 +160,11 @@ public class UpgradeJournal extends UpgradeProcess {
 			new JournalTemplatePKUpgradeColumnImpl(
 				upgradeCompanyIdColumn, upgradeGroupIdColumn);
 
+		UpgradeColumn upgradeTemplateIdColumn =
+			new TempUpgradeColumnImpl("templateId");
+
 		UpgradeColumn upgradeXSLColumn =
-			new JournalTemplateXSLUpgradeColumnImpl();
+			new JournalTemplateXSLUpgradeColumnImpl(upgradeTemplateIdColumn);
 
 		UpgradeColumn upgradeSmallImageIdColumn =
 			new JournalTemplateSmallImageIdUpgradeColumnImpl(
@@ -172,7 +175,8 @@ public class UpgradeJournal extends UpgradeProcess {
 		upgradeTable = new DefaultUpgradeTableImpl(
 			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
-			upgradeTemplatePKColumn, upgradeUserIdColumn, upgradeXSLColumn,
+			upgradeTemplatePKColumn, upgradeUserIdColumn,
+			upgradeTemplateIdColumn, upgradeXSLColumn,
 			upgradeSmallImageIdColumn);
 
 		upgradeTable.setCreateSQL(JournalTemplateImpl.TABLE_SQL_CREATE);

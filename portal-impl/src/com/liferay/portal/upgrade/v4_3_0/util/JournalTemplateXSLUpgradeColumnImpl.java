@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.util.StringUtil;
 
 /**
@@ -34,8 +35,10 @@ import com.liferay.util.StringUtil;
  */
 public class JournalTemplateXSLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public JournalTemplateXSLUpgradeColumnImpl() {
+	public JournalTemplateXSLUpgradeColumnImpl(UpgradeColumn templateIdColumn) {
 		super("xsl");
+
+		_templateIdColumn = templateIdColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -50,7 +53,21 @@ public class JournalTemplateXSLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 				xsl, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
 		}
 
+		String templateId = (String)_templateIdColumn.getOldValue();
+
+		if (templateId.equals("BASIC-BANNER")) {
+
+			// 4.3 defaults to XHTML 1.0 Transitional and requires stricter CSS
+
+			xsl = StringUtil.replace(
+				xsl,
+				"background-repeat: no-repeat; width: 520; height: 175;",
+				"background-repeat: no-repeat; width: 520px; height: 175px;");
+		}
+
 		return xsl;
 	}
+
+	private UpgradeColumn _templateIdColumn;
 
 }

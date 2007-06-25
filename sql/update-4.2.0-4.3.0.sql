@@ -81,7 +81,7 @@ create table JournalContentSearch (
 	companyId LONG,
 	privateLayout BOOLEAN,
 	layoutId LONG,
-	portletId VARCHAR(75) null,
+	portletId VARCHAR(200) null,
 	articleId VARCHAR(75) null
 );
 
@@ -228,7 +228,7 @@ alter table Resource_ add codeId LONG;
 create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(75) null,
+	name VARCHAR(200) null,
 	scope INTEGER
 );
 

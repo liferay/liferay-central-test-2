@@ -153,11 +153,6 @@ public class UpgradeCompany extends UpgradeProcess {
 					"' and classPK = '" + webId + "'");
 
 		runSQL(
-			"update PortletPreferences set ownerId = '" + companyId +
-				"', ownerType = " + PortletKeys.PREFS_OWNER_TYPE_COMPANY +
-					" where ownerId = 'COMPANY." + webId + "'");
-
-		runSQL(
 			"update Resource_ set primKey = '" + companyId +
 				"' where scope = 'company' and primKey = '" + webId + "'");
 

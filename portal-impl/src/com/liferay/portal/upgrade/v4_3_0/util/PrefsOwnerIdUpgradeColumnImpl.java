@@ -39,10 +39,12 @@ import java.sql.Types;
 public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public PrefsOwnerIdUpgradeColumnImpl(
-		ValueMapper groupIdMapper, ValueMapper userIdMapper) {
+		ValueMapper companyIdMapper, ValueMapper groupIdMapper,
+		ValueMapper userIdMapper) {
 
 		super("ownerId", new Integer(Types.VARCHAR));
 
+		_companyIdMapper = companyIdMapper;
 		_groupIdMapper = groupIdMapper;
 		_userIdMapper = userIdMapper;
 	}
@@ -85,6 +87,8 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 			}
 		}
 		else if (ownerId.startsWith("COMPANY.")) {
+			ownerId = String.valueOf(_companyIdMapper.getNewValue(
+				ownerId.substring(8, ownerId.length())));
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 		}
 		else if (ownerId.startsWith("GROUP.")) {
@@ -127,6 +131,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 		return _privateLayout;
 	}
 
+	private ValueMapper _companyIdMapper;
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _userIdMapper;
 	private Integer _ownerType;

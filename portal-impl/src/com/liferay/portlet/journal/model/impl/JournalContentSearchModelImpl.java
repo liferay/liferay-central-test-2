@@ -61,7 +61,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(75) null,articleId VARCHAR(75) null)";
+	public static String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table JournalContentSearch";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch"),

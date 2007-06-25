@@ -69,6 +69,14 @@ public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	protected void processPrefs(String portletId, PortletPreferences prefs)
 		throws Exception {
 
+		// Portlet Setup
+
+		String portletCSS = prefs.getValue("portlet-setup-css", null);
+
+		if (Validator.isNotNull(portletCSS)) {
+			prefs.reset("portlet-setup-css");
+		}
+
 		// Journal Articles and Journal Content
 
 		if (portletId.startsWith("62_INSTANCE_") ||
