@@ -281,6 +281,8 @@
 		<antcall target="build-lang-native2ascii-all" />
 
 		<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
+
+		<delete file="alfresco.log" />
 	</target>
 
 	<target name="build-lang-native2ascii">
