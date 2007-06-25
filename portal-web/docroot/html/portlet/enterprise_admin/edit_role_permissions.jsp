@@ -137,10 +137,10 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />addPermissions() {
+	function <portlet:namespace />addPermissions(type) {
 		var addPermissionsURL = "<%= addPermissionsURL.toString() %>";
 
-		if (document.<portlet:namespace />fm.<portlet:namespace />permissionType.value == "portal") {
+		if (type == "portal") {
 			addPermissionsURL += "&<portlet:namespace />portletResource=<%= PortletKeys.PORTAL %>";
 		}
 
@@ -194,81 +194,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
 </liferay-util:include>
-
-<c:choose>
-	<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
-		Define permissions for this <b>Regular</b> role. Configure what this role has permission to do.
-
-		<liferay-ui:toggle
-			id="toggle_id_enterprise_admin_edit_role_permissions"
-			onImage='<%= themeDisplay.getPathThemeImages() + "/common/help.png" %>'
-			offImage='<%= themeDisplay.getPathThemeImages() + "/common/help.png" %>'
-			defaultOn="false"
-		/>
-
-		<br /><br />
-
-		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
-			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-				This is a <i>Regular</i> role. That means this role can be associated directly with users, communities, organizations, locations, or user groups.
-
-				<br /><br />
-
-				To add permissions to this role, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
-
-				<br /><br />
-
-				Once you choose the portlet or resource, configure the actions that this role has and the scope of the actions.
-
-				<br /><br />
-
-				For example, you can give this role the <i>Delete</i> action on the <i>Category</i> resource with the <i>Enterprise</i> scope. This means anyone associated with this role can delete all Message Boards Categories.
-
-				<br /><br />
-
-				Or, you can give this role the <i>Delete</i> action on the <i>Category</i> resource with the <i>Communities</i> scope. You must then choose a list of communities. This means anyone associated with this role can delete Message Boards Categories in the selected communities.
-			</div>
-
-			<br />
-		</div>
-	</c:when>
-	<c:otherwise>
-		Define permissions for this <b>Community</b> role. Configure what this role has permission to do.
-
-		<liferay-ui:toggle
-			id="toggle_id_enterprise_admin_edit_role_permissions"
-			onImage='<%= themeDisplay.getPathThemeImages() + "/common/help.png" %>'
-			offImage='<%= themeDisplay.getPathThemeImages() + "/common/help.png" %>'
-			defaultOn="false"
-		/>
-
-		<br /><br />
-
-		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
-			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-				This is a <i>Community</i> role. That means this role is only valid for a user in a given community. A user can have one set of Community roles in one community, and another set of Community roles in another community.
-
-				<br /><br />
-
-				To add permissions to this role, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
-
-				<br /><br />
-
-				Once you choose the portlet or resource, configure the actions that this role has.
-
-				<br /><br />
-
-				You must then go to the Communities portlet to associate different users with the appropriate Community roles.
-
-				<br /><br />
-
-				For example, you may have a role called <i>Message Boards Moderator</i>. You give this role the <i>Delete</i> action on the <i>Category</i> resource. A user can then have this role for community X and not have this role for community Y. That means this user can delete Message Boards Categories for community X but not for community Y.
-			</div>
-
-			<br />
-		</div>
-	</c:otherwise>
-</c:choose>
 
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
@@ -328,6 +253,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		int total = permissionsDisplay.size();
 
 		searchContainer.setTotal(total);
+        searchContainer.setEmptyResultsMessage("this-role-does-not-contain-any-permission");
 
 		List results = ListUtil.subList(permissionsDisplay, searchContainer.getStart(), searchContainer.getEnd());
 
@@ -421,31 +347,16 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		}
 		%>
 
-		<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="what-type-of-permissions-would-you-like-to-add" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />permissionType">
-					<option value="portlet"><liferay-ui:message key="portlet" /></option>
-					<option value="portal"><liferay-ui:message key="portal" /></option>
-				</select>
-			</td>
-		</tr>
-		</table>
-
 		<br />
 
-		<input type="button" value="<liferay-ui:message key="add-permissions" />" onClick="<portlet:namespace />addPermissions();" />
+		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onClick="<portlet:namespace />addPermissions('portlet');" />
+		<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
 
-		<c:if test="<%= total > 0 %>">
-			<br /><br />
+        <br /><br />
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+        <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-		</c:if>
+        <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test="<%= (groupScopePos >= 0) && (groupScopeActionIdsArray.length > 0) %>">
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
@@ -459,17 +370,16 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		%>
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step 4 of <%= totalSteps %>: Select the communities where this role can perform the <i><%= ResourceActionsUtil.getAction(pageContext, actionId) %></i> action on the
-
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(modelResource) %>">
-					<i><%= modelResourceName %></i> resource.
-				</c:when>
-				<c:otherwise>
-					<i><%= portletResourceName %></i> portlet.
-				</c:otherwise>
-			</c:choose>
-		</div>
+            <%= LanguageUtil.format(pageContext, "step-x-of-x", new String[]{"4", Integer.toString(totalSteps)}) %>:
+            <c:choose>
+                <c:when test="<%= Validator.isNotNull(modelResource) %>">
+                    <%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-resource", new String[]{ResourceActionsUtil.getAction(pageContext, actionId), modelResourceName}) %>
+                </c:when>
+                <c:otherwise>
+                    <%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet", new String[]{ResourceActionsUtil.getAction(pageContext, actionId), portletResourceName}) %>
+                </c:otherwise>
+            </c:choose>
+        </div>
 
 		<br />
 
@@ -570,42 +480,43 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 			<c:choose>
 				<c:when test="<%= portletResource.equals(PortletKeys.PORTAL) %>">
-					Step 1 of <%= totalSteps %>: Select the scope of the action that this role can perform for the <i><%= portletResourceName %></i>.
+					<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[]{"1", Integer.toString(totalSteps)}) %>:
+                    <%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-for-the-x", portletResourceName) %>
 
-					<c:if test="<%= actions.size() > 0 %>">
-						You can choose more than one.
+                    <c:if test="<%= actions.size() > 0 %>">
+						
 					</c:if>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
-					Step 3 of <%= totalSteps %>: Select the scope of the action that this role can perform for the
+					<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[]{"3", Integer.toString(totalSteps)}) %>:
 
 					<c:choose>
 						<c:when test="<%= Validator.isNotNull(modelResource) %>">
-							<i><%= modelResourceName %></i> resource.
+                            <%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-for-the-x-resource", modelResourceName) %>
 						</c:when>
 						<c:otherwise>
-							<i><%= portletResourceName %></i> portlet.
+                            <%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-for-the-x-portlet", portletResourceName) %>
 						</c:otherwise>
 					</c:choose>
 
 					<c:if test="<%= actions.size() > 0 %>">
-						You can choose more than one.
+                        <%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					Step 3 of <%= totalSteps %>: Select the action that this role can perform for the
+					<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[]{"3", Integer.toString(totalSteps)}) %>:
 
 					<c:choose>
 						<c:when test="<%= Validator.isNotNull(modelResource) %>">
-							<i><%= modelResourceName %></i> resource.
+                            <%= LanguageUtil.format(pageContext, "select-the-action-that-this-role-can-perform-for-the-x-resource", modelResourceName) %>
 						</c:when>
 						<c:otherwise>
-							<i><%= portletResourceName %></i> portlet.
+                            <%= LanguageUtil.format(pageContext, "select-the-action-that-this-role-can-perform-for-the-x-portlet", portletResourceName) %>
 						</c:otherwise>
 					</c:choose>
 
 					<c:if test="<%= actions.size() > 0 %>">
-						You can choose more than one.
+						<%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
@@ -681,8 +592,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step 2 of <%= totalSteps %>: Choose a resource or proceed to the next step.
-		</div>
+			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[]{"2", Integer.toString(totalSteps)}) %>:
+            <%= LanguageUtil.get(pageContext, "choose-a-resource-or-proceed-to-the-next-step") %>
+        </div>
 
 		<br />
 
@@ -690,7 +602,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			<%= breadcrumbs %>
 		</div>
 
-		Proceed to the next step to define permissions to the <%= portletResourceName %> portlet itself.
+        <%= LanguageUtil.format(pageContext, "proceed-to-the-next-step-to-define-permissions-to-the-x-portlet-itself", portletResourceName) %>
 
 		<br /><br />
 
@@ -701,7 +613,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 			<liferay-ui:tabs names="resources" />
 
-			Define permissions to a resource that belongs to the <%= portletResourceName %> portlet.
+            <%= LanguageUtil.format(pageContext, "define-permissions-to-a-resource-that-belongs-to-the-{0}-portlet", portletResourceName) %>
 
 			<br /><br />
 
@@ -792,7 +704,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		%>
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step 1 of <%= totalSteps %>: Choose a portlet.
+			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[]{"1", Integer.toString(totalSteps)}) %>:
+            <%= LanguageUtil.get(pageContext, "choose-a-portlet") %>
 		</div>
 
 		<br />
