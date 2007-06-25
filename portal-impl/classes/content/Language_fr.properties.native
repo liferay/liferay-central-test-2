@@ -11,11 +11,11 @@ lang.line.end=right
 ##
 
 javax.portlet.title.100=Invitation
-javax.portlet.title.101=Contenu Étiqueté
+javax.portlet.title.101=Contenu étiqueté
 javax.portlet.title.102=Contenu du XSL
 javax.portlet.title.104=Mise à jour du manager
-javax.portlet.title.105=Mes Étiquettes globales
-javax.portlet.title.106=Mes Étiquettes de la communauté
+javax.portlet.title.105=Mes étiquettes globales
+javax.portlet.title.106=Mes étiquettes de la communauté
 javax.portlet.title.107=Commentaires de la page
 javax.portlet.title.108=Classement de la page
 javax.portlet.title.109=Formulaire web
@@ -106,7 +106,7 @@ javax.portlet.title.95=Gadgets Google
 javax.portlet.title.96=Google Maps
 javax.portlet.title.97=Note rapide
 javax.portlet.title.98=Catalogue de logiciel
-javax.portlet.title.99=Administration d'Étiquette
+javax.portlet.title.99=Administration d'étiquette
 javax.portlet.title.9=Administration du portail
 
 ##
