@@ -158,7 +158,7 @@ Liferay.Navigation = new Class({
 			navList.after(
 				'<div id="add-page">' +
 				'<a href="javascript:;">' +
-				'<span>Add page</span>' +
+				'<span>' + Liferay.Language.get('add-page') + '</span>' +
 				'</a>' +
 				'</div>');
 
@@ -311,7 +311,7 @@ Liferay.Navigation = new Class({
 		var tab = jQuery(obj).parents('li');
 		var tabText = tab.find('a span').html();
 
-		if (confirm('Are you sure you want to remove "' + tabText + '"?')) {
+		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {
 			var data = {
 				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 				cmd: 'delete',
