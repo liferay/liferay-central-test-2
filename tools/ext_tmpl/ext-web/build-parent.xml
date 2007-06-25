@@ -44,6 +44,7 @@
 		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/google.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/jsonrpc.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jstl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
@@ -236,7 +237,10 @@
 						</copy>
 					</then>
 					<elseif>
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						<and>
+							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+							<equals arg1="${app.server.version}" arg2="4.0" />
+						</and>
 						<then>
 							<antcall target="compile-jboss-tomcat" />
 

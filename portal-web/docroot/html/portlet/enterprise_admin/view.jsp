@@ -1536,7 +1536,7 @@ portletURL.setParameter("tabs3", tabs3);
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEmails();" />
 			</c:when>
 			<c:otherwise>
-				<%@ include file="/html/portlet/enterprise_admin/edit_company.jsp" %>
+				<%@ include file="/html/portlet/enterprise_admin/company.jspf" %>
 			</c:otherwise>
 		</c:choose>
 	</c:when>
