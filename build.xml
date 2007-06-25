@@ -341,10 +341,6 @@
 		<ant dir="portal-web" target="deploy" inheritAll="false" />
 		<ant dir="tunnel-web" target="deploy" inheritAll="false" />
 
-		<ant dir="layouttpl" target="deploy" inheritAll="false" />
-		<ant dir="portlets" target="deploy" inheritAll="false" />
-		<ant dir="themes" target="deploy" inheritAll="false" />
-
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
@@ -1300,13 +1296,6 @@
 		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
 		<copy file="portal-ear/liferay-portal-servlet23.ear" tofile="liferay-portal-servlet23-${lp.version.file.name}.ear" />
 		<copy file="portal-ear/liferay-portal-servlet23.war" tofile="liferay-portal-servlet23-${lp.version.file.name}.war" />-->
-
-		<ant dir="layouttpl" target="deploy" inheritAll="false" />
-		<ant dir="portlets" target="deploy" inheritAll="false" />
-		<ant dir="themes" target="deploy" inheritAll="false" />
-
-		<ant dir="layouttpl" target="war" inheritAll="false" />
-		<ant dir="portlets" target="war" inheritAll="false" />
 
 		<ant dir="jbpm-web" target="deploy" inheritAll="false" />
 		<ant dir="servicemix-web" target="deploy" inheritAll="false" />

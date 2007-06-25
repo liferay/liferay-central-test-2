@@ -132,10 +132,6 @@
 		<ant dir="ext-web" target="deploy" inheritAll="false" />
 		<ant dir="modules" target="deploy" inheritAll="false" />
 
-		<ant dir="layouttpl" target="deploy" inheritAll="false" />
-		<ant dir="portlets" target="deploy" inheritAll="false" />
-		<ant dir="themes" target="deploy" inheritAll="false" />
-
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
