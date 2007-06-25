@@ -49,8 +49,6 @@
 		<ant dir="portal-web" target="clean" inheritAll="false" />
 		<ant dir="tunnel-web" target="clean" inheritAll="false" />
 
-		<ant dir="portlets" target="clean" inheritAll="false" />
-
 		<delete>
 			<fileset dir="." includes="*.ear,*.jar,*.war,*.zip" />
 		</delete>
@@ -237,8 +235,6 @@
 		<ant dir="lock-impl" target="compile" inheritAll="false" />
 		<ant dir="mail-impl" target="compile" inheritAll="false" />
 		<ant dir="portal-impl" target="compile" inheritAll="false" />
-
-		<ant dir="portlets" target="compile" inheritAll="false" />
 	</target>
 
 	<target name="jar">
@@ -261,8 +257,6 @@
 
 		<ant dir="portal-web" target="war" inheritAll="false" />
 		<ant dir="tunnel-web" target="war" inheritAll="false" />
-
-		<ant dir="portlets" target="war" inheritAll="false" />
 
 		<ant dir="support-tomcat" target="jar" inheritAll="false" />
 	</target>
@@ -1293,7 +1287,6 @@
 		<!--<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version.file.name}.ear" />
 		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version.file.name}.war" />
 		<copy file="portal-ear/liferay-portal-geronimo-tomcat.war" tofile="liferay-portal-geronimo-tomcat-${lp.version.file.name}.war" />
-		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
 		<copy file="portal-ear/liferay-portal-servlet23.ear" tofile="liferay-portal-servlet23-${lp.version.file.name}.ear" />
 		<copy file="portal-ear/liferay-portal-servlet23.war" tofile="liferay-portal-servlet23-${lp.version.file.name}.war" />-->
 
@@ -1305,8 +1298,6 @@
 		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
 		<copy file="servicemix-web/servicemix-web.war" tofile="liferay-portal-servicemix-${lp.version.file.name}.war" />
 		<copy file="tunnel-web/tunnel-web.war" tofile="liferay-portal-tunnel-${lp.version.file.name}.war" />
-
-		<copy file="portlets/alfresco.war" tofile="liferay-portal-alfresco-${lp.version.file.name}.war" />
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
