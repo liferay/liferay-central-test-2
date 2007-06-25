@@ -84,12 +84,10 @@ Liferay.Portlet = {
 	last: function(arg1) {
 		this.fnLast.push(arg1);
 	},
-	
-	
+
 	/*
 	 * Helper methods for portlets
 	 */
-
 	findIndex: function(portlet) {
 		var index = -1;
 
@@ -122,13 +120,13 @@ Liferay.Portlet = {
 
 		this.savePosition(portlet);
 	},
-	
+
 	savePosition: function(portlet) {
 		var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
 		var index = this.findIndex(portlet);
 		var portletId = portlet.id.replace(/^(p_p_id_)/, '');
 		portletId = portletId.substring(0, portletId.length - 1);
-	
+
 		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout" + 
 			"?p_l_id=" + themeDisplay.getPlid() +
 			"&p_p_id=" + portletId +

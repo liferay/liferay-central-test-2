@@ -3,10 +3,10 @@ Liferay.Publisher = {
 
 	deliver: function(publisher) {
 		var instance = this;
-		
+
 		var scope = window;
 		var data;
-	
+
 		if (arguments.length == 2) {
 			data = [arguments[1]];
 		} else {
@@ -27,7 +27,7 @@ Liferay.Publisher = {
 
 	register: function(publisher) {
 		var instance = this;
-		
+
 		if (!instance.publishers[publisher]) {
 			instance.publishers[publisher] = [];
 		}
@@ -35,13 +35,13 @@ Liferay.Publisher = {
 
 	subscribe: function(publisher, func, obj) {
 		var instance = this;
-	
+
 		if (instance.publishers[publisher] == null) {
 			instance.register(publisher);
 		}
-		
+
 		var alreadyExists = false;
-		
+
 		jQuery.each(instance.publishers[publisher],
 			function(i, el) {
 				if (el === func) {
@@ -50,7 +50,7 @@ Liferay.Publisher = {
 				}
 			}
 		);
-		
+
 		if (!alreadyExists) {
 			var data = {
 				func: func,
@@ -64,11 +64,11 @@ Liferay.Publisher = {
 
 	unsubscribe: function(publisher, func) {
 		var instance = this;
-		
+
 		if (!instance.publishers[publisher]) {
 			return;
 		}
-		
+
 		 jQuery.each(instance.publishers[publisher],
 			function(i, el) {
 				if (el.func === func) {

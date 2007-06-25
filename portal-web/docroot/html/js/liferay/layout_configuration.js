@@ -7,19 +7,19 @@ var LayoutConfiguration = {
 	menuIframe : null,
 	portlets : new Array(),
 	showTimer : 0,
-	
+
 	init : function () {
 		var arrow1 = new Image();
 		var arrow2 = new Image();
 		arrow1.src = themeDisplay.getPathThemeImages() + "/arrows/01_down.png";
 		arrow2.src = themeDisplay.getPathThemeImages() + "/arrows/01_right.png";
-		
+
 		var menu = document.getElementById("portal_add_content");
 		LayoutConfiguration.menu = menu;
-		
+
 		if (menu != null) {
 			var list = menu.childNodes;
-			
+
 			for (var i = 0; i < list.length; i++) {
 				if (list[i].className != null && list[i].className.match("portal-add-content")) {
 					LayoutConfiguration.menuDiv = list[i];
@@ -41,10 +41,10 @@ var LayoutConfiguration = {
 			}
 
 			LayoutConfiguration.initialized = true;
-			
+
 			jQuery('#layout_configuration_content').trigger('focus').addClass('focus');
 		}
-	},	
+	},
 
 	toggle : function (plid, ppid, doAsUserId) {
 		if (!LayoutConfiguration.menu) {
@@ -75,7 +75,7 @@ var LayoutConfiguration = {
 
 		this.showTimer = setTimeout("LayoutConfiguration.showMatching(\"" + word + "\")", 250);
 	},
-	
+
 	showMatching : function (word) {
 		var portlets = this.portlets;
 		var categories = this.categories;
@@ -138,16 +138,16 @@ var LayoutConfiguration = {
 
 	toggleCategory : function (obj, display) {
 		var parent = obj;
-		
+
 		while(parent.nodeName.toLowerCase() != "table") {
 			parent = parent.parentNode;
 		}
-		
+
 		var data = parent.rows[1].cells[0];
 		var pane = _$J(".layout_configuration_category_pane:first", data).get(0);
 		var image = obj.getElementsByTagName("img")[0];
 		var imagePath = themeDisplay.getPathThemeImages();
-		
+
 		if (display) {
 			pane.style.display = display;
 			if (display.toLowerCase().match("block")) {

@@ -1,5 +1,5 @@
 function AjaxRequest(url, options) {
-	
+
 	var xmlHttpReq;
 	var opts = options;
 
@@ -27,7 +27,7 @@ function AjaxRequest(url, options) {
 			}
 		}
 	}
-	
+
 	var returnFunction = function() {
 			if (xmlHttpReq.readyState == 4) {
 				try {
@@ -41,7 +41,7 @@ function AjaxRequest(url, options) {
 						if (opts.onComplete) {
 							opts.onComplete(xmlHttpReq, opts.returnArgs);
 						}
-		
+
 						AjaxUtil.remove(opts.ajaxId);
 					}
 				}
@@ -54,7 +54,7 @@ function AjaxRequest(url, options) {
 		var urlArray = url.split("?");
 		var path = urlArray[0];
 		var query = urlArray[1];
-		
+
 		try {
 			if (opts.method == "get") {
 				xmlHttpReq.open("GET", url, true);
@@ -72,7 +72,7 @@ function AjaxRequest(url, options) {
 		catch (e) {
 		}
 	};
-	
+
 	send(url);
 
 	this.resend = function(url, options) {
@@ -83,11 +83,11 @@ function AjaxRequest(url, options) {
 		*/
 		send(url);
 	};
-	
+
 	this.getId = function() {
 		return ajaxId;
 	};
-	
+
 	this.cleanUp = function() {
 		xmlHttpReq.onreadystatechange = function() {};
 		returnFunction = null;
@@ -99,7 +99,7 @@ function AjaxRequest(url, options) {
 var AjaxUtil = {
 	counter : 1,
 	requests : new Array(),
-	
+
 	request : function(url, options) {
 		/*
 		 * OPTIONS:
@@ -111,9 +111,9 @@ var AjaxUtil = {
 		var opts = (options == null) ? (new Object()) : options;
 		var ajaxId = (opts.reverseAjax) ? 0 : AjaxUtil.getNextId();
 		opts.ajaxId = ajaxId;
-		
+
 		var request;
-		
+
 		if (ajaxId == 0 && AjaxUtil.requests[0]) {
 			request = AjaxUtil.requests[0];
 			request.resend(url, opts);
@@ -122,18 +122,18 @@ var AjaxUtil = {
 			request = new AjaxRequest(url, opts);
 			AjaxUtil.requests[ajaxId] = request;
 		}
-		
+
 		if (!opts.onComplete && !opts.update) {
 			AjaxUtil.remove(ajaxId);
 		}
 	},
-	
+
 	submit: function(form, options) {
 		var url = form.action;
 		var inputs = jQuery("input, textarea, select", form);
 		var opts = options || new Object();
 		var params = inputs.serialize();
-		
+
 		if (url.indexOf("?") == -1) {
 			url = url + "?" + params;
 		}
@@ -143,20 +143,20 @@ var AjaxUtil = {
 		else {
 			url = url + "&" + params;
 		}
-		
+
 		if (opts.disable) {
 			inputs.attr("disabled", true);
 		}
 
 		AjaxUtil.request(url, opts);
 	},
-	
+
 	update : function(url, id, options) {
 		var opts = options || new Object();
 		opts.update = id;
 		AjaxUtil.request(url, opts);
 	},
-	
+
 	getNextId : function() {
 		var id = AjaxUtil.counter++;
 
@@ -172,7 +172,7 @@ var AjaxUtil = {
 	remove : function(id) {
 		if (id) {
 			var request = AjaxUtil.requests[id];
-			
+
 			if (request) {
 				request.cleanUp();
 				request = null;
@@ -186,7 +186,7 @@ var ReverseAjax = {
 		Liferay.Util.addEventHandler(window, "unload", ReverseAjax.release);
 		ReverseAjax.request();
 	},
-	
+
 	request: function() {
 		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax",
 			{
@@ -194,11 +194,11 @@ var ReverseAjax = {
 				reverseAjax: true
 			});
 	},
-	
+
 	response: function(xmlHttpRequest) {
 		var res = Liferay.Util.toJSONObject(xmlHttpRequest.responseText);
 		var status = res.status;
-		
+
 		if (status && status != "failure") {
 			if (status == "success") {
 				if (res.chatMessages) {
@@ -212,7 +212,7 @@ var ReverseAjax = {
 			ReverseAjax.request();
 		}
 	},
-	
+
 	release : function() {
 		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax?release=1", {reverseAjax:true});
 	}

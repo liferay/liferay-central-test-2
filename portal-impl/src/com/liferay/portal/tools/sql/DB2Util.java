@@ -66,21 +66,23 @@ public class DB2Util extends DBUtil {
 		return template;
 	}
 
-	public void runSQL(String[] templates) throws IOException, SQLException {
-		super.runSQL(templates);
-		_reorgTables(templates);
-	}
-
 	public void runSQL(String template) throws IOException, SQLException {
 		if (template.startsWith(ALTER_COLUMN_NAME)) {
 			String sql = buildSQL(template);
 
 			String[] renameSqls = sql.split(";");
+
 			runSQL(renameSqls);
 		}
 		else {
 			super.runSQL(template);
 		}
+	}
+
+	public void runSQL(String[] templates) throws IOException, SQLException {
+		super.runSQL(templates);
+
+		_reorgTables(templates);
 	}
 
 	protected DB2Util() {
@@ -154,30 +156,33 @@ public class DB2Util extends DBUtil {
 
 		return sm.toString();
 	}
-	
+
 	private void _reorgTables(String[] templates) throws SQLException {
 		Set tableNames = new HashSet();
-		
+
 		for (int i = 0; i < templates.length; i++) {
 			if (templates[i].startsWith("alter table")) {
 				tableNames.add(templates[i].split(" ")[2]);
 			}
 		}
-		
+
 		if (tableNames.size() == 0) {
 			return;
 		}
-		 
+
 		Connection con = null;
-		CallableStatement  callStmt = null;
+		CallableStatement callStmt = null;
 
 		try {
 			con = HibernateUtil.getConnection();
-			
-			for (Iterator iter = tableNames.iterator(); iter.hasNext();) {
-				String tableName = (String) iter.next();
-				
+
+			Iterator itr = tableNames.iterator();
+
+			while (itr.hasNext()) {
+				String tableName = (String)itr.next();
+
 				String sql = "call sysproc.admin_cmd(?)";
+
 				callStmt = con.prepareCall(sql);
 
 			    String param = "reorg table " + tableName;
@@ -185,7 +190,7 @@ public class DB2Util extends DBUtil {
 			    callStmt.setString(1, param);
 
 			    callStmt.execute();
-			}			
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, callStmt);

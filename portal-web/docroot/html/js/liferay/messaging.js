@@ -11,7 +11,7 @@ var Messaging = {
 
 	chat : function(msgObj) {
 		if (!msgObj && Messaging.msgQueue.length == 0) return; 
-		
+
 		var msg = msgObj || Messaging.msgQueue.shift();
 		var toDivId = msg.toId.replace(/\./g, "_");
 		var chatBox = _$J("#msg-chat-box_" + toDivId)[0];
@@ -25,7 +25,7 @@ var Messaging = {
 					"</div>" +
 					"<input class='msg-type-area' style='width: 90%; margin-top: 5px' tabIndex=1 type='text' onKeyPress='Messaging.sendChat(this, event)' />" +
 				"</div>";
-				
+
 			chatBox = Liferay.Popup({
 				title: msg.toName,
 				message: contents,
@@ -33,7 +33,7 @@ var Messaging = {
 				width: 300,
 				onClose: function() { Messaging.saveCookie(); }
 			});
-			
+
 			if (msg.status && msg.status == "unavailable") {
 				_$J(chatBox).append(
 					"<img src='" + themeDisplay.getPathThemeImages() + "/chat/add_user.png' " +
@@ -44,7 +44,7 @@ var Messaging = {
 			}
 
 			Messaging.populateChatBox(chatBox, msg);
-			
+
 			if (msg.top != null && msg.left != null) {
 				_$J(chatBox).parents(".popup:first").css({
 					top: msg.top + "px",
@@ -53,7 +53,7 @@ var Messaging = {
 			}
 			else {
 				var count = Liferay.Popup.count();
-				
+
 				_$J(chatBox).parents(".popup:first").css({
 					top: (count * 10) + "px",
 					left: (count * 10) + "px"
@@ -64,7 +64,7 @@ var Messaging = {
 			this.populateChatBox(chatBox, msg);
 		}
 	},
-	
+
 	populateChatBox : function(chatBox, msg) {
 		var typeArea = _$J.getOne(".msg-type-area", chatBox);
 		var chatArea = _$J.getOne(".msg-chat-area", chatBox);
@@ -121,7 +121,7 @@ var Messaging = {
 			}
 		}
 	},
-	
+
 	error : function() {
 		alert("User does not exist");
 	},
@@ -131,14 +131,14 @@ var Messaging = {
 		this.userId = userId;
 
 		var msgJSON = _$J.cookie(this.userId + "_chats");
-		
+
 		if (msgJSON) {
 			var chatArray = eval("(" + msgJSON + ")");
-			
+
 			for (var i = 0; i < chatArray.length; i++) {
 				Messaging.msgQueue.push(chatArray[i]);
 			}
-			
+
 			Messaging.chat();
 		}
 
@@ -150,7 +150,7 @@ var Messaging = {
 		var chatBox = _$J.getOne(id);
 		var widthDiv = _$J.getOne(".msg-chat-box-width");
 		var chatArea = _$J.getOne(".msg-chat-area");
-		
+
 		chatBox.style.left = Viewport.scroll().x + "px";
 		chatBox.style.top = Viewport.scroll().y + "px";
 		widthDiv.style.width = (Viewport.frame().x - 30) + "px";
@@ -161,14 +161,14 @@ var Messaging = {
 		var chatBox = _$J.getOne(id);
 		var widthDiv = _$J.getOne(".msg-chat-box-width");
 		var chatArea = _$J.getOne(".msg-chat-area");
-		
+
 		widthDiv.style.width = 250 + "px";
 		chatArea.style.height = 100 + "px";
 	},
 
 	removeChat : function(id) {
 		var chatBox = _$J.getOne(id);
-		
+
 		Element.remove(chatBox);
 		this.saveCookie();
 	},
@@ -176,7 +176,7 @@ var Messaging = {
 	saveCookie : function() {
 		var chatList = _$J(".msg-chat-box");
 		var jsonString = "[";
-		
+
 		chatList.each(function(i){
 			var item = this;
 			var popup = _$J(item).parents(".popup:first");
@@ -187,7 +187,7 @@ var Messaging = {
 				+ "top:" + parseInt(popup.css("top")) + ","
 				+ "left:" + parseInt(popup.css("left")) + ","
 				+ "messages:\"" + Liferay.Util.toJSONString(_$J(".msg-chat-area", item)[0].innerHTML) + "\"}";
-				
+
 			if (i < chatList.length - 1) {
 				jsonString += ",";
 			}
@@ -242,7 +242,7 @@ var Messaging = {
 			chatArea.innerHTML += "<span style='color: #0000FF'>Me: </span>" + typeArea.value + "<br/>";
 			chatArea.scrollTop = chatArea.scrollHeight;
 			typeArea.value = "";
-			
+
 			Messaging.saveCookie();
 		}
 	},

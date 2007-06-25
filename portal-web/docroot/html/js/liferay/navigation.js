@@ -42,24 +42,24 @@ Liferay.Navigation = new Class({
 		var addBlock = jQuery('<li>' + instance._enterPage + '</li>');
 
 		var blockInput = addBlock.find('input');
-		
+
 		navItem.find('ul:first').append(addBlock);
-		
+
 		var savePage = addBlock.find('.save-page');
 		var cancelPage = addBlock.find('.cancel-page');
 		var currentInput = addBlock.find('.enter-page input');
-		
+
 		var pageParents = jQuery(document);
 
 		var pageBlur = function(internalEvent) {
 			var currentEl = jQuery(internalEvent.target);
 			var liParent = currentEl.parents('ul:eq(0)');
-	
+
 			if ((liParent.length == 0) && !currentEl.is('li') && !currentEl.parents('#add-page').length) {
 				cancelPage.trigger('click');
 			}
 		};
-		
+
 		pageParents.click(pageBlur);
 
 		cancelPage.click(
@@ -86,13 +86,13 @@ Liferay.Navigation = new Class({
 				} else {
 					return;
 				}
-				
+
 				pageParents.unbind('click', pageBlur);
 			}
 		);
 		blockInput[0].focus();
 	},
-	
+
 	_cancelAddingPage: function(event, obj) {
 		var instance = this;
 		obj.remove();
@@ -197,7 +197,7 @@ Liferay.Navigation = new Class({
 					return false;
 				}
 			);
-			
+
 			currentSpan.click(
 				function() {
 					var span = jQuery(this);
