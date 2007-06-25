@@ -28,27 +28,27 @@
 +-----------------------------------------------------------------------+
 */
 
-/* $Id: jquery.jeditable.js,v 1.39 2007/01/17 18:04:40 tuupola Exp $ */
+/* $Id$ */
 
 /**
-  * jQuery inplace editor plugin (version 1.1.0)  
+  * jQuery inplace editor plugin (version 1.3.x)
   *
   * Based on editable by Dylan Verheul <dylan@dyve.net>
   * http://www.dyve.net/jquery/?editable
   *
   * @name  jEditable
   * @type  jQuery
-  * @param String  url                POST URL to send edited content
+  * @param String  target             POST URL or function name to send edited content
   * @param Hash    options            additional options 
   * @param String  options[name]      POST parameter name of edited content
   * @param String  options[id]        POST parameter name of edited div id
-  * @param String  options[type]      text or textarea
+  * @param String  options[type]      text, textarea or select
   * @param Integer options[rows]      number of rows if using textarea
   * @param Integer options[cols]      number of columns if using textarea
   * @param Mixed   options[height]    'auto' or height in pixels
   * @param Mixed   options[width]     'auto' or width in pixels 
-  * @param String  options[postload]  POST URL to fetch content before editing
-  * @param String  options[getload]   GET URL to fetch content before editing
+  * @param String  options[loadurl]   URL to fetch content before editing
+  * @param String  options[loadtype]  Request type for load url. Should be GET or POST.
   * @param String  options[data]      Or content given as paramameter.
   * @param String  options[indicator] indicator html to show when saving
   * @param String  options[tooltip]   optional tooltip text via title attribute
@@ -56,30 +56,36 @@
   * @param String  options[onblur]    'cancel', 'submit' or 'ignore'
   * @param String  options[submit]    submit button value, empty means no button
   * @param String  options[cancel]    cancel button value, empty means no button
+  * @param String  options[cssclass]  CSS class to apply to input form. 'inherit' to copy from parent.
+  * @param String  options[style]     Style to apply to input form 'inherit' to copy from parent.
+  * @param String  options[select]    true or false, when true text is highlighted
   *             
   */
 
-jQuery.fn.editable = function(url, options) {
+jQuery.fn.editable = function(target, options, callback) {
 
     /* prevent elem has no properties error */
     if (this.length == 0) { 
-        return false; 
+        return(this); 
     };
-
+    
     var settings = {
-        url    : url,
-        name   : 'value',
-        id     : 'id',
-        type   : 'text',
-        width  : 'auto',
-        height : 'auto',
-        event  : 'click',
-        onblur : 'cancel'
+        target   : target,
+        name     : 'value',
+        id       : 'id',
+        type     : 'text',
+        width    : 'auto',
+        height   : 'auto',
+        event    : 'click',
+        onblur   : 'cancel',
+        loadtype : 'GET'
     };
-
+        
     if(options) {
         jQuery.extend(settings, options);
     };
+    
+    var callback = callback || function() { };
       
     jQuery(this).attr('title', settings.tooltip);
 
@@ -95,9 +101,9 @@ jQuery.fn.editable = function(url, options) {
 
         /* figure out how wide and tall we are */
         var width = 
-            ('auto' == settings.width)  ? jQuery(self).css('width')  : settings.width;
+            ('auto' == settings.width)  ? jQuery(self).width()  : settings.width;
         var height = 
-            ('auto' == settings.height) ? jQuery(self).css('height') : settings.height;
+            ('auto' == settings.height) ? jQuery(self).height() : settings.height;
 
         self.editing    = true;
         self.revert     = jQuery(self).html();
@@ -105,7 +111,26 @@ jQuery.fn.editable = function(url, options) {
 
         /* create the form object */
         var f = document.createElement('form');
-
+        
+        /* apply css or style or both */
+        if (settings.cssclass) {
+            if ('inherit' == settings.cssclass) {
+                jQuery(f).attr('class', jQuery(self).attr('class'));
+            } else {
+                jQuery(f).attr('class', settings.cssclass);
+            }
+        }
+        
+        if (settings.style) {
+            if ('inherit' == settings.style) {
+                jQuery(f).attr('style', jQuery(self).attr('style'));
+                /* IE needs the second line or display wont be inherited */
+                jQuery(f).css('display', jQuery(self).css('display'));                
+            } else {
+                jQuery(f).attr('style', settings.style);
+            }
+        }
+        
         /*  main input element */
         var i;
         switch (settings.type) {
@@ -114,12 +139,12 @@ jQuery.fn.editable = function(url, options) {
                 if (settings.rows) {
                     i.rows = settings.rows;
                 } else {
-                    jQuery(i).css('height', height);
+                    jQuery(i).height(height);
                 }
                 if (settings.cols) {
                     i.cols = settings.cols;
                 } else {
-                    jQuery(i).css('width', width);
+                    jQuery(i).width(width);
                 }   
                 break;
             case 'select':
@@ -128,40 +153,37 @@ jQuery.fn.editable = function(url, options) {
             default:
                 i = document.createElement('input');
                 i.type  = settings.type;
-                jQuery(i).css('width', width);
-                jQuery(i).css('height', height);
+                jQuery(i).width(width);
+                jQuery(i).height(height);
                 /* https://bugzilla.mozilla.org/show_bug.cgi?id=236791 */
                 i.setAttribute('autocomplete','off');
         }
-        
-        /* set input content via POST, GET, given data or existing value */
-        /* this looks weird because it is for maintaining bc */
-        var url;
-        var type;
-                
+
+        /* maintain bc with 1.1.1 and earlier versions */        
         if (settings.getload) {
-            url = settings.getload;
-            type = 'GET';
+            settings.loadurl    = settings.getload;
+            settings.loadtype = 'GET';
         } else if (settings.postload) {
-            url = settings.postload;
-            type = 'POST';      
+            settings.loadurl    = settings.postload;
+            settings.loadtype = 'POST';
         }
 
-        if (url) {
+        /* set input content via POST, GET, given data or existing value */
+        if (settings.loadurl) {
             var data = {};
             data[settings.id] = self.id;
             jQuery.ajax({
-               type : type,
-               url  : url,
+               type : settings.loadtype,
+               url  : settings.loadurl,
                data : data,
                success: function(str) {
-                  i.value = str;
+                  setInputContent(str);
                }
             });
         } else if (settings.data) {
-            i.value = settings.data;
+            setInputContent(settings.data);
         } else { 
-            i.value = self.revert;
+            setInputContent(self.revert);
         }
 
         i.name  = settings.name;
@@ -178,6 +200,9 @@ jQuery.fn.editable = function(url, options) {
             var b = document.createElement('input');
             b.type = 'button';
             b.value = settings.cancel;
+            jQuery(b).click(function() {
+                reset();
+            });
             f.appendChild(b);
         }
 
@@ -185,7 +210,12 @@ jQuery.fn.editable = function(url, options) {
         self.appendChild(f);
 
         i.focus();
- 
+        
+        /* highlight input contents when requested */
+        if (settings.select) {
+            i.select();
+        }
+         
         /* discard changes if pressing esc */
         jQuery(i).keydown(function(e) {
             if (e.keyCode == 27) {
@@ -201,7 +231,6 @@ jQuery.fn.editable = function(url, options) {
             jQuery(i).blur(function(e) {
                 t = setTimeout(reset, 500)
             });
-        /* TODO: does not currently work */
         } else if ('submit' == settings.onblur) {
             jQuery(i).blur(function(e) {
                 jQuery(f).submit();
@@ -221,18 +250,27 @@ jQuery.fn.editable = function(url, options) {
             /* do no submit */
             e.preventDefault(); 
 
-            /* add edited content and id of edited element to POST */           
-            var p = {};
-            p[i.name] = jQuery(i).val();
-            p[settings.id] = self.id;
-
-            /* show the saving indicator */
-            jQuery(self).html(options.indicator);
-            // jQuery(self).load(settings.url, p, function(str) {
-            jQuery.post(settings.url, p, function(str) {
+            /* check if given target is function */
+            if (jQuery.isFunction(settings.target)) {
+                var str = settings.target.apply(self, [jQuery(i).val(), settings]);
                 self.innerHTML = str;
                 self.editing = false;
-            });
+                callback.apply(self, [self.innerHTML, settings]);
+            } else {
+                /* add edited content and id of edited element to POST */           
+                var p = {};
+                p[i.name] = jQuery(i).val();
+                p[settings.id] = self.id;
+
+                /* show the saving indicator */
+                jQuery(self).html(settings.indicator);
+                jQuery.post(settings.target, p, function(str) {
+                    self.innerHTML = str;
+                    self.editing = false;
+                    callback.apply(self, [self.innerHTML, settings]);
+                });
+            }
+                        
             return false;
         });
 
@@ -240,6 +278,35 @@ jQuery.fn.editable = function(url, options) {
             self.innerHTML = self.revert;
             self.editing   = false;
         };
+        
+        function setInputContent(str) {
+            if (jQuery.isFunction(str)) {
+                var str = str.apply(self, [self.revert, settings]);
+            }
+            switch (settings.type) { 	 
+                case 'select': 	 
+                    if (String == str.constructor) { 	 
+                        eval ("var json = " + str);
+                        for (var key in json) {
+                            if ('selected' == key) {
+                                continue;
+                            } 
+                            o = document.createElement('option'); 	 
+                            o.value = key;
+                            var text = document.createTextNode(json[key]);
+                            o.appendChild(text);
+                            if (key == json['selected']) {
+                                o.selected = true;
+                            }
+                            i.appendChild(o); 	 
+                        }
+                    } 	 
+                    break; 	 
+                default: 	 
+                    i.value = str; 	 
+                    break; 	 
+            } 	 
+        }
 
     });
 
