@@ -255,6 +255,8 @@
 	<target name="deploy">
 		<antcall target="build-fckeditor" />
 
+		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" />
+
 		<antcall target="build-common-web.deploy" />
 
 		<if>

@@ -80,7 +80,7 @@ if (!portletDecorate) {
 String portletIcon = null;
 
 if (portletResourcePortlet != null) {
-	portletIcon = portletResourcePortlet.getContextPath() + portlet.getIcon();
+	portletIcon = portletResourcePortlet.getContextPath() + portletResourcePortlet.getIcon();
 }
 else {
 	portletIcon = portlet.getContextPath() + portlet.getIcon();
