@@ -135,8 +135,8 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		runSQL(
 			"update Contact_ set companyId = '" + companyId +
-				"', accountId = '" + accountId + "' where contactId = '" + webId +
-					".default'");
+				"', accountId = '" + accountId + "' where contactId = '" +
+					webId + ".default'");
 
 		runSQL(
 			"update Contact_ set accountId = '" + accountId +

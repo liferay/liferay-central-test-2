@@ -32,7 +32,8 @@ import com.liferay.util.StringUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalStructureXSDUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class JournalStructureXSDUpgradeColumnImpl
+	extends BaseUpgradeColumnImpl {
 
 	public JournalStructureXSDUpgradeColumnImpl() {
 		super("xsd");
