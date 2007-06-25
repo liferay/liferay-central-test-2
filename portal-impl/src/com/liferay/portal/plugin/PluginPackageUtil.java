@@ -104,7 +104,16 @@ public class PluginPackageUtil {
 				plugins.addAll(repository.getPluginPackages());
 			}
 			catch(PluginPackageException pe) {
-				_log.error(pe.getMessage());
+				String message = pe.getMessage();
+
+				if (message.startsWith("Unable to communicate")) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(message);
+					}
+				}
+				else {
+					_log.error(message);
+				}
 			}
 		}
 

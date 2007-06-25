@@ -144,6 +144,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.plugin.PluginPackageUtil">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.security.auth.LDAPAuth">
 		<priority value="ERROR" />
 	</category>
