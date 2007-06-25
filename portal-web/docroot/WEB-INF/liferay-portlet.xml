@@ -689,15 +689,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>69</portlet-name>
-		<icon>/html/portlet/hello_laszlo/icon.png</icon>
-		<struts-path>hello_laszlo</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>70</portlet-name>
 		<icon>/html/portlet/password_generator/icon.png</icon>
 		<struts-path>password_generator</struts-path>

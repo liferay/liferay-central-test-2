@@ -334,11 +334,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>69</portlet-name>
-		<struts-path>hello_laszlo</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>70</portlet-name>
 		<struts-path>password_generator</struts-path>
 		<include>true</include>
