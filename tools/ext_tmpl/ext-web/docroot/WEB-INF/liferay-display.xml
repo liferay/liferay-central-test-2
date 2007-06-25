@@ -87,11 +87,7 @@
 			<portlet id="51" />
 		</category>
 	</category>
-	<category name="category.shopping">
-		<portlet id="34" />
-		<portlet id="67" />
-	</category>
-	<category name="category.test">
+	<category name="category.sample">
 		<portlet id="47" />
 		<portlet id="48" />
 		<portlet id="50" />
@@ -100,6 +96,10 @@
 		<portlet id="69" />
 		<portlet id="98" />
 		<portlet id="EXT_1" />
+	</category>
+	<category name="category.shopping">
+		<portlet id="34" />
+		<portlet id="67" />
 	</category>
 	<category name="category.tools">
 		<portlet id="2" />
