@@ -22,16 +22,21 @@
 
 package com.liferay.portal.im;
 
-import com.levelonelabs.aim.AIMBuddy;
-import com.levelonelabs.aim.AIMClient;
-
 import com.liferay.portal.util.PropsUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.walluck.oscar.AIMConnection;
+import org.walluck.oscar.AIMSession;
+import org.walluck.oscar.client.Oscar;
 
 /**
  * <a href="AIMConnector.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Brett Randall
+ * @author Bruno Farache
  *
  */
 public class AIMConnector {
@@ -53,33 +58,49 @@ public class AIMConnector {
 		String login = PropsUtil.get(PropsUtil.AIM_LOGIN);
 		String password = PropsUtil.get(PropsUtil.AIM_PASSWORD);
 
-		_aim = new AIMClient(login, password);
+		AIMSession ses = new AIMSession();
 
-		_aim.signOn();
+		ses.setSN(login);
+
+		Oscar oscar = new Oscar();
+
+		oscar.setSN(login);
+		oscar.setPassword(password);
+
+		sess.init();
 	}
 
 	private void _disconnect() {
 		if (_aim != null) {
-			_aim.signOff();
+			AIMConnection.killAllInSess(_aim);
 		}
 	}
 
 	private void _send(String to, String msg) {
-		if (_aim == null) {
-			_connect();
+		try {
+			if (_aim == null) {
+				_connect();
+
+				// Daim's listeners are buggy. Instead, just wait a second
+				// before sending the first message.
+
+				Thread.sleep(1000);
+			}
+
+			_oscar.sendIM(_aim, to, msg, Oscar.getICQCaps());
 		}
-
-		AIMBuddy buddy = new AIMBuddy(to);
-
-		buddy.setOnline(true);
-
-		_aim.addBuddy(buddy);
-
-		_aim.sendMessage(buddy, msg);
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Could not send AIM message");
+			}
+		}
 	}
 
 	private static AIMConnector _instance = new AIMConnector();
 
-	private AIMClient _aim;
+	private static Log _log = LogFactory.getLog(AIMConnector.class);
+
+	private AIMSession _aim;
+	private Oscar _oscar;
 
 }

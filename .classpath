@@ -84,6 +84,7 @@
 	<classpathentry kind="lib" path="lib/portal/compass.jar"/>
 	<classpathentry kind="lib" path="lib/portal/concurrent.jar"/>
 	<classpathentry kind="lib" path="lib/portal/crypt.jar"/>
+	<classpathentry kind="lib" path="lib/portal/daim.jar"/>
 	<classpathentry kind="lib" path="lib/portal/displaytag.jar"/>
 	<classpathentry kind="lib" path="lib/portal/dom4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/easyconf.jar"/>
@@ -102,7 +103,6 @@
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-jcr-commons.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-text-extractors.jar"/>
-	<classpathentry kind="lib" path="lib/portal/jaim.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jaxen.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jazzy.jar"/>
