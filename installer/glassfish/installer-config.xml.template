@@ -15,7 +15,7 @@
 	>
 		<directory
 			create="true"
-			defaultValue="C:\liferay-@lp.version.file.name@\glassfish-2.0m2"
+			defaultValue="C:\liferay-@lp.version.file.name@\glassfish-2.0b41d"
 			displayText="Select an installation directory"
 			property="app.server.glassfish.install.dir"
 		/>

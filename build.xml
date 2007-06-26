@@ -633,112 +633,77 @@
 	</target>
 
 	<target name="deploy-properties">
+		<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
+			<fileset dir="portal-impl/classes">
+				<include name="*-ext.properties" />
+			</fileset>
+		</copy>
+
+		<if>
+			<not>
+				<available file="${app.server.classes.portal.dir}/portal-ext.properties" />
+			</not>
+			<then>
+				<mkdir dir="${app.server.classes.portal.dir}" />
+
+				<echo file="${app.server.classes.portal.dir}/portal-ext.properties" append="false">auto.deploy.dest.dir=../webapps</echo>
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
+			<then>
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
+				</replace>
+			</then>
+		</if>
+
 		<if>
 			<or>
-				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<equals arg1="${app.server.type}" arg2="pramati" />
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 			</or>
 			<then>
-				<tstamp>
-					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-				</tstamp>
-
-				<mkdir dir="${tstamp.value}" />
-
-				<copy todir="${tstamp.value}" overwrite="yes">
-					<fileset dir="portal-impl/classes">
-						<include name="*-ext.properties" />
-					</fileset>
-				</copy>
-
-				<if>
-					<not>
-						<available file="${tstamp.value}/portal-ext.properties" />
-					</not>
-					<then>
-						<echo file="${tstamp.value}/portal-ext.properties" append="false">auto.deploy.dest.dir=../webapps</echo>
-					</then>
-				</if>
-
-				<if>
-					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<then>
-						<replace file="${tstamp.value}/portal-ext.properties">
-							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-							<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
-						</replace>
-					</then>
-					<elseif>
-						<equals arg1="${app.server.type}" arg2="pramati" />
-						<then>
-							<replace file="${tstamp.value}/portal-ext.properties">
-								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-								<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
-							</replace>
-						</then>
-					</elseif>
-				</if>
-
-				<jar
-					basedir="${tstamp.value}"
-					destfile="${app.server.portal.dir}/portal-impl.jar"
-					update="yes"
-				/>
-
-				<delete dir="${tstamp.value}" />
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
+				</replace>
 			</then>
-			<else>
-				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
-					<fileset dir="portal-impl/classes">
-						<include name="*-ext.properties" />
-					</fileset>
-				</copy>
+		</if>
 
-				<if>
-					<not>
-						<available file="${app.server.classes.portal.dir}/portal-ext.properties" />
-					</not>
-					<then>
-						<mkdir dir="${app.server.classes.portal.dir}" />
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=../../webapps/autoload</replacevalue>
+				</replace>
+			</then>
+		</if>
 
-						<echo file="${app.server.classes.portal.dir}/portal-ext.properties" append="false">auto.deploy.dest.dir=../webapps</echo>
-					</then>
-				</if>
+		<if>
+			<equals arg1="${app.server.type}" arg2="pramati" />
+			<then>
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
+				</replace>
+			</then>
+		</if>
 
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<then>
-						<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-							<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
-						</replace>
-					</then>
-					<elseif>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-							<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-						</or>
-						<then>
-							<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-								<replacevalue>auto.deploy.dest.dir=../../webapps/autoload</replacevalue>
-							</replace>
-						</then>
-					</elseif>
-					<elseif>
-						<equals arg1="${app.server.type}" arg2="resin" />
-						<then>
-							<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-								<replacevalue>auto.deploy.dest.dir=webapps</replacevalue>
-							</replace>
-						</then>
-					</elseif>
-				</if>
-			</else>
+		<if>
+			<equals arg1="${app.server.type}" arg2="resin" />
+			<then>
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=webapps</replacevalue>
+				</replace>
+			</then>
 		</if>
 	</target>
 
@@ -1287,7 +1252,7 @@
 		/>
 	</target>
 
-	<target name="release">
+	<target name="dist">
 		<delete>
 			<fileset dir="${lp.source.dir}" defaultexcludes="no">
 				<include name="**/.#*" />
@@ -1298,50 +1263,32 @@
 		<antcall target="start" />
 		<antcall target="java2html" />
 		<antcall target="build-ext" />
-		<!--<antcall target="build-ext-glassfish" />-->
 		<antcall target="build-ext-jboss-jetty" />
 		<antcall target="build-ext-jboss-tomcat" />
 		<antcall target="build-ext-jetty" />
 		<antcall target="build-ext-jonas-jetty" />
 		<antcall target="build-ext-jonas-tomcat" />
-		<!--<antcall target="build-ext-pramati" />-->
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />
 
-		<!--<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version.file.name}.ear" />
-		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version.file.name}.war" />
-		<copy file="portal-ear/liferay-portal-geronimo-tomcat.war" tofile="liferay-portal-geronimo-tomcat-${lp.version.file.name}.war" />
-		<copy file="portal-ear/liferay-portal-servlet23.ear" tofile="liferay-portal-servlet23-${lp.version.file.name}.ear" />
-		<copy file="portal-ear/liferay-portal-servlet23.war" tofile="liferay-portal-servlet23-${lp.version.file.name}.war" />-->
-
+		<ant dir="cms-web" target="deploy" inheritAll="false" />
 		<ant dir="jbpm-web" target="deploy" inheritAll="false" />
+		<ant dir="mule-web" target="deploy" inheritAll="false" />
 		<ant dir="servicemix-web" target="deploy" inheritAll="false" />
 
 		<copy file="cas-web/cas-web.war" tofile="liferay-portal-cas-${lp.version.file.name}.war" />
 		<copy file="cms-web/cms-web.war" tofile="liferay-portal-cms-${lp.version.file.name}.war" />
 		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
+		<copy file="mule-web/mule-web.war" tofile="liferay-portal-mule-${lp.version.file.name}.war" />
 		<copy file="servicemix-web/servicemix-web.war" tofile="liferay-portal-servicemix-${lp.version.file.name}.war" />
 		<copy file="tunnel-web/tunnel-web.war" tofile="liferay-portal-tunnel-${lp.version.file.name}.war" />
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
 				dir="${app.server.deploy.dir}"
-				includes="jbpm-web/**,sample*/**,servicemix-web/**"
+				includes="cms-web/**,jbpm-web/**,mule-web/**,sample*/**,servicemix-web/**"
 			/>
 		</delete>
-	</target>
-
-	<target name="test-release">
-		<antcall target="clean" />
-		<antcall target="start" />
-		<antcall target="build-ext" />
-		<antcall target="build-ext-jboss-jetty" />
-		<antcall target="build-ext-jboss-tomcat" />
-		<antcall target="build-ext-jetty" />
-		<antcall target="build-ext-jonas-jetty" />
-		<antcall target="build-ext-jonas-tomcat" />
-		<antcall target="build-ext-resin" />
-		<antcall target="build-ext-tomcat" />
 	</target>
 </project>

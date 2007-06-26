@@ -97,10 +97,12 @@
 			<else>
 				<if>
 					<or>
+						<equals arg1="${app.server.type}" arg2="glassfish" />
 						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+						<equals arg1="${app.server.type}" arg2="pramati" />
 					</or>
 					<then>
 						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
@@ -113,57 +115,54 @@
 		</if>
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<equals arg1="${app.server.type}" arg2="pramati" />
-			</or>
+			<available file="${war.file.dest}" type="file" />
 			<then>
-				<if>
-					<equals arg1="${war.file}" arg2="ext-web" />
-					<then>
-						<copy file="${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
-
-						<war
-							basedir="${project.dir}/web-sites/liferay.com-web/docroot"
-							destfile="${app.server.portal.dir}/portal-web.war"
-							excludes="WEB-INF/web.xml"
-							webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
-							update="yes"
-						/>
-					</then>
-					<else>
-						<copy file="${war.file}.war" todir="${app.server.portal.dir}" />
-					</else>
-				</if>
+				<delete file="${war.file.dest}" />
 			</then>
-			<else>
-				<if>
-					<available file="${war.file.dest}" type="file" />
-					<then>
-						<delete file="${war.file.dest}" />
-					</then>
-				</if>
+		</if>
 
-				<if>
-					<available file="tmp" type="dir" />
-					<then>
-						<copy todir="${war.file.dest}">
-							<fileset dir="tmp" />
-						</copy>
-					</then>
-					<elseif>
-						<available file="docroot" type="dir" />
-						<then>
-							<copy todir="${war.file.dest}">
-								<fileset dir="docroot" />
-							</copy>
-						</then>
-					</elseif>
-					<else>
-						<unwar src="${war.file}.war" dest="${war.file.dest}" />
-					</else>
-				</if>
+		<if>
+			<available file="tmp" type="dir" />
+			<then>
+				<copy todir="${war.file.dest}">
+					<fileset dir="tmp" />
+				</copy>
+			</then>
+			<elseif>
+				<available file="docroot" type="dir" />
+				<then>
+					<copy todir="${war.file.dest}">
+						<fileset dir="docroot" />
+					</copy>
+				</then>
+			</elseif>
+			<else>
+				<unwar src="${war.file}.war" dest="${war.file.dest}" />
 			</else>
+		</if>
+
+		<if>
+			<and>
+				<or>
+					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<equals arg1="${app.server.type}" arg2="pramati" />
+				</or>
+				<available file="${war.file.dest}" type="dir" />
+			</and>
+			<then>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<jar
+					basedir="${war.file.dest}"
+					jarfile="${tstamp.value}"
+				/>
+
+				<delete dir="${war.file.dest}" />
+
+				<move file="${tstamp.value}" tofile="${war.file.dest}" />
+			</then>
 		</if>
 
 		<if>
