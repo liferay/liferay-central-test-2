@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -49,7 +48,7 @@ public class UpgradeIndexes extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+		runSQLTemplate("indexes.sql", false);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeIndexes.class);

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
@@ -41,13 +40,7 @@ public class ImageSizeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Integer size = _textColumn.getSize();
-
-		if (size == null) {
-			throw new StagnantRowException("Size is null");
-		}
-
-		return size;
+		return _textColumn.getSize();
 	}
 
 	private ImageTextUpgradeColumnImpl _textColumn;

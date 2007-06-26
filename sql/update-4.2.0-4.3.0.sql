@@ -8,6 +8,8 @@ create table ClassName_ (
 	value VARCHAR(75) null
 );
 
+drop table ColorScheme;
+
 alter table Company add accountId LONG;
 alter table Company add webId VARCHAR(75) null;
 alter table Company add virtualHost VARCHAR(75) null;
@@ -144,6 +146,8 @@ update MBMessageFlag set flag = '1';
 
 alter table MBStatsUser add statsUserId LONG;
 
+drop table MBTopic;
+
 drop table OrgGroupRole;
 create table OrgGroupRole (
 	organizationId LONG not null,
@@ -195,7 +199,7 @@ create table PluginSetting (
 	companyId LONG,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
-	roles VARCHAR(75) null,
+	roles STRING null,
 	active_ BOOLEAN
 );
 
@@ -228,7 +232,7 @@ alter table Resource_ add codeId LONG;
 create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(200) null,
+	name VARCHAR(300) null,
 	scope INTEGER
 );
 
@@ -394,6 +398,7 @@ alter table User_ add portraitId LONG;
 alter table User_ add lastFailedLoginDate DATE null;
 alter table User_ add lockout BOOLEAN;
 alter table User_ add lockoutDate DATE null;
+alter table User_ drop column resolution;
 
 COMMIT_TRANSACTION;
 

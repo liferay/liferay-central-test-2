@@ -31,6 +31,9 @@ import com.liferay.util.CollectionFactory;
 
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="DLFileEntryIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -70,9 +73,14 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_dlFileEntryIdMapper.mapValue(oldPageIdValue, newValue);
 
 		if (!_movedFolderIds.contains(oldFolderId)) {
-			DLLocalServiceUtil.move(
-				"/" + oldCompanyId + "/documentlibrary/" + oldFolderId,
-				"/" + newCompanyId + "/documentlibrary/" + newFolderId);
+			try {
+				DLLocalServiceUtil.move(
+					"/" + oldCompanyId + "/documentlibrary/" + oldFolderId,
+					"/" + newCompanyId + "/documentlibrary/" + newFolderId);
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
 
 			_movedFolderIds.add(oldFolderId);
 		}
@@ -83,6 +91,9 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 	public ValueMapper getValueMapper() {
 		return _dlFileEntryIdMapper;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(DLFileEntryIdUpgradeColumnImpl.class);
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _folderIdColumn;

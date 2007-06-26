@@ -135,7 +135,7 @@ public class SQLServerUtil extends DBUtil {
 		"'19700101'", "GetDate()",
 		" bit", " datetime", " float",
 		" int", " bigint",
-		" varchar(1000)", " text", " varchar",
+		" varchar(2000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
 

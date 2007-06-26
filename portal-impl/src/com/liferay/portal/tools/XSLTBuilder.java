@@ -20,30 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.tools;
+
+import java.io.FileOutputStream;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 /**
- * <a href="NoteContentException.java.html"><b><i>View Source</i></b></a>
+ * <a href="XSLTBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class NoteContentException extends PortalException {
+public class XSLTBuilder {
 
-	public NoteContentException() {
-		super();
+	public static void main(String[] args) {
+		if (args.length == 3) {
+			new XSLTBuilder(args[0], args[1], args[2]);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
-	public NoteContentException(String msg) {
-		super(msg);
-	}
+	public XSLTBuilder(String xml, String xsl, String html) {
+		try {
+			TransformerFactory transformerFactory =
+				TransformerFactory.newInstance();
 
-	public NoteContentException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+			Transformer transformer = transformerFactory.newTransformer(
+				new StreamSource(xsl));
 
-	public NoteContentException(Throwable cause) {
-		super(cause);
+			transformer.transform(
+				new StreamSource(xml),
+				new StreamResult(new FileOutputStream(html)));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

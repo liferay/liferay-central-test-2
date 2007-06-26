@@ -24,8 +24,13 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ImageTextUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +40,10 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
  */
 public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ImageTextUpgradeColumnImpl() {
+	public ImageTextUpgradeColumnImpl(UpgradeColumn imageIdColumn) {
 		super("text_");
+
+		_imageIdColumn = imageIdColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -49,12 +56,28 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		byte[] bytes = (byte[])Base64.stringToObject(text);
 
-		Image image = ImageLocalUtil.getImage(bytes);
+		try {
+			Image image = ImageLocalUtil.getImage(bytes);
 
-		_type = image.getType();
-		_height = new Integer(image.getHeight());
-		_width = new Integer(image.getWidth());
-		_size = new Integer(image.getSize());
+			_type = image.getType();
+			_height = new Integer(image.getHeight());
+			_width = new Integer(image.getWidth());
+			_size = new Integer(image.getSize());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				String imageId = (String)_imageIdColumn.getOldValue();
+
+				_log.warn(
+					"Unable to get image data for " + imageId + ": " +
+						e.getMessage());
+			}
+
+			_type = ImageImpl.TYPE_NOT_AVAILABLE;
+			_height = null;
+			_width = null;
+			_size = new Integer(bytes.length);
+		}
 
 		return oldValue;
 	}
@@ -75,6 +98,10 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		return _size;
 	}
 
+	private static Log _log =
+		LogFactory.getLog(ImageTextUpgradeColumnImpl.class);
+
+	private UpgradeColumn _imageIdColumn;
 	private String _type;
 	private Integer _height;
 	private Integer _width;

@@ -111,7 +111,9 @@
 		<field name="ymSn" type="String" />
 		<field name="employeeStatusId" type="String" />
 		<field name="employeeNumber" type="String" />
-		<field name="jobTitle" type="String" />
+		<field name="jobTitle" type="String">
+			<hint name="max-length">100</hint>
+		</field>
 		<field name="jobClass" type="String" />
 		<field name="hoursOfOperation" type="String" />
 	</model>
@@ -154,7 +156,9 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="type" type="String" />
-		<field name="friendlyURL" type="String" />
+		<field name="friendlyURL" type="String">
+			<hint name="max-length">100</hint>
+		</field>
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Image">
@@ -186,7 +190,9 @@
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="hidden" type="boolean" />
-		<field name="friendlyURL" type="String" />
+		<field name="friendlyURL" type="String">
+			<hint name="max-length">100</hint>
+		</field>
 		<field name="iconImage" type="boolean" />
 		<field name="iconImageId" type="long" />
 		<field name="themeId" type="String" />
@@ -224,6 +230,7 @@
 		<field name="parentOrganizationId" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
+			<hint name="max-length">100</hint>
 		</field>
 		<field name="recursable" type="boolean" />
 		<field name="regionId" type="long" />
@@ -339,7 +346,9 @@
 		<field name="companyId" type="long" />
 		<field name="pluginId" type="String" />
 		<field name="pluginType" type="String" />
-		<field name="roles" type="String" />
+		<field name="roles" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Portlet">
@@ -348,7 +357,9 @@
 		<field name="portletId" type="String">
 			<hint name="max-length">200</hint>
 		</field>
-		<field name="roles" type="String" />
+		<field name="roles" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.PortletPreferences">
@@ -382,14 +393,14 @@
 		<field name="resourceId" type="long" />
 		<field name="codeId" type="long" />
 		<field name="primKey" type="String">
-			<hint name="max-length">200</hint>
+			<hint name="max-length">300</hint>
 		</field>
 	</model>
 	<model name="com.liferay.portal.model.ResourceCode">
 		<field name="codeId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="name" type="String">
-			<hint name="max-length">200</hint>
+			<hint name="max-length">300</hint>
 		</field>
 		<field name="scope" type="int" />
 	</model>
@@ -532,7 +543,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="categoryId" type="long" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">150</hint>
+		</field>
 		<field name="content" type="String">
 			<hint-collection name="CLOB" />
 		</field>
@@ -605,10 +618,10 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="folderId" type="long" />
 		<field name="name" type="String">
-			<hint name="max-length">100</hint>
+			<hint name="max-length">300</hint>
 		</field>
 		<field name="title" type="String">
-			<hint name="max-length">100</hint>
+			<hint name="max-length">300</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -627,7 +640,7 @@
 		<field name="createDate" type="Date" />
 		<field name="folderId" type="long" />
 		<field name="name" type="String">
-			<hint name="max-length">100</hint>
+			<hint name="max-length">300</hint>
 		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileShortcut">
@@ -639,7 +652,9 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="folderId" type="long" />
 		<field name="toFolderId" type="long" />
-		<field name="toName" type="String" />
+		<field name="toName" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileVersion">
 		<field name="fileVersionId" type="long" />
@@ -649,7 +664,7 @@
 		<field name="createDate" type="Date" />
 		<field name="folderId" type="long" />
 		<field name="name" type="String">
-			<hint name="max-length">100</hint>
+			<hint name="max-length">300</hint>
 		</field>
 		<field name="version" type="double" />
 		<field name="size" type="int" />
@@ -710,7 +725,9 @@
 			<hint name="upper-case">true</hint>
 		</field>
 		<field name="version" type="double" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">100</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -872,7 +889,9 @@
 		<field name="choiceId" type="long" />
 		<field name="questionId" type="long" />
 		<field name="name" type="String" />
-		<field name="description" type="String" />
+		<field name="description" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsQuestion">
 		<field name="questionId" type="long" />
@@ -882,7 +901,9 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">500</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>

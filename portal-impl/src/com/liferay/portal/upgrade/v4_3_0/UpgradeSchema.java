@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -49,8 +48,25 @@ public class UpgradeSchema extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		DBUtil.getInstance().runSQLTemplate("update-4.2.0-4.3.0.sql", false);
+		runSQLTemplate("update-4.2.0-4.3.0.sql", false);
+
+		for (int i = 0; i < _OLD_TABLES.length; i++) {
+			try {
+				runSQL("drop table " + _OLD_TABLES[i]);
+			}
+			catch (Exception e) {
+			}
+		}
 	}
+
+	private static final String[] _OLD_TABLES = new String[] {
+		"ABContact", "ABContacts_ABLists", "ABList", "AdminConfig", "BJEntry",
+		"BJTopic", "BJVerse", "CalTask", "ComicEntry",
+		"ContactOrgDepartmentLevel", "DLFileProfile", "DLRepository",
+		"MailReceipt", "NetworkAddress", "Note", "OrgDepartment", "ProjFirm",
+		"ProjProject", "ProjTask", "ProjTime", "ResourceType",
+		"Users_ComicEntries", "Users_ProjProjects"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
 

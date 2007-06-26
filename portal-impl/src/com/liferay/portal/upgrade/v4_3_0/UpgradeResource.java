@@ -24,8 +24,10 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -201,6 +203,13 @@ public class UpgradeResource extends UpgradeProcess {
 			new ClassPKContainer(
 				AvailableMappersUtil.getLayoutPlidMapper(), false));
 
+		// Location
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(Location.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getOrganizationIdMapper(), true));
+
 		// MBCategory
 
 		classPKContainers.put(
@@ -251,6 +260,13 @@ public class UpgradeResource extends UpgradeProcess {
 			new Long(PortalUtil.getClassNameId(ShoppingItem.class.getName())),
 			new ClassPKContainer(
 				AvailableMappersUtil.getShoppingItemIdMapper(), true));
+
+		// User
+
+		classPKContainers.put(
+			new Long(PortalUtil.getClassNameId(User.class.getName())),
+			new ClassPKContainer(
+				AvailableMappersUtil.getUserIdMapper(), false));
 
 		// UserGroup
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
@@ -43,11 +42,12 @@ public class ImageHeightUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Integer height = _textColumn.getHeight();
 
-		if (height == null) {
-			throw new StagnantRowException("Height is null");
+		if (height != null) {
+			return height;
 		}
-
-		return height;
+		else {
+			return oldValue;
+		}
 	}
 
 	private ImageTextUpgradeColumnImpl _textColumn;

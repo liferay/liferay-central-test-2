@@ -59,7 +59,7 @@ create table BlogsEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	categoryId LONG,
-	title VARCHAR(75) null,
+	title VARCHAR(150) null,
 	content TEXT null,
 	displayDate DATE null
 );
@@ -153,7 +153,7 @@ create table Contact_ (
 	ymSn VARCHAR(75) null,
 	employeeStatusId VARCHAR(75) null,
 	employeeNumber VARCHAR(75) null,
-	jobTitle VARCHAR(75) null,
+	jobTitle VARCHAR(100) null,
 	jobClass VARCHAR(75) null,
 	hoursOfOperation VARCHAR(75) null
 );
@@ -193,8 +193,8 @@ create table DLFileEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	folderId LONG,
-	name VARCHAR(100) null,
-	title VARCHAR(100) null,
+	name VARCHAR(300) null,
+	title VARCHAR(300) null,
 	description STRING null,
 	version DOUBLE,
 	size_ INTEGER,
@@ -208,7 +208,7 @@ create table DLFileRank (
 	userId LONG,
 	createDate DATE null,
 	folderId LONG,
-	name VARCHAR(100) null
+	name VARCHAR(300) null
 );
 
 create table DLFileShortcut (
@@ -220,7 +220,7 @@ create table DLFileShortcut (
 	modifiedDate DATE null,
 	folderId LONG,
 	toFolderId LONG,
-	toName VARCHAR(75) null
+	toName VARCHAR(300) null
 );
 
 create table DLFileVersion (
@@ -230,7 +230,7 @@ create table DLFileVersion (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	folderId LONG,
-	name VARCHAR(100) null,
+	name VARCHAR(300) null,
 	version DOUBLE,
 	size_ INTEGER
 );
@@ -274,7 +274,7 @@ create table Group_ (
 	name VARCHAR(75) null,
 	description STRING null,
 	type_ VARCHAR(75) null,
-	friendlyURL VARCHAR(75) null,
+	friendlyURL VARCHAR(100) null,
 	active_ BOOLEAN
 );
 
@@ -347,7 +347,7 @@ create table JournalArticle (
 	modifiedDate DATE null,
 	articleId VARCHAR(75) null,
 	version DOUBLE,
-	title VARCHAR(75) null,
+	title VARCHAR(100) null,
 	description STRING null,
 	content TEXT null,
 	type_ VARCHAR(75) null,
@@ -434,7 +434,7 @@ create table Layout (
 	type_ VARCHAR(75) null,
 	typeSettings TEXT null,
 	hidden_ BOOLEAN,
-	friendlyURL VARCHAR(75) null,
+	friendlyURL VARCHAR(100) null,
 	iconImage BOOLEAN,
 	iconImageId LONG,
 	themeId VARCHAR(75) null,
@@ -545,7 +545,7 @@ create table Organization_ (
 	organizationId LONG not null primary key,
 	companyId LONG,
 	parentOrganizationId LONG,
-	name VARCHAR(75) null,
+	name VARCHAR(100) null,
 	recursable BOOLEAN,
 	regionId LONG,
 	countryId LONG,
@@ -657,7 +657,7 @@ create table PluginSetting (
 	companyId LONG,
 	pluginId VARCHAR(75) null,
 	pluginType VARCHAR(75) null,
-	roles VARCHAR(75) null,
+	roles STRING null,
 	active_ BOOLEAN
 );
 
@@ -665,7 +665,7 @@ create table PollsChoice (
 	choiceId LONG not null primary key,
 	questionId LONG,
 	name VARCHAR(75) null,
-	description VARCHAR(75) null
+	description VARCHAR(1000) null
 );
 
 create table PollsQuestion (
@@ -676,7 +676,7 @@ create table PollsQuestion (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	title VARCHAR(75) null,
+	title VARCHAR(500) null,
 	description STRING null,
 	expirationDate DATE null,
 	lastVoteDate DATE null
@@ -694,7 +694,7 @@ create table Portlet (
 	id_ LONG not null primary key,
 	companyId LONG,
 	portletId VARCHAR(200) null,
-	roles VARCHAR(75) null,
+	roles STRING null,
 	active_ BOOLEAN
 );
 
@@ -748,13 +748,13 @@ create table Release_ (
 create table Resource_ (
 	resourceId LONG not null primary key,
 	codeId LONG,
-	primKey VARCHAR(200) null
+	primKey VARCHAR(300) null
 );
 
 create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(200) null,
+	name VARCHAR(300) null,
 	scope INTEGER
 );
 

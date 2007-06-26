@@ -37,6 +37,9 @@ import java.io.StringReader;
 
 import java.util.Iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -97,17 +100,24 @@ public class JournalArticleContentUpgradeColumnImpl
 				new String[] {"\n", "\r"});
 		}
 
-		SAXReader reader = new SAXReader();
+		try {
+			SAXReader reader = new SAXReader();
 
-		Document doc = reader.read(new StringReader(content));
+			Document doc = reader.read(new StringReader(content));
 
-		Element root = doc.getRootElement();
+			Element root = doc.getRootElement();
 
-		format(
-			oldCompanyId, newCompanyId.longValue(), groupId.longValue(),
-			articleId, version.doubleValue(), root);
+			format(
+				oldCompanyId, newCompanyId.longValue(), groupId.longValue(),
+				articleId, version.doubleValue(), root);
 
-		content = JournalUtil.formatXML(doc);
+			content = JournalUtil.formatXML(doc);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to format content for {articleId=" + articleId +
+					",version=" + version + "}: " + e.getMessage());
+		}
 
 		content = StringUtil.replace(
 			content, BaseUpgradeTableImpl.SAFE_CHARS[0],
@@ -195,6 +205,9 @@ public class JournalArticleContentUpgradeColumnImpl
 
 	private static final String _IMG_ID_PATH =
 		"/image/journal/article?img_id=";
+
+	private static Log _log =
+		LogFactory.getLog(JournalArticleContentUpgradeColumnImpl.class);
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _groupIdColumn;

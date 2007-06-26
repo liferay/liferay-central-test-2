@@ -59,6 +59,16 @@ public abstract class UpgradeProcess {
 		DBUtil.getInstance().runSQL(templates);
 	}
 
+	public void runSQLTemplate(String path) throws IOException, SQLException {
+		DBUtil.getInstance().runSQLTemplate(path);
+	}
+
+	public void runSQLTemplate(String path, boolean failOnError)
+		throws IOException, SQLException {
+
+		DBUtil.getInstance().runSQLTemplate(path, failOnError);
+	}
+
 	public abstract void upgrade() throws UpgradeException;
 
 	public void upgrade(UpgradeProcess upgradeProgress)

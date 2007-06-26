@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
@@ -43,11 +42,12 @@ public class ImageWidthUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Integer width = _textColumn.getWidth();
 
-		if (width == null) {
-			throw new StagnantRowException("Width is null");
+		if (width != null) {
+			return width;
 		}
-
-		return width;
+		else {
+			return oldValue;
+		}
 	}
 
 	private ImageTextUpgradeColumnImpl _textColumn;

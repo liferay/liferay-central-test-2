@@ -1335,7 +1335,6 @@
 		<exception>LayoutPermission</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
-		<exception>NoteContent</exception>
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
 		<exception>OrganizationParent</exception>

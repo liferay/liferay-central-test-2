@@ -85,7 +85,7 @@ public class UpgradeImage extends UpgradeProcess {
 			"imageId", new Integer(Types.VARCHAR), true);
 
 		ImageTextUpgradeColumnImpl upgradeTextColumn =
-			new ImageTextUpgradeColumnImpl();
+			new ImageTextUpgradeColumnImpl(upgradePKColumn);
 
 		ImageTypeUpgradeColumnImpl upgradeTypeColumn =
 			new ImageTypeUpgradeColumnImpl(upgradeTextColumn);

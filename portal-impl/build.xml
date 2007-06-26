@@ -375,6 +375,19 @@
 		</antcall>
 	</target>
 
+	<target name="build-lib-versions">
+		<java
+			classname="com.liferay.portal.tools.XSLTBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="${project.dir}/lib/versions.xml" />
+			<arg value="${project.dir}/lib/versions.xsl" />
+			<arg value="${project.dir}/lib/versions.html" />
+		</java>
+	</target>
+
 	<target name="build-newscategories" if="release.info">
 		<java
 			classname="com.liferay.portlet.news.tools.NewsCategoriesBuilder"

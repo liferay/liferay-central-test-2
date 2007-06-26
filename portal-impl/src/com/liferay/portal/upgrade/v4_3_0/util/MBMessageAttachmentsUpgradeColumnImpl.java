@@ -28,6 +28,9 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
  * </i></b></a>
@@ -61,19 +64,28 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 			Long newCompanyId = (Long)_companyIdColumn.getNewValue();
 			Long newThreadId = (Long)_threadIdColumn.getNewValue();
 
-			DLServiceUtil.addDirectory(
-				newCompanyId.longValue(), CompanyImpl.SYSTEM,
-				"messageboards/" + newThreadId);
+			try {
+				DLServiceUtil.addDirectory(
+					newCompanyId.longValue(), CompanyImpl.SYSTEM,
+					"messageboards/" + newThreadId);
 
-			DLLocalServiceUtil.move(
-				"/" + oldCompanyId + "/documentlibrary/system/messageboards/" +
-					oldThreadId + "/" + oldMessageId,
-				"/" + newCompanyId + "/documentlibrary/0/messageboards/" +
-					newThreadId + "/" + newMessageId);
+				DLLocalServiceUtil.move(
+					"/" + oldCompanyId +
+						"/documentlibrary/system/messageboards/" + oldThreadId +
+							"/" + oldMessageId,
+					"/" + newCompanyId + "/documentlibrary/0/messageboards/" +
+						newThreadId + "/" + newMessageId);
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
 		}
 
 		return attachments;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(MBMessageAttachmentsUpgradeColumnImpl.class);
 
 	private UpgradeColumn _messageIdColumn;
 	private UpgradeColumn _companyIdColumn;
