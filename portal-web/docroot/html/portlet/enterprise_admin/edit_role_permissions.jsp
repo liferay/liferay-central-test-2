@@ -348,9 +348,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onClick="<portlet:namespace />addPermissions('portlet');" />
 
-		<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
+            <input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
 
-        <br /><br />
+            <br /><br />
 
         <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
@@ -484,6 +484,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 					<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x", portletResourceName) %>
 
                     <c:if test="<%= actions.size() > 0 %>">
+                        <%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
 					</c:if>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
