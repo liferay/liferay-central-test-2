@@ -218,12 +218,20 @@ public class OpenIdResponseAction extends Action {
 			if (ext instanceof FetchResponse) {
 				FetchResponse fetchResp = (FetchResponse)ext;
 
-				firstName = getFirstValue(
-					fetchResp.getAttributeValues("firstName"));
-				lastName = getFirstValue(
-					fetchResp.getAttributeValues("lastName"));
-				emailAddress = getFirstValue(
-					fetchResp.getAttributeValues("email"));
+				if (Validator.isNull(firstName)) {
+					firstName = getFirstValue(
+						fetchResp.getAttributeValues("firstName"));
+				}
+
+				if (Validator.isNull(lastName)) {
+					lastName = getFirstValue(
+							fetchResp.getAttributeValues("lastName"));
+				}
+
+				if (Validator.isNull(emailAddress)) {
+					emailAddress = getFirstValue(
+							fetchResp.getAttributeValues("email"));
+				}
 			}
 		}
 
@@ -238,6 +246,8 @@ public class OpenIdResponseAction extends Action {
 		catch (NoSuchUserException nsue) {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
 				Validator.isNull(emailAddress)) {
+
+				SessionErrors.add(req, "not-enough-information");
 
 				_log.error(
 					"The OpenID provider did not send the required " +
