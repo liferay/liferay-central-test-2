@@ -2431,6 +2431,7 @@ the-message-object-has-expired-and-is-no-longer-available=The message object has
 the-name-of-the-email-recipient=電子メールの受け手の名前
 the-node-could-not-be-found=ノードは見つけられることができなかった。
 the-node-you-selected-does-not-have-pages-configured=あなたが選んだノードに形成されるページがない。
+the-openid-provider-did-not-send-the-required-attributes=OpenID の提供者は必須属性を送らなかった。
 the-order-could-not-be-found=順序は見つけられることができなかった。
 the-organization-could-not-be-found=構成は見つけることができなかった。
 the-organization-name-is-already-taken=構成名前は既に取られる。

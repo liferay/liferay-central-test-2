@@ -2433,6 +2433,7 @@ the-message-object-has-expired-and-is-no-longer-available=消息已经超时并�
 the-name-of-the-email-recipient=电子邮件接收者的名字
 the-node-could-not-be-found=节点找不到。
 the-node-you-selected-does-not-have-pages-configured=您选择的节点没有配置页面。
+the-openid-provider-did-not-send-the-required-attributes=OpenID 提供者没有送必要的属性。
 the-order-could-not-be-found=命令找不到。
 the-organization-could-not-be-found=组织找不到。
 the-organization-name-is-already-taken=组织名已存在。

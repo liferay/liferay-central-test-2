@@ -2432,6 +2432,7 @@ the-message-object-has-expired-and-is-no-longer-available=Το μήνυμα έχ
 the-name-of-the-email-recipient=Το όνομα του παραλήπτη ηλεκτρονικού ταχυδρομείου
 the-node-could-not-be-found=Ο κόμβος δεν μπόρεσε να βρεθεί.
 the-node-you-selected-does-not-have-pages-configured=Ο κόμβος που επιλέξατε δεν έχει παραμετροποιημένες σελίδες.
+the-openid-provider-did-not-send-the-required-attributes=Ο προμηθευτής OpenID δεν έστειλε τις απαραίτητες ιδιότητες.
 the-order-could-not-be-found=Η σειρά δεν μπόρεσε να βρεθεί.
 the-organization-could-not-be-found=Η οργάνωση δεν θα μπορούσε να βρεθεί.
 the-organization-name-is-already-taken=Το όνομα οργάνωσης λαμβάνεται ήδη.

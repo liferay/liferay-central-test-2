@@ -247,7 +247,7 @@ public class OpenIdResponseAction extends Action {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
 				Validator.isNull(emailAddress)) {
 
-				SessionErrors.add(req, "not-enough-information");
+				SessionErrors.add(req, "missingOpenIdUserInformation");
 
 				_log.error(
 					"The OpenID provider did not send the required " +

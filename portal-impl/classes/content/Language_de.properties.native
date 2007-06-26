@@ -2434,6 +2434,7 @@ the-message-object-has-expired-and-is-no-longer-available=Das Nachrichtenobjekt 
 the-name-of-the-email-recipient=Der Name des E-Mail Empfängers
 the-node-could-not-be-found=Der Knoten konnte nicht gefunden werden.
 the-node-you-selected-does-not-have-pages-configured=Der gewählte Knoten besitzt keine konfiguierten Seiten.
+the-openid-provider-did-not-send-the-required-attributes=Der OpenID Versorger sendete nicht die erforderlichen Attribute.
 the-order-could-not-be-found=Die Reihenfolge konnte nicht gefunden werden.
 the-organization-could-not-be-found=Die Organisation konnte nicht gefunden werden.
 the-organization-name-is-already-taken=Der Name der Organisation ist schon belegt.

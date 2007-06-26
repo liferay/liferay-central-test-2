@@ -2434,6 +2434,7 @@ the-message-object-has-expired-and-is-no-longer-available=訊息物件已經逾�
 the-name-of-the-email-recipient=電子郵件接收者的名字
 the-node-could-not-be-found=結不能被發現。
 the-node-you-selected-does-not-have-pages-configured=您選擇的節點沒有頁被配置。
+the-openid-provider-did-not-send-the-required-attributes=OpenID 提供者沒有送必要的屬性。
 the-order-could-not-be-found=命令找不到。
 the-organization-could-not-be-found=組織不能被發現。
 the-organization-name-is-already-taken=組織名已經被需要。

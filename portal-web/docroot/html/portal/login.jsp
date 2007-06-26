@@ -223,11 +223,11 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 						</span>
 					</c:if>
 
-                    <c:if test="<%= SessionErrors.contains(request, "not-enough-information") %>">
-                        <span class="portlet-msg-error">
-                        <liferay-ui:message key="the-openid-provider-did-not-send-the-required-attributes" />
-                        </span>
-                    </c:if>
+					<c:if test='<%= SessionErrors.contains(request, "missingOpenIdUserInformation") %>'>
+						<span class="portlet-msg-error">
+						<liferay-ui:message key="the-openid-provider-did-not-send-the-required-attributes" />
+						</span>
+					</c:if>
 
 					<table class="liferay-table">
 					<tr>

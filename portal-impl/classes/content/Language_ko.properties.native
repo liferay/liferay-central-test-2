@@ -2433,6 +2433,7 @@ the-message-object-has-expired-and-is-no-longer-available=The message object has
 the-name-of-the-email-recipient=전자 우편 수령인의 이름
 the-node-could-not-be-found=마디는 발견될 수 없었다.
 the-node-you-selected-does-not-have-pages-configured=너가 선정한 마디에는 형성되는 페이지가 있지 않는다.
+the-openid-provider-did-not-send-the-required-attributes=OpenID공급자는 필수 속성을 보내지 않았다.
 the-order-could-not-be-found=명령은 발견될 수 없었다.
 the-organization-could-not-be-found=조직은 발견될 수 없었다.
 the-organization-name-is-already-taken=조직 이름은 이미 걸린다.

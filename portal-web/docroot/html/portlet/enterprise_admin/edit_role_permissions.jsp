@@ -348,13 +348,13 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onClick="<portlet:namespace />addPermissions('portlet');" />
 
-            <input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
+		<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
 
-            <br /><br />
+		<br /><br />
 
-        <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-        <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test="<%= (groupScopePos >= 0) && (groupScopeActionIdsArray.length > 0) %>">
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
@@ -368,17 +368,17 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		%>
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-            <%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"4", String.valueOf(totalSteps)}) %>
+			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"4", String.valueOf(totalSteps)}) %>
 
 			<c:choose>
-                <c:when test="<%= Validator.isNotNull(modelResource) %>">
-                    <%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-resource", new String[] {ResourceActionsUtil.getAction(pageContext, actionId), modelResourceName}) %>
-                </c:when>
-                <c:otherwise>
-                    <%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet", new String[] {ResourceActionsUtil.getAction(pageContext, actionId), portletResourceName}) %>
-                </c:otherwise>
-            </c:choose>
-        </div>
+				<c:when test="<%= Validator.isNotNull(modelResource) %>">
+					<%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-resource", new String[] {ResourceActionsUtil.getAction(pageContext, actionId), modelResourceName}) %>
+				</c:when>
+				<c:otherwise>
+					<%= LanguageUtil.format(pageContext, "select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet", new String[] {ResourceActionsUtil.getAction(pageContext, actionId), portletResourceName}) %>
+				</c:otherwise>
+			</c:choose>
+		</div>
 
 		<br />
 
@@ -483,8 +483,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 					<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x", portletResourceName) %>
 
-                    <c:if test="<%= actions.size() > 0 %>">
-                        <%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
+					<c:if test="<%= actions.size() > 0 %>">
+						<%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
 					</c:if>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
@@ -492,15 +492,15 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 					<c:choose>
 						<c:when test="<%= Validator.isNotNull(modelResource) %>">
-                            <%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x-resource", modelResourceName) %>
+							<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x-resource", modelResourceName) %>
 						</c:when>
 						<c:otherwise>
-                            <%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x-portlet", portletResourceName) %>
+							<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x-portlet", portletResourceName) %>
 						</c:otherwise>
 					</c:choose>
 
 					<c:if test="<%= actions.size() > 0 %>">
-                        <%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
+						<%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
 					</c:if>
 				</c:when>
 				<c:otherwise>
@@ -508,10 +508,10 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 					<c:choose>
 						<c:when test="<%= Validator.isNotNull(modelResource) %>">
-                            <%= LanguageUtil.format(pageContext, "select-the-action-that-this-role-can-perform-on-the-x-resource", modelResourceName) %>
+							<%= LanguageUtil.format(pageContext, "select-the-action-that-this-role-can-perform-on-the-x-resource", modelResourceName) %>
 						</c:when>
 						<c:otherwise>
-                            <%= LanguageUtil.format(pageContext, "select-the-action-that-this-role-can-perform-on-the-x-portlet", portletResourceName) %>
+							<%= LanguageUtil.format(pageContext, "select-the-action-that-this-role-can-perform-on-the-x-portlet", portletResourceName) %>
 						</c:otherwise>
 					</c:choose>
 
@@ -595,7 +595,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", String.valueOf(totalSteps)}) %>
 
 			<%= LanguageUtil.get(pageContext, "choose-a-resource-or-proceed-to-the-next-step") %>
-        </div>
+		</div>
 
 		<br />
 
@@ -603,7 +603,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			<%= breadcrumbs %>
 		</div>
 
-        <%= LanguageUtil.format(pageContext, "proceed-to-the-next-step-to-define-permissions-on-the-x-portlet-itself", portletResourceName) %>
+		<%= LanguageUtil.format(pageContext, "proceed-to-the-next-step-to-define-permissions-on-the-x-portlet-itself", portletResourceName) %>
 
 		<br /><br />
 
@@ -614,7 +614,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 			<liferay-ui:tabs names="resources" />
 
-            <%= LanguageUtil.format(pageContext, "define-permissions-on-a-resource-that-belongs-to-the-x-portlet", portletResourceName) %>
+			<%= LanguageUtil.format(pageContext, "define-permissions-on-a-resource-that-belongs-to-the-x-portlet", portletResourceName) %>
 
 			<br /><br />
 

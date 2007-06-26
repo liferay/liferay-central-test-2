@@ -2434,6 +2434,7 @@ the-message-object-has-expired-and-is-no-longer-available=The message object has
 the-name-of-the-email-recipient=O nome do receptor do email
 the-node-could-not-be-found=O nó não podia ser encontrado.
 the-node-you-selected-does-not-have-pages-configured=O nó que você selecionou não tem as páginas configuraradas.
+the-openid-provider-did-not-send-the-required-attributes=O fornecedor de OpenID não emitiu os atributos requeridos.
 the-order-could-not-be-found=A ordem não podia ser encontrada.
 the-organization-could-not-be-found=A organização não podia ser encontrada.
 the-organization-name-is-already-taken=O nome da organização é feito exame já.

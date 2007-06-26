@@ -2434,6 +2434,7 @@ the-message-object-has-expired-and-is-no-longer-available=Het bericht is verlope
 the-name-of-the-email-recipient=De naam van de e-mailontvanger
 the-node-could-not-be-found=Het knooppunt kon niet worden gevonden.
 the-node-you-selected-does-not-have-pages-configured=Het geselecteerd knooppunt heeft geen pagina's geconfigureerd.
+the-openid-provider-did-not-send-the-required-attributes=De leverancier OpenID verzond niet de vereiste attributen.
 the-order-could-not-be-found=De order kon niet worden gevonden.
 the-organization-could-not-be-found=De organisatie kon niet worden gevonden.
 the-organization-name-is-already-taken=De organisatienaam is reeds in gebruik.
