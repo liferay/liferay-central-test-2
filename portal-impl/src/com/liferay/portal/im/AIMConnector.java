@@ -67,7 +67,7 @@ public class AIMConnector {
 		oscar.setSN(login);
 		oscar.setPassword(password);
 
-		sess.init();
+		ses.init();
 	}
 
 	private void _disconnect() {
