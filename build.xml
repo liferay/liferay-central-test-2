@@ -1003,35 +1003,22 @@
 		</copy>
 	</target>
 
-	<target name="zip">
-		<antcall target="zip-api" />
-		<!--<antcall target="zip-glassfish" />-->
-		<antcall target="zip-jboss" />
-		<antcall target="zip-jetty" />
-		<antcall target="zip-jonas" />
-		<antcall target="zip-portal-client" />
-		<antcall target="zip-portal-dependencies" />
-		<!--<antcall target="zip-pramati" />-->
-		<antcall target="zip-resin" />
-		<antcall target="zip-sql" />
-		<antcall target="zip-src" />
-		<antcall target="zip-tomcat" />
-	</target>
-
 	<target name="zip-api">
-		<delete file="liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-doc-${lp.version.file.name}.zip"
+		<zip
 			basedir="."
+			destfile="dist/liferay-portal-doc-${lp.version.file.name}.zip"
 			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
 		/>
 	</target>
 
 	<target name="zip-glassfish">
-		<delete file="liferay-portal-glassfish-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-glassfish-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-glassfish-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.glassfish.dir}"
+			destfile="dist/liferay-portal-glassfish-${lp.version.file.name}.zip"
 		/>
 
 		<taskdef
@@ -1040,7 +1027,7 @@
 			name="installer"
 		/>
 
-		<delete file="liferay-portal-glassfish-${lp.version.file.name}.jar" failonerror="false" />
+		<delete file="dist/liferay-portal-glassfish-${lp.version.file.name}.jar" failonerror="false" />
 
 		<copy file="installer/glassfish/installer-config.xml.template" tofile="installer/glassfish/installer-config.xml" overwrite="yes">
 			<filterset>
@@ -1072,16 +1059,16 @@
 			compress="true"
 			extractType="SelfExtractor"
 			failOnError="true"
-			file="liferay-portal-glassfish-${lp.version.file.name}.jar"
+			file="dist/liferay-portal-glassfish-${lp.version.file.name}.jar"
 			installConfig="installer/glassfish/installer-config.xml"
 			validateConfig="true"
 		>
 			<fileset dir="installer/glassfish" includes="installer-build.properties" />
-			<fileset dir="." includes="liferay-portal-glassfish-${lp.version.file.name}.zip" />
+			<fileset dir="dist" includes="liferay-portal-glassfish-${lp.version.file.name}.zip" />
 		</installer>
 
 		<jar
-			destfile="liferay-portal-glassfish-${lp.version.file.name}.jar"
+			destfile="dist/liferay-portal-glassfish-${lp.version.file.name}.jar"
 			update="yes"
 		>
 			<fileset
@@ -1092,65 +1079,81 @@
 	</target>
 
 	<target name="zip-jboss">
-		<delete file="liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.jboss-jetty.dir}"
+			destfile="dist/liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
 		/>
 
-		<delete file="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.jboss-tomcat.dir}"
+			destfile="dist/liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
 		/>
 	</target>
 
 	<target name="zip-jetty">
-		<delete file="liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-jetty-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.jetty.dir}"
+			destfile="dist/liferay-portal-jetty-${lp.version.file.name}.zip"
 		/>
 	</target>
 
 	<target name="zip-jonas">
-		<delete file="liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.jonas-jetty.dir}"
+			destfile="dist/liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
 		/>
 
-		<delete file="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-jonas-tomcat-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.jonas-tomcat.dir}"
+			destfile="dist/liferay-portal-jonas-tomcat-${lp.version.file.name}.zip"
 		/>
 	</target>
 
 	<target name="zip-portal-client">
-		<delete file="liferay-portal-client-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-client-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
+		<zip
 			basedir="."
+			destfile="dist/liferay-portal-client-${lp.version.file.name}.zip"
 			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar"
 		/>
 	</target>
 
 	<target name="zip-portal-dependencies">
-		<delete file="liferay-portal-dependencies-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-dependencies-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-dependencies-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-dependencies-${lp.version.file.name}.zip">
 			<fileset dir="lib/global" includes="portlet.jar" />
 			<fileset dir="portal-kernel" includes="portal-kernel.jar" />
 			<fileset dir="portal-service" includes="portal-service.jar" />
 		</zip>
 	</target>
 
-	<target name="zip-pramati">
-		<delete file="liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
+	<target name="zip-portal-war">
+		<delete file="dist/liferay-portal-${lp.version.file.name}.war" failonerror="false" />
 
-		<zip zipfile="liferay-portal-pramati-${lp.version.file.name}.zip"
+		<zip
+			basedir="${app.server.portal.dir}"
+			destfile="dist/liferay-portal-${lp.version.file.name}.war"
+		/>
+	</target>
+
+	<target name="zip-pramati">
+		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
+
+		<zip
 			basedir="${app.server.pramati.dir}"
+			destfile="dist/liferay-portal-pramati-${lp.version.file.name}.zip"
 		/>
 
 		<taskdef
@@ -1159,7 +1162,7 @@
 			name="installer"
 		/>
 
-		<delete file="liferay-portal-pramati-${lp.version.file.name}.jar" failonerror="false" />
+		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.jar" failonerror="false" />
 
 		<copy file="installer/pramati/installer-config.xml.template" tofile="installer/pramati/installer-config.xml" overwrite="yes">
 			<filterset>
@@ -1191,16 +1194,16 @@
 			compress="true"
 			extractType="SelfExtractor"
 			failOnError="true"
-			file="liferay-portal-pramati-${lp.version.file.name}.jar"
+			file="dist/liferay-portal-pramati-${lp.version.file.name}.jar"
 			installConfig="installer/pramati/installer-config.xml"
 			validateConfig="true"
 		>
 			<fileset dir="installer/pramati" includes="installer-build.properties" />
-			<fileset dir="." includes="liferay-portal-pramati-${lp.version.file.name}.zip" />
+			<fileset dir="dist" includes="liferay-portal-pramati-${lp.version.file.name}.zip" />
 		</installer>
 
 		<jar
-			destfile="liferay-portal-pramati-${lp.version.file.name}.jar"
+			destfile="dist/liferay-portal-pramati-${lp.version.file.name}.jar"
 			update="yes"
 		>
 			<fileset
@@ -1211,57 +1214,59 @@
 	</target>
 
 	<target name="zip-resin">
-		<delete file="liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-resin-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.resin.dir}"
+			destfile="dist/liferay-portal-resin-${lp.version.file.name}.zip"
 		/>
 	</target>
 
 	<target name="zip-sql">
-		<delete file="liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-sql-${lp.version.file.name}.zip"
+		<zip
 			basedir="sql"
+			destfile="dist/liferay-portal-sql-${lp.version.file.name}.zip"
 			includes="**/*.sql"
 		/>
 	</target>
 
 	<target name="zip-src">
-		<delete file="liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-src-${lp.version.file.name}.zip"
+		<zip
 			basedir="${lp.source.dir}"
+			destfile="dist/liferay-portal-src-${lp.version.file.name}.zip"
 			excludes="**/CVS/**"
 		/>
 	</target>
 
 	<target name="zip-tomcat">
-		<delete file="liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-tomcat-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.tomcat.dir}"
+			destfile="dist/liferay-portal-tomcat-${lp.version.file.name}.zip"
 			excludes="common/lib/ext/firebird.jar,common/lib/ext/interbase.jar,common/lib/ext/jtds.jar,common/lib/ext/mysql.jar,common/lib/ext/ojdbc14.jar,common/lib/ext/p6spy.jar,common/lib/ext/postgresql.jar,common/lib/ext/sap.jar,common/lib/ext/spy.properties"
 		/>
 
-		<delete file="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
 
-		<zip zipfile="liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
+		<zip
 			basedir="${app.server.tomcat.dir}"
+			destfile="dist/liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
 			excludes="bin/jmx.jar,common/lib/ext/firebird.jar,common/lib/ext/interbase.jar,common/lib/ext/jtds.jar,common/lib/ext/mysql.jar,common/lib/ext/ojdbc14.jar,common/lib/ext/p6spy.jar,common/lib/ext/postgresql.jar,common/lib/ext/sap.jar,common/lib/ext/spy.properties"
 		/>
 	</target>
 
 	<target name="dist">
-		<delete>
-			<fileset dir="${lp.source.dir}" defaultexcludes="no">
-				<include name="**/.#*" />
-			</fileset>
-		</delete>
-
 		<antcall target="clean" />
 		<antcall target="start" />
+		<antcall target="deploy" />
+
 		<antcall target="java2html" />
+
 		<antcall target="build-ext" />
 		<antcall target="build-ext-jboss-jetty" />
 		<antcall target="build-ext-jboss-tomcat" />
@@ -1270,19 +1275,33 @@
 		<antcall target="build-ext-jonas-tomcat" />
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
-		<antcall target="zip" />
 
-		<ant dir="cms-web" target="deploy" inheritAll="false" />
-		<ant dir="jbpm-web" target="deploy" inheritAll="false" />
-		<ant dir="mule-web" target="deploy" inheritAll="false" />
-		<ant dir="servicemix-web" target="deploy" inheritAll="false" />
+		<delete dir="dist" />
+		<mkdir dir="dist" />
 
-		<copy file="cas-web/cas-web.war" tofile="liferay-portal-cas-${lp.version.file.name}.war" />
-		<copy file="cms-web/cms-web.war" tofile="liferay-portal-cms-${lp.version.file.name}.war" />
-		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
-		<copy file="mule-web/mule-web.war" tofile="liferay-portal-mule-${lp.version.file.name}.war" />
-		<copy file="servicemix-web/servicemix-web.war" tofile="liferay-portal-servicemix-${lp.version.file.name}.war" />
-		<copy file="tunnel-web/tunnel-web.war" tofile="liferay-portal-tunnel-${lp.version.file.name}.war" />
+		<antcall target="zip-api" />
+		<antcall target="zip-jboss" />
+		<antcall target="zip-jetty" />
+		<antcall target="zip-jonas" />
+		<antcall target="zip-portal-client" />
+		<antcall target="zip-portal-dependencies" />
+		<antcall target="zip-portal-war" />
+		<antcall target="zip-resin" />
+		<antcall target="zip-sql" />
+		<antcall target="zip-src" />
+		<antcall target="zip-tomcat" />
+
+		<ant dir="cms-web" target="war" inheritAll="false" />
+		<ant dir="jbpm-web" target="war" inheritAll="false" />
+		<ant dir="mule-web" target="war" inheritAll="false" />
+		<ant dir="servicemix-web" target="war" inheritAll="false" />
+
+		<copy file="cas-web/cas-web.war" tofile="dist/liferay-portal-cas-web-${lp.version.file.name}.war" />
+		<copy file="cms-web/cms-web.war" tofile="dist/liferay-portal-cms-web-${lp.version.file.name}.war" />
+		<copy file="jbpm-web/jbpm-web.war" tofile="dist/liferay-portal-jbpm-web-${lp.version.file.name}.war" />
+		<copy file="mule-web/mule-web.war" tofile="dist/liferay-portal-mule-web-${lp.version.file.name}.war" />
+		<copy file="servicemix-web/servicemix-web.war" tofile="dist/liferay-portal-servicemix-web-${lp.version.file.name}.war" />
+		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version.file.name}.war" />
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
