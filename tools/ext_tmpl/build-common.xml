@@ -85,79 +85,28 @@
 	</if>
 
 	<target name="deploy-impl-jar">
-		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
-			<then>
-				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
-
-				<copy
-					file="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF.JOnAS"
-					tofile="${app.server.portal.dir}/${jar.file}.jar/META-INF/MANIFEST.MF"
-					overwrite="yes"
-				/>
-			</then>
-			<elseif>
-				<or>
-					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<equals arg1="${app.server.type}" arg2="pramati" />
-				</or>
-				<then>
-					<copy file="${jar.file}.jar" todir="${app.server.portal.dir}" />
-				</then>
-			</elseif>
-			<else>
-				<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
-			</else>
-		</if>
+		<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
 	</target>
 
 	<target name="deploy-war">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${war.file}" arg2="ext-web" />
 			<then>
-				<if>
-					<equals arg1="${war.file}" arg2="ext-web" />
-					<then>
-						<property name="war.file.dest" value="${app.server.portal.dir}/portal-web.war" />
-					</then>
-					<else>
-						<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
-					</else>
-				</if>
+				<property name="war.file.dest" value="${app.server.portal.dir}" />
 			</then>
 			<else>
 				<if>
-					<equals arg1="${war.file}" arg2="ext-web" />
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+					</or>
 					<then>
-						<if>
-							<equals arg1="${app.server.type}" arg2="jetty" />
-							<then>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/root" />
-							</then>
-							<else>
-								<property name="war.file.dest" value="${app.server.portal.dir}" />
-							</else>
-						</if>
+						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
 					</then>
 					<else>
-						<if>
-							<or>
-								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-							</or>
-							<then>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
-							</then>
-							<else>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
-							</else>
-						</if>
+						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
 					</else>
 				</if>
 			</else>
@@ -227,12 +176,13 @@
 					failonerror="false"
 				/>
 			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				<then>
-					<delete file="${war.file.dest}/META-INF/context.xml" />
-				</then>
-			</elseif>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			<then>
+				<delete file="${war.file.dest}/META-INF/context.xml" />
+			</then>
 		</if>
 
 		<if>

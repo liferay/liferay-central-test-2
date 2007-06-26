@@ -10,4 +10,5 @@
 		<res-ref-name>mail/MailSession</res-ref-name>
 		<jndi-name>mail/MailSession</jndi-name>
 	</jonas-resource>
+	<context-root>/</context-root>
 </jonas-web-app>

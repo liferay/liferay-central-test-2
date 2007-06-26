@@ -27,22 +27,5 @@
 		<antcall target="deploy-war">
 			<param name="war.file" value="tunnel-web" />
 		</antcall>
-
-		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				<equals arg1="${app.server.type}" arg2="pramati" />
-			</or>
-			<then>
-				<copy todir="${app.server.portal.dir}">
-					<fileset
-						dir="modules"
-						includes="*.xml,*/**.xml"
-					/>
-				</copy>
-			</then>
-		</if>
 	</target>
 </project>

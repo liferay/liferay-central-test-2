@@ -406,6 +406,25 @@
 		</if>
 
 		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<copy todir="${app.server.lib.portal.dir}">
+					<fileset
+						dir="lib/development"
+						includes="mail.jar"
+					/>
+				</copy>
+
+				<copy todir="${app.server.dir}">
+					<fileset dir="tools/ext_tmpl/servers/jonas" />
+				</copy>
+			</then>
+		</if>
+
+		<if>
 			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
 				<copy todir="${app.server.lib.portal.dir}">
@@ -422,113 +441,115 @@
 					/>
 				</delete>
 			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="resin" />
-				<then>
+		</if>
 
-					<!--
-					Resin 3.0.19 needs Commons Logging and Log4J in the common
-					class loader or else Resin will break when Commons Logging
-					from one WAR tries to load Log4J from another WAR.
-					-->
+		<if>
+			<equals arg1="${app.server.type}" arg2="resin" />
+			<then>
 
-					<copy todir="${app.server.lib.global.dir}">
-						<fileset
-							dir="lib/portal"
-							includes="commons-logging.jar,log4j.jar"
-						/>
-					</copy>
+				<!--
+				Resin 3.0.19 needs Commons Logging and Log4J in the common
+				class loader or else Resin will break when Commons Logging
+				from one WAR tries to load Log4J from another WAR.
+				-->
 
-					<copy todir="${app.server.lib.global.dir}">
-						<fileset
-							dir="lib/development"
-							includes="activation.jar,mail.jar"
-						/>
-					</copy>
+				<copy todir="${app.server.lib.global.dir}">
+					<fileset
+						dir="lib/portal"
+						includes="commons-logging.jar,log4j.jar"
+					/>
+				</copy>
 
-					<copy todir="${app.server.dir}/lib">
-						<fileset
-							dir="lib/portal"
-							includes="xercesImpl.jar,xml-apis.jar"
-						/>
-					</copy>
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<then>
-					<ant dir="support-tomcat" target="deploy" inheritAll="false" />
+				<copy todir="${app.server.lib.global.dir}">
+					<fileset
+						dir="lib/development"
+						includes="activation.jar,mail.jar"
+					/>
+				</copy>
 
-					<copy todir="${app.server.lib.endorsed.dir}" flatten="true">
-						<fileset
-							dir="lib"
-							includes="${endorsed.libraries}"
-						/>
-					</copy>
+				<copy todir="${app.server.dir}/lib">
+					<fileset
+						dir="lib/portal"
+						includes="xercesImpl.jar,xml-apis.jar"
+					/>
+				</copy>
+			</then>
+		</if>
 
-					<copy todir="${app.server.lib.global.dir}">
-						<fileset
-							dir="lib/development"
-							includes="activation.jar,jms.jar,jta.jar,mail.jar"
-						/>
-					</copy>
+		<if>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<then>
+				<ant dir="support-tomcat" target="deploy" inheritAll="false" />
 
-					<if>
-						<equals arg1="${app.server.version}" arg2="5.5" />
-						<then>
+				<copy todir="${app.server.lib.endorsed.dir}" flatten="true">
+					<fileset
+						dir="lib"
+						includes="${endorsed.libraries}"
+					/>
+				</copy>
 
-							<!--
-							LEP-2981
-							-->
+				<copy todir="${app.server.lib.global.dir}">
+					<fileset
+						dir="lib/development"
+						includes="activation.jar,jms.jar,jta.jar,mail.jar"
+					/>
+				</copy>
 
-							<copy todir="${app.server.dir}/common/lib">
-								<fileset
-									dir="lib/development"
-									includes="naming-factory.jar"
-								/>
-							</copy>
-						</then>
-					</if>
+				<if>
+					<equals arg1="${app.server.version}" arg2="5.5" />
+					<then>
 
-					<move todir="${app.server.lib.endorsed.dir}">
-						<fileset
-							dir="${app.server.lib.portal.dir}"
-							includes="xercesImpl.jar"
-						/>
-					</move>
+						<!--
+						LEP-2981
+						-->
 
-					<copy todir="${app.server.temp.dir}/liferay/com/liferay/portal/deploy/dependencies">
-						<fileset
-							dir="lib/development"
-							includes="quercus.jar,resin-util.jar,script-10.jar"
-						/>
-					</copy>
-
-					<if>
-						<not>
-							<available file="${app.server.dir}/conf/Catalina/localhost/ROOT.xml" />
-						</not>
-						<then>
-							<copy
-								file="${project.dir}/tools/ext_tmpl/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
-								tofile="${app.server.dir}/conf/Catalina/localhost/ROOT.xml"
-								overwrite="yes"
+						<copy todir="${app.server.dir}/common/lib">
+							<fileset
+								dir="lib/development"
+								includes="naming-factory.jar"
 							/>
-						</then>
-					</if>
+						</copy>
+					</then>
+				</if>
 
-					<copy
-						file="${project.dir}/tools/ext_tmpl/servers/tomcat/conf/catalina.properties.${app.server.version}"
-						tofile="${app.server.dir}/conf/catalina.properties"
-						overwrite="yes"
+				<move todir="${app.server.lib.endorsed.dir}">
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="xercesImpl.jar"
 					/>
+				</move>
 
-					<copy
-						file="${project.dir}/tools/ext_tmpl/servers/tomcat/conf/jaas.config"
-						tofile="${app.server.dir}/conf/jaas.config"
+				<copy todir="${app.server.temp.dir}/liferay/com/liferay/portal/deploy/dependencies">
+					<fileset
+						dir="lib/development"
+						includes="quercus.jar,resin-util.jar,script-10.jar"
 					/>
-				</then>
-			</elseif>
+				</copy>
+
+				<if>
+					<not>
+						<available file="${app.server.dir}/conf/Catalina/localhost/ROOT.xml" />
+					</not>
+					<then>
+						<copy
+							file="tools/ext_tmpl/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
+							tofile="${app.server.dir}/conf/Catalina/localhost/ROOT.xml"
+							overwrite="yes"
+						/>
+					</then>
+				</if>
+
+				<copy
+					file="tools/ext_tmpl/servers/tomcat/conf/catalina.properties.${app.server.version}"
+					tofile="${app.server.dir}/conf/catalina.properties"
+					overwrite="yes"
+				/>
+
+				<copy
+					file="tools/ext_tmpl/servers/tomcat/conf/jaas.config"
+					tofile="${app.server.dir}/conf/jaas.config"
+				/>
+			</then>
 		</if>
 
 		<mkdir dir="${app.server.log.dir}" />
@@ -951,7 +972,7 @@
 		<delete dir="${app.server.pramati.dir}/server/lf" />
 
 		<copy
-			file="${project.dir}/tools/ext_tmpl/servers/pramati/server/license.key"
+			file="tools/ext_tmpl/servers/pramati/server/license.key"
 			todir="${app.server.pramati.dir}/server"
 			overwrite="yes"
 		/>

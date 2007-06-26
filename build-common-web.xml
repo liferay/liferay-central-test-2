@@ -58,40 +58,23 @@
 
 	<target name="deploy" depends="compile">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${war.file}" arg2="portal-web" />
 			<then>
-				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+				<property name="war.file.dest" value="${app.server.portal.dir}" />
 			</then>
 			<else>
 				<if>
-					<equals arg1="${war.file}" arg2="portal-web" />
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+					</or>
 					<then>
-						<if>
-							<equals arg1="${app.server.type}" arg2="jetty" />
-							<then>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/root" />
-							</then>
-							<else>
-								<property name="war.file.dest" value="${app.server.portal.dir}" />
-							</else>
-						</if>
+						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
 					</then>
 					<else>
-						<if>
-							<or>
-								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-							</or>
-							<then>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
-							</then>
-							<else>
-								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
-							</else>
-						</if>
+						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
 					</else>
 				</if>
 			</else>
@@ -162,12 +145,13 @@
 					failonerror="false"
 				/>
 			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				<then>
-					<delete file="${war.file.dest}/META-INF/context.xml" />
-				</then>
-			</elseif>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			<then>
+				<delete file="${war.file.dest}/META-INF/context.xml" />
+			</then>
 		</if>
 	</target>
 </project>
