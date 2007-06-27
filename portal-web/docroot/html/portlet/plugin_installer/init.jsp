@@ -21,42 +21,32 @@
  * SOFTWARE.
  */
 %>
+<%@ include file="/html/portlet/admin/init.jsp" %>
 
-<%@ include file="/html/portlet/plugin_installer/init.jsp" %>
+<%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
+<%@ page import="com.liferay.portal.plugin.PluginPackageImpl" %>
+<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
+<%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
+<%@ page import="com.liferay.util.License" %>
+<%@ page import="com.liferay.util.Screenshot" %>
 
-<c:if test="<%= SessionMessages.contains(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT) %>">
-	<br />
+<%
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+%>
 
-	<%
-	RepositoryReport repositoryReport = (RepositoryReport)SessionMessages.get(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT);
+<%!
+public String getNoteIcon(ThemeDisplay themeDisplay, String message) {
+	StringMaker sm = new StringMaker();
 
-	Iterator itr = repositoryReport.getRepositoryURLs().iterator();
+	sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+	sm.append(themeDisplay.getPathThemeImages());
+	sm.append("/document_library/page.png");
+	sm.append("' onmousemove='ToolTip.show(event, this, \"");
+	sm.append(message);
+	sm.append("\")'>");
 
-	while (itr.hasNext()) {
-		String repositoryURL = (String)itr.next();
-
-		Object status = repositoryReport.getState(repositoryURL);
-	%>
-
-		<%= repositoryURL %>
-
-		<c:choose>
-			<c:when test="<%= status == RepositoryReport.SUCCESS %>">
-				<span class="portlet-msg-success">
-				<liferay-ui:message key="ok" />
-				</span>
-			</c:when>
-			<c:otherwise>
-				<span class="portlet-msg-error">
-				<%= status %>
-				</span>
-			</c:otherwise>
-		</c:choose>
-
-		<br />
-
-	<%
-	}
-	%>
-
-</c:if>
+	return sm.toString();
+}
+%>

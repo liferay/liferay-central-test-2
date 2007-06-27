@@ -117,7 +117,7 @@
 		<project-name>Java2HTML?</project-name>
 		<project-url>http://www.java2html.com</project-url>
 		<license-name>GNU General Public License</license-name>
-		<license-url>http://www.java2html.com/gpl.txt</license-url>
+		<license-url>http://www.gnu.org/copyleft/gpl.html</license-url>
 	</library>
 	<library>
 		<file-name>development/jass.jar</file-name>
@@ -390,6 +390,14 @@
 		<project-url>http://tomcat.apache.org</project-url>
 		<license-name>Apache License 2.0</license-name>
 		<license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
+	</library>
+	<library>
+		<file-name>development/ymsg.jar</file-name>
+		<version>0.6.1</version>
+		<project-name>jYMSG</project-name>
+		<project-url>http://jymsg9.sourceforge.net</project-url>
+		<license-name>GNU General Public License</license-name>
+		<license-url>http://www.gnu.org/copyleft/gpl.html</license-url>
 	</library>
 	<library>
 		<file-name>development/zql.jar</file-name>
@@ -724,8 +732,8 @@
 		<version>2.1.1</version>
 		<project-name>Friki</project-name>
 		<project-url>http://freshmeat.net/projects/friki/?branch_id=50295&amp;release_id=160735</project-url>
-		<license-name>GNU General Public License</license-name>
-		<license-url>http://www.opensource.org/licenses/gpl-license.php</license-url>
+		<license-name>Apache License 2.0</license-name>
+		<license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
 	</library>
 	<library>
 		<file-name>portal/gif89.jar</file-name>
@@ -1302,13 +1310,5 @@
 		<project-url>http://xstream.codehaus.org</project-url>
 		<license-name>BSD License</license-name>
 		<license-url>http://xstream.codehaus.org/license.html</license-url>
-	</library>
-	<library>
-		<file-name>portal/ym.jar</file-name>
-		<version></version>
-		<project-name></project-name>
-		<project-url></project-url>
-		<license-name></license-name>
-		<license-url></license-url>
 	</library>
 </libraries>

@@ -135,6 +135,7 @@
 							</delete>
 						</then>
 					</if>
+
 					<if>
 						<equals arg1="${app.server.version}" arg2="6.0" />
 						<then>
@@ -843,6 +844,43 @@
 		</copy>
 	</target>
 
+	<target name="build-ext-geronimo-tomcat">
+		<delete dir="${app.server.geronimo-tomcat.dir}" />
+
+		<unzip src="${app.server.parent.dir}/geronimo-tomcat-1.1.1.zip" dest="${app.server.parent.dir}" />
+
+		<ant dir="sql" target="rebuild-derby" inheritAll="false" />
+
+		<parallel>
+			<exec dir="${app.server.geronimo-tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
+
+			<sequential>
+				<sleep seconds="30" />
+
+				<ant dir="sql" target="deploy-geronimo-tomcat-derby" inheritAll="false" />
+
+				<sleep seconds="10" />
+
+				<java
+					fork="true"
+					jar="${app.server.geronimo-tomcat.dir}/bin/deployer.jar"
+				>
+					<arg line="${app.server.geronimo-tomcat.credentials} deploy dist/liferay-portal-${lp.version.file.name}-with-dependencies.war" />
+				</java>
+
+				<sleep seconds="60" />
+
+				<exec dir="${app.server.geronimo-tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true">
+					<arg line="${app.server.geronimo-tomcat.credentials}" />
+				</exec>
+			</sequential>
+		</parallel>
+
+		<delete>
+			<fileset dir="${app.server.geronimo-tomcat.dir}/var/log" includes="*.log" />
+		</delete>
+	</target>
+
 	<target name="build-ext-glassfish">
 		<delete dir="${app.server.glassfish.dir}" />
 
@@ -885,6 +923,15 @@
 
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jboss-tomcat
+
+app.server.jboss-tomcat.version=4.2
+app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.0
+</echo>
+
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="build-ext-jetty">
@@ -923,7 +970,7 @@
 			<exec dir="${app.server.pramati.bin.dir}" executable="runliferay.bat" resolveexecutable="true" />
 
 			<sequential>
-				<sleep seconds="500" />
+				<sleep seconds="300" />
 
 				<exec dir="${app.server.pramati.bin.dir}" executable="remoteshell.bat" resolveexecutable="true">
 					<arg value="-file" />
@@ -952,6 +999,21 @@
 
 	<target name="build-ext-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
+
+		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
+		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
+
+		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat
+
+app.server.tomcat.version=6.0
+app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.13
+app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/lib
+app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/lib/ext
+app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/lib/ext
+app.server.tomcat.lib.support.dir=$${app.server.tomcat.dir}/lib/ext
+app.server.tomcat.support.dir=$${app.server.tomcat.dir}/lib/ext
+app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.name}.zip
+</echo>
 
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
@@ -1010,6 +1072,15 @@
 			basedir="."
 			destfile="dist/liferay-portal-doc-${lp.version.file.name}.zip"
 			includes="api/**/*.css,api/**/*.gif,api/**/*.html"
+		/>
+	</target>
+
+	<target name="zip-geronimo-tomcat">
+		<delete file="dist/liferay-portal-geronimo-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+
+		<zip
+			basedir="${app.server.geronimo-tomcat.dir}"
+			destfile="dist/liferay-portal-geronimo-tomcat-${lp.version.file.name}.zip"
 		/>
 	</target>
 
@@ -1079,18 +1150,25 @@
 	</target>
 
 	<target name="zip-jboss">
-		<delete file="dist/liferay-portal-jboss-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip
 			basedir="${app.server.jboss-jetty.dir}"
-			destfile="dist/liferay-portal-jboss-jetty-${lp.version.file.name}.zip"
+			destfile="dist/liferay-portal-jboss-jetty-4.0-${lp.version.file.name}.zip"
 		/>
 
-		<delete file="dist/liferay-portal-jboss-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-tomcat-4.0-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip
 			basedir="${app.server.jboss-tomcat.dir}"
-			destfile="dist/liferay-portal-jboss-tomcat-${lp.version.file.name}.zip"
+			destfile="dist/liferay-portal-jboss-tomcat-4.0-${lp.version.file.name}.zip"
+		/>
+
+		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version.file.name}.zip" failonerror="false" />
+
+		<zip
+			basedir="${app.server.parent.dir}/jboss-tomcat-4.2.0"
+			destfile="dist/liferay-portal-jboss-tomcat-4.2-${lp.version.file.name}.zip"
 		/>
 	</target>
 
@@ -1146,6 +1224,31 @@
 			basedir="${app.server.portal.dir}"
 			destfile="dist/liferay-portal-${lp.version.file.name}.war"
 		/>
+
+		<copy
+			file="dist/liferay-portal-${lp.version.file.name}.war"
+			tofile="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war"
+			overwrite="yes"
+		/>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<copy todir="${tstamp.value}/WEB-INF/lib">
+			<fileset
+				dir="${app.server.lib.global.dir}"
+				includes="portal-kernel.jar,portal-service.jar,portlet.jar"
+			/>
+		</copy>
+
+		<zip
+			basedir="${tstamp.value}"
+			destfile="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war"
+			update="yes"
+		/>
+
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="zip-pramati">
@@ -1243,31 +1346,50 @@
 	</target>
 
 	<target name="zip-tomcat">
-		<delete file="dist/liferay-portal-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip
 			basedir="${app.server.tomcat.dir}"
-			destfile="dist/liferay-portal-tomcat-${lp.version.file.name}.zip"
-			excludes="common/lib/ext/firebird.jar,common/lib/ext/interbase.jar,common/lib/ext/jtds.jar,common/lib/ext/mysql.jar,common/lib/ext/ojdbc14.jar,common/lib/ext/p6spy.jar,common/lib/ext/postgresql.jar,common/lib/ext/sap.jar,common/lib/ext/spy.properties"
+			destfile="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip"
 		/>
 
-		<delete file="dist/liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip
 			basedir="${app.server.tomcat.dir}"
-			destfile="dist/liferay-portal-tomcat-jdk5-${lp.version.file.name}.zip"
-			excludes="bin/jmx.jar,common/lib/ext/firebird.jar,common/lib/ext/interbase.jar,common/lib/ext/jtds.jar,common/lib/ext/mysql.jar,common/lib/ext/ojdbc14.jar,common/lib/ext/p6spy.jar,common/lib/ext/postgresql.jar,common/lib/ext/sap.jar,common/lib/ext/spy.properties"
+			destfile="dist/liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}.zip"
+			excludes="bin/jmx.jar"
+		/>
+
+		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip" failonerror="false" />
+
+		<zip
+			basedir="${app.server.parent.dir}/tomcat-6.0.13"
+			destfile="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip"
 		/>
 	</target>
 
 	<target name="dist">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${app.server.tomcat.lib.global.dir}"
+				includes="*.jar"
+			/>
+		</delete>
+
 		<antcall target="clean" />
 		<antcall target="start" />
 		<antcall target="deploy" />
 
 		<antcall target="java2html" />
 
+		<delete dir="dist" />
+		<mkdir dir="dist" />
+
+		<antcall target="zip-portal-war" />
+
 		<antcall target="build-ext" />
+		<antcall target="build-ext-geronimo-tomcat" />
 		<antcall target="build-ext-jboss-jetty" />
 		<antcall target="build-ext-jboss-tomcat" />
 		<antcall target="build-ext-jetty" />
@@ -1276,16 +1398,12 @@
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
 
-		<delete dir="dist" />
-		<mkdir dir="dist" />
-
 		<antcall target="zip-api" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
 		<antcall target="zip-portal-dependencies" />
-		<antcall target="zip-portal-war" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -1305,9 +1423,17 @@
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
-				dir="${app.server.deploy.dir}"
-				includes="cms-web/**,jbpm-web/**,mule-web/**,sample*/**,servicemix-web/**"
+				dir="${app.server.tomcat.deploy.dir}"
+				includes="cms-web/**,jbpm-web/**,mule-web/**,servicemix-web/**"
 			/>
 		</delete>
+	</target>
+
+	<target name="dist-jdk5">
+		<antcall target="build-ext-glassfish" />
+		<antcall target="build-ext-pramati" />
+
+		<antcall target="zip-glassfish" />
+		<antcall target="zip-pramati" />
 	</target>
 </project>

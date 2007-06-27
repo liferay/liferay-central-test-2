@@ -30,7 +30,7 @@
 
 <br /><br />
 
-<input class="liferay-input-text" name="<portlet:namespace />url" value="" />
+<input name="<portlet:namespace />url" value="" size="75" type="text"/>
 
 <br /><br />
 
@@ -40,7 +40,7 @@
 
 <br /><br />
 
-<input class="liferay-input-text" name="<portlet:namespace />remoteDeployWARName" value="" />
+<input name="<portlet:namespace />remoteDeployWARName" value="" size="20" type="text"/>
 
 <br /><br />
 

@@ -42,7 +42,7 @@ public class ReleaseInfo {
 
 	static String codeName = "Owen";
 
-	static String build = "4293";
+	static String build = "4300";
 
 	static String date = "June 26, 2007";
 
@@ -51,6 +51,14 @@ public class ReleaseInfo {
 			date + ")";
 
 	static String serverInfo = name + " / " + version;
+
+	public static int RELEASE_4_2_0_BUILD_NUMBER = 3500;
+
+	public static int RELEASE_4_2_1_BUILD_NUMBER = 3501;
+
+	public static int RELEASE_4_2_2_BUILD_NUMBER = 3502;
+
+	public static int RELEASE_4_3_0_BUILD_NUMBER = 4300;
 
 	public static final String getVersion() {
 		return version;

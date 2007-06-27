@@ -39,7 +39,7 @@
 
 <br /><br />
 
-<input class="liferay-input-text" name="<portlet:namespace />deploymentContext" />
+<input name="<portlet:namespace />deploymentContext" size="20" type="text"/>
 
 <br /><br />
 

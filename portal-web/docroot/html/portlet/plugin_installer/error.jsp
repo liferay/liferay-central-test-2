@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/html/portlet/plugin_installer/init.jsp" %>
 
 <liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 

@@ -140,10 +140,4 @@
 		debug="99"
 		useContextClassLoader="false"
 	/>
-
-	<!--
-	Disable persistent sessions by uncommenting the following
-	-->
-
-	<!--<Manager pathname="" />-->
 </Context>

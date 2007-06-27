@@ -35,6 +35,12 @@ import java.util.Map;
  */
 public class MethodCache {
 
+	public static Method get(String className, String methodName)
+		throws ClassNotFoundException, NoSuchMethodException {
+
+		return get(className, methodName, new Class[] {});
+	}
+
 	public static Method get(
 			String className, String methodName, Class[] parameterTypes)
 		throws ClassNotFoundException, NoSuchMethodException {

@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 %>
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/html/portlet/plugin_installer/init.jsp" %>
 
 <c:if test="<%= !permissionChecker.isOmniadmin()%>">
 	<liferay-ui:message key="this-tool-can-only-be-used-by-omniadmin-users" />

@@ -22,21 +22,22 @@
 
 package com.liferay.portal.im;
 
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.IOException;
 
+import java.lang.reflect.Method;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import ymsg.network.Session;
-import ymsg.network.YahooException;
 
 /**
  * <a href="YMConnector.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Brett Randall
+ * @author Bruno Farache
  *
  */
 public class YMConnector {
@@ -48,7 +49,7 @@ public class YMConnector {
 	}
 
 	public static void send(String to, String msg)
-		throws IllegalStateException, IOException, YahooException {
+		throws IllegalStateException, IOException {
 
 		_instance._send(to, msg);
 	}
@@ -58,12 +59,28 @@ public class YMConnector {
 
 	private void _connect() {
 		try {
-			_ym = new Session();
+			_ym = (Object)Class.forName(_SESSION).newInstance();
+		}
+		catch (Exception e) {
+			_jYMSGLibraryFound = false;
 
-			String login = PropsUtil.get(PropsUtil.YM_LOGIN);
-			String password = PropsUtil.get(PropsUtil.YM_PASSWORD);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"jYMSG library could not be loaded: " + e.getMessage());
+			}
+		}
 
-			_ym.login(login, password);
+		try {
+			if (_jYMSGLibraryFound) {
+				String login = PropsUtil.get(PropsUtil.YM_LOGIN);
+				String password = PropsUtil.get(PropsUtil.YM_PASSWORD);
+
+				Method method = MethodCache.get(
+					_SESSION, "login",
+					new Class[] {String.class, String.class});
+
+				method.invoke(_ym, new Object[] {login, password});
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);
@@ -73,11 +90,15 @@ public class YMConnector {
 	private void _disconnect() {
 		try {
 			if (_ym != null) {
-				_ym.logout();
+				Method method = MethodCache.get(_SESSION, "logout");
+
+				method.invoke(_ym, new Object[] {});
 			}
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 	}
 
@@ -89,19 +110,26 @@ public class YMConnector {
 				_connect();
 			}
 
-			_ym.sendMessage(to, msg);
+			if (_jYMSGLibraryFound) {
+				Method method = MethodCache.get(
+					_SESSION, "sendMessage",
+					new Class[] {String.class, String.class});
+
+				method.invoke(_ym, new Object[] {to, msg});
+			}
 		}
 		catch (Exception e) {
-			_connect();
-
-			_ym.sendMessage(to, msg);
+			_log.error(e);
 		}
 	}
+
+	private static final String _SESSION = "ymsg.network.Session";
 
 	private static Log _log = LogFactory.getLog(YMConnector.class);
 
 	private static YMConnector _instance = new YMConnector();
 
-	private Session _ym;
+	private boolean _jYMSGLibraryFound = true;
+	private Object _ym;
 
 }

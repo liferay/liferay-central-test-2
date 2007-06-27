@@ -61,6 +61,7 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeUserGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeUserIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWiki;
+import com.liferay.portal.util.ReleaseInfo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -75,10 +76,7 @@ import org.apache.commons.logging.LogFactory;
 public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 	public int getThreshold() {
-
-		// Version 4.2.2 has build number 3502
-
-		return 3502;
+		return ReleaseInfo.RELEASE_4_3_0_BUILD_NUMBER;
 	}
 
 	public void upgrade() throws UpgradeException {

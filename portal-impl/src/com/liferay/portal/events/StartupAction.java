@@ -84,8 +84,8 @@ public class StartupAction extends SimpleAction {
 
 			int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
-			if (buildNumber < 3500) {
-				_log.error("You must first upgrade to Liferay Portal 4.2.x");
+			if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
+				_log.error("You must first upgrade to Liferay Portal 4.2.1");
 
 				System.exit(0);
 			}
@@ -104,7 +104,7 @@ public class StartupAction extends SimpleAction {
 							upgradeProcesses[i]).newInstance();
 
 					if ((upgradeProcess.getThreshold() == 0) ||
-						(upgradeProcess.getThreshold() >= buildNumber)) {
+						(upgradeProcess.getThreshold() > buildNumber)) {
 
 						if (_log.isInfoEnabled()) {
 							_log.info(
