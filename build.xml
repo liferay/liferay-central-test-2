@@ -1147,6 +1147,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 				includes="resources/extract-image.png"
 			/>
 		</jar>
+
+		<delete file="dist/liferay-portal-glassfish-${lp.version.file.name}.zip" failonerror="false" />
 	</target>
 
 	<target name="zip-jboss">
@@ -1257,6 +1259,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<zip
 			basedir="${app.server.pramati.dir}"
 			destfile="dist/liferay-portal-pramati-${lp.version.file.name}.zip"
+			excludes="server/nodes/liferay/archives/autodeploy/*.war"
 		/>
 
 		<taskdef
@@ -1314,6 +1317,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 				includes="resources/extract-image.png"
 			/>
 		</jar>
+
+		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
 	</target>
 
 	<target name="zip-resin">
@@ -1370,13 +1375,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="dist">
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset
-				dir="${app.server.tomcat.lib.global.dir}"
-				includes="*.jar"
-			/>
-		</delete>
-
 		<antcall target="clean" />
 		<antcall target="start" />
 		<antcall target="deploy" />
@@ -1399,6 +1397,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<antcall target="build-ext-tomcat" />
 
 		<antcall target="zip-api" />
+		<antcall target="zip-geronimo-tomcat" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
