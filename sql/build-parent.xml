@@ -165,7 +165,7 @@
 			<param name="log" value="${oracle.log}" />
 		</antcall>
 
-		<antcall target="rebuild-oracle-sqlldr">
+		<!--<antcall target="rebuild-oracle-sqlldr">
 			<param name="csv.name" value="image" />
 		</antcall>
 
@@ -181,7 +181,7 @@
 			<param name="csv.name" value="journaltemplate" />
 		</antcall>
 
-		<!--<antcall target="rebuild-oracle-sqlldr">
+		<antcall target="rebuild-oracle-sqlldr">
 			<param name="csv.name" value="shoppingitem" />
 		</antcall>-->
 
