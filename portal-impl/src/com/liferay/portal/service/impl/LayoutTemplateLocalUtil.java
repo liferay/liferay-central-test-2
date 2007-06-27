@@ -306,12 +306,22 @@ public class LayoutTemplateLocalUtil {
 				layoutTemplate.elementText("thumbnail-path"),
 				layoutTemplateModel.getThumbnailPath()));
 
-			String content = Http.URLtoString(ctx.getResource(
-				layoutTemplateModel.getTemplatePath()));
+			String content = null;
+
+			try {
+				content = Http.URLtoString(ctx.getResource(
+					layoutTemplateModel.getTemplatePath()));
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unable to get content at template path " +
+						layoutTemplateModel.getTemplatePath() + ": " +
+							e.getMessage());
+			}
 
 			if (Validator.isNull(content)) {
 				_log.error(
-					"No content found at " +
+					"No content found at template path " +
 						layoutTemplateModel.getTemplatePath());
 			}
 			else {
@@ -319,16 +329,33 @@ public class LayoutTemplateLocalUtil {
 				layoutTemplateModel.setColumns(_getColumns(content));
 			}
 
-			String wapContent = Http.URLtoString(ctx.getResource(
-				layoutTemplateModel.getWapTemplatePath()));
-
-			if (Validator.isNull(wapContent)) {
+			if (Validator.isNull(layoutTemplateModel.getWapTemplatePath())) {
 				_log.error(
-					"No WAP content found at " +
-						layoutTemplateModel.getWapTemplatePath());
+					"The element wap-template-path is not defined for " +
+						layoutTemplateId);
 			}
 			else {
-				layoutTemplateModel.setWapContent(wapContent);
+				String wapContent = null;
+
+				try {
+					wapContent = Http.URLtoString(ctx.getResource(
+						layoutTemplateModel.getWapTemplatePath()));
+				}
+				catch (Exception e) {
+					_log.error(
+						"Unable to get content at WAP template path " +
+							layoutTemplateModel.getWapTemplatePath() + ": " +
+								e.getMessage());
+				}
+
+				if (Validator.isNull(wapContent)) {
+					_log.error(
+						"No content found at WAP template path " +
+							layoutTemplateModel.getWapTemplatePath());
+				}
+				else {
+					layoutTemplateModel.setWapContent(wapContent);
+				}
 			}
 
 			Element rolesEl = layoutTemplate.element("roles");

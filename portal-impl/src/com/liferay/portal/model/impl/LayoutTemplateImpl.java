@@ -194,8 +194,17 @@ public class LayoutTemplateImpl
 					getWapTemplatePath());
 		}
 
-		String wapContent = Http.URLtoString(
-			_ctx.getResource(getWapTemplatePath()));
+		String wapContent = null;
+
+		try {
+			wapContent = Http.URLtoString(
+				_ctx.getResource(getWapTemplatePath()));
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to get content at WAP template path " +
+					getWapTemplatePath() + ": " + e.getMessage());
+		}
 
 		setWapContent(wapContent);
 
