@@ -22,6 +22,7 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.Validator;
 
@@ -175,7 +176,10 @@ public class ServletResponseUtil {
 		OutputStream os = null;
 
 		try {
-			if (!res.isCommitted()) {
+
+			// LEP-3122
+
+			if (!res.isCommitted() || ServerDetector.isPramati()) {
 
 				// LEP-536
 
