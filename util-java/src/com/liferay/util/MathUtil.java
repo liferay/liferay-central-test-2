@@ -24,6 +24,9 @@ package com.liferay.util;
 
 import java.text.NumberFormat;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="MathUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,6 +52,7 @@ public class MathUtil {
 
 	public static double format(double x, int max, int min) {
 		NumberFormat nf = NumberFormat.getInstance();
+
 		nf.setMaximumFractionDigits(max);
 		nf.setMinimumFractionDigits(min);
 
@@ -58,7 +62,7 @@ public class MathUtil {
 			x = number.doubleValue();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e.getMessage());
 		}
 
 		return x;
@@ -118,5 +122,7 @@ public class MathUtil {
 			return result;
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(MathUtil.class);
 
 }

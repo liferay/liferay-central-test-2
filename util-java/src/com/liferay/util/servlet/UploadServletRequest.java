@@ -47,6 +47,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UploadServletRequest.java.html"><b><i>View Source</i></b></a>
@@ -114,7 +116,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 			}
 		}
 		catch (FileUploadException fue) {
-			fue.printStackTrace();
+			_log.error(fue.getMessage());
 		}
 	}
 
@@ -268,6 +270,8 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(UploadServletRequest.class);
 
 	private LiferayServletRequest _lsr;
 	private Map _params;

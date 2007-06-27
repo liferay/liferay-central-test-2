@@ -24,6 +24,9 @@ package com.liferay.util;
 
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="InstancePool.java.html"><b><i>View Source</i></b></a>
  *
@@ -56,13 +59,13 @@ public class InstancePool {
 				_put(className, obj);
 			}
 			catch (ClassNotFoundException cnofe) {
-				cnofe.printStackTrace();
+				_log.error(cnofe.getMessage());
 			}
 			catch (InstantiationException ie) {
-				ie.printStackTrace();
+				_log.error(ie.getMessage());
 			}
 			catch (IllegalAccessException iae) {
-				iae.printStackTrace();
+				_log.error(iae.getMessage());
 			}
 		}
 
@@ -72,6 +75,8 @@ public class InstancePool {
 	private void _put(String className, Object obj) {
 		_classPool.put(className, obj);
 	}
+
+	private static Log _log = LogFactory.getLog(InstancePool.class);
 
 	private static InstancePool _instance = new InstancePool();
 

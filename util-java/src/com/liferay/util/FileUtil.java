@@ -44,6 +44,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="FileUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -166,7 +169,7 @@ public class FileUtil {
 				dstChannel.close();
 			}
 			catch (IOException ioe) {
-				ioe.printStackTrace();
+				_log.error(ioe.getMessage());
 			}
 		}
 	}
@@ -567,5 +570,7 @@ public class FileUtil {
 	public static void write(File file, InputStream in) throws IOException {
 		write(file, getBytes(in));
 	}
+
+	private static Log _log = LogFactory.getLog(FileUtil.class);
 
 }

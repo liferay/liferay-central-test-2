@@ -34,6 +34,9 @@ import javax.naming.NamingException;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="DataAccess.java.html"><b><i>View Source</i></b></a>
  *
@@ -69,7 +72,9 @@ public class DataAccess {
 			}
 		}
 		catch (SQLException sqle) {
-			sqle.printStackTrace();
+			if (_log.isWarnEnabled()) {
+				_log.warn(sqle.getMessage());
+			}
 		}
 
 		try {
@@ -78,7 +83,9 @@ public class DataAccess {
 			}
 		}
 		catch (SQLException sqle) {
-			sqle.printStackTrace();
+			if (_log.isWarnEnabled()) {
+				_log.warn(sqle.getMessage());
+			}
 		}
 
 		try {
@@ -87,8 +94,12 @@ public class DataAccess {
 			}
 		}
 		catch (SQLException sqle) {
-			sqle.printStackTrace();
+			if (_log.isWarnEnabled()) {
+				_log.warn(sqle.getMessage());
+			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(DataAccess.class);
 
 }

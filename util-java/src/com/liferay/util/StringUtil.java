@@ -38,6 +38,9 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="StringUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -621,7 +624,7 @@ public class StringUtil {
 				br.close();
 			}
 			catch (IOException ioe) {
-				ioe.printStackTrace();
+				_log.error(ioe.getMessage());
 			}
 		}
 		else {
@@ -988,7 +991,7 @@ public class StringUtil {
 			}
 		}
 		catch (IOException ioe) {
-			ioe.printStackTrace();
+			_log.error(ioe.getMessage());
 		}
 
 		return sm.toString();
@@ -1005,5 +1008,7 @@ public class StringUtil {
 
 		return Character.isWhitespace(c);
 	}
+
+	private static Log _log = LogFactory.getLog(StringUtil.class);
 
 }

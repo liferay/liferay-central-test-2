@@ -27,6 +27,9 @@ import javax.jms.QueueConnection;
 import javax.jms.QueueSender;
 import javax.jms.QueueSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="JMSUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,7 +47,9 @@ public class JMSUtil {
 			}
 		}
 		catch (JMSException jmse) {
-			jmse.printStackTrace();
+			if (_log.isWarnEnabled()) {
+				_log.warn(jmse.getMessage());
+			}
 		}
 
 		try {
@@ -53,7 +58,9 @@ public class JMSUtil {
 			}
 		}
 		catch (JMSException jmse) {
-			jmse.printStackTrace();
+			if (_log.isWarnEnabled()) {
+				_log.warn(jmse.getMessage());
+			}
 		}
 
 		try {
@@ -62,8 +69,12 @@ public class JMSUtil {
 			}
 		}
 		catch (JMSException jmse) {
-			jmse.printStackTrace();
+			if (_log.isWarnEnabled()) {
+				_log.warn(jmse.getMessage());
+			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(JMSUtil.class);
 
 }

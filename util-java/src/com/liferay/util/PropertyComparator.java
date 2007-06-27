@@ -27,6 +27,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PropertyComparator.java.html"><b><i>View Source</i></b></a>
@@ -72,18 +74,20 @@ public class PropertyComparator implements Comparator {
 				}
 			}
 		}
-		catch (NoSuchMethodException nsme) {
-			nsme.printStackTrace();
+		catch (IllegalAccessException iae) {
+			_log.error(iae.getMessage());
 		}
 		catch (InvocationTargetException ite) {
-			ite.printStackTrace();
+			_log.error(ite.getMessage());
 		}
-		catch (IllegalAccessException iae) {
-			iae.printStackTrace();
+		catch (NoSuchMethodException nsme) {
+			_log.error(nsme.getMessage());
 		}
 
 		return -1;
 	}
+
+	private static Log _log = LogFactory.getLog(PropertyComparator.class);
 
 	private String[] _propertyNames;
 

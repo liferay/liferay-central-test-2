@@ -28,6 +28,8 @@ import java.io.InputStream;
 
 import java.util.Iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -89,13 +91,15 @@ public class XLSTextStripper {
 			_text = sm.toString();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e.getMessage());
 		}
 	}
 
 	public String getText() {
 		return  _text;
 	}
+
+	private static Log _log = LogFactory.getLog(XLSTextStripper.class);
 
 	private String _text;
 

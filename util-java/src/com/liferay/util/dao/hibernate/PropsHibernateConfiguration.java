@@ -70,7 +70,7 @@ public class PropsHibernateConfiguration extends LocalSessionFactoryBean {
 					}
 				}
 				catch (Exception e) {
-					e.printStackTrace();
+					_log.error(e.getMessage());
 				}
 			}
 
