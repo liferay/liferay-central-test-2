@@ -331,6 +331,7 @@ add-image=Añadir imagen
 add-instance=Añadir instancia
 add-item=Añadir elemento
 add-license=Añadir licencia
+add-liferay-as-a-search-provider=Agregue Liferay como abastecedor de la búsqueda
 add-link=Añadir enlace
 add-list=Añadir lista
 add-location=Añadir localización

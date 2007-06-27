@@ -84,7 +84,7 @@ if (Validator.isNotNull(primarySearch)) {
 }
 %>
 
-<input type="button" value="Add Liferay as a Search Provider" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
+<input type="button" value="<liferay-ui:message key="add-liferay-as-a-search-provider" />" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
 
 <br /><br />
 
@@ -206,8 +206,8 @@ for (int i = 0; i < portlets.size(); i++) {
 		<br />
 	</c:if>
 
-	<div style="border: 1px solid <%= colorScheme.getPortletMenuBg() %>; font-size: x-small; font-weight: bold; margin-bottom: 1px; padding: 3px 5px;">
-		<%= portletTitle %>
+	<div style="padding-bottom: 5px;">
+		<b><%= portletTitle %></b>
 	</div>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
