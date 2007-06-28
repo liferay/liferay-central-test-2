@@ -1355,6 +1355,7 @@
 		<exception>ReservedUserEmailAddress</exception>
 		<exception>ReservedUserId</exception>
 		<exception>ReservedUserScreenName</exception>
+		<exception>ResourcePrimKey</exception>
 		<exception>RoleName</exception>
 		<exception>SendPassword</exception>
 		<exception>UserActive</exception>

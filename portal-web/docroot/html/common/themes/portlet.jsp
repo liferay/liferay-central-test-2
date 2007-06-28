@@ -126,6 +126,7 @@ else {
 }
 
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
+urlConfiguration.setParameter("resourcePrimKey", PortletPermission.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 urlConfiguration.setParameter("redirect", currentURL);
 
 portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");

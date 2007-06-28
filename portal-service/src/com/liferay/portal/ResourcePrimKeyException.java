@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,18 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal;
 
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
-<%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
-<%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
-<%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+import com.liferay.portal.PortalException;
+
+/**
+ * <a href="ResourcePrimKeyException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ResourcePrimKeyException extends PortalException {
+
+	public ResourcePrimKeyException() {
+		super();
+	}
+
+	public ResourcePrimKeyException(String msg) {
+		super(msg);
+	}
+
+	public ResourcePrimKeyException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ResourcePrimKeyException(Throwable cause) {
+		super(cause);
+	}
+
+}

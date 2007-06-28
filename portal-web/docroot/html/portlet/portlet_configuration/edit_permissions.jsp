@@ -46,6 +46,10 @@ String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, mod
 
 String resourcePrimKey = ParamUtil.getString(request, "resourcePrimKey");
 
+if (Validator.isNull(resourcePrimKey)) {
+	throw new ResourcePrimKeyException();
+}
+
 String selResource = modelResource;
 String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
