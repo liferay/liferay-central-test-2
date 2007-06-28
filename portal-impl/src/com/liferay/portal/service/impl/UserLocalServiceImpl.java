@@ -452,13 +452,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			String password = user.getPassword();
 
-			if (password.equals(encPwd)) {
-				return true;
-			}
-			else if (!GetterUtil.getBoolean(PropsUtil.get(
+			if (user.isPasswordEncrypted()) {
+				if (password.equals(encPwd)) {
+					return true;
+				}
+
+				if (!GetterUtil.getBoolean(PropsUtil.get(
 						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
 
-				encPwd = PwdEncryptor.encrypt(encPwd, password);
+					encPwd = PwdEncryptor.encrypt(encPwd, password);
+
+					if (password.equals(encPwd)) {
+						return true;
+					}
+				}
+			}
+			else {
+				if (!GetterUtil.getBoolean(PropsUtil.get(
+						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
+
+					if (password.equals(encPwd)) {
+						return true;
+					}
+				}
+
+				password = PwdEncryptor.encrypt(password);
 
 				if (password.equals(encPwd)) {
 					return true;

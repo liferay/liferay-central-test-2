@@ -83,12 +83,12 @@ public class BasicLoginModule implements LoginModule {
 			credentials = authenticate();
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e.getMessage());
 
 			throw new LoginException();
 		}
 
-		if (credentials != null && credentials.length == 2) {
+		if ((credentials != null) && (credentials.length == 2)) {
 			setPrincipal(getPortalPrincipal(credentials[0]));
 			setPassword(credentials[1]);
 

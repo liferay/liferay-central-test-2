@@ -43,6 +43,7 @@
 	<path id="test-spring-remoting.classpath">
 		<path refid="web.classpath" />
 		<path refid="test-junit.classpath" />
+		<pathelement path="${classpath}" />
 		<pathelement path="${project.dir}/test/classes" />
 		<pathelement path="${project.dir}/lib/portal/commons-beanutils.jar" />
 		<pathelement path="${project.dir}/lib/portal/commons-configuration.jar" />
@@ -53,6 +54,7 @@
 		<pathelement path="${project.dir}/lib/portal/commons-logging.jar" />
 		<pathelement path="${project.dir}/lib/portal/commons-codec.jar" />
 		<pathelement path="${project.dir}/lib/portal/concurrent.jar" />
+		<pathelement path="${project.dir}/lib/portal/dom4j.jar" />
 		<pathelement path="${project.dir}/lib/portal/easyconf.jar" />
 		<pathelement path="${project.dir}/lib/portal/hessian.jar" />
 		<pathelement path="${project.dir}/lib/portal/hibernate3.jar" />
@@ -73,6 +75,7 @@
 			<path refid="test-soap.classpath" />
 			<path refid="test-spring-remoting.classpath" />
 			<pathelement path="${project.dir}/portal-impl/classes" />
+			<pathelement path="${project.dir}/portal-web/docroot/WEB-INF/classes" />
 		</path>
 
 		<javac
