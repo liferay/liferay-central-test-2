@@ -28,9 +28,17 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.SystemProperties;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import java.sql.Types;
+
+import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -173,6 +181,135 @@ public class UpgradeMappingTables extends UpgradeProcess {
 		upgradeTable.setCreateSQL(_CREATE_USERS_USERGROUPS);
 
 		upgradeTable.updateTable();
+
+		// Persist value mappers in case the portal was customized with
+		// additional tables that referenced these ids. This allows developers
+		// to retrieve the keys at a later point and build scripts to upgrade
+		// the other tables.
+
+		persistValueMapper(
+			AvailableMappersUtil.getBlogsCategoryIdMapper(),
+			"blogs-category-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getBlogsEntryIdMapper(), "blogs-entry-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getBookmarksFolderIdMapper(),
+			"bookmarks-folder-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getBookmarksEntryIdMapper(),
+			"bookmarks-entry-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getCalEventIdMapper(), "cal-event-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getCompanyIdMapper(), "company-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getContactIdMapper(), "contact-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getDLFileEntryIdMapper(), "dl-file-entry-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getDLFileShortcutIdMapper(),
+			"dl-file-shortcut-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getDLFolderIdMapper(), "dl-folder-id");
+
+		persistValueMapper(AvailableMappersUtil.getGroupIdMapper(), "group-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getIGFolderIdMapper(), "ig-folder-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getIGImageIdMapper(), "ig-image-id");
+
+		persistValueMapper(AvailableMappersUtil.getImageIdMapper(), "image-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getJournalArticleIdMapper(),
+			"journal-article-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getJournalStructureIdMapper(),
+			"journal-structure-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getJournalTemplateIdMapper(),
+			"journal-template-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getLayoutPlidMapper(), "layout-plid");
+
+		persistValueMapper(
+			AvailableMappersUtil.getMBCategoryIdMapper(), "mb-category-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getMBMessageIdMapper(), "mb-message-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getOrganizationIdMapper(), "organization-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getPollsQuestionIdMapper(),
+			"polls-question-id");
+
+		persistValueMapper(AvailableMappersUtil.getRoleIdMapper(), "role-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getShoppingCategoryIdMapper(),
+			"shopping-category-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getShoppingItemIdMapper(), "shopping-item-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getUserGroupIdMapper(), "user-group-id");
+
+		persistValueMapper(AvailableMappersUtil.getUserIdMapper(), "user-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getWikiNodeIdMapper(), "wiki-node-id");
+
+		persistValueMapper(
+			AvailableMappersUtil.getWikiPageIdMapper(), "wiki-page-id");
+	}
+
+	protected void persistValueMapper(ValueMapper valueMapper, String fileName)
+		throws Exception {
+
+		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
+
+		tmpDir += "/com/liferay/portal/upgrade/v4_3_0/UpgradeMappingTables";
+
+		FileUtil.mkdirs(tmpDir);
+
+		BufferedWriter bw = new BufferedWriter(
+			new FileWriter(tmpDir + "/" + fileName + ".txt"));
+
+		try {
+			Iterator itr = valueMapper.iterator();
+
+			while (itr.hasNext()) {
+				Object oldValue = itr.next();
+
+				Object newValue = valueMapper.getNewValue(oldValue);
+
+				bw.write(oldValue + "=" + newValue);
+
+				if (itr.hasNext()) {
+					bw.write("\n");
+				}
+			}
+		}
+		finally {
+			bw.close();
+		}
 	}
 
 	private static final String _TABLE_GROUPS_ORGS = "Groups_Orgs";
@@ -316,6 +453,6 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			"primary key (userId, userGroupId)" +
 		")";
 
-	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
+	private static Log _log = LogFactory.getLog(UpgradeMappingTables.class);
 
 }
