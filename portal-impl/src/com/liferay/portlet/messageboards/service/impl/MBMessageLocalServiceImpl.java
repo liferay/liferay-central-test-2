@@ -1140,12 +1140,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					PropsUtil.SMTP_SERVER_ENABLED))) {
 
 				mailingListAddress = MBUtil.getMailingListAddress(
-					message.getCategoryId(), company.getCompanyId());
+					message.getCategoryId(), company.getMx());
 			}
 
 			String replyToAddress = mailingListAddress;
 			String messageId = MBUtil.getMailId(
-				message.getMessageId(), company.getCompanyId());
+				message.getMessageId(), company.getMx());
 
 			fromName = StringUtil.replace(
 				fromName,
@@ -1192,7 +1192,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				body = MBUtil.getEmailMessageUpdatedBody(prefs);
 				signature = MBUtil.getEmailMessageUpdatedSignature(prefs);
 				inReplyTo = MBUtil.getMailId(
-					message.getParentMessageId(), company.getCompanyId());
+					message.getParentMessageId(), company.getMx());
 			}
 			else {
 				subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(prefs);

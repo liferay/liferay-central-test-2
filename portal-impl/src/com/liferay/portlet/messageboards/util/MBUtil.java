@@ -22,15 +22,9 @@
 
 package com.liferay.portlet.messageboards.util;
 
-import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -59,6 +53,9 @@ import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 import javax.servlet.jsp.PageContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBUtil.java.html"><b><i>View Source</i></b></a>
@@ -336,40 +333,17 @@ public class MBUtil {
 		}
 	}
 
-	public static String getMailId(long messageId, long companyId) {
-
-		Company company = null;
-		String companyMX = "localhost";
-		
-		try {
-			company = CompanyLocalServiceUtil.getCompanyById(companyId);
-			companyMX = company.getMx();
-		}
-		catch (Exception e) {
-		}
-
+	public static String getMailId(long messageId, String mx) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
 				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
-					StringPool.PERIOD + companyMX + StringPool.GREATER_THAN;
+					StringPool.PERIOD + mx + StringPool.GREATER_THAN;
 	}
 
-	public static String getMailingListAddress(
-		long categoryId, long companyId) {
-		
-		Company company = null;
-		String companyMX = "localhost";
-		
-		try {
-			company = CompanyLocalServiceUtil.getCompanyById(companyId);
-			companyMX = company.getMx();
-		}
-		catch (Exception e) {
-		}
-
+	public static String getMailingListAddress(long categoryId, String mx) {
 		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
 			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
-				companyMX;
+				mx;
 	}
 
 	public static long getMessageId(String mailId) {
@@ -463,5 +437,7 @@ public class MBUtil {
 
 		return rank;
 	}
+
+	private static Log _log = LogFactory.getLog(MBUtil.class);
 
 }
