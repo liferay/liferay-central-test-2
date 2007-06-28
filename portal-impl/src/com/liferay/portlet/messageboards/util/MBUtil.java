@@ -22,9 +22,15 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -331,18 +337,39 @@ public class MBUtil {
 	}
 
 	public static String getMailId(long messageId, long companyId) {
+
+		Company company = null;
+		String companyMX = "localhost";
+		
+		try {
+			company = CompanyLocalServiceUtil.getCompanyById(companyId);
+			companyMX = company.getMx();
+		}
+		catch (Exception e) {
+		}
+
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
 				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
-					StringPool.PERIOD + companyId + StringPool.GREATER_THAN;
+					StringPool.PERIOD + companyMX + StringPool.GREATER_THAN;
 	}
 
 	public static String getMailingListAddress(
 		long categoryId, long companyId) {
+		
+		Company company = null;
+		String companyMX = "localhost";
+		
+		try {
+			company = CompanyLocalServiceUtil.getCompanyById(companyId);
+			companyMX = company.getMx();
+		}
+		catch (Exception e) {
+		}
 
 		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
 			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
-				companyId;
+				companyMX;
 	}
 
 	public static long getMessageId(String mailId) {
