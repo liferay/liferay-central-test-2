@@ -20,14 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.cms.servlet;
+package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.util.Validator;
+import com.liferay.util.ArrayUtil;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
@@ -36,78 +34,102 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CMSServletUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Charles May
  *
  */
-public class CMSServletUtil {
+public class PermissionCacheUtil {
 
-	public static final String GROUP_NAME = CMSServletUtil.class.getName();
+	public static final String GROUP_NAME = PermissionCacheUtil.class.getName();
 
 	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
-
-	public static String LANGUAGE = "_LANGUAGE_";
 
 	public static void clearCache() {
 		_cache.flushGroup(GROUP_NAME);
 	}
 
-	public static String getContent(
-		long groupId, String articleId, String languageId,
-		ThemeDisplay themeDisplay) {
+	public static void clearCache(String name, String primKey) {
+		String resourceGroupKey = _encodeKey(name, primKey);
 
-		String content = null;
+		_cache.flushGroup(resourceGroupKey);
+	}
 
-		if (Validator.isNull(articleId)) {
-			return null;
-		}
+	public static Boolean hasPermission(
+		long userId, long groupId, String name, String primKey,
+		String actionId) {
 
-		articleId = articleId.trim().toUpperCase();
+		Boolean value = null;
 
-		String key = _encodeKey(articleId, languageId);
+		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
 		try {
-			content = (String)_cache.getFromCache(key);
+			value = (Boolean)_cache.getFromCache(key);
 		}
 		catch (NeedsRefreshException nre) {
-			try {
-				content = JournalArticleLocalServiceUtil.getArticleContent(
-					groupId, articleId, languageId, themeDisplay);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage());
-				}
-			}
-
-			if (content != null) {
-				_cache.putInCache(key, content, GROUP_NAME_ARRAY);
-			}
+			value = null;
 		}
 		finally {
-			if (content == null) {
+			if (value == null) {
 				_cache.cancelUpdate(key);
 			}
 		}
 
-		return content;
+		return value;
 	}
 
-	private static String _encodeKey(String articleId, String languageId) {
+	public static Boolean putPermission(
+		long userId, long groupId, String name, String primKey, String actionId,
+		Boolean value) {
+
+		if (value != null) {
+			String key = _encodeKey(userId, groupId, name, primKey, actionId);
+
+			String resourceGroupKey = _encodeKey(name, primKey);
+
+			String[] groups = ArrayUtil.append(
+				GROUP_NAME_ARRAY, resourceGroupKey);
+
+			_cache.putInCache(key, value, groups);
+		}
+
+		return value;
+	}
+
+	private static String _encodeKey(String name, String primKey) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(GROUP_NAME);
 		sm.append(StringPool.POUND);
-		sm.append(articleId);
+		sm.append(name);
 		sm.append(StringPool.POUND);
-		sm.append(languageId);
+		sm.append(primKey);
 
 		return sm.toString();
 	}
 
-	private static Log _log = LogFactory.getLog(CMSServletUtil.class);
+	private static String _encodeKey(
+		long userId, long groupId, String name, String primKey,
+		String actionId) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(GROUP_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(userId);
+		sm.append(StringPool.POUND);
+		sm.append(groupId);
+		sm.append(StringPool.POUND);
+		sm.append(name);
+		sm.append(StringPool.POUND);
+		sm.append(primKey);
+		sm.append(StringPool.POUND);
+		sm.append(actionId);
+
+		return sm.toString();
+	}
+
+	private static Log _log = LogFactory.getLog(PermissionCacheUtil.class);
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
 

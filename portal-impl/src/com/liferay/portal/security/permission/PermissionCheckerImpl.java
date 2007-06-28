@@ -39,6 +39,7 @@ import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
+import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.CollectionFactory;
@@ -84,7 +85,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		signedIn = false;
 		checkGuest = false;
 		bags.clear();
-		results.clear();
 		omniadmin = null;
 		resetValues();
 	}
@@ -243,15 +243,15 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			return false;
 		}
 
-		String resultsKey = getResultsKey(groupId, name, primKey, actionId);
+		Boolean value = PermissionCacheUtil.hasPermission(
+			user.getUserId(), groupId, name, primKey, actionId);
 
-		Boolean resultsValue = (Boolean)results.get(resultsKey);
-
-		if (resultsValue == null) {
-			resultsValue = new Boolean(
+		if (value == null) {
+			value = new Boolean(
 				hasPermissionImpl(groupId, name, primKey, actionId));
 
-			results.put(resultsKey, resultsValue);
+			PermissionCacheUtil.putPermission(
+				user.getUserId(), groupId, name, primKey, actionId, value);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
@@ -261,7 +261,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 
-		return resultsValue.booleanValue();
+		return value.booleanValue();
 	}
 
 	public boolean isOmniadmin() {
@@ -274,14 +274,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	protected PermissionCheckerBag getBag(long groupId) {
 		return (PermissionCheckerBag)bags.get(new Long(groupId));
-	}
-
-	protected String getResultsKey(
-		long groupId, String name, String primKey, String actionId) {
-
-		return user.getUserId() + RESULTS_SEPARATOR + groupId +
-			RESULTS_SEPARATOR + name + RESULTS_SEPARATOR + primKey +
-				RESULTS_SEPARATOR + actionId;
 	}
 
 	protected boolean hasPermissionImpl(
@@ -546,7 +538,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	protected boolean signedIn;
 	protected boolean checkGuest;
 	protected Map bags = CollectionFactory.getHashMap();
-	protected Map results = CollectionFactory.getHashMap();
 	protected Boolean omniadmin;
 
 	private static Log _log = LogFactory.getLog(PermissionCheckerImpl.class);

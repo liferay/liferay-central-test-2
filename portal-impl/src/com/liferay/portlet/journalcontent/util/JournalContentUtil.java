@@ -66,8 +66,7 @@ public class JournalContentUtil {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		String articleGroupKey = _encodeKey(
-			groupId, articleId, templateId, null);
+		String articleGroupKey = _encodeKey(groupId, articleId, templateId);
 
 		_cache.flushGroup(articleGroupKey);
 	}
@@ -108,7 +107,7 @@ public class JournalContentUtil {
 
 			if (content != null) {
 				String articleGroupKey = _encodeKey(
-					groupId, articleId, templateId, null);
+					groupId, articleId, templateId);
 
 				String[] groups = ArrayUtil.append(
 					GROUP_NAME_ARRAY, articleGroupKey);
@@ -123,6 +122,12 @@ public class JournalContentUtil {
 		}
 
 		return content;
+	}
+
+	private static String _encodeKey(
+		long groupId, String articleId, String templateId) {
+
+		return _encodeKey(groupId, articleId, templateId, null);
 	}
 
 	private static String _encodeKey(
