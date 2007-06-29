@@ -374,6 +374,7 @@
 		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
 		<column name="priority" type="int" />
+		<column name="dlFolderId" type="long" />
 
 		<!-- Order -->
 
@@ -402,6 +403,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="friendlyURL" />
+		</finder>
+		<finder name="G_P_DLF" return-type="Layout">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="dlFolderId" />
 		</finder>
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">

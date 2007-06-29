@@ -24,10 +24,12 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -128,28 +130,25 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Layout
 
+		String[] pathArray = folder.getPathArray();
+
 		boolean layoutsSyncEnabled = GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
 
 		if (layoutsSyncEnabled &&
 			(parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
-			DLFolder parentFolder = DLFolderUtil.findByPrimaryKey(
-				parentFolderId);
-
-			String parentFolderName = parentFolder.getName();
-
 			String layoutsSyncPrivateFolder = GetterUtil.getString(
 				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
 			String layoutsSyncPublicFolder = GetterUtil.getString(
 				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
 
-			if (parentFolderName.equals(layoutsSyncPrivateFolder) ||
-				parentFolderName.equals(layoutsSyncPublicFolder)) {
+			if (pathArray[0].equals(layoutsSyncPrivateFolder) ||
+				pathArray[0].equals(layoutsSyncPublicFolder)) {
 
 				boolean privateLayout = true;
 
-				if (parentFolderName.equals(layoutsSyncPublicFolder)) {
+				if (pathArray[0].equals(layoutsSyncPublicFolder)) {
 					privateLayout = false;
 				}
 
@@ -159,9 +158,20 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				boolean hidden = false;
 				String friendlyURL = StringPool.BLANK;
 
+				Layout dlFolderLayout = null;
+
+				try {
+					dlFolderLayout = LayoutLocalServiceUtil.getDLFolderLayout(
+						groupId, privateLayout, folder.getParentFolderId());
+
+					parentLayoutId = dlFolderLayout.getLayoutId();
+				}
+				catch (NoSuchLayoutException nsle) {
+				}
+
 				LayoutLocalServiceUtil.addLayout(
 					userId, groupId, privateLayout, parentLayoutId, name, title,
-					type, hidden, friendlyURL);
+					type, hidden, friendlyURL, folder.getFolderId());
 			}
 		}
 

@@ -64,6 +64,13 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
+		boolean privateLayout, long parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL, long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteLayout(long plid)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -88,6 +95,11 @@ public interface LayoutLocalService {
 
 	public long getDefaultPlid(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Layout getDLFolderLayout(long groupId,
+		boolean privateLayout, long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(long groupId,
 		boolean privateLayout, java.lang.String friendlyURL)

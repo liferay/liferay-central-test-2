@@ -700,6 +700,79 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public Layout findByG_P_DLF(long groupId, boolean privateLayout,
+		long dlFolderId) throws NoSuchLayoutException, SystemException {
+		Layout layout = fetchByG_P_DLF(groupId, privateLayout, dlFolderId);
+
+		if (layout == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Layout exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("privateLayout=");
+			msg.append(privateLayout);
+			msg.append(", ");
+			msg.append("dlFolderId=");
+			msg.append(dlFolderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+
+		return layout;
+	}
+
+	public Layout fetchByG_P_DLF(long groupId, boolean privateLayout,
+		long dlFolderId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("dlFolderId = ?");
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("parentLayoutId ASC").append(", ");
+			query.append("priority ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, dlFolderId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			Layout layout = (Layout)list.get(0);
+
+			return layout;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -810,6 +883,12 @@ public class LayoutPersistenceImpl extends BasePersistence
 	public void removeByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws NoSuchLayoutException, SystemException {
 		Layout layout = findByG_P_F(groupId, privateLayout, friendlyURL);
+		remove(layout);
+	}
+
+	public void removeByG_P_DLF(long groupId, boolean privateLayout,
+		long dlFolderId) throws NoSuchLayoutException, SystemException {
+		Layout layout = findByG_P_DLF(groupId, privateLayout, dlFolderId);
 		remove(layout);
 	}
 
@@ -987,6 +1066,51 @@ public class LayoutPersistenceImpl extends BasePersistence
 			if (friendlyURL != null) {
 				q.setString(queryPos++, friendlyURL);
 			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_P_DLF(long groupId, boolean privateLayout,
+		long dlFolderId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+			query.append("groupId = ?");
+			query.append(" AND ");
+			query.append("privateLayout = ?");
+			query.append(" AND ");
+			query.append("dlFolderId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+			q.setBoolean(queryPos++, privateLayout);
+			q.setLong(queryPos++, dlFolderId);
 
 			Iterator itr = q.list().iterator();
 

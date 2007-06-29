@@ -96,6 +96,7 @@ create index IX_E802AA3C on JournalTemplate (groupId, templateId);
 create index IX_1B12CA20 on JournalTemplate (templateId);
 
 create index IX_705F5AA3 on Layout (groupId, privateLayout);
+create index IX_5CAEEB28 on Layout (groupId, privateLayout, dlFolderId);
 create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);
 create index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
 create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);

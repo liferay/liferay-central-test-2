@@ -203,6 +203,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="priority" type="int" />
+		<field name="dlFolderId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutSet">
 		<field name="layoutSetId" type="long" />

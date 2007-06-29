@@ -154,6 +154,7 @@ public class LayoutJSONSerializer {
 		}
 
 		jsonObj.put("priority", model.getPriority());
+		jsonObj.put("dlFolderId", model.getDlFolderId());
 
 		return jsonObj;
 	}

@@ -134,4 +134,8 @@ public interface LayoutModel extends BaseModel {
 	public int getPriority();
 
 	public void setPriority(int priority);
+
+	public long getDlFolderId();
+
+	public void setDlFolderId(long dlFolderId);
 }

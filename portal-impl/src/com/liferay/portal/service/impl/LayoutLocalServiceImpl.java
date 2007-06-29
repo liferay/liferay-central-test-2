@@ -86,6 +86,7 @@ import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
@@ -148,6 +149,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
+		return addLayout(
+			userId, groupId, privateLayout, parentLayoutId, name, title, type,
+			hidden, friendlyURL, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+	}
+
+	public Layout addLayout(
+			long userId, long groupId, boolean privateLayout,
+			long parentLayoutId, String name, String title, String type,
+			boolean hidden, String friendlyURL, long dlFolderId)
+		throws PortalException, SystemException {
+
 		// Layout
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -175,6 +187,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
 		layout.setPriority(priority);
+		layout.setDlFolderId(dlFolderId);
 
 		LayoutUtil.update(layout);
 
@@ -522,6 +535,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return LayoutImpl.DEFAULT_PLID;
+	}
+
+	public Layout getDLFolderLayout(
+			long groupId, boolean privateLayout, long dlFolderId)
+		throws PortalException, SystemException {
+
+		return LayoutUtil.findByG_P_DLF(groupId, privateLayout, dlFolderId);
 	}
 
 	public Layout getFriendlyURLLayout(

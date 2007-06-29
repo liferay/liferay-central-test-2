@@ -77,6 +77,18 @@ public class LayoutLocalServiceUtil {
 			parentLayoutId, name, title, type, hidden, friendlyURL);
 	}
 
+	public static com.liferay.portal.model.Layout addLayout(long userId,
+		long groupId, boolean privateLayout, long parentLayoutId,
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL, long dlFolderId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.addLayout(userId, groupId, privateLayout,
+			parentLayoutId, name, title, type, hidden, friendlyURL, dlFolderId);
+	}
+
 	public static void deleteLayout(long plid)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -122,6 +134,16 @@ public class LayoutLocalServiceUtil {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.getDefaultPlid(groupId, privateLayout);
+	}
+
+	public static com.liferay.portal.model.Layout getDLFolderLayout(
+		long groupId, boolean privateLayout, long dlFolderId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getDLFolderLayout(groupId, privateLayout,
+			dlFolderId);
 	}
 
 	public static com.liferay.portal.model.Layout getFriendlyURLLayout(

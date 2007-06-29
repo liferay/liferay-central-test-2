@@ -264,6 +264,20 @@ public class LayoutUtil {
 		return getPersistence().fetchByG_P_F(groupId, privateLayout, friendlyURL);
 	}
 
+	public static com.liferay.portal.model.Layout findByG_P_DLF(long groupId,
+		boolean privateLayout, long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
+		return getPersistence().findByG_P_DLF(groupId, privateLayout, dlFolderId);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByG_P_DLF(long groupId,
+		boolean privateLayout, long dlFolderId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_P_DLF(groupId, privateLayout,
+			dlFolderId);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -317,6 +331,13 @@ public class LayoutUtil {
 		getPersistence().removeByG_P_F(groupId, privateLayout, friendlyURL);
 	}
 
+	public static void removeByG_P_DLF(long groupId, boolean privateLayout,
+		long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
+		getPersistence().removeByG_P_DLF(groupId, privateLayout, dlFolderId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -340,6 +361,12 @@ public class LayoutUtil {
 	public static int countByG_P_F(long groupId, boolean privateLayout,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_P_F(groupId, privateLayout, friendlyURL);
+	}
+
+	public static int countByG_P_DLF(long groupId, boolean privateLayout,
+		long dlFolderId) throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P_DLF(groupId, privateLayout,
+			dlFolderId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

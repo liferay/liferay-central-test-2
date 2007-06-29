@@ -442,7 +442,8 @@ create table Layout (
 	wapThemeId VARCHAR(75) null,
 	wapColorSchemeId VARCHAR(75) null,
 	css STRING null,
-	priority INTEGER
+	priority INTEGER,
+	dlFolderId LONG
 );
 
 create table LayoutSet (

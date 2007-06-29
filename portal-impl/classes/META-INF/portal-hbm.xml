@@ -178,6 +178,7 @@
 		<property name="wapColorSchemeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="css" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="dlFolderId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutSetImpl" table="LayoutSet">
 		<cache usage="read-write" />

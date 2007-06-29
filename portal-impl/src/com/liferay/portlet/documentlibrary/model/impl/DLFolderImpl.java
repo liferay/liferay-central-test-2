@@ -22,7 +22,13 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="DLFolderImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,6 +50,36 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 		else {
 			return false;
 		}
+	}
+
+	public String getPath() throws PortalException, SystemException {
+		StringMaker sm = new StringMaker();
+
+		DLFolder folder = this;
+
+		while (true) {
+			sm.insert(0, folder.getName());
+			sm.insert(0, StringPool.SLASH);
+
+			if (getParentFolderId() != DEFAULT_PARENT_FOLDER_ID) {
+				folder = DLFolderLocalServiceUtil.getFolder(
+					folder.getParentFolderId());
+
+				break;
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public String[] getPathArray() throws PortalException, SystemException {
+		String path = getPath();
+
+		// Remove leading /
+
+		path = path.substring(0, path.length());
+
+		return StringUtil.split(path, StringPool.SLASH);
 	}
 
 }

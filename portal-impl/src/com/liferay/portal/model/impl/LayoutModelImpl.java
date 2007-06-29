@@ -71,9 +71,10 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "wapThemeId", new Integer(Types.VARCHAR) },
 			{ "wapColorSchemeId", new Integer(Types.VARCHAR) },
 			{ "css", new Integer(Types.VARCHAR) },
-			{ "priority", new Integer(Types.INTEGER) }
+			{ "priority", new Integer(Types.INTEGER) },
+			{ "dlFolderId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,dlFolderId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Layout";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout"), XSS_ALLOW);
@@ -399,6 +400,16 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getDlFolderId() {
+		return _dlFolderId;
+	}
+
+	public void setDlFolderId(long dlFolderId) {
+		if (dlFolderId != _dlFolderId) {
+			_dlFolderId = dlFolderId;
+		}
+	}
+
 	public Object clone() {
 		LayoutImpl clone = new LayoutImpl();
 		clone.setPlid(getPlid());
@@ -421,6 +432,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setWapColorSchemeId(getWapColorSchemeId());
 		clone.setCss(getCss());
 		clone.setPriority(getPriority());
+		clone.setDlFolderId(getDlFolderId());
 
 		return clone;
 	}
@@ -512,4 +524,5 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private String _wapColorSchemeId;
 	private String _css;
 	private int _priority;
+	private long _dlFolderId;
 }
