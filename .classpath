@@ -40,6 +40,7 @@
 	<classpathentry kind="lib" path="lib/development/jsse.jar"/>
 	<classpathentry kind="lib" path="lib/development/jta.jar"/>
 	<classpathentry kind="lib" path="lib/development/junit.jar"/>
+	<classpathentry kind="lib" path="lib/development/jymsg.jar"/>
 	<classpathentry kind="lib" path="lib/development/mail.jar"/>
 	<classpathentry kind="lib" path="lib/development/myfaces-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/myfaces-impl.jar"/>
@@ -160,7 +161,6 @@
 	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xpp3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xstream.jar"/>
-	<classpathentry kind="lib" path="lib/portal/ym.jar"/>
 	<classpathentry kind="lib" path="portal-client/portal-client.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
