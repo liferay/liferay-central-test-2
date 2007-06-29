@@ -86,7 +86,7 @@ public class IntegerType implements UserType {
 		try {
 			value = (Integer)Hibernate.INTEGER.nullSafeGet(rs, names[0]);
 		}
-		catch (SQLException e) {
+		catch (SQLException sqle) {
 		}
 
 		if (value == null) {

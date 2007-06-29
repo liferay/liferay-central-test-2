@@ -74,20 +74,20 @@ public class UpgradeUser extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn =
 			new PKUpgradeColumnImpl("userId", new Integer(Types.VARCHAR), true);
 
-		UpgradeColumn upgradeUserPortraitIdColumn =
-			new UserPortraitIdUpgradeColumnImpl(
-				upgradePKColumn, AvailableMappersUtil.getImageIdMapper());
-
 		UpgradeColumn upgradeCompanyIdColumn = new TempUpgradeColumnImpl(
 			"companyId", new Integer(Types.VARCHAR));
 
 		UpgradeColumn upgradeContactIdColumn = new TempUpgradeColumnImpl(
 			"contactId", new Integer(Types.VARCHAR));
 
+		UpgradeColumn upgradeUserPortraitIdColumn =
+			new UserPortraitIdUpgradeColumnImpl(
+				upgradePKColumn, AvailableMappersUtil.getImageIdMapper());
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, upgradePKColumn,
-			upgradeUserPortraitIdColumn, upgradeCompanyIdColumn,
-			upgradeContactIdColumn);
+			upgradeCompanyIdColumn, upgradeContactIdColumn,
+			upgradeUserPortraitIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -125,10 +125,9 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS,
-			upgradeContactIdColumn, upgradeUserIdColumn,
-			upgradeCompanyIdColumn, upgradeAccountIdColumn,
-			upgradeParentContactIdColumn, upgradePrefixIdColumn,
-			upgradeSuffixIdColumn);
+			upgradeContactIdColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
+			upgradeAccountIdColumn, upgradeParentContactIdColumn,
+			upgradePrefixIdColumn, upgradeSuffixIdColumn);
 
 		upgradeTable.updateTable();
 

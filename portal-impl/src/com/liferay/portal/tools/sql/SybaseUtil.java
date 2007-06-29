@@ -77,12 +77,11 @@ public class SybaseUtil extends DBUtil {
 
 		sm.append("use master\n");
 		sm.append(
-			"exec sp_dboption '" + databaseName + "' ," +
+			"exec sp_dboption '" + databaseName + "', " +
 				"'allow nulls by default' , true\n");
 		sm.append("go\n\n");
-
 		sm.append(
-			"exec sp_dboption '" + databaseName + "' ," +
+			"exec sp_dboption '" + databaseName + "', " +
 				"'select into/bulkcopy/pllsort' , true\n");
 		sm.append("go\n\n");
 
@@ -116,8 +115,8 @@ public class SybaseUtil extends DBUtil {
 
 		while ((line = br.readLine()) != null) {
 
-			if (line.contains(DROP_COLUMN)) {
-				line = line.replaceAll("column", "");
+			if (line.indexOf(DROP_COLUMN) != -1) {
+				line = StringUtil.replace(line, " drop column ", " drop ");
 			}
 
 			if (line.startsWith(ALTER_COLUMN_TYPE)) {
