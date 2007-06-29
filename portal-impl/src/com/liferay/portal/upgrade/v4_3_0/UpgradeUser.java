@@ -51,6 +51,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class UpgradeUser extends UpgradeProcess {
@@ -77,9 +78,16 @@ public class UpgradeUser extends UpgradeProcess {
 			new UserPortraitIdUpgradeColumnImpl(
 				upgradePKColumn, AvailableMappersUtil.getImageIdMapper());
 
+		UpgradeColumn upgradeCompanyIdColumn = new TempUpgradeColumnImpl(
+			"companyId", new Integer(Types.VARCHAR));
+
+		UpgradeColumn upgradeContactIdColumn = new TempUpgradeColumnImpl(
+			"contactId", new Integer(Types.VARCHAR));
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS, upgradePKColumn,
-			upgradeUserPortraitIdColumn);
+			upgradeUserPortraitIdColumn, upgradeCompanyIdColumn,
+			upgradeContactIdColumn);
 
 		upgradeTable.updateTable();
 
@@ -103,12 +111,24 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// Contact
 
-		UpgradeColumn upgradeContactIdColumn = new TempUpgradeColumnImpl(
-			"contactId", new Integer(Types.VARCHAR));
+		UpgradeColumn upgradeAccountIdColumn = new TempUpgradeColumnImpl(
+			"accountId", new Integer(Types.VARCHAR));
+
+		UpgradeColumn upgradeParentContactIdColumn = new TempUpgradeColumnImpl(
+			"parentContactId", new Integer(Types.VARCHAR));
+
+		UpgradeColumn upgradePrefixIdColumn = new TempUpgradeColumnImpl(
+			"prefixId", new Integer(Types.VARCHAR));
+
+		UpgradeColumn upgradeSuffixIdColumn = new TempUpgradeColumnImpl(
+			"suffixId", new Integer(Types.VARCHAR));
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS,
-			upgradeContactIdColumn, upgradeUserIdColumn);
+			upgradeContactIdColumn, upgradeUserIdColumn,
+			upgradeCompanyIdColumn, upgradeAccountIdColumn,
+			upgradeParentContactIdColumn, upgradePrefixIdColumn,
+			upgradeSuffixIdColumn);
 
 		upgradeTable.updateTable();
 

@@ -235,6 +235,10 @@ public abstract class DBUtil {
 					sql = sql.substring(0, sql.length() - 1);
 				}
 
+				if (sql.endsWith("go")) {
+					sql = sql.substring(0, sql.length() - 2);
+				}
+
 				if (_log.isDebugEnabled()) {
 					_log.debug(sql);
 				}

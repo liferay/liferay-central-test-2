@@ -38,6 +38,7 @@ import java.util.List;
  * <a href="DefaultUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Bruno Farache
  *
  */
 public class DefaultUpgradeTableImpl
@@ -260,7 +261,12 @@ public class DefaultUpgradeTableImpl
 		throws Exception {
 
 		if (_upgradeColumns[index] != null) {
-			type = _upgradeColumns[index].getNewColumnType(type);
+			if (getCreateSQL() == null) {
+				type = _upgradeColumns[index].getOldColumnType(type);
+			}
+			else {
+				type = _upgradeColumns[index].getNewColumnType(type);
+			}
 		}
 
 		super.setColumn(ps, index, type, value);

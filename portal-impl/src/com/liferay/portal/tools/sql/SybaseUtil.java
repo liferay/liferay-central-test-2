@@ -35,6 +35,7 @@ import java.io.StringReader;
  * <a href="SybaseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Bruno Farache
  *
  */
 public class SybaseUtil extends DBUtil {
@@ -74,6 +75,17 @@ public class SybaseUtil extends DBUtil {
 
 		sm = new StringMaker();
 
+		sm.append("use master\n");
+		sm.append(
+			"exec sp_dboption '" + databaseName + "' ," +
+				"'allow nulls by default' , true\n");
+		sm.append("go\n\n");
+
+		sm.append(
+			"exec sp_dboption '" + databaseName + "' ," +
+				"'select into/bulkcopy/pllsort' , true\n");
+		sm.append("go\n\n");
+
 		sm.append("use " + databaseName + "\n\n");
 		sm.append(
 			FileUtil.read(
@@ -103,6 +115,11 @@ public class SybaseUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
+
+			if (line.contains(DROP_COLUMN)) {
+				line = line.replaceAll("column", "");
+			}
+
 			if (line.startsWith(ALTER_COLUMN_TYPE)) {
 				String[] template = buildColumnTypeTokens(line);
 
@@ -126,6 +143,8 @@ public class SybaseUtil extends DBUtil {
 
 		return sm.toString();
 	}
+
+	protected static String DROP_COLUMN = "drop column";
 
 	private static String[] _SYBASE = {
 		"--", "1", "0",

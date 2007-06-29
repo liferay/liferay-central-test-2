@@ -252,7 +252,7 @@ public abstract class BaseUpgradeTableImpl {
 				// If the database doesn't allow CLOB types for the column
 				// value, then try retrieving it as a String
 
-				value = rs.getString(name);
+				value = GetterUtil.getString(rs.getString(name));
 			}
 		}
 		else if (t == Types.DOUBLE) {

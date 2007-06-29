@@ -37,6 +37,7 @@ import org.hibernate.usertype.UserType;
  * <a href="IntegerType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class IntegerType implements UserType {
@@ -80,7 +81,13 @@ public class IntegerType implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
 		throws HibernateException, SQLException {
 
-		Integer value = (Integer)Hibernate.INTEGER.nullSafeGet(rs, names[0]);
+		Integer value = null;
+
+		try {
+			value = (Integer)Hibernate.INTEGER.nullSafeGet(rs, names[0]);
+		}
+		catch (SQLException e) {
+		}
 
 		if (value == null) {
 			return new Integer(DEFAULT_VALUE);
