@@ -37,6 +37,7 @@ import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
+import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
@@ -58,6 +59,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupUtil.addUserGroups(groupId, userGroupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public UserGroup addUserGroup(
@@ -119,6 +122,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		// User Group
 
 		UserGroupUtil.remove(userGroupId);
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public UserGroup getUserGroup(long userGroupId)
@@ -167,6 +174,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupUtil.removeUserGroups(groupId, userGroupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public UserGroup updateUserGroup(

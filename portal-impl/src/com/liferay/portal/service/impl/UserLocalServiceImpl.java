@@ -87,6 +87,7 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
+import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -161,6 +162,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
 				userId, groupId, new long[] {role.getRoleId()});
 		}
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
@@ -174,12 +179,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RoleUtil.addUsers(roleId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupUtil.addUsers(userGroupId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public User addUser(
@@ -686,6 +695,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RoleUtil.removeUser(roleId, userId);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUser(long userId)
@@ -760,6 +771,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User
 
 		UserUtil.remove(userId);
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public String encryptUserId(String name)
@@ -1138,18 +1153,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		GroupUtil.setUsers(groupId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.setUsers(roleId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupUtil.setUsers(userGroupId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
@@ -1158,6 +1179,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userIds, groupId);
 
 		GroupUtil.removeUsers(groupId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetPasswordPolicyUsers(
@@ -1172,12 +1195,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RoleUtil.removeUsers(roleId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
 		UserGroupUtil.removeUsers(userGroupId, userIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public User updateActive(long userId, boolean active)
@@ -1291,6 +1318,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (locationId  > 0) {
 			UserUtil.addOrganization(userId, locationId);
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public User updatePassword(
@@ -1489,6 +1518,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Organization and location
 
 		updateOrganizations(userId, organizationId, locationId);
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 
 		return user;
 	}

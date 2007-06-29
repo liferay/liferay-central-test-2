@@ -41,6 +41,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
+import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
@@ -183,6 +184,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		// Role
 
 		RoleUtil.remove(roleId);
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public Role getGroupRole(long companyId, long groupId)
@@ -318,6 +323,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		UserUtil.setRoles(userId, roleIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public Role updateRole(long roleId, String name)

@@ -47,6 +47,7 @@ import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
+import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
@@ -72,6 +73,8 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		GroupUtil.addOrganizations(groupId, organizationIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public Organization addOrganization(
@@ -208,6 +211,10 @@ public class OrganizationLocalServiceImpl
 		// Organization
 
 		OrganizationUtil.remove(organization.getOrganizationId());
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public List getGroupOrganizations(long groupId)
@@ -285,12 +292,16 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		GroupUtil.setOrganizations(groupId, organizationIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.removeOrganizations(groupId, organizationIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetPasswordPolicyOrganizations(

@@ -53,6 +53,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
+import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
@@ -175,12 +176,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RoleUtil.addGroups(roleId, groupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void addUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		UserUtil.addGroups(userId, groupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void checkSystemGroups(long companyId)
@@ -320,6 +325,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Group
 
 		GroupUtil.remove(groupId);
+
+		// Permission cache
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public Group getFriendlyURLGroup(long companyId, String friendlyURL)
@@ -450,24 +459,32 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		RoleUtil.setGroups(roleId, groupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		UserUtil.setGroups(userId, groupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RoleUtil.removeGroups(roleId, groupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		UserUtil.removeGroups(userId, groupIds);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public Group updateGroup(
