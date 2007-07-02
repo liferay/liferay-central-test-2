@@ -30,6 +30,7 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
@@ -99,6 +100,9 @@ public class VirtualHostFilter implements Filter {
 				contextPath.length(), friendlyURL.length());
 		}
 
+		friendlyURL = StringUtil.replace(
+			friendlyURL, StringPool.DOUBLE_SLASH, StringPool.SLASH);
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Friendly URL " + friendlyURL);
 		}
@@ -142,7 +146,9 @@ public class VirtualHostFilter implements Filter {
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
 		if (PortalInstances.isIgnorePath(friendlyURL) ||
-			friendlyURL.startsWith(_PATH_IMAGE)) {
+			friendlyURL.startsWith(_PATH_HTML) ||
+			friendlyURL.startsWith(_PATH_IMAGE) ||
+			friendlyURL.startsWith(_PATH_WAP)) {
 
 			return false;
 		}
@@ -160,7 +166,11 @@ public class VirtualHostFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);
 
+	private static String _PATH_HTML = "/html/";
+
 	private static String _PATH_IMAGE = "/image/";
+
+	private static String _PATH_WAP = "/wap/";
 
 	private ServletContext _ctx;
 
