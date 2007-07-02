@@ -93,26 +93,25 @@ public class WebXMLBuilder {
 						 String mergedWebXML) {
 
 		try {
-			String originalContent = FileUtil.read(originalWebXML);
-
-			int x = originalContent.indexOf("<web-app");
-
-			x = originalContent.indexOf(">", x) + 1;
-
-			int y = originalContent.indexOf("</web-app>");
-
-			originalContent = originalContent.substring(x, y);
-
 			String customContent = FileUtil.read(customWebXML);
 
-			int z = customContent.indexOf("<web-app");
+			int x = customContent.indexOf("<web-app");
 
-			z = customContent.indexOf(">", z) + 1;
+			x = customContent.indexOf(">", x) + 1;
+
+			int y = customContent.indexOf("</web-app>");
+
+			customContent = customContent.substring(x, y);
+
+			String originalContent = FileUtil.read(originalWebXML);
+
+			int z = originalContent.indexOf("<web-app");
+
+			z = originalContent.indexOf(">", z) + 1;
 
 			String mergedContent =
-				customContent.substring(0, z) +
-				originalContent +
-				customContent.substring(z, customContent.length());
+				originalContent.substring(0, z) + customContent +
+					originalContent.substring(z, originalContent.length());
 
 			mergedContent = organizeWebXML(mergedContent);
 
