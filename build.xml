@@ -998,11 +998,18 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.0
 	</target>
 
 	<target name="build-ext-tomcat">
+		<antcall target="build-ext-tomcat-5.5" />
+		<antcall target="build-ext-tomcat-6.0" />
+	</target>
+
+	<target name="build-ext-tomcat-5.5">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
+	</target>
 
+	<target name="build-ext-tomcat-6.0">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=tomcat
 
 app.server.tomcat.version=6.0
@@ -1351,6 +1358,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-tomcat">
+		<antcall target="zip-tomcat-5.5" />
+		<antcall target="zip-tomcat-6.0" />
+	</target>
+
+	<target name="zip-tomcat-5.5">
 		<delete file="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip
@@ -1365,7 +1377,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			destfile="dist/liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}.zip"
 			excludes="bin/jmx.jar"
 		/>
+	</target>
 
+	<target name="zip-tomcat-6.0">
 		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip" failonerror="false" />
 
 		<zip
