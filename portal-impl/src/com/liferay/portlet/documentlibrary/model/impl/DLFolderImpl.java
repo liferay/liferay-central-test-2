@@ -64,7 +64,8 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			if (getParentFolderId() != DEFAULT_PARENT_FOLDER_ID) {
 				folder = DLFolderLocalServiceUtil.getFolder(
 					folder.getParentFolderId());
-
+			}
+			else {
 				break;
 			}
 		}
