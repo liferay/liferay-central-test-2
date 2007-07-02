@@ -31,6 +31,7 @@
 <%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
 <%@ page import="com.liferay.util.License" %>
 <%@ page import="com.liferay.util.Screenshot" %>
+<%@ page import="com.liferay.util.Version" %>
 
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
