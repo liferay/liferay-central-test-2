@@ -146,19 +146,19 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		try {
 			DBUtil dbUtil = DBUtil.getInstance();
 
-			dbUtil.runSQLTemplate("portal-tables.sql");
-			dbUtil.runSQLTemplate("portal-data-common.sql");
-			dbUtil.runSQLTemplate("portal-data-counter.sql");
+			dbUtil.runSQLTemplate("portal-tables.sql", false);
+			dbUtil.runSQLTemplate("portal-data-common.sql", false);
+			dbUtil.runSQLTemplate("portal-data-counter.sql", false);
 
 			if (!GetterUtil.getBoolean(
 					PropsUtil.get(PropsUtil.SCHEMA_RUN_MINIMAL))) {
 
-				dbUtil.runSQLTemplate("portal-data-sample.vm");
+				dbUtil.runSQLTemplate("portal-data-sample.vm", false);
 			}
 
-			dbUtil.runSQLTemplate("portal-data-release.sql");
+			dbUtil.runSQLTemplate("portal-data-release.sql", false);
 			dbUtil.runSQLTemplate("indexes.sql", false);
-			dbUtil.runSQLTemplate("sequences.sql");
+			dbUtil.runSQLTemplate("sequences.sql", false);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
