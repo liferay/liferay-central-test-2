@@ -70,12 +70,13 @@ import org.json.JSONObject;
 public class LayoutServiceJSON {
 	public static JSONObject addLayout(long groupId, boolean privateLayout,
 		long parentLayoutId, java.lang.String name, java.lang.String title,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		java.lang.String description, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.addLayout(groupId,
-				privateLayout, parentLayoutId, name, title, type, hidden,
-				friendlyURL);
+				privateLayout, parentLayoutId, name, title, description, type,
+				hidden, friendlyURL);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
@@ -124,12 +125,13 @@ public class LayoutServiceJSON {
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,
 		long layoutId, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		java.lang.String description, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(groupId,
 				privateLayout, layoutId, parentLayoutId, name, title,
-				languageId, type, hidden, friendlyURL);
+				languageId, description, type, hidden, friendlyURL);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}
@@ -137,13 +139,15 @@ public class LayoutServiceJSON {
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,
 		long layoutId, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
-		java.lang.Boolean iconImage, byte[] iconBytes)
+		java.lang.String description, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL, java.lang.Boolean iconImage,
+		byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(groupId,
 				privateLayout, layoutId, parentLayoutId, name, title,
-				languageId, type, hidden, friendlyURL, iconImage, iconBytes);
+				languageId, description, type, hidden, friendlyURL, iconImage,
+				iconBytes);
 
 		return LayoutJSONSerializer.toJSONObject(returnValue);
 	}

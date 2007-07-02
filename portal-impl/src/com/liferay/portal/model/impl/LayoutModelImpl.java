@@ -60,6 +60,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "parentLayoutId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
 			{ "typeSettings", new Integer(Types.CLOB) },
 			{ "hidden_", new Integer(Types.BOOLEAN) },
@@ -74,7 +75,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "priority", new Integer(Types.INTEGER) },
 			{ "dlFolderId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,dlFolderId LONG)";
+	public static String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,dlFolderId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Layout";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout"), XSS_ALLOW);
@@ -83,6 +84,9 @@ public class LayoutModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.title"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Layout.description"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.type"),
@@ -215,6 +219,23 @@ public class LayoutModelImpl extends BaseModelImpl {
 			}
 
 			_title = title;
+		}
+	}
+
+	public String getDescription() {
+		return GetterUtil.getString(_description);
+	}
+
+	public void setDescription(String description) {
+		if (((description == null) && (_description != null)) ||
+				((description != null) && (_description == null)) ||
+				((description != null) && (_description != null) &&
+				!description.equals(_description))) {
+			if (!XSS_ALLOW_DESCRIPTION) {
+				description = XSSUtil.strip(description);
+			}
+
+			_description = description;
 		}
 	}
 
@@ -420,6 +441,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setParentLayoutId(getParentLayoutId());
 		clone.setName(getName());
 		clone.setTitle(getTitle());
+		clone.setDescription(getDescription());
 		clone.setType(getType());
 		clone.setTypeSettings(getTypeSettings());
 		clone.setHidden(getHidden());
@@ -512,6 +534,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private long _parentLayoutId;
 	private String _name;
 	private String _title;
+	private String _description;
 	private String _type;
 	private String _typeSettings;
 	private boolean _hidden;

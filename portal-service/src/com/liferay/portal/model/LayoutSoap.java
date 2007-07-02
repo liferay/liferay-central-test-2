@@ -55,6 +55,7 @@ public class LayoutSoap implements Serializable {
 		soapModel.setParentLayoutId(model.getParentLayoutId());
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
+		soapModel.setDescription(model.getDescription());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setHidden(model.getHidden());
@@ -160,6 +161,14 @@ public class LayoutSoap implements Serializable {
 
 	public void setTitle(String title) {
 		_title = title;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
 	}
 
 	public String getType() {
@@ -282,6 +291,7 @@ public class LayoutSoap implements Serializable {
 	private long _parentLayoutId;
 	private String _name;
 	private String _title;
+	private String _description;
 	private String _type;
 	private String _typeSettings;
 	private boolean _hidden;

@@ -538,7 +538,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			defaultUserId, group.getGroupId(), false,
 			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
-			LayoutImpl.TYPE_PORTLET, false, friendlyURL);
+			StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false, friendlyURL);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();

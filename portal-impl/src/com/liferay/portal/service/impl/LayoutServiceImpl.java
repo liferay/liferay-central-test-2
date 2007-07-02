@@ -48,8 +48,8 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
-			String name, String title, String type, boolean hidden,
-			String friendlyURL)
+			String name, String title, String description, String type,
+			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -57,7 +57,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		return LayoutLocalServiceUtil.addLayout(
 			getUserId(), groupId, privateLayout, parentLayoutId, name, title,
-			type, hidden, friendlyURL);
+			description, type, hidden, friendlyURL);
 	}
 
 	public void deleteLayout(long plid)
@@ -135,7 +135,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, String name, String title, String languageId,
-			String type, boolean hidden, String friendlyURL)
+			String description, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
@@ -144,14 +144,14 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		return LayoutLocalServiceUtil.updateLayout(
 			groupId, privateLayout, layoutId, parentLayoutId, name, title,
-			languageId, type, hidden, friendlyURL);
+			languageId, description, type, hidden, friendlyURL);
 	}
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, String name, String title, String languageId,
-			String type, boolean hidden, String friendlyURL, Boolean iconImage,
-			byte[] iconBytes)
+			String description, String type, boolean hidden, String friendlyURL,
+			Boolean iconImage, byte[] iconBytes)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
@@ -160,7 +160,8 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		return LayoutLocalServiceUtil.updateLayout(
 			groupId, privateLayout, layoutId, parentLayoutId, name, title,
-			languageId, type, hidden, friendlyURL, iconImage, iconBytes);
+			languageId, description, type, hidden, friendlyURL, iconImage,
+			iconBytes);
 	}
 
 	public Layout updateLayout(

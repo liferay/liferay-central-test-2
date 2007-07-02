@@ -61,7 +61,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			sm.insert(0, folder.getName());
 			sm.insert(0, StringPool.SLASH);
 
-			if (getParentFolderId() != DEFAULT_PARENT_FOLDER_ID) {
+			if (folder.getParentFolderId() != DEFAULT_PARENT_FOLDER_ID) {
 				folder = DLFolderLocalServiceUtil.getFolder(
 					folder.getParentFolderId());
 			}
@@ -78,7 +78,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 		// Remove leading /
 
-		path = path.substring(0, path.length());
+		path = path.substring(1, path.length());
 
 		return StringUtil.split(path, StringPool.SLASH);
 	}

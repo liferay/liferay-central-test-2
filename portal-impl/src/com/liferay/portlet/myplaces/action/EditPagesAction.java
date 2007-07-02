@@ -75,13 +75,14 @@ public class EditPagesAction extends PortletAction {
 			long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 			String name = "New Page";
 			String title = StringPool.BLANK;
+			String description = StringPool.BLANK;
 			String type = LayoutImpl.TYPE_PORTLET;
 			boolean hidden = false;
 			String friendlyURL = StringPool.BLANK;
 
 			layout = LayoutServiceUtil.addLayout(
-				groupId, privateLayout, parentLayoutId, name, title, type,
-				hidden, friendlyURL);
+				groupId, privateLayout, parentLayoutId, name, title,
+				description, type, hidden, friendlyURL);
 		}
 
 		if (layout != null) {

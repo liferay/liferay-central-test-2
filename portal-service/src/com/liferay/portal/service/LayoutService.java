@@ -51,8 +51,8 @@ package com.liferay.portal.service;
 public interface LayoutService {
 	public com.liferay.portal.model.Layout addLayout(long groupId,
 		boolean privateLayout, long parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -92,17 +92,17 @@ public interface LayoutService {
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String languageId, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL, java.lang.Boolean iconImage,
-		byte[] iconBytes)
+		java.lang.String languageId, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

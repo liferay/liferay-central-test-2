@@ -76,6 +76,15 @@ public class LayoutJSONSerializer {
 			jsonObj.put("title", title.toString());
 		}
 
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
 		String type = model.getType();
 
 		if (type == null) {

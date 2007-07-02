@@ -148,7 +148,7 @@ public class ServicePreAction extends Action {
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			user.getUserId(), userGroup.getGroupId(), true,
 			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
-			LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
+			StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();

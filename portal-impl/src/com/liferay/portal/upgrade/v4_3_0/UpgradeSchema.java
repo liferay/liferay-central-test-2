@@ -49,6 +49,7 @@ public class UpgradeSchema extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		runSQLTemplate("update-4.2.0-4.3.0.sql", false);
+		runSQLTemplate("update-4.3.0-4.3.1.sql", false);
 
 		for (int i = 0; i < _OLD_TABLES.length; i++) {
 			try {

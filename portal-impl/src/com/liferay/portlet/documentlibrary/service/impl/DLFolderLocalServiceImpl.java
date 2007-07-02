@@ -154,6 +154,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 				long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 				String title = StringPool.BLANK;
+				String layoutDescription = StringPool.BLANK;
 				String type = LayoutImpl.TYPE_PORTLET;
 				boolean hidden = false;
 				String friendlyURL = StringPool.BLANK;
@@ -171,7 +172,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 				LayoutLocalServiceUtil.addLayout(
 					userId, groupId, privateLayout, parentLayoutId, name, title,
-					type, hidden, friendlyURL, folder.getFolderId());
+					layoutDescription, type, hidden, friendlyURL,
+					folder.getFolderId());
 			}
 		}
 

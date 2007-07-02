@@ -55,6 +55,7 @@ public class DBBuilder {
 			_buildSQLFile("indexes");
 			_buildSQLFile("sequences");
 			_buildSQLFile("update-4.2.0-4.3.0");
+			_buildSQLFile("update-4.3.0-4.3.1");
 			_buildCreateFile();
 		}
 		catch (Exception e) {

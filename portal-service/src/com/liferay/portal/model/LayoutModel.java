@@ -83,6 +83,10 @@ public interface LayoutModel extends BaseModel {
 
 	public void setTitle(String title);
 
+	public String getDescription();
+
+	public void setDescription(String description);
+
 	public String getType();
 
 	public void setType(String type);

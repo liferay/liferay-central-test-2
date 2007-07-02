@@ -431,6 +431,7 @@ create table Layout (
 	parentLayoutId LONG,
 	name STRING null,
 	title STRING null,
+	description STRING null,
 	type_ VARCHAR(75) null,
 	typeSettings TEXT null,
 	hidden_ BOOLEAN,

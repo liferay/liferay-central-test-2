@@ -424,6 +424,7 @@ public class EditPagesAction extends PortletAction {
 		String name = ParamUtil.getString(uploadReq, "name");
 		String title = ParamUtil.getString(uploadReq, "title");
 		String languageId = ParamUtil.getString(uploadReq, "curLanguageId");
+		String description = ParamUtil.getString(uploadReq, "description");
 		String type = ParamUtil.getString(uploadReq, "type");
 		boolean hidden = ParamUtil.getBoolean(uploadReq, "hidden");
 		String friendlyURL = ParamUtil.getString(uploadReq, "friendlyURL");
@@ -446,8 +447,8 @@ public class EditPagesAction extends PortletAction {
 
 				Layout layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, name, title,
-					parentLayout.getType(), parentLayout.isHidden(),
-					friendlyURL);
+					description, parentLayout.getType(),
+					parentLayout.isHidden(), friendlyURL);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
@@ -455,8 +456,8 @@ public class EditPagesAction extends PortletAction {
 			}
 			else {
 				Layout layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, name, title, type,
-					hidden, friendlyURL);
+					groupId, privateLayout, parentLayoutId, name, title,
+					description, type, hidden, friendlyURL);
 
 				if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 					LayoutTypePortlet layoutTypePortlet =
@@ -481,7 +482,7 @@ public class EditPagesAction extends PortletAction {
 
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
-				name, title, languageId, type, hidden, friendlyURL,
+				name, title, languageId, description, type, hidden, friendlyURL,
 				new Boolean(iconImage), iconBytes);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {

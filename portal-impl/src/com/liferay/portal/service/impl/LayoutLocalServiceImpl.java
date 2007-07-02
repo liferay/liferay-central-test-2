@@ -145,19 +145,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, String name, String title, String type,
-			boolean hidden, String friendlyURL)
+			long parentLayoutId, String name, String title, String description,
+			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, name, title, type,
-			hidden, friendlyURL, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+			userId, groupId, privateLayout, parentLayoutId, name, title,
+			description, type, hidden, friendlyURL,
+			DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, String name, String title, String type,
-			boolean hidden, String friendlyURL, long dlFolderId)
+			long parentLayoutId, String name, String title, String description,
+			String type, boolean hidden, String friendlyURL, long dlFolderId)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -183,6 +184,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setName(name, null);
 		layout.setTitle(title, null);
+		layout.setDescription(description);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
@@ -975,19 +977,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, String name, String title, String languageId,
-			String type, boolean hidden, String friendlyURL)
+			String description, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		return updateLayout(
 			groupId, privateLayout, layoutId, parentLayoutId, name, title,
-			languageId, type, hidden, friendlyURL, null, null);
+			languageId, description, type, hidden, friendlyURL, null, null);
 	}
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, String name, String title, String languageId,
-			String type, boolean hidden, String friendlyURL, Boolean iconImage,
-			byte[] iconBytes)
+			String description, String type, boolean hidden, String friendlyURL,
+			Boolean iconImage, byte[] iconBytes)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -1014,6 +1016,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setName(name, locale);
 		layout.setTitle(title, locale);
+		layout.setDescription(description);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);

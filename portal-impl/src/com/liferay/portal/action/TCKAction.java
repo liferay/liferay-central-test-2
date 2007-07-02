@@ -86,8 +86,8 @@ public class TCKAction extends Action {
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
 				userId, groupId, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
-				"TCKAction", StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
-				StringPool.BLANK);
+				"TCKAction", StringPool.BLANK, StringPool.BLANK,
+				LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
 
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
