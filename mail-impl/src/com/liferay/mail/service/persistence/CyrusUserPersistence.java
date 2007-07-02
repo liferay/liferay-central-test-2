@@ -48,7 +48,7 @@ public class CyrusUserPersistence extends BasePersistence {
 			session = getSessionFactory().openSession();
 
 			CyrusUser user = (CyrusUser)session.load(
-				CyrusUser.class, new Long(userId));
+				CyrusUser.class, String.valueOf(userId));
 
 			session.delete(user);
 
@@ -73,7 +73,7 @@ public class CyrusUserPersistence extends BasePersistence {
 
 			try {
 				CyrusUser userModel = (CyrusUser)session.load(
-					CyrusUser.class, new Long(user.getUserId()));
+					CyrusUser.class, String.valueOf(user.getUserId()));
 
 				userModel.setPassword(user.getPassword());
 
@@ -105,7 +105,7 @@ public class CyrusUserPersistence extends BasePersistence {
 			session = getSessionFactory().openSession();
 
 			return (CyrusUser)session.load(
-				CyrusUser.class, new Long(userId));
+				CyrusUser.class, String.valueOf(userId));
 		}
 		catch (ObjectNotFoundException onfe) {
 			throw new NoSuchCyrusUserException();

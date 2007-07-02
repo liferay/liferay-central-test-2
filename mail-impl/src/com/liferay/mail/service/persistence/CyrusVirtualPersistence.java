@@ -132,7 +132,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			Query q = session.createQuery(FIND_BY_USER_ID);
 
-			q.setLong(0, userId);
+			q.setString(0, String.valueOf(userId));
 
 			return q.list();
 		}
@@ -152,7 +152,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 
 			Query q = session.createQuery(FIND_BY_USER_ID);
 
-			q.setLong(0, userId);
+			q.setString(0, String.valueOf(userId));
 
 			Iterator itr = q.iterate();
 

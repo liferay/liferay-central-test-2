@@ -174,13 +174,13 @@ create table Country (
 );
 
 create table CyrusUser (
-	userId LONG not null primary key,
+	userId VARCHAR(75) not null primary key,
 	password_ VARCHAR(75) not null
 );
 
 create table CyrusVirtual (
 	emailAddress VARCHAR(75) not null primary key,
-	userId LONG
+	userId VARCHAR(75) not null
 );
 
 create table DLFileEntry (

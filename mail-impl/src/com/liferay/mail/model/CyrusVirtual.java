@@ -38,13 +38,17 @@ public class CyrusVirtual implements Serializable {
 
 	public static Object[][] TABLE_COLUMNS = {
 		{"emailAddress", new Integer(Types.VARCHAR)},
-		{"userId", new Integer(Types.BIGINT)}
+		{"userId", new Integer(Types.VARCHAR)}
 	};
 
 	public CyrusVirtual() {
 	}
 
 	public CyrusVirtual(String emailAddress, long userId) {
+		this(emailAddress, String.valueOf(userId));
+	}
+
+	public CyrusVirtual(String emailAddress, String userId) {
 		_emailAddress = emailAddress;
 		_userId = userId;
 	}
@@ -57,15 +61,15 @@ public class CyrusVirtual implements Serializable {
 		_emailAddress = emailAddress;
 	}
 
-	public long getUserId() {
+	public String getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		_userId = userId;
 	}
 
 	private String _emailAddress;
-	private long _userId;
+	private String _userId;
 
 }

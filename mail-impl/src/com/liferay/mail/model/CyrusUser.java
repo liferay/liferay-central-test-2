@@ -37,7 +37,7 @@ public class CyrusUser implements Serializable {
 	public static String TABLE_NAME = "CyrusUser";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"userId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.VARCHAR)},
 		{"password_", new Integer(Types.VARCHAR)}
 	};
 
@@ -45,15 +45,19 @@ public class CyrusUser implements Serializable {
 	}
 
 	public CyrusUser(long userId, String password) {
+		this(String.valueOf(userId), password);
+	}
+
+	public CyrusUser(String userId, String password) {
 		_userId = userId;
 		_password = password;
 	}
 
-	public long getUserId() {
+	public String getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		_userId = userId;
 	}
 
@@ -65,7 +69,7 @@ public class CyrusUser implements Serializable {
 		_password = password;
 	}
 
-	private long _userId;
+	private String _userId;
 	private String _password;
 
 }
