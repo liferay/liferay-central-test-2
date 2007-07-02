@@ -787,9 +787,7 @@ public class PropsUtil {
 
 	// Document Library Portlet
 
-	public static final String DL_ROOT_DIR = "dl.root.dir";
-
-	public static final String DL_VERSION_ROOT_DIR = "dl.version.root.dir";
+	public static final String DL_HOOK_IMPL = "dl.hook.impl";
 
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 

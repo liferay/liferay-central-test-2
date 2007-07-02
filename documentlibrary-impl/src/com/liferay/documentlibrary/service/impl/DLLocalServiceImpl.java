@@ -22,18 +22,14 @@
 
 package com.liferay.documentlibrary.service.impl;
 
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.util.DLUtil;
-import com.liferay.documentlibrary.util.Indexer;
+import com.liferay.documentlibrary.util.Hook;
+import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.jcr.JCRConstants;
-import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
@@ -43,18 +39,7 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-
-import java.util.Calendar;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.version.Version;
 
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
@@ -69,8 +54,6 @@ import org.apache.lucene.search.TermQuery;
  *
  */
 public class DLLocalServiceImpl implements DLLocalService {
-
-	public static final double DEFAULT_VERSION = 1.0;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
@@ -117,80 +100,24 @@ public class DLLocalServiceImpl implements DLLocalService {
 			throw new FileSizeException(fileName);
 		}
 
-		Session session = null;
+		Hook hook = HookFactory.getInstance();
 
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node rootNode = DLUtil.getRootNode(session, companyId);
-			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
-
-			if (repositoryNode.hasNode(fileName)) {
-				throw new DuplicateFileException(fileName);
-			}
-			else {
-				Node fileNode = repositoryNode.addNode(
-					fileName, JCRConstants.NT_FILE);
-
-				Node contentNode = fileNode.addNode(
-					JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
-
-				contentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
-				contentNode.setProperty(
-					JCRConstants.JCR_MIME_TYPE, "text/plain");
-				contentNode.setProperty(JCRConstants.JCR_DATA, is);
-				contentNode.setProperty(
-					JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
-
-				session.save();
-
-				Version version = contentNode.checkin();
-
-				contentNode.getVersionHistory().addVersionLabel(
-					version.getName(), String.valueOf(DEFAULT_VERSION), false);
-
-				Indexer.addFile(
-					companyId, portletId, groupId, repositoryId, fileName);
-			}
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
+		hook.addFile(companyId, portletId, groupId, repositoryId, fileName, is);
 	}
 
-	public void checkRootNode(long companyId) throws SystemException {
-		Session session = null;
+	public void checkRoot(long companyId) throws SystemException {
+		Hook hook = HookFactory.getInstance();
 
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node rootNode = DLUtil.getRootNode(session, companyId);
-
-			session.save();
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
+		hook.checkRoot(companyId);
 	}
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return getFileAsStream(companyId, repositoryId, fileName, 0);
+		Hook hook = HookFactory.getInstance();
+
+		return hook.getFileAsStream(companyId, repositoryId, fileName);
 	}
 
 	public InputStream getFileAsStream(
@@ -198,66 +125,26 @@ public class DLLocalServiceImpl implements DLLocalService {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		InputStream is = null;
+		Hook hook = HookFactory.getInstance();
 
-		Session session = null;
-
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node contentNode = DLUtil.getFileContentNode(
-				session, companyId, repositoryId, fileName, versionNumber);
-
-			Property data = contentNode.getProperty(JCRConstants.JCR_DATA);
-
-			is = new BufferedInputStream(data.getStream());
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
-
-		return is;
+		return hook.getFileAsStream(
+			companyId, repositoryId, fileName, versionNumber);
 	}
 
-	public boolean hasFileContentNode(
+	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		try {
-			DLUtil.getFileContentNode(
-				companyId, repositoryId, fileName, versionNumber);
-		}
-		catch (NoSuchFileException nsfe) {
-			return false;
-		}
+		Hook hook = HookFactory.getInstance();
 
-		return true;
+		return hook.hasFile(companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public void move(String srcDir, String destDir) throws SystemException {
-		Session session = null;
+		Hook hook = HookFactory.getInstance();
 
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			session.move(srcDir, destDir);
-
-			session.save();
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
+		hook.move(srcDir, destDir);
 	}
 
 	public Hits search(
@@ -323,8 +210,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 			InputStream is)
 		throws PortalException, SystemException {
 
-		String versionLabel = String.valueOf(versionNumber);
-
 		int pos = fileName.lastIndexOf(StringPool.PERIOD);
 
 		if (pos != -1) {
@@ -352,47 +237,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 			throw new FileSizeException(fileName);
 		}
 
-		Session session = null;
+		Hook hook = HookFactory.getInstance();
 
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node rootNode = DLUtil.getRootNode(session, companyId);
-			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
-			Node fileNode = repositoryNode.getNode(fileName);
-			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
-
-			contentNode.checkout();
-
-			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
-			contentNode.setProperty(JCRConstants.JCR_DATA, is);
-			contentNode.setProperty(
-				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
-
-			session.save();
-
-			Version version = contentNode.checkin();
-
-			contentNode.getVersionHistory().addVersionLabel(
-				version.getName(), versionLabel, false);
-
-			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName);
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
+		hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, is);
 	}
 
 }

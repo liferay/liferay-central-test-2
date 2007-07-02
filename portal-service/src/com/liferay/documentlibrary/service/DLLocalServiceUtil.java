@@ -47,10 +47,10 @@ public class DLLocalServiceUtil {
 			companyId, portletId, groupId, repositoryId, fileName, is);
 	}
 
-	public static void checkRootNode(long companyId) throws SystemException {
+	public static void checkRoot(long companyId) throws SystemException {
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-		dlLocalService.checkRootNode(companyId);
+		dlLocalService.checkRoot(companyId);
 	}
 
 	public static InputStream getFileAsStream(
@@ -74,14 +74,14 @@ public class DLLocalServiceUtil {
 			companyId, repositoryId, fileName, versionNumber);
 	}
 
-	public static boolean hasFileContentNode(
+	public static boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-		return dlLocalService.hasFileContentNode(
+		return dlLocalService.hasFile(
 			companyId, repositoryId, fileName, versionNumber);
 	}
 

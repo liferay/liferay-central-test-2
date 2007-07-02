@@ -76,7 +76,7 @@ public class UpgradeCompany extends UpgradeProcess {
 
 			LuceneUtil.checkLuceneDir(companyId);
 
-			DLLocalServiceUtil.checkRootNode(companyId);
+			DLLocalServiceUtil.checkRoot(companyId);
 		}
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(

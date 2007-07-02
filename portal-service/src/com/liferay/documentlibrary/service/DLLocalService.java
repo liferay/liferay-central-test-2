@@ -41,7 +41,7 @@ public interface DLLocalService {
 			String fileName, InputStream is)
 		throws PortalException, SystemException;
 
-	public void checkRootNode(long companyId) throws SystemException;
+	public void checkRoot(long companyId) throws SystemException;
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
@@ -52,7 +52,7 @@ public interface DLLocalService {
 			double versionNumber)
 		throws PortalException, SystemException;
 
-	public boolean hasFileContentNode(
+	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException;

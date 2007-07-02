@@ -218,7 +218,7 @@ public class DLFileEntryLocalServiceImpl
 			throw new FileSizeException();
 		}
 
-		if (DLLocalServiceUtil.hasFileContentNode(
+		if (DLLocalServiceUtil.hasFile(
 				user.getCompanyId(), folderId, name, 0)) {
 
 			throw new DuplicateFileException(name);
@@ -655,7 +655,7 @@ public class DLFileEntryLocalServiceImpl
 				throw new NoSuchFolderException();
 			}
 
-			if (DLLocalServiceUtil.hasFileContentNode(
+			if (DLLocalServiceUtil.hasFile(
 					user.getCompanyId(), newFolderId, name, 0)) {
 
 				throw new DuplicateFileException(name);

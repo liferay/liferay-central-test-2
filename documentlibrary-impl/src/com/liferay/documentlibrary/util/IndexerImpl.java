@@ -25,8 +25,6 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.service.impl.DLServiceImpl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.jcr.JCRConstants;
-import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,10 +42,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -97,22 +91,12 @@ public class IndexerImpl {
 
 		InputStream is = null;
 
-		Session session = null;
-
 		try {
-			session = JCRFactoryUtil.createSession();
+			Hook hook = HookFactory.getInstance();
 
-			Node contentNode = DLUtil.getFileContentNode(
-				session, companyId, repositoryId, fileName, 0);
-
-			is = contentNode.getProperty(JCRConstants.JCR_DATA).getStream();
+			is = hook.getFileAsStream(companyId, repositoryId, fileName);
 		}
 		catch (Exception e) {
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
 		}
 
 		if (is == null) {
@@ -247,41 +231,9 @@ public class IndexerImpl {
 	}
 
 	public static void reIndex(String[] ids) throws SearchException {
-		long companyId = GetterUtil.getLong(ids[0]);
-		String portletId = ids[1];
-		long groupId = GetterUtil.getLong(ids[2]);
-		long repositoryId = GetterUtil.getLong(ids[3]);
+		Hook hook = HookFactory.getInstance();
 
-		Session session = null;
-
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node rootNode = DLUtil.getRootNode(session, companyId);
-			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
-
-			NodeIterator itr = repositoryNode.getNodes();
-
-			while (itr.hasNext()) {
-				Node node = (Node)itr.next();
-
-				if (node.getPrimaryNodeType().getName().equals(
-						JCRConstants.NT_FILE)) {
-
-					addFile(
-						companyId, portletId, groupId, repositoryId,
-						node.getName());
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
+		hook.reIndex(ids);
 	}
 
 	public static void updateFile(
