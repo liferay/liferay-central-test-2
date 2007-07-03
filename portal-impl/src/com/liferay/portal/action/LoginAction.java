@@ -79,6 +79,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="LoginAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class LoginAction extends Action {
@@ -276,15 +277,28 @@ public class LoginAction extends Action {
 				}
 			}
 			catch (Exception e) {
-				if (e instanceof AuthException ||
-					e instanceof CookieNotSupportedException ||
-					e instanceof NoSuchUserException ||
-					e instanceof PasswordExpiredException ||
-					e instanceof UserEmailAddressException ||
-					e instanceof UserIdException ||
-					e instanceof UserLockoutException ||
-					e instanceof UserPasswordException ||
-					e instanceof UserScreenNameException) {
+				if (e instanceof AuthException) {
+					Throwable cause = e.getCause();
+
+					if (cause instanceof PasswordExpiredException ||
+						cause instanceof UserLockoutException) {
+
+						SessionErrors.add(req, cause.getClass().getName());
+					}
+					else {
+						SessionErrors.add(req, e.getClass().getName());
+					}
+
+					return mapping.findForward("portal.login");
+				}
+				else if (e instanceof CookieNotSupportedException ||
+						 e instanceof NoSuchUserException ||
+						 e instanceof PasswordExpiredException ||
+						 e instanceof UserEmailAddressException ||
+						 e instanceof UserIdException ||
+						 e instanceof UserLockoutException ||
+						 e instanceof UserPasswordException ||
+						 e instanceof UserScreenNameException) {
 
 					SessionErrors.add(req, e.getClass().getName());
 

@@ -23,6 +23,8 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PasswordExpiredException;
+import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
@@ -50,6 +52,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
+import javax.naming.ldap.Control;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
@@ -57,6 +60,7 @@ import javax.naming.ldap.LdapContext;
  * <a href="LDAPAuth.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class LDAPAuth implements Authenticator {
@@ -65,6 +69,12 @@ public class LDAPAuth implements Authenticator {
 
 	public static final String AUTH_METHOD_PASSWORD_COMPARE =
 		"password-compare";
+
+	public static final String RESULT_PASSWORD_RESET =
+		"2.16.840.1.113730.3.4.4";
+
+	public static final String RESULT_PASSWORD_EXP_WARNING =
+		"2.16.840.1.113730.3.4.5";
 
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password, Map headerMap,
@@ -221,18 +231,54 @@ public class LDAPAuth implements Authenticator {
 
 				Attribute userPassword = attrs.get("userPassword");
 
-				boolean authenticated = authenticate(
+				LDAPAuthResult ldapAuthResult = authenticate(
 					ctx, env, binding, baseDN, userPassword, companyId,
 					emailAddress, screenName, userId, password);
 
-				if (!authenticated) {
+				// Process LDAP failure codes
+
+				String errorMessage = ldapAuthResult.getErrorMessage();
+
+				if (errorMessage != null) {
+					if (errorMessage.indexOf(PrefsPropsUtil.getString(
+							companyId, PropsUtil.LDAP_ERROR_USER_LOCKOUT))
+								!= -1) {
+
+						throw new UserLockoutException();
+					}
+					else if (errorMessage.indexOf(PrefsPropsUtil.getString(
+						companyId, PropsUtil.LDAP_ERROR_PASSWORD_EXPIRED))
+							!= -1) {
+
+						throw new PasswordExpiredException();
+					}
+				}
+
+				if (!ldapAuthResult.isAuthenticated()) {
 					return authenticateRequired(
 						companyId, userId, emailAddress, FAILURE);
 				}
 
-				processUser(
+				// Get user or create from LDAP
+
+				User user = processUser(
 					attrs, userMappings, companyId, emailAddress, screenName,
 					userId, password);
+
+				// Process LDAP success codes
+
+				String resultCode = ldapAuthResult.getResponseControl();
+
+				if (resultCode.equals(LDAPAuth.RESULT_PASSWORD_RESET)) {
+					UserLocalServiceUtil.updatePasswordReset(
+						user.getUserId(), true);
+				}
+				else if (
+					resultCode.equals(LDAPAuth.RESULT_PASSWORD_EXP_WARNING)) {
+
+					UserLocalServiceUtil.updatePasswordReset(
+						user.getUserId(), true);
+				}
 			}
 			else {
 				if (_log.isDebugEnabled()) {
@@ -244,46 +290,57 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Problem accessing LDAP server " + e.getMessage());
+			_log.error("Problem accessing LDAP server: " + e.getMessage());
 
-			return authenticateRequired(
-				companyId, userId, emailAddress, FAILURE);
+			if (authenticateRequired(
+					companyId, userId, emailAddress, FAILURE) == FAILURE) {
+
+				throw e;
+			}
 		}
 
 		return SUCCESS;
 	}
 
-	protected boolean authenticate(
+	protected LDAPAuthResult authenticate(
 			LdapContext ctx, Properties env, Binding binding, String baseDN,
 			Attribute userPassword, long companyId, String emailAddress,
 			String screenName, long userId, String password)
 		throws Exception {
 
-		boolean authenticated = false;
+		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
 
 		// Check passwords by either doing a comparison between the passwords or
-		// by binding to the LDAP server
+		// by binding to the LDAP server.  If using LDAP password policies, bind
+		// auth method must be used in order to get the result control codes.
 
 		String authMethod = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_AUTH_METHOD);
 
+		String userDN = binding.getName() + StringPool.COMMA + baseDN;
+
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
-				String userDN = binding.getName() + StringPool.COMMA + baseDN;
 
 				env.put(Context.SECURITY_PRINCIPAL, userDN);
 				env.put(Context.SECURITY_CREDENTIALS, password);
 
 				ctx = new InitialLdapContext(env, null);
 
-				authenticated = true;
+				// Get LDAP bind results
+
+				Control[] responseControls =  ctx.getResponseControls();
+
+				ldapAuthResult.setAuthenticated(true);
+				ldapAuthResult.setResponseControl(responseControls);
 			}
 			catch (Exception e) {
 				_log.error(
-					"Failed to bind to the LDAP server with " + userId +
-						" " + password + " " + e.getMessage());
+					"Failed to bind to the LDAP server with userDN " + userDN +
+						" and password " + password + ": " + e.getMessage());
 
-				authenticated = false;
+				ldapAuthResult.setAuthenticated(false);
+				ldapAuthResult.setErrorMessage(e.getMessage());
 			}
 		}
 		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
@@ -304,10 +361,10 @@ public class LDAPAuth implements Authenticator {
 				}
 
 				if (ldapPassword.equals(encryptedPassword)) {
-					authenticated = true;
+					ldapAuthResult.setAuthenticated(true);
 				}
 				else {
-					authenticated = false;
+					ldapAuthResult.setAuthenticated(false);
 
 					_log.error(
 						"LDAP password " + ldapPassword +
@@ -317,7 +374,7 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 
-		return authenticated;
+		return ldapAuthResult;
 	}
 
 	protected int authenticateOmniadmin(
@@ -365,7 +422,7 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
-	protected void processUser(
+	protected User processUser(
 			Attributes attrs, Properties userMappings, long companyId,
 			String emailAddress, String screenName, long userId,
 			String password)
@@ -423,7 +480,7 @@ public class LDAPAuth implements Authenticator {
 		boolean checkExists = true;
 		boolean updatePassword = true;
 
-		PortalLDAPUtil.importFromLDAP(
+		return PortalLDAPUtil.importFromLDAP(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, prefixId, suffixId, male,

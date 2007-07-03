@@ -329,6 +329,20 @@ public class PropsUtil {
 
 	public static final String LDAP_PASSWORD_POLICY_ENABLED = "ldap.password.policy.enabled";
 
+	public static final String LDAP_ERROR_PASSWORD_AGE = "ldap.error.password.age";
+
+	public static final String LDAP_ERROR_PASSWORD_EXPIRED = "ldap.error.password.expired";
+
+	public static final String LDAP_ERROR_PASSWORD_HISTORY = "ldap.error.password.history";
+
+	public static final String LDAP_ERROR_PASSWORD_NOT_CHANGEABLE = "ldap.error.password.not.changeable";
+
+	public static final String LDAP_ERROR_PASSWORD_SYNTAX = "ldap.error.password.syntax";
+
+	public static final String LDAP_ERROR_PASSWORD_TRIVIAL = "ldap.error.password.trivial";
+
+	public static final String LDAP_ERROR_USER_LOCKOUT = "ldap.error.user.lockout";
+
 	// CAS
 
 	public static final String CAS_AUTH_ENABLED = "cas.auth.enabled";
