@@ -83,6 +83,16 @@ public class TemplateProcessor {
 		return sm.toString();
 	}
 
+	public String processPortlet(String portletId) throws Exception {
+		RuntimeLogic logic = new PortletLogic(_ctx, _req, _res, portletId);
+
+		StringMaker sm = new StringMaker();
+
+		logic.processContent(sm, new HashMap());
+
+		return sm.toString();
+	}
+
 	public Map getColumnsMap() {
 		return _columnsMap;
 	}
