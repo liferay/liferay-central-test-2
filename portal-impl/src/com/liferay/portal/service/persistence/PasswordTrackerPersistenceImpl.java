@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 	public PasswordTracker remove(PasswordTracker passwordTracker)
 		throws SystemException {
+		FinderCache.clearCache(PasswordTracker.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.PasswordTracker update(
+	public PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws SystemException {
 		return update(passwordTracker, false);
 	}
 
-	public com.liferay.portal.model.PasswordTracker update(
+	public PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(PasswordTracker.class.getName());
+
 		Session session = null;
 
 		try {

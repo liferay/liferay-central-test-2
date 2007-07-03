@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -107,6 +108,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public Group remove(Group group) throws SystemException {
+		FinderCache.clearCache(Group.class.getName());
+
 		Session session = null;
 
 		try {
@@ -129,14 +132,15 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Group update(
-		com.liferay.portal.model.Group group) throws SystemException {
+	public Group update(com.liferay.portal.model.Group group)
+		throws SystemException {
 		return update(group, false);
 	}
 
-	public com.liferay.portal.model.Group update(
-		com.liferay.portal.model.Group group, boolean saveOrUpdate)
-		throws SystemException {
+	public Group update(com.liferay.portal.model.Group group,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Group.class.getName());
+
 		Session session = null;
 
 		try {
@@ -219,39 +223,50 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "fetchByLiveGroupId";
+		Object[] finderArgs = new Object[] { new Long(liveGroupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("liveGroupId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("liveGroupId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("name ASC");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, liveGroupId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, liveGroupId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Group group = (Group)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, group);
+
+				return group;
 			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Group)result;
 		}
 	}
 
@@ -282,52 +297,63 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group fetchByC_N(long companyId, String name)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "fetchByC_N";
+		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (name == null) {
-				query.append("name IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Group group = (Group)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, group);
+
+				return group;
 			}
-			else {
-				query.append("name = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Group)result;
 		}
 	}
 
@@ -358,52 +384,63 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group fetchByC_F(long companyId, String friendlyURL)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "fetchByC_F";
+		Object[] finderArgs = new Object[] { new Long(companyId), friendlyURL };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (friendlyURL == null) {
-				query.append("friendlyURL IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (friendlyURL == null) {
+					query.append("friendlyURL IS NULL");
+				}
+				else {
+					query.append("friendlyURL = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (friendlyURL != null) {
+					q.setString(queryPos++, friendlyURL);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Group group = (Group)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, group);
+
+				return group;
 			}
-			else {
-				query.append("friendlyURL = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (friendlyURL != null) {
-				q.setString(queryPos++, friendlyURL);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Group)result;
 		}
 	}
 
@@ -437,45 +474,58 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "fetchByC_C_C";
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(classNameId), new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("name ASC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("name ASC");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Group group = (Group)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, group);
+
+				return group;
 			}
-
-			Group group = (Group)list.get(0);
-
-			return group;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Group)result;
 		}
 	}
 

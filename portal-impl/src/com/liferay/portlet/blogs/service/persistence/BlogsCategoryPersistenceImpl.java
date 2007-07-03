@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.blogs.NoSuchCategoryException;
@@ -98,6 +99,8 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 	public BlogsCategory remove(BlogsCategory blogsCategory)
 		throws SystemException {
+		FinderCache.clearCache(BlogsCategory.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory update(
+	public BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
 		throws SystemException {
 		return update(blogsCategory, false);
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsCategory update(
+	public BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(BlogsCategory.class.getName());
+
 		Session session = null;
 
 		try {

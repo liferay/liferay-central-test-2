@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
@@ -98,6 +99,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 	public MBStatsUser remove(MBStatsUser mbStatsUser)
 		throws SystemException {
+		FinderCache.clearCache(MBStatsUser.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser update(
+	public MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws SystemException {
 		return update(mbStatsUser, false);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser update(
+	public MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(MBStatsUser.class.getName());
+
 		Session session = null;
 
 		try {
@@ -517,43 +522,54 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 	public MBStatsUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBStatsUser.class.getName();
+		String finderMethodName = "fetchByG_U";
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("messageCount DESC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBStatsUser WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("messageCount DESC");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, userId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+				q.setLong(queryPos++, userId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				MBStatsUser mbStatsUser = (MBStatsUser)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, mbStatsUser);
+
+				return mbStatsUser;
 			}
-
-			MBStatsUser mbStatsUser = (MBStatsUser)list.get(0);
-
-			return mbStatsUser;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBStatsUser)result;
 		}
 	}
 

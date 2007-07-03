@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public Company remove(Company company) throws SystemException {
+		FinderCache.clearCache(Company.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company) throws SystemException {
+	public Company update(com.liferay.portal.model.Company company)
+		throws SystemException {
 		return update(company, false);
 	}
 
-	public com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company, boolean saveOrUpdate)
-		throws SystemException {
+	public Company update(com.liferay.portal.model.Company company,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Company.class.getName());
+
 		Session session = null;
 
 		try {
@@ -203,47 +207,58 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public Company fetchByWebId(String webId) throws SystemException {
-		Session session = null;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "fetchByWebId";
+		Object[] finderArgs = new Object[] { webId };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
+			try {
+				session = openSession();
 
-			if (webId == null) {
-				query.append("webId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				if (webId == null) {
+					query.append("webId IS NULL");
+				}
+				else {
+					query.append("webId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (webId != null) {
+					q.setString(queryPos++, webId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Company company = (Company)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, company);
+
+				return company;
 			}
-			else {
-				query.append("webId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (webId != null) {
-				q.setString(queryPos++, webId);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Company company = (Company)list.get(0);
-
-			return company;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Company)result;
 		}
 	}
 
@@ -271,47 +286,58 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 	public Company fetchByVirtualHost(String virtualHost)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "fetchByVirtualHost";
+		Object[] finderArgs = new Object[] { virtualHost };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
+			try {
+				session = openSession();
 
-			if (virtualHost == null) {
-				query.append("virtualHost IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				if (virtualHost == null) {
+					query.append("virtualHost IS NULL");
+				}
+				else {
+					query.append("virtualHost = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (virtualHost != null) {
+					q.setString(queryPos++, virtualHost);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Company company = (Company)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, company);
+
+				return company;
 			}
-			else {
-				query.append("virtualHost = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (virtualHost != null) {
-				q.setString(queryPos++, virtualHost);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Company company = (Company)list.get(0);
-
-			return company;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Company)result;
 		}
 	}
 
@@ -338,47 +364,58 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public Company fetchByMx(String mx) throws SystemException {
-		Session session = null;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "fetchByMx";
+		Object[] finderArgs = new Object[] { mx };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Company WHERE ");
+			try {
+				session = openSession();
 
-			if (mx == null) {
-				query.append("mx IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				if (mx == null) {
+					query.append("mx IS NULL");
+				}
+				else {
+					query.append("mx = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (mx != null) {
+					q.setString(queryPos++, mx);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Company company = (Company)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, company);
+
+				return company;
 			}
-			else {
-				query.append("mx = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (mx != null) {
-				q.setString(queryPos++, mx);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Company company = (Company)list.get(0);
-
-			return company;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Company)result;
 		}
 	}
 

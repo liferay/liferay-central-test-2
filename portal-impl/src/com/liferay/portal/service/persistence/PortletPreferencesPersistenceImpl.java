@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -98,6 +99,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public PortletPreferences remove(PortletPreferences portletPreferences)
 		throws SystemException {
+		FinderCache.clearCache(PortletPreferences.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.PortletPreferences update(
+	public PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws SystemException {
 		return update(portletPreferences, false);
 	}
 
-	public com.liferay.portal.model.PortletPreferences update(
+	public PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(PortletPreferences.class.getName());
+
 		Session session = null;
 
 		try {
@@ -540,57 +545,71 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
 		long plid, String portletId) throws SystemException {
-		Session session = null;
+		String finderClassName = PortletPreferences.class.getName();
+		String finderMethodName = "fetchByO_O_P_P";
+		Object[] finderArgs = new Object[] {
+				new Long(ownerId), new Integer(ownerType), new Long(plid),
+				portletId
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
-			query.append("ownerId = ?");
-			query.append(" AND ");
-			query.append("ownerType = ?");
-			query.append(" AND ");
-			query.append("plid = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+				query.append("ownerId = ?");
+				query.append(" AND ");
+				query.append("ownerType = ?");
+				query.append(" AND ");
+				query.append("plid = ?");
+				query.append(" AND ");
+
+				if (portletId == null) {
+					query.append("portletId IS NULL");
+				}
+				else {
+					query.append("portletId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, ownerId);
+				q.setInteger(queryPos++, ownerType);
+				q.setLong(queryPos++, plid);
+
+				if (portletId != null) {
+					q.setString(queryPos++, portletId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				PortletPreferences portletPreferences = (PortletPreferences)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, portletPreferences);
+
+				return portletPreferences;
 			}
-			else {
-				query.append("portletId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, ownerId);
-			q.setInteger(queryPos++, ownerType);
-			q.setLong(queryPos++, plid);
-
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			PortletPreferences portletPreferences = (PortletPreferences)list.get(0);
-
-			return portletPreferences;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PortletPreferences)result;
 		}
 	}
 

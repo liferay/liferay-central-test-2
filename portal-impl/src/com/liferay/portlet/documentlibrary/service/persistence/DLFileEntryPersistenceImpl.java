@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -98,6 +99,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 	public DLFileEntry remove(DLFileEntry dlFileEntry)
 		throws SystemException {
+		FinderCache.clearCache(DLFileEntry.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry update(
+	public DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws SystemException {
 		return update(dlFileEntry, false);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry update(
+	public DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(DLFileEntry.class.getName());
+
 		Session session = null;
 
 		try {
@@ -368,54 +373,65 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 	public DLFileEntry fetchByF_N(long folderId, String name)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = DLFileEntry.class.getName();
+		String finderMethodName = "fetchByF_N";
+		Object[] finderArgs = new Object[] { new Long(folderId), name };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
-			query.append("folderId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (name == null) {
-				query.append("name IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry WHERE ");
+				query.append("folderId = ?");
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, folderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				DLFileEntry dlFileEntry = (DLFileEntry)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, dlFileEntry);
+
+				return dlFileEntry;
 			}
-			else {
-				query.append("name = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("folderId ASC").append(", ");
-			query.append("name ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, folderId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			DLFileEntry dlFileEntry = (DLFileEntry)list.get(0);
-
-			return dlFileEntry;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (DLFileEntry)result;
 		}
 	}
 

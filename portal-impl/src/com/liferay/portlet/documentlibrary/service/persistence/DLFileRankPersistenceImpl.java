@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
@@ -96,6 +97,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {
+		FinderCache.clearCache(DLFileRank.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
+	public DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws SystemException {
 		return update(dlFileRank, false);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
+	public DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(DLFileRank.class.getName());
+
 		Session session = null;
 
 		try {
@@ -565,59 +570,72 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
 		long folderId, String name) throws SystemException {
-		Session session = null;
+		String finderClassName = DLFileRank.class.getName();
+		String finderMethodName = "fetchByC_U_F_N";
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(userId), new Long(folderId), name
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" AND ");
-			query.append("folderId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (name == null) {
-				query.append("name IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" AND ");
+				query.append("folderId = ?");
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate DESC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, userId);
+				q.setLong(queryPos++, folderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				DLFileRank dlFileRank = (DLFileRank)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, dlFileRank);
+
+				return dlFileRank;
 			}
-			else {
-				query.append("name = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate DESC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-			q.setLong(queryPos++, userId);
-			q.setLong(queryPos++, folderId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			DLFileRank dlFileRank = (DLFileRank)list.get(0);
-
-			return dlFileRank;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (DLFileRank)result;
 		}
 	}
 

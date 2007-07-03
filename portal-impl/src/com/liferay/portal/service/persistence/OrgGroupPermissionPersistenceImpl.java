@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -98,6 +99,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
 		throws SystemException {
+		FinderCache.clearCache(OrgGroupPermission.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission update(
+	public OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
 		throws SystemException {
 		return update(orgGroupPermission, false);
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission update(
+	public OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(OrgGroupPermission.class.getName());
+
 		Session session = null;
 
 		try {

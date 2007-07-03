@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -200,46 +201,61 @@ public class GroupFinder {
 
 		name = StringUtil.lowerCase(name);
 
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "findByC_N";
+		Object finderArgs[] = new Object[] {new Long(companyId), name};
 
-		try {
-			session = HibernateUtil.openSession();
+		Object result = FinderCache.getResult(
+			finderClassName, finderMethodName, finderArgs);
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(sql);
+			try {
+				session = HibernateUtil.openSession();
 
-			q.setCacheable(true);
+				String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
-			q.addEntity("Group_", GroupImpl.class);
+				SQLQuery q = session.createSQLQuery(sql);
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				q.addEntity("Group_", GroupImpl.class);
 
-			qPos.add(companyId);
-			qPos.add(name);
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			Iterator itr = q.list().iterator();
+				qPos.add(companyId);
+				qPos.add(name);
 
-			if (itr.hasNext()) {
-				return (Group)itr.next();
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					Group group = (Group)itr.next();
+
+					FinderCache.putResult(
+						finderClassName, finderMethodName, finderArgs, group);
+
+					return group;
+				}
 			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 
-		StringMaker sm = new StringMaker();
+			StringMaker sm = new StringMaker();
 
-		sm.append("No Group exists with the key {companyId=");
-		sm.append(companyId);
-		sm.append(", name=");
-		sm.append(name);
-		sm.append("}");
+			sm.append("No Group exists with the key {companyId=");
+			sm.append(companyId);
+			sm.append(", name=");
+			sm.append(name);
+			sm.append("}");
 
-		throw new NoSuchGroupException(sm.toString());
+			throw new NoSuchGroupException(sm.toString());
+		}
+		else {
+			return (Group)result;
+		}
 	}
 
 	public static List findByC_N_D(

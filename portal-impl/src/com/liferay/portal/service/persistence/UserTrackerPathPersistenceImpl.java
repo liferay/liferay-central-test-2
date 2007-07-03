@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 	public UserTrackerPath remove(UserTrackerPath userTrackerPath)
 		throws SystemException {
+		FinderCache.clearCache(UserTrackerPath.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.UserTrackerPath update(
+	public UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws SystemException {
 		return update(userTrackerPath, false);
 	}
 
-	public com.liferay.portal.model.UserTrackerPath update(
+	public UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(UserTrackerPath.class.getName());
+
 		Session session = null;
 
 		try {

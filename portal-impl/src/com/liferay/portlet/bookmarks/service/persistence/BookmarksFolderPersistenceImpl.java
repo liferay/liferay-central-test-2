@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
@@ -98,6 +99,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
 		throws SystemException {
+		FinderCache.clearCache(BookmarksFolder.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
+	public BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		return update(bookmarksFolder, false);
 	}
 
-	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
+	public BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(BookmarksFolder.class.getName());
+
 		Session session = null;
 
 		try {

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
@@ -96,6 +97,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public SCLicense remove(SCLicense scLicense) throws SystemException {
+		FinderCache.clearCache(SCLicense.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
+	public SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws SystemException {
 		return update(scLicense, false);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
+	public SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(SCLicense.class.getName());
+
 		Session session = null;
 
 		try {

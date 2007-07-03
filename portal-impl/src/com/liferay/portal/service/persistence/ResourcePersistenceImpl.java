@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public Resource remove(Resource resource) throws SystemException {
+		FinderCache.clearCache(Resource.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class ResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Resource update(
-		com.liferay.portal.model.Resource resource) throws SystemException {
+	public Resource update(com.liferay.portal.model.Resource resource)
+		throws SystemException {
 		return update(resource, false);
 	}
 
-	public com.liferay.portal.model.Resource update(
-		com.liferay.portal.model.Resource resource, boolean saveOrUpdate)
-		throws SystemException {
+	public Resource update(com.liferay.portal.model.Resource resource,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Resource.class.getName());
+
 		Session session = null;
 
 		try {
@@ -346,50 +350,61 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 	public Resource fetchByC_P(long codeId, String primKey)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Resource.class.getName();
+		String finderMethodName = "fetchByC_P";
+		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Resource WHERE ");
-			query.append("codeId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (primKey == null) {
-				query.append("primKey IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Resource WHERE ");
+				query.append("codeId = ?");
+				query.append(" AND ");
+
+				if (primKey == null) {
+					query.append("primKey IS NULL");
+				}
+				else {
+					query.append("primKey = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, codeId);
+
+				if (primKey != null) {
+					q.setString(queryPos++, primKey);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Resource resource = (Resource)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, resource);
+
+				return resource;
 			}
-			else {
-				query.append("primKey = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, codeId);
-
-			if (primKey != null) {
-				q.setString(queryPos++, primKey);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Resource resource = (Resource)list.get(0);
-
-			return resource;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Resource)result;
 		}
 	}
 

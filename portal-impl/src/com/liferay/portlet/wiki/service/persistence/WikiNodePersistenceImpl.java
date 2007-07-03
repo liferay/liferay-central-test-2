@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -96,6 +97,8 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public WikiNode remove(WikiNode wikiNode) throws SystemException {
+		FinderCache.clearCache(WikiNode.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,15 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode update(
-		com.liferay.portlet.wiki.model.WikiNode wikiNode)
+	public WikiNode update(com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws SystemException {
 		return update(wikiNode, false);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode update(
-		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean saveOrUpdate)
-		throws SystemException {
+	public WikiNode update(com.liferay.portlet.wiki.model.WikiNode wikiNode,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(WikiNode.class.getName());
+
 		Session session = null;
 
 		try {

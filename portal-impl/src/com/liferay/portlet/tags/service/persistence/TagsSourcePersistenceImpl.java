@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.tags.NoSuchSourceException;
@@ -95,6 +96,8 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 	}
 
 	public TagsSource remove(TagsSource tagsSource) throws SystemException {
+		FinderCache.clearCache(TagsSource.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,15 +115,17 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.tags.model.TagsSource update(
+	public TagsSource update(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws SystemException {
 		return update(tagsSource, false);
 	}
 
-	public com.liferay.portlet.tags.model.TagsSource update(
+	public TagsSource update(
 		com.liferay.portlet.tags.model.TagsSource tagsSource,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(TagsSource.class.getName());
+
 		Session session = null;
 
 		try {

@@ -29,6 +29,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -223,40 +224,55 @@ public class RoleFinder {
 
 		name = StringUtil.lowerCase(name);
 
-		Session session = null;
+		String finderClassName = Role.class.getName();
+		String finderMethodName = "findByC_N";
+		Object finderArgs[] = new Object[] {new Long(companyId), name};
 
-		try {
-			session = HibernateUtil.openSession();
+		Object result = FinderCache.getResult(
+			finderClassName, finderMethodName, finderArgs);
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(sql);
+			try {
+				session = HibernateUtil.openSession();
 
-			q.setCacheable(true);
+				String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
-			q.addEntity("Role_", RoleImpl.class);
+				SQLQuery q = session.createSQLQuery(sql);
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				q.addEntity("Role_", RoleImpl.class);
 
-			qPos.add(companyId);
-			qPos.add(name);
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			Iterator itr = q.list().iterator();
+				qPos.add(companyId);
+				qPos.add(name);
 
-			if (itr.hasNext()) {
-				return (Role)itr.next();
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					Role role = (Role)itr.next();
+
+					FinderCache.putResult(
+						finderClassName, finderMethodName, finderArgs, role);
+
+					return role;
+				}
 			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 
-		throw new NoSuchRoleException(
-			"No Role exists with the key {companyId=" + companyId + ", name=" +
-				name + "}");
+			throw new NoSuchRoleException(
+				"No Role exists with the key {companyId=" + companyId + ", name=" +
+					name + "}");
+		}
+		else {
+			return (Role)result;
+		}
 	}
 
 	public static List findByU_G(long userId, long groupId)

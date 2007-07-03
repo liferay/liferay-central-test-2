@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -98,6 +99,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 	public PollsQuestion remove(PollsQuestion pollsQuestion)
 		throws SystemException {
+		FinderCache.clearCache(PollsQuestion.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion update(
+	public PollsQuestion update(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws SystemException {
 		return update(pollsQuestion, false);
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion update(
+	public PollsQuestion update(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(PollsQuestion.class.getName());
+
 		Session session = null;
 
 		try {

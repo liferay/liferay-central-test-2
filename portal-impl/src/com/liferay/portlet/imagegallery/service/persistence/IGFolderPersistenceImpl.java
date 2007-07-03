@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -96,6 +97,8 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	}
 
 	public IGFolder remove(IGFolder igFolder) throws SystemException {
+		FinderCache.clearCache(IGFolder.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder update(
+	public IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws SystemException {
 		return update(igFolder, false);
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder update(
+	public IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(IGFolder.class.getName());
+
 		Session session = null;
 
 		try {

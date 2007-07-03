@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -94,6 +95,8 @@ public class PortletPersistenceImpl extends BasePersistence
 	}
 
 	public Portlet remove(Portlet portlet) throws SystemException {
+		FinderCache.clearCache(Portlet.class.getName());
+
 		Session session = null;
 
 		try {
@@ -111,14 +114,15 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Portlet update(
-		com.liferay.portal.model.Portlet portlet) throws SystemException {
+	public Portlet update(com.liferay.portal.model.Portlet portlet)
+		throws SystemException {
 		return update(portlet, false);
 	}
 
-	public com.liferay.portal.model.Portlet update(
-		com.liferay.portal.model.Portlet portlet, boolean saveOrUpdate)
-		throws SystemException {
+	public Portlet update(com.liferay.portal.model.Portlet portlet,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Portlet.class.getName());
+
 		Session session = null;
 
 		try {
@@ -342,50 +346,61 @@ public class PortletPersistenceImpl extends BasePersistence
 
 	public Portlet fetchByC_P(long companyId, String portletId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Portlet.class.getName();
+		String finderMethodName = "fetchByC_P";
+		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Portlet WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Portlet WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (portletId == null) {
+					query.append("portletId IS NULL");
+				}
+				else {
+					query.append("portletId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (portletId != null) {
+					q.setString(queryPos++, portletId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Portlet portlet = (Portlet)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, portlet);
+
+				return portlet;
 			}
-			else {
-				query.append("portletId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Portlet portlet = (Portlet)list.get(0);
-
-			return portlet;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Portlet)result;
 		}
 	}
 

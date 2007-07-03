@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -98,6 +99,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 	public MBDiscussion remove(MBDiscussion mbDiscussion)
 		throws SystemException {
+		FinderCache.clearCache(MBDiscussion.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion update(
+	public MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws SystemException {
 		return update(mbDiscussion, false);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion update(
+	public MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(MBDiscussion.class.getName());
+
 		Session session = null;
 
 		try {
@@ -213,41 +218,54 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 	public MBDiscussion fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBDiscussion.class.getName();
+		String finderMethodName = "fetchByC_C";
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBDiscussion WHERE ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, mbDiscussion);
+
+				return mbDiscussion;
 			}
-
-			MBDiscussion mbDiscussion = (MBDiscussion)list.get(0);
-
-			return mbDiscussion;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBDiscussion)result;
 		}
 	}
 

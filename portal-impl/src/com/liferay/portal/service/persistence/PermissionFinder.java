@@ -29,7 +29,9 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
@@ -592,34 +594,51 @@ public class PermissionFinder {
 	public static List findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
-		Session session = null;
+		String finderClassName = Permission.class.getName();
+		String finderMethodName = "findByA_R";
+		Object finderArgs[] = new Object[] {
+			actionId, StringUtil.merge(ArrayUtil.toObjectArray(resourceIds))
+		};
 
-		try {
-			session = HibernateUtil.openSession();
+		Object result = FinderCache.getResult(
+			finderClassName, finderMethodName, finderArgs);
 
-			String sql = CustomSQLUtil.get(FIND_BY_A_R);
+		if (result == null) {
+			Session session = null;
 
-			sql = StringUtil.replace(
-				sql, "[$RESOURCE_IDS$]", _getResourceIds(resourceIds));
+			try {
+				session = HibernateUtil.openSession();
 
-			SQLQuery q = session.createSQLQuery(sql);
+				String sql = CustomSQLUtil.get(FIND_BY_A_R);
 
-			q.setCacheable(true);
+				sql = StringUtil.replace(
+					sql, "[$RESOURCE_IDS$]", _getResourceIds(resourceIds));
 
-			q.addEntity("Permission_", PermissionImpl.class);
+				SQLQuery q = session.createSQLQuery(sql);
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				q.addEntity("Permission_", PermissionImpl.class);
 
-			qPos.add(actionId);
-			_setResourceIds(qPos, resourceIds);
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			return q.list();
+				qPos.add(actionId);
+				_setResourceIds(qPos, resourceIds);
+
+				List list = q.list();
+
+				FinderCache.putResult(
+					finderClassName, finderMethodName, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 

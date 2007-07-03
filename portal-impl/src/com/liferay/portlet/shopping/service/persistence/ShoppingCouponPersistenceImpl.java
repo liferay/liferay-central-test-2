@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.shopping.NoSuchCouponException;
@@ -98,6 +99,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
+		FinderCache.clearCache(ShoppingCoupon.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon update(
+	public ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		return update(shoppingCoupon, false);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon update(
+	public ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(ShoppingCoupon.class.getName());
+
 		Session session = null;
 
 		try {
@@ -361,50 +366,61 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	}
 
 	public ShoppingCoupon fetchByCode(String code) throws SystemException {
-		Session session = null;
+		String finderClassName = ShoppingCoupon.class.getName();
+		String finderMethodName = "fetchByCode";
+		Object[] finderArgs = new Object[] { code };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+			try {
+				session = openSession();
 
-			if (code == null) {
-				query.append("code_ IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingCoupon WHERE ");
+
+				if (code == null) {
+					query.append("code_ IS NULL");
+				}
+				else {
+					query.append("code_ = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (code != null) {
+					q.setString(queryPos++, code);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				ShoppingCoupon shoppingCoupon = (ShoppingCoupon)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, shoppingCoupon);
+
+				return shoppingCoupon;
 			}
-			else {
-				query.append("code_ = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (code != null) {
-				q.setString(queryPos++, code);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)list.get(0);
-
-			return shoppingCoupon;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ShoppingCoupon)result;
 		}
 	}
 

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
@@ -98,6 +99,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
 		throws SystemException {
+		FinderCache.clearCache(DLFileShortcut.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
+	public DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		return update(dlFileShortcut, false);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
+	public DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(DLFileShortcut.class.getName());
+
 		Session session = null;
 
 		try {

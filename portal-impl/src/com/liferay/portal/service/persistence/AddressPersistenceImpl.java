@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public Address remove(Address address) throws SystemException {
+		FinderCache.clearCache(Address.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class AddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Address update(
-		com.liferay.portal.model.Address address) throws SystemException {
+	public Address update(com.liferay.portal.model.Address address)
+		throws SystemException {
 		return update(address, false);
 	}
 
-	public com.liferay.portal.model.Address update(
-		com.liferay.portal.model.Address address, boolean saveOrUpdate)
-		throws SystemException {
+	public Address update(com.liferay.portal.model.Address address,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Address.class.getName());
+
 		Session session = null;
 
 		try {

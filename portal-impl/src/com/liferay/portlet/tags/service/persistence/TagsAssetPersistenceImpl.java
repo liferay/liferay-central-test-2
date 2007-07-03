@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.tags.NoSuchAssetException;
@@ -109,6 +110,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset remove(TagsAsset tagsAsset) throws SystemException {
+		FinderCache.clearCache(TagsAsset.class.getName());
+
 		Session session = null;
 
 		try {
@@ -127,15 +130,16 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.tags.model.TagsAsset update(
-		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
+	public TagsAsset update(com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws SystemException {
 		return update(tagsAsset, false);
 	}
 
-	public com.liferay.portlet.tags.model.TagsAsset update(
+	public TagsAsset update(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(TagsAsset.class.getName());
+
 		Session session = null;
 
 		try {
@@ -223,40 +227,54 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 	public TagsAsset fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = TagsAsset.class.getName();
+		String finderMethodName = "fetchByC_C";
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				TagsAsset tagsAsset = (TagsAsset)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, tagsAsset);
+
+				return tagsAsset;
 			}
-
-			TagsAsset tagsAsset = (TagsAsset)list.get(0);
-
-			return tagsAsset;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (TagsAsset)result;
 		}
 	}
 

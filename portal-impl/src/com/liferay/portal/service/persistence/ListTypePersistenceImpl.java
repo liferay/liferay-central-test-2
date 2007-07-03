@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class ListTypePersistenceImpl extends BasePersistence
 	}
 
 	public ListType remove(ListType listType) throws SystemException {
+		FinderCache.clearCache(ListType.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.ListType update(
-		com.liferay.portal.model.ListType listType) throws SystemException {
+	public ListType update(com.liferay.portal.model.ListType listType)
+		throws SystemException {
 		return update(listType, false);
 	}
 
-	public com.liferay.portal.model.ListType update(
-		com.liferay.portal.model.ListType listType, boolean saveOrUpdate)
-		throws SystemException {
+	public ListType update(com.liferay.portal.model.ListType listType,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(ListType.class.getName());
+
 		Session session = null;
 
 		try {

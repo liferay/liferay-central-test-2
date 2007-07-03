@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -126,40 +127,56 @@ public class UserGroupFinder {
 
 		name = StringUtil.lowerCase(name);
 
-		Session session = null;
+		String finderClassName = UserGroup.class.getName();
+		String finderMethodName = "findByC_N";
+		Object finderArgs[] = new Object[] {new Long(companyId), name};
 
-		try {
-			session = HibernateUtil.openSession();
+		Object result = FinderCache.getResult(
+			finderClassName, finderMethodName, finderArgs);
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(sql);
+			try {
+				session = HibernateUtil.openSession();
 
-			q.setCacheable(true);
+				String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
-			q.addEntity("UserGroup", UserGroupImpl.class);
+				SQLQuery q = session.createSQLQuery(sql);
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				q.addEntity("UserGroup", UserGroupImpl.class);
 
-			qPos.add(companyId);
-			qPos.add(name);
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			Iterator itr = q.list().iterator();
+				qPos.add(companyId);
+				qPos.add(name);
 
-			if (itr.hasNext()) {
-				return (UserGroup)itr.next();
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					UserGroup userGroup = (UserGroup)itr.next();
+
+					FinderCache.putResult(
+						finderClassName, finderMethodName, finderArgs,
+						userGroup);
+
+					return userGroup;
+				}
 			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 
-		throw new NoSuchUserGroupException(
-			"No UserGroup exists with the key {companyId=" + companyId +
-				", name=" + name + "}");
+			throw new NoSuchUserGroupException(
+				"No UserGroup exists with the key {companyId=" + companyId +
+					", name=" + name + "}");
+		}
+		else {
+			return (UserGroup)result;
+		}
 	}
 
 	public static List findByC_N_D(

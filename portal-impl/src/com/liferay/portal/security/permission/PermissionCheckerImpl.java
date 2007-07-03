@@ -39,7 +39,6 @@ import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
-import com.liferay.portal.service.permission.PermissionCacheUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.CollectionFactory;

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 	public EmailAddress remove(EmailAddress emailAddress)
 		throws SystemException {
+		FinderCache.clearCache(EmailAddress.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.EmailAddress update(
+	public EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws SystemException {
 		return update(emailAddress, false);
 	}
 
-	public com.liferay.portal.model.EmailAddress update(
+	public EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(EmailAddress.class.getName());
+
 		Session session = null;
 
 		try {

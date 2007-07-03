@@ -20,32 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.permission;
+package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.ArrayUtil;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * <a href="PermissionCacheUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
  *
- * @author Charles May
+ * @author Brian Wing Shun Chan
  *
  */
-public class PermissionCacheUtil {
+public class FinderCache {
 
-	public static final String GROUP_NAME = PermissionCacheUtil.class.getName();
+	public static final String GROUP_NAME = FinderCache.class.getName();
 
 	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
 
@@ -53,95 +46,79 @@ public class PermissionCacheUtil {
 		_cache.flushGroup(GROUP_NAME);
 	}
 
-	public static void clearCache(long resourceId)
-		throws PortalException, SystemException {
+	public static void clearCache(String className) {
+		String classNameGroupKey = _encodeKey(className);
 
-		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
-
-		clearCache(resource.getName(), resource.getPrimKey());
+		_cache.flushGroup(classNameGroupKey);
 	}
 
-	public static void clearCache(String name, String primKey) {
-		String resourceGroupKey = _encodeKey(name, primKey);
+	public static Object getResult(
+		String className, String methodName, Object[] args) {
 
-		_cache.flushGroup(resourceGroupKey);
-	}
+		Object result = null;
 
-	public static Boolean hasPermission(
-		long userId, long groupId, String name, String primKey,
-		String actionId) {
-
-		Boolean value = null;
-
-		String key = _encodeKey(userId, groupId, name, primKey, actionId);
+		String key = _encodeKey(className, methodName, args);
 
 		try {
-			value = (Boolean)_cache.getFromCache(key);
+			result = _cache.getFromCache(key);
 		}
 		catch (NeedsRefreshException nre) {
-			value = null;
+			result = null;
 		}
 		finally {
-			if (value == null) {
+			if (result == null) {
 				_cache.cancelUpdate(key);
 			}
 		}
 
-		return value;
+		return result;
 	}
 
-	public static Boolean putPermission(
-		long userId, long groupId, String name, String primKey, String actionId,
-		Boolean value) {
+	public static Object putResult(
+		String className, String methodName, Object[] args, Object result) {
 
-		if (value != null) {
-			String key = _encodeKey(userId, groupId, name, primKey, actionId);
+		if ((result != null) && CacheRegistry.isActive()) {
+			String key = _encodeKey(className, methodName, args);
 
-			String resourceGroupKey = _encodeKey(name, primKey);
+			String classNameGroupKey = _encodeKey(className);
 
 			String[] groups = ArrayUtil.append(
-				GROUP_NAME_ARRAY, resourceGroupKey);
+				GROUP_NAME_ARRAY, classNameGroupKey);
 
-			_cache.putInCache(key, value, groups);
+			_cache.putInCache(key, result, groups);
 		}
 
-		return value;
+		return result;
 	}
 
-	private static String _encodeKey(String name, String primKey) {
+	private static String _encodeKey(String className) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(GROUP_NAME);
 		sm.append(StringPool.POUND);
-		sm.append(name);
-		sm.append(StringPool.POUND);
-		sm.append(primKey);
+		sm.append(className);
 
 		return sm.toString();
 	}
 
 	private static String _encodeKey(
-		long userId, long groupId, String name, String primKey,
-		String actionId) {
+		String className, String methodName, Object[] args) {
 
 		StringMaker sm = new StringMaker();
 
 		sm.append(GROUP_NAME);
 		sm.append(StringPool.POUND);
-		sm.append(userId);
+		sm.append(className);
 		sm.append(StringPool.POUND);
-		sm.append(groupId);
-		sm.append(StringPool.POUND);
-		sm.append(name);
-		sm.append(StringPool.POUND);
-		sm.append(primKey);
-		sm.append(StringPool.POUND);
-		sm.append(actionId);
+		sm.append(methodName);
+
+		for (int i = 0; i < args.length; i++) {
+			sm.append(StringPool.POUND);
+			sm.append(args[0].toString());
+		}
 
 		return sm.toString();
 	}
-
-	private static Log _log = LogFactory.getLog(PermissionCacheUtil.class);
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
 

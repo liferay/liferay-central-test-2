@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -93,6 +94,8 @@ public class ImagePersistenceImpl extends BasePersistence
 	}
 
 	public Image remove(Image image) throws SystemException {
+		FinderCache.clearCache(Image.class.getName());
+
 		Session session = null;
 
 		try {
@@ -110,14 +113,15 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Image update(
-		com.liferay.portal.model.Image image) throws SystemException {
+	public Image update(com.liferay.portal.model.Image image)
+		throws SystemException {
 		return update(image, false);
 	}
 
-	public com.liferay.portal.model.Image update(
-		com.liferay.portal.model.Image image, boolean saveOrUpdate)
-		throws SystemException {
+	public Image update(com.liferay.portal.model.Image image,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Image.class.getName());
+
 		Session session = null;
 
 		try {

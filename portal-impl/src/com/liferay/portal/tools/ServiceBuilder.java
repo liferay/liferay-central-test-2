@@ -191,6 +191,7 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.util.StringPool",
 			"com.liferay.portal.security.auth.HttpPrincipal",
 			"com.liferay.portal.service.http.TunnelUtil",
+			"com.liferay.portal.spring.hibernate.FinderCache",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
 			"com.liferay.util.DateUtil",
@@ -2310,6 +2311,7 @@ public class ServiceBuilder {
 		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
 		sm.append("import com.liferay.portal.service.persistence.BasePersistence;");
+		sm.append("import com.liferay.portal.spring.hibernate.FinderCache;");
 		sm.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryUtil;");
@@ -2390,6 +2392,7 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " remove(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
+		sm.append("FinderCache.clearCache(" + entity.getName() + ".class.getName());");
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
@@ -2420,11 +2423,12 @@ public class ServiceBuilder {
 
 		// Update method
 
-		sm.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
+		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
 		sm.append("return update(" + entity.getVarName() + ", false);");
 		sm.append("}");
 
-		sm.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
+		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
+		sm.append("FinderCache.clearCache(" + entity.getName() + ".class.getName());");
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
@@ -2565,6 +2569,31 @@ public class ServiceBuilder {
 				}
 
 				sm.append(") throws SystemException {");
+				sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
+				sm.append("String finderMethodName = \"fetchBy" + finder.getName() + "\";");
+				sm.append("Object finderArgs[] = new Object[] {");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (col.isPrimitiveType()) {
+						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+					}
+
+					sm.append(col.getName());
+
+					if (col.isPrimitiveType()) {
+						sm.append(")");
+					}
+
+					if ((j + 1) != finderColsList.size()) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append("};");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderArgs);");
+				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
 				sm.append("session = openSession();");
@@ -2617,7 +2646,6 @@ public class ServiceBuilder {
 				}
 
 				sm.append("Query q = session.createQuery(query.toString());");
-				sm.append("q.setCacheable(true);");
 				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
@@ -2667,6 +2695,7 @@ public class ServiceBuilder {
 				sm.append("return null;");
 				sm.append("}");
 				sm.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderArgs, " + entity.getVarName() + ");");
 				sm.append("return " + entity.getVarName() + ";");
 				sm.append("}");
 				sm.append("catch (Exception e) {");
@@ -2674,6 +2703,10 @@ public class ServiceBuilder {
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return (" + entity.getName() + ")result;");
 				sm.append("}");
 				sm.append("}");
 			}

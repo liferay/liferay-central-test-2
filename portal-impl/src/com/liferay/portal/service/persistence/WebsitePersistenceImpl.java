@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class WebsitePersistenceImpl extends BasePersistence
 	}
 
 	public Website remove(Website website) throws SystemException {
+		FinderCache.clearCache(Website.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Website update(
-		com.liferay.portal.model.Website website) throws SystemException {
+	public Website update(com.liferay.portal.model.Website website)
+		throws SystemException {
 		return update(website, false);
 	}
 
-	public com.liferay.portal.model.Website update(
-		com.liferay.portal.model.Website website, boolean saveOrUpdate)
-		throws SystemException {
+	public Website update(com.liferay.portal.model.Website website,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Website.class.getName());
+
 		Session session = null;
 
 		try {

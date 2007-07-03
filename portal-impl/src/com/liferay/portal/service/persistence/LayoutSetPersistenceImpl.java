@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public LayoutSet remove(LayoutSet layoutSet) throws SystemException {
+		FinderCache.clearCache(LayoutSet.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.LayoutSet update(
-		com.liferay.portal.model.LayoutSet layoutSet) throws SystemException {
+	public LayoutSet update(com.liferay.portal.model.LayoutSet layoutSet)
+		throws SystemException {
 		return update(layoutSet, false);
 	}
 
-	public com.liferay.portal.model.LayoutSet update(
-		com.liferay.portal.model.LayoutSet layoutSet, boolean saveOrUpdate)
-		throws SystemException {
+	public LayoutSet update(com.liferay.portal.model.LayoutSet layoutSet,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(LayoutSet.class.getName());
+
 		Session session = null;
 
 		try {
@@ -345,47 +349,58 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public LayoutSet fetchByVirtualHost(String virtualHost)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = LayoutSet.class.getName();
+		String finderMethodName = "fetchByVirtualHost";
+		Object[] finderArgs = new Object[] { virtualHost };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			try {
+				session = openSession();
 
-			if (virtualHost == null) {
-				query.append("virtualHost IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+
+				if (virtualHost == null) {
+					query.append("virtualHost IS NULL");
+				}
+				else {
+					query.append("virtualHost = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (virtualHost != null) {
+					q.setString(queryPos++, virtualHost);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				LayoutSet layoutSet = (LayoutSet)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, layoutSet);
+
+				return layoutSet;
 			}
-			else {
-				query.append("virtualHost = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (virtualHost != null) {
-				q.setString(queryPos++, virtualHost);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			LayoutSet layoutSet = (LayoutSet)list.get(0);
-
-			return layoutSet;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (LayoutSet)result;
 		}
 	}
 
@@ -416,40 +431,53 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public LayoutSet fetchByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = LayoutSet.class.getName();
+		String finderMethodName = "fetchByG_P";
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Boolean(privateLayout)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("privateLayout = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+				query.append("privateLayout = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setBoolean(queryPos++, privateLayout);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+				q.setBoolean(queryPos++, privateLayout);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				LayoutSet layoutSet = (LayoutSet)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, layoutSet);
+
+				return layoutSet;
 			}
-
-			LayoutSet layoutSet = (LayoutSet)list.get(0);
-
-			return layoutSet;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (LayoutSet)result;
 		}
 	}
 

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.PluginSettingImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 	public PluginSetting remove(PluginSetting pluginSetting)
 		throws SystemException {
+		FinderCache.clearCache(PluginSetting.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.PluginSetting update(
+	public PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws SystemException {
 		return update(pluginSetting, false);
 	}
 
-	public com.liferay.portal.model.PluginSetting update(
+	public PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(PluginSetting.class.getName());
+
 		Session session = null;
 
 		try {
@@ -358,63 +363,77 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
 		String pluginType) throws SystemException {
-		Session session = null;
+		String finderClassName = PluginSetting.class.getName();
+		String finderMethodName = "fetchByC_I_T";
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), pluginId, pluginType
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.PluginSetting WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (pluginId == null) {
-				query.append("pluginId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.PluginSetting WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (pluginId == null) {
+					query.append("pluginId IS NULL");
+				}
+				else {
+					query.append("pluginId = ?");
+				}
+
+				query.append(" AND ");
+
+				if (pluginType == null) {
+					query.append("pluginType IS NULL");
+				}
+				else {
+					query.append("pluginType = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (pluginId != null) {
+					q.setString(queryPos++, pluginId);
+				}
+
+				if (pluginType != null) {
+					q.setString(queryPos++, pluginType);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				PluginSetting pluginSetting = (PluginSetting)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, pluginSetting);
+
+				return pluginSetting;
 			}
-			else {
-				query.append("pluginId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-
-			if (pluginType == null) {
-				query.append("pluginType IS NULL");
+			finally {
+				closeSession(session);
 			}
-			else {
-				query.append("pluginType = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (pluginId != null) {
-				q.setString(queryPos++, pluginId);
-			}
-
-			if (pluginType != null) {
-				q.setString(queryPos++, pluginType);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			PluginSetting pluginSetting = (PluginSetting)list.get(0);
-
-			return pluginSetting;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PluginSetting)result;
 		}
 	}
 

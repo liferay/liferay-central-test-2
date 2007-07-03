@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.journal.NoSuchContentSearchException;
@@ -99,6 +100,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public JournalContentSearch remove(
 		JournalContentSearch journalContentSearch) throws SystemException {
+		FinderCache.clearCache(JournalContentSearch.class.getName());
+
 		Session session = null;
 
 		try {
@@ -116,15 +119,17 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch update(
+	public JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws SystemException {
 		return update(journalContentSearch, false);
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch update(
+	public JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(JournalContentSearch.class.getName());
+
 		Session session = null;
 
 		try {
@@ -963,70 +968,84 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 	public JournalContentSearch fetchByG_P_L_P_A(long groupId,
 		boolean privateLayout, long layoutId, String portletId, String articleId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = JournalContentSearch.class.getName();
+		String finderMethodName = "fetchByG_P_L_P_A";
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Boolean(privateLayout),
+				new Long(layoutId), portletId, articleId
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("privateLayout = ?");
-			query.append(" AND ");
-			query.append("layoutId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (portletId == null) {
-				query.append("portletId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalContentSearch WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+				query.append("privateLayout = ?");
+				query.append(" AND ");
+				query.append("layoutId = ?");
+				query.append(" AND ");
+
+				if (portletId == null) {
+					query.append("portletId IS NULL");
+				}
+				else {
+					query.append("portletId = ?");
+				}
+
+				query.append(" AND ");
+
+				if (articleId == null) {
+					query.append("articleId IS NULL");
+				}
+				else {
+					query.append("articleId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+				q.setBoolean(queryPos++, privateLayout);
+				q.setLong(queryPos++, layoutId);
+
+				if (portletId != null) {
+					q.setString(queryPos++, portletId);
+				}
+
+				if (articleId != null) {
+					q.setString(queryPos++, articleId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				JournalContentSearch journalContentSearch = (JournalContentSearch)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, journalContentSearch);
+
+				return journalContentSearch;
 			}
-			else {
-				query.append("portletId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-
-			if (articleId == null) {
-				query.append("articleId IS NULL");
+			finally {
+				closeSession(session);
 			}
-			else {
-				query.append("articleId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setBoolean(queryPos++, privateLayout);
-			q.setLong(queryPos++, layoutId);
-
-			if (portletId != null) {
-				q.setString(queryPos++, portletId);
-			}
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			JournalContentSearch journalContentSearch = (JournalContentSearch)list.get(0);
-
-			return journalContentSearch;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (JournalContentSearch)result;
 		}
 	}
 

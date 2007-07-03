@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 	public Subscription remove(Subscription subscription)
 		throws SystemException {
+		FinderCache.clearCache(Subscription.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Subscription update(
+	public Subscription update(
 		com.liferay.portal.model.Subscription subscription)
 		throws SystemException {
 		return update(subscription, false);
 	}
 
-	public com.liferay.portal.model.Subscription update(
+	public Subscription update(
 		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(Subscription.class.getName());
+
 		Session session = null;
 
 		try {
@@ -533,46 +538,61 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 	public Subscription fetchByC_U_C_C(long companyId, long userId,
 		long classNameId, long classPK) throws SystemException {
-		Session session = null;
+		String finderClassName = Subscription.class.getName();
+		String finderMethodName = "fetchByC_U_C_C";
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(userId), new Long(classNameId),
+				new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" AND ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.Subscription WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" AND ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-			q.setLong(queryPos++, userId);
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, userId);
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Subscription subscription = (Subscription)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, subscription);
+
+				return subscription;
 			}
-
-			Subscription subscription = (Subscription)list.get(0);
-
-			return subscription;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Subscription)result;
 		}
 	}
 

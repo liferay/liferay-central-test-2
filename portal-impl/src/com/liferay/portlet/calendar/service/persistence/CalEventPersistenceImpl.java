@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
@@ -96,6 +97,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public CalEvent remove(CalEvent calEvent) throws SystemException {
+		FinderCache.clearCache(CalEvent.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,16 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent update(
-		com.liferay.portlet.calendar.model.CalEvent calEvent)
+	public CalEvent update(com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws SystemException {
 		return update(calEvent, false);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent update(
+	public CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(CalEvent.class.getName());
+
 		Session session = null;
 
 		try {

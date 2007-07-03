@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
@@ -99,6 +100,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public SCFrameworkVersion remove(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
+		FinderCache.clearCache(SCFrameworkVersion.class.getName());
+
 		Session session = null;
 
 		try {
@@ -116,15 +119,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
+	public SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
 		return update(scFrameworkVersion, false);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
+	public SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(SCFrameworkVersion.class.getName());
+
 		Session session = null;
 
 		try {

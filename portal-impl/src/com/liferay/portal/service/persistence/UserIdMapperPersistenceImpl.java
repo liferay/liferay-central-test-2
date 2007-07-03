@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 	public UserIdMapper remove(UserIdMapper userIdMapper)
 		throws SystemException {
+		FinderCache.clearCache(UserIdMapper.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.UserIdMapper update(
+	public UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws SystemException {
 		return update(userIdMapper, false);
 	}
 
-	public com.liferay.portal.model.UserIdMapper update(
+	public UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(UserIdMapper.class.getName());
+
 		Session session = null;
 
 		try {
@@ -352,50 +357,62 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 	public UserIdMapper fetchByU_T(long userId, String type)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = UserIdMapper.class.getName();
+		String finderMethodName = "fetchByU_T";
+		Object[] finderArgs = new Object[] { new Long(userId), type };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserIdMapper WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (type == null) {
-				query.append("type_ IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+				query.append("userId = ?");
+				query.append(" AND ");
+
+				if (type == null) {
+					query.append("type_ IS NULL");
+				}
+				else {
+					query.append("type_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, userId);
+
+				if (type != null) {
+					q.setString(queryPos++, type);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				UserIdMapper userIdMapper = (UserIdMapper)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, userIdMapper);
+
+				return userIdMapper;
 			}
-			else {
-				query.append("type_ = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-
-			if (type != null) {
-				q.setString(queryPos++, type);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			UserIdMapper userIdMapper = (UserIdMapper)list.get(0);
-
-			return userIdMapper;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (UserIdMapper)result;
 		}
 	}
 

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
@@ -98,6 +99,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
 		throws SystemException {
+		FinderCache.clearCache(MBMessageFlag.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
+	public MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		return update(mbMessageFlag, false);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
+	public MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(MBMessageFlag.class.getName());
+
 		Session session = null;
 
 		try {
@@ -500,41 +505,52 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 	public MBMessageFlag fetchByU_M(long userId, long messageId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessageFlag.class.getName();
+		String finderMethodName = "fetchByU_M";
+		Object[] finderArgs = new Object[] { new Long(userId), new Long(messageId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
-			query.append("messageId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
+				query.append("userId = ?");
+				query.append(" AND ");
+				query.append("messageId = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-			q.setLong(queryPos++, messageId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, userId);
+				q.setLong(queryPos++, messageId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				MBMessageFlag mbMessageFlag = (MBMessageFlag)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, mbMessageFlag);
+
+				return mbMessageFlag;
 			}
-
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)list.get(0);
-
-			return mbMessageFlag;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBMessageFlag)result;
 		}
 	}
 

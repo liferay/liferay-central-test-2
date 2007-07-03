@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
@@ -96,6 +97,8 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public MBCategory remove(MBCategory mbCategory) throws SystemException {
+		FinderCache.clearCache(MBCategory.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory update(
+	public MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws SystemException {
 		return update(mbCategory, false);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory update(
+	public MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(MBCategory.class.getName());
+
 		Session session = null;
 
 		try {

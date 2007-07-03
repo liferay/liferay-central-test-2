@@ -50,6 +50,16 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static Float[] append(Float[] array, Float obj) {
+		Float[] newArray = new Float[array.length + 1];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		newArray[newArray.length - 1] = obj;
+
+		return newArray;
+	}
+
 	public static Integer[] append(Integer[] array, Integer obj) {
 		Integer[] newArray = new Integer[array.length + 1];
 
@@ -131,6 +141,15 @@ public class ArrayUtil {
 
 	public static Double[] append(Double[] array1, Double[] array2) {
 		Double[] newArray = new Double[array1.length + array2.length];
+
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
+
+		return newArray;
+	}
+
+	public static Float[] append(Float[] array1, Float[] array2) {
+		Float[] newArray = new Float[array1.length + array2.length];
 
 		System.arraycopy(array1, 0, newArray, 0, array1.length);
 		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
@@ -241,6 +260,66 @@ public class ArrayUtil {
 		else {
 			return array[pos];
 		}
+	}
+
+	public static Boolean[] toObjectArray(boolean[] array) {
+		Boolean[] objArray = new Boolean[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			objArray[i] = new Boolean(array[i]);
+		}
+
+		return objArray;
+	}
+
+	public static Double[] toObjectArray(double[] array) {
+		Double[] objArray = new Double[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			objArray[i] = new Double(array[i]);
+		}
+
+		return objArray;
+	}
+
+	public static Float[] toObjectArray(float[] array) {
+		Float[] objArray = new Float[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			objArray[i] = new Float(array[i]);
+		}
+
+		return objArray;
+	}
+
+	public static Integer[] toObjectArray(int[] array) {
+		Integer[] objArray = new Integer[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			objArray[i] = new Integer(array[i]);
+		}
+
+		return objArray;
+	}
+
+	public static Long[] toObjectArray(long[] array) {
+		Long[] objArray = new Long[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			objArray[i] = new Long(array[i]);
+		}
+
+		return objArray;
+	}
+
+	public static Short[] toObjectArray(short[] array) {
+		Short[] objArray = new Short[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			objArray[i] = new Short(array[i]);
+		}
+
+		return objArray;
 	}
 
 }

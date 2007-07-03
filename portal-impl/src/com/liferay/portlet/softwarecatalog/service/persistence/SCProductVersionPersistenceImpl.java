@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
@@ -112,6 +113,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public SCProductVersion remove(SCProductVersion scProductVersion)
 		throws SystemException {
+		FinderCache.clearCache(SCProductVersion.class.getName());
+
 		Session session = null;
 
 		try {
@@ -130,15 +133,17 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
+	public SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws SystemException {
 		return update(scProductVersion, false);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
+	public SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(SCProductVersion.class.getName());
+
 		Session session = null;
 
 		try {

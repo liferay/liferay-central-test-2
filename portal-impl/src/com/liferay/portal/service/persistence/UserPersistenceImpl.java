@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -105,6 +106,8 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public User remove(User user) throws SystemException {
+		FinderCache.clearCache(User.class.getName());
+
 		Session session = null;
 
 		try {
@@ -127,14 +130,15 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.User update(
-		com.liferay.portal.model.User user) throws SystemException {
+	public User update(com.liferay.portal.model.User user)
+		throws SystemException {
 		return update(user, false);
 	}
 
-	public com.liferay.portal.model.User update(
-		com.liferay.portal.model.User user, boolean saveOrUpdate)
+	public User update(com.liferay.portal.model.User user, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(User.class.getName());
+
 		Session session = null;
 
 		try {
@@ -354,37 +358,48 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public User fetchByContactId(long contactId) throws SystemException {
-		Session session = null;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByContactId";
+		Object[] finderArgs = new Object[] { new Long(contactId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-			query.append("contactId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("contactId = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, contactId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, contactId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				User user = (User)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, user);
+
+				return user;
 			}
-
-			User user = (User)list.get(0);
-
-			return user;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (User)result;
 		}
 	}
 
@@ -415,40 +430,51 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public User fetchByC_U(long companyId, long userId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByC_U";
+		Object[] finderArgs = new Object[] { new Long(companyId), new Long(userId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-			q.setLong(queryPos++, userId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, userId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				User user = (User)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, user);
+
+				return user;
 			}
-
-			User user = (User)list.get(0);
-
-			return user;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (User)result;
 		}
 	}
 
@@ -479,40 +505,53 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public User fetchByC_DU(long companyId, boolean defaultUser)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByC_DU";
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Boolean(defaultUser)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-			query.append("defaultUser = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+				query.append("defaultUser = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-			q.setBoolean(queryPos++, defaultUser);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+				q.setBoolean(queryPos++, defaultUser);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				User user = (User)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, user);
+
+				return user;
 			}
-
-			User user = (User)list.get(0);
-
-			return user;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (User)result;
 		}
 	}
 
@@ -727,50 +766,61 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public User fetchByC_SN(long companyId, String screenName)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByC_SN";
+		Object[] finderArgs = new Object[] { new Long(companyId), screenName };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (screenName == null) {
-				query.append("screenName IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (screenName == null) {
+					query.append("screenName IS NULL");
+				}
+				else {
+					query.append("screenName = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (screenName != null) {
+					q.setString(queryPos++, screenName);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				User user = (User)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, user);
+
+				return user;
 			}
-			else {
-				query.append("screenName = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (screenName != null) {
-				q.setString(queryPos++, screenName);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			User user = (User)list.get(0);
-
-			return user;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (User)result;
 		}
 	}
 
@@ -801,50 +851,61 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public User fetchByC_EA(long companyId, String emailAddress)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByC_EA";
+		Object[] finderArgs = new Object[] { new Long(companyId), emailAddress };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.User WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (emailAddress == null) {
-				query.append("emailAddress IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (emailAddress == null) {
+					query.append("emailAddress IS NULL");
+				}
+				else {
+					query.append("emailAddress = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (emailAddress != null) {
+					q.setString(queryPos++, emailAddress);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				User user = (User)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, user);
+
+				return user;
 			}
-			else {
-				query.append("emailAddress = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (emailAddress != null) {
-				q.setString(queryPos++, emailAddress);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			User user = (User)list.get(0);
-
-			return user;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (User)result;
 		}
 	}
 

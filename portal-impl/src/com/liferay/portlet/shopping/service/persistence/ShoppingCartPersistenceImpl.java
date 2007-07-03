@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.shopping.NoSuchCartException;
@@ -97,6 +98,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 	public ShoppingCart remove(ShoppingCart shoppingCart)
 		throws SystemException {
+		FinderCache.clearCache(ShoppingCart.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCart update(
+	public ShoppingCart update(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws SystemException {
 		return update(shoppingCart, false);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCart update(
+	public ShoppingCart update(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(ShoppingCart.class.getName());
+
 		Session session = null;
 
 		try {
@@ -494,41 +499,52 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 	public ShoppingCart fetchByG_U(long groupId, long userId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = ShoppingCart.class.getName();
+		String finderMethodName = "fetchByG_U";
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingCart WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, userId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+				q.setLong(queryPos++, userId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				ShoppingCart shoppingCart = (ShoppingCart)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, shoppingCart);
+
+				return shoppingCart;
 			}
-
-			ShoppingCart shoppingCart = (ShoppingCart)list.get(0);
-
-			return shoppingCart;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ShoppingCart)result;
 		}
 	}
 

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.messageboards.NoSuchBanException;
@@ -93,6 +94,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public MBBan remove(MBBan mbBan) throws SystemException {
+		FinderCache.clearCache(MBBan.class.getName());
+
 		Session session = null;
 
 		try {
@@ -110,15 +113,15 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBBan update(
-		com.liferay.portlet.messageboards.model.MBBan mbBan)
+	public MBBan update(com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws SystemException {
 		return update(mbBan, false);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBBan update(
-		com.liferay.portlet.messageboards.model.MBBan mbBan,
+	public MBBan update(com.liferay.portlet.messageboards.model.MBBan mbBan,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(MBBan.class.getName());
+
 		Session session = null;
 
 		try {
@@ -625,41 +628,54 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 	public MBBan fetchByG_B(long groupId, long banUserId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBBan.class.getName();
+		String finderMethodName = "fetchByG_B";
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(banUserId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
-			query.append("banUserId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBBan WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+				query.append("banUserId = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-			q.setLong(queryPos++, banUserId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+				q.setLong(queryPos++, banUserId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				MBBan mbBan = (MBBan)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, mbBan);
+
+				return mbBan;
 			}
-
-			MBBan mbBan = (MBBan)list.get(0);
-
-			return mbBan;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBBan)result;
 		}
 	}
 

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -96,6 +97,8 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public IGImage remove(IGImage igImage) throws SystemException {
+		FinderCache.clearCache(IGImage.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage update(
+	public IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws SystemException {
 		return update(igImage, false);
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage update(
+	public IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(IGImage.class.getName());
+
 		Session session = null;
 
 		try {

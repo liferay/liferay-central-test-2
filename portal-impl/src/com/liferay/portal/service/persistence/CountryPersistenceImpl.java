@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class CountryPersistenceImpl extends BasePersistence
 	}
 
 	public Country remove(Country country) throws SystemException {
+		FinderCache.clearCache(Country.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Country update(
-		com.liferay.portal.model.Country country) throws SystemException {
+	public Country update(com.liferay.portal.model.Country country)
+		throws SystemException {
 		return update(country, false);
 	}
 
-	public com.liferay.portal.model.Country update(
-		com.liferay.portal.model.Country country, boolean saveOrUpdate)
-		throws SystemException {
+	public Country update(com.liferay.portal.model.Country country,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Country.class.getName());
+
 		Session session = null;
 
 		try {

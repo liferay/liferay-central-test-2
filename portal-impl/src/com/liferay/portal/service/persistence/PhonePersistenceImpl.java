@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -94,6 +95,8 @@ public class PhonePersistenceImpl extends BasePersistence
 	}
 
 	public Phone remove(Phone phone) throws SystemException {
+		FinderCache.clearCache(Phone.class.getName());
+
 		Session session = null;
 
 		try {
@@ -111,14 +114,15 @@ public class PhonePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Phone update(
-		com.liferay.portal.model.Phone phone) throws SystemException {
+	public Phone update(com.liferay.portal.model.Phone phone)
+		throws SystemException {
 		return update(phone, false);
 	}
 
-	public com.liferay.portal.model.Phone update(
-		com.liferay.portal.model.Phone phone, boolean saveOrUpdate)
-		throws SystemException {
+	public Phone update(com.liferay.portal.model.Phone phone,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Phone.class.getName());
+
 		Session session = null;
 
 		try {

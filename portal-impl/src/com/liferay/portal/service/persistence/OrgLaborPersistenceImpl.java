@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	}
 
 	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
+		FinderCache.clearCache(OrgLabor.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor) throws SystemException {
+	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor)
+		throws SystemException {
 		return update(orgLabor, false);
 	}
 
-	public com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor, boolean saveOrUpdate)
-		throws SystemException {
+	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(OrgLabor.class.getName());
+
 		Session session = null;
 
 		try {

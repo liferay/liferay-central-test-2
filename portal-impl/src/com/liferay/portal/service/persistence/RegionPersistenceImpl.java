@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class RegionPersistenceImpl extends BasePersistence
 	}
 
 	public Region remove(Region region) throws SystemException {
+		FinderCache.clearCache(Region.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Region update(
-		com.liferay.portal.model.Region region) throws SystemException {
+	public Region update(com.liferay.portal.model.Region region)
+		throws SystemException {
 		return update(region, false);
 	}
 
-	public com.liferay.portal.model.Region update(
-		com.liferay.portal.model.Region region, boolean saveOrUpdate)
-		throws SystemException {
+	public Region update(com.liferay.portal.model.Region region,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Region.class.getName());
+
 		Session session = null;
 
 		try {

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -94,6 +95,8 @@ public class ReleasePersistenceImpl extends BasePersistence
 	}
 
 	public Release remove(Release release) throws SystemException {
+		FinderCache.clearCache(Release.class.getName());
+
 		Session session = null;
 
 		try {
@@ -111,14 +114,15 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release) throws SystemException {
+	public Release update(com.liferay.portal.model.Release release)
+		throws SystemException {
 		return update(release, false);
 	}
 
-	public com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release, boolean saveOrUpdate)
-		throws SystemException {
+	public Release update(com.liferay.portal.model.Release release,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Release.class.getName());
+
 		Session session = null;
 
 		try {

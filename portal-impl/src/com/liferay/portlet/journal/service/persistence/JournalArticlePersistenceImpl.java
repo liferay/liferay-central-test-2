@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.journal.NoSuchArticleException;
@@ -97,6 +98,8 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 	public JournalArticle remove(JournalArticle journalArticle)
 		throws SystemException {
+		FinderCache.clearCache(JournalArticle.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticle update(
+	public JournalArticle update(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws SystemException {
 		return update(journalArticle, false);
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticle update(
+	public JournalArticle update(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(JournalArticle.class.getName());
+
 		Session session = null;
 
 		try {
@@ -1126,58 +1131,71 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 	public JournalArticle fetchByG_A_V(long groupId, String articleId,
 		double version) throws SystemException {
-		Session session = null;
+		String finderClassName = JournalArticle.class.getName();
+		String finderMethodName = "fetchByG_A_V";
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), articleId, new Double(version)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (articleId == null) {
-				query.append("articleId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+
+				if (articleId == null) {
+					query.append("articleId IS NULL");
+				}
+				else {
+					query.append("articleId = ?");
+				}
+
+				query.append(" AND ");
+				query.append("version = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("articleId ASC").append(", ");
+				query.append("version DESC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				if (articleId != null) {
+					q.setString(queryPos++, articleId);
+				}
+
+				q.setDouble(queryPos++, version);
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				JournalArticle journalArticle = (JournalArticle)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, journalArticle);
+
+				return journalArticle;
 			}
-			else {
-				query.append("articleId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-			query.append("version = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("articleId ASC").append(", ");
-			query.append("version DESC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
+			finally {
+				closeSession(session);
 			}
-
-			q.setDouble(queryPos++, version);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			JournalArticle journalArticle = (JournalArticle)list.get(0);
-
-			return journalArticle;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (JournalArticle)result;
 		}
 	}
 

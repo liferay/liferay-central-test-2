@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.polls.NoSuchVoteException;
@@ -96,6 +97,8 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	}
 
 	public PollsVote remove(PollsVote pollsVote) throws SystemException {
+		FinderCache.clearCache(PollsVote.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,16 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.polls.model.PollsVote update(
-		com.liferay.portlet.polls.model.PollsVote pollsVote)
+	public PollsVote update(com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws SystemException {
 		return update(pollsVote, false);
 	}
 
-	public com.liferay.portlet.polls.model.PollsVote update(
+	public PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(PollsVote.class.getName());
+
 		Session session = null;
 
 		try {
@@ -491,41 +495,54 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 	public PollsVote fetchByQ_U(long questionId, long userId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "fetchByQ_U";
+		Object[] finderArgs = new Object[] {
+				new Long(questionId), new Long(userId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("questionId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-			q.setLong(queryPos++, userId);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, questionId);
+				q.setLong(queryPos++, userId);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				PollsVote pollsVote = (PollsVote)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, pollsVote);
+
+				return pollsVote;
 			}
-
-			PollsVote pollsVote = (PollsVote)list.get(0);
-
-			return pollsVote;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PollsVote)result;
 		}
 	}
 

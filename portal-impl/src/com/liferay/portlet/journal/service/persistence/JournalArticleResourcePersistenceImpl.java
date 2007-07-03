@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.journal.NoSuchArticleResourceException;
@@ -100,6 +101,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 	public JournalArticleResource remove(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
+		FinderCache.clearCache(JournalArticleResource.class.getName());
+
 		Session session = null;
 
 		try {
@@ -117,15 +120,17 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticleResource update(
+	public JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws SystemException {
 		return update(journalArticleResource, false);
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticleResource update(
+	public JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(JournalArticleResource.class.getName());
+
 		Session session = null;
 
 		try {
@@ -218,51 +223,62 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 	public JournalArticleResource fetchByG_A(long groupId, String articleId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = JournalArticleResource.class.getName();
+		String finderMethodName = "fetchByG_A";
+		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticleResource WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (articleId == null) {
-				query.append("articleId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleResource WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+
+				if (articleId == null) {
+					query.append("articleId IS NULL");
+				}
+				else {
+					query.append("articleId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				if (articleId != null) {
+					q.setString(queryPos++, articleId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				JournalArticleResource journalArticleResource = (JournalArticleResource)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, journalArticleResource);
+
+				return journalArticleResource;
 			}
-			else {
-				query.append("articleId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			JournalArticleResource journalArticleResource = (JournalArticleResource)list.get(0);
-
-			return journalArticleResource;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (JournalArticleResource)result;
 		}
 	}
 

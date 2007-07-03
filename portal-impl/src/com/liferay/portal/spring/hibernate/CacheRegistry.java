@@ -53,6 +53,8 @@ public class CacheRegistry {
 
 			cache.clear();
 		}
+
+		FinderCache.clearCache();
 	}
 
 	public static void register(Cache cache) {

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.shopping.NoSuchOrderItemException;
@@ -99,6 +100,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 
 	public ShoppingOrderItem remove(ShoppingOrderItem shoppingOrderItem)
 		throws SystemException {
+		FinderCache.clearCache(ShoppingOrderItem.class.getName());
+
 		Session session = null;
 
 		try {
@@ -116,15 +119,17 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem update(
+	public ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws SystemException {
 		return update(shoppingOrderItem, false);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem update(
+	public ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(ShoppingOrderItem.class.getName());
+
 		Session session = null;
 
 		try {

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -96,6 +97,8 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	public WikiPage remove(WikiPage wikiPage) throws SystemException {
+		FinderCache.clearCache(WikiPage.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage update(
-		com.liferay.portlet.wiki.model.WikiPage wikiPage)
+	public WikiPage update(com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws SystemException {
 		return update(wikiPage, false);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage update(
-		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean saveOrUpdate)
-		throws SystemException {
+	public WikiPage update(com.liferay.portlet.wiki.model.WikiPage wikiPage,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(WikiPage.class.getName());
+
 		Session session = null;
 
 		try {
@@ -732,58 +735,72 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = WikiPage.class.getName();
+		String finderMethodName = "fetchByN_T_V";
+		Object[] finderArgs = new Object[] {
+				new Long(nodeId), title, new Double(version)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
-			query.append("nodeId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (title == null) {
-				query.append("title IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+				query.append("nodeId = ?");
+				query.append(" AND ");
+
+				if (title == null) {
+					query.append("title IS NULL");
+				}
+				else {
+					query.append("title = ?");
+				}
+
+				query.append(" AND ");
+				query.append("version = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("nodeId ASC").append(", ");
+				query.append("title ASC").append(", ");
+				query.append("version ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, nodeId);
+
+				if (title != null) {
+					q.setString(queryPos++, title);
+				}
+
+				q.setDouble(queryPos++, version);
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				WikiPage wikiPage = (WikiPage)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, wikiPage);
+
+				return wikiPage;
 			}
-			else {
-				query.append("title = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-			query.append("version = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("nodeId ASC").append(", ");
-			query.append("title ASC").append(", ");
-			query.append("version ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, nodeId);
-
-			if (title != null) {
-				q.setString(queryPos++, title);
+			finally {
+				closeSession(session);
 			}
-
-			q.setDouble(queryPos++, version);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			WikiPage wikiPage = (WikiPage)list.get(0);
-
-			return wikiPage;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (WikiPage)result;
 		}
 	}
 

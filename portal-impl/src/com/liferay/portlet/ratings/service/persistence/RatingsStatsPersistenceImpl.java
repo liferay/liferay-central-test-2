@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.ratings.NoSuchStatsException;
@@ -97,6 +98,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 	public RatingsStats remove(RatingsStats ratingsStats)
 		throws SystemException {
+		FinderCache.clearCache(RatingsStats.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.ratings.model.RatingsStats update(
+	public RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws SystemException {
 		return update(ratingsStats, false);
 	}
 
-	public com.liferay.portlet.ratings.model.RatingsStats update(
+	public RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(RatingsStats.class.getName());
+
 		Session session = null;
 
 		try {
@@ -212,41 +217,54 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 	public RatingsStats fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = RatingsStats.class.getName();
+		String finderMethodName = "fetchByC_C";
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				RatingsStats ratingsStats = (RatingsStats)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, ratingsStats);
+
+				return ratingsStats;
 			}
-
-			RatingsStats ratingsStats = (RatingsStats)list.get(0);
-
-			return ratingsStats;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (RatingsStats)result;
 		}
 	}
 

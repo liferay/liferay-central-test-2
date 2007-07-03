@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -94,6 +95,8 @@ public class AccountPersistenceImpl extends BasePersistence
 	}
 
 	public Account remove(Account account) throws SystemException {
+		FinderCache.clearCache(Account.class.getName());
+
 		Session session = null;
 
 		try {
@@ -111,14 +114,15 @@ public class AccountPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Account update(
-		com.liferay.portal.model.Account account) throws SystemException {
+	public Account update(com.liferay.portal.model.Account account)
+		throws SystemException {
 		return update(account, false);
 	}
 
-	public com.liferay.portal.model.Account update(
-		com.liferay.portal.model.Account account, boolean saveOrUpdate)
-		throws SystemException {
+	public Account update(com.liferay.portal.model.Account account,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Account.class.getName());
+
 		Session session = null;
 
 		try {

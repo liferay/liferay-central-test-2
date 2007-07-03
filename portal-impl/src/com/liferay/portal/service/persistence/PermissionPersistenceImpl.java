@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -109,6 +110,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public Permission remove(Permission permission) throws SystemException {
+		FinderCache.clearCache(Permission.class.getName());
+
 		Session session = null;
 
 		try {
@@ -129,15 +132,15 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.Permission update(
-		com.liferay.portal.model.Permission permission)
+	public Permission update(com.liferay.portal.model.Permission permission)
 		throws SystemException {
 		return update(permission, false);
 	}
 
-	public com.liferay.portal.model.Permission update(
-		com.liferay.portal.model.Permission permission, boolean saveOrUpdate)
-		throws SystemException {
+	public Permission update(com.liferay.portal.model.Permission permission,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(Permission.class.getName());
+
 		Session session = null;
 
 		try {
@@ -368,51 +371,62 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public Permission fetchByA_R(String actionId, long resourceId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Permission.class.getName();
+		String finderMethodName = "fetchByA_R";
+		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Permission WHERE ");
+			try {
+				session = openSession();
 
-			if (actionId == null) {
-				query.append("actionId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Permission WHERE ");
+
+				if (actionId == null) {
+					query.append("actionId IS NULL");
+				}
+				else {
+					query.append("actionId = ?");
+				}
+
+				query.append(" AND ");
+				query.append("resourceId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (actionId != null) {
+					q.setString(queryPos++, actionId);
+				}
+
+				q.setLong(queryPos++, resourceId);
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				Permission permission = (Permission)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, permission);
+
+				return permission;
 			}
-			else {
-				query.append("actionId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-			query.append("resourceId = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (actionId != null) {
-				q.setString(queryPos++, actionId);
+			finally {
+				closeSession(session);
 			}
-
-			q.setLong(queryPos++, resourceId);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			Permission permission = (Permission)list.get(0);
-
-			return permission;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Permission)result;
 		}
 	}
 

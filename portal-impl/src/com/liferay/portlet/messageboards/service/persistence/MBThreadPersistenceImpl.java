@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -96,6 +97,8 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	}
 
 	public MBThread remove(MBThread mbThread) throws SystemException {
+		FinderCache.clearCache(MBThread.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread update(
+	public MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws SystemException {
 		return update(mbThread, false);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread update(
+	public MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(MBThread.class.getName());
+
 		Session session = null;
 
 		try {

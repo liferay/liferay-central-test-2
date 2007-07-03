@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.UserGroupRoleImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 	public UserGroupRole remove(UserGroupRole userGroupRole)
 		throws SystemException {
+		FinderCache.clearCache(UserGroupRole.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.UserGroupRole update(
+	public UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws SystemException {
 		return update(userGroupRole, false);
 	}
 
-	public com.liferay.portal.model.UserGroupRole update(
+	public UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(UserGroupRole.class.getName());
+
 		Session session = null;
 
 		try {

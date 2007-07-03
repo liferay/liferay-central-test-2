@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -95,6 +96,8 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	}
 
 	public ClassName remove(ClassName className) throws SystemException {
+		FinderCache.clearCache(ClassName.class.getName());
+
 		Session session = null;
 
 		try {
@@ -112,14 +115,15 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.ClassName update(
-		com.liferay.portal.model.ClassName className) throws SystemException {
+	public ClassName update(com.liferay.portal.model.ClassName className)
+		throws SystemException {
 		return update(className, false);
 	}
 
-	public com.liferay.portal.model.ClassName update(
-		com.liferay.portal.model.ClassName className, boolean saveOrUpdate)
-		throws SystemException {
+	public ClassName update(com.liferay.portal.model.ClassName className,
+		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(ClassName.class.getName());
+
 		Session session = null;
 
 		try {
@@ -205,47 +209,58 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	}
 
 	public ClassName fetchByValue(String value) throws SystemException {
-		Session session = null;
+		String finderClassName = ClassName.class.getName();
+		String finderMethodName = "fetchByValue";
+		Object[] finderArgs = new Object[] { value };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ClassName WHERE ");
+			try {
+				session = openSession();
 
-			if (value == null) {
-				query.append("value IS NULL");
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.ClassName WHERE ");
+
+				if (value == null) {
+					query.append("value IS NULL");
+				}
+				else {
+					query.append("value = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (value != null) {
+					q.setString(queryPos++, value);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				ClassName className = (ClassName)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, className);
+
+				return className;
 			}
-			else {
-				query.append("value = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (value != null) {
-				q.setString(queryPos++, value);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			ClassName className = (ClassName)list.get(0);
-
-			return className;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ClassName)result;
 		}
 	}
 

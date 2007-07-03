@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -97,6 +98,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
 		throws SystemException {
+		FinderCache.clearCache(OrgGroupRole.class.getName());
+
 		Session session = null;
 
 		try {
@@ -114,15 +117,17 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.OrgGroupRole update(
+	public OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws SystemException {
 		return update(orgGroupRole, false);
 	}
 
-	public com.liferay.portal.model.OrgGroupRole update(
+	public OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(OrgGroupRole.class.getName());
+
 		Session session = null;
 
 		try {

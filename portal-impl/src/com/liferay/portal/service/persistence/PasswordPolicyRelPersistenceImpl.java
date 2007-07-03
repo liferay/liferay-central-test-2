@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.impl.PasswordPolicyRelImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -98,6 +99,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
+		FinderCache.clearCache(PasswordPolicyRel.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.PasswordPolicyRel update(
+	public PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		return update(passwordPolicyRel, false);
 	}
 
-	public com.liferay.portal.model.PasswordPolicyRel update(
+	public PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(PasswordPolicyRel.class.getName());
+
 		Session session = null;
 
 		try {
@@ -214,41 +219,54 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = PasswordPolicyRel.class.getName();
+		String finderMethodName = "fetchByC_C";
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, passwordPolicyRel);
+
+				return passwordPolicyRel;
 			}
-
-			PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)list.get(0);
-
-			return passwordPolicyRel;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PasswordPolicyRel)result;
 		}
 	}
 
@@ -284,44 +302,58 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 	public PasswordPolicyRel fetchByP_C_C(long passwordPolicyId,
 		long classNameId, long classPK) throws SystemException {
-		Session session = null;
+		String finderClassName = PasswordPolicyRel.class.getName();
+		String finderMethodName = "fetchByP_C_C";
+		Object[] finderArgs = new Object[] {
+				new Long(passwordPolicyId), new Long(classNameId),
+				new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
-			query.append("passwordPolicyId = ?");
-			query.append(" AND ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.PasswordPolicyRel WHERE ");
+				query.append("passwordPolicyId = ?");
+				query.append(" AND ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			int queryPos = 0;
-			q.setLong(queryPos++, passwordPolicyId);
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, passwordPolicyId);
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			List list = q.list();
+				List list = q.list();
 
-			if (list.size() == 0) {
-				return null;
+				if (list.size() == 0) {
+					return null;
+				}
+
+				PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, passwordPolicyRel);
+
+				return passwordPolicyRel;
 			}
-
-			PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)list.get(0);
-
-			return passwordPolicyRel;
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PasswordPolicyRel)result;
 		}
 	}
 

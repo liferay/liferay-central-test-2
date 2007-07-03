@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.impl.ResourceCodeImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -96,6 +97,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 	public ResourceCode remove(ResourceCode resourceCode)
 		throws SystemException {
+		FinderCache.clearCache(ResourceCode.class.getName());
+
 		Session session = null;
 
 		try {
@@ -113,15 +116,17 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portal.model.ResourceCode update(
+	public ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws SystemException {
 		return update(resourceCode, false);
 	}
 
-	public com.liferay.portal.model.ResourceCode update(
+	public ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache(ResourceCode.class.getName());
+
 		Session session = null;
 
 		try {
@@ -524,54 +529,68 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 	public ResourceCode fetchByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = ResourceCode.class.getName();
+		String finderMethodName = "fetchByC_N_S";
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), name, new Integer(scope)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.ResourceCode WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (name == null) {
-				query.append("name IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.ResourceCode WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" AND ");
+				query.append("scope = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				q.setInteger(queryPos++, scope);
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				ResourceCode resourceCode = (ResourceCode)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, resourceCode);
+
+				return resourceCode;
 			}
-			else {
-				query.append("name = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-			query.append("scope = ?");
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
+			finally {
+				closeSession(session);
 			}
-
-			q.setInteger(queryPos++, scope);
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			ResourceCode resourceCode = (ResourceCode)list.get(0);
-
-			return resourceCode;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ResourceCode)result;
 		}
 	}
 

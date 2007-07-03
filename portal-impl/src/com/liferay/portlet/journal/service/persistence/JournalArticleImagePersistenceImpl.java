@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.journal.NoSuchArticleImageException;
@@ -99,6 +100,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
 		throws SystemException {
+		FinderCache.clearCache(JournalArticleImage.class.getName());
+
 		Session session = null;
 
 		try {
@@ -116,15 +119,17 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticleImage update(
+	public JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws SystemException {
 		return update(journalArticleImage, false);
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticleImage update(
+	public JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(JournalArticleImage.class.getName());
+
 		Session session = null;
 
 		try {
@@ -580,81 +585,95 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	public JournalArticleImage fetchByG_A_V_E_L(long groupId, String articleId,
 		double version, String elName, String languageId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = JournalArticleImage.class.getName();
+		String finderMethodName = "fetchByG_A_V_E_L";
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), articleId, new Double(version), elName,
+				languageId
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (articleId == null) {
-				query.append("articleId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+
+				if (articleId == null) {
+					query.append("articleId IS NULL");
+				}
+				else {
+					query.append("articleId = ?");
+				}
+
+				query.append(" AND ");
+				query.append("version = ?");
+				query.append(" AND ");
+
+				if (elName == null) {
+					query.append("elName IS NULL");
+				}
+				else {
+					query.append("elName = ?");
+				}
+
+				query.append(" AND ");
+
+				if (languageId == null) {
+					query.append("languageId IS NULL");
+				}
+				else {
+					query.append("languageId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				if (articleId != null) {
+					q.setString(queryPos++, articleId);
+				}
+
+				q.setDouble(queryPos++, version);
+
+				if (elName != null) {
+					q.setString(queryPos++, elName);
+				}
+
+				if (languageId != null) {
+					q.setString(queryPos++, languageId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				JournalArticleImage journalArticleImage = (JournalArticleImage)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, journalArticleImage);
+
+				return journalArticleImage;
 			}
-			else {
-				query.append("articleId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" AND ");
-			query.append("version = ?");
-			query.append(" AND ");
-
-			if (elName == null) {
-				query.append("elName IS NULL");
+			finally {
+				closeSession(session);
 			}
-			else {
-				query.append("elName = ?");
-			}
-
-			query.append(" AND ");
-
-			if (languageId == null) {
-				query.append("languageId IS NULL");
-			}
-			else {
-				query.append("languageId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			if (articleId != null) {
-				q.setString(queryPos++, articleId);
-			}
-
-			q.setDouble(queryPos++, version);
-
-			if (elName != null) {
-				q.setString(queryPos++, elName);
-			}
-
-			if (languageId != null) {
-				q.setString(queryPos++, languageId);
-			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			JournalArticleImage journalArticleImage = (JournalArticleImage)list.get(0);
-
-			return journalArticleImage;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (JournalArticleImage)result;
 		}
 	}
 

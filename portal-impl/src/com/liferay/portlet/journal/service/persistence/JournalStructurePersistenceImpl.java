@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -98,6 +99,8 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 	public JournalStructure remove(JournalStructure journalStructure)
 		throws SystemException {
+		FinderCache.clearCache(JournalStructure.class.getName());
+
 		Session session = null;
 
 		try {
@@ -115,15 +118,17 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure update(
+	public JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws SystemException {
 		return update(journalStructure, false);
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure update(
+	public JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache(JournalStructure.class.getName());
+
 		Session session = null;
 
 		try {
@@ -546,53 +551,64 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 	public JournalStructure fetchByG_S(long groupId, String structureId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = JournalStructure.class.getName();
+		String finderMethodName = "fetchByG_S";
+		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
-			query.append("groupId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (structureId == null) {
-				query.append("structureId IS NULL");
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+
+				if (structureId == null) {
+					query.append("structureId IS NULL");
+				}
+				else {
+					query.append("structureId = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("structureId ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				if (structureId != null) {
+					q.setString(queryPos++, structureId);
+				}
+
+				List list = q.list();
+
+				if (list.size() == 0) {
+					return null;
+				}
+
+				JournalStructure journalStructure = (JournalStructure)list.get(0);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderArgs, journalStructure);
+
+				return journalStructure;
 			}
-			else {
-				query.append("structureId = ?");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("structureId ASC");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			if (structureId != null) {
-				q.setString(queryPos++, structureId);
+			finally {
+				closeSession(session);
 			}
-
-			List list = q.list();
-
-			if (list.size() == 0) {
-				return null;
-			}
-
-			JournalStructure journalStructure = (JournalStructure)list.get(0);
-
-			return journalStructure;
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (JournalStructure)result;
 		}
 	}
 

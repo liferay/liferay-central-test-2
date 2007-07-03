@@ -43,6 +43,10 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array, obj);
 	}
 
+	public java.lang.Float[] append(java.lang.Float[] array, java.lang.Float obj) {
+		return ArrayUtil.append(array, obj);
+	}
+
 	public java.lang.Integer[] append(java.lang.Integer[] array,
 		java.lang.Integer obj) {
 		return ArrayUtil.append(array, obj);
@@ -83,6 +87,11 @@ public class ArrayUtil_IW {
 
 	public java.lang.Double[] append(java.lang.Double[] array1,
 		java.lang.Double[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Float[] append(java.lang.Float[] array1,
+		java.lang.Float[] array2) {
 		return ArrayUtil.append(array1, array2);
 	}
 
@@ -136,6 +145,30 @@ public class ArrayUtil_IW {
 
 	public java.lang.Object getValue(java.lang.Object[] array, int pos) {
 		return ArrayUtil.getValue(array, pos);
+	}
+
+	public java.lang.Boolean[] toObjectArray(boolean[] array) {
+		return ArrayUtil.toObjectArray(array);
+	}
+
+	public java.lang.Double[] toObjectArray(double[] array) {
+		return ArrayUtil.toObjectArray(array);
+	}
+
+	public java.lang.Float[] toObjectArray(float[] array) {
+		return ArrayUtil.toObjectArray(array);
+	}
+
+	public java.lang.Integer[] toObjectArray(int[] array) {
+		return ArrayUtil.toObjectArray(array);
+	}
+
+	public java.lang.Long[] toObjectArray(long[] array) {
+		return ArrayUtil.toObjectArray(array);
+	}
+
+	public java.lang.Short[] toObjectArray(short[] array) {
+		return ArrayUtil.toObjectArray(array);
 	}
 
 	private ArrayUtil_IW() {
