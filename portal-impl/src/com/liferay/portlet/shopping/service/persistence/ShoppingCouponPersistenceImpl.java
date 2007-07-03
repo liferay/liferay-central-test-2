@@ -201,8 +201,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			query.append("createDate ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -244,8 +242,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -322,8 +318,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -482,7 +476,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -531,8 +524,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -577,8 +568,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (code != null) {
@@ -617,8 +606,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.shopping.model.ShoppingCoupon");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

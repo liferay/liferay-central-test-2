@@ -177,8 +177,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -287,8 +285,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -345,8 +341,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -391,8 +385,6 @@ public class PermissionFinder {
 				sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -439,8 +431,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -484,8 +474,6 @@ public class PermissionFinder {
 				_getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -531,8 +519,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -575,8 +561,6 @@ public class PermissionFinder {
 				_getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -651,8 +635,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -681,8 +663,6 @@ public class PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_U_R);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("Permission_", PermissionImpl.class);
 
@@ -713,8 +693,6 @@ public class PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_O_G_R);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("Permission_", PermissionImpl.class);
 
@@ -750,8 +728,6 @@ public class PermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -782,8 +758,6 @@ public class PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_G_C_N_S_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("Permission_", PermissionImpl.class);
 
@@ -817,8 +791,6 @@ public class PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_U_C_N_S_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("Permission_", PermissionImpl.class);
 

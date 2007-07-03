@@ -204,8 +204,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			query.append("description ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, orderId);
 
@@ -248,8 +246,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, orderId);
 
@@ -327,8 +323,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, orderId);
 
@@ -418,7 +412,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -461,8 +454,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, orderId);
 
@@ -498,8 +489,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

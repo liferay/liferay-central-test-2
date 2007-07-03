@@ -215,8 +215,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -257,8 +255,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -336,8 +332,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -372,8 +366,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -414,8 +406,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -493,8 +483,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -532,8 +520,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, parentOrganizationId);
@@ -577,8 +563,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, parentOrganizationId);
@@ -666,8 +650,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, parentOrganizationId);
@@ -832,7 +814,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -899,8 +880,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -937,8 +916,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append(" AND parentOrganizationId != 0 ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -978,8 +955,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 			q.setLong(queryPos++, parentOrganizationId);
@@ -1027,8 +1002,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -1067,8 +1040,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.Organization");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
@@ -1120,7 +1091,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
 			q.addEntity("Group_", com.liferay.portal.model.impl.GroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1143,7 +1113,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
-			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1354,7 +1323,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
 			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -1377,7 +1345,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
-			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

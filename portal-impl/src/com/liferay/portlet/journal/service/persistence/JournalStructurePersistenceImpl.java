@@ -201,8 +201,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			query.append("structureId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -244,8 +242,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -321,8 +317,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -365,8 +359,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			query.append("structureId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (structureId != null) {
@@ -418,8 +410,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (structureId != null) {
@@ -506,8 +496,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (structureId != null) {
@@ -676,7 +664,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -735,8 +722,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -781,8 +766,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (structureId != null) {
@@ -833,8 +816,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -874,8 +855,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.journal.model.JournalStructure");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

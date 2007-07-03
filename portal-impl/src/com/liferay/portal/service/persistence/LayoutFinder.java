@@ -67,8 +67,6 @@ public class LayoutFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar("layoutPlid", Hibernate.LONG);
 			q.addScalar("prefsPortletId", Hibernate.STRING);
 

@@ -70,8 +70,6 @@ public class DLFileEntryAndShortcutFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -128,8 +126,6 @@ public class DLFileEntryAndShortcutFinder {
 				_getFolderIds(folderIds, "DLFileShortcut"));
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("folderId", Hibernate.LONG);
 			q.addScalar("name", Hibernate.STRING);

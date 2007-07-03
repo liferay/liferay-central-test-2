@@ -334,8 +334,6 @@ public class GroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar("groupId", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -397,8 +395,6 @@ public class GroupFinder {
 
 		SQLQuery q = session.createSQLQuery(sql);
 
-		q.setCacheable(false);
-
 		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -430,8 +426,6 @@ public class GroupFinder {
 		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 
 		SQLQuery q = session.createSQLQuery(sql);
-
-		q.setCacheable(false);
 
 		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 

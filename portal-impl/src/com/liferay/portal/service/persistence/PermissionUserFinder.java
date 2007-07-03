@@ -116,8 +116,6 @@ public class PermissionUserFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -254,8 +252,6 @@ public class PermissionUserFinder {
 
 		SQLQuery q = session.createSQLQuery(sql);
 
-		q.setCacheable(false);
-
 		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
@@ -334,8 +330,6 @@ public class PermissionUserFinder {
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("userId", Hibernate.LONG);
 
@@ -418,8 +412,6 @@ public class PermissionUserFinder {
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("userId", Hibernate.LONG);
 

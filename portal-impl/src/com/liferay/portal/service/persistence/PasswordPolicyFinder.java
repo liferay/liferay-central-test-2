@@ -65,8 +65,6 @@ public class PasswordPolicyFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -109,8 +107,6 @@ public class PasswordPolicyFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("PasswordPolicy", PasswordPolicyImpl.class);
 

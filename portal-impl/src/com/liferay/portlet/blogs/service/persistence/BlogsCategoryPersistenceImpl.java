@@ -202,8 +202,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, parentCategoryId);
 
@@ -245,8 +243,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, parentCategoryId);
 
@@ -324,8 +320,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, parentCategoryId);
 
@@ -413,7 +407,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -458,8 +451,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, parentCategoryId);
 
@@ -494,8 +485,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portlet.blogs.model.BlogsCategory");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

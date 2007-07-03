@@ -58,8 +58,6 @@ public class ResourceFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("Resource_", ResourceImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -87,8 +85,6 @@ public class ResourceFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("Resource_", ResourceImpl.class);
 

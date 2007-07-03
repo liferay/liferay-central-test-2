@@ -193,8 +193,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 
@@ -235,8 +233,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 
@@ -311,8 +307,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 
@@ -346,8 +340,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -388,8 +380,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -464,8 +454,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -502,8 +490,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 			q.setBoolean(queryPos++, active);
@@ -547,8 +533,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 			q.setBoolean(queryPos++, active);
@@ -633,8 +617,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 			q.setBoolean(queryPos++, active);
@@ -722,7 +704,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -783,8 +764,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 
@@ -821,8 +800,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -862,8 +839,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, countryId);
 			q.setBoolean(queryPos++, active);
@@ -899,8 +874,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.Region");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

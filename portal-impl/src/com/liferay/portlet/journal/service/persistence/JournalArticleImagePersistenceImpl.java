@@ -201,8 +201,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, tempImage);
 
@@ -240,8 +238,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, tempImage);
 
@@ -316,8 +312,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, tempImage);
 
@@ -363,8 +357,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -419,8 +411,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -525,8 +515,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -734,7 +722,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -795,8 +782,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, tempImage);
 
@@ -846,8 +831,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -921,8 +904,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
 
@@ -972,8 +953,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

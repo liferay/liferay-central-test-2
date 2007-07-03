@@ -198,8 +198,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			query.append("lastPostDate DESC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -242,8 +240,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -321,8 +317,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -411,7 +405,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -454,8 +447,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -491,8 +482,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.messageboards.model.MBThread");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

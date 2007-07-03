@@ -64,8 +64,6 @@ public class TagsPropertyFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -111,8 +109,6 @@ public class TagsPropertyFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_K);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("propertyValue", Hibernate.STRING);
 

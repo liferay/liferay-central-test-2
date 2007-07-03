@@ -76,8 +76,6 @@ public class MBThreadFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.INTEGER);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -118,8 +116,6 @@ public class MBThreadFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -157,8 +153,6 @@ public class MBThreadFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -199,8 +193,6 @@ public class MBThreadFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("MBThread", MBThreadImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -228,8 +220,6 @@ public class MBThreadFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("MBThread", MBThreadImpl.class);
 

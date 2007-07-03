@@ -2743,7 +2743,6 @@ public class ServiceBuilder {
 				}
 
 				sm.append("Query q = session.createQuery(query.toString());");
-				sm.append("q.setCacheable(true);");
 				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
@@ -2885,7 +2884,6 @@ public class ServiceBuilder {
 				}
 
 				sm.append("Query q = session.createQuery(query.toString());");
-				sm.append("q.setCacheable(true);");
 				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
@@ -3136,7 +3134,6 @@ public class ServiceBuilder {
 				}
 
 				sm.append("Query q = session.createQuery(query.toString());");
-				sm.append("q.setCacheable(true);");
 				sm.append("int queryPos = 0;");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
@@ -3277,7 +3274,6 @@ public class ServiceBuilder {
 		}
 
 		sm.append("Query q = session.createQuery(query.toString());");
-		sm.append("q.setCacheable(true);");
 		sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
 		sm.append("}");
 		sm.append("catch (Exception e) {");
@@ -3418,7 +3414,6 @@ public class ServiceBuilder {
 			}
 
 			sm.append("Query q = session.createQuery(query.toString());");
-			sm.append("q.setCacheable(true);");
 			sm.append("int queryPos = 0;");
 
 			for (int j = 0; j < finderColsList.size(); j++) {
@@ -3489,7 +3484,6 @@ public class ServiceBuilder {
 		sm.append("query.append(\"SELECT COUNT(*) \");");
 		sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + "\");");
 		sm.append("Query q = session.createQuery(query.toString());");
-		sm.append("q.setCacheable(true);");
 		sm.append("Iterator itr = q.list().iterator();");
 		sm.append("if (itr.hasNext()) {");
 		sm.append("Long count = (Long)itr.next();");
@@ -3565,7 +3559,6 @@ public class ServiceBuilder {
 
 				sm.append("String sql = sm.toString();");
 				sm.append("SQLQuery q = session.createSQLQuery(sql);");
-				sm.append("q.setCacheable(false);");
 				sm.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model.impl." + tempEntity.getName() + "Impl.class);");
 				sm.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sm.append("qPos.add(pk);");
@@ -3586,7 +3579,6 @@ public class ServiceBuilder {
 				sm.append("try {");
 				sm.append("session = openSession();");
 				sm.append("SQLQuery q = session.createSQLQuery(_SQL_GET" + tempEntity.getName().toUpperCase() + "SSIZE);");
-				sm.append("q.setCacheable(false);");
 				sm.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
 				sm.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sm.append("qPos.add(pk);");

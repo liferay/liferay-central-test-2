@@ -445,7 +445,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -503,8 +502,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (webId != null) {
@@ -551,8 +548,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (virtualHost != null) {
@@ -599,8 +594,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (mx != null) {
@@ -638,8 +631,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.Company");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

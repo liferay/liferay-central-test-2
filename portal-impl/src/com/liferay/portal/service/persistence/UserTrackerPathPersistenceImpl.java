@@ -199,8 +199,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, userTrackerId);
 
@@ -237,8 +235,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, userTrackerId);
 
@@ -312,8 +308,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, userTrackerId);
 
@@ -397,7 +391,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -441,8 +434,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, userTrackerId);
 
@@ -477,8 +468,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.UserTrackerPath");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

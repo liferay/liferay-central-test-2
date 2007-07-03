@@ -201,8 +201,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, classNameId);
 			q.setLong(queryPos++, classPK);
@@ -243,8 +241,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, classNameId);
 			q.setLong(queryPos++, classPK);
@@ -326,8 +322,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, classNameId);
 			q.setLong(queryPos++, classPK);
@@ -483,7 +477,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -536,8 +529,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, classNameId);
 			q.setLong(queryPos++, classPK);
@@ -581,8 +572,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, userId);
 			q.setLong(queryPos++, classNameId);
@@ -619,8 +608,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portlet.ratings.model.RatingsEntry");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

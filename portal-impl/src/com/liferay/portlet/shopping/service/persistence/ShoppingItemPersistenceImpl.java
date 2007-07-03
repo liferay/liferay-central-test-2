@@ -212,8 +212,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			query.append("itemId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -255,8 +253,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -333,8 +329,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -500,7 +494,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -549,8 +542,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -597,8 +588,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, companyId);
 
@@ -637,8 +626,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portlet.shopping.model.ShoppingItem");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
@@ -692,7 +679,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
 			q.addEntity("ShoppingItemPrice",
 				com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl.class);
 
@@ -716,7 +702,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
-			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

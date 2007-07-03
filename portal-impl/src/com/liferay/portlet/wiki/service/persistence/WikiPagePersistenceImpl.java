@@ -197,8 +197,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append("version ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -241,8 +239,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -319,8 +315,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -365,8 +359,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append("version ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -422,8 +414,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -520,8 +510,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -563,8 +551,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append("version ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 			q.setBoolean(queryPos++, head);
@@ -610,8 +596,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 			q.setBoolean(queryPos++, head);
@@ -698,8 +682,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 			q.setBoolean(queryPos++, head);
@@ -833,8 +815,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append("version ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -894,8 +874,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -1002,8 +980,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -1098,7 +1074,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -1176,8 +1151,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -1223,8 +1196,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -1267,8 +1238,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 			q.setBoolean(queryPos++, head);
@@ -1318,8 +1287,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -1374,8 +1341,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, nodeId);
 
@@ -1416,8 +1381,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

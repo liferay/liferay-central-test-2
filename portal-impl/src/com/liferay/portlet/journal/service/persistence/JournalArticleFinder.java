@@ -108,8 +108,6 @@ public class JournalArticleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -196,8 +194,6 @@ public class JournalArticleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("JournalArticle", JournalArticleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -232,8 +228,6 @@ public class JournalArticleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_REVIEW_DATE);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("JournalArticle", JournalArticleImpl.class);
 
@@ -296,8 +290,6 @@ public class JournalArticleFinder {
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("JournalArticle", JournalArticleImpl.class);
 

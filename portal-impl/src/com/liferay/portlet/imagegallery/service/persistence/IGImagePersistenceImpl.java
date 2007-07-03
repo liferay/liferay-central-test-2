@@ -196,8 +196,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 			query.append("imageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -239,8 +237,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -316,8 +312,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -404,7 +398,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -447,8 +440,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -483,8 +474,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portlet.imagegallery.model.IGImage");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

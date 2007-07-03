@@ -125,8 +125,6 @@ public class OrganizationFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -237,8 +235,6 @@ public class OrganizationFinder {
 			sql = sm.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("orgId", Hibernate.LONG);
 
@@ -375,8 +371,6 @@ public class OrganizationFinder {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -521,8 +515,6 @@ public class OrganizationFinder {
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("orgId", Hibernate.LONG);
 

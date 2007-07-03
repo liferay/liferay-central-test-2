@@ -64,8 +64,6 @@ public class ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -131,8 +129,6 @@ public class ShoppingItemFinder {
 			query.append("ShoppingItem.smallImage = ?");
 
 			SQLQuery q = session.createSQLQuery(query.toString());
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -207,8 +203,6 @@ public class ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(query.toString());
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -278,8 +272,6 @@ public class ShoppingItemFinder {
 			query.append("ShoppingItem.smallImage = ?");
 
 			SQLQuery q = session.createSQLQuery(query.toString());
-
-			q.setCacheable(false);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -353,8 +345,6 @@ public class ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(query.toString());
 
-			q.setCacheable(false);
-
 			q.addEntity("ShoppingItem", ShoppingItemImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -420,8 +410,6 @@ public class ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(query.toString());
 
-			q.setCacheable(false);
-
 			q.addEntity("ShoppingItem", ShoppingItemImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -484,8 +472,6 @@ public class ShoppingItemFinder {
 			query.append("ShoppingItem.smallImage = ?");
 
 			SQLQuery q = session.createSQLQuery(query.toString());
-
-			q.setCacheable(false);
 
 			q.addEntity("ShoppingItem", ShoppingItemImpl.class);
 

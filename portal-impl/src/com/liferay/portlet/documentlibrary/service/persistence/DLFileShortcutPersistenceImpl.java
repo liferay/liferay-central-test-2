@@ -200,8 +200,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -239,8 +237,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -315,8 +311,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -360,8 +354,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, toFolderId);
 
@@ -412,8 +404,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, toFolderId);
 
@@ -507,8 +497,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, toFolderId);
 
@@ -597,7 +585,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -650,8 +637,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -699,8 +684,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, toFolderId);
 
@@ -740,8 +723,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

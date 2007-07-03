@@ -312,7 +312,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -358,8 +357,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 
 			if (value != null) {
@@ -397,8 +394,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.ClassName");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

@@ -194,8 +194,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -236,8 +234,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -312,8 +308,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -400,7 +394,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -442,8 +435,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setBoolean(queryPos++, active);
 
@@ -478,8 +469,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.Country");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

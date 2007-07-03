@@ -323,7 +323,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -365,8 +364,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, classNameId);
 			q.setLong(queryPos++, classPK);
@@ -402,8 +399,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
@@ -455,7 +450,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
 			q.addEntity("TagsEntry",
 				com.liferay.portlet.tags.model.impl.TagsEntryImpl.class);
 
@@ -479,7 +473,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETTAGSENTRYSSIZE);
-			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

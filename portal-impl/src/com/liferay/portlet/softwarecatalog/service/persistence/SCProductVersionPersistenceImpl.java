@@ -218,8 +218,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			query.append("createDate DESC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, productEntryId);
 
@@ -261,8 +259,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, productEntryId);
 
@@ -341,8 +337,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, productEntryId);
 
@@ -431,7 +425,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -476,8 +469,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, productEntryId);
 
@@ -513,8 +504,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
@@ -569,7 +558,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 			String sql = sm.toString();
 			SQLQuery q = session.createSQLQuery(sql);
-			q.setCacheable(false);
 			q.addEntity("SCFrameworkVersion",
 				com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl.class);
 
@@ -593,7 +581,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(_SQL_GETSCFRAMEWORKVERSIONSSIZE);
-			q.setCacheable(false);
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);

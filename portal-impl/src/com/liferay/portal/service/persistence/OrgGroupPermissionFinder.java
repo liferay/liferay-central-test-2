@@ -59,8 +59,6 @@ public class OrgGroupPermissionFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("OrgGroupPermission", OrgGroupPermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);

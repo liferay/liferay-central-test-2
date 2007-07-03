@@ -213,8 +213,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			query.append("version DESC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -271,8 +269,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -372,8 +368,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -554,7 +548,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -613,8 +606,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -668,8 +659,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, folderId);
 
@@ -711,8 +700,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

@@ -198,8 +198,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			query.append("typeId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, organizationId);
 
@@ -241,8 +239,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, organizationId);
 
@@ -319,8 +315,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, organizationId);
 
@@ -408,7 +402,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -452,8 +445,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, organizationId);
 
@@ -488,8 +479,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.OrgLabor");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

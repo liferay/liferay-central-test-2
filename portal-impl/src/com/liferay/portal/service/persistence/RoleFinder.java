@@ -104,8 +104,6 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sm.toString());
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -157,8 +155,6 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -204,8 +200,6 @@ public class RoleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_USER_GROUP_ROLE);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addEntity("Role_", RoleImpl.class);
 
@@ -286,8 +280,6 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("Role_", RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -340,8 +332,6 @@ public class RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("Role_", RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -378,8 +368,6 @@ public class RoleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_S_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
 
 			q.addScalar("roleName", Hibernate.STRING);
 			q.addScalar("actionId", Hibernate.STRING);

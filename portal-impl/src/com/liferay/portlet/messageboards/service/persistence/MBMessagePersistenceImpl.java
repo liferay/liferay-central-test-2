@@ -200,8 +200,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -244,8 +242,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -323,8 +319,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -361,8 +355,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 
@@ -405,8 +397,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 
@@ -484,8 +474,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 
@@ -525,8 +513,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 			q.setLong(queryPos++, threadId);
@@ -572,8 +558,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 			q.setLong(queryPos++, threadId);
@@ -660,8 +644,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 			q.setLong(queryPos++, threadId);
@@ -702,8 +684,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append("messageId ASC");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 			q.setLong(queryPos++, parentMessageId);
@@ -749,8 +729,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 			q.setLong(queryPos++, parentMessageId);
@@ -837,8 +815,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 			q.setLong(queryPos++, parentMessageId);
@@ -929,7 +905,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -1001,8 +976,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 
@@ -1040,8 +1013,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 
@@ -1082,8 +1053,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, categoryId);
 			q.setLong(queryPos++, threadId);
@@ -1125,8 +1094,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			int queryPos = 0;
 			q.setLong(queryPos++, threadId);
 			q.setLong(queryPos++, parentMessageId);
@@ -1163,8 +1130,6 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				"FROM com.liferay.portlet.messageboards.model.MBMessage");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

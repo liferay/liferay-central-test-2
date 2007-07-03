@@ -244,7 +244,6 @@ public class ImagePersistenceImpl extends BasePersistence
 			}
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -275,8 +274,6 @@ public class ImagePersistenceImpl extends BasePersistence
 			query.append("FROM com.liferay.portal.model.Image");
 
 			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {

@@ -56,8 +56,6 @@ public class PortletPreferencesFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.setCacheable(false);
-
 			q.addEntity("PortletPreferences", PortletPreferencesImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
