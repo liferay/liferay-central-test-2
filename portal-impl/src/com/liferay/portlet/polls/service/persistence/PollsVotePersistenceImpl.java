@@ -44,6 +44,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -186,28 +187,44 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	}
 
 	public List findByQuestionId(long questionId) throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "findByQuestionId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(questionId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("questionId = ?");
+				query.append(" ");
 
-			return q.list();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, questionId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -218,33 +235,55 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 	public List findByQuestionId(long questionId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "findByQuestionId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(questionId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("questionId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, questionId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -328,28 +367,44 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	}
 
 	public List findByChoiceId(long choiceId) throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "findByChoiceId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(choiceId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("choiceId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, choiceId);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("choiceId = ?");
+				query.append(" ");
 
-			return q.list();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, choiceId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -360,33 +415,55 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 	public List findByChoiceId(long choiceId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "findByChoiceId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(choiceId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("choiceId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("choiceId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, choiceId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, choiceId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -497,11 +574,14 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		throws SystemException {
 		String finderClassName = PollsVote.class.getName();
 		String finderMethodName = "fetchByQ_U";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
 		Object[] finderArgs = new Object[] {
 				new Long(questionId), new Long(userId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderArgs);
+				finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -523,16 +603,15 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, userId);
 
 				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
 				}
-
-				PollsVote pollsVote = (PollsVote)list.get(0);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderArgs, pollsVote);
-
-				return pollsVote;
+				else {
+					return (PollsVote)list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -542,7 +621,14 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (PollsVote)result;
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (PollsVote)list.get(0);
+			}
 		}
 	}
 
@@ -595,28 +681,53 @@ public class PollsVotePersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "findAll";
+		String[] finderParams = new String[] {
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portlet.polls.model.PollsVote ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portlet.polls.model.PollsVote ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				if (obc == null) {
+					Collections.sort(list);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-
-			Query q = session.createQuery(query.toString());
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -653,148 +764,212 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	}
 
 	public int countByQuestionId(long questionId) throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "countByQuestionId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(questionId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("questionId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, questionId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByChoiceId(long choiceId) throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "countByChoiceId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(choiceId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("choiceId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, choiceId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("choiceId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, choiceId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByQ_U(long questionId, long userId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "countByQ_U";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(questionId), new Long(userId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
-			query.append("questionId = ?");
-			query.append(" AND ");
-			query.append("userId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, questionId);
-			q.setLong(queryPos++, userId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.polls.model.PollsVote WHERE ");
+				query.append("questionId = ?");
+				query.append(" AND ");
+				query.append("userId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, questionId);
+				q.setLong(queryPos++, userId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countAll() throws SystemException {
-		Session session = null;
+		String finderClassName = PollsVote.class.getName();
+		String finderMethodName = "countAll";
+		String[] finderParams = new String[] {  };
+		Object[] finderArgs = new Object[] {  };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portlet.polls.model.PollsVote");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			Iterator itr = q.list().iterator();
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portlet.polls.model.PollsVote");
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Query q = session.createQuery(query.toString());
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 

@@ -101,7 +101,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		virtualHost = virtualHost.trim().toLowerCase();
 
 		if ((Validator.isNull(webId)) ||
-			(webId.equals(PortalInstances.DEFAULT_WEB_ID)) ||
+			(webId.equals(CompanyImpl.DEFAULT_WEB_ID)) ||
 			(CompanyUtil.fetchByWebId(webId) != null)) {
 
 			throw new CompanyWebIdException();
@@ -139,7 +139,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		if (company == null) {
 			String virtualHost = webId;
 
-			if (webId.equals(PortalInstances.DEFAULT_WEB_ID)) {
+			if (webId.equals(CompanyImpl.DEFAULT_WEB_ID)) {
 				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
 			}
 
@@ -391,7 +391,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public List getCompanies() throws SystemException {
-		return CompanyLocalUtil.getCompanies();
+		return CompanyUtil.findAll();
 	}
 
 	public Company getCompanyById(long companyId)
@@ -636,7 +636,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyVirtualHostException();
 		}
 		else if (virtualHost.equals(PortalInstances.DEFAULT_VIRTUAL_HOST) &&
-				 !webId.equals(PortalInstances.DEFAULT_WEB_ID)) {
+				 !webId.equals(CompanyImpl.DEFAULT_WEB_ID)) {
 
 			throw new CompanyVirtualHostException();
 		}

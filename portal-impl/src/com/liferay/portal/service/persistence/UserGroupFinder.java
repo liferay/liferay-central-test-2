@@ -129,10 +129,13 @@ public class UserGroupFinder {
 
 		String finderClassName = UserGroup.class.getName();
 		String finderMethodName = "findByC_N";
+		String finderParams[] = new String[] {
+			Long.class.getName(), String.class.getName()
+		};
 		Object finderArgs[] = new Object[] {new Long(companyId), name};
 
 		Object result = FinderCache.getResult(
-			finderClassName, finderMethodName, finderArgs);
+			finderClassName, finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -157,8 +160,8 @@ public class UserGroupFinder {
 					UserGroup userGroup = (UserGroup)itr.next();
 
 					FinderCache.putResult(
-						finderClassName, finderMethodName, finderArgs,
-						userGroup);
+						finderClassName, finderMethodName, finderParams,
+						finderArgs, userGroup);
 
 					return userGroup;
 				}

@@ -56,6 +56,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -225,9 +226,10 @@ public class GroupPersistenceImpl extends BasePersistence
 	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByLiveGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(liveGroupId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderArgs);
+				finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -247,16 +249,15 @@ public class GroupPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, liveGroupId);
 
 				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
 				}
-
-				Group group = (Group)list.get(0);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderArgs, group);
-
-				return group;
+				else {
+					return (Group)list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -266,7 +267,14 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (Group)result;
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (Group)list.get(0);
+			}
 		}
 	}
 
@@ -299,9 +307,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		throws SystemException {
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByC_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderArgs);
+				finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -334,16 +345,15 @@ public class GroupPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
 				}
-
-				Group group = (Group)list.get(0);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderArgs, group);
-
-				return group;
+				else {
+					return (Group)list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -353,7 +363,14 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (Group)result;
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (Group)list.get(0);
+			}
 		}
 	}
 
@@ -386,9 +403,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		throws SystemException {
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByC_F";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
 		Object[] finderArgs = new Object[] { new Long(companyId), friendlyURL };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderArgs);
+				finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -421,16 +441,15 @@ public class GroupPersistenceImpl extends BasePersistence
 				}
 
 				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
 				}
-
-				Group group = (Group)list.get(0);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderArgs, group);
-
-				return group;
+				else {
+					return (Group)list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -440,7 +459,14 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (Group)result;
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (Group)list.get(0);
+			}
 		}
 	}
 
@@ -476,11 +502,14 @@ public class GroupPersistenceImpl extends BasePersistence
 		throws SystemException {
 		String finderClassName = Group.class.getName();
 		String finderMethodName = "fetchByC_C_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderArgs);
+				finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -506,16 +535,15 @@ public class GroupPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, classPK);
 
 				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
 
 				if (list.size() == 0) {
 					return null;
 				}
-
-				Group group = (Group)list.get(0);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderArgs, group);
-
-				return group;
+				else {
+					return (Group)list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -525,7 +553,14 @@ public class GroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (Group)result;
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (Group)list.get(0);
+			}
 		}
 	}
 
@@ -578,32 +613,57 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "findAll";
+		String[] finderParams = new String[] {
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.Group ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Group ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				if (obc == null) {
+					Collections.sort(list);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				query.append("ORDER BY ");
-				query.append("name ASC");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			Query q = session.createQuery(query.toString());
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -640,212 +700,295 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public int countByLiveGroupId(long liveGroupId) throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countByLiveGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(liveGroupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("liveGroupId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, liveGroupId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("liveGroupId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, liveGroupId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countByC_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (name == null) {
-				query.append("name IS NULL");
-			}
-			else {
-				query.append("name = ?");
-			}
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (name != null) {
-				q.setString(queryPos++, name);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
+				if (name == null) {
+					query.append("name IS NULL");
 				}
-			}
+				else {
+					query.append("name = ?");
+				}
 
-			return 0;
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
+				}
+
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByC_F(long companyId, String friendlyURL)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countByC_F";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(companyId), friendlyURL };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
+			try {
+				session = openSession();
 
-			if (friendlyURL == null) {
-				query.append("friendlyURL IS NULL");
-			}
-			else {
-				query.append("friendlyURL = ?");
-			}
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
 
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-
-			if (friendlyURL != null) {
-				q.setString(queryPos++, friendlyURL);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
+				if (friendlyURL == null) {
+					query.append("friendlyURL IS NULL");
 				}
-			}
+				else {
+					query.append("friendlyURL = ?");
+				}
 
-			return 0;
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				if (friendlyURL != null) {
+					q.setString(queryPos++, friendlyURL);
+				}
+
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
+				}
+
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countByC_C_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(classNameId), new Long(classPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Group WHERE ");
-			query.append("companyId = ?");
-			query.append(" AND ");
-			query.append("classNameId = ?");
-			query.append(" AND ");
-			query.append("classPK = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, companyId);
-			q.setLong(queryPos++, classNameId);
-			q.setLong(queryPos++, classPK);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+				query.append("companyId = ?");
+				query.append(" AND ");
+				query.append("classNameId = ?");
+				query.append(" AND ");
+				query.append("classPK = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, classNameId);
+				q.setLong(queryPos++, classPK);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countAll() throws SystemException {
-		Session session = null;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countAll";
+		String[] finderParams = new String[] {  };
+		Object[] finderArgs = new Object[] {  };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.Group");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			Iterator itr = q.list().iterator();
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group");
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Query q = session.createQuery(query.toString());
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 

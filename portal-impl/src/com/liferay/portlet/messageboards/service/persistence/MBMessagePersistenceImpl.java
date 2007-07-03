@@ -44,6 +44,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -190,31 +191,47 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public List findByCategoryId(long categoryId) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByCategoryId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(categoryId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("categoryId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, categoryId);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("categoryId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate ASC").append(", ");
+				query.append("messageId ASC");
 
-			return q.list();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, categoryId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -225,38 +242,60 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findByCategoryId(long categoryId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByCategoryId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("categoryId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("categoryId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("createDate ASC").append(", ");
+					query.append("messageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, categoryId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate ASC").append(", ");
-				query.append("messageId ASC");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, categoryId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -345,31 +384,47 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public List findByThreadId(long threadId) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByThreadId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("threadId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, threadId);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("threadId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate ASC").append(", ");
+				query.append("messageId ASC");
 
-			return q.list();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, threadId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -380,38 +435,60 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findByThreadId(long threadId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByThreadId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(threadId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("threadId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("threadId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("createDate ASC").append(", ");
+					query.append("messageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, threadId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate ASC").append(", ");
-				query.append("messageId ASC");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, threadId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -501,34 +578,54 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findByC_T(long categoryId, long threadId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByC_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), new Long(threadId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("categoryId = ?");
-			query.append(" AND ");
-			query.append("threadId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, categoryId);
-			q.setLong(queryPos++, threadId);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("categoryId = ?");
+				query.append(" AND ");
+				query.append("threadId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate ASC").append(", ");
+				query.append("messageId ASC");
 
-			return q.list();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, categoryId);
+				q.setLong(queryPos++, threadId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -539,41 +636,64 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findByC_T(long categoryId, long threadId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByC_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
+				"java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), new Long(threadId), String.valueOf(begin),
+				String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("categoryId = ?");
-			query.append(" AND ");
-			query.append("threadId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("categoryId = ?");
+				query.append(" AND ");
+				query.append("threadId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("createDate ASC").append(", ");
+					query.append("messageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, categoryId);
+				q.setLong(queryPos++, threadId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate ASC").append(", ");
-				query.append("messageId ASC");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, categoryId);
-			q.setLong(queryPos++, threadId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -672,34 +792,54 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findByT_P(long threadId, long parentMessageId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByT_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(threadId), new Long(parentMessageId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("threadId = ?");
-			query.append(" AND ");
-			query.append("parentMessageId = ?");
-			query.append(" ");
-			query.append("ORDER BY ");
-			query.append("createDate ASC").append(", ");
-			query.append("messageId ASC");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, threadId);
-			q.setLong(queryPos++, parentMessageId);
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("threadId = ?");
+				query.append(" AND ");
+				query.append("parentMessageId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate ASC").append(", ");
+				query.append("messageId ASC");
 
-			return q.list();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, threadId);
+				q.setLong(queryPos++, parentMessageId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -710,41 +850,64 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findByT_P(long threadId, long parentMessageId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findByT_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
+				"java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(threadId), new Long(parentMessageId),
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("threadId = ?");
-			query.append(" AND ");
-			query.append("parentMessageId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("threadId = ?");
+				query.append(" AND ");
+				query.append("parentMessageId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("createDate ASC").append(", ");
+					query.append("messageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, threadId);
+				q.setLong(queryPos++, parentMessageId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate ASC").append(", ");
-				query.append("messageId ASC");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, threadId);
-			q.setLong(queryPos++, parentMessageId);
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -890,34 +1053,59 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public List findAll(int begin, int end, OrderByComparator obc)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "findAll";
+		String[] finderParams = new String[] {
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage ");
+			try {
+				session = openSession();
 
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("createDate ASC").append(", ");
+					query.append("messageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+
+				if (obc == null) {
+					Collections.sort(list);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate ASC").append(", ");
-				query.append("messageId ASC");
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
 			}
-
-			Query q = session.createQuery(query.toString());
-
-			return QueryUtil.list(q, getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
@@ -968,190 +1156,273 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public int countByCategoryId(long categoryId) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "countByCategoryId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(categoryId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("categoryId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, categoryId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("categoryId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, categoryId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByThreadId(long threadId) throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "countByThreadId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(threadId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("threadId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, threadId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("threadId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, threadId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByC_T(long categoryId, long threadId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "countByC_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(categoryId), new Long(threadId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("categoryId = ?");
-			query.append(" AND ");
-			query.append("threadId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, categoryId);
-			q.setLong(queryPos++, threadId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("categoryId = ?");
+				query.append(" AND ");
+				query.append("threadId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, categoryId);
+				q.setLong(queryPos++, threadId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countByT_P(long threadId, long parentMessageId)
 		throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "countByT_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(threadId), new Long(parentMessageId)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
-			query.append("threadId = ?");
-			query.append(" AND ");
-			query.append("parentMessageId = ?");
-			query.append(" ");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, threadId);
-			q.setLong(queryPos++, parentMessageId);
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
+				query.append("threadId = ?");
+				query.append(" AND ");
+				query.append("parentMessageId = ?");
+				query.append(" ");
 
-			Iterator itr = q.list().iterator();
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, threadId);
+				q.setLong(queryPos++, parentMessageId);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 
 	public int countAll() throws SystemException {
-		Session session = null;
+		String finderClassName = MBMessage.class.getName();
+		String finderMethodName = "countAll";
+		String[] finderParams = new String[] {  };
+		Object[] finderArgs = new Object[] {  };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker query = new StringMaker();
-			query.append("SELECT COUNT(*) ");
-			query.append(
-				"FROM com.liferay.portlet.messageboards.model.MBMessage");
+			try {
+				session = openSession();
 
-			Query q = session.createQuery(query.toString());
-			Iterator itr = q.list().iterator();
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBMessage");
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Query q = session.createQuery(query.toString());
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					Long count = (Long)itr.next();
+
+					if (count != null) {
+						FinderCache.putResult(finderClassName,
+							finderMethodName, finderParams, finderArgs, count);
+
+						return count.intValue();
+					}
 				}
-			}
 
-			return 0;
+				return 0;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Integer)result).intValue();
 		}
 	}
 

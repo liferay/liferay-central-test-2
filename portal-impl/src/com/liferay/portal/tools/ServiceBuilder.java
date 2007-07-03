@@ -2571,6 +2571,26 @@ public class ServiceBuilder {
 				sm.append(") throws SystemException {");
 				sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
 				sm.append("String finderMethodName = \"fetchBy" + finder.getName() + "\";");
+				sm.append("String finderParams[] = new String[] {");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (col.isPrimitiveType()) {
+						sm.append(_getPrimitiveObj(col.getType()));
+					}
+					else {
+						sm.append(col.getType());
+					}
+
+					sm.append(".class.getName()");
+
+					if ((j + 1) != finderColsList.size()) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append("};");
 				sm.append("Object finderArgs[] = new Object[] {");
 
 				for (int j = 0; j < finderColsList.size(); j++) {
@@ -2592,7 +2612,7 @@ public class ServiceBuilder {
 				}
 
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
 				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
@@ -2691,12 +2711,13 @@ public class ServiceBuilder {
 				}
 
 				sm.append("List list = q.list();");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);");
 				sm.append("if (list.size() == 0) {");
 				sm.append("return null;");
 				sm.append("}");
-				sm.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")list.get(0);");
-				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderArgs, " + entity.getVarName() + ");");
-				sm.append("return " + entity.getVarName() + ";");
+				sm.append("else {");
+				sm.append("return (" + entity.getName() + ")list.get(0);");
+				sm.append("}");
 				sm.append("}");
 				sm.append("catch (Exception e) {");
 				sm.append("throw HibernateUtil.processException(e);");
@@ -2706,7 +2727,13 @@ public class ServiceBuilder {
 				sm.append("}");
 				sm.append("}");
 				sm.append("else {");
-				sm.append("return (" + entity.getName() + ")result;");
+				sm.append("List list = (List)result;");
+				sm.append("if (list.size() == 0) {");
+				sm.append("return null;");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return (" + entity.getName() + ")list.get(0);");
+				sm.append("}");
 				sm.append("}");
 				sm.append("}");
 			}
@@ -2724,6 +2751,51 @@ public class ServiceBuilder {
 				}
 
 				sm.append(") throws SystemException {");
+				sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
+				sm.append("String finderMethodName = \"findBy" + finder.getName() + "\";");
+				sm.append("String finderParams[] = new String[] {");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (col.isPrimitiveType()) {
+						sm.append(_getPrimitiveObj(col.getType()));
+					}
+					else {
+						sm.append(col.getType());
+					}
+
+					sm.append(".class.getName()");
+
+					if ((j + 1) != finderColsList.size()) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append("};");
+				sm.append("Object finderArgs[] = new Object[] {");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (col.isPrimitiveType()) {
+						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+					}
+
+					sm.append(col.getName());
+
+					if (col.isPrimitiveType()) {
+						sm.append(")");
+					}
+
+					if ((j + 1) != finderColsList.size()) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append("};");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
 				sm.append("session = openSession();");
@@ -2820,13 +2892,19 @@ public class ServiceBuilder {
 					}
 				}
 
-				sm.append("return q.list();");
+				sm.append("List list = q.list();");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);");
+				sm.append("return list;");
 				sm.append("}");
 				sm.append("catch (Exception e) {");
 				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return (List)result;");
 				sm.append("}");
 				sm.append("}");
 
@@ -2859,6 +2937,47 @@ public class ServiceBuilder {
 				}
 
 				sm.append("int begin, int end, OrderByComparator obc) throws SystemException {");
+				sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
+				sm.append("String finderMethodName = \"findBy" + finder.getName() + "\";");
+				sm.append("String finderParams[] = new String[] {");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (col.isPrimitiveType()) {
+						sm.append(_getPrimitiveObj(col.getType()));
+					}
+					else {
+						sm.append(col.getType());
+					}
+
+					sm.append(".class.getName(), ");
+				}
+
+				sm.append("\"java.lang.Integer\", \"java.lang.Integer\", \"com.liferay.portal.kernel.util.OrderByComparator\"");
+				sm.append("};");
+				sm.append("Object finderArgs[] = new Object[] {");
+
+				for (int j = 0; j < finderColsList.size(); j++) {
+					EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+					if (col.isPrimitiveType()) {
+						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+					}
+
+					sm.append(col.getName());
+
+					if (col.isPrimitiveType()) {
+						sm.append(")");
+					}
+
+					sm.append(", ");
+				}
+
+				sm.append("String.valueOf(begin), String.valueOf(end), String.valueOf(obc)");
+				sm.append("};");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
 				sm.append("session = openSession();");
@@ -2961,13 +3080,19 @@ public class ServiceBuilder {
 					}
 				}
 
-				sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
+				sm.append("List list = QueryUtil.list(q, getDialect(), begin, end);");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);");
+				sm.append("return list;");
 				sm.append("}");
 				sm.append("catch (Exception e) {");
 				sm.append("throw HibernateUtil.processException(e);");
 				sm.append("}");
 				sm.append("finally {");
 				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return (List)result;");
 				sm.append("}");
 				sm.append("}");
 
@@ -3271,6 +3396,16 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public List findAll(int begin, int end, OrderByComparator obc) throws SystemException {");
+		sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
+		sm.append("String finderMethodName = \"findAll\";");
+		sm.append("String finderParams[] = new String[] {");
+		sm.append("\"java.lang.Integer\", \"java.lang.Integer\", \"com.liferay.portal.kernel.util.OrderByComparator\"");
+		sm.append("};");
+		sm.append("Object finderArgs[] = new Object[] {");
+		sm.append("String.valueOf(begin), String.valueOf(end), String.valueOf(obc)");
+		sm.append("};");
+		sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+		sm.append("if (result == null) {");
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
@@ -3307,13 +3442,22 @@ public class ServiceBuilder {
 		}
 
 		sm.append("Query q = session.createQuery(query.toString());");
-		sm.append("return QueryUtil.list(q, getDialect(), begin, end);");
+		sm.append("List list = QueryUtil.list(q, getDialect(), begin, end);");
+		sm.append("if (obc == null) {");
+		sm.append("Collections.sort(list);");
+		sm.append("}");
+		sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);");
+		sm.append("return list;");
 		sm.append("}");
 		sm.append("catch (Exception e) {");
 		sm.append("throw HibernateUtil.processException(e);");
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("return (List)result;");
 		sm.append("}");
 		sm.append("}");
 
@@ -3415,6 +3559,51 @@ public class ServiceBuilder {
 			}
 
 			sm.append(") throws SystemException {");
+			sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
+			sm.append("String finderMethodName = \"countBy" + finder.getName() + "\";");
+			sm.append("String finderParams[] = new String[] {");
+
+			for (int j = 0; j < finderColsList.size(); j++) {
+				EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+				if (col.isPrimitiveType()) {
+					sm.append(_getPrimitiveObj(col.getType()));
+				}
+				else {
+					sm.append(col.getType());
+				}
+
+				sm.append(".class.getName()");
+
+				if ((j + 1) != finderColsList.size()) {
+					sm.append(", ");
+				}
+			}
+
+			sm.append("};");
+			sm.append("Object finderArgs[] = new Object[] {");
+
+			for (int j = 0; j < finderColsList.size(); j++) {
+				EntityColumn col = (EntityColumn)finderColsList.get(j);
+
+				if (col.isPrimitiveType()) {
+					sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+				}
+
+				sm.append(col.getName());
+
+				if (col.isPrimitiveType()) {
+					sm.append(")");
+				}
+
+				if ((j + 1) != finderColsList.size()) {
+					sm.append(", ");
+				}
+			}
+
+			sm.append("};");
+			sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+			sm.append("if (result == null) {");
 			sm.append("Session session = null;");
 			sm.append("try {");
 			sm.append("session = openSession();");
@@ -3495,6 +3684,7 @@ public class ServiceBuilder {
 			sm.append("if (itr.hasNext()) {");
 			sm.append("Long count = (Long)itr.next();");
 			sm.append("if (count != null) {");
+			sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);");
 			sm.append("return count.intValue();");
 			sm.append("}");
 			sm.append("}");
@@ -3507,9 +3697,19 @@ public class ServiceBuilder {
 			sm.append("closeSession(session);");
 			sm.append("}");
 			sm.append("}");
+			sm.append("else {");
+			sm.append("return ((Integer)result).intValue();");
+			sm.append("}");
+			sm.append("}");
 		}
 
 		sm.append("public int countAll() throws SystemException {");
+		sm.append("String finderClassName = " + entity.getName() + ".class.getName();");
+		sm.append("String finderMethodName = \"countAll\";");
+		sm.append("String finderParams[] = new String[] {};");
+		sm.append("Object finderArgs[] = new Object[] {};");
+		sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+		sm.append("if (result == null) {");
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
@@ -3521,6 +3721,7 @@ public class ServiceBuilder {
 		sm.append("if (itr.hasNext()) {");
 		sm.append("Long count = (Long)itr.next();");
 		sm.append("if (count != null) {");
+		sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);");
 		sm.append("return count.intValue();");
 		sm.append("}");
 		sm.append("}");
@@ -3531,6 +3732,10 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
+		sm.append("}");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("return ((Integer)result).intValue();");
 		sm.append("}");
 		sm.append("}");
 

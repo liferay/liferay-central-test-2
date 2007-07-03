@@ -596,12 +596,15 @@ public class PermissionFinder {
 
 		String finderClassName = Permission.class.getName();
 		String finderMethodName = "findByA_R";
+		String finderParams[] = new String[] {
+			String.class.getName(), "[L" + Long.class.getName()
+		};
 		Object finderArgs[] = new Object[] {
 			actionId, StringUtil.merge(ArrayUtil.toObjectArray(resourceIds))
 		};
 
 		Object result = FinderCache.getResult(
-			finderClassName, finderMethodName, finderArgs);
+			finderClassName, finderMethodName, finderParams, finderArgs);
 
 		if (result == null) {
 			Session session = null;
@@ -626,7 +629,8 @@ public class PermissionFinder {
 				List list = q.list();
 
 				FinderCache.putResult(
-					finderClassName, finderMethodName, finderArgs, list);
+					finderClassName, finderMethodName, finderParams, finderArgs,
+					list);
 
 				return list;
 			}

@@ -50,6 +50,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CompanyImpl extends CompanyModelImpl implements Company {
 
+	public static final String DEFAULT_WEB_ID =
+		PropsUtil.get(PropsUtil.COMPANY_DEFAULT_WEB_ID);
+
 	public static final String AUTH_TYPE_EA = "emailAddress";
 
 	public static final String AUTH_TYPE_SN = "screenName";
@@ -165,6 +168,23 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 	public boolean isCommunityLogo() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO);
+	}
+
+	public int compareTo(Object obj) {
+		Company company = (Company)obj;
+
+		String webId1 = getWebId();
+		String webId2 = company.getWebId();
+
+		if (webId1.equals(DEFAULT_WEB_ID)) {
+			return -1;
+		}
+		else if (webId2.equals(DEFAULT_WEB_ID)) {
+			return 1;
+		}
+		else {
+			return webId1.compareTo(webId2);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(CompanyImpl.class);

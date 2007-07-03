@@ -40,4 +40,8 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 
 	public abstract int compare(Object obj1, Object obj2);
 
+	public String toString() {
+		return getOrderBy();
+	}
+
 }

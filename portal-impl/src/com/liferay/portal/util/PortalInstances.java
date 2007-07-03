@@ -71,9 +71,6 @@ public class PortalInstances {
 
 	public static final String DEFAULT_VIRTUAL_HOST = "localhost";
 
-	public static final String DEFAULT_WEB_ID =
-		PropsUtil.get(PropsUtil.COMPANY_DEFAULT_WEB_ID);
-
 	public static void addCompanyId(long companyId) {
 		_instance._addCompanyId(companyId);
 	}
@@ -238,7 +235,7 @@ public class PortalInstances {
 			return _webIds;
 		}
 
-		if (Validator.isNull(DEFAULT_WEB_ID)) {
+		if (Validator.isNull(CompanyImpl.DEFAULT_WEB_ID)) {
 			throw new RuntimeException("Default web id must not be null");
 		}
 
@@ -262,7 +259,7 @@ public class PortalInstances {
 		}
 
 		if ((_webIds == null) || (_webIds.length == 0)) {
-			_webIds = new String[] {DEFAULT_WEB_ID};
+			_webIds = new String[] {CompanyImpl.DEFAULT_WEB_ID};
 		}
 
 		return _webIds;

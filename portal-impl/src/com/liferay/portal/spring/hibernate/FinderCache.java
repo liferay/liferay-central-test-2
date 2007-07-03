@@ -53,11 +53,11 @@ public class FinderCache {
 	}
 
 	public static Object getResult(
-		String className, String methodName, Object[] args) {
+		String className, String methodName, String[] params, Object[] args) {
 
 		Object result = null;
 
-		String key = _encodeKey(className, methodName, args);
+		String key = _encodeKey(className, methodName, params, args);
 
 		try {
 			result = _cache.getFromCache(key);
@@ -75,10 +75,11 @@ public class FinderCache {
 	}
 
 	public static Object putResult(
-		String className, String methodName, Object[] args, Object result) {
+		String className, String methodName, String[] params, Object[] args,
+		Object result) {
 
 		if ((result != null) && CacheRegistry.isActive()) {
-			String key = _encodeKey(className, methodName, args);
+			String key = _encodeKey(className, methodName, params, args);
 
 			String classNameGroupKey = _encodeKey(className);
 
@@ -102,7 +103,7 @@ public class FinderCache {
 	}
 
 	private static String _encodeKey(
-		String className, String methodName, Object[] args) {
+		String className, String methodName, String[] params, Object[] args) {
 
 		StringMaker sm = new StringMaker();
 
@@ -111,14 +112,30 @@ public class FinderCache {
 		sm.append(className);
 		sm.append(StringPool.POUND);
 		sm.append(methodName);
+		sm.append(_PARAMS_SEPARATOR);
+
+		for (int i = 0; i < params.length; i++) {
+			String param = params[i];
+
+			sm.append(StringPool.POUND);
+			sm.append(param);
+		}
+
+		sm.append(_ARGS_SEPARATOR);
 
 		for (int i = 0; i < args.length; i++) {
+			Object arg = args[i];
+
 			sm.append(StringPool.POUND);
-			sm.append(args[0].toString());
+			sm.append(arg.toString());
 		}
 
 		return sm.toString();
 	}
+
+	private static final String _ARGS_SEPARATOR = "_ARGS_SEPARATOR_";
+
+	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
 
