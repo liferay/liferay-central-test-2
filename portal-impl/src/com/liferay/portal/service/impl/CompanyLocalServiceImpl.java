@@ -66,7 +66,6 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.comparator.CompanyComparator;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
@@ -77,7 +76,6 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -393,11 +391,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public List getCompanies() throws SystemException {
-		List companies = CompanyUtil.findAll();
-
-		Collections.sort(companies, new CompanyComparator());
-
-		return companies;
+		return CompanyLocalUtil.getCompanies();
 	}
 
 	public Company getCompanyById(long companyId)
