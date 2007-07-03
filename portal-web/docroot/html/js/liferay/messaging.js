@@ -10,14 +10,14 @@ var Messaging = {
 	zIndex : 1,
 
 	chat : function(msgObj) {
-		if (!msgObj && Messaging.msgQueue.length == 0) return; 
+		if (!msgObj && Messaging.msgQueue.length == 0) return;
 
 		var msg = msgObj || Messaging.msgQueue.shift();
 		var toDivId = msg.toId.replace(/\./g, "_");
 		var chatBox = _$J("#msg-chat-box_" + toDivId)[0];
 
 		if (!chatBox) {
-			var contents = 
+			var contents =
 				"<div class='msg-chat-box' id='msg-chat-box_" + toDivId + "'>" +
 					"<input class='msg-to-input-id' type=hidden value='" + msg.toId + "' />" +
 					"<div class='msg-chat-area textarea' style='overflow: auto; height: 100px'>" +

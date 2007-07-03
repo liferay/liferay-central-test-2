@@ -9,8 +9,9 @@ Liferay.Publisher = {
 
 		if (arguments.length == 2) {
 			data = [arguments[1]];
-		} else {
-			data = jQuery.map(arguments, 
+		}
+		else {
+			data = jQuery.map(arguments,
 				function(item, i) {
 					 return (i > 0) ? item : null;
 				}

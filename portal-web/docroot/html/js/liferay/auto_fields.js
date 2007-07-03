@@ -152,7 +152,7 @@ Liferay.autoFields = new Class({
 
 		if (instance._numField <= 1) {
 		   var removeLink = instance._controlLinks.find('a:eq(1)');
-		   
+
 		   if (removeLink.is(':visible')) {
 				   removeLink.hide();
 		   }

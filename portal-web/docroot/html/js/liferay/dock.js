@@ -38,7 +38,8 @@ Liferay.Dock = {
 			var dockOver = function(event) {
 				event.data = dockData;
 
-				jQuery(document).one('click', 
+				jQuery(document).one(
+					'click',
 					function(internalEvent) {
 						var currentEl = jQuery(internalEvent.target);
 						var dockParent = currentEl.parents('.lfr-dock');

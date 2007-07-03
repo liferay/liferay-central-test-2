@@ -82,8 +82,8 @@ var Tree = new Class({
 
 			var mainLi  = jQuery(
 				'<li class="root-container">' +
-					'<a href="' + node.href + '">' + 
-						instance.generateImage(icons.root) + 
+					'<a href="' + node.href + '">' +
+						instance.generateImage(icons.root) +
 						'<span>&nbsp;' + node.name + '</span>' +
 					'</a>' +
 				'</li>'

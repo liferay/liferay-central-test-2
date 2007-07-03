@@ -80,6 +80,7 @@ public class LangBuilder {
 			_createProps(content, "it"); // Italian
 			_createProps(content, "ja"); // Japanese
 			_createProps(content, "ko"); // Korean
+			_createProps(content, "fa"); // Persian
 			_createProps(content, "pt"); // Portuguese
 			_createProps(content, "ru"); // Russian
 			_createProps(content, "es"); // Spanish

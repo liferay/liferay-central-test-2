@@ -285,7 +285,7 @@ Liferay.PortletCSS = {
 				objectData = jQuery.parseJSON(objectData.responseText);
 
 				instance._objData = objectData;
-			} 
+			}
 			else {
 				instance._objData = defaultData;
 			}

@@ -135,7 +135,7 @@ Liferay.Navigation = new Class({
 		obj.hover(
 			function() {
 				jQuery(this).find('.delete-tab').fadeIn('fast');
-			}, 
+			},
 			function() {
 				jQuery(this).find('.delete-tab').fadeOut('fast');
 			}

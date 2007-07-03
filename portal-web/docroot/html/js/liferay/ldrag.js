@@ -340,9 +340,9 @@
 				minMouseX = settings.minX + settings.mouseNwOffset.x;
 			if (settings.minY != null)
 				minMouseY = settings.minY + settings.mouseNwOffset.y;
-			if (settings.maxX != null) 
+			if (settings.maxX != null)
 				maxMouseX = settings.maxX + settings.mouseSeOffset.x;
-			if (settings.maxY != null) 
+			if (settings.maxY != null)
 				maxMouseY = settings.maxY + settings.mouseSeOffset.y;
 
 			if (minMouseX && maxMouseX && minMouseX > maxMouseX)
