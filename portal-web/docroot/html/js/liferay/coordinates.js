@@ -11,7 +11,7 @@ var Coordinates = {
 	ORIGIN : new Coordinate(0, 0),
 
 	coordinatesData: function(element, recurse) {
-		var data = new Object();
+		var data = {};
 
 		data.recurse = recurse;
 		data.size = new Coordinate(element.offsetWidth, element.offsetHeight);

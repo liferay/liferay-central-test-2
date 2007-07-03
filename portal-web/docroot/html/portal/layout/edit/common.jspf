@@ -25,20 +25,14 @@
 <br />
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
+<tr class="portlet-section-header">
 	<td>
-		<table border="0" cellpadding="4" cellspacing="0" width="100%">
-		<tr>
-			<td class="beta-gradient">
-				<b><liferay-ui:message key="meta-tags" />:</b>
-			</td>
-			<td align="right" class="beta-gradient">
-				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-				</span>
-			</td>
-		</tr>
-		</table>
+		<b><liferay-ui:message key="meta-tags" />:</b>
+	</td>
+	<td align="right">
+		<span>
+		[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />metaTags'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+		</span>
 	</td>
 </tr>
 <tr>
@@ -66,20 +60,14 @@
 		</div>
 	</td>
 </tr>
-<tr>
-	<td>
-		<table border="0" cellpadding="4" cellspacing="0" width="100%">
-		<tr>
-			<td class="beta-gradient">
-				<b><liferay-ui:message key="javascript" />:</b>
-			</td>
-			<td align="right" class="beta-gradient">
-				<span style="font-size: xx-small;">
-				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-				</span>
-			</td>
-		</tr>
-		</table>
+<tr class="portlet-section-header">
+	<td>	
+		<b><liferay-ui:message key="javascript" />:</b>
+	</td>
+	<td align="right">
+		<span>
+		[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />javascript'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+		</span>
 	</td>
 </tr>
 <tr>

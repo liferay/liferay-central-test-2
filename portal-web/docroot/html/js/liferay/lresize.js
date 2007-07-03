@@ -95,7 +95,7 @@
 				jHandle.lDragBind("complete", options.onComplete);
 
 				if (!settings.resizeRules) {
-					settings.resizeRules = new Array();
+					settings.resizeRules = [];
 				}
 
 				settings.resizeRules.push(new $.lResize.resizeRule(container, options.direction, options.mode));

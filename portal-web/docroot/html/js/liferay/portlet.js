@@ -1,9 +1,9 @@
 Liferay.Portlet = {
-	fn: new Object(),
-	fnAll: new Array(),
-	fnLast: new Array(),
-	ajaxList: new Object(),
-	list: new Object(),
+	fn: {},
+	fnAll: [],
+	fnLast: [],
+	ajaxList: {},
+	list: {},
 
 	isAjax: function(id) {
 		return (this.ajaxList[id] == 1);
@@ -51,7 +51,7 @@ Liferay.Portlet = {
 			for (var i = 0; i < this.fn[id].length; i++) {
 				this.fn[id][i](id, _$J("#p_p_id_" + id + "_"));
 			}
-			this.fn[id] = new Array();
+			this.fn[id] = [];
 		}
 	},
 
@@ -59,7 +59,7 @@ Liferay.Portlet = {
 		for (var i = 0; i < this.fnLast.length; i++) {
 			this.fnLast[i](id);
 		}
-		this.fnLast = new Array();
+		this.fnLast = [];
 	},
 
 	ready: function(arg1, arg2) {
@@ -68,7 +68,7 @@ Liferay.Portlet = {
 		}
 		else if (typeof arg1 == "string" && typeof arg2 == "function") {
 			if (!this.fn[arg1]) {
-				this.fn[arg1] = new Array();
+				this.fn[arg1] = [];
 			}
 
 			this.fn[arg1].push(arg2);
@@ -78,7 +78,7 @@ Liferay.Portlet = {
 	remove: function(id) {
 		this.ajaxList[id] = 0;
 		this.list[id] = 1;
-		this.fn[id] = new Array();
+		this.fn[id] = [];
 	},
 
 	last: function(arg1) {

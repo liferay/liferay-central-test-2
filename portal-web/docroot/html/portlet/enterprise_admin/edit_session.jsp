@@ -139,23 +139,17 @@ UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
+		<tr class="portlet-section-header">
 			<td>
-				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-				<tr>
-					<td class="beta-gradient">
-						<b><liferay-ui:message key="accessed-urls" /></b>
-					</td>
-					<td align="right" class="beta-gradient">
-						<span style="font-size: xx-small;">
-						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-						</span>
-					</td>
-				</tr>
-				</table>
+				<b><liferay-ui:message key="accessed-urls" /></b>
+			</td>
+			<td align="right">
+				<span style="font-size: xx-small;">
+				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+				</span>
 			</td>
 		</tr>
-		<tr>
+		<tr class="portlet-section-header">
 			<td>
 				<div id="<portlet:namespace />accessedUrls" style="display: none;">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
@@ -192,20 +186,14 @@ UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 				</div>
 			</td>
 		</tr>
-		<tr>
+		<tr class="portlet-section-header">
 			<td>
-				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-				<tr>
-					<td class="beta-gradient">
-						<b><liferay-ui:message key="session-attributes" /></b>
-					</td>
-					<td align="right" class="beta-gradient">
-						<span style="font-size: xx-small;">
-						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
-						</span>
-					</td>
-				</tr>
-				</table>
+				<b><liferay-ui:message key="session-attributes" /></b>
+			</td>
+			<td align="right">
+				<span style="font-size: xx-small;">
+				[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><liferay-ui:message key="show" /></span><span style="display: none;"><liferay-ui:message key="hide" /></span></a>]
+				</span>
 			</td>
 		</tr>
 		<tr>

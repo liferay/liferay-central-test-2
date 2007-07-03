@@ -1,11 +1,11 @@
 var LayoutConfiguration = {
-	categories : new Array(),
+	categories : [],
 	initialized : false,
 	loadingImage : null,
 	menu : null,
 	menuDiv : null,
 	menuIframe : null,
-	portlets : new Array(),
+	portlets : [],
 	showTimer : 0,
 
 	init : function () {

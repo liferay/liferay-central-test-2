@@ -75,7 +75,7 @@
 		},
 
 		create: function(container, options) {
-			options = options || new Object();
+			options = options || {};
 			options.container = container;
 
 		    if (options.handle == null) {
@@ -89,9 +89,9 @@
     		}
 			container.dragSettings = options;
 
-			options.onDragStart = new Array();
-			options.onDrag = new Array();
-			options.onDragEnd = new Array();
+			options.onDragStart = [];
+			options.onDrag = [];
+			options.onDragEnd = [];
 
 			// Bind event listeners
 			if (options.onStart) {

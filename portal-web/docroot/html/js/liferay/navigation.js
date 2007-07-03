@@ -193,13 +193,18 @@ Liferay.Navigation = new Class({
 			currentSpan.css('cursor', 'text');
 
 			currentLink.click(
-				function() {
-					return false;
+				function(event) {
+					if (event.shiftKey) {
+						return false;
+					}
 				}
 			);
 
 			currentSpan.click(
-				function() {
+				function(event) {
+					if (!event.shiftKey) {
+						return;
+					}
 					var span = jQuery(this);
 					var text = span.text();
 
@@ -259,6 +264,7 @@ Liferay.Navigation = new Class({
 					);
 
 					pageParents.click(pageBlur);
+					return false;
 				}
 			);
 		}

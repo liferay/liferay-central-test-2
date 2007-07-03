@@ -47,7 +47,7 @@
 			 * onClose (function) - executes after closing
 			 */
 
-			if (!options) options = new Object();
+			options = options || {};
 
 			var modal = options.modal;
 			var myMessage = options.message;

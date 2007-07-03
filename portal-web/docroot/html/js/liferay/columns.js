@@ -35,8 +35,9 @@
 				dragClass: "drag-indicator",
 				handle: jPortlet.find(instance._handle)[0],
 				onMove: function(s){instance._onMove(s)},
-				onComplete: function(s){instance._onComplete(s)},
-				threshold: 2
+				onComplete: function(s){instance._onComplete(s);},
+				threshold: 2,
+				scroll: true
 			});
 		},
 
@@ -58,7 +59,7 @@
 				jQuery(".lfr-column").addClass("dragging");
 
 				jColumns = instance._cache.columns = jQuery(instance._columns);
-				instance._cache.columnData = new Array();
+				instance._cache.columnData = [];
 
 				jColumns.each(function(i){
 					var element = this.parentNode.nodeName.toLowerCase() == "td" ? this.parentNode : this;
@@ -87,9 +88,9 @@
 			var instance = this;
 
 			if (!instance._cache.portlets) {
-				instance._cache.portlets = new Array();
-				instance._cache.portletData = new Array();
-				instance._cache.portletList = new Array();
+				instance._cache.portlets = [];
+				instance._cache.portletData = [];
+				instance._cache.portletList = [];
 			}
 
 			var jPortlets = instance._cache.portlets[scope.id];
@@ -97,7 +98,7 @@
 			if (!jPortlets) {
 				jPortlets = jQuery(instance._portlets, scope);
 				instance._cache.portlets[scope.id] = jPortlets;
-				instance._cache.portletData[scope.id] = new Array();
+				instance._cache.portletData[scope.id] = [];
 				instance._cache.portletList[scope.id] = new LinkedList();
 
 				jPortlets.each(function(i){

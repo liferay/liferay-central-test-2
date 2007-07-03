@@ -100,7 +100,7 @@ var NavFlyout = {
 };
 
 var PortletHeaderBar = {
-	mode: new Object(),
+	mode: {},
 
 	fade: function(data) {
 		var count = data.count;
@@ -253,7 +253,7 @@ var StarRating = new Class({
 		 * onComplete: (function) executes when rating is selected
 		 * rating: rating to initialize to
 		 */
-			this.options = options || new Object();
+			this.options = options || {};
 			this.rating = this.options.rating || 0;
 			var item = _$J("#" + id);
 			this.stars = item.find("img");

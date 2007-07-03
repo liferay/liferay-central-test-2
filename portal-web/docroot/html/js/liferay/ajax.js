@@ -98,7 +98,7 @@ function AjaxRequest(url, options) {
 
 var AjaxUtil = {
 	counter : 1,
-	requests : new Array(),
+	requests : [],
 
 	request : function(url, options) {
 		/*
@@ -108,7 +108,7 @@ var AjaxUtil = {
 		 * reverseAjax (boolean) - use reverse ajax. (only one at a time)
 		 * method (string) - use "get" or "post". Default is post.
 		 */
-		var opts = (options == null) ? (new Object()) : options;
+		var opts = options || {};
 		var ajaxId = (opts.reverseAjax) ? 0 : AjaxUtil.getNextId();
 		opts.ajaxId = ajaxId;
 
@@ -131,7 +131,7 @@ var AjaxUtil = {
 	submit: function(form, options) {
 		var url = form.action;
 		var inputs = jQuery("input, textarea, select", form);
-		var opts = options || new Object();
+		var opts = options || {};
 		var params = inputs.serialize();
 
 		if (url.indexOf("?") == -1) {
@@ -152,7 +152,7 @@ var AjaxUtil = {
 	},
 
 	update : function(url, id, options) {
-		var opts = options || new Object();
+		var opts = options || {};
 		opts.update = id;
 		AjaxUtil.request(url, opts);
 	},

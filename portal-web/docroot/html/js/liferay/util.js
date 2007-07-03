@@ -622,10 +622,10 @@ Liferay.Util = {
 	},
 
 	sortBox: function(box) {
-		var newBox = new Array();
+		var newBox = [];
 
 		for (var i = 0; i < box.length; i++) {
-			newBox[i] = new Array(box[i].value, box[i].text);
+			newBox[i] = [box[i].value, box[i].text];
 		}
 
 		newBox.sort(Liferay.Util.sortByAscending);
@@ -694,7 +694,7 @@ Liferay.Util = {
 			return eval("(" + s + ")");
 		}
 		catch (e) {
-			return new Object();
+			return {};
 		}
 	},
 
@@ -737,7 +737,7 @@ function cloneObject (obj, recurse) {
 	}
 }
 
-Element = new Object();
+Element = {};
 
 Element.disable = function(element) {
 	element = _$J.getOne(element);
@@ -784,7 +784,7 @@ function LinkedList() {
 }
 
 LinkedList.prototype.add = function(obj) {
-	obj.listInfo = new Object();
+	obj.listInfo = {};
 	var tail = this.tail;
 	var head = this.head;
 

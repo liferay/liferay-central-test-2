@@ -4,7 +4,7 @@ var Messaging = {
 	initialized : false,
 	inputCount : 1,
 	mainDiv : null,
-	msgQueue : new Array(),
+	msgQueue : [],
 	userId : null,
 	windowCount : 0,
 	zIndex : 1,

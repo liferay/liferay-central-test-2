@@ -18,7 +18,7 @@ Liferay.Animate = function(id, fn, data) {
 };
 
 Liferay.Animate.extendNativeFunctionObject({
-	q: new Object,
+	q: {},
 	timer: 0,
 
 	process: function() {
