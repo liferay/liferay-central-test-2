@@ -27,6 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -103,36 +108,62 @@ public class GroupFinder {
 	public static int countByG_U(long groupId, long userId)
 		throws SystemException {
 
-		Long userIdObj = new Long(userId);
+		String finderSQL = Group.class.getName();
+		String[] finderClassNames = new String[] {
+			Group.class.getName(), "Groups_Orgs", "Groups_UserGroups",
+			"Users_Groups", "Users_Orgs", "Users_UserGroups"
+		};
+		String finderMethodName = "customCountByG_U";
+		String finderParams[] = new String[] {
+			Long.class.getName(), Long.class.getName()
+		};
+		Object finderArgs[] = new Object[] {
+			new Long(groupId), new Long(userId)
+		};
 
-		LinkedHashMap params1 = new LinkedHashMap();
+		Object result = FinderCache.getResult(
+			finderSQL, finderClassNames, finderMethodName, finderParams,
+			finderArgs);
 
-		params1.put("usersGroups", userIdObj);
+		if (result == null) {
+			Long userIdObj = new Long(userId);
 
-		LinkedHashMap params2 = new LinkedHashMap();
+			LinkedHashMap params1 = new LinkedHashMap();
 
-		params2.put("groupsOrgs", userIdObj);
+			params1.put("usersGroups", userIdObj);
 
-		LinkedHashMap params3 = new LinkedHashMap();
+			LinkedHashMap params2 = new LinkedHashMap();
 
-		params3.put("groupsUserGroups", userIdObj);
+			params2.put("groupsOrgs", userIdObj);
 
-		Session session = null;
+			LinkedHashMap params3 = new LinkedHashMap();
 
-		try {
-			session = HibernateUtil.openSession();
+			params3.put("groupsUserGroups", userIdObj);
 
-			int count = _countByGroupId(session, groupId, params1);
-			count += _countByGroupId(session, groupId, params2);
-			count += _countByGroupId(session, groupId, params3);
+			Session session = null;
 
-			return count;
+			try {
+				session = HibernateUtil.openSession();
+
+				int count = _countByGroupId(session, groupId, params1);
+				count += _countByGroupId(session, groupId, params2);
+				count += _countByGroupId(session, groupId, params3);
+
+				FinderCache.putResult(
+					finderSQL, finderClassNames, finderMethodName, finderParams,
+					finderArgs, new Long(count));
+
+				return count;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -296,111 +327,144 @@ public class GroupFinder {
 			params3.put("groupsUserGroups", userId);
 		}
 
-		Session session = null;
+		StringMaker sm = new StringMaker();
 
-		try {
-			session = HibernateUtil.openSession();
+		sm.append("(");
 
-			StringMaker sm = new StringMaker();
+		sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-			sm.append("(");
+		String sql = sm.toString();
+
+		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
+		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params1));
+
+		sm = new StringMaker();
+
+		sm.append(sql);
+
+		sm.append(")");
+
+		if (Validator.isNotNull(userId)) {
+			sm.append(" UNION (");
 
 			sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-			String sql = sm.toString();
+			sql = sm.toString();
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params1));
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params2));
+
+			sm = new StringMaker();
+
+			sm.append(sql);
+
+			sm.append(") UNION (");
+
+			sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+
+			sql = sm.toString();
+
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params3));
 
 			sm = new StringMaker();
 
 			sm.append(sql);
 
 			sm.append(")");
+		}
 
-			if (Validator.isNotNull(userId)) {
-				sm.append(" UNION (");
+		sm.append(" ORDER BY groupName ASC");
 
-				sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+		sql = sm.toString();
 
-				sql = sm.toString();
+		String finderSQL = sql;
+		String[] finderClassNames = new String[] {
+			Group.class.getName(), LayoutSet.class.getName(),
+			Permission.class.getName(), Resource.class.getName(),
+			ResourceCode.class.getName(), UserGroupRole.class.getName(),
+			"Groups_Orgs", "Groups_Roles", "Groups_UserGroups",
+			"Roles_Permissions", "Users_Groups", "Users_Orgs",
+			"Users_UserGroups"
+		};
+		String finderMethodName = "customFindByC_N_D";
+		String finderParams[] = new String[] {
+			Long.class.getName(), String.class.getName(),
+			String.class.getName(), LinkedHashMap.class.getName(),
+			String.class.getName(), String.class.getName()
+		};
+		Object finderArgs[] = new Object[] {
+			new Long(companyId), name, description, params.toString(),
+			String.valueOf(begin), String.valueOf(end)
+		};
 
-				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
-				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params2));
+		Object result = FinderCache.getResult(
+			finderSQL, finderClassNames, finderMethodName, finderParams,
+			finderArgs);
 
-				sm = new StringMaker();
+		if (result == null) {
+			Session session = null;
 
-				sm.append(sql);
+			try {
+				session = HibernateUtil.openSession();
 
-				sm.append(") UNION (");
+				SQLQuery q = session.createSQLQuery(sql);
 
-				sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+				q.addScalar("groupId", Hibernate.STRING);
 
-				sql = sm.toString();
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
-				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params3));
-
-				sm = new StringMaker();
-
-				sm.append(sql);
-
-				sm.append(")");
-			}
-
-			sm.append(" ORDER BY groupName ASC");
-
-			sql = sm.toString();
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar("groupId", Hibernate.STRING);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			_setJoin(qPos, params1);
-			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
-
-			if (Validator.isNotNull(userId)) {
-				_setJoin(qPos, params2);
+				_setJoin(qPos, params1);
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(name);
 				qPos.add(description);
 				qPos.add(description);
 
-				_setJoin(qPos, params3);
-				qPos.add(companyId);
-				qPos.add(name);
-				qPos.add(name);
-				qPos.add(description);
-				qPos.add(description);
+				if (Validator.isNotNull(userId)) {
+					_setJoin(qPos, params2);
+					qPos.add(companyId);
+					qPos.add(name);
+					qPos.add(name);
+					qPos.add(description);
+					qPos.add(description);
+
+					_setJoin(qPos, params3);
+					qPos.add(companyId);
+					qPos.add(name);
+					qPos.add(name);
+					qPos.add(description);
+					qPos.add(description);
+				}
+
+				List list = new ArrayList();
+
+				Iterator itr = QueryUtil.iterate(
+					q, HibernateUtil.getDialect(), begin, end);
+
+				while (itr.hasNext()) {
+					long groupId = GetterUtil.getLong((String)itr.next());
+
+					Group group = GroupUtil.findByPrimaryKey(groupId);
+
+					list.add(group);
+				}
+
+				FinderCache.putResult(
+					finderSQL, finderClassNames, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
 			}
-
-			List list = new ArrayList();
-
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				long groupId = GetterUtil.getLong((String)itr.next());
-
-				Group group = GroupUtil.findByPrimaryKey(groupId);
-
-				list.add(group);
+			catch (Exception e) {
+				throw new SystemException(e);
 			}
-
-			return list;
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 

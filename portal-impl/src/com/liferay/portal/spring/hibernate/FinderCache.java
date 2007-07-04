@@ -32,6 +32,9 @@ import com.liferay.util.GetterUtil;
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
  *
@@ -66,6 +69,33 @@ public class FinderCache {
 
 		try {
 			result = _cache.getFromCache(key);
+
+			return _getResult(result);
+		}
+		catch (NeedsRefreshException nre) {
+			result = null;
+		}
+		finally {
+			if (result == null) {
+				_cache.cancelUpdate(key);
+			}
+		}
+
+		return result;
+	}
+
+	public static Object getResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args) {
+
+		Object result = null;
+
+		String key = _encodeKey(sql, methodName, params, args);
+
+		try {
+			result = _cache.getFromCache(key);
+
+			return _getResult(result);
 		}
 		catch (NeedsRefreshException nre) {
 			result = null;
@@ -96,6 +126,8 @@ public class FinderCache {
 			if (classNameCacheEnabled) {
 				String key = _encodeKey(className, methodName, params, args);
 
+				result = _getResult(result);
+
 				String classNameGroupKey = _encodeKey(className);
 
 				String[] groups = ArrayUtil.append(
@@ -103,6 +135,51 @@ public class FinderCache {
 
 				_cache.putInCache(key, result, groups);
 			}
+		}
+
+		return result;
+	}
+
+	public static Object putResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args, Object result) {
+
+		if (CACHE_ENABLED && CacheRegistry.isActive() && (result != null)) {
+			for (int i = 0; i < classNames.length; i++) {
+				String className = classNames[i];
+
+				StringMaker sm = new StringMaker();
+
+				sm.append(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED);
+				sm.append(StringPool.PERIOD);
+				sm.append(className);
+
+				boolean classNameCacheEnabled = GetterUtil.getBoolean(
+					PropsUtil.get(sm.toString()), true);
+
+				if (!classNameCacheEnabled) {
+					return result;
+				}
+			}
+
+			String key = _encodeKey(sql, methodName, params, args);
+
+			result = _getResult(result);
+
+			List groups = new ArrayList(classNames.length + 1);
+
+			groups.add(GROUP_NAME);
+
+			for (int i = 0; i < classNames.length; i++) {
+				String className = classNames[i];
+
+				String classNameGroupKey = _encodeKey(className);
+
+				groups.add(classNameGroupKey);
+			}
+
+			_cache.putInCache(
+				key, result, (String[])groups.toArray(new String[0]));
 		}
 
 		return result;
@@ -143,10 +220,25 @@ public class FinderCache {
 			Object arg = args[i];
 
 			sm.append(StringPool.POUND);
-			sm.append(arg.toString());
+			sm.append(String.valueOf(arg));
 		}
 
 		return sm.toString();
+	}
+
+	private static Object _getResult(Object result) {
+		if (result instanceof ArrayList) {
+			List cachedList = (List)result;
+
+			List list = new ArrayList(cachedList.size());
+
+			list.addAll(cachedList);
+
+			return list;
+		}
+		else {
+			return result;
+		}
 	}
 
 	private static final String _ARGS_SEPARATOR = "_ARGS_SEPARATOR_";

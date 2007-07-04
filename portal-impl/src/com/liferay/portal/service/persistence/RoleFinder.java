@@ -86,53 +86,77 @@ public class RoleFinder {
 	public static int countByR_U(long roleId, long userId)
 		throws SystemException {
 
-		Session session = null;
+		String finderSQL = Role.class.getName();
+		String[] finderClassNames = new String[] {
+			Group.class.getName(), Role.class.getName(), "Groups_Roles",
+			"Users_Groups", "Users_Orgs", "Users_Roles", "Users_UserGroups"
+		};
+		String finderMethodName = "customCountByR_U";
+		String finderParams[] = new String[] {
+			Long.class.getName(), Long.class.getName()
+		};
+		Object finderArgs[] = new Object[] {new Long(roleId), new Long(userId)};
 
-		try {
-			session = HibernateUtil.openSession();
+		Object result = FinderCache.getResult(
+			finderSQL, finderClassNames, finderMethodName, finderParams,
+			finderArgs);
 
-			StringMaker sm = new StringMaker();
+		if (result == null) {
+			Session session = null;
 
-			sm.append("(");
-			sm.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(COUNT_BY_USER));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
-			sm.append(")");
+			try {
+				session = HibernateUtil.openSession();
 
-			SQLQuery q = session.createSQLQuery(sm.toString());
+				StringMaker sm = new StringMaker();
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				sm.append("(");
+				sm.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
+				sm.append(") UNION (");
+				sm.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
+				sm.append(") UNION (");
+				sm.append(CustomSQLUtil.get(COUNT_BY_USER));
+				sm.append(") UNION (");
+				sm.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
+				sm.append(")");
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				SQLQuery q = session.createSQLQuery(sm.toString());
 
-			for (int i = 0; i < 4; i++) {
-				qPos.add(roleId);
-				qPos.add(userId);
-			}
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			int count = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Long l = (Long)itr.next();
-
-				if (l != null) {
-					count += l.intValue();
+				for (int i = 0; i < 4; i++) {
+					qPos.add(roleId);
+					qPos.add(userId);
 				}
-			}
 
-			return count;
+				int count = 0;
+
+				Iterator itr = q.list().iterator();
+
+				while (itr.hasNext()) {
+					Long l = (Long)itr.next();
+
+					if (l != null) {
+						count += l.intValue();
+					}
+				}
+
+				FinderCache.putResult(
+					finderSQL, finderClassNames, finderMethodName, finderParams,
+					finderArgs, new Long(count));
+
+				return count;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
