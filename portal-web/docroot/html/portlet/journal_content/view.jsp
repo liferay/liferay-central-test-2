@@ -63,43 +63,20 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 	</c:when>
 </c:choose>
 
+<%
+JournalArticle article = null;
+
+try {
+	article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId);
+}
+catch (NoSuchArticleException nsae) {
+}
+%>
+
 <c:if test="<%= themeDisplay.isSignedIn() %>">
 	<br />
 
-	<%
-	JournalArticle article = null;
-
-	try {
-		article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId);
-	%>
-
-		<c:if test="<%= enableRatings %>">
-			<liferay-ui:ratings
-				className="<%= JournalArticle.class.getName() %>"
-				classPK="<%= article.getResourcePrimKey() %>"
-				url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
-			/>
-
-			<br />
-		</c:if>
-
-		<c:if test="<%= enableComments %>">
-			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
-			</portlet:actionURL>
-
-			<liferay-ui:discussion
-				formAction="<%= discussionURL %>"
-				className="<%= JournalArticle.class.getName() %>"
-				classPK="<%= article.getResourcePrimKey() %>"
-				userId="<%= article.getUserId() %>"
-				subject="<%= article.getTitle() %>"
-				redirect="<%= currentURL %>"
-			/>
-
-			<br />
-		</c:if>
-
+	<c:if test="<%= article != null %>">
 		<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
 			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 				<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
@@ -108,15 +85,10 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 				<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 				<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</liferay-portlet:renderURL>
-
+	
 			<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
 		</c:if>
-
-	<%
-	}
-	catch (NoSuchArticleException nsae) {
-	}
-	%>
+	</c:if>
 
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
 		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
@@ -132,3 +104,35 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 		<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
 	</c:if>
 </c:if>
+
+<c:if test="<%= article != null %>">
+	<br />
+		
+	<c:if test="<%= enableRatings %>">
+		<br />
+
+		<liferay-ui:ratings
+			className="<%= JournalArticle.class.getName() %>"
+			classPK="<%= article.getResourcePrimKey() %>"
+			url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+		/>
+	</c:if>
+
+	<c:if test="<%= enableComments %>">
+		<br />
+		
+		<portlet:actionURL var="discussionURL">
+			<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
+		</portlet:actionURL>
+
+		<liferay-ui:discussion
+			formAction="<%= discussionURL %>"
+			className="<%= JournalArticle.class.getName() %>"
+			classPK="<%= article.getResourcePrimKey() %>"
+			userId="<%= article.getUserId() %>"
+			subject="<%= article.getTitle() %>"
+			redirect="<%= currentURL %>"
+		/>
+	</c:if>
+</c:if>
+
