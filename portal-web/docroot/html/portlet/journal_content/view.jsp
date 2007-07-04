@@ -85,7 +85,7 @@ catch (NoSuchArticleException nsae) {
 				<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 				<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</liferay-portlet:renderURL>
-	
+
 			<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
 		</c:if>
 	</c:if>
@@ -107,7 +107,7 @@ catch (NoSuchArticleException nsae) {
 
 <c:if test="<%= article != null %>">
 	<br />
-		
+
 	<c:if test="<%= enableRatings %>">
 		<br />
 
@@ -120,7 +120,7 @@ catch (NoSuchArticleException nsae) {
 
 	<c:if test="<%= enableComments %>">
 		<br />
-		
+
 		<portlet:actionURL var="discussionURL">
 			<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
 		</portlet:actionURL>
@@ -135,4 +135,3 @@ catch (NoSuchArticleException nsae) {
 		/>
 	</c:if>
 </c:if>
-

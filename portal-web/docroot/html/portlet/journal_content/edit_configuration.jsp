@@ -60,27 +60,25 @@ type = ParamUtil.getString(request, "type", type);
 	}
 </script>
 
-<c:if test="<%= Validator.isNotNull(portletResource) %>">
-	<table class="liferay-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="portlet-id" />:
-		</td>
-		<td>
-			<%= portletResource %>
-		</td>
-	</tr>
-	</table>
-</c:if>
-
-<br />
-
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm1">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
 <input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
+
+<table class="liferay-table">
+<tr>
+	<td>
+		<liferay-ui:message key="portlet-id" />:
+	</td>
+	<td>
+		<%= portletResource %>
+	</td>
+</tr>
+</table>
+
+<br />
 
 <c:if test="<%= article != null %>">
 	<div class="portlet-msg-info"><liferay-ui:message key="displaying-content" />: <%= articleId %></div>
@@ -148,6 +146,14 @@ type = ParamUtil.getString(request, "type", type);
 	<table class="liferay-table">
 	<tr>
 		<td>
+			<liferay-ui:message key="disable-caching" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="disableCaching" defaultValue="<%= disableCaching %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>
@@ -160,14 +166,6 @@ type = ParamUtil.getString(request, "type", type);
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="disable-caching" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="disableCaching" defaultValue="<%= disableCaching %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
 		</td>
 	</tr>
 	</table>

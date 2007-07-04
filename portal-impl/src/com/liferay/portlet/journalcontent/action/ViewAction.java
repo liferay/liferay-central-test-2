@@ -58,36 +58,34 @@ public class ViewAction extends PortletAction {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-		
-		long groupId = ParamUtil.getLong(req, "groupId", 0);
-		String articleId = ParamUtil.getString(req, "articleId", 
-				StringPool.BLANK);
-		String templateId = ParamUtil.getString(req, "templateId", 
-				StringPool.BLANK);
 
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		if (groupId < 1) {
 			groupId = GetterUtil.getLong(
-					prefs.getValue("group-id", StringPool.BLANK));
+				prefs.getValue("group-id", StringPool.BLANK));
 		}
-		
+
+		String articleId = ParamUtil.getString(req, "articleId");
+		String templateId = ParamUtil.getString(req, "templateId");
+
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
-					prefs.getValue("article-id", StringPool.BLANK));
+				prefs.getValue("article-id", StringPool.BLANK));
 			templateId = GetterUtil.getString(
-					prefs.getValue("template-id", StringPool.BLANK));
+				prefs.getValue("template-id", StringPool.BLANK));
 		}
-		
+
 		String languageId = LanguageUtil.getLanguageId(req);
 
 		boolean disableCaching = GetterUtil.getBoolean(
-				prefs.getValue("disable-caching", StringPool.BLANK));
+			prefs.getValue("disable-caching", StringPool.BLANK));
 
 		String content = null;
 
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			content = JournalContentUtil.getContent(
-				groupId, articleId, templateId, languageId, themeDisplay, 
+				groupId, articleId, templateId, languageId, themeDisplay,
 				disableCaching);
 		}
 

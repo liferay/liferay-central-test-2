@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.journalcontent;
 
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.PortletURLImpl;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
+
 import java.util.Map;
 
 import javax.portlet.PortletURL;
@@ -29,18 +35,9 @@ import javax.portlet.PortletURL;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.BaseFriendlyURLMapper;
-import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
-
 /**
- * <a href="JournalContentFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalContentFriendlyURLMapper.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  *
@@ -70,18 +67,19 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 			String templateId = url.getParameter("templateId");
 
 			if (Validator.isNotNull(portletId) &&
-					Validator.isNotNull(groupId) && 
-					Validator.isNotNull(articleId)) {
-				
-				friendlyURLPath = "/journal_content/" + portletId + "/" + 
-						groupId + "/" + articleId;
+				Validator.isNotNull(groupId) &&
+				Validator.isNotNull(articleId)) {
+
+				friendlyURLPath =
+					"/journal_content/" + portletId + "/" + groupId + "/" +
+						articleId;
 
 				url.addParameterIncludedInPath("groupId");
 				url.addParameterIncludedInPath("articleId");
 
 				if (Validator.isNotNull(templateId)) {
 					friendlyURLPath += "/" + templateId;
-					
+
 					url.addParameterIncludedInPath("templateId");
 				}
 			}
@@ -104,10 +102,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		if (x == -1) {
 			return;
 		}
-		
+
 		String portletId = friendlyURLPath.substring(w + 1, x);
 
-		String namespace = 
+		String namespace =
 			StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
 		params.put("p_p_id", portletId);
@@ -116,11 +114,12 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		String groupId = friendlyURLPath.substring(x + 1, y);
 
 		params.put(namespace + "groupId", groupId);
-		
+
 		String articleId = null;
-		
+
 		if (z == -1) {
-			articleId = friendlyURLPath.substring(y + 1, friendlyURLPath.length());
+			articleId =
+				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
 
 			params.put(namespace + "articleId", articleId);
 		}
@@ -129,7 +128,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 			params.put(namespace + "articleId", articleId);
 
-			String templateId = 
+			String templateId =
 				friendlyURLPath.substring(z + 1, friendlyURLPath.length());
 
 			params.put(namespace + "templateId", articleId);
@@ -140,5 +139,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 	private static final String _MAPPING = "journal_content";
 
-	private static Log _log = LogFactory.getLog(JournalContentFriendlyURLMapper.class);
+	private static Log _log =
+		LogFactory.getLog(JournalContentFriendlyURLMapper.class);
+
 }

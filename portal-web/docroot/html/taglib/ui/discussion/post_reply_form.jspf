@@ -102,13 +102,13 @@
 		<tr>
 			<c:if test="<%= themeDisplay.isSignedIn() %>">
 				<td>
-	
+
 					<%
 					postReplyHREF = "javascript: document.getElementById('" + namespace + "postReplyForm" + i + "').style.display = ''; void('');";
 					%>
-	
+
 					<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" />
-	
+
 					<a href="<%= postReplyHREF %>"><liferay-ui:message key="post-reply" /></a>
 				</td>
 			</c:if>

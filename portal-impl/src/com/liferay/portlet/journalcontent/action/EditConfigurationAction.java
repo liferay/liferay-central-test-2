@@ -78,8 +78,12 @@ public class EditConfigurationAction extends PortletAction {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
+			boolean disableCaching = ParamUtil.getBoolean(
+				req, "disableCaching");
+
 			String content = JournalContentUtil.getContent(
-				groupId, articleId, languageId, themeDisplay);
+				groupId, articleId, templateId, languageId, themeDisplay,
+				disableCaching);
 
 			if (Validator.isNull(content)) {
 				throw new NoSuchArticleException();
@@ -88,8 +92,6 @@ public class EditConfigurationAction extends PortletAction {
 			boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 			boolean enableComments = ParamUtil.getBoolean(
 				req, "enableComments");
-			boolean disableCaching = ParamUtil.getBoolean(
-					req, "disableCaching");
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
@@ -101,9 +103,9 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValue("article-id", articleId);
 			prefs.setValue("template-id", templateId);
+			prefs.setValue("disable-caching", String.valueOf(disableCaching));
 			prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 			prefs.setValue("enable-comments", String.valueOf(enableComments));
-			prefs.setValue("disable-caching", String.valueOf(disableCaching));
 
 			prefs.store();
 

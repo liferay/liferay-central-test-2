@@ -248,13 +248,15 @@ public class LangBuilder {
 			translationId.equals("en_cs") ||
 			translationId.equals("en_fi") ||
 			translationId.equals("en_hu") ||
+			translationId.equals("en_fa") ||
 			translationId.equals("en_ru") ||
 			translationId.equals("en_sv") ||
 			translationId.equals("en_tr") ||
 			translationId.equals("en_vi")) {
 
 			// Automatic translator does not support Arabic, Catalan, Czech,
-			// Finnish, Hungarian, Russian, Swedish, Turkish, or Vietnamese
+			// Finnish, Hungarian, Persian, Russian, Swedish, Turkish,
+			// or Vietnamese
 
 			return null;
 		}

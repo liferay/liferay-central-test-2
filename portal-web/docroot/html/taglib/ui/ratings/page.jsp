@@ -57,13 +57,14 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			<div style="font-size: xx-small; padding-bottom: 2px;">
 				<liferay-ui:message key="your-rating" />
 			</div>
-	
+
 			<div id="<%= randomNamespace %>yourRating">
 				<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 			</div>
 		</td>
 		<td style="padding-left: 30px;"></td>
 	</c:if>
+
 	<td>
 		<div style="font-size: xx-small; padding-bottom: 2px;">
 			<liferay-ui:message key="average" /> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br />

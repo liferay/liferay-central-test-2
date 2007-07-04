@@ -83,24 +83,25 @@ public class JournalContentUtil {
 		ThemeDisplay themeDisplay) {
 
 		return getContent(
-				groupId, articleId, null, languageId, themeDisplay, false);
+			groupId, articleId, null, languageId, themeDisplay, false);
 	}
-	
+
 	public static String getContent(
 		long groupId, String articleId, String templateId, String languageId,
 		ThemeDisplay themeDisplay, boolean disableCaching) {
-		
-		String content = null;
 
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
+		if (disableCaching) {
+			return _getContent(
+				groupId, articleId, templateId, languageId, themeDisplay);
+		}
+
+		String content = null;
+
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
 
-		if (disableCaching) {
-			_cache.flushEntry(key);
-		}
-		
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);
 		}
@@ -161,6 +162,28 @@ public class JournalContentUtil {
 		}
 
 		return sm.toString();
+	}
+
+	private static String _getContent(
+		long groupId, String articleId, String templateId, String languageId,
+		ThemeDisplay themeDisplay) {
+
+		articleId = GetterUtil.getString(articleId).toUpperCase();
+		templateId = GetterUtil.getString(templateId).toUpperCase();
+
+		try {
+			return JournalArticleLocalServiceUtil.getArticleContent(
+				groupId, articleId, templateId, languageId, themeDisplay);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get content for " + groupId + " " +
+						articleId + " " + languageId);
+			}
+
+			return null;
+		}
 	}
 
 	private static final int _REFRESH_TIME = 3600;
