@@ -311,7 +311,7 @@ public class LDAPAuth implements Authenticator {
 		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
 
 		// Check passwords by either doing a comparison between the passwords or
-		// by binding to the LDAP server.  If using LDAP password policies, bind
+		// by binding to the LDAP server. If using LDAP password policies, bind
 		// auth method must be used in order to get the result control codes.
 
 		String authMethod = PrefsPropsUtil.getString(
