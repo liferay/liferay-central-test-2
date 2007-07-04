@@ -89,9 +89,15 @@ public class GetTemplateAction extends Action {
 
 			String fileName = templateId + StringPool.PERIOD + extension;
 			byte[] byteArray = script.getBytes();
+			
+			String contentType = Constants.TEXT_XML;
+			
+			if (Validator.equals(extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
+				contentType = JournalTemplateImpl.LANG_TYPE_CSS;
+			}
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, Constants.TEXT_XML);
+				res, fileName, byteArray, contentType);
 
 			return null;
 		}

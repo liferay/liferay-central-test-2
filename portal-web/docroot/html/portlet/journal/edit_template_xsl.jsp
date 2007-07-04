@@ -43,6 +43,9 @@ String defaultContent = null;
 if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.xsl");
 }
+else if (langType.equals(JournalTemplateImpl.LANG_TYPE_CSS)) {
+	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.css");
+}
 else {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.vm");
 }
