@@ -101,8 +101,6 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public JournalContentSearch remove(
 		JournalContentSearch journalContentSearch) throws SystemException {
-		FinderCache.clearCache(JournalContentSearch.class.getName());
-
 		Session session = null;
 
 		try {
@@ -117,6 +115,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalContentSearch.class.getName());
 		}
 	}
 
@@ -129,8 +128,6 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 	public JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(JournalContentSearch.class.getName());
-
 		Session session = null;
 
 		try {
@@ -142,6 +139,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			else {
 				if (journalContentSearch.isNew()) {
 					session.save(journalContentSearch);
+				}
+				else {
+					session.update(journalContentSearch);
 				}
 			}
 
@@ -155,6 +155,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalContentSearch.class.getName());
 		}
 	}
 
@@ -1447,7 +1448,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1515,7 +1516,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1580,7 +1581,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1654,7 +1655,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1747,7 +1748,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1794,7 +1795,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

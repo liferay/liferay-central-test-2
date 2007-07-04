@@ -623,7 +623,7 @@ public class PropsUtil {
 
 	// Value Object
 
-	public static final String VALUE_OBJECT_CACHEABLE = "value.object.cacheable";
+	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 
 	// Last Modified
 

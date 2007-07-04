@@ -97,8 +97,6 @@ public class CountryPersistenceImpl extends BasePersistence
 	}
 
 	public Country remove(Country country) throws SystemException {
-		FinderCache.clearCache(Country.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Country.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class CountryPersistenceImpl extends BasePersistence
 
 	public Country update(com.liferay.portal.model.Country country,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Country.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class CountryPersistenceImpl extends BasePersistence
 			else {
 				if (country.isNew()) {
 					session.save(country);
+				}
+				else {
+					session.update(country);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Country.class.getName());
 		}
 	}
 
@@ -538,7 +539,7 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -584,7 +585,7 @@ public class CountryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

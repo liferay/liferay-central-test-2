@@ -170,10 +170,14 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	public Layout getLayout() {
 		if (_layout == null) {
 			try {
-				_layout = LayoutLocalServiceUtil.getLayout(_plid);
+				if (_plid > 0) {
+					_layout = LayoutLocalServiceUtil.getLayout(_plid);
+				}
 			}
 			catch (Exception e) {
-				_log.warn("Layout cannot be found for " + _plid);
+				if (_log.isWarnEnabled()) {
+					_log.warn("Layout cannot be found for " + _plid);
+				}
 			}
 		}
 

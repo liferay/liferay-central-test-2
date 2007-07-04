@@ -97,8 +97,6 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public Resource remove(Resource resource) throws SystemException {
-		FinderCache.clearCache(Resource.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Resource.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 	public Resource update(com.liferay.portal.model.Resource resource,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Resource.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 			else {
 				if (resource.isNew()) {
 					session.save(resource);
+				}
+				else {
+					session.update(resource);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Resource.class.getName());
 		}
 	}
 
@@ -625,7 +626,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -692,7 +693,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -738,7 +739,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

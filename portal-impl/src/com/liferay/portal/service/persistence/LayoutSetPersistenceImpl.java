@@ -97,8 +97,6 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public LayoutSet remove(LayoutSet layoutSet) throws SystemException {
-		FinderCache.clearCache(LayoutSet.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(LayoutSet.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 	public LayoutSet update(com.liferay.portal.model.LayoutSet layoutSet,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(LayoutSet.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			else {
 				if (layoutSet.isNew()) {
 					session.save(layoutSet);
+				}
+				else {
+					session.update(layoutSet);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(LayoutSet.class.getName());
 		}
 	}
 
@@ -711,7 +712,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -772,7 +773,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -831,7 +832,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -877,7 +878,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

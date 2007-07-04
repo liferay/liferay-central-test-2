@@ -99,8 +99,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 	public JournalTemplate remove(JournalTemplate journalTemplate)
 		throws SystemException {
-		FinderCache.clearCache(JournalTemplate.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalTemplate.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 	public JournalTemplate update(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(JournalTemplate.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			else {
 				if (journalTemplate.isNew()) {
 					session.save(journalTemplate);
+				}
+				else {
+					session.update(journalTemplate);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalTemplate.class.getName());
 		}
 	}
 
@@ -1129,7 +1130,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1191,7 +1192,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1259,7 +1260,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1327,7 +1328,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1374,7 +1375,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

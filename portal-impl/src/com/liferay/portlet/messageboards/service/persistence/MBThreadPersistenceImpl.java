@@ -98,8 +98,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	}
 
 	public MBThread remove(MBThread mbThread) throws SystemException {
-		FinderCache.clearCache(MBThread.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBThread.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	public MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(MBThread.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			else {
 				if (mbThread.isNew()) {
 					session.save(mbThread);
+				}
+				else {
+					session.update(mbThread);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBThread.class.getName());
 		}
 	}
 
@@ -550,7 +551,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -597,7 +598,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

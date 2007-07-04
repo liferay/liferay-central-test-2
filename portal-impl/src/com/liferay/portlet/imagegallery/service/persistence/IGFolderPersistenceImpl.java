@@ -98,8 +98,6 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	}
 
 	public IGFolder remove(IGFolder igFolder) throws SystemException {
-		FinderCache.clearCache(IGFolder.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(IGFolder.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	public IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(IGFolder.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			else {
 				if (igFolder.isNew()) {
 					session.save(igFolder);
+				}
+				else {
+					session.update(igFolder);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(IGFolder.class.getName());
 		}
 	}
 
@@ -772,7 +773,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -832,7 +833,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -879,7 +880,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

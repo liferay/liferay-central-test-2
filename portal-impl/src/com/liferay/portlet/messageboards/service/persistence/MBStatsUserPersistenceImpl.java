@@ -100,8 +100,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 	public MBStatsUser remove(MBStatsUser mbStatsUser)
 		throws SystemException {
-		FinderCache.clearCache(MBStatsUser.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBStatsUser.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	public MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(MBStatsUser.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			else {
 				if (mbStatsUser.isNew()) {
 					session.save(mbStatsUser);
+				}
+				else {
+					session.update(mbStatsUser);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBStatsUser.class.getName());
 		}
 	}
 
@@ -1064,7 +1065,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1116,7 +1117,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1173,7 +1174,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1233,7 +1234,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1280,7 +1281,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

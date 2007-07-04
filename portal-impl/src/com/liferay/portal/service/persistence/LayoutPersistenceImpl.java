@@ -95,8 +95,6 @@ public class LayoutPersistenceImpl extends BasePersistence
 	}
 
 	public Layout remove(Layout layout) throws SystemException {
-		FinderCache.clearCache(Layout.class.getName());
-
 		Session session = null;
 
 		try {
@@ -111,6 +109,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Layout.class.getName());
 		}
 	}
 
@@ -121,8 +120,6 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 	public Layout update(com.liferay.portal.model.Layout layout,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Layout.class.getName());
-
 		Session session = null;
 
 		try {
@@ -134,6 +131,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 			else {
 				if (layout.isNew()) {
 					session.save(layout);
+				}
+				else {
+					session.update(layout);
 				}
 			}
 
@@ -147,6 +147,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Layout.class.getName());
 		}
 	}
 
@@ -1132,7 +1133,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1196,7 +1197,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1260,7 +1261,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1333,7 +1334,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1397,7 +1398,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1443,7 +1444,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

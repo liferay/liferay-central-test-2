@@ -101,8 +101,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public SCFrameworkVersion remove(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
-		FinderCache.clearCache(SCFrameworkVersion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -117,6 +115,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCFrameworkVersion.class.getName());
 		}
 	}
 
@@ -129,8 +128,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	public SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(SCFrameworkVersion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -142,6 +139,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			else {
 				if (scFrameworkVersion.isNew()) {
 					session.save(scFrameworkVersion);
+				}
+				else {
+					session.update(scFrameworkVersion);
 				}
 			}
 
@@ -155,6 +155,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCFrameworkVersion.class.getName());
 		}
 	}
 
@@ -989,7 +990,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1041,7 +1042,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1101,7 +1102,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1148,7 +1149,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

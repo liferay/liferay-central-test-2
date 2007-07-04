@@ -98,8 +98,6 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public CalEvent remove(CalEvent calEvent) throws SystemException {
-		FinderCache.clearCache(CalEvent.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(CalEvent.class.getName());
 		}
 	}
 
@@ -125,8 +124,6 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(CalEvent.class.getName());
-
 		Session session = null;
 
 		try {
@@ -138,6 +135,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 			else {
 				if (calEvent.isNew()) {
 					session.save(calEvent);
+				}
+				else {
+					session.update(calEvent);
 				}
 			}
 
@@ -151,6 +151,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(CalEvent.class.getName());
 		}
 	}
 
@@ -1020,7 +1021,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1087,7 +1088,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1147,7 +1148,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1193,7 +1194,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -102,8 +102,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 	public JournalArticleResource remove(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
-		FinderCache.clearCache(JournalArticleResource.class.getName());
-
 		Session session = null;
 
 		try {
@@ -118,6 +116,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalArticleResource.class.getName());
 		}
 	}
 
@@ -130,8 +129,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 	public JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(JournalArticleResource.class.getName());
-
 		Session session = null;
 
 		try {
@@ -143,6 +140,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 			else {
 				if (journalArticleResource.isNew()) {
 					session.save(journalArticleResource);
+				}
+				else {
+					session.update(journalArticleResource);
 				}
 			}
 
@@ -156,6 +156,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalArticleResource.class.getName());
 		}
 	}
 
@@ -471,7 +472,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -518,7 +519,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

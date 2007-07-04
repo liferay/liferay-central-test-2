@@ -99,8 +99,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 	public UserIdMapper remove(UserIdMapper userIdMapper)
 		throws SystemException {
-		FinderCache.clearCache(UserIdMapper.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserIdMapper.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	public UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(UserIdMapper.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			else {
 				if (userIdMapper.isNew()) {
 					session.save(userIdMapper);
+				}
+				else {
+					session.update(userIdMapper);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserIdMapper.class.getName());
 		}
 	}
 
@@ -636,7 +637,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -703,7 +704,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -749,7 +750,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

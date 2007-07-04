@@ -100,8 +100,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 	public TagsProperty remove(TagsProperty tagsProperty)
 		throws SystemException {
-		FinderCache.clearCache(TagsProperty.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(TagsProperty.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	public TagsProperty update(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(TagsProperty.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 			else {
 				if (tagsProperty.isNew()) {
 					session.save(tagsProperty);
+				}
+				else {
+					session.update(tagsProperty);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(TagsProperty.class.getName());
 		}
 	}
 
@@ -1101,7 +1102,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1153,7 +1154,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1220,7 +1221,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1287,7 +1288,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1333,7 +1334,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

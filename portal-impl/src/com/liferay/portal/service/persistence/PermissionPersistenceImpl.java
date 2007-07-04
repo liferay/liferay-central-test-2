@@ -111,8 +111,6 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public Permission remove(Permission permission) throws SystemException {
-		FinderCache.clearCache(Permission.class.getName());
-
 		Session session = null;
 
 		try {
@@ -130,6 +128,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Permission.class.getName());
 		}
 	}
 
@@ -140,8 +139,6 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public Permission update(com.liferay.portal.model.Permission permission,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Permission.class.getName());
-
 		Session session = null;
 
 		try {
@@ -153,6 +150,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 			else {
 				if (permission.isNew()) {
 					session.save(permission);
+				}
+				else {
+					session.update(permission);
 				}
 			}
 
@@ -166,6 +166,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Permission.class.getName());
 		}
 	}
 
@@ -647,7 +648,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -715,7 +716,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -761,7 +762,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

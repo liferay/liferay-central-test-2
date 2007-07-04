@@ -95,8 +95,6 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public MBBan remove(MBBan mbBan) throws SystemException {
-		FinderCache.clearCache(MBBan.class.getName());
-
 		Session session = null;
 
 		try {
@@ -111,6 +109,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBBan.class.getName());
 		}
 	}
 
@@ -121,8 +120,6 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 	public MBBan update(com.liferay.portlet.messageboards.model.MBBan mbBan,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(MBBan.class.getName());
-
 		Session session = null;
 
 		try {
@@ -134,6 +131,9 @@ public class MBBanPersistenceImpl extends BasePersistence
 			else {
 				if (mbBan.isNew()) {
 					session.save(mbBan);
+				}
+				else {
+					session.update(mbBan);
 				}
 			}
 
@@ -147,6 +147,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBBan.class.getName());
 		}
 	}
 
@@ -992,7 +993,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1044,7 +1045,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1096,7 +1097,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1156,7 +1157,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1203,7 +1204,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

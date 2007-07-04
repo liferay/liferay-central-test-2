@@ -107,8 +107,6 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public User remove(User user) throws SystemException {
-		FinderCache.clearCache(User.class.getName());
-
 		Session session = null;
 
 		try {
@@ -128,6 +126,7 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(User.class.getName());
 		}
 	}
 
@@ -138,8 +137,6 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public User update(com.liferay.portal.model.User user, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(User.class.getName());
-
 		Session session = null;
 
 		try {
@@ -151,6 +148,9 @@ public class UserPersistenceImpl extends BasePersistence
 			else {
 				if (user.isNew()) {
 					session.save(user);
+				}
+				else {
+					session.update(user);
 				}
 			}
 
@@ -164,6 +164,7 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(User.class.getName());
 		}
 	}
 
@@ -1235,7 +1236,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1286,7 +1287,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1343,7 +1344,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1402,7 +1403,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1469,7 +1470,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1536,7 +1537,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1603,7 +1604,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1649,7 +1650,7 @@ public class UserPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

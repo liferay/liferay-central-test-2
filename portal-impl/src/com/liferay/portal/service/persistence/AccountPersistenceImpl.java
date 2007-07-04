@@ -96,8 +96,6 @@ public class AccountPersistenceImpl extends BasePersistence
 	}
 
 	public Account remove(Account account) throws SystemException {
-		FinderCache.clearCache(Account.class.getName());
-
 		Session session = null;
 
 		try {
@@ -112,6 +110,7 @@ public class AccountPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Account.class.getName());
 		}
 	}
 
@@ -122,8 +121,6 @@ public class AccountPersistenceImpl extends BasePersistence
 
 	public Account update(com.liferay.portal.model.Account account,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Account.class.getName());
-
 		Session session = null;
 
 		try {
@@ -135,6 +132,9 @@ public class AccountPersistenceImpl extends BasePersistence
 			else {
 				if (account.isNew()) {
 					session.save(account);
+				}
+				else {
+					session.update(account);
 				}
 			}
 
@@ -148,6 +148,7 @@ public class AccountPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Account.class.getName());
 		}
 	}
 
@@ -333,7 +334,7 @@ public class AccountPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

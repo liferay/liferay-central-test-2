@@ -97,8 +97,6 @@ public class WebsitePersistenceImpl extends BasePersistence
 	}
 
 	public Website remove(Website website) throws SystemException {
-		FinderCache.clearCache(Website.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Website.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 	public Website update(com.liferay.portal.model.Website website,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Website.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class WebsitePersistenceImpl extends BasePersistence
 			else {
 				if (website.isNew()) {
 					session.save(website);
+				}
+				else {
+					session.update(website);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Website.class.getName());
 		}
 	}
 
@@ -1442,7 +1443,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1493,7 +1494,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1552,7 +1553,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1614,7 +1615,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1681,7 +1682,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1727,7 +1728,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

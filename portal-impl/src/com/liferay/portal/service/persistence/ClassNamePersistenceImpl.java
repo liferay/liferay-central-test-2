@@ -97,8 +97,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	}
 
 	public ClassName remove(ClassName className) throws SystemException {
-		FinderCache.clearCache(ClassName.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ClassName.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 	public ClassName update(com.liferay.portal.model.ClassName className,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(ClassName.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			else {
 				if (className.isNew()) {
 					session.save(className);
+				}
+				else {
+					session.update(className);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ClassName.class.getName());
 		}
 	}
 
@@ -442,7 +443,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -488,7 +489,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

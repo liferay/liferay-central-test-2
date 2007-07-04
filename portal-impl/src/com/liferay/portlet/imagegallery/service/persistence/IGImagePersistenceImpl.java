@@ -98,8 +98,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public IGImage remove(IGImage igImage) throws SystemException {
-		FinderCache.clearCache(IGImage.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(IGImage.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(IGImage.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 			else {
 				if (igImage.isNew()) {
 					session.save(igImage);
+				}
+				else {
+					session.update(igImage);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(IGImage.class.getName());
 		}
 	}
 
@@ -544,7 +545,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -591,7 +592,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

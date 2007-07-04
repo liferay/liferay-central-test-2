@@ -100,8 +100,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public PortletPreferences remove(PortletPreferences portletPreferences)
 		throws SystemException {
-		FinderCache.clearCache(PortletPreferences.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PortletPreferences.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	public PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(PortletPreferences.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			else {
 				if (portletPreferences.isNew()) {
 					session.save(portletPreferences);
+				}
+				else {
+					session.update(portletPreferences);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PortletPreferences.class.getName());
 		}
 	}
 
@@ -889,7 +890,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -953,7 +954,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1031,7 +1032,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1077,7 +1078,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

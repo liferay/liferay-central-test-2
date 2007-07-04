@@ -100,8 +100,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
 		throws SystemException {
-		FinderCache.clearCache(OrgGroupPermission.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(OrgGroupPermission.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 	public OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(OrgGroupPermission.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			else {
 				if (orgGroupPermission.isNew()) {
 					session.save(orgGroupPermission);
+				}
+				else {
+					session.update(orgGroupPermission);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(OrgGroupPermission.class.getName());
 		}
 	}
 
@@ -735,7 +736,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -787,7 +788,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -833,7 +834,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

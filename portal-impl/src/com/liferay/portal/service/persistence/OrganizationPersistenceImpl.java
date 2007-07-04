@@ -112,8 +112,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 	public Organization remove(Organization organization)
 		throws SystemException {
-		FinderCache.clearCache(Organization.class.getName());
-
 		Session session = null;
 
 		try {
@@ -130,6 +128,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Organization.class.getName());
 		}
 	}
 
@@ -142,8 +141,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	public Organization update(
 		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(Organization.class.getName());
-
 		Session session = null;
 
 		try {
@@ -155,6 +152,9 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			else {
 				if (organization.isNew()) {
 					session.save(organization);
+				}
+				else {
+					session.update(organization);
 				}
 			}
 
@@ -168,6 +168,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Organization.class.getName());
 		}
 	}
 
@@ -1092,7 +1093,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1144,7 +1145,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1204,7 +1205,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1272,7 +1273,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1318,7 +1319,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

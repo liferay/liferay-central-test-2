@@ -107,8 +107,6 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public Role remove(Role role) throws SystemException {
-		FinderCache.clearCache(Role.class.getName());
-
 		Session session = null;
 
 		try {
@@ -126,6 +124,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Role.class.getName());
 		}
 	}
 
@@ -136,8 +135,6 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public Role update(com.liferay.portal.model.Role role, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(Role.class.getName());
-
 		Session session = null;
 
 		try {
@@ -149,6 +146,9 @@ public class RolePersistenceImpl extends BasePersistence
 			else {
 				if (role.isNew()) {
 					session.save(role);
+				}
+				else {
+					session.update(role);
 				}
 			}
 
@@ -162,6 +162,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Role.class.getName());
 		}
 	}
 
@@ -751,7 +752,7 @@ public class RolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -818,7 +819,7 @@ public class RolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -880,7 +881,7 @@ public class RolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -926,7 +927,7 @@ public class RolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -98,8 +98,6 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public MBCategory remove(MBCategory mbCategory) throws SystemException {
-		FinderCache.clearCache(MBCategory.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBCategory.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	public MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(MBCategory.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			else {
 				if (mbCategory.isNew()) {
 					session.save(mbCategory);
+				}
+				else {
+					session.update(mbCategory);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBCategory.class.getName());
 		}
 	}
 
@@ -979,7 +980,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1031,7 +1032,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1091,7 +1092,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1138,7 +1139,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

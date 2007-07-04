@@ -97,8 +97,6 @@ public class RegionPersistenceImpl extends BasePersistence
 	}
 
 	public Region remove(Region region) throws SystemException {
-		FinderCache.clearCache(Region.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Region.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class RegionPersistenceImpl extends BasePersistence
 
 	public Region update(com.liferay.portal.model.Region region,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Region.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class RegionPersistenceImpl extends BasePersistence
 			else {
 				if (region.isNew()) {
 					session.save(region);
+				}
+				else {
+					session.update(region);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class RegionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Region.class.getName());
 		}
 	}
 
@@ -948,7 +949,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -999,7 +1000,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1058,7 +1059,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1104,7 +1105,7 @@ public class RegionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -2392,7 +2392,6 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " remove(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
-		sm.append("FinderCache.clearCache(" + entity.getName() + ".class.getName());");
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
@@ -2418,6 +2417,7 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
+		sm.append("FinderCache.clearCache(" + entity.getName() + ".class.getName());");
 		sm.append("}");
 		sm.append("}");
 
@@ -2428,7 +2428,6 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
-		sm.append("FinderCache.clearCache(" + entity.getName() + ".class.getName());");
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
@@ -2438,6 +2437,9 @@ public class ServiceBuilder {
 		sm.append("else {");
 		sm.append("if (" + entity.getVarName() + ".isNew()) {");
 		sm.append("session.save(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("session.update(" + entity.getVarName() + ");");
 		sm.append("}");
 		sm.append("}");
 		sm.append("session.flush();");
@@ -2449,6 +2451,7 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("finally {");
 		sm.append("closeSession(session);");
+		sm.append("FinderCache.clearCache(" + entity.getName() + ".class.getName());");
 		sm.append("}");
 		sm.append("}");
 
@@ -3698,7 +3701,7 @@ public class ServiceBuilder {
 			sm.append("}");
 			sm.append("}");
 			sm.append("else {");
-			sm.append("return ((Integer)result).intValue();");
+			sm.append("return ((Long)result).intValue();");
 			sm.append("}");
 			sm.append("}");
 		}
@@ -3735,7 +3738,7 @@ public class ServiceBuilder {
 		sm.append("}");
 		sm.append("}");
 		sm.append("else {");
-		sm.append("return ((Integer)result).intValue();");
+		sm.append("return ((Long)result).intValue();");
 		sm.append("}");
 		sm.append("}");
 

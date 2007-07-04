@@ -98,8 +98,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	public WikiPage remove(WikiPage wikiPage) throws SystemException {
-		FinderCache.clearCache(WikiPage.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(WikiPage.class.getName());
 		}
 	}
 
@@ -124,8 +123,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public WikiPage update(com.liferay.portlet.wiki.model.WikiPage wikiPage,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(WikiPage.class.getName());
-
 		Session session = null;
 
 		try {
@@ -137,6 +134,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			else {
 				if (wikiPage.isNew()) {
 					session.save(wikiPage);
+				}
+				else {
+					session.update(wikiPage);
 				}
 			}
 
@@ -150,6 +150,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(WikiPage.class.getName());
 		}
 	}
 
@@ -1412,7 +1413,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1479,7 +1480,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1536,7 +1537,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1611,7 +1612,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1686,7 +1687,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1732,7 +1733,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

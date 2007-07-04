@@ -98,8 +98,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException {
-		FinderCache.clearCache(BlogsEntry.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(BlogsEntry.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 	public BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(BlogsEntry.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 			else {
 				if (blogsEntry.isNew()) {
 					session.save(blogsEntry);
+				}
+				else {
+					session.update(blogsEntry);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(BlogsEntry.class.getName());
 		}
 	}
 
@@ -944,7 +945,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -996,7 +997,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1048,7 +1049,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1094,7 +1095,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

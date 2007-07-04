@@ -97,8 +97,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	}
 
 	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
-		FinderCache.clearCache(OrgLabor.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(OrgLabor.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(OrgLabor.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			else {
 				if (orgLabor.isNew()) {
 					session.save(orgLabor);
+				}
+				else {
+					session.update(orgLabor);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(OrgLabor.class.getName());
 		}
 	}
 
@@ -547,7 +548,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -593,7 +594,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

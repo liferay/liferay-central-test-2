@@ -99,8 +99,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 	public PasswordTracker remove(PasswordTracker passwordTracker)
 		throws SystemException {
-		FinderCache.clearCache(PasswordTracker.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PasswordTracker.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 	public PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(PasswordTracker.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			else {
 				if (passwordTracker.isNew()) {
 					session.save(passwordTracker);
+				}
+				else {
+					session.update(passwordTracker);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PasswordTracker.class.getName());
 		}
 	}
 
@@ -553,7 +554,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -599,7 +600,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

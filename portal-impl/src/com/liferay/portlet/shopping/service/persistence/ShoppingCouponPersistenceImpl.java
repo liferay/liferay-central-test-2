@@ -100,8 +100,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
-		FinderCache.clearCache(ShoppingCoupon.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ShoppingCoupon.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	public ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(ShoppingCoupon.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			else {
 				if (shoppingCoupon.isNew()) {
 					session.save(shoppingCoupon);
+				}
+				else {
+					session.update(shoppingCoupon);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ShoppingCoupon.class.getName());
 		}
 	}
 
@@ -645,7 +646,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -707,7 +708,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -754,7 +755,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

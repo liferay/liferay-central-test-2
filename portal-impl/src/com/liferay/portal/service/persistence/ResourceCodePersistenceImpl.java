@@ -98,8 +98,6 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 	public ResourceCode remove(ResourceCode resourceCode)
 		throws SystemException {
-		FinderCache.clearCache(ResourceCode.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ResourceCode.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	public ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(ResourceCode.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			else {
 				if (resourceCode.isNew()) {
 					session.save(resourceCode);
+				}
+				else {
+					session.update(resourceCode);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ResourceCode.class.getName());
 		}
 	}
 
@@ -864,7 +865,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -926,7 +927,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1001,7 +1002,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1047,7 +1048,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

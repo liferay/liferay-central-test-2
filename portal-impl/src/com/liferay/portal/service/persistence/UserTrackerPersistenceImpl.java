@@ -99,8 +99,6 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 	public UserTracker remove(UserTracker userTracker)
 		throws SystemException {
-		FinderCache.clearCache(UserTracker.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserTracker.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 	public UserTracker update(
 		com.liferay.portal.model.UserTracker userTracker, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(UserTracker.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			else {
 				if (userTracker.isNew()) {
 					session.save(userTracker);
+				}
+				else {
+					session.update(userTracker);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserTracker.class.getName());
 		}
 	}
 
@@ -936,7 +937,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -987,7 +988,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1048,7 +1049,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1094,7 +1095,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

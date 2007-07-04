@@ -101,8 +101,6 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 	public ShoppingItemField remove(ShoppingItemField shoppingItemField)
 		throws SystemException {
-		FinderCache.clearCache(ShoppingItemField.class.getName());
-
 		Session session = null;
 
 		try {
@@ -117,6 +115,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ShoppingItemField.class.getName());
 		}
 	}
 
@@ -129,8 +128,6 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 	public ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(ShoppingItemField.class.getName());
-
 		Session session = null;
 
 		try {
@@ -142,6 +139,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			else {
 				if (shoppingItemField.isNew()) {
 					session.save(shoppingItemField);
+				}
+				else {
+					session.update(shoppingItemField);
 				}
 			}
 
@@ -155,6 +155,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ShoppingItemField.class.getName());
 		}
 	}
 
@@ -557,7 +558,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -604,7 +605,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

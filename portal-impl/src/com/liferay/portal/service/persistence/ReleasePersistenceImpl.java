@@ -96,8 +96,6 @@ public class ReleasePersistenceImpl extends BasePersistence
 	}
 
 	public Release remove(Release release) throws SystemException {
-		FinderCache.clearCache(Release.class.getName());
-
 		Session session = null;
 
 		try {
@@ -112,6 +110,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Release.class.getName());
 		}
 	}
 
@@ -122,8 +121,6 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 	public Release update(com.liferay.portal.model.Release release,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Release.class.getName());
-
 		Session session = null;
 
 		try {
@@ -135,6 +132,9 @@ public class ReleasePersistenceImpl extends BasePersistence
 			else {
 				if (release.isNew()) {
 					session.save(release);
+				}
+				else {
+					session.update(release);
 				}
 			}
 
@@ -148,6 +148,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Release.class.getName());
 		}
 	}
 
@@ -333,7 +334,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

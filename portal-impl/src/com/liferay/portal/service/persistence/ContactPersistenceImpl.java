@@ -97,8 +97,6 @@ public class ContactPersistenceImpl extends BasePersistence
 	}
 
 	public Contact remove(Contact contact) throws SystemException {
-		FinderCache.clearCache(Contact.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Contact.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class ContactPersistenceImpl extends BasePersistence
 
 	public Contact update(com.liferay.portal.model.Contact contact,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Contact.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class ContactPersistenceImpl extends BasePersistence
 			else {
 				if (contact.isNew()) {
 					session.save(contact);
+				}
+				else {
+					session.update(contact);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Contact.class.getName());
 		}
 	}
 
@@ -524,7 +525,7 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -570,7 +571,7 @@ public class ContactPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

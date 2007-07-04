@@ -96,8 +96,6 @@ public class PhonePersistenceImpl extends BasePersistence
 	}
 
 	public Phone remove(Phone phone) throws SystemException {
-		FinderCache.clearCache(Phone.class.getName());
-
 		Session session = null;
 
 		try {
@@ -112,6 +110,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Phone.class.getName());
 		}
 	}
 
@@ -122,8 +121,6 @@ public class PhonePersistenceImpl extends BasePersistence
 
 	public Phone update(com.liferay.portal.model.Phone phone,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Phone.class.getName());
-
 		Session session = null;
 
 		try {
@@ -135,6 +132,9 @@ public class PhonePersistenceImpl extends BasePersistence
 			else {
 				if (phone.isNew()) {
 					session.save(phone);
+				}
+				else {
+					session.update(phone);
 				}
 			}
 
@@ -148,6 +148,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Phone.class.getName());
 		}
 	}
 
@@ -1439,7 +1440,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1490,7 +1491,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1549,7 +1550,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1611,7 +1612,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1678,7 +1679,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1724,7 +1725,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -100,8 +100,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 	public MBDiscussion remove(MBDiscussion mbDiscussion)
 		throws SystemException {
-		FinderCache.clearCache(MBDiscussion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBDiscussion.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 	public MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(MBDiscussion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 			else {
 				if (mbDiscussion.isNew()) {
 					session.save(mbDiscussion);
+				}
+				else {
+					session.update(mbDiscussion);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBDiscussion.class.getName());
 		}
 	}
 
@@ -449,7 +450,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -496,7 +497,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

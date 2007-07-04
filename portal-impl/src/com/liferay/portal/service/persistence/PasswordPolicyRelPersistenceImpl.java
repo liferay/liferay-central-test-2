@@ -100,8 +100,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
-		FinderCache.clearCache(PasswordPolicyRel.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PasswordPolicyRel.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	public PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(PasswordPolicyRel.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			else {
 				if (passwordPolicyRel.isNew()) {
 					session.save(passwordPolicyRel);
+				}
+				else {
+					session.update(passwordPolicyRel);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PasswordPolicyRel.class.getName());
 		}
 	}
 
@@ -552,7 +553,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -616,7 +617,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -662,7 +663,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

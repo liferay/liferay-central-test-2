@@ -113,8 +113,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	public SCProductEntry remove(SCProductEntry scProductEntry)
 		throws SystemException {
-		FinderCache.clearCache(SCProductEntry.class.getName());
-
 		Session session = null;
 
 		try {
@@ -130,6 +128,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCProductEntry.class.getName());
 		}
 	}
 
@@ -142,8 +141,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	public SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(SCProductEntry.class.getName());
-
 		Session session = null;
 
 		try {
@@ -155,6 +152,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			else {
 				if (scProductEntry.isNew()) {
 					session.save(scProductEntry);
+				}
+				else {
+					session.update(scProductEntry);
 				}
 			}
 
@@ -168,6 +168,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCProductEntry.class.getName());
 		}
 	}
 
@@ -998,7 +999,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1050,7 +1051,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1107,7 +1108,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1154,7 +1155,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

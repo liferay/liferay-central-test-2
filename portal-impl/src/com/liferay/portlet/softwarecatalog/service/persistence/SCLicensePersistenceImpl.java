@@ -98,8 +98,6 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public SCLicense remove(SCLicense scLicense) throws SystemException {
-		FinderCache.clearCache(SCLicense.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCLicense.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	public SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(SCLicense.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			else {
 				if (scLicense.isNew()) {
 					session.save(scLicense);
+				}
+				else {
+					session.update(scLicense);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCLicense.class.getName());
 		}
 	}
 
@@ -770,7 +771,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -830,7 +831,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -877,7 +878,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

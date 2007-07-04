@@ -100,8 +100,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
 		throws SystemException {
-		FinderCache.clearCache(MBMessageFlag.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBMessageFlag.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	public MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(MBMessageFlag.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			else {
 				if (mbMessageFlag.isNew()) {
 					session.save(mbMessageFlag);
+				}
+				else {
+					session.update(mbMessageFlag);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(MBMessageFlag.class.getName());
 		}
 	}
 
@@ -820,7 +821,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -872,7 +873,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -930,7 +931,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -977,7 +978,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

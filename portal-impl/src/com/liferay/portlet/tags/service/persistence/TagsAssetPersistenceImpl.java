@@ -111,8 +111,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset remove(TagsAsset tagsAsset) throws SystemException {
-		FinderCache.clearCache(TagsAsset.class.getName());
-
 		Session session = null;
 
 		try {
@@ -128,6 +126,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(TagsAsset.class.getName());
 		}
 	}
 
@@ -139,8 +138,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	public TagsAsset update(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(TagsAsset.class.getName());
-
 		Session session = null;
 
 		try {
@@ -152,6 +149,9 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			else {
 				if (tagsAsset.isNew()) {
 					session.save(tagsAsset);
+				}
+				else {
+					session.update(tagsAsset);
 				}
 			}
 
@@ -165,6 +165,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(TagsAsset.class.getName());
 		}
 	}
 
@@ -457,7 +458,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -503,7 +504,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

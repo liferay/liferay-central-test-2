@@ -97,8 +97,6 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public Address remove(Address address) throws SystemException {
-		FinderCache.clearCache(Address.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class AddressPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Address.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class AddressPersistenceImpl extends BasePersistence
 
 	public Address update(com.liferay.portal.model.Address address,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Address.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class AddressPersistenceImpl extends BasePersistence
 			else {
 				if (address.isNew()) {
 					session.save(address);
+				}
+				else {
+					session.update(address);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class AddressPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Address.class.getName());
 		}
 	}
 
@@ -1700,7 +1701,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1751,7 +1752,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1810,7 +1811,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1872,7 +1873,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1939,7 +1940,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2006,7 +2007,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2052,7 +2053,7 @@ public class AddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

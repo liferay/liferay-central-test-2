@@ -100,8 +100,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
 		throws SystemException {
-		FinderCache.clearCache(DLFileShortcut.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileShortcut.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	public DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(DLFileShortcut.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileShortcut.isNew()) {
 					session.save(dlFileShortcut);
+				}
+				else {
+					session.update(dlFileShortcut);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileShortcut.class.getName());
 		}
 	}
 
@@ -781,7 +782,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -849,7 +850,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -896,7 +897,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -99,8 +99,6 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 	public PluginSetting remove(PluginSetting pluginSetting)
 		throws SystemException {
-		FinderCache.clearCache(PluginSetting.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PluginSetting.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	public PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(PluginSetting.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			else {
 				if (pluginSetting.isNew()) {
 					session.save(pluginSetting);
+				}
+				else {
+					session.update(pluginSetting);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PluginSetting.class.getName());
 		}
 	}
 
@@ -659,7 +660,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -743,7 +744,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -789,7 +790,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

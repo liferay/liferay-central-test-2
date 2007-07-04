@@ -99,8 +99,6 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 	public JournalArticle remove(JournalArticle journalArticle)
 		throws SystemException {
-		FinderCache.clearCache(JournalArticle.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalArticle.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	public JournalArticle update(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(JournalArticle.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			else {
 				if (journalArticle.isNew()) {
 					session.save(journalArticle);
+				}
+				else {
+					session.update(journalArticle);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalArticle.class.getName());
 		}
 	}
 
@@ -1901,7 +1902,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1953,7 +1954,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2021,7 +2022,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2089,7 +2090,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2157,7 +2158,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2232,7 +2233,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2307,7 +2308,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2354,7 +2355,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

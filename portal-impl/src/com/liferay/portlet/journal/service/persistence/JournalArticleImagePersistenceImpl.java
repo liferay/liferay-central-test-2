@@ -101,8 +101,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
 		throws SystemException {
-		FinderCache.clearCache(JournalArticleImage.class.getName());
-
 		Session session = null;
 
 		try {
@@ -117,6 +115,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalArticleImage.class.getName());
 		}
 	}
 
@@ -129,8 +128,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	public JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(JournalArticleImage.class.getName());
-
 		Session session = null;
 
 		try {
@@ -142,6 +139,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			else {
 				if (journalArticleImage.isNew()) {
 					session.save(journalArticleImage);
+				}
+				else {
+					session.update(journalArticleImage);
 				}
 			}
 
@@ -155,6 +155,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalArticleImage.class.getName());
 		}
 	}
 
@@ -955,7 +956,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1030,7 +1031,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1133,7 +1134,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1180,7 +1181,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

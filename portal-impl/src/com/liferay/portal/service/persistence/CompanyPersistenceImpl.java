@@ -97,8 +97,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public Company remove(Company company) throws SystemException {
-		FinderCache.clearCache(Company.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Company.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 	public Company update(com.liferay.portal.model.Company company,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Company.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class CompanyPersistenceImpl extends BasePersistence
 			else {
 				if (company.isNew()) {
 					session.save(company);
+				}
+				else {
+					session.update(company);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Company.class.getName());
 		}
 	}
 
@@ -623,7 +624,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -684,7 +685,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -745,7 +746,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -791,7 +792,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

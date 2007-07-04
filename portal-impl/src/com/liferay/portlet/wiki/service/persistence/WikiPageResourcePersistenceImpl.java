@@ -101,8 +101,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 	public WikiPageResource remove(WikiPageResource wikiPageResource)
 		throws SystemException {
-		FinderCache.clearCache(WikiPageResource.class.getName());
-
 		Session session = null;
 
 		try {
@@ -117,6 +115,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(WikiPageResource.class.getName());
 		}
 	}
 
@@ -129,8 +128,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	public WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(WikiPageResource.class.getName());
-
 		Session session = null;
 
 		try {
@@ -142,6 +139,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			else {
 				if (wikiPageResource.isNew()) {
 					session.save(wikiPageResource);
+				}
+				else {
+					session.update(wikiPageResource);
 				}
 			}
 
@@ -155,6 +155,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(WikiPageResource.class.getName());
 		}
 	}
 
@@ -466,7 +467,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -513,7 +514,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

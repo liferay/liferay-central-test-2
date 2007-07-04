@@ -100,8 +100,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 	public DLFileVersion remove(DLFileVersion dlFileVersion)
 		throws SystemException {
-		FinderCache.clearCache(DLFileVersion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileVersion.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	public DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(DLFileVersion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileVersion.isNew()) {
 					session.save(dlFileVersion);
+				}
+				else {
+					session.update(dlFileVersion);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileVersion.class.getName());
 		}
 	}
 
@@ -741,7 +742,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -816,7 +817,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -863,7 +864,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

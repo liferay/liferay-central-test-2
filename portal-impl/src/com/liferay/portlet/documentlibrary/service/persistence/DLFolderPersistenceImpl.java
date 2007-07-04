@@ -98,8 +98,6 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public DLFolder remove(DLFolder dlFolder) throws SystemException {
-		FinderCache.clearCache(DLFolder.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFolder.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	public DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(DLFolder.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			else {
 				if (dlFolder.isNew()) {
 					session.save(dlFolder);
+				}
+				else {
+					session.update(dlFolder);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFolder.class.getName());
 		}
 	}
 
@@ -1077,7 +1078,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1129,7 +1130,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1189,7 +1190,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1257,7 +1258,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1304,7 +1305,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

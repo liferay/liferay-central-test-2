@@ -110,8 +110,6 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public UserGroup remove(UserGroup userGroup) throws SystemException {
-		FinderCache.clearCache(UserGroup.class.getName());
-
 		Session session = null;
 
 		try {
@@ -127,6 +125,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserGroup.class.getName());
 		}
 	}
 
@@ -137,8 +136,6 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 	public UserGroup update(com.liferay.portal.model.UserGroup userGroup,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(UserGroup.class.getName());
-
 		Session session = null;
 
 		try {
@@ -150,6 +147,9 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			else {
 				if (userGroup.isNew()) {
 					session.save(userGroup);
+				}
+				else {
+					session.update(userGroup);
 				}
 			}
 
@@ -163,6 +163,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserGroup.class.getName());
 		}
 	}
 
@@ -876,7 +877,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -935,7 +936,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1002,7 +1003,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1048,7 +1049,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

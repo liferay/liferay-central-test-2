@@ -114,8 +114,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public SCProductVersion remove(SCProductVersion scProductVersion)
 		throws SystemException {
-		FinderCache.clearCache(SCProductVersion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -131,6 +129,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCProductVersion.class.getName());
 		}
 	}
 
@@ -143,8 +142,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	public SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(SCProductVersion.class.getName());
-
 		Session session = null;
 
 		try {
@@ -156,6 +153,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			else {
 				if (scProductVersion.isNew()) {
 					session.save(scProductVersion);
+				}
+				else {
+					session.update(scProductVersion);
 				}
 			}
 
@@ -169,6 +169,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(SCProductVersion.class.getName());
 		}
 	}
 
@@ -572,7 +573,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -619,7 +620,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

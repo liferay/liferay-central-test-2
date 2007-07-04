@@ -116,7 +116,9 @@
 						Layout linkableLayout = null;
 
 						try {
-							linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
+							if (objId > 0) {
+								linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
+							}
 						}
 						catch (Exception e) {
 						}

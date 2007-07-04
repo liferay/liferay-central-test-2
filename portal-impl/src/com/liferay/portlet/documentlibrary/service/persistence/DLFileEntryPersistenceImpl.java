@@ -100,8 +100,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 	public DLFileEntry remove(DLFileEntry dlFileEntry)
 		throws SystemException {
-		FinderCache.clearCache(DLFileEntry.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileEntry.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	public DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(DLFileEntry.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileEntry.isNew()) {
 					session.save(dlFileEntry);
+				}
+				else {
+					session.update(dlFileEntry);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileEntry.class.getName());
 		}
 	}
 
@@ -659,7 +660,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -726,7 +727,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -773,7 +774,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

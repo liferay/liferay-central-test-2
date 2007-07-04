@@ -100,8 +100,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 	public JournalStructure remove(JournalStructure journalStructure)
 		throws SystemException {
-		FinderCache.clearCache(JournalStructure.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalStructure.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(JournalStructure.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			else {
 				if (journalStructure.isNew()) {
 					session.save(journalStructure);
+				}
+				else {
+					session.update(journalStructure);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(JournalStructure.class.getName());
 		}
 	}
 
@@ -883,7 +884,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -945,7 +946,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1013,7 +1014,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1060,7 +1061,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

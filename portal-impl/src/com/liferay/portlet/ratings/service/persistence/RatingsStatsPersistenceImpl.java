@@ -99,8 +99,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 	public RatingsStats remove(RatingsStats ratingsStats)
 		throws SystemException {
-		FinderCache.clearCache(RatingsStats.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(RatingsStats.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 	public RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(RatingsStats.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			else {
 				if (ratingsStats.isNew()) {
 					session.save(ratingsStats);
+				}
+				else {
+					session.update(ratingsStats);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(RatingsStats.class.getName());
 		}
 	}
 
@@ -448,7 +449,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -495,7 +496,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

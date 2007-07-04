@@ -98,8 +98,6 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public WikiNode remove(WikiNode wikiNode) throws SystemException {
-		FinderCache.clearCache(WikiNode.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(WikiNode.class.getName());
 		}
 	}
 
@@ -124,8 +123,6 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 	public WikiNode update(com.liferay.portlet.wiki.model.WikiNode wikiNode,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(WikiNode.class.getName());
-
 		Session session = null;
 
 		try {
@@ -137,6 +134,9 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			else {
 				if (wikiNode.isNew()) {
 					session.save(wikiNode);
+				}
+				else {
+					session.update(wikiNode);
 				}
 			}
 
@@ -150,6 +150,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(WikiNode.class.getName());
 		}
 	}
 
@@ -736,7 +737,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -788,7 +789,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -834,7 +835,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

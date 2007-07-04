@@ -95,8 +95,6 @@ public class ImagePersistenceImpl extends BasePersistence
 	}
 
 	public Image remove(Image image) throws SystemException {
-		FinderCache.clearCache(Image.class.getName());
-
 		Session session = null;
 
 		try {
@@ -111,6 +109,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Image.class.getName());
 		}
 	}
 
@@ -121,8 +120,6 @@ public class ImagePersistenceImpl extends BasePersistence
 
 	public Image update(com.liferay.portal.model.Image image,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Image.class.getName());
-
 		Session session = null;
 
 		try {
@@ -134,6 +131,9 @@ public class ImagePersistenceImpl extends BasePersistence
 			else {
 				if (image.isNew()) {
 					session.save(image);
+				}
+				else {
+					session.update(image);
 				}
 			}
 
@@ -147,6 +147,7 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Image.class.getName());
 		}
 	}
 
@@ -335,7 +336,7 @@ public class ImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

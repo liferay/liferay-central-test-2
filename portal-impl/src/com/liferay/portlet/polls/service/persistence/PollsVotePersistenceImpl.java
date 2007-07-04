@@ -98,8 +98,6 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	}
 
 	public PollsVote remove(PollsVote pollsVote) throws SystemException {
-		FinderCache.clearCache(PollsVote.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PollsVote.class.getName());
 		}
 	}
 
@@ -125,8 +124,6 @@ public class PollsVotePersistenceImpl extends BasePersistence
 	public PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(PollsVote.class.getName());
-
 		Session session = null;
 
 		try {
@@ -138,6 +135,9 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			else {
 				if (pollsVote.isNew()) {
 					session.save(pollsVote);
+				}
+				else {
+					session.update(pollsVote);
 				}
 			}
 
@@ -151,6 +151,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(PollsVote.class.getName());
 		}
 	}
 
@@ -811,7 +812,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -863,7 +864,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -923,7 +924,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -969,7 +970,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

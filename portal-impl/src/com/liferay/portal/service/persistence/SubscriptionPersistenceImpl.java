@@ -99,8 +99,6 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 	public Subscription remove(Subscription subscription)
 		throws SystemException {
-		FinderCache.clearCache(Subscription.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Subscription.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	public Subscription update(
 		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(Subscription.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			else {
 				if (subscription.isNew()) {
 					session.save(subscription);
+				}
+				else {
+					session.update(subscription);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Subscription.class.getName());
 		}
 	}
 
@@ -873,7 +874,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -936,7 +937,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1004,7 +1005,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1050,7 +1051,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

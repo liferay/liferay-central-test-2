@@ -98,8 +98,6 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {
-		FinderCache.clearCache(DLFileRank.class.getName());
-
 		Session session = null;
 
 		try {
@@ -114,6 +112,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileRank.class.getName());
 		}
 	}
 
@@ -126,8 +125,6 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	public DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(DLFileRank.class.getName());
-
 		Session session = null;
 
 		try {
@@ -139,6 +136,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileRank.isNew()) {
 					session.save(dlFileRank);
+				}
+				else {
+					session.update(dlFileRank);
 				}
 			}
 
@@ -152,6 +152,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(DLFileRank.class.getName());
 		}
 	}
 
@@ -914,7 +915,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -981,7 +982,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1058,7 +1059,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1105,7 +1106,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

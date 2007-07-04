@@ -99,8 +99,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 	public UserGroupRole remove(UserGroupRole userGroupRole)
 		throws SystemException {
-		FinderCache.clearCache(UserGroupRole.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserGroupRole.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	public UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(UserGroupRole.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			else {
 				if (userGroupRole.isNew()) {
 					session.save(userGroupRole);
+				}
+				else {
+					session.update(userGroupRole);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(UserGroupRole.class.getName());
 		}
 	}
 
@@ -1126,7 +1127,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1178,7 +1179,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1230,7 +1231,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1282,7 +1283,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1328,7 +1329,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

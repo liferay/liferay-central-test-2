@@ -25,7 +25,9 @@ package com.liferay.portal.spring.hibernate;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ArrayUtil;
+import com.liferay.util.GetterUtil;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
@@ -37,6 +39,9 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
  *
  */
 public class FinderCache {
+
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);
 
 	public static final String GROUP_NAME = FinderCache.class.getName();
 
@@ -78,15 +83,26 @@ public class FinderCache {
 		String className, String methodName, String[] params, Object[] args,
 		Object result) {
 
-		if ((result != null) && CacheRegistry.isActive()) {
-			String key = _encodeKey(className, methodName, params, args);
+		if (CACHE_ENABLED && CacheRegistry.isActive() && (result != null)) {
+			StringMaker sm = new StringMaker();
 
-			String classNameGroupKey = _encodeKey(className);
+			sm.append(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED);
+			sm.append(StringPool.PERIOD);
+			sm.append(className);
 
-			String[] groups = ArrayUtil.append(
-				GROUP_NAME_ARRAY, classNameGroupKey);
+			boolean classNameCacheEnabled = GetterUtil.getBoolean(
+				PropsUtil.get(sm.toString()), true);
 
-			_cache.putInCache(key, result, groups);
+			if (classNameCacheEnabled) {
+				String key = _encodeKey(className, methodName, params, args);
+
+				String classNameGroupKey = _encodeKey(className);
+
+				String[] groups = ArrayUtil.append(
+					GROUP_NAME_ARRAY, classNameGroupKey);
+
+				_cache.putInCache(key, result, groups);
+			}
 		}
 
 		return result;

@@ -97,8 +97,6 @@ public class ListTypePersistenceImpl extends BasePersistence
 	}
 
 	public ListType remove(ListType listType) throws SystemException {
-		FinderCache.clearCache(ListType.class.getName());
-
 		Session session = null;
 
 		try {
@@ -113,6 +111,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ListType.class.getName());
 		}
 	}
 
@@ -123,8 +122,6 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 	public ListType update(com.liferay.portal.model.ListType listType,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(ListType.class.getName());
-
 		Session session = null;
 
 		try {
@@ -136,6 +133,9 @@ public class ListTypePersistenceImpl extends BasePersistence
 			else {
 				if (listType.isNew()) {
 					session.save(listType);
+				}
+				else {
+					session.update(listType);
 				}
 			}
 
@@ -149,6 +149,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(ListType.class.getName());
 		}
 	}
 
@@ -578,7 +579,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -624,7 +625,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

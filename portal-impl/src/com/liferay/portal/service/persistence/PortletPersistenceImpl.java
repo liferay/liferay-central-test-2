@@ -96,8 +96,6 @@ public class PortletPersistenceImpl extends BasePersistence
 	}
 
 	public Portlet remove(Portlet portlet) throws SystemException {
-		FinderCache.clearCache(Portlet.class.getName());
-
 		Session session = null;
 
 		try {
@@ -112,6 +110,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Portlet.class.getName());
 		}
 	}
 
@@ -122,8 +121,6 @@ public class PortletPersistenceImpl extends BasePersistence
 
 	public Portlet update(com.liferay.portal.model.Portlet portlet,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(Portlet.class.getName());
-
 		Session session = null;
 
 		try {
@@ -135,6 +132,9 @@ public class PortletPersistenceImpl extends BasePersistence
 			else {
 				if (portlet.isNew()) {
 					session.save(portlet);
+				}
+				else {
+					session.update(portlet);
 				}
 			}
 
@@ -148,6 +148,7 @@ public class PortletPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(Portlet.class.getName());
 		}
 	}
 
@@ -621,7 +622,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -688,7 +689,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -734,7 +735,7 @@ public class PortletPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

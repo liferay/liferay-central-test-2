@@ -99,8 +99,6 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 	public EmailAddress remove(EmailAddress emailAddress)
 		throws SystemException {
-		FinderCache.clearCache(EmailAddress.class.getName());
-
 		Session session = null;
 
 		try {
@@ -115,6 +113,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(EmailAddress.class.getName());
 		}
 	}
 
@@ -127,8 +126,6 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 	public EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
 		throws SystemException {
-		FinderCache.clearCache(EmailAddress.class.getName());
-
 		Session session = null;
 
 		try {
@@ -140,6 +137,9 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			else {
 				if (emailAddress.isNew()) {
 					session.save(emailAddress);
+				}
+				else {
+					session.update(emailAddress);
 				}
 			}
 
@@ -153,6 +153,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(EmailAddress.class.getName());
 		}
 	}
 
@@ -1471,7 +1472,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1523,7 +1524,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1583,7 +1584,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1646,7 +1647,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1714,7 +1715,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -1760,7 +1761,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 

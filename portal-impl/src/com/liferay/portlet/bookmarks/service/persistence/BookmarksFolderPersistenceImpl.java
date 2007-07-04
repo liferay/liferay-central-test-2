@@ -100,8 +100,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
 		throws SystemException {
-		FinderCache.clearCache(BookmarksFolder.class.getName());
-
 		Session session = null;
 
 		try {
@@ -116,6 +114,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(BookmarksFolder.class.getName());
 		}
 	}
 
@@ -128,8 +127,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	public BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean saveOrUpdate) throws SystemException {
-		FinderCache.clearCache(BookmarksFolder.class.getName());
-
 		Session session = null;
 
 		try {
@@ -141,6 +138,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			else {
 				if (bookmarksFolder.isNew()) {
 					session.save(bookmarksFolder);
+				}
+				else {
+					session.update(bookmarksFolder);
 				}
 			}
 
@@ -154,6 +154,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+			FinderCache.clearCache(BookmarksFolder.class.getName());
 		}
 	}
 
@@ -779,7 +780,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -839,7 +840,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -886,7 +887,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return ((Integer)result).intValue();
+			return ((Long)result).intValue();
 		}
 	}
 
