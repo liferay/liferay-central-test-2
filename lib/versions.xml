@@ -896,6 +896,14 @@
 		<license-url>http://www.jdom.org/docs/faq.html#a0030</license-url>
 	</library>
 	<library>
+		<file-name>portal/jets3t.jar</file-name>
+		<version>0.5.0</version>
+		<project-name>JetS3t</project-name>
+		<project-url>https://jets3t.dev.java.net</project-url>
+		<license-name>Apache License 2.0</license-name>
+		<license-url>http://www.apache.org/licenses/LICENSE-2.0.html</license-url>
+	</library>
+	<library>
 		<file-name>portal/jfreechart.jar</file-name>
 		<version>1.0.3</version>
 		<project-name>JFreeChart</project-name>

@@ -73,9 +73,6 @@ try {
 
 	List resultRows = searchContainer.getResultRows();
 
-	String rootDir = PropsUtil.get(PropsUtil.DL_ROOT_DIR);
-	String versionRootDir = PropsUtil.get(PropsUtil.DL_VERSION_ROOT_DIR);
-
 	for (int i = 0; i < results.getLength(); i++) {
 		Document doc = results.doc(i);
 

@@ -438,7 +438,7 @@ public class DLFileEntryLocalServiceImpl
 			long companyId, long userId, long folderId, String name)
 		throws PortalException, SystemException {
 
-		return getFileAsStream(companyId, userId, folderId, name, -1);
+		return getFileAsStream(companyId, userId, folderId, name, 0);
 	}
 
 	public InputStream getFileAsStream(
@@ -459,7 +459,7 @@ public class DLFileEntryLocalServiceImpl
 
 		DLFileEntryUtil.update(fileEntry);
 
-		if (version > 0 && (fileEntry.getVersion() != version)) {
+		if ((version > 0) && (fileEntry.getVersion() != version)) {
 			return DLLocalServiceUtil.getFileAsStream(
 				companyId, folderId, name, version);
 		}
