@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
@@ -57,14 +58,26 @@ public class ViewAction extends PortletAction {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		long groupId = ParamUtil.getLong(req, "groupId", 0);
+		String articleId = ParamUtil.getString(req, "articleId", 
+				StringPool.BLANK);
+		String templateId = ParamUtil.getString(req, "templateId", 
+				StringPool.BLANK);
 
-		long groupId = GetterUtil.getLong(
-			prefs.getValue("group-id", StringPool.BLANK));
-		String articleId = GetterUtil.getString(
-			prefs.getValue("article-id", StringPool.BLANK));
-		String templateId = GetterUtil.getString(
-			prefs.getValue("template-id", StringPool.BLANK));
 
+		if (groupId < 1) {
+			groupId = GetterUtil.getLong(
+					prefs.getValue("group-id", StringPool.BLANK));
+		}
+		
+		if (Validator.isNull(articleId)) {
+			articleId = GetterUtil.getString(
+					prefs.getValue("article-id", StringPool.BLANK));
+			templateId = GetterUtil.getString(
+					prefs.getValue("template-id", StringPool.BLANK));
+		}
+		
 		String languageId = LanguageUtil.getLanguageId(req);
 
 		boolean disableCaching = GetterUtil.getBoolean(

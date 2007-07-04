@@ -584,6 +584,7 @@
 		<icon>/html/portlet/journal_content/icon.png</icon>
 		<struts-path>journal_content</struts-path>
 		<configuration-path>/journal_content/edit_configuration</configuration-path>
+		<friendly-url-mapper-class>com.liferay.portlet.journalcontent.JournalContentFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

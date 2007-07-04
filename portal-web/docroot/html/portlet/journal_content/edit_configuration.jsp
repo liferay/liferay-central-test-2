@@ -60,6 +60,21 @@ type = ParamUtil.getString(request, "type", type);
 	}
 </script>
 
+<c:if test="<%= Validator.isNotNull(portletResource) %>">
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="portlet-id" />:
+		</td>
+		<td>
+			<%= portletResource %>
+		</td>
+	</tr>
+	</table>
+</c:if>
+
+<br />
+
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm1">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
