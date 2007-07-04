@@ -225,7 +225,7 @@ public class RoleFinder {
 		name = StringUtil.lowerCase(name);
 
 		String finderClassName = Role.class.getName();
-		String finderMethodName = "findByC_N";
+		String finderMethodName = "customFindByC_N";
 		String finderParams[] = new String[] {
 			Long.class.getName(), String.class.getName()
 		};

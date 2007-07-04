@@ -595,7 +595,7 @@ public class PermissionFinder {
 		throws SystemException {
 
 		String finderClassName = Permission.class.getName();
-		String finderMethodName = "findByA_R";
+		String finderMethodName = "customFindByA_R";
 		String finderParams[] = new String[] {
 			String.class.getName(), "[L" + Long.class.getName()
 		};

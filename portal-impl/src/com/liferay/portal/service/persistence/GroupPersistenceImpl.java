@@ -724,20 +724,21 @@ public class GroupPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 				q.setLong(queryPos++, liveGroupId);
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -791,20 +792,21 @@ public class GroupPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, name);
 				}
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -858,20 +860,21 @@ public class GroupPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, friendlyURL);
 				}
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -920,20 +923,21 @@ public class GroupPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, classNameId);
 				q.setLong(queryPos++, classPK);
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -966,20 +970,21 @@ public class GroupPersistenceImpl extends BasePersistence
 				query.append("FROM com.liferay.portal.model.Group");
 
 				Query q = session.createQuery(query.toString());
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -1005,80 +1010,139 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getOrganizations(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchGroupException, SystemException {
-		Session session = null;
+		String finderClassName = "Groups_Orgs";
+		String finderMethodName = "getOrganizations";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETORGANIZATIONS);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETORGANIZATIONS);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+				else {
+					sm.append("ORDER BY ");
+					sm.append("Organization_.name ASC");
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("Organization_",
+					com.liferay.portal.model.impl.OrganizationImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				sm.append("ORDER BY ");
-				sm.append("Organization_.name ASC");
+			catch (Exception e) {
+				throw new SystemException(e);
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("Organization_",
-				com.liferay.portal.model.impl.OrganizationImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getOrganizationsSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "Groups_Orgs";
+		String finderMethodName = "getOrganizationsSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETORGANIZATIONSSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETORGANIZATIONSSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
-		try {
-			return containsOrganization.contains(pk, organizationPK);
+		String finderClassName = "Groups_Orgs";
+		String finderMethodName = "containsOrganizations";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), new Long(organizationPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsOrganization.contains(pk,
+							organizationPK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 
@@ -1100,6 +1164,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
 	}
 
 	public void addOrganization(long pk,
@@ -1111,6 +1178,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
 		}
 	}
 
@@ -1124,6 +1194,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
 		}
 	}
 
@@ -1139,6 +1212,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
 	}
 
 	public void clearOrganizations(long pk)
@@ -1148,6 +1224,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
 		}
 	}
 
@@ -1159,6 +1238,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
 		}
 	}
 
@@ -1172,6 +1254,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
 	}
 
 	public void removeOrganizations(long pk, long[] organizationPKs)
@@ -1184,6 +1269,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
 		}
 	}
 
@@ -1199,6 +1287,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
 	}
 
 	public void setOrganizations(long pk, long[] organizationPKs)
@@ -1213,6 +1304,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
 		}
 	}
 
@@ -1230,6 +1324,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
 	}
 
 	public List getPermissions(long pk)
@@ -1244,76 +1341,133 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getPermissions(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchGroupException, SystemException {
-		Session session = null;
+		String finderClassName = "Groups_Permissions";
+		String finderMethodName = "getPermissions";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETPERMISSIONS);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETPERMISSIONS);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("Permission_",
+					com.liferay.portal.model.impl.PermissionImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("Permission_",
-				com.liferay.portal.model.impl.PermissionImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getPermissionsSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "Groups_Permissions";
+		String finderMethodName = "getPermissionsSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsPermission(long pk, long permissionPK)
 		throws SystemException {
-		try {
-			return containsPermission.contains(pk, permissionPK);
+		String finderClassName = "Groups_Permissions";
+		String finderMethodName = "containsPermissions";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(pk), new Long(permissionPK) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsPermission.contains(pk,
+							permissionPK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 
@@ -1335,6 +1489,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
 	}
 
 	public void addPermission(long pk,
@@ -1346,6 +1503,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
 		}
 	}
 
@@ -1359,6 +1519,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
 		}
 	}
 
@@ -1374,6 +1537,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
 	}
 
 	public void clearPermissions(long pk)
@@ -1383,6 +1549,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
 		}
 	}
 
@@ -1394,6 +1563,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
 		}
 	}
 
@@ -1407,6 +1579,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
 	}
 
 	public void removePermissions(long pk, long[] permissionPKs)
@@ -1419,6 +1594,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
 		}
 	}
 
@@ -1434,6 +1612,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
 	}
 
 	public void setPermissions(long pk, long[] permissionPKs)
@@ -1448,6 +1629,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
 		}
 	}
 
@@ -1465,6 +1649,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
 	}
 
 	public List getRoles(long pk) throws NoSuchGroupException, SystemException {
@@ -1478,78 +1665,135 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getRoles(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		String finderClassName = "Groups_Roles";
+		String finderMethodName = "getRoles";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETROLES);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETROLES);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+				else {
+					sm.append("ORDER BY ");
+					sm.append("Role_.name ASC");
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("Role_",
+					com.liferay.portal.model.impl.RoleImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				sm.append("ORDER BY ");
-				sm.append("Role_.name ASC");
+			catch (Exception e) {
+				throw new SystemException(e);
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("Role_", com.liferay.portal.model.impl.RoleImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getRolesSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "Groups_Roles";
+		String finderMethodName = "getRolesSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
-		try {
-			return containsRole.contains(pk, rolePK);
+		String finderClassName = "Groups_Roles";
+		String finderMethodName = "containsRoles";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(pk), new Long(rolePK) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsRole.contains(pk, rolePK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 
@@ -1571,6 +1815,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
 	}
 
 	public void addRole(long pk, com.liferay.portal.model.Role role)
@@ -1581,6 +1828,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1594,6 +1844,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1609,6 +1862,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
 	}
 
 	public void clearRoles(long pk)
@@ -1618,6 +1874,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1630,6 +1889,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
 	}
 
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
@@ -1640,6 +1902,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1653,6 +1918,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1668,6 +1936,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
 	}
 
 	public void setRoles(long pk, long[] rolePKs)
@@ -1682,6 +1953,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1699,6 +1973,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
 	}
 
 	public List getUserGroups(long pk)
@@ -1713,80 +1990,137 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getUserGroups(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		String finderClassName = "Groups_UserGroups";
+		String finderMethodName = "getUserGroups";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETUSERGROUPS);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETUSERGROUPS);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+				else {
+					sm.append("ORDER BY ");
+					sm.append("UserGroup.name ASC");
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("UserGroup",
+					com.liferay.portal.model.impl.UserGroupImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				sm.append("ORDER BY ");
-				sm.append("UserGroup.name ASC");
+			catch (Exception e) {
+				throw new SystemException(e);
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("UserGroup",
-				com.liferay.portal.model.impl.UserGroupImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getUserGroupsSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "Groups_UserGroups";
+		String finderMethodName = "getUserGroupsSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETUSERGROUPSSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETUSERGROUPSSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
-		try {
-			return containsUserGroup.contains(pk, userGroupPK);
+		String finderClassName = "Groups_UserGroups";
+		String finderMethodName = "containsUserGroups";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(pk), new Long(userGroupPK) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsUserGroup.contains(pk,
+							userGroupPK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 
@@ -1808,6 +2142,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
+		}
 	}
 
 	public void addUserGroup(long pk,
@@ -1819,6 +2156,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
 		}
 	}
 
@@ -1832,6 +2172,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
 		}
 	}
 
@@ -1847,6 +2190,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
+		}
 	}
 
 	public void clearUserGroups(long pk)
@@ -1856,6 +2202,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
 		}
 	}
 
@@ -1867,6 +2216,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
 		}
 	}
 
@@ -1880,6 +2232,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
+		}
 	}
 
 	public void removeUserGroups(long pk, long[] userGroupPKs)
@@ -1892,6 +2247,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
 		}
 	}
 
@@ -1907,6 +2265,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
+		}
 	}
 
 	public void setUserGroups(long pk, long[] userGroupPKs)
@@ -1921,6 +2282,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
 		}
 	}
 
@@ -1938,6 +2302,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
+		}
 	}
 
 	public List getUsers(long pk) throws NoSuchGroupException, SystemException {
@@ -1951,74 +2318,131 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public List getUsers(long pk, int begin, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
-		Session session = null;
+		String finderClassName = "Users_Groups";
+		String finderMethodName = "getUsers";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETUSERS);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETUSERS);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("User_",
+					com.liferay.portal.model.impl.UserImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getUsersSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "Users_Groups";
+		String finderMethodName = "getUsersSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
-		try {
-			return containsUser.contains(pk, userPK);
+		String finderClassName = "Users_Groups";
+		String finderMethodName = "containsUsers";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsUser.contains(pk, userPK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 
@@ -2040,6 +2464,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
 	}
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
@@ -2050,6 +2477,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
 		}
 	}
 
@@ -2063,6 +2493,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
 		}
 	}
 
@@ -2078,6 +2511,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
 	}
 
 	public void clearUsers(long pk)
@@ -2087,6 +2523,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
 		}
 	}
 
@@ -2099,6 +2538,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
 	}
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
@@ -2109,6 +2551,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
 		}
 	}
 
@@ -2123,6 +2568,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
 	}
 
 	public void removeUsers(long pk, List users)
@@ -2136,6 +2584,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
 		}
 	}
 
@@ -2152,6 +2603,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
 	}
 
 	public void setUsers(long pk, List users)
@@ -2167,6 +2621,9 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
 		}
 	}
 

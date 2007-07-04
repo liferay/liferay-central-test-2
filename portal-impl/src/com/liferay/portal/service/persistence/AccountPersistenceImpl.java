@@ -311,20 +311,21 @@ public class AccountPersistenceImpl extends BasePersistence
 				query.append("FROM com.liferay.portal.model.Account");
 
 				Query q = session.createQuery(query.toString());
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);

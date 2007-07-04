@@ -643,20 +643,21 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 				q.setLong(queryPos++, categoryId);
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -710,20 +711,21 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 					q.setString(queryPos++, sku);
 				}
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -757,20 +759,21 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem");
 
 				Query q = session.createQuery(query.toString());
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -796,82 +799,141 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 	public List getShoppingItemPrices(long pk, int begin, int end,
 		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		Session session = null;
+		String finderClassName = "null";
+		String finderMethodName = "getShoppingItemPrices";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETSHOPPINGITEMPRICES);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETSHOPPINGITEMPRICES);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+				else {
+					sm.append("ORDER BY ");
+					sm.append("ShoppingItemPrice.itemId ASC");
+					sm.append(", ");
+					sm.append("ShoppingItemPrice.itemPriceId ASC");
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("ShoppingItemPrice",
+					com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				sm.append("ORDER BY ");
-				sm.append("ShoppingItemPrice.itemId ASC");
-				sm.append(", ");
-				sm.append("ShoppingItemPrice.itemPriceId ASC");
+			catch (Exception e) {
+				throw new SystemException(e);
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("ShoppingItemPrice",
-				com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getShoppingItemPricesSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "null";
+		String finderMethodName = "getShoppingItemPricesSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETSHOPPINGITEMPRICESSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
 		throws SystemException {
-		try {
-			return containsShoppingItemPrice.contains(pk, shoppingItemPricePK);
+		String finderClassName = "null";
+		String finderMethodName = "containsShoppingItemPrices";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), new Long(shoppingItemPricePK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsShoppingItemPrice.contains(
+							pk, shoppingItemPricePK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 

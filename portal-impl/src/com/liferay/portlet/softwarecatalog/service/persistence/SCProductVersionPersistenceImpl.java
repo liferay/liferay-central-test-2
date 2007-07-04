@@ -550,20 +550,21 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 				q.setLong(queryPos++, productEntryId);
 
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -597,20 +598,21 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
 
 				Query q = session.createQuery(query.toString());
+				Long count = null;
 				Iterator itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Long count = (Long)itr.next();
-
-					if (count != null) {
-						FinderCache.putResult(finderClassName,
-							finderMethodName, finderParams, finderArgs, count);
-
-						return count.intValue();
-					}
+					count = (Long)itr.next();
 				}
 
-				return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -637,82 +639,141 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	public List getSCFrameworkVersions(long pk, int begin, int end,
 		OrderByComparator obc)
 		throws NoSuchProductVersionException, SystemException {
-		Session session = null;
+		String finderClassName = "SCFrameworkVersi_SCProductVers";
+		String finderMethodName = "getSCFrameworkVersions";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = HibernateUtil.openSession();
+		if (result == null) {
+			Session session = null;
 
-			StringMaker sm = new StringMaker();
-			sm.append(_SQL_GETSCFRAMEWORKVERSIONS);
+			try {
+				session = HibernateUtil.openSession();
 
-			if (obc != null) {
-				sm.append("ORDER BY ");
-				sm.append(obc.getOrderBy());
+				StringMaker sm = new StringMaker();
+				sm.append(_SQL_GETSCFRAMEWORKVERSIONS);
+
+				if (obc != null) {
+					sm.append("ORDER BY ");
+					sm.append(obc.getOrderBy());
+				}
+				else {
+					sm.append("ORDER BY ");
+					sm.append("SCFrameworkVersion.priority ASC");
+					sm.append(", ");
+					sm.append("SCFrameworkVersion.name ASC");
+				}
+
+				String sql = sm.toString();
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity("SCFrameworkVersion",
+					com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
 			}
-			else {
-				sm.append("ORDER BY ");
-				sm.append("SCFrameworkVersion.priority ASC");
-				sm.append(", ");
-				sm.append("SCFrameworkVersion.name ASC");
+			catch (Exception e) {
+				throw new SystemException(e);
 			}
-
-			String sql = sm.toString();
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity("SCFrameworkVersion",
-				com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
+		else {
+			return (List)result;
 		}
 	}
 
 	public int getSCFrameworkVersionsSize(long pk) throws SystemException {
-		Session session = null;
+		String finderClassName = "SCFrameworkVersi_SCProductVers";
+		String finderMethodName = "getSCFrameworkVersionsSize";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(pk) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			SQLQuery q = session.createSQLQuery(_SQL_GETSCFRAMEWORKVERSIONSSIZE);
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			try {
+				session = openSession();
 
-			QueryPos qPos = QueryPos.getInstance(q);
-			qPos.add(pk);
+				SQLQuery q = session.createSQLQuery(_SQL_GETSCFRAMEWORKVERSIONSSIZE);
+				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
-			Iterator itr = q.list().iterator();
+				QueryPos qPos = QueryPos.getInstance(q);
+				qPos.add(pk);
 
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = null;
+				Iterator itr = q.list().iterator();
 
-				if (count != null) {
-					return count.intValue();
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
 				}
-			}
 
-			return 0;
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
 	public boolean containsSCFrameworkVersion(long pk, long scFrameworkVersionPK)
 		throws SystemException {
-		try {
-			return containsSCFrameworkVersion.contains(pk, scFrameworkVersionPK);
+		String finderClassName = "SCFrameworkVersi_SCProductVers";
+		String finderMethodName = "containsSCFrameworkVersions";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(pk), new Long(scFrameworkVersionPK)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			try {
+				Boolean value = new Boolean(containsSCFrameworkVersion.contains(
+							pk, scFrameworkVersionPK));
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, value);
+
+				return value.booleanValue();
+			}
+			catch (DataAccessException dae) {
+				throw new SystemException(dae);
+			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		else {
+			return ((Boolean)result).booleanValue();
 		}
 	}
 
@@ -736,6 +797,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
+		}
 	}
 
 	public void addSCFrameworkVersion(long pk,
@@ -748,6 +812,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 
@@ -762,6 +829,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 
@@ -779,6 +849,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
+		}
 	}
 
 	public void clearSCFrameworkVersions(long pk)
@@ -788,6 +861,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 
@@ -800,6 +876,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 
@@ -815,6 +894,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
+		}
 	}
 
 	public void removeSCFrameworkVersions(long pk, long[] scFrameworkVersionPKs)
@@ -828,6 +910,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 
@@ -846,6 +931,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
 		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
+		}
 	}
 
 	public void setSCFrameworkVersions(long pk, long[] scFrameworkVersionPKs)
@@ -861,6 +949,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 
@@ -879,6 +970,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 		catch (DataAccessException dae) {
 			throw new SystemException(dae);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 		}
 	}
 

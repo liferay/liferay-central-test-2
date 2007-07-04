@@ -3683,15 +3683,16 @@ public class ServiceBuilder {
 				}
 			}
 
+			sm.append("Long count = null;");
 			sm.append("Iterator itr = q.list().iterator();");
 			sm.append("if (itr.hasNext()) {");
-			sm.append("Long count = (Long)itr.next();");
-			sm.append("if (count != null) {");
+			sm.append("count = (Long)itr.next();");
+			sm.append("}");
+			sm.append("if (count == null) {");
+			sm.append("count = new Long(0);");
+			sm.append("}");
 			sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);");
 			sm.append("return count.intValue();");
-			sm.append("}");
-			sm.append("}");
-			sm.append("return 0;");
 			sm.append("}");
 			sm.append("catch (Exception e) {");
 			sm.append("throw HibernateUtil.processException(e);");
@@ -3720,15 +3721,16 @@ public class ServiceBuilder {
 		sm.append("query.append(\"SELECT COUNT(*) \");");
 		sm.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + "\");");
 		sm.append("Query q = session.createQuery(query.toString());");
+		sm.append("Long count = null;");
 		sm.append("Iterator itr = q.list().iterator();");
 		sm.append("if (itr.hasNext()) {");
-		sm.append("Long count = (Long)itr.next();");
-		sm.append("if (count != null) {");
+		sm.append("count = (Long)itr.next();");
+		sm.append("}");
+		sm.append("if (count == null) {");
+		sm.append("count = new Long(0);");
+		sm.append("}");
 		sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);");
 		sm.append("return count.intValue();");
-		sm.append("}");
-		sm.append("}");
-		sm.append("return 0;");
 		sm.append("}");
 		sm.append("catch (Exception e) {");
 		sm.append("throw HibernateUtil.processException(e);");
@@ -3768,6 +3770,35 @@ public class ServiceBuilder {
 				// getUsers(String pk, int begin, int end, OrderByComparator obc)
 
 				sm.append("public List get" + tempEntity.getNames() + "(" + entity.getPKClassName() + " pk, int begin, int end, OrderByComparator obc) throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
+				sm.append("String finderClassName = \"" + col.getMappingTable() + "\";");
+				sm.append("String finderMethodName = \"get" + tempEntity.getNames() + "\";");
+				sm.append("String finderParams[] = new String[] {");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append(_getPrimitiveObj(entity.getPKClassName()));
+				}
+				else {
+					sm.append(entity.getPKClassName());
+				}
+
+				sm.append(".class.getName(), \"java.lang.Integer\", \"java.lang.Integer\", \"com.liferay.portal.kernel.util.OrderByComparator\"");
+				sm.append("};");
+				sm.append("Object finderArgs[] = new Object[] {");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+				}
+
+				sm.append("pk");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append(")");
+				}
+
+				sm.append(", String.valueOf(begin), String.valueOf(end), String.valueOf(obc)");
+				sm.append("};");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
 				sm.append("session = HibernateUtil.openSession();");
@@ -3803,19 +3834,53 @@ public class ServiceBuilder {
 				sm.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model.impl." + tempEntity.getName() + "Impl.class);");
 				sm.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sm.append("qPos.add(pk);");
-				sm.append("return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);");
+				sm.append("List list = QueryUtil.list(q, getDialect(), begin, end);");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, list);");
+				sm.append("return list;");
 				sm.append("}");
 				sm.append("catch (Exception e) {");
 				sm.append("throw new SystemException(e);");
 				sm.append("}");
 				sm.append("finally {");
-				sm.append("HibernateUtil.closeSession(session);");
+				sm.append("closeSession(session);");
+				sm.append("}");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return (List)result;");
 				sm.append("}");
 				sm.append("}");
 
 				// getUsersSize(String pk)
 
 				sm.append("public int get" + tempEntity.getNames() + "Size(" + entity.getPKClassName() + " pk) throws SystemException {");
+				sm.append("String finderClassName = \"" + col.getMappingTable() + "\";");
+				sm.append("String finderMethodName = \"get" + tempEntity.getNames() + "Size\";");
+				sm.append("String finderParams[] = new String[] {");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append(_getPrimitiveObj(entity.getPKClassName()));
+				}
+				else {
+					sm.append(entity.getPKClassName());
+				}
+
+				sm.append(".class.getName()");
+				sm.append("};");
+				sm.append("Object finderArgs[] = new Object[] {");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+				}
+
+				sm.append("pk");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append(")");
+				}
+
+				sm.append("};");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
 				sm.append("session = openSession();");
@@ -3823,14 +3888,16 @@ public class ServiceBuilder {
 				sm.append("q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);");
 				sm.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sm.append("qPos.add(pk);");
+				sm.append("Long count = null;");
 				sm.append("Iterator itr = q.list().iterator();");
 				sm.append("if (itr.hasNext()) {");
-				sm.append("Long count = (Long)itr.next();");
-				sm.append("if (count != null) {");
+				sm.append("count = (Long)itr.next();");
+				sm.append("}");
+				sm.append("if (count == null) {");
+				sm.append("count = new Long(0);");
+				sm.append("}");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, count);");
 				sm.append("return count.intValue();");
-				sm.append("}");
-				sm.append("}");
-				sm.append("return 0;");
 				sm.append("}");
 				sm.append("catch (Exception e) {");
 				sm.append("throw HibernateUtil.processException(e);");
@@ -3839,15 +3906,74 @@ public class ServiceBuilder {
 				sm.append("closeSession(session);");
 				sm.append("}");
 				sm.append("}");
+				sm.append("else {");
+				sm.append("return ((Long)result).intValue();");
+				sm.append("}");
+				sm.append("}");
 
 				// containsUser(String pk, String userPK)
 
 				sm.append("public boolean contains" + tempEntity.getName() + "(" + entity.getPKClassName() + " pk, " + tempEntity.getPKClassName() + " " + tempEntity.getVarName() + "PK) throws SystemException {");
+				sm.append("String finderClassName = \"" + col.getMappingTable() + "\";");
+				sm.append("String finderMethodName = \"contains" + tempEntity.getNames() + "\";");
+				sm.append("String finderParams[] = new String[] {");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append(_getPrimitiveObj(entity.getPKClassName()));
+				}
+				else {
+					sm.append(entity.getPKClassName());
+				}
+
+				sm.append(".class.getName(), ");
+
+				if (tempEntity.hasPrimitivePK()) {
+					sm.append(_getPrimitiveObj(tempEntity.getPKClassName()));
+				}
+				else {
+					sm.append(tempEntity.getPKClassName());
+				}
+
+				sm.append(".class.getName()");
+				sm.append("};");
+				sm.append("Object finderArgs[] = new Object[] {");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+				}
+
+				sm.append("pk");
+
+				if (entity.hasPrimitivePK()) {
+					sm.append(")");
+				}
+
+				sm.append(", ");
+
+				if (tempEntity.hasPrimitivePK()) {
+					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+				}
+
+				sm.append(tempEntity.getVarName() + "PK");
+
+				if (tempEntity.hasPrimitivePK()) {
+					sm.append(")");
+				}
+
+				sm.append("};");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("if (result == null) {");
 				sm.append("try {");
-				sm.append("return contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK);");
+				sm.append("Boolean value = new Boolean(contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK));");
+				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, value);");
+				sm.append("return value.booleanValue();");
 				sm.append("}");
 				sm.append("catch (DataAccessException dae) {");
 				sm.append("throw new SystemException(dae);");
+				sm.append("}");
+				sm.append("}");
+				sm.append("else {");
+				sm.append("return ((Boolean)result).booleanValue();");
 				sm.append("}");
 				sm.append("}");
 
@@ -3873,6 +3999,9 @@ public class ServiceBuilder {
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
 					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
+					sm.append("}");
 					sm.append("}");
 
 					// addUser(String pk, User user)
@@ -3883,6 +4012,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 
@@ -3896,6 +4028,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 
@@ -3911,6 +4046,9 @@ public class ServiceBuilder {
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
 					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
+					sm.append("}");
 					sm.append("}");
 
 					// clearUsers(String pk)
@@ -3921,6 +4059,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 
@@ -3933,6 +4074,9 @@ public class ServiceBuilder {
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
 					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
+					sm.append("}");
 					sm.append("}");
 
 					// removeUser(String pk, User user)
@@ -3943,6 +4087,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 
@@ -3956,6 +4103,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 
@@ -3971,6 +4121,9 @@ public class ServiceBuilder {
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
 					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
+					sm.append("}");
 					sm.append("}");
 
 					// setUsers(String pk, String[] pks)
@@ -3984,6 +4137,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 
@@ -3999,6 +4155,9 @@ public class ServiceBuilder {
 					sm.append("}");
 					sm.append("catch (DataAccessException dae) {");
 					sm.append("throw new SystemException(dae);");
+					sm.append("}");
+					sm.append("finally {");
+					sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 					sm.append("}");
 					sm.append("}");
 				}
