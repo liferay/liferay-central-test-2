@@ -88,6 +88,8 @@ public class EditConfigurationAction extends PortletAction {
 			boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 			boolean enableComments = ParamUtil.getBoolean(
 				req, "enableComments");
+			boolean disableCaching = ParamUtil.getBoolean(
+					req, "disableCaching");
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
@@ -101,6 +103,7 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue("template-id", templateId);
 			prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 			prefs.setValue("enable-comments", String.valueOf(enableComments));
+			prefs.setValue("disable-caching", String.valueOf(disableCaching));
 
 			prefs.store();
 

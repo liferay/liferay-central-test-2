@@ -67,11 +67,15 @@ public class ViewAction extends PortletAction {
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
+		boolean disableCaching = GetterUtil.getBoolean(
+				prefs.getValue("disable-caching", StringPool.BLANK));
+
 		String content = null;
 
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			content = JournalContentUtil.getContent(
-				groupId, articleId, templateId, languageId, themeDisplay);
+				groupId, articleId, templateId, languageId, themeDisplay, 
+				disableCaching);
 		}
 
 		if (Validator.isNotNull(content)) {

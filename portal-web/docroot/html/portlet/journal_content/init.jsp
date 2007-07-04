@@ -56,6 +56,7 @@ String templateId = GetterUtil.getString(prefs.getValue("template-id", StringPoo
 boolean paginate = GetterUtil.getBoolean(prefs.getValue("paginate", StringPool.BLANK), true);
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", StringPool.BLANK), true);
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", StringPool.BLANK), true);
+boolean disableCaching = GetterUtil.getBoolean(prefs.getValue("disable-caching", StringPool.BLANK), true);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

@@ -147,6 +147,14 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="disable-caching" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="disableCaching" defaultValue="<%= disableCaching %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+		</td>
+	</tr>
 	</table>
 </c:if>
 

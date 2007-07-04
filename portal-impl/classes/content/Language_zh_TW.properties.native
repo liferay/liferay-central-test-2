@@ -860,6 +860,7 @@ direct-install=直接安裝
 directions-address=方向地址
 directions-input-enabled=方向輸入使能
 directory=目錄
+disable-caching=功能失效貯藏
 disable-forwarding=取消轉送功能
 disable=功能失效
 disclaimer=權利聲明

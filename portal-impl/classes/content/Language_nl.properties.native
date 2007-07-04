@@ -860,6 +860,7 @@ direct-install=Direct installeer
 directions-address=Het Adres van richtingen
 directions-input-enabled=Toegelaten de Input van richtingen
 directory=Folder
+disable-caching=Maak Caching onbruikbaar
 disable-forwarding=Doorsturen uitzetten
 disable=Uitzetten
 disclaimer=disclaimer

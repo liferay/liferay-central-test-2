@@ -82,6 +82,14 @@ public class JournalContentUtil {
 		long groupId, String articleId, String templateId, String languageId,
 		ThemeDisplay themeDisplay) {
 
+		return getContent(
+				groupId, articleId, null, languageId, themeDisplay, false);
+	}
+	
+	public static String getContent(
+		long groupId, String articleId, String templateId, String languageId,
+		ThemeDisplay themeDisplay, boolean disableCaching) {
+		
 		String content = null;
 
 		articleId = GetterUtil.getString(articleId).toUpperCase();
@@ -89,6 +97,10 @@ public class JournalContentUtil {
 
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
 
+		if (disableCaching) {
+			_cache.flushEntry(key);
+		}
+		
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);
 		}

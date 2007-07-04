@@ -860,6 +860,7 @@ direct-install=Αμεσος εγκαταστήστε
 directions-address=Διεύθυνση κατευθύνσεων
 directions-input-enabled=Εισαγωγή κατευθύνσεων που επιτρέπεται
 directory=Κατάλογος
+disable-caching=Θέστε εκτός λειτουργίας την εναποθήκευση
 disable-forwarding=Απενεργοποίηση Προώθησης
 disable=Θέστε εκτός λειτουργίας
 disclaimer=Αποποίηση

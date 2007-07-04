@@ -860,6 +860,7 @@ direct-install=Installazione Diretta
 directions-address=Indirizzo  Sensi
 directions-input-enabled=Input di Sensi Permesso
 directory=Elenco
+disable-caching=Inabiliti Nascondere
 disable-forwarding=Disabilita il forwarding
 disable=Disabilita
 disclaimer=disclaimer

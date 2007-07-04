@@ -860,6 +860,7 @@ direct-install=직접 설치하십시요
 directions-address=방향 주소
 directions-input-enabled=방향 입력은 가능하게 했다
 directory=전화번호부
+disable-caching=무능 숨김
 disable-forwarding=운송을 무능하게 하십시요
 disable=무능
 disclaimer=포기
