@@ -113,13 +113,22 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	public SCProductEntry remove(SCProductEntry scProductEntry)
 		throws SystemException {
+		try {
+			clearSCLicenses.clear(scProductEntry.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("SCLicenses_SCProductEntries");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(scProductEntry);
 			session.flush();
-			clearSCLicenses.clear(scProductEntry.getPrimaryKey());
 
 			return scProductEntry;
 		}

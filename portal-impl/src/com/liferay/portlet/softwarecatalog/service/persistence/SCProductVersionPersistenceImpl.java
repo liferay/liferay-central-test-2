@@ -114,13 +114,22 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public SCProductVersion remove(SCProductVersion scProductVersion)
 		throws SystemException {
+		try {
+			clearSCFrameworkVersions.clear(scProductVersion.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(scProductVersion);
 			session.flush();
-			clearSCFrameworkVersions.clear(scProductVersion.getPrimaryKey());
 
 			return scProductVersion;
 		}

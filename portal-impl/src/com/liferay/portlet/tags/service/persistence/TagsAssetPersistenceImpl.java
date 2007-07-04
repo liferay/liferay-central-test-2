@@ -111,13 +111,22 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset remove(TagsAsset tagsAsset) throws SystemException {
+		try {
+			clearTagsEntries.clear(tagsAsset.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("TagsAssets_TagsEntries");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(tagsAsset);
 			session.flush();
-			clearTagsEntries.clear(tagsAsset.getPrimaryKey());
 
 			return tagsAsset;
 		}

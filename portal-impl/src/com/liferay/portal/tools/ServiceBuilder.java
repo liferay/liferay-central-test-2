@@ -2392,11 +2392,6 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " remove(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
-		sm.append("Session session = null;");
-		sm.append("try {");
-		sm.append("session = openSession();");
-		sm.append("session.delete(" + entity.getVarName() + ");");
-		sm.append("session.flush();");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -2406,10 +2401,23 @@ public class ServiceBuilder {
 
 				// clearUsers(String pk)
 
+				sm.append("try {");
 				sm.append("clear" + tempEntity.getNames() + ".clear(" + entity.getVarName() + ".getPrimaryKey());");
+				sm.append("}");
+				sm.append("catch (Exception e) {");
+				sm.append("throw HibernateUtil.processException(e);");
+				sm.append("}");
+				sm.append("finally {");
+				sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
+				sm.append("}");
 			}
 		}
 
+		sm.append("Session session = null;");
+		sm.append("try {");
+		sm.append("session = openSession();");
+		sm.append("session.delete(" + entity.getVarName() + ");");
+		sm.append("session.flush();");
 		sm.append("return " + entity.getVarName() + ";");
 		sm.append("}");
 		sm.append("catch (Exception e) {");

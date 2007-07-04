@@ -110,13 +110,22 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public UserGroup remove(UserGroup userGroup) throws SystemException {
+		try {
+			clearUsers.clear(userGroup.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_UserGroups");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(userGroup);
 			session.flush();
-			clearUsers.clear(userGroup.getPrimaryKey());
 
 			return userGroup;
 		}

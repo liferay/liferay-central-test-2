@@ -109,17 +109,62 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public Group remove(Group group) throws SystemException {
+		try {
+			clearOrganizations.clear(group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
+
+		try {
+			clearPermissions.clear(group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
+
+		try {
+			clearRoles.clear(group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
+
+		try {
+			clearUserGroups.clear(group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_UserGroups");
+		}
+
+		try {
+			clearUsers.clear(group.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(group);
 			session.flush();
-			clearOrganizations.clear(group.getPrimaryKey());
-			clearPermissions.clear(group.getPrimaryKey());
-			clearRoles.clear(group.getPrimaryKey());
-			clearUserGroups.clear(group.getPrimaryKey());
-			clearUsers.clear(group.getPrimaryKey());
 
 			return group;
 		}

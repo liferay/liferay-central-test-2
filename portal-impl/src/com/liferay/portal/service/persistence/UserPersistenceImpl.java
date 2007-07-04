@@ -107,17 +107,62 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public User remove(User user) throws SystemException {
+		try {
+			clearGroups.clear(user.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Groups");
+		}
+
+		try {
+			clearOrganizations.clear(user.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Orgs");
+		}
+
+		try {
+			clearPermissions.clear(user.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Permissions");
+		}
+
+		try {
+			clearRoles.clear(user.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Roles");
+		}
+
+		try {
+			clearUserGroups.clear(user.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_UserGroups");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(user);
 			session.flush();
-			clearGroups.clear(user.getPrimaryKey());
-			clearOrganizations.clear(user.getPrimaryKey());
-			clearPermissions.clear(user.getPrimaryKey());
-			clearRoles.clear(user.getPrimaryKey());
-			clearUserGroups.clear(user.getPrimaryKey());
 
 			return user;
 		}

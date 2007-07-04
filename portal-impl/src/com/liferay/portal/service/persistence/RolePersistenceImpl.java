@@ -107,15 +107,42 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public Role remove(Role role) throws SystemException {
+		try {
+			clearGroups.clear(role.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Roles");
+		}
+
+		try {
+			clearPermissions.clear(role.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Roles_Permissions");
+		}
+
+		try {
+			clearUsers.clear(role.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Roles");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(role);
 			session.flush();
-			clearGroups.clear(role.getPrimaryKey());
-			clearPermissions.clear(role.getPrimaryKey());
-			clearUsers.clear(role.getPrimaryKey());
 
 			return role;
 		}

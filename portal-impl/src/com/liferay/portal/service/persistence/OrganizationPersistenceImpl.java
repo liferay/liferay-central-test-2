@@ -112,14 +112,32 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 	public Organization remove(Organization organization)
 		throws SystemException {
+		try {
+			clearGroups.clear(organization.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Orgs");
+		}
+
+		try {
+			clearUsers.clear(organization.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Orgs");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(organization);
 			session.flush();
-			clearGroups.clear(organization.getPrimaryKey());
-			clearUsers.clear(organization.getPrimaryKey());
 
 			return organization;
 		}

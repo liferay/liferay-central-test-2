@@ -111,15 +111,42 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public Permission remove(Permission permission) throws SystemException {
+		try {
+			clearGroups.clear(permission.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Groups_Permissions");
+		}
+
+		try {
+			clearRoles.clear(permission.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Roles_Permissions");
+		}
+
+		try {
+			clearUsers.clear(permission.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			FinderCache.clearCache("Users_Permissions");
+		}
+
 		Session session = null;
 
 		try {
 			session = openSession();
 			session.delete(permission);
 			session.flush();
-			clearGroups.clear(permission.getPrimaryKey());
-			clearRoles.clear(permission.getPrimaryKey());
-			clearUsers.clear(permission.getPrimaryKey());
 
 			return permission;
 		}
