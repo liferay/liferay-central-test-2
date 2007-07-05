@@ -1324,7 +1324,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public User updatePassword(
 			long userId, String password1, String password2,
-			boolean passwordReset)
+			boolean passwordReset, boolean isSilentUpdate)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -1352,17 +1352,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordUnencrypted(password1);
 		user.setPasswordEncrypted(true);
 		user.setPasswordReset(passwordReset);
-		user.setPasswordModified(true);
 		user.setPasswordModifiedDate(new Date());
 		user.setGraceLoginCount(0);
 
+		if (!isSilentUpdate) {
+			user.setPasswordModified(true);
+		}
+
 		UserUtil.update(user);
 
-		user.setPasswordModified(false);
+		if (!isSilentUpdate) {
+			user.setPasswordModified(false);
+		}
 
 		PasswordTrackerLocalServiceUtil.trackPassword(userId, oldEncPwd);
 
 		return user;
+	}
+
+	public User updatePassword(
+			long userId, String password1, String password2,
+			boolean passwordReset)
+		throws PortalException, SystemException {
+
+		return updatePassword(
+			userId, password1, password2, passwordReset, false);
 	}
 
 	public void updatePasswordReset(long userId, boolean passwordReset)

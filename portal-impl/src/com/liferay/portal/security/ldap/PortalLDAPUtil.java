@@ -431,7 +431,8 @@ public class PortalLDAPUtil {
 
 				if (updatePassword) {
 					UserLocalServiceUtil.updatePassword(
-						user.getUserId(), password1, password2, passwordReset);
+						user.getUserId(), password1, password2, passwordReset,
+						true);
 				}
 
 				create = false;
