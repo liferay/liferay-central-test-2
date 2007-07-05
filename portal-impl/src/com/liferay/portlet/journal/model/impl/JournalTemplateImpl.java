@@ -36,7 +36,7 @@ public class JournalTemplateImpl
 	public static final String LANG_TYPE_VM = "vm";
 
 	public static final String LANG_TYPE_XSL = "xsl";
-	
+
 	public static final String LANG_TYPE_CSS = "css";
 
 	public static final String[] LANG_TYPES = new String[] {

@@ -1,15 +1,15 @@
 /*
- * This CSS template can be retrieved from
+ * This CSS template can be retrieved from the path:
  *
- *   @root_path@/c/journal/get_template?templateId=THIS-TEMPLATE-ID
+ * @root_path@/c/journal/get_template?groupId=@group_id@&templateId=@template_id@
  *
- * The content type is properly returned as 'text/css'. As a result will 
- * function properly when embedded as
+ * The content type is properly returned as "text/css". As a result, you can
+ * reference this template with the following snippets:
  *
- *   <link rel="stylesheet" type="text/css" 
- *       href="@root_path@/c/journal/get_template?templateId=THIS-TEMPLATE-ID"/>
+ * <link rel="stylesheet" type="text/css" href="@root_path@/c/journal/get_template?groupId=@group_id@&templateId=@template_id@" />
  *
- *   or as
+ * or
  *
- *   @import url(@root_path@/c/journal/get_template?templateId=THIS-TEMPLATE-ID);
+ * @import url(@root_path@/c/journal/get_template?groupId=@group_id@&templateId=@template_id@);
+ *
  */
