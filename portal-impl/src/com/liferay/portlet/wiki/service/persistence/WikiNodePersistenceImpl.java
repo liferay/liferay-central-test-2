@@ -136,7 +136,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 					session.save(wikiNode);
 				}
 				else {
-					session.update(wikiNode);
+					wikiNode = (WikiNode)session.merge(wikiNode);
 				}
 			}
 

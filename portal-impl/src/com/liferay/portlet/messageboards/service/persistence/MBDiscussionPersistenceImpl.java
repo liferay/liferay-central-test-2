@@ -140,7 +140,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 					session.save(mbDiscussion);
 				}
 				else {
-					session.update(mbDiscussion);
+					mbDiscussion = (MBDiscussion)session.merge(mbDiscussion);
 				}
 			}
 

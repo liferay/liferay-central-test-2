@@ -134,7 +134,7 @@ public class PortletPersistenceImpl extends BasePersistence
 					session.save(portlet);
 				}
 				else {
-					session.update(portlet);
+					portlet = (Portlet)session.merge(portlet);
 				}
 			}
 

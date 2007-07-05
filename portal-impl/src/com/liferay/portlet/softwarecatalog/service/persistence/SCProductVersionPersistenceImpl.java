@@ -164,7 +164,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 					session.save(scProductVersion);
 				}
 				else {
-					session.update(scProductVersion);
+					scProductVersion = (SCProductVersion)session.merge(scProductVersion);
 				}
 			}
 

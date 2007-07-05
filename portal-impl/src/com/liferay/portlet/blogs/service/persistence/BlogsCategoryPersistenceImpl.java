@@ -140,7 +140,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 					session.save(blogsCategory);
 				}
 				else {
-					session.update(blogsCategory);
+					blogsCategory = (BlogsCategory)session.merge(blogsCategory);
 				}
 			}
 

@@ -138,7 +138,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 					session.save(userTracker);
 				}
 				else {
-					session.update(userTracker);
+					userTracker = (UserTracker)session.merge(userTracker);
 				}
 			}
 

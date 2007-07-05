@@ -139,7 +139,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 					session.save(emailAddress);
 				}
 				else {
-					session.update(emailAddress);
+					emailAddress = (EmailAddress)session.merge(emailAddress);
 				}
 			}
 

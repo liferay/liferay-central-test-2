@@ -141,7 +141,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 					session.save(shoppingOrderItem);
 				}
 				else {
-					session.update(shoppingOrderItem);
+					shoppingOrderItem = (ShoppingOrderItem)session.merge(shoppingOrderItem);
 				}
 			}
 

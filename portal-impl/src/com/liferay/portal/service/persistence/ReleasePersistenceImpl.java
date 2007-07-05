@@ -134,7 +134,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 					session.save(release);
 				}
 				else {
-					session.update(release);
+					release = (Release)session.merge(release);
 				}
 			}
 

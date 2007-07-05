@@ -138,7 +138,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 					session.save(blogsEntry);
 				}
 				else {
-					session.update(blogsEntry);
+					blogsEntry = (BlogsEntry)session.merge(blogsEntry);
 				}
 			}
 

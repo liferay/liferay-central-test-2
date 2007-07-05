@@ -140,7 +140,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 					session.save(bookmarksFolder);
 				}
 				else {
-					session.update(bookmarksFolder);
+					bookmarksFolder = (BookmarksFolder)session.merge(bookmarksFolder);
 				}
 			}
 

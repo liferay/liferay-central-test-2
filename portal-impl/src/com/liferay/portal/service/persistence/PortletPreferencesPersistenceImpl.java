@@ -140,7 +140,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 					session.save(portletPreferences);
 				}
 				else {
-					session.update(portletPreferences);
+					portletPreferences = (PortletPreferences)session.merge(portletPreferences);
 				}
 			}
 

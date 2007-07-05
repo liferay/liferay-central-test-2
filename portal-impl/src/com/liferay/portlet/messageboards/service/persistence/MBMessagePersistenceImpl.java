@@ -138,7 +138,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 					session.save(mbMessage);
 				}
 				else {
-					session.update(mbMessage);
+					mbMessage = (MBMessage)session.merge(mbMessage);
 				}
 			}
 

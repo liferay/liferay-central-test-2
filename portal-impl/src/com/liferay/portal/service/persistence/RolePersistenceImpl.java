@@ -175,7 +175,7 @@ public class RolePersistenceImpl extends BasePersistence
 					session.save(role);
 				}
 				else {
-					session.update(role);
+					role = (Role)session.merge(role);
 				}
 			}
 

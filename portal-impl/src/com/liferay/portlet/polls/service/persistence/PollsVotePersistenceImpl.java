@@ -137,7 +137,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 					session.save(pollsVote);
 				}
 				else {
-					session.update(pollsVote);
+					pollsVote = (PollsVote)session.merge(pollsVote);
 				}
 			}
 

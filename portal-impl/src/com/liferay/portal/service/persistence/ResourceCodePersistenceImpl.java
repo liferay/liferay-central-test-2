@@ -138,7 +138,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 					session.save(resourceCode);
 				}
 				else {
-					session.update(resourceCode);
+					resourceCode = (ResourceCode)session.merge(resourceCode);
 				}
 			}
 

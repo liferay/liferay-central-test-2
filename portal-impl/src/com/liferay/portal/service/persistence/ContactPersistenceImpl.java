@@ -135,7 +135,7 @@ public class ContactPersistenceImpl extends BasePersistence
 					session.save(contact);
 				}
 				else {
-					session.update(contact);
+					contact = (Contact)session.merge(contact);
 				}
 			}
 

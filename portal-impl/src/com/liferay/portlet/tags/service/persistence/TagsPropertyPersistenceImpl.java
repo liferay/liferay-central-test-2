@@ -140,7 +140,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 					session.save(tagsProperty);
 				}
 				else {
-					session.update(tagsProperty);
+					tagsProperty = (TagsProperty)session.merge(tagsProperty);
 				}
 			}
 

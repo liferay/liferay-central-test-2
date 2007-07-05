@@ -139,7 +139,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 					session.save(userGroupRole);
 				}
 				else {
-					session.update(userGroupRole);
+					userGroupRole = (UserGroupRole)session.merge(userGroupRole);
 				}
 			}
 

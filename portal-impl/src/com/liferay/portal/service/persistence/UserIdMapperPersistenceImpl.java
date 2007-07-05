@@ -139,7 +139,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 					session.save(userIdMapper);
 				}
 				else {
-					session.update(userIdMapper);
+					userIdMapper = (UserIdMapper)session.merge(userIdMapper);
 				}
 			}
 

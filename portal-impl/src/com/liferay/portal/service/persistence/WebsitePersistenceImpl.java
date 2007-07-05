@@ -135,7 +135,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 					session.save(website);
 				}
 				else {
-					session.update(website);
+					website = (Website)session.merge(website);
 				}
 			}
 

@@ -141,7 +141,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 					session.save(wikiPageResource);
 				}
 				else {
-					session.update(wikiPageResource);
+					wikiPageResource = (WikiPageResource)session.merge(wikiPageResource);
 				}
 			}
 

@@ -135,7 +135,7 @@ public class RegionPersistenceImpl extends BasePersistence
 					session.save(region);
 				}
 				else {
-					session.update(region);
+					region = (Region)session.merge(region);
 				}
 			}
 

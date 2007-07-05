@@ -172,7 +172,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 					session.save(organization);
 				}
 				else {
-					session.update(organization);
+					organization = (Organization)session.merge(organization);
 				}
 			}
 

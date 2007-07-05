@@ -140,7 +140,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 					session.save(dlFileShortcut);
 				}
 				else {
-					session.update(dlFileShortcut);
+					dlFileShortcut = (DLFileShortcut)session.merge(dlFileShortcut);
 				}
 			}
 

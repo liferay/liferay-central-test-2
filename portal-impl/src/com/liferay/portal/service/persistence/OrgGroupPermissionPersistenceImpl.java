@@ -140,7 +140,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 					session.save(orgGroupPermission);
 				}
 				else {
-					session.update(orgGroupPermission);
+					orgGroupPermission = (OrgGroupPermission)session.merge(orgGroupPermission);
 				}
 			}
 

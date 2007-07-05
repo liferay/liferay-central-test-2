@@ -137,7 +137,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 					session.save(calEvent);
 				}
 				else {
-					session.update(calEvent);
+					calEvent = (CalEvent)session.merge(calEvent);
 				}
 			}
 

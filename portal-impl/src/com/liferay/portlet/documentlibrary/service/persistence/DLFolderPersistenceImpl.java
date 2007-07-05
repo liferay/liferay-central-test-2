@@ -138,7 +138,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 					session.save(dlFolder);
 				}
 				else {
-					session.update(dlFolder);
+					dlFolder = (DLFolder)session.merge(dlFolder);
 				}
 			}
 

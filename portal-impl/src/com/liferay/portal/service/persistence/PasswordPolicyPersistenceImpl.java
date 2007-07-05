@@ -139,7 +139,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 					session.save(passwordPolicy);
 				}
 				else {
-					session.update(passwordPolicy);
+					passwordPolicy = (PasswordPolicy)session.merge(passwordPolicy);
 				}
 			}
 

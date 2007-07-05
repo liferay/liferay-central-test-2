@@ -139,7 +139,7 @@ public class PollsChoicePersistenceImpl extends BasePersistence
 					session.save(pollsChoice);
 				}
 				else {
-					session.update(pollsChoice);
+					pollsChoice = (PollsChoice)session.merge(pollsChoice);
 				}
 			}
 

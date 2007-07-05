@@ -160,7 +160,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 					session.save(tagsEntry);
 				}
 				else {
-					session.update(tagsEntry);
+					tagsEntry = (TagsEntry)session.merge(tagsEntry);
 				}
 			}
 

@@ -140,7 +140,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 					session.save(shoppingCoupon);
 				}
 				else {
-					session.update(shoppingCoupon);
+					shoppingCoupon = (ShoppingCoupon)session.merge(shoppingCoupon);
 				}
 			}
 

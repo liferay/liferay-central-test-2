@@ -138,7 +138,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 					session.save(dlFileRank);
 				}
 				else {
-					session.update(dlFileRank);
+					dlFileRank = (DLFileRank)session.merge(dlFileRank);
 				}
 			}
 

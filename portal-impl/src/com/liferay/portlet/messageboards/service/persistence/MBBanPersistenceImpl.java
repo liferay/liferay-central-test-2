@@ -133,7 +133,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 					session.save(mbBan);
 				}
 				else {
-					session.update(mbBan);
+					mbBan = (MBBan)session.merge(mbBan);
 				}
 			}
 

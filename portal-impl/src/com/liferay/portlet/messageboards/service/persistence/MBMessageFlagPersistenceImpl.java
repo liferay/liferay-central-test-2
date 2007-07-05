@@ -140,7 +140,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 					session.save(mbMessageFlag);
 				}
 				else {
-					session.update(mbMessageFlag);
+					mbMessageFlag = (MBMessageFlag)session.merge(mbMessageFlag);
 				}
 			}
 

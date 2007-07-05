@@ -138,7 +138,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 					session.save(igFolder);
 				}
 				else {
-					session.update(igFolder);
+					igFolder = (IGFolder)session.merge(igFolder);
 				}
 			}
 

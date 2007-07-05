@@ -139,7 +139,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 					session.save(journalTemplate);
 				}
 				else {
-					session.update(journalTemplate);
+					journalTemplate = (JournalTemplate)session.merge(journalTemplate);
 				}
 			}
 

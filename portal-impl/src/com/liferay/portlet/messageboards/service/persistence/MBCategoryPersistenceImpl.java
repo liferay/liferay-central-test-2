@@ -138,7 +138,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 					session.save(mbCategory);
 				}
 				else {
-					session.update(mbCategory);
+					mbCategory = (MBCategory)session.merge(mbCategory);
 				}
 			}
 

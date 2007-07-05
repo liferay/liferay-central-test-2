@@ -134,7 +134,7 @@ public class PhonePersistenceImpl extends BasePersistence
 					session.save(phone);
 				}
 				else {
-					session.update(phone);
+					phone = (Phone)session.merge(phone);
 				}
 			}
 

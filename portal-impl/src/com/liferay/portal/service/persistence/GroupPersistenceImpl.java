@@ -197,7 +197,7 @@ public class GroupPersistenceImpl extends BasePersistence
 					session.save(group);
 				}
 				else {
-					session.update(group);
+					group = (Group)session.merge(group);
 				}
 			}
 

@@ -135,7 +135,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 					session.save(company);
 				}
 				else {
-					session.update(company);
+					company = (Company)session.merge(company);
 				}
 			}
 

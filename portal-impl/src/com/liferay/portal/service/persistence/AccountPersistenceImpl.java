@@ -134,7 +134,7 @@ public class AccountPersistenceImpl extends BasePersistence
 					session.save(account);
 				}
 				else {
-					session.update(account);
+					account = (Account)session.merge(account);
 				}
 			}
 

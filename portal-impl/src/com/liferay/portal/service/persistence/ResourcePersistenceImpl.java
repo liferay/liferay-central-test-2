@@ -135,7 +135,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 					session.save(resource);
 				}
 				else {
-					session.update(resource);
+					resource = (Resource)session.merge(resource);
 				}
 			}
 

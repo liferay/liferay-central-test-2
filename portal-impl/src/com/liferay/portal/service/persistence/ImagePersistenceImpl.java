@@ -133,7 +133,7 @@ public class ImagePersistenceImpl extends BasePersistence
 					session.save(image);
 				}
 				else {
-					session.update(image);
+					image = (Image)session.merge(image);
 				}
 			}
 

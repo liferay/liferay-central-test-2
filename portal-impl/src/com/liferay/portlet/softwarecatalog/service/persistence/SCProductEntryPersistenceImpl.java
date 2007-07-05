@@ -163,7 +163,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					session.save(scProductEntry);
 				}
 				else {
-					session.update(scProductEntry);
+					scProductEntry = (SCProductEntry)session.merge(scProductEntry);
 				}
 			}
 

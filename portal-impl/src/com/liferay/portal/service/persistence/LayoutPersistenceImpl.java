@@ -133,7 +133,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					session.save(layout);
 				}
 				else {
-					session.update(layout);
+					layout = (Layout)session.merge(layout);
 				}
 			}
 

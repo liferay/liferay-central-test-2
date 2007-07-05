@@ -138,7 +138,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 					session.save(igImage);
 				}
 				else {
-					session.update(igImage);
+					igImage = (IGImage)session.merge(igImage);
 				}
 			}
 

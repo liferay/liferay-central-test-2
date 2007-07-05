@@ -141,7 +141,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 					session.save(journalArticleImage);
 				}
 				else {
-					session.update(journalArticleImage);
+					journalArticleImage = (JournalArticleImage)session.merge(journalArticleImage);
 				}
 			}
 

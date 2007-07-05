@@ -135,7 +135,7 @@ public class CountryPersistenceImpl extends BasePersistence
 					session.save(country);
 				}
 				else {
-					session.update(country);
+					country = (Country)session.merge(country);
 				}
 			}
 

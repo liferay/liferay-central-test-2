@@ -139,7 +139,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 					session.save(passwordTracker);
 				}
 				else {
-					session.update(passwordTracker);
+					passwordTracker = (PasswordTracker)session.merge(passwordTracker);
 				}
 			}
 

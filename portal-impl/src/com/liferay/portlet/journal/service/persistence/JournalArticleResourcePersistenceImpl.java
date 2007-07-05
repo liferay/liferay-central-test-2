@@ -142,7 +142,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 					session.save(journalArticleResource);
 				}
 				else {
-					session.update(journalArticleResource);
+					journalArticleResource = (JournalArticleResource)session.merge(journalArticleResource);
 				}
 			}
 

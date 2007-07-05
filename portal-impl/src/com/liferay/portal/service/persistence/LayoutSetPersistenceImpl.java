@@ -135,7 +135,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 					session.save(layoutSet);
 				}
 				else {
-					session.update(layoutSet);
+					layoutSet = (LayoutSet)session.merge(layoutSet);
 				}
 			}
 

@@ -140,7 +140,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 					session.save(mbStatsUser);
 				}
 				else {
-					session.update(mbStatsUser);
+					mbStatsUser = (MBStatsUser)session.merge(mbStatsUser);
 				}
 			}
 

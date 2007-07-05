@@ -139,7 +139,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 					session.save(ratingsStats);
 				}
 				else {
-					session.update(ratingsStats);
+					ratingsStats = (RatingsStats)session.merge(ratingsStats);
 				}
 			}
 

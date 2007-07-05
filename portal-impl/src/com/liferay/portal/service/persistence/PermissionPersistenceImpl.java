@@ -179,7 +179,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 					session.save(permission);
 				}
 				else {
-					session.update(permission);
+					permission = (Permission)session.merge(permission);
 				}
 			}
 

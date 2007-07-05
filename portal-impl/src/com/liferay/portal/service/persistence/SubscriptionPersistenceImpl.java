@@ -139,7 +139,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 					session.save(subscription);
 				}
 				else {
-					session.update(subscription);
+					subscription = (Subscription)session.merge(subscription);
 				}
 			}
 

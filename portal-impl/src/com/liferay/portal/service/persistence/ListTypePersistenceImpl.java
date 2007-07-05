@@ -135,7 +135,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 					session.save(listType);
 				}
 				else {
-					session.update(listType);
+					listType = (ListType)session.merge(listType);
 				}
 			}
 

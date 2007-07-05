@@ -138,7 +138,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 					session.save(mbThread);
 				}
 				else {
-					session.update(mbThread);
+					mbThread = (MBThread)session.merge(mbThread);
 				}
 			}
 

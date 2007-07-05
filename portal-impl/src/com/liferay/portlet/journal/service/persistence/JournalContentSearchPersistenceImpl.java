@@ -141,7 +141,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 					session.save(journalContentSearch);
 				}
 				else {
-					session.update(journalContentSearch);
+					journalContentSearch = (JournalContentSearch)session.merge(journalContentSearch);
 				}
 			}
 

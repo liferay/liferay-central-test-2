@@ -140,7 +140,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 					session.save(dlFileEntry);
 				}
 				else {
-					session.update(dlFileEntry);
+					dlFileEntry = (DLFileEntry)session.merge(dlFileEntry);
 				}
 			}
 

@@ -139,7 +139,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 					session.save(userTrackerPath);
 				}
 				else {
-					session.update(userTrackerPath);
+					userTrackerPath = (UserTrackerPath)session.merge(userTrackerPath);
 				}
 			}
 

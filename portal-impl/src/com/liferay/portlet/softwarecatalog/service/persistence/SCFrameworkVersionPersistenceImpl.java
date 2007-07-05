@@ -141,7 +141,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 					session.save(scFrameworkVersion);
 				}
 				else {
-					session.update(scFrameworkVersion);
+					scFrameworkVersion = (SCFrameworkVersion)session.merge(scFrameworkVersion);
 				}
 			}
 

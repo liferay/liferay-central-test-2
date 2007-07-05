@@ -139,7 +139,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 					session.save(pluginSetting);
 				}
 				else {
-					session.update(pluginSetting);
+					pluginSetting = (PluginSetting)session.merge(pluginSetting);
 				}
 			}
 

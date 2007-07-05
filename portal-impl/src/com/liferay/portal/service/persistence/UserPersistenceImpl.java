@@ -195,7 +195,7 @@ public class UserPersistenceImpl extends BasePersistence
 					session.save(user);
 				}
 				else {
-					session.update(user);
+					user = (User)session.merge(user);
 				}
 			}
 

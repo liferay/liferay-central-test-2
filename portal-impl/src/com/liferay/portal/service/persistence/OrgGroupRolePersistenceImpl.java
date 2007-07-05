@@ -139,7 +139,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 					session.save(orgGroupRole);
 				}
 				else {
-					session.update(orgGroupRole);
+					orgGroupRole = (OrgGroupRole)session.merge(orgGroupRole);
 				}
 			}
 

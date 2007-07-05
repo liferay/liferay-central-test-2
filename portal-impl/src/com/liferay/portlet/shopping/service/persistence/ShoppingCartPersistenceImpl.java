@@ -139,7 +139,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 					session.save(shoppingCart);
 				}
 				else {
-					session.update(shoppingCart);
+					shoppingCart = (ShoppingCart)session.merge(shoppingCart);
 				}
 			}
 

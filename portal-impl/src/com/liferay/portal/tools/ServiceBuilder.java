@@ -2447,7 +2447,7 @@ public class ServiceBuilder {
 		sm.append("session.save(" + entity.getVarName() + ");");
 		sm.append("}");
 		sm.append("else {");
-		sm.append("session.update(" + entity.getVarName() + ");");
+		sm.append(entity.getVarName() + " = (" + entity.getName() + ")session.merge(" + entity.getVarName() + ");");
 		sm.append("}");
 		sm.append("}");
 		sm.append("session.flush();");

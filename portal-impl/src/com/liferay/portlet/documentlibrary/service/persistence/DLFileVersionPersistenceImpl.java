@@ -140,7 +140,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 					session.save(dlFileVersion);
 				}
 				else {
-					session.update(dlFileVersion);
+					dlFileVersion = (DLFileVersion)session.merge(dlFileVersion);
 				}
 			}
 

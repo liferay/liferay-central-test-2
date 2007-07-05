@@ -135,7 +135,7 @@ public class AddressPersistenceImpl extends BasePersistence
 					session.save(address);
 				}
 				else {
-					session.update(address);
+					address = (Address)session.merge(address);
 				}
 			}
 

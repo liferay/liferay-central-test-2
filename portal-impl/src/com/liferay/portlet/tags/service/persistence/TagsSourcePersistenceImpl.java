@@ -137,7 +137,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 					session.save(tagsSource);
 				}
 				else {
-					session.update(tagsSource);
+					tagsSource = (TagsSource)session.merge(tagsSource);
 				}
 			}
 

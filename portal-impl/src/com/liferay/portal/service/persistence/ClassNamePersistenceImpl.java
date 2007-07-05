@@ -135,7 +135,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 					session.save(className);
 				}
 				else {
-					session.update(className);
+					className = (ClassName)session.merge(className);
 				}
 			}
 
