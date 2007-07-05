@@ -323,7 +323,9 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_INTERVAL = "ldap.import.interval";
 
-	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
+	public static final String LDAP_IMPORT_USER_SEARCH_FILTER = "ldap.user.import.search.filter";
+
+	public static final String LDAP_IMPORT_GROUP_SEARCH_FILTER = "ldap.group.import.search.filter";
 
 	public static final String LDAP_EXPORT_ENABLED = "ldap.export.enabled";
 

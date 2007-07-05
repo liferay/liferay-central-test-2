@@ -296,7 +296,7 @@ public class PortalLDAPUtil {
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_BASE_DN);
 			String filter = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
+				companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
 
@@ -559,6 +559,8 @@ public class PortalLDAPUtil {
 			String description = LDAPUtil.getAttributeValue(
 				groupAttrs, groupMappings.getProperty("description"));
 
+			// Get associated portal usergroup
+
 			UserGroup userGroup = null;
 
 			try {
@@ -585,6 +587,8 @@ public class PortalLDAPUtil {
 					}
 				}
 			}
+
+			// Add user to usergroup
 
 			if (userGroup != null) {
 				if (_log.isDebugEnabled()) {

@@ -134,6 +134,27 @@ portletURL.setParameter("tabs3", tabs3);
 			document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
 		}
 	}
+
+	function <portlet:namespace />toggleBoxes(checkBoxId, toggleBoxId) {
+		var checkBox = jQuery('#<portlet:namespace />' + checkBoxId);
+		var toggleBox = jQuery('#<portlet:namespace />' + toggleBoxId);
+
+		if (!checkBox.is(':checked')){
+			toggleBox.hide();
+		}
+
+		checkBox.click(
+			function(){
+				toggleBox.toggle();
+			}
+		);
+	}
+
+	jQuery(
+		function() {
+			<portlet:namespace />toggleBoxes('importEnabledCheckbox', 'importEnabledSettings');
+		}
+	);
 </script>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
@@ -1022,9 +1043,10 @@ portletURL.setParameter("tabs3", tabs3);
 										<liferay-ui:message key="import-enabled" />
 									</td>
 									<td>
-										<liferay-ui:input-checkbox param="importEnabled" defaultValue="true" disabled="true" />
+										<liferay-ui:input-checkbox param="importEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "importEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ENABLED)) %>' />
 									</td>
 								</tr>
+								<tbody id="<portlet:namespace />importEnabledSettings">
 								<tr>
 									<td>
 										<liferay-ui:message key="import-on-startup-enabled" />
@@ -1043,6 +1065,7 @@ portletURL.setParameter("tabs3", tabs3);
 										%>
 
 										<select name="<portlet:namespace />importInterval">
+											<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
 											<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
 											<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
 											<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
@@ -1054,12 +1077,21 @@ portletURL.setParameter("tabs3", tabs3);
 								</tr>
 								<tr>
 									<td>
-										<liferay-ui:message key="import-search-filter" />
+										<liferay-ui:message key="import-user-search-filter" />
 									</td>
 									<td>
-										<input class="liferay-input-text" name="<portlet:namespace />importSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_SEARCH_FILTER)) %>' />
+										<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
 									</td>
 								</tr>
+								<tr>
+									<td>
+										<liferay-ui:message key="import-group-search-filter" />
+									</td>
+									<td>
+										<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
+									</td>
+								</tr>
+								</tbody>
 								</table>
 							</liferay-ui:section>
 						</liferay-ui:tabs>
