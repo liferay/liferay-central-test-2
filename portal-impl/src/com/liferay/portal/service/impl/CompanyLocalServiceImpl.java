@@ -98,6 +98,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company addCompany(String webId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
+		// Company
+
 		virtualHost = virtualHost.trim().toLowerCase();
 
 		if ((Validator.isNull(webId)) ||
@@ -114,9 +116,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
 
-		LuceneUtil.checkLuceneDir(company.getCompanyId());
-
 		CompanyUtil.update(company);
+
+		// Lucene
+
+		LuceneUtil.checkLuceneDir(company.getCompanyId());
 
 		return company;
 	}
