@@ -114,6 +114,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
 
+		LuceneUtil.checkLuceneDir(company.getCompanyId());
+
 		CompanyUtil.update(company);
 
 		return company;
