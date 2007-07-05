@@ -36,4 +36,6 @@ public interface BaseModel extends Cloneable, Comparable, Serializable {
 
 	public boolean setNew(boolean n);
 
+	public Object clone();
+
 }

@@ -48,6 +48,8 @@ public abstract class BaseModelImpl implements BaseModel {
 		return _new = n;
 	}
 
+	public abstract Object clone();
+
 	private boolean _new;
 
 }

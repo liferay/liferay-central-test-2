@@ -24,6 +24,7 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ArrayUtil;
@@ -34,6 +35,9 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
@@ -232,18 +236,36 @@ public class FinderCache {
 
 			List list = new ArrayList(cachedList.size());
 
-			list.addAll(cachedList);
+			for (int i = 0; i < cachedList.size(); i++) {
+				Object curResult = _getResult(cachedList.get(i));
+
+				list.add(curResult);
+			}
 
 			return list;
 		}
-		else {
-			return result;
+		else if (result instanceof BaseModel) {
+			String modelImpl = result.getClass().getName();
+
+			try {
+				BaseModel model = (BaseModel)result;
+
+				return model.clone();
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unable to clone " + modelImpl + ": " + e.getMessage());
+			}
 		}
+
+		return result;
 	}
 
 	private static final String _ARGS_SEPARATOR = "_ARGS_SEPARATOR_";
 
 	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
+
+	private static Log _log = LogFactory.getLog(FinderCache.class);
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
 

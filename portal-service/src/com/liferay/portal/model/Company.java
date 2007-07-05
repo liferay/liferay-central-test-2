@@ -89,4 +89,6 @@ public interface Company extends CompanyModel {
 	public boolean isCommunityLogo()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public int compareTo(java.lang.Object obj);
 }
