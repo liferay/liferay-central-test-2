@@ -1359,7 +1359,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordModified(true);
 		}
 
-		UserUtil.update(user);
+		try {
+			UserUtil.update(user);
+		}
+		catch (Exception e) {
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_INVALID);
+		}
 
 		if (!isSilentUpdate) {
 			user.setPasswordModified(false);
