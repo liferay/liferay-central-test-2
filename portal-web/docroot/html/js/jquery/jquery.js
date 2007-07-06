@@ -2331,7 +2331,6 @@ jQuery.extend({
 				
 				// Perform the easing function, defaults to swing
 				z.now = jQuery.easing[options.easing](p, n, firstNum, (lastNum-firstNum), options.duration);
-				console.log('t:' + t, 'this.startTime:' + this.startTime,'p:' + p, 'n:' + n, 'firstNum:' + firstNum, 'lastNum-firstNum:' + (lastNum-firstNum), 'options.duration:' + options.duration);
 				// Perform the next step of the animation
 				z.a();
 			}
