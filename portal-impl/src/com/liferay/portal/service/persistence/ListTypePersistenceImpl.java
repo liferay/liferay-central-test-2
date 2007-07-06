@@ -101,6 +101,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			listType = (ListType)session.merge(listType);
 			session.delete(listType);
 			session.flush();
 

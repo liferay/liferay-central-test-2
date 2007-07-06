@@ -104,6 +104,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			dlFileVersion = (DLFileVersion)session.merge(dlFileVersion);
 			session.delete(dlFileVersion);
 			session.flush();
 

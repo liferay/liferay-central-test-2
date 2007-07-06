@@ -100,6 +100,7 @@ public class PortletPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			portlet = (Portlet)session.merge(portlet);
 			session.delete(portlet);
 			session.flush();
 

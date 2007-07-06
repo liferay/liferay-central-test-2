@@ -102,6 +102,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			calEvent = (CalEvent)session.merge(calEvent);
 			session.delete(calEvent);
 			session.flush();
 

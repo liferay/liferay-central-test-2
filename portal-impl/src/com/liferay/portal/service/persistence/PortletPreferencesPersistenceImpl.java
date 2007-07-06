@@ -104,6 +104,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			portletPreferences = (PortletPreferences)session.merge(portletPreferences);
 			session.delete(portletPreferences);
 			session.flush();
 

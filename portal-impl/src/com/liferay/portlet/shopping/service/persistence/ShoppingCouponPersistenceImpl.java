@@ -104,6 +104,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			shoppingCoupon = (ShoppingCoupon)session.merge(shoppingCoupon);
 			session.delete(shoppingCoupon);
 			session.flush();
 

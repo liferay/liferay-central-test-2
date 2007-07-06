@@ -332,13 +332,13 @@ public interface UserLocalService {
 
 	public com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, boolean isSilentUpdate)
+		boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset)
+		boolean passwordReset, boolean silentUpdate)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

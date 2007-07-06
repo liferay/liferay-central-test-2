@@ -103,6 +103,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			userIdMapper = (UserIdMapper)session.merge(userIdMapper);
 			session.delete(userIdMapper);
 			session.flush();
 

@@ -161,6 +161,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			user = (User)session.merge(user);
 			session.delete(user);
 			session.flush();
 

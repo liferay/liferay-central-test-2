@@ -125,6 +125,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			tagsAsset = (TagsAsset)session.merge(tagsAsset);
 			session.delete(tagsAsset);
 			session.flush();
 

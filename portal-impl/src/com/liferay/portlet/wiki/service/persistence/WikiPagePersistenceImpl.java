@@ -102,6 +102,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			wikiPage = (WikiPage)session.merge(wikiPage);
 			session.delete(wikiPage);
 			session.flush();
 

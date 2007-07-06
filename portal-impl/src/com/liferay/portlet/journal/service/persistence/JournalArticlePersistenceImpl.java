@@ -103,6 +103,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			journalArticle = (JournalArticle)session.merge(journalArticle);
 			session.delete(journalArticle);
 			session.flush();
 

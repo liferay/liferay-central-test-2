@@ -125,6 +125,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			tagsEntry = (TagsEntry)session.merge(tagsEntry);
 			session.delete(tagsEntry);
 			session.flush();
 

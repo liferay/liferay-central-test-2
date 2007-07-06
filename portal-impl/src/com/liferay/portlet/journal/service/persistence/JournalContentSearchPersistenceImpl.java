@@ -105,6 +105,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			journalContentSearch = (JournalContentSearch)session.merge(journalContentSearch);
 			session.delete(journalContentSearch);
 			session.flush();
 

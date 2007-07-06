@@ -102,6 +102,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			blogsEntry = (BlogsEntry)session.merge(blogsEntry);
 			session.delete(blogsEntry);
 			session.flush();
 

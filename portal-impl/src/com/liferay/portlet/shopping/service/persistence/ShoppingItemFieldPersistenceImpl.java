@@ -105,6 +105,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			shoppingItemField = (ShoppingItemField)session.merge(shoppingItemField);
 			session.delete(shoppingItemField);
 			session.flush();
 

@@ -104,6 +104,7 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			blogsCategory = (BlogsCategory)session.merge(blogsCategory);
 			session.delete(blogsCategory);
 			session.flush();
 

@@ -102,6 +102,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			dlFolder = (DLFolder)session.merge(dlFolder);
 			session.delete(dlFolder);
 			session.flush();
 

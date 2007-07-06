@@ -104,6 +104,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbMessageFlag = (MBMessageFlag)session.merge(mbMessageFlag);
 			session.delete(mbMessageFlag);
 			session.flush();
 

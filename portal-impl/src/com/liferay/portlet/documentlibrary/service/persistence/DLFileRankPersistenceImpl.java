@@ -102,6 +102,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			dlFileRank = (DLFileRank)session.merge(dlFileRank);
 			session.delete(dlFileRank);
 			session.flush();
 

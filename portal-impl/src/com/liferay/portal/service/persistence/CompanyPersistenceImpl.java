@@ -101,6 +101,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			company = (Company)session.merge(company);
 			session.delete(company);
 			session.flush();
 

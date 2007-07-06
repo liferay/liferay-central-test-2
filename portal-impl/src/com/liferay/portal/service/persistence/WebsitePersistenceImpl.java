@@ -101,6 +101,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			website = (Website)session.merge(website);
 			session.delete(website);
 			session.flush();
 

@@ -103,6 +103,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			passwordTracker = (PasswordTracker)session.merge(passwordTracker);
 			session.delete(passwordTracker);
 			session.flush();
 

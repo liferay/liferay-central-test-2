@@ -141,6 +141,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			role = (Role)session.merge(role);
 			session.delete(role);
 			session.flush();
 

@@ -102,6 +102,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			igImage = (IGImage)session.merge(igImage);
 			session.delete(igImage);
 			session.flush();
 

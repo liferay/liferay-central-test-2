@@ -103,6 +103,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			orgGroupRole = (OrgGroupRole)session.merge(orgGroupRole);
 			session.delete(orgGroupRole);
 			session.flush();
 

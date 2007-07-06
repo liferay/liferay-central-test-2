@@ -104,6 +104,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			pollsQuestion = (PollsQuestion)session.merge(pollsQuestion);
 			session.delete(pollsQuestion);
 			session.flush();
 

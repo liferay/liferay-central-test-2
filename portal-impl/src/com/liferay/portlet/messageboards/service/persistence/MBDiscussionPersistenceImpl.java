@@ -104,6 +104,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbDiscussion = (MBDiscussion)session.merge(mbDiscussion);
 			session.delete(mbDiscussion);
 			session.flush();
 

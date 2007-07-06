@@ -100,6 +100,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			release = (Release)session.merge(release);
 			session.delete(release);
 			session.flush();
 

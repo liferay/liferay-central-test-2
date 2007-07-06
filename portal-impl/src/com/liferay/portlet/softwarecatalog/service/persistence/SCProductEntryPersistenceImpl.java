@@ -127,6 +127,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			scProductEntry = (SCProductEntry)session.merge(scProductEntry);
 			session.delete(scProductEntry);
 			session.flush();
 

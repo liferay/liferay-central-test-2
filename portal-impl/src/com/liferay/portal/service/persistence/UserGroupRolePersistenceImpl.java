@@ -103,6 +103,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			userGroupRole = (UserGroupRole)session.merge(userGroupRole);
 			session.delete(userGroupRole);
 			session.flush();
 

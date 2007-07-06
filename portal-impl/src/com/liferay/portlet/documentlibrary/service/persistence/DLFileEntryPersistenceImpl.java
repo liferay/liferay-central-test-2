@@ -104,6 +104,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			dlFileEntry = (DLFileEntry)session.merge(dlFileEntry);
 			session.delete(dlFileEntry);
 			session.flush();
 

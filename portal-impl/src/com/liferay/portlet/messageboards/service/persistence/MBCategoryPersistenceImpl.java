@@ -102,6 +102,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbCategory = (MBCategory)session.merge(mbCategory);
 			session.delete(mbCategory);
 			session.flush();
 

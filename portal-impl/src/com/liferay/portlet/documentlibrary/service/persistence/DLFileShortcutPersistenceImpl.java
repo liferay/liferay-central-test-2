@@ -104,6 +104,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			dlFileShortcut = (DLFileShortcut)session.merge(dlFileShortcut);
 			session.delete(dlFileShortcut);
 			session.flush();
 

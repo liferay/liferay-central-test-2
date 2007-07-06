@@ -103,6 +103,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			ratingsEntry = (RatingsEntry)session.merge(ratingsEntry);
 			session.delete(ratingsEntry);
 			session.flush();
 

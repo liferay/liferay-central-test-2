@@ -102,6 +102,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbThread = (MBThread)session.merge(mbThread);
 			session.delete(mbThread);
 			session.flush();
 

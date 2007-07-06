@@ -106,6 +106,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			journalArticleResource = (JournalArticleResource)session.merge(journalArticleResource);
 			session.delete(journalArticleResource);
 			session.flush();
 

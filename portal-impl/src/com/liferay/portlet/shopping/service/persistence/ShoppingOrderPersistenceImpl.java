@@ -103,6 +103,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			shoppingOrder = (ShoppingOrder)session.merge(shoppingOrder);
 			session.delete(shoppingOrder);
 			session.flush();
 

@@ -124,6 +124,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			userGroup = (UserGroup)session.merge(userGroup);
 			session.delete(userGroup);
 			session.flush();
 

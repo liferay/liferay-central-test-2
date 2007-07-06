@@ -104,6 +104,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			tagsProperty = (TagsProperty)session.merge(tagsProperty);
 			session.delete(tagsProperty);
 			session.flush();
 

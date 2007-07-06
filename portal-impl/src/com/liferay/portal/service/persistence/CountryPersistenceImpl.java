@@ -101,6 +101,7 @@ public class CountryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			country = (Country)session.merge(country);
 			session.delete(country);
 			session.flush();
 

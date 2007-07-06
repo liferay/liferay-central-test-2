@@ -105,6 +105,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			shoppingItemPrice = (ShoppingItemPrice)session.merge(shoppingItemPrice);
 			session.delete(shoppingItemPrice);
 			session.flush();
 

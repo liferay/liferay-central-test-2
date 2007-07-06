@@ -103,6 +103,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			bookmarksEntry = (BookmarksEntry)session.merge(bookmarksEntry);
 			session.delete(bookmarksEntry);
 			session.flush();
 

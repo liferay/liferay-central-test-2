@@ -105,6 +105,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			journalArticleImage = (JournalArticleImage)session.merge(journalArticleImage);
 			session.delete(journalArticleImage);
 			session.flush();
 

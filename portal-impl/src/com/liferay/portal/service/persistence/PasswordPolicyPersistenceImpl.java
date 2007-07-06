@@ -103,6 +103,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			passwordPolicy = (PasswordPolicy)session.merge(passwordPolicy);
 			session.delete(passwordPolicy);
 			session.flush();
 

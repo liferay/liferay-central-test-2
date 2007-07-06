@@ -103,6 +103,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			journalTemplate = (JournalTemplate)session.merge(journalTemplate);
 			session.delete(journalTemplate);
 			session.flush();
 

@@ -103,6 +103,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			emailAddress = (EmailAddress)session.merge(emailAddress);
 			session.delete(emailAddress);
 			session.flush();
 

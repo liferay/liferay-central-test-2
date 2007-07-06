@@ -572,17 +572,6 @@ public class UserLocalServiceUtil {
 
 	public static com.liferay.portal.model.User updatePassword(long userId,
 		java.lang.String password1, java.lang.String password2,
-		boolean passwordReset, boolean isSilentUpdate)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updatePassword(userId, password1, password2,
-			passwordReset, isSilentUpdate);
-	}
-
-	public static com.liferay.portal.model.User updatePassword(long userId,
-		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -590,6 +579,17 @@ public class UserLocalServiceUtil {
 
 		return userLocalService.updatePassword(userId, password1, password2,
 			passwordReset);
+	}
+
+	public static com.liferay.portal.model.User updatePassword(long userId,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, boolean silentUpdate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.updatePassword(userId, password1, password2,
+			passwordReset, silentUpdate);
 	}
 
 	public static void updatePasswordReset(long userId, boolean passwordReset)

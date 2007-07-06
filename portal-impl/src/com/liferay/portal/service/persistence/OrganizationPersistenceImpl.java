@@ -136,6 +136,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			organization = (Organization)session.merge(organization);
 			session.delete(organization);
 			session.flush();
 

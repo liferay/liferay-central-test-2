@@ -101,6 +101,7 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			region = (Region)session.merge(region);
 			session.delete(region);
 			session.flush();
 

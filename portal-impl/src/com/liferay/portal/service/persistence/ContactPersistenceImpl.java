@@ -101,6 +101,7 @@ public class ContactPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			contact = (Contact)session.merge(contact);
 			session.delete(contact);
 			session.flush();
 

@@ -101,6 +101,7 @@ public class AddressPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			address = (Address)session.merge(address);
 			session.delete(address);
 			session.flush();
 

@@ -99,6 +99,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbBan = (MBBan)session.merge(mbBan);
 			session.delete(mbBan);
 			session.flush();
 

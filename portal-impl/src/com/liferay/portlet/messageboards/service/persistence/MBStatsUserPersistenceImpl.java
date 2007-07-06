@@ -104,6 +104,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbStatsUser = (MBStatsUser)session.merge(mbStatsUser);
 			session.delete(mbStatsUser);
 			session.flush();
 

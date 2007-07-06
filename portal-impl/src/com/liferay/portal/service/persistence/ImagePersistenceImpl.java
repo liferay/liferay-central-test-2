@@ -99,6 +99,7 @@ public class ImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			image = (Image)session.merge(image);
 			session.delete(image);
 			session.flush();
 

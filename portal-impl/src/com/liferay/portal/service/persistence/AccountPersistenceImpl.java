@@ -100,6 +100,7 @@ public class AccountPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			account = (Account)session.merge(account);
 			session.delete(account);
 			session.flush();
 

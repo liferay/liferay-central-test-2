@@ -103,6 +103,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			pluginSetting = (PluginSetting)session.merge(pluginSetting);
 			session.delete(pluginSetting);
 			session.flush();
 

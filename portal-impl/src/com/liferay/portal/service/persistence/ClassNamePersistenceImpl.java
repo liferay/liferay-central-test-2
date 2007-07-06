@@ -101,6 +101,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			className = (ClassName)session.merge(className);
 			session.delete(className);
 			session.flush();
 

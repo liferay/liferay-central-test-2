@@ -102,6 +102,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			mbMessage = (MBMessage)session.merge(mbMessage);
 			session.delete(mbMessage);
 			session.flush();
 

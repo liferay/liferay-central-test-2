@@ -104,6 +104,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			bookmarksFolder = (BookmarksFolder)session.merge(bookmarksFolder);
 			session.delete(bookmarksFolder);
 			session.flush();
 

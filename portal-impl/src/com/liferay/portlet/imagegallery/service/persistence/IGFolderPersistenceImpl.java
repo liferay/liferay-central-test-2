@@ -102,6 +102,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			igFolder = (IGFolder)session.merge(igFolder);
 			session.delete(igFolder);
 			session.flush();
 

@@ -103,6 +103,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			userTrackerPath = (UserTrackerPath)session.merge(userTrackerPath);
 			session.delete(userTrackerPath);
 			session.flush();
 

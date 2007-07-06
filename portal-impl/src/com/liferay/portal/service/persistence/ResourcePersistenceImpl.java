@@ -101,6 +101,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			resource = (Resource)session.merge(resource);
 			session.delete(resource);
 			session.flush();
 

@@ -101,6 +101,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			orgLabor = (OrgLabor)session.merge(orgLabor);
 			session.delete(orgLabor);
 			session.flush();
 

@@ -103,6 +103,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			shoppingCart = (ShoppingCart)session.merge(shoppingCart);
 			session.delete(shoppingCart);
 			session.flush();
 

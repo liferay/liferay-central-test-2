@@ -101,6 +101,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			tagsSource = (TagsSource)session.merge(tagsSource);
 			session.delete(tagsSource);
 			session.flush();
 

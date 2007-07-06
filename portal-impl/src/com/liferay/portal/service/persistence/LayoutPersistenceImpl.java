@@ -99,6 +99,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			layout = (Layout)session.merge(layout);
 			session.delete(layout);
 			session.flush();
 

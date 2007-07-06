@@ -103,6 +103,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			userTracker = (UserTracker)session.merge(userTracker);
 			session.delete(userTracker);
 			session.flush();
 

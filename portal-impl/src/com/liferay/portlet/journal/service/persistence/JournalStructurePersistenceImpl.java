@@ -104,6 +104,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			journalStructure = (JournalStructure)session.merge(journalStructure);
 			session.delete(journalStructure);
 			session.flush();
 

@@ -101,6 +101,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			layoutSet = (LayoutSet)session.merge(layoutSet);
 			session.delete(layoutSet);
 			session.flush();
 

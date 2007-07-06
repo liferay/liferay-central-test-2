@@ -103,6 +103,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			subscription = (Subscription)session.merge(subscription);
 			session.delete(subscription);
 			session.flush();
 

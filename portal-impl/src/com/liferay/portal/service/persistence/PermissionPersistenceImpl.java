@@ -145,6 +145,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
+			permission = (Permission)session.merge(permission);
 			session.delete(permission);
 			session.flush();
 
