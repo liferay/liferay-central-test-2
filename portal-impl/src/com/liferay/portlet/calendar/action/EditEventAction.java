@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.action;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -43,7 +44,6 @@ import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -187,7 +187,7 @@ public class EditEventAction extends PortletAction {
 			timeZone = TimeZone.getDefault();
 		}
 
-		Calendar startDate = new GregorianCalendar(timeZone, locale);
+		Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		startDate.set(Calendar.MONTH, startDateMonth);
 		startDate.set(Calendar.DATE, startDateDay);
@@ -213,7 +213,7 @@ public class EditEventAction extends PortletAction {
 			Calendar recStartCal = null;
 
 			if (timeZoneSensitive) {
-				recStartCal = new GregorianCalendar();
+				recStartCal = CalendarFactoryUtil.getCalendar();
 
 				recStartCal.setTime(startDate.getTime());
 			}
@@ -343,7 +343,7 @@ public class EditEventAction extends PortletAction {
 				Calendar recEndCal = null;
 
 				if (timeZoneSensitive) {
-					recEndCal = new GregorianCalendar();
+					recEndCal = CalendarFactoryUtil.getCalendar();
 
 					recEndCal.setTime(startDate.getTime());
 				}

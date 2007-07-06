@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -98,7 +99,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -370,10 +370,10 @@ public class PortalUtil {
 			Calendar cal = null;
 
 			if (timeZone == null) {
-				cal = new GregorianCalendar();
+				cal = CalendarFactoryUtil.getCalendar();
 			}
 			else {
-				cal = new GregorianCalendar(timeZone);
+				cal = CalendarFactoryUtil.getCalendar(timeZone);
 			}
 
 			if ((hour == -1) || (min == -1)) {
@@ -386,7 +386,7 @@ public class PortalUtil {
 			Date date = cal.getTime();
 
 			/*if (timeZone != null &&
-				cal.before(new GregorianCalendar(timeZone))) {
+				cal.before(CalendarFactoryUtil.getCalendar(timeZone))) {
 
 				throw pe;
 			}*/

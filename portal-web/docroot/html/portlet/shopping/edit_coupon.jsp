@@ -33,7 +33,7 @@ long couponId = BeanParamUtil.getLong(coupon, request, "couponId");
 
 String code = BeanParamUtil.getString(coupon, request, "code");
 
-Calendar startDate = new GregorianCalendar(timeZone, locale);
+Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 if (coupon != null) {
 	if (coupon.getStartDate() != null) {
@@ -43,7 +43,7 @@ if (coupon != null) {
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-Calendar endDate = new GregorianCalendar(timeZone, locale);
+Calendar endDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 endDate.add(Calendar.MONTH, 1);
 

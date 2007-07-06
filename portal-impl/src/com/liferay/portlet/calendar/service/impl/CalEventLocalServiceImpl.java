@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -77,7 +78,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -194,7 +194,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			timeZone = TimeZone.getDefault();
 		}
 
-		Calendar startDate = new GregorianCalendar(timeZone, locale);
+		Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		startDate.set(Calendar.MONTH, startDateMonth);
 		startDate.set(Calendar.DATE, startDateDay);
@@ -204,7 +204,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		startDate.set(Calendar.SECOND, 0);
 		startDate.set(Calendar.MILLISECOND, 0);
 
-		Calendar endDate = new GregorianCalendar(timeZone, locale);
+		Calendar endDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		endDate.set(Calendar.MONTH, endDateMonth);
 		endDate.set(Calendar.DATE, endDateDay);
@@ -324,11 +324,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			User user = UserUtil.findByPrimaryKey(event.getUserId());
 
-			Calendar now = new GregorianCalendar(
+			Calendar now = CalendarFactoryUtil.getCalendar(
 				user.getTimeZone(), user.getLocale());
 
 			if (!event.isTimeZoneSensitive()) {
-				Calendar temp = new GregorianCalendar();
+				Calendar temp = CalendarFactoryUtil.getCalendar();
 
 				temp.setTime(Time.getDate(now));
 
@@ -338,11 +338,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			Calendar startDate = null;
 
 			if (event.isTimeZoneSensitive()) {
-				startDate = new GregorianCalendar(
+				startDate = CalendarFactoryUtil.getCalendar(
 					user.getTimeZone(), user.getLocale());
 			}
 			else {
-				startDate = new GregorianCalendar();
+				startDate = CalendarFactoryUtil.getCalendar();
 			}
 
 			startDate.setTime(event.getStartDate());
@@ -453,7 +453,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			// Time zone insensitive
 
-			Calendar tzICal = new GregorianCalendar(
+			Calendar tzICal = CalendarFactoryUtil.getCalendar(
 				cal.get(Calendar.YEAR),
 				cal.get(Calendar.MONTH),
 				cal.get(Calendar.DATE));
@@ -611,7 +611,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			timeZone = TimeZone.getDefault();
 		}
 
-		Calendar startDate = new GregorianCalendar(timeZone, locale);
+		Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		startDate.set(Calendar.MONTH, startDateMonth);
 		startDate.set(Calendar.DATE, startDateDay);
@@ -621,7 +621,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		startDate.set(Calendar.SECOND, 0);
 		startDate.set(Calendar.MILLISECOND, 0);
 
-		Calendar endDate = new GregorianCalendar(timeZone, locale);
+		Calendar endDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		endDate.set(Calendar.MONTH, endDateMonth);
 		endDate.set(Calendar.DATE, endDateDay);
@@ -712,7 +712,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	protected Calendar getRecurrenceCal(
 		Calendar cal, Calendar tzICal, CalEvent event) {
 
-		Calendar eventCal = new GregorianCalendar();
+		Calendar eventCal = CalendarFactoryUtil.getCalendar();
 		eventCal.setTime(event.getStartDate());
 
 		Calendar recurrenceCal = (Calendar)tzICal.clone();
@@ -1213,7 +1213,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	protected Recurrence toRecurrence(
 		Recur recur, TimeZone timeZone, Calendar startDate) {
 
-		Calendar recStartCal = new GregorianCalendar(timeZone);
+		Calendar recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 		recStartCal.setTime(startDate.getTime());
 
@@ -1331,10 +1331,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			throw new EventDurationException();
 		}
 
-		Calendar startDate = new GregorianCalendar(
+		Calendar startDate = CalendarFactoryUtil.getCalendar(
 			startDateYear, startDateMonth, startDateDay);
 
-		Calendar endDate = new GregorianCalendar(
+		Calendar endDate = CalendarFactoryUtil.getCalendar(
 			endDateYear, endDateMonth, endDateDay);
 
 		if (startDate.after(endDate)) {

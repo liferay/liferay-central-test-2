@@ -161,7 +161,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							Calendar cal = null;
 
 							if (Validator.isNotNull(value)) {
-								cal = new GregorianCalendar();
+								cal = CalendarFactoryUtil.getCalendar();
 
 								cal.setTime(WorkflowXMLUtil.parseDate(value));
 							}

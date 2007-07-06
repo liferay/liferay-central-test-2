@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.reverendfun.util;
 
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.util.ConverterException;
@@ -32,7 +33,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -55,12 +55,12 @@ public class ReverendFunConverter implements WebCacheable {
 			DateFormat dateFormatYMD = new SimpleDateFormat("yyyyMMdd");
 			DateFormat dateFormatYM = new SimpleDateFormat("yyyyMM");
 
-			Calendar cal = new GregorianCalendar();
+			Calendar cal = CalendarFactoryUtil.getCalendar();
 
 			cal.setTime(dateFormatYMD.parse(_date));
 			cal.set(Calendar.DATE, 1);
 
-			Calendar now = new GregorianCalendar();
+			Calendar now = CalendarFactoryUtil.getCalendar();
 
 			String url = "http://www.reverendfun.com/artchives/?search=";
 

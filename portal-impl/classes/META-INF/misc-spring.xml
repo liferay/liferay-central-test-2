@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="com.liferay.portal.util.CalendarFactoryImpl" class="com.liferay.portal.util.CalendarFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil" lazy-init="true">
+		<property name="calendarFactory">
+			<ref bean="com.liferay.portal.util.CalendarFactoryImpl" />
+		</property>
+	</bean>
+</beans>

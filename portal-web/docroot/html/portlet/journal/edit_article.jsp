@@ -63,7 +63,7 @@ String newArticleId = ParamUtil.getString(request, "newArticleId");
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleImpl.DEFAULT_VERSION);
 boolean incrementVersion = ParamUtil.getBoolean(request, "incrementVersion");
 
-Calendar displayDate = new GregorianCalendar(timeZone, locale);
+Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 if (article != null) {
 	if (article.getDisplayDate() != null) {
@@ -73,7 +73,7 @@ if (article != null) {
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-Calendar expirationDate = new GregorianCalendar(timeZone, locale);
+Calendar expirationDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 expirationDate.add(Calendar.YEAR, 1);
 
@@ -87,7 +87,7 @@ if (article != null) {
 
 boolean neverReview = ParamUtil.getBoolean(request, "neverReview", true);
 
-Calendar reviewDate = new GregorianCalendar(timeZone, locale);
+Calendar reviewDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 reviewDate.add(Calendar.MONTH, 9);
 

@@ -26,7 +26,7 @@
 int prefixId = BeanParamUtil.getInteger(contact2, request, "prefixId");
 int suffixId = BeanParamUtil.getInteger(contact2, request, "suffixId");
 
-Calendar birthday = new GregorianCalendar();
+Calendar birthday = CalendarFactoryUtil.getCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
 birthday.set(Calendar.DATE, 1);

@@ -41,7 +41,7 @@ String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");
 String yearParam = request.getParameter("year");
 
-Calendar selCal = new GregorianCalendar(timeZone, locale);
+Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 try {
 	selCal.set(Calendar.YEAR, Integer.parseInt(yearParam));
@@ -77,7 +77,7 @@ int selMonth = selCal.get(Calendar.MONTH);
 int selDay = selCal.get(Calendar.DATE);
 int selYear = selCal.get(Calendar.YEAR);
 
-Calendar curCal = new GregorianCalendar(timeZone, locale);
+Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 int curMonth = curCal.get(Calendar.MONTH);
 int curDay = curCal.get(Calendar.DATE);

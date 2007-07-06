@@ -29,7 +29,8 @@ int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEO
 int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
 int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 
-Calendar sessionTimeoutCal = new GregorianCalendar(timeZone);
+Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
+
 sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutWarningMinute);
 
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));

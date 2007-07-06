@@ -33,7 +33,7 @@ long questionId = BeanParamUtil.getLong(question, request, "questionId");
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-Calendar expirationDate = new GregorianCalendar(timeZone, locale);
+Calendar expirationDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 expirationDate.add(Calendar.MONTH, 1);
 

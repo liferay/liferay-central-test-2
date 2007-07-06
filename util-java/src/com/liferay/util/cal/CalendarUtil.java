@@ -22,6 +22,7 @@
 
 package com.liferay.util.cal;
 
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
@@ -33,7 +34,6 @@ import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -96,11 +96,11 @@ public class CalendarUtil {
 	}
 
 	public static int getAge(Date date, TimeZone tz) {
-		return getAge(date, new GregorianCalendar(tz));
+		return getAge(date, CalendarFactoryUtil.getCalendar(tz));
 	}
 
 	public static int getAge(Date date, Calendar today) {
-		Calendar birthday = new GregorianCalendar();
+		Calendar birthday = CalendarFactoryUtil.getCalendar();
 
 		birthday.setTime(date);
 
@@ -145,7 +145,7 @@ public class CalendarUtil {
 
 			DateFormat dayFormat = new SimpleDateFormat(pattern, locale);
 
-			Calendar cal = new GregorianCalendar();
+			Calendar cal = CalendarFactoryUtil.getCalendar();
 
 			cal.set(Calendar.DATE, 1);
 
@@ -286,7 +286,7 @@ public class CalendarUtil {
 
 			DateFormat monthFormat = new SimpleDateFormat(pattern, locale);
 
-			Calendar cal = new GregorianCalendar();
+			Calendar cal = CalendarFactoryUtil.getCalendar();
 
 			cal.set(Calendar.DATE, 1);
 
@@ -317,7 +317,7 @@ public class CalendarUtil {
 								  int hour2, int minute2, int amPm2,
 								  TimeZone timeZone, Locale locale) {
 
-		Calendar cal1 = new GregorianCalendar(timeZone, locale);
+		Calendar cal1 = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		cal1.set(Calendar.MONTH, month1);
 		cal1.set(Calendar.DATE, day1);
@@ -326,7 +326,7 @@ public class CalendarUtil {
 		cal1.set(Calendar.MINUTE, minute1);
 		cal1.set(Calendar.AM_PM, amPm1);
 
-		Calendar cal2 = new GregorianCalendar(timeZone, locale);
+		Calendar cal2 = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		cal2.set(Calendar.MONTH, month2);
 		cal2.set(Calendar.DATE, day2);
@@ -343,14 +343,14 @@ public class CalendarUtil {
 			return false;
 		}
 
-		Calendar cal1 = new GregorianCalendar();
+		Calendar cal1 = CalendarFactoryUtil.getCalendar();
 
 		cal1.setFirstDayOfWeek(Calendar.MONDAY);
 		cal1.set(Calendar.MONTH, month);
 		cal1.set(Calendar.DATE, day);
 		cal1.set(Calendar.YEAR, year);
 
-		Calendar cal2 = new GregorianCalendar();
+		Calendar cal2 = CalendarFactoryUtil.getCalendar();
 
 		cal2.setFirstDayOfWeek(Calendar.MONDAY);
 		cal2.set(Calendar.MONTH, month + 1);
@@ -379,7 +379,7 @@ public class CalendarUtil {
 	public static boolean isFuture(int month, int year, TimeZone timeZone,
 								   Locale locale) {
 
-		Calendar curCal = new GregorianCalendar(timeZone, locale);
+		Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		curCal.set(Calendar.DATE, 1);
 
@@ -399,7 +399,7 @@ public class CalendarUtil {
 	public static boolean isFuture(int month, int day, int year,
 								   TimeZone timeZone, Locale locale) {
 
-		Calendar curCal = new GregorianCalendar(timeZone, locale);
+		Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		Calendar cal = (Calendar)curCal.clone();
 
@@ -422,7 +422,7 @@ public class CalendarUtil {
 								   int hour, int minute, int amPm,
 								   TimeZone timeZone, Locale locale) {
 
-		Calendar curCal = new GregorianCalendar(timeZone, locale);
+		Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		Calendar cal = (Calendar)curCal.clone();
 

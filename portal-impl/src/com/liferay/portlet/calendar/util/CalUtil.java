@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.util;
 
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ContentUtil;
@@ -35,7 +36,6 @@ import java.io.IOException;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -124,10 +124,10 @@ public class CalUtil {
 		Calendar cal = null;
 
 		if (event.getTimeZoneSensitive()) {
-			cal = new GregorianCalendar(timeZone, locale);
+			cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 		}
 		else {
-			cal = new GregorianCalendar();
+			cal = CalendarFactoryUtil.getCalendar();
 		}
 
 		cal.setTime(event.getStartDate());

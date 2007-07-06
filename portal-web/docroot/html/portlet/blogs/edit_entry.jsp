@@ -47,7 +47,7 @@ if (categoryId > 0) {
 
 String content = BeanParamUtil.getString(entry, request, "content");
 
-Calendar displayDate = new GregorianCalendar(timeZone, locale);
+Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 if (entry != null) {
 	if (entry.getDisplayDate() != null) {

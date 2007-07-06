@@ -33,7 +33,8 @@
 				<%
 				String currentDate = ReverendFunUtil.getCurrentDate();
 
-				Calendar currentCal = new GregorianCalendar();
+				Calendar currentCal = CalendarFactoryUtil.getCalendar();
+
 				currentCal.setTime(dateFormat.parse(currentDate));
 				%>
 

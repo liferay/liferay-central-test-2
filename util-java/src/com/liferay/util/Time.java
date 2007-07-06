@@ -22,13 +22,13 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 /**
@@ -56,7 +56,7 @@ public class Time {
 	public static final String SHORT_TIMESTAMP_FORMAT = "yyyyMMddkkmm";
 
 	public static Date getDate(Calendar cal) {
-		Calendar adjustedCal = new GregorianCalendar();
+		Calendar adjustedCal = CalendarFactoryUtil.getCalendar();
 		adjustedCal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
 		adjustedCal.set(Calendar.MONTH, cal.get(Calendar.MONTH));
 		adjustedCal.set(Calendar.DATE, cal.get(Calendar.DATE));
@@ -69,13 +69,13 @@ public class Time {
 	}
 
 	public static Date getDate(TimeZone tz) {
-		Calendar cal = new GregorianCalendar(tz);
+		Calendar cal = CalendarFactoryUtil.getCalendar(tz);
 
 		return getDate(cal);
 	}
 
 	public static Date getDate(Date date, TimeZone tz) {
-		Calendar cal = new GregorianCalendar(tz);
+		Calendar cal = CalendarFactoryUtil.getCalendar(tz);
 		cal.setTime(date);
 
 		return getDate(cal);

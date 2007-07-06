@@ -46,7 +46,7 @@ if (StateUtil.isStateId(shippingState)) {
 String ccType = ParamUtil.getString(request, "ccType");
 String ccNumber = ParamUtil.getString(request, "ccNumber");
 
-Calendar cal = new GregorianCalendar();
+Calendar cal = CalendarFactoryUtil.getCalendar();
 
 int ccExpMonth = ParamUtil.getInteger(request, "ccExpMonth", cal.get(Calendar.MONTH));
 int ccExpYear = ParamUtil.getInteger(request, "ccExpYear", cal.get(Calendar.YEAR));

@@ -156,7 +156,7 @@ for (int i = 0; i < days.length; i++) {
 				<option value="-1"></option>
 
 				<%
-				Calendar cal = new GregorianCalendar();
+				Calendar cal = CalendarFactoryUtil.getCalendar();
 
 				cal.set(Calendar.HOUR_OF_DAY, 0);
 				cal.set(Calendar.MINUTE, 0);

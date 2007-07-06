@@ -22,6 +22,7 @@
 
 package com.liferay.util.dao;
 
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
@@ -31,7 +32,6 @@ import com.liferay.util.Validator;
 import java.text.DateFormat;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.portlet.PortletRequest;
 
@@ -56,7 +56,7 @@ public class DAOParamUtil {
 		int amPm = ParamUtil.getInteger(req, param + "AmPm");
 
 		if ((month >= 0) && (day > 0) && (year > 0)) {
-			Calendar cal = new GregorianCalendar();
+			Calendar cal = CalendarFactoryUtil.getCalendar();
 
 			if ((hour == -1) || (minute == -1)) {
 				cal.set(year, month, day);
@@ -144,7 +144,7 @@ public class DAOParamUtil {
 		int amPm = ParamUtil.getInteger(req, param + "AmPm");
 
 		if ((month >= 0) && (day > 0) && (year > 0)) {
-			Calendar cal = new GregorianCalendar();
+			Calendar cal = CalendarFactoryUtil.getCalendar();
 
 			if ((hour == -1) || (minute == -1)) {
 				cal.set(year, month, day);

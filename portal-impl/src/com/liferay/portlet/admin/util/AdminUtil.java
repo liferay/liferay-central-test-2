@@ -24,6 +24,7 @@ package com.liferay.portlet.admin.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
@@ -34,7 +35,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.rmi.RemoteException;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.portlet.ActionRequest;
 
@@ -80,7 +80,7 @@ public class AdminUtil {
 
 		Contact contact = user.getContact();
 
-		Calendar birthdayCal = new GregorianCalendar();
+		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
 
 		birthdayCal.setTime(contact.getBirthday());
 

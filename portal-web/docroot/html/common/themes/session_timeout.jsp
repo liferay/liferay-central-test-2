@@ -32,7 +32,7 @@
 	int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 	int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
-	Calendar sessionTimeoutCal = new GregorianCalendar(timeZone);
+	Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 	sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeout * (int)Time.MINUTE);
 	%>

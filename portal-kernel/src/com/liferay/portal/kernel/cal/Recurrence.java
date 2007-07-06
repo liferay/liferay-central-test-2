@@ -30,13 +30,13 @@
 
 package com.liferay.portal.kernel.cal;
 
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 
 import java.io.Serializable;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 /**
@@ -196,7 +196,8 @@ public class Recurrence implements Serializable {
 		}
 
 		if (start == null) {
-			dtStart = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+			dtStart = CalendarFactoryUtil.getCalendar(
+				TimeZone.getTimeZone("GMT"));
 
 			dtStart.setTime(new Date(0L));
 		}

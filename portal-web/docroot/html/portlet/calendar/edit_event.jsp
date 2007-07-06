@@ -35,7 +35,7 @@ Calendar startDate = CalendarUtil.roundByMinutes((Calendar)selCal.clone(), 15);
 
 if (event != null) {
 	if (!event.isTimeZoneSensitive()) {
-		startDate = new GregorianCalendar();
+		startDate = CalendarFactoryUtil.getCalendar();
 	}
 
 	startDate.setTime(event.getStartDate());
@@ -47,7 +47,7 @@ endDate.add(Calendar.YEAR, 1);
 
 if (event != null) {
 	if (!event.isTimeZoneSensitive()) {
-		endDate = new GregorianCalendar();
+		endDate = CalendarFactoryUtil.getCalendar();
 	}
 
 	if (event.getEndDate() != null) {

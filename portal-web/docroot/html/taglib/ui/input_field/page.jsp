@@ -107,7 +107,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			int yearRangeEnd = year + yearRangeDelta;
 
 			if (year == -1) {
-				Calendar now = new GregorianCalendar(timeZone, locale);
+				Calendar now = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 				yearRangeStart = now.get(Calendar.YEAR) - yearRangeDelta;
 				yearRangeEnd = now.get(Calendar.YEAR) + yearRangeDelta;

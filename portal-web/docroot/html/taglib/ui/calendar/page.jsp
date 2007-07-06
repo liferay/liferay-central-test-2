@@ -32,7 +32,7 @@ String headerPattern = (String)request.getAttribute("liferay-ui:calendar:headerP
 DateFormat headerFormat = (DateFormat)request.getAttribute("liferay-ui:calendar:headerFormat");
 Set data = (Set)request.getAttribute("liferay-ui:calendar:data");
 
-Calendar selCal = new GregorianCalendar(timeZone, locale);
+Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 selCal.set(Calendar.MONTH, month);
 selCal.set(Calendar.DATE, day);
@@ -48,7 +48,7 @@ selCal.set(Calendar.DATE, 1);
 int dayOfWeek = selCal.get(Calendar.DAY_OF_WEEK);
 selCal.set(Calendar.DATE, selDay);
 
-Calendar curCal = new GregorianCalendar(timeZone, locale);
+Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 int curMonth = curCal.get(Calendar.MONTH);
 int curDay = curCal.get(Calendar.DATE);

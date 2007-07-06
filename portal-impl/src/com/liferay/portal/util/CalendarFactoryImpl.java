@@ -22,68 +22,51 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.CalendarFactory;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalendarFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class CalendarFactoryImpl implements CalendarFactory {
 
-	static String name = "Liferay Enterprise Portal";
-
-	static String version = "4.3.0";
-
-	static String codeName = "Owen";
-
-	static String build = "4319";
-
-	static String date = "July 6, 2007";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static int RELEASE_4_2_0_BUILD_NUMBER = 3500;
-
-	public static int RELEASE_4_2_1_BUILD_NUMBER = 3501;
-
-	public static int RELEASE_4_2_2_BUILD_NUMBER = 3502;
-
-	public static int RELEASE_4_3_0_BUILD_NUMBER = 4300;
-
-	public static final String getVersion() {
-		return version;
+	public Calendar getCalendar() {
+		return new GregorianCalendar();
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public Calendar getCalendar(int year, int month, int date) {
+		return new GregorianCalendar(year, month, date);
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public Calendar getCalendar(
+		int year, int month, int date, int hour, int minute) {
+
+		return new GregorianCalendar(year, month, date, hour, minute);
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
+	public Calendar getCalendar(
+		int year, int month, int date, int hour, int minute, int second) {
 
-		return GetterUtil.getDate(date, df);
+		return new GregorianCalendar(year, month, date, hour, minute, second);
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public Calendar getCalendar(Locale locale) {
+		return new GregorianCalendar(locale);
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+	public Calendar getCalendar(TimeZone timeZone) {
+		return new GregorianCalendar(timeZone);
+	}
+
+	public Calendar getCalendar(TimeZone timeZone, Locale locale) {
+		return new GregorianCalendar(timeZone, locale);
 	}
 
 }

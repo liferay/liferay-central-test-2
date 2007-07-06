@@ -20,53 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.globalprayerdigest.action;
-
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+package com.liferay.portal.kernel.util;
 
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalendarFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewAction extends com.liferay.portlet.iframe.action.ViewAction {
+public interface CalendarFactory {
 
-	protected String getSrc(RenderRequest req, RenderResponse res) {
-		String src = super.getSrc(req, res);
+	public Calendar getCalendar();
 
-		TimeZone timeZone = TimeZone.getDefault();
+	public Calendar getCalendar(int year, int month, int date);
 
-		try {
-			User user = PortalUtil.getUser(req);
+	public Calendar getCalendar(
+		int year, int month, int date, int hour, int minute);
 
-			timeZone = user.getTimeZone();
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+	public Calendar getCalendar(
+		int year, int month, int date, int hour, int minute, int second);
 
-		Calendar cal = CalendarFactoryUtil.getCalendar(timeZone);
+	public Calendar getCalendar(Locale locale);
 
-		src = src +
-			  "?which=chosenday&whichyear=" + cal.get(Calendar.YEAR) +
-			  "&whichmonth=" + (cal.get(Calendar.MONTH) + 1) +
-			  "&whichday=" + cal.get(Calendar.DATE);
+	public Calendar getCalendar(TimeZone timeZone);
 
-		return src;
-	}
-
-	private static Log _log = LogFactory.getLog(ViewAction.class);
+	public Calendar getCalendar(TimeZone timeZone, Locale locale);
 
 }

@@ -555,7 +555,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 						<span style="padding-left: 5px;" />
 
 						<%
-						Calendar cal = new GregorianCalendar(timeZone, locale);
+						Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 						%>
 
 						<liferay-ui:input-date

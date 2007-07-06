@@ -28,7 +28,7 @@
 User user2 = null;
 Contact contact2 = null;
 
-Calendar birthday = new GregorianCalendar();
+Calendar birthday = CalendarFactoryUtil.getCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
 birthday.set(Calendar.DATE, 1);
