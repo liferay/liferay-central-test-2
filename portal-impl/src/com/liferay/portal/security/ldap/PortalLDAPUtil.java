@@ -290,9 +290,6 @@ public class PortalLDAPUtil {
 		}
 
 		try {
-			Properties userMappings = getUserMappings(companyId);
-			Properties groupMappings = getGroupMappings(companyId);
-
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_BASE_DN);
 			String filter = PrefsPropsUtil.getString(
@@ -305,9 +302,7 @@ public class PortalLDAPUtil {
 			while (enu.hasMore()) {
 				SearchResult result = (SearchResult)enu.next();
 
-				importFromLDAP(
-					companyId, ctx, userMappings, groupMappings, baseDN,
-					result);
+				importUserFromLDAP(companyId, ctx, baseDN, result);
 			}
 		}
 		catch (Exception e) {
@@ -320,10 +315,14 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static User importFromLDAP(
-			long companyId, LdapContext ctx, Properties userMappings,
-			Properties groupMappings, String baseDN, SearchResult result)
+	public static User importUserFromLDAP(
+			long companyId, LdapContext ctx, String baseDN, SearchResult result)
 		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
+		Properties groupMappings = getGroupMappings(companyId);
+
+		LogUtil.debug(_log, userMappings);
 
 		String userDN = result.getName() + StringPool.COMMA + baseDN;
 
@@ -339,6 +338,9 @@ public class PortalLDAPUtil {
 		String password2 = StringPool.BLANK;
 		boolean passwordReset = false;
 		boolean autoScreenName = false;
+
+		// Required fields
+
 		String screenName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("screenName")).toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
@@ -362,6 +364,8 @@ public class PortalLDAPUtil {
 			lastName = names[2];
 		}
 
+		// Additional fields
+		
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
@@ -405,6 +409,8 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		User user = null;
+
+		// Validation
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

@@ -104,12 +104,8 @@ public class NtlmAutoLogin implements AutoLogin {
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_BASE_DN);
 
-		Properties userMappings = PortalLDAPUtil.getUserMappings(companyId);
-		Properties groupMappings =
-			PortalLDAPUtil.getGroupMappings(companyId);
-
-		User user = PortalLDAPUtil.importFromLDAP(
-			companyId, ctx, userMappings, groupMappings, baseDN, result);
+		User user = PortalLDAPUtil.importUserFromLDAP(
+			companyId, ctx, baseDN, result);
 
 		return user;
 	}

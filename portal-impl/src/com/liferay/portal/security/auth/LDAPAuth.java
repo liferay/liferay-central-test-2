@@ -52,6 +52,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
 import javax.naming.ldap.Control;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
@@ -220,9 +221,9 @@ public class LDAPAuth implements Authenticator {
 					_log.debug("Search filter returned at least one result");
 				}
 
-				Binding binding = (Binding)enu.next();
+				SearchResult result = (SearchResult)enu.next();
 
-				Attributes attrs = ctx.getAttributes(binding.getName());
+				Attributes attrs = ctx.getAttributes(result.getName());
 
 				Properties userMappings =
 					PortalLDAPUtil.getUserMappings(companyId);
@@ -232,7 +233,7 @@ public class LDAPAuth implements Authenticator {
 				Attribute userPassword = attrs.get("userPassword");
 
 				LDAPAuthResult ldapAuthResult = authenticate(
-					ctx, env, binding, baseDN, userPassword, companyId,
+					ctx, env, result, baseDN, userPassword, companyId,
 					emailAddress, screenName, userId, password);
 
 				// Process LDAP failure codes
@@ -303,7 +304,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected LDAPAuthResult authenticate(
-			LdapContext ctx, Properties env, Binding binding, String baseDN,
+			LdapContext ctx, Properties env, SearchResult result, String baseDN,
 			Attribute userPassword, long companyId, String emailAddress,
 			String screenName, long userId, String password)
 		throws Exception {
@@ -317,7 +318,7 @@ public class LDAPAuth implements Authenticator {
 		String authMethod = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_AUTH_METHOD);
 
-		String userDN = binding.getName() + StringPool.COMMA + baseDN;
+		String userDN = result.getName() + StringPool.COMMA + baseDN;
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
