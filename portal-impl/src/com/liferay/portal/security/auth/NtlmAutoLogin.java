@@ -29,8 +29,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
-import java.util.Properties;
-
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 

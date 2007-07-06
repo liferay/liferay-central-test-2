@@ -2,29 +2,38 @@ Liferay.Util = {
 	submitCountdown: 0,
 
 	actsAsAspect: function(object) {
-	  object.yield = null;
-	  object.rv    = {};
-	  object.before  = function(method, f) {
-		var original = eval("this." + method);
-		this[method] = function() {
-		  f.apply(this, arguments);
-		  return original.apply(this, arguments);
+		object.yield = null;
+		object.rv = {};
+
+		object.before = function(method, f) {
+			var original = eval("this." + method);
+
+			this[method] = function() {
+				f.apply(this, arguments);
+
+				return original.apply(this, arguments);
+			};
 		};
-	  };
-	  object.after   = function(method, f) {
-		var original = eval("this." + method);
-		this[method] = function() {
-		  this.rv[method] = original.apply(this, arguments);
-		  return f.apply(this, arguments);
+
+		object.after = function(method, f) {
+			var original = eval("this." + method);
+
+			this[method] = function() {
+				this.rv[method] = original.apply(this, arguments);
+
+				return f.apply(this, arguments);
+			};
 		};
-	  };
-	  object.around  = function(method, f) {
-		var original = eval("this." + method);
-		this[method] = function() {
-		  this.yield = original;
-		  return f.apply(this, arguments);
+
+		object.around = function(method, f) {
+			var original = eval("this." + method);
+
+			this[method] = function() {
+				this.yield = original;
+
+				return f.apply(this, arguments);
+			};
 		};
-	  };
 	},
 
 	addEventHandler: function(obj, type, func) {
@@ -722,6 +731,7 @@ Liferay.Util = {
 		if (!checkBox.is(':checked')){
 			toggleBox.hide();
 		}
+
 		checkBox.click(
 			function(){
 				toggleBox.toggle();
@@ -763,7 +773,7 @@ Liferay.Util = {
 			});
 		}
 
-        return rt;
+		return rt;
 	}
 };
 
@@ -1007,7 +1017,7 @@ var Viewport = {
 			y = document.body.scrollHeight;
 		}
 		else // Explorer Mac;
-		    //would also work in Explorer 6 Strict, Mozilla and Safari
+			//would also work in Explorer 6 Strict, Mozilla and Safari
 		{
 			x = document.body.offsetWidth;
 			y = document.body.offsetHeight;

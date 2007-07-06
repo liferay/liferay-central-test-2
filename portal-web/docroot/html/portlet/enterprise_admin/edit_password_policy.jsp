@@ -42,30 +42,15 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />toggleBoxes(checkBoxId, toggleBoxId) {
-		var checkBox = jQuery('#<portlet:namespace />' + checkBoxId);
-		var toggleBox = jQuery('#<portlet:namespace />' + toggleBoxId);
-
-		if (!checkBox.is(':checked')){
-			toggleBox.hide();
-		}
-
-		checkBox.click(
-			function(){
-				toggleBox.toggle();
-			}
-		);
-	}
-
 	jQuery(
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= defaultPolicy ? "description" : "name" %>.focus();
 
-			<portlet:namespace />toggleBoxes('changeableCheckbox', 'changeableSettings');
-			<portlet:namespace />toggleBoxes('checkSyntaxCheckbox', 'syntaxSettings');
-			<portlet:namespace />toggleBoxes('historyCheckbox', 'historySettings');
-			<portlet:namespace />toggleBoxes('expireableCheckbox', 'expirationSettings');
-			<portlet:namespace />toggleBoxes('lockoutCheckbox', 'lockoutSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />changeableCheckbox', '<portlet:namespace />changeableSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />checkSyntaxCheckbox', '<portlet:namespace />syntaxSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />historyCheckbox', '<portlet:namespace />historySettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />expireableCheckbox', '<portlet:namespace />expirationSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />lockoutCheckbox', '<portlet:namespace />lockoutSettings');
 		}
 	);
 </script>

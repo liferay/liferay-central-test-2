@@ -135,24 +135,9 @@ portletURL.setParameter("tabs3", tabs3);
 		}
 	}
 
-	function <portlet:namespace />toggleBoxes(checkBoxId, toggleBoxId) {
-		var checkBox = jQuery('#<portlet:namespace />' + checkBoxId);
-		var toggleBox = jQuery('#<portlet:namespace />' + toggleBoxId);
-
-		if (!checkBox.is(':checked')){
-			toggleBox.hide();
-		}
-
-		checkBox.click(
-			function(){
-				toggleBox.toggle();
-			}
-		);
-	}
-
 	jQuery(
 		function() {
-			<portlet:namespace />toggleBoxes('importEnabledCheckbox', 'importEnabledSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />importEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
 		}
 	);
 </script>
@@ -1047,50 +1032,51 @@ portletURL.setParameter("tabs3", tabs3);
 									</td>
 								</tr>
 								<tbody id="<portlet:namespace />importEnabledSettings">
-								<tr>
-									<td>
-										<liferay-ui:message key="import-on-startup-enabled" />
-									</td>
-									<td>
-										<liferay-ui:input-checkbox param="importOnStartup" defaultValue='<%= ParamUtil.getBoolean(request, "importOnStartup", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ON_STARTUP)) %>' />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<liferay-ui:message key="import-interval" />
-									</td>
-									<td>
-										<%
-											long importInterval = ParamUtil.getLong(request, "importInterval", PrefsPropsUtil.getLong(company.getCompanyId(), PropsUtil.LDAP_IMPORT_INTERVAL));
-										%>
+									<tr>
+										<td>
+											<liferay-ui:message key="import-on-startup-enabled" />
+										</td>
+										<td>
+											<liferay-ui:input-checkbox param="importOnStartup" defaultValue='<%= ParamUtil.getBoolean(request, "importOnStartup", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ON_STARTUP)) %>' />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<liferay-ui:message key="import-interval" />
+										</td>
+										<td>
 
-										<select name="<portlet:namespace />importInterval">
-											<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
-											<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
-											<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
-											<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
-											<option value="60" <%= (importInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
-											<option value="120" <%= (importInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
-											<option value="180" <%= (importInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<liferay-ui:message key="import-user-search-filter" />
-									</td>
-									<td>
-										<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<liferay-ui:message key="import-group-search-filter" />
-									</td>
-									<td>
-										<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
-									</td>
-								</tr>
+											<%
+											long importInterval = ParamUtil.getLong(request, "importInterval", PrefsPropsUtil.getLong(company.getCompanyId(), PropsUtil.LDAP_IMPORT_INTERVAL));
+											%>
+
+											<select name="<portlet:namespace />importInterval">
+												<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
+												<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
+												<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
+												<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
+												<option value="60" <%= (importInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
+												<option value="120" <%= (importInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
+												<option value="180" <%= (importInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<liferay-ui:message key="import-user-search-filter" />
+										</td>
+										<td>
+											<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<liferay-ui:message key="import-group-search-filter" />
+										</td>
+										<td>
+											<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
+										</td>
+									</tr>
 								</tbody>
 								</table>
 							</liferay-ui:section>

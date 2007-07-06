@@ -338,9 +338,6 @@ public class PortalLDAPUtil {
 		String password2 = StringPool.BLANK;
 		boolean passwordReset = false;
 		boolean autoScreenName = false;
-
-		// Required fields
-
 		String screenName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("screenName")).toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
@@ -364,8 +361,6 @@ public class PortalLDAPUtil {
 			lastName = names[2];
 		}
 
-		// Additional fields
-		
 		int prefixId = 0;
 		int suffixId = 0;
 		boolean male = true;
@@ -409,8 +404,6 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		User user = null;
-
-		// Validation
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -566,7 +559,7 @@ public class PortalLDAPUtil {
 			String description = LDAPUtil.getAttributeValue(
 				groupAttrs, groupMappings.getProperty("description"));
 
-			// Get associated portal usergroup
+			// Get associated user group
 
 			UserGroup userGroup = null;
 
@@ -595,7 +588,7 @@ public class PortalLDAPUtil {
 				}
 			}
 
-			// Add user to usergroup
+			// Add user to user group
 
 			if (userGroup != null) {
 				if (_log.isDebugEnabled()) {
