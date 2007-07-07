@@ -532,9 +532,9 @@
 		<portlet-preferences>
 			<preference>
 				<name>priorities</name>
-				<value>Urgent,/message_boards/priority_urgent.gif,3.0</value>
-				<value>Sticky,/message_boards/priority_sticky.gif,2.0</value>
-				<value>Announcement,/message_boards/priority_announcement.gif,1.0</value>
+				<value>Urgent,/message_boards/priority_urgent.png,3.0</value>
+				<value>Sticky,/message_boards/priority_sticky.png,2.0</value>
+				<value>Announcement,/message_boards/priority_announcement.png,1.0</value>
 			</preference>
 			<preference>
 				<name>ranks</name>
