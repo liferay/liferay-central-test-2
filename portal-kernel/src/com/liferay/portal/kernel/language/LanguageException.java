@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.language;
+package com.liferay.portal.kernel.language;
 
 import com.liferay.portal.PortalException;
 

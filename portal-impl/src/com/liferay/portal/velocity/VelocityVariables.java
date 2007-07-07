@@ -22,9 +22,9 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.language.LanguageUtil_IW;
-import com.liferay.portal.language.UnicodeLanguageUtil_IW;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.AccountPermission_IW;
@@ -243,8 +243,8 @@ public class VelocityVariables {
 
 		// Language util
 
-		vc.put("languageUtil", LanguageUtil_IW.getInstance());
-		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil_IW.getInstance());
+		vc.put("languageUtil", LanguageUtil.getLanguage());
+		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
 
 		// Portal util
 

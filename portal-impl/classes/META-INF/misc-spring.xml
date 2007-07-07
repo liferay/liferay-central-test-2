@@ -2,6 +2,18 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="com.liferay.portal.language.LanguageImpl" class="com.liferay.portal.language.LanguageImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil" lazy-init="true">
+		<property name="language">
+			<ref bean="com.liferay.portal.language.LanguageImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.language.UnicodeLanguageImpl" class="com.liferay.portal.language.UnicodeLanguageImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.language.UnicodeLanguageUtil" class="com.liferay.portal.kernel.language.UnicodeLanguageUtil" lazy-init="true">
+		<property name="unicodeLanguage">
+			<ref bean="com.liferay.portal.language.UnicodeLanguageImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.util.CalendarFactoryImpl" class="com.liferay.portal.util.CalendarFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil" lazy-init="true">
 		<property name="calendarFactory">

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.language.action;
 
-import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;

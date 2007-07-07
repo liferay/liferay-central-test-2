@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.language;
+package com.liferay.portal.kernel.language;
 
 /**
  * <a href="LanguageWrapper.java.html"><b><i>View Source</i></b></a>

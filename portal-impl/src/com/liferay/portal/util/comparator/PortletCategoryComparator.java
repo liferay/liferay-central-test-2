@@ -22,8 +22,8 @@
 
 package com.liferay.portal.util.comparator;
 
-import com.liferay.portal.language.LanguageException;
-import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.kernel.language.LanguageException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.model.PortletCategory;
 
 import java.io.Serializable;

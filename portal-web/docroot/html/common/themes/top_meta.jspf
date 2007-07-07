@@ -22,7 +22,7 @@
  */
 %>
 
-<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.DEFAULT_ENCODING %>" http-equiv="content-type" />
+<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageImpl.DEFAULT_ENCODING %>" http-equiv="content-type" />
 
 <%
 String refreshRate = request.getParameter("refresh_rate");

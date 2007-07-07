@@ -22,9 +22,9 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.language.LanguageException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageException;
-import com.liferay.portal.language.LanguageUtil;
 
 import java.text.DateFormat;
 import java.text.FieldPosition;

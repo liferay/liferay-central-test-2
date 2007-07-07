@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;

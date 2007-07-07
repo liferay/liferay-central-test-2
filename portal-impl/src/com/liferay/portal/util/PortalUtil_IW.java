@@ -335,7 +335,7 @@ public class PortalUtil_IW {
 
 	public java.lang.String getPortletTitle(java.lang.String portletId,
 		com.liferay.portal.model.User user)
-		throws com.liferay.portal.language.LanguageException {
+		throws com.liferay.portal.kernel.language.LanguageException {
 		return PortalUtil.getPortletTitle(portletId, user);
 	}
 

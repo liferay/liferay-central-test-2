@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 

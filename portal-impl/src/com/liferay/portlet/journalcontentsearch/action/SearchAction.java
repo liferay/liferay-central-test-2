@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.journalcontentsearch.action;
 
-import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -54,8 +53,6 @@ public class SearchAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		User user = themeDisplay.getUser();
-
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
 
@@ -64,7 +61,10 @@ public class SearchAction extends PortletAction {
 		String portletId = configImpl.getPortletId();
 
 		if (!layoutTypePortlet.hasPortletId(portletId)) {
-			res.setTitle(LanguageUtil.get(user, "search"));
+			res.setTitle(
+				LanguageUtil.get(
+					themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+					"search"));
 		}
 
 		return mapping.findForward("portlet.journal_content_search.search");

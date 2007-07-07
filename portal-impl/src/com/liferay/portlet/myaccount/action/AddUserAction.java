@@ -37,7 +37,7 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
-import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -122,9 +122,10 @@ public class AddUserAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		User user = themeDisplay.getUser();
-
-		res.setTitle(LanguageUtil.get(user, "create-account"));
+		res.setTitle(
+			LanguageUtil.get(
+				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+				"create-account"));
 
 		return mapping.findForward("portlet.my_account.create_account");
 	}

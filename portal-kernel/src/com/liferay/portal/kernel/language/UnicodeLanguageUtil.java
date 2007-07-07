@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.language;
+package com.liferay.portal.kernel.language;
 
-import com.liferay.portal.model.User;
-import com.liferay.util.UnicodeFormatter;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import java.util.Locale;
 
@@ -37,29 +36,27 @@ import javax.servlet.jsp.PageContext;
  */
 public class UnicodeLanguageUtil {
 
-	public static String get(User user, String key) throws LanguageException {
-		return UnicodeFormatter.toString(LanguageUtil.get(user, key));
-	}
-
-	public static String get(long companyId, Locale locale, String key)
+	public static String format(
+			long companyId, Locale locale, String pattern, Object argument)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(
-			LanguageUtil.get(companyId, locale, key));
+		return getUnicodeLanguage().format(
+			companyId, locale, pattern, argument);
 	}
 
-	public static String get(PageContext pageContext, String key)
+	public static String format(
+			long companyId, Locale locale, String pattern, Object[] arguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.get(pageContext, key));
+		return getUnicodeLanguage().format(
+			companyId, locale, pattern, arguments);
 	}
 
 	public static String format(
 			PageContext pageContext, String pattern, Object argument)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, argument));
+		return getUnicodeLanguage().format(pageContext, pattern, argument);
 	}
 
 	public static String format(
@@ -67,16 +64,15 @@ public class UnicodeLanguageUtil {
 			boolean translateArguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, argument, translateArguments));
+		return getUnicodeLanguage().format(
+			pageContext, pattern, argument, translateArguments);
 	}
 
 	public static String format(
 			PageContext pageContext, String pattern, Object[] arguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, arguments));
+		return getUnicodeLanguage().format(pageContext, pattern, arguments);
 	}
 
 	public static String format(
@@ -84,16 +80,15 @@ public class UnicodeLanguageUtil {
 			boolean translateArguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, arguments, translateArguments));
+		return getUnicodeLanguage().format(
+			pageContext, pattern, arguments, translateArguments);
 	}
 
 	public static String format(
 			PageContext pageContext, String pattern, LanguageWrapper argument)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, argument));
+		return getUnicodeLanguage().format(pageContext, pattern, argument);
 	}
 
 	public static String format(
@@ -101,8 +96,8 @@ public class UnicodeLanguageUtil {
 			boolean translateArguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, argument, translateArguments));
+		return getUnicodeLanguage().format(
+			pageContext, pattern, argument, translateArguments);
 	}
 
 	public static String format(
@@ -110,8 +105,7 @@ public class UnicodeLanguageUtil {
 			LanguageWrapper[] arguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, arguments));
+		return getUnicodeLanguage().format(pageContext, pattern, arguments);
 	}
 
 	public static String format(
@@ -119,24 +113,72 @@ public class UnicodeLanguageUtil {
 			LanguageWrapper[] arguments, boolean translateArguments)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			pageContext, pattern, arguments, translateArguments));
+		return getUnicodeLanguage().format(
+			pageContext, pattern, arguments, translateArguments);
+	}
+
+	public static String get(long companyId, Locale locale, String key)
+		throws LanguageException {
+
+		return getUnicodeLanguage().get(companyId, locale, key);
+	}
+
+	public static String get(
+			long companyId, Locale locale, String key, String defaultValue)
+		throws LanguageException {
+
+		return getUnicodeLanguage().get(companyId, locale, key, defaultValue);
+	}
+
+	public static String get(PageContext pageContext, String key)
+		throws LanguageException {
+
+		return getUnicodeLanguage().get(pageContext, key);
+	}
+
+	public static String get(
+			PageContext pageContext, String key, String defaultValue)
+		throws LanguageException {
+
+		return getUnicodeLanguage().get(pageContext, key, defaultValue);
 	}
 
 	public static String getTimeDescription(
 			PageContext pageContext, Long milliseconds)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.getTimeDescription(
-			pageContext, milliseconds));
+		return getUnicodeLanguage().getTimeDescription(
+			pageContext, milliseconds);
 	}
 
 	public static String getTimeDescription(
 			PageContext pageContext, long milliseconds)
 		throws LanguageException {
 
-		return UnicodeFormatter.toString(LanguageUtil.getTimeDescription(
-			pageContext, milliseconds));
+		return getUnicodeLanguage().getTimeDescription(
+			pageContext, milliseconds);
 	}
+
+	public static UnicodeLanguage getUnicodeLanguage() {
+		return _getUtil()._unicodeLanguage;
+	}
+
+	public void setUnicodeLanguage(UnicodeLanguage unicodeLanguage) {
+		_unicodeLanguage = unicodeLanguage;
+	}
+
+	private static UnicodeLanguageUtil _getUtil() {
+		if (_util == null) {
+			_util = (UnicodeLanguageUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = UnicodeLanguageUtil.class.getName();
+
+	private static UnicodeLanguageUtil _util;
+
+	private UnicodeLanguage _unicodeLanguage;
 
 }

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.currencyconverter.util;
 
+import com.liferay.portal.kernel.language.LanguageException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageException;
-import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.currencyconverter.model.Currency;

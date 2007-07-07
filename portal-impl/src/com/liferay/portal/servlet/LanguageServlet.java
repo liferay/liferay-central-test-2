@@ -22,8 +22,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.HttpHeaders;

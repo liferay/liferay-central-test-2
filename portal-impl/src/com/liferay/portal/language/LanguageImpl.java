@@ -22,11 +22,11 @@
 
 package com.liferay.portal.language;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.language.Language;
+import com.liferay.portal.kernel.language.LanguageException;
+import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -64,24 +64,24 @@ import org.apache.struts.taglib.TagUtils;
 import org.apache.struts.util.MessageResources;
 
 /**
- * <a href="LanguageUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="LanguageImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Andrius Vitkauskas
  *
  */
-public class LanguageUtil {
+public class LanguageImpl implements Language {
 
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
-	public static String format(
+	public String format(
 			long companyId, Locale locale, String pattern, Object argument)
 		throws LanguageException {
 
 		return format(companyId, locale, pattern, new Object[] {argument});
 	}
 
-	public static String format(
+	public String format(
 			long companyId, Locale locale, String pattern, Object[] arguments)
 		throws LanguageException {
 
@@ -111,14 +111,14 @@ public class LanguageUtil {
 		return value;
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern, Object argument)
 		throws LanguageException {
 
 		return format(pageContext, pattern, new Object[] {argument}, true);
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern, Object argument,
 			boolean translateArguments)
 		throws LanguageException {
@@ -127,14 +127,14 @@ public class LanguageUtil {
 			pageContext, pattern, new Object[] {argument}, translateArguments);
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern, Object[] arguments)
 		throws LanguageException {
 
 		return format(pageContext, pattern, arguments, true);
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern, Object[] arguments,
 			boolean translateArguments)
 		throws LanguageException {
@@ -170,7 +170,7 @@ public class LanguageUtil {
 		return value;
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern, LanguageWrapper argument)
 		throws LanguageException {
 
@@ -178,7 +178,7 @@ public class LanguageUtil {
 			pageContext, pattern, new LanguageWrapper[] {argument}, true);
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern, LanguageWrapper argument,
 			boolean translateArguments)
 		throws LanguageException {
@@ -188,7 +188,7 @@ public class LanguageUtil {
 			translateArguments);
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern,
 			LanguageWrapper[] arguments)
 		throws LanguageException {
@@ -196,7 +196,7 @@ public class LanguageUtil {
 		return format(pageContext, pattern, arguments, true);
 	}
 
-	public static String format(
+	public String format(
 			PageContext pageContext, String pattern,
 			LanguageWrapper[] arguments, boolean translateArguments)
 		throws LanguageException {
@@ -237,23 +237,13 @@ public class LanguageUtil {
 		return value;
 	}
 
-	public static String get(User user, String key) throws LanguageException {
-		return get(user, key, key);
-	}
-
-	public static String get(User user, String key, String defaultValue)
-		throws LanguageException {
-
-		return get(user.getCompanyId(), user.getLocale(), key, defaultValue);
-	}
-
-	public static String get(long companyId, Locale locale, String key)
+	public String get(long companyId, Locale locale, String key)
 		throws LanguageException {
 
 		return get(companyId, locale, key, key);
 	}
 
-	public static String get(
+	public String get(
 			long companyId, Locale locale, String key, String defaultValue)
 		throws LanguageException {
 
@@ -280,14 +270,13 @@ public class LanguageUtil {
 		return value;
 	}
 
-	public static String get(PageContext pageContext, String key)
+	public String get(PageContext pageContext, String key)
 		throws LanguageException {
 
 		return get(pageContext, key, key);
 	}
 
-	public static String get(
-			PageContext pageContext, String key, String defaultValue)
+	public String get(PageContext pageContext, String key, String defaultValue)
 		throws LanguageException {
 
 		if (key == null) {
@@ -336,31 +325,27 @@ public class LanguageUtil {
 		return value;
 	}
 
-	public static Locale[] getAvailableLocales() {
+	public Locale[] getAvailableLocales() {
 		return _getInstance()._locales;
 	}
 
-	public static String getCharset(Locale locale) {
+	public String getCharset(Locale locale) {
 		return _getInstance()._getCharset(locale);
 	}
 
-	public static String getLanguageId(ActionRequest req)
-		throws PortalException, SystemException {
-
+	public String getLanguageId(ActionRequest req) {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return getLanguageId(httpReq);
 	}
 
-	public static String getLanguageId(RenderRequest req)
-		throws PortalException, SystemException {
-
+	public String getLanguageId(RenderRequest req) {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return getLanguageId(httpReq);
 	}
 
-	public static String getLanguageId(HttpServletRequest req) {
+	public String getLanguageId(HttpServletRequest req) {
 		String languageId = ParamUtil.getString(req, "languageId");
 
 		if (Validator.isNotNull(languageId)) {
@@ -382,23 +367,21 @@ public class LanguageUtil {
 		return getLanguageId(locale);
 	}
 
-	public static String getLanguageId(Locale locale) {
+	public String getLanguageId(Locale locale) {
 		return LocaleUtil.toLanguageId(locale);
 	}
 
-	public static Locale getLocale(String languageCode) {
+	public Locale getLocale(String languageCode) {
 		return _getInstance()._getLocale(languageCode);
 	}
 
-	public static String getTimeDescription(
-			PageContext pageContext, Long milliseconds)
+	public String getTimeDescription(PageContext pageContext, Long milliseconds)
 		throws LanguageException {
 
 		return getTimeDescription(pageContext, milliseconds.longValue());
 	}
 
-	public static String getTimeDescription(
-			PageContext pageContext, long milliseconds)
+	public String getTimeDescription(PageContext pageContext, long milliseconds)
 		throws LanguageException {
 
 		String desc = Time.getDescription(milliseconds);
@@ -423,7 +406,7 @@ public class LanguageUtil {
 		return value;
 	}
 
-	public static void updateCookie(HttpServletResponse res, Locale locale) {
+	public void updateCookie(HttpServletResponse res, Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		Cookie languageIdCookie = new Cookie(
@@ -435,13 +418,13 @@ public class LanguageUtil {
 		CookieKeys.addCookie(res, languageIdCookie);
 	}
 
-	private static LanguageUtil _getInstance() {
+	private static LanguageImpl _getInstance() {
 		Long companyIdObj = new Long(CompanyThreadLocal.getCompanyId());
 
-		LanguageUtil instance = (LanguageUtil)_instances.get(companyIdObj);
+		LanguageImpl instance = (LanguageImpl)_instances.get(companyIdObj);
 
 		if (instance == null) {
-			instance = new LanguageUtil();
+			instance = new LanguageImpl();
 
 			_instances.put(companyIdObj, instance);
 		}
@@ -449,7 +432,7 @@ public class LanguageUtil {
 		return instance;
 	}
 
-	private LanguageUtil() {
+	private LanguageImpl() {
 		String[] array = StringUtil.split(
 			PropsUtil.get(PropsUtil.LOCALES), StringPool.COMMA);
 
@@ -481,7 +464,7 @@ public class LanguageUtil {
 		return (Locale)_localesByLanguageCode.get(languageCode);
 	}
 
-	private static Log _log = LogFactory.getLog(LanguageUtil.class);
+	private static Log _log = LogFactory.getLog(LanguageImpl.class);
 
 	private static Map _instances = CollectionFactory.getSyncHashMap();
 

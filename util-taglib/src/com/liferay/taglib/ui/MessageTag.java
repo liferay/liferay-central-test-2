@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;

@@ -22,8 +22,7 @@
 
 package com.liferay.portlet.polls.action;
 
-import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.model.User;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
@@ -66,17 +65,20 @@ public class ViewChartAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			User user = themeDisplay.getUser();
-
 			long questionId = ParamUtil.getLong(req, "questionId");
 
 			String chartType = ParamUtil.getString(req, "chartType", "pie");
 
 			CategoryDataset dataset = PollsUtil.getVotesDataset(questionId);
 
-			String chartName = LanguageUtil.get(user, "vote-results");
-			String xName = LanguageUtil.get(user, "choice");
-			String yName = LanguageUtil.get(user, "votes");
+			String chartName = LanguageUtil.get(
+				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+				"vote-results");
+			String xName = LanguageUtil.get(
+				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+				"choice");
+			String yName = LanguageUtil.get(
+				themeDisplay.getCompanyId(), themeDisplay.getLocale(), "votes");
 
 			JFreeChart chart = null;
 

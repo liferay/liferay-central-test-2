@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;

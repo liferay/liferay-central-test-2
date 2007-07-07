@@ -3,14 +3,6 @@
 <instance-wrappers>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/language/LanguageUtil.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/language/UnicodeLanguageUtil.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
 		src-file="com/liferay/portal/service/permission/AccountPermission.java"
 	/>
 	<instance-wrapper
