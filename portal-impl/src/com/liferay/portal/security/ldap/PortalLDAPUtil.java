@@ -293,10 +293,10 @@ public class PortalLDAPUtil {
 			return;
 		}
 
-		String importMethod = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_IMPORT_METHOD);		
-		
 		try {
+			String importMethod = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_METHOD);
+
 			if (importMethod.equals(IMPORT_BY_USER)) {
 				String baseDN = PrefsPropsUtil.getString(
 					companyId, PropsUtil.LDAP_BASE_DN);
@@ -556,7 +556,7 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		Properties groupMappings = getGroupMappings(companyId);
-		
+
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 			companyId);
 
