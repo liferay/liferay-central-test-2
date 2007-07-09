@@ -327,6 +327,8 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_GROUP_SEARCH_FILTER = "ldap.import.group.search.filter";
 
+	public static final String LDAP_IMPORT_METHOD = "ldap.import.method";
+	
 	public static final String LDAP_EXPORT_ENABLED = "ldap.export.enabled";
 
 	public static final String LDAP_PASSWORD_POLICY_ENABLED = "ldap.password.policy.enabled";

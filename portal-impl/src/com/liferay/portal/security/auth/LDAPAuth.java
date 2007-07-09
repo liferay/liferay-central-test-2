@@ -480,7 +480,7 @@ public class LDAPAuth implements Authenticator {
 		boolean checkExists = true;
 		boolean updatePassword = true;
 
-		return PortalLDAPUtil.importFromLDAP(
+		return PortalLDAPUtil.importUserFromLDAP(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, prefixId, suffixId, male,

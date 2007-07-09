@@ -72,6 +72,10 @@ import javax.naming.ldap.LdapContext;
  */
 public class PortalLDAPUtil {
 
+	public static final String IMPORT_BY_USER = "user";
+
+	public static final String IMPORT_BY_GROUP = "group";
+
 	public static void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
 
@@ -289,20 +293,27 @@ public class PortalLDAPUtil {
 			return;
 		}
 
+		String importMethod = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_IMPORT_METHOD);		
+		
 		try {
-			String baseDN = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_BASE_DN);
-			String filter = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
-			SearchControls cons = new SearchControls(
-				SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+			if (importMethod.equals(IMPORT_BY_USER)) {
+				String baseDN = PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_BASE_DN);
+				String filter = PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
+				SearchControls cons = new SearchControls(
+					SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
 
-			NamingEnumeration enu = ctx.search(baseDN, filter, cons);
+				NamingEnumeration enu = ctx.search(baseDN, filter, cons);
 
-			while (enu.hasMore()) {
-				SearchResult result = (SearchResult)enu.next();
+				// Loop through all users in LDAP
 
-				importUserFromLDAP(companyId, ctx, baseDN, result);
+				while (enu.hasMore()) {
+					SearchResult result = (SearchResult)enu.next();
+
+					importUserFromLDAP(companyId, ctx, baseDN, result);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -320,7 +331,6 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		Properties userMappings = getUserMappings(companyId);
-		Properties groupMappings = getGroupMappings(companyId);
 
 		LogUtil.debug(_log, userMappings);
 
@@ -373,7 +383,7 @@ public class PortalLDAPUtil {
 		long locationId = 0;
 		boolean sendEmail = false;
 
-		User user = importFromLDAP(
+		User user = importUserFromLDAP(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, prefixId, suffixId, male,
@@ -384,15 +394,15 @@ public class PortalLDAPUtil {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
 
 			if (attr != null){
-				_importToLDAPGroup(
-					companyId, ctx, groupMappings, user.getUserId(), attr);
+				_importGroupsFromLDAPUser(
+					companyId, ctx, user.getUserId(), attr);
 			}
 		}
 
 		return user;
 	}
 
-	public static User importFromLDAP(
+	public static User importUserFromLDAP(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean passwordReset,
 			boolean autoScreenName, String screenName, String emailAddress,
@@ -541,11 +551,12 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	private static void _importToLDAPGroup(
-			long companyId, LdapContext ctx, Properties groupMappings,
-			long userId, Attribute attr)
+	private static void _importGroupsFromLDAPUser(
+			long companyId, LdapContext ctx, long userId, Attribute attr)
 		throws Exception {
 
+		Properties groupMappings = getGroupMappings(companyId);
+		
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 			companyId);
 
