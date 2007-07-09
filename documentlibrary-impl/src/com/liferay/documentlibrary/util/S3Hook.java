@@ -42,7 +42,10 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.id.uuid.UUID;
 import org.apache.commons.logging.Log;
@@ -225,7 +228,18 @@ public class S3Hook extends BaseHook {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return 0;
+		try {
+			double version = getHeadVersionNumber(
+				companyId, repositoryId, fileName);
+
+			S3Object objectDetails = _s3Service.getObjectDetails(
+				_s3Bucket, getKey(companyId, repositoryId, fileName, version));
+
+			return objectDetails.getContentLength();
+		}
+		catch (S3ServiceException s3se) {
+			throw new SystemException(s3se);
+		}
 	}
 
 	public boolean hasFile(
@@ -254,6 +268,50 @@ public class S3Hook extends BaseHook {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
+		long companyId = GetterUtil.getLong(ids[0]);
+		String portletId = ids[1];
+		long groupId = GetterUtil.getLong(ids[2]);
+		long repositoryId = GetterUtil.getLong(ids[3]);
+
+		try {
+			S3Object[] searchObjects = _s3Service.listObjects(
+				_s3Bucket, getKey(companyId, repositoryId), null);
+
+			Set fileNameSet = new HashSet();
+
+			for (int i = 0; i < searchObjects.length; i++) {
+				S3Object currentObject = searchObjects[i];
+
+				String fileName = (String)getFileName(currentObject.getKey());
+
+				fileNameSet.add(fileName);
+			}
+
+			Iterator itr = fileNameSet.iterator();
+
+			while (itr.hasNext()) {
+				String fileName = (String)itr.next();
+
+				Indexer.addFile(
+					companyId, portletId, groupId, repositoryId, fileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new SearchException(ioe);
+		}
+		catch (S3ServiceException s3se) {
+			throw new SearchException(s3se);
+		}
+	}
+
+	protected Object getFileName(String key) {
+		int x = key.indexOf(StringPool.SLASH);
+
+		x = key.indexOf(StringPool.SLASH, x + 1);
+
+		int y = key.lastIndexOf(StringPool.SLASH);
+
+		return key.substring(x + 1, y);
 	}
 
 	public void updateFile(
@@ -352,15 +410,12 @@ public class S3Hook extends BaseHook {
 	}
 
 	protected AWSCredentials getAWSCredentials() throws S3ServiceException {
-		String awsAccessKey = PropsUtil.get(PropsUtil.DL_HOOK_S3_ACCESS_KEY);
-		String awsSecretKey = PropsUtil.get(PropsUtil.DL_HOOK_S3_SECRET_KEY);
-
-		if (Validator.isNull(awsAccessKey) || Validator.isNull(awsSecretKey)) {
+		if (Validator.isNull(_ACCESS_KEY) || Validator.isNull(_SECRET_KEY)) {
 			throw new S3ServiceException(
 				"S3 access and secret keys are not set");
 		}
 		else {
-			return new AWSCredentials(awsAccessKey, awsSecretKey);
+			return new AWSCredentials(_ACCESS_KEY, _SECRET_KEY);
 		}
 	}
 
@@ -438,7 +493,12 @@ public class S3Hook extends BaseHook {
 	}
 
 	protected S3Bucket getS3Bucket() throws S3ServiceException {
-		return getS3Service().createBucket("liferay.inc");
+		if (Validator.isNull(_BUCKET_NAME)) {
+			throw new S3ServiceException("S3 bucket name is not set");
+		}
+		else {
+			return getS3Service().createBucket(_BUCKET_NAME);
+		}
 	}
 
 	protected S3Service getS3Service() throws S3ServiceException {
@@ -446,6 +506,15 @@ public class S3Hook extends BaseHook {
 
 		return new RestS3Service(credentials);
 	}
+
+	private static final String _ACCESS_KEY = PropsUtil.get(
+		PropsUtil.DL_HOOK_S3_ACCESS_KEY);
+
+	private static final String _SECRET_KEY = PropsUtil.get(
+		PropsUtil.DL_HOOK_S3_SECRET_KEY);
+
+	private static final String _BUCKET_NAME = PropsUtil.get(
+		PropsUtil.DL_HOOK_S3_BUCKET_NAME);
 
 	private static Log _log = LogFactory.getLog(S3Hook.class);
 
