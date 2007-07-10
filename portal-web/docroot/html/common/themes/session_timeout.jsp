@@ -28,23 +28,47 @@
 
 	<%
 	int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
+	int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
 	int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
 	int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 	int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
 	Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
 
-	sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeout * (int)Time.MINUTE);
+	sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
 	%>
 
 	<c:if test="<%= (themeDisplay.isSignedIn()) && (sessionTimeoutWarning > 0) && (timeoutDiff > 0) %>">
-		setTimeout("openSessionWarning()", <%= timeoutDiff %>);
+	var newTime = new Date().getTime();
+	jQuery.cookie('SESSION_STATE', newTime);
+
+	setTimeout("checkSessionState()", <%= timeoutDiff %>);
 	</c:if>
 
 	function extendSession() {
 		loadPage("<%= themeDisplay.getPathMain() %>/portal/extend_session");
+		var newTime = new Date().getTime();
+		jQuery.cookie('SESSION_STATE', newTime);
 
 		setTimeout("openSessionWarning()", <%= timeoutDiff %>);
+	}
+
+	function checkSessionState() {
+		var currentTime = new Date().getTime();
+		var sessionState = jQuery.cookie('SESSION_STATE');
+
+		if (sessionState == 'expired') {
+			sessionHasExpired();
+		} else {
+			var timeDiff = currentTime - sessionState;
+			if ((timeDiff + 100) >= <%= timeoutDiff%>) {
+				openSessionWarning();
+			} else {
+				var newWaitTime = (<%= sessionTimeoutMinute %> - timeDiff) + 10000;
+				setTimeout("checkSessionState()", newWaitTime);
+			}
+		}
+			
 	}
 
 	function openSessionWarning() {
@@ -62,6 +86,8 @@
 
 	function sessionHasExpired() {
 		var warningText = document.getElementById("session_warning_text");
+
+		jQuery.cookie('SESSION_STATE', 'expired');
 
 		if (warningText) {
 			warningText.innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
