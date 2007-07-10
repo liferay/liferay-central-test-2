@@ -297,22 +297,36 @@ public class PortalLDAPUtil {
 			String importMethod = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_METHOD);
 
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_BASE_DN);
+			String userFilter = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
+			String groupFilter = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+			SearchControls cons = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+
 			if (importMethod.equals(IMPORT_BY_USER)) {
-				String baseDN = PrefsPropsUtil.getString(
-					companyId, PropsUtil.LDAP_BASE_DN);
-				String filter = PrefsPropsUtil.getString(
-					companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
-				SearchControls cons = new SearchControls(
-					SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+				NamingEnumeration enu = ctx.search(baseDN, userFilter, cons);
 
-				NamingEnumeration enu = ctx.search(baseDN, filter, cons);
-
-				// Loop through all users in LDAP
+				// Loop through all LDAP users
 
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
 					importLDAPUser(companyId, ctx, result.getAttributes(),
+						true);
+				}
+			}
+			else if (importMethod.equals(IMPORT_BY_GROUP)) {
+				NamingEnumeration enu = ctx.search(baseDN, groupFilter, cons);
+
+				// Loop through all LDAP groups
+
+				while (enu.hasMore()) {
+					SearchResult result = (SearchResult)enu.next();
+
+					importLDAPGroup(companyId, ctx, result.getAttributes(),
 						true);
 				}
 			}
@@ -325,6 +339,52 @@ public class PortalLDAPUtil {
 				ctx.close();
 			}
 		}
+	}
+
+	public static UserGroup importLDAPGroup(
+			long companyId, LdapContext ctx, Attributes attrs,
+			boolean importGroupMembership)
+		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
+		Properties groupMappings = getGroupMappings(companyId);
+
+		LogUtil.debug(_log, userMappings);
+
+		String name = LDAPUtil.getAttributeValue(
+			attrs, groupMappings.getProperty("groupName")).toLowerCase();
+		String description = LDAPUtil.getAttributeValue(
+			attrs, groupMappings.getProperty("description"));
+
+		long creatorUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
+
+		// Get or create user group
+
+		UserGroup userGroup = null;
+
+		try {
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(companyId, name);
+
+			UserGroupLocalServiceUtil.updateUserGroup(
+				companyId, userGroup.getUserGroupId(), name, description);
+		}
+		catch (NoSuchUserGroupException nsuge) {
+			userGroup = UserGroupLocalServiceUtil.addUserGroup(
+				creatorUserId, companyId, name, description);
+		}
+
+		// Import users and membership
+
+		if (importGroupMembership && userGroup != null) {
+			Attribute attr = attrs.get(groupMappings.getProperty("user"));
+
+			if (attr != null){
+				_importUsersAndMembershipFromLDAPGroup(
+					companyId, ctx, userGroup.getUserGroupId(), attr);
+			}
+		}
+
+		return userGroup;
 	}
 
 	public static User importLDAPUser(
@@ -605,6 +665,47 @@ public class PortalLDAPUtil {
 				UserLocalServiceUtil.addUserGroupUsers(
 					userGroup.getUserGroupId(), new long[] {userId});
 			}
+		}
+	}
+
+	private static void _importUsersAndMembershipFromLDAPGroup(
+			long companyId, LdapContext ctx, long userGroupId, Attribute attr)
+		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
+
+		for (int i = 0; i < attr.size(); i++) {
+			String userDN = (String)attr.get(i);
+
+			// Get associated user
+
+			Attributes userAttrs = ctx.getAttributes(userDN);
+
+			String emailAddress = LDAPUtil.getAttributeValue(
+				userAttrs, userMappings.getProperty("emailAddress"));
+
+			User user = null;
+
+			try {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, emailAddress);
+
+			}
+			catch (NoSuchUserException nsue) {
+				user = importLDAPUser(companyId, ctx, userAttrs, false);
+			}
+
+			// Add user to user group
+
+			if (user != null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Adding " + user.getUserId() + " to group " + userGroupId);
+				}
+
+				UserLocalServiceUtil.addUserGroupUsers(
+					userGroupId, new long[] {user.getUserId()});
+			}
+
 		}
 	}
 
