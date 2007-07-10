@@ -173,6 +173,39 @@ public class RoleServiceHttp {
 		}
 	}
 
+	public static java.util.List getGroupRoles(HttpPrincipal httpPrincipal,
+		long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
+					"getGroupRoles", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Role getRole(
 		HttpPrincipal httpPrincipal, long roleId)
 		throws com.liferay.portal.SystemException, 

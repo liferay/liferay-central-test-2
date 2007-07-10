@@ -739,6 +739,13 @@ Liferay.Service.Portal.Role = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getGroupRoles: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getGroupRoles";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getRole: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getRole";
@@ -837,6 +844,13 @@ Liferay.Service.Portal.User = {
 	deleteUser: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteUser";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getDefaultUserId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getDefaultUserId";
 
 		return Liferay.Service.ajax(params, callback);
 	},

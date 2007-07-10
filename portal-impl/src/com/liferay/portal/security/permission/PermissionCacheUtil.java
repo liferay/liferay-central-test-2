@@ -22,12 +22,8 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.ArrayUtil;
 
@@ -51,20 +47,6 @@ public class PermissionCacheUtil {
 
 	public static void clearCache() {
 		_cache.flushGroup(GROUP_NAME);
-	}
-
-	public static void clearCache(long resourceId)
-		throws PortalException, SystemException {
-
-		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
-
-		clearCache(resource.getName(), resource.getPrimKey());
-	}
-
-	public static void clearCache(String name, String primKey) {
-		String resourceGroupKey = _encodeKey(name, primKey);
-
-		_cache.flushGroup(resourceGroupKey);
 	}
 
 	public static Boolean hasPermission(

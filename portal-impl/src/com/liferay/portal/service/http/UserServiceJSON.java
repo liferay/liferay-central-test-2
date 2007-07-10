@@ -128,6 +128,14 @@ public class UserServiceJSON {
 		UserServiceUtil.deleteUser(userId);
 	}
 
+	public static long getDefaultUserId(long companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		long returnValue = UserServiceUtil.getDefaultUserId(companyId);
+
+		return returnValue;
+	}
+
 	public static JSONArray getGroupUsers(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

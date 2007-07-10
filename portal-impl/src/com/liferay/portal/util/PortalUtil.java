@@ -1678,14 +1678,13 @@ public class PortalUtil {
 
 		User realUser = UserLocalServiceUtil.getUserById(
 			realUserIdObj.longValue());
-		boolean signedIn = true;
 		boolean checkGuest = true;
 
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
 			permissionChecker = PermissionCheckerFactory.create(
-				realUser, signedIn, checkGuest);
+				realUser, checkGuest);
 
 			if (doAsUser.isDefaultUser() ||
 				UserPermission.contains(

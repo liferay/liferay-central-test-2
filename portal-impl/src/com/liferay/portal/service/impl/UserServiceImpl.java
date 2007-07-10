@@ -154,6 +154,12 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.deleteUser(userId);
 	}
 
+	public long getDefaultUserId(long companyId)
+		throws PortalException, SystemException {
+
+		return UserLocalServiceUtil.getDefaultUserId(companyId);
+	}
+
 	public List getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 

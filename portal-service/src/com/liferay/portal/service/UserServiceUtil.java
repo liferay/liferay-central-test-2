@@ -113,6 +113,14 @@ public class UserServiceUtil {
 		userService.deleteUser(userId);
 	}
 
+	public static long getDefaultUserId(long companyId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		return userService.getDefaultUserId(companyId);
+	}
+
 	public static java.util.List getGroupUsers(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

@@ -23,8 +23,6 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceException;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,14 +37,13 @@ import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 
 import java.io.Serializable;
-
-import java.rmi.RemoteException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,14 +70,31 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	public PermissionCheckerImpl() {
 	}
 
-	public void init(User user, boolean signedIn, boolean checkGuest) {
+	public void init(User user, boolean checkGuest) {
 		this.user = user;
-		this.signedIn = signedIn;
+
+		if (user.isDefaultUser()) {
+			this.defaultUserId = user.getUserId();
+			this.signedIn = false;
+		}
+		else {
+			try {
+				this.defaultUserId = UserServiceUtil.getDefaultUserId(
+					user.getCompanyId());
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			this.signedIn = true;
+		}
+
 		this.checkGuest = checkGuest;
 	}
 
 	public void recycle() {
 		user = null;
+		defaultUserId = 0;
 		signedIn = false;
 		checkGuest = false;
 		bags.clear();
@@ -263,6 +277,47 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return value.booleanValue();
 	}
 
+	public boolean hasUserPermission(
+			long groupId, String name, String primKey, String actionId,
+			boolean checkAdmin)
+		throws Exception {
+
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		long companyId = user.getCompanyId();
+
+		if (checkAdmin && isAdmin(companyId, groupId, name)) {
+			return true;
+		}
+
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 1);
+
+		long[] resourceIds = getResourceIds(
+			companyId, groupId, name, primKey, actionId);
+
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 2);
+
+		// Check if user has access to perform the action on the given
+		// resource scopes. The resources are scoped to check first for an
+		// individual class, then for the group that the class may belong
+		// to, and then for the company that the class belongs to.
+
+		PermissionCheckerBag bag = getBag(groupId);
+
+		boolean value = PermissionServiceUtil.hasUserPermissions(
+			user.getUserId(), groupId, actionId, resourceIds, bag);
+
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
+
+		return value;
+	}
+
 	public boolean isOmniadmin() {
 		if (omniadmin == null) {
 			omniadmin = new Boolean(OmniadminUtil.isOmniadmin(getUserId()));
@@ -273,6 +328,92 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	protected PermissionCheckerBag getBag(long groupId) {
 		return (PermissionCheckerBag)bags.get(new Long(groupId));
+	}
+
+	protected long[] getResourceIds(
+			long companyId, long groupId, String name, String primKey,
+			String actionId)
+		throws Exception {
+
+		// Individual
+
+		long[] resourceIds = new long[4];
+
+		try {
+			Resource resource = ResourceServiceUtil.getResource(
+				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+
+			resourceIds[0] = resource.getResourceId();
+		}
+		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						ResourceImpl.SCOPE_INDIVIDUAL + " " + primKey +
+							" does not exist");
+			}
+		}
+
+		// Group
+
+		try {
+			if (groupId > 0) {
+				Resource resource = ResourceServiceUtil.getResource(
+					companyId, name, ResourceImpl.SCOPE_GROUP,
+					String.valueOf(groupId));
+
+				resourceIds[1] = resource.getResourceId();
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						ResourceImpl.SCOPE_GROUP + " " + groupId +
+							" does not exist");
+			}
+		}
+
+		// Group template
+
+		try {
+			if (groupId > 0) {
+				Resource resource = ResourceServiceUtil.getResource(
+					companyId, name, ResourceImpl.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID));
+
+				resourceIds[2] = resource.getResourceId();
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						ResourceImpl.SCOPE_GROUP_TEMPLATE + " " +
+							GroupImpl.DEFAULT_PARENT_GROUP_ID +
+								" does not exist");
+			}
+		}
+
+		// Company
+
+		try {
+			Resource resource = ResourceServiceUtil.getResource(
+				companyId, name, ResourceImpl.SCOPE_COMPANY,
+				String.valueOf(companyId));
+
+			resourceIds[3] = resource.getResourceId();
+		}
+		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						ResourceImpl.SCOPE_COMPANY + " " + companyId +
+							" does not exist");
+			}
+		}
+
+		return resourceIds;
 	}
 
 	protected boolean hasPermissionImpl(
@@ -286,11 +427,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				boolean value = false;
 
 				if (checkGuest) {
-					signedIn = false;
-
 					value = hasGuestPermission(name, primKey, actionId);
-
-					signedIn = true;
 				}
 
 				if (!value) {
@@ -310,7 +447,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	protected boolean hasGuestPermission(
 			String name, String primKey, String actionId)
-		throws PortalException, RemoteException, SystemException {
+		throws Exception {
 
 		if (name.indexOf(StringPool.PERIOD) != -1) {
 
@@ -340,9 +477,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		Group guestGroup = GroupServiceUtil.getGroup(
 			companyId, GroupImpl.GUEST);
 
-		// Create bag for Guest group
+		long[] resourceIds = getResourceIds(
+			companyId, guestGroup.getGroupId(), name, primKey, actionId);
 
-		PermissionCheckerBag bag = getBag(guestGroup.getGroupId());
+		PermissionCheckerBag bag = getBag(GUEST_GROUP_BAG_ID);
 
 		if (bag == null) {
 			List groups = new ArrayList();
@@ -351,142 +489,24 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 			List roles = RoleServiceUtil.getUserRoles(user.getUserId());
 
+			roles.addAll(
+				RoleServiceUtil.getGroupRoles(guestGroup.getGroupId()));
+
 			bag = new PermissionCheckerBagImpl(
-				user.getUserId(), new ArrayList(), new ArrayList(),
+				defaultUserId, new ArrayList(), new ArrayList(),
 				new ArrayList(), new ArrayList(), groups, roles);
 
 			putBag(guestGroup.getGroupId(), bag);
 		}
 
 		try {
-			return hasUserPermission(
-				guestGroup.getGroupId(), name, primKey, actionId, false);
+			return PermissionServiceUtil.hasUserPermissions(
+				defaultUserId, guestGroup.getGroupId(), actionId, resourceIds,
+				bag);
 		}
 		catch (Exception e) {
 			return false;
 		}
-	}
-
-	public boolean hasUserPermission(
-			long groupId, String name, String primKey, String actionId,
-			boolean checkAdmin)
-		throws Exception {
-
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		long companyId = user.getCompanyId();
-
-		if (checkAdmin && isAdmin(companyId, groupId, name)) {
-			return true;
-		}
-
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 1);
-
-		// Individual
-
-		long[] resourceIds = new long[4];
-
-		try {
-			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
-
-			resourceIds[0] = resource.getResourceId();
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_INDIVIDUAL + " " + primKey +
-							" does not exist");
-			}
-		}
-
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 2);
-
-		// Group
-
-		try {
-			if (groupId > 0) {
-				Resource resource = ResourceServiceUtil.getResource(
-					companyId, name, ResourceImpl.SCOPE_GROUP,
-					String.valueOf(groupId));
-
-				resourceIds[1] = resource.getResourceId();
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_GROUP + " " + groupId +
-							" does not exist");
-			}
-		}
-
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
-
-		// Group template
-
-		try {
-			if (groupId > 0) {
-				Resource resource = ResourceServiceUtil.getResource(
-					companyId, name, ResourceImpl.SCOPE_GROUP_TEMPLATE,
-					String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID));
-
-				resourceIds[2] = resource.getResourceId();
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_GROUP_TEMPLATE + " " +
-							GroupImpl.DEFAULT_PARENT_GROUP_ID +
-								" does not exist");
-			}
-		}
-
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 4);
-
-		// Company
-
-		try {
-			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, ResourceImpl.SCOPE_COMPANY,
-				String.valueOf(companyId));
-
-			resourceIds[3] = resource.getResourceId();
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_COMPANY + " " + companyId +
-							" does not exist");
-			}
-		}
-
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 5);
-
-		// Check if user has access to perform the action on the given
-		// resource scopes. The resources are scoped to check first for an
-		// individual class, then for the group that the class may belong
-		// to, and then for the company that the class belongs to.
-
-		PermissionCheckerBag bag = getBag(groupId);
-
-		boolean value = PermissionServiceUtil.hasUserPermissions(
-			user.getUserId(), groupId, actionId, resourceIds, bag);
-
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 6);
-
-		return value;
 	}
 
 	protected boolean isAdmin(long companyId, long groupId, String name)
@@ -531,9 +551,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		bags.put(new Long(groupId), bag);
 	}
 
+	protected static final int GUEST_GROUP_BAG_ID = -101;
+
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";
 
 	protected User user;
+	protected long defaultUserId;
 	protected boolean signedIn;
 	protected boolean checkGuest;
 	protected Map bags = CollectionFactory.getHashMap();

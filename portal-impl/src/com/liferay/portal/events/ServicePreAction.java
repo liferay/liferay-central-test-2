@@ -523,7 +523,7 @@ public class ServicePreAction extends Action {
 		// Permission checker
 
 		PermissionCheckerImpl permissionChecker =
-			PermissionCheckerFactory.create(user, signedIn, true);
+			PermissionCheckerFactory.create(user, true);
 
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 

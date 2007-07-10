@@ -41,8 +41,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
  */
 public class PermissionCheckerFactory {
 
-	public static PermissionCheckerImpl create(
-			User user, boolean signedIn, boolean checkGuest)
+	public static PermissionCheckerImpl create(User user, boolean checkGuest)
 		throws Exception {
 
 		if (CachePropsUtil.COMMONS_POOL_ENABLED) {
@@ -64,7 +63,7 @@ public class PermissionCheckerFactory {
 				PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
 		}
 
-		permissionChecker.init(user, signedIn, checkGuest);
+		permissionChecker.init(user, checkGuest);
 
 		return permissionChecker;
 	}

@@ -75,14 +75,9 @@ public class PrincipalBean {
 				permissionChecker = (PermissionCheckerImpl)Class.forName(
 					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
 
-				boolean signedIn = false;
 				boolean checkGuest = true;
 
-				if (user != null) {
-					signedIn = true;
-				}
-
-				permissionChecker.init(user, signedIn, checkGuest);
+				permissionChecker.init(user, checkGuest);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}

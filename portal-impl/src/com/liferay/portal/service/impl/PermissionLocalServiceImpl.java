@@ -432,7 +432,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		GroupUtil.addPermissions(groupId, permissions);
 
-		PermissionCacheUtil.clearCache(resourceId);
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setGroupPermissions(
@@ -500,7 +500,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			OrgGroupPermissionUtil.update(orgGroupPermission);
 		}
 
-		PermissionCacheUtil.clearCache(resourceId);
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setRolePermission(
@@ -550,7 +550,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		RoleUtil.addPermission(roleId, permission);
 
-		PermissionCacheUtil.clearCache(resource.getResourceId());
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setRolePermissions(
@@ -581,7 +581,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		UserUtil.addPermissions(userId, permissions);
 
-		PermissionCacheUtil.clearCache(resourceId);
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetRolePermission(long roleId, long permissionId)
@@ -592,11 +592,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				PermissionUtil.findByPrimaryKey(permissionId);
 
 			RoleUtil.removePermission(roleId, permission);
-
-			PermissionCacheUtil.clearCache(permission.getResourceId());
 		}
 		catch (NoSuchPermissionException nspe) {
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetRolePermission(
@@ -616,13 +616,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				actionId, resource.getResourceId());
 
 			RoleUtil.removePermission(roleId, permission);
-
-			PermissionCacheUtil.clearCache(resource.getResourceId());
 		}
 		catch (NoSuchPermissionException nspe) {
 		}
 		catch (NoSuchResourceException nsre) {
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetRolePermissions(
@@ -645,12 +645,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 					actionId, resource.getResourceId());
 
 				RoleUtil.removePermission(roleId, permission);
-
-				PermissionCacheUtil.clearCache(resource.getResourceId());
 			}
 			catch (NoSuchPermissionException nspe) {
 			}
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetUserPermissions(
@@ -662,7 +662,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		UserUtil.removePermissions(userId, permissions);
 
-		PermissionCacheUtil.clearCache(resourceId);
+		PermissionCacheUtil.clearCache();
 	}
 
 	protected boolean checkOrgGroupPermission(

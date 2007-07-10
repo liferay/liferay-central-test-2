@@ -167,6 +167,19 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static long getDefaultUserId(long companyId)
+		throws RemoteException {
+		try {
+			long returnValue = UserServiceUtil.getDefaultUserId(companyId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap[] getGroupUsers(
 		long groupId) throws RemoteException {
 		try {

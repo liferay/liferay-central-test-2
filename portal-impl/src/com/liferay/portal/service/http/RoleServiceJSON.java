@@ -93,6 +93,14 @@ public class RoleServiceJSON {
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONArray getGroupRoles(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = RoleServiceUtil.getGroupRoles(groupId);
+
+		return RoleJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONObject getRole(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

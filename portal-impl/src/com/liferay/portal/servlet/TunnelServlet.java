@@ -89,7 +89,7 @@ public class TunnelServlet extends HttpServlet {
 						httpPrincipal.getUserId());
 
 					permissionChecker =
-						PermissionCheckerFactory.create(user, true, true);
+						PermissionCheckerFactory.create(user, true);
 
 					PermissionThreadLocal.setPermissionChecker(
 						permissionChecker);

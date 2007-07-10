@@ -96,8 +96,7 @@ public class RemotingServlet extends DispatcherServlet {
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				permissionChecker =
-					PermissionCheckerFactory.create(user, true, true);
+				permissionChecker = PermissionCheckerFactory.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
