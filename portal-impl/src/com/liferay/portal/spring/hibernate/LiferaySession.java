@@ -63,6 +63,10 @@ public class LiferaySession implements Session {
 		_session = session;
 	}
 
+	public Session getHibernateSession() {
+		return _session;
+	}
+
 	public Transaction beginTransaction() throws HibernateException {
 		return _session.beginTransaction();
 	}

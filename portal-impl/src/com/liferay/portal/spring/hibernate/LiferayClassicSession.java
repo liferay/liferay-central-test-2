@@ -55,6 +55,10 @@ public class LiferayClassicSession extends LiferaySession implements Session {
 		_session = session;
 	}
 
+	public Session getHibernateClassicSession() {
+		return _session;
+	}
+
 	/**
 	 * @deprecated
 	 */

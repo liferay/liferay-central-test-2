@@ -260,9 +260,9 @@
 		<priority value="INFO" />
 	</category>
 
-	<!--<category name="com.liferay.portal.spring.hibernate.HibernateUtil">
-		<priority value="DEBUG" />
-	</category>-->
+	<category name="com.liferay.portal.spring.hibernate.HibernateUtil">
+		<priority value="ERROR" />
+	</category>
 
 	<category name="com.liferay.portal.struts">
 		<priority value="ERROR" />

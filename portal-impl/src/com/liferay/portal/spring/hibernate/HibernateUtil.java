@@ -176,7 +176,11 @@ public class HibernateUtil {
 		Session session = sessionFactory.getCurrentSession();
 
 		if (_log.isDebugEnabled()) {
-			SessionImpl sessionImpl = (SessionImpl)session;
+			LiferayClassicSession classicSession =
+				(LiferayClassicSession)session;
+
+			SessionImpl sessionImpl =
+				(SessionImpl)classicSession.getHibernateClassicSession();
 
 			_log.debug(
 				"Session is using connection release mode " +
