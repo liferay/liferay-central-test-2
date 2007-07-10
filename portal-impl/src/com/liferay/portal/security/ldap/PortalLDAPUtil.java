@@ -312,7 +312,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
-					importUserFromLDAP(companyId, ctx, baseDN, result);
+					importLDAPUser(companyId, ctx, result.getAttributes(),
+						true);
 				}
 			}
 		}
@@ -326,21 +327,14 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static User importUserFromLDAP(
-			long companyId, LdapContext ctx, String baseDN, SearchResult result)
+	public static User importLDAPUser(
+			long companyId, LdapContext ctx, Attributes attrs,
+			boolean importGroupMembership)
 		throws Exception {
 
 		Properties userMappings = getUserMappings(companyId);
 
 		LogUtil.debug(_log, userMappings);
-
-		String userDN = result.getName() + StringPool.COMMA + baseDN;
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("User DN " + userDN);
-		}
-
-		Attributes attrs = result.getAttributes();
 
 		long creatorUserId = 0;
 		boolean autoPassword = true;
@@ -383,18 +377,20 @@ public class PortalLDAPUtil {
 		long locationId = 0;
 		boolean sendEmail = false;
 
-		User user = importUserFromLDAP(
+		User user = importLDAPUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			passwordReset, autoScreenName, screenName, emailAddress, locale,
 			firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
 			locationId, sendEmail, true, false);
 
-		if (user != null) {
+		// Import user groups and membership
+
+		if (importGroupMembership && user != null) {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
 
 			if (attr != null){
-				_importGroupsFromLDAPUser(
+				_importGroupsAndMembershipFromLDAPUser(
 					companyId, ctx, user.getUserId(), attr);
 			}
 		}
@@ -402,7 +398,7 @@ public class PortalLDAPUtil {
 		return user;
 	}
 
-	public static User importUserFromLDAP(
+	public static User importLDAPUser(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean passwordReset,
 			boolean autoScreenName, String screenName, String emailAddress,
@@ -551,7 +547,7 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	private static void _importGroupsFromLDAPUser(
+	private static void _importGroupsAndMembershipFromLDAPUser(
 			long companyId, LdapContext ctx, long userId, Attribute attr)
 		throws Exception {
 

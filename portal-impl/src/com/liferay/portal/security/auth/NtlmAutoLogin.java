@@ -25,8 +25,6 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import javax.naming.directory.SearchResult;
@@ -99,11 +97,8 @@ public class NtlmAutoLogin implements AutoLogin {
 
 		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
 
-		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_DN);
-
-		User user = PortalLDAPUtil.importUserFromLDAP(
-			companyId, ctx, baseDN, result);
+		User user = PortalLDAPUtil.importLDAPUser(
+			companyId, ctx, result.getAttributes(), false);
 
 		return user;
 	}
