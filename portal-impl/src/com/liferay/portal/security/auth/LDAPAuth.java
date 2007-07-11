@@ -263,7 +263,7 @@ public class LDAPAuth implements Authenticator {
 
 				User user = processUser(
 					attrs, userMappings, companyId, emailAddress, screenName,
-					userId, password);
+					password);
 
 				// Process LDAP success codes
 
@@ -424,8 +424,7 @@ public class LDAPAuth implements Authenticator {
 
 	protected User processUser(
 			Attributes attrs, Properties userMappings, long companyId,
-			String emailAddress, String screenName, long userId,
-			String password)
+			String emailAddress, String screenName, String password)
 		throws Exception {
 
 		long creatorUserId = 0;
