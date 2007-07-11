@@ -75,7 +75,7 @@ public class JournalTemplatePermission {
 
 		return permissionChecker.hasPermission(
 			template.getGroupId(), JournalTemplate.class.getName(),
-			template.getTemplateId(), actionId);
+			template.getId(), actionId);
 	}
 
 }

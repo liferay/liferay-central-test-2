@@ -185,7 +185,7 @@ public class JournalStructureLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), JournalStructure.class.getName(),
-			structure.getStructureId(), false, addCommunityPermissions,
+			structure.getId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -209,7 +209,7 @@ public class JournalStructureLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), JournalStructure.class.getName(),
-			structure.getStructureId(), communityPermissions, guestPermissions);
+			structure.getId(), communityPermissions, guestPermissions);
 	}
 
 	public void checkNewLine(long groupId, String structureId)
@@ -262,7 +262,7 @@ public class JournalStructureLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			structure.getCompanyId(), JournalStructure.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, structure.getStructureId());
+			ResourceImpl.SCOPE_INDIVIDUAL, structure.getId());
 
 		// Structure
 

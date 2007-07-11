@@ -75,7 +75,7 @@ public class JournalStructurePermission {
 
 		return permissionChecker.hasPermission(
 			structure.getGroupId(), JournalStructure.class.getName(),
-			structure.getStructureId(), actionId);
+			structure.getId(), actionId);
 	}
 
 }
