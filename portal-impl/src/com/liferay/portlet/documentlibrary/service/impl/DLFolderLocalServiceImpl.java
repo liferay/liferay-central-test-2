@@ -46,12 +46,14 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * <a href="DLFolderLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -348,6 +350,30 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setDescription(description);
 
 		DLFolderUtil.update(folder);
+
+		if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED))) {
+
+			String privateFolder = GetterUtil.getString(PropsUtil.get(
+				PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
+
+			boolean privateLayout = false;
+
+			String[] path = folder.getPathArray();
+
+			if (path[0].equals(privateFolder)) {
+				privateLayout = true;
+			}
+
+			Layout layout = LayoutLocalServiceUtil.getDLFolderLayout(
+				folder.getGroupId(), privateLayout, folder.getFolderId());
+
+			layout.setName(folder.getName());
+
+			LayoutLocalServiceUtil.updateName(
+				folder.getGroupId(), privateLayout, layout.getLayoutId(),
+				folder.getName(), LocaleUtil.toLanguageId(Locale.getDefault()));
+		}
 
 		return folder;
 	}

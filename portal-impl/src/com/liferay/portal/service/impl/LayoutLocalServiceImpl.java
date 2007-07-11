@@ -86,7 +86,10 @@ import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
@@ -1048,6 +1051,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
+		try {
+			if (layout.getDlFolderId() > 0) {
+				DLFolder folder = DLFolderLocalServiceUtil.getFolder(
+					layout.getDlFolderId());
+
+				DLFolderLocalServiceUtil.updateFolder(
+					folder.getFolderId(), folder.getParentFolderId(), name,
+					folder.getDescription());
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
+		}
+
 		return layout;
 	}
 
@@ -1114,6 +1130,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
 		LayoutUtil.update(layout);
+
+		try {
+			if (layout.getDlFolderId() > 0) {
+				DLFolder folder = DLFolderLocalServiceUtil.getFolder(
+					layout.getDlFolderId());
+
+				DLFolderLocalServiceUtil.updateFolder(
+					folder.getFolderId(), folder.getParentFolderId(), name,
+					folder.getDescription());
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
+		}
 
 		return layout;
 	}
