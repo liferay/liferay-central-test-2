@@ -434,6 +434,10 @@ Liferay.Util = {
 		document.all[id].focus();
 	},
 
+	randomMinMax: function(min, max) {
+		return (Math.round(Math.random() * (max - min))) + min;
+	},
+
 	removeItem: function(box, value) {
 		if (value == null) {
 			for (var i = box.length - 1; i >= 0; i--) {
