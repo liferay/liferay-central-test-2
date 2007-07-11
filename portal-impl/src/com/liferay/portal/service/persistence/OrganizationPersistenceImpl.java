@@ -160,6 +160,9 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	public Organization update(
 		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache("Groups_Orgs");
+		FinderCache.clearCache("Users_Orgs");
+
 		Session session = null;
 
 		try {

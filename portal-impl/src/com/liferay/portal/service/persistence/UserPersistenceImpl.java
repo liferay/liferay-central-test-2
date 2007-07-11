@@ -183,6 +183,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public User update(com.liferay.portal.model.User user, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache("Users_Groups");
+		FinderCache.clearCache("Users_Orgs");
+		FinderCache.clearCache("Users_Permissions");
+		FinderCache.clearCache("Users_Roles");
+		FinderCache.clearCache("Users_UserGroups");
+
 		Session session = null;
 
 		try {

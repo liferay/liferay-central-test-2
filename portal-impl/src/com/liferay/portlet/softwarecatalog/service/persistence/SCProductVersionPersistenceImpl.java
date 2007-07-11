@@ -152,6 +152,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	public SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
+
 		Session session = null;
 
 		try {

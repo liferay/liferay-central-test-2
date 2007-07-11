@@ -163,6 +163,10 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public Role update(com.liferay.portal.model.Role role, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache("Groups_Roles");
+		FinderCache.clearCache("Roles_Permissions");
+		FinderCache.clearCache("Users_Roles");
+
 		Session session = null;
 
 		try {

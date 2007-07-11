@@ -167,6 +167,10 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public Permission update(com.liferay.portal.model.Permission permission,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache("Groups_Permissions");
+		FinderCache.clearCache("Roles_Permissions");
+		FinderCache.clearCache("Users_Permissions");
+
 		Session session = null;
 
 		try {

@@ -148,6 +148,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	public TagsAsset update(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean saveOrUpdate)
 		throws SystemException {
+		FinderCache.clearCache("TagsAssets_TagsEntries");
+
 		Session session = null;
 
 		try {

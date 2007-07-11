@@ -185,6 +185,12 @@ public class GroupPersistenceImpl extends BasePersistence
 
 	public Group update(com.liferay.portal.model.Group group,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache("Groups_Orgs");
+		FinderCache.clearCache("Groups_Permissions");
+		FinderCache.clearCache("Groups_Roles");
+		FinderCache.clearCache("Groups_UserGroups");
+		FinderCache.clearCache("Users_Groups");
+
 		Session session = null;
 
 		try {

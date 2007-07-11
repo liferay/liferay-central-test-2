@@ -151,6 +151,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	public SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean saveOrUpdate) throws SystemException {
+		FinderCache.clearCache("SCLicenses_SCProductEntries");
+
 		Session session = null;
 
 		try {

@@ -2437,6 +2437,17 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
+
+		for (int i = 0; i < columnList.size(); i++) {
+			EntityColumn col = (EntityColumn)columnList.get(i);
+
+			if (col.isCollection() && col.isMappingManyToMany()) {
+				Entity tempEntity = getEntity(col.getEJBName());
+
+				sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
+			}
+		}
+
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
