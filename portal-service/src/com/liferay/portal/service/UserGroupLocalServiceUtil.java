@@ -82,6 +82,13 @@ public class UserGroupLocalServiceUtil {
 			description);
 	}
 
+	public static void clearUserUserGroups(long userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+		userGroupLocalService.clearUserUserGroups(userId);
+	}
+
 	public static void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

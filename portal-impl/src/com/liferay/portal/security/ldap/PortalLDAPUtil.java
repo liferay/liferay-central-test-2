@@ -612,6 +612,10 @@ public class PortalLDAPUtil {
 
 		Properties groupMappings = getGroupMappings(companyId);
 
+		// Remove all user group membership from user
+
+		UserGroupLocalServiceUtil.clearUserUserGroups(userId);
+
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 			companyId);
 
@@ -672,6 +676,10 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		Properties userMappings = getUserMappings(companyId);
+
+		// Remove all user membership from user group
+
+		UserLocalServiceUtil.clearUserGroupUsers(userGroupId);
 
 		for (int i = 0; i < attr.size(); i++) {
 			String userDN = (String)attr.get(i);

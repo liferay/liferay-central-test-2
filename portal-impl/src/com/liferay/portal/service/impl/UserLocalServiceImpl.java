@@ -645,6 +645,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
+	public void clearUserGroupUsers(long userGroupId)
+		throws PortalException, SystemException {
+
+		UserGroupUtil.clearUsers(userGroupId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public KeyValuePair decryptUserId(
 			long companyId, String name, String password)
 		throws PortalException, SystemException {

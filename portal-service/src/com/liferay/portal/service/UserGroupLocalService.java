@@ -66,6 +66,10 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void clearUserUserGroups(long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -98,6 +98,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
+	public void clearUserUserGroups(long userId)
+		throws PortalException, SystemException {
+
+		UserUtil.clearUserGroups(userId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
