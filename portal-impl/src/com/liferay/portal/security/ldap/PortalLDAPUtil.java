@@ -314,8 +314,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
-					importLDAPUser(companyId, ctx, result.getAttributes(),
-						true);
+					importLDAPUser(
+						companyId, ctx, result.getAttributes(), true);
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
@@ -326,8 +326,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMore()) {
 					SearchResult result = (SearchResult)enu.next();
 
-					importLDAPGroup(companyId, ctx, result.getAttributes(),
-						true);
+					importLDAPGroup(
+						companyId, ctx, result.getAttributes(), true);
 				}
 			}
 		}
@@ -346,10 +346,9 @@ public class PortalLDAPUtil {
 			boolean importGroupMembership)
 		throws Exception {
 
-		Properties userMappings = getUserMappings(companyId);
 		Properties groupMappings = getGroupMappings(companyId);
 
-		LogUtil.debug(_log, userMappings);
+		LogUtil.debug(_log, groupMappings);
 
 		String name = LDAPUtil.getAttributeValue(
 			attrs, groupMappings.getProperty("groupName")).toLowerCase();
@@ -375,7 +374,7 @@ public class PortalLDAPUtil {
 
 		// Import users and membership
 
-		if (importGroupMembership && userGroup != null) {
+		if (importGroupMembership && (userGroup != null)) {
 			Attribute attr = attrs.get(groupMappings.getProperty("user"));
 
 			if (attr != null){
@@ -689,7 +688,6 @@ public class PortalLDAPUtil {
 			try {
 				user = UserLocalServiceUtil.getUserByEmailAddress(
 					companyId, emailAddress);
-
 			}
 			catch (NoSuchUserException nsue) {
 				user = importLDAPUser(companyId, ctx, userAttrs, false);
@@ -699,13 +697,14 @@ public class PortalLDAPUtil {
 
 			if (user != null) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Adding " + user.getUserId() + " to group " + userGroupId);
+					_log.debug(
+						"Adding " + user.getUserId() + " to group " +
+							userGroupId);
 				}
 
 				UserLocalServiceUtil.addUserGroupUsers(
 					userGroupId, new long[] {user.getUserId()});
 			}
-
 		}
 	}
 
