@@ -51,14 +51,26 @@ public class Version implements Comparable {
 	}
 
 	public String getMajor() {
+		if (_major == null) {
+			return "0";
+		}
+
 		return _major;
 	}
 
 	public String getMinor() {
+		if (_minor == null) {
+			return "0";
+		}
+
 		return _minor;
 	}
 
 	public String getBugFix() {
+		if (_bugFix == null) {
+			return "0";
+		}
+
 		return _bugFix;
 	}
 
@@ -98,6 +110,10 @@ public class Version implements Comparable {
 			return true;
 		}
 
+		if (getMajor().equals(StringPool.STAR)) {
+			return true;
+		}
+
 		if (getMajor().equals(version.getMajor())) {
 			if (getMinor().equals(StringPool.STAR)) {
 				return true;
@@ -115,7 +131,16 @@ public class Version implements Comparable {
 						return true;
 					}
 				}
+				else if (_contains(getBugFix(), version.getBugFix())) {
+					return true;
+				}
 			}
+			else if (_contains(getMinor(), version.getMinor())) {
+				return true;
+			}
+		}
+		else if (_contains(getMajor(), version.getMajor())) {
+			return true;
 		}
 
 		return false;
@@ -138,25 +163,25 @@ public class Version implements Comparable {
 			return -1;
 		}
 
-		int result = _compareVersionFragments(_major, version.getMajor());
+		int result = getMajor().compareTo(version.getMajor());
 
 		if (result != 0) {
 			return result;
 		}
 
-		result = _compareVersionFragments(_minor, version.getMinor());
+		result = getMinor().compareTo(version.getMinor());
 
 		if (result != 0) {
 			return result;
 		}
 
-		result = _compareVersionFragments(_bugFix, version.getBugFix());
+		result = getBugFix().compareTo(version.getBugFix());
 
 		if (result != 0) {
 			return result;
 		}
 
-		return _compareVersionFragments(_buildNumber, version.getBuildNumber());
+		return getBuildNumber().compareTo(version.getBuildNumber());
 	}
 
 	public boolean equals(Object obj) {
@@ -229,18 +254,21 @@ public class Version implements Comparable {
 		_buildNumber = buildNumber.toString();
 	}
 
-	private int _compareVersionFragments(
-		String versionFragmentA, String versionFragmentB) {
+	private boolean _contains(String containerStr, String numberStr) {
+		if (containerStr.endsWith(StringPool.PLUS)) {
+			String containerNumberStr =
+					containerStr.substring(0, containerStr.length() - 1);
 
-		if (Validator.isNull(versionFragmentA)) {
-			versionFragmentA = "0";
+			try {
+				int containerNumber = Integer.parseInt(containerNumberStr);
+				int number = Integer.parseInt(numberStr);
+
+				return containerNumber <= number;
+			} catch (NumberFormatException nfe) {
+				return false;
+			}
 		}
-
-		if (Validator.isNull(versionFragmentB)) {
-			versionFragmentB = "0";
-		}
-
-		return versionFragmentA.compareTo(versionFragmentB);
+		return false;
 	}
 
 	private static final String _SEPARATOR = StringPool.PERIOD;

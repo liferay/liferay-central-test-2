@@ -12,4 +12,35 @@
 		<copy file="${jar.file}.jar" todir="${project.dir}/portal-impl/classes/com/liferay/portal/deploy/dependencies" />
 		<copy file="${jar.file}.jar" todir="${project.dir}/servicemix-web/docroot/WEB-INF/lib" />
 	</target>
+
+	<target name="compile-test" depends="compile">
+		<mkdir dir="test/classes" />
+
+		<path id="test.classpath">
+			<path refid="project.classpath" />
+			<pathelement location="${project.dir}/lib/development/junit.jar" />
+			<pathelement location="test/classes" />
+		</path>
+
+		<javac
+			classpathref="test.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="test/classes"
+			fork="${javac.fork}"
+			memoryMaximumSize="${javac.memoryMaximumSize}"
+			nowarn="on"
+			srcdir="test/src"
+		/>
+	</target>
+
+	<target name="test" depends="compile-test">
+		<java
+			classname="com.liferay.util.AllTests"
+			classpathref="test.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
 </project>
