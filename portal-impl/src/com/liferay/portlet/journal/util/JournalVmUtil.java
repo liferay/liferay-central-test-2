@@ -27,6 +27,7 @@ import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
+import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;
@@ -83,11 +84,17 @@ public class JournalVmUtil {
 			long companyId = GetterUtil.getLong(
 				(String)tokens.get("company_id"));
 			long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
-
-			context.put(
-				"journalTemplatesPath",
+			String journalTemplatesPath =
 				VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
-					companyId + StringPool.SLASH + groupId);
+					companyId + StringPool.SLASH + groupId;
+			String randomNamespace =
+				PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
+					StringPool.UNDERLINE;
+
+			context.put("companyId", String.valueOf(companyId));
+			context.put("groupId", String.valueOf(groupId));
+			context.put("journalTemplatesPath", journalTemplatesPath);
+			context.put("randomNamespace", randomNamespace);
 
 			load = Velocity.evaluate(
 				context, output, JournalVmUtil.class.getName(), script);
