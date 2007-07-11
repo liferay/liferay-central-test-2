@@ -29,7 +29,7 @@ String cur = ParamUtil.getString(request, "cur");
 
 JournalArticle article = null;
 
-String type = JournalArticleImpl.TYPES[0];
+String type = StringPool.BLANK;
 
 try {
 	if (Validator.isNotNull(articleId)) {
