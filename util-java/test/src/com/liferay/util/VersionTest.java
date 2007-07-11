@@ -73,34 +73,37 @@ public class VersionTest extends TestCase {
 	}
 
 	private void _assertPrevious(String first, String second) {
-		Version firstV = Version.getInstance(first);
+		Version firstVersion = Version.getInstance(first);
 
 		assertTrue(
-				first + " is not previous than " + second,
-				firstV.isPreviousVersionThan(second));
+			first + " is not previous than " + second,
+			firstVersion.isPreviousVersionThan(second));
 	}
 
 	private void _assertLater(String first, String second) {
-		Version firstV = Version.getInstance(first);
+		Version firstVersion = Version.getInstance(first);
 
 		assertTrue(
-				first + " is not later than " + second,
-				firstV.isLaterVersionThan(second.toString()));
+			first + " is not later than " + second,
+			firstVersion.isLaterVersionThan(second.toString()));
 	}
 
 	private void _assertIncludes(String first, String second) {
-		Version firstV = Version.getInstance(first);
-		Version secondV = Version.getInstance(second);
+		Version firstVersion = Version.getInstance(first);
+		Version secondVersion = Version.getInstance(second);
 
 		assertTrue(
-				first + " does not include " + second, firstV.includes(secondV));
+			first + " does not include " + second,
+			firstVersion.includes(secondVersion));
 	}
 
 	private void _assertNotIncludes(String first, String second) {
-		Version firstV = Version.getInstance(first);
-		Version secondV = Version.getInstance(second);
+		Version firstVersion = Version.getInstance(first);
+		Version secondVersion = Version.getInstance(second);
 
-		assertFalse(first + " includes " + second, firstV.includes(secondV));
+		assertFalse(
+			first + " includes " + second,
+			firstVersion.includes(secondVersion));
 	}
 
 }

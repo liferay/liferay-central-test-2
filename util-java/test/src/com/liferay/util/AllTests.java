@@ -25,8 +25,8 @@ package com.liferay.util;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import junit.textui.TestRunner;
 import junit.textui.ResultPrinter;
+import junit.textui.TestRunner;
 
 /**
  * <a href="AllTests.java.html"><b><i>View Source</i></b></a>
