@@ -81,7 +81,7 @@
 	</library>
 	<library>
 		<file-name>development/icefaces.jar</file-name>
-		<version>1.6-Beta</version>
+		<version>1.6.0</version>
 		<project-name>ICEfaces</project-name>
 		<project-url>http://www.icefaces.com/main/home/index.jsp</project-url>
 		<license-name>Mozilla Public License 1.1</license-name>
