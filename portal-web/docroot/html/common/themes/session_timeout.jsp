@@ -68,7 +68,7 @@
 				setTimeout("checkSessionState()", newWaitTime);
 			}
 		}
-			
+
 	}
 
 	function openSessionWarning() {
