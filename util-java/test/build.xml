@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<project name="test" basedir="." default="compile">
+	<property name="project.dir" value="../.." />
+
+	<import file="${project.dir}/build-common-java.xml" />
+
+	<target name="test" depends="compile">
+		<java
+			classname="com.liferay.util.AllTests"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
+</project>
