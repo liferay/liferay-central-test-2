@@ -41,8 +41,6 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.ldap.LDAPUtil;
 
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -261,9 +259,9 @@ public class LDAPAuth implements Authenticator {
 
 				// Get user or create from LDAP
 
-				User user = processUser(
-					attrs, userMappings, companyId, emailAddress, screenName,
-					password);
+				User user = PortalLDAPUtil.importLDAPUser(
+					companyId, ctx, attrs, emailAddress, screenName, password,
+					true);
 
 				// Process LDAP success codes
 
@@ -420,71 +418,6 @@ public class LDAPAuth implements Authenticator {
 		else {
 			return SUCCESS;
 		}
-	}
-
-	protected User processUser(
-			Attributes attrs, Properties userMappings, long companyId,
-			String emailAddress, String screenName, String password)
-		throws Exception {
-
-		long creatorUserId = 0;
-
-		boolean autoPassword = false;
-		String password1 = password;
-		String password2 = password;
-		boolean passwordReset = false;
-
-		boolean autoScreenName = false;
-
-		if (Validator.isNull(screenName)) {
-			screenName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("screenName")).toLowerCase();
-		}
-
-		if (Validator.isNull(emailAddress)) {
-			emailAddress = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("emailAddress"));
-		}
-
-		Locale locale = Locale.US;
-		String firstName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("firstName"));
-		String middleName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("middleName"));
-		String lastName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("lastName"));
-
-		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
-			String fullName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("fullName"));
-
-			String[] names = LDAPUtil.splitFullName(fullName);
-
-			firstName = names[0];
-			middleName = names[1];
-			lastName = names[2];
-		}
-
-		int prefixId = 0;
-		int suffixId = 0;
-		boolean male = true;
-		int birthdayMonth = Calendar.JANUARY;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("jobTitle"));
-		long organizationId = 0;
-		long locationId = 0;
-		boolean sendEmail = false;
-		boolean checkExists = true;
-		boolean updatePassword = true;
-
-		return PortalLDAPUtil.importLDAPUser(
-			creatorUserId, companyId, autoPassword, password1, password2,
-			passwordReset, autoScreenName, screenName, emailAddress, locale,
-			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail, checkExists, updatePassword);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LDAPAuth.class);
