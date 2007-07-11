@@ -13,7 +13,7 @@
 	credentials, and schema settings.
 	-->
 
-	<!--<FileSystem class="org.apache.jackrabbit.core.fsa.db.DbFileSystem">
+	<!--<FileSystem class="org.apache.jackrabbit.core.fs.db.DbFileSystem">
 		<param name="driver" value="com.mysql.jdbc.Driver"/>
 		<param name="url" value="jdbc:mysql://localhost/jcr" />
 		<param name="user" value="" />
