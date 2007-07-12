@@ -72,16 +72,21 @@
 	}
 
 	function openSessionWarning() {
-		var message = Liferay.Popup({
+		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND), false) %>">
+			extendSession();
+		</c:if>
+		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND), false) %>">
+			var message = Liferay.Popup({
 				modal: true,
 				width: 300
 			});
 
-		var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
+			var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
 
-		AjaxUtil.update(url, message);
+			AjaxUtil.update(url, message);
 
-		setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
+			setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
+		</c:if>
 	}
 
 	function sessionHasExpired() {
