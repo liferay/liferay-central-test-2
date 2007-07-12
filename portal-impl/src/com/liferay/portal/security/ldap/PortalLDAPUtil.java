@@ -424,6 +424,7 @@ public class PortalLDAPUtil {
 		LogUtil.debug(_log, userMappings);
 
 		boolean autoPassword = false;
+
 		if (Validator.isNull(screenName)) {
 			screenName = LDAPUtil.getAttributeValue(
 				attrs, userMappings.getProperty("screenName")).toLowerCase();
@@ -586,9 +587,9 @@ public class PortalLDAPUtil {
 
 	private static User _importLDAPUser(
 			long companyId, LdapContext ctx, Attributes attrs,
-			Properties userMappings, boolean autoPassword,
-			String password, String screenName, String emailAddress,
-			boolean updatePassword, boolean importGroupMembership)
+			Properties userMappings, boolean autoPassword, String password,
+			String screenName, String emailAddress, boolean updatePassword,
+			boolean importGroupMembership)
 		throws Exception {
 
 		LogUtil.debug(_log, userMappings);
