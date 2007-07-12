@@ -235,7 +235,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 							<liferay-ui:message key="open-id" />
 						</td>
 						<td>
-							<input name="openId" class="openid_login" style="width: 150px;" type="text" />
+							<input class="openid_login" name="openId" style="width: 150px;" type="text" />
 						</td>
 					</tr>
 

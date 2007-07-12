@@ -54,7 +54,7 @@
 						<liferay-ui:message key="open-id" />
 					</td>
 					<td>
-						<input name="<portlet:namespace />openId" class="openid_login" style="width: 120px;" type="text" />
+						<input class="openid_login" name="<portlet:namespace />openId" style="width: 120px;" type="text" />
 					</td>
 				</tr>
 
