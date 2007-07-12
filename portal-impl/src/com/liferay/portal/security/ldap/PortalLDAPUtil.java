@@ -51,6 +51,7 @@ import java.util.Properties;
 
 import javax.naming.Binding;
 import javax.naming.Context;
+import javax.naming.NameNotFoundException;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
@@ -534,18 +535,35 @@ public class PortalLDAPUtil {
 			companyId);
 
 		for (int i = 0; i < attr.size(); i++) {
-			String groupDN = (String)attr.get(i);
 
-			Attributes groupAttrs = ctx.getAttributes(groupDN);
+			// Get LDAP group
+
+			String groupDN = (String)attr.get(i);
+			Attributes groupAttrs = null;
+
+			try {
+				groupAttrs = ctx.getAttributes(groupDN);
+			}
+			catch (NameNotFoundException nnfe) {
+				if (_log.isErrorEnabled()) {
+					_log.error(
+						"Trying to import non-existant LDAP group that was " +
+							"referenced from LDAP user with groupDN " + groupDN);
+
+					_log.error(nnfe, nnfe);
+				}
+
+				continue;
+			}
+
+			// Get portal user group corresponding to LDAP group
+
+			UserGroup userGroup = null;
 
 			String groupName = LDAPUtil.getAttributeValue(
 				groupAttrs, groupMappings.getProperty("groupName"));
 			String description = LDAPUtil.getAttributeValue(
 				groupAttrs, groupMappings.getProperty("description"));
-
-			// Get associated user group
-
-			UserGroup userGroup = null;
 
 			try {
 				userGroup = UserGroupLocalServiceUtil.getUserGroup(
@@ -676,10 +694,12 @@ public class PortalLDAPUtil {
 					organizationId, locationId, sendEmail);
 			}
 			catch (Exception e){
-				_log.error(
-					"Problem adding user with screen name " + screenName +
-						" and email address " + emailAddress,
-					e);
+				if (_log.isErrorEnabled()) {
+					_log.error(
+						"Problem adding user with screen name " + screenName +
+							" and email address " + emailAddress,
+						e);
+				}
 			}
 		}
 
@@ -708,23 +728,55 @@ public class PortalLDAPUtil {
 		UserLocalServiceUtil.clearUserGroupUsers(userGroupId);
 
 		for (int i = 0; i < attr.size(); i++) {
+
+			// Get LDAP user
+
 			String userDN = (String)attr.get(i);
+			Attributes userAttrs = null;
 
-			// Get associated user
+			try {
+				userAttrs = ctx.getAttributes(userDN);
+			}
+			catch (NameNotFoundException nnfe) {
+				if (_log.isErrorEnabled()) {
+					_log.error(
+						"Trying to import non-existant LDAP user that was " +
+							"referenced from LDAP group with userDN " + userDN);
 
-			Attributes userAttrs = ctx.getAttributes(userDN);
+					_log.error(nnfe, nnfe);
+				}
 
-			String emailAddress = LDAPUtil.getAttributeValue(
-				userAttrs, userMappings.getProperty("emailAddress"));
+				continue;
+			}
+
+			// Get portal user corresponding to LDAP user
 
 			User user = null;
+			String emailAddress = LDAPUtil.getAttributeValue(
+				userAttrs, userMappings.getProperty("emailAddress"));
 
 			try {
 				user = UserLocalServiceUtil.getUserByEmailAddress(
 					companyId, emailAddress);
 			}
 			catch (NoSuchUserException nsue) {
-				user = importLDAPUser(companyId, ctx, userAttrs, false);
+				try {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Adding user " + emailAddress + " at " + userDN);
+					}
+
+					user = importLDAPUser(companyId, ctx, userAttrs, false);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Could not create user " + userDN);
+					}
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(e);
+					}
+				}
 			}
 
 			// Add user to user group
