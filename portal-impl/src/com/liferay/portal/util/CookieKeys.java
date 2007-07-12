@@ -79,7 +79,9 @@ public class CookieKeys {
 		throws CookieNotSupportedException {
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SESSION_ENABLE_PERSISTENT_COOKIES))) {
+				PropsUtil.SESSION_ENABLE_PERSISTENT_COOKIES)) &&
+			GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.SESSION_TEST_COOKIE_SUPPORT))) {
 
 			String cookieSupport = CookieUtil.get(
 				req.getCookies(), CookieKeys.COOKIE_SUPPORT);
