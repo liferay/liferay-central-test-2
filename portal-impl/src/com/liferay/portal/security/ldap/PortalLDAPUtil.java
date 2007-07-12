@@ -298,8 +298,10 @@ public class PortalLDAPUtil {
 			String importMethod = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_METHOD);
 
-			String baseDN = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_BASE_DN);
+			String userDN = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_USERS_DN);
+			String groupDN = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_GROUPS_DN);
 			String userFilter = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
 			String groupFilter = PrefsPropsUtil.getString(
@@ -308,7 +310,7 @@ public class PortalLDAPUtil {
 				SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
 
 			if (importMethod.equals(IMPORT_BY_USER)) {
-				NamingEnumeration enu = ctx.search(baseDN, userFilter, cons);
+				NamingEnumeration enu = ctx.search(userDN, userFilter, cons);
 
 				// Loop through all LDAP users
 
@@ -320,7 +322,7 @@ public class PortalLDAPUtil {
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
-				NamingEnumeration enu = ctx.search(baseDN, groupFilter, cons);
+				NamingEnumeration enu = ctx.search(groupDN, groupFilter, cons);
 
 				// Loop through all LDAP groups
 
