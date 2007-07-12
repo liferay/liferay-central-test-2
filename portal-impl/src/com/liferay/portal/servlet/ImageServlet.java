@@ -25,6 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -119,7 +120,7 @@ public class ImageServlet extends HttpServlet {
 			Date modifiedDate = image.getModifiedDate();
 
 			if (modifiedDate == null) {
-				return -1;
+				modifiedDate = PortalUtil.UP_TIME;
 			}
 
 			// Round down and remove milliseconds

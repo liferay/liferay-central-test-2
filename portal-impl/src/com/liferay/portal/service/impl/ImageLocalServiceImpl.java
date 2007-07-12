@@ -29,6 +29,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ImageUtil;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,6 +75,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 			image = ImageUtil.create(imageId);
 		}
 
+		image.setModifiedDate(new Date());
 		image.setTextObj(bytes);
 		image.setType(type);
 		image.setHeight(height);
