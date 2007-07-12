@@ -111,7 +111,9 @@ public class PropertiesTransformerListener extends TransformerListener {
 			PropertiesUtil.load(props, script);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		if (props.size() == 0) {

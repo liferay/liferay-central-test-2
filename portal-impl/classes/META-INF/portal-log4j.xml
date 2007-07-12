@@ -392,6 +392,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.journal.util.PropertiesTransformerListener">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portlet.mail">
 		<priority value="WARN" />
 	</category>
