@@ -619,3 +619,21 @@ ul.gamma .tree-item-hover {
 .ie6 .tabs-nav .tabs-disabled a {
 	filter: alpha(opacity=40);
 }
+
+/* ----------- OpenID ---------- */
+
+input[type="text"].openid_login {
+   background: url(http://openid.net/login-bg.gif) no-repeat;
+   background-color: #fff;
+   background-position: 0 50%;
+   color: #000;
+   padding-left: 18px;
+}
+
+.ie6 input.text.openid_login {
+	background: url(http://openid.net/login-bg.gif) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
+}
