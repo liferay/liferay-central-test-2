@@ -27,12 +27,27 @@
 <%@ include file="/html/common/themes/top_meta.jspf" %>
 <%@ include file="/html/common/themes/top_meta-ext.jsp" %>
 
+<%@ page import="com.liferay.portlet.journal.NoSuchTemplateException" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalTemplate" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
+
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/liferay.ico" />
 
 <link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
 <link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
 
 <%
+try {
+	JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(portletGroupId.longValue(), "CSS-TEMPLATE");
+%>
+
+	<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= portletGroupId.longValue() %>&templateId=CSS-TEMPLATE" />
+
+<%
+}
+catch (NoSuchTemplateException nste) {
+}
+
 List portlets = null;
 
 if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
