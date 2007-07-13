@@ -581,6 +581,10 @@ public class PropsUtil {
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY = "field.enable.com.liferay.portal.model.Contact.birthday";
 
+	// Mime Types
+
+	public static final String MIME_TYPES = "mime.types";
+
 	// Amazon License Keys
 
 	public static final String AMAZON_LICENSE = "amazon.license.";

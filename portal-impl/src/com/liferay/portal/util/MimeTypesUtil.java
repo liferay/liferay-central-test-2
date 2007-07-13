@@ -26,6 +26,9 @@ import java.io.File;
 
 import javax.activation.MimetypesFileTypeMap;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="MimeTypesUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,15 +48,39 @@ public class MimeTypesUtil {
 
 	private MimeTypesUtil() {
 		_mimeTypes = new MimetypesFileTypeMap();
+
+		String[] customMimeTypes = PropsUtil.getArray(PropsUtil.MIME_TYPES);
+
+		for (int i = 0; i < customMimeTypes.length; i++) {
+			_mimeTypes.addMimeTypes(customMimeTypes[i]);
+		}
 	}
 
 	private String _getContentType(File file) {
-		return _mimeTypes.getContentType(file);
+		String contentType = _mimeTypes.getContentType(file);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Content type " + contentType + " returned for file " +
+					file.toString());
+		}
+
+		return contentType;
 	}
 
 	private String _getContentType(String fileName) {
-		return _mimeTypes.getContentType(fileName);
+		String contentType = _mimeTypes.getContentType(fileName);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Content type " + contentType + " returned for file name " +
+					fileName);
+		}
+
+		return contentType;
 	}
+
+	private static Log _log = LogFactory.getLog(MimeTypesUtil.class);
 
 	private static MimeTypesUtil _instance = new MimeTypesUtil();
 

@@ -304,6 +304,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.util.MimeTypesUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.util.PortalInstances">
 		<priority value="ERROR" />
 	</category>
