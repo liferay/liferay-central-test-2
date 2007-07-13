@@ -5,9 +5,9 @@
 	<name>Liferay Core Plugins</name>
 	<module-id>liferay/core-plugins/4.3.0/war</module-id>
 	<types>
-		<type>layout-templates</type>
-		<type>portlets</type>
-		<type>themes</type>
+		<type>layout-template</type>
+		<type>portlet</type>
+		<type>theme</type>
 	</types>
 	<short-description>
 		Portlets, themes, and layout templates included with Liferay Portal.
