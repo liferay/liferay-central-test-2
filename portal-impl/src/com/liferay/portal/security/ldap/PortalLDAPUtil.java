@@ -540,20 +540,19 @@ public class PortalLDAPUtil {
 
 			// Get LDAP group
 
-			String groupDN = (String)attr.get(i);
 			Attributes groupAttrs = null;
+
+			String groupDN = (String)attr.get(i);
 
 			try {
 				groupAttrs = ctx.getAttributes(groupDN);
 			}
 			catch (NameNotFoundException nnfe) {
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Trying to import non-existant LDAP group that was " +
-							"referenced from LDAP user with groupDN " + groupDN);
+				_log.error(
+					"Trying to import nonexistent LDAP group that was " +
+						"referenced from LDAP user with groupDN " + groupDN);
 
-					_log.error(nnfe, nnfe);
-				}
+				_log.error(nnfe, nnfe);
 
 				continue;
 			}
@@ -696,12 +695,10 @@ public class PortalLDAPUtil {
 					organizationId, locationId, sendEmail);
 			}
 			catch (Exception e){
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Problem adding user with screen name " + screenName +
-							" and email address " + emailAddress,
-						e);
-				}
+				_log.error(
+					"Problem adding user with screen name " + screenName +
+						" and email address " + emailAddress,
+					e);
 			}
 		}
 
@@ -733,20 +730,19 @@ public class PortalLDAPUtil {
 
 			// Get LDAP user
 
-			String userDN = (String)attr.get(i);
 			Attributes userAttrs = null;
+
+			String userDN = (String)attr.get(i);
 
 			try {
 				userAttrs = ctx.getAttributes(userDN);
 			}
 			catch (NameNotFoundException nnfe) {
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Trying to import non-existant LDAP user that was " +
-							"referenced from LDAP group with userDN " + userDN);
+				_log.error(
+					"Trying to import nonexistent LDAP user that was " +
+						"referenced from LDAP group with userDN " + userDN);
 
-					_log.error(nnfe, nnfe);
-				}
+				_log.error(nnfe, nnfe);
 
 				continue;
 			}
@@ -754,6 +750,7 @@ public class PortalLDAPUtil {
 			// Get portal user corresponding to LDAP user
 
 			User user = null;
+
 			String emailAddress = LDAPUtil.getAttributeValue(
 				userAttrs, userMappings.getProperty("emailAddress"));
 
@@ -776,7 +773,7 @@ public class PortalLDAPUtil {
 					}
 
 					if (_log.isDebugEnabled()) {
-						_log.debug(e);
+						_log.debug(e, e);
 					}
 				}
 			}
