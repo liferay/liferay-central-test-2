@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
 import java.sql.Connection;
 import java.sql.SQLException;

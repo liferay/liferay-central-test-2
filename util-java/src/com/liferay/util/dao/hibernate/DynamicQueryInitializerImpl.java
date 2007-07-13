@@ -24,7 +24,6 @@ package com.liferay.util.dao.hibernate;
 
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.spring.hibernate.LiferaySession;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.util.dao.hibernate.LiferayClassicSession;
+
 import java.lang.Object;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
