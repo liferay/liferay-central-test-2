@@ -20,43 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
+package com.liferay.taglib.faces.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.model.PortletCategory;
+import com.liferay.util.Validator;
 
-import java.io.Serializable;
-
-import java.util.Comparator;
-import java.util.Locale;
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
+import javax.faces.el.ValueBinding;
+import javax.faces.webapp.UIComponentTag;
 
 /**
- * <a href="PortletCategoryComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="JSFTagUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Neil Griffin
  *
  */
-public class PortletCategoryComparator implements Comparator, Serializable {
+public class JSFTagUtil {
 
-	public PortletCategoryComparator(long companyId, Locale locale) {
-		_companyId = companyId;
-		_locale = locale;
+	public static String eval(String expr) {
+		if (Validator.isNotNull(expr) &&
+			UIComponentTag.isValueReference(expr)) {
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			Application application = facesContext.getApplication();
+			ValueBinding valueBinding = application.createValueBinding(expr);
+
+			expr = String.valueOf(valueBinding.getValue(facesContext));
+		}
+
+		return expr;
 	}
-
-	public int compare(Object obj1, Object obj2) {
-		PortletCategory portletCategory1 = (PortletCategory)obj1;
-		PortletCategory portletCategory2 = (PortletCategory)obj2;
-
-		String name1 = LanguageUtil.get(
-			_companyId, _locale, portletCategory1.getName());
-
-		String name2 = LanguageUtil.get(
-			_companyId, _locale, portletCategory2.getName());
-
-		return name1.compareTo(name2);
-	}
-
-	private long _companyId;
-	private Locale _locale;
 
 }

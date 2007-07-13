@@ -20,43 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
+package com.liferay.util.bridges.jsf.common;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.Serializable;
-
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+
 /**
- * <a href="PortletCategoryComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="SelectItemList.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * This class provides a convenient way of building lists of JSF SelectItem
+ * objects, and convenience method for operating against them.
+ * </p>
+ *
+ * @author Neil Griffin
  *
  */
-public class PortletCategoryComparator implements Comparator, Serializable {
+public class SelectItemList extends ArrayList {
 
-	public PortletCategoryComparator(long companyId, Locale locale) {
-		_companyId = companyId;
-		_locale = locale;
+	public void addEmptySelectItem(FacesContext facesContext) {
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+
+		Object value = StringPool.BLANK;
+		String label = LanguageUtil.get(locale, "select");
+
+		add(new SelectItem(value, label));
 	}
-
-	public int compare(Object obj1, Object obj2) {
-		PortletCategory portletCategory1 = (PortletCategory)obj1;
-		PortletCategory portletCategory2 = (PortletCategory)obj2;
-
-		String name1 = LanguageUtil.get(
-			_companyId, _locale, portletCategory1.getName());
-
-		String name2 = LanguageUtil.get(
-			_companyId, _locale, portletCategory2.getName());
-
-		return name1.compareTo(name2);
-	}
-
-	private long _companyId;
-	private Locale _locale;
 
 }

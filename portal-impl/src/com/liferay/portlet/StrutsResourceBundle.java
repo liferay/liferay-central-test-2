@@ -22,7 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -79,13 +78,7 @@ public class StrutsResourceBundle extends ResourceBundle {
 			key = sm.toString();
 		}
 
-		try {
-			obj = LanguageUtil.get(_companyId, _locale, key);
-		}
-		catch (LanguageException le) {
-		}
-
-		return obj;
+		return LanguageUtil.get(_companyId, _locale, key);
 	}
 
 	private String _portletName;

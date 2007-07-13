@@ -22,7 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -43,9 +42,7 @@ import java.util.TimeZone;
  */
 public class PrettyDateFormat extends DateFormat {
 
-	public PrettyDateFormat(long companyId, Locale locale, TimeZone timeZone)
-		throws LanguageException {
-
+	public PrettyDateFormat(long companyId, Locale locale, TimeZone timeZone) {
 		_companyId = companyId;
 		_locale = locale;
 		_timeZone = timeZone;

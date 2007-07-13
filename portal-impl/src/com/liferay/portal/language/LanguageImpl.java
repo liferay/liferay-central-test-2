@@ -23,7 +23,6 @@
 package com.liferay.portal.language;
 
 import com.liferay.portal.kernel.language.Language;
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
@@ -74,16 +73,26 @@ public class LanguageImpl implements Language {
 
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
+	public String format(Locale locale, String pattern, Object argument) {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return format(companyId, locale, pattern, new Object[] {argument});
+	}
+
+	public String format(Locale locale, String pattern, Object[] arguments) {
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return format(companyId, locale, pattern, arguments);
+	}
+
 	public String format(
-			long companyId, Locale locale, String pattern, Object argument)
-		throws LanguageException {
+		long companyId, Locale locale, String pattern, Object argument) {
 
 		return format(companyId, locale, pattern, new Object[] {argument});
 	}
 
 	public String format(
-			long companyId, Locale locale, String pattern, Object[] arguments)
-		throws LanguageException {
+		long companyId, Locale locale, String pattern, Object[] arguments) {
 
 		String value = null;
 
@@ -105,39 +114,37 @@ public class LanguageImpl implements Language {
 			}
 		}
 		catch (Exception e) {
-			throw new LanguageException(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
 		}
 
 		return value;
 	}
 
 	public String format(
-			PageContext pageContext, String pattern, Object argument)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object argument) {
 
 		return format(pageContext, pattern, new Object[] {argument}, true);
 	}
 
 	public String format(
-			PageContext pageContext, String pattern, Object argument,
-			boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments) {
 
 		return format(
 			pageContext, pattern, new Object[] {argument}, translateArguments);
 	}
 
 	public String format(
-			PageContext pageContext, String pattern, Object[] arguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object[] arguments) {
 
 		return format(pageContext, pattern, arguments, true);
 	}
 
 	public String format(
-			PageContext pageContext, String pattern, Object[] arguments,
-			boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments) {
 
 		String value = null;
 
@@ -164,24 +171,24 @@ public class LanguageImpl implements Language {
 			}
 		}
 		catch (Exception e) {
-			throw new LanguageException(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
 		}
 
 		return value;
 	}
 
 	public String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
 		return format(
 			pageContext, pattern, new LanguageWrapper[] {argument}, true);
 	}
 
 	public String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument,
-			boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper argument,
+		boolean translateArguments) {
 
 		return format(
 			pageContext, pattern, new LanguageWrapper[] {argument},
@@ -189,17 +196,14 @@ public class LanguageImpl implements Language {
 	}
 
 	public String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper[] arguments) {
 
 		return format(pageContext, pattern, arguments, true);
 	}
 
 	public String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments, boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
+		boolean translateArguments) {
 
 		String value = null;
 
@@ -231,21 +235,26 @@ public class LanguageImpl implements Language {
 			}
 		}
 		catch (Exception e) {
-			throw new LanguageException(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
 		}
 
 		return value;
 	}
 
-	public String get(long companyId, Locale locale, String key)
-		throws LanguageException {
+	public String get(Locale locale, String key) {
+		long companyId = CompanyThreadLocal.getCompanyId();
 
 		return get(companyId, locale, key, key);
 	}
 
+	public String get(long companyId, Locale locale, String key) {
+		return get(companyId, locale, key, key);
+	}
+
 	public String get(
-			long companyId, Locale locale, String key, String defaultValue)
-		throws LanguageException {
+		long companyId, Locale locale, String key, String defaultValue) {
 
 		if (key == null) {
 			return null;
@@ -260,7 +269,9 @@ public class LanguageImpl implements Language {
 			value = resources.getMessage(locale, key);
 		}
 		catch (Exception e) {
-			throw new LanguageException(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
 		}
 
 		if (value == null) {
@@ -270,14 +281,12 @@ public class LanguageImpl implements Language {
 		return value;
 	}
 
-	public String get(PageContext pageContext, String key)
-		throws LanguageException {
-
+	public String get(PageContext pageContext, String key) {
 		return get(pageContext, key, key);
 	}
 
-	public String get(PageContext pageContext, String key, String defaultValue)
-		throws LanguageException {
+	public String get(
+		PageContext pageContext, String key, String defaultValue) {
 
 		if (key == null) {
 			return null;
@@ -291,8 +300,6 @@ public class LanguageImpl implements Language {
 		}
 		catch (Exception e) {
 			_log.error(e);
-
-			throw new LanguageException(key, e);
 		}
 
 		if (value == null) {
@@ -375,14 +382,14 @@ public class LanguageImpl implements Language {
 		return _getInstance()._getLocale(languageCode);
 	}
 
-	public String getTimeDescription(PageContext pageContext, Long milliseconds)
-		throws LanguageException {
+	public String getTimeDescription(
+		PageContext pageContext, Long milliseconds) {
 
 		return getTimeDescription(pageContext, milliseconds.longValue());
 	}
 
-	public String getTimeDescription(PageContext pageContext, long milliseconds)
-		throws LanguageException {
+	public String getTimeDescription(
+		PageContext pageContext, long milliseconds) {
 
 		String desc = Time.getDescription(milliseconds);
 
@@ -400,7 +407,9 @@ public class LanguageImpl implements Language {
 					desc.substring(pos + 1, desc.length()).toLowerCase());
 		}
 		catch (Exception e) {
-			throw new LanguageException(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
 		}
 
 		return value;

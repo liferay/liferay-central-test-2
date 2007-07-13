@@ -20,43 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
-
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.model.PortletCategory;
-
-import java.io.Serializable;
+package com.liferay.util.bridges.jsf.common.comparator;
 
 import java.util.Comparator;
-import java.util.Locale;
+
+import javax.faces.model.SelectItem;
 
 /**
- * <a href="PortletCategoryComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="SelectItemComparator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Neil Griffin
  *
  */
-public class PortletCategoryComparator implements Comparator, Serializable {
+public class SelectItemComparator implements Comparator {
 
-	public PortletCategoryComparator(long companyId, Locale locale) {
-		_companyId = companyId;
-		_locale = locale;
+	public SelectItemComparator() {
+		this(true);
+	}
+
+	public SelectItemComparator(boolean asc) {
+		_asc = asc;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		PortletCategory portletCategory1 = (PortletCategory)obj1;
-		PortletCategory portletCategory2 = (PortletCategory)obj2;
+		SelectItem selectItem1 = (SelectItem)obj1;
+		SelectItem selectItem2 = (SelectItem)obj2;
 
-		String name1 = LanguageUtil.get(
-			_companyId, _locale, portletCategory1.getName());
+		int value = selectItem1.getLabel().compareTo(selectItem2.getLabel());
 
-		String name2 = LanguageUtil.get(
-			_companyId, _locale, portletCategory2.getName());
-
-		return name1.compareTo(name2);
+		if (_asc) {
+			return value;
+		}
+		else {
+			return -value;
+		}
 	}
 
-	private long _companyId;
-	private Locale _locale;
+	private boolean _asc;
 
 }

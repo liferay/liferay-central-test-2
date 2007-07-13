@@ -37,123 +37,120 @@ import javax.servlet.jsp.PageContext;
 public class UnicodeLanguageUtil {
 
 	public static String format(
-			long companyId, Locale locale, String pattern, Object argument)
-		throws LanguageException {
+		Locale locale, String pattern, Object argument) {
+
+		return getUnicodeLanguage().format(locale, pattern, argument);
+	}
+
+	public static String format(
+		Locale locale, String pattern, Object[] arguments) {
+
+		return getUnicodeLanguage().format(locale, pattern, arguments);
+	}
+
+	public static String format(
+		long companyId, Locale locale, String pattern, Object argument) {
 
 		return getUnicodeLanguage().format(
 			companyId, locale, pattern, argument);
 	}
 
 	public static String format(
-			long companyId, Locale locale, String pattern, Object[] arguments)
-		throws LanguageException {
+		long companyId, Locale locale, String pattern, Object[] arguments) {
 
 		return getUnicodeLanguage().format(
 			companyId, locale, pattern, arguments);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern, Object argument)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object argument) {
 
 		return getUnicodeLanguage().format(pageContext, pattern, argument);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern, Object argument,
-			boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments) {
 
 		return getUnicodeLanguage().format(
 			pageContext, pattern, argument, translateArguments);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern, Object[] arguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object[] arguments) {
 
 		return getUnicodeLanguage().format(pageContext, pattern, arguments);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern, Object[] arguments,
-			boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments) {
 
 		return getUnicodeLanguage().format(
 			pageContext, pattern, arguments, translateArguments);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
 		return getUnicodeLanguage().format(pageContext, pattern, argument);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument,
-			boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper argument,
+		boolean translateArguments) {
 
 		return getUnicodeLanguage().format(
 			pageContext, pattern, argument, translateArguments);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper[] arguments) {
 
 		return getUnicodeLanguage().format(pageContext, pattern, arguments);
 	}
 
 	public static String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments, boolean translateArguments)
-		throws LanguageException {
+		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
+		boolean translateArguments) {
 
 		return getUnicodeLanguage().format(
 			pageContext, pattern, arguments, translateArguments);
 	}
 
-	public static String get(long companyId, Locale locale, String key)
-		throws LanguageException {
+	public static String get(Locale locale, String key) {
+		return getUnicodeLanguage().get(locale, key);
+	}
 
+	public static String get(long companyId, Locale locale, String key) {
 		return getUnicodeLanguage().get(companyId, locale, key);
 	}
 
 	public static String get(
-			long companyId, Locale locale, String key, String defaultValue)
-		throws LanguageException {
+		long companyId, Locale locale, String key, String defaultValue) {
 
 		return getUnicodeLanguage().get(companyId, locale, key, defaultValue);
 	}
 
-	public static String get(PageContext pageContext, String key)
-		throws LanguageException {
-
+	public static String get(PageContext pageContext, String key) {
 		return getUnicodeLanguage().get(pageContext, key);
 	}
 
 	public static String get(
-			PageContext pageContext, String key, String defaultValue)
-		throws LanguageException {
+		PageContext pageContext, String key, String defaultValue) {
 
 		return getUnicodeLanguage().get(pageContext, key, defaultValue);
 	}
 
 	public static String getTimeDescription(
-			PageContext pageContext, Long milliseconds)
-		throws LanguageException {
+		PageContext pageContext, Long milliseconds) {
 
 		return getUnicodeLanguage().getTimeDescription(
 			pageContext, milliseconds);
 	}
 
 	public static String getTimeDescription(
-			PageContext pageContext, long milliseconds)
-		throws LanguageException {
+		PageContext pageContext, long milliseconds) {
 
 		return getUnicodeLanguage().getTimeDescription(
 			pageContext, milliseconds);

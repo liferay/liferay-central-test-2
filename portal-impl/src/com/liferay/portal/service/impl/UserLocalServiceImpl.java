@@ -49,7 +49,6 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserPortraitException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
@@ -246,16 +245,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String fullName = UserImpl.getFullName(firstName, middleName, lastName);
 
-		String greeting = null;
-
-		try {
-			greeting =
-				LanguageUtil.get(companyId, locale, "welcome") + ", " +
-					fullName + "!";
-		}
-		catch (LanguageException le) {
-			greeting = "Welcome, " + fullName + "!";
-		}
+		String greeting =
+			LanguageUtil.get(companyId, locale, "welcome") + ", " + fullName +
+				"!";
 
 		User user = UserUtil.create(userId);
 

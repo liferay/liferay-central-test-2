@@ -20,32 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.language;
+package com.liferay.util.bridges.jsf.common;
 
-import com.liferay.portal.PortalException;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
- * <a href="LanguageException.java.html"><b><i>View Source</i></b></a>
+ * <a href="FacesMessageUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * This class provides static convenience methods for creating FacesMessage
+ * objects from values in resource bundles, and adding them to the FacesContext
+ * either globally, or to individual components only.
+ * </p>
+ *
+ * @author Neil Griffin
  *
  */
-public class LanguageException extends PortalException {
+public class FacesMessageUtil {
 
-	public LanguageException() {
-		super();
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String summary) {
+
+		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
+
+		facesContext.addMessage(clientId, facesMessage);
 	}
 
-	public LanguageException(String msg) {
-		super(msg);
-	}
+	public static void addGlobalMessage(
+		FacesContext facesContext, Severity severity, String summary) {
 
-	public LanguageException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
 
-	public LanguageException(Throwable cause) {
-		super(cause);
+		facesContext.addMessage(null, facesMessage);
 	}
 
 }

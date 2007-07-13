@@ -34,69 +34,59 @@ import javax.servlet.jsp.PageContext;
  */
 public interface UnicodeLanguage {
 
-	public String format(
-			long companyId, Locale locale, String pattern, Object argument)
-		throws LanguageException;
+	public String format(Locale locale, String pattern, Object argument);
+
+	public String format(Locale locale, String pattern, Object[] arguments);
 
 	public String format(
-			long companyId, Locale locale, String pattern, Object[] arguments)
-		throws LanguageException;
+		long companyId, Locale locale, String pattern, Object argument);
 
 	public String format(
-			PageContext pageContext, String pattern, Object argument)
-		throws LanguageException;
+		long companyId, Locale locale, String pattern, Object[] arguments);
 
 	public String format(
-			PageContext pageContext, String pattern, Object argument,
-			boolean translateArguments)
-		throws LanguageException;
+		PageContext pageContext, String pattern, Object argument);
 
 	public String format(
-			PageContext pageContext, String pattern, Object[] arguments)
-		throws LanguageException;
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments);
 
 	public String format(
-			PageContext pageContext, String pattern, Object[] arguments,
-			boolean translateArguments)
-		throws LanguageException;
+		PageContext pageContext, String pattern, Object[] arguments);
 
 	public String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument)
-		throws LanguageException;
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments);
 
 	public String format(
-			PageContext pageContext, String pattern, LanguageWrapper argument,
-			boolean translateArguments)
-		throws LanguageException;
+		PageContext pageContext, String pattern, LanguageWrapper argument);
 
 	public String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments)
-		throws LanguageException;
+		PageContext pageContext, String pattern, LanguageWrapper argument,
+		boolean translateArguments);
 
 	public String format(
-			PageContext pageContext, String pattern,
-			LanguageWrapper[] arguments, boolean translateArguments)
-		throws LanguageException;
+		PageContext pageContext, String pattern, LanguageWrapper[] arguments);
 
-	public String get(long companyId, Locale locale, String key)
-		throws LanguageException;
+	public String format(
+		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
+		boolean translateArguments);
+
+	public String get(Locale locale, String key);
+
+	public String get(long companyId, Locale locale, String key);
 
 	public String get(
-			long companyId, Locale locale, String key, String defaultValue)
-		throws LanguageException;
+		long companyId, Locale locale, String key, String defaultValue);
 
-	public String get(PageContext pageContext, String key)
-		throws LanguageException;
+	public String get(PageContext pageContext, String key);
 
-	public String get(
-			PageContext pageContext, String key, String defaultValue)
-		throws LanguageException;
+	public String get(PageContext pageContext, String key, String defaultValue);
 
-	public String getTimeDescription(PageContext pageContext, Long milliseconds)
-		throws LanguageException;
+	public String getTimeDescription(
+		PageContext pageContext, Long milliseconds);
 
-	public String getTimeDescription(PageContext pageContext, long milliseconds)
-		throws LanguageException;
+	public String getTimeDescription(
+		PageContext pageContext, long milliseconds);
 
 }

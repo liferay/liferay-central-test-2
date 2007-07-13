@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.mail.action;
 
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -354,8 +353,7 @@ public class MailAction extends JSONAction {
 	}
 
 	private JSONArray _convertEnvelopes(
-			Set envelopes, ThemeDisplay themeDisplay)
-		throws LanguageException {
+		Set envelopes, ThemeDisplay themeDisplay) {
 
 		PrettyDateFormat dateFormat =
 			new PrettyDateFormat(themeDisplay.getCompanyId(),

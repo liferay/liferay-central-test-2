@@ -20,43 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
+package com.liferay.util.bridges.jsf.common;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 
-import java.io.Serializable;
+import javax.faces.context.FacesContext;
 
-import java.util.Comparator;
-import java.util.Locale;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortletCategoryComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemeDisplayManagedBean.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * This class is designed to be a convenient JSF managed bean that can be used
+ * to get portal related information (such as the user's time zone).
+ * </p>
+ *
+ * @author Neil Griffin
  *
  */
-public class PortletCategoryComparator implements Comparator, Serializable {
+public class ThemeDisplayManagedBean {
 
-	public PortletCategoryComparator(long companyId, Locale locale) {
-		_companyId = companyId;
-		_locale = locale;
+	public User getUser() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		String remoteUser = facesContext.getExternalContext().getRemoteUser();
+
+		try {
+			long userId = GetterUtil.getLong(remoteUser);
+
+			return UserLocalServiceUtil.getUserById(userId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return null;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		PortletCategory portletCategory1 = (PortletCategory)obj1;
-		PortletCategory portletCategory2 = (PortletCategory)obj2;
-
-		String name1 = LanguageUtil.get(
-			_companyId, _locale, portletCategory1.getName());
-
-		String name2 = LanguageUtil.get(
-			_companyId, _locale, portletCategory2.getName());
-
-		return name1.compareTo(name2);
-	}
-
-	private long _companyId;
-	private Locale _locale;
+	private static Log _log = LogFactory.getLog(User.class);
 
 }

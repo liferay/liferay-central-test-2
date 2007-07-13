@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.currencyconverter.util;
 
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCachePool;
@@ -47,9 +46,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class CurrencyUtil {
 
-	public static Map getAllSymbols(PageContext pageContext)
-		throws LanguageException {
-
+	public static Map getAllSymbols(PageContext pageContext) {
 		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
 
 		Locale locale = req.getLocale();

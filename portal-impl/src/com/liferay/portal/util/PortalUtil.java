@@ -28,7 +28,6 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.language.LanguageException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
@@ -943,9 +942,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getPortletTitle(String portletId, User user)
-		throws LanguageException {
-
+	public static String getPortletTitle(String portletId, User user) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
