@@ -252,7 +252,7 @@ public class PropsUtil {
 	public static final String SESSION_TIMEOUT = "session.timeout";
 
 	public static final String SESSION_TIMEOUT_WARNING = "session.timeout.warning";
-	
+
 	public static final String SESSION_TIMEOUT_AUTO_EXTEND = "session.timeout.auto.extend";
 
 	public static final String SESSION_SHARED_ATTRIBUTES = "session.shared.attributes";
