@@ -43,7 +43,7 @@ public class DynamicQueryInitializerImpl implements DynamicQueryInitializer {
 
 	public DynamicQuery initialize(Object obj) {
 		Session session = (Session)obj;
-		
+
 		if (session instanceof LiferaySession) {
 			session = ((LiferaySession)session).getHibernateSession();
 		}
