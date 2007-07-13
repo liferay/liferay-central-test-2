@@ -1059,6 +1059,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=Kentät
 file-location=Tiedoston sijaintipaikka
 file-name=Tiedoston nimi
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=Tiedoston lähetys
 file=Tiedosto
 fill-out-the-following-form-to-get-driving-directions-to=Täytä lomake saadaksesi ajo-ohjeet kohteeseen
@@ -2553,6 +2554,7 @@ user=Käyttäjä
 users=Käyttäjät
 vacation-message=Lomaviesti
 vacation=Loma
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=Arvot
 verification-number=Varmistus numero
 version-history=Versio historia

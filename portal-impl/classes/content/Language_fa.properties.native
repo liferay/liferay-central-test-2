@@ -856,6 +856,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=فيلدها
 file-location=مکان فايل
 file-name=نام فايل
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=آپلود فايل
 file=فايل
 fill-out-the-following-form-to-get-driving-directions-to=فرم زير را پر کنيد
@@ -2052,6 +2053,7 @@ user=کاربر
 users=کاربران
 vacation-message=پيام مرخصی
 vacation=مرخصی
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=مقادير
 verification-number=شماره بررسی
 version-history=تاريخچه نسخه ها

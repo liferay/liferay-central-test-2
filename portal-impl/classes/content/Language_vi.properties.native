@@ -590,6 +590,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=Các trường
 file-location=Vị trí file
 file-name=Tên File
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file=File
 fill-out-the-following-form-to-get-driving-directions-to=Điền vào mẫu để nhận được chỉ dẫn lái xe tới
 filter-settings=Cài đặt bộ lọc
@@ -1486,6 +1487,7 @@ user=Ngừơi dùng
 users=Người dùng
 vacation-message=Thông báo nghỉ
 vacation=Nghỉ
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=Giá trị
 verification-number=Số kiểm tra
 version-history=Lịch sử phiên bản

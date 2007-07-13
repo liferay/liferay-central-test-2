@@ -795,6 +795,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=Поля
 file-location=Местонахождение файла
 file-name=Название файла
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=Отправка файла
 file=Файл
 fill-out-the-following-form-to-get-driving-directions-to=Fill out the following form to get driving directions to
@@ -1970,6 +1971,7 @@ user=Пользователь
 users=Пользователи
 vacation-message=Отсутственное сообщение
 vacation=Отсутствие
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=Значения
 verification-number=Проверочный номер
 version-history=История версий

@@ -944,6 +944,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=Fält
 file-location=Fil plats
 file-name=Filnamn
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=Ladda upp fil
 file=Fil
 fill-out-the-following-form-to-get-driving-directions-to=Fyll i formeln för att få vägbeskrivning till
@@ -2308,6 +2309,7 @@ user=Användare
 users=Användare
 vacation-message=Frånvaro meddelande
 vacation=Frånvaro
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=Värden
 verification-number=CVV-kod
 version-history=Versionshistorik

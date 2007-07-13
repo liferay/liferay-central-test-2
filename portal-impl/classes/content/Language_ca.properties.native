@@ -834,6 +834,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=Camps
 file-location=Localització de l'arxiu
 file-name=Nom de l'arxiu
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=Pujar l'arxiu
 file=Arxiu
 fill-out-the-following-form-to-get-driving-directions-to=Completi el següent formulari per a conseguir instruccions sobre com arribar a
@@ -2019,6 +2020,7 @@ user=Usuari
 users=Usuaris
 vacation-message=Missatge de vacances
 vacation=Vacances
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=Valors
 verification-number=Número de verificació
 version-history=Històric de versions

@@ -1028,6 +1028,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=حقول
 file-location=موقع الملف
 file-name=إسم الملف
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=تحميل الملف
 file=ملف
 fill-out-the-following-form-to-get-driving-directions-to=عبء النموذج التالي للحصول على إتجاهات القيادة إلى
@@ -2456,6 +2457,7 @@ user=مستخدم
 users=المستخدمين
 vacation-message=رسالة الإجازة
 vacation=إجازة
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=قيم
 verification-number=رقم التأكيد
 version-history=تارخ النسخ

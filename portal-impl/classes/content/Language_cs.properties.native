@@ -546,6 +546,7 @@ fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-th
 fields=Pole
 file-location=Umístění souboru
 file-name=Název souboru
+file-size-is-larger-than-x-megabytes=File size is larger than ${0} megabytes.
 file-upload=Upload souboru
 file=Soubor
 fill-out-the-following-form-to-get-driving-directions-to=Vyplňte následující formulář pro vyhledání cesty do
@@ -1481,6 +1482,7 @@ user=Uživatel
 users=Uživatelé
 vacation-message=Zpráva o nepřítomnosti
 vacation=Dovolená
+validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
 values=Hodnoty
 verification-number=Číslo pro ověření
 version-history=Historie verzí
