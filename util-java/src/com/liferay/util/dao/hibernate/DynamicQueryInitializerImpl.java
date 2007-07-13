@@ -24,6 +24,7 @@ package com.liferay.util.dao.hibernate;
 
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.spring.hibernate.LiferaySession;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
@@ -41,8 +42,14 @@ public class DynamicQueryInitializerImpl implements DynamicQueryInitializer {
 	}
 
 	public DynamicQuery initialize(Object obj) {
+		Session session = (Session)obj;
+		
+		if (session instanceof LiferaySession) {
+			session = ((LiferaySession)session).getHibernateSession();
+		}
+
 		return new DynamicQueryImpl(
-			_detachedCriteria.getExecutableCriteria((Session)obj));
+			_detachedCriteria.getExecutableCriteria(session));
 	}
 
 	private DetachedCriteria _detachedCriteria;
