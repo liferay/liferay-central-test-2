@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
@@ -122,10 +121,6 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.error(e);
 		}
 
-		// Portal initable
-
-		PortalInitableUtil.flushInitables();
-
 		// Hot deploy
 
 		_log.debug("Registering hot deploy listeners");
@@ -137,8 +132,6 @@ public class GlobalStartupAction extends SimpleAction {
 
 			HotDeployUtil.registerListener(hotDeployListener);
 		}
-
-		HotDeployUtil.flushEvents();
 
 		// Auto deploy
 

@@ -25,8 +25,10 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
+import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
@@ -271,6 +273,12 @@ public class MainServlet extends ActionServlet {
 		for (int i = 0; i < webIds.length; i++) {
 			PortalInstances.initCompany(ctx, webIds[i]);
 		}
+
+		// See LEP-2885. Don't flush hot deploy events until after the portal
+		// has initialized.
+
+		PortalInitableUtil.flushInitables();
+		HotDeployUtil.flushEvents();
 	}
 
 	public void callParentService(
