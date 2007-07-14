@@ -78,7 +78,7 @@ public class PortalUtil {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_CLASS, method, args);
 
-			return MethodInvoker.invoke(methodWrapper);
+			return MethodInvoker.invoke(methodWrapper, false);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
