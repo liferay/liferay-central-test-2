@@ -913,6 +913,14 @@ public class PropsUtil {
 
 	public static final String MAIL_HOOK_CYRUS_HOME = "mail.hook.cyrus.home";
 
+	public static final String MAIL_HOOK_FUSEMAIL_URL = "mail.hook.fusemail.url";
+
+	public static final String MAIL_HOOK_FUSEMAIL_USERNAME = "mail.hook.fusemail.username";
+
+	public static final String MAIL_HOOK_FUSEMAIL_PASSWORD = "mail.hook.fusemail.password";
+
+	public static final String MAIL_HOOK_FUSEMAIL_ACCOUNT_TYPE = "mail.hook.fusemail.account.type";
+
 	public static final String MAIL_HOOK_SENDMAIL_ADD_USER = "mail.hook.sendmail.add.user";
 
 	public static final String MAIL_HOOK_SENDMAIL_CHANGE_PASSWORD = "mail.hook.sendmail.change.password";

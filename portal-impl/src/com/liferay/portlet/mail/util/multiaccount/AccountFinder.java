@@ -40,13 +40,15 @@ import java.util.Collection;
  */
 public interface AccountFinder {
 
+	public String getDefaultAccountName();
+
+	public String getMailUserId(User user);
+
 	public MailAccount findAccount(
 			User user, String password, String accountName)
 		throws MailAccountsException, AccountNotFoundException;
 
 	public Collection findAllAccounts(User user, String password)
 		throws MailAccountsException;
-
-	public String getDefaultAccountName();
 
 }

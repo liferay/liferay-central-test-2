@@ -22,46 +22,27 @@
 
 package com.liferay.portlet.mail.util.multiaccount;
 
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
-import com.liferay.portlet.mail.MailAccountsException;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
- * <a href="SingleAccountFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="FuseMailAccountFinder.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Sten Martinez
  *
  */
-public class SingleAccountFinder implements AccountFinder {
-
-	public String getDefaultAccountName() {
-		return _IGNORE;
-	}
+public class FuseMailAccountFinder
+	extends SingleAccountFinder implements AccountFinder {
 
 	public String getMailUserId(User user) {
-		return String.valueOf(user.getUserId());
+		StringMaker sm = new StringMaker();
+
+		sm.append(user.getCompanyMx());
+		sm.append(StringPool.PERIOD);
+		sm.append(user.getUserId());
+
+		return sm.toString();
 	}
-
-	public MailAccount findAccount(
-			User user, String password, String accountName)
-		throws MailAccountsException {
-
-		return new MailAccount(
-			accountName, user.getUserId(), password, user.getEmailAddress());
-	}
-
-	public Collection findAllAccounts(User user, String password)
-		throws MailAccountsException {
-
-		Collection result = new ArrayList();
-
-		result.add(findAccount(user, password, getDefaultAccountName()));
-
-		return result;
-	}
-
-	private static final String _IGNORE = ".IGNORE";
 
 }
