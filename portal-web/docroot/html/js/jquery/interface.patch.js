@@ -570,3 +570,110 @@ jQuery.iAuto.handleData = function(response, subject, subjectValue, isXML) {
 };
 
 jQuery.fn.Autocomplete = jQuery.iAuto.build;
+
+/* ---------- Patches related to the jQuery 1.1.3 bug in 'find' method ---------- */
+
+jQuery.iDrag.build = function(o)
+	{
+		if (!jQuery.iDrag.helper) {
+			jQuery('body',document).append('<div id="dragHelper"></div>');
+			jQuery.iDrag.helper = jQuery('#dragHelper');
+			var el = jQuery.iDrag.helper.get(0);
+			var els = el.style;
+			els.position = 'absolute';
+			els.display = 'none';
+			els.cursor = 'move';
+			els.listStyle = 'none';
+			els.overflow = 'hidden';
+			if (window.ActiveXObject) {
+				el.unselectable = "on";
+			} else {
+				els.mozUserSelect = 'none';
+				els.userSelect = 'none';
+				els.KhtmlUserSelect = 'none';
+			}
+		}
+		if (!o) {
+			o = {};
+		}
+		
+		return this.each(
+			function()
+			{
+				if (this.isDraggable || !jQuery.iUtil)
+					return;
+				if (window.ActiveXObject) {
+					this.onselectstart = function(){return false;};
+					this.ondragstart = function(){return false;};
+				}
+				var el = this;
+				var dhe = o.handle ? jQuery(o.handle, this) : jQuery(this);
+				if(jQuery.browser.msie) {
+					dhe.each(
+						function()
+						{
+							this.unselectable = "on";
+						}
+					);
+				} else {
+					dhe.css('-moz-user-select', 'none');
+					dhe.css('user-select', 'none');
+					dhe.css('-khtml-user-select', 'none');
+				}
+				this.dragCfg = {
+					dhe: dhe,
+					revert : o.revert ? true : false,
+					ghosting : o.ghosting ? true : false,
+					so : o.so ? o.so : false,
+					si : o.si ? o.si : false,
+					insideParent : o.insideParent ? o.insideParent : false,
+					zIndex : o.zIndex ? parseInt(o.zIndex)||0 : false,
+					opacity : o.opacity ? parseFloat(o.opacity) : false,
+					fx : parseInt(o.fx)||null,
+					hpc : o.hpc ? o.hpc : false,
+					onDragModifier : {},
+					pointer : {},
+					onStart : o.onStart && o.onStart.constructor == Function ? o.onStart : false,
+					onStop : o.onStop && o.onStop.constructor == Function ? o.onStop : false,
+					onChange : o.onChange && o.onChange.constructor == Function ? o.onChange : false,
+					axis : /vertically|horizontally/.test(o.axis) ? o.axis : false,
+					snapDistance : o.snapDistance ? parseInt(o.snapDistance)||0 : 0,
+					cursorAt: o.cursorAt ? o.cursorAt : false,
+					autoSize : o.autoSize ? true : false,
+					frameClass : o.frameClass || false
+					
+				};
+				if (o.onDragModifier && o.onDragModifier.constructor == Function)
+					this.dragCfg.onDragModifier.user = o.onDragModifier;
+				if (o.onDrag && o.onDrag.constructor == Function)
+					this.dragCfg.onDrag = o.onDrag;
+				if (o.containment && ((o.containment.constructor == String && (o.containment == 'parent' || o.containment == 'document')) || (o.containment.constructor == Array && o.containment.length == 4) )) {
+					this.dragCfg.containment = o.containment;
+				}
+				if(o.fractions) {
+					this.dragCfg.fractions = o.fractions;
+				}
+				if(o.grid){
+					if(typeof o.grid == 'number'){
+						this.dragCfg.gx = parseInt(o.grid)||1;
+						this.dragCfg.gy = parseInt(o.grid)||1;
+					} else if (o.grid.length == 2) {
+						this.dragCfg.gx = parseInt(o.grid[0])||1;
+						this.dragCfg.gy = parseInt(o.grid[1])||1;
+					}
+				}
+				if (o.onSlide && o.onSlide.constructor == Function) {
+					this.dragCfg.onSlide = o.onSlide;
+				}
+
+				this.isDraggable = true;
+				dhe.each(
+					function(){
+						this.dragElem = el;
+					}
+				);
+				dhe.bind('mousedown', jQuery.iDrag.draginit);
+			}
+		)
+	};
+jQuery.fn.Draggable = jQuery.iDrag.build;
