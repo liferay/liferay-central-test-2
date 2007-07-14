@@ -5870,8 +5870,11 @@ public class ServiceBuilder {
 		sm.append("\t\t</property>\n");
 		sm.append("\t\t<property name=\"transactionAttributes\">\n");
 		sm.append("\t\t\t<props>\n");
-		//sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED,-PortalException,-SystemException</prop>\n");
-		sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"add*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"delete*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"update*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_SUPPORTS,readOnly</prop>\n");
+		//sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED</prop>\n");
 		sm.append("\t\t\t</props>\n");
 		sm.append("\t\t</property>\n");
 		sm.append("\t</bean>\n");
