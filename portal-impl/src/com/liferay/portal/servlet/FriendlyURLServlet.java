@@ -175,16 +175,16 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		if (group == null) {
 			try {
-				if (_private && _user) {
-					String screenName = friendlyURL.substring(1);
+				String screenName = friendlyURL.substring(1);
 
+				if (_user || !Validator.isNumber(screenName)) {
 					User user = UserLocalServiceUtil.getUserByScreenName(
 						companyId, screenName);
 
 					group = user.getGroup();
 				}
 				else {
-					long groupId = GetterUtil.getLong(friendlyURL.substring(1));
+					long groupId = GetterUtil.getLong(screenName);
 
 					group = GroupLocalServiceUtil.getGroup(groupId);
 				}

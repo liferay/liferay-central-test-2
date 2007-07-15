@@ -198,7 +198,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public String getDefaultFriendlyURL(boolean privateLayout)
 		throws PortalException, SystemException {
 
-		if (privateLayout && isUser()) {
+		if (isUser()) {
 			long userId = getClassPK();
 
 			User user = UserLocalServiceUtil.getUserById(userId);
