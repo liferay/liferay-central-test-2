@@ -57,8 +57,8 @@ public class ResourceBundleUtil {
 		else {
 
 			// Get the value associated with the specified key, and substitute
-            // any arguuments like {0}, {1}, {2}, etc. with the specified
-            // argument values.
+			// any arguuments like {0}, {1}, {2}, etc. with the specified
+			// argument values.
 
 			value = bundle.getString(key);
 
