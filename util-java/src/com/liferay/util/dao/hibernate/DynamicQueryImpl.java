@@ -46,7 +46,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 
 	public void setLimit(int begin, int end) {
 		_criteria = _criteria.setFirstResult(begin);
-		_criteria = _criteria.setMaxResults(begin - end);
+		_criteria = _criteria.setMaxResults(end - begin);
 	}
 
 	private Criteria _criteria;
