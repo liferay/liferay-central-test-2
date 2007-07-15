@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 
 <project name="test" basedir="." default="test">
-	<import file="../build-common-java.xml" />
+	<property name="project.dir" value="../.." />
+
+	<import file="${project.dir}/build-common-java.xml" />
 
 	<path id="web-lib.classpath">
 	</path>

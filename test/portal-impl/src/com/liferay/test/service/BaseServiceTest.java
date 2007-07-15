@@ -53,7 +53,7 @@ public class BaseServiceTest extends TestCase {
 
 		User user = UserLocalServiceUtil.getUserById(userId);
 
-		_permissionChecker = PermissionCheckerFactory.create(user, true, true);
+		_permissionChecker = PermissionCheckerFactory.create(user, true);
 
 		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 	}
