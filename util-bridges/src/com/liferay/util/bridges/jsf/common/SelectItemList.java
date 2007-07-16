@@ -50,7 +50,7 @@ public class SelectItemList extends ArrayList {
 		Object value = StringPool.BLANK;
 		String label = LanguageUtil.get(locale, "select");
 
-		this.add(0, new SelectItem(value, label));
+		add(0, new SelectItem(value, label));
 	}
 
 }
