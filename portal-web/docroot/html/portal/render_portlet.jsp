@@ -516,8 +516,9 @@ else {
 }
 %>
 
+<c:if test="<%= !themeDisplay.isStateExclusive() %>">
 <script type="text/javascript">
-	<c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">
+	<c:if test="<%= !runtimePortlet %>">
 		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
 		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").columnPos = <%= columnPos %>;
 
@@ -545,6 +546,7 @@ else {
 		);
 	</c:if>
 </script>
+</c:if>
 
 <%
 RenderRequestFactory.recycle(renderRequestImpl);
