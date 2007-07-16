@@ -1460,7 +1460,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setScreenName(screenName);
 
-		if (!emailAddress.equals(user.getEmailAddress())) {
+		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
 
 			// test@test.com -> test@liferay.com
 
@@ -1873,7 +1873,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
-		if (!user.getScreenName().equals(screenName)) {
+		if (!user.getScreenName().equalsIgnoreCase(screenName)) {
 			validateScreenName(user.getCompanyId(), screenName);
 		}
 
@@ -1882,7 +1882,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 		else if (!user.isDefaultUser()) {
 			try {
-				if (!user.getEmailAddress().equals(emailAddress)) {
+				if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
 					if (UserUtil.findByC_EA(
 							user.getCompanyId(), emailAddress) != null) {
 
