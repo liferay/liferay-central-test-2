@@ -22,9 +22,12 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.CollectionFactory;
+
+import java.io.Serializable;
 
 import java.util.Map;
 
@@ -39,8 +42,7 @@ import net.sf.ehcache.Cache;
  */
 public class CalEventLocalUtil {
 
-	public static final String CACHE_NAME =
-		CalEventLocalUtil.class.getName();
+	public static final String CACHE_NAME = CalEventLocalUtil.class.getName();
 
 	protected static void clearEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
@@ -51,21 +53,25 @@ public class CalEventLocalUtil {
 	protected static Map getEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
 
-		Map eventsPool = null;
-
-		eventsPool = (Map)ClusterPool.get(_cache, key);
+		Map eventsPool = (Map)ClusterPool.get(_cache, key);
 
 		if (eventsPool == null) {
 			eventsPool = CollectionFactory.getSyncHashMap();
 
-			ClusterPool.put(_cache, key, eventsPool);
+			ClusterPool.put(_cache, key, (Serializable)eventsPool);
 		}
-		
+
 		return eventsPool;
 	}
 
 	private static String _encodeKey(long groupId) {
-		return CACHE_NAME + StringPool.POUND + groupId;
+		StringMaker sm = new StringMaker();
+
+		sm.append(CACHE_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(groupId);
+
+		return sm.toString();
 	}
 
 	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);

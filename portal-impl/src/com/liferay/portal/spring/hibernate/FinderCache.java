@@ -30,9 +30,9 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import net.sf.ehcache.Cache;
@@ -58,38 +58,17 @@ public class FinderCache {
 	}
 
 	public static void clearCache(String className) {
-		String groupKey = _encodeKey(className);
+		String groupKey = _encodeGroupKey(className);
 
-		if (!_groups.containsKey(groupKey)) {
-			return;
-		}
-		
-		Map groupKeys = (Map)_groups.get(groupKey);
-		
-		Iterator keys = groupKeys.values().iterator();
-
-		while(keys.hasNext()) {
-			String key = (String)keys.next();
-			
-			// The functionality here pretty much mimics OSCache groups. It is 
-			// not necessary to remove the keys in dependent groups because they
-			// will be cleared when the group itself is cleared, resulting in a 
-			// performance boost.
-
-			_cache.remove(key);
-		}
-		
-		groupKeys.clear();
+		ClusterPool.clearGroup(_groups, groupKey, _cache);
 	}
 
-	public static Object getResult(
+	public static Serializable getResult(
 		String className, String methodName, String[] params, Object[] args) {
-
-		Object result = null;
 
 		String key = _encodeKey(className, methodName, params, args);
 
-		result = ClusterPool.get(_cache, key);
+		Serializable result = ClusterPool.get(_cache, key);
 
 		if (result != null) {
 			result = _getResult(result);
@@ -98,11 +77,11 @@ public class FinderCache {
 		return result;
 	}
 
-	public static Object getResult(
+	public static Serializable getResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args) {
 
-		Object result = null;
+		Serializable result = null;
 
 		String key = _encodeKey(sql, methodName, params, args);
 
@@ -111,10 +90,11 @@ public class FinderCache {
 
 			if (result != null) {
 				result = _getResult(result);
+
 				break;
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -132,16 +112,19 @@ public class FinderCache {
 			boolean classNameCacheEnabled = GetterUtil.getBoolean(
 				PropsUtil.get(sm.toString()), true);
 
-			if (classNameCacheEnabled) {				
+			if (classNameCacheEnabled) {
 				String key = _encodeKey(className, methodName, params, args);
 
-				result = _getResult(result);
+				Serializable serializedResult = (Serializable)result;
 
-				String classNameGroupKey = _encodeKey(className);
+				serializedResult = _getResult(serializedResult);
 
-				_updateGroup(classNameGroupKey, key);
+				String groupKey = _encodeGroupKey(className);
 
-				ClusterPool.put(_cache, key, result);
+				ClusterPool.put(
+					_cache, key, _groups, groupKey, serializedResult);
+
+				return serializedResult;
 			}
 		}
 
@@ -153,6 +136,8 @@ public class FinderCache {
 		Object[] args, Object result) {
 
 		if (CACHE_ENABLED && CacheRegistry.isActive() && (result != null)) {
+			Serializable serializedResult = (Serializable)result;
+
 			for (int i = 0; i < classNames.length; i++) {
 				String className = classNames[i];
 
@@ -166,29 +151,29 @@ public class FinderCache {
 					PropsUtil.get(sm.toString()), true);
 
 				if (!classNameCacheEnabled) {
-					return result;
+					return serializedResult;
 				}
 			}
 
 			String key = _encodeKey(sql, methodName, params, args);
 
-			result = _getResult(result);
+			serializedResult = _getResult(serializedResult);
 
 			for (int i = 0; i < classNames.length; i++) {
 				String className = classNames[i];
 
-				String classNameGroupKey = _encodeKey(className);
+				String groupKey = _encodeGroupKey(className);
 
-				_updateGroup(classNameGroupKey, key);
+				ClusterPool.updateGroup(_groups, groupKey, key);
 			}
-			
-			ClusterPool.put(_cache, key, result);			
+
+			ClusterPool.put(_cache, key, serializedResult);
 		}
 
 		return result;
 	}
 
-	private static String _encodeKey(String className) {
+	private static String _encodeGroupKey(String className) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(CACHE_NAME);
@@ -229,14 +214,15 @@ public class FinderCache {
 		return sm.toString();
 	}
 
-	private static Object _getResult(Object result) {
+	private static Serializable _getResult(Serializable result) {
 		if (result instanceof ArrayList) {
-			List cachedList = (List)result;
+			ArrayList cachedList = (ArrayList)result;
 
-			List list = new ArrayList(cachedList.size());
+			ArrayList list = new ArrayList(cachedList.size());
 
 			for (int i = 0; i < cachedList.size(); i++) {
-				Object curResult = _getResult(cachedList.get(i));
+				Serializable curResult = _getResult(
+					(Serializable)cachedList.get(i));
 
 				list.add(curResult);
 			}
@@ -249,7 +235,7 @@ public class FinderCache {
 			try {
 				BaseModel model = (BaseModel)result;
 
-				return model.clone();
+				return (BaseModel)model.clone();
 			}
 			catch (Exception e) {
 				_log.error(
@@ -260,29 +246,14 @@ public class FinderCache {
 		return result;
 	}
 
-	private static void _updateGroup(String groupKey, String key) {
-		Map groupKeys = null;
-		
-		if (_groups.containsKey(groupKey)) {
-			groupKeys = (Map)_groups.get(groupKey);
-		}
-		else {
-			groupKeys = CollectionFactory.getSyncHashMap();
-			
-			_groups.put(groupKey, groupKeys);
-		}
-		
-		groupKeys.put(key, key);
-	}
-
 	private static final String _ARGS_SEPARATOR = "_ARGS_SEPARATOR_";
 
 	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
-	
+
 	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
-	
+
 	private static Map _groups = CollectionFactory.getSyncHashMap();
-	
+
 	private static Log _log = LogFactory.getLog(FinderCache.class);
 
 }

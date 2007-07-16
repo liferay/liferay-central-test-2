@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.CollectionFactory;
 
+import java.io.Serializable;
+
 import java.util.Map;
 
 import net.sf.ehcache.Cache;
@@ -61,7 +63,7 @@ public class PortletPreferencesLocalUtil {
 		if (prefsPool == null) {
 			prefsPool = CollectionFactory.getSyncHashMap();
 
-			ClusterPool.put(_cache, key, prefsPool);
+			ClusterPool.put(_cache, key, (Serializable)prefsPool);
 		}
 
 		return prefsPool;

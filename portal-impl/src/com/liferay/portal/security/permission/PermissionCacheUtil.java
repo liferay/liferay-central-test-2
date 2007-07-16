@@ -50,11 +50,9 @@ public class PermissionCacheUtil {
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
-		Boolean value = null;
-
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		value = (Boolean)ClusterPool.get(_cache, key);
+		Boolean value = (Boolean)ClusterPool.get(_cache, key);
 
 		return value;
 	}
@@ -95,7 +93,6 @@ public class PermissionCacheUtil {
 
 	private static Log _log = LogFactory.getLog(PermissionCacheUtil.class);
 
-	private static Cache _cache = 
-		ClusterPool.getCache(CACHE_NAME);
+	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
 
 }

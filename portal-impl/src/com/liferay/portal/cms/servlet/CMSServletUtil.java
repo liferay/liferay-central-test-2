@@ -55,8 +55,6 @@ public class CMSServletUtil {
 		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
-		String content = null;
-
 		if (Validator.isNull(articleId)) {
 			return null;
 		}
@@ -65,7 +63,7 @@ public class CMSServletUtil {
 
 		String key = _encodeKey(articleId, languageId);
 
-		content = (String)ClusterPool.get(_cache, key);
+		String content = (String)ClusterPool.get(_cache, key);
 
 		if (content == null) {
 			try {

@@ -1,66 +1,93 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
-	<diskStore path="user.home/liferay/ehcache/liferay"/>
-	<cacheManagerEventListenerFactory class="" properties=""/>
-	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1" propertySeparator=","/>
-	<cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"/>
+	<diskStore path="user.home/liferay/ehcache/liferay" />
+	<cacheManagerEventListenerFactory class="" properties="" />
+	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1" propertySeparator="," />
+	<cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory" />
 
-	<!-- 
-		The defaultCache is used to provide a configuration for caches that
-		are not defined below.	 
+	<!--
+	The defaultCache is used to provide a configuration for caches that are not
+	defined below.
 	-->
 
 	<defaultCache maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</defaultCache>
 	<cache name="com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil" maxElementsInMemory="1000" eternal="false" timeToLiveSeconds="300" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil" maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portal.cms.servlet.CMSServletUtil" maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portal.spring.hibernate.FinderCache" maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portlet.journalcontent.util.JournalContentUtil" maxElementsInMemory="1000" eternal="false" timeToLiveSeconds="3600" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil" maxElementsInMemory="1000" eternal="false" timeToLiveSeconds="3600" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portal.security.permission.PermissionCacheUtil" maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil" maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
-		<!-- Enable the following in a clustered configuration -->
 
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>-->
+		<!--
+		Uncomment the following in a clustered configuration.
+		-->
+
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 </ehcache>

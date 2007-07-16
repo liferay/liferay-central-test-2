@@ -29,7 +29,6 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import net.sf.ehcache.Cache;
@@ -53,28 +52,9 @@ public class LayoutCacheUtil {
 	}
 
 	public static void clearCache(long companyId) {
-		String groupKey = _encodeKey(companyId);
+		String groupKey = _encodeGroupKey(companyId);
 
-		if (!_groups.containsKey(groupKey)) {
-			return;
-		}
-		
-		Map groupKeys = (Map)_groups.get(groupKey);
-		
-		Iterator keys = groupKeys.values().iterator();
-
-		while(keys.hasNext()) {
-			String key = (String)keys.next();
-			
-			// The functionality here pretty much mimics OSCache groups. It is 
-			// not necessary to remove the keys in dependent groups because they
-			// will be cleared when the group itself is cleared, resulting in a 
-			// performance boost.
-
-			_cache.remove(key);
-		}
-		
-		groupKeys.clear();
+		ClusterPool.clearGroup(_groups, groupKey, _cache);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Cleared layout cache for " + companyId);
@@ -84,15 +64,14 @@ public class LayoutCacheUtil {
 	public static CacheResponseData getCacheResponseData(
 		long companyId, String key) {
 
-		CacheResponseData data = null;
-
 		if (Validator.isNull(key)) {
 			return null;
 		}
 
 		key = _encodeKey(companyId, key);
 
-		data = (CacheResponseData)ClusterPool.get(_cache, key);
+		CacheResponseData data =
+			(CacheResponseData)ClusterPool.get(_cache, key);
 
 		return data;
 	}
@@ -103,15 +82,13 @@ public class LayoutCacheUtil {
 		if (data != null) {
 			key = _encodeKey(companyId, key);
 
-			String groupKey = _encodeKey(companyId);
+			String groupKey = _encodeGroupKey(companyId);
 
-			_updateGroup(groupKey, key);
-			
-			ClusterPool.put(_cache, key, data);
+			ClusterPool.put(_cache, key, _groups, groupKey, data);
 		}
 	}
 
-	private static String _encodeKey(long companyId) {
+	private static String _encodeGroupKey(long companyId) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(CACHE_NAME);
@@ -133,25 +110,10 @@ public class LayoutCacheUtil {
 		return sm.toString();
 	}
 
-	private static void _updateGroup(String groupKey, String key) {
-		Map groupKeys = null;
-		
-		if (_groups.containsKey(groupKey)) {
-			groupKeys = (Map)_groups.get(groupKey);
-		}
-		else {
-			groupKeys = CollectionFactory.getSyncHashMap();
-			
-			_groups.put(groupKey, groupKeys);
-		}
-		
-		groupKeys.put(key, key);
-	}
-
 	private static Log _log = LogFactory.getLog(LayoutCacheUtil.class);
 
 	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
-	
+
 	private static Map _groups = CollectionFactory.getSyncHashMap();
-	
+
 }

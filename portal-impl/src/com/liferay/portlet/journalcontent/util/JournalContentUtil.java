@@ -31,7 +31,6 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import net.sf.ehcache.Cache;
@@ -67,28 +66,9 @@ public class JournalContentUtil {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		String groupKey = _encodeKey(groupId, articleId, templateId);
+		String groupKey = _encodeGroupKey(groupId, articleId, templateId);
 
-		if (!_groups.containsKey(groupKey)) {
-			return;
-		}
-		
-		Map groupKeys = (Map)_groups.get(groupKey);
-		
-		Iterator keys = groupKeys.values().iterator();
-
-		while(keys.hasNext()) {
-			String key = (String)keys.next();
-			
-			// The functionality here pretty much mimics OSCache groups. It is 
-			// not necessary to remove the keys in dependent groups because they
-			// will be cleared when the group itself is cleared, resulting in a 
-			// performance boost.
-
-			_cache.remove(key);
-		}
-		
-		groupKeys.clear();
+		ClusterPool.clearGroup(_groups, groupKey, _cache);
 	}
 
 	public static String getContent(
@@ -118,13 +98,9 @@ public class JournalContentUtil {
 				groupId, articleId, templateId, languageId, themeDisplay);
 		}
 
-		String content = null;
-
-		String groupKey = _encodeKey(groupId, articleId, templateId);
-
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
 
-		content = (String)ClusterPool.get(_cache, key);
+		String content = (String)ClusterPool.get(_cache, key);
 
 		if (content == null) {
 			try {
@@ -140,16 +116,17 @@ public class JournalContentUtil {
 			}
 
 			if (content != null) {
-				_updateGroup(groupKey, key);
+				String groupKey = _encodeGroupKey(
+					groupId, articleId, templateId);
 
-				ClusterPool.put(_cache, key, content);
+				ClusterPool.put(_cache, key, _groups, groupKey, content);
 			}
 		}
 
 		return content;
 	}
 
-	private static String _encodeKey(
+	private static String _encodeGroupKey(
 		long groupId, String articleId, String templateId) {
 
 		return _encodeKey(groupId, articleId, templateId, null);
@@ -198,25 +175,10 @@ public class JournalContentUtil {
 		}
 	}
 
-	private static void _updateGroup(String groupKey, String key) {
-		Map groupKeys = null;
-		
-		if (_groups.containsKey(groupKey)) {
-			groupKeys = (Map)_groups.get(groupKey);
-		}
-		else {
-			groupKeys = CollectionFactory.getSyncHashMap();
-			
-			_groups.put(groupKey, groupKeys);
-		}
-		
-		groupKeys.put(key, key);
-	}
-
 	private static Log _log = LogFactory.getLog(JournalContentUtil.class);
 
 	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
-	
+
 	private static Map _groups = CollectionFactory.getSyncHashMap();
 
 }

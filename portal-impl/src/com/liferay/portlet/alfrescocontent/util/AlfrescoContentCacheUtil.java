@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.Validator;
@@ -53,18 +54,16 @@ public class AlfrescoContentCacheUtil {
 			boolean maximizeLinks, RenderResponse res)
 		throws Exception {
 
-		String content = null;
-
 		if (Validator.isNull(uuid)) {
 			return null;
 		}
 
 		String key = _encodeKey(uuid);
 
-		content = (String) ClusterPool.get(_cache, key);
-		
+		String content = (String)ClusterPool.get(_cache, key);
+
 		if (content == null) {
-			
+
 			try {
 				content = AlfrescoContentUtil.getContent(
 					userId, password, uuid, path, maximizeLinks, res);
@@ -74,17 +73,23 @@ public class AlfrescoContentCacheUtil {
 					_log.warn(e.getMessage());
 				}
 			}
-	
+
 			if (content != null) {
 				ClusterPool.put(_cache, key, content);
 			}
 		}
-		
+
 		return content;
 	}
 
 	private static String _encodeKey(String key) {
-		return CACHE_NAME + StringPool.POUND + key;
+		StringMaker sm = new StringMaker();
+
+		sm.append(CACHE_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(key);
+
+		return sm.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentCacheUtil.class);
