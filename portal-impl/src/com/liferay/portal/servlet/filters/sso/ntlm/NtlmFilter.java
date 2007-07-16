@@ -42,11 +42,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import jcifs.Config;
 import jcifs.UniAddress;
+
 import jcifs.http.NtlmHttpFilter;
+
 import jcifs.ntlmssp.Type1Message;
 import jcifs.ntlmssp.Type2Message;
+
 import jcifs.smb.NtlmPasswordAuthentication;
 import jcifs.smb.SmbSession;
+
 import jcifs.util.Base64;
 
 import org.apache.commons.logging.Log;
@@ -63,12 +67,13 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 	public void init(FilterConfig config) throws ServletException {
 		_config = new DynamicFilterConfig(config);
+
 		super.init(config);
 	}
 
 	public void doFilter(
-		ServletRequest req, ServletResponse res, FilterChain chain)
-	throws IOException, ServletException {
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
 
 		try {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
@@ -100,6 +105,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 					_config.addInitParameter(
 						"jcifs.http.domainController", domainController);
+
 					super.init(_config);
 
 					if (_log.isDebugEnabled()) {
@@ -110,7 +116,8 @@ public class NtlmFilter extends NtlmHttpFilter {
 				// Type 1 NTLM requests from browser can (and should) always
 				// immediately be replied to with an Type 2 NTLM response, no
 				// matter whether we're yet logging in or whether it is much
-				// later in the session
+				// later in the session.
+
 				String msg = httpReq.getHeader("Authorization");
 
 				if (msg != null && msg.startsWith("NTLM")) {
@@ -137,7 +144,8 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 				        // Interrupt filter chain, send response. Browser will
 				        // immediately post a new request.
-				        return;
+
+						return;
 				    }
 				}
 
@@ -166,9 +174,11 @@ public class NtlmFilter extends NtlmHttpFilter {
 					req.setAttribute(WebKeys.NTLM_REMOTE_USER, remoteUser);
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			_log.error(e);
 		}
+
 		chain.doFilter(req, res);
 	}
 
