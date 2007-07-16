@@ -4,10 +4,10 @@
 <taglib>
 	<tlib-version>1.0</tlib-version>
 	<jsp-version>1.2</jsp-version>
-	<short-name>liferay-faces</short-name>
+	<short-name>lf</short-name>
 	<uri>http://liferay.com/tld/faces</uri>
 	<tag>
-		<name>phoneNumberConverter</name>
+		<name>convertPhoneNumber</name>
 		<tag-class>com.liferay.taglib.faces.converter.PhoneNumberConverterTag</tag-class>
 		<attribute>
 			<name>unitedStatesFormat</name>
@@ -16,7 +16,7 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>emailAddressValidator</name>
+		<name>validateEmailAddress</name>
 		<tag-class>com.liferay.taglib.faces.validator.EmailAddressValidatorTag</tag-class>
 	</tag>
 </taglib>
