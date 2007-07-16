@@ -40,6 +40,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PropertiesUtil;
+import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
@@ -618,7 +619,12 @@ public class PortalLDAPUtil {
 		long creatorUserId = 0;
 		boolean passwordReset = false;
 		boolean autoScreenName = false;
-		Locale locale = Locale.US;
+
+		String userLanguage = SystemProperties.get("user.language");
+		String userCountry = SystemProperties.get("user.country");
+		String userVariant = SystemProperties.get("user.variant");
+
+		Locale locale = new Locale(userLanguage, userCountry, userVariant);
 		String firstName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("firstName"));
 		String middleName = LDAPUtil.getAttributeValue(
