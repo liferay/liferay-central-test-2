@@ -29,8 +29,7 @@ import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Validator;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,14 +43,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CMSServletUtil {
 
-	public static final String GROUP_NAME = CMSServletUtil.class.getName();
-
-	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
+	public static final String CACHE_NAME = CMSServletUtil.class.getName();
 
 	public static String LANGUAGE = "_LANGUAGE_";
 
 	public static void clearCache() {
-		_cache.flushGroup(GROUP_NAME);
+		_cache.removeAll();
 	}
 
 	public static String getContent(
@@ -68,10 +65,9 @@ public class CMSServletUtil {
 
 		String key = _encodeKey(articleId, languageId);
 
-		try {
-			content = (String)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nre) {
+		content = (String)ClusterPool.get(_cache, key);
+
+		if (content == null) {
 			try {
 				content = JournalArticleLocalServiceUtil.getArticleContent(
 					groupId, articleId, languageId, themeDisplay);
@@ -83,12 +79,7 @@ public class CMSServletUtil {
 			}
 
 			if (content != null) {
-				_cache.putInCache(key, content, GROUP_NAME_ARRAY);
-			}
-		}
-		finally {
-			if (content == null) {
-				_cache.cancelUpdate(key);
+				ClusterPool.put(_cache, key, content);
 			}
 		}
 
@@ -98,7 +89,7 @@ public class CMSServletUtil {
 	private static String _encodeKey(String articleId, String languageId) {
 		StringMaker sm = new StringMaker();
 
-		sm.append(GROUP_NAME);
+		sm.append(CACHE_NAME);
 		sm.append(StringPool.POUND);
 		sm.append(articleId);
 		sm.append(StringPool.POUND);
@@ -109,6 +100,6 @@ public class CMSServletUtil {
 
 	private static Log _log = LogFactory.getLog(CMSServletUtil.class);
 
-	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
+	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
 
 }

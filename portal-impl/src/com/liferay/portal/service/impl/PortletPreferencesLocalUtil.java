@@ -27,51 +27,41 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.CollectionFactory;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
-
 import java.util.Map;
+
+import net.sf.ehcache.Cache;
 
 /**
  * <a href="PortletPreferencesLocalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
 public class PortletPreferencesLocalUtil {
 
-	public static final String GROUP_NAME =
+	public static final String CACHE_NAME =
 		PortletPreferencesLocalUtil.class.getName();
 
-	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
-
 	protected static void clearPreferencesPool() {
-		_cache.flushGroup(GROUP_NAME);
+		_cache.removeAll();
 	}
 
 	protected static void clearPreferencesPool(long ownerId, int ownerType) {
 		String key = _encodeKey(ownerId, ownerType);
 
-		_cache.flushEntry(key);
+		_cache.remove(key);
 	}
 
 	protected static Map getPreferencesPool(long ownerId, int ownerType) {
 		String key = _encodeKey(ownerId, ownerType);
 
-		Map prefsPool = null;
+		Map prefsPool = (Map)ClusterPool.get(_cache, key);
 
-		try {
-			prefsPool = (Map)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nfe) {
+		if (prefsPool == null) {
 			prefsPool = CollectionFactory.getSyncHashMap();
 
-			_cache.putInCache(key, prefsPool, GROUP_NAME_ARRAY);
-		}
-		finally {
-			if (prefsPool == null) {
-				_cache.cancelUpdate(key);
-			}
+			ClusterPool.put(_cache, key, prefsPool);
 		}
 
 		return prefsPool;
@@ -80,7 +70,7 @@ public class PortletPreferencesLocalUtil {
 	private static String _encodeKey(long ownerId, int ownerType) {
 		StringMaker sm = new StringMaker();
 
-		sm.append(GROUP_NAME);
+		sm.append(CACHE_NAME);
 		sm.append(StringPool.POUND);
 		sm.append(ownerId);
 		sm.append(StringPool.POUND);
@@ -89,6 +79,6 @@ public class PortletPreferencesLocalUtil {
 		return sm.toString();
 	}
 
-	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
+	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
 
 }

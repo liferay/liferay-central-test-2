@@ -25,10 +25,8 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
-import com.liferay.util.ArrayUtil;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,16 +35,15 @@ import org.apache.commons.logging.LogFactory;
  * <a href="PermissionCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
+ * @author Michael Young
  *
  */
 public class PermissionCacheUtil {
 
-	public static final String GROUP_NAME = PermissionCacheUtil.class.getName();
-
-	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
+	public static final String CACHE_NAME = PermissionCacheUtil.class.getName();
 
 	public static void clearCache() {
-		_cache.flushGroup(GROUP_NAME);
+		_cache.removeAll();
 	}
 
 	public static Boolean hasPermission(
@@ -57,17 +54,7 @@ public class PermissionCacheUtil {
 
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		try {
-			value = (Boolean)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nre) {
-			value = null;
-		}
-		finally {
-			if (value == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
+		value = (Boolean)ClusterPool.get(_cache, key);
 
 		return value;
 	}
@@ -79,27 +66,10 @@ public class PermissionCacheUtil {
 		if (value != null) {
 			String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-			String resourceGroupKey = _encodeKey(name, primKey);
-
-			String[] groups = ArrayUtil.append(
-				GROUP_NAME_ARRAY, resourceGroupKey);
-
-			_cache.putInCache(key, value, groups);
+			ClusterPool.put(_cache, key, value);
 		}
 
 		return value;
-	}
-
-	private static String _encodeKey(String name, String primKey) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(GROUP_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(name);
-		sm.append(StringPool.POUND);
-		sm.append(primKey);
-
-		return sm.toString();
 	}
 
 	private static String _encodeKey(
@@ -108,7 +78,7 @@ public class PermissionCacheUtil {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append(GROUP_NAME);
+		sm.append(CACHE_NAME);
 		sm.append(StringPool.POUND);
 		sm.append(userId);
 		sm.append(StringPool.POUND);
@@ -125,6 +95,7 @@ public class PermissionCacheUtil {
 
 	private static Log _log = LogFactory.getLog(PermissionCacheUtil.class);
 
-	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
+	private static Cache _cache = 
+		ClusterPool.getCache(CACHE_NAME);
 
 }

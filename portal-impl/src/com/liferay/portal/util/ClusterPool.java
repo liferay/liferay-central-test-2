@@ -22,48 +22,99 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.CollectionFactory;
-import com.liferay.util.ExtPropertiesLoader;
+import java.io.Serializable;
+import java.net.URL;
 
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
-
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Set;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 
 /**
  * <a href="ClusterPool.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
 public class ClusterPool {
 
 	public static void clear() {
-		_instance._cache.flushAll();
+		_instance._cacheManager.clearAll();
 	}
 
-	public static GeneralCacheAdministrator getCache() {
-		return _instance._cache;
+	public static void clear(String name) {
+		Cache cache = getCache(name);
+		
+		cache.removeAll();
+	}	
+	
+	public static Object get(String name, String key) {
+		Cache cache = getCache(name);
+		
+		return get(cache, key);
 	}
 
-	public static Enumeration getPoolNames() {
-		return Collections.enumeration(_instance._registeredPools);
+	public static Object get(Cache cache, String key) {
+		Element element = cache.get(key);
+		
+		if (element == null) {
+			return null;
+		}
+		else {
+			return element.getObjectValue();
+		}
+	}
+		
+	public static Cache getCache(String name) {
+		Cache cache = _instance._cacheManager.getCache(name);
+		
+		if (cache == null) {
+			_instance._cacheManager.addCache(name);
+
+			cache = _instance._cacheManager.getCache(name);
+		}		
+		return cache;
 	}
 
-	public static void registerPool(String className) {
-		_instance._registeredPools.add(className);
+	public static void put(String name, String key, Object object) {
+		Cache cache = getCache(name);
+		
+		put(cache, key, object);
+	}
+	
+	public static void put(Cache cache, String key, Object object) {
+		Element element = new Element(key, object);
+		
+		cache.put(element);
+	}
+	
+	public static void put(String name, String key, Serializable object) {
+		Cache cache = getCache(name);
+		
+		put(cache, key, object);
+	}
+
+	public static void put(Cache cache, String key, Serializable object) {
+		Element element = new Element(key, object);
+		
+		cache.put(element);
+	}
+
+	public static void remove(String name, String key) {
+		Cache cache = getCache(name);
+		
+		cache.remove(key);
 	}
 
 	private ClusterPool() {
-		_cache = new GeneralCacheAdministrator(ExtPropertiesLoader.getInstance(
-			PropsFiles.CACHE_MULTI_VM).getProperties());
-		_registeredPools = CollectionFactory.getSyncHashSet();
+		String configLocation = PropsUtil.get("ehcache.config.location");
+		
+		URL url = getClass().getResource(configLocation);
+		
+		_cacheManager = new CacheManager(url);
 	}
 
 	private static ClusterPool _instance = new ClusterPool();
 
-	private GeneralCacheAdministrator _cache;
-	private Set _registeredPools;
-
+	private CacheManager _cacheManager;
 }

@@ -26,28 +26,26 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.CollectionFactory;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
-
 import java.util.Map;
+
+import net.sf.ehcache.Cache;
 
 /**
  * <a href="CalEventLocalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
 public class CalEventLocalUtil {
 
-	public static final String GROUP_NAME =
+	public static final String CACHE_NAME =
 		CalEventLocalUtil.class.getName();
-
-	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
 
 	protected static void clearEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
 
-		_cache.flushEntry(key);
+		_cache.remove(key);
 	}
 
 	protected static Map getEventsPool(long groupId) {
@@ -55,27 +53,21 @@ public class CalEventLocalUtil {
 
 		Map eventsPool = null;
 
-		try {
-			eventsPool = (Map)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nfe) {
+		eventsPool = (Map)ClusterPool.get(_cache, key);
+
+		if (eventsPool == null) {
 			eventsPool = CollectionFactory.getSyncHashMap();
 
-			_cache.putInCache(key, eventsPool, GROUP_NAME_ARRAY);
+			ClusterPool.put(_cache, key, eventsPool);
 		}
-		finally {
-			if (eventsPool == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
-
+		
 		return eventsPool;
 	}
 
 	private static String _encodeKey(long groupId) {
-		return GROUP_NAME + StringPool.POUND + groupId;
+		return CACHE_NAME + StringPool.POUND + groupId;
 	}
 
-	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
+	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
 
 }

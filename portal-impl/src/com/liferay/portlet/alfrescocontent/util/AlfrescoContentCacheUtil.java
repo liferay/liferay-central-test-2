@@ -24,15 +24,11 @@ package com.liferay.portlet.alfrescocontent.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CachePolicy;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
-
 import javax.portlet.RenderResponse;
+
+import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,16 +41,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class AlfrescoContentCacheUtil {
 
-	public static final String GROUP_NAME =
+	public static final String CACHE_NAME =
 		AlfrescoContentCacheUtil.class.getName();
 
-	public static final String[] GROUP_NAME_ARRAY = new String[]{GROUP_NAME};
-
-	public static final long REFRESH_TIME = GetterUtil.getLong(
-		PropsUtil.ALFRESCO_CONTENT_CACHE_REFRESH_TIME);
-
 	public static void clearCache() {
-		_cache.flushGroup(GROUP_NAME);
+		_cache.removeAll();
 	}
 
 	public static String getContent(
@@ -70,10 +61,10 @@ public class AlfrescoContentCacheUtil {
 
 		String key = _encodeKey(uuid);
 
-		try {
-			content = (String) _cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nre) {
+		content = (String) ClusterPool.get(_cache, key);
+		
+		if (content == null) {
+			
 			try {
 				content = AlfrescoContentUtil.getContent(
 					userId, password, uuid, path, maximizeLinks, res);
@@ -83,28 +74,21 @@ public class AlfrescoContentCacheUtil {
 					_log.warn(e.getMessage());
 				}
 			}
-
+	
 			if (content != null) {
-				_cache.putInCache(
-					key, content, GROUP_NAME_ARRAY,
-					new CachePolicy(REFRESH_TIME));
+				ClusterPool.put(_cache, key, content);
 			}
 		}
-		finally {
-			if (content == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
-
+		
 		return content;
 	}
 
 	private static String _encodeKey(String key) {
-		return GROUP_NAME + StringPool.POUND + key;
+		return CACHE_NAME + StringPool.POUND + key;
 	}
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentCacheUtil.class);
 
-	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
+	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
 
 }

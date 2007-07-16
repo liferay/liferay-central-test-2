@@ -22,17 +22,17 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
-import com.liferay.portal.util.PortalInstances;
-import com.liferay.util.CachePolicy;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import java.util.Iterator;
+import java.util.Map;
+
+import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,40 +41,40 @@ import org.apache.commons.logging.LogFactory;
  * <a href="LayoutCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Michael Young
  *
  */
 public class LayoutCacheUtil {
 
-	public static String[] GROUP_NAME_ARRAY;
-
-	public static String GROUP = "_GROUP_";
-
-	public static final long REFRESH_TIME = GetterUtil.getLong(
-		SystemProperties.get(
-			LayoutCacheFilter.class.getName() + ".refresh.time"));
-
-	static {
-		long[] companyIds = PortalInstances.getCompanyIds();
-
-		GROUP_NAME_ARRAY = new String[companyIds.length];
-
-		for (int i = 0; i < companyIds.length; i++) {
-			GROUP_NAME_ARRAY[i] = _encodeGroupName(companyIds[i]);
-		}
-	}
+	public static String CACHE_NAME = LayoutCacheUtil.class.getName();
 
 	public static void clearCache() {
-		long[] companyIds = PortalInstances.getCompanyIds();
-
-		for (int i = 0; i < companyIds.length; i++) {
-			clearCache(companyIds[i]);
-		}
+		ClusterPool.clear(CACHE_NAME);
 	}
 
 	public static void clearCache(long companyId) {
-		String groupName = _encodeGroupName(companyId);
+		String groupKey = _encodeKey(companyId);
 
-		_cache.flushGroup(groupName);
+		if (!_groups.containsKey(groupKey)) {
+			return;
+		}
+		
+		Map groupKeys = (Map)_groups.get(groupKey);
+		
+		Iterator keys = groupKeys.values().iterator();
+
+		while(keys.hasNext()) {
+			String key = (String)keys.next();
+			
+			// The functionality here pretty much mimics OSCache groups. It is 
+			// not necessary to remove the keys in dependent groups because they
+			// will be cleared when the group itself is cleared, resulting in a 
+			// performance boost.
+
+			_cache.remove(key);
+		}
+		
+		groupKeys.clear();
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Cleared layout cache for " + companyId);
@@ -92,19 +92,7 @@ public class LayoutCacheUtil {
 
 		key = _encodeKey(companyId, key);
 
-		try {
-			data = (CacheResponseData)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Layout " + key + " is not cached");
-			}
-		}
-		finally {
-			if (data == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
+		data = (CacheResponseData)ClusterPool.get(_cache, key);
 
 		return data;
 	}
@@ -115,21 +103,55 @@ public class LayoutCacheUtil {
 		if (data != null) {
 			key = _encodeKey(companyId, key);
 
-			_cache.putInCache(
-				key, data, GROUP_NAME_ARRAY, new CachePolicy(REFRESH_TIME));
+			String groupKey = _encodeKey(companyId);
+
+			_updateGroup(groupKey, key);
+			
+			ClusterPool.put(_cache, key, data);
 		}
 	}
 
-	private static String _encodeGroupName(long companyId) {
-		return LayoutCacheUtil.class.getName() + GROUP + companyId;
+	private static String _encodeKey(long companyId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(CACHE_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(companyId);
+
+		return sm.toString();
 	}
 
 	private static String _encodeKey(long companyId, String key) {
-		return _encodeGroupName(companyId) + StringPool.POUND + key;
+		StringMaker sm = new StringMaker();
+
+		sm.append(CACHE_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(companyId);
+		sm.append(StringPool.POUND);
+		sm.append(key);
+
+		return sm.toString();
+	}
+
+	private static void _updateGroup(String groupKey, String key) {
+		Map groupKeys = null;
+		
+		if (_groups.containsKey(groupKey)) {
+			groupKeys = (Map)_groups.get(groupKey);
+		}
+		else {
+			groupKeys = CollectionFactory.getSyncHashMap();
+			
+			_groups.put(groupKey, groupKeys);
+		}
+		
+		groupKeys.put(key, key);
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutCacheUtil.class);
 
-	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
-
+	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
+	
+	private static Map _groups = CollectionFactory.getSyncHashMap();
+	
 }
