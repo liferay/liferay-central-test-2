@@ -90,7 +90,7 @@ public class ClusterPool {
 			return null;
 		}
 		else {
-			return (Serializable)element.getObjectValue();
+			return element.getValue();
 		}
 	}
 
