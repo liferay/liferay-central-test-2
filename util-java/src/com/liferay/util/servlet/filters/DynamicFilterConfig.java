@@ -34,9 +34,20 @@ import javax.servlet.ServletContext;
  * <a href="DynamicFilterConfig.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class DynamicFilterConfig implements FilterConfig {
+
+	public DynamicFilterConfig(FilterConfig config) {
+		Enumeration enu = config.getInitParameterNames();
+
+        while (enu.hasMoreElements()) {
+        	String name = (String)enu.nextElement();
+
+            addInitParameter(name, config.getInitParameter(name));
+        }
+	}
 
 	public DynamicFilterConfig(String filterName, ServletContext ctx) {
 		_filterName = filterName;
