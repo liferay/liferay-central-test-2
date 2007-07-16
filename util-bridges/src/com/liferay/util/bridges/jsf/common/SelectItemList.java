@@ -44,13 +44,13 @@ import javax.faces.model.SelectItem;
  */
 public class SelectItemList extends ArrayList {
 
-	public void addEmptySelectItem(FacesContext facesContext) {
+	public void prependEmptySelectItem(FacesContext facesContext) {
 		Locale locale = facesContext.getExternalContext().getRequestLocale();
 
 		Object value = StringPool.BLANK;
 		String label = LanguageUtil.get(locale, "select");
 
-		add(new SelectItem(value, label));
+		this.add(0, new SelectItem(value, label));
 	}
 
 }

@@ -22,8 +22,13 @@
 
 package com.liferay.util.bridges.jsf.common;
 
-import javax.faces.application.FacesMessage.Severity;
+import com.liferay.util.ResourceBundleUtil;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 /**
@@ -49,12 +54,101 @@ public class FacesMessageUtil {
 		facesContext.addMessage(clientId, facesMessage);
 	}
 
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		ResourceBundle resourceBundle, String key) {
+
+		String summary = resourceBundle.getString(key);
+
+		addComponentMessage(clientId, facesContext, severity, summary);
+	}
+
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String resourceBundleBaseName, String key) {
+
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(
+				resourceBundleBaseName, locale);
+
+		addComponentMessage(
+			clientId, facesContext, severity, resourceBundle, key);
+	}
+
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		ResourceBundle resourceBundle, String key, Object[] args) {
+
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+		String summary = ResourceBundleUtil.getString(
+				resourceBundle, locale, key, args);
+
+		addComponentMessage(clientId, facesContext, severity, summary);
+	}
+
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String resourceBundleBaseName, String key, Object[] args) {
+
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(
+				resourceBundleBaseName, locale);
+		String summary = ResourceBundleUtil.getString(
+				resourceBundle, locale, key, args);
+
+		addComponentMessage(clientId, facesContext, severity, summary);
+	}
+
 	public static void addGlobalMessage(
 		FacesContext facesContext, Severity severity, String summary) {
 
 		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
 
 		facesContext.addMessage(null, facesMessage);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Severity severity,
+		ResourceBundle resourceBundle, String key) {
+
+		String summary = resourceBundle.getString(key);
+
+		addGlobalMessage(facesContext, severity, summary);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Severity severity,
+		String resourceBundleBaseName, String key) {
+
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(
+				resourceBundleBaseName, locale);
+
+		addGlobalMessage(facesContext, severity, resourceBundle, key);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Severity severity,
+		ResourceBundle resourceBundle, String key, Object[] args) {
+
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+		String summary = ResourceBundleUtil.getString(
+				resourceBundle, locale, key, args);
+
+		addGlobalMessage(facesContext, severity, summary);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Severity severity,
+		String resourceBundleBaseName, String key, Object[] args) {
+
+		Locale locale = facesContext.getExternalContext().getRequestLocale();
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(
+				resourceBundleBaseName, locale);
+		String summary = ResourceBundleUtil.getString(
+				resourceBundle, locale, key, args);
+
+		addGlobalMessage(facesContext, severity, summary);
 	}
 
 }
