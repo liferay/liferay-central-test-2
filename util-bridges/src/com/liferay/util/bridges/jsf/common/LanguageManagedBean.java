@@ -24,9 +24,6 @@ package com.liferay.util.bridges.jsf.common;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
@@ -34,11 +31,16 @@ import java.util.Set;
 
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="LanguageManagedBean.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
  * This class serves as a bridge between the JSF Expression Language (EL)
  * and Liferay's Language.properties resource bundle.
+ * </p>
  *
  * @author Neil Griffin
  *
@@ -47,9 +49,11 @@ public class LanguageManagedBean implements Map {
 
 	public LanguageManagedBean() {
 
-		// Workaround for LEP-3275
+		// LEP-3275
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		_cachedCompanyId = JSFPortletUtil.getCompanyId(facesContext);
+
+		_companyId = JSFPortletUtil.getCompanyId(facesContext);
 	}
 
 	public void clear() {
@@ -57,7 +61,6 @@ public class LanguageManagedBean implements Map {
 	}
 
 	public boolean containsKey(Object key) {
-
 		throw new UnsupportedOperationException();
 	}
 
@@ -74,31 +77,27 @@ public class LanguageManagedBean implements Map {
 	}
 
 	public Object get(Object key) {
-
-		Object returnValue = null;
+		Object value = null;
 
 		if (key != null) {
-			String keyAsString = key.toString();
 			FacesContext facesContext = FacesContext.getCurrentInstance();
+
 			Locale locale = facesContext.getViewRoot().getLocale();
 
 			if (locale == null) {
 				locale = facesContext.getApplication().getDefaultLocale();
 			}
 
-			// Workaround for LEP-3275
-			returnValue = LanguageUtil.get(
-					_cachedCompanyId, locale, key.toString());
+			value = LanguageUtil.get(_companyId, locale, key.toString());
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"companyId=" + _cachedCompanyId + " locale=" +
-					locale.toString() + " key=" + keyAsString + " value=" +
-					returnValue);
+					"{companyId=" + _companyId + ", locale=" + locale +
+						", key=" + key + ", value=" + value);
 			}
 		}
 
-		return (returnValue);
+		return value;
 	}
 
 	public Set keySet() {
@@ -127,6 +126,6 @@ public class LanguageManagedBean implements Map {
 
 	private static Log _log = LogFactory.getLog(LanguageManagedBean.class);
 
-	// Workaround for LEP-3275
-	private long _cachedCompanyId = 0;
+	private long _companyId = 0;
+
 }

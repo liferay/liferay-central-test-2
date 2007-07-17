@@ -97,9 +97,9 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 				Locale locale = externalContext.getRequestLocale();
 
 				String summary = LanguageUtil.get(
-					locale,
-					"the-following-are-invalid-characters") + " " +
-						invalidChars.toString();
+					locale, "the-following-are-invalid-characters");
+
+				summary += " " + invalidChars.toString();
 
 				FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, summary, null);

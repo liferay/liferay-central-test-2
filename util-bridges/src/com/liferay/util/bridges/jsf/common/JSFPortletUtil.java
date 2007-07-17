@@ -25,6 +25,8 @@ package com.liferay.util.bridges.jsf.common;
 import com.icesoft.faces.env.ServletEnvironmentRequest;
 import com.icesoft.faces.webapp.http.portlet.PortletArtifactHack;
 
+import com.liferay.util.GetterUtil;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -43,27 +45,21 @@ import javax.portlet.RenderRequest;
 public class JSFPortletUtil {
 
 	public static long getCompanyId(FacesContext facesContext) {
-		return (getCompanyId(getPortletRequest(facesContext)));
+		return getCompanyId(getPortletRequest(facesContext));
 	}
 
 	public static long getCompanyId(PortletRequest portletRequest) {
+		long companyId = 0;
 
-		long returnValue = 0;
-		Map userInfoMap = (Map)portletRequest.getAttribute(
-				RenderRequest.USER_INFO);
+		Map userInfo = (Map)portletRequest.getAttribute(
+			RenderRequest.USER_INFO);
 
-		if (userInfoMap != null) {
-
-			try {
-				returnValue = Long.parseLong(
-						(String)userInfoMap.get("liferay.company.id"));
-			}
-			catch (NumberFormatException numberFormatException) {
-				returnValue = 0;
-			}
+		if (userInfo != null) {
+			companyId = GetterUtil.getLong(
+				(String)userInfo.get("liferay.company.id"));
 		}
 
-		return (returnValue);
+		return companyId;
 	}
 
 	public static Locale getLocale(FacesContext facesContext) {
@@ -83,27 +79,27 @@ public class JSFPortletUtil {
 	}
 
 	public static PortletRequest getPortletRequest(FacesContext facesContext) {
-		PortletRequest returnValue = null;
+		PortletRequest portletRequest = null;
 
 		Object request = facesContext.getExternalContext().getRequest();
 
 		if (request instanceof PortletRequest) {
-			returnValue = (PortletRequest)request;
+			portletRequest = (PortletRequest)request;
 		}
 		else if (request instanceof ServletEnvironmentRequest) {
 			ServletEnvironmentRequest servletEnvironmentRequest =
 				(ServletEnvironmentRequest)request;
 
-			PortletArtifactHack portletArtifactHack = (PortletArtifactHack)
-				servletEnvironmentRequest.getAttribute(
+			PortletArtifactHack portletArtifactHack =
+				(PortletArtifactHack)servletEnvironmentRequest.getAttribute(
 					PortletArtifactHack.PORTLET_HACK_KEY);
 
 			if (portletArtifactHack != null) {
-				returnValue = portletArtifactHack.getPortletRequest();
+				portletRequest = portletArtifactHack.getPortletRequest();
 			}
 		}
 
-		return returnValue;
+		return portletRequest;
 	}
 
 	public static String getPreferenceValue(
@@ -122,21 +118,20 @@ public class JSFPortletUtil {
 		FacesContext facesContext, String preferenceName, String defaultValue) {
 
 		return getPreferenceValue(
-				getPortletPreferences(facesContext), preferenceName,
-				defaultValue);
+			getPortletPreferences(facesContext), preferenceName, defaultValue);
 	}
 
 	public static String getPreferenceValue(
 		PortletPreferences portletPreferences, String preferenceName,
 		String defaultValue) {
 
-		String returnValue = defaultValue;
+		String value = defaultValue;
 
 		if (portletPreferences != null) {
 			portletPreferences.getValue(preferenceName, defaultValue);
 		}
 
-		return returnValue;
+		return value;
 	}
 
 }
