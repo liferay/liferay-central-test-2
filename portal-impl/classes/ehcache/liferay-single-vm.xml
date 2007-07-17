@@ -25,10 +25,6 @@
         timeToIdleSeconds="3600"
 		overflowToDisk="false"
 	/>
-	
-	<!--
-	timeToLiveSeconds is specified at the element level
-	-->
 	<cache
 		name="com.liferay.portal.util.WebCachePool"
 		maxElementsInMemory="1000"

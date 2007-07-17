@@ -1734,6 +1734,7 @@ templates=Шаблоны
 terms-of-use=Условия использования
 test=Тест
 text=Текст
+thank-you-for-applying-for-a-job-with-our-organization=Thank you {0} for applying for a job with our organization. Your request has been sent to our human resources department.
 thank-you-for-creating-an-account-your-password-has-been-sent-to-x=Thank you for creating an account. Your password has been sent to {0}. Please check your inbox and spam folders.
 thank-you-for-creating-an-account-your-password-is-x=Thank you for creating an account. Your password is <b>{0}</b> and has been sent to {1}. Please check your inbox and spam folders.
 thank-you-for-signing-our-guestbook=Спасибо за оставленную запись в нашей гостевой книге.

@@ -2180,6 +2180,7 @@ text-box=صندوق النص
 text-verification-failed=التحقق من النص قد فشل.
 text-verification=التحقق من النص
 text=كتابة
+thank-you-for-applying-for-a-job-with-our-organization=Thank you {0} for applying for a job with our organization. Your request has been sent to our human resources department.
 thank-you-for-creating-an-account-your-password-has-been-sent-to-x=شكرا لك لإنشاء حساب. تم إرسال كلمة السر الخاصة بك هي إلى {0}. يرجى التأكد في حافظة البريد الوارد و البريد غير المرغوب به.
 thank-you-for-creating-an-account-your-password-is-x=شكرا لك لإنشاء حساب. كلمة السر الخاصة بك هي <b>{0}</b> و تم إرسالها إلى {1}. يرجى التأكد في حافظة البريد الوارد و البريد غير المرغوب به.
 thank-you-for-signing-our-guestbook=شكرا لتوقيعك في سجل الزوار.

@@ -9,9 +9,9 @@
 	below for individual domain objects, collection, queries, etc.
 	-->
 
-	<defaultCache 
-		maxElementsInMemory="1000" 
-		eternal="false" 
+	<defaultCache
+		maxElementsInMemory="1000"
+		eternal="false"
         timeToIdleSeconds="3600"
 		overflowToDisk="true">
 
@@ -24,9 +24,10 @@
 	</defaultCache>
 	
 	<!--
-	The cache name is the same as the class name specified in your hibernate 
+	The cache name is the same as the class name specified in your Hibernate
 	mapping file.
 	-->
+
 	<cache
 		name="com.liferay.portal.model.impl.UserImpl"
 		maxElementsInMemory="1000"

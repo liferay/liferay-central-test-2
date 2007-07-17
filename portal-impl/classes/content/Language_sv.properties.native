@@ -2044,6 +2044,7 @@ text-box=Textruta
 text-verification-failed=Text verifikationen misslyckades.
 text-verification=Text verifikation
 text=Text
+thank-you-for-applying-for-a-job-with-our-organization=Thank you {0} for applying for a job with our organization. Your request has been sent to our human resources department.
 thank-you-for-creating-an-account-your-password-has-been-sent-to-x=Tack för att du skapade ett konto. Ditt lösenord har skickats till {0}. Var vänlig och kontrollera din inkorg samt skräppost.
 thank-you-for-creating-an-account-your-password-is-x=Tack för att du skapade ett konto. Ditt lösenord är <b>{0}</b> och har skickats till {1}. Var vänlig och kontrollera din inkorg samt skräppost.
 thank-you-for-signing-our-guestbook=Tack för att du signerade gästboken.
