@@ -1,5 +1,5 @@
 <!--
-Caches in this file are designed to be unique per VM and should be clustered.
+Caches in this file are designed to be unique per VM and should not be clustered.
 -->
 
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
