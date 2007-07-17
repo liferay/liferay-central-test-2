@@ -25,10 +25,14 @@ package com.liferay.util.bridges.jsf.common;
 import com.icesoft.faces.env.ServletEnvironmentRequest;
 import com.icesoft.faces.webapp.http.portlet.PortletArtifactHack;
 
+import java.util.Locale;
+import java.util.Map;
+
 import javax.faces.context.FacesContext;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.RenderRequest;
 
 /**
  * <a href="JSFPortletUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +41,40 @@ import javax.portlet.PortletRequest;
  *
  */
 public class JSFPortletUtil {
+
+	public static long getCompanyId(FacesContext facesContext) {
+		return (getCompanyId(getPortletRequest(facesContext)));
+	}
+
+	public static long getCompanyId(PortletRequest portletRequest) {
+
+		long returnValue = 0;
+		Map userInfoMap = (Map)portletRequest.getAttribute(
+				RenderRequest.USER_INFO);
+
+		if (userInfoMap != null) {
+
+			try {
+				returnValue = Long.parseLong(
+						(String)userInfoMap.get("liferay.company.id"));
+			}
+			catch (NumberFormatException numberFormatException) {
+				returnValue = 0;
+			}
+		}
+
+		return (returnValue);
+	}
+
+	public static Locale getLocale(FacesContext facesContext) {
+		Locale locale = facesContext.getViewRoot().getLocale();
+
+		if (locale == null) {
+			locale = facesContext.getApplication().getDefaultLocale();
+		}
+
+		return (locale);
+	}
 
 	public static PortletPreferences getPortletPreferences(
 		FacesContext facesContext) {
@@ -56,8 +94,8 @@ public class JSFPortletUtil {
 			ServletEnvironmentRequest servletEnvironmentRequest =
 				(ServletEnvironmentRequest)request;
 
-			PortletArtifactHack portletArtifactHack =
-				(PortletArtifactHack)servletEnvironmentRequest.getAttribute(
+			PortletArtifactHack portletArtifactHack = (PortletArtifactHack)
+				servletEnvironmentRequest.getAttribute(
 					PortletArtifactHack.PORTLET_HACK_KEY);
 
 			if (portletArtifactHack != null) {
@@ -84,7 +122,8 @@ public class JSFPortletUtil {
 		FacesContext facesContext, String preferenceName, String defaultValue) {
 
 		return getPreferenceValue(
-			getPortletPreferences(facesContext), preferenceName, defaultValue);
+				getPortletPreferences(facesContext), preferenceName,
+				defaultValue);
 	}
 
 	public static String getPreferenceValue(

@@ -22,8 +22,12 @@
 
 package com.liferay.util.bridges.jsf.common;
 
-import javax.faces.application.FacesMessage.Severity;
+import com.liferay.portal.kernel.language.LanguageUtil;
+
+import java.util.Locale;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 /**
@@ -42,19 +46,119 @@ public class FacesMessageUtil {
 
 	public static void addComponentMessage(
 		String clientId, FacesContext facesContext, Severity severity,
-		String summary) {
+		String message) {
 
-		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
-
+		FacesMessage facesMessage = new FacesMessage(severity, message, null);
 		facesContext.addMessage(clientId, facesMessage);
 	}
 
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String message, Object argument) {
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		addComponentMessage(
+			clientId, facesContext, locale, severity, message, argument);
+	}
+
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Locale locale,
+		Severity severity, String message, Object argument) {
+		String formattedMessage = LanguageUtil.format(
+				locale, message, argument);
+		addComponentMessage(clientId, facesContext, severity, formattedMessage);
+	}
+
+	public static void addComponentMessage(
+		String clientId, FacesContext facesContext, Locale locale,
+		Severity severity, String message, Object[] arguments) {
+		String formattedMessage = LanguageUtil.format(
+				locale, message, arguments);
+		addComponentMessage(clientId, facesContext, severity, formattedMessage);
+	}
+
+	public static void addComponentMessageFromLiferay(
+		String clientId, FacesContext facesContext, Severity severity,
+		String key) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		String message = LanguageUtil.get(locale, key);
+		addComponentMessage(clientId, facesContext, severity, message);
+	}
+
+	public static void addComponentMessageFromLiferay(
+		String clientId, FacesContext facesContext, Severity severity,
+		String key, Object argument) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		String message = LanguageUtil.get(locale, key);
+		addComponentMessage(
+			clientId, facesContext, locale, severity, message, argument);
+	}
+
+	public static void addComponentMessageFromLiferay(
+		String clientId, FacesContext facesContext, Severity severity,
+		String key, Object[] arguments) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		String message = LanguageUtil.get(locale, key);
+		addComponentMessage(
+			clientId, facesContext, locale, severity, message, arguments);
+	}
+
 	public static void addGlobalMessage(
-		FacesContext facesContext, Severity severity, String summary) {
+		FacesContext facesContext, Severity severity, String message) {
 
-		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
-
+		FacesMessage facesMessage = new FacesMessage(severity, message, null);
 		facesContext.addMessage(null, facesMessage);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Severity severity, String message,
+		Object argument) {
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		addGlobalMessage(facesContext, locale, severity, message, argument);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Locale locale, Severity severity,
+		String message, Object argument) {
+		String formattedMessage = LanguageUtil.format(
+				locale, message, argument);
+		addGlobalMessage(facesContext, severity, formattedMessage);
+	}
+
+	public static void addGlobalMessage(
+		FacesContext facesContext, Locale locale, Severity severity,
+		String message, Object[] arguments) {
+		String formattedMessage = LanguageUtil.format(
+				locale, message, arguments);
+		addGlobalMessage(facesContext, severity, formattedMessage);
+	}
+
+	public static void addGlobalMessageFromLiferay(
+		FacesContext facesContext, Severity severity, String key) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		String message = LanguageUtil.get(locale, key);
+		addGlobalMessage(facesContext, severity, message);
+	}
+
+	public static void addGlobalMessageFromLiferay(
+		FacesContext facesContext, Severity severity, String key,
+		Object argument) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		String message = LanguageUtil.get(locale, key);
+		addGlobalMessage(facesContext, locale, severity, message, argument);
+	}
+
+	public static void addGlobalMessageFromLiferay(
+		FacesContext facesContext, Severity severity, String key,
+		Object[] arguments) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+		String message = LanguageUtil.get(locale, key);
+		addGlobalMessage(facesContext, locale, severity, message, arguments);
 	}
 
 }
