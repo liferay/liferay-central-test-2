@@ -51,21 +51,21 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 
 		ExplodedTomcatDeployer deployer = null;
 
-		File docBaseDir = getDocBaseDir(
-			file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+		File docBaseDir = getDocBaseDir(file, "index.php");
 
-		if (docBaseDir == null) {
-			docBaseDir = getDocBaseDir(file, "index.php");
-
-			if (docBaseDir == null) {
-				return;
-			}
-			else {
-				deployer = getPhpDeployer();
-			}
+		if (docBaseDir != null) {
+			deployer = getPhpDeployer();
 		}
 		else {
-			deployer = _deployer;
+			docBaseDir = getDocBaseDir(
+				file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+
+			if (docBaseDir != null) {
+				deployer = _deployer;
+			}
+			else {
+				return;
+			}
 		}
 
 		if (_log.isInfoEnabled()) {

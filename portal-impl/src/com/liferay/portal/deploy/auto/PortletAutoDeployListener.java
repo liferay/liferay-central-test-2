@@ -50,13 +50,14 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 		AutoDeployer deployer = null;
 
-		if (isMatchingFile(
-				file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
+		if (isMatchingFile(file, "index.php")) {
+			deployer = getPhpDeployer();
+		}
+		else if (isMatchingFile(
+					file,
+					"WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
 
 			deployer = _deployer;
-		}
-		else if (isMatchingFile(file, "index.php")) {
-			deployer = getPhpDeployer();
 		}
 		else {
 			return;
