@@ -98,8 +98,8 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 
 				String summary = LanguageUtil.get(
 					locale,
-					"the-following-are-invalid-characters" +
-						invalidChars.toString());
+					"the-following-are-invalid-characters") + " " +
+						invalidChars.toString();
 
 				FacesMessage facesMessage = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, summary, null);
