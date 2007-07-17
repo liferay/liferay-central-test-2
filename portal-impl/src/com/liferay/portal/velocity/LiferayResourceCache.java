@@ -44,11 +44,19 @@ public class LiferayResourceCache implements ResourceCache {
 	}
 
 	public Resource put(Object key, Resource resource) {
-		return LiferayResourceCacheUtil.put(key.toString(), resource);
+		LiferayResourceCacheUtil.put(key.toString(), resource);
+
+		return resource;
 	}
 
 	public Resource remove(Object key) {
-		return LiferayResourceCacheUtil.remove(key.toString());
+		Resource resource = get(key);
+
+		if (resource != null) {
+			LiferayResourceCacheUtil.remove(key.toString());
+		}
+
+		return resource;
 	}
 
 	public Iterator enumerateKeys() {

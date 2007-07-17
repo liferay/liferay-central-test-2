@@ -43,8 +43,8 @@ public class CSSCachedAction extends LastModifiedAction {
 		return LastModifiedCSS.get(key);
 	}
 
-	public String setLastModifiedValue(String key, String value) {
-		return LastModifiedCSS.put(key, key);
+	public void setLastModifiedValue(String key, String value) {
+		LastModifiedCSS.put(key, key);
 	}
 
 }

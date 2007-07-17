@@ -22,12 +22,12 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.CachePolicy;
+import com.liferay.portal.cache.SingleVMPool;
 import com.liferay.util.ConverterException;
-import com.liferay.util.ExtPropertiesLoader;
+import com.liferay.util.Time;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,62 +40,39 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebCachePool {
 
-	static GeneralCacheAdministrator cache = null;
-
-	static {
-		cache = new GeneralCacheAdministrator(ExtPropertiesLoader.getInstance(
-			PropsFiles.CACHE_SINGLE_VM).getProperties());
-	}
+	public static final String CACHE_NAME = WebCachePool.class.getName();
 
 	public static void clear() {
-		cache.flushAll();
+		_cache.removeAll();
 	}
 
 	public static Object get(String key, WebCacheable wc) {
-		Object obj = null;
+		Object obj = SingleVMPool.get(_cache, key);
 
-		try {
-			obj = cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nfe) {
+		if (obj == null) {
 			try {
 				obj = wc.convert(key);
 
-				cache.putInCache(
-					key, obj, new CachePolicy(wc.getRefreshTime()));
+				Element element = new Element(key, obj);
+
+				element.setTimeToLive((int)(wc.getRefreshTime() / Time.SECOND));
+
+				_cache.put(element);
 			}
 			catch (ConverterException ce) {
 				_log.error(ce.getMessage());
 			}
-			finally {
-				if (obj == null) {
-					cache.cancelUpdate(key);
-				}
-			}
 		}
 
 		return obj;
 	}
 
-	public static Object remove(String key) {
-		Object obj = null;
-
-		try {
-			obj = cache.getFromCache(key);
-
-			cache.flushEntry(key);
-		}
-		catch (NeedsRefreshException nfe) {
-		}
-		finally {
-			if (obj == null) {
-				cache.cancelUpdate(key);
-			}
-		}
-
-		return obj;
+	public static void remove(String key) {
+		SingleVMPool.remove(_cache, key);
 	}
 
 	private static Log _log = LogFactory.getLog(WebCachePool.class);
+
+	private static Cache _cache = SingleVMPool.getCache(CACHE_NAME);
 
 }

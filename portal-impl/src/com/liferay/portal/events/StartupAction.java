@@ -24,6 +24,7 @@ package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
@@ -33,7 +34,6 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.verify.VerifyProcess;
@@ -150,7 +150,7 @@ public class StartupAction extends SimpleAction {
 
 			CacheRegistry.setActive(true);
 
-			ClusterPool.clear();
+			MultiVMPool.clear();
 
 			// Verify
 

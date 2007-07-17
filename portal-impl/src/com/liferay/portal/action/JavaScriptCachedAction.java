@@ -43,8 +43,8 @@ public class JavaScriptCachedAction extends LastModifiedAction {
 		return LastModifiedJavaScript.get(key);
 	}
 
-	public String setLastModifiedValue(String key, String value) {
-		return LastModifiedJavaScript.put(key, key);
+	public void setLastModifiedValue(String key, String value) {
+		LastModifiedJavaScript.put(key, key);
 	}
 
 }

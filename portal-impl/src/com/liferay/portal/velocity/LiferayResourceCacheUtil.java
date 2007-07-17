@@ -22,12 +22,9 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.util.PropsFiles;
-import com.liferay.util.ExtPropertiesLoader;
-import com.liferay.util.Validator;
+import com.liferay.portal.cache.SingleVMPool;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import net.sf.ehcache.Cache;
 
 import org.apache.velocity.runtime.resource.Resource;
 
@@ -39,79 +36,25 @@ import org.apache.velocity.runtime.resource.Resource;
  */
 public class LiferayResourceCacheUtil {
 
+	public static final String CACHE_NAME =
+		LiferayResourceCacheUtil.class.getName();
+
 	public static void clear() {
-		_instance._clear();
+		_cache.removeAll();
 	}
 
 	public static Resource get(String key) {
-		return _instance._get(key);
+		return (Resource)SingleVMPool.get(_cache, key);
 	}
 
-	public static Resource put(String key, Resource resource) {
-		return _instance._put(key, resource);
+	public static void put(String key, Resource resource) {
+		SingleVMPool.put(_cache, key, resource);
 	}
 
-	public static Resource remove(String key) {
-		return _instance._remove(key);
+	public static void remove(String key) {
+		SingleVMPool.remove(_cache, key);
 	}
 
-	private LiferayResourceCacheUtil() {
-		_cache = new GeneralCacheAdministrator(ExtPropertiesLoader.getInstance(
-			PropsFiles.CACHE_SINGLE_VM).getProperties());
-	}
-
-	private void _clear() {
-		_cache.flushAll();
-	}
-
-	private Resource _get(String key) {
-		Resource resource = null;
-
-		try {
-			resource = (Resource)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nfe) {
-		}
-		finally {
-			if (resource == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
-
-		return resource;
-	}
-
-	private Resource _put(String key, Resource resource) {
-		if (Validator.isNotNull(key)) {
-			_cache.flushEntry(key);
-			_cache.putInCache(key, resource);
-		}
-
-		return resource;
-	}
-
-	private Resource _remove(String key) {
-		Resource resource = null;
-
-		try {
-			resource = (Resource)_cache.getFromCache(key);
-
-			_cache.flushEntry(key);
-		}
-		catch (NeedsRefreshException nfe) {
-		}
-		finally {
-			if (resource == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
-
-		return resource;
-	}
-
-	private static LiferayResourceCacheUtil _instance =
-		new LiferayResourceCacheUtil();
-
-	private GeneralCacheAdministrator _cache;
+	private static Cache _cache = SingleVMPool.getCache(CACHE_NAME);
 
 }

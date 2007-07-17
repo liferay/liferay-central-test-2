@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.plugininstaller.action;
 
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
@@ -35,13 +36,13 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
@@ -124,12 +125,13 @@ public class InstallPluginAction extends PortletAction {
 	}
 
 	protected void cacheMulti() throws Exception {
-		ClusterPool.clear();
+		MultiVMPool.clear();
 	}
 
 	protected void cacheSingle() throws Exception {
 		LastModifiedCSS.clear();
 		LastModifiedJavaScript.clear();
+		LiferayResourceCacheUtil.clear();
 		WebCachePool.clear();
 	}
 

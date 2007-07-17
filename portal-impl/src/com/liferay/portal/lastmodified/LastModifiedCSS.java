@@ -22,12 +22,9 @@
 
 package com.liferay.portal.lastmodified;
 
-import com.liferay.portal.util.PropsFiles;
-import com.liferay.util.ExtPropertiesLoader;
-import com.liferay.util.Validator;
+import com.liferay.portal.cache.SingleVMPool;
 
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import net.sf.ehcache.Cache;
 
 /**
  * <a href="LastModifiedCSS.java.html"><b><i>View Source</i></b></a>
@@ -37,78 +34,24 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
  */
 public class LastModifiedCSS {
 
+	public static final String CACHE_NAME = LastModifiedCSS.class.getName();
+
 	public static void clear() {
-		_instance._clear();
+		_cache.removeAll();
 	}
 
 	public static String get(String key) {
-		return _instance._get(key);
+		return (String)SingleVMPool.get(_cache, key);
 	}
 
-	public static String put(String key, String obj) {
-		return _instance._put(key, obj);
+	public static void put(String key, String css) {
+		SingleVMPool.put(_cache, key, css);
 	}
 
-	public static String remove(String key) {
-		return _instance._remove(key);
+	public static void remove(String key) {
+		SingleVMPool.remove(_cache, key);
 	}
 
-	private LastModifiedCSS() {
-		_cache = new GeneralCacheAdministrator(ExtPropertiesLoader.getInstance(
-			PropsFiles.CACHE_SINGLE_VM).getProperties());
-	}
-
-	private void _clear() {
-		_cache.flushAll();
-	}
-
-	private String _get(String key) {
-		String obj = null;
-
-		try {
-			obj = (String)_cache.getFromCache(key);
-		}
-		catch (NeedsRefreshException nfe) {
-		}
-		finally {
-			if (obj == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
-
-		return obj;
-	}
-
-	private String _put(String key, String obj) {
-		if (Validator.isNotNull(key)) {
-			_cache.flushEntry(key);
-			_cache.putInCache(key, obj);
-		}
-
-		return obj;
-	}
-
-	private String _remove(String key) {
-		String obj = null;
-
-		try {
-			obj = (String)_cache.getFromCache(key);
-
-			_cache.flushEntry(key);
-		}
-		catch (NeedsRefreshException nfe) {
-		}
-		finally {
-			if (obj == null) {
-				_cache.cancelUpdate(key);
-			}
-		}
-
-		return obj;
-	}
-
-	private static LastModifiedCSS _instance = new LastModifiedCSS();
-
-	private GeneralCacheAdministrator _cache;
+	private static Cache _cache = SingleVMPool.getCache(CACHE_NAME);
 
 }

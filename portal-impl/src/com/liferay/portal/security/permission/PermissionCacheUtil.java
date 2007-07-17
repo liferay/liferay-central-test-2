@@ -22,9 +22,9 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.ClusterPool;
 
 import net.sf.ehcache.Cache;
 
@@ -52,7 +52,7 @@ public class PermissionCacheUtil {
 
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		Boolean value = (Boolean)ClusterPool.get(_cache, key);
+		Boolean value = (Boolean)MultiVMPool.get(_cache, key);
 
 		return value;
 	}
@@ -64,7 +64,7 @@ public class PermissionCacheUtil {
 		if (value != null) {
 			String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-			ClusterPool.put(_cache, key, value);
+			MultiVMPool.put(_cache, key, value);
 		}
 
 		return value;
@@ -93,6 +93,6 @@ public class PermissionCacheUtil {
 
 	private static Log _log = LogFactory.getLog(PermissionCacheUtil.class);
 
-	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
+	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
 
 }

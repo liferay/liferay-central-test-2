@@ -22,10 +22,10 @@
 
 package com.liferay.portal.cms.servlet;
 
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Validator;
 
@@ -63,7 +63,7 @@ public class CMSServletUtil {
 
 		String key = _encodeKey(articleId, languageId);
 
-		String content = (String)ClusterPool.get(_cache, key);
+		String content = (String)MultiVMPool.get(_cache, key);
 
 		if (content == null) {
 			try {
@@ -77,7 +77,7 @@ public class CMSServletUtil {
 			}
 
 			if (content != null) {
-				ClusterPool.put(_cache, key, content);
+				MultiVMPool.put(_cache, key, content);
 			}
 		}
 
@@ -98,6 +98,6 @@ public class CMSServletUtil {
 
 	private static Log _log = LogFactory.getLog(CMSServletUtil.class);
 
-	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
+	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
 
 }

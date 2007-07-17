@@ -155,6 +155,12 @@ public class PropsUtil {
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";
 
+	// Ehcache
+
+	public static final String EHCACHE_SINGLE_VM_CONFIG_LOCATION = "ehcache.single.vm.config.location";
+
+	public static final String EHCACHE_MULTI_VM_CONFIG_LOCATION = "ehcache.multi.vm.config.location";
+
 	// Commons Pool
 
 	public static final String COMMONS_POOL_ENABLED = "commons.pool.enabled";

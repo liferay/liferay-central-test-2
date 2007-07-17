@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.admin.action;
 
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
@@ -29,7 +30,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -126,7 +126,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void cacheMulti() throws Exception {
-		ClusterPool.clear();
+		MultiVMPool.clear();
 	}
 
 	protected void cacheSingle() throws Exception {

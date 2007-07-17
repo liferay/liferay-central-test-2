@@ -103,6 +103,6 @@ public abstract class LastModifiedAction extends Action {
 
 	public abstract String getLastModifiedValue(String key);
 
-	public abstract String setLastModifiedValue(String key, String value);
+	public abstract void setLastModifiedValue(String key, String value);
 
 }

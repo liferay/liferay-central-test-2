@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.Validator;
 
 import javax.portlet.RenderResponse;
@@ -60,7 +60,7 @@ public class AlfrescoContentCacheUtil {
 
 		String key = _encodeKey(uuid);
 
-		String content = (String)ClusterPool.get(_cache, key);
+		String content = (String)MultiVMPool.get(_cache, key);
 
 		if (content == null) {
 
@@ -75,7 +75,7 @@ public class AlfrescoContentCacheUtil {
 			}
 
 			if (content != null) {
-				ClusterPool.put(_cache, key, content);
+				MultiVMPool.put(_cache, key, content);
 			}
 		}
 
@@ -94,6 +94,6 @@ public class AlfrescoContentCacheUtil {
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentCacheUtil.class);
 
-	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
+	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
 
 }

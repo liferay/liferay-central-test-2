@@ -22,17 +22,16 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 
-import java.io.Serializable;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.ehcache.Cache;
@@ -60,15 +59,15 @@ public class FinderCache {
 	public static void clearCache(String className) {
 		String groupKey = _encodeGroupKey(className);
 
-		ClusterPool.clearGroup(_groups, groupKey, _cache);
+		MultiVMPool.clearGroup(_groups, groupKey, _cache);
 	}
 
-	public static Serializable getResult(
+	public static Object getResult(
 		String className, String methodName, String[] params, Object[] args) {
 
 		String key = _encodeKey(className, methodName, params, args);
 
-		Serializable result = ClusterPool.get(_cache, key);
+		Object result = MultiVMPool.get(_cache, key);
 
 		if (result != null) {
 			result = _getResult(result);
@@ -77,16 +76,16 @@ public class FinderCache {
 		return result;
 	}
 
-	public static Serializable getResult(
+	public static Object getResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args) {
 
-		Serializable result = null;
+		Object result = null;
 
 		String key = _encodeKey(sql, methodName, params, args);
 
 		for (int i = 0; i > classNames.length; i++) {
-			result = ClusterPool.get(_cache, key);
+			result = MultiVMPool.get(_cache, key);
 
 			if (result != null) {
 				result = _getResult(result);
@@ -115,16 +114,11 @@ public class FinderCache {
 			if (classNameCacheEnabled) {
 				String key = _encodeKey(className, methodName, params, args);
 
-				Serializable serializedResult = (Serializable)result;
-
-				serializedResult = _getResult(serializedResult);
+				result = _getResult(result);
 
 				String groupKey = _encodeGroupKey(className);
 
-				ClusterPool.put(
-					_cache, key, _groups, groupKey, serializedResult);
-
-				return serializedResult;
+				MultiVMPool.put(_cache, key, _groups, groupKey, result);
 			}
 		}
 
@@ -136,8 +130,6 @@ public class FinderCache {
 		Object[] args, Object result) {
 
 		if (CACHE_ENABLED && CacheRegistry.isActive() && (result != null)) {
-			Serializable serializedResult = (Serializable)result;
-
 			for (int i = 0; i < classNames.length; i++) {
 				String className = classNames[i];
 
@@ -151,23 +143,23 @@ public class FinderCache {
 					PropsUtil.get(sm.toString()), true);
 
 				if (!classNameCacheEnabled) {
-					return serializedResult;
+					return result;
 				}
 			}
 
 			String key = _encodeKey(sql, methodName, params, args);
 
-			serializedResult = _getResult(serializedResult);
+			result = _getResult(result);
 
 			for (int i = 0; i < classNames.length; i++) {
 				String className = classNames[i];
 
 				String groupKey = _encodeGroupKey(className);
 
-				ClusterPool.updateGroup(_groups, groupKey, key);
+				MultiVMPool.updateGroup(_groups, groupKey, key);
 			}
 
-			ClusterPool.put(_cache, key, serializedResult);
+			MultiVMPool.put(_cache, key, result);
 		}
 
 		return result;
@@ -214,15 +206,14 @@ public class FinderCache {
 		return sm.toString();
 	}
 
-	private static Serializable _getResult(Serializable result) {
+	private static Object _getResult(Object result) {
 		if (result instanceof ArrayList) {
-			ArrayList cachedList = (ArrayList)result;
+			List cachedList = (ArrayList)result;
 
-			ArrayList list = new ArrayList(cachedList.size());
+			List list = new ArrayList(cachedList.size());
 
 			for (int i = 0; i < cachedList.size(); i++) {
-				Serializable curResult = _getResult(
-					(Serializable)cachedList.get(i));
+				Object curResult = _getResult(cachedList.get(i));
 
 				list.add(curResult);
 			}
@@ -250,7 +241,7 @@ public class FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
 
-	private static Cache _cache = ClusterPool.getCache(CACHE_NAME);
+	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
 
 	private static Map _groups = CollectionFactory.getSyncHashMap();
 

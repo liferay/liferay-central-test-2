@@ -30,10 +30,6 @@ package com.liferay.portal.util;
  */
 public class PropsFiles {
 
-	public static final String CACHE_MULTI_VM = "cache-multi-vm";
-
-	public static final String CACHE_SINGLE_VM = "cache-single-vm";
-
 	public static final String CAPTCHA = "captcha";
 
 	public static final String PORTAL = "portal";
