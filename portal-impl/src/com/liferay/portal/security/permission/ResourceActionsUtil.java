@@ -317,6 +317,12 @@ public class ResourceActionsUtil {
 		}
 	}
 
+	private void _checkPortletGuestDefaultActions(List actions) {
+		if (actions.size() == 0) {
+			actions.add("VIEW");
+		}
+	}
+
 	private List _getActions(Map map, String name) {
 		List actions = (List)map.get(name);
 
@@ -378,8 +384,6 @@ public class ResourceActionsUtil {
 
 		if (actions.size() == 0) {
 			synchronized (this) {
-				actions.clear();
-
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					companyId, name);
 
@@ -407,12 +411,30 @@ public class ResourceActionsUtil {
 
 				_checkPortletActions(actions);
 
-				List communityDefaultActions = _getActions(
-					_portletResourceCommunityDefaultActions, name);
+				List communityDefaultActions =
+					(List)_portletResourceCommunityDefaultActions.get(name);
 
-				communityDefaultActions.clear();
+				if (communityDefaultActions == null) {
+					communityDefaultActions = new UniqueList();
 
-				_checkPortletCommunityDefaultActions(communityDefaultActions);
+					_portletResourceCommunityDefaultActions.put(
+						name, communityDefaultActions);
+
+					_checkPortletCommunityDefaultActions(
+						communityDefaultActions);
+				}
+
+				List guestDefaultActions =
+					(List)_portletResourceGuestDefaultActions.get(name);
+
+				if (guestDefaultActions == null) {
+					guestDefaultActions = new UniqueList();
+
+					_portletResourceGuestDefaultActions.put(
+						name, guestDefaultActions);
+
+					_checkPortletGuestDefaultActions(guestDefaultActions);
+				}
 			}
 		}
 
@@ -431,14 +453,7 @@ public class ResourceActionsUtil {
 
 		name = PortletImpl.getRootPortletId(name);
 
-		List communityDefaultActions = _getActions(
-			_portletResourceCommunityDefaultActions, name);
-
-		if (communityDefaultActions.size() == 0) {
-			throw new SystemException("Community defaults should never empty");
-		}
-
-		return communityDefaultActions;
+		return _getActions(_portletResourceCommunityDefaultActions, name);
 	}
 
 	private List _getPortletResourceGuestDefaultActions(String name)
@@ -547,8 +562,6 @@ public class ResourceActionsUtil {
 					communityDefaultActions.add(actionKeyText);
 				}
 			}
-
-			_checkPortletCommunityDefaultActions(communityDefaultActions);
 
 			// Guest default actions
 
