@@ -23,13 +23,12 @@
 package com.liferay.portlet.plugininstaller.action;
 
 import com.liferay.portal.cache.MultiVMPool;
+import com.liferay.portal.cache.SingleVMPool;
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.lastmodified.LastModifiedCSS;
-import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -40,9 +39,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
@@ -129,10 +126,7 @@ public class InstallPluginAction extends PortletAction {
 	}
 
 	protected void cacheSingle() throws Exception {
-		LastModifiedCSS.clear();
-		LastModifiedJavaScript.clear();
-		LiferayResourceCacheUtil.clear();
-		WebCachePool.clear();
+		SingleVMPool.clear();
 	}
 
 	protected void deployConfiguration(ActionRequest req) throws Exception {
