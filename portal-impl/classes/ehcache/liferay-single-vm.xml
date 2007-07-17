@@ -1,8 +1,10 @@
-<!--
-Caches in this file are designed to be unique per VM and should not be clustered.
--->
-
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<!--
+	Caches in this file are designed to be unique per VM and should not be
+	clustered.
+	-->
+
 	<defaultCache
 		maxElementsInMemory="1000"
 		eternal="false"
@@ -12,28 +14,24 @@ Caches in this file are designed to be unique per VM and should not be clustered
 		name="com.liferay.portal.lastmodified.LastModifiedCSS"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
 		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.lastmodified.LastModifiedJavaScript"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
 		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.util.WebCachePool"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
 		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
 		overflowToDisk="false"
 	/>
 </ehcache>
