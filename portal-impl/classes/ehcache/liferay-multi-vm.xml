@@ -20,6 +20,7 @@
 	<defaultCache
 		maxElementsInMemory="1000"
 		eternal="false"
+        timeToIdleSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -39,7 +40,7 @@
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+        timeToIdleSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -49,7 +50,7 @@
 		name="com.liferay.portal.cms.servlet.CMSServletUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+        timeToIdleSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -59,7 +60,7 @@
 		name="com.liferay.portal.spring.hibernate.FinderCache"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+        timeToIdleSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -69,7 +70,7 @@
 		name="com.liferay.portlet.journalcontent.util.JournalContentUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+		timeToLiveSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -79,7 +80,7 @@
 		name="com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+		timeToLiveSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -89,7 +90,7 @@
 		name="com.liferay.portal.security.permission.PermissionCacheUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+        timeToIdleSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -99,7 +100,7 @@
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		maxElementsInMemory="1000"
 		eternal="false"
-		timeToLiveSeconds="300"
+        timeToIdleSeconds="3600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />

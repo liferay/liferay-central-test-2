@@ -9,7 +9,11 @@
 	below for individual domain objects, collection, queries, etc.
 	-->
 
-	<defaultCache maxElementsInMemory="1000" eternal="false" overflowToDisk="true">
+	<defaultCache 
+		maxElementsInMemory="1000" 
+		eternal="false" 
+        timeToIdleSeconds="3600"
+		overflowToDisk="true">
 
 		<!--
 		Uncomment the following in a clustered configuration.
@@ -18,4 +22,19 @@
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</defaultCache>
+	
+	<!--
+	The cache name is the same as the class name specified in your hibernate 
+	mapping file.
+	-->
+	<cache
+		name="com.liferay.portal.model.impl.UserImpl"
+		maxElementsInMemory="1000"
+		eternal="false"
+        timeToIdleSeconds="3600"
+		overflowToDisk="true"
+	>
+		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
+	</cache>
 </ehcache>
