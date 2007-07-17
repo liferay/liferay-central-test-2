@@ -40,7 +40,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PropertiesUtil;
-import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
@@ -614,17 +613,12 @@ public class PortalLDAPUtil {
 
 		LogUtil.debug(_log, userMappings);
 
-		User user = null;
+		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
 
 		long creatorUserId = 0;
 		boolean passwordReset = false;
 		boolean autoScreenName = false;
-
-		String userLanguage = SystemProperties.get("user.language");
-		String userCountry = SystemProperties.get("user.country");
-		String userVariant = SystemProperties.get("user.variant");
-
-		Locale locale = new Locale(userLanguage, userCountry, userVariant);
+		Locale locale = defaultUser.getLocale();
 		String firstName = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("firstName"));
 		String middleName = LDAPUtil.getAttributeValue(
@@ -668,10 +662,10 @@ public class PortalLDAPUtil {
 						"are required");
 			}
 
-			return user;
+			return null;
 		}
 
-		boolean create = true;
+		User user = null;
 
 		try {
 			user = UserLocalServiceUtil.getUserByEmailAddress(
@@ -682,8 +676,6 @@ public class PortalLDAPUtil {
 					user.getUserId(), password, password, passwordReset,
 					true);
 			}
-
-			create = false;
 		}
 		catch (NoSuchUserException nsue) {
 
@@ -691,7 +683,7 @@ public class PortalLDAPUtil {
 
 		}
 
-		if (create) {
+		if (user != null) {
 			try {
 				user = UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoPassword, password, password,
@@ -710,7 +702,7 @@ public class PortalLDAPUtil {
 
 		// Import user groups and membership
 
-		if (importGroupMembership && user != null) {
+		if (importGroupMembership && (user != null)) {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
 
 			if (attr != null){
