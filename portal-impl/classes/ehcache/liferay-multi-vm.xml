@@ -22,6 +22,7 @@
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
 	/>-->
+
 	<defaultCache
 		maxElementsInMemory="1000"
 		eternal="false"

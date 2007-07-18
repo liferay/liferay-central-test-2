@@ -30,6 +30,7 @@ import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.test.TestConstants;
 import com.liferay.test.TestProps;
 import com.liferay.test.client.BaseSoapTest;
+import com.liferay.util.GetterUtil;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -49,9 +50,8 @@ public class PortalSoapTest extends BaseSoapTest {
 		catch (Exception e) {
 			fail(e);
 		}
-		
 	}
-	
+
 	public void testAddUser() {
 		try {
 			addUser(getUserService(), 0);
@@ -60,29 +60,29 @@ public class PortalSoapTest extends BaseSoapTest {
 			fail(e);
 		}
 	}
-	
+
 	public void testConcurrentAddUser() {
-		int threadCount = Integer.parseInt(
-				TestProps.get("portal.soap.add.user.thread.count"));
-		
+		int threadCount = GetterUtil.getInteger(
+			TestProps.get("portal.soap.add.user.thread.count"));
+
 		AddUserWorker[] workers = new AddUserWorker[threadCount];
-		
+
 		try {
 			for (int i = 0; i < threadCount; i++) {
 				workers[i] = new AddUserWorker(getUserService(), i);
-				
+
 				workers[i].start();
-			}			
+			}
 
 			while (true) {
 				int activeThreads = 0;
-				
+
 				for (int i = 0; i < threadCount; i++) {
 					if (workers[i].isAlive()) {
 						activeThreads++;
 					}
 				}
-				
+
 				if (activeThreads == 0) {
 					break;
 				}
@@ -90,7 +90,7 @@ public class PortalSoapTest extends BaseSoapTest {
 
 			for (int i = 0; i < threadCount; i++) {
 				Exception e = workers[i].getException();
-				
+
 				if (e != null) {
 					throw e;
 				}
@@ -100,30 +100,10 @@ public class PortalSoapTest extends BaseSoapTest {
 			fail(e);
 		}
 	}
-	
-	protected PortalServiceSoap getPortalService() throws Exception {
-		PortalServiceSoapServiceLocator locator =
-			new PortalServiceSoapServiceLocator();
 
-		PortalServiceSoap service = locator.getPortal_PortalService(
-			getURL("Portal_PortalService"));
-
-		return service;
-	}
-
-	protected UserServiceSoap getUserService() throws Exception {
-		UserServiceSoapServiceLocator locator =
-			new UserServiceSoapServiceLocator();
-
-		UserServiceSoap service = locator.getPortal_UserService(
-			getURL("Portal_UserService"));
-
-		return service;
-	}
-	
-	public static void addUser(UserServiceSoap userService, int seed) 
+	protected static void addUser(UserServiceSoap userService, int seed)
 		throws Exception {
-		
+
 		boolean autoPassword = true;
 		String password1 = null;
 		String password2 = null;
@@ -152,12 +132,32 @@ public class PortalSoapTest extends BaseSoapTest {
 			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
 			sendMail);
 
-		System.out.println("creating user: " + emailAddress);
-		
+		System.out.println("Creating user " + emailAddress);
+
 		user = userService.getUserByEmailAddress(
 			TestConstants.COMPANY_ID, emailAddress);
 
 		userService.deleteUser(user.getUserId());
 	}
-	
+
+	protected PortalServiceSoap getPortalService() throws Exception {
+		PortalServiceSoapServiceLocator locator =
+			new PortalServiceSoapServiceLocator();
+
+		PortalServiceSoap service = locator.getPortal_PortalService(
+			getURL("Portal_PortalService"));
+
+		return service;
+	}
+
+	protected UserServiceSoap getUserService() throws Exception {
+		UserServiceSoapServiceLocator locator =
+			new UserServiceSoapServiceLocator();
+
+		UserServiceSoap service = locator.getPortal_UserService(
+			getURL("Portal_UserService"));
+
+		return service;
+	}
+
 }
