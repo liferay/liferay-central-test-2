@@ -478,7 +478,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
@@ -679,11 +679,8 @@ String[] availableLocales = null;
 						contentDoc = null;
 
 						try {
-							contentDoc = reader.read(new StringReader(content));
+							availableLocales = article.getAvailableLocales();
 
-							contentEl = contentDoc.getRootElement();
-
-							availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
 						}
 						catch (Exception e) {
 							contentDoc = null;
@@ -1006,7 +1003,7 @@ String[] availableLocales = null;
 						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
 
 						<script type="text/javascript">
-							document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].style.color = '<%= colorScheme.getPortletMsgError() %>';
+							document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
 						</script>
 
 		<%
@@ -1015,7 +1012,7 @@ String[] availableLocales = null;
 					%>
 
 						<script type="text/javascript">
-							document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].style.color = '<%= colorScheme.getPortletMsgError() %>';
+							document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
 						</script>
 
 		<%

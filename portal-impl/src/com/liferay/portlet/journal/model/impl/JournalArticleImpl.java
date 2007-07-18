@@ -26,6 +26,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.StringReader;
@@ -58,6 +59,29 @@ public class JournalArticleImpl
 	public static final String STAND_ALONE = "stand-alone";
 
 	public JournalArticleImpl() {
+	}
+
+	public String[] getAvailableLocales() {
+		String xml = getContent();
+
+		String[] availableLocales = new String[] {""};
+
+		try {
+			SAXReader reader = new SAXReader();
+
+			Document doc = reader.read(new StringReader(xml));
+
+			Element root = doc.getRootElement();
+
+			availableLocales = StringUtil.split(
+				root.attributeValue("available-locales"));
+
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return availableLocales;
 	}
 
 	public String getContentByLocale(String languageId){

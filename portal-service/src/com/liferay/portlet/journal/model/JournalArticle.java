@@ -48,6 +48,9 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalArticle extends JournalArticleModel {
+
+	public String[] getAvailableLocales();
+
 	public java.lang.String getContentByLocale(java.lang.String languageId);
 
 	public java.lang.String getDefaultLocale();
