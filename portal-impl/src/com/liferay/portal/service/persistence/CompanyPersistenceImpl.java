@@ -101,7 +101,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			company = (Company)session.merge(company);
 			session.delete(company);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class CompanyPersistenceImpl extends BasePersistence
 			else {
 				if (company.isNew()) {
 					session.save(company);
-				}
-				else {
-					company = (Company)session.merge(company);
 				}
 			}
 

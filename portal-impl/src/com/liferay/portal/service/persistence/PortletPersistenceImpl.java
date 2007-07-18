@@ -100,7 +100,6 @@ public class PortletPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			portlet = (Portlet)session.merge(portlet);
 			session.delete(portlet);
 			session.flush();
 
@@ -133,9 +132,6 @@ public class PortletPersistenceImpl extends BasePersistence
 			else {
 				if (portlet.isNew()) {
 					session.save(portlet);
-				}
-				else {
-					portlet = (Portlet)session.merge(portlet);
 				}
 			}
 

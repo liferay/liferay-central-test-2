@@ -104,7 +104,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			passwordPolicyRel = (PasswordPolicyRel)session.merge(passwordPolicyRel);
 			session.delete(passwordPolicyRel);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			else {
 				if (passwordPolicyRel.isNew()) {
 					session.save(passwordPolicyRel);
-				}
-				else {
-					passwordPolicyRel = (PasswordPolicyRel)session.merge(passwordPolicyRel);
 				}
 			}
 

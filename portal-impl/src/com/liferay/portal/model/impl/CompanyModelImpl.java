@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -88,6 +90,10 @@ public class CompanyModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setCompanyId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_companyId);
 	}
 
 	public long getCompanyId() {

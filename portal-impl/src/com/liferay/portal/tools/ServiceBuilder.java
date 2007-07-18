@@ -200,6 +200,7 @@ public class ServiceBuilder {
 			"com.liferay.util.XSSUtil",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
+			"java.io.Serializable",
 			"java.rmi.RemoteException",
 			"java.sql.ResultSet",
 			"java.sql.SQLException",
@@ -1731,6 +1732,7 @@ public class ServiceBuilder {
 		sm.append("import com.liferay.util.DateUtil;");
 		sm.append("import com.liferay.util.GetterUtil;");
 		sm.append("import com.liferay.util.XSSUtil;");
+		sm.append("import java.io.Serializable;");
 		sm.append("import java.sql.Types;");
 		sm.append("import java.util.Date;");
 
@@ -1825,6 +1827,45 @@ public class ServiceBuilder {
 			EntityColumn col = (EntityColumn)pkList.get(0);
 
 			sm.append("set" + col.getMethodName() + "(pk);");
+		}
+
+		sm.append("}");
+
+		sm.append("public Serializable getPrimaryKeyObj() {");
+
+		if (entity.hasCompoundPK()) {
+			sm.append("return new " + entity.getPKClassName() + "(");
+
+			for (int i = 0; i < pkList.size(); i++) {
+				EntityColumn col = (EntityColumn)pkList.get(i);
+
+				sm.append("_" + col.getName());
+
+				if ((i + 1) != (pkList.size())) {
+					sm.append(", ");
+				}
+			}
+
+			sm.append(");");
+		}
+		else {
+			EntityColumn col = (EntityColumn)pkList.get(0);
+
+			sm.append("return ");
+
+			if (entity.hasPrimitivePK()) {
+				sm.append("new ");
+				sm.append(_getPrimitiveObj(entity.getPKClassName()));
+				sm.append("(");
+			}
+
+			sm.append("_" + col.getName());
+
+			if (entity.hasPrimitivePK()) {
+				sm.append(")");
+			}
+
+			sm.append(";");
 		}
 
 		sm.append("}");
@@ -2416,7 +2457,7 @@ public class ServiceBuilder {
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
-		sm.append(entity.getVarName() + " = (" + entity.getName() + ")session.merge(" + entity.getVarName() + ");");
+		//sm.append(entity.getVarName() + " = (" + entity.getName() + ")session.merge(" + entity.getVarName() + ");");
 		sm.append("session.delete(" + entity.getVarName() + ");");
 		sm.append("session.flush();");
 		sm.append("return " + entity.getVarName() + ";");
@@ -2458,9 +2499,9 @@ public class ServiceBuilder {
 		sm.append("if (" + entity.getVarName() + ".isNew()) {");
 		sm.append("session.save(" + entity.getVarName() + ");");
 		sm.append("}");
-		sm.append("else {");
-		sm.append(entity.getVarName() + " = (" + entity.getName() + ")session.merge(" + entity.getVarName() + ");");
-		sm.append("}");
+		//sm.append("else {");
+		//sm.append(entity.getVarName() + " = (" + entity.getName() + ")session.merge(" + entity.getVarName() + ");");
+		//sm.append("}");
 		sm.append("}");
 		sm.append("session.flush();");
 		sm.append(entity.getVarName() + ".setNew(false);");

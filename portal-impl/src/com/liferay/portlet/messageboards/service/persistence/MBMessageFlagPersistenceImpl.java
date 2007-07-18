@@ -104,7 +104,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			mbMessageFlag = (MBMessageFlag)session.merge(mbMessageFlag);
 			session.delete(mbMessageFlag);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 			else {
 				if (mbMessageFlag.isNew()) {
 					session.save(mbMessageFlag);
-				}
-				else {
-					mbMessageFlag = (MBMessageFlag)session.merge(mbMessageFlag);
 				}
 			}
 

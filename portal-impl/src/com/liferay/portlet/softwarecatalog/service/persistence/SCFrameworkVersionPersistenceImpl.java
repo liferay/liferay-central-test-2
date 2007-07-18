@@ -105,7 +105,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			scFrameworkVersion = (SCFrameworkVersion)session.merge(scFrameworkVersion);
 			session.delete(scFrameworkVersion);
 			session.flush();
 
@@ -140,9 +139,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			else {
 				if (scFrameworkVersion.isNew()) {
 					session.save(scFrameworkVersion);
-				}
-				else {
-					scFrameworkVersion = (SCFrameworkVersion)session.merge(scFrameworkVersion);
 				}
 			}
 

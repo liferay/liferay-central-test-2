@@ -30,6 +30,7 @@ import java.io.Serializable;
 import java.net.URL;
 
 import java.util.Map;
+import java.util.Set;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -59,9 +60,9 @@ public class MultiVMPool {
 			return;
 		}
 
-		Map groupKeys = (Map)groups.get(groupKey);
+		Set groupKeys = (Set)groups.get(groupKey);
 
-		String[] keys = (String[])groupKeys.values().toArray(new String[0]);
+		String[] keys = (String[])groupKeys.toArray(new String[0]);
 
 		for (int i = 0; i < keys.length; i++) {
 			String key = keys[i];
@@ -157,18 +158,18 @@ public class MultiVMPool {
 	}
 
 	public static void updateGroup(Map groups, String groupKey, String key) {
-		Map groupKeys = null;
+		Set groupKeys = null;
 
 		if (groups.containsKey(groupKey)) {
-			groupKeys = (Map)groups.get(groupKey);
+			groupKeys = (Set)groups.get(groupKey);
 		}
 		else {
-			groupKeys = CollectionFactory.getSyncHashMap();
+			groupKeys = CollectionFactory.getSyncHashSet();
 
 			groups.put(groupKey, groupKeys);
 		}
 
-		groupKeys.put(key, key);
+		groupKeys.add(key);
 	}
 
 	private MultiVMPool() {

@@ -161,7 +161,6 @@ public class UserPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			user = (User)session.merge(user);
 			session.delete(user);
 			session.flush();
 
@@ -200,9 +199,6 @@ public class UserPersistenceImpl extends BasePersistence
 			else {
 				if (user.isNew()) {
 					session.save(user);
-				}
-				else {
-					user = (User)session.merge(user);
 				}
 			}
 

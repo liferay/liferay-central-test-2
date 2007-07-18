@@ -128,7 +128,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			scProductVersion = (SCProductVersion)session.merge(scProductVersion);
 			session.delete(scProductVersion);
 			session.flush();
 
@@ -165,9 +164,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 			else {
 				if (scProductVersion.isNew()) {
 					session.save(scProductVersion);
-				}
-				else {
-					scProductVersion = (SCProductVersion)session.merge(scProductVersion);
 				}
 			}
 

@@ -103,7 +103,6 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			pluginSetting = (PluginSetting)session.merge(pluginSetting);
 			session.delete(pluginSetting);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 			else {
 				if (pluginSetting.isNew()) {
 					session.save(pluginSetting);
-				}
-				else {
-					pluginSetting = (PluginSetting)session.merge(pluginSetting);
 				}
 			}
 

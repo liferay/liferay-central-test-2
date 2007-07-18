@@ -104,7 +104,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			dlFileVersion = (DLFileVersion)session.merge(dlFileVersion);
 			session.delete(dlFileVersion);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileVersion.isNew()) {
 					session.save(dlFileVersion);
-				}
-				else {
-					dlFileVersion = (DLFileVersion)session.merge(dlFileVersion);
 				}
 			}
 

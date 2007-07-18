@@ -136,7 +136,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			organization = (Organization)session.merge(organization);
 			session.delete(organization);
 			session.flush();
 
@@ -174,9 +173,6 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			else {
 				if (organization.isNew()) {
 					session.save(organization);
-				}
-				else {
-					organization = (Organization)session.merge(organization);
 				}
 			}
 

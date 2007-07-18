@@ -101,7 +101,6 @@ public class CountryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			country = (Country)session.merge(country);
 			session.delete(country);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class CountryPersistenceImpl extends BasePersistence
 			else {
 				if (country.isNew()) {
 					session.save(country);
-				}
-				else {
-					country = (Country)session.merge(country);
 				}
 			}
 

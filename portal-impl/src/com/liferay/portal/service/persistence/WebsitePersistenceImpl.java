@@ -101,7 +101,6 @@ public class WebsitePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			website = (Website)session.merge(website);
 			session.delete(website);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class WebsitePersistenceImpl extends BasePersistence
 			else {
 				if (website.isNew()) {
 					session.save(website);
-				}
-				else {
-					website = (Website)session.merge(website);
 				}
 			}
 

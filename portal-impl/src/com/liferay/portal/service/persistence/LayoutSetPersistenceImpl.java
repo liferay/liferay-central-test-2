@@ -101,7 +101,6 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			layoutSet = (LayoutSet)session.merge(layoutSet);
 			session.delete(layoutSet);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			else {
 				if (layoutSet.isNew()) {
 					session.save(layoutSet);
-				}
-				else {
-					layoutSet = (LayoutSet)session.merge(layoutSet);
 				}
 			}
 

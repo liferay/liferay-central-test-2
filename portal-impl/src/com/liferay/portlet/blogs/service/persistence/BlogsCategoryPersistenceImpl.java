@@ -104,7 +104,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			blogsCategory = (BlogsCategory)session.merge(blogsCategory);
 			session.delete(blogsCategory);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 			else {
 				if (blogsCategory.isNew()) {
 					session.save(blogsCategory);
-				}
-				else {
-					blogsCategory = (BlogsCategory)session.merge(blogsCategory);
 				}
 			}
 

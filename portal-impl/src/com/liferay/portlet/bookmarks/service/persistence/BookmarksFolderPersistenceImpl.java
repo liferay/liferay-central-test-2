@@ -104,7 +104,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			bookmarksFolder = (BookmarksFolder)session.merge(bookmarksFolder);
 			session.delete(bookmarksFolder);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 			else {
 				if (bookmarksFolder.isNew()) {
 					session.save(bookmarksFolder);
-				}
-				else {
-					bookmarksFolder = (BookmarksFolder)session.merge(bookmarksFolder);
 				}
 			}
 

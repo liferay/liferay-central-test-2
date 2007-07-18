@@ -101,7 +101,6 @@ public class ContactPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			contact = (Contact)session.merge(contact);
 			session.delete(contact);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class ContactPersistenceImpl extends BasePersistence
 			else {
 				if (contact.isNew()) {
 					session.save(contact);
-				}
-				else {
-					contact = (Contact)session.merge(contact);
 				}
 			}
 

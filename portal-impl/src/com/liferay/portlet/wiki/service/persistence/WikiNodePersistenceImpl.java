@@ -102,7 +102,6 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			wikiNode = (WikiNode)session.merge(wikiNode);
 			session.delete(wikiNode);
 			session.flush();
 
@@ -135,9 +134,6 @@ public class WikiNodePersistenceImpl extends BasePersistence
 			else {
 				if (wikiNode.isNew()) {
 					session.save(wikiNode);
-				}
-				else {
-					wikiNode = (WikiNode)session.merge(wikiNode);
 				}
 			}
 

@@ -101,7 +101,6 @@ public class RegionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			region = (Region)session.merge(region);
 			session.delete(region);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class RegionPersistenceImpl extends BasePersistence
 			else {
 				if (region.isNew()) {
 					session.save(region);
-				}
-				else {
-					region = (Region)session.merge(region);
 				}
 			}
 

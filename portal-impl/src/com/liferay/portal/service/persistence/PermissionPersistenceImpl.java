@@ -145,7 +145,6 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			permission = (Permission)session.merge(permission);
 			session.delete(permission);
 			session.flush();
 
@@ -182,9 +181,6 @@ public class PermissionPersistenceImpl extends BasePersistence
 			else {
 				if (permission.isNew()) {
 					session.save(permission);
-				}
-				else {
-					permission = (Permission)session.merge(permission);
 				}
 			}
 

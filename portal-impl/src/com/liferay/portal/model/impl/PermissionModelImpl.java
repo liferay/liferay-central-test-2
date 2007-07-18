@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -77,6 +79,10 @@ public class PermissionModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setPermissionId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_permissionId);
 	}
 
 	public long getPermissionId() {

@@ -20,24 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.spring.hibernate;
 
 import java.io.Serializable;
 
 /**
- * <a href="BaseModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="FinderCachePK.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface BaseModel extends Cloneable, Comparable, Serializable {
+public class FinderCachePK implements Serializable {
 
-	public boolean isNew();
+	public FinderCachePK(Class modelClass, Serializable primaryKeyObj) {
+		_modelClass = modelClass;
+		_primaryKeyObj = primaryKeyObj;
+	}
 
-	public boolean setNew(boolean n);
+	public Class getModelClass() {
+		return _modelClass;
+	}
 
-	public Serializable getPrimaryKeyObj();
+	public Serializable getPrimaryKeyObj() {
+		return _primaryKeyObj;
+	}
 
-	public Object clone();
+	private Class _modelClass;
+	private Serializable _primaryKeyObj;
 
 }

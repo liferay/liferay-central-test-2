@@ -104,7 +104,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			mbDiscussion = (MBDiscussion)session.merge(mbDiscussion);
 			session.delete(mbDiscussion);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 			else {
 				if (mbDiscussion.isNew()) {
 					session.save(mbDiscussion);
-				}
-				else {
-					mbDiscussion = (MBDiscussion)session.merge(mbDiscussion);
 				}
 			}
 

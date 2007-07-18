@@ -30,6 +30,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,8 @@ import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.hibernate.Session;
 
 /**
  * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
@@ -67,37 +71,51 @@ public class FinderCache {
 
 		String key = _encodeKey(className, methodName, params, args);
 
-		Object result = MultiVMPool.get(_cache, key);
+		Object primaryKey = MultiVMPool.get(_cache, key);
 
-		if (result != null) {
-			result = _getResult(result);
+		if (primaryKey != null) {
+			Session session = null;
+
+			try {
+				session = HibernateUtil.openSession();
+
+				return _primaryKeyToResult(session, primaryKey);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
+			}
 		}
-
-		return result;
+		else {
+			return null;
+		}
 	}
 
 	public static Object getResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args) {
 
-		Object result = null;
-
 		String key = _encodeKey(sql, methodName, params, args);
 
-		for (int i = 0; i > classNames.length; i++) {
-			result = MultiVMPool.get(_cache, key);
+		Object primaryKey = MultiVMPool.get(_cache, key);
 
-			if (result != null) {
-				result = _getResult(result);
+		if (primaryKey != null) {
+			Session session = null;
 
-				break;
+			try {
+				session = HibernateUtil.openSession();
+
+				return _primaryKeyToResult(session, primaryKey);
+			}
+			finally {
+				HibernateUtil.closeSession(session);
 			}
 		}
-
-		return result;
+		else {
+			return null;
+		}
 	}
 
-	public static Object putResult(
+	public static void putResult(
 		String className, String methodName, String[] params, Object[] args,
 		Object result) {
 
@@ -114,18 +132,16 @@ public class FinderCache {
 			if (classNameCacheEnabled) {
 				String key = _encodeKey(className, methodName, params, args);
 
-				result = _getResult(result);
-
 				String groupKey = _encodeGroupKey(className);
 
-				MultiVMPool.put(_cache, key, _groups, groupKey, result);
+				MultiVMPool.put(
+					_cache, key, _groups, groupKey,
+					_resultToPrimaryKey(result));
 			}
 		}
-
-		return result;
 	}
 
-	public static Object putResult(
+	public static void putResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args, Object result) {
 
@@ -143,13 +159,11 @@ public class FinderCache {
 					PropsUtil.get(sm.toString()), true);
 
 				if (!classNameCacheEnabled) {
-					return result;
+					return;
 				}
 			}
 
 			String key = _encodeKey(sql, methodName, params, args);
-
-			result = _getResult(result);
 
 			for (int i = 0; i < classNames.length; i++) {
 				String className = classNames[i];
@@ -159,10 +173,8 @@ public class FinderCache {
 				MultiVMPool.updateGroup(_groups, groupKey, key);
 			}
 
-			MultiVMPool.put(_cache, key, result);
+			MultiVMPool.put(_cache, key, _resultToPrimaryKey(result));
 		}
-
-		return result;
 	}
 
 	private static String _encodeGroupKey(String className) {
@@ -206,35 +218,60 @@ public class FinderCache {
 		return sm.toString();
 	}
 
-	private static Object _getResult(Object result) {
-		if (result instanceof ArrayList) {
-			List cachedList = (ArrayList)result;
+	private static Object _primaryKeyToResult(
+		Session session, Object primaryKey) {
+
+		if (primaryKey instanceof FinderCachePK) {
+			FinderCachePK finderCachePK = (FinderCachePK)primaryKey;
+
+			Class modelClass = finderCachePK.getModelClass();
+			Serializable primaryKeyObj = finderCachePK.getPrimaryKeyObj();
+
+			return session.load(modelClass, primaryKeyObj);
+		}
+		else if (primaryKey instanceof List) {
+			List cachedList = (List)primaryKey;
 
 			List list = new ArrayList(cachedList.size());
 
 			for (int i = 0; i < cachedList.size(); i++) {
-				Object curResult = _getResult(cachedList.get(i));
+				Object result = _primaryKeyToResult(session, cachedList.get(i));
 
-				list.add(curResult);
+				list.add(result);
 			}
 
 			return list;
 		}
-		else if (result instanceof BaseModel) {
-			String modelImpl = result.getClass().getName();
-
-			try {
-				BaseModel model = (BaseModel)result;
-
-				return (BaseModel)model.clone();
-			}
-			catch (Exception e) {
-				_log.error(
-					"Unable to clone " + modelImpl + ": " + e.getMessage());
-			}
+		else {
+			return primaryKey;
 		}
+	}
 
-		return result;
+	private static Object _resultToPrimaryKey(Object result) {
+		if (result instanceof BaseModel) {
+			BaseModel model = (BaseModel)result;
+
+			Class modelClass = model.getClass();
+			Serializable primaryKeyObj = model.getPrimaryKeyObj();
+
+			return new FinderCachePK(modelClass, primaryKeyObj);
+		}
+		else if (result instanceof List) {
+			List list = (ArrayList)result;
+
+			List cachedList = new ArrayList(list.size());
+
+			for (int i = 0; i < list.size(); i++) {
+				Object primaryKey = _resultToPrimaryKey(list.get(i));
+
+				cachedList.add(primaryKey);
+			}
+
+			return cachedList;
+		}
+		else {
+			return result;
+		}
 	}
 
 	private static final String _ARGS_SEPARATOR = "_ARGS_SEPARATOR_";

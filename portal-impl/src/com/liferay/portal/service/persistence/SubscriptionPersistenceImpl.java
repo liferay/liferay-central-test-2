@@ -103,7 +103,6 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			subscription = (Subscription)session.merge(subscription);
 			session.delete(subscription);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 			else {
 				if (subscription.isNew()) {
 					session.save(subscription);
-				}
-				else {
-					subscription = (Subscription)session.merge(subscription);
 				}
 			}
 

@@ -13,12 +13,8 @@
 		maxElementsInMemory="1000"
 		eternal="false"
         timeToIdleSeconds="3600"
-		overflowToDisk="true">
-
-		<!--
-		Uncomment the following in a clustered configuration.
-		-->
-
+		overflowToDisk="true"
+	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</defaultCache>

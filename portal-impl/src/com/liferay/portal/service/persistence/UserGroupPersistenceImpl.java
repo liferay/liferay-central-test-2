@@ -124,7 +124,6 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			userGroup = (UserGroup)session.merge(userGroup);
 			session.delete(userGroup);
 			session.flush();
 
@@ -159,9 +158,6 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			else {
 				if (userGroup.isNew()) {
 					session.save(userGroup);
-				}
-				else {
-					userGroup = (UserGroup)session.merge(userGroup);
 				}
 			}
 

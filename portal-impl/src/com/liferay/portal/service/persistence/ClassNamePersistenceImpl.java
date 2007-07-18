@@ -101,7 +101,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			className = (ClassName)session.merge(className);
 			session.delete(className);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class ClassNamePersistenceImpl extends BasePersistence
 			else {
 				if (className.isNew()) {
 					session.save(className);
-				}
-				else {
-					className = (ClassName)session.merge(className);
 				}
 			}
 

@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -75,6 +77,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 		setOrganizationId(pk.organizationId);
 		setGroupId(pk.groupId);
 		setRoleId(pk.roleId);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new OrgGroupRolePK(_organizationId, _groupId, _roleId);
 	}
 
 	public long getOrganizationId() {

@@ -104,7 +104,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			portletPreferences = (PortletPreferences)session.merge(portletPreferences);
 			session.delete(portletPreferences);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			else {
 				if (portletPreferences.isNew()) {
 					session.save(portletPreferences);
-				}
-				else {
-					portletPreferences = (PortletPreferences)session.merge(portletPreferences);
 				}
 			}
 

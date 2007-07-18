@@ -102,7 +102,6 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			resourceCode = (ResourceCode)session.merge(resourceCode);
 			session.delete(resourceCode);
 			session.flush();
 
@@ -137,9 +136,6 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 			else {
 				if (resourceCode.isNew()) {
 					session.save(resourceCode);
-				}
-				else {
-					resourceCode = (ResourceCode)session.merge(resourceCode);
 				}
 			}
 

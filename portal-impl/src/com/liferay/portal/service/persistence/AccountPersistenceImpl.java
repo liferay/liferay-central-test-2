@@ -100,7 +100,6 @@ public class AccountPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			account = (Account)session.merge(account);
 			session.delete(account);
 			session.flush();
 
@@ -133,9 +132,6 @@ public class AccountPersistenceImpl extends BasePersistence
 			else {
 				if (account.isNew()) {
 					session.save(account);
-				}
-				else {
-					account = (Account)session.merge(account);
 				}
 			}
 

@@ -104,7 +104,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			orgGroupPermission = (OrgGroupPermission)session.merge(orgGroupPermission);
 			session.delete(orgGroupPermission);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 			else {
 				if (orgGroupPermission.isNew()) {
 					session.save(orgGroupPermission);
-				}
-				else {
-					orgGroupPermission = (OrgGroupPermission)session.merge(orgGroupPermission);
 				}
 			}
 

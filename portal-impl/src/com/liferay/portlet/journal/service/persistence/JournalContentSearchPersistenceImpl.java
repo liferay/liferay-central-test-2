@@ -105,7 +105,6 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			journalContentSearch = (JournalContentSearch)session.merge(journalContentSearch);
 			session.delete(journalContentSearch);
 			session.flush();
 
@@ -140,9 +139,6 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 			else {
 				if (journalContentSearch.isNew()) {
 					session.save(journalContentSearch);
-				}
-				else {
-					journalContentSearch = (JournalContentSearch)session.merge(journalContentSearch);
 				}
 			}
 

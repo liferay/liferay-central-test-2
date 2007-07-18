@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -79,6 +81,10 @@ public class ListTypeModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(int pk) {
 		setListTypeId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Integer(_listTypeId);
 	}
 
 	public int getListTypeId() {

@@ -100,7 +100,6 @@ public class PhonePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			phone = (Phone)session.merge(phone);
 			session.delete(phone);
 			session.flush();
 
@@ -133,9 +132,6 @@ public class PhonePersistenceImpl extends BasePersistence
 			else {
 				if (phone.isNew()) {
 					session.save(phone);
-				}
-				else {
-					phone = (Phone)session.merge(phone);
 				}
 			}
 

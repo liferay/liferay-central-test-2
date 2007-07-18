@@ -106,7 +106,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			journalArticleResource = (JournalArticleResource)session.merge(journalArticleResource);
 			session.delete(journalArticleResource);
 			session.flush();
 
@@ -141,9 +140,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 			else {
 				if (journalArticleResource.isNew()) {
 					session.save(journalArticleResource);
-				}
-				else {
-					journalArticleResource = (JournalArticleResource)session.merge(journalArticleResource);
 				}
 			}
 

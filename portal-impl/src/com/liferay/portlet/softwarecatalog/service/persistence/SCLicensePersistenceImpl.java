@@ -102,7 +102,6 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			scLicense = (SCLicense)session.merge(scLicense);
 			session.delete(scLicense);
 			session.flush();
 
@@ -137,9 +136,6 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			else {
 				if (scLicense.isNew()) {
 					session.save(scLicense);
-				}
-				else {
-					scLicense = (SCLicense)session.merge(scLicense);
 				}
 			}
 

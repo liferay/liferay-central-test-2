@@ -103,7 +103,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			ratingsStats = (RatingsStats)session.merge(ratingsStats);
 			session.delete(ratingsStats);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			else {
 				if (ratingsStats.isNew()) {
 					session.save(ratingsStats);
-				}
-				else {
-					ratingsStats = (RatingsStats)session.merge(ratingsStats);
 				}
 			}
 

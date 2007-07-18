@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -76,6 +78,10 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		setOrganizationId(pk.organizationId);
 		setGroupId(pk.groupId);
 		setPermissionId(pk.permissionId);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new OrgGroupPermissionPK(_organizationId, _groupId, _permissionId);
 	}
 
 	public long getOrganizationId() {

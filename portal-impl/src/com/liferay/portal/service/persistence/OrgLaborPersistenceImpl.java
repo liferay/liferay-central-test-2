@@ -101,7 +101,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			orgLabor = (OrgLabor)session.merge(orgLabor);
 			session.delete(orgLabor);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 			else {
 				if (orgLabor.isNew()) {
 					session.save(orgLabor);
-				}
-				else {
-					orgLabor = (OrgLabor)session.merge(orgLabor);
 				}
 			}
 

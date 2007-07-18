@@ -27,6 +27,8 @@ import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -86,6 +88,10 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setOrgLaborId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_orgLaborId);
 	}
 
 	public long getOrgLaborId() {

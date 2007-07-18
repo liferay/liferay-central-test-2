@@ -102,7 +102,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			mbThread = (MBThread)session.merge(mbThread);
 			session.delete(mbThread);
 			session.flush();
 
@@ -137,9 +136,6 @@ public class MBThreadPersistenceImpl extends BasePersistence
 			else {
 				if (mbThread.isNew()) {
 					session.save(mbThread);
-				}
-				else {
-					mbThread = (MBThread)session.merge(mbThread);
 				}
 			}
 

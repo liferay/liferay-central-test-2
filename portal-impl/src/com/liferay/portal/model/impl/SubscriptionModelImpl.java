@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -87,6 +89,10 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setSubscriptionId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_subscriptionId);
 	}
 
 	public long getSubscriptionId() {

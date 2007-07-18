@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -83,6 +85,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setPortletPreferencesId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_portletPreferencesId);
 	}
 
 	public long getPortletPreferencesId() {

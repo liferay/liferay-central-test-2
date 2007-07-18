@@ -105,7 +105,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			shoppingCategory = (ShoppingCategory)session.merge(shoppingCategory);
 			session.delete(shoppingCategory);
 			session.flush();
 
@@ -140,9 +139,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 			else {
 				if (shoppingCategory.isNew()) {
 					session.save(shoppingCategory);
-				}
-				else {
-					shoppingCategory = (ShoppingCategory)session.merge(shoppingCategory);
 				}
 			}
 

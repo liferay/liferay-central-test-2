@@ -103,7 +103,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			journalTemplate = (JournalTemplate)session.merge(journalTemplate);
 			session.delete(journalTemplate);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			else {
 				if (journalTemplate.isNew()) {
 					session.save(journalTemplate);
-				}
-				else {
-					journalTemplate = (JournalTemplate)session.merge(journalTemplate);
 				}
 			}
 

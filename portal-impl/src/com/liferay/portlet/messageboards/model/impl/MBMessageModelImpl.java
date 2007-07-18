@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -96,6 +98,10 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setMessageId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_messageId);
 	}
 
 	public long getMessageId() {

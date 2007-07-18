@@ -163,7 +163,6 @@ public class GroupPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			group = (Group)session.merge(group);
 			session.delete(group);
 			session.flush();
 
@@ -202,9 +201,6 @@ public class GroupPersistenceImpl extends BasePersistence
 			else {
 				if (group.isNew()) {
 					session.save(group);
-				}
-				else {
-					group = (Group)session.merge(group);
 				}
 			}
 

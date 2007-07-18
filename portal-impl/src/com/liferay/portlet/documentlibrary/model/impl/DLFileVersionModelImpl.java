@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -88,6 +90,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setFileVersionId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_fileVersionId);
 	}
 
 	public long getFileVersionId() {

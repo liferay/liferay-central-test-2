@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -93,6 +95,10 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setFrameworkVersionId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_frameworkVersionId);
 	}
 
 	public long getFrameworkVersionId() {

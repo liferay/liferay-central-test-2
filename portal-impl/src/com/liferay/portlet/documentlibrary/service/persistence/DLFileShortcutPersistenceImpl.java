@@ -104,7 +104,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			dlFileShortcut = (DLFileShortcut)session.merge(dlFileShortcut);
 			session.delete(dlFileShortcut);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileShortcut.isNew()) {
 					session.save(dlFileShortcut);
-				}
-				else {
-					dlFileShortcut = (DLFileShortcut)session.merge(dlFileShortcut);
 				}
 			}
 

@@ -127,7 +127,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			scProductEntry = (SCProductEntry)session.merge(scProductEntry);
 			session.delete(scProductEntry);
 			session.flush();
 
@@ -164,9 +163,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			else {
 				if (scProductEntry.isNew()) {
 					session.save(scProductEntry);
-				}
-				else {
-					scProductEntry = (SCProductEntry)session.merge(scProductEntry);
 				}
 			}
 

@@ -125,7 +125,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			tagsAsset = (TagsAsset)session.merge(tagsAsset);
 			session.delete(tagsAsset);
 			session.flush();
 
@@ -161,9 +160,6 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 			else {
 				if (tagsAsset.isNew()) {
 					session.save(tagsAsset);
-				}
-				else {
-					tagsAsset = (TagsAsset)session.merge(tagsAsset);
 				}
 			}
 

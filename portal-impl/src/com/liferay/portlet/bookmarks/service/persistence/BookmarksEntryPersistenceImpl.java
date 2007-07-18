@@ -103,7 +103,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			bookmarksEntry = (BookmarksEntry)session.merge(bookmarksEntry);
 			session.delete(bookmarksEntry);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 			else {
 				if (bookmarksEntry.isNew()) {
 					session.save(bookmarksEntry);
-				}
-				else {
-					bookmarksEntry = (BookmarksEntry)session.merge(bookmarksEntry);
 				}
 			}
 

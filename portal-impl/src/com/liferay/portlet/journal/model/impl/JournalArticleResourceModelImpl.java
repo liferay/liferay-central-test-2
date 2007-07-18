@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -77,6 +79,10 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setResourcePrimKey(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_resourcePrimKey);
 	}
 
 	public long getResourcePrimKey() {

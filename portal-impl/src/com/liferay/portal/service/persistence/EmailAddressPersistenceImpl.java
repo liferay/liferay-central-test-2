@@ -103,7 +103,6 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			emailAddress = (EmailAddress)session.merge(emailAddress);
 			session.delete(emailAddress);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 			else {
 				if (emailAddress.isNew()) {
 					session.save(emailAddress);
-				}
-				else {
-					emailAddress = (EmailAddress)session.merge(emailAddress);
 				}
 			}
 

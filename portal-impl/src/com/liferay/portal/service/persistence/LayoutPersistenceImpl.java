@@ -99,7 +99,6 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			layout = (Layout)session.merge(layout);
 			session.delete(layout);
 			session.flush();
 
@@ -132,9 +131,6 @@ public class LayoutPersistenceImpl extends BasePersistence
 			else {
 				if (layout.isNew()) {
 					session.save(layout);
-				}
-				else {
-					layout = (Layout)session.merge(layout);
 				}
 			}
 

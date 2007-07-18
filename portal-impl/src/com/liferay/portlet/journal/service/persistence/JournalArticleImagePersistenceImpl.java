@@ -105,7 +105,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			journalArticleImage = (JournalArticleImage)session.merge(journalArticleImage);
 			session.delete(journalArticleImage);
 			session.flush();
 
@@ -140,9 +139,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			else {
 				if (journalArticleImage.isNew()) {
 					session.save(journalArticleImage);
-				}
-				else {
-					journalArticleImage = (JournalArticleImage)session.merge(journalArticleImage);
 				}
 			}
 

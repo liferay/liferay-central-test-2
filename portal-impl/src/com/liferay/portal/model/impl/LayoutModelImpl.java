@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -124,6 +126,10 @@ public class LayoutModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setPlid(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_plid);
 	}
 
 	public long getPlid() {

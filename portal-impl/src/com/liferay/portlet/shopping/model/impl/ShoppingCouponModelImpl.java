@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -113,6 +115,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setCouponId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_couponId);
 	}
 
 	public long getCouponId() {

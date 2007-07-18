@@ -101,7 +101,6 @@ public class AddressPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			address = (Address)session.merge(address);
 			session.delete(address);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class AddressPersistenceImpl extends BasePersistence
 			else {
 				if (address.isNew()) {
 					session.save(address);
-				}
-				else {
-					address = (Address)session.merge(address);
 				}
 			}
 

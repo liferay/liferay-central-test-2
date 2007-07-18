@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -91,6 +93,10 @@ public class BlogsCategoryModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setCategoryId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_categoryId);
 	}
 
 	public long getCategoryId() {

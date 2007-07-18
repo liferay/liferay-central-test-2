@@ -103,7 +103,6 @@ public class PollsChoicePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			pollsChoice = (PollsChoice)session.merge(pollsChoice);
 			session.delete(pollsChoice);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class PollsChoicePersistenceImpl extends BasePersistence
 			else {
 				if (pollsChoice.isNew()) {
 					session.save(pollsChoice);
-				}
-				else {
-					pollsChoice = (PollsChoice)session.merge(pollsChoice);
 				}
 			}
 

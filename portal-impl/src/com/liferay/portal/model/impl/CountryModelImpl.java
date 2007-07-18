@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 /**
@@ -91,6 +93,10 @@ public class CountryModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setCountryId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_countryId);
 	}
 
 	public long getCountryId() {

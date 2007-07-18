@@ -141,7 +141,6 @@ public class RolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			role = (Role)session.merge(role);
 			session.delete(role);
 			session.flush();
 
@@ -178,9 +177,6 @@ public class RolePersistenceImpl extends BasePersistence
 			else {
 				if (role.isNew()) {
 					session.save(role);
-				}
-				else {
-					role = (Role)session.merge(role);
 				}
 			}
 

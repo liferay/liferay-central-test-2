@@ -103,7 +103,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			orgGroupRole = (OrgGroupRole)session.merge(orgGroupRole);
 			session.delete(orgGroupRole);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 			else {
 				if (orgGroupRole.isNew()) {
 					session.save(orgGroupRole);
-				}
-				else {
-					orgGroupRole = (OrgGroupRole)session.merge(orgGroupRole);
 				}
 			}
 

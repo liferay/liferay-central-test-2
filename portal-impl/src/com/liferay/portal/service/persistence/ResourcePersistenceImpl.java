@@ -101,7 +101,6 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			resource = (Resource)session.merge(resource);
 			session.delete(resource);
 			session.flush();
 
@@ -134,9 +133,6 @@ public class ResourcePersistenceImpl extends BasePersistence
 			else {
 				if (resource.isNew()) {
 					session.save(resource);
-				}
-				else {
-					resource = (Resource)session.merge(resource);
 				}
 			}
 

@@ -104,7 +104,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			journalStructure = (JournalStructure)session.merge(journalStructure);
 			session.delete(journalStructure);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 			else {
 				if (journalStructure.isNew()) {
 					session.save(journalStructure);
-				}
-				else {
-					journalStructure = (JournalStructure)session.merge(journalStructure);
 				}
 			}
 

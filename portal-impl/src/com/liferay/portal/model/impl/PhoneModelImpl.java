@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.Date;
@@ -93,6 +95,10 @@ public class PhoneModelImpl extends BaseModelImpl {
 
 	public void setPrimaryKey(long pk) {
 		setPhoneId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_phoneId);
 	}
 
 	public long getPhoneId() {

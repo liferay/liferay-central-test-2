@@ -104,7 +104,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			dlFileEntry = (DLFileEntry)session.merge(dlFileEntry);
 			session.delete(dlFileEntry);
 			session.flush();
 
@@ -139,9 +138,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 			else {
 				if (dlFileEntry.isNew()) {
 					session.save(dlFileEntry);
-				}
-				else {
-					dlFileEntry = (DLFileEntry)session.merge(dlFileEntry);
 				}
 			}
 

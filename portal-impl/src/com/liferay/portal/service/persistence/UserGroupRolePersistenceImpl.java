@@ -103,7 +103,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			userGroupRole = (UserGroupRole)session.merge(userGroupRole);
 			session.delete(userGroupRole);
 			session.flush();
 
@@ -138,9 +137,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 			else {
 				if (userGroupRole.isNew()) {
 					session.save(userGroupRole);
-				}
-				else {
-					userGroupRole = (UserGroupRole)session.merge(userGroupRole);
 				}
 			}
 

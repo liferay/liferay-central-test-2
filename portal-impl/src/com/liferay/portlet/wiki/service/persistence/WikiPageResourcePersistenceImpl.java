@@ -105,7 +105,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			wikiPageResource = (WikiPageResource)session.merge(wikiPageResource);
 			session.delete(wikiPageResource);
 			session.flush();
 
@@ -140,9 +139,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			else {
 				if (wikiPageResource.isNew()) {
 					session.save(wikiPageResource);
-				}
-				else {
-					wikiPageResource = (WikiPageResource)session.merge(wikiPageResource);
 				}
 			}
 

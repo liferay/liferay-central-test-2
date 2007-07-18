@@ -100,7 +100,6 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 		try {
 			session = openSession();
-			release = (Release)session.merge(release);
 			session.delete(release);
 			session.flush();
 
@@ -133,9 +132,6 @@ public class ReleasePersistenceImpl extends BasePersistence
 			else {
 				if (release.isNew()) {
 					session.save(release);
-				}
-				else {
-					release = (Release)session.merge(release);
 				}
 			}
 
