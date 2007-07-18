@@ -152,18 +152,24 @@ Liferay.Portlet.TagsAdmin = new Class({
 			var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 
 			category = addCategoryNameInput.val();
+			category = jQuery.trim(category);
+			
+			if (category) {
+				instance._searchFilters['category'] = category;
 
-			instance._searchFilters['category'] = category;
-
-			addCategoryNameInput.hide();
+				addCategoryNameInput.hide();
+			}
+			else {
+				category = 'no category';
+			}
 		}
 
 		var properties = new Array('0:category:' + category);
-
+		
 		if (category == '[none]') {
 			properties = null;
 		}
-
+		console.log(category, properties);
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
 				name: addEntryNameInput.val(),
@@ -478,6 +484,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
 		var keywordsInput = jQuery('#' + params.keywordsInput);
+
 
 		addCategoryNameInput.val('');
 		addEntryNameInput.val('');
