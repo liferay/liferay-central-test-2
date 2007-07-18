@@ -9,14 +9,19 @@
 
 	<diskStore path="user.home/liferay/ehcache/liferay-multi-vm" />
 	<cacheManagerEventListenerFactory class="" properties="" />
-	<cacheManagerPeerProviderFactory
+
+	<!--
+	Uncomment the following in a clustered configuration.
+	-->
+
+	<!--<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.2,multicastGroupPort=4446,timeToLive=1"
 		propertySeparator=","
 	/>
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-	/>
+	/>-->
 	<defaultCache
 		maxElementsInMemory="1000"
 		eternal="false"

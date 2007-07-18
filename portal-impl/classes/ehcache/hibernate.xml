@@ -1,8 +1,17 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
 	<diskStore path="user.home/liferay/ehcache/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
-	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1" propertySeparator="," />
-	<cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory" />
+
+	<!--
+	Uncomment the following in a clustered configuration.
+	-->
+
+	<!--<cacheManagerPeerProviderFactory 
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
+		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1" 
+		propertySeparator="," />
+	<cacheManagerPeerListenerFactory 
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory" />-->
 
 	<!--
 	Hibernate will use the defaultCache unless custom configurations are defined
