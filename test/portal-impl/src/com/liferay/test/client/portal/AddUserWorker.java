@@ -31,13 +31,12 @@ import com.liferay.client.portal.service.http.UserServiceSoap;
  *
  */
 public class AddUserWorker extends Thread {
-	
+
 	public AddUserWorker(UserServiceSoap userService, int seed) {
-		
 		_userService = userService;
 		_seed = seed;
 	}
-	
+
 	public void run() {
 		try {
 			PortalSoapTest.addUser(_userService, _seed);
@@ -46,13 +45,13 @@ public class AddUserWorker extends Thread {
 			_e = e;
 		}
 	}
-	
+
 	public Exception getException() {
 		return _e;
 	}
-	
-	private int _seed;
+
 	private UserServiceSoap _userService;
+	private int _seed;
 	private Exception _e;
-	
+
 }
