@@ -28,6 +28,7 @@ import com.liferay.client.portal.service.http.PortalServiceSoapServiceLocator;
 import com.liferay.client.portal.service.http.UserServiceSoap;
 import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.test.TestConstants;
+import com.liferay.test.TestProps;
 import com.liferay.test.client.BaseSoapTest;
 
 import java.util.Calendar;
@@ -44,45 +45,62 @@ public class PortalSoapTest extends BaseSoapTest {
 	public void test() {
 		try {
 			getPortalService().test();
-
-			boolean autoPassword = true;
-			String password1 = null;
-			String password2 = null;
-			boolean autoScreenName = true;
-			String screenName = "";
-			String emailAddress = "PortalSoapTest@liferay.com";
-			String locale = Locale.getDefault().toString();
-			String firstName = "PortalSoapTest";
-			String middleName = "";
-			String lastName = "PortalSoapTest";
-			int prefixId = 0;
-			int suffixId = 0;
-			boolean male = true;
-			int birthdayMonth = Calendar.JANUARY;
-			int birthdayDay = 1;
-			int birthdayYear = 1970;
-			String jobTitle = null;
-			long organizationId = 0;
-			long locationId = 0;
-			boolean sendMail = false;
-
-			UserSoap user = getUserService().addUser(
-				TestConstants.COMPANY_ID, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, locale, firstName,
-				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-				birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
-				sendMail);
-
-			user = getUserService().getUserByEmailAddress(
-				TestConstants.COMPANY_ID, emailAddress);
-
-			getUserService().deleteUser(user.getUserId());
+		}
+		catch (Exception e) {
+			fail(e);
+		}
+		
+	}
+	
+	public void testAddUser() {
+		try {
+			addUser(getUserService(), 0);
 		}
 		catch (Exception e) {
 			fail(e);
 		}
 	}
+	
+	public void testConcurrentAddUser() {
+		int threadCount = Integer.parseInt(
+				TestProps.get("portal.soap.add.user.thread.count"));
+		
+		AddUserWorker[] workers = new AddUserWorker[threadCount];
+		
+		try {
+			for (int i = 0; i < threadCount; i++) {
+				workers[i] = new AddUserWorker(getUserService(), i);
+				
+				workers[i].start();
+			}			
 
+			while (true) {
+				int activeThreads = 0;
+				
+				for (int i = 0; i < threadCount; i++) {
+					if (workers[i].isAlive()) {
+						activeThreads++;
+					}
+				}
+				
+				if (activeThreads == 0) {
+					break;
+				}
+			}
+
+			for (int i = 0; i < threadCount; i++) {
+				Exception e = workers[i].getException();
+				
+				if (e != null) {
+					throw e;
+				}
+			}
+		}
+		catch (Exception e) {
+			fail(e);
+		}
+	}
+	
 	protected PortalServiceSoap getPortalService() throws Exception {
 		PortalServiceSoapServiceLocator locator =
 			new PortalServiceSoapServiceLocator();
@@ -102,5 +120,44 @@ public class PortalSoapTest extends BaseSoapTest {
 
 		return service;
 	}
+	
+	public static void addUser(UserServiceSoap userService, int seed) 
+		throws Exception {
+		
+		boolean autoPassword = true;
+		String password1 = null;
+		String password2 = null;
+		boolean autoScreenName = true;
+		String screenName = "";
+		String emailAddress = "PortalSoapTest" + seed + "@liferay.com";
+		String locale = Locale.getDefault().toString();
+		String firstName = "PortalSoapTest";
+		String middleName = "";
+		String lastName = "PortalSoapTest";
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = null;
+		long organizationId = 0;
+		long locationId = 0;
+		boolean sendMail = false;
 
+		UserSoap user = userService.addUser(
+			TestConstants.COMPANY_ID, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, locale, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
+			sendMail);
+
+		System.out.println("creating user: " + emailAddress);
+		
+		user = userService.getUserByEmailAddress(
+			TestConstants.COMPANY_ID, emailAddress);
+
+		userService.deleteUser(user.getUserId());
+	}
+	
 }

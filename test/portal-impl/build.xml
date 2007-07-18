@@ -10,7 +10,7 @@
 
 	<path id="test-junit.classpath">
 		<pathelement path="${project.dir}/lib/development/junit.jar" />
-		<pathelement path="${project.dir}/test/classes" />
+		<pathelement path="${project.dir}/test/portal-impl/classes" />
 	</path>
 
 	<path id="test-http.classpath">
