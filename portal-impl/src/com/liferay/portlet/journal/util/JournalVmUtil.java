@@ -23,6 +23,9 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.GetterUtil;
@@ -57,7 +60,7 @@ import org.dom4j.io.SAXReader;
 public class JournalVmUtil {
 
 	public static String transform(
-			Map tokens, String languageId, String xml, String script)
+			Map tokens, String languageId, String xml, String script, ThemeDisplay themeDisplay)
 		throws TransformException {
 
 		StringWriter output = new StringWriter();
@@ -81,6 +84,31 @@ public class JournalVmUtil {
 				context.put(node.getName(), node);
 			}
 
+			if (themeDisplay != null) {
+				Theme theme = themeDisplay.getTheme();
+
+				Layout layout = themeDisplay.getLayout();
+				List layouts = themeDisplay.getLayouts();
+
+				context.put("themeDisplay", themeDisplay);
+				context.put("company", themeDisplay.getCompany());
+				context.put("user", themeDisplay.getUser());
+				context.put("realUser", themeDisplay.getRealUser());
+				context.put("layout", layout);
+				context.put("layouts", layouts);
+				context.put("plid", String.valueOf(themeDisplay.getPlid()));
+				context.put("layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
+				context.put(
+					"portletGroupId", new Long(themeDisplay.getPortletGroupId()));
+				context.put("permissionChecker", themeDisplay.getPermissionChecker());
+				context.put("locale", themeDisplay.getLocale());
+				context.put("timeZone", themeDisplay.getTimeZone());
+				context.put("theme", theme);
+				context.put("colorScheme", themeDisplay.getColorScheme());
+				context.put("portletDisplay", themeDisplay.getPortletDisplay());
+
+			}
+			
 			long companyId = GetterUtil.getLong(
 				(String)tokens.get("company_id"));
 			long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
