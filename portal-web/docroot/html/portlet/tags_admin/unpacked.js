@@ -151,9 +151,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 		if (category == '[new]') {
 			var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 
-			category = addCategoryNameInput.val();
-			category = jQuery.trim(category);
-			
+			category = jQuery.trim(addCategoryNameInput.val());
+
 			if (category) {
 				instance._searchFilters['category'] = category;
 
@@ -165,11 +164,11 @@ Liferay.Portlet.TagsAdmin = new Class({
 		}
 
 		var properties = new Array('0:category:' + category);
-		
+
 		if (category == '[none]') {
 			properties = null;
 		}
-		console.log(category, properties);
+
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
 				name: addEntryNameInput.val(),
@@ -248,7 +247,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 				entryId: entryId
 			},
 			function() {
-				if (((instance._searchFilters['category'] != 'all') || (instance._categoriesCount == 1)) && 
+				if (((instance._searchFilters['category'] != 'all') || (instance._categoriesCount == 1)) &&
 					 (instance._entriesInCurCategoryCount == 1)) {
 
 					instance._searchFilters['category'] = 'all';
@@ -281,8 +280,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 		jQuery.each(
 			properties,
 			function(i,category) {
-				if (instance._searchFilters['category'] == null || 
-					instance._searchFilters['category'] == 'all' || 
+				if (instance._searchFilters['category'] == null ||
+					instance._searchFilters['category'] == 'all' ||
 					instance._searchFilters['category'] == category.value) {
 
 					Liferay.Service.Tags.TagsEntry.search(
