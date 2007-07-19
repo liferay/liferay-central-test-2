@@ -59,7 +59,9 @@ import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.job.CheckArticleJob;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
@@ -671,11 +673,10 @@ public class JournalArticleLocalServiceImpl
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getDisplayArticle(groupId, articleId);
+		JournalArticleDisplay articleDisplay = getArticleDisplay(
+			groupId, articleId, templateId, languageId, themeDisplay);
 
-		return getArticleContent(
-			groupId, articleId, article.getVersion(), templateId, languageId,
-			themeDisplay);
+		return articleDisplay.getContent();
 	}
 
 	public String getArticleContent(
@@ -691,6 +692,31 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, double version, String templateId,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
+
+		JournalArticleDisplay articleDisplay = getArticleDisplay(
+			groupId, articleId, version, templateId, languageId, themeDisplay);
+
+		return articleDisplay.getContent();
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, String templateId,
+			String languageId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getDisplayArticle(groupId, articleId);
+
+		return getArticleDisplay(
+			groupId, articleId, article.getVersion(), templateId, languageId,
+			themeDisplay);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, double version, String templateId,
+			String languageId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		String content = null;
 
 		JournalArticle article = JournalArticleUtil.findByG_A_V(
 			groupId, articleId, version);
@@ -837,12 +863,15 @@ public class JournalArticleLocalServiceImpl
 				langType = template.getLangType();
 			}
 
-			return JournalUtil.transform(
+			content = JournalUtil.transform(
 				tokens, languageId, xml, script, langType);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+
+		return new JournalArticleDisplayImpl(
+			article.getAvailableLocales(), content);
 	}
 
 	public List getArticles() throws SystemException {

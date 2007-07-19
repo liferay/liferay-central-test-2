@@ -70,6 +70,16 @@ public class LocaleUtil {
 		return locale;
 	}
 
+	public static Locale[] fromLanguageIds(String[] languageIds) {
+		Locale[] locales = new Locale[languageIds.length];
+
+		for (int i = 0; i < languageIds.length; i++) {
+			locales[i] = fromLanguageId(languageIds[i]);
+		}
+
+		return locales;
+	}
+
 	public static String toLanguageId(Locale locale) {
 		if (locale == null) {
 			locale = Locale.getDefault();
@@ -82,6 +92,16 @@ public class LocaleUtil {
 		sm.append(locale.getCountry());
 
 		return sm.toString();
+	}
+
+	public static String[] toLanguageIds(Locale[] locales) {
+		String[] languageIds = new String[locales.length];
+
+		for (int i = 0; i < locales.length; i++) {
+			languageIds[i] = toLanguageId(locales[i]);
+		}
+
+		return languageIds;
 	}
 
 	private static Log _log = LogFactory.getLog(LocaleUtil.class);

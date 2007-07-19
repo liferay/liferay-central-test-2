@@ -2231,6 +2231,7 @@ shortcut=近道
 shorter=より短い
 should-users-forward-to-the-cart-page-when-adding-an-item-from-the-category-page=部門のページからの項目を加えた場合ユーザーはカートにページを捲るために進むべきであるか。
 show-availability-when-viewing-an-item=項目を見る場合のショー供給か。
+show-available-locales=ショーの利用できる場所
 show-borders=ショーのボーダー
 show-breadcrumbs=ショーのBreadcrumbs
 show-calendar=ショーのカレンダー

@@ -62,23 +62,22 @@ public class JournalArticleImpl
 	}
 
 	public String[] getAvailableLocales() {
-		String xml = getContent();
+		String[] availableLocales = new String[0];
 
-		String[] availableLocales = new String[] {""};
+		if (isTemplateDriven()) {
+			try {
+				SAXReader reader = new SAXReader();
 
-		try {
-			SAXReader reader = new SAXReader();
+				Document doc = reader.read(new StringReader(getContent()));
 
-			Document doc = reader.read(new StringReader(xml));
+				Element root = doc.getRootElement();
 
-			Element root = doc.getRootElement();
-
-			availableLocales = StringUtil.split(
-				root.attributeValue("available-locales"));
-
-		}
-		catch (Exception e) {
-			_log.error(e);
+				availableLocales = StringUtil.split(
+					root.attributeValue("available-locales"));
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 
 		return availableLocales;

@@ -20,39 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model;
+package com.liferay.portlet.journal.model.impl;
+
+import com.liferay.portlet.journal.model.JournalArticleDisplay;
 
 /**
- * <a href="JournalArticle.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>JournalArticle</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.journal.service.model.impl.JournalArticleImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
+ * <a href="JournalArticleDisplayImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalArticleModel
- * @see com.liferay.portlet.journal.service.model.impl.JournalArticleImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalArticleModelImpl
- *
  */
-public interface JournalArticle extends JournalArticleModel {
-	public java.lang.String[] getAvailableLocales();
+public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
-	public java.lang.String getContentByLocale(java.lang.String languageId);
+	public JournalArticleDisplayImpl(String[] availableLocales,
+									 String content) {
 
-	public java.lang.String getDefaultLocale();
+		_availableLocales = availableLocales;
+		_content = content;
+	}
 
-	public boolean isTemplateDriven();
+	public String[] getAvailableLocales() {
+		return _availableLocales;
+	}
+
+	public String getContent() {
+		return _content;
+	}
+
+	private String[] _availableLocales;
+	private String _content;
+
 }

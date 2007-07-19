@@ -2234,6 +2234,7 @@ shortcut=捷徑
 shorter=更短
 should-users-forward-to-the-cart-page-when-adding-an-item-from-the-category-page=當新增一個項目從類別頁時, 用戶會專送到推車頁面?
 show-availability-when-viewing-an-item=當檢視項目時顯示可及性?
+show-available-locales=顯示可利用的地點
 show-borders=顯示邊框
 show-breadcrumbs=顯示麵包渣
 show-calendar=顯示日曆

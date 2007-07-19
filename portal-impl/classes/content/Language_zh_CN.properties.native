@@ -2233,6 +2233,7 @@ shortcut=捷径
 shorter=更短
 should-users-forward-to-the-cart-page-when-adding-an-item-from-the-category-page=当新增一个项目到类别页时, 重定向到购物车页面?
 show-availability-when-viewing-an-item=当查看项目时显示可用?
+show-available-locales=显示可利用的地点
 show-borders=显示边框
 show-breadcrumbs=显示面包渣
 show-calendar=显示日历

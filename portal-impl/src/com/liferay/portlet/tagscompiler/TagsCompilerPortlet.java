@@ -37,6 +37,8 @@ import java.io.IOException;
 
 import java.util.Collection;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -53,6 +55,10 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class TagsCompilerPortlet extends LiferayPortlet {
+
+	public void processAction(ActionRequest req, ActionResponse res)
+		throws IOException, PortletException {
+	}
 
 	public void render(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {

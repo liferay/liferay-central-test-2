@@ -89,6 +89,8 @@ public class EditConfigurationAction extends PortletAction {
 				throw new NoSuchArticleException();
 			}
 
+			boolean showAvailableLocales = ParamUtil.getBoolean(
+				req, "showAvailableLocales");
 			boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 			boolean enableComments = ParamUtil.getBoolean(
 				req, "enableComments");
@@ -104,6 +106,8 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue("article-id", articleId);
 			prefs.setValue("template-id", templateId);
 			prefs.setValue("disable-caching", String.valueOf(disableCaching));
+			prefs.setValue(
+				"show-available-locales", String.valueOf(showAvailableLocales));
 			prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 			prefs.setValue("enable-comments", String.valueOf(enableComments));
 

@@ -22,37 +22,18 @@
 
 package com.liferay.portlet.journal.model;
 
+import java.io.Serializable;
+
 /**
- * <a href="JournalArticle.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>JournalArticle</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.journal.service.model.impl.JournalArticleImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
+ * <a href="JournalArticleDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalArticleModel
- * @see com.liferay.portlet.journal.service.model.impl.JournalArticleImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalArticleModelImpl
- *
  */
-public interface JournalArticle extends JournalArticleModel {
-	public java.lang.String[] getAvailableLocales();
+public interface JournalArticleDisplay extends Serializable {
 
-	public java.lang.String getContentByLocale(java.lang.String languageId);
+	public String[] getAvailableLocales();
 
-	public java.lang.String getDefaultLocale();
+	public String getContent();
 
-	public boolean isTemplateDriven();
 }

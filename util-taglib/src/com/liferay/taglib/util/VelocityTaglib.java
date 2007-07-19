@@ -319,7 +319,21 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		LanguageTag.doTag(
-			formName, formAction, name, displayStyle, _ctx, _req, _res);
+			formName, formAction, name, null, displayStyle, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String language(
+			String formName, String formAction, String name,
+			String[] languageIds, int displayStyle)
+		throws Exception {
+
+		_res.recycle();
+
+		LanguageTag.doTag(
+			formName, formAction, name, languageIds, displayStyle, _ctx, _req,
+			_res);
 
 		return _res.getString();
 	}
@@ -332,7 +346,22 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		LanguageTag.doTag(
-			page, formName, formAction, name, displayStyle, _ctx, _req, _res);
+			page, formName, formAction, name, null, displayStyle, _ctx, _req,
+			_res);
+
+		return _res.getString();
+	}
+
+	public String language(
+			String page, String formName, String formAction, String name,
+			String[] languageIds, int displayStyle)
+		throws Exception {
+
+		_res.recycle();
+
+		LanguageTag.doTag(
+			page, formName, formAction, name, languageIds, displayStyle, _ctx,
+			_req, _res);
 
 		return _res.getString();
 	}

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -81,19 +82,19 @@ public class ViewAction extends PortletAction {
 		boolean disableCaching = GetterUtil.getBoolean(
 			prefs.getValue("disable-caching", StringPool.BLANK));
 
-		String content = null;
+		JournalArticleDisplay articleDisplay = null;
 
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
-			content = JournalContentUtil.getContent(
+			articleDisplay = JournalContentUtil.getDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay,
 				disableCaching);
 		}
 
-		if (Validator.isNotNull(content)) {
-			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, content);
+		if (articleDisplay != null) {
+			req.setAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY, articleDisplay);
 		}
 		else {
-			req.removeAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
+			req.removeAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
 
 			// Don't decorate this portlet if there is no content. This will
 			// prevent end users from seeing empty portlets from expired

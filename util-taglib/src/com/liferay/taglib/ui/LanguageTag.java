@@ -22,10 +22,14 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
+
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -55,27 +59,42 @@ public class LanguageTag extends IncludeTag {
 		throws IOException, ServletException {
 
 		doTag(
-			_PAGE, _FORM_NAME, _FORM_ACTION, _NAME, _DISPLAY_STYLE, ctx, req,
-			res);
+			_PAGE, _FORM_NAME, _FORM_ACTION, _NAME, null, _DISPLAY_STYLE, ctx,
+			req, res);
 	}
 
 	public static void doTag(
-			String formName, String formAction, String name, int displayStyle,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			String formName, String formAction, String name,
+			String[] languageIds, int displayStyle, ServletContext ctx,
+			HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, formName, formAction, name, displayStyle, ctx, req, res);
+		doTag(
+			_PAGE, formName, formAction, name, languageIds, displayStyle, ctx,
+			req, res);
 	}
 
 	public static void doTag(
 			String page, String formName, String formAction, String name,
-			int displayStyle, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String[] languageIds, int displayStyle, ServletContext ctx,
+			HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
 		req.setAttribute("liferay-ui:language:formName", formName);
 		req.setAttribute("liferay-ui:language:formAction", formAction);
 		req.setAttribute("liferay-ui:language:name", name);
+
+		Locale[] locales = null;
+
+		if ((languageIds == null) || (languageIds.length == 0)) {
+			locales = LanguageUtil.getAvailableLocales();
+		}
+		else {
+			locales = LocaleUtil.fromLanguageIds(languageIds);
+		}
+
+		req.setAttribute("liferay-ui:language:locales", locales);
+
 		req.setAttribute(
 			"liferay-ui:language:displayStyle", String.valueOf(displayStyle));
 
@@ -90,7 +109,9 @@ public class LanguageTag extends IncludeTag {
 			HttpServletRequest req = getServletRequest();
 			StringServletResponse res = getServletResponse();
 
-			doTag(_formName, _formAction, _name, _displayStyle, ctx, req, res);
+			doTag(
+				_formName, _formAction, _name, _languageIds, _displayStyle, ctx,
+				req, res);
 
 			pageContext.getOut().print(res.getString());
 
@@ -111,6 +132,10 @@ public class LanguageTag extends IncludeTag {
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setLanguageIds(String[] languageIds) {
+		_languageIds = languageIds;
 	}
 
 	public void setDisplayStyle(int displayStyle) {
@@ -134,6 +159,7 @@ public class LanguageTag extends IncludeTag {
 	private String _formName = _FORM_NAME;
 	private String _formAction = _FORM_ACTION;
 	private String _name = _NAME;
+	private String[] _languageIds;
 	private int _displayStyle = _DISPLAY_STYLE;
 
 }

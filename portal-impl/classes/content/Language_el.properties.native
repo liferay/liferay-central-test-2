@@ -2232,6 +2232,7 @@ shortcut=Συντομότερος δρόμος
 shorter=Κοντύτερος
 should-users-forward-to-the-cart-page-when-adding-an-item-from-the-category-page=Θα έπρεπε οι χρήστες να διαβιβάσουν στο κάρρο να σελιδοποιήσουν κατά το προσθήκη ενός στοιχείου από τη σελίδα κατηγορίας;
 show-availability-when-viewing-an-item=Παρουσιάστε διαθεσιμότητα κατά την εξέταση ενός στοιχείου;
+show-available-locales=Παρουσιάστε διαθέσιμα σύνολα τοπικής προσαρμογής
 show-borders=Προβολή Περιθωρίων
 show-breadcrumbs=Παρουσιάστε τριμμένες φρυγανιές
 show-calendar=Προβολή Ημερολογίου

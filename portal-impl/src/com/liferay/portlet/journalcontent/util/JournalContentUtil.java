@@ -26,6 +26,7 @@ import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -90,40 +91,48 @@ public class JournalContentUtil {
 		long groupId, String articleId, String templateId, String languageId,
 		ThemeDisplay themeDisplay, boolean disableCaching) {
 
+		JournalArticleDisplay articleDisplay = getDisplay(
+			groupId, articleId, templateId, languageId, themeDisplay,
+			disableCaching);
+
+		if (articleDisplay != null) {
+			return articleDisplay.getContent();
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String templateId, String languageId,
+		ThemeDisplay themeDisplay, boolean disableCaching) {
+
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		if (disableCaching) {
-			return _getContent(
+			return _getArticleDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay);
 		}
 
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
 
-		String content = (String)MultiVMPool.get(_cache, key);
+		JournalArticleDisplay articleDisplay =
+			(JournalArticleDisplay)MultiVMPool.get(_cache, key);
 
-		if (content == null) {
-			try {
-				content = JournalArticleLocalServiceUtil.getArticleContent(
-					groupId, articleId, templateId, languageId, themeDisplay);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to get content for " + groupId + " " +
-							articleId + " " + languageId);
-				}
-			}
+		if (articleDisplay == null) {
+			articleDisplay = _getArticleDisplay(
+				groupId, articleId, templateId, languageId, themeDisplay);
 
-			if (content != null) {
+			if (articleDisplay != null) {
 				String groupKey = _encodeGroupKey(
 					groupId, articleId, templateId);
 
-				MultiVMPool.put(_cache, key, _groups, groupKey, content);
+				MultiVMPool.put(_cache, key, _groups, groupKey, articleDisplay);
 			}
 		}
 
-		return content;
+		return articleDisplay;
 	}
 
 	private static String _encodeGroupKey(
@@ -153,21 +162,18 @@ public class JournalContentUtil {
 		return sm.toString();
 	}
 
-	private static String _getContent(
+	private static JournalArticleDisplay _getArticleDisplay(
 		long groupId, String articleId, String templateId, String languageId,
 		ThemeDisplay themeDisplay) {
 
-		articleId = GetterUtil.getString(articleId).toUpperCase();
-		templateId = GetterUtil.getString(templateId).toUpperCase();
-
 		try {
-			return JournalArticleLocalServiceUtil.getArticleContent(
+			return JournalArticleLocalServiceUtil.getArticleDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to get content for " + groupId + " " +
+					"Unable to get display for " + groupId + " " +
 						articleId + " " + languageId);
 			}
 
