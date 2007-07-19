@@ -425,11 +425,13 @@ Liferay.PortletCSS = {
 
 		var setColor = function(obj){
 			var color = obj.value;
-			if (color != '') {
-				portlet.css('background-color', color);
-
-				bgData.backgroundColor = color;
+			var cssColor = color;
+			if (color == '' || color == '#') {
+				cssColor = 'transparent';
+				color = '';
 			}
+			portlet.css('background-color', cssColor);
+			bgData.backgroundColor = color;
 		};
 
 		var colorPicker = new Liferay.ColorPicker(
