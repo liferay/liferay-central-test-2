@@ -25,16 +25,18 @@
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
 
 <%
-String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
+JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
 %>
 
 <c:choose>
-	<c:when test="<%= Validator.isNotNull(content) %>">
+	<c:when test="<%= articleDisplay != null %>">
 
 		<%
 		RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
 		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
 		RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
+
+		String content = articleDisplay.getContent();
 
 		content = RuntimePortletUtil.processXML(request, content, portletLogic);
 		content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
@@ -43,6 +45,20 @@ String content = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT);
 
 		<%= content %>
 
+		<c:if test="<%= showAvailableLocales %>">
+
+			<%
+			String[] availableLocales = articleDisplay.getAvailableLocales();
+			%>
+
+			<c:if test="<%= availableLocales.length > 0 %>">
+				<div>
+					<br />
+
+					<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+				</div>
+			</c:if>
+		</c:if>
 	</c:when>
 	<c:when test="<%= portletDisplay.isShowConfigurationIcon() %>">
 		<br />
@@ -74,64 +90,66 @@ catch (NoSuchArticleException nsae) {
 %>
 
 <c:if test="<%= themeDisplay.isSignedIn() %>">
-	<br />
+	<div>
+		<br />
 
-	<c:if test="<%= article != null %>">
-		<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+		<c:if test="<%= article != null %>">
+			<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
+				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+					<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
+					<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+					<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+					<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+					<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+				</liferay-portlet:renderURL>
+
+				<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
+			</c:if>
+		</c:if>
+
+		<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+			<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
+		</c:if>
+
+		<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
 				<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
+				<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
 				<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-				<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-				<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-				<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</liferay-portlet:renderURL>
 
-			<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
+			<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
 		</c:if>
-	</c:if>
-
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
-		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
-	</c:if>
-
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
-			<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
-			<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
-			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-		</liferay-portlet:renderURL>
-
-		<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
-	</c:if>
+	</div>
 </c:if>
 
 <c:if test="<%= article != null %>">
-	<br />
+	<div>
+		<c:if test="<%= enableRatings %>">
+			<br />
 
-	<c:if test="<%= enableRatings %>">
-		<br />
+			<liferay-ui:ratings
+				className="<%= JournalArticle.class.getName() %>"
+				classPK="<%= article.getResourcePrimKey() %>"
+				url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+			/>
+		</c:if>
 
-		<liferay-ui:ratings
-			className="<%= JournalArticle.class.getName() %>"
-			classPK="<%= article.getResourcePrimKey() %>"
-			url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
-		/>
-	</c:if>
+		<c:if test="<%= enableComments %>">
+			<br />
 
-	<c:if test="<%= enableComments %>">
-		<br />
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
+			</portlet:actionURL>
 
-		<portlet:actionURL var="discussionURL">
-			<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
-		</portlet:actionURL>
-
-		<liferay-ui:discussion
-			formAction="<%= discussionURL %>"
-			className="<%= JournalArticle.class.getName() %>"
-			classPK="<%= article.getResourcePrimKey() %>"
-			userId="<%= article.getUserId() %>"
-			subject="<%= article.getTitle() %>"
-			redirect="<%= currentURL %>"
-		/>
-	</c:if>
+			<liferay-ui:discussion
+				formAction="<%= discussionURL %>"
+				className="<%= JournalArticle.class.getName() %>"
+				classPK="<%= article.getResourcePrimKey() %>"
+				userId="<%= article.getUserId() %>"
+				subject="<%= article.getTitle() %>"
+				redirect="<%= currentURL %>"
+			/>
+		</c:if>
+	</div>
 </c:if>

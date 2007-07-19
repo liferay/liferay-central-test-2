@@ -43,10 +43,9 @@ if (Validator.isNull(formAction)) {
 	formAction = portletURLImpl.toString();
 }
 
-String name = namespace + request.getAttribute("liferay-ui:language:name");
+String name = (String)request.getAttribute("liferay-ui:language:name");
+Locale[] locales = (Locale[])request.getAttribute("liferay-ui:language:locales");
 int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:language:displayStyle"));
-
-Locale[] locales = LanguageUtil.getAvailableLocales();
 
 Map langCounts = CollectionFactory.getHashMap();
 
@@ -78,7 +77,7 @@ for (int i = 0; i < locales.length; i++) {
 	<c:when test="<%= displayStyle == LanguageTag.SELECT_BOX %>">
 		<form action="<%= formAction %>" method="post" name="<%= formName %>">
 
-		<select name="<%= name %>" onChange="submitForm(document.<%= formName %>);">
+		<select name="<%= namespace + name %>" onChange="submitForm(document.<%= formName %>);">
 
 			<%
 			for (int i = 0; i < locales.length; i++) {
@@ -100,9 +99,9 @@ for (int i = 0; i < locales.length; i++) {
 			for (int i = 0; i < locales.length; i++) {
 			%>
 
-				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundImage = "url(<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png)";
-				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundRepeat = "no-repeat";
-				document.<%= formName %>.<%= name %>.options[<%= i %>].style.backgroundPosition = "center left";
+				document.<%= formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundImage = "url(<%= themeDisplay.getPathThemeImages() %>/language/<%= LocaleUtil.toLanguageId(locales[i]) %>.png)";
+				document.<%= formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundRepeat = "no-repeat";
+				document.<%= formName %>.<%= namespace + name %>.options[<%= i %>].style.backgroundPosition = "center left";
 
 			<%
 			}

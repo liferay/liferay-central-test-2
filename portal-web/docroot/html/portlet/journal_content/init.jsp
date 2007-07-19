@@ -27,6 +27,7 @@
 <%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalTemplate" %>
 <%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %>
 <%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %>
@@ -54,6 +55,7 @@ long groupId = GetterUtil.getLong(prefs.getValue("group-id", portletGroupId.toSt
 String articleId = GetterUtil.getString(prefs.getValue("article-id", StringPool.BLANK));
 String templateId = GetterUtil.getString(prefs.getValue("template-id", StringPool.BLANK));
 boolean disableCaching = GetterUtil.getBoolean(prefs.getValue("disable-caching", StringPool.BLANK));
+boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", StringPool.BLANK), true);
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", StringPool.BLANK), true);
 

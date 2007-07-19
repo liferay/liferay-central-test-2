@@ -46,7 +46,7 @@
 <liferay-ui:tags-selector
 	hiddenInput="notEntries"
 	curTags="<%= StringUtil.merge(notEntries) %>"
-	focus="<%= true %>"
+	focus="<%= false %>"
 />
 
 <br />

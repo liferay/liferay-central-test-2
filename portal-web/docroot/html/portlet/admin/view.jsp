@@ -31,6 +31,12 @@
 		String tabs1 = ParamUtil.getString(request, "tabs1", "server");
 		String tabs2 = ParamUtil.getString(request, "tabs2", "memory");
 
+		if (tabs1.equals("plugins")) {
+			if (!tabs2.equals("portlets") && !tabs2.equals("themes") && !tabs2.equals("layout-templates")) {
+				tabs2 = "portlets";
+			}
+		}
+
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);

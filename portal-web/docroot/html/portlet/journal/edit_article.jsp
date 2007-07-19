@@ -679,8 +679,11 @@ String[] availableLocales = null;
 						contentDoc = null;
 
 						try {
-							availableLocales = article.getAvailableLocales();
+							contentDoc = reader.read(new StringReader(content));
 
+							contentEl = contentDoc.getRootElement();
+
+							availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
 						}
 						catch (Exception e) {
 							contentDoc = null;
