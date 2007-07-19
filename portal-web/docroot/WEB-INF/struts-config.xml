@@ -1492,6 +1492,10 @@
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki_display/edit_page_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.wiki.error" />
+		</action>
+
 		<action path="/wiki_display/view" type="com.liferay.portlet.wikidisplay.action.ViewAction">
 			<forward name="portlet.wiki_display.view" path="portlet.wiki_display.view" />
 		</action>
