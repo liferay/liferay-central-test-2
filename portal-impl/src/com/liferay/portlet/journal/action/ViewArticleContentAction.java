@@ -186,7 +186,7 @@ public class ViewArticleContentAction extends Action {
 				String script = template.getXsl();
 
 				output = JournalUtil.transform(
-					tokens, languageId, xml, script, langType, themeDisplay);
+					tokens, languageId, xml, script, langType);
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(

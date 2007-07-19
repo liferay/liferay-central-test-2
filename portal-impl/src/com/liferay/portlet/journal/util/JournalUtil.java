@@ -714,7 +714,7 @@ public class JournalUtil {
 
 	public static String transform(
 			Map tokens, String languageId, String xml, String script,
-			String langType, ThemeDisplay themeDisplay)
+			String langType)
 		throws TransformException {
 
 		// Setup Listeners
@@ -789,7 +789,7 @@ public class JournalUtil {
 			output = xml;
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
-			output = JournalVmUtil.transform(tokens, languageId, xml, script, themeDisplay);
+			output = JournalVmUtil.transform(tokens, languageId, xml, script);
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
 			output = JournalXslUtil.transform(tokens, languageId, xml, script);

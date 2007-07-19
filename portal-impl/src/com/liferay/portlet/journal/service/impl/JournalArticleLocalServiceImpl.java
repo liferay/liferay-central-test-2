@@ -838,7 +838,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			return JournalUtil.transform(
-				tokens, languageId, xml, script, langType, themeDisplay);
+				tokens, languageId, xml, script, langType);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
