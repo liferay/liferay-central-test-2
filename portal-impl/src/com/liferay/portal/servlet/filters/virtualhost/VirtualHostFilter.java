@@ -103,7 +103,7 @@ public class VirtualHostFilter implements Filter {
 			return;
 		}
 
-		String requestURL = httpReq.getRequestURL().toString();
+		StringBuffer requestURL = httpReq.getRequestURL();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Received " + requestURL);
@@ -198,17 +198,21 @@ public class VirtualHostFilter implements Filter {
 		return true;
 	}
 
-	protected boolean isValidRequestURL(String requestURL) {
-		if (requestURL.endsWith(_EXT_C) || requestURL.endsWith(_EXT_CSS) || requestURL.endsWith(_EXT_GIF) ||
-			requestURL.endsWith(_EXT_IMAGE_COMPANY_LOGO) ||
-			requestURL.endsWith(_EXT_ICO) || requestURL.endsWith(_EXT_JS) ||
-			requestURL.endsWith(_EXT_JPEG) ||
-			requestURL.endsWith(_EXT_PORTAL_CSS_CACHED) ||
-			requestURL.endsWith(_EXT_PORTAL_JAVASCRIPT_CACHED) ||
-			requestURL.endsWith(_EXT_PORTAL_LAYOUT) ||
-			requestURL.endsWith(_EXT_PORTAL_LOGIN) ||
-			requestURL.endsWith(_EXT_PORTAL_LOGOUT) ||
-			requestURL.endsWith(_EXT_PNG)) {
+	protected boolean isValidRequestURL(StringBuffer requestURL) {
+		if (requestURL == null) {
+			return false;
+		}
+
+		String url = requestURL.toString();
+
+		if (url.endsWith(_EXT_C) || url.endsWith(_EXT_CSS) ||
+			url.endsWith(_EXT_GIF) || url.endsWith(_EXT_IMAGE_COMPANY_LOGO) ||
+			url.endsWith(_EXT_ICO) || url.endsWith(_EXT_JS) ||
+			url.endsWith(_EXT_JPEG) || url.endsWith(_EXT_PORTAL_CSS_CACHED) ||
+			url.endsWith(_EXT_PORTAL_JAVASCRIPT_CACHED) ||
+			url.endsWith(_EXT_PORTAL_LAYOUT) ||
+			url.endsWith(_EXT_PORTAL_LOGIN) ||
+			url.endsWith(_EXT_PORTAL_LOGOUT) || url.endsWith(_EXT_PNG)) {
 
 			return false;
 		}
