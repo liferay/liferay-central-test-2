@@ -22,6 +22,10 @@
 
 package com.liferay.util.bridges.jsf.common;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
+
+import java.util.Locale;
+
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -31,8 +35,9 @@ import javax.faces.context.FacesContext;
  *
  * <p>
  * This class provides static convenience methods for creating FacesMessage
- * objects from values in resource bundles, and adding them to the FacesContext
- * either globally, or to individual components only.
+ * objects from locale-specific values in the Liferay portal.properties file,
+ * and adding them to the FacesContext either globally, or to individual
+ * components.
  * </p>
  *
  * @author Neil Griffin
@@ -40,21 +45,120 @@ import javax.faces.context.FacesContext;
  */
 public class FacesMessageUtil {
 
-	public static void addComponentMessage(
-		String clientId, FacesContext facesContext, Severity severity,
-		String summary) {
+	public static void error(FacesContext facesContext, String key) {
+		error(facesContext, key);
+	}
 
-		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
+	public static void error(
+		FacesContext facesContext, String key, Object argument) {
+
+		error(facesContext, key, argument);
+	}
+
+	public static void error(
+		FacesContext facesContext, String key, Object[] arguments) {
+
+		error(facesContext, key, arguments);
+	}
+
+	public static void error(
+		String clientId, FacesContext facesContext, String key) {
+
+		_addMessage(clientId, facesContext, FacesMessage.SEVERITY_ERROR, key);
+	}
+
+	public static void error(
+		String clientId, FacesContext facesContext, String key,
+		Object argument) {
+
+		_addMessage(
+			clientId, facesContext, FacesMessage.SEVERITY_ERROR, key, argument);
+	}
+
+	public static void error(
+		String clientId, FacesContext facesContext, String key,
+		Object[] arguments) {
+
+		_addMessage(
+			clientId, facesContext, FacesMessage.SEVERITY_ERROR, key,
+			arguments);
+	}
+
+	public static void info(FacesContext facesContext, String key) {
+		info(facesContext, key);
+	}
+
+	public static void info(
+		FacesContext facesContext, String key, Object argument) {
+
+		info(facesContext, key, argument);
+	}
+
+	public static void info(
+		FacesContext facesContext, String key, Object[] arguments) {
+
+		info(facesContext, key, arguments);
+	}
+
+	public static void info(
+		String clientId, FacesContext facesContext, String key) {
+
+		_addMessage(clientId, facesContext, FacesMessage.SEVERITY_INFO, key);
+	}
+
+	public static void info(
+		String clientId, FacesContext facesContext, String key,
+		Object argument) {
+
+		_addMessage(
+			clientId, facesContext, FacesMessage.SEVERITY_INFO, key, argument);
+	}
+
+	public static void info(
+		String clientId, FacesContext facesContext, String key,
+		Object[] arguments) {
+
+		_addMessage(
+			clientId, facesContext, FacesMessage.SEVERITY_INFO, key, arguments);
+	}
+
+	private static void _addMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String key) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+
+		String message = LanguageUtil.get(locale, key);
+
+		FacesMessage facesMessage = new FacesMessage(severity, message, null);
 
 		facesContext.addMessage(clientId, facesMessage);
 	}
 
-	public static void addGlobalMessage(
-		FacesContext facesContext, Severity severity, String summary) {
+	private static void _addMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String key, Object argument) {
 
-		FacesMessage facesMessage = new FacesMessage(severity, summary, null);
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
 
-		facesContext.addMessage(null, facesMessage);
+		String message = LanguageUtil.format(locale, key, argument);
+
+		FacesMessage facesMessage = new FacesMessage(severity, message, null);
+
+		facesContext.addMessage(clientId, facesMessage);
+	}
+
+	private static void _addMessage(
+		String clientId, FacesContext facesContext, Severity severity,
+		String key, Object[] arguments) {
+
+		Locale locale = JSFPortletUtil.getLocale(facesContext);
+
+		String message = LanguageUtil.format(locale, key, arguments);
+
+		FacesMessage facesMessage = new FacesMessage(severity, message, null);
+
+		facesContext.addMessage(clientId, facesMessage);
 	}
 
 }

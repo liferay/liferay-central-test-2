@@ -22,16 +22,10 @@
 
 package com.liferay.util.bridges.jsf.common;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.faces.application.FacesMessage.Severity;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import javax.portlet.PortletPreferences;
@@ -79,10 +73,6 @@ public class PortletPreferencesManagedBean {
 				_log.debug("{name=" + name + ", value=" + value + "}");
 			}
 		}
-
-		ExternalContext externalContext = facesContext.getExternalContext();
-
-		_locale = externalContext.getRequestLocale();
 	}
 
 	public Map getPreferences() {
@@ -151,20 +141,16 @@ public class PortletPreferencesManagedBean {
 		}
 	}
 
-	protected void addErrorMessage(String summary) {
-		addMessage(FacesMessage.SEVERITY_ERROR, summary);
-	}
-
-	protected void addInfoMessage(String summary) {
-		addMessage(FacesMessage.SEVERITY_INFO, summary);
-	}
-
-	protected void addMessage(Severity severity, String summary) {
+	protected void addErrorMessage(String key) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
-		summary = LanguageUtil.get(_locale, summary);
+		FacesMessageUtil.error(facesContext, key);
+	}
 
-		FacesMessageUtil.addGlobalMessage(facesContext, severity, summary);
+	protected void addInfoMessage(String key) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		FacesMessageUtil.info(facesContext, key);
 	}
 
 	private static Log _log =
@@ -172,6 +158,5 @@ public class PortletPreferencesManagedBean {
 
 	private PortletPreferences _portletPreferences;
 	private Map _preferences;
-	private Locale _locale;
 
 }

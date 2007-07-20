@@ -28,17 +28,12 @@ import com.icesoft.faces.component.inputfile.InputFile;
 import com.icesoft.faces.webapp.xmlhttp.PersistentFacesState;
 import com.icesoft.faces.webapp.xmlhttp.RenderingException;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.util.bridges.jsf.common.FacesMessageUtil;
 
 import java.text.DecimalFormat;
 
 import java.util.EventObject;
-import java.util.Locale;
 
-import javax.faces.application.FacesMessage.Severity;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -74,11 +69,6 @@ public class FileUploadManagedBean implements Renderable {
 
 	public FileUploadManagedBean() {
 		_state = PersistentFacesState.getInstance();
-
-		ExternalContext externalContext =
-			FacesContext.getCurrentInstance().getExternalContext();
-
-		_locale = externalContext.getRequestLocale();
 	}
 
 	public PersistentFacesState getState() {
@@ -121,8 +111,7 @@ public class FileUploadManagedBean implements Renderable {
 
 		try {
 			if (status == InputFile.INVALID) {
-				addErrorMessage(
-					LanguageUtil.get(_locale, "file-type-is-invalid"));
+				addErrorMessage("file-type-is-invalid");
 
 				_percent = 100;
 			}
@@ -143,16 +132,12 @@ public class FileUploadManagedBean implements Renderable {
 						(double)maxFileSizeInBytes / 1024 / 1024);
 
 				addErrorMessage(
-					LanguageUtil.format(
-						_locale, "file-size-is-larger-than-x-megabytes",
-						maxFileSizeInMegs));
+					"file-size-is-larger-than-x-megabytes", maxFileSizeInMegs);
 
 				_percent = 100;
 			}
 			else if (status == InputFile.UNKNOWN_SIZE) {
-				addErrorMessage(
-					LanguageUtil.get(
-						_locale, "file-size-was-not-specified-in-the-request"));
+				addErrorMessage("file-size-was-not-specified-in-the-request");
 
 				_percent = 100;
 			}
@@ -176,20 +161,20 @@ public class FileUploadManagedBean implements Renderable {
 		_log.error(renderingException.getMessage());
 	}
 
-	protected void addErrorMessage(String summary) {
-		addMessage(FacesMessage.SEVERITY_ERROR, summary);
+	protected void addErrorMessage(String key) {
+		addErrorMessage(key);
 	}
 
-	protected void addMessage(Severity severity, String summary) {
+	protected void addErrorMessage(String key, String argument) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		if (_inputFile == null) {
-			FacesMessageUtil.addGlobalMessage(facesContext, severity, summary);
+			FacesMessageUtil.error(facesContext, key, argument);
 		}
 		else {
-			FacesMessageUtil.addComponentMessage(
-				_inputFile.getClientId(facesContext), facesContext, severity,
-				summary);
+			FacesMessageUtil.error(
+				_inputFile.getClientId(facesContext), facesContext, key,
+				argument);
 		}
 	}
 
@@ -199,6 +184,5 @@ public class FileUploadManagedBean implements Renderable {
 	private RenderManager _renderManager;
 	private InputFile _inputFile;
 	private int _percent;
-	private Locale _locale;
 
 }
