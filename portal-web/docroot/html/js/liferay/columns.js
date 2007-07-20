@@ -62,7 +62,7 @@
 				instance._cache.columnData = [];
 
 				jColumns.each(function(i){
-					var element = this.parentNode.nodeName.toLowerCase() == "td" ? this.parentNode : this.parentNode;
+					var element = this.parentNode;
 					instance._cache.columnData[i] = jQuery(element).coordinatesData(true);
 				});
 			}
