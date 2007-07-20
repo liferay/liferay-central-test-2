@@ -211,6 +211,12 @@ public class LoginAction extends Action {
 				PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE),
 				CookieKeys.MAX_AGE);
 
+			if (GetterUtil.getBoolean(
+					PropsUtil.get(PropsUtil.SESSION_DISABLED))) {
+
+				rememberMe = true;
+			}
+
 			if (rememberMe) {
 				idCookie.setMaxAge(loginMaxAge);
 				passwordCookie.setMaxAge(loginMaxAge);

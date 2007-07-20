@@ -269,6 +269,8 @@ public class PropsUtil {
 
 	public static final String SESSION_TEST_COOKIE_SUPPORT = "session.test.cookie.support";
 
+	public static final String SESSION_DISABLED = "session.disabled";
+
 	public static final String SERVLET_SESSION_CREATE_EVENTS = "servlet.session.create.events";
 
 	public static final String SERVLET_SESSION_DESTROY_EVENTS = "servlet.session.destroy.events";
