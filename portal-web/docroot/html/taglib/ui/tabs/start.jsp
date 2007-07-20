@@ -106,7 +106,13 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 					}
 				}
 				else {
-					curURL = "javascript: Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+					curURL = "javascript: ";
+
+					if (Validator.isNotNull(formName)) {
+						curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";
+					}
+
+					curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
 				}
 			}
 		%>

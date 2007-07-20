@@ -53,6 +53,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 
 			req.setAttribute("liferay-ui:tabs:values", _tabsValues);
 
+			req.setAttribute("liferay-ui:tabs:formName", _formName);
 			req.setAttribute("liferay-ui:tabs:param", _param);
 
 			if (_value == null) {
@@ -128,6 +129,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 			_names = null;
 			_namesPos = 0;
 			_tabsValues = null;
+			_formName = StringPool.BLANK;
 			_param = "tabs1";
 			_value = null;
 			_portletURL = null;
@@ -179,6 +181,10 @@ public class TabsTag extends ParamAncestorTagImpl {
 
 	public void setTabsValues(String tabsValues) {
 		_tabsValues = StringUtil.split(tabsValues);
+	}
+
+	public void setFormName(String formName) {
+		_formName = formName;
 	}
 
 	public String getParam() {
@@ -287,6 +293,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 	private String[] _names;
 	private int _namesPos;
 	private String[] _tabsValues;
+	private String _formName;
 	private String _param = "tabs1";
 	private String _value;
 	private PortletURL _portletURL;
