@@ -39,6 +39,10 @@ if ((values == null) || (values.length < names.length)) {
 	values = names;
 }
 
+// Form name
+
+String formName = (String)request.getAttribute("liferay-ui:tabs:formName");
+
 // Param
 
 String param = (String)request.getAttribute("liferay-ui:tabs:param");
