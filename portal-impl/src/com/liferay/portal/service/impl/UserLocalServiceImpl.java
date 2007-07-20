@@ -2008,6 +2008,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, long userId, String password1, String password2)
 		throws PortalException, SystemException {
 
+		if (Validator.isNull(password1) || Validator.isNull(password2)) {
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_INVALID);
+		}
+
 		if (!password1.equals(password2)) {
 			throw new UserPasswordException(
 				UserPasswordException.PASSWORDS_DO_NOT_MATCH);
