@@ -214,7 +214,6 @@ PhotoSlider.prototype = {
 };
 
 var Tabs = {
-
 	show : function (namespace, names, id) {
 		var el = document.getElementById(namespace + id + "TabsId");
 

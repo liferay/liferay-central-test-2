@@ -252,13 +252,13 @@ public class ActionResponseImpl implements ActionResponse {
 		if ((location == null) ||
 			(!location.startsWith("/") && (location.indexOf("://") == -1))) {
 
-			_log.error(location);
-
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(
+				location + " is not a valid redirect");
 		}
 
 		if (_calledSetRenderParameter) {
-			throw new IllegalStateException();
+			throw new IllegalStateException(
+				"Set render parameter has already been called");
 		}
 
 		_redirectLocation = location;

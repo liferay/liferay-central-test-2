@@ -59,6 +59,7 @@ if (Validator.isNotNull(portletResource)) {
 String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
+boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 
 Arrays.sort(entries);
 %>

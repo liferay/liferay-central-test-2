@@ -48,7 +48,16 @@ if (Validator.isNotNull(structureId)) {
 	}
 }
 
-String xsl = BeanParamUtil.getString(template, request, "xsl");
+String xslContent = request.getParameter("xslContent");
+
+String xsl = xslContent;
+
+if (xslContent != null) {
+	xsl = JS.decodeURIComponent(xsl);
+}
+else {
+	xsl = BeanParamUtil.getString(template, request, "xsl");
+}
 
 String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
 

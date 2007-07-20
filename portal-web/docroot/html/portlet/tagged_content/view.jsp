@@ -136,10 +136,25 @@ for (int i = 0; i < results.size(); i++) {
 				<c:if test="<%= articleDisplay != null %>">
 					<%= articleDisplay.getContent() %>
 
-					<div>
-						<br />
+					<c:if test="<%= showAvailableLocales %>">
 
-						<c:if test="<%= JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE) %>">
+						<%
+						String[] availableLocales = articleDisplay.getAvailableLocales();
+						%>
+
+						<c:if test="<%= availableLocales.length > 0 %>">
+							<div>
+								<br />
+
+								<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+							</div>
+						</c:if>
+					</c:if>
+
+					<c:if test="<%= JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE) %>">
+						<div>
+							<br />
+
 							<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 								<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
 								<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
@@ -149,8 +164,8 @@ for (int i = 0; i < results.size(); i++) {
 							</liferay-portlet:renderURL>
 
 							<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
-						</c:if>
-					</div>
+						</div>
+					</c:if>
 				</c:if>
 			</c:when>
 			<c:when test="<%= className.equals(WikiPage.class.getName()) %>">

@@ -25,50 +25,74 @@
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2");
+
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
-<liferay-ui:message key="displayed-content-must-contain-the-following-tags" />
+<liferay-ui:tabs
+	names="query-logic,display-settings"
+	formName="fm"
+	param="tabs2"
+	refresh="<%= false %>"
+>
+	<liferay-ui:section>
+		<liferay-ui:message key="displayed-content-must-contain-the-following-tags" />
 
-<br /><br />
+		<br /><br />
 
-<liferay-ui:tags-selector
-	hiddenInput="entries"
-	curTags="<%= StringUtil.merge(entries) %>"
-	focus="<%= true %>"
-/>
+		<liferay-ui:tags-selector
+			hiddenInput="entries"
+			curTags="<%= StringUtil.merge(entries) %>"
+			focus="<%= false %>"
+		/>
 
-<br />
+		<br />
 
-<liferay-ui:message key="displayed-content-must-not-contain-the-following-tags" />
+		<liferay-ui:message key="displayed-content-must-not-contain-the-following-tags" />
 
-<br /><br />
+		<br /><br />
 
-<liferay-ui:tags-selector
-	hiddenInput="notEntries"
-	curTags="<%= StringUtil.merge(notEntries) %>"
-	focus="<%= false %>"
-/>
+		<liferay-ui:tags-selector
+			hiddenInput="notEntries"
+			curTags="<%= StringUtil.merge(notEntries) %>"
+			focus="<%= false %>"
+		/>
 
-<br />
+		<br />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<liferay-ui:message key="search-operator" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />andOperator">
-			<option <%= andOperator ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-			<option <%= !andOperator ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-		</select>
-	</td>
-</tr>
-</table>
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="search-operator" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />andOperator">
+					<option <%= andOperator ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+					<option <%= !andOperator ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</liferay-ui:section>
+	<liferay-ui:section>
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="show-available-locales" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" />
+			</td>
+		</tr>
+		</table>
+	</liferay-ui:section>
+</liferay-ui:tabs>
 
 <br />
 
