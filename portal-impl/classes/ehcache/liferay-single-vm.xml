@@ -6,23 +6,23 @@
 	-->
 
 	<defaultCache
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.lastmodified.LastModifiedCSS"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.lastmodified.LastModifiedJavaScript"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache
@@ -33,9 +33,9 @@
 	/>
 	<cache
 		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 </ehcache>

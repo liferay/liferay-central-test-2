@@ -21,9 +21,9 @@
 	-->
 
 	<defaultCache
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory">
@@ -37,9 +37,9 @@
 
 	<cache
 		name="com.liferay.portal.model.impl.UserImpl"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />

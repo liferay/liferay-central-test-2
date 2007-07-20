@@ -24,9 +24,9 @@
 	/>-->
 
 	<defaultCache
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -34,7 +34,7 @@
 	</defaultCache>
 	<cache
 		name="com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
 		timeToLiveSeconds="300"
 		overflowToDisk="true"
@@ -44,9 +44,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -54,9 +54,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portal.cms.servlet.CMSServletUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -64,9 +64,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portal.spring.hibernate.FinderCache"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -74,9 +74,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portlet.journalcontent.util.JournalContentUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-		timeToLiveSeconds="3600"
+		timeToLiveSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -84,9 +84,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-		timeToLiveSeconds="3600"
+		timeToLiveSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -94,9 +94,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portal.security.permission.PermissionCacheUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -104,9 +104,9 @@
 	</cache>
 	<cache
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
-		maxElementsInMemory="1000"
+		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="3600"
+        timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
 		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
