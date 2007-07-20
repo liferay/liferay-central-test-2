@@ -62,7 +62,7 @@
 				instance._cache.columnData = [];
 
 				jColumns.each(function(i){
-					var element = this.parentNode.nodeName.toLowerCase() == "td" ? this.parentNode : this;
+					var element = this.parentNode.nodeName.toLowerCase() == "td" ? this.parentNode : this.parentNode;
 					instance._cache.columnData[i] = jQuery(element).coordinatesData(true);
 				});
 			}
@@ -146,7 +146,7 @@
 				});
 			}
 
-			var element = jQuery(container.parentNode.nodeName.toLowerCase() == "td" ? container.parentNode : container);
+			var element = jQuery(container.parentNode.nodeName.toLowerCase() == "td" ? container.parentNode : container.parentNode);
 			dropArea.css({
 				display: "",
 				height: element.height(),
