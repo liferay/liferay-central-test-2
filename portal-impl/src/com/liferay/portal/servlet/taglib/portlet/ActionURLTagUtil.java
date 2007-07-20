@@ -123,6 +123,7 @@ public class ActionURLTagUtil {
 			if ((portletConfiguration != null) &&
 				portletConfiguration.booleanValue()) {
 
+				String backURL = ParamUtil.getString(req, "backURL");
 				String portletResource = ParamUtil.getString(
 					req, "portletResource");
 				String previewWidth = ParamUtil.getString(req, "previewWidth");
@@ -130,6 +131,7 @@ public class ActionURLTagUtil {
 				portletURL.setParameter(
 					"struts_action",
 					"/portlet_configuration/edit_configuration");
+				portletURL.setParameter("backURL", backURL);
 				portletURL.setParameter("portletResource", portletResource);
 				portletURL.setParameter("previewWidth", previewWidth);
 			}

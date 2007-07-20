@@ -130,10 +130,28 @@ for (int i = 0; i < results.size(); i++) {
 
 				String languageId = LanguageUtil.getLanguageId(request);
 
-				String content = JournalArticleLocalServiceUtil.getArticleContent(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+				JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 				%>
 
-				<%= content %>
+				<c:if test="<%= articleDisplay != null %>">
+					<%= articleDisplay.getContent() %>
+
+					<div>
+						<br />
+
+						<c:if test="<%= JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE) %>">
+							<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+								<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
+								<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+								<liferay-portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
+								<liferay-portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
+								<liferay-portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
+							</liferay-portlet:renderURL>
+
+							<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
+						</c:if>
+					</div>
+				</c:if>
 			</c:when>
 			<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
 

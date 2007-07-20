@@ -700,6 +700,15 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, String languageId,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getArticleDisplay(
+			groupId, articleId, null, languageId, themeDisplay);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String templateId,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -871,6 +880,8 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return new JournalArticleDisplayImpl(
+			article.getId(), article.getResourcePrimKey(), article.getGroupId(),
+			article.getArticleId(), article.getVersion(),
 			article.getAvailableLocales(), content);
 	}
 

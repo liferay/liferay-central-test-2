@@ -37,6 +37,7 @@ String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 String cur = ParamUtil.getString(request, "cur");
 
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
@@ -100,6 +101,7 @@ portletURL.setParameter("struts_action", "/portlet_configuration/edit_permission
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("backURL", backURL);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 portletURL.setParameter("modelResourceDescription", modelResourceDescription);

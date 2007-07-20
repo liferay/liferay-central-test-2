@@ -26,6 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 String previewWidth = ParamUtil.getString(request, "previewWidth");
@@ -40,6 +41,7 @@ configurationURL.setWindowState(WindowState.MAXIMIZED);
 
 configurationURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 configurationURL.setParameter("redirect", redirect);
+configurationURL.setParameter("backURL", backURL);
 configurationURL.setParameter("portletResource", portletResource);
 configurationURL.setParameter("previewWidth", previewWidth);
 
@@ -51,6 +53,7 @@ supportedClientsURL.setWindowState(WindowState.MAXIMIZED);
 
 supportedClientsURL.setParameter("struts_action", "/portlet_configuration/edit_supported_clients");
 supportedClientsURL.setParameter("redirect", redirect);
+supportedClientsURL.setParameter("backURL", backURL);
 supportedClientsURL.setParameter("portletResource", portletResource);
 configurationURL.setParameter("previewWidth", previewWidth);
 
@@ -62,6 +65,7 @@ permissionsURL.setWindowState(WindowState.MAXIMIZED);
 
 permissionsURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 permissionsURL.setParameter("redirect", redirect);
+permissionsURL.setParameter("backURL", backURL);
 permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermission.getPrimaryKey(layout.getPlid(), portletResource));
 permissionsURL.setParameter("previewWidth", previewWidth);

@@ -355,6 +355,17 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
+		long groupId, java.lang.String articleId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getArticleDisplay(groupId, articleId,
+			languageId, themeDisplay);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)

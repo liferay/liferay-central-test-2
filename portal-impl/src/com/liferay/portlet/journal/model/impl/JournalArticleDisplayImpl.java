@@ -32,11 +32,38 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
  */
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
-	public JournalArticleDisplayImpl(String[] availableLocales,
+	public JournalArticleDisplayImpl(long id, long resourcePrimKey,
+									 long groupId, String articleId,
+									 double version, String[] availableLocales,
 									 String content) {
 
+		_id = id;
+		_resourcePrimKey = resourcePrimKey;
+		_groupId = groupId;
+		_articleId = articleId;
+		_version = version;
 		_availableLocales = availableLocales;
 		_content = content;
+	}
+
+	public long getId() {
+		return _id;
+	}
+
+	public long getResourcePrimKey() {
+		return _resourcePrimKey;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public String getArticleId() {
+		return _articleId;
+	}
+
+	public double getVersion() {
+		return _version;
 	}
 
 	public String[] getAvailableLocales() {
@@ -47,6 +74,11 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		return _content;
 	}
 
+	private long _id;
+	private long _resourcePrimKey;
+	private long _groupId;
+	private String _articleId;
+	private double _version;
 	private String[] _availableLocales;
 	private String _content;
 

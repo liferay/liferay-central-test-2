@@ -37,7 +37,8 @@ PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(requ
 
 RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
 
-String currentURL = PortletURLUtil.getCurrent(renderRequest, renderResponse).toString();
+//String currentURL = PortletURLUtil.getCurrent(renderRequest, renderResponse).toString();
+String currentURL = PortalUtil.getCurrentURL(request);
 
 Portlet portletResourcePortlet = null;
 
@@ -128,6 +129,7 @@ else {
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
 urlConfiguration.setParameter("resourcePrimKey", PortletPermission.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 urlConfiguration.setParameter("redirect", currentURL);
+urlConfiguration.setParameter("backURL", currentURL);
 
 portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
 
@@ -285,11 +287,13 @@ else if (portletDisplay.isModePrint()) {
 }
 else if (portletDisplay.isStateMax()) {
 	if (portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
-		String portletResource = ParamUtil.getString(request, "portletResource");
+		/*String portletResource = ParamUtil.getString(request, "portletResource");
 
 		urlMax.setAnchor(false);
 
-		urlBack = urlMax.toString() + "#p_" + portletResource;
+		urlBack = urlMax.toString() + "#p_" + portletResource;*/
+
+		urlBack = ParamUtil.getString(request, "backURL");
 	}
 	else {
 		urlBack = urlMax.toString();

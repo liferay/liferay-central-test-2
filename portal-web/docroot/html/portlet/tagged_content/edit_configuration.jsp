@@ -24,8 +24,13 @@
 
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
+
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:message key="displayed-content-must-contain-the-following-tags" />
 
@@ -68,5 +73,7 @@
 <br />
 
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

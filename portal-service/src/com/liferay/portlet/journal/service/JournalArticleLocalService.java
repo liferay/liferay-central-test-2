@@ -226,6 +226,12 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
+		long groupId, java.lang.String articleId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)

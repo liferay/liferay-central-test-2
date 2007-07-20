@@ -336,6 +336,32 @@ public class PortalUtil {
 		return companyId;
 	}
 
+	public static String getCurrentURL(HttpServletRequest req) {
+		String completeURL = (String)req.getAttribute(WebKeys.CURRENT_URL);
+
+		if (completeURL == null) {
+			completeURL = Http.getCompleteURL(req);
+
+			if ((Validator.isNotNull(completeURL)) &&
+				(completeURL.indexOf("j_security_check") == -1)) {
+
+				completeURL = completeURL.substring(
+					completeURL.indexOf("://") + 3, completeURL.length());
+
+				completeURL = completeURL.substring(
+					completeURL.indexOf("/"), completeURL.length());
+			}
+
+			if (Validator.isNull(completeURL)) {
+				completeURL = PortalUtil.getPathMain();
+			}
+
+			req.setAttribute(WebKeys.CURRENT_URL, completeURL);
+		}
+
+		return completeURL;
+	}
+
 	public static Date getDate(
 			int month, int day, int year, PortalException pe)
 		throws PortalException {
@@ -854,7 +880,8 @@ public class PortalUtil {
 				Object state = actualParams.get("p_p_state");
 
 				if ((state == null) || (((String[])state).length == 0)) {
-					actualParams.put("p_p_state", "maximized");
+					actualParams.put(
+						"p_p_state", WindowState.MAXIMIZED.toString());
 				}
 
 				friendlyURLMapper.populateParams(

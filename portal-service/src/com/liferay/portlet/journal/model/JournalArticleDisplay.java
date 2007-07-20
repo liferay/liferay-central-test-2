@@ -32,6 +32,16 @@ import java.io.Serializable;
  */
 public interface JournalArticleDisplay extends Serializable {
 
+	public long getId();
+
+	public long getResourcePrimKey();
+
+	public long getGroupId();
+
+	public String getArticleId();
+
+	public double getVersion();
+
 	public String[] getAvailableLocales();
 
 	public String getContent();

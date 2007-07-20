@@ -97,6 +97,8 @@ public class VirtualHostFilter implements Filter {
 			_log.debug("Company id " + companyId);
 		}
 
+		PortalUtil.getCurrentURL(httpReq);
+
 		if (!USE_VIRTUAL_HOST_FILTER) {
 			chain.doFilter(req, res);
 

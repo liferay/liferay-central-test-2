@@ -60,7 +60,6 @@ import com.liferay.util.Http;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.EncryptedServletRequest;
 import com.liferay.util.servlet.ProtectedServletRequest;
 
@@ -419,23 +418,7 @@ public class MainServlet extends ActionServlet {
 
 		// Current URL
 
-		String completeURL = Http.getCompleteURL(req);
-
-		if ((Validator.isNotNull(completeURL)) &&
-			(completeURL.indexOf("j_security_check") == -1)) {
-
-			completeURL = completeURL.substring(
-				completeURL.indexOf("://") + 3, completeURL.length());
-
-			completeURL = completeURL.substring(
-				completeURL.indexOf("/"), completeURL.length());
-		}
-
-		if (Validator.isNull(completeURL)) {
-			completeURL = PortalUtil.getPathMain();
-		}
-
-		req.setAttribute(WebKeys.CURRENT_URL, completeURL);
+		PortalUtil.getCurrentURL(req);
 
 		// Login
 
