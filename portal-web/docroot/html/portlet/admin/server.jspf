@@ -59,78 +59,6 @@ numberFormat.setMinimumIntegerDigits(2);
 		/>
 
 		<c:choose>
-			<c:when test='<%= tabs2.equals("memory") %>'>
-
-				<%
-				Runtime runtime = Runtime.getRuntime();
-
-				numberFormat = NumberFormat.getInstance(locale);
-				%>
-
-				<table class="liferay-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="free-memory" />:
-					</td>
-					<td>
-						<%= numberFormat.format(runtime.freeMemory()) %> <liferay-ui:message key="bytes" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="total-memory" />:
-					</td>
-					<td>
-						<%= numberFormat.format(runtime.totalMemory()) %> <liferay-ui:message key="bytes" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-memory" />:
-					</td>
-					<td>
-						<%= numberFormat.format(runtime.maxMemory()) %> <liferay-ui:message key="bytes" />
-					</td>
-				</tr>
-				</table>
-
-				<br />
-
-				<table class="liferay-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="clear-content-cached-by-this-vm" />
-					</td>
-					<td align="right">
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="clear-content-cached-across-the-cluster" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="clear-the-database-cache" />
-					</td>
-					<td>
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
-					</td>
-				</tr>
-				</table>
-			</c:when>
 			<c:when test='<%= tabs2.equals("log-levels") %>'>
 
 				<%
@@ -397,6 +325,78 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" />
 			</c:when>
+			<c:otherwise>
+
+				<%
+				Runtime runtime = Runtime.getRuntime();
+
+				numberFormat = NumberFormat.getInstance(locale);
+				%>
+
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="free-memory" />:
+					</td>
+					<td>
+						<%= numberFormat.format(runtime.freeMemory()) %> <liferay-ui:message key="bytes" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="total-memory" />:
+					</td>
+					<td>
+						<%= numberFormat.format(runtime.totalMemory()) %> <liferay-ui:message key="bytes" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="maximum-memory" />:
+					</td>
+					<td>
+						<%= numberFormat.format(runtime.maxMemory()) %> <liferay-ui:message key="bytes" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-content-cached-by-this-vm" />
+					</td>
+					<td align="right">
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-content-cached-across-the-cluster" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-the-database-cache" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
 </c:choose>
