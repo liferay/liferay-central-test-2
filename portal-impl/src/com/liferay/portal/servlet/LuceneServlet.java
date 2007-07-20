@@ -59,7 +59,7 @@ public class LuceneServlet extends HttpServlet {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		for (int i = 0; i < companyIds.length; i++) {
-			long companyId = companyIds[0];
+			long companyId = companyIds[i];
 
 			if (GetterUtil.getBoolean(
 					PropsUtil.get(PropsUtil.INDEX_ON_STARTUP))) {
