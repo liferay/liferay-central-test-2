@@ -90,6 +90,8 @@ public class StartupAction extends SimpleAction {
 				System.exit(0);
 			}
 
+			boolean ranUpgradeProcess = false;
+
 			String[] upgradeProcesses =
 				PropsUtil.getArray(PropsUtil.UPGRADE_PROCESSES);
 
@@ -117,6 +119,8 @@ public class StartupAction extends SimpleAction {
 							_log.info(
 								"Finished upgrade " + upgradeProcesses[i]);
 						}
+
+						ranUpgradeProcess = true;
 					}
 					else {
 						if (_log.isDebugEnabled()) {
@@ -161,7 +165,8 @@ public class StartupAction extends SimpleAction {
 			boolean verified = release.isVerified();
 
 			if ((verifyFrequency == VerifyProcess.ALWAYS) ||
-				((verifyFrequency == VerifyProcess.ONCE) && !verified)) {
+				((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
+				(ranUpgradeProcess)) {
 
 				String[] verifyProcesses =
 					PropsUtil.getArray(PropsUtil.VERIFY_PROCESSES);
