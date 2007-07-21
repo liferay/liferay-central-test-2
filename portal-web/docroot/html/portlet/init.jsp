@@ -29,8 +29,8 @@
 <%
 PortletURL currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
 
-//String currentURL = currentURLObj.toString();
-String currentURL = PortalUtil.getCurrentURL(request);
+String currentURL = currentURLObj.toString();
+//String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <%@ include file="/html/portlet/init-ext.jsp" %>
