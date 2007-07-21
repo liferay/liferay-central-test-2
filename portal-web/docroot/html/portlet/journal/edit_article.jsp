@@ -448,9 +448,12 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-		submitForm(document.<portlet:namespace />fm);
+		if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
+			submitForm(document.<portlet:namespace />fm);
+		}
 	}
 
 	function <portlet:namespace />selectTemplate(structureId, templateId) {

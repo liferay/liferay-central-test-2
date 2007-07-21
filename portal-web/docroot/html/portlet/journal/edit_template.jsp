@@ -59,7 +59,7 @@ else {
 	xsl = BeanParamUtil.getString(template, request, "xsl");
 }
 
-String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
+String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateImpl.LANG_TYPE_VM);
 
 boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL");
