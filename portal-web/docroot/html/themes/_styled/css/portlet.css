@@ -68,7 +68,7 @@
 }
 
 .portlet-placeholder {
-	background: url(../images/portlet/placeholder_bg.gif);
+	background: url(../images/portlet/placeholder_bg.png);
 	border: 1px dashed #508FB4;
 	width: 100% !important;
 }
@@ -118,7 +118,7 @@
 /* ---------- Error messages ---------- */
 
 .portlet-msg-error {
-	background: #FFF1ED url(../images/messages/error.gif) no-repeat 0.5em 50%;
+	background: #FFF1ED url(../images/messages/error.png) no-repeat 0.5em 50%;
 	border: 1px solid #900;
 	display: block;
 	margin: 0.15em auto 1.2em;
@@ -129,7 +129,7 @@
 /* ---------- Warning messages ---------- */
 
 .portlet-msg-alert {
-	background: #FEFFDF url(../images/messages/alert.gif) no-repeat 0.5em 10%;
+	background: #FEFFDF url(../images/messages/alert.png) no-repeat 0.5em 10%;
 	border: 1px solid #EFEFEF;
 	display: block;
 	margin: 0.15em auto 1.2em;
@@ -140,7 +140,7 @@
 /* ---------- Success messages ---------- */
 
 .portlet-msg-success {
-	background: #F4FDEF url(../images/messages/success.gif) no-repeat 0.5em 50%;
+	background: #F4FDEF url(../images/messages/success.png) no-repeat 0.5em 50%;
 	border: 1px solid #3F9305;
 	display: block;
 	margin: 0.15em auto 1.2em;

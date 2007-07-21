@@ -22,7 +22,7 @@
 }
 
 #navigation li {
-	background: transparent url(../images/navigation/bg.gif) no-repeat 100% 100%;
+	background: transparent url(../images/navigation/bg.png) no-repeat 100% 100%;
 	display: inline;
 	float: left;
 	margin-right: 0.5em;
@@ -31,7 +31,7 @@
 }
 
 #navigation li a {
-	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
+	background: transparent url(../images/navigation/bg.png) no-repeat 0 100%;
 	display: block;
 	padding: 0 2em 0.5em 1.5em;
 	text-decoration: none;
@@ -42,7 +42,7 @@
 }
 
 #navigation li a span {
-	background: url(../images/navigation/bullet.gif) no-repeat 0 50%;
+	background: url(../images/navigation/bullet.png) no-repeat 0 50%;
 	padding-left: 17px;
 	text-decoration: none;
 }
@@ -52,7 +52,7 @@
 }
 
 #navigation li.selected a span {
-	background: url(../images/navigation/bullet_selected.gif) no-repeat 0 50%;
+	background: url(../images/navigation/bullet_selected.png) no-repeat 0 50%;
 	font-size: 1.3em;
 	font-weight: bold;
 }
@@ -62,7 +62,7 @@
 }
 
 #navigation li a:hover span {
-	background: url(../images/navigation/bullet_over.gif) no-repeat 0 50%;
+	background: url(../images/navigation/bullet_over.png) no-repeat 0 50%;
 }
 
 #navigation .child-menu {
@@ -315,7 +315,7 @@
 /* ---------- Add/Sort/Remove page ---------- */
 
 .js #navigation .enter-page {
-	background: transparent url(../images/navigation/bg.gif) no-repeat 0 100%;
+	background: transparent url(../images/navigation/bg.png) no-repeat 0 100%;
 	padding: 0.5em 2em 0.7em 1.5em;
 }
 
@@ -366,7 +366,7 @@
 /*------ Drag/drop menu items ------*/
 
 #navigation ul .sort-helper {
-	background: url(../images/portlet/placeholder_bg.gif);
+	background: url(../images/portlet/placeholder_bg.png);
 	border: 1px dashed #508FB4;
 	float: left;
 	padding: 0.5em;

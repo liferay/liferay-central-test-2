@@ -208,6 +208,16 @@ body.staging {
 	padding: 5px;
 }
 
+.popup-alert-notice {
+	background-color: #ffc;
+	border-bottom-color: #fc0;
+}
+
+.popup-alert-warning {
+	background-color: #fcc;
+	border-bottom-color: #f00;
+}
+
 /* ---------- Portal add content ---------- */
 
 .portal-add-content {
@@ -272,7 +282,7 @@ body.staging {
 /* ---------- Update Manager ---------- */
 
 .update-available {
-	background: url(../images/messages/alert.gif) no-repeat top left;
+	background: url(../images/messages/alert.png) no-repeat top left;
 	margin-top: 10px;
 	padding: 2px 20px;
 	text-align: left;
