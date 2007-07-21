@@ -4,6 +4,8 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>@portlet_name@</portlet-name>
+		<render-weight>1</render-weight>
+		<ajaxable>false</ajaxable>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
