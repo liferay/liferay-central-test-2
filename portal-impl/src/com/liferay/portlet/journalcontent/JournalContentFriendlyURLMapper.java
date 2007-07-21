@@ -32,9 +32,6 @@ import java.util.Map;
 
 import javax.portlet.PortletURL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalContentFriendlyURLMapper.java.html"><b><i>View Source</i></b>
  * </a>
@@ -131,15 +128,12 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 			String templateId =
 				friendlyURLPath.substring(z + 1, friendlyURLPath.length());
 
-			params.put(namespace + "templateId", articleId);
+			params.put(namespace + "templateId", templateId);
 		}
 
 		params.put(namespace + "struts_action", "/journal_content/view");
 	}
 
 	private static final String _MAPPING = "journal_content";
-
-	private static Log _log =
-		LogFactory.getLog(JournalContentFriendlyURLMapper.class);
 
 }

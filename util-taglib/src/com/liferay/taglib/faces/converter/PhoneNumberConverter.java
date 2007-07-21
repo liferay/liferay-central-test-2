@@ -34,9 +34,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PhoneNumberConverter.java.html"><b><i>View Source</i></b></a>
  *
@@ -152,8 +149,6 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 
 		return values;
 	}
-
-	private static Log _log = LogFactory.getLog(PhoneNumberConverter.class);
 
 	private boolean _transient;
 	private String _unitedStatesFormat;

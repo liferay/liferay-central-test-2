@@ -38,8 +38,6 @@ import javax.portlet.PortletPreferences;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -78,7 +76,5 @@ public class GetLookAndFeelAction extends JSONAction {
 
 		return PortletSetupUtil.cssToString(portletSetup);
 	}
-
-	private static Log _log = LogFactory.getLog(GetLookAndFeelAction.class);
 
 }

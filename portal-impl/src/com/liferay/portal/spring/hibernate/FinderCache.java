@@ -38,9 +38,6 @@ import java.util.Map;
 
 import net.sf.ehcache.Cache;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.hibernate.Session;
 
 /**
@@ -281,7 +278,5 @@ public class FinderCache {
 	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
 
 	private static Map _groups = CollectionFactory.getSyncHashMap();
-
-	private static Log _log = LogFactory.getLog(FinderCache.class);
 
 }

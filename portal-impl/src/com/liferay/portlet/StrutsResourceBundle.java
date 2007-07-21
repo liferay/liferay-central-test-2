@@ -62,8 +62,6 @@ public class StrutsResourceBundle extends ResourceBundle {
 	}
 
 	protected Object handleGetObject(String key) {
-		Object obj = null;
-
 		if ((key != null) &&
 			(key.equals(JavaConstants.JAVAX_PORTLET_TITLE) ||
 			 key.equals(JavaConstants.JAVAX_PORTLET_SHORT_TITLE) ||

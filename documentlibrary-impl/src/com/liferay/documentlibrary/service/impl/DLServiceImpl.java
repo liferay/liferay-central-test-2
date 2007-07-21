@@ -36,9 +36,6 @@ import com.liferay.util.GetterUtil;
 
 import java.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DLServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -239,7 +236,5 @@ public class DLServiceImpl implements DLService {
 			companyId, portletId, groupId, repositoryId, newRepositoryId,
 			fileName);
 	}
-
-	private static Log _log = LogFactory.getLog(DLServiceImpl.class);
 
 }

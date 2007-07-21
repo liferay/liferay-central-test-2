@@ -1262,12 +1262,6 @@ public class JournalArticleLocalServiceImpl
 			approved = false;
 		}
 
-		boolean expired = oldArticle.isExpired();
-
-		if (incrementVersion) {
-			expired = false;
-		}
-
 		article.setModifiedDate(now);
 		article.setTitle(title);
 		article.setDescription(description);

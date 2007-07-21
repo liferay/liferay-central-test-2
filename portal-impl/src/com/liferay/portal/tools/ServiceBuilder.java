@@ -2483,8 +2483,6 @@ public class ServiceBuilder {
 			EntityColumn col = (EntityColumn)columnList.get(i);
 
 			if (col.isCollection() && col.isMappingManyToMany()) {
-				Entity tempEntity = getEntity(col.getEJBName());
-
 				sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 			}
 		}

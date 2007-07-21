@@ -171,7 +171,7 @@ public class JCRHook extends BaseHook {
 		try {
 			session = JCRFactoryUtil.createSession();
 
-			Node rootNode = getRootNode(session, companyId);
+			getRootNode(session, companyId);
 
 			session.save();
 		}

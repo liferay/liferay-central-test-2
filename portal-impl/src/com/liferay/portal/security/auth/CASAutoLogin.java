@@ -191,9 +191,6 @@ public class CASAutoLogin implements AutoLogin {
 
 				Attributes attrs = ctx.getAttributes(binding.getName());
 
-				Properties userMappings =
-					PortalLDAPUtil.getUserMappings(companyId);
-
 				Attribute emailAddressAttr = attrs.get("mail");
 
 				String emailAddress = StringPool.BLANK;
