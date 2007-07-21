@@ -10,15 +10,12 @@
 	<classpathentry kind="lib" path="lib/development/j2h.jar"/>
 	<classpathentry kind="lib" path="lib/development/jaas.jar"/>
 	<classpathentry kind="lib" path="lib/development/jalopy.jar"/>
-	<classpathentry kind="lib" path="lib/development/jce.jar"/>
-	<classpathentry kind="lib" path="lib/development/jdbc.jar"/>
 	<classpathentry kind="lib" path="lib/development/jms.jar"/>
 	<classpathentry kind="lib" path="lib/development/jndi.jar"/>
 	<classpathentry kind="lib" path="lib/development/jnet.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-impl.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-portlet.jar"/>
-	<classpathentry kind="lib" path="lib/development/jsse.jar"/>
 	<classpathentry kind="lib" path="lib/development/jta.jar"/>
 	<classpathentry kind="lib" path="lib/development/junit.jar"/>
 	<classpathentry kind="lib" path="lib/development/jymsg.jar"/>
