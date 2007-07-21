@@ -496,7 +496,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				defaultUserId, new ArrayList(), new ArrayList(),
 				new ArrayList(), new ArrayList(), groups, roles);
 
-			putBag(guestGroup.getGroupId(), bag);
+			putBag(GUEST_GROUP_BAG_ID, bag);
 		}
 
 		try {
