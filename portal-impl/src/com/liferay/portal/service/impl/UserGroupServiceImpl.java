@@ -67,32 +67,50 @@ public class UserGroupServiceImpl
 			user.getUserId(), user.getCompanyId(), name, description);
 	}
 
-	public void deleteUserGroup(long groupId, long userGroupId)
+	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
-			getPermissionChecker(), groupId, userGroupId, ActionKeys.DELETE);
+			getPermissionChecker(), userGroupId, ActionKeys.DELETE);
 
 		UserGroupLocalServiceUtil.deleteUserGroup(userGroupId);
 	}
 
-	public UserGroup getUserGroup(long groupId, long userGroupId)
+	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
 		if (!UserGroupPermission.contains(
-				getPermissionChecker(), groupId, userGroupId,
-				ActionKeys.VIEW) &&
+				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
 			!UserGroupPermission.contains(
-				getPermissionChecker(), groupId, userGroupId,
-				ActionKeys.UPDATE) &&
+				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
 			!UserGroupPermission.contains(
-				getPermissionChecker(), groupId, userGroupId,
-				ActionKeys.ASSIGN_USERS)) {
+				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
 
 			throw new PrincipalException();
 		}
 
 		return UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+	}
+
+	public UserGroup getUserGroup(String name)
+		throws PortalException, SystemException {
+
+		UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+			getUser().getCompanyId(), name);
+
+		long userGroupId = userGroup.getUserGroupId();
+
+		if (!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
+			!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
+			!UserGroupPermission.contains(
+				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
+
+			throw new PrincipalException();
+		}
+
+		return userGroup;
 	}
 
 	public List getUserUserGroups(long userId)
@@ -112,11 +130,11 @@ public class UserGroupServiceImpl
 	}
 
 	public UserGroup updateUserGroup(
-			long groupId, long userGroupId, String name, String description)
+			long userGroupId, String name, String description)
 		throws PortalException, SystemException {
 
 		UserGroupPermission.check(
-			getPermissionChecker(), groupId, userGroupId, ActionKeys.UPDATE);
+			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
 		return UserGroupLocalServiceUtil.updateUserGroup(
 			getUser().getCompanyId(), userGroupId, name, description);

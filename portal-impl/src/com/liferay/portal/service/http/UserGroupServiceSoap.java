@@ -103,10 +103,10 @@ public class UserGroupServiceSoap {
 		}
 	}
 
-	public static void deleteUserGroup(long groupId, long userGroupId)
+	public static void deleteUserGroup(long userGroupId)
 		throws RemoteException {
 		try {
-			UserGroupServiceUtil.deleteUserGroup(groupId, userGroupId);
+			UserGroupServiceUtil.deleteUserGroup(userGroupId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -115,10 +115,22 @@ public class UserGroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserGroupSoap getUserGroup(
-		long groupId, long userGroupId) throws RemoteException {
+		long userGroupId) throws RemoteException {
 		try {
-			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(groupId,
-					userGroupId);
+			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(userGroupId);
+
+			return com.liferay.portal.model.UserGroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.UserGroupSoap getUserGroup(
+		java.lang.String name) throws RemoteException {
+		try {
+			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(name);
 
 			return com.liferay.portal.model.UserGroupSoap.toSoapModel(returnValue);
 		}
@@ -153,11 +165,11 @@ public class UserGroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserGroupSoap updateUserGroup(
-		long groupId, long userGroupId, java.lang.String name,
-		java.lang.String description) throws RemoteException {
+		long userGroupId, java.lang.String name, java.lang.String description)
+		throws RemoteException {
 		try {
-			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.updateUserGroup(groupId,
-					userGroupId, name, description);
+			com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.updateUserGroup(userGroupId,
+					name, description);
 
 			return com.liferay.portal.model.UserGroupSoap.toSoapModel(returnValue);
 		}

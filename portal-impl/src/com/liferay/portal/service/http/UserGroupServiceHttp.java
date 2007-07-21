@@ -151,14 +151,13 @@ public class UserGroupServiceHttp {
 	}
 
 	public static void deleteUserGroup(HttpPrincipal httpPrincipal,
-		long groupId, long userGroupId)
+		long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-			Object paramObj1 = new LongWrapper(userGroupId);
+			Object paramObj0 = new LongWrapper(userGroupId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
-					"deleteUserGroup", new Object[] { paramObj0, paramObj1 });
+					"deleteUserGroup", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -182,14 +181,51 @@ public class UserGroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
-		HttpPrincipal httpPrincipal, long groupId, long userGroupId)
+		HttpPrincipal httpPrincipal, long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-			Object paramObj1 = new LongWrapper(userGroupId);
+			Object paramObj0 = new LongWrapper(userGroupId);
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
-					"getUserGroup", new Object[] { paramObj0, paramObj1 });
+					"getUserGroup", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.UserGroup)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.UserGroup getUserGroup(
+		HttpPrincipal httpPrincipal, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = name;
+
+			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
+					"getUserGroup", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {
@@ -286,28 +322,27 @@ public class UserGroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
-		HttpPrincipal httpPrincipal, long groupId, long userGroupId,
-		java.lang.String name, java.lang.String description)
+		HttpPrincipal httpPrincipal, long userGroupId, java.lang.String name,
+		java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-			Object paramObj1 = new LongWrapper(userGroupId);
-			Object paramObj2 = name;
+			Object paramObj0 = new LongWrapper(userGroupId);
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = description;
+			Object paramObj2 = description;
 
 			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserGroupServiceUtil.class.getName(),
 					"updateUserGroup",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {

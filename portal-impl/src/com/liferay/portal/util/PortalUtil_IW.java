@@ -104,6 +104,11 @@ public class PortalUtil_IW {
 		return PortalUtil.getCompanyIdByWebId(webId);
 	}
 
+	public java.lang.String getCurrentURL(
+		javax.servlet.http.HttpServletRequest req) {
+		return PortalUtil.getCurrentURL(req);
+	}
+
 	public java.util.Date getDate(int month, int day, int year,
 		com.liferay.portal.PortalException pe)
 		throws com.liferay.portal.PortalException {

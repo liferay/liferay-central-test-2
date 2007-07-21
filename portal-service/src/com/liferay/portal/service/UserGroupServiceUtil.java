@@ -65,20 +65,29 @@ public class UserGroupServiceUtil {
 		return userGroupService.addUserGroup(name, description);
 	}
 
-	public static void deleteUserGroup(long groupId, long userGroupId)
+	public static void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
-		userGroupService.deleteUserGroup(groupId, userGroupId);
+		userGroupService.deleteUserGroup(userGroupId);
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
-		long groupId, long userGroupId)
+		long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
-		return userGroupService.getUserGroup(groupId, userGroupId);
+		return userGroupService.getUserGroup(userGroupId);
+	}
+
+	public static com.liferay.portal.model.UserGroup getUserGroup(
+		java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserGroupService userGroupService = UserGroupServiceFactory.getService();
+
+		return userGroupService.getUserGroup(name);
 	}
 
 	public static java.util.List getUserUserGroups(long userId)
@@ -97,13 +106,11 @@ public class UserGroupServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
-		long groupId, long userGroupId, java.lang.String name,
-		java.lang.String description)
+		long userGroupId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
-		return userGroupService.updateUserGroup(groupId, userGroupId, name,
-			description);
+		return userGroupService.updateUserGroup(userGroupId, name, description);
 	}
 }

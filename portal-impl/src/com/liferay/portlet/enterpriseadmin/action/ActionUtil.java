@@ -253,17 +253,12 @@ public class ActionUtil {
 	public static void getUserGroup(HttpServletRequest req)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getPortletGroupId();
-
 		long userGroupId = ParamUtil.getLong(req, "userGroupId");
 
 		UserGroup userGroup = null;
 
 		if (userGroupId > 0) {
-			userGroup = UserGroupServiceUtil.getUserGroup(groupId, userGroupId);
+			userGroup = UserGroupServiceUtil.getUserGroup(userGroupId);
 		}
 
 		req.setAttribute(WebKeys.USER_GROUP, userGroup);

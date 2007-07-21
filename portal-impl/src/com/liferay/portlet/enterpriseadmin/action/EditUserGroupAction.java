@@ -127,8 +127,7 @@ public class EditUserGroupAction extends PortletAction {
 			ParamUtil.getString(req, "deleteUserGroupIds"), 0L);
 
 		for (int i = 0; i < deleteUserGroupIds.length; i++) {
-			UserGroupServiceUtil.deleteUserGroup(
-				themeDisplay.getPortletGroupId(), deleteUserGroupIds[i]);
+			UserGroupServiceUtil.deleteUserGroup(deleteUserGroupIds[i]);
 		}
 	}
 
@@ -152,8 +151,7 @@ public class EditUserGroupAction extends PortletAction {
 			// Update user group
 
 			UserGroupServiceUtil.updateUserGroup(
-				themeDisplay.getPortletGroupId(), userGroupId, name,
-				description);
+				userGroupId, name, description);
 		}
 	}
 

@@ -85,17 +85,24 @@ public class UserGroupServiceJSON {
 		return UserGroupJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteUserGroup(long groupId, long userGroupId)
+	public static void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		UserGroupServiceUtil.deleteUserGroup(groupId, userGroupId);
+		UserGroupServiceUtil.deleteUserGroup(userGroupId);
 	}
 
-	public static JSONObject getUserGroup(long groupId, long userGroupId)
+	public static JSONObject getUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(groupId,
-				userGroupId);
+		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(userGroupId);
+
+		return UserGroupJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getUserGroup(java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(name);
 
 		return UserGroupJSONSerializer.toJSONObject(returnValue);
 	}
@@ -114,12 +121,12 @@ public class UserGroupServiceJSON {
 		UserGroupServiceUtil.unsetGroupUserGroups(groupId, userGroupIds);
 	}
 
-	public static JSONObject updateUserGroup(long groupId, long userGroupId,
+	public static JSONObject updateUserGroup(long userGroupId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.updateUserGroup(groupId,
-				userGroupId, name, description);
+		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.updateUserGroup(userGroupId,
+				name, description);
 
 		return UserGroupJSONSerializer.toJSONObject(returnValue);
 	}
