@@ -144,16 +144,8 @@
 
 /* ---------- Portlet wrapper and icons ---------- */
 
-.green .portlet-topper {
-	background-image: url(../../images/color_schemes/green/portlet/header_bg.gif);
-}
-
-.green .portlet-title {
-	background-image: url(../../images/color_schemes/green/portlet/header_bg.gif);
-}
-
-.green .portlet-content {
-	border-color: #63d07c;
+.green .portlet, .green .portlet-topper, .green .portlet-content, .green .portlet-title {
+	background-image: url(../../images/color_schemes/green/portlet/portlet_bg.png);
 }
 
 /* ---------- Drag and drop ---------- */

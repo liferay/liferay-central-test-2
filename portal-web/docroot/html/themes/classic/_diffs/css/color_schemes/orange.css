@@ -158,16 +158,8 @@
 
 /* ---------- Portlet wrapper and icons ---------- */
 
-.orange .portlet-topper {
-	background-image: url(../../images/color_schemes/orange/portlet/header_bg.gif);
-}
-
-.orange .portlet-title {
-	background-image: url(../../images/color_schemes/orange/portlet/header_bg.gif);
-}
-
-.orange .portlet-content {
-	border-color: #ff9733;
+.orange .portlet, .orange .portlet-topper, .orange .portlet-content, .orange .portlet-title {
+	background-image: url(../../images/color_schemes/orange/portlet/portlet_bg.png);
 }
 
 /* ---------- Drag and drop ---------- */
