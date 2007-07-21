@@ -2012,6 +2012,7 @@ votes=Голоса
 voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-has-expired=Предупреждение! В связи с неактивностью, ваша сессия закрыта.
 warning-due-to-inactivity-your-session-will-expire=Предупреждение! В связи с неактивностью, будет закрыта через {0} минут(у)(ы) на {1} {2}. Вы желаете продлить вашу сессию на {3} минут(у)(ы)?
+warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 website=Сайт
 websites=Сайты
 wedding=Wedding

@@ -2357,6 +2357,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Möjigheten att rösa i denna 
 waiting-on-sibling-tokens-to-complete=Väntar på att närstående markörer avslutas
 warning-due-to-inactivity-your-session-has-expired=Varning! Din session har upphört på grund av inaktivitet.
 warning-due-to-inactivity-your-session-will-expire=Varning! På grund av inaktivitet kommer din session att upphöra om {0} minut(er) på {1} {2}. Vill du förlänga din session med {3} minut(er)?
+warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 website=Webbsida
 websites=Webbsidor
 wedding=Bröllop

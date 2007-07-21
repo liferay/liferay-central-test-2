@@ -2718,6 +2718,7 @@ warning-due-to-inactivity-your-session-has-expired=Varoitus! Istuntosi on vanhen
 warning-due-to-inactivity-your-session-will-expire=Varoitus! Istuntosi vanhenee {0} minuutissa {1}{2} toimettomuuden vuoksi. Haluatko jatkaa istuntoasi vielä seuraavat {3} minuuttia?
 warning-time-help=Tämä määrittää kuinka kauan ennen salasanan vanhenemista käyttäjälle ilmoitetaan siitä.
 warning-time=Varoitus aika
+warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=Web ID
 webdav-url=WebDAV osoite
 website=WWW-sivusto

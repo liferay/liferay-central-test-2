@@ -38,81 +38,11 @@
 	sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
 	%>
 
-	<c:if test="<%= (themeDisplay.isSignedIn()) && (sessionTimeoutWarning > 0) && (timeoutDiff > 0) %>">
-		var newTime = new Date().getTime();
-
-		jQuery.cookie('SESSION_STATE', newTime);
-
-		setTimeout("checkSessionState()", <%= timeoutDiff %>);
-	</c:if>
-
-	function checkSessionState() {
-		var currentTime = new Date().getTime();
-		var sessionState = jQuery.cookie('SESSION_STATE');
-
-		if (sessionState == 'expired') {
-			sessionHasExpired();
+	Liferay.Session.init(
+		{
+			autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
+			timeout: <%= sessionTimeout %>,
+			timeoutWarning: <%= sessionTimeoutWarning %>
 		}
-		else {
-			var timeDiff = currentTime - sessionState;
-
-			if ((timeDiff + 100) >= <%= timeoutDiff%>) {
-				openSessionWarning();
-			}
-			else {
-				var newWaitTime = (<%= sessionTimeoutMinute %> - timeDiff) + 10000;
-
-				setTimeout("checkSessionState()", newWaitTime);
-			}
-		}
-	}
-
-	function extendSession() {
-		loadPage("<%= themeDisplay.getPathMain() %>/portal/extend_session");
-
-		var newTime = new Date().getTime();
-
-		jQuery.cookie('SESSION_STATE', newTime);
-
-		setTimeout("openSessionWarning()", <%= timeoutDiff %>);
-	}
-
-	function openSessionWarning() {
-		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>">
-				extendSession();
-			</c:when>
-			<c:otherwise>
-				var message = Liferay.Popup({
-					modal: true,
-					width: 300
-				});
-
-				var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
-
-				AjaxUtil.update(url, message);
-
-				setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
-			</c:otherwise>
-		</c:choose>
-	}
-
-	function sessionHasExpired() {
-		var warningText = document.getElementById("session_warning_text");
-
-		jQuery.cookie('SESSION_STATE', 'expired');
-
-		if (warningText) {
-			warningText.innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
-
-			document.getElementById("ok_btn").onclick = function() {
-				Liferay.Popup.close(this);
-				window.location = "<%= themeDisplay.getURLHome() %>";
-			};
-
-			document.getElementById("cancel_btn").style.display = "none";
-
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");
-		}
-	}
+	);
 </script>

@@ -486,6 +486,49 @@ ul.gamma .tree-item-hover {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/collapse_all.png) no-repeat 0 50%;
 }
 
+/* ---------- Portal ---------- */
+
+/* ---------- Generic styling ---------- */
+
+.popup-alert-notice, .popup-alert-warning {
+	background: #ffc url() no-repeat 5px 50%;
+	border-bottom: 1px solid;
+	font-size: 1.1em;
+	left: 0;
+	padding: 10px;
+	padding-left: 25px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10000;
+}
+
+.popup-alert-notice {
+	background-color: #ffc;
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/alert.gif);
+	border-bottom-color: #fc0;
+}
+
+.popup-alert-warning {
+	background-color: #fcc;
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/error.gif);
+	border-bottom-color: #f00;
+	font-weight: bold;
+}
+
+.ie6 .popup-alert-notice, .ie6 .popup-alert-warning { 
+	bottom: auto;
+  	left: expression( ( LFR_IGNORE_ME2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) + 'px' );
+  	position: absolute;
+	right: auto; 
+	top: expression( ( LFR_IGNORE_ME = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) + 'px' );
+}
+
+.popup-alert-notice .countdown-timer {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
 /* ---------- Portlets ---------- */
 
 /* ---------- Generic styling ---------- */

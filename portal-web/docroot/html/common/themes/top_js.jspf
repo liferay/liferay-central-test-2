@@ -36,6 +36,9 @@
 		getGroupId: function() {
 			return "<%= themeDisplay.getPortletGroupId() %>";
 		},
+		getUserId: function() {
+			return "<%= themeDisplay.getUserId() %>";
+		},
 
 		<c:if test="<%= layout != null %>">
 			getLayoutId: function() {
@@ -55,6 +58,9 @@
 		isFreeformLayout: function() {
 			return <%= themeDisplay.isFreeformLayout() %>;
 		},
+		isSignedIn: function() {
+			return <%= themeDisplay.isSignedIn() %>;
+		},
 		getPathContext: function() {
 			return "<%= themeDisplay.getPathContext() %>";
 		},
@@ -69,6 +75,9 @@
 		},
 		getURLHome: function() {
 			return "<%= themeDisplay.getURLHome() %>";
+		},
+		getSessionId: function() {
+			return "<%= session.getId() %>";
 		}
 	};
 

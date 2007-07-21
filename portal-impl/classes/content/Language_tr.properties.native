@@ -1018,6 +1018,7 @@ vote=Oylama
 votes=Oylamalar
 voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-will-expire=Uyarı! {1} bağlantınız işlem yapmadığınız için {2}'den {0} dakika sonra kesilecektir. Bağlantınızın süresini {3} dakika uzatmak istermisiniz?
+warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 website=Site
 wedding=Evlilik
 wednesday-abbreviation=Ç
