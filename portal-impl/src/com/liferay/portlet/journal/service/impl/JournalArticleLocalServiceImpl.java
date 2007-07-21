@@ -1240,6 +1240,7 @@ public class JournalArticleLocalServiceImpl
 
 			article = JournalArticleUtil.create(id);
 
+			article.setResourcePrimKey(oldArticle.getResourcePrimKey());
 			article.setGroupId(oldArticle.getGroupId());
 			article.setCompanyId(user.getCompanyId());
 			article.setUserId(user.getUserId());
