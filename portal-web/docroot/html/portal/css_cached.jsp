@@ -516,11 +516,11 @@ ul.gamma .tree-item-hover {
 	font-weight: bold;
 }
 
-.ie6 .popup-alert-notice, .ie6 .popup-alert-warning { 
+.ie6 .popup-alert-notice, .ie6 .popup-alert-warning {
 	bottom: auto;
   	left: expression( ( LFR_IGNORE_ME2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) + 'px' );
   	position: absolute;
-	right: auto; 
+	right: auto;
 	top: expression( ( LFR_IGNORE_ME = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) + 'px' );
 }
 

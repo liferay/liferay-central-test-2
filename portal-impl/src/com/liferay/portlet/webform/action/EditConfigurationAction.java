@@ -100,7 +100,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
 		String fieldType = ParamUtil.getString(req, "fieldType" + i);
-		boolean fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i, false);
+		boolean fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
 		String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
 
 		while ((i == 1) || (fieldLabel.trim().length() > 0)) {
@@ -113,7 +113,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
 			fieldType = ParamUtil.getString(req, "fieldType" + i);
-			fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i, false);
+			fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
 			fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
 		}
 
