@@ -34,11 +34,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("require-captcha",
 
 <h3><%= title %></h3>
 
-<br />
-
-<%= description %>
-
-<br /><br />
+<p class="liferay-web-form-descr"><%= description %></p>
 
 <liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
 
@@ -52,6 +48,7 @@ int i = 1;
 String fieldName = "field" + i;
 String fieldLabel = prefs.getValue("fieldLabel" + i, "");
 String fieldValue = ParamUtil.getString(request, fieldName);
+boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
 
 while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 
@@ -60,46 +57,64 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
     }
 
 	String type = prefs.getValue("fieldType" + i, "text");
+
 %>
 
-	<label for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label><br />
-
 	<c:choose>
+	
+		<c:when test='<%= type.equals("paragraph") %>'>
+			<p class="liferay-webform"><%= prefs.getValue("fieldOptions" + i, "unknown") %></p>
+		</c:when>
+		
 		<c:when test='<%= type.equals("text") %>'>
-			<input class="liferay-input-text" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
+			<label class="liferay-web-form<c:if test="<%=fieldOptional %>"> optional</c:if>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<input class="liferay-input-text<c:if test="<%=fieldOptional %>"> optional</c:if>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
 		</c:when>
+		
 		<c:when test='<%= type.equals("textarea") %>'>
-			<textarea class="liferay-textarea" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
+			<label class="liferay-web-form<c:if test="<%=fieldOptional %>"> optional</c:if>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<textarea class="liferay-textarea<c:if test="<%=fieldOptional %>"> optional</c:if>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
 		</c:when>
+		
+		<c:when test='<%= type.equals("checkbox") %>'>
+			<label class="liferay-web-form<c:if test="<%=fieldOptional %>"> optional</c:if>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<div class="liferay-input-checkbox<c:if test='<%=fieldOptional %>'> optional</c:if>">
+				<input name="<portlet:namespace /><%= fieldName %>" type="checkbox"<c:if test="<%= fieldValue.length() > 0 %>"> checked="true"</c:if> />
+			</div>
+		</c:when>
+		
+		<c:when test='<%= type.equals("radio") %>'>
+			<label class="liferay-web-form<c:if test="<%=fieldOptional %>"> optional</c:if>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<div class="liferay-input-radio<c:if test='<%=fieldOptional %>'> optional</c:if>">
+				<% String[] options = WebFormUtil.split(prefs.getValue("fieldOptions" + i, "unknown")); 	%>
+				<% for (int j = 0; j < options.length; j++) {	%>
+					<div class="liferay-input-radiobutton">
+						<input type="radio" name="<portlet:namespace /><%= fieldName %>" <%= fieldValue.equals(options[j]) ? "checked=\"true\"" : "" %> value="<%= options[j] %>" /><%= options[j] %>
+					</div>
+				<% } %>
+			</div>
+		</c:when>
+		
 		<c:when test='<%= type.equals("options") %>'>
-
-			<%
-			String[] options = WebFormUtil.split(prefs.getValue("fieldOptions" + i, "unknown"));
-			%>
-
-			<select name="<portlet:namespace /><%= fieldName %>">
-
-			<%
-			for (int j = 0; j < options.length; j++) {
-			%>
-
-				<option <%= fieldValue.equals(options[j]) ? "selected" : "" %> value="<%= options[j] %>"><%= options[j] %></option>
-
-			<%
-			}
-			%>
-
-			</select>
+			<label class="liferay-web-form<c:if test="<%=fieldOptional %>"> optional</c:if>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+			<div class="liferay-input-radio<c:if test='<%=fieldOptional %>'> optional</c:if>">
+				<% String[] options = WebFormUtil.split(prefs.getValue("fieldOptions" + i, "unknown")); 	%>
+				<select name="<portlet:namespace /><%= fieldName %>">
+					<% for (int j = 0; j < options.length; j++) {	%>
+						<option <%= fieldValue.equals(options[j]) ? "selected" : "" %> value="<%= options[j] %>"><%= options[j] %></option>
+					<% } %>
+				</select>
+			</div>
 		</c:when>
+		
 	</c:choose>
-
-	<br /><br />
 
 <%
     i++;
 
     fieldName = "field" + i;
     fieldLabel = prefs.getValue("fieldLabel" + i, "");
+    fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
     fieldValue = ParamUtil.getString(request, fieldName);
 }
 %>
@@ -112,6 +127,8 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 	<liferay-ui:captcha url="<%= captchaURL %>" />
 </c:if>
 
-<input type="submit" value="<liferay-ui:message key="send" />" />
+<div class="liferay-web-form-submit">
+	<input type="submit" value="<liferay-ui:message key="send" />" />
+</div>
 
 </form>

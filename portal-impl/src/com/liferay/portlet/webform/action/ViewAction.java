@@ -173,8 +173,11 @@ public class ViewAction extends PortletAction {
 		for (int i = 1; i < 10; i++) {
 			String fieldLabel = prefs.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
-
-			if ((Validator.isNotNull(fieldLabel)) &&
+			boolean fieldOptional = GetterUtil.getBoolean(
+					prefs.getValue("fieldOptional" + i, StringPool.BLANK), false);
+				
+			if ((!fieldOptional) &&
+				(Validator.isNotNull(fieldLabel)) &&
 				(Validator.isNull((String)fieldValues.get(i - 1)))) {
 
 				return false;

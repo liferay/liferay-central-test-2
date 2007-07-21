@@ -85,6 +85,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
     String fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
     String fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
+    boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
     String fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
 
     while ((i == 1) || (fieldLabel.trim().length() > 0)) {
@@ -95,7 +96,15 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
            <div class="ctrl-holder">
                <label for="<portlet:namespace/>fieldLabel<%= i %>"><liferay-ui:message key="name" /></label>
-               <input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" />
+               <input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" /><br />
+               <c:choose>
+	               <c:when test="<%= fieldType.equals("paragraph") %>">
+		               <input type="hidden" name="<portlet:namespace/>fieldOptional<%= i %>" value="on" />
+	               </c:when>
+	               <c:otherwise>
+		               <input type="checkbox" name="<portlet:namespace/>fieldOptional<%= i %>" <c:if test="<%=fieldOptional %>">checked</c:if> /> <liferay-ui:message key="optional" />
+	               </c:otherwise>
+               </c:choose>
            </div>
 
            <div class="ctrl-holder">
@@ -105,16 +114,19 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
                        <option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
                        <option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
                        <option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
+                       <option <%= (fieldType.equals("radio")) ? "selected" : "" %> value="radio"><liferay-ui:message key="radiobuttons" /></option>
+                       <option <%= (fieldType.equals("paragraph")) ? "selected" : "" %> value="paragraph"><liferay-ui:message key="paragraph" /></option>
+                       <option <%= (fieldType.equals("checkbox")) ? "selected" : "" %> value="checkbox"><liferay-ui:message key="checkbox" /></option>
                </select>
            </div>
 
            <div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= i %>">
 
            <label for="<portlet:namespace/>fieldOptions<%= i %>"><liferay-ui:message key="options" /></label>
+           <span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span>
 
-           <input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" type="text" size="50" value="<%= fieldOptions %>" />
-
-           (<liferay-ui:message key="add-options-separated-by-commas" />)
+           <textarea class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" rows="1" cols="50" style="width:auto; height:auto;"><%= fieldOptions %></textarea>
+           
            </div>
 
         </fieldset>
@@ -123,6 +135,7 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 
         fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
         fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
+        fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
         fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
     }
     %>
@@ -151,9 +164,17 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
                                var div = select.parent().next();
                                var value = select.find('option:selected').val();
 
-                               if (value == 'options') {
+                               if (value == 'options' || value == 'radio') {
+                                       div.children().show();
                                        div.show();
-                               } else {
+                               } 
+                               else if (value == 'paragraph') {
+                               			// Show just the textarea, not the labels since they are about multiple choise inputs.
+                                       div.children().hide();
+                                       div.children(".<portlet:namespace />input-field").show();
+                                       div.show();
+                               } 
+                               else {
                                        div.hide();
                                }
                        };
