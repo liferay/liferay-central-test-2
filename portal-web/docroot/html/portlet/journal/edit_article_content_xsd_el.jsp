@@ -113,7 +113,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 			<br />
 		</c:if>
 
-		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-color: <%= colorScheme.getPortletMenuBg() %>; border-width: 1px; border-style: dashed; padding: 4px;">
+		<table class="liferay-table">
 		<tr>
 			<c:if test="<%= depth.intValue() > 0 %>">
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= depth.intValue() * 50 %>" /></td>
