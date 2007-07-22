@@ -119,6 +119,26 @@ public class SubscriptionLocalServiceUtil {
 			className, classPK);
 	}
 
+	public static java.util.List getSubscriptions(long companyId, long userId,
+		java.lang.String className, int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getSubscriptions(companyId, userId,
+			className, begin, end);
+	}
+
+	public static int getSubscriptionsCount(long companyId, long userId,
+		java.lang.String className)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getSubscriptionsCount(companyId,
+			userId, className);
+	}
+
 	public static java.util.List getSubscriptions(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
