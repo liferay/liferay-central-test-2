@@ -79,10 +79,16 @@ public interface MBThreadLocalService {
 	public java.util.List getGroupThreads(long groupId, long userId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
+	public java.util.List getGroupSubscribedThreads(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public int getGroupThreadsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupThreadsCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupSubscribedThreadsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread(

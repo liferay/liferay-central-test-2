@@ -34,7 +34,7 @@ tabs1URL.setParameter("struts_action", "/message_boards/view");
 String tabs1Names = "categories,recent-posts,statistics";
 
 if (themeDisplay.isSignedIn()) {
-	tabs1Names = "categories,my-posts,recent-posts,statistics";
+	tabs1Names = "categories,my-posts,my-subscriptions,recent-posts,statistics";
 
 	if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) {
 		tabs1Names += ",banned-users";

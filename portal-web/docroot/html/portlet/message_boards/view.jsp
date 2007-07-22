@@ -376,12 +376,12 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			</script>
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("recent-posts") %>'>
+	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("recent-posts") || tabs1.equals("my-subscriptions") %>'>
 
 		<%
 		long groupThreadsUserId = 0;
 
-		if (tabs1.equals("my-posts") && themeDisplay.isSignedIn()) {
+		if ((tabs1.equals("my-posts") || tabs1.equals("my-subscriptions")) && themeDisplay.isSignedIn()) {
 			groupThreadsUserId = user.getUserId();
 		}
 
@@ -396,14 +396,26 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
+		List results = null;
+		
+		if (tabs1.equals("my-subscriptions")) {
+			int total = MBThreadLocalServiceUtil.getGroupSubscribedThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
 
-		searchContainer.setTotal(total);
+			searchContainer.setTotal(total);
+			
+			results = MBThreadLocalServiceUtil.getGroupSubscribedThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
-		List results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
+			searchContainer.setResults(results);			
+		} else {
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
 
-		searchContainer.setResults(results);
+			searchContainer.setTotal(total);
+			
+			results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
+			searchContainer.setResults(results);
+		}
+		
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {

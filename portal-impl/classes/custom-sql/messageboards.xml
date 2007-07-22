@@ -133,4 +133,47 @@
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countSubscriptionsByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.threadId = MBThread.threadId)
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId)
+			INNER JOIN
+				Subscription ON
+					(Subscription.classPK = MBThread.threadId AND Subscription.classNameId = ?)
+			WHERE
+				(MBCategory.groupId = ?) AND
+				(Subscription.userId = ?)
+		]]>
+	</sql>	
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findSubscriptionsByG_U">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBThread.*}
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.threadId = MBThread.threadId)
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId)
+			INNER JOIN
+				Subscription ON
+					(Subscription.classPK = MBThread.threadId AND Subscription.classNameId = ?)
+			WHERE
+				(MBCategory.groupId = ?) AND
+				(Subscription.userId = ?)
+			ORDER BY
+				MBThread.priority DESC,
+				MBThread.lastPostDate DESC
+		]]>
+	</sql>	
 </custom-sql>

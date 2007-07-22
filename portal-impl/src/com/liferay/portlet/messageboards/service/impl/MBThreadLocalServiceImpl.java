@@ -173,6 +173,17 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 	}
 
+	public List getGroupSubscribedThreads(long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		if (userId <= 0) {
+			return MBThreadFinder.findByGroupId(groupId, begin, end);
+		}
+		else {
+			return MBThreadFinder.findSubscriptionsByG_U(groupId, userId, begin, end);
+		}
+	}	
+	
 	public int getGroupThreadsCount(long groupId) throws SystemException {
 		return MBThreadFinder.countByGroupId(groupId);
 	}
@@ -187,6 +198,17 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			return MBThreadFinder.countByG_U(groupId, userId);
 		}
 	}
+	
+	public int getGroupSubscribedThreadsCount(long groupId, long userId)
+		throws SystemException {
+
+		if (userId <= 0) {
+			return MBThreadFinder.countByGroupId(groupId);
+		}
+		else {
+			return MBThreadFinder.countSubscriptionsByG_U(groupId, userId);
+		}
+	}	
 
 	public MBThread getThread(long threadId)
 		throws PortalException, SystemException {

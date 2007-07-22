@@ -26,6 +26,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -60,7 +62,13 @@ public class MBThreadFinder {
 
 	public static String FIND_BY_G_U =
 		MBThreadFinder.class.getName() + ".findByG_U";
-
+	
+	public static String COUNT_SUBSCRIPTIONS_BY_G_U =
+		MBThreadFinder.class.getName() + ".countSubscriptionsByG_U";
+	
+	public static String FIND_SUBSCRIPTIONS_BY_G_U =
+		MBThreadFinder.class.getName() + ".findSubscriptionsByG_U";
+	
 	public static int countByCategoryIds(List categoryIds)
 		throws SystemException {
 
@@ -180,6 +188,46 @@ public class MBThreadFinder {
 			HibernateUtil.closeSession(session);
 		}
 	}
+	
+	public static int countSubscriptionsByG_U(long groupId, long userId)
+		throws SystemException {
+
+		Session session = null;
+	
+		try {
+			session = HibernateUtil.openSession();
+	
+			String sql = CustomSQLUtil.get(COUNT_SUBSCRIPTIONS_BY_G_U);
+	
+			SQLQuery q = session.createSQLQuery(sql);
+	
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+	
+			QueryPos qPos = QueryPos.getInstance(q);
+	
+			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
+			qPos.add(groupId);
+			qPos.add(userId);
+	
+			Iterator itr = q.list().iterator();
+	
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+	
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+	
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}	
 
 	public static List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
@@ -238,6 +286,36 @@ public class MBThreadFinder {
 		}
 	}
 
+	public static List findSubscriptionsByG_U(long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+	
+		try {
+			session = HibernateUtil.openSession();
+	
+			String sql = CustomSQLUtil.get(FIND_SUBSCRIPTIONS_BY_G_U);
+	
+			SQLQuery q = session.createSQLQuery(sql);
+	
+			q.addEntity("MBThread", MBThreadImpl.class);
+	
+			QueryPos qPos = QueryPos.getInstance(q);
+	
+			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
+			qPos.add(groupId);
+			qPos.add(userId);
+	
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}	
+	
 	private static String _getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
