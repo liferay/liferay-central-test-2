@@ -1038,17 +1038,12 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_U_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="userId" />
-			<finder-column name="classNameId" />
-		</finder>		
 		<finder name="C_U_C_C" return-type="Subscription">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
-		</finder>		
+		</finder>
 	</entity>
 	<entity name="User" local-service="true" remote-service="true">
 

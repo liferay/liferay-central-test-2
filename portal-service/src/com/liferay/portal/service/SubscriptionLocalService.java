@@ -83,16 +83,6 @@ public interface SubscriptionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getSubscriptions(long companyId, long userId,
-		java.lang.String className, int begin, int end)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public int getSubscriptionsCount(long companyId, long userId,
-		java.lang.String className)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public java.util.List getSubscriptions(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 

@@ -111,36 +111,6 @@ public interface SubscriptionPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchSubscriptionException;
 
-	public java.util.List findByC_U_C(long companyId, long userId,
-		long classNameId) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_U_C(long companyId, long userId,
-		long classNameId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_U_C(long companyId, long userId,
-		long classNameId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Subscription findByC_U_C_First(
-		long companyId, long userId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchSubscriptionException;
-
-	public com.liferay.portal.model.Subscription findByC_U_C_Last(
-		long companyId, long userId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchSubscriptionException;
-
-	public com.liferay.portal.model.Subscription[] findByC_U_C_PrevAndNext(
-		long subscriptionId, long companyId, long userId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchSubscriptionException;
-
 	public com.liferay.portal.model.Subscription findByC_U_C_C(long companyId,
 		long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
@@ -173,9 +143,6 @@ public interface SubscriptionPersistence {
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_U_C(long companyId, long userId, long classNameId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByC_U_C_C(long companyId, long userId, long classNameId,
 		long classPK)
 		throws com.liferay.portal.SystemException, 
@@ -187,9 +154,6 @@ public interface SubscriptionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	public int countByC_U_C(long companyId, long userId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_U_C_C(long companyId, long userId, long classNameId,

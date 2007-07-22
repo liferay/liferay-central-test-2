@@ -240,7 +240,6 @@ create index IX_D7D6E87A on ShoppingOrder (number_);
 create index IX_B5F82C7A on ShoppingOrderItem (orderId);
 
 create index IX_786D171A on Subscription (companyId, classNameId, classPK);
-create index IX_216B7DEF on Subscription (companyId, userId, classNameId);
 create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classPK);
 create index IX_54243AFD on Subscription (userId);
 
