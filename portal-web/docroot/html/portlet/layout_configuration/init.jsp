@@ -27,3 +27,4 @@
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
 
 <%@ page import="java.util.MissingResourceException" %>
+<%@ page import="java.util.regex.*" %>
