@@ -96,10 +96,10 @@
 	}
 
 	function <portlet:namespace />insertEmail() {
-		var addy = prompt("Enter an email address:", "");
+		var addy = prompt("<liferay-ui:message key="enter-an-email-address" />:", "");
 
 		if (addy != null && addy != "") {
-			var name = prompt("Enter a name associated with the email:", "");
+			var name = prompt("<liferay-ui:message key="enter-a-name-associated-with-the-email" />:", "");
 
 			<portlet:namespace />resetSelection();
 
@@ -137,7 +137,7 @@
 	}
 
 	function <portlet:namespace />insertImage() {
-		var url = prompt("Enter a address for a picture:", "http://");
+		var url = prompt("<liferay-ui:message key="enter-a-address-for-a-picture" />:", "http://");
 
 		if (url != null && url != "") {
 			<portlet:namespace />resetSelection();
@@ -149,7 +149,7 @@
 		var list = "\n";
 		var entry;
 
-		while (entry = prompt("Enter a list item.  Click 'cancel' or leave blank to end the list.", "")) {
+		while (entry = prompt("<liferay-ui:message key="enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list" />", "")) {
 			if (entry == null || entry == "") {
 				break;
 			}
@@ -164,10 +164,10 @@
 	}
 
 	function <portlet:namespace />insertUrl() {
-		var url = prompt("Enter a address:", "http://");
+		var url = prompt("<liferay-ui:message key="enter-a-address" />:", "http://");
 
 		if (url != null) {
-			var title = prompt("Enter a title for the link:");
+			var title = prompt("<liferay-ui:message key="enter-a-title-for-the-link" />:");
 
 			if (title != null && title != "") {
 				<portlet:namespace />resetSelection();
@@ -263,7 +263,7 @@
 				<tr>
 					<td>
 					<select onChange="<portlet:namespace />insertTag('font', this[this.selectedIndex].value); this.selectedIndex = 0;">
-						<option selected value="Font">Font</option>
+						<option selected value="Font"><liferay-ui:message key="font" /></option>
 						<option value="Arial">Arial</option>
 						<option value="Comic Sans MS">Comic Sans MS</option>
 						<option value="Courier New">Courier New</option>
@@ -275,7 +275,7 @@
 					</td>
 					<td>
 					<select onChange="<portlet:namespace />insertTag('size', this[this.selectedIndex].value); this.selectedIndex = 0;">
-						<option selected value="Size">Size</option>
+						<option selected value="Size"><liferay-ui:message key="size" /></option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -286,26 +286,26 @@
 					</select>
 					</td>
 					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('b');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Bold" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/bold.png" title="Bold" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('i');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Italics" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/italic.png" title="Italics" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('u');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Underline" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/underline.png" title="Underline" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('s');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Strikethrough" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/strike.png" title="Strikethrough" vspace="0" width="18" /></div></td>
-					<td><div class="button" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><input type="hidden" id="fontColor" name="fontColor" value="" onchange="" /><img align="absmiddle" alt="Color" border="0" class="use-color-picker" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/color.png" title="Color" vspace="0" width="18" style="cursor: pointer;" /></input></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('b');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="bold" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/bold.png" title="<liferay-ui:message key="bold" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('i');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="italic" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/italic.png" title="<liferay-ui:message key="italic" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('u');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="underline" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/underline.png" title="<liferay-ui:message key="underline" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('s');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="striketrough" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/strike.png" title="<liferay-ui:message key="striketrough" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><input type="hidden" id="fontColor" name="fontColor" value="" onchange="" /><img align="absmiddle" alt="<liferay-ui:message key="color" />" border="0" class="use-color-picker" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/color.png" title="<liferay-ui:message key="color" />" vspace="0" width="18" style="cursor: pointer;" /></input></div></td>
 					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /></td>
-					<td><div class="button" onClick="<portlet:namespace />insertUrl();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Hyperlink" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/hyperlink.png" title="Hyperlink" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertEmail();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Email" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/email.png" title="Email" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertImage();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Image" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/image.png" title="Image" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertUrl();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="hyperlink" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/hyperlink.png" title="<liferay-ui:message key="hyperlink" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertEmail();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="email" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/email.png" title="<liferay-ui:message key="email" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertImage();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="image" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/image.png" title="<liferay-ui:message key="image" />" vspace="0" width="18" /></div></td>
 					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /></td>
-					<td><div class="button" onClick="<portlet:namespace />insertList('1');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Ordered List" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ordered_list.png" title="Ordered List" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertList();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Unordered List" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unordered_list.png" title="Unordered List" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertList('1');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="ordered-list" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ordered_list.png" title="<liferay-ui:message key="ordered-list" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertList();" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="unordered-list" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unordered_list.png" title="<liferay-ui:message key="unordered-list" />" vspace="0" width="18" /></div></td>
 					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('left');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Left" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/justify_left.png" title="Justify Left" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('center');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Center" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/justify_center.png" title="Justify Center" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('right');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Justify Right" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/justify_right.png" title="Justify Right" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('indent');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Indent" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/indent.png" title="Indent" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('left');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="justify-left" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/justify_left.png" title="<liferay-ui:message key="justify-left" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('center');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="justify-center" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/justify_center.png" title="<liferay-ui:message key="justify-center" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('right');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="justify-right" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/justify_right.png" title="<liferay-ui:message key="justify-right" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('indent');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="indent" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/indent.png" title="<liferay-ui:message key="indent" />" vspace="0" width="18" /></div></td>
 					<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /><span class="separator"></span><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/spacer.png" vspace="0" width="2" /></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('quote');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Quote" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/quote.png" title="Quote" vspace="0" width="18" /></div></td>
-					<td><div class="button" onClick="<portlet:namespace />insertTag('code');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="Code" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/code.png" title="Code" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('quote');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="quote" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/quote.png" title="<liferay-ui:message key="quote" />" vspace="0" width="18" /></div></td>
+					<td><div class="button" onClick="<portlet:namespace />insertTag('code');" onMouseDown="<portlet:namespace />buttonDown(this);" onMouseOut="<portlet:namespace />buttonOut(this);" onMouseOver="<portlet:namespace />buttonOver(this);"><img align="absmiddle" alt="<liferay-ui:message key="code" />" border="0" height="18" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/code.png" title="<liferay-ui:message key="code" />" vspace="0" width="18" /></div></td>
 				</tr>
 				</table>
 			</td>
