@@ -138,7 +138,7 @@ public class LanguageServlet extends HttpServlet {
 
 		res.setContentType(_CONTENT_TYPE);
 
-		ServletResponseUtil.write(res, value.getBytes());
+		ServletResponseUtil.write(res, value.getBytes("UTF-8"));
 	}
 
 	protected long getLastModified() {
