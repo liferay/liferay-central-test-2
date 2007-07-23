@@ -81,7 +81,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Html;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.StringUtil;
@@ -90,6 +89,7 @@ import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 
 import java.util.Collections;
 import java.util.Date;
@@ -116,6 +116,9 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import org.htmlparser.util.ParserException;
+import org.htmlparser.util.ParserUtils;
 
 /**
  * <a href="JournalArticleLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -1386,10 +1389,13 @@ public class JournalArticleLocalServiceImpl
 				Element dynamicContent = el.element("dynamic-content");
 
 				String text = dynamicContent.getText();
-
-				if (Validator.isNull(Html.stripHtml(text))) {
-					dynamicContent.setText(StringPool.BLANK);
-				}
+				try {
+					text = ParserUtils.trimTags( text, new String[] { "script" }, false, true );
+				} 
+				catch (ParserException e) { text = e.getLocalizedMessage(); }
+				catch (UnsupportedEncodingException e) { text = e.getLocalizedMessage(); }
+				
+				dynamicContent.setText(text);
 			}
 
 			format(
