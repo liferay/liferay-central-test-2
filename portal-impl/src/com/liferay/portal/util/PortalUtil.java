@@ -337,29 +337,33 @@ public class PortalUtil {
 	}
 
 	public static String getCurrentURL(HttpServletRequest req) {
-		String completeURL = (String)req.getAttribute(WebKeys.CURRENT_URL);
+		String currentURL = (String)req.getAttribute(WebKeys.CURRENT_URL);
 
-		if (completeURL == null) {
-			completeURL = Http.getCompleteURL(req);
+		if (currentURL == null) {
+			currentURL = ParamUtil.getString(req, "currentURL");
 
-			if ((Validator.isNotNull(completeURL)) &&
-				(completeURL.indexOf("j_security_check") == -1)) {
+			if (Validator.isNull(currentURL)) {
+				currentURL = Http.getCompleteURL(req);
 
-				completeURL = completeURL.substring(
-					completeURL.indexOf("://") + 3, completeURL.length());
+				if ((Validator.isNotNull(currentURL)) &&
+					(currentURL.indexOf("j_security_check") == -1)) {
 
-				completeURL = completeURL.substring(
-					completeURL.indexOf("/"), completeURL.length());
+					currentURL = currentURL.substring(
+						currentURL.indexOf("://") + 3, currentURL.length());
+
+					currentURL = currentURL.substring(
+						currentURL.indexOf("/"), currentURL.length());
+				}
 			}
 
-			if (Validator.isNull(completeURL)) {
-				completeURL = PortalUtil.getPathMain();
+			if (Validator.isNull(currentURL)) {
+				currentURL = PortalUtil.getPathMain();
 			}
 
-			req.setAttribute(WebKeys.CURRENT_URL, completeURL);
+			req.setAttribute(WebKeys.CURRENT_URL, currentURL);
 		}
 
-		return completeURL;
+		return currentURL;
 	}
 
 	public static Date getDate(

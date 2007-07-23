@@ -26,54 +26,6 @@ var loadingAnimation = new Image();
 
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImages() %>/progress_bar/loading_animation.gif";
 
-function addPortlet(plid, portletId, doAsUserId) {
-
-	<%
-	List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
-
-	List nonAjaxPortlets = new ArrayList();
-
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
-
-		if (!portlet.isAjaxable()) {
-			nonAjaxPortlets.add(portlet.getPortletId());
-		}
-	}
-
-	StringMaker portletList = new StringMaker();
-
-	for (int i = 0; i < nonAjaxPortlets.size(); i++) {
-		portletList.append("_");
-		portletList.append(nonAjaxPortlets.get(i));
-		portletList.append(":true");
-		portletList.append((i < nonAjaxPortlets.size() - 1) ? "," : "");
-	}
-	%>
-
-	var refreshPortletList = { <%= portletList.toString() %> };
-
-	if (refreshPortletList["_" + portletId]) {
-		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
-	}
-	else {
-		var loadingDiv = document.createElement("div");
-		var container = document.getElementById("layout-column_column-1");
-
-		if (container == null) {
-			return;
-		}
-
-		loadingDiv.className = "loading-animation";
-
-		container.appendChild(loadingDiv);
-
-		var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>";
-
-		addPortletHTML(queryString, loadingDiv);
-	}
-}
-
 function addPortletHTML(url, placeHolder) {
 	var addPortletReturn = function(html) {
 		var container = placeHolder.parentNode;
@@ -167,6 +119,36 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 	else {
 		self.focus();
 	}
+}
+
+function getRefreshPortletList() {
+
+	<%
+	List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+
+	List nonAjaxPortlets = new ArrayList();
+
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		if (!portlet.isAjaxable()) {
+			nonAjaxPortlets.add(portlet.getPortletId());
+		}
+	}
+
+	StringMaker portletList = new StringMaker();
+
+	for (int i = 0; i < nonAjaxPortlets.size(); i++) {
+		portletList.append("_");
+		portletList.append(nonAjaxPortlets.get(i));
+		portletList.append(":true");
+		portletList.append((i < nonAjaxPortlets.size() - 1) ? "," : "");
+	}
+	%>
+
+	var refreshPortletList = { <%= portletList.toString() %> };
+
+	return refreshPortletList;
 }
 
 function minimizePortlet(plid, portletId, restore, doAsUserId) {

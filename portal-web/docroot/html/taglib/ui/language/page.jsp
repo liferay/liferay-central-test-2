@@ -39,6 +39,7 @@ if (Validator.isNull(formAction)) {
 	portletURLImpl.setAnchor(false);
 
 	portletURLImpl.setParameter("struts_action", "/language/view");
+	portletURLImpl.setParameter("redirect", currentURL);
 
 	formAction = portletURLImpl.toString();
 }

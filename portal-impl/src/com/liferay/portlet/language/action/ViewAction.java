@@ -34,6 +34,7 @@ import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
 
 import java.util.List;
 import java.util.Locale;
@@ -104,7 +105,13 @@ public class ViewAction extends PortletAction {
 
 		// Send redirect
 
-		res.sendRedirect(PortalUtil.getLayoutURL(layout, themeDisplay));
+		String redirect = ParamUtil.getString(req, "redirect");
+
+		if (Validator.isNull(redirect)) {
+			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+		}
+
+		res.sendRedirect(redirect);
 	}
 
 	public ActionForward render(

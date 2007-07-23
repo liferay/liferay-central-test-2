@@ -118,6 +118,35 @@
 <script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?languageId=<%= themeDisplay.getLocale().toString() %>&themeId=<%= themeDisplay.getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorSchemeId() %>"></script>
 
 <script type="text/javascript">
+
+	<%
+	String currentURL = PortalUtil.getCurrentURL(request);
+	%>
+
+	function addPortlet(plid, portletId, doAsUserId) {
+		var refreshPortletList = getRefreshPortletList();
+
+		if (refreshPortletList["_" + portletId]) {
+			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=<%= Http.encodeURL(currentURL) %>&refresh=1";
+		}
+		else {
+			var loadingDiv = document.createElement("div");
+			var container = document.getElementById("layout-column_column-1");
+
+			if (container == null) {
+				return;
+			}
+
+			loadingDiv.className = "loading-animation";
+
+			container.appendChild(loadingDiv);
+
+			var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= Http.encodeURL(currentURL) %>";
+
+			addPortletHTML(queryString, loadingDiv);
+		}
+	}
+
 	function showLayoutTemplates() {
 		var message = Liferay.Popup(
 			{

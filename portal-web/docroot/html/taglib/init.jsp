@@ -30,14 +30,12 @@ RenderRequest renderRequest = (RenderRequest)request.getAttribute(JavaConstants.
 RenderResponse renderResponse = (RenderResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 String namespace = StringPool.BLANK;
-PortletURL currentURLObj = null;
-String currentURL = StringPool.BLANK;
 
 if (renderRequest != null) {
 	namespace = renderResponse.getNamespace();
-	currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
-	currentURL = currentURLObj.toString();
 }
+
+String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <%@ include file="/html/taglib/init-ext.jsp" %>
