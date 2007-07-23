@@ -35,6 +35,7 @@ import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
 import com.liferay.portlet.journal.ArticleTitleException;
+import com.liferay.portlet.journal.ArticleTypeException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -124,6 +125,7 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof ArticleExpirationDateException ||
 					 e instanceof ArticleIdException ||
 					 e instanceof ArticleTitleException ||
+					 e instanceof ArticleTypeException ||
 					 e instanceof DuplicateArticleIdException) {
 
 				SessionErrors.add(req, e.getClass().getName());

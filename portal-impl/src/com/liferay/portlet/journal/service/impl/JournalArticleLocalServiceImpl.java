@@ -54,6 +54,7 @@ import com.liferay.portlet.journal.ArticleExpirationDateException;
 import com.liferay.portlet.journal.ArticleIdException;
 import com.liferay.portlet.journal.ArticleReviewDateException;
 import com.liferay.portlet.journal.ArticleTitleException;
+import com.liferay.portlet.journal.ArticleTypeException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
@@ -226,8 +227,8 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			groupId, articleId, autoArticleId, title, content, structureId,
-			templateId);
+			groupId, articleId, autoArticleId, title, content, type,
+			structureId, templateId);
 
 		if (autoArticleId) {
 			articleId = String.valueOf(CounterLocalServiceUtil.increment());
@@ -1226,7 +1227,7 @@ public class JournalArticleLocalServiceImpl
 				new ArticleReviewDateException());
 		}
 
-		validate(title, content, groupId, structureId, templateId);
+		validate(groupId, title, content, type, structureId, templateId);
 
 		JournalArticle oldArticle = JournalArticleUtil.findByG_A_V(
 			groupId, articleId, version);
@@ -1663,7 +1664,7 @@ public class JournalArticleLocalServiceImpl
 
 	protected void validate(
 			long groupId, String articleId, boolean autoArticleId, String title,
-			String content, String structureId, String templateId)
+			String content, String type, String structureId, String templateId)
 		throws PortalException, SystemException {
 
 		if (!autoArticleId) {
@@ -1684,12 +1685,12 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		validate(title, content, groupId, structureId, templateId);
+		validate(groupId, title, content, type, structureId, templateId);
 	}
 
 	protected void validate(
-			String title, String content, long groupId, String structureId,
-			String templateId)
+			long groupId, String title, String content, String type,
+			String structureId, String templateId)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(title)) {
@@ -1697,6 +1698,9 @@ public class JournalArticleLocalServiceImpl
 		}
 		else if (Validator.isNull(content)) {
 			throw new ArticleContentException();
+		}
+		else if (Validator.isNull(type)) {
+			throw new ArticleTypeException();
 		}
 
 		if (Validator.isNotNull(structureId)) {

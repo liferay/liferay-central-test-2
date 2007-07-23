@@ -520,6 +520,7 @@ String[] availableLocales = null;
 	<liferay-ui:section>
 		<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
+		<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 
 		<table class="liferay-table">
@@ -636,6 +637,7 @@ String[] availableLocales = null;
 			</td>
 			<td>
 				<select name="<portlet:namespace />type">
+					<option value=""></option>
 
 					<%
 					for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
