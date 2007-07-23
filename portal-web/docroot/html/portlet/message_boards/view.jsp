@@ -87,6 +87,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			MBCategory curCategory = (MBCategory)results.get(i);
 
 			ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
+			
+			boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
+
+			row.setRestricted(restricted);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -100,7 +104,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			StringMaker sm = new StringMaker();
 
 			sm.append("<a href=\"");
-			sm.append(rowURL);
+			sm.append(restricted?"":rowURL);
 			sm.append("\"><b>");
 			sm.append(curCategory.getName());
 			sm.append("</b>");
@@ -113,34 +117,36 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			}
 
 			sm.append("</a>");
+			
+			if (!restricted) {
+				List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
-			List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
+				if (subcategories.size() > 0) {
+					sm.append("<br />");
+					sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
+					sm.append(LanguageUtil.get(pageContext, "subcategories"));
+					sm.append("</u>: ");
 
-			if (subcategories.size() > 0) {
-				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small; font-weight: bold;\"><u>");
-				sm.append(LanguageUtil.get(pageContext, "subcategories"));
-				sm.append("</u>: ");
+					for (int j = 0; j < subcategories.size(); j++) {
+						MBCategory subcategory = (MBCategory)subcategories.get(j);
 
-				for (int j = 0; j < subcategories.size(); j++) {
-					MBCategory subcategory = (MBCategory)subcategories.get(j);
+						rowURL.setParameter("categoryId", String.valueOf(subcategory.getCategoryId()));
 
-					rowURL.setParameter("categoryId", String.valueOf(subcategory.getCategoryId()));
+						sm.append("<a href=\"");
+						sm.append(rowURL);
+						sm.append("\">");
+						sm.append(subcategory.getName());
+						sm.append("</a>");
 
-					sm.append("<a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
-					sm.append(subcategory.getName());
-					sm.append("</a>");
-
-					if ((j + 1) < subcategories.size()) {
-						sm.append(", ");
+						if ((j + 1) < subcategories.size()) {
+							sm.append(", ");
+						}
 					}
+
+					rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+
+					sm.append("</span>");
 				}
-
-				rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
-
-				sm.append("</span>");
 			}
 
 			row.addText(sm.toString());
@@ -157,9 +163,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
 			int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
 
-			row.addText(String.valueOf(categoriesCount), rowURL);
-			row.addText(String.valueOf(threadsCount), rowURL);
-			row.addText(String.valueOf(messagesCount), rowURL);
+			row.addText(String.valueOf(categoriesCount), restricted?"":rowURL.toString());
+			row.addText(String.valueOf(threadsCount), restricted?"":rowURL.toString());
+			row.addText(String.valueOf(messagesCount), restricted?"":rowURL.toString());
 
 			// Action
 
@@ -249,6 +255,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 				ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
+				
+				row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -426,6 +434,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 			ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
+
+			row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
