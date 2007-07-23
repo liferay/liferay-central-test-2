@@ -309,3 +309,18 @@
 
 .portlet-menu-caption {
 }
+
+/* ---------- Miscellaneous portlet styles ---------- */
+
+.restricted, .restricted td {
+	background: #FEE1E0;
+}
+
+.restricted * {
+	color: #777;
+}
+
+.restricted .col-1 {
+	background: transparent url(../images/messages/error.png) no-repeat 0.5em 50%;
+	padding-left: 2.8em;
+}

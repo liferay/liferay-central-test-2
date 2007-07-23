@@ -2,6 +2,9 @@
 
 /* ---------- Portlet wrapper and icons ---------- */
 
+.portlet, .portlet-topper, .portlet-content, .portlet-title {
+}
+
 .portlet {
 }
 
@@ -11,16 +14,16 @@
 .portlet-title {
 }
 
+.ie .portlet-title {
+}
+
+.portlet-title img {
+}
+
 .portlet-icons {
 }
 
 .portlet-content {
-}
-
-.ie6 .portlet-topper {
-}
-
-.ie6 .portlet-icons {
 }
 
 .portlet-icon-back {
@@ -218,4 +221,15 @@
 /* ---------- Menu caption ---------- */
 
 .portlet-menu-caption {
+}
+
+/* ---------- Miscellaneous portlet styles ---------- */
+
+.restricted, .restricted td {
+}
+
+.restricted * {
+}
+
+.restricted .col-1 {
 }
