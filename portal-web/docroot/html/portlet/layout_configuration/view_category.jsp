@@ -115,24 +115,9 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 					while (itr2.hasNext()) {
 						Portlet portlet = (Portlet)itr2.next();
-						
-						// Construct a valid XHTML1.0 id from the portlet Title
-						// Currently just remove any non-alphanumeric characters.
-						Pattern p = Pattern.compile("\\p{Alnum}");
-
-						StringMaker divId = new StringMaker();
-
-						Matcher m = p.matcher(newCategoryPath);
-						while( m.find() ) divId.append( m.group() );
-
-						divId.append(":");
-
-						m = p.matcher(PortalUtil.getPortletTitle(portlet, application, locale));
-						while( m.find() ) divId.append( m.group() );
-						
 					%>
 
-						<div class="layout_configuration_portlet" id="<%= divId %>">
+						<div class="layout_configuration_portlet" id="<%= newCategoryPath %>:<%= PortalUtil.getPortletTitle(portlet, application, locale) %>">
 							<table border="0" cellpadding="2" cellspacing="0" width="100%">
 							<tr>
 								<td width="99%">
@@ -144,7 +129,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
 
 											if (<%= !portlet.isInstanceable() %>) {
-												var div = document.getElementById('<%= divId %>');
+												var div = document.getElementById('<%= StringUtil.replace(newCategoryPath + ":" + PortalUtil.getPortletTitle(portlet, application, locale), "'", "\\'") %>');
 
 												div.parentNode.removeChild(div);
 											};"
