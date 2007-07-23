@@ -134,12 +134,17 @@ if (rowChecker != null) {
 	for (int i = 0; i < resultRows.size(); i++) {
 		ResultRow row = (ResultRow)resultRows.get(i);
 
-		String className = "portlet-section-alternate";
-		String classHoverName = "portlet-section-alternate-hover";
+		String restricted = StringPool.BLANK;
+		if (row.isRestricted()) {
+			restricted = "restricted ";
+		}
+		
+		String className = restricted + "portlet-section-alternate";
+		String classHoverName = restricted + "portlet-section-alternate-hover";
 
 		if (MathUtil.isEven(i)) {
-			className = "portlet-section-body";
-			classHoverName = "portlet-section-body-hover";
+			className = restricted + "portlet-section-body";
+			classHoverName = restricted + "portlet-section-body-hover";
 		}
 
 		if (Validator.isNull(row.getClassName())) {
@@ -174,7 +179,7 @@ if (rowChecker != null) {
 			SearchEntry entry = (SearchEntry)entries.get(j);
 		%>
 
-			<td align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
+			<td class="col-<%= j+1 %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
 
 				<%
 				entry.print(pageContext);

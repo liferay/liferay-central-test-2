@@ -56,6 +56,7 @@ public class ResultRow {
 		_pos = pos;
 		_bold = bold;
 		_entries = new ArrayList();
+		_restricted = false;
 	}
 
 	public Object getObject() {
@@ -80,6 +81,14 @@ public class ResultRow {
 
 	public boolean isBold() {
 		return _bold;
+	}
+	
+	public void setRestricted(boolean restricted) {
+		_restricted = restricted;
+	}
+	
+	public boolean isRestricted() {
+		return _restricted;
 	}
 
 	public String getClassName() {
@@ -261,6 +270,7 @@ public class ResultRow {
 	private String _primaryKey;
 	private int _pos;
 	private boolean _bold;
+	private boolean _restricted;
 	private String _className;
 	private String _classHoverName;
 	private List _entries;
