@@ -54,12 +54,12 @@ if (portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
 
 boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
 
-boolean portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), tilesPortletDecorateBoolean);
+boolean portletDecorateDefault = false;
+if( tilesPortletDecorateBoolean ) portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), true);
 
 boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
 
 Boolean portletDecorateObj = (Boolean)request.getAttribute(WebKeys.PORTLET_DECORATE);
-
 if (portletDecorateObj != null) {
 	portletDecorate = portletDecorateObj.booleanValue();
 
