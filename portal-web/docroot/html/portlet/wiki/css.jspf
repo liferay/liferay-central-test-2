@@ -22,40 +22,49 @@
  */
 %>
 
-<%@ include file="/html/portlet/wiki/css.jspf" %>
+<style type="text/css">
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td class="wiki-body">
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
-			<%= wikiPage.getContent() %>
-		</c:if>
+	.wiki-body {
+	}
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
-
-			<%
-			PortletURL pageURL = renderResponse.createRenderURL();
-
-			pageURL.setParameter("struts_action", "/wiki/view_page");
-			%>
-
-			<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
-		</c:if>
-
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-<pre>
-<%= wikiPage.getContent() %>
-</pre>
-		</c:if>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<div>
-	<liferay-ui:tags-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePrimKey() %>"
-	/>
-</div>
+	.wiki-code {
+		background: #fff;
+		border: 1px solid #777;
+		font-family: monospace;
+		white-space: pre;
+	}
+	
+	.wiki-code-lines {
+		border-right: 1px solid #ccc;
+		color: #000;
+		margin-right: 5px;
+		padding: 0px 5px 0px 5px;
+	}
+	
+	.wiki-body ol.wiki-list {
+		list-style-type: decimal;
+		margin-left: 15px;
+	}
+	
+	.wiki-body ul.wiki-list {
+		list-style-type: disc;
+		margin-left: 15px;
+	}
+	
+	ol.wiki-list ol.wiki-list, ul.wiki-list ul.wiki-list {
+		list-style-type: inherit;
+	}
+	
+	a.wiki-external-link {
+		background: transparent url(<%= themeDisplay.getPathThemeImages() %>/wiki/external.png) right top no-repeat;
+		text-decoration: none;
+		padding-right: 11px;
+	}	
+	
+	a.wiki-external-link:hover {
+		background: transparent url(<%= themeDisplay.getPathThemeImages() %>/wiki/external.png) right top no-repeat;
+		text-decoration: underline;
+		padding-right: 11px;
+	}	
+	
+</style>

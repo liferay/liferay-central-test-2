@@ -1,9 +1,25 @@
 # harmonise line-endings
 Replace !(\n\r)|(\r\n)|(\r)!\n!
 
-# escape rogue HTML
-Replace !<!&lt;!
-Replace !>!&gt;!
+# escape rogue HTML (Default ON)
+#Replace !<!&lt;!
+#Replace !>!&gt;!
+
+Replace !    !\t!
+
+# "code" block
+FilterLock com.liferay.portlet.wiki.filters.CodeBlock !\[code\](.|\n)*?\[/code\]!&~0!
+
+# Headers
+Replace !(^|\n)={5,}(.+?)={5,}!\n<h5>$2</h5>\n!
+Replace !(^|\n)={4}(.+?)={4}!\n<h4>$2</h4>\n!
+Replace !(^|\n)={3}(.+?)={3}!\n<h3>$2</h3>\n!
+Replace !(^|\n)={2}(.+?)={2}!\n<h2>$2</h2>\n!
+Replace !(^|\n)={1}(.+?)={1}!\n<h1>$2</h1>\n!
+
+# Make sure formatted embedded HTML removes formatting (pre-whitespace) so it 
+# doesn't get defeated by other rules
+Replace !^\s*<!<!
 
 # "six-ticks" - override pattern recognition
 Replace !''''''!<b></b>!
@@ -12,15 +28,18 @@ Replace !''''''!<b></b>!
 Lock !\[\n((.|\n)*?)\n\]!<pre>&1</pre>!
 
 # tabs, emphasis and rulers
-Replace !        !\t!
-Replace !\n\s*\n!\n<p/>\n!
-Replace !'{5}(.+?)'{5}!<i><b>$1</b></i>!
+Replace !\n\s*\n!\n<br/><br/>\n!
+Replace !'{5}(.+?)'{5}!<b><i>$1</i></b>!
 Replace !'{3}(.+?)'{3}!<b>$1</b>!
 Replace !'{2}(.+?)'{2}!<i>$1</i>!
-Replace !(^|\n)-{4,}!\n<hr/>!
+Replace !(^|\n)-{4,}!\n<div class='separator'></div>\n!
 
 # ordered/unordered list
 FilterReplace wiki.ListRow !(^\t+(\*|[1234567890]+)\.?\s*(.+)(\n|\z))+!\n&~0!
+
+# Make Unordered List look "standard"
+Replace !<ul>!<ul class='wiki-list'>!
+Replace !<ol>!<ol class='wiki-list'>!
 
 # monospace
 Replace !(^ (.+))(\n (.+))*!<pre>$0</pre>!
@@ -29,13 +48,14 @@ Replace !\n !\n!
 
 # def list
 Replace !(((?:^|\n)\t+)(?:\s*)(.*)(?:\s*):(?:\s*)(.*))+!<dl>\n$0\n</dl>!
-Replace !((?:^|\n)\t+)(?:\s*)(.*)(?:\s*):(?:\s*)(.*)!$1<dt>$2</dt><dd>$3</dd>!
+Replace !((?:^|\n)\t+)(?:\s*)(.*)(?:\s*):(?:\s*)(.*)!$1<dt>$2</dt><dd style='margin-left:15px;'>$3</dd>!
 
 # embedded URLs
-Lock !\"([^\"]*)\"((?i)(http|https|ftp|file|mailto)(?-i):([^\s\<\>\[\]\"'\(\)\?])*[^\s\<\>\[\]\"'\(\)\?\,\.]([\?][^\s\<\>\[\]\"'\(\)\?]*[^\s\<\>\[\]\"'\(\)\?\,\.])?)!<a href='&2'>&1</a>!
+Lock !\[((?i)(http|https|ftp|file|mailto)(?-i):([^\s\<\>\[\]\"'\(\)\?])*[^\s\<\>\[\]\"'\(\)\?\,\.]([\?][^\s\<\>\[\]\"'\(\)\?]*[^\s\<\>\[\]\"'\(\)\?\,\.])?)\s+([^\<\>\[\]\"'\(\)\?]*)\]!<a class='wiki-external-link' href='&1'>&5</a>!
+Lock !\"([^\"]*)\"((?i)(http|https|ftp|file|mailto)(?-i):([^\s\<\>\[\]\"'\(\)\?])*[^\s\<\>\[\]\"'\(\)\?\,\.]([\?][^\s\<\>\[\]\"'\(\)\?]*[^\s\<\>\[\]\"'\(\)\?\,\.])?)!<a class='wiki-external-link' href='&2'>&1</a>!
 Lock !(?i)(http|https|ftp|file):([^\s\<\>\[\]\"'\(\)\?])*[^\s\<\>\[\]\"'\(\)\?\,\.](\.gif|\.jp[eg]{1,2}|\.png)([\?][^\s\<\>\[\]\"'\(\)\?]*[^\s\<\>\[\]\"'\(\)\?\,\.])?(?-i)!<img src='&0'/>!
-Lock !(?i)(http|https|ftp|file|mailto)(?-i):([^\s\<\>\[\]\"'\(\)\?])*[^\s\<\>\[\]\"'\(\)\?\,\.]([\?][^\s\<\>\[\]\"'\(\)\?]*[^\s\<\>\[\]\"'\(\)\?\,\.])?!<a href='&0'>&0</a>!
-Lock !(?:(?i)mailto:(?-i))((\p{Alnum}+(\.|\_|\-)?)*\p{Alnum}@(((\p{Alnum}+(\.|\_|\-)?)*\p{Alpha})|((([0-1]?\d{1,2}\.)|(2[0-4]\d\.)|(25[0-5]\.)){3}(([0-1]?\d{1,2}\.)|(2[0-4]\d\.)|(25[0-5])))))!<a href='&0'>&1</a>!
+Lock !(?i)(http|https|ftp|file|mailto)(?-i):([^\s\<\>\[\]\"'\(\)\?])*[^\s\<\>\[\]\"'\(\)\?\,\.]([\?][^\s\<\>\[\]\"'\(\)\?]*[^\s\<\>\[\]\"'\(\)\?\,\.])?!<a class='wiki-external-link' href='&0'>&0</a>!
+Lock !(?:(?i)mailto:(?-i))((\p{Alnum}+(\.|\_|\-)?)*\p{Alnum}@(((\p{Alnum}+(\.|\_|\-)?)*\p{Alpha})|((([0-1]?\d{1,2}\.)|(2[0-4]\d\.)|(25[0-5]\.)){3}(([0-1]?\d{1,2}\.)|(2[0-4]\d\.)|(25[0-5])))))!<a class='wiki-external-link' href='&0'>&1</a>!
 
 # embedded ISBN
 FilterLock wiki.CompressISBN !(?:\[\s?)?(?:ISBN:?\s?)((?:\d[ -]?){9}(?:[\dXx]))(?:\s?\])?!<a href='http://www.amazon.com/exec/obidos/ASIN/&~1/efficacysolut-20'>ISBN &1</a>!
@@ -49,7 +69,7 @@ Lock !\nunknown\{(.*)\}\{(.*)\}\{(.*)\}!&2:&3!
 FilterReplace wiki.LocalWikiLink /(^|\p{Punct}|\p{Space})((\p{Lu}\p{Ll}+){2,})(\z|\n|\p{Punct}|\p{Space})/&1&~2&4/
 Lock !\?\?\n(?:view|edit)\{(.*),(.*)\}\n!<a href='diff?&2'>changes</a>!
 Lock !\nview\{(.*),(.*)\}\n!<a href="[$BEGIN_PAGE_TITLE$]&2[$END_PAGE_TITLE$]">&1</a>!
-Lock !\nedit\{(.*),(.*)\}\n!<a href="[$BEGIN_PAGE_TITLE$]&2[$END_PAGE_TITLE$]">?</a>&1!
+Lock !\nedit\{(.*),(.*)\}\n!<a href="[$BEGIN_PAGE_TITLE$]&2[$END_PAGE_TITLE$]" style="color: red;">&1</a>!
 
 # a "hook" for extra user-defined processing without mucking up this file
 Include wiki-extra.txt
