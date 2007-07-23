@@ -30,6 +30,7 @@
 <%@ page import="com.liferay.portlet.journal.ArticleExpirationDateException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleIdException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleTitleException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleTypeException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateArticleIdException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateStructureIdException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateTemplateIdException" %>
