@@ -165,25 +165,26 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List getGroupThreads(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		if (userId <= 0) {
-			return MBThreadFinder.findByGroupId(groupId, begin, end);
-		}
-		else {
-			return MBThreadFinder.findByG_U(groupId, userId, begin, end);
-		}
+		return getGroupThreads(groupId, userId, false, begin, end);
 	}
 
-	public List getGroupSubscribedThreads(long groupId, long userId, int begin, int end)
+	public List getGroupThreads(
+			long groupId, long userId, boolean subscribed, int begin, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
 			return MBThreadFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
-			return MBThreadFinder.findSubscriptionsByG_U(groupId, userId, begin, end);
+			if (subscribed) {
+				return MBThreadFinder.findByS_G_U(groupId, userId, begin, end);
+			}
+			else {
+				return MBThreadFinder.findByG_U(groupId, userId, begin, end);
+			}
 		}
-	}	
-	
+	}
+
 	public int getGroupThreadsCount(long groupId) throws SystemException {
 		return MBThreadFinder.countByGroupId(groupId);
 	}
@@ -191,24 +192,25 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public int getGroupThreadsCount(long groupId, long userId)
 		throws SystemException {
 
-		if (userId <= 0) {
-			return MBThreadFinder.countByGroupId(groupId);
-		}
-		else {
-			return MBThreadFinder.countByG_U(groupId, userId);
-		}
+		return getGroupThreadsCount(groupId, userId, false);
 	}
-	
-	public int getGroupSubscribedThreadsCount(long groupId, long userId)
+
+	public int getGroupThreadsCount(
+			long groupId, long userId, boolean subscribed)
 		throws SystemException {
 
 		if (userId <= 0) {
 			return MBThreadFinder.countByGroupId(groupId);
 		}
 		else {
-			return MBThreadFinder.countSubscriptionsByG_U(groupId, userId);
+			if (subscribed) {
+				return MBThreadFinder.countByS_G_U(groupId, userId);
+			}
+			else {
+				return MBThreadFinder.countByG_U(groupId, userId);
+			}
 		}
-	}	
+	}
 
 	public MBThread getThread(long threadId)
 		throws PortalException, SystemException {

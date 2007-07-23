@@ -57,18 +57,18 @@ public class MBThreadFinder {
 	public static String COUNT_BY_G_U =
 		MBThreadFinder.class.getName() + ".countByG_U";
 
+	public static String COUNT_BY_S_G_U =
+		MBThreadFinder.class.getName() + ".countByS_G_U";
+
 	public static String FIND_BY_GROUP_ID =
 		MBThreadFinder.class.getName() + ".findByGroupId";
 
 	public static String FIND_BY_G_U =
 		MBThreadFinder.class.getName() + ".findByG_U";
-	
-	public static String COUNT_SUBSCRIPTIONS_BY_G_U =
-		MBThreadFinder.class.getName() + ".countSubscriptionsByG_U";
-	
-	public static String FIND_SUBSCRIPTIONS_BY_G_U =
-		MBThreadFinder.class.getName() + ".findSubscriptionsByG_U";
-	
+
+	public static String FIND_BY_S_G_U =
+		MBThreadFinder.class.getName() + ".findByS_G_U";
+
 	public static int countByCategoryIds(List categoryIds)
 		throws SystemException {
 
@@ -188,37 +188,37 @@ public class MBThreadFinder {
 			HibernateUtil.closeSession(session);
 		}
 	}
-	
-	public static int countSubscriptionsByG_U(long groupId, long userId)
+
+	public static int countByS_G_U(long groupId, long userId)
 		throws SystemException {
 
 		Session session = null;
-	
+
 		try {
 			session = HibernateUtil.openSession();
-	
-			String sql = CustomSQLUtil.get(COUNT_SUBSCRIPTIONS_BY_G_U);
-	
+
+			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+
 			SQLQuery q = session.createSQLQuery(sql);
-	
+
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-	
+
 			QueryPos qPos = QueryPos.getInstance(q);
-	
+
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
 			qPos.add(userId);
-	
+
 			Iterator itr = q.list().iterator();
-	
+
 			if (itr.hasNext()) {
 				Long count = (Long)itr.next();
-	
+
 				if (count != null) {
 					return count.intValue();
 				}
 			}
-	
+
 			return 0;
 		}
 		catch (Exception e) {
@@ -227,7 +227,7 @@ public class MBThreadFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-	}	
+	}
 
 	public static List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
@@ -286,26 +286,27 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static List findSubscriptionsByG_U(long groupId, long userId, int begin, int end)
+	public static List findByS_G_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
-	
+
 		try {
 			session = HibernateUtil.openSession();
-	
-			String sql = CustomSQLUtil.get(FIND_SUBSCRIPTIONS_BY_G_U);
-	
+
+			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
+
 			SQLQuery q = session.createSQLQuery(sql);
-	
+
 			q.addEntity("MBThread", MBThreadImpl.class);
-	
+
 			QueryPos qPos = QueryPos.getInstance(q);
-	
+
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
 			qPos.add(userId);
-	
+
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
@@ -314,8 +315,8 @@ public class MBThreadFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-	}	
-	
+	}
+
 	private static String _getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 

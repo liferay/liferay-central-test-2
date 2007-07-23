@@ -376,7 +376,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			</script>
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("recent-posts") || tabs1.equals("my-subscriptions") %>'>
+	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("my-subscriptions") || tabs1.equals("recent-posts") %>'>
 
 		<%
 		long groupThreadsUserId = 0;
@@ -397,25 +397,26 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
 		List results = null;
-		
+
 		if (tabs1.equals("my-subscriptions")) {
-			int total = MBThreadLocalServiceUtil.getGroupSubscribedThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId, true);
 
 			searchContainer.setTotal(total);
-			
-			results = MBThreadLocalServiceUtil.getGroupSubscribedThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setResults(results);			
-		} else {
+			results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, true, searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+		}
+		else {
 			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
 
 			searchContainer.setTotal(total);
-			
+
 			results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
-		
+
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {

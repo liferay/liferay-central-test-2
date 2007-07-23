@@ -94,6 +94,27 @@
 				(MBMessage.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.threadId = MBThread.threadId)
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId)
+			INNER JOIN
+				Subscription ON
+					(Subscription.classNameId = ?) AND
+					(Subscription.classPK = MBThread.threadId)
+			WHERE
+				(MBCategory.groupId = ?) AND
+				(Subscription.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByGroupId">
 		<![CDATA[
 			SELECT
@@ -133,27 +154,7 @@
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countSubscriptionsByG_U">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			INNER JOIN
-				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId)
-			INNER JOIN
-				Subscription ON
-					(Subscription.classPK = MBThread.threadId AND Subscription.classNameId = ?)
-			WHERE
-				(MBCategory.groupId = ?) AND
-				(Subscription.userId = ?)
-		]]>
-	</sql>	
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findSubscriptionsByG_U">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByS_G_U">
 		<![CDATA[
 			SELECT
 				DISTINCT {MBThread.*}
@@ -167,7 +168,8 @@
 					(MBCategory.categoryId = MBMessage.categoryId)
 			INNER JOIN
 				Subscription ON
-					(Subscription.classPK = MBThread.threadId AND Subscription.classNameId = ?)
+					(Subscription.classNameId = ?) AND
+					(Subscription.classPK = MBThread.threadId)
 			WHERE
 				(MBCategory.groupId = ?) AND
 				(Subscription.userId = ?)
@@ -175,5 +177,5 @@
 				MBThread.priority DESC,
 				MBThread.lastPostDate DESC
 		]]>
-	</sql>	
+	</sql>
 </custom-sql>

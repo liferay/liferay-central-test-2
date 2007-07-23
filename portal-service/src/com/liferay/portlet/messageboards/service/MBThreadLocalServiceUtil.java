@@ -108,13 +108,13 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getGroupThreads(groupId, userId, begin, end);
 	}
 
-	public static java.util.List getGroupSubscribedThreads(long groupId,
-		long userId, int begin, int end)
+	public static java.util.List getGroupThreads(long groupId, long userId,
+		boolean subscribed, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-		return mbThreadLocalService.getGroupSubscribedThreads(groupId, userId,
-			begin, end);
+		return mbThreadLocalService.getGroupThreads(groupId, userId,
+			subscribed, begin, end);
 	}
 
 	public static int getGroupThreadsCount(long groupId)
@@ -131,12 +131,12 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getGroupThreadsCount(groupId, userId);
 	}
 
-	public static int getGroupSubscribedThreadsCount(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
+	public static int getGroupThreadsCount(long groupId, long userId,
+		boolean subscribed) throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-		return mbThreadLocalService.getGroupSubscribedThreadsCount(groupId,
-			userId);
+		return mbThreadLocalService.getGroupThreadsCount(groupId, userId,
+			subscribed);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread getThread(
