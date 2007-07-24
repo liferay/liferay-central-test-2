@@ -1389,12 +1389,20 @@ public class JournalArticleLocalServiceImpl
 				Element dynamicContent = el.element("dynamic-content");
 
 				String text = dynamicContent.getText();
+
+				// LEP-1594
+
 				try {
-					text = ParserUtils.trimTags( text, new String[] { "script" }, false, true );
-				} 
-				catch (ParserException e) { text = e.getLocalizedMessage(); }
-				catch (UnsupportedEncodingException e) { text = e.getLocalizedMessage(); }
-				
+					text = ParserUtils.trimTags(
+						text, new String[] {"script"}, false, true);
+				}
+				catch (ParserException pe) {
+					text = pe.getLocalizedMessage();
+				}
+				catch (UnsupportedEncodingException uee) {
+					text = uee.getLocalizedMessage();
+				}
+
 				dynamicContent.setText(text);
 			}
 
