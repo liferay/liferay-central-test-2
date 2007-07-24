@@ -81,7 +81,7 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 				<td>
 					<a href="javascript: <portlet:namespace />editElement('add', <%= count.getValue() %>);">
-					<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" vspace="0" width="9" />
+					<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" title="<liferay-ui:message key="add" />" vspace="0" width="16" />
 					</a>
 				</td>
 			</c:if>
@@ -92,7 +92,7 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 				<c:when test="<%= el.elements().size() == 0 %>">
 					<td>
 						<a href="javascript: <portlet:namespace />editElement('remove', <%= count.getValue() %>);">
-						<img border="0" height="9" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<liferay-ui:message key="remove" />" vspace="0" width="9" />
+						<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png" title="<liferay-ui:message key="remove" />" vspace="0" width="16" />
 						</a>
 					</td>
 				</c:when>
@@ -105,13 +105,13 @@ IntegerWrapper tabIndex = (IntegerWrapper)request.getAttribute(WebKeys.TAB_INDEX
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="10" /></td>
 				<td>
 					<a href="javascript: <portlet:namespace />moveElement(true, <%= count.getValue() %>);">
-					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<liferay-ui:message key="up" />" vspace="0" width="11" />
+					<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" title="<liferay-ui:message key="up" />" vspace="0" width="16" />
 					</a>
 				</td>
 				<td><img border="0" height="1" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="5" /></td>
 				<td>
 					<a href="javascript: <portlet:namespace />moveElement(false, <%= count.getValue() %>);">
-					<img border="0" height="11" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<liferay-ui:message key="down" />" vspace="0" width="11" />
+					<img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" title="<liferay-ui:message key="down" />" vspace="0" width="16" />
 					</a>
 				</td>
 			</c:if>
