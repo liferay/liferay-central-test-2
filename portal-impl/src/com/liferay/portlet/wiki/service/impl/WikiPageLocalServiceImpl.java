@@ -488,7 +488,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			throw new PageTitleException();
 		}
 
-		Pattern pattern = Pattern.compile("(([A-Z][a-z]+){2,})");
+		Pattern pattern = Pattern.compile("(((\\p{Lu}\\p{Ll}+)_?)+)");
 		Matcher matcher = pattern.matcher(title);
 
 		if (!matcher.matches()) {
