@@ -488,6 +488,8 @@
 
 		<column name="parentOrganizationId" type="long" />
 		<column name="name" type="String" />
+		<column name="location" type="boolean" />
+		<column name="inheritable" type="boolean" />
 		<column name="recursable" type="boolean" />
 		<column name="regionId" type="long" />
 		<column name="countryId" type="long" />

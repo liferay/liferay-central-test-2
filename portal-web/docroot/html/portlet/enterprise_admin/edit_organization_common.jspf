@@ -25,7 +25,7 @@
 <%
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
-if (rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (organizationsTab && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	organization = user.getOrganization();
 }
 
@@ -35,10 +35,10 @@ long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
 
 boolean editable = false;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!organizationsTab && portletName.equals(PortletKeys.LOCATION_ADMIN)) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	editable = true;
 
-	if (rootOrganization) {
+	if (organizationsTab) {
 		if (!OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
 			editable = false;
 		}
@@ -64,7 +64,7 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!rootOrganization && po
 
 String strutsAction = "/enterprise_admin/edit_organization";
 
-if (!rootOrganization) {
+if (!organizationsTab) {
 	strutsAction = "/enterprise_admin/edit_location";
 }
 %>
@@ -82,7 +82,7 @@ if (!rootOrganization) {
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value='<%= rootOrganization ? "organizations" : "locations" %>' />
+	<liferay-util:param name="tabs1" value='<%= organizationsTab ? "organizations" : "locations" %>' />
 </liferay-util:include>
 
 <liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
@@ -90,7 +90,7 @@ if (!rootOrganization) {
 </liferay-util:include>
 
 <c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-	<liferay-ui:tabs names='<%= rootOrganization ? "organization" : "location" %>' />
+	<liferay-ui:tabs names='<%= organizationsTab ? "organization" : "location" %>' />
 </c:if>
 
 <%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jspf" %>

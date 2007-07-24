@@ -31,11 +31,11 @@ Organization organization = (Organization)row.getObject();
 
 long organizationId = organization.getOrganizationId();
 
-boolean rootOrganization = organization.isRoot();
+boolean organizationsTab = !organization.isLocation();
 
 String strutsAction = "/enterprise_admin/edit_organization";
 
-if (!rootOrganization) {
+if (!organizationsTab) {
 	strutsAction = "/enterprise_admin/edit_location";
 }
 %>
@@ -58,7 +58,7 @@ String addUserURLString = null;
 %>
 
 <c:choose>
-	<c:when test="<%= rootOrganization %>">
+	<c:when test="<%= organizationsTab %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToOrganizationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
@@ -109,9 +109,15 @@ String addUserURLString = null;
 	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSubOrganizationsURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/view" />
+	<portlet:param name="tabs1" value="organizations" />
+	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+</portlet:renderURL>
+
 <c:choose>
 	<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
-		<c:if test="<%= !rootOrganization && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+		<c:if test="<%= !organizationsTab && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 			<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 		</c:if>
 
@@ -139,7 +145,7 @@ String addUserURLString = null;
 	<c:otherwise>
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 			<c:choose>
-				<c:when test="<%= rootOrganization %>">
+				<c:when test="<%= organizationsTab %>">
 					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 						<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 					</c:if>
@@ -152,16 +158,16 @@ String addUserURLString = null;
 			</c:choose>
 
 			<c:choose>
-				<c:when test="<%= rootOrganization %>">
+				<c:when test="<%= organizationsTab %>">
 					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 						<liferay-security:permissionsURL
 							modelResource="<%= Organization.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
 							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
-							var="editRootOrganizationPermissionsURL"
+							var="editOrganizationPermissionsURL"
 						/>
 
-						<liferay-ui:icon image="permissions" url="<%= editRootOrganizationPermissionsURL %>" />
+						<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
@@ -170,16 +176,16 @@ String addUserURLString = null;
 							modelResource="<%= Location.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
 							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
-							var="editOrganizationPermissionsURL"
+							var="editLocationPermissionsURL"
 						/>
 
-						<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
+						<liferay-ui:icon image="permissions" url="<%= editLocationPermissionsURL %>" />
 					</c:if>
 				</c:otherwise>
 			</c:choose>
 
 			<c:choose>
-				<c:when test="<%= rootOrganization %>">
+				<c:when test="<%= organizationsTab %>">
 					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
 						<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
 					</c:if>
@@ -195,17 +201,21 @@ String addUserURLString = null;
 		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<c:if test="<%= rootOrganization && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
+			<c:if test="<%= organizationsTab && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
 				<liferay-ui:icon image="add_location" message="add-location" url="<%= addLocationURL %>" />
 			</c:if>
 		</c:if>
 
-		<c:if test="<%= rootOrganization %>">
+		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !organization.isLocation() %>">
+			<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSubOrganizationsURL %>" />
+		</c:if>
+
+		<c:if test="<%= organizationsTab %>">
 			<liferay-ui:icon image="view_locations" message="view-locations" url="<%= viewLocationsURL %>" />
 		</c:if>
 
 		<c:choose>
-			<c:when test="<%= rootOrganization %>">
+			<c:when test="<%= organizationsTab %>">
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 					<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 				</c:if>

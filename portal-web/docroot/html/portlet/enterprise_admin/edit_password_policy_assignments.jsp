@@ -183,16 +183,11 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		/>
 
 		<%
-		boolean rootOrganization = tabs2.equals("organizations");
+		boolean organizationsTab = tabs2.equals("organizations");
 
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-		long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-		String parentOrganizationComparator = StringPool.EQUAL;
-
-		if (!rootOrganization) {
-			parentOrganizationComparator = StringPool.NOT_EQUAL;
-		}
+		long parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
 
 		LinkedHashMap organizationParams = new LinkedHashMap();
 
@@ -200,11 +195,11 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 			organizationParams.put("organizationsPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
 		}
 
-		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
+		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+		List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>
@@ -219,11 +214,12 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		List headerNames = new ArrayList();
 
 		headerNames.add("name");
+		headerNames.add("parent-organization");
 		headerNames.add("city");
 
 		searchContainer.setHeaderNames(headerNames);
 
-		if (!rootOrganization) {
+		if (!organizationsTab) {
 			searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
 		}
 
@@ -237,6 +233,21 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 			// Name
 
 			row.addText(organization.getName());
+
+			// Parent Organization
+
+			String parentOrganizationName = StringPool.BLANK;
+
+			if (organization.getParentOrganizationId() > 0) {
+				try {
+					Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+					parentOrganizationName = parentOrganization.getName();
+				}
+				catch (Exception nsoe) {
+				}
+			}
+			row.addText(parentOrganizationName);
+
 
 			// Address
 

@@ -28,7 +28,7 @@
 String tabs2 = ParamUtil.getString(request, "tabs2");
 String tabs3 = ParamUtil.getString(request, "tabs3");
 
-boolean rootOrganization = tabs1.equals("organizations");
+boolean organizationsTab = tabs1.equals("organizations");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -42,7 +42,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 <script type="text/javascript">
 	function <portlet:namespace />deleteOrganizations() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-" + (rootOrganization ? "organizations" : "locations")) %>')) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-" + (organizationsTab ? "organizations" : "locations")) %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
@@ -269,7 +269,7 @@ portletURL.setParameter("tabs3", tabs3);
 			<c:if test="<%= organization != null %>">
 				<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-				<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isRoot() ? "organization" : "location")) %>: <%= organization.getName() %><br />
+				<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isLocation() ? "location" : "organization")) %>: <%= organization.getName() %><br />
 			</c:if>
 
 			<c:if test="<%= role != null %>">
@@ -405,7 +405,7 @@ portletURL.setParameter("tabs3", tabs3);
 		<input name="<portlet:namespace />deleteOrganizationIds" type="hidden" value="" />
 
 		<c:choose>
-			<c:when test="<%= rootOrganization %>">
+			<c:when test="<%= organizationsTab %>">
 				<liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-locations-or-users" />
 			</c:when>
 			<c:otherwise>
@@ -414,11 +414,22 @@ portletURL.setParameter("tabs3", tabs3);
 		</c:choose>
 
 		<%
+		List headerNames = new ArrayList();
+		headerNames.add("name");
+
+		if (!organizationsTab) {
+			headerNames.add("organization");
+		}
+
+		headerNames.add("city");
+		headerNames.add("region");
+		headerNames.add("country");
+
 		boolean showSearch = false;
 
-		if (rootOrganization && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
+		if (organizationsTab && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
 		}
-		else if (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
+		else if (!organizationsTab && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		}
 		else {
 			showSearch = true;
@@ -427,7 +438,7 @@ portletURL.setParameter("tabs3", tabs3);
 		boolean showButtons = false;
 
 		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-			if (rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+			if (organizationsTab && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 			}
 			else {
 				showButtons = true;
@@ -436,7 +447,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 		OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
-		List headerNames = searchContainer.getHeaderNames();
+		searchContainer.setHeaderNames(headerNames);
 
 		headerNames.add(StringPool.BLANK);
 
@@ -462,7 +473,7 @@ portletURL.setParameter("tabs3", tabs3);
 			int total = 0;
 			List results = null;
 
-			if (rootOrganization && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
+			if (organizationsTab && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
 				total = 1;
 
 				searchContainer.setTotal(total);
@@ -471,7 +482,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 				results.add(user.getOrganization());
 			}
-			else if (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
+			else if (!organizationsTab && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				total = 1;
 
 				searchContainer.setTotal(total);
@@ -481,37 +492,37 @@ portletURL.setParameter("tabs3", tabs3);
 				results.add(user.getLocation());
 			}
 			else {
-				long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-				String parentOrganizationComparator = StringPool.EQUAL;
+				OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
+				long parentOrganizationId = displayTerms.getParentOrganizationId();
 
-				if (!rootOrganization) {
+				boolean location = false;
+
+				if (!organizationsTab) {
+
+					location = true;
+
 					if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 						parentOrganizationId = user.getOrganization().getOrganizationId();
-						parentOrganizationComparator = StringPool.EQUAL;
 					}
 					else {
 						parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 
-						if ((parentOrganizationId <= 0)) {
-							parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-						}
-
-						if (parentOrganizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-							parentOrganizationComparator = StringPool.NOT_EQUAL;
+						if (parentOrganizationId <= 0) {
+							parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
 						}
 					}
 				}
 
-				total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+				total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, location, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
 
 				searchContainer.setTotal(total);
 
-				results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+				results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, location, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 			}
 
 			searchContainer.setResults(results);
 
-			if (!rootOrganization) {
+			if (!organizationsTab) {
 				searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
 			}
 			%>
@@ -521,8 +532,8 @@ portletURL.setParameter("tabs3", tabs3);
 			</c:if>
 
 			<c:if test="<%= showButtons %>">
-				<c:if test="<%= (rootOrganization && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !rootOrganization %>">
-					<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (rootOrganization ? "organization" : "location") %>' /></portlet:renderURL>';" />
+				<c:if test="<%= (organizationsTab && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !organizationsTab %>">
+					<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (organizationsTab ? "organization" : "location") %>' /></portlet:renderURL>';" />
 				</c:if>
 
 				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
@@ -540,7 +551,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 				String strutsAction = "/enterprise_admin/edit_organization";
 
-				if (!organization.isRoot()) {
+				if (organization.isLocation()) {
 					strutsAction = "/enterprise_admin/edit_location";
 				}
 
@@ -554,6 +565,22 @@ portletURL.setParameter("tabs3", tabs3);
 				// Name
 
 				row.addText(organization.getName(), rowURL);
+
+				// Parent Organization
+
+				if (!organizationsTab) {
+					String parentOrganizationName = StringPool.BLANK;
+
+					if (organization.getParentOrganizationId() > 0) {
+						try {
+							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+							parentOrganizationName = parentOrganization.getName();
+						}
+						catch (NoSuchOrganizationException nsoe) {
+						}
+					}
+					row.addText(parentOrganizationName, rowURL);
+				}
 
 				// City
 

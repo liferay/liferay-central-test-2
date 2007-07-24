@@ -68,13 +68,13 @@ public class OrganizationServiceUtil {
 
 	public static com.liferay.portal.model.Organization addOrganization(
 		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location)
+		long countryId, int statusId, boolean location, boolean inheritable)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
 		return organizationService.addOrganization(parentOrganizationId, name,
-			regionId, countryId, statusId, location);
+			regionId, countryId, statusId, location, inheritable);
 	}
 
 	public static void deleteOrganization(long organizationId)
@@ -136,13 +136,15 @@ public class OrganizationServiceUtil {
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		long organizationId, long parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location)
+		long regionId, long countryId, int statusId, boolean location,
+		boolean inheritable)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
 		return organizationService.updateOrganization(organizationId,
-			parentOrganizationId, name, regionId, countryId, statusId, location);
+			parentOrganizationId, name, regionId, countryId, statusId,
+			location, inheritable);
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(

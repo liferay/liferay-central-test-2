@@ -236,6 +236,8 @@
 			<hint name="display-width">150</hint>
 			<hint name="max-length">100</hint>
 		</field>
+		<field name="location" type="boolean" />
+		<field name="inheritable" type="boolean" />
 		<field name="recursable" type="boolean" />
 		<field name="regionId" type="long" />
 		<field name="countryId" type="long" />

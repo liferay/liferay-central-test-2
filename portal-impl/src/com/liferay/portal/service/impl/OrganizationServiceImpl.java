@@ -68,7 +68,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 	public Organization addOrganization(
 			long parentOrganizationId, String name, long regionId,
-			long countryId, int statusId, boolean location)
+			long countryId, int statusId, boolean location, boolean inheritable)
 		throws PortalException, SystemException {
 
 		if (location) {
@@ -83,7 +83,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 		return OrganizationLocalServiceUtil.addOrganization(
 			getUserId(), parentOrganizationId, name, regionId, countryId,
-			statusId, location);
+			statusId, location, inheritable);
 	}
 
 	public void deleteOrganization(long organizationId)
@@ -147,14 +147,15 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
-			long regionId, long countryId, int statusId, boolean location)
+			long regionId, long countryId, int statusId, boolean location,
+			boolean inheritable)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
 
 		return OrganizationLocalServiceUtil.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
-			name, regionId, countryId, statusId, location);
+			name, regionId, countryId, statusId, location, inheritable);
 	}
 
 	public Organization updateOrganization(long organizationId, String comments)
@@ -172,7 +173,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 		Organization organization =
 			OrganizationUtil.findByPrimaryKey(organizationId);
 
-		if (organization.isRoot()) {
+		if (!organization.isLocation()) {
 			OrganizationPermission.check(
 				getPermissionChecker(), organizationId, actionId);
 		}

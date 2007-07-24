@@ -79,6 +79,7 @@ import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
@@ -125,6 +126,7 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -455,14 +457,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String password = user.getPassword();
 
 			if (user.isPasswordEncrypted()) {
-				if (password.equals(encPwd)) {
-					return true;
-				}
+			if (password.equals(encPwd)) {
+				return true;
+			}
 
 				if (!GetterUtil.getBoolean(PropsUtil.get(
 						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
 
-					encPwd = PwdEncryptor.encrypt(encPwd, password);
+				encPwd = PwdEncryptor.encrypt(encPwd, password);
 
 					if (password.equals(encPwd)) {
 						return true;
@@ -1996,9 +1998,28 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if ((organization != null) && (location != null)) {
-			if (location.getParentOrganizationId() !=
-					organization.getOrganizationId()) {
 
+			// Location must belong to one of the ancestors of the organization
+
+			List ancestors =
+					OrganizationLocalServiceUtil.getAncestors(organizationId);
+
+			boolean isAncestor = false;
+
+			Iterator it = ancestors.iterator();
+
+			while (it.hasNext()){
+				Organization ancestor = (Organization) it.next();
+
+				if (ancestor.getPrimaryKey() ==
+						location.getParentOrganizationId()){
+					isAncestor = true;
+
+					break;
+				}
+			}
+
+			if (!isAncestor) {
 				throw new OrganizationParentException();
 			}
 		}

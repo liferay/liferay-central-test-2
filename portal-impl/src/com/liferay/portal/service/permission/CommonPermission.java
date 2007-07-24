@@ -79,7 +79,7 @@ public class CommonPermission {
 			Organization organization =
 				OrganizationLocalServiceUtil.getOrganization(classPK);
 
-			if (organization.isRoot()) {
+			if (!organization.isLocation()) {
 				OrganizationPermission.check(
 					permissionChecker, classPK, actionId);
 			}

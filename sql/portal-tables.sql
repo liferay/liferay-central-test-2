@@ -548,6 +548,8 @@ create table Organization_ (
 	companyId LONG,
 	parentOrganizationId LONG,
 	name VARCHAR(100) null,
+	location BOOLEAN,
+	inheritable BOOLEAN,
 	recursable BOOLEAN,
 	regionId LONG,
 	countryId LONG,

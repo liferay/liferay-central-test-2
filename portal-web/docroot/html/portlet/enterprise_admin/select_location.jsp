@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-boolean rootOrganization = false;
+boolean organizationsTab = false;
 %>
 
 <%@ include file="/html/portlet/enterprise_admin/select_organization_common.jspf" %>

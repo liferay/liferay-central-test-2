@@ -111,7 +111,7 @@ public class OrgLaborServiceImpl
 		Organization organization =
 			OrganizationUtil.findByPrimaryKey(organizationId);
 
-		if (organization.isRoot()) {
+		if (!organization.isLocation()) {
 			OrganizationPermission.check(
 				getPermissionChecker(), organizationId, actionId);
 		}

@@ -47,10 +47,6 @@ String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, mod
 
 String resourcePrimKey = ParamUtil.getString(request, "resourcePrimKey");
 
-if (Validator.isNull(resourcePrimKey)) {
-	throw new ResourcePrimKeyException();
-}
-
 String selResource = modelResource;
 String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
@@ -432,7 +428,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
 
 		<%
-		boolean rootOrganization = tabs2.equals("organizations");
+		boolean organizationsTab = tabs2.equals("organizations");
 
 		String organizationIds = ParamUtil.getString(request, "organizationIds");
 		long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
@@ -466,12 +462,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<%
 				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-				long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-				String parentOrganizationComparator = StringPool.EQUAL;
-
-				if (!rootOrganization) {
-					parentOrganizationComparator = StringPool.NOT_EQUAL;
-				}
+				long parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
 
 				LinkedHashMap organizationParams = new LinkedHashMap();
 
@@ -480,11 +471,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 					organizationParams.put("permissionsGroupId", new Long(groupId));
 				}
 
-				int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
+				int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
 
 				searchContainer.setTotal(total);
 
-				List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+				List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 				%>
@@ -499,16 +490,17 @@ else if (modelResource.equals(Layout.class.getName())) {
 				List headerNames = new ArrayList();
 
 				headerNames.add("name");
+				headerNames.add("parent-organization");
 				headerNames.add("city");
 				headerNames.add("permissions");
 
-				if (!rootOrganization) {
+				if (!organizationsTab) {
 					headerNames.add("exclusive");
 				}
 
 				searchContainer.setHeaderNames(headerNames);
 
-				if (!rootOrganization) {
+				if (!organizationsTab) {
 					searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
 				}
 
@@ -522,6 +514,20 @@ else if (modelResource.equals(Layout.class.getName())) {
 					// Name
 
 					row.addText(organization.getName());
+
+					// Parent Organization
+
+					String parentOrganizationName = StringPool.BLANK;
+
+					if (organization.getParentOrganizationId() > 0) {
+						try {
+							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+							parentOrganizationName = parentOrganization.getName();
+						}
+						catch (Exception nsoe) {
+						}
+					}
+					row.addText(parentOrganizationName);
 
 					// Address
 
@@ -548,7 +554,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 					row.addText(StringUtil.merge(actionsNames, ", "));
 
-					if (!rootOrganization) {
+					if (!organizationsTab) {
 						if (permissions.size() == 0) {
 							row.addText(StringPool.BLANK);
 						}
@@ -631,7 +637,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<br />
 
 				<c:choose>
-					<c:when test='<%= rootOrganization %>'>
+					<c:when test='<%= organizationsTab %>'>
 						<input name="<portlet:namespace />organizationIntersection" type="hidden" value="0" />
 					</c:when>
 					<c:otherwise>

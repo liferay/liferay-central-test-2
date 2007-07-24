@@ -28,7 +28,7 @@ String strutsAction = ParamUtil.getString(request, "struts_action");
 
 <form method="post" name="<portlet:namespace />fm">
 
-<liferay-ui:tabs names='<%= rootOrganization ? "organizations" : "locations" %>' />
+<liferay-ui:tabs names='<%= organizationsTab ? "organizations" : "locations" %>' />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -47,11 +47,13 @@ OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portl
 
 <%
 OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+List headerNames = searchContainer.getHeaderNames();
+headerNames.add(StringPool.BLANK);
 
 int total = 0;
 List results = null;
 
-if (rootOrganization && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
+if (organizationsTab && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
 	total = 1;
 
 	searchContainer.setTotal(total);
@@ -60,7 +62,7 @@ if (rootOrganization && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portl
 
 	results.add(user.getOrganization());
 }
-else if (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
+else if (!organizationsTab && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 	total = 1;
 
 	searchContainer.setTotal(total);
@@ -70,32 +72,27 @@ else if (!rootOrganization && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 	results.add(user.getLocation());
 }
 else {
-	long parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.ANY_PARENT_ORGANIZATION_ID);
 	String parentOrganizationComparator = StringPool.EQUAL;
 
-	if (!rootOrganization) {
+	if (!organizationsTab) {
 		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 			parentOrganizationId = user.getOrganization().getOrganizationId();
-			parentOrganizationComparator = StringPool.EQUAL;
 		}
 		else {
-			parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
+			parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.ANY_PARENT_ORGANIZATION_ID);
 
 			if ((parentOrganizationId <= 0)) {
-				parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-			}
-
-			if (parentOrganizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-				parentOrganizationComparator = StringPool.NOT_EQUAL;
+				parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
 			}
 		}
 	}
 
-	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
 
 	searchContainer.setTotal(total);
 
-	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
 searchContainer.setResults(results);
@@ -117,7 +114,7 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(renderResponse.getNamespace());
 	sm.append("select");
 
-	if (rootOrganization) {
+	if (organizationsTab) {
 		sm.append("Organization");
 	}
 	else {
@@ -143,6 +140,9 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(address.getCity(), rowHREF);
 	row.addText(address.getRegion().getName(), rowHREF);
 	row.addText(address.getCountry().getName(), rowHREF);
+
+	// Add actions bar
+	row.addJSP("/html/portlet/enterprise_admin/select_organization_action.jsp");
 
 	// Add result row
 

@@ -259,8 +259,7 @@ public class UserImpl extends UserModelImpl implements User {
 			for (int i = 0; i < organizations.size(); i++) {
 				Organization organization = (Organization)organizations.get(i);
 
-				if (organization.getParentOrganizationId() ==
-						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+				if (!organization.isLocation() ) {
 
 					return organization;
 				}
@@ -281,8 +280,7 @@ public class UserImpl extends UserModelImpl implements User {
 			for (int i = 0; i < organizations.size(); i++) {
 				Organization organization = (Organization)organizations.get(i);
 
-				if (organization.getParentOrganizationId() !=
-						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+				if (organization.isLocation()) {
 
 					return organization;
 				}

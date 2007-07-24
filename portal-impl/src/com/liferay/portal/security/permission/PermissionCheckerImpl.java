@@ -27,11 +27,13 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.ResourceServiceUtil;
@@ -46,6 +48,7 @@ import com.liferay.util.GetterUtil;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -199,6 +202,32 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				List userOrgs =
 					OrganizationServiceUtil.getUserOrganizations(
 						user.getUserId());
+
+				// Recursive calculation organization ancestors with inheritable
+				// flag actived.
+
+				if (userOrgs != null && userOrgs.size() > 0){
+
+					ArrayList organizationsTree = new ArrayList();
+
+					Iterator it = userOrgs.iterator();
+
+					while (it.hasNext()){
+						Organization org = (Organization) it.next();
+
+						if (!org.isLocation()) {
+							organizationsTree.addAll(
+									OrganizationLocalServiceUtil.
+											getInheritableAncestors(
+												org.getOrganizationId()));
+						}
+						else {
+							organizationsTree.add(org);
+						}
+					}
+
+					userOrgs = organizationsTree;
+				}
 
 				List userOrgGroups =
 					GroupServiceUtil.getOrganizationsGroups(userOrgs);

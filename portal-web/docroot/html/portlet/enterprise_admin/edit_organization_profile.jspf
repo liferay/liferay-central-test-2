@@ -31,7 +31,7 @@ if (parentOrganizationId <= 0) {
 	}
 }
 
-if (!rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (!organizationsTab && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	parentOrganizationId = user.getOrganization().getOrganizationId();
 }
 
@@ -60,6 +60,19 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
 		nameEl.innerHTML = name + "&nbsp;";
+
+		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = false;
+	}
+
+	function <portlet:namespace />removeOrganization() {
+		document.<portlet:namespace />fm.<portlet:namespace />parentOrganizationId.value = "";
+
+		var nameEl = document.getElementById("<portlet:namespace />parentOrganizationName");
+
+		nameEl.href = "#";
+		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
 	}
 </script>
 
@@ -82,23 +95,35 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			</td>
 		</tr>
 
-		<c:if test='<%= !rootOrganization %>'>
-			<input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
+		<input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
 
-			<tr>
-				<td>
-					<liferay-ui:message key="organization" />
-				</td>
-				<td>
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentOrganizationName"><%= parentOrganizationName %></a>
+		<tr>
+			<td>
+				<liferay-ui:message key="parent-organization" />
+			</td>
+			<td>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentOrganizationName"><%= parentOrganizationName %></a>
 
-					<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-						<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
-					</c:if>
-				</td>
-			</tr>
+				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
+					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
+					<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
+				</c:if>
+			</td>
+		</tr>
+
+		<c:if test="<%= organizationsTab %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="permissions-inheritable" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />inheritable">
+						<option <%= organization != null && organization.isInheritable() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "true") %></option>
+						<option <%= organization != null && !organization.isInheritable() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "false") %></option>
+				</select>
+			</td>
+		</tr>
 		</c:if>
-
 		<tr>
 			<td>
 				<liferay-ui:message key="status" />

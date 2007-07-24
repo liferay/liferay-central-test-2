@@ -112,7 +112,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 
 	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isRoot() ? "organization" : "location")) %>: <%= organization.getName() %><br />
+	<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isLocation() ? "location" : "organization")) %>: <%= organization.getName() %><br />
 </c:if>
 
 <script type="text/javascript">

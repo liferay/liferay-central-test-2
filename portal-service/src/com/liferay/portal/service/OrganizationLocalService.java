@@ -63,7 +63,7 @@ public interface OrganizationLocalService {
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
 		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location)
+		long countryId, int statusId, boolean location, boolean inheritable)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -83,6 +83,14 @@ public interface OrganizationLocalService {
 
 	public void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getAncestors(long organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getInheritableAncestors(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -113,18 +121,20 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, long parentOrganizationId,
-		java.lang.String parentOrganizationComparator, java.lang.String name,
-		java.lang.String street, java.lang.String city, java.lang.String zip,
-		java.lang.Long regionId, java.lang.Long countryId,
-		java.util.LinkedHashMap params, boolean andOperator, int begin, int end)
-		throws com.liferay.portal.SystemException;
+		boolean location, java.lang.String name, java.lang.String street,
+		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params,
+		boolean andOperator, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public int searchCount(long companyId, long parentOrganizationId,
-		java.lang.String parentOrganizationComparator, java.lang.String name,
-		java.lang.String street, java.lang.String city, java.lang.String zip,
-		java.lang.Long regionId, java.lang.Long countryId,
-		java.util.LinkedHashMap params, boolean andOperator)
-		throws com.liferay.portal.SystemException;
+		boolean location, java.lang.String name, java.lang.String street,
+		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params,
+		boolean andOperator)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
@@ -142,7 +152,7 @@ public interface OrganizationLocalService {
 	public com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+		boolean location, boolean inheritable)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

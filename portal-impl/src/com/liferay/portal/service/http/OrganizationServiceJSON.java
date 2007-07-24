@@ -86,11 +86,11 @@ public class OrganizationServiceJSON {
 
 	public static JSONObject addOrganization(long parentOrganizationId,
 		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+		boolean location, boolean inheritable)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
-				name, regionId, countryId, statusId, location);
+				name, regionId, countryId, statusId, location, inheritable);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
@@ -150,12 +150,12 @@ public class OrganizationServiceJSON {
 
 	public static JSONObject updateOrganization(long organizationId,
 		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location)
+		long countryId, int statusId, boolean location, boolean inheritable)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 				parentOrganizationId, name, regionId, countryId, statusId,
-				location);
+				location, inheritable);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}

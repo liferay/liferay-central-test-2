@@ -65,6 +65,18 @@ public interface OrganizationModel extends BaseModel {
 
 	public void setName(String name);
 
+	public boolean getLocation();
+
+	public boolean isLocation();
+
+	public void setLocation(boolean location);
+
+	public boolean getInheritable();
+
+	public boolean isInheritable();
+
+	public void setInheritable(boolean inheritable);
+
 	public boolean getRecursable();
 
 	public boolean isRecursable();

@@ -25,7 +25,23 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-boolean organizationsTab = true;
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+
+Organization organization = (Organization)row.getObject();
+
+long organizationId = organization.getOrganizationId();
+
+boolean organizationsTab = !organization.isLocation();
+boolean location = organization.isLocation();
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/edit_organization_common.jspf" %>
+<c:if test="<%= !location %>">
+	<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="viewSubOrganizationsURL">
+		<portlet:param name="struts_action" value="/enterprise_admin/select_organization" />
+		<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+		<portlet:param name="back" value="<%= currentURL %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSubOrganizationsURL %>" />
+</c:if>
+

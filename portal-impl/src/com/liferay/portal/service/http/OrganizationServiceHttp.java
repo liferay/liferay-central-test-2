@@ -149,7 +149,7 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location)
+		boolean location, boolean inheritable)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -164,11 +164,12 @@ public class OrganizationServiceHttp {
 			Object paramObj3 = new LongWrapper(countryId);
 			Object paramObj4 = new IntegerWrapper(statusId);
 			Object paramObj5 = new BooleanWrapper(location);
+			Object paramObj6 = new BooleanWrapper(inheritable);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -445,7 +446,7 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization updateOrganization(
 		HttpPrincipal httpPrincipal, long organizationId,
 		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location)
+		long countryId, int statusId, boolean location, boolean inheritable)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -461,11 +462,12 @@ public class OrganizationServiceHttp {
 			Object paramObj4 = new LongWrapper(countryId);
 			Object paramObj5 = new IntegerWrapper(statusId);
 			Object paramObj6 = new BooleanWrapper(location);
+			Object paramObj7 = new BooleanWrapper(inheritable);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 			Object returnObj = null;
 

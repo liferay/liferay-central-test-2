@@ -64,6 +64,8 @@ public class OrganizationJSONSerializer {
 			jsonObj.put("name", name.toString());
 		}
 
+		jsonObj.put("location", model.isLocation());
+		jsonObj.put("inheritable", model.isInheritable());
 		jsonObj.put("recursable", model.isRecursable());
 		jsonObj.put("regionId", model.getRegionId());
 		jsonObj.put("countryId", model.getCountryId());
