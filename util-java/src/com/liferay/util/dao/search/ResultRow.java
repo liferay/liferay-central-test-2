@@ -56,7 +56,6 @@ public class ResultRow {
 		_pos = pos;
 		_bold = bold;
 		_entries = new ArrayList();
-		_restricted = false;
 	}
 
 	public Object getObject() {
@@ -82,13 +81,13 @@ public class ResultRow {
 	public boolean isBold() {
 		return _bold;
 	}
-	
-	public void setRestricted(boolean restricted) {
-		_restricted = restricted;
-	}
-	
+
 	public boolean isRestricted() {
 		return _restricted;
+	}
+
+	public void setRestricted(boolean restricted) {
+		_restricted = restricted;
 	}
 
 	public String getClassName() {
@@ -167,6 +166,10 @@ public class ResultRow {
 	public void addText(
 		int index, String align, String valign, String name, String href) {
 
+		if (_restricted) {
+			href = null;
+		}
+
 		_entries.add(index, new TextSearchEntry(align, valign, name, href));
 	}
 
@@ -216,10 +219,18 @@ public class ResultRow {
 	// Text with search entry
 
 	public void addText(TextSearchEntry searchEntry) {
+		if (_restricted) {
+			searchEntry.setHref(null);
+		}
+
 		_entries.add(_entries.size(), searchEntry);
 	}
 
 	public void addText(int index, TextSearchEntry searchEntry) {
+		if (_restricted) {
+			searchEntry.setHref(null);
+		}
+
 		_entries.add(index, searchEntry);
 	}
 
@@ -243,6 +254,10 @@ public class ResultRow {
 
 	public void addButton(
 		int index, String align, String valign, String name, String href) {
+
+		if (_restricted) {
+			href = null;
+		}
 
 		_entries.add(index, new ButtonSearchEntry(align, valign, name, href));
 	}

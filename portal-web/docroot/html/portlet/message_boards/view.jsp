@@ -87,7 +87,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			MBCategory curCategory = (MBCategory)results.get(i);
 
 			ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
-			
+
 			boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
 
 			row.setRestricted(restricted);
@@ -103,9 +103,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			StringMaker sm = new StringMaker();
 
-			sm.append("<a href=\"");
-			sm.append(restricted?"":rowURL);
-			sm.append("\"><b>");
+			if (!restricted) {
+				sm.append("<a href=\"");
+				sm.append(rowURL);
+				sm.append("\">");
+			}
+
+			sm.append("<b>");
 			sm.append(curCategory.getName());
 			sm.append("</b>");
 
@@ -116,9 +120,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				sm.append("</span>");
 			}
 
-			sm.append("</a>");
-			
 			if (!restricted) {
+				sm.append("</a>");
+
 				List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
 				if (subcategories.size() > 0) {
@@ -163,13 +167,18 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
 			int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
 
-			row.addText(String.valueOf(categoriesCount), restricted?"":rowURL.toString());
-			row.addText(String.valueOf(threadsCount), restricted?"":rowURL.toString());
-			row.addText(String.valueOf(messagesCount), restricted?"":rowURL.toString());
+			row.addText(String.valueOf(categoriesCount), rowURL);
+			row.addText(String.valueOf(threadsCount), rowURL);
+			row.addText(String.valueOf(messagesCount), rowURL);
 
 			// Action
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/category_action.jsp");
+			if (restricted) {
+				row.addText(StringPool.BLANK);
+			}
+			else {
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/category_action.jsp");
+			}
 
 			// Add result row
 
@@ -255,7 +264,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
 				ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
-				
+
 				row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
 				PortletURL rowURL = renderResponse.createRenderURL();
