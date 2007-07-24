@@ -314,6 +314,7 @@
 
 .restricted, .restricted td {
 	background: #FEE1E0;
+	border: none;
 }
 
 .restricted * {
@@ -321,6 +322,8 @@
 }
 
 .restricted .col-1 {
-	background: transparent url(../images/messages/error.png) no-repeat 0.5em 50%;
+	background-image: url(../images/messages/error.png);
+	background-position: 0.5em 50%;
+	background-repeat: no-repeat;
 	padding-left: 2.8em;
 }
