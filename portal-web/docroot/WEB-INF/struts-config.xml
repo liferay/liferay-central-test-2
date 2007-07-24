@@ -671,7 +671,9 @@
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
 		</action>
 
-		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" />
+		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" >
+			<forward name="portlet.message_boards.error" path="portlet.journal.error" />
+		</action>
 
 		<action path="/journal/edit_configuration" type="com.liferay.portlet.journal.action.EditConfigurationAction">
 			<forward name="portlet.journal.edit_configuration" path="portlet.journal.edit_configuration" />
@@ -742,7 +744,9 @@
 
 		<!-- Journal Content -->
 
-		<action path="/journal_content/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" />
+		<action path="/journal_content/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" >
+			<forward name="portlet.message_boards.error" path="portlet.journal_content.error" />
+		</action>
 
 		<action path="/journal_content/edit_configuration" type="com.liferay.portlet.journalcontent.action.EditConfigurationAction">
 			<forward name="portlet.journal_content.edit_configuration" path="portlet.journal_content.edit_configuration" />

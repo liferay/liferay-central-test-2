@@ -98,7 +98,7 @@ public class EditDiscussionAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return null;
+		return mapping.findForward(getForward(req));
 	}
 
 	protected void deleteMessage(ActionRequest req) throws Exception {

@@ -690,6 +690,10 @@
 		<put name="portlet_content" value="/portlet/journal_content/view.jsp" />
 	</definition>
 
+	<definition name="portlet.journal_content.error" extends="portlet.journal_content">
+		<put name="portlet_content" value="/portlet/journal_content/error.jsp" />
+	</definition>
+
 	<!-- Journal Content Search -->
 
 	<definition name="portlet.journal_content_search" extends="portlet" />
