@@ -241,7 +241,7 @@ public class UserAttributes {
 			return StringPool.BLANK;
 		}
 		else if (name.equals(USER_NAME_NICKNAME)) {
-			return StringPool.BLANK;
+			return _user.getScreenName();
 		}
 		else if (name.equals(USER_HOME_INFO_POSTAL_NAME)) {
 			return StringPool.BLANK;
