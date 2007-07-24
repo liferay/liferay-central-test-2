@@ -123,6 +123,8 @@ public class JournalArticleContentUpgradeColumnImpl
 			content, BaseUpgradeTableImpl.SAFE_CHARS[0],
 			BaseUpgradeTableImpl.SAFE_CHARS[1]);
 
+		content = replaceIds(content);
+
 		return content;
 	}
 
@@ -201,6 +203,25 @@ public class JournalArticleContentUpgradeColumnImpl
 		String newImageId = oldCompanyId + ".journal.article." + oldImageId;
 
 		return String.valueOf(_imageIdMapper.getNewValue(newImageId));
+	}
+
+	protected String replaceIds(String content) throws Exception {
+		ValueMapper folderIdMapper = AvailableMappersUtil.getDLFolderIdMapper();
+
+		Iterator itr = folderIdMapper.iterator();
+
+		while (itr.hasNext()) {
+			Long oldFolderId = (Long)itr.next();
+
+			Long newFolderId = (Long)folderIdMapper.getNewValue(oldFolderId);
+
+			content = StringUtil.replace(
+				content,
+				"/document_library/get_file?folderId=" + oldFolderId + "&",
+				"/document_library/get_file?folderId=" + newFolderId + "&");
+		}
+
+		return content;
 	}
 
 	private static final String _IMG_ID_PATH =
