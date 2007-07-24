@@ -204,7 +204,7 @@ Liferay.Session = {
 						document.title = instance.banner.text();
 					} else {
 						instance.banner.html(instance._expiredText);
-						instance.banner.toggleClass('popup-alert-notice popup-alert-warning');
+						instance.banner.toggleClass('popup-alert-notice').toggleClass('popup-alert-warning');
 
 						if (instance._countdownTimer) {
 							clearInterval(instance._countdownTimer);
