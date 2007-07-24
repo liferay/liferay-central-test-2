@@ -153,6 +153,12 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</td>
 	<td>
 		<input type="submit" value="<liferay-ui:message key="search" />" />
+
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+			<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			</c:if>
+		</c:if>
 	</td>
 </tr>
 </table>

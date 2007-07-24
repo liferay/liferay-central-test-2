@@ -49,6 +49,12 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 <tr>
 	<td>
 		<input type="submit" value="<liferay-ui:message key="search" />" />
+
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) && portletName.equals(PortletKeys.COMMUNITIES) %>">
+			<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
+				<input type="button" value="<liferay-ui:message key="create-community" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			</c:if>
+		</c:if>
 	</td>
 </tr>
 </table>
