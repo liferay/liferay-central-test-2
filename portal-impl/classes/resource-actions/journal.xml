@@ -52,8 +52,8 @@
 			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults>
-			<action-key>VIEW</action-key>
 			<action-key>ADD_DISCUSSION</action-key>
+			<action-key>VIEW</action-key>
 		</community-defaults>
 		<guest-defaults>
 			<action-key>VIEW</action-key>
