@@ -93,14 +93,6 @@ public class EditDiscussionAction extends PortletAction {
 		}
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
-		throws Exception {
-
-		return mapping.findForward(getForward(req));
-	}
-
 	protected void deleteMessage(ActionRequest req) throws Exception {
 		long groupId = PortalUtil.getPortletGroupId(req);
 		String className = ParamUtil.getString(req, "className");

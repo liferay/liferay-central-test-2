@@ -686,12 +686,12 @@
 		<put name="portlet_configuration_content" value="/portlet/journal_content/edit_configuration.jsp" />
 	</definition>
 
-	<definition name="portlet.journal_content.view" extends="portlet.journal_content">
-		<put name="portlet_content" value="/portlet/journal_content/view.jsp" />
-	</definition>
-
 	<definition name="portlet.journal_content.error" extends="portlet.journal_content">
 		<put name="portlet_content" value="/portlet/journal_content/error.jsp" />
+	</definition>
+
+	<definition name="portlet.journal_content.view" extends="portlet.journal_content">
+		<put name="portlet_content" value="/portlet/journal_content/view.jsp" />
 	</definition>
 
 	<!-- Journal Content Search -->
