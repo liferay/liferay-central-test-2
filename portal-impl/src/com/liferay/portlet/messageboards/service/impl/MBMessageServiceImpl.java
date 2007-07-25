@@ -528,6 +528,8 @@ public class MBMessageServiceImpl
 		List entries = new ArrayList();
 
 		syndFeed.setEntries(entries);
+		
+		int rssContentLength = MBUtil.getRSSContentLength(prefs);
 
 		Iterator itr = messages.iterator();
 
@@ -535,7 +537,7 @@ public class MBMessageServiceImpl
 			MBMessage message = (MBMessage)itr.next();
 
 			String firstLine = StringUtil.shorten(
-				Html.stripHtml(message.getBody()), 80, StringPool.BLANK);
+				Html.stripHtml(message.getBody()), rssContentLength, StringPool.BLANK);
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 

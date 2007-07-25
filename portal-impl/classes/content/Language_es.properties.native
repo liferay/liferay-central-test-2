@@ -2118,6 +2118,7 @@ root-layout=Disposición de la página raíz
 root-theme=Tema raíz
 root=Raíz
 rounded-edges=Bordes redondeados
+rss-feed-content-length=Longitud Del Contenido De la Alimentación de RSS
 rss=RSS
 ru_en=De ruso a inglés
 run-the-garbage-collector-to-free-up-memory=Ejecutar el recolector de basura para liberar memoria.

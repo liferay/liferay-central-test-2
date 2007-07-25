@@ -2118,6 +2118,7 @@ root-layout=根布局
 root-theme=根题材
 root=根
 rounded-edges=圆边
+rss-feed-content-length=RSS 饲料内容长度
 rss=RSS
 ru_en=俄语对英语
 run-the-garbage-collector-to-free-up-memory=执行Java内存回收以释放内存。

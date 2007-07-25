@@ -40,6 +40,8 @@ String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMes
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
 String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(prefs));
 
+String rssContentLength = ParamUtil.getString(request, "rssContentLength", String.valueOf(MBUtil.getRSSContentLength(prefs)));
+
 String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
@@ -456,6 +458,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:input-checkbox param="showFullName" defaultValue="<%= MBUtil.getShowFullName(prefs) %>" />
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="rss-feed-content-length" />
+			</td>
+			<td>
+				<input name="<portlet:namespace />rssContentLength" size="4" type="text" value="<%= rssContentLength %>" />
+			</td>
+		</tr>		
 		</table>
 	</c:when>	
 </c:choose>

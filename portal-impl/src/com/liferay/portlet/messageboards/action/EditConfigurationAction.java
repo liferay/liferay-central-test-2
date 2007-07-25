@@ -254,10 +254,12 @@ public class EditConfigurationAction extends PortletAction {
 		prefs.setValues(MBUtil.getRanksKey(languageId), ranks);
 	}
 
-	private void updateDisplaySettings(ActionRequest req, PortletPreferences prefs) 
+	protected void updateDisplaySettings(ActionRequest req, PortletPreferences prefs) 
 		throws Exception {
 
 		prefs.setValue("show-fullname", ParamUtil.getString(req, "showFullName"));
+		
+		prefs.setValue("rss-content-length", ParamUtil.getString(req, "rssContentLength"));
 	}
 
 }

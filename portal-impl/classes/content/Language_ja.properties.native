@@ -2115,6 +2115,7 @@ root-layout=根のレイアウト
 root-theme=根の主題
 root=根
 rounded-edges=円形にされた端
+rss-feed-content-length=RSS の供給の内容の長さ
 rss=RSS
 ru_en=英語へのロシア語
 run-the-garbage-collector-to-free-up-memory=記憶を解放するために塵芥収集車を動かしなさい。

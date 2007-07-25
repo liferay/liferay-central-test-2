@@ -338,6 +338,14 @@ public class MBUtil {
 				prefs.getValue("show-fullname", showFullName), true);
 	}
 	
+	public static int getRSSContentLength(PortletPreferences prefs) {
+		String rssContentLength = PropsUtil.get(
+				PropsUtil.MESSAGE_BOARDS_RSS_CONTENT_LENGTH); 
+			
+		return GetterUtil.getInteger(
+				prefs.getValue("rss-content-length", rssContentLength), 80);
+	}	
+	
 	public static String getMailId(long messageId, String mx) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
