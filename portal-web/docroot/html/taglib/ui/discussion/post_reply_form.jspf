@@ -58,14 +58,14 @@
 		<input type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
-
-		<br /><br />
 	</td>
 </tr>
 
 <c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
 	<tr id="<%= namespace %>editForm<%= i %>" style="display: none;">
 		<td>
+			<br />
+
 			<table class="liferay-table">
 			<tr>
 				<td>
@@ -90,8 +90,6 @@
 			<input type="button" value="<liferay-ui:message key="update" />" onClick="<%= namespace %>updateMessage(<%= i %>);" />
 
 			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');" />
-
-			<br /><br />
 		</td>
 	</tr>
 </c:if>
@@ -99,6 +97,8 @@
 <c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
 	<tr>
 		<td>
+			<br />
+
 			<table class="liferay-table">
 			<tr>
 				<c:if test="<%= themeDisplay.isSignedIn() %>">
