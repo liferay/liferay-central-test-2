@@ -83,9 +83,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("articles") %>'>
+		<input name="<portlet:namespace />groupId" type="hidden" value="" />
 		<input name="<portlet:namespace />deleteArticleIds" type="hidden" value="" />
 		<input name="<portlet:namespace />expireArticleIds" type="hidden" value="" />
-		<input name="<portlet:namespace />groupId" type="hidden" value="" />
 
 		<%
 		String orderByCol = ParamUtil.getString(request, "orderByCol");
