@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -39,6 +40,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,6 +63,7 @@ import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.store.jdbc.JdbcDirectory;
 import org.apache.lucene.store.jdbc.dialect.Dialect;
 
@@ -290,9 +293,6 @@ public class LuceneUtil {
 	}
 
 	private LuceneUtil() {
-
-		// Analyzer
-
 		String analyzerName = PropsUtil.get(PropsUtil.LUCENE_ANALYZER);
 
 		if (Validator.isNotNull(analyzerName)) {
@@ -418,9 +418,13 @@ public class LuceneUtil {
 	private Directory _getLuceneDir(long companyId) {
 		Directory directory = null;
 
-		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
-				_LUCENE_STORE_TYPE_JDBC)) {
+		String storeType = PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE);
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lucene store type " + storeType);
+		}
+
+		if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
 			String tableName = _getTableName(companyId);
 
 			JdbcDirectory jdbcDir = null;
@@ -456,6 +460,19 @@ public class LuceneUtil {
 				}
 			}
 		}
+		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
+			String path =
+				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
+					StringPool.SLASH;
+
+			directory = (Directory)_ramDirectories.get(path);
+
+			if (directory == null) {
+				directory = new RAMDirectory();
+
+				_ramDirectories.put(path, directory);
+			}
+		}
 		else {
 			String path =
 				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
@@ -485,9 +502,11 @@ public class LuceneUtil {
 		return _LUCENE_TABLE_PREFIX + companyId;
 	}
 
-	//private static final String _LUCENE_STORE_TYPE_FILE = "file";
+	private static final String _LUCENE_STORE_TYPE_FILE = "file";
 
 	private static final String _LUCENE_STORE_TYPE_JDBC = "jdbc";
+
+	private static final String _LUCENE_STORE_TYPE_RAM = "ram";
 
 	private static final String _LUCENE_TABLE_PREFIX = "LUCENE_";
 
@@ -498,5 +517,6 @@ public class LuceneUtil {
 	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
 	private Class _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
+	private Map _ramDirectories = CollectionFactory.getSyncHashMap();
 
 }
