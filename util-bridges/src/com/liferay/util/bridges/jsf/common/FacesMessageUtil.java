@@ -46,19 +46,19 @@ import javax.faces.context.FacesContext;
 public class FacesMessageUtil {
 
 	public static void error(FacesContext facesContext, String key) {
-		error(facesContext, key);
+		error(null, facesContext, key);
 	}
 
 	public static void error(
 		FacesContext facesContext, String key, Object argument) {
 
-		error(facesContext, key, argument);
+		error(null, facesContext, key, argument);
 	}
 
 	public static void error(
 		FacesContext facesContext, String key, Object[] arguments) {
 
-		error(facesContext, key, arguments);
+		error(null, facesContext, key, arguments);
 	}
 
 	public static void error(
@@ -85,19 +85,19 @@ public class FacesMessageUtil {
 	}
 
 	public static void info(FacesContext facesContext, String key) {
-		info(facesContext, key);
+		info(null, facesContext, key);
 	}
 
 	public static void info(
 		FacesContext facesContext, String key, Object argument) {
 
-		info(facesContext, key, argument);
+		info(null, facesContext, key, argument);
 	}
 
 	public static void info(
 		FacesContext facesContext, String key, Object[] arguments) {
 
-		info(facesContext, key, arguments);
+		info(null, facesContext, key, arguments);
 	}
 
 	public static void info(
