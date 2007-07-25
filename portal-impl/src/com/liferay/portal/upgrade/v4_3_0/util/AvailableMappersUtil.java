@@ -206,6 +206,14 @@ public class AvailableMappersUtil {
 		_mbMessageIdMapper = mbMessageIdMapper;
 	}
 
+	public static ValueMapper getMBThreadIdMapper() {
+		return _mbThreadIdMapper;
+	}
+
+	public static void setMBThreadIdMapper(ValueMapper mbThreadIdMapper) {
+		_mbThreadIdMapper = mbThreadIdMapper;
+	}
+
 	public static ValueMapper getOrganizationIdMapper() {
 		return _organizationIdMapper;
 	}
@@ -306,6 +314,7 @@ public class AvailableMappersUtil {
 	private static ValueMapper _layoutPlidMapper;
 	private static ValueMapper _mbCategoryIdMapper;
 	private static ValueMapper _mbMessageIdMapper;
+	private static ValueMapper _mbThreadIdMapper;
 	private static ValueMapper _organizationIdMapper;
 	private static ValueMapper _pollsQuestionIdMapper;
 	private static ValueMapper _roleIdMapper;

@@ -36,6 +36,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -74,6 +75,9 @@ public class UpgradeWebsite extends UpgradeProcess {
 			"userId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
+			"websiteId", true);
+
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
@@ -93,13 +97,14 @@ public class UpgradeWebsite extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("websiteId", false), upgradeUserIdColumn,
-			classNameIdColumn, upgradeClassPKColumn);
+			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS, upgradePKColumn,
+			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.setCreateSQL(WebsiteImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
+
+		ValueMapperUtil.persist(upgradePKColumn.getValueMapper(), "website-id");
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);

@@ -146,6 +146,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		ValueMapper threadIdMapper = upgradeThreadIdPKColumn.getValueMapper();
 
+		AvailableMappersUtil.setMBThreadIdMapper(threadIdMapper);
+
 		UpgradeColumn upgradeParentMessageIdColumn = new SwapUpgradeColumnImpl(
 			"parentMessageId", messageIdMapper);
 

@@ -65,18 +65,18 @@ public class UpgradeContact extends UpgradeProcess {
 
 		// Contact_
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"contactId", new Integer(Types.VARCHAR), true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS, pkUpgradeColumn);
+			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS, upgradePKColumn);
 
 		upgradeTable.setCreateSQL(ContactImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		ValueMapper contactIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setContactIdMapper(contactIdMapper);
 

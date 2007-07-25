@@ -35,6 +35,7 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,19 +63,19 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		// Organization
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"organizationId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			upgradePKColumn);
 
 		upgradeTable.setCreateSQL(OrganizationImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		ValueMapper organizationIdMapper = new DefaultPKMapper(
-			pkUpgradeColumn.getValueMapper());
+			upgradePKColumn.getValueMapper());
 
 		AvailableMappersUtil.setOrganizationIdMapper(organizationIdMapper);
 
@@ -103,14 +104,18 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		// OrgLabor
 
+		upgradePKColumn = new PKUpgradeColumnImpl("orgLaborId", true);
+
 		upgradeTable = new DefaultUpgradeTableImpl(
 			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
-			new PKUpgradeColumnImpl("orgLaborId", false),
-			upgradeOrganizationIdColumn);
+			upgradePKColumn, upgradeOrganizationIdColumn);
 
 		upgradeTable.setCreateSQL(OrgLaborImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
+
+		ValueMapperUtil.persist(
+			upgradePKColumn.getValueMapper(), "org-labor-id");
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);

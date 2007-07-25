@@ -57,17 +57,17 @@ public class UpgradeRole extends UpgradeProcess {
 
 		// Role
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"roleId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, pkUpgradeColumn);
+			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, upgradePKColumn);
 
 		upgradeTable.setCreateSQL(RoleImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
-		ValueMapper roleIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper roleIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setRoleIdMapper(roleIdMapper);
 	}

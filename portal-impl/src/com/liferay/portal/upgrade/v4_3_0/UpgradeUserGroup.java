@@ -57,18 +57,18 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 		// UserGroup
 
-		PKUpgradeColumnImpl pkUpgradeColumn = new PKUpgradeColumnImpl(
+		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"userGroupId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			UserGroupImpl.TABLE_NAME, UserGroupImpl.TABLE_COLUMNS,
-			pkUpgradeColumn);
+			upgradePKColumn);
 
 		upgradeTable.setCreateSQL(UserGroupImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
-		ValueMapper userGroupIdMapper = pkUpgradeColumn.getValueMapper();
+		ValueMapper userGroupIdMapper = upgradePKColumn.getValueMapper();
 
 		AvailableMappersUtil.setUserGroupIdMapper(userGroupIdMapper);
 	}
