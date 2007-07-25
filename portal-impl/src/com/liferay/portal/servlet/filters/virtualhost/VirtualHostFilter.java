@@ -24,8 +24,8 @@ package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -37,6 +37,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
+import com.liferay.util.Validator;
 
 import java.io.IOException;
 
@@ -59,9 +60,9 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * This filter is used to provide virtual host functionality. However, this
  * filter is still required even if you do not use virtual hosting because it
- * sets the company id in the request so that subsequent calls in the
- * thread have the company id properly set. This filter must also always be the
- * first filter in the list of filters.
+ * sets the company id in the request so that subsequent calls in the thread
+ * have the company id properly set. This filter must also always be the first
+ * filter in the list of filters.
  * </p>
  *
  * @author Joel Kozikowski
@@ -150,58 +151,58 @@ public class VirtualHostFilter implements Filter {
 
 		if (layoutSet != null) {
 			try {
-
 				LayoutLocalServiceUtil.getFriendlyURLLayout(
 					layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
 					friendlyURL);
 
-                // Layout exists, add prefixes and forward to fire all other
-				// filters (caching, ...)
-
-                StringMaker prefix = new StringMaker();
+				StringMaker prefix = new StringMaker();
 
 				if (layoutSet.isPrivateLayout()) {
-                    prefix.append(PortalUtil.getPathFriendlyURLPrivateGroup());
-                }
+					prefix.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+				}
 				else {
-                    prefix.append(PortalUtil.getPathFriendlyURLPublic());
-                }
+					prefix.append(PortalUtil.getPathFriendlyURLPublic());
+				}
 
-				Group group =
-						GroupLocalServiceUtil.getGroup(layoutSet.getGroupId());
+				Group group = GroupLocalServiceUtil.getGroup(
+					layoutSet.getGroupId());
 
-                if (group.getFriendlyURL().length() > 0) {
-                    prefix.append(group.getFriendlyURL());
-                }
-                else {
-                    prefix.append(group.getDefaultFriendlyURL(
-		                    layoutSet.isPrivateLayout()));
-                }
+				if (Validator.isNotNull(group.getFriendlyURL())) {
+					prefix.append(group.getFriendlyURL());
+				}
+				else {
+					prefix.append(
+						group.getDefaultFriendlyURL(
+							layoutSet.isPrivateLayout()));
+				}
 
-                StringMaker redirect = new StringMaker();
+				StringMaker redirect = new StringMaker();
 
 				redirect.append(prefix);
 				redirect.append(friendlyURL);
 
-                String query = httpReq.getQueryString();
+				String query = httpReq.getQueryString();
 
 				if (query != null) {
-                    redirect.append(StringPool.QUESTION);
+					redirect.append(StringPool.QUESTION);
 					redirect.append(query);
-                }
+				}
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Redirect to " + redirect);
 				}
 
 				RequestDispatcher rd =
-						_ctx.getRequestDispatcher(redirect.toString());
+					_ctx.getRequestDispatcher(redirect.toString());
 
 				rd.forward(req, res);
 
 				return;
 			}
 			catch (NoSuchLayoutException nsle) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsle.getMessage());
+				}
 			}
 			catch (Exception e) {
 				_log.error(e, e);
