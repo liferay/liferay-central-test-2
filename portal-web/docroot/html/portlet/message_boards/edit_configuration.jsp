@@ -80,7 +80,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <liferay-ui:tabs
-	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks"
+	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,display-settings"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -446,6 +446,18 @@ String redirect = ParamUtil.getString(request, "redirect");
 			}
 		</script>
 	</c:when>
+	<c:when test='<%= tabs2.equals("display-settings") %>'>
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="show-fullname" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showFullName" defaultValue="<%= MBUtil.getShowFullName(prefs) %>" />
+			</td>
+		</tr>
+		</table>
+	</c:when>	
 </c:choose>
 
 <br />

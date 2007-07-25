@@ -196,13 +196,14 @@ public class MBMessageServiceUtil {
 
 	public static java.lang.String getCategoryMessagesRSS(long categoryId,
 		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getCategoryMessagesRSS(categoryId, max, type,
-			version, feedURL, entryURL);
+			version, feedURL, entryURL, prefs);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
@@ -225,13 +226,13 @@ public class MBMessageServiceUtil {
 
 	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getThreadMessagesRSS(threadId, max, type,
-			version, feedURL, entryURL);
+			version, feedURL, entryURL, prefs);
 	}
 
 	public static void subscribeMessage(long messageId)

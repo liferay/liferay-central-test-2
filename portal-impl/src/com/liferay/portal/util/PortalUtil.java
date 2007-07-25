@@ -1251,18 +1251,32 @@ public class PortalUtil {
 	}
 
 	public static String getUserName(long userId, String defaultUserName) {
-		return getUserName(userId, defaultUserName, null);
+		return getUserName(userId, defaultUserName, true);
+	}
+
+	public static String getUserName(long userId, String defaultUserName, boolean fullName) {
+		return getUserName(userId, defaultUserName, null, fullName);
+	}
+	
+	public static String getUserName(
+			long userId, String defaultUserName, HttpServletRequest req) {
+		return getUserName(userId, defaultUserName, req, true);
 	}
 
 	public static String getUserName(
-		long userId, String defaultUserName, HttpServletRequest req) {
+		long userId, String defaultUserName, HttpServletRequest req, boolean fullName) {
 
 		String userName = defaultUserName;
 
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			userName = user.getFullName();
+			if (fullName) {
+				userName = user.getFullName();
+			} 
+			else {
+				userName = user.getScreenName();
+			}
 
 			if (req != null) {
 				Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);

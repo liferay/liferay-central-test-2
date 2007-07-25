@@ -300,7 +300,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 				}
 				else {
-					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
+					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName(), MBUtil.getShowFullName(portletSetup)), rowURL);
 				}
 
 				// Number of posts
@@ -325,15 +325,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					sm.append(": ");
 					sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-					try {
-						User user2 = UserLocalServiceUtil.getUserById(thread.getLastPostByUserId());
-
+					String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), null, MBUtil.getShowFullName(portletSetup));
+					
+					if (lastPostByUserName != null) {
 						sm.append("<br />");
 						sm.append(LanguageUtil.get(pageContext, "by"));
 						sm.append(": ");
-						sm.append(user2.getFullName());
-					}
-					catch (NoSuchUserException nsue) {
+						sm.append(lastPostByUserName);
 					}
 
 					sm.append("</span>");
@@ -479,7 +477,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 			}
 			else {
-				row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
+				row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName(), MBUtil.getShowFullName(portletSetup)), rowURL);
 			}
 
 			// Number of posts
@@ -504,17 +502,15 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				sm.append(": ");
 				sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-				try {
-					User user2 = UserLocalServiceUtil.getUserById(thread.getLastPostByUserId());
-
+				String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), null, MBUtil.getShowFullName(portletSetup));
+				
+				if (lastPostByUserName != null) {
 					sm.append("<br />");
 					sm.append(LanguageUtil.get(pageContext, "by"));
 					sm.append(": ");
-					sm.append(user2.getFullName());
+					sm.append(lastPostByUserName);
 				}
-				catch (NoSuchUserException nsue) {
-				}
-
+				
 				sm.append("</span>");
 
 				row.addText(sm.toString(), rowURL);
@@ -590,7 +586,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 						rowURL.setParameter("struts_action", "/directory/edit_user");
 						rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
-						fullName = user2.getFullName();
+						fullName = (MBUtil.getShowFullName(portletSetup) ? user2.getScreenName() : user2.getFullName());
 						createDate = user2.getCreateDate();
 					}
 					catch (NoSuchUserException nsue) {
@@ -669,7 +665,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Name
 
-			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK));
+			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK, MBUtil.getShowFullName(portletSetup)));
 
 			// Ban Date
 

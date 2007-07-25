@@ -93,6 +93,9 @@ public class EditConfigurationAction extends PortletAction {
 		else if (tabs2.equals("user-ranks")) {
 			updateUserRanks(req, prefs);
 		}
+		else if (tabs2.equals("display-settings")) {
+			updateDisplaySettings(req, prefs);
+		}		
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -249,6 +252,12 @@ public class EditConfigurationAction extends PortletAction {
 		String languageId = ParamUtil.getString(req, "languageId");
 
 		prefs.setValues(MBUtil.getRanksKey(languageId), ranks);
+	}
+
+	private void updateDisplaySettings(ActionRequest req, PortletPreferences prefs) 
+		throws Exception {
+
+		prefs.setValue("show-fullname", ParamUtil.getString(req, "showFullName"));
 	}
 
 }

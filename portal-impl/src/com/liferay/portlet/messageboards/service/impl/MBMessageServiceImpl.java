@@ -42,6 +42,7 @@ import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
@@ -337,7 +338,7 @@ public class MBMessageServiceImpl
 
 	public String getCategoryMessagesRSS(
 			long categoryId, int max, String type, double version,
-			String feedURL, String entryURL)
+			String feedURL, String entryURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
@@ -362,7 +363,7 @@ public class MBMessageServiceImpl
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages);
+			name, description, type, version, feedURL, entryURL, messages, prefs);
 	}
 
 	public MBMessage getMessage(long messageId)
@@ -385,7 +386,7 @@ public class MBMessageServiceImpl
 
 	public String getThreadMessagesRSS(
 			long threadId, int max, String type, double version,
-			String feedURL, String entryURL)
+			String feedURL, String entryURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		String name = StringPool.BLANK;
@@ -414,7 +415,7 @@ public class MBMessageServiceImpl
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages);
+			name, description, type, version, feedURL, entryURL, messages, prefs);
 	}
 
 	public void subscribeMessage(long messageId)
@@ -513,7 +514,7 @@ public class MBMessageServiceImpl
 
 	protected String exportToRSS(
 			String name, String description, String type, double version,
-			String feedURL, String entryURL, List messages)
+			String feedURL, String entryURL, List messages, PortletPreferences prefs)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -545,7 +546,7 @@ public class MBMessageServiceImpl
 					User user = UserLocalServiceUtil.getUserById(
 						message.getUserId());
 
-					userName = user.getFullName();
+					userName = (MBUtil.getShowFullName(prefs) ?  user.getFullName() : user.getScreenName());
 				}
 				catch (Exception e) {
 				}

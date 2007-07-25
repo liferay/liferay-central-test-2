@@ -329,7 +329,15 @@ public class MBUtil {
 				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX));
 		}
 	}
-
+	
+	public static boolean getShowFullName(PortletPreferences prefs) {
+		String showFullName = PropsUtil.get(
+				PropsUtil.MESSAGE_BOARDS_SHOW_FULLNAME); 
+			
+		return GetterUtil.getBoolean(
+				prefs.getValue("show-fullname", showFullName), true);
+	}
+	
 	public static String getMailId(long messageId, String mx) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +

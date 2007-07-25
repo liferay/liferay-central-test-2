@@ -834,7 +834,7 @@ public class MBMessageServiceHttp {
 	public static java.lang.String getCategoryMessagesRSS(
 		HttpPrincipal httpPrincipal, long categoryId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -859,11 +859,17 @@ public class MBMessageServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj6 = prefs;
+
+			if (prefs == null) {
+				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -959,7 +965,7 @@ public class MBMessageServiceHttp {
 	public static java.lang.String getThreadMessagesRSS(
 		HttpPrincipal httpPrincipal, long threadId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -984,11 +990,17 @@ public class MBMessageServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj6 = prefs;
+
+			if (prefs == null) {
+				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getThreadMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 

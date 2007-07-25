@@ -150,17 +150,6 @@ public class MBMessageServiceJSON {
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
-	public static java.lang.String getCategoryMessagesRSS(long categoryId,
-		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		java.lang.String returnValue = MBMessageServiceUtil.getCategoryMessagesRSS(categoryId,
-				max, type, version, feedURL, entryURL);
-
-		return returnValue;
-	}
-
 	public static JSONObject getMessage(long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -174,17 +163,6 @@ public class MBMessageServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue = MBMessageServiceUtil.getMessageDisplay(messageId);
-
-		return returnValue;
-	}
-
-	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(threadId,
-				max, type, version, feedURL, entryURL);
 
 		return returnValue;
 	}

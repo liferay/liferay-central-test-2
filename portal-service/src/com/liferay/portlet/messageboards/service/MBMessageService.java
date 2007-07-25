@@ -136,7 +136,7 @@ public interface MBMessageService {
 
 	public java.lang.String getCategoryMessagesRSS(long categoryId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -152,7 +152,7 @@ public interface MBMessageService {
 
 	public java.lang.String getThreadMessagesRSS(long threadId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
