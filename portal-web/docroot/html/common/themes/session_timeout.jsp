@@ -24,25 +24,27 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<script type="text/javascript">
+<c:if test="<%= themeDisplay.isSignedIn() %>">
+	<script type="text/javascript">
 
-	<%
-	int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
-	int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
-	int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
-	int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
-	int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
+		<%
+		int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
+		int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
+		int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
+		int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
+		int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
-	Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
+		Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
 
-	sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
-	%>
+		sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
+		%>
 
-	Liferay.Session.init(
-		{
-			autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
-			timeout: <%= sessionTimeout %>,
-			timeoutWarning: <%= sessionTimeoutWarning %>
-		}
-	);
-</script>
+		Liferay.Session.init(
+			{
+				autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
+				timeout: <%= sessionTimeout %>,
+				timeoutWarning: <%= sessionTimeoutWarning %>
+			}
+		);
+	</script>
+</c:if>
