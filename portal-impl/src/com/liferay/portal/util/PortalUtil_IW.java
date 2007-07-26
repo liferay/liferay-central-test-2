@@ -466,9 +466,21 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.String getUserName(long userId,
+		java.lang.String defaultUserName, java.lang.String userAttribute) {
+		return PortalUtil.getUserName(userId, defaultUserName, userAttribute);
+	}
+
+	public java.lang.String getUserName(long userId,
 		java.lang.String defaultUserName,
 		javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getUserName(userId, defaultUserName, req);
+	}
+
+	public java.lang.String getUserName(long userId,
+		java.lang.String defaultUserName, java.lang.String userAttribute,
+		javax.servlet.http.HttpServletRequest req) {
+		return PortalUtil.getUserName(userId, defaultUserName, userAttribute,
+			req);
 	}
 
 	public java.lang.String getUserPassword(javax.servlet.http.HttpSession ses) {
