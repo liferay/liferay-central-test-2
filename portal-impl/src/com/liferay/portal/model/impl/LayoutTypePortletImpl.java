@@ -875,8 +875,20 @@ public class LayoutTypePortletImpl
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				getLayout().getCompanyId(), portletIds[i]);
 
-			if ((portlet != null) && (!portlet.isInstanceable())) {
-				Portlet staticPortlet = (Portlet)portlet.clone();
+			if (portlet != null) {
+				Portlet staticPortlet = portlet;
+
+				if (portlet.isInstanceable()) {
+
+					// Instanceable portlets do not need to be cloned because
+					// they are already cloned. See the method getPortletById in
+					// the class PortletLocalServiceImpl and how it references
+					// the method getClonedInstance in the class PortletImpl.
+
+				}
+				else {
+					staticPortlet = (Portlet)staticPortlet.clone();
+				}
 
 				staticPortlet.setStatic(true);
 
