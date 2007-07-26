@@ -892,7 +892,7 @@ public class LayoutTypePortletImpl
 
 				staticPortlet.setStatic(true);
 
-				if (position.endsWith(".start")) {
+				if (position.startsWith("layout.static.portlets.start")) {
 					staticPortlet.setStaticStart(true);
 				}
 
