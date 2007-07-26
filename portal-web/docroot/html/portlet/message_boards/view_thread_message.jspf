@@ -31,7 +31,7 @@
 					<liferay-ui:message key="anonymous" />
 				</c:when>
 				<c:otherwise>
-					<b><%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request, MBUtil.getShowFullName(portletSetup)) %></b><br />
+					<b><%= MBUtil.getUserName(message.getUserId(), message.getUserName(), request, portletSetup) %></b><br />
 
 						<%
 						User user2 = null;
@@ -47,7 +47,7 @@
 
 							<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 								<div>
-									<a href="javascript: Messaging.chat({toId:'<%= user2.getUserId() %>', toName:'<%= (MBUtil.getShowFullName(portletSetup)? user2.getScreenName() : user2.getFullName()) %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
+									<a href="javascript: Messaging.chat({toId:'<%= user2.getUserId() %>', toName:'<%= MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup) %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
 								</div>
 							</c:if>
 
@@ -125,7 +125,7 @@
 						parentMessageURL.setParameter("struts_action", "/message_boards/view_message");
 						parentMessageURL.setParameter("messageId", String.valueOf(parentMessage.getMessageId()));
 
-						String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName(), MBUtil.getShowFullName(portletSetup));
+						String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : MBUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName(), portletSetup);
 						%>
 
 						<%= LanguageUtil.format(pageContext, "posted-as-a-reply-to", author) %>

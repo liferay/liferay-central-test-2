@@ -231,8 +231,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage.class.getName(), "subject", subject);
 		anonymous = user.isDefaultUser() ? true : anonymous;
 		Date now = new Date();
-		String author = (MBUtil.getShowFullName(prefs) ? 
-				user.getScreenName() : user.getFullName());
 
 		validate(subject, body);
 
@@ -244,7 +242,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
-		message.setUserName(author);
+		message.setUserName(user.getFullName());
 		message.setCreateDate(now);
 		message.setModifiedDate(now);
 
@@ -415,7 +413,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (!category.isDiscussion()) {
 				Indexer.addMessage(
 					message.getCompanyId(), category.getGroupId(),
-					author, category.getCategoryId(), threadId,
+					user.getFullName(), category.getCategoryId(), threadId,
 					messageId, subject, body);
 			}
 		}
@@ -1148,8 +1146,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String replyToAddress = mailingListAddress;
 			String messageId = MBUtil.getMailId(
 				message.getMessageId(), company.getMx());
-			String author = (MBUtil.getShowFullName(prefs) ? 
-					user.getScreenName() : user.getFullName());
 
 			fromName = StringUtil.replace(
 				fromName,
@@ -1164,7 +1160,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					String.valueOf(company.getCompanyId()),
 					mailingListAddress,
 					user.getEmailAddress(),
-					author,
+					user.getFullName(),
 					portletName
 				});
 
@@ -1181,7 +1177,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					String.valueOf(company.getCompanyId()),
 					mailingListAddress,
 					user.getEmailAddress(),
-					author,
+					user.getFullName(),
 					portletName
 				});
 
@@ -1234,7 +1230,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					String.valueOf(message.getMessageId()),
 					message.getSubject(),
 					user.getEmailAddress(),
-					author,
+					user.getFullName(),
 					company.getVirtualHost(),
 					portletName
 				});
@@ -1265,7 +1261,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					String.valueOf(message.getMessageId()),
 					message.getSubject(),
 					user.getEmailAddress(),
-					author,
+					user.getFullName(),
 					company.getVirtualHost(),
 					portletName
 				});

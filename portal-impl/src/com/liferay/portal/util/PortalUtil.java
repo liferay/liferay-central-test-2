@@ -72,6 +72,7 @@ import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.portlet.UserAttributes;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
@@ -1251,29 +1252,35 @@ public class PortalUtil {
 	}
 
 	public static String getUserName(long userId, String defaultUserName) {
-		return getUserName(userId, defaultUserName, true);
-	}
-
-	public static String getUserName(long userId, String defaultUserName, boolean fullName) {
-		return getUserName(userId, defaultUserName, null, fullName);
-	}
-	
-	public static String getUserName(
-			long userId, String defaultUserName, HttpServletRequest req) {
-		return getUserName(userId, defaultUserName, req, true);
+		return getUserName(
+			userId, defaultUserName, UserAttributes.USER_NAME_NICKNAME);
 	}
 
 	public static String getUserName(
-		long userId, String defaultUserName, HttpServletRequest req, boolean fullName) {
+		long userId, String defaultUserName, String userAttribute) {
+
+		return getUserName(userId, defaultUserName, userAttribute, null);
+	}
+
+	public static String getUserName(
+		long userId, String defaultUserName, HttpServletRequest req) {
+
+		return getUserName(
+			userId, defaultUserName, UserAttributes.USER_NAME_NICKNAME, req);
+	}
+
+	public static String getUserName(
+		long userId, String defaultUserName, String userAttribute,
+		HttpServletRequest req) {
 
 		String userName = defaultUserName;
 
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			if (fullName) {
+			if (userAttribute.equals(UserAttributes.USER_NAME_FULL)) {
 				userName = user.getFullName();
-			} 
+			}
 			else {
 				userName = user.getScreenName();
 			}

@@ -25,9 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -363,7 +361,8 @@ public class MBMessageServiceImpl
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages, prefs);
+			name, description, type, version, feedURL, entryURL, messages,
+			prefs);
 	}
 
 	public MBMessage getMessage(long messageId)
@@ -415,7 +414,8 @@ public class MBMessageServiceImpl
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, messages, prefs);
+			name, description, type, version, feedURL, entryURL, messages,
+			prefs);
 	}
 
 	public void subscribeMessage(long messageId)
@@ -514,7 +514,8 @@ public class MBMessageServiceImpl
 
 	protected String exportToRSS(
 			String name, String description, String type, double version,
-			String feedURL, String entryURL, List messages, PortletPreferences prefs)
+			String feedURL, String entryURL, List messages,
+			PortletPreferences prefs)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -528,7 +529,7 @@ public class MBMessageServiceImpl
 		List entries = new ArrayList();
 
 		syndFeed.setEntries(entries);
-		
+
 		int rssContentLength = MBUtil.getRSSContentLength(prefs);
 
 		Iterator itr = messages.iterator();
@@ -537,21 +538,14 @@ public class MBMessageServiceImpl
 			MBMessage message = (MBMessage)itr.next();
 
 			String firstLine = StringUtil.shorten(
-				Html.stripHtml(message.getBody()), rssContentLength, StringPool.BLANK);
+				Html.stripHtml(message.getBody()), rssContentLength,
+				StringPool.BLANK);
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			if (!message.isAnonymous()) {
-				String userName = message.getUserName();
-
-				try {
-					User user = UserLocalServiceUtil.getUserById(
-						message.getUserId());
-
-					userName = (MBUtil.getShowFullName(prefs) ?  user.getFullName() : user.getScreenName());
-				}
-				catch (Exception e) {
-				}
+				String userName = MBUtil.getUserName(
+					message.getUserId(), message.getUserName(), prefs);
 
 				syndEntry.setAuthor(userName);
 			}

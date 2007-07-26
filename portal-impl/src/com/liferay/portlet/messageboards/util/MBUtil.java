@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -52,6 +53,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -329,23 +331,7 @@ public class MBUtil {
 				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX));
 		}
 	}
-	
-	public static boolean getShowFullName(PortletPreferences prefs) {
-		String showFullName = PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_SHOW_FULLNAME); 
-			
-		return GetterUtil.getBoolean(
-				prefs.getValue("show-fullname", showFullName), true);
-	}
-	
-	public static int getRSSContentLength(PortletPreferences prefs) {
-		String rssContentLength = PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_RSS_CONTENT_LENGTH); 
-			
-		return GetterUtil.getInteger(
-				prefs.getValue("rss-content-length", rssContentLength), 80);
-	}	
-	
+
 	public static String getMailId(long messageId, String mx) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
@@ -381,6 +367,14 @@ public class MBUtil {
 		}
 
 		return ranksKey;
+	}
+
+	public static int getRSSContentLength(PortletPreferences prefs) {
+		String rssContentLength = PropsUtil.get(
+			PropsUtil.MESSAGE_BOARDS_RSS_CONTENT_LENGTH);
+
+		return GetterUtil.getInteger(
+			prefs.getValue("rss-content-length", rssContentLength), 80);
 	}
 
 	public static String[] getThreadPriority(
@@ -423,6 +417,29 @@ public class MBUtil {
 		cal.add(Calendar.DATE, expireInterval);
 
 		return cal.getTime();
+	}
+
+	public static String getUserName(
+		long userId, String defaultUserName, PortletPreferences prefs) {
+
+		return getUserName(userId, defaultUserName, null, prefs);
+	}
+
+	public static String getUserName(
+		long userId, String defaultUserName, HttpServletRequest req,
+		PortletPreferences prefs) {
+
+		String userAttribute = getUserNameAttribute(prefs);
+
+		return PortalUtil.getUserName(
+			userId, defaultUserName, userAttribute, req);
+	}
+
+	public static String getUserNameAttribute(PortletPreferences prefs) {
+		String userNameAttribute = PropsUtil.get(
+			PropsUtil.MESSAGE_BOARDS_USER_NAME_ATTRIBUTE);
+
+		return prefs.getValue("user-name-attribute", userNameAttribute);
 	}
 
 	public static String getUserRank(

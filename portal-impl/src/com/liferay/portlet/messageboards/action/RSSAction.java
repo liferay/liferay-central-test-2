@@ -35,6 +35,7 @@ import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.portlet.PortletPreferences;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
@@ -73,9 +74,9 @@ public class RSSAction extends Action {
 	protected byte[] getRSS(HttpServletRequest req) throws Exception {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-		
+
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-				req, PortletKeys.MESSAGE_BOARDS, false, true);
+			req, PortletKeys.MESSAGE_BOARDS, false, true);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long categoryId = ParamUtil.getLong(req, "categoryId");

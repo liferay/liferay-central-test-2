@@ -300,7 +300,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 				}
 				else {
-					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName(), MBUtil.getShowFullName(portletSetup)), rowURL);
+					row.addText(MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup), rowURL);
 				}
 
 				// Number of posts
@@ -325,9 +325,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					sm.append(": ");
 					sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-					String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), null, MBUtil.getShowFullName(portletSetup));
-					
-					if (lastPostByUserName != null) {
+					String lastPostByUserName = MBUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK, portletSetup);
+
+					if (Validator.isNotNull(lastPostByUserName)) {
 						sm.append("<br />");
 						sm.append(LanguageUtil.get(pageContext, "by"));
 						sm.append(": ");
@@ -477,7 +477,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 			}
 			else {
-				row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName(), MBUtil.getShowFullName(portletSetup)), rowURL);
+				row.addText(MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup), rowURL);
 			}
 
 			// Number of posts
@@ -502,15 +502,15 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				sm.append(": ");
 				sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-				String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), null, MBUtil.getShowFullName(portletSetup));
-				
-				if (lastPostByUserName != null) {
+				String lastPostByUserName = MBUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK, portletSetup);
+
+				if (Validator.isNotNull(lastPostByUserName)) {
 					sm.append("<br />");
 					sm.append(LanguageUtil.get(pageContext, "by"));
 					sm.append(": ");
 					sm.append(lastPostByUserName);
 				}
-				
+
 				sm.append("</span>");
 
 				row.addText(sm.toString(), rowURL);
@@ -586,7 +586,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 						rowURL.setParameter("struts_action", "/directory/edit_user");
 						rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
-						fullName = (MBUtil.getShowFullName(portletSetup) ? user2.getScreenName() : user2.getFullName());
+						fullName = MBUtil.getUserName(user2.getUserId(), StringPool.BLANK, portletSetup);
 						createDate = user2.getCreateDate();
 					}
 					catch (NoSuchUserException nsue) {
@@ -665,7 +665,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Name
 
-			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK, MBUtil.getShowFullName(portletSetup)));
+			row.addText(MBUtil.getUserName(ban.getBanUserId(), StringPool.BLANK, portletSetup));
 
 			// Ban Date
 

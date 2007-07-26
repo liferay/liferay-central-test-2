@@ -42,6 +42,8 @@ public class UserAttributes {
 
 	public static final String LIFERAY_USER_ID = "liferay.user.id";
 
+	public static final String USER_NAME_FULL = "user.name.full";
+
 	// See page 119 of the JSR 168 spec
 
 	public static final String USER_BDATE = "user.bdate";
@@ -209,6 +211,9 @@ public class UserAttributes {
 		}
 		else if (name.equals(LIFERAY_USER_ID)) {
 			return String.valueOf(_user.getUserId());
+		}
+		else if (name.equals(USER_NAME_FULL)) {
+			return _user.getFullName();
 		}
 		else if (name.equals(USER_BDATE)) {
 			return _user.getBirthday().toString();

@@ -991,14 +991,14 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE = "message.boards.email.message.updated.signature";
 
-	public static final String MESSAGE_BOARDS_SHOW_FULLNAME = "message.boards.show.fullname";
-	
 	public static final String MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL = "message.boards.expire.ban.job.interval";
 
 	public static final String MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL = "message.boards.expire.ban.interval";
 
 	public static final String MESSAGE_BOARDS_RSS_CONTENT_LENGTH = "message.boards.rss.content.length";
-	
+
+	public static final String MESSAGE_BOARDS_USER_NAME_ATTRIBUTE = "message.boards.user.name.attribute";
+
 	// Shopping Portlet
 
 	public static final String SHOPPING_CART_MIN_QTY_MULTIPLE = "shopping.cart.min.qty.multiple";

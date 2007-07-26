@@ -78,7 +78,10 @@ public class EditConfigurationAction extends PortletAction {
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
-		if (tabs2.equals("email-from")) {
+		if (tabs2.equals("display-settings")) {
+			updateDisplaySettings(req, prefs);
+		}
+		else if (tabs2.equals("email-from")) {
 			updateEmailFrom(req, prefs);
 		}
 		else if (tabs2.equals("message-added-email")) {
@@ -93,9 +96,6 @@ public class EditConfigurationAction extends PortletAction {
 		else if (tabs2.equals("user-ranks")) {
 			updateUserRanks(req, prefs);
 		}
-		else if (tabs2.equals("display-settings")) {
-			updateDisplaySettings(req, prefs);
-		}		
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -110,6 +110,18 @@ public class EditConfigurationAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward("portlet.message_boards.edit_configuration");
+	}
+
+	protected void updateDisplaySettings(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String userNameAttribute = ParamUtil.getString(
+			req, "userNameAttribute");
+		int rssContentLength = ParamUtil.getInteger(req, "rssContentLength");
+
+		prefs.setValue("user-name-attribute", userNameAttribute);
+		prefs.setValue("rss-content-length", String.valueOf(rssContentLength));
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
@@ -252,14 +264,6 @@ public class EditConfigurationAction extends PortletAction {
 		String languageId = ParamUtil.getString(req, "languageId");
 
 		prefs.setValues(MBUtil.getRanksKey(languageId), ranks);
-	}
-
-	protected void updateDisplaySettings(ActionRequest req, PortletPreferences prefs) 
-		throws Exception {
-
-		prefs.setValue("show-fullname", ParamUtil.getString(req, "showFullName"));
-		
-		prefs.setValue("rss-content-length", ParamUtil.getString(req, "rssContentLength"));
 	}
 
 }

@@ -40,7 +40,8 @@ String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMes
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
 String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(prefs));
 
-String rssContentLength = ParamUtil.getString(request, "rssContentLength", String.valueOf(MBUtil.getRSSContentLength(prefs)));
+String userNameAttribute = ParamUtil.getString(request, "userNameAttribute", MBUtil.getUserNameAttribute(prefs));
+int rssContentLength = ParamUtil.getInteger(request, "rssContentLength", MBUtil.getRSSContentLength(prefs));
 
 String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
@@ -452,10 +453,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="show-fullname" />
+				<liferay-ui:message key="show-user-name-as" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="showFullName" defaultValue="<%= MBUtil.getShowFullName(prefs) %>" />
+				<select name="<portlet:namespace />userNameAttribute">
+					<option <%= userNameAttribute.equals(UserAttributes.USER_NAME_FULL) ? "selected" : "" %> value="<%= UserAttributes.USER_NAME_FULL %>"><liferay-ui:message key="full-name" /></option>
+					<option <%= userNameAttribute.equals(UserAttributes.USER_NAME_NICKNAME) ? "selected" : "" %> value="<%= UserAttributes.USER_NAME_NICKNAME %>"><liferay-ui:message key="screen-name" /></option>
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -465,9 +469,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td>
 				<input name="<portlet:namespace />rssContentLength" size="4" type="text" value="<%= rssContentLength %>" />
 			</td>
-		</tr>		
+		</tr>
 		</table>
-	</c:when>	
+	</c:when>
 </c:choose>
 
 <br />

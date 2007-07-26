@@ -44,4 +44,3 @@ boolean location = organization.isLocation();
 
 	<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSubOrganizationsURL %>" />
 </c:if>
-
