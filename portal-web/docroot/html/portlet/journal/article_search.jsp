@@ -97,7 +97,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 		</select>
 	</td>
-	<td colspan="2">
+	<td>
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 				<select name="<portlet:namespace /><%= ArticleDisplayTerms.STATUS %>">
@@ -138,30 +138,23 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			</c:otherwise>
 		</c:choose>
 	</td>
-</tr>
-</table>
-
-<br />
-
-<table class="liferay-table">
-<tr>
 	<td>
 		<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
 			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
 	</td>
-	<td>
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
-			<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
-				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-			</c:if>
-		</c:if>
-	</td>
 </tr>
 </table>
+
+<br />
+
+<input type="submit" value="<liferay-ui:message key="search" />" />
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+		<input type="button" value="<liferay-ui:message key="add-article" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+	</c:if>
+</c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<input name="<portlet:namespace /><%= ArticleDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
