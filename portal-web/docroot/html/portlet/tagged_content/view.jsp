@@ -63,6 +63,49 @@ if (themeDisplay.isSignedIn()) {
 	}
 }
 
+%>
+
+<liferay-ui:message key="tags" />: 
+
+<% 
+if (entries.length > 0) {
+	%>( <%
+}
+
+for (int k = 0; k < entries.length; k++) {
+	if (k+1 == entries.length) {
+		%><%= entries[k] %> )<%
+	}
+	else {
+		%>
+		<c:if test="<%= andOperator%>">
+			<%= entries[k] %> AND
+		</c:if>
+		<c:if test="<%= !andOperator%>">
+			<%= entries[k] %> OR
+		</c:if>
+		<%
+	}
+}
+
+if (entries.length > 0 && notEntries.length > 0) {
+	%> AND NOT( <%
+}
+
+for (int k = 0; k < notEntries.length; k++) {
+	if (k+1 == notEntries.length) {
+		%><%= notEntries[k] %> )<%
+	}
+	else {
+		%>
+			<%= notEntries[k] %> OR
+		<%
+	}
+}
+%>
+
+<%
+
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -80,12 +123,15 @@ List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOpe
 
 searchContainer.setResults(results);
 
+
 for (int i = 0; i < results.size(); i++) {
 	TagsAsset asset = (TagsAsset)results.get(i);
 	
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
 %>
+
+	<div class="separator"></div>
 
 	<div>
 		<c:choose>
@@ -100,10 +146,6 @@ for (int i = 0; i < results.size(); i++) {
 			</c:otherwise>
 		</c:choose>
 	</div>
-
-	<c:if test="<%= (i + 1) < results.size() %>">
-		<br />
-	</c:if>
 
 <%
 }
