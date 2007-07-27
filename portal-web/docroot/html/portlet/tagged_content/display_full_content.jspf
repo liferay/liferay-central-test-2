@@ -1,5 +1,6 @@
 <c:choose>
 	<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
+		<div class="separator"></div>
 
 		<%
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
@@ -8,6 +9,7 @@
 		<%= entry.getContent() %>
 	</c:when>
 	<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
+		<div class="separator"></div>
 
 		<%
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -16,6 +18,7 @@
 		<a href="<%= entry.getUrl() %>"><%= entry.getName() %></a>
 	</c:when>
 	<c:when test="<%= className.equals(DLFileEntry.class.getName()) %>">
+		<div class="separator"></div>
 
 		<%
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -26,6 +29,7 @@
 		</a>
 	</c:when>
 	<c:when test="<%= className.equals(IGImage.class.getName()) %>">
+		<div class="separator"></div>
 
 		<%
 		IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -39,46 +43,56 @@
 		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
 		String languageId = LanguageUtil.getLanguageId(request);
+		
+		try {
+			JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 
-		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
-		%>
+			%>
+			<div class="separator"></div>
 
-		<c:if test="<%= articleDisplay != null %>">
-			<%= articleDisplay.getContent() %>
-
-			<c:if test="<%= showAvailableLocales %>">
-
-				<%
-				String[] availableLocales = articleDisplay.getAvailableLocales();
-				%>
-
-				<c:if test="<%= availableLocales.length > 0 %>">
+			<c:if test="<%= articleDisplay != null %>">
+				<%= articleDisplay.getContent() %>
+	
+				<c:if test="<%= showAvailableLocales %>">
+	
+					<%
+					String[] availableLocales = articleDisplay.getAvailableLocales();
+					%>
+	
+					<c:if test="<%= availableLocales.length > 0 %>">
+						<div>
+							<br />
+	
+							<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+						</div>
+					</c:if>
+				</c:if>
+	
+				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE) %>">
 					<div>
 						<br />
-
-						<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+	
+						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+							<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
+							<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+							<liferay-portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
+							<liferay-portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
+							<liferay-portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
+						</liferay-portlet:renderURL>
+	
+						<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
 					</div>
 				</c:if>
 			</c:if>
+			<%
+		}
+		catch (NoSuchArticleException nsar) {
+		}
+		%>
 
-			<c:if test="<%= JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE) %>">
-				<div>
-					<br />
-
-					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
-						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
-						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-						<liferay-portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
-						<liferay-portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
-						<liferay-portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
-					</liferay-portlet:renderURL>
-
-					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
-				</div>
-			</c:if>
-		</c:if>
 	</c:when>
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
+		<div class="separator"></div>
 
 		<%
 		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
@@ -112,6 +126,8 @@
 
 	</c:when>
 	<c:otherwise>
+		<div class="separator"></div>
+
 		<%= className %> is not a valid type.
 	</c:otherwise>
 </c:choose>

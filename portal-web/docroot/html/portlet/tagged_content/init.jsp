@@ -33,6 +33,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>

@@ -56,6 +56,8 @@ else if (className.equals(JournalArticle.class.getName())) {
 	}
 }
 %>
+<div class="separator"></div>
+
 <div class="content-abstract">
 	<h3><%= title %></h3>
 

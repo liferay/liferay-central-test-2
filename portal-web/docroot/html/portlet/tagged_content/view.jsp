@@ -102,9 +102,6 @@ for (int k = 0; k < notEntries.length; k++) {
 		<%
 	}
 }
-%>
-
-<%
 
 // Display content
 
@@ -130,8 +127,6 @@ for (int i = 0; i < results.size(); i++) {
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
 %>
-
-	<div class="separator"></div>
 
 	<div>
 		<c:choose>
