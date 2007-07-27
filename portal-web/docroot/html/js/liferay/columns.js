@@ -163,20 +163,22 @@
 			if (!dropPos) {
 				jQuery("body:first").append("<div class='" + instance._dropPosition + "'></div>");
 				dropPos = jQuery("." + instance._dropPosition + ":first");
-				dropPos.css({
-					position: "absolute",
-					zIndex: ZINDEX.DROP_POSITION
-				});
+
+				dropPos[0].style.position = 'absolute';
+				dropPos[0].style.zIndex = ZINDEX.DROP_POSITION;
+
 				instance._cache.dropPosition = dropPos;
 			}
 			var jDropPos = jQuery(instance._cache.dropPosition);
 			var jPortlet = jQuery(portlet);
-
+			var portletWidth = jPortlet.width();
+			var portletHeight = jPortlet.height();
+			
 			dropPos.css({
 				display: "",
-				height: jPortlet.height()/2,
+				height: portletHeight/2,
 				left: nwOffset.x + "px",
-				width: jPortlet.width() + "px"
+				width: portletWidth + "px"
 			});
 
 			if (quadrant == 1 || quadrant == 2) {
@@ -186,7 +188,7 @@
 				}
 			}
 			else {
-				dropPos.css({ top: (nwOffset.y + jPortlet.height()/2) + "px" });
+				dropPos.css({ top: (nwOffset.y + portletHeight/2) + "px" });
 				if (dropPos[0].className != "drop-position-bottom") {
 					dropPos[0].className = "drop-position-bottom";
 				}
@@ -230,7 +232,8 @@
 		},
 
 		_onMove: function(settings) {
-			jQuery(settings.container).css({top: 0, left: 0});
+			settings.container.style.top = 0;
+			settings.container.style.left = 0;
 			var instance = this;
 			var foundContainer = instance._findContainer(mousePos);
 			var foundPortlet = null;
@@ -238,6 +241,9 @@
 			if (foundContainer) {
 				foundPortlet = instance._findPortlet(mousePos, foundContainer.area, settings.container);
 				instance._showArea(foundContainer.area, foundContainer.data.nwOffset);
+				if (foundPortlet.position.isStatic) {
+					foundPortlet = null;
+				}
 			}
 			else {
 				instance._hideArea();
@@ -263,9 +269,9 @@
 
 			if (instance._onDrop && foundContainer) {
 				var foundPortlet = instance._findPortlet(mousePos, foundContainer.area, settings.container);
-
+				
 				if (foundPortlet) {
-					if (instance._hasMoved(settings.container, foundPortlet.position, foundPortlet.data.quadrant)) {
+					if (instance._hasMoved(settings.container, foundPortlet.position, foundPortlet.data.quadrant) && !foundPortlet.position.isStatic) {
 						// Move if not in the same position
 						instance._onDrop({
 							portlet: settings.container,
