@@ -44,6 +44,6 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 		<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 	</portlet:actionURL>
-	
+
 	<input type="button" value="<liferay-ui:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />
 </c:if>

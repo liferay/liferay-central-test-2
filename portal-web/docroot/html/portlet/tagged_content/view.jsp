@@ -63,44 +63,55 @@ if (themeDisplay.isSignedIn()) {
 	}
 }
 
+entries = ArrayUtil.distinct(entries, new StringComparator());
+
+if (showQueryLogic) {
+	StringMaker tagsText = new StringMaker();
+
+	if (entries.length > 0) {
+		tagsText.append("( ");
+	}
+
+	for (int i = 0; i < entries.length; i++) {
+		if ((i + 1) == entries.length) {
+			tagsText.append(entries[i]);
+			tagsText.append(" )");
+		}
+		else {
+			tagsText.append(entries[i]);
+
+			if (andOperator) {
+				tagsText.append(" AND ");
+			}
+			else {
+				tagsText.append(" OR ");
+			}
+		}
+	}
+
+	if (entries.length > 0 && notEntries.length > 0) {
+		tagsText.append(" AND NOT ( ");
+	}
+
+	for (int i = 0; i < notEntries.length; i++) {
+		if ((i + 1) == notEntries.length) {
+			tagsText.append(notEntries[i]);
+			tagsText.append(" )");
+		}
+		else {
+			tagsText.append(notEntries[i]);
+			tagsText.append(" OR ");
+		}
+	}
 %>
 
-<liferay-ui:message key="tags" />: 
+	<liferay-ui:message key="tags" />:
 
-<% 
-if (entries.length > 0) {
-	%>( <%
-}
+	<%= tagsText %>
 
-for (int k = 0; k < entries.length; k++) {
-	if (k+1 == entries.length) {
-		%><%= entries[k] %> )<%
-	}
-	else {
-		%>
-		<c:if test="<%= andOperator%>">
-			<%= entries[k] %> AND
-		</c:if>
-		<c:if test="<%= !andOperator%>">
-			<%= entries[k] %> OR
-		</c:if>
-		<%
-	}
-}
+	<div class="separator"></div>
 
-if (entries.length > 0 && notEntries.length > 0) {
-	%> AND NOT( <%
-}
-
-for (int k = 0; k < notEntries.length; k++) {
-	if (k+1 == notEntries.length) {
-		%><%= notEntries[k] %> )<%
-	}
-	else {
-		%>
-			<%= notEntries[k] %> OR
-		<%
-	}
+<%
 }
 
 // Display content
@@ -120,27 +131,38 @@ List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOpe
 
 searchContainer.setResults(results);
 
-
 for (int i = 0; i < results.size(); i++) {
 	TagsAsset asset = (TagsAsset)results.get(i);
-	
+
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
+
+	try {
 %>
 
-	<div>
-		<c:choose>
-			<c:when test="<%= display.equals("full-content") %>">
-				<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
-			</c:when>
-			<c:when test="<%= display.equals("abstracts") %>">
-				<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
-			</c:when>
-			<c:otherwise>
-				<%= display %> is not a display type.
-			</c:otherwise>
-		</c:choose>
-	</div>
+		<div>
+			<c:choose>
+				<c:when test='<%= displayStyle.equals("full-content") %>'>
+					<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+				</c:when>
+				<c:when test='<%= displayStyle.equals("abstracts") %>'>
+					<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+				</c:when>
+				<c:otherwise>
+					<%= displayStyle %> is not a display type.
+				</c:otherwise>
+			</c:choose>
+		</div>
+
+<%
+	}
+	catch (Exception e) {
+	}
+%>
+
+	<c:if test="<%= (i + 1) < results.size() %>">
+		<div class="separator"></div>
+	</c:if>
 
 <%
 }

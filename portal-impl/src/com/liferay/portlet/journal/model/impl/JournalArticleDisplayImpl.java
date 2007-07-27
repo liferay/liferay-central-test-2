@@ -34,7 +34,9 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public JournalArticleDisplayImpl(long id, long resourcePrimKey,
 									 long groupId, String articleId,
-									 double version, String[] availableLocales,
+									 double version, String title,
+									 String description,
+									 String[] availableLocales,
 									 String content) {
 
 		_id = id;
@@ -42,6 +44,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_groupId = groupId;
 		_articleId = articleId;
 		_version = version;
+		_title = title;
+		_description = description;
 		_availableLocales = availableLocales;
 		_content = content;
 	}
@@ -66,6 +70,14 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		return _version;
 	}
 
+	public String getTitle() {
+		return _title;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
 	public String[] getAvailableLocales() {
 		return _availableLocales;
 	}
@@ -79,6 +91,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private long _groupId;
 	private String _articleId;
 	private double _version;
+	private String _title;
+	private String _description;
 	private String[] _availableLocales;
 	private String _content;
 

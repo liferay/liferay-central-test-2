@@ -84,18 +84,21 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="display" />
+				<liferay-ui:message key="display-style" />
 			</td>
 			<td>
-				<select name="<portlet:namespace />display">
-					<option <%= display.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
-					<option <%= display.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
+				<select name="<portlet:namespace />displayStyle">
+					<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
+					<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
-				<br />
+			<td>
+				<liferay-ui:message key="show-query-logic" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showQueryLogic" defaultValue="<%= showQueryLogic %>" />
 			</td>
 		</tr>
 		<tr>

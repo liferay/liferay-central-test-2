@@ -33,7 +33,6 @@
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
@@ -43,10 +42,10 @@
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
+<%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
@@ -63,7 +62,8 @@ if (Validator.isNotNull(portletResource)) {
 String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
-String display = GetterUtil.getString(prefs.getValue("display", "full-content"));
+String displayStyle = GetterUtil.getString(prefs.getValue("display-style", "full-content"));
+boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 
 Arrays.sort(entries);

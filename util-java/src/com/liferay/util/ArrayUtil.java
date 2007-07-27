@@ -22,6 +22,10 @@
 
 package com.liferay.util;
 
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * <a href="ArrayUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -242,6 +246,35 @@ public class ArrayUtil {
 
 			return false;
 		}
+	}
+
+	public static String[] distinct(String[] array) {
+		return distinct(array, null);
+	}
+
+	public static String[] distinct(String[] array, Comparator comparator) {
+		if ((array == null) || (array.length == 0)) {
+			return array;
+		}
+
+		Set set = null;
+
+		if (comparator == null) {
+			set = new TreeSet();
+		}
+		else {
+			set = new TreeSet(comparator);
+		}
+
+		for (int i = 0; i < array.length; i++) {
+			Object obj = array[i];
+
+			if (!set.contains(obj)) {
+				set.add(obj);
+			}
+		}
+
+		return (String[])set.toArray(new String[0]);
 	}
 
 	public static int getLength(Object[] array) {

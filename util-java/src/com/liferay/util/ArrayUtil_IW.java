@@ -139,6 +139,15 @@ public class ArrayUtil_IW {
 		return ArrayUtil.contains(array, obj);
 	}
 
+	public java.lang.String[] distinct(java.lang.String[] array) {
+		return ArrayUtil.distinct(array);
+	}
+
+	public java.lang.String[] distinct(java.lang.String[] array,
+		java.util.Comparator comparator) {
+		return ArrayUtil.distinct(array, comparator);
+	}
+
 	public int getLength(java.lang.Object[] array) {
 		return ArrayUtil.getLength(array);
 	}

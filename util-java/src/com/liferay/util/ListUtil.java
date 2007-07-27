@@ -85,6 +85,7 @@ public class ListUtil {
 		}
 
 		Set set = null;
+
 		if (comparator == null) {
 			set = new TreeSet();
 		}
