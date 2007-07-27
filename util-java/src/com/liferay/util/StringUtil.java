@@ -36,6 +36,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
@@ -531,6 +532,64 @@ public class StringUtil {
 		}
 
 		return s;
+	}
+
+	/**
+	 * Returns a string with replaced values. This method will replace all text
+	 * in the given string, between the beginning and ending delimiter, with new
+	 * values found in the given map. For example, if the string contained the
+	 * text <code>[$HELLO$]</code>, and the beginning delimiter was
+	 * <code>[$]</code>, and the ending delimiter was <code>$]</code>, and the
+	 * values map had a key of <code>HELLO</code> that mapped to
+	 * <code>WORLD</code>, then the replaced string will contain the text
+	 * <code>[$WORLD$]</code>.
+	 *
+	 * @param		s the original string
+	 * @param		begin the beginning delimiter
+	 * @param		end the ending delimiter
+	 * @param		values a map of old and new values
+	 * @return		a string with replaced values
+	 */
+	public static String replaceValues(
+		String s, String begin, String end, Map values) {
+
+		if ((s == null) || (begin == null) || (end == null) ||
+			(values == null) || (values.size() == 0)) {
+
+			return s;
+		}
+
+		StringMaker sm = new StringMaker(s.length());
+
+		int pos = 0;
+
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
+
+			if ((x == -1) || (y == -1)) {
+				sm.append(s.substring(pos, s.length()));
+
+				break;
+			}
+			else {
+				sm.append(s.substring(pos, x + begin.length()));
+
+				String oldValue = s.substring(x + begin.length(), y);
+
+				String newValue = (String)values.get(oldValue);
+
+				if (newValue == null) {
+					newValue = oldValue;
+				}
+
+				sm.append(newValue);
+
+				pos = y;
+			}
+		}
+
+		return sm.toString();
 	}
 
 	public static String reverse(String s) {

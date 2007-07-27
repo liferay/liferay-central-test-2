@@ -170,6 +170,11 @@ public class StringUtil_IW {
 		return StringUtil.replace(s, oldSubs, newSubs);
 	}
 
+	public java.lang.String replaceValues(java.lang.String s,
+		java.lang.String begin, java.lang.String end, java.util.Map values) {
+		return StringUtil.replaceValues(s, begin, end, values);
+	}
+
 	public java.lang.String reverse(java.lang.String s) {
 		return StringUtil.reverse(s);
 	}
