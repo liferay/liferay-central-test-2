@@ -65,6 +65,7 @@ public class EditConfigurationAction extends PortletAction {
 			ParamUtil.getString(req, "notEntries"));
 		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
+		String display = ParamUtil.getString(req, "display");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 
@@ -79,6 +80,8 @@ public class EditConfigurationAction extends PortletAction {
 		prefs.setValues("not-entries", notEntries);
 		prefs.setValue("and-operator", String.valueOf(andOperator));
 
+		prefs.setValue(
+			"display", String.valueOf(display));
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 

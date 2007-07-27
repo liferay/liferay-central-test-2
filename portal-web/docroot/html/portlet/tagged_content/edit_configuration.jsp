@@ -84,6 +84,22 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
+				<liferay-ui:message key="display" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />display">
+					<option <%= display.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
+					<option <%= display.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<liferay-ui:message key="show-available-locales" />
 			</td>
 			<td>

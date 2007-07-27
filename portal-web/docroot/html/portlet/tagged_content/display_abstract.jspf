@@ -1,0 +1,77 @@
+<%@ page import="com.liferay.portlet.PortletURLImpl" %>
+<%
+String title = asset.getTitle();
+String url = asset.getUrl();
+String summary = StringPool.BLANK;
+String editURL = StringPool.BLANK;
+
+if (className.equals(BookmarksEntry.class.getName())) {
+	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
+
+	summary = entry.getComments();
+
+	if (Validator.isNull(title)) {
+		title = entry.getName();
+	}
+}
+else if (className.equals(DLFileEntry.class.getName())) {
+	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+
+	summary = fileEntry.getDescription();
+
+	if (Validator.isNull(title)) {
+		title = fileEntry.getName();
+	}
+}
+else if (className.equals(IGImage.class.getName())) {
+	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
+
+	summary = image.getDescription();
+}
+else if (className.equals(JournalArticle.class.getName())) {
+	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
+	String languageId = LanguageUtil.getLanguageId(request);
+
+	JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+
+	JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleResource.getGroupId(), articleResource.getArticleId());
+
+	summary = article.getDescription();
+
+	if (Validator.isNull(title)) {
+		title = article.getTitle();
+	}
+
+	if (JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE)) {
+		PortletURLImpl editArticleURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
+
+		editArticleURL.setWindowState(WindowState.MAXIMIZED);
+
+		editArticleURL.setParameter("struts_action", "/journal/edit_article");
+		editArticleURL.setParameter("redirect", currentURL);
+		editArticleURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
+		editArticleURL.setParameter("articleId", articleDisplay.getArticleId());
+		editArticleURL.setParameter("version", String.valueOf(articleDisplay.getVersion()));
+		editURL = editArticleURL.toString();
+	}
+}
+%>
+<div class="content-abstract">
+	<h3><%= title %></h3>
+
+	<p class="description">
+		<%= summary %>
+	</p>
+	
+	<c:if test="<%= Validator.isNotNull(url) %>">
+		<div class="read-more-link">
+			<a href="<%=asset.getUrl()%>"><liferay-ui:message key="read-more"/></a>
+		</div>
+	</c:if>
+</div>
+
+<c:choose>
+	<c:when test="<%= Validator.isNotNull(editURL) %>">
+		<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
+	</c:when>
+</c:choose>
