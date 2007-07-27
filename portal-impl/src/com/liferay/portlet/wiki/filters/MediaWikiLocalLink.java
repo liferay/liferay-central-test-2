@@ -35,7 +35,7 @@ import org.stringtree.regex.Pattern;
 /**
  * <a href="MediaWikiLocalLink.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class MediaWikiLocalLink
@@ -64,10 +64,10 @@ public class MediaWikiLocalLink
 			String title = match.group(6).trim();
 
 			if (_pages.contains(key)) {
-				value = "\nview{" + title + "," + key + "}\n";
+				value = "\nview_mw{" + title + "," + key + "}\n";
 			}
 			else{
-				value = "\nedit{" + title + "," + key + "}\n";
+				value = "\nedit_mw{" + title + "," + key + "}\n";
 			}
 		}
 
