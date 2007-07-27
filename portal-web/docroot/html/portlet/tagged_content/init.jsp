@@ -42,10 +42,13 @@
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
