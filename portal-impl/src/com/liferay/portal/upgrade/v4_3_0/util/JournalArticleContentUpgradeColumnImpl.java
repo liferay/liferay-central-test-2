@@ -73,23 +73,6 @@ public class JournalArticleContentUpgradeColumnImpl
 	public Object getNewValue(Object oldValue) throws Exception {
 		String content = (String)oldValue;
 
-		String structureId = (String)_structureIdColumn.getOldValue();
-
-		if (Validator.isNull(structureId)) {
-			return content;
-		}
-		else {
-			return formatContent(content);
-		}
-	}
-
-	protected String formatContent(String content) throws Exception {
-		String oldCompanyId = (String)_companyIdColumn.getOldValue();
-		Long newCompanyId = (Long)_companyIdColumn.getNewValue();
-		Long groupId = (Long)_groupIdColumn.getNewValue();
-		String articleId = (String)_articleIdColumn.getNewValue();
-		Double version = (Double)_versionColumn.getNewValue();
-
 		content = StringUtil.replace(
 			content, BaseUpgradeTableImpl.SAFE_CHARS[1],
 			BaseUpgradeTableImpl.SAFE_CHARS[0]);
@@ -100,6 +83,28 @@ public class JournalArticleContentUpgradeColumnImpl
 				new String[] {"\\n", "\\r"},
 				new String[] {"\n", "\r"});
 		}
+
+		String structureId = (String)_structureIdColumn.getOldValue();
+
+		if (Validator.isNotNull(structureId)) {
+			content = formatContent(content);
+		}
+
+		content = StringUtil.replace(
+			content, BaseUpgradeTableImpl.SAFE_CHARS[0],
+			BaseUpgradeTableImpl.SAFE_CHARS[1]);
+
+		content = replaceIds(content);
+
+		return content;
+	}
+
+	protected String formatContent(String content) throws Exception {
+		String oldCompanyId = (String)_companyIdColumn.getOldValue();
+		Long newCompanyId = (Long)_companyIdColumn.getNewValue();
+		Long groupId = (Long)_groupIdColumn.getNewValue();
+		String articleId = (String)_articleIdColumn.getNewValue();
+		Double version = (Double)_versionColumn.getNewValue();
 
 		try {
 			SAXReader reader = new SAXReader();
@@ -119,12 +124,6 @@ public class JournalArticleContentUpgradeColumnImpl
 				"Unable to format content for {articleId=" + articleId +
 					",version=" + version + "}: " + e.getMessage());
 		}
-
-		content = StringUtil.replace(
-			content, BaseUpgradeTableImpl.SAFE_CHARS[0],
-			BaseUpgradeTableImpl.SAFE_CHARS[1]);
-
-		content = replaceIds(content);
 
 		return content;
 	}
