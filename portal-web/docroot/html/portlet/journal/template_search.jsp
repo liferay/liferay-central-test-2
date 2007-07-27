@@ -57,21 +57,16 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 
 <br />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<select name="<portlet:namespace /><%= TemplateDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-		</select>
-	</td>
-	<td>
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-	</td>
-</tr>
-</table>
+<select name="<portlet:namespace /><%= TemplateDisplayTerms.AND_OPERATOR %>">
+	<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+	<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+</select>
+
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
+	<br />
+
 	<input name="<portlet:namespace /><%= TemplateDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<br />
