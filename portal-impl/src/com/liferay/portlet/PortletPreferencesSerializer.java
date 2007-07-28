@@ -176,6 +176,8 @@ public class PortletPreferencesSerializer {
 					Element valueEl = docFactory.createElement("read-only");
 
 					valueEl.addText("true");
+
+					prefEl.add(valueEl);
 				}
 
 				portletPreferences.add(prefEl);
