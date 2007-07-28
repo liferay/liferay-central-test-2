@@ -173,10 +173,10 @@
 			var jPortlet = jQuery(portlet);
 			var portletWidth = jPortlet.width();
 			var portletHeight = jPortlet.height();
-			
+
 			dropPos.css({
 				display: "",
-				height: portletHeight/2,
+				height: portletHeight / 2,
 				left: nwOffset.x + "px",
 				width: portletWidth + "px"
 			});
@@ -188,7 +188,7 @@
 				}
 			}
 			else {
-				dropPos.css({ top: (nwOffset.y + portletHeight/2) + "px" });
+				dropPos.css({ top: (nwOffset.y + portletHeight / 2) + "px" });
 				if (dropPos[0].className != "drop-position-bottom") {
 					dropPos[0].className = "drop-position-bottom";
 				}
@@ -241,6 +241,7 @@
 			if (foundContainer) {
 				foundPortlet = instance._findPortlet(mousePos, foundContainer.area, settings.container);
 				instance._showArea(foundContainer.area, foundContainer.data.nwOffset);
+
 				if (foundPortlet.position.isStatic) {
 					foundPortlet = null;
 				}
@@ -269,7 +270,7 @@
 
 			if (instance._onDrop && foundContainer) {
 				var foundPortlet = instance._findPortlet(mousePos, foundContainer.area, settings.container);
-				
+
 				if (foundPortlet) {
 					if (instance._hasMoved(settings.container, foundPortlet.position, foundPortlet.data.quadrant) && !foundPortlet.position.isStatic) {
 						// Move if not in the same position
