@@ -30,6 +30,7 @@ import javax.servlet.ServletRequest;
  * <a href="NavigationTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class NavigationTag extends IncludeTag {
@@ -37,21 +38,43 @@ public class NavigationTag extends IncludeTag {
 	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
+		req.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
+		req.setAttribute("liferay-ui:navigation:displayStyle", _displayStyle);
+
+		req.setAttribute("liferay-ui:navigation:headerType", _headerType);
 		req.setAttribute(
-			"liferay-ui:navigation:bulletStyle", String.valueOf(_bulletStyle));
+			"liferay-ui:navigation:rootLayoutType", _rootLayoutType);
 		req.setAttribute(
-			"liferay-ui:navigation:displayStyle",
-			String.valueOf(_displayStyle));
+			"liferay-ui:navigation:rootLayoutLevel",
+			String.valueOf(_rootLayoutLevel));
+		req.setAttribute(
+			"liferay-ui:navigation:includedLayouts", _includedLayouts);
 
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public void setBulletStyle(int bulletStyle) {
+	public void setBulletStyle(String bulletStyle) {
 		_bulletStyle = bulletStyle;
 	}
 
-	public void setDisplayStyle(int displayStyle) {
+	public void setDisplayStyle(String displayStyle) {
 		_displayStyle = displayStyle;
+	}
+
+	public void setHeaderType(String headerType) {
+		_headerType = headerType;
+	}
+
+	public void setRootLayoutType(String rootLayoutType) {
+		_rootLayoutType = rootLayoutType;
+	}
+
+	public void setRootLayoutLevel(int rootLayoutLevel) {
+		_rootLayoutLevel = rootLayoutLevel;
+	}
+
+	public void setIncludedLayouts(String includedLayouts) {
+		_includedLayouts = includedLayouts;
 	}
 
 	protected String getDefaultPage() {
@@ -60,7 +83,12 @@ public class NavigationTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/navigation/page.jsp";
 
-	private int _bulletStyle = 1;
-	private int _displayStyle = 1;
+	private String _bulletStyle = "1";
+	private String _displayStyle = "1";
+
+	private String _headerType = "none";
+	private String _rootLayoutType = "absolute";
+	private int _rootLayoutLevel = 1;
+	private String _includedLayouts = "auto";
 
 }

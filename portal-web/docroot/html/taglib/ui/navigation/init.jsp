@@ -25,15 +25,39 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-int bulletStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:navigation:bulletStyle"));
+String bulletStyle = (String) request.getAttribute("liferay-ui:navigation:bulletStyle");
 
-if (bulletStyle == 0) {
-	bulletStyle = 1;
+String displayStyle = (String) request.getAttribute("liferay-ui:navigation:displayStyle");
+
+String headerType;
+String rootLayoutType;
+int rootLayoutLevel;
+String includedLayouts;
+
+String[] displayStyleDef = _getDisplayStyleDefinition(displayStyle);
+
+if ((displayStyleDef != null) && (displayStyleDef.length == 4)) {
+
+	headerType = displayStyleDef[0];
+
+	rootLayoutType = displayStyleDef[1];
+	rootLayoutLevel = Integer.parseInt(displayStyleDef[2]);
+
+	includedLayouts = displayStyleDef[3];
 }
+else {
+	headerType = (String) request.getAttribute("liferay-ui:navigation:headerType");
 
-int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:navigation:displayStyle"));
+	rootLayoutType = (String) request.getAttribute("liferay-ui:navigation:rootLayoutType");
+	rootLayoutLevel = GetterUtil.getInteger((String) request.getAttribute("liferay-ui:navigation:rootLayoutLevel"));
 
-if (displayStyle == 0) {
-	displayStyle = 1;
+	includedLayouts = (String) request.getAttribute("liferay-ui:navigation:includedLayouts");
+}
+%>
+
+<%!
+String[] _getDisplayStyleDefinition(String displayStyle) {
+	return PropsUtil.getComponentProperties().getStringArray(
+		"navigation.display.style", com.germinus.easyconf.Filter.by(displayStyle));
 }
 %>

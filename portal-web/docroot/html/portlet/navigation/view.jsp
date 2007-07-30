@@ -24,4 +24,11 @@
 
 <%@ include file="/html/portlet/navigation/init.jsp" %>
 
-<liferay-ui:navigation bulletStyle="<%= bulletStyle %>" displayStyle="<%= displayStyle %>" />
+<liferay-ui:navigation
+	bulletStyle="<%= bulletStyle %>"
+	displayStyle="<%= displayStyle %>"
+	headerType="<%= headerType %>"
+	rootLayoutType="<%= rootLayoutType %>"
+	rootLayoutLevel="<%= rootLayoutLevel %>"
+	includedLayouts="<%= includedLayouts %>"
+/>

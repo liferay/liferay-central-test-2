@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/navigation/init.jsp" %>
 
+<%
+	String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSetting("bullet-style-options"));
+%>
+
 <liferay-portlet:preview
 	portletName="<%= portletResource %>"
 	queryString="struts_action=/navigation/view"
@@ -41,12 +45,73 @@
 	</td>
 	<td>
 		<select name="<portlet:namespace />bulletStyle">
-
 			<%
-			for (int i = 1; i <= 2; i++) {
+			for (int i = 0; i < bulletStyleOptions.length; i++) {
 			%>
 
-				<option <%= (bulletStyle == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+				<option <%= (bulletStyleOptions[i].equals(bulletStyle)) ? "selected" : "" %> value="<%= bulletStyleOptions[i] %>"><%= bulletStyleOptions[i] %></option>
+
+			<%
+			}
+			%>
+			<c:if test="<%= bulletStyleOptions.length == 0 %>">
+				<option value="">(<liferay-ui:message key="default" />)</option>
+			</c:if>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="display-style" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />displayStyle" id="<portlet:namespace />displayStyle">
+
+			<%
+			for (int i = 1; i <= 6; i++) {
+			%>
+
+				<option <%= (displayStyle.equals(Integer.toString(i))) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+
+			<%
+			}
+			%>
+			<option <%= displayStyle.equals("[custom]") ? "selected" : "" %> value="[custom]"> (<liferay-ui:message key="custom" />) </option>
+		</select>
+	</td>
+</tr>
+</table>
+
+<table id="<portlet:namespace/>customDisplayStyle" class="liferay-table" style="margin-left: 40px; margin-top: 10px">
+<tr>
+	<td>
+		<liferay-ui:message key="header" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />headerType">
+			<option <%= headerType.equals("none") ? "selected" : "" %> value="none"><liferay-ui:message key="none" /></option>
+			<option <%= headerType.equals("portlet-title") ? "selected" : "" %> value="portlet-title"><liferay-ui:message key="portlet-title" /></option>
+			<option <%= headerType.equals("root-layout") ? "selected" : "" %> value="root-layout"><liferay-ui:message key="root-layout" /></option>
+			<option <%= headerType.equals("breadcrumb") ? "selected" : "" %> value="breadcrumb"><liferay-ui:message key="breadcrumb" /></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="root-layout" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />rootLayoutType">
+			<option <%= rootLayoutType.equals("absolute") ? "selected" : "" %> value="absolute"><liferay-ui:message key="parent-at-level" /></option>
+			<option <%= rootLayoutType.equals("relative") ? "selected" : "" %> value="relative"><liferay-ui:message key="relative-parent-up-by" /></option>
+		</select>
+		<select name="<portlet:namespace />rootLayoutLevel">
+
+			<%
+			for (int i = 0; i <= 4; i++) {
+			%>
+
+				<option <%= (rootLayoutLevel == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 			<%
 			}
@@ -57,21 +122,12 @@
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="display-style" />
+		<liferay-ui:message key="included-layouts" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />displayStyle">
-
-			<%
-			for (int i = 1; i <= 6; i++) {
-			%>
-
-				<option <%= (displayStyle == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
-
-			<%
-			}
-			%>
-
+		<select name="<portlet:namespace />includedLayouts">
+			<option <%= includedLayouts.equals("auto") ? "selected" : "" %> value="auto"><liferay-ui:message key="auto" /></option>
+			<option <%= includedLayouts.equals("all") ? "selected" : "" %> value="all"><liferay-ui:message key="all" /></option>
 		</select>
 	</td>
 </tr>
@@ -82,3 +138,30 @@
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
+
+<script type="text/javascript">
+	jQuery(
+		function() {
+			var selects = jQuery('#<portlet:namespace/>displayStyle');
+
+			var toggleCustomFields = function() {
+				var select = jQuery(this);
+				var div = select.parent().next();
+				var value = select.find('option:selected').val();
+
+				var displayStyle = jQuery(this).val();
+
+				if (displayStyle == '[custom]') {
+					jQuery("#<portlet:namespace/>customDisplayStyle").show();
+				}
+				else {
+					jQuery("#<portlet:namespace/>customDisplayStyle").hide();
+				}
+			}
+
+			selects.change(toggleCustomFields);
+			selects.each(toggleCustomFields);
+
+		}
+	)
+</script>

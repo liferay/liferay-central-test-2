@@ -15,6 +15,7 @@
 		<images-path>${root-path}/images</images-path>
 		<template-extension>vm</template-extension>
 		<settings>
+			<setting key="bullet-style-options" value="1,2" />
 			<setting key="hello" value="world" />
 			<setting key="hi" value="mom" />
 		</settings>
@@ -34,9 +35,15 @@
 	</theme>
 	<theme id="brochure" name="Brochure">
 		<root-path>/html/themes/${theme-id}</root-path>
+		<settings>
+			<setting key="bullet-style-options" value="1,2" />
+		</settings>
 	</theme>
 	<theme id="genesis" name="Genesis">
 		<root-path>/html/themes/${theme-id}</root-path>
+		<settings>
+			<setting key="bullet-style-options" value="1,2" />
+		</settings>
 	</theme>
 	<theme id="desktop" name="Desktop">
 		<root-path>/html/themes/${theme-id}</root-path>

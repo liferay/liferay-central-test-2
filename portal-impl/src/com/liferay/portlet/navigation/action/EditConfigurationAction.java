@@ -58,19 +58,32 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String bulletStyle = ParamUtil.getString(req, "bulletStyle");
 		String displayStyle = ParamUtil.getString(req, "displayStyle");
+		String bulletStyle = ParamUtil.getString(req, "bulletStyle");
+
+		String headerType = ParamUtil.getString(req, "headerType");
+
+		String rootLayoutType = ParamUtil.getString(req, "rootLayoutType");
+		int rootLayoutLevel = ParamUtil.getInteger(req, "rootLayoutLevel");
+
+		String includedLayouts = ParamUtil.getString(req, "includedLayouts");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("bullet-style", bulletStyle);
 		prefs.setValue("display-style", displayStyle);
+		prefs.setValue("bullet-style", bulletStyle);
 
-		if (displayStyle.equals("4")) {
-			prefs.setValue("portlet-setup-show-borders", "true");
+		if (displayStyle.equals("[custom]")) {
+			prefs.setValue("header-type", headerType);
+
+			prefs.setValue("root-layout-type", rootLayoutType);
+			prefs.setValue(
+				"root-layout-level", Integer.toString(rootLayoutLevel));
+
+			prefs.setValue("included-layouts", includedLayouts);
 		}
 
 		prefs.store();

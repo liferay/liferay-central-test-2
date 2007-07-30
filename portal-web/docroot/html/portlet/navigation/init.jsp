@@ -33,6 +33,13 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-int bulletStyle = GetterUtil.getInteger(prefs.getValue("bullet-style", StringPool.BLANK));
-int displayStyle = GetterUtil.getInteger(prefs.getValue("display-style", StringPool.BLANK));
+String bulletStyle = PrefsParamUtil.getString(prefs, request, "bullet-style", "1");
+String displayStyle = PrefsParamUtil.getString(prefs, request, "display-style", "1");
+
+String headerType = PrefsParamUtil.getString(prefs, request, "header-type", "root-layout");
+
+String rootLayoutType = PrefsParamUtil.getString(prefs, request, "root-layout-type", "absolute");
+int rootLayoutLevel = PrefsParamUtil.getInteger(prefs, request, "root-layout-level", 1);
+
+String includedLayouts = PrefsParamUtil.getString(prefs, request, "included-layouts", "current");
 %>

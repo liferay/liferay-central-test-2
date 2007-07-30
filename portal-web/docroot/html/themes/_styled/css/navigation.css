@@ -371,3 +371,26 @@
 	float: left;
 	padding: 0.5em;
 }
+
+/*------ Navigation Portlet ------*/
+
+.navmenu li a.ancestor {
+	font-weight: bold;
+}
+
+.navmenu li a.selected {
+	color: black;
+	font-weight: bold;                                                                                                                 1
+	text-decoration: none;
+}
+
+.navmenu ul {
+	padding-left: 10px;
+}
+
+.navmenu-style-1 {
+}
+
+.navmenu-style-2 {
+}
+

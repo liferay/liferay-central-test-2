@@ -59,6 +59,7 @@ import com.liferay.util.xml.XMLFormatter;
 import java.io.IOException;
 import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -199,8 +200,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			Layout ancestorLayout = this;
 
 			while (true) {
-				if (ancestorLayout.getParentLayoutId() !=
-						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+				if (!ancestorLayout.isRootLayout()) {
 
 					ancestorLayout = LayoutLocalServiceUtil.getLayout(
 						ancestorLayout.getGroupId(),
@@ -221,12 +221,34 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return ancestorLayoutId;
 	}
 
+	public List getAncestors() throws SystemException, PortalException {
+
+		List ancestors = new ArrayList();
+
+		Layout itLayout = this;
+
+		while (true) {
+			if (!itLayout.isRootLayout()) {
+				itLayout = LayoutLocalServiceUtil.getLayout(
+					itLayout.getGroupId(),
+					itLayout.isPrivateLayout(),
+					itLayout.getParentLayoutId());
+
+				ancestors.add(itLayout);
+			}
+			else {
+				break;
+			}
+		}
+
+		return ancestors;
+	}
 	public boolean hasAncestor(long layoutId)
 		throws PortalException, SystemException {
 
 		long parentLayoutId = getParentLayoutId();
 
-		while (parentLayoutId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		while (isRootLayout()) {
 			if (parentLayoutId == layoutId) {
 				return true;
 			}
@@ -242,8 +264,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public boolean isFirstParent() {
-		if (isFirstChild() &&
-			(getParentLayoutId() == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+		if (isFirstChild() && isRootLayout()) {
 
 			return true;
 		}
@@ -254,6 +275,15 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public boolean isFirstChild() {
 		if (getPriority() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isRootLayout() {
+		if (this.getParentLayoutId() == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
 			return true;
 		}
 		else {

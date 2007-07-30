@@ -54,6 +54,10 @@ public interface Layout extends LayoutModel {
 
 	public long getAncestorLayoutId();
 
+	public java.util.List getAncestors()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean hasAncestor(long layoutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -61,6 +65,8 @@ public interface Layout extends LayoutModel {
 	public boolean isFirstParent();
 
 	public boolean isFirstChild();
+
+	public boolean isRootLayout();
 
 	public java.util.List getChildren()
 		throws com.liferay.portal.SystemException, 
