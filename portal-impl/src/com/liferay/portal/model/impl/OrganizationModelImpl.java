@@ -60,14 +60,13 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			{ "parentOrganizationId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "location", new Integer(Types.BOOLEAN) },
-			{ "inheritable", new Integer(Types.BOOLEAN) },
 			{ "recursable", new Integer(Types.BOOLEAN) },
 			{ "regionId", new Integer(Types.BIGINT) },
 			{ "countryId", new Integer(Types.BIGINT) },
 			{ "statusId", new Integer(Types.INTEGER) },
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,inheritable BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
+	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
 	public static String TABLE_SQL_DROP = "drop table Organization_";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization"), XSS_ALLOW);
@@ -155,20 +154,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public boolean getInheritable() {
-		return _inheritable;
-	}
-
-	public boolean isInheritable() {
-		return _inheritable;
-	}
-
-	public void setInheritable(boolean inheritable) {
-		if (inheritable != _inheritable) {
-			_inheritable = inheritable;
-		}
-	}
-
 	public boolean getRecursable() {
 		return _recursable;
 	}
@@ -237,7 +222,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		clone.setParentOrganizationId(getParentOrganizationId());
 		clone.setName(getName());
 		clone.setLocation(getLocation());
-		clone.setInheritable(getInheritable());
 		clone.setRecursable(getRecursable());
 		clone.setRegionId(getRegionId());
 		clone.setCountryId(getCountryId());
@@ -296,7 +280,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	private long _parentOrganizationId;
 	private String _name;
 	private boolean _location;
-	private boolean _inheritable;
 	private boolean _recursable;
 	private long _regionId;
 	private long _countryId;

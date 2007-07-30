@@ -52,7 +52,6 @@ public class OrganizationSoap implements Serializable {
 		soapModel.setParentOrganizationId(model.getParentOrganizationId());
 		soapModel.setName(model.getName());
 		soapModel.setLocation(model.getLocation());
-		soapModel.setInheritable(model.getInheritable());
 		soapModel.setRecursable(model.getRecursable());
 		soapModel.setRegionId(model.getRegionId());
 		soapModel.setCountryId(model.getCountryId());
@@ -128,18 +127,6 @@ public class OrganizationSoap implements Serializable {
 		_location = location;
 	}
 
-	public boolean getInheritable() {
-		return _inheritable;
-	}
-
-	public boolean isInheritable() {
-		return _inheritable;
-	}
-
-	public void setInheritable(boolean inheritable) {
-		_inheritable = inheritable;
-	}
-
 	public boolean getRecursable() {
 		return _recursable;
 	}
@@ -189,7 +176,6 @@ public class OrganizationSoap implements Serializable {
 	private long _parentOrganizationId;
 	private String _name;
 	private boolean _location;
-	private boolean _inheritable;
 	private boolean _recursable;
 	private long _regionId;
 	private long _countryId;

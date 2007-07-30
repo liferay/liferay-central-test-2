@@ -20,24 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.documentlibrary.util;
+package com.liferay.portal.upgrade;
 
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.upgrade.v4_3_1.UpgradeOrganization;
+import com.liferay.portal.upgrade.v4_3_1.UpgradeSchema;
+import com.liferay.portal.util.ReleaseInfo;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeProcess_4_3_1.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HookFactory {
+public class UpgradeProcess_4_3_1 extends UpgradeProcess {
 
-	public static Hook getInstance() {
-		return _hook;
+	public int getThreshold() {
+		return ReleaseInfo.RELEASE_4_3_1_BUILD_NUMBER;
 	}
 
-	private static Hook _hook = (Hook)InstancePool.get(
-		PropsUtil.get(PropsUtil.DL_HOOK_IMPL));
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
+
+		upgrade(new UpgradeSchema());
+		upgrade(new UpgradeOrganization());
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_1.class);
 
 }

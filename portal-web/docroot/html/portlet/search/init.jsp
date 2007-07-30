@@ -26,9 +26,9 @@
 
 <%@ page import="com.liferay.portal.kernel.search.OpenSearch" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchException" %>
+<%@ page import="com.liferay.portal.kernel.util.InstancePool" %>
 <%@ page import="com.liferay.portal.search.OpenSearchUtil" %>
 <%@ page import="com.liferay.portal.util.SAXReaderFactory" %>
-<%@ page import="com.liferay.util.InstancePool" %>
 
 <%@ page import="org.dom4j.Document" %>
 <%@ page import="org.dom4j.Element" %>

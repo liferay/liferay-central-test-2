@@ -38,6 +38,23 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 portletURL.setParameter("struts_action", strutsAction);
 
 OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
+
+List headerNames = new ArrayList();
+
+headerNames.add("name");
+
+if (organizationsTab) {
+	headerNames.add("parent-organization");
+}
+else {
+	headerNames.add("organization");
+}
+
+headerNames.add("city");
+headerNames.add("region");
+headerNames.add("country");
+
+searchContainer.setHeaderNames(headerNames);
 %>
 
 <liferay-ui:search-form
@@ -47,8 +64,6 @@ OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portl
 
 <%
 OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
-List headerNames = searchContainer.getHeaderNames();
-headerNames.add(StringPool.BLANK);
 
 int total = 0;
 List results = null;
@@ -88,11 +103,11 @@ else {
 		}
 	}
 
-	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
 
 	searchContainer.setTotal(total);
 
-	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
 searchContainer.setResults(results);
@@ -133,6 +148,22 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(organization.getName(), rowHREF);
 
+	// Parent organization
+
+	String parentOrganizationName = StringPool.BLANK;
+
+	if (organization.getParentOrganizationId() > 0) {
+		try {
+			Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+			parentOrganizationName = parentOrganization.getName();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	row.addText(parentOrganizationName);
+
 	// Address
 
 	Address address = organization.getAddress();
@@ -140,9 +171,6 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText(address.getCity(), rowHREF);
 	row.addText(address.getRegion().getName(), rowHREF);
 	row.addText(address.getCountry().getName(), rowHREF);
-
-	// Add actions bar
-	row.addJSP("/html/portlet/enterprise_admin/select_organization_action.jsp");
 
 	// Add result row
 

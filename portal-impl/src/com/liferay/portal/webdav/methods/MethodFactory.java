@@ -22,11 +22,11 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.InstancePool;
 
 import java.util.Map;
 

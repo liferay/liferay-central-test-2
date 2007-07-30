@@ -85,15 +85,14 @@ public class LayoutCache  {
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
 						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    false, name, null, null, null, null, null,
-						null, true, 0, 1);
-
+					    name, false, null, null, null, null, null, null, true,
+						0, 1);
 				}
 				else if (entityName.equals("location")) {
 					organizations = OrganizationLocalServiceUtil.search(
 						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    true, null, null, null, null, null,
-						null, null, true, 0, 1);
+					    name, true, null, null, null, null, null, null, true,
+						0, 1);
 				}
 
 				if (organizations.size() > 0) {
@@ -145,14 +144,14 @@ public class LayoutCache  {
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
 						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    false, null, null, null, null, null, null,
-						null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					    null, false, null, null, null, null, null, null, true,
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				}
 				else if (entityName.equals("location")) {
 					organizations = OrganizationLocalServiceUtil.search(
 						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    true, null, null, null, null, null,
-						null, null, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					    null, true, null, null, null, null, null, null, true,
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				}
 
 				for (int i = 0; i < organizations.size(); i++) {

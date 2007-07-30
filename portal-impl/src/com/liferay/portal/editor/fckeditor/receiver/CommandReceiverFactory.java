@@ -22,7 +22,7 @@
 
 package com.liferay.portal.editor.fckeditor.receiver;
 
-import com.liferay.util.InstancePool;
+import com.liferay.portal.kernel.util.InstancePool;
 
 /**
  * <a href="CommandReceiverFactory.java.html"><b><i>View Source</i></b></a>

@@ -61,6 +61,16 @@
 		<liferay-ui:icon image="permissions" url="<%= permissionsUserURL %>" />
 	</c:if>
 
+	<c:if test="<%= user2.isLayoutsRequired() %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+	</c:if>
+
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (user.getUserId() != user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.IMPERSONATE) %>">
 			<liferay-security:doAsURL

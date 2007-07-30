@@ -171,10 +171,10 @@ public class EditOrganizationAction extends PortletAction {
 			req, "parentOrganizationId",
 			OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 		String name = ParamUtil.getString(req, "name");
+		boolean recursable = ParamUtil.getBoolean(req, "recursable");
 		int statusId = ParamUtil.getInteger(req, "statusId");
 		long regionId = ParamUtil.getLong(req, "regionId");
 		long countryId = ParamUtil.getLong(req, "countryId");
-		boolean inheritable = ParamUtil.getBoolean(req, "inheritable");
 
 		Organization organization = null;
 
@@ -183,16 +183,16 @@ public class EditOrganizationAction extends PortletAction {
 			// Add organization
 
 			organization = OrganizationServiceUtil.addOrganization(
-				parentOrganizationId, name, regionId, countryId, statusId,
-				isLocation(), inheritable);
+				parentOrganizationId, name, isLocation(), recursable, regionId,
+				countryId, statusId);
 		}
 		else {
 
 			// Update organization
 
 			organization = OrganizationServiceUtil.updateOrganization(
-				organizationId, parentOrganizationId, name, regionId, countryId,
-				statusId, isLocation(), inheritable);
+				organizationId, parentOrganizationId, name, isLocation(),
+				recursable, regionId, countryId, statusId);
 		}
 
 		return organization;

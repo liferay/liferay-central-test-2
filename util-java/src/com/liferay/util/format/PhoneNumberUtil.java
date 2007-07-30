@@ -22,8 +22,8 @@
 
 package com.liferay.util.format;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.InstancePool;
 import com.liferay.util.SystemProperties;
 
 /**

@@ -50,11 +50,14 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
+import com.liferay.portal.service.permission.OrganizationPermission;
+import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -415,7 +418,8 @@ public class ServicePreAction extends Action {
 	}
 
 	protected boolean isViewableCommunity(
-			User user, long groupId, boolean privateLayout)
+			User user, long groupId, boolean privateLayout,
+			PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
 		// Public layouts are always viewable
@@ -424,7 +428,8 @@ public class ServicePreAction extends Action {
 			return true;
 		}
 
-		// Users can only see their own private layouts
+		// User private layouts are only viewable by the user and anyone who can
+		// update the user
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -435,7 +440,19 @@ public class ServicePreAction extends Action {
 				return true;
 			}
 			else {
-				return false;
+				User groupUser = UserLocalServiceUtil.getUserById(groupUserId);
+
+				if (UserPermission.contains(
+						permissionChecker, groupUserId,
+						user.getOrganization().getOrganizationId(),
+						user.getLocation().getOrganizationId(),
+						ActionKeys.UPDATE)) {
+
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 		}
 
@@ -446,15 +463,36 @@ public class ServicePreAction extends Action {
 			groupId = group.getLiveGroupId();
 		}
 
-		// Authenticated users can only see group layouts if they belong to the
-		// group
+		// Community or organization layhous are only viewable by users who
+		// belong to the community or organization, or by users who can update
+		// the community or organization
 
-		if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
-			return true;
+		if (group.isCommunity()) {
+			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
+				return true;
+			}
+			else if (GroupPermission.contains(
+						permissionChecker, groupId, ActionKeys.UPDATE)) {
+
+				return true;
+			}
 		}
-		else {
-			return false;
+		else if (group.isOrganization()) {
+			long organizationId = group.getClassPK();
+
+			if (OrganizationLocalServiceUtil.hasUserOrganization(
+					user.getUserId(), organizationId)) {
+
+				return true;
+			}
+			else if (OrganizationPermission.contains(
+						permissionChecker, organizationId, ActionKeys.UPDATE)) {
+
+				return true;
+			}
 		}
+
+		return false;
 	}
 
 	protected void servicePre(HttpServletRequest req, HttpServletResponse res)
@@ -616,7 +654,8 @@ public class ServicePreAction extends Action {
 				layout = LayoutLocalServiceUtil.getLayout(plid);
 
 				if (!isViewableCommunity(
-						user, layout.getGroupId(), layout.isPrivateLayout())) {
+						user, layout.getGroupId(), layout.isPrivateLayout(),
+						permissionChecker)) {
 
 					layout = null;
 				}

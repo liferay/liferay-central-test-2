@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.mail.util.recipient;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
 
 import java.util.ArrayList;
 import java.util.List;

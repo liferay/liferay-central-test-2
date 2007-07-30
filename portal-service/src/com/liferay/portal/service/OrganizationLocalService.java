@@ -62,8 +62,8 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
-		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location, boolean inheritable)
+		long parentOrganizationId, java.lang.String name, boolean location,
+		boolean recursable, long regionId, long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -86,11 +86,7 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getAncestors(long organizationId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public java.util.List getInheritableAncestors(long organizationId)
+	public java.util.List getAncestorOrganizations(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -107,6 +103,11 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getRecursableAncestorOrganizations(
+		long organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getUserOrganizations(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -115,13 +116,21 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean hasUserOrganization(long userId, long organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isAncestor(long locationId, long ancestorOrganizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List search(long companyId, long parentOrganizationId,
-		boolean location, java.lang.String name, java.lang.String street,
+		java.lang.String name, boolean location, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator, int begin, int end)
@@ -129,7 +138,7 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public int searchCount(long companyId, long parentOrganizationId,
-		boolean location, java.lang.String name, java.lang.String street,
+		java.lang.String name, boolean location, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator)
@@ -151,8 +160,8 @@ public interface OrganizationLocalService {
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location, boolean inheritable)
+		java.lang.String name, boolean location, boolean recursable,
+		long regionId, long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

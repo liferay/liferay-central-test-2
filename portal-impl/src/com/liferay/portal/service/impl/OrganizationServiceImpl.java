@@ -67,8 +67,8 @@ public class OrganizationServiceImpl extends PrincipalBean
 	}
 
 	public Organization addOrganization(
-			long parentOrganizationId, String name, long regionId,
-			long countryId, int statusId, boolean location, boolean inheritable)
+			long parentOrganizationId, String name, boolean location,
+			boolean recursable, long regionId, long countryId, int statusId)
 		throws PortalException, SystemException {
 
 		if (location) {
@@ -82,8 +82,8 @@ public class OrganizationServiceImpl extends PrincipalBean
 		}
 
 		return OrganizationLocalServiceUtil.addOrganization(
-			getUserId(), parentOrganizationId, name, regionId, countryId,
-			statusId, location, inheritable);
+			getUserId(), parentOrganizationId, name, location, recursable,
+			regionId, countryId, statusId);
 	}
 
 	public void deleteOrganization(long organizationId)
@@ -147,15 +147,15 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
-			long regionId, long countryId, int statusId, boolean location,
-			boolean inheritable)
+			boolean location, boolean recursable, long regionId, long countryId,
+			int statusId)
 		throws PortalException, SystemException {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
 
 		return OrganizationLocalServiceUtil.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
-			name, regionId, countryId, statusId, location, inheritable);
+			name, location, recursable, regionId, countryId, statusId);
 	}
 
 	public Organization updateOrganization(long organizationId, String comments)

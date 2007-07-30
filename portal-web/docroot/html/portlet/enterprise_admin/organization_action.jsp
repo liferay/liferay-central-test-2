@@ -97,6 +97,12 @@ String addUserURLString = null;
 	<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSuborganizationsURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/view" />
+	<portlet:param name="tabs1" value="organizations" />
+	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+</portlet:renderURL>
+
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLocationURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_location" />
 	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
@@ -106,12 +112,6 @@ String addUserURLString = null;
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewLocationsURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	<portlet:param name="tabs1" value="locations" />
-	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-</portlet:renderURL>
-
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewSubOrganizationsURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/view" />
-	<portlet:param name="tabs1" value="organizations" />
 	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
@@ -184,6 +184,16 @@ String addUserURLString = null;
 				</c:otherwise>
 			</c:choose>
 
+			<c:if test="<%= true %>">
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
+					<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+			</c:if>
+
 			<c:choose>
 				<c:when test="<%= organizationsTab %>">
 					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
@@ -200,14 +210,14 @@ String addUserURLString = null;
 
 		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
+		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !organization.isLocation() %>">
+			<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSuborganizationsURL %>" />
+		</c:if>
+
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 			<c:if test="<%= organizationsTab && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
 				<liferay-ui:icon image="add_location" message="add-location" url="<%= addLocationURL %>" />
 			</c:if>
-		</c:if>
-
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !organization.isLocation() %>">
-			<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSubOrganizationsURL %>" />
 		</c:if>
 
 		<c:if test="<%= organizationsTab %>">

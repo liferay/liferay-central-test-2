@@ -196,7 +196,6 @@ public class ServiceBuilder {
 			"com.liferay.portal.util.PropsUtil",
 			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
-			"com.liferay.util.InstancePool",
 			"com.liferay.util.XSSUtil",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
@@ -4451,7 +4450,6 @@ public class ServiceBuilder {
 		sm.append("import com.liferay.portal.model.ModelListener;");
 		sm.append("import com.liferay.portal.util.PropsUtil;");
 		sm.append("import com.liferay.util.GetterUtil;");
-		sm.append("import com.liferay.util.InstancePool;");
 		sm.append("import com.liferay.util.Validator;");
 		sm.append("import org.apache.commons.logging.Log;");
 		sm.append("import org.apache.commons.logging.LogFactory;");

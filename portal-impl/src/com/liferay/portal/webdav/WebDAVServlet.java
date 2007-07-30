@@ -22,6 +22,7 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -32,7 +33,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.webdav.methods.Method;
 import com.liferay.portal.webdav.methods.MethodFactory;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.InstancePool;
 
 import java.io.IOException;
 

@@ -59,8 +59,8 @@ public interface OrganizationService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.Organization addOrganization(
-		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location, boolean inheritable)
+		long parentOrganizationId, java.lang.String name, boolean location,
+		boolean recursable, long regionId, long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -96,8 +96,8 @@ public interface OrganizationService {
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		long organizationId, long parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location,
-		boolean inheritable)
+		boolean location, boolean recursable, long regionId, long countryId,
+		int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

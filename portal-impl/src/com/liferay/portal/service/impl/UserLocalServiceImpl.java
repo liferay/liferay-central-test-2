@@ -52,6 +52,7 @@ import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -112,7 +113,6 @@ import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.InstancePool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -126,7 +126,6 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -457,14 +456,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String password = user.getPassword();
 
 			if (user.isPasswordEncrypted()) {
-			if (password.equals(encPwd)) {
-				return true;
-			}
+				if (password.equals(encPwd)) {
+					return true;
+				}
 
 				if (!GetterUtil.getBoolean(PropsUtil.get(
 						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
 
-				encPwd = PwdEncryptor.encrypt(encPwd, password);
+					encPwd = PwdEncryptor.encrypt(encPwd, password);
 
 					if (password.equals(encPwd)) {
 						return true;
@@ -2001,25 +2000,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			// Location must belong to one of the ancestors of the organization
 
-			List ancestors =
-					OrganizationLocalServiceUtil.getAncestors(organizationId);
+			if (!OrganizationLocalServiceUtil.isAncestor(
+					locationId, organizationId)) {
 
-			boolean isAncestor = false;
-
-			Iterator it = ancestors.iterator();
-
-			while (it.hasNext()){
-				Organization ancestor = (Organization) it.next();
-
-				if (ancestor.getPrimaryKey() ==
-						location.getParentOrganizationId()){
-					isAncestor = true;
-
-					break;
-				}
-			}
-
-			if (!isAncestor) {
 				throw new OrganizationParentException();
 			}
 		}

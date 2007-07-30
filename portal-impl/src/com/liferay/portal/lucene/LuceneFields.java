@@ -22,9 +22,9 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
 
 import java.io.File;
 import java.io.IOException;

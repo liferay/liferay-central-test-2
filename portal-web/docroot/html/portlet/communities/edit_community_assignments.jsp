@@ -329,11 +329,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			organizationParams.put("organizationsGroups", new Long(group.getGroupId()));
 		}
 
-		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
+		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, !organizationsTab, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+		List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>
@@ -368,20 +368,21 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 			row.addText(organization.getName());
 
-			// Parent Organization
+			// Parent organization
 
 			String parentOrganizationName = StringPool.BLANK;
 
 			if (organization.getParentOrganizationId() > 0) {
 				try {
 					Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
 					parentOrganizationName = parentOrganization.getName();
 				}
-				catch (Exception nsoe) {
+				catch (Exception e) {
 				}
 			}
-			row.addText(parentOrganizationName);
 
+			row.addText(parentOrganizationName);
 
 			// Address
 

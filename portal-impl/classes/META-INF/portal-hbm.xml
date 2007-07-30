@@ -216,7 +216,6 @@
 		<property name="parentOrganizationId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="location" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="inheritable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="recursable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="regionId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="countryId" type="com.liferay.util.dao.hibernate.LongType" />

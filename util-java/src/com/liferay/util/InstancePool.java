@@ -22,64 +22,23 @@
 
 package com.liferay.util;
 
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="InstancePool.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated this class has been repackaged at
+ * <code>com.liferay.portal.kernel.util</code>.
+ *
  */
 public class InstancePool {
 
 	public static Object get(String className) {
-		return _instance._get(className);
+		return com.liferay.portal.kernel.util.InstancePool.get(className);
 	}
 
 	public static void put(String className, Object obj) {
-		_instance._put(className, obj);
+		com.liferay.portal.kernel.util.InstancePool.put(className, obj);
 	}
-
-	private InstancePool() {
-		_classPool = CollectionFactory.getSyncHashMap();
-	}
-
-	private Object _get(String className) {
-		className = className.trim();
-
-		Object obj = _classPool.get(className);
-
-		if (obj == null) {
-			try {
-				obj = Class.forName(className).newInstance();
-
-				_put(className, obj);
-			}
-			catch (ClassNotFoundException cnofe) {
-				_log.error(cnofe.getMessage());
-			}
-			catch (InstantiationException ie) {
-				_log.error(ie.getMessage());
-			}
-			catch (IllegalAccessException iae) {
-				_log.error(iae.getMessage());
-			}
-		}
-
-		return obj;
-	}
-
-	private void _put(String className, Object obj) {
-		_classPool.put(className, obj);
-	}
-
-	private static Log _log = LogFactory.getLog(InstancePool.class);
-
-	private static InstancePool _instance = new InstancePool();
-
-	private Map _classPool;
 
 }

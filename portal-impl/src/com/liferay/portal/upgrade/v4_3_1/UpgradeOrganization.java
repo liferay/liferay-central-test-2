@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0;
+package com.liferay.portal.upgrade.v4_3_1;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -29,12 +29,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeIndexes.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeIndexes extends UpgradeProcess {
+public class UpgradeOrganization extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -48,9 +48,11 @@ public class UpgradeIndexes extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		runSQLTemplate("indexes.sql", false);
+		runSQL(
+			"update Organization_ set location = TRUE where " +
+				"parentOrganizationId > 0");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeIndexes.class);
+	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);
 
 }

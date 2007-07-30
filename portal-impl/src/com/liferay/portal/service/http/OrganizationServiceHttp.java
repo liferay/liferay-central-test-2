@@ -148,8 +148,8 @@ public class OrganizationServiceHttp {
 
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location, boolean inheritable)
+		java.lang.String name, boolean location, boolean recursable,
+		long regionId, long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -160,11 +160,11 @@ public class OrganizationServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new LongWrapper(regionId);
-			Object paramObj3 = new LongWrapper(countryId);
-			Object paramObj4 = new IntegerWrapper(statusId);
-			Object paramObj5 = new BooleanWrapper(location);
-			Object paramObj6 = new BooleanWrapper(inheritable);
+			Object paramObj2 = new BooleanWrapper(location);
+			Object paramObj3 = new BooleanWrapper(recursable);
+			Object paramObj4 = new LongWrapper(regionId);
+			Object paramObj5 = new LongWrapper(countryId);
+			Object paramObj6 = new IntegerWrapper(statusId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
 					new Object[] {
@@ -445,8 +445,8 @@ public class OrganizationServiceHttp {
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		HttpPrincipal httpPrincipal, long organizationId,
-		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location, boolean inheritable)
+		long parentOrganizationId, java.lang.String name, boolean location,
+		boolean recursable, long regionId, long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -458,11 +458,11 @@ public class OrganizationServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(regionId);
-			Object paramObj4 = new LongWrapper(countryId);
-			Object paramObj5 = new IntegerWrapper(statusId);
-			Object paramObj6 = new BooleanWrapper(location);
-			Object paramObj7 = new BooleanWrapper(inheritable);
+			Object paramObj3 = new BooleanWrapper(location);
+			Object paramObj4 = new BooleanWrapper(recursable);
+			Object paramObj5 = new LongWrapper(regionId);
+			Object paramObj6 = new LongWrapper(countryId);
+			Object paramObj7 = new IntegerWrapper(statusId);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",
 					new Object[] {

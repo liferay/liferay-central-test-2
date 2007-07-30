@@ -414,17 +414,6 @@ portletURL.setParameter("tabs3", tabs3);
 		</c:choose>
 
 		<%
-		List headerNames = new ArrayList();
-		headerNames.add("name");
-
-		if (!organizationsTab) {
-			headerNames.add("organization");
-		}
-
-		headerNames.add("city");
-		headerNames.add("region");
-		headerNames.add("country");
-
 		boolean showSearch = false;
 
 		if (organizationsTab && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
@@ -446,6 +435,21 @@ portletURL.setParameter("tabs3", tabs3);
 		}
 
 		OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
+
+		List headerNames = new ArrayList();
+
+		headerNames.add("name");
+
+		if (organizationsTab) {
+			headerNames.add("parent-organization");
+		}
+		else {
+			headerNames.add("organization");
+		}
+
+		headerNames.add("city");
+		headerNames.add("region");
+		headerNames.add("country");
 
 		searchContainer.setHeaderNames(headerNames);
 
@@ -493,14 +497,17 @@ portletURL.setParameter("tabs3", tabs3);
 			}
 			else {
 				OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
+
 				long parentOrganizationId = displayTerms.getParentOrganizationId();
 
-				boolean location = false;
+				if (organizationsTab) {
+					parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 
-				if (!organizationsTab) {
-
-					location = true;
-
+					if (parentOrganizationId <= 0) {
+						parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
+					}
+				}
+				else {
 					if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 						parentOrganizationId = user.getOrganization().getOrganizationId();
 					}
@@ -513,11 +520,11 @@ portletURL.setParameter("tabs3", tabs3);
 					}
 				}
 
-				total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, location, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+				total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
 
 				searchContainer.setTotal(total);
 
-				results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, location, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+				results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 			}
 
 			searchContainer.setResults(results);
@@ -566,21 +573,21 @@ portletURL.setParameter("tabs3", tabs3);
 
 				row.addText(organization.getName(), rowURL);
 
-				// Parent Organization
+				// Parent organization
 
-				if (!organizationsTab) {
-					String parentOrganizationName = StringPool.BLANK;
+				String parentOrganizationName = StringPool.BLANK;
 
-					if (organization.getParentOrganizationId() > 0) {
-						try {
-							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-							parentOrganizationName = parentOrganization.getName();
-						}
-						catch (NoSuchOrganizationException nsoe) {
-						}
+				if (organization.getParentOrganizationId() > 0) {
+					try {
+						Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+						parentOrganizationName = parentOrganization.getName();
 					}
-					row.addText(parentOrganizationName, rowURL);
+					catch (Exception e) {
+					}
 				}
+
+				row.addText(parentOrganizationName);
 
 				// City
 

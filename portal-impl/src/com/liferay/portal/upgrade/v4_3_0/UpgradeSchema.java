@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -49,7 +50,6 @@ public class UpgradeSchema extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		runSQLTemplate("update-4.2.0-4.3.0.sql", false);
-		runSQLTemplate("update-4.3.0-4.3.1.sql", false);
 
 		for (int i = 0; i < _OLD_TABLES.length; i++) {
 			try {
@@ -58,6 +58,11 @@ public class UpgradeSchema extends UpgradeProcess {
 			catch (Exception e) {
 			}
 		}
+
+		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
+			com.liferay.portal.upgrade.v4_3_1.UpgradeSchema.class.getName());
+
+		upgradeProcess.upgrade();
 	}
 
 	private static final String[] _OLD_TABLES = new String[] {

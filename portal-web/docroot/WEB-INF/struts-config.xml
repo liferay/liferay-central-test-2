@@ -273,7 +273,7 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
-		<action path="/communities/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm" scope="request">
+		<action path="/communities/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
@@ -453,6 +453,11 @@
 		<action path="/enterprise_admin/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
+		<action path="/enterprise_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
 		<action path="/enterprise_admin/edit_password_policy" type="com.liferay.portlet.enterpriseadmin.action.EditPasswordPolicyAction">
@@ -671,7 +676,7 @@
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
 		</action>
 
-		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" >
+		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.journal.error" />
 		</action>
 
@@ -744,7 +749,7 @@
 
 		<!-- Journal Content -->
 
-		<action path="/journal_content/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction" >
+		<action path="/journal_content/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.journal_content.error" />
 		</action>
 
@@ -823,6 +828,11 @@
 		<action path="/location_admin/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
+		<action path="/location_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
 		<action path="/location_admin/edit_phone" type="com.liferay.portlet.enterpriseadmin.action.EditPhoneAction">
@@ -1103,6 +1113,11 @@
 		<action path="/organization_admin/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
+		</action>
+
+		<action path="/organization_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
 		<action path="/organization_admin/edit_phone" type="com.liferay.portlet.enterpriseadmin.action.EditPhoneAction">
@@ -1570,7 +1585,7 @@
 
 	<!-- Tiles Plugin -->
 
-	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
 		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml,/WEB-INF/tiles-defs-ext.xml" />
 		<set-property property="moduleAware" value="true" />
 		<set-property property="definitions-parser-validate" value="true" />

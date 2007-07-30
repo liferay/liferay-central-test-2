@@ -36,7 +36,6 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeImage;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeImageGallery;
-import com.liferay.portal.upgrade.v4_3_0.UpgradeIndexes;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeJournal;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeListType;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeLucene;
@@ -120,7 +119,6 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeCounter());
 		upgrade(new UpgradeResource());
 		upgrade(new UpgradeMappingTables());
-		upgrade(new UpgradeIndexes());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);

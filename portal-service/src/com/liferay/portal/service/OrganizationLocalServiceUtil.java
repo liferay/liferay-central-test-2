@@ -76,15 +76,15 @@ public class OrganizationLocalServiceUtil {
 
 	public static com.liferay.portal.model.Organization addOrganization(
 		long userId, long parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location,
-		boolean inheritable)
+		boolean location, boolean recursable, long regionId, long countryId,
+		int statusId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.addOrganization(userId,
-			parentOrganizationId, name, regionId, countryId, statusId,
-			location, inheritable);
+			parentOrganizationId, name, location, recursable, regionId,
+			countryId, statusId);
 	}
 
 	public static void addOrganizationResources(long userId,
@@ -119,20 +119,12 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.deleteOrganization(organization);
 	}
 
-	public static java.util.List getAncestors(long organizationId)
+	public static java.util.List getAncestorOrganizations(long organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
-		return organizationLocalService.getAncestors(organizationId);
-	}
-
-	public static java.util.List getInheritableAncestors(long organizationId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getInheritableAncestors(organizationId);
+		return organizationLocalService.getAncestorOrganizations(organizationId);
 	}
 
 	public static java.util.List getGroupOrganizations(long groupId)
@@ -160,6 +152,15 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganizationId(companyId, name);
 	}
 
+	public static java.util.List getRecursableAncestorOrganizations(
+		long organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getRecursableAncestorOrganizations(organizationId);
+	}
+
 	public static java.util.List getUserOrganizations(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -177,6 +178,15 @@ public class OrganizationLocalServiceUtil {
 			organizationId);
 	}
 
+	public static boolean hasUserOrganization(long userId, long organizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.hasUserOrganization(userId,
+			organizationId);
+	}
+
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId)
 		throws com.liferay.portal.PortalException, 
@@ -187,8 +197,18 @@ public class OrganizationLocalServiceUtil {
 			organizationId);
 	}
 
+	public static boolean isAncestor(long locationId,
+		long ancestorOrganizationId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.isAncestor(locationId,
+			ancestorOrganizationId);
+	}
+
 	public static java.util.List search(long companyId,
-		long parentOrganizationId, boolean location, java.lang.String name,
+		long parentOrganizationId, java.lang.String name, boolean location,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap params, boolean andOperator, int begin, int end)
@@ -197,12 +217,12 @@ public class OrganizationLocalServiceUtil {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.search(companyId, parentOrganizationId,
-			location, name, street, city, zip, regionId, countryId, params,
+			name, location, street, city, zip, regionId, countryId, params,
 			andOperator, begin, end);
 	}
 
 	public static int searchCount(long companyId, long parentOrganizationId,
-		boolean location, java.lang.String name, java.lang.String street,
+		java.lang.String name, boolean location, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator)
@@ -211,7 +231,7 @@ public class OrganizationLocalServiceUtil {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.searchCount(companyId,
-			parentOrganizationId, location, name, street, city, zip, regionId,
+			parentOrganizationId, name, location, street, city, zip, regionId,
 			countryId, params, andOperator);
 	}
 
@@ -243,15 +263,15 @@ public class OrganizationLocalServiceUtil {
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
-		java.lang.String name, long regionId, long countryId, int statusId,
-		boolean location, boolean inheritable)
+		java.lang.String name, boolean location, boolean recursable,
+		long regionId, long countryId, int statusId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.updateOrganization(companyId,
-			organizationId, parentOrganizationId, name, regionId, countryId,
-			statusId, location, inheritable);
+			organizationId, parentOrganizationId, name, location, recursable,
+			regionId, countryId, statusId);
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(

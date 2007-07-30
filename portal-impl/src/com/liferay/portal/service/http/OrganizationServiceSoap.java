@@ -102,12 +102,12 @@ public class OrganizationServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrganizationSoap addOrganization(
-		long parentOrganizationId, java.lang.String name, long regionId,
-		long countryId, int statusId, boolean location, boolean inheritable)
+		long parentOrganizationId, java.lang.String name, boolean location,
+		boolean recursable, long regionId, long countryId, int statusId)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
-					name, regionId, countryId, statusId, location, inheritable);
+					name, location, recursable, regionId, countryId, statusId);
 
 			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}
@@ -206,12 +206,12 @@ public class OrganizationServiceSoap {
 
 	public static com.liferay.portal.model.OrganizationSoap updateOrganization(
 		long organizationId, long parentOrganizationId, java.lang.String name,
-		long regionId, long countryId, int statusId, boolean location,
-		boolean inheritable) throws RemoteException {
+		boolean location, boolean recursable, long regionId, long countryId,
+		int statusId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
-					parentOrganizationId, name, regionId, countryId, statusId,
-					location, inheritable);
+					parentOrganizationId, name, location, recursable, regionId,
+					countryId, statusId);
 
 			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}

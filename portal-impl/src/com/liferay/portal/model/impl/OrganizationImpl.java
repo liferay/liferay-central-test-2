@@ -45,6 +45,7 @@ public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
 	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;
+
 	public static final int ANY_PARENT_ORGANIZATION_ID = -1;
 
 	public OrganizationImpl() {

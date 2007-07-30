@@ -22,7 +22,7 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.util.InstancePool;
+import com.liferay.portal.kernel.util.InstancePool;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

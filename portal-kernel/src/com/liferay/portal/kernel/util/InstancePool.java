@@ -20,25 +20,72 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.util;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="InstancePool.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.portal.kernel.util</code>.
- *
  */
 public class InstancePool {
 
 	public static Object get(String className) {
-		return com.liferay.portal.kernel.util.InstancePool.get(className);
+		return _instance._get(className);
 	}
 
 	public static void put(String className, Object obj) {
-		com.liferay.portal.kernel.util.InstancePool.put(className, obj);
+		_instance._put(className, obj);
 	}
+
+	private InstancePool() {
+		_classPool = new HashMap();
+	}
+
+	private Object _get(String className) {
+		className = className.trim();
+
+		Object obj = _classPool.get(className);
+
+		if (obj == null) {
+			try {
+				ClassLoader contextClassLoader =
+					Thread.currentThread().getContextClassLoader();
+
+				Class classObj = contextClassLoader.loadClass(className);
+
+				obj = classObj.newInstance();
+
+				_put(className, obj);
+			}
+			catch (ClassNotFoundException cnofe) {
+				_log.error(cnofe, cnofe);
+			}
+			catch (InstantiationException ie) {
+				_log.error(ie, ie);
+			}
+			catch (IllegalAccessException iae) {
+				_log.error(iae, iae);
+			}
+		}
+
+		return obj;
+	}
+
+	private void _put(String className, Object obj) {
+		_classPool.put(className, obj);
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(InstancePool.class);
+
+	private static InstancePool _instance = new InstancePool();
+
+	private Map _classPool;
 
 }

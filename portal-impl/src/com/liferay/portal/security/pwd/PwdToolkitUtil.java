@@ -25,10 +25,10 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
 
 /**
  * <a href="PwdToolkitUtil.java.html"><b><i>View Source</i></b></a>

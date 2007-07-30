@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.InstancePool;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.util.Validator;
 
 /**

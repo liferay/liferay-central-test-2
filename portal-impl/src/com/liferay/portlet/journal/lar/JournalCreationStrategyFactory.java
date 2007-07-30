@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
 
 /**
  * <a href="JournalCreationStrategyFactory.java.html"><b><i>View Source</i></b>

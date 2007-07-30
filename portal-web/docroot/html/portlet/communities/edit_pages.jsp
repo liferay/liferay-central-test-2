@@ -130,9 +130,27 @@ if (selLayout == null) {
 
 long parentLayoutId = BeanParamUtil.getLong(selLayout, request,  "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
+Organization organization = null;
+User user2 = null;
+
+if (liveGroup.isOrganization()) {
+	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getClassPK());
+}
+else if (liveGroup.isUser()) {
+	user2 = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());
+}
+
 LayoutLister layoutLister = new LayoutLister();
 
-String rootNodeName = liveGroup.isUser() ? contact.getFullName() : liveGroup.getName();
+String rootNodeName = liveGroup.getName();
+
+if (liveGroup.isOrganization()) {
+	rootNodeName = organization.getName();
+}
+else if (liveGroup.isUser()) {
+	rootNodeName = user2.getFullName();
+}
+
 LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
 
 List layoutList = layoutView.getList();
@@ -296,12 +314,34 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" type="hidden" value="<%= true %>">
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_SELECTED_LAYOUTS %>" type="hidden" value="">
 
-<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
 				<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
+			</td>
+			<td align="right">
+				&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+	</c:if>
+
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td>
+				<c:choose>
+					<c:when test="<%= liveGroup.isOrganization() %>">
+						<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= organization.getName() %>
+					</c:when>
+					<c:when test="<%= liveGroup.isUser() %>">
+						<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>
+					</c:when>
+				</c:choose>
 			</td>
 			<td align="right">
 				&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
@@ -318,7 +358,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		</liferay-util:include>
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
+	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
 		<liferay-ui:tabs
 			names="live,staging"
 			param="tabs1"
@@ -343,18 +383,16 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 	<br />
 </c:if>
 
-<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.MY_ACCOUNT)) && (group != null) %>">
+<c:if test="<%= (group != null) %>">
 	<liferay-ui:tabs
 		names="public,private"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
 	/>
-</c:if>
 
-<c:if test="<%= (group != null) %>">
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
-			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
+			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 			</c:if>
 
@@ -365,7 +403,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			<br /><br />
 		</c:when>
 		<c:otherwise>
-			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
+			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 				<br /><br />
@@ -1400,7 +1438,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					</tr>
 					</table>
 
-					<c:if test="<%= group.isCommunity() %>">
+					<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
 						<br />
 
 						<liferay-ui:message key="enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages" />

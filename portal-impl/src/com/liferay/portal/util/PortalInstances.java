@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.smtp.MessageListener;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
@@ -40,7 +41,6 @@ import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.InstancePool;
 import com.liferay.util.SetUtil;
 import com.liferay.util.Validator;
 

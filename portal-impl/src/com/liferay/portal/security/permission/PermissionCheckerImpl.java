@@ -199,35 +199,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					}
 				}
 
-				List userOrgs =
-					OrganizationServiceUtil.getUserOrganizations(
-						user.getUserId());
-
-				// Recursive calculation organization ancestors with inheritable
-				// flag actived.
-
-				if (userOrgs != null && userOrgs.size() > 0){
-
-					ArrayList organizationsTree = new ArrayList();
-
-					Iterator it = userOrgs.iterator();
-
-					while (it.hasNext()){
-						Organization org = (Organization) it.next();
-
-						if (!org.isLocation()) {
-							organizationsTree.addAll(
-									OrganizationLocalServiceUtil.
-											getInheritableAncestors(
-												org.getOrganizationId()));
-						}
-						else {
-							organizationsTree.add(org);
-						}
-					}
-
-					userOrgs = organizationsTree;
-				}
+				List userOrgs =	getUserOrgs(user.getUserId());
 
 				List userOrgGroups =
 					GroupServiceUtil.getOrganizationsGroups(userOrgs);
@@ -443,6 +415,38 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 
 		return resourceIds;
+	}
+
+	protected List getUserOrgs(long userId) throws Exception {
+		List userOrgs = OrganizationServiceUtil.getUserOrganizations(userId);
+
+		if (userOrgs.size() == 0) {
+			return userOrgs;
+		}
+
+		// Recursive calculation of organization ancestors with inheritable flag
+		// actived
+
+		List organizations = new ArrayList();
+
+		Iterator itr = userOrgs.iterator();
+
+		while (itr.hasNext()){
+			Organization organization = (Organization)itr.next();
+
+			if (!organization.isLocation()) {
+				List recursableAncestorOrgs = OrganizationLocalServiceUtil.
+					getRecursableAncestorOrganizations(
+						organization.getOrganizationId());
+
+				organizations.addAll(recursableAncestorOrgs);
+			}
+			else {
+				organizations.add(organization);
+			}
+		}
+
+		return organizations;
 	}
 
 	protected boolean hasPermissionImpl(

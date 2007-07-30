@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,27 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+package com.liferay.portal.upgrade.v4_3_1;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
 
-Organization organization = (Organization)row.getObject();
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-long organizationId = organization.getOrganizationId();
+/**
+ * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class UpgradeSchema extends UpgradeProcess {
 
-boolean organizationsTab = !organization.isLocation();
-boolean location = organization.isLocation();
-%>
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
 
-<c:if test="<%= !location %>">
-	<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="viewSubOrganizationsURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/select_organization" />
-		<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-		<portlet:param name="back" value="<%= currentURL %>" />
-	</portlet:renderURL>
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
+	}
 
-	<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSubOrganizationsURL %>" />
-</c:if>
+	protected void doUpgrade() throws Exception {
+		if (!_alreadyUpgraded) {
+			_alreadyUpgraded = true;
+
+			runSQLTemplate("update-4.3.0-4.3.1.sql", false);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
+
+	private boolean _alreadyUpgraded;
+
+}

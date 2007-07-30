@@ -26,6 +26,7 @@ import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
@@ -100,11 +101,10 @@ public class StartupAction extends SimpleAction {
 					_log.debug("Initializing upgrade " + upgradeProcesses[i]);
 				}
 
-				try {
-					UpgradeProcess upgradeProcess =
-						(UpgradeProcess)Class.forName(
-							upgradeProcesses[i]).newInstance();
+				UpgradeProcess upgradeProcess =
+					(UpgradeProcess)InstancePool.get(upgradeProcesses[i]);
 
+				if (upgradeProcess != null) {
 					if ((upgradeProcess.getThreshold() == 0) ||
 						(upgradeProcess.getThreshold() > buildNumber)) {
 
@@ -134,11 +134,8 @@ public class StartupAction extends SimpleAction {
 						}
 					}
 				}
-				catch (ClassNotFoundException cnfe) {
+				else {
 					_log.error(upgradeProcesses[i] + " cannot be found");
-				}
-				catch (InstantiationException ie) {
-					_log.error(upgradeProcesses[i] + " cannot be initiated");
 				}
 			}
 
@@ -149,6 +146,12 @@ public class StartupAction extends SimpleAction {
 			// Delete temporary images
 
 			deleteTemporaryImages();
+
+			// Update indexes
+
+			if (ranUpgradeProcess) {
+				DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+			}
 
 			// Enable database caching after upgrade
 
