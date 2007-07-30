@@ -216,16 +216,19 @@
 			}
 			else {
 				var portlets = instance._cache.portletList[current.parentNode.id];
-				portlets.each(function(item) {
-					if (item == position) {
-						if ((quadrant == 1 || quadrant == 2) && item.listInfo.prev == current) {
-							rt = false;
+
+				if (portlets) {
+					portlets.each(function(item) {
+						if (item == position) {
+							if ((quadrant == 1 || quadrant == 2) && item.listInfo.prev == current) {
+								rt = false;
+							}
+							else if ((quadrant == 3 || quadrant == 4) && item.listInfo.next == current) {
+								rt = false;
+							}
 						}
-						else if ((quadrant == 3 || quadrant == 4) && item.listInfo.next == current) {
-							rt = false;
-						}
-					}
-				});
+					});
+				}
 			}
 
 			return rt;
