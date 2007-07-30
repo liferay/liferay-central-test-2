@@ -405,7 +405,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	sm = new StringMaker();
 
-	if (ShoppingUtil.isInStock(item, itemFields, fieldsArray)) {
+	if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
 		sm.append("<span class=\"portlet-msg-success\">");
 		sm.append(LanguageUtil.get(pageContext, "in-stock"));
 		sm.append("</span>");

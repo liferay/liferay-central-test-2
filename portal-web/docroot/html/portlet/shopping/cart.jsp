@@ -254,7 +254,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	if (PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY)) {
 		sm.append("<br /><br />");
 
-		if (ShoppingUtil.isInStock(item, itemFields, fieldsArray)) {
+		if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
 			sm.append(LanguageUtil.get(pageContext, "availability"));
 			sm.append(": ");
 			sm.append("<span class=\"portlet-msg-success\">");
