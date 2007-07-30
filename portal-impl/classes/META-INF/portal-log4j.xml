@@ -209,7 +209,7 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.FriendlyURLServlet">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.servlet.ImageServlet">
