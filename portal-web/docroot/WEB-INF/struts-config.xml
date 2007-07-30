@@ -759,6 +759,8 @@
 
 		<action path="/journal_content/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
+		<action path="/journal_content/update_article_field" type="com.liferay.portlet.ratings.action.UpdateArticleFieldAction" />
+
 		<action path="/journal_content/view" type="com.liferay.portlet.journalcontent.action.ViewAction">
 			<forward name="portlet.journal_content.view" path="portlet.journal_content.view" />
 		</action>

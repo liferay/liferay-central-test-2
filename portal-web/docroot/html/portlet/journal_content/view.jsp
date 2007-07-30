@@ -43,7 +43,10 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
 		%>
 
+		<!--<div class="journal-content-article-content" id="<portlet:namespace />content" style="z-index: 8;">-->
+		<div class="journal-content-article-content" id="<portlet:namespace />content">
 		<%= content %>
+		</div>
 
 		<c:if test="<%= showAvailableLocales %>">
 

@@ -236,4 +236,15 @@ public class JournalArticleServiceImpl
 			prefs, tagsEntries);
 	}
 
+	public JournalArticle updateContent(
+			long groupId, String articleId, double version, String content)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, ActionKeys.UPDATE);
+
+		return JournalArticleLocalServiceUtil.updateContent(
+			groupId, articleId, version, content);
+	}
+
 }

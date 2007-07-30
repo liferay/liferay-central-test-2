@@ -94,4 +94,14 @@ public class JournalArticleServiceJSON {
 
 		return JournalArticleJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject updateContent(long groupId,
+		java.lang.String articleId, double version, java.lang.String content)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateContent(groupId,
+				articleId, version, content);
+
+		return JournalArticleJSONSerializer.toJSONObject(returnValue);
+	}
 }

@@ -214,4 +214,15 @@ public class JournalArticleServiceUtil {
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			images, articleURL, prefs, tagsEntries);
 	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String content)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
+
+		return journalArticleService.updateContent(groupId, articleId, version,
+			content);
+	}
 }

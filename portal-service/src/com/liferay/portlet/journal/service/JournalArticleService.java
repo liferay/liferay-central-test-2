@@ -145,4 +145,10 @@ public interface JournalArticleService {
 		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public com.liferay.portlet.journal.model.JournalArticle updateContent(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String content)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

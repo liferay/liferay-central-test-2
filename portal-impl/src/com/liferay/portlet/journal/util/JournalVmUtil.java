@@ -28,6 +28,7 @@ import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.PwdGenerator;
+import com.liferay.util.StringUtil;
 import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;
@@ -52,6 +53,7 @@ import org.dom4j.io.SAXReader;
  * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class JournalVmUtil {
@@ -95,6 +97,8 @@ public class JournalVmUtil {
 			context.put("groupId", String.valueOf(groupId));
 			context.put("journalTemplatesPath", journalTemplatesPath);
 			context.put("randomNamespace", randomNamespace);
+
+			script = _injectEditAndPlace(xml, script);
 
 			load = Velocity.evaluate(
 				context, output, JournalVmUtil.class.getName(), script);
@@ -177,6 +181,45 @@ public class JournalVmUtil {
 		}
 
 		return nodes;
+	}
+
+	private static String _injectEditAndPlace(String xml, String script)
+		throws DocumentException {
+
+		SAXReader reader = new SAXReader();
+
+		Document doc = reader.read(new StringReader(xml));
+
+		Iterator itr = doc.selectNodes("//dynamic-element").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String name = GetterUtil.getString(el.attributeValue("name"));
+			String type = GetterUtil.getString(el.attributeValue("type"));
+
+			if ((!name.startsWith("reserved-")) &&
+				(type.equals("text") || type.equals("text_box") ||
+				 type.equals("text_area"))) {
+
+				script = _wrapField(script, name, type, "data");
+				script = _wrapField(script, name, type, "getData()");
+			}
+		}
+
+		return script;
+	}
+
+	private static String _wrapField(
+		String script, String name, String type, String call) {
+
+		String field = "$" + name + "." + call;
+		String wrappedField =
+			"<span class=\"journal-content-eip-" + type + "\" " +
+				"id=\"journal-content-field-name-" + name + "\">" + field +
+					"</span>";
+
+		return StringUtil.replace(script, field, wrappedField);
 	}
 
 }

@@ -1493,6 +1493,13 @@ Liferay.Service.Journal.JournalArticle = {
 		params.serviceMethodName = "removeArticleLocale";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateContent: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateContent";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 
