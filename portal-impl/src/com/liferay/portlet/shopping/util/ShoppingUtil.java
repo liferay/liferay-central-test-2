@@ -991,14 +991,12 @@ public class ShoppingUtil {
 		ShoppingItem item, ShoppingItemField[] itemFields,
 		String[] fieldsArray, Integer orderedQuantity) {
 
-		int stockQuantity;
-
 		if (!item.isFields()) {
-
-			stockQuantity = item.getStockQuantity();
+			int stockQuantity = item.getStockQuantity();
 
 			if ((stockQuantity > 0)  &&
 			    (stockQuantity >= orderedQuantity.intValue())) {
+
 				return true;
 			}
 			else {
@@ -1010,7 +1008,7 @@ public class ShoppingUtil {
 
 			String[] fieldsQuantities = item.getFieldsQuantitiesArray();
 
-			stockQuantity = GetterUtil.getInteger(fieldsQuantities[rowPos]);
+			int stockQuantity = GetterUtil.getInteger(fieldsQuantities[rowPos]);
 
 			try {
 				if ((stockQuantity > 0) &&
