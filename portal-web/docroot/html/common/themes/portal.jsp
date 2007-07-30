@@ -30,7 +30,7 @@ String scroll = ParamUtil.getString(request, "scroll");
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isStateExclusive() %>">
-		<liferay-util:include page='<%= Constants.TEXT_HTML_DIR + "/portal/layout/view/portlet.jsp" %>' />
+		<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">
 		<liferay-theme:include page="portal_pop_up.jsp" />

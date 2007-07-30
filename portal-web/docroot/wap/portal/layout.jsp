@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<liferay-util:include page='<%= Constants.TEXT_WAP_DIR + "/portal/layout/view/portlet.jsp" %>' />
+<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>

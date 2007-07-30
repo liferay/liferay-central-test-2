@@ -99,6 +99,8 @@ public class WebKeys {
 
 	public static final String LAYOUT = "LAYOUT";
 
+	public static final String LAYOUT_CONTENT = "LAYOUT_CONTENT";
+
 	public static final String LAYOUT_DEFAULT = "LAYOUT_DEFAULT";
 
 	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
@@ -190,6 +192,10 @@ public class WebKeys {
 	public static final String ORG_LABOR = "ORG_LABOR";
 
 	public static final String ORGANIZATION = "ORGANIZATION";
+
+	public static final String PAGE_SUBTITLE = "LIFERAY_SHARED_PAGE_SUBTITLE";
+
+	public static final String PAGE_TITLE = "LIFERAY_SHARED_PAGE_TITLE";
 
 	public static final String PASSWORD_POLICY = "PASSWORD_POLICY";
 

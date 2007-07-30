@@ -136,6 +136,14 @@
 	#end
 #end
 
+#if ( $pageTitle )
+	#set ( $the_title = $pageTitle )
+#end
+
+#if ( $pageSubtitle )
+	#set ( $the_title = $the_title + " - " + $pageSubtitle )
+#end
+
 #if ( $layouts )
 	#set ( $pages = $layouts )
 #end

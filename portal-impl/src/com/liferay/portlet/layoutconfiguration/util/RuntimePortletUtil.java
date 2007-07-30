@@ -38,6 +38,7 @@ import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.StringWriter;
 
@@ -51,7 +52,6 @@ import javax.portlet.RenderResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -181,16 +181,16 @@ public class RuntimePortletUtil {
 	}
 
 	public static void processTemplate(
-			ServletContext ctx, PageContext pageContext, HttpServletRequest req,
-			HttpServletResponse res, String content)
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
+			String content)
 		throws Exception {
 
-		processTemplate(ctx, pageContext, req, res, null, content);
+		processTemplate(ctx, req, res, null, content);
 	}
 
 	public static void processTemplate(
-			ServletContext ctx, PageContext pageContext, HttpServletRequest req,
-			HttpServletResponse res, String portletId, String content)
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
+			String portletId, String content)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
@@ -261,7 +261,7 @@ public class RuntimePortletUtil {
 				sm.toString());
 		}
 
-		pageContext.getOut().print(output);
+		ServletResponseUtil.write(res, output);
 	}
 
 	public static String processXML(

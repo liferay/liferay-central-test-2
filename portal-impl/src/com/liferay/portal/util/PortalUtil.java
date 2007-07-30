@@ -1453,6 +1453,30 @@ public class PortalUtil {
 		}
 	}
 
+	/**
+	 * Sets the subtitle for a page. This is just a hint and can be overridden
+	 * by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		subtitle the subtitle for a page
+	 * @param		req the HTTP servlet request
+	 */
+	public static void setPageSubtitle(
+		String subtitle, HttpServletRequest req) {
+
+		req.setAttribute(WebKeys.PAGE_SUBTITLE, subtitle);
+	}
+
+	/**
+	 * Sets the whole title for a page. This is just a hint and can be
+	 * overridden by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		title the whole title for a page
+	 * @param		req the HTTP servlet request
+	 */
+	public static void setPageTitle(String title, HttpServletRequest req) {
+		req.setAttribute(WebKeys.PAGE_TITLE, title);
+	}
+
 	public static void storePreferences(PortletPreferences prefs)
 		throws IOException, ValidatorException {
 

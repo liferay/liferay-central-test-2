@@ -44,10 +44,12 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
+import com.liferay.util.BrowserSniffer;
 import com.liferay.util.Http;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.servlet.UploadServletRequest;
 
 import java.util.Iterator;
@@ -60,6 +62,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,15 +89,15 @@ public class LayoutAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
 		Boolean layoutDefault  = (Boolean)req.getAttribute(
 			WebKeys.LAYOUT_DEFAULT);
 
 		if ((layoutDefault != null) && (layoutDefault.booleanValue())) {
-			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
 			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
 			if (_log.isDebugEnabled()) {
@@ -140,6 +143,15 @@ public class LayoutAction extends Action {
 				}
 				else if (action.equals("0")) {
 					processRenderRequest(req, res);
+				}
+
+				if (layout != null) {
+
+					// Include layout content before the page loads because
+					// portlets on the page can set the page title and page
+					// subtitle
+
+					includeLayoutContent(req, res, themeDisplay, layout);
 				}
 
 				return mapping.findForward("portal.layout");
@@ -226,6 +238,46 @@ public class LayoutAction extends Action {
 		}
 
 		req.setAttribute(WebKeys.FORWARD_URL, forwardURL);
+	}
+
+	protected void includeLayoutContent(
+			HttpServletRequest req, HttpServletResponse res,
+			ThemeDisplay themeDisplay, Layout layout)
+		throws Exception {
+
+		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+
+		String path = Constants.TEXT_HTML_DIR;
+
+		if (BrowserSniffer.is_wap_xhtml(req)) {
+			path = Constants.TEXT_WAP_DIR;
+		}
+
+		// Manually check the p_p_id. See LEP-1724.
+
+		if (themeDisplay.isStateExclusive() ||
+			Validator.isNotNull(ParamUtil.getString(req, "p_p_id"))) {
+
+			path += "/portal/layout/view/portlet.jsp";
+		}
+		else {
+			path += PortalUtil.getLayoutViewPage(layout);
+		}
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+
+		StringServletResponse stringServletRes = new StringServletResponse(res);
+
+		rd.include(req, stringServletRes);
+
+		req.setAttribute(WebKeys.LAYOUT_CONTENT, stringServletRes.getString());
+	}
+
+	protected Portlet processActionRequest(
+			HttpServletRequest req, HttpServletResponse res)
+		throws Exception {
+
+		return processPortletRequest(req, res, true);
 	}
 
 	protected Portlet processPortletRequest(
@@ -325,13 +377,6 @@ public class LayoutAction extends Action {
 		}
 
 		return portlet;
-	}
-
-	protected Portlet processActionRequest(
-			HttpServletRequest req, HttpServletResponse res)
-		throws Exception {
-
-		return processPortletRequest(req, res, true);
 	}
 
 	protected Portlet processRenderRequest(

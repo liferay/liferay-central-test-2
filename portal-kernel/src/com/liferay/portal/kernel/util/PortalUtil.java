@@ -63,8 +63,22 @@ public class PortalUtil {
 		}
 	}
 
+	public static void setPageSubtitle(
+		String subtitle, HttpServletRequest req) {
+
+		_invoke(_METHOD_SETPAGESUBTITLE, subtitle, req);
+	}
+
+	public static void setPageTitle(String title, HttpServletRequest req) {
+		_invoke(_METHOD_SETPAGETITLE, title, req);
+	}
+
 	private static Object _invoke(String method, Object arg) {
 		return _invoke(method, new Object[] {arg});
+	}
+
+	private static Object _invoke(String method, Object arg1, Object arg2) {
+		return _invoke(method, new Object[] {arg1, arg2});
 	}
 
 	private static Object _invoke(String method, Object[] args) {
@@ -97,6 +111,10 @@ public class PortalUtil {
 
 	private static final String _METHOD_GETHTTPSERVLETRESPONSE =
 		"getHttpServletResponse";
+
+	private static final String _METHOD_SETPAGESUBTITLE = "setPageSubtitle";
+
+	private static final String _METHOD_SETPAGETITLE = "setPageTitle";
 
 	private static Log _log = LogFactoryUtil.getLog(PortalUtil.class);
 

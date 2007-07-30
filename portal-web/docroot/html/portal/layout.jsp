@@ -24,17 +24,4 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<%--
-
-// Manually check the p_p_id. See LEP-1724.
-
---%>
-
-<c:choose>
-	<c:when test='<%= Validator.isNull(ParamUtil.getString(request, "p_p_id")) %>'>
-		<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + PortalUtil.getLayoutViewPage(layout) %>" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page='<%= Constants.TEXT_HTML_DIR + "/portal/layout/view/portlet.jsp" %>' />
-	</c:otherwise>
-</c:choose>
+<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>

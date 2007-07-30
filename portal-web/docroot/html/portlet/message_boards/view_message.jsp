@@ -271,6 +271,8 @@ else {
 
 <%
 MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
+
+PortalUtil.setPageSubtitle(message.getSubject(), request);
 %>
 
 <%!

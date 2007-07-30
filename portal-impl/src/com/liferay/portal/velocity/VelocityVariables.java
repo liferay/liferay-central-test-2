@@ -199,6 +199,11 @@ public class VelocityVariables {
 			themeDisplay.setTilesSelectable(tilesSelectable);
 		}
 
+		// Page title and subtitle
+
+		vc.put("pageTitle", req.getAttribute(WebKeys.PAGE_TITLE));
+		vc.put("pageSubtitle", req.getAttribute(WebKeys.PAGE_SUBTITLE));
+
 		// Helper utilities
 
 		_insertHelperUtilities(vc);

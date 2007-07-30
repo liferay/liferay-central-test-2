@@ -180,6 +180,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		StrutsUtil.forward(uri, getServletContext(), req, res);
 	}
 
+	protected void doInclude(
+			String uri, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		StrutsUtil.include(uri, getServletContext(), req, res);
+	}
+
 	protected HttpServletRequest callParentProcessMultipart(
 		HttpServletRequest req) {
 

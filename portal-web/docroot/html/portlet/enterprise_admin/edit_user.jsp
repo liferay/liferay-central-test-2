@@ -185,6 +185,11 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 	</liferay-ui:tabs>
 
 	<%@ include file="/html/portlet/enterprise_admin/edit_user_comments.jspf" %>
+
+	<%
+	PortalUtil.setPageSubtitle(user2.getFullName(), request);
+	%>
+
 </c:if>
 
 </form>
