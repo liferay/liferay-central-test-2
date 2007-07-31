@@ -50,4 +50,6 @@ public interface JournalArticleDisplay extends Serializable {
 
 	public String getContent();
 
+	public void setContent(String content);
+
 }

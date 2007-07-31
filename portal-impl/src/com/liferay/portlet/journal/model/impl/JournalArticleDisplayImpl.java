@@ -86,6 +86,10 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		return _content;
 	}
 
+	public void setContent(String content) {
+		_content = content;
+	}
+
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
