@@ -201,7 +201,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 			while (true) {
 				if (!ancestorLayout.isRootLayout()) {
-
 					ancestorLayout = LayoutLocalServiceUtil.getLayout(
 						ancestorLayout.getGroupId(),
 						ancestorLayout.isPrivateLayout(),
@@ -222,19 +221,17 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public List getAncestors() throws SystemException, PortalException {
-
 		List ancestors = new ArrayList();
 
-		Layout itLayout = this;
+		Layout layout = this;
 
 		while (true) {
-			if (!itLayout.isRootLayout()) {
-				itLayout = LayoutLocalServiceUtil.getLayout(
-					itLayout.getGroupId(),
-					itLayout.isPrivateLayout(),
-					itLayout.getParentLayoutId());
+			if (!layout.isRootLayout()) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getParentLayoutId());
 
-				ancestors.add(itLayout);
+				ancestors.add(layout);
 			}
 			else {
 				break;
@@ -243,6 +240,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		return ancestors;
 	}
+
 	public boolean hasAncestor(long layoutId)
 		throws PortalException, SystemException {
 
@@ -265,7 +263,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public boolean isFirstParent() {
 		if (isFirstChild() && isRootLayout()) {
-
 			return true;
 		}
 		else {

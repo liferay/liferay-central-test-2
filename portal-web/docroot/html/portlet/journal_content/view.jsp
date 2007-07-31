@@ -43,7 +43,9 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
 		%>
 
+		<span class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
 		<%= content %>
+		</span>
 
 		<c:if test="<%= showAvailableLocales %>">
 

@@ -40,7 +40,6 @@ public class NavigationTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
 		req.setAttribute("liferay-ui:navigation:displayStyle", _displayStyle);
-
 		req.setAttribute("liferay-ui:navigation:headerType", _headerType);
 		req.setAttribute(
 			"liferay-ui:navigation:rootLayoutType", _rootLayoutType);
@@ -85,7 +84,6 @@ public class NavigationTag extends IncludeTag {
 
 	private String _bulletStyle = "1";
 	private String _displayStyle = "1";
-
 	private String _headerType = "none";
 	private String _rootLayoutType = "absolute";
 	private int _rootLayoutLevel = 1;

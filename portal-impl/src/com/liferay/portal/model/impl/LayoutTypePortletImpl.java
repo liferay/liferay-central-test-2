@@ -856,7 +856,6 @@ public class LayoutTypePortletImpl
 		String selector2 = StringPool.BLANK;
 
 		if (layout.isFirstParent()) {
-
 			selector2 = "firstLayout";
 		}
 

@@ -25,11 +25,13 @@
 <%@ include file="/html/taglib/ui/navigation/init.jsp" %>
 
 <c:if test="<%= layout != null %>">
+
 	<%
 	Layout rootLayout = null;
 	boolean hidden = false;
 
 	List selBranch = new ArrayList();
+
 	selBranch.add(layout);
 	selBranch.addAll(layout.getAncestors());
 
@@ -56,38 +58,40 @@
 	}
 	%>
 
-	<div class='navmenu navmenu-style-<%= bulletStyle %>'>
+	<div class="nav-menu nav-menu-style-<%= bulletStyle %>">
 
-	<c:choose>
-		<c:when test="<%= (headerType.equals("root-layout") && (rootLayout != null)) %>">
-			<%
-			String layoutURL = PortalUtil.getLayoutURL(rootLayout, themeDisplay);
-			String target = PortalUtil.getLayoutTarget(rootLayout);
-			String layoutName = rootLayout.getName(themeDisplay.getLocale());
-			%>
-			<h3>
-				<a href='<%=layoutURL%>' <%=target%>><%=layoutName%></a>
-			</h3>
-		</c:when>
-		<c:when test="<%= headerType.equals("portlet-title") %>">
-			<h3><%=themeDisplay.getPortletDisplay().getTitle()%></h3>
-		</c:when>
-		<c:when test="<%= headerType.equals("breadcrumb") %>">
-			<liferay-ui:breadcrumb />
-		</c:when>
-	</c:choose>
+		<c:choose>
+			<c:when test='<%= (headerType.equals("root-layout") && (rootLayout != null)) %>'>
 
-	<%
-	if (!hidden) {
-		StringMaker sm = new StringMaker();
-		_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sm);
-		out.print(sm.toString());
-	}
-	%>
+				<%
+				String layoutURL = PortalUtil.getLayoutURL(rootLayout, themeDisplay);
+				String target = PortalUtil.getLayoutTarget(rootLayout);
+				String layoutName = rootLayout.getName(themeDisplay.getLocale());
+				%>
 
+				<h3>
+					<a href="<%= layoutURL %>" <%= target %>><%= layoutName %></a>
+				</h3>
+			</c:when>
+			<c:when test='<%= headerType.equals("portlet-title") %>'>
+				<h3><%= themeDisplay.getPortletDisplay().getTitle() %></h3>
+			</c:when>
+			<c:when test='<%= headerType.equals("breadcrumb") %>'>
+				<liferay-ui:breadcrumb />
+			</c:when>
+		</c:choose>
+
+		<%
+		if (!hidden) {
+			StringMaker sm = new StringMaker();
+
+			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sm);
+
+			out.print(sm.toString());
+		}
+		%>
 
 	</div>
-
 </c:if>
 
 <%!
@@ -102,7 +106,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 	}
 
 	if (layoutChildren.size() > 0) {
-		sm.append("<ul class='layouts'>");
+		sm.append("<ul class=\"layouts\">");
 
 		for (int i = 0; i < layoutChildren.size(); i++) {
 			Layout layoutChild = (Layout)layoutChildren.get(i);
@@ -134,18 +138,18 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				sm.append("<li ");
 
 				if (Validator.isNotNull(className)) {
-					sm.append("class='");
+					sm.append("class=\"");
 					sm.append(className);
-					sm.append("' ");
+					sm.append("\" ");
 				}
 
 				sm.append(">");
 				sm.append("<a ");
 
 				if (Validator.isNotNull(className)) {
-					sm.append("class='");
+					sm.append("class=\"");
 					sm.append(className);
-					sm.append("' ");
+					sm.append("\" ");
 				}
 
 				sm.append("href=\"");

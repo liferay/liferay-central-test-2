@@ -25,38 +25,32 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String bulletStyle = (String) request.getAttribute("liferay-ui:navigation:bulletStyle");
+String bulletStyle = (String)request.getAttribute("liferay-ui:navigation:bulletStyle");
+String displayStyle = (String)request.getAttribute("liferay-ui:navigation:displayStyle");
 
-String displayStyle = (String) request.getAttribute("liferay-ui:navigation:displayStyle");
+String headerType = null;
+String rootLayoutType = null;
+int rootLayoutLevel = 0;
+String includedLayouts = null;
 
-String headerType;
-String rootLayoutType;
-int rootLayoutLevel;
-String includedLayouts;
+String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
 
-String[] displayStyleDef = _getDisplayStyleDefinition(displayStyle);
-
-if ((displayStyleDef != null) && (displayStyleDef.length == 4)) {
-
-	headerType = displayStyleDef[0];
-
-	rootLayoutType = displayStyleDef[1];
-	rootLayoutLevel = Integer.parseInt(displayStyleDef[2]);
-
-	includedLayouts = displayStyleDef[3];
+if ((displayStyleDefinition != null) && (displayStyleDefinition.length == 4)) {
+	headerType = displayStyleDefinition[0];
+	rootLayoutType = displayStyleDefinition[1];
+	rootLayoutLevel = GetterUtil.getInteger(displayStyleDefinition[2]);
+	includedLayouts = displayStyleDefinition[3];
 }
 else {
-	headerType = (String) request.getAttribute("liferay-ui:navigation:headerType");
-
-	rootLayoutType = (String) request.getAttribute("liferay-ui:navigation:rootLayoutType");
-	rootLayoutLevel = GetterUtil.getInteger((String) request.getAttribute("liferay-ui:navigation:rootLayoutLevel"));
-
-	includedLayouts = (String) request.getAttribute("liferay-ui:navigation:includedLayouts");
+	headerType = (String)request.getAttribute("liferay-ui:navigation:headerType");
+	rootLayoutType = (String)request.getAttribute("liferay-ui:navigation:rootLayoutType");
+	rootLayoutLevel = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:navigation:rootLayoutLevel"));
+	includedLayouts = (String)request.getAttribute("liferay-ui:navigation:includedLayouts");
 }
 %>
 
 <%!
-String[] _getDisplayStyleDefinition(String displayStyle) {
+private String[] _getDisplayStyleDefinition(String displayStyle) {
 	return PropsUtil.getComponentProperties().getStringArray(
 		"navigation.display.style", com.germinus.easyconf.Filter.by(displayStyle));
 }

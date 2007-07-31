@@ -38,7 +38,7 @@
 #navigation .child-menu {
 }
 
-/* ---------- Dock without Javascript ---------- */
+/* ---------- Dock without JavaScript ---------- */
 
 .lfr-dock {
 }
@@ -82,7 +82,7 @@
 .lfr-dock li.my-places {
 }
 
-/* ---------- Dock with Javascript ---------- */
+/* ---------- Dock with JavaScript ---------- */
 
 .js .lfr-dock.interactive-mode {
 }
@@ -174,7 +174,7 @@
 .ie6.js .lfr-dock.interactive-mode li a {
 }
 
-/* ---------- Add/Sort/Remove page ---------- */
+/* ---------- Add/sort/remove page ---------- */
 
 .js #navigation .enter-page {
 }
@@ -205,23 +205,22 @@
 #navigation ul .sort-helper {
 }
 
-/*------ Navigation Portlet ------*/
+/*------ Navigation portlet ------*/
 
-.navmenu li a.open {
+.nav-menu li a.open {
 }
 
-.navmenu li a.selected {
+.nav-menu li a.selected {
 }
 
-.navmenu li a.open {
+.nav-menu li a.open {
 }
 
-.navmenu ul {
+.nav-menu ul {
 }
 
-.navmenu-style-1 {
+.nav-menu-style-1 {
 }
 
-.navmenu-style-2 {
+.nav-menu-style-2 {
 }
-

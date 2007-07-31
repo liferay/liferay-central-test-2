@@ -64,7 +64,7 @@ if (layoutFamilySet.size() >= depth) {
 
 	StringMaker sm = new StringMaker();
 
-	sm.append("<div class=\"navmenu\">");
+	sm.append("<div class=\"nav-menu\">");
 
 	_buildNavigation(depthLevelLayout, layout, layoutFamilySet, themeDisplay, 1, bulletStyle, showTitle, sm);
 
