@@ -212,6 +212,12 @@ boolean showPortletIcon = (portletResourcePortlet != null) ? Validator.isNotNull
 boolean showPrintIcon = portlet.hasPortletMode(responseContentType, LiferayPortletMode.PRINT);
 boolean showRefreshIcon = portlet.isAjaxable() && (portlet.getRenderWeight() == 0);
 
+Boolean portletParallelRender = (Boolean)request.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
+
+if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == false)) {
+	showRefreshIcon = false;
+}
+
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
