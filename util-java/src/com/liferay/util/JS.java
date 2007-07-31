@@ -43,7 +43,7 @@ public class JS {
 			StringUtil.replace(
 				name,
 				new String[] {
-					StringPool.SPACE, StringPool.DASH, StringPool.PERIOD,
+					StringPool.SPACE, StringPool.DASH, StringPool.PERIOD
 				},
 				new String[] {
 					StringPool.BLANK, StringPool.BLANK, StringPool.BLANK
