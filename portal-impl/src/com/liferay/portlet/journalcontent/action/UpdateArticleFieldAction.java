@@ -28,7 +28,10 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.StringReader;
 
@@ -48,12 +51,12 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="UpdateArticleField.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpdateArticleFieldAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpdateArticleField extends Action {
+public class UpdateArticleFieldAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
@@ -61,7 +64,7 @@ public class UpdateArticleField extends Action {
 		throws Exception {
 
 		try {
-			updateArticleField(req);
+			updateArticleField(req, res);
 
 			return null;
 		}
@@ -72,15 +75,36 @@ public class UpdateArticleField extends Action {
 		}
 	}
 
-	protected void updateArticleField(HttpServletRequest req) throws Exception {
+	protected void updateArticleField(
+			HttpServletRequest req, HttpServletResponse res)
+		throws Exception {
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(req, "version");
+
+		String containerId = ParamUtil.getString(req, "containerId");
+
+		if (Validator.isNotNull(containerId)) {
+			int x = containerId.indexOf("_");
+			int y = containerId.lastIndexOf("_");
+
+			if ((x != -1) && (y != -1)) {
+				groupId = GetterUtil.getLong(containerId.substring(0, x));
+				articleId = containerId.substring(x + 1, y);
+				version = GetterUtil.getDouble(
+					containerId.substring(y, containerId.length()));
+			}
+		}
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
 		String fieldName = ParamUtil.getString(req, "fieldName");
 		String fieldData = ParamUtil.getString(req, "fieldData");
+
+		if (fieldName.startsWith("journal-content-field-name-")) {
+			fieldName = fieldName.substring(27, fieldName.length());
+		}
 
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			groupId, articleId, version);
@@ -119,8 +143,10 @@ public class UpdateArticleField extends Action {
 
 		JournalArticleServiceUtil.updateContent(
 			groupId, articleId, version, content);
+
+		ServletResponseUtil.write(res, fieldData);
 	}
 
-	private static Log _log = LogFactory.getLog(UpdateArticleField.class);
+	private static Log _log = LogFactory.getLog(UpdateArticleFieldAction.class);
 
 }
