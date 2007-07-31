@@ -182,20 +182,48 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<liferay-ui:tabs names="entries" />
 
 			<%
+			String orderByCol = ParamUtil.getString(request, "orderByCol");
+			String orderByType = ParamUtil.getString(request, "orderByType");
+
+			if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+				prefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-col", orderByCol);
+				prefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-type", orderByType);
+			}
+			else {
+				orderByCol = prefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-col", "name");
+				orderByType = prefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-type", "asc");
+			}
+
+			OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(orderByCol, orderByType);
+
 			headerNames.clear();
 
 			headerNames.add("entry");
 			headerNames.add("url");
 			headerNames.add("visits");
+			headerNames.add("priority");
+			headerNames.add("modified-date");
 			headerNames.add(StringPool.BLANK);
 
+			Map orderableHeaders = CollectionFactory.getHashMap();
+
+			orderableHeaders.put("entry", "name");
+			orderableHeaders.put("url", "url");
+			orderableHeaders.put("visits", "visits");
+			orderableHeaders.put("priority", "priority");
+			orderableHeaders.put("modified-date", "modified-date");
+
 			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+			searchContainer.setOrderableHeaders(orderableHeaders);
+			searchContainer.setOrderByCol(orderByCol);
+			searchContainer.setOrderByType(orderByType);
 
 			total = BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId());
 
 			searchContainer.setTotal(total);
 
-			results = BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+			results = BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 
 			searchContainer.setResults(results);
 
@@ -233,6 +261,22 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
 				rowTextEntry.setName(String.valueOf(entry.getVisits()));
+
+				row.addText(rowTextEntry);
+
+				// Priority
+
+				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+				rowTextEntry.setName(String.valueOf(entry.getPriority()));
+
+				row.addText(rowTextEntry);
+
+				// ModifiedDate
+
+				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+				rowTextEntry.setName(dateFormatDate.format(entry.getModifiedDate()));
 
 				row.addText(rowTextEntry);
 

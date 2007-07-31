@@ -127,6 +127,10 @@ public interface BookmarksEntryLocalService {
 	public java.util.List getEntries(long folderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getEntries(long folderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.SystemException;
+
 	public int getEntriesCount(long folderId)
 		throws com.liferay.portal.SystemException;
 

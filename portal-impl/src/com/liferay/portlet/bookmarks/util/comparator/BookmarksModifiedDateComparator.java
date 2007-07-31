@@ -20,38 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.util.comparator;
+package com.liferay.portlet.bookmarks.util.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.util.DateUtil;
 
 /**
- * <a href="ArticleCreateDateComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksModifiedDateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ArticleCreateDateComparator extends OrderByComparator {
+public class BookmarksModifiedDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "createDate ASC";
+	public static String ORDER_BY_ASC = "modifiedDate ASC";
 
-	public static String ORDER_BY_DESC = "createDate DESC";
+	public static String ORDER_BY_DESC = "modifiedDate DESC";
 
-	public ArticleCreateDateComparator() {
+	public BookmarksModifiedDateComparator() {
 		this(false);
 	}
 
-	public ArticleCreateDateComparator(boolean asc) {
+	public BookmarksModifiedDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		JournalArticle article1 = (JournalArticle)obj1;
-		JournalArticle article2 = (JournalArticle)obj2;
+		BookmarksEntry entry1 = (BookmarksEntry)obj1;
+		BookmarksEntry entry2 = (BookmarksEntry)obj2;
 
 		int value = DateUtil.compareTo(
-			article1.getCreateDate(), article2.getCreateDate());
+			entry1.getModifiedDate(), entry2.getModifiedDate());
 
 		if (_asc) {
 			return value;

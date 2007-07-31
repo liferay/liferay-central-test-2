@@ -574,6 +574,7 @@
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="comments" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="visits" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" table="BookmarksFolder">
 		<cache usage="read-write" />

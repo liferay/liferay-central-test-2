@@ -181,6 +181,15 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.getEntries(folderId, begin, end);
 	}
 
+	public static java.util.List getEntries(long folderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getEntries(folderId, begin, end,
+			orderByComparator);
+	}
+
 	public static int getEntriesCount(long folderId)
 		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();

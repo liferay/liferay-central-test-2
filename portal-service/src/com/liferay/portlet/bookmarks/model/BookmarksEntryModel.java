@@ -90,4 +90,8 @@ public interface BookmarksEntryModel extends BaseModel {
 	public int getVisits();
 
 	public void setVisits(int visits);
+
+	public int getPriority();
+
+	public void setPriority(int priority);
 }

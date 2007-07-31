@@ -20,56 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.util.comparator;
+package com.liferay.portlet.tags;
 
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.util.DateUtil;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="ArticleCreateDateComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsEntryException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ArticleCreateDateComparator extends OrderByComparator {
+public class TagsEntryException extends PortalException {
 
-	public static String ORDER_BY_ASC = "createDate ASC";
+	public static final int AT_LEAST_ONE_TAG = 1;
 
-	public static String ORDER_BY_DESC = "createDate DESC";
-
-	public ArticleCreateDateComparator() {
-		this(false);
+	public TagsEntryException(int type) {
+		_type = type;
 	}
 
-	public ArticleCreateDateComparator(boolean asc) {
-		_asc = asc;
+	public int getType() {
+		return _type;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		JournalArticle article1 = (JournalArticle)obj1;
-		JournalArticle article2 = (JournalArticle)obj2;
-
-		int value = DateUtil.compareTo(
-			article1.getCreateDate(), article2.getCreateDate());
-
-		if (_asc) {
-			return value;
-		}
-		else {
-			return -value;
-		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	private boolean _asc;
+	private int _type;
 
 }

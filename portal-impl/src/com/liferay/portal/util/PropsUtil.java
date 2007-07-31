@@ -1041,6 +1041,10 @@ public class PropsUtil {
 
 	public static final String SC_IMAGE_THUMBNAIL_MAX_WIDTH = "sc.image.thumbnail.max.width";
 
+	// Tags Portlet
+
+	public static final String TAGS_ASSET_VALIDATOR = "tags.asset.validator";
+
 	// Translator Portlet
 
 	public static final String TRANSLATOR_DEFAULT_LANGUAGES = "translator.default.languages";

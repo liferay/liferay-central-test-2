@@ -58,6 +58,7 @@ public class BookmarksEntrySoap implements Serializable {
 		soapModel.setUrl(model.getUrl());
 		soapModel.setComments(model.getComments());
 		soapModel.setVisits(model.getVisits());
+		soapModel.setPriority(model.getPriority());
 
 		return soapModel;
 	}
@@ -164,6 +165,14 @@ public class BookmarksEntrySoap implements Serializable {
 		_visits = visits;
 	}
 
+	public int getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(int priority) {
+		_priority = priority;
+	}
+
 	private long _entryId;
 	private long _companyId;
 	private long _userId;
@@ -174,4 +183,5 @@ public class BookmarksEntrySoap implements Serializable {
 	private String _url;
 	private String _comments;
 	private int _visits;
+	private int _priority;
 }

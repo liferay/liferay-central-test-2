@@ -102,6 +102,8 @@ if (fileEntry != null) {
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
+<liferay-ui:tags-error />
+
 <%
 String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) / 1024);
 %>

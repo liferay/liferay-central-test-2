@@ -71,10 +71,11 @@ create table BookmarksEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	folderId LONG,
-	name VARCHAR(75) null,
+	name VARCHAR(300) null,
 	url STRING null,
 	comments STRING null,
-	visits INTEGER
+	visits INTEGER,
+	priority INTEGER
 );
 
 create table BookmarksFolder (

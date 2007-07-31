@@ -85,6 +85,7 @@ if (entry != null) {
 <liferay-ui:tabs names="entry" />
 
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
+<liferay-ui:tags-error />
 
 <table class="liferay-table">
 <tr>

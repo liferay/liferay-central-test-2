@@ -1,3 +1,5 @@
+alter table BookmarksEntry add priority INTEGER;
+
 alter table Layout add description STRING null;
 alter table Layout add dlFolderId LONG;
 

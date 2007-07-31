@@ -32,6 +32,7 @@ import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -88,6 +89,9 @@ public class EditImageAction extends PortletAction {
 					 e instanceof ImageSizeException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof TagsEntryException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;

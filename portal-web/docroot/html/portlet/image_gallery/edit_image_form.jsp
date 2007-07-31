@@ -78,6 +78,8 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
+<liferay-ui:tags-error />
+
 <%
 String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE)) / 1024);
 %>

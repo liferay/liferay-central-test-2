@@ -132,4 +132,11 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.updateAsset(userId, className, classPK,
 			entryNames);
 	}
+
+	public static void validate(java.lang.String className,
+		java.lang.String[] entryNames)
+		throws com.liferay.portal.PortalException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.validate(className, entryNames);
+	}
 }

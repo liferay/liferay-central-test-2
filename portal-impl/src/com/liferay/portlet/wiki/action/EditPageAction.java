@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.action;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
@@ -88,6 +89,9 @@ public class EditPageAction extends PortletAction {
 					 e instanceof PageTitleException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof TagsEntryException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;

@@ -105,6 +105,7 @@ public class BookmarksEntryJSONSerializer {
 		}
 
 		jsonObj.put("visits", model.getVisits());
+		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;
 	}

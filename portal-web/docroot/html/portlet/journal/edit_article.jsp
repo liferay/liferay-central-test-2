@@ -522,6 +522,7 @@ String[] availableLocales = null;
 		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
 		<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
+		<liferay-ui:tags-error />
 
 		<table class="liferay-table">
 		<tr>

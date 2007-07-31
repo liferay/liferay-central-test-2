@@ -137,5 +137,6 @@
 		<exception>EntryName</exception>
 		<exception>PropertyKey</exception>
 		<exception>PropertyValue</exception>
+		<exception>TagsEntry</exception>
 	</exceptions>
 </service-builder>

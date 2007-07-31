@@ -38,6 +38,7 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -113,6 +114,9 @@ public class EditMessageAction extends PortletAction {
 					 e instanceof MessageSubjectException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof TagsEntryException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;

@@ -89,4 +89,8 @@ public interface TagsAssetLocalService {
 		java.lang.String className, long classPK, java.lang.String[] entryNames)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public void validate(java.lang.String className,
+		java.lang.String[] entryNames)
+		throws com.liferay.portal.PortalException;
 }

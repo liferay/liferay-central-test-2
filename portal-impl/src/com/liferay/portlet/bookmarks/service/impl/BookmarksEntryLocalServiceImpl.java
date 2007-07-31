@@ -25,6 +25,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -226,6 +227,15 @@ public class BookmarksEntryLocalServiceImpl
 		throws SystemException {
 
 		return BookmarksEntryUtil.findByFolderId(folderId, begin, end);
+	}
+
+	public List getEntries(
+			long folderId, int begin, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return BookmarksEntryUtil.findByFolderId(
+			folderId, begin, end, orderByComparator);
 	}
 
 	public int getEntriesCount(long folderId) throws SystemException {

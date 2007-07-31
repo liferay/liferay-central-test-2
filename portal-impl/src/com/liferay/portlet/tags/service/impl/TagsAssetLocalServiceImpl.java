@@ -25,15 +25,18 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
+import com.liferay.portlet.tags.util.TagsAssetValidator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,6 +127,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
+		validate(className, entryNames);
+
 		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
@@ -159,6 +164,15 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		TagsAssetUtil.setTagsEntries(asset.getAssetId(), entries);
 
 		return asset;
+	}
+
+	public void validate(String className, String[] entryNames)
+		throws PortalException {
+
+		TagsAssetValidator validator = (TagsAssetValidator)InstancePool.get(
+			PropsUtil.get(PropsUtil.TAGS_ASSET_VALIDATOR));
+
+		validator.validate(className, entryNames);
 	}
 
 }

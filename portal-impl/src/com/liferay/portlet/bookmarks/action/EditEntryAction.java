@@ -29,6 +29,7 @@ import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -79,6 +80,9 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (e instanceof EntryURLException) {
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof TagsEntryException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;

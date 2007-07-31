@@ -36,3 +36,9 @@
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
+
+<%
+PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
+
+DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+%>

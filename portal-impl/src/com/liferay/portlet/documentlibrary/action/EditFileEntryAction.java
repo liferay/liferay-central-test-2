@@ -42,6 +42,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
@@ -117,6 +118,9 @@ public class EditFileEntryAction extends PortletAction {
 					 e instanceof SourceFileNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof TagsEntryException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;

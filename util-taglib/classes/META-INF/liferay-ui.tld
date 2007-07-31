@@ -1330,6 +1330,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>tags-error</name>
+		<tag-class>com.liferay.taglib.ui.TagsErrorTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>tags-selector</name>
 		<tag-class>com.liferay.taglib.ui.TagsSelectorTag</tag-class>
 		<body-content>JSP</body-content>

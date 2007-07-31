@@ -163,6 +163,8 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
+<liferay-ui:tags-error />
+
 <%
 long breadcrumbsMessageId = parentMessageId;
 

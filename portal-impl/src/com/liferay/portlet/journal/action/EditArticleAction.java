@@ -46,6 +46,7 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -129,6 +130,9 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof DuplicateArticleIdException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof TagsEntryException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
