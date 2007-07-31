@@ -191,6 +191,7 @@
 
 		<unjar src="${project.dir}/filters/compression/compression-filter.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/filters/doubleclick/doubleclick-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/filters/header/header-filter.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/filters/secure/secure-filter.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/filters/strip/strip-filter.jar" dest="${classpath.jsp}" />
 
