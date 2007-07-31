@@ -56,15 +56,15 @@ else if (className.equals(JournalArticle.class.getName())) {
 }
 %>
 
-<div>
+<div class="portlet-journal-abstract">
 	<h3><%= title %></h3>
 
-	<p>
+	<p class="portlet-journal-summary">
 		<%= summary %>
 	</p>
 
 	<c:if test="<%= Validator.isNotNull(url) %>">
-		<div>
+		<div class="portlet-journal-more">
 			<a href="<%= asset.getUrl() %>"><liferay-ui:message key="read-more" /></a>
 		</div>
 	</c:if>
