@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.shopping.CartMinQuantityException;
 import com.liferay.portlet.shopping.CouponActiveException;
 import com.liferay.portlet.shopping.CouponEndDateException;
@@ -45,6 +46,7 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.util.ArrayList;
@@ -127,6 +129,9 @@ public class ShoppingCartLocalServiceImpl
 
 		Map items = getItems(groupId, itemIds);
 
+		boolean minQtyMultiple = GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.SHOPPING_CART_MIN_QTY_MULTIPLE));
+
 		Iterator itr = items.entrySet().iterator();
 
 		while (itr.hasNext()) {
@@ -139,8 +144,17 @@ public class ShoppingCartLocalServiceImpl
 
 			int minQuantity = ShoppingUtil.getMinQuantity(item);
 
-			if (minQuantity > 0) {
+			if (minQuantity <= 0) {
+				continue;
+			}
+
+			if (minQtyMultiple) {
 				if ((count.intValue() % minQuantity) > 0) {
+					badItemIds.add(new Long(item.getItemId()));
+				}
+			}
+			else {
+				if (count.intValue() < minQuantity) {
 					badItemIds.add(new Long(item.getItemId()));
 				}
 			}
