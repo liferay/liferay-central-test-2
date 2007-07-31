@@ -133,30 +133,6 @@
 		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/c/portal/login</url-pattern>
 	</filter-mapping>
-	<!--<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.css</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.gif</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.jpg</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.js</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.png</url-pattern>
-	</filter-mapping>-->
 	<filter-mapping>
 		<filter-name>Layout Cache Filter - Friendly</filter-name>
 		<url-pattern>/group/*</url-pattern>
@@ -200,6 +176,30 @@
 	<filter-mapping>
 		<filter-name>Compression Filter</filter-name>
 		<url-pattern>/c/portal/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
+		<url-pattern>*.gif</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
+		<url-pattern>*.jpg</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
+		<url-pattern>*.png</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Compression Filter</filter-name>
