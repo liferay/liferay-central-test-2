@@ -219,7 +219,8 @@ public class JournalVmUtil {
 				"id=\"journal-content-field-name-" + name + "\">" + field +
 					"</span>";
 
-		return StringUtil.replace(script, field, wrappedField);
+		return StringUtil.replace(
+			script, "$editInPlace(" + field + ")", wrappedField);
 	}
 
 }

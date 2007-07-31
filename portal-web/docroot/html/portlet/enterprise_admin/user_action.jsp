@@ -61,7 +61,7 @@
 		<liferay-ui:icon image="permissions" url="<%= permissionsUserURL %>" />
 	</c:if>
 
-	<c:if test="<%= user2.isLayoutsRequired() %>">
+	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) && user2.isLayoutsRequired() %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

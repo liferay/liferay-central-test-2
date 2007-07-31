@@ -53,6 +53,12 @@ if (!organizationsTab) {
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 </portlet:actionURL>
 
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
+</portlet:renderURL>
+
 <%
 String addUserURLString = null;
 %>
@@ -184,15 +190,18 @@ String addUserURLString = null;
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test="<%= true %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
-				</portlet:renderURL>
-
-				<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
-			</c:if>
+			<c:choose>
+				<c:when test="<%= organizationsTab %>">
+					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+						<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+						<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+					</c:if>
+				</c:otherwise>
+			</c:choose>
 
 			<c:choose>
 				<c:when test="<%= organizationsTab %>">
