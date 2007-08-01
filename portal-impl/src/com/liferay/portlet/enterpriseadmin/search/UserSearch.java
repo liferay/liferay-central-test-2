@@ -48,9 +48,10 @@ public class UserSearch extends SearchContainer {
 		headerNames.add("screen-name");
 		headerNames.add("email-address");
 		headerNames.add("job-title");
+		headerNames.add("organization");
 		headerNames.add("location");
 		//headerNames.add("city");
-		headerNames.add("region");
+		//headerNames.add("region");
 		//headerNames.add("country");
 	}
 

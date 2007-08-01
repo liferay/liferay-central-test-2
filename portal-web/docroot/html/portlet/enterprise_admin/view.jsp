@@ -338,13 +338,15 @@ portletURL.setParameter("tabs3", tabs3);
 
 				row.addText(contact2.getJobTitle(), rowURL);
 
-				// Organization or location
+				// Organization
+
+				Organization userOrg = user2.getOrganization();
+
+				row.addText(userOrg.getName(), rowURL);
+
+				// Location
 
 				Organization location = user2.getLocation();
-
-				if ((location.getOrganizationId() <= 0)) {
-					location = user2.getOrganization();
-				}
 
 				row.addText(location.getName(), rowURL);
 
@@ -368,7 +370,7 @@ portletURL.setParameter("tabs3", tabs3);
 					}
 				}
 
-				row.addText(regionName, rowURL);
+				//row.addText(regionName, rowURL);
 
 				// Country
 
