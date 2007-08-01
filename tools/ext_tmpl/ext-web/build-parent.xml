@@ -371,12 +371,13 @@
 				/>
 			</not>
 			<then>
-				<delete dir="tmp" />
+				<delete dir="tmp" failonerror="false" />
 				<mkdir dir="tmp" />
 
 				<unjar
 					dest="tmp"
 					src="${project.dir}/modules/portal-web.war"
+					overwrite="true"
 				/>
 
 				<copy todir="tmp" overwrite="true">
@@ -418,5 +419,9 @@
 		/>
 
 		<antcall target="build-webxml" />
+
+		<touch>
+			<fileset dir="tmp" />
+		</touch>
 	</target>
 </project>

@@ -749,7 +749,7 @@
 			</then>
 		</if>
 
-		<copy todir="${lp.ext.dir}" overwrite="yes">
+		<copy todir="${lp.ext.dir}" preservelastmodified="true">
 			<fileset
 				dir="."
 				includes="app.server.properties"
@@ -774,24 +774,24 @@
 
 		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
 
-		<copy todir="${lp.ext.dir}/lib" overwrite="yes">
+		<copy todir="${lp.ext.dir}/lib" preservelastmodified="true">
 			<fileset dir="lib" />
 		</copy>
 
 		<delete file="${lp.ext.dir}/lib/portal/util-jsf.jar" failonerror="false" />
 
-		<copy todir="${lp.ext.dir}/lib/development" overwrite="yes">
+		<copy todir="${lp.ext.dir}/lib/development" preservelastmodified="true">
 			<fileset dir="${project.dir}/support-tomcat" includes="support-tomcat.jar" />
 		</copy>
 
-		<copy todir="${lp.ext.dir}/lib/global" overwrite="yes">
+		<copy todir="${lp.ext.dir}/lib/global" preservelastmodified="true">
 			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
 			<fileset dir="${project.dir}/portal-service" includes="portal-service.jar" />
 		</copy>
 
 		<delete file="${lp.ext.dir}/lib/global/portal-shared.jar" failonerror="false" />
 
-		<copy todir="${lp.ext.dir}/lib/portal" overwrite="yes">
+		<copy todir="${lp.ext.dir}/lib/portal" preservelastmodified="true">
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/doubleclick" includes="doubleclick-filter.jar" />
 			<fileset dir="${project.dir}/filters/header" includes="header-filter.jar" />
@@ -803,7 +803,7 @@
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
 		</copy>
 
-		<copy todir="${lp.ext.dir}/modules" overwrite="yes">
+		<copy todir="${lp.ext.dir}/modules" preservelastmodified="true">
 			<fileset dir="${project.dir}/counter-impl" includes="counter-impl.jar" />
 			<fileset dir="${project.dir}/documentlibrary-impl" includes="documentlibrary-impl.jar" />
 			<fileset dir="${project.dir}/lock-impl" includes="lock-impl.jar" />
@@ -840,7 +840,7 @@
 	<target name="build-ext-dir" unless="lp.ext.dir.available">
 		<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
 
-		<copy todir="${lp.ext.dir}" filtering="true">
+		<copy todir="${lp.ext.dir}" filtering="true" preservelastmodified="true">
 			<fileset dir="tools/ext_tmpl" />
 		</copy>
 	</target>

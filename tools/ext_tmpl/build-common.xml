@@ -85,7 +85,11 @@
 	</if>
 
 	<target name="deploy-impl-jar">
-		<copy file="${jar.file}.jar" todir="${app.server.lib.portal.dir}" />
+		<copy
+			file="${jar.file}.jar"
+			todir="${app.server.lib.portal.dir}"
+			preservelastmodified="true"
+		/>
 	</target>
 
 	<target name="deploy-war">
