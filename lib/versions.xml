@@ -20,7 +20,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
-				<copyright-notice>Copyright (c) 2001-2003 Ant-Contrib project.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2003 Ant-Contrib project. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -58,7 +58,7 @@
 				<license-name>Apache License 1.1</license-name>
 			</license>
 		</licenses>
-	</library> 
+	</library>
 	<library>
 		<file-name>development/c3p0.jar</file-name>
 		<version>0.9.0.4</version>
@@ -349,7 +349,7 @@
 				<license-name>Sun License For JavaMail 1.4</license-name>
 			</license>
 		</licenses>
-	</library> 
+	</library>
 	<library>
 		<file-name>development/myfaces-api.jar</file-name>
 		<version>1.1.5</version>
@@ -479,7 +479,7 @@
 				<license-name>GNU Lesser General Public License version 2.1</license-name>
 			</license>
 		</licenses>
-	</library>		   
+	</library>		
 	<library>
 		<file-name>development/saxpath.jar</file-name>
 		<version>1.0-FCS</version>
@@ -944,7 +944,7 @@
 				<license-name>Technology License From Sun Microsystems Inc. To Doug Lea</license-name>
 			</license>
 		</licenses>
-	</library> 
+	</library>
 	<library>
 		<file-name>portal/crypt.jar</file-name>
 		<version></version>
@@ -1040,7 +1040,7 @@
 			</license>
 			<license>
 				<license-name>GIFEncoder BSD License</license-name>
-				<copyright-notice>Copyright (C) 1996 by Jef Poskanzer &lt;jef@acme.com&gt;.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (C) 1996 by Jef Poskanzer &lt;jef@acme.com&gt;. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1063,7 +1063,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
-				<copyright-notice>Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2004 Caucho Technology, Inc. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1404,7 +1404,7 @@
 		<licenses>
 			<license>
 				<license-name>MSNM BSD License</license-name>
-				<copyright-notice>Copyright (c) 2002 Jang-Ho Hwang.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2002 Jang-Ho Hwang. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1416,7 +1416,7 @@
 		<licenses>
 			<license>
 				<license-name>MX4J License 1.0</license-name>
-				<copyright-notice>Copyright (c) 2001-2004 by the MX4J contributors.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2004 by the MX4J contributors. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1428,7 +1428,7 @@
 		<licenses>
 			<license>
 				<license-name>CyperNeko Software License 1.0</license-name>
-				<copyright-notice>(C) Copyright 2002-2005, Andy Clark.  All rights reserved.</copyright-notice>
+				<copyright-notice>(C) Copyright 2002-2005, Andy Clark. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1500,7 +1500,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
-				<copyright-notice>Copyright (c) 2000-2002 The Apache Software Foundation.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2000-2002 The Apache Software Foundation. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1747,10 +1747,10 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
-				<copyright-notice>Copyright (c) 1999 The Apache Software Foundation.  All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 1999 The Apache Software Foundation. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
-	</library> 
+	</library>
 	<library>
 		<file-name>portal/spring.jar</file-name>
 		<version>2.0.6</version>
@@ -1979,7 +1979,6 @@
 	</library>
 	<library>
 		<file-name>portal/xstream.jar</file-name>
-		<!-- Note: Downloaded xstream-1.2.2.jar and it differed from from xstream.jar, so don't know what version ships with Liferay -->
 		<version></version>
 		<project-name>XStream</project-name>
 		<project-url>http://xstream.codehaus.org</project-url>

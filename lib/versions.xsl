@@ -20,6 +20,9 @@
 			<th>
 				License
 			</th>
+			<th>
+				Copyright
+			</th>
 		</tr>
 
 		<xsl:apply-templates />
@@ -33,13 +36,13 @@
 
 	<xsl:template match="library">
 		<tr>
-			<td>
+			<td nowrap="nowrap">
 				<xsl:value-of select="file-name" />
 			</td>
-			<td>
+			<td nowrap="nowrap">
 				<xsl:value-of select="version" />
 			</td>
-			<td>
+			<td nowrap="nowrap">
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of disable-output-escaping="yes" select="project-url" />
@@ -47,28 +50,24 @@
 					<xsl:value-of select="project-name" />
 				</a>
 			</td>
-			<td>
-				<table>
-					
+			<td nowrap="nowrap">
 				<xsl:apply-templates select="licenses/license" />
-
-				</table>
 			</td>
 		</tr>
 	</xsl:template>
 
 	<xsl:template match="licenses/license">
-		<tr>
-			<td>
-				<a>
-					<xsl:attribute name="href">
-						<xsl:value-of disable-output-escaping="yes" select="license-url" />
-					</xsl:attribute>
-					<xsl:value-of select="license-name" />
-				</a>
+		<a>
+			<xsl:attribute name="href">
+				<xsl:value-of disable-output-escaping="yes" select="license-url" />
+			</xsl:attribute>
+			<xsl:value-of select="license-name" />
+		</a>
 
-				<xsl:value-of select="copyright-notice" />
-			</td>
-		</tr>
+		<xsl:variable name="copyrightNotice" select="copyright-notice" />
+
+		<xsl:copy-of select="$copyrightNotice" />
+
+		<br />
 	</xsl:template>
 </xsl:stylesheet>
