@@ -123,7 +123,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
@@ -204,7 +204,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updatePasswordPolicyOrganizations('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 

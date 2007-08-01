@@ -43,7 +43,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	searchContainer="<%= searchContainer %>"
 />
 
-<div class="separator"></div>
+<div class="separator"><!-- --></div>
 
 <%
 GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();

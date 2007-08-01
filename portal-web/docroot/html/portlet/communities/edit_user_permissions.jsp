@@ -239,7 +239,7 @@ Assign permissions to users.
 				searchContainer.setResults(results);
 				%>
 
-				<div class="separator"></div>
+				<div class="separator"><!-- --></div>
 
 				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
 

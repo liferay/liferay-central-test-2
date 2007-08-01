@@ -182,7 +182,7 @@ type = ParamUtil.getString(request, "type", type);
 </form>
 
 <c:if test="<%= Validator.isNotNull(articleId) %>">
-	<div class="separator"></div>
+	<div class="separator"><!-- --></div>
 </c:if>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm2">
@@ -208,7 +208,7 @@ ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
 	<liferay-ui:param name="type" value="<%= type %>" />
 </liferay-ui:search-form>
 
-<div class="separator"></div>
+<div class="separator"><!-- --></div>
 
 <%
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());

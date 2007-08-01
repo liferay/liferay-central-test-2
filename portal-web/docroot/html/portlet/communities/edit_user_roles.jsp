@@ -135,7 +135,7 @@ Assign Community roles to users.
 			searchContainer.setResults(results);
 			%>
 
-			<div class="separator"></div>
+			<div class="separator"><!-- --></div>
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -228,7 +228,7 @@ Assign Community roles to users.
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 

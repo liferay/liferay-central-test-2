@@ -109,7 +109,7 @@ if (showQueryLogic) {
 
 	<%= tagsText %>
 
-	<div class="separator"></div>
+	<div class="separator"><!-- --></div>
 
 <%
 }
@@ -161,7 +161,7 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 	<c:if test="<%= (i + 1) < results.size() %>">
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 	</c:if>
 
 <%

@@ -221,7 +221,7 @@ try {
 
    <input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= browseRepoURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
 
-	<div class="separator" style="clear: both;"/>
+	<div class="separator"><!-- --></div>
 
 	<div>
 	   <c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">

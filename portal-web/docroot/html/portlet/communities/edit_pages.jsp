@@ -728,7 +728,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					</tr>
 					<tr>
 						<td>
-							<div class="separator"></div>
+							<div class="separator"><!-- --></div>
 						</td>
 					</tr>
 					<tr>
@@ -887,7 +887,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					%>
 
 					<c:if test="<%= (selLayoutChildren != null) && (selLayoutChildren.size() > 0) %>">
-						<div class="separator"></div>
+						<div class="separator"><!-- --></div>
 
 						<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
 

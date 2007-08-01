@@ -48,12 +48,26 @@
 				</a>
 			</td>
 			<td>
+				<table>
+					
+				<xsl:apply-templates select="licenses/license" />
+
+				</table>
+			</td>
+		</tr>
+	</xsl:template>
+
+	<xsl:template match="licenses/license">
+		<tr>
+			<td>
 				<a>
 					<xsl:attribute name="href">
 						<xsl:value-of disable-output-escaping="yes" select="license-url" />
 					</xsl:attribute>
 					<xsl:value-of select="license-name" />
 				</a>
+
+				<xsl:value-of select="copyright-notice" />
 			</td>
 		</tr>
 	</xsl:template>

@@ -72,7 +72,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<div class="separator"></div>
+			<div class="separator"><!-- --></div>
 
 			<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.WORKFLOW, ActionKeys.ADD_DEFINITION) %>">
 				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
@@ -156,7 +156,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<div class="separator"></div>
+			<div class="separator"><!-- --></div>
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -254,7 +254,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer.setResults(results);
 			%>
 
-			<div class="separator"></div>
+			<div class="separator"><!-- --></div>
 
 			<%
 			List resultRows = searchContainer.getResultRows();

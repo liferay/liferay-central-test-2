@@ -130,7 +130,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
@@ -207,7 +207,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
@@ -284,7 +284,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
@@ -387,7 +387,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 

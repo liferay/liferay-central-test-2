@@ -107,7 +107,7 @@ catch (Exception e) {
 	}
 	%>
 
-	<div class="separator"></div>
+	<div class="separator"><!-- --></div>
 
 	<liferay-portlet:actionURL portletConfiguration="true" varImpl="portletURL" />
 

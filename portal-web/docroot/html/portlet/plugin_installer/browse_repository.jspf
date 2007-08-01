@@ -115,7 +115,9 @@ try {
 
 	<br /><br />
 
-	<div class="separator" style="clear: both;"></div><br />
+	<div class="separator"><!-- --></div>
+
+	<br />
 
 	<%
 	List headerNames = new ArrayList();
@@ -226,7 +228,7 @@ try {
 
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-	<div class="separator" style="clear: both;"/>
+	<div class="separator"><!-- --></div>
 
 	<div>
 		<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">

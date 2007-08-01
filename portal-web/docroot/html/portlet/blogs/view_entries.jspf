@@ -65,7 +65,7 @@ for (int i = 0; i < results.size(); i++) {
 	<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
 
 	<c:if test="<%= i + 1 < results.size() %>">
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 	</c:if>
 
 <%

@@ -314,7 +314,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<div class="separator"></div>
+				<div class="separator"><!-- --></div>
 
 				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
 
@@ -484,7 +484,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<div class="separator"></div>
+				<div class="separator"><!-- --></div>
 
 				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
 
@@ -730,7 +730,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				searchContainer.setResults(results);
 				%>
 
-				<div class="separator"></div>
+				<div class="separator"><!-- --></div>
 
 				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
 
@@ -979,7 +979,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		searchContainer.setResults(results);
 		%>
 
-		<div class="separator"></div>
+		<div class="separator"><!-- --></div>
 
 		<%
 		List headerNames = new ArrayList();
