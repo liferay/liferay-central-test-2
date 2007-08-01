@@ -30,6 +30,8 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
+
+String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <c:choose>
@@ -71,6 +73,9 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 			url.append("&doAsUserId=");
 			url.append(doAsUserId);
 		}
+
+		url.append("&currentURL=");
+		url.append(Http.encodeURL(currentURL));
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
