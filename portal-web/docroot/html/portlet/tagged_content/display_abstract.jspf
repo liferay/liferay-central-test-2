@@ -1,9 +1,9 @@
 <%
 String title = asset.getTitle();
-String url = null;
 String summary = StringPool.BLANK;
+String viewURL = null;
+String viewURLMessage = StringPool.BLANK;
 String editURL = StringPool.BLANK;
-String linkKey = "read-more";
 
 if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -13,16 +13,16 @@ if (className.equals(BookmarksEntry.class.getName())) {
 	}
 
 	summary = entry.getComments();
-
-	url = entry.getUrl();
-	linkKey = "go";
+	viewURL = entry.getUrl();
+	viewURLMessage = "go";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
 	if (Validator.isNull(title)) {
 		StringMaker sm = new StringMaker();
-        sm.append("<img align=\"left\" border=\"0\" src=\"");
+
+		sm.append("<img align=\"left\" border=\"0\" src=\"");
         sm.append(themeDisplay.getPathThemeImages());
         sm.append("/document_library/");
         sm.append(DLUtil.getFileExtension(fileEntry.getName()));
@@ -33,10 +33,8 @@ else if (className.equals(DLFileEntry.class.getName())) {
 	}
 
 	summary = fileEntry.getDescription();
-
-	url = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
-
-	linkKey = "download";
+	viewURL = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
+	viewURLMessage = "download";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -50,8 +48,9 @@ else if (className.equals(IGImage.class.getName())) {
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 
-	url = imageURL.toString();
-	linkKey = "view";
+	viewURL = imageURL.toString();
+
+	viewURLMessage = "view";
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
@@ -67,10 +66,14 @@ else if (className.equals(JournalArticle.class.getName())) {
 	summary = articleDisplay.getDescription();
 
 	PortletURL articleURL = renderResponse.createRenderURL();
-	articleURL.setParameter("struts_action", "/tagged_content/view_content");
-	articleURL.setParameter("assetId", Long.toString(asset.getAssetId()));
 
-	url = articleURL.toString();
+	articleURL.setParameter("struts_action", "/tagged_content/view_content");
+	articleURL.setParameter("redirect", currentURL);
+	articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+
+	viewURL = articleURL.toString();
+
+	viewURLMessage = "read-more";
 
 	if (JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE)) {
 		PortletURLImpl editArticleURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
@@ -87,30 +90,30 @@ else if (className.equals(JournalArticle.class.getName())) {
 	}
 }
 
-// URLs set through the Asset Manager override automatically generated URLs
+// URLs set through the asset override automatically generated URLs
 
 if (Validator.isNotNull(asset.getUrl())) {
-	url = asset.getUrl();
-	linkKey = "read-more";
+	viewURL = asset.getUrl();
 }
-	
 %>
 
 <div class="portlet-journal-abstract">
-	<c:if test="<%= Validator.isNotNull(url) %>">
-		<h3><a href="<%= url %>"><%= title %></a></h3>
-	</c:if>
-	<c:if test="<%= Validator.isNull(url) %>">
-		<h3><%= title %></h3>
-	</c:if>
+	<c:choose>
+		<c:when test="<%= Validator.isNotNull(viewURL) %>">
+			<h3><a href="<%= viewURL %>"><%= title %></a></h3>
+		</c:when>
+		<c:otherwise>
+			<h3><%= title %></h3>
+		</c:otherwise>
+	</c:choose>
 
 	<p class="portlet-journal-summary">
 		<%= summary %>
 	</p>
 
-	<c:if test="<%= Validator.isNotNull(url) %>">
+	<c:if test="<%= Validator.isNotNull(viewURL) %>">
 		<div class="portlet-journal-more">
-			<a href="<%= url %>"><liferay-ui:message key="<%= linkKey %>" /></a>
+			<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /></a>
 		</div>
 	</c:if>
 </div>

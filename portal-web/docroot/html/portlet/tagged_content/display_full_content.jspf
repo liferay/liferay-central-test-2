@@ -113,9 +113,9 @@
 		</c:if>
 
 		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-			<pre>
-			<%= wikiPage.getContent() %>
-			</pre>
+<pre>
+<%= wikiPage.getContent() %>
+</pre>
 		</c:if>
 
 	</c:when>

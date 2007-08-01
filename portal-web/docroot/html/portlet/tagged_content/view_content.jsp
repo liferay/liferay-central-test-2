@@ -25,35 +25,26 @@
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
-String redirect = portletURL.toString();
+String redirect = ParamUtil.getString(request, "redirect");
 
-long assetId = ParamUtil.getLong(renderRequest, "assetId", 0);	
-System.out.println("assetId: " + assetId);
-TagsAsset asset = null;
+long assetId = ParamUtil.getLong(renderRequest, "assetId");
 
-if (assetId != 0) {
-	asset = TagsAssetLocalServiceUtil.getAsset(assetId);
-}
+try {
+	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 
-if (asset != null) {
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
-
-	System.out.println("classPK: " + assetId);
-	try {
 %>
 
-		<div align="right">
-			&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
-		</div>
-		<div>
-			<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
-		</div>
+	<div align="right">
+		&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
+	</div>
+	<div>
+		<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+	</div>
 
 <%
-	}
-	catch (Exception e) {
-	}
+}
+catch (Exception e) {
 }
 %>
