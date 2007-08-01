@@ -23,7 +23,6 @@
 package com.liferay.util.bridges.jsf.sun;
 
 import java.util.AbstractMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -50,20 +49,24 @@ public class LiferayApplicationMap extends AbstractMap {
 
 	public Object put(Object key, Object value) {
 		Object previousValue = get(key);
+
 		_servletContext.setAttribute(key.toString(), value);
+
 		return previousValue;
 	}
 
-	public Object remove(Object key)
-	{
+	public Object remove(Object key) {
 		Object value = null;
+
 		if (key != null) {
 			value = get(key);
+
 			_servletContext.removeAttribute(key.toString());
 		}
+
 		return value;
 	}
-	
+
 	private ServletContext _servletContext;
 
 }

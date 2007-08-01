@@ -52,7 +52,6 @@ public class LiferayServletContextAdapter extends ExternalContext {
 	}
 
 	public Map getApplicationMap() {
-
 		if (_applicationMap == null) {
 			_applicationMap = new LiferayApplicationMap(_servletContext);
 		}
@@ -188,8 +187,7 @@ public class LiferayServletContextAdapter extends ExternalContext {
 		return null;
 	}
 
-	private LiferayApplicationMap _applicationMap;
-
 	private ServletContext _servletContext;
+	private LiferayApplicationMap _applicationMap;
 
 }
