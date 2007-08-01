@@ -65,8 +65,16 @@ public class LiveUsers {
 		return _instance._getGroupUsers(_instance._getLiveUsers(), groupId);
 	}
 
+	public static int getGroupUsersCount(long groupId) {
+		return getGroupUsers(groupId).size();
+	}
+
 	public static Map getSessionUsers() {
 		return _instance._getSessionUsers(_instance._getLiveUsers());
+	}
+
+	public static int getSessionUsersCount() {
+		return getSessionUsers().size();
 	}
 
 	public static UserTracker getUserTracker(String sesId) {
