@@ -514,40 +514,22 @@
 	</target>
 
 	<target name="build-javascript">
-
-		<!--
-		http://dean.edwards.name/download/#packer
-		http://homepages.nildram.co.uk/~9jack9/download/packer.wsh.zip
-		-->
-
-		<delete file="docroot/html/js/everything.js" />
-
-		<taskdef classpathref="project.classpath" classname="com.liferay.portal.util.PropsUtilTask" name="propsutil" />
-
-		<propsutil key="javascript.files" result="javascript.files" />
-
-		<for list="${javascript.files}" param="js.file">
-			<sequential>
-				<exec executable="cmd">
-					<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf docroot/html/js/@{js.file} >> docroot/html/js/everything.js" />
-				</exec>
-			</sequential>
-		</for>
-
-		<!--<for list="${javascript.files}" param="js.file">
-			<sequential>
-				<concat destfile="docroot/html/js/everything_unpacked.js" append="yes">
-					<fileset dir="docroot/html/js/" includes="@{js.file}" />
-				</concat>
-			</sequential>
-		</for>
+		<java
+			classname="com.liferay.portal.tools.JavaScriptBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg value="docroot/html/js/" />
+			<arg value="docroot/html/js/everything_unpacked.js" />
+		</java>
 
 		<antcall target="build-javascript-cmd">
 			<param name="js.from.file" value="docroot/html/js/everything_unpacked.js" />
 			<param name="js.to.file" value="docroot/html/js/everything.js" />
 		</antcall>
 
-		<delete file="docroot/html/js/everything_unpacked.js" />-->
+		<delete file="docroot/html/js/everything_unpacked.js" />
 
 		<antcall target="build-javascript-portlet-cmd">
 			<param name="portlet.name" value="mail" />
@@ -559,6 +541,12 @@
 	</target>
 
 	<target name="build-javascript-cmd">
+
+		<!--
+		http://dean.edwards.name/download/#packer
+		http://homepages.nildram.co.uk/~9jack9/download/packer.wsh.zip
+		-->
+
 		<exec executable="cmd">
 			<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf ${js.from.file} > ${js.to.file}" />
 		</exec>

@@ -311,4 +311,4 @@ jQuery.fn.editable = function(target, options, callback) {
     });
 
     return(this);
-}
+};
