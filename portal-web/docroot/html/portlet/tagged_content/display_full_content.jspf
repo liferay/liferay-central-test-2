@@ -14,6 +14,8 @@
 		%>
 
 		<a href="<%= entry.getUrl() %>"><%= entry.getName() %></a>
+
+		<p class="journal-content-field-comments"><%= entry.getComments() %></p>
 	</c:when>
 	<c:when test="<%= className.equals(DLFileEntry.class.getName()) %>">
 
@@ -24,6 +26,8 @@
 		<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= Http.encodeURL(fileEntry.getName()) %>">
 		<img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png" /><%= fileEntry.getTitle() %>
 		</a>
+
+		<p class="journal-content-field-description"><%= fileEntry.getDescription() %></p>
 	</c:when>
 	<c:when test="<%= className.equals(IGImage.class.getName()) %>">
 
@@ -32,6 +36,8 @@
 		%>
 
 		<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>" />
+
+		<p class="journal-content-field-description"><%= image.getDescription() %></p>
 	</c:when>
 	<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
 
@@ -107,9 +113,9 @@
 		</c:if>
 
 		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-<pre>
-<%= wikiPage.getContent() %>
-</pre>
+			<pre>
+			<%= wikiPage.getContent() %>
+			</pre>
 		</c:if>
 
 	</c:when>

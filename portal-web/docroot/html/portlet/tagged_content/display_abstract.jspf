@@ -1,8 +1,9 @@
 <%
 String title = asset.getTitle();
-String url = asset.getUrl();
+String url = null;
 String summary = StringPool.BLANK;
 String editURL = StringPool.BLANK;
+String linkKey = "read-more";
 
 if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -12,20 +13,45 @@ if (className.equals(BookmarksEntry.class.getName())) {
 	}
 
 	summary = entry.getComments();
+
+	url = entry.getUrl();
+	linkKey = "go";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
 	if (Validator.isNull(title)) {
-		title = fileEntry.getName();
+		StringMaker sm = new StringMaker();
+        sm.append("<img align=\"left\" border=\"0\" src=\"");
+        sm.append(themeDisplay.getPathThemeImages());
+        sm.append("/document_library/");
+        sm.append(DLUtil.getFileExtension(fileEntry.getName()));
+        sm.append(".png\" />");
+		sm.append(fileEntry.getTitle());
+
+		title = sm.toString();
 	}
 
 	summary = fileEntry.getDescription();
+
+	url = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
+
+	linkKey = "download";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
 	summary = image.getDescription();
+
+	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), false);
+
+	imageURL.setWindowState(WindowState.MAXIMIZED);
+
+	imageURL.setParameter("struts_action", "/image_gallery/view");
+	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
+
+	url = imageURL.toString();
+	linkKey = "view";
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
@@ -39,6 +65,12 @@ else if (className.equals(JournalArticle.class.getName())) {
 	}
 
 	summary = articleDisplay.getDescription();
+
+	PortletURL articleURL = renderResponse.createRenderURL();
+	articleURL.setParameter("struts_action", "/tagged_content/view_content");
+	articleURL.setParameter("assetId", Long.toString(asset.getAssetId()));
+
+	url = articleURL.toString();
 
 	if (JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE)) {
 		PortletURLImpl editArticleURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
@@ -54,10 +86,23 @@ else if (className.equals(JournalArticle.class.getName())) {
 		editURL = editArticleURL.toString();
 	}
 }
+
+// URLs set through the Asset Manager override automatically generated URLs
+
+if (Validator.isNotNull(asset.getUrl())) {
+	url = asset.getUrl();
+	linkKey = "read-more";
+}
+	
 %>
 
 <div class="portlet-journal-abstract">
-	<h3><%= title %></h3>
+	<c:if test="<%= Validator.isNotNull(url) %>">
+		<h3><a href="<%= url %>"><%= title %></a></h3>
+	</c:if>
+	<c:if test="<%= Validator.isNull(url) %>">
+		<h3><%= title %></h3>
+	</c:if>
 
 	<p class="portlet-journal-summary">
 		<%= summary %>
@@ -65,7 +110,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 	<c:if test="<%= Validator.isNotNull(url) %>">
 		<div class="portlet-journal-more">
-			<a href="<%= asset.getUrl() %>"><liferay-ui:message key="read-more" /></a>
+			<a href="<%= url %>"><liferay-ui:message key="<%= linkKey %>" /></a>
 		</div>
 	</c:if>
 </div>

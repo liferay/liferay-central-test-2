@@ -1192,6 +1192,10 @@
 		<put name="portlet_content" value="/portlet/tagged_content/view.jsp" />
 	</definition>
 
+	<definition name="portlet.tagged_content.view_content" extends="portlet.tagged_content">
+		<put name="portlet_content" value="/portlet/tagged_content/view_content.jsp" />
+	</definition>
+
 	<!-- Tags Admin -->
 
 	<definition name="portlet.tags_admin" extends="portlet" />

@@ -1399,6 +1399,12 @@
 			<forward name="portlet.tagged_content.edit_configuration" path="portlet.tagged_content.edit_configuration" />
 		</action>
 
+		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
+			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
+		</action>
+
+		<action path="/tagged_content/view_content" forward="portlet.tagged_content.view_content" />
+
 		<!-- Tags Admin -->
 
 		<action path="/tags_admin/edit_entry" type="com.liferay.portlet.tagsadmin.action.EditEntryAction" />
@@ -1406,10 +1412,6 @@
 		<action path="/tags_admin/edit_property" type="com.liferay.portlet.tagsadmin.action.EditPropertyAction" />
 
 		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
-
-		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
-			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
-		</action>
 
 		<!-- Update Manager -->
 
