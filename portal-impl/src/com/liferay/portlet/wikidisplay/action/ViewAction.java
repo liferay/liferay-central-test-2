@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
+import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
@@ -65,7 +66,15 @@ public class ViewAction extends PortletAction {
 				req, "title", WikiPageImpl.FRONT_PAGE);
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
-			WikiPage wikiPage = WikiPageServiceUtil.getPage(nodeId, title);
+
+			WikiPage wikiPage = null;
+
+			try {
+				wikiPage = WikiPageServiceUtil.getPage(nodeId, title);
+			}
+			catch (NoSuchPageException nspe) {
+				wikiPage = WikiPageServiceUtil.addPage(nodeId, title);
+			}
 
 			req.setAttribute(WebKeys.WIKI_NODE, node);
 			req.setAttribute(WebKeys.WIKI_PAGE, wikiPage);
