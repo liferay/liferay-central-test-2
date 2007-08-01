@@ -69,12 +69,17 @@ catch (NoSuchResourceException nsre) {
 					addDefaultResource = true;
 				}
 			}
-			else if (group.isUser()) {
-				long groupUserId = group.getClassPK();
+			else if (group.isOrganization()) {
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
 
-				if (groupUserId == user.getUserId()) {
+				if ((!organization.isLocation() && OrganizationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
+					(organization.isLocation() && LocationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
+
 					addDefaultResource = true;
 				}
+			}
+			else if (group.isUser()) {
+				addDefaultResource = true;
 			}
 		}
 	}

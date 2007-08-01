@@ -61,19 +61,17 @@ public class OrganizationImpl
 	}
 
 	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getOrganizationGroup(
-				getCompanyId(), getOrganizationId());
-		}
-		catch (Exception e) {
-			group = new GroupImpl();
-
-			_log.error(e);
+		if (getOrganizationId() > 0) {
+			try {
+				return GroupLocalServiceUtil.getOrganizationGroup(
+					getCompanyId(), getOrganizationId());
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 
-		return group;
+		return new GroupImpl();
 	}
 
 	public Address getAddress() {

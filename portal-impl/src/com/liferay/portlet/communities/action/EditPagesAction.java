@@ -32,10 +32,12 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -47,9 +49,14 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.LocationPermission;
+import com.liferay.portal.service.permission.OrganizationPermission;
+import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -222,20 +229,48 @@ public class EditPagesAction extends PortletAction {
 
 		User user = themeDisplay.getUser();
 
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		GroupPermission.check(
-			themeDisplay.getPermissionChecker(), group.getGroupId(),
-			ActionKeys.MANAGE_LAYOUTS);
+		if (group.isCommunity()) {
+			GroupPermission.check(
+				permissionChecker, group.getGroupId(),
+				ActionKeys.MANAGE_LAYOUTS);
+		}
+		else if (group.isOrganization()) {
+			Organization organization =
+				OrganizationLocalServiceUtil.getOrganization(
+					group.getClassPK());
 
-		if (group.isUser()) {
+			if (!organization.isLocation()) {
+				OrganizationPermission.check(
+					permissionChecker, organization.getOrganizationId(),
+					ActionKeys.UPDATE);
+			}
+			else {
+				LocationPermission.check(
+					permissionChecker, organization.getOrganizationId(),
+					ActionKeys.UPDATE);
+			}
+		}
+		else if (group.isUser()) {
 			long groupUserId = group.getClassPK();
 
-			if ((groupUserId == user.getUserId()) &&
-				!user.isLayoutsRequired()) {
+			User groupUser = UserLocalServiceUtil.getUserById(groupUserId);
 
+			long organizationId =
+				groupUser.getOrganization().getOrganizationId();
+			long locationId = groupUser.getLocation().getOrganizationId();
+
+			UserPermission.check(
+				permissionChecker, groupUserId, organizationId, locationId,
+				ActionKeys.UPDATE);
+
+			if (!groupUser.isLayoutsRequired()) {
 				throw new PrincipalException();
 			}
 		}

@@ -86,6 +86,12 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		if (layout != null) {
+			String tabs2 = "public";
+
+			if (privateLayout) {
+				tabs2 = "private";
+			}
+
 			HttpServletRequest httReq = PortalUtil.getHttpServletRequest(req);
 
 			PortletURL portletURL = new PortletURLImpl(
@@ -96,7 +102,7 @@ public class EditPagesAction extends PortletAction {
 
 			portletURL.setParameter(
 				"struts_action", "/layout_management/edit_pages");
-			portletURL.setParameter("tabs2", "public");
+			portletURL.setParameter("tabs2", tabs2);
 			portletURL.setParameter("groupId", String.valueOf(groupId));
 
 			res.sendRedirect(portletURL.toString());

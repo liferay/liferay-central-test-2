@@ -25,3 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%@ page import="com.liferay.portal.service.permission.GroupPermission" %>
+<%@ page import="com.liferay.portal.service.permission.LocationPermission" %>
+<%@ page import="com.liferay.portal.service.permission.OrganizationPermission" %>

@@ -42,6 +42,18 @@
 
 		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
+		Group locationGroup = user.getLocation().getGroup();
+
+		if (locationGroup.getGroupId() > 0) {
+			communities.add(0, locationGroup);
+		}
+
+		Group organizationGroup = user.getOrganization().getGroup();
+
+		if (organizationGroup.getGroupId() > 0) {
+			communities.add(0, organizationGroup);
+		}
+
 		if (user.isLayoutsRequired()) {
 			Group userGroup = user.getGroup();
 
@@ -51,14 +63,58 @@
 		for (int i = 0; i < communities.size(); i++) {
 			Group community = (Group)communities.get(i);
 
+			boolean organizationCommunity = community.isOrganization();
+			boolean regularCommunity = community.isCommunity();
 			boolean userCommunity = community.isUser();
 			int publicLayoutsPageCount = community.getPublicLayoutsPageCount();
 			int privateLayoutsPageCount = community.getPrivateLayoutsPageCount();
 
+			Organization organization = null;
+
 			String publicAddPageHREF = null;
 			String privateAddPageHREF = null;
 
-			if (userCommunity) {
+			if (organizationCommunity) {
+				organization = OrganizationLocalServiceUtil.getOrganization(community.getClassPK());
+
+				if ((!organization.isLocation() && OrganizationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
+					(organization.isLocation() && LocationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
+
+					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+
+					addPageURL.setWindowState(WindowState.NORMAL);
+					addPageURL.setPortletMode(PortletMode.VIEW);
+
+					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+					addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
+
+					publicAddPageHREF = addPageURL.toString();
+
+					addPageURL.setParameter("privateLayout", Boolean.TRUE.toString());
+
+					privateAddPageHREF = addPageURL.toString();
+				}
+			}
+			else if (regularCommunity) {
+				if (GroupPermission.contains(permissionChecker, community.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+
+					addPageURL.setWindowState(WindowState.NORMAL);
+					addPageURL.setPortletMode(PortletMode.VIEW);
+
+					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+					addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
+
+					publicAddPageHREF = addPageURL.toString();
+
+					addPageURL.setParameter("privateLayout", Boolean.TRUE.toString());
+
+					privateAddPageHREF = addPageURL.toString();
+				}
+			}
+			else if (userCommunity) {
 				long publicAddPagePlid = community.getDefaultPublicPlid();
 
 				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, publicAddPagePlid, false);
@@ -85,27 +141,14 @@
 
 				privateAddPageHREF = privateAddPageURL.toString();
 			}
-			else if (GroupPermission.contains(permissionChecker, community.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-				PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
-
-				addPageURL.setWindowState(WindowState.NORMAL);
-				addPageURL.setPortletMode(PortletMode.VIEW);
-
-				addPageURL.setParameter("struts_action", "/my_places/edit_pages");
-				addPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
-				addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
-
-				publicAddPageHREF = addPageURL.toString();
-
-				addPageURL.setParameter("privateLayout", Boolean.TRUE.toString());
-
-				privateAddPageHREF = addPageURL.toString();
-			}
 		%>
 
 			<li>
 				<h3>
 					<c:choose>
+						<c:when test="<%= organizationCommunity %>">
+							<%= organization.getName() %>
+						</c:when>
 						<c:when test="<%= userCommunity %>">
 							<liferay-ui:message key="my-community" />
 						</c:when>

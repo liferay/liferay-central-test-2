@@ -446,7 +446,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				throw (ServletException)cause;
 			}
 			else {
-				cause.printStackTrace();
+				_log.error(cause, cause);
 			}
 		}
 	}

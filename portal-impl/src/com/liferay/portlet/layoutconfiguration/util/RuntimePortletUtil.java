@@ -38,7 +38,6 @@ import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.StringWriter;
 
@@ -180,21 +179,21 @@ public class RuntimePortletUtil {
 		}
 	}
 
-	public static void processTemplate(
+	public static String processTemplate(
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
 			String content)
 		throws Exception {
 
-		processTemplate(ctx, req, res, null, content);
+		return processTemplate(ctx, req, res, null, content);
 	}
 
-	public static void processTemplate(
+	public static String processTemplate(
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
 			String portletId, String content)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
-			return;
+			return StringPool.BLANK;
 		}
 
 		TemplateProcessor processor =
@@ -261,7 +260,7 @@ public class RuntimePortletUtil {
 				sm.toString());
 		}
 
-		ServletResponseUtil.write(res, output);
+		return output;
 	}
 
 	public static String processXML(
