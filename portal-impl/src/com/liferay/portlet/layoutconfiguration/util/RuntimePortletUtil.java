@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.PortletDisplayFactory;
@@ -125,11 +124,11 @@ public class RuntimePortletUtil {
 				Validator.isPassword(instanceId) &&
 				(instanceId.length() == 4)) {
 
-				portletId +=
+				/*portletId +=
 					PortletImpl.INSTANCE_SEPARATOR + instanceId;
 
 				portlet = PortletLocalServiceUtil.getPortletById(
-					themeDisplay.getCompanyId(), portletId);
+					themeDisplay.getCompanyId(), portletId);*/
 			}
 			else {
 				if (_log.isDebugEnabled()) {
@@ -242,18 +241,16 @@ public class RuntimePortletUtil {
 			Portlet portlet = (Portlet)entry.getKey();
 			Object[] value = (Object[])entry.getValue();
 
-			String rootPortletId = (String)value[0];
-			String instanceId = (String)value[1];
-			String queryString = (String)value[2];
-			String columnId = (String)value[3];
-			Integer columnPos = (Integer)value[4];
-			Integer columnCount = (Integer)value[5];
+			String queryString = (String)value[0];
+			String columnId = (String)value[1];
+			Integer columnPos = (Integer)value[2];
+			Integer columnCount = (Integer)value[3];
 
 			StringMaker sm = new StringMaker();
 
-			RuntimePortletUtil.processPortlet(
-				sm, ctx, req, res, null, null, rootPortletId, instanceId,
-				queryString, columnId, columnPos, columnCount);
+			processPortlet(
+				sm, ctx, req, res, portlet, queryString, columnId, columnPos,
+				columnCount, null);
 
 			output = StringUtil.replace(
 				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",

@@ -90,8 +90,6 @@ public class PortletColumnLogic extends RuntimeLogic {
 		for (int i = 0; i < portlets.size(); i++) {
 			Portlet portlet = (Portlet)portlets.get(i);
 
-			String rootPortletId = portlet.getRootPortletId();
-			String instanceId = portlet.getInstanceId();
 			String queryString = null;
 			Integer columnPos = new Integer(i);
 			Integer columnCount = new Integer(portlets.size());
@@ -104,8 +102,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 					_portletsMap.put(
 						portlet,
 						new Object[] {
-							rootPortletId, instanceId, queryString, columnId,
-							columnPos, columnCount
+							queryString, columnId, columnPos, columnCount
 						});
 				}
 			}

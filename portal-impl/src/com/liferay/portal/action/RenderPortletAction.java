@@ -65,11 +65,14 @@ public class RenderPortletAction extends Action {
 		int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
 		int columnCount = ParamUtil.getInteger(req, "p_p_col_count");
 		boolean staticPortlet = ParamUtil.getBoolean(req, "p_p_static");
+		boolean staticStartPortlet = ParamUtil.getBoolean(
+			req, "p_p_static_start");
 
 		if (staticPortlet) {
 			portlet = (Portlet)portlet.clone();
 
 			portlet.setStatic(true);
+			portlet.setStaticStart(staticStartPortlet);
 		}
 
 		if (ajaxId != null) {

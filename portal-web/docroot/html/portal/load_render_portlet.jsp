@@ -67,6 +67,10 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		if (portlet.isStatic()) {
 			url.append("&p_p_static=1");
+
+			if (portlet.isStaticStart()) {
+				url.append("&p_p_static_start=1");
+			}
 		}
 
 		if (Validator.isNotNull(doAsUserId)) {
