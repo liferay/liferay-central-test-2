@@ -137,7 +137,7 @@
 #end
 
 #if ( $layout.getHTMLTitle($locale) )
-	#set ($the_title = $layout.getHTMLTitle($locale))
+	#set ( $the_title = $layout.getHTMLTitle($locale) )
 #end
 
 #if ( $pageTitle )
