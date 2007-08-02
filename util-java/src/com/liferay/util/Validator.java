@@ -443,6 +443,10 @@ public class Validator {
 		return isNumber(StringUtil.extractDigits(phoneNumber));
 	}
 
+	public static boolean isVariableTerm(String s) {
+		return s.startsWith("[$") && s.endsWith("$]");
+	}
+
 	private static char[] _EMAIL_ADDRESS_SPECIAL_CHAR = new char[] {
 		'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^',
 		'_', '`', '{', '|', '}', '~'

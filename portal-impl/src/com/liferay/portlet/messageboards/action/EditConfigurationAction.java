@@ -133,7 +133,8 @@ public class EditConfigurationAction extends PortletAction {
 		if (Validator.isNull(emailFromName)) {
 			SessionErrors.add(req, "emailFromName");
 		}
-		else if (!Validator.isEmailAddress(emailFromAddress)) {
+		else if (!Validator.isEmailAddress(emailFromAddress) ||
+				 Validator.isVariableTerm(emailFromAddress)) {
 			SessionErrors.add(req, "emailFromAddress");
 		}
 		else {
