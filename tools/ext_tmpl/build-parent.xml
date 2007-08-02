@@ -103,6 +103,8 @@
 				<delete dir="${app.server.work.dir}" />
 			</then>
 		</if>
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="java2html">
@@ -404,6 +406,8 @@
 				<move file="${tstamp.value}" tofile="${app.server.portal.dir}" />
 			</then>
 		</if>
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="deploy-properties">

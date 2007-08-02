@@ -251,4 +251,12 @@
 			</then>
 		</if>
 	</target>
+
+	<target name="print-current-time">
+		<tstamp>
+			<format property="current.time" pattern="MMMM d, yyyy 'at' hh:mm aa" />
+		</tstamp>
+
+		<echo message="${current.time}" />
+	</target>
 </project>

@@ -64,6 +64,8 @@
 				<antcall target="build-common-java.compile" />
 			</else>
 		</if>
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="compile-common">

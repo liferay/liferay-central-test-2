@@ -24,6 +24,8 @@
   		<ant dir="portal-impl" target="build-themes" inheritAll="false" />
 
 		<antcall target="jar" />
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="clean">
@@ -220,6 +222,8 @@
 				<delete dir="${app.server.work.dir}" />
 			</then>
 		</if>
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="compile">
