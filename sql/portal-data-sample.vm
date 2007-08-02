@@ -200,6 +200,15 @@ insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, par
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $hkgGroupId, TRUE, FALSE, 'classic', '01', 0);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $hkgGroupId, FALSE, FALSE, 'classic', '01', 0);
 
+#set($kulLocationId = $counter.get())
+#set($kulGroupId = $counter.get())
+
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, location, recursable, regionId, countryId, statusId, comments) values ($kulLocationId, $companyId, $incOrganizationId, 'Liferay Kuala Lumpur', TRUE, FALSE, 0, 2, 12017, '');
+
+insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($kulGroupId, $companyId, $defaultUserId, $organizationClassNameId, $kulLocationId, 0, 0, '$kulGroupId', '', TRUE);
+insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $kulGroupId, TRUE, FALSE, 'classic', '01', 0);
+insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $kulGroupId, FALSE, FALSE, 'classic', '01', 0);
+
 ##
 ## User (default)
 ##
@@ -420,6 +429,27 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, $incOrganizationId);
 	insert into Users_Orgs (userId, organizationId) values ($batchUserId, $hkgLocationId);
+
+	insert into Users_Roles values ($batchUserId, $userRoleId);
+#end
+
+#foreach($count in [1000..1009])
+	#set($batchUserId = $counter.get())
+	#set($batchContactId = $counter.get())
+	#set($batchGroupId = $counter.get())
+	#set($cur = $count - 999)
+
+	insert into User_ (userId, companyId, createDate, modifiedDate, defaultUser, contactId, password_, passwordEncrypted, passwordReset, screenName, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ($batchUserId, $companyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, FALSE, $batchContactId, 'test', FALSE, FALSE, 'kul$cur', 'test.kul.$cur@liferay.com', 'Welcome Test HKG $cur!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
+	insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values ($batchContactId, $companyId, $testUserId, 'Joe Bloggs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, $accountId, 0, 'Test', '', 'HKG $cur', TRUE, '01/01/1970');
+
+	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($batchGroupId, $companyId, $batchUserId, $userClassNameId, $batchUserId, 0, 0, '$batchGroupId', '', TRUE);
+	insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, TRUE, FALSE, 'classic', '01', 0);
+	insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $batchGroupId, FALSE, FALSE, 'classic', '01', 0);
+
+	insert into Users_Groups values ($batchUserId, $supportGroupId);
+
+	insert into Users_Orgs (userId, organizationId) values ($batchUserId, $incOrganizationId);
+	insert into Users_Orgs (userId, organizationId) values ($batchUserId, $kulLocationId);
 
 	insert into Users_Roles values ($batchUserId, $userRoleId);
 #end

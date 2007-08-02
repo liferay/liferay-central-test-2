@@ -227,8 +227,6 @@ public class EditPagesAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		User user = themeDisplay.getUser();
-
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 

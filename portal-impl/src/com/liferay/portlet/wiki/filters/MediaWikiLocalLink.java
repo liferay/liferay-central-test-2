@@ -22,9 +22,6 @@
 
 package com.liferay.portlet.wiki.filters;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.stringtree.factory.AbstractStringFetcher;
 import org.stringtree.factory.Container;
 import org.stringtree.factory.Fetcher;
@@ -80,8 +77,6 @@ public class MediaWikiLocalLink
 
 	private static Pattern _pattern = Pattern.compile(
 		"(^|\\p{Punct}|\\p{Space})(\\[\\s*(((\\p{Lu}\\p{Ll}+)\\s?)+)\\s*\\|\\s*((([\\p{Alpha}\\p{Digit}]+)\\s?)+)\\s*\\])(\\z|\\n|\\p{Punct}|\\p{Space})");
-
-	private static Log _log = LogFactory.getLog(MediaWikiLocalLink.class);
 
 	private Container _pages;
 

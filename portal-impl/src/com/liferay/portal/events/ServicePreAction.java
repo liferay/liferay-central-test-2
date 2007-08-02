@@ -444,8 +444,8 @@ public class ServicePreAction extends Action {
 
 				if (UserPermission.contains(
 						permissionChecker, groupUserId,
-						user.getOrganization().getOrganizationId(),
-						user.getLocation().getOrganizationId(),
+						groupUser.getOrganization().getOrganizationId(),
+						groupUser.getLocation().getOrganizationId(),
 						ActionKeys.UPDATE)) {
 
 					return true;

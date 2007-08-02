@@ -25,9 +25,6 @@ package com.liferay.portlet.wiki.filters;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.util.StringUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.stringtree.factory.AbstractStringFetcher;
 import org.stringtree.regex.Matcher;
 import org.stringtree.regex.Pattern;
@@ -103,7 +100,5 @@ public class CodeBlock extends AbstractStringFetcher {
 
 	private static Pattern _pattern = Pattern.compile(
 		"(\\[code\\])((.|\n)*?)(\\[/code\\])");
-
-	private static Log _log = LogFactory.getLog(CodeBlock.class);
 
 }

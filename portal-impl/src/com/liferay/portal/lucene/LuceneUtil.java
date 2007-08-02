@@ -424,7 +424,28 @@ public class LuceneUtil {
 			_log.debug("Lucene store type " + storeType);
 		}
 
-		if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
+		if (storeType.equals(_LUCENE_STORE_TYPE_FILE)) {
+			String path =
+				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
+					StringPool.SLASH;
+
+			try {
+				directory = FSDirectory.getDirectory(path, false);
+			}
+			catch (IOException ioe1) {
+				try {
+					if (directory != null) {
+						directory.close();
+					}
+
+					directory = FSDirectory.getDirectory(path, true);
+				}
+				catch (IOException ioe2) {
+					throw new RuntimeException(ioe2);
+				}
+			}
+		}
+		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
 			String tableName = _getTableName(companyId);
 
 			JdbcDirectory jdbcDir = null;
@@ -471,27 +492,6 @@ public class LuceneUtil {
 				directory = new RAMDirectory();
 
 				_ramDirectories.put(path, directory);
-			}
-		}
-		else {
-			String path =
-				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-					StringPool.SLASH;
-
-			try {
-				directory = FSDirectory.getDirectory(path, false);
-			}
-			catch (IOException ioe1) {
-				try {
-					if (directory != null) {
-						directory.close();
-					}
-
-					directory = FSDirectory.getDirectory(path, true);
-				}
-				catch (IOException ioe2) {
-					throw new RuntimeException(ioe2);
-				}
 			}
 		}
 

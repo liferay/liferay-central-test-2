@@ -75,7 +75,8 @@ public class XLSTextStripper {
 							cellStringValue = Double.toString(doubleValue);
 						}
 						else if (cell.getCellType() == 1) {
-							cellStringValue = cell.getStringCellValue();
+							cellStringValue =
+								cell.getRichStringCellValue().getString();
 						}
 
 						if (cellStringValue != null) {
