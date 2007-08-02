@@ -135,6 +135,7 @@ public class EditConfigurationAction extends PortletAction {
 		}
 		else if (!Validator.isEmailAddress(emailFromAddress) ||
 				 Validator.isVariableTerm(emailFromAddress)) {
+
 			SessionErrors.add(req, "emailFromAddress");
 		}
 		else {

@@ -444,7 +444,12 @@ public class Validator {
 	}
 
 	public static boolean isVariableTerm(String s) {
-		return s.startsWith("[$") && s.endsWith("$]");
+		if (s.startsWith("[$") && s.endsWith("$]")) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static char[] _EMAIL_ADDRESS_SPECIAL_CHAR = new char[] {
