@@ -87,41 +87,44 @@ public class JSFPortletUtil {
 
 		Object request = facesContext.getExternalContext().getRequest();
 
-		if (request != null) {
+		if (request == null) {
+			return null;
+		}
 
-			if (request instanceof PortletRequest) {
-				portletRequest = (PortletRequest)request;
+		if (request instanceof PortletRequest) {
+			return (PortletRequest)request;
+		}
+		else if (request instanceof HttpServletRequest) {
+			HttpServletRequest httpServletRequest =
+				(HttpServletRequest)request;
+
+			Object portletArtifactHack = httpServletRequest.getAttribute(
+				"com.icesoft.faces.portletHack");
+
+			if (portletArtifactHack == null) {
+				return null;
 			}
-			else if (request instanceof HttpServletRequest) {
-				HttpServletRequest httpServletRequest = (HttpServletRequest)
-					request;
-				Object portletArtifactHack = httpServletRequest.getAttribute(
-						"com.icesoft.faces.portletHack");
 
-				if (portletArtifactHack != null) {
+			try {
+				Class portletArtifactHackClass = portletArtifactHack.getClass();
 
-					try {
-						Method method = portletArtifactHack.getClass()
-							.getMethod("getPortletRequest", (Class[])null);
+				Method method = portletArtifactHackClass.getMethod(
+					"getPortletRequest", null);
 
-						if (method != null) {
-							Object value = method.invoke(
-									portletArtifactHack, (Object[])null);
+				if (method != null) {
+					Object value = method.invoke(portletArtifactHack, null);
 
-							if ((value != null) &&
-									(value instanceof PortletRequest)) {
-								portletRequest = (PortletRequest)value;
-							}
-						}
-
-					}
-					catch (Exception e) {
-						_log.error(e, e);
+					if ((value != null) && (value instanceof PortletRequest)) {
+						return (PortletRequest)value;
 					}
 				}
 			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
-		return portletRequest;
+
+		return null;
 	}
 
 	public static String getPreferenceValue(
@@ -157,4 +160,5 @@ public class JSFPortletUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(JSFPortletUtil.class);
+
 }
