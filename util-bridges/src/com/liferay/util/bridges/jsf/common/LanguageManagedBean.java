@@ -56,8 +56,7 @@ public class LanguageManagedBean implements Map {
 		_companyId = JSFPortletUtil.getCompanyId(facesContext);
 
 		if (_companyId == 0) {
-			_log.error("Unable to determine companyId from facesContext");
-			_companyId = 1;
+			_log.error("Unable to determine company id from facesContext");
 		}
 	}
 
@@ -98,7 +97,7 @@ public class LanguageManagedBean implements Map {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"{companyId=" + _companyId + ", locale=" + locale +
-					", key=" + key + ", value=" + value);
+						", key=" + key + ", value=" + value);
 			}
 		}
 
