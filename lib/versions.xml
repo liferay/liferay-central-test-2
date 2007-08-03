@@ -8,7 +8,7 @@
 		<project-url>http://java.sun.com/products/javabeans/jaf</project-url>
 		<licenses>
 			<license>
-				<license-name>JavaBeans Activation Framework 1.1</license-name>
+				<license-name>JavaBeans Activation Framework 1.1 License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -24,7 +24,7 @@
 			</license>
 		</licenses>
 	</library>
-	<library>
+    <library>
 		<file-name>development/ant-ext.jar</file-name>
 		<version>0.7.4-beta</version>
 		<project-name>Ant Installer</project-name>
@@ -66,7 +66,7 @@
 		<project-url>http://sourceforge.net/projects/c3p0</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -99,7 +99,7 @@
 		<project-url>http://www.firebirdsql.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Initial Developer's PUBLIC LICENSE 1.0</license-name>
+				<license-name>Initial Developer's Public License 1.0</license-name>
 			</license>
 			<license>
 				<license-name>Public Domain</license-name>
@@ -130,7 +130,7 @@
 		<project-url>http://www.icefaces.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Mozilla Public License 1.1</license-name>
+				<license-name>MPL 1.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -141,11 +141,11 @@
 		<project-url>http://www.icefaces.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Mozilla Public License 1.1</license-name>
+				<license-name>MPL 1.1</license-name>
 			</license>
 			<license>
 				<bundled-project-name>Facelets</bundled-project-name>
-				<license-name>Common Development and Distribution License (CDDL) Version 1.0</license-name>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -156,7 +156,7 @@
 		<project-url>http://www.icefaces.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Mozilla Public License 1.1</license-name>
+				<license-name>MPL 1.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -178,7 +178,7 @@
 		<project-url>http://www.java2html.com</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -189,7 +189,7 @@
 		<project-url>http://csd.informatik.uni-oldenburg.de/~jass</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -200,7 +200,7 @@
 		<project-url>http://jalopy.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>Jalopy BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -233,7 +233,7 @@
 		<project-url>https://jnet.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -269,7 +269,7 @@
 		<project-url>https://jsfportletbridge.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>Common Development and Distribution License 1.0</license-name>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -291,7 +291,7 @@
 		<project-url>http://jtds.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -313,7 +313,7 @@
 		<project-url>http://www.icefaces.org</project-url>
 		<licenses>
 			<license>
-				<license-name>Mozilla Public License 1.1</license-name>
+				<license-name>MPL 1.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -324,7 +324,7 @@
 		<project-url>http://jutf7.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>JUTF7 MIT License</license-name>
+				<license-name>MIT License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -335,7 +335,7 @@
 		<project-url>http://jymsg9.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -385,7 +385,7 @@
 		<project-url>http://www.mysql.com/products/connector/j</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -408,7 +408,7 @@
 		<project-url>http://ovanttasks.sourceforge.net/rat/index.html</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -419,7 +419,7 @@
 		<project-url>http://www.p6spy.com</project-url>
 		<licenses>
 			<license>
-				<license-name>P6Spy Software License, Version 1.1</license-name>
+				<license-name>P6Spy Software License 1.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -430,7 +430,7 @@
 		<project-url>http://jdbc.postgresql.org</project-url>
 		<licenses>
 			<license>
-				<license-name>PostgreSQL BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -454,7 +454,7 @@
 		<project-url>http://www.caucho.com/resin-3.1/doc/quercus.xtp</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -465,7 +465,7 @@
 		<project-url>http://www.caucho.com/resin-3.1</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -476,7 +476,7 @@
 		<project-url>http://www.sapdb.org/</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>		
@@ -498,7 +498,7 @@
 		<project-url>http://www.caucho.com/resin-3.1</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
+				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -577,10 +577,7 @@
 		<project-url>http://dev.alfresco.com</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
-			</license>
-			<license>
-				<license-name>Alfresco GPL FLOSS Exception</license-name>
+				<license-name>GPL 2.0 with Alfresco GPL FLOSS Exception</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -608,7 +605,7 @@
 		<project-url>http://www.antlr.org</project-url>
 		<licenses>
 			<license>
-				<license-name>ANTLR BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -711,9 +708,15 @@
 		<project-name>Burlap</project-name>
 		<project-url>http://www.caucho.com/resin-3.0/protocols/burlap.xtp</project-url>
 		<licenses>
-			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
-			</license>
+            <!--
+            Note: The project website implies that burlap.jar is part of the Resin project
+            which is GPL, but a physical review of the source code reveals the Apache
+            License 1.1 in the burlap source code files.
+            -->
+            <license>
+				<license-name>Apache License 1.1</license-name>
+                <copyright-notice>Copyright (c) 2001-2002 Caucho Technology, Inc.  All rights reserved.</copyright-notice>
+            </license>
 		</licenses>
 	</library>
 	<library>
@@ -723,7 +726,7 @@
 		<project-url>http://www.yale.edu/tp/cas/cas-client-java-2.1.0/webDoc</project-url>
 		<licenses>
 			<license>
-				<license-name>Yale BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -952,7 +955,7 @@
 		<project-url>http://manticore.2y.net/Java/examples/</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU General Public License Version 2.0</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -963,7 +966,7 @@
 		<project-url>http://daim.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -985,7 +988,7 @@
 		<project-url>http://dom4j.org/index.html</project-url>
 		<licenses>
 			<license>
-				<license-name>DOM4J BSD-Style License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1039,7 +1042,7 @@
 				<license-name>GIF89 Public Domain</license-name>
 			</license>
 			<license>
-				<license-name>GIFEncoder BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 				<copyright-notice>Copyright (C) 1996 by Jef Poskanzer &lt;jef@acme.com&gt;. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1074,7 +1077,7 @@
 		<project-url>http://www.hibernate.org</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1096,7 +1099,7 @@
 		<project-url>http://ical4j.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>iCal4j BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 				<copyright-notice>Copyright (c) 2007, Ben Fortuna. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1110,7 +1113,7 @@
 		<project-url>http://sourceforge.net/projects/ooimlib/</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 				<copyright-notice>Copyright (c) Fabrice Michellonet 2002</copyright-notice>
 			</license>
 		</licenses>
@@ -1211,7 +1214,7 @@
 		<project-url>https://jax-rpc.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>Common Development and Distribution License 1.0</license-name>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1222,7 +1225,7 @@
 		<project-url>http://jazzy.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1233,7 +1236,7 @@
 		<project-url>http://jcifs.samba.org</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1244,7 +1247,7 @@
 		<project-url>http://www.jfree.org/jcommon/index.php</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1268,7 +1271,7 @@
 		<project-url>http://www.jdom.org</project-url>
 		<licenses>
 			<license>
-				<license-name>JDOM BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 				<copyright-notice>Copyright (C) 2000-2004 Jason Hunter &amp; Brett McLaughlin. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1292,7 +1295,7 @@
 		<project-url>http://www.jfree.org/jfreechart</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1303,7 +1306,7 @@
 		<project-url>http://www.jgroups.org/javagroupsnew/docs/index.html</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1370,7 +1373,7 @@
 		<project-url>http://jug.safehaus.org/</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1403,7 +1406,7 @@
 		<project-url>http://jmsn.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>MSNM BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 				<copyright-notice>Copyright (c) 2002 Jang-Ho Hwang. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1523,7 +1526,7 @@
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
 			<license>
-				<license-name>PDFBox BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 				<copyright-notice>Copyright (c) 2002-2007, www.pdfbox.org All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1540,11 +1543,11 @@
 			</license>
 			<license>
 				<bundled-project-name>JUnit</bundled-project-name>
-				<license-name>Common Public License Version 1.0</license-name>
+				<license-name>Common Public License 1.0</license-name>
 			</license>
 			<license>
 				<bundled-project-name>VSDump</bundled-project-name>
-				<license-name>GNU General Public Licence Version 3.0</license-name>
+				<license-name>GPL 3.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1559,11 +1562,11 @@
 			</license>
 			<license>
 				<bundled-project-name>JUnit</bundled-project-name>
-				<license-name>Common Public License Version 1.0</license-name>
+				<license-name>Common Public License 1.0</license-name>
 			</license>
 			<license>
 				<bundled-project-name>VSDump</bundled-project-name>
-				<license-name>GNU General Public Licence Version 3.0</license-name>
+				<license-name>GPL 3.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1579,11 +1582,11 @@
 			</license>
 			<license>
 				<bundled-project-name>JUnit</bundled-project-name>
-				<license-name>Common Public License Version 1.0</license-name>
+				<license-name>Common Public License 1.0</license-name>
 			</license>
 			<license>
 				<bundled-project-name>VSDump</bundled-project-name>
-				<license-name>GNU General Public Licence Version 3.0</license-name>
+				<license-name>GPL 3.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1710,7 +1713,7 @@
 		<project-url>http://www.slf4j.org</project-url>
 		<licenses>
 			<license>
-				<license-name>SLF4J MIT License</license-name>
+				<license-name>MIT License</license-name>
 				<copyright-notice>Copyright (c) 2004-2007 QOS.ch</copyright-notice>
 			</license>
 		</licenses>
@@ -1774,7 +1777,7 @@
 			</license>
 			<license>
 				<bundled-project-name>ANTLR</bundled-project-name>
-				<license-name>ANTLR BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1789,7 +1792,7 @@
 			</license>
 			<license>
 				<bundled-project-name>ANTLR</bundled-project-name>
-				<license-name>ANTLR BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1800,7 +1803,7 @@
 		<project-url>http://subethasmtp.tigris.org</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 				<copyright-notice>Copyright (C) 2006 SubEthaMail.org</copyright-notice>
 			</license>
 		</licenses>
@@ -1829,7 +1832,7 @@
 		<project-url>http://trove4j.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>GNU Lesser General Public License version 2.1</license-name>
+				<license-name>LGPL 2.1</license-name>
 				<copyright-notice>Copyright (c) 2001, Eric D. Friedman All Rights Reserved.</copyright-notice>
 			</license>
 			<license>
@@ -1972,7 +1975,7 @@
 		<project-url>http://www.extreme.indiana.edu/xgws/xsoap/xpp</project-url>
 		<licenses>
 			<license>
-				<license-name>Indiana University Extreme! Lab Software License Version 1.1.1</license-name>
+				<license-name>Indiana University Extreme! Lab Software License 1.1.1</license-name>
 				<copyright-notice>Copyright (c) 2002 Extreme! Lab, Indiana University. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1984,7 +1987,7 @@
 		<project-url>http://xstream.codehaus.org</project-url>
 		<licenses>
 			<license>
-				<license-name>XStream BSD License</license-name>
+				<license-name>BSD-style License</license-name>
 				<copyright-notice>Copyright (c) 2003-2006, Joe Walnes. Copyright (c) 2006-2007, XStream Committers. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
