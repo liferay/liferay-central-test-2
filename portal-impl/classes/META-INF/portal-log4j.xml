@@ -40,6 +40,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.mail.service.impl.MailServiceImpl">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.mail.util">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.bean.BeanLocatorImpl">
 		<priority value="WARN" />
 	</category>

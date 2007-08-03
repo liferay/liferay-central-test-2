@@ -27,10 +27,12 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.Http;
 
 import java.util.List;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -41,6 +43,10 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class FuseMailHook implements Hook {
+
+	public FuseMailHook() {
+		_client = new HttpClient();
+	}
 
 	public void addForward(
 		long userId, List filters, List emailAddresses, boolean leaveCopy) {
@@ -53,24 +59,18 @@ public class FuseMailHook implements Hook {
 		try {
 			String mailUserId = getMailUserId(userId);
 
-			StringMaker sm = new StringMaker();
+			PostMethod method = getPostMethod();
 
-			sm.append(_URL_PREFIX);
-			sm.append("&request=order");
-			sm.append("&user=");
-			sm.append(mailUserId);
-			sm.append("&password=");
-			sm.append(password);
-			sm.append("&first_name=");
-			sm.append(firstName);
-			sm.append("&last_name=");
-			sm.append(lastName);
-			sm.append("&account_type=");
-			sm.append(_ACCOUNT_TYPE);
-			sm.append("&alias[0]");
-			sm.append(emailAddress);
+			method.addParameter("request", "order");
+			method.addParameter("user", mailUserId);
+			method.addParameter("password", password);
+			method.addParameter("first_name", firstName);
+			method.addParameter("last_name", lastName);
+			method.addParameter("account_type", _ACCOUNT_TYPE);
+			method.addParameter("group_parent", _GROUP_PARENT);
+			method.addParameter("alias[0]", emailAddress);
 
-			Http.submit(sm.toString());
+			executeMethod(method);
         }
 		catch (Exception e) {
 			_log.error(e, e);
@@ -87,16 +87,13 @@ public class FuseMailHook implements Hook {
 
 			String mailUserId = getMailUserId(userId);
 
-			StringMaker sm = new StringMaker();
+			PostMethod method = getPostMethod();
 
-			sm.append(_URL_PREFIX);
-			sm.append("&request=removealias");
-			sm.append("&user=");
-			sm.append(mailUserId);
-			sm.append("&alias");
-			sm.append(user.getEmailAddress());
+			method.addParameter("request", "removealias");
+			method.addParameter("user", mailUserId);
+			method.addParameter("alias", user.getEmailAddress());
 
-			Http.submit(sm.toString());
+			executeMethod(method);
         }
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,14 +104,12 @@ public class FuseMailHook implements Hook {
 		try {
 			String mailUserId = getMailUserId(userId);
 
-			StringMaker sm = new StringMaker();
+			PostMethod method = getPostMethod();
 
-			sm.append(_URL_PREFIX);
-			sm.append("&request=terminate");
-			sm.append("&user=");
-			sm.append(mailUserId);
+			method.addParameter("request", "terminate");
+			method.addParameter("user", mailUserId);
 
-			Http.submit(sm.toString());
+			executeMethod(method);
         }
 		catch (Exception e) {
 			_log.error(e, e);
@@ -130,16 +125,13 @@ public class FuseMailHook implements Hook {
 
 			String mailUserId = getMailUserId(userId);
 
-			StringMaker sm = new StringMaker();
+			PostMethod method = getPostMethod();
 
-			sm.append(_URL_PREFIX);
-			sm.append("&request=modify");
-			sm.append("&user=");
-			sm.append(mailUserId);
-			sm.append("&alias[0]");
-			sm.append(emailAddress);
+			method.addParameter("request", "modify");
+			method.addParameter("user", mailUserId);
+			method.addParameter("alias[0]", emailAddress);
 
-			Http.submit(sm.toString());
+			executeMethod(method);
         }
 		catch (Exception e) {
 			_log.error(e, e);
@@ -150,20 +142,48 @@ public class FuseMailHook implements Hook {
 		try {
 			String mailUserId = getMailUserId(userId);
 
-			StringMaker sm = new StringMaker();
+			PostMethod method = getPostMethod();
 
-			sm.append(_URL_PREFIX);
-			sm.append("&request=modify");
-			sm.append("&user=");
-			sm.append(mailUserId);
-			sm.append("&password=");
-			sm.append(password);
+			method.addParameter("request", "modify");
+			method.addParameter("user", mailUserId);
+			method.addParameter("password", password);
 
-			Http.submit(sm.toString());
+			executeMethod(method);
         }
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	protected int executeMethod(PostMethod method) throws Exception {
+		HttpClient client = getHttpClient();
+
+		int status = client.executeMethod(method);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Posting to URI: " + method.getURI());
+
+			NameValuePair[] pairs = method.getParameters();
+
+			if (pairs.length > 0) {
+				StringMaker sm = new StringMaker();
+
+				sm.append("With parameters:\n");
+
+				for (int i = 0; i < pairs.length; i++) {
+					sm.append("\t");
+					sm.append(pairs[i]);
+					sm.append("\n");
+				}
+
+				_log.debug(sm.toString());
+			}
+
+			_log.debug("Status: " + status);
+			_log.debug("Response body: " + method.getResponseBodyAsString());
+		}
+
+		return status;
 	}
 
 	protected String getMailUserId(long userId) throws Exception {
@@ -175,7 +195,26 @@ public class FuseMailHook implements Hook {
 		sm.append(StringPool.PERIOD);
 		sm.append(user.getUserId());
 
-		return sm.toString();
+		String mailUserId = sm.toString();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Mail user id " + mailUserId + " for user id " + userId);
+		}
+
+		return mailUserId;
+	}
+
+	protected HttpClient getHttpClient() {
+		return _client;
+	}
+
+	protected PostMethod getPostMethod() {
+		PostMethod post = new PostMethod(_URL);
+
+		post.addParameter("PlatformUser", _USERNAME);
+		post.addParameter("PlatformPassword", _PASSWORD);
+
+		return post;
 	}
 
 	private static final String _URL = PropsUtil.get(
@@ -187,12 +226,14 @@ public class FuseMailHook implements Hook {
 	private static final String _PASSWORD = PropsUtil.get(
 		PropsUtil.MAIL_HOOK_FUSEMAIL_PASSWORD);
 
-	private static final String _URL_PREFIX =
-		_URL + "?PlatformUser=" + _USERNAME + "&PlatformPassword=" + _PASSWORD;
-
 	private static final String _ACCOUNT_TYPE = PropsUtil.get(
 		PropsUtil.MAIL_HOOK_FUSEMAIL_ACCOUNT_TYPE);
 
+	private static final String _GROUP_PARENT = PropsUtil.get(
+		PropsUtil.MAIL_HOOK_FUSEMAIL_GROUP_PARENT);
+
 	private static Log _log = LogFactory.getLog(FuseMailHook.class);
+
+	private HttpClient _client;
 
 }

@@ -33,6 +33,9 @@ import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="MailServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,6 +47,10 @@ public class MailServiceImpl implements MailService {
 	public void addForward(
 			long userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws SystemException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("addForward");
+		}
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
@@ -62,6 +69,10 @@ public class MailServiceImpl implements MailService {
 			String lastName, String emailAddress)
 		throws SystemException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("addUser");
+		}
+
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
@@ -78,6 +89,10 @@ public class MailServiceImpl implements MailService {
 			long userId, String emailAddress, String vacationMessage)
 		throws SystemException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("addVacationMessage");
+		}
+
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
@@ -90,6 +105,10 @@ public class MailServiceImpl implements MailService {
 	}
 
 	public void deleteEmailAddress(long userId) throws SystemException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("deleteEmailAddress");
+		}
+
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
@@ -100,6 +119,10 @@ public class MailServiceImpl implements MailService {
 	}
 
 	public void deleteUser(long userId) throws SystemException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("deleteUser");
+		}
+
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
@@ -109,11 +132,19 @@ public class MailServiceImpl implements MailService {
 	}
 
 	public void sendEmail(MailMessage mailMessage) throws SystemException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("sendEmail");
+		}
+
 		MailProducer.produce(mailMessage);
 	}
 
 	public void updateBlocked(long userId, List blocked)
 		throws SystemException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("updateBlocked");
+		}
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
@@ -127,6 +158,10 @@ public class MailServiceImpl implements MailService {
 	public void updateEmailAddress(long userId, String emailAddress)
 		throws SystemException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("updateEmailAddress");
+		}
+
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
@@ -139,6 +174,10 @@ public class MailServiceImpl implements MailService {
 	public void updatePassword(long userId, String password)
 		throws SystemException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("updatePassword");
+		}
+
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
@@ -147,5 +186,7 @@ public class MailServiceImpl implements MailService {
 
 		MailProducer.produce(methodWrapper);
 	}
+
+	private static Log _log = LogFactory.getLog(MailServiceImpl.class);
 
 }
