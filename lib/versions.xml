@@ -24,7 +24,7 @@
 			</license>
 		</licenses>
 	</library>
-    <library>
+	<library>
 		<file-name>development/ant-ext.jar</file-name>
 		<version>0.7.4-beta</version>
 		<project-name>Ant Installer</project-name>
@@ -32,7 +32,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2005 Paul Hinds</copyright-notice>
+				<copyright-notice>Copyright (c) 2005 Paul Hinds</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -44,7 +44,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2005 Paul Hinds</copyright-notice>
+				<copyright-notice>Copyright (c) 2005 Paul Hinds</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -173,7 +173,7 @@
 	</library>
 	<library>
 		<file-name>development/j2h.jar</file-name>
-		<version>1.4?</version>
+		<version>1.3.1</version>
 		<project-name>Java2HTML</project-name>
 		<project-url>http://www.java2html.com</project-url>
 		<licenses>
@@ -184,7 +184,7 @@
 	</library>
 	<library>
 		<file-name>development/jass.jar</file-name>
-		<version>2.0.14?</version>
+		<version></version>
 		<project-name>Jass</project-name>
 		<project-url>http://csd.informatik.uni-oldenburg.de/~jass</project-url>
 		<licenses>
@@ -200,7 +200,7 @@
 		<project-url>http://jalopy.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -358,7 +358,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2004-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2004-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -370,11 +370,11 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2004-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2004-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 			<license>
 				<license-name>Sun DTD License</license-name>
-				<copyright-notice>Copyright 1994-2005 Sun Microsystems, Inc. All Rights Reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 1994-2005 Sun Microsystems, Inc. All Rights Reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -402,8 +402,7 @@
 	</library>
 	<library>
 		<file-name>development/orangevolt-ant-tasks.jar</file-name>
-		<!-- Version unknown: performed binary diff of orangevolt-ant-tasks.jar with 1.3.1, 1.3.2, 1.3.3, and 1.3.5 and they all differed -->
-		<version></version>
+		<version>1.3.5</version>
 		<project-name>Orangevolt ANT Tasks</project-name>
 		<project-url>http://ovanttasks.sourceforge.net/rat/index.html</project-url>
 		<licenses>
@@ -430,20 +429,19 @@
 		<project-url>http://jdbc.postgresql.org</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>development/qdox.jar</file-name>
-		<!-- Note: Downloaded qdox-1.6.3.jar and the class files inside it were dated newer that qdox.jar,m so don't know what version ships with Liferay -->
-		<version></version>
+		<version>1.6.3</version>
 		<project-name>QDox</project-name>
 		<project-url>http://qdox.codehaus.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2006 Joe Walnes and QDox Project Team</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2006 Joe Walnes and QDox Project Team</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -566,7 +564,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2005-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2005-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -589,7 +587,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 1999-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 1999-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 			<license>
 				<bundled-project-name>&lt;sync&gt; task</bundled-project-name>
@@ -605,7 +603,7 @@
 		<project-url>http://www.antlr.org</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -698,7 +696,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2006 The Apache Software Foundation.</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2006 The Apache Software Foundation.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -708,15 +706,17 @@
 		<project-name>Burlap</project-name>
 		<project-url>http://www.caucho.com/resin-3.0/protocols/burlap.xtp</project-url>
 		<licenses>
-            <!--
-            Note: The project website implies that burlap.jar is part of the Resin project
-            which is GPL, but a physical review of the source code reveals the Apache
-            License 1.1 in the burlap source code files.
-            -->
-            <license>
+
+			<!--
+			The project website implies that burlap.jar is part of the Resin
+			project which is GPL, but a physical review of the source code
+			reveals the Apache License 1.1 in the Burlap source code files.
+			-->
+
+			<license>
 				<license-name>Apache License 1.1</license-name>
-                <copyright-notice>Copyright (c) 2001-2002 Caucho Technology, Inc.  All rights reserved.</copyright-notice>
-            </license>
+				<copyright-notice>Copyright (c) 2001-2002 Caucho Technology, Inc. All rights reserved.</copyright-notice>
+			</license>
 		</licenses>
 	</library>
 	<library>
@@ -726,7 +726,7 @@
 		<project-url>http://www.yale.edu/tp/cas/cas-client-java-2.1.0/webDoc</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -815,7 +815,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -838,7 +838,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -861,7 +861,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2003-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2003-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -873,7 +873,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -885,7 +885,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -919,7 +919,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -951,8 +951,8 @@
 	<library>
 		<file-name>portal/crypt.jar</file-name>
 		<version></version>
-		<project-name>DATA crypting (UNIX crypt implementation)</project-name>
-		<project-url>http://manticore.2y.net/Java/examples/</project-url>
+		<project-name>Unix Crypt</project-name>
+		<project-url>http://www.dynamic.net.au/christos/crypt/</project-url>
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
@@ -988,7 +988,7 @@
 		<project-url>http://dom4j.org/index.html</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1000,7 +1000,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2004-2005 Germinus XXI</copyright-notice>
+				<copyright-notice>Copyright (c) 2004-2005 Germinus XXI</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1012,7 +1012,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2003-2007 Greg Luck</copyright-notice>
+				<copyright-notice>Copyright (c) 2003-2007 Greg Luck</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1042,8 +1042,8 @@
 				<license-name>GIF89 Public Domain</license-name>
 			</license>
 			<license>
-				<license-name>BSD-style License</license-name>
-				<copyright-notice>Copyright (C) 1996 by Jef Poskanzer &lt;jef@acme.com&gt;. All rights reserved.</copyright-notice>
+				<license-name>BSD Style License</license-name>
+				<copyright-notice>Copyright (c) 1996 by Jef Poskanzer &lt;jef@acme.com&gt;. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1099,7 +1099,7 @@
 		<project-url>http://ical4j.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 				<copyright-notice>Copyright (c) 2007, Ben Fortuna. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1150,7 +1150,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1162,7 +1162,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 			<license>
 				<bundled-project-name>XPath Grammar and Parser</bundled-project-name>
@@ -1179,7 +1179,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1191,7 +1191,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1203,7 +1203,7 @@
 		<licenses>
 			<license>
 				<license-name>Jaxen License</license-name>
-				<copyright-notice>Copyright 2003 (C) The Werken Company. All Rights Reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2003 (c) The Werken Company. All Rights Reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1253,14 +1253,13 @@
 	</library>
 	<library>
 		<file-name>portal/jcr.jar</file-name>
-		<!-- Note: Downloaded jcr-1.0.jar and it differed from from jcr.jar, so don't know what version ships with Liferay -->
 		<version></version>
 		<project-name>JSR-170 Content Repository for Java Technology</project-name>
 		<project-url>http://jcp.org/en/jsr/detail?id=170</project-url>
 		<licenses>
 			<license>
 				<license-name>Content Repository for Java Technology API Specification License</license-name>
-				<copyright-notice>Copyright 2005 Day Management AG Barfüsserplatz 6, 4001 Basel, Switzerland. All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2005 Day Management AG Barfüsserplatz 6, 4001 Basel, Switzerland. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1271,8 +1270,8 @@
 		<project-url>http://www.jdom.org</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
-				<copyright-notice>Copyright (C) 2000-2004 Jason Hunter &amp; Brett McLaughlin. All rights reserved.</copyright-notice>
+				<license-name>BSD Style License</license-name>
+				<copyright-notice>Copyright (c) 2000-2004 Jason Hunter &amp; Brett McLaughlin. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1284,7 +1283,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2006 James Murty</copyright-notice>
+				<copyright-notice>Copyright (c) 2006 James Murty</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1340,7 +1339,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright Metaparadigm Pte. Ltd. 2004.</copyright-notice>
+				<copyright-notice>Copyright (c) Metaparadigm Pte. Ltd. 2004.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1406,7 +1405,7 @@
 		<project-url>http://jmsn.sourceforge.net</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 				<copyright-notice>Copyright (c) 2002 Jang-Ho Hwang. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1431,7 +1430,7 @@
 		<licenses>
 			<license>
 				<license-name>CyperNeko Software License 1.0</license-name>
-				<copyright-notice>(C) Copyright 2002-2005, Andy Clark. All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2005, Andy Clark. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1455,7 +1454,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2006-2007 Sxip Identity Corporation</copyright-notice>
+				<copyright-notice>Copyright (c) 2006-2007 Sxip Identity Corporation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1467,7 +1466,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2005 Internet2</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2005 Internet2</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1479,7 +1478,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2003-2005 Epok Inc.</copyright-notice>
+				<copyright-notice>Copyright (c) 2003-2005 Epok Inc.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1491,7 +1490,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2003-2005 Epok Inc.</copyright-notice>
+				<copyright-notice>Copyright (c) 2003-2005 Epok Inc.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1526,7 +1525,7 @@
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 				<copyright-notice>Copyright (c) 2002-2007, www.pdfbox.org All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1539,15 +1538,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2007 The Apache Software Foundation</copyright-notice>
-			</license>
-			<license>
-				<bundled-project-name>JUnit</bundled-project-name>
-				<license-name>Common Public License 1.0</license-name>
-			</license>
-			<license>
-				<bundled-project-name>VSDump</bundled-project-name>
-				<license-name>GPL 3.0</license-name>
+				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1558,15 +1549,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2007 The Apache Software Foundation</copyright-notice>
-			</license>
-			<license>
-				<bundled-project-name>JUnit</bundled-project-name>
-				<license-name>Common Public License 1.0</license-name>
-			</license>
-			<license>
-				<bundled-project-name>VSDump</bundled-project-name>
-				<license-name>GPL 3.0</license-name>
+				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1578,15 +1561,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2007 The Apache Software Foundation</copyright-notice>
-			</license>
-			<license>
-				<bundled-project-name>JUnit</bundled-project-name>
-				<license-name>Common Public License 1.0</license-name>
-			</license>
-			<license>
-				<bundled-project-name>VSDump</bundled-project-name>
-				<license-name>GPL 3.0</license-name>
+				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1598,7 +1573,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2005-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2005-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 			<license>
 				<bundled-project-name>phpportlet</bundled-project-name>
@@ -1615,7 +1590,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2004 The Apache Software Foundation.</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2004 The Apache Software Foundation.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1627,7 +1602,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2004 The Apache Software Foundation.</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2004 The Apache Software Foundation.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1639,7 +1614,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2004-2005 OpenSymphony</copyright-notice>
+				<copyright-notice>Copyright (c) 2004-2005 OpenSymphony</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1651,7 +1626,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2004 Sun Microsystems, Inc.</copyright-notice>
+				<copyright-notice>Copyright (c) 2004 Sun Microsystems, Inc.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1665,7 +1640,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun License for JSR 67 Java APIs for XML Messaging 1.0</license-name>
-				<copyright-notice>Copyright 2006 SUN MICROSYSTEMS, INC.</copyright-notice>
+				<copyright-notice>Copyright (c) 2006 SUN MICROSYSTEMS, INC.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1697,12 +1672,12 @@
 		<licenses>
 			<license>
 				<license-name>None</license-name>
-				<copyright-notice>Copyright (C) 2005 keesjanvoogd at users.sourceforge.net</copyright-notice>
+				<copyright-notice>Copyright (c) 2005 keesjanvoogd at users.sourceforge.net</copyright-notice>
 			</license>
 			<license>
 				<bundled-project-name>JH Labs Distortion Dlgorithms</bundled-project-name>
 				<license-name>None</license-name>
-				<copyright-notice>Copyright (C) 1998 Jerry Huxtable</copyright-notice>
+				<copyright-notice>Copyright (c) 1998 Jerry Huxtable</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1726,7 +1701,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2007 Jive Software.</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2007 Jive Software.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1738,7 +1713,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2007 Jive Software.</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2007 Jive Software.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1762,7 +1737,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2002-2007 the original author or authors.</copyright-notice>
+				<copyright-notice>Copyright (c) 2002-2007 the original author or authors.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1777,7 +1752,7 @@
 			</license>
 			<license>
 				<bundled-project-name>ANTLR</bundled-project-name>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1792,7 +1767,7 @@
 			</license>
 			<license>
 				<bundled-project-name>ANTLR</bundled-project-name>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1804,7 +1779,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
-				<copyright-notice>Copyright (C) 2006 SubEthaMail.org</copyright-notice>
+				<copyright-notice>Copyright (c) 2006 SubEthaMail.org</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1816,12 +1791,12 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2004 Ryan Ackley</copyright-notice>
+				<copyright-notice>Copyright (c) 2004 Ryan Ackley</copyright-notice>
 			</license>
 			<license>
 				<bundled-project-name>POI</bundled-project-name>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2001-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1849,7 +1824,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (C) 2000-2007 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2000-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1861,7 +1836,7 @@
 		<licenses>
 			<license>
 				<license-name>Common Public License 1.0</license-name>
-				<copyright-notice>(c) Copyright IBM Corp 2001, 2005</copyright-notice>
+				<copyright-notice>Copyright (c) IBM Corp 2001, 2005</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1904,7 +1879,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2005-2006 The Apache Software Foundation</copyright-notice>
+				<copyright-notice>Copyright (c) 2005-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1956,11 +1931,11 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 1999-2006 The Apache Software Foundation.</copyright-notice>
+				<copyright-notice>Copyright (c) 1999-2006 The Apache Software Foundation.</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright 2005 Sun Microsystems, Inc. All rights reserved.</copyright-notice>
+				<copyright-notice>Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved.</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -1987,7 +1962,7 @@
 		<project-url>http://xstream.codehaus.org</project-url>
 		<licenses>
 			<license>
-				<license-name>BSD-style License</license-name>
+				<license-name>BSD Style License</license-name>
 				<copyright-notice>Copyright (c) 2003-2006, Joe Walnes. Copyright (c) 2006-2007, XStream Committers. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
