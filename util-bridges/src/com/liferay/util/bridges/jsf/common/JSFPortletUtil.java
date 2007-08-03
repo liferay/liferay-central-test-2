@@ -22,10 +22,9 @@
 
 package com.liferay.util.bridges.jsf.common;
 
-import com.icesoft.faces.env.ServletEnvironmentRequest;
-import com.icesoft.faces.webapp.http.portlet.PortletArtifactHack;
-
 import com.liferay.util.GetterUtil;
+
+import java.lang.reflect.Method;
 
 import java.util.Locale;
 import java.util.Map;
@@ -35,6 +34,11 @@ import javax.faces.context.FacesContext;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSFPortletUtil.java.html"><b><i>View Source</i></b></a>
@@ -83,22 +87,40 @@ public class JSFPortletUtil {
 
 		Object request = facesContext.getExternalContext().getRequest();
 
-		if (request instanceof PortletRequest) {
-			portletRequest = (PortletRequest)request;
-		}
-		else if (request instanceof ServletEnvironmentRequest) {
-			ServletEnvironmentRequest servletEnvironmentRequest =
-				(ServletEnvironmentRequest)request;
+		if (request != null) {
 
-			PortletArtifactHack portletArtifactHack =
-				(PortletArtifactHack)servletEnvironmentRequest.getAttribute(
-					PortletArtifactHack.PORTLET_HACK_KEY);
+			if (request instanceof PortletRequest) {
+				portletRequest = (PortletRequest)request;
+			}
+			else if (request instanceof HttpServletRequest) {
+				HttpServletRequest httpServletRequest = (HttpServletRequest)
+					request;
+				Object portletArtifactHack = httpServletRequest.getAttribute(
+						"com.icesoft.faces.portletHack");
 
-			if (portletArtifactHack != null) {
-				portletRequest = portletArtifactHack.getPortletRequest();
+				if (portletArtifactHack != null) {
+
+					try {
+						Method method = portletArtifactHack.getClass()
+							.getMethod("getPortletRequest", (Class[])null);
+
+						if (method != null) {
+							Object value = method.invoke(
+									portletArtifactHack, (Object[])null);
+
+							if ((value != null) &&
+									(value instanceof PortletRequest)) {
+								portletRequest = (PortletRequest)value;
+							}
+						}
+
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
+				}
 			}
 		}
-
 		return portletRequest;
 	}
 
@@ -134,4 +156,5 @@ public class JSFPortletUtil {
 		return value;
 	}
 
+	private static Log _log = LogFactory.getLog(JSFPortletUtil.class);
 }
