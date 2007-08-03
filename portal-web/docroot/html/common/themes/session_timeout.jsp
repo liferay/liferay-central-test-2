@@ -24,7 +24,7 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() %>">
+<c:if test="<%= themeDisplay.isSignedIn() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
 	<script type="text/javascript">
 
 		<%
@@ -39,12 +39,14 @@
 		sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
 		%>
 
-		Liferay.Session.init(
-			{
-				autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
-				timeout: <%= sessionTimeout %>,
-				timeoutWarning: <%= sessionTimeoutWarning %>
-			}
-		);
+		<c:if test="<%= sessionTimeoutWarning > 0 %>">
+			Liferay.Session.init(
+				{
+					autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
+					timeout: <%= sessionTimeout %>,
+					timeoutWarning: <%= sessionTimeoutWarning %>
+				}
+			);
+		</c:if>
 	</script>
 </c:if>
