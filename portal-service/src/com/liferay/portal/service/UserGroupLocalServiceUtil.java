@@ -130,14 +130,6 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.getUserUserGroups(userId);
 	}
 
-	public static java.util.List getUsers(long userGroupId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
-
-		return userGroupLocalService.getUsers(userGroupId);
-	}
-
 	public static boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

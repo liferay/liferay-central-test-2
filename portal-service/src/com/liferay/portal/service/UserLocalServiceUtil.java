@@ -306,6 +306,14 @@ public class UserLocalServiceUtil {
 		return userLocalService.getRoleUsers(roleId);
 	}
 
+	public static java.util.List getUserGroupUsers(long userGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserGroupUsers(userGroupId);
+	}
+
 	public static com.liferay.portal.model.User getUserByContactId(
 		long contactId)
 		throws com.liferay.portal.PortalException, 

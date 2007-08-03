@@ -190,6 +190,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getUserGroupUsers(long userGroupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.User getUserByContactId(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

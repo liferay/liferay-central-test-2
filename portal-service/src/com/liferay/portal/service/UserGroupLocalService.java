@@ -91,10 +91,6 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUsers(long userGroupId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

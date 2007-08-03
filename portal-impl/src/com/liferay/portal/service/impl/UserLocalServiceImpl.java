@@ -867,6 +867,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return RoleUtil.getUsers(roleId);
 	}
 
+	public List getUserGroupUsers(long userGroupId)
+		throws PortalException, SystemException {
+
+		return UserGroupUtil.getUsers(userGroupId);
+	}
+
 	public User getUserByContactId(long contactId)
 		throws PortalException, SystemException {
 
