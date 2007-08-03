@@ -635,6 +635,8 @@
 				<move file="${tstamp.value}" tofile="${app.server.portal.dir}" />
 			</then>
 		</if>
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="deploy-properties">
@@ -839,6 +841,8 @@
 		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
 			<fileset dir="tools" includes="java2html.bat,javadoc.css" />
 		</copy>
+
+		<antcall target="print-current-time" />
 	</target>
 
 	<target name="build-ext-dir" unless="lp.ext.dir.available">
