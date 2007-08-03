@@ -24,6 +24,8 @@ package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.io.Serializable;
+
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -44,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Jorge Ferrer
  *
  */
-public class MailAccount {
+public class MailAccount implements Serializable {
 
 	public MailAccount(String accountName, long userId, String password,
 					   String emailAddress) {

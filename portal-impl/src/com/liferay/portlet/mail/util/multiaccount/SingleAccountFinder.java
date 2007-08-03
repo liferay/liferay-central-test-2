@@ -49,7 +49,7 @@ public class SingleAccountFinder implements AccountFinder {
 		throws MailAccountsException {
 
 		return new MailAccount(
-			accountName, user.getUserId(), password, user.getEmailAddress());
+			accountName, getMailUserId(user), password, user.getEmailAddress());
 	}
 
 	public Collection findAllAccounts(User user, String password)
