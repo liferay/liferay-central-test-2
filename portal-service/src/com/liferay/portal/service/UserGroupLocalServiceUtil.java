@@ -114,12 +114,28 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.getUserGroup(companyId, name);
 	}
 
+	public static java.util.List getUserGroups(long companyId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		return userGroupLocalService.getUserGroups(companyId);
+	}
+
 	public static java.util.List getUserUserGroups(long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		return userGroupLocalService.getUserUserGroups(userId);
+	}
+
+	public static java.util.List getUsers(long userGroupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		return userGroupLocalService.getUsers(userGroupId);
 	}
 
 	public static boolean hasGroupUserGroup(long groupId, long userGroupId)

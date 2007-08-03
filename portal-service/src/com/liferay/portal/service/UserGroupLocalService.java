@@ -83,7 +83,15 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getUserGroups(long companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getUserUserGroups(long userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getUsers(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

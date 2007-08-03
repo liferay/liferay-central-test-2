@@ -148,10 +148,22 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return UserGroupFinder.findByC_N(companyId, name);
 	}
 
+	public List getUserGroups(long companyId)
+		throws PortalException, SystemException {
+	
+		return UserGroupUtil.findByCompanyId(companyId);
+	}
+	
 	public List getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
 		return UserUtil.getUserGroups(userId);
+	}
+
+	public List getUsers(long userGroupId)
+		throws PortalException, SystemException {
+	
+		return UserGroupUtil.getUsers(userGroupId);
 	}
 
 	public boolean hasGroupUserGroup(long groupId, long userGroupId)
