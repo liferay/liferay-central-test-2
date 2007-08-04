@@ -98,16 +98,19 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-		</select>
-	</td>
-	<td>
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-	</td>
-</tr>
-</table>
+<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
+	<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+	<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+</select>
+
+<input type="submit" value="<liferay-ui:message key="search" />" />
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER)) ||
+						(portletName.equals(PortletKeys.LOCATION_ADMIN) && LocationPermission.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) ||
+						(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && OrganizationPermission.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) %>">
+			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';" />
+		</c:if>
+	</c:if>
+</c:if>
