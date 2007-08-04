@@ -170,6 +170,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
+		friendlyURL = friendlyURL.toLowerCase();
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
@@ -556,6 +557,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (Validator.isNull(friendlyURL)) {
 			throw new NoSuchLayoutException();
 		}
+
+		friendlyURL = friendlyURL.toLowerCase();
 
 		return LayoutUtil.findByG_P_F(groupId, privateLayout, friendlyURL);
 	}
@@ -1000,6 +1003,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
+		friendlyURL = friendlyURL.toLowerCase();
 
 		validate(
 			groupId, privateLayout, layoutId, parentLayoutId, name, type,

@@ -338,6 +338,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			throw new NoSuchGroupException();
 		}
 
+		friendlyURL = friendlyURL.toLowerCase();
+
 		return GroupUtil.findByC_F(companyId, friendlyURL);
 	}
 
@@ -535,6 +537,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			friendlyURL = PropsUtil.get(PropsUtil.DEFAULT_GUEST_FRIENDLY_URL);
 		}
 
+		friendlyURL = friendlyURL.toLowerCase();
+
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			defaultUserId, group.getGroupId(), false,
 			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
@@ -573,7 +577,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		return friendlyURL;
+		return friendlyURL.toLowerCase();
 	}
 
 	protected void validateFriendlyURL(
