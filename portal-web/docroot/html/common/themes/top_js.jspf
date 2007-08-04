@@ -262,7 +262,7 @@
 					}
 				);
 
-				jQuery(".journal-content-eip-text").leditable(
+				/*jQuery(".journal-content-eip-text").leditable(
 					"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
 					{
 						cancel: Liferay.Language.get('cancel'),
@@ -299,7 +299,7 @@
 						type: 'fcktextarea',
 						width: '100%'
 					}
-				);
+				);*/
 			}
 		);
 	</c:if>

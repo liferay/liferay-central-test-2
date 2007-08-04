@@ -529,8 +529,6 @@
 			<param name="js.to.file" value="docroot/html/js/everything.js" />
 		</antcall>
 
-		<delete file="docroot/html/js/everything_unpacked.js" />
-
 		<antcall target="build-javascript-portlet-cmd">
 			<param name="portlet.name" value="mail" />
 		</antcall>
