@@ -57,12 +57,18 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 
 <br />
 
-<select name="<portlet:namespace /><%= TemplateDisplayTerms.AND_OPERATOR %>">
-	<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-	<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-</select>
+<div>
+	<select name="<portlet:namespace /><%= TemplateDisplayTerms.AND_OPERATOR %>">
+		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+	</select>
 
-<input type="submit" value="<liferay-ui:message key="search" />" />
+	<input type="submit" value="<liferay-ui:message key="search-templates" />" />
+
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
+		<input type="button" value="<liferay-ui:message key="add-template" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+	</c:if>
+</div>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<br />

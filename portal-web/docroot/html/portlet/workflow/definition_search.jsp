@@ -51,16 +51,15 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 
 <br />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<select name="<portlet:namespace /><%= DefinitionDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-		</select>
-	</td>
-	<td>
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-	</td>
-</tr>
-</table>
+<div>
+	<select name="<portlet:namespace /><%= DefinitionDisplayTerms.AND_OPERATOR %>">
+		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+	</select>
+
+	<input type="submit" value="<liferay-ui:message key="search-definitions" />" />
+
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.WORKFLOW, ActionKeys.ADD_DEFINITION) %>">
+		<input type="button" value="<liferay-ui:message key="add-definition" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+	</c:if>
+</div>

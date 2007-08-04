@@ -81,19 +81,34 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 
 <br />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<select name="<portlet:namespace /><%= OrganizationDisplayTerms.AND_OPERATOR %>">
-			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-		</select>
-	</td>
-	<td>
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-	</td>
-</tr>
-</table>
+<div>
+	<select name="<portlet:namespace /><%= OrganizationDisplayTerms.AND_OPERATOR %>">
+		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+	</select>
+
+	<input type="submit" value="<liferay-ui:message key='<%= "search-" + tabs1 %>' />" />
+
+	<%
+	boolean organizationsTab = tabs1.equals("organizations");
+
+	boolean showButtons = false;
+
+	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+		if (organizationsTab && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+		}
+		else {
+			showButtons = true;
+		}
+	}
+	%>
+
+	<c:if test="<%= showButtons %>">
+		<c:if test="<%= (organizationsTab && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !organizationsTab %>">
+			<input type="button" value="<liferay-ui:message key='<%= "add-" + tabs1 %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (organizationsTab ? "organization" : "location") %>' /></portlet:renderURL>';" />
+		</c:if>
+	</c:if>
+</div>
 
 <%
 Organization organization = null;

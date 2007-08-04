@@ -189,23 +189,17 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<c:if test="<%= showAddCategoryButton || (results.size() > 0) %>">
-			<table class="liferay-table">
-			<tr>
-				<c:if test="<%= showAddCategoryButton %>">
-					<td>
-						<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
-					</td>
-				</c:if>
-
+			<div>
 				<c:if test="<%= results.size() > 0 %>">
-					<td>
-						<input name="<portlet:namespace />keywords" size="30" type="text" />
+					<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<input type="submit" value="<liferay-ui:message key="search-categories" />" />
-					</td>
+					<input type="submit" value="<liferay-ui:message key="search-categories" />" />
 				</c:if>
-			</tr>
-			</table>
+
+				<c:if test="<%= showAddCategoryButton %>">
+					<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+				</c:if>
+			</div>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />

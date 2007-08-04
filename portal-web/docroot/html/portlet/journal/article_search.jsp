@@ -143,18 +143,18 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 <br />
 
-<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
-	<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-	<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-</select>
+<div>
+	<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
+		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+	</select>
 
-<input type="submit" value="<liferay-ui:message key="search" />" />
+	<input type="submit" value="<liferay-ui:message key="search-articles" />" />
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 		<input type="button" value="<liferay-ui:message key="add-article" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</c:if>
-</c:if>
+</div>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<br />

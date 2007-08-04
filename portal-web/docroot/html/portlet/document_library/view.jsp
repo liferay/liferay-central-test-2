@@ -143,24 +143,17 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			%>
 
 			<c:if test="<%= showAddFolderButton || showCurFolderSearch %>">
-				<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<c:if test="<%= showAddFolderButton %>">
-						<td>
-							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
-						</td>
-						<td style="padding-left: 30px;"></td>
-					</c:if>
-
+				<div>
 					<c:if test="<%= showCurFolderSearch %>">
-						<td>
-							<input name="<portlet:namespace />keywords" size="30" type="text" />
+						<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-							<input type="submit" value="<liferay-ui:message key="search-folders" />" />
-						</td>
+						<input type="submit" value="<liferay-ui:message key="search-folders" />" />
 					</c:if>
-				</tr>
-				</table>
+
+					<c:if test="<%= showAddFolderButton %>">
+						<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+					</c:if>
+				</div>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<br />

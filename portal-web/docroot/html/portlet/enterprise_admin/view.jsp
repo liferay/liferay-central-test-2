@@ -287,13 +287,6 @@ portletURL.setParameter("tabs3", tabs3);
 			<div class="separator"><!-- --></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER)) ||
-								(portletName.equals(PortletKeys.LOCATION_ADMIN) && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER)) ||
-								(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER)) %>">
-
-					<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';" />
-				</c:if>
-
 				<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE))) %>">
 					<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 				</c:if>
@@ -541,10 +534,6 @@ portletURL.setParameter("tabs3", tabs3);
 			</c:if>
 
 			<c:if test="<%= showButtons %>">
-				<c:if test="<%= (organizationsTab && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !organizationsTab %>">
-					<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (organizationsTab ? "organization" : "location") %>' /></portlet:renderURL>';" />
-				</c:if>
-
 				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
 
 				<br /><br />
@@ -685,8 +674,6 @@ portletURL.setParameter("tabs3", tabs3);
 			<div class="separator"><!-- --></div>
 
 			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-
 				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
 			</c:if>
 
@@ -759,12 +746,6 @@ portletURL.setParameter("tabs3", tabs3);
 			%>
 
 			<div class="separator"><!-- --></div>
-
-			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
-				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-
-				<br /><br />
-			</c:if>
 
 			<%
 			List resultRows = searchContainer.getResultRows();
@@ -850,12 +831,6 @@ portletURL.setParameter("tabs3", tabs3);
 			%>
 
 			<div class="separator"><!-- --></div>
-
-			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-				<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-
-				<br /><br />
-			</c:if>
 
 			<%
 			List resultRows = searchContainer.getResultRows();

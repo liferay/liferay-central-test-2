@@ -45,10 +45,10 @@ PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchCont
 
 <br />
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<input type="submit" value="<liferay-ui:message key="search" />" />
-	</td>
-</tr>
-</table>
+<div>
+	<input type="submit" value="<liferay-ui:message key="search-password-policies" />" />
+
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+		<input type="button" value="<liferay-ui:message key="add-password-policy" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+	</c:if>
+</div>
