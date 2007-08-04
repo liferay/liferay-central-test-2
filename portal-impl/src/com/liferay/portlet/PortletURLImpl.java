@@ -437,8 +437,6 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 		String portalURL = PortalUtil.getPortalURL(_req, _secure);
 
-		sm.append(portalURL);
-
 		try {
 			if (_layoutFriendlyURL == null) {
 				Layout layout = getLayout();
@@ -446,14 +444,6 @@ public class PortletURLImpl implements PortletURL, Serializable {
 				if (layout != null) {
 					_layoutFriendlyURL = GetterUtil.getString(
 						PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
-
-					// A virtual host URL will contain the complete path. Since
-					// that's not needed, strip the redundant portal URL.
-
-					if (_layoutFriendlyURL.startsWith(portalURL)) {
-						_layoutFriendlyURL = _layoutFriendlyURL.substring(
-							portalURL.length(), _layoutFriendlyURL.length());
-					}
 				}
 			}
 		}
@@ -475,6 +465,7 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		}
 
 		if (Validator.isNull(_layoutFriendlyURL)) {
+			sm.append(portalURL);
 			sm.append(themeDisplay.getPathMain());
 			sm.append("/portal/layout?");
 
@@ -484,6 +475,17 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			sm.append(StringPool.AMPERSAND);
 		}
 		else {
+
+			// A virtual host URL will contain the complete path. Do not append
+			// the portal URL if the virtual host URL starts with "http://" or
+			// "https://".
+
+			if (!_layoutFriendlyURL.startsWith(Http.HTTP_WITH_SLASH) &&
+				!_layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+				sm.append(portalURL);
+			}
+
 			sm.append(_layoutFriendlyURL);
 
 			String friendlyURLPath = getPortletFriendlyURLPath();

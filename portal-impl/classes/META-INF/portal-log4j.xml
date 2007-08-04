@@ -249,7 +249,7 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.smtp.SubEthaMessageListenerImpl">

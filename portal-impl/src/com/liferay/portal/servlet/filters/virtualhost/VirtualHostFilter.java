@@ -23,14 +23,12 @@
 package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -151,10 +149,6 @@ public class VirtualHostFilter implements Filter {
 
 		if (layoutSet != null) {
 			try {
-				LayoutLocalServiceUtil.getFriendlyURLLayout(
-					layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-					friendlyURL);
-
 				StringMaker prefix = new StringMaker();
 
 				if (layoutSet.isPrivateLayout()) {
@@ -199,11 +193,6 @@ public class VirtualHostFilter implements Filter {
 
 				return;
 			}
-			catch (NoSuchLayoutException nsle) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsle.getMessage());
-				}
-			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
@@ -225,6 +214,7 @@ public class VirtualHostFilter implements Filter {
 			friendlyURL.startsWith(_PATH_C) ||
 			friendlyURL.startsWith(_PATH_HTML) ||
 			friendlyURL.startsWith(_PATH_IMAGE) ||
+			friendlyURL.startsWith(_PATH_LANGUAGE) ||
 			friendlyURL.startsWith(_PATH_WAP)) {
 
 			return false;
@@ -298,6 +288,8 @@ public class VirtualHostFilter implements Filter {
 	private static String _PATH_HTML = "/html/";
 
 	private static String _PATH_IMAGE = "/image/";
+
+	private static String _PATH_LANGUAGE = "/language";
 
 	private static String _PATH_WAP = "/wap/";
 
