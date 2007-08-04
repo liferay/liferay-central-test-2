@@ -61,7 +61,7 @@ import com.liferay.portlet.RenderResponseFactory;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -640,7 +640,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		lastPathSM.append(portalURL);
 		lastPathSM.append(lastPath.getContextPath());
 		lastPathSM.append(lastPath.getPath());
-		lastPathSM.append(Http.parameterMapToString(parameterMap));
+		lastPathSM.append(HttpUtil.parameterMapToString(parameterMap));
 
 		return lastPathSM.toString();
 	}

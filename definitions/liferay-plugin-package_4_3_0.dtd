@@ -18,7 +18,7 @@ The plugin-package element contains the declarative data of a plugin.
 -->
 <!ELEMENT plugin-package (name, module-id, recommended-deployment-context?,
 types, tags?, short-description, long-description?, change-log, page-url?,
-screenshots?, author, licenses, liferay-versions)>
+screenshots?, author, licenses, liferay-versions, deployment-settings?)>
 
 <!--
 The name element contains the name of the plugin package that will be shown to
@@ -161,3 +161,29 @@ The liferay-version element contains a version of Liferay Portal that is
 supported by the plugin.
 -->
 <!ELEMENT liferay-version (#PCDATA)>
+
+<!--
+The deployment-settings element contains a list of parameters that specify how
+the package should be deployed
+-->
+<!ELEMENT deployment-settings (setting)+>
+
+<!--
+The setting element specifies a name-value pair that provide information of how
+the package should be deployed
+-->
+<!ELEMENT setting (#PCDATA)>
+
+<!--
+The name attribute specifies the name of the setting
+-->
+<!ATTLIST setting
+	name CDATA #IMPLIED
+>
+
+<!--
+The value attribute specifies the value of the setting
+-->
+<!ATTLIST setting
+	value CDATA #IMPLIED
+>

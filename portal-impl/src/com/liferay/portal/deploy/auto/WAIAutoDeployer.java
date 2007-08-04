@@ -25,31 +25,23 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.util.Validator;
 
 import java.io.File;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
- * <a href="PHPPortletAutoDeployer.java.html"><b><i>View Source</i></b></a>
+ * <a href="WAIAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public class PHPPortletAutoDeployer extends PortletAutoDeployer {
+public class WAIAutoDeployer extends PortletAutoDeployer {
 
-	protected PHPPortletAutoDeployer() throws AutoDeployException {
+	protected WAIAutoDeployer() throws AutoDeployException {
 		try {
-			String[] phpJars = new String[] {
-				"quercus.jar", "resin-util.jar", "script-10.jar"
-			};
-
-			for (int i = 0; i < phpJars.length; i++) {
-				String phpJar = phpJars[i];
-
-				jars.add(downloadJar(phpJar));
-			}
-
 			jars.add(DeployUtil.getResourcePath("portals-bridges.jar"));
 		}
 		catch (Exception e) {
@@ -60,22 +52,47 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 	protected void copyXmls(
 		File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
+
 		super.copyXmls(srcFile, displayName, pluginPackage);
+
+		String portletName = displayName;
+
+		if (pluginPackage != null) {
+			portletName = pluginPackage.getName();
+		}
 
 		Map filterMap = new HashMap();
 
-		String portletName = pluginPackage.getName();
-
-		filterMap.put(
-			"portlet_class", "com.liferay.util.bridges.php.PHPPortlet");
-		filterMap.put("portlet_name", portletName);
+		filterMap.put("portlet_name", displayName);
 		filterMap.put("portlet_title", portletName);
 		filterMap.put("restore_current_view", "false");
-		filterMap.put("friendly_url_mapper_class", "");
-		filterMap.put("init_param_name_0", "view-uri");
-		filterMap.put("init_param_value_0", "/index.php");
-		filterMap.put("init_param_name_1", "add-portlet-params");
-		filterMap.put("init_param_value_1", "true");
+
+		if (pluginPackage != null) {
+			Properties settings = pluginPackage.getDeploymentSettings();
+
+			filterMap.put(
+				"portlet_class",
+				settings.getProperty(
+					"wai.portlet", "com.liferay.util.bridges.wai.WAIPortlet"));
+
+			filterMap.put(
+				"friendly_url_mapper_class",
+				settings.getProperty(
+					"wai.friendly.url.mapper",
+					"com.liferay.portlet.WAIFriendlyURLMapper"));
+
+		}
+		else {
+			filterMap.put(
+				"portlet_class", "com.liferay.util.bridges.wai.WAIPortlet");
+
+			filterMap.put(
+				"friendly_url_mapper_class",
+				"com.liferay.portlet.WAIFriendlyURLMapper");
+
+		}
+
+		_setInitParams(filterMap, pluginPackage);
 
 		copyDependencyXml(
 			"liferay-display.xml", srcFile + "/WEB-INF", filterMap);
@@ -83,6 +100,42 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 			"liferay-portlet.xml", srcFile + "/WEB-INF", filterMap);
 		copyDependencyXml(
 			"portlet.xml", srcFile + "/WEB-INF", filterMap);
+
+		copyDependencyXml(
+			"normal_window_state.jsp",
+			srcFile + "/WEB-INF/jsp/liferay/wai");
+
+		copyDependencyXml(
+			"iframe.jsp",
+			srcFile + "/WEB-INF/jsp/liferay/wai");
+
 	}
+
+	private void _setInitParams(Map filterMap, PluginPackage pluginPackage) {
+		for (int i = 0; i < _INIT_PARAM_NAMES.length; i++) {
+			String name = _INIT_PARAM_NAMES[i];
+
+			String value = null;
+
+			if (pluginPackage != null) {
+				pluginPackage.getDeploymentSettings().getProperty(name);
+			}
+
+			if (Validator.isNull(value)) {
+				value = _INIT_PARAM_DEFAULT_VALUES[i];
+			}
+
+			filterMap.put("init_param_name_" + i, name);
+			filterMap.put("init_param_value_" + i, value);
+		}
+	}
+
+	private static String[] _INIT_PARAM_NAMES = new String[] {
+		"wai.connector", "wai.connector.iframe.height.extra"
+	};
+
+	private static String[] _INIT_PARAM_DEFAULT_VALUES = new String[] {
+		"iframe", "40"
+	};
 
 }

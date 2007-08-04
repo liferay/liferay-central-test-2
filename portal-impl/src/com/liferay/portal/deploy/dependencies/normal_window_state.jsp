@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,37 +20,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.deploy.auto.exploded.tomcat;
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
-import com.liferay.portal.deploy.auto.PortletAutoDeployer;
-import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.kernel.plugin.PluginPackage;
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 
-import java.io.File;
+<portlet:defineObjects />
 
-/**
- * <a href="PortletExplodedTomcatDeployer.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Olaf Fricke
- * @author Brian Wing Shun Chan
- *
- */
-public class PortletExplodedTomcatDeployer
-	extends PortletAutoDeployer implements ExplodedTomcatDeployer {
+<%
+String renderURL = (String) renderRequest.getAttribute("renderURL");
+%>
 
-	public void explodedTomcatDeploy(
-		File contextFile, File webAppDir, PluginPackage pluginPackage)
-		throws AutoDeployException {
-
-		try {
-			deployDirectory(
-				webAppDir, getDisplayName(contextFile), false, pluginPackage);
-		}
-		catch (Exception e) {
-			throw new AutoDeployException(e);
-		}
-	}
-
-}
+<div>
+   <a href="<%= renderURL %>">
+      <%= LanguageUtil.get(response.getLocale(), "open") %>
+   </a>
+</div>

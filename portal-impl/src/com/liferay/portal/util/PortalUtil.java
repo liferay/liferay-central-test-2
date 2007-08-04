@@ -80,6 +80,7 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.JS;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -894,7 +895,7 @@ public class PortalUtil {
 
 				queryString =
 					StringPool.AMPERSAND +
-						Http.parameterMapToString(actualParams, false);
+						HttpUtil.parameterMapToString(actualParams, false);
 
 				break;
 			}

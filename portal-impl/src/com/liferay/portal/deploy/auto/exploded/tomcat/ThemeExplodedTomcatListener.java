@@ -58,7 +58,7 @@ public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 			_log.info("Modifying themes for " + file.getPath());
 		}
 
-		_deployer.explodedTomcatDeploy(file, docBaseDir);
+		_deployer.explodedTomcatDeploy(file, docBaseDir, null);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

@@ -23,7 +23,6 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -370,56 +369,6 @@ public class Http {
 		else {
 			return false;
 		}
-	}
-
-	public static String parameterMapToString(Map parameterMap) {
-		return parameterMapToString(parameterMap, true);
-	}
-
-	public static String parameterMapToString(
-		Map parameterMap, boolean addQuestion) {
-
-		StringMaker sm = new StringMaker();
-
-		if (parameterMap.size() > 0) {
-			if (addQuestion) {
-				sm.append(StringPool.QUESTION);
-			}
-
-			Iterator itr = parameterMap.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
-				String name = (String)entry.getKey();
-				Object value = entry.getValue();
-
-				String[] values = null;
-
-				if (value instanceof String[]) {
-					values = (String[])entry.getValue();
-				}
-				else if (value instanceof String) {
-				    values = new String[] {(String)value};
-				}
-				else {
-					throw new IllegalArgumentException(
-						"Values of type " + value.getClass() + " are not " +
-							"supported");
-				}
-
-				for (int i = 0; i < values.length; i++) {
-					sm.append(name);
-					sm.append(StringPool.EQUAL);
-					sm.append(Http.encodeURL(values[i]));
-					sm.append(StringPool.AMPERSAND);
-				}
-			}
-
-			sm.deleteCharAt(sm.length() - 1);
-		}
-
-		return sm.toString();
 	}
 
 	public static String protocolize(String url, boolean secure) {

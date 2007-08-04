@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.plugin;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * <a href="PluginPackage.java.html"><b><i>View Source</i></b></a>
@@ -103,6 +104,10 @@ public interface PluginPackage {
 	public String getGroupId();
 
 	public String getVersion();
+
+	public Properties getDeploymentSettings();
+
+	public void setDeploymentSettings(Properties properties);
 
 	public boolean isLaterVersionThan(PluginPackage pluginPackage);
 

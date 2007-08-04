@@ -72,7 +72,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 			_log.info("Modifying portlets for " + file.getPath());
 		}
 
-		deployer.explodedTomcatDeploy(file, docBaseDir);
+		deployer.explodedTomcatDeploy(file, docBaseDir, null);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

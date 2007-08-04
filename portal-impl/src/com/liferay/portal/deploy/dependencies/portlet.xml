@@ -5,12 +5,12 @@
 		<portlet-name>@portlet_name@</portlet-name>
 		<portlet-class>@portlet_class@</portlet-class>
 		<init-param>
-			<name>view-uri</name>
-			<value>/index.php</value>
+			<name>@init_param_name_0@</name>
+			<value>@init_param_value_0@</value>
 		</init-param>
 		<init-param>
-			<name>add-portlet-params</name>
-			<value>true</value>
+			<name>@init_param_name_1@</name>
+			<value>@init_param_value_1@</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

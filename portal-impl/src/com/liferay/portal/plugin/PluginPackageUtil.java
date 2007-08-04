@@ -341,6 +341,9 @@ public class PluginPackageUtil {
 			_readText(pluginPackageEl.elementText("page-url")));
 		pluginPackage.setDownloadURL(
 			_readText(pluginPackageEl.elementText("download-url")));
+		pluginPackage.setDeploymentSettings(
+			_readProperties(
+				pluginPackageEl.element("deployment-settings"), "setting"));
 
 		return pluginPackage;
 	}

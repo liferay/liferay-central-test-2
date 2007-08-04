@@ -23,6 +23,7 @@
 package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 
 import java.io.File;
 
@@ -35,7 +36,8 @@ import java.io.File;
  */
 public interface ExplodedTomcatDeployer {
 
-	public void explodedTomcatDeploy(File contextFile, File webAppDir)
+	public void explodedTomcatDeploy(
+		File contextFile, File webAppDir, PluginPackage pluginPackage)
 		throws AutoDeployException;
 
 }

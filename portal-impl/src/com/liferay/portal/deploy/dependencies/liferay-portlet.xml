@@ -4,6 +4,8 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>@portlet_name@</portlet-name>
+		<friendly-url-mapper-class>@friendly_url_mapper_class@</friendly-url-mapper-class>
+		<restore-current-view>@restore_current_view@</restore-current-view>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 	</portlet>

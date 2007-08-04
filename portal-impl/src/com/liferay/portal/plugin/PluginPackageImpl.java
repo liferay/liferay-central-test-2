@@ -29,6 +29,7 @@ import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -244,6 +245,14 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		return _moduleId.getGroupId();
 	}
 
+	public Properties getDeploymentSettings() {
+		return _deploymentSettings;
+	}
+
+	public void setDeploymentSettings(Properties deploymentSettings) {
+		_deploymentSettings = deploymentSettings;
+	}
+
 	public int compareTo(Object obj) {
 		if (!(obj instanceof PluginPackage)) {
 			return -1;
@@ -295,5 +304,6 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	private String _downloadURL;
 	private RemotePluginPackageRepository _repository;
 	private String _context;
+	private Properties _deploymentSettings;
 
 }

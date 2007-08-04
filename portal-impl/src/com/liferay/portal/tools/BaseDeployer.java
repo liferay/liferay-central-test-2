@@ -181,7 +181,8 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void copyJars(File srcFile) throws Exception {
+	protected void copyJars(File srcFile, PluginPackage pluginPackage)
+		throws Exception {
 		for (int i = 0; i < jars.size(); i++) {
 			String jarFullName = (String)jars.get(i);
 			String jarName = jarFullName.substring(
@@ -199,7 +200,8 @@ public class BaseDeployer {
 		FileUtil.delete(srcFile + "/WEB-INF/lib/util-jsf.jar");
 	}
 
-	protected void copyTlds(File srcFile) throws Exception {
+	protected void copyTlds(File srcFile, PluginPackage pluginPackage)
+		throws Exception {
 		if (Validator.isNotNull(portletTaglibDTD)) {
 			FileUtil.copyFile(
 				portletTaglibDTD, srcFile + "/WEB-INF/tld/liferay-portlet.tld",
@@ -218,7 +220,9 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void copyXmls(File srcFile, String displayName) throws Exception {
+	protected void copyXmls(
+		File srcFile, String displayName, PluginPackage pluginPackage)
+		throws Exception {
 		copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
@@ -255,25 +259,27 @@ public class BaseDeployer {
 	}
 
 	protected void deployDirectory(
-			File srcFile, String displayName, boolean override)
+		File srcFile, String displayName, boolean override,
+		PluginPackage pluginPackage)
 		throws Exception {
 
-		deployDirectory(srcFile, null, displayName, override);
+		deployDirectory(srcFile, null, displayName, override, pluginPackage);
 	}
 
 	protected void deployDirectory(
-			File srcFile, File deployDir, String displayName, boolean overwrite)
+		File srcFile, File deployDir, String displayName, boolean overwrite,
+		PluginPackage pluginPackage)
 		throws Exception {
 
-		copyJars(srcFile);
-		copyTlds(srcFile);
-		copyXmls(srcFile, displayName);
+		copyJars(srcFile, pluginPackage);
+		copyTlds(srcFile, pluginPackage);
+		copyXmls(srcFile, displayName, pluginPackage);
 
-		updateGeronimoWebXml(srcFile, displayName);
+		updateGeronimoWebXml(srcFile, displayName, pluginPackage);
 
 		File webXml = new File(srcFile + "/WEB-INF/web.xml");
 
-		updateWebXml(webXml, srcFile, displayName);
+		updateWebXml(webXml, srcFile, displayName, pluginPackage);
 
 		if ((deployDir != null) && !baseDir.equals(destDir)) {
 			updateDeployDirectory(srcFile);
@@ -429,7 +435,7 @@ public class BaseDeployer {
 			PluginPackage previousPluginPackage =
 				readPluginPackage(deployDirFile);
 
-			if (previousPluginPackage != null) {
+			if ((pluginPackage != null) && (previousPluginPackage != null)) {
 				if (_log.isInfoEnabled()) {
 					String name = pluginPackage.getName();
 					String previousVersion = previousPluginPackage.getVersion();
@@ -448,11 +454,14 @@ public class BaseDeployer {
 			}
 
 			if (srcFile.isDirectory()) {
-				deployDirectory(srcFile, deployDirFile, displayName, overwrite);
+				deployDirectory(
+					srcFile, deployDirFile, displayName, overwrite,
+					pluginPackage);
 			}
 			else {
 				boolean deployed = deployFile(
-					srcFile, deployDirFile, displayName, overwrite);
+					srcFile, deployDirFile, displayName, overwrite,
+					pluginPackage);
 
 				if (!deployed) {
 					String context = preliminaryContext;
@@ -476,7 +485,8 @@ public class BaseDeployer {
 	}
 
 	protected boolean deployFile(
-			File srcFile, File deployDir, String displayName, boolean overwrite)
+		File srcFile, File deployDir, String displayName, boolean overwrite,
+		PluginPackage pluginPackage)
 		throws Exception {
 
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
@@ -498,7 +508,8 @@ public class BaseDeployer {
 
 		ExpandTask.expand(srcFile, tempDir);
 
-		deployDirectory(tempDir, deployDir, displayName, overwrite);
+		deployDirectory(
+			tempDir, deployDir, displayName, overwrite, pluginPackage);
 
 		DeleteTask.deleteDirectory(tempDir);
 
@@ -707,7 +718,8 @@ public class BaseDeployer {
 	protected void updateDeployDirectory(File srcFile) throws Exception {
 	}
 
-	protected void updateGeronimoWebXml(File srcFile, String displayName)
+	protected void updateGeronimoWebXml(
+		File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
 		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
@@ -741,7 +753,8 @@ public class BaseDeployer {
 	}
 
 	protected void updateWebXml(
-			File webXml, File srcFile, String displayName)
+		File webXml, File srcFile, String displayName,
+		PluginPackage pluginPackage)
 		throws Exception {
 
 		String content = FileUtil.read(webXml);

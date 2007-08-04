@@ -92,6 +92,9 @@ public class FriendlyURLServlet extends HttpServlet {
 			friendlyURLPath = PortalUtil.getPathFriendlyURLPublic();
 		}
 
+		req.setAttribute(
+				WebKeys.FRIENDLY_URL, friendlyURLPath + req.getPathInfo());
+
 		String redirect = mainPath;
 
 		try {

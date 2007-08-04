@@ -60,7 +60,7 @@ public class LayoutTemplateExplodedTomcatListener
 			_log.info("Modifying layout templates for " + file.getPath());
 		}
 
-		_deployer.explodedTomcatDeploy(file, docBaseDir);
+		_deployer.explodedTomcatDeploy(file, docBaseDir, null);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

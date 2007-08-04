@@ -24,6 +24,7 @@ package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.deploy.auto.ThemeAutoDeployer;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 
 import java.io.File;
 
@@ -37,11 +38,13 @@ import java.io.File;
 public class ThemeExplodedTomcatDeployer
 	extends ThemeAutoDeployer implements ExplodedTomcatDeployer {
 
-	public void explodedTomcatDeploy(File contextFile, File webAppDir)
+	public void explodedTomcatDeploy(
+		File contextFile, File webAppDir, PluginPackage pluginPackage)
 		throws AutoDeployException {
 
 		try {
-			deployDirectory(webAppDir, getDisplayName(contextFile), false);
+			deployDirectory(
+				webAppDir, getDisplayName(contextFile), false, pluginPackage);
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);
