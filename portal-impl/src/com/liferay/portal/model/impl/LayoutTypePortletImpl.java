@@ -423,10 +423,7 @@ public class LayoutTypePortletImpl
 		for (int i = 0; i < columns.size(); i++) {
 			String columnId = (String)columns.get(i);
 
-			String columnValue =
-				getTypeSettingsProperties().getProperty(columnId);
-
-			if (StringUtil.contains(columnValue, portletId)) {
+			if (_hasNonstaticPortletId(columnId, portletId)) {
 				return true;
 			}
 
@@ -869,8 +866,14 @@ public class LayoutTypePortletImpl
 		List portlets = new ArrayList();
 
 		for (int i = 0; i < portletIds.length; i++) {
+			String portletId = portletIds[i];
+
+			if (_hasNonstaticPortletId(portletId)) {
+				continue;
+			}
+
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				getLayout().getCompanyId(), portletIds[i]);
+				getLayout().getCompanyId(), portletId);
 
 			if (portlet != null) {
 				Portlet staticPortlet = portlet;
@@ -898,6 +901,49 @@ public class LayoutTypePortletImpl
 		}
 
 		return portlets;
+	}
+
+	private boolean _hasNonstaticPortletId(String portletId) {
+		LayoutTemplate layoutTemplate = getLayoutTemplate();
+
+		List columns = layoutTemplate.getColumns();
+
+		for (int i = 0; i < columns.size(); i++) {
+			String columnId = (String)columns.get(i);
+
+			if (_hasNonstaticPortletId(columnId, portletId)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private boolean _hasNonstaticPortletId(String columnId, String portletId) {
+		String columnValue = getTypeSettingsProperties().getProperty(columnId);
+
+		if (StringUtil.contains(columnValue, portletId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private boolean _hasStaticPortletId(String portletId) {
+		LayoutTemplate layoutTemplate = getLayoutTemplate();
+
+		List columns = layoutTemplate.getColumns();
+
+		for (int i = 0; i < columns.size(); i++) {
+			String columnId = (String)columns.get(i);
+
+			if (_hasStaticPortletId(columnId, portletId)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private boolean _hasStaticPortletId(String columnId, String portletId) {
