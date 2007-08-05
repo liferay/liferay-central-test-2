@@ -859,11 +859,17 @@ public class PropsUtil {
 
 	// Journal Portlet
 
-	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
+	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
 
 	public static final String JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION = "journal.article.force.increment.version";
 
-	public static final String JOURNAL_ARTICLES_CHECK_INTERVAL = "journal.article.check.interval";
+	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
+
+	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
+
+	public static final String JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID = "journal.structure.force.autogenerate.id";
+
+	public static final String JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID = "journal.template.force.autogenerate.id";
 
 	public static final String JOURNAL_IMAGE_SMALL_MAX_SIZE = "journal.image.small.max.size";
 

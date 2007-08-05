@@ -44,7 +44,7 @@ import org.quartz.JobExecutionException;
 public class CheckArticleJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
-		PropsUtil.JOURNAL_ARTICLES_CHECK_INTERVAL)) * Time.MINUTE;
+		PropsUtil.JOURNAL_ARTICLE_CHECK_INTERVAL)) * Time.MINUTE;
 
 	public long getInterval() {
 		return INTERVAL;

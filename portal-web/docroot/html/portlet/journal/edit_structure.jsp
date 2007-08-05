@@ -208,28 +208,45 @@ int tabIndex = 1;
 		<liferay-ui:message key="id" />
 	</td>
 	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
+		<c:choose>
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
 				<c:choose>
 					<c:when test="<%= structure == null %>">
-						<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="structureId" fieldParam="newStructureId" defaultValue="<%= newStructureId %>" />
+						<liferay-ui:message key="autogenerate-id" />
+
+						<input name="<portlet:namespace />newStructureId" type="hidden" value="" />
+						<input name="<portlet:namespace />autoStructureId" type="hidden" value="true" />
 					</c:when>
 					<c:otherwise>
 						<%= structureId %>
 					</c:otherwise>
 				</c:choose>
-			</td>
-			<td style="padding-left: 30px;"></td>
-			<td>
-				<c:if test="<%= structure == null %>">
-					<liferay-ui:input-checkbox param="autoStructureId" />
+			</c:when>
+			<c:otherwise>
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<c:choose>
+							<c:when test="<%= structure == null %>">
+								<liferay-ui:input-field model="<%= JournalStructure.class %>" bean="<%= structure %>" field="structureId" fieldParam="newStructureId" defaultValue="<%= newStructureId %>" />
+							</c:when>
+							<c:otherwise>
+								<%= structureId %>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td style="padding-left: 30px;"></td>
+					<td>
+						<c:if test="<%= structure == null %>">
+							<liferay-ui:input-checkbox param="autoStructureId" />
 
-					<liferay-ui:message key="autogenerate-id" />
-				</c:if>
-			</td>
-		</tr>
-		</table>
+							<liferay-ui:message key="autogenerate-id" />
+						</c:if>
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 <tr>
@@ -326,7 +343,14 @@ tabIndex = tabIndexWrapper.getValue();
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>.focus();
+	<c:choose>
+		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
+			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+		</c:when>
+		<c:otherwise>
+			document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>.focus();
+		</c:otherwise>
+	</c:choose>
 </script>
 
 <%!

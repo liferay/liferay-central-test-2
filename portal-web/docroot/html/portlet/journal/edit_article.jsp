@@ -530,27 +530,44 @@ String[] availableLocales = null;
 				<liferay-ui:message key="id" />
 			</td>
 			<td>
-				<table class="liferay-table">
-				<tr>
-					<td>
+				<c:choose>
+					<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID)) %>">
 						<c:choose>
 							<c:when test="<%= article == null %>">
-								<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="articleId" fieldParam="newArticleId" defaultValue="<%= newArticleId %>" />
+								<liferay-ui:message key="autogenerate-id" />
+
+								<input name="<portlet:namespace />newArticleId" type="hidden" value="" />
+								<input name="<portlet:namespace />autoArticleId" type="hidden" value="true" />
 							</c:when>
 							<c:otherwise>
 								<%= articleId %>
 							</c:otherwise>
 						</c:choose>
-					</td>
-					<td>
-						<c:if test="<%= article == null %>">
-							<liferay-ui:input-checkbox param="autoArticleId" />
+					</c:when>
+					<c:otherwise>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<c:choose>
+									<c:when test="<%= article == null %>">
+										<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="articleId" fieldParam="newArticleId" defaultValue="<%= newArticleId %>" />
+									</c:when>
+									<c:otherwise>
+										<%= articleId %>
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td>
+								<c:if test="<%= article == null %>">
+									<liferay-ui:input-checkbox param="autoArticleId" />
 
-							<liferay-ui:message key="autogenerate-id" />
-						</c:if>
-					</td>
-				</tr>
-				</table>
+									<liferay-ui:message key="autogenerate-id" />
+								</c:if>
+							</td>
+						</tr>
+						</table>
+					</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 		<tr>

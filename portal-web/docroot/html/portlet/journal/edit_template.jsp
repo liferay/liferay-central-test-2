@@ -120,27 +120,44 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<liferay-ui:message key="id" />
 	</td>
 	<td>
-		<table class="liferay-table">
-		<tr>
-			<td>
+		<c:choose>
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
 				<c:choose>
 					<c:when test="<%= template == null %>">
-						<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="templateId" fieldParam="newTemplateId" defaultValue="<%= newTemplateId %>" />
+						<liferay-ui:message key="autogenerate-id" />
+
+						<input name="<portlet:namespace />newTemplateId" type="hidden" value="" />
+						<input name="<portlet:namespace />autoTemplateId" type="hidden" value="true" />
 					</c:when>
 					<c:otherwise>
 						<%= templateId %>
 					</c:otherwise>
 				</c:choose>
-			</td>
-			<td>
-				<c:if test="<%= template == null %>">
-					<liferay-ui:input-checkbox param="autoTemplateId" />
+			</c:when>
+			<c:otherwise>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<c:choose>
+							<c:when test="<%= template == null %>">
+								<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="templateId" fieldParam="newTemplateId" defaultValue="<%= newTemplateId %>" />
+							</c:when>
+							<c:otherwise>
+								<%= templateId %>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td>
+						<c:if test="<%= template == null %>">
+							<liferay-ui:input-checkbox param="autoTemplateId" />
 
-					<liferay-ui:message key="autogenerate-id" />
-				</c:if>
-			</td>
-		</tr>
-		</table>
+							<liferay-ui:message key="autogenerate-id" />
+						</c:if>
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 <tr>
@@ -300,5 +317,12 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>.focus();
+	<c:choose>
+		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
+			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+		</c:when>
+		<c:otherwise>
+			document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>.focus();
+		</c:otherwise>
+	</c:choose>
 </script>
