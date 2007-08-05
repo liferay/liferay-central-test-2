@@ -371,6 +371,24 @@ public class Http {
 		}
 	}
 
+	/**
+	 * @deprecated this method has been moved to
+	 * <code>com.liferay.util.HttpUtil</code>.
+	 */
+	public static String parameterMapToString(Map parameterMap) {
+		return HttpUtil.parameterMapToString(parameterMap);
+	}
+
+	/**
+	 * @deprecated this method has been moved to
+	 * <code>com.liferay.util.HttpUtil</code>.
+	 */
+	public static String parameterMapToString(
+		Map parameterMap, boolean addQuestion) {
+
+		return HttpUtil.parameterMapToString(parameterMap, addQuestion);
+	}
+
 	public static String protocolize(String url, boolean secure) {
 		if (secure) {
 			if (url.startsWith(HTTP_WITH_SLASH)) {

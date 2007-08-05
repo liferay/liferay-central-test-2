@@ -36,24 +36,28 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * <a href="WAIHttpServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class WAIHttpServletRequest extends HttpServletRequestWrapper {
-	public WAIHttpServletRequest(
-			HttpServletRequest req, String contextPath, String pathInfo,
-			String queryString, Map params) {
+
+	public WAIHttpServletRequest(HttpServletRequest req, String contextPath,
+								 String pathInfo, String queryString,
+								 Map params) {
+
 		super(req);
+
 		_contextPath = contextPath;
 		_pathInfo = pathInfo;
 		_queryString = queryString;
 		_params = params;
 	}
 
-	public String getPathInfo() {
-		return super.getPathInfo();
-	}
-
 	public String getContextPath() {
 		return _contextPath;
+	}
+
+	public String getPathInfo() {
+		return super.getPathInfo();
 	}
 
 	public String getQueryString() {
@@ -62,8 +66,10 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 
 	public String getRequestURI() {
 		StringMaker sm = new StringMaker();
+
 		sm.append(getContextPath());
 		sm.append(_pathInfo);
+
 		if (getQueryString().trim().length() > 0) {
 			sm.append(StringPool.QUESTION);
 			sm.append(getQueryString());
@@ -86,9 +92,11 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 
 	public String getParameter(String key) {
 		String[] values = (String[]) _params.get(key);
+
 		if (values == null) {
 			return null;
 		}
+
 		return values[0];
 	}
 
@@ -99,7 +107,6 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 	private String _contextPath;
 	private String _pathInfo;
 	private String _queryString;
-
 	private Map _params;
 
 }

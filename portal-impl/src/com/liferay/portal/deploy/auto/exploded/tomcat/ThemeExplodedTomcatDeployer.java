@@ -39,7 +39,7 @@ public class ThemeExplodedTomcatDeployer
 	extends ThemeAutoDeployer implements ExplodedTomcatDeployer {
 
 	public void explodedTomcatDeploy(
-		File contextFile, File webAppDir, PluginPackage pluginPackage)
+			File contextFile, File webAppDir, PluginPackage pluginPackage)
 		throws AutoDeployException {
 
 		try {

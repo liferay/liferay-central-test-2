@@ -59,14 +59,17 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 			deployer = _deployer;
 		}
-		else if (!isMatchingFile(file, "WEB-INF/liferay-layout-templates.xml")
-			&& !isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml")) {
+		else if (!isMatchingFile(
+					file, "WEB-INF/liferay-layout-templates.xml") &&
+				 !isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml")) {
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Deploying package as a web application");
 			}
+
 			deployer = getWaiDeployer();
-		} else {
+		}
+		else {
 			return;
 		}
 
@@ -102,7 +105,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		LogFactory.getLog(PortletAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
-	private WAIAutoDeployer _waiDeployer;
 	private PHPPortletAutoDeployer _phpDeployer;
+	private WAIAutoDeployer _waiDeployer;
 
 }

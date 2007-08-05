@@ -93,7 +93,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		req.setAttribute(
-				WebKeys.FRIENDLY_URL, friendlyURLPath + req.getPathInfo());
+			WebKeys.FRIENDLY_URL, friendlyURLPath + req.getPathInfo());
 
 		String redirect = mainPath;
 

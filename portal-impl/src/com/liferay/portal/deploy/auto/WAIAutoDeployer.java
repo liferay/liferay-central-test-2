@@ -37,6 +37,7 @@ import java.util.Properties;
  * <a href="WAIAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class WAIAutoDeployer extends PortletAutoDeployer {
 
@@ -50,7 +51,7 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 	}
 
 	protected void copyXmls(
-		File srcFile, String displayName, PluginPackage pluginPackage)
+			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
 		super.copyXmls(srcFile, displayName, pluginPackage);
@@ -80,7 +81,6 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 				settings.getProperty(
 					"wai.friendly.url.mapper",
 					"com.liferay.portlet.WAIFriendlyURLMapper"));
-
 		}
 		else {
 			filterMap.put(
@@ -89,7 +89,6 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 			filterMap.put(
 				"friendly_url_mapper_class",
 				"com.liferay.portlet.WAIFriendlyURLMapper");
-
 		}
 
 		_setInitParams(filterMap, pluginPackage);
@@ -100,14 +99,9 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 			"liferay-portlet.xml", srcFile + "/WEB-INF", filterMap);
 		copyDependencyXml(
 			"portlet.xml", srcFile + "/WEB-INF", filterMap);
-
 		copyDependencyXml(
-			"normal_window_state.jsp",
-			srcFile + "/WEB-INF/jsp/liferay/wai");
-
-		copyDependencyXml(
-			"iframe.jsp",
-			srcFile + "/WEB-INF/jsp/liferay/wai");
+			"normal_window_state.jsp", srcFile + "/WEB-INF/jsp/liferay/wai");
+		copyDependencyXml("iframe.jsp", srcFile + "/WEB-INF/jsp/liferay/wai");
 
 	}
 

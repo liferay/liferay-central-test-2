@@ -58,8 +58,9 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 	}
 
 	protected void copyXmls(
-		File srcFile, String displayName, PluginPackage pluginPackage)
+			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
+
 		super.copyXmls(srcFile, displayName, pluginPackage);
 
 		Map filterMap = new HashMap();

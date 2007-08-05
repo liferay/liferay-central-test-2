@@ -183,6 +183,7 @@ public class BaseDeployer {
 
 	protected void copyJars(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
+
 		for (int i = 0; i < jars.size(); i++) {
 			String jarFullName = (String)jars.get(i);
 			String jarName = jarFullName.substring(
@@ -202,6 +203,7 @@ public class BaseDeployer {
 
 	protected void copyTlds(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
+
 		if (Validator.isNotNull(portletTaglibDTD)) {
 			FileUtil.copyFile(
 				portletTaglibDTD, srcFile + "/WEB-INF/tld/liferay-portlet.tld",
@@ -223,6 +225,7 @@ public class BaseDeployer {
 	protected void copyXmls(
 		File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
+
 		copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
@@ -259,16 +262,16 @@ public class BaseDeployer {
 	}
 
 	protected void deployDirectory(
-		File srcFile, String displayName, boolean override,
-		PluginPackage pluginPackage)
+			File srcFile, String displayName, boolean override,
+			PluginPackage pluginPackage)
 		throws Exception {
 
 		deployDirectory(srcFile, null, displayName, override, pluginPackage);
 	}
 
 	protected void deployDirectory(
-		File srcFile, File deployDir, String displayName, boolean overwrite,
-		PluginPackage pluginPackage)
+			File srcFile, File deployDir, String displayName, boolean overwrite,
+			PluginPackage pluginPackage)
 		throws Exception {
 
 		copyJars(srcFile, pluginPackage);
@@ -485,8 +488,8 @@ public class BaseDeployer {
 	}
 
 	protected boolean deployFile(
-		File srcFile, File deployDir, String displayName, boolean overwrite,
-		PluginPackage pluginPackage)
+			File srcFile, File deployDir, String displayName, boolean overwrite,
+			PluginPackage pluginPackage)
 		throws Exception {
 
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
@@ -719,7 +722,7 @@ public class BaseDeployer {
 	}
 
 	protected void updateGeronimoWebXml(
-		File srcFile, String displayName, PluginPackage pluginPackage)
+			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
 		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
@@ -753,8 +756,8 @@ public class BaseDeployer {
 	}
 
 	protected void updateWebXml(
-		File webXml, File srcFile, String displayName,
-		PluginPackage pluginPackage)
+			File webXml, File srcFile, String displayName,
+			PluginPackage pluginPackage)
 		throws Exception {
 
 		String content = FileUtil.read(webXml);

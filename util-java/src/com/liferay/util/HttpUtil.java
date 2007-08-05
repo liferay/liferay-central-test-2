@@ -33,8 +33,10 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ *
  */
 public class HttpUtil {
+
 	public static String parameterMapToString(Map parameterMap) {
 		return parameterMapToString(parameterMap, true);
 	}

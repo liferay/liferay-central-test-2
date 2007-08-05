@@ -164,25 +164,25 @@ supported by the plugin.
 
 <!--
 The deployment-settings element contains a list of parameters that specify how
-the package should be deployed
+the package should be deployed.
 -->
 <!ELEMENT deployment-settings (setting)+>
 
 <!--
-The setting element specifies a name-value pair that provide information of how
-the package should be deployed
+The setting element specifies a name value pair that provides information of how
+the package should be deployed.
 -->
 <!ELEMENT setting (#PCDATA)>
 
 <!--
-The name attribute specifies the name of the setting
+The name attribute specifies the name of the setting.
 -->
 <!ATTLIST setting
 	name CDATA #IMPLIED
 >
 
 <!--
-The value attribute specifies the value of the setting
+The value attribute specifies the value of the setting.
 -->
 <!ATTLIST setting
 	value CDATA #IMPLIED

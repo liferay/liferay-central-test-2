@@ -29,11 +29,9 @@
 <portlet:defineObjects />
 
 <%
-String renderURL = (String) renderRequest.getAttribute("renderURL");
+String renderURL = (String)renderRequest.getAttribute("renderURL");
 %>
 
 <div>
-   <a href="<%= renderURL %>">
-      <%= LanguageUtil.get(response.getLocale(), "open") %>
-   </a>
+	<a href="<%= renderURL %>"><%= LanguageUtil.get(response.getLocale(), "open") %></a>
 </div>

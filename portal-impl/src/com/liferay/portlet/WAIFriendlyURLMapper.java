@@ -58,13 +58,13 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 			prefix = portletId.substring(0, pos);
 		}
 
-		String appUrl =
-				GetterUtil.get(portletURLImpl.getParameter("appURL"), "");
+		String appUrl = GetterUtil.getString(
+			portletURLImpl.getParameter("appURL"));
 
 		portletURLImpl.addParameterIncludedInPath("p_p_id");
 
 		return StringPool.SLASH + _MAPPING + StringPool.SLASH + prefix +
-				StringPool.SLASH + appUrl;
+			StringPool.SLASH + appUrl;
 	}
 
 	public void populateParams(String friendlyURLPath, Map params) {
@@ -83,12 +83,14 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		}
 
 		String prefix = friendlyURLPath.substring(x + _MAPPING.length() + 1, y);
+
 		String portletId = prefix + PortletImpl.WAR_SEPARATOR + prefix;
 
 		params.put("p_p_id", portletId);
 
-		String path = friendlyURLPath.substring(y);
 		String namespace = PortalUtil.getPortletNamespace(portletId);
+
+		String path = friendlyURLPath.substring(y);
 
 		params.put(namespace + "appURL", path);
 	}
@@ -106,10 +108,10 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	private static final String _MAPPING = "waiapp";
-	private static final String[] _BINARY_EXTENSIONS =
-		new String[] {
-			".css", ".gif", ".png", ".jpg", ".jpeg", ".zip", ".tgz", ".xls",
-			".doc", ".ppt", ".odp", ".js"
-		};
+
+	private static final String[] _BINARY_EXTENSIONS = new String[] {
+		".css", ".doc", ".gif", ".jpeg", ".jpg", ".js", ".odp", ".png", ".ppt",
+		".tgz", ".xls", ".zip",
+	};
 
 }

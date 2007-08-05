@@ -40,7 +40,7 @@ public class PortletExplodedTomcatDeployer
 	extends PortletAutoDeployer implements ExplodedTomcatDeployer {
 
 	public void explodedTomcatDeploy(
-		File contextFile, File webAppDir, PluginPackage pluginPackage)
+			File contextFile, File webAppDir, PluginPackage pluginPackage)
 		throws AutoDeployException {
 
 		try {

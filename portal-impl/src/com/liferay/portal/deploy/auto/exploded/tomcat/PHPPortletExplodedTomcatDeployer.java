@@ -43,7 +43,7 @@ public class PHPPortletExplodedTomcatDeployer
 	}
 
 	public void explodedTomcatDeploy(
-		File contextFile, File webAppDir, PluginPackage pluginPackage)
+			File contextFile, File webAppDir, PluginPackage pluginPackage)
 		throws AutoDeployException {
 
 		try {
