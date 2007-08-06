@@ -20040,7 +20040,7 @@ Liferay.ColorPicker = new Class({
 				foundPortlet = instance._findPortlet(mousePos, foundContainer.area, settings.container);
 				instance._showArea(foundContainer.area, foundContainer.data.nwOffset);
 
-				if (foundPortlet.position.isStatic) {
+				if (foundPortlet && foundPortlet.position.isStatic) {
 					foundPortlet = null;
 				}
 			}
