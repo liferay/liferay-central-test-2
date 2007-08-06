@@ -1443,11 +1443,6 @@ public class PortalUtil {
 
 			// LEP-766
 
-			String strutsCharEncoding =
-				PropsUtil.get(PropsUtil.STRUTS_CHAR_ENCODING);
-
-			req.setCharacterEncoding(strutsCharEncoding);
-
 			res.setContentType(Constants.TEXT_HTML + "; charset=UTF-8");
 
 			rd.include(req, res);
