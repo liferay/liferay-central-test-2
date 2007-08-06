@@ -68,26 +68,24 @@ public class RuntimePortletUtil {
 	public static void processPortlet(
 			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String instanceId,
-			String queryString)
+			RenderResponse renderResponse, String portletId, String queryString)
 		throws Exception {
 
 		processPortlet(
 			sm, ctx, req, res, renderRequest, renderResponse, portletId,
-			instanceId, queryString, null, null, null);
+			queryString, null, null, null);
 	}
 
 	public static void processPortlet(
 			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String instanceId,
-			String queryString, String columnId, Integer columnPos,
-			Integer columnCount)
+			RenderResponse renderResponse, String portletId, String queryString,
+			String columnId, Integer columnPos, Integer columnCount)
 		throws Exception {
 
 		processPortlet(
 			sm, ctx, req, res, renderRequest, renderResponse, null, portletId,
-			instanceId, queryString, columnId, columnPos, columnCount, null);
+			queryString, columnId, columnPos, columnCount, null);
 	}
 
 	public static void processPortlet(
@@ -98,17 +96,16 @@ public class RuntimePortletUtil {
 		throws Exception {
 
 		processPortlet(
-			sm, ctx, req, res, null, null, portlet, portlet.getRootPortletId(),
-			portlet.getInstanceId(), queryString, columnId, columnPos,
-			columnCount, path);
+			sm, ctx, req, res, null, null, portlet, portlet.getPortletId(),
+			queryString, columnId, columnPos, columnCount, path);
 	}
 
 	public static void processPortlet(
 			StringMaker sm, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, Portlet portlet, String portletId,
-			String instanceId, String queryString, String columnId,
-			Integer columnPos, Integer columnCount, String path)
+			String queryString, String columnId, Integer columnPos,
+			Integer columnCount, String path)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -120,6 +117,8 @@ public class RuntimePortletUtil {
 		}
 
 		if ((portlet != null) && portlet.isInstanceable()) {
+			String instanceId = portlet.getInstanceId();
+
 			if (Validator.isNotNull(instanceId) &&
 				Validator.isPassword(instanceId) &&
 				(instanceId.length() == 4)) {

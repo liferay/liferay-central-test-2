@@ -23,7 +23,9 @@
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
+import com.liferay.util.Validator;
 
 import java.io.StringReader;
 
@@ -78,13 +80,19 @@ public class PortletLogic extends RuntimeLogic {
 
 		Element root = doc.getRootElement();
 
-		String portletId = root.attributeValue("name");
+		String rootPortletId = root.attributeValue("name");
 		String instanceId = root.attributeValue("instance");
 		String queryString = root.attributeValue("queryString");
 
+		String portletId = rootPortletId;
+
+		if (Validator.isNotNull(instanceId)) {
+			portletId += PortletImpl.INSTANCE_SEPARATOR + instanceId;
+		}
+
 		RuntimePortletUtil.processPortlet(
 			sm, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
-			instanceId, queryString);
+			queryString);
 	}
 
 	private ServletContext _ctx;

@@ -25,6 +25,7 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
+import com.liferay.util.Validator;
 
 import java.util.Map;
 
@@ -49,8 +50,7 @@ public class PortletLogic extends RuntimeLogic {
 
 		this(ctx, req, res, null, null);
 
-		_portletId = PortletImpl.getRootPortletId(portletId);
-		_instanceId = PortletImpl.getInstanceId(portletId);
+		_portletId = portletId;
 	}
 
 	public PortletLogic(ServletContext ctx, HttpServletRequest req,
@@ -67,18 +67,23 @@ public class PortletLogic extends RuntimeLogic {
 	public void processContent(StringMaker sm, Map attributes)
 		throws Exception {
 
-		String portletId = (String)attributes.get("name");
+		String rootPortletId = (String)attributes.get("name");
 		String instanceId = (String)attributes.get("instance");
 		String queryString = (String)attributes.get("queryString");
 
+		String portletId = _portletId;
+
 		if (portletId == null) {
-			portletId = _portletId;
-			instanceId = _instanceId;
+			portletId = rootPortletId;
+
+			if (Validator.isNotNull(instanceId)) {
+				portletId += PortletImpl.INSTANCE_SEPARATOR + instanceId;
+			}
 		}
 
 		RuntimePortletUtil.processPortlet(
 			sm, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
-			instanceId, queryString);
+			queryString);
 	}
 
 	private ServletContext _ctx;
@@ -87,6 +92,5 @@ public class PortletLogic extends RuntimeLogic {
 	private RenderRequest _renderRequest;
 	private RenderResponse _renderResponse;
 	private String _portletId;
-	private String _instanceId;
 
 }

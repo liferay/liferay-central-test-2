@@ -28,6 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
+import com.liferay.util.Validator;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -90,6 +91,12 @@ public class RuntimeTag extends TagSupport {
 		String rootPortletId = PortletImpl.getRootPortletId(portletName);
 		String instanceId = PortletImpl.getInstanceId(portletName);
 
+		String portletId = rootPortletId;
+
+		if (Validator.isNotNull(instanceId)) {
+			portletId += PortletImpl.INSTANCE_SEPARATOR + instanceId;
+		}
+
 		StringMaker renderPortletSM = new StringMaker();
 
 		try {
@@ -97,7 +104,7 @@ public class RuntimeTag extends TagSupport {
 
 			RuntimePortletUtil.processPortlet(
 				renderPortletSM, ctx, req, res, renderRequest, renderResponse,
-				rootPortletId, instanceId, queryString);
+				portletId, queryString);
 		}
 		finally {
 			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
