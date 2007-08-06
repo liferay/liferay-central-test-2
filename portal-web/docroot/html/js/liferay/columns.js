@@ -18,7 +18,11 @@
 			instance._cache = {};
 
 			jQuery(instance._columns).find(instance._portlets).each(function() {
-				instance.add(this);
+				var portlet = this;
+
+				if (!portlet.isStatic) {
+					instance.add(portlet);
+				}
 			});
 		},
 
