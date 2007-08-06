@@ -73,7 +73,7 @@ public class VirtualHostFilter implements Filter {
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-			SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void init(FilterConfig config) throws ServletException {
 		_ctx = config.getServletContext();

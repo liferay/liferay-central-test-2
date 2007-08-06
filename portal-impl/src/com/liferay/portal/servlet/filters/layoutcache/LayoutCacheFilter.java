@@ -79,7 +79,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-			SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void portalInit() {
 		_pattern = GetterUtil.getInteger(

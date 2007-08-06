@@ -55,9 +55,6 @@ public class CompressionFilter implements Filter {
 	static boolean useCompressionFilter = GetterUtil.getBoolean(
 		SystemProperties.get(CompressionFilter.class.getName()), true);
 
-	public static final String ENCODING = GetterUtil.getString(
-			SystemProperties.get("file.encoding"), "UTF-8");
-
 	static {
 
 		// The compression filter will work on JBoss, Jetty, JOnAS, OC4J, Orion,
