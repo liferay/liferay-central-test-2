@@ -40,7 +40,8 @@ import javax.faces.context.ExternalContext;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="LiferayServletContextAdapter.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayServletContextAdapter.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Neil Griffin
  *

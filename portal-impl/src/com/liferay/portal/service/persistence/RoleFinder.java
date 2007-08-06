@@ -295,8 +295,8 @@ public class RoleFinder {
 			}
 
 			throw new NoSuchRoleException(
-				"No Role exists with the key {companyId=" + companyId + ", name=" +
-					name + "}");
+				"No Role exists with the key {companyId=" + companyId +
+					", name=" + name + "}");
 		}
 		else {
 			return (Role)result;
