@@ -94,7 +94,7 @@
 		<liferay-ui:message key="color-border" />
 	</td>
 	<td>
-		<inputclass="liferay-input-text" name="<portlet:namespace />colorBorder" type="text"  value="<%= colorBorder %>" />
+		<input class="liferay-input-text" name="<portlet:namespace />colorBorder" type="text"  value="<%= colorBorder %>" />
 	</td>
 </tr>
 <tr>
