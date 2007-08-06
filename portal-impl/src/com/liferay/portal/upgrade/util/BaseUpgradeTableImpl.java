@@ -487,7 +487,7 @@ public abstract class BaseUpgradeTableImpl {
 					ps.addBatch();
 
 					if (count == _BATCH_SIZE) {
-						repopulateTableRows(ps);
+						repopulateTableRows(ps, true);
 
 						count = 0;
 					}
@@ -496,13 +496,13 @@ public abstract class BaseUpgradeTableImpl {
 					}
 				}
 				else {
-					repopulateTableRows(ps);
+					repopulateTableRows(ps, false);
 				}
 			}
 
 			if (useBatch) {
 				if (count != 0) {
-					repopulateTableRows(ps);
+					repopulateTableRows(ps, true);
 				}
 			}
 		}
@@ -517,12 +517,19 @@ public abstract class BaseUpgradeTableImpl {
 		}
 	}
 
-	protected void repopulateTableRows(PreparedStatement ps) throws Exception {
+	protected void repopulateTableRows(PreparedStatement ps, boolean batch)
+		throws Exception {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Updating rows for " + _tableName);
 		}
 
-		ps.executeUpdate();
+		if (batch) {
+			ps.executeBatch();
+		}
+		else {
+			ps.executeUpdate();
+		}
 
 		ps.close();
 	}
