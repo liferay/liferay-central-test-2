@@ -76,8 +76,7 @@ public class VelocityFilter implements Filter {
 		SystemProperties.get(VelocityFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get(VelocityFilter.class.getName() + ".encoding"),
-		"UTF-8");
+			SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void init(FilterConfig config) {
 		String pattern = config.getInitParameter("pattern");
@@ -100,8 +99,6 @@ public class VelocityFilter implements Filter {
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		httpReq.setCharacterEncoding(ENCODING);
 
 		String completeURL = Http.getCompleteURL(httpReq);
 

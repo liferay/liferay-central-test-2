@@ -79,8 +79,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get(LayoutCacheFilter.class.getName() + ".encoding"),
-		"UTF-8");
+			SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void portalInit() {
 		_pattern = GetterUtil.getInteger(
@@ -115,8 +114,6 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		httpReq.setCharacterEncoding(ENCODING);
 
 		if (USE_LAYOUT_CACHE_FILTER && !isPortletRequest(httpReq) &&
 			isLayout(httpReq) && !isSignedIn(httpReq) &&

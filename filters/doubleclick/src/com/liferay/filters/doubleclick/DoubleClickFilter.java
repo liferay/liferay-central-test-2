@@ -55,8 +55,7 @@ public class DoubleClickFilter implements Filter {
 		SystemProperties.get(DoubleClickFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get(DoubleClickFilter.class.getName() + ".encoding"),
-		"UTF-8");
+			SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void init(FilterConfig config) throws ServletException {
 	}
@@ -77,8 +76,6 @@ public class DoubleClickFilter implements Filter {
 		if (USE_DOUBLE_CLICK_FILTER) {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
 			HttpServletResponse httpRes = (HttpServletResponse)res;
-
-			httpReq.setCharacterEncoding(ENCODING);
 
 			StopWatch stopWatch = null;
 

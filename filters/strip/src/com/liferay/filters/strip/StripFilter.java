@@ -55,8 +55,7 @@ public class StripFilter implements Filter {
 		SystemProperties.get(StripFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get(StripFilter.class.getName() + ".encoding"),
-		"UTF-8");
+			SystemProperties.get("file.encoding"), "UTF-8");
 
 	public void init(FilterConfig config) {
 	}
@@ -76,8 +75,6 @@ public class StripFilter implements Filter {
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		httpReq.setCharacterEncoding(ENCODING);
 
 		String completeURL = Http.getCompleteURL(httpReq);
 

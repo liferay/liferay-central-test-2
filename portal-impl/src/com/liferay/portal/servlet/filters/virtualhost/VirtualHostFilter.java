@@ -72,6 +72,9 @@ public class VirtualHostFilter implements Filter {
 	public static final boolean USE_VIRTUAL_HOST_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
 
+	public static final String ENCODING = GetterUtil.getString(
+			SystemProperties.get("file.encoding"), "UTF-8");
+
 	public void init(FilterConfig config) throws ServletException {
 		_ctx = config.getServletContext();
 	}
@@ -90,6 +93,8 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
+
+		httpReq.setCharacterEncoding(ENCODING);
 
 		// Company id needs to always be called here so that it's properly set
 		// in subsequent calls

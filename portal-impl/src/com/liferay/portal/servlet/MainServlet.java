@@ -396,13 +396,6 @@ public class MainServlet extends ActionServlet {
 			ctx.setAttribute(WebKeys.ASSOCIATE_KEY, applicationAssociate);
 		}
 
-		// Set character encoding
-
-		String strutsCharEncoding =
-			PropsUtil.get(PropsUtil.STRUTS_CHAR_ENCODING);
-
-		req.setCharacterEncoding(strutsCharEncoding);
-
 		// Encrypt request
 
 		if (ParamUtil.get(req, WebKeys.ENCRYPT, false)) {
