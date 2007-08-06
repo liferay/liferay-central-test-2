@@ -171,7 +171,11 @@ public class EditImageAction extends PortletAction {
 
 			// Update image
 
-			if( Validator.isNull(uploadReq.getFileName("file")) ) file = null;
+			String fileName = uploadReq.getFileName("file");
+
+			if (Validator.isNull(fileName)) {
+				file = null;
+			}
 
 			IGImageServiceUtil.updateImage(
 				imageId, folderId, description, file, contentType, tagsEntries);

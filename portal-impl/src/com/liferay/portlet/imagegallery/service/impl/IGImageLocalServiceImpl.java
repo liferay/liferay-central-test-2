@@ -328,7 +328,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			BufferedImage bufferedImage = null;
 			byte[] bytes = null;
 
-			if( file != null ) {
+			if (file != null) {
 				if (file.exists()) {
 					bufferedImage = ImageIO.read(file);
 					bytes = FileUtil.getBytes(file);
