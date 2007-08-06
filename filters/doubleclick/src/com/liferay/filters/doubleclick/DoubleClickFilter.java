@@ -54,6 +54,9 @@ public class DoubleClickFilter implements Filter {
 	public static final boolean USE_DOUBLE_CLICK_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(DoubleClickFilter.class.getName()), true);
 
+	public static final String ENCODING = GetterUtil.getString(
+		SystemProperties.get("file.encoding"), "UTF-8");
+
 	public void init(FilterConfig config) throws ServletException {
 	}
 
