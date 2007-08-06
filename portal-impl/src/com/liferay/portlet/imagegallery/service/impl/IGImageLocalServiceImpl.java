@@ -328,12 +328,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			BufferedImage bufferedImage = null;
 			byte[] bytes = null;
 
-			if (file.exists()) {
-				bufferedImage = ImageIO.read(file);
-				bytes = FileUtil.getBytes(file);
-			}
+			if( file != null ) {
+				if (file.exists()) {
+					bufferedImage = ImageIO.read(file);
+					bytes = FileUtil.getBytes(file);
+				}
 
-			validate(file, bytes);
+				validate(file, bytes);
+			}
 
 			image.setModifiedDate(new Date());
 			image.setFolderId(folder.getFolderId());
