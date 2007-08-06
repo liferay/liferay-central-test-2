@@ -221,8 +221,6 @@ public class PropsUtil {
 
 	public static final String LOCALE_DEFAULT_REQUEST = "locale.default.request";
 
-	public static final String STRUTS_CHAR_ENCODING = "struts.char.encoding";
-
 	public static final String TIME_ZONES = "time.zones";
 
 	// Organizations and Locations
