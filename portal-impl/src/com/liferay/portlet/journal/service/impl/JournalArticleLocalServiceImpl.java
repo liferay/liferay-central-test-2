@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -40,7 +39,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -64,7 +62,6 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
@@ -761,7 +758,7 @@ public class JournalArticleLocalServiceImpl
 				doc = reader.read(new StringReader(xml));
 
 				root = doc.getRootElement();
-				
+
 				JournalUtil.addAllReservedEls(root, tokens, article);
 
 				xml = JournalUtil.formatXML(doc);

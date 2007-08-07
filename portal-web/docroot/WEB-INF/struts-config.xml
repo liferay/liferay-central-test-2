@@ -701,13 +701,13 @@
 
 		<action path="/journal/export" type="com.liferay.portlet.journal.action.ExportAction" />
 
+		<action path="/journal/get_article" type="com.liferay.portlet.journal.action.GetArticleAction" />
+
 		<action path="/journal/get_article_content" type="com.liferay.portlet.journal.action.GetArticleContentAction" />
 
 		<action path="/journal/get_articles" type="com.liferay.portlet.journal.action.GetArticlesAction" />
 
 		<action path="/journal/get_latest_article_content" type="com.liferay.portlet.journal.action.GetLatestArticleContentAction" />
-
-		<action path="/journal/get_article" type="com.liferay.portlet.journal.action.GetArticleAction" />
 
 		<action path="/journal/get_structure" type="com.liferay.portlet.journal.action.GetStructureAction" />
 

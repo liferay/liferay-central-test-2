@@ -87,6 +87,7 @@ public class GetTemplateAction extends Action {
 				extension = template.getLangType();
 			}
 
+			String fileName = null;
 			byte[] byteArray = script.getBytes();
 
 			String contentType = Constants.TEXT_PLAIN;
@@ -101,12 +102,9 @@ public class GetTemplateAction extends Action {
 
 				contentType = Constants.TEXT_XML;
 			}
-			
-			res.setContentLength(byteArray.length);
-			
-			res.setContentType(contentType + ";charset=UTF-8");
 
-			ServletResponseUtil.write(res, byteArray);
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, contentType + "; charset=UTF-8");
 
 			return null;
 		}

@@ -823,6 +823,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setSignedIn(signedIn);
 		themeDisplay.setPermissionChecker(permissionChecker);
 		themeDisplay.setLocale(locale);
+		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 		themeDisplay.setServerPort(req.getServerPort());

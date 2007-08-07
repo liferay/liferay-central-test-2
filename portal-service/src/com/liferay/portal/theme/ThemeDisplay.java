@@ -250,6 +250,14 @@ public class ThemeDisplay implements Serializable {
 		_locale = locale;
 	}
 
+	public String getLanguageId() {
+		return _languageId;
+	}
+
+	public void setLanguageId(String languageId) {
+		_languageId = languageId;
+	}
+
 	public TimeZone getTimeZone() {
 		return _timeZone;
 	}
@@ -685,6 +693,7 @@ public class ThemeDisplay implements Serializable {
 		_signedIn = false;
 		_permissionChecker = null;
 		_locale = null;
+		_languageId = null;
 		_timeZone = null;
 		_theme = null;
 		_colorScheme = null;
@@ -756,6 +765,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _signedIn;
 	private PermissionChecker _permissionChecker;
 	private Locale _locale;
+	private String _languageId;
 	private TimeZone _timeZone;
 	private Theme _theme;
 	private ColorScheme _colorScheme;

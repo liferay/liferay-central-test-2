@@ -59,13 +59,12 @@ public class GetStructureAction extends Action {
 				JournalStructureLocalServiceUtil.getStructure(
 					groupId, structureId);
 
+			String fileName = null;
 			byte[] byteArray = structure.getXsd().getBytes();
 
-			res.setContentLength(byteArray.length);
-			
-			res.setContentType(Constants.TEXT_XML + ";charset=UTF-8");
-			
-			ServletResponseUtil.write(res, byteArray);
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray,
+				Constants.TEXT_XML + "; charset=UTF-8");
 
 			return null;
 		}

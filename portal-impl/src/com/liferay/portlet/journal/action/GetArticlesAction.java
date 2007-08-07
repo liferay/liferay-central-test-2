@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -82,13 +81,12 @@ public class GetArticlesAction extends Action {
 		try {
 			List articles = getArticles(req);
 
+			String fileName = null;
 			byte[] byteArray = getContent(req, articles);
 
-			res.setContentLength(byteArray.length);
-			
-			res.setContentType(Constants.TEXT_XML + ";charset=UTF-8");
-			
-			ServletResponseUtil.write(res, byteArray);
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray,
+				Constants.TEXT_XML + "; charset=UTF-8");
 
 			return null;
 		}
@@ -168,8 +166,6 @@ public class GetArticlesAction extends Action {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 
-		String languageId = LanguageUtil.getLanguageId(req);
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -188,9 +184,9 @@ public class GetArticlesAction extends Action {
 			JournalArticle article = (JournalArticle)itr.next();
 
 			Element resultEl = resultSetEl.addElement("result");
-			
-			Document articleDoc = reader.read(
-				new StringReader(article.getContentByLocale(languageId)));
+
+			Document articleDoc = reader.read(new StringReader(
+				article.getContentByLocale(themeDisplay.getLanguageId())));
 
 			resultEl.content().add(
 				articleDoc.getRootElement().createCopy());
@@ -198,7 +194,7 @@ public class GetArticlesAction extends Action {
 			if (article.isTemplateDriven()) {
 				resultEl = resultEl.element("root");
 			}
-			
+
 			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
 

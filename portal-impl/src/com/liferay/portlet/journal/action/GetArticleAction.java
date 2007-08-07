@@ -22,23 +22,11 @@
 
 package com.liferay.portlet.journal.action;
 
-import java.io.StringReader;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -46,6 +34,12 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
+
+import java.io.StringReader;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +49,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentFactory;
 import org.dom4j.Element;
@@ -77,49 +72,46 @@ public class GetArticleAction extends Action {
 		try {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId =  ParamUtil.getString(req, "articleId");
-			
-			JournalArticle article = 
-				JournalArticleLocalServiceUtil.getLatestArticle(groupId, 
-						articleId, Boolean.TRUE);			
 
-			String languageId = LanguageUtil.getLanguageId(req);
+			JournalArticle article =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					groupId, articleId, Boolean.TRUE);
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
-			String xml = article.getContentByLocale(languageId);
+			String xml = article.getContentByLocale(
+				themeDisplay.getLanguageId());
 
 			String contentType = Constants.TEXT_HTML;
-			
+
 			Document doc = null;
 
 			Element root = null;
-			
+
 			if (article.isTemplateDriven()) {
 				SAXReader reader = new SAXReader();
 
 				doc = reader.read(new StringReader(xml));
 
 				root = doc.getRootElement();
-				
-				_addProcessingInstructions(doc, themeDisplay, article, groupId);
-				
+
+				addProcessingInstructions(doc, themeDisplay, article);
+
 				JournalUtil.addAllReservedEls(root, tokens, article);
 
 				xml = JournalUtil.formatXML(doc);
-				
+
 				contentType = Constants.TEXT_XML;
 			}
 
+			String fileName = null;
 			byte[] byteArray = xml.getBytes();
-			
-			res.setContentLength(byteArray.length);
-			
-			res.setContentType(contentType + ";charset=UTF-8");
-			
-			ServletResponseUtil.write(res, byteArray);
+
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, contentType + "; charset=UTF-8");
 
 			return null;
 		}
@@ -129,75 +121,84 @@ public class GetArticleAction extends Action {
 			return mapping.findForward(Constants.COMMON_ERROR);
 		}
 	}
-	
-	protected void _addProcessingInstructions(Document doc, 
-		ThemeDisplay themeDisplay, JournalArticle article, long groupId) {
-		
-		// Add styleSheets in reverse order that they should appear in document.
-		
+
+	protected void addProcessingInstructions(
+		Document doc, ThemeDisplay themeDisplay, JournalArticle article) {
+
+		// Add style sheets in the reverse order that they appear in the
+		// document
+
 		// Theme CSS
-		
-		String styleSheetUrl = themeDisplay.getPathThemeCss() + 
-			"/main.css?companyId=" + themeDisplay.getCompanyId() + 
-			"&themeId=" + themeDisplay.getTheme().getThemeId() +
-			"&colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId();
-	
+
+		String url =
+			themeDisplay.getPathThemeCss() + "/main.css?companyId=" +
+				themeDisplay.getCompanyId() + "&themeId=" +
+					themeDisplay.getThemeId() + "&colorSchemeId=" +
+						themeDisplay.getColorSchemeId();
+
 		Map arguments = new LinkedHashMap();
+
 		arguments.put("type", "text/css");
-		arguments.put("href", styleSheetUrl);
-	
-		_addStyleSheet(doc, styleSheetUrl, arguments);		
+		arguments.put("href", url);
 
-		// CSS Cached
-		
-		styleSheetUrl = themeDisplay.getPathMain() + 
-			"/portal/css_cached?themeId=" + 
-			themeDisplay.getTheme().getThemeId() + 
-			"&colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId();
+		addStyleSheet(doc, url, arguments);
 
-		arguments = new LinkedHashMap();
+		// CSS cached
+
+		url =
+			themeDisplay.getPathMain() + "/portal/css_cached?themeId=" +
+				themeDisplay.getThemeId() + "&colorSchemeId=" +
+					themeDisplay.getColorSchemeId();
+
+		arguments.clear();
+
 		arguments.put("type", "text/css");
-		arguments.put("href", styleSheetUrl);
+		arguments.put("href", url);
 
-		_addStyleSheet(doc, styleSheetUrl, arguments);
-		
-		// XSL Template
-		
+		addStyleSheet(doc, url, arguments);
+
+		// XSL template
+
 		String templateId = article.getTemplateId();
-		
+
 		if (Validator.isNotNull(templateId)) {
 			JournalTemplate template = null;
-			
+
 			try {
 				template = JournalTemplateLocalServiceUtil.getTemplate(
-						groupId, templateId); 
+					article.getGroupId(), templateId);
 
-				if (Validator.equals(template.getLangType(), 
+				if (Validator.equals(
+						template.getLangType(),
 						JournalTemplateImpl.LANG_TYPE_XSL)) {
-		
-					styleSheetUrl = themeDisplay.getPathMain() + 
-						"/journal/get_template?groupId=" + groupId + 
-						"&templateId=" + templateId;
-			
-					arguments = new LinkedHashMap();
+
+					url =
+						themeDisplay.getPathMain() +
+							"/journal/get_template?groupId=" +
+								article.getGroupId() + "&templateId=" +
+									templateId;
+
+					arguments.clear();
+
 					arguments.put("type", "text/xsl");
-					arguments.put("href", styleSheetUrl);
-					
-					_addStyleSheet(doc, styleSheetUrl, arguments);			
-				}			
+					arguments.put("href", url);
+
+					addStyleSheet(doc, url, arguments);
+				}
 			}
 			catch (Exception e) {
-			}			
+			}
 		}
 	}
-	
-	protected void _addStyleSheet(Document doc, String url, Map arguments) {
+
+	protected void addStyleSheet(Document doc, String url, Map arguments) {
 		List content = doc.content();
 
-		ProcessingInstruction pi
-				= DocumentFactory.getInstance().createProcessingInstruction(
-						"xml-stylesheet", arguments);
+		ProcessingInstruction pi =
+			DocumentFactory.getInstance().createProcessingInstruction(
+				"xml-stylesheet", arguments);
 
 		content.add(0, pi);
 	}
+
 }

@@ -126,17 +126,18 @@ public class ViewArticleContentAction extends Action {
 					uploadReq);
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
-				
+
 				JournalArticle article = new JournalArticleImpl();
+
+				article.setUserId(user.getUserId());
+				article.setCreateDate(createDate);
+				article.setModifiedDate(modifiedDate);
 				article.setArticleId(articleId);
 				article.setVersion(version);
 				article.setTitle(title);
 				article.setDescription(description);
-				article.setCreateDate(createDate);
-				article.setModifiedDate(modifiedDate);
 				article.setDisplayDate(displayDate);
-				article.setUserId(user.getUserId());
-				
+
 				JournalUtil.addAllReservedEls(root, tokens, article);
 
 				xml = JournalUtil.formatXML(doc);

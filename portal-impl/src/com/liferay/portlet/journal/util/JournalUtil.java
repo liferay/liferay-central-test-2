@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.NoSuchOrganizationException;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -89,6 +87,7 @@ import org.dom4j.io.SAXReader;
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalUtil {
@@ -158,10 +157,10 @@ public class JournalUtil {
 			StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE),
 			value);
 	}
-	
-	public static void addAllReservedEls(Element root, Map tokens, 
-		JournalArticle article) {
-		
+
+	public static void addAllReservedEls(
+		Element root, Map tokens, JournalArticle article) {
+
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
 			article.getArticleId());
@@ -244,7 +243,7 @@ public class JournalUtil {
 		JournalUtil.addReservedEl(
 			root, tokens,
 			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
-			userEmailAddress);		
+			userEmailAddress);
 
 		JournalUtil.addReservedEl(
 			root, tokens,
