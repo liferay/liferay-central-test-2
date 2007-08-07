@@ -395,6 +395,8 @@ public class PropsUtil {
 
 	public static final String AUTH_FORWARD_BY_LAST_PATH = "auth.forward.by.last.path";
 
+	public static final String AUTH_FORWARD_BY_REDIRECT = "auth.forward.by.redirect";
+
 	public static final String AUTH_FORWARD_LAST_PATHS = "auth.forward.last.paths";
 
 	public static final String AUTH_PUBLIC_PATHS = "auth.public.paths";

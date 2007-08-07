@@ -41,6 +41,8 @@ if (company.isStrangers()) {
 	tabs1Names += ",create-account";
 }
 
+String redirect = ParamUtil.getString(request, "redirect", StringPool.BLANK);
+
 PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 %>
 
@@ -62,6 +64,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm1">
 				<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
 				<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
+				<input name="redirect" type="hidden" value="<%= redirect %>" />
 
 				<c:if test="<%= sectionSelected.booleanValue() %>">
 					<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>

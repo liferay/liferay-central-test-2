@@ -98,13 +98,29 @@ public class LayoutAction extends Action {
 			WebKeys.LAYOUT_DEFAULT);
 
 		if ((layoutDefault != null) && (layoutDefault.booleanValue())) {
-			String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+			Layout requestedLayout =
+				(Layout)req.getAttribute(WebKeys.REQUESTED_LAYOUT);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Redirect default layout to " + redirect);
+			if (requestedLayout != null) {
+				String redirect =
+					themeDisplay.getURLSignIn() + "?redirect=" +
+						PortalUtil.getLayoutURL(requestedLayout, themeDisplay);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Redirect requested layout to " + redirect);
+				}
+
+				res.sendRedirect(redirect);
 			}
+			else {
+				String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
-			res.sendRedirect(redirect);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Redirect default layout to " + redirect);
+				}
+
+				res.sendRedirect(redirect);
+			}
 
 			return null;
 		}

@@ -653,6 +653,13 @@ public class ServicePreAction extends Action {
 			try {
 				layout = LayoutLocalServiceUtil.getLayout(plid);
 
+				if (!signedIn &&
+					GetterUtil.getBoolean(PropsUtil.get(
+						PropsUtil.AUTH_FORWARD_BY_REDIRECT))) {
+
+					req.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
+				}
+
 				if (!isViewableCommunity(
 						user, layout.getGroupId(), layout.isPrivateLayout(),
 						permissionChecker)) {

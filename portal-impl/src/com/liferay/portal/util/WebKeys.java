@@ -249,6 +249,8 @@ public class WebKeys {
 
 	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
 
+	public static final String REQUESTED_LAYOUT = "REQUESTED_LAYOUT";
+
 	public static final String REVERSE_AJAX = "REVERSE_AJAX";
 
 	public static final String ROLE = "ROLE";

@@ -277,7 +277,14 @@ public class LoginAction extends Action {
 					return mapping.findForward("/portal/touch_protected.jsp");
 				}
 				else {
-					res.sendRedirect(themeDisplay.getPathMain());
+					String redirect = ParamUtil.getString(req, "redirect");
+
+					if (Validator.isNotNull(redirect)) {
+						res.sendRedirect(redirect);
+					}
+					else {
+						res.sendRedirect(themeDisplay.getPathMain());
+					}
 
 					return null;
 				}
