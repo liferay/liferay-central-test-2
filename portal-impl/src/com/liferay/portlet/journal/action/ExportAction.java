@@ -89,9 +89,13 @@ public class ExportAction extends Action {
 
 	public static final String COMPANY_ID = "liferay.com";
 
-	public static final long DEFAULT_SITE_GROUP_ID = 1;
+	public static final long DEFAULT_SITE_GROUP_ID = 14;
 
-	public static final long  DEFAULT_CMS_GROUP_ID = 1;
+	public static final long DEFAULT_CMS_GROUP_ID = 14;
+
+	public static final long DEFAULT_USER_ID = 2;
+
+	public static final String DEFAULT_USER_NAME = "Joe Bloggs";
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
@@ -293,8 +297,8 @@ public class ExportAction extends Action {
 				addColumn(sm, article.getCompanyId());
 				//addColumn(sm, article.getUserId());
 				//addColumn(sm, article.getUserName());
-				addColumn(sm, 2);
-				addColumn(sm, "Joe Bloggs");
+				addColumn(sm, DEFAULT_USER_ID);
+				addColumn(sm, DEFAULT_USER_NAME);
 				addColumn(sm, article.getCreateDate());
 				addColumn(sm, article.getModifiedDate());
 				addColumn(sm, article.getArticleId());
@@ -309,8 +313,8 @@ public class ExportAction extends Action {
 				addColumn(sm, article.getApproved());
 				//addColumn(sm, article.getApprovedByUserId());
 				//addColumn(sm, article.getApprovedByUserName());
-				addColumn(sm, "liferay.com.1");
-				addColumn(sm, "Joe Bloggs");
+				addColumn(sm, DEFAULT_USER_ID);
+				addColumn(sm, DEFAULT_USER_NAME);
 				addColumn(sm, article.getExpired());
 				//addColumn(sm, article.getExpirationDate());
 				//addColumn(sm, article.getReviewDate());
