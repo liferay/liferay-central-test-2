@@ -242,7 +242,7 @@ public class ExportAction extends Action {
 				IGImageLocalServiceUtil.getImages(folder.getFolderId()));
 		}
 
-		//sm.append("\n");
+		sm.append("\n");
 
 		Collections.sort(igImages);
 
@@ -268,7 +268,7 @@ public class ExportAction extends Action {
 			sm.append(");\n");
 		}
 
-		//sm.append("\n");
+		sm.append("\n");
 
 		itr = JournalArticleLocalServiceUtil.getArticles(
 			cmsGroupId).iterator();

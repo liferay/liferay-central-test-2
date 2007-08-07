@@ -25,28 +25,36 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isSignedIn() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
-	<script type="text/javascript">
 
-		<%
-		int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
-		int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
-		int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
-		int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
-		int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
+	<%
+	String autoUserId = CookieUtil.get(request.getCookies(), CookieKeys.ID);
+	String autoPassword = CookieUtil.get(request.getCookies(), CookieKeys.PASSWORD);
+	%>
 
-		Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
+	<c:if test="<%= Validator.isNull(autoUserId) || Validator.isNull(autoPassword) %>">
+		<script type="text/javascript">
 
-		sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
-		%>
+			<%
+			int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
+			int sessionTimeoutMinute = sessionTimeout * (int)Time.MINUTE;
+			int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
+			int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
+			int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
-		<c:if test="<%= sessionTimeoutWarning > 0 %>">
-			Liferay.Session.init(
-				{
-					autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
-					timeout: <%= sessionTimeout %>,
-					timeoutWarning: <%= sessionTimeoutWarning %>
-				}
-			);
-		</c:if>
-	</script>
+			Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
+
+			sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
+			%>
+
+			<c:if test="<%= sessionTimeoutWarning > 0 %>">
+				Liferay.Session.init(
+					{
+						autoExtend: <%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND)) %>,
+						timeout: <%= sessionTimeout %>,
+						timeoutWarning: <%= sessionTimeoutWarning %>
+					}
+				);
+			</c:if>
+		</script>
+	</c:if>
 </c:if>

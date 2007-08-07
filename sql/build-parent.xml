@@ -10,7 +10,7 @@
 			classname="com.liferay.portal.tools.DBBuilder"
 			classpathref="project.classpath"
 			fork="true"
-			maxmemory="256m"
+			maxmemory="512m"
 			newenvironment="true"
 		>
 			<arg value="${database.name}" />

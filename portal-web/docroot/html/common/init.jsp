@@ -134,6 +134,7 @@
 <%@ page import="com.liferay.util.BeanUtil" %>
 <%@ page import="com.liferay.util.BrowserSniffer" %>
 <%@ page import="com.liferay.util.CollectionFactory" %>
+<%@ page import="com.liferay.util.CookieUtil" %>
 <%@ page import="com.liferay.util.CreditCard" %>
 <%@ page import="com.liferay.util.DateUtil" %>
 <%@ page import="com.liferay.util.FileUtil" %>
