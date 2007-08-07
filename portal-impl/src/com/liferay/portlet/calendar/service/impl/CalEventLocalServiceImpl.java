@@ -477,10 +477,30 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 				Recurrence recurrence = event.getRecurrenceObj();
 
-				if (recurrence.isInRecurrence(
-						getRecurrenceCal(cal, tzICal, event))) {
+				try {
 
-					events.add(event);
+					// LEP-3468
+
+					if ((recurrence.getFrequency() == Recurrence.DAILY) &&
+						(recurrence.getInterval() <= 0)) {
+
+						recurrence.setInterval(1);
+
+						event.setRecurrence(Base64.objectToString(recurrence));
+
+						event = CalEventUtil.update(event);
+
+						recurrence = event.getRecurrenceObj();
+					}
+
+					if (recurrence.isInRecurrence(
+							getRecurrenceCal(cal, tzICal, event))) {
+
+						events.add(event);
+					}
+				}
+				catch (Exception e) {
+					_log.error(e.getMessage());
 				}
 			}
 

@@ -233,6 +233,12 @@ public class EditEventAction extends PortletAction {
 					int dailyInterval = ParamUtil.getInteger(
 						req, "dailyInterval");
 
+					// LEP-3468
+
+					if (dailyInterval <= 0) {
+						dailyInterval = 1;
+					}
+
 					recurrence.setInterval(dailyInterval);
 				}
 				else {
