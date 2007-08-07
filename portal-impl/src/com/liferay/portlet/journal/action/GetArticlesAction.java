@@ -22,14 +22,12 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -38,7 +36,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.DAOParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -50,6 +47,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -70,7 +68,7 @@ import org.dom4j.io.SAXReader;
 /**
  * <a href="GetArticlesAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Brian Wing Shun Chan
  *
  */
@@ -84,11 +82,13 @@ public class GetArticlesAction extends Action {
 		try {
 			List articles = getArticles(req);
 
-			String fileName = "articles.xml";
 			byte[] byteArray = getContent(req, articles);
 
-			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, Constants.TEXT_XML);
+			res.setContentLength(byteArray.length);
+			
+			res.setContentType(Constants.TEXT_XML + ";charset=UTF-8");
+			
+			ServletResponseUtil.write(res, byteArray);
 
 			return null;
 		}
@@ -166,7 +166,14 @@ public class GetArticlesAction extends Action {
 	protected byte[] getContent(HttpServletRequest req, List articles)
 		throws Exception {
 
+		long groupId = ParamUtil.getLong(req, "groupId");
+
 		String languageId = LanguageUtil.getLanguageId(req);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 		Document resultsDoc =
 			DocumentFactory.getInstance().createDocument();
@@ -181,53 +188,18 @@ public class GetArticlesAction extends Action {
 			JournalArticle article = (JournalArticle)itr.next();
 
 			Element resultEl = resultSetEl.addElement("result");
-
-			resultEl.addAttribute("article-id", article.getArticleId());
-
-			Element infoEl = resultEl.addElement("reserved-info");
-
-			infoEl.addElement("version").addText(
-				String.valueOf(article.getVersion()));
-
-			infoEl.addElement("title").addText(article.getTitle());
-
-			infoEl.addElement("description").addText(article.getDescription());
-
-			infoEl.addElement("create-date").addText(
-				Time.getRFC822(article.getCreateDate()));
-
-			infoEl.addElement("modified-date").addText(
-				Time.getRFC822(article.getModifiedDate()));
-
-			infoEl.addElement("display-date").addText(
-				Time.getRFC822(article.getDisplayDate()));
-
-			infoEl.addElement("author-id").addText(
-				String.valueOf(article.getUserId()));
-
-			String userName = StringPool.BLANK;
-			String userEmailAddress = StringPool.BLANK;
-
-			User user = null;
-
-			try {
-				user = UserLocalServiceUtil.getUserById(article.getUserId());
-
-				userName = user.getFullName();
-				userEmailAddress = user.getEmailAddress();
-			}
-			catch (NoSuchUserException nsue) {
-			}
-
-			infoEl.addElement("author-name").addText(userName);
-
-			infoEl.addElement("author-email-address").addText(userEmailAddress);
-
+			
 			Document articleDoc = reader.read(
 				new StringReader(article.getContentByLocale(languageId)));
 
 			resultEl.content().add(
 				articleDoc.getRootElement().createCopy());
+
+			if (article.isTemplateDriven()) {
+				resultEl = resultEl.element("root");
+			}
+			
+			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
 
 		return JournalUtil.formatXML(resultsDoc).getBytes();

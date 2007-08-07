@@ -30,9 +30,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -67,6 +67,7 @@ import org.dom4j.io.SAXReader;
  * <a href="ViewArticleContentAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class ViewArticleContentAction extends Action {
@@ -125,53 +126,18 @@ public class ViewArticleContentAction extends Action {
 					uploadReq);
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
-
-				JournalUtil.addReservedEl(
-					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
-					articleId);
-
-				JournalUtil.addReservedEl(
-					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
-					Double.toString(version));
-
-				JournalUtil.addReservedEl(
-					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
-					title);
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_DESCRIPTION,
-					description);
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
-					createDate.toString());
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
-					modifiedDate.toString());
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
-					displayDate.toString());
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
-					String.valueOf(user.getUserId()));
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_NAME,
-					user.getFullName());
-
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
-					user.getEmailAddress());
+				
+				JournalArticle article = new JournalArticleImpl();
+				article.setArticleId(articleId);
+				article.setVersion(version);
+				article.setTitle(title);
+				article.setDescription(description);
+				article.setCreateDate(createDate);
+				article.setModifiedDate(modifiedDate);
+				article.setDisplayDate(displayDate);
+				article.setUserId(user.getUserId());
+				
+				JournalUtil.addAllReservedEls(root, tokens, article);
 
 				xml = JournalUtil.formatXML(doc);
 

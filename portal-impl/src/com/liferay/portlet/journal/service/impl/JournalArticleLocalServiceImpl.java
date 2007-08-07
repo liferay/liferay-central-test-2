@@ -761,68 +761,9 @@ public class JournalArticleLocalServiceImpl
 				doc = reader.read(new StringReader(xml));
 
 				root = doc.getRootElement();
-			}
+				
+				JournalUtil.addAllReservedEls(root, tokens, article);
 
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
-				article.getArticleId());
-
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
-				Double.toString(article.getVersion()));
-
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
-				article.getTitle());
-
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_DESCRIPTION,
-				article.getDescription());
-
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
-				article.getCreateDate().toString());
-
-			JournalUtil.addReservedEl(
-				root, tokens,
-				JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
-				article.getModifiedDate().toString());
-
-			if (article.getDisplayDate() != null) {
-				JournalUtil.addReservedEl(
-					root, tokens,
-					JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
-					article.getDisplayDate().toString());
-			}
-
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
-				String.valueOf(article.getUserId()));
-
-			String userName = StringPool.BLANK;
-			String userEmailAddress = StringPool.BLANK;
-
-			User user = null;
-
-			try {
-				user = UserLocalServiceUtil.getUserById(article.getUserId());
-
-				userName = user.getFullName();
-				userEmailAddress = user.getEmailAddress();
-			}
-			catch (NoSuchUserException nsue) {
-			}
-
-			JournalUtil.addReservedEl(
-				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_NAME,
-				userName);
-
-			JournalUtil.addReservedEl(
-				root, tokens,
-				JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
-				userEmailAddress);
-
-			if (article.isTemplateDriven()) {
 				xml = JournalUtil.formatXML(doc);
 			}
 		}

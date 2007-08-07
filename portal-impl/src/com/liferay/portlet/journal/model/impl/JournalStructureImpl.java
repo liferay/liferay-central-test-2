@@ -64,6 +64,18 @@ public class JournalStructureImpl
 	public static final String RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS =
 		"reserved-article-author-email_address";
 
+	public static final String RESERVED_ARTICLE_AUTHOR_COMMENTS =
+		"reserved-article-author-comments";
+
+	public static final String RESERVED_ARTICLE_AUTHOR_ORGANIZATION =
+		"reserved-article-author-organization";
+
+	public static final String RESERVED_ARTICLE_AUTHOR_LOCATION =
+		"reserved-article-author-location";
+
+	public static final String RESERVED_ARTICLE_AUTHOR_JOB_TITLE =
+		"reserved-article-author-job-title";
+
 	public JournalStructureImpl() {
 	}
 

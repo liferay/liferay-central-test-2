@@ -22,10 +22,16 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.NoSuchOrganizationException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
@@ -35,6 +41,7 @@ import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
@@ -150,6 +157,114 @@ public class JournalUtil {
 		tokens.put(
 			StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE),
 			value);
+	}
+	
+	public static void addAllReservedEls(Element root, Map tokens, 
+		JournalArticle article) {
+		
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
+			article.getArticleId());
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
+			Double.toString(article.getVersion()));
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
+			article.getTitle());
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_DESCRIPTION,
+			article.getDescription());
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
+			article.getCreateDate().toString());
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
+			article.getModifiedDate().toString());
+
+		if (article.getDisplayDate() != null) {
+			JournalUtil.addReservedEl(
+				root, tokens,
+				JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
+				article.getDisplayDate().toString());
+		}
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
+			String.valueOf(article.getUserId()));
+
+		String userName = StringPool.BLANK;
+		String userEmailAddress = StringPool.BLANK;
+		String userComments = StringPool.BLANK;
+		String userOrganizationName = StringPool.BLANK;
+		String userLocationName = StringPool.BLANK;
+		String userJobTitle = StringPool.BLANK;
+
+		User user = null;
+
+		try {
+			user = UserLocalServiceUtil.getUserById(article.getUserId());
+
+			userName = user.getFullName();
+			userEmailAddress = user.getEmailAddress();
+			userComments = user.getComments();
+
+			Organization organization = user.getOrganization();
+
+			if (organization != null) {
+				userOrganizationName = organization.getName();
+			}
+
+			Organization location = user.getLocation();
+
+			if (location != null) {
+				userLocationName = location.getName();
+			}
+
+			Contact contact = user.getContact();
+
+			if (contact != null) {
+				userJobTitle = contact.getJobTitle();
+			}
+		}
+		catch (PortalException pe) {
+		}
+		catch (SystemException se) {
+		}
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_NAME,
+			userName);
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
+			userEmailAddress);		
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_COMMENTS,
+			userComments);
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ORGANIZATION,
+			userOrganizationName);
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_LOCATION,
+			userLocationName);
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_JOB_TITLE,
+			userJobTitle);
 	}
 
 	public static String formatVM(String vm) {
