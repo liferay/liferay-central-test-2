@@ -514,6 +514,13 @@ public class JournalArticleLocalServiceUtil {
 			templateId);
 	}
 
+	public static boolean hasArticle(long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.hasArticle(groupId, articleId);
+	}
+
 	public static boolean isLatestVersion(long groupId,
 		java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException, 

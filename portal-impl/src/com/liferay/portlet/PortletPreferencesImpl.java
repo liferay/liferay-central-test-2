@@ -198,6 +198,10 @@ public class PortletPreferencesImpl
 		}
 	}
 
+	public void reset() {
+		_preferences.clear();
+	}
+
 	public void reset(String key) throws ReadOnlyException {
 		if (isReadOnly(key)) {
 			throw new ReadOnlyException(key);
@@ -372,7 +376,7 @@ public class PortletPreferencesImpl
 	private int _ownerType;
 	private long _plid;
 	private String _portletId;
-	private Map _preferences = null;
-	private PortletPreferences _defaultPreferences = null;
+	private Map _preferences;
+	private PortletPreferences _defaultPreferences;
 
 }

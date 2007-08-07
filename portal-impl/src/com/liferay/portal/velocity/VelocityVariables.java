@@ -264,6 +264,10 @@ public class VelocityVariables {
 
 		vc.put("portletURLFactory", PortletURLFactory.getInstance());
 
+		// Portlet preferences
+
+		vc.put("velocityPortletPreferences", new VelocityPortletPreferences());
+
 		// Randomizer
 
 		vc.put("randomizer", Randomizer_IW.getInstance().getWrappedInstance());

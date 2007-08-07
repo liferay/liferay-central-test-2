@@ -37,6 +37,7 @@ import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.util.Validator;
 
 import java.util.List;
 import java.util.Map;
@@ -119,6 +120,15 @@ public class PortletPreferencesLocalServiceImpl
 			String portletId)
 		throws PortalException, SystemException {
 
+		return getPreferences(
+			companyId, ownerId, ownerType, plid, portletId, null);
+	}
+
+	public javax.portlet.PortletPreferences getPreferences(
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String defaultPreferences)
+		throws PortalException, SystemException {
+
 		Map prefsPool = PortletPreferencesLocalUtil.getPreferencesPool(
 			ownerId, ownerType);
 
@@ -148,14 +158,16 @@ public class PortletPreferencesLocalServiceImpl
 				portletPreferences.setPlid(plid);
 				portletPreferences.setPortletId(portletId);
 
-				if (portlet == null) {
-					portletPreferences.setPreferences(
-						PortletImpl.DEFAULT_PREFERENCES);
+				if (Validator.isNull(defaultPreferences)) {
+					if (portlet == null) {
+						defaultPreferences = PortletImpl.DEFAULT_PREFERENCES;
+					}
+					else {
+						defaultPreferences = portlet.getDefaultPreferences();
+					}
 				}
-				else {
-					portletPreferences.setPreferences(
-						portlet.getDefaultPreferences());
-				}
+
+				portletPreferences.setPreferences(defaultPreferences);
 
 				PortletPreferencesUtil.update(portletPreferences);
 			}

@@ -1016,6 +1016,19 @@ public class JournalArticleLocalServiceImpl
 		return JournalArticleUtil.countByG_T(groupId, templateId);
 	}
 
+	public boolean hasArticle(long groupId, String articleId)
+		throws SystemException {
+
+		try {
+			getArticle(groupId, articleId);
+
+			return true;
+		}
+		catch (PortalException pe) {
+			return false;
+		}
+	}
+
 	public boolean isLatestVersion(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {

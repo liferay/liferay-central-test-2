@@ -302,6 +302,9 @@ public interface JournalArticleLocalService {
 	public int getTemplateArticlesCount(long groupId,
 		java.lang.String templateId) throws com.liferay.portal.SystemException;
 
+	public boolean hasArticle(long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException;
+
 	public boolean isLatestVersion(long groupId, java.lang.String articleId,
 		double version)
 		throws com.liferay.portal.SystemException, 

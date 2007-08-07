@@ -97,6 +97,12 @@ public interface PortletPreferencesLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public javax.portlet.PortletPreferences getPreferences(long companyId,
+		long ownerId, int ownerType, long plid, java.lang.String portletId,
+		java.lang.String defaultPreferences)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
 		javax.portlet.PortletPreferences prefs)

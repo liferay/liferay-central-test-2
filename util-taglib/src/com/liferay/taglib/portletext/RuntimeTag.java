@@ -25,11 +25,12 @@ package com.liferay.taglib.portletext;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 import com.liferay.util.Validator;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -66,6 +67,15 @@ public class RuntimeTag extends TagSupport {
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
+		doTag(portletName, null, null, pageContext, ctx, req, res);
+	}
+
+	public static void doTag(
+			String portletName, String queryString, String defaultPreferences,
+			PageContext pageContext, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
 		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
@@ -88,19 +98,18 @@ public class RuntimeTag extends TagSupport {
 			renderResponse = (RenderResponse)portletResponse;
 		}
 
-		String rootPortletId = PortletImpl.getRootPortletId(portletName);
-		String instanceId = PortletImpl.getInstanceId(portletName);
-
-		String portletId = rootPortletId;
-
-		if (Validator.isNotNull(instanceId)) {
-			portletId += PortletImpl.INSTANCE_SEPARATOR + instanceId;
-		}
+		String portletId = portletName;
 
 		StringMaker renderPortletSM = new StringMaker();
 
 		try {
 			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
+
+			if (Validator.isNotNull(defaultPreferences)) {
+				PortletPreferences prefs =
+					PortletPreferencesFactory.getPortletSetup(
+						req, portletId, true, true, defaultPreferences);
+			}
 
 			RuntimePortletUtil.processPortlet(
 				renderPortletSM, ctx, req, res, renderRequest, renderResponse,
@@ -157,9 +166,14 @@ public class RuntimeTag extends TagSupport {
 		_queryString = queryString;
 	}
 
+	public void setDefaultPreferences(String defaultPreferences) {
+		_defaultPreferences = defaultPreferences;
+	}
+
 	private static Log _log = LogFactory.getLog(RuntimeTag.class);
 
 	private String _portletName;
 	private String _queryString;
+	private String _defaultPreferences;
 
 }

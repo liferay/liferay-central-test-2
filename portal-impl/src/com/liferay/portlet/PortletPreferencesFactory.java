@@ -272,6 +272,15 @@ public class PortletPreferencesFactory {
 			boolean uniquePerGroup)
 		throws PortalException, SystemException {
 
+		return getPortletSetup(
+			req, portletId, uniquePerLayout, uniquePerGroup, null);
+	}
+
+	public static PortletPreferences getPortletSetup(
+			HttpServletRequest req, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
+		throws PortalException, SystemException {
+
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
@@ -292,7 +301,8 @@ public class PortletPreferencesFactory {
 		}
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
-			layout.getCompanyId(), ownerId, ownerType, plid, portletId);
+			layout.getCompanyId(), ownerId, ownerType, plid, portletId,
+			defaultPreferences);
 	}
 
 	public static PortletPreferences getPortletSetup(

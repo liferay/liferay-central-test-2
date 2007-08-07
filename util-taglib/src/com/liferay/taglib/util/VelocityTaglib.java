@@ -440,6 +440,19 @@ public class VelocityTaglib {
 		return _res.getString();
 	}
 
+	public String runtime(
+			String portletName, String queryString, String defaultPreferences)
+		throws Exception {
+
+		_res.recycle();
+
+		RuntimeTag.doTag(
+			portletName, queryString, defaultPreferences, null, _ctx, _req,
+			_res);
+
+		return _res.getString();
+	}
+
 	public String search() throws Exception {
 		_res.recycle();
 

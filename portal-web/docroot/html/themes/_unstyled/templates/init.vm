@@ -51,6 +51,8 @@
 
 #set ( $is_signed_in = $theme_display.isSignedIn() )
 
+#set ( $group_id = $theme_display.getPortletGroupId() )
+
 ## ---------- URLs ---------- ##
 
 #set ( $show_add_content = $theme_display.isShowAddContentIcon() )
