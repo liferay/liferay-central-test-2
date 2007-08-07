@@ -161,7 +161,7 @@ public class GetArticleAction extends Action {
 		String templateId = article.getTemplateId();
 		
 		styleSheetUrl = themeDisplay.getPathMain() + 
-			"/journal/get_raw_template?groupId=" + groupId + 
+			"/journal/get_template?groupId=" + groupId + 
 			"&templateId=" + templateId;
 
 		arguments = new LinkedHashMap();
