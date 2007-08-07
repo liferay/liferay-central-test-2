@@ -35,11 +35,16 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -160,15 +165,30 @@ public class GetArticleAction extends Action {
 		
 		String templateId = article.getTemplateId();
 		
-		styleSheetUrl = themeDisplay.getPathMain() + 
-			"/journal/get_template?groupId=" + groupId + 
-			"&templateId=" + templateId;
+		if (Validator.isNotNull(templateId)) {
+			JournalTemplate template = null;
+			
+			try {
+				template = JournalTemplateLocalServiceUtil.getTemplate(
+						groupId, templateId); 
 
-		arguments = new LinkedHashMap();
-		arguments.put("type", "text/xsl");
-		arguments.put("href", styleSheetUrl);
+				if (Validator.equals(template.getLangType(), 
+						JournalTemplateImpl.LANG_TYPE_XSL)) {
 		
-		_addStyleSheet(doc, styleSheetUrl, arguments);
+					styleSheetUrl = themeDisplay.getPathMain() + 
+						"/journal/get_template?groupId=" + groupId + 
+						"&templateId=" + templateId;
+			
+					arguments = new LinkedHashMap();
+					arguments.put("type", "text/xsl");
+					arguments.put("href", styleSheetUrl);
+					
+					_addStyleSheet(doc, styleSheetUrl, arguments);			
+				}			
+			}
+			catch (Exception e) {
+			}			
+		}
 	}
 	
 	protected void _addStyleSheet(Document doc, String url, Map arguments) {
