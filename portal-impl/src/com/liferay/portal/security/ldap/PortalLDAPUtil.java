@@ -683,7 +683,7 @@ public class PortalLDAPUtil {
 
 		}
 
-		if (user != null) {
+		if (user == null) {
 			try {
 				user = UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoPassword, password, password,
