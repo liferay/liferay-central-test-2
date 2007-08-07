@@ -41,6 +41,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetStructureAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class GetStructureAction extends Action {
@@ -58,11 +59,13 @@ public class GetStructureAction extends Action {
 				JournalStructureLocalServiceUtil.getStructure(
 					groupId, structureId);
 
-			String fileName = structure.getStructureId() + ".xml";
 			byte[] byteArray = structure.getXsd().getBytes();
 
-			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, Constants.TEXT_XML);
+			res.setContentLength(byteArray.length);
+			
+			res.setContentType(Constants.TEXT_XML + ";charset=UTF-8");
+			
+			ServletResponseUtil.write(res, byteArray);
 
 			return null;
 		}

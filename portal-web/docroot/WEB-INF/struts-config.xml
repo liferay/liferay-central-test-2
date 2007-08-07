@@ -707,6 +707,8 @@
 
 		<action path="/journal/get_latest_article_content" type="com.liferay.portlet.journal.action.GetLatestArticleContentAction" />
 
+		<action path="/journal/get_article" type="com.liferay.portlet.journal.action.GetArticleAction" />
+
 		<action path="/journal/get_structure" type="com.liferay.portlet.journal.action.GetStructureAction" />
 
 		<action path="/journal/get_template" type="com.liferay.portlet.journal.action.GetTemplateAction" />
