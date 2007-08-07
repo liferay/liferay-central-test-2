@@ -80,4 +80,7 @@ public interface JournalArticleImageLocalService {
 	public long getArticleImageId(long groupId, java.lang.String articleId,
 		double version, java.lang.String elName, java.lang.String languageId,
 		boolean tempImage) throws com.liferay.portal.SystemException;
+
+	public java.util.List getArticleImages(long groupId)
+		throws com.liferay.portal.SystemException;
 }

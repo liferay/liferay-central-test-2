@@ -114,4 +114,11 @@ public class JournalArticleImageLocalServiceUtil {
 		return journalArticleImageLocalService.getArticleImageId(groupId,
 			articleId, version, elName, languageId, tempImage);
 	}
+
+	public static java.util.List getArticleImages(long groupId)
+		throws com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getArticleImages(groupId);
+	}
 }

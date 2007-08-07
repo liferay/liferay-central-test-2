@@ -84,6 +84,13 @@ public class JournalArticleResourceLocalServiceUtil {
 		return journalArticleResourceLocalService.getArticleResource(articleResourceId);
 	}
 
+	public static java.util.List getArticleResources(long groupId)
+		throws com.liferay.portal.SystemException {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
+		return journalArticleResourceLocalService.getArticleResources(groupId);
+	}
+
 	public static long getArticleResourcePrimKey(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 

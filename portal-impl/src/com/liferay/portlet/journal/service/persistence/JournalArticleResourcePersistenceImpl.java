@@ -194,6 +194,188 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByGroupId(long groupId) throws SystemException {
+		String finderClassName = JournalArticleResource.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleResource WHERE ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public List findByGroupId(long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = JournalArticleResource.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleResource WHERE ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public JournalArticleResource findByGroupId_First(long groupId,
+		OrderByComparator obc)
+		throws NoSuchArticleResourceException, SystemException {
+		List list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticleResource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchArticleResourceException(msg.toString());
+		}
+		else {
+			return (JournalArticleResource)list.get(0);
+		}
+	}
+
+	public JournalArticleResource findByGroupId_Last(long groupId,
+		OrderByComparator obc)
+		throws NoSuchArticleResourceException, SystemException {
+		int count = countByGroupId(groupId);
+		List list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticleResource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchArticleResourceException(msg.toString());
+		}
+		else {
+			return (JournalArticleResource)list.get(0);
+		}
+	}
+
+	public JournalArticleResource[] findByGroupId_PrevAndNext(
+		long resourcePrimKey, long groupId, OrderByComparator obc)
+		throws NoSuchArticleResourceException, SystemException {
+		JournalArticleResource journalArticleResource = findByPrimaryKey(resourcePrimKey);
+		int count = countByGroupId(groupId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalArticleResource WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalArticleResource);
+			JournalArticleResource[] array = new JournalArticleResourceImpl[3];
+			array[0] = (JournalArticleResource)objArray[0];
+			array[1] = (JournalArticleResource)objArray[1];
+			array[2] = (JournalArticleResource)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public JournalArticleResource findByG_A(long groupId, String articleId)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = fetchByG_A(groupId,
@@ -390,6 +572,15 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByGroupId(long groupId) throws SystemException {
+		Iterator itr = findByGroupId(groupId).iterator();
+
+		while (itr.hasNext()) {
+			JournalArticleResource journalArticleResource = (JournalArticleResource)itr.next();
+			remove(journalArticleResource);
+		}
+	}
+
 	public void removeByG_A(long groupId, String articleId)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = findByG_A(groupId,
@@ -402,6 +593,59 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((JournalArticleResource)itr.next());
+		}
+	}
+
+	public int countByGroupId(long groupId) throws SystemException {
+		String finderClassName = JournalArticleResource.class.getName();
+		String finderMethodName = "countByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleResource WHERE ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

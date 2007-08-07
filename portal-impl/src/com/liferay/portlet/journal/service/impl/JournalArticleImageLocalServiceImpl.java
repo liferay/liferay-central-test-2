@@ -33,6 +33,7 @@ import com.liferay.portlet.journal.service.base.JournalArticleImageLocalServiceB
 import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * <a href="JournalArticleImageLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -146,6 +147,10 @@ public class JournalArticleImageLocalServiceImpl
 		}
 
 		return articleImage.getArticleImageId();
+	}
+
+	public List getArticleImages(long groupId) throws SystemException {
+		return JournalArticleImageUtil.findByGroupId(groupId);
 	}
 
 }

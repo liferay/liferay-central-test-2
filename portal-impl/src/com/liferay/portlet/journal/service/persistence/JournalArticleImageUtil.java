@@ -152,6 +152,45 @@ public class JournalArticleImageUtil {
 		return getPersistence().fetchByPrimaryKey(articleImageId);
 	}
 
+	public static java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleImage[] findByGroupId_PrevAndNext(
+		long articleImageId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException {
+		return getPersistence().findByGroupId_PrevAndNext(articleImageId,
+			groupId, obc);
+	}
+
 	public static java.util.List findByTempImage(boolean tempImage)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByTempImage(tempImage);
@@ -285,6 +324,11 @@ public class JournalArticleImageUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByTempImage(boolean tempImage)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByTempImage(tempImage);
@@ -306,6 +350,11 @@ public class JournalArticleImageUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByTempImage(boolean tempImage)

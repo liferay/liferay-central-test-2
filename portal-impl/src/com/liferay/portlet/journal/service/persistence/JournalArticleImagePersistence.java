@@ -57,6 +57,32 @@ public interface JournalArticleImagePersistence {
 	public com.liferay.portlet.journal.model.JournalArticleImage fetchByPrimaryKey(
 		long articleImageId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByGroupId(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException;
+
+	public com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException;
+
+	public com.liferay.portlet.journal.model.JournalArticleImage[] findByGroupId_PrevAndNext(
+		long articleImageId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException;
+
 	public java.util.List findByTempImage(boolean tempImage)
 		throws com.liferay.portal.SystemException;
 
@@ -141,6 +167,9 @@ public interface JournalArticleImagePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByTempImage(boolean tempImage)
 		throws com.liferay.portal.SystemException;
 
@@ -153,6 +182,9 @@ public interface JournalArticleImagePersistence {
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByTempImage(boolean tempImage)
 		throws com.liferay.portal.SystemException;

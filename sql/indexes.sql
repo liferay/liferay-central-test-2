@@ -74,10 +74,12 @@ create index IX_85C52EEC on JournalArticle (groupId, articleId, version);
 create index IX_2E207659 on JournalArticle (groupId, structureId);
 create index IX_8DEAE14E on JournalArticle (groupId, templateId);
 
+create index IX_3B51BB68 on JournalArticleImage (groupId);
 create index IX_158B526F on JournalArticleImage (groupId, articleId, version);
 create index IX_D67292FC on JournalArticleImage (groupId, articleId, version, elName, languageId);
 create index IX_D4121315 on JournalArticleImage (tempImage);
 
+create index IX_F8433677 on JournalArticleResource (groupId);
 create index IX_88DF994A on JournalArticleResource (groupId, articleId);
 
 create index IX_6838E427 on JournalContentSearch (groupId, articleId);

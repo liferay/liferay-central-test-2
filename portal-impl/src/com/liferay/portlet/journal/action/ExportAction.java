@@ -47,11 +47,15 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
@@ -325,6 +329,48 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
+		itr = JournalArticleImageLocalServiceUtil.getArticleImages(
+			cmsGroupId).iterator();
+
+		while (itr.hasNext()) {
+			JournalArticleImage articleImage = (JournalArticleImage)itr.next();
+
+			sm.append("insert into JournalArticleImage (");
+			sm.append("articleImageId, groupId, articleId, version, elName, ");
+			sm.append("languageId, tempImage");
+			sm.append(") values (");
+			addColumn(sm, articleImage.getArticleImageId());
+			addColumn(sm, articleImage.getGroupId());
+			addColumn(sm, articleImage.getArticleId());
+			addColumn(sm, articleImage.getVersion());
+			addColumn(sm, articleImage.getElName());
+			addColumn(sm, articleImage.getLanguageId());
+			addColumn(sm, articleImage.getTempImage());
+			removeTrailingComma(sm);
+			sm.append(");\n");
+		}
+
+		sm.append("\n");
+
+		itr = JournalArticleResourceLocalServiceUtil.getArticleResources(
+			cmsGroupId).iterator();
+
+		while (itr.hasNext()) {
+			JournalArticleResource articleResource =
+				(JournalArticleResource)itr.next();
+
+			sm.append("insert into JournalArticleResource (");
+			sm.append("resourcePrimKey, groupId, articleId");
+			sm.append(") values (");
+			addColumn(sm, articleResource.getResourcePrimKey());
+			addColumn(sm, articleResource.getGroupId());
+			addColumn(sm, articleResource.getArticleId());
+			removeTrailingComma(sm);
+			sm.append(");\n");
+		}
+
+		sm.append("\n");
+
 		itr = journalContentSearches.iterator();
 
 		while (itr.hasNext()) {
@@ -342,7 +388,6 @@ public class ExportAction extends Action {
 			addColumn(sm, contentSearch.getLayoutId());
 			addColumn(sm, contentSearch.getPortletId());
 			addColumn(sm, contentSearch.getArticleId());
-
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}

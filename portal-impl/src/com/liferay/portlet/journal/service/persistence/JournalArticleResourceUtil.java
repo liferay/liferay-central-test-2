@@ -152,6 +152,45 @@ public class JournalArticleResourceUtil {
 		return getPersistence().fetchByPrimaryKey(resourcePrimKey);
 	}
 
+	public static java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleResource findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleResourceException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleResource findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleResourceException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleResource[] findByGroupId_PrevAndNext(
+		long resourcePrimKey, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleResourceException {
+		return getPersistence().findByGroupId_PrevAndNext(resourcePrimKey,
+			groupId, obc);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleResource findByG_A(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
@@ -194,6 +233,11 @@ public class JournalArticleResourceUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByG_A(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
@@ -202,6 +246,11 @@ public class JournalArticleResourceUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByG_A(long groupId, java.lang.String articleId)

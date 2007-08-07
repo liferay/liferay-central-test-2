@@ -29,6 +29,8 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.base.JournalArticleResourceLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 
+import java.util.List;
+
 /**
  * <a href="JournalArticleResourceLocalServiceImpl.java.html"><b><i>View Source
  * </i></b></a>
@@ -70,6 +72,10 @@ public class JournalArticleResourceLocalServiceImpl
 		}
 
 		return articleResource.getResourcePrimKey();
+	}
+
+	public List getArticleResources(long groupId) throws SystemException {
+		return JournalArticleResourceUtil.findByGroupId(groupId);
 	}
 
 }
