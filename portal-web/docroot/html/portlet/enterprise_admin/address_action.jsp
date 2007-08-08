@@ -27,6 +27,8 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+String className = ParamUtil.getString(request, "className");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Address address = (Address)row.getObject();
@@ -35,6 +37,7 @@ Address address = (Address)row.getObject();
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_address" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="className" value="<%= className %>" />
 	<portlet:param name="addressId" value="<%= String.valueOf(address.getAddressId()) %>" />
 </portlet:renderURL>
 
