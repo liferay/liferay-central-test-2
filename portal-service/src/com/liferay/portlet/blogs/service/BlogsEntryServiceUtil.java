@@ -109,6 +109,14 @@ public class BlogsEntryServiceUtil {
 		return blogsEntryService.getEntry(entryId);
 	}
 
+	public static java.util.List getGroupEntries(long groupId, int max)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+
+		return blogsEntryService.getGroupEntries(groupId, max);
+	}
+
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
 		java.lang.String entryURL)

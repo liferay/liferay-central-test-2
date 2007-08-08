@@ -151,6 +151,27 @@ public class BlogsEntryServiceImpl
 		return BlogsEntryLocalServiceUtil.getEntry(entryId);
 	}
 
+	public List getGroupEntries(long groupId, int max)
+		throws PortalException, SystemException {
+
+		List entries = BlogsEntryLocalServiceUtil.getGroupEntries(
+			groupId, 0, max);
+
+		Iterator itr = entries.iterator();
+
+		while (itr.hasNext()) {
+			BlogsEntry entry = (BlogsEntry)itr.next();
+
+			if (!BlogsEntryPermission.contains(
+					getPermissionChecker(), entry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return entries;
+	}
+
 	public String getGroupEntriesRSS(
 			long groupId, int max, String type, double version,
 			String feedURL, String entryURL)
@@ -168,20 +189,7 @@ public class BlogsEntryServiceImpl
 			name = user.getFullName();
 		}
 
-		List blogsEntries = BlogsEntryLocalServiceUtil.getGroupEntries(
-			groupId, 0, max);
-
-		Iterator itr = blogsEntries.iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
-
-			if (!BlogsEntryPermission.contains(
-					getPermissionChecker(), entry, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
+		List blogsEntries = getGroupEntries(groupId, max);
 
 		return exportToRSS(
 			name, null, type, version, feedURL, entryURL, blogsEntries);

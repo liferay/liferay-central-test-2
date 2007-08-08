@@ -18039,6 +18039,13 @@ Liferay.Service.Blogs.BlogsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getGroupEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getGroupEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getGroupEntriesRSS: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getGroupEntriesRSS";

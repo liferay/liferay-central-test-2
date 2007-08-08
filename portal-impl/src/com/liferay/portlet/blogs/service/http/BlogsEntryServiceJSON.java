@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.service.http;
 
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -122,6 +123,15 @@ public class BlogsEntryServiceJSON {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getGroupEntries(long groupId, int max)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = BlogsEntryServiceUtil.getGroupEntries(groupId,
+				max);
+
+		return BlogsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,

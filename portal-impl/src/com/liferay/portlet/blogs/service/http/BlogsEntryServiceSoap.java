@@ -160,6 +160,20 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getGroupEntries(
+		long groupId, int max) throws RemoteException {
+		try {
+			java.util.List returnValue = BlogsEntryServiceUtil.getGroupEntries(groupId,
+					max);
+
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
 		java.lang.String entryURL) throws RemoteException {
