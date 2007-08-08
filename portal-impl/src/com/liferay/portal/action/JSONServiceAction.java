@@ -26,22 +26,18 @@ import com.liferay.portal.struts.JSONAction;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * <a href="JSONServiceAction.java.html"><b><i>View Source</i></b></a>
@@ -158,6 +154,11 @@ public class JSONServiceAction extends JSONAction {
 				 parameterTypeName.equals(Long.class.getName())) {
 
 			return new Long(ParamUtil.getLong(req, parameter));
+		}
+		else if (parameterTypeName.equals("double") ||
+				 parameterTypeName.equals(Double.class.getName())) {
+
+			return new Double(ParamUtil.getDouble(req, parameter));
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
 			return ParamUtil.getString(req, parameter);
