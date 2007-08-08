@@ -1074,7 +1074,7 @@ create table TagsProperty (
 	modifiedDate DATE null,
 	entryId LONG,
 	key_ VARCHAR(75) null,
-	value VARCHAR(75) null
+	value VARCHAR(300) null
 );
 
 create table TagsSource (
