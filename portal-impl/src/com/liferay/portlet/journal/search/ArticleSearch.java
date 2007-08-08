@@ -60,7 +60,7 @@ public class ArticleSearch extends SearchContainer {
 
 		orderableHeaders.put("id", "id");
 		orderableHeaders.put("version", "version");
-		orderableHeaders.put("title", "title");
+		orderableHeaders.put("name", "title");
 		orderableHeaders.put("modified-date", "modified-date");
 		orderableHeaders.put("display-date", "display-date");
 	}
