@@ -281,7 +281,8 @@ public class Html {
 	}
 
 	public static String toInputSafe(String text) {
-		return StringUtil.replace(text, "&", "&amp;");
+		String tmpString = StringUtil.replace(text, "&", "&amp;");
+		return StringUtil.replace(tmpString, "\"", "&quot;");
 	}
 
 	private static boolean _isScriptTag(String text, int start) {
