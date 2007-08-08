@@ -36,7 +36,7 @@ import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyFinder;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
-import com.liferay.util.Validator;
+import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -167,36 +167,12 @@ public class TagsPropertyLocalServiceImpl
 	protected void validate(String key, String value)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(key)) {
+		if (!TagsUtil.isValidWord(key)) {
 			throw new PropertyKeyException();
 		}
-		else {
-			char[] c = key.toCharArray();
 
-			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
-					(c[i] != ' ') && (c[i] != '-') && (c[i] != '_') &&
-					(c[i] != '(') && (c[i] != ')')) {
-
-					throw new PropertyKeyException();
-				}
-			}
-		}
-
-		if (Validator.isNull(value)) {
+		if (!TagsUtil.isValidWord(value)) {
 			throw new PropertyValueException();
-		}
-		else {
-			char[] c = value.toCharArray();
-
-			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
-					(c[i] != ' ') && (c[i] != '-') && (c[i] != '_') &&
-					(c[i] != '(') && (c[i] != ')')) {
-
-					throw new PropertyValueException();
-				}
-			}
 		}
 	}
 

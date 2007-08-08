@@ -41,6 +41,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
+import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -330,20 +331,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	protected void validate(String name)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(name)) {
+		if (!TagsUtil.isValidWord(name)) {
 			throw new EntryNameException();
-		}
-		else {
-			char[] c = name.toCharArray();
-
-			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
-					(c[i] != ' ') && (c[i] != '-') && (c[i] != '_') &&
-					(c[i] != '(') && (c[i] != ')')) {
-
-					throw new EntryNameException();
-				}
-			}
 		}
 	}
 
