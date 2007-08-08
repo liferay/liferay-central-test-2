@@ -151,7 +151,7 @@ public class GetArticlesAction extends Action {
 
 		OrderByComparator obc = new ArticleModifiedDateComparator(false);
 
-		if (orderBy.equals("displayDate")) {
+		if (orderBy.equals("display-date")) {
 			obc = new ArticleDisplayDateComparator(false);
 		}
 
