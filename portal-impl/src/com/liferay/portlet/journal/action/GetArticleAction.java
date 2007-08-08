@@ -140,6 +140,7 @@ public class GetArticleAction extends Action {
 
 		arguments.put("type", "text/css");
 		arguments.put("href", url);
+		arguments.put("title", "theme css");
 
 		addStyleSheet(doc, url, arguments);
 
@@ -154,6 +155,8 @@ public class GetArticleAction extends Action {
 
 		arguments.put("type", "text/css");
 		arguments.put("href", url);
+		arguments.put("title", "cached css");
+		arguments.put("alternate", "yes");
 
 		addStyleSheet(doc, url, arguments);
 
@@ -182,6 +185,7 @@ public class GetArticleAction extends Action {
 
 					arguments.put("type", "text/xsl");
 					arguments.put("href", url);
+					arguments.put("title", "xsl");
 
 					addStyleSheet(doc, url, arguments);
 				}
