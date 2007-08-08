@@ -33,5 +33,5 @@
 ##                         in the #foreach clause
 ##
 ## Additionally, the variable $journalTemplatesPath can be used to include
-## another Journal template, e.g. #parse("$journalTemplatesPath/LAYOUT-PARENT")
+## another Journal template, e.g. #parse ("$journalTemplatesPath/LAYOUT-PARENT")
 ##
