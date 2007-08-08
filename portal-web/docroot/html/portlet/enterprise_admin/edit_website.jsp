@@ -31,8 +31,8 @@ Website website = (Website)request.getAttribute(WebKeys.WEBSITE);
 
 long websiteId = BeanParamUtil.getLong(website, request, "websiteId");
 
-String className = BeanParamUtil.getString(website, request, "className");
-String classPK = BeanParamUtil.getString(website, request, "classPK");
+String className = ParamUtil.getString(request, "className");
+long classPK = BeanParamUtil.getLong(website, request, "classPK");
 
 int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 %>

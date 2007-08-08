@@ -31,8 +31,8 @@ EmailAddress emailAddress = (EmailAddress)request.getAttribute(WebKeys.EMAIL_ADD
 
 long emailAddressId = BeanParamUtil.getLong(emailAddress, request, "emailAddressId");
 
-String className = BeanParamUtil.getString(emailAddress, request, "className");
-String classPK = BeanParamUtil.getString(emailAddress, request, "classPK");
+String className = ParamUtil.getString(request, "className");
+long classPK = BeanParamUtil.getLong(emailAddress, request, "classPK");
 
 int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 %>

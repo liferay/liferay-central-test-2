@@ -31,8 +31,8 @@ Phone phone = (Phone)request.getAttribute(WebKeys.PHONE);
 
 long phoneId = BeanParamUtil.getLong(phone, request, "phoneId");
 
-String className = BeanParamUtil.getString(phone, request, "className");
-String classPK = BeanParamUtil.getString(phone, request, "classPK");
+String className = ParamUtil.getString(request, "className");
+long classPK = BeanParamUtil.getLong(phone, request, "classPK");
 
 int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 %>

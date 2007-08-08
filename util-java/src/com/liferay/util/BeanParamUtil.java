@@ -53,7 +53,7 @@ public class BeanParamUtil {
 					(Boolean)PropertyUtils.getSimpleProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(param + " " + e.getMessage());
 			}
 		}
 
@@ -82,7 +82,7 @@ public class BeanParamUtil {
 					(Double)PropertyUtils.getSimpleProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(param + " " + e.getMessage());
 			}
 		}
 
@@ -111,7 +111,7 @@ public class BeanParamUtil {
 					(Integer)PropertyUtils.getSimpleProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(param + " " + e.getMessage());
 			}
 		}
 
@@ -138,7 +138,7 @@ public class BeanParamUtil {
 					(Long)PropertyUtils.getSimpleProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(param + " " + e.getMessage());
 			}
 		}
 
@@ -167,7 +167,7 @@ public class BeanParamUtil {
 					(String)PropertyUtils.getSimpleProperty(bean, param);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(param + " " + e.getMessage());
 			}
 		}
 

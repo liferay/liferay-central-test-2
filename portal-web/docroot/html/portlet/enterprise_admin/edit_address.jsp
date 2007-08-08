@@ -31,8 +31,8 @@ Address address = (Address)request.getAttribute(WebKeys.ADDRESS);
 
 long addressId = BeanParamUtil.getLong(address, request, "addressId");
 
-String className = BeanParamUtil.getString(address, request, "className");
-String classPK = BeanParamUtil.getString(address, request, "classPK");
+String className = ParamUtil.getString(request, "className");
+long classPK = BeanParamUtil.getLong(address, request, "classPK");
 
 long regionId = BeanParamUtil.getLong(address, request, "regionId");
 long countryId = BeanParamUtil.getLong(address, request, "countryId");
