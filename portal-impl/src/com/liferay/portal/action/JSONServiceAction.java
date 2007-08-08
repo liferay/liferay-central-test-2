@@ -103,7 +103,9 @@ public class JSONServiceAction extends JSONAction {
 					}
 					else if (returnObj instanceof Boolean ||
 							 returnObj instanceof Integer ||
-							 returnObj instanceof Long) {
+							 returnObj instanceof Long ||
+							 returnObj instanceof Double ||
+							 returnObj instanceof String) {
 
 						JSONObject jsonObj = new JSONObject();
 
