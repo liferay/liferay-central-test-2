@@ -43,6 +43,9 @@ else {
 	if (themeDisplay.isStateExclusive()) {
 		content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
 	}
+	else if (themeDisplay.isStatePopUp()) {
+		content = LayoutTemplateLocalUtil.getContent("pop_up", true, theme.getThemeId());
+	}
 	else {
 		content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
 	}
