@@ -57,7 +57,7 @@ import org.dom4j.ProcessingInstruction;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="GetArticleContentAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetArticleAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
