@@ -131,7 +131,7 @@ public class JSONServiceAction extends JSONAction {
 			catch (InvocationTargetException ite) {
 				JSONObject jsonObj = new JSONObject();
 
-				jsonObj.put("exception", ite.getCause());
+				jsonObj.put("exception", ite.getCause().toString());
 
 				return jsonObj.toString();
 			}

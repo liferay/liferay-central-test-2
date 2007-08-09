@@ -20,6 +20,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var form = jQuery('#' + params.form);
 		var keywordsInput = jQuery('#' + params.keywordsInput);
 		var updateEntryButton = jQuery('#' + params.updateEntryButton);
+		
+		instance._form = form;
 
 		// Show all entries
 
@@ -174,8 +176,18 @@ Liferay.Portlet.TagsAdmin = new Class({
 				name: addEntryNameInput.val(),
 				properties: properties
 			},
-			function() {
-				instance._getEntries(instance);
+			function(json) {
+				if (!json.exception) {
+					instance._getEntries(instance);
+				}
+				else {
+					if (json.exception.indexOf('com.liferay.portlet.tags.DuplicateEntryException') > -1) {
+						instance._sendMessage('error', 'that-tag-already-exists');
+					}
+					else if (json.exception.indexOf('com.liferay.portlet.tags.EntryNameException') > -1) {
+						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
+					}
+				}
 			}
 		);
 
@@ -510,6 +522,34 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 	},
+	
+	_sendMessage: function(type, key) {
+		var instance = this;
+		var msgType = 'portlet-msg-error';
+		if (type == 'success') {
+			msgType = 'portlet-msg-success';
+		}
+		var message = Liferay.Language.get(key);
+		
+		var currentMsg = jQuery('.lfr-message-response');
+		
+		if (currentMsg.length) {
+			currentMsg.removeClass('portlet-msg-success').removeClass('portlet-msg-error');
+			currentMsg.addClass(msgType);
+			currentMsg.fadeIn('fast');
+		}
+		else {
+			currentMsg = jQuery('<div class="' + msgType + ' lfr-message-response">' + message + '</div>');
+			instance._form.prepend(currentMsg);
+		}
+		var fadeOutTimeout = setTimeout(
+			function() {
+				currentMsg.fadeOut('slow');
+				clearTimeout(fadeOutTimeout);
+			},
+		7000);
+	},
+	
 
 	_updateEntry: function(instance) {
 		var params = instance.params;
@@ -543,8 +583,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 				name: editEntryNameInput.val(),
 				properties: properties
 			},
-			function() {
-				instance._getEntries(instance);
+			function(json) {
+				if (!json.exception) {
+					instance._getEntries(instance);
+				}
+				else {
+					if (json.exception.indexOf('Exception') > -1) {
+						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
+					}
+				}
 			}
 		);
 
