@@ -93,95 +93,111 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		// Folder
-
-		User user = UserUtil.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
-		parentFolderId = getParentFolderId(groupId, parentFolderId);
-		Date now = new Date();
 
-		validate(name);
-
-		long folderId = CounterLocalServiceUtil.increment();
-
-		DLFolder folder = DLFolderUtil.create(folderId);
-
-		folder.setGroupId(groupId);
-		folder.setCompanyId(user.getCompanyId());
-		folder.setUserId(user.getUserId());
-		folder.setCreateDate(now);
-		folder.setModifiedDate(now);
-		folder.setParentFolderId(parentFolderId);
-		folder.setName(name);
-		folder.setDescription(description);
-
-		DLFolderUtil.update(folder);
-
-		// Resources
-
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
-
-			addFolderResources(
-				folder, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
-		}
-		else {
-			addFolderResources(folder, communityPermissions, guestPermissions);
-		}
-
-		// Layout
-
-		String[] pathArray = folder.getPathArray();
-
-		boolean layoutsSyncEnabled = GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
-
-		if (layoutsSyncEnabled &&
-			(parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
-			String layoutsSyncPrivateFolder = GetterUtil.getString(
-				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
-			String layoutsSyncPublicFolder = GetterUtil.getString(
-				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
-
-			if (pathArray[0].equals(layoutsSyncPrivateFolder) ||
-				pathArray[0].equals(layoutsSyncPublicFolder)) {
-
-				boolean privateLayout = true;
-
-				if (pathArray[0].equals(layoutsSyncPublicFolder)) {
-					privateLayout = false;
-				}
-
-				long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
-				String title = StringPool.BLANK;
-				String layoutDescription = StringPool.BLANK;
-				String type = LayoutImpl.TYPE_PORTLET;
-				boolean hidden = false;
-				String friendlyURL = StringPool.BLANK;
-
-				Layout dlFolderLayout = null;
-
-				try {
-					dlFolderLayout = LayoutLocalServiceUtil.getDLFolderLayout(
-						groupId, privateLayout, folder.getParentFolderId());
-
-					parentLayoutId = dlFolderLayout.getLayoutId();
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
-
-				LayoutLocalServiceUtil.addLayout(
-					userId, groupId, privateLayout, parentLayoutId, name, title,
-					layoutDescription, type, hidden, friendlyURL,
-					folder.getFolderId());
-			}
-		}
-
-		return folder;
+		return addFolderToGroup(userId, groupId, parentFolderId, name,
+                description, addCommunityPermissions,
+                addGuestPermissions, communityPermissions,
+                guestPermissions);
 	}
 
+    
+    public DLFolder addFolderToGroup(
+            long userId, long groupId, long parentFolderId, String name,
+            String description, Boolean addCommunityPermissions,
+            Boolean addGuestPermissions, String[] communityPermissions,
+            String[] guestPermissions)
+        throws PortalException, SystemException {
+
+        // Folder
+
+        User user = UserUtil.findByPrimaryKey(userId);
+        parentFolderId = getParentFolderId(groupId, parentFolderId);
+        Date now = new Date();
+
+        validate(name);
+
+        long folderId = CounterLocalServiceUtil.increment();
+
+        DLFolder folder = DLFolderUtil.create(folderId);
+
+        folder.setGroupId(groupId);
+        folder.setCompanyId(user.getCompanyId());
+        folder.setUserId(user.getUserId());
+        folder.setCreateDate(now);
+        folder.setModifiedDate(now);
+        folder.setParentFolderId(parentFolderId);
+        folder.setName(name);
+        folder.setDescription(description);
+
+        DLFolderUtil.update(folder);
+
+        // Resources
+
+        if ((addCommunityPermissions != null) &&
+            (addGuestPermissions != null)) {
+
+            addFolderResources(
+                folder, addCommunityPermissions.booleanValue(),
+                addGuestPermissions.booleanValue());
+        }
+        else {
+            addFolderResources(folder, communityPermissions, guestPermissions);
+        }
+
+        // Layout
+
+        String[] pathArray = folder.getPathArray();
+
+        boolean layoutsSyncEnabled = GetterUtil.getBoolean(
+            PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_ENABLED));
+
+        if (layoutsSyncEnabled &&
+            (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+
+            String layoutsSyncPrivateFolder = GetterUtil.getString(
+                PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
+            String layoutsSyncPublicFolder = GetterUtil.getString(
+                PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
+
+            if (pathArray[0].equals(layoutsSyncPrivateFolder) ||
+                pathArray[0].equals(layoutsSyncPublicFolder)) {
+
+                boolean privateLayout = true;
+
+                if (pathArray[0].equals(layoutsSyncPublicFolder)) {
+                    privateLayout = false;
+                }
+
+                long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+                String title = StringPool.BLANK;
+                String layoutDescription = StringPool.BLANK;
+                String type = LayoutImpl.TYPE_PORTLET;
+                boolean hidden = false;
+                String friendlyURL = StringPool.BLANK;
+
+                Layout dlFolderLayout = null;
+
+                try {
+                    dlFolderLayout = LayoutLocalServiceUtil.getDLFolderLayout(
+                        groupId, privateLayout, folder.getParentFolderId());
+
+                    parentLayoutId = dlFolderLayout.getLayoutId();
+                }
+                catch (NoSuchLayoutException nsle) {
+                }
+
+                LayoutLocalServiceUtil.addLayout(
+                    userId, groupId, privateLayout, parentLayoutId, name, title,
+                    layoutDescription, type, hidden, friendlyURL,
+                    folder.getFolderId());
+            }
+        }
+
+        return folder;
+    }
+
+    
 	public void addFolderResources(
 			long folderId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)

@@ -76,8 +76,24 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
-	public IGFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
+    public IGFolder addFolder(
+            long userId, long plid, long parentFolderId, String name,
+            String description, Boolean addCommunityPermissions,
+            Boolean addGuestPermissions, String[] communityPermissions,
+            String[] guestPermissions)
+        throws PortalException, SystemException {
+
+        long groupId = PortalUtil.getPortletGroupId(plid);
+        return addFolderToGroup(
+                userId, groupId, parentFolderId, name,
+                description, addCommunityPermissions,
+                addGuestPermissions, communityPermissions,
+                guestPermissions);
+    }
+    
+    
+	public IGFolder addFolderToGroup(
+			long userId, long groupId, long parentFolderId, String name,
 			String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
@@ -86,7 +102,6 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		// Folder
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 

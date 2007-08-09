@@ -105,6 +105,22 @@ public class IGFolderLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder addFolderToGroup(
+		long userId, long groupId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.addFolderToGroup(userId, groupId,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
 	public static void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
