@@ -75,6 +75,7 @@
 	<classpathentry kind="lib" path="lib/portal/friki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/gif89.jar"/>
 	<classpathentry kind="lib" path="lib/portal/google.jar"/>
+	<classpathentry kind="lib" path="lib/portal/header-filter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hessian.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hibernate3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/htmlparser.jar"/>

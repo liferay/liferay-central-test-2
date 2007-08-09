@@ -8,6 +8,7 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="documentlibrary-impl/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/compression/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/doubleclick/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/header/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/secure/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/strip/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="lock-impl/src"/>
