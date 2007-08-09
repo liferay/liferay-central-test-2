@@ -35,17 +35,19 @@ long productVersionId = BeanParamUtil.getLong(productVersion, request, "productV
 
 Set frameworkVersionIds = CollectionFactory.getHashSet();
 
-if ((productVersion != null) && (request.getParameterValues("frameworkVersions") == null)) {
+String[] frameworkVersions = request.getParameterValues("frameworkVersions");
+
+if ((productVersion != null) && (frameworkVersions == null)) {
 	Iterator itr = productVersion.getFrameworkVersions().iterator();
 
 	while (itr.hasNext()) {
-		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) itr.next();
+		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();
 
 		frameworkVersionIds.add(new Long(frameworkVersion.getFrameworkVersionId()));
 	}
 }
 else {
-	long[] frameworkVersionIdsArray = ParamUtil.getLongValues(request, "frameworkVersions");
+	long[] frameworkVersionIdsArray = GetterUtil.getLongValues(frameworkVersions);
 
 	for (int i = 0; i < frameworkVersionIdsArray.length; i++) {
 		frameworkVersionIds.add(new Long(frameworkVersionIdsArray[i]));
@@ -57,9 +59,8 @@ PortletURL editProductEntryURL = renderResponse.createRenderURL();
 editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
 
 editProductEntryURL.setParameter("struts_action", "/software_catalog/edit_product_entry");
-editProductEntryURL.setParameter("redirect", redirect);
+editProductEntryURL.setParameter("redirect", currentURL);
 editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId));
-
 %>
 
 <script type="text/javascript">
@@ -67,7 +68,6 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productVersion == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_version" /><portlet:param name="productEntryId" value="<%= String.valueOf(productEntryId) %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
@@ -75,14 +75,17 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />productVersionId" type="hidden" value="<%= productVersionId %>" />
 
-<liferay-ui:tabs names="product-entry" />
+<liferay-ui:tabs
+	names="product-version"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= ProductVersionNameException.class %>" message="please-enter-a-valid-version-name" />
 <liferay-ui:error exception="<%= ProductVersionChangeLogException.class %>" message="please-enter-a-valid-change-log" />
 <liferay-ui:error exception="<%= ProductVersionDownloadURLException.class %>" message="please-enter-at-least-one-of-direct-download-url-or-download-page-url" />
 <liferay-ui:error exception="<%= ProductVersionFrameworkVersionException.class %>" message="please-select-at-least-one-framework-version" />
 
-<h3><%=LanguageUtil.get(pageContext, "product-version-for-product") + " " + productEntry.getName()%></h3>
+<h3><%= productEntry.getName() %></h3>
 
 <fieldset>
 	<legend><%=LanguageUtil.get(pageContext, "main-fields")%></legend>
@@ -110,16 +113,20 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		</td>
 		<td>
 			<select name="<portlet:namespace/>frameworkVersions" multiple="true">
+
 				<%
-				Iterator frameworkVersionsIt = SCFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId.longValue(), true).iterator();
-				while (frameworkVersionsIt.hasNext()) {
-					SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) frameworkVersionsIt.next();
+				Iterator itr = SCFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId.longValue(), true).iterator();
+
+				while (itr.hasNext()) {
+					SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();
 				%>
-						<option <%= (frameworkVersionIds.contains(new Long(frameworkVersion.getFrameworkVersionId()))) ? "selected" : "" %>
-							value="<%= frameworkVersion.getFrameworkVersionId() %>"><%= frameworkVersion.getName() %></option>
+
+					<option <%= (frameworkVersionIds.contains(new Long(frameworkVersion.getFrameworkVersionId()))) ? "selected" : "" %> value="<%= frameworkVersion.getFrameworkVersionId() %>"><%= frameworkVersion.getName() %></option>
+
 				<%
 				}
 				%>
+
 			</select>
 		</td>
 	</tr>
@@ -168,20 +175,24 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</table>
 </fieldset>
 
-<div class="form-buttons">
-	<input type="submit" value="<liferay-ui:message key="save" />" />
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
-</div>
+<br />
+
+<input type="submit" value="<liferay-ui:message key="save" />" />
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 
 <script type="text/javascript">
 	function <portlet:namespace />showRepoStoreArtifact() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.value == '') {
-			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = true;
-			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.options[0].selected = true;
-		} else {
-			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = false;
+		if (document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact) {
+			if (document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.value == '') {
+				document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = true;
+				document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.options[0].selected = true;
+			}
+			else {
+				document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = false;
+			}
 		}
 	}
 
@@ -190,5 +201,6 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</c:if>
 
 	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onkeyup = <portlet:namespace />showRepoStoreArtifact;
+
 	<portlet:namespace />showRepoStoreArtifact();
 </script>

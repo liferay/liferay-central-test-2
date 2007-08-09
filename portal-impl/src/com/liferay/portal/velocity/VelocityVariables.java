@@ -42,6 +42,7 @@ import com.liferay.portal.service.permission.UserPermission_IW;
 import com.liferay.portal.theme.NavItem;
 import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.DateFormats_IW;
 import com.liferay.portal.util.PortalUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.ServiceLocator;
@@ -82,6 +83,93 @@ import org.apache.velocity.VelocityContext;
  *
  */
 public class VelocityVariables {
+
+	public static void insertHelperUtilities(VelocityContext vc) {
+
+		// Array util
+
+		vc.put("arrayUtil", ArrayUtil_IW.getInstance());
+
+		// Browser sniffer
+
+		vc.put("browserSniffer", BrowserSniffer_IW.getInstance());
+
+		// Date formats
+
+		vc.put("dateFormats", DateFormats_IW.getInstance());
+
+		// Date util
+
+		vc.put("dateUtil", DateUtil_IW.getInstance());
+
+		// Getter util
+
+		vc.put("getterUtil", GetterUtil_IW.getInstance());
+
+		// Language util
+
+		vc.put("languageUtil", LanguageUtil.getLanguage());
+		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
+
+		// Portal util
+
+		vc.put("portalUtil", PortalUtil_IW.getInstance());
+		vc.put("portal", PortalUtil_IW.getInstance());
+
+		// Props util
+
+		vc.put("propsUtil", PropsUtil_IW.getInstance());
+
+		// Portlet URL factory
+
+		vc.put("portletURLFactory", PortletURLFactory.getInstance());
+
+		// Portlet preferences
+
+		vc.put("velocityPortletPreferences", new VelocityPortletPreferences());
+
+		// Randomizer
+
+		vc.put("randomizer", Randomizer_IW.getInstance().getWrappedInstance());
+
+		// Service locator
+
+		vc.put("serviceLocator", ServiceLocator.getInstance());
+
+		// Session clicks
+
+		vc.put("sessionClicks", SessionClicks_IW.getInstance());
+
+		// Static field getter
+
+		vc.put("staticFieldGetter", StaticFieldGetter.getInstance());
+
+		// String util
+
+		vc.put("stringUtil", StringUtil_IW.getInstance());
+
+		// Unicode formatter
+
+		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
+
+		// Permissions
+
+		vc.put("accountPermission", AccountPermission_IW.getInstance());
+		vc.put("commonPermission", CommonPermission_IW.getInstance());
+		vc.put("groupPermission", GroupPermission_IW.getInstance());
+		vc.put("layoutPermission", LayoutPermission_IW.getInstance());
+		vc.put("locationPermission", LocationPermission_IW.getInstance());
+		vc.put(
+			"organizationPermission", OrganizationPermission_IW.getInstance());
+		vc.put(
+			"passwordPolicyPermission",
+			PasswordPolicyPermission_IW.getInstance());
+		vc.put("portalPermission", PortalPermission_IW.getInstance());
+		vc.put("portletPermission", PortletPermission_IW.getInstance());
+		vc.put("rolePermission", RolePermission_IW.getInstance());
+		vc.put("userGroupPermission", UserGroupPermission_IW.getInstance());
+		vc.put("userPermission", UserPermission_IW.getInstance());
+	}
 
 	public static void insertVariables(
 		VelocityContext vc, HttpServletRequest req) {
@@ -206,7 +294,7 @@ public class VelocityVariables {
 
 		// Helper utilities
 
-		_insertHelperUtilities(vc);
+		insertHelperUtilities(vc);
 
 		// Insert custom vm variables
 
@@ -226,89 +314,6 @@ public class VelocityVariables {
 				}
 			}
 		}
-	}
-
-	private static void _insertHelperUtilities(VelocityContext vc) {
-
-		// Array util
-
-		vc.put("arrayUtil", ArrayUtil_IW.getInstance());
-
-		// Browser sniffer
-
-		vc.put("browserSniffer", BrowserSniffer_IW.getInstance());
-
-		// Date util
-
-		vc.put("dateUtil", DateUtil_IW.getInstance());
-
-		// Getter util
-
-		vc.put("getterUtil", GetterUtil_IW.getInstance());
-
-		// Language util
-
-		vc.put("languageUtil", LanguageUtil.getLanguage());
-		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
-
-		// Portal util
-
-		vc.put("portalUtil", PortalUtil_IW.getInstance());
-		vc.put("portal", PortalUtil_IW.getInstance());
-
-		// Props util
-
-		vc.put("propsUtil", PropsUtil_IW.getInstance());
-
-		// Portlet URL factory
-
-		vc.put("portletURLFactory", PortletURLFactory.getInstance());
-
-		// Portlet preferences
-
-		vc.put("velocityPortletPreferences", new VelocityPortletPreferences());
-
-		// Randomizer
-
-		vc.put("randomizer", Randomizer_IW.getInstance().getWrappedInstance());
-
-		// Service locator
-
-		vc.put("serviceLocator", ServiceLocator.getInstance());
-
-		// Session clicks
-
-		vc.put("sessionClicks", SessionClicks_IW.getInstance());
-
-		// Static field getter
-
-		vc.put("staticFieldGetter", StaticFieldGetter.getInstance());
-
-		// String util
-
-		vc.put("stringUtil", StringUtil_IW.getInstance());
-
-		// Unicode formatter
-
-		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
-
-		// Permissions
-
-		vc.put("accountPermission", AccountPermission_IW.getInstance());
-		vc.put("commonPermission", CommonPermission_IW.getInstance());
-		vc.put("groupPermission", GroupPermission_IW.getInstance());
-		vc.put("layoutPermission", LayoutPermission_IW.getInstance());
-		vc.put("locationPermission", LocationPermission_IW.getInstance());
-		vc.put(
-			"organizationPermission", OrganizationPermission_IW.getInstance());
-		vc.put(
-			"passwordPolicyPermission",
-			PasswordPolicyPermission_IW.getInstance());
-		vc.put("portalPermission", PortalPermission_IW.getInstance());
-		vc.put("portletPermission", PortletPermission_IW.getInstance());
-		vc.put("rolePermission", RolePermission_IW.getInstance());
-		vc.put("userGroupPermission", UserGroupPermission_IW.getInstance());
-		vc.put("userPermission", UserPermission_IW.getInstance());
 	}
 
 	private static String _insertTilesVariables(

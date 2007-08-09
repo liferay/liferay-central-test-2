@@ -1300,6 +1300,7 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=비활동성 사용자
 inactive=비활동성
 inch=인치
+include-artifact-in-repository=창고안에 인공물을 포함하십시요
 include-original-text=원래 원본을 포함하십시요
 include=포함하십시요
 included-layouts=포함하는 배치

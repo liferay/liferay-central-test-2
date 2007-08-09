@@ -573,6 +573,16 @@ public class PortalUtil_IW {
 			columnId, columnPos, columnCount, path);
 	}
 
+	public void setPageSubtitle(java.lang.String subtitle,
+		javax.servlet.http.HttpServletRequest req) {
+		PortalUtil.setPageSubtitle(subtitle, req);
+	}
+
+	public void setPageTitle(java.lang.String title,
+		javax.servlet.http.HttpServletRequest req) {
+		PortalUtil.setPageTitle(title, req);
+	}
+
 	public void storePreferences(javax.portlet.PortletPreferences prefs)
 		throws java.io.IOException, javax.portlet.ValidatorException {
 		PortalUtil.storePreferences(prefs);

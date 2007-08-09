@@ -1299,6 +1299,7 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=不活性ユーザー
 inactive=不活性
 inch=インチ
+include-artifact-in-repository=貯蔵場所で人工物を含めなさい
 include-original-text=原本を含みなさい
 include=含みなさい
 included-layouts=含まれたレイアウト

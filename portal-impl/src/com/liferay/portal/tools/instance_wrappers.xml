@@ -51,6 +51,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
+		src-file="com/liferay/portal/util/DateFormats.java"
+	/>
+	<instance-wrapper
+		parent-dir="../portal-impl/src"
 		src-file="com/liferay/portal/util/PortalUtil.java"
 	/>
 	<instance-wrapper

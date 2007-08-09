@@ -1301,6 +1301,7 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=Utilisateur inactif
 inactive=Inactif
 inch=Pouce
+include-artifact-in-repository=Incluez l'objet façonné dans le dépôt
 include-original-text=Inclure le texte original
 include=Incluez
 included-layouts=Dispositions Incluses

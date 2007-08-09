@@ -1301,6 +1301,7 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=非活动中用户
 inactive=非活动中
 inch=英寸
+include-artifact-in-repository=包括人工制品在贮藏库里
 include-original-text=包含原始內文
 include=包括
 included-layouts=包括的布局

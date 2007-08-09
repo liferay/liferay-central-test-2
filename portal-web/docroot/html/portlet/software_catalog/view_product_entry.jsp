@@ -69,7 +69,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	backURL="<%= redirect %>"
 />
 
-<h2><%= productEntry.getName() %> <%= (latestProductVersion == null) ? "" : latestProductVersion.getVersion() %></h2>
+<h3><%= productEntry.getName() %> <%= (latestProductVersion == null) ? "" : latestProductVersion.getVersion() %></h3>
 
 <br />
 

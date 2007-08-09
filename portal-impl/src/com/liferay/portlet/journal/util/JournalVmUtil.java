@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.velocity.VelocityResourceListener;
+import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
@@ -97,6 +98,8 @@ public class JournalVmUtil {
 			context.put("groupId", String.valueOf(groupId));
 			context.put("journalTemplatesPath", journalTemplatesPath);
 			context.put("randomNamespace", randomNamespace);
+
+			VelocityVariables.insertHelperUtilities(context);
 
 			script = _injectEditAndPlace(xml, script);
 
