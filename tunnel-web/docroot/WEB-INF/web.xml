@@ -140,6 +140,19 @@
 		</init-param>
 		<load-on-startup>4</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>WebDAVServlet - Journal</servlet-name>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
+		<init-param>
+			<param-name>servlet-class</param-name>
+			<param-value>com.liferay.portal.webdav.WebDAVServlet</param-value>
+		</init-param>
+		<init-param>
+			<param-name>storage-class</param-name>
+			<param-value>com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl</param-value>
+		</init-param>
+		<load-on-startup>5</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>AxisServlet</servlet-name>
 		<url-pattern>/axis/*</url-pattern>
@@ -167,6 +180,10 @@
 	<servlet-mapping>
 		<servlet-name>WebDAVServlet - Document Library</servlet-name>
 		<url-pattern>/secure/webdav/document_library/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>WebDAVServlet - Journal</servlet-name>
+		<url-pattern>/secure/webdav/journal/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>1</session-timeout>

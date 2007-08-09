@@ -181,6 +181,36 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<liferay-ui:input-field model="<%= JournalTemplate.class %>" bean="<%= template %>" field="description" />
 	</td>
 </tr>
+
+
+<c:if test="<%= template != null %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="url" />
+		</td>
+		<td>
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/journal/get_template?groupId=" + groupId + "&templateId=" + templateId %>'
+			/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="webdav-url" />
+		</td>
+		<td>
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/journal/" + company.getCompanyId() + "/" + portletGroupId + "/Templates/" + templateId %>'
+			/>
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td colspan="2">
 		<br />
