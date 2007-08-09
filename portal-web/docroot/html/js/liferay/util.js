@@ -1033,17 +1033,15 @@ var Viewport = {
 
 String.prototype.trim = jQuery.trim;
 
-var ZINDEX = {
-	DOCK:			7,
-	DOCK_PARENT:	8,
-	ALERT:			9,
-	DROP_AREA:		10,
-	DROP_POSITION:	11,
-	DRAG_ITEM:		12
+//0-200: Theme Developer
+//200-400: Portlet Developer
+//400+: Liferay
+
+Liferay.zIndex = {
+	DOCK:			10,
+	DOCK_PARENT:	20,
+	ALERT:			430,
+	DROP_AREA:		440,
+	DROP_POSITION:	450,
+	DRAG_ITEM:		460
 };
-
-//0-100: Theme Developer
-//100-200: Portlet Developer
-//200-300: Liferay
-
-//var Liferay.zIndex = {};

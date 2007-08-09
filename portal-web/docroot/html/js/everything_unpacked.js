@@ -14824,20 +14824,18 @@ var Viewport = {
 
 String.prototype.trim = jQuery.trim;
 
-var ZINDEX = {
-	DOCK:			7,
-	DOCK_PARENT:	8,
-	ALERT:			9,
-	DROP_AREA:		10,
-	DROP_POSITION:	11,
-	DRAG_ITEM:		12
+//0-200: Theme Developer
+//200-400: Portlet Developer
+//400+: Liferay
+
+Liferay.zIndex = {
+	DOCK:			10,
+	DOCK_PARENT:	20,
+	ALERT:			430,
+	DROP_AREA:		440,
+	DROP_POSITION:	450,
+	DRAG_ITEM:		460
 };
-
-//0-100: Theme Developer
-//100-200: Portlet Developer
-//200-300: Liferay
-
-//var Liferay.zIndex = {};
 Liferay.Language = {
 	get: function(key, extraParams) {
 		var instance = this;
@@ -15717,7 +15715,7 @@ jQuery.fn.xySize = function() {
 					position: "absolute",
 					top: nwPosition.y + "px",
 					width: jContainer.width() + "px",
-					zIndex: ZINDEX.DRAG_ITEM
+					zIndex: Liferay.zIndex.DRAG_ITEM
 				});
 
 				if (settings.opacity) jClone.css("opacity", settings.opacity);
@@ -16094,7 +16092,7 @@ jQuery.fn.xySize = function() {
 			var jAlertMsgs = jQuery("#alert-messages");
 
 			if (!jAlertMsgs.length) {
-				jQuery("body").append("<div id='alert-messages' style='position:absolute; top:0; left:0; z-index:" + ZINDEX.ALERT + "'></div>");
+				jQuery("body").append("<div id='alert-messages' style='position:absolute; top:0; left:0; z-index:" + Liferay.zIndex.ALERT + "'></div>");
 				jAlertMsgs = jQuery("#alert-messages");
 			}
 
@@ -16173,7 +16171,7 @@ jQuery.fn.xySize = function() {
 				// jQuery Draggable is slow.  Use Liferay Drag (lDrag)
 				jPopup.Draggable({
 					handle: jPopup.find(".popup-header")[0],
-					zIndex: ZINDEX.ALERT + 1
+					zIndex: Liferay.zIndex.ALERT + 1
 				});
 			}
 			else {
@@ -19580,7 +19578,7 @@ Liferay.ColorPicker = new Class({
 		baseDiv.css(
 			{
 				position: 'absolute',
-				zIndex: ZINDEX.ALERT + 1
+				zIndex: Liferay.zIndex.ALERT + 1
 			}
 		);
 
@@ -19948,7 +19946,7 @@ Liferay.ColorPicker = new Class({
 				instance._cache.dropArea = dropArea = jQuery("." + instance._dropArea + ":first");
 				dropArea.css({
 					position: "absolute",
-					zIndex: ZINDEX.DROP_AREA
+					zIndex: Liferay.zIndex.DROP_AREA
 				});
 			}
 
@@ -19971,7 +19969,7 @@ Liferay.ColorPicker = new Class({
 				dropPos = jQuery("." + instance._dropPosition + ":first");
 
 				dropPos[0].style.position = 'absolute';
-				dropPos[0].style.zIndex = ZINDEX.DROP_POSITION;
+				dropPos[0].style.zIndex = Liferay.zIndex.DROP_POSITION;
 
 				instance._cache.dropPosition = dropPos;
 			}
@@ -20138,7 +20136,7 @@ Liferay.Dock = {
 				{
 					cursor: 'pointer',
 					position: 'absolute',
-					zIndex: ZINDEX.DOCK
+					zIndex: Liferay.zIndex.DOCK
 				}
 			);
 
@@ -20201,7 +20199,7 @@ Liferay.Dock = {
 			dockParent.css(
 				{
 					position: 'relative',
-					zIndex: ZINDEX.DOCK_PARENT
+					zIndex: Liferay.zIndex.DOCK_PARENT
 				}
 			);
 

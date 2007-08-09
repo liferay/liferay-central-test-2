@@ -267,7 +267,7 @@
 					position: "absolute",
 					top: nwPosition.y + "px",
 					width: jContainer.width() + "px",
-					zIndex: ZINDEX.DRAG_ITEM
+					zIndex: Liferay.zIndex.DRAG_ITEM
 				});
 
 				if (settings.opacity) jClone.css("opacity", settings.opacity);

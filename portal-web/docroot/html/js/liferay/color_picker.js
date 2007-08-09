@@ -95,7 +95,7 @@ Liferay.ColorPicker = new Class({
 		baseDiv.css(
 			{
 				position: 'absolute',
-				zIndex: ZINDEX.ALERT + 1
+				zIndex: Liferay.zIndex.ALERT + 1
 			}
 		);
 

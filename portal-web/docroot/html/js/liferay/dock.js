@@ -31,7 +31,7 @@ Liferay.Dock = {
 				{
 					cursor: 'pointer',
 					position: 'absolute',
-					zIndex: ZINDEX.DOCK
+					zIndex: Liferay.zIndex.DOCK
 				}
 			);
 
@@ -94,7 +94,7 @@ Liferay.Dock = {
 			dockParent.css(
 				{
 					position: 'relative',
-					zIndex: ZINDEX.DOCK_PARENT
+					zIndex: Liferay.zIndex.DOCK_PARENT
 				}
 			);
 

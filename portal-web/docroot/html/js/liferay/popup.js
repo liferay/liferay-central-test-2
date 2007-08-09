@@ -60,7 +60,7 @@
 			var jAlertMsgs = jQuery("#alert-messages");
 
 			if (!jAlertMsgs.length) {
-				jQuery("body").append("<div id='alert-messages' style='position:absolute; top:0; left:0; z-index:" + ZINDEX.ALERT + "'></div>");
+				jQuery("body").append("<div id='alert-messages' style='position:absolute; top:0; left:0; z-index:" + Liferay.zIndex.ALERT + "'></div>");
 				jAlertMsgs = jQuery("#alert-messages");
 			}
 
@@ -139,7 +139,7 @@
 				// jQuery Draggable is slow.  Use Liferay Drag (lDrag)
 				jPopup.Draggable({
 					handle: jPopup.find(".popup-header")[0],
-					zIndex: ZINDEX.ALERT + 1
+					zIndex: Liferay.zIndex.ALERT + 1
 				});
 			}
 			else {

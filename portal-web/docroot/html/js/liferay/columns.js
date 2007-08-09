@@ -146,7 +146,7 @@
 				instance._cache.dropArea = dropArea = jQuery("." + instance._dropArea + ":first");
 				dropArea.css({
 					position: "absolute",
-					zIndex: ZINDEX.DROP_AREA
+					zIndex: Liferay.zIndex.DROP_AREA
 				});
 			}
 
@@ -169,7 +169,7 @@
 				dropPos = jQuery("." + instance._dropPosition + ":first");
 
 				dropPos[0].style.position = 'absolute';
-				dropPos[0].style.zIndex = ZINDEX.DROP_POSITION;
+				dropPos[0].style.zIndex = Liferay.zIndex.DROP_POSITION;
 
 				instance._cache.dropPosition = dropPos;
 			}
