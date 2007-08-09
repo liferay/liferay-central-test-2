@@ -2303,7 +2303,6 @@ source-input-enabled=Lähde syöte päällä
 source-url=Lähde URL
 source=Lähde
 spanish=Espanjalainen
-specify-a-URL-for-a-remote-layout-template,-portlet,-or-theme=Määritä URL  etä leiskalle, portletille tai teemalle.
 specify-an-optional-context-for-deployment=Määritä vapaaehtoinen konteksti asennukselle.
 specify-the-file-to-import=Määritä tiedosto lähetettäväksi:
 speed=Nopeus

@@ -39,7 +39,7 @@ try {
 		<%= breadcrumbs.toString() %>
 	</div>
 
-	<input type="hidden" name="<portlet:namespace/>pluginType" value="<%=pluginType%>" />
+	<input type="hidden" name="<portlet:namespace/>pluginType" value="<%= pluginType %>" />
 
 	<table class="liferay-table">
 	<tr>
@@ -100,10 +100,10 @@ try {
 		</td>
 		<td>
 			<select name="<portlet:namespace/>installStatus">
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED%>"><liferay-ui:message key="not-installed-or-older-version-installed" /></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED%>"><liferay-ui:message key="older-version-installed" /></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_NOT_INSTALLED%>"><liferay-ui:message key="not-installed" /></option>
-				<option <%=(installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%=PluginPackageImpl.STATUS_ALL%>"><liferay-ui:message key="all" /></option>
+				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED %>"><liferay-ui:message key="not-installed-or-older-version-installed" /></option>
+				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED %>"><liferay-ui:message key="older-version-installed" /></option>
+				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_NOT_INSTALLED %>"><liferay-ui:message key="not-installed" /></option>
+				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_ALL %>"><liferay-ui:message key="all" /></option>
 			</select>
 		</td>
 	</tr>
@@ -111,13 +111,11 @@ try {
 
 	<br />
 
-	<input type="button" value="<liferay-ui:message key="search" />" onClick="<portlet:namespace/>searchPlugins('<%=redirect%>')" />
+	<input type="button" value="<liferay-ui:message key="search" />" onClick="<portlet:namespace/>searchPlugins('<%= redirect %>')" />
 
 	<br /><br />
 
 	<div class="separator"><!-- --></div>
-
-	<br />
 
 	<%
 	List headerNames = new ArrayList();
@@ -127,15 +125,11 @@ try {
 	headerNames.add("installed-version");
 	headerNames.add("available-version");
 
-	SearchContainer searchContainer = new SearchContainer(
-		renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-		SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	Hits hits = PluginPackageUtil.search(
-		keywords, pluginType, tag, license, repositoryURL, installStatus);
+	Hits hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus);
 
-	Hits results =
-		hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
 
 	searchContainer.setTotal(total);
@@ -164,10 +158,10 @@ try {
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/plugin_installer/view");
-		rowURL.setParameter("referer", referer);
-		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("tabs2", tabs2);
+		rowURL.setParameter("referer", referer);
+		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("moduleId", pluginPackageModuleId);
 		rowURL.setParameter("repositoryURL", pluginPackageRepositoryURL);
 
@@ -214,7 +208,17 @@ try {
 
 		// Available version
 
-		row.addText(pluginPackageAvailableVersion + getNoteIcon(themeDisplay, pluginPackageChangeLog));
+		sm = new StringMaker();
+
+		sm.append(pluginPackageAvailableVersion);
+		sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+		sm.append(themeDisplay.getPathThemeImages());
+		sm.append("/document_library/page.png");
+		sm.append("' onmousemove='ToolTip.show(event, this, \"");
+		sm.append(pluginPackageChangeLog);
+		sm.append("\")'>");
+
+		row.addText(sm.toString());
 
 		// Add result row
 
@@ -224,8 +228,6 @@ try {
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-    <br />
-
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 	<div class="separator"><!-- --></div>
@@ -234,17 +236,20 @@ try {
 		<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
 			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 		</c:if>
+
 		<input type="button" value="<liferay-ui:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
 
 		<br />
 
 		<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
-
 	</div>
+
 <%
 }
-catch (PluginPackageException e) {
-	_log.warn("Error browsing the repository", e);
+catch (PluginPackageException ppe) {
+	if (_log.isWarnEnabled()) {
+		_log.warn("Error browsing the repository", ppe);
+	}
 %>
 
 	<span class="portlet-msg-error">

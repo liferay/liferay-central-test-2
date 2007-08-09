@@ -2291,7 +2291,6 @@ source-input-enabled=Adressinmatning tillåten
 source-url=Källa URL
 source=Källa
 spanish=Spansk
-specify-a-URL-for-a-remote-layout-template,-portlet,-or-theme=Ange en URL för fjärrsida, portlet eller mall
 specify-an-optional-context-for-deployment=Ange en miljö för driftsättning
 specify-the-file-to-import=Ange filen som ska importeras:
 speed=Hastighet

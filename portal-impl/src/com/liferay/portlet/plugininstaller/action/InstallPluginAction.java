@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.plugininstaller.action;
 
-import com.liferay.portal.cache.MultiVMPool;
-import com.liferay.portal.cache.SingleVMPool;
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
@@ -32,7 +30,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -94,7 +91,7 @@ public class InstallPluginAction extends PortletAction {
 		if (!permissionChecker.isOmniadmin()) {
 			SessionErrors.add(req, PrincipalException.class.getName());
 
-			setForward(req, "portlet.admin.error");
+			setForward(req, "portlet.plugin_installer.error");
 
 			return;
 		}
@@ -115,18 +112,6 @@ public class InstallPluginAction extends PortletAction {
 		}
 
 		sendRedirect(req, res);
-	}
-
-	protected void cacheDb() throws Exception {
-		CacheRegistry.clear();
-	}
-
-	protected void cacheMulti() throws Exception {
-		MultiVMPool.clear();
-	}
-
-	protected void cacheSingle() throws Exception {
-		SingleVMPool.clear();
 	}
 
 	protected void deployConfiguration(ActionRequest req) throws Exception {
@@ -243,12 +228,14 @@ public class InstallPluginAction extends PortletAction {
 			else {
 				PluginPackageUtil.endPluginPackageInstallation(
 					deploymentContext);
+
 				SessionErrors.add(req, UploadException.class.getName());
 			}
 		}
 		catch (Exception e) {
 			PluginPackageUtil.endPluginPackageInstallation(
 				deploymentContext);
+
 			throw e;
 		}
 	}
@@ -261,13 +248,15 @@ public class InstallPluginAction extends PortletAction {
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {
 		GetMethod getMethod = null;
-		String fileName = null;
 
-		String url = ParamUtil.getString(req, "url");
 		String deploymentContext = ParamUtil.getString(
 			req, "deploymentContext");
 
 		try {
+			String url = ParamUtil.getString(req, "url");
+
+			String fileName = null;
+
 			if (Validator.isNotNull(deploymentContext)) {
 				fileName =
 					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
@@ -301,6 +290,7 @@ public class InstallPluginAction extends PortletAction {
 
 				PluginPackageUtil.endPluginPackageInstallation(
 					deploymentContext);
+
 				return;
 			}
 
@@ -382,6 +372,7 @@ public class InstallPluginAction extends PortletAction {
 				PluginPackageUtil.endPluginPackageInstallation(
 					deploymentContext);
 			}
+
 			throw e;
 		}
 	}

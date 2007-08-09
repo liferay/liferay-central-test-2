@@ -21,11 +21,12 @@
  * SOFTWARE.
  */
 %>
+
 <liferay-ui:success key="pluginUploaded" message="the-plugin-was-uploaded-successfully-and-is-now-being-installed" />
 
 <liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-<%= LanguageUtil.get(pageContext, "upload-a-war-file-to-install-a-layout-template,-portlet,-or-theme") %>
+<liferay-ui:message key="upload-a-war-file-to-install-a-layout-template,-portlet,-or-theme" />
 
 <br /><br />
 
