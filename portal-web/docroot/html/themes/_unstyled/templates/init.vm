@@ -186,3 +186,7 @@
 
 #set ($current_time = $date.getCurrentDate())
 #set ($the_year = $date.getCurrentDate("yyyy", $locale))
+
+## ---------- Custom init ---------- ##
+
+#parse ("$full_templates_path/init_custom.vm")

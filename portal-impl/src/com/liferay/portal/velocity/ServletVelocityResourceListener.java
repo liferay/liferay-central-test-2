@@ -25,6 +25,7 @@ package com.liferay.portal.velocity;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.servlet.ServletContext;
@@ -69,6 +70,15 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 				}
 
 				is = ctx.getResourceAsStream(name);
+
+				if ((is == null) && (name.endsWith("/init_custom.vm"))) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"The template " + name + " should be created");
+					}
+
+					is = new ByteArrayInputStream(new byte[0]);
+				}
 			}
 			else {
 				_log.error(
