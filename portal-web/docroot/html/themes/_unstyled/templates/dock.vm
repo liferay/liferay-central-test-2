@@ -4,31 +4,31 @@
 	</h2>
 
 	<ul class="lfr-dock-list">
-		#if ( $show_home )
+		#if ($show_home)
 			<li class="home">
 				<a href="$home_url">$home_text</a>
 			</li>
 		#end
 
-		#if ( $show_sign_in )
+		#if ($show_sign_in)
 			<li class="sign-in">
 				<a href="$sign_in_url">$sign_in_text</a>
 			</li>
 		#end
 
-		#if ( $show_my_account )
+		#if ($show_my_account)
 			<li class="my-account">
 				<a href="$my_account_url">$my_account_text</a>
 			</li>
 		#end
 
-		#if ( $show_sign_out )
+		#if ($show_sign_out)
 			<li class="sign-out">
 				<a href="$sign_out_url">$sign_out_text</a>
 			</li>
 		#end
 
-		#if ( $show_add_content )
+		#if ($show_add_content)
 			<li class="add-content">
 				<a href="javascript: void(0);" onclick="$add_content_url">$add_content_text</a>
 			</li>
@@ -37,13 +37,13 @@
 			</li>
 		#end
 
-		#if ( $show_page_settings )
+		#if ($show_page_settings)
 			<li class="page-settings">
 				<a href="$page_settings_url">$page_settings_text</a>
 			</li>
 		#end
 
-		#if ( $is_signed_in )
+		#if ($is_signed_in)
 			<li class="my-places">
 				<a>$my_places_text</a>
 
