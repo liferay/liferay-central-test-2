@@ -74,9 +74,10 @@ WindowState windowState = renderRequest.getWindowState();
 		<br /><br />
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-			<liferay-util:param name="tabs1" value="orders" />
-		</liferay-util:include>
+		<liferay-ui:tabs
+			names="order"
+			backURL="<%= redirect %>"
+		/>
 	</c:otherwise>
 </c:choose>
 

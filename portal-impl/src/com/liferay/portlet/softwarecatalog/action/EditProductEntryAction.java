@@ -31,6 +31,7 @@ import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductEntryImagesException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
+import com.liferay.portlet.softwarecatalog.ProductEntryPageURLException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
@@ -83,6 +84,7 @@ public class EditProductEntryAction extends PortletAction {
 			else if (e instanceof ProductEntryImagesException ||
 					 e instanceof ProductEntryNameException ||
 					 e instanceof ProductEntryLicenseException ||
+					 e instanceof ProductEntryPageURLException ||
 					 e instanceof ProductEntryShortDescriptionException ||
 					 e instanceof ProductEntryTypeException) {
 

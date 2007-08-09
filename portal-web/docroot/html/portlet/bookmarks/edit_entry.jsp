@@ -56,7 +56,10 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 
-<liferay-ui:tabs names="entry" />
+<liferay-ui:tabs
+	names="entry"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
 <liferay-ui:tags-error />
@@ -183,6 +186,8 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

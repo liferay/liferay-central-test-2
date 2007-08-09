@@ -195,7 +195,10 @@ int tabIndex = 1;
 <input name="<portlet:namespace />move_up" type="hidden" value="" />
 <input name="<portlet:namespace />move_depth" type="hidden" value="" />
 
-<liferay-ui:tabs names="structure" />
+<liferay-ui:tabs
+	names="structure"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
 <liferay-ui:error exception="<%= StructureDescriptionException.class %>" message="please-enter-a-valid-description" />
@@ -342,16 +345,18 @@ tabIndex = tabIndexWrapper.getValue();
 
 </form>
 
-<script type="text/javascript">
-	<c:choose>
-		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
-			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-		</c:when>
-		<c:otherwise>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>.focus();
-		</c:otherwise>
-	</c:choose>
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		<c:choose>
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
+				document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+			</c:when>
+			<c:otherwise>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>.focus();
+			</c:otherwise>
+		</c:choose>
+	</script>
+</c:if>
 
 <%!
 private void _format(Element root, IntegerWrapper count, Integer depth, IntegerWrapper tabIndex, PageContext pageContext, HttpServletRequest req) throws Exception {

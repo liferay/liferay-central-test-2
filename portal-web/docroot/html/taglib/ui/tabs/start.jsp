@@ -90,36 +90,43 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 			String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
 
 			if (Validator.isNull(curURL)) {
-				if (refresh) {
-					if (portletURL != null) {
-						portletURL.setParameter(param, values[i]);
-
-						curURL = portletURL.toString();
-					}
-					else {
-						if (values[i].equals("&raquo;")) {
-							curURL = url + "&" + param + "=" + values[0] + anchor;
-						}
-						else {
-							curURL = url + "&" + param + "=" + values[i] + anchor;
-						}
+				if (values.length == 1) {
+					if (Validator.isNotNull(backURL)) {
+						curURL = backURL;
 					}
 				}
 				else {
-					curURL = "javascript: ";
+					if (refresh) {
+						if (portletURL != null) {
+							portletURL.setParameter(param, values[i]);
 
-					if (Validator.isNotNull(formName)) {
-						curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";
+							curURL = portletURL.toString();
+						}
+						else {
+							if (values[i].equals("&raquo;")) {
+								curURL = url + "&" + param + "=" + values[0] + anchor;
+							}
+							else {
+								curURL = url + "&" + param + "=" + values[i] + anchor;
+							}
+						}
 					}
+					else {
+						curURL = "javascript: ";
 
-					curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+						if (Validator.isNotNull(formName)) {
+							curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";
+						}
+
+						curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+					}
 				}
 			}
 		%>
 
 			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 				<c:choose>
-					<c:when test="<%= values.length > 1 %>">
+					<c:when test="<%= Validator.isNotNull(curURL) %>">
 						<a href="<%= curURL %>">
 					</c:when>
 					<c:otherwise>
@@ -130,7 +137,7 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 				<%= LanguageUtil.get(pageContext, names[i]) %>
 
 				<c:choose>
-					<c:when test="<%= values.length > 1 %>">
+					<c:when test="<%= Validator.isNotNull(curURL) %>">
 						</a>
 					</c:when>
 					<c:otherwise>

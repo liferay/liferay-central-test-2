@@ -82,7 +82,11 @@ if (entry != null) {
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 
-<liferay-ui:tabs names="entry" />
+<liferay-ui:tabs
+	names="entry"
+	backURL="<%= redirect %>"
+/>
+
 
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:tags-error />
@@ -193,9 +197,11 @@ if (entry != null) {
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />title.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />title.focus();
+	</script>
+</c:if>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.blogs.edit_entry.jsp";

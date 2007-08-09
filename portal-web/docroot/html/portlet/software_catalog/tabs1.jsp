@@ -45,6 +45,6 @@ if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.
 %>
 
 <liferay-ui:tabs
-	names="<%=tabs1Names%>"
+	names="<%= tabs1Names %>"
 	portletURL="<%= tabs1URL %>"
 />

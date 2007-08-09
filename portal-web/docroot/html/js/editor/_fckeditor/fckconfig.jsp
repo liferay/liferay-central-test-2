@@ -35,7 +35,7 @@ String connectorURL = Http.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + pl
 
 FCKConfig.IncludeLatinEntities	= false ;
 
-FCKConfig.ToolbarSets["default"] = [
+FCKConfig.ToolbarSets["liferay"] = [
 	['FontName','FontSize','-','TextColor','BGColor'],
 	['Bold','Italic','Underline','StrikeThrough'],
 	['Subscript','Superscript'],

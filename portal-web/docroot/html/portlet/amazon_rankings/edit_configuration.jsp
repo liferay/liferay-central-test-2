@@ -70,6 +70,8 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />isbns.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />isbns.focus();
+	</script>
+</c:if>

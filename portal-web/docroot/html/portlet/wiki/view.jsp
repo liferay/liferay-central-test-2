@@ -127,8 +127,10 @@ boolean showAddNodeButton = PortletPermission.contains(permissionChecker, plid.l
 
 </form>
 
-<script type="text/javascript">
-	if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
-		document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
-	}
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
+			document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
+		}
+	</script>
+</c:if>

@@ -65,7 +65,10 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
-<liferay-ui:tabs names="folder" />
+<liferay-ui:tabs
+	names="folder"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -196,6 +199,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

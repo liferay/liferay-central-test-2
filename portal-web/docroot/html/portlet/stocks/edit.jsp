@@ -70,6 +70,8 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />symbols.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />symbols.focus();
+	</script>
+</c:if>

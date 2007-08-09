@@ -86,6 +86,8 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />zips.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />zips.focus();
+	</script>
+</c:if>

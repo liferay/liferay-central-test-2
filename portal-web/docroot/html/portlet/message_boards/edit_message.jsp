@@ -146,7 +146,10 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 <input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>" />
 <input name="<portlet:namespace />preview" type="hidden" value="" />
 
-<liferay-ui:tabs names="message" />
+<liferay-ui:tabs
+	names="message"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
@@ -419,9 +422,11 @@ if (message != null) {
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />subject.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />subject.focus();
+	</script>
+</c:if>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.edit_message.jsp");

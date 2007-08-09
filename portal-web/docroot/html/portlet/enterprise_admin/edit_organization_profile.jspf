@@ -175,7 +175,9 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <c:if test="<%= editable %>">
 	<br />
 
-	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');" /><br />
+	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');" />
+
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" /><br />
 </c:if>
 
 <c:if test="<%= organization != null %>">
@@ -183,7 +185,9 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 </c:if>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</c:if>
 
 	new Liferay.DynamicSelect(
 		[

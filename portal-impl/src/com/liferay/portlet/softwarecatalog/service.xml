@@ -179,6 +179,7 @@
 		<exception>ProductEntryImages</exception>
 		<exception>ProductEntryLicense</exception>
 		<exception>ProductEntryName</exception>
+		<exception>ProductEntryPageURL</exception>
 		<exception>ProductEntryShortDescription</exception>
 		<exception>ProductEntryType</exception>
 		<exception>ProductVersionChangeLog</exception>

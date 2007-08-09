@@ -78,12 +78,13 @@ if (!organizationsTab) {
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>'); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /><portlet:param name="redirect" value="<%= redirect %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value='<%= organizationsTab ? "organizations" : "locations" %>' />
-</liferay-util:include>
+<liferay-ui:tabs
+	names='<%= organizationsTab ? "organization" : "location" %>'
+	backURL="<%= redirect %>"
+/>
 
 <liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="profile" />

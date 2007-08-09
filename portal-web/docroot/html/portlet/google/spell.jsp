@@ -52,9 +52,11 @@ String suggestion = (String)request.getAttribute(WebKeys.GOOGLE_SPELLING_SUGGEST
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />args.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />args.focus();
+	</script>
+</c:if>
 
 <br />
 

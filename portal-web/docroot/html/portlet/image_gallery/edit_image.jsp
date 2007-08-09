@@ -40,7 +40,10 @@ if (image != null) {
 }
 %>
 
-<liferay-ui:tabs names="image" />
+<liferay-ui:tabs
+	names="image"
+	backURL="<%= redirect %>"
+/>
 
 <div class="breadcrumbs">
 	<%= IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse) %>

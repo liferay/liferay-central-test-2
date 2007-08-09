@@ -89,6 +89,7 @@ portletURL.setParameter("name", name);
 
 <liferay-ui:tabs
 	names="document"
+	backURL="<%= redirect %>"
 />
 
 <div class="breadcrumbs">

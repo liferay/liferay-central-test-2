@@ -30,8 +30,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)request.getAttribute(WebKeys.SOFTWARE_CATALOG_FRAMEWORK_VERSION);
 
 long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "frameworkVersionId");
-
-boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", true);
 %>
 
 <script type="text/javascript">
@@ -46,7 +44,10 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />frameworkVersionId" type="hidden" value="<%= frameworkVersionId %>" />
 
-<liferay-ui:tabs names="framework-version" />
+<liferay-ui:tabs
+	names="framework-version"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -72,7 +73,7 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 		<liferay-ui:message key="active" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
+		<liferay-ui:input-field model="<%= SCFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
 	</td>
 </tr>
 
@@ -104,6 +105,8 @@ boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", t
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

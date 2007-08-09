@@ -216,11 +216,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		</form>
 
-		<script type="text/javascript">
-			if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-				document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-			}
-		</script>
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
+				}
+			</script>
+		</c:if>
 
 		<c:if test="<%= category != null %>">
 			<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
@@ -375,14 +377,16 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			</form>
 
-			<script type="text/javascript">
-				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-				}
-				else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
-					document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
-				}
-			</script>
+			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				<script type="text/javascript">
+					if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+						document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
+					}
+					else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
+						document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
+					}
+				</script>
+			</c:if>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("my-subscriptions") || tabs1.equals("recent-posts") %>'>

@@ -38,6 +38,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
+import com.liferay.portlet.softwarecatalog.ProductEntryPageURLException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
@@ -55,6 +56,9 @@ import com.liferay.util.lucene.HitsImpl;
 import com.liferay.util.xml.DocUtil;
 
 import java.io.IOException;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -123,7 +127,7 @@ public class SCProductEntryLocalServiceImpl
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		validate(name, type, shortDescription, licenseIds);
+		validate(name, type, shortDescription, pageURL, licenseIds);
 
 		long productEntryId = CounterLocalServiceUtil.increment();
 
@@ -459,7 +463,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Product entry
 
-		validate(name, type, shortDescription, licenseIds);
+		validate(name, type, shortDescription, pageURL, licenseIds);
 
 		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
 			productEntryId);
@@ -493,25 +497,6 @@ public class SCProductEntryLocalServiceImpl
 		}
 
 		return productEntry;
-	}
-
-	protected void validate(
-			String name, String type, String shortDescription,
-			long[] licenseIds)
-		throws PortalException {
-
-		if (Validator.isNull(name)) {
-			throw new ProductEntryNameException();
-		}
-		else if (Validator.isNull(type)) {
-			throw new ProductEntryTypeException();
-		}
-		else if (Validator.isNull(shortDescription)) {
-			throw new ProductEntryShortDescriptionException();
-		}
-		else if (licenseIds.length == 0) {
-			throw new ProductEntryLicenseException();
-		}
 	}
 
 	protected void populatePluginPackageElement(
@@ -594,6 +579,40 @@ public class SCProductEntryLocalServiceImpl
 
 			settingEl.addAttribute("name", key);
 			settingEl.addAttribute("value", repoSettings.getProperty(key));
+		}
+	}
+
+	protected void validate(
+			String name, String type, String shortDescription, String pageURL,
+			long[] licenseIds)
+		throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new ProductEntryNameException();
+		}
+
+		if (Validator.isNull(type)) {
+			throw new ProductEntryTypeException();
+		}
+
+		if (Validator.isNull(shortDescription)) {
+			throw new ProductEntryShortDescriptionException();
+		}
+
+		if (Validator.isNull(pageURL)) {
+			throw new ProductEntryPageURLException();
+		}
+		else {
+			try {
+				new URL(pageURL);
+			}
+			catch (MalformedURLException murle) {
+				throw new ProductEntryPageURLException();
+			}
+		}
+
+		if (licenseIds.length == 0) {
+			throw new ProductEntryLicenseException();
 		}
 	}
 

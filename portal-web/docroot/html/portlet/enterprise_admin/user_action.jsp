@@ -44,6 +44,7 @@
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</portlet:renderURL>
 

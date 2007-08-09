@@ -111,7 +111,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 						(portletName.equals(PortletKeys.LOCATION_ADMIN) && LocationPermission.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) ||
 						(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && OrganizationPermission.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) %>">
 
-			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
 	</c:if>
 </div>

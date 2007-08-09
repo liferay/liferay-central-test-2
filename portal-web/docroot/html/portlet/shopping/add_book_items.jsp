@@ -56,6 +56,8 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryImpl.
 
 </form>
 
-<script language="JavaScript">
-	document.<portlet:namespace />fm.<portlet:namespace />isbns.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script language="JavaScript">
+		document.<portlet:namespace />fm.<portlet:namespace />isbns.focus();
+	</script>
+</c:if>

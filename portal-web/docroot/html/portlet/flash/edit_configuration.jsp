@@ -93,6 +93,8 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />movie.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />movie.focus();
+	</script>
+</c:if>

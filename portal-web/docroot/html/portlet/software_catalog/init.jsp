@@ -32,6 +32,7 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.FrameworkVersionNameException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.LicenseNameException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryNameException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryPageURLException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryTypeException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryLicenseException" %>

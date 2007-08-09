@@ -43,6 +43,8 @@ hangmanWordList = ParamUtil.getString(request, "hangmanWordList", hangmanWordLis
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />hangmanWordList.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />hangmanWordList.focus();
+	</script>
+</c:if>

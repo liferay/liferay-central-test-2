@@ -65,7 +65,10 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 <input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
-<liferay-ui:tabs names="category" />
+<liferay-ui:tabs
+	names="category"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
@@ -176,6 +179,8 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

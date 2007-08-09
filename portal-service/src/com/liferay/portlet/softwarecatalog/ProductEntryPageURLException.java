@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,16 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<liferay-ui:tabs names="comments">
-	<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="comments" />
+package com.liferay.portlet.softwarecatalog;
 
-	<c:if test="<%= editable %>">
-		<br /><br />
+import com.liferay.portal.PortalException;
 
-		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('comments');" />
+/**
+ * <a href="ProductEntryPageURLException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ProductEntryPageURLException extends PortalException {
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
-	</c:if>
-</liferay-ui:tabs>
+	public ProductEntryPageURLException() {
+		super();
+	}
+
+	public ProductEntryPageURLException(String msg) {
+		super(msg);
+	}
+
+	public ProductEntryPageURLException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ProductEntryPageURLException(Throwable cause) {
+		super(cause);
+	}
+
+}

@@ -133,7 +133,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 </form>
 
-<c:if test="<%= !format.equals(WikiPageImpl.HTML_FORMAT) %>">
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) && !format.equals(WikiPageImpl.HTML_FORMAT) %>">
 	<script type="text/javascript">
 		document.<portlet:namespace />fm.<portlet:namespace />content.focus();
 	</script>

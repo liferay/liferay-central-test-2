@@ -34,7 +34,10 @@ long userId = ParamUtil.getLong(request, "p_u_i_d");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= userId %>" />
 
-<liferay-ui:tabs names="user-portrait" />
+<liferay-ui:tabs
+	names="user-portrait"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 <liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -53,6 +56,8 @@ long userId = ParamUtil.getLong(request, "p_u_i_d");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />fileName.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />fileName.focus();
+	</script>
+</c:if>

@@ -48,7 +48,10 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= friendlyURL %>" />
 
-<liferay-ui:tabs names="community" />
+<liferay-ui:tabs
+	names="community"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
 <liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
@@ -97,6 +100,8 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

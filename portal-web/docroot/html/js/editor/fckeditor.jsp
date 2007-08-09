@@ -31,7 +31,7 @@ String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
-String toolbarSet = ParamUtil.getString(request, "toolbarSet", "default");
+String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
 // Add custom configuration to fckeditor/fckconfig.jsp. Copy

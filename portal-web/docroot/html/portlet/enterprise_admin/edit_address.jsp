@@ -180,7 +180,9 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />street1.focus();
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		document.<portlet:namespace />fm.<portlet:namespace />street1.focus();
+	</c:if>
 
 	new Liferay.DynamicSelect(
 		[

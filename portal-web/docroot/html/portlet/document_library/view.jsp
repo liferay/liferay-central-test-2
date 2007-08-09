@@ -170,11 +170,13 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			</form>
 
-			<script type="text/javascript">
-				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-				}
-			</script>
+			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				<script type="text/javascript">
+					if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+						document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
+					}
+				</script>
+			</c:if>
 		</c:if>
 
 		<c:if test="<%= folder != null %>">
@@ -294,14 +296,16 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			</form>
 
-			<script type="text/javascript">
-				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-				}
-				else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
-					document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
-				}
-			</script>
+			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				<script type="text/javascript">
+					if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+						document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
+					}
+					else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
+						document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
+					}
+				</script>
+			</c:if>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>

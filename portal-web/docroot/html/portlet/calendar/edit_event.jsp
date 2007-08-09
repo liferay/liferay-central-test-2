@@ -317,9 +317,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />eventId" type="hidden" value="<%= eventId %>" />
 
-<liferay-util:include page="/html/portlet/calendar/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="events" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="event"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= EventDurationException.class %>" message="please-enter-a-longer-duration" />
 <liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />

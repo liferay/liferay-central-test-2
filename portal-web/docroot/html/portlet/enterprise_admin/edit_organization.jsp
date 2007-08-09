@@ -26,6 +26,8 @@
 
 <%
 boolean organizationsTab = true;
+
+String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <%@ include file="/html/portlet/enterprise_admin/edit_organization_common.jspf" %>

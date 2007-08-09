@@ -180,6 +180,8 @@ for (int i = 0; i < results.size(); i++) {
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
+	</script>
+</c:if>

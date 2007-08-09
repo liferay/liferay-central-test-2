@@ -245,7 +245,9 @@ if (fileEntry == null) {
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		document.<portlet:namespace />fm.<portlet:namespace />file.focus();
+	</c:if>
 
 	_$J(document).ready(
 		function() {

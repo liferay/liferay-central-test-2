@@ -44,9 +44,10 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroupId %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="user-groups" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="user-groups"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />
 <liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="this-is-a-required-user-group" />
@@ -79,8 +80,12 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

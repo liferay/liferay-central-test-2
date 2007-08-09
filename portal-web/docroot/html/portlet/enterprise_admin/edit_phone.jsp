@@ -109,6 +109,8 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />number.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />number.focus();
+	</script>
+</c:if>

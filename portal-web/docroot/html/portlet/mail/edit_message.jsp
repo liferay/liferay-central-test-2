@@ -235,7 +235,9 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			ccFinder = new RecipientSelector("<portlet:namespace />cc");
 			bccFinder = new RecipientSelector("<portlet:namespace />bcc");
 
-			document.<portlet:namespace />fm.<portlet:namespace />to.focus();
+			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				document.<portlet:namespace />fm.<portlet:namespace />to.focus();
+			</c:if>
 		}
 	);
 </script>

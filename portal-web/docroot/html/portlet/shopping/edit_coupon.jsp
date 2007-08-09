@@ -83,9 +83,10 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />couponId" type="hidden" value="<%= couponId %>" />
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="coupons" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="coupon"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />
 <liferay-ui:error exception="<%= CouponDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-expiration-date" />
@@ -292,6 +293,8 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>.focus();
+	</script>
+</c:if>

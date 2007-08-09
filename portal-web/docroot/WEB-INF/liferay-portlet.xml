@@ -953,13 +953,14 @@
 		<portlet-name>98</portlet-name>
 		<icon>/html/portlet/software_catalog/icon.png</icon>
 		<struts-path>software_catalog</struts-path>
+		<configuration-path>/software_catalog/edit_configuration</configuration-path>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.Indexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portlet.softwarecatalog.SCFriendlyURLMapper</friendly-url-mapper-class>
-		<use-default-template>true</use-default-template>
+		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
-		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
-		<render-weight>1</render-weight>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
 		<portlet-name>99</portlet-name>

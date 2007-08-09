@@ -501,7 +501,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="xml" type="hidden" value="" />
 <input name="xsl" type="hidden" value="" />
 
-<liferay-ui:tabs names="article" />
+<liferay-ui:tabs
+	names="article"
+	backURL="<%= redirect %>"
+/>
 
 <%
 SAXReader reader = new SAXReader();
@@ -1086,9 +1089,11 @@ String[] availableLocales = null;
 
 </form>
 
-<script type="text/javascript">
-	//document.<portlet:namespace />fm.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		//document.<portlet:namespace />fm.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>.focus();
+	</script>
+</c:if>
 
 <%!
 private void _format(long groupId, Document contentDoc, Element root, IntegerWrapper count, Integer depth, PageContext pageContext, HttpServletRequest req) throws Exception {

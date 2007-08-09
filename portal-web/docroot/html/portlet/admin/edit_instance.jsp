@@ -44,7 +44,10 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />companyId" type="hidden" value="<%= companyId %>" />
 
-<liferay-ui:tabs names="instance" />
+<liferay-ui:tabs
+	names="instance"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 <liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />

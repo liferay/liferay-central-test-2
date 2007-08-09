@@ -181,7 +181,10 @@
 		document.<portlet:namespace />fm.<portlet:namespace />height.value = heightMatrix[index];
 	}
 
-	document.<portlet:namespace />fm.<portlet:namespace />gadgetId.focus();
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		document.<portlet:namespace />fm.<portlet:namespace />gadgetId.focus();
+	</c:if>
+
 	document.<portlet:namespace />fm.<portlet:namespace />gadgetId.onchange = <portlet:namespace />setRecommendedGadgetSize;
 	document.<portlet:namespace />fm.<portlet:namespace />confType[0].onclick = <portlet:namespace />enableSelectedTypeForm;
 	document.<portlet:namespace />fm.<portlet:namespace />confType[1].onclick = <portlet:namespace />enableSelectedTypeForm;

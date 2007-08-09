@@ -151,6 +151,8 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />firstName.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />firstName.focus();
+	</script>
+</c:if>

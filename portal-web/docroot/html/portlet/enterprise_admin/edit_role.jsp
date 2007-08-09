@@ -32,9 +32,10 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 %>
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="roles" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="roles"
+	backURL="<%= redirect %>"
+/>
 
 <c:choose>
 	<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
@@ -105,8 +106,10 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 		</form>
 
-		<script type="text/javascript">
-			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-		</script>
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+			</script>
+		</c:if>
 	</c:otherwise>
 </c:choose>

@@ -759,7 +759,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
 
 					<script type="text/javascript">
-						document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+						<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+							document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+						</c:if>
 
 						function <portlet:namespace />getChoice(value) {
 							for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
@@ -871,9 +873,11 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<input type="submit" value="<liferay-ui:message key="add-page" />" /><br />
 
-					<script type="text/javascript">
-						document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-					</script>
+					<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+						<script type="text/javascript">
+							document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+						</script>
+					</c:if>
 
 					<%
 					List selLayoutChildren = null;

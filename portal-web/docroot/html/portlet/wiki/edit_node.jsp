@@ -44,7 +44,10 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<liferay-ui:tabs names="node" />
+<liferay-ui:tabs
+	names="node"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -94,6 +97,8 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

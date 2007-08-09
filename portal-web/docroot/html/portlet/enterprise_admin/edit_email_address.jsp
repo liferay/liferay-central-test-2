@@ -103,6 +103,8 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />address.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />address.focus();
+	</script>
+</c:if>

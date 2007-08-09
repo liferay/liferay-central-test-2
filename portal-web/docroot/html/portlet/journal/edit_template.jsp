@@ -106,7 +106,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 <input name="<portlet:namespace />xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>" />
 
-<liferay-ui:tabs names="template" />
+<liferay-ui:tabs
+	names="template"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
 <liferay-ui:error exception="<%= TemplateDescriptionException.class %>" message="please-enter-a-valid-description" />
@@ -346,13 +349,15 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 </form>
 
-<script type="text/javascript">
-	<c:choose>
-		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
-			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-		</c:when>
-		<c:otherwise>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>.focus();
-		</c:otherwise>
-	</c:choose>
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		<c:choose>
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
+				document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+			</c:when>
+			<c:otherwise>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>.focus();
+			</c:otherwise>
+		</c:choose>
+	</script>
+</c:if>

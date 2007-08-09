@@ -73,6 +73,7 @@ import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -576,6 +577,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				return StringPool.BLANK;
 			}
 		}
+
+		friendlyURL = GetterUtil.getString(friendlyURL);
 
 		return friendlyURL.toLowerCase();
 	}

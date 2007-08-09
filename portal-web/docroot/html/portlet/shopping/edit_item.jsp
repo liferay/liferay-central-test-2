@@ -129,7 +129,9 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		%>
 
 		var itemQuantitiesWindow = window.open(itemQuantitiesURL, "itemQuantities", "directories=no,height=400,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no,width=300");
+
 		void("");
+
 		itemQuantitiesWindow.focus();
 	}
 
@@ -160,9 +162,10 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <input name="<portlet:namespace />pricesCount" type="hidden" value="<%= pricesCount %>" />
 <input name="<portlet:namespace />priceId" type="hidden" value="" />
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="categories" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="item"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= DuplicateItemSKUException.class %>" message="the-item-sku-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= ItemNameException.class %>" message="please-enter-a-valid-name" />

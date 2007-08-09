@@ -69,6 +69,8 @@
 	<br />
 
 	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('display');" />
+
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 </c:if>
 
 <br /><br />

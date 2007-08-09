@@ -89,6 +89,11 @@ if (choiceName > 0) {
 <input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>" />
 <input name="<portlet:namespace />choiceName" type="hidden" value="" />
 
+<liferay-ui:tabs
+	names="question"
+	backURL="<%= redirect %>"
+/>
+
 <liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />
 <liferay-ui:error exception="<%= QuestionDescriptionException.class %>" message="please-enter-a-valid-description" />
 <liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
@@ -239,6 +244,8 @@ if (choiceName > 0) {
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />title.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />title.focus();
+	</script>
+</c:if>

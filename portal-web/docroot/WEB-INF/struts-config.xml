@@ -1243,7 +1243,7 @@
 
 		<action path="/quick_note/view" forward="portlet.quick_note.view" />
 
-		<!-- Software Repository -->
+		<!-- Software Catalog -->
 
 		<action path="/software_catalog/edit_framework_version" type="com.liferay.portlet.softwarecatalog.action.EditFrameworkVersionAction">
 			<forward name="portlet.software_catalog.edit_framework_version" path="portlet.software_catalog.edit_framework_version" />

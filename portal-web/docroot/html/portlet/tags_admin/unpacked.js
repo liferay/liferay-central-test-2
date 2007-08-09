@@ -72,7 +72,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		);
 
 		keywordsInput.val('');
-		keywordsInput.focus();
+		//keywordsInput.focus();
 
 		// Buttons
 

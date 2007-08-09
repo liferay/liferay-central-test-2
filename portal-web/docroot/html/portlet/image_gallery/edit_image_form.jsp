@@ -188,7 +188,9 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		document.<portlet:namespace />fm.<portlet:namespace />file.focus();
+	</c:if>
 
 	_$J(document).ready(function() {
 		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);

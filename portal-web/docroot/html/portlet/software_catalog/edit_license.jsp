@@ -30,10 +30,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 SCLicense license = (SCLicense)request.getAttribute(WebKeys.SOFTWARE_CATALOG_LICENSE);
 
 long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
-
-boolean openSource = BeanParamUtil.getBoolean(license, request, "openSource", false);
-boolean active = BeanParamUtil.getBoolean(license, request, "active", true);
-boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", true);
 %>
 
 <script type="text/javascript">
@@ -49,9 +45,12 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />licenseId" type="hidden" value="<%= licenseId %>" />
 
-<liferay-ui:tabs names="license" />
+<liferay-ui:tabs
+	names="license"
+	backURL="<%= redirect %>"
+/>
 
-<liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-select-at-least-one-framework-version" />
+<liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-enter-a-valid-name" />
 
 <table class="liferay-table">
 <tr>
@@ -75,7 +74,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 		<liferay-ui:message key="open-source" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="openSource" defaultValue="<%= openSource %>" />
+		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="openSource" defaultValue="<%= Boolean.TRUE %>" />
 	</td>
 </tr>
 <tr>
@@ -83,7 +82,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 		<liferay-ui:message key="active" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
+		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
 	</td>
 </tr>
 <tr>
@@ -91,7 +90,7 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 		<liferay-ui:message key="recommended" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="recommended" defaultValue="<%= recommended %>" />
+		<liferay-ui:input-field model="<%= SCLicense.class %>" bean="<%= license %>" field="recommended" defaultValue="<%= Boolean.TRUE %>" />
 	</td>
 </tr>
 </table>
@@ -104,6 +103,8 @@ boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", 
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

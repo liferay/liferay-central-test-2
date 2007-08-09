@@ -58,7 +58,6 @@ else {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productEntry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" enctype="multipart/form-data" onSubmit="<portlet:namespace />saveProductEntry(); return false;">
@@ -66,13 +65,17 @@ else {
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />productEntryId" type="hidden" value="<%= productEntryId %>" />
 
-<liferay-ui:tabs names="product" />
+<liferay-ui:tabs
+	names="product"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= ProductEntryNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= ProductEntryTypeException.class %>" message="please-select-a-valid-type" />
 <liferay-ui:error exception="<%= ProductEntryShortDescriptionException.class %>" message="please-enter-a-valid-short-description" />
 <liferay-ui:error exception="<%= ProductEntryLicenseException.class %>" message="please-select-at-least-one-license" />
-<liferay-ui:error exception="<%= ProductEntryImagesException.class %>" message="please-enter-a valid-main-screenshot" />
+<liferay-ui:error exception="<%= ProductEntryPageURLException.class %>" message="please-enter-a-valid-page-url" />
+<liferay-ui:error exception="<%= ProductEntryImagesException.class %>" message="please-enter-a-valid-main-screenshot" />
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
 <table class="liferay-table">
@@ -215,6 +218,8 @@ else {
 
 </form>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+	</script>
+</c:if>

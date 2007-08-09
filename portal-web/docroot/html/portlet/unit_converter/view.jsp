@@ -35,6 +35,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 <script type="text/javascript">
 	var lengthArray = new Array();
+
 	lengthArray[0] = new Option("0", "<liferay-ui:message key="meter" />");
 	lengthArray[1] = new Option("1", "<liferay-ui:message key="millimeter" />");
 	lengthArray[2] = new Option("2", "<liferay-ui:message key="centimeter" />");
@@ -48,6 +49,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	lengthArray[10] = new Option("10", "<liferay-ui:message key="handbreath" />");
 
 	var areaArray = new Array();
+
 	areaArray[0] = new Option("0", "<liferay-ui:message key="square-kilometer" />");
 	areaArray[1] = new Option("1", "<liferay-ui:message key="square-meter" />");
 	areaArray[2] = new Option("2", "<liferay-ui:message key="square-centimeter" />");
@@ -60,6 +62,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	areaArray[9] = new Option("9", "<liferay-ui:message key="acre" />");
 
 	var volumeArray = new Array();
+
 	volumeArray[0] = new Option("0", "Liter");
 	volumeArray[1] = new Option("1", "Cubic Centimeter");
 	volumeArray[2] = new Option("2", "Cubic Inch (Liquid Measure)");
@@ -75,6 +78,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	volumeArray[12] = new Option("12", "Log");
 
 	var massArray = new Array();
+
 	massArray[0] = new Option("0", "<liferay-ui:message key="kilogram" />");
 	massArray[1] = new Option("1", "<liferay-ui:message key="pound" />");
 	massArray[2] = new Option("2", "<liferay-ui:message key="ton" />");
@@ -86,6 +90,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	massArray[8] = new Option("8", "<liferay-ui:message key="gerah" />");
 
 	var temperatureArray = new Array();
+
 	temperatureArray[0] = new Option("0", "Kelvin");
 	temperatureArray[1] = new Option("1", "Celcius");
 	temperatureArray[2] = new Option("2", "Fahrenheit");

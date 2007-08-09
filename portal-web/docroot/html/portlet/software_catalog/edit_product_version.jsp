@@ -98,7 +98,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="changeLog" />
+			<liferay-ui:message key="change-log" />
 		</td>
 		<td>
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="changeLog" />
@@ -160,7 +160,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			</td>
 		<% } else { %>
 			<td>
-				<a href="<%=editProductEntryURL%>"><liferay-ui:message key="please-specify-the-group-id-and-artifact-id-to-be-able-to-add-versions-to-our-repository" /></a>
+				<a href="<%= editProductEntryURL %>"><liferay-ui:message key="you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version" /></a>
 			</td>
 		<% } %>
 	</tr>
@@ -184,8 +184,11 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = false;
 		}
 	}
-	document.<portlet:namespace />fm.<portlet:namespace />version.focus();
+
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		document.<portlet:namespace />fm.<portlet:namespace />version.focus();
+	</c:if>
+
 	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onkeyup = <portlet:namespace />showRepoStoreArtifact;
 	<portlet:namespace />showRepoStoreArtifact();
-
 </script>
