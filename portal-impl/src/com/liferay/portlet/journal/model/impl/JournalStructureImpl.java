@@ -62,7 +62,7 @@ public class JournalStructureImpl
 		"reserved-article-author-name";
 
 	public static final String RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS =
-		"reserved-article-author-email_address";
+		"reserved-article-author-email-address";
 
 	public static final String RESERVED_ARTICLE_AUTHOR_COMMENTS =
 		"reserved-article-author-comments";
