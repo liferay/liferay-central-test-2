@@ -69,7 +69,7 @@ else {
 	}
 </script>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form>
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
 <input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= message.getThreadId() %>" />

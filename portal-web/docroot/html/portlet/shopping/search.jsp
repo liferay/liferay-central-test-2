@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
 
 String categoryIds = ParamUtil.getString(request, "categoryIds");
@@ -33,13 +35,18 @@ long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/shopping/search" /></liferay-portlet:renderURL>
+
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
 <input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
 
-<div class="breadcrumbs">
-	<%= ShoppingUtil.getBreadcrumbs(breadcrumbsCategoryId, pageContext, renderRequest, renderResponse) %> &raquo; <liferay-ui:message key="search" />
-</div>
+<liferay-ui:tabs
+	names="search"
+	backURL="<%= redirect %>"
+/>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -81,6 +88,7 @@ for (int i = 0; i < results.size(); i++) {
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/shopping/view_item");
+	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
 	// SKU and small image

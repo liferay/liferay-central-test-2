@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = null;
 
@@ -39,18 +41,15 @@ if (node != null) {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
-
-&raquo;
-
-<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /><portlet:param name="nodeId" value="<%= String.valueOf(nodeId) %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>">
-<liferay-ui:message key="search" />
-</a>
-
-<br /><br />
+<liferay-ui:tabs
+	names="search"
+	backURL="<%= redirect %>"
+/>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();

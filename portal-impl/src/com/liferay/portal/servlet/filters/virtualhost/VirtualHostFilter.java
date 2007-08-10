@@ -217,10 +217,14 @@ public class VirtualHostFilter implements Filter {
 			friendlyURL.startsWith(
 				PortalUtil.getPathFriendlyURLPrivateUser()) ||
 			friendlyURL.startsWith(_PATH_C) ||
+			friendlyURL.startsWith(_PATH_DELEGATE) ||
 			friendlyURL.startsWith(_PATH_HTML) ||
 			friendlyURL.startsWith(_PATH_IMAGE) ||
 			friendlyURL.startsWith(_PATH_LANGUAGE) ||
-			friendlyURL.startsWith(_PATH_WAP)) {
+			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
+			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
+			friendlyURL.startsWith(_PATH_WAP) ||
+			friendlyURL.startsWith(_PATH_WSRP)) {
 
 			return false;
 		}
@@ -290,13 +294,21 @@ public class VirtualHostFilter implements Filter {
 
 	private static String _PATH_C = "/c/";
 
+	private static String _PATH_DELEGATE = "/delegate/";
+
 	private static String _PATH_HTML = "/html/";
 
 	private static String _PATH_IMAGE = "/image/";
 
-	private static String _PATH_LANGUAGE = "/language";
+	private static String _PATH_LANGUAGE = "/language/";
+
+	private static String _PATH_SITEMAP_XML = "/sitemap.xml";
+
+	private static String _PATH_SOFTWARE_CATALOG = "/software_catalog/";
 
 	private static String _PATH_WAP = "/wap/";
+
+	private static String _PATH_WSRP = "/wsrp/";
 
 	private ServletContext _ctx;
 

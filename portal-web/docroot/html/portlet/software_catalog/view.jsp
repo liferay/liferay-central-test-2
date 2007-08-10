@@ -27,6 +27,16 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "products");
 
+String tabs1Names = "products,my-products";
+
+if (PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
+	tabs1Names += ",licenses";
+}
+
+if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
+	tabs1Names += ",framework-versions";
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -35,9 +45,16 @@ portletURL.setParameter("struts_action", "/software_catalog/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<liferay-util:include page="/html/portlet/software_catalog/tabs1.jsp" />
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/software_catalog/search" /></liferay-portlet:renderURL>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+
+<liferay-ui:tabs
+	names="<%= tabs1Names %>"
+	portletURL="<%= portletURL %>"
+/>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("products") || tabs1.equals("my-products") %>'>

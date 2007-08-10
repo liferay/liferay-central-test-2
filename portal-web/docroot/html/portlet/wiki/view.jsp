@@ -24,7 +24,11 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
+
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -62,6 +66,7 @@ for (int i = 0; i < results.size(); i++) {
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/wiki/view_page");
+	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 

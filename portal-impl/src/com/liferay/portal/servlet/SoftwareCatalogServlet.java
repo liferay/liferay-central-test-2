@@ -25,17 +25,21 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 import java.text.SimpleDateFormat;
 
@@ -63,10 +67,6 @@ public class SoftwareCatalogServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		res.setContentType("text/xml; charset=UTF-8");
-
-		OutputStreamWriter out = new OutputStreamWriter(res.getOutputStream());
-
 		try {
 			long groupId = getGroupId(req);
 			String baseImageURL = getBaseImageURL(req);
@@ -75,16 +75,26 @@ public class SoftwareCatalogServlet extends HttpServlet {
 				req, "maxNumOfVersions");
 			Properties repoSettings = getRepoSettings(req);
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Group ID " + groupId);
+				_log.debug("Base image URL " + baseImageURL);
+				_log.debug("Oldtest date " + oldestDate);
+				_log.debug("Maximum number of versions " + maxNumOfVersions);
+			}
+
 			String repositoryXML =
 				SCProductEntryLocalServiceUtil.getRepositoryXML(
 					groupId, baseImageURL, oldestDate, maxNumOfVersions,
 					repoSettings);
 
-			if (!res.isCommitted()) {
-				out.write(repositoryXML);
-			}
+			String fileName = null;
+			byte[] byteArray = repositoryXML.getBytes("UTF-8");
+
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray,
+				Constants.TEXT_XML + "; charset=UTF-8");
 		}
-		catch (NoSuchGroupException e) {
+		catch (NoSuchGroupException nsge) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
 		catch (Exception e) {
@@ -94,10 +104,6 @@ public class SoftwareCatalogServlet extends HttpServlet {
 
 			res.sendError(
 				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
-		}
-		finally {
-			out.flush();
-			out.close();
 		}
 	}
 
@@ -113,21 +119,32 @@ public class SoftwareCatalogServlet extends HttpServlet {
 	protected long getGroupId(HttpServletRequest req)
 		throws SystemException, PortalException {
 
-		String path = req.getPathInfo();
-
-		long groupId = GetterUtil.getLong(path.substring(1));
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		if (groupId <= 0) {
-			groupId = ParamUtil.getLong(req, "groupId");
+			String path = GetterUtil.getString(req.getPathInfo());
+
+			path = StringUtil.replace(
+				path, StringPool.DOUBLE_SLASH, StringPool.SLASH);
+
+			if (Validator.isNotNull(path)) {
+				int pos = path.indexOf(StringPool.SLASH, 1);
+
+				if (pos == -1) {
+					pos = path.length();
+				}
+
+				groupId = GetterUtil.getLong(path.substring(1, pos));
+			}
 		}
 
 		if (groupId <= 0) {
 			long companyId = PortalInstances.getCompanyId(req);
 
-			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				companyId, path);
+			Group guestGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupImpl.GUEST);
 
-			groupId = group.getGroupId();
+			groupId = guestGroup.getGroupId();
 		}
 
 		return groupId;

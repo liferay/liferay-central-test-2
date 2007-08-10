@@ -27,6 +27,8 @@
 <c:if test="<%= SessionMessages.contains(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT) %>">
 	<br />
 
+	<table class="liferay-table">
+
 	<%
 	RepositoryReport repositoryReport = (RepositoryReport)SessionMessages.get(renderRequest, WebKeys.PLUGIN_REPOSITORY_REPORT);
 
@@ -38,25 +40,29 @@
 		Object status = repositoryReport.getState(repositoryURL);
 	%>
 
-		<%= repositoryURL %>
-
-		<c:choose>
-			<c:when test="<%= status == RepositoryReport.SUCCESS %>">
-				<span class="portlet-msg-success">
-				<liferay-ui:message key="ok" />
-				</span>
-			</c:when>
-			<c:otherwise>
-				<span class="portlet-msg-error">
-				<%= status %>
-				</span>
-			</c:otherwise>
-		</c:choose>
-
-		<br />
+		<tr>
+			<td>
+				<%= repositoryURL %>
+			</td>
+			<td>
+				<c:choose>
+					<c:when test="<%= status == RepositoryReport.SUCCESS %>">
+						<span class="portlet-msg-success">
+						<liferay-ui:message key="ok" />
+						</span>
+					</c:when>
+					<c:otherwise>
+						<span class="portlet-msg-error">
+						<%= status %>
+						</span>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
 
 	<%
 	}
 	%>
 
+	</table>
 </c:if>

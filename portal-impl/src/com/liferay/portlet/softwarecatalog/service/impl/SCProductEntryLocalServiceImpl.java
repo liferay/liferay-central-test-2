@@ -350,7 +350,7 @@ public class SCProductEntryLocalServiceImpl
 					break;
 				}
 
-				if (!productVersion.getRepoStoreArtifact()) {
+				if (!productVersion.isRepoStoreArtifact()) {
 					continue;
 				}
 
@@ -517,7 +517,7 @@ public class SCProductEntryLocalServiceImpl
 		DocUtil.add(typesEl, "type", productEntry.getType());
 
 		DocUtil.add(
-			el, "short-descriptionid", productEntry.getShortDescription());
+			el, "short-description", productEntry.getShortDescription());
 
 		if (Validator.isNotNull(productEntry.getLongDescription())) {
 			DocUtil.add(

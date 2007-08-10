@@ -38,14 +38,23 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("categoryId", String.valueOf(categoryId));
 %>
 
-<liferay-ui:tabs
+<%--<liferay-ui:tabs
 	names="entries,categories"
+	url="<%= portletURL.toString() %>"
+/>--%>
+
+<liferay-ui:tabs
+	names="entries"
 	url="<%= portletURL.toString() %>"
 />
 
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
+
 <c:choose>
 	<c:when test='<%= tabs1.equals("entries") %>'>
-		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
 
 		<%
@@ -80,7 +89,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		BlogsCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, categoryId);
 		%>
 
-		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>" />
 
@@ -197,7 +208,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<c:if test="<%= category != null %>">
-			<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+			<liferay-portlet:renderURLParams varImpl="searchURL" />
+			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>" />
 

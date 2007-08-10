@@ -238,11 +238,9 @@ try {
 		</c:if>
 
 		<input type="button" value="<liferay-ui:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
-
-		<br />
-
-		<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 	</div>
+
+	<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 
 <%
 }

@@ -219,11 +219,11 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositories" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
-
-		<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 	</td>
 </tr>
 </table>
+
+<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 
 <br />
 

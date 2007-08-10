@@ -31,10 +31,6 @@ BlogsCategory category = null;
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/blogs/view");
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveEntry(); return false;">
@@ -42,10 +38,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= String.valueOf(entryId) %>" />
 
 <liferay-ui:tabs
-	names="entries,categories,entry"
-	value="entry"
-	url="<%= portletURL.toString() %>"
-	url2="<%= currentURL %>"
+	names="entry"
 	backURL="<%= redirect %>"
 />
 

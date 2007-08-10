@@ -82,7 +82,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <liferay-ui:error exception="<%= ProductVersionNameException.class %>" message="please-enter-a-valid-version-name" />
 <liferay-ui:error exception="<%= ProductVersionChangeLogException.class %>" message="please-enter-a-valid-change-log" />
-<liferay-ui:error exception="<%= ProductVersionDownloadURLException.class %>" message="please-enter-at-least-one-of-direct-download-url-or-download-page-url" />
+<liferay-ui:error exception="<%= ProductVersionDownloadURLException.class %>" message="please-enter-a-download-page-url-or-a-direct-download-url" />
 <liferay-ui:error exception="<%= ProductVersionFrameworkVersionException.class %>" message="please-select-at-least-one-framework-version" />
 
 <h3><%= productEntry.getName() %></h3>
@@ -112,7 +112,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<liferay-ui:message key="supported-framework-versions" />
 		</td>
 		<td>
-			<select name="<portlet:namespace/>frameworkVersions" multiple="true">
+			<select multiple="true" name="<portlet:namespace/>frameworkVersions">
 
 				<%
 				Iterator itr = SCFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId.longValue(), true).iterator();

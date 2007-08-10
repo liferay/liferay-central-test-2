@@ -287,6 +287,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>renderURLParams</name>
+		<tag-class>com.liferay.taglib.portlet.RenderURLParamsTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>varImpl</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>param</name>
 		<tag-class>com.liferay.taglib.util.ParamTag</tag-class>
 		<body-content>JSP</body-content>

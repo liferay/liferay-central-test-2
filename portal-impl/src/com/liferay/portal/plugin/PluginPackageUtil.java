@@ -84,6 +84,9 @@ import org.dom4j.io.SAXReader;
  */
 public class PluginPackageUtil {
 
+	public static final String REPOSITORY_XML_FILENAME =
+		"liferay-plugin-repository.xml";
+
 	public static void endPluginPackageInstallation(String preliminaryContext) {
 		_installedPluginPackages.unregisterPluginPackageInstallation(
 			preliminaryContext);
@@ -103,8 +106,8 @@ public class PluginPackageUtil {
 
 				plugins.addAll(repository.getPluginPackages());
 			}
-			catch(PluginPackageException pe) {
-				String message = pe.getMessage();
+			catch(PluginPackageException ppe) {
+				String message = ppe.getMessage();
 
 				if (message.startsWith("Unable to communicate")) {
 					if (_log.isWarnEnabled()) {
@@ -361,8 +364,8 @@ public class PluginPackageUtil {
 		catch (SystemException se) {
 			throw se;
 		}
-		catch (Exception e2) {
-			throw new SystemException(e2);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
@@ -400,13 +403,14 @@ public class PluginPackageUtil {
 		PluginPackage pluginPackage) {
 
 		_installedPluginPackages.addPluginPackage(pluginPackage);
+
 		_updateAvailable = null;
 
 		try {
 			reIndex();
 		}
-		catch (SystemException e) {
-			_log.warn("The repositories could not be reindexed", e);
+		catch (SystemException se) {
+			_log.warn("The repositories could not be reindexed", se);
 		}
 	}
 
@@ -622,7 +626,7 @@ public class PluginPackageUtil {
 		RemotePluginPackageRepository repository = null;
 
 		String pluginsXmlURL =
-			repositoryURL + StringPool.SLASH + _REPOSITORY_XML_FILENAME;
+			repositoryURL + StringPool.SLASH + REPOSITORY_XML_FILENAME;
 
 		try {
 			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
@@ -855,9 +859,6 @@ public class PluginPackageUtil {
 	private static String _readText(String text) {
 		return Html.stripHtml(GetterUtil.getString(text));
 	}
-
-	private static final String _REPOSITORY_XML_FILENAME =
-		"liferay-plugin-repository.xml";
 
 	private static Log _log = LogFactory.getLog(PluginPackageUtil.class);
 

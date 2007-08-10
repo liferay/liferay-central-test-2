@@ -28,6 +28,8 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
 String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
+String redirect = ParamUtil.getString(request, "redirect");
+
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
@@ -50,9 +52,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/message_boards/search" /></liferay-portlet:renderURL>
+
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
-		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>" />
 
@@ -225,7 +231,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<c:if test="<%= category != null %>">
-			<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+			<liferay-portlet:renderURLParams varImpl="searchURL" />
+			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>" />
 

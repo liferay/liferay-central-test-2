@@ -62,28 +62,6 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission" %>
 
 <%
+DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-%>
-<%!
-public String _buildFrameworkVersions(List frameworkVersions) {
-	Iterator itr = frameworkVersions.iterator();
-	StringMaker sm = new StringMaker();
-	while (itr.hasNext()) {
-		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) itr.next();
-
-		if (Validator.isNotNull(frameworkVersion.getUrl())) {
-			sm.append("<a href='");
-			sm.append(frameworkVersion.getUrl());
-			sm.append("'>");
-			sm.append(frameworkVersion.getName());
-			sm.append("</a>");
-		} else {
-			sm.append(frameworkVersion.getName());
-		}
-		if (itr.hasNext()) {
-			sm.append(", ");
-		}
-	}
-	return sm.toString();
-}
 %>

@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 ShoppingItem item = (ShoppingItem)request.getAttribute(WebKeys.SHOPPING_ITEM);
 
 ShoppingItemField[] itemFields = (ShoppingItemField[])ShoppingItemFieldLocalServiceUtil.getItemFields(item.getItemId()).toArray(new ShoppingItemField[0]);
@@ -72,9 +74,10 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 <input name="<portlet:namespace />itemId" type="hidden" value="<%= item.getItemId() %>" />
 <input name="<portlet:namespace />fields" type="hidden" value="" />
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="categories" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="item"
+	backURL="<%= redirect %>"
+/>
 
 <div class="breadcrumbs">
 	<%= ShoppingUtil.getBreadcrumbs(item.getCategoryId(), pageContext, renderRequest, renderResponse) %>

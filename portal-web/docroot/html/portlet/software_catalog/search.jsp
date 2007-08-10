@@ -25,13 +25,22 @@
 <%@ include file="/html/portlet/software_catalog/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 String type = ParamUtil.getString(request, "type");
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/software_catalog/search" /></liferay-portlet:renderURL>
 
-<liferay-util:include page="/html/portlet/software_catalog/tabs1.jsp" />
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+
+<liferay-ui:tabs
+	names="search"
+	backURL="<%= redirect %>"
+/>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -104,10 +113,10 @@ try {
 
 	<select name="<portlet:namespace/>type">
 		<option value=""></option>
-		<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
-		<option <%= type.equals("theme")? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
-		<option <%= type.equals("layout")? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
-		<option <%= type.equals("extension")? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
+		<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
+		<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
+		<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
+		<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
 	</select>
 
 	<input type="submit" value="<liferay-ui:message key="search-products" />" />

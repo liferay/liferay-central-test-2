@@ -161,9 +161,15 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String resourceIdParam = getResourceIdParam(urlFragments[0]);
 
 		if (urlFragments.length == 1) {
-			addParam(
-				params, "struts_action", "/software_catalog/view");
-			addParam(params, "tabs1", urlFragments[0]);
+			if (urlFragments[0].equals("search")) {
+				addParam(
+					params, "struts_action", "/software_catalog/search");
+			}
+			else {
+				addParam(
+					params, "struts_action", "/software_catalog/view");
+				addParam(params, "tabs1", urlFragments[0]);
+			}
 		}
 		else if (urlFragments.length == 2) {
 			if (urlFragments[1].equals("new")) {

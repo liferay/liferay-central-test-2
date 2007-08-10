@@ -100,7 +100,7 @@ if (entry != null) {
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
 	</td>
 </tr>
-<tr>
+<%--<tr>
 	<td>
 		<liferay-ui:message key="category" />
 	</td>
@@ -118,7 +118,7 @@ if (entry != null) {
 	<td colspan="2">
 		<br />
 	</td>
-</tr>
+</tr>--%>
 <tr>
 	<td>
 		<liferay-ui:message key="display-date" />

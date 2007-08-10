@@ -135,36 +135,23 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 </c:if>
 
-<tr>
-	<td>
-		<liferay-ui:message key="screenshots" />:
-	</td>
-	<td>
-	</td>
-</tr>
 </table>
 
+<br />
+
 <c:if test="<%= latestProductVersion != null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<th colspan="2">
-			<liferay-ui:message key="information-about-the-latest-version" />:
-		</th>
-	</tr>
+	<table class="liferay-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="release-date" />:
 		</td>
 		<td>
-			<%= latestProductVersion.getModifiedDate() %>
+			<%= dateFormatDate.format(latestProductVersion.getModifiedDate()) %>
 		</td>
-	</tr><tr>
+	</tr>
+	<tr>
 		<td>
-			<liferay-ui:message key="changeLog" />:
+			<liferay-ui:message key="change-log" />:
 		</td>
 		<td>
 			<%= latestProductVersion.getChangeLog() %>
@@ -172,10 +159,10 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="supported-framework-versions" />:
+			<liferay-ui:message key="framework-versions" />:
 		</td>
 		<td>
-			<%= _buildFrameworkVersions(latestProductVersion.getFrameworkVersions()) %>
+			<%= _getFrameworkVersions(latestProductVersion.getFrameworkVersions()) %>
 		</td>
 	</tr>
 	<tr>
@@ -183,22 +170,19 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<liferay-ui:message key="download-links" />:
 		</td>
 		<td>
-			<c:if test="<%= Validator.isNotNull(latestProductVersion.getDirectDownloadURL()) %>">
-				<a href="<%= latestProductVersion.getDirectDownloadURL() %>">
-					<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" align="absmiddle" alt="<liferay-ui:message key="direct-download" />" border="0" />
-				</a>
+			<c:if test="<%= Validator.isNotNull(latestProductVersion.getDownloadPageURL()) %>">
+				<liferay-ui:icon image="download" message="download-page" url="<%= latestProductVersion.getDownloadPageURL() %>" />
 			</c:if>
 
-			<c:if test="<%= Validator.isNotNull(latestProductVersion.getDownloadPageURL()) %>">
-				<a href="<%= latestProductVersion.getDownloadPageURL() %>">
-					<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download-page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0" />
-				</a>
+			<c:if test="<%= Validator.isNotNull(latestProductVersion.getDirectDownloadURL()) %>">
+				<liferay-ui:icon image="download" message="direct-download" url="<%= latestProductVersion.getDirectDownloadURL() %>" />
 			</c:if>
 		</td>
 	</tr>
-</c:if>
+	</table>
 
-<br />
+	<br />
+</c:if>
 
 <c:if test="<%= latestProductVersion == null %>">
 	<div class="portlet-msg-info">
@@ -259,7 +243,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 		headerNames.add("version");
 		headerNames.add("supported-framework-versions");
-		headerNames.add("date");
+		headerNames.add("release-date");
 		headerNames.add(StringPool.BLANK);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, viewProductVersionURL, headerNames, null);
@@ -298,8 +282,8 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 			row.addText(sm.toString());
 
-			row.addText(_buildFrameworkVersions(curProductVersion.getFrameworkVersions()));
-			row.addText(String.valueOf(curProductVersion.getModifiedDate()));
+			row.addText(_getFrameworkVersions(curProductVersion.getFrameworkVersions()));
+			row.addText(dateFormatDate.format(curProductVersion.getModifiedDate()));
 
 			// Action
 
@@ -316,3 +300,32 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
+
+<%!
+public String _getFrameworkVersions(List frameworkVersions) {
+	Iterator itr = frameworkVersions.iterator();
+
+	StringMaker sm = new StringMaker();
+
+	while (itr.hasNext()) {
+		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();
+
+		if (Validator.isNotNull(frameworkVersion.getUrl())) {
+			sm.append("<a href='");
+			sm.append(frameworkVersion.getUrl());
+			sm.append("'>");
+			sm.append(frameworkVersion.getName());
+			sm.append("</a>");
+		}
+		else {
+			sm.append(frameworkVersion.getName());
+		}
+
+		if (itr.hasNext()) {
+			sm.append(", ");
+		}
+	}
+
+	return sm.toString();
+}
+%>

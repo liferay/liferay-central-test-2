@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
 long breadcrumbsMessageId = ParamUtil.getLong(request, "breadcrumbsMessageId");
 
@@ -35,17 +37,20 @@ long threadId = ParamUtil.getLong(request, "threadId");
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/message_boards/search" /></liferay-portlet:renderURL>
+
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
 <input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>" />
 <input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
 
-<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
-
-<div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(breadcrumbsCategoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %> &raquo; <liferay-ui:message key="search" />
-</div>
+<liferay-ui:tabs
+	names="search"
+	backURL="<%= redirect %>"
+/>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -108,6 +113,7 @@ try {
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/message_boards/view_message");
+		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("messageId", String.valueOf(messageId));
 
 		row.addText(category.getName(), rowURL);

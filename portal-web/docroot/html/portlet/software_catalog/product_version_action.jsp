@@ -29,17 +29,14 @@ ResultRow row =	(ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT
 
 SCProductVersion productVersion = (SCProductVersion) row.getObject();
 %>
-<% if (Validator.isNotNull(productVersion.getDirectDownloadURL())) { %>
-	<a href="<%=productVersion.getDirectDownloadURL()%>">
-		<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "direct-download")%>')" alt="<%=LanguageUtil.get(pageContext, "direct-download")%>" align="absmiddle" border="0" />
-	</a>
-<% } %>
-<% if (Validator.isNotNull(productVersion.getDownloadPageURL())) { %>
-	<a href="<%=productVersion.getDownloadPageURL()%>">
-		<img src="/html/themes/classic/images/common/download.png" onmousemove="ToolTip.show(event, this, '<%=LanguageUtil.get(pageContext, "download-page")%>')" alt="<%=LanguageUtil.get(pageContext, "download-page")%>" align="absmiddle" border="0" />
-	</a>
-<% } %>
 
+<c:if test="<%= Validator.isNotNull(productVersion.getDownloadPageURL()) %>">
+	<liferay-ui:icon image="download" message="download-page" url="<%= productVersion.getDownloadPageURL() %>" />
+</c:if>
+
+<c:if test="<%= Validator.isNotNull(productVersion.getDirectDownloadURL()) %>">
+	<liferay-ui:icon image="download" message="direct-download" url="<%= productVersion.getDirectDownloadURL() %>" />
+</c:if>
 
 <c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productVersion.getProductEntryId(), ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
