@@ -173,6 +173,7 @@
 
 .portlet-section-body td {
 	background: #DCDCDC;
+	border-bottom: 1px solid #BFBFBF;
 	border-top: 1px solid #BFBFBF;
 	padding: 0.3em 1em;
 }
@@ -186,6 +187,7 @@
 
 .portlet-section-alternate td {
 	background: #fff;
+	border-bottom: 1px solid #fff;
 	border-top: 1px solid #BFBFBF;
 	padding: 0.3em 1em;
 }
