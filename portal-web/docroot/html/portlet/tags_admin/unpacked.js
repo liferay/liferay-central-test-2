@@ -20,7 +20,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var form = jQuery('#' + params.form);
 		var keywordsInput = jQuery('#' + params.keywordsInput);
 		var updateEntryButton = jQuery('#' + params.updateEntryButton);
-		
+
 		instance._form = form;
 
 		// Show all entries
@@ -522,17 +522,20 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 	},
-	
+
 	_sendMessage: function(type, key) {
 		var instance = this;
+
 		var msgType = 'portlet-msg-error';
+
 		if (type == 'success') {
 			msgType = 'portlet-msg-success';
 		}
+
 		var message = Liferay.Language.get(key);
-		
+
 		var currentMsg = jQuery('.lfr-message-response');
-		
+
 		if (currentMsg.length) {
 			currentMsg.removeClass('portlet-msg-success').removeClass('portlet-msg-error');
 			currentMsg.addClass(msgType);
@@ -540,16 +543,18 @@ Liferay.Portlet.TagsAdmin = new Class({
 		}
 		else {
 			currentMsg = jQuery('<div class="' + msgType + ' lfr-message-response">' + message + '</div>');
+
 			instance._form.prepend(currentMsg);
 		}
+
 		var fadeOutTimeout = setTimeout(
 			function() {
 				currentMsg.fadeOut('slow');
 				clearTimeout(fadeOutTimeout);
 			},
-		7000);
+			7000
+		);
 	},
-	
 
 	_updateEntry: function(instance) {
 		var params = instance.params;

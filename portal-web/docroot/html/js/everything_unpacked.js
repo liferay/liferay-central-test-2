@@ -14824,9 +14824,9 @@ var Viewport = {
 
 String.prototype.trim = jQuery.trim;
 
-//0-200: Theme Developer
-//200-400: Portlet Developer
-//400+: Liferay
+// 0-200: Theme Developer
+// 200-400: Portlet Developer
+// 400+: Liferay
 
 Liferay.zIndex = {
 	DOCK:			10,
