@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -72,9 +73,28 @@ public class JournalArticleFinder {
 			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
+		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, articleId, version, title, description, content,
+			type, new String[] {structureId}, templateId, displayDateGT,
+			displayDateLT, approved, expired, reviewDate, andOperator);
+	}
+
+	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			long companyId, long groupId, String articleId, Double version,
+			String title, String description, String content, String type,
+			String[] structureIds, String templateId, Date displayDateGT,
+			Date displayDateLT, Boolean approved, Boolean expired,
+			Date reviewDate, boolean andOperator)
+		throws SystemException {
+
 		articleId = StringUtil.upperCase(articleId);
 		title = StringUtil.lowerCase(title);
 		content = StringUtil.lowerCase(content);
+
+		if ((structureIds == null) || (structureIds.length == 0)) {
+			structureIds = new String[] {null};
+		}
+
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
@@ -94,6 +114,24 @@ public class JournalArticleFinder {
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
+			}
+
+			if (structureIds.length > 1) {
+				StringMaker sm = new StringMaker();
+
+				sm.append("(");
+
+				for (int i = 0; i < structureIds.length; i++) {
+					sm.append("(structureId = ? [$AND_OR_NULL_CHECK$]) OR ");
+				}
+
+				sm.append(") [$AND_OR_CONNECTOR$]");
+
+				sql = StringUtil.replace(
+					sql,
+					"(structureId = ? [$AND_OR_NULL_CHECK$]) " +
+						"[$AND_OR_CONNECTOR$]",
+					sm.toString());
 			}
 
 			if (approved == null) {
@@ -133,8 +171,12 @@ public class JournalArticleFinder {
 			qPos.add(content);
 			qPos.add(type);
 			qPos.add(type);
-			qPos.add(structureId);
-			qPos.add(structureId);
+
+			for (int i = 0; i < structureIds.length; i++) {
+				qPos.add(structureIds[i]);
+				qPos.add(structureIds[i]);
+			}
+
 			qPos.add(templateId);
 			qPos.add(templateId);
 			qPos.add(displayDateGT_TS);
@@ -255,9 +297,30 @@ public class JournalArticleFinder {
 			OrderByComparator obc)
 		throws SystemException {
 
+		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, articleId, version, title, description, content,
+			type, new String[] {structureId}, templateId, displayDateGT,
+			displayDateLT, approved, expired, reviewDate, andOperator, begin,
+			end, obc);
+	}
+
+	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			long companyId, long groupId, String articleId, Double version,
+			String title, String description, String content, String type,
+			String[] structureIds, String templateId, Date displayDateGT,
+			Date displayDateLT, Boolean approved, Boolean expired,
+			Date reviewDate, boolean andOperator, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
 		articleId = StringUtil.upperCase(articleId);
 		title = StringUtil.lowerCase(title);
 		content = StringUtil.lowerCase(content);
+
+		if ((structureIds == null) || (structureIds.length == 0)) {
+			structureIds = new String[] {null};
+		}
+
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
@@ -276,6 +339,24 @@ public class JournalArticleFinder {
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
+			}
+
+			if (structureIds.length > 1) {
+				StringMaker sm = new StringMaker();
+
+				sm.append("(");
+
+				for (int i = 0; i < structureIds.length; i++) {
+					sm.append("(structureId = ? [$AND_OR_NULL_CHECK$]) OR ");
+				}
+
+				sm.append(") [$AND_OR_CONNECTOR$]");
+
+				sql = StringUtil.replace(
+					sql,
+					"(structureId = ? [$AND_OR_NULL_CHECK$]) " +
+						"[$AND_OR_CONNECTOR$]",
+					sm.toString());
 			}
 
 			if (approved == null) {
@@ -316,8 +397,12 @@ public class JournalArticleFinder {
 			qPos.add(content);
 			qPos.add(type);
 			qPos.add(type);
-			qPos.add(structureId);
-			qPos.add(structureId);
+
+			for (int i = 0; i < structureIds.length; i++) {
+				qPos.add(structureIds[i]);
+				qPos.add(structureIds[i]);
+			}
+
 			qPos.add(templateId);
 			qPos.add(templateId);
 			qPos.add(displayDateGT_TS);

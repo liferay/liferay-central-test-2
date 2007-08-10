@@ -586,6 +586,24 @@ public class JournalArticleLocalServiceUtil {
 			reviewDate, andOperator, begin, end, obc);
 	}
 
+	public static java.util.List search(long companyId, long groupId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.search(companyId, groupId, articleId,
+			version, title, description, content, type, structureIds,
+			templateId, displayDateGT, displayDateLT, approved, expired,
+			reviewDate, andOperator, begin, end, obc);
+	}
+
 	public static int searchCount(long companyId, long groupId,
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
@@ -601,6 +619,23 @@ public class JournalArticleLocalServiceUtil {
 			articleId, version, title, description, content, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
 			reviewDate, andOperator);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, boolean andOperator)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.searchCount(companyId, groupId,
+			articleId, version, title, description, content, type,
+			structureIds, templateId, displayDateGT, displayDateLT, approved,
+			expired, reviewDate, andOperator);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(

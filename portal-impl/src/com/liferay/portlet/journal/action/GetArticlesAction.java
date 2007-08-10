@@ -44,8 +44,6 @@ import java.io.StringReader;
 
 import java.text.DateFormat;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -110,15 +108,11 @@ public class GetArticlesAction extends Action {
 		String content = null;
 		String type = DAOParamUtil.getString(req, "type");
 		String[] structureIds = StringUtil.split(
-				DAOParamUtil.getString(req, "structureId"));
+			DAOParamUtil.getString(req, "structureId"));
 		String templateId = DAOParamUtil.getString(req, "templateId");
 
 		Date displayDateGT = null;
-		
-		if (structureIds.length == 0) {
-			structureIds = new String[]{null};
-		}
-		
+
 		String displayDateGTParam = ParamUtil.getString(req, "displayDateGT");
 
 		if (Validator.isNotNull(displayDateGTParam)) {
@@ -163,31 +157,10 @@ public class GetArticlesAction extends Action {
 			obc = new ArticleDisplayDateComparator(false);
 		}
 
-		if (structureIds.length > 1) { 
-			List results = new ArrayList();
-			
-			for (int i = 0; i< structureIds.length; i++) {
-				results.addAll(JournalArticleLocalServiceUtil.search(
-						companyId, groupId, articleId, version, title, 
-						description, content, type, structureIds[i].trim(), 
-						templateId, displayDateGT, displayDateLT, approved, 
-						expired, reviewDate, andOperator, begin, end, obc));
-			}
-			
-			Collections.sort(results, obc);
-			
-			if (results.size() > end) {
-				return results.subList(0, end);
-			}
-			
-			return results;
-		}
-		else {
-			return JournalArticleLocalServiceUtil.search(
-					companyId, groupId, articleId, version, title, description, content,
-					type, structureIds[0], templateId, displayDateGT, displayDateLT,
-					approved, expired, reviewDate, andOperator, begin, end, obc);
-		}
+		return JournalArticleLocalServiceUtil.search(
+			companyId, groupId, articleId, version, title, description, content,
+			type, structureIds, templateId, displayDateGT, displayDateLT,
+			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
 	protected byte[] getContent(HttpServletRequest req, List articles)
