@@ -310,8 +310,9 @@ Liferay.Navigation = new Class({
 					}
 				}
 			);
+
 			var sortableLinks = navList.find('a');
-			
+
 			sortableLinks.click(
 				function() {
 					if (jQuery.browser.msie) {
@@ -320,6 +321,7 @@ Liferay.Navigation = new Class({
 					else {
 						window.location = this.href;
 					}
+
 					return false;
 				}
 			);

@@ -23082,6 +23082,21 @@ Liferay.Navigation = new Class({
 					}
 				}
 			);
+
+			var sortableLinks = navList.find('a');
+
+			sortableLinks.click(
+				function() {
+					if (jQuery.browser.msie) {
+						setTimeout('window.location = "' + this.href + '";', 0);
+					}
+					else {
+						window.location = this.href;
+					}
+
+					return false;
+				}
+			);
 		}
 	},
 
