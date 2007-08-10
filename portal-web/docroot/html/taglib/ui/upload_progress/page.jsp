@@ -38,12 +38,12 @@ String message = (String)request.getAttribute("liferay-ui:upload-progress:messag
 </script>
 
 <c:if test="<%= Validator.isNotNull(iframeSrc) %>">
-	<iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe>
+	<div><iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe></div>
 </c:if>
 
-<iframe frameborder="0" id="<%= id %>-poller" src="" style="width: 0; height: 0;"></iframe>
+<div><iframe frameborder="0" id="<%= id %>-poller" src="" style="height: 0; width: 0;"></iframe></div>
 
-<div id="<%= id %>-bar-div" style="text-align: center; display: none;">
+<div id="<%= id %>-bar-div" style="display: none; text-align: center;">
 	<br />
 
 	<c:if test="<%= Validator.isNotNull(message) %>">

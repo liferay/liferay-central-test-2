@@ -24,232 +24,218 @@
 
 <%@ include file="/html/portlet/plugin_installer/init.jsp" %>
 
-<c:if test="<%= !permissionChecker.isOmniadmin()%>">
-	<liferay-ui:message key="this-tool-can-only-be-used-by-omniadmin-users" />
-</c:if>
+<c:choose>
+	<c:when test="<%= permissionChecker.isOmniadmin() %>">
+		<c:choose>
+			<c:when test="<%= !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
 
-<c:if test="<%= permissionChecker.isOmniadmin() && !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
-	<%
-	PortletURL configurationURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
-	configurationURL.setWindowState(WindowState.MAXIMIZED);
+				<%
+				PortletURL configurationURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-	configurationURL.setParameter("struts_action", "/plugin_installer/view");
-	configurationURL.setParameter("referer", currentURL);
-	configurationURL.setParameter("tabs1", "configuration");
-    %>
-	<a href="<%=configurationURL%>"><liferay-ui:message key="auto-deploy-has-to-be-enabled-to-use-this-tool" /></a>
-</c:if>
+				configurationURL.setWindowState(WindowState.MAXIMIZED);
 
-<c:if test="<%= permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
-<%
-String redirect = currentURL;
-if (!themeDisplay.getPortletDisplay().isStateMax()) {
-	PortletURL refererURL = renderResponse.createRenderURL();
-	refererURL.setWindowState(WindowState.MAXIMIZED);
-	redirect = refererURL.toString();
-}
+				configurationURL.setParameter("struts_action", "/plugin_installer/view");
+				configurationURL.setParameter("redirect", currentURL);
+				configurationURL.setParameter("tabs1", "configuration");
+				%>
 
-PortletURL browseRepoURL = ((RenderResponseImpl) renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+				<a href="<%= configurationURL %>"><liferay-ui:message key="auto-deploy-is-not-enabled" /></a>
+			</c:when>
+			<c:otherwise>
 
-browseRepoURL.setWindowState(WindowState.MAXIMIZED);
+				<%
+				PortletURL browseRepositoryURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-browseRepoURL.setParameter("struts_action", "/plugin_installer/view");
-browseRepoURL.setParameter("referer", redirect);
-browseRepoURL.setParameter("tabs1", "browse-repository");
+				browseRepositoryURL.setWindowState(WindowState.MAXIMIZED);
 
-PortletURL installPluginURL = ((RenderResponseImpl) renderResponse).createActionURL(PortletKeys.PLUGIN_INSTALLER);
+				browseRepositoryURL.setParameter("struts_action", "/plugin_installer/view");
+				browseRepositoryURL.setParameter("redirect", currentURL);
+				browseRepositoryURL.setParameter("tabs1", "browse-repository");
 
-installPluginURL.setParameter("struts_action", "/plugin_installer/install_plugin");
-installPluginURL.setParameter("redirect", redirect);
-%>
+				PortletURL installPluginURL = ((RenderResponseImpl)renderResponse).createActionURL(PortletKeys.PLUGIN_INSTALLER);
 
-<script type="text/javascript">
-	function <portlet:namespace />reloadRepositories(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-		submitForm(document.<portlet:namespace />fm, "<%=installPluginURL%>")
-	}
-</script>
+				installPluginURL.setParameter("struts_action", "/plugin_installer/install_plugin");
+				installPluginURL.setParameter("redirect", currentURL);
+				%>
 
-<form method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />referer" type="hidden" value="<%=redirect%>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%=redirect%>" />
+				<script type="text/javascript">
+					function <portlet:namespace />reloadRepositories(redirect) {
+						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
+						submitForm(document.<portlet:namespace />fm, "<%= installPluginURL %>")
+					}
+				</script>
 
+				<form method="post" name="<portlet:namespace />fm">
+				<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+				<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 
-<%
-try {
+				<%
+				try {
+					String downloadProgressId = "update_manager_" + System.currentTimeMillis();
 
-	String downloadProgressId = "update_manager_" + System.currentTimeMillis();
+					List headerNames = new ArrayList();
 
-	List headerNames = new ArrayList();
+					headerNames.add("plugin-package");
+					headerNames.add("status");
+					headerNames.add("installed-version");
+					headerNames.add("available-version");
+					headerNames.add(StringPool.BLANK);
 
-	headerNames.add("plugin-package");
-	headerNames.add("status");
-	headerNames.add("installed-version");
-	headerNames.add("available-version");
-	headerNames.add(StringPool.BLANK);
+					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, browseRepositoryURL, headerNames, null);
 
-	SearchContainer searchContainer = new SearchContainer(
-		renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-		SearchContainer.DEFAULT_DELTA, browseRepoURL, headerNames, null);
+					List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
 
-	List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
-	int total = pluginPackages.size();
+					int total = pluginPackages.size();
 
-	searchContainer.setTotal(total);
+					searchContainer.setTotal(total);
 
-	pluginPackages = pluginPackages.subList(
-		searchContainer.getStart(),
-		Math.min(total, searchContainer.getEnd()));
+					pluginPackages = pluginPackages.subList(searchContainer.getStart(), Math.min(total, searchContainer.getEnd()));
 
-	List resultRows = searchContainer.getResultRows();
+					List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < pluginPackages.size(); i++) {
+					for (int i = 0; i < pluginPackages.size(); i++) {
+						PluginPackage pluginPackage = (PluginPackage)pluginPackages.get(i);
 
-		PluginPackage pluginPackage = (PluginPackage) pluginPackages.get(i);
-		PluginPackage availablePluginPackage = null;
-		try {
-			availablePluginPackage = PluginPackageUtil.getLatestAvailablePluginPackage(pluginPackage.getGroupId(), pluginPackage.getArtifactId());
-		}
-		catch (Exception se) {
-		}
+						PluginPackage availablePluginPackage = null;
 
+						try {
+							availablePluginPackage = PluginPackageUtil.getLatestAvailablePluginPackage(pluginPackage.getGroupId(), pluginPackage.getArtifactId());
+						}
+						catch (Exception e) {
+						}
 
-		String pluginPackageModuleId = pluginPackage.getModuleId();
-		String pluginPackageName = pluginPackage.getName();
-		String pluginPackageVersion = pluginPackage.getVersion();
-		String pluginPackageContext = pluginPackage.getContext();
+						String pluginPackageModuleId = pluginPackage.getModuleId();
+						String pluginPackageName = pluginPackage.getName();
+						String pluginPackageVersion = pluginPackage.getVersion();
+						String pluginPackageContext = pluginPackage.getContext();
 
-		String pluginPackageStatus = "up-to-date";
-		if (PluginPackageUtil.isInstallationInProcess(pluginPackage.getContext())) {
-			pluginPackageStatus = "installation-in-process";
-		}
-		else if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
-			pluginPackageStatus = "update-available";
-		}
-		else if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
-			pluginPackageStatus = "unknown";
-		}
+						String pluginPackageStatus = "up-to-date";
 
-		ResultRow row = new ResultRow(new Object[]{pluginPackage, availablePluginPackage, pluginPackageStatus, downloadProgressId, redirect}, pluginPackageModuleId, i);
+						if (PluginPackageUtil.isInstallationInProcess(pluginPackage.getContext())) {
+							pluginPackageStatus = "installation-in-process";
+						}
+						else if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
+							pluginPackageStatus = "update-available";
+						}
+						else if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
+							pluginPackageStatus = "unknown";
+						}
 
-		row.setClassName("status-" + pluginPackageStatus);
+						ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, downloadProgressId, currentURL}, pluginPackageModuleId, i);
 
-		// Name
+						row.setClassName("status-" + pluginPackageStatus);
 
-		StringMaker sm = new StringMaker();
+						// Name
 
-		sm.append("<b>");
-		sm.append(pluginPackageName);
-		sm.append("</b> ");
-		sm.append("<br />/");
-		sm.append(pluginPackageContext);
+						StringMaker sm = new StringMaker();
 
-		row.addText(sm.toString());
+						sm.append("<b>");
+						sm.append(pluginPackageName);
+						sm.append("</b> ");
+						sm.append("<br />/");
+						sm.append(pluginPackageContext);
 
-		// Status
+						row.addText(sm.toString());
 
-		row.addText(pluginPackageStatus);
+						// Status
 
-		// Installed version
+						row.addText(LanguageUtil.get(pageContext, pluginPackageStatus));
 
-		row.addText(pluginPackageVersion);
+						// Installed version
 
-		// Available version
+						row.addText(pluginPackageVersion);
 
-		if (availablePluginPackage != null) {
+						// Available version
 
-			PortletURL rowURL = ((RenderResponseImpl) renderResponse)
-				.createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+						if (availablePluginPackage != null) {
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
+							PortletURL rowURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-			rowURL.setParameter("struts_action", "/plugin_installer/view");
-			rowURL.setParameter("referer", redirect);
-			rowURL.setParameter("tabs1", "browse-repository");
-			rowURL.setParameter(
-				"repositoryURL", availablePluginPackage.getRepositoryURL());
-			rowURL.setParameter(
-				"moduleId", availablePluginPackage.getModuleId());
+							rowURL.setWindowState(WindowState.MAXIMIZED);
 
-			sm = new StringMaker();
-			sm.append("<a href='");
-			sm.append(rowURL.toString());
-			sm.append("'>");
-			sm.append(availablePluginPackage.getVersion());
-			sm.append(getNoteIcon(themeDisplay, availablePluginPackage.getChangeLog()));
-			sm.append("</a>");
-			row.addText(sm.toString());
-		}
-		else {
-			row.addText(StringPool.DASH);
-		}
+							rowURL.setParameter("struts_action", "/plugin_installer/view");
+							rowURL.setParameter("referer", currentURL);
+							rowURL.setParameter("tabs1", "browse-repository");
+							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
+							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
 
-		// Actions
+							sm = new StringMaker();
 
-		row.addJSP(
-			"/html/portlet/update_manager/plugin_package_action.jsp");
+							sm.append(availablePluginPackage.getVersion());
+							sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+							sm.append(themeDisplay.getPathThemeImages());
+							sm.append("/document_library/page.png");
+							sm.append("' onmousemove=\"ToolTip.show(event, this, '");
+							sm.append(availablePluginPackage.getChangeLog());
+							sm.append("')\" />");
 
-		// Add result row
+							row.addText(sm.toString(), rowURL);
+						}
+						else {
+							row.addText(StringPool.DASH);
+						}
 
-		resultRows.add(row);
+						// Actions
 
-	}
+						row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
 
-%>
+						// Add result row
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+						resultRows.add(row);
+					}
+				%>
 
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-	<liferay-ui:upload-progress
-		id="<%= downloadProgressId %>"
-		message="downloading"
-		redirect="<%= redirect %>"
-/>
-<%
-	if (total == 0) {
-%>
-		<br />
+					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-		<%= LanguageUtil.get(pageContext, "there-are-no-plugins-installed")%>
-<%
-	}
-%>
+					<liferay-ui:upload-progress
+						id="<%= downloadProgressId %>"
+						message="downloading"
+						redirect="<%= currentURL %>"
+					/>
 
-   <br />
+					<br />
 
-   <input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= browseRepoURL.toString() %>');" value='<%=LanguageUtil.get(pageContext, "install-more-plugins")%>'/>
+					<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= browseRepositoryURL.toString() %>');" value="<liferay-ui:message key="install-more-plugins" />" />
 
-	<div class="separator"><!-- --></div>
+					<div class="separator"><!-- --></div>
 
-	<div>
-	   <c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
-			<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
-	   </c:if>
-	   <input type="button" value="<liferay-ui:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
+					<div>
+						<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
+							<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
+						</c:if>
 
-	   <br />
+						<input type="button" value="<liferay-ui:message key="refresh" />" onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
 
-	   <liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
+						<br />
 
-   </div>
+						<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
+					</div>
 
-<%
-}
-catch (PluginPackageException e) {
-	_log.warn("Error browsing the repository", e);
-%>
+				<%
+				}
+				catch (PluginPackageException ppe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Error browsing the repository", ppe);
+					}
+				%>
 
-	<span class="portlet-msg-error">
-	<liferay-ui:message key="error-obtaining-available-plugins" />
-	</span>
+					<span class="portlet-msg-error">
+					<liferay-ui:message key="error-obtaining-available-plugins" />
+					</span>
 
-<%
-}
-%>
-</form>
-</c:if>
+				<%
+				}
+				%>
+				</form>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
+	</c:otherwise>
+</c:choose>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.update_manager.view.jsp");

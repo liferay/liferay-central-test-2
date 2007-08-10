@@ -25,27 +25,32 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
-ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object[] rowObj = (Object[]) row.getObject();
-PluginPackage pluginPackage = (PluginPackage) rowObj[0];
-PluginPackage availablePluginPackage = (PluginPackage) rowObj[1];
-String pluginPackageStatus = (String) rowObj[2];
-String downloadProgressId = (String) rowObj[3];
-String redirect = (String) rowObj[4];
+Object[] rowObj = (Object[])row.getObject();
 
-String downloadURL = (availablePluginPackage == null)?"":availablePluginPackage.getDownloadURL();
+PluginPackage pluginPackage = (PluginPackage)rowObj[0];
+PluginPackage availablePluginPackage = (PluginPackage)rowObj[1];
+String pluginPackageStatus = (String)rowObj[2];
+String downloadProgressId = (String)rowObj[3];
+String redirect = (String)rowObj[4];
+
+String downloadURL = StringPool.BLANK;
+
+if (availablePluginPackage != null) {
+	downloadURL = availablePluginPackage.getDownloadURL();
+}
 %>
 
 <c:if test='<%= pluginPackageStatus.equals("update-available") %>'>
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
 		<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="url" value="<%= downloadURL %>" />
 		<portlet:param name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
 		<portlet:param name="<%= Constants.PROGRESS_ID %>" value="<%= downloadProgressId %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="download" url='<%= "javascript: " + downloadProgressId + ".startProgress(); self.location='" + updateURL + "'"%>' message="update"/>
+	<liferay-ui:icon image="download" url='<%= "javascript: " + downloadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>' message="update" />
 </c:if>

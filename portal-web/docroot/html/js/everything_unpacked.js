@@ -23075,26 +23075,12 @@ Liferay.Navigation = new Class({
 					revert:	true,
 					floats:	(floatStyle == 'left' || floatStyle == 'right'),
 					tolerance: 'pointer',
+					snapDistance: 10,
 					onStop: function() {
 						instance._saveSortables(this);
 
 						Liferay.Publisher.deliver('navigation', this);
 					}
-				}
-			);
-
-			var sortableLinks = navList.find('a');
-
-			sortableLinks.click(
-				function() {
-					if (jQuery.browser.msie) {
-						setTimeout('window.location = "' + this.href + '";', 0);
-					}
-					else {
-						window.location = this.href;
-					}
-
-					return false;
 				}
 			);
 		}

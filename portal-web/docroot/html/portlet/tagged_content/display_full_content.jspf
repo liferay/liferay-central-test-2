@@ -85,41 +85,40 @@
 		</c:if>
 	</c:when>
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
-
 		<div class="wiki-body">
+
 			<%
 			WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
-	
+
 			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
-	
+
 			WikiNode node = wikiPage.getNode();
 			%>
-	
+
 			<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
 				<%= wikiPage.getContent() %>
 			</c:if>
-	
+
 			<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
-	
+
 				<%
 				PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
-	
+
 				pageURL.setWindowState(WindowState.MAXIMIZED);
 				pageURL.setPortletMode(PortletMode.VIEW);
-	
+
 				pageURL.setParameter("struts_action", "/wiki/view_page");
 				%>
-	
+
 				<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
 			</c:if>
-	
+
 			<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
 <pre>
 <%= wikiPage.getContent() %>
 </pre>
 			</c:if>
 		</div>
-
 	</c:when>
 	<c:otherwise>
 		<%= className %> is not a valid type.

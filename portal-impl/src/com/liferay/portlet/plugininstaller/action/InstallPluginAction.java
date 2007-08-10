@@ -255,22 +255,7 @@ public class InstallPluginAction extends PortletAction {
 		try {
 			String url = ParamUtil.getString(req, "url");
 
-			String fileName = null;
-
-			if (Validator.isNotNull(deploymentContext)) {
-				fileName =
-					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
-			}
-			else {
-				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
-
-				deploymentContext = fileName.substring(
-					0, fileName.length() - 4);
-			}
-
 			URL urlObj = new URL(url);
-
-			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
 			HostConfiguration hostConfig = Http.getHostConfig(url.toString());
 
@@ -296,12 +281,27 @@ public class InstallPluginAction extends PortletAction {
 
 			long contentLength = getMethod.getResponseContentLength();
 
+			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
+
 			ProgressInputStream pis = new ProgressInputStream(
 				req, getMethod.getResponseBodyAsStream(), contentLength,
 				progressId);
 
 			String deployDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+
+			String fileName = null;
+
+			if (Validator.isNotNull(deploymentContext)) {
+				fileName =
+					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
+			}
+			else {
+				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
+
+				deploymentContext = fileName.substring(
+					0, fileName.length() - 4);
+			}
 
 			String tmpFilePath =
 				deployDir + StringPool.SLASH + _DOWNLOAD_DIR +

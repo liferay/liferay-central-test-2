@@ -47,8 +47,7 @@
 			pluginType = PortletImpl.PLUGIN_TYPE;
 		}
 
-		String referer = ParamUtil.getString(request, WebKeys.REFERER);
-		String redirect = ParamUtil.getString(request, "redirect", currentURL);
+		String redirect = ParamUtil.getString(request, "redirect");
 
 		String downloadProgressId = "downloadPlugin" + System.currentTimeMillis();
 		String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
@@ -60,7 +59,7 @@
 		portletURL.setParameter("struts_action", "/plugin_installer/view");
 		portletURL.setParameter("tabs1", tabs1);
 		portletURL.setParameter("tabs2", tabs2);
-		portletURL.setParameter("referer", referer);
+		portletURL.setParameter("redirect", redirect);
 
 		String tabs1Names = "browse-repository,upload-file,download-file,configuration";
 
@@ -88,6 +87,8 @@
 					document.<portlet:namespace />fm.encoding = "multipart/form-data";
 				}
 
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+
 				if (progressId) {
 					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.PROGRESS_ID %>.value = progressId;
 				}
@@ -96,7 +97,6 @@
 					document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 				}
 
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 				submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>');
 			}
 
@@ -122,8 +122,7 @@
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-		<input name="<portlet:namespace />referer" type="hidden" value="<%=referer%>" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%=currentURL%>" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 		<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
 		<input name="<portlet:namespace />progressId" type="hidden" value="" />
 
@@ -131,17 +130,17 @@
 			names="<%= tabs1Names %>"
 			param="tabs1"
 			url="<%= portletURL.toString() %>"
-			backURL="<%= referer %>"
+			backURL="<%= redirect %>"
 		/>
 
 		<c:choose>
-			<c:when test='<%=tabs1.equals("upload-file") %>'>
+			<c:when test='<%= tabs1.equals("upload-file") %>'>
 				<%@ include file="/html/portlet/plugin_installer/upload_file.jspf" %>
 			</c:when>
-			<c:when test='<%=tabs1.equals("download-file") %>'>
+			<c:when test='<%= tabs1.equals("download-file") %>'>
 				<%@ include file="/html/portlet/plugin_installer/download_file.jspf" %>
 			</c:when>
-			<c:when test='<%=tabs1.equals("configuration") %>'>
+			<c:when test='<%= tabs1.equals("configuration") %>'>
 				<%@ include file="/html/portlet/plugin_installer/configuration.jspf" %>
 			</c:when>
 			<c:otherwise>

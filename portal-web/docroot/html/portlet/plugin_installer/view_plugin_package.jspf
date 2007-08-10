@@ -25,8 +25,6 @@
 <%
 PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(moduleId, repositoryURL);
 
-// Breadcrumbs
-
 breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.getName() + "</a>");
 %>
 
@@ -123,7 +121,7 @@ breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.ge
 			</c:if>
 
 			<c:if test="<%= license.isOsiApproved() %>">
-				(<%= LanguageUtil.get(pageContext, "open-source")%>)
+				(<liferay-ui:message key="open-source" />)
 			</c:if>
 
 			<c:if test="<%= itr.hasNext() %>">, </c:if>
@@ -238,7 +236,7 @@ List screenshots = pluginPackage.getScreenshots();
 
 <input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>" />
 
-<input type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');" />
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');" />
 
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"

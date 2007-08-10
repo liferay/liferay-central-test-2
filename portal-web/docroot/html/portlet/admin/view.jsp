@@ -83,7 +83,7 @@
 					installPluginsURL.setWindowState(WindowState.MAXIMIZED);
 
 					installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
-					installPluginsURL.setParameter("referer", currentURL);
+					installPluginsURL.setParameter("redirect", currentURL);
 					installPluginsURL.setParameter("tabs1", tabs1);
 					installPluginsURL.setParameter("tabs2", tabs2);
 				}

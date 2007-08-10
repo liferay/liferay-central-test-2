@@ -160,8 +160,7 @@ try {
 		rowURL.setParameter("struts_action", "/plugin_installer/view");
 		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("tabs2", tabs2);
-		rowURL.setParameter("referer", referer);
-		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("redirect", redirect);
 		rowURL.setParameter("moduleId", pluginPackageModuleId);
 		rowURL.setParameter("repositoryURL", pluginPackageRepositoryURL);
 
@@ -214,9 +213,9 @@ try {
 		sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
 		sm.append(themeDisplay.getPathThemeImages());
 		sm.append("/document_library/page.png");
-		sm.append("' onmousemove='ToolTip.show(event, this, \"");
+		sm.append("' onmousemove=\"ToolTip.show(event, this, '");
 		sm.append(pluginPackageChangeLog);
-		sm.append("\")'>");
+		sm.append("')\" />");
 
 		row.addText(sm.toString());
 

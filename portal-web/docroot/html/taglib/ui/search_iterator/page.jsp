@@ -142,15 +142,20 @@ if (rowChecker != null) {
 			classHoverName = "portlet-section-body-hover";
 		}
 
+		if (Validator.isNotNull(row.getClassName())) {
+			className = row.getClassName();
+		}
+
+		if (Validator.isNotNull(row.getClassHoverName())) {
+			classHoverName = row.getClassHoverName();
+		}
+
 		if (row.isRestricted()) {
 			className += " restricted";
 			classHoverName += " restricted";
 		}
 
-		if (Validator.isNull(row.getClassName())) {
-			row.setClassName(className);
-		}
-
+		row.setClassName(className);
 		row.setClassHoverName(classHoverName);
 
 		request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
@@ -168,7 +173,7 @@ if (rowChecker != null) {
 		}
 	%>
 
-		<tr class="<%= row.getClassName() %>" style="font-weight: <%= row.isBold() ? "bold" : "normal" %>;"
+		<tr class="<%= className %>" style="font-weight: <%= row.isBold() ? "bold" : "normal" %>;"
 			<c:if test="<%= searchContainer.isHover() %>">
 				onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';"
 			</c:if>
