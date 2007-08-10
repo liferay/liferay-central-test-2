@@ -1,10 +1,7 @@
 # harmonise line-endings
 Replace !(\n\r)|(\r\n)|(\r)!\n!
 
-# escape rogue HTML (Default ON)
-#Replace !<!&lt;!
-#Replace !>!&gt;!
-
+# replace 4 spaces with tab
 Replace !    !\t!
 
 # "code" block
@@ -27,8 +24,9 @@ Replace !''''''!<b></b>!
 # "hands-off" block
 Lock !\[\n((.|\n)*?)\n\]!<pre>&1</pre>!
 
-# tabs, emphasis and rulers
-Replace !\n\s*\n!\n<br/><br/>\n!
+# bold, emphasis and rulers
+Replace !(^|\n)(^|\n)!\n<br/>\n!
+Replace !_(.+?)_!<u>$1</u>!
 Replace !'{5}(.+?)'{5}!<b><i>$1</i></b>!
 Replace !'{3}(.+?)'{3}!<b>$1</b>!
 Replace !'{2}(.+?)'{2}!<i>$1</i>!

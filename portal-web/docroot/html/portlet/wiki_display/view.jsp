@@ -47,11 +47,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </tr>
 </table>
 
-<br />
-
 <%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
-
-<br />
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 
@@ -94,7 +90,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 			<liferay-ui:tabs names="comments" />
 
 			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+				<portlet:param name="struts_action" value="/wiki_display/edit_page_discussion" />
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
