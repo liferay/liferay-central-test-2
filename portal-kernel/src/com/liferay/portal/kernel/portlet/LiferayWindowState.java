@@ -49,6 +49,19 @@ public class LiferayWindowState extends WindowState {
 		}
 	}
 
+	public static boolean isMaximized(HttpServletRequest req) {
+		String state = req.getParameter("p_p_state");
+
+		if ((state != null) &&
+			(state.equals(WindowState.MAXIMIZED.toString()))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isPopUp(HttpServletRequest req) {
 		String state = req.getParameter("p_p_state");
 

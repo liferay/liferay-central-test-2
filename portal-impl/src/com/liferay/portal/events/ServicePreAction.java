@@ -829,6 +829,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setServerPort(req.getServerPort());
 		themeDisplay.setSecure(req.isSecure());
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
+		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(req));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
 		themeDisplay.setPathApplet(contextPath + "/applets");
 		themeDisplay.setPathCms(contextPath + "/cms");

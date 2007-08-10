@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/calendar/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
 Recurrence recurrence = null;
@@ -173,9 +175,10 @@ if ((event.getRepeating()) && (recurrence != null)) {
 }
 %>
 
-<liferay-util:include page="/html/portlet/calendar/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="events" />
-</liferay-util:include>
+<liferay-ui:tabs
+	names="event"
+	backURL="<%= redirect %>"
+/>
 
 <div class="vevent">
 	<table class="liferay-table">

@@ -61,6 +61,15 @@
 		isSignedIn: function() {
 			return <%= themeDisplay.isSignedIn() %>;
 		},
+		isStateExclusive: function() {
+			return <%= themeDisplay.isStateExclusive() %>;
+		},
+		isStateMaximized: function() {
+			return <%= themeDisplay.isStateMaximized() %>;
+		},
+		isStatePopUp: function() {
+			return <%= themeDisplay.isStatePopUp() %>;
+		},
 		getPathContext: function() {
 			return "<%= themeDisplay.getPathContext() %>";
 		},

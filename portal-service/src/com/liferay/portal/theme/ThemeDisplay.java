@@ -346,6 +346,14 @@ public class ThemeDisplay implements Serializable {
 		_stateExclusive = stateExclusive;
 	}
 
+	public boolean isStateMaximized() {
+		return _stateMaximized;
+	}
+
+	public void setStateMaximized(boolean stateMaximized) {
+		_stateMaximized = stateMaximized;
+	}
+
 	public boolean isStatePopUp() {
 		return _statePopUp;
 	}
@@ -701,6 +709,7 @@ public class ThemeDisplay implements Serializable {
 		_serverPort = 0;
 		_secure = false;
 		_stateExclusive = false;
+		_stateMaximized = false;
 		_statePopUp = false;
 		_pathApplet = StringPool.BLANK;
 		_pathCms = StringPool.BLANK;
@@ -773,6 +782,7 @@ public class ThemeDisplay implements Serializable {
 	private int _serverPort;
 	private boolean _secure;
 	private boolean _stateExclusive;
+	private boolean _stateMaximized;
 	private boolean _statePopUp;
 	private String _pathApplet = StringPool.BLANK;
 	private String _pathCms = StringPool.BLANK;
