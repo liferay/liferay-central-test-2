@@ -347,7 +347,12 @@ public class JournalArticleFinder {
 				sm.append("(");
 
 				for (int i = 0; i < structureIds.length; i++) {
-					sm.append("(structureId = ? [$AND_OR_NULL_CHECK$]) OR ");
+					if (i == 0) {
+						sm.append("(structureId = ? [$AND_OR_NULL_CHECK$])");						
+					}
+					else {
+						sm.append(" OR (structureId = ? [$AND_OR_NULL_CHECK$])");
+					}
 				}
 
 				sm.append(") [$AND_OR_CONNECTOR$]");
