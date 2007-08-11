@@ -42,6 +42,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_id = id;
 		_resourcePrimKey = resourcePrimKey;
 		_groupId = groupId;
+		_userId = userId;
 		_articleId = articleId;
 		_version = version;
 		_title = title;
