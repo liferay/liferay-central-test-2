@@ -823,8 +823,9 @@ public class JournalArticleLocalServiceImpl
 
 		return new JournalArticleDisplayImpl(
 			article.getId(), article.getResourcePrimKey(), article.getGroupId(),
-			article.getArticleId(), article.getVersion(), article.getTitle(),
-			article.getDescription(), article.getAvailableLocales(), content);
+			article.getUserId(), article.getArticleId(), article.getVersion(), 
+			article.getTitle(), article.getDescription(), 
+			article.getAvailableLocales(), content);
 	}
 
 	public List getArticles() throws SystemException {

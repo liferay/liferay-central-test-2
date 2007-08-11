@@ -33,7 +33,7 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public JournalArticleDisplayImpl(long id, long resourcePrimKey,
-									 long groupId, String articleId,
+									 long groupId, long userId, String articleId,
 									 double version, String title,
 									 String description,
 									 String[] availableLocales,
@@ -60,6 +60,10 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public long getGroupId() {
 		return _groupId;
+	}
+	
+	public long getUserId() {
+		return _userId;
 	}
 
 	public String getArticleId() {
@@ -93,6 +97,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
+	private long _userId;
 	private String _articleId;
 	private double _version;
 	private String _title;

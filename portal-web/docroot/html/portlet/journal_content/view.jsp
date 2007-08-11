@@ -125,14 +125,14 @@ catch (NoSuchArticleException nsae) {
 	</div>
 </c:if>
 
-<c:if test="<%= article != null %>">
+<c:if test="<%= articleDisplay != null %>">
 	<div>
 		<c:if test="<%= enableRatings %>">
 			<br />
 
 			<liferay-ui:ratings
 				className="<%= JournalArticle.class.getName() %>"
-				classPK="<%= article.getResourcePrimKey() %>"
+				classPK="<%= articleDisplay.getResourcePrimKey() %>"
 				url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
 			/>
 		</c:if>
@@ -147,9 +147,9 @@ catch (NoSuchArticleException nsae) {
 			<liferay-ui:discussion
 				formAction="<%= discussionURL %>"
 				className="<%= JournalArticle.class.getName() %>"
-				classPK="<%= article.getResourcePrimKey() %>"
-				userId="<%= article.getUserId() %>"
-				subject="<%= article.getTitle() %>"
+				classPK="<%= articleDisplay.getResourcePrimKey() %>"
+				userId="<%= articleDisplay.getUserId() %>"
+				subject="<%= articleDisplay.getTitle() %>"
 				redirect="<%= currentURL %>"
 			/>
 		</c:if>
