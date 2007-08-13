@@ -31,15 +31,6 @@ String oldCategoryPath = (String)request.getAttribute(WebKeys.PORTLET_CATEGORY_P
 
 String newCategoryPath = LanguageUtil.get(pageContext, portletCategory.getName());
 
-// Make a valid id from the Category name (which can contain any characters).
-
-StringMaker divId = new StringMaker();
-for( int chIndex=0; chIndex<newCategoryPath.length(); chIndex++ ) {
-	Character c = newCategoryPath.charAt(chIndex);
-	if( Character.isJavaIdentifierStart(c) ) divId.append( c );
-}
-newCategoryPath = divId.toString();
-
 if (Validator.isNotNull(oldCategoryPath)) {
 	newCategoryPath = oldCategoryPath + ":" + newCategoryPath;
 }
@@ -124,23 +115,9 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 					while (itr2.hasNext()) {
 						Portlet portlet = (Portlet)itr2.next();
-
-						// Make a valid id path from the Category and Portlet names.
-
-						divId = new StringMaker();
-						divId.append( newCategoryPath );
-						divId.append( ":" );
-
-						String origPortletName = PortalUtil.getPortletTitle(portlet, application, locale);
-
-						for( int chIndex=0; chIndex<origPortletName.length(); chIndex++ ) {
-							Character c = origPortletName.charAt(chIndex);
-							if( Character.isJavaIdentifierStart(c) ) divId.append( c );
-						}
-
 					%>
 
-						<div class="layout_configuration_portlet" id="<%= divId %>">
+						<div class="layout_configuration_portlet" id="<%= newCategoryPath %>:<%= PortalUtil.getPortletTitle(portlet, application, locale) %>">
 							<table border="0" cellpadding="2" cellspacing="0" width="100%">
 							<tr>
 								<td width="99%">
@@ -152,7 +129,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
 
 											if (<%= !portlet.isInstanceable() %>) {
-												var div = document.getElementById('<%= divId %>');
+												var div = document.getElementById('<%= StringUtil.replace(newCategoryPath + ":" + PortalUtil.getPortletTitle(portlet, application, locale), "'", "\\'") %>');
 
 												div.parentNode.removeChild(div);
 											};"
