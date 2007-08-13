@@ -31,10 +31,16 @@ String oldCategoryPath = (String)request.getAttribute(WebKeys.PORTLET_CATEGORY_P
 
 String newCategoryPath = LanguageUtil.get(pageContext, portletCategory.getName());
 
-Pattern p = Pattern.compile("[:,a-z,A-Z,0-9]+");
+Pattern pattern = Pattern.compile("[:,a-z,A-Z,0-9]+");
+
+Matcher matcher = pattern.matcher(newCategoryPath);
+
 StringMaker divId = new StringMaker();
-Matcher m = p.matcher(newCategoryPath);
-while( m.find() ) divId.append( m.group() );
+
+while (matcher.find()) {
+	divId.append(matcher.group());
+}
+
 newCategoryPath = divId.toString();
 
 if (Validator.isNotNull(oldCategoryPath)) {
@@ -122,11 +128,16 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 					while (itr2.hasNext()) {
 						Portlet portlet = (Portlet)itr2.next();
 
-						divId = new StringMaker(newCategoryPath);
+						divId = new StringMaker();
+						
+						divId.append(newCategoryPath);
 						divId.append(":");
-						m = p.matcher(PortalUtil.getPortletTitle(portlet, application, locale));
-						while( m.find() ) divId.append( m.group() );
 
+						matcher = pattern.matcher(PortalUtil.getPortletTitle(portlet, application, locale));
+
+						while (matcher.find()) {
+							divId.append(matcher.group());
+						}
 					%>
 
 						<div class="layout_configuration_portlet" id="<%= divId %>">

@@ -20633,7 +20633,7 @@ var LayoutConfiguration = {
 			}
 		}
 		else {
-			word = word.toLowerCase();
+			word = word.toLowerCase().match(/[a-z,A-Z,0-9]*/g).join("");
 
 			for (var i = 0; i < categories.length; i++) {
 				categories[i].style.display = "none";
