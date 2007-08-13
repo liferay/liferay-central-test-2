@@ -31,6 +31,12 @@ String oldCategoryPath = (String)request.getAttribute(WebKeys.PORTLET_CATEGORY_P
 
 String newCategoryPath = LanguageUtil.get(pageContext, portletCategory.getName());
 
+Pattern p = Pattern.compile("[:,a-z,A-Z,0-9]+");
+StringMaker divId = new StringMaker();
+Matcher m = p.matcher(newCategoryPath);
+while( m.find() ) divId.append( m.group() );
+newCategoryPath = divId.toString();
+
 if (Validator.isNotNull(oldCategoryPath)) {
 	newCategoryPath = oldCategoryPath + ":" + newCategoryPath;
 }
@@ -115,9 +121,15 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 					while (itr2.hasNext()) {
 						Portlet portlet = (Portlet)itr2.next();
+
+						divId = new StringMaker(newCategoryPath);
+						divId.append(":");
+						m = p.matcher(PortalUtil.getPortletTitle(portlet, application, locale));
+						while( m.find() ) divId.append( m.group() );
+
 					%>
 
-						<div class="layout_configuration_portlet" id="<%= newCategoryPath %>:<%= PortalUtil.getPortletTitle(portlet, application, locale) %>">
+						<div class="layout_configuration_portlet" id="<%= divId %>">
 							<table border="0" cellpadding="2" cellspacing="0" width="100%">
 							<tr>
 								<td width="99%">
@@ -129,7 +141,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
 
 											if (<%= !portlet.isInstanceable() %>) {
-												var div = document.getElementById('<%= StringUtil.replace(newCategoryPath + ":" + PortalUtil.getPortletTitle(portlet, application, locale), "'", "\\'") %>');
+												var div = document.getElementById('<%= divId %>');
 
 												div.parentNode.removeChild(div);
 											};"
