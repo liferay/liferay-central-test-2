@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
+<xsl:stylesheet
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:dyn="http://exslt.org/dynamic" 
 	xmlns:exsl="http://exslt.org/common"
@@ -14,14 +15,13 @@
 	exclude-result-prefixes="xalan"
 	extension-element-prefixes="date dyn exsl func math random regexp set str xalan">
 
-  <!--
-	-- For details on the use of the above declared extentions visit
-	--
-	-- http://www.exslt.org
+	<!--
+	See http://www.exslt.org for details on the use of the above declared
+	extentions.
 	-->
 
-  <xsl:output method="html" omit-xml-declaration="yes"/>
-  <xsl:template match="/">
+	<xsl:output method="html" omit-xml-declaration="yes"/>
+	<xsl:template match="/">
 
-  </xsl:template>
+	</xsl:template>
 </xsl:stylesheet>
