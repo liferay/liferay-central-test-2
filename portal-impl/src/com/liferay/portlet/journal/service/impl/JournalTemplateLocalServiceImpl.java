@@ -369,6 +369,19 @@ public class JournalTemplateLocalServiceImpl
 		return JournalTemplateUtil.countByGroupId(groupId);
 	}
 
+	public boolean hasTemplate(long groupId, String templateId)
+		throws SystemException {
+
+		try {
+			getTemplate(groupId, templateId);
+
+			return true;
+		}
+		catch (PortalException pe) {
+			return false;
+		}
+	}
+
 	public List search(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,

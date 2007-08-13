@@ -46,6 +46,13 @@ String redirect = ParamUtil.getString(request, "redirect", StringPool.BLANK);
 PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 %>
 
+<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
+	<span class="portlet-msg-error">
+	<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
+	<liferay-ui:message key="please-sign-in-to-continue" />
+	</span>
+</c:if>
+
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
 	url2="<%= createAccountURL.toString() %>"
@@ -103,13 +110,6 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 					<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 						<span class="portlet-msg-error">
 						<liferay-ui:message key="please-enter-a-valid-login" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
-						<liferay-ui:message key="please-sign-in-to-continue" />
 						</span>
 					</c:if>
 

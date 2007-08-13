@@ -256,6 +256,13 @@ public class JournalTemplateLocalServiceUtil {
 		return journalTemplateLocalService.getTemplatesCount(groupId);
 	}
 
+	public static boolean hasTemplate(long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.hasTemplate(groupId, templateId);
+	}
+
 	public static java.util.List search(long companyId, long groupId,
 		java.lang.String templateId, java.lang.String structureId,
 		java.lang.String structureIdComparator, java.lang.String name,

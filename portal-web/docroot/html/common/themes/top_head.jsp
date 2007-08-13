@@ -37,17 +37,6 @@
 <link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
 
 <%
-try {
-	JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(portletGroupId.longValue(), "CSS-TEMPLATE");
-%>
-
-	<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= portletGroupId.longValue() %>&templateId=CSS-TEMPLATE" />
-
-<%
-}
-catch (NoSuchTemplateException nste) {
-}
-
 List portlets = null;
 
 if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {

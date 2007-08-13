@@ -160,6 +160,9 @@ public interface JournalTemplateLocalService {
 	public int getTemplatesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public boolean hasTemplate(long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List search(long companyId, long groupId,
 		java.lang.String templateId, java.lang.String structureId,
 		java.lang.String structureIdComparator, java.lang.String name,
