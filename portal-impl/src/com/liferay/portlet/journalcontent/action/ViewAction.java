@@ -56,8 +56,6 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		PortletPreferences prefs = req.getPreferences();
-		
-		String xmlRequest = ParamUtil.getXMLRequest(req, res);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -83,6 +81,8 @@ public class ViewAction extends PortletAction {
 
 		boolean disableCaching = GetterUtil.getBoolean(
 			prefs.getValue("disable-caching", StringPool.BLANK));
+
+		String xmlRequest = ParamUtil.toXML(req, res);
 
 		JournalArticleDisplay articleDisplay = null;
 

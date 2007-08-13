@@ -104,11 +104,12 @@ public class JournalContentUtil {
 	}
 
 	public static JournalArticleDisplay getDisplay(
-			long groupId, String articleId, String templateId, String languageId,
-			ThemeDisplay themeDisplay, boolean disableCaching) {
-		
-		return getDisplay(groupId, articleId, templateId, languageId,
-				themeDisplay, disableCaching, null);
+		long groupId, String articleId, String templateId, String languageId,
+		ThemeDisplay themeDisplay, boolean disableCaching) {
+
+		return getDisplay(
+			groupId, articleId, templateId, languageId, themeDisplay,
+			disableCaching, null);
 	}
 
 	public static JournalArticleDisplay getDisplay(
@@ -120,7 +121,7 @@ public class JournalContentUtil {
 
 		if (disableCaching) {
 			return _getArticleDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay, 
+				groupId, articleId, templateId, languageId, themeDisplay,
 				xmlRequest);
 		}
 
@@ -131,7 +132,7 @@ public class JournalContentUtil {
 
 		if (articleDisplay == null) {
 			articleDisplay = _getArticleDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay, 
+				groupId, articleId, templateId, languageId, themeDisplay,
 				xmlRequest);
 
 			if (articleDisplay != null) {
@@ -178,7 +179,7 @@ public class JournalContentUtil {
 
 		try {
 			return JournalArticleLocalServiceUtil.getArticleDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay, 
+				groupId, articleId, templateId, languageId, themeDisplay,
 				xmlRequest);
 		}
 		catch (Exception e) {

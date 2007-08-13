@@ -794,8 +794,8 @@ public class JournalArticleLocalServiceImpl
 
 				if (Validator.isNotNull(xmlRequest)) {
 					try {
-						Document request = 
-							reader.read(new StringReader(xmlRequest));
+						Document request = reader.read(
+							new StringReader(xmlRequest));
 
 						root.add(request.getRootElement().createCopy());
 					}

@@ -23,10 +23,13 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
+
 import java.text.DateFormat;
+
 import java.util.Date;
 import java.util.Enumeration;
 
@@ -37,6 +40,7 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowStateException;
+
 import javax.servlet.ServletRequest;
 
 import org.dom4j.Document;
@@ -476,79 +480,6 @@ public class ParamUtil {
 		return null;
 	}
 
-	public static String getXMLRequest(PortletRequest req, PortletResponse res) {
-		String xml = null;
-
-		Document doc = DocumentHelper.createDocument();
-
-		Element request = doc.addElement("request");
-
-		request.addElement("container-type").setText(
-				"portlet");
-		request.addElement("container-namespace").setText(
-				req.getContextPath());
-		request.addElement("content-type").setText(
-				req.getResponseContentType());
-
-		request.addElement("server-name").setText(
-				String.valueOf(req.getServerName()));
-		request.addElement("server-port").setText(
-				String.valueOf(req.getServerPort()));
-		request.addElement("is-secure").setText(
-				String.valueOf(req.isSecure()));
-		request.addElement("auth-type").setText(
-				String.valueOf(req.getAuthType()));
-		request.addElement("remote-user").setText(
-				String.valueOf(req.getRemoteUser()));
-		request.addElement("context-path").setText(
-				String.valueOf(req.getContextPath()));
-
-		request.addElement("locale").setText(req.getLocale().toString());
-		request.addElement("portlet-mode").setText(
-				req.getPortletMode().toString());
-		request.addElement("portlet-session-id").setText(
-				req.getRequestedSessionId());
-		request.addElement("scheme").setText(req.getScheme());
-		request.addElement("window-state").setText(
-				req.getWindowState().toString());
-
-		if (req instanceof RenderRequest) {
-			request.addElement("action").setText(Boolean.FALSE.toString());
-		}
-		else if (req instanceof ActionRequest) {
-			request.addElement("action").setText(Boolean.TRUE.toString());
-		}
-
-		if (res instanceof RenderResponse) {
-			_generateXML((RenderResponse)res, request);
-		}
-
-		Element parameters = request.addElement("parameters");
-
-		Enumeration e = req.getParameterNames();
-
-		while (e.hasMoreElements()) {
-			String param = (String)e.nextElement();
-
-			Element parameter = parameters.addElement("parameter");
-			parameter.addElement("name").addText(param);
-
-			String[] values = req.getParameterValues(param);
-
-			for (int i = 0; i < values.length; i++) {
-				parameter.addElement("value").addText(values[i]);
-			}
-		}
-
-		try {
-			xml = XMLFormatter.toString(doc);
-		}
-		catch (IOException ioe) {
-		}
-
-		return xml;
-	}
-
 	public static void print(PortletRequest req) {
 		Enumeration e = req.getParameterNames();
 
@@ -562,33 +493,113 @@ public class ParamUtil {
 			}
 		}
 	}
-	
-	private static void _generateXML(RenderResponse res, Element request) {
-		PortletURL url = null;
 
-		request.addElement("portlet-namespace").setText(
-				res.getNamespace());
+	public static String toXML(PortletRequest req, PortletResponse res) {
+		String xml = null;
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element request = doc.addElement("request");
+
+		DocUtil.add(request, "container-type", "portlet");
+		DocUtil.add(request, "container-namespace", req.getContextPath());
+		DocUtil.add(request, "content-type", req.getResponseContentType());
+		DocUtil.add(request, "server-name", req.getServerName());
+		DocUtil.add(request, "server-port", req.getServerPort());
+		DocUtil.add(request, "secure", req.isSecure());
+		DocUtil.add(request, "auth-type", req.getAuthType());
+		DocUtil.add(request, "remote-user", req.getRemoteUser());
+		DocUtil.add(request, "context-path", req.getContextPath());
+		DocUtil.add(request, "locale", req.getLocale());
+		DocUtil.add(request, "portlet-mode", req.getPortletMode());
+		DocUtil.add(request, "portlet-session-id", req.getRequestedSessionId());
+		DocUtil.add(request, "scheme", req.getScheme());
+		DocUtil.add(request, "window-state", req.getWindowState());
+
+		if (req instanceof RenderRequest) {
+			DocUtil.add(request, "action", Boolean.FALSE);
+		}
+		else if (req instanceof ActionRequest) {
+			DocUtil.add(request, "action", Boolean.TRUE);
+		}
+
+		if (res instanceof RenderResponse) {
+			_toXML((RenderResponse)res, request);
+		}
+
+		Element parameters = request.addElement("parameters");
+
+		Enumeration enu = req.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			Element parameter = parameters.addElement("parameter");
+
+			DocUtil.add(parameter, "name", name);
+
+			String[] values = req.getParameterValues(name);
+
+			for (int i = 0; i < values.length; i++) {
+				DocUtil.add(parameter, "value", values[i]);
+			}
+		}
 
 		try {
-			url = res.createRenderURL();
-			request.addElement("render-url").setText(url.toString());
+			xml = XMLFormatter.toString(doc);
+		}
+		catch (IOException ioe) {
+		}
 
+		return xml;
+	}
+
+	private static void _toXML(RenderResponse res, Element request) {
+		DocUtil.add(request, "portlet-namespace", res.getNamespace());
+
+		PortletURL url = res.createRenderURL();
+
+		DocUtil.add(request, "render-url", url);
+
+		try {
 			url.setWindowState(LiferayWindowState.EXCLUSIVE);
-			request.addElement("render-url-exclusive").setText(url.toString());
 
-			url.setWindowState(LiferayWindowState.MAXIMIZED);
-			request.addElement("render-url-maximized").setText(url.toString());
-
-			url.setWindowState(LiferayWindowState.MINIMIZED);
-			request.addElement("render-url-minimized").setText(url.toString());
-
-			url.setWindowState(LiferayWindowState.NORMAL);
-			request.addElement("render-url-normal").setText(url.toString());
-
-			url.setWindowState(LiferayWindowState.POP_UP);
-			request.addElement("render-url-pop-up").setText(url.toString());
+			DocUtil.add(request, "render-url-exclusive", url);
 		}
 		catch (WindowStateException wse) {
 		}
-	}	
+
+		try {
+			url.setWindowState(LiferayWindowState.MAXIMIZED);
+
+			DocUtil.add(request, "render-url-maximized", url);
+		}
+		catch (WindowStateException wse) {
+		}
+
+		try {
+			url.setWindowState(LiferayWindowState.MINIMIZED);
+
+			DocUtil.add(request, "render-url-minimized", url);
+		}
+		catch (WindowStateException wse) {
+		}
+
+		try {
+			url.setWindowState(LiferayWindowState.NORMAL);
+
+			DocUtil.add(request, "render-url-normal", url);
+		}
+		catch (WindowStateException wse) {
+		}
+
+		try {
+			url.setWindowState(LiferayWindowState.POP_UP);
+
+			DocUtil.add(request, "render-url-pop-up", url);
+		}
+		catch (WindowStateException wse) {
+		}
+	}
+
 }

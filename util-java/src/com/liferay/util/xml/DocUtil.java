@@ -62,4 +62,8 @@ public class DocUtil {
 		el.addElement(name).addText(GetterUtil.getString(text));
 	}
 
+	public static void add(Element el, String name, Object obj) {
+		el.addElement(name).addText(String.valueOf(obj));
+	}
+
 }
