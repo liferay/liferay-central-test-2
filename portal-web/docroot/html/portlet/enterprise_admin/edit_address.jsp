@@ -53,7 +53,10 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>" />
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>" />
 
-<liferay-ui:tabs names="address" />
+<liferay-ui:tabs
+	names="address"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= AddressCityException.class %>" message="please-enter-a-valid-city" />
 <liferay-ui:error exception="<%= AddressStreetException.class %>" message="please-enter-a-valid-street" />

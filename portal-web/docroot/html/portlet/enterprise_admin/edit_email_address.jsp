@@ -51,7 +51,10 @@ int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>" />
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>" />
 
-<liferay-ui:tabs names="email-address" />
+<liferay-ui:tabs
+	names="email-address"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />

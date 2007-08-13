@@ -64,7 +64,10 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 <input name="<portlet:namespace />orgLaborId" type="hidden" value="<%= orgLaborId %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
-<liferay-ui:tabs names="service" />
+<liferay-ui:tabs
+	names="service"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 

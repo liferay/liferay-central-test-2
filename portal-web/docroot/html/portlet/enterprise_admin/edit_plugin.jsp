@@ -57,11 +57,10 @@ if (pluginType.equals(PortletImpl.PLUGIN_TYPE)) {
 <input name="<portlet:namespace />pluginId" type="hidden" value="<%= pluginId %>" />
 <input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="plugins" />
-</liferay-util:include>
-
-<liferay-ui:tabs names="plugin" />
+<liferay-ui:tabs
+	names="plugin"
+	backURL="<%= redirect %>"
+/>
 
 <table class="liferay-table">
 <tr>

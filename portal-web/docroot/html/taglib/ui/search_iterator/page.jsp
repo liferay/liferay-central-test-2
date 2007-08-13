@@ -143,11 +143,11 @@ if (rowChecker != null) {
 		}
 
 		if (Validator.isNotNull(row.getClassName())) {
-			className = row.getClassName();
+			className += " " + row.getClassName();
 		}
 
 		if (Validator.isNotNull(row.getClassHoverName())) {
-			classHoverName = row.getClassHoverName();
+			classHoverName += " " + row.getClassHoverName();
 		}
 
 		if (row.isRestricted()) {

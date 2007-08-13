@@ -1,23 +1,31 @@
-.status-up-to-date td {
-	background-color: #ccffcc;
-	border-top: 1px solid #BFBFBF;
-	padding: 0.3em 1em;
+.portlet-section-body.status-installation-in-process td {
+	background-color: #99CCFF;
 }
 
-.status-update-available td {
-	background-color: #ff9999;
-	border-top: 1px solid #BFBFBF;
-	padding: 0.3em 1em;
+.portlet-section-alternate.status-installation-in-process td {
+	background-color: #99CCFF;
 }
 
-.status-unknown td {
-	background-color: #ffffcc;
-	border-top: 1px solid #BFBFBF;
-	padding: 0.3em 1em;
+.portlet-section-body.status-up-to-date td {
+	background-color: #CCFFCC;
 }
 
-.status-installation-in-process td {
-	background-color: #99ccff;
-	border-top: 1px solid #BFBFBF;
-	padding: 0.3em 1em;
+.portlet-section-alternate.status-up-to-date td {
+	background-color: #CCFFCC;
+}
+
+.portlet-section-body.status-unknown td {
+	background-color: #FFFFCC;
+}
+
+.portlet-section-alternate.status-unknown td {
+	background-color: #FFFFCC;
+}
+
+.portlet-section-body.status-update-available td {
+	background-color: #FF9999;
+}
+
+.portlet-section-alternate.status-update-available td {
+	background-color: #FF9999;
 }

@@ -51,7 +51,10 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>" />
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>" />
 
-<liferay-ui:tabs names="phone-number" />
+<liferay-ui:tabs
+	names="phone-number"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />

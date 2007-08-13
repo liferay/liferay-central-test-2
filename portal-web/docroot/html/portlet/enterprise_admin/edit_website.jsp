@@ -51,7 +51,10 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>" />
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>" />
 
-<liferay-ui:tabs names="website" />
+<liferay-ui:tabs
+	names="website"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= NoSuchListTypeException.class %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
