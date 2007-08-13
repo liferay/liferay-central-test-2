@@ -38,6 +38,8 @@ public interface JournalArticleDisplay extends Serializable {
 
 	public long getGroupId();
 
+	public long getUserId();
+
 	public String getArticleId();
 
 	public double getVersion();
