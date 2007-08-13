@@ -27,17 +27,6 @@
 <%
 String langType = ParamUtil.getString(request, "langType");
 
-String editorType = ParamUtil.getString(request, "editorType");
-
-if (Validator.isNotNull(editorType)) {
-	prefs.setValue(PortletKeys.JOURNAL, "editor-type", editorType);
-}
-else {
-	editorType = prefs.getValue(PortletKeys.JOURNAL, "editor-type", "html");
-}
-
-boolean useEditorApplet = editorType.equals("applet");
-
 String defaultContent = null;
 
 if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
@@ -50,6 +39,8 @@ else {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.vm");
 }
 %>
+
+<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent');
@@ -64,28 +55,8 @@ else {
 		return content;
 	}
 
-	function <portlet:namespace />updateEditorType() {
-
-		<%
-		String newEditorType = "applet";
-
-		if (useEditorApplet) {
-			newEditorType = "html";
-		}
-		%>
-
-		self.location = "<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>";
-	}
-
 	function <portlet:namespace />updateTemplateXsl() {
-		<c:choose>
-			<c:when test="<%= useEditorApplet %>">
-				opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(document.applets["<portlet:namespace />editor"].getText());
-			</c:when>
-			<c:otherwise>
-				opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
-			</c:otherwise>
-		</c:choose>
+		opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(<portlet:namespace />xslContent.getCode());
 
 		self.close();
 	}
@@ -93,47 +64,18 @@ else {
 
 <form method="post" name="<portlet:namespace />fm">
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<b><liferay-ui:message key="editor-type" /></b>
-	</td>
-	<td>
-		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
-			<option value="1"><liferay-ui:message key="html" /></option>
-			<option <%= useEditorApplet ? "selected" : "" %> value="0"><liferay-ui:message key="applet" /></option>
-		</select>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<c:choose>
-	<c:when test="<%= useEditorApplet %>">
-		<applet archive="editor.jar" code="com.liferay.applets.editor.Editor" codebase="<%= themeDisplay.getPathApplet() %>" height="530" name="<portlet:namespace />editor" width="670" mayscript>
-			<param name="lexer" value="<%= langType %>" />
-		</applet>
-	</c:when>
-	<c:otherwise>
-		<textarea class="liferay-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
-	</c:otherwise>
-</c:choose>
+<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
 
 <br /><br />
 
 <input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
 
-<c:if test="<%= !useEditorApplet %>">
-	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);" />
-</c:if>
+<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
 
 </form>
 
-<c:if test="<%= !useEditorApplet %>">
-	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = getEditorContent();
-	</script>
-</c:if>
+<script type="text/javascript">
+	document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = getEditorContent();
+</script>

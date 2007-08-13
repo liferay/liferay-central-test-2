@@ -306,7 +306,7 @@ int tabIndex = 1;
 
 <liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
-<input name="<portlet:namespace />xsd" type="hidden" value="" />
+<input id="<portlet:namespace />xsd" name="<portlet:namespace />xsd" type="hidden" value="" />
 
 <input type="button" value="<liferay-ui:message key="add-row" />" onClick="<portlet:namespace />editElement('add', -1);" />
 
