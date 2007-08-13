@@ -33,9 +33,9 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public JournalArticleDisplayImpl(long id, long resourcePrimKey,
-									 long groupId, long userId, String articleId,
-									 double version, String title,
-									 String description,
+									 long groupId, long userId,
+									 String articleId, double version,
+									 String title, String description,
 									 String[] availableLocales,
 									 String content) {
 
@@ -62,7 +62,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	public long getGroupId() {
 		return _groupId;
 	}
-	
+
 	public long getUserId() {
 		return _userId;
 	}
