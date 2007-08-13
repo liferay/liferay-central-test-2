@@ -49,6 +49,8 @@ public class CookieKeys {
 
 	public static final String PASSWORD = "PASSWORD";
 
+	public static final String SCREEN_NAME = "SCREEN_NAME";
+
 	public static final int MAX_AGE = 31536000;
 
 	public static void addCookie(HttpServletResponse res, Cookie cookie) {

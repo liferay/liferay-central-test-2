@@ -185,6 +185,8 @@ public class LoginAction extends Action {
 
 			// Set cookies
 
+			String domain = PropsUtil.get(PropsUtil.SESSION_COOKIE_DOMAIN);
+
 			User user = UserLocalServiceUtil.getUserById(userId);
 
 			String userIdString = String.valueOf(userId);
@@ -199,11 +201,19 @@ public class LoginAction extends Action {
 				CookieKeys.ID,
 				UserLocalServiceUtil.encryptUserId(userIdString));
 
+			if (Validator.isNotNull(domain)) {
+				idCookie.setDomain(domain);
+			}
+
 			idCookie.setPath(StringPool.SLASH);
 
 			Cookie passwordCookie = new Cookie(
 				CookieKeys.PASSWORD,
 				Encryptor.encrypt(company.getKeyObj(), password));
+
+			if (Validator.isNotNull(domain)) {
+				passwordCookie.setDomain(domain);
+			}
 
 			passwordCookie.setPath(StringPool.SLASH);
 
@@ -228,12 +238,28 @@ public class LoginAction extends Action {
 
 			Cookie loginCookie = new Cookie(CookieKeys.LOGIN, login);
 
+			if (Validator.isNotNull(domain)) {
+				loginCookie.setDomain(domain);
+			}
+
 			loginCookie.setPath(StringPool.SLASH);
 			loginCookie.setMaxAge(loginMaxAge);
+
+			Cookie screenNameCookie = new Cookie(
+				CookieKeys.SCREEN_NAME,
+				Encryptor.encrypt(company.getKeyObj(), user.getScreenName()));
+
+			if (Validator.isNotNull(domain)) {
+				screenNameCookie.setDomain(domain);
+			}
+
+			screenNameCookie.setPath(StringPool.SLASH);
+			screenNameCookie.setMaxAge(loginMaxAge);
 
 			CookieKeys.addCookie(res, idCookie);
 			CookieKeys.addCookie(res, passwordCookie);
 			CookieKeys.addCookie(res, loginCookie);
+			CookieKeys.addCookie(res, screenNameCookie);
 		}
 		else {
 			throw new AuthException();
