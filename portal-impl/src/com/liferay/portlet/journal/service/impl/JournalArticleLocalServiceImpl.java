@@ -710,6 +710,15 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, String languageId,
+			ThemeDisplay themeDisplay, String xmlRequest)
+		throws PortalException, SystemException {
+
+		return getArticleDisplay(
+			groupId, articleId, null, languageId, themeDisplay, xmlRequest);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String templateId,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -722,8 +731,32 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, String templateId,
+			String languageId, ThemeDisplay themeDisplay, String xmlRequest)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getDisplayArticle(groupId, articleId);
+
+		return getArticleDisplay(
+			groupId, articleId, article.getVersion(), templateId, languageId,
+			themeDisplay, xmlRequest);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, double version, String templateId,
 			String languageId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getDisplayArticle(groupId, articleId);
+
+		return getArticleDisplay(
+			groupId, articleId, article.getVersion(), templateId, languageId,
+			themeDisplay, null);
+	}
+
+	public JournalArticleDisplay getArticleDisplay(
+			long groupId, String articleId, double version, String templateId,
+			String languageId, ThemeDisplay themeDisplay, String xmlRequest)
 		throws PortalException, SystemException {
 
 		String content = null;
@@ -758,6 +791,17 @@ public class JournalArticleLocalServiceImpl
 				doc = reader.read(new StringReader(xml));
 
 				root = doc.getRootElement();
+
+				if (Validator.isNotNull(xmlRequest)) {
+					try {
+						Document request = 
+							reader.read(new StringReader(xmlRequest));
+
+						root.add(request.getRootElement().createCopy());
+					}
+					catch (Exception e) {
+					}
+				}
 
 				JournalUtil.addAllReservedEls(root, tokens, article);
 

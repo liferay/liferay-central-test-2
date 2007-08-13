@@ -22,19 +22,32 @@
 
 package com.liferay.util;
 
-import java.text.DateFormat;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.util.xml.XMLFormatter;
 
+import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
-
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.WindowStateException;
 import javax.servlet.ServletRequest;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
 /**
  * <a href="ParamUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class ParamUtil {
@@ -463,6 +476,79 @@ public class ParamUtil {
 		return null;
 	}
 
+	public static String getXMLRequest(PortletRequest req, PortletResponse res) {
+		String xml = null;
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element request = doc.addElement("request");
+
+		request.addElement("container-type").setText(
+				"portlet");
+		request.addElement("container-namespace").setText(
+				req.getContextPath());
+		request.addElement("content-type").setText(
+				req.getResponseContentType());
+
+		request.addElement("server-name").setText(
+				String.valueOf(req.getServerName()));
+		request.addElement("server-port").setText(
+				String.valueOf(req.getServerPort()));
+		request.addElement("is-secure").setText(
+				String.valueOf(req.isSecure()));
+		request.addElement("auth-type").setText(
+				String.valueOf(req.getAuthType()));
+		request.addElement("remote-user").setText(
+				String.valueOf(req.getRemoteUser()));
+		request.addElement("context-path").setText(
+				String.valueOf(req.getContextPath()));
+
+		request.addElement("locale").setText(req.getLocale().toString());
+		request.addElement("portlet-mode").setText(
+				req.getPortletMode().toString());
+		request.addElement("portlet-session-id").setText(
+				req.getRequestedSessionId());
+		request.addElement("scheme").setText(req.getScheme());
+		request.addElement("window-state").setText(
+				req.getWindowState().toString());
+
+		if (req instanceof RenderRequest) {
+			request.addElement("action").setText(Boolean.FALSE.toString());
+		}
+		else if (req instanceof ActionRequest) {
+			request.addElement("action").setText(Boolean.TRUE.toString());
+		}
+
+		if (res instanceof RenderResponse) {
+			_generateXML((RenderResponse)res, request);
+		}
+
+		Element parameters = request.addElement("parameters");
+
+		Enumeration e = req.getParameterNames();
+
+		while (e.hasMoreElements()) {
+			String param = (String)e.nextElement();
+
+			Element parameter = parameters.addElement("parameter");
+			parameter.addElement("name").addText(param);
+
+			String[] values = req.getParameterValues(param);
+
+			for (int i = 0; i < values.length; i++) {
+				parameter.addElement("value").addText(values[i]);
+			}
+		}
+
+		try {
+			xml = XMLFormatter.toString(doc);
+		}
+		catch (IOException ioe) {
+		}
+
+		return xml;
+	}
+
 	public static void print(PortletRequest req) {
 		Enumeration e = req.getParameterNames();
 
@@ -476,5 +562,33 @@ public class ParamUtil {
 			}
 		}
 	}
+	
+	private static void _generateXML(RenderResponse res, Element request) {
+		PortletURL url = null;
 
+		request.addElement("portlet-namespace").setText(
+				res.getNamespace());
+
+		try {
+			url = res.createRenderURL();
+			request.addElement("render-url").setText(url.toString());
+
+			url.setWindowState(LiferayWindowState.EXCLUSIVE);
+			request.addElement("render-url-exclusive").setText(url.toString());
+
+			url.setWindowState(LiferayWindowState.MAXIMIZED);
+			request.addElement("render-url-maximized").setText(url.toString());
+
+			url.setWindowState(LiferayWindowState.MINIMIZED);
+			request.addElement("render-url-minimized").setText(url.toString());
+
+			url.setWindowState(LiferayWindowState.NORMAL);
+			request.addElement("render-url-normal").setText(url.toString());
+
+			url.setWindowState(LiferayWindowState.POP_UP);
+			request.addElement("render-url-pop-up").setText(url.toString());
+		}
+		catch (WindowStateException wse) {
+		}
+	}	
 }

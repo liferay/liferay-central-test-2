@@ -56,6 +56,8 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		PortletPreferences prefs = req.getPreferences();
+		
+		String xmlRequest = ParamUtil.getXMLRequest(req, res);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
@@ -87,7 +89,7 @@ public class ViewAction extends PortletAction {
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			articleDisplay = JournalContentUtil.getDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay,
-				disableCaching);
+				disableCaching, xmlRequest);
 		}
 
 		if (articleDisplay != null) {
