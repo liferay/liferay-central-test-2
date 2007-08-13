@@ -62,6 +62,15 @@ public class PortletColumnLogic extends RuntimeLogic {
 			PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
 
 		if (_parallelRenderEnable) {
+			boolean sessionDisabled = GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.SESSION_DISABLED));
+
+			if (sessionDisabled) {
+				_parallelRenderEnable = false;
+			}
+		}
+
+		if (_parallelRenderEnable) {
 			Boolean portletParallelRender =
 				(Boolean)req.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
 
@@ -70,6 +79,9 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 				_parallelRenderEnable = false;
 			}
+		}
+		else {
+			req.removeAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
 		}
 	}
 

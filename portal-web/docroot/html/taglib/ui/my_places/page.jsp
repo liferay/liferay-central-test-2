@@ -157,13 +157,18 @@
 						</c:otherwise>
 					</c:choose>
 				</h3>
+
 				<ul>
 
 					<%
 					portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 					portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-					boolean selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+					boolean selectedPlace = false;
+
+					if (layout != null) {
+						selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+					}
 					%>
 
 					<li class="public <%= selectedPlace ? "current" : "" %>">
@@ -178,7 +183,11 @@
 					portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 					portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
-					selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+					selectedPlace = false;
+
+					if (layout != null) {
+						selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+					}
 					%>
 
 					<li class="private <%= selectedPlace ? "current" : "" %>">
