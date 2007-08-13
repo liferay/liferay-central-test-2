@@ -182,7 +182,7 @@
 	}
 
 	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-		document.<portlet:namespace />fm.<portlet:namespace />gadgetId.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />gadgetId);
 	</c:if>
 
 	document.<portlet:namespace />fm.<portlet:namespace />gadgetId.onchange = <portlet:namespace />setRecommendedGadgetSize;

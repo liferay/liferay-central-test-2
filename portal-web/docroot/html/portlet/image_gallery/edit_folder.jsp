@@ -172,6 +172,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>

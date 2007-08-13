@@ -295,6 +295,6 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>);
 	</script>
 </c:if>

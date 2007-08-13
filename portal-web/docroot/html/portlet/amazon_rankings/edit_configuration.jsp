@@ -72,6 +72,6 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />isbns.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />isbns);
 	</script>
 </c:if>

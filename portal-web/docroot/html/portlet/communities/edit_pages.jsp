@@ -760,7 +760,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<script type="text/javascript">
 						<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-							document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 						</c:if>
 
 						function <portlet:namespace />getChoice(value) {
@@ -875,7 +875,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 						<script type="text/javascript">
-							document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 						</script>
 					</c:if>
 

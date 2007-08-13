@@ -167,6 +167,6 @@ String csz = ParamUtil.getString(request, "csz");
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />street.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />street);
 	</script>
 </c:if>

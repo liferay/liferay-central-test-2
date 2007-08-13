@@ -108,6 +108,6 @@ int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />url.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />url);
 	</script>
 </c:if>

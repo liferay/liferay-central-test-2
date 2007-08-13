@@ -133,6 +133,6 @@ catch (Throwable t) {
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />wsrp_service_url.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />wsrp_service_url);
 	</script>
 </c:if>

@@ -197,7 +197,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 	}
 
 	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-		document.<portlet:namespace />fm.<portlet:namespace />version.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />version);
 	</c:if>
 
 	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onkeyup = <portlet:namespace />showRepoStoreArtifact;

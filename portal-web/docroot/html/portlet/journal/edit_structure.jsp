@@ -349,10 +349,10 @@ tabIndex = tabIndexWrapper.getValue();
 	<script type="text/javascript">
 		<c:choose>
 			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID)) %>">
-				document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (structure == null) ? "newStructureId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
 	</script>

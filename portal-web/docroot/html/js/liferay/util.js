@@ -231,6 +231,24 @@ Liferay.Util = {
 		}
 	},
 
+	focusFormField: function(el) {
+		jQuery(
+			function() {
+				if (el) {
+					var elObj = jQuery(el);
+
+					//if (elObj.is(":visible")) {
+					//	try {
+							elObj.trigger("focus");
+					//	}
+					//	catch (e) {
+					//	}
+					//}
+				}
+			}
+		);
+	},
+
 	getSelectedIndex: function(col) {
 		for (var i = 0; i < col.length; i++) {
 			if (col[i].checked == true) {

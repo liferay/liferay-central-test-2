@@ -135,7 +135,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) && !format.equals(WikiPageImpl.HTML_FORMAT) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />content.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
 	</script>
 </c:if>
 

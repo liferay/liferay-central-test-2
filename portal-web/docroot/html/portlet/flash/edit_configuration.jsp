@@ -95,6 +95,6 @@ flashVariables = ParamUtil.getString(request, "flashVariables", flashVariables);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />movie.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />movie);
 	</script>
 </c:if>

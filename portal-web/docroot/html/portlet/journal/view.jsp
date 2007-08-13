@@ -498,13 +498,13 @@ portletURL.setParameter("tabs1", tabs1);
 	<script type="text/javascript">
 		<c:choose>
 			<c:when test='<%= tabs1.equals("articles") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace />searchArticleId.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchArticleId);
 			</c:when>
 			<c:when test='<%= tabs1.equals("structures") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace />searchStructureId.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchStructureId);
 			</c:when>
 			<c:when test='<%= tabs1.equals("templates") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId);
 			</c:when>
 		</c:choose>
 	</script>

@@ -88,6 +88,6 @@
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />mapAddress.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />mapAddress);
 	</script>
 </c:if>

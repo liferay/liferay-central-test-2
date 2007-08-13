@@ -88,6 +88,6 @@ zipsString = StringUtil.merge(zips, StringPool.NEW_LINE);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />zips.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />zips);
 	</script>
 </c:if>

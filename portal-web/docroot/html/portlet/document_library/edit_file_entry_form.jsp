@@ -246,7 +246,7 @@ if (fileEntry == null) {
 
 <script type="text/javascript">
 	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-		document.<portlet:namespace />fm.<portlet:namespace />file.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
 	_$J(document).ready(

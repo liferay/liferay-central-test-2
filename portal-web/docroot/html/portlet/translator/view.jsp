@@ -76,6 +76,6 @@ if (translation == null) {
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />text.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />text);
 	</script>
 </c:if>

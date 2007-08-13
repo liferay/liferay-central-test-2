@@ -368,3 +368,9 @@ portletURL.setParameter("tabs1", tabs1);
 </c:choose>
 
 </form>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+	</script>
+</c:if>

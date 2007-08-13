@@ -129,7 +129,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 						Portlet portlet = (Portlet)itr2.next();
 
 						divId = new StringMaker();
-						
+
 						divId.append(newCategoryPath);
 						divId.append(":");
 

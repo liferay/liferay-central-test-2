@@ -246,9 +246,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
-			document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
-		}
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
 	</script>
 </c:if>
 

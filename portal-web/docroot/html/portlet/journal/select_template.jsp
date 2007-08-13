@@ -103,5 +103,5 @@ for (int i = 0; i < results.size(); i++) {
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId.focus();
+	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId);
 </script>

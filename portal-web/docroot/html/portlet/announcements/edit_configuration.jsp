@@ -43,6 +43,6 @@ content = ParamUtil.getString(request, "content", content);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />content.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
 	</script>
 </c:if>

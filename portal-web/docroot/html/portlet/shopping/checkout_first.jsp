@@ -556,6 +556,6 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />billingFirstName.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />billingFirstName);
 	</script>
 </c:if>

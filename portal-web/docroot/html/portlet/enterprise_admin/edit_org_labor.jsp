@@ -231,6 +231,6 @@ for (int i = 0; i < days.length; i++) {
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />typeId.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />typeId);
 	</script>
 </c:if>

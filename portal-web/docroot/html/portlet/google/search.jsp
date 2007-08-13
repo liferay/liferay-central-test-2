@@ -61,7 +61,7 @@ integerFormat.setMaximumFractionDigits(0);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />args.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />args);
 	</script>
 </c:if>
 

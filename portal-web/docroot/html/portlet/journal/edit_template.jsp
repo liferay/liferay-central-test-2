@@ -353,10 +353,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<script type="text/javascript">
 		<c:choose>
 			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">
-				document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 			</c:when>
 			<c:otherwise>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>.focus();
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (template == null) ? "newTemplateId" : "name" %>);
 			</c:otherwise>
 		</c:choose>
 	</script>

@@ -224,9 +224,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">
-				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-					document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-				}
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 			</script>
 		</c:if>
 
@@ -387,12 +385,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 				<script type="text/javascript">
-					if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-						document.<portlet:namespace />fm1.<portlet:namespace />keywords.focus();
-					}
-					else if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
-						document.<portlet:namespace />fm2.<portlet:namespace />keywords.focus();
-					}
+					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
+					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</script>
 			</c:if>
 		</c:if>

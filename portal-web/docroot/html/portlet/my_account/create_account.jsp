@@ -153,6 +153,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />firstName.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
 	</script>
 </c:if>

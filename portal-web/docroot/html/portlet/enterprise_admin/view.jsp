@@ -1682,10 +1682,10 @@ portletURL.setParameter("tabs3", tabs3);
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		if (document.<portlet:namespace />fm.<portlet:namespace />firstName) {
-			document.<portlet:namespace />fm.<portlet:namespace />firstName.focus();
+			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
 		}
 		else if (document.<portlet:namespace />fm.<portlet:namespace />name) {
-			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 		}
 	</script>
 </c:if>

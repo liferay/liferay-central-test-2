@@ -311,10 +311,10 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 <script type="text/javascript">
 	<c:choose>
 		<c:when test='<%= tabs1.equals("already-registered") %>'>
-			document.fm1.login.focus();
+			Liferay.Util.focusFormField(document.fm1.login);
 		</c:when>
 		<c:when test='<%= tabs1.equals("forgot-password") %>'>
-			document.fm3.emailAddress.focus();
+			Liferay.Util.focusFormField(document.fm3.emailAddress);
 		</c:when>
 	</c:choose>
 </script>

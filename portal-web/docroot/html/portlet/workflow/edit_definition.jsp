@@ -103,6 +103,6 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />xml.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />xml);
 	</script>
 </c:if>

@@ -184,7 +184,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 
 <script type="text/javascript">
 	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-		document.<portlet:namespace />fm.<portlet:namespace />street1.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />street1);
 	</c:if>
 
 	new Liferay.DynamicSelect(

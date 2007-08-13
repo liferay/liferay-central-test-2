@@ -52,6 +52,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />fileName.focus();
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
 	</script>
 </c:if>
