@@ -22924,7 +22924,7 @@ Liferay.Navigation = new Class({
 				'<div class="enter-page">' +
 				'<input type="text" name="new_page" value="" class="text" />' +
 				'<a class="cancel-page" href="javascript: ;"></a>' +
-				'<a class="save-page" href="javascript: ;">Save</a>' +
+				'<a class="save-page" href="javascript: ;">' + Liferay.Language.get('save') + '</a>' +
 				'</div>';
 
 			navList.after(
@@ -22962,14 +22962,25 @@ Liferay.Navigation = new Class({
 			var currentLink = currentItem.find('a');
 			var currentSpan = currentLink.find('span');
 
-			currentSpan.css('cursor', 'text');
-
 			currentLink.click(
 				function(event) {
 					if (event.shiftKey) {
 						return false;
 					}
 				}
+			);
+
+			var resetCursor = function() {
+				currentSpan.css('cursor', 'pointer');
+			};
+
+			currentLink.hover(
+				function(event) {
+					if (event.shiftKey) {
+						currentSpan.css('cursor', 'text');
+					}
+				},
+				resetCursor
 			);
 
 			currentSpan.click(
@@ -23036,6 +23047,9 @@ Liferay.Navigation = new Class({
 					);
 
 					pageParents.click(pageBlur);
+
+					resetCursor();
+
 					return false;
 				}
 			);

@@ -197,7 +197,7 @@ Liferay.Navigation = new Class({
 					}
 				}
 			);
-			
+
 			var resetCursor = function() {
 				currentSpan.css('cursor', 'pointer');
 			};
@@ -275,6 +275,7 @@ Liferay.Navigation = new Class({
 					);
 
 					pageParents.click(pageBlur);
+
 					resetCursor();
 
 					return false;
