@@ -39,6 +39,9 @@ import java.util.TreeMap;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 /**
  * <a href="PortletColumnLogic.java.html"><b><i>View Source</i></b></a>
@@ -66,7 +69,11 @@ public class PortletColumnLogic extends RuntimeLogic {
 				PropsUtil.get(PropsUtil.SESSION_DISABLED));
 
 			if (sessionDisabled) {
-				_parallelRenderEnable = false;
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Parallel rendering should be disabled if sessions " +
+							"are disabled");
+				}
 			}
 		}
 
@@ -130,6 +137,8 @@ public class PortletColumnLogic extends RuntimeLogic {
 	public Map getPortletsMap() {
 		return _portletsMap;
 	}
+
+	private static Log _log = LogFactory.getLog(PortletColumnLogic.class);
 
 	private ServletContext _ctx;
 	private HttpServletRequest _req;
