@@ -1366,7 +1366,9 @@ jQuery.event = {
 			if ( jQuery.isFunction(element.$handle) && (val = element.$handle.apply( element, data )) !== false )
 				this.triggered = true;
 
-			if ( fn && val !== false && !jQuery.nodeName(element, 'a') )
+			// Liferay
+			//if ( fn && val !== false && !jQuery.nodeName(element, 'a') )
+			if ( fn && val !== false && !jQuery.nodeName(element, 'a') && !(type == 'focus' && element.offsetHeight == 0) )
 				element[ type ]();
 
 			this.triggered = false;
