@@ -398,7 +398,13 @@ public abstract class DBUtil {
 					String includeFileName =
 						line.substring(pos + 1, line.length());
 
-					String include = FileUtil.read("../sql/" + includeFileName);
+					File includeFile = new File("../sql/" + includeFileName);
+
+					if (!includeFile.exists()) {
+						continue;
+					}
+
+					String include = FileUtil.read(includeFile);
 
 					if (includeFileName.endsWith(".vm")) {
 						try {
