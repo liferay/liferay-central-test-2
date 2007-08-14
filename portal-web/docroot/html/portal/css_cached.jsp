@@ -543,15 +543,19 @@ ul.gamma .tree-item-hover {
 	clear: both;
 }
 
-.liferay-table tr td {
+.liferay-table tr td, .liferay-table tr th {
 	padding: 0 5px;
 }
 
-.liferay-table tr td:first-child, .liferay-table tr td.first-child {
+.liferay-table tr th {
+	font-weight: bold;
+}
+
+.liferay-table tr td:first-child, .liferay-table tr td.first-child, .liferay-table tr th:first-child, .liferay-table tr th.first-child {
 	padding-left: 0;
 }
 
-.liferay-table tr td:last-child, .liferay-table tr td.last-child {
+.liferay-table tr td:last-child, .liferay-table tr td.last-child, .liferay-table tr th:last-child, .liferay-table tr th.last-child {
 	padding-right: 0;
 }
 
