@@ -81,6 +81,7 @@ Liferay.Util = {
 				if (this.createTextRange) {
 					var value = this.value;
 					var textRange = this.createTextRange();
+
 					textRange.moveStart('character', value.length);
 					textRange.select();
 				}
@@ -244,13 +245,7 @@ Liferay.Util = {
 				if (el) {
 					var elObj = jQuery(el);
 
-					//if (elObj.is(":visible")) {
-					//	try {
-							elObj.trigger("focus");
-					//	}
-					//	catch (e) {
-					//	}
-					//}
+					elObj.trigger("focus");
 				}
 			}
 		);

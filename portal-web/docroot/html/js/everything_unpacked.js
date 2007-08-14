@@ -1366,7 +1366,9 @@ jQuery.event = {
 			if ( jQuery.isFunction(element.$handle) && (val = element.$handle.apply( element, data )) !== false )
 				this.triggered = true;
 
-			if ( fn && val !== false && !jQuery.nodeName(element, 'a') )
+			// Liferay
+			//if ( fn && val !== false && !jQuery.nodeName(element, 'a') )
+			if ( fn && val !== false && !jQuery.nodeName(element, 'a') && !(type == 'focus' && element.offsetHeight == 0) )
 				element[ type ]();
 
 			this.triggered = false;
@@ -13868,6 +13870,14 @@ Liferay.Util = {
 		inputs.focus(
 			function() {
 				jQuery(this).addClass('focus');
+
+				if (this.createTextRange) {
+					var value = this.value;
+					var textRange = this.createTextRange();
+
+					textRange.moveStart('character', value.length);
+					textRange.select();
+				}
 			}
 		);
 
@@ -14025,14 +14035,10 @@ Liferay.Util = {
 	focusFormField: function(el) {
 		jQuery(
 			function() {
-				var elObj = jQuery(el);
+				if (el) {
+					var elObj = jQuery(el);
 
-				if (elObj.is(":visible")) {
-					try {
-						elObj.trigger("focus");
-					}
-					catch (e) {
-					}
+					elObj.trigger("focus");
 				}
 			}
 		);
