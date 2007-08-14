@@ -1011,6 +1011,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		return false;
 	}
+
+	public List search(
+			long companyId, String keywords, Boolean active,
+			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return UserFinder.findByKeywords(
+			companyId, keywords, active, params, begin, end, obc);
+	}
+
 	public List search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
@@ -1021,6 +1031,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserFinder.findByC_FN_MN_LN_SN_EA_A(
 			companyId, firstName, middleName, lastName, screenName,
 			emailAddress, active, params, andSearch, begin, end, obc);
+	}
+
+	public int searchCount(
+			long companyId, String keywords, Boolean active,
+			LinkedHashMap params)
+		throws SystemException {
+
+		return UserFinder.countByKeywords(companyId, keywords, active, params);
 	}
 
 	public int searchCount(

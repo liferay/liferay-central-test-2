@@ -64,9 +64,16 @@ public class SearchContainer {
 		_iteratorURL = iteratorURL;
 
 		_iteratorURL.setParameter(
+			DisplayTerms.KEYWORDS,
+			ParamUtil.getString(req, DisplayTerms.KEYWORDS));
+		_iteratorURL.setParameter(
+			DisplayTerms.ADVANCED_SEARCH,
+			String.valueOf(
+				ParamUtil.getBoolean(req, DisplayTerms.ADVANCED_SEARCH)));
+		_iteratorURL.setParameter(
 			DisplayTerms.AND_OPERATOR,
-			Boolean.toString(
-				ParamUtil.get(req, DisplayTerms.AND_OPERATOR, true)));
+			String.valueOf(
+				ParamUtil.getBoolean(req, DisplayTerms.AND_OPERATOR)));
 
 		_headerNames = ListUtil.copy(headerNames);
 		_emptyResultsMessage = emptyResultsMessage;

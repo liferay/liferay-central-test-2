@@ -36,10 +36,8 @@ import java.net.URLEncoder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import javax.portlet.ActionRequest;
@@ -274,54 +272,12 @@ public class Http {
 		return StringPool.BLANK;
 	}
 
+	/**
+	 * @deprecated this method has been moved to
+	 * <code>com.liferay.util.HttpUtil</code>.
+	 */
 	public static Map getParameterMap(String queryString) {
-		Map parameterMap = new LinkedHashMap();
-
-		if (Validator.isNull(queryString)) {
-			return parameterMap;
-		}
-
-		StringTokenizer st = new StringTokenizer(
-			queryString, StringPool.AMPERSAND);
-
-		while (st.hasMoreTokens()) {
-			String token = st.nextToken();
-
-			if (Validator.isNotNull(token)) {
-				String[] kvp = StringUtil.split(token, StringPool.EQUAL);
-
-				String key = kvp[0];
-
-				String value = StringPool.BLANK;
-
-				if (kvp.length > 1) {
-					value = kvp[1];
-				}
-
-				List values = (List)parameterMap.get(key);
-
-				if (values == null) {
-					values = new ArrayList();
-
-					parameterMap.put(key, values);
-				}
-
-				values.add(value);
-			}
-		}
-
-		Iterator itr = parameterMap.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			List values = (List)entry.getValue();
-
-			parameterMap.put(key, (String[])values.toArray(new String[0]));
-		}
-
-		return parameterMap;
+		return HttpUtil.parameterMapFromString(queryString);
 	}
 
 	public static String getProtocol(boolean secure) {

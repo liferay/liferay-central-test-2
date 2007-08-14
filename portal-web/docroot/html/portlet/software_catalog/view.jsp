@@ -165,32 +165,25 @@ portletURL.setParameter("tabs1", tabs1);
 		%>
 
 		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<c:if test="<%= showAddProductEntryButton %>">
-					<td>
-						<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-					</td>
-					<td style="padding-left: 30px;"></td>
-				</c:if>
-
+			<div>
 				<c:if test='<%= (results.size() > 0) && tabs1.equals("products") %>'>
-					<td>
-						<input name="<portlet:namespace />keywords" size="30" type="text" />
+					<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<select name="<portlet:namespace/>type">
-							<option value=""></option>
-							<option value="portlet"><liferay-ui:message key="portlet" /></option>
-							<option value="theme"><liferay-ui:message key="theme" /></option>
-							<option value="layout-template"><liferay-ui:message key="layout-template" /></option>
-							<option value="extension"><liferay-ui:message key="extension" /></option>
-						</select>
+					<select name="<portlet:namespace/>type">
+						<option value=""></option>
+						<option value="portlet"><liferay-ui:message key="portlet" /></option>
+						<option value="theme"><liferay-ui:message key="theme" /></option>
+						<option value="layout-template"><liferay-ui:message key="layout-template" /></option>
+						<option value="extension"><liferay-ui:message key="extension" /></option>
+					</select>
 
-						<input type="submit" value="<liferay-ui:message key="search-products" />" />
-					</td>
+					<input type="submit" value="<liferay-ui:message key="search-products" />" />
 				</c:if>
-			</tr>
-			</table>
+
+				<c:if test="<%= showAddProductEntryButton %>">
+					<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+				</c:if>
+			</div>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />

@@ -1044,6 +1044,7 @@ map-new-location=Связать новое местонахождение
 maps-and-directions=Карты и направления
 mass=Масса
 match-whole-words=Совпадение всех слов
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=Max кол-во
 maximize=Распахнуть
 maximum-memory=Предельный объем памяти

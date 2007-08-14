@@ -66,6 +66,8 @@ public class StringPool {
 
 	public static final String LESS_THAN = "<";
 
+	public static final String LIKE = "LIKE";
+
 	public static final String MINUS = "-";
 
 	public static final String NBSP = "&nbsp;";

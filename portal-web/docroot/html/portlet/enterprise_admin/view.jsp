@@ -223,11 +223,25 @@ portletURL.setParameter("tabs3", tabs3);
 				userParams.put("usersUserGroups", new Long(userGroupId));
 			}
 
-			int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator());
+			int total = 0;
+
+			if (searchTerms.isAdvancedSearch()) {
+				total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator());
+			}
+			else {
+				total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams);
+			}
 
 			searchContainer.setTotal(total);
 
-			List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+			List results = null;
+
+			if (searchTerms.isAdvancedSearch()) {
+				results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+			}
+			else {
+				results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams, searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+			}
 
 			searchContainer.setResults(results);
 
@@ -1681,12 +1695,9 @@ portletURL.setParameter("tabs3", tabs3);
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		if (document.<portlet:namespace />fm.<portlet:namespace />firstName) {
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
-		}
-		else if (document.<portlet:namespace />fm.<portlet:namespace />name) {
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-		}
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
 	</script>
 </c:if>
 

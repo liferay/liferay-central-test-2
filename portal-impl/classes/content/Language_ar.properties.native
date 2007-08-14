@@ -1340,6 +1340,7 @@ map-new-location=نظّم موقع جديد
 maps-and-directions=الخرائط و الإتجاهات
 mass=كتلة
 match-whole-words=طابق كل الكلمات
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=الكمية القصوى
 maximize-links=وصلات الزيادة للحد الأقصى
 maximize=لأقصى حد

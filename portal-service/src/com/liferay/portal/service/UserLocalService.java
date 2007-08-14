@@ -250,12 +250,21 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List search(long companyId, java.lang.String keywords,
+		java.lang.Boolean active, java.util.LinkedHashMap params, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List search(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active, java.util.LinkedHashMap params,
 		boolean andSearch, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(long companyId, java.lang.String keywords,
+		java.lang.Boolean active, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String firstName,

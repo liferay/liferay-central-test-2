@@ -531,6 +531,7 @@ maori=Maori
 map-new-location=Yeni Yerleşimi Haritala
 mass=Yoğun
 match-whole-words=Tüm Sözcükleri Eşle
+match-x-of-the-following-fields=Match {0} of the following fields:
 maximize=En Çoklama
 maximum=En Çok
 medium-image=Orta Boy Resim

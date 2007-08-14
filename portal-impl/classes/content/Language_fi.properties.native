@@ -1470,6 +1470,7 @@ maps-and-directions=Kartat ja ohjeet
 margin-and-padding=Marginaali ja väli
 mass=Massa
 match-whole-words=Hae kokonaisilla sanoilla
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=Maksimimäärä
 maximize-links=Maksimoi linkit
 maximize=Maksimoi

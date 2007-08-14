@@ -56,6 +56,14 @@ public class CustomSQLUtil {
 		return _instance._portalCustomSQLUtil.isVendorSybase();
 	}
 
+	public static String[] keywords(String keywords) {
+		return _instance._portalCustomSQLUtil.keywords(keywords);
+	}
+
+	public static String[] keywords(String[] keywordsArray) {
+		return _instance._portalCustomSQLUtil.keywords(keywordsArray);
+	}
+
 	public static String replaceAndOperator(String sql, boolean andOperator) {
 		return _instance._portalCustomSQLUtil.replaceAndOperator(
 			sql, andOperator);
@@ -63,6 +71,14 @@ public class CustomSQLUtil {
 
 	public static String replaceIsNull(String sql) {
 		return _instance._portalCustomSQLUtil.replaceIsNull(sql);
+	}
+
+	public static String replaceKeywords(
+		String sql, String field, String operator, boolean last,
+		String[] values) {
+
+		return _instance._portalCustomSQLUtil.replaceKeywords(
+			sql, field, operator, last, values);
 	}
 
 	public static String removeOrderBy(String sql) {

@@ -1109,6 +1109,7 @@ map-new-location=نقشه مکان جديد
 maps-and-directions=نقشه ها و راهنما ها
 mass=جرم
 match-whole-words=مطابقت کل کلمه
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=حداکثر تعداد
 maximize-links=حداکثر نمودن لينک ها
 maximize=حداکثر

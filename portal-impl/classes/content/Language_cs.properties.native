@@ -735,6 +735,7 @@ map-new-location=Mapuj novou pozici
 maps-and-directions=Mapy a cesty
 mass=Hromadný
 match-whole-words=Obsahuje celá slova
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=Maximální počet
 maximize=Maximize
 maximum-memory=Maximum Memory

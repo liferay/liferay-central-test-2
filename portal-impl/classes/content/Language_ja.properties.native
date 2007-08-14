@@ -1496,6 +1496,7 @@ maps-and-directions=地図及び方向
 margin-and-padding=差益及びパッディング
 mass=固まり
 match-whole-words=マッチの全単語
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=最高Qty
 maximize-links=リンクを最大にしなさい
 maximize=最大にしなさい

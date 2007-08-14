@@ -36,20 +36,38 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DisplayTerms {
 
+	public static final String KEYWORDS = "keywords";
+
+	public static final String ADVANCED_SEARCH = "advancedSearch";
+
 	public static final String AND_OPERATOR = "andOperator";
 
 	public DisplayTerms(HttpServletRequest req) {
-		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
+		keywords = ParamUtil.getString(req, KEYWORDS);
+		advancedSearch = ParamUtil.getBoolean(req, ADVANCED_SEARCH);
+		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR);
 	}
 
 	public DisplayTerms(RenderRequest req) {
-		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
+		keywords = ParamUtil.getString(req, KEYWORDS);
+		advancedSearch = ParamUtil.getBoolean(req, ADVANCED_SEARCH);
+		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR);
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public boolean isAdvancedSearch() {
+		return advancedSearch;
 	}
 
 	public boolean isAndOperator() {
 		return andOperator;
 	}
 
+	protected String keywords;
+	protected boolean advancedSearch;
 	protected boolean andOperator;
 
 }

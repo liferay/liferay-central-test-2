@@ -30,80 +30,80 @@ UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search
 UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<liferay-ui:message key="first-name" />
-	</td>
-	<td>
-		<liferay-ui:message key="middle-name" />
-	</td>
-	<td>
-		<liferay-ui:message key="last-name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="screen-name" />
-	</td>
-	<td>
-		<liferay-ui:message key="email-address" />
-	</td>
+<liferay-ui:search-toggle
+	id="toggle_id_enterprise_admin_user_search"
+	displayTerms="<%= displayTerms %>"
+>
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="first-name" />
+		</td>
+		<td>
+			<liferay-ui:message key="middle-name" />
+		</td>
+		<td>
+			<liferay-ui:message key="last-name" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="screen-name" />
+		</td>
+		<td>
+			<liferay-ui:message key="email-address" />
+		</td>
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<td>
-				<liferay-ui:message key="active" />
-			</td>
-		</c:when>
-		<c:otherwise>
-			<td></td>
-		</c:otherwise>
-	</c:choose>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= UserDisplayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
-	</td>
+		<c:choose>
+			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+				<td>
+					<liferay-ui:message key="active" />
+				</td>
+			</c:when>
+			<c:otherwise>
+				<td></td>
+			</c:otherwise>
+		</c:choose>
+	</tr>
+	<tr>
+		<td>
+			<input name="<portlet:namespace /><%= UserDisplayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
+		</td>
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-			<td>
-				<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
-					<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-					<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-				</select>
-			</td>
-		</c:when>
-		<c:otherwise>
-			<td></td>
-		</c:otherwise>
-	</c:choose>
-</tr>
-</table>
+		<c:choose>
+			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+				<td>
+					<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
+						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+						<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+					</select>
+				</td>
+			</c:when>
+			<c:otherwise>
+				<td></td>
+			</c:otherwise>
+		</c:choose>
+	</tr>
+	</table>
+</liferay-ui:search-toggle>
 
 <br />
 
 <div>
-	<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">
-		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-	</select>
-
 	<input type="submit" value="<liferay-ui:message key="search-users" />" />
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">

@@ -1086,6 +1086,7 @@ map-new-location=Nova ubicació al mapa
 maps-and-directions=Mapes i adreces
 mass=Massa
 match-whole-words=Comparar paraules completes
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=Quantitat màxima
 maximize-links=Maximitzar els links
 maximize=Maximitzar

@@ -24,7 +24,7 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -90,11 +90,7 @@ public class JournalArticleFinder {
 		articleId = StringUtil.upperCase(articleId);
 		title = StringUtil.lowerCase(title);
 		content = StringUtil.lowerCase(content);
-
-		if ((structureIds == null) || (structureIds.length == 0)) {
-			structureIds = new String[] {null};
-		}
-
+		structureIds = CustomSQLUtil.keywords(structureIds);
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
@@ -116,29 +112,9 @@ public class JournalArticleFinder {
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
-			if (structureIds.length > 1) {
-				StringMaker sm = new StringMaker();
-
-				sm.append("(");
-
-				for (int i = 0; i < structureIds.length; i++) {
-					if (i == 0) {
-						sm.append("(structureId = ? [$AND_OR_NULL_CHECK$])");
-					}
-					else {
-						sm.append(
-							" OR (structureId = ? [$AND_OR_NULL_CHECK$])");
-					}
-				}
-
-				sm.append(") [$AND_OR_CONNECTOR$]");
-
-				sql = StringUtil.replace(
-					sql,
-					"(structureId = ? [$AND_OR_NULL_CHECK$]) " +
-						"[$AND_OR_CONNECTOR$]",
-					sm.toString());
-			}
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureId", StringPool.EQUAL, false,
+				structureIds);
 
 			if (approved == null) {
 				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
@@ -177,12 +153,7 @@ public class JournalArticleFinder {
 			qPos.add(content);
 			qPos.add(type);
 			qPos.add(type);
-
-			for (int i = 0; i < structureIds.length; i++) {
-				qPos.add(structureIds[i]);
-				qPos.add(structureIds[i]);
-			}
-
+			qPos.add(structureIds, 2);
 			qPos.add(templateId);
 			qPos.add(templateId);
 			qPos.add(displayDateGT_TS);
@@ -322,11 +293,7 @@ public class JournalArticleFinder {
 		articleId = StringUtil.upperCase(articleId);
 		title = StringUtil.lowerCase(title);
 		content = StringUtil.lowerCase(content);
-
-		if ((structureIds == null) || (structureIds.length == 0)) {
-			structureIds = new String[] {null};
-		}
-
+		structureIds = CustomSQLUtil.keywords(structureIds);
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
@@ -347,29 +314,9 @@ public class JournalArticleFinder {
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
-			if (structureIds.length > 1) {
-				StringMaker sm = new StringMaker();
-
-				sm.append("(");
-
-				for (int i = 0; i < structureIds.length; i++) {
-					if (i == 0) {
-						sm.append("(structureId = ? [$AND_OR_NULL_CHECK$])");
-					}
-					else {
-						sm.append(
-							" OR (structureId = ? [$AND_OR_NULL_CHECK$])");
-					}
-				}
-
-				sm.append(") [$AND_OR_CONNECTOR$]");
-
-				sql = StringUtil.replace(
-					sql,
-					"(structureId = ? [$AND_OR_NULL_CHECK$]) " +
-						"[$AND_OR_CONNECTOR$]",
-					sm.toString());
-			}
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureId", StringPool.EQUAL, false,
+				structureIds);
 
 			if (approved == null) {
 				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
@@ -409,12 +356,7 @@ public class JournalArticleFinder {
 			qPos.add(content);
 			qPos.add(type);
 			qPos.add(type);
-
-			for (int i = 0; i < structureIds.length; i++) {
-				qPos.add(structureIds[i]);
-				qPos.add(structureIds[i]);
-			}
-
+			qPos.add(structureIds, 2);
 			qPos.add(templateId);
 			qPos.add(templateId);
 			qPos.add(displayDateGT_TS);

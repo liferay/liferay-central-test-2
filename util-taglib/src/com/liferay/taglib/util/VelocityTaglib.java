@@ -49,7 +49,7 @@ import com.liferay.taglib.ui.MyPlacesTag;
 import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.ToggleTag;
-import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.util.Map;
@@ -82,7 +82,7 @@ public class VelocityTaglib {
 			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
-		Map params = Http.getParameterMap(queryString);
+		Map params = HttpUtil.parameterMapFromString(queryString);
 
 		return ActionURLTag.doTag(
 			true, windowState, portletMode, null, null, secure, portletName,
@@ -416,7 +416,7 @@ public class VelocityTaglib {
 			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
-		Map params = Http.getParameterMap(queryString);
+		Map params = HttpUtil.parameterMapFromString(queryString);
 
 		return ActionURLTag.doTag(
 			false, windowState, portletMode, null, null, secure, portletName,

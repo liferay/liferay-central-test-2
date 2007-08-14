@@ -769,6 +769,7 @@ map-new-location=Vị trí bản đồ mới
 maps-and-directions=Bản đồ và chỉ dẫn
 mass=Quần chúng
 match-whole-words=Đúng cả từ
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=Max Qty
 maximize=Phóng lớn
 maximum=Lớn nhất

@@ -81,6 +81,7 @@ last-x-structures=Last {0} Structures
 last-x-templates=Last {0} Templates
 list-of-plugins-was-last-refreshed-on-x=List of plugins was last refreshed on {0}.
 make-x-my-start-page=Make {0} my start page!
+match-x-of-the-following-fields=Match {0} of the following fields:
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
 no-documents-were-found-that-matched-the-keywords-x=No documents were found that matched the keywords: {0}.
 no-entries-were-found-that-matched-the-keywords-x=No entries were found that matched the keywords: {0}.

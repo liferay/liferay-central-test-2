@@ -1458,6 +1458,7 @@ maps-and-directions=Kartor och vägbeskrivningar
 margin-and-padding=Marginaler
 mass=Mässa
 match-whole-words=Matcha orden
+match-x-of-the-following-fields=Match {0} of the following fields:
 max-qty=Maximal kvantitet
 maximize-links=Maximera länkar
 maximize=Maximera

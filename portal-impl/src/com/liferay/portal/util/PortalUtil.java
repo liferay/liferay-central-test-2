@@ -345,7 +345,15 @@ public class PortalUtil {
 			currentURL = ParamUtil.getString(req, "currentURL");
 
 			if (Validator.isNull(currentURL)) {
-				currentURL = Http.getCompleteURL(req);
+				if (true) {
+					currentURL = Http.getCompleteURL(req);
+				}
+				else {
+
+					// Do we need to trim redirects?
+
+					currentURL = _getCurrentURL(req);
+				}
 
 				if ((Validator.isNotNull(currentURL)) &&
 					(currentURL.indexOf("j_security_check") == -1)) {
@@ -1879,6 +1887,74 @@ public class PortalUtil {
 		_reservedParams.add("p_p_col_pos");
 		_reservedParams.add("p_p_col_count");
 		_reservedParams.add("p_p_static");
+	}
+
+	private static String _getCurrentURL(HttpServletRequest req) {
+		StringMaker sm = new StringMaker();
+
+		StringBuffer requestURL = req.getRequestURL();
+
+		if (requestURL != null) {
+			sm.append(requestURL.toString());
+		}
+
+		String queryString = req.getQueryString();
+
+		if (Validator.isNull(queryString)) {
+			return sm.toString();
+		}
+
+		String portletId = req.getParameter("p_p_id");
+
+		String redirectParam = "redirect";
+
+		if (Validator.isNotNull(portletId)) {
+			redirectParam = getPortletNamespace(portletId) + redirectParam;
+		}
+
+		Map parameterMap = HttpUtil.parameterMapFromString(queryString);
+
+		String[] redirectValues = (String[])parameterMap.get(redirectParam);
+
+		if ((redirectValues != null) && (redirectValues.length > 0)) {
+
+			// Prevent the redirect for GET requests from growing indefinitely
+			// and using up all the available space by remembering only the
+			// first redirect.
+
+			String redirect = Http.decodeURL(
+				GetterUtil.getString(redirectValues[0]));
+
+			int pos = redirect.indexOf(StringPool.QUESTION);
+
+			if (pos != -1) {
+				String subqueryString = redirect.substring(
+					pos + 1, redirect.length());
+
+				Map subparameterMap = HttpUtil.parameterMapFromString(
+					subqueryString);
+
+				String[] subredirectValues = (String[])subparameterMap.get(
+					redirectParam);
+
+				if ((subredirectValues != null) &&
+					(subredirectValues.length > 0)) {
+
+					String subredirect = Http.decodeURL(
+						GetterUtil.getString(subredirectValues[0]));
+
+					parameterMap.put(redirectParam, new String[] {subredirect});
+
+					queryString = HttpUtil.parameterMapToString(
+						parameterMap, false);
+				}
+			}
+		}
+
+		sm.append(StringPool.QUESTION);
+		sm.append(queryString);
+
+		return sm.toString();
 	}
 
 	private String _getPathContext() {

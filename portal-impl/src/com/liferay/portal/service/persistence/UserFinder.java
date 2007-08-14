@@ -79,17 +79,57 @@ public class UserFinder {
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
 
+	public static int countByKeywords(
+			long companyId, String keywords, Boolean active,
+			LinkedHashMap params)
+		throws SystemException {
+
+		String[] firstNames = null;
+		String[] middleNames = null;
+		String[] lastNames = null;
+		String[] screenNames = null;
+		String[] emailAddresses = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			firstNames = CustomSQLUtil.keywords(keywords);
+			middleNames = CustomSQLUtil.keywords(keywords);
+			lastNames = CustomSQLUtil.keywords(keywords);
+			screenNames = CustomSQLUtil.keywords(keywords);
+			emailAddresses = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByC_FN_MN_LN_SN_EA_A(
+			companyId, firstNames, middleNames, lastNames, screenNames,
+			emailAddresses, active, params, andOperator);
+	}
+
 	public static int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
-		firstName = StringUtil.lowerCase(firstName);
-		middleName = StringUtil.lowerCase(middleName);
-		lastName = StringUtil.lowerCase(lastName);
-		screenName = StringUtil.lowerCase(screenName);
-		emailAddress = StringUtil.lowerCase(emailAddress);
+		return countByC_FN_MN_LN_SN_EA_A(
+			companyId, new String[] {firstName}, new String[] {middleName},
+			new String[] {lastName}, new String[] {screenName},
+			new String[] {emailAddress}, active, params, andOperator);
+	}
+
+	public static int countByC_FN_MN_LN_SN_EA_A(
+			long companyId, String[] firstNames, String[] middleNames,
+			String[] lastNames, String[] screenNames, String[] emailAddresses,
+			Boolean active, LinkedHashMap params, boolean andOperator)
+		throws SystemException {
+
+		firstNames = CustomSQLUtil.keywords(firstNames);
+		middleNames = CustomSQLUtil.keywords(middleNames);
+		lastNames = CustomSQLUtil.keywords(lastNames);
+		screenNames = CustomSQLUtil.keywords(screenNames);
+		emailAddresses = CustomSQLUtil.keywords(emailAddresses);
 
 		Session session = null;
 
@@ -97,6 +137,22 @@ public class UserFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_A);
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Contact_.firstName)", StringPool.LIKE, false,
+				firstNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Contact_.middleName)", StringPool.LIKE, false,
+				middleNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Contact_.lastName)", StringPool.LIKE, false,
+				lastNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(User_.screenName)", StringPool.LIKE, false,
+				screenNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(User_.emailAddress)", StringPool.LIKE, true,
+				emailAddresses);
 
 			if (active == null) {
 				sql = StringUtil.replace(sql, _ACTIVE_SQL, StringPool.BLANK);
@@ -115,16 +171,11 @@ public class UserFinder {
 			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(false);
-			qPos.add(firstName);
-			qPos.add(firstName);
-			qPos.add(middleName);
-			qPos.add(middleName);
-			qPos.add(lastName);
-			qPos.add(lastName);
-			qPos.add(screenName);
-			qPos.add(screenName);
-			qPos.add(emailAddress);
-			qPos.add(emailAddress);
+			qPos.add(firstNames, 2);
+			qPos.add(middleNames, 2);
+			qPos.add(lastNames, 2);
+			qPos.add(screenNames, 2);
+			qPos.add(emailAddresses, 2);
 
 			if (active != null) {
 				qPos.add(active);
@@ -150,6 +201,34 @@ public class UserFinder {
 		}
 	}
 
+	public static List findByKeywords(
+			long companyId, String keywords, Boolean active,
+			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		String[] firstNames = null;
+		String[] middleNames = null;
+		String[] lastNames = null;
+		String[] screenNames = null;
+		String[] emailAddresses = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			firstNames = CustomSQLUtil.keywords(keywords);
+			middleNames = CustomSQLUtil.keywords(keywords);
+			lastNames = CustomSQLUtil.keywords(keywords);
+			screenNames = CustomSQLUtil.keywords(keywords);
+			emailAddresses = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return findByC_FN_MN_LN_SN_EA_A(
+			companyId, firstNames, middleNames, lastNames, screenNames,
+			emailAddresses, active, params, andOperator, begin, end, obc);
+	}
+
 	public static List findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
@@ -157,11 +236,25 @@ public class UserFinder {
 			int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		firstName = StringUtil.lowerCase(firstName);
-		middleName = StringUtil.lowerCase(middleName);
-		lastName = StringUtil.lowerCase(lastName);
-		screenName = StringUtil.lowerCase(screenName);
-		emailAddress = StringUtil.lowerCase(emailAddress);
+		return findByC_FN_MN_LN_SN_EA_A(
+			companyId, new String[] {firstName}, new String[] {middleName},
+			new String[] {lastName}, new String[] {screenName},
+			new String[] {emailAddress}, active, params, andOperator, begin,
+			end, obc);
+	}
+
+	public static List findByC_FN_MN_LN_SN_EA_A(
+			long companyId, String[] firstNames, String[] middleNames,
+			String[] lastNames, String[] screenNames, String[] emailAddresses,
+			Boolean active, LinkedHashMap params, boolean andOperator,
+			int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		firstNames = CustomSQLUtil.keywords(firstNames);
+		middleNames = CustomSQLUtil.keywords(middleNames);
+		lastNames = CustomSQLUtil.keywords(lastNames);
+		screenNames = CustomSQLUtil.keywords(screenNames);
+		emailAddresses = CustomSQLUtil.keywords(emailAddresses);
 
 		Session session = null;
 
@@ -169,6 +262,22 @@ public class UserFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_A);
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Contact_.firstName)", StringPool.LIKE, false,
+				firstNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Contact_.middleName)", StringPool.LIKE, false,
+				middleNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Contact_.lastName)", StringPool.LIKE, false,
+				lastNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(User_.screenName)", StringPool.LIKE, false,
+				screenNames);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(User_.emailAddress)", StringPool.LIKE, true,
+				emailAddresses);
 
 			if (active == null) {
 				sql = StringUtil.replace(sql, _ACTIVE_SQL, StringPool.BLANK);
@@ -188,16 +297,11 @@ public class UserFinder {
 			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(false);
-			qPos.add(firstName);
-			qPos.add(firstName);
-			qPos.add(middleName);
-			qPos.add(middleName);
-			qPos.add(lastName);
-			qPos.add(lastName);
-			qPos.add(screenName);
-			qPos.add(screenName);
-			qPos.add(emailAddress);
-			qPos.add(emailAddress);
+			qPos.add(firstNames, 2);
+			qPos.add(middleNames, 2);
+			qPos.add(lastNames, 2);
+			qPos.add(screenNames, 2);
+			qPos.add(emailAddresses, 2);
 
 			if (active != null) {
 				qPos.add(active);

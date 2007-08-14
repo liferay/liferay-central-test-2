@@ -183,6 +183,10 @@ public abstract class CustomSQLUtil {
 		}
 	}
 
+	public String get(String id) {
+		return (String)_sqlPool.get(id);
+	}
+
 	/**
 	 * Returns true if Hibernate is connecting to a DB2 database.
 	 *
@@ -223,8 +227,31 @@ public abstract class CustomSQLUtil {
 		return _vendorSybase;
 	}
 
-	public String get(String id) {
-		return (String)_sqlPool.get(id);
+	public static String[] keywords(String keywords) {
+		keywords = keywords.toLowerCase().trim();
+
+		String[] keywordsArray = StringUtil.split(keywords, StringPool.SPACE);
+
+		for (int i = 0; i < keywordsArray.length; i++) {
+			String keyword = keywordsArray[i];
+
+			keywordsArray[i] =
+				StringPool.PERCENT + keyword + StringPool.PERCENT;
+		}
+
+		return keywordsArray;
+	}
+
+	public static String[] keywords(String[] keywordsArray) {
+		if ((keywordsArray == null) || (keywordsArray.length == 0)) {
+			keywordsArray = new String[] {null};
+		}
+
+		for (int i = 0; i < keywordsArray.length; i++) {
+			keywordsArray[i] = StringUtil.lowerCase(keywordsArray[i]);
+		}
+
+		return keywordsArray;
 	}
 
 	public String replaceAndOperator(String sql, boolean andOperator) {
@@ -264,6 +291,51 @@ public abstract class CustomSQLUtil {
 		}
 
 		return sql;
+	}
+
+	public static String replaceKeywords(
+		String sql, String field, String operator, boolean last,
+		String[] values) {
+
+		if (values.length == 0) {
+			return sql;
+		}
+
+		StringMaker oldSql = new StringMaker();
+
+		oldSql.append("(");
+		oldSql.append(field);
+		oldSql.append(" ");
+		oldSql.append(operator);
+		oldSql.append(" ? [$AND_OR_NULL_CHECK$])");
+
+		if (!last) {
+			oldSql.append(" [$AND_OR_CONNECTOR$]");
+		}
+
+		StringMaker newSql = new StringMaker();
+
+		newSql.append("(");
+
+		for (int i = 0; i < values.length; i++) {
+			if (i > 0) {
+				newSql.append(" OR ");
+			}
+
+			newSql.append("(");
+			newSql.append(field);
+			newSql.append(" ");
+			newSql.append(operator);
+			newSql.append(" ? [$AND_OR_NULL_CHECK$])");
+		}
+
+		newSql.append(")");
+
+		if (!last) {
+			newSql.append(" [$AND_OR_CONNECTOR$]");
+		}
+
+		return StringUtil.replace(sql, oldSql.toString(), newSql.toString());
 	}
 
 	public String removeOrderBy(String sql) {
