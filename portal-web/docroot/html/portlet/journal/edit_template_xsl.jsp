@@ -43,7 +43,6 @@ else {
 <script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-
 	function getEditorContent() {
 		var content = decodeURIComponent(opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
 
@@ -74,10 +73,12 @@ else {
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
 
 </form>
+
 <script type="text/javascript">
 	jQuery(
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = getEditorContent();
+
 			Liferay.Util.resizeTextarea('<portlet:namespace />xslContent');
 		}
 	);
