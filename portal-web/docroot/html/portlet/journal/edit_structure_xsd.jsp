@@ -27,7 +27,6 @@
 <script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent');
 
 	function getEditorContent() {
 		return opener.<portlet:namespace />getXsd();
@@ -58,5 +57,10 @@
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />xsdContent.value = getEditorContent();
+	jQuery(
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace />xsdContent.value = getEditorContent();
+			Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent');
+		}
+	);
 </script>
