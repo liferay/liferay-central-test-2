@@ -396,6 +396,18 @@
 		</copy>
 
 		<if>
+			<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
+			<then>
+				<copy todir="${app.server.lib.portal.dir}">
+					<fileset
+						dir="lib/development"
+						includes="mail.jar,smtp.jar"
+					/>
+				</copy>
+			</then>
+		</if>
+
+		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
