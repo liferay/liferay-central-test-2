@@ -240,12 +240,13 @@ Liferay.Util = {
 	},
 
 	focusFormField: function(el) {
-		var instance = this;
 		jQuery(
 			function() {
-				if (el && el.offsetHeight != 0) {
+				if (el && (el.offsetHeight != 0)) {
 					var elObj = jQuery(el);
+
 					jQuery('input').trigger('blur');
+
 					elObj.trigger('focus');
 				}
 			}
