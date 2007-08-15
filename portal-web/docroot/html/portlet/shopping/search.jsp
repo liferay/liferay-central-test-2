@@ -178,7 +178,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-<input type="submit" value="<liferay-ui:message key="search" />" />
+<input type="submit" value="<liferay-ui:message key="search-items" />" />
 
 <br /><br />
 

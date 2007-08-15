@@ -33,7 +33,7 @@ PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchCont
 <div>
 	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
 
-	<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
+	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
 </div>
 
 <br />

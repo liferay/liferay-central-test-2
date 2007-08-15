@@ -102,24 +102,19 @@ boolean showAddNodeButton = PortletPermission.contains(permissionChecker, plid.l
 %>
 
 <c:if test="<%= showAddNodeButton || (results.size() > 0) %>">
-	<table border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<c:if test="<%= showAddNodeButton %>">
-			<td>
-				<input type="button" value="<liferay-ui:message key="add-node" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-			</td>
-			<td style="padding-left: 30px;"></td>
-		</c:if>
-
+	<div>
 		<c:if test="<%= results.size() > 0 %>">
-			<td>
-				<input name="<portlet:namespace />keywords" size="30" type="text" />
+			<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
 
-				<input type="submit" value="<liferay-ui:message key="search-nodes" />" />
-			</td>
+			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" />
+
+			<input type="submit" value="<liferay-ui:message key="search-pages" />" />
 		</c:if>
-	</tr>
-	</table>
+
+		<c:if test="<%= showAddNodeButton %>">
+			<input type="button" value="<liferay-ui:message key="add-node" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+		</c:if>
+	</div>
 
 	<c:if test="<%= results.size() > 0 %>">
 		<br />

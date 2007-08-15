@@ -167,7 +167,9 @@ portletURL.setParameter("tabs1", tabs1);
 		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
 			<div>
 				<c:if test='<%= (results.size() > 0) && tabs1.equals("products") %>'>
-					<input name="<portlet:namespace />keywords" size="30" type="text" />
+					<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
+
+					<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" />
 
 					<select name="<portlet:namespace/>type">
 						<option value=""></option>

@@ -41,6 +41,8 @@ if (node != null) {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
+
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
@@ -124,7 +126,7 @@ try {
 		<td>
 			<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-			<input type="submit" value="<liferay-ui:message key="search" />" />
+			<input type="submit" value="<liferay-ui:message key="search-pages" />" />
 		</td>
 		<td align="right">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

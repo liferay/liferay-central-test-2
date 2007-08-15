@@ -130,9 +130,9 @@ try {
 	}
 %>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
+	<input type="submit" value="<liferay-ui:message key="search-entries" />" />
 
 	<br /><br />
 

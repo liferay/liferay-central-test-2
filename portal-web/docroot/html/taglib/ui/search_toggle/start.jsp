@@ -51,9 +51,9 @@
 <input id="<%= randomNamespace %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
 
 <div id="<%= randomNamespace %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
-	<label for="<%= namespace %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
+	<label for="<%= randomNamespace %><%= displayTerms.KEYWORDS %>"><liferay-ui:message key="search" /></label>
 
-	<input name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= displayTerms.getKeywords() %>" />
+	<input id="<%= randomNamespace %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= displayTerms.getKeywords() %>" />
 
 	&nbsp;<a href="javascript: <%= randomNamespace %>toggleSearch();" tabindex="-1" ><liferay-ui:message key="advanced" /> &raquo;</a>
 </div>

@@ -197,9 +197,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<c:if test="<%= showAddCategoryButton || (results.size() > 0) %>">
 			<div>
 				<c:if test="<%= results.size() > 0 %>">
-					<input name="<portlet:namespace />keywords" size="30" type="text" />
+					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
-					<input type="submit" value="<liferay-ui:message key="search-categories" />" />
+					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
+
+					<input type="submit" value="<liferay-ui:message key="search-messages" />" />
 				</c:if>
 
 				<c:if test="<%= showAddCategoryButton %>">
@@ -354,23 +356,19 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			%>
 
 			<c:if test="<%= showAddMessageButton || (results.size() > 0) %>">
-				<table class="liferay-table">
-				<tr>
-					<c:if test="<%= showAddMessageButton %>">
-						<td>
-							<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
-						</td>
-					</c:if>
-
+				<div>
 					<c:if test="<%= results.size() > 0 %>">
-						<td>
-							<input name="<portlet:namespace />keywords" size="30" type="text" />
+						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
 
-							<input type="submit" value="<liferay-ui:message key="search-threads" />" />
-						</td>
+						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+						<input type="submit" value="<liferay-ui:message key="search-messages" />" />
 					</c:if>
-				</tr>
-				</table>
+
+					<c:if test="<%= showAddMessageButton %>">
+						<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+					</c:if>
+				</div>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<br />
