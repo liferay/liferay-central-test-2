@@ -122,6 +122,15 @@
 		</if>
 
 		<if>
+			<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
+			<then>
+				<copy todir="${war.file.dest}/WEB-INF/lib">
+					<fileset dir="${project.dir}/lib/development" includes="mail.jar,smtp.jar"/>
+				</copy>
+			</then>
+		</if>
+
+		<if>
 			<and>
 				<or>
 					<equals arg1="${app.server.type}" arg2="glassfish" />
