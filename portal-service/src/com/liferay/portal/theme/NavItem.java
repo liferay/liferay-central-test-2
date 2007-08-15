@@ -83,7 +83,7 @@ public class NavItem implements Serializable {
 	}
 
 	public String getURL() throws Exception {
-		return getResetLayoutURL();
+		return getRegularURL();
 	}
 
 	public String getRegularURL() throws Exception {

@@ -642,6 +642,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		String url = PortalUtil.getLayoutURL(this, themeDisplay);
 
+		if (!resetMaxState && !resetMaxState) {
+			return url;
+		}
+
 		if (PortalUtil.DEFAULT_P_L_RESET && !resetRenderParameters) {
 			url = Http.addParameter(url, "p_l_reset", 0);
 		}
