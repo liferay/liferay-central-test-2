@@ -607,6 +607,21 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static java.util.List search(long companyId, long groupId,
+		java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.search(companyId, groupId, keywords,
+			version, type, structureId, templateId, displayDateGT,
+			displayDateLT, approved, expired, reviewDate, begin, end, obc);
+	}
+
+	public static java.util.List search(long companyId, long groupId,
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
@@ -628,7 +643,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String templateId,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator, int begin, int end,
@@ -638,8 +653,22 @@ public class JournalArticleLocalServiceUtil {
 
 		return journalArticleLocalService.search(companyId, groupId, articleId,
 			version, title, description, content, type, structureIds,
-			templateId, displayDateGT, displayDateLT, approved, expired,
+			templateIds, displayDateGT, displayDateLT, approved, expired,
 			reviewDate, andOperator, begin, end, obc);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.searchCount(companyId, groupId,
+			keywords, version, type, structureId, templateId, displayDateGT,
+			displayDateLT, approved, expired, reviewDate);
 	}
 
 	public static int searchCount(long companyId, long groupId,
@@ -663,7 +692,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String templateId,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator)
@@ -672,7 +701,7 @@ public class JournalArticleLocalServiceUtil {
 
 		return journalArticleLocalService.searchCount(companyId, groupId,
 			articleId, version, title, description, content, type,
-			structureIds, templateId, displayDateGT, displayDateLT, approved,
+			structureIds, templateIds, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator);
 	}
 

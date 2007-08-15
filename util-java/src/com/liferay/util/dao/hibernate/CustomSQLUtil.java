@@ -228,7 +228,15 @@ public abstract class CustomSQLUtil {
 	}
 
 	public static String[] keywords(String keywords) {
-		keywords = keywords.toLowerCase().trim();
+		return keywords(keywords, true);
+	}
+
+	public static String[] keywords(String keywords, boolean lowerCase) {
+		if (lowerCase) {
+			keywords = keywords.toLowerCase();
+		}
+
+		keywords = keywords.trim();
 
 		String[] keywordsArray = StringUtil.split(keywords, StringPool.SPACE);
 
@@ -243,12 +251,18 @@ public abstract class CustomSQLUtil {
 	}
 
 	public static String[] keywords(String[] keywordsArray) {
+		return keywords(keywordsArray, true);
+	}
+
+	public static String[] keywords(String[] keywordsArray, boolean lowerCase) {
 		if ((keywordsArray == null) || (keywordsArray.length == 0)) {
 			keywordsArray = new String[] {null};
 		}
 
-		for (int i = 0; i < keywordsArray.length; i++) {
-			keywordsArray[i] = StringUtil.lowerCase(keywordsArray[i]);
+		if (lowerCase) {
+			for (int i = 0; i < keywordsArray.length; i++) {
+				keywordsArray[i] = StringUtil.lowerCase(keywordsArray[i]);
+			}
 		}
 
 		return keywordsArray;

@@ -121,15 +121,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<%
 			ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
-
-			int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator());
-
-			searchContainer.setTotal(total);
-
-			List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
-
-			searchContainer.setResults(results);
 			%>
+
+			<%@ include file="/html/portlet/journal/article_search_results.jsp" %>
 
 			<div class="separator"><!-- --></div>
 
@@ -220,15 +214,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<%
 			StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
-
-			int total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
-
-			searchContainer.setTotal(total);
-
-			List results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
-
-			searchContainer.setResults(results);
 			%>
+
+			<%@ include file="/html/portlet/journal/structure_search_results.jsp" %>
 
 			<div class="separator"><!-- --></div>
 
@@ -312,14 +300,10 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-			int total = JournalTemplateLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
-
-			searchContainer.setTotal(total);
-
-			List results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
-
-			searchContainer.setResults(results);
+			searchTerms.setStructureIdComparator(StringPool.EQUAL);
 			%>
+
+			<%@ include file="/html/portlet/journal/template_search_results.jsp" %>
 
 			<div class="separator"><!-- --></div>
 
@@ -493,19 +477,3 @@ portletURL.setParameter("tabs1", tabs1);
 </c:choose>
 
 </form>
-
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		<c:choose>
-			<c:when test='<%= tabs1.equals("articles") %>'>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchArticleId);
-			</c:when>
-			<c:when test='<%= tabs1.equals("structures") %>'>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchStructureId);
-			</c:when>
-			<c:when test='<%= tabs1.equals("templates") %>'>
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />searchTemplateId);
-			</c:when>
-		</c:choose>
-	</script>
-</c:if>

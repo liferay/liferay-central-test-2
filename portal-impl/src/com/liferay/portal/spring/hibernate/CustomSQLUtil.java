@@ -60,8 +60,17 @@ public class CustomSQLUtil {
 		return _instance._portalCustomSQLUtil.keywords(keywords);
 	}
 
+	public static String[] keywords(String keywords, boolean lowerCase) {
+		return _instance._portalCustomSQLUtil.keywords(keywords, lowerCase);
+	}
+
 	public static String[] keywords(String[] keywordsArray) {
 		return _instance._portalCustomSQLUtil.keywords(keywordsArray);
+	}
+
+	public static String[] keywords(String[] keywordsArray, boolean lowerCase) {
+		return _instance._portalCustomSQLUtil.keywords(
+			keywordsArray, lowerCase);
 	}
 
 	public static String replaceAndOperator(String sql, boolean andOperator) {

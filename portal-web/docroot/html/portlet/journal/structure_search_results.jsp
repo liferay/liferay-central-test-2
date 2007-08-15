@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,46 +20,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.journal.search;
+<%
+int total = 0;
 
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.dao.DAOParamUtil;
-
-import javax.portlet.RenderRequest;
-
-/**
- * <a href="TemplateSearchTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class TemplateSearchTerms extends TemplateDisplayTerms {
-
-	public TemplateSearchTerms(RenderRequest req) {
-		super(req);
-
-		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		templateId = DAOParamUtil.getLike(req, TEMPLATE_ID);
-		structureId = DAOParamUtil.getString(req, STRUCTURE_ID);
-		name = DAOParamUtil.getLike(req, NAME);
-		description = DAOParamUtil.getLike(req, DESCRIPTION);
-	}
-
-	public void setStructureId(String structureId) {
-		this.structureId = structureId;
-	}
-
-	public String getStructureIdComparator() {
-		return structureIdComparator;
-	}
-
-	public void setStructureIdComparator(String structureIdComparator) {
-		this.structureIdComparator = structureIdComparator;
-	}
-
-	protected String structureIdComparator;
-
+if (searchTerms.isAdvancedSearch()) {
+	total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
 }
+else {
+	total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getKeywords());
+}
+
+searchContainer.setTotal(total);
+
+List results = null;
+
+if (searchTerms.isAdvancedSearch()) {
+	results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
+}
+else {
+	results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd(), null);
+}
+
+searchContainer.setResults(results);
+%>

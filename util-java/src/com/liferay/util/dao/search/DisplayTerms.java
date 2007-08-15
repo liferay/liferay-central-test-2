@@ -45,13 +45,13 @@ public class DisplayTerms {
 	public DisplayTerms(HttpServletRequest req) {
 		keywords = ParamUtil.getString(req, KEYWORDS);
 		advancedSearch = ParamUtil.getBoolean(req, ADVANCED_SEARCH);
-		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR);
+		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
 	}
 
 	public DisplayTerms(RenderRequest req) {
 		keywords = ParamUtil.getString(req, KEYWORDS);
 		advancedSearch = ParamUtil.getBoolean(req, ADVANCED_SEARCH);
-		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR);
+		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
 	}
 
 	public String getKeywords() {
@@ -60,6 +60,10 @@ public class DisplayTerms {
 
 	public boolean isAdvancedSearch() {
 		return advancedSearch;
+	}
+
+	public void setAdvancedSearch(boolean advancedSearch) {
+		this.advancedSearch = advancedSearch;
 	}
 
 	public boolean isAndOperator() {

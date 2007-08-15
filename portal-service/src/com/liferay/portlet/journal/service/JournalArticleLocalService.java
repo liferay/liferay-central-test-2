@@ -353,6 +353,15 @@ public interface JournalArticleLocalService {
 		java.lang.String sortField) throws com.liferay.portal.SystemException;
 
 	public java.util.List search(long companyId, long groupId,
+		java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List search(long companyId, long groupId,
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
@@ -367,11 +376,19 @@ public interface JournalArticleLocalService {
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String templateId,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(long companyId, long groupId,
+		java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, long groupId,
@@ -388,7 +405,7 @@ public interface JournalArticleLocalService {
 		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String templateId,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
 		java.util.Date reviewDate, boolean andOperator)

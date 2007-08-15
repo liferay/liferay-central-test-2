@@ -37,9 +37,7 @@ double version = ParamUtil.getDouble(request, "version");
 			type = null;
 		}
 
-		Boolean approved = Boolean.TRUE;
-		Boolean expired = Boolean.FALSE;
-		Date reviewDate = null;
+		String status = "approved";
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -63,14 +61,14 @@ double version = ParamUtil.getDouble(request, "version");
 
 		ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
-		int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), groupId, searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator());
+		searchTerms.setGroupId(groupId);
+		searchTerms.setType(type);
+		searchTerms.setStatus("approved");
+		%>
 
-		searchContainer.setTotal(total);
+		<%@ include file="/html/portlet/journal/article_search_results.jsp" %>
 
-		List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), groupId, searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
-
-		searchContainer.setResults(results);
-
+		<%
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {

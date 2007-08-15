@@ -109,7 +109,8 @@ public class GetArticlesAction extends Action {
 		String type = DAOParamUtil.getString(req, "type");
 		String[] structureIds = StringUtil.split(
 			DAOParamUtil.getString(req, "structureId"));
-		String templateId = DAOParamUtil.getString(req, "templateId");
+		String[] templateIds = StringUtil.split(
+			DAOParamUtil.getString(req, "templateId"));
 
 		Date displayDateGT = null;
 
@@ -159,7 +160,7 @@ public class GetArticlesAction extends Action {
 
 		return JournalArticleLocalServiceUtil.search(
 			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateId, displayDateGT, displayDateLT,
+			type, structureIds, templateIds, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 

@@ -222,6 +222,16 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static java.util.List search(long companyId, long groupId,
+		java.lang.String keywords, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		return journalStructureLocalService.search(companyId, groupId,
+			keywords, begin, end, obc);
+	}
+
+	public static java.util.List search(long companyId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -230,6 +240,14 @@ public class JournalStructureLocalServiceUtil {
 
 		return journalStructureLocalService.search(companyId, groupId,
 			structureId, name, description, andOperator, begin, end, obc);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		return journalStructureLocalService.searchCount(companyId, groupId,
+			keywords);
 	}
 
 	public static int searchCount(long companyId, long groupId,

@@ -322,6 +322,15 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public List search(
+			long companyId, long groupId, String keywords, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return JournalStructureFinder.findByKeywords(
+			companyId, groupId, keywords, begin, end, obc);
+	}
+
+	public List search(
 			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -330,6 +339,13 @@ public class JournalStructureLocalServiceImpl
 		return JournalStructureFinder.findByC_G_S_N_D(
 			companyId, groupId, structureId, name, description, andOperator,
 			begin, end, obc);
+	}
+
+	public int searchCount(long companyId, long groupId, String keywords)
+		throws SystemException {
+
+		return JournalStructureFinder.countByKeywords(
+			companyId, groupId, keywords);
 	}
 
 	public int searchCount(

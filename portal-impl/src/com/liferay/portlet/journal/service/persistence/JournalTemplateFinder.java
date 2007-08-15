@@ -29,6 +29,7 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -54,15 +55,51 @@ public class JournalTemplateFinder {
 	public static String FIND_BY_C_G_T_S_N_D =
 		JournalTemplateFinder.class.getName() + ".findByC_G_T_S_N_D";
 
+	public static int countByKeywords(
+			long companyId, long groupId, String keywords, String structureId,
+			String structureIdComparator)
+		throws SystemException {
+
+		String[] templateIds = null;
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			templateIds = CustomSQLUtil.keywords(keywords, false);
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByC_G_T_S_N_D(
+			companyId, groupId, templateIds, structureId, structureIdComparator,
+			names, descriptions, andOperator);
+	}
+
 	public static int countByC_G_T_S_N_D(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator)
 		throws SystemException {
 
-		templateId = StringUtil.upperCase(templateId);
-		name = StringUtil.lowerCase(name);
-		description = StringUtil.lowerCase(description);
+		return countByC_G_T_S_N_D(
+			companyId, groupId, new String[] {templateId}, structureId,
+			structureIdComparator, new String[] {name},
+			new String[] {description}, andOperator);
+	}
+
+	public static int countByC_G_T_S_N_D(
+			long companyId, long groupId, String[] templateIds,
+			String structureId, String structureIdComparator, String[] names,
+			String[] descriptions, boolean andOperator)
+		throws SystemException {
+
+		templateIds = CustomSQLUtil.keywords(templateIds, false);
+		names = CustomSQLUtil.keywords(names);
+		descriptions = CustomSQLUtil.keywords(descriptions);
 
 		Session session = null;
 
@@ -75,6 +112,9 @@ public class JournalTemplateFinder {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "templateId", StringPool.LIKE, false, templateIds);
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				String replaceWith =
 					"structureId != ? AND structureId IS NOT NULL";
@@ -86,6 +126,11 @@ public class JournalTemplateFinder {
 				sql = StringUtil.replace(
 					sql, "structureId = ? [$AND_OR_NULL_CHECK$]", replaceWith);
 			}
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(description)", StringPool.LIKE, true, descriptions);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -101,8 +146,7 @@ public class JournalTemplateFinder {
 				qPos.add(groupId);
 			}
 
-			qPos.add(templateId);
-			qPos.add(templateId);
+			qPos.add(templateIds, 2);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				if (CustomSQLUtil.isVendorOracle()) {
@@ -119,10 +163,8 @@ public class JournalTemplateFinder {
 				qPos.add(structureId);
 			}
 
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 
 			Iterator itr = q.list().iterator();
 
@@ -144,15 +186,53 @@ public class JournalTemplateFinder {
 		}
 	}
 
+	public static List findByKeywords(
+			long companyId, long groupId, String keywords, String structureId,
+			String structureIdComparator, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		String[] templateIds = null;
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			templateIds = CustomSQLUtil.keywords(keywords, false);
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return findByC_G_T_S_N_D(
+			companyId, groupId, templateIds, structureId, structureIdComparator,
+			names, descriptions, andOperator, begin, end, obc);
+	}
+
 	public static List findByC_G_T_S_N_D(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		templateId = StringUtil.upperCase(templateId);
-		name = StringUtil.lowerCase(name);
-		description = StringUtil.lowerCase(description);
+		return findByC_G_T_S_N_D(
+			companyId, groupId, new String[] {templateId}, structureId,
+			structureIdComparator, new String[] {name},
+			new String[] {description}, andOperator, begin, end, obc);
+	}
+
+	public static List findByC_G_T_S_N_D(
+			long companyId, long groupId, String[] templateIds,
+			String structureId, String structureIdComparator, String[] names,
+			String[] descriptions, boolean andOperator, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		templateIds = CustomSQLUtil.keywords(templateIds, false);
+		names = CustomSQLUtil.keywords(names);
+		descriptions = CustomSQLUtil.keywords(descriptions);
 
 		Session session = null;
 
@@ -165,6 +245,9 @@ public class JournalTemplateFinder {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "templateId", StringPool.LIKE, false, templateIds);
+
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				String replaceWith =
 					"structureId != ? AND structureId IS NOT NULL";
@@ -176,6 +259,11 @@ public class JournalTemplateFinder {
 				sql = StringUtil.replace(
 					sql, "structureId = ? [$AND_OR_NULL_CHECK$]", replaceWith);
 			}
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(description)", StringPool.LIKE, true, descriptions);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
@@ -192,8 +280,7 @@ public class JournalTemplateFinder {
 				qPos.add(groupId);
 			}
 
-			qPos.add(templateId);
-			qPos.add(templateId);
+			qPos.add(templateIds, 2);
 
 			if (structureIdComparator.equals(StringPool.NOT_EQUAL)) {
 				if (CustomSQLUtil.isVendorOracle()) {
@@ -210,10 +297,8 @@ public class JournalTemplateFinder {
 				qPos.add(structureId);
 			}
 
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}

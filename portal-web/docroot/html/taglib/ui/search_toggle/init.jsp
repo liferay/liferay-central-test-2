@@ -33,4 +33,15 @@ String id = (String)request.getAttribute("liferay-ui:search-toggle:id");
 DisplayTerms displayTerms = (DisplayTerms)request.getAttribute("liferay-ui:search-toggle:displayTerms");
 
 String clickValue = GetterUtil.getString(SessionClicks.get(request, id, null), "basic");
+
+if (clickValue.equals("basic")) {
+	if (displayTerms.isAdvancedSearch()) {
+		displayTerms.setAdvancedSearch(false);
+	}
+}
+else {
+	if (!displayTerms.isAdvancedSearch()) {
+		displayTerms.setAdvancedSearch(true);
+	}
+}
 %>

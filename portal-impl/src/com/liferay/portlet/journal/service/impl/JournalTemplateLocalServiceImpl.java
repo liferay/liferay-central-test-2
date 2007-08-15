@@ -383,6 +383,17 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public List search(
+			long companyId, long groupId, String keywords, String structureId,
+			String structureIdComparator, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return JournalTemplateFinder.findByKeywords(
+			companyId, groupId, keywords, structureId, structureIdComparator,
+			begin, end, obc);
+	}
+
+	public List search(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
@@ -391,6 +402,15 @@ public class JournalTemplateLocalServiceImpl
 		return JournalTemplateFinder.findByC_G_T_S_N_D(
 			companyId, groupId, templateId, structureId, structureIdComparator,
 			name, description, andOperator, begin, end, obc);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String keywords, String structureId,
+			String structureIdComparator)
+		throws SystemException {
+
+		return JournalTemplateFinder.countByKeywords(
+			companyId, groupId, keywords, structureId, structureIdComparator);
 	}
 
 	public int searchCount(

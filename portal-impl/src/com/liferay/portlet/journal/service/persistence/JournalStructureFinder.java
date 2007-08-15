@@ -24,10 +24,12 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -52,14 +54,46 @@ public class JournalStructureFinder {
 	public static String FIND_BY_C_G_S_N_D =
 		JournalStructureFinder.class.getName() + ".findByC_G_S_N_D";
 
+	public static int countByKeywords(
+			long companyId, long groupId, String keywords)
+		throws SystemException {
+
+		String[] structureIds = null;
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			structureIds = CustomSQLUtil.keywords(keywords, false);
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByC_G_S_N_D(
+			companyId, groupId, structureIds, names, descriptions, andOperator);
+	}
+
 	public static int countByC_G_S_N_D(
 			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
-		structureId = StringUtil.upperCase(structureId);
-		name = StringUtil.lowerCase(name);
-		description = StringUtil.lowerCase(description);
+		return countByC_G_S_N_D(
+			companyId, groupId, new String[] {structureId}, new String[] {name},
+			new String[] {description}, andOperator);
+	}
+
+	public static int countByC_G_S_N_D(
+			long companyId, long groupId, String[] structureIds, String[] names,
+			String[] descriptions, boolean andOperator)
+		throws SystemException {
+
+		structureIds = CustomSQLUtil.keywords(structureIds, false);
+		names = CustomSQLUtil.keywords(names);
+		descriptions = CustomSQLUtil.keywords(descriptions);
 
 		Session session = null;
 
@@ -71,6 +105,13 @@ public class JournalStructureFinder {
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureId", StringPool.LIKE, false, structureIds);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(description)", StringPool.LIKE, true, descriptions);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -86,12 +127,9 @@ public class JournalStructureFinder {
 				qPos.add(groupId);
 			}
 
-			qPos.add(structureId);
-			qPos.add(structureId);
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
+			qPos.add(structureIds, 2);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 
 			Iterator itr = q.list().iterator();
 
@@ -113,15 +151,50 @@ public class JournalStructureFinder {
 		}
 	}
 
+	public static List findByKeywords(
+			long companyId, long groupId, String keywords, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		String[] structureIds = null;
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			structureIds = CustomSQLUtil.keywords(keywords, false);
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return findByC_G_S_N_D(
+			companyId, groupId, structureIds, names, descriptions, andOperator,
+			begin, end, obc);
+	}
+
 	public static List findByC_G_S_N_D(
 			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		structureId = StringUtil.upperCase(structureId);
-		name = StringUtil.lowerCase(name);
-		description = StringUtil.lowerCase(description);
+		return findByC_G_S_N_D(
+			companyId, groupId, new String[] {structureId}, new String[] {name},
+			new String[] {description}, andOperator, begin, end, obc);
+	}
+
+	public static List findByC_G_S_N_D(
+			long companyId, long groupId, String[] structureIds, String[] names,
+			String[] descriptions, boolean andOperator, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		structureIds = CustomSQLUtil.keywords(structureIds, false);
+		names = CustomSQLUtil.keywords(names);
+		descriptions = CustomSQLUtil.keywords(descriptions);
 
 		Session session = null;
 
@@ -133,6 +206,13 @@ public class JournalStructureFinder {
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureId", StringPool.LIKE, false, structureIds);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(description)", StringPool.LIKE, true, descriptions);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
@@ -149,12 +229,9 @@ public class JournalStructureFinder {
 				qPos.add(groupId);
 			}
 
-			qPos.add(structureId);
-			qPos.add(structureId);
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
+			qPos.add(structureIds, 2);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}

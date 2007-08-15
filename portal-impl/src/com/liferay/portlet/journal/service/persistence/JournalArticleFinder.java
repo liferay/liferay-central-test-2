@@ -29,6 +29,7 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -65,6 +66,36 @@ public class JournalArticleFinder {
 		JournalArticleFinder.class.getName() +
 			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
+	public static int countByKeywords(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate)
+		throws SystemException {
+
+		String[] articleIds = null;
+		String[] titles = null;
+		String[] descriptions = null;
+		String[] contents = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			articleIds = CustomSQLUtil.keywords(keywords, false);
+			titles = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords, false);
+			contents = CustomSQLUtil.keywords(keywords, false);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, articleIds, version, titles, descriptions,
+			contents, type, new String[] {structureId},
+			new String[] {templateId}, displayDateGT, displayDateLT, approved,
+			expired, reviewDate, andOperator);
+	}
+
 	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
@@ -74,23 +105,42 @@ public class JournalArticleFinder {
 		throws SystemException {
 
 		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, new String[] {structureId}, templateId, displayDateGT,
-			displayDateLT, approved, expired, reviewDate, andOperator);
+			companyId, groupId, articleId, version, title, description,
+			content, type, new String[] {structureId},
+			new String[] {templateId}, displayDateGT, displayDateLT, approved,
+			expired, reviewDate, andOperator);
 	}
 
 	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
-			String[] structureIds, String templateId, Date displayDateGT,
+			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
 			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
-		articleId = StringUtil.upperCase(articleId);
-		title = StringUtil.lowerCase(title);
-		content = StringUtil.lowerCase(content);
-		structureIds = CustomSQLUtil.keywords(structureIds);
+		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, new String[] {articleId}, version,
+			new String[] {title}, new String[] {description},
+			new String[] {content}, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, approved, expired, reviewDate,
+			andOperator);
+	}
+
+	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			long companyId, long groupId, String[] articleIds, Double version,
+			String[] titles, String[] descriptions, String[] contents,
+			String type, String[] structureIds, String[] templateIds,
+			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate, boolean andOperator)
+		throws SystemException {
+
+		articleIds = CustomSQLUtil.keywords(articleIds, false);
+		titles = CustomSQLUtil.keywords(titles);
+		descriptions = CustomSQLUtil.keywords(descriptions, false);
+		contents = CustomSQLUtil.keywords(contents, false);
+		structureIds = CustomSQLUtil.keywords(structureIds, false);
+		templateIds = CustomSQLUtil.keywords(templateIds, false);
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
@@ -107,14 +157,24 @@ public class JournalArticleFinder {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "articleId", StringPool.LIKE, false, articleIds);
+
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "structureId", StringPool.EQUAL, false,
-				structureIds);
+				sql, "lower(title)", StringPool.LIKE, false, titles);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "description", StringPool.LIKE, false, descriptions);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "content", StringPool.LIKE, false, contents);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureId", StringPool.EQUAL, false, structureIds);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
 			if (approved == null) {
 				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
@@ -138,24 +198,19 @@ public class JournalArticleFinder {
 				qPos.add(groupId);
 			}
 
-			qPos.add(articleId);
-			qPos.add(articleId);
+			qPos.add(articleIds, 2);
 
 			if (version != null) {
 				qPos.add(version);
 			}
 
-			qPos.add(title);
-			qPos.add(title);
-			qPos.add(description);
-			qPos.add(description);
-			qPos.add(content);
-			qPos.add(content);
+			qPos.add(titles, 2);
+			qPos.add(descriptions, 2);
+			qPos.add(contents, 2);
 			qPos.add(type);
 			qPos.add(type);
 			qPos.add(structureIds, 2);
-			qPos.add(templateId);
-			qPos.add(templateId);
+			qPos.add(templateIds, 2);
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateLT_TS);
@@ -234,6 +289,37 @@ public class JournalArticleFinder {
 		}
 	}
 
+	public static List findByKeywords(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		String[] articleIds = null;
+		String[] titles = null;
+		String[] descriptions = null;
+		String[] contents = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			articleIds = CustomSQLUtil.keywords(keywords, false);
+			titles = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords, false);
+			contents = CustomSQLUtil.keywords(keywords, false);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, articleIds, version, titles, descriptions,
+			contents, type, new String[] {structureId},
+			new String[] {templateId}, displayDateGT, displayDateLT, approved,
+			expired, reviewDate, andOperator, begin, end, obc);
+	}
+
 	public static List findByReviewDate(Date reviewDateLT, Date reviewDateGT)
 		throws SystemException {
 
@@ -275,25 +361,44 @@ public class JournalArticleFinder {
 		throws SystemException {
 
 		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, new String[] {structureId}, templateId, displayDateGT,
-			displayDateLT, approved, expired, reviewDate, andOperator, begin,
-			end, obc);
+			companyId, groupId, articleId, version, title, description,
+			content, type, new String[] {structureId},
+			new String[] {templateId}, displayDateGT, displayDateLT, approved,
+			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
 	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
-			String[] structureIds, String templateId, Date displayDateGT,
+			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
 			Date reviewDate, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		articleId = StringUtil.upperCase(articleId);
-		title = StringUtil.lowerCase(title);
-		content = StringUtil.lowerCase(content);
-		structureIds = CustomSQLUtil.keywords(structureIds);
+		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, new String[] {articleId}, version,
+			new String[] {title}, new String[] {description},
+			new String[] {content}, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, approved, expired, reviewDate,
+			andOperator, begin, end, obc);
+	}
+
+	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			long companyId, long groupId, String[] articleIds, Double version,
+			String[] titles, String[] descriptions, String[] contents,
+			String type, String[] structureIds, String[] templateIds,
+			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate, boolean andOperator, int begin,
+			int end, OrderByComparator obc)
+		throws SystemException {
+
+		articleIds = CustomSQLUtil.keywords(articleIds, false);
+		titles = CustomSQLUtil.keywords(titles);
+		descriptions = CustomSQLUtil.keywords(descriptions, false);
+		contents = CustomSQLUtil.keywords(contents, false);
+		structureIds = CustomSQLUtil.keywords(structureIds, false);
+		templateIds = CustomSQLUtil.keywords(templateIds, false);
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
 		Timestamp reviewDate_TS = CalendarUtil.getTimestamp(reviewDate);
@@ -309,14 +414,24 @@ public class JournalArticleFinder {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "articleId", StringPool.LIKE, false, articleIds);
+
 			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "structureId", StringPool.EQUAL, false,
-				structureIds);
+				sql, "lower(title)", StringPool.LIKE, false, titles);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "description", StringPool.LIKE, false, descriptions);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "content", StringPool.LIKE, false, contents);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureId", StringPool.EQUAL, false, structureIds);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
 			if (approved == null) {
 				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
@@ -341,24 +456,19 @@ public class JournalArticleFinder {
 				qPos.add(groupId);
 			}
 
-			qPos.add(articleId);
-			qPos.add(articleId);
+			qPos.add(articleIds, 2);
 
 			if (version != null) {
 				qPos.add(version);
 			}
 
-			qPos.add(title);
-			qPos.add(title);
-			qPos.add(description);
-			qPos.add(description);
-			qPos.add(content);
-			qPos.add(content);
+			qPos.add(titles, 2);
+			qPos.add(descriptions, 2);
+			qPos.add(contents, 2);
 			qPos.add(type);
 			qPos.add(type);
 			qPos.add(structureIds, 2);
-			qPos.add(templateId);
-			qPos.add(templateId);
+			qPos.add(templateIds, 2);
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateLT_TS);

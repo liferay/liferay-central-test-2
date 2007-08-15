@@ -1155,6 +1155,20 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List search(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return JournalArticleFinder.findByKeywords(
+			companyId, groupId, keywords, version, type, structureId,
+			templateId, displayDateGT, displayDateLT, approved, expired,
+			reviewDate, begin, end, obc);
+	}
+
+	public List search(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
@@ -1172,7 +1186,7 @@ public class JournalArticleLocalServiceImpl
 	public List search(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
-			String[] structureIds, String templateId, Date displayDateGT,
+			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
 			Date reviewDate, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -1180,8 +1194,21 @@ public class JournalArticleLocalServiceImpl
 
 		return JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateId, displayDateGT, displayDateLT,
+			type, structureIds, templateIds, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator, begin, end, obc);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate)
+		throws SystemException {
+
+		return JournalArticleFinder.countByKeywords(
+			companyId, groupId, keywords, version, type, structureId,
+			templateId, displayDateGT, displayDateLT, approved, expired,
+			reviewDate);
 	}
 
 	public int searchCount(
@@ -1201,14 +1228,14 @@ public class JournalArticleLocalServiceImpl
 	public int searchCount(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
-			String[] structureIds, String templateId, Date displayDateGT,
+			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
 			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
 		return JournalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateId, displayDateGT, displayDateLT,
+			type, structureIds, templateIds, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator);
 	}
 

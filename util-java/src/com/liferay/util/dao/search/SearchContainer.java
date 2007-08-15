@@ -73,7 +73,7 @@ public class SearchContainer {
 		_iteratorURL.setParameter(
 			DisplayTerms.AND_OPERATOR,
 			String.valueOf(
-				ParamUtil.getBoolean(req, DisplayTerms.AND_OPERATOR)));
+				ParamUtil.getBoolean(req, DisplayTerms.AND_OPERATOR, true)));
 
 		_headerNames = ListUtil.copy(headerNames);
 		_emptyResultsMessage = emptyResultsMessage;

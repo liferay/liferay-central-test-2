@@ -30,42 +30,49 @@ StructureSearch searchContainer = (StructureSearch)request.getAttribute("liferay
 StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
-	</td>
-</tr>
-</table>
+<liferay-ui:search-toggle
+	id="toggle_id_journal_structure_search"
+	displayTerms="<%= displayTerms %>"
+>
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="id" />
+		</td>
+		<td>
+			<liferay-ui:message key="name" />
+		</td>
+		<td>
+			<liferay-ui:message key="description" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
+		</td>
+	</tr>
+	</table>
+</liferay-ui:search-toggle>
 
 <br />
 
 <div>
-	<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
-		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-	</select>
-
 	<input type="submit" value="<liferay-ui:message key="search-structures" />" />
 
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
 		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</c:if>
 </div>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
+	</script>
+</c:if>

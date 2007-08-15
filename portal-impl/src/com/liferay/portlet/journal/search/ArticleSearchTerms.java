@@ -54,6 +54,10 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		status = ParamUtil.getString(req, STATUS);
 	}
 
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
+	}
+
 	public Double getVersionObj() {
 		if (version == 0) {
 			return null;
@@ -61,6 +65,14 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		else {
 			return new Double(version);
 		}
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Boolean getApprovedObj() {

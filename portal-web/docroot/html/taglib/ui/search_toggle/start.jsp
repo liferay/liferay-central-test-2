@@ -71,22 +71,22 @@
 
 		sm.append("<option ");
 
-		if (!displayTerms.isAndOperator()) {
-			sm.append("selected ");
-		}
-
-		sm.append("value=\"0\">");
-		sm.append(LanguageUtil.get(pageContext, "any"));
-		sm.append("</option>");
-
-		sm.append("<option ");
-
 		if (displayTerms.isAndOperator()) {
 			sm.append("selected ");
 		}
 
 		sm.append("value=\"1\">");
 		sm.append(LanguageUtil.get(pageContext, "all"));
+		sm.append("</option>");
+
+		sm.append("<option ");
+
+		if (!displayTerms.isAndOperator()) {
+			sm.append("selected ");
+		}
+
+		sm.append("value=\"0\">");
+		sm.append(LanguageUtil.get(pageContext, "any"));
 		sm.append("</option>");
 
 		sm.append("</select>");
