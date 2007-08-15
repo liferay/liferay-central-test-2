@@ -23,7 +23,6 @@
 package com.liferay.portlet.directory.util;
 
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseOpenSearchImpl;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -73,9 +72,6 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws Exception {
 
-		String keywordsLike =
-			StringPool.PERCENT + keywords + StringPool.PERCENT;
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -83,14 +79,11 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 		int end = startPage * itemsPerPage;
 
 		List results = UserLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), keywordsLike, keywordsLike,
-			keywordsLike, keywordsLike, keywordsLike, Boolean.TRUE, null, false,
-			begin, end, new ContactLastNameComparator(true));
+			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null, begin,
+			end, new ContactLastNameComparator(true));
 
 		int total = UserLocalServiceUtil.searchCount(
-			themeDisplay.getCompanyId(), keywordsLike, keywordsLike,
-			keywordsLike, keywordsLike, keywordsLike, Boolean.TRUE, null,
-			false);
+			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null);
 
 		Object[] values = addSearchResults(
 			keywords, startPage, itemsPerPage, total, null,

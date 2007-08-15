@@ -95,8 +95,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 			}
 
 			List results = UserLocalServiceUtil.search(
-				user.getCompanyId(), null, null, null, null, null, Boolean.TRUE,
-				params, true, 0, 50, null);
+				user.getCompanyId(), null, Boolean.TRUE, params, 0, 50, null);
 
 			for (int i = 0; i < results.size(); i++) {
 				User recipient = (User)results.get(i);
