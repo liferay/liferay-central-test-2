@@ -229,15 +229,9 @@ Assign permissions to users.
 				else if (tabs2.equals("available")) {
 					userParams.put("usersGroups", new Long(group.getGroupId()));
 				}
-
-				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator());
-
-				searchContainer.setTotal(total);
-
-				List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-
-				searchContainer.setResults(results);
 				%>
+
+				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jsp" %>
 
 				<div class="separator"><!-- --></div>
 

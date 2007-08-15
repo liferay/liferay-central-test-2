@@ -80,7 +80,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// # of Users
 
-	int usersCount = UserLocalServiceUtil.searchCount(company2.getCompanyId(), null, null, null, null, null, null, null, true);
+	int usersCount = UserLocalServiceUtil.searchCount(company2.getCompanyId(), null, null, null);
 
 	row.addText(String.valueOf(usersCount), rowURL);
 

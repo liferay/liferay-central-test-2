@@ -222,29 +222,11 @@ portletURL.setParameter("tabs3", tabs3);
 			if (userGroupId > 0) {
 				userParams.put("usersUserGroups", new Long(userGroupId));
 			}
+			%>
 
-			int total = 0;
+			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jsp" %>
 
-			if (searchTerms.isAdvancedSearch()) {
-				total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator());
-			}
-			else {
-				total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams);
-			}
-
-			searchContainer.setTotal(total);
-
-			List results = null;
-
-			if (searchTerms.isAdvancedSearch()) {
-				results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-			}
-			else {
-				results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getActiveObj(), userParams, searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-			}
-
-			searchContainer.setResults(results);
-
+			<%
 			Organization organization = null;
 
 			if ((organizationId > 0)) {

@@ -101,15 +101,9 @@ else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 if (tabs2.equals("current")) {
 	userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
 }
-
-int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator());
-
-searchContainer.setTotal(total);
-
-List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getActiveObj(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
-
-searchContainer.setResults(results);
 %>
+
+<%@ include file="/html/portlet/enterprise_admin/user_search_results.jsp" %>
 
 <div class="separator"><!-- --></div>
 
