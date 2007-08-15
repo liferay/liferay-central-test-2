@@ -47,16 +47,16 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<%--<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>" />
 	</td>--%>
 	<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_VERSION %>" size="20" type="text" value="<%= displayTerms.getDefinitionVersion() %>" />
 	</td>
 </tr>
 </table>
@@ -69,11 +69,11 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<td>
-		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.START_DATE_GT %>" />
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= displayTerms.START_DATE_GT %>" />
 
 		<liferay-ui:message key="to" />
 
-		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.START_DATE_LT %>" />
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= displayTerms.START_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
@@ -83,13 +83,13 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<td>
-		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_GT %>" />
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= displayTerms.END_DATE_GT %>" />
 
 		<liferay-ui:message key="to" />
 
-		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_LT %>" />
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= displayTerms.END_DATE_LT %>" />
 
-		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= InstanceDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <liferay-ui:message key="hide-instances-that-have-already-ended" />
+		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= displayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <liferay-ui:message key="hide-instances-that-have-already-ended" />
 	</td>
 </tr>
 </table>
@@ -99,7 +99,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 <table class="liferay-table">
 <tr>
 	<td>
-		<select name="<portlet:namespace /><%= InstanceDisplayTerms.AND_OPERATOR %>">
+		<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
 			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
@@ -116,7 +116,7 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	function <portlet:namespace />updateEndDates() {
 		var form = document.<portlet:namespace />fm;
 
-		var hideEndedTasks = form.<portlet:namespace /><%= InstanceDisplayTerms.HIDE_ENDED_TASKS %>.checked;
+		var hideEndedTasks = form.<portlet:namespace /><%= displayTerms.HIDE_ENDED_TASKS %>.checked;
 
 		for (var i = 0; i < form.elements.length; i++) {
 			var e = form.elements[i];

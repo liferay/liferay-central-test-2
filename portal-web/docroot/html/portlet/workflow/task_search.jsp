@@ -44,13 +44,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= TaskDisplayTerms.TASK_NAME %>" size="20" type="text" value="<%= displayTerms.getTaskName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.TASK_NAME %>" size="20" type="text" value="<%= displayTerms.getTaskName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= TaskDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>" />
 	</td>
 	<td>
-		<select name="<portlet:namespace /><%= TaskDisplayTerms.ASSIGNED_TO %>">
+		<select name="<portlet:namespace /><%= displayTerms.ASSIGNED_TO %>">
 			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><liferay-ui:message key="all" /></option>
 			<option <%= displayTerms.getAssignedTo().equals("me") ? "selected" : "" %> value="me"><liferay-ui:message key="me" /></option>
 			<option <%= displayTerms.getAssignedTo().equals("pool") ? "selected" : "" %> value="pool"><liferay-ui:message key="pool" /></option>
@@ -67,11 +67,11 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_GT %>" />
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= displayTerms.CREATE_DATE_GT %>" />
 
 		<liferay-ui:message key="to" />
 
-		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_LT %>" />
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= displayTerms.CREATE_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
@@ -81,11 +81,11 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_GT %>" />
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= displayTerms.START_DATE_GT %>" />
 
 		<liferay-ui:message key="to" />
 
-		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_LT %>" />
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= displayTerms.START_DATE_LT %>" />
 	</td>
 </tr>
 <tr>
@@ -95,13 +95,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_GT %>" />
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= displayTerms.END_DATE_GT %>" />
 
 		<liferay-ui:message key="to" />
 
-		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_LT %>" />
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= displayTerms.END_DATE_LT %>" />
 
-		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <liferay-ui:message key="hide-tasks-that-have-already-ended" />
+		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= displayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <liferay-ui:message key="hide-tasks-that-have-already-ended" />
 	</td>
 </tr>
 </table>
@@ -111,7 +111,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <table class="liferay-table">
 <tr>
 	<td>
-		<select name="<portlet:namespace /><%= TaskDisplayTerms.AND_OPERATOR %>">
+		<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
 			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>
@@ -128,7 +128,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	function <portlet:namespace />updateEndDates() {
 		var form = document.<portlet:namespace />fm;
 
-		var hideEndedTasks = form.<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>.checked;
+		var hideEndedTasks = form.<portlet:namespace /><%= displayTerms.HIDE_ENDED_TASKS %>.checked;
 
 		for (var i = 0; i < form.elements.length; i++) {
 			var e = form.elements[i];

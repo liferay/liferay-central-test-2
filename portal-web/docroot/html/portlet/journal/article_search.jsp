@@ -47,16 +47,16 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= displayTerms.getArticleId() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 	</td>
 </tr>
 <tr>
@@ -79,10 +79,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= ArticleDisplayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
 	</td>
 	<td>
-		<select name="<portlet:namespace /><%= ArticleDisplayTerms.TYPE %>">
+		<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
 			<option value=""></option>
 
 			<%
@@ -100,7 +100,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	<td colspan="2">
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-				<select name="<portlet:namespace /><%= ArticleDisplayTerms.STATUS %>">
+				<select name="<portlet:namespace /><%= displayTerms.STATUS %>">
 					<option value=""></option>
 					<option <%= displayTerms.getStatus().equals("approved") ? "selected" : "" %> value="approved"><liferay-ui:message key="approved" /></option>
 					<option <%= displayTerms.getStatus().equals("not-approved") ? "selected" : "" %> value="not-approved"><liferay-ui:message key="not-approved" /></option>
@@ -118,7 +118,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 				List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				%>
 
-				<select name="<portlet:namespace /><%= ArticleDisplayTerms.GROUP_ID %>">
+				<select name="<portlet:namespace /><%= displayTerms.GROUP_ID %>">
 					<c:if test="<%= layout.getGroup().isUser() %>">
 						<option <%= displayTerms.getGroupId() == layout.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(layout.getGroupId()) %>"><liferay-ui:message key="my-community" /></option>
 					</c:if>
@@ -144,7 +144,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <br />
 
 <div>
-	<select name="<portlet:namespace /><%= ArticleDisplayTerms.AND_OPERATOR %>">
+	<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
 		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 	</select>
@@ -159,7 +159,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
 	<br />
 
-	<input name="<portlet:namespace /><%= ArticleDisplayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
+	<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<br />
 
@@ -169,7 +169,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
 	<br />
 
-	<input name="<portlet:namespace /><%= ArticleDisplayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
+	<input name="<portlet:namespace /><%= displayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
 
 	<br />
 

@@ -188,15 +188,9 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		if (tabs3.equals("current")) {
 			organizationParams.put("organizationsPasswordPolicies", new Long(passwordPolicy.getPasswordPolicyId()));
 		}
-
-		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
-
-		searchContainer.setTotal(total);
-
-		List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
 		%>
+
+		<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jsp" %>
 
 		<div class="separator"><!-- --></div>
 

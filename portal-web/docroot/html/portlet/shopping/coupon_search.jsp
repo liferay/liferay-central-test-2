@@ -44,10 +44,10 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= CouponDisplayTerms.CODE %>" size="20" type="text" value="<%= displayTerms.getCode() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.CODE %>" size="20" type="text" value="<%= displayTerms.getCode() %>" />
 	</td>
 	<td>
-		<select name="<%= CouponDisplayTerms.DISCOUNT_TYPE %>">
+		<select name="<%= displayTerms.DISCOUNT_TYPE %>">
 			<option value=""></option>
 
 			<%
@@ -63,7 +63,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 		</select>
 	</td>
 	<td>
-		<select name="<portlet:namespace /><%= CouponDisplayTerms.ACTIVE %>">
+		<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
 			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 			<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 		</select>
@@ -76,7 +76,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 <table class="liferay-table">
 <tr>
 	<td>
-		<select name="<portlet:namespace /><%= CouponDisplayTerms.AND_OPERATOR %>">
+		<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
 			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>

@@ -71,16 +71,12 @@ List results = null;
 if (organizationsTab && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
 	total = 1;
 
-	searchContainer.setTotal(total);
-
 	results = new ArrayList();
 
 	results.add(user.getOrganization());
 }
 else if (!organizationsTab && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 	total = 1;
-
-	searchContainer.setTotal(total);
 
 	results = new ArrayList();
 
@@ -103,13 +99,22 @@ else {
 		}
 	}
 
-	total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+	if (searchTerms.isAdvancedSearch()) {
+		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+	}
+	else {
+		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), !organizationsTab, searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null);
+	}
 
-	searchContainer.setTotal(total);
-
-	results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	if (searchTerms.isAdvancedSearch()) {
+		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	}
+	else {
+		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), !organizationsTab, searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchContainer.getStart(), searchContainer.getEnd());
+	}
 }
 
+searchContainer.setTotal(total);
 searchContainer.setResults(results);
 %>
 

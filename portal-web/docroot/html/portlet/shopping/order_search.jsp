@@ -50,10 +50,10 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.NUMBER %>" size="20" type="text" value="<%= displayTerms.getNumber() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.NUMBER %>" size="20" type="text" value="<%= displayTerms.getNumber() %>" />
 	</td>
 	<td>
-		<select name="<%= OrderDisplayTerms.STATUS %>">
+		<select name="<%= displayTerms.STATUS %>">
 			<option value=""></option>
 
 			<%
@@ -69,13 +69,13 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 		</select>
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= OrderDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
 	</td>
 </tr>
 </table>
@@ -85,7 +85,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 <table class="liferay-table">
 <tr>
 	<td>
-		<select name="<portlet:namespace /><%= OrderDisplayTerms.AND_OPERATOR %>">
+		<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
 			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 		</select>

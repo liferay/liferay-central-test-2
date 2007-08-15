@@ -144,14 +144,14 @@ public class LayoutCache  {
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
 						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    null, false, null, null, null, null, null, null, true,
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					    null, false, null, null, null, QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS);
 				}
 				else if (entityName.equals("location")) {
 					organizations = OrganizationLocalServiceUtil.search(
 						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    null, true, null, null, null, null, null, null, true,
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					    null, true, null, null, null, QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS);
 				}
 
 				for (int i = 0; i < organizations.size(); i++) {

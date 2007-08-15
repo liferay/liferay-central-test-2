@@ -44,13 +44,13 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= StructureDisplayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>" size="20" type="text" value="<%= displayTerms.getStructureId() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= StructureDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= StructureDisplayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 	</td>
 </tr>
 </table>
@@ -58,7 +58,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 <br />
 
 <div>
-	<select name="<portlet:namespace /><%= StructureDisplayTerms.AND_OPERATOR %>">
+	<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
 		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
 		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 	</select>

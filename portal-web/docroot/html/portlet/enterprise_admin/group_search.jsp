@@ -30,27 +30,26 @@ GroupSearch searchContainer = (GroupSearch)request.getAttribute("liferay-ui:sear
 GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= GroupDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
-	</td>
-</tr>
-</table>
+<div>
+	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
+
+	<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
+</div>
 
 <br />
 
 <div>
-	<input type="submit" value="<liferay-ui:message key="search" />" />
+	<input type="submit" value="<liferay-ui:message key="search-communities" />" />
 
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
 		<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
-			<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-community" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
 	</c:if>
 </div>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
+	</script>
+</c:if>

@@ -130,10 +130,39 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String keywords, boolean location, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String keywords, boolean location, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long companyId, long parentOrganizationId,
 		java.lang.String name, boolean location, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String name, boolean location, java.lang.String street,
+		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params,
+		boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public int searchCount(long companyId, long parentOrganizationId,
+		java.lang.String keywords, boolean location, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

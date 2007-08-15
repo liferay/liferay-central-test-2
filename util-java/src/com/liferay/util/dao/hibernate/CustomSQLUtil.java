@@ -353,10 +353,13 @@ public abstract class CustomSQLUtil {
 			return sql;
 		}
 
-		sql = removeOrderBy(sql);
-		sql += " ORDER BY " + obc.getOrderBy();
+		StringMaker sm = new StringMaker();
 
-		return sql;
+		sm.append(removeOrderBy(sql));
+		sm.append(" ORDER BY ");
+		sm.append(obc.getOrderBy());
+
+		return sm.toString();
 	}
 
 	protected abstract String[] getConfigs();

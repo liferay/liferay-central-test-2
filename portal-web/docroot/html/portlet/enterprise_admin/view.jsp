@@ -307,6 +307,7 @@ portletURL.setParameter("tabs3", tabs3);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
+				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
 				// Name
@@ -471,16 +472,12 @@ portletURL.setParameter("tabs3", tabs3);
 			if (organizationsTab && (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN))) {
 				total = 1;
 
-				searchContainer.setTotal(total);
-
 				results = new ArrayList();
 
 				results.add(user.getOrganization());
 			}
 			else if (!organizationsTab && portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				total = 1;
-
-				searchContainer.setTotal(total);
 
 				results = new ArrayList();
 
@@ -511,13 +508,22 @@ portletURL.setParameter("tabs3", tabs3);
 					}
 				}
 
-				total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+				if (searchTerms.isAdvancedSearch()) {
+					total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+				}
+				else {
+					total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), !organizationsTab, searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null);
+				}
 
-				searchContainer.setTotal(total);
-
-				results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+				if (searchTerms.isAdvancedSearch()) {
+					results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+				}
+				else {
+					results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), !organizationsTab, searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchContainer.getStart(), searchContainer.getEnd());
+				}
 			}
 
+			searchContainer.setTotal(total);
 			searchContainer.setResults(results);
 
 			if (!organizationsTab) {
@@ -554,6 +560,7 @@ portletURL.setParameter("tabs3", tabs3);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", strutsAction);
+				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("organizationId", String.valueOf(organization.getOrganizationId()));
 
 				// Name
@@ -1674,14 +1681,6 @@ portletURL.setParameter("tabs3", tabs3);
 </c:choose>
 
 </form>
-
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
-	</script>
-</c:if>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.enterprise_admin.view.jsp";

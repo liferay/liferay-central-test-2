@@ -468,15 +468,9 @@ else if (modelResource.equals(Layout.class.getName())) {
 					organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
 					organizationParams.put("permissionsGroupId", new Long(groupId));
 				}
-
-				int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator());
-
-				searchContainer.setTotal(total);
-
-				List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), !organizationsTab, searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
-
-				searchContainer.setResults(results);
 				%>
+
+				<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jsp" %>
 
 				<div class="separator"><!-- --></div>
 

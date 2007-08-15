@@ -30,63 +30,63 @@ OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("l
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:message key="street" />
-	</td>
-	<td>
-		<liferay-ui:message key="city" />
-	</td>
-	<td>
-		<liferay-ui:message key="zip" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= OrganizationDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= OrganizationDisplayTerms.STREET %>" size="20" type="text" value="<%= displayTerms.getStreet() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= OrganizationDisplayTerms.CITY %>" size="20" type="text" value="<%= displayTerms.getCity() %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= OrganizationDisplayTerms.ZIP %>" size="20" type="text" value="<%= displayTerms.getZip() %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="country" />
-	</td>
-	<td>
-		<liferay-ui:message key="region" />
-	</td>
-	<td colspan="2"></td>
-</tr>
-<tr>
-	<td>
-		<select id="<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>" name="<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>"></select>
-	</td>
-	<td>
-		<select id="<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>" name="<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>"></select>
-	</td>
-	<td colspan="2"></td>
-</tr>
-</table>
+<liferay-ui:search-toggle
+	id="toggle_id_enterprise_admin_organization_search"
+	displayTerms="<%= displayTerms %>"
+>
+	<table class="liferay-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="name" />
+		</td>
+		<td>
+			<liferay-ui:message key="street" />
+		</td>
+		<td>
+			<liferay-ui:message key="city" />
+		</td>
+		<td>
+			<liferay-ui:message key="zip" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.STREET %>" size="20" type="text" value="<%= displayTerms.getStreet() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.CITY %>" size="20" type="text" value="<%= displayTerms.getCity() %>" />
+		</td>
+		<td>
+			<input name="<portlet:namespace /><%= displayTerms.ZIP %>" size="20" type="text" value="<%= displayTerms.getZip() %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="country" />
+		</td>
+		<td>
+			<liferay-ui:message key="region" />
+		</td>
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td>
+			<select id="<portlet:namespace /><%= displayTerms.COUNTRY_ID %>" name="<portlet:namespace /><%= displayTerms.COUNTRY_ID %>"></select>
+		</td>
+		<td>
+			<select id="<portlet:namespace /><%= displayTerms.REGION_ID %>" name="<portlet:namespace /><%= displayTerms.REGION_ID %>"></select>
+		</td>
+		<td colspan="2"></td>
+	</tr>
+	</table>
+</liferay-ui:search-toggle>
 
 <br />
 
 <div>
-	<select name="<portlet:namespace /><%= OrganizationDisplayTerms.AND_OPERATOR %>">
-		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-	</select>
-
 	<input type="submit" value="<liferay-ui:message key='<%= "search-" + tabs1 %>' />" />
 
 	<%
@@ -130,11 +130,18 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isLocation() ? "location" : "organization")) %>: <%= organization.getName() %><br />
 </c:if>
 
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
+	</script>
+</c:if>
+
 <script type="text/javascript">
 	new Liferay.DynamicSelect(
 		[
 			{
-				select: "<portlet:namespace /><%= OrganizationDisplayTerms.COUNTRY_ID %>",
+				select: "<portlet:namespace /><%= displayTerms.COUNTRY_ID %>",
 				selectId: "countryId",
 				selectDesc: "name",
 				selectVal: "<%= displayTerms.getCountryId() %>",
@@ -148,7 +155,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 				}
 			},
 			{
-				select: "<portlet:namespace /><%= OrganizationDisplayTerms.REGION_ID %>",
+				select: "<portlet:namespace /><%= displayTerms.REGION_ID %>",
 				selectId: "regionId",
 				selectDesc: "name",
 				selectVal: "<%= displayTerms.getRegionId() %>",

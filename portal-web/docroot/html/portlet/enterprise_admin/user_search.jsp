@@ -48,13 +48,13 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
+			<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>" />
+			<input name="<portlet:namespace /><%= displayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
+			<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
 		</td>
 	</tr>
 	<tr>
@@ -78,16 +78,16 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= UserDisplayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>" />
+			<input name="<portlet:namespace /><%= displayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= displayTerms.getScreenName() %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
+			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
 		</td>
 
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
 				<td>
-					<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
+					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
 						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 						<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 					</select>
@@ -115,3 +115,10 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		</c:if>
 	</c:if>
 </div>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.FIRST_NAME %>);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
+	</script>
+</c:if>
