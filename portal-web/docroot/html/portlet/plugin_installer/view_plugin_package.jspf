@@ -46,7 +46,7 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 		<liferay-ui:message key="name" />:
 	</td>
 	<td>
-		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getArtifactURL() %>">[<liferay-ui:message key="download" />]</a>
+		<b><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></b> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getDownloadURL() %>">[<liferay-ui:message key="download" />]</a>
 	</td>
 </tr>
 <tr>

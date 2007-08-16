@@ -193,7 +193,7 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		String useDownloadURL = getRepository().getSettings().getProperty(
 			RemotePluginPackageRepository.SETTING_USE_DOWNLOAD_URL);
 
-		if (!GetterUtil.getBoolean(useDownloadURL, false)) {
+		if (!GetterUtil.getBoolean(useDownloadURL, true)) {
 			return getArtifactURL();
 		}
 

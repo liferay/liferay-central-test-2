@@ -27,7 +27,11 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "products");
 
-String tabs1Names = "products,my-products";
+String tabs1Names = "products";
+
+if (themeDisplay.isSignedIn()) {
+	tabs1Names += ",my-products";
+}
 
 if (PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
 	tabs1Names += ",licenses";
