@@ -70,7 +70,7 @@ try {
 					String curTag = (String)itr.next();
 				%>
 
-					<option <%= (tag.equals(curTag)) ? "selected": "" %> value="<%= curTag %>"><%= LanguageUtil.get(pageContext, curTag) %></option>
+					<option <%= (tag.equals(curTag)) ? "selected": "" %> value="<%= curTag %>"><%= curTag %></option>
 
 				<%
 				}
@@ -197,7 +197,7 @@ try {
 
 		// Tags
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, pluginPackageTags), null, null, null);
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, pluginPackageTags, null, null, null);
 
 		row.addText(rowTextEntry);
 

@@ -1765,21 +1765,17 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 			</license>
-			<license>
-				<bundled-project-name>ANTLR</bundled-project-name>
-				<license-name>BSD Style License</license-name>
-			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/subetha-smtp.jar</file-name>
-		<version>1.1</version>
+		<version>1.2.1</version>
 		<project-name>SubEtha SMTP</project-name>
 		<project-url>http://subethasmtp.tigris.org</project-url>
 		<licenses>
 			<license>
-				<license-name>LGPL 2.1</license-name>
-				<copyright-notice>Copyright (c) 2006 SubEthaMail.org</copyright-notice>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright (c) 2006-2007 SubEthaMail.org</copyright-notice>
 			</license>
 		</licenses>
 	</library>

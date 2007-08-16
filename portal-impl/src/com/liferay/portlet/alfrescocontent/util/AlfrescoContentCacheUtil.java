@@ -63,7 +63,6 @@ public class AlfrescoContentCacheUtil {
 		String content = (String)MultiVMPool.get(_cache, key);
 
 		if (content == null) {
-
 			try {
 				content = AlfrescoContentUtil.getContent(
 					userId, password, uuid, path, maximizeLinks, res);
