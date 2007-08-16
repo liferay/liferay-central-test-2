@@ -38,6 +38,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -111,7 +112,14 @@ public class InstallPluginAction extends PortletAction {
 			remoteDeploy(req);
 		}
 
-		sendRedirect(req, res);
+		String backURL = ParamUtil.getString(req, "backURL");
+
+		if (Validator.isNotNull(backURL)) {
+			res.sendRedirect(backURL);
+		}
+		else {
+			sendRedirect(req, res);
+		}
 	}
 
 	protected void deployConfiguration(ActionRequest req) throws Exception {
@@ -201,42 +209,42 @@ public class InstallPluginAction extends PortletAction {
 				Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 		}
 		else {
-			fileName = uploadReq.getFileName("file");
+			fileName = GetterUtil.getString(uploadReq.getFileName("file"));
 
-			deploymentContext = fileName.substring(0, fileName.length() - 4);
+			int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+			if (pos != -1) {
+				deploymentContext = fileName.substring(0, pos);
+			}
 		}
 
 		File file = uploadReq.getFile("file");
 
-		PluginPackageUtil.registerInstallingPluginPackage(deploymentContext);
+		byte[] bytes = FileUtil.getBytes(file);
+
+		if ((bytes == null) || (bytes.length == 0)) {
+			SessionErrors.add(req, UploadException.class.getName());
+
+			return;
+		}
 
 		try {
-			byte[] bytes = FileUtil.getBytes(file);
-
-			if ((bytes != null) && (bytes.length > 0)) {
-				String source = file.toString();
-
-				String deployDir = PrefsPropsUtil.getString(
-					PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
-
-				String destination = deployDir + StringPool.SLASH + fileName;
-
-				FileUtil.copyFile(source, destination);
-
-				SessionMessages.add(req, "pluginUploaded");
-			}
-			else {
-				PluginPackageUtil.endPluginPackageInstallation(
-					deploymentContext);
-
-				SessionErrors.add(req, UploadException.class.getName());
-			}
-		}
-		catch (Exception e) {
-			PluginPackageUtil.endPluginPackageInstallation(
+			PluginPackageUtil.registerInstallingPluginPackage(
 				deploymentContext);
 
-			throw e;
+			String source = file.toString();
+
+			String deployDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+
+			String destination = deployDir + StringPool.SLASH + fileName;
+
+			FileUtil.copyFile(source, destination);
+
+			SessionMessages.add(req, "pluginUploaded");
+		}
+		finally {
+			PluginPackageUtil.endPluginPackageInstallation(deploymentContext);
 		}
 	}
 
@@ -263,6 +271,22 @@ public class InstallPluginAction extends PortletAction {
 
 			getMethod = new GetMethod(url);
 
+			String fileName = null;
+
+			if (Validator.isNotNull(deploymentContext)) {
+				fileName =
+					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
+			}
+			else {
+				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
+
+				int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+				if (pos != -1) {
+					deploymentContext = fileName.substring(0, pos);
+				}
+			}
+
 			PluginPackageUtil.registerInstallingPluginPackage(
 				deploymentContext);
 
@@ -270,11 +294,8 @@ public class InstallPluginAction extends PortletAction {
 
 			if (responseCode != 200) {
 				SessionErrors.add(
-					req, "errorResponseFromServer",
+					req, "errorConnectingToUrl",
 					new Object[] {String.valueOf(responseCode)});
-
-				PluginPackageUtil.endPluginPackageInstallation(
-					deploymentContext);
 
 				return;
 			}
@@ -289,19 +310,6 @@ public class InstallPluginAction extends PortletAction {
 
 			String deployDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
-
-			String fileName = null;
-
-			if (Validator.isNotNull(deploymentContext)) {
-				fileName =
-					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
-			}
-			else {
-				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
-
-				deploymentContext = fileName.substring(
-					0, fileName.length() - 4);
-			}
 
 			String tmpFilePath =
 				deployDir + StringPool.SLASH + _DOWNLOAD_DIR +
@@ -349,31 +357,17 @@ public class InstallPluginAction extends PortletAction {
 			}
 		}
 		catch (MalformedURLException murle) {
-			if (getMethod != null) {
-				getMethod.releaseConnection();
-			}
-
 			SessionErrors.add(req, "invalidUrl", murle);
 		}
 		catch (IOException ioe) {
+			SessionErrors.add(req, "errorConnectingToUrl", ioe);
+		}
+		finally {
 			if (getMethod != null) {
 				getMethod.releaseConnection();
 			}
 
-			SessionErrors.add(req, "errorConnectingToServer", ioe);
-
-			if (Validator.isNotNull(deploymentContext)) {
-				PluginPackageUtil.endPluginPackageInstallation(
-					deploymentContext);
-			}
-		}
-		catch (Exception e) {
-			if (Validator.isNotNull(deploymentContext)) {
-				PluginPackageUtil.endPluginPackageInstallation(
-					deploymentContext);
-			}
-
-			throw e;
+			PluginPackageUtil.endPluginPackageInstallation(deploymentContext);
 		}
 	}
 

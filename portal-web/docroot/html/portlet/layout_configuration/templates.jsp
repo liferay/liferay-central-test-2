@@ -69,9 +69,9 @@
 		</c:if>
 
 		<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-			<img onclick="document.getElementById('layoutTemplateId_<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" /><br />
-			<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
-			<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
+			<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" /><br />
+			<input <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> id="layoutTemplateId<%= i %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
+			<label for="layoutTemplateId<%= i %>"><%= layoutTemplate.getName() %></label>
 		</td>
 
 		<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">

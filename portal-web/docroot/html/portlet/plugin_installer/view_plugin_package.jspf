@@ -24,19 +24,20 @@
 
 <%
 PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(moduleId, repositoryURL);
-
-breadcrumbs.append(" &raquo; <a href=\"" + currentURL + "\">" + pluginPackage.getName() + "</a>");
 %>
 
-<div class="breadcrumbs">
-	<%= breadcrumbs.toString() %>
-</div>
+<input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
+<input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>" />
+
+<liferay-ui:tabs
+	names="<%= pluginPackage.getName() %>"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:success key="pluginDownloaded" message="the-plugin-was-downloaded-successfully-and-is-now-being-installed" />
 
-<liferay-ui:error key="errorConnectingToServer" message="an-unexpected-error-occurred-while-connecting-to-the-repository" />
-<liferay-ui:error key="errorResponseFromServer" message="connecting-to-the-repository-returned-an-error" />
-<liferay-ui:error key="invalidUrl" message="plugin-does-not-have-a-valid-url" />
+<liferay-ui:error key="invalidUrl" message="please-enter-a-valid-url" />
+<liferay-ui:error key="errorConnectingToUrl" message="an-unexpected-error-occurred-while-connecting-to-the-specified-url" />
 
 <table class="liferay-table">
 <tr>
@@ -234,12 +235,10 @@ List screenshots = pluginPackage.getScreenshots();
 
 <br />
 
-<input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>" />
-
-<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');" />
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy');" />
 
 <liferay-ui:upload-progress
-	id="<%= downloadProgressId %>"
+	id="<%= uploadProgressId %>"
 	message="downloading"
 	redirect="<%= currentURL %>"
 />

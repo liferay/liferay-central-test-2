@@ -28,12 +28,24 @@
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
 
 		<%
+		String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
+		String tabs1Names = "browse-repository,upload-file,download-file,configuration";
 		String tabs1 = ParamUtil.getString(request, "tabs1");
+
+		if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
+			tabs1Names = "configuration";
+			tabs1 = "configuration";
+		}
+
 		String tabs2 = ParamUtil.getString(request, "tabs2");
 
 		if (Validator.isNull(tabs2)) {
 			tabs2 = "portlets";
 		}
+
+		String redirect = ParamUtil.getString(request, "redirect");
+		String backURL = ParamUtil.getString(request, "backURL");
 
 		String pluginType = null;
 
@@ -47,10 +59,8 @@
 			pluginType = PortletImpl.PLUGIN_TYPE;
 		}
 
-		String redirect = ParamUtil.getString(request, "redirect");
-
-		String downloadProgressId = "downloadPlugin" + System.currentTimeMillis();
-		String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
+		String moduleId = ParamUtil.getString(request, "moduleId");
+		String repositoryURL = ParamUtil.getString(request, "repositoryURL");
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -59,106 +69,80 @@
 		portletURL.setParameter("struts_action", "/plugin_installer/view");
 		portletURL.setParameter("tabs1", tabs1);
 		portletURL.setParameter("tabs2", tabs2);
-		portletURL.setParameter("redirect", redirect);
+		portletURL.setParameter("backURL", backURL);
+		portletURL.setParameter("moduleId", moduleId);
+		portletURL.setParameter("repositoryURL", repositoryURL);
 
-		String tabs1Names = "browse-repository,upload-file,download-file,configuration";
+		pageContext.setAttribute("portletURL", portletURL);
 
-		if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
-			tabs1Names = "configuration";
-			tabs1 = "configuration";
-		}
-
-		// Breadcrumbs
-
-		StringMaker breadcrumbs = new StringMaker();
-
-		breadcrumbs.append(LanguageUtil.get(pageContext, "repositories"));
-		breadcrumbs.append(" &raquo; ");
-		breadcrumbs.append("<a href=\"");
-		breadcrumbs.append(portletURL.toString());
-		breadcrumbs.append("\">");
-		breadcrumbs.append(LanguageUtil.get(pageContext, pluginType + "-packages"));
-		breadcrumbs.append("</a>");
+		String portletURLString = portletURL.toString();
 		%>
 
 		<script type="text/javascript">
-			function <portlet:namespace />installPluginPackage(cmd, progressId, redirect) {
+			function <portlet:namespace />installPluginPackage(cmd) {
+				document.<portlet:namespace />fm.method = "post";
+
 				if (cmd == "localDeploy") {
 					document.<portlet:namespace />fm.encoding = "multipart/form-data";
 				}
 
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-
-				if (progressId) {
-					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.PROGRESS_ID %>.value = progressId;
-				}
-
-				if (redirect) {
-					document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-				}
-
-				submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><liferay-portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>');
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
 			}
 
-			function <portlet:namespace />reloadRepositories(redirect) {
+			function <portlet:namespace />reloadRepositories() {
+				document.<portlet:namespace />fm.method = "post";
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-				submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>')
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
 			}
 
 			function <portlet:namespace />saveDeployConfiguration() {
+				document.<portlet:namespace />fm.method = "post";
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'deployConfiguration';
-				submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>');
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/plugin_installer/install_plugin" /></portlet:actionURL>");
 			}
 
-			function <portlet:namespace />searchPlugins(redirect) {
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-				submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
+			function <portlet:namespace />searchPlugins() {
+				submitForm(document.<portlet:namespace />fm);
 			}
-
 		</script>
 
-		<form method="post" name="<portlet:namespace />fm">
+		<form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm">
+		<liferay-portlet:renderURLParams varImpl="portletURL" />
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+		<input name="<portlet:namespace /><%= Constants.PROGRESS_ID %>" type="hidden" value="<%= uploadProgressId %>" />
 		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
-		<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
-		<input name="<portlet:namespace />progressId" type="hidden" value="" />
 
-		<liferay-ui:tabs
-			names="<%= tabs1Names %>"
-			param="tabs1"
-			url="<%= portletURL.toString() %>"
-			backURL="<%= redirect %>"
-		/>
+		<c:if test="<%= Validator.isNull(moduleId) || Validator.isNull(repositoryURL) %>">
+			<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
+		</c:if>
+
+		<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
+		<input name="<portlet:namespace />moduleId" type="hidden" value="<%= moduleId %>" />
+		<input name="<portlet:namespace />repositoryURL" type="hidden" value="<%= repositoryURL %>" />
 
 		<c:choose>
-			<c:when test='<%= tabs1.equals("upload-file") %>'>
-				<%@ include file="/html/portlet/plugin_installer/upload_file.jspf" %>
-			</c:when>
-			<c:when test='<%= tabs1.equals("download-file") %>'>
-				<%@ include file="/html/portlet/plugin_installer/download_file.jspf" %>
-			</c:when>
-			<c:when test='<%= tabs1.equals("configuration") %>'>
-				<%@ include file="/html/portlet/plugin_installer/configuration.jspf" %>
+			<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
+				<%@ include file="/html/portlet/plugin_installer/view_plugin_package.jspf" %>
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
-					names="portlet-packages,theme-packages,layout-template-packages"
-					tabsValues="portlets,themes,layout-templates"
-					param="tabs2"
-					url="<%= portletURL.toString() %>"
+					names="<%= tabs1Names %>"
+					param="tabs1"
+					url="<%= portletURLString %>"
+					backURL="<%= backURL %>"
 				/>
 
-				<%
-				String moduleId = ParamUtil.getString(request, "moduleId");
-				String repositoryURL = ParamUtil.getString(request, "repositoryURL");
-				%>
-
 				<c:choose>
-					<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
-						<%@ include file="/html/portlet/plugin_installer/view_plugin_package.jspf" %>
+					<c:when test='<%= tabs1.equals("upload-file") %>'>
+						<%@ include file="/html/portlet/plugin_installer/upload_file.jspf" %>
+					</c:when>
+					<c:when test='<%= tabs1.equals("download-file") %>'>
+						<%@ include file="/html/portlet/plugin_installer/download_file.jspf" %>
+					</c:when>
+					<c:when test='<%= tabs1.equals("configuration") %>'>
+						<%@ include file="/html/portlet/plugin_installer/configuration.jspf" %>
 					</c:when>
 					<c:otherwise>
 						<%@ include file="/html/portlet/plugin_installer/browse_repository.jspf" %>

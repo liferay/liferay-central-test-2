@@ -55,7 +55,7 @@
 			<legend><liferay-ui:message key="portlet-configuration" /></legend>
 
 			<div class="ctrl-holder">
-				<label><liferay-ui:message key="portlet-title" /></label>
+				<label for="custom-title"><liferay-ui:message key="portlet-title" /></label>
 
 				<input class="text-input" id="custom-title" type="text" name="custom-title" value="" />
 

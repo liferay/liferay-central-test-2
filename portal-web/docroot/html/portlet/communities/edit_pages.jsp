@@ -1508,24 +1508,24 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 </form>
 
 <%!
-private String _renderControls(String nameSpace, ResourceBundle resourceBundle, PortletDataHandlerControl[] controls) {
+private String _renderControls(String namespace, ResourceBundle resourceBundle, PortletDataHandlerControl[] controls) {
 	StringMaker sm = new StringMaker();
 
 	for (int i = 0; i < controls.length; i++) {
 		sm.append("<div class=\"");
-		sm.append(nameSpace);
+		sm.append(namespace);
 		sm.append("handler-control\">");
 
 		if (controls[i] instanceof PortletDataHandlerBoolean) {
 			PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)controls[i];
 
 			sm.append("<label class=\"");
-			sm.append(nameSpace);
+			sm.append(namespace);
 			sm.append("handler-control-label\">");
 			sm.append("<input ");
 			sm.append(control.getDefaultState() ? "checked=\"checked\" " : "");
 			sm.append("name=\"");
-			sm.append(nameSpace);
+			sm.append(namespace);
 			sm.append(control.getControlName());
 			sm.append("\" ");
 			sm.append("type=\"checkbox\" />");
@@ -1535,14 +1535,14 @@ private String _renderControls(String nameSpace, ResourceBundle resourceBundle, 
 			PortletDataHandlerControl[] children = control.getChildren();
 
 			if (children != null) {
-				sm.append(_renderControls(nameSpace, resourceBundle, children));
+				sm.append(_renderControls(namespace, resourceBundle, children));
 			}
 		}
 		else if (controls[i] instanceof PortletDataHandlerChoice) {
 			PortletDataHandlerChoice control = (PortletDataHandlerChoice)controls[i];
 
 			sm.append("<span class=\"");
-			sm.append(nameSpace);
+			sm.append(namespace);
 			sm.append("handler-control-label\">");
 			sm.append("<strong>&#9632;</strong> ");
 			sm.append(resourceBundle.getString(control.getControlName()));
@@ -1552,12 +1552,12 @@ private String _renderControls(String nameSpace, ResourceBundle resourceBundle, 
 
 			for (int j = 0; j < choices.length; j++) {
 				sm.append("<label class=\"");
-				sm.append(nameSpace);
+				sm.append(namespace);
 				sm.append("handler-control-label\">");
 				sm.append("<input ");
 				sm.append(control.getDefaultChoiceIndex() == j ? "checked=\"checked\" " : "");
 				sm.append("name=\"");
-				sm.append(nameSpace);
+				sm.append(namespace);
 				sm.append(control.getControlName());
 				sm.append("\" type=\"radio\" value=\"");
 				sm.append(choices[j]);

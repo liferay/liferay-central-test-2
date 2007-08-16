@@ -26,25 +26,24 @@
 String keywords = ParamUtil.getString(request, "keywords");
 String tag = ParamUtil.getString(request, "tag");
 String license = ParamUtil.getString(request, "license");
-String installStatus = ParamUtil.getString(request, "installStatus");
-
-if (Validator.isNull(installStatus)) {
-	installStatus = PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED;
-}
-
-try {
+String installStatus = ParamUtil.getString(request, "installStatus", PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED);
 %>
 
-	<div class="breadcrumbs">
-		<%= breadcrumbs.toString() %>
-	</div>
+<liferay-ui:tabs
+	names="portlet-packages,theme-packages,layout-template-packages"
+	tabsValues="portlets,themes,layout-templates"
+	param="tabs2"
+	url="<%= portletURLString %>"
+/>
 
-	<input type="hidden" name="<portlet:namespace/>pluginType" value="<%= pluginType %>" />
+<%
+try {
+%>
 
 	<table class="liferay-table">
 	<tr>
 		<td>
-			<liferay-ui:message key="keywords" />
+			<label for="<portlet:namespace />keywords"><liferay-ui:message key="keywords" /></label>
 		</td>
 		<td>
 			<liferay-ui:message key="tag" />
@@ -58,7 +57,7 @@ try {
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace />keywords" size="20" type="text" value="<%= keywords %>" />
+			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 		</td>
 		<td>
 			<select name="<portlet:namespace/>tag">
@@ -71,7 +70,7 @@ try {
 					String curTag = (String)itr.next();
 				%>
 
-					<option <%= (tag.equals(curTag)) ? "selected": "" %> value="<%= curTag %>"><%= curTag %></option>
+					<option <%= (tag.equals(curTag)) ? "selected": "" %> value="<%= curTag %>"><%= LanguageUtil.get(pageContext, curTag) %></option>
 
 				<%
 				}
@@ -111,7 +110,13 @@ try {
 
 	<br />
 
-	<input type="button" value="<liferay-ui:message key="search" />" onClick="<portlet:namespace/>searchPlugins('<%= redirect %>')" />
+	<input type="submit" value="<liferay-ui:message key="search-packages" />" />
+
+	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<script type="text/javascript">
+			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+		</script>
+	</c:if>
 
 	<br /><br />
 
@@ -125,7 +130,7 @@ try {
 	headerNames.add("installed-version");
 	headerNames.add("available-version");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-packages-were-found"));
 
 	Hits hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus);
 
@@ -160,7 +165,7 @@ try {
 		rowURL.setParameter("struts_action", "/plugin_installer/view");
 		rowURL.setParameter("tabs1", tabs1);
 		rowURL.setParameter("tabs2", tabs2);
-		rowURL.setParameter("redirect", redirect);
+		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("moduleId", pluginPackageModuleId);
 		rowURL.setParameter("repositoryURL", pluginPackageRepositoryURL);
 
@@ -236,7 +241,7 @@ try {
 			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 		</c:if>
 
-		<input type="button" value="<liferay-ui:message key="refresh" />"  onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
+		<input type="button" value="<liferay-ui:message key="refresh" />" onClick="<portlet:namespace/>reloadRepositories();" />
 	</div>
 
 	<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />

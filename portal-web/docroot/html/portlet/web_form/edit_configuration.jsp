@@ -39,114 +39,119 @@ String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <fieldset class="block-labels">
-    <legend><liferay-ui:message key="form-information" /></legend>
+	<legend><liferay-ui:message key="form-information" /></legend>
 
-    <liferay-ui:error key="titleRequired" message="please-enter-a-title" />
+	<liferay-ui:error key="titleRequired" message="please-enter-a-title" />
 
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
 
-    <div class="ctrl-holder">
-        <label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
-        <input class="liferay-input-text" id="<portlet:namespace />title" name="<portlet:namespace />title" type="text" value="<%= title %>" />
-    </div>
+		<input class="liferay-input-text" id="<portlet:namespace />title" name="<portlet:namespace />title" type="text" value="<%= title %>" />
+	</div>
 
-    <div class="ctrl-holder">
-        <label for="<portlet:namespace/>description"><liferay-ui:message key="description" /></label>
-        <textarea class="liferay-textarea" id="<portlet:namespace/>description" name="<portlet:namespace/>description" wrap="soft"><%= description %></textarea>
-    </div>
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace/>description"><liferay-ui:message key="description" /></label>
 
-    <div class="ctrl-holder">
-        <label><liferay-ui:message key="require-captcha" /> <liferay-ui:input-checkbox param="requireCaptcha" defaultValue="<%= requireCaptcha %>" /></label>
-    </div>
+		<textarea class="liferay-textarea" id="<portlet:namespace/>description" name="<portlet:namespace/>description" wrap="soft"><%= description %></textarea>
+	</div>
+
+	<div class="ctrl-holder">
+		<label><liferay-ui:message key="require-captcha" /> <liferay-ui:input-checkbox param="requireCaptcha" defaultValue="<%= requireCaptcha %>" /></label>
+	</div>
 </fieldset>
 
 <fieldset class="block-labels">
-    <legend><liferay-ui:message key="email-to" /></legend>
+	<legend><liferay-ui:message key="email-to" /></legend>
 
-    <liferay-ui:error key="subjectRequired" message="please-enter-a-subject" />
-    <liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
-    <liferay-ui:error key="emailAddressInvalid" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error key="subjectRequired" message="please-enter-a-subject" />
+	<liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
+	<liferay-ui:error key="emailAddressInvalid" message="please-enter-a-valid-email-address" />
 
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />subject"><liferay-ui:message key="subject" /></label>
 
-    <div class="ctrl-holder">
-        <label for="<portlet:namespace />subject"><liferay-ui:message key="subject" /></label>
-        <input class="liferay-input-text" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
-    </div>
-    <div class="ctrl-holder">
-        <label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
-        <input class="liferay-input-text" name="<portlet:namespace />emailAddress" type="text" value="<%= emailAddress %>" />
-    </div>
+		<input class="liferay-input-text" id="<portlet:namespace />subject" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
+
+		<input class="liferay-input-text" id="<portlet:namespace />emailAddress" name="<portlet:namespace />emailAddress" type="text" value="<%= emailAddress %>" />
+	</div>
 </fieldset>
 
 <fieldset class="block-labels" id="<portlet:namespace/>webFields">
-    <legend><liferay-ui:message key="form-fields" /></legend>
-
-    <%
-    int i = 1;
-
-    String fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
-    String fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
-    boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i);
-    String fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
-
-    while ((i == 1) || (fieldLabel.trim().length() > 0)) {
-    %>
-
-		<fieldset>
-           <legend><liferay-ui:message key="field" /> <%= i %></legend>
-
-           <div class="ctrl-holder">
-               <label for="<portlet:namespace/>fieldLabel<%= i %>"><liferay-ui:message key="name" /></label>
-               <input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" /><br />
-
-			   <c:choose>
-	               <c:when test='<%= fieldType.equals("paragraph") %>'>
-		               <input type="hidden" name="<portlet:namespace/>fieldOptional<%= i %>" value="on" />
-	               </c:when>
-	               <c:otherwise>
-		               <input <c:if test="<%= fieldOptional %>">checked</c:if> type="checkbox" name="<portlet:namespace/>fieldOptional<%= i %>" /> <liferay-ui:message key="optional" />
-	               </c:otherwise>
-               </c:choose>
-           </div>
-
-           <div class="ctrl-holder">
-               <label for="<portlet:namespace/>fieldType<%= i %>"><liferay-ui:message key="type" /></label>
-
-               <select class="<portlet:namespace/>select-field" id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>">
-                       <option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
-                       <option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
-                       <option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
-                       <option <%= (fieldType.equals("radio")) ? "selected" : "" %> value="radio"><liferay-ui:message key="radiobuttons" /></option>
-                       <option <%= (fieldType.equals("paragraph")) ? "selected" : "" %> value="paragraph"><liferay-ui:message key="paragraph" /></option>
-                       <option <%= (fieldType.equals("checkbox")) ? "selected" : "" %> value="checkbox"><liferay-ui:message key="checkbox" /></option>
-               </select>
-           </div>
-
-           <div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= i %>">
-			   <label for="<portlet:namespace/>fieldOptions<%= i %>"><liferay-ui:message key="options" /></label>
-			   <span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span>
-
-			   <textarea class="<portlet:namespace/>input-field" cols="50" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" rows="1" style="height: auto; width: auto;"><%= fieldOptions %></textarea>
-           </div>
-        </fieldset>
+	<legend><liferay-ui:message key="form-fields" /></legend>
 
 	<%
-        i++;
+	int i = 1;
 
-        fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
-        fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
-        fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
-        fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
-    }
-    %>
+	String fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
+	String fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
+	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i);
+	String fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
+
+	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
+	%>
+
+		<fieldset>
+			<legend><liferay-ui:message key="field" /> <%= i %></legend>
+
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace/>fieldLabel<%= i %>"><liferay-ui:message key="name" /></label>
+
+				<input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" /><br />
+
+				<c:choose>
+					<c:when test='<%= fieldType.equals("paragraph") %>'>
+						<input type="hidden" name="<portlet:namespace/>fieldOptional<%= i %>" value="on" />
+					</c:when>
+					<c:otherwise>
+						<input <c:if test="<%= fieldOptional %>">checked</c:if> type="checkbox" name="<portlet:namespace/>fieldOptional<%= i %>" /> <liferay-ui:message key="optional" />
+					</c:otherwise>
+				</c:choose>
+			</div>
+
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace/>fieldType<%= i %>"><liferay-ui:message key="type" /></label>
+
+				<select class="<portlet:namespace/>select-field" id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>">
+					<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
+					<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
+					<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
+					<option <%= (fieldType.equals("radio")) ? "selected" : "" %> value="radio"><liferay-ui:message key="radiobuttons" /></option>
+					<option <%= (fieldType.equals("paragraph")) ? "selected" : "" %> value="paragraph"><liferay-ui:message key="paragraph" /></option>
+					<option <%= (fieldType.equals("checkbox")) ? "selected" : "" %> value="checkbox"><liferay-ui:message key="checkbox" /></option>
+				</select>
+			</div>
+
+			<div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= i %>">
+				<label for="<portlet:namespace/>fieldOptions<%= i %>"><liferay-ui:message key="options" /></label>
+
+				<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span>
+
+				<textarea class="<portlet:namespace/>input-field" cols="50" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" rows="1" style="height: auto; width: auto;"><%= fieldOptions %></textarea>
+			</div>
+		</fieldset>
+
+	<%
+		i++;
+
+		fieldLabel = PrefsParamUtil.getString(prefs, request, "fieldLabel" + i);
+		fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
+		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
+		fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
+	}
+	%>
 
 </fieldset>
 
 <br />
 
 <div class="button-holder">
-    <input type="submit" value="<liferay-ui:message key="save" />" />
+	<input type="submit" value="<liferay-ui:message key="save" />" />
 
-    <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 </div>
 
 </form>

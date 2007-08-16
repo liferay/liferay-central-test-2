@@ -21,8 +21,10 @@
  * SOFTWARE.
  */
 %>
-<%@ include file="/html/portlet/admin/init.jsp" %>
 
+<%@ include file="/html/portlet/init.jsp" %>
+
+<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
@@ -31,7 +33,6 @@
 <%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
 <%@ page import="com.liferay.util.License" %>
 <%@ page import="com.liferay.util.Screenshot" %>
-<%@ page import="com.liferay.util.Version" %>
 
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

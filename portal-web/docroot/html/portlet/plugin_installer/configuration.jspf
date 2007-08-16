@@ -22,12 +22,6 @@
  */
 %>
 
-<c:if test="<%= !PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>">
-	<liferay-ui:message key="installation-of-plugins-is-disabled" />
-
-	<br /><br />
-</c:if>
-
 <table class="liferay-table">
 <tr>
 	<td>

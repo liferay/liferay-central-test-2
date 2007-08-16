@@ -698,7 +698,6 @@ configure-pages=أعّد الصفحات
 configure=أعّد
 confirm-password=أكّد كلمة السر
 confirmation-email=الرسالة الإلكترونية للتأكيد
-connecting-to-the-repository-returned-an-error=حدث خطأ عند المحاولة لمخاطبة المستودع.
 content-and-layout=المحتوى و التصميم
 content-background=خلفية المحتوى
 content-border=إطار المحتوى

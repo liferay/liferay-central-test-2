@@ -750,7 +750,6 @@ configure-pages=Konfiguroi sivuja
 configure=Konfiguroi
 confirm-password=Varmista salasana
 confirmation-email=Vahvistus-sähköposti
-connecting-to-the-repository-returned-an-error=Yhteydenotto varastoon palautti virheen.
 connection-settings=Yhteysasetukset
 content-and-layout=Sisältö ja leiska
 content-background=Sisällön tausta

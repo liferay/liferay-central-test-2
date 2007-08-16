@@ -65,20 +65,24 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 		</c:when>
 		<c:when test='<%= fieldType.equals("text") %>'>
 			<label class="liferay-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
-			<input class="liferay-input-text <%= fieldOptional ? "optional" : "" %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
+
+			<input class="liferay-input-text <%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="text" value="<%= fieldValue %>" />
 		</c:when>
 		<c:when test='<%= fieldType.equals("textarea") %>'>
 			<label class="liferay-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
-			<textarea class="liferay-textarea <%= fieldOptional ? "optional" : "" %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
+
+			<textarea class="liferay-textarea <%= fieldOptional ? "optional" : "" %>" id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" wrap="soft"><%= fieldValue %></textarea>
 		</c:when>
 		<c:when test='<%= fieldType.equals("checkbox") %>'>
 			<label class="liferay-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+
 			<div class="liferay-input-checkbox <%= fieldOptional ? "optional" : "" %>">
-				<input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> name="<portlet:namespace /><%= fieldName %>" type="checkbox" />
+				<input <%= Validator.isNotNull(fieldValue) ? "checked" : "" %> id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="checkbox" />
 			</div>
 		</c:when>
 		<c:when test='<%= fieldType.equals("radio") %>'>
 			<label class="liferay-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+
 			<div class="liferay-input-radio <%= fieldOptional ? "optional" : "" %>">
 
 				<%
@@ -99,6 +103,7 @@ while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 		</c:when>
 		<c:when test='<%= fieldType.equals("options") %>'>
 			<label class="liferay-web-form <%= fieldOptional ? "optional" : "" %>" for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
+
 			<div class="liferay-input-radio <%= fieldOptional ? "optional" : "" %>">
 
 				<%

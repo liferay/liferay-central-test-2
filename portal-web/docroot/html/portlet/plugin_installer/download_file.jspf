@@ -24,13 +24,16 @@
 
 <liferay-ui:success key="pluginDownloaded" message="the-plugin-was-downloaded-successfully-and-is-now-being-installed" />
 
+<liferay-ui:error key="invalidUrl" message="please-enter-a-valid-url" />
+<liferay-ui:error key="errorConnectingToUrl" message="an-unexpected-error-occurred-while-connecting-to-the-specified-url" />
+
 <liferay-ui:message key="specify-a-url-for-a-remote-layout-template,-portlet,-or-theme" />
 
 <%= LanguageUtil.format(pageContext, "for-example-x", "<i>http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war</i>") %>
 
 <br /><br />
 
-<input name="<portlet:namespace />url" value="" size="75" type="text"/>
+<input name="<portlet:namespace />url" size="75" type="text" />
 
 <br /><br />
 
@@ -40,14 +43,14 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />remoteDeployWARName" value="" size="20" type="text"/>
+<input name="<portlet:namespace />deploymentContext" size="20" type="text" />
 
 <br /><br />
 
-<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy', '<%= downloadProgressId %>');" />
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy');" />
 
 <liferay-ui:upload-progress
-	id="<%= downloadProgressId %>"
+	id="<%= uploadProgressId %>"
 	message="downloading"
-	redirect="<%= currentURL %>"
+	redirect="<%= portletURLString %>"
 />

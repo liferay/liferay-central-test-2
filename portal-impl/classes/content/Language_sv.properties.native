@@ -740,7 +740,6 @@ configure-pages=Konfigurera sidor
 configure=Konfigurera
 confirm-password=Bekräfta lösenord
 confirmation-email=Bekräftelse e-post
-connecting-to-the-repository-returned-an-error=Lagringsplatsen svarade med ett fel vid anslutningen.
 connection-settings=Anslutningsinställningar
 content-and-layout=Innehåll och format
 content-background=Innehållsbakgrund

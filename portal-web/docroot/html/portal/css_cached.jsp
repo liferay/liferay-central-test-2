@@ -535,7 +535,7 @@ ul.gamma .tree-item-hover {
 
 .breadcrumbs {
 	margin-bottom: 10px;
-	margin-left: 5px;
+	margin-left: 0px;
 }
 
 .liferay-table {
