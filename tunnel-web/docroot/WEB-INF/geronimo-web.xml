@@ -18,7 +18,7 @@
 				<type>car</type>
 			</dependency>
 		</dependencies>
-		<inverse-classloading/>
+		<inverse-classloading />
 	</environment>
 	<security-realm-name>PortalRealm</security-realm-name>
 	<security>
