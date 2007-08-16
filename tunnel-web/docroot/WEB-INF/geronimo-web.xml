@@ -12,7 +12,13 @@
 			<dependency>
 				<artifactId>sharedlib</artifactId>
 			</dependency>
+			<dependency>
+				<groupId>liferay</groupId>
+				<artifactId>liferay-portal-tomcat</artifactId>
+				<type>car</type>
+			</dependency>
 		</dependencies>
+		<inverse-classloading/>
 	</environment>
 	<security-realm-name>PortalRealm</security-realm-name>
 	<security>
