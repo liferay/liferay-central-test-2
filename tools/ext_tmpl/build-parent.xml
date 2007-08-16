@@ -429,6 +429,16 @@
 		</copy>
 
 		<if>
+			<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
+			<then>
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=../deploy</replacevalue>
+				</replace>
+			</then>
+		</if>
+
+		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
 				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
