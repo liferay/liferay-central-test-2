@@ -553,24 +553,30 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_id")) {
-			sm.append("p_p_col_id");
-			sm.append(StringPool.EQUAL);
-			sm.append(processValue(key, portletDisplay.getColumnId()));
-			sm.append(StringPool.AMPERSAND);
+			if (Validator.isNotNull(portletDisplay.getColumnId())) {
+				sm.append("p_p_col_id");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, portletDisplay.getColumnId()));
+				sm.append(StringPool.AMPERSAND);
+			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_pos")) {
-			sm.append("p_p_col_pos");
-			sm.append(StringPool.EQUAL);
-			sm.append(processValue(key, portletDisplay.getColumnPos()));
-			sm.append(StringPool.AMPERSAND);
+			if (portletDisplay.getColumnPos() > 0) {
+				sm.append("p_p_col_pos");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, portletDisplay.getColumnPos()));
+				sm.append(StringPool.AMPERSAND);
+			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_count")) {
-			sm.append("p_p_col_count");
-			sm.append(StringPool.EQUAL);
-			sm.append(processValue(key, portletDisplay.getColumnCount()));
-			sm.append(StringPool.AMPERSAND);
+			if (portletDisplay.getColumnCount() > 0) {
+				sm.append("p_p_col_count");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, portletDisplay.getColumnCount()));
+				sm.append(StringPool.AMPERSAND);
+			}
 		}
 
 		if (_doAsUserId > 0) {
