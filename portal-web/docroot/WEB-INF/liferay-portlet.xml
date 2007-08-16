@@ -1035,7 +1035,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<header-css>/html/portlet/update_manager/update_manager.css</header-css>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>

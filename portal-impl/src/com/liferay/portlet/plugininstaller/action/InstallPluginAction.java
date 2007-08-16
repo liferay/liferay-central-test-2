@@ -112,14 +112,7 @@ public class InstallPluginAction extends PortletAction {
 			remoteDeploy(req);
 		}
 
-		String backURL = ParamUtil.getString(req, "backURL");
-
-		if (Validator.isNotNull(backURL)) {
-			res.sendRedirect(backURL);
-		}
-		else {
-			sendRedirect(req, res);
-		}
+		sendRedirect(req, res);
 	}
 
 	protected void deployConfiguration(ActionRequest req) throws Exception {

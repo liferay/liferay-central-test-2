@@ -89,21 +89,12 @@
 			<%
 			int blacklistThreshold = PrefsPropsUtil.getInteger(PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
 
-			for (int i = 0; i < blacklistThreshold; i++) {
-				if (i < Time.MINUTE) {
-					i += Time.SECOND * 5;
-				}
-				else {
-					i += Time.MINUTE;
-				}
+			for (int i = 5; i <= 20; i = i + 5) {
 			%>
 
-				<option <%= (interval == i) ? "selected" : "" %> value="<%= i %>"><%= LanguageUtil.getTimeDescription(pageContext, i) %></option>
+				<option <%= (blacklistThreshold == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 			<%
-				if (i >= (Time.MINUTE * 5)) {
-					break;
-				}
 			}
 			%>
 

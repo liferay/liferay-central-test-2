@@ -161,8 +161,8 @@ public class AutoDeployDir {
 		}
 
 		if (_blacklistFiles.contains(fileName)) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
+			if (_log.isDebugEnabled()) {
+				_log.debug(
 					"Skip processing of " + fileName + " because it is " +
 						"blacklisted. You must restart the server to remove " +
 							"the file from the blacklist.");

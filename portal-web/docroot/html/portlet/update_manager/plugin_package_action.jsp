@@ -32,7 +32,7 @@ Object[] rowObj = (Object[])row.getObject();
 PluginPackage pluginPackage = (PluginPackage)rowObj[0];
 PluginPackage availablePluginPackage = (PluginPackage)rowObj[1];
 String pluginPackageStatus = (String)rowObj[2];
-String downloadProgressId = (String)rowObj[3];
+String uploadProgressId = (String)rowObj[3];
 String redirect = (String)rowObj[4];
 
 String downloadURL = StringPool.BLANK;
@@ -46,11 +46,15 @@ if (availablePluginPackage != null) {
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
 		<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 		<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />
+		<portlet:param name="<%= Constants.PROGRESS_ID %>" value="<%= uploadProgressId %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="url" value="<%= downloadURL %>" />
 		<portlet:param name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
-		<portlet:param name="<%= Constants.PROGRESS_ID %>" value="<%= downloadProgressId %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="download" url='<%= "javascript: " + downloadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>' message="update" />
+	<liferay-ui:icon
+		image="download"
+		message="update"
+		url='<%= "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>'
+	/>
 </c:if>

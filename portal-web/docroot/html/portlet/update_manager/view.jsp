@@ -22,7 +22,9 @@
  */
 %>
 
-<%@ include file="/html/portlet/plugin_installer/init.jsp" %>
+<%@ include file="/html/portlet/update_manager/init.jsp" %>
+
+<%@ include file="/html/portlet/update_manager/css.jspf" %>
 
 <c:choose>
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
@@ -35,7 +37,7 @@
 				configurationURL.setWindowState(WindowState.MAXIMIZED);
 
 				configurationURL.setParameter("struts_action", "/plugin_installer/view");
-				configurationURL.setParameter("redirect", currentURL);
+				configurationURL.setParameter("backURL", currentURL);
 				configurationURL.setParameter("tabs1", "configuration");
 				%>
 
@@ -44,35 +46,30 @@
 			<c:otherwise>
 
 				<%
-				PortletURL browseRepositoryURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+				String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
-				browseRepositoryURL.setWindowState(WindowState.MAXIMIZED);
+				PortletURL pluginInstallerURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
-				browseRepositoryURL.setParameter("struts_action", "/plugin_installer/view");
-				browseRepositoryURL.setParameter("redirect", currentURL);
-				browseRepositoryURL.setParameter("tabs1", "browse-repository");
+				pluginInstallerURL.setWindowState(WindowState.MAXIMIZED);
 
-				PortletURL installPluginURL = ((RenderResponseImpl)renderResponse).createActionURL(PortletKeys.PLUGIN_INSTALLER);
-
-				installPluginURL.setParameter("struts_action", "/plugin_installer/install_plugin");
-				installPluginURL.setParameter("redirect", currentURL);
+				pluginInstallerURL.setParameter("struts_action", "/plugin_installer/view");
+				pluginInstallerURL.setParameter("tabs1", "browse-repository");
+				pluginInstallerURL.setParameter("backURL", currentURL);
 				%>
 
 				<script type="text/javascript">
-					function <portlet:namespace />reloadRepositories(redirect) {
+					function <portlet:namespace />reloadRepositories() {
 						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "reloadRepositories";
-						submitForm(document.<portlet:namespace />fm, "<%= installPluginURL %>")
+						submitForm(document.<portlet:namespace />fm);
 					}
 				</script>
 
-				<form method="post" name="<portlet:namespace />fm">
+				<form action="<portlet:actionURL><portlet:param name="struts_action" value="/update_manager/install_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 				<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-				<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+				<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/update_manager/view" /></portlet:renderURL>" />
 
 				<%
 				try {
-					String downloadProgressId = "update_manager_" + System.currentTimeMillis();
-
 					List headerNames = new ArrayList();
 
 					headerNames.add("plugin-package");
@@ -81,7 +78,7 @@
 					headerNames.add("available-version");
 					headerNames.add(StringPool.BLANK);
 
-					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, browseRepositoryURL, headerNames, null);
+					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, pluginInstallerURL, headerNames, null);
 
 					List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
 
@@ -121,7 +118,7 @@
 							pluginPackageStatus = "unknown";
 						}
 
-						ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, downloadProgressId, currentURL}, pluginPackageModuleId, i);
+						ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
 
 						row.setClassName("status-" + pluginPackageStatus);
 
@@ -131,7 +128,7 @@
 
 						sm.append("<b>");
 						sm.append(pluginPackageName);
-						sm.append("</b> ");
+						sm.append("</b>");
 						sm.append("<br />/");
 						sm.append(pluginPackageContext);
 
@@ -148,7 +145,6 @@
 						// Available version
 
 						if (availablePluginPackage != null) {
-
 							PortletURL rowURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 							rowURL.setWindowState(WindowState.MAXIMIZED);
@@ -156,8 +152,8 @@
 							rowURL.setParameter("struts_action", "/plugin_installer/view");
 							rowURL.setParameter("referer", currentURL);
 							rowURL.setParameter("tabs1", "browse-repository");
-							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
 							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
+							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
 
 							sm = new StringMaker();
 
@@ -190,14 +186,14 @@
 					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 					<liferay-ui:upload-progress
-						id="<%= downloadProgressId %>"
+						id="<%= uploadProgressId %>"
 						message="downloading"
 						redirect="<%= currentURL %>"
 					/>
 
 					<br />
 
-					<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= browseRepositoryURL.toString() %>');" value="<liferay-ui:message key="install-more-plugins" />" />
+					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="self.location = '<%= pluginInstallerURL.toString() %>';" />
 
 					<div class="separator"><!-- --></div>
 
@@ -206,7 +202,7 @@
 							<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 						</c:if>
 
-						<input type="button" value="<liferay-ui:message key="refresh" />" onClick="<portlet:namespace/>reloadRepositories('<%= currentURL %>');" />
+						<input type="button" value="<liferay-ui:message key="refresh" />" onClick="<portlet:namespace/>reloadRepositories();" />
 
 						<br />
 
@@ -228,6 +224,7 @@
 				<%
 				}
 				%>
+
 				</form>
 			</c:otherwise>
 		</c:choose>

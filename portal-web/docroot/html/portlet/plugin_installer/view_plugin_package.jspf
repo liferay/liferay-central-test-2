@@ -28,6 +28,7 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 
 <input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
 <input type="hidden" name="<portlet:namespace/>url" value="<%= pluginPackage.getArtifactURL() %>" />
+<input type="hidden" name="<portlet:namespace/>deploymentContext" value="<%= pluginPackage.getContext() %>" />
 
 <liferay-ui:tabs
 	names="<%= pluginPackage.getName() %>"

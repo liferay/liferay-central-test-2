@@ -100,7 +100,7 @@
 	#set ($sign_out_url = $theme_display.getURLSignOut())
 #end
 
-#if ($portalUtil.isOmniadmin($user.getUserId()) && $portalUtil.isUpdateAvailable())
+#if ($permissionChecker.isOmniadmin() && $portalUtil.isUpdateAvailable())
     #set ($update_available_url = $theme_display.getURLUpdateManager())
 #end
 
