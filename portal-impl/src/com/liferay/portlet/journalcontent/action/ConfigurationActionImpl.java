@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
@@ -94,7 +94,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				req, "portletResource");
 
 			PortletPreferences prefs =
-				PortletPreferencesFactory.getPortletSetup(
+				PortletPreferencesFactoryUtil.getPortletSetup(
 					req, portletResource, true, true);
 
 			prefs.setValue("group-id", String.valueOf(groupId));

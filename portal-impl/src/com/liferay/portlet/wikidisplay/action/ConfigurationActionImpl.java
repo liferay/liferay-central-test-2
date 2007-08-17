@@ -24,7 +24,7 @@ package com.liferay.portlet.wikidisplay.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
@@ -66,7 +66,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				req, "portletResource");
 
 			PortletPreferences prefs =
-				PortletPreferencesFactory.getPortletSetup(
+				PortletPreferencesFactoryUtil.getPortletSetup(
 					req, portletResource, true, true);
 
 			prefs.setValue("node-id", String.valueOf(node.getNodeId()));

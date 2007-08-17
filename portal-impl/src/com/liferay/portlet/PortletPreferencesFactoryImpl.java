@@ -53,14 +53,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * <a href="PortletPreferencesFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletPreferencesFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletPreferencesFactory {
+public class PortletPreferencesFactoryImpl
+	implements PortletPreferencesFactory {
 
-	public static PortalPreferences getPortalPreferences(HttpServletRequest req)
+	public PortalPreferences getPortalPreferences(HttpServletRequest req)
 		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay =
@@ -79,7 +80,7 @@ public class PortletPreferencesFactory {
 					themeDisplay.getCompanyId(), ownerId, ownerType, plid,
 					portletId);
 
-			portalPrefs = new PortalPreferences(
+			portalPrefs = new PortalPreferencesImpl(
 				prefsImpl, themeDisplay.isSignedIn());
 		}
 		else {
@@ -96,7 +97,7 @@ public class PortletPreferencesFactory {
 
 				prefsImpl = (PortletPreferencesImpl)prefsImpl.clone();
 
-				portalPrefs = new PortalPreferences(
+				portalPrefs = new PortalPreferencesImpl(
 					prefsImpl, themeDisplay.isSignedIn());
 
 				ses.setAttribute(WebKeys.PORTAL_PREFERENCES, portalPrefs);
@@ -106,7 +107,7 @@ public class PortletPreferencesFactory {
 		return portalPrefs;
 	}
 
-	public static PortalPreferences getPortalPreferences(ActionRequest req)
+	public PortalPreferences getPortalPreferences(ActionRequest req)
 		throws PortalException, SystemException {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
@@ -114,7 +115,7 @@ public class PortletPreferencesFactory {
 		return getPortalPreferences(httpReq);
 	}
 
-	public static PortalPreferences getPortalPreferences(RenderRequest req)
+	public PortalPreferences getPortalPreferences(RenderRequest req)
 		throws PortalException, SystemException {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
@@ -122,7 +123,7 @@ public class PortletPreferencesFactory {
 		return getPortalPreferences(httpReq);
 	}
 
-	public static PortletPreferences getPortletPreferences(
+	public PortletPreferences getPortletPreferences(
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
@@ -133,7 +134,7 @@ public class PortletPreferencesFactory {
 			portletPreferencesIds);
 	}
 
-	public static PortletPreferencesIds getPortletPreferencesIds(
+	public PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest req, String portletId)
 		throws PortalException, SystemException {
 
@@ -142,7 +143,7 @@ public class PortletPreferencesFactory {
 		return getPortletPreferencesIds(req, layout, portletId);
 	}
 
-	public static PortletPreferencesIds getPortletPreferencesIds(
+	public PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest req, Layout selLayout, String portletId)
 		throws PortalException, SystemException {
 
@@ -255,7 +256,7 @@ public class PortletPreferencesFactory {
 			themeDisplay.getCompanyId(), ownerId, ownerType, plid, portletId);
 	}
 
-	public static PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
 
@@ -267,7 +268,7 @@ public class PortletPreferencesFactory {
 			portletId);
 	}
 
-	public static PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			HttpServletRequest req, String portletId, boolean uniquePerLayout,
 			boolean uniquePerGroup)
 		throws PortalException, SystemException {
@@ -276,7 +277,7 @@ public class PortletPreferencesFactory {
 			req, portletId, uniquePerLayout, uniquePerGroup, null);
 	}
 
-	public static PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			HttpServletRequest req, String portletId, boolean uniquePerLayout,
 			boolean uniquePerGroup, String defaultPreferences)
 		throws PortalException, SystemException {
@@ -305,7 +306,7 @@ public class PortletPreferencesFactory {
 			defaultPreferences);
 	}
 
-	public static PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			ActionRequest req, String portletId, boolean uniquePerLayout,
 			boolean uniquePerGroup)
 		throws PortalException, SystemException {
@@ -316,7 +317,7 @@ public class PortletPreferencesFactory {
 			httpReq, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
-	public static PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			RenderRequest req, String portletId, boolean uniquePerLayout,
 			boolean uniquePerGroup)
 		throws PortalException, SystemException {
@@ -327,7 +328,7 @@ public class PortletPreferencesFactory {
 			httpReq, portletId, uniquePerLayout, uniquePerGroup);
 	}
 
-	public static PortletPreferences getPreferences(HttpServletRequest req) {
+	public PortletPreferences getPreferences(HttpServletRequest req) {
 		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
@@ -343,9 +344,7 @@ public class PortletPreferencesFactory {
 		return prefs;
 	}
 
-	public static PreferencesValidator getPreferencesValidator(
-		Portlet portlet) {
-
+	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
 		if (portlet.isWARFile()) {
 			PortletContextWrapper pcw =
 				PortletContextPool.get(portlet.getRootPortletId());

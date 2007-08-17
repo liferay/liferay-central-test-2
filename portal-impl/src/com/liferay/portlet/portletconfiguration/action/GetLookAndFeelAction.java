@@ -29,7 +29,7 @@ import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletSetupUtil;
 import com.liferay.util.ParamUtil;
 
@@ -72,7 +72,7 @@ public class GetLookAndFeelAction extends JSONAction {
 		}
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactory.getPortletSetup(layout, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
 
 		return PortletSetupUtil.cssToString(portletSetup);
 	}

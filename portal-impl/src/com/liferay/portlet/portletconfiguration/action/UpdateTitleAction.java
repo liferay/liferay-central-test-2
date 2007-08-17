@@ -31,7 +31,7 @@ import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CachePortlet;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ParamUtil;
 
 import javax.portlet.PortletPreferences;
@@ -79,7 +79,7 @@ public class UpdateTitleAction extends JSONAction {
 		String title = ParamUtil.getString(req, "title");
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactory.getPortletSetup(layout, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
 
 		portletSetup.setValue("portlet-setup-title-" + languageId, title);
 		portletSetup.setValue("portlet-setup-use-custom-title", "true");

@@ -62,7 +62,7 @@
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
 
 <%
-PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), false, true);
+PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletDisplay.getId(), false, true);
 
 String[] priorities = portletSetup.getValues("priorities", new String[0]);
 

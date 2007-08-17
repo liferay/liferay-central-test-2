@@ -38,7 +38,7 @@
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
+PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

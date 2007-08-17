@@ -78,7 +78,7 @@
 <%@ page import="org.dom4j.io.SAXReader" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
+PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

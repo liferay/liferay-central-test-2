@@ -27,7 +27,7 @@ import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -61,8 +61,9 @@ public class SaveAction extends JSONAction {
 			themeDisplay.getPermissionChecker(), themeDisplay.getPlid(),
 			portletId, ActionKeys.CONFIGURATION);
 
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, portletId, true, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletId, true, true);
 
 		String color = ParamUtil.getString(req, "color");
 		String data = ParamUtil.getString(req, "data");

@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 

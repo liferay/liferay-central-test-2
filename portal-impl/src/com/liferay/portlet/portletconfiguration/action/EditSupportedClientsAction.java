@@ -31,7 +31,7 @@ import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -121,7 +121,7 @@ public class EditSupportedClientsAction extends PortletAction {
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactory.getPortletSetup(
+			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(

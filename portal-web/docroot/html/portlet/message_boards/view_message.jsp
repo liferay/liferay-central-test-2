@@ -51,7 +51,7 @@ MBThread lastThread = messageDisplay.getLastThread();
 boolean isFirstThread = messageDisplay.isFirstThread();
 boolean isLastThread = messageDisplay.isLastThread();
 
-PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
+PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 String threadView = ParamUtil.getString(request, "threadView");
 

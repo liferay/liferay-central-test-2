@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -73,8 +73,9 @@ public class ViewAction extends PortletAction {
 
 		String portletId = configImpl.getPortletId();
 
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, portletId, true, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletId, true, true);
 
 		boolean requireCaptcha = GetterUtil.getBoolean(
 			prefs.getValue("require-captcha", StringPool.BLANK));

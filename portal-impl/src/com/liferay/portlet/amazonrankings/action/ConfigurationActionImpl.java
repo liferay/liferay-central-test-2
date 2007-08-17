@@ -25,7 +25,7 @@ package com.liferay.portlet.amazonrankings.action;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -70,7 +70,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				req, "portletResource");
 
 			PortletPreferences prefs =
-				PortletPreferencesFactory.getPortletSetup(
+				PortletPreferencesFactoryUtil.getPortletSetup(
 					req, portletResource, true, true);
 
 			prefs.setValues("isbns", isbns);

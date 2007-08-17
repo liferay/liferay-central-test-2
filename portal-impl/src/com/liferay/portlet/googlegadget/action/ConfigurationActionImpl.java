@@ -24,7 +24,7 @@ package com.liferay.portlet.googlegadget.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -65,8 +65,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, portletResource, true, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
 
 		prefs.setValue("conf-type", confType);
 

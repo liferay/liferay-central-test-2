@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portlet;
 
-<%@ page import="com.liferay.taglib.ui.LanguageTag" %>
+import java.io.Serializable;
 
-<%
-PortletPreferences prefs = renderRequest.getPreferences();
+/**
+ * <a href="PortalPreferences.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public interface PortalPreferences extends Serializable {
 
-String portletResource = ParamUtil.getString(request, "portletResource");
+	public String getValue(String namespace, String key);
 
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+	public String getValue(String namespace, String key, String defaultValue);
+
+	public String[] getValues(String namespace, String key);
+
+	public String[] getValues(
+		String namespace, String key, String[] defaultValue);
+
+	public void setValue(String namespace, String key, String value);
+
+	public void setValues(String namespace, String key, String[] values);
+
 }
-
-int displayStyle = GetterUtil.getInteger(prefs.getValue("display-style", StringPool.BLANK));
-%>

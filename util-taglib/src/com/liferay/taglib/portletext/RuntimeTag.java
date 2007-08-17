@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 import com.liferay.util.Validator;
 
@@ -105,7 +105,7 @@ public class RuntimeTag extends TagSupport {
 			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
 			if (Validator.isNotNull(defaultPreferences)) {
-				PortletPreferencesFactory.getPortletSetup(
+				PortletPreferencesFactoryUtil.getPortletSetup(
 					req, portletId, true, true, defaultPreferences);
 			}
 

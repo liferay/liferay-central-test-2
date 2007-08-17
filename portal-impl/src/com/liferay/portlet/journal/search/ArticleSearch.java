@@ -25,7 +25,7 @@ package com.liferay.portlet.journal.search;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.dao.search.SearchContainer;
 
@@ -110,7 +110,7 @@ public class ArticleSearch extends SearchContainer {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			String orderByCol = prefs.getValue(
 				PortletKeys.JOURNAL, "articles-order-by-col", "id");

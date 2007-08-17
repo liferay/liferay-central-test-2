@@ -24,7 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.PortalPreferences;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +47,7 @@ public class SessionTreeJSClicks {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 
@@ -63,7 +63,7 @@ public class SessionTreeJSClicks {
 	public static void closeNodes(HttpServletRequest req, String treeId) {
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			String openNodesString = StringPool.BLANK;
 
@@ -77,7 +77,7 @@ public class SessionTreeJSClicks {
 	public static String getOpenNodes(HttpServletRequest req, String treeId) {
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			return prefs.getValue(CLASS_NAME, treeId);
 		}
@@ -93,7 +93,7 @@ public class SessionTreeJSClicks {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 
@@ -111,7 +111,7 @@ public class SessionTreeJSClicks {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 

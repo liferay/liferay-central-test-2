@@ -31,7 +31,7 @@ import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CachePortlet;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
@@ -85,7 +85,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		}
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactory.getPortletSetup(layout, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
 
 		String css = ParamUtil.getString(req, "css");
 

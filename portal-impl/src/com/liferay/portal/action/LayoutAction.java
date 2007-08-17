@@ -45,7 +45,7 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.util.Http;
@@ -321,7 +321,7 @@ public class LayoutAction extends Action {
 		}
 
 		PortletPreferencesIds portletPreferencesIds =
-			PortletPreferencesFactory.getPortletPreferencesIds(
+			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 				req, portletId);
 
 		PortletPreferences portletPreferences =

@@ -113,7 +113,7 @@ public class RenderResponseImpl implements RenderResponse {
 
 		try {
 			PortletPreferences portletSetup =
-				PortletPreferencesFactory.getPortletSetup(
+				PortletPreferencesFactoryUtil.getPortletSetup(
 					_req, _portletName, true, true);
 
 			plid = GetterUtil.getLong(portletSetup.getValue(

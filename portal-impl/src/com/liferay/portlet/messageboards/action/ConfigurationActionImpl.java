@@ -25,7 +25,7 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -68,8 +68,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
 
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, portletResource, false, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, false, true);
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 

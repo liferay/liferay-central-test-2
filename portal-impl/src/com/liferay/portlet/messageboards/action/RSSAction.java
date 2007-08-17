@@ -28,7 +28,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
@@ -76,8 +76,9 @@ public class RSSAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, PortletKeys.MESSAGE_BOARDS, false, true);
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, PortletKeys.MESSAGE_BOARDS, false, true);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long categoryId = ParamUtil.getLong(req, "categoryId");

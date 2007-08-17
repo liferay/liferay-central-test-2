@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%
-PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
+PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 String[] entries = prefs.getValues(PortletKeys.MY_GLOBAL_TAGS, "entries", new String[0]);
 

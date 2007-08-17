@@ -25,22 +25,20 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
-import java.io.Serializable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortalPreferences.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalPreferencesImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalPreferences implements Serializable {
+public class PortalPreferencesImpl implements PortalPreferences {
 
-	public static final String RANDOM_KEY = "r";
+	public PortalPreferencesImpl(
+		PortletPreferencesImpl prefs, boolean signedIn) {
 
-	public PortalPreferences(PortletPreferencesImpl prefs, boolean signedIn) {
 		_prefs = prefs;
 		_signedIn = signedIn;
 	}
@@ -68,7 +66,7 @@ public class PortalPreferences implements Serializable {
 	}
 
 	public void setValue(String namespace, String key, String value) {
-		if (Validator.isNull(key) || (key.equals(RANDOM_KEY))) {
+		if (Validator.isNull(key) || (key.equals(_RANDOM_KEY))) {
 			return;
 		}
 
@@ -92,7 +90,7 @@ public class PortalPreferences implements Serializable {
 	}
 
 	public void setValues(String namespace, String key, String[] values) {
-		if (Validator.isNull(key) || (key.equals(RANDOM_KEY))) {
+		if (Validator.isNull(key) || (key.equals(_RANDOM_KEY))) {
 			return;
 		}
 
@@ -118,6 +116,8 @@ public class PortalPreferences implements Serializable {
 	private String _encodeKey(String namespace, String key) {
 		return namespace + StringPool.POUND + key;
 	}
+
+	private static final String _RANDOM_KEY = "r";
 
 	private static Log _log = LogFactory.getLog(PortalPreferences.class);
 

@@ -24,7 +24,7 @@ package com.liferay.portlet.alfrescocontent.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
@@ -61,7 +61,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				req, "portletResource");
 
 			PortletPreferences prefs =
-				PortletPreferencesFactory.getPortletSetup(
+				PortletPreferencesFactoryUtil.getPortletSetup(
 					req, portletResource, true, true);
 
 			prefs.setValue("user-id", userId);

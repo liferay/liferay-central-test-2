@@ -31,7 +31,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.invitation.util.InvitationUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ParamUtil;
@@ -111,7 +111,7 @@ public class ViewAction extends PortletAction {
 			portalURL + PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		PortletPreferences prefs =
-			PortletPreferencesFactory.getPortletSetup(
+			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, PortletKeys.INVITATION, true, true);
 
 		String subject = InvitationUtil.getEmailMessageSubject(prefs);

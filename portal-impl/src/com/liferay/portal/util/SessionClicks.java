@@ -23,7 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portlet.PortalPreferences;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +45,7 @@ public class SessionClicks {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			return prefs.getValue(CLASS_NAME, key, defaultValue);
 		}
@@ -59,7 +59,7 @@ public class SessionClicks {
 	public static void put(HttpServletRequest req, String key, String value) {
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactory.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(req);
 
 			prefs.setValue(CLASS_NAME, key, value);
 		}

@@ -42,7 +42,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
@@ -108,7 +108,7 @@ public class UpdateLayoutAction extends Action {
 				String left = ParamUtil.getString(req, "left");
 
 				PortletPreferences prefs =
-					PortletPreferencesFactory.getPortletSetup(
+					PortletPreferencesFactoryUtil.getPortletSetup(
 						req, portletId, true, true);
 
 				StringMaker sm = new StringMaker();

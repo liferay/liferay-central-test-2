@@ -64,7 +64,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
@@ -357,14 +357,14 @@ public class EditPagesAction extends PortletAction {
 			// Copy preference
 
 			PortletPreferencesIds portletPreferencesIds =
-				PortletPreferencesFactory.getPortletPreferencesIds(
+				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 					httpReq, layout, copyPortletId);
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				portletPreferencesIds);
 
 			PortletPreferencesIds copyPortletPreferencesIds =
-				PortletPreferencesFactory.getPortletPreferencesIds(
+				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 					httpReq, copyLayout, copyPortletId);
 
 			PortletPreferences copyPrefs =
@@ -638,7 +638,7 @@ public class EditPagesAction extends PortletAction {
 			// Update layout
 
 			LayoutServiceUtil.updateLookAndFeel(
-				groupId, privateLayout,	layoutId, themeId, colorSchemeId, css,
+				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
 				wapTheme);
 		}
 	}

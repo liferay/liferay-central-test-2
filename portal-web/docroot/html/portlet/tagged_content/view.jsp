@@ -40,7 +40,7 @@ if (themeDisplay.isSignedIn()) {
 
 	// Merge my global tags
 
-	PortalPreferences myGlobalPrefs = PortletPreferencesFactory.getPortalPreferences(request);
+	PortalPreferences myGlobalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 	String[] myGlobalEntries = myGlobalPrefs.getValues(PortletKeys.MY_GLOBAL_TAGS, "entries", new String[0]);
 
@@ -52,7 +52,7 @@ if (themeDisplay.isSignedIn()) {
 
 	// Merge my community tags
 
-	PortletPreferences myCommunityPrefs = PortletPreferencesFactory.getPortletPreferences(request, PortletKeys.MY_COMMUNITY_TAGS);
+	PortletPreferences myCommunityPrefs = PortletPreferencesFactoryUtil.getPortletPreferences(request, PortletKeys.MY_COMMUNITY_TAGS);
 
 	String[] myCommunityEntries = myCommunityPrefs.getValues("entries", new String[0]);
 

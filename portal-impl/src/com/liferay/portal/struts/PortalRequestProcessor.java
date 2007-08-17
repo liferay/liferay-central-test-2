@@ -53,7 +53,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseFactory;
@@ -684,7 +684,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		CachePortlet cachePortlet = PortletInstanceFactory.create(portlet, ctx);
 
 		PortletPreferencesIds portletPreferencesIds =
-			PortletPreferencesFactory.getPortletPreferencesIds(
+			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 				req, portletId);
 
 		PortletPreferences portletPreferences =

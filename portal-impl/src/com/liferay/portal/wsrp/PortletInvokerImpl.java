@@ -43,7 +43,7 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
-import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
@@ -132,7 +132,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					renderParameters);
 			PortletPreferencesIds portletPreferencesIds =
-				PortletPreferencesFactory.getPortletPreferencesIds(
+				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 					httpReq, portlet.getPortletId());
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
@@ -212,7 +212,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 					.getHttpServletRequest(), reqLocale, reqMimeType,
 					actionParameters);
 			PortletPreferencesIds portletPreferencesIds =
-				PortletPreferencesFactory.getPortletPreferencesIds(
+				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
 					httpReq, portlet.getPortletId());
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
