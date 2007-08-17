@@ -222,7 +222,7 @@ Liferay.Util = {
 	},
 
 	createInputElement: function(name) {
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			var entry = document.createElement("<input name='" + name + "'></input>");
 		}
 		else {
@@ -565,7 +565,7 @@ Liferay.Util = {
 		else {
 			Liferay.Util.submitCountdown = 0;
 
-			if (!is_ns_4) {
+			if (!Liferay.Browser.is_ns_4) {
 				document.body.style.cursor = "auto";
 			}
 
@@ -639,7 +639,7 @@ Liferay.Util = {
 	},
 
 	setSelectVisibility: function(mode, obj) {
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			if (obj) {
 				obj = jQuery.getOne(obj);
 			}
@@ -831,7 +831,7 @@ Element.disable = function(element) {
 		item.onmouseover = function() {};
 		item.onmouseout = function() {};
 
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			item.onmouseenter = function() {};
 			item.onmouseleave = function() {};
 		}
@@ -944,7 +944,7 @@ function endsWith(str, x) {
 
 // Netscape 4 functions
 
-if (is_ns_4) {
+if (Liferay.Browser.is_ns_4) {
 	encodeURIComponent = new function(uri) {
 		return escape(uri);
 	};
@@ -979,7 +979,7 @@ function submitForm(form, action, singleSubmit) {
 			form.action = action;
 		}
 
-		if (!is_ns_4) {
+		if (!Liferay.Browser.is_ns_4) {
 			document.body.style.cursor = "wait";
 		}
 

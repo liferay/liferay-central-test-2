@@ -83,7 +83,7 @@ List invalidWords = WordsUtil.checkSpelling(text);
 		var ignoreWords = new Array();
 		var changeWords = new Array();
 
-		var spanInvalidBegin = (is_ie) ? "<SPAN class=spell-check-error id=spellCheckError>" : "<SPAN class=\"spell-check-error\" id=\"spellCheckError\">";
+		var spanInvalidBegin = (Liferay.Browser.is_ie) ? "<SPAN class=spell-check-error id=spellCheckError>" : "<SPAN class=\"spell-check-error\" id=\"spellCheckError\">";
 		var spanInvalidEnd = "</SPAN>";
 
 		function init() {

@@ -8,7 +8,7 @@ var DragLink = {
 
 	onLinkClick: function() {
 		if (this.dragId.wasClicked) {
-			if (is_ie) {
+			if (Liferay.Browser.is_ie) {
 				setTimeout("window.location = \"" + this.clickLink + "\";", 0);
 			}
 			else {

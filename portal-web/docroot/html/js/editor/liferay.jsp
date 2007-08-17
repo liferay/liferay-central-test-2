@@ -144,7 +144,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				setTimeout("setHTML(htmlValue)", 0);
 			}
 			else {
-				if (is_ie) {
+				if (Liferay.Browser.is_ie) {
 
 					// The IE rich text editor gives two breaks instead of one
 					// when a user hits enter. Wrapping the HTML with div tags
@@ -168,7 +168,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				switchMode();
 			}
 
-			if (is_ie) {
+			if (Liferay.Browser.is_ie) {
 				return document.getElementById("textArea").contentWindow.document.body.innerText;
 			}
 			else {
@@ -241,7 +241,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				switchMode();
 			}
 
-			if (is_ie) {
+			if (Liferay.Browser.is_ie) {
 				/*if (cmd == "createLink") {
 					var selUrl = prompt("URL:", "http://");
 
@@ -346,7 +346,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 		function insertHTML(newHTML) {
 			document.getElementById("textArea").contentWindow.focus();
 
-			if (is_ie) {
+			if (Liferay.Browser.is_ie) {
 				document.selection.createRange().pasteHTML(newHTML);
 			}
 			else {
@@ -381,7 +381,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 		}
 
 		function openBackColor() {
-			if (is_ie) {
+			if (Liferay.Browser.is_ie) {
 				colorType = "backColor";
 			}
 			else {
@@ -451,7 +451,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 			source = !source;
 
 			if (source) {
-				if (is_ie) {
+				if (Liferay.Browser.is_ie) {
 					var temp = formatHTML(document.getElementById("textArea").contentWindow.document.body.innerHTML);
 					document.getElementById("textArea").contentWindow.document.body.innerText = temp;
 				}
@@ -462,7 +462,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				}
 			}
 			else {
-				if (is_ie) {
+				if (Liferay.Browser.is_ie) {
 					var temp = document.getElementById("textArea").contentWindow.document.body.innerText;
 					document.getElementById("textArea").contentWindow.document.body.innerHTML = temp;
 				}

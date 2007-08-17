@@ -233,10 +233,10 @@ function executeLoadedScript(el) {
 		}
 		else {
 			try {
-				if (is_safari) {
+				if (Liferay.Browser.is_safari) {
 					eval(scripts[i].innerHTML);
 				}
-				else if (is_mozilla) {
+				else if (Liferay.Browser.is_mozilla) {
 					eval(scripts[i].textContent);
 				}
 				else {

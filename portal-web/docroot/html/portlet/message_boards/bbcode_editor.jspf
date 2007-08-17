@@ -115,7 +115,7 @@
 	function <portlet:namespace />insertEmoticon(emoticon) {
 		var field = document.getElementById("textArea");
 
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			field.focus();
 
 			var sel = document.selection.createRange();
@@ -193,7 +193,7 @@
 
 		var field = document.getElementById("textArea");
 
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			field.focus();
 
 			var sel = document.selection.createRange();
@@ -228,7 +228,7 @@
 	function <portlet:namespace />resetSelection() {
 		var field = document.getElementById("textArea");
 
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			field.focus();
 
 			var sel = document.selection.createRange();

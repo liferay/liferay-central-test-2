@@ -192,7 +192,7 @@
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
-			if (!is_safari) {
+			if (!Liferay.Browser.is_safari) {
 				_$J(document).last(
 					function() {
 						ReverseAjax.initialize();

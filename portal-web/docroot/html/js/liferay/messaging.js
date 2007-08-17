@@ -82,7 +82,7 @@ var Messaging = {
 		chatArea.scrollTop = chatArea.scrollHeight;
 		typeArea.focus();
 
-		if (is_ie) {
+		if (Liferay.Browser.is_ie) {
 			// need double focus for IE
 			typeArea.focus();
 		}
