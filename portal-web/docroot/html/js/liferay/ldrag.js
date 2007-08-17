@@ -150,6 +150,7 @@
 			var settings = this.dragSettings;
 			var container = settings.container;
 			var jContainer = $(settings.container);
+
 			if (!container._LFR_noDrag) {
 				$.lDrag.container = container;
 	

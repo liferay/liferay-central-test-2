@@ -419,7 +419,9 @@ Liferay.Util = {
 							}
 						);
 					}
+
 					obj[0]._LFR_noDrag = null;
+
 					return cruft + value;
 				},
 				{
