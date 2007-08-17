@@ -59,10 +59,10 @@ public class RegExpToolkit extends BasicToolkit {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Password " + password1 + " is not valid");
 			}
-		}
 
-		throw new UserPasswordException(
-			UserPasswordException.PASSWORD_INVALID);
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_INVALID);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(RegExpToolkit.class);
