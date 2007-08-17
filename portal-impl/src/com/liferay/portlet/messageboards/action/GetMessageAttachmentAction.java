@@ -24,8 +24,8 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -71,7 +71,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

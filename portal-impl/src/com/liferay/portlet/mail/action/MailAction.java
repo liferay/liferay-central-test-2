@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrettyDateFormat;
 import com.liferay.portal.util.WebKeys;

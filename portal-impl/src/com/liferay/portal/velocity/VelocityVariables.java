@@ -24,6 +24,7 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.servlet.BrowserSniffer_IW;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
@@ -51,7 +52,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
 import com.liferay.util.ArrayUtil_IW;
-import com.liferay.util.BrowserSniffer_IW;
 import com.liferay.util.DateUtil_IW;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.GetterUtil_IW;

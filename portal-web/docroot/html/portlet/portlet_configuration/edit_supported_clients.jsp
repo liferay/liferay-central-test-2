@@ -61,7 +61,7 @@ while (itr.hasNext()) {
 	String portletMode = (String)itr.next();
 
 	String mobileDevicesParam = "portlet-setup-supported-clients-mobile-devices-" + portletMode;
-	boolean mobileDevicesDefault = portlet.hasPortletMode(Constants.XHTML_MP, new PortletMode(portletMode));
+	boolean mobileDevicesDefault = portlet.hasPortletMode(ContentTypes.XHTML_MP, new PortletMode(portletMode));
 
 	boolean mobileDevices = GetterUtil.getBoolean(portletSetup.getValue(mobileDevicesParam, String.valueOf(mobileDevicesDefault)));
 %>

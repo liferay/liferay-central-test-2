@@ -227,11 +227,11 @@ public abstract class CustomSQLUtil {
 		return _vendorSybase;
 	}
 
-	public static String[] keywords(String keywords) {
+	public String[] keywords(String keywords) {
 		return keywords(keywords, true);
 	}
 
-	public static String[] keywords(String keywords, boolean lowerCase) {
+	public String[] keywords(String keywords, boolean lowerCase) {
 		if (lowerCase) {
 			keywords = keywords.toLowerCase();
 		}
@@ -250,11 +250,11 @@ public abstract class CustomSQLUtil {
 		return keywordsArray;
 	}
 
-	public static String[] keywords(String[] keywordsArray) {
+	public String[] keywords(String[] keywordsArray) {
 		return keywords(keywordsArray, true);
 	}
 
-	public static String[] keywords(String[] keywordsArray, boolean lowerCase) {
+	public String[] keywords(String[] keywordsArray, boolean lowerCase) {
 		if ((keywordsArray == null) || (keywordsArray.length == 0)) {
 			keywordsArray = new String[] {null};
 		}
@@ -307,7 +307,7 @@ public abstract class CustomSQLUtil {
 		return sql;
 	}
 
-	public static String replaceKeywords(
+	public String replaceKeywords(
 		String sql, String field, String operator, boolean last,
 		String[] values) {
 

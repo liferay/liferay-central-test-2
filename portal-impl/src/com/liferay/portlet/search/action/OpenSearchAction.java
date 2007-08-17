@@ -23,9 +23,10 @@
 package com.liferay.portlet.search.action;
 
 import com.liferay.portal.kernel.search.OpenSearch;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.PortalOpenSearchImpl;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,14 +53,14 @@ public class OpenSearchAction extends Action {
 
 		try {
 			ServletResponseUtil.sendFile(
-				res, null, getXML(req), Constants.TEXT_XML);
+				res, null, getXML(req), ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

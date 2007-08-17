@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -119,8 +119,10 @@ public class CachePortlet implements Portlet {
 		_portletCtx = (PortletContextImpl)portletCtx;
 		_expCache = expCache;
 
-		if (ClassUtil.isSubclass(_portlet.getClass(), Constants.JSF_MYFACES) ||
-			ClassUtil.isSubclass(_portlet.getClass(), Constants.JSF_SUN)) {
+		if (ClassUtil.isSubclass(
+				_portlet.getClass(), PortletDeployer.JSF_MYFACES) ||
+			ClassUtil.isSubclass(
+				_portlet.getClass(), PortletDeployer.JSF_SUN)) {
 
 			_facesPortlet = true;
 		}

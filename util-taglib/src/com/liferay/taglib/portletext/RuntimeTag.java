@@ -30,7 +30,6 @@ import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 import com.liferay.util.Validator;
 
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -106,9 +105,8 @@ public class RuntimeTag extends TagSupport {
 			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
 			if (Validator.isNotNull(defaultPreferences)) {
-				PortletPreferences prefs =
-					PortletPreferencesFactory.getPortletSetup(
-						req, portletId, true, true, defaultPreferences);
+				PortletPreferencesFactory.getPortletSetup(
+					req, portletId, true, true, defaultPreferences);
 			}
 
 			RuntimePortletUtil.processPortlet(
@@ -147,7 +145,9 @@ public class RuntimeTag extends TagSupport {
 			HttpServletResponse res =
 				(HttpServletResponse)pageContext.getResponse();
 
-			doTag(_portletName, _queryString, pageContext, ctx, req, res);
+			doTag(
+				_portletName, _queryString, _defaultPreferences, pageContext,
+				ctx, req, res);
 
 			return EVAL_PAGE;
 		}

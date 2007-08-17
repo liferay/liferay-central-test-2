@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.ParamUtil;
@@ -74,7 +74,7 @@ public class FindMessageAction extends Action {
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

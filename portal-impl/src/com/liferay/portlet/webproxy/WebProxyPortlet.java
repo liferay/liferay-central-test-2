@@ -23,7 +23,7 @@
 package com.liferay.portlet.webproxy;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -57,7 +57,7 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 		if (Validator.isNull(initUrl)) {
 			PortletRequestDispatcher prd =
 				getPortletContext().getRequestDispatcher(
-					Constants.TEXT_HTML_DIR + "/portal/portlet_not_setup.jsp");
+					StrutsUtil.TEXT_HTML_DIR + "/portal/portlet_not_setup.jsp");
 
 			prd.include(req, res);
 		}

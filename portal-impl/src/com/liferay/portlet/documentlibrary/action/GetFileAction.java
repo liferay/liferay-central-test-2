@@ -25,9 +25,9 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
@@ -85,7 +85,7 @@ public class GetFileAction extends PortletAction {
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

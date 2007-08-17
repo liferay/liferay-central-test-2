@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-response.setContentType(Constants.TEXT_CSS);
+response.setContentType(ContentTypes.TEXT_CSS);
 %>
 
 <%@ include file="/html/portal/css_cached_uniform.jsp" %>

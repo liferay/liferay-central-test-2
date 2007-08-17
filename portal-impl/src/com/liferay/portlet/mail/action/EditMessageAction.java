@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;

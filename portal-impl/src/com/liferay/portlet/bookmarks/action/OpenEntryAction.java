@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.bookmarks.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
@@ -58,12 +58,12 @@ public class OpenEntryAction extends Action {
 
 			req.setAttribute(WebKeys.FORWARD_URL, entry.getUrl());
 
-			return mapping.findForward(Constants.COMMON_FORWARD);
+			return mapping.findForward(ActionConstants.COMMON_FORWARD);
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

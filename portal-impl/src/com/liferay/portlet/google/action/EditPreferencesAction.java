@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.google.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 

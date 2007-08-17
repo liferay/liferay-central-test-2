@@ -20,41 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.helloworld;
-
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.util.ReleaseInfo;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.GenericPortlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+package com.liferay.portal.struts;
 
 /**
- * <a href="HelloWorldPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="ActionConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HelloWorldPortlet extends GenericPortlet {
+public class ActionConstants {
 
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
-	}
+	public static final String COMMON_ERROR = "/common/error.jsp";
 
-	public void doView(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+	public static final String COMMON_FORWARD = "/common/forward_js.jsp";
 
-		res.setContentType(ContentTypes.TEXT_HTML_UTF8);
+	public static final String COMMON_FORWARD_JSP = "/common/forward_jsp.jsp";
 
-		PrintWriter writer = res.getWriter();
+	public static final String COMMON_NULL = "/common/null.jsp";
 
-		writer.print("Welcome to " + ReleaseInfo.getReleaseInfo() + ".");
-	}
+	public static final String COMMON_REFERER = "/common/referer_js.jsp";
+
+	public static final String COMMON_REFERER_JSP = "/common/referer_jsp.jsp";
 
 }

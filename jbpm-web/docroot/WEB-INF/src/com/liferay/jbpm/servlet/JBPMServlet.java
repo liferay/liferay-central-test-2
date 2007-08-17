@@ -25,8 +25,8 @@ package com.liferay.jbpm.servlet;
 import com.liferay.jbpm.WorkflowComponentImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.util.ContentTypes;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 

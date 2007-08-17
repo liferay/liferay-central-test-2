@@ -23,8 +23,8 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
 import com.liferay.util.ParamUtil;

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.shopping.CartMinQuantityException;
 import com.liferay.portlet.shopping.CouponActiveException;
 import com.liferay.portlet.shopping.CouponEndDateException;

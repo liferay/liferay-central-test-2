@@ -25,10 +25,10 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.NoSuchListTypeException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 

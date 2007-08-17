@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil;
 import com.liferay.util.ParamUtil;

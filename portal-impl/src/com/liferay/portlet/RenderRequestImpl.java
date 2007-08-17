@@ -23,6 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
@@ -32,9 +34,7 @@ import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.BrowserSniffer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
@@ -399,10 +399,10 @@ public class RenderRequestImpl implements RenderRequest {
 
 	public String getResponseContentType() {
 		if (_wapTheme) {
-			return Constants.XHTML_MP;
+			return ContentTypes.XHTML_MP;
 		}
 		else {
-			return Constants.TEXT_HTML;
+			return ContentTypes.TEXT_HTML;
 		}
 	}
 

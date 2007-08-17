@@ -349,7 +349,7 @@ containerStyles = sm.toString();
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">
 		<div>
 			<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
-				<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
+				<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + tilesPortletContent %>" />
 			</c:if>
 
 			<c:if test="<%= Validator.isNull(tilesPortletContent) %>">

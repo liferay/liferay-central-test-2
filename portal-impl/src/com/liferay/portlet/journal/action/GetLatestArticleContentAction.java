@@ -23,7 +23,8 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -68,14 +69,14 @@ public class GetLatestArticleContentAction extends Action {
 				article.getContentByLocale(languageId).getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, Constants.TEXT_XML);
+				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

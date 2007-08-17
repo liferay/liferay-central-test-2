@@ -23,7 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.service.UserServiceUtil;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +51,7 @@ public class UpdateTermsOfUseAction extends Action {
 
 		UserServiceUtil.updateAgreedToTermsOfUse(userId, true);
 
-		return mapping.findForward(Constants.COMMON_REFERER);
+		return mapping.findForward(ActionConstants.COMMON_REFERER);
 	}
 
 }

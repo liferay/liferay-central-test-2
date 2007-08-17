@@ -22,6 +22,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
@@ -32,7 +33,6 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Randomizer;
 

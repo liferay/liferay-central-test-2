@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.mail.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -65,7 +65,7 @@ public class GetAttachmentAction extends Action {
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

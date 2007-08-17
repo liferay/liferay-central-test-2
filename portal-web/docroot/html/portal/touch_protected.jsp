@@ -27,7 +27,7 @@
 <html dir="<liferay-ui:message key="lang.dir" />">
 
 <head>
-	<meta content="<%= Constants.TEXT_HTML %>; charset=<%= LanguageUtil.getCharset(locale) %>" http-equiv="content-type" />
+	<meta content="<%= ContentTypes.TEXT_HTML_UTF8 %>" http-equiv="content-type" />
 	<meta content="no-cache" http-equiv="Cache-Control" />
 	<meta content="no-cache" http-equiv="Pragma" />
 	<meta content="0" http-equiv="Expires" />

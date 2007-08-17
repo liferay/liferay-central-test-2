@@ -244,7 +244,7 @@ if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_GUEST)) 
 
 boolean supportsMimeType = portlet.hasPortletMode(responseContentType, portletMode);
 
-if (responseContentType.equals(Constants.XHTML_MP) && portlet.hasMultipleMimeTypes()) {
+if (responseContentType.equals(ContentTypes.XHTML_MP) && portlet.hasMultipleMimeTypes()) {
 	supportsMimeType = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-supported-clients-mobile-devices-" + portletMode, String.valueOf(supportsMimeType)));
 }
 
@@ -449,10 +449,10 @@ if (portlet.isActive() && access && supportsMimeType) {
 					definition = TilesUtil.getDefinition(definitionName, request, application);
 				}
 
-				String templatePath = Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp";
+				String templatePath = StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp";
 
 				if (definition != null) {
-					templatePath = Constants.TEXT_HTML_DIR + definition.getPath();
+					templatePath = StrutsUtil.TEXT_HTML_DIR + definition.getPath();
 				}
 		%>
 
@@ -467,7 +467,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
 		%>
 
-					<tiles:insert template='<%= Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
+					<tiles:insert template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
 						<tiles:put name="portlet_content" value="<%= StringPool.BLANK %>" />
 					</tiles:insert>
 
@@ -490,7 +490,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 			<c:choose>
 				<c:when test="<%= useDefaultTemplate || portletException %>">
-					<tiles:insert template='<%= Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
+					<tiles:insert template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
 						<tiles:put name="portlet_content" value="<%= portletContent %>" />
 					</tiles:insert>
 				</c:when>

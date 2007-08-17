@@ -24,7 +24,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -79,12 +79,12 @@ public class LogoutAction extends Action {
 			EventsProcessor.process(PropsUtil.getArray(
 				PropsUtil.LOGOUT_EVENTS_POST), req, res);
 
-			return mapping.findForward(Constants.COMMON_REFERER);
+			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

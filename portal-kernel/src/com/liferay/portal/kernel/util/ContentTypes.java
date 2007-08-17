@@ -20,40 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="HttpHeaders.java.html"><b><i>View Source</i></b></a>
+ * <a href="ContentTypes.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HttpHeaders {
+public interface ContentTypes {
 
-	public static final String ACCEPT = "ACCEPT";
+	public static final String MESSAGE_RFC822 = "message/rfc822";
 
-	public static final String ACCEPT_ENCODING = "Accept-Encoding";
+	public static final String MULTIPART_ALTERNATIVE = "multipart/alternative";
 
-	public static final String CACHE_CONTROL = "Cache-Control";
+	public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
-	public static final String CONNECTION = "Connection";
+	public static final String MULTIPART_MIXED = "multipart/mixed";
 
-	public static final String CONTENT_DISPOSITION = "Content-Disposition";
+	public static final String TEXT_CSS = "text/css";
 
-	public static final String CONTENT_TYPE = "Content-Type";
+	public static final String TEXT_CSS_UTF8 = "text/css; charset=UTF-8";
 
-	public static final String IF_MODIFIED_SINCE = "If-Modified-Since";
+	public static final String TEXT_HTML = "text/html";
 
-	public static final String KEEP_ALIVE = "Keep-Alive";
+	public static final String TEXT_HTML_UTF8 = "text/html; charset=UTF-8";
 
-	public static final String LAST_MODIFIED = "Last-Modified";
+	public static final String TEXT_JAVASCRIPT = "text/javascript";
 
-	public static final String LOCATION = "Location";
+	public static final String TEXT_PLAIN = "text/plain";
 
-	public static final String PRAGMA = "Pragma";
+	public static final String TEXT_PLAIN_UTF8 = "text/plain; charset=UTF-8";
 
-	public static final String PUBLIC = "public";
+	public static final String TEXT_WML = "text/wml";
 
-	public static final String USER_AGENT = "User-Agent";
+	public static final String TEXT_XML = "text/xml";
+
+	public static final String TEXT_XML_UTF8 = "text/xml; charset=UTF-8";
+
+	public static final String XHTML_MP = "application/vnd.wap.xhtml+xml";
 
 }

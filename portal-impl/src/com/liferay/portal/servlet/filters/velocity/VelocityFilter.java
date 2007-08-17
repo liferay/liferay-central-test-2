@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.velocity;
 
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Theme;
@@ -32,7 +33,6 @@ import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
-import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;

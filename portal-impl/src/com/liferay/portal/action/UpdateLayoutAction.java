@@ -23,6 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
@@ -37,8 +38,8 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.servlet.NamespaceServletRequest;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactory;
@@ -170,7 +171,7 @@ public class UpdateLayoutAction extends Action {
 		}
 
 		if (ParamUtil.getBoolean(req, "refresh")) {
-			return mapping.findForward(Constants.COMMON_REFERER);
+			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		else {
 			if (cmd.equals(Constants.ADD) && (portletId != null)) {

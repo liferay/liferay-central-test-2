@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -32,7 +33,6 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -244,7 +244,7 @@ public class BlogsEntryServiceImpl
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType(Constants.TEXT_PLAIN);
+			syndContent.setType(ContentTypes.TEXT_PLAIN);
 			syndContent.setValue(firstLine);
 
 			syndEntry.setDescription(syndContent);

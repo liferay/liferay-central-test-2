@@ -22,9 +22,10 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -86,15 +87,14 @@ public class GetArticlesAction extends Action {
 			byte[] byteArray = getContent(req, articles);
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray,
-				Constants.TEXT_XML + "; charset=UTF-8");
+				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

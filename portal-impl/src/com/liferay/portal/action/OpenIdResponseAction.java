@@ -26,8 +26,8 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.OpenIdUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -103,7 +103,7 @@ public class OpenIdResponseAction extends Action {
 			else {
 				req.setAttribute(PageContext.EXCEPTION, e);
 
-				return mapping.findForward(Constants.COMMON_ERROR);
+				return mapping.findForward(ActionConstants.COMMON_ERROR);
 			}
 		}
 

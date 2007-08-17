@@ -46,7 +46,6 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -760,7 +759,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static String _PATH_PORTAL_CSS_CACHED = "/portal/css_cached";
 
-	private static String _PATH_PORTAL_ERROR = Constants.PORTAL_ERROR;
+	private static String _PATH_PORTAL_ERROR = "/portal/error";
 
 	private static String _PATH_PORTAL_FLASH = "/portal/flash";
 

@@ -22,8 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.Validator;
 
 import java.io.BufferedOutputStream;

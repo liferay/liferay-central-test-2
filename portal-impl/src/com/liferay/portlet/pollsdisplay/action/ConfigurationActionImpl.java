@@ -23,7 +23,7 @@
 package com.liferay.portlet.pollsdisplay.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;

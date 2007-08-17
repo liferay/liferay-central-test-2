@@ -24,8 +24,8 @@ package com.liferay.portlet.workflow.service.impl;
 
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.workflow.jbi.WorkflowURL;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;

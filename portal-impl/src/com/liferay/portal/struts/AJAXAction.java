@@ -22,8 +22,8 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.util.HttpHeaders;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ContentTypes;
 
 import java.io.PrintWriter;
 
@@ -60,7 +60,7 @@ public abstract class AJAXAction extends Action {
 			return null;
 		}
 
-		res.setContentType(Constants.TEXT_XML);
+		res.setContentType(ContentTypes.TEXT_XML_UTF8);
 		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 
 		PrintWriter pw = res.getWriter();

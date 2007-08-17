@@ -33,7 +33,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -429,7 +428,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 		PortletRequestDispatcherImpl prd = (PortletRequestDispatcherImpl)
 			portletConfig.getPortletContext().getRequestDispatcher(
-				Constants.TEXT_HTML_DIR + uri);
+				StrutsUtil.TEXT_HTML_DIR + uri);
 
 		try {
 			if (prd == null) {

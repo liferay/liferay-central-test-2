@@ -22,13 +22,13 @@
 
 package com.liferay.portal.lastmodified;
 
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.BrowserSniffer;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;

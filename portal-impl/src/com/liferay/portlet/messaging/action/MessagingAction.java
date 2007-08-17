@@ -22,12 +22,13 @@
 
 package com.liferay.portlet.messaging.action;
 
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -84,7 +85,7 @@ public class MessagingAction extends Action {
 			}
 
 			if (Validator.isNotNull(json)) {
-				res.setContentType(Constants.TEXT_JAVASCRIPT);
+				res.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
 				PrintWriter pw = res.getWriter();
 

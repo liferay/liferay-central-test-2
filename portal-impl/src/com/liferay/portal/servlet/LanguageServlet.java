@@ -23,10 +23,10 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;

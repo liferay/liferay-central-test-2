@@ -23,8 +23,9 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -90,28 +91,27 @@ public class GetTemplateAction extends Action {
 			String fileName = null;
 			byte[] byteArray = script.getBytes();
 
-			String contentType = Constants.TEXT_PLAIN;
+			String contentType = ContentTypes.TEXT_PLAIN_UTF8;
 
 			if (Validator.equals(
 					extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
 
-				contentType = Constants.TEXT_CSS;
+				contentType = ContentTypes.TEXT_CSS_UTF8;
 			}
 			else if (Validator.equals(
 					extension, JournalTemplateImpl.LANG_TYPE_XSL)) {
 
-				contentType = Constants.TEXT_XML;
+				contentType = ContentTypes.TEXT_XML_UTF8;
 			}
 
-			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, contentType + "; charset=UTF-8");
+			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 
 			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

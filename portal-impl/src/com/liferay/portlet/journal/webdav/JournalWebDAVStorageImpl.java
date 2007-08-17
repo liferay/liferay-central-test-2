@@ -45,9 +45,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -105,15 +102,15 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] pathArray = webDavReq.getPathArray();
 
 			if (pathArray.length == 3) {
-				String companyId = pathArray[0];
-				String groupId = pathArray[1];
+				//String companyId = pathArray[0];
+				//String groupId = pathArray[1];
 				String type = pathArray[2];
 
 				return toResource(webDavReq, type, false);
 			}
 			else if (pathArray.length == 4) {
-				String companyId = pathArray[0];
-				String groupId = pathArray[1];
+				//String companyId = pathArray[0];
+				//String groupId = pathArray[1];
 				String type = pathArray[2];
 				String journalTypeId = pathArray[3];
 
@@ -262,15 +259,13 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			href += StringPool.SLASH + template.getTemplateId();
 		}
 
-		return new JournalTemplateResourceImpl(webDavReq, template, href);
+		return new JournalTemplateResourceImpl(template, href);
 	}
 
-	private static final String _TYPE_ARTICLES = "Articles";
+	//private static final String _TYPE_ARTICLES = "Articles";
 
-	private static final String _TYPE_STRUCTURES = "Structures";
+	//private static final String _TYPE_STRUCTURES = "Structures";
 
 	private static final String _TYPE_TEMPLATES = "Templates";
-
-	private static Log _log = LogFactory.getLog(JournalWebDAVStorageImpl.class);
 
 }

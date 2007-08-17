@@ -24,6 +24,7 @@ package com.liferay.portal.wsrp;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -35,7 +36,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.ActionRequestFactory;
 import com.liferay.portlet.ActionRequestImpl;
@@ -157,7 +157,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			markupContext.setMarkupString(res.getString());
 			String contentType = renderResponse.getContentType();
 			if (contentType == null) {
-				contentType = Constants.TEXT_HTML;
+				contentType = ContentTypes.TEXT_HTML_UTF8;
 			}
 			markupContext.setMimeType(contentType);
 			markupContext.setLocale(renderResponse.getLocale().getLanguage());

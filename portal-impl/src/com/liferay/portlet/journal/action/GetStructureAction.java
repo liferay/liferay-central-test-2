@@ -22,7 +22,8 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -63,15 +64,14 @@ public class GetStructureAction extends Action {
 			byte[] byteArray = structure.getXsd().getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray,
-				Constants.TEXT_XML + "; charset=UTF-8");
+				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.util.HttpHeaders;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -73,7 +73,7 @@ public abstract class JSONAction extends Action {
 		}
 
 		if (Validator.isNotNull(json)) {
-			res.setContentType(Constants.TEXT_JAVASCRIPT);
+			res.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 			res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 
 			PrintWriter pw = res.getWriter();

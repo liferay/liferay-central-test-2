@@ -23,6 +23,7 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -34,7 +35,6 @@ import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;

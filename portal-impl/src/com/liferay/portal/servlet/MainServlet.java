@@ -27,7 +27,9 @@ import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
@@ -43,7 +45,6 @@ import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -58,7 +59,6 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.EncryptedServletRequest;
 import com.liferay.util.servlet.ProtectedServletRequest;
@@ -291,7 +291,7 @@ public class MainServlet extends ActionServlet {
 		throws IOException, ServletException {
 
 		if (ShutdownUtil.isShutdown()) {
-			res.setContentType(Constants.TEXT_HTML);
+			res.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 			String html = ContentUtil.get(
 				"com/liferay/portal/dependencies/shutdown.html");

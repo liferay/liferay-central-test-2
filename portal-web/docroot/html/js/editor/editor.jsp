@@ -22,9 +22,10 @@
  */
 %>
 
-<%@ page import="com.liferay.portal.util.Constants" %>
+<%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
+<%@ page import="com.liferay.portal.kernel.util.Constants" %>
+<%@ page import="com.liferay.portal.struts.StrutsUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
-<%@ page import="com.liferay.util.BrowserSniffer" %>
 <%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
@@ -47,12 +48,12 @@ else if (!BrowserSniffer.is_rtf(request)) {
 
 // Resin won't allow dynamic content inside the jsp:include tag
 
-RequestDispatcher rd = application.getRequestDispatcher(Constants.TEXT_HTML_DIR + "/js/editor/" + editorImpl + ".jsp");
+RequestDispatcher rd = application.getRequestDispatcher(StrutsUtil.TEXT_HTML_DIR + "/js/editor/" + editorImpl + ".jsp");
 
 rd.include(request, response);
 %>
 
-<%--<jsp:include page='<%= Constants.TEXT_HTML_DIR + "/js/editor/" + editorImpl + ".jsp" %>' />--%>
+<%--<jsp:include page='<%= StrutsUtil.TEXT_HTML_DIR + "/js/editor/" + editorImpl + ".jsp" %>' />--%>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.default";

@@ -31,6 +31,6 @@
 
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
+		<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + tilesPortletContent %>" />
 	</c:otherwise>
 </c:choose>

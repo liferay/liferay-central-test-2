@@ -22,13 +22,15 @@
 
 package com.liferay.portlet.mail.util;
 
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -211,7 +213,7 @@ public class MailUtil {
 			BodyPart bodyPart = new MimeBodyPart();
 
 			bodyPart.setContent(
-				mailMessage.getBody(), Constants.TEXT_HTML + "; charset=UTF-8");
+				mailMessage.getBody(), ContentTypes.TEXT_HTML_UTF8);
 
 			multipart.addBodyPart(bodyPart);
 
@@ -233,7 +235,7 @@ public class MailUtil {
 
 				if (Validator.isNotNull(mailAttachment.getContentId())) {
 					attachment.addHeader(
-						Constants.CONTENT_ID, mailAttachment.getContentId());
+						HttpHeaders.CONTENT_ID, mailAttachment.getContentId());
 				}
 
 				multipart.addBodyPart(attachment);
@@ -1271,14 +1273,14 @@ public class MailUtil {
 			else if (Validator.isNull(part.getFileName())) {
 				attachment = false;
 
-				if (contentType.startsWith(Constants.TEXT_PLAIN)) {
+				if (contentType.startsWith(ContentTypes.TEXT_PLAIN)) {
 					content.appendPlainBody((String)part.getContent());
 				}
-				else if (contentType.startsWith(Constants.TEXT_HTML)) {
+				else if (contentType.startsWith(ContentTypes.TEXT_HTML)) {
 					content.appendHtmlBody(
 						_customizeHtml((String)part.getContent()));
 				}
-				else if (contentType.startsWith(Constants.MESSAGE_RFC822)) {
+				else if (contentType.startsWith(ContentTypes.MESSAGE_RFC822)) {
 					MailContent subContent = new MailContent();
 
 					mailMessage = _getContent(
@@ -1431,7 +1433,7 @@ public class MailUtil {
 			remoteMailAttachment.setFilename(part.getFileName());
 			remoteMailAttachment.setContentPath(contentPath);
 
-			String[] contentId = part.getHeader(Constants.CONTENT_ID);
+			String[] contentId = part.getHeader(HttpHeaders.CONTENT_ID);
 
 			if ((contentId != null) && (contentId.length == 1)) {
 				remoteMailAttachment.setContentId(contentId[0]);

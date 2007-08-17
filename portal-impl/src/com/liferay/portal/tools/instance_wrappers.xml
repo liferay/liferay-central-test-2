@@ -62,12 +62,12 @@
 		src-file="com/liferay/portal/util/PropsUtil.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/ArrayUtil.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/servlet/BrowserSniffer.java"
 	/>
 	<instance-wrapper
 		parent-dir="../util-java/src"
-		src-file="com/liferay/util/BrowserSniffer.java"
+		src-file="com/liferay/util/ArrayUtil.java"
 	/>
 	<instance-wrapper
 		parent-dir="../util-java/src"

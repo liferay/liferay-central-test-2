@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 

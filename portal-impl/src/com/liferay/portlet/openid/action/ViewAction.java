@@ -23,9 +23,10 @@
 package com.liferay.portlet.openid.action;
 
 import com.liferay.portal.action.OpenIdRequestAction;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
@@ -88,7 +89,7 @@ public class ViewAction extends PortletAction {
 				else {
 					req.setAttribute(PageContext.EXCEPTION, e);
 
-					setForward(req, Constants.COMMON_ERROR);
+					setForward(req, ActionConstants.COMMON_ERROR);
 				}
 			}
 		}

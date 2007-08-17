@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.webdav;
 
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
-import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
 import java.io.ByteArrayInputStream;
@@ -38,16 +37,13 @@ import java.io.InputStream;
  */
 public class JournalTemplateResourceImpl extends BaseResourceImpl {
 
-	public JournalTemplateResourceImpl(WebDAVRequest webDavReq,
-									   JournalTemplate template, String href) {
-
+	public JournalTemplateResourceImpl(JournalTemplate template, String href) {
 		super(
 			href, template.getTemplateId(), false, template.getCreateDate(),
 			template.getModifiedDate(), template.getXsl().length());
 
 		setModel(template);
 
-		_webDavReq = webDavReq;
 		_template = template;
 	}
 
@@ -61,7 +57,6 @@ public class JournalTemplateResourceImpl extends BaseResourceImpl {
 		}
 	}
 
-	private WebDAVRequest _webDavReq;
 	private JournalTemplate _template;
 
 }

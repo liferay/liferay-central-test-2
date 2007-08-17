@@ -29,8 +29,8 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -105,12 +105,12 @@ public class TCKAction extends Action {
 				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" +
 					layout.getPlid());
 
-			return mapping.findForward(Constants.COMMON_FORWARD_JSP);
+			return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

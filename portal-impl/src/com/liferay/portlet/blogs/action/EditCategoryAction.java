@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.blogs.CategoryNameException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;

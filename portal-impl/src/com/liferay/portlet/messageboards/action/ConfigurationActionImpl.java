@@ -23,8 +23,8 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.GetterUtil;

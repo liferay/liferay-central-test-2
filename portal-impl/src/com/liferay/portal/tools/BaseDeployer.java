@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
@@ -71,6 +70,8 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class BaseDeployer {
+
+	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
 
 	public static void main(String[] args) {
 		List wars = new ArrayList();
@@ -372,10 +373,9 @@ public class BaseDeployer {
 		// File names starting with DEPLOY_TO_PREFIX should use the filename
 		// after the prefix as the deployment context
 
-		if (srcFile.getName().startsWith(Constants.DEPLOY_TO_PREFIX)) {
+		if (srcFile.getName().startsWith(DEPLOY_TO_PREFIX)) {
 			displayName = srcFile.getName().substring(
-				Constants.DEPLOY_TO_PREFIX.length(),
-				srcFile.getName().length() - 4);
+				DEPLOY_TO_PREFIX.length(), srcFile.getName().length() - 4);
 
 			overwrite = true;
 			preliminaryContext = displayName;

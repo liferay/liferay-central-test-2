@@ -22,7 +22,8 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.SessionTreeJSClicks;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -80,7 +81,7 @@ public class SessionTreeJSClickAction extends Action {
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

@@ -738,7 +738,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
 							%>
 
-							<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + PortalUtil.getLayoutEditPage(selLayout) %>" />
+							<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + PortalUtil.getLayoutEditPage(selLayout) %>" />
 						</td>
 					</tr>
 					</table>

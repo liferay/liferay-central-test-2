@@ -24,7 +24,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
-<%@ page import="com.liferay.util.BrowserSniffer" %>
+<%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
 <%@ page import="com.liferay.util.ParamUtil" %>
 <%@ page import="com.liferay.util.StringUtil" %>
 <%@ page import="com.liferay.util.Validator" %>

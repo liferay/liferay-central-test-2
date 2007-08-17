@@ -25,7 +25,7 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
-response.setContentType(Constants.TEXT_XML);
+response.setContentType(ContentTypes.TEXT_XML_UTF8);
 %>
 
 <?xml version="1.0" encoding="UTF-8"?>

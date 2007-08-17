@@ -22,8 +22,7 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.util.Constants;
-import com.liferay.util.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
 
 import java.io.IOException;
 
@@ -56,6 +55,10 @@ public class StrutsUtil {
 
 	public static final String STRUTS_PACKAGE = "org.apache.struts.";
 
+	public static final String TEXT_HTML_DIR = "/html";
+
+	public static final String TEXT_WAP_DIR = "/wap";
+
 	public static void forward(
 			String uri, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res)
@@ -65,15 +68,15 @@ public class StrutsUtil {
 			_log.debug("Forward URI " + uri);
 		}
 
-		if (uri.equals(Constants.COMMON_NULL)) {
+		if (uri.equals(ActionConstants.COMMON_NULL)) {
 			return;
 		}
 
 		if (!res.isCommitted()) {
-			String path = Constants.TEXT_HTML_DIR + uri;
+			String path = TEXT_HTML_DIR + uri;
 
 			if (BrowserSniffer.is_wap_xhtml(req)) {
-				path = Constants.TEXT_WAP_DIR + uri;
+				path = TEXT_WAP_DIR + uri;
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -91,11 +94,10 @@ public class StrutsUtil {
 			catch (ServletException se1) {
 				req.setAttribute(PageContext.EXCEPTION, se1.getRootCause());
 
-				String errorPath =
-					Constants.TEXT_HTML_DIR + Constants.COMMON_ERROR;
+				String errorPath = TEXT_HTML_DIR + ActionConstants.COMMON_ERROR;
 
 				if (BrowserSniffer.is_wap_xhtml(req)) {
-					path = Constants.TEXT_WAP_DIR + Constants.COMMON_ERROR;
+					path = TEXT_WAP_DIR + ActionConstants.COMMON_ERROR;
 				}
 
 				rd = ctx.getRequestDispatcher(errorPath);
@@ -125,10 +127,10 @@ public class StrutsUtil {
 			_log.debug("Include URI " + uri);
 		}
 
-		String path = Constants.TEXT_HTML_DIR + uri;
+		String path = TEXT_HTML_DIR + uri;
 
 		if (BrowserSniffer.is_wap_xhtml(req)) {
-			path = Constants.TEXT_WAP_DIR + uri;
+			path = TEXT_WAP_DIR + uri;
 		}
 
 		if (_log.isDebugEnabled()) {

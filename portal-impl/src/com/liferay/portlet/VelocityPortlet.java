@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
 
 import java.io.IOException;
@@ -136,14 +136,14 @@ public class VelocityPortlet extends GenericPortlet {
 	protected Template getTemplate(String name) throws Exception {
 		return RuntimeSingleton.getTemplate(
 			_portletContextName + VelocityResourceListener.SERVLET_SEPARATOR +
-				Constants.TEXT_HTML_DIR + name);
+				StrutsUtil.TEXT_HTML_DIR + name);
 	}
 
 	protected Template getTemplate(String name, String encoding)
 		throws Exception {
 
 		return RuntimeSingleton.getTemplate(
-			Constants.TEXT_HTML_DIR + name, encoding);
+			StrutsUtil.TEXT_HTML_DIR + name, encoding);
 	}
 
 	protected void mergeTemplate(

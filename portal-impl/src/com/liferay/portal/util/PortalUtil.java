@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringComparator;
@@ -1451,7 +1452,7 @@ public class PortalUtil {
 
 			// LEP-766
 
-			res.setContentType(Constants.TEXT_HTML + "; charset=UTF-8");
+			res.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 			rd.include(req, res);
 		}

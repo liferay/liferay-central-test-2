@@ -23,7 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
@@ -158,7 +158,7 @@ public class JSPPortlet extends LiferayPortlet {
 
 		PortletRequestDispatcher prd =
 			getPortletContext().getRequestDispatcher(
-				Constants.TEXT_HTML_DIR + path);
+				StrutsUtil.TEXT_HTML_DIR + path);
 
 		if (prd == null) {
 			_log.error(path + " is not a valid include");

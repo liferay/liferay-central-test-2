@@ -28,7 +28,7 @@ package com.liferay.portal.kernel.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class JavaConstants {
+public interface JavaConstants {
 
 	public static final String JAVAX_PORTLET_CONFIG = "javax.portlet.config";
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.myglobaltags.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactory;

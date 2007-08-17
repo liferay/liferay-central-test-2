@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.tagsadmin.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.struts.JSONAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.tags.service.TagsPropertyServiceUtil;
 import com.liferay.util.ParamUtil;
 

@@ -23,7 +23,6 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -53,6 +52,18 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class PortletDeployer extends BaseDeployer {
+
+	public static final String JSF_MYFACES =
+		"org.apache.myfaces.portlet.MyFacesGenericPortlet";
+
+	public static final String JSF_SUN =
+		"com.sun.faces.portlet.FacesPortlet";
+
+	public static final String LIFERAY_RENDER_KIT_FACTORY =
+		"com.liferay.util.jsf.sun.faces.renderkit.LiferayRenderKitFactoryImpl";
+
+	public static final String MYFACES_CONTEXT_FACTORY =
+		"com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl";
 
 	public static void main(String[] args) {
 		List wars = new ArrayList();
@@ -387,12 +398,12 @@ public class PortletDeployer extends BaseDeployer {
 
 			String portletClass = portlet.elementText("portlet-class");
 
-			if (portletClass.equals(Constants.JSF_MYFACES)) {
+			if (portletClass.equals(JSF_MYFACES)) {
 				_myFacesPortlet = true;
 
 				break;
 			}
-			else if (portletClass.equals(Constants.JSF_SUN)) {
+			else if (portletClass.equals(JSF_SUN)) {
 				_sunFacesPortlet = true;
 
 				break;
@@ -424,13 +435,13 @@ public class PortletDeployer extends BaseDeployer {
 
 			renderKitFactoryEl = factoryEl.addElement("render-kit-factory");
 
-			renderKitFactoryEl.addText(Constants.LIFERAY_RENDER_KIT_FACTORY);
+			renderKitFactoryEl.addText(LIFERAY_RENDER_KIT_FACTORY);
 		}
 		else if (_myFacesPortlet && (facesContextFactoryEl == null)) {
 			facesContextFactoryEl =
 				factoryEl.addElement("faces-context-factory");
 
-			facesContextFactoryEl.addText(Constants.MYFACES_CONTEXT_FACTORY);
+			facesContextFactoryEl.addText(MYFACES_CONTEXT_FACTORY);
 		}
 
 		if (!appServerType.equals("orion") && (_sunFacesPortlet)) {

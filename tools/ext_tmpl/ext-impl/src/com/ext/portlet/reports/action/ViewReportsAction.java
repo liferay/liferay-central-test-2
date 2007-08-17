@@ -23,7 +23,7 @@
 package com.ext.portlet.reports.action;
 
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.kernel.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

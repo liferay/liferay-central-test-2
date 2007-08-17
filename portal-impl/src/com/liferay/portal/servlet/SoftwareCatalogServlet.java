@@ -25,11 +25,11 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
@@ -91,8 +91,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 			byte[] byteArray = repositoryXML.getBytes("UTF-8");
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray,
-				Constants.TEXT_XML + "; charset=UTF-8");
+				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchGroupException nsge) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND);

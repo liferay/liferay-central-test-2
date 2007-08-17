@@ -22,6 +22,9 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -30,8 +33,9 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestFactory;
@@ -44,9 +48,7 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
-import com.liferay.util.BrowserSniffer;
 import com.liferay.util.Http;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;
@@ -175,7 +177,7 @@ public class LayoutAction extends Action {
 			catch (Exception e) {
 				req.setAttribute(PageContext.EXCEPTION, e);
 
-				return mapping.findForward(Constants.COMMON_ERROR);
+				return mapping.findForward(ActionConstants.COMMON_ERROR);
 			}
 			finally {
 				try {
@@ -213,12 +215,12 @@ public class LayoutAction extends Action {
 			try {
 				forwardLayout(req);
 
-				return mapping.findForward(Constants.COMMON_FORWARD);
+				return mapping.findForward(ActionConstants.COMMON_FORWARD);
 			}
 			catch (Exception e) {
 				req.setAttribute(PageContext.EXCEPTION, e);
 
-				return mapping.findForward(Constants.COMMON_ERROR);
+				return mapping.findForward(ActionConstants.COMMON_ERROR);
 			}
 		}
 	}
@@ -263,10 +265,10 @@ public class LayoutAction extends Action {
 
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
-		String path = Constants.TEXT_HTML_DIR;
+		String path = StrutsUtil.TEXT_HTML_DIR;
 
 		if (BrowserSniffer.is_wap_xhtml(req)) {
-			path = Constants.TEXT_WAP_DIR;
+			path = StrutsUtil.TEXT_WAP_DIR;
 		}
 
 		// Manually check the p_p_id. See LEP-1724.
@@ -347,7 +349,7 @@ public class LayoutAction extends Action {
 			try {
 				if ((contentType != null) &&
 					(contentType.startsWith(
-						Constants.MULTIPART_FORM_DATA))) {
+						ContentTypes.MULTIPART_FORM_DATA))) {
 
 					if (!cachePortlet.getPortletConfig().isWARFile() ||
 						cachePortlet.isStrutsPortlet()) {

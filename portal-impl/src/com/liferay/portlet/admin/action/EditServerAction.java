@@ -24,13 +24,14 @@ package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
@@ -246,7 +247,7 @@ public class EditServerAction extends PortletAction {
 
 		while (itr1.hasNext()) {
 			try {
-				String jsp = Constants.TEXT_HTML_DIR + itr1.next();
+				String jsp = StrutsUtil.TEXT_HTML_DIR + itr1.next();
 
 				RequestDispatcher rd = ctx.getRequestDispatcher(jsp);
 

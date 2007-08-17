@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-response.setContentType(Constants.TEXT_JAVASCRIPT);
+response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 %>
 
 function submitFormAlert(countdown) {

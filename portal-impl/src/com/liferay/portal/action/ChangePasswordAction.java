@@ -24,9 +24,10 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
@@ -61,7 +62,7 @@ public class ChangePasswordAction extends Action {
 			try {
 				updatePassword(req, res);
 
-				return mapping.findForward(Constants.COMMON_REFERER);
+				return mapping.findForward(ActionConstants.COMMON_REFERER);
 			}
 			catch (Exception e) {
 				if (e instanceof UserPasswordException) {
@@ -81,7 +82,7 @@ public class ChangePasswordAction extends Action {
 				else {
 					req.setAttribute(PageContext.EXCEPTION, e);
 
-					return mapping.findForward(Constants.COMMON_ERROR);
+					return mapping.findForward(ActionConstants.COMMON_ERROR);
 				}
 			}
 		}

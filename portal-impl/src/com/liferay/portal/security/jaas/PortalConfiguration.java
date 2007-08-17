@@ -22,8 +22,6 @@
 
 package com.liferay.portal.security.jaas;
 
-import com.liferay.portal.util.Constants;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +35,14 @@ import org.apache.commons.logging.LogFactory;
  * <a href="PortalConfiguration.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Weisser
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortalConfiguration extends Configuration {
+
+	public static final String REALM_NAME = "PortalRealm";
+
+	public static final String JBOSS_LOGIN_MODULE = "client-login";
 
 	public PortalConfiguration(Configuration config) {
 		_config = config;
@@ -49,7 +52,7 @@ public class PortalConfiguration extends Configuration {
 		AppConfigurationEntry[] aceArray =
 			_config.getAppConfigurationEntry(name);
 
-		if ((name != null) && !name.equals(Constants.JBOSS_LOGIN_MODULE)) {
+		if ((name != null) && !name.equals(JBOSS_LOGIN_MODULE)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(name);
 			}
@@ -75,7 +78,7 @@ public class PortalConfiguration extends Configuration {
 				AppConfigurationEntry[] newAceArray =
 					new AppConfigurationEntry[aceArray.length + 1];
 
-				if (name.equals(Constants.REALM_NAME)) {
+				if (name.equals(REALM_NAME)) {
 					newAceArray[0] = ace;
 
 					System.arraycopy(

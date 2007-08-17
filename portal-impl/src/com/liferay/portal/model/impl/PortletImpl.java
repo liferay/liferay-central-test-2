@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
@@ -1611,7 +1611,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public boolean hasPortletMode(String mimeType, PortletMode portletMode) {
 		if (mimeType == null) {
-			mimeType = Constants.TEXT_HTML;
+			mimeType = ContentTypes.TEXT_HTML;
 		}
 
 		Set mimeTypeModes = (Set)_portletModes.get(mimeType);

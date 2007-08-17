@@ -26,13 +26,14 @@ import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.tools.BaseDeployer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -199,7 +200,7 @@ public class InstallPluginAction extends PortletAction {
 
 		if (Validator.isNotNull(deploymentContext)) {
 			fileName =
-				Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
+				BaseDeployer.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 		}
 		else {
 			fileName = GetterUtil.getString(uploadReq.getFileName("file"));
@@ -268,7 +269,7 @@ public class InstallPluginAction extends PortletAction {
 
 			if (Validator.isNotNull(deploymentContext)) {
 				fileName =
-					Constants.DEPLOY_TO_PREFIX + deploymentContext + ".war";
+					BaseDeployer.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 			}
 			else {
 				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);

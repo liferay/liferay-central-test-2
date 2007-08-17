@@ -22,8 +22,9 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -85,7 +86,7 @@ public class GetArticleAction extends Action {
 			String xml = article.getContentByLocale(
 				themeDisplay.getLanguageId());
 
-			String contentType = Constants.TEXT_HTML;
+			String contentType = ContentTypes.TEXT_HTML_UTF8;
 
 			Document doc = null;
 
@@ -104,21 +105,20 @@ public class GetArticleAction extends Action {
 
 				xml = JournalUtil.formatXML(doc);
 
-				contentType = Constants.TEXT_XML;
+				contentType = ContentTypes.TEXT_XML_UTF8;
 			}
 
 			String fileName = null;
 			byte[] byteArray = xml.getBytes();
 
-			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, contentType + "; charset=UTF-8");
+			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 
 			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

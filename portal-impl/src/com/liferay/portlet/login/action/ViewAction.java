@@ -31,10 +31,11 @@ import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.action.LoginAction;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.AuthException;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -109,7 +110,7 @@ public class ViewAction extends PortletAction {
 				else {
 					req.setAttribute(PageContext.EXCEPTION, e);
 
-					setForward(req, Constants.COMMON_ERROR);
+					setForward(req, ActionConstants.COMMON_ERROR);
 				}
 			}
 		}

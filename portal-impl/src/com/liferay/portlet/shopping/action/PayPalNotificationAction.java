@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.liferay.util.Http;
@@ -133,17 +133,17 @@ public class PayPalNotificationAction extends Action {
 			else if (payPalStatus.equals("INVALID")) {
 			}
 
-			return mapping.findForward(Constants.COMMON_NULL);
+			return mapping.findForward(ActionConstants.COMMON_NULL);
 		}
 		catch (NoSuchOrderException nsoe) {
 			_log.error("Order " + invoice + " does not exist");
 
-			return mapping.findForward(Constants.COMMON_NULL);
+			return mapping.findForward(ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
-			return mapping.findForward(Constants.COMMON_ERROR);
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

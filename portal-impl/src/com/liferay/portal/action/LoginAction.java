@@ -33,6 +33,8 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -40,9 +42,9 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -50,7 +52,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.XSSUtil;
@@ -346,7 +347,7 @@ public class LoginAction extends Action {
 				else {
 					req.setAttribute(PageContext.EXCEPTION, e);
 
-					return mapping.findForward(Constants.COMMON_ERROR);
+					return mapping.findForward(ActionConstants.COMMON_ERROR);
 				}
 			}
 		}
@@ -368,7 +369,7 @@ public class LoginAction extends Action {
 				else {
 					req.setAttribute(PageContext.EXCEPTION, e);
 
-					return mapping.findForward(Constants.COMMON_ERROR);
+					return mapping.findForward(ActionConstants.COMMON_ERROR);
 				}
 			}
 		}

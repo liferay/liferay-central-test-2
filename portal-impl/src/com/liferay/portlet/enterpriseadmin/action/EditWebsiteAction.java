@@ -25,10 +25,10 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchWebsiteException;
 import com.liferay.portal.WebsiteURLException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 

@@ -83,8 +83,6 @@ public class JSFPortletUtil {
 	}
 
 	public static PortletRequest getPortletRequest(FacesContext facesContext) {
-		PortletRequest portletRequest = null;
-
 		Object request = facesContext.getExternalContext().getRequest();
 
 		if (request == null) {

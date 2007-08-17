@@ -930,7 +930,7 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	private boolean _hasStaticPortletId(String portletId) {
+	/*private boolean _hasStaticPortletId(String portletId) {
 		LayoutTemplate layoutTemplate = getLayoutTemplate();
 
 		List columns = layoutTemplate.getColumns();
@@ -944,7 +944,7 @@ public class LayoutTypePortletImpl
 		}
 
 		return false;
-	}
+	}*/
 
 	private boolean _hasStaticPortletId(String columnId, String portletId) {
 		String[] staticPortletIdsStart = _getStaticPortletIds(

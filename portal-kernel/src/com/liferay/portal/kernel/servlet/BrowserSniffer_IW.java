@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.servlet;
 
 /**
  * <a href="BrowserSniffer_IW.java.html"><b><i>View Source</i></b></a>

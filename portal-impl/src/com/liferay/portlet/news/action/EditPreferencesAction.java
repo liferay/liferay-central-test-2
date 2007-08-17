@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.news.action;
 
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.news.model.Feed;
 import com.liferay.portlet.news.util.NewsUtil;
 import com.liferay.util.ParamUtil;

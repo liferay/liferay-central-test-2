@@ -23,12 +23,12 @@
 package com.liferay.portal.cms.servlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ExtPropertiesLoader;
@@ -139,7 +139,7 @@ public class CMSServlet extends HttpServlet {
 				}
 
 				String mimeType = ParamUtil.getString(
-					req, "mimeType", Constants.TEXT_HTML);
+					req, "mimeType", ContentTypes.TEXT_HTML_UTF8);
 
 				res.setContentType(mimeType);
 
