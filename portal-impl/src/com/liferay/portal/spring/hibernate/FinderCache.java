@@ -22,7 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.cache.MultiVMPool;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
@@ -35,8 +36,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.ehcache.Cache;
 
 import org.hibernate.Session;
 
@@ -60,7 +59,7 @@ public class FinderCache {
 	public static void clearCache(String className) {
 		String groupKey = _encodeGroupKey(className);
 
-		MultiVMPool.clearGroup(_groups, groupKey, _cache);
+		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
 	}
 
 	public static Object getResult(
@@ -68,7 +67,7 @@ public class FinderCache {
 
 		String key = _encodeKey(className, methodName, params, args);
 
-		Object primaryKey = MultiVMPool.get(_cache, key);
+		Object primaryKey = MultiVMPoolUtil.get(_cache, key);
 
 		if (primaryKey != null) {
 			Session session = null;
@@ -93,7 +92,7 @@ public class FinderCache {
 
 		String key = _encodeKey(sql, methodName, params, args);
 
-		Object primaryKey = MultiVMPool.get(_cache, key);
+		Object primaryKey = MultiVMPoolUtil.get(_cache, key);
 
 		if (primaryKey != null) {
 			Session session = null;
@@ -131,7 +130,7 @@ public class FinderCache {
 
 				String groupKey = _encodeGroupKey(className);
 
-				MultiVMPool.put(
+				MultiVMPoolUtil.put(
 					_cache, key, _groups, groupKey,
 					_resultToPrimaryKey(result));
 			}
@@ -167,10 +166,10 @@ public class FinderCache {
 
 				String groupKey = _encodeGroupKey(className);
 
-				MultiVMPool.updateGroup(_groups, groupKey, key);
+				MultiVMPoolUtil.updateGroup(_groups, groupKey, key);
 			}
 
-			MultiVMPool.put(_cache, key, _resultToPrimaryKey(result));
+			MultiVMPoolUtil.put(_cache, key, _resultToPrimaryKey(result));
 		}
 	}
 
@@ -275,7 +274,7 @@ public class FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
 
-	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
+	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
 	private static Map _groups = CollectionFactory.getSyncHashMap();
 

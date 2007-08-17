@@ -22,7 +22,8 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
-import com.liferay.portal.cache.MultiVMPool;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
@@ -30,8 +31,6 @@ import com.liferay.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
 import java.util.Map;
-
-import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,13 +47,13 @@ public class LayoutCacheUtil {
 	public static String CACHE_NAME = LayoutCacheUtil.class.getName();
 
 	public static void clearCache() {
-		MultiVMPool.clear(CACHE_NAME);
+		MultiVMPoolUtil.clear(CACHE_NAME);
 	}
 
 	public static void clearCache(long companyId) {
 		String groupKey = _encodeGroupKey(companyId);
 
-		MultiVMPool.clearGroup(_groups, groupKey, _cache);
+		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Cleared layout cache for " + companyId);
@@ -71,7 +70,7 @@ public class LayoutCacheUtil {
 		key = _encodeKey(companyId, key);
 
 		CacheResponseData data =
-			(CacheResponseData)MultiVMPool.get(_cache, key);
+			(CacheResponseData)MultiVMPoolUtil.get(_cache, key);
 
 		return data;
 	}
@@ -84,7 +83,7 @@ public class LayoutCacheUtil {
 
 			String groupKey = _encodeGroupKey(companyId);
 
-			MultiVMPool.put(_cache, key, _groups, groupKey, data);
+			MultiVMPoolUtil.put(_cache, key, _groups, groupKey, data);
 		}
 	}
 
@@ -112,7 +111,7 @@ public class LayoutCacheUtil {
 
 	private static Log _log = LogFactory.getLog(LayoutCacheUtil.class);
 
-	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
+	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
 	private static Map _groups = CollectionFactory.getSyncHashMap();
 

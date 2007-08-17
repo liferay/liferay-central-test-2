@@ -20,38 +20,54 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lastmodified;
+package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import java.io.Serializable;
+
+import java.util.Map;
 
 /**
- * <a href="LastModifiedJavaScript.java.html"><b><i>View Source</i></b></a>
+ * <a href="MultiVMPool.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class LastModifiedJavaScript {
+public interface MultiVMPool {
 
-	public static final String CACHE_NAME =
-		LastModifiedJavaScript.class.getName();
+	public void clear();
 
-	public static void clear() {
-		_cache.removeAll();
-	}
+	public void clear(String name);
 
-	public static String get(String key) {
-		return (String)SingleVMPoolUtil.get(_cache, key);
-	}
+	public void clearGroup(
+		Map groups, String groupKey, PortalCache portalCache);
 
-	public static void put(String key, String js) {
-		SingleVMPoolUtil.put(_cache, key, js);
-	}
+	public Object get(String name, String key);
 
-	public static void remove(String key) {
-		SingleVMPoolUtil.remove(_cache, key);
-	}
+	public Object get(PortalCache portalCache, String key);
 
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	public PortalCache getCache(String name);
+
+	public void put(String name, String key, Object obj);
+
+	public void put(PortalCache portalCache, String key, Object obj);
+
+	public void put(
+		PortalCache portalCache, String key, Map groups, String groupKey,
+		Object obj);
+
+	public void put(String name, String key, Serializable obj);
+
+	public void put(PortalCache portalCache, String key, Serializable obj);
+
+	public void put(
+		PortalCache portalCache, String key, Map groups, String groupKey,
+		Serializable obj);
+
+	public void remove(String name, String key);
+
+	public void remove(PortalCache portalCache, String key);
+
+	public void updateGroup(Map groups, String groupKey, String key);
 
 }

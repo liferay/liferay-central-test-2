@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.admin.action;
 
-import com.liferay.portal.cache.MultiVMPool;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
@@ -126,7 +126,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void cacheMulti() throws Exception {
-		MultiVMPool.clear();
+		MultiVMPoolUtil.clear();
 	}
 
 	protected void cacheSingle() throws Exception {

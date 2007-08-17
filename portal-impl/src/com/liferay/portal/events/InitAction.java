@@ -61,6 +61,8 @@ import org.apache.log4j.helpers.NullEnumeration;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -127,6 +129,10 @@ public class InitAction extends SimpleAction {
 			configureLog4J(
 				classLoader.getResource("META-INF/portal-log4j-ext.xml"));
 		}
+
+		// Bean locator
+
+		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 		// Java properties
 

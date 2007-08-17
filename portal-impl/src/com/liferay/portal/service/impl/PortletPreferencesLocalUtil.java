@@ -22,14 +22,13 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.cache.MultiVMPool;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
-
-import net.sf.ehcache.Cache;
 
 /**
  * <a href="PortletPreferencesLocalUtil.java.html"><b><i>View Source</i></b></a>
@@ -56,12 +55,12 @@ public class PortletPreferencesLocalUtil {
 	protected static Map getPreferencesPool(long ownerId, int ownerType) {
 		String key = _encodeKey(ownerId, ownerType);
 
-		Map prefsPool = (Map)MultiVMPool.get(_cache, key);
+		Map prefsPool = (Map)MultiVMPoolUtil.get(_cache, key);
 
 		if (prefsPool == null) {
 			prefsPool = CollectionFactory.getSyncHashMap();
 
-			MultiVMPool.put(_cache, key, prefsPool);
+			MultiVMPoolUtil.put(_cache, key, prefsPool);
 		}
 
 		return prefsPool;
@@ -79,6 +78,6 @@ public class PortletPreferencesLocalUtil {
 		return sm.toString();
 	}
 
-	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
+	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
 }

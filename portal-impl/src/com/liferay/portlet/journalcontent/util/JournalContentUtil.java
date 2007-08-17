@@ -22,7 +22,8 @@
 
 package com.liferay.portlet.journalcontent.util;
 
-import com.liferay.portal.cache.MultiVMPool;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -33,8 +34,6 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.util.Map;
-
-import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,7 +68,7 @@ public class JournalContentUtil {
 
 		String groupKey = _encodeGroupKey(groupId, articleId, templateId);
 
-		MultiVMPool.clearGroup(_groups, groupKey, _cache);
+		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
 	}
 
 	public static String getContent(
@@ -128,7 +127,7 @@ public class JournalContentUtil {
 		String key = _encodeKey(groupId, articleId, templateId, languageId);
 
 		JournalArticleDisplay articleDisplay =
-			(JournalArticleDisplay)MultiVMPool.get(_cache, key);
+			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
 
 		if (articleDisplay == null) {
 			articleDisplay = _getArticleDisplay(
@@ -139,7 +138,7 @@ public class JournalContentUtil {
 				String groupKey = _encodeGroupKey(
 					groupId, articleId, templateId);
 
-				MultiVMPool.put(_cache, key, _groups, groupKey, articleDisplay);
+				MultiVMPoolUtil.put(_cache, key, _groups, groupKey, articleDisplay);
 			}
 		}
 
@@ -195,7 +194,7 @@ public class JournalContentUtil {
 
 	private static Log _log = LogFactory.getLog(JournalContentUtil.class);
 
-	private static Cache _cache = MultiVMPool.getCache(CACHE_NAME);
+	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
 	private static Map _groups = CollectionFactory.getSyncHashMap();
 

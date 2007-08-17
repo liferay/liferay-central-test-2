@@ -20,38 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lastmodified;
+package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import java.io.Serializable;
 
 /**
- * <a href="LastModifiedJavaScript.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalCache.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LastModifiedJavaScript {
+public interface PortalCache {
 
-	public static final String CACHE_NAME =
-		LastModifiedJavaScript.class.getName();
+	public Object get(String key);
 
-	public static void clear() {
-		_cache.removeAll();
-	}
+	public void put(String key, Object obj);
 
-	public static String get(String key) {
-		return (String)SingleVMPoolUtil.get(_cache, key);
-	}
+	public void put(String key, Object obj, int timeToLive);
 
-	public static void put(String key, String js) {
-		SingleVMPoolUtil.put(_cache, key, js);
-	}
+	public void put(String key, Serializable obj);
 
-	public static void remove(String key) {
-		SingleVMPoolUtil.remove(_cache, key);
-	}
+	public void put(String key, Serializable obj, int timeToLive);
 
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	public void remove(String key);
+
+	public void removeAll();
 
 }

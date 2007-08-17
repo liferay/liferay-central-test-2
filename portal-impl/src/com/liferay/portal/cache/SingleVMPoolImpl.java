@@ -22,8 +22,9 @@
 
 package com.liferay.portal.cache;
 
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.util.PropsUtil;
-
+import com.liferay.portal.kernel.cache.SingleVMPool;
 import java.io.Serializable;
 
 import java.net.URL;
@@ -33,32 +34,32 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 /**
- * <a href="SingleVMPool.java.html"><b><i>View Source</i></b></a>
+ * <a href="SingleVMPoolImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Michael Young
  *
  */
-public class SingleVMPool {
+public class SingleVMPoolImpl implements SingleVMPool {
 
-	public static void clear() {
-		_instance._cacheManager.clearAll();
+	public void clear() {
+		_cacheManager.clearAll();
 	}
 
-	public static void clear(String name) {
-		Cache cache = getCache(name);
+	public void clear(String name) {
+		PortalCache portalCache = getCache(name);
 
-		cache.removeAll();
+		portalCache.removeAll();
 	}
 
-	public static Object get(String name, String key) {
-		Cache cache = getCache(name);
+	public Object get(String name, String key) {
+		PortalCache portalCache = getCache(name);
 
-		return get(cache, key);
+		return get(portalCache, key);
 	}
 
-	public static Object get(Cache cache, String key) {
-		Element element = cache.get(key);
+	public Object get(PortalCache portalCache, String key) {
+		Element element = (Element)portalCache.get(key);
 
 		if (element == null) {
 			return null;
@@ -68,52 +69,49 @@ public class SingleVMPool {
 		}
 	}
 
-	public static Cache getCache(String name) {
-		Cache cache = _instance._cacheManager.getCache(name);
+	public PortalCache getCache(String name) {
+		Cache cache = _cacheManager.getCache(name);
 
 		if (cache == null) {
-			_instance._cacheManager.addCache(name);
+			_cacheManager.addCache(name);
 
-			cache = _instance._cacheManager.getCache(name);
+			cache = _cacheManager.getCache(name);
 		}
-		return cache;
+
+		return new PortalCacheImpl(cache);
 	}
 
-	public static void put(String name, String key, Object object) {
-		Cache cache = getCache(name);
+	public void put(String name, String key, Object obj) {
+		PortalCache portalCache = getCache(name);
 
-		put(cache, key, object);
+		put(portalCache, key, obj);
 	}
 
-	public static void put(Cache cache, String key, Object object) {
-		Element element = new Element(key, object);
-
-		cache.put(element);
+	public void put(PortalCache portalCache, String key, Object obj) {
+		portalCache.put(key, obj);
 	}
 
-	public static void put(String name, String key, Serializable object) {
-		Cache cache = getCache(name);
+	public void put(String name, String key, Serializable obj) {
+		PortalCache portalCache = getCache(name);
 
-		put(cache, key, object);
+		put(portalCache, key, obj);
 	}
 
-	public static void put(Cache cache, String key, Serializable object) {
-		Element element = new Element(key, object);
-
-		cache.put(element);
+	public void put(PortalCache portalCache, String key, Serializable obj) {
+		portalCache.put(key, obj);
 	}
 
-	public static void remove(String name, String key) {
-		Cache cache = getCache(name);
+	public void remove(String name, String key) {
+		PortalCache portalCache = getCache(name);
 
-		remove(cache, key);
+		remove(portalCache, key);
 	}
 
-	public static void remove(Cache cache, String key) {
-		cache.remove(key);
+	public void remove(PortalCache portalCache, String key) {
+		portalCache.remove(key);
 	}
 
-	private SingleVMPool() {
+	private SingleVMPoolImpl() {
 		String configLocation = PropsUtil.get(
 			PropsUtil.EHCACHE_SINGLE_VM_CONFIG_LOCATION);
 
@@ -121,8 +119,6 @@ public class SingleVMPool {
 
 		_cacheManager = new CacheManager(url);
 	}
-
-	private static SingleVMPool _instance = new SingleVMPool();
 
 	private CacheManager _cacheManager;
 

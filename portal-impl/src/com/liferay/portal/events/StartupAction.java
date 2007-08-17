@@ -24,8 +24,8 @@ package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.cache.MultiVMPool;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
@@ -58,10 +58,6 @@ public class StartupAction extends SimpleAction {
 			// Print release information
 
 			System.out.println("Starting " + ReleaseInfo.getReleaseInfo());
-
-			// Bean locator
-
-			BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 			// Clear locks
 
@@ -157,7 +153,7 @@ public class StartupAction extends SimpleAction {
 
 			CacheRegistry.setActive(true);
 
-			MultiVMPool.clear();
+			MultiVMPoolUtil.clear();
 
 			// Verify
 

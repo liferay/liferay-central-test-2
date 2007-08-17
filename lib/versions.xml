@@ -1619,6 +1619,18 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/retroweaver.jar</file-name>
+		<version>2.0</version>
+		<project-name>Retroweaver</project-name>
+		<project-url>http://retroweaver.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+				<copyright-notice>Copyright (c) 2004-2006, Toby Reyelts, Xavier Le Vourch. All rights reserved.</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/rome.jar</file-name>
 		<version>0.9</version>
 		<project-name>ROME</project-name>
@@ -1631,9 +1643,7 @@
 		</licenses>
 	</library>
 	<library>
-		<!-- Note: Filename from Sun download is saaj-api.jar and not saaj.jar -->
 		<file-name>portal/saaj.jar</file-name>
-		<!-- Note: The date of the files inside the downloaded saaj-api.jar are 3/29/2006 and not 4/22/2006 like the saaj.jar that ships with Liferay -->
 		<version>1.3</version>
 		<project-name>JSR 67 Java APIs for XML Messaging 1.0 / SOAP with Attachments API for Java (SAAJ)</project-name>
 		<project-url>https://saaj.dev.java.net/</project-url>
@@ -1749,10 +1759,6 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-			</license>
-			<license>
-				<bundled-project-name>ANTLR</bundled-project-name>
-				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>

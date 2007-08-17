@@ -22,6 +22,8 @@
 
 package com.liferay.portal.cache;
 
+import com.liferay.portal.kernel.cache.MultiVMPool;
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -37,25 +39,27 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 /**
- * <a href="MultiVMPool.java.html"><b><i>View Source</i></b></a>
+ * <a href="MultiVMPoolImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Michael Young
  *
  */
-public class MultiVMPool {
+public class MultiVMPoolImpl implements MultiVMPool {
 
-	public static void clear() {
-		_instance._cacheManager.clearAll();
+	public void clear() {
+		_cacheManager.clearAll();
 	}
 
-	public static void clear(String name) {
-		Cache cache = getCache(name);
+	public void clear(String name) {
+		PortalCache portalCache = getCache(name);
 
-		cache.removeAll();
+		portalCache.removeAll();
 	}
 
-	public static void clearGroup(Map groups, String groupKey, Cache cache) {
+	public void clearGroup(
+		Map groups, String groupKey, PortalCache portalCache) {
+
 		if (!groups.containsKey(groupKey)) {
 			return;
 		}
@@ -72,20 +76,20 @@ public class MultiVMPool {
 			// will be cleared when the group itself is cleared, resulting in a
 			// performance boost.
 
-			cache.remove(key);
+			portalCache.remove(key);
 		}
 
 		groupKeys.clear();
 	}
 
-	public static Object get(String name, String key) {
-		Cache cache = getCache(name);
+	public Object get(String name, String key) {
+		PortalCache portalCache = getCache(name);
 
-		return get(cache, key);
+		return get(portalCache, key);
 	}
 
-	public static Object get(Cache cache, String key) {
-		Element element = cache.get(key);
+	public Object get(PortalCache portalCache, String key) {
+		Element element = (Element)portalCache.get(key);
 
 		if (element == null) {
 			return null;
@@ -95,69 +99,67 @@ public class MultiVMPool {
 		}
 	}
 
-	public static Cache getCache(String name) {
-		Cache cache = _instance._cacheManager.getCache(name);
+	public PortalCache getCache(String name) {
+		Cache cache = _cacheManager.getCache(name);
 
 		if (cache == null) {
-			_instance._cacheManager.addCache(name);
+			_cacheManager.addCache(name);
 
-			cache = _instance._cacheManager.getCache(name);
+			cache = _cacheManager.getCache(name);
 		}
-		return cache;
+
+		return new PortalCacheImpl(cache);
 	}
 
-	public static void put(String name, String key, Object object) {
-		Cache cache = getCache(name);
+	public void put(String name, String key, Object obj) {
+		PortalCache portalCache = getCache(name);
 
-		put(cache, key, object);
+		put(portalCache, key, obj);
 	}
 
-	public static void put(Cache cache, String key, Object object) {
-		Element element = new Element(key, object);
-
-		cache.put(element);
+	public void put(PortalCache portalCache, String key, Object obj) {
+		portalCache.put(key, obj);
 	}
 
-	public static void put(
-		Cache cache, String key, Map groups, String groupKey, Object object) {
+	public void put(
+		PortalCache portalCache, String key, Map groups, String groupKey,
+		Object obj) {
 
-		put(cache, key, object);
+		put(portalCache, key, obj);
 
 		updateGroup(groups, groupKey, key);
 	}
 
-	public static void put(String name, String key, Serializable object) {
-		Cache cache = getCache(name);
+	public void put(String name, String key, Serializable obj) {
+		PortalCache portalCache = getCache(name);
 
-		put(cache, key, object);
+		put(portalCache, key, obj);
 	}
 
-	public static void put(Cache cache, String key, Serializable object) {
-		Element element = new Element(key, object);
-
-		cache.put(element);
+	public void put(PortalCache portalCache, String key, Serializable obj) {
+		portalCache.put(key, obj);
 	}
 
-	public static void put(
-		Cache cache, String key, Map groups, String groupKey,
-		Serializable object) {
+	public void put(
+		PortalCache portalCache, String key, Map groups, String groupKey,
+		Serializable obj) {
 
-		put(cache, key, object);
+		put(portalCache, key, obj);
 
 		updateGroup(groups, groupKey, key);
 	}
 
-	public static void remove(String name, String key) {
-		Cache cache = getCache(name);
+	public void remove(String name, String key) {
+		PortalCache portalCache = getCache(name);
 
-		remove(cache, key);
+		remove(portalCache, key);
 	}
 
-	public static void remove(Cache cache, String key) {
-		cache.remove(key);
+	public void remove(PortalCache portalCache, String key) {
+		portalCache.remove(key);
 	}
 
-	public static void updateGroup(Map groups, String groupKey, String key) {
+	public void updateGroup(Map groups, String groupKey, String key) {
 		Set groupKeys = null;
 
 		if (groups.containsKey(groupKey)) {
@@ -172,7 +174,7 @@ public class MultiVMPool {
 		groupKeys.add(key);
 	}
 
-	private MultiVMPool() {
+	private MultiVMPoolImpl() {
 		String configLocation = PropsUtil.get(
 			PropsUtil.EHCACHE_MULTI_VM_CONFIG_LOCATION);
 
@@ -180,8 +182,6 @@ public class MultiVMPool {
 
 		_cacheManager = new CacheManager(url);
 	}
-
-	private static MultiVMPool _instance = new MultiVMPool();
 
 	private CacheManager _cacheManager;
 

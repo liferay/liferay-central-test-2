@@ -2,6 +2,18 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil" lazy-init="true">
+		<property name="multiVMPool">
+			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.cache.SingleVMPoolImpl" class="com.liferay.portal.cache.SingleVMPoolImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil" lazy-init="true">
+		<property name="singleVMPool">
+			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.language.LanguageImpl" class="com.liferay.portal.language.LanguageImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil" lazy-init="true">
 		<property name="language">

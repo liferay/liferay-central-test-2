@@ -22,9 +22,8 @@
 
 package com.liferay.portal.lastmodified;
 
-import com.liferay.portal.cache.SingleVMPool;
-
-import net.sf.ehcache.Cache;
+import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 
 /**
  * <a href="LastModifiedCSS.java.html"><b><i>View Source</i></b></a>
@@ -41,17 +40,17 @@ public class LastModifiedCSS {
 	}
 
 	public static String get(String key) {
-		return (String)SingleVMPool.get(_cache, key);
+		return (String)SingleVMPoolUtil.get(_cache, key);
 	}
 
 	public static void put(String key, String css) {
-		SingleVMPool.put(_cache, key, css);
+		SingleVMPoolUtil.put(_cache, key, css);
 	}
 
 	public static void remove(String key) {
-		SingleVMPool.remove(_cache, key);
+		SingleVMPoolUtil.remove(_cache, key);
 	}
 
-	private static Cache _cache = SingleVMPool.getCache(CACHE_NAME);
+	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
 
 }

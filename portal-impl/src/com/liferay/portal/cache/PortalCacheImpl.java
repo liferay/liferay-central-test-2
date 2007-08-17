@@ -20,38 +20,67 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lastmodified;
+package com.liferay.portal.cache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+
+import java.io.Serializable;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 /**
- * <a href="LastModifiedJavaScript.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalCacheImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LastModifiedJavaScript {
+public class PortalCacheImpl implements PortalCache {
 
-	public static final String CACHE_NAME =
-		LastModifiedJavaScript.class.getName();
+	public PortalCacheImpl(Cache cache) {
+		_cache = cache;
+	}
 
-	public static void clear() {
+	public Object get(String key) {
+		return _cache.get(key);
+	}
+
+	public void put(String key, Object obj) {
+		Element element = new Element(key, obj);
+
+		_cache.put(element);
+	}
+
+	public void put(String key, Object obj, int timeToLive) {
+		Element element = new Element(key, obj);
+
+		element.setTimeToLive(timeToLive);
+
+		_cache.put(element);
+	}
+
+	public void put(String key, Serializable obj) {
+		Element element = new Element(key, obj);
+
+		_cache.put(element);
+	}
+
+	public void put(String key, Serializable obj, int timeToLive) {
+		Element element = new Element(key, obj);
+
+		element.setTimeToLive(timeToLive);
+
+		_cache.put(element);
+	}
+
+	public void remove(String key) {
+		_cache.remove(key);
+	}
+
+	public void removeAll() {
 		_cache.removeAll();
 	}
 
-	public static String get(String key) {
-		return (String)SingleVMPoolUtil.get(_cache, key);
-	}
-
-	public static void put(String key, String js) {
-		SingleVMPoolUtil.put(_cache, key, js);
-	}
-
-	public static void remove(String key) {
-		SingleVMPoolUtil.remove(_cache, key);
-	}
-
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	private Cache _cache;
 
 }

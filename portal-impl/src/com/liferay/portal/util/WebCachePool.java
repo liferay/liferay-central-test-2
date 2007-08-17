@@ -22,12 +22,10 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.cache.SingleVMPool;
+import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Time;
-
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,17 +45,15 @@ public class WebCachePool {
 	}
 
 	public static Object get(String key, WebCacheable wc) {
-		Object obj = SingleVMPool.get(_cache, key);
+		Object obj = SingleVMPoolUtil.get(_cache, key);
 
 		if (obj == null) {
 			try {
 				obj = wc.convert(key);
 
-				Element element = new Element(key, obj);
+				int timeToLive = (int)(wc.getRefreshTime() / Time.SECOND);
 
-				element.setTimeToLive((int)(wc.getRefreshTime() / Time.SECOND));
-
-				_cache.put(element);
+				_cache.put(key, obj, timeToLive);
 			}
 			catch (ConverterException ce) {
 				_log.error(ce.getMessage());
@@ -68,11 +64,11 @@ public class WebCachePool {
 	}
 
 	public static void remove(String key) {
-		SingleVMPool.remove(_cache, key);
+		SingleVMPoolUtil.remove(_cache, key);
 	}
 
 	private static Log _log = LogFactory.getLog(WebCachePool.class);
 
-	private static Cache _cache = SingleVMPool.getCache(CACHE_NAME);
+	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
 
 }
