@@ -13926,6 +13926,70 @@ if (jQuery.browser.msie) {
 		};
 	});
 }
+Liferay.Packages = {
+	_importCache: {},
+	init: function() {
+		var instance = this;
+		
+		var pathRE = /\/html\/js\/(.+)\.js/gim;
+		var scripts = jQuery('script');
+		var path;
+		console.log(scripts.length);
+		scripts.each(
+			function(i) {
+				path = this.src;
+				if (path) {
+					var matches = pathRE.exec(path);
+					if (matches && matches[1]) {
+						instance._importCache[matches[1]] = i;
+					}
+				}
+			}
+		);
+	}
+};
+
+Liferay.loadScript = function(packages, callback, noCache) {
+		if (!Liferay.Util.isArray(packages)) {
+			packages = packages.split(',');
+		}
+		var cache = Liferay.Packages._importCache;
+		var script, path;
+		
+		for (var i = 0; i < packages.length; i++) {
+
+			if (cache[packages[i]] == null || noCache) {
+				var callbackWrapper = function() {
+					callback();	
+				}
+				path = '/html/js/' + packages[i] + '.js';
+				if (noCache) {
+					jQuery('script[@src=' + path + ']').remove();
+				}
+				var script = jQuery('<script src="' + path + '" type="text/javascript"></script>');
+				script.load(callback);
+				script.appendTo('head');
+				Liferay.Packages._importCache[packages[i]] = i;
+			}
+			else {
+				(function() {
+					callback();
+				})();
+			}
+		}
+};
+jQuery(
+	function() {
+		Liferay.Packages.init();
+		var anchor = jQuery('<a href="javascript: ;">Load a new script</a>');
+		anchor.click(function() {
+				Liferay.loadScript('ext/examples/dialog/hello', function() {
+						console.log(Ext, Liferay, 'this is a test');
+					});
+			});
+		anchor.prependTo('body');
+	}
+);
 Liferay.Util = {
 	submitCountdown: 0,
 
@@ -15757,28 +15821,32 @@ jQuery.fn.xySize = function() {
 			var settings = this.dragSettings;
 			var container = settings.container;
 			var jContainer = $(settings.container);
+			if (!container._LFR_noDrag) {
+				$.lDrag.container = container;
+	
+				var nwOffset = jContainer.northwestOffset(true);
+				var seOffset = nwOffset.plus(jContainer.xySize());
+	
+				settings.originalZIndex = container.style.zIndex;
+	
+				// Offset of the mouse relative to the dragging container
+				// This should remain constant.
+				settings.mouseNwOffset = mousePos.minus(nwOffset);
+				settings.mouseSeOffset = mousePos.minus(seOffset);
+				settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
+	
+				$.lDrag._processListeners(settings, "start");
+	
+				$.lDrag._setConstraint(settings);
 
-			$.lDrag.container = container;
-
-			var nwOffset = jContainer.northwestOffset(true);
-			var seOffset = nwOffset.plus(jContainer.xySize());
-
-			settings.originalZIndex = container.style.zIndex;
-
-			// Offset of the mouse relative to the dragging container
-			// This should remain constant.
-			settings.mouseNwOffset = mousePos.minus(nwOffset);
-			settings.mouseSeOffset = mousePos.minus(seOffset);
-			settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
-
-			$.lDrag._processListeners(settings, "start");
-
-			$.lDrag._setConstraint(settings);
-
-			jQuery(document).mousemove($.lDrag.onMouseMove);
-			jQuery(document).mouseup($.lDrag.onMouseUp);
-
-			return false;
+				jQuery(document).mousemove($.lDrag.onMouseMove);
+				jQuery(document).mouseup($.lDrag.onMouseUp);
+			
+				return false;
+			}
+			else {
+				return;
+			}
 		},
 
 		onMouseMove: function(event) {

@@ -150,28 +150,32 @@
 			var settings = this.dragSettings;
 			var container = settings.container;
 			var jContainer = $(settings.container);
+			if (!container._LFR_noDrag) {
+				$.lDrag.container = container;
+	
+				var nwOffset = jContainer.northwestOffset(true);
+				var seOffset = nwOffset.plus(jContainer.xySize());
+	
+				settings.originalZIndex = container.style.zIndex;
+	
+				// Offset of the mouse relative to the dragging container
+				// This should remain constant.
+				settings.mouseNwOffset = mousePos.minus(nwOffset);
+				settings.mouseSeOffset = mousePos.minus(seOffset);
+				settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
+	
+				$.lDrag._processListeners(settings, "start");
+	
+				$.lDrag._setConstraint(settings);
 
-			$.lDrag.container = container;
-
-			var nwOffset = jContainer.northwestOffset(true);
-			var seOffset = nwOffset.plus(jContainer.xySize());
-
-			settings.originalZIndex = container.style.zIndex;
-
-			// Offset of the mouse relative to the dragging container
-			// This should remain constant.
-			settings.mouseNwOffset = mousePos.minus(nwOffset);
-			settings.mouseSeOffset = mousePos.minus(seOffset);
-			settings.mouseStart = new Coordinate(mousePos.x, mousePos.y);
-
-			$.lDrag._processListeners(settings, "start");
-
-			$.lDrag._setConstraint(settings);
-
-			jQuery(document).mousemove($.lDrag.onMouseMove);
-			jQuery(document).mouseup($.lDrag.onMouseUp);
-
-			return false;
+				jQuery(document).mousemove($.lDrag.onMouseMove);
+				jQuery(document).mouseup($.lDrag.onMouseUp);
+			
+				return false;
+			}
+			else {
+				return;
+			}
 		},
 
 		onMouseMove: function(event) {

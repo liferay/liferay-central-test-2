@@ -419,7 +419,7 @@ Liferay.Util = {
 							}
 						);
 					}
-
+					obj[0]._LFR_noDrag = null;
 					return cruft + value;
 				},
 				{
@@ -436,6 +436,7 @@ Liferay.Util = {
 
 						value = value.replace(re, '');
 						settings._LFR_.oldText = value;
+						obj[0]._LFR_noDrag = true;
 
 						return value;
 					},
