@@ -2739,6 +2739,7 @@ update-search-index=갱신 수색 색인
 update-the-styles-on-this-page=이 페이지에 작풍을 새롭게 하십시요.
 update=갱신
 updated=개정하는
+updates-are-available-for-liferay=갱신은Liferay을 위해 유효하다. 이 갱신을 설치하기 위하여 여기 누르십시요.
 updates-available=유효한 갱신
 upload-a-background-image=후면 이미지를 올려주기하십시요
 upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide=Upload a GIF or JPEG that is {0} pixels tall and {1} pixels wide.
