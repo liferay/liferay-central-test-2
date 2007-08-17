@@ -20,11 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.games.action;
+package com.liferay.portlet.iframe.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionMessages;
@@ -36,21 +37,16 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -59,31 +55,66 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String hangmanWordList = ParamUtil.getString(req, "hangmanWordList");
+		String src = ParamUtil.getString(req, "src");
 
-		hangmanWordList = hangmanWordList.toLowerCase();
-		hangmanWordList = StringUtil.replace(hangmanWordList, "\r", " ");
-		hangmanWordList = StringUtil.replace(hangmanWordList, "\n", " ");
-		hangmanWordList = StringUtil.replace(hangmanWordList, "\t", " ");
+		if (!src.startsWith("/") &&
+			!StringUtil.startsWith(src, "http://") &&
+			!StringUtil.startsWith(src, "https://") &&
+			!StringUtil.startsWith(src, "mhtml://")) {
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+			src = Http.getProtocol(req) + "://" + src;
+		}
+
+		boolean relative = ParamUtil.getBoolean(req, "relative");
+
+		boolean auth = ParamUtil.getBoolean(req, "auth");
+		String authType = ParamUtil.getString(req, "authType");
+		String formMethod = ParamUtil.getString(req, "formMethod");
+		String userName = ParamUtil.getString(req, "userName");
+		String password = ParamUtil.getString(req, "password");
+		String hiddenVariables = ParamUtil.getString(req, "hiddenVariables");
+
+		String[] htmlAttributes = StringUtil.split(ParamUtil.getString(
+			req, "htmlAttributes"), "\n");
+
+		String portletResource = ParamUtil.getString(
+			req, "portletResource");
 
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("hangman-word-list", hangmanWordList);
+		prefs.setValue("src", src);
+		prefs.setValue("relative", String.valueOf(relative));
+
+		prefs.setValue("auth", String.valueOf(auth));
+		prefs.setValue("auth-type", authType);
+		prefs.setValue("form-method", formMethod);
+		prefs.setValue("user-name", userName);
+		prefs.setValue("password", password);
+		prefs.setValue("hidden-variables", hiddenVariables);
+
+		for (int i = 0; i < htmlAttributes.length; i++) {
+			int pos = htmlAttributes[i].indexOf("=");
+
+			if (pos != -1) {
+				String key = htmlAttributes[i].substring(0, pos);
+				String value = htmlAttributes[i].substring(
+					pos + 1, htmlAttributes[i].length());
+
+				prefs.setValue(key, value);
+			}
+		}
 
 		prefs.store();
 
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.games.edit_configuration");
+		return "/html/portlet/iframe/edit_configuration.jsp";
 	}
 
 }

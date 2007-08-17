@@ -47,10 +47,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		_portletResponse = portletResponse;
 
 		if (_portletResponse instanceof ActionResponse) {
-			_isAction = true;
+			_action = true;
 		}
 		else {
-			_isAction = false;
+			_action = false;
 		}
 	}
 
@@ -67,49 +67,49 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public String encodeURL(String path) {
-		if (_isAction == false) {
+		if (_action) {
+			throw new UnsupportedOperationException();
+		}
+		else {
 			RenderResponse res = (RenderResponse)_portletResponse;
 
 			return res.encodeURL(path);
 		}
-		else {
-			throw new UnsupportedOperationException();
-		}
 	}
 
 	public Locale getLocale() {
-		if (_isAction == false) {
+		if (_action) {
+			return null;
+		}
+		else {
 			RenderResponse res = (RenderResponse)_portletResponse;
 
 			return res.getLocale();
 		}
-		else {
-			return null;
-		}
 	}
 	public int getBufferSize() {
-		if (_isAction == false) {
+		if (_action) {
+			return 0;
+		}
+		else {
 			RenderResponse res = (RenderResponse)_portletResponse;
 
 			return res.getBufferSize();
 		}
-		else {
-			return 0;
-		}
 	}
 
 	public boolean isCommitted() {
-		if (_isAction == false) {
+		if (_action) {
+			return false;
+		}
+		else {
 			RenderResponse res = (RenderResponse)_portletResponse;
 
 			return res.isCommitted();
 		}
-		else {
-			return false;
-		}
 	}
 
 	private PortletResponse _portletResponse;
-	private boolean _isAction;
+	private boolean _action;
 
 }

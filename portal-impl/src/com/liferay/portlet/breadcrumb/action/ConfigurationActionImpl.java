@@ -20,16 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wikidisplay.action;
+package com.liferay.portlet.breadcrumb.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
@@ -39,58 +35,43 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			if (!cmd.equals(Constants.UPDATE)) {
-				return;
-			}
-
-			long nodeId = ParamUtil.getLong(req, "nodeId");
-
-			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
-
-			String portletResource = ParamUtil.getString(
-				req, "portletResource");
-
-			PortletPreferences prefs =
-				PortletPreferencesFactory.getPortletSetup(
-					req, portletResource, true, true);
-
-			prefs.setValue("node-id", String.valueOf(node.getNodeId()));
-
-			prefs.store();
-
-			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
 		}
-		catch (NoSuchNodeException nsne) {
-			SessionErrors.add(req, nsne.getClass().getName());
-		}
+
+		String displayStyle = ParamUtil.getString(req, "displayStyle");
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, true, true);
+
+		prefs.setValue("display-style", displayStyle);
+
+		prefs.store();
+
+		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.wiki_display.edit_configuration");
+		return "/html/portlet/breadcrumb/edit_configuration.jsp";
 	}
 
 }

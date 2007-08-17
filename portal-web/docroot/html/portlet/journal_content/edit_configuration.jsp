@@ -216,7 +216,7 @@ OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(se
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 %>
 
-<%@ include file="/html/portlet/journal/article_search_results.jsp" %>
+<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
 <%
 List resultRows = searchContainer.getResultRows();

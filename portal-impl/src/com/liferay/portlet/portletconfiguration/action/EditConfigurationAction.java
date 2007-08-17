@@ -22,19 +22,23 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.struts.DynamicPortletAction;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
@@ -42,6 +46,8 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -52,7 +58,31 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends DynamicPortletAction {
+public class EditConfigurationAction extends PortletAction {
+
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		Portlet portlet = null;
+
+		try {
+			portlet = getPortlet(req);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
+		}
+
+		ConfigurationAction configurationAction = getConfigurationAction(
+			portlet);
+
+		if (configurationAction != null) {
+			configurationAction.processAction(config, req, res);
+		}
+	}
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -79,13 +109,41 @@ public class EditConfigurationAction extends DynamicPortletAction {
 		res.setTitle(
 			PortalUtil.getPortletTitle(portlet, ctx, themeDisplay.getLocale()));
 
-		return super.render(mapping, form, config, req, res);
+		ConfigurationAction configurationAction = getConfigurationAction(
+			portlet);
+
+		if (configurationAction != null) {
+			String path = configurationAction.render(config, req, res);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Configuration action returned render path " + path);
+			}
+
+			if (Validator.isNotNull(path)) {
+				req.setAttribute(WebKeys.CONFIGURATION_ACTION_PATH, path);
+			}
+			else {
+				_log.error("Configuration action returned a null path");
+			}
+		}
+
+		return mapping.findForward(getForward(
+			req, "portlet.portlet_configuration.edit_configuration"));
 	}
 
-	protected String getPath(PortletRequest req) throws Exception {
-		Portlet portlet = getPortlet(req);
+	protected ConfigurationAction getConfigurationAction(Portlet portlet)
+		throws Exception {
 
-		return portlet.getConfigurationPath();
+		ConfigurationAction configurationAction =
+			portlet.getConfigurationActionInstance();
+
+		if (configurationAction == null) {
+			_log.error(
+				"Configuration action for portlet " + portlet.getPortletId() +
+					" is null");
+		}
+
+		return configurationAction;
 	}
 
 	protected Portlet getPortlet(PortletRequest req) throws Exception {
@@ -108,5 +166,7 @@ public class EditConfigurationAction extends DynamicPortletAction {
 
 		return PortletLocalServiceUtil.getPortletById(companyId, portletId);
 	}
+
+	private static Log _log = LogFactory.getLog(EditConfigurationAction.class);
 
 }

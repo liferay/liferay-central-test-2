@@ -1027,7 +1027,7 @@ public class PortalUtil {
 			PortletContextWrapper pcw =
 				PortletContextPool.get(portlet.getRootPortletId());
 
-			return pcw.getPreferencesValidator();
+			return pcw.getPreferencesValidatorInstance();
 		}
 		else {
 			PreferencesValidator prefsValidator = null;

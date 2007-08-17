@@ -385,7 +385,7 @@ public class PortalInstances {
 				Portlet portlet = (Portlet)itr.next();
 
 				MessageListener smtpMessageListener =
-					portlet.getSmtpMessageListener();
+					portlet.getSmtpMessageListenerInstance();
 
 				if (portlet.isActive() && (smtpMessageListener != null)) {
 					SMTPServerUtil.addListener(smtpMessageListener);

@@ -20,41 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.xslcontent.action;
+package com.liferay.portlet.googlemaps.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.xslcontent.util.XSLContentUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Mark Wong
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -63,57 +55,47 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		URL xmlURL = null;
-
-		try {
-			xmlURL = new URL(ParamUtil.getString(req, "xmlURL"));
-		}
-		catch (MalformedURLException murle) {
-			SessionErrors.add(req, "xmlURL");
-
-			return;
-		}
-
-		URL xslURL = null;
-
-		try {
-			xslURL = new URL(ParamUtil.getString(req, "xslURL"));
-		}
-		catch (MalformedURLException murle) {
-			SessionErrors.add(req, "xslURL");
-
-			return;
-		}
-
-		try {
-			XSLContentUtil.transform(xmlURL, xslURL);
-		}
-		catch (Exception e) {
-			SessionErrors.add(req, "transformation");
-
-			return;
-		}
+		String mapAddress = ParamUtil.getString(req, "mapAddress");
+		boolean mapInputEnabled = ParamUtil.getBoolean(req, "mapInputEnabled");
+		String directionsAddress = ParamUtil.getString(
+			req, "directionsAddress");
+		boolean directionsInputEnabled = ParamUtil.getBoolean(
+			req, "directionsInputEnabled");
+		String height = ParamUtil.getString(req, "height");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactory.getPortletSetup(
-				req, portletResource, true, true);
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, true, true);
 
-		prefs.setValue("xml-url", xmlURL.toString());
-		prefs.setValue("xsl-url", xslURL.toString());
+		prefs.setValue("map-address", mapAddress);
+		prefs.setValue("map-input-enabled", String.valueOf(mapInputEnabled));
+		prefs.setValue("directions-address", directionsAddress);
+		prefs.setValue(
+			"directions-input-enabled", String.valueOf(directionsInputEnabled));
+		prefs.setValue("height", height);
 
 		prefs.store();
+
+		PortletSession ses = req.getPortletSession();
+
+		ses.removeAttribute(
+			PortalUtil.getPortletNamespace(portletResource) + "mapAddress",
+			PortletSession.APPLICATION_SCOPE);
+
+		ses.removeAttribute(
+			PortalUtil.getPortletNamespace(portletResource) +
+				"directionsAddress",
+			PortletSession.APPLICATION_SCOPE);
 
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.xsl_content.edit_configuration");
+		return "/html/portlet/google_maps/edit_configuration.jsp";
 	}
 
 }

@@ -226,7 +226,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			PortletServletResponse portletServletRes =
 				new PortletServletResponse(httpRes, resImpl);
 
-			URLEncoder urlEncoder = _portlet.getURLEncoder();
+			URLEncoder urlEncoder = _portlet.getURLEncoderInstance();
 
 			if (urlEncoder != null) {
 				resImpl.setURLEncoder(urlEncoder);

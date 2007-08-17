@@ -30,7 +30,7 @@ String installStatus = ParamUtil.getString(request, "installStatus", PluginPacka
 %>
 
 <liferay-ui:tabs
-	names="portlet-packages,theme-packages,layout-template-packages"
+	names="portlet-plugins,theme-plugins,layout-template-plugins"
 	tabsValues="portlets,themes,layout-templates"
 	param="tabs2"
 	url="<%= portletURLString %>"
@@ -110,7 +110,7 @@ try {
 
 	<br />
 
-	<input type="submit" value="<liferay-ui:message key="search-packages" />" />
+	<input type="submit" value="<liferay-ui:message key="search-plugins" />" />
 
 	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 		<script type="text/javascript">
@@ -125,12 +125,12 @@ try {
 	<%
 	List headerNames = new ArrayList();
 
-	headerNames.add(pluginType + "-package");
+	headerNames.add(pluginType + "-plugin");
 	headerNames.add("tags");
 	headerNames.add("installed-version");
 	headerNames.add("available-version");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-packages-were-found"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-plugins-were-found"));
 
 	Hits hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus);
 
@@ -255,7 +255,7 @@ catch (PluginPackageException ppe) {
 %>
 
 	<span class="portlet-msg-error">
-	<liferay-ui:message key="error-obtaining-available-plugins" />
+	<liferay-ui:message key="an-error-occurred-while-retrieving-available-plugins" />
 	</span>
 
 <%

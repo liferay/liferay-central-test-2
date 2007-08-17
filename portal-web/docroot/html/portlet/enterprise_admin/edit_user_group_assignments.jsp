@@ -103,7 +103,7 @@ if (tabs2.equals("current")) {
 }
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/user_search_results.jsp" %>
+<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
 <div class="separator"><!-- --></div>
 

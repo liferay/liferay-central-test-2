@@ -24,10 +24,14 @@
 
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
-<tiles:useAttribute id="tilesPortletConfigurationContent" name="portlet_configuration_content" classname="java.lang.String" ignore="true" />
-
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="setup" />
 </liferay-util:include>
 
-<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletConfigurationContent %>" />
+<%
+String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
+%>
+
+<c:if test="<%= Validator.isNotNull(path) %>">
+	<liferay-util:include page="<%= path %>" />
+</c:if>

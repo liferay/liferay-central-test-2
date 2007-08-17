@@ -72,7 +72,7 @@
 				try {
 					List headerNames = new ArrayList();
 
-					headerNames.add("plugin-package");
+					headerNames.add("plugin");
 					headerNames.add("status");
 					headerNames.add("installed-version");
 					headerNames.add("available-version");
@@ -218,7 +218,7 @@
 				%>
 
 					<span class="portlet-msg-error">
-					<liferay-ui:message key="error-obtaining-available-plugins" />
+					<liferay-ui:message key="an-error-occurred-while-retrieving-available-plugins" />
 					</span>
 
 				<%

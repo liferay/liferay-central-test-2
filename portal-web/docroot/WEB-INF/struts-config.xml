@@ -133,10 +133,6 @@
 
 		<!-- Alfresco Content -->
 
-		<action path="/alfresco_content/edit_configuration" type="com.liferay.portlet.alfrescocontent.action.EditConfigurationAction">
-			<forward name="portlet.alfresco_content.edit_configuration" path="portlet.alfresco_content.edit_configuration" />
-		</action>
-
 		<action path="/alfresco_content/view" type="com.liferay.portlet.alfrescocontent.action.ViewAction">
 			<forward name="portlet.alfresco_content.view_1" path="portlet.alfresco_content.view_1" />
 			<forward name="portlet.alfresco_content.view_2" path="portlet.alfresco_content.view_2" />
@@ -144,17 +140,9 @@
 
 		<!-- Amazon Rankings -->
 
-		<action path="/amazon_rankings/edit_configuration" type="com.liferay.portlet.amazonrankings.action.EditConfigurationAction">
-			<forward name="portlet.amazon_rankings.edit_configuration" path="portlet.amazon_rankings.edit_configuration" />
-		</action>
-
 		<action path="/amazon_rankings/view" forward="portlet.amazon_rankings.view" />
 
 		<!-- Announcements -->
-
-		<action path="/announcements/edit_configuration" type="com.liferay.portlet.announcements.action.EditConfigurationAction">
-			<forward name="portlet.announcements.edit_configuration" path="portlet.announcements.edit_configuration" />
-		</action>
 
 		<action path="/announcements/view" type="com.liferay.portlet.announcements.action.ViewAction">
 			<forward name="portlet.announcements.view" path="portlet.announcements.view" />
@@ -223,19 +211,9 @@
 
 		<!-- Breadcrumb -->
 
-		<action path="/breadcrumb/edit_configuration" type="com.liferay.portlet.breadcrumb.action.EditConfigurationAction">
-			<forward name="portlet.breadcrumb.edit_configuration" path="portlet.breadcrumb.edit_configuration" />
-			<forward name="portlet.breadcrumb.error" path="portlet.breadcrumb.error" />
-		</action>
-
 		<action path="/breadcrumb/view" forward="portlet.breadcrumb.view" />
 
 		<!-- Calendar -->
-
-		<action path="/calendar/edit_configuration" type="com.liferay.portlet.calendar.action.EditConfigurationAction">
-			<forward name="portlet.calendar.edit_configuration" path="portlet.calendar.edit_configuration" />
-			<forward name="portlet.calendar.error" path="portlet.calendar.error" />
-		</action>
 
 		<action path="/calendar/edit_event" type="com.liferay.portlet.calendar.action.EditEventAction">
 			<forward name="portlet.calendar.edit_event" path="portlet.calendar.edit_event" />
@@ -338,11 +316,6 @@
 
 		<!-- Document Library -->
 
-		<action path="/document_library/edit_configuration" type="com.liferay.portlet.documentlibrary.action.EditConfigurationAction">
-			<forward name="portlet.document_library.edit_configuration" path="portlet.document_library.edit_configuration" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
-
 		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction" name="documentLibraryFileEntryForm">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.edit_file_entry" />
 			<forward name="portlet.document_library.edit_file_entry_form" path="portlet.document_library.edit_file_entry_form" />
@@ -398,11 +371,6 @@
 		</action>
 
 		<!-- Document Library Display -->
-
-		<action path="/document_library_display/edit_configuration" type="com.liferay.portlet.documentlibrary.action.EditConfigurationAction">
-			<forward name="portlet.document_library.edit_configuration" path="portlet.document_library.edit_configuration" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
 
 		<action path="/document_library_display/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />
 
@@ -546,19 +514,11 @@
 
 		<!-- Flash -->
 
-		<action path="/flash/edit_configuration" type="com.liferay.portlet.flash.action.EditConfigurationAction">
-			<forward name="portlet.flash.edit_configuration" path="portlet.flash.edit_configuration" />
-		</action>
-
 		<action path="/flash/view" type="com.liferay.portlet.flash.action.ViewAction">
 			<forward name="portlet.flash.view" path="portlet.flash.view" />
 		</action>
 
 		<!-- Games -->
-
-		<action path="/games/edit_configuration" type="com.liferay.portlet.games.action.EditConfigurationAction">
-			<forward name="portlet.games.edit_configuration" path="portlet.games.edit_configuration" />
-		</action>
 
 		<action path="/games/view" forward="portlet.games.view" />
 
@@ -593,25 +553,13 @@
 
 		<!-- Google AdSense -->
 
-		<action path="/google_adsense/edit_configuration" type="com.liferay.portlet.googleadsense.action.EditConfigurationAction">
-			<forward name="portlet.google_adsense.edit_configuration" path="portlet.google_adsense.edit_configuration" />
-		</action>
-
 		<action path="/google_adsense/view" forward="portlet.google_adsense.view" />
 
 		<!-- Google Gadget -->
 
-		<action path="/google_gadget/edit_configuration" type="com.liferay.portlet.googlegadget.action.EditConfigurationAction">
-			<forward name="portlet.google_gadget.edit_configuration" path="portlet.google_gadget.edit_configuration" />
-		</action>
-
 		<action path="/google_gadget/view" forward="portlet.google_gadget.view" />
 
 		<!-- Google Maps -->
-
-		<action path="/google_maps/edit_configuration" type="com.liferay.portlet.googlemaps.action.EditConfigurationAction">
-			<forward name="portlet.google_maps.edit_configuration" path="portlet.google_maps.edit_configuration" />
-		</action>
 
 		<action path="/google_maps/save_directions_address" type="com.liferay.portlet.googlemaps.action.SaveDirectionsAddressAction" />
 
@@ -620,10 +568,6 @@
 		<action path="/google_maps/view" forward="portlet.google_maps.view"  />
 
 		<!-- IFrame -->
-
-		<action path="/iframe/edit_configuration" type="com.liferay.portlet.iframe.action.EditConfigurationAction">
-			<forward name="portlet.iframe.edit_configuration" path="portlet.iframe.edit_configuration" />
-		</action>
 
 		<action path="/iframe/proxy" forward="/portlet/iframe/proxy.jsp" />
 
@@ -661,10 +605,6 @@
 
 		<!-- Invitation -->
 
-		<action path="/invitation/edit_configuration" type="com.liferay.portlet.invitation.action.EditConfigurationAction">
-			<forward name="portlet.invitation.edit_configuration" path="portlet.invitation.edit_configuration" />
-		</action>
-
 		<action path="/invitation/view" type="com.liferay.portlet.invitation.action.ViewAction">
 			<forward name="portlet.invitation.view" path="portlet.invitation.view" />
 		</action>
@@ -678,11 +618,6 @@
 
 		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.journal.error" />
-		</action>
-
-		<action path="/journal/edit_configuration" type="com.liferay.portlet.journal.action.EditConfigurationAction">
-			<forward name="portlet.journal.edit_configuration" path="portlet.journal.edit_configuration" />
-			<forward name="portlet.journal.error" path="portlet.journal.error" />
 		</action>
 
 		<action path="/journal/edit_structure" type="com.liferay.portlet.journal.action.EditStructureAction">
@@ -737,10 +672,6 @@
 
 		<!-- Journal Articles -->
 
-		<action path="/journal_articles/edit_configuration" type="com.liferay.portlet.journalarticles.action.EditConfigurationAction">
-			<forward name="portlet.journal_articles.edit_configuration" path="portlet.journal_articles.edit_configuration" />
-		</action>
-
 		<action path="/journal_articles/view" type="com.liferay.portlet.journalarticles.action.ViewAction">
 			<forward name="portlet.journal_articles.view" path="portlet.journal_articles.view" />
 		</action>
@@ -755,10 +686,6 @@
 			<forward name="portlet.message_boards.error" path="portlet.journal_content.error" />
 		</action>
 
-		<action path="/journal_content/edit_configuration" type="com.liferay.portlet.journalcontent.action.EditConfigurationAction">
-			<forward name="portlet.journal_content.edit_configuration" path="portlet.journal_content.edit_configuration" />
-		</action>
-
 		<action path="/journal_content/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/journal_content/update_article_field" type="com.liferay.portlet.journalcontent.action.UpdateArticleFieldAction" />
@@ -769,10 +696,6 @@
 
 		<!-- Journal Content Search -->
 
-		<action path="/journal_content_search/edit_configuration" type="com.liferay.portlet.journalcontentsearch.action.EditConfigurationAction">
-			<forward name="portlet.journal_content_search.edit_configuration" path="portlet.journal_content_search.edit_configuration" />
-		</action>
-
 		<action path="/journal_content_search/search" type="com.liferay.portlet.journalcontentsearch.action.SearchAction">
 			<forward name="portlet.journal_content_search.search" path="portlet.journal_content_search.search" />
 		</action>
@@ -780,11 +703,6 @@
 		<action path="/journal_content_search/view" forward="portlet.journal_content_search.view" />
 
 		<!-- Language -->
-
-		<action path="/language/edit_configuration" type="com.liferay.portlet.language.action.EditConfigurationAction">
-			<forward name="portlet.language.edit_configuration" path="portlet.language.edit_configuration" />
-			<forward name="portlet.language.error" path="portlet.language.error" />
-		</action>
 
 		<action path="/language/view" type="com.liferay.portlet.language.action.ViewAction">
 			<forward name="portlet.language.view" path="portlet.language.view" />
@@ -922,11 +840,6 @@
 
 		<action path="/message_boards/edit_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
 			<forward name="portlet.message_boards.edit_category" path="portlet.message_boards.edit_category" />
-			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
-		</action>
-
-		<action path="/message_boards/edit_configuration" type="com.liferay.portlet.messageboards.action.EditConfigurationAction">
-			<forward name="portlet.message_boards.edit_configuration" path="portlet.message_boards.edit_configuration" />
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
@@ -1068,10 +981,6 @@
 
 		<!-- Navigation -->
 
-		<action path="/navigation/edit_configuration" type="com.liferay.portlet.navigation.action.EditConfigurationAction">
-			<forward name="portlet.navigation.edit_configuration" path="portlet.navigation.edit_configuration" />
-		</action>
-
 		<action path="/navigation/view" forward="portlet.navigation.view" />
 
 		<!-- Network -->
@@ -1203,10 +1112,6 @@
 
 		<!-- Polls Display -->
 
-		<action path="/polls_display/edit_configuration" type="com.liferay.portlet.pollsdisplay.action.EditConfigurationAction">
-			<forward name="portlet.polls_display.edit_configuration" path="portlet.polls_display.edit_configuration" />
-		</action>
-
 		<action path="/polls_display/view" type="com.liferay.portlet.pollsdisplay.action.ViewAction">
 			<forward name="portlet.polls_display.view" path="portlet.polls_display.view" />
 		</action>
@@ -1214,6 +1119,7 @@
 		<!-- Portlet Configuration -->
 
 		<action path="/portlet_configuration/edit_configuration" type="com.liferay.portlet.portletconfiguration.action.EditConfigurationAction">
+			<forward name="portlet.portlet_configuration.edit_configuration" path="portlet.portlet_configuration.edit_configuration" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
@@ -1330,10 +1236,6 @@
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
-		<action path="/shopping/edit_configuration" type="com.liferay.portlet.shopping.action.EditConfigurationAction">
-			<forward name="portlet.shopping.edit_configuration" path="portlet.shopping.edit_configuration" />
-		</action>
-
 		<action path="/shopping/edit_coupon" type="com.liferay.portlet.shopping.action.EditCouponAction">
 			<forward name="portlet.shopping.edit_coupon" path="portlet.shopping.edit_coupon" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
@@ -1381,10 +1283,6 @@
 
 		<!-- Site Map -->
 
-		<action path="/site_map/edit_configuration" type="com.liferay.portlet.sitemap.action.EditConfigurationAction">
-			<forward name="portlet.site_map.edit_configuration" path="portlet.site_map.edit_configuration" />
-		</action>
-
 		<action path="/site_map/view" forward="portlet.site_map.view" />
 
 		<!-- Stocks -->
@@ -1396,10 +1294,6 @@
 		<action path="/stocks/view" forward="portlet.stocks.view" />
 
 		<!-- Tagged Content -->
-
-		<action path="/tagged_content/edit_configuration" type="com.liferay.portlet.taggedcontent.action.EditConfigurationAction">
-			<forward name="portlet.tagged_content.edit_configuration" path="portlet.tagged_content.edit_configuration" />
-		</action>
 
 		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
 			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
@@ -1435,18 +1329,8 @@
 
 		<action path="/web_form/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
 
-		<action path="/web_form/edit_configuration" type="com.liferay.portlet.webform.action.EditConfigurationAction">
-			<forward name="portlet.web_form.edit_configuration" path="portlet.web_form.edit_configuration" />
-		</action>
-
 		<action path="/web_form/view" type="com.liferay.portlet.webform.action.ViewAction">
 			<forward name="portlet.web_form.view" path="portlet.web_form.view" />
-		</action>
-
-		<!-- Web Proxy -->
-
-		<action path="/web_proxy/edit_configuration" type="com.liferay.portlet.webproxy.action.EditConfigurationAction">
-			<forward name="portlet.web_proxy.edit_configuration" path="portlet.web_proxy.edit_configuration" />
 		</action>
 
 		<!-- Westminster Catechism -->
@@ -1508,10 +1392,6 @@
 
 		<!-- Wiki Display -->
 
-		<action path="/wiki_display/edit_configuration" type="com.liferay.portlet.wikidisplay.action.EditConfigurationAction">
-			<forward name="portlet.wiki_display.edit_configuration" path="portlet.wiki_display.edit_configuration" />
-		</action>
-
 		<action path="/wiki_display/edit_page" type="com.liferay.portlet.wiki.action.EditPageAction">
 			<forward name="portlet.wiki.edit_page" path="portlet.wiki.edit_page" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
@@ -1571,10 +1451,6 @@
 		<action path="/wsrp" type="com.liferay.portal.wsrp.WSRPAction" />
 
 		<!-- XSL Content -->
-
-		<action path="/xsl_content/edit_configuration" type="com.liferay.portlet.xslcontent.action.EditConfigurationAction">
-			<forward name="portlet.xsl_content.edit_configuration" path="portlet.xsl_content.edit_configuration" />
-		</action>
 
 		<action path="/xsl_content/view" type="com.liferay.portlet.xslcontent.action.ViewAction">
 			<forward name="portlet.xsl_content.view" path="portlet.xsl_content.view" />

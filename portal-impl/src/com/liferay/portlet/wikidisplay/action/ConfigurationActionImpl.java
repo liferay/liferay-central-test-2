@@ -20,13 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.alfrescocontent.action;
+package com.liferay.portlet.wikidisplay.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil;
+import com.liferay.portlet.wiki.NoSuchNodeException;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
@@ -36,31 +39,28 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Michael Young
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		try {
+			String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (cmd.equals(Constants.UPDATE)) {
-			String userId = ParamUtil.getString(req, "userId");
-			String password = ParamUtil.getString(req, "password");
-			String uuid = ParamUtil.getString(req, "uuid");
-			boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
+			if (!cmd.equals(Constants.UPDATE)) {
+				return;
+			}
+
+			long nodeId = ParamUtil.getLong(req, "nodeId");
+
+			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
@@ -69,27 +69,22 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
-			prefs.setValue("user-id", userId);
-			prefs.setValue("password", password);
-			prefs.setValue("uuid", uuid);
-			prefs.setValue("maximize-links", String.valueOf(maximizeLinks));
+			prefs.setValue("node-id", String.valueOf(node.getNodeId()));
 
 			prefs.store();
-		}
-		else if (cmd.equals("clearCache")) {
-			AlfrescoContentCacheUtil.clearCache();
-		}
 
-		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+		}
+		catch (NoSuchNodeException nsne) {
+			SessionErrors.add(req, nsne.getClass().getName());
+		}
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward(
-			"portlet.alfresco_content.edit_configuration");
+		return "/html/portlet/wiki_display/edit_configuration.jsp";
 	}
 
 }

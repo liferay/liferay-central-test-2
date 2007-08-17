@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.1//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_1.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -88,7 +88,7 @@
 		<portlet-name>8</portlet-name>
 		<icon>/html/portlet/calendar/icon.png</icon>
 		<struts-path>calendar</struts-path>
-		<configuration-path>/calendar/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
 		<scheduler-class>com.liferay.portlet.calendar.job.Scheduler</scheduler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
@@ -159,7 +159,7 @@
 		<portlet-name>14</portlet-name>
 		<icon>/html/portlet/games/icon.png</icon>
 		<struts-path>games</struts-path>
-		<configuration-path>/games/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.games.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -170,7 +170,7 @@
 		<portlet-name>15</portlet-name>
 		<icon>/html/portlet/journal/icon.png</icon>
 		<struts-path>journal</struts-path>
-		<configuration-path>/journal/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
 		<scheduler-class>com.liferay.portlet.journal.job.Scheduler</scheduler-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
@@ -217,7 +217,7 @@
 		<portlet-name>19</portlet-name>
 		<icon>/html/portlet/message_boards/icon.png</icon>
 		<struts-path>message_boards</struts-path>
-		<configuration-path>/message_boards/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.messageboards.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.messageboards.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.messageboards.util.MBOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.messageboards.job.Scheduler</scheduler-class>
@@ -234,7 +234,7 @@
 		<portlet-name>20</portlet-name>
 		<icon>/html/portlet/document_library/icon.png</icon>
 		<struts-path>document_library</struts-path>
-		<configuration-path>/document_library/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.documentlibrary.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
 		<use-default-template>false</use-default-template>
@@ -374,7 +374,7 @@
 		<portlet-name>34</portlet-name>
 		<icon>/html/portlet/shopping/icon.png</icon>
 		<struts-path>shopping</struts-path>
-		<configuration-path>/shopping/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.shopping.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>false</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
@@ -504,7 +504,7 @@
 		<portlet-name>48</portlet-name>
 		<icon>/html/portlet/iframe/icon.png</icon>
 		<struts-path>iframe</struts-path>
-		<configuration-path>/iframe/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.iframe.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -559,7 +559,7 @@
 		<portlet-name>53</portlet-name>
 		<icon>/html/portlet/flash/icon.png</icon>
 		<struts-path>flash</struts-path>
-		<configuration-path>/flash/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.flash.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -571,7 +571,7 @@
 		<portlet-name>54</portlet-name>
 		<icon>/html/portlet/wiki_display/icon.png</icon>
 		<struts-path>wiki_display</struts-path>
-		<configuration-path>/wiki_display/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.wikidisplay.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -584,7 +584,7 @@
 		<portlet-name>56</portlet-name>
 		<icon>/html/portlet/journal_content/icon.png</icon>
 		<struts-path>journal_content</struts-path>
-		<configuration-path>/journal_content/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.journalcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portlet.journalcontent.JournalContentFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
@@ -611,7 +611,7 @@
 		<portlet-name>59</portlet-name>
 		<icon>/html/portlet/polls_display/icon.png</icon>
 		<struts-path>polls_display</struts-path>
-		<configuration-path>/polls_display/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.pollsdisplay.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -632,7 +632,7 @@
 		<portlet-name>62</portlet-name>
 		<icon>/html/portlet/journal_articles/icon.png</icon>
 		<struts-path>journal_articles</struts-path>
-		<configuration-path>/journal_articles/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.journalarticles.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -663,7 +663,7 @@
 		<portlet-name>66</portlet-name>
 		<icon>/html/portlet/web_proxy/icon.png</icon>
 		<struts-path>web_proxy</struts-path>
-		<configuration-path>/web_proxy/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.webproxy.action.ConfigurationActionImpl</configuration-action-class>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
@@ -674,7 +674,7 @@
 		<portlet-name>67</portlet-name>
 		<icon>/html/portlet/amazon_rankings/icon.png</icon>
 		<struts-path>amazon_rankings</struts-path>
-		<configuration-path>/amazon_rankings/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.amazonrankings.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -703,7 +703,7 @@
 		<portlet-name>71</portlet-name>
 		<icon>/html/portlet/navigation/icon.png</icon>
 		<struts-path>navigation</struts-path>
-		<configuration-path>/navigation/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.navigation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -717,7 +717,7 @@
 		<portlet-name>73</portlet-name>
 		<icon>/html/portlet/breadcrumb/icon.png</icon>
 		<struts-path>breadcrumb</struts-path>
-		<configuration-path>/breadcrumb/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.breadcrumb.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -731,7 +731,7 @@
 		<portlet-name>77</portlet-name>
 		<icon>/html/portlet/journal_content_search/icon.png</icon>
 		<struts-path>journal_content_search</struts-path>
-		<configuration-path>/journal_content_search/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.journalcontentsearch.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -776,7 +776,7 @@
 		<portlet-name>82</portlet-name>
 		<icon>/html/portlet/language/icon.png</icon>
 		<struts-path>language</struts-path>
-		<configuration-path>/language/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.language.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -789,7 +789,7 @@
 		<portlet-name>83</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>announcements</struts-path>
-		<configuration-path>/announcements/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.announcements.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -802,7 +802,7 @@
 		<portlet-name>85</portlet-name>
 		<icon>/html/portlet/site_map/icon.png</icon>
 		<struts-path>site_map</struts-path>
-		<configuration-path>/site_map/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.sitemap.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -864,7 +864,7 @@
 		<portlet-name>91</portlet-name>
 		<icon>/html/portlet/alfresco_content/icon.png</icon>
 		<struts-path>alfresco_content</struts-path>
-		<configuration-path>/alfresco_content/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.alfrescocontent.action.ConfigurationActionImpl</configuration-action-class>
 		<open-search-class>com.liferay.portlet.alfrescocontent.util.AlfrescoOpenSearchImpl</open-search-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -902,7 +902,7 @@
 		<portlet-name>94</portlet-name>
 		<icon>/html/portlet/google_adsense/icon.png</icon>
 		<struts-path>google_adsense</struts-path>
-		<configuration-path>/google_adsense/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.googleadsense.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -915,7 +915,7 @@
 		<portlet-name>95</portlet-name>
 		<icon>/html/portlet/google_gadget/icon.png</icon>
 		<struts-path>google_gadget</struts-path>
-		<configuration-path>/google_gadget/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.googlegadget.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -928,7 +928,7 @@
 		<portlet-name>96</portlet-name>
 		<icon>/html/portlet/google_maps/icon.png</icon>
 		<struts-path>google_maps</struts-path>
-		<configuration-path>/google_maps/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.googlemaps.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -953,7 +953,7 @@
 		<portlet-name>98</portlet-name>
 		<icon>/html/portlet/software_catalog/icon.png</icon>
 		<struts-path>software_catalog</struts-path>
-		<configuration-path>/software_catalog/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.softwarecatalog.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.Indexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portlet.softwarecatalog.SCFriendlyURLMapper</friendly-url-mapper-class>
 		<use-default-template>false</use-default-template>
@@ -978,7 +978,7 @@
 		<portlet-name>100</portlet-name>
 		<icon>/html/portlet/invitation/icon.png</icon>
 		<struts-path>invitation</struts-path>
-		<configuration-path>/invitation/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.invitation.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -989,7 +989,7 @@
 		<portlet-name>101</portlet-name>
 		<icon>/html/portlet/tagged_content/icon.png</icon>
 		<struts-path>tagged_content</struts-path>
-		<configuration-path>/tagged_content/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.taggedcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -1002,7 +1002,7 @@
 		<portlet-name>102</portlet-name>
 		<icon>/html/portlet/xsl_content/icon.png</icon>
 		<struts-path>xsl_content</struts-path>
-		<configuration-path>/xsl_content/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.xslcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -1085,7 +1085,7 @@
 		<portlet-name>109</portlet-name>
 		<icon>/html/portlet/web_form/icon.png</icon>
 		<struts-path>web_form</struts-path>
-		<configuration-path>/web_form/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.webform.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
@@ -1097,7 +1097,7 @@
 		<portlet-name>110</portlet-name>
 		<icon>/html/portlet/document_library/icon.png</icon>
 		<struts-path>document_library_display</struts-path>
-		<configuration-path>/document_library_display/edit_configuration</configuration-path>
+		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

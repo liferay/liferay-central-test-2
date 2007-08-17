@@ -3,8 +3,8 @@ This is the DTD for the Portlet Application parameters that are specific to
 Liferay Portal.
 
 <!DOCTYPE liferay-portlet-app PUBLIC
-	"-//Liferay//DTD Portlet Application 4.3.0//EN"
-	"http://www.liferay.com/dtd/liferay-portlet-app_4_3_0.dtd">
+	"-//Liferay//DTD Portlet Application 4.3.1//EN"
+	"http://www.liferay.com/dtd/liferay-portlet-app_4_3_1.dtd">
 -->
 
 <!--
@@ -17,16 +17,16 @@ a Liferay portlet application.
 The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
-configuration-path?, indexer-class?, open-search-class?, scheduler-class?,
-portlet-url-class?, friendly-url-mapper-class?, url-encoder-class?,
-portlet-data-handler-class?, smtp-message-listener-class?,
-preferences-company-wide?, preferences-unique-per-layout?,
-preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
-show-portlet-inactive?, action-url-redirect?, restore-current-view?,
-maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
-private-request-attributes?, private-session-attributes?, render-weight?,
-ajaxable?, header-css*, header-javascript*, add-default-resource?, system?,
-active?, include?)>
+configuration-path?, configuration-action-class?, indexer-class?,
+open-search-class?, scheduler-class?, portlet-url-class?,
+friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
+smtp-message-listener-class?, preferences-company-wide?,
+preferences-unique-per-layout?, preferences-owned-by-group?,
+use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
+action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
+pop-up-print?, layout-cacheable?, instanceable?, private-request-attributes?,
+private-session-attributes?, render-weight?, ajaxable?, header-css*,
+header-javascript*, add-default-resource?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -62,15 +62,21 @@ servlet requests.
 <!ELEMENT struts-path (#PCDATA)>
 
 <!--
-The configuration-path value is a Struts path that allows users to configure the
-portlet at runtime. The Struts path must reference a class that extends
-com.liferay.portal.struts.PortletAction.
+The configuration-path value is no longer available. Use
+configuration-action-class instead.
+-->
+<!ELEMENT configuration-path (#PCDATA)>
+
+<!--
+The configuration-action-class value must be a class that implements
+com.liferay.portal.kernel.portlet.ConfigurationAction and is called to allow
+users to configure the portlet at runtime.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/messageboards/action/EditConfigurationAction.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
 -->
-<!ELEMENT configuration-path (#PCDATA)>
+<!ELEMENT configuration-action-class (#PCDATA)>
 
 <!--
 The indexer-class value must be a class that implements
@@ -79,8 +85,8 @@ search index for the portlet.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
+http://content.liferay.com/4.3.1/docs/api/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
 http://lucene.apache.org
 -->
 <!ELEMENT indexer-class (#PCDATA)>
@@ -92,8 +98,8 @@ in the OpenSearch 1.1 standard.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
+http://content.liferay.com/4.3.1/docs/api/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
 http://www.opensearch.org
 -->
 <!ELEMENT open-search-class (#PCDATA)>
@@ -105,8 +111,8 @@ portlet.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portal/job/Scheduler.html
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portal/job/Scheduler.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
@@ -118,7 +124,7 @@ default portlet URL implementation.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
 
@@ -130,7 +136,7 @@ example of its uses.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
 -->
 <!ELEMENT friendly-url-mapper-class (#PCDATA)>
 
@@ -149,8 +155,8 @@ tasks are run.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
+http://content.liferay.com/4.3.1/docs/api/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
 -->
 <!ELEMENT portlet-data-handler-class (#PCDATA)>
 
@@ -161,8 +167,8 @@ emails.
 
 See:
 
-http://content.liferay.com/4.3.0/docs/api/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
-http://content.liferay.com/4.3.0/docs/api/portal-impl/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
+http://content.liferay.com/4.3.1/docs/api/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
+http://content.liferay.com/4.3.1/docs/api/portal-impl/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
 -->
 <!ELEMENT smtp-message-listener-class (#PCDATA)>
 

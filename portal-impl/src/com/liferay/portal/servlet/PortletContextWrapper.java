@@ -24,6 +24,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
@@ -45,27 +46,27 @@ import javax.servlet.ServletContext;
  */
 public class PortletContextWrapper {
 
-	public PortletContextWrapper(String portletName,
-								 ServletContext	servletContext,
-								 Portlet portletInstance,
-								 Indexer indexerInstance,
-								 Scheduler schedulerInstance,
-								 URLEncoder urlEncoder,
-								 PortletDataHandler portletDataHandler,
-								 MessageListener smtpMessageListener,
-								 PreferencesValidator prefsValidator,
-								 Map resourceBundles,
-								 Map customUserAttributes) {
+	public PortletContextWrapper(
+		String portletName, ServletContext	servletContext,
+		Portlet portletInstance,
+		ConfigurationAction configurationActionInstance,
+		Indexer indexerInstance, Scheduler schedulerInstance,
+		URLEncoder urlEncoderInstance,
+		PortletDataHandler portletDataHandlerInstance,
+		MessageListener smtpMessageListenerInstance,
+		PreferencesValidator prefsValidatorInstance, Map resourceBundles,
+		Map customUserAttributes) {
 
 		_portletName = portletName;
 		_servletContext = servletContext;
 		_portletInstance = portletInstance;
+		_configurationActionInstance = configurationActionInstance;
 		_indexerInstance = indexerInstance;
 		_schedulerInstance = schedulerInstance;
-		_urlEncoder = urlEncoder;
-		_portletDataHandler = portletDataHandler;
-		_smtpMessageListener = smtpMessageListener;
-		_prefsValidator = prefsValidator;
+		_urlEncoderInstance = urlEncoderInstance;
+		_portletDataHandlerInstance = portletDataHandlerInstance;
+		_smtpMessageListenerInstance = smtpMessageListenerInstance;
+		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
 		_customUserAttributes = customUserAttributes;
 	}
@@ -86,6 +87,10 @@ public class PortletContextWrapper {
 		_portletInstance = null;
 	}
 
+	public ConfigurationAction getConfigurationActionInstance() {
+		return _configurationActionInstance;
+	}
+
 	public Indexer getIndexerInstance() {
 		return _indexerInstance;
 	}
@@ -94,20 +99,20 @@ public class PortletContextWrapper {
 		return _schedulerInstance;
 	}
 
-	public URLEncoder getURLEncoder() {
-		return _urlEncoder;
+	public URLEncoder getURLEncoderInstance() {
+		return _urlEncoderInstance;
 	}
 
-	public PortletDataHandler getPortletDataHandler() {
-		return _portletDataHandler;
+	public PortletDataHandler getPortletDataHandlerInstance() {
+		return _portletDataHandlerInstance;
 	}
 
-	public MessageListener getSmtpMessageListener() {
-		return _smtpMessageListener;
+	public MessageListener getSmtpMessageListenerInstance() {
+		return _smtpMessageListenerInstance;
 	}
 
-	public PreferencesValidator getPreferencesValidator() {
-		return _prefsValidator;
+	public PreferencesValidator getPreferencesValidatorInstance() {
+		return _prefsValidatorInstance;
 	}
 
 	public ResourceBundle getResourceBundle(Locale locale) {
@@ -129,12 +134,13 @@ public class PortletContextWrapper {
 	private String _portletName;
 	private ServletContext _servletContext;
 	private Portlet _portletInstance;
+	private ConfigurationAction _configurationActionInstance;
 	private Indexer _indexerInstance;
 	private Scheduler _schedulerInstance;
-	private URLEncoder _urlEncoder;
-	private PortletDataHandler _portletDataHandler;
-	private MessageListener _smtpMessageListener;
-	private PreferencesValidator _prefsValidator;
+	private URLEncoder _urlEncoderInstance;
+	private PortletDataHandler _portletDataHandlerInstance;
+	private MessageListener _smtpMessageListenerInstance;
+	private PreferencesValidator _prefsValidatorInstance;
 	private Map _resourceBundles;
 	private Map _customUserAttributes;
 

@@ -1194,7 +1194,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							while (itr2.hasNext()) {
 								Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
 
-								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
 								if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
 									portletIdsSet.add(curPortlet.getRootPortletId());
@@ -1264,7 +1264,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							while (itr1.hasNext()) {
 								Portlet curPortlet = (Portlet)itr1.next();
 
-								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
 								PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
 
@@ -1345,7 +1345,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								while (itr1.hasNext()) {
 									Portlet curPortlet = (Portlet)itr1.next();
 
-									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandler();
+									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
 									PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
 

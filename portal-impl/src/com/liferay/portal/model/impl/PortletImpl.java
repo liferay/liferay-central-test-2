@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
@@ -159,33 +160,29 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Constructs a portlet with the specified parameters.
 	 */
-	public PortletImpl(String portletId, PluginPackage pluginPackage,
-					   PluginSetting pluginSetting, long companyId,
-					   String icon, String virtualPath, String strutsPath,
-					   String configurationPath, String displayName,
-					   String portletClass, String indexerClass,
-					   String openSearchClass, String schedulerClass,
-					   String portletURLClass, String friendlyURLMapperClass,
-					   String urlEncoderClass, String portletDataHandlerClass,
-					   String smtpMessageListenerClass,
-					   String defaultPreferences, String prefsValidator,
-					   boolean prefsCompanyWide, boolean prefsUniquePerLayout,
-					   boolean prefsOwnedByGroup, boolean useDefaultTemplate,
-					   boolean showPortletAccessDenied,
-					   boolean showPortletInactive, boolean actionURLRedirect,
-					   boolean restoreCurrentView, boolean maximizeEdit,
-					   boolean maximizeHelp, boolean popUpPrint,
-					   boolean layoutCacheable, boolean instanceable,
-					   boolean privateRequestAttributes,
-					   boolean privateSessionAttributes, int renderWeight,
-					   boolean ajaxable, List headerCss, List headerJavaScript,
-					   boolean addDefaultResource, String roles,
-					   Set unlinkedRoles, Map roleMappers, boolean system,
-					   boolean active, boolean include, Map initParams,
-					   Integer expCache, Map portletModes, Set supportedLocales,
-					   String resourceBundle, PortletInfo portletInfo,
-					   Set userAttributes, Map customUserAttributes,
-					   String servletContextName, List servletURLPatterns) {
+	public PortletImpl(
+		String portletId, PluginPackage pluginPackage,
+		PluginSetting pluginSetting, long companyId, String icon,
+		String virtualPath, String strutsPath, String displayName,
+		String portletClass, String configurationActionClass,
+		String indexerClass, String openSearchClass, String schedulerClass,
+		String portletURLClass, String friendlyURLMapperClass,
+		String urlEncoderClass, String portletDataHandlerClass,
+		String smtpMessageListenerClass, String defaultPreferences,
+		String prefsValidator, boolean prefsCompanyWide,
+		boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
+		boolean useDefaultTemplate, boolean showPortletAccessDenied,
+		boolean showPortletInactive, boolean actionURLRedirect,
+		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
+		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
+		boolean privateRequestAttributes, boolean privateSessionAttributes,
+		int renderWeight, boolean ajaxable, List headerCss,
+		List headerJavaScript, boolean addDefaultResource, String roles,
+		Set unlinkedRoles, Map roleMappers, boolean system, boolean active,
+		boolean include, Map initParams, Integer expCache, Map portletModes,
+		Set supportedLocales, String resourceBundle, PortletInfo portletInfo,
+		Set userAttributes, Map customUserAttributes, String servletContextName,
+		List servletURLPatterns) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -194,9 +191,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_icon = icon;
 		_virtualPath = virtualPath;
 		_strutsPath = strutsPath;
-		_configurationPath = configurationPath;
 		_displayName = displayName;
 		_portletClass = portletClass;
+		_configurationActionClass = configurationActionClass;
 		_indexerClass = indexerClass;
 		_openSearchClass = openSearchClass;
 		_schedulerClass = schedulerClass;
@@ -381,24 +378,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the configuration path of the portlet.
-	 *
-	 * @return		the configuration path of the portlet
-	 */
-	public String getConfigurationPath() {
-		return _configurationPath;
-	}
-
-	/**
-	 * Sets the configuration path of the portlet.
-	 *
-	 * @param		configurationPath the configuration path of the portlet
-	 */
-	public void setConfigurationPath(String configurationPath) {
-		_configurationPath = configurationPath;
-	}
-
-	/**
 	 * Gets the display name of the portlet.
 	 *
 	 * @return		the display name of the portlet
@@ -432,6 +411,47 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPortletClass(String portletClass) {
 		_portletClass = portletClass;
+	}
+
+	/**
+	 * Gets the configuration action class of the portlet.
+	 *
+	 * @return		the configuration action class of the portlet
+	 */
+	public String getConfigurationActionClass() {
+		return _configurationActionClass;
+	}
+
+	/**
+	 * Sets the configuration action class of the portlet.
+	 *
+	 * @param		configurationActionClass the configuration action class of
+	 *				the portlet
+	 */
+	public void setConfigurationActionClass(String configurationActionClass) {
+		_configurationActionClass = configurationActionClass;
+	}
+
+	/**
+	 * Gets the configuration action instance of the portlet.
+	 *
+	 * @return		the configuration action instance of the portlet
+	 */
+	public ConfigurationAction getConfigurationActionInstance() {
+		if (Validator.isNotNull(getConfigurationActionClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getConfigurationActionInstance();
+			}
+			else {
+				return (ConfigurationAction)InstancePool.get(
+					getConfigurationActionClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -542,27 +562,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the URL encoder of the portlet.
-	 *
-	 * @return		the URL encoder of the portlet
-	 */
-	public URLEncoder getURLEncoder() {
-		if (Validator.isNotNull(getURLEncoderClass())) {
-			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
-
-				return pcw.getURLEncoder();
-			}
-			else {
-				return (URLEncoder)InstancePool.get(getURLEncoderClass());
-			}
-		}
-
-		return null;
-	}
-
-	/**
 	 * Gets the name of the URL encoder class of the portlet.
 	 *
 	 * @return		the name of the URL encoder class of the portlet
@@ -582,21 +581,20 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the portlet data handler of the portlet.
+	 * Gets the URL encoder instance of the portlet.
 	 *
-	 * @return		the portlet data handler of the portlet
+	 * @return		the URL encoder instance of the portlet
 	 */
-	public PortletDataHandler getPortletDataHandler() {
-		if (Validator.isNotNull(getPortletDataHandlerClass())) {
+	public URLEncoder getURLEncoderInstance() {
+		if (Validator.isNotNull(getURLEncoderClass())) {
 			if (isWARFile()) {
 				PortletContextWrapper pcw =
 					PortletContextPool.get(getRootPortletId());
 
-				return pcw.getPortletDataHandler();
+				return pcw.getURLEncoderInstance();
 			}
 			else {
-				return (PortletDataHandler)InstancePool.get(
-					getPortletDataHandlerClass());
+				return (URLEncoder)InstancePool.get(getURLEncoderClass());
 			}
 		}
 
@@ -623,21 +621,21 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the SMTP message listener of the portlet.
+	 * Gets the portlet data handler instance of the portlet.
 	 *
-	 * @return		the SMTP message listener of the portlet
+	 * @return		the portlet data handler instance of the portlet
 	 */
-	public MessageListener getSmtpMessageListener() {
-		if (Validator.isNotNull(getSmtpMessageListenerClass())) {
+	public PortletDataHandler getPortletDataHandlerInstance() {
+		if (Validator.isNotNull(getPortletDataHandlerClass())) {
 			if (isWARFile()) {
 				PortletContextWrapper pcw =
 					PortletContextPool.get(getRootPortletId());
 
-				return pcw.getSmtpMessageListener();
+				return pcw.getPortletDataHandlerInstance();
 			}
 			else {
-				return (MessageListener)InstancePool.get(
-					getSmtpMessageListenerClass());
+				return (PortletDataHandler)InstancePool.get(
+					getPortletDataHandlerClass());
 			}
 		}
 
@@ -661,6 +659,28 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setSmtpMessageListenerClass(String smtpMessageListenerClass) {
 		_smtpMessageListenerClass = smtpMessageListenerClass;
+	}
+
+	/**
+	 * Gets the SMTP message listener instance of the portlet.
+	 *
+	 * @return		the SMTP message listener instance of the portlet
+	 */
+	public MessageListener getSmtpMessageListenerInstance() {
+		if (Validator.isNotNull(getSmtpMessageListenerClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getSmtpMessageListenerInstance();
+			}
+			else {
+				return (MessageListener)InstancePool.get(
+					getSmtpMessageListenerClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -1965,7 +1985,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		return new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
 			getCompanyId(), getIcon(), getVirtualPath(), getStrutsPath(),
-			getConfigurationPath(), getDisplayName(), getPortletClass(),
+			getDisplayName(), getPortletClass(), getConfigurationActionClass(),
 			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getURLEncoderClass(), getPortletDataHandlerClass(),
@@ -2044,11 +2064,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private String _strutsPath;
 
 	/**
-	 * The configuration path of the portlet.
-	 */
-	private String _configurationPath;
-
-	/**
 	 * The display name of the portlet.
 	 */
 	private String _displayName;
@@ -2057,6 +2072,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the portlet class of the portlet.
 	 */
 	private String _portletClass;
+
+	/**
+	 * The configuration action class of the portlet.
+	 */
+	private String _configurationActionClass;
 
 	/**
 	 * The name of the indexer class of the portlet.

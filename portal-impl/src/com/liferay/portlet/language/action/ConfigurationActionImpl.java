@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.googlegadget.action;
+package com.liferay.portlet.language.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
@@ -35,21 +35,16 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -58,45 +53,25 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String confType = ParamUtil.getString(req, "confType");
-
-		String gadgetCode = ParamUtil.getString(req, "gadgetCode");
-
-		String gadgetId = ParamUtil.getString(req, "gadgetId");
-		String title = ParamUtil.getString(req, "title");
-		String borderId = ParamUtil.getString(req, "borderId");
-		String width = ParamUtil.getString(req, "width");
-		String height = ParamUtil.getString(req, "height");
+		String displayStyle = ParamUtil.getString(req, "displayStyle");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("conf-type", confType);
-
-		if (confType.equals("custom")) {
-			prefs.setValue("gadget-code", gadgetCode);
-		}
-		else {
-			prefs.setValue("gadget-id", gadgetId);
-			prefs.setValue("title", title);
-			prefs.setValue("border-id", borderId);
-			prefs.setValue("width", width);
-			prefs.setValue("height", height);
-		}
+		prefs.setValue("display-style", displayStyle);
 
 		prefs.store();
 
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.google_gadget.edit_configuration");
+		return "/html/portlet/language/edit_configuration.jsp";
 	}
 
 }

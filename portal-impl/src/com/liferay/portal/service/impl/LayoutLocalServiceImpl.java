@@ -1532,7 +1532,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		PortletDataHandler portletDataHandler =
-			portlet.getPortletDataHandler();
+			portlet.getPortletDataHandlerInstance();
 
 		if (portletDataHandler == null) {
 			return;
@@ -2260,7 +2260,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return null;
 		}
 
-		PortletDataHandler portletDataHandler = portlet.getPortletDataHandler();
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandlerInstance();
 
 		if (portlet == null) {
 			if (_log.isDebugEnabled()) {

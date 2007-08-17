@@ -141,7 +141,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				}
 				%>
 
-				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jsp" %>
+				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
 				<div class="separator"><!-- --></div>
 
@@ -324,7 +324,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		}
 		%>
 
-		<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jsp" %>
+		<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
 
 		<div class="separator"><!-- --></div>
 

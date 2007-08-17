@@ -74,7 +74,7 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 <c:choose>
 	<c:when test="<%= portlet.hasMultipleMimeTypes() %>">
 		<c:choose>
-			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationPath()) %>">
+			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationActionClass()) %>">
 				<liferay-ui:tabs
 					names="setup,supported-clients,permissions"
 					url0="<%= configurationURL.toString() %>"
@@ -93,7 +93,7 @@ permissionsURL.setParameter("previewWidth", previewWidth);
 	</c:when>
 	<c:otherwise>
 		<c:choose>
-			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationPath()) %>">
+			<c:when test="<%= Validator.isNotNull(portlet.getConfigurationActionClass()) %>">
 				<liferay-ui:tabs
 					names="setup,permissions"
 					url0="<%= configurationURL.toString() %>"

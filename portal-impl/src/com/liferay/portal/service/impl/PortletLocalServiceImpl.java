@@ -902,9 +902,19 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setStrutsPath(GetterUtil.getString(
 					portlet.elementText("struts-path"),
 					portletModel.getStrutsPath()));
-				portletModel.setConfigurationPath(GetterUtil.getString(
-					portlet.elementText("configuration-path"),
-					portletModel.getConfigurationPath()));
+
+				if (Validator.isNotNull(
+						portlet.elementText("configuration-path"))) {
+
+					_log.error(
+						"The configuration-path element is no longer " +
+							"supported. Use configuration-action-class " +
+								"instead.");
+				}
+
+				portletModel.setConfigurationActionClass(GetterUtil.getString(
+					portlet.elementText("configuration-action-class"),
+					portletModel.getConfigurationActionClass()));
 				portletModel.setIndexerClass(GetterUtil.getString(
 					portlet.elementText("indexer-class"),
 					portletModel.getIndexerClass()));

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/calculator/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/editor/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/hangman/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="applets/lawt/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="counter-impl/src"/>

@@ -49,7 +49,7 @@ searchContainer.setDelta(10);
 StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
 %>
 
-<%@ include file="/html/portlet/journal/structure_search_results.jsp" %>
+<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
 
 <div class="separator"><!-- --></div>
 

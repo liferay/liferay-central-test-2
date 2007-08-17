@@ -20,14 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.announcements.action;
+package com.liferay.portlet.journalarticles.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.announcements.AnnouncementsContentException;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -38,21 +38,16 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		try {
@@ -62,36 +57,43 @@ public class EditConfigurationAction extends PortletAction {
 				return;
 			}
 
-			String content = ParamUtil.getString(req, "content");
+			long groupId = ParamUtil.getLong(req, "groupId");
+			String type = ParamUtil.getString(req, "type");
+			String pageURL = ParamUtil.getString(req, "pageURL");
+			int pageDelta = ParamUtil.getInteger(req, "pageDelta");
+			String orderByCol = ParamUtil.getString(req, "orderByCol");
+			String orderByType = ParamUtil.getString(req, "orderByType");
 
-			if (Validator.isNull(content)) {
-				throw new AnnouncementsContentException();
-			}
+			GroupLocalServiceUtil.getGroup(groupId);
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
 
 			PortletPreferences prefs =
 				PortletPreferencesFactory.getPortletSetup(
-					req, portletResource, false, false);
+					req, portletResource, true, true);
 
-			prefs.setValue("content", content);
+			prefs.setValue("group-id", String.valueOf(groupId));
+			prefs.setValue("type", type);
+			prefs.setValue("page-url", pageURL);
+			prefs.setValue("page-delta", String.valueOf(pageDelta));
+			prefs.setValue("order-by-col", orderByCol);
+			prefs.setValue("order-by-type", orderByType);
 
 			prefs.store();
 
 			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 		}
-		catch (AnnouncementsContentException ace) {
-			SessionErrors.add(req, ace.getClass().getName());
+		catch (NoSuchGroupException nsge) {
+			SessionErrors.add(req, nsge.getClass().getName());
 		}
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.announcements.edit_configuration");
+		return "/html/portlet/journal_articles/edit_configuration.jsp";
 	}
 
 }

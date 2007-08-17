@@ -113,10 +113,6 @@
 
 	<definition name="portlet.alfresco_content" extends="portlet" />
 
-	<definition name="portlet.alfresco_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/alfresco_content/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.alfresco_content.view_1" extends="portlet.alfresco_content">
 		<put name="portlet_content" value="/portlet/alfresco_content/view.jsp" />
 	</definition>
@@ -130,10 +126,6 @@
 
 	<definition name="portlet.amazon_rankings" extends="portlet" />
 
-	<definition name="portlet.amazon_rankings.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/amazon_rankings/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.amazon_rankings.view" extends="portlet.amazon_rankings">
 		<put name="portlet_content" value="/portlet/amazon_rankings/view.jsp" />
 	</definition>
@@ -141,10 +133,6 @@
 	<!-- Announcements -->
 
 	<definition name="portlet.announcements" extends="portlet" />
-
-	<definition name="portlet.announcements.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/announcements/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.announcements.view" extends="portlet.announcements">
 		<put name="portlet_content" value="/portlet/announcements/view.jsp" />
@@ -210,10 +198,6 @@
 
 	<definition name="portlet.breadcrumb" extends="portlet" />
 
-	<definition name="portlet.breadcrumb.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/breadcrumb/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.breadcrumb.view" extends="portlet.breadcrumb">
 		<put name="portlet_content" value="/portlet/breadcrumb/view.jsp" />
 	</definition>
@@ -221,10 +205,6 @@
 	<!-- Calendar -->
 
 	<definition name="portlet.calendar" extends="portlet" />
-
-	<definition name="portlet.calendar.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/calendar/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.calendar.edit_event" extends="portlet.calendar">
 		<put name="portlet_content" value="/portlet/calendar/edit_event.jsp" />
@@ -317,10 +297,6 @@
 	<!-- Document Library -->
 
 	<definition name="portlet.document_library" extends="portlet" />
-
-	<definition name="portlet.document_library.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/document_library/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.document_library.edit_file_entry" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/edit_file_entry.jsp" />
@@ -467,10 +443,6 @@
 
 	<definition name="portlet.flash" extends="portlet" />
 
-	<definition name="portlet.flash.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/flash/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.flash.view" extends="portlet.flash">
 		<put name="portlet_content" value="/portlet/flash/view.jsp" />
 	</definition>
@@ -478,10 +450,6 @@
 	<!-- Games -->
 
 	<definition name="portlet.games" extends="portlet" />
-
-	<definition name="portlet.games.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/games/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.games.view" extends="portlet.games">
 		<put name="portlet_content" value="/portlet/games/view.jsp" />
@@ -517,10 +485,6 @@
 		<put name="portlet_decorate" value="true" />
 	</definition>
 
-	<definition name="portlet.google_adsense.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/google_adsense/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.google_adsense.view" extends="portlet.google_adsense">
 		<put name="portlet_content" value="/portlet/google_adsense/view.jsp" />
 	</definition>
@@ -529,10 +493,6 @@
 
 	<definition name="portlet.google_gadget" extends="portlet">
 		<put name="portlet_decorate" value="true" />
-	</definition>
-
-	<definition name="portlet.google_gadget.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/google_gadget/edit_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.google_gadget.view" extends="portlet.google_gadget">
@@ -545,10 +505,6 @@
 		<put name="portlet_decorate" value="true" />
 	</definition>
 
-	<definition name="portlet.google_maps.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/google_maps/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.google_maps.view" extends="portlet.google_maps">
 		<put name="portlet_content" value="/portlet/google_maps/view.jsp" />
 	</definition>
@@ -556,10 +512,6 @@
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />
-
-	<definition name="portlet.iframe.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/iframe/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.iframe.view" extends="portlet.iframe">
 		<put name="portlet_content" value="/portlet/iframe/view.jsp" />
@@ -602,10 +554,6 @@
 
 	<definition name="portlet.invitation" extends="portlet" />
 
-	<definition name="portlet.invitation.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/invitation/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.invitation.view" extends="portlet.invitation">
 		<put name="portlet_content" value="/portlet/invitation/view.jsp" />
 	</definition>
@@ -616,10 +564,6 @@
 
 	<definition name="portlet.journal.edit_article" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/edit_article.jsp" />
-	</definition>
-
-	<definition name="portlet.journal.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/journal/edit_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.journal.edit_structure" extends="portlet.journal">
@@ -670,10 +614,6 @@
 
 	<definition name="portlet.journal_articles" extends="portlet" />
 
-	<definition name="portlet.journal_articles.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/journal_articles/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.journal_articles.view" extends="portlet.journal_articles">
 		<put name="portlet_content" value="/portlet/journal_articles/view.jsp" />
 	</definition>
@@ -681,10 +621,6 @@
 	<!-- Journal Content -->
 
 	<definition name="portlet.journal_content" extends="portlet" />
-
-	<definition name="portlet.journal_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/journal_content/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.journal_content.error" extends="portlet.journal_content">
 		<put name="portlet_content" value="/portlet/journal_content/error.jsp" />
@@ -698,10 +634,6 @@
 
 	<definition name="portlet.journal_content_search" extends="portlet" />
 
-	<definition name="portlet.journal_content_search.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/journal_content_search/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.journal_content_search.search" extends="portlet.journal_content_search">
 		<put name="portlet_content" value="/portlet/journal_content_search/search.jsp" />
 	</definition>
@@ -713,10 +645,6 @@
 	<!-- Language -->
 
 	<definition name="portlet.language" extends="portlet" />
-
-	<definition name="portlet.language.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/language/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.language.view" extends="portlet.language">
 		<put name="portlet_content" value="/portlet/language/view.jsp" />
@@ -780,10 +708,6 @@
 
 	<definition name="portlet.message_boards.edit_category" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/edit_category.jsp" />
-	</definition>
-
-	<definition name="portlet.message_boards.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/message_boards/edit_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.message_boards.edit_message" extends="portlet.message_boards">
@@ -865,10 +789,6 @@
 	<!-- Navigation -->
 
 	<definition name="portlet.navigation" extends="portlet" />
-
-	<definition name="portlet.navigation.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/navigation/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.navigation.view" extends="portlet.navigation">
 		<put name="portlet_content" value="/portlet/navigation/view.jsp" />
@@ -958,10 +878,6 @@
 
 	<definition name="portlet.polls_display" extends="portlet" />
 
-	<definition name="portlet.polls_display.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/polls_display/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.polls_display.view" extends="portlet.polls_display">
 		<put name="portlet_content" value="/portlet/polls_display/view.jsp" />
 	</definition>
@@ -972,7 +888,6 @@
 
 	<definition name="portlet.portlet_configuration.edit_configuration" extends="portlet.portlet_configuration">
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_configuration.jsp" />
-		<put name="portlet_configuration_content" value="" />
 	</definition>
 
 	<definition name="portlet.portlet_configuration.edit_permissions" extends="portlet.portlet_configuration">
@@ -1086,10 +1001,6 @@
 
 	<definition name="portlet.site_map" extends="portlet" />
 
-	<definition name="portlet.site_map.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/site_map/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.site_map.view" extends="portlet.site_map">
 		<put name="portlet_content" value="/portlet/site_map/view.jsp" />
 	</definition>
@@ -1120,10 +1031,6 @@
 
 	<definition name="portlet.shopping.checkout_third" extends="portlet.shopping">
 		<put name="portlet_content" value="/portlet/shopping/checkout_third.jsp" />
-	</definition>
-
-	<definition name="portlet.shopping.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/shopping/edit_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.shopping.edit_coupon" extends="portlet.shopping">
@@ -1182,10 +1089,6 @@
 
 	<definition name="portlet.tagged_content" extends="portlet" />
 
-	<definition name="portlet.tagged_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/tagged_content/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.tagged_content.view" extends="portlet.tagged_content">
 		<put name="portlet_content" value="/portlet/tagged_content/view.jsp" />
 	</definition>
@@ -1226,18 +1129,8 @@
 
 	<definition name="portlet.web_form" extends="portlet" />
 
-	<definition name="portlet.web_form.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/web_form/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.web_form.view" extends="portlet.web_form">
 		<put name="portlet_content" value="/portlet/web_form/view.jsp" />
-	</definition>
-
-	<!-- Web Proxy -->
-
-	<definition name="portlet.web_proxy.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/web_proxy/edit_configuration.jsp" />
 	</definition>
 
 	<!-- Westminster Catechism -->
@@ -1300,10 +1193,6 @@
 
 	<definition name="portlet.wiki_display" extends="portlet" />
 
-	<definition name="portlet.wiki_display.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/wiki_display/edit_configuration.jsp" />
-	</definition>
-
 	<definition name="portlet.wiki_display.view" extends="portlet.wiki_display">
 		<put name="portlet_content" value="/portlet/wiki_display/view.jsp" />
 	</definition>
@@ -1339,10 +1228,6 @@
 	<!-- XSL Content -->
 
 	<definition name="portlet.xsl_content" extends="portlet" />
-
-	<definition name="portlet.xsl_content.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/xsl_content/edit_configuration.jsp" />
-	</definition>
 
 	<definition name="portlet.xsl_content.view" extends="portlet.xsl_content">
 		<put name="portlet_content" value="/portlet/xsl_content/view.jsp" />

@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,36 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portal/init.jsp" %>
+package com.liferay.portal.kernel.portlet;
 
-<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
-<%
-boolean layoutMaximized = layoutTypePortlet.hasStateMax();
+/**
+ * <a href="ConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public interface ConfigurationAction {
 
-if (!layoutMaximized) {
-	String content = LayoutTemplateLocalUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-%>
+	public void processAction(
+			PortletConfig config, ActionRequest req, ActionResponse res)
+		throws Exception;
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, content) %>
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
+		throws Exception;
 
-<%
 }
-else {
-	String content = null;
-
-	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalUtil.getWapContent("exclusive", true, theme.getThemeId());
-	}
-	else {
-		content = LayoutTemplateLocalUtil.getWapContent("max", true, theme.getThemeId());
-	}
-%>
-
-	<%= RuntimePortletUtil.processTemplate(application, request, response, StringUtil.split(layoutTypePortlet.getStateMax())[0], content) %>
-
-<%
-}
-%>

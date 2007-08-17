@@ -65,6 +65,8 @@ public class WebKeys {
 
 	public static final String COMPANY_ID = "COMPANY_ID";
 
+	public static final String CONFIGURATION_ACTION_PATH = "CONFIGURATION_ACTION_PATH";
+
 	public static final String CTX = "CTX";
 	
 	public static final String CURRENT_URL = "CURRENT_URL";

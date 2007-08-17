@@ -22,7 +22,9 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -61,8 +63,6 @@ import org.apache.log4j.helpers.NullEnumeration;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
-import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import org.dom4j.Document;
 import org.dom4j.Element;

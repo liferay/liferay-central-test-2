@@ -23,8 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
-import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Release;

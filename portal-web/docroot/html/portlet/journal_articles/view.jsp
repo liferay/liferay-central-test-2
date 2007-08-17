@@ -66,7 +66,7 @@ double version = ParamUtil.getDouble(request, "version");
 		searchTerms.setStatus("approved");
 		%>
 
-		<%@ include file="/html/portlet/journal/article_search_results.jsp" %>
+		<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
 		<%
 		List resultRows = searchContainer.getResultRows();

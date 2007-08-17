@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
@@ -157,6 +158,17 @@ public class PortletHotDeployListener implements HotDeployListener {
 					strutsBridges = true;
 				}
 
+				ConfigurationAction configurationActionInstance = null;
+
+				if (Validator.isNotNull(
+						portlet.getConfigurationActionClass())) {
+
+					configurationActionInstance =
+						(ConfigurationAction)portletClassLoader.loadClass(
+							portlet.getConfigurationActionClass()).
+								newInstance();
+				}
+
 				Indexer indexerInstance = null;
 
 				if (Validator.isNotNull(portlet.getIndexerClass())) {
@@ -171,39 +183,39 @@ public class PortletHotDeployListener implements HotDeployListener {
 						portlet.getSchedulerClass()).newInstance();
 				}
 
-				URLEncoder urlEncoder = null;
+				URLEncoder urlEncoderInstance = null;
 
 				if (Validator.isNotNull(portlet.getURLEncoderClass())) {
-					urlEncoder =
+					urlEncoderInstance =
 						(URLEncoder)portletClassLoader.loadClass(
 							portlet.getURLEncoderClass()).newInstance();
 				}
 
-				PortletDataHandler portletDataHandler = null;
+				PortletDataHandler portletDataHandlerInstance = null;
 
 				if (Validator.isNotNull(portlet.getPortletDataHandlerClass())) {
-					portletDataHandler =
+					portletDataHandlerInstance =
 						(PortletDataHandler)portletClassLoader.loadClass(
 							portlet.getPortletDataHandlerClass()).newInstance();
 				}
 
-				MessageListener smtpMessageListener = null;
+				MessageListener smtpMessageListenerInstance = null;
 
 				if (Validator.isNotNull(
 						portlet.getSmtpMessageListenerClass())) {
 
-					smtpMessageListener =
+					smtpMessageListenerInstance =
 						(MessageListener)portletClassLoader.loadClass(
 							portlet.getSmtpMessageListenerClass()).
 								newInstance();
 
-					SMTPServerUtil.addListener(smtpMessageListener);
+					SMTPServerUtil.addListener(smtpMessageListenerInstance);
 				}
 
-				PreferencesValidator prefsValidator = null;
+				PreferencesValidator prefsValidatorInstance = null;
 
 				if (Validator.isNotNull(portlet.getPreferencesValidator())) {
-					prefsValidator =
+					prefsValidatorInstance =
 						(PreferencesValidator)portletClassLoader.loadClass(
 							portlet.getPreferencesValidator()).newInstance();
 
@@ -211,7 +223,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 						if (GetterUtil.getBoolean(PropsUtil.get(
 								PropsUtil.PREFERENCE_VALIDATE_ON_STARTUP))) {
 
-							prefsValidator.validate(
+							prefsValidatorInstance.validate(
 								PortletPreferencesSerializer.fromDefaultXML(
 									portlet.getDefaultPreferences()));
 						}
@@ -269,9 +281,11 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 				PortletContextWrapper pcw = new PortletContextWrapper(
 					portlet.getPortletId(), ctx, portletInstance,
-					indexerInstance, schedulerInstance, urlEncoder,
-					portletDataHandler, smtpMessageListener, prefsValidator,
-					resourceBundles, customUserAttributes);
+					configurationActionInstance, indexerInstance,
+					schedulerInstance, urlEncoderInstance,
+					portletDataHandlerInstance, smtpMessageListenerInstance,
+					prefsValidatorInstance, resourceBundles,
+					customUserAttributes);
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}
@@ -395,7 +409,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 					Portlet portlet = (Portlet)itr.next();
 
 					SMTPServerUtil.deleteListener(
-						portlet.getSmtpMessageListener());
+						portlet.getSmtpMessageListenerInstance());
 
 					PortletInstanceFactory.destroy(portlet);
 

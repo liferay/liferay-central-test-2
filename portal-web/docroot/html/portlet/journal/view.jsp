@@ -123,7 +123,7 @@ portletURL.setParameter("tabs1", tabs1);
 			ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 			%>
 
-			<%@ include file="/html/portlet/journal/article_search_results.jsp" %>
+			<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
 			<div class="separator"><!-- --></div>
 
@@ -216,7 +216,7 @@ portletURL.setParameter("tabs1", tabs1);
 			StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
 			%>
 
-			<%@ include file="/html/portlet/journal/structure_search_results.jsp" %>
+			<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
 
 			<div class="separator"><!-- --></div>
 
@@ -303,7 +303,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchTerms.setStructureIdComparator(StringPool.EQUAL);
 			%>
 
-			<%@ include file="/html/portlet/journal/template_search_results.jsp" %>
+			<%@ include file="/html/portlet/journal/template_search_results.jspf" %>
 
 			<div class="separator"><!-- --></div>
 

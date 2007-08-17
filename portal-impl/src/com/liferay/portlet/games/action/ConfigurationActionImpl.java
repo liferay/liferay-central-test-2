@@ -20,18 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.amazonrankings.action;
+package com.liferay.portlet.games.action;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-
-import java.util.Arrays;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -39,63 +35,49 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ValidatorException;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			if (!cmd.equals(Constants.UPDATE)) {
-				return;
-			}
-
-			String[] isbns = StringUtil.split(
-				ParamUtil.getString(req, "isbns").toUpperCase(),
-				StringPool.SPACE);
-
-			Arrays.sort(isbns);
-
-			String portletResource = ParamUtil.getString(
-				req, "portletResource");
-
-			PortletPreferences prefs =
-				PortletPreferencesFactory.getPortletSetup(
-					req, portletResource, true, true);
-
-			prefs.setValues("isbns", isbns);
-
-			prefs.store();
-
-			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
 		}
-		catch (ValidatorException ve) {
-			SessionErrors.add(req, ValidatorException.class.getName(), ve);
-		}
+
+		String hangmanWordList = ParamUtil.getString(req, "hangmanWordList");
+
+		hangmanWordList = hangmanWordList.toLowerCase();
+		hangmanWordList = StringUtil.replace(hangmanWordList, "\r", " ");
+		hangmanWordList = StringUtil.replace(hangmanWordList, "\n", " ");
+		hangmanWordList = StringUtil.replace(hangmanWordList, "\t", " ");
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, true, true);
+
+		prefs.setValue("hangman-word-list", hangmanWordList);
+
+		prefs.store();
+
+		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward(
-			"portlet.amazon_rankings.edit_configuration");
+		return "/html/portlet/games/edit_configuration.jsp";
 	}
 
 }

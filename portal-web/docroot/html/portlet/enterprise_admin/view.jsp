@@ -224,7 +224,7 @@ portletURL.setParameter("tabs3", tabs3);
 			}
 			%>
 
-			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jsp" %>
+			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
 			<%
 			Organization organization = null;

@@ -125,7 +125,7 @@ PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLE
 
 urlConfiguration.setWindowState(WindowState.MAXIMIZED);
 
-if (Validator.isNotNull(portlet.getConfigurationPath())) {
+if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 }
 else {

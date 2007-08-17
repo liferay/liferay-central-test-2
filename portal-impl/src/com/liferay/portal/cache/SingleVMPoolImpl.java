@@ -23,8 +23,9 @@
 package com.liferay.portal.cache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.kernel.cache.SingleVMPool;
+import com.liferay.portal.util.PropsUtil;
+
 import java.io.Serializable;
 
 import java.net.URL;

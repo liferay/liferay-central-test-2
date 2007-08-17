@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.webproxy.action;
+package com.liferay.portlet.flash.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
@@ -35,21 +35,16 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -58,21 +53,11 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String initUrl = ParamUtil.getString(req, "initUrl");
-		String scope = ParamUtil.getString(req, "scope");
-		String proxyHost = ParamUtil.getString(req, "proxyHost");
-		String proxyPort = ParamUtil.getString(req, "proxyPort");
-		String proxyAuthentication = ParamUtil.getString(
-			req, "proxyAuthentication");
-		String proxyAuthenticationUsername = ParamUtil.getString(
-			req, "proxyAuthenticationUsername");
-		String proxyAuthenticationPassword = ParamUtil.getString(
-			req, "proxyAuthenticationPassword");
-		String proxyAuthenticationHost = ParamUtil.getString(
-			req, "proxyAuthenticationHost");
-		String proxyAuthenticationDomain = ParamUtil.getString(
-			req, "proxyAuthenticationDomain");
-		String stylesheet = ParamUtil.getString(req, "stylesheet");
+		String movie = ParamUtil.getString(req, "movie");
+		String flashAttributes = ParamUtil.getString(
+			req, "flashAttributes");
+		String flashVariables = ParamUtil.getString(
+			req, "flashVariables");
 
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
@@ -80,30 +65,20 @@ public class EditConfigurationAction extends PortletAction {
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("initUrl", initUrl);
-		prefs.setValue("scope", scope);
-		prefs.setValue("proxyHost", proxyHost);
-		prefs.setValue("proxyPort", proxyPort);
-		prefs.setValue("proxyAuthentication", proxyAuthentication);
-		prefs.setValue(
-			"proxyAuthenticationUsername", proxyAuthenticationUsername);
-		prefs.setValue(
-			"proxyAuthenticationPassword", proxyAuthenticationPassword);
-		prefs.setValue("proxyAuthenticationHost", proxyAuthenticationHost);
-		prefs.setValue("proxyAuthenticationDomain", proxyAuthenticationDomain);
-		prefs.setValue("stylesheet", stylesheet);
+		prefs.setValue("movie", movie);
+		prefs.setValue("flash-attributes", flashAttributes);
+		prefs.setValue("flash-variables", flashVariables);
 
 		prefs.store();
 
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.web_proxy.edit_configuration");
+		return "/html/portlet/flash/edit_configuration.jsp";
 	}
 
 }

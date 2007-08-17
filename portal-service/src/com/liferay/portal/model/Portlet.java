@@ -78,10 +78,6 @@ public interface Portlet extends PortletModel {
 
 	public void setStrutsPath(java.lang.String strutsPath);
 
-	public java.lang.String getConfigurationPath();
-
-	public void setConfigurationPath(java.lang.String configurationPath);
-
 	public java.lang.String getDisplayName();
 
 	public void setDisplayName(java.lang.String displayName);
@@ -89,6 +85,13 @@ public interface Portlet extends PortletModel {
 	public java.lang.String getPortletClass();
 
 	public void setPortletClass(java.lang.String portletClass);
+
+	public java.lang.String getConfigurationActionClass();
+
+	public void setConfigurationActionClass(
+		java.lang.String configurationActionClass);
+
+	public com.liferay.portal.kernel.portlet.ConfigurationAction getConfigurationActionInstance();
 
 	public java.lang.String getIndexerClass();
 
@@ -113,25 +116,25 @@ public interface Portlet extends PortletModel {
 	public void setFriendlyURLMapperClass(
 		java.lang.String friendlyURLMapperClass);
 
-	public com.liferay.portal.kernel.servlet.URLEncoder getURLEncoder();
-
 	public java.lang.String getURLEncoderClass();
 
 	public void setURLEncoderClass(java.lang.String urlEncoderClass);
 
-	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandler();
+	public com.liferay.portal.kernel.servlet.URLEncoder getURLEncoderInstance();
 
 	public java.lang.String getPortletDataHandlerClass();
 
 	public void setPortletDataHandlerClass(
 		java.lang.String portletDataHandlerClass);
 
-	public com.liferay.portal.kernel.smtp.MessageListener getSmtpMessageListener();
+	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance();
 
 	public java.lang.String getSmtpMessageListenerClass();
 
 	public void setSmtpMessageListenerClass(
 		java.lang.String smtpMessageListenerClass);
+
+	public com.liferay.portal.kernel.smtp.MessageListener getSmtpMessageListenerInstance();
 
 	public java.lang.String getDefaultPreferences();
 

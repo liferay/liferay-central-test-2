@@ -52,7 +52,7 @@ searchTerms.setStructureId(StringPool.BLANK);
 searchTerms.setStructureIdComparator(StringPool.NOT_EQUAL);
 %>
 
-<%@ include file="/html/portlet/journal/template_search_results.jsp" %>
+<%@ include file="/html/portlet/journal/template_search_results.jspf" %>
 
 <div class="separator"><!-- --></div>
 
