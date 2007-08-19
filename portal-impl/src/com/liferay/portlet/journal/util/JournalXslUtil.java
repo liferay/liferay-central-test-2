@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portlet.journal.TransformException;
 
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class JournalXslUtil {
 
 	public static String transform(
 			Map tokens, String languageId, String xml, String script)
-		throws TransformException {
+		throws TransformException, UnsupportedEncodingException {
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 
@@ -69,7 +70,7 @@ public class JournalXslUtil {
 			throw new TransformException(te.getMessage());
 		}
 
-		return bam.toString();
+		return bam.toString("UTF-8");
 	}
 
 }

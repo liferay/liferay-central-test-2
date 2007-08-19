@@ -59,6 +59,7 @@ import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -829,7 +830,7 @@ public class JournalUtil {
 	public static String transform(
 			Map tokens, String languageId, String xml, String script,
 			String langType)
-		throws TransformException {
+		throws TransformException, UnsupportedEncodingException {
 
 		// Setup Listeners
 
