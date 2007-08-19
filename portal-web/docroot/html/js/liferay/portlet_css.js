@@ -132,6 +132,7 @@ Liferay.PortletCSS = {
 					onClose: function() {
 						instance._newPanel.removeClass('instantiated');
 						jQuery(newPanel[0]).hide().appendTo('body');
+                        window.location.reload( true );
 					}
 				});
 
