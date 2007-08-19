@@ -163,7 +163,12 @@ public class ViewArticleContentAction extends Action {
 
 			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);
 
-			return mapping.findForward("portlet.journal.view_article_content");
+			if( output.startsWith("<?xml ")) {
+				return mapping.findForward("portlet.journal.send_article_content");
+			}
+			else {
+				return mapping.findForward("portlet.journal.view_article_content");
+			}
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);

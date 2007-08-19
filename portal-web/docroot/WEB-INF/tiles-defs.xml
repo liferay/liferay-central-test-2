@@ -610,6 +610,10 @@
 		<put name="portlet_content" value="/portlet/journal/view_article_content.jsp" />
 	</definition>
 
+	<definition name="portlet.journal.send_article_content" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/send_article_content.jsp" />
+	</definition>
+
 	<!-- Journal Articles -->
 
 	<definition name="portlet.journal_articles" extends="portlet" />

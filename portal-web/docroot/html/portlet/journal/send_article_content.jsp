@@ -1,0 +1,1 @@
+<%@ page import="com.liferay.portal.util.WebKeys" %><%= request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT) %>
