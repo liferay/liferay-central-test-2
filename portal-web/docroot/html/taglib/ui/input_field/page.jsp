@@ -24,6 +24,9 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portal.model.impl.BaseModelImpl" %>
+<%@ page import="com.liferay.util.XSSUtil" %>
+
 <%
 String model = (String)request.getAttribute("liferay-ui:input-field:model");
 Object bean = request.getAttribute("liferay-ui:input-field:bean");
@@ -198,6 +201,15 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				}
 				else {
 					value = BeanParamUtil.getString(bean, request, field, defaultString);
+
+					String httpValue = request.getParameter(field);
+
+					if (httpValue != null) {
+						boolean xssAllowByModel = GetterUtil.getBoolean(PropsUtil.get("xss.allow." + model), BaseModelImpl.XSS_ALLOW);
+						boolean xssAllowByField = GetterUtil.getBoolean(PropsUtil.get("xss.allow." + model + "." + field), xssAllowByModel);
+
+						value = XSSUtil.strip(httpValue);
+					}
 				}
 			}
 			else {
