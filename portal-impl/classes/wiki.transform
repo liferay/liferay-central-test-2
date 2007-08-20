@@ -38,10 +38,6 @@ Replace !(^|\n)-{4,}!\n<hr/>\n!
 # ordered/unordered list
 FilterReplace wiki.ListRow !(^\t+(\*|[1234567890]+)\.?\s*(.+)(\n|\z))+!\n&~0!
 
-# Make Unordered List look "standard"
-Replace !<ul>!<ul class='wiki-list'>!
-Replace !<ol>!<ol class='wiki-list'>!
-
 # monospace
 Replace !(^ (.+))(\n (.+))*!<pre>$0</pre>!
 Replace !<pre> !<pre>!
