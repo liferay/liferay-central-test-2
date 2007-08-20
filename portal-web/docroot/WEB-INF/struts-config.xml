@@ -667,8 +667,8 @@
 		<action path="/journal/view" forward="portlet.journal.view" />
 
 		<action path="/journal/view_article_content" type="com.liferay.portlet.journal.action.ViewArticleContentAction">
+			<forward name="portlet.journal.raw_article_content" path="/portlet/journal/raw_article_content.jsp" />
 			<forward name="portlet.journal.view_article_content" path="/portlet/journal/view_article_content.jsp" />
-			<forward name="portlet.journal.send_article_content" path="/portlet/journal/send_article_content.jsp" />
 		</action>
 
 		<!-- Journal Articles -->
