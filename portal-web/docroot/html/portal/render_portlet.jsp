@@ -555,7 +555,7 @@ else if (portletDisplay.isStateMax()) {
 
 		urlBack = urlMax.toString() + "#p_" + portletResource;*/
 
-		urlBack = ParamUtil.getString(request, "backURL");
+		urlBack = ParamUtil.getString(renderRequestImpl, "backURL");
 	}
 	else {
 		urlBack = urlMax.toString();
