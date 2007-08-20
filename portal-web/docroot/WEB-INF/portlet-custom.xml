@@ -1950,42 +1950,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>91</portlet-name>
-		<display-name>Alfresco Content</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/alfresco_content/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<supports>
-			<mime-type>application/vnd.wap.xhtml+xml</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>user-id</name>
-				<value>admin</value>
-			</preference>
-			<preference>
-				<name>password</name>
-				<value>admin</value>
-			</preference>
-		</portlet-preferences>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>92</portlet-name>
 		<display-name>Messaging</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

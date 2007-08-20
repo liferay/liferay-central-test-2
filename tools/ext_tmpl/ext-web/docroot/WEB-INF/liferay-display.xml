@@ -12,9 +12,6 @@
 		<portlet id="111" />
 	</category>
 	<category name="category.cms">
-		<category name="category.alfresco">
-			<portlet id="91" />
-		</category>
 		<category name="category.journal">
 			<portlet id="15" />
 			<portlet id="20" />

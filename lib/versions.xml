@@ -569,17 +569,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/alfresco-client.jar</file-name>
-		<version>2.0.0</version>
-		<project-name>Alfresco Web Service Client</project-name>
-		<project-url>http://dev.alfresco.com</project-url>
-		<licenses>
-			<license>
-				<license-name>GPL 2.0 with Alfresco GPL FLOSS Exception</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/ant.jar</file-name>
 		<version>1.7.0</version>
 		<project-name>Ant</project-name>
@@ -674,17 +663,6 @@
 			</license>
 			<license>
 				<license-name>Technology License From Sun Microsystems Inc. To Doug Lea</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/bcprov-jdk15.jar</file-name>
-		<version>1.29</version>
-		<project-name>Bouncy Castle JDK 1.5</project-name>
-		<project-url>http://www.bouncycastle.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Bouncy Castle License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1459,18 +1437,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/opensaml.jar</file-name>
-		<version>1.0.1</version>
-		<project-name>OpenSAML</project-name>
-		<project-url>http://www.opensaml.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2001-2005 Internet2</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/openxri-client.jar</file-name>
 		<version>1.0.1</version>
 		<project-name>OpenXRI</project-name>
@@ -1839,17 +1805,6 @@
 			<license>
 				<license-name>Common Public License 1.0</license-name>
 				<copyright-notice>Copyright (c) IBM Corp 2001, 2005</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wss4j.jar</file-name>
-		<version>1.0.0</version>
-		<project-name>WSS4J</project-name>
-		<project-url>http://ws.apache.org/wss4j</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>

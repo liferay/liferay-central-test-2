@@ -404,11 +404,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>91</portlet-name>
-		<struts-path>alfresco_content</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>92</portlet-name>
 		<struts-path>messaging</struts-path>
 		<include>true</include>
