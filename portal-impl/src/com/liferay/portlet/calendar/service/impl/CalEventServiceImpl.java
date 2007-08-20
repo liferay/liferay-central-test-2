@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
@@ -56,7 +56,7 @@ public class CalEventServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.ADD_EVENT);
 
@@ -80,7 +80,7 @@ public class CalEventServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.ADD_EVENT);
 
@@ -114,7 +114,7 @@ public class CalEventServiceImpl
 	public File exportGroupEvents(long plid, String fileName)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.EXPORT_ALL_EVENTS);
 
@@ -134,7 +134,7 @@ public class CalEventServiceImpl
 	public void importICal4j(long plid, File file)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.ADD_EVENT);
 

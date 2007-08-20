@@ -22,32 +22,58 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 
 /**
- * <a href="PortalPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  *
  */
-public class PortalPermission {
+public class OrganizationPermissionImpl implements OrganizationPermission {
 
-	public static void check(
-			PermissionChecker permissionChecker, String actionId)
+	public void check(
+			PermissionChecker permissionChecker, long organizationId,
+			String actionId)
 		throws PrincipalException {
 
-		if (!contains(permissionChecker, actionId)) {
+		if (!contains(permissionChecker, organizationId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
-	public static boolean contains(
-		PermissionChecker permissionChecker, String actionId) {
+	public boolean contains(
+		PermissionChecker permissionChecker, long organizationId,
+		String actionId) {
 
-		return permissionChecker.hasPermission(
-			0, PortletKeys.PORTAL, null, actionId);
+		PermissionCheckerImpl permissionCheckerImpl =
+			(PermissionCheckerImpl)permissionChecker;
+
+		if (permissionChecker.hasPermission(
+				0, Organization.class.getName(), organizationId, actionId)) {
+
+			return true;
+		}
+		else if (actionId.equals(ActionKeys.VIEW)) {
+			User user = permissionCheckerImpl.getUser();
+
+			Organization organization = user.getOrganization();
+
+			if (organizationId == organization.getOrganizationId()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
 	}
 
 }

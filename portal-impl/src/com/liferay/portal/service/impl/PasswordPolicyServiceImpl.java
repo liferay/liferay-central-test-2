@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyService;
-import com.liferay.portal.service.permission.PasswordPolicyPermission;
-import com.liferay.portal.service.permission.PortalPermission;
+import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
 
 /**
  * <a href="PasswordPolicyServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +49,7 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
-		PortalPermission.check(
+		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
 		return PasswordPolicyLocalServiceUtil.addPasswordPolicy(
@@ -62,7 +62,7 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 	public void deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
-		PasswordPolicyPermission.check(
+		PasswordPolicyPermissionUtil.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.DELETE);
 
 		PasswordPolicyLocalServiceUtil.deletePasswordPolicy(passwordPolicyId);
@@ -77,7 +77,7 @@ public class PasswordPolicyServiceImpl extends PrincipalBean
 			long lockoutDuration, long resetFailureCount)
 		throws PortalException, SystemException {
 
-		PasswordPolicyPermission.check(
+		PasswordPolicyPermissionUtil.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		return PasswordPolicyLocalServiceUtil.updatePasswordPolicy(

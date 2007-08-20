@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil;
@@ -53,7 +53,7 @@ public class ShoppingCouponServiceImpl
 			double discount, String discountType)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
@@ -68,7 +68,7 @@ public class ShoppingCouponServiceImpl
 	public void deleteCoupon(long plid, long couponId)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
@@ -78,7 +78,7 @@ public class ShoppingCouponServiceImpl
 	public ShoppingCoupon getCoupon(long plid, long couponId)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
@@ -90,7 +90,7 @@ public class ShoppingCouponServiceImpl
 			String discountType, boolean andOperator, int begin, int end)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
@@ -109,7 +109,7 @@ public class ShoppingCouponServiceImpl
 			String discountType)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 

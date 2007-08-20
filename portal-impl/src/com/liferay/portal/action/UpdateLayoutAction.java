@@ -36,8 +36,8 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.permission.LayoutPermission;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -97,7 +97,7 @@ public class UpdateLayoutAction extends Action {
 			}
 		}
 		else if (cmd.equals("drag")) {
-			if (LayoutPermission.contains(
+			if (LayoutPermissionUtil.contains(
 					permissionChecker, layout.getGroupId(),
 					layout.isPrivateLayout(), layout.getLayoutId(),
 					ActionKeys.UPDATE)) {
@@ -165,7 +165,7 @@ public class UpdateLayoutAction extends Action {
 				ResourceLocalServiceUtil.deleteResource(
 					layout.getCompanyId(), rootPortletId,
 					ResourceImpl.SCOPE_INDIVIDUAL,
-					PortletPermission.getPrimaryKey(
+					PortletPermissionUtil.getPrimaryKey(
 						layout.getPlid(), portletId));
 			}
 		}

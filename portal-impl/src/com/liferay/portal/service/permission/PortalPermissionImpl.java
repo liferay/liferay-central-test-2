@@ -22,33 +22,32 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.util.PortletKeys;
+
 /**
- * <a href="OrganizationPermission_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Charles May
  *
  */
-public class OrganizationPermission_IW {
-	public static OrganizationPermission_IW getInstance() {
-		return _instance;
-	}
+public class PortalPermissionImpl implements PortalPermission {
 
 	public void check(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long organizationId, java.lang.String actionId)
-		throws com.liferay.portal.security.auth.PrincipalException {
-		OrganizationPermission.check(permissionChecker, organizationId, actionId);
+			PermissionChecker permissionChecker, String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public boolean contains(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long organizationId, java.lang.String actionId) {
-		return OrganizationPermission.contains(permissionChecker,
-			organizationId, actionId);
+		PermissionChecker permissionChecker, String actionId) {
+
+		return permissionChecker.hasPermission(
+			0, PortletKeys.PORTAL, null, actionId);
 	}
 
-	private OrganizationPermission_IW() {
-	}
-
-	private static OrganizationPermission_IW _instance = new OrganizationPermission_IW();
 }

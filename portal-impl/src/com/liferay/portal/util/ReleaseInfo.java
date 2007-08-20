@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.text.DateFormat;
 
@@ -42,9 +42,9 @@ public class ReleaseInfo {
 
 	static String codeName = "Owen";
 
-	static String build = "4430";
+	static String build = "4436";
 
-	static String date = "August 13, 2007";
+	static String date = "August 20, 2007";
 
 	static String releaseInfo =
 		name + " " + version + " (" + codeName + " / Build " + build + " / " +

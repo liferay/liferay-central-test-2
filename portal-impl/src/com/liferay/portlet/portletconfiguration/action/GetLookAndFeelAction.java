@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -64,7 +64,7 @@ public class GetLookAndFeelAction extends JSONAction {
 
 		String portletId = ParamUtil.getString(req, "portletId");
 
-		if (!PortletPermission.contains(
+		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
 				ActionKeys.CONFIGURATION)) {
 

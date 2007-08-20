@@ -22,35 +22,62 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.AccountLocalServiceUtil;
 
 /**
- * <a href="GroupPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="AccountPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GroupPermission {
+public class AccountPermissionImpl implements AccountPermission {
 
-	public static void check(
-			PermissionChecker permissionChecker, long groupId,
+	public void check(
+			PermissionChecker permissionChecker, long accountId,
 			String actionId)
-		throws PrincipalException {
+		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, actionId)) {
+		if (!contains(permissionChecker, accountId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
-	public static boolean contains(
-		PermissionChecker permissionChecker, long groupId, String actionId) {
+	public void check(
+			PermissionChecker permissionChecker, Account account,
+			String actionId)
+		throws PortalException, SystemException {
 
-		// Group id must be set so that users can modify their personal pages
+		if (!contains(permissionChecker, account, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long accountId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		Account account = AccountLocalServiceUtil.getAccount(accountId);
+
+		return contains(permissionChecker, account, actionId);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, Account account,
+			String actionId)
+		throws PortalException, SystemException {
+
+		//long groupId = account.getGroupId();
+		long groupId = 0;
 
 		return permissionChecker.hasPermission(
-			groupId, Group.class.getName(), groupId, actionId);
+			groupId, Account.class.getName(), account.getAccountId(),
+			actionId);
 	}
 
 }

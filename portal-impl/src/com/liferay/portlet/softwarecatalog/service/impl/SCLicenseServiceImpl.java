@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortalPermission;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseService;
@@ -47,7 +47,7 @@ public class SCLicenseServiceImpl
 			boolean recommended)
 		throws PortalException, SystemException {
 
-		PortalPermission.check(getPermissionChecker(), ActionKeys.ADD_LICENSE);
+		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_LICENSE);
 
 		return SCLicenseLocalServiceUtil.addLicense(
 			name, url, openSource, active, recommended);

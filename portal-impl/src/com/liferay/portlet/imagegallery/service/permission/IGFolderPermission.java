@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -76,7 +76,7 @@ public class IGFolderPermission {
 
 		if (folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
-			return PortletPermission.contains(
+			return PortletPermissionUtil.contains(
 				permissionChecker, plid, PortletKeys.IMAGE_GALLERY, actionId);
 		}
 		else {

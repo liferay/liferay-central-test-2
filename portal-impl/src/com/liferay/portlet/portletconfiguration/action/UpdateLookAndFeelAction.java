@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -77,7 +77,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 
 		String portletId = ParamUtil.getString(req, "portletId");
 
-		if (!PortletPermission.contains(
+		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
 				ActionKeys.CONFIGURATION)) {
 

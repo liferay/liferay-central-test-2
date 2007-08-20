@@ -57,10 +57,10 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LocationPermission;
-import com.liferay.portal.service.permission.OrganizationPermission;
-import com.liferay.portal.service.permission.UserPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LocationPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -235,7 +235,7 @@ public class EditPagesAction extends PortletAction {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (group.isCommunity()) {
-			GroupPermission.check(
+			GroupPermissionUtil.check(
 				permissionChecker, group.getGroupId(),
 				ActionKeys.MANAGE_LAYOUTS);
 		}
@@ -245,12 +245,12 @@ public class EditPagesAction extends PortletAction {
 					group.getClassPK());
 
 			if (!organization.isLocation()) {
-				OrganizationPermission.check(
+				OrganizationPermissionUtil.check(
 					permissionChecker, organization.getOrganizationId(),
 					ActionKeys.UPDATE);
 			}
 			else {
-				LocationPermission.check(
+				LocationPermissionUtil.check(
 					permissionChecker, organization.getOrganizationId(),
 					ActionKeys.UPDATE);
 			}
@@ -264,7 +264,7 @@ public class EditPagesAction extends PortletAction {
 				groupUser.getOrganization().getOrganizationId();
 			long locationId = groupUser.getLocation().getOrganizationId();
 
-			UserPermission.check(
+			UserPermissionUtil.check(
 				permissionChecker, groupUserId, organizationId, locationId,
 				ActionKeys.UPDATE);
 

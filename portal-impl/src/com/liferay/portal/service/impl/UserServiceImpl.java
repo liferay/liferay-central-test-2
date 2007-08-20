@@ -38,10 +38,10 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.RolePermission;
-import com.liferay.portal.service.permission.UserGroupPermission;
-import com.liferay.portal.service.permission.UserPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.service.permission.UserGroupPermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -71,7 +71,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermission.check(
+		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
@@ -80,7 +80,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void addRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.addRoleUsers(roleId, userIds);
 	}
@@ -88,9 +88,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermission.contains(
+		if (!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermission.contains(
+			!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
 
 			throw new PrincipalException();
@@ -216,7 +216,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void setGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.setGroupUsers(groupId, userIds);
@@ -225,7 +225,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
 	}
@@ -233,7 +233,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupPermission.check(
+		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.setUserGroupUsers(userGroupId, userIds);
@@ -252,7 +252,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermission.check(
+		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.unsetPasswordPolicyUsers(
@@ -262,7 +262,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
 	}
@@ -270,9 +270,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermission.contains(
+		if (!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermission.contains(
+			!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
 
 			throw new PrincipalException();
@@ -375,7 +375,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			long userId, long organizationId, long locationId, String actionId)
 		throws PortalException, SystemException {
 
-		UserPermission.check(
+		UserPermissionUtil.check(
 			getPermissionChecker(), userId, organizationId, locationId,
 			actionId);
 	}
@@ -412,7 +412,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		throws PortalException, SystemException {
 
 		try {
-			GroupPermission.check(
+			GroupPermissionUtil.check(
 				getPermissionChecker(), groupId, ActionKeys.UPDATE);
 		}
 		catch (PrincipalException pe) {

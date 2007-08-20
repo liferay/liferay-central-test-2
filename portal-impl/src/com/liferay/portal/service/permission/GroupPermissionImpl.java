@@ -22,37 +22,35 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.security.auth.PrincipalException;
+
 /**
- * <a href="CommonPermission_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="GroupPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CommonPermission_IW {
-	public static CommonPermission_IW getInstance() {
-		return _instance;
+public class GroupPermissionImpl implements GroupPermission {
+
+	public void check(
+			PermissionChecker permissionChecker, long groupId,
+			String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, groupId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
-	public void checkPermission(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long classNameId, long classPK, java.lang.String actionId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		CommonPermission.checkPermission(permissionChecker, classNameId,
-			classPK, actionId);
+	public boolean contains(
+		PermissionChecker permissionChecker, long groupId, String actionId) {
+
+		// Group id must be set so that users can modify their personal pages
+
+		return permissionChecker.hasPermission(
+			groupId, Group.class.getName(), groupId, actionId);
 	}
 
-	public void checkPermission(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String className, long classPK, java.lang.String actionId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
-		CommonPermission.checkPermission(permissionChecker, className, classPK,
-			actionId);
-	}
-
-	private CommonPermission_IW() {
-	}
-
-	private static CommonPermission_IW _instance = new CommonPermission_IW();
 }

@@ -3,54 +3,6 @@
 <instance-wrappers>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/AccountPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/CommonPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/GroupPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/LayoutPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/LocationPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/OrganizationPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/PasswordPolicyPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/PortalPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/PortletPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/RolePermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/UserGroupPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/service/permission/UserPermission.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
 		src-file="com/liferay/portal/util/DateFormats.java"
 	/>
 	<instance-wrapper

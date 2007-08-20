@@ -42,7 +42,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
-import com.liferay.portal.service.permission.LayoutPermission;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
@@ -304,7 +304,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			Layout layout = (Layout)itr.next();
 
 			if (layout.isHidden() ||
-				!LayoutPermission.contains(
+				!LayoutPermissionUtil.contains(
 					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				itr.remove();

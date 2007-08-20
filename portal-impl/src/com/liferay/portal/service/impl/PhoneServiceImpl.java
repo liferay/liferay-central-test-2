@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.PhoneService;
-import com.liferay.portal.service.permission.CommonPermission;
+import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.PhoneUtil;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return PhoneLocalServiceUtil.addPhone(
@@ -59,7 +59,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), phone.getClassNameId(), phone.getClassPK(),
 			ActionKeys.UPDATE);
 
@@ -71,7 +71,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), phone.getClassNameId(), phone.getClassPK(),
 			ActionKeys.VIEW);
 
@@ -81,7 +81,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 	public List getPhones(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return PhoneLocalServiceUtil.getPhones(
@@ -95,7 +95,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), phone.getClassNameId(), phone.getClassPK(),
 			ActionKeys.UPDATE);
 

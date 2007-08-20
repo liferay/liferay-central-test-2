@@ -22,32 +22,34 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.security.auth.PrincipalException;
+
 /**
- * <a href="GroupPermission_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GroupPermission_IW {
-	public static GroupPermission_IW getInstance() {
-		return _instance;
-	}
+public class PasswordPolicyPermissionImpl implements PasswordPolicyPermission {
 
 	public void check(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long groupId, java.lang.String actionId)
-		throws com.liferay.portal.security.auth.PrincipalException {
-		GroupPermission.check(permissionChecker, groupId, actionId);
+			PermissionChecker permissionChecker, long passwordPolicyId,
+			String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, passwordPolicyId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public boolean contains(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		long groupId, java.lang.String actionId) {
-		return GroupPermission.contains(permissionChecker, groupId, actionId);
+		PermissionChecker permissionChecker, long passwordPolicyId,
+		String actionId) {
+
+		return permissionChecker.hasPermission(
+			0, PasswordPolicy.class.getName(), passwordPolicyId, actionId);
 	}
 
-	private GroupPermission_IW() {
-	}
-
-	private static GroupPermission_IW _instance = new GroupPermission_IW();
 }

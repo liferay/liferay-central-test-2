@@ -30,9 +30,9 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserGroupService;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.PortalPermission;
-import com.liferay.portal.service.permission.UserGroupPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class UserGroupServiceImpl
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		UserGroupLocalServiceUtil.addGroupUserGroups(
@@ -58,7 +58,7 @@ public class UserGroupServiceImpl
 	public UserGroup addUserGroup(String name, String description)
 		throws PortalException, SystemException {
 
-		PortalPermission.check(
+		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_USER_GROUP);
 
 		User user = getUser();
@@ -70,7 +70,7 @@ public class UserGroupServiceImpl
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
-		UserGroupPermission.check(
+		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.DELETE);
 
 		UserGroupLocalServiceUtil.deleteUserGroup(userGroupId);
@@ -79,11 +79,11 @@ public class UserGroupServiceImpl
 	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
-		if (!UserGroupPermission.contains(
+		if (!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
-			!UserGroupPermission.contains(
+			!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermission.contains(
+			!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
 
 			throw new PrincipalException();
@@ -100,11 +100,11 @@ public class UserGroupServiceImpl
 
 		long userGroupId = userGroup.getUserGroupId();
 
-		if (!UserGroupPermission.contains(
+		if (!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.VIEW) &&
-			!UserGroupPermission.contains(
+			!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.UPDATE) &&
-			!UserGroupPermission.contains(
+			!UserGroupPermissionUtil.contains(
 				getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_USERS)) {
 
 			throw new PrincipalException();
@@ -122,7 +122,7 @@ public class UserGroupServiceImpl
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		UserGroupLocalServiceUtil.unsetGroupUserGroups(
@@ -133,7 +133,7 @@ public class UserGroupServiceImpl
 			long userGroupId, String name, String description)
 		throws PortalException, SystemException {
 
-		UserGroupPermission.check(
+		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
 		return UserGroupLocalServiceUtil.updateUserGroup(

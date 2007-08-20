@@ -23,33 +23,31 @@
 package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.security.auth.PrincipalException;
 
 /**
- * <a href="UserGroupPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="RolePermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  *
  */
-public class UserGroupPermission {
+public class RolePermissionImpl implements RolePermission {
 
-	public static void check(
-			PermissionChecker permissionChecker, long userGroupId,
-			String actionId)
+	public void check(
+			PermissionChecker permissionChecker, long roleId, String actionId)
 		throws PrincipalException {
 
-		if (!contains(permissionChecker, userGroupId, actionId)) {
+		if (!contains(permissionChecker, roleId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
-	public static boolean contains(
-		PermissionChecker permissionChecker, long userGroupId,
-		String actionId) {
+	public boolean contains(
+		PermissionChecker permissionChecker, long roleId, String actionId) {
 
 		return permissionChecker.hasPermission(
-			0, UserGroup.class.getName(), userGroupId, actionId);
+			0, Role.class.getName(), roleId, actionId);
 	}
 
 }

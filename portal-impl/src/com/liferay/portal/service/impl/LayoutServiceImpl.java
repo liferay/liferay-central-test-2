@@ -31,8 +31,8 @@ import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LayoutPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 
 import java.io.File;
 
@@ -52,7 +52,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return LayoutLocalServiceUtil.addLayout(
@@ -63,7 +63,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.DELETE);
+		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.DELETE);
 
 		LayoutLocalServiceUtil.deleteLayout(plid);
 	}
@@ -71,7 +71,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.DELETE);
 
@@ -102,7 +102,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			long groupId, boolean privateLayout, Map parameterMap)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return LayoutLocalServiceUtil.exportLayouts(
@@ -113,7 +113,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			long groupId, boolean privateLayout, Map parameterMap, File file)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutLocalServiceUtil.importLayouts(
@@ -125,7 +125,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			long[] layoutIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutLocalServiceUtil.setLayouts(
@@ -138,7 +138,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String description, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
@@ -154,7 +154,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			Boolean iconImage, byte[] iconBytes)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
@@ -169,7 +169,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String typeSettings)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
@@ -182,7 +182,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
@@ -197,7 +197,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updateName(long plid, String name, String languageId)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateName(plid, name, languageId);
 	}
@@ -207,7 +207,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String languageId)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
@@ -218,7 +218,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updateParentLayoutId(long plid, long parentPlid)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateParentLayoutId(plid, parentPlid);
 	}
@@ -228,7 +228,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			long parentLayoutId)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
@@ -239,7 +239,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updatePriority(long plid, int priority)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updatePriority(plid, priority);
 	}
@@ -248,7 +248,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			long groupId, boolean privateLayout, long layoutId, int priority)
 		throws PortalException, SystemException {
 
-		LayoutPermission.check(
+		LayoutPermissionUtil.check(
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 

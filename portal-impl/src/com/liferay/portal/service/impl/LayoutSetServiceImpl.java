@@ -30,7 +30,7 @@ import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
-import com.liferay.portal.service.permission.GroupPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 import java.io.File;
 
@@ -47,7 +47,7 @@ public class LayoutSetServiceImpl
 			long groupId, boolean privateLayout, boolean logo, File file)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		LayoutSetLocalServiceUtil.updateLogo(
@@ -59,7 +59,7 @@ public class LayoutSetServiceImpl
 			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		PluginSettingLocalServiceUtil.checkPermission(
@@ -73,7 +73,7 @@ public class LayoutSetServiceImpl
 			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		return LayoutSetLocalServiceUtil.updateVirtualHost(

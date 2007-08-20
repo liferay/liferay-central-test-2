@@ -25,7 +25,7 @@ package com.liferay.portlet.quicknote.action;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -57,7 +57,7 @@ public class SaveAction extends JSONAction {
 
 		String portletId = ParamUtil.getString(req, "portletId");
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			themeDisplay.getPermissionChecker(), themeDisplay.getPlid(),
 			portletId, ActionKeys.CONFIGURATION);
 

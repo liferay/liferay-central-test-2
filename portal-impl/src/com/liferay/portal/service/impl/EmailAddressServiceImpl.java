@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.EmailAddressService;
-import com.liferay.portal.service.permission.CommonPermission;
+import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class EmailAddressServiceImpl
 			boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return EmailAddressLocalServiceUtil.addEmailAddress(
@@ -61,7 +61,7 @@ public class EmailAddressServiceImpl
 		EmailAddress emailAddress =
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.UPDATE);
 
@@ -74,7 +74,7 @@ public class EmailAddressServiceImpl
 		EmailAddress emailAddress =
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.VIEW);
 
@@ -84,7 +84,7 @@ public class EmailAddressServiceImpl
 	public List getEmailAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return EmailAddressLocalServiceUtil.getEmailAddresses(
@@ -98,7 +98,7 @@ public class EmailAddressServiceImpl
 		EmailAddress emailAddress =
 			EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), emailAddress.getClassNameId(),
 			emailAddress.getClassPK(), ActionKeys.UPDATE);
 

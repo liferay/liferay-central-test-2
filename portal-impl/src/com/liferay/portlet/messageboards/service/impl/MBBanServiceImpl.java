@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
@@ -43,7 +43,7 @@ public class MBBanServiceImpl extends PrincipalBean implements MBBanService {
 	public MBBan addBan(long plid, long banUserId)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.MESSAGE_BOARDS,
 			ActionKeys.BAN_USER);
 
@@ -53,7 +53,7 @@ public class MBBanServiceImpl extends PrincipalBean implements MBBanService {
 	public void deleteBan(long plid, long banUserId)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.MESSAGE_BOARDS,
 			ActionKeys.BAN_USER);
 

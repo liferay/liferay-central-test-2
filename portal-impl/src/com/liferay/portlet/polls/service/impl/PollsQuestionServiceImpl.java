@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
@@ -52,7 +52,7 @@ public class PollsQuestionServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.POLLS,
 			ActionKeys.ADD_QUESTION);
 
@@ -71,7 +71,7 @@ public class PollsQuestionServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.POLLS,
 			ActionKeys.ADD_QUESTION);
 

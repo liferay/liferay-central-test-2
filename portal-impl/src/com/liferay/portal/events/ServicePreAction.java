@@ -59,10 +59,10 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LayoutPermission;
-import com.liferay.portal.service.permission.OrganizationPermission;
-import com.liferay.portal.service.permission.UserPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -380,7 +380,7 @@ public class ServicePreAction extends Action {
 		if ((layouts != null) && (layouts.size() > 0)) {
 			boolean replaceLayout = true;
 
-			if (LayoutPermission.contains(
+			if (LayoutPermissionUtil.contains(
 					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				replaceLayout = false;
@@ -392,7 +392,7 @@ public class ServicePreAction extends Action {
 				Layout curLayout = (Layout)layouts.get(i);
 
 				if (!curLayout.isHidden() &&
-					LayoutPermission.contains(
+					LayoutPermissionUtil.contains(
 						permissionChecker, curLayout, ActionKeys.VIEW)) {
 
 					if ((accessibleLayouts.size() == 0) && replaceLayout) {
@@ -442,7 +442,7 @@ public class ServicePreAction extends Action {
 			else {
 				User groupUser = UserLocalServiceUtil.getUserById(groupUserId);
 
-				if (UserPermission.contains(
+				if (UserPermissionUtil.contains(
 						permissionChecker, groupUserId,
 						groupUser.getOrganization().getOrganizationId(),
 						groupUser.getLocation().getOrganizationId(),
@@ -471,7 +471,7 @@ public class ServicePreAction extends Action {
 			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
 				return true;
 			}
-			else if (GroupPermission.contains(
+			else if (GroupPermissionUtil.contains(
 						permissionChecker, groupId, ActionKeys.UPDATE)) {
 
 				return true;
@@ -485,7 +485,7 @@ public class ServicePreAction extends Action {
 
 				return true;
 			}
-			else if (OrganizationPermission.contains(
+			else if (OrganizationPermissionUtil.contains(
 						permissionChecker, organizationId, ActionKeys.UPDATE)) {
 
 				return true;
@@ -876,7 +876,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setFreeformLayout(freeformLayout);
 
 				boolean hasUpdateLayoutPermission =
-					LayoutPermission.contains(
+					LayoutPermissionUtil.contains(
 						permissionChecker, layout, ActionKeys.UPDATE);
 
 				if (hasUpdateLayoutPermission) {
@@ -897,7 +897,7 @@ public class ServicePreAction extends Action {
 			}
 
 			boolean hasManageLayoutsPermission =
-				GroupPermission.contains(
+				GroupPermissionUtil.contains(
 					permissionChecker, portletGroupId,
 					ActionKeys.MANAGE_LAYOUTS);
 

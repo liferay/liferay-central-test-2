@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -76,7 +76,7 @@ public class BlogsEntryServiceImpl
 			String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.BLOGS,
 			ActionKeys.ADD_ENTRY);
 
@@ -93,7 +93,7 @@ public class BlogsEntryServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.BLOGS,
 			ActionKeys.ADD_ENTRY);
 

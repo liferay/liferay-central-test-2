@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
@@ -50,7 +50,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
 			ActionKeys.ADD_PRODUCT_ENTRY);
 
@@ -67,7 +67,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
 			ActionKeys.ADD_PRODUCT_ENTRY);
 

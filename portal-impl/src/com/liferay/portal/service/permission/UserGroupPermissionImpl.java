@@ -22,32 +22,34 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.auth.PrincipalException;
+
 /**
- * <a href="PortalPermission_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Charles May
  *
  */
-public class PortalPermission_IW {
-	public static PortalPermission_IW getInstance() {
-		return _instance;
-	}
+public class UserGroupPermissionImpl implements UserGroupPermission {
 
 	public void check(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String actionId)
-		throws com.liferay.portal.security.auth.PrincipalException {
-		PortalPermission.check(permissionChecker, actionId);
+			PermissionChecker permissionChecker, long userGroupId,
+			String actionId)
+		throws PrincipalException {
+
+		if (!contains(permissionChecker, userGroupId, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public boolean contains(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker,
-		java.lang.String actionId) {
-		return PortalPermission.contains(permissionChecker, actionId);
+		PermissionChecker permissionChecker, long userGroupId,
+		String actionId) {
+
+		return permissionChecker.hasPermission(
+			0, UserGroup.class.getName(), userGroupId, actionId);
 	}
 
-	private PortalPermission_IW() {
-	}
-
-	private static PortalPermission_IW _instance = new PortalPermission_IW();
 }

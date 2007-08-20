@@ -26,6 +26,78 @@
 			<ref bean="com.liferay.portal.language.UnicodeLanguageImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.permission.AccountPermissionImpl" class="com.liferay.portal.service.permission.AccountPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.AccountPermissionUtil" class="com.liferay.portal.service.permission.AccountPermissionUtil" lazy-init="true">
+		<property name="accountPermission">
+			<ref bean="com.liferay.portal.service.permission.AccountPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.CommonPermissionImpl" class="com.liferay.portal.service.permission.CommonPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.CommonPermissionUtil" class="com.liferay.portal.service.permission.CommonPermissionUtil" lazy-init="true">
+		<property name="commonPermission">
+			<ref bean="com.liferay.portal.service.permission.CommonPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.GroupPermissionImpl" class="com.liferay.portal.service.permission.GroupPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.GroupPermissionUtil" class="com.liferay.portal.service.permission.GroupPermissionUtil" lazy-init="true">
+		<property name="groupPermission">
+			<ref bean="com.liferay.portal.service.permission.GroupPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.LayoutPermissionImpl" class="com.liferay.portal.service.permission.LayoutPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.LayoutPermissionUtil" class="com.liferay.portal.service.permission.LayoutPermissionUtil" lazy-init="true">
+		<property name="layoutPermission">
+			<ref bean="com.liferay.portal.service.permission.LayoutPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.LocationPermissionImpl" class="com.liferay.portal.service.permission.LocationPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.LocationPermissionUtil" class="com.liferay.portal.service.permission.LocationPermissionUtil" lazy-init="true">
+		<property name="locationPermission">
+			<ref bean="com.liferay.portal.service.permission.LocationPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.OrganizationPermissionImpl" class="com.liferay.portal.service.permission.OrganizationPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.OrganizationPermissionUtil" class="com.liferay.portal.service.permission.OrganizationPermissionUtil" lazy-init="true">
+		<property name="organizationPermission">
+			<ref bean="com.liferay.portal.service.permission.OrganizationPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" class="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil" class="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil" lazy-init="true">
+		<property name="passwordPolicyPermission">
+			<ref bean="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.PortalPermissionImpl" class="com.liferay.portal.service.permission.PortalPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.PortalPermissionUtil" class="com.liferay.portal.service.permission.PortalPermissionUtil" lazy-init="true">
+		<property name="portalPermission">
+			<ref bean="com.liferay.portal.service.permission.PortalPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.PortletPermissionImpl" class="com.liferay.portal.service.permission.PortletPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.PortletPermissionUtil" class="com.liferay.portal.service.permission.PortletPermissionUtil" lazy-init="true">
+		<property name="portletPermission">
+			<ref bean="com.liferay.portal.service.permission.PortletPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.RolePermissionImpl" class="com.liferay.portal.service.permission.RolePermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.RolePermissionUtil" class="com.liferay.portal.service.permission.RolePermissionUtil" lazy-init="true">
+		<property name="rolePermission">
+			<ref bean="com.liferay.portal.service.permission.RolePermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.UserGroupPermissionImpl" class="com.liferay.portal.service.permission.UserGroupPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.UserGroupPermissionUtil" class="com.liferay.portal.service.permission.UserGroupPermissionUtil" lazy-init="true">
+		<property name="userGroupPermission">
+			<ref bean="com.liferay.portal.service.permission.UserGroupPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.permission.UserPermissionImpl" class="com.liferay.portal.service.permission.UserPermissionImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.permission.UserPermissionUtil" class="com.liferay.portal.service.permission.UserPermissionUtil" lazy-init="true">
+		<property name="userPermission">
+			<ref bean="com.liferay.portal.service.permission.UserPermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.util.CalendarFactoryImpl" class="com.liferay.portal.util.CalendarFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil" lazy-init="true">
 		<property name="calendarFactory">

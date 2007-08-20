@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.AddressService;
-import com.liferay.portal.service.permission.CommonPermission;
+import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.AddressUtil;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class AddressServiceImpl
 			long countryId, int typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return AddressLocalServiceUtil.addAddress(
@@ -62,7 +62,7 @@ public class AddressServiceImpl
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 
@@ -74,7 +74,7 @@ public class AddressServiceImpl
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.VIEW);
 
@@ -84,7 +84,7 @@ public class AddressServiceImpl
 	public List getAddresses(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return AddressLocalServiceUtil.getAddresses(
@@ -99,7 +99,7 @@ public class AddressServiceImpl
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 

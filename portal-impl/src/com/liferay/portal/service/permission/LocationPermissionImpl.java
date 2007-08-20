@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Location;
@@ -29,65 +31,70 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 /**
- * <a href="UserPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="LocationPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  *
  */
-public class UserPermission {
+public class LocationPermissionImpl implements LocationPermission {
 
-	public static void check(
-			PermissionChecker permissionChecker, long userId,
-			long organizationId, long locationId, String actionId)
-		throws PrincipalException {
+	public void check(
+			PermissionChecker permissionChecker, long locationId,
+			String actionId)
+		throws PortalException, SystemException {
 
-		if (!contains(
-				permissionChecker, userId, organizationId, locationId,
-				actionId)) {
-
+		if (!contains(permissionChecker, locationId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
-	public static boolean contains(
-		PermissionChecker permissionChecker, long userId, long organizationId,
-		long locationId, String actionId) {
+	public boolean contains(
+			PermissionChecker permissionChecker, long locationId,
+			String actionId)
+		throws PortalException, SystemException {
 
 		PermissionCheckerImpl permissionCheckerImpl =
 			(PermissionCheckerImpl)permissionChecker;
 
-		String organizationActionId = actionId + "_USER";
-
-		if (actionId.equals(ActionKeys.ADD_USER)) {
-			organizationActionId = actionId;
-		}
-
-		if (permissionCheckerImpl.getUserId() == userId) {
-			return true;
-		}
-		else if (permissionChecker.hasPermission(
-					0, User.class.getName(), userId, actionId)) {
+		if (permissionChecker.hasPermission(
+				0, Location.class.getName(), locationId, actionId)) {
 
 			return true;
 		}
-		else if ((organizationId > 0) &&
-				 permissionChecker.hasPermission(
-					0, Organization.class.getName(), organizationId,
-					organizationActionId)) {
+		else if (actionId.equals(ActionKeys.VIEW)) {
+			User user = permissionCheckerImpl.getUser();
 
-			return true;
+			Organization location = user.getLocation();
+
+			if (locationId == location.getOrganizationId()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		else if ((locationId  > 0) &&
-				 permissionChecker.hasPermission(
-					0, Location.class.getName(), locationId,
-					organizationActionId)) {
+		else if (actionId.endsWith("_USER")){
+			Organization location =
+				OrganizationLocalServiceUtil.getOrganization(locationId);
 
-			return true;
+			long parentOrganizationId = location.getParentOrganizationId();
+
+			if (permissionChecker.hasPermission(
+					0, Organization.class.getName(), parentOrganizationId,
+					actionId)) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 }

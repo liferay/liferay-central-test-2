@@ -46,7 +46,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LiveUsers;
@@ -546,7 +546,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 					PermissionChecker permissionChecker =
 						themeDisplay.getPermissionChecker();
 
-					if (!PortletPermission.contains(
+					if (!PortletPermissionUtil.contains(
 							permissionChecker, layout.getPlid(), portlet,
 							ActionKeys.VIEW)) {
 

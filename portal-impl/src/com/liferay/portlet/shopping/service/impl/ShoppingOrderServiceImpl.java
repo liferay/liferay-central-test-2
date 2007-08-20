@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
@@ -46,7 +46,7 @@ public class ShoppingOrderServiceImpl
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_ORDERS);
 
@@ -58,7 +58,7 @@ public class ShoppingOrderServiceImpl
 	public void deleteOrder(long plid, long orderId)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_ORDERS);
 
@@ -74,7 +74,7 @@ public class ShoppingOrderServiceImpl
 			return order;
 		}
 		else {
-			PortletPermission.check(
+			PortletPermissionUtil.check(
 				getPermissionChecker(), plid, PortletKeys.SHOPPING,
 				ActionKeys.MANAGE_ORDERS);
 
@@ -85,7 +85,7 @@ public class ShoppingOrderServiceImpl
 	public void sendEmail(long plid, long orderId, String emailType)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_ORDERS);
 
@@ -106,7 +106,7 @@ public class ShoppingOrderServiceImpl
 			int ccExpYear, String ccVerNumber, String comments)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_ORDERS);
 
@@ -125,7 +125,7 @@ public class ShoppingOrderServiceImpl
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
-		PortletPermission.check(
+		PortletPermissionUtil.check(
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_ORDERS);
 

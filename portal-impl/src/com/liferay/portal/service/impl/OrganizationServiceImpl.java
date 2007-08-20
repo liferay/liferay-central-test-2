@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.OrganizationService;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LocationPermission;
-import com.liferay.portal.service.permission.OrganizationPermission;
-import com.liferay.portal.service.permission.PortalPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LocationPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		OrganizationLocalServiceUtil.addGroupOrganizations(
@@ -59,7 +59,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermission.check(
+		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		OrganizationLocalServiceUtil.addPasswordPolicyOrganizations(
@@ -72,12 +72,12 @@ public class OrganizationServiceImpl extends PrincipalBean
 		throws PortalException, SystemException {
 
 		if (location) {
-			OrganizationPermission.check(
+			OrganizationPermissionUtil.check(
 				getPermissionChecker(), parentOrganizationId,
 				ActionKeys.ADD_LOCATION);
 		}
 		else {
-			PortalPermission.check(
+			PortalPermissionUtil.check(
 				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION);
 		}
 
@@ -117,7 +117,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		OrganizationLocalServiceUtil.setGroupOrganizations(
@@ -127,7 +127,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		GroupPermission.check(
+		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		OrganizationLocalServiceUtil.unsetGroupOrganizations(
@@ -138,7 +138,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		//PasswordPolicyPermission.check(
+		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
 		OrganizationLocalServiceUtil.unsetPasswordPolicyOrganizations(
@@ -174,11 +174,11 @@ public class OrganizationServiceImpl extends PrincipalBean
 			OrganizationUtil.findByPrimaryKey(organizationId);
 
 		if (!organization.isLocation()) {
-			OrganizationPermission.check(
+			OrganizationPermissionUtil.check(
 				getPermissionChecker(), organizationId, actionId);
 		}
 		else {
-			LocationPermission.check(
+			LocationPermissionUtil.check(
 				getPermissionChecker(), organizationId, actionId);
 		}
 	}

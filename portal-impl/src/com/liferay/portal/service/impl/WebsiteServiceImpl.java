@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.WebsiteService;
-import com.liferay.portal.service.permission.CommonPermission;
+import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class WebsiteServiceImpl
 			boolean primary)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
 		return WebsiteLocalServiceUtil.addWebsite(
@@ -59,7 +59,7 @@ public class WebsiteServiceImpl
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 
@@ -71,7 +71,7 @@ public class WebsiteServiceImpl
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.VIEW);
 
@@ -81,7 +81,7 @@ public class WebsiteServiceImpl
 	public List getWebsites(String className, long classPK)
 		throws PortalException, SystemException {
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
 		return WebsiteLocalServiceUtil.getWebsites(
@@ -94,7 +94,7 @@ public class WebsiteServiceImpl
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
-		CommonPermission.checkPermission(
+		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 

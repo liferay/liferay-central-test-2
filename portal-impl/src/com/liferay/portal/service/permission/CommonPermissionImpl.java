@@ -35,14 +35,14 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 /**
- * <a href="CommonPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommonPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  *
  */
-public class CommonPermission {
+public class CommonPermissionImpl implements CommonPermission {
 
-	public static void checkPermission(
+	public void checkPermission(
 			PermissionChecker permissionChecker, long classNameId,
 			long classPK, String actionId)
 		throws PortalException, SystemException {
@@ -52,7 +52,7 @@ public class CommonPermission {
 		checkPermission(permissionChecker, className, classPK, actionId);
 	}
 
-	public static void checkPermission(
+	public void checkPermission(
 			PermissionChecker permissionChecker, String className,
 			long classPK, String actionId)
 		throws PortalException, SystemException {
@@ -61,7 +61,8 @@ public class CommonPermission {
 			/*Account account = AccountLocalServiceUtil.getAccount(classPK);
 
 			if (account.isDefaultAccount()) {
-				AccountPermission.check(permissionChecker, classPK, actionId);
+				AccountPermissionUtil.check(
+					permissionChecker, classPK, actionId);
 			}
 			else {
 				throw new PrincipalException();
@@ -70,7 +71,7 @@ public class CommonPermission {
 		else if (className.equals(Contact.class.getName())) {
 			User user = UserLocalServiceUtil.getUserByContactId(classPK);
 
-			UserPermission.check(
+			UserPermissionUtil.check(
 				permissionChecker, user.getUserId(),
 				user.getOrganization().getOrganizationId(),
 				user.getLocation().getOrganizationId(), actionId);
@@ -80,11 +81,12 @@ public class CommonPermission {
 				OrganizationLocalServiceUtil.getOrganization(classPK);
 
 			if (!organization.isLocation()) {
-				OrganizationPermission.check(
+				OrganizationPermissionUtil.check(
 					permissionChecker, classPK, actionId);
 			}
 			else {
-				LocationPermission.check(permissionChecker, classPK, actionId);
+				LocationPermissionUtil.check(
+					permissionChecker, classPK, actionId);
 			}
 		}
 		else {

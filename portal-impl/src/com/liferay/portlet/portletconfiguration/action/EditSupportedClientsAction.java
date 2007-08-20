@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -104,7 +104,7 @@ public class EditSupportedClientsAction extends PortletAction {
 
 		String portletId = ParamUtil.getString(req, "portletResource");
 
-		if (!PortletPermission.contains(
+		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
 				ActionKeys.CONFIGURATION)) {
 

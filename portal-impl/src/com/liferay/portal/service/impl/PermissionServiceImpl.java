@@ -40,9 +40,9 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PermissionService;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.service.permission.UserPermission;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 
 /**
  * <a href="PermissionServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -209,7 +209,7 @@ public class PermissionServiceImpl
 		throws PortalException, SystemException {
 
 		if (name.equals(Group.class.getName())) {
-			GroupPermission.check(
+			GroupPermissionUtil.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
@@ -218,7 +218,7 @@ public class PermissionServiceImpl
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			GroupPermission.check(
+			GroupPermissionUtil.check(
 				permissionChecker, layout.getGroupId(),
 				ActionKeys.MANAGE_LAYOUTS);
 		}
@@ -227,7 +227,7 @@ public class PermissionServiceImpl
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			UserPermission.check(
+			UserPermissionUtil.check(
 				permissionChecker, userId,
 				user.getOrganization().getOrganizationId(),
 				user.getLocation().getOrganizationId(), ActionKeys.PERMISSIONS);
@@ -242,7 +242,7 @@ public class PermissionServiceImpl
 			String portletId = primKey.substring(
 				pos + PortletImpl.LAYOUT_SEPARATOR.length() , primKey.length());
 
-			if (!PortletPermission.contains(
+			if (!PortletPermissionUtil.contains(
 					permissionChecker, plid, portletId,
 					ActionKeys.CONFIGURATION)) {
 

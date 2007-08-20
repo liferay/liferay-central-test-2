@@ -66,7 +66,7 @@ import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
-import com.liferay.portal.service.permission.UserPermission;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -1765,7 +1765,7 @@ public class PortalUtil {
 				realUser, checkGuest);
 
 			if (doAsUser.isDefaultUser() ||
-				UserPermission.contains(
+				UserPermissionUtil.contains(
 					permissionChecker, doAsUserId, organizationId, locationId,
 					ActionKeys.IMPERSONATE)) {
 

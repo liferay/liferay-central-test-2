@@ -34,14 +34,14 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 /**
- * <a href="PortletPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletPermission {
+public class PortletPermissionImpl implements PortletPermission {
 
-	public static void check(
+	public void check(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -51,7 +51,7 @@ public class PortletPermission {
 		}
 	}
 
-	public static void check(
+	public void check(
 			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -61,7 +61,7 @@ public class PortletPermission {
 		}
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -69,7 +69,7 @@ public class PortletPermission {
 		return contains(permissionChecker, 0, portletId, actionId);
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -85,7 +85,7 @@ public class PortletPermission {
 			name = PortletImpl.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
 
-			if (LayoutPermission.contains(
+			if (LayoutPermissionUtil.contains(
 					permissionChecker, groupId, layout.isPrivateLayout(),
 					layout.getLayoutId(), ActionKeys.UPDATE)) {
 
@@ -101,7 +101,7 @@ public class PortletPermission {
 			groupId, name, primKey, actionId);
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId)
 		throws PortalException, SystemException {
@@ -122,7 +122,7 @@ public class PortletPermission {
 		}
 	}
 
-	public static String getPrimaryKey(long plid, String portletId) {
+	public String getPrimaryKey(long plid, String portletId) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(plid);

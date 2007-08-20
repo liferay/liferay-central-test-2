@@ -37,18 +37,18 @@ import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.service.permission.AccountPermission_IW;
-import com.liferay.portal.service.permission.CommonPermission_IW;
-import com.liferay.portal.service.permission.GroupPermission_IW;
-import com.liferay.portal.service.permission.LayoutPermission_IW;
-import com.liferay.portal.service.permission.LocationPermission_IW;
-import com.liferay.portal.service.permission.OrganizationPermission_IW;
-import com.liferay.portal.service.permission.PasswordPolicyPermission_IW;
-import com.liferay.portal.service.permission.PortalPermission_IW;
-import com.liferay.portal.service.permission.PortletPermission_IW;
-import com.liferay.portal.service.permission.RolePermission_IW;
-import com.liferay.portal.service.permission.UserGroupPermission_IW;
-import com.liferay.portal.service.permission.UserPermission_IW;
+import com.liferay.portal.service.permission.AccountPermissionUtil;
+import com.liferay.portal.service.permission.CommonPermissionUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portal.service.permission.LocationPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.service.permission.UserGroupPermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.NavItem;
 import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -154,21 +154,28 @@ public class VelocityVariables {
 
 		// Permissions
 
-		vc.put("accountPermission", AccountPermission_IW.getInstance());
-		vc.put("commonPermission", CommonPermission_IW.getInstance());
-		vc.put("groupPermission", GroupPermission_IW.getInstance());
-		vc.put("layoutPermission", LayoutPermission_IW.getInstance());
-		vc.put("locationPermission", LocationPermission_IW.getInstance());
 		vc.put(
-			"organizationPermission", OrganizationPermission_IW.getInstance());
+			"accountPermission", AccountPermissionUtil.getAccountPermission());
+		vc.put("commonPermission", CommonPermissionUtil.getCommonPermission());
+		vc.put("groupPermission", GroupPermissionUtil.getGroupPermission());
+		vc.put("layoutPermission", LayoutPermissionUtil.getLayoutPermission());
+		vc.put(
+			"locationPermission",
+			LocationPermissionUtil.getLocationPermission());
+		vc.put(
+			"organizationPermission",
+			OrganizationPermissionUtil.getOrganizationPermission());
 		vc.put(
 			"passwordPolicyPermission",
-			PasswordPolicyPermission_IW.getInstance());
-		vc.put("portalPermission", PortalPermission_IW.getInstance());
-		vc.put("portletPermission", PortletPermission_IW.getInstance());
-		vc.put("rolePermission", RolePermission_IW.getInstance());
-		vc.put("userGroupPermission", UserGroupPermission_IW.getInstance());
-		vc.put("userPermission", UserPermission_IW.getInstance());
+			PasswordPolicyPermissionUtil.getPasswordPolicyPermission());
+		vc.put("portalPermission", PortalPermissionUtil.getPortalPermission());
+		vc.put(
+			"portletPermission", PortletPermissionUtil.getPortletPermission());
+		vc.put("rolePermission", RolePermissionUtil.getRolePermission());
+		vc.put(
+			"userGroupPermission",
+			UserGroupPermissionUtil.getUserGroupPermission());
+		vc.put("userPermission", UserPermissionUtil.getUserPermission());
 	}
 
 	public static void insertVariables(

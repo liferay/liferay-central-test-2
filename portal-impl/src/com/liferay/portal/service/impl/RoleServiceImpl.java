@@ -29,8 +29,8 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.RoleService;
-import com.liferay.portal.service.permission.PortalPermission;
-import com.liferay.portal.service.permission.RolePermission;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.service.permission.RolePermissionUtil;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 
 		User user = getUser();
 
-		PortalPermission.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
+		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
 
 		return RoleLocalServiceUtil.addRole(
 			user.getUserId(), user.getCompanyId(), name, type);
@@ -56,7 +56,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 	public void deleteRole(long roleId)
 		throws PortalException, SystemException {
 
-		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.DELETE);
+		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.DELETE);
 
 		RoleLocalServiceUtil.deleteRole(roleId);
 	}
@@ -122,7 +122,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 	public Role updateRole(long roleId, String name)
 		throws PortalException, SystemException {
 
-		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		return RoleLocalServiceUtil.updateRole(roleId, name);
 	}

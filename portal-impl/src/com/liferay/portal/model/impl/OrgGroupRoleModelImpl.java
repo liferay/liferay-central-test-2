@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.persistence.OrgGroupRolePK;

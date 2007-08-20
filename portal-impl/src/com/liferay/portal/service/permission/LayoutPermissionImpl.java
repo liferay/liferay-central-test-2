@@ -35,15 +35,15 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 
 /**
- * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutPermission {
+public class LayoutPermissionImpl implements LayoutPermission {
 
-	public static void check(
+	public void check(
 			PermissionChecker permissionChecker, long plid, String actionId)
 		throws PortalException, SystemException {
 
@@ -52,7 +52,7 @@ public class LayoutPermission {
 		}
 	}
 
-	public static void check(
+	public void check(
 			PermissionChecker permissionChecker, long groupId,
 			boolean privateLayout, long layoutId, String actionId)
 		throws PortalException, SystemException {
@@ -65,7 +65,7 @@ public class LayoutPermission {
 		}
 	}
 
-	public static void check(
+	public void check(
 			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException {
 
@@ -74,7 +74,7 @@ public class LayoutPermission {
 		}
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long plid, String actionId)
 		throws PortalException, SystemException {
 
@@ -83,13 +83,13 @@ public class LayoutPermission {
 		return contains(permissionChecker, layout, actionId);
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long groupId,
 			boolean privateLayout, long layoutId, String actionId)
 		throws PortalException, SystemException {
 
 		if (layoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
-			if (GroupPermission.contains(
+			if (GroupPermissionUtil.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
 				return true;
@@ -106,11 +106,11 @@ public class LayoutPermission {
 		}
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException {
 
-		if (GroupPermission.contains(
+		if (GroupPermissionUtil.contains(
 				permissionChecker, layout.getGroupId(),
 				ActionKeys.MANAGE_LAYOUTS)) {
 

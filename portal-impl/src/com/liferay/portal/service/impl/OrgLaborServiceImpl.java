@@ -29,8 +29,8 @@ import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.OrgLaborService;
-import com.liferay.portal.service.permission.LocationPermission;
-import com.liferay.portal.service.permission.OrganizationPermission;
+import com.liferay.portal.service.permission.LocationPermissionUtil;
+import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 
@@ -112,11 +112,11 @@ public class OrgLaborServiceImpl
 			OrganizationUtil.findByPrimaryKey(organizationId);
 
 		if (!organization.isLocation()) {
-			OrganizationPermission.check(
+			OrganizationPermissionUtil.check(
 				getPermissionChecker(), organizationId, actionId);
 		}
 		else {
-			LocationPermission.check(
+			LocationPermissionUtil.check(
 				getPermissionChecker(), organizationId, actionId);
 		}
 	}
